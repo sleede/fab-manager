@@ -1,0 +1,91 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1>Centre de notifications</h1>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="m-lg">
+  <div class="row">
+
+    <div class="col-md-12">
+      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="notifications.length == 0">Tout marquer comme lu ({{notifications.length}})</button>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:10%"></th>
+            <th style="width:20%">Date</th>
+            <th style="width:70%">Intitulée</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="notification in notifications" ng-if="notifications.length > 0">
+            <td>
+                <button class="btn btn-sm btn-warning" ng-click="markAsRead(notification, $event)">
+                  <i class="fa fa-check"></i>
+                </button>
+            </td>
+            <td>{{ notification.created_at | amDateFormat:'D MMMM YYYY H:mm' }}</td>
+            <td ng-bind-html="notification.message.description"></td>
+
+          </tr>
+          <tr ng-if="notifications.length == 0">
+            <td colspan="3">Aucune nouvelle notification.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5>Archives</h5>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:10%"></th>
+            <th style="width:20%"></th>
+            <th style="width:70%"></th>
+      
+          </tr>
+        </thead>
+        <tbody>
+
+      
+
+          <tr class="read" ng-repeat="n in notificationsRead | orderBy:'created_at':true" ng-if="notificationsRead.length > 0">
+            <td>
+            </td>
+            <td>{{ n.created_at | amDateFormat:'D MMMM YYYY H:mm' }}</td>
+            <td ng-bind-html="n.message.description"></td>
+
+          </tr>
+
+
+          <tr ng-if="notificationsRead.length == 0">
+            <td colspan="3">Aucune notification archivée.</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+
+      <a class="btn btn-default" ng-click="addMoreNotificationsReaded()" ng-if="paginateActive">Charger les notifications suivantes...</a>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+

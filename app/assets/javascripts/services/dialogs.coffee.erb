@@ -1,0 +1,27 @@
+'use strict'
+
+Application.Services.factory 'dialogs', ["$modal", ($modal) ->
+    confirm: (options, success, error)->
+      defaultOpts =
+        templateUrl: '<%= asset_path "shared/confirm_modal.html" %>'
+        size: 'sm'
+        resolve:
+          object: ->
+            title: 'Titre de confirmation'
+            msg: 'Message de confiramtion'
+        controller: ['$scope', '$modalInstance', '$state', 'object', ($scope, $modalInstance, $state, object) ->
+          $scope.object = object
+          $scope.ok = ->
+            $modalInstance.close()
+          $scope.cancel = ->
+            $modalInstance.dismiss('cancel')
+        ]
+      angular.extend(defaultOpts, options) if angular.isObject options
+      $modal.open defaultOpts
+      .result['finally'](null).then ->
+        if angular.isFunction(success)
+          success()
+      , ->
+        if angular.isFunction(error)
+          error()
+  ]

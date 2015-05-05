@@ -1,0 +1,1 @@
+json.extract! @theme, :id, :name

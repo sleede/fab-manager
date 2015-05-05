@@ -1,0 +1,36 @@
+
+.bg-light { background-color: $brand-light; }
+.bg-red { background-color: $red; color: white; }
+.bg-red-dark { background-color: $red-dark; }
+.bg-yellow { background-color: $yellow !important; }
+.bg-machine { background-color: $beige; }
+.bg-formation { background-color: $violet; }
+.bg-atelier { background-color: $blue; }
+.bg-stage { background-color: $violet; }
+.bg-success { background-color: $brand-success; }
+.bg-info { background-color: $brand-info; }
+
+.bg-black-light { background-color: #424242 !important; }
+
+.bg-white {
+	background-color: #fff;
+	color: $text-color;
+	a {
+		color: $link-color;
+		&:hover{
+			color: darken($link-color, 10%);
+		}
+	}
+	.text-muted{color: $text-muted !important;}
+}
+.bg-white-only{background-color:#fff;}
+.bg-empty{background-color: transparent;}
+
+.text-black{ color: #000 !important; };
+.text-black-light { color: #424242 !important; }
+.text-gray { color: #5a5a5a !important; }
+.text-white { color: #fff !important; }
+.text-yellow { color: $yellow !important; }
+.text-blue { color: $blue; }
+.text-muted { color: $text-muted; }
+.text-danger, .red { color: $red !important; }

@@ -1,0 +1,44 @@
+{
+  "name": "angular-unsavedChanges",
+  "version": "0.2.3-alpha.3",
+  "homepage": "https://github.com/facultymatt/angular-unsavedChanges",
+  "authors": [
+    "Matt Miller <mattmillerart@gmail.com>"
+  ],
+  "description": "AngularJS directive to warn user of unsaved changes when navigating away from a form.",
+  "main": "dist/unsavedChanges.js",
+  "keywords": [
+    "form",
+    "angularjs",
+    "unsaved",
+    "changes",
+    "warning",
+    "dirty",
+    "reload"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.3.x",
+    "angular-route": "~1.3.x",
+    "angular-mocks": "~1.3.x",
+    "angular-scenario": "~1.3.x",
+    "jquery": "~2.0.3",
+    "angular-translate": "^2.0.1"
+  },
+  "_release": "0.2.3-alpha.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.3-alpha.3",
+    "commit": "f831050a08686545fb26c9e516bad5d7abba32eb"
+  },
+  "_source": "git://github.com/facultymatt/angular-unsavedChanges.git",
+  "_target": "~0.2.0",
+  "_originalSource": "angular-unsavedChanges"
+}

@@ -1,0 +1,222 @@
+angular.module('application.router', ['ui.router']).
+    config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
+        $locationProvider.hashPrefix('!')
+        $urlRouterProvider.otherwise("/")
+
+        # abstract root parents states
+        # these states controls the access rights to the various routes inherited from them
+        $stateProvider
+            .state 'app',
+                abstract: true
+                views:
+                    'header': { templateUrl: '<%= asset_path "shared/header.html" %>' }
+                    'leftnav':
+                        templateUrl: '<%= asset_path "shared/leftnav.html" %>'
+                        controller: 'mainNavController'
+                    'main':
+                        templateUrl: '<%= asset_path "home.html" %>'
+                        controller: 'homeController'
+            .state 'app.public',
+                abstract: true
+            .state 'app.logged',
+                abstract: true
+                data:
+                    authorizedRoles: ['member', 'admin']
+                resolve:
+                    currentUser: ['Auth', (Auth)->
+                        Auth.currentUser()
+                    ]
+                onEnter: ["currentUser", "$rootScope", (currentUser, $rootScope)->
+                    $rootScope.currentUser = currentUser
+                ]
+            .state 'app.admin',
+                abstract: true
+                data:
+                    authorizedRoles: ['admin']
+                resolve:
+                    currentUser: ['Auth', (Auth)->
+                        Auth.currentUser()
+                    ]
+                onEnter: ["currentUser", "$rootScope", (currentUser, $rootScope)->
+                    $rootScope.currentUser = currentUser
+                ]
+
+
+
+            # main pages
+            .state 'app.public.about',
+                url: '/about'
+                views:
+                    'content@': { templateUrl: '<%= asset_path "shared/about.html" %>' }
+            .state 'app.public.home',
+                url: '/?reset_password_token'
+                views:
+                    'main':
+                        templateUrl: '<%= asset_path "home.html" %>'
+                        controller: 'homeController'
+
+
+            # dashboard
+            .state 'app.logged.dashboard_profile',
+                url: '/dashboard/profile'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "dashboard/profile.html" %>'
+                        controller: 'editProfileController'
+            .state 'app.logged.dashboard_projects',
+                url: '/dashboard/projects'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "dashboard/projects.html" %>'
+                        controller: 'dashboardProjectsController'
+
+
+            # members
+            .state 'app.logged.members_show',
+                url: '/members/:id'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "members/show.html" %>'
+                        controller: 'showProfileController'
+            .state 'app.logged.members',
+                url: '/members'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "members/index.html" %>'
+                        controller: 'membersController'
+
+
+            # projects
+            .state 'app.public.projects_list',
+                url: '/projects'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "projects/index.html" %>'
+                        controller: 'projectsController'
+            .state 'app.public.projects_show',
+                url: '/projects/:id'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "projects/show.html" %>'
+                        controller: 'showProjectController'
+            .state 'app.logged.projects_new',
+                url: '/projects/new'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "projects/new.html" %>'
+                        controller: 'newProjectController'
+            .state 'app.logged.projects_edit',
+                url: '/projects/:id/edit'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "projects/edit.html" %>'
+                        controller: 'editProjectController'
+
+
+
+            # machines
+            .state 'app.public.machines_list',
+                url: '/machines'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "machines/index.html" %>'
+                        controller: 'machinesController'
+            .state 'app.public.machines_show',
+                url: '/machines/:id'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "machines/show.html" %>'
+                        controller: 'showMachineController'
+            .state 'app.admin.machines_new',
+                url: '/machines/new'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "machines/new.html" %>'
+                        controller: 'newMachineController'
+            .state 'app.admin.machines_edit',
+                url: '/machines/:id/edit'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "machines/edit.html" %>'
+                        controller: 'editMachineController'
+
+
+            # notifications
+            .state 'app.logged.notifications',
+                url: '/notifications'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "notifications/index.html" %>'
+                        controller: 'notificationsController'
+
+
+            # events
+            .state 'app.public.events_list',
+                url: '/events'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "events/index.html" %>'
+                        controller: 'eventsController'
+            .state 'app.public.events_show',
+                url: '/events/:id'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "events/show.html" %>'
+                        controller: 'showEventController'
+
+
+            # --- namespace /admin/... ---
+
+
+            # project's elements
+            .state 'app.admin.project_elements',
+                url: '/admin/project_elements'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "admin/project_elements/index.html" %>'
+                        controller: 'projectElementsController'
+
+
+            # events
+            .state 'app.admin.events',
+                url: '/admin/events'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "admin/events/index.html" %>'
+                        controller: 'adminEventsController'
+            .state 'app.admin.events_new',
+                url: '/admin/events/new'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "events/new.html" %>'
+                        controller: 'newEventController'
+            .state 'app.admin.events_edit',
+                url: '/admin/events/:id/edit'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "events/edit.html" %>'
+                        controller: 'editEventController'
+
+
+            # members
+            .state 'app.admin.members',
+                url: '/admin/members'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "admin/members/index.html" %>'
+                        controller: 'membersController'
+            .state 'app.admin.members_new',
+                url: '/admin/members/new'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "admin/members/new.html" %>'
+                        controller: 'newMemberController'
+            .state 'app.admin.members_edit',
+                url: '/admin/members/:id/edit'
+                views:
+                    'main@':
+                        templateUrl: '<%= asset_path "admin/members/edit.html" %>'
+                        controller: 'editMemberController'
+
+
+]

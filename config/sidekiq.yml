@@ -1,0 +1,8 @@
+# configuration file for Sidekiq
+:verbose: false
+:pidfile: ./tmp/pids/sidekiq.pid
+:concurrency:  25
+:queues:
+  - [default, 5]
+  - [devise_mailer, 3]
+  - [mailers, 3]

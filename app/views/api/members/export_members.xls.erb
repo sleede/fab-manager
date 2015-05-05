@@ -1,0 +1,24 @@
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Email</th>
+    <th>Genre</th>
+    <th>Age</th>
+    <th>Tel.</th>
+    <th>Type utilisateur</th>
+  </tr>
+  <% @datas.each do |data| %>
+  <tr>
+    <td><%= data.id %></td>
+    <td><%= data.profile.last_name %></td>
+    <td><%= data.profile.first_name %></td>
+    <td><%= data.email %></td>
+    <td><%= data.profile.gender ? 'Homme' : 'Femme' %></td>
+    <td><%= data.profile.age %></td>
+    <td><%= data.profile.phone %></td>
+    <td><%= data.group.name %></td>
+  </tr>
+  <% end %>
+</table>
