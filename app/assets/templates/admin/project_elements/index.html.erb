@@ -1,0 +1,153 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1>Gestion des éléments projets</h1>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="m-lg">
+  <div class="row">
+
+    <div class="col-md-12">
+      <tabset justified="true">
+        <tab heading="Matériaux">
+          <button type="button" class="btn btn-warning m-b m-t" ng-click="addComponent()">Ajouter un matériau</button>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:80%">Nom</th>
+                <th style="width:20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="component in components">
+                <td>
+                  <span editable-text="component.name" e-cols="100" e-name="name" e-form="rowform" e-required>
+                    {{ component.name }}
+                  </span>
+                </td>
+                <td>
+                  <!-- form -->
+                  <form editable-form name="rowform" onbeforesave="saveComponent($data, component.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == component">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelComponent(rowform, $index)" class="btn btn-default">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </form>
+                  <div class="buttons" ng-show="!rowform.$visible">
+                    <button class="btn btn-default" ng-click="rowform.$show()">
+                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">Éditer</span>
+                    </button>
+                    <button class="btn btn-danger" ng-click="removeComponent($index)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </tab>
+        <tab heading="Thématiques">
+          <button type="button" class="btn btn-warning m-t m-b" ng-click="addTheme()">Ajouter une nouvelle thématique</button>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:80%">Nom</th>
+                <th style="width:20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="theme in themes">
+                <td>
+                  <span editable-text="theme.name" e-name="name" e-form="rowform" e-required>
+                    {{ theme.name }}
+                  </span>
+                </td>
+                <td>
+                  <!-- form -->
+                  <form editable-form name="rowform" onbeforesave="saveTheme($data, theme.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == theme">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelTheme(rowform, $index)" class="btn btn-default">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </form>
+                  <div class="buttons" ng-show="!rowform.$visible">
+                    <button class="btn btn-default" ng-click="rowform.$show()">
+                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">Éditer</span>
+                    </button>
+                    <button class="btn btn-danger" ng-click="removeTheme($index)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </tab>
+        <tab heading="Licences">
+          <button type="button" class="btn btn-warning m-t m-b" ng-click="addLicence()">Ajouter une nouvelle licence</button>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:30%">Nom</th>
+                <th style="width:50%" class="hidden-xs">Description</th>
+                <th style="width:20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="licence in licences">
+                <td>
+                  <span editable-textarea="licence.name" e-rows="5" e-cols="100" e-name="name" e-form="rowform" e-required>
+                    {{ licence.name }}
+                  </span>
+                </td>
+                <td  class="hidden-xs">
+                  <span editable-textarea="licence.description" e-rows="5" e-cols="100" e-name="description" e-form="rowform" e-required>
+                    <div class="text-sm">{{ licence.description }}</div>
+                  </span>
+                </td>
+                <td>
+                  <!-- form -->
+                  <form editable-form name="rowform" onbeforesave="saveLicence($data, licence.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == licence">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelLicence(rowform, $index)" class="btn btn-default">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </form>
+                  <div class="buttons" ng-show="!rowform.$visible">
+                    <button class="btn btn-default" ng-click="rowform.$show()">
+                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">Éditer</span>
+                    </button>
+                    <button class="btn btn-danger" ng-click="removeLicence($index)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </tab>
+      </tabset>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,71 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1>Liste des membres</h1>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+<section class="m-lg">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+          <input type="text" ng-model="searchMember" class="form-control" placeholder="Recherchez un utilisateur">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new">Ajouter un nouveau membre</button>
+      <div class="pull-right">
+        <a class="btn btn-default" ng-href="api/members/export_members.xls" target="_blank">
+          <i class="fa fa-file-excel-o"></i> Membres
+        </a>
+      </div>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:15%"><a href="" ng-click="setOrderMember('last_name')">Nom <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='last_name', 'fa fa-sort-alpha-desc': orderMember=='-last_name', 'fa fa-arrows-v': orderMember }"></i></a></th>
+
+            <th style="width:15%"><a href="" ng-click="setOrderMember('first_name')">Prénom <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='first_name', 'fa fa-sort-alpha-desc': orderMember=='-first_name', 'fa fa-arrows-v': orderMember }"></i></a></th>
+
+            <th style="width:15%"><a href="" ng-click="setOrderMember('email')">Email <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='email', 'fa fa-sort-alpha-desc': orderMember=='-email', 'fa fa-arrows-v': orderMember }"></i></a></th>
+
+            <th style="width:10%"><a href="" ng-click="setOrderMember('profile.phone')">Tel. <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderMember=='profile.phone', 'fa fa-sort-numeric-desc': orderMember=='-profile.phone', 'fa fa-arrows-v': orderMember }"></i></a></th>
+
+            <th style="width:20%"><a href="" ng-click="setOrderMember('group.name')">Type utilisateur <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='group.name', 'fa fa-sort-alpha-desc': orderMember=='-group.name', 'fa fa-arrows-v': orderMember }"></i></a></th>
+
+            <th style="width:10%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="member in members | filter:searchMember | orderBy:orderMember">
+            <td class="text-c">{{ member.profile.last_name }}</td>
+            <td class="text-c">{{ member.profile.first_name }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.profile.phone }}</td>
+            <td class="text-u-c text-sm">{{ member.group.name }}</td>
+            <td>
+              <div class="buttons">
+                <button class="btn btn-default" ui-sref="app.admin.members_edit({id: member.id})">
+                  <i class="fa fa-edit"></i> Éditer
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,164 @@
+'use strict'
+
+### COMMON CODE ###
+
+##
+# Provides a set of common callback methods to the $scope parameter. These methods are used
+# in the various machines' admin controllers.
+#
+# Provides :
+#  - $scope.submited(content)
+#  - $scope.cancel()
+#  - $scope.fileinputClass(v)
+#  - $scope.addFile()
+#  - $scope.deleteFile(file)
+#
+# Requires :
+#  - $scope.machine.machine_files_attributes = []
+#  - $state (Ui-Router) [ 'app.public.machines_list' ]
+##
+class MachinesController
+  constructor: ($scope, $state)->
+    ##
+    # For use with ngUpload (https://github.com/twilson63/ngUpload).
+    # Intended to be the callback when the upload is done: any raised error will be stacked in the
+    # $scope.alerts array. If everything goes fine, the user is redirected to the machines list.
+    # @param content {Object} JSON - The upload's result
+    ##
+    $scope.submited = (content) ->
+      if !content.id?
+        $scope.alerts = []
+        angular.forEach content, (v, k)->
+          angular.forEach v, (err)->
+            $scope.alerts.push
+              msg: k+': '+err
+              type: 'danger'
+      else
+        $state.go('app.public.machines_list')
+
+    ##
+    # Changes the current user's view, redirecting him to the machines list
+    ##
+    $scope.cancel = ->
+      $state.go('app.public.machines_list')
+
+    ##
+    # For use with 'ng-class', returns the CSS class name for the uploads previews.
+    # The preview may show a placeholder or the content of the file depending on the upload state.
+    # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+    ##
+    $scope.fileinputClass = (v)->
+      if v
+        'fileinput-exists'
+      else
+        'fileinput-new'
+
+    ##
+    # This will create a single new empty entry into the machine attachements list.
+    ##
+    $scope.addFile = ->
+      $scope.machine.machine_files_attributes.push {}
+
+    ##
+    # This will remove the given file from the machine attachements list. If the file was previously uploaded
+    # to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
+    # the attachements array.
+    # @param file {Object} the file to delete
+    ##
+    $scope.deleteFile = (file) ->
+      index = $scope.machine.machine_files_attributes.indexOf(file)
+      if file.id?
+        file._destroy = true
+      else
+        $scope.machine.machine_files_attributes.splice(index, 1)
+
+
+
+##
+# Controller used in the public listing page, allowing everyone to see the list of machines
+##
+Application.Controllers.controller "machinesController", ["$scope", "$state", 'Machine', '$modal', ($scope, $state, Machine, $modal) ->
+
+  ## Retrieve the list of machines
+  $scope.machines = Machine.query()
+
+  ##
+  # Redirect the user to the machine details page
+  ##
+  $scope.showMachine = (machine) ->
+    $state.go('app.public.machines_show', {id: machine.slug})
+]
+
+
+
+##
+# Controller used in the machine creation page (admin)
+##
+Application.Controllers.controller "newMachineController", ["$scope", "$state", 'CSRF', ($scope, $state, CSRF) ->
+  CSRF.setMetaTags()
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = "/api/machines/"
+
+  ## Form action on the above URL
+  $scope.method = "post"
+
+  ## default machine parameters
+  $scope.machine =
+    machine_files_attributes: []
+
+  ## Using the MachinesController
+  new MachinesController($scope, $state)
+]
+
+
+
+##
+# Controller used in the machine edition page (admin)
+##
+Application.Controllers.controller "editMachineController", ["$scope", "$state", '$stateParams', 'Machine', 'CSRF', ($scope, $state, $stateParams, Machine, CSRF) ->
+  CSRF.setMetaTags()
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = "/api/machines/" + $stateParams.id
+
+  ## Form action on the above URL
+  $scope.method = "put"
+
+  ## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
+  $scope.machine = Machine.get {id: $stateParams.id}
+  , ->
+    return
+  , ->
+    $state.go('app.public.machines_list')
+
+  ## Using the MachinesController
+  new MachinesController($scope, $state)
+]
+
+
+
+##
+# Controller used in the machine details page (public)
+##
+Application.Controllers.controller "showMachineController", ['$scope', '$state', '$modal', '$stateParams', 'Machine', ($scope, $state, $modal, $stateParams, Machine) ->
+
+  ## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
+  $scope.machine = Machine.get {id: $stateParams.id}
+  , ->
+    return
+  , ->
+    $state.go('app.public.machines_list')
+
+  ##
+  # Callback to delete the current machine (admins only)
+  ##
+  $scope.delete = (machine) ->
+    # check the permissions
+    if $scope.currentUser.role isnt 'admin'
+      console.error 'Unauthorized operation'
+    else
+      # delete the machine then redirect to the machines listing
+      machine.$delete ->
+        $state.go('app.public.machines_list')
+]

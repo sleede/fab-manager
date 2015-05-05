@@ -1,0 +1,57 @@
+'use strict'
+
+##
+# Navigation controller. List the links availables in the left navigation pane and their icon.
+##
+Application.Controllers.controller "mainNavController", ["$scope", "$location", "$cookies", ($scope, $location, $cookies) ->
+
+## Common links (public application)
+  $scope.navLinks = [
+    {
+      state: 'app.public.home'
+      linkText: 'Accueil'
+      linkIcon: 'home'
+    }
+
+    {
+      state: 'app.public.machines_list'
+      linkText: 'Liste des machines'
+      linkIcon: 'gears'
+    }
+    {
+      state: 'app.public.events_list'
+      linkText: 'Liste des stages et ateliers'
+      linkIcon: 'tags'
+    }
+    {
+      state: 'app.public.projects_list'
+      linkText: 'Galerie de projets'
+      linkIcon: 'th'
+    }
+  ]
+
+  ## Admin links (backoffice application)
+  $scope.adminNavLinks = [
+    {
+      state: 'app.admin.members'
+      linkText: 'Suivi utilisateurs'
+      linkIcon: 'users'
+    }
+    {
+      state: 'app.admin.events'
+      linkText: 'Suivi stages et ateliers'
+      linkIcon: 'tags'
+    }
+    {
+      state: 'app.public.machines_list'
+      linkText: 'Gérer les machines'
+      linkIcon: 'cogs'
+    }
+    {
+      state: 'app.admin.project_elements'
+      linkText: 'Gérer les éléments Projets'
+      linkIcon: 'tasks'
+    }
+  ]
+  
+]

@@ -1,0 +1,1 @@
+json.extract! @licence, :id, :name, :description

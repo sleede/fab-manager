@@ -1,0 +1,216 @@
+<div class="row no-gutter">
+
+  <div class=" col-sm-12 col-md-12 col-lg-8 nopadding">
+
+    <section class="panel panel-default bg-light m-lg"> 
+    <div class="panel-body m-r">
+
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+      <input name="_method" type="hidden" ng-value="method">
+
+      <div class="form-group" ng-class="{'has-error': eventForm['event[title]'].$dirty && eventForm['event[title]'].$invalid}">
+        <label for="event_title" class="col-sm-3 control-label">Titre *</label>
+        <div class="col-sm-9">
+          <input ng-model="event.title" type="text" name="event[title]" class="form-control" id="event_title" placeholder="" required>
+          <span class="help-block" ng-show="eventForm['event[title]'].$dirty && eventForm['event[title]'].$error.required">Titre est obligatoire</span>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="event_image" class="col-sm-3 control-label">Visuel associé</label>
+        <div class="col-sm-9">
+          <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(event.event_image)">
+            <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
+              <img src="data:image/png;base64," src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!event.event_image">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
+              <img ng-src="{{ event.event_image }}" alt="" />
+            </div>
+            <div>
+              <span class="btn btn-default btn-file"><span class="fileinput-new">Choisir une image <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists">Modifier</span>
+                <input type="file" name="event[event_image_attributes][attachment]"></span>
+              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-trash-o"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': eventForm['event[description]'].$dirty && eventForm['event[description]'].$invalid}">
+        <label for="description" class="col-sm-3 control-label">Description *</label>
+        <div class="col-sm-9">
+          <textarea ng-model="event.description" rows="16" class="form-control" id="event_description" placeholder="" name="event[description]" required></textarea>
+          <span class="help-block" ng-show="eventForm['event[description]'].$dirty && eventForm['event[description]'].$error.required">Description est obligatoire</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Pièces jointes</label>
+        <div class="col-sm-9">
+          <div ng-repeat="file in event.event_files_attributes" ng-show="!file._destroy">
+            <input type="hidden" name="event[event_files_attributes][][id]" ng-value="file.id" />
+            <input type="hidden" name="event[event_files_attributes][][_destroy]" ng-value="file._destroy" />
+
+            <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
+              <div class="form-control" data-trigger="fileinput">
+                <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+              </div>
+              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Parcourir</span>
+                <span class="fileinput-exists">Modifier</span><input type="file" name="event[event_files_attributes][][attachment]"></span>
+              <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
+            </div>
+
+          </div>
+          <a class="btn btn-default" ng-click="addFile()" role="button">Ajouter un nouveau fichier <i class="fa fa-file-o fa-fw"></i></a>
+        </div>
+      </div>
+
+
+    </div>   <!-- ./panel-body  -->
+    <div class="panel-footer no-padder">
+      <input type="submit" ng-value="submitName" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="eventForm.$invalid"/>
+    </div>
+    </section>
+
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-4">
+
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3>Type d'évènement</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <input type="hidden" name="event[category_ids][]" value="" />
+        <select ng-model="event.category_ids" class="form-control" name="event[category_ids][]" required ui-select2>
+          <option value="{{c.id}}" ng-repeat="c in categories">{{c.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3>Dates et horaires</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <div class="m-b">
+          <label class="v-bottom">Toute la journée</label>
+          <div class="inline v-top">
+            <label class="checkbox-inline">
+              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="true" required/> Oui
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="false"/> Non
+            </label>
+          </div>
+        </div>
+        <input type="hidden" name="event[availability_id]" ng-value="event.availability_id" ng-if="event.availability_id">
+        <div class="m-b">
+          <label>Date de début</label>
+          <div class="input-group">
+            <input type="hidden" name="event[start_date]" ng-value="event.start_date">
+            <input type="text"
+                   class="form-control"
+                   ng-model="event.start_date"
+                   datepicker-popup="dd/MM/yyyy"
+                   datepicker-options="datePicker.options"
+                   is-open="datePicker.startOpened"
+                   ng-click="toggleStartDatePicker($event)"
+                   required/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="toggleStartDatePicker($event)"><i class="fa fa-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="m-b">
+          <label>Date de fin</label>
+          <div class="input-group">
+            <input type="hidden" name="event[end_date]" ng-value="event.end_date">
+            <input type="text"
+                   class="form-control"
+                   ng-model="event.end_date"
+                   datepicker-popup="dd/MM/yyyy"
+                   datepicker-options="datePicker.options"
+                   is-open="datePicker.endOpened"
+                   ng-click="toggleEndDatePicker($event)"
+                   required/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="toggleEndDatePicker($event)"><i class="fa fa-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="m-b row" ng-if="event.all_day =='false'">
+          <div class="col-xs-6">
+              <label>Heure de début</label>
+              <div>
+                <input type="hidden" name="event[start_time]" ng-value="event.start_time">
+                <timepicker ng-model="event.start_time" hour-step="1" minute-step="1" show-meridian="ismeridian"></timepicker>
+              </div>
+          </div>
+          <div class="col-xs-6">
+            <label>Heure de fin</label>
+            <div>
+              <input type="hidden" name="event[end_time]" ng-value="event.end_time">
+              <timepicker ng-model="event.end_time" hour-step="1" minute-step="1" show-meridian="ismeridian"></timepicker>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="method == 'post'" class="m-b">
+          <label>Récurrence</label>
+          <select ng-model="event.recurrence" class="form-control" name="event[recurrence]">
+            <option value="{{t.value}}" ng-repeat="t in recurrenceTypes">{{t.label}}</option>
+          </select>
+          <div ng-if="event.recurrence != 'none'">
+            et se terminera le
+            <div class="input-group">
+              <input type="hidden" name="event[recurrence_end_at]" ng-value="event.recurrence_end_at">
+              <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="event.recurrence_end_at" is-open="datePicker.recurrenceEndOpened" ng-required="true"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="toggleRecurrenceEnd($event)"><i class="fa fa-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3>Tarifs et disponibilités</h3>
+      </div>
+      <div class="widget-content no-bg wrapper">
+        <div class="form-group">
+          <label for="event_amount" class="col-sm-5 control-label">Tarif standard</label>
+          <div class="col-sm-5">
+            <div class="input-group">
+              <input ng-model="event.amount" type="number" name="event[amount]" class="form-control" id="event_amount" required>
+              <div class="input-group-addon">€</div>
+            </div>
+             <span class="help-block">0 = gratuit</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event_reduced_amount" class="col-sm-5 control-label">Tarif réduit</label>
+          <div class="col-sm-5">
+            <div class="input-group">
+              <input ng-model="event.reduced_amount" type="number" name="event[reduced_amount]" class="form-control" id="event_reduced_amount">
+              <div class="input-group-addon">€</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event_nb_total_places" class="col-sm-5 control-label">Places disponibles</label>
+          <div class="col-sm-6">
+            <div class="input-group">
+              <input ng-model="event.nb_total_places" type="number" name="event[nb_total_places]" class="form-control" id="event_nb_total_places">
+              <div class="input-group-addon"><i class="fa fa-ticket"></i> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

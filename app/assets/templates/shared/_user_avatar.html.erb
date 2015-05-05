@@ -1,0 +1,4 @@
+<img ng-src="<%= image_path("no_avatar.png") %>" class="img-circle" ng-class="avatarClass"
+     ng-if="!userAvatar || !userAvatar.attachment_url">
+<img ng-src="{{userAvatar.attachment_url}}" class="img-circle" ng-class="avatarClass"
+     ng-if="userAvatar.attachment_url">

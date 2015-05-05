@@ -1,0 +1,91 @@
+'use strict';
+
+/**
+* The application file bootstraps the angular app by  initializing the main module and
+* creating namespaces and moduled for controllers, filters, services, and directives.
+*/
+
+var Application = Application || {};
+
+Application.Constants = angular.module('application.constants', []);
+Application.Services = angular.module('application.services', []);
+Application.Controllers = angular.module('application.controllers', []);
+Application.Filters = angular.module('application.filters', []);
+Application.Directives = angular.module('application.directives', []);
+
+
+angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngAnimate', 'ngCookies', 'ui.router', 'ui.bootstrap',
+               'ngUpload', 'duScroll', 'application.filters','application.services', 'application.directives',
+               'application.constants', 'application.controllers', 'application.router', 'ui.select2', 'angularMoment',
+               'Devise', 'DeviseModal', 'angular-growl', 'xeditable', 'checklist-model', 'unsavedChanges', 'angular-loading-bar',
+               'ngTouch', 'angular-google-analytics', 'angularUtils.directives.dirDisqus', 'angular-redactor']).
+config(['$locationProvider', '$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfigProvider", "AnalyticsProvider", "datepickerPopupConfig",
+    function($locationProvider, $httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, datepickerPopupConfig) {
+
+
+    <% if Rails.env.production? and ENV["GOOGLE_ANALYTICS_ACCOUNT"] != 'UA-YOUR_ID_HERE' and ENV["GOOGLE_ANALYTICS_ACCOUNT"] != nil %>
+      AnalyticsProvider.setAccount('<%= ENV["GOOGLE_ANALYTICS_ACCOUNT"] %>');
+      // track all routes (or not)
+      AnalyticsProvider.trackPages(true);
+      AnalyticsProvider.setDomainName('<%= ENV["APPLICATION_ROOT_URL"] %>');
+      AnalyticsProvider.useAnalytics(true);
+      AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+    <% else %>
+	  AnalyticsProvider.setAccount('DISABLED');
+    <% end %>
+
+    datepickerPopupConfig.closeText = "Fermer";
+    datepickerPopupConfig.cleartext = "Effacer";
+    datepickerPopupConfig.currentText = "Aujourd'hui";
+
+    // custom message for angular-unsavedChanges
+    unsavedWarningsConfigProvider.navigateMessage = "Vous perdrez les modifications non enregistrées si vous quittez cette page";
+    unsavedWarningsConfigProvider.reloadMessage = "Vous perdrez les modifications non enregistrées si vous rechargez cette page";
+
+    growlProvider.globalTimeToLive(5000);
+    growlProvider.globalEnableHtml(true);
+
+    $locationProvider.hashPrefix('!');
+
+  }]).run(["$rootScope", "$log", "AuthService", "Auth", "amMoment", "$state", "editableOptions", "$location", "Analytics", function($rootScope, $log, AuthService, Auth, amMoment, $state, editableOptions, $location, Analytics){
+
+      amMoment.changeLocale('fr');
+
+      editableOptions.theme = 'bs3';
+
+      $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+        $state.prevState = fromState;
+        $state.prevParams = fromParams;
+      });
+
+      $rootScope.backPrevLocation = function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        if($state.prevState.name == ""){
+          $state.prevState = "app.public.home";
+        }
+        $state.go($state.prevState, $state.prevParams);
+      };
+
+  }]).filter('array', function() {
+    return function(arrayLength) {
+        if (arrayLength) {
+            arrayLength = Math.ceil(arrayLength);
+            var arr = new Array(arrayLength), i = 0;
+            for (; i < arrayLength; i++) {
+                arr[i] = i;
+            }
+            return arr;
+        }
+    };
+}).directive('datepickerPopup', function (){
+    // fixes https://github.com/angular-ui/bootstrap/issues/2659
+    return {
+        restrict: 'EAC',
+        require: 'ngModel',
+        link: function(scope, element, attr, controller) {
+            //remove the default formatter from the input directive to prevent conflict
+            controller.$formatters.shift();
+        }
+    }
+});
