@@ -1,0 +1,29 @@
+# Add application configuration variables here, as shown below.
+#
+
+# Var ENV for Staging or Production
+DEVISE_KEY: '-- your secret key here --'
+
+SECRET_KEY_BASE: YourXssPreventionKeyHere
+
+APPLICATION_ROOT_URL: 'demo.fab-manager.com'
+APPLICATION_PROTOCOL: 'http'
+
+DATABASE_USERNAME:
+DATABASE_PASSWORD:
+DATABASE_PORT:
+
+DEFAULT_MAIL_FROM: fabmanager <noreply@fabmanager.com>
+
+MANDRILL_USERNAME: YourMandrillUsernameHere
+MANDRILL_APIKEY: YourMandrillApiKeyHere
+
+GOOGLE_ANALYTICS_ACCOUNT: 'UA-YOUR_ID_HERE'
+
+
+# Global ENV
+TWITTER_NAME: 'FablabGrenoble'
+TWITTER_CONSUMER_KEY: 'YourTwitterKeyHere'
+TWITTER_CONSUMER_SECRET: 'YourTwitterSecretHere'
+TWITTER_ACCESS_TOKEN: 'YourTwitterTokenHere'
+TWITTER_ACCESS_TOKEN_SECRET: 'YourTwitterTokenSecretHere'

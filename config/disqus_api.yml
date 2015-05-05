@@ -1,0 +1,14 @@
+development:
+  api_secret: YourApiSecretHere
+  api_key: YourApiKeyHere
+  access_token: YourAccessTokenHere
+
+staging:
+  api_secret: YourApiSecretHere
+  api_key: YourApiKeyHere
+  access_token: YourAccessTokenHere
+
+production:
+  api_secret: YourApiSecretHere
+  api_key: YourApiKeyHere
+  access_token: YourAccessTokenHere

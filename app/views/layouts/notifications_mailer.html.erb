@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="http://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    /* Client-specific Styles */
+    #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" button. */
+    a{color:#D92227;} a:hover{color:#D92227;}
+    </style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="width:100% !important; -webkit-text-size-adjust:none; margin:0; padding:0; background-color:#fafafa; font-family:Arial; font-size:14px;">
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable" style="height:100% !important; margin:0; padding:0; width:100% !important; background-color:#fafafa;">
+      <tr>
+        <td align="center" valign="top">
+          <p style="font-size:9px;">&nbsp;</p>
+          <table border="0" cellpadding="20" cellspacing="0" width="600" id="templateContainer" style="width:600px; border:1px solid #dddddd; background-color:#fff; -webkit-border-radius:2px; -moz-border-radius:2px; -ms-border-radius:2px; -o-border-radius:2px; border-radius:2px;">
+            <tr>
+              <td align="center">
+                <a href="<%= root_url %>"><img src="<%= root_url + image_path('fablab.jpg') %>" alt="Fab Lab" width="140px;"></a>
+              </td>
+            </tr>
+            <tr>
+              <td id="title" style="font-size:14px; color:#fff; font-weight:bold; background-color:#D92227"><%= message.subject %></td>
+            </tr>
+            <tr>
+              <td>
+                <%= yield %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>A très bientôt sur <a href="<%= root_url %>" style="color:#D92227">le Fab Lab</a>.</p>
+                <p>Cordialement,<br>L&#39;équipe du Fab Lab.</p>
+              </td>
+            </tr>
+            <tr>
+              <td id="contactTd" style="color:#666; font-size:11px; background-color:#f3f3f3; padding:13px 20px 13px 20px; border-top:2px dashed #ddd;">Merci de ne pas répondre directement à cet email.</td>
+            </tr>
+          </table>
+          <p style="font-size:9px;">&nbsp;</p>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+</html>

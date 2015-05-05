@@ -1,0 +1,120 @@
+'use strict'
+
+Application.Controllers.controller "eventsController", ["$scope", "$state", 'Event', ($scope, $state, Event) ->
+
+
+
+    ### PRIVATE STATIC CONSTANTS ###
+
+    # Number of events added to the page when the user clicks on 'load next events'
+    EVENTS_PER_PAGE = 12
+
+
+
+    ### PUBLIC SCOPE ###
+
+    ## The events displayed on the page
+    $scope.events = []
+
+    ## By default, the pagination mode is activated to limit the page size
+    $scope.paginateActive = true
+
+    ## The currently displayed page number
+    $scope.page = 1
+
+    ##
+    # Adds EVENTS_PER_PAGE events to the bottom of the page, grouped by month
+    ##
+    $scope.loadMoreEvents = ->
+        Event.query {page: $scope.page}, (data) ->
+            $scope.events = $scope.events.concat data
+            if data.length > 0
+                $scope.paginateActive = false if ($scope.page-2)*EVENTS_PER_PAGE+data.length >= data[0].nb_total_events
+
+                $scope.eventsGroupByMonth = _.groupBy($scope.events, (obj) ->
+                    _.map ['month', 'year'], (key, value) -> obj[key]
+                )
+                $scope.monthOrder = _.sortBy _.keys($scope.eventsGroupByMonth), (k)->
+                    monthYearArray = k.split(',')
+                    date = new Date()
+                    date.setMonth(monthYearArray[0])
+                    date.setYear(monthYearArray[1])
+                    return -date.getTime()
+            else
+                $scope.paginateActive = false
+        $scope.page += 1
+
+
+
+    ##
+    # Callback to redirect the user to the specified event page
+    # @param event {{id:number}}
+    ##
+    $scope.showEvent = (event) ->
+        $state.go('app.public.events_show', {id: event.id})
+
+
+
+    ### PRIVATE SCOPE ###
+
+    ##
+    # Kind of constructor: these actions will be realized first when the controller is loaded
+    ##
+    initialize = ->
+        $scope.loadMoreEvents()
+
+
+    ## !!! MUST BE CALLED AT THE END of the controller
+    initialize()
+]
+
+
+
+
+
+
+
+Application.Controllers.controller "showEventController", ["$scope", "$state", "$stateParams", "Event", '$modal', 'Member', ($scope, $state, $stateParams, Event, $modal, Member) ->
+
+
+
+    ### PUBLIC SCOPE ###
+
+    ## current event details
+    $scope.event = {}
+
+
+
+    ##
+    # Callback to delete the provided event (admins only)
+    # @param event {$resource} angular's Event $resource
+    ##
+    $scope.deleteEvent = (event) ->
+        event.$delete ->
+            $state.go('app.public.events_list')
+
+
+
+    ### PRIVATE SCOPE ###
+
+    ##
+    # Kind of constructor: these actions will be realized first when the controller is loaded
+    ##
+    initialize = ->
+
+        # get the details for the current event (event's id is recovered from the current URL)
+        Event.get {id: $stateParams.id}
+        , (data) ->
+            $scope.event = data
+            if !$scope.event.reduced_amount
+                $scope.event.reduced_amount = 0
+            return
+        , ->
+            $state.go('app.public.events_list')
+
+
+
+    ## !!! MUST BE CALLED AT THE END of the controller
+    initialize()
+]
+

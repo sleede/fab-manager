@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" ng-app="application" class="app">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="sleede">
+
+  <title>Fab Lab Manager</title>
+
+  <script type="text/javascript" src="//use.typekit.net/rih5zfr.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+
+  <%= stylesheet_link_tag "application", media: 'all' %>
+  <%= stylesheet_link_tag "app.printer", media: 'print' %>
+  <base href="/"></base>
+
+  <link rel="shortcut icon" type="image/x-icon" href="<%= image_path('favicons/favicon.ico') %>">
+  <link rel="shortcut icon" type="image/ico" href="<%= image_path('favicons/favicon.ico') %>">
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_builder.target! : 'null' %>)" ng-cloak>
+<div growl></div>
+
+<section class="vbox">
+
+  <header class="header header-md navbar navbar-fixed-top-xs">
+    <div ui-view="header"></div>
+  </header>
+
+  <section ui-view="content">
+    <section class="hbox stretch">
+
+      <aside id="nav" class="aside-md bg-red hidden-print" ui-view="leftnav">
+      </aside>
+
+      <section id="content">
+        <section class="vbox">
+          <section class="scrollable" ui-view="main">
+          </section>
+        </section>
+      </section>
+
+
+    </section> <!-- /.hbox -->
+  </section>
+
+</section> <!-- /.vbox -->
+
+<%= javascript_include_tag 'application' %>
+
+</body>
+</html>

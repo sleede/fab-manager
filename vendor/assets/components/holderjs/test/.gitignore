@@ -1,0 +1,10 @@
+benchmark.js
+lodash.js
+require.js
+test.js
+ua-parser.js
+*.svg
+*.woff
+*.ttf
+*.html
+!index.html

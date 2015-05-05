@@ -1,0 +1,44 @@
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+
+	background-color: #f2f2f2;
+	
+}
+
+.btn{
+	> i{
+		&.pull-left,
+		&.pull-right{
+			line-height: 1.428571429;
+		}
+	}
+}
+
+.btn-warning-full {
+	outline: 0;
+	text-transform: uppercase;
+	border: 3px solid $yellow;
+	background-color: $yellow;
+	&:hover {
+		background-color: white;
+	}
+}
+
+
+.btn-block {
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+.btn-group-vertical > .btn:first-child:not(:last-child){
+	border-top-right-radius: $border-radius-base;
+}
+
+.btn-group-vertical > .btn:last-child:not(:first-child){
+	border-bottom-left-radius: $border-radius-base;
+}
+
+.btn-inactive{
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}

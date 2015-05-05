@@ -1,0 +1,133 @@
+  <div class="modal-header">
+    <%= image_tag("fablab-w.png", class: 'modal-logo') %>
+    <h1>Créer votre compte</h1>
+  </div>
+  <div class="">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+    <div class="well m-b-n">
+      <form role="form" name="signupForm" class="form-horizontal" novalidate autocomplete="off" ng-keydown="signupForm.$valid && $event.which == 13 && ok()">
+        <div class="form-group" ng-class="{'has-error': signupForm.gender.$dirty && signupForm.gender.$invalid}">
+          <div class="col-sm-12">
+            <label class="checkbox-inline">
+              <input type="radio" name="gender" ng-model="user.profile_attributes.gender" value="true" required/> Homme
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio" name="gender" ng-model="user.profile_attributes.gender" value="false"/> Femme
+            </label>
+            <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required">Sexe est obligatoire</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+
+          <div class="col-sm-6" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
+            <input type="first_name" name="first_name" ng-model="user.profile_attributes.first_name" class="form-control" placeholder="Votre prénom" required>
+            <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required">Prénom est obligatoire</span>
+          </div>
+          <div class="m-b visible-xs"></div>
+          <div class="col-sm-6" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
+            <input type="last_name" name="last_name" ng-model="user.profile_attributes.last_name" class="form-control" placeholder="Votre nom" required>
+            <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required">Nom est obligatoire</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.username.$dirty && signupForm.username.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input type="username" name="username" ng-model="user.username" class="form-control" placeholder="Votre pseudo" required>
+            </div>
+            <span class="help-block" ng-show="signupForm.username.$dirty && signupForm.username.$error.required">Pseudo est obligatoire</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              <input type="email" name="email" ng-model="user.email" class="form-control" placeholder="Votre adresse email" required>
+            </div>
+            <span class="help-block" ng-show="signupForm.email.$dirty && signupForm.email.$error.required">Email est obligatoire</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.password.$dirty && signupForm.password.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              <input type="password" name="password" ng-model="user.password" class="form-control" placeholder="Votre mot de passe" required ng-minlength="8">
+            </div>
+            <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.required">Mot de passe est obligatoire</span>
+            <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.minlength">Mot de passe est trop court (au moins 8 caractères)</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              <input type="password" name="password_confirmation" ng-model="user.password_confirmation" class="form-control" placeholder="Resaisissez votre mot de passe" required ng-minlength="8" match="user.password">
+            </div>
+            <span class="help-block" ng-show="signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$error.required">Mot de passe de confirmation est obligatoire</span>
+            <span class="help-block" ng-show="signupForm.password_confirmation.$error.match">Mot de passe ne concorde pas avec la confirmation</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
+          <div class="col-sm-12">
+            <div>
+              <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in groups" required>
+                <option value="">Votre profil utilisateur</option>
+              </select>
+            </div>
+            <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required">Le profil utilisateur est obligatoire</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.birthday.$dirty && signupForm.birthday.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
+              <input type="text"
+                     class="form-control"
+                     name="birthday"
+                     ng-model="user.profile_attributes.birthday"
+                     datepicker-popup="{{datePicker.format}}"
+                     datepicker-options="datePicker.options"
+                     is-open="datePicker.opened"
+                     placeholder="Date de naissance"
+                     ng-click="openDatePicker($event)"
+                     required/>
+            </div>
+            <span class="help-block" ng-show="signupForm.birthday.$dirty && signupForm.birthday.$error.required">La date de naissance est obligatoire</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.phone.$dirty && signupForm.phone.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+              <input ng-model="user.profile_attributes.phone" type="text" name="phone" class="form-control" placeholder="Numéro de téléphone" required>
+            </div>
+            <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required">Le numéro de téléphone est obligatoire.</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.is_allow_contact.$dirty && signupForm.is_allow_contact.$invalid}">
+          <div class="col-sm-12">
+            <input type="checkbox" name="is_allow_contact" ng-model="user.is_allow_contact" value="true"/> J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.cgu.$dirty && signupForm.cgu.$invalid}">
+          <div class="col-sm-12">
+            <input type="checkbox" name="cgu" ng-model="user.cgu" value="true" required/> J'accepte et J'ai Lu <a href="/Charte_FABLAB.pdf" target="_blank">la charte d'utilisation du Fab Lab</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer no-padder">
+    <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" ng-disabled="signupForm.$invalid">Valider</button>
+  </div>
