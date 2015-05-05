@@ -1,0 +1,54 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1>Les membres du Fab Lab</h1>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+<section class="m-lg">
+  <div class="row">
+    <div class="col-md-12">
+<!--       <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new">Ajouter un nouveau membre</button> -->
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:15%">Avatar</th>
+            <th style="width:15%">Utilisateur</th>
+            <th style="width:15%">Pseudo</th>
+            <th style="width:15%">Email</th>
+            <th style="width:10%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="member in members">
+            <td>
+              <span class="pull-left thumb-sm avatar m-r">
+                <fab-user-avatar ng-model="member.profile.user_avatar" avatar-class="thumb-38"></fab-user-avatar>
+              </span>
+            </td>
+            <td class="text-c">{{ member.name }}</td>
+            <td class="text-u-c text-sm">{{ member.username }}</td>
+            <td>{{ member.email }}</td>
+            <td>
+              <div class="buttons">
+                <button class="btn btn-default" ui-sref="app.logged.members_show({id: member.slug})">
+                  <i class="fa fa-eye"></i> Consulter
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

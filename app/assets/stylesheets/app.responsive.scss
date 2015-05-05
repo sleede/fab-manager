@@ -1,0 +1,38 @@
+
+@media screen and (max-width: $screen-sm-min) {
+  .modal-dialog { top: 0; }
+  .modal-header {
+    .modal-logo {
+      display: none;
+    }
+  }
+
+  .about-fablab {
+  	.about-title {
+    	font-size: rem-calc(30);
+    	line-height: rem-calc(28);
+    	text-align: center;
+	}
+	.about-picture {
+	  padding: 70px 0;
+	  height: 226px;
+	}
+  }
+
+
+}
+
+@media screen and (max-width: $screen-md-min) {
+
+	.heading {
+		.heading-title {
+			h1 {
+			  font-size: rem-calc(16);
+			  padding: 26px 15px;
+			}
+		}
+	}
+
+}
+
+
