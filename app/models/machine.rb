@@ -10,8 +10,6 @@ class Machine < ActiveRecord::Base
 
   has_and_belongs_to_many :projects, join_table: 'projects_machines'
 
-  has_and_belongs_to_many :trainings, join_table: 'trainings_machines'
-
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true
 
