@@ -18,7 +18,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngAnima
                'ngUpload', 'duScroll', 'application.filters','application.services', 'application.directives',
                'application.constants', 'application.controllers', 'application.router', 'ui.select2', 'angularMoment',
                'Devise', 'DeviseModal', 'angular-growl', 'xeditable', 'checklist-model', 'unsavedChanges', 'angular-loading-bar',
-               'ngTouch', 'angular-google-analytics', 'angularUtils.directives.dirDisqus', 'angular-redactor']).
+               'ngTouch', 'angular-google-analytics', 'angularUtils.directives.dirDisqus', 'summernote']).
 config(['$locationProvider', '$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfigProvider", "AnalyticsProvider", "datepickerPopupConfig",
     function($locationProvider, $httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, datepickerPopupConfig) {
 
@@ -65,6 +65,23 @@ config(['$locationProvider', '$httpProvider', 'AuthProvider', "growlProvider", "
           $state.prevState = "app.public.home";
         }
         $state.go($state.prevState, $state.prevParams);
+      };
+
+      $rootScope.summernoteOpts = {
+        lang: 'fr-FR',
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'italic', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'hr']],
+          ['view', ['fullscreen', 'codeview']],
+          ['group', ['video']],
+          ['help', ['help']]
+        ],
+        styleTags: ['p', 'blockquote', 'pre', 'h4', 'h5', 'h6'],
+        maximumImageFileSize: 4096
       };
 
   }]).filter('array', function() {

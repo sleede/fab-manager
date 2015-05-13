@@ -1,9 +1,3 @@
-// Redactor
-
-.redactor_editor, .redactor_editor:focus {
-  height: 200px;
-}
-
 
 // Growl
 .growl {
@@ -24,7 +18,7 @@
         .select2-search-choice {
           @extend .label;
           padding-left: .9em;
-          font-size: 100%; 
+          font-size: 100%;
           font-weight: normal;
 
         }
@@ -130,7 +124,7 @@
         }
         &:hover { color: $yellow; }
       }
-      
+
     }
   }
   &.slider-actu {
@@ -254,12 +248,12 @@
     }
     &:hover { color: $yellow; }
   }
-  
+
 }
 
 .home {
-  .nav-branding { 
-    display: none; 
+  .nav-branding {
+    display: none;
   }
 }
 

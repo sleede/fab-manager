@@ -1,0 +1,45 @@
+{
+  "name": "angular-summernote",
+  "description": "AngularJS directive to Summernote",
+  "version": "0.3.2",
+  "main": [
+        "./dist/angular-summernote.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules/",
+    "examples/",
+    "test/",
+    "Gruntfile.js",
+    "karma.conf.js",
+    "package.json",
+    ".travis.yml",
+    ".jshintrc",
+    ".gitignore",
+    ".editorconfig",
+    ".bowerrc",
+    ".coveralls.yml"
+  ],
+  "keywords": ["angular.js", "summernote", "editor", "directive"],
+  "authors": [
+    {
+      "name": "\"Outsider\" Jeonghoon Byun",
+      "email": "outsideris@gmail.com",
+      "url": "http://blog.outsider.ne.kr/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/summernote/angular-summernote.git"
+  },
+  "dependencies": {
+    "summernote": "~0.6.0",
+    "angular": "~1.3.0"
+  },
+  "devDependencies": {
+    "angular-1.2": "https://raw.githubusercontent.com/angular/bower-angular/v1.2.26/angular.min.js",
+    "chai": "~1.10.0",
+    "angular-mocks": "~1.3.0",
+    "angular-mocks-1.2": "https://raw.githubusercontent.com/angular/bower-angular-mocks/v1.2.26/angular-mocks.js"
+  }
+}
