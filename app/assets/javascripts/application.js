@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require jquery-ui/ui/jquery.ui.core
 //= require jquery-ui/ui/jquery.ui.widget
 //= require jquery-ui/ui/jquery.ui.mouse
@@ -48,8 +49,6 @@
 //= require angular-google-analytics/src/angular-google-analytics
 //= require dirDisqus
 //= require humanize
-//= require redactor
-//= require angular-redactor/angular-redactor
 //= require underscore/underscore
 //= require app
 //= require router
@@ -57,3 +56,7 @@
 //= require_tree ./services
 //= require_tree ./directives
 //= require_tree ./filters
+//= require summernote/dist/summernote
+//= require summernote/lang/summernote-fr-FR
+//= require summernote/plugin/summernote-ext-video
+//= require angular-summernote/dist/angular-summernote
