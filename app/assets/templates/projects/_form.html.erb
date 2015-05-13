@@ -2,7 +2,7 @@
 
   <div class=" col-sm-12 col-md-12 col-lg-9 nopadding">
 
-    <section class="panel panel-default bg-light m-lg"> 
+    <section class="panel panel-default bg-light m-lg">
     <div class="panel-body m-r">
 
       <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
@@ -62,7 +62,8 @@
       <div class="form-group" ng-class="{'has-error': projectForm['project[description]'].$dirty && projectForm['project[description]'].$invalid}">
         <label for="description" class="col-sm-2 control-label">Description *</label>
         <div class="col-sm-10">
-          <textarea ng-model="project.description" rows="16" class="" id="project_description" placeholder="" name="project[description]" redactor required></textarea>
+          <input type="hidden" name="project[description]" ng-value="project.description" />
+          <summernote ng-model="project.description" id="project_description" placeholder="" config="summernoteOpts" name="project[description]" required></summernote>
           <span class="help-block" ng-show="projectForm['project[description]'].$dirty && projectForm['project[description]'].$error.required">Description est obligatoire</span>
         </div>
       </div>
@@ -76,8 +77,11 @@
               <span class="label label-warning m-t m-b">Étape {{ $index+1 }}/{{project.project_steps_attributes.length}}</span>
               <input type="hidden" name="project[project_steps_attributes][][id]" ng-value="step.id" />
               <input type="hidden" name="project[project_steps_attributes][][_destroy]" ng-value="step._destroy" />
-              <input ng-model="step.title" type="text" name="project[project_steps_attributes][][title]" class="form-control m-b-sm m-t-xs" placeholder="Titre de l'étape" required>
-              <textarea name="project[project_steps_attributes][][description]" ng-model="step.description" class="m-b-sm form-control" placeholder="" rows="8" redactor></textarea>
+              <!-- <input ng-model="step.title" type="text" name="project[project_steps_attributes][][title]" class="form-control m-b-sm m-t-xs" placeholder="Titre de l'étape" required>
+              <textarea name="project[project_steps_attributes][][description]" ng-model="step.description" class="m-b-sm form-control" placeholder="" rows="8" redactor></textarea> -->
+
+              <input type="hidden" name="project[project_steps_attributes][][description]" ng-value="step.description" />
+              <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description] required></summernote>
 
               <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(step.project_step_image)">
                 <span class="btn btn-default btn-file"><span class="fileinput-new">Ajouter une image</span><span class="fileinput-exists">Modifier l'image</span>
@@ -101,7 +105,7 @@
     <div class="panel-footer no-padder">
       <div ng-show="project.state != 'published'">
         <div class="btn btn-lg btn-block btn-valid btn-success text-u-c r-n" publish-project ng-disabled="projectForm.$invalid">
-          Publier votre projet 
+          Publier votre projet
         </div>
         <div class="text-center font-bold text-u-c">ou</div>
       </div>
@@ -173,7 +177,7 @@
         </select>
       </div>
     </div>
-    
+
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
         <h3>Tags</h3>
@@ -183,6 +187,6 @@
       </div>
     </div>
 
-  </div> 
+  </div>
 
 </div>

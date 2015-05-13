@@ -4,10 +4,12 @@
  *= require jasny-bootstrap/dist/css/jasny-bootstrap
  *= require angular-growl/build/angular-growl.min.css
  *= require angular-xeditable/dist/css/xeditable
- *= require redactor
  *= require angular-loading-bar/src/loading-bar
  *= require font-awesome
+ *= require summernote/dist/summernote
  */
+
+
 
 @import "app.functions";
 @import "compass";
