@@ -15,8 +15,6 @@ DATABASE_PORT:
 
 DEFAULT_MAIL_FROM: fabmanager <noreply@fabmanager.com>
 
-DISQUS_SHORTNAME: 
-
 MANDRILL_USERNAME: YourMandrillUsernameHere
 MANDRILL_APIKEY: YourMandrillApiKeyHere
 
