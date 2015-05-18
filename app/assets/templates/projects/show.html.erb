@@ -40,22 +40,22 @@
         <div class="row article-step m-b-lg" ng-repeat="step in project.project_steps_attributes">
           <div class="col-md-12 m-b-xs">
              <h3 class="well well-simple step-title">Étape {{$index+1}} : {{step.title}}</h3>
-          </div>  
+          </div>
           <div class="col-md-4" ng-if="step.project_step_image">
             <a href="{{step.project_step_image_url}}" target="_blank"><img class="img-responsive m-b" ng-src="{{step.project_step_image_url}}" alt="{{step.title}}" ></a>
           </div>
           <div class="col-md-8" ng-class="{'col-md-12' : step.project_step_image == undefined}">
-        
+
               <p ng-bind-html="step.description | toTrusted"></p>
           </div>
-        
- 
+
+
         </div>
       </div>
 
     </div>
 
-    <div class="wrapper-lg">
+    <div class="wrapper-lg"> 
       <dir-disqus disqus-shortname="<%= Rails.application.secrets.disqus_shortname %>"
                   disqus-identifier="project_{{ project.id }}"
                   disqus-url="{{ project_url }}"
@@ -64,7 +64,7 @@
     </div>
 
   </div>
-  
+
   <div class="col-sm-12 col-md-12 col-lg-3">
 
 
@@ -75,7 +75,7 @@
       <div><a class="text-sm font-sbold" ui-sref="app.logged.members_show({id: project.author.slug})"><i>Par {{project.author.first_name}}</i></a></div>
       <small class="text-xs m-b"><i>posté le {{project.created_at | amDateFormat: 'Do MMMM YYYY'}}</i></small>
 
- 
+
     </div>
 
     <section class="widget panel b-a m" ng-if="project.project_caos_attributes">
@@ -83,8 +83,8 @@
         <span class="badge bg-warning pull-right">{{project.project_caos_attributes.length}}</span>
         <h3>Fichier CAO à télécharger</h3>
       </div>
-    
-        <ul class="widget-content list-group list-group-lg no-bg auto">       
+
+        <ul class="widget-content list-group list-group-lg no-bg auto">
           <li ng-repeat="file in project.project_caos_attributes" class="list-group-item no-b clearfix">
             <a target="_blank" ng-href="{{file.attachment_url}}" download="{{file.attachment_url}}"><i class="fa fa-arrow-circle-o-down"> </i> {{file.attachment | humanize : 25}}</a>
           </li>
@@ -96,14 +96,14 @@
         <span class="badge bg-warning pull-right">{{project.machines.length}}</span>
         <h3>Machines et matériaux</h3>
       </div>
-    
-        <ul class="widget-content list-group list-group-lg no-bg auto">       
+
+        <ul class="widget-content list-group list-group-lg no-bg auto">
           <li ng-repeat="machine in project.machines" class="list-group-item no-b clearfix">
             <a ui-sref="app.public.machines_show({id: machine.id})">{{machine.name}}</a>
           </li>
         </ul>
 
-        <ul class="widget-content list-group list-group-lg no-bg auto">       
+        <ul class="widget-content list-group list-group-lg no-bg auto">
           <li ng-repeat="component in project.components" class="list-group-item no-b clearfix">
             {{component.name}}
           </li>
@@ -115,8 +115,8 @@
         <span class="badge bg-warning pull-right">{{project.project_users.length}}</span>
         <h3>Les collaborateurs</h3>
       </div>
-    
-        <ul class="widget-content list-group list-group-lg no-bg auto">       
+
+        <ul class="widget-content list-group list-group-lg no-bg auto">
           <li class="list-group-item no-b clearfix block-link" ng-repeat="collaborator in project.project_users" ui-sref="app.logged.members_show({id: collaborator.slug})">
             <span class="pull-left thumb-sm avatar m-r">
               <fab-user-avatar ng-model="collaborator.user_avatar" avatar-class="thumb-38"></fab-user-avatar>
@@ -132,9 +132,15 @@
         </ul>
     </section>
 
- 
+    <section class="widget panel b-a m" ng-if="project.licence">
+      <div class="panel-heading b-b">
+        <h3>Licence</h3>
+      </div>
+      <div class="panel-body">
+        {{ project.licence.name }}
+      </div>
+    </section>
   </div>
-
 </div>
 
 

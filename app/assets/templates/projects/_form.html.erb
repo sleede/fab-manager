@@ -77,8 +77,8 @@
               <span class="label label-warning m-t m-b">Étape {{ $index+1 }}/{{project.project_steps_attributes.length}}</span>
               <input type="hidden" name="project[project_steps_attributes][][id]" ng-value="step.id" />
               <input type="hidden" name="project[project_steps_attributes][][_destroy]" ng-value="step._destroy" />
-              <!-- <input ng-model="step.title" type="text" name="project[project_steps_attributes][][title]" class="form-control m-b-sm m-t-xs" placeholder="Titre de l'étape" required>
-              <textarea name="project[project_steps_attributes][][description]" ng-model="step.description" class="m-b-sm form-control" placeholder="" rows="8" redactor></textarea> -->
+              <input ng-model="step.title" type="text" name="project[project_steps_attributes][][title]" class="form-control m-b-sm m-t-xs" placeholder="Titre de l'étape" required>
+              
 
               <input type="hidden" name="project[project_steps_attributes][][description]" ng-value="step.description" />
               <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description] required></summernote>
