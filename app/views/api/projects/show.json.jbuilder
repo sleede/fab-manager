@@ -54,3 +54,6 @@ json.project_steps_attributes @project.project_steps.order('project_steps.create
   json.project_step_image_url s.project_step_image.attachment_url if s.project_step_image
 end
 json.state @project.state
+json.licence do
+  json.name @project.licence.name
+end if @project.licence.present?
