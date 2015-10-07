@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.is_admin? or (record.is_allow_contact and record.has_role?(:member))
+    user.is_admin? or (record.is_allow_contact and record.has_role?(:member)) or (user.id == record.id)
   end
 
   def create?
