@@ -116,12 +116,21 @@ The following files must be filled with the correct configuration to allow FabMa
 
 ## 4. Know issues
 
-  If you encounter a problem with bundler (unable to run `$ rails c` or `$ rails g`), you can fix it running the following commands:
+1. If you encounter a problem with bundler (unable to run `$ rails c` or `$ rails g`), you can fix it running the following commands:
 
-	$ bundle pack
-	$ bundle install --path vendor/cache
+	  $ bundle pack
+	  $ bundle install --path vendor/cache
+	
+2. While running `$ rake db:setup`, the following error message may appear:
+  
+    rake aborted!
+    PG::ConnectionBad: FATAL:  le rôle « user » n'existe pas
+  
+To solve this problem, run the following commands (don't forget to replace `user` by your current username):
 
-
+    $ sudo -i -u postgres
+    $ psql
+    $ CREATE ROLE user WITH CREATEDB, LOGIN;
 
 ## 5. Related Documentation
 - Angular-Bootstrap: http://angular-ui.github.io/bootstrap/
