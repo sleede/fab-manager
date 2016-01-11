@@ -94,24 +94,23 @@ The following files must be filled with the correct configuration to allow FabMa
 
 ### 3.2 Setup the FabManager database in PostgreSQL
 
+```
+###
+# set postgreSQL to valid password
+###
+sudo sed -i 's/all\s*peer/all md5/g' /etc/postgresql/*/main/pg_hba.conf
+sudo service postgresql restart
+```
+
 1. Login as the postgres user
 	`$ sudo -i -u postgres`
 
 2. Run the postgreSQL administration command line interface
-	`$ psql`
-  
 3. Create a new user in postgres (in this example, the user will be named "sleede")
-	`# CREATE USER sleede;`
-
 4. Grant him the right to create databases
-	`# ALTER ROLE sleede WITH CREATEDB;`
- 
 5. Then create the fablab database
-	`# CREATE DATABASE fabmanager_development OWNER sleede;`
-  
 6. To finish, attribute a password to this user
-	`# ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';`
-  
+`psql -f /path/of/the/create_db_user.sql`
   
 
 ## 4. Know issues
@@ -125,3 +124,39 @@ The following files must be filled with the correct configuration to allow FabMa
 
 ## 5. Related Documentation
 - Angular-Bootstrap: http://angular-ui.github.io/bootstrap/
+
+## Vagrant
+
+You will need to install the Vagrant and Virtualbox first. After that you can setup develop enviroment by one command.
+
+**Refrences:**
+
+https://www.vagrantup.com/
+
+https://gorails.com/guides/using-vagrant-for-rails-development
+
+**Install plugin for Vagrant first:**
+
+```
+vagrant plugin install vagrant-librarian-chef-nochef
+```
+
+**How to start the Vagrant in project directory:**
+
+```
+vagrant up
+```
+
+**Start rails server:**
+```
+vagrant ssh -c ./serve
+```
+
+**Login VM:**
+```
+vagrant ssh
+```
+
+By default, Vagrant will share your project directory (the directory with the Vagrantfile) to `/vagrant`.
+
+Notice: If bundle command fail when bootstrap, you can run it manually after login.
