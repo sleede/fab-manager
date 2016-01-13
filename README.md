@@ -149,7 +149,7 @@ vagrant up
 
 **Start rails server:**
 ```
-vagrant ssh -c ./serve
+vagrant ssh -c /home/vagrant/serve
 ```
 
 **Login VM:**
