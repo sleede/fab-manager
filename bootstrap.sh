@@ -22,8 +22,7 @@ sudo chmod 0600 /swapfile
 ###
 # bundle
 ###
-sudo apt-get install libpq-dev
-sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install postgresql postgresql-contrib libpq-dev -y
 cd /vagrant
 gem install --no-ri --no-rdoc bundler
 rbenv rehash
