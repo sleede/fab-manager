@@ -2,7 +2,7 @@
 
 <div class="row wrapper">
 	<div class="col-lg-8">
-		<h4 class="text-sm m-t-sm">Les derniers projets documentés</h4>
+		<h4 class="text-sm m-t-sm">The last documented projects</h4>
 
 		<carousel interval="5000" disable-animation="true">
 			<slide class="h480 cover r" ng-repeat="p in last_projects" active="p.active" style="background-image:url({{p.project_image}});">
@@ -19,14 +19,14 @@
 		<section class="widget panel b-a m-t-sm" ng-if="last_tweets">
 		  <div class="panel-heading b-b small">
 		    <div class="pull-right text-xs align">
-		        <a href="https://twitter.com/<%= ENV['TWITTER_NAME'] %>" target="_blank">Suivez-nous
+		        <a href="https://twitter.com/<%= ENV['TWITTER_NAME'] %>" target="_blank">Follow us
 					<span class="fa-stack fa-lg">
 					  <i class="fa fa-circle fa-stack-2x text-yellow"></i>
 					  <i class="fa fa-twitter fa-stack-1x fa-inverse text-white"></i>
 					</span>
 				</a>
 		   </div>
-		    <h2>Les derniers tweets</h2>
+		    <h2>The last tweets</h2>
 		  </div>
 		
 		    <ul class="widget-content list-group list-group-lg no-bg auto">       
@@ -38,7 +38,8 @@
 
 		<section class="widget panel b-a" >
 		  <div class="panel-heading small b-b">
-		    <h2>Derniers membres inscrits</h2>
+		    <h2>Latest Members
+</h2>
 		  </div>
 		
 			<div class="row m-n">
@@ -55,11 +56,11 @@
           
       </div>
 			<div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()">
-				<button href="#" ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm">Créer un compte</button>
+				<button href="#" ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm">Create an account</button>
 			</div>
 
 			<div class="m-t-sm m-b-sm text-center" ng-if="isAuthenticated()">
-				<button href="#" ui-sref="app.logged.members" class="btn btn-warning-full width-70 font-sbold rounded text-sm">Découvrir les membres</button>
+				<button href="#" ui-sref="app.logged.members" class="btn btn-warning-full width-70 font-sbold rounded text-sm">Discover members</button>
 			</div>
 
 		</section>
@@ -67,7 +68,7 @@
 	</div>
 
   <section class="col-lg-12 wrapper">
-      <h4 class="text-sm m-t-sm">Les prochains ateliers et stages du fablab <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> Tous les événements</a></h4>
+      <h4 class="text-sm m-t-sm">The next fablab workshops and courses <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> All events</a></h4>
 
       <div class="row" ng-repeat="event in (upcoming_events.length/3 | array)">
 

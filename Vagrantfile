@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/precise64"
 
   # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.13"
+  config.vm.network "private_network", ip: "192.168.33.13"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
