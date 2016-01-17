@@ -20,4 +20,245 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  date:
+    formats:
+      default: "%m/%d/%Y"
+      short_default: "%m/%d/%y"
+      short: "%e %b"
+      long: "%e %B %Y"
+      medium: "%e %b %Y"
+      day_name: "%A"
+      simple: "%A %e %B"
+
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+    month_names:
+      - ~
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    order:
+      - :month
+      - :day
+      - :year
+
+  time:
+    formats:
+      default: "%d %B %Y %H:%M"
+      short: "%d %b %H:%M"
+      long: "%A %d %B %Y %H:%M"
+      hour_minute: "%H:%M"
+      hour_minute_long: "%Hh%M"
+    am: 'am'
+    pm: 'pm'
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        zero:  "less than a second"
+        one:   "less than a second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one:   "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        zero:  "less than a minute"
+        one:   "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one:   "1 minute ago"
+        other: "%{count} minutes ago"
+      about_x_hours:
+        one:   "about an hour"
+        other: "about %{count} hours"
+      x_days:
+        one:   "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one:   "about a month"
+        other: "about %{count} months"
+      x_months:
+        one:   "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one:   "about a year"
+        other: "about %{count} years"
+      over_x_years:
+        one:   "over a year"
+        other: "over %{count} years"
+      almost_x_years:
+        one:   "almost a year"
+        other: "almost %{count} years"
+    prompts:
+      year:   "Year"
+      month:  "Month"
+      day:    "Day"
+      hour:   "Hour"
+      minute: "Minute"
+      second: "Second"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+    currency:
+      format:
+        format: "%n %u"
+        unit: "¥"
+        separator: "."
+        delimiter: " "
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "byte"
+            other: "bytes"
+          kb: "Kb"
+          mb: "Mb"
+          gb: "Gb"
+          tb: "Tb"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: "thousand"
+          million: "million"
+          billion: "billion"
+          trillion: "trillion"
+          quadrillion: "quadrillion"
+
+  distance:
+    centi:
+      one: "centimeter"
+      other: "centimeter"
+    unit:
+      one: "meter"
+      other: "meter"
+    thousand:
+      one: "km"
+      other: "kms"
+    billion: "gazillion-distance"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: " and "
+
+
+  errors: &errors
+    format: "%{attribute} : %{message}"
+    messages: &errors_messages
+      inclusion: "is not included in the list"
+      exclusion: "is not available"
+      invalid: "is invalid"
+      confirmation: "does not match confirmation"
+      accepted: "must be accepted"
+      empty: "required field"
+      blank: "required field"
+      too_long:
+        one: "is too long (no more than one character)"
+        other: "is too long (no more than %{count} character)"
+      too_short:
+        one: "is too short (at least one character)"
+        other: "is too short (at least %{count} characters)"
+      wrong_length:
+        one: "is not the right length (must have one character)"
+        other: "is not the right length (must contain %{count} characters)"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer number"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less or equal to %{count}"
+      odd: "must be an odd entry"
+      even: "must be an even entry"
+      taken: "is not available"
+      record_invalid: "Validation failed : %{errors}"
+      # ***************** CarrierWave ********************* #
+      carrierwave_processing_error: failed to be processed
+      carrierwave_integrity_error: is not of an allowed file type
+      carrierwave_download_error: could not be downloaded
+      extension_white_list_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
+      extension_black_list_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+      rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image? Original Error: %{e}"
+      mime_types_processing_error: "Failed to process file with MIME::Types, maybe not valid content-type? Original Error: %{e}"
+      mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"
+      wrong_size: "does not have the minimum file size (must contain %{file_size})"
+      size_too_small: "is to small (at least %{file_size})"
+      size_too_big: "is too large (no more than %{file_size})"
+
+    template: &errors_template
+      header:
+        one:   "Can't save this %{model} : 1 error"
+        other: "Can't save this %{model} : %{count} errors"
+      body: "Please check the following fields : "
+
+  activemodel:
+    errors:
+      <<: *errors
+
+  notifications_mailer:
+    send_mail_by:
+      subject_notify_admin_when_project_published: "A draft was published"
+      subject_notify_project_collaborator_to_valid: "Invitation to collaborate on a project"
+      subject_notify_project_author_when_collaborator_valid: "A new collaborator in your project"
+      subject_notify_admin_when_user_is_created: "A user account was created"
+
