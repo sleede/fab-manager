@@ -22,9 +22,8 @@ sudo chmod 0600 /swapfile
 ###
 # bundle
 ###
-sudo apt-get install postgresql postgresql-contrib libpq-dev -y
-sudo apt-get install redis-server
-sudo apt-get install graphicsmagick
+sudo apt-get install postgresql postgresql-contrib libpq-dev redis-server graphicsmagick -y
+
 cd /vagrant
 gem install --no-ri --no-rdoc bundler
 rbenv rehash
