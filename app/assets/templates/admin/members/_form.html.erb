@@ -1,9 +1,9 @@
 <div class="form-group" ng-class="{'has-error': userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$invalid}">
-  <label for="user_group_id" class="col-sm-3 control-label">Type d'utilisateur</label>
+  <label for="user_group_id" class="col-sm-3 control-label">User Type</label>
   <div class="col-sm-9">
     <select ng-model="user.group_id" class="form-control" name="user[group_id]" id="user_group_id" ng-options="g.id as g.name for g in groups" required>
     </select>
     <input type="hidden" name="user[group_id]" ng-value="user.group_id" />
-    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required">Le type d'utilisateur est obligatoire</span>
+    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required">The user type is mandatory</span>
   </div>
 </div>

@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1>Liste des membres</h1>
+        <h1>Members list</h1>
       </section>
     </div>
 
@@ -20,15 +20,15 @@
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-          <input type="text" ng-model="searchMember" class="form-control" placeholder="Recherchez un utilisateur">
+          <input type="text" ng-model="searchMember" class="form-control" placeholder="Seach members">
         </div>
       </div>
     </div>
     <div class="col-md-12">
-      <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new">Ajouter un nouveau membre</button>
+      <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new">Add a new member</button>
       <div class="pull-right">
         <a class="btn btn-default" ng-href="api/members/export_members.xls" target="_blank">
-          <i class="fa fa-file-excel-o"></i> Membres
+          <i class="fa fa-file-excel-o"></i> Members
         </a>
       </div>
 
@@ -36,15 +36,15 @@
       <table class="table">
         <thead>
           <tr>
-            <th style="width:15%"><a href="" ng-click="setOrderMember('last_name')">Nom <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='last_name', 'fa fa-sort-alpha-desc': orderMember=='-last_name', 'fa fa-arrows-v': orderMember }"></i></a></th>
+            <th style="width:15%"><a href="" ng-click="setOrderMember('last_name')">Last name <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='last_name', 'fa fa-sort-alpha-desc': orderMember=='-last_name', 'fa fa-arrows-v': orderMember }"></i></a></th>
 
-            <th style="width:15%"><a href="" ng-click="setOrderMember('first_name')">Prénom <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='first_name', 'fa fa-sort-alpha-desc': orderMember=='-first_name', 'fa fa-arrows-v': orderMember }"></i></a></th>
+            <th style="width:15%"><a href="" ng-click="setOrderMember('first_name')">First name <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='first_name', 'fa fa-sort-alpha-desc': orderMember=='-first_name', 'fa fa-arrows-v': orderMember }"></i></a></th>
 
             <th style="width:15%"><a href="" ng-click="setOrderMember('email')">Email <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='email', 'fa fa-sort-alpha-desc': orderMember=='-email', 'fa fa-arrows-v': orderMember }"></i></a></th>
 
-            <th style="width:10%"><a href="" ng-click="setOrderMember('profile.phone')">Tel. <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderMember=='profile.phone', 'fa fa-sort-numeric-desc': orderMember=='-profile.phone', 'fa fa-arrows-v': orderMember }"></i></a></th>
+            <th style="width:10%"><a href="" ng-click="setOrderMember('profile.phone')">Phone <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderMember=='profile.phone', 'fa fa-sort-numeric-desc': orderMember=='-profile.phone', 'fa fa-arrows-v': orderMember }"></i></a></th>
 
-            <th style="width:20%"><a href="" ng-click="setOrderMember('group.name')">Type utilisateur <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='group.name', 'fa fa-sort-alpha-desc': orderMember=='-group.name', 'fa fa-arrows-v': orderMember }"></i></a></th>
+            <th style="width:20%"><a href="" ng-click="setOrderMember('group.name')">User type <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderMember=='group.name', 'fa fa-sort-alpha-desc': orderMember=='-group.name', 'fa fa-arrows-v': orderMember }"></i></a></th>
 
             <th style="width:10%"></th>
           </tr>
@@ -59,7 +59,7 @@
             <td>
               <div class="buttons">
                 <button class="btn btn-default" ui-sref="app.admin.members_edit({id: member.id})">
-                  <i class="fa fa-edit"></i> Éditer
+                  <i class="fa fa-edit"></i> Edit
                 </button>
               </div>
             </td>

@@ -9,12 +9,12 @@
 
   <div class="row no-gutter">
 
-      <div class="wrapper" ng-if="user.all_projects.length == 0">Vous n'avez aucun projet.</div>
+      <div class="wrapper" ng-if="user.all_projects.length == 0">You have no projects.</div>
       <div class="widget panel b-a m m-t-lg" ng-repeat="project in user.all_projects">
         <div class="panel-heading b-b clearfix">
-          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4> <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'Auteur' : 'Collaborateur'}}</span>
+          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4> <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'Author' : 'Contributor'}}</span>
           <div class="pull-right">
-            <a class="btn btn-warning bg-white b-2x rounded upper text-sm text-black" ui-sref="app.public.projects_show({id:project.slug})" role="button">Consulter</a>
+            <a class="btn btn-warning bg-white b-2x rounded upper text-sm text-black" ui-sref="app.public.projects_show({id:project.slug})" role="button">Consult</a>
           </div>
         </div>
         <div class="widget-content bg-light clearfix">
@@ -36,14 +36,14 @@
           <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="widget panel b-a r-n m-t-md">
               <div class="panel-heading b-b small">
-                <h3>Machines et matériaux</h3>
+                <h3>Machines and materials</h3>
               </div>
               <div class="widget-content no-bg wrapper">
                 <h3 class="text-black-light font-sbold"><i class="fa fa-rocket red"></i> Machines :</h3>
                 <ul class="list-unstyled m-l-md text-black-light">
                   <li ng-repeat="m in project.machines">{{m.name}}</li>
                 </ul>
-                <h3 class="text-black-light font-sbold"><i class="fa fa-cog red"></i> Matériaux :</h3>
+                <h3 class="text-black-light font-sbold"><i class="fa fa-cog red"></i> Materials :</h3>
                 <ul class="list-unstyled m-l-md text-black-light">
                   <li ng-repeat="c in project.components">{{c.name}}</li>
                 </ul>
@@ -54,7 +54,7 @@
           <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="widget panel b-a r-n m-t-md">
               <div class="panel-heading b-b small">
-                <h3>Les collaborateurs</h3>
+                <h3>The collaborators</h3>
               </div>
               <div class="widget-content list-group-lg no-bg auto wrapper">
                 <li class="list-group-item no-b clearfix" ng-repeat="collaborator in project.project_users">
