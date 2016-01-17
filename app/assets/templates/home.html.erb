@@ -94,25 +94,25 @@
               <div class="row">
                   <div class="col-sm-6 row m-b-sm">
                     <i class="fa fa-calendar red col-xs-3 padder-icon"></i>
-                    <h6 class="m-n col-xs-9 ">Du {{event.start_date | amDateFormat:'DD/MM'}}<span class="text-sm font-thin"> au </span>{{event.end_date | amDateFormat:'DD/MM'}}</h6>
+                    <h6 class="m-n col-xs-9 ">From {{event.start_date | amDateFormat:'DD/MM'}}<span class="text-sm font-thin"> to </span>{{event.end_date | amDateFormat:'DD/MM'}}</h6>
                   </div>
                   <div class="col-sm-6 row m-b-sm">
                     <i class="fa fa-clock-o red col-xs-3 padder-icon"></i>
-                    <h6 class="m-n col-xs-9"><span ng-if="event.all_day == 'true'">Toute la journée</span><span ng-if="event.all_day == 'false'">De {{event.start_date | date:'HH:mm'}}<span class="text-sm font-thin"> à </span>{{event.end_date | date:'HH:mm'}}</span></h6>
+                    <h6 class="m-n col-xs-9"><span ng-if="event.all_day == 'true'">All day long</span><span ng-if="event.all_day == 'false'">De {{event.start_date | date:'HH:mm'}}<span class="text-sm font-thin"> à </span>{{event.end_date | date:'HH:mm'}}</span></h6>
                   </div>
                   <div class="col-sm-12 row m-b">
                     <i class="fa fa-bookmark red col-xs-1 padder-icon"></i>
                     <h6 class="m-n col-xs-10">
-					            <span ng-if="!event.nb_total_places">Entrée Libre</span>
-                      <span ng-if="event.nb_total_places && event.amount == 0">Entrée Gratuite</span><span ng-if="event.amount > 0">{{event.amount}} € Plein tarif</span><span ng-if="event.reduced_amount > 0"><br/>{{event.reduced_amount}} € Tarif réduit</span>
-                      <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold bg-red">Événement complet.</span></div>
+					            <span ng-if="!event.nb_total_places">Free entry</span>
+                      <span ng-if="event.nb_total_places && event.amount == 0">Free admission</span><span ng-if="event.amount > 0">{{event.amount}} ¥ Full price</span><span ng-if="event.reduced_amount > 0"><br/>{{event.reduced_amount}} ¥ Reduced price</span>
+                      <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold bg-red">Event full.</span></div>
                     </h6>
 
                   </div>
 
               </div>
               <div class="text-center clearfix ">
-                <div class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm m-b-sm upper text-sm width-70" ui-sref="app.public.events_show({id: event.id})" ><span>Consulter</span></div>
+                <div class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm m-b-sm upper text-sm width-70" ui-sref="app.public.events_show({id: event.id})" ><span>Check</span></div>
               </div>
             </div>
           </div>

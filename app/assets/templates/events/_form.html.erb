@@ -10,7 +10,7 @@
       <input name="_method" type="hidden" ng-value="method">
 
       <div class="form-group" ng-class="{'has-error': eventForm['event[title]'].$dirty && eventForm['event[title]'].$invalid}">
-        <label for="event_title" class="col-sm-3 control-label">Titre *</label>
+        <label for="event_title" class="col-sm-3 control-label">Title *</label>
         <div class="col-sm-9">
           <input ng-model="event.title" type="text" name="event[title]" class="form-control" id="event_title" placeholder="" required>
           <span class="help-block" ng-show="eventForm['event[title]'].$dirty && eventForm['event[title]'].$error.required">Title is mandatory</span>

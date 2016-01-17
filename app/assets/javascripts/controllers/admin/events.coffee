@@ -204,11 +204,11 @@ Application.Controllers.controller "newEventController", ["$scope", "$state", 'E
 
   ## Possible types of recurrences for an event
   $scope.recurrenceTypes = [
-    {label: 'Aucune', value: 'none'},
-    {label: 'Tous les jours', value: 'day'},
-    {label: 'Chaque semaine', value: 'week'},
-    {label: 'Chaque mois', value: 'month'},
-    {label: 'Chaque année', value: 'year'}
+    {label: 'None', value: 'none'},
+    {label: 'Everyday', value: 'day'},
+    {label: 'Every week', value: 'week'},
+    {label: 'Each month', value: 'month'},
+    {label: 'Every year', value: 'year'}
   ]
 
   ## Using the EventsController
