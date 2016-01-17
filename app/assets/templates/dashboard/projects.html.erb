@@ -12,9 +12,9 @@
       <div class="wrapper" ng-if="user.all_projects.length == 0">You have no projects.</div>
       <div class="widget panel b-a m m-t-lg" ng-repeat="project in user.all_projects">
         <div class="panel-heading b-b clearfix">
-          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4> <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'Auteur' : 'Collaborateur'}}</span>
+          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4> <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'Author' : 'Contributor'}}</span>
           <div class="pull-right">
-            <a class="btn btn-warning bg-white b-2x rounded upper text-sm text-black" ui-sref="app.public.projects_show({id:project.slug})" role="button">Consulter</a>
+            <a class="btn btn-warning bg-white b-2x rounded upper text-sm text-black" ui-sref="app.public.projects_show({id:project.slug})" role="button">Consult</a>
           </div>
         </div>
         <div class="widget-content bg-light clearfix">

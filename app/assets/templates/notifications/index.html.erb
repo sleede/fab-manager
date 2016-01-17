@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1>Centre de notifications</h1>
+        <h1>Alert Center</h1>
       </section>
     </div>
 
@@ -19,14 +19,14 @@
   <div class="row">
 
     <div class="col-md-12">
-      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="notifications.length == 0">Tout marquer comme lu ({{notifications.length}})</button>
+      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="notifications.length == 0">Mark all as read ({{notifications.length}})</button>
 
       <table class="table">
         <thead>
           <tr>
             <th style="width:10%"></th>
             <th style="width:20%">Date</th>
-            <th style="width:70%">Intitulée</th>
+            <th style="width:70%">Entitled</th>
     
           </tr>
         </thead>
@@ -42,7 +42,7 @@
 
           </tr>
           <tr ng-if="notifications.length == 0">
-            <td colspan="3">Aucune nouvelle notification.</td>
+            <td colspan="3">No new notification.</td>
           </tr>
         </tbody>
       </table>
@@ -72,14 +72,14 @@
 
 
           <tr ng-if="notificationsRead.length == 0">
-            <td colspan="3">Aucune notification archivée.</td>
+            <td colspan="3">No archived notification.</td>
           </tr>
 
 
         </tbody>
       </table>
 
-      <a class="btn btn-default" ng-click="addMoreNotificationsReaded()" ng-if="paginateActive">Charger les notifications suivantes...</a>
+      <a class="btn btn-default" ng-click="addMoreNotificationsReaded()" ng-if="paginateActive">Load the following notifications...</a>
 
     </div>
 

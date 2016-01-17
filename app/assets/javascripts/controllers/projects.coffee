@@ -104,9 +104,9 @@ class ProjectsController
 
 
     ##
-    # This will remove the given file from the project's CAO attachements list. If the file was previously uploaded
+    # This will remove the given file from the project's CAD attachements list. If the file was previously uploaded
     # to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
-    # the CAO attachements array.
+    # the CAD attachements array.
     # @param file {Object} the file to delete
     ##
     $scope.deleteFile = (file) ->
@@ -247,7 +247,7 @@ Application.Controllers.controller "newProjectController", ["$scope", "$state", 
   $scope.method = 'post'
 
   ## Button litteral text value
-  $scope.submitName = 'Enregistrer comme brouillon'
+  $scope.submitName = 'Save as a draft'
 
   ## Default project parameters
   $scope.project =
@@ -281,7 +281,7 @@ Application.Controllers.controller "editProjectController", ["$scope", "$state",
   $scope.method = 'put'
 
   ## Button litteral text value
-  $scope.submitName = 'Enregistrer'
+  $scope.submitName = 'Save'
 
   ## Retrieve the project's details, if an error occured, redirect the user to the projects list page
   $scope.project = Project.get {id: $stateParams.id}
