@@ -127,9 +127,9 @@ sudo service postgresql restart
 
 ## Vagrant
 
-You will need to install the Vagrant and Virtualbox first. After that you can setup develop enviroment by one command.
+You will need to install the Vagrant and Virtualbox first. After that you can setup develop environment by one command.
 
-**Refrences:**
+**References:**
 
 https://www.vagrantup.com/
 
@@ -140,21 +140,47 @@ https://gorails.com/guides/using-vagrant-for-rails-development
 ```
 vagrant plugin install vagrant-librarian-chef-nochef
 ```
+**Uncomment ip on Vagrantfile:**
+```
+$ vi Vagrantfile
+```
+uncomment line 11 in other to assign ip should look like this
+
+config.vm.network "private_network", ip: "192.168.33.13"
 
 **How to start the Vagrant in project directory:**
 
 ```
 vagrant up
 ```
-
+**Setup the FabManager database in PostgreSQL**
+ * Login as the postgres user
+```
+vagrant ssh
+$ sudo -i -u postgres
+```
+ * To finish, attribute a password to this user and some extra stuff...
+```
+sudo apt-get install redis-server
+sudo apt-get install graphicsmagick
+psql -f /vagrant/create_db_user.sql
+exit
+cd /vagrant
+rake db:migrate
+rake db:seed
+exit
+```
 **Start rails server:**
 ```
 vagrant ssh -c /home/vagrant/serve
 ```
+or
 
 **Login VM:**
 ```
 vagrant ssh
+cd /vagrant
+rails s -b 0.0.0.0
 ```
 
 By default, Vagrant will share your project directory (the directory with the Vagrantfile) to `/vagrant`.
