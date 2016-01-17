@@ -7,8 +7,8 @@ Application.Services.factory 'dialogs', ["$modal", ($modal) ->
         size: 'sm'
         resolve:
           object: ->
-            title: 'Titre de confirmation'
-            msg: 'Message de confiramtion'
+            title: 'As confirmation'
+            msg: 'Confirmation message'
         controller: ['$scope', '$modalInstance', '$state', 'object', ($scope, $modalInstance, $state, object) ->
           $scope.object = object
           $scope.ok = ->
