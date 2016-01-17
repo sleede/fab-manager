@@ -25,12 +25,12 @@
           <%= p.label :gender %>
           <div class="radio">
             <label>
-              <%= p.radio_button :gender, true %> Homme
+              <%= p.radio_button :gender, true %> Male
             </label>
           </div>
           <div class="radio">
             <label>
-              <%= p.radio_button :gender, false %> Femme
+              <%= p.radio_button :gender, false %> Female
             </label>
           </div>
         </div>
@@ -73,13 +73,13 @@
 
         <div class="checkbox">
           <label>
-            <%= f.check_box :is_allow_contact %> J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter
+            <%= f.check_box :is_allow_contact %> I authorize Fablab users registered on the site to contact me
           </label>
         </div>
 
         <div class="checkbox">
           <label>
-            <%= f.check_box :cgu %> J'accepte et J'ai Lu la charte d'utilisation du Fab Lab
+            <%= f.check_box :cgu %> I have read and I accept the rules of the Fab Lab XinFab
           </label>
         </div>
         <button type="submit" class="btn btn-default">Sign in</button>

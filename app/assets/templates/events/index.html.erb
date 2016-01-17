@@ -7,13 +7,13 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1>Les Stages et ateliers du Fab Lab</h1>
+        <h1>Fablab XinFab courses and workshops</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin'])">
       <section class="heading-actions wrapper">
-       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button">Ajouter un évènement</a>
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button">Add an event</a>
       </section>
     </div>
   </div>
@@ -34,7 +34,7 @@
             <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
             <h3 class="m-n">{{event.start_date | amDateFormat:'DD/MM'}}<span class="text-sm font-thin"> au </span>{{event.end_date | amDateFormat:'DD/MM'}}</h3>
 
-            <h6 class="m-n" ng-if="event.amount">Plein tarif: {{event.amount}}€ <span ng-if="event.reduced_amount > 0">/ Tarif réduit: {{event.reduced_amount}}€</span></h6>
+            <h6 class="m-n" ng-if="event.amount">Full price: {{event.amount}}€ <span ng-if="event.reduced_amount > 0">/ Tarif réduit: {{event.reduced_amount}}€</span></h6>
           </div>
           <!-- Event Image -->
           <div class="pull-right crop-130">
@@ -51,7 +51,7 @@
     <div class="row">
 
       <div class="col-lg-12 text-center m-t-md">
-        <a class="btn btn-warning" ng-click="loadMoreEvents()" ng-if="paginateActive">Charger les stages et ateliers suivants ...</a>
+        <a class="btn btn-warning" ng-click="loadMoreEvents()" ng-if="paginateActive">Load the following courses and workshops ...</a>
       </div>
     </div>
 
