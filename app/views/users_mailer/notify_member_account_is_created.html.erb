@@ -1,10 +1,10 @@
-<p>Bonjour <%= @user.profile.full_name %>, </p>
+<p>Hi <%= @user.profile.full_name %>, </p>
 
-<p>L’équipe du Fab Lab vient de vous créer un compte sur <%= link_to 'le site du Fab lab', root_url %> <br> Voici vos paramètres de connexion : </p>
+<p>The FabLab team has created an account on www.xinfab.com. <%= link_to 'www.xinfab.com', root_url %> <br> Here is your connection settings : </p>
 
-<p>Nom de compte : <b><%= @user.email %></b></p>
-<p>Mot de passe : <b><%= @generated_password %></b></p>
+<p>Username : <b><%= @user.email %></b></p>
+<p>Password : <b><%= @generated_password %></b></p>
 
-<p>Ce mot de passe est temporaire, vous pourrez le modifier en accédant à l’espace « Mon compte ». Avec ce compte, vous conservez bien entendu tous les avantages liés à votre profil utilisateur Fab Lab (abonnement, formations).</p>
+<p>This password is temporary, you can change it by accessing the "My Account". With this account, you retain all the benefits of course related to your user profile Fab Lab (subscription, training).</p>
 
-<p>L'équipe Fab Lab.</p>
+<p>The team Fablab XinFab.</p>

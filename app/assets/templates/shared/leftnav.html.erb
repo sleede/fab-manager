@@ -6,9 +6,9 @@
         <!-- nav -->
         <nav class="nav-primary hidden-xs">
           <ul class="nav nav-main m-t-xs" data-ride="collapse" >
-            <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated()"><a href="#" class="auto" ng-click="signup($event)"><i class="fa fa-rocket"></i> <span>S'inscrire</span></a></li>
+            <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated()"><a href="#" class="auto" ng-click="signup($event)"><i class="fa fa-rocket"></i> <span>Register</span></a></li>
             <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated()">
-              <a href="#" class="auto" ng-click="login($event)"><i class="fa fa-sign-in"></i> <span>Se connecter</span></a>
+              <a href="#" class="auto" ng-click="login($event)"><i class="fa fa-sign-in"></i> <span>Login</span></a>
             </li>
 
             <li class="" ng-repeat="navLink in navLinks" >
@@ -37,7 +37,7 @@
 
     <footer class="footer hidden-xs no-padder text-center-nav-xs">
       <a data-link="#nav" data-toggle="class:nav-xs" class="btn btn-danger btn-block no-b btn-icon icon-muted btn-inactive no-radius wrapper" ng-click="toggleNavSize($event)">
-        <i class="fa fa-long-arrow-left text"></i> <span class="text text-sm">Réduire le volet</span>
+        <i class="fa fa-long-arrow-left text"></i> <span class="text text-sm">Reduce frame</span>
         <i class="fa fa-long-arrow-right text-active"></i>
       </a>
     </footer>
