@@ -136,7 +136,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
                   type: 'danger'
       ]
     .result['finally'](null).then (user) ->
-      growl.addInfoMessage('Votre mot de passe a bien été modifié.')
+      growl.addInfoMessage('Your password has been changed.')
       Auth.login().then (user) ->
         $scope.setCurrentUser(user)
       , (error) ->
@@ -272,7 +272,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
             # Authentication failed...
             $scope.alerts = []
             $scope.alerts.push
-              msg: 'E-mail ou mot de passe incorrect.'
+              msg: 'Incorrect Email or password.'
               type: 'danger'
 
         # handle modal behaviors. The provided reason will be used to define the following actions
@@ -314,12 +314,12 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
                 $modalInstance.close()
               .error ->
                 $scope.alerts.push
-                  msg: "Your email address n'existe pas."
+                  msg: "Your email address does not exist."
                   type: 'danger'
 
           ]
         .result['finally'](null).then ->
-          growl.addInfoMessage('Vous allez recevoir sous quelques minutes un e-mail vous indiquant comment réinitialiser votre mot de passe.')
+          growl.addInfoMessage('You will receive an email within a few minutes telling you how to reset your password.')
 
   # otherwise the user just closed the modal
 

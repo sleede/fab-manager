@@ -74,7 +74,7 @@
         <div class="col-sm-10">
           <div ng-repeat="step in project.project_steps_attributes" ng-show="!step._destroy">
             <div class="m-t-xs m-b-lg">
-              <span class="label label-warning m-t m-b">Étape {{ $index+1 }}/{{project.project_steps_attributes.length}}</span>
+              <span class="label label-warning m-t m-b">Step {{ $index+1 }}/{{project.project_steps_attributes.length}}</span>
               <input type="hidden" name="project[project_steps_attributes][][id]" ng-value="step.id" />
               <input type="hidden" name="project[project_steps_attributes][][_destroy]" ng-value="step._destroy" />
               <input ng-model="step.title" type="text" name="project[project_steps_attributes][][title]" class="form-control m-b-sm m-t-xs" placeholder="Step title" required>
@@ -168,7 +168,7 @@
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Thématiques</h3>
+        <h3>Themes</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <input type="hidden" name="project[theme_ids][]" value="" />

@@ -79,7 +79,7 @@
           <h1 class="red text-u-c">Projects</h1>
           <ul class="list-unstyled" ng-if="user.all_projects.length > 0">
             <li ng-repeat="p in user.all_projects" class="m-t-sm">
-              <a class="text-u-c" ui-sref="app.public.projects_show({id:p.slug})" role="button">{{p.name}}  <span class="m-l-sm label label-success text-white">{{p.author_id == currentUser.id ? 'Auteur' : 'Collaborateur'}}</span></a>
+              <a class="text-u-c" ui-sref="app.public.projects_show({id:p.slug})" role="button">{{p.name}}  <span class="m-l-sm label label-success text-white">{{p.author_id == currentUser.id ? 'Author' : 'Contributor'}}</span></a>
             </li>
 
           </ul>
