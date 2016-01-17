@@ -23,6 +23,8 @@ sudo chmod 0600 /swapfile
 # bundle
 ###
 sudo apt-get install postgresql postgresql-contrib libpq-dev -y
+sudo apt-get install redis-server
+sudo apt-get install graphicsmagick
 cd /vagrant
 gem install --no-ri --no-rdoc bundler
 rbenv rehash
@@ -38,5 +40,5 @@ sudo service postgresql restart
 # script of start rails server
 ###
 echo 'cd /vagrant' > ~/serve
-echo 'rails s' >> ~/serve
+echo 'rails s -b 0.0.0.0' >> ~/serve
 chmod +x ~/serve
