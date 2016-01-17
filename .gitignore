@@ -27,3 +27,6 @@
 
 # machine specific database config
 /config/database.yml
+.vagrant/
+cookbooks/
+Cheffile.lock
