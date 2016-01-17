@@ -12,18 +12,18 @@
       </div>
       <div class="col-xs-10 col-sm-10 col-md-7 b-l b-r-md">
         <section class="heading-title">
-          <h1>Editer le projet <span class="badge" ng-if="project.state == 'draft'">Brouillon</span></h1>
+          <h1>Edit Project <span class="badge" ng-if="project.state == 'draft'">Draft copy</span></h1>
         </section>
       </div>
 
       <div class="col-xs-12 col-sm-12 col-md-4 b-t hide-b-md">
         <section class="heading-actions wrapper">
      <!--     <div class="btn btn-lg btn-block btn-default m-t-xs" ng-click="cancel()" ng-if="project.state == 'published'">
-           Annuler
+           Cancel
          </div> -->
          <input type="submit" ng-value="submitName" class="btn btn-lg btn-warning m-t-xs text-u-c" ng-disabled="projectForm.$invalid"/>
          <div class="btn btn-lg btn-valid btn-success m-t-xs text-u-c" publish-project ng-if="project.state == 'draft'" ng-disabled="projectForm.$invalid">
-           Publier
+           Publish
          </div>
          
         </section>

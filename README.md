@@ -94,24 +94,23 @@ The following files must be filled with the correct configuration to allow FabMa
 
 ### 3.2 Setup the FabManager database in PostgreSQL
 
+```
+###
+# set postgreSQL to valid password
+###
+sudo sed -i 's/all\s*peer/all md5/g' /etc/postgresql/*/main/pg_hba.conf
+sudo service postgresql restart
+```
+
 1. Login as the postgres user
 	`$ sudo -i -u postgres`
 
 2. Run the postgreSQL administration command line interface
-	`$ psql`
-  
 3. Create a new user in postgres (in this example, the user will be named "sleede")
-	`# CREATE USER sleede;`
-
 4. Grant him the right to create databases
-	`# ALTER ROLE sleede WITH CREATEDB;`
- 
 5. Then create the fablab database
-	`# CREATE DATABASE fabmanager_development OWNER sleede;`
-  
 6. To finish, attribute a password to this user
-	`# ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';`
-  
+`psql -f /path/of/the/create_db_user.sql`
   
 
 ## 4. Know issues
@@ -125,3 +124,65 @@ The following files must be filled with the correct configuration to allow FabMa
 
 ## 5. Related Documentation
 - Angular-Bootstrap: http://angular-ui.github.io/bootstrap/
+
+## Vagrant
+
+You will need to install the Vagrant and Virtualbox first. After that you can setup develop environment by one command.
+
+**References:**
+
+https://www.vagrantup.com/
+
+https://gorails.com/guides/using-vagrant-for-rails-development
+
+**Install plugin for Vagrant first:**
+
+```
+vagrant plugin install vagrant-librarian-chef-nochef
+```
+**Uncomment ip on Vagrantfile:**
+```
+$ vi Vagrantfile
+```
+uncomment line 11 in other to assign ip should look like this
+
+config.vm.network "private_network", ip: "192.168.33.13"
+
+**How to start the Vagrant in project directory:**
+
+```
+vagrant up
+```
+**Setup the FabManager database in PostgreSQL**
+ * Login as the postgres user
+```
+vagrant ssh
+$ sudo -i -u postgres
+```
+ * To finish, attribute a password to this user and some extra stuff...
+```
+sudo apt-get install redis-server
+sudo apt-get install graphicsmagick
+psql -f /vagrant/create_db_user.sql
+exit
+cd /vagrant
+rake db:migrate
+rake db:seed
+exit
+```
+**Start rails server:**
+```
+vagrant ssh -c /home/vagrant/serve
+```
+or
+
+**Login VM:**
+```
+vagrant ssh
+cd /vagrant
+rails s -b 0.0.0.0
+```
+
+By default, Vagrant will share your project directory (the directory with the Vagrantfile) to `/vagrant`.
+
+Notice: If bundle command fail when bootstrap, you can run it manually after login.

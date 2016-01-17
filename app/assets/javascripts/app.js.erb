@@ -34,13 +34,13 @@ config(['$locationProvider', '$httpProvider', 'AuthProvider', "growlProvider", "
 	  AnalyticsProvider.setAccount('DISABLED');
     <% end %>
 
-    datepickerPopupConfig.closeText = "Fermer";
-    datepickerPopupConfig.cleartext = "Effacer";
-    datepickerPopupConfig.currentText = "Aujourd'hui";
+    datepickerPopupConfig.closeText = "Close";
+    datepickerPopupConfig.cleartext = "Delete";
+    datepickerPopupConfig.currentText = "Today";
 
     // custom message for angular-unsavedChanges
-    unsavedWarningsConfigProvider.navigateMessage = "Vous perdrez les modifications non enregistrées si vous quittez cette page";
-    unsavedWarningsConfigProvider.reloadMessage = "Vous perdrez les modifications non enregistrées si vous rechargez cette page";
+    unsavedWarningsConfigProvider.navigateMessage = "You lose any unsaved changes if you leave this page";
+    unsavedWarningsConfigProvider.reloadMessage = "You lose any unsaved changes if you reload this page";
 
     growlProvider.globalTimeToLive(5000);
     growlProvider.globalEnableHtml(true);
@@ -49,7 +49,7 @@ config(['$locationProvider', '$httpProvider', 'AuthProvider', "growlProvider", "
 
   }]).run(["$rootScope", "$log", "AuthService", "Auth", "amMoment", "$state", "editableOptions", "$location", "Analytics", function($rootScope, $log, AuthService, Auth, amMoment, $state, editableOptions, $location, Analytics){
 
-      amMoment.changeLocale('fr');
+      amMoment.changeLocale('en');
 
       editableOptions.theme = 'bs3';
 
@@ -68,7 +68,7 @@ config(['$locationProvider', '$httpProvider', 'AuthProvider', "growlProvider", "
       };
 
       $rootScope.summernoteOpts = {
-        lang: 'fr-FR',
+        lang: 'en-US',
         height: 200,
         toolbar: [
           ['style', ['style']],
