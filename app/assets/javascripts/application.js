@@ -20,7 +20,7 @@
 //= require jquery-ui/ui/jquery.ui.droppable
 //= require jquery-ui/ui/jquery.ui.resizable
 //= require angular
-//= require angular-i18n/angular-locale_fr-fr.js
+//= require angular-i18n/angular-locale_en-us.js
 //= require angular-cookies
 //= require angular-resource
 //= require angular-sanitize

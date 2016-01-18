@@ -6,14 +6,14 @@ DEVISE_KEY: '-- your secret key here --'
 
 SECRET_KEY_BASE: YourXssPreventionKeyHere
 
-APPLICATION_ROOT_URL: 'rail.xinfab.com'
+APPLICATION_ROOT_URL: 'www.fabmanager.com'
 APPLICATION_PROTOCOL: 'http'
 
 DATABASE_USERNAME:
 DATABASE_PASSWORD:
 DATABASE_PORT:
 
-DEFAULT_MAIL_FROM: xinfab <noreply@xinfab.com>
+DEFAULT_MAIL_FROM: Fablab <noreply@fabmanager.com>
 
 MANDRILL_USERNAME: YourMandrillUsernameHere
 MANDRILL_APIKEY: YourMandrillApiKeyHere
@@ -22,7 +22,7 @@ GOOGLE_ANALYTICS_ACCOUNT: 'UA-YOUR_ID_HERE'
 
 
 # Global ENV
-TWITTER_NAME: 'Fablab Xinfab'
+TWITTER_NAME: 'Fablab'
 TWITTER_CONSUMER_KEY: 'YourTwitterKeyHere'
 TWITTER_CONSUMER_SECRET: 'YourTwitterSecretHere'
 TWITTER_ACCESS_TOKEN: 'YourTwitterTokenHere'

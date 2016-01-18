@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1>Fablab XinFab courses and workshops</h1>
+        <h1>Fablab courses and workshops</h1>
       </section>
     </div>
 
@@ -34,7 +34,7 @@
             <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
             <h3 class="m-n">{{event.start_date | amDateFormat:'DD/MM'}}<span class="text-sm font-thin"> au </span>{{event.end_date | amDateFormat:'DD/MM'}}</h3>
 
-            <h6 class="m-n" ng-if="event.amount">Full price: {{event.amount}}¥ <span ng-if="event.reduced_amount > 0">/Reduced price: {{event.reduced_amount}}¥</span></h6>
+            <h6 class="m-n" ng-if="event.amount">Full price: {{event.amount}} $ <span ng-if="event.reduced_amount > 0">/Reduced price: {{event.reduced_amount}} $ </span></h6>
           </div>
           <!-- Event Image -->
           <div class="pull-right crop-130">
