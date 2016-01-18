@@ -25,7 +25,7 @@
 class EventsController
   constructor: ($scope, $state, Event, Category) ->
 
-    ## Retrieve the list of categories from the server (stage, atelier, ...)
+    ## Retrieve the list of categories from the server (course, workshop, ...)
     Category.query().$promise.then (data)->
       $scope.categories = data.map (d) ->
         id: d.id

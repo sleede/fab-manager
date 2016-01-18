@@ -98,7 +98,7 @@
                   </div>
                   <div class="col-sm-6 row m-b-sm">
                     <i class="fa fa-clock-o red col-xs-3 padder-icon"></i>
-                    <h6 class="m-n col-xs-9"><span ng-if="event.all_day == 'true'">All day long</span><span ng-if="event.all_day == 'false'">De {{event.start_date | date:'HH:mm'}}<span class="text-sm font-thin"> à </span>{{event.end_date | date:'HH:mm'}}</span></h6>
+                    <h6 class="m-n col-xs-9"><span ng-if="event.all_day == 'true'">All day long</span><span ng-if="event.all_day == 'false'">From {{event.start_date | date:'HH:mm'}}<span class="text-sm font-thin"> to </span>{{event.end_date | date:'HH:mm'}}</span></h6>
                   </div>
                   <div class="col-sm-12 row m-b">
                     <i class="fa fa-bookmark red col-xs-1 padder-icon"></i>
