@@ -30,10 +30,8 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require select2/select2
-//= require select2/select2_locale_fr
 //= require angular-ui-select2/src/select2
 //= require moment/moment
-//= require moment/locale/fr
 //= require angular-moment/angular-moment
 //= require ngUpload/ng-upload
 //= require jasny-bootstrap/js/fileinput
@@ -57,6 +55,5 @@
 //= require_tree ./directives
 //= require_tree ./filters
 //= require summernote/dist/summernote
-//= require summernote/lang/summernote-fr-FR
 //= require summernote/plugin/summernote-ext-video
 //= require angular-summernote/dist/angular-summernote
