@@ -8,10 +8,10 @@
   <ul class="nav navbar-nav hidden-xs">
     <li>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.about" ng-show="!goabout">
-        <span class="label label-danger rounded text-lg text-white m-r-sm font-ebold">?</span>A propos du Fab Lab
+        <span class="label label-danger rounded text-lg text-white m-r-sm font-ebold">?</span>About Fablab
       </a>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.home" ng-show="goabout">
-        <span class="label label-danger label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>Retour
+        <span class="label label-danger label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>Back
       </div>
       </a>
     </li>
@@ -30,15 +30,15 @@
         </span>
       </a>
       <ul class="dropdown-menu animated fadeInRight">
-        <li><a href="#" ui-sref="app.logged.dashboard_profile">Mon profil</a></li>
-        <li><a href="#" ui-sref="app.logged.dashboard_projects">Mes projets</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard_profile">My profile</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard_projects">My Projects</a></li>
 
         <li class="divider"></li>
-        <li><a href="#" class="text-black" ng-click="logout($event)"><i class="fa fa-power-off"></i> Se déconnecter</a></li>
+        <li><a href="#" class="text-black" ng-click="logout($event)"><i class="fa fa-power-off"></i> Sign out</a></li>
       </ul>
     </li>
-    <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> S'inscrire</a></li>
+    <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> Register</a></li>
     <li ng-if="!isAuthenticated()">
-      <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> Se connecter</a>
+      <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> Login</a>
     </li>
   </ul>

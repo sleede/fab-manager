@@ -1,3 +1,3 @@
 <p>Bonjour <%= @attached_object.project.author.profile.full_name %>,</p>
 
-<p>Le membre <%= @attached_object.user.profile.full_name %> a accepté votre demande de collaboration sur votre projet : <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>
+<p>The member <%= @attached_object.user.profile.full_name %> has accepted your request for collaboration on your project : <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>

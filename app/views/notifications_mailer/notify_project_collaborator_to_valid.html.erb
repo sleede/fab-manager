@@ -1,5 +1,5 @@
-<p>Bonjour <%= @attached_object.user.profile.full_name %>,</p>
+<p>Hello <%= @attached_object.user.profile.full_name %>,</p>
 
-<p>Vous êtes invité à collaborer sur ce projet : <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>
+<p>You are invited to collaborate on this project: <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>
 
-<p>Pour accepter cette invitation, il vous suffit de cliquer sur le lien suivant: <%= link_to "#{root_url}project_collaborator/#{@attached_object.valid_token}", "#{root_url}project_collaborator/#{@attached_object.valid_token}" %></p>
+<p>To accept this invitation, simply click on the following link: <%= link_to "#{root_url}project_collaborator/#{@attached_object.valid_token}", "#{root_url}project_collaborator/#{@attached_object.valid_token}" %></p>
