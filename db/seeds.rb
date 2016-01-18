@@ -12,8 +12,8 @@ if Group.count == 0
                 ])
 end
 
-if User.find_by(email: "admin@xinfab.com").nil?
-  admin = User.new(username: 'admin', email: 'admin@xinfab.com', password: 'adminadmin', password_confirmation: 'adminadmin', group_id: Group.first.id,
+if User.find_by(email: "admin@fabmanager.com").nil?
+  admin = User.new(username: 'admin', email: 'admin@fabmanager.com', password: 'adminadmin', password_confirmation: 'adminadmin', group_id: Group.first.id,
                    profile_attributes: {first_name: 'Admin', last_name: 'Admin', gender: true, phone: '0000000000', birthday: Time.now})
   #admin.skip_confirmation!
   admin.add_role "admin"
