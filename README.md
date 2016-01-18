@@ -114,14 +114,35 @@ The following files must be filled with the correct configuration to allow FabMa
   
   
 
-## 4. Know issues
+## 4. Known issue
 
-  If you encounter a problem with bundler (unable to run `$ rails c` or `$ rails g`), you can fix it running the following commands:
+  You may encounter the following error message when running the application for the first time:
 
-	$ bundle pack
-	$ bundle install --path vendor/cache
+  ```bash
+  Uncaught exception: FATAL:  authentification peer échouée pour l'utilisateur « USERNAME »
+  Exiting
+  	.rvm/gems/ruby-2.2.1@fabmanager/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+  	...
+  ```
+  
+  To solve this issue, edit your `/etc/postgresql/9.4/main/pg_hba.conf` as root and replace the following:
+  
+  ```bash
+  # comment over or replace...
+  local   all             all                                     peer
+  # ...by the following:
+  local   all             all                                     trust
+  ```
+  
+  Then, restart postgreSQL to validate the modification (`sudo service postgresql restart`).
+
 
 
 
 ## 5. Related Documentation
 - Angular-Bootstrap: http://angular-ui.github.io/bootstrap/
+
+
+## 6. Translations
+- French translation is available on the branches [master](../tree/master) and [dev](../tree/dev)
+- English translation is available on the branch [english](../tree/english)
