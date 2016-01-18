@@ -144,5 +144,5 @@ The following files must be filled with the correct configuration to allow FabMa
 
 
 ## 6. Translations
-- French translation is available on the branches [master](../tree/master) and [dev](../tree/dev)
-- English translation is available on the branch [english](../tree/english)
+- French translation is available on the branches [master](../../tree/master) and [dev](../../tree/dev)
+- English translation is available on the branch [english](../../tree/english)
