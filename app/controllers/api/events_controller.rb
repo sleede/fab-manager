@@ -58,8 +58,8 @@ class API::EventsController < API::ApiController
                                                     :amount, :reduced_amount, :nb_total_places, :availability_id,
                                                     :all_day, :recurrence, :recurrence_end_at, :category_ids, category_ids: [],
                                                     event_image_attributes: [:attachment], event_files_attributes: [:id, :attachment, :_destroy])
-      start_date = Time.parse(event_preparams[:start_date])
-      end_date = Time.parse(event_preparams[:end_date])
+      start_date = Time.zone.parse(event_preparams[:start_date])
+      end_date = Time.zone.parse(event_preparams[:end_date])
       start_time = Time.parse(event_preparams[:start_time]) if event_preparams[:start_time]
       end_time = Time.parse(event_preparams[:end_time]) if event_preparams[:end_time]
       if event_preparams[:all_day] == 'true'
