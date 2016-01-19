@@ -68,7 +68,7 @@
           <dt><i class="fa fa-calendar"></i> Dates :</dt>
           <dd>Start: <span class="text-u-l">{{event.start_date | amDateFormat:'DD/MM/YYYY'}}</span><br>Ends: <span class="text-u-l">{{event.end_date | amDateFormat:'DD/MM/YYYY'}}</span></dd>
           <dt><i class="fa fa-clock-o"></i> Hours :</dt>
-          <dd ng-if="event.all_day == 'true'"><span>Toute la journée</span></dd>
+          <dd ng-if="event.all_day == 'true'"><span>All day</span></dd>
           <dd ng-if="event.all_day == 'false'">From <span class="text-u-l">{{event.start_date | amDateFormat:'HH:mm'}}</span> to <span class="text-u-l">{{event.end_date | amDateFormat:'HH:mm'}}</span></dd>
         </dl>
 

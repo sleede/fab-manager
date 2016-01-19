@@ -159,7 +159,7 @@
         <h3>Licences Creative Commons</h3>
       </div>
       <div class="widget-content no-bg wrapper">
-        <%# TODO: Bug concerne qu'on ne peut pas déselectionner un option %>
+        <%# TODO: Bug concerns that you can not select an option %>
         <select ng-model="project.licence_id" class="form-control" name="project[licence_id]" ui-select2>
           <option value="{{l.id}}" ng-repeat="l in licences">{{l.name}}</option>
         </select>

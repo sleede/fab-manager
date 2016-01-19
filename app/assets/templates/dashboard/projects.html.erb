@@ -27,7 +27,7 @@
               <div class="widget-content no-bg wrapper text-black-light">
               <!-- TODO -->
 <!--                 <div class="text-sm font-sbold "><i>By {{project.author.first_name}}</i></div>
-                <small class="text-xs m-b"><i>posté le {{project.created_at | amDateFormat: 'Do MMMM YYYY'}}</i></small> -->
+                <small class="text-xs m-b"><i>posted on {{project.created_at | amDateFormat: 'Do MMMM YYYY'}}</i></small> -->
                 <div ng-bind-html="project.description | humanize : 180 | toTrusted"></div>
               </div>
             </div>
@@ -54,7 +54,7 @@
           <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="widget panel b-a r-n m-t-md">
               <div class="panel-heading b-b small">
-                <h3>The collaborators</h3>
+                <h3>The contributors</h3>
               </div>
               <div class="widget-content list-group-lg no-bg auto wrapper">
                 <li class="list-group-item no-b clearfix" ng-repeat="collaborator in project.project_users">
