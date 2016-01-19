@@ -290,7 +290,7 @@ Application.Controllers.controller "editProjectController", ["$scope", "$state",
   , -> # failed
     $state.go('app.public.projects_list')
 
-  ## Other members list (project collaborators)
+  ## Other members list (project contributors)
   Member.query().$promise.then (data)->
     $scope.members = data.filter (m) ->
       m.id != $scope.project.author_id
