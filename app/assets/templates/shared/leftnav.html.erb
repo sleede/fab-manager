@@ -6,11 +6,57 @@
         <!-- nav -->
         <nav class="nav-primary hidden-xs">
           <ul class="nav nav-main m-t-xs" data-ride="collapse" >
-            <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated()"><a href="#" class="auto" ng-click="signup($event)"><i class="fa fa-rocket"></i> <span>Register</span></a></li>
-            <li class="hidden-sm hidden-md hidden-lg" ng-if="!isAuthenticated()">
-              <a href="#" class="auto" ng-click="login($event)"><i class="fa fa-sign-in"></i> <span>Login</span></a>
-            </li>
-
+              <!-- Disconnected user menu for small devices -->
+              <li class="hidden-sm hidden-md hidden-lg" ng-if-start="!isAuthenticated()">
+                  <a href="#" class="auto" ng-click="signup($event)">
+                      <i class="fa fa-rocket"></i> <span>Register</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg" ng-if-end>
+                  <a href="#" class="auto" ng-click="login($event)">
+                      <i class="fa fa-sign-in"></i> <span>Login</span>
+                  </a>
+              </li>
+              <!-- Connected user menu for small devices -->
+              <li class="notification-open hidden-sm hidden-md hidden-lg" ng-if-start="isAuthenticated()">
+                  <a href="#" ui-sref="app.logged.notifications">
+                      <i>
+                          <i class="fa fa-bell fa-2x black"></i> <span class="menu-badge badge" ng-class="{'bg-red': notifications.length > 0}">{{notifications.length}}</span>
+                      </i>
+                      <span>Notifications</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg">
+                  <a href="#" ng-click="logout($event)">
+                      <i class="fa fa-power-off"></i> <span>Logout</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg" >
+                  <a href="#" ui-sref="app.logged.dashboard.profile">
+                      <i class="fa fa-user"></i> <span>My profile</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg">
+                  <a href="#" ui-sref="app.logged.dashboard.projects">
+                      <i class="fa fa-puzzle-piece"></i> <span>My projects</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg">
+                  <a href="#" ui-sref="app.logged.dashboard.trainings">
+                      <i class="fa fa-graduation-cap"></i> <span>My trainings</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg">
+                  <a href="#" ui-sref="app.logged.dashboard.events">
+                      <i class="fa fa-calendar-o"></i> <span>My courses and workshops</span>
+                  </a>
+              </li>
+              <li class="hidden-sm hidden-md hidden-lg"  ng-if-end>
+                  <a href="#" ui-sref="app.logged.dashboard.invoices">
+                      <i class="fa fa-file-pdf-o"></i> <span>My invoices</span>
+                  </a>
+              </li>
+              <!-- Common menu entries -->
             <li class="" ng-repeat="navLink in navLinks" >
               <a ng-click="toggleNavSize($event)" ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav">
                 <i class="fa fa-{{navLink.linkIcon}} fa-lg"></i>
@@ -19,7 +65,7 @@
             </li>
           </ul>
 
-          <!-- Admin -->
+          <!-- Admin entries -->
           <div class="line-s bg-red-dark dk " ng-if="isAuthorized('admin')"></div>
           <div class="text-xs font-bold text-bordeau hidden-nav-xs padder m-t-lg m-b-sm" ng-if="isAuthorized('admin')">Admin</div>
           <ul class="nav" ng-if="isAuthorized('admin')">

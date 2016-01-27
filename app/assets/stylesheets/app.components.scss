@@ -147,6 +147,12 @@
       top: 18px; right: 18px;
       padding: 3px 6px 1px 6px;
     }
+    .menu-badge {
+      position: absolute;
+      top: 0; right: 0;
+      padding: 2px 4px 1px 3px;
+      border: 2px solid white;
+    }
   }
   .fa { color: black; font-size: rem-calc(24); }
 }

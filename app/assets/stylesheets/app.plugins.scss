@@ -217,7 +217,7 @@
         border: 2px solid $yellow;
         background-color: transparent;
         text-transform: uppercase;
-        font-family: "proxima-nova-condensed";
+        font-family: $font-proxima-condensed;
         font-weight: 600;
         &:hover {
           background-color: $yellow;
