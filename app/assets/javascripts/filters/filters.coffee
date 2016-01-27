@@ -17,12 +17,12 @@ Application.Controllers.filter "projectMemberFilter", [ "Auth", (Auth)->
   (projects, selectedMember) ->
     if !angular.isUndefined(projects) and angular.isDefined(selectedMember) and projects? and selectedMember? and selectedMember != ""
       filteredProject = []
-      # Mes projets
+      # My projects
       if selectedMember == '0'
         angular.forEach projects, (project)->
           if project.author_id == Auth._currentUser.id
             filteredProject.push(project)
-      # les projets auxquels je collabore
+      # the projects I am working
       else
         angular.forEach projects, (project)->
           if project.user_ids.indexOf(Auth._currentUser.id) != -1
