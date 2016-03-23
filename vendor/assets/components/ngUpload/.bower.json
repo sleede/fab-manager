@@ -1,6 +1,6 @@
 {
   "name": "ngUpload",
-  "version": "0.5.14",
+  "version": "0.5.17",
   "main": "ng-upload.js",
   "ignore": [
     "node_modules",
@@ -20,11 +20,11 @@
     "angular": ">=1.0.4"
   },
   "homepage": "https://github.com/twilson63/ngUpload",
-  "_release": "0.5.14",
+  "_release": "0.5.17",
   "_resolution": {
     "type": "version",
-    "tag": "v0.5.14",
-    "commit": "435e7717c6820be3c42c9e91e35adcc1942435df"
+    "tag": "v0.5.17",
+    "commit": "df9f3edfdbcd1ca6d3f365ff85e32de229df3af1"
   },
   "_source": "git://github.com/twilson63/ngUpload.git",
   "_target": ">=0.5.11",

@@ -21,6 +21,8 @@ Application.Directives.directive 'bsHolder', [ ->
   {
   link: (scope, element, attrs) ->
     Holder.addTheme("icon", { background: "white", foreground: "#e9e9e9", size: 80, font: "FontAwesome"})
+    .addTheme("icon-xs", { background: "white", foreground: "#e0e0e0", size: 20, font: "FontAwesome"})
+    .addTheme("icon-black-xs", { background: "black", foreground: "white", size: 20, font: "FontAwesome"})
     .addTheme("avatar", { background: "#eeeeee", foreground: "#555555", size: 16, font: "FontAwesome"})
     .run(element[0])
     return
@@ -66,3 +68,38 @@ Application.Directives.directive "disableAnimation", ($animate) ->
     attrs.$observe "disableAnimation", (value) ->
       $animate.enabled not value, elem
 
+
+##
+# Isolate a form's scope from its parent : no nested validation
+##
+Application.Directives.directive 'isolateForm', [ ->
+  {
+    restrict: 'A',
+    require: '?form'
+    link: (scope, elm, attrs, ctrl) ->
+      return unless ctrl
+
+      # Do a copy of the controller
+      ctrlCopy = {}
+      angular.copy(ctrl, ctrlCopy)
+
+      # Get the form's parent
+      parent = elm.parent().controller('form')
+      # Remove parent link to the controller
+      parent.$removeControl(ctrl)
+
+      # Replace form controller with a "isolated form"
+      isolatedFormCtrl =
+        $setValidity: (validationToken, isValid, control) ->
+          ctrlCopy.$setValidity(validationToken, isValid, control);
+          parent.$setValidity(validationToken, true, ctrl);
+
+        $setDirty: ->
+          elm.removeClass('ng-pristine').addClass('ng-dirty');
+          ctrl.$dirty = true;
+          ctrl.$pristine = false;
+
+      angular.extend(ctrl, isolatedFormCtrl)
+
+  }
+]

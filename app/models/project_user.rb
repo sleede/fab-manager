@@ -5,7 +5,7 @@ class ProjectUser < ActiveRecord::Base
   belongs_to :user
 
   before_create :generate_valid_token
-  after_create :notify_project_collaborator_to_valid
+  after_commit :notify_project_collaborator_to_valid, on: :create
   after_update :notify_project_author_when_collaborator_valid, if: :is_valid_changed?
 
   private

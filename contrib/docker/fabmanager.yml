@@ -1,6 +1,0 @@
-fabmanager:
-    hostname: fabmanager
-    container_name: fabmanager
-    image: squaregolab/fabmanager:latest
-    ports:
-        - "3000:3000"

@@ -1,10 +1,10 @@
 class API::MachinesController < API::ApiController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_machine, only: [:edit, :update, :destroy]
+  before_action :set_machine, only: [:update, :destroy]
   respond_to :json
 
   def index
-    @machines = Machine.all
+    @machines = Machine.includes(:machine_image, :plans)
   end
 
   def show
@@ -31,7 +31,7 @@ class API::MachinesController < API::ApiController
   end
 
   def destroy
-    authorize Machine
+    authorize @machine
     @machine.destroy
     head :no_content
   end
@@ -46,4 +46,13 @@ class API::MachinesController < API::ApiController
                                       machine_files_attributes: [:id, :attachment, :_destroy])
     end
 
+    def is_reserved(start_at, reservations)
+      is_reserved = false
+      reservations.each do |r|
+        r.slots.each do |s|
+          is_reserved = true if s.start_at == start_at
+        end
+      end
+      is_reserved
+    end
 end

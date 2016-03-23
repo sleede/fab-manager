@@ -1,0 +1,369 @@
+'use strict'
+
+### COMMON CODE ###
+
+##
+# Provides a set of common properties and methods to the $scope parameter. They are used
+# in the various projects' admin controllers.
+#
+# Provides :
+#  - $scope.machines = [{Machine}]
+#  - $scope.components = [{Component}]
+#  - $scope.themes = [{Theme}]
+#  - $scope.licences = [{Licence}]
+#  - $scope.submited(content)
+#  - $scope.cancel()
+#  - $scope.addFile()
+#  - $scope.deleteFile(file)
+#  - $scope.addStep()
+#  - $scope.deleteStep(step)
+#
+# Requires :
+#  - $scope.project.project_caos_attributes = []
+#  - $scope.project.project_steps_attributes = []
+#  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
+##
+class ProjectsController
+  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)->
+
+    ## Retrieve the list of machines from the server
+    Machine.query().$promise.then (data)->
+      $scope.machines = data.map (d) ->
+        id: d.id
+        name: d.name
+
+    ## Retrieve the list of components from the server
+    Component.query().$promise.then (data)->
+      $scope.components = data.map (d) ->
+        id: d.id
+        name: d.name
+
+    ## Retrieve the list of themes from the server
+    Theme.query().$promise.then (data)->
+      $scope.themes = data.map (d) ->
+        id: d.id
+        name: d.name
+
+    ## Retrieve the list of licences from the server
+    Licence.query().$promise.then (data)->
+      $scope.licences = data.map (d) ->
+        id: d.id
+        name: d.name
+
+
+
+    ##
+    # For use with ngUpload (https://github.com/twilson63/ngUpload).
+    # Intended to be the callback when an upload is done: any raised error will be stacked in the
+    # $scope.alerts array. If everything goes fine, the user is redirected to the project page.
+    # @param content {Object} JSON - The upload's result
+    ##
+    $scope.submited = (content) ->
+      if !content.id?
+        $scope.alerts = []
+        angular.forEach content, (v, k)->
+          angular.forEach v, (err)->
+            $scope.alerts.push
+              msg: k+': '+err
+              type: 'danger'
+        # using https://github.com/oblador/angular-scroll
+        $('section[ui-view=main]').scrollTop(0, 200)
+        return
+      else
+        $state.go('app.public.projects_show', {id: content.id})
+
+
+
+    ##
+    # Changes the user's view to the projects list page
+    ##
+    $scope.cancel = ->
+      $state.go('app.public.projects_list')
+
+
+
+    ##
+    # For use with 'ng-class', returns the CSS class name for the uploads previews.
+    # The preview may show a placeholder or the content of the file depending on the upload state.
+    # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+    ##
+    $scope.fileinputClass = (v)->
+      if v
+        'fileinput-exists'
+      else
+        'fileinput-new'
+
+
+
+    ##
+    # This will create a single new empty entry into the project's CAO attachements list.
+    ##
+    $scope.addFile = ->
+      $scope.project.project_caos_attributes.push {}
+
+
+
+    ##
+    # This will remove the given file from the project's CAO attachements list. If the file was previously uploaded
+    # to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
+    # the CAO attachements array.
+    # @param file {Object} the file to delete
+    ##
+    $scope.deleteFile = (file) ->
+      index = $scope.project.project_caos_attributes.indexOf(file)
+      if file.id?
+        file._destroy = true
+      else
+        $scope.project.project_caos_attributes.splice(index, 1)
+
+
+
+    ##
+    # This will create a single new empty entry into the project's steps list.
+    ##
+    $scope.addStep = ->
+      $scope.project.project_steps_attributes.push {}
+
+
+
+    ##
+    # This will remove the given stip from the project's steps list. If the step was previously saved
+    # on the server, it will be marked for deletion for the next saving. Otherwise, it will be simply truncated from
+    # the steps array.
+    # @param file {Object} the file to delete
+    ##
+    $scope.deleteStep = (step) ->
+      index = $scope.project.project_steps_attributes.indexOf(step)
+      if step.id?
+        step._destroy = true
+      else
+        $scope.project.project_steps_attributes.splice(index, 1)
+
+
+
+##
+#  Controller used on projects listing page
+##
+Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise'
+, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise) ->
+
+  ### PRIVATE STATIC CONSTANTS ###
+
+  # Number of notifications added to the page when the user clicks on 'load next notifications'
+  PROJECTS_PER_PAGE = 12
+
+  ### PUBLIC SCOPE ###
+  $scope.search = { q: "", from: undefined, machine_id: undefined, component_id: undefined, theme_id: undefined }
+
+  ## list of projects to display
+  $scope.projects = []
+
+  ## list of machines / used for filtering
+  $scope.machines = machinesPromise
+
+  ## list of themes / used for filtering
+  $scope.themes = themesPromise
+
+  ## list of components / used for filtering
+  $scope.components = componentsPromise
+
+  ## By default, the pagination mode is activated to limit the page size
+  $scope.paginateActive = true
+
+  ## The currently displayed page number
+  $scope.page = 1
+
+  $scope.resetFilters = ->
+    $scope.search.q = ""
+    $scope.search.from = undefined
+    $scope.search.machine_id = undefined
+    $scope.search.component_id = undefined
+    $scope.search.theme_id = undefined
+    $scope.triggerSearch()
+
+  $scope.triggerSearch = ->
+    Project.search { search: $scope.search, page: 1 }, (projects)->
+      $scope.projects = projects
+      if projects.length < PROJECTS_PER_PAGE
+        $scope.paginateActive = false
+      else
+        $scope.paginateActive = true
+      $scope.page = 2
+
+  $scope.loadMoreProjects = ->
+		# Project.query {page: $scope.page}, (projects) ->
+		# 	$scope.projects = $scope.projects.concat projects
+		# 	$scope.paginateActive = false if projects.length < PROJECTS_PER_PAGE
+    Project.search { search: $scope.search, page: $scope.page }, (projects)->
+    	$scope.projects = $scope.projects.concat projects
+    	$scope.paginateActive = false if projects.length < PROJECTS_PER_PAGE
+    	$scope.page += 1
+
+
+  ##
+  # Callback to switch the user's view to the detailled project page
+  # @param project {{slug:string}} The project to display
+  ##
+  $scope.showProject = (project) ->
+    $state.go('app.public.projects_show', {id: project.slug})
+
+
+
+  ## initialization
+  $scope.triggerSearch()
+
+]
+
+
+
+##
+# Controller used in the project creation page
+##
+Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF'
+, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF) ->
+  CSRF.setMetaTags()
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = "/api/projects/"
+
+  ## Form action on the above URL
+  $scope.method = 'post'
+
+  ## Default project parameters
+  $scope.project =
+    project_steps_attributes: []
+    project_caos_attributes: []
+
+  ## Other members list (project collaborators)
+  Member.query().$promise.then (data)->
+    $scope.members = data.filter (m) ->
+      m.id != $scope.currentUser.id
+    .map (d) ->
+      id: d.id
+      name: d.name
+
+  ## Using the ProjectsController
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)
+]
+
+
+
+##
+# Controller used in the project edition page
+##
+Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise'
+, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise) ->
+  CSRF.setMetaTags()
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = "/api/projects/" + $stateParams.id
+
+  ## Form action on the above URL
+  $scope.method = 'put'
+
+  ## Retrieve the project's details, if an error occured, redirect the user to the projects list page
+  $scope.project = projectPromise
+
+  ## Other members list (project collaborators)
+  Member.query().$promise.then (data)->
+    $scope.members = data.filter (m) ->
+      m.id != $scope.project.author_id
+    .map (d) ->
+      id: d.id
+      name: d.name
+
+  ## Using the ProjectsController
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)
+]
+
+
+
+##
+# Controller used in the public project's details page
+##
+Application.Controllers.controller "ShowProjectController", ["$scope", "$state", "projectPromise", '$location', '$uibModal', '_t'
+, ($scope, $state, projectPromise, $location, $uibModal, _t) ->
+
+  ### PUBLIC SCOPE ###
+
+  ## Store the project's details
+  $scope.project = projectPromise
+  $scope.projectUrl = $location.absUrl()
+  $scope.disqusShortname = Fablab.disqusShortname
+
+
+  ##
+  # Test if the provided user has the edition rights on the current project
+  # @param [user] {{id:number}} (optional) the user to check rights
+  # @returns boolean
+  ##
+  $scope.projectEditableBy = (user) ->
+    return false if not user?
+    return true if $scope.project.author_id == user.id
+    canEdit = false
+    angular.forEach $scope.project.project_users, (u)->
+      canEdit = true if u.id == user.id and u.is_valid
+    return canEdit
+
+
+
+  ##
+  # Test if the provided user has the deletion rights on the current project
+  # @param [user] {{id:number}} (optional) the user to check rights
+  # @returns boolean
+  ##
+  $scope.projectDeletableBy = (user) ->
+    return false if not user?
+    return true if $scope.project.author_id == user.id
+
+
+
+  ##
+  # Callback to delete the current project. Then, the user is redirected to the projects list page,
+  # which is refreshed. Admins and project owner only are allowed to delete a project
+  ##
+  $scope.deleteProject = ->
+    # check the permissions
+    if $scope.currentUser.role is 'admin' or $scope.projectDeletableBy($scope.currentUser)
+      # delete the project then refresh the projects list
+      $scope.project.$delete ->
+        $state.go('app.public.projects_list', {}, {reload: true})
+    else
+      console.error _t('unauthorized_operation')
+
+  ##
+  # Open a modal box containg a form that allow the end-user to signal an abusive content
+  # @param e {Object} jQuery event
+  ##
+  $scope.signalAbuse = (e) ->
+    e.preventDefault() if e
+
+    $uibModal.open
+      templateUrl: '<%= asset_path "shared/signalAbuseModal.html" %>'
+      size: 'md'
+      resolve:
+        project: -> $scope.project
+      controller: ['$scope', '$uibModalInstance', '_t', 'growl', 'Abuse', 'project', ($scope, $uibModalInstance, _t, growl, Abuse, project) ->
+
+        # signaler's profile & signalement infos
+        $scope.signaler = {
+          signaled_type: 'Project'
+          signaled_id: project.id
+        }
+
+        # callback for signaling cancellation
+        $scope.cancel = ->
+          $uibModalInstance.dismiss('cancel')
+
+        # callback for form validation
+        $scope.ok = ->
+          Abuse.save {}, {abuse: $scope.signaler}, (res) ->
+            # creation successful
+            growl.success(_t('your_report_was_successful_thanks'))
+            $uibModalInstance.close(res)
+          , (error) ->
+            # creation failed...
+            growl.error(_t('an_error_occured_while_sending_your_report'))
+      ]
+
+]

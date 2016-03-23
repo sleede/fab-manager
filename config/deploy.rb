@@ -1,6 +1,7 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 require 'capistrano/ext/multistage'
+require 'capistrano/maintenance'
 
 set :stages, %w(production staging)
 set :default_stage, "staging"
@@ -10,6 +11,8 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
+
+# after "deploy:finalize_update", "deploy:assets:precompile"
 
 namespace :deploy do
   %w[start stop restart].each do |command|
@@ -38,8 +41,9 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/uploads"
-    put File.read("config/database.yml.default"), "#{shared_path}/config/database.yml"
-    puts "Now edit #{shared_path}/config/database.yml"
+    run "mkdir -p #{shared_path}/invoices"
+    put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
+    puts "Now edit #{shared_path}/config/database.yml and add your username and password"
     put File.read("config/application.yml"), "#{shared_path}/config/application.yml"
     puts "Now edit #{shared_path}/config/application.yml and add your ENV vars"
 
@@ -81,6 +85,12 @@ namespace :deploy do
   end
   after "deploy:finalize_update", 'deploy:symlink_uploads_dir'
 
+  desc "Symlinks the invoices dir"
+  task :symlink_invoices_dir, :roles => :app do
+    run "rm -rf #{release_path}/invoices"
+    run "ln -nfs #{shared_path}/invoices/ #{release_path}/"
+  end
+  after "deploy:finalize_update", 'deploy:symlink_invoices_dir'
 
   namespace :assets do
     desc 'Run the precompile task locally and rsync with shared'

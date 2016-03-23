@@ -1,0 +1,64 @@
+Application.Controllers.controller "GroupsController", ["$scope", 'groupsPromise', 'Group', 'growl', '_t',  ($scope, groupsPromise, Group, growl, _t) ->
+
+  ## List of users groups
+  $scope.groups = groupsPromise
+
+
+
+  ##
+  # Removes the newly inserted but not saved group / Cancel the current group modification
+  # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+  # @param index {number} group index in the $scope.groups array
+  ##
+  $scope.cancelGroup = (rowform, index) ->
+    if $scope.groups[index].id?
+      rowform.$cancel()
+    else
+      $scope.groups.splice(index, 1)
+
+
+
+  ##
+  # Creates a new empty entry in the $scope.groups array
+  ##
+  $scope.addGroup = ->
+    $scope.inserted =
+      name: ''
+    $scope.groups.push($scope.inserted)
+
+
+
+  ##
+  # Saves a new group / Update an existing group to the server (form validation callback)
+  # @param data {Object} group name
+  # @param [data] {number} group id, in case of update
+  ##
+  $scope.saveGroup = (data, id) ->
+    if id?
+      Group.update {id: id}, { group: data }, (response) ->
+        growl.success(_t('changes_successfully_saved'))
+      , (error) ->
+        growl.error(_t('an_error_occurred_while_saving_changes'))
+    else
+      Group.save { group: data }, (resp)->
+        growl.success(_t('new_group_successfully_saved'))
+        $scope.groups[$scope.groups.length-1].id = resp.id
+      , (error) ->
+        growl.error(_t('an_error_occurred_when_saving_the_new_group'))
+        $scope.groups.splice($scope.groups.length-1, 1)
+
+
+
+  ##
+  # Deletes the group at the specified index
+  # @param index {number} group index in the $scope.groups array
+  ##
+  $scope.removeGroup = (index) ->
+    Group.delete { id: $scope.groups[index].id }, (resp) ->
+      growl.success(_t('group_successfully_deleted'))
+      $scope.groups.splice(index, 1)
+    , (error) ->
+      growl.error(_t('unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it'))
+
+
+]

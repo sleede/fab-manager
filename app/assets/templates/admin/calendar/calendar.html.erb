@@ -1,0 +1,66 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate>{{ 'calendar_management' }}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+      <section class="heading-actions wrapper">
+       <span class="badge text-sm bg-formation m-t-sm" translate>{{ 'trainings' }}</span><br>
+       <span class="badge text-sm bg-machine" translate>{{ 'machines' }}</span>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="row no-gutter">
+
+  <div class="col-sm-12 col-md-12 col-lg-9">
+    <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg"></div>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-3">
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'ongoing_reservations' }}</h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper">
+        <ul class="list-unstyled" ng-if="reservations.length > 0">
+          <li ng-repeat="r in reservations" class="m-b-xs" ng-class="{'reservation-canceled':r.canceled_at}">
+            {{r.user.name}}
+              - <span class="label reservation-time">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+              - <span class="label label-success text-white">{{r.reservable.name}}</span>
+              <span class="btn btn-warning btn-xs" ng-click="cancelBooking(r)" ng-if="!r.canceled_at"><i class="fa fa-times red"></i></span>
+          </li>
+        </ul>
+        <div ng-if="reservations.length == 0" translate>{{ 'no_reservations' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-3" ng-if="availability.machine_ids.length > 0">
+      <div class="widget panel b-a m m-t-lg">
+          <div class="panel-heading b-b small">
+              <h3 translate>{{ 'machines' }}</h3>
+          </div>
+          <div class="widget-content no-bg auto wrapper">
+              <ul class="list-unstyled">
+                  <li ng-repeat="m in machines" class="m-b-xs" ng-show="availability.machine_ids.indexOf(m.id) > -1">
+                      {{m.name}}
+                      <span class="btn btn-warning btn-xs" ng-click="removeMachine(m)" ng-if="availability.machine_ids.length > 1"><i class="fa fa-times red"></i></span>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+</section>

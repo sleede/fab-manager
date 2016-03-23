@@ -1,0 +1,262 @@
+fr:
+  app:
+    shared:
+      buttons:
+        # traductions de boutons communs
+        confirm_changes: "Valider les modifications"
+        consult: "Consulter"
+        edit: "Éditer"
+        change: "Modifier"
+        delete: "Supprimer"
+        browse: "Parcourir"
+        cancel: "Annuler"
+        close: "Fermer"
+        clear: "Effacer"
+        today: "Aujourd'hui"
+        confirm: "Valider"
+        save: "Enregistrer"
+        "yes": "Oui"
+        "no": "Non"
+        apply: "Appliquer"
+        confirm_(payment_on_site): "Valider (Paiement sur place)"
+
+      elements:
+        # traductions variées utilisées à plusieurs reprises dans l'application
+        group: "Groupe"
+        subscription: "Abonnement"
+        trainings: "Formations"
+        no_trainings: "Aucune formation"
+        confirmation_required: "Confirmation requise"
+        description: "Description"
+        machines: "Machines"
+        materials: "Matériaux"
+        date: "Date"
+        price: "Prix"
+        download_the_invoice: "Télécharger la facture"
+        download_the_credit_note: "Télécharger l'avoir"
+        no_invoices_for_now: "Aucune facture pour le moment."
+        email_address: "Adresse de courriel"
+        user: "Utilisateur"
+        pseudonym: "Pseudonyme"
+        all_day: "Toute la journée"
+        reservation_was_successfully_cancelled: "La réservation a bien été annulée."
+        title: "Titre"
+        total_: "TOTAL :"
+        full_price_: "Plein tarif :"
+        reduced_rate: "Tarif réduit"
+        reduced_rate_: "Tarif réduit :"
+        rough_draft: "Brouillon"
+        machines_and_materials: "Machines et matériaux"
+        collaborators: "Les collaborateurs"
+        summary: "Résumé"
+        you_ve_just_selected_a_: "Vous venez de sélectionner un"  # you_ve_just_selected_a_ + _subscription
+        _subscription: "abonnement"
+        confirm_and_pay: "Valider et payer"
+        your_invoice_will_be_available_soon_from_your_: "Votre facture sera bientôt disponible depuis votre"
+        add_an_event: "Ajouter un évènement"
+        load_the_next_courses_and_workshops: "Charger les stages et ateliers suivants ..."
+        dates: "Dates :"
+        thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
+        surname: "Nom"
+        first_name: "Prénom"
+        address: "Adresse"
+        interests: "Centres d'intérêts"
+        CAD_softwares_mastered: "Logiciels de conception maîtrisés"
+        name: "Nom"
+        step_N: "Étape {{INDEX}}"  # angular interpolation
+        themes: "Thématiques"
+        tags: "Étiquettes"
+        technical_specifications: "Caractéristiques techniques"
+        online_payment: "Paiement en ligne"
+        type: "Type"
+        partner: "Partenaire"
+        standard: "Standard"
+        year: "Année"
+        month: "Mois"
+        subscription_price: "Coût de l'abonnement"
+        model: "Modèle"
+        from_date: "Du" # context: date. eg: "from 01/01 to 01/05"
+        from_time: "De" # context: time. eg. "from 18:00 to 21:00"
+        to_date: "au" # context: date. eg: "from 01/01 to 01/05"
+        to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
+
+      messages:
+        you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
+        you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Vous perdrez les modifications non enregistrées si vous rechargez cette page"
+
+      user:
+        # formulaire d'édition du profil utilisateur
+        add_an_avatar: "Ajouter un avatar"
+        pseudonym: "Pseudonyme"
+        email_address_is_required: "L'adresse de courriel est requise."
+        change_password: "Changer de mot de passe"
+        new_password: "Nouveau mot de passe"
+        confirmation_of_new_password: "Confirmation du nouveau mot de passe"
+        confirmation_of_password_is_required: "La confirmation du mot de passe est requise."
+        confirmation_of_password_is_too_short_(minimum_8_characters): "La confirmation du mot de passe est trop courte (au moins 8 caractères)."
+        confirmation_mismatch_with_password: "La confirmation ne concorde pas avec le mot de passe."
+        date_of_birth: "Date de naissance"
+        date_of_birth_is_required: "La date de naissance est requise."
+
+      project:
+        # formulaire d'étition d'un projet
+        name_is_required: "Le nom est requis."
+        illustration: "Illustration"
+        add_an_illustration: "Ajouter un visuel"
+        CAD_file: "Fichier CAO"
+        add_a_new_file: "Ajouter un nouveau fichier"
+        description_is_required: "La description est requise."
+        steps: "Étapes"
+        step_title: "Titre de l'étape"
+        add_a_picture: "Ajouter une image"
+        change_the_picture: "Modifier l'image"
+        delete_the_step: "Supprimer l'étape"
+        add_a_new_step: "Ajouter une nouvelle étape"
+        publish_your_project: "Publier votre projet"
+        employed_materials: "Matériaux utilisés"
+        employed_machines: "Machines utilisées"
+        creative_commons_licences: "Licences Creative Commons"
+
+      machine:
+        # formulaire d'édition d'une machine
+        name_is_required: "Le nom est requis."
+        illustration: "Visuel"
+        add_an_illustration: "Ajouter un visuel"
+        description_is_required: "La description est requise."
+        technical_specifications_are_required: "Les caractéristiques techniques sont requises."
+        attached_files_(pdf): "Pièces jointes (pdf)"
+        attach_a_file: "Joindre un fichier"
+        add_an_attachment: "Ajouter une pièce jointe"
+        validate_your_machine: "Valider votre machine"
+
+      plan_subscribe:
+        # cadre de souscription à un abonnement
+        subscribe_online: "je m'abonne en ligne"
+        do_not_subscribe: "je ne souhaite pas m'abonner"
+
+      member_select:
+        # admin : choisir un membre avec lequel interagir
+        select_a_member: "Sélectionnez un membre"
+        please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
+
+      stripe:
+        # fenêtre de paiement stripe
+        i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
+        _the_general_terms_and_conditions: "les conditions générales de vente."
+        enter_your_card_number: "Saisissez votre numéro de carte"
+        confirm_my_payment_of_: "Valider mon paiement de"  # contexte : valider mon paiement de 20,00 €
+
+      valid_reservation_modal:
+        # fenêtre de paiement sur place d'une réservation
+        booking_confirmation: "Validation réservation"
+        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
+
+      event:
+        # formulaire d'édition d'un événement (stage/atelier)
+        title_is_required: "Le titre est requis."
+        matching_visual: "Visuel associé"
+        choose_a_picture: "Choisir une image"
+        description_is_required: "La description est requise."
+        attachments: "Pièces jointes"
+        add_a_new_file: "Ajouter un nouveau fichier"
+        event_type: "Type d'évènement"
+        dates_and_opening_hours: "Dates et horaires"
+        all_day: "Toute la journée"
+        start_date: "Date de début"
+        end_date: "Date de fin"
+        start_time: "Heure de début"
+        end_time: "Heure de fin"
+        recurrence: "Récurrence"
+        _and_ends_on: "et se terminera le"
+        prices_and_availabilities: "Tarifs et disponibilités"
+        standard_rate: "Tarif standard"
+        0_=_free: "0 = gratuit"
+        tickets_available: "Places disponibles"
+
+      plan:
+        # formulaire d'édition d'une formule d'abonnement
+        general_informations: "Informations générales"
+        name_is_required: "Le nom est requis."
+        name_length_must_be_less_than_24_characters: "Le nom doit faire moins de 24 caractères."
+        type_is_required: "Le type est requis."
+        group: "Groupe"
+        transversal_(all_groups): "Transversal (tout les groupes)"
+        group_is_required: "Le groupe est requis."
+        number_of_periods: "Nombre de périodes"
+        number_of_periods_is_required: "Le nombre de périodes est requis."
+        period: "Période"
+        period_is_required: "La période est requise."
+        price_is_required: "Le prix est requis."
+        visual_prominence_of_the_subscription: "Importance visuelle de l'abonnement"
+        on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "Sur la page des abonnements, les abonnements les plus importants seront placés en haut de la liste."
+        an_evelated_number_means_a_higher_prominence: "Un nombre plus élevé traduit une importance plus élevée."
+        rolling_subscription: "Abonnement glissant ?"
+        a_rolling_subscription_will_begin_the_day_of_the_first_training: "Un abonnement glissant prendra effet seulement le jour de la première formation."
+        otherwise_it_will_begin_as_soon_as_it_is_bought: "Dans le cas contraire, il prendra effet dès sa date d'achat."
+        information_sheet: "Fiche descriptive"
+        attach_an_information_sheet: "Joindre une fiche descriptive"
+        notified_partner: "Partenaire notifié"
+        new_user: "Nouvel utilisateur ..."
+        as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
+        new_partner: "Nouveau partenaire"
+        email_address_is_required: "L'adresse e-mail est requise."
+
+      user_admin:
+        # formulaire partiel d'édition/création utilisateur (vue admin)
+        group: "Groupe"
+        group_is_required: "Le groupe est requis."
+        disable_invoices_generation: "Désactiver la génération de factures :"
+        no_more_invoices_will_be_generated_for_: "Plus aucune facture ne sera générée pour"
+        _the_payments_carried_out_at_the_reception_: "les paiement effectués à l'accueil"
+        _regarding_this_user: "pour cet utilisateur."
+        trainings: "Formations"
+
+      authentication:
+        # formulaire partiel d'édition/création d'un fournisseur d'authentification (SSO)
+        provider_name_is_required: "Le nom du fournisseur est requis."
+        authentication_type: "Type d'authentification"
+        authentication_type_is_required: "Le type d'authentification est requis."
+
+      oauth2:
+        # formulaire d'édition/création d'un fournisseur d'authentification de type OAuth2
+        common_url: "URL commune"
+        common_url_is_required: "L'URL commune est requise."
+        provided_url_is_not_a_valid_url: "L'URL fournie n'est pas une URL valide."
+        authorization_endpoint: "Terminaison d'autorisation"
+        oauth2_authorization_endpoint_is_required: "La terminaison d'autorisation OAuth 2 est requise."
+        provided_endpoint_is_not_valid: "La terminaison fournie n'est pas valide."
+        token_acquisition_endpoint: "Terminaison d'acquisition du jeton"
+        oauth2_token_acquisition_endpoint_is_required: "La terminaison d'acquisition du jeton OAuth 2 est requise."
+        profil_edition_url: "URL d'édition du profil"
+        profile_edition_url_is_required: "L'adresse d'édition du profil utilisateur est requise."
+        client_identifier: "Identifiant client"
+        oauth2_client_identifier_is_required: "L'identifiant client OAuth 2 est requis."
+        obtain_it_when_registering_with_your_provider: "Enregistrez-vous auprès du fournisseur pour l'obtenir."
+        client_secret: "Secret client"
+        oauth2_client_secret_is_required: "Le secret client OAuth 2 est requis."
+        define_the_fields_mapping: "Définir la correspondance des champs"
+        add_a_match: "Ajouter une correspondance"
+        field: "Champ"
+        api_endpoint_url: "Terminaison/URL de l'API"
+        api_type: "Type d'API"
+        api_fields: "Champ de l'API"
+
+      confirm_modify_slot_modal:
+        # fenêtre de modification d'un créneau de réservation machine/formation
+        change_the_slot: "Modifier le créneau"
+        do_you_want_to_change_your_booking_slot_initially_planned_at: "Souhaitez-vous changer votre créneau de réservation initialement prévu au :"
+        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Souhaitez-vous changer le créneau de réservation de {{NAME}}, initialement prévu au :"  # angular interpolation
+        cancel_this_reservation: "Annuler cette réservation"
+        i_want_to_change_date: "Je veux changer de date"
+
+      request_training_modal:
+        # fenêtre présentant l'obligation de participer à une formation avant de réserver une machine
+        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Pour réserver la machine \"{{MACHINE}}\" vous devez avoir suivi la {{TRAINING}}."  # angular interpolation
+        register_for_the_training: "S'inscrire à la formation"
+        i_dont_want_to_register_now: "Je ne souhaite pas m'inscrire pour l'instant"
+
+      training_reservation_modal:
+        # fenêtre présentant l'obligation d'attendre la validation de la formation pour réserver une machine
+        machine_reservation: "Réservation machine"
+        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Il faut attendre que votre formation soit validée par l'équipe du Fab Lab pour réserver cette machine."
+        your_training_will_occur_: "Votre formation aura lieu le"

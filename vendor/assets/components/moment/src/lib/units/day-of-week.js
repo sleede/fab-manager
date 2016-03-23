@@ -4,6 +4,7 @@ import { addRegexToken, match1to2, matchWord } from '../parse/regex';
 import { addWeekParseToken } from '../parse/token';
 import toInt from '../utils/to-int';
 import { createLocal } from '../create/local';
+import getParsingFlags from '../create/parsing-flags';
 
 // FORMATTING
 
@@ -45,7 +46,7 @@ addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config) {
     if (weekday != null) {
         week.d = weekday;
     } else {
-        config._pf.invalidWeekday = input;
+        getParsingFlags(config).invalidWeekday = input;
     }
 });
 
@@ -56,18 +57,20 @@ addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
 // HELPERS
 
 function parseWeekday(input, locale) {
-    if (typeof input === 'string') {
-        if (!isNaN(input)) {
-            input = parseInt(input, 10);
-        }
-        else {
-            input = locale.weekdaysParse(input);
-            if (typeof input !== 'number') {
-                return null;
-            }
-        }
+    if (typeof input !== 'string') {
+        return input;
     }
-    return input;
+
+    if (!isNaN(input)) {
+        return parseInt(input, 10);
+    }
+
+    input = locale.weekdaysParse(input);
+    if (typeof input === 'number') {
+        return input;
+    }
+
+    return null;
 }
 
 // LOCALES
@@ -90,9 +93,7 @@ export function localeWeekdaysMin (m) {
 export function localeWeekdaysParse (weekdayName) {
     var i, mom, regex;
 
-    if (!this._weekdaysParse) {
-        this._weekdaysParse = [];
-    }
+    this._weekdaysParse = this._weekdaysParse || [];
 
     for (i = 0; i < 7; i++) {
         // make the regex if we don't have it already

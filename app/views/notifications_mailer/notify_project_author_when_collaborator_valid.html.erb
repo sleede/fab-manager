@@ -1,3 +1,3 @@
-<p>Bonjour <%= @attached_object.project.author.profile.full_name %>,</p>
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
-<p>Le membre <%= @attached_object.user.profile.full_name %> a accepté votre demande de collaboration sur votre projet : <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>
+<p><%= t('.body.the_member') %> <%= @attached_object.user.profile.full_name %> <%= t(".body.accepted_your_invitation_to_take_part_in_the_project" ) %> <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>

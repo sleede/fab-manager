@@ -1,0 +1,22 @@
+<table border="1">
+  <tr>
+    <th><%=t('export_reservations.customer_id')%></th>
+    <th><%=t('export_reservations.customer')%></th>
+    <th><%=t('export_reservations.reservation_date')%></th>
+    <th><%=t('export_reservations.reservation_type')%></th>
+    <th><%=t('export_reservations.reservation_object')%></th>
+    <th><%=t('export_reservations.slots_number_hours_tickets')%></th>
+
+  </tr>
+  <% @datas.each do |d| %>
+  <tr>
+    <td><%= d.user.id %></td>
+    <td><%= d.user.profile.full_name %></td>
+    <td><%= d.created_at %></td>
+    <td><%= d.reservable_type %></td>
+    <td><%= d.reservable.name if !d.reservable.nil? %></td>
+    <td><%= d.slots.count %></td>
+    <td><%= (d.stp_invoice_id.nil?)? t('export_reservations.local_payment') : t('export_reservations.online_payment') %></td>
+  </tr>
+  <% end %>
+</table>

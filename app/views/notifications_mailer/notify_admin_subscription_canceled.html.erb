@@ -1,0 +1,6 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.subscription_canceled_html',
+         PLAN: @attached_object.plan.human_readable_name,
+         NAME: @attached_object.user.profile.full_name) %>
+</p>

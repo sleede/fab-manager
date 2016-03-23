@@ -1,0 +1,10 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.reservation_saved_html', RESERVATION: @attached_object.reservable.name) %></p>
+
+<p><%= t('.body.your_reserved_slots') %> </p>
+<ul>
+<% @attached_object.slots.each do |slot| %>
+  <li><%= "#{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}" %></li>
+<% end %>
+</ul>

@@ -14,7 +14,8 @@ class Profile < ActiveRecord::Base
   validates_numericality_of :phone, only_integer: true, allow_blank: false
 
   def full_name
-    first_name.humanize.titleize + ' ' + last_name.humanize.titleize
+    # if first_name or last_name is nil, the empty string will be used as a temporary replacement
+    (first_name || '').humanize.titleize + ' ' + (last_name || '').humanize.titleize
   end
 
   def to_s

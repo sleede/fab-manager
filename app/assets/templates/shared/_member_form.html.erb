@@ -1,4 +1,4 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
 <input name="_method" type="hidden" ng-value="method">
 <input name="user[profile_attributes][id]" type="hidden" ng-value="user.profile.id">
@@ -16,9 +16,20 @@
             <div class="m-t-sm">
               <input type="hidden" name="user[profile_attributes][user_avatar_attributes][id]" ng-value="user.profile.user_avatar.id">
               <input type="hidden" name="user[profile_attributes][user_avatar_attributes][_destroy]" ng-value="true" ng-if="user.profile.user_avatar._destory">
-              <span class="btn btn-default btn-file" ng-click="user.profile.user_avatar._destory = false"><span class="fileinput-new">Ajouter un avatar</span><span class="fileinput-exists">Modifier</span>
-                <input type="file" name="user[profile_attributes][user_avatar_attributes][attachment]"></span>
-              <button class="btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="user.profile.user_avatar._destory = true"><i class="fa fa-trash-o"></i> </button>
+              <span class="btn btn-default btn-file"
+                    ng-click="user.profile.user_avatar._destory = false"
+                    ng-hide="preventField['profile.avatar'] && user.profile.user_avatar.attachment_url && !userForm['user[profile_attributes][user_avatar_attributes]'].$dirty">
+                  <span class="fileinput-new" translate>{{ 'add_an_avatar' }}</span>
+                  <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                  <input type="file" name="user[profile_attributes][user_avatar_attributes][attachment]">
+              </span>
+
+              <button class="btn btn-danger fileinput-exists"
+                      data-dismiss="fileinput"
+                      ng-click="user.profile.user_avatar._destory = true"
+                      ng-hide="preventField['profile.avatar'] && user.profile.user_avatar.attachment_url && !userForm['user[profile_attributes][user_avatar_attributes]'].$dirty">
+                  <i class="fa fa-trash-o"></i>
+              </button>
             </div>
           </div>
       </div>
@@ -28,21 +39,39 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$invalid}">
           <label class="checkbox-inline btn btn-default">
-            <input type="radio" name="user[profile_attributes][gender]" ng-model="user.profile.gender" value="true" required/><i class="fa fa-male m-l-sm"></i> Homme
+            <input type="radio"
+                   name="user[profile_attributes][gender]"
+                   ng-model="user.profile.gender"
+                   value="true"
+                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"
+                   required/>
+              <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
           </label>
           <label class="checkbox-inline btn btn-default">
-            <input type="radio" name="user[profile_attributes][gender]" ng-model="user.profile.gender" value="false"/> <i class="fa fa-female m-l-sm"></i> Femme
+            <input type="radio"
+                   name="user[profile_attributes][gender]"
+                   ng-model="user.profile.gender"
+                   value="false"
+                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
+              <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
-          <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required">Le genre est obligatoire</span>
+          <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
       </div>
 
 
       <div class="form-group" ng-class="{'has-error': userForm['user[username]'].$dirty && userForm['user[username]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user"></i></span>
-          <input ng-model="user.username" type="text" name="user[username]" class="form-control" id="user_username" placeholder="Pseudo" required>
+          <input type="text"
+                 name="user[username]"
+                 ng-model="user.username"
+                 class="form-control"
+                 id="user_username"
+                 placeholder="{{ 'pseudonym' | translate }}"
+                 ng-disabled="preventField['user.username'] && user.username  && !userForm['user[username]'].$dirty"
+                 required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[username]'].$dirty && userForm['user[username]'].$error.required">Le pseudo est obligatoire</span>
+        <span class="help-block" ng-show="userForm['user[username]'].$dirty && userForm['user[username]'].$error.required" translate>{{ 'pseudonym_is_required' }}</span>
       </div>
 
 
@@ -50,48 +79,86 @@
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user"></i></span>
-          <input ng-model="user.profile.last_name" type="text" name="user[profile_attributes][last_name]" class="form-control" id="user_last_name" placeholder="Nom" required>
+          <input type="text"
+                 name="user[profile_attributes][last_name]"
+                 ng-model="user.profile.last_name"
+                 class="form-control"
+                 id="user_last_name"
+                 placeholder="{{ 'surname' | translate }}"
+                 ng-disabled="preventField['profile.last_name'] && user.profile.last_name && !userForm['user[profile_attributes][last_name]'].$dirty"
+                 required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$error.required">Le nom est obligatoire</span>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$error.required" translate>{{ 'surname_is_required' }}</span>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user"></i></span>
-          <input ng-model="user.profile.first_name" type="text" name="user[profile_attributes][first_name]" class="form-control" id="user_first_name" placeholder="Prénom" required>
+          <input type="text"
+                 name="user[profile_attributes][first_name]"
+                 ng-model="user.profile.first_name"
+                 class="form-control"
+                 id="user_first_name"
+                 placeholder="{{ 'first_name' | translate }}"
+                 ng-disabled="preventField['profile.first_name'] && user.profile.first_name && !userForm['user[profile_attributes][first_name]'].$dirty"
+                 required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$error.required">Le prénom est obligatoire</span>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$error.required" translate>{{ 'first_name_is_required' }}</span>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[email]'].$dirty && userForm['user[email]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
-          <input ng-model="user.email" type="email" name="user[email]" class="form-control" id="user_email" placeholder="Adresse email" required>
+          <input type="email"
+                 name="user[email]"
+                 ng-model="user.email"
+                 class="form-control"
+                 id="user_email"
+                 placeholder="{{ 'email_address' | translate }}"
+                 ng-disabled="preventField['user.email'] && user.email && !userForm['user[email]'].$dirty"
+                 required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[email]'].$dirty && userForm['user[email]'].$error.required">L'email est obligatoire</span>
+        <span class="help-block" ng-show="userForm['user[email]'].$dirty && userForm['user[email]'].$error.required" translate>{{ 'email_address_is_required' }}</span>
       </div>
 
-      <div class="form-group">
-        <button class="btn btn-warning btn-block" ng-click="change_password = !change_password; $event.stopPropagation(); $event.preventDefault()">Changer de mot de passe</button>
+      <div class="form-group" ng-hide="preventPassword">
+        <button class="btn btn-warning btn-block"
+                ng-click="change_password = !change_password; $event.stopPropagation(); $event.preventDefault()" translate>{{ 'change_password' }}</button>
       </div>
       
 
       <div class="form-group" ng-class="{'has-error': userForm['user[password]'].$dirty && userForm['user[password]'].$invalid}" ng-if="change_password">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-key"></i> </span>
-          <input ng-model="user.password" type="password" name="user[password]" class="form-control" id="user_password" placeholder="Nouveau mot de passe" required ng-minlength="8">
+          <input type="password"
+                 name="user[password]"
+                 ng-model="user.password"
+                 class="form-control"
+                 id="user_password"
+                 placeholder="{{ 'new_password' | translate }}"
+                 ng-minlength="8"
+                 required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.required">Le mot de passe est obligatoire</span>
-        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength">Le mot de passe est trop court (au moins 8 caractères)</span>
+        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.required" translate>{{ 'password_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'password_is_too_short_(minimum_8_characters)' }}</span>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="change_password">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-key"></i> </span>
-          <input ng-model="user.password_confirmation" type="password" name="user[password_confirmation]" class="form-control" id="user_password_confirmation" placeholder="Confirmation du nouveau mot de passe" required ng-minlength="8">
+          <input type="password"
+                 name="user[password_confirmation]"
+                 ng-model="user.password_confirmation"
+                 class="form-control"
+                 id="user_password_confirmation"
+                 placeholder="{{ 'confirmation_of_new_password' | translate }}"
+                 ng-minlength="8"
+                 required
+                 match="user.password"/>
         </div>
-        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.required">Le mot de passe de confirmation est obligatoire</span>
-        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength">Le mot de passe de confirmation est trop court (au moins 8 caractères)</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.required" translate>{{ 'confirmation_of_password_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength" translate>{{ 'confirmation_of_password_is_too_short_(minimum_8_characters)' }}</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$error.match" translate>{{ 'confirmation_mismatch_with_password' }}</span>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$invalid}">
@@ -102,40 +169,68 @@
                  class="form-control"
                  name="user[profile_attributes][birthday]"
                  ng-model="user.profile.birthday"
-                 datepicker-popup="dd/MM/yyyy"
+                 uib-datepicker-popup="{{datePicker.format}}"
                  datepicker-options="datePicker.options"
                  is-open="datePicker.opened"
-                 placeholder="Date de naissance"
+                 placeholder="{{ 'date_of_birth' | translate }}"
                  ng-click="openDatePicker($event)"
+                 ng-disabled="preventField['profile.birthday'] && user.profile.birthday && !userForm['user[profile_attributes][birthday]'].$dirty"
                  required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required">La date de naissance est obligatoire</span>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
       </div>
 
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
-          <input type="hidden" name="user[profile_attributes][address_attributes][id]" ng-value="user.profile.address.id" />
-          <input ng-model="user.profile.address.address" type="text" name="user[profile_attributes][address_attributes][address]" class="form-control" id="user_address" placeholder="Adresse">
+          <input type="hidden"
+                 name="user[profile_attributes][address_attributes][id]"
+                 ng-value="user.profile.address.id" />
+          <input type="text"
+                 name="user[profile_attributes][address_attributes][address]"
+                 ng-model="user.profile.address.address"
+                 class="form-control"
+                 id="user_address"
+                 ng-disabled="preventField['profile.address'] && user.profile.address.address && !userForm['user[profile_attributes][address_attributes][address]'].$dirty"
+                 placeholder="{{ 'address' | translate }}"/>
         </div>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
-          <input ng-model="user.profile.phone" type="text" name="user[profile_attributes][phone]" class="form-control" id="user_phone" placeholder="Numéro de téléphone" required>
+          <input type="text"
+                 name="user[profile_attributes][phone]"
+                 ng-model="user.profile.phone"
+                 class="form-control"
+                 id="user_phone"
+                 placeholder="{{ 'phone_number' | translate }}"
+                 ng-disabled="preventField['profile.phone'] && user.profile.phone && !userForm['user[profile_attributes][phone]'].$dirty"
+                 required/>
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$error.required">Le numéro de téléphone est obligatoire.</span>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
       </div>
 
       <div class="form-group">
-        <label for="user_interest">Centres d'intérêts</label>
-        <textarea ng-model="user.profile.interest" rows="5" name="user[profile_attributes][interest]" class="form-control" id="user_interest" placeholder=""></textarea>
+        <label for="user_interest" translate>{{ 'interests' }}</label>
+        <textarea name="user[profile_attributes][interest]"
+                  ng-model="user.profile.interest"
+                  rows="5"
+                  class="form-control"
+                  id="user_interest"
+                  placeholder=""
+                  ng-disabled="preventField['profile.interest'] && user.profile.interest && !userForm['user[profile_attributes][interest]'].$dirty"></textarea>
       </div>
 
       <div class="form-group">
-        <label for="user_software_mastered">Logiciels de conception maîtrisés</label>
-        <textarea ng-model="user.profile.software_mastered" rows="5" name="user[profile_attributes][software_mastered]" class="form-control" id="user_software_mastered" placeholder=""></textarea>
+        <label for="user_software_mastered" translate>{{ 'CAD_softwares_mastered' }}</label>
+        <textarea name="user[profile_attributes][software_mastered]"
+                  ng-model="user.profile.software_mastered"
+                  rows="5"
+                  class="form-control"
+                  id="user_software_mastered"
+                  placeholder=""
+                  ng-disabled="preventField['profile.software_mastered'] && user.profile.software_mastered && !userForm['user[profile_attributes][software_mastered]'].$dirty"></textarea>
       </div>
 
     </div>

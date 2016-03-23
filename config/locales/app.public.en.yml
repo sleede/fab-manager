@@ -1,0 +1,214 @@
+en:
+  app:
+    public:
+      common:
+        # header and "about" page
+        about_the_fablab: "About the {NAME}"  # messageFormat interpolation
+        return: "Return"
+
+        # dashboard sections
+        dashboard: "Dashboard"
+        my_profile: "My Profile"
+        my_projects: "My Projects"
+        my_trainings: "My Trainings"
+        my_courses_and_workshops: "My Courses and Workshops"
+        my_invoices: "My Invoices"
+
+        # login/logout
+        sign_out: "Sign Out"
+        sign_up: "Sign Up"
+        sign_in: "Sign In"
+
+        # left menu
+        notifications: "Notifications"
+        admin: "Admin"
+        reduce_panel: "Reduce panel"
+
+        # left menu (public)
+        home: "Home"
+        reserve_a_machine: "Reserve a Machine"
+        trainings_registrations: "Trainings registrations"
+        courses_and_workshops_registrations: "Courses and Workshops registrations"
+        projects_gallery: "Projects gallery"
+        subscriptions: "Subscriptions"
+
+        # left menu (admin)
+        trainings_monitoring: "Trainings monitoring"
+        manage_the_calendar: "Manage the Calendar"
+        manage_the_users: "Manage the Users"
+        manage_the_invoices: "Manage the invoices"
+        subscriptions_and_prices: "Subscriptions and Prices"
+        courses_and_workshops_monitoring: "Courses and Workshops monitoring"
+        manage_the_machines: "Manage the Machines"
+        manage_the_projects_elements: "Manage the Projects Elements"
+        statistics: "Statistics"
+        customization: "Customization"
+
+        # account creation modal
+        create_your_account: "Create your account"
+        man: "Man"
+        woman: "Woman"
+        gender_is_required: "Gender is required."
+        your_first_name: "Your first name"
+        first_name_is_required: "First name is required."
+        your_surname: "Your surname"
+        surname_is_required: "Surname is required."
+        your_pseudonym: "Your pseudonym"
+        pseudonym_is_required: "Pseudonym is required."
+        your_email_address: "Your e-mail address"
+        email_is_required: "E-mail address is required."
+        your_password: "Your password"
+        password_is_required: "Password is required."
+        password_is_too_short_(minimum_8_characters): "Password is too short (minimum 8 characters)"
+        type_your_password_again: "Type your password again"
+        password_confirmation_is_required: "Password confirmation is required."
+        password_does_not_match_with_confirmation: "Password does not match with confirmation."
+        your_user_s_profile: "Your user's profile"
+        user_s_profile_is_required: "User's profile is required."
+        birth_date: "Birth date"
+        birth_date_is_required: "Birth date is required."
+        phone_number: "Phone number"
+        phone_number_is_required: "Phone number is required."
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
+        i_ve_read_and_i_accept_: "I've read and I accept"
+        _the_fablab_policy: "the FabLab policy"
+
+        # password modification modal
+        change_your_password: "Change your password"
+        your_new_password: "Your new password"
+        your_password_was_successfully_changed: "Your password was successfully changed."
+
+        # connection modal
+        connection: "Connection"
+        password_forgotten: "Forgotten password?"
+        not_registered_to_the_fablab: "Not registered to the Fablab?"
+        create_an_account: "Create an account"
+        wrong_email_or_password: "Wrong e-mail or password."
+
+        # forgotten password modal
+        your_email_address_is_unknown: "Your e-mail address is unknown."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive in a moment, an e-mail with instructions to reset your password."
+
+      about:
+        # about page
+        read_the_fablab_policy: "Read the FabLab policy"
+        your_fablab_s_contacts: "Your FabLab's contacts"
+
+      home:
+        # home page
+        latest_documented_projects: "The latest documented projects"
+        follow_us: "Follow Us"
+        latest_tweets: "The latest tweets"
+        latest_registered_members: "Latest registered members"
+        create_an_account: "Create an account"
+        discover_members: "Discover members"
+
+        # next events summary on the home page
+        fablab_s_next_courses_and_workshops: "Fablab's next courses and workshops"
+        every_events: "Every events"
+        from_date_to_date: "From {{START}} to {{END}}"  # angular interpolation
+        on_the_date: "On the {{DATE}}"  # angular interpolation
+        from_time_to_time: "From {{START}} to {{END}}"  # angular interpolation
+        free_entry: "Free entry"
+        free_admission: "Free admission"
+        full_price: "Full price"
+        event_full: "Event full"
+
+      projects_list:
+        # projects gallery
+        the_fablab_projects: "The Fab Lab projects"
+        add_a_project: "Add a project"
+        filter_projects: "Filter projects:"
+        reset_all_filters: "Reset all filters"
+        search: "Search"
+        all_projects: "All projects"
+        my_projects: "My projects"
+        projects_to_whom_i_take_part_in: "Projects to whom I take part in"
+        all_machines: "All machines"
+        all_themes: "All themes"
+        all_materials: "All materials"
+        load_next_projects: "Load next projects..."
+
+      projects_show:
+        # details of a projet
+        project_description: "Project description"
+        by_name: "By {{NAME}}"  # angular interpolation
+        posted_on_: "Posted on"
+        CAD_file_to_download: "{COUNT, plural, =0{No CAD file} =1{CAD file to download} other{CAD files to download}"  # messageFormat interpolation
+        licence: "Licence"
+        report_an_abuse: "Report an abuse"
+        unauthorized_operation: "Unauthorized operation"
+        your_report_was_successful_thanks: "Your report was successful. Thank you."
+        an_error_occured_while_sending_your_report: "An error occurred while sending your report."
+        your_first_name: "Your first name"
+        your_first_name_is_required: "Your first name is required."
+        your_surname: "Your surname"
+        your_surname_is_required: "Your surname is required."
+        your_email_address: "Your email address"
+        your_email_address_is_required: "Your email address is required."
+        tell_us_why_this_looks_abusive: "Tell us why this looks abusive"
+        message_is_required: "Message is required."
+        report: "Report"
+
+      machines_list:
+        # list of machines
+        the_fablab_s_machines: "The FabLab's machines"
+        add_a_machine: "Add a machine"
+        book: "Book"
+        _or_the_: " or the "
+
+      machines_show:
+        # details of a machine
+        book_this_machine: "Book this machine"
+        files_to_download: "Files to download"
+        projects_using_the_machine: "Projects using the machine"
+        _or_the_: " or the "
+        unauthorized_operation: "Unauthoried operation"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
+
+      plans:
+        # summary of the subscriptions
+        subcriptions: "Subscriptions"
+        i_choose_that_plan: "I choose that plan"
+        i_subscribe_online: "I subscribe online"
+        i_already_subscribed: "I already subscribed"
+        more_informations: "More informations"
+        your_subscription_expires_on_the_DATE: "Your subscription expires on the {{DATE}}"  # angular interpolation
+        my_group: "My group"
+        his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"  # messageFormat interpolation
+        he_wants_to_change_group: "{ROLE, select, admin{He wants} other{I want}} to change group"  # messageFormat interpolation
+        change_my_group: "Change {ROLE, select, admin{{GENDER, select, male{his} female{her} other{its}}} other{my}} group"  # messageFormat interpolation
+        your_subscription_has_expired_on_the_DATE: "Your subscription has expired on the {{DATE}}"  # angular interpolation
+        you_ve_just_payed_the_: "You've just payed the"
+        thank_you_your_subscription_is_successful: "Thank you. Your subscription is successful!"
+        your_group_was_successfully_changed: "Your group was successfully changed."
+        the_user_s_group_was_successfully_changed: "The user's group was successfully changed."
+        an_error_prevented_your_group_from_being_changed: "An error prevented your group from being changed."
+        an_error_prevented_to_change_the_user_s_group: "An error prevented to change the user's group."
+        an_error_occured_during_the_payment_process_please_try_again_later: "An error occurred during the payment process. Please try again later."
+        subscription_confirmation: "Subscription confirmation"
+        here_is_the_NAME_subscription_summary: "Here is the {{NAME}}'s subscription summary:"  # angular interpolation
+
+      events_list:
+        # Fablab's events list
+        the_fablab_s_courses_and_workshops: "The Fablab's courses and workshops"
+
+      events_show:
+        # details and booking of an event
+        event_description: "Event description"
+        downloadable_documents: "Downloadable documents"
+        informations_and_booking: "Informations and booking"
+        beginning: "Beginning:"
+        ending: "Ending:"
+        opening_hours: "Opening hours:"
+        reduced_rate*: "Reduced rate*:"
+        tickets_still_availables: "Tickets still available:"
+        sold_out: "Sold out."
+        free_entry: "Free entry"
+        ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
+        make_a_gift_of_this_reservation: "Make a gift of this reservation"
+        you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
+        you_booked_(DATE): "You booked ({{DATE}}):"  # angular interpolation
+        book: "Book"
+        change_the_reservation: "Change the reservation"
+        you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"

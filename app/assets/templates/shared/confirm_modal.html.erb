@@ -1,11 +1,11 @@
 <div class="modal-header">
-  <%= image_tag("fablab-w.png", class: 'modal-logo') %>
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
   <h1>{{object.title}}</h1>
 </div>
 <div class="modal-body">
   <p>{{object.msg}}</p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()">Valider</button>
-  <button class="btn btn-default" ng-click="cancel()">Annuler</button>
+  <button class="btn btn-info" ng-click="ok()" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

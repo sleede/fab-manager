@@ -4,7 +4,7 @@
 # Controller used in notifications page
 # inherits $scope.$parent.notifications (unread notifications) from ApplicationController
 ##
-Application.Controllers.controller "notificationsController", ["$scope", 'Notification', ($scope, Notification) ->
+Application.Controllers.controller "NotificationsController", ["$scope", 'Notification', ($scope, Notification) ->
 
 
 
@@ -32,7 +32,7 @@ Application.Controllers.controller "notificationsController", ["$scope", 'Notifi
   # Mark the provided notification as read, updating its status on the server and moving it
   # to the already read notifications list.
   # @param notification {{id:number}} the notification to mark as read
-  # @param e {Object} jQuery event object
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   ##
   $scope.markAsRead = (notification, e) ->
     e.preventDefault()

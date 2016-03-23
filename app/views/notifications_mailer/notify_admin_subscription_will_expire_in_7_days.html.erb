@@ -1,0 +1,6 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.subscription_will_expire_html',
+         NAME:@attached_object.user.profile.full_name,
+         PLAN: @attached_object.plan.human_readable_name) %>
+</p>

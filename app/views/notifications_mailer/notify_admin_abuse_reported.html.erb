@@ -1,0 +1,9 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.intro') %></p>
+<ul>
+    <li><%= t('.body.signaled_content') %> <%= link_to "#{@attached_object.signaled_type} #{@attached_object.signaled_id} (#{@attached_object.signaled.name if @attached_object.signaled.name})", "#{root_url}#!/projects/#{@attached_object.signaled_id}" %></li>
+    <li><%= t('.body.signaled_by') %> <%= @attached_object.first_name %> <%= @attached_object.last_name %> (<%= @attached_object.email %>)</li>
+    <li><%= t('.body.signaled_on') %> <%= @attached_object.created_at.strftime('%e %B %Y, %H:%M') %></li>
+    <li><%= t('.body.message') %><br><%= @attached_object.message %></li>
+</ul>

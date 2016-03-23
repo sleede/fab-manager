@@ -1,81 +1,94 @@
-<div>
+
+<div class="alert alert-warning m-sm text-center" ng-if="(homeBlogpost != null) && (homeBlogpost != '') && (homeBlogpost != undefined)">
+	<span ng-bind-html="homeBlogpost"></span>
+</div>
 
 <div class="row wrapper">
 	<div class="col-lg-8">
-		<h4 class="text-sm m-t-sm">Les derniers projets documentés</h4>
+		<h4 class="text-sm m-t-sm" translate>{{ 'latest_documented_projects' }}</h4>
 
-		<carousel interval="5000" disable-animation="true">
-			<slide class="h480 cover r" ng-repeat="p in last_projects" active="p.active" style="background-image:url({{p.project_image}});">
+		<uib-carousel interval="5000" disable-animation="true">
+			<uib-slide class="h480 cover r" ng-repeat="p in lastProjects" active="p.active" style="background-image:url({{p.project_image}});">
+			  <!-- <img ng-src="{{p.project_image}}" style="margin:auto;"> -->
 			  <div class="carousel-caption">
 			    <h1 class="title"><a ui-sref="app.public.projects_show({id:p.slug})">{{p.name}}</a></h1>
+			    <!-- <p class="description hidden-xs">{{p.description | humanize : 120}}</p> -->
 			  </div>
-			</slide>
-		</carousel>
+			</uib-slide>
+		</uib-carousel>
     </div>
 
 
 	<div class="col-lg-4 m-t-lg">
-		
-		<section class="widget panel b-a m-t-sm" ng-if="last_tweets">
+
+		<section class="widget panel b-a m-t-sm" ng-if="lastTweets.length > 0">
 		  <div class="panel-heading b-b small">
 		    <div class="pull-right text-xs align">
-		        <a href="https://twitter.com/<%= ENV['TWITTER_NAME'] %>" target="_blank">Suivez-nous
+		        <a href="https://twitter.com/{{ twitterName }}" ng-show="twitterName" target="_blank">{{ 'follow_us' | translate }}
 					<span class="fa-stack fa-lg">
 					  <i class="fa fa-circle fa-stack-2x text-yellow"></i>
 					  <i class="fa fa-twitter fa-stack-1x fa-inverse text-white"></i>
 					</span>
 				</a>
 		   </div>
-		    <h2>Les derniers tweets</h2>
+		    <h2 translate>{{ 'latest_tweets' }}</h2>
 		  </div>
-		
-		    <ul class="widget-content list-group list-group-lg no-bg auto">       
-		      <li ng-repeat="tweet in last_tweets" class="text-sm list-group-item no-b clearfix" ng-bind-html="tweet.text">
-		      </li>             
+
+		    <ul class="widget-content list-group list-group-lg no-bg auto">
+		      <li ng-repeat="tweet in lastTweets" class="text-sm list-group-item no-b clearfix" ng-bind-html="tweet.text">
+		      </li>
 		    </ul>
 
 		</section>
 
 		<section class="widget panel b-a" >
 		  <div class="panel-heading small b-b">
-		    <h2>Derniers membres inscrits</h2>
+		    <!-- <span class="badge inverse pull-right">110</span> -->
+		    <h2 translate>{{ 'latest_registered_members' }}</h2>
 		  </div>
-		
+
 			<div class="row m-n">
-        <div class="col-md-6 b-b b-r block-link"  ng-repeat="member in last_members" ui-sref="app.logged.members_show({id:member.slug})">
+              <div class="col-md-6 b-b b-r block-link"  ng-repeat="member in lastMembers" ui-sref="app.logged.members_show({id:member.slug})">
 
-  				<div class="padder-v">
-  					<span class="avatar avatar-block text-center">
-              <fab-user-avatar ng-model="member.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
-  						<a ><span class="user-name m-l-sm text-black m-t-xs">{{member.name}}</span></a>
-  					</span>
-  				</div>
 
-         </div>  
-          
-      </div>
+				<div class="padder-v">
+					<span class="avatar avatar-block text-center">
+            <fab-user-avatar ng-model="member.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
+						<!-- <i class="on b-white bottom"></i> -->
+						<a ><span class="user-name m-l-sm text-black m-t-xs">{{member.name}}</span></a>
+					</span>
+				</div>
+
+              </div>
+                <!-- TODO EVEN <div class="col-md-6 b-b"> -->
+
+            </div>
 			<div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()">
-				<button href="#" ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm">Créer un compte</button>
+				<button href="#" ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'create_an_account' }}</button>
 			</div>
 
 			<div class="m-t-sm m-b-sm text-center" ng-if="isAuthenticated()">
-				<button href="#" ui-sref="app.logged.members" class="btn btn-warning-full width-70 font-sbold rounded text-sm">Découvrir les membres</button>
+				<button href="#" ui-sref="app.logged.members" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'discover_members' }}</button>
 			</div>
 
+
+
 		</section>
+
+
 
 	</div>
 
   <section class="col-lg-12 wrapper">
-      <h4 class="text-sm m-t-sm">Les prochains ateliers et stages du fablab <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> Tous les événements</a></h4>
+      <h4 class="text-sm m-t-sm">{{ 'fablab_s_next_courses_and_workshops' | translate }} <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> {{ 'every_events' | translate }}</a></h4>
 
-      <div class="row" ng-repeat="event in (upcoming_events.length/3 | array)">
+      <div class="row" ng-repeat="event in (upcomingEvents.length/3 | array)">
 
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" ng-repeat="event in upcoming_events.slice(3*$index, 3*$index + 3)">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" ng-repeat="event in upcomingEvents.slice(3*$index, 3*$index + 3)">
 
 
           <div class="widget panel panel-default" ui-sref="app.public.events_show({id: event.id})">
-            <div class="panel-heading picture" style="background-image: url({{event.event_image}});" >
+            <div class="panel-heading picture" style="background-image: url({{event.event_image_medium}});" >
               <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!event.event_image" class="img-responsive">
             </div>
             <div class="panel-body" style="heigth:170px;">
@@ -93,25 +106,31 @@
               <div class="row">
                   <div class="col-sm-6 row m-b-sm">
                     <i class="fa fa-calendar red col-xs-3 padder-icon"></i>
-                    <h6 class="m-n col-xs-9 ">Du {{event.start_date | amDateFormat:'DD/MM'}}<span class="text-sm font-thin"> au </span>{{event.end_date | amDateFormat:'DD/MM'}}</h6>
+                    <h6 class="m-n col-xs-9 " ng-hide="isOneDayEvent(event)">{{ 'from_date_to_date' | translate:{START:(event.start_date | amDateFormat:'L'), END:(event.end_date | amDateFormat:'L')} }}</h6>
+                    <h6 class="m-n col-xs-9 " ng-show="isOneDayEvent(event)">{{ 'on_the_date' | translate:{DATE:(event.start_date | amDateFormat:'L')} }}</h6>
                   </div>
                   <div class="col-sm-6 row m-b-sm">
                     <i class="fa fa-clock-o red col-xs-3 padder-icon"></i>
-                    <h6 class="m-n col-xs-9"><span ng-if="event.all_day == 'true'">Toute la journée</span><span ng-if="event.all_day == 'false'">De {{event.start_date | date:'HH:mm'}}<span class="text-sm font-thin"> à </span>{{event.end_date | date:'HH:mm'}}</span></h6>
+                    <h6 class="m-n col-xs-9">
+                        <span ng-if="event.all_day == 'true'" translate>{{ 'all_day' }}</span>
+                        <span ng-if="event.all_day == 'false'">{{ 'from_time_to_time' | translate:{START:(event.start_date | amDateFormat:'LT'), END:(event.end_date | amDateFormat:'LT')} }}</span>
+                    </h6>
                   </div>
                   <div class="col-sm-12 row m-b">
                     <i class="fa fa-bookmark red col-xs-1 padder-icon"></i>
                     <h6 class="m-n col-xs-10">
-					            <span ng-if="!event.nb_total_places">Entrée Libre</span>
-                      <span ng-if="event.nb_total_places && event.amount == 0">Entrée Gratuite</span><span ng-if="event.amount > 0">{{event.amount}} € Plein tarif</span><span ng-if="event.reduced_amount > 0"><br/>{{event.reduced_amount}} € Tarif réduit</span>
-                      <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold bg-red">Événement complet.</span></div>
+					            <span ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
+                      <span ng-if="event.nb_total_places && event.amount == 0" translate>{{ 'free_admission' }}</span>
+                      <span ng-if="event.amount > 0">{{event.amount | currency}} {{ 'full_price' | translate }}</span>
+                      <span ng-if="event.reduced_amount > 0"><br/>{{event.reduced_amount | currency}} {{ 'reduced_rate' | translate }}</span>
+                      <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold bg-red" translate>{{ 'event_full' }}</span></div>
                     </h6>
 
                   </div>
 
               </div>
               <div class="text-center clearfix ">
-                <div class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm m-b-sm upper text-sm width-70" ui-sref="app.public.events_show({id: event.id})" ><span>Consulter</span></div>
+                <div class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm m-b-sm upper text-sm width-70" ui-sref="app.public.events_show({id: event.id})" ><span translate>{{ 'consult' }}</span></div>
               </div>
             </div>
           </div>
@@ -120,7 +139,3 @@
   </section>
 
 </div>
-
-
-</div>
-

@@ -1,0 +1,9 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.member_cancelled', NAME: @attached_object.reservation.user.profile.full_name) %></p>
+<p><%= t('.body.item_details',
+         START: I18n.l(@attached_object.start_at, format: :long),
+         END:(I18n.l @attached_object.end_at, format: :hour_minute),
+         RESERVABLE: @attached_object.reservation.reservable.name) %>
+</p>
+<p><%= t('.body.generate_refund') %></p>

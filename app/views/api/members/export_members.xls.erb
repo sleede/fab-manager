@@ -1,13 +1,16 @@
 <table border="1">
   <tr>
-    <th>ID</th>
-    <th>Nom</th>
-    <th>Prénom</th>
-    <th>Email</th>
-    <th>Genre</th>
-    <th>Age</th>
-    <th>Tel.</th>
-    <th>Type utilisateur</th>
+    <th><%=t('export_members.id')%></th>
+    <th><%=t('export_members.surname')%></th>
+    <th><%=t('export_members.first_name')%></th>
+    <th><%=t('export_members.email')%></th>
+    <th><%=t('export_members.gender')%></th>
+    <th><%=t('export_members.age')%></th>
+    <th><%=t('export_members.phone')%></th>
+    <th><%=t('export_members.group')%></th>
+    <th><%=t('export_members.subscription')%></th>
+    <th><%=t('export_members.subscription_end_date')%></th>
+    <th><%=t('export_members.validated_trainings')%></th>
   </tr>
   <% @datas.each do |data| %>
   <tr>
@@ -15,10 +18,13 @@
     <td><%= data.profile.last_name %></td>
     <td><%= data.profile.first_name %></td>
     <td><%= data.email %></td>
-    <td><%= data.profile.gender ? 'Homme' : 'Femme' %></td>
+    <td><%= data.profile.gender ? t('export_members.man') : t('export_members.woman') %></td>
     <td><%= data.profile.age %></td>
     <td><%= data.profile.phone %></td>
     <td><%= data.group.name %></td>
+    <td><%= (data.subscription and data.subscription.expired_at > Time.now) ? data.subscription.plan.name : t('export_members.without_subscriptions') %></td>
+    <td><%= (data.subscription and data.subscription.expired_at > Time.now) ? data.subscription.expired_at : '' %></td>
+    <td><%= raw data.trainings.map(&:name).join('&#10;') %></td>
   </tr>
   <% end %>
 </table>

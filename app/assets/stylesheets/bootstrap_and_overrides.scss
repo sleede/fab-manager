@@ -78,10 +78,10 @@ $link-hover-decoration: underline;
 
 // Semibold = 600, Bold = 700, ExtraB = 800
 
-$font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif !default;
-$font-proxima-condensed:  "Open Sans Condensed", Helvetica, Arial, sans-serif !default;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
-$font-felt:               "Loved by the King", sans-serif;
+$font-family-sans-serif:  'proxima-nova', 'Open Sans', Helvetica, Arial, sans-serif !default;
+$font-proxima-condensed:  'proxima-nova-condensed', 'Open Sans Condensed', Helvetica, Arial, sans-serif !default;
+$font-family-serif:       Georgia, 'Times New Roman', Times, serif !default;
+$font-felt:                'felt-tip-roman', 'Loved by the King', cursive, sans-serif;
 
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 // $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
@@ -952,16 +952,16 @@ $hr-border:                   $gray-lighter !default;
 @import "bootstrap/input-groups";
 @import "bootstrap/navs";
 @import "bootstrap/navbar";
-// @import "bootstrap/breadcrumbs";
+@import "bootstrap/breadcrumbs";
 @import "bootstrap/pagination";
-// @import "bootstrap/pager";
+@import "bootstrap/pager";
 @import "bootstrap/labels";
 @import "bootstrap/badges";
-//@import "bootstrap/jumbotron";
+@import "bootstrap/jumbotron";
 @import "bootstrap/thumbnails";
 @import "bootstrap/alerts";
 @import "bootstrap/progress-bars";
-// @import "bootstrap/media";
+@import "bootstrap/media";
 @import "bootstrap/list-group";
 @import "bootstrap/panels";
 @import "bootstrap/responsive-embed";

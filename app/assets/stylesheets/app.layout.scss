@@ -76,11 +76,17 @@
 			cursor: pointer;
 			color: black;
 			&:hover {
-				background-color: $yellow;
+				//background-color: $yellow;
 			}
 			i:before { content: "\f177"; }
 		}
 	}
+  .heading-icon {
+    width: 100%;
+    padding: 35px 40%;
+    display: inline-block;
+    color: black;
+  }
 	.heading-title {
 		overflow: hidden;
 		height: 94px;
@@ -341,4 +347,131 @@ body.container{
       }
     }
   }
+}
+
+.customMenuButton {
+  min-width: 15em;
+  max-width: 15em;
+  overflow-x: hidden;
+}
+
+.customMenuInput {
+  width:100% !important;
+}
+
+
+.reservation-canceled {
+  color: #606060;
+  border-radius: 0.2em;
+  background-color: #e4e4e4;
+  padding: 0.7em 0.7em;
+  font-size: 90%;
+  display:inline-block;
+  vertical-align:middle;
+
+  .reservation-time {
+    color: #606060;
+  }
+
+  &:before {
+    content: "Annulée";
+    display: inline-block;
+    background-color: #c44242;
+    border-radius: 0.25em;
+    padding: 0.1em 0.5em;
+    font-weight: bold;
+    color: #fff;
+    float: left;
+    margin-right: 1em;
+  }
+
+}
+
+.custom-logo-container {
+  max-width: 240px;
+  height: 100%;
+
+  .custom-logo {
+    height: 100px;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px dashed #c4c4c4;
+    border-radius: 0.7em;
+    padding: 1.6em;
+    margin-left: 1em;
+
+    img {
+      display: block;
+      width: auto;
+      max-height: 44px;
+      max-width: 100%;
+      margin:auto;
+    }
+
+    &:hover .tools-box {
+      opacity: 1;
+    }
+
+    .tools-box {
+      opacity: 0;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
+
+  .bg-dark {
+    background-color: #000;
+    opacity: 0.9;
+  }
+}
+
+.custom-favicon-container {
+  max-width: 70px;
+  height: 100%;
+
+  .custom-favicon {
+    height: 70px;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px dashed #c4c4c4;
+    border-radius: 0.7em;
+    padding: 1.6em;
+    margin-left: 1em;
+
+    img {
+      display: block;
+      width: auto;
+      max-height: 16px;
+      max-width: 16px;
+      margin:auto;
+    }
+
+    &:hover .tools-box {
+      opacity: 1;
+    }
+
+    .tools-box {
+      opacity: 0;
+      position: absolute;
+      bottom: -7px;
+      left: 51px;
+      right: 0;
+      text-align: center;
+    }
+  }
+}
+
+.flash-message {
+  position: absolute;
+  top: 1%;
+  z-index: 1001;
+  width: 33%;
+  left: 33%;
 }

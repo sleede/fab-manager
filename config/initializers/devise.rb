@@ -4,7 +4,10 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = ENV['DEVISE_KEY']
+  # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
+  # by default. You can change it below and use your own secret key.
+  # config.secret_key = 'f0ad7aadec8086b90c0427e734602262e5d211147f3d93b5b94b5263ffd245e9fd9fcd672dcadea1d9ee2b1bffbf2712cdb013883d66943ef5bed93a263fe11a'
+  
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -116,7 +119,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
@@ -227,6 +230,12 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+
+  require_relative '../../lib/omni_auth/omni_auth'
+  active_provider = AuthProvider.active
+  if active_provider.providable_type == OAuth2Provider.name
+    config.omniauth OmniAuth::Strategies::SsoOauth2Provider.name.to_sym, active_provider.providable.client_id, active_provider.providable.client_secret
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

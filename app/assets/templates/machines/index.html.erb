@@ -7,13 +7,13 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1>Les machines du FabLab</h1>
+        <h1 translate>{{ 'the_fablab_s_machines' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
       <section class="heading-actions wrapper">
-       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.machines_new" role="button">Ajouter une machine</a>
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.machines_new" role="button" translate>{{ 'add_a_machine' }}</a>
       </section>
     </div>
   </div>
@@ -26,7 +26,7 @@
 
       <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="machine in machines.slice(3*$index, 3*$index + 3)">
 
-        
+
           <div class="widget panel panel-default" ng-click="showMachine(machine)">
             <div class="panel-heading picture" ng-if="!machine.machine_image">
               <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
@@ -40,9 +40,14 @@
             <div class="panel-footer no-padder">
 
               <div class="text-center clearfix">
-                <div class="col-sm-12 no-padder">
+                <div class="col-sm-6 b-r no-padder">
+                   <div class="btn btn-default btn-block no-b padder-v red" ng-click="reserveMachine(machine, $event)">
+                     <i class="fa fa-bookmark"></i> {{ 'book' | translate }}
+                   </div>
+                </div>
+                <div class="col-sm-6 no-padder">
                     <div class="btn btn-default btn-block padder-v no-b red" ng-click="showMachine(machine)">
-                      <i class="fa fa-eye"></i> Consulter
+                      <i class="fa fa-eye"></i> {{ 'consult' | translate }}
                     </div>
                 </div>
               </div>

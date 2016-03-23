@@ -1,0 +1,37 @@
+<button type="button" class="btn btn-warning m-b m-t-lg" ng-click="addTag()" translate>{{ 'add_a_tag'}}</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th style="width: 80%;" translate>{{ 'tag_name' }}</th>
+        <th style="width: 20%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="tag in tags">
+        <td>
+            <span editable-text="tag.name" e-cols="200" e-name="name" e-form="rowform" e-required>
+                {{tag.name}}
+            </span>
+        </td>
+        <td>
+            <!-- form -->
+            <form editable-form name="rowform" onbeforesave="saveTag($data, tag.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == tag">
+                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                    <i class="fa fa-check"></i>
+                </button>
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelTag(rowform, $index)" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                </button>
+            </form>
+            <div class="buttons" ng-show="!rowform.$visible">
+                <button class="btn btn-default" ng-click="rowform.$show()">
+                    <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+                </button>
+                <button class="btn btn-danger" ng-click="removeTag($index)">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

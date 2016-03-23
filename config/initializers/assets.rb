@@ -12,3 +12,5 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( fontawesome-webfont.eot fontawesome-webfont.woff fontawesome-webfont.svg fontawesome-webfont.ttf )
 Rails.application.config.assets.precompile += %w( app.printer.css )
+
+Rails.application.config.assets.precompile += %w( angular-i18n/angular-locale_*.js moment/locale/*.js summernote/lang/*.js messageformat/locale/*.js fullcalendar/dist/lang/*.js )

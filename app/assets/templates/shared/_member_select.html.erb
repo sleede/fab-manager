@@ -1,11 +1,16 @@
 <div class="widget panel b-a m">
   <div class="panel-heading b-b small">
-    <h3 class="panel-title">Sélectionnez un membre</h3>
+    <h3 class="panel-title" translate>{{ 'select_a_member' }}</h3>
   </div>
   <div class="widget-content no-bg auto wrapper">
-    <select ng-model="ctrl.member_id" class="form-control form-control-ui-select" ui-select2 ng-change="updateMember()">
-      <option value="{{$index}}" ng-repeat="m in members">{{m.name}}</option>
-    </select>
+    <ui-select ng-model="ctrl.member" on-select="updateMember()">
+        <ui-select-match>
+            <span ng-bind="$select.selected.name"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="m in (members | filter: {'name':$select.search})">
+            <span ng-bind-html="m.name | highlight: $select.search"></span>
+        </ui-select-choices>
+    </ui-select>
     {{member}}
   </div>
 </div>

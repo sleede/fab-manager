@@ -7,4 +7,8 @@ Application.Services.factory 'Project', ["$resource", ($resource)->
       method: 'GET'
       url: '/api/projects/last_published'
       isArray: true
+    search:
+      method: 'GET'
+      url: '/api/projects/search'
+      isArray: true
 ]

@@ -19,6 +19,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.is_admin?
+    user.is_admin? or record.author == user
   end
 end

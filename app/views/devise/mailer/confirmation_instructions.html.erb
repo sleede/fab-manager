@@ -1,7 +1,5 @@
-<p>Bonjour <%= @user.profile.full_name %> !</p>
+<%= render 'notifications_mailer/shared/hello', recipient: @user %>
 
-<p>Vous pouvez finaliser votre inscription en confirmant votre adresse mail en cliquant sur le lien suivant :</p>
+<p><%= t('.instruction') %></p>
 
-<p><%= link_to 'Confirmer mon e-mail !', confirmation_url(@resource, confirmation_token: @token) %></p>
-
-<p>L'équipe Fab Lab.</p>
+<p><%= link_to t('.action'), confirmation_url(@resource, confirmation_token: @token) %></p>

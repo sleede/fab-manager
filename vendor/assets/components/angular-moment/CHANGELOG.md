@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.3 - 2015-09-05
+- Allow `amDateFormat` to work with custom formatted input date strings ([#162](https://github.com/urish/angular-moment/pull/162), contributed by [jblashka](https://github.com/jblashka))
+- `amAdd`, `amSubtract` - add/subtract a value from a given date ([#171](https://github.com/urish/angular-moment/pull/171), contributed by [nicholasruggeri](https://github.com/nicholasruggeri))
+- Bugfix: Timezones with a 'Z' somewhere in them all become UTC ([#168](https://github.com/urish/angular-moment/issues/168)).
+
+## 0.10.2 - 2015-07-28
+- Look for `moment` on the `global` object ([#133](https://github.com/urish/angular-moment/pull/133), contributed by [kitbrennan90](https://github.com/kitbrennan90))
+- Add support to use UTC offset timezones in addition to named timezones ([#151](https://github.com/urish/angular-moment/pull/151), contributed by [DiegoZoracKy](https://github.com/DiegoZoracKy))
+- Add timezone parameter for amCalendar filter ([#152](https://github.com/urish/angular-moment/pull/152), contributed by [DiegoZoracKy](https://github.com/DiegoZoracKy))
+- Add `from` parameter to the `amTimeAgo` filter ([#146](https://github.com/urish/angular-moment/pull/146), contributed by [pipo02mix](https://github.com/pipo02mix))
+
+## 0.10.1 - 2015-05-01
+- Fix broken SystemJS/JSPM support (see [#104](https://github.com/urish/angular-moment/issues/104))
+
 ## 0.10.0 - 2015-04-10
 - Breaking change: removed one-time binding for `am-time-ago` in favor of AngularJS 1.3's one time binding ([#122](https://github.com/urish/angular-moment/issues/122))
 - Remove support for AngularJS 1.0.x and 1.1.x.

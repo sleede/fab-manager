@@ -1,0 +1,22 @@
+<% provider = AuthProvider.from_strategy_name(@attached_object.provider) %>
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.new_account_imported', ID: @attached_object.id, PROVIDER: provider.name) %><br/>
+   <%= t('.body.provider_uid', UID:@attached_object.uid) %></p>
+<% if provider.sso_fields.size > 1 %>
+  <p><%= t('.body.known_informations') %></p>
+    <ul>
+      <% for field in provider.sso_fields %>
+          <% value = @attached_object.get_data_from_sso_mapping(field) %>
+          <%if field == 'user.email' and value.end_with? '-duplicate' %>
+            <li><%= field %> : <%= value.match(/^<([^>]+)>.{20}-duplicate$/)[1] %>
+                <em>- <%= t('.body.address_already_used') %></em>
+            </li>
+          <% else %>
+            <li><%= field %> : <%= value %></li>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
+
+<p><%= t('.body.no_more_info_available') %></p>

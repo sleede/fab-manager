@@ -1,10 +1,12 @@
   <div class="" id="loginModal">
     <div class="modal-header">
-      <%= image_tag("fablab-w.png", class: 'modal-logo') %>
-      <h1>Connexion</h1>
+      <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+      <h1 translate>
+        {{ 'connection' }}
+      </h1>
     </div>
     <div class="modal-body">
-      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
       <div class="panel panel-default bg-light">
         <div class="panel-body">
@@ -12,10 +14,17 @@
             <div class="form-group" ng-class="{'has-error': emailError}">
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                  <input type="email" name="email" class="form-control"
-                         ng-model="user.email" required="required"  ng-blur="emailError = !!loginForm.email.$error.email"
-                         ng-focus="emailError = false" placeholder="Votre adresse email" />
+                  <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                  <input type="email"
+                         name="email"
+                         class="form-control"
+                         ng-model="user.email"
+                         required="required"
+                         ng-blur="emailError = !!loginForm.email.$error.email"
+                         ng-focus="emailError = false"
+                         placeholder="{{ 'your_email_address' | translate }}" />
                 </div>
               </div>
             </div>
@@ -24,9 +33,15 @@
               <div class="col-sm-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="password" name="password" class="form-control" ng-model="user.password" required="required" placeholder="Votre mot de passe" ng-minlength="8"/>
+                  <input type="password"
+                         name="password"
+                         class="form-control"
+                         ng-model="user.password"
+                         required="required"
+                         placeholder="{{ 'your_password' | translate }}"
+                         ng-minlength="8"/>
                 </div>
-                <a href="#" ng-click="openResetPassword($event)" class="text-xs">Mot de passe oublié ?</a>
+                <a href="#" ng-click="openResetPassword($event)" class="text-xs">{{ 'password_forgotten' | translate }}</a>
               </div>
             </div>
 
@@ -34,12 +49,13 @@
 
         </div>
         <div class="panel-footer no-padder">
-          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid">Valider</button>
+          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate>{{ 'confirm' }}</button>
         </div>
       </div>
       <p class="text-center font-sbold">
-        Vous n'êtes pas inscrit au FAB LAB ? <br>
-        <a href="#" ng-click="openSignup($event)" class="text-u-l">Créer un compte</a></br>
+        <span translate>{{ 'not_registered_to_the_fablab' }}</span>
+        <br/>
+        <a href="#" ng-click="openSignup($event)" class="text-u-l" translate>{{ 'create_an_account' }}</a></br>
       </p>
     </div>
 

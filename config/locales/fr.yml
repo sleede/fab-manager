@@ -1,242 +1,227 @@
 fr:
-  date:
-    formats:
-      default: "%d/%m/%Y"
-      short_default: "%d/%m/%y"
-      short: "%e %b"
-      long: "%e %B %Y"
-      medium: "%e %b %Y"
-      day_name: "%A"
-      simple: "%A %e %B"
 
-    day_names:
-      - dimanche
-      - lundi
-      - mardi
-      - mercredi
-      - jeudi
-      - vendredi
-      - samedi
-    abbr_day_names:
-      - dim
-      - lun
-      - mar
-      - mer
-      - jeu
-      - ven
-      - sam
-    month_names:
-      - ~
-      - janvier
-      - février
-      - mars
-      - avril
-      - mai
-      - juin
-      - juillet
-      - août
-      - septembre
-      - octobre
-      - novembre
-      - décembre
-    abbr_month_names:
-      - ~
-      - jan
-      - fév
-      - mar
-      - avr
-      - mai
-      - juin
-      - juil
-      - août
-      - sept
-      - oct
-      - nov
-      - déc
-    order:
-      - :day
-      - :month
-      - :year
+  duration:
+    # durée d'une formule d'abonnement
+    year:
+      one: 'un an'
+      other: '%{count} ans'
+    month:
+      one: 'un mois'
+      other: '%{count} mois'
+    week:
+      one: 'une semaine'
+      other: '%{count} semaines'
 
   time:
     formats:
-      default: "%d %B %Y %H:%M"
-      short: "%d %b %H:%M"
-      long: "%A %d %B %Y %H:%M"
+      # Liste des directives disponibles sur http://apidock.com/ruby/DateTime/strftime
       hour_minute: "%H:%M"
-      hour_minute_long: "%Hh%M"
-    am: 'am'
-    pm: 'pm'
-
-  datetime:
-    distance_in_words:
-      half_a_minute: "une demi-minute"
-      less_than_x_seconds:
-        zero:  "moins d'une seconde"
-        one:   "moins d'une seconde"
-        other: "moins de %{count} secondes"
-      x_seconds:
-        one:   "1 seconde"
-        other: "%{count} secondes"
-      less_than_x_minutes:
-        zero:  "moins d'une minute"
-        one:   "moins d'une minute"
-        other: "moins de %{count} minutes"
-      x_minutes:
-        one:   "il y a 1 minute"
-        other: "il y a %{count} minutes"
-      about_x_hours:
-        one:   "environ une heure"
-        other: "environ %{count} heures"
-      x_days:
-        one:   "1 jour"
-        other: "%{count} jours"
-      about_x_months:
-        one:   "environ un mois"
-        other: "environ %{count} mois"
-      x_months:
-        one:   "1 mois"
-        other: "%{count} mois"
-      about_x_years:
-        one:   "environ un an"
-        other: "environ %{count} ans"
-      over_x_years:
-        one:   "plus d'un an"
-        other: "plus de %{count} ans"
-      almost_x_years:
-        one:   "presqu'un an"
-        other: "presque %{count} ans"
-    prompts:
-      year:   "Année"
-      month:  "Mois"
-      day:    "Jour"
-      hour:   "Heure"
-      minute: "Minute"
-      second: "Seconde"
-
-  number:
-    format:
-      separator: ","
-      delimiter: " "
-      precision: 3
-      significant: false
-      strip_insignificant_zeros: false
-    currency:
-      format:
-        format: "%n %u"
-        unit: "€"
-        separator: ","
-        delimiter: " "
-        precision: 2
-        significant: false
-        strip_insignificant_zeros: false
-    percentage:
-      format:
-        delimiter: ""
-    precision:
-      format:
-        delimiter: ""
-    human:
-      format:
-        delimiter: ""
-        precision: 2
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: "%n %u"
-        units:
-          byte:
-            one:   "octet"
-            other: "octets"
-          kb: "ko"
-          mb: "Mo"
-          gb: "Go"
-          tb: "To"
-      decimal_units:
-        format: "%n %u"
-        units:
-          unit: ""
-          thousand: "millier"
-          million: "million"
-          billion: "milliard"
-          trillion: "billion"
-          quadrillion: "million de milliards"
-
-  distance:
-    centi:
-      one: "centimètre"
-      other: "centimètres"
-    unit:
-      one: "mètre"
-      other: "mètres"
-    thousand:
-      one: "km"
-      other: "kms"
-    billion: "gazillion-distance"
-
-  support:
-    array:
-      words_connector: ", "
-      two_words_connector: " et "
-      last_word_connector: " et "
-
 
   errors: &errors
-    format: "%{attribute} : %{message}"
     messages: &errors_messages
-      inclusion: "n'est pas inclus(e) dans la liste"
-      exclusion: "n'est pas disponible"
-      invalid: "n'est pas valide"
-      confirmation: "ne concorde pas avec la confirmation"
-      accepted: "doit être accepté(e)"
-      empty: "champ obligatoire"
-      blank: "champ obligatoire"
-      too_long:
-        one: "est trop long (pas plus d'un caractère)"
-        other: "est trop long (pas plus de %{count} caractères)"
-      too_short:
-        one: "est trop court (au moins un caractère)"
-        other: "est trop court (au moins %{count} caractères)"
-      wrong_length:
-        one: "ne fait pas la bonne longueur (doit comporter un seul caractère)"
-        other: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
-      not_a_number: "n'est pas un nombre"
-      not_an_integer: "doit être un nombre entier"
-      greater_than: "doit être supérieur à %{count}"
-      greater_than_or_equal_to: "doit être supérieur ou égal à %{count}"
-      equal_to: "doit être égal à %{count}"
-      less_than: "doit être inférieur à %{count}"
-      less_than_or_equal_to: "doit être inférieur ou égal à %{count}"
-      odd: "doit être impair"
-      even: "doit être pair"
-      taken: "n'est pas disponible"
-      record_invalid: "La validation a échoué : %{errors}"
-      # ***************** CarrierWave ********************* #
-      carrierwave_processing_error: failed to be processed
-      carrierwave_integrity_error: is not of an allowed file type
-      carrierwave_download_error: could not be downloaded
-      extension_white_list_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
-      extension_black_list_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
-      rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image? Original Error: %{e}"
-      mime_types_processing_error: "Failed to process file with MIME::Types, maybe not valid content-type? Original Error: %{e}"
-      mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"
+      # CarrierWave
+      carrierwave_processing_error: "n'a pas pu être traité"
+      carrierwave_integrity_error: "n'est pas d'un type de fichier autorisé"
+      carrierwave_download_error: "ne peut pas être téléchargé"
+      extension_white_list_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{extension}, les types autorisés sont : %{allowed_types}"
+      extension_black_list_error: "Vous n'êtes pas autorisé à envoyer des fichiers %{extension}, les types interdits sont : %{prohibited_types}"
+      rmagick_processing_error: "La manipulation avec rmagick a échoué, peut-être ne s'agit-il pas d'une image ? Erreur d'origine : %{e}"
+      mime_types_processing_error: "Le traitement avec MIME::Types a échoué, le content-type est-il correct ? Erreur d'origine : %{e}"
+      mini_magick_processing_error: "La manipulation avec MiniMagick a échoué, peut-être ne s'agit-il pas d'une image ? Erreur d'origine : %{e}"
       wrong_size: "ne fait pas la taille du fichier (doit comporter %{file_size})"
-      size_too_small: "est trop petit (au moins %{file_size})"
-      size_too_big: "est trop grand (pas plus de %{file_size})"
-
-    template: &errors_template
-      header:
-        one:   "Impossible d'enregistrer ce(tte) %{model} : 1 erreur"
-        other: "Impossible d'enregistrer ce(tte) %{model} : %{count} erreurs"
-      body: "Veuillez vérifier les champs suivants : "
+      size_too_small: "est trop petite (au moins %{file_size})"
+      size_too_big: "est trop grande (pas plus de %{file_size})"
 
   activemodel:
     errors:
       <<: *errors
 
-  notifications_mailer:
-    send_mail_by:
-      subject_notify_admin_when_project_published: "Un projet a été publié."
-      subject_notify_project_collaborator_to_valid: "Invitation à collaborer sur un projet"
-      subject_notify_project_author_when_collaborator_valid: "Un nouveau collaborateur dans votre projet"
-      subject_notify_admin_when_user_is_created: "Un compte utilisateur a été créé"
+  omniauth:
+    # messages d'erreur lors de l'import d'un compte depuis un SSO
+    email_already_linked_to_another_account_please_input_your_authentication_code: "L'adresse de courriel \"%{OLD_MAIL}\" est déjà associée à un compte utilisateur, merci de saisir votre code d'authentification."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Votre nom d'utilisateur (%{USERNAME}) est déjà associée à un autre compte utilisateur, impossible de le mettre à jour."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Votre adresse de courriel (%{EMAIL}) est déjà associée à un autre compte utilisateur, impossible de la mettre à jour."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Ce compte %{NAME} est déjà lié à un utilisateur de la plate-forme."
+
+  availabilities:
+    # créneaux de disponibilité dans le calendrier
+    not_available: "Non disponible"
+    i_ve_reserved: "J'ai réservé"
+    must_be_at_least_1_hour_after_the_start_date: "doit être au moins 1 heure après la date de début"
+    must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
+
+  members:
+    # gestion des membres
+    unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
+    please_input_the_authentication_code_sent_to_the_address: "Merci d'enter le code d'authentification qui a été envoyé à l'adresse de courriel %{EMAIL}"
+    your_authentication_code_is_not_valid: "Votre code d'authentification n'est pas valide."
+
+  invoices:
+    # génération des factures en PDF
+    refund_invoice_reference: "Référence de l'avoir : %{REF}"
+    invoice_reference: "Référence facture : %{REF}"
+    code: "Code : %{CODE}"
+    order_number: "N° Commande : %{NUMBER}"
+    invoice_issued_on_DATE: "Facture éditée le %{DATE}"
+    refund_invoice_issued_on_DATE: "Avoir édité le %{DATE}"
+    cancellation_of_invoice_REF: "Annulation de la facture %{REF}"
+    reservation_of_USER_on_DATE_at_TIME: "Réservation de %{USER} le %{DATE} à %{TIME}"
+    cancellation: "Annulation"
+    object: "Objet :"
+    order_summary: "Récapitulatif de la commande :"
+    details: "Détails"
+    amount: "Montant"
+    subscription_extended_for_free_from_START_to_END: "Abonnement prolongé gratuitement - Du %{START} au %{END}"
+    subscription_NAME_from_START_to_END: "Abonnement - Du %{START} au %{END}"
+    machine_reservation_DESCRIPTION: "Réservation Machine - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
+    courses_and_workshops_reservation_DESCRIPTION: "Réservation Ateliers et Stages - %{DESCRIPTION}"
+    full_price_ticket:
+      one: "Une place plein tarif"
+      other: "%{count} places plein tarif"
+    reduced_rate_ticket:
+      one: "Une place à tarif réduit"
+      other: "%{count} places à tarif réduit"
+    reservation_other: "Réservation (autre)"
+    total_including_all_taxes: "Total TTC"
+    including_VAT_RATE: "Dont TVA %{RATE}%"
+    including_total_excluding_taxes: "Dont total HT"
+    including_amount_payed_on_ordering: "Dont montant payé à la commande"
+    total_amount: "Montant total"
+    refund_on_DATE: "Remboursement le %{DATE}"
+    by_stripe_online_payment: "par Stripe (paiement en ligne)"
+    by_cheque: "par chèque"
+    by_transfer: "par virement"
+    by_cash: "en espèces"
+    no_refund: "Pas de remboursement"
+    settlement_by_debit_card: "Règlement effectué par carte bancaire"
+    settlement_done_at_the_reception: "Règlement effectué à l'accueil"
+    on_DATE_at_TIME: "le %{DATE} à %{TIME},"
+    for_an_amount_of_AMOUNT: "pour un montant de %{AMOUNT}"
+    on_DATE_from_START_to_END: "Le %{DATE} de %{START} à %{END}" # eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Du %{STARTDATE} au %{ENDDATE}, de %{STARTTIME} à %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement de %{NAME} pour %{DURATION} à compter du %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
+
+  trainings:
+    # disponibilités formations
+    i_ve_reserved: "J'ai réservé"
+    completed: "Effectué"
+
+  export_members:
+    # export de la liste des members au format EXCEL
+    id: "ID"
+    surname: "Nom"
+    first_name: "Prénom"
+    email: "Courriel"
+    gender: "Genre"
+    age: "Âge"
+    phone: "Tel."
+    group: "Groupe"
+    subscription: "Abonnement"
+    subscription_end_date: "Date de fin de l'abonnement"
+    validated_trainings: "Formations validées"
+    man: "Homme"
+    woman: "Femme"
+    without_subscriptions: "Sans Abonnement"
+
+  export_reservations:
+    # export de la liste des réservations machines/formations/évènements au format EXCEL
+    customer_id: "ID client"
+    customer: "Client"
+    reservation_date: "Date de réservation"
+    reservation_type: "Type de réservation"
+    reservation_object: "Objet de la réservation"
+    slots_number_hours_tickets: "Nombre de créneaux (heures/places)"
+    payment_method: "Méthode de paiement"
+    local_payment: "Paiement à l'accueil"
+    online_payment: "Paiement en ligne"
+
+  export_subscriptions:
+    # export de la liste des abonnements au format EXCEL
+    id: "ID"
+    customer: "Client"
+    email: "Courriel"
+    subscription: "Abonnement"
+    period: "Période"
+    start_date: "Date de début"
+    expiration_date: "Date d'expiration"
+    amount: "Montant"
+    payment_method: "Méthode de paiement"
+    local_payment: "Paiement à l'accueil"
+    online_payment: "Paiement en ligne"
+
+  api:
+    notifications:
+      # notifications internes à l'application
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abus a été signalé sur <strong>%{TYPE} %{ID} : <em>%{NAME}</em></strong>."
+      notify_admin_invoicing_changed:
+        invoices_generation_was_STATUS_for_user_NAME_html: "La génération de factures a été <strong>{STATUS, select, true{désactivée} other{activée}}</strong> pour l'utilisateur {NAME}."  # messageFormat interpolation
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Une réservation <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_(UID)_has_completed_its_informations_html: "Le compte importé depuis <strong><em>%{PROVIDER} </strong> (%{UID})</em> a complété ses informations."
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "La réservation de <strong><em>%{USER}</em></strong>, le %{DATE}, a été annulée. Pensez a générer un avoir le cas échéant."
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "Un créneau de réservation a été modifié."
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "L'abonnement <strong><em>%{PLAN}</em></strong> a été souscrit par <strong><em>%{USER}</strong></em>."
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "L'abonnement de %{USER} a été annulé."
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{USER}</strong></em> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}."  # messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "L'abonnement de %{USER} est arrivé à expiration."
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "L'abonnement de %{USER} expire dans 7 jours."
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "L'utilisateur <strong><em>{NAME}</strong></em> a changé de groupe."  # messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html: "L'utilisateur <strong><em>{NAME}</strong></em> a fusionné son compte avec le compte importé depuis <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "Le projet <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> vient d'être publié."
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "Un nouveau compte utilisateur vient d'être créé : <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_(UID)_html: "Un nouveau compte utilisateur vient d'être importé depuis : <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Votre réservation %{RESERVABLE} du %{DATE} a bien été annulée."
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "Votre créneau de réservation a bien été modifié."
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "Vous avez souscrit à l'abonnement <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "Vous avez changé votre abonnement à <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "Votre abonnement <strong><em>%{PLAN}</em></strong> est bien annulé."
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Votre abonnement <strong><em>{PLAN}</em></strong> a été prolongé {FREE, select, true{gratuitement} other{}} jusqu'au {DATE}."  # messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "Votre abonnement est arrivé à expiration."
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "Votre abonnement arrive à échéance dans 7 jours."
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "L'abonnement partenaire <strong><em>%{PLAN}</em></strong> a été souscrit par <strong><em>%{USER}</strong></em>."
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project_PROJECT: "Le membre %{USER} est devenu un collaborateur de votre projet :"
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "Vous êtes invité à collaborer sur le projet suivant :"
+      notify_user_auth_migration:
+        your_account_was_migrated: "Votre compte a bien été migré vers le nouveau système d'authentification."
+      notify_user_profile_complete:
+        your_profile_was_completed: "Votre profil a bien été complété, vous avez désormais accès à l'ensemble de la plateforme."
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "Votre formation <strong><em>%{TRAINING}</em></strong> a bien été validée."
+      notify_user_user_group_changed:
+        your_group_has_changed: "Vous avez changé de groupe"
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "Votre facture d'avoir n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prête. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Cliquez ici pour la télécharger</a>."
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "Votre facture n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prête. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Cliquez ici pour la télécharger</a>."
+      undefined_notification:
+        unknown_notification: "Notification inconnue"
+        notification_ID_wrong_type_TYPE_unknown: "Notification {ID} erronée (type {TYPE} inconnu)."

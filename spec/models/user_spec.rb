@@ -62,6 +62,13 @@ RSpec.describe User, type: :model do
       member = create(:user)
       expect(member.is_member?).to be true
     end
+
+    it 'create a stripe customer' do
+      member = create(:user)
+      allow(member).to receive(:create_stripe_customer) { |u| member.stp_customer_id = 'stripe customer id' }
+      member.run_callbacks(:commit)
+      expect(member.stp_customer_id).to eq 'stripe customer id'
+    end
   end
 end
 

@@ -39,7 +39,7 @@ class API::EventsController < API::ApiController
 
   def destroy
     authorize Event
-    if @event.destroy
+    if @event.safe_destroy
       head :no_content
     else
       head :unprocessable_entity

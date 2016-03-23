@@ -8,7 +8,8 @@ class API::FeedsController < API::ApiController
     else
       limit = 3
     end
-    @tweet_news = Feed.twitter.user_timeline(ENV['TWITTER_NAME'], {count: limit})
+    from_account = Setting.find_by(name: 'twitter_name').try(:value) || ENV['TWITTER_NAME']
+    @tweet_news = Feed.twitter.user_timeline(from_account, {count: limit})
   end
 
 end

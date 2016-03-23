@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'change_the_slot' }}</h1>
+</div>
+<div class="modal-body">
+  <p ng-show="currentUser.role != 'admin'" translate>{{ 'do_you_want_to_change_your_booking_slot_initially_planned_at' }} </p>
+  <p ng-show="currentUser.role == 'admin'" translate translate-values="{NAME: object.user.name}">{{ 'do_you_want_to_change_NAME_s_booking_slot_initially_planned_at' }}</p>
+  <p><strong>{{object.start | amDateFormat: 'LL'}} : {{object.start | amDateFormat:'LT'}} - {{object.end | amDateFormat:'LT'}}</strong></p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-class="{'m-b':object.cancelable&&object.movable}" ng-click="ok('cancel')" ng-show="object.cancelable" translate>{{ 'cancel_this_reservation' }}</button>
+  <button class="btn btn-info" ng-click="ok('move')" ng-show="object.movable" translate>{{ 'i_want_to_change_date' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

@@ -1,22 +1,23 @@
-# If ENV['REDIS_URL'] = nil, then url = redis://localhost:6379/0
-
 if Rails.env.staging?
-  namespace = "fabmanager_staging"
+  namespace = "fablab_staging"
 else
-  namespace = "fabmanager"
+  namespace = "fablab"
 end
 
+redis_host = ENV["REDIS_HOST"] || 'localhost'
+redis_url = "redis://#{redis_host}:6379"
+
 Sidekiq.configure_server do |config|
-  config.redis = { url: ENV['REDIS_URL'], namespace: namespace }
+  config.redis = { url: redis_url, namespace: namespace }
+
+  # load sidekiq-cron schedule config
+  schedule_file = "config/schedule.yml"
+
+  if File.exists?(schedule_file)
+    Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
+  end
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: ENV['REDIS_URL'], namespace: namespace }
-end
-
-# load sidekiq-cron schedule config
-schedule_file = "config/schedule.yml"
-
-if File.exists?(schedule_file)
-  Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
+  config.redis = { url: redis_url, namespace: namespace }
 end

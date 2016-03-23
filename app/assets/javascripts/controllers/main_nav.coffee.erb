@@ -3,55 +3,97 @@
 ##
 # Navigation controller. List the links availables in the left navigation pane and their icon.
 ##
-Application.Controllers.controller "mainNavController", ["$scope", "$location", "$cookies", ($scope, $location, $cookies) ->
+Application.Controllers.controller "MainNavController", ["$scope", "$location", "$cookies", ($scope, $location, $cookies) ->
 
-## Common links (public application)
+  ## Common links (public application)
   $scope.navLinks = [
     {
       state: 'app.public.home'
-      linkText: 'Accueil'
+      linkText: 'home'
       linkIcon: 'home'
     }
 
     {
       state: 'app.public.machines_list'
-      linkText: 'Liste des machines'
-      linkIcon: 'gears'
+      linkText: 'reserve_a_machine'
+      linkIcon: 'calendar'
+    }
+    {
+      state: 'app.logged.trainings_reserve'
+      linkText: 'trainings_registrations'
+      linkIcon: 'graduation-cap'
     }
     {
       state: 'app.public.events_list'
-      linkText: 'Liste des stages et ateliers'
+      linkText: 'courses_and_workshops_registrations'
       linkIcon: 'tags'
     }
     {
       state: 'app.public.projects_list'
-      linkText: 'Galerie de projets'
+      linkText: 'projects_gallery'
       linkIcon: 'th'
     }
+
   ]
 
-  ## Admin links (backoffice application)
+  unless Fablab.withoutPlans
+    $scope.navLinks.push({
+        state: 'app.public.plans'
+        linkText: 'subscriptions'
+        linkIcon: 'credit-card'
+    })
+
+
   $scope.adminNavLinks = [
     {
+      state: 'app.admin.trainings'
+      linkText: 'trainings_monitoring'
+      linkIcon: 'graduation-cap'
+    }
+    {
+      state: 'app.admin.calendar'
+      linkText: 'manage_the_calendar'
+      linkIcon: 'calendar'
+    }
+    {
       state: 'app.admin.members'
-      linkText: 'Suivi utilisateurs'
+      linkText: 'manage_the_users'
       linkIcon: 'users'
     }
     {
+      state: 'app.admin.invoices'
+      linkText: 'manage_the_invoices'
+      linkIcon: 'file-pdf-o'
+    }
+    {
+      state: 'app.admin.pricing'
+      linkText: 'subscriptions_and_prices'
+      linkIcon: 'money'
+    }
+    {
       state: 'app.admin.events'
-      linkText: 'Suivi stages et ateliers'
+      linkText: 'courses_and_workshops_monitoring'
       linkIcon: 'tags'
     }
     {
       state: 'app.public.machines_list'
-      linkText: 'Gérer les machines'
+      linkText: 'manage_the_machines'
       linkIcon: 'cogs'
     }
     {
       state: 'app.admin.project_elements'
-      linkText: 'Gérer les éléments Projets'
+      linkText: 'manage_the_projects_elements'
       linkIcon: 'tasks'
     }
+    {
+      state: 'app.admin.statistics'
+      linkText: 'statistics'
+      linkIcon: 'bar-chart-o'
+    }
+    {
+      state: 'app.admin.settings'
+      linkText: 'customization'
+      linkIcon: 'gear'
+    }
   ]
-  
 ]

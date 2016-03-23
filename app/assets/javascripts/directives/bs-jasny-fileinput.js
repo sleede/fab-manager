@@ -28,7 +28,7 @@ Application.Directives.directive('bsJasnyFileinput', [function(){
               ngModelCtrl.$setValidity('filetype', true);
             else
               ngModelCtrl.$setValidity('filetype', false);
-          }
+          };
         }
         $scope.$apply();
       });

@@ -3,23 +3,11 @@
 ##
 # Controller used in the members listing page
 ##
-Application.Controllers.controller "membersController", ["$scope", "$state", 'Member', ($scope, $state, Member) ->
+Application.Controllers.controller "MembersController", ["$scope", 'membersPromise', ($scope, membersPromise) ->
 
   ## members list
-  $scope.members = Member.query()
+  $scope.members = membersPromise
 
-  ## Merbers ordering/sorting. Default: not sorted
-  $scope.orderMember = null
-
-  ##
-  # Change the members ordering criterion to the one provided
-  # @param orderBy {string} ordering criterion
-  ##
-  $scope.setOrderMember = (orderBy)->
-    if $scope.orderMember == orderBy
-      $scope.orderMember = '-'+orderBy
-    else
-      $scope.orderMember = orderBy
 ]
 
 
@@ -27,24 +15,71 @@ Application.Controllers.controller "membersController", ["$scope", "$state", 'Me
 ##
 # Controller used when editing the current user's profile
 ##
-Application.Controllers.controller "editProfileController", ["$scope", "$state", "Member", "Auth", 'growl', 'dialogs', 'CSRF', ($scope, $state, Member, Auth, growl, dialogs, CSRF) ->
-  CSRF.setMetaTags()
+Application.Controllers.controller "EditProfileController", ["$scope", "$rootScope", "$state", "$window", '$locale', "Member", "Auth", "Session", "activeProviderPromise", 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t'
+, ($scope, $rootScope, $state, $window, $locale, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) ->
+
+
+
+  ### PUBLIC SCOPE ###
 
   ## API URL where the form will be posted
   $scope.actionUrl = "/api/members/" + $scope.currentUser.id
+
+  ## list of groups
+  $scope.groups = groups
 
   ## Form action on the above URL
   $scope.method = 'patch'
 
   ## Current user's profile
-  $scope.user = Member.get {id: $scope.currentUser.id}
+  $scope.user = memberPromise
+
+  ## default : do not show the group changing form
+  $scope.group =
+      change: false
+
+  ## group ID of the current/selected user
+  $scope.userGroup = memberPromise.group_id
+
+  ## active authentication provider parameters
+  $scope.activeProvider = activeProviderPromise
+
+  ## allow the user to change his password except if he connect from an SSO
+  $scope.preventPassword = false
+
+  ## mapping of fields to disable
+  $scope.preventField = {}
 
   ## Angular-Bootstrap datepicker configuration for birthday
   $scope.datePicker =
-    format: 'dd/MM/yyyy'
+    format: $locale.DATETIME_FORMATS.shortDate
     opened: false # default: datePicker is not shown
     options:
-      startingDay: 1 # France: the week starts on monday
+      startingDay: Fablab.weekStartingDay
+
+
+
+  ##
+  # Return the group object, identified by the ID set in $scope.userGroup
+  ##
+  $scope.getUserGroup = ->
+    for group in $scope.groups
+      if group.id == $scope.userGroup
+        return group
+
+
+
+  ##
+  # Change the group of the current user to the one set in $scope.userGroup
+  ##
+  $scope.selectGroup = ->
+    Member.update {id: $scope.user.id}, {user: {group_id: $scope.userGroup}}, (user) ->
+      $scope.user = user
+      $scope.group.change = false
+      growl.success(_t('your_group_has_been_successfully_changed'))
+    , (err) ->
+      growl.error(_t('an_unexpected_error_prevented_your_group_from_being_changed'))
+      console.error(err)
 
 
 
@@ -81,7 +116,29 @@ Application.Controllers.controller "editProfileController", ["$scope", "$state",
       Auth._currentUser.name = content.name
       $scope.currentUser = content
       Auth._currentUser = content
+      $rootScope.currentUser = content
       $state.go('app.public.home')
+
+
+
+  ##
+  # Ask for confirmation then delete the current user's account
+  # @param user {Object} the current user (to delete)
+  ##
+  $scope.deleteUser = (user)->
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('confirmation_required')
+          msg: _t('do_you_really_want_to_delete_your_account')+' '+_t('all_data_relative_to_your_projects_will_be_lost')
+    , -> # cancel confirmed
+      Member.remove { id: user.id }, ->
+        Auth.logout().then ->
+          $state.go('app.public.home')
+          growl.success(_t('your_user_account_has_been_successfully_deleted_goodbye'))
+      , (error)->
+        console.log(error)
+        growl.error(_t('an_error_occured_preventing_your_account_from_being_deleted'))
 
 
 
@@ -95,6 +152,52 @@ Application.Controllers.controller "editProfileController", ["$scope", "$state",
       'fileinput-exists'
     else
       'fileinput-new'
+
+
+  ##
+  # Check if the of the properties editable by the user are linked to the SSO
+  # @return {boolean} true if some editable fields are mapped with the SSO, false otherwise
+  ##
+  $scope.hasSsoFields = ->
+    # if check if keys > 1 because there's a minimum of 1 mapping (id <-> provider-uid)
+    # so the user may want to edit his profile on the SSO if at least 2 mappings exists
+    Object.keys($scope.preventField).length > 1
+
+
+  ##
+  # Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
+  ##
+  $scope.syncProfile = ->
+    Auth.logout().then (oldUser) ->
+      Session.destroy()
+      $rootScope.currentUser = null
+      $rootScope.toCheckNotifications = false
+      $scope.notifications = []
+      $window.location.href = $scope.activeProvider.link_to_sso_connect
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    CSRF.setMetaTags()
+
+    # init the birth date to JS object
+    $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
+
+    if $scope.activeProvider.providable_type != 'DatabaseProvider'
+      $scope.preventPassword = true
+    # bind fields protection with sso fields
+    angular.forEach activeProviderPromise.mapping, (map) ->
+      $scope.preventField[map] = true
+
+
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]
 
 
@@ -102,8 +205,8 @@ Application.Controllers.controller "editProfileController", ["$scope", "$state",
 ##
 # Controller used on the public user's profile page (seeing another user's profile)
 ##
-Application.Controllers.controller "showProfileController", ["$scope", "$stateParams", 'Member', ($scope, $stateParams, Member) ->
+Application.Controllers.controller "ShowProfileController", ["$scope", "$stateParams", 'Member', 'memberPromise', ($scope, $stateParams, Member, memberPromise) ->
 
   ## Selected user's profile (id from the current URL)
-  $scope.user = Member.get {id: $stateParams.id}
+  $scope.user = memberPromise
 ]

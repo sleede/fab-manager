@@ -4,10 +4,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   after_action :set_csrf_cookie
+  cache_sweeper :stylesheet_sweeper
 
   respond_to :html, :json
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  # Globally rescue Authorization Errors in controller.
+  # Returning 403 Forbidden if permission is denied
+  rescue_from Pundit::NotAuthorizedError, with: :permission_denied
 
   def index
   end
@@ -30,5 +35,9 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     Rails.env.production? ? { protocol: 'https' } : {}
+  end
+
+  def permission_denied
+    head 403
   end
 end

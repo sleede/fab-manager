@@ -1,6 +1,7 @@
 'use strict'
 
-Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "Session", "AuthService", "Auth", "$modal", "$state", 'growl', 'Notification', '$interval', ($rootScope, $scope, Session, AuthService, Auth, $modal, $state, growl, Notification, $interval) ->
+Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '$locale', '_t'
+, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, $locale, _t) ->
 
 
 
@@ -18,14 +19,14 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   # @param user {Object} Rails/Devise user
   ##
   $scope.setCurrentUser = (user) ->
-    $scope.currentUser = user
+    $rootScope.currentUser = user
     Session.create(user);
     getNotifications()
 
 
   ##
   # Login callback
-  # @param e {Object} jQuery event
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   # @param callback {function}
   ##
   $scope.login = (e, callback) ->
@@ -36,14 +37,14 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
   ##
   # Logout callback
-  # @param e {Object} jQuery event
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   ##
   $scope.logout = (e) ->
     e.preventDefault()
     Auth.logout().then (oldUser) ->
       # console.log(oldUser.name + " you're signed out now.");
       Session.destroy()
-      $scope.currentUser = null
+      $rootScope.currentUser = null
       $rootScope.toCheckNotifications = false
       $scope.notifications = []
       $state.go('app.public.home')
@@ -54,21 +55,21 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
   ##
   # Open the modal window allowing the user to create an account.
-  # @param e {Object} jQuery event
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   ##
   $scope.signup = (e) ->
     e.preventDefault() if e
 
-    $modal.open
+    $uibModal.open
       templateUrl: '<%= asset_path "shared/signupModal.html" %>'
       size: 'md'
-      controller: ['$scope', '$modalInstance', 'Group', ($scope, $modalInstance, Group) ->
+      controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', ($scope, $uibModalInstance, Group, CustomAsset) ->
         # default parameters for the date picker in the account creation modal
         $scope.datePicker =
-          format: 'dd/MM/yyyy'
+          format: $locale.DATETIME_FORMATS.shortDate
           opened: false
           options:
-            startingDay: 1
+            startingDay: Fablab.weekStartingDay
 
         # callback to open the date picker (account creation modal)
         $scope.openDatePicker = ($event) ->
@@ -79,6 +80,10 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         # retrieve the groups (standard, student ...)
         Group.query (groups) ->
           $scope.groups = groups
+
+        # retrieve the CGU
+        CustomAsset.get {name: 'cgu-file'}, (cgu) ->
+          $scope.cgu = cgu.custom_asset
 
         # default user's parameters
         $scope.user =
@@ -95,7 +100,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
           $scope.alerts = []
           Auth.register($scope.user).then (user) ->
             # creation successful
-            $modalInstance.close(user)
+            $uibModalInstance.close(user)
           , (error) ->
             # creation failed...
             angular.forEach error.data.errors, (v, k) ->
@@ -114,10 +119,10 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   # @param token {string} security token for password changing. The user should have recieved it by mail
   ##
   $scope.editPassword = (token) ->
-    $modal.open
+    $uibModal.open
       templateUrl: '<%= asset_path "shared/passwordEditModal.html" %>'
       size: 'md'
-      controller: ['$scope', '$modalInstance', '$http', ($scope, $modalInstance, $http) ->
+      controller: ['$scope', '$uibModalInstance', '$http', '_t', ($scope, $uibModalInstance, $http, _t) ->
         $scope.user =
           reset_password_token: token
         $scope.alerts = []
@@ -127,7 +132,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         $scope.changePassword = ->
           $scope.alerts = []
           $http.put('/users/password.json', {user: $scope.user}).success (data) ->
-            $modalInstance.close()
+            $uibModalInstance.close()
           .error (data) ->
             angular.forEach data.errors, (v, k) ->
               angular.forEach v, (err) ->
@@ -136,20 +141,20 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
                   type: 'danger'
       ]
     .result['finally'](null).then (user) ->
-      growl.addInfoMessage('Votre mot de passe a bien été modifié.')
+      growl.success(_t('your_password_was_successfully_changed'))
       Auth.login().then (user) ->
         $scope.setCurrentUser(user)
       , (error) ->
         # Authentication failed...
 
-  
+
   ##
   # Compact/Expend the width of the left navigation bar
-  # @param e {Object} jQuery event object
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   ##
   $scope.toggleNavSize = (event) ->
     if typeof event == 'undefined'
-      console.error '[applicationController::toggleNavSize] Missing event parameter'
+      console.error '[ApplicationController::toggleNavSize] Missing event parameter'
       return
 
     toggler = $(event.target)
@@ -184,14 +189,16 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
 
   ### PRIVATE SCOPE ###
-
   ##
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
+
     # try to retrieve any currently logged user
     Auth.login().then (user) ->
       $scope.setCurrentUser(user)
+      if user.need_completion
+        $state.transitionTo('app.logged.profileCompletion')
     , (error) ->
       # Authentication failed...
       $rootScope.toCheckNotifications = false
@@ -205,10 +212,16 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         event.preventDefault()
         if AuthService.isAuthenticated()
           # user is not allowed
-          console.log('user is not allowed')
+          console.error('[ApplicationController::initialize] user is not allowed')
         else
           # user is not logged in
           openLoginModal(toState, toParams)
+
+    Setting.get { name: 'fablab_name' }, (data)->
+      $scope.fablabName = data.setting.value
+    Setting.get { name: 'name_genre' }, (data)->
+      $scope.nameGenre = data.setting.value
+
 
 
     # shorthands
@@ -223,7 +236,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   ##
   getNotifications = ->
     $rootScope.toCheckNotifications = true
-    unless $rootScope.checkNotificationsIsInit or !$scope.currentUser
+    unless $rootScope.checkNotificationsIsInit or !$rootScope.currentUser
       $scope.notifications = Notification.query {is_read: false}
       $scope.$watch 'notifications', (newValue, oldValue) ->
         diff = []
@@ -239,7 +252,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
 
         angular.forEach diff, (notification, key) ->
-          growl.addInfoMessage(notification.message.description)
+          growl.info(notification.message.description)
 
       , true
 
@@ -257,35 +270,39 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   # Open the modal window allowing the user to log in.
   ##
   openLoginModal = (toState, toParams, callback) ->
-    $modal.open
+  <% active_provider = AuthProvider.active %>
+  <% if active_provider.providable_type != DatabaseProvider.name %>
+    $window.location.href = '<%=user_omniauth_authorize_path(AuthProvider.active.strategy_name.to_sym)%>'
+  <% else %>
+    $uibModal.open
       templateUrl: '<%= asset_path "shared/deviseModal.html" %>'
       size: 'sm'
-      controller: ['$scope', '$modalInstance', ($scope, $modalInstance) ->
+      controller: ['$scope', '$uibModalInstance', '_t', ($scope, $uibModalInstance, _t) ->
         user = $scope.user = {}
         $scope.login = () ->
           Auth.login(user).then (user) ->
             # Authentification succeeded ...
-            $modalInstance.close(user)
+            $uibModalInstance.close(user)
             if callback and typeof callback is "function"
               callback(user)
           , (error) ->
             # Authentication failed...
             $scope.alerts = []
             $scope.alerts.push
-              msg: 'E-mail ou mot de passe incorrect.'
+              msg: _t('wrong_email_or_password')
               type: 'danger'
 
         # handle modal behaviors. The provided reason will be used to define the following actions
         $scope.dismiss = ->
-          $modalInstance.dismiss('cancel')
+          $uibModalInstance.dismiss('cancel')
 
         $scope.openSignup = (e) ->
           e.preventDefault()
-          $modalInstance.dismiss('signup')
+          $uibModalInstance.dismiss('signup')
 
         $scope.openResetPassword = (e) ->
           e.preventDefault()
-          $modalInstance.dismiss('resetPassword')
+          $uibModalInstance.dismiss('resetPassword')
       ]
 
     # what to do when the modal is closed
@@ -303,25 +320,26 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         $scope.signup()
       else if reason is 'resetPassword'
         # open the 'reset password' modal
-        $modal.open
+        $uibModal.open
           templateUrl: '<%= asset_path "shared/passwordNewModal.html" %>'
           size: 'sm'
-          controller: ['$scope', '$modalInstance', '$http', ($scope, $modalInstance, $http) ->
+          controller: ['$scope', '$uibModalInstance', '$http', ($scope, $uibModalInstance, $http) ->
             $scope.user = {email: ''}
             $scope.sendReset = () ->
               $scope.alerts = []
               $http.post('/users/password.json', {user: $scope.user}).success ->
-                $modalInstance.close()
+                $uibModalInstance.close()
               .error ->
                 $scope.alerts.push
-                  msg: "Votre adresse email n'existe pas."
+                  msg: _t('your_email_address_is_unknown')
                   type: 'danger'
 
           ]
         .result['finally'](null).then ->
-          growl.addInfoMessage('Vous allez recevoir sous quelques minutes un e-mail vous indiquant comment réinitialiser votre mot de passe.')
+          growl.info(_t('you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password'))
 
   # otherwise the user just closed the modal
+  <% end %>
 
 
 

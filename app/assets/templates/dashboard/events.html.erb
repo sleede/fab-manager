@@ -1,0 +1,47 @@
+<div>
+
+  <section class="heading">
+    <div class="row no-gutter">
+      <ng-include src="'<%= asset_path 'dashboard/nav.html' %>'"></ng-include>
+    </div>
+
+  </section>
+
+
+  <div class="row no-gutter">
+
+    <div class="col-md-6">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b">
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_next_courses_and_workshops' | translate }}</h4>
+        </div>
+        <div class="widget-content bg-light wrapper r-b">
+          <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
+            <li ng-repeat="r in user.events_reservations | eventsReservationsFilter:'future'" class="m-b">
+              <a class="font-sbold" ui-sref="app.public.events_show({id: r.reservable.id})">{{r.reservable.title}}</a> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+              <br/><span translate translate-values="{NUMBER: r.nb_reserve_places}" translate-interpolation="messageformat">{{ 'NUMBER_normal_places_reserved' }}</span>
+              <br/><span translate translate-values="{NUMBER: r.nb_reserve_reduced_places}" translate-interpolation="messageformat">{{ 'NUMBER_reduced_fare_places_reserved' }}</span>
+            </li>
+          </ul>
+          <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'no_courses_or_workshops_to_come' }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b">
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_previous_courses_and_workshops' | translate }}</h4>
+        </div>
+        <div class="widget-content bg-light auto wrapper r-b">
+          <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
+            <li ng-repeat="r in user.events_reservations | eventsReservationsFilter:'passed'" class="m-b">
+              <span class="font-sbold">{{r.reservable.title}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+            </li>
+          </ul>
+          <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'no_passed_courses_or_workshops' }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

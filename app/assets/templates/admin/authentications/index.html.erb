@@ -1,0 +1,40 @@
+<div class="col-md-5 m-t-lg">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+            <input type="text" ng-model="searchFilter" class="form-control" placeholder="{{ 'search_for_an_authentication_provider' | translate }}">
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.authentication_new" translate>{{ 'add_a_new_authentication_provider' }}</button>
+
+    <table class="table">
+        <thead>
+          <tr>
+              <th style="width:15%" translate>{{ 'name' }}</th>
+
+              <th style="width:15%" translate>{{ 'type' }}</th>
+
+              <th style="width:15%" translate>{{ 'state' }}</th>
+
+              <th style="width:10%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="provider in providers | filter:searchFilter">
+              <td>{{ provider.name }}</td>
+              <td>{{ getType(provider.providable_type) }}</td>
+              <td>{{ getState(provider.status) }}</td>
+              <td>
+                  <button class="btn btn-default" ui-sref="app.admin.authentication_edit({id:provider.id})">
+                      <i class="fa fa-pencil-square-o"></i> {{ 'edit' | translate }}
+                  </button>
+                  <button class="btn btn-danger" ng-if="provider.status != 'active'" ng-click="destroyProvider(providers, provider)">
+                      <i class="fa fa-trash-o"></i>
+                  </button>
+              </td>
+          </tr>
+        </tbody>
+    </table>
+</div>

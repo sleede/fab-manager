@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1>Gestion des éléments projets</h1>
+        <h1 translate>{{ 'projects_elements_management' }}</h1>
       </section>
     </div>
 
@@ -19,14 +19,14 @@
   <div class="row">
 
     <div class="col-md-12">
-      <tabset justified="true">
-        <tab heading="Matériaux">
-          <button type="button" class="btn btn-warning m-b m-t" ng-click="addComponent()">Ajouter un matériau</button>
+      <uib-tabset justified="true">
+        <uib-tab heading="{{ 'materials' | translate }}">
+          <button type="button" class="btn btn-warning m-b m-t" ng-click="addComponent()" translate>{{ 'add_a_material' }}</button>
 
           <table class="table">
             <thead>
               <tr>
-                <th style="width:80%">Nom</th>
+                <th style="width:80%" translate>{{ 'name' }}</th>
                 <th style="width:20%"></th>
               </tr>
             </thead>
@@ -49,7 +49,7 @@
                   </form>
                   <div class="buttons" ng-show="!rowform.$visible">
                     <button class="btn btn-default" ng-click="rowform.$show()">
-                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">Éditer</span>
+                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
                     </button>
                     <button class="btn btn-danger" ng-click="removeComponent($index)">
                       <i class="fa fa-trash-o"></i>
@@ -59,14 +59,14 @@
               </tr>
             </tbody>
           </table>
-        </tab>
-        <tab heading="Thématiques">
-          <button type="button" class="btn btn-warning m-t m-b" ng-click="addTheme()">Ajouter une nouvelle thématique</button>
+        </uib-tab>
+        <uib-tab heading="{{ 'themes' | translate }}">
+          <button type="button" class="btn btn-warning m-t m-b" ng-click="addTheme()" translate>{{ 'add_a_new_theme' }}</button>
 
           <table class="table">
             <thead>
               <tr>
-                <th style="width:80%">Nom</th>
+                <th style="width:80%" translate>{{ 'name' }}</th>
                 <th style="width:20%"></th>
               </tr>
             </thead>
@@ -89,7 +89,7 @@
                   </form>
                   <div class="buttons" ng-show="!rowform.$visible">
                     <button class="btn btn-default" ng-click="rowform.$show()">
-                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">Éditer</span>
+                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
                     </button>
                     <button class="btn btn-danger" ng-click="removeTheme($index)">
                       <i class="fa fa-trash-o"></i>
@@ -99,15 +99,15 @@
               </tr>
             </tbody>
           </table>
-        </tab>
-        <tab heading="Licences">
-          <button type="button" class="btn btn-warning m-t m-b" ng-click="addLicence()">Ajouter une nouvelle licence</button>
+        </uib-tab>
+        <uib-tab heading="{{ 'licences' | translate }}">
+          <button type="button" class="btn btn-warning m-t m-b" ng-click="addLicence()" translate>{{ 'add_a_new_licence' }}</button>
 
           <table class="table">
             <thead>
               <tr>
-                <th style="width:30%">Nom</th>
-                <th style="width:50%" class="hidden-xs">Description</th>
+                <th style="width:30%" translate>{{ 'name' }}</th>
+                <th style="width:50%" class="hidden-xs" translate>{{ 'description' }}</th>
                 <th style="width:20%"></th>
               </tr>
             </thead>
@@ -135,7 +135,7 @@
                   </form>
                   <div class="buttons" ng-show="!rowform.$visible">
                     <button class="btn btn-default" ng-click="rowform.$show()">
-                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">Éditer</span>
+                      <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
                     </button>
                     <button class="btn btn-danger" ng-click="removeLicence($index)">
                       <i class="fa fa-trash-o"></i>
@@ -145,8 +145,8 @@
               </tr>
             </tbody>
           </table>
-        </tab>
-      </tabset>
+        </uib-tab>
+      </uib-tabset>
     </div>
 
   </div>

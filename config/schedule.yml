@@ -1,0 +1,16 @@
+subscription_expire_in_7_days:
+  cron: "0 0 * * *"
+  class: "SubscriptionExpireWorker"
+  queue: default
+  args: [7]
+
+subscription_is_expired:
+  cron: "0 23 * * *"
+  class: "SubscriptionExpireWorker"
+  queue: default
+  args: [0]
+
+generate_statistic:
+  cron: "0 1 * * *"
+  class: "StatisticWorker"
+  queue: default

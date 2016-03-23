@@ -1,0 +1,13 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= _t('.body.subscription_extended_html',
+         {
+             PLAN: @attached_object.plan.human_readable_name,
+             NAME: @attached_object.user.profile.full_name,
+             FREE: bool_to_sym(@notification.get_meta_data(:free_days)),
+             DATE: I18n.l(@attached_object.expired_at.to_date)
+         })
+      # messageFormat
+  %>
+</p>

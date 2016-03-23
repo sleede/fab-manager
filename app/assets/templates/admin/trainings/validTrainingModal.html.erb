@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h1 translate>{{ 'training_validation' }}</h1>
+</div>
+<div class="modal-body">
+  <p>{{ 'training_of_the_' | translate }}<span class="font-sbold">{{ availability.start_at | amDateFormat:'LLL' }} - {{ availability.end_at | amDateFormat:'LT' }}</span> <br>
+    {{ 'you_can_validate_the_training_of_the_following_members' | translate }}</p>
+  <ul class="list-unstyled" ng-if="availability.reservation_users.length > 0">
+    <li ng-repeat="user in availability.reservation_users">
+      {{user.full_name}}
+      <input type="checkbox" ng-checked="user.is_valid" ng-disabled="user.is_valid" ng-click="toggleSelection(user)" />
+    </li>
+  </ul>
+  <p ng-if="availability.reservation_users.length == 0" translate>{{ 'no_reservation' }}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="usersToValid.length == 0" translate>{{ 'validate_the_trainings' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

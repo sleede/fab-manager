@@ -1,7 +1,7 @@
 {
   "name": "angular-summernote",
   "description": "AngularJS directive to Summernote",
-  "version": "0.3.2",
+  "version": "0.7.1",
   "main": [
     "./dist/angular-summernote.js"
   ],
@@ -38,23 +38,25 @@
     "url": "git://github.com/summernote/angular-summernote.git"
   },
   "dependencies": {
-    "summernote": "~0.6.0",
-    "angular": "~1.3.0"
+    "summernote": "~0.7.0",
+    "angular": "~1.4.0"
   },
   "devDependencies": {
     "angular-1.2": "https://raw.githubusercontent.com/angular/bower-angular/v1.2.26/angular.min.js",
-    "chai": "~1.10.0",
-    "angular-mocks": "~1.3.0",
-    "angular-mocks-1.2": "https://raw.githubusercontent.com/angular/bower-angular-mocks/v1.2.26/angular-mocks.js"
+    "angular-1.3": "https://raw.githubusercontent.com/angular/bower-angular/v1.3.17/angular.min.js",
+    "chai": "~2.3.0",
+    "angular-mocks": "~1.4.0",
+    "angular-mocks-1.2": "https://raw.githubusercontent.com/angular/bower-angular-mocks/v1.2.26/angular-mocks.js",
+    "angular-mocks-1.3": "https://raw.githubusercontent.com/angular/bower-angular-mocks/v1.3.17/angular-mocks.js"
   },
   "homepage": "https://github.com/summernote/angular-summernote",
-  "_release": "0.3.2",
+  "_release": "0.7.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.3.2",
-    "commit": "0e329e681879af08bea0c776e227b53fb81c8657"
+    "tag": "0.7.1",
+    "commit": "e94e2fb2182a655b4a48ee6a0edd779cda37a14a"
   },
   "_source": "git://github.com/summernote/angular-summernote.git",
-  "_target": "~0.3.2",
+  "_target": "~0.7.1",
   "_originalSource": "angular-summernote"
 }

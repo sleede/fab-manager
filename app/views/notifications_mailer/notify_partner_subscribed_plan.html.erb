@@ -1,0 +1,3 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.a_plan') %> <strong><em><%= @attached_object.plan.human_readable_name %></em></strong> <%= t('.body.was_purchased_by_member') %> <strong><em><%= @attached_object.user.profile.full_name %></strong></em>.</p>

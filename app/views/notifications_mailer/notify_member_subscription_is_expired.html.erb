@@ -1,0 +1,5 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.your_plan') %> <strong><em><%= @attached_object.plan.human_readable_name %></em></strong> <%= t('.body.has_expired') %>.</p>
+
+<p><%= t('.body.you_can_go_to') %> <%= link_to "Abonnements", "#{root_url}#!/pricing" %>, <%= t('.body.to_renew_your_plan') %>.</p>

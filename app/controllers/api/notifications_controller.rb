@@ -4,7 +4,7 @@ class API::NotificationsController < API::ApiController
 
   def index
     if params[:is_read]
-      @notifications = current_user.notifications.where(is_read: params[:is_read] == "true").page(params[:page]).per(15).order('created_at DESC')
+      @notifications = current_user.notifications.where(is_read: params[:is_read] == 'true').page(params[:page]).per(15).order('created_at DESC')
     else
       @notifications = current_user.notifications.order('created_at DESC')
     end

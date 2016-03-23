@@ -46,5 +46,5 @@ class ProjectCaoUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   #def filename
     #"avatar.#{file.extension}" if original_filename
-  #end 
+  #end
 end

@@ -8,6 +8,6 @@ class MachinePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.is_admin?
+    user.is_admin? and record.destroyable?
   end
 end

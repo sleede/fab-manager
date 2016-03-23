@@ -5,11 +5,11 @@
       'ui.bootstrap'
     ]);
   deviseModal.run([
-    '$modal',
+    '$uibModal',
     '$http',
     'Auth',
     '$rootScope',
-    function ($modal, $http, Auth, $rootScope) {
+    function ($uibModal, $http, Auth, $rootScope) {
       var promise = null;
       function reset() {
         promise = null;
@@ -26,15 +26,15 @@
           }).then(deferred.resolve, partial(deferred.reject, response));
         }
         if (!promise) {
-          promise = $modal.open({
+          promise = $uibModal.open({
             templateUrl: 'deviseModal.html',
-            controller: function ($scope, $modalInstance) {
+            controller: function ($scope, $uibModalInstance) {
               var user = $scope.user = {};
               $scope.login = function () {
-                $modalInstance.close(user);
+                $uibModalInstance.close(user);
               };
               $scope.dismiss = function () {
-                $modalInstance.dismiss('cancel');
+                $uibModalInstance.dismiss('cancel');
               };
             }
           }).result['finally'](reset).then(Auth.login);

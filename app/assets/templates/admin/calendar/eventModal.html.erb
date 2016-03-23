@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h3 class="text-center red">
+      {{ 'DATE_slot' | translate:{DATE:(start | amDateFormat: 'LL')} }} {{start | amDateFormat:'LT'}} - {{end | amDateFormat:'LT'}}
+  </h3>
+</div>
+<div class="modal-body">
+  <p class="text-center font-sbold" translate>{{ 'you_can_define_a_training_on_that_slot' }}</p>
+  <div>
+    <label class="checkbox-inline">
+      <input type="checkbox" ng-model="available_type" ng-change="changeAvailableType()"> {{ 'link_a_training' | translate }}
+    </label>
+  </div>
+
+  <p class="text-center font-sbold m-t" ng-show="availability.available_type == 'machines'"><span class="underline" translate>{{ 'or_' }}</span> {{ '_select_some_machines' | translate }}</p>
+
+  <div class="checkbox" ng-show="availability.available_type == 'machines'">
+    <label class="checkbox" ng-repeat="machine in machines">
+      <input type="checkbox" ng-click="toggleSelection(machine)"> {{machine.name}} <span class="text-xs">(id {{machine.id}})</span>
+    </label>
+  </div>
+
+  <div ng-show="availability.available_type == 'training'">
+    <select ng-model="selectedTraining" class="form-control m-t-sm" ng-options="t.name for t in trainings" ng-change="setNbTotalPlaces()">
+    </select>
+    <div class="row m-t">
+      <div class="form-group">
+        <label class="col-sm-6 control-label" translate>{{ 'number_of_tickets' }}</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" ng-model="availability.nb_total_places">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="timeAdjust" class="m-t-lg">
+      <p class="text-center font-sbold" translate>{{ 'adjust_the_opening_hours' }}</p>
+      <div class="row">
+          <div class="col-md-3 col-md-offset-2">
+              <uib-timepicker ng-model="start" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
+          </div>
+          <span class="col-md-1 m-t-xl m-l" translate>{{ 'to_time' }}</span>
+          <fieldset ng-disabled="endDateReadOnly" class="col-md-5">
+              <uib-timepicker ng-model="end" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
+          </fieldset>
+      </div>
+  </div>
+  <div id="tagAssociate" class="m-t-lg">
+      <p class="text-center font-sbold" translate>{{ 'restrict_this_slot_with_labels_(optional)' }}</p>
+      <div class="row">
+          <div class="col-sm-12">
+              <ui-select multiple ng-model="availability.tag_ids" class="form-control">
+                  <ui-select-match>
+                      <span ng-bind="$item.name"></span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="t.id as t in (tags | filter: $select.search)">
+                      <span ng-bind-html="t.name | highlight: $select.search"></span>
+                  </ui-select-choices>
+              </ui-select>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

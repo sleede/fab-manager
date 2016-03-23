@@ -1,0 +1,262 @@
+en:
+  app:
+    shared:
+      buttons:
+        # translations of common buttons
+        confirm_changes: "Confirm changes"
+        consult: "Consult"
+        edit: "Edit"
+        change: "Change"
+        delete: "Delete"
+        browse: "Browse"
+        cancel: "Cancel"
+        close: "Close"
+        clear: "Clear"
+        today: "Today"
+        confirm: "Confirm"
+        save: "Save"
+        "yes": "Yes"
+        "no": "No"
+        apply: "Apply"
+        confirm_(payment_on_site): "Confirm (Payment on site)"
+
+      elements:
+        # various translations used many times in the application
+        group: "Group"
+        subscription: "Subscription"
+        trainings: "Trainings"
+        no_trainings: "No trainings"
+        confirmation_required: "Confirmation required"
+        description: "Description"
+        machines: "Machines"
+        materials: "Materials"
+        date: "Date"
+        price: "Price"
+        download_the_invoice: "Download the invoice"
+        download_the_credit_note: "Download the credit note"
+        no_invoices_for_now: "No invoices for now."
+        email_address: "Email address"
+        user: "User"
+        pseudonym: "Pseudonym"
+        all_day: "All day"
+        reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
+        title: "Title"
+        total_: "TOTAL :"
+        full_price_: "Full price:"
+        reduced_rate: "Reduced rate"
+        reduced_rate_: "Reduced rate:"
+        rough_draft: "Rough draft"
+        machines_and_materials: "Machines and materials"
+        collaborators: "Collaborators"
+        summary: "Summary"
+        you_ve_just_selected_a_: "You've just selected a"  # you_ve_just_selected_a_ + _subscription
+        _subscription: "subscription"
+        confirm_and_pay: "Confirm and pay"
+        your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon form your"
+        add_an_event: "Add ane event"
+        load_the_next_courses_and_workshops: "Load the next courses and workshops..."
+        dates: "Dates:"
+        thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
+        surname: "Surname"
+        first_name: "First Name"
+        address: "Address"
+        interests: "Interests"
+        CAD_softwares_mastered: "CAD Softwares mastered"
+        name: "Name"
+        step_N: "Step {{INDEX}}"  # angular interpolation
+        themes: "Themes"
+        tags: "Tages"
+        technical_specifications: "Technical specifications"
+        online_payment: "Online payment"
+        type: "Type"
+        partner: "Partner"
+        standard: "Standard"
+        year: "Year"
+        month: "Month"
+        subscription_price: "Subscription price"
+        model: "Model"
+        from_date: "From" # context: date. eg: "from 01/01 to 01/05"
+        from_time: "From" # context: time. eg. "from 18:00 to 21:00"
+        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
+        to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
+
+      messages:
+        you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
+        you_will_lose_any_unsaved_modification_if_you_reload_this_page: "You will lose any unsaved modification if you reload this page"
+
+      user:
+        # user edition form
+        add_an_avatar: "Add an avatar"
+        pseudonym: "Pseudonym"
+        email_address_is_required: "E-mail address is required."
+        change_password: "Change password"
+        new_password: "New password"
+        confirmation_of_new_password: "Confirmation of new password"
+        confirmation_of_password_is_required: "Confirmation of password is required."
+        confirmation_of_password_is_too_short_(minimum_8_characters): "Confirmation of password is too short (minimum 8 characters)."
+        confirmation_mismatch_with_password: "Confirmation mismatch with password."
+        date_of_birth: "Date of birth"
+        date_of_birth_is_required: "Date of birth is required."
+
+      project:
+        # project edition form
+        name_is_required: "Name is required."
+        illustration: "Illustration"
+        add_an_illustration: "Add an illustration"
+        CAD_file: "CAD file"
+        add_a_new_file: "Add a new file"
+        description_is_required: "Description is required."
+        steps: "Steps"
+        step_title: "Step title"
+        add_a_picture: "Add a picture"
+        change_the_picture: "Change the picture"
+        delete_the_step: "Delete the step"
+        add_a_new_step: "Add a new step"
+        publish_your_project: "Publish your project"
+        employed_materials: "Employed materials"
+        employed_machines: "Employed machines"
+        creative_commons_licences: "Creative Commons licences"
+
+      machine:
+        # machine edition form
+        name_is_required: "The name is required."
+        illustration: "Illustration"
+        add_an_illustration: "Add an illustration."
+        description_is_required: "Description is required."
+        technical_specifications_are_required: "Technical specifications are required."
+        attached_files_(pdf): "Attached files (pdf)"
+        attach_a_file: "Attach a file"
+        add_an_attachment: "Add an attachment"
+        validate_your_machine: "Validate your machine"
+
+      plan_subscribe:
+        # frame to select a plan to subscribe
+        subscribe_online: "subscribe online"
+        do_not_subscribe: "do not subscribe"
+
+      member_select:
+        # admin: choose a member to interact with
+        select_a_member: "Select a member"
+        please_select_a_member_first: "Please select a member first"
+
+      stripe:
+        # stripe payment modal
+        i_have_read_and_accept_: "I have read, and accept"
+        _the_general_terms_and_conditions: "the general terms and conditions."
+        enter_your_card_number: "Enter your card number"
+        confirm_my_payment_of_: "Confirm my payment of"  # context: confirm my payment of $20.00
+
+      valid_reservation_modal:
+        # dialog of on site payment for reservations
+        booking_confirmation: "Booking confirmation"
+        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
+
+      event:
+        # event edition form (courses/workshops)
+        title_is_required: "Title is required."
+        matching_visual: "Matching visual"
+        choose_a_picture: "Choose a picture"
+        description_is_required: "Description is required."
+        attachments: "Attachments"
+        add_a_new_file: "Add a new file"
+        event_type: "Event type"
+        dates_and_opening_hours: "Dates and opening hours"
+        all_day: "All day"
+        start_date: "Start date"
+        end_date: "End date"
+        start_time: "Start time"
+        end_time: "End time"
+        recurrence: "Recurrence"
+        _and_ends_on: "and ends on"
+        prices_and_availabilities: "Prices and availabilities"
+        standard_rate: "Standard rate"
+        0_=_free: "0 = free"
+        tickets_available: "Tickets available"
+
+      plan:
+        # subscription plan edition form
+        general_informations: "General informations"
+        name_is_required: "Name is required."
+        name_length_must_be_less_than_24_characters: "Name length must be less than 24 characters."
+        type_is_required: "Type is required."
+        group: "Group"
+        transversal_(all_groups): "Transversal (all groups)"
+        group_is_required: "Group is required."
+        number_of_periods: "Number of periods"
+        number_of_periods_is_required: "Number of periods is required."
+        period: "Period"
+        period_is_required: "Period is required."
+        price_is_required: "Price is required."
+        visual_prominence_of_the_subscription: "Visual prominence of the subscription"
+        on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "On the subscriptions page, the most prominent subscriptions will be placed at the top of the list."
+        an_evelated_number_means_a_higher_prominence: "An elevated number means a higher prominence."
+        rolling_subscription: "Rolling subscription?"
+        a_rolling_subscription_will_begin_the_day_of_the_first_training: "A rolling subscription will begin the day of the first trainings."
+        otherwise_it_will_begin_as_soon_as_it_is_bought: "Otherwise, it will begin as soon as it is bought."
+        information_sheet: "Information sheet"
+        attach_an_information_sheet: "Attach an information sheet"
+        notified_partner: "Notified partner"
+        new_user: "New user ..."
+        as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "As part of a partner subscription, some notifications may be sent to this user."
+        new_partner: "New partner"
+        email_address_is_required: "Email address is required."
+
+      user_admin:
+        # partial form to edit/create an user (admin view)
+        group: "Group"
+        group_is_required: "Group is required"
+        disable_invoices_generation: "Disable invoices generation:"
+        no_more_invoices_will_be_generated_for_: "No more invoices will be generated for"
+        _the_payments_carried_out_at_the_reception_: "the payments carried out at the reception"
+        _regarding_this_user: "regarding this user."
+        trainings: "Trainings"
+
+      authentication:
+        # partial form to edit/create an authentication provider (SSO)
+        provider_name_is_required: "Provider name is required."
+        authentication_type: "Authentication type"
+        authentication_type_is_required: "Authentication type is required."
+
+      oauth2:
+        # edition/creation form of an OAuth2 authentication provider
+        common_url: "Common URL"
+        common_url_is_required: "Common URL is required."
+        provided_url_is_not_a_valid_url: "Provided URL is not a valid URL."
+        authorization_endpoint: "Authorization endpoint"
+        oauth2_authorization_endpoint_is_required: "OAuth 2.0 authorization endpoint is required."
+        provided_endpoint_is_not_valid: "Provided endpoint is not valid."
+        token_acquisition_endpoint: "Token acquisition endpoint"
+        oauth2_token_acquisition_endpoint_is_required: "OAuth 2.0 token acquisition endpoint is required."
+        profil_edition_url: "Profil edition URL"
+        profile_edition_url_is_required: "Profile edition URL is required."
+        client_identifier: "Client identifier"
+        oauth2_client_identifier_is_required: "OAuth 2.0 client identifier is required."
+        obtain_it_when_registering_with_your_provider: "Obtain it when registering with your provider."
+        client_secret: "Client secret"
+        oauth2_client_secret_is_required: "OAuth 2.0 client secret is required."
+        define_the_fields_mapping: "Define the fields mapping"
+        add_a_match: "Add a match"
+        field: "Fiels"
+        api_endpoint_url: "API endpoint URL"
+        api_type: "API type"
+        api_fields: "API fields"
+
+      confirm_modify_slot_modal:
+        # machine/training slot modification modal
+        change_the_slot: "Change the slot"
+        do_you_want_to_change_your_booking_slot_initially_planned_at: "Do you want to change your booking slot, initially planned at:"
+        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Do you want to change {{NAME}}'s booking slot, initially planned at:"  # angular interpolation
+        cancel_this_reservation: "Cancel this reservation"
+        i_want_to_change_date: "I want to change date"
+
+      request_training_modal:
+        # modal introducing that a training is requested before booking a machine
+        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "To book the \"{{MACHINE}}\" you must have completed the {{TRAINING}}."  # angular interpolation
+        register_for_the_training: "Enroll in the training"
+        i_dont_want_to_register_now: "I don't want to enroll now"
+
+      training_reservation_modal:
+        # modal introducing that a user must wait for his training being validated before booking a machine
+        machine_reservation: "Machine reservation"
+        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
+        your_training_will_occur_: "Your training will occur"

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>jquery old</title>
-  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 
   <!-- include libraries BS2 -->
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
@@ -32,21 +32,16 @@
   </style>
 
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('.summernote')
-              .on('summernote.init', function() {
-                console.log('summernote initialize!')
-              })
-              .on('summernote.change', function() {
-                console.log(' changed content ')
-              })
-              .on('summernote.keyup', function(event) {
-                console.log('you can use keyboard event', event);
-              })
-              .on('summernote.enter', function(event) {
-                console.log('check enter key ');
-              })
-              .summernote({ height : 300 });
+    $(function() {
+      $('.summernote').on('summernote.init', function() {
+        console.log('summernote initialize!')
+      }).on('summernote.change', function() {
+        console.log(' changed content ')
+      }).on('summernote.keyup', function(event) {
+        console.log('you can use keyboard event', event);
+      }).on('summernote.enter', function(event) {
+        console.log('check enter key ');
+      }).summernote({ height : 300 });
 
     });
   </script>

@@ -10,6 +10,7 @@ Used by [Bootstrap](http://getbootstrap.com), thousands of [open source projects
 
 * [npm](http://npmjs.com/): `npm install holderjs`
 * [Bower](http://bower.io/): `bower install holderjs`
+* [RawGit](http://rawgit.com): <https://cdn.rawgit.com/imsky/holder/master/holder.js>
 * [cdnjs](http://cdnjs.com/): <http://cdnjs.com/libraries/holder>
 * [jsDelivr](http://www.jsdelivr.com): <http://www.jsdelivr.com/#!holder>
 * [Rails Assets](https://rails-assets.org): `gem 'rails-assets-holderjs'`
@@ -234,7 +235,7 @@ Holder can render placeholders as background images for elements with the `holde
 The Holder URL in CSS should have a `?` in front. Like in image placeholders, you can specify the Holder URL in a `data-background-src` attribute:
 
 ```html
-<div data-background-src="?holder.js/300x200"></div>
+<div class="holderjs" data-background-src="?holder.js/300x200"></div>
 ```
 
 **Important:** Make sure to define a height and/or width for elements with background placeholders. Fluid background placeholders are not yet supported.
