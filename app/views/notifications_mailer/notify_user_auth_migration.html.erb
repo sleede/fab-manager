@@ -1,0 +1,29 @@
+<style type="text/css">
+    .token {
+      margin: auto;
+      width: 16em;
+      background-color: rgba(230, 208, 137, 0.49);
+      border-color: #d1d1d1;
+      border-radius: 0.2em;
+      padding: 2em;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: bold;
+    }
+</style>
+
+<% active_provider = AuthProvider.active %>
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t(".body.the_platform") %> <%= Setting.find_by(name: 'fablab_name').value %> <%= t(".body.is_changing_its_auth_system_and_will_now_use") %> <%= active_provider.name %> <%= t(".body.instead_of") %> <%= AuthProvider.find_by(status: 'previous').name %>.</p>
+
+<p><%= t('.body.consequence_of_the_modification') %></p>
+
+<p><%= t('.body.to_use_the_platform_thanks_for') %> <a href="<%= root_url+user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>?auth_token=<%= @attached_object.auth_token %>" target="_blank">
+    <%= t('.body.create_an_account_on') %> <%= active_provider.name %> <%= t('.body.or_use_an_existing_account_clicking_here') %></a></p>
+
+<p><%= t('.body.in_case_of_problem_enter_the_following_code') %></p>
+
+<div class="token">
+    <%= @attached_object.auth_token %>
+</div>

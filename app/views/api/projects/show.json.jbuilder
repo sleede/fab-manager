@@ -51,9 +51,12 @@ json.project_steps_attributes @project.project_steps.order('project_steps.create
   json.description s.description
   json.title s.title
   json.project_step_image s.project_step_image.attachment_identifier if s.project_step_image
-  json.project_step_image_url s.project_step_image.attachment_url if s.project_step_image
+  json.project_step_image_url s.project_step_image.attachment.medium.url if s.project_step_image
 end
 json.state @project.state
 json.licence do
   json.name @project.licence.name
 end if @project.licence.present?
+#json.project_steps_attributes @project.project_steps do |s|
+  #json.set! s.id, {id: s.id, description: s.description}
+#end

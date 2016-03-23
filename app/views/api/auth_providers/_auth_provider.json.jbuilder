@@ -1,0 +1,1 @@
+json.extract! auth_provider, :id, :name, :status, :providable_type

@@ -2,13 +2,19 @@
 
 ***
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 [![Build Status](https://travis-ci.org/summernote/angular-summernote.png?branch=master)](https://travis-ci.org/summernote/angular-summernote)
 [![Dependency Status](https://gemnasium.com/summernote/angular-summernote.png)](https://gemnasium.com/summernote/angular-summernote)
 [![Coverage Status](https://coveralls.io/repos/summernote/angular-summernote/badge.png)](https://coveralls.io/r/summernote/angular-summernote)
 
 angular-summernote is just a directive to bind summmernote's all features.
 You can use summernote with angular way.
+
+**Since v0.7.x, the version of angular-summernote follows the version of summernote.
+So, angular-summernote v0.7.x are compatible with summernote v0.7.x and
+and angular-summernote v0.8.x will be compatible with summernote v0.8.x.
+Angular-summernote will match only `major.minor` with summernote.
+Therefore, angular-summernote v0.7.0 will be compatible with summernote v0.7.0, v0.7.1 and
+v0.7.2. Angular-summernote will release patch update, such as v0.7.1, if only angular-summernote has changed.**
 
 ## Table of Contents
 
@@ -25,7 +31,7 @@ You can use summernote with angular way.
 
 ## Demo
 
-See at [JSFiddle](http://jsfiddle.net/outsider/n8dt4/158/embedded/result%2Chtml%2Cjs%2Ccss/)
+See at [JSFiddle](http://jsfiddle.net/outsider/n8dt4/271/embedded/result%2Chtml%2Cjs%2Ccss/)
 or run example in projects(need to run `bower install` before run)
 
 ## Installation
@@ -65,6 +71,12 @@ And when the scope is destroyed the directive will be destroyed.
 
 It will be initialized automatically.
 
+If you put markups in the directive, the markups used as initial text.
+
+```html
+<summernote><span style="font-weight: bold;">This is initial text.</span></summernote>
+```
+
 ### Options
 
 summernote's options can be specified as attributes.
@@ -84,6 +96,39 @@ summernote's options can be specified as attributes.
 #### airmode
 ```html
 <summernote airMode></summernote>
+```
+
+If you use the `removeMedia` button in popover, like below:
+
+```
+<summernote airMode config="options" on-media-delete="mediaDelete(target)"></summernote>
+```
+
+```
+function DemoController($scope) {
+  $scope.options = {
+    popover: {
+      image: [['remove', ['removeMedia']] ],
+      air: [['insert', ['picture']]]
+    }
+  };
+  $scope.mediaDelete = function(target) {
+    console.log('media is delted:', target);
+  }
+}
+```
+
+You can use the 'onMediaDelete` callback. The `target` object has information of the DOM that is removed like:
+
+```
+{
+  tagName: "IMG",
+  attrs: {
+    data-filename: "image-name.jpg",
+    src: "http://path/to/image",
+    style: "width: 100px;"
+  }
+}
 ```
 
 #### options object
@@ -138,6 +183,10 @@ function DemoController($scope) {
 }
 ```
 
+And you can use [ngModelOptions](https://docs.angularjs.org/api/ng/directive/ngModelOptions)
+with Angular v1.3+. So, you can update ngModel when blur event emitted or with a debouncing delay
+if you want.
+
 ### Event Listeners
 
 event listeners can be registered as attribute as you want.
@@ -154,8 +203,8 @@ function DemoController($scope) {
   };
   $scope.keyup = function(e) { console.log('Key is released:', e.keyCode); }
   $scope.keydown = function(e) { console.log('Key is pressed:', e.keyCode); }
-  $scope.imageUpload = function(files, editor) {
-    console.log('image upload:', files, editor);
+  $scope.imageUpload = function(files) {
+    console.log('image upload:', files);
     console.log('image upload\'s editable:', $scope.editable);
   }
 }
@@ -165,14 +214,19 @@ function DemoController($scope) {
 <summernote on-init="init()" on-enter="enter()" on-focus="focus(evt)"
             on-blur="blur(evt)" on-paste="paste()" on-keyup="keyup(evt)"
             on-keydown="keydown(evt)" on-change="change(contents)"
-            on-image-upload="imageUpload(files, editor)" editable="editable">
+            on-image-upload="imageUpload(files)" editable="editable" editor="editor">
 </summernote>
 ```
 
 If you use `$editable` object in `onImageUpload` or `onChange`
 (see [summernote's callback](http://summernote.org/#/features#callbacks)),
-you should defined `editable` attribute and use it in `$scope`.
+you should define `editable` attribute and use it in `$scope`.
 (Because [AngularJS 1.3.x restricts access to DOM nodes from within expressions](https://docs.angularjs.org/error/$parse/isecdom))
+
+Since summernote v0.6.4, APIs have been changed. So, If you use the verions,
+`onImageUpload` is not return `editor` object anymore. If you want to user
+`editor` object, you should define `editor` attribute and use it in `$scope`.
+Futhermore, you can use summernote's APIs via the `editor` object.
 
 ### i18n Support
 

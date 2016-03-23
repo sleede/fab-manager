@@ -1,0 +1,214 @@
+fr:
+  app:
+    public:
+      common:
+        # en-tête et page "à propos"
+        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} other{des}} {NAME}"  # messageFormat interpolation
+        return: "Retour"
+
+        # sections du tableau de bord
+        dashboard: "Tableau de bord"
+        my_profile: "Mon profil"
+        my_projects: "Mes projets"
+        my_trainings: "Mes formations"
+        my_courses_and_workshops: "Mes stages et ateliers"
+        my_invoices: "Mes factures"
+
+        # connexion / déconnexion
+        sign_out: "Se déconnecter"
+        sign_up: "S'inscrire"
+        sign_in: "Se connecter"
+
+        # menu de gauche
+        notifications: "Notifications"
+        admin: "Admin"
+        reduce_panel: "Réduire le volet"
+
+        # menu de gauche (partie publique)
+        home: "Accueil"
+        reserve_a_machine: "Réserver une machine"
+        trainings_registrations: "Inscriptions formations"
+        courses_and_workshops_registrations: "Inscriptions stages et ateliers"
+        projects_gallery: "Galerie de projets"
+        subscriptions: "Abonnements"
+
+        # menu de gauche (partie admin)
+        trainings_monitoring: "Suivi formations"
+        manage_the_calendar: "Gérer le calendrier"
+        manage_the_users: "Gérer les utilisateurs"
+        manage_the_invoices: "Gérer les factures"
+        subscriptions_and_prices: "Abonnements & Tarifs"
+        courses_and_workshops_monitoring: "Suivi stages et ateliers"
+        manage_the_machines: "Gérer les machines"
+        manage_the_projects_elements: "Gérer les éléments projets"
+        statistics: "Statistiques"
+        customization: "Personnalisation"
+
+        # fenêtre de création de compte
+        create_your_account: "Créer votre compte"
+        man: "Homme"
+        woman: "Femme"
+        gender_is_required: "Le genre est requis."
+        your_first_name: "Votre prénom"
+        first_name_is_required: "Le prénom est requis."
+        your_surname: "Votre nom"
+        surname_is_required: "Le nom est requis."
+        your_pseudonym: "Votre pseudonyme"
+        pseudonym_is_required: "Le pseudonyme est requis."
+        your_email_address: "Votre adresse de courriel"
+        email_is_required: "L'adresse de courriel est requise."
+        your_password: "Votre mot de passe"
+        password_is_required: "Le mot de passe est requis."
+        password_is_too_short_(minimum_8_characters): "Le mot de passe est trop court (au moins 8 caractères)"
+        type_your_password_again: "Ressaisissez votre mot de passe"
+        password_confirmation_is_required: "La confirmation du mot de passe est requise."
+        password_does_not_match_with_confirmation: "Le mot de passe ne concorde pas avec la confirmation."
+        your_user_s_profile: "Votre profil utilisateur"
+        user_s_profile_is_required: "Le profil utilisateur est requis."
+        birth_date: "Date de naissance"
+        birth_date_is_required: "La date de naissance est requise."
+        phone_number: "Numéro de téléphone"
+        phone_number_is_required: "Le numéro de téléphone est requis."
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
+        i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
+        _the_fablab_policy: "la charte d'utilisation du Fab Lab"
+
+        # fenêtre de changement de mot de passe
+        change_your_password: "Modifier votre mot de passe"
+        your_new_password: "Votre nouveau mot de passe"
+        your_password_was_successfully_changed: "Votre mot de passe a bien été modifié."
+
+        # fenêtre de connexion
+        connection: "Connexion"
+        password_forgotten: "Mot de passe oublié ?"
+        not_registered_to_the_fablab: "Vous n'êtes pas inscrit au FAB LAB ?"
+        create_an_account: "Créer un compte"
+        wrong_email_or_password: "Adresse courriel ou mot de passe incorrect."
+
+        # mot de passe oublié
+        your_email_address_is_unknown: "Votre adresse de courriel est inconnue."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Vous allez recevoir sous quelques minutes un courriel vous indiquant comment réinitialiser votre mot de passe."
+
+      about:
+        # page à propos
+        read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
+        your_fablab_s_contacts: "Vos contacts au Fab Lab"
+
+      home:
+        # page d'accueil
+        latest_documented_projects: "Les derniers projets documentés"
+        follow_us: "Suivez-nous"
+        latest_tweets: "Les derniers tweets"
+        latest_registered_members: "Derniers members inscrits"
+        create_an_account: "Créer un compte"
+        discover_members: "Découvrir les membres"
+
+        # résumé des prochains évènements sur la page d'acceuil
+        fablab_s_next_courses_and_workshops: "Les prochains ateliers et stages du Fab Lab"
+        every_events: "Tous les évènements"
+        from_date_to_date: "Du {{START}} au {{END}}"  # angular interpolation
+        on_the_date: "Le {{DATE}}"  # angular interpolation
+        from_time_to_time: "De {{START}} à {{END}}"  # angular interpolation
+        free_entry: "Entrée libre"
+        free_admission: "Entrée gratuite"
+        full_price: "Plein tarif"
+        event_full: "Événement complet"
+
+      projects_list:
+        # galerie des projets
+        the_fablab_projects: "Les projets du FabLab"
+        add_a_project: "Ajouter un projet"
+        filter_projects: "Filtrer les projets :"
+        reset_all_filters: "Réinitialiser tous les filtres"
+        search: "Rechercher"
+        all_projects: "Tous les projets"
+        my_projects: "Mes projets"
+        projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
+        all_machines: "Toutes les machines"
+        all_themes: "Toutes les thématiques"
+        all_materials: "Tous les matériaux"
+        load_next_projects: "Charger les projets suivants ..."
+
+      projects_show:
+        # détails d'un projet
+        project_description: "Description du projet"
+        by_name: "Par {{NAME}}"  # angular interpolation
+        posted_on_: "posté le"
+        CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"  # messageFormat interpolation
+        licence: "Licence"
+        report_an_abuse: "Signaler un abus"
+        unauthorized_operation: "Opération non autorisée"
+        your_report_was_successful_thanks: "Votre signalement a bien été pris en compte, merci."
+        an_error_occured_while_sending_your_report: "Une erreur est survenue lors de l'envoi de votre signalement."
+        your_first_name: "Votre prénom"
+        your_first_name_is_required: "Votre prénom est requis."
+        your_surname: "Votre nom"
+        your_surname_is_required: "Votre nom est requis."
+        your_email_address: "Votre adresse e-mail"
+        your_email_address_is_required: "Votre adresse e-mail est requise."
+        tell_us_why_this_looks_abusive: "Dites nous en quoi cela vous semble abusif"
+        message_is_required: "Le message est requis."
+        report: "Signaler"
+
+      machines_list:
+        # liste des machines
+        the_fablab_s_machines: "Les machines du FabLab"
+        add_a_machine: "Ajouter une machine"
+        book: "Réserver"
+        _or_the_: " ou la "
+
+      machines_show:
+        # détail d'une machine
+        book_this_machine: "Réserver cette machine"
+        files_to_download: "Fichiers à télécharger"
+        projects_using_the_machine: "Projets utilisant la machine"
+        _or_the_: " ou la "
+        unauthorized_operation: "Opération non autorisée"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+
+      plans:
+        # page récapitulative des abonnements
+        subcriptions: "Les abonnements"
+        i_choose_that_plan: "Je choisis cette formule"
+        i_subscribe_online: "Je m'abonne en ligne"
+        i_already_subscribed: "Je suis déjà abonné"
+        more_informations: "Plus d'infos"
+        your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}"  # angular interpolation
+        my_group: "Mon groupe"
+        his_group: "Son groupe"  # messageFormat interpolation
+        he_wants_to_change_group: "{ROLE, select, admin{Il veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
+        change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"  # messageFormat interpolation
+        your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {{DATE}}"  # angular interpolation
+        you_ve_just_payed_the_: "Vous venez de régler l'"
+        thank_you_your_subscription_is_successful: "Merci. Votre abonnement a bien été pris en compte !"
+        your_group_was_successfully_changed: "Votre groupe a bien été changé."
+        the_user_s_group_was_successfully_changed: "Le groupe de l'utilisateur a bien été changé."
+        an_error_prevented_your_group_from_being_changed: "Une erreur a empêché votre changement de groupe."
+        an_error_prevented_to_change_the_user_s_group: "Une erreur a empêché le changement de groupe de l'utilisateur."
+        an_error_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
+        subscription_confirmation: "Validation de l'abonnement"
+        here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {{NAME}} :"  # angular interpolation
+
+      events_list:
+        # liste des évènements du fablab
+        the_fablab_s_courses_and_workshops: "Les Stages et ateliers du Fab Lab"
+
+      events_show:
+        # détails d'un événement et réservation
+        event_description: "Description de l'évènement"
+        downloadable_documents: "Documents à télécharger"
+        informations_and_booking: "Informations et réservation"
+        beginning: "Début :"
+        ending: "Fin :"
+        opening_hours: "Horaires :"
+        reduced_rate*: "Tarif réduit* :"
+        tickets_still_availables: "Places encore disponibles :"
+        sold_out: "Événement complet."
+        free_entry: "Entrée libre"
+        ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"  # messageFormat interpolation
+        make_a_gift_of_this_reservation: "Offrir cette réservation"
+        you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
+        you_booked_(DATE): "Vous avez réservé ({{DATE}}) :"  # angular interpolation
+        book: "Réserver"
+        change_the_reservation: "Modifier la réservation"
+        you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"

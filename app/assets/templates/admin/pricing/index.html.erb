@@ -1,0 +1,219 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1 translate>{{ 'pricing_management' }}</h1>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="m-lg">
+  <div class="row">
+
+    <div class="col-md-12">
+      <uib-tabset justified="true">
+
+        <uib-tab heading="{{ 'subscriptions' | translate }}">
+          <h2 translate>{{ 'list_of_the_subscription_plans' }}</h2>
+
+          <div ng-show="fablabWithoutPlans" class="alert alert-warning m-t">
+            {{ 'beware_the_subscriptions_are_disabled_on_this_application' | translate }}
+            {{ 'you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager' | translate }}
+            <br>{{ 'for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later' | translate }}
+          </div>
+
+          <button type="button" class="btn btn-warning m-t-lg m-b" ui-sref="app.admin.plans.new" translate>{{ 'add_a_new_subscription_plan' }}</button>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th><a href="" ng-click="setOrderPlans('type')">{{ 'type' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='type', 'fa fa-sort-alpha-desc': orderPlans=='-type', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+                      <th><a href="" ng-click="setOrderPlans('name')">{{ 'name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='name', 'fa fa-sort-alpha-desc': orderPlans=='-name', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+                      <th><a href="" ng-click="setOrderPlans('interval')">{{ 'duration' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-amount-asc': orderPlans=='interval', 'fa fa-sort-amount-desc': orderPlans=='-interval', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+                      <th><a href="" ng-click="setOrderPlans('group_id')">{{ 'group' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='group_id', 'fa fa-sort-alpha-desc': orderPlans=='-group_id', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+                      <th><a href="" ng-click="setOrderPlans('ui_weight')">{{ 'prominence' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPlans=='ui_weight', 'fa fa-sort-numeric-desc': orderPlans=='-ui_weight', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+                      <th><a href="" ng-click="setOrderPlans('amount')">{{ 'price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPlans=='amount', 'fa fa-sort-numeric-desc': orderPlans=='-amount', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="plan in plans | orderBy:orderPlans">
+                      <td>{{getPlanType(plan.type)}}</td>
+                      <td>{{plan.base_name}}</td>
+                      <td>{{ plan.interval | planIntervalFilter }}</td>
+                      <td>{{getGroupFromId(groups, plan.group_id).name}}</td>
+                      <td>{{plan.ui_weight}}</td>
+                      <td>{{plan.amount | currency}}</td>
+                      <td><button type="button" class="btn btn-default" ui-sref="app.admin.plans.edit({id:plan.id})"><i class="fa fa-pencil-square-o"></i></button> <button type="button" class="btn btn-danger" ng-click="deletePlan(plans, plan.id)"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+              </tbody>
+          </table>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'trainings' | translate }}">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:20%" translate>{{ 'trainings' }}</th>
+                <th style="width:20%" ng-repeat="group in groups">
+                  <span class="text-u-c text-sm">{{group.name}}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="training in trainings">
+                <td>
+                  {{ training.name }}
+                </td>
+                <td ng-repeat="group in groups">
+                  <span editable-number="findTrainingsPricing(trainingsPricings, training.id, group.id).amount"
+                    onbeforesave="updateTrainingsPricing($data, findTrainingsPricing(trainingsPricings, training.id, group.id))">
+                      {{ findTrainingsPricing(trainingsPricings, training.id, group.id).amount | currency}}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'machine_hours' | translate }}">
+          <div class="alert alert-warning m-t">
+            {{ 'these_prices_match_machine_hours_rates_' | translate }} <span class="font-bold" translate>{{ '_without_subscriptions' }}</span>.
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:20%"  translate>{{ 'machines' }}</th>
+                <th style="width:20%" ng-repeat="group in groups">
+                  <span class="text-u-c text-sm">{{group.name}}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="machine in machines">
+                <td>
+                  {{ machine.name }}
+                </td>
+                <td ng-repeat="group in groups">
+                  <span editable-number="findPriceBy(machinesPrices, machine.id, group.id).amount"
+                    onbeforesave="updatePrice($data, findPriceBy(machinesPrices, machine.id, group.id))">
+                      {{ findPriceBy(machinesPrices, machine.id, group.id).amount | currency}}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'credits' | translate }}">
+          <h2 class="m-t-lg" translate>{{ 'trainings' }}</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:20%" translate>{{ 'subscription' }}</th>
+                <th style="width:10%" translate>{{ 'credits' }}</th>
+                <th style="width:50%" translate>{{ 'related_trainings' }}</th>
+                <th style="width:20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr ng-repeat="(planId, trainingIds) in trainingCreditsGroups" ng-init="plan = getPlanFromId(planId)">
+                  <td>
+                    {{ plan | humanReadablePlanName: groups }}
+                  </td>
+                  <td>
+                      <span editable-text="plan.training_credit_nb" e-form="rowform" e-name="training_credits" e-required>
+                          {{ plan.training_credit_nb }}
+                      </span>
+                  </td>
+                  <td>
+                      <span editable-checklist="trainingIds" e-form="rowform" e-name="training_ids" e-ng-options="t.id as t.name for t in trainings" e-required>
+                          {{ showTrainings(trainingIds) }}
+                      </span>
+                  </td>
+                  <td>
+                      <form editable-form name="rowform" onbeforesave="saveTrainingCredits($data, planId)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == trainingIds">
+                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                          <i class="fa fa-check"></i>
+                        </button>
+                        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelTrainingCredit(rowform)" class="btn btn-default">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </form>
+                      <div class="buttons" ng-show="!rowform.$visible">
+                        <button class="btn btn-default" ng-click="rowform.$show()">
+                          <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+                        </button>
+                      </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="m-t-lg" translate>{{ 'machines' }}</h2>
+          <div class="btn-group m-t-md m-b-md">
+            <button type="button" class="btn btn-warning" ng-click="addMachineCredit($event)" translate>{{ 'add_a_machine_credit' }}</button>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:20%" translate>{{ 'machine' }}</th>
+                <th style="width:10%" translate>{{ 'hours' }}</th>
+                <th style="width:50%" translate>{{ 'related_subscriptions' }}</th>
+                <th style="width:20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="mc in machineCredits">
+                <td>
+                  <span editable-select="mc.creditable_id" e-name="creditable_id" e-form="rowform" e-ng-options="m.id as m.name+' ( id. '+m.id+' )' for m in machines" e-required>
+                    {{ showCreditableName(mc) }}
+                  </span>
+                </td>
+                <td>
+                  <span editable-number="mc.hours" e-name="hours" e-form="rowform" e-required>
+                    {{ mc.hours }}
+                  </span>
+                </td>
+                <td>
+                  <span editable-select="mc.plan_id" e-ng-options="p.id as humanReadablePlanName(p, groups, 'short') for p in plans" e-name="plan_id" e-form="rowform">
+                    {{ getPlanFromId(mc.plan_id) | humanReadablePlanName: groups: 'short' }}
+                  </span>
+                </td>
+                <td>
+                  <form editable-form name="rowform" onbeforesave="saveMachineCredit($data, mc.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == mc">
+                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+                      <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelMachineCredit(rowform, $index)" class="btn btn-default">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </form>
+                  <div class="buttons" ng-show="!rowform.$visible">
+                    <button class="btn btn-default" ng-click="rowform.$show()">
+                      <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+                    </button>
+                    <button class="btn btn-danger" ng-click="removeMachineCredit($index)">
+                      <i class="fa fa-trash-o"></i> {{ 'delete' | translate }} (!)
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+
+  </div>
+</section>

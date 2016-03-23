@@ -1,0 +1,6 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.your_plan') %> <strong><em><%= @attached_object.plan.human_readable_name %></em></strong> <%= t('.body.expires_in_7_days') %>.</p>
+<% if @attached_object.stp_subscription_id %>
+  <p><%= t('.body.to_renew_your_plan_follow_the_link') %> <%= link_to "votre page de profil", "#{root_url}#!/dashboard/profile" %></p>
+<% end %>

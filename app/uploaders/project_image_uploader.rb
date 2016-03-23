@@ -58,5 +58,5 @@ class ProjectImageUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     "#{model.class.to_s.underscore}.#{file.extension}" if original_filename
-  end 
+  end
 end

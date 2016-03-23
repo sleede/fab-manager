@@ -75,18 +75,95 @@ class MachinesController
 
 
 ##
+# Manages the transition when a user clicks on the reservation button.
+# According to the status of user currently logged into the system, redirect him to the reservation page,
+# or display a modal window asking him to complete a training before he can book a machine reservation.
+# @param machine {{id:number}} An object containg the id of the machine to book,
+#   the object will be completed before the fonction returns.
+# @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+##
+_reserveMachine = (machine, e) ->
+  _this = this
+  e.preventDefault()
+  e.stopPropagation()
+
+  # retrieve the full machine object
+  machine = _this.Machine.get {id: machine.id}, ->
+
+    # if the currently logged'in user has completed the training for this machine, or this machine does not require
+    # a prior training, just redirect him to the machine's booking page
+    if machine.current_user_is_training or machine.trainings.length == 0
+      _this.$state.go('app.logged.machines_reserve', {id: machine.id})
+    else
+      # otherwise, if a user is authenticated ...
+      if _this.$scope.isAuthenticated()
+        # ... and have booked a training for this machine, tell him that he must wait for an admin to validate
+        # the training before he can book the reservation
+        if machine.current_user_training_reservation
+          _this.$uibModal.open
+            templateUrl: '<%= asset_path "machines/training_reservation_modal.html" %>'
+            controller: ['$scope', '$uibModalInstance', '$state', ($scope, $uibModalInstance, $state) ->
+              $scope.machine = machine
+              $scope.cancel = ->
+                $uibModalInstance.dismiss('cancel')
+            ]
+        # ... but does not have booked the training, tell him to register for a training session first
+        else
+          _this.$uibModal.open
+            templateUrl: '<%= asset_path "machines/request_training_modal.html" %>'
+            controller: ['$scope', '$uibModalInstance', '$state', ($scope, $uibModalInstance, $state) ->
+              $scope.machine = machine
+              $scope.member = _this.$scope.currentUser
+
+              # transform the name of the trainings associated with the machine to integrate them in a sentence
+              $scope.humanizeTrainings = ->
+                text = ''
+                angular.forEach $scope.machine.trainings, (training) ->
+                  if text.length > 0
+                    text += _this._t('_or_the_')
+                  text += training.name.substr(0,1).toLowerCase() + training.name.substr(1)
+                text
+
+              # modal is close with validation
+              $scope.ok = ->
+                $state.go('app.logged.trainings_reserve')
+                $uibModalInstance.close(machine)
+
+              # modal is closed with escaping
+              $scope.cancel = (e)->
+                e.preventDefault()
+                $uibModalInstance.dismiss('cancel')
+            ]
+      # if the user is not logged, open the login modal window
+      else
+        _this.$scope.login()
+
+
+
+
+##
 # Controller used in the public listing page, allowing everyone to see the list of machines
 ##
-Application.Controllers.controller "machinesController", ["$scope", "$state", 'Machine', '$modal', ($scope, $state, Machine, $modal) ->
+Application.Controllers.controller "MachinesController", ["$scope", "$state", '_t', 'Machine', '$uibModal', 'machinesPromise', ($scope, $state, _t, Machine, $uibModal, machinesPromise) ->
 
-  ## Retrieve the list of machines
-  $scope.machines = Machine.query()
+## Retrieve the list of machines
+  $scope.machines = machinesPromise
 
   ##
   # Redirect the user to the machine details page
   ##
   $scope.showMachine = (machine) ->
     $state.go('app.public.machines_show', {id: machine.slug})
+
+  ##
+  # Callback to book a reservation for the current machine
+  ##
+  $scope.reserveMachine = _reserveMachine.bind
+    $scope: $scope
+    $state: $state
+    _t: _t
+    $uibModal: $uibModal
+    Machine: Machine
 ]
 
 
@@ -94,7 +171,7 @@ Application.Controllers.controller "machinesController", ["$scope", "$state", 'M
 ##
 # Controller used in the machine creation page (admin)
 ##
-Application.Controllers.controller "newMachineController", ["$scope", "$state", 'CSRF', ($scope, $state, CSRF) ->
+Application.Controllers.controller "NewMachineController", ["$scope", "$state", 'CSRF',($scope, $state, CSRF) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -116,8 +193,11 @@ Application.Controllers.controller "newMachineController", ["$scope", "$state", 
 ##
 # Controller used in the machine edition page (admin)
 ##
-Application.Controllers.controller "editMachineController", ["$scope", "$state", '$stateParams', 'Machine', 'CSRF', ($scope, $state, $stateParams, Machine, CSRF) ->
-  CSRF.setMetaTags()
+Application.Controllers.controller "EditMachineController", ["$scope", '$state', '$stateParams', 'machinePromise', 'CSRF', ($scope, $state, $stateParams, machinePromise, CSRF) ->
+
+
+
+  ### PUBLIC SCOPE ###
 
   ## API URL where the form will be posted
   $scope.actionUrl = "/api/machines/" + $stateParams.id
@@ -126,14 +206,24 @@ Application.Controllers.controller "editMachineController", ["$scope", "$state",
   $scope.method = "put"
 
   ## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
-  $scope.machine = Machine.get {id: $stateParams.id}
-  , ->
-    return
-  , ->
-    $state.go('app.public.machines_list')
+  $scope.machine = machinePromise
 
-  ## Using the MachinesController
-  new MachinesController($scope, $state)
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    CSRF.setMetaTags()
+
+    ## Using the MachinesController
+    new MachinesController($scope, $state)
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]
 
 
@@ -141,14 +231,11 @@ Application.Controllers.controller "editMachineController", ["$scope", "$state",
 ##
 # Controller used in the machine details page (public)
 ##
-Application.Controllers.controller "showMachineController", ['$scope', '$state', '$modal', '$stateParams', 'Machine', ($scope, $state, $modal, $stateParams, Machine) ->
+Application.Controllers.controller "ShowMachineController", ['$scope', '$state', '$uibModal', '$stateParams', '_t', 'Machine', 'growl', 'machinePromise'
+, ($scope, $state, $uibModal, $stateParams, _t, Machine, growl, machinePromise) ->
 
-  ## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
-  $scope.machine = Machine.get {id: $stateParams.id}
-  , ->
-    return
-  , ->
-    $state.go('app.public.machines_list')
+## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
+  $scope.machine = machinePromise
 
   ##
   # Callback to delete the current machine (admins only)
@@ -156,9 +243,730 @@ Application.Controllers.controller "showMachineController", ['$scope', '$state',
   $scope.delete = (machine) ->
     # check the permissions
     if $scope.currentUser.role isnt 'admin'
-      console.error 'Unauthorized operation'
+      console.error _t('unauthorized_operation')
     else
       # delete the machine then redirect to the machines listing
       machine.$delete ->
         $state.go('app.public.machines_list')
+      , (error)->
+        growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
+  ##
+  # Callback to book a reservation for the current machine
+  ##
+  $scope.reserveMachine = _reserveMachine.bind
+    $scope: $scope
+    $state: $state
+    _t: _t
+    $uibModal: $uibModal
+    Machine: Machine
+]
+
+
+
+##
+# Controller used in the machine reservation page (for logged users who have completed the training and admins).
+# This controller workflow is pretty similar to the trainings reservation controller.
+##
+
+Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise',
+($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise) ->
+
+
+
+  ### PRIVATE STATIC CONSTANTS ###
+
+  # The calendar is divided in slots of 60 minutes
+  BASE_SLOT = '01:00:00'
+
+  # The calendar will be initialized positioned under 9:00 AM
+  DEFAULT_CALENDAR_POSITION = '09:00:00'
+
+  # The user is unable to modify his already booked reservation 1 day before it occurs
+  PREVENT_BOOKING_MODIFICATION_DELAY = 1
+
+  # Slot already booked by the current user
+  FREE_SLOT_BORDER_COLOR = '#e4cd78'
+
+  # Slot already booked by another user
+  UNAVAILABLE_SLOT_BORDER_COLOR = '#1d98ec'
+
+  # Slot free to be booked
+  BOOKED_SLOT_BORDER_COLOR = '#b2e774'
+
+
+
+  ### PUBLIC SCOPE ###
+
+  ## after fullCalendar loads, provides access to its methods through $scope.calendar.fullCalendar()
+  $scope.calendar = null
+
+  ## bind the machine availabilities with full-Calendar events
+  $scope.eventSources = []
+
+  ## fullCalendar event. The last selected slot that the user want to book
+  $scope.slotToPlace = null
+
+  ## fullCalendar event. An already booked slot that the user want to modify
+  $scope.slotToModify = null
+
+  ## indicates the state of the current view : calendar or plans informations
+  $scope.plansAreShown = false
+
+  ## will store the user's plan if he choosed to buy one
+  $scope.selectedPlan = null
+
+  ## array of fullCalendar events. Slots where the user want to book
+  $scope.eventsReserved = []
+
+  ## total amount of the bill to pay
+  $scope.amountTotal = 0
+
+  ## is the user allowed to change the date of his booking
+  $scope.enableBookingMove = true
+
+  ## how many hours before the reservation, the user is still allowed to change his booking
+  $scope.moveBookingDelay = 24
+
+  ## list of plans, classified by group
+  $scope.plansClassifiedByGroup = []
+  for group in groupsPromise
+    groupObj = { id: group.id, name: group.name, plans: [] }
+    for plan in plansPromise
+      groupObj.plans.push(plan) if plan.group_id == group.id
+    $scope.plansClassifiedByGroup.push(groupObj)
+
+  ## the user to deal with, ie. the current user for non-admins
+  $scope.ctrl =
+    member: {}
+
+  ## fablab users list
+  $scope.members = []
+
+  ## current machine to reserve
+  $scope.machine = {}
+
+  ## fullCalendar (v2) configuration
+  $scope.calendarConfig =
+    timezone: Fablab.timezone
+    lang: Fablab.fullcalendar_locale
+    header:
+      left: 'month agendaWeek'
+      center: 'title'
+      right: 'today prev,next'
+    firstDay: 1 # Week start on monday (France)
+    scrollTime: DEFAULT_CALENDAR_POSITION
+    slotDuration: BASE_SLOT
+    allDayDefault: false
+    minTime: '00:00:00'
+    maxTime: '24:00:00'
+    height: 'auto'
+    buttonIcons:
+      prev: 'left-single-arrow'
+      next: 'right-single-arrow'
+    timeFormat:
+      agenda:'H:mm'
+      month: 'H(:mm)'
+    axisFormat: 'H:mm'
+
+    allDaySlot: false
+    defaultView: 'agendaWeek'
+    editable: false
+    eventClick: (event, jsEvent, view) ->
+      calendarEventClickCb(event, jsEvent, view)
+    eventRender: (event, element, view) ->
+      eventRenderCb(event, element)
+
+  ## Global config: message to the end user concerning the subscriptions rules
+  $scope.subscriptionExplicationsAlert = settingsPromise.subscription_explications_alert
+
+  ## Gloabl config: message to the end user concerning the machine bookings
+  $scope.machineExplicationsAlert = settingsPromise.machine_explications_alert
+
+  ## Global config: is the user authorized to change his bookings slots?
+  $scope.enableBookingMove = (settingsPromise.booking_move_enable == "true")
+
+  ## Global config: delay in hours before a booking while changing the booking slot is forbidden
+  $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
+
+  ## Global config: is the user authorized to cancel his bookings?
+  $scope.enableBookingCancel = (settingsPromise.booking_cancel_enable == "true")
+
+  ## Global config: delay in hours before a booking while the cancellation is forbidden
+  $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay)
+
+  ## Global config: calendar window in the morning
+  $scope.calendarConfig.minTime = moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
+
+  ## Global config: calendar window in the evening
+  $scope.calendarConfig.maxTime = moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
+
+
+
+  ##
+  # Cancel the current booking modification, removing the previously booked slot from the selection
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.removeSlotToModify = (e) ->
+    e.preventDefault()
+    if $scope.slotToPlace
+      $scope.slotToPlace.backgroundColor = 'white'
+      $scope.slotToPlace.title = ''
+      $scope.slotToPlace = null
+    $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
+    $scope.slotToModify.backgroundColor = 'white'
+    $scope.slotToModify = null
+    $scope.calendar.fullCalendar 'rerenderEvents'
+
+
+
+  ##
+  # When modifying an already booked reservation, cancel the choice of the new slot
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.removeSlotToPlace = (e)->
+    e.preventDefault()
+    $scope.slotToPlace.backgroundColor = 'white'
+    $scope.slotToPlace.title = ''
+    $scope.slotToPlace = null
+    $scope.calendar.fullCalendar 'rerenderEvents'
+
+
+
+  ##
+  # When modifying an already booked reservation, confirm the modification.
+  ##
+  $scope.modifyMachineSlot = ->
+    Slot.update {id: $scope.slotToModify.id},
+      slot:
+        start_at: $scope.slotToPlace.start
+        end_at: $scope.slotToPlace.end
+        availability_id: $scope.slotToPlace.availability_id
+    , -> # success
+      $scope.modifiedSlots =
+        newReservedSlot: $scope.slotToPlace
+        oldReservedSlot: $scope.slotToModify
+      $scope.slotToPlace.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
+      $scope.slotToPlace.backgroundColor = 'white'
+      $scope.slotToPlace.borderColor = $scope.slotToModify.borderColor
+      $scope.slotToPlace.id = $scope.slotToModify.id
+      $scope.slotToPlace.is_reserved = true
+      $scope.slotToPlace.can_modify = true
+      $scope.slotToPlace = null
+
+      $scope.slotToModify.backgroundColor = 'white'
+      $scope.slotToModify.title = ''
+      $scope.slotToModify.borderColor = FREE_SLOT_BORDER_COLOR
+      $scope.slotToModify.id = null
+      $scope.slotToModify.is_reserved = false
+      $scope.slotToModify.can_modify = false
+      $scope.slotToModify = null
+
+      $scope.calendar.fullCalendar 'rerenderEvents'
+    , (err) ->  # failure
+      growl.error(_t('unable_to_change_the_reservation'))
+      console.error(err)
+
+
+
+  ##
+  # Cancel the current booking modification, reseting the whole process
+  ##
+  $scope.cancelModifyMachineSlot = ->
+    $scope.slotToPlace.backgroundColor = 'white'
+    $scope.slotToPlace.title = ''
+    $scope.slotToPlace = null
+    $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
+    $scope.slotToModify.backgroundColor = 'white'
+    $scope.slotToModify = null
+
+    $scope.calendar.fullCalendar 'rerenderEvents'
+
+
+
+  ##
+  # Callback to deal with the reservations of the user selected in the dropdown list instead of the current user's
+  # reservations. (admins only)
+  ##
+  $scope.updateMember = ->
+    $scope.paidMachineSlots = null
+    $scope.plansAreShown = false
+    $scope.selectedPlan = null
+    updateCartPrice()
+
+
+
+  ##
+  # Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
+  # and increment the total amount of the cart if needed.
+  # @param machineSlot {Object} fullCalendar event object
+  ##
+  $scope.validMachineSlot = (machineSlot)->
+    machineSlot.isValid = true
+    updateCartPrice()
+
+
+
+  ##
+  # Remove the provided slot from the shopping cart (state transition from 'about to be reserved' to free)
+  # and decrement the total amount of the cart if needed.
+  # @param machineSlot {Object} fullCalendar event object
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.removeMachineSlot = (machineSlot, e)->
+    e.preventDefault() if e
+    machineSlot.backgroundColor = 'white'
+    machineSlot.borderColor = FREE_SLOT_BORDER_COLOR
+    machineSlot.title = ''
+    machineSlot.isValid = false
+
+    if machineSlot.machine.is_reduced_amount
+      angular.forEach $scope.ctrl.member.machine_credits, (credit)->
+        if credit.machine_id = machineSlot.machine.id
+          credit.hours_used--
+      machineSlot.machine.is_reduced_amount = false
+
+    index = $scope.eventsReserved.indexOf(machineSlot)
+    $scope.eventsReserved.splice(index, 1)
+    if $scope.eventsReserved.length == 0
+      if $scope.plansAreShown
+        $scope.selectedPlan = null
+      $scope.plansAreShown = false
+    updateCartPrice()
+    $timeout ->
+      $scope.calendar.fullCalendar 'refetchEvents'
+      $scope.calendar.fullCalendar 'rerenderEvents'
+
+
+
+  ##
+  # Checks that every selected slots were added to the shopping cart. Ie. will return false if
+  # any checked slot was not validated by the user.
+  ##
+  $scope.machineSlotsValid = ->
+    isValid = true
+    angular.forEach $scope.eventsReserved, (m)->
+      isValid = false if !m.isValid
+    isValid
+
+
+
+  ##
+  # Changes the user current view from the plan subsription screen to the machine reservation agenda
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.doNotSubscribePlan = (e)->
+    e.preventDefault()
+    $scope.plansAreShown = false
+    $scope.selectPlan($scope.selectedPlan)
+
+
+
+  ##
+  # Validates the shopping chart and redirect the user to the payment step
+  ##
+  $scope.payMachine = ->
+
+    # first, we check that a user was selected
+    if Object.keys($scope.ctrl.member).length > 0
+      reservation = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
+
+      if $scope.currentUser.role isnt 'admin' and $scope.amountTotal > 0
+        payByStripe(reservation)
+      else
+        if $scope.currentUser.role is 'admin' or $scope.amountTotal is 0
+          payOnSite(reservation)
+    else
+      # otherwise we alert, this error musn't occur when the current user is not admin
+      growl.error(_t('please_select_a_member_first'))
+
+
+  ##
+  # Switch the user's view from the reservation agenda to the plan subscription
+  ##
+  $scope.showPlans = ->
+    $scope.plansAreShown = true
+
+
+
+  ##
+  # Add the provided plan to the current shopping cart
+  # @param plan {Object} the plan to subscribe
+  ##
+  $scope.selectPlan = (plan) ->
+    if $scope.isAuthenticated()
+      angular.forEach $scope.eventsReserved, (machineSlot)->
+        angular.forEach $scope.ctrl.member.machine_credits, (credit)->
+          if credit.machine_id = machineSlot.machine.id
+            credit.hours_used = 0
+        machineSlot.machine.is_reduced_amount = false
+
+      if $scope.selectedPlan != plan
+        $scope.selectedPlan = plan
+      else
+        $scope.selectedPlan = null
+      updateCartPrice()
+    else
+      $scope.login null, ->
+        $scope.selectedPlan = plan
+        updateCartPrice()
+
+
+
+  ##
+  # Checks if $scope.slotToModify and $scope.slotToPlace have tag incompatibilities
+  # @returns {boolean} true in case of incompatibility
+  ##
+  $scope.tagMissmatch = ->
+    for tag in $scope.slotToModify.tags
+      if tag.id not in $scope.slotToPlace.tag_ids
+        return true
+    false
+
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    Availability.machine {machineId: $stateParams.id}, (availabilities) ->
+      $scope.eventSources.push
+        events: availabilities
+        textColor: 'black'
+
+    if $scope.currentUser.role isnt 'admin'
+      $scope.ctrl.member = $scope.currentUser
+    else
+      Member.query {requested_attributes:'[subscription,credits]'}, (members) ->
+        $scope.members = members
+
+    $scope.machine = Machine.get {id: $stateParams.id}
+    , ->
+      return
+    , ->
+      $state.go('app.public.machines_list')
+
+
+
+  ##
+  # Create an hash map implementing the Reservation specs
+  # @param member {Object} User as retreived from the API: current user / selected user if current is admin
+  # @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
+  # @param [plan] {Object} Plan as retrived from the API: plan to buy with the current reservation
+  # @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, plan_id:Number|null}}
+  ##
+  mkReservation = (member, slots, plan = null) ->
+    reservation =
+      user_id: member.id
+      reservable_id: (slots[0].machine.id if slots.length > 0)
+      reservable_type: 'Machine'
+      slots_attributes: []
+      plan_id: (plan.id if plan)
+    angular.forEach slots, (slot, key) ->
+      reservation.slots_attributes.push
+        start_at: slot.start
+        end_at: slot.end
+        availability_id: slot.availability_id
+        offered: slot.offered || false
+
+    reservation
+
+
+
+  ##
+  # Update the total price of the current selection/reservation
+  ##
+  updateCartPrice = ->
+    if Object.keys($scope.ctrl.member).length > 0
+      r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
+      Price.compute {reservation: r}, (res) ->
+        $scope.amountTotal = res.price
+        setSlotsDetails(res.details)
+    else
+      # otherwise we alert, this error musn't occur when the current user is not admin
+      growl.warning(_t('please_select_a_member_first'))
+      $scope.amountTotal = null
+
+
+  setSlotsDetails = (details) ->
+    angular.forEach $scope.eventsReserved, (slot) ->
+      angular.forEach details.slots, (s) ->
+        if moment(s.start_at).isSame(slot.start)
+          slot.promo = s.promo
+          slot.price = s.price
+
+
+  ##
+  # Triggered when the user click on a reservation slot in the agenda.
+  # Defines the behavior to adopt depending on the slot status (already booked, free, ready to be reserved ...),
+  # the user's subscription (current or about to be took) and the time (the user cannot modify a booked reservation
+  # if it's too late).
+  ##
+  calendarEventClickCb = (event, jsEvent, view) ->
+
+    if !event.is_reserved && !$scope.slotToModify
+      index = $scope.eventsReserved.indexOf(event)
+      if index == -1
+        event.backgroundColor = FREE_SLOT_BORDER_COLOR
+        event.title = _t('i_reserve')
+        $scope.eventsReserved.push event
+      else
+        $scope.removeMachineSlot(event)
+      $scope.paidMachineSlots = null
+      $scope.selectedPlan = null
+      $scope.modifiedSlots = null
+    else if !event.is_reserved && $scope.slotToModify
+      if $scope.slotToPlace
+        $scope.slotToPlace.backgroundColor = 'white'
+        $scope.slotToPlace.title = ''
+      $scope.slotToPlace = event
+      event.backgroundColor = '#bbb'
+      event.title = _t('i_shift')
+    else if event.is_reserved and (slotCanBeModified(event) or slotCanBeCanceled(event)) and !$scope.slotToModify and $scope.eventsReserved.length == 0
+      event.movable = slotCanBeModified(event)
+      event.cancelable = slotCanBeCanceled(event)
+      dialogs.confirm
+        templateUrl: '<%= asset_path "shared/confirm_modify_slot_modal.html" %>'
+        resolve:
+          object: -> event
+      , (type) ->
+        if type == 'move'
+          $scope.modifiedSlots = null
+          $scope.slotToModify = event
+          event.backgroundColor = '#eee'
+          event.title = _t('i_change')
+          $scope.calendar.fullCalendar 'rerenderEvents'
+        else if type == 'cancel'
+          dialogs.confirm
+            resolve:
+              object: ->
+                title: _t('confirmation_required')
+                msg: _t('do_you_really_want_to_cancel_this_reservation')
+          , -> # cancel confirmed
+            Slot.cancel {id: event.id}, -> # successfully canceled
+              growl.success _t('reservation_was_cancelled_successfully')
+              $scope.canceledSlot = event
+              $scope.canceledSlot.backgroundColor = 'white'
+              $scope.canceledSlot.title = ''
+              $scope.canceledSlot.borderColor = FREE_SLOT_BORDER_COLOR
+              $scope.canceledSlot.id = null
+              $scope.canceledSlot.is_reserved = false
+              $scope.canceledSlot.can_modify = false
+              $scope.canceledSlot = null
+              $scope.calendar.fullCalendar 'rerenderEvents'
+            , -> # error while canceling
+              growl.error _t('cancellation_failed')
+      , ->
+        $scope.paidMachineSlots = null
+        $scope.selectedPlan = null
+        $scope.modifiedSlots = null
+
+    $scope.calendar.fullCalendar 'rerenderEvents'
+
+    updateCartPrice()
+
+
+
+
+    ##
+  # Triggered when fullCalendar tries to graphicaly render an event block.
+  # Append the event tag into the block, just after the event title.
+  # @see http://fullcalendar.io/docs/event_rendering/eventRender/
+  ##
+  eventRenderCb = (event, element) ->
+    if $scope.currentUser.role is 'admin' and event.tags.length > 0
+      html = ''
+      for tag in event.tags
+        html += "<span class='label label-success text-white' title='#{tag.name}'>#{tag.name}</span>"
+      element.find('.fc-time').append(html)
+
+
+
+  ##
+  # Open a modal window that allows the user to process a credit card payment for his current shopping cart.
+  ##
+  payByStripe = (reservation) ->
+
+    $uibModal.open
+      templateUrl: '<%= asset_path "stripe/payment_modal.html" %>'
+      size: 'md'
+      resolve:
+        reservation: ->
+          reservation
+        price: ->
+          Price.compute({reservation: reservation}).$promise
+        cgv: ->
+          CustomAsset.get({name: 'cgv-file'}).$promise
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation',  ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation) ->
+        # Price
+        $scope.amount = price.price
+
+        # CGV
+        $scope.cgv = cgv.custom_asset
+
+        # Reservation
+        $scope.reservation = reservation
+
+        ##
+        # Callback to process the payment with Stripe, triggered on button click
+        ##
+        $scope.payment = (status, response) ->
+          if response.error
+            growl.error(response.error.message)
+          else
+            $scope.attempting = true
+            $scope.reservation.card_token = response.id
+            Reservation.save reservation: $scope.reservation, (reservation) ->
+              $uibModalInstance.close(reservation)
+            , (response)->
+              $scope.alerts = []
+              $scope.alerts.push
+                msg: response.data.card[0]
+                type: 'danger'
+              $scope.attempting = false
+      ]
+    .result['finally'](null).then (reservation)->
+      afterPayment(reservation)
+
+
+
+  ##
+  # Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
+  ##
+  payOnSite = (reservation) ->
+
+    $uibModal.open
+      templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>'
+      size: 'sm'
+      resolve:
+        reservation: ->
+          reservation
+        price: ->
+          Price.compute({reservation: reservation}).$promise
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation) ->
+
+        # Price
+        $scope.amount = price.price
+
+        # Reservation
+        $scope.reservation = reservation
+
+        # Button label
+        if $scope.amount > 0
+          $scope.validButtonName = _t('confirm_(payment_on_site)')
+        else
+          $scope.validButtonName = _t('confirm')
+
+        ##
+        # Callback to process the local payment, triggered on button click
+        ##
+        $scope.ok = ->
+          $scope.attempting = true
+          Reservation.save reservation: $scope.reservation, (reservation) ->
+            $uibModalInstance.close(reservation)
+            $scope.attempting = true
+          , (response)->
+            $scope.alerts = []
+            $scope.alerts.push({msg: _t('a_problem_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
+            $scope.attempting = false
+        $scope.cancel = ->
+          $uibModalInstance.dismiss('cancel')
+      ]
+    .result['finally'](null).then (reservation)->
+      afterPayment(reservation)
+
+
+
+  ##
+  # Determines if the provided booked slot is able to be modified by the user.
+  # @param slot {Object} fullCalendar event object
+  ##
+  slotCanBeModified = (slot)->
+    return true if $scope.currentUser.role is 'admin'
+    slotStart = moment(slot.start)
+    now = moment()
+    if slot.can_modify and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay
+      return true
+    else
+      return false
+
+
+
+  ##
+  # Determines if the provided booked slot is able to be canceled by the user.
+  # @param slot {Object} fullCalendar event object
+  ##
+  slotCanBeCanceled = (slot) ->
+    return true if $scope.currentUser.role is 'admin'
+    slotStart = moment(slot.start)
+    now = moment()
+    if slot.can_modify and $scope.enableBookingCancel and slotStart.diff(now, "hours") >= $scope.cancelBookingDelay
+      return true
+    else
+      return false
+
+
+  ##
+  # Once the reservation is booked (payment process successfully completed), change the event style
+  # in fullCalendar, update the user's subscription and free-credits if needed
+  # @param reservation {Object}
+  ##
+  afterPayment = (reservation)->
+    angular.forEach $scope.eventsReserved, (machineSlot, key) ->
+      machineSlot.is_reserved = true
+      machineSlot.can_modify = true
+      if $scope.currentUser.role isnt 'admin'
+        machineSlot.title = _t('i_ve_reserved')
+        machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR
+        updateMachineSlot(machineSlot, reservation, $scope.currentUser)
+      else
+        machineSlot.title = _t('not_available')
+        machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR
+        updateMachineSlot(machineSlot, reservation, $scope.ctrl.member)
+      machineSlot.backgroundColor = 'white'
+    $scope.paidMachineSlots = $scope.eventsReserved
+
+    $scope.eventsReserved = []
+
+    if $scope.selectedPlan
+      $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
+      Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
+      $scope.plansAreShown = false
+
+    $scope.calendar.fullCalendar 'refetchEvents'
+    $scope.calendar.fullCalendar 'rerenderEvents'
+
+
+
+  ##
+  # After payment, update the id of the newly reserved slot with the id returned by the server.
+  # This will allow the user to modify the reservation he just booked. The associated user will also be registered
+  # with the slot.
+  # @param slot {Object}
+  # @param reservation {Object}
+  # @param user {Object} user associated with the slot
+  ##
+  updateMachineSlot = (slot, reservation, user)->
+    angular.forEach reservation.slots, (s)->
+      if slot.start.isSame(s.start_at)
+        slot.id = s.id
+        slot.user = user
+
+
+
+  ##
+  # Search for the requested plan in the provided array and return its price.
+  # @param plansArray {Array} full list of plans
+  # @param planId {Number} plan identifier
+  # @returns {Number|null} price of the given plan or null if not found
+  ##
+  findAmountByPlanId = (plansArray, planId)->
+    for plan in plansArray
+      return plan.amount if plan.plan_id == planId
+    return null
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]

@@ -1,0 +1,197 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1 translate>{{ 'trainings_planning' }}</h1>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="row no-gutter training-reserve">
+  <div class="col-sm-12 col-md-12 col-lg-9">
+    <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg" ng-show="!plansAreShown"></div>
+    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path 'plans/_plan.html' %>'"></ng-include>
+  </div>
+
+
+  <div class="col-sm-12 col-md-12 col-lg-3">
+
+    <div>
+      <ng-include src="'<%= asset_path 'shared/_member_select.html' %>'" ng-if="currentUser.role === 'admin'"></ng-include>
+    </div>
+
+
+    <div class="widget panel b-a m m-t-lg" ng-if="ctrl.member && !slotToModify && !modifiedSlots">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'summary' }}</h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper" ng-show="!selectedTraining && !paidTraining">
+        <p class="font-felt fleche-left text-lg"><%= image_tag("fleche-left.png", class: 'fleche-left visible-lg') %>
+          {{ 'select_a_slot_in_the_calendar' | translate }}</p>
+      </div>
+
+      <div class="widget-content no-bg auto wrapper" ng-if="selectedTraining">
+        <div class="font-sbold m-b-sm " translate>{{ 'you_ve_just_selected_the_slot' }}</div>
+
+
+        <div class="panel panel-default bg-light m-n">
+          <div class="panel-body">
+            <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(selectedTraining.start | amDateFormat:'LLLL'), END_TIME:(selectedTraining.end | amDateFormat:'LT')} }}</div>
+            <div class="text-base">{{ 'training_cost_' | translate }} <span ng-class="{'text-blue': selectedTraining.training.amount == selectedTrainingAmount, 'red': selectedTraining.training.amount != selectedTrainingAmount}">{{selectedTrainingAmount | currency}}</span></div>
+              <div ng-show="currentUser.role == 'admin'" class="m-t">
+                  <label for="offerSlot" class="control-label m-r" translate>{{ 'offer_this_training' }}</label>
+                  <input bs-switch
+                         ng-model="selectedTraining.offered"
+                         id="offerSlot"
+                         type="checkbox"
+                         class="form-control"
+                         switch-on-text="{{ 'yes' | translate }}"
+                         switch-off-text="{{ 'no' | translate }}"
+                         switch-animate="true"
+                         switch-readonly="{{trainingIsValid}}"
+                         ng-change="updatePrices()"/>
+              </div>
+          </div>
+          <div class="panel-footer no-padder">
+            <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validTraining()" ng-if="!trainingIsValid" translate>{{ 'confirm_this_slot' }}</button>
+          </div>
+        </div>
+
+        <div class="clear">
+          <a class="pull-right m-t-xs text-u-l" href="#" ng-click="removeTraining($event)" ng-if="trainingIsValid" translate>{{ 'remove_this_slot' }}</a>
+        </div>
+
+        <span ng-hide="fablabWithoutPlans">
+          <div ng-if="trainingIsValid && !ctrl.member.subscribed_plan" ng-show="!plansIsShow">
+            <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices_and_a_free_training' }}</p>
+            <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'view_our_subscriptions' }}</button></div>
+            <p class="font-bold text-base text-u-c text-center m-b-xs">ou</p>
+          </div>
+
+          <div ng-if="selectedPlan">
+            <div class="m-t-md m-b-sm text-base">{{ 'you_ve_just_selected_a_' | translate }} <br> <span class="font-sbold" translate>{{ '_subscription' }}</span> :</div>
+            <div class="panel panel-default bg-light m-n">
+              <div class="panel-body m-b-md">
+                <div class="font-sbold text-u-c">{{ selectedPlan | humanReadablePlanName }}</div>
+                <div class="text-base">{{ 'subscription_cost' | translate }} <span class="text-blue">{{selectedPlan.amount | currency}}</span></div>
+              </div>
+            </div>
+          </div>
+        </span>
+
+      </div>
+
+      <div class="panel-footer no-padder" ng-if="selectedTraining">
+        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payTraining()" ng-if="trainingIsValid && (!plansIsShow || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
+      </div>
+
+
+      <div class="widget-content no-bg auto wrapper" ng-if="paidTraining">
+        <div class="m-t-md m-b-sm text-base">{{ 'you_have_settled_the_training' | translate }} <br> <span class="font-sbold">{{paidTraining.training.name}}</span> :
+        </div>
+
+        <div class="well well-warning m-t-sm">
+          <i class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(paidTraining.start | amDateFormat:'LLLL'), END_TIME:(paidTraining.end | amDateFormat:'LT') } }} </i>
+          <div class="font-sbold">{{ 'training_cost_' | translate }} {{paidTraining.training.amount | currency}}</div>
+        </div>
+
+
+        <div ng-if="selectedPlan">
+          <div class="m-t-md m-b-sm text-base">{{ 'you_have_settled_a_' | translate }} <br> <span class="font-sbold" translate>{{ '_subscription' }}</span> :</div>
+
+          <div class="well well-warning m-t-sm">
+            <i class="font-sbold  text-u-c">{{selectedPlan | humanReadablePlanName }}</i>
+            <div class="font-sbold">{{ 'subscription_cost' | translate }} {{selectedPlan.amount | currency}}</div>
+          </div>
+        </div>
+
+        <div class="m-t-md font-sbold">{{ 'total_' | translate }} {{amountTotal | currency}}</div>
+        <div class="alert alert-success" ng-if="ctrl.member.subscribed_plan">{{ 'thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
+         {{ 'your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="widget panel b-a m m-t-lg" ng-if="slotToModify || modifiedSlots">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'summary' }}</h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper" ng-if="slotToModify">
+        <div class="font-sbold m-b-sm " translate>{{ 'i_want_to_change_the_following_reservation' }}</div>
+
+        <div class="panel panel-warning bg-yellow">
+          <div class="panel-body">
+            <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(slotToModify.start | amDateFormat:'LLLL'), END_TIME:(slotToModify.end | amDateFormat:'LT') } }}</div>
+          </div>
+          <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToModify($event)" translate>{{ 'cancel_my_modification' }}</a></div>
+        </div>
+
+        <div class="widget-content no-bg">
+          <p class="font-felt fleche-left text-lg"><%= image_tag("fleche-left.png", class: 'fleche-left visible-lg') %>
+          {{ 'select_a_new_slot_in_the_calendar' | translate }}</p>
+        </div>
+
+        <div class="panel panel-info bg-info text-white" ng-if="slotToPlace">
+          <div class="panel-body">
+            <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(slotToPlace.start | amDateFormat:'LLLL'), END_TIME:(slotToPlace.end | amDateFormat:'LT') } }}</div>
+          </div>
+          <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToPlace($event)" translate>{{ 'cancel_my_selection' }}</a></div>
+        </div>
+      </div>
+
+      <div class="panel-footer no-padder" ng-if="slotToModify && slotToPlace">
+       <button class="btn btn-invalid btn-default btn-block p-l btn-lg text-u-c r-n text-base" ng-click="cancelModifyMachineSlot()" translate>{{ 'cancel' }}</button>
+        <div>
+          <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="modifyTrainingSlot()" translate>{{ 'confirm_my_modification' }}</button>
+        </div>
+      </div>
+
+      <div class="widget-content no-bg auto wrapper" ng-if="modifiedSlots">
+        <div class="font-sbold m-b-sm " translate>{{ 'your_booking_slot_was_successfully_moved_from_' }}</div>
+
+        <div class="panel panel-default bg-light">
+          <div class="panel-body">
+            <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(modifiedSlots.oldReservedSlot.start | amDateFormat:'LLLL'), END_TIME:(modifiedSlots.oldReservedSlot.end | amDateFormat:'LT') } }}</div>
+          </div>
+        </div>
+
+        <p class="text-center font-bold m-b-sm text-u-c" translate>{{ 'to_date' }}</p>
+
+        <div class="panel panel-success bg-success bg-light">
+          <div class="panel-body">
+            <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(modifiedSlots.newReservedSlot.start | amDateFormat:'LLLL'), END_TIME:(modifiedSlots.newReservedSlot.end | amDateFormat:'LT') } }}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <uib-alert type="info m">
+      <p class="text-sm font-bold">
+        <i class="fa fa-lightbulb-o"></i>
+        <span ng-bind-html="trainingInformationMessage"></span>
+      </p>
+    </uib-alert>
+
+    <uib-alert type="warning m">
+      <p class="text-sm">
+        <i class="fa fa-warning"></i>
+        <span ng-bind-html="trainingExplicationsAlert"></span>
+      </p>
+    </uib-alert>
+
+  </div>
+
+
+</div>

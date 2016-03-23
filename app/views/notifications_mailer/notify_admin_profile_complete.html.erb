@@ -1,0 +1,7 @@
+<% provider = AuthProvider.from_strategy_name(@attached_object.provider) %>
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.account_completed', PROVIDER: provider.name) %>
+    <%= "#{@attached_object.profile.full_name}" %> &lt;<%= @attached_object.email%>&gt;.</p>
+
+<p><%= t('.body.provider_id', UID: @attached_object.uid) %></p>

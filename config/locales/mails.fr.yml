@@ -1,0 +1,244 @@
+fr:
+  layouts:
+    notifications_mailer:
+      see_you_later: "A très bientôt sur {GENDER, select, male{le} female{la} other{les}}"  # messageFormat interpolation
+      sincerely: "Cordialement,"
+      signature: "L'équipe du Fab Lab."
+      do_not_reply: "Merci de ne pas répondre directement à cet email."
+
+  users_mailer:
+    notify_user_account_created:
+      subject: "Votre compte Fab Lab a bien été créé"
+      body:
+        hello: "Bonjour %{NAME},"
+        intro: "L’équipe du Fab Lab vient de vous créer un compte sur le site {GENDER, select, male{du} female{de la} other{des}} {FABLAB} :"  # messageFormat interpolation
+        connection_parameters: "Voici vos paramètres de connexion :"
+        account_name: "Nom de compte :"
+        password: "Mot de passe :"
+        temporary_password: "Ce mot de passe est temporaire, vous pourrez le modifier en accédant à l’espace « Mon compte »."
+        keep_advantages: "Avec ce compte, vous conservez bien entendu tous les avantages liés à votre profil utilisateur Fab Lab (abonnement, formations)."
+        thanks_to_: "Pour pouvoir utiliser la plateforme, merci de vous"
+        logon_or_login: "créer un compte sur %{PROVIDER} ou utiliser un compte pré-existant en cliquant ici"
+        token_if_link_problem: "En cas de problème avec le lien, vous pourrez saisir manuellement le code suivant lors de votre première connexion :"
+
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "Vous avez changé de groupe"
+      body:
+        warning: "Vous venez de changer de groupe utilisateurs. Des contrôles pourront être opérés au Fab Lab afin de vérifier que ce changement est justifié."
+
+    notify_admin_user_group_changed:
+      subject: "Un membre a changé de groupe"
+      body:
+        user_changed_group_html: "L'utilisateur <em><strong>%{NAME}</strong></em> a changé de groupe."
+        previous_group: "Ancien groupe :"
+        new_group: "Nouveau groupe :"
+
+    notify_admin_subscription_extended:
+      subject: "Un abonnement a été prolongé"
+      body:
+        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitment} other{}} jusqu'au {DATE}."   # messageFormat interpolation
+
+    notify_member_subscription_extended:
+      subject: "Votre abonnement a été prolongé"
+      body:
+        your_plan: "Votre abonnement"
+        has_been_extended: "a été prolongé"
+        free: "gratuitement"
+        until: "jusqu'au"
+
+    notify_partner_subscribed_plan:
+      subject: "Un abonnement a été souscrit"
+      body:
+        a_plan: "Un abonnement"
+        was_purchased_by_member: "vient d'être souscrit par le membre"
+
+    notify_admin_when_project_published:
+      subject: "Un projet a été publié."
+      body:
+        new_project_published: "Un nouveau projet vient d'être publié :"
+
+    notify_project_collaborator_to_valid:
+      subject: "Invitation à collaborer sur un projet"
+      body:
+        your_are_invited_to_take_part_in_a_project: "Vous êtes invité à collaborer sur ce projet :"
+        to_accept_the_invitation_click_on_following_link: "Pour accepter cette invitation, il vous suffit de cliquer sur le lien suivant:"
+
+    notify_project_author_when_collaborator_valid:
+      subject: "Un nouveau collaborateur dans votre projet"
+      body:
+        the_member: "Le membre"
+        accepted_your_invitation_to_take_part_in_the_project: "a accepté votre demande de collaboration sur votre projet :"
+
+    notify_user_training_valid:
+      subject: "Votre formation a été validée"
+      body:
+        your_training: "Votre formation"
+        has_been_validated: "a bien été validée"
+
+    notify_member_subscribed_plan:
+      subject: "Votre abonnement a bien été souscrit"
+      body:
+        plan_subscribed_html: "Vous avez souscrit à l'abonnement : <strong><em>%{PLAN}</em></strong>."
+        subscription_stops_on: "Votre abonnement s'arrêtera automatiquement le %{DATE}"
+
+    notify_member_create_reservation:
+      subject: "Votre réservation a bien été enregistrée"
+      body:
+        reservation_saved_html: "Votre réservation <strong><em>%{RESERVATION}</em></strong> a bien été enregistrée."
+        your_reserved_slots: "Les créneaux que vous avez réservés sont :"
+
+    notify_member_subscribed_plan_is_changed:
+      subject: "Votre abonnement a été mis à jour"
+      body:
+        new_plan_html: "Vous avez changé votre abonnement à <strong><em>%{PLAN}</em></strong>."
+
+    notify_admin_member_create_reservation:
+      subject: "Nouvelle réservation"
+      body:
+        member_reserved_html: "Le membre %{NAME} a réservé <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Les créneaux réservés sont :"
+
+    notify_member_slot_is_modified:
+      subject: "Votre créneau de réservation a bien été modifié"
+      body:
+        reservation_changed_to: "Votre créneau de réservation a bien été déplacé au :"
+        previous_date: "Ancienne date :"
+
+    notify_admin_slot_is_modified:
+      subject: "Un créneau de réservation a été modifié"
+      body:
+        slot_modified: "Le membre %{NAME} a modifié son créneau de réservation."
+        new_date: "Nouvelle date :"
+        old_date: "Ancienne date :"
+
+    notify_admin_when_user_is_created:
+      subject: "Un compte utilisateur a été créé"
+      body:
+        new_account_created: "Un nouveau compte utilisateur vient d'être créé sur la plateforme :"
+        invoicing_disabled_html: "La génération de factures est <strong>désactivée</strong> pour cet utilisateur."
+
+    notify_admin_subscribed_plan:
+      subject: "Un abonnement a été souscrit"
+      body:
+        plan_subscribed_html: "Un abonnement <strong><em>%{PLAN}</em></strong> vient d'être souscrit par le membre <strong><em>%{NAME}</strong></em>."
+
+    notify_member_invoice_ready:
+      subject: "Votre facture du FabLab"
+      body:
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  # messageFormat interpolation
+        invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture dans %{DASHBOARD} sur le site du Fab Lab."
+        your_dashboard: "votre tableau de bord"
+
+    notify_member_avoir_ready:
+      subject: "Votre facture d'avoir du FabLab"
+      body:
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  # messageFormat interpolation
+        invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture d'avoir dans %{DASHBOARD} sur le site du Fab Lab."
+        your_dashboard: "votre tableau de bord"
+
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "Votre abonnement expire dans 7 jours"
+      body:
+        your_plan: "Votre abonnement"
+        expires_in_7_days: "expire dans 7 jours"
+        to_renew_your_plan_follow_the_link: "Si vous souhaitez renouveler votre abonnement, vous pouvez vous rendre sur"
+
+    notify_member_subscription_is_expired:
+      subject: "Votre abonnement est arrivé à expiration"
+      body:
+        your_plan: "Votre abonnement"
+        has_expired: "est arrivé à expiration"
+        you_can_go_to: "Vous pouvez vous rendre sur notre page"
+        to_renew_your_plan: "afin de renouveler votre abonnement"
+
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "L'abonnement d'un membre expire dans 7 jours"
+      body:
+        subscription_will_expire_html: "L'abonnement du membre %{NAME} <strong><em>%{PLAN}</em></strong> expire dans 7 jours."
+
+    notify_admin_subscription_is_expired:
+      subject: "L'abonnement d'un membre est arrivé à expiration"
+      body:
+        subscription_expired_html: "L'abonnement du membre %{NAME} <strong><em>%{PLAN}</em></strong> est arrivé à expiration."
+
+    notify_admin_subscription_canceled:
+      subject: "L'abonnement d'un membre a été annulé"
+      body:
+        subscription_canceled_html: "L'abonnement <strong><em>%{PLAN}</em></strong> du membre %{NAME} vient d'être annulé."
+
+    notify_member_subscription_canceled:
+      subject: "Votre abonnement a été annulé"
+      body:
+        your_plan_was_canceled: "Votre abonnement a bien été annulé"
+        your_plan: "votre abonnement"
+        end_at: "fin au"
+
+    notify_member_slot_is_canceled:
+      subject: "Votre réservation a bien été annulée"
+      body:
+        reservation_canceled: "Votre réservation %{RESERVABLE} a bien été annulée :"
+
+    notify_admin_slot_is_canceled:
+      subject: "Une réservation a été annulée"
+      body:
+        member_cancelled: "Le membre %{NAME} a annulé sa réservation :"
+        item_details: "%{START} - %{END}, concernant %{RESERVABLE}"
+        generate_refund: "Pensez à générer un avoir ou un remboursement pour cette annulation, le cas échéant."
+
+    notify_admin_when_user_is_imported:
+      subject: "Un compte utilisateur a été importé depuis le SSO"
+      body:
+        new_account_imported: "Un nouveau compte utilisateur (ID: %{ID}) vient d'être importé sur la plate-forme via %{PROVIDER}."
+        provider_uid: "Son identifiant fournisseur est %{UID}."
+        known_informations: "Voici les informations connues à son propos :"
+        address_already_used: "Cette adresse est déjà associée à un autre utilisateur"
+        no_more_info_available: "Aucune autre information sur cet utilisateur n'est disponible tant que celui-ci n'aura pas complété son profil."
+
+    notify_user_profile_complete:
+      subject: "Vous avez désormais accès à l'ensemble de la plate-forme"
+      body:
+        message: "Les informations de votre nouveau compte ont correctement été mises à jour, vous avez désormais accès à l'ensemble de la plateforme."
+
+    notify_user_auth_migration:
+      subject: "Changement important pour votre compte FabLab"
+      body:
+        the_platform: "La plateforme"
+        is_changing_its_auth_system_and_will_now_use: "change actuellement son système d'authentification des utilisateurs et utilisera désormais"
+        instead_of: "au lieu de"
+        consequence_of_the_modification: "A cause de ce changement vous ne serez plus en mesure de vous connecter sur la plateforme avec vos identifiants habituels."
+        to_use_the_platform_thanks_for: "Pour pouvoir continuer à utiliser la plateforme, merci de vous"
+        create_an_account_on: "créer un compte sur"
+        or_use_an_existing_account_clicking_here: "ou utiliser un compte pré-existant en cliquant ici"
+        in_case_of_problem_enter_the_following_code: "En cas de problème avec le lien, vous pourrez saisir manuellement le code suivant lors de votre première connexion, pour migrer votre compte actuel vers le nouveau système d'authentification :"
+
+    notify_admin_user_merged:
+      subject: "Un compte importé a été fusionné avec un compte existant"
+      body:
+        imported_account_merged: "Un compte utilisateur précédemment importé via %{PROVIDER} vient d'être fusionné avec le compte existant de %{NAME}"
+        provider_uid: "Son identifiant fournisseur est %{UID}"
+
+    notify_admin_profile_complete:
+      subject: "Un compte importé a complété ses informations"
+      body:
+        account_completed: "Un compte utilisateur précédemment importé via %{PROVIDER} vient de compléter ses informations de profil :"
+        provider_id: "Son identifiant fournisseur est %{UID}"
+
+    notify_admin_abuse_reported:
+      subject: "Un contenu abusif a été rapporté"
+      body:
+        intro: "Un visiteur vient de signaler le contenu suivant comme étant abusif."
+        signaled_content: "Contenu signalé :"
+        signaled_by: "Signalé par :"
+        signaled_on: "Signalé le :"
+        message: "Message :"
+
+    notify_admin_invoicing_changed:
+      subject: "Un paramètre de facturation a été modifié"
+      body:
+        generation_status_html: "La génération de factures vient d'être <strong>{STATUS, select, true{désactivée} other{activée}}</strong> pour l'utilisateur {NAME}."  # messageFormat interpolation
+        disabled: "Désormais, aucune facture ne sera générée pour les paiement de cet utilisateur effectués à l'accueil."
+        enabled: "Désormais, tous les paiement de cet utilisateur effectués à l'accueil, donneront lieu à la génération d'une facture."
+
+    shared:
+      hello: "Bonjour %{user_name}"

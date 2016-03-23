@@ -1,3 +1,46 @@
+# 0.7.1 (2016-01-22)
+* Fix a bug that load 2 editor on IE(it is a workaround)
+  [#98](https://github.com/summernote/angular-summernote/issues/98)
+* Fix a bug when content is empty
+  [#105](https://github.com/summernote/angular-summernote/pull/105)
+* Support placeholder, min height and max height options
+  [#97](https://github.com/summernote/angular-summernote/pull/97),
+  [#104](https://github.com/summernote/angular-summernote/pull/104)
+* Supoort on-media-delete callback
+  [#92](https://github.com/summernote/angular-summernote/issues/92)
+
+# 0.7.0 (2015-12-11)
+* Make compatible with summernote v0.7.0
+
+# 0.5.2 (2015-11-29)
+* fix a broken ngModel binding with angular 1.3
+  [#84](https://github.com/summernote/angular-summernote/issues/84)
+
+# 0.5.1 (2015-10-05)
+* Support initial text from inner markup in directive
+  [#77](https://github.com/summernote/angular-summernote/issues/77)
+
+# 0.5.0 (2015-08-19)
+* Support [AngularJS 1.4.x](http://angularjs.blogspot.kr/2015/05/angular-140-jaracimrman-existence.html)
+
+# 0.4.2 (2015-08-19)
+* bug fixes
+    * fix "Maximum call stack size exceeded" error in airmode
+      [#62](https://github.com/summernote/angular-summernote/issues/62)
+    * clean ngModel when content is empty
+      [#53](https://github.com/summernote/angular-summernote/issues/53)
+
+# 0.4.0 (2015-05-25)
+## Breaking changes
+* Support Summernote v0.6.4+. It's not compatible with the version under v0.6.4.
+  If you use summernote v0.6.3-, use angular-summernote v0.3.2.
+* Now, editor object exposed via `editor` attribute.
+
+## Features
+* Support `ngModelOptions`
+* Support `onToolbarClick` event
+* Publish in npm registry
+
 # 0.3.2 (2015-02-13)
 * bug fixes
     * fix to avoid inprog error with outer scope

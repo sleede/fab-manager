@@ -13,17 +13,24 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
+/log/*.log
 /tmp
 
-# uploads and public assets
 /public/uploads
 /public/assets
 
-# MacOS and IDE files
+# Ignore application configuration
+/config/application.yml
+
+*.DS_Store
 .idea
+
+# PDF invoices
+/invoices/*
+
+/config/database.yml
+/config/application.yml
+
 .DS_Store
 
-# machine specific database config
-/config/database.yml
+.vagrant

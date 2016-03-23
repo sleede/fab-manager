@@ -1,0 +1,20 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= _t('.body.please_find_attached_html',
+         {
+             DATE: I18n.l(@attached_object.avoir_date.to_date),
+             AMOUNT: number_to_currency(@attached_object.total / 100.0),
+             TYPE: @attached_object.invoiced_type
+         })
+      # messageFormat
+  %>
+</p>
+
+<p><%= t('.body.invoice_in_your_dashboard_html',
+         DASHBOARD: link_to(
+             t('.body.your_dashboard'),
+             "#{root_url}#!/dashboard/invoices"
+         )
+       ) %>
+</p>

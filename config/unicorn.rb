@@ -1,12 +1,12 @@
 # config/unicorn.rb
 
-root = "/home/sleede/apps/fabmanager/current"
+root = "/home/sleede/apps/fablab/current"
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
-listen "/tmp/unicorn.fabmanager.sock"
+listen "/tmp/unicorn.fablab.sock"
 worker_processes 1
 timeout 60
 preload_app true

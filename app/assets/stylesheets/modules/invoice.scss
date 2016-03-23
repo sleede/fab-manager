@@ -1,0 +1,181 @@
+
+// admin invoices
+
+.invoice-placeholder {
+  width: 80%;
+  max-width: 800px;
+  height: 100%;
+  margin: auto;
+  margin-top: 2em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #aeaeae #979797 #7b7b7b;
+  box-shadow: 2px 3px 6px 0 #898989,
+              -2px 3px 6px 0 #898989;
+  padding: 2em;
+
+  .invoice-buyer-infos {
+    float: right;
+    text-align: right;
+    margin-left: 1em;
+  }
+
+  .invoice-logo {
+    height: 6em;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    img {
+      display: block;
+      width: auto;
+      max-height: 100%;
+      max-width: 60%;
+    }
+
+    &:hover .tools-box {
+      opacity: 1;
+    }
+
+    .tools-box {
+      opacity: 0;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
+
+  .invoice-object, .invoice-data, .invoice-data p, .invoice-text, .invoice-legals {
+    margin-top: 2em;
+  }
+
+  .invoice-data table {
+    width: 100%
+  }
+
+  .invoice-data tr, .invoice-data th, .invoice-data td {
+    border: 1px solid;
+    padding: 4px;
+  }
+
+  .invoice-text {
+    font-weight: bold;
+  }
+
+  .invoice-legals {
+    text-align: right;
+  }
+
+  .invoice-editable:hover {
+    background-color: $yellow;
+    overflow-x: hidden;
+  }
+
+  .invoice-activable {
+    font-style: italic;
+    color: #c4c4c4;
+    overflow-x: hidden;
+  }
+
+  .invoice-activable:hover {
+    background-color: $yellow;
+    border: 1px dashed #c4c4c4;
+  }
+
+
+  &:after {
+    content:"";
+    display:block;
+    margin-top:30%;
+  }
+
+  .vat-line {
+    background-color: #e4e4e4;
+    text-align: right;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+}
+
+.custom-invoice {
+  .modal-header {
+    @extend .modal-header;
+    // padding-left: 4em;
+    text-align: center;
+    background-color: #e6e6e6;
+  }
+
+  .modal-body {
+
+    .elements ul {
+      @extend .list-unstyled;
+    }
+
+    .elements li {
+      @extend .btn;
+      @extend .btn-default;
+      width: 100%;
+    }
+
+    table.invoice-element-legend {
+      min-width: 15em;
+    }
+
+    .invoice-element-legend tr, .invoice-element-legend th, .invoice-element-legend td {
+      border: 1px solid;
+      padding: 4px;
+    }
+
+    .bottom-notes {
+      font-style: italic;
+    }
+
+  }
+
+}
+
+
+.partial-avoir-table tr {
+  float:left;
+
+  .input-col { min-width: 2em; }
+  .label-col { min-width: 18em; }
+  .amount-col { min-width: 6em; }
+}
+
+.partial-avoir-selected-item {
+  background-color: $yellow;
+  display: block;
+  position: relative;
+
+  &:after {
+    content:"Rembourser";
+    display:inline-block;
+    position: absolute;
+    right: 0.8em;
+    top: 1.8em;
+    color: $red;
+    width: 6.7em;
+    transform: rotate(-22.5deg);
+    overflow: visible;
+    font-weight: bold;
+    border: 1px solid;
+    padding: 0 4px;
+    border-radius: 5px;
+    font-size: small;
+  }
+}

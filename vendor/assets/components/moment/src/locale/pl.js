@@ -29,7 +29,12 @@ function translate(number, withoutSuffix, key) {
 
 export default moment.defineLocale('pl', {
     months : function (momentToFormat, format) {
-        if (/D MMMM/.test(format)) {
+        if (format === '') {
+            // Hack: if format empty we know this is used to generate
+            // RegExp by moment. Give then back both valid forms of months
+            // in RegExp ready format.
+            return '(' + monthsSubjective[momentToFormat.month()] + '|' + monthsNominative[momentToFormat.month()] + ')';
+        } else if (/D MMMM/.test(format)) {
             return monthsSubjective[momentToFormat.month()];
         } else {
             return monthsNominative[momentToFormat.month()];
@@ -41,11 +46,11 @@ export default moment.defineLocale('pl', {
     weekdaysMin : 'N_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
     longDateFormat : {
         LT : 'HH:mm',
-        LTS : 'LT:ss',
+        LTS : 'HH:mm:ss',
         L : 'DD.MM.YYYY',
         LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY LT',
-        LLLL : 'dddd, D MMMM YYYY LT'
+        LLL : 'D MMMM YYYY HH:mm',
+        LLLL : 'dddd, D MMMM YYYY HH:mm'
     },
     calendar : {
         sameDay: '[Dziś o] LT',
@@ -88,4 +93,3 @@ export default moment.defineLocale('pl', {
         doy : 4  // The week that contains Jan 4th is the first week of the year.
     }
 });
-

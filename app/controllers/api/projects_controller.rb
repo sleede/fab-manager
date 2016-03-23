@@ -1,5 +1,5 @@
 class API::ProjectsController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show, :last_published]
+  before_action :authenticate_user!, except: [:index, :show, :last_published, :search]
   before_action :set_project, only: [:update, :destroy]
   respond_to :json
 
@@ -35,7 +35,7 @@ class API::ProjectsController < API::ApiController
   end
 
   def destroy
-    authorize Project
+    authorize @project
     @project.destroy
     head :no_content
   end
@@ -47,6 +47,12 @@ class API::ProjectsController < API::ApiController
       redirect_to "/#!/projects/#{project_user.project.id}" and return
     end
     redirect_to root_url
+  end
+
+  def search
+    query_params = JSON.parse(params[:search])
+    @projects = Project.search(query_params, current_user).page(params[:page]).records
+    render :index
   end
 
   private

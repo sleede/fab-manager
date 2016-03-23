@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 25
+  username: postgres
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+
+development:
+  <<: *default
+  database: fablab_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: fablab_test
+
+staging:
+  <<: *default
+  database: fablab_staging
+
+
+production:
+  <<: *default
+  database: fablab_production

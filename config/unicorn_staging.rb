@@ -1,12 +1,12 @@
 # config/unicorn_staging.rb
 
-root = "/home/admin/apps/fabmanager_staging/current"
+root = "/home/admin/apps/fablab_staging/current"
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
-listen "/tmp/unicorn.fabmanager_staging.sock"
+listen "/tmp/unicorn.fablab_staging.sock"
 worker_processes 1
 timeout 60
 preload_app true

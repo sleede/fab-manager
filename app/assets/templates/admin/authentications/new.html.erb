@@ -1,0 +1,52 @@
+<div>
+
+    <section class="heading b-b">
+        <div class="row no-gutter">
+            <div class="col-md-1 hidden-xs">
+                <section class="heading-btn">
+                    <a ng-click="cancel()"><i class="fa fa-long-arrow-left"></i></a>
+                </section>
+            </div>
+            <div class="col-md-8 b-l b-r">
+                <section class="heading-title">
+                    <h1 translate>{{ 'add_a_new_authentication_provider' }}</h1>
+                </section>
+
+            </div>
+
+            <div class="col-md-3">
+                <section class="heading-actions wrapper">
+                    <div class="btn btn-lg btn-block btn-default m-t-xs" ng-click="cancel()" translate>
+                        {{ 'cancel' }}
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="row no-gutter">
+        <div class=" col-sm-12 col-md-9 b-r nopadding">
+
+            <form role="form" name="providerForm" class="form-horizontal" novalidate>
+
+                <section class="panel panel-default bg-light m-lg">
+                    <div class="panel-body m-r">
+
+                        <ng-include src="'<%= asset_path 'admin/authentications/_form.html' %>'"></ng-include>
+                        <ng-include src="'<%= asset_path 'admin/authentications/_oauth2.html'%>'" ng-if="provider.providable_type == 'OAuth2Provider'"></ng-include>
+                    </div>   <!-- ./panel-body  -->
+
+
+                    <div class="panel-footer no-padder">
+                        <input type="button" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="providerForm.$invalid" ng-click="registerProvider()"/>
+                    </div>
+                </section>
+            </form>
+
+        </div>
+    </div>
+</div>

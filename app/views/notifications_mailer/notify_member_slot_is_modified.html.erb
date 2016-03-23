@@ -1,0 +1,5 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.reservation_changed_to') %></p>
+<p><%= "#{I18n.l @attached_object.start_at, format: :long} - #{I18n.l @attached_object.end_at, format: :hour_minute}" %></p>
+<p><small><%= t('.body.previous_date') %> <%= "#{I18n.l @attached_object.ex_start_at, format: :long} - #{I18n.l @attached_object.ex_end_at, format: :hour_minute}" %></small></p>

@@ -2,15 +2,15 @@ class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.is_admin?
-        scope.with_role(:member).includes(:group, :profile => [:user_avatar]).order('created_at desc')
+        scope.includes(:group, :training_credits, :machine_credits, :subscriptions => [:plan => [:credits]], :profile => [:user_avatar]).joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'").order('users.created_at desc')
       else
-        scope.with_role(:member).includes(:group, :profile => [:user_avatar]).where(is_allow_contact: true).order('created_at desc')
+        scope.includes(:group, :training_credits, :machine_credits, :profile => [:user_avatar]).joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'").where(is_allow_contact: true).order('users.created_at desc')
       end
     end
   end
 
   def show?
-    user.is_admin? or (record.is_allow_contact and record.has_role?(:member)) or (user.id == record.id)
+    user.is_admin? or (record.is_allow_contact and record.is_member?) or (user.id == record.id)
   end
 
   def create?
@@ -19,5 +19,13 @@ class UserPolicy < ApplicationPolicy
 
   def update?
     user.is_admin? or (user.id == record.id)
+  end
+
+  def destroy?
+    user.id == record.id
+  end
+
+  def merge?
+    user.id == record.id
   end
 end

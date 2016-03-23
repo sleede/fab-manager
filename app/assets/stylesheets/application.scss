@@ -1,17 +1,23 @@
 /*
  *= require_self
- *= require select2/select2
+ *= require angular-ui-select/dist/select
+ *= require fullcalendar/dist/fullcalendar
  *= require jasny-bootstrap/dist/css/jasny-bootstrap
- *= require angular-growl/build/angular-growl.min.css
+ *= require angular-growl-v2/build/angular-growl
  *= require angular-xeditable/dist/css/xeditable
  *= require angular-loading-bar/src/loading-bar
+ *= require nvd3/build/nv.d3
  *= require font-awesome
+ *= require medium-editor/dist/css/medium-editor
+ *= require medium-editor/dist/css/themes/default
+ *= require bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min
  *= require summernote/dist/summernote
+ *= require jquery-minicolors/jquery.minicolors.css
  */
 
-
-
 @import "app.functions";
+@import "bootstrap-compass";
+@import "bootstrap-sprockets";
 @import "compass";
 @import "bootstrap_and_overrides";
 
@@ -25,5 +31,6 @@
 @import "app.buttons";
 @import "app.components";
 @import "app.plugins";
+@import "modules/invoice";
 
 @import "app.responsive";

@@ -1,0 +1,93 @@
+<hr/>
+
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[base_url]'].$dirty && providerForm['auth_provider[base_url]'].$invalid}">
+    <label for="provider_base_url" class="col-sm-3 control-label" translate>{{ 'common_url' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+               ng-model="provider.providable_attributes.base_url"
+               class="form-control"
+               name="auth_provider[base_url]"
+               id="provider_base_url"
+               placeholder="https://sso.example.net..."
+               required
+               url>
+        <span class="help-block" ng-show="providerForm['auth_provider[base_url]'].$dirty && providerForm['auth_provider[base_url]'].$error.required" translate>{{ 'common_url_is_required' }}</span>
+        <span class="help-block" ng-show="providerForm['auth_provider[base_url]'].$error.url" translate>{{ 'provided_url_is_not_a_valid_url' }}</span>
+    </div>
+</div>
+
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[authorization_endpoint]'].$dirty && providerForm['auth_provider[authorization_endpoint]'].$invalid}">
+    <label for="provider_authorization_endpoint" class="col-sm-3 control-label" translate>{{ 'authorization_endpoint' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+               ng-model="provider.providable_attributes.authorization_endpoint"
+               class="form-control"
+               name="auth_provider[authorization_endpoint]"
+               id="provider_authorization_endpoint"
+               placeholder="/oauth2/auth..."
+               required
+               endpoint>
+        <span class="help-block" ng-show="providerForm['auth_provider[authorization_endpoint]'].$dirty && providerForm['auth_provider[authorization_url]'].$error.required" translate>{{ 'oauth2_authorization_endpoint_is_required' }}</span>
+        <span class="help-block" ng-show="providerForm['auth_provider[authorization_endpoint]'].$error.endpoint" translate>{{ 'provided_endpoint_is_not_valid' }}</span>
+    </div>
+</div>
+
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[token_endpoint]'].$dirty && providerForm['auth_provider[token_endpoint]'].$invalid}">
+    <label for="provider_token_endpoint" class="col-sm-3 control-label" translate>{{ 'token_acquisition_endpoint' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+               ng-model="provider.providable_attributes.token_endpoint"
+               class="form-control"
+               name="auth_provider[token_endpoint]"
+               id="provider_token_endpoint"
+               placeholder="/oauth2/token..."
+               required
+               endpoint>
+        <span class="help-block" ng-show="providerForm['auth_provider[token_endpoint]'].$dirty && providerForm['auth_provider[token_endpoint]'].$error.required" translate>{{ 'oauth2_token_acquisition_endpoint_is_required' }}</span>
+        <span class="help-block" ng-show="providerForm['auth_provider[token_endpoint]'].$error.endpoint" translate>{{ 'provided_endpoint_is_not_valid' }}</span>
+    </div>
+</div>
+
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[profile_url]'].$dirty && providerForm['auth_provider[profile_url]'].$invalid}">
+    <label for="provider_profile_url" class="col-sm-3 control-label" translate>{{ 'profil_edition_url' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+               ng-model="provider.providable_attributes.profile_url"
+               class="form-control"
+               name="auth_provider[profile_url]"
+               id="provider_profile_url"
+               placeholder="https://exemple.net/user..."
+               required
+               url>
+        <span class="help-block" ng-show="providerForm['auth_provider[profile_url]'].$dirty && providerForm['auth_provider[profile_url]'].$error.required" translate>{{ 'profile_edition_url_is_required' }}</span>
+        <span class="help-block" ng-show="providerForm['auth_provider[profile_url]'].$error.url" translate>{{ 'provided_url_is_not_a_valid_url' }}</span>
+    </div>
+</div>
+
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[client_id]'].$dirty && providerForm['auth_provider[client_id]'].$invalid}">
+    <label for="provider_client_id" class="col-sm-3 control-label" translate>{{ 'client_identifier' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+               ng-model="provider.providable_attributes.client_id"
+               class="form-control"
+               name="auth_provider[client_id]"
+               id="provider_client_id"
+               required>
+        <span class="help-block" ng-show="providerForm['auth_provider[client_id]'].$dirty && providerForm['auth_provider[client_id]'].$error.required" translate>{{ 'oauth2_client_identifier_is_required' }} {{ 'obtain_it_when_registering_with_your_provider' }}</span>
+    </div>
+</div>
+
+<div class="form-group" ng-class="{'has-error': providerForm['auth_provider[client_secret]'].$dirty && providerForm['auth_provider[client_secret]'].$invalid}">
+    <label for="provider_client_secret" class="col-sm-3 control-label" translate>{{ 'client_secret' }}</label>
+    <div class="col-sm-9">
+        <input type="text"
+               ng-model="provider.providable_attributes.client_secret"
+               class="form-control"
+               name="auth_provider[client_secret]"
+               id="provider_client_secret"
+               required>
+        <span class="help-block" ng-show="providerForm['auth_provider[client_secret]'].$dirty && providerForm['auth_provider[client_secret]'].$error.required" translate>{{ 'oauth2_client_secret_is_required' }} {{ 'obtain_it_when_registering_with_your_provider' }}</span>
+    </div>
+</div>
+
+<ng-include src="'<%= asset_path 'admin/authentications/_oauth2_mapping.html' %>'"></ng-include>

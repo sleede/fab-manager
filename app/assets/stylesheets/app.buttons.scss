@@ -17,8 +17,8 @@
 .btn-warning-full {
 	outline: 0;
 	text-transform: uppercase;
-	border: 3px solid $yellow;
-	background-color: $yellow;
+	//border: 3px solid $yellow;
+	//background-color: $yellow;
 	&:hover {
 		background-color: white;
 	}
@@ -42,3 +42,17 @@
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 }
+
+.btn-loading:after {
+  margin-left: 1em;
+  display: inline-block;
+  content: "\f110";
+  font-family: FontAwesome;
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

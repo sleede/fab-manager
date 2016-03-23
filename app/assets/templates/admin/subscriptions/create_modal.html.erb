@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title m-l" translate>{{ 'new_subscription' }}</h3>
+</div>
+<div class="modal-body m-lg">
+    <div class="alert alert-danger">
+      <p translate translate-values="{NAME: user.name}">
+        {{ 'you_are_about_to_purchase_a_subscription_to_NAME' }}
+      </p>
+    </div>
+    <form role="form" name="subscriptionForm" class="form-horizontal col-md-8" novalidate>
+      <div class="form-group">
+        <select ng-model="subscription.plan_id" ng-options="plan.id as humanReadablePlanName(plan) for plan in plans" class="form-control" required>
+        </select>
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()" ng-disabled="subscriptionForm.$invalid" translate>{{ 'confirm' }}</button>
+    <button class="btn btn-primary" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

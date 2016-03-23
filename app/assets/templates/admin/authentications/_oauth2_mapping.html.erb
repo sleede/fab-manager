@@ -1,0 +1,76 @@
+<h4 class="m-l m-t-xl" translate>{{ 'define_the_fields_mapping' }}</h4>
+
+
+<button type="button" class="btn btn-success m-l m-b" ng-click="newMapping = {}"><i class="fa fa-plus"></i> {{ 'add_a_match' | translate }}</button>
+<table class="table">
+    <thead>
+      <tr>
+          <th translate>{{ 'model' }}</th>
+          <th translate>{{ 'field' }}</th>
+          <th translate>{{ 'api_endpoint_url' }}</th>
+          <th translate>{{ 'api_type' }}</th>
+          <th translate>{{ 'api_fields' }}</th>
+          <th style="width: 6.4em;"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="m in provider.providable_attributes.o_auth2_mappings_attributes" ng-if="!m._destroy">
+            <td class="text-c">{{m.local_model}}</td>
+            <td>{{m.local_field}}</td>
+            <td>{{m.api_endpoint}}</td>
+            <td>{{m.api_data_type}}</td>
+            <td>{{m.api_field}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="m._destroy = true">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+            </td>
+        </tr>
+        <tr ng-show="newMapping" ng-form="mappingForm" isolate-form>
+            <td ng-class="{'has-error': mappingForm['auth_mapping[local_model]'].$dirty && mappingForm['auth_mapping[local_model]'].$invalid}">
+                <select class="form-control text-c"
+                        name="auth_mapping[local_model]"
+                        ng-options="model as model for (model, fields) in mappingFields"
+                        ng-model="newMapping.local_model"
+                        required>
+                </select>
+            </td>
+            <td ng-class="{'has-error': mappingForm['auth_mapping[local_field]'].$dirty && mappingForm['auth_mapping[local_field]'].$invalid}">
+                <select class="form-control"
+                        name="auth_mapping[local_field]"
+                        ng-options="field for field in mappingFields[newMapping.local_model]"
+                        ng-model="newMapping.local_field"
+                        required>
+                </select>
+            </td>
+            <td ng-class="{'has-error': mappingForm['auth_mapping[api_endpoint]'].$dirty && mappingForm['auth_mapping[api_endpoint]'].$invalid}">
+                <input type="text"
+                       class="form-control"
+                       placeholder="/api/resource..."
+                       ng-model="newMapping.api_endpoint"
+                       name="auth_mapping[api_endpoint]"
+                       required/>
+            </td>
+            <td ng-class="{'has-error': mappingForm['auth_mapping[api_data_type]'].$dirty && mappingForm['auth_mapping[api_data_type]'].$invalid}">
+                <select class="form-control"
+                        ng-model="newMapping.api_data_type"
+                        name="auth_mapping[api_data_type]"
+                        required>
+                    <option value="json">JSON</option>
+                </select>
+            </td>
+            <td ng-class="{'has-error': mappingForm['auth_mapping[api_field]'].$dirty && mappingForm['auth_mapping[api_field]'].$invalid}">
+                <input type="text"
+                       class="form-control"
+                       placeholder="field_name"
+                       ng-model="newMapping.api_field"
+                       name="auth_mapping[api_field]"
+                       required/>
+            </td>
+            <td>
+                <button type="button" class="btn btn-success" ng-disabled="mappingForm.$invalid" ng-click="provider.providable_attributes.o_auth2_mappings_attributes.push(newMapping); newMapping = null;"><i class="fa fa-check"></i></button>
+                <button type="button" class="btn btn-danger" ng-click="newMapping = null"><i class="fa fa-times"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>

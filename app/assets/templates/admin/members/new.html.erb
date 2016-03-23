@@ -9,15 +9,15 @@
       </div>
       <div class="col-md-8 b-l b-r">
         <section class="heading-title">
-          <h1>Ajouter un membre</h1>
+          <h1 translate>{{ 'add_a_member' }}</h1>
         </section>
 
       </div>
 
       <div class="col-md-3">
         <section class="heading-actions wrapper">
-         <div class="btn btn-lg btn-block btn-default m-t-xs" ng-click="cancel()">
-           Annuler
+         <div class="btn btn-lg btn-block btn-default m-t-xs" ng-click="cancel()" translate>
+           {{ 'cancel' }}
          </div>
         </section>
 
@@ -42,7 +42,7 @@
 
 
           <div class="panel-footer no-padder">
-            <input type="submit" value="Enregistrer" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
+            <input type="submit" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
           </div>
         </section>
       </form>

@@ -1,0 +1,47 @@
+<div>
+
+  <section class="heading">
+    <div class="row no-gutter">
+      <ng-include src="'<%= asset_path 'dashboard/nav.html' %>'"></ng-include>
+    </div>
+
+  </section>
+
+
+  <div class="row no-gutter">
+    <div class="col-md-12 m m-t-lg">
+
+
+      <table class="table" ng-if="user.invoices.length > 0">
+        <thead>
+        <tr>
+          <th style="width:21%" translate>{{ 'reference_number' }}</th>
+          <th style="width:21%" translate>{{ 'date' }}</th>
+          <th style="width:21%" translate>{{ 'price' }}</th>
+          <th style="width:20%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="invoice in user.invoices">
+          <td>{{ invoice.reference }}</td>
+          <td ng-if="!invoice.is_avoir">{{ invoice.date | amDateFormat:'L LTS' }}</td>
+          <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
+          <td>{{ invoice.total | currency}}</td>
+          <td>
+            <div class="buttons">
+              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
+                <i class="fa fa-file-pdf-o"></i> {{ 'download_the_invoice' | translate }}
+              </a>
+              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
+                <i class="fa fa-file-pdf-o"></i> {{ 'download_the_credit_note' | translate }}
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <p ng-if="user.invoices.length == 0" translate>{{ 'no_invoices_for_now' }}</p>
+
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/home/admin/apps/fabmanager_staging/current
+APP_ROOT=/home/admin/apps/fablab_staging/current
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn_staging.rb -E staging"
 AS_USER=admin

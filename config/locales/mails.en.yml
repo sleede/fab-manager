@@ -1,0 +1,244 @@
+en:
+  layouts:
+    notifications_mailer:
+      see_you_later:
+      sincerely:
+      signature:
+      do_not_reply:
+
+  users_mailer:
+    notify_user_account_created:
+      subject: "Your FabLab account has been successfully created"
+      body:
+        hello: "Hello %{NAME},"
+        intro: "The FabLab team has just created an account for you, on the {FABLAB} site:"  # messageFormat interpolation
+        connection_parameters: "Here are your connection parameters:"
+        account_name: "Account name:"
+        password: "Password:"
+        temporary_password:
+        keep_advantages:
+        thanks_to_:
+        logon_or_login:
+        token_if_link_problem:
+
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "Your group has changed"
+      body:
+        warning:
+
+    notify_admin_user_group_changed:
+      subject: "A member has changed his group"
+      body:
+        user_changed_group_html:
+        previous_group:
+        new_group:
+
+    notify_admin_subscription_extended:
+      subject: "A subscription has been extended"
+      body:
+        subscription_extended_html:
+
+    notify_member_subscription_extended:
+      subject: "Your subscription has been extended"
+      body:
+        your_plan:
+        has_been_extended:
+        free:
+        until:
+
+    notify_partner_subscribed_plan:
+      subject: "A subscription has been purchased"
+      body:
+        a_plan:
+        was_purchased_by_member:
+
+    notify_admin_when_project_published:
+      subject: "A project has been published"
+      body:
+        new_project_published:
+
+    notify_project_collaborator_to_valid:
+      subject: "Invitation to take part in a project"
+      body:
+        your_are_invited_to_take_part_in_a_project:
+        to_accept_the_invitation_click_on_following_link:
+
+    notify_project_author_when_collaborator_valid:
+      subject: "New collaborator in your project"
+      body:
+        the_member:
+        accepted_your_invitation_to_take_part_in_the_project:
+
+    notify_user_training_valid:
+      subject: "Your training has been validated"
+      body:
+        your_training:
+        has_been_validated:
+
+    notify_member_subscribed_plan:
+      subject: "Your subscription has been successfully purchased"
+      body:
+        plan_subscribed_html:
+        subscription_stops_on:
+
+    notify_member_create_reservation:
+      subject: "Your réservation has been successfully saved"
+      body:
+        reservation_saved_html:
+        your_reserved_slots:
+
+    notify_member_subscribed_plan_is_changed:
+      subject: "Your subscription has been updated"
+      body:
+        new_plan_html:
+
+    notify_admin_member_create_reservation:
+      subject: "New reservation"
+      body:
+        member_reserved_html:
+        reserved_slots:
+
+    notify_member_slot_is_modified:
+      subject: "Your reservation slot has been successfully changed"
+      body:
+        reservation_changed_to:
+        previous_date:
+
+    notify_admin_slot_is_modified:
+      subject:
+      body:
+        slot_modified:
+        new_date:
+        old_date:
+
+    notify_admin_when_user_is_created:
+      subject: "A user account has been created"
+      body:
+        new_account_created:
+        invoicing_disabled_html:
+
+    notify_admin_subscribed_plan:
+      subject: "A subscription has been purchased"
+      body:
+        plan_subscribed_html:
+
+    notify_member_invoice_ready:
+      subject: "Your FabLab's invoice"
+      body:
+        please_find_attached_html:
+        invoice_in_your_dashboard_html:
+        your_dashboard:
+
+    notify_member_avoir_ready:
+      subject: "Your FabLab's refund invoice"
+      body:
+        please_find_attached_html:
+        invoice_in_your_dashboard_html:
+        your_dashboard:
+
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "Your subscription expires in 7 days"
+      body:
+        your_plan:
+        expires_in_7_days:
+        to_renew_your_plan_follow_the_link:
+
+    notify_member_subscription_is_expired:
+      subject: "Your subscription has expired"
+      body:
+        your_plan:
+        has_expired:
+        you_can_go_to:
+        to_renew_your_plan:
+
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "A member subscription expires in 7 days"
+      body:
+        subscription_will_expire_html:
+
+    notify_admin_subscription_is_expired:
+      subject: "A member subscription has expired"
+      body:
+        subscription_expired_html:
+
+    notify_admin_subscription_canceled:
+      subject: "A member subscription has been canceled"
+      body:
+        subscription_canceled_html:
+
+    notify_member_subscription_canceled:
+      subject: "Your subscription has been canceled"
+      body:
+        your_plan_was_canceled:
+        your_plan:
+        end_at:
+
+    notify_member_slot_is_canceled:
+      subject: "Your reservation has been canceled"
+      body:
+        reservation_canceled:
+
+    notify_admin_slot_is_canceled:
+      subject: "A reservation has been canceled"
+      body:
+        member_cancelled:
+        item_details:
+        generate_refund:
+
+    notify_admin_when_user_is_imported:
+      subject: "A user account has been imported from the SSO"
+      body:
+        new_account_imported:
+        provider_uid:
+        known_informations:
+        address_already_used:
+        no_more_info_available:
+
+    notify_user_profile_complete:
+      subject: "You now have access to the entire platform"
+      body:
+        message:
+
+    notify_user_auth_migration:
+      subject: "Important change to your FabLab account"
+      body:
+        the_platform:
+        is_changing_its_auth_system_and_will_now_use:
+        instead_of:
+        consequence_of_the_modification:
+        to_use_the_platform_thanks_for:
+        create_an_account_on:
+        or_use_an_existing_account_clicking_here:
+        in_case_of_problem_enter_the_following_code:
+
+    notify_admin_user_merged:
+      subject: "An imported account has been merged with an existing account"
+      body:
+        imported_account_merged:
+        provider_uid:
+
+    notify_admin_profile_complete:
+      subject: "An imported account has completed its profile"
+      body:
+        account_completed:
+        provider_id:
+
+    notify_admin_abuse_reported:
+      subject: "An abusive content has been reported"
+      body:
+        intro:
+        signaled_content:
+        signaled_by:
+        signaled_on:
+        message:
+
+    notify_admin_invoicing_changed:
+      subject: "An invoicing parameter has been changed"
+      body:
+        generation_status_html:
+        disabled:
+        enabled:
+
+    shared:
+      hello: "Hello %{user_name}"

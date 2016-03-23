@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1>Centre de notifications</h1>
+        <h1 translate>{{ 'notifications_center' }}</h1>
       </section>
     </div>
 
@@ -19,15 +19,15 @@
   <div class="row">
 
     <div class="col-md-12">
-      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="notifications.length == 0">Tout marquer comme lu ({{notifications.length}})</button>
+      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="notifications.length == 0">{{ 'mark_all_as_read' | translate }} ({{notifications.length}})</button>
 
       <table class="table">
         <thead>
           <tr>
             <th style="width:10%"></th>
-            <th style="width:20%">Date</th>
-            <th style="width:70%">Intitulée</th>
-    
+            <th style="width:20%" translate>{{ 'date' }}</th>
+            <th style="width:70%" translate>{{ 'notif_title' }}</th>
+
           </tr>
         </thead>
         <tbody>
@@ -37,17 +37,17 @@
                   <i class="fa fa-check"></i>
                 </button>
             </td>
-            <td>{{ notification.created_at | amDateFormat:'D MMMM YYYY H:mm' }}</td>
+            <td>{{ notification.created_at | amDateFormat:'LLL' }}</td>
             <td ng-bind-html="notification.message.description"></td>
 
           </tr>
           <tr ng-if="notifications.length == 0">
-            <td colspan="3">Aucune nouvelle notification.</td>
+            <td colspan="3" translate>{{ 'no_new_notifications' }}</td>
           </tr>
         </tbody>
       </table>
 
-      <h5>Archives</h5>
+      <h5 translate>{{ 'archives' }}</h5>
 
       <table class="table">
         <thead>
@@ -55,31 +55,31 @@
             <th style="width:10%"></th>
             <th style="width:20%"></th>
             <th style="width:70%"></th>
-      
+
           </tr>
         </thead>
         <tbody>
 
-      
+
 
           <tr class="read" ng-repeat="n in notificationsRead | orderBy:'created_at':true" ng-if="notificationsRead.length > 0">
             <td>
             </td>
-            <td>{{ n.created_at | amDateFormat:'D MMMM YYYY H:mm' }}</td>
+            <td>{{ n.created_at | amDateFormat:'LLL' }}</td>
             <td ng-bind-html="n.message.description"></td>
 
           </tr>
 
 
           <tr ng-if="notificationsRead.length == 0">
-            <td colspan="3">Aucune notification archivée.</td>
+            <td colspan="3" translate>{{ 'no_archived_notifications' }}</td>
           </tr>
 
 
         </tbody>
       </table>
 
-      <a class="btn btn-default" ng-click="addMoreNotificationsReaded()" ng-if="paginateActive">Charger les notifications suivantes...</a>
+      <a class="btn btn-default" ng-click="addMoreNotificationsReaded()" ng-if="paginateActive" translate>{{ 'load_the_next_notifications' }}</a>
 
     </div>
 

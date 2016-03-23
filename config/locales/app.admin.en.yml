@@ -1,0 +1,463 @@
+en:
+  app:
+    admin:
+      machines_new:
+        # add a new machine
+        declare_a_new_machine: "Declare a new machine"
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new machine, its prices are initialized at 0 for all subscriptions."
+        consider_changing_them_before_creating_any_reservation_slot: "Consider changing them before creating any reservation slot."
+
+      machines_edit:
+        # machine edition
+        machine_edit: "Edit a machine"
+
+      calendar:
+        # manage the trainings & machines slots
+        calendar_management: "Calendar management"
+        ongoing_reservations: "Ongoing reservations"
+        no_reservations: "No reservations"
+        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"  # messageFormat interpolation
+        reservation_cancellation_failed: "Reservation cancellation failed."
+        unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Unable to remove the last machine of the slot. Delete the slot rather."
+        do_you_really_want_to_remove_MACHINE_from_this_slot: "Do you really want to remove \"{MACHINE}\" from this slot?"  # messageFormat interpolation
+        this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "This will prevent any new reservation on this slot but won't cancel those existing."
+        beware_this_cannot_be_reverted: "Beware: this cannot be reverted."
+        the_machine_was_successfully_removed_from_the_slot: "The machine was successfully removed from the slot."
+        deletion_failed: "Deletion failed."
+        DATE_slot: "{{DATE}} slot:"  # angular interpolation
+        you_can_define_a_training_on_that_slot: "You can define a training on that slot:"
+        link_a_training: "Link a training"
+        or_: "Or"
+        _select_some_machines: "select some machines"
+        number_of_tickets: "Number of tickets: "
+        adjust_the_opening_hours: "Adjust the opening hours"
+        restrict_this_slot_with_labels_(optional): "Restrict this slot with labels (optional)"
+        the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
+        unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
+        you_should_link_a_training_or_a_machine_to_this_slot: "You should link a training or a machine to this slot."
+
+      project_elements:
+        # management of the projects' components
+        projects_elements_management: "Projects elements management"
+        add_a_material: "Add a material"
+        add_a_new_theme: "Add a new theme"
+        licences: "Licences"
+        add_a_new_licence: "Add a new licence"
+
+      trainings:
+        # track and monitor the trainings
+        add_a_new_training: "Add a new training"
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
+        associated_machines: "Associated machines"
+        number_of_tickets: "Number of tickets"
+        training: "Training"
+        year_NUMBER: "Year {{NUMBER}}"  # angular interpolation
+        month_of_NAME: "Month of {{NAME}}"  # angular interpolation
+        NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"  # messageFormat interpolation
+        none: "None"
+        training_validation: "Training validation"
+        training_of_the_ : "Training of the "  # context: date. eg. "training of the september 1st 2012"
+        you_can_validate_the_training_of_the_following_members: "You can validate the training of the following members:"
+        no_reservation: "No reservation"
+        validate_the_trainings: "Validate the trainings"
+        edition_of_the_description_tooltip: "Edition of the description tooltip"
+        describe_the_training_in_a_few_words: "Describe the training in a few words."
+        description_is_limited_to_255_characters: "Description is limited to 255 characters."
+        description_was_successfully_saved: "Description was successfully saved."
+        training_successfully_deleted: "Training successfully deleted."
+        unable_to_delete_the_training_because_some_users_alredy_booked_it: "Unable to delete the training because some users already booked it."
+
+      events:
+        # courses and workshops tracking and management
+        fablab_courses_and_workshops: "Fablab courses and workshops"
+        all_events: "All events"
+        passed_events: "Passed events"
+        events_to_come: "Events to come"
+        from_DATE: "From {{DATE}}"  # angular interpolation
+        from_TIME: "From {{TIME}}"  # angular interpolation
+        view_reservations: "View reservations"
+
+      events_new:
+        # add a new workshop/course
+        none: "None"
+        every_days: "Every days"
+        every_week: "Every week"
+        every_month: "Every month"
+        every_year: "Every year"
+
+      events_edit:
+        # edit an existing event
+        edit_the_event: "Edit the event"
+
+      event_reservations:
+        # event reservations list
+        reservations: "Reservations :"
+        payment_date: "Payment date"
+        reserved_tickets: "Reserved tickets"
+        show_the_event: "Show the event"
+        no_reservations_for_now: "No reservation for now."
+        back_to_monitoring: "Back to monitoring"
+
+      pricing:
+        # subscriptions, prices and credits management
+        pricing_management: "Pricing management"
+        list_of_the_subscription_plans: "List of the subscription plans"
+        beware_the_subscriptions_are_disabled_on_this_application: "Beware, the subscriptions are disabled on this application."
+        you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager: "You can create some but they won't be available until the project is redeployed by the server manager."
+        for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later: "For safety reasons, please don't create subscriptions if you don't intend to use them later."
+        add_a_new_subscription_plan: "Add a new subscription plan"
+        duration: "Duration"
+        prominence: "Prominence"
+        machine_hours: "Machine hours"
+        these_prices_match_machine_hours_rates_: "These prices match machine hours rates"
+        _without_subscriptions: "without subscriptions"
+        credits: "Credits"
+        related_trainings: "Related trainings"
+        add_a_machine_credit: "Add a machine credit"
+        machine: "Machine"
+        hours: "Hours"
+        related_subscriptions: "Related subscriptions"
+        please_specify_a_number: "Please specify a number."
+        none: "None"  # grammar note: concordance with "training".
+        an_error_occurred_while_saving_the_number_of_credits: "An error occurred while saving the number of credits."
+        an_error_occurred_while_deleting_credit_with_the_TRAINING: "An error occurred while deleting credit with the {{TRAINING}}."  # angular interpolation
+        an_error_occurred_unable_to_find_the_credit_to_revoke: "An error occurred : unable to find the credit to revoke."
+        an_error_occurred_while_creating_credit_with_the_TRAINING: "An error occurred while creating credit with the {{TRAINING}}."  # angular interpolation
+        not_set: "Not set"
+        error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Error : a credit linking this machine with that subscription already exists."
+        changes_have_been_successfully_saved: "Changes have been successfully saved."
+        credit_was_successfully_saved: "Credit was successfully saved."
+        do_you_really_want_to_delete_this_subscription_plan: "Do you really want to delete this subscription plan?"
+        subscription_plan_was_successfully_deleted: "Subscription plan was successfully delete."
+        unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
+
+      plans:
+        new:
+          # add a subscription plan on the platform
+          add_a_subscription_plan: "Add a subscription plan"
+          unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
+          successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
+          unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
+        edit:
+          # edit a subscription plan / machine hours prices
+          subscription_plan: "Subscription plan:"
+          prices: "Prices"
+          copy_prices_from: "Copy prices from"
+          machine: "Machine"
+          hourly_rate: "Hourly rate"
+          unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."
+          subscription_successfully_changed: "Subscription successfully changed."
+
+      invoices:
+        # list of all invoices & invoicing parameters
+        invoices: "Invoices"
+        invoices_list: "Invoices list"
+        filter_invoices: "Filter invoices"
+        invoice_#_: "Invoice #:"
+        customer_: "Customer:"
+        date_: "Date:"
+        invoice_#: "Invoice #"
+        customer: "Customer"
+        credit_note: "Credit note"
+        invoicing_settings: "Invoicing settings"
+        change_logo: "Change logo"
+        john_smith: "John Smith"
+        john_smith@example_com: "jean.smith@example.com"
+        invoice_reference_: "Invoice reference:"
+        code_: "Code:"
+        code_disabled: "Code disabled"
+        order_#: "Order #:"
+        invoice_issued_on_DATE_at_TIME: "Invoice issued on {{DATE}} at {{TIME}}"  # angular interpolation
+        object_reservation_of_john_smith_on_DATE_at_TIME: "Object: Reservation of John Smith on {{DATE}} at {{TIME}}"  # angular interpolation
+        order_summary: "Order summary:"
+        details: "Details"
+        amount: "Amount"
+        machine_booking-3D_printer: "Machine booking - 3D printer"
+        total_amount: "Total amount"
+        total_including_all_taxes: "Total incl. all taxes"
+        VAT_disabled: "VAT disabled"
+        including_VAT: "Including VAT"
+        including_total_excluding_taxes: "Including Total excl. taxes"
+        including_amount_payed_on_ordering: "Including Amount payed on ordering"
+        settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Settlement by debit card on {{DATE}} at {{TIME}}, for an amount of {{AMOUNT}}"
+        important_notes: "Important notes"
+        address_and_legal_information: "Address and legal information"
+        invoice_reference: "Invoice reference"
+        day: "Day"
+        "#_of_invoice": "# of invoice"
+        online_sales: "Online sales"
+        refund: "Refund"
+        documentation: "Documentation"
+        2_digits_year_(eg_70): "2 digits year (eg. 70)"
+        4_digits_year_(eg_1970): "4 digits year (eg. 1970)"
+        month_number_(eg_1): "Month number (eg. 1)"
+        2_digits_month_number_(eg_01): "2 digits month number (eg. 01)"
+        3_characters_month_name_(eg_JAN): "3 characters month name (eg. JAN)"
+        day_in_the_month_(eg_1): "Day in the month (eg. 1)"
+        2_digits_day_in_the_month_(eg_01): "2 digits in the month (eg. 01)"
+        (n)_digits_daily_count_of_invoices_(eg_ddd_002_2nd_invoice_of_the_day): "(n) digits, daily count of invoices (eg. ddd => 002 : 2nd invoice of the day)"
+        (n)_digits_monthly_count_of_invoices_(eg_mmmm_0012_12th_invoice_of_this_month): "(n) digits, monthly count of invoices (eg. mmmm => 0012 : 12th invoice of the month)"
+        (n)_digits_annual_amount_of_invoices_(eg_yyyyyy_000008_8th_invoice_of_this_year): "(n) digits, annual count of invoices (ex. yyyyyy => 000008 : 8th invoice of this year)"
+        beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left: "Beware: if the number exceed the specified length, it will be truncated by the left."
+        (n)_digits_count_of_orders_(eg_nnnn_0327_327th_order): "(n) digits, count of invoices (eg. nnnn => 0327 : 327th order)"
+        (n)_digits_daily_count_of_orders_(eg_ddd_002_2nd_order_of_the_day): "(n) digits, daily count of orders (eg. ddd => 002 : 2nd order of the day)"
+        (n)_digits_monthly_count_of_orders_(eg_mmmm_0012_12th_order_of_this_month): "(n) digits, monthly count of orders (eg. mmmm => 0012 : 12th order of the month)"
+        (n)_digits_annual_amount_of_orders_(eg_yyyyyy_000008_8th_order_of_this_year): "(n) digits, annual count of orders (ex. yyyyyy => 000008 : 8th order of this year)"
+        add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Add a notice regarding the online sales, only if the invoice is concerned."
+        this_will_never_be_added_when_a_refund_notice_is_present: "This will never be added when a refund notice is present."
+        (eg_X[/VL]_will_add_/VL_to_the_invoices_settled_with_stripe): '(eg. X[/VL] will add "/VL" to the invoices settled with stripe)'
+        add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Add a notice regarding refunds, only if the invoice is concerned."
+        this_will_never_be_added_when_an_online_sales_notice_is_present: "This will never be added when an online sales notice is present."
+        (eg_R[/A]_will_add_/A_to_the_refund_invoices): '(ed. R[/A] will add "/A" to the refund invoices)'
+        code: "Code"
+        enable_the_code: "Enable the code"
+        enabled: "Enabled"
+        disabled: "Disabled"
+        order_number: "Order number"
+        elements: "Elements"
+        VAT: "VAT"
+        enable_VAT: "Enable VAT"
+        VAT_rate: "VAT rate"
+        refund_invoice_successfully_created: "Refund invoice successfully created."
+        create_a_refund_on_this_invoice: "Create a refund on this invoice"
+        creation_date_for_the_refund: "Creation date for the refund"
+        creation_date_is_required: "Creation date is required."
+        refund_mode: "Refund mode:"
+        do_you_want_to_disable_the_user_s_subscription: "Do you want to disabled the user's subscription:"
+        elements_to_refund: "Elements to refund"
+        description_(optional): "Description (optional):"
+        will_appear_on_the_refund_invoice: "Will appear on the refund invoice."
+        none: "None"  # grammar note: concordance with "payment mean"
+        by_cash: "By cash"
+        by_cheque: "By cheque"
+        by_transfer: "By transfer"
+        you_must_select_at_least_one_element_to_create_a_refund: "You must select at least one element, to create a refund."
+        unable_to_create_the_refund: "Unable to create the refund"
+        invoice_reference_successfully_saved: "Invoice reference successfully saved."
+        an_error_occurred_while_saving_invoice_reference: "An error occurred while saving invoice reference."
+        invoicing_code_succesfully_saved: "Invoicing code successfully saved."
+        an_error_occurred_while_saving_the_invoicing_code: "An error occurred while saving the invoicing code."
+        code_successfully_activated: "Code successfully activated."
+        code_successfully_disabled: "Code successfully disabled."
+        an_error_occurred_while_activating_the_invoicing_code: "An error occurred while activating the invoicing code."
+        order_number_successfully_saved: "Order number successfully saved."
+        an_error_occurred_while_saving_the_order_number: "An error occurred while saving the order number."
+        VAT_rate_successfully_saved: "VAT rate successfully saved."
+        an_error_occurred_while_saving_the_VAT_rate: "An error occurred while saving the VAT rate."
+        VAT_successfully_activated: "VAT successfully activated."
+        VAT_successfully_disabled: "VAT successfully disabled."
+        an_error_occurred_while_activating_the_VAT: "An error occurred while activating the VAT."
+        text_successfully_saved: "Text successfully saved."
+        an_error_occurred_while_saving_the_text: "An error occurred while saving the text."
+        address_and_legal_information_successfully_saved: "Address and legal information successfully saved."
+        an_error_occurred_while_saving_the_address_and_the_legal_information: "An error occurred while saving the address and the legal information."
+        logo_successfully_saved: "Logo successfully saved."
+        an_error_occurred_while_saving_the_logo: "An error occurred while saving the logo."
+
+      members:
+        # management of users, labels, groups, and so on
+        users_management: "Users management"
+        members: "Members"
+        search_for_an_user: "Search for an user"
+        add_a_new_member: "Add a new member"
+        reservations: "Reservations"
+        email: "Email"
+        phone: "Phone"
+        user_type: "User type"
+        administrators: "Administrators"
+        search_for_an_administrator: "Search for an administrator"
+        add_a_new_administrator: "Add a new administrator"
+        groups: "Groups"
+        authentication: "Authentication"
+        do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Do you really want to delete this administrator? This cannot be undone."
+        administrator_successfully_deleted: "Administrator successfully deleted."
+        unable_to_delete_the_administrator: "Unable to delete the administrator."
+        add_a_group: "Add a group"
+        group_name: "Group name"
+        changes_successfully_saved: "Changes successfully saved."
+        an_error_occurred_while_saving_changes: "An error occurred when saving changes."
+        new_group_successfully_saved: "New group successfully saved."
+        an_error_occurred_when_saving_the_new_group: "An error occurred when saving the new group."
+        group_successfully_deleted: "Group successfully deleted."
+        unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Unable to delete group because some users and/or groups are still linked to it."
+        add_a_tag: "Add a tag"
+        tag_name: "Tag name"
+        new_tag_successfully_saved: "New tag successfully saved."
+        an_error_occurred_while_saving_the_new_tag: "An error occurred while saving the new tag."
+        tag_successfully_deleted: "Tag successfully deleted."
+        an_error_occurred_and_the_tag_deletion_failed: "An error occurred and the tag deletion failed."
+        search_for_an_authentication_provider: "Search for an authentication provider"
+        add_a_new_authentication_provider: "Add a new authentication provider"
+        state: "State"
+        unknown: "Unknown: "
+        active: "Active"
+        pending: "Pending"
+        previous_provider: "Previous provider"
+        do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Do you really want to delete the {{TYPE}} authentication provider: {{NAME}}?"  # angular interpolation
+        authentication_provider_successfully_deleted: "Authentication provider successfully deleted."
+        an_error_occurred_unable_to_delete_the_specified_provider: "An error occurred: unable to delete the specified provider."
+
+      members_new:
+        # add a member
+        add_a_member: "Add a member"
+
+      members_edit:
+        # edit a member
+        duration: "Duration:"
+        expires_at: "Expires at:"
+        price_: "Price:"
+        offer_free_days: "Offer free days"
+        extend_subscription: "Extend subscription"
+        user_has_no_current_subscription: "User has no current subscription."
+        subscribe_to_a_plan: "Subscribe to a plan"
+        next_trainings: "Next trainings"
+        passed_trainings: "Passed trainings"
+        validated_trainings: "Validated trainings"
+        courses_and_workshops: "Courses and workshops"
+        next_courses_and_workshops: "Next courses and workshops"
+        no_upcomning_courses_or_workshops: "No upcoming courses and workshops"
+        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
+        NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 reduced rate ticket reserved} other{{NUMBER} reduced rate tickets reserved}}"  # messageFormat interpolation
+        passed_courses_and_workshops: "Passed courses and workshops"
+        no_passed_courses_or_workshop: "No passed courses or workshops"
+        invoices: "Invoices"
+        invoice_#: "Invoice #"
+        download_the_refund_invoice: "Download the refund invoice"
+        expiration_date: "Expiration date"
+        you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days: "You intentionally decide to extend the user's subscription by offering him free days."
+        you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "You intentionally decide to extend the user's subscription by charging him again for his current subscription."
+        until_(expiration_date): "Until (expiration date):"
+        you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "You successfully changed the expiration date of the user's subscription"
+        a_problem_occurred_while_saving_the_date: "A problem occurred while saving the date."
+        new_subscription: "New subscription"
+        you_are_about_to_purchase_a_subscription_to_NAME: "You are about to purchase a subscription to {{NAME}}."  # angular interpolation
+        subscription_successfully_purchased: "Subscription successfully purchased."
+        a_problem_occurred_while_taking_the_subscription: "A problem occurred while taking the subscription"
+
+      admins_new:
+        # add a new administrator to the platform
+        add_an_administrator: "Add an administrator"
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."  # messageFormat interpolation
+
+      authentication_new:
+        # add a new authentication provider (SSO)
+        add_a_new_authentication_provider: "Add a new authentication provider"
+        a_local_database_provider_already_exists_unable_to_create_another: "A \"Local Database\" provider already exists. Unable to create another."
+        local_provider_successfully_saved: "Local provider successfully saved."
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider"
+        security_issue_detected: "Security issue detected"
+        beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "Beware: the OAuth 2 provider you are about to add isn't using HTTPS."
+        this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "This is a serious security issue on internet and should never be used except for testing purposes."
+        do_you_really_want_to_continue: "Do you really want to continue?"
+        unsecured_oauth2_provider_successfully_added: "Unsecured OAuth 2.0 provider successfully added."
+        oauth2_provider_successfully_added: "OAuth 2.0 provider successfully added."
+
+      authentication_edit:
+        # edit an authentication provider (SSO)
+        provider: "Provider :"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider"
+        provider_successfully_updated: "Provider successfully updated"
+        an_error_occurred_unable_to_update_the_provider: "An error occurred: unable to update the provider."
+
+      statistics:
+        # statistics tables
+        evolution: "Evolution"
+        age_filter: "Age filter"
+        from_age: "From"  # context: age. eg: from 8 to 40 years old
+        to_age: "to"  # context: age. eg: from 8 to 40 years old
+        _years_old: "years old"
+        start: "Start:"
+        end: "End:"
+        custom_filter: "Custom filter"
+        NO_: "NO"
+        criterion: "Criterion:"
+        value: "Value:"
+        exclude: "Exclude"
+        entries: "Entries:"
+        revenue_: "Revenue:"
+        average_age: "Average age:"
+        years_old: "Years old"
+        total: "Total"
+        gender: "Gender"
+        age: "Age"
+        revenue: "Revenue"
+        unknown: "Unknown"
+        user_id: "User ID"
+
+
+      stats_graphs:
+        # statistics graphs
+        data: "Data"
+        day: "Day"
+        week: "Week"
+        start: "Start:"
+        end: "End:"
+        revenue: "Revenue"
+        top_list_of: "Top list of"
+        number: "Number"
+        week_short: "Week"
+        week_of_START_to_END: "Week of {{START}} to {{END}}"  # angular interpolation
+        no_data_for_this_period: "No data for this period"
+
+      settings:
+        # global application parameters and customization
+        customize_the_application: "Customize the application"
+        general: "General"
+        fablab_title: "FabLab title"
+        fablab_name: "FabLab name"
+        title_concordance: "Title concordance"
+        male: "Male."
+        female: "Female."
+        eg: "eg:"
+        about: "About"
+        male_preposition: "the"
+        female_preposition: "the"
+        customize_information_messages: "Customize information messages"
+        message_of_the_machine_booking_page: "Message of the machine booking page:"
+        type_the_message_content: "Type the message content"
+        warning_message_of_the_training_booking_page: "Warning message of the training booking page:"
+        information_message_of_the_training_reservation_page: "Information message of the training reservation page:"
+        message_of_the_subscriptions_page: "Message of the subscriptions page:"
+        message_of_the_event_page_relative_to_the_reduced_rate_availability_conditions: "Message of the event page, relative to the reduced rate availability conditions:"
+        legal_documents: "Legal documents"
+        if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user: "If these documents are not filled, no consent about them will be asked."
+        general_terms_and_conditions_(T&C): "General terms and conditions (T&C)"
+        terms_of_service_(TOS): "Terms of service (TOS)"
+        customize_the_graphics: "Customize the graphics"
+        for_an_optimal_rendering_the_logo_image_must_be_at_the_PNG_format_with_a_transparent_background_and_with_an_aspect_ratio_3.5_times_wider_than_the_height: "For an optimal rendering, the logo image must be at the PNG format with a transparent background and an aspect ratio 3.5 wider than the height."
+        concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "Concerning the favicon, it must be at ICO format with a size of 16x16 pixels."
+        remember_to_refresh_the_page_for_the_changes_to_take_effect: "Remember to refresh the page for the changes to take effect."
+        logo_(white_background): "Logo (white background)"
+        change_the_logo: "Change the logo"
+        logo_(black_background): "Logo (black background)"
+        favicon: "Favicon"
+        change_the_favicon: "Change the favicon"
+        main_colour: "Main colour:"
+        primary: "Primary"
+        secondary_colour: "Secondary colour:"
+        secondary: "Secondary"
+        home_page: "Home page"
+        news_of_the_home_page: "News of the home page:"
+        type_your_news_here: "Type your news here"
+        leave_it_empty_to_not_bring_up_any_news_on_the_home_page: "Leave it empty to not bring up any news on the home page"
+        twitter_stream: "Twitter Stream:"
+        name_of_the_twitter_account: "Name of the Twitter account"
+        title_of_the_about_page: "Title of the About page"
+        shift_enter_to_force_carriage_return: "SHIFT + ENTER to force carriage return"
+        input_the_main_content: "Input the main content"
+        input_the_fablab_contacts: "Input the FabLab contacts"
+        reservations: "Reservations"
+        reservations_parameters: "Reservations parameters"
+        confine_the_booking_agenda: "Confine the booking agenda"
+        opening_time: "Opening time"
+        closing_time: "Closing time"
+        ability_for_the_users_to_move_their_reservations: "Ability for the users to move their reservations"
+        reservations_shifting: "Reservations shifting"
+        prior_period_(hours): "Prior period (hours)"
+        enabled: "Enabled"
+        disabled: "Disabled"
+        ability_for_the_users_to_cancel_their_reservations: "Ability for the users to cancel their reservations"
+        reservations_cancelling: "Reservations cancelling"
+        customization_of_SETTING_successfully_saved: "Customization of {{SETTING}} successfully saved."  # angular interpolation
+        file_successfully_updated: "File successfully updated."

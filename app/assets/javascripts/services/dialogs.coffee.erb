@@ -1,6 +1,6 @@
 'use strict'
 
-Application.Services.factory 'dialogs', ["$modal", ($modal) ->
+Application.Services.factory 'dialogs', ["$uibModal", ($uibModal) ->
     confirm: (options, success, error)->
       defaultOpts =
         templateUrl: '<%= asset_path "shared/confirm_modal.html" %>'
@@ -8,20 +8,20 @@ Application.Services.factory 'dialogs', ["$modal", ($modal) ->
         resolve:
           object: ->
             title: 'Titre de confirmation'
-            msg: 'Message de confiramtion'
-        controller: ['$scope', '$modalInstance', '$state', 'object', ($scope, $modalInstance, $state, object) ->
+            msg: 'Message de confirmation'
+        controller: ['$scope', '$uibModalInstance', '$state', 'object', ($scope, $uibModalInstance, $state, object) ->
           $scope.object = object
-          $scope.ok = ->
-            $modalInstance.close()
+          $scope.ok = (info) ->
+            $uibModalInstance.close( info )
           $scope.cancel = ->
-            $modalInstance.dismiss('cancel')
+            $uibModalInstance.dismiss('cancel')
         ]
       angular.extend(defaultOpts, options) if angular.isObject options
-      $modal.open defaultOpts
-      .result['finally'](null).then ->
+      $uibModal.open defaultOpts
+      .result['finally'](null).then (info)->
         if angular.isFunction(success)
-          success()
-      , ->
+          success(info)
+      , (reason)->
         if angular.isFunction(error)
-          error()
+          error(reason)
   ]

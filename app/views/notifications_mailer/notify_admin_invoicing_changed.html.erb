@@ -1,0 +1,17 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= _t('.body.generation_status_html',
+         {
+             STATUS: bool_to_sym(@attached_object.invoicing_disabled),
+             NAME: @attached_object.profile.full_name
+         })
+      # messageFormat
+  %>
+</p>
+
+<% if @attached_object.invoicing_disabled %>
+  <p><%= t('.body.disabled') %></p>
+<% else %>
+  <p><%= t('.body.enabled') %></p>
+<% end %>

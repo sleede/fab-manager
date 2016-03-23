@@ -1,3 +1,5 @@
 json.title notification.notification_type
-json.description "Un nouveau compte utilisateur vient d'être créé : <strong><em>#{ notification.attached_object.profile.full_name } &lt;#{ notification.attached_object.email}&gt;</strong></em>."
+json.description t('.a_new_user_account_has_been_created_NAME_EMAIL_html',
+                   NAME: notification.attached_object.profile.full_name,
+                   EMAIL: notification.attached_object.email)
 json.url notification_url(notification, format: :json)

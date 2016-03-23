@@ -5,21 +5,21 @@
     <section class="panel panel-default bg-light m-lg">
     <div class="panel-body m-r">
 
-      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
       <input name="_method" type="hidden" ng-value="method">
 
       <div class="form-group" ng-class="{'has-error': projectForm['project[name]'].$dirty && projectForm['project[name]'].$invalid}">
-        <label for="name" class="col-sm-2 control-label">Nom *</label>
+        <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
         <div class="col-sm-8">
           <input ng-model="project.name" type="text" name="project[name]" class="form-control" id="project_name" placeholder="" required>
-          <span class="help-block" ng-show="projectForm['project[name]'].$dirty && projectForm['project[name]'].$error.required">Nom est obligatoire</span>
+          <span class="help-block" ng-show="projectForm['project[name]'].$dirty && projectForm['project[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
         </div>
       </div>
 
 
       <div class="form-group">
-        <label for="project_image" class="col-sm-2 control-label">Illustration</label>
+        <label for="project_image" class="col-sm-2 control-label" translate>{{ 'illustration' }}</label>
         <div class="col-sm-10">
           <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(project.project_image)">
             <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
@@ -29,9 +29,9 @@
               <img ng-src="{{ project.project_image }}" alt="" />
             </div>
             <div>
-              <span class="btn btn-default btn-file"><span class="fileinput-new">Ajouter un visuel <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists">Modifier</span>
+              <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'change' }}</span>
                 <input type="file" name="project[project_image_attributes][attachment]"></span>
-              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Supprimer</a>
+              <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'delete' }}</a>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
 
 
       <div class="form-group">
-        <label class="col-sm-2 control-label">Fichier CAO</label>
+        <label class="col-sm-2 control-label" translate>{{ 'CAD_file' }}</label>
         <div class="col-sm-10">
           <div ng-repeat="file in project.project_caos_attributes" ng-show="!file._destroy">
             <input type="hidden" name="project[project_caos_attributes][][id]" ng-value="file.id" />
@@ -49,53 +49,58 @@
               <div class="form-control" data-trigger="fileinput">
                 <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
               </div>
-              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Parcourir</span>
-                <span class="fileinput-exists">Modifier</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
+              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
+                <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
               <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
 
           </div>
-          <a class="btn btn-default" ng-click="addFile()" role="button">Ajouter un nouveau fichier <i class="fa fa-file-o fa-fw"></i></a>
+          <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
         </div>
       </div>
 
       <div class="form-group" ng-class="{'has-error': projectForm['project[description]'].$dirty && projectForm['project[description]'].$invalid}">
-        <label for="description" class="col-sm-2 control-label">Description *</label>
+        <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
         <div class="col-sm-10">
           <input type="hidden" name="project[description]" ng-value="project.description" />
           <summernote ng-model="project.description" id="project_description" placeholder="" config="summernoteOpts" name="project[description]" required></summernote>
-          <span class="help-block" ng-show="projectForm['project[description]'].$dirty && projectForm['project[description]'].$error.required">Description est obligatoire</span>
+          <span class="help-block" ng-show="projectForm['project[description]'].$dirty && projectForm['project[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
         </div>
       </div>
 
 
       <div class="form-group">
-        <label class="col-sm-2 control-label">Étapes</label>
+        <label class="col-sm-2 control-label" translate>{{ 'steps' }}</label>
         <div class="col-sm-10">
           <div ng-repeat="step in project.project_steps_attributes" ng-show="!step._destroy">
             <div class="m-t-xs m-b-lg">
-              <span class="label label-warning m-t m-b">Étape {{ $index+1 }}/{{project.project_steps_attributes.length}}</span>
+              <span class="label label-warning m-t m-b">{{ 'step_N' | translate:{ INDEX:$index+1 } }}/{{project.project_steps_attributes.length}}</span>
               <input type="hidden" name="project[project_steps_attributes][][id]" ng-value="step.id" />
               <input type="hidden" name="project[project_steps_attributes][][_destroy]" ng-value="step._destroy" />
-              <input ng-model="step.title" type="text" name="project[project_steps_attributes][][title]" class="form-control m-b-sm m-t-xs" placeholder="Titre de l'étape" required>
-              
+              <input ng-model="step.title"
+                     type="text"
+                     name="project[project_steps_attributes][][title]"
+                     class="form-control m-b-sm m-t-xs"
+                     placeholder="{{ 'step_title' | translate }}"
+                     required>
 
               <input type="hidden" name="project[project_steps_attributes][][description]" ng-value="step.description" />
-              <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description] required></summernote>
+              <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description]></summernote>
 
               <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(step.project_step_image)">
-                <span class="btn btn-default btn-file"><span class="fileinput-new">Ajouter une image</span><span class="fileinput-exists">Modifier l'image</span>
-                  <input type="file" name="project[project_steps_attributes][][project_step_image_attributes][attachment]"></span>
+                <span class="btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'add_a_picture' }}</span><span class="fileinput-exists" translate>{{ 'change_the_picture' }}</span>
+                  <input type="file"
+                         name="project[project_steps_attributes][][project_step_image_attributes][attachment]"></span>
                 <span class="fileinput-filename">{{step.project_step_image}}</span>
                 <a class="close fileinput-exists" data-dismiss="fileinput" style="float: none"><i class="fa fa-trash-o"></i></a>
               </div>
 
               <div>
-                <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o"></i> Supprimer l'étape</a>
+                <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o"></i> {{ 'delete_the_step' | translate }}</a>
               </div>
             </div>
           </div>
-          <a class="btn btn-default m-b" ng-click="addStep()" role="button">Ajouter une nouvelle étape</a>
+          <a class="btn btn-default m-b" ng-click="addStep()" role="button" translate>{{ 'add_a_new_step' }}</a>
         </div>
       </div>
 
@@ -104,12 +109,13 @@
     </div>   <!-- ./panel-body  -->
     <div class="panel-footer no-padder">
       <div ng-show="project.state != 'published'">
-        <div class="btn btn-lg btn-block btn-valid btn-success text-u-c r-n" publish-project ng-disabled="projectForm.$invalid">
-          Publier votre projet
-        </div>
-        <div class="text-center font-bold text-u-c">ou</div>
+        <div class="btn btn-lg btn-block btn-valid btn-success text-u-c r-n" publish-project ng-disabled="projectForm.$invalid" translate>{{ 'publish_your_project' }}</div>
+        <div class="text-center font-bold text-u-c" translate>{{ 'or' }}</div>
       </div>
-      <input type="submit" ng-value="submitName" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="projectForm.$invalid"/>
+      <input type="submit"
+             ng-value="'save_button_value' | translate"
+             class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+             ng-disabled="projectForm.$invalid"/>
     </div>
     </section>
 
@@ -120,67 +126,97 @@
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Matériaux utilisés</h3>
+        <h3 translate>{{ 'employed_materials' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <input type="hidden" name="project[component_ids][]" value="" />
-        <select ng-model="project.component_ids" class="form-control form-control-ui-select" name="project[component_ids][]" ui-select2 multiple>
-          <option value="{{c.id}}" ng-repeat="c in components">{{c.name}}</option>
-        </select>
+        <ui-select multiple ng-model="project.component_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[component_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="c.id as c in (components | filter: $select.search)">
+                <span ng-bind-html="c.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
       </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Machines utilisées</h3>
+        <h3 translate>{{ 'employed_machines' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <input type="hidden" name="project[machine_ids][]" value="" />
-        <select ng-model="project.machine_ids" class="form-control form-control-ui-select" name="project[machine_ids][]" ui-select2 multiple>
-          <option value="{{m.id}}" ng-repeat="m in machines">{{m.name}}</option>
-        </select>
+        <ui-select multiple ng-model="project.machine_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[machine_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="m.id as m in (machines | filter: $select.search)">
+                <span ng-bind-html="m.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
       </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Collaborateurs</h3>
+        <h3 translate>{{ 'collaborators' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <input type="hidden" name="project[user_ids][]" value="" />
-        <select ng-model="project.user_ids" class="form-control form-control-ui-select" name="project[user_ids][]" ui-select2 multiple>
-          <option value="{{m.id}}" ng-repeat="m in members">{{m.name}}</option>
-        </select>
+        <ui-select multiple ng-model="project.user_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[user_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="m.id as m in (members | filter: $select.search)">
+                <span ng-bind-html="m.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
       </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Licences Creative Commons</h3>
+        <h3 translate>{{ 'creative_commons_licences' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
-        <%# TODO: Bug concerne qu'on ne peut pas déselectionner un option %>
-        <select ng-model="project.licence_id" class="form-control" name="project[licence_id]" ui-select2>
-          <option value="{{l.id}}" ng-repeat="l in licences">{{l.name}}</option>
-        </select>
+        <%# TODO: be able to remove the selected option %>
+        <ui-select ng-model="project.licence_id">
+            <ui-select-match>
+                <span ng-bind="$select.selected.name"></span>
+                <input type="hidden" name="project[licence_id]" value="{{$select.selected.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="l.id as l in (licences | filter: $select.search)">
+                <span ng-bind-html="l.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
       </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Thématiques</h3>
+        <h3 translate>{{ 'themes' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <input type="hidden" name="project[theme_ids][]" value="" />
-        <select ng-model="project.theme_ids" class="form-control form-control-ui-select" name="project[theme_ids][]" ui-select2 multiple>
-          <option value="{{t.id}}" ng-repeat="t in themes">{{t.name}}</option>
-        </select>
+        <ui-select multiple ng-model="project.theme_ids" class="form-control">
+            <ui-select-match>
+                <span ng-bind="$item.name"></span>
+                <input type="hidden" name="project[theme_ids][]" value="{{$item.id}}" />
+            </ui-select-match>
+            <ui-select-choices repeat="t.id as t in (themes | filter: $select.search)">
+                <span ng-bind-html="t.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
       </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3>Tags</h3>
+        <h3 translate>{{ 'tags' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <textarea ng-model="project.tags" class="form-control" id="project_tags" placeholder="" name="project[tags]"></textarea>

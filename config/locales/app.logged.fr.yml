@@ -1,0 +1,169 @@
+fr:
+  app:
+    logged:
+      profileCompletion:
+        # page de complétion du profil utilisateur, à la première connexion depuis un SSO
+        confirm_your_new_account: "Confirmez votre nouveau compte"
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Vous venez de créer un nouveau compte sur {GENDER, select, male{le} female{la} other{les}} {NAME}, en vous connectant depuis"  # messageFormat interpolation
+        before_letting_you_use_the_application_we_need_some_more_details: "Avant de vous laisser utiliser l'application, nous avons besoin de quelques renseignements supplémentaires"
+        please_fill_the_following_form: "Merci de compléter le formulaire suivant"
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Certaines informations peuvent nous avoir été déjà fournies par {{NAME}} et ne sont pas modifiables"  # angular interpolation
+        then_click_on_: "Cliquez ensuite sur"
+        _to_start_using_the_application: "pour commencer à utiliser l'application"
+        do_you_already_have_an_account: "Vous possédez déjà un compte ?"
+        do_not_fill_the_form_below_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Ne remplissez pas le formulaire ci-dessous mais indiquez ici le code qui vous a été fourni par e-mail, cela vous permettra de récupérer l'accès à votre compte."
+        authentification_code: "Code d'authentification"
+        confirm_my_code: "Valider mon code"
+        an_unexpected_error_occurred_check_your_authentication_code: "Une erreur inattendue est survenue, vérifiez votre code d'authentification."
+
+      dashboard:
+        profile:
+          # tableau de bord : mon profil
+          last_activity_on_: "Dernière activité le"
+          i_want_to_change_group: "Je veux changer de groupe !"
+          your_subscription_expires_on_: "Votre abonnement expire le"
+          no_subscriptions: "Aucun abonnement"
+          i_want_to_subscribe: "Je veux m'abonner !"
+          to_come: "à venir"
+          approved: "validée"
+          projects: "Projets"
+          no_projects: "Aucun projet"
+          labels: "Étiquettes"
+          no_labels: "Aucune étiquette"
+          delete_my_account: "Supprimer mon compte"
+          edit_my_profile: "Éditer votre profil"
+          change_my_data: "Modifier mes données"
+          once_your_data_are_up_to_date_: "Une fois vos données à jour,"
+          _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
+          _or_: 'ou'
+          _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
+          _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
+          sync_my_profile: "Synchroniser mon profil"
+          your_group_has_been_successfully_changed: "Votre groupe a bien été changé."
+          an_unexpected_error_prevented_your_group_from_being_changed: "Une erreur inattendue a empêché votre changement de groupe."
+          do_you_really_want_to_delete_your_account: "Êtes-vous sûr de vouloir supprimer votre compte ?"
+          all_data_relative_to_your_projects_will_be_lost: "Toutes les données relatives à vos projets seront détruites."
+          your_user_account_has_been_successfully_deleted_goodbye: "Votre compte utilisateur a bien été supprimé. Au revoir."
+          an_error_occured_preventing_your_account_from_being_deleted: "Une erreur est survenue qui a empêché la suppression de votre compte."
+        projects:
+          # tableau de bord : mes projets
+          you_dont_have_any_projects: "Vous n'avez aucun projet."
+          author: "Auteur"
+          collaborator: "Collaborateur"
+        trainings:
+          # tableau de bord : mes formations
+          your_next_trainings: "Vos prochaines formations"
+          your_previous_trainings: "Vos formations passées"
+          your_approved_trainings: "Vos formations validées"
+        events:
+          # tableau de bord : mes évènements
+          your_next_courses_and_workshops: "Vos prochains stages et ateliers"
+          no_courses_or_workshops_to_come: "Aucun stage ou atelier à venir"
+          your_previous_courses_and_workshops: "Vos stages et ateliers passés"
+          no_passed_courses_or_workshops: "Aucun stage ou atelier passé"
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =1{place normale réservée}, other{places normales réservées}}"  # messageFormat interpolation
+          NUMBER_reduced_fare_places_reserved: "{NUMBER} {NUMBER, plural, =1{place réservée à tarif réduit}, other{places réservées à tarif réduit}"  # messageFormat interpolation
+        invoices:
+          # tableau de bord : mes factures
+          reference_number: "Référence"
+
+      members_show:
+        # profil public d'un membre
+        members_list: "Liste des membres"
+        last_activity_: "Dernière activité"
+        _on_: "le"
+        to_come: "à venir"
+        approved: "validée"
+        projects: "Projets"
+        no_projects: "Aucun projet"
+        author: "Auteur"
+        collaborator: "Collaborateur"
+
+      members:
+        #  liste des membres qui acceptent d'être contactés
+        the_fablab_members: "Les membres du Fab Lab"
+        avatar: "Avatar"
+
+      projects_new:
+        # ajouter un nouveau projet
+        add_a_new_project: "Ajouter un nouveau projet"
+        save_button_value: "Enregistrer comme brouillon"  # "save as draft"
+
+      projects_edit:
+        # modifier un projet existant
+        save_button_value: "Enregistrer"  # "save"
+        edit_the_project: "Éditer le projet"
+        publish: "Publier"
+
+      machines_reserve:
+        # réserver une machine
+        machine_planning: "Planning machine"
+        select_one_or_more_slots_in_the_calendar: "Sélectionnez un ou plusieurs créneaux dans le calendrier"
+        you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
+        datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+        cost_of_a_machine_hour: "Coût de l'heure machine"
+        offer_this_slot: "Offrir ce créneau"
+        confirm_this_slot: "Valider ce créneau"
+        remove_this_slot: "Supprimer ce créneau"
+        to_benefit_from_attractive_prices: "Pour bénéficier de prix avantageux"
+        view_our_subscriptions: "Consultez nos abonnements"
+        or: "ou"
+        cost_of_the_subscription: "Coût de l'abonnement"
+        you_have_settled_the_following_machine_hours: "Vous avez réglé les heures machines suivantes :"
+        you_have_settled_a_: "Vous avez réglé un"
+        i_want_to_change_the_following_reservation: "Je souhaite modifier ma réservation suivante :"
+        cancel_my_modification: "Annuler ma modification"
+        select_a_new_slot_in_the_calendar: "Sélectionnez un nouveau créneau dans le calendrier"
+        cancel_my_selection: "Annuler ma sélection"
+        tags_of_the_original_slot: "Étiquettes du créneau d'origine :"
+        tags_of_the_destination_slot: "Étiquettes du créneau de destination :"
+        confirm_my_modification: "Valider ma modification"
+        your_booking_slot_was_successfully_moved_from_: "Votre créneau de réservation a bien été déplacé du"
+        i_ve_reserved: "J'ai réservé"
+        not_available: "Non disponible"
+        unable_to_change_the_reservation: "Impossible de modifier la réservation"
+        i_reserve: "Je réserve"
+        i_shift: "Je déplace"
+        i_change: "Je change"
+        do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"
+        reservation_was_cancelled_successfully: "La réservation a bien été annulée."
+        cancellation_failed: "L'annulation a échoué."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
+
+      trainings_reserve:
+        # réserver une formation
+        trainings_planning: "Planning formation"
+        select_a_slot_in_the_calendar: "Sélectionnez un créneau dans le calendrier"
+        you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
+        datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+        offer_this_training: "Offrir cette formation"
+        confirm_this_slot: "Valider ce créneau"
+        remove_this_slot: "Supprimer ce créneau"
+        to_benefit_from_attractive_prices_and_a_free_training: "Pour bénéficier de prix avantageux et d'une formation offerte"
+        view_our_subscriptions: "Consultez nos abonnements"
+        subscription_cost: "Coût de l'abonnement"
+        you_have_settled_the_training: "Vous avez réglé la formation"
+        training_cost_: "Coût de la formation :"
+        you_have_settled_a_: "Vous avez réglé un"
+        i_want_to_change_the_following_reservation: "Je souhaite modifier ma réservation suivante :"
+        cancel_my_modification: "Annuler ma modification"
+        select_a_new_slot_in_the_calendar: "Sélectionnez un nouveau créneau dans le calendrier"
+        cancel_my_selection: "Annuler ma sélection"
+        confirm_my_modification: "Valider ma modification"
+        your_booking_slot_was_successfully_moved_from_: "Votre créneau de réservation a bien été déplacé du"
+        i_ve_reserved: "J'ai réservé"
+        an_error_occured_preventing_the_booked_slot_from_being_modified: "Une erreur est survenue, empêchant la modification du créneau réservé."
+        i_shift: "Je déplace"
+        i_change: "Je change"
+        do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"
+        cancellation_failed: "L'annulation a échoué."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
+
+      notifications:
+        notifications_center: "Centre de notifications"
+        mark_all_as_read: "Tout marquer comme lu"
+        notif_title: "Intitulé"
+        no_new_notifications: "Aucune nouvelle notification."
+        archives: "Archives"
+        no_archived_notifications: "Aucune notification archivée."
+        load_the_next_notifications: "Charger les notifications suivantes..."

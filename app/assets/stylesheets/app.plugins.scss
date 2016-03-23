@@ -1,9 +1,21 @@
+// medium editor placeholder 
+.medium-editor-placeholder {
+    min-height: 30px; // fix for firefox
+}
+
+//xeditable
+.editable-buttons{
+  button[type=submit].btn-primary{
+    @extend .btn-warning;
+  }
+}
+
 
 //summernote
-
 .note-editor .note-editable {
   background-color: white;
 }
+
 
 // Growl
 .growl {
@@ -11,26 +23,85 @@
   z-index: 1100;
 }
 
+// fullcalendar
 
-
-// UI Select
-
-.form-control {
-  &.form-control-ui-select {
-    height: auto;
-    .select2-choices {
-        border: none;
-        background: transparent;
-        .select2-search-choice {
-          @extend .label;
-          padding-left: .9em;
-          font-size: 100%;
-          font-weight: normal;
-
-        }
-    }
-  }
+.fc-view-container .fc-body tr {
+  height: 40px !important;
 }
+
+.fc-toolbar {
+  height: 40px;
+  background-color: #fff;
+}
+
+.fc-toolbar .fc-button {
+  background: #F2F2F2;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  margin: 0;
+  height: 40px;
+  line-height: 18px;
+  padding: 10px;
+  //&:hover, &:active, &.fc-state-active { background-color: $yellow; }
+}
+
+.fc-toolbar h2 {
+  font-size: 15px;
+  line-height: 40px;
+  margin: 0;
+}
+
+.fc-view-container .fc-widget-header,
+.fc-view-container .fc-widget-content {
+  border-color: #e8e8e8;
+  font-weight: normal;
+}
+
+.fc-content-skeleton .fc-event {
+  padding: 2px;
+  border-left: solid 3px;
+}
+
+.fc-event {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.fc-event .fc-time span, .fc-event .fc-title {
+  font-size: rem-calc(10);
+  line-height: rem-calc(12);
+}
+
+.fc-event .fc-time span.label {
+  font-size: rem-calc(8);
+  margin-left: 0.7em;
+}
+
+// croix de suppression pour un créneau de disponibilité
+.remove-event {
+  position: absolute;
+  float: right;
+  right: 0;
+  top: 0;
+  padding: 0;
+  font-size: 11px;
+  color: black;
+  cursor: pointer;
+  z-index: 9999;
+  text-align: right;
+  .training-reserve &, .machine-reserve & { display: none; }
+}
+
+.fc-v-event.fc-end {
+  border-bottom-width: 2px;
+}
+
+.fc-divider {
+  display: none !important;
+}
+
 
 
 
@@ -59,6 +130,7 @@
     line-height: rem-calc(24);
     color: white;
     font-weight: 800;
+    text-align: center;
     a {
       color: white;
       &:hover { color: $yellow; }
@@ -77,7 +149,7 @@
   background: none;
   @include border-radius($border-radius-base);
   &:hover, &:focus {
-    color: $yellow;
+    //color: $yellow;
   }
 
   .glyphicon-chevron-left {
@@ -98,6 +170,31 @@
 .carousel-indicators {
   display: none;
 }
+
+// .carousel-control {
+//   // position: absolute;
+//   display: block;
+//   margin-bottom: -20px;
+//   padding: 20px;
+//   color: white;
+//   width: 58px;
+//   height: 58px;
+//   border: 3px solid white;
+//   border-radius: 50%;
+
+//   .glyphicon-chevron-right:before {
+//        // //Reset the icon
+//        // content: " ";
+//        // //Give layout
+//        // display:block;
+//        // //Your image as background
+//        // background:url('http://yourarrow.png') no-repeat;
+//        // //To show full image set the dimensions
+//        // width:30px;
+//        // height:30px;
+//    }
+// }
+
 
 
 .banner { }

@@ -16,7 +16,7 @@ h1, .page-title {
    font-weight: 900;
 }
 h2 {
-   color: $red;
+   //color: $red;
    line-height: rem-calc(24);
    font-weight: 900;
 }
@@ -26,7 +26,7 @@ h5 {
    display: inline-block;
    position: relative;
    line-height: rem-calc(18);
-   color: $red;
+   //color: $red;
    font-size: rem-calc(16);
    &:after {
       position: absolute;
@@ -35,7 +35,7 @@ h5 {
       content: '';
       width: 35%;
       height: 1px;
-      background-color: $red;
+      //background-color: $red;
    }
 }
 
@@ -43,12 +43,12 @@ h5 {
 // -------------------------
 
 a {
-  color: $link-color;
+  //color: $link-color;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: $link-hover-color;
+  //color: $link-hover-color;
   text-decoration: none;
 }
 
@@ -127,7 +127,8 @@ dd {
 //    transition:0.5s linear all;
 // }
 
-[ui-view].ng-enter, [ui-view].ng-leave {
+// only for main content
+#content-main.ng-enter, #content-main.ng-leave {
   position: absolute;
   left: 0;
   right: 0;

@@ -1,0 +1,69 @@
+<section class="heading b-b">
+    <div class="row no-gutter">
+        <div class="col-xs-2 col-sm-2 col-md-1">
+            <section class="heading-btn">
+                <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+            </section>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+            <section class="heading-title">
+                <h1>{{ 'subscription_plan' | translate }} {{ plan.base_name }}</h1>
+            </section>
+        </div>
+
+        <div class="col-md-3">
+            <section class="heading-actions wrapper">
+                <a class="btn btn-lg btn-block btn-default m-t-xs" ui-sref="app.admin.pricing" translate>{{ 'cancel' }}</a>
+            </section>
+
+        </div>
+
+
+    </div>
+</section>
+
+<div class="row no-gutter">
+    <div class=" col-sm-12 col-md-9 b-r nopadding">
+
+        <div id="planForm">
+            <form name="planForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
+
+              <ng-include src="'<%= asset_path 'admin/plans/_form.html' %>'"></ng-include>
+
+              <h2 class="m-t-xl" translate>{{ 'prices' }}</h2>
+              <div class="form-group col-md-6 col-lg-offset-6">
+                  <input type="hidden" ng-model="plan.parent" name="plan[parent_id]" ng-value="plan.parent"/>
+                  <label for="parentPlan" translate>{{ 'copy_prices_from' }}</label>
+                  <select id="parentPlan" ng-options="plan.id as humanReadablePlanName(plan, groups) for plan in plans" ng-model="plan.parent" ng-change="copyPricesFromPlan()" class="form-control">
+                      <option value=""></option>
+                  </select>
+              </div>
+              <h3 translate>{{ 'machines' }}</h3>
+              <table class="table">
+                  <thead>
+                      <th translate>{{ 'machine' }}</th>
+                      <th translate>{{ 'hourly_rate' }}</th>
+                  </thead>
+                  <tbody>
+
+                  <tr ng-repeat="price in plan.prices">
+                      <td style="width: 60%;">{{ price.priceable_name }} (id {{ price.priceable_id }}) *</td>
+                      <td>
+                          <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
+                              <span class="input-group-addon">{{currencySymbol}}</span>
+                              <input type="number" class="form-control" name="plan[prices_attributes][][amount]" ng-value="price.amount" required="required"/>
+                              <input type="hidden" class="form-control" name="plan[prices_attributes][][id]" ng-value="price.id"/>
+                          </div>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+
+              <div class="panel-footer no-padder">
+                  <input type="submit" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid"/>
+              </div>
+            </form>
+        </div>
+
+    </div>
+</div>

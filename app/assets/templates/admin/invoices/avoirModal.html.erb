@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h3 class="text-center red" translate>{{ 'create_a_refund_on_this_invoice' }}</h3>
+</div>
+<div class="modal-body">
+  <form name="avoirForm" novalidate="novalidate">
+    <div class="form-group" ng-class="{'has-error': avoirForm.avoir_date.$dirty && avoirForm.avoir_date.$invalid }">
+      <label translate>{{ 'creation_date_for_the_refund' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input type="text"
+               class="form-control"
+               name="avoir_date"
+               ng-model="avoir.avoir_date"
+               uib-datepicker-popup="{{datePicker.format}}"
+               datepicker-options="datePicker.options"
+               is-open="datePicker.opened"
+               placeholder="{{datePicker.format}}"
+               ng-click="openDatePicker($event)"
+               required/>
+      </div>
+      <span class="help-block" ng-show="avoirForm.avoir_date.$dirty && avoirForm.avoir_date.$error.required" translate>{{ 'creation_date_is_required' }}</span>
+    </div>
+    <div class="form-group">
+      <label translate>{{ 'refund_mode' }}</label>
+      <select class="form-control m-t-sm" name="avoir_mode" ng-model="avoir.avoir_mode" ng-options="mode.value as mode.name for mode in avoirModes" required></select>
+    </div>
+    <div class="form-group" ng-if="invoice.is_subscription_invoice">
+      <label translate>{{ 'do_you_want_to_disable_the_user_s_subscription' }}</label>
+      <select class="form-control m-t-sm" name="subscription_to_expire" ng-model="avoir.subscription_to_expire" ng-options="value as key for (key, value) in subscriptionExpireOptions" required></select>
+    </div>
+    <div ng-show="!invoice.is_subscription_invoice && invoice.items.length > 1" class="form-group">
+        <label translate>{{ 'elements_to_refund' }}</label>
+        <table class="table partial-avoir-table">
+            <thead>
+              <tr>
+                  <th class="input-col"></th>
+                  <th class="label-col" translate>{{ 'description' }}</th>
+                  <th class="amount-col" translate>{{ 'price' }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in invoice.items" ng-class="{'partial-avoir-selected-item': partial[item.id]}">
+                  <td class="input-col"><input type="checkbox" ng-model="partial[item.id]" id="partial_{{item.id}}" ng-disabled="item.avoir_item_id"></td>
+                  <td class="label-col"><label for="partial_{{item.id}}">{{item.description}}</label></td>
+                  <td class="amount-col">{{item.amount | currency}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <label for="description" translate>{{ 'description_(optional)' }}</label>
+        <p translate>{{ 'will_appear_on_the_refund_invoice' }}</p>
+        <textarea class="form-control m-t-sm" name="description" ng-model="avoir.description"></textarea>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="avoirForm.$invalid" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

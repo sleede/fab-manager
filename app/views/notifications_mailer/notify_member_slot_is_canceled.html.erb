@@ -1,0 +1,4 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.reservation_canceled', RESERVABLE: @attached_object.reservation.reservable.name ) %></p>
+<p><%= "#{I18n.l @attached_object.start_at, format: :long} - #{I18n.l @attached_object.end_at, format: :hour_minute}" %></p>

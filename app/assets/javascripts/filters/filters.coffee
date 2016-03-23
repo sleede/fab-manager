@@ -1,7 +1,19 @@
 'use strict'
 
+Application.Filters.filter 'array', [ ->
+  (arrayLength) ->
+    if (arrayLength)
+      arrayLength = Math.ceil(arrayLength)
+      arr = new Array(arrayLength)
+
+      for i in [0 ... arrayLength]
+        arr[i] = i
+
+      arr
+]
+
 # filter for projects and trainings
-Application.Controllers.filter "machineFilter", [ ->
+Application.Filters.filter "machineFilter", [ ->
   (elements, selectedMachine) ->
     if !angular.isUndefined(elements) and !angular.isUndefined(selectedMachine) and elements? and selectedMachine?
       filteredElements = []
@@ -13,7 +25,7 @@ Application.Controllers.filter "machineFilter", [ ->
       elements
 ]
 
-Application.Controllers.filter "projectMemberFilter", [ "Auth", (Auth)->
+Application.Filters.filter "projectMemberFilter", [ "Auth", (Auth)->
   (projects, selectedMember) ->
     if !angular.isUndefined(projects) and angular.isDefined(selectedMember) and projects? and selectedMember? and selectedMember != ""
       filteredProject = []
@@ -32,7 +44,7 @@ Application.Controllers.filter "projectMemberFilter", [ "Auth", (Auth)->
       projects
 ]
 
-Application.Controllers.filter "themeFilter", [ ->
+Application.Filters.filter "themeFilter", [ ->
   (projects, selectedTheme) ->
     if !angular.isUndefined(projects) and !angular.isUndefined(selectedTheme) and projects? and selectedTheme?
       filteredProjects = []
@@ -44,7 +56,7 @@ Application.Controllers.filter "themeFilter", [ ->
       projects
 ]
 
-Application.Controllers.filter "componentFilter", [ ->
+Application.Filters.filter "componentFilter", [ ->
   (projects, selectedComponent) ->
     if !angular.isUndefined(projects) and !angular.isUndefined(selectedComponent) and projects? and selectedComponent?
       filteredProjects = []
@@ -56,7 +68,7 @@ Application.Controllers.filter "componentFilter", [ ->
       projects
 ]
 
-Application.Controllers.filter "projectsByAuthor", [ ->
+Application.Filters.filter "projectsByAuthor", [ ->
   (projects, authorId) ->
     if !angular.isUndefined(projects) and angular.isDefined(authorId) and projects? and authorId? and authorId != ""
       filteredProject = []
@@ -68,7 +80,7 @@ Application.Controllers.filter "projectsByAuthor", [ ->
       projects
 ]
 
-Application.Controllers.filter "projectsCollabored", [ ->
+Application.Filters.filter "projectsCollabored", [ ->
   (projects, memberId) ->
     if !angular.isUndefined(projects) and angular.isDefined(memberId) and projects? and memberId? and memberId != ""
       filteredProject = []
@@ -81,24 +93,84 @@ Application.Controllers.filter "projectsCollabored", [ ->
 ]
 
 # depend on humanize.js lib in /vendor
-Application.Controllers.filter "humanize", [ ->
+Application.Filters.filter "humanize", [ ->
   (element, param) ->
     Humanize.truncate(element, param, null)
 ]
 
-Application.Controllers.filter "breakFilter", [ ->
+Application.Filters.filter "breakFilter", [ ->
   (text) ->
     if text != undefined
       text.replace(/\n/g, '<br />')
 ]
 
-Application.Controllers.filter "toTrusted", [ "$sce", ($sce) ->
+Application.Filters.filter "toTrusted", [ "$sce", ($sce) ->
   (text) ->
     $sce.trustAsHtml text
 ]
 
 
-Application.Controllers.filter "eventsFilter", [ ->
+Application.Filters.filter "planIntervalFilter", [ ->
+  (interval, intervalCount) ->
+    if typeof intervalCount != 'number'
+      switch interval
+        when 'day' then return 'jour'
+        when 'week' then return 'semaine'
+        when 'month' then return 'mois'
+        when 'year' then return 'année'
+    else
+      if intervalCount == 1
+        switch interval
+          when 'day' then return 'un jour'
+          when 'week' then return 'une semaine'
+          when 'month' then return 'un mois'
+          when 'year' then return 'un an'
+      else
+        switch interval
+          when 'day' then return intervalCount+ ' jours'
+          when 'week' then return intervalCount+ ' semaines'
+          when 'month' then return intervalCount+ ' mois'
+          when 'year' then return intervalCount+ ' ans'
+]
+
+Application.Filters.filter "humanReadablePlanName", ['$filter', ($filter)->
+  (plan, groups, short) ->
+    if plan?
+      result = plan.base_name
+      if groups?
+        for group in groups
+          if group.id == plan.group_id
+            if short?
+              result += " - #{group.slug}"
+            else
+              result += " - #{group.name}"
+      result += " - #{$filter('planIntervalFilter')(plan.interval, plan.interval_count)}"
+      result
+]
+
+Application.Filters.filter "trainingReservationsFilter", [ ->
+  (elements, selectedScope) ->
+    if !angular.isUndefined(elements) and !angular.isUndefined(selectedScope) and elements? and selectedScope?
+      filteredElements = []
+      angular.forEach elements, (element)->
+        switch selectedScope
+          when "future"
+            if new Date(element.start_at) > new Date
+              filteredElements.push(element)
+          when "passed"
+            if new Date(element.start_at) <= new Date and !element.is_valid
+              filteredElements.push(element)
+          when "valided"
+            if new Date(element.start_at) <= new Date and element.is_valid
+              filteredElements.push(element)
+          else
+            return []
+      filteredElements
+    else
+      elements
+]
+
+Application.Filters.filter "eventsReservationsFilter", [ ->
   (elements, selectedScope) ->
     if !angular.isUndefined(elements) and !angular.isUndefined(selectedScope) and elements? and selectedScope? and selectedScope != ""
       filteredElements = []
@@ -116,4 +188,44 @@ Application.Controllers.filter "eventsFilter", [ ->
       filteredElements
     else
       elements
+]
+
+Application.Filters.filter "groupFilter", [ ->
+  (elements, member) ->
+    if !angular.isUndefined(elements) and !angular.isUndefined(member) and elements? and member?
+      filteredElements = []
+      angular.forEach elements, (element)->
+        if member.group_id == element.id
+          filteredElements.push(element)
+      filteredElements
+    else
+      elements
+]
+
+Application.Filters.filter "groupByFilter", [ ->
+  _.memoize (elements, field)->
+    _.groupBy(elements, field)
+]
+
+Application.Filters.filter "capitalize", [->
+  (text)->
+    "#{text.charAt(0).toUpperCase()}#{text.slice(1).toLowerCase()}"
+]
+
+
+Application.Filters.filter 'reverse', [ ->
+  (items) ->
+    unless angular.isArray(items)
+      return items
+
+    items.slice().reverse()
+]
+
+Application.Filters.filter 'toArray', [ ->
+  (obj) ->
+    return obj unless (obj instanceof Object)
+    _.map obj, (val, key) ->
+      if angular.isObject(val)
+        Object.defineProperty(val, '$key', {__proto__: null, value: key})
+
 ]

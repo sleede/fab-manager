@@ -1,0 +1,287 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-8 col-sm-11 col-md-8 b-l">
+      <section class="heading-title">
+        <h1 translate>{{ 'statistics' }}</h1>
+      </section>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+      <section class="heading-actions wrapper">
+        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.stats_graphs" role="button"><i class="fa fa-line-chart"></i> {{ 'evolution' | translate }}</a>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<section class="m-lg">
+  <div class="row">
+
+    <div class="col-md-12">
+      <uib-tabset justified="true">
+        <uib-tab ng-repeat="stat in statistics" heading="{{stat.label}}" select="setActiveTab(stat)" ng-if="stat.table && !(stat.es_type_key == 'subscription' && fablabWithoutPlans)">
+          <form id="filters_form" name="filters_form" class="form-inline m-t-md m-b-lg" novalidate="novalidate">
+            <div id="agePickerPane" class="form-group datepicker-container">
+              <button id="agePickerExpand" class="btn btn-default" type="button" ng-click="agePicker.show = !agePicker.show">
+                <i class="fa fa-birthday-cake"></i>
+                <span ng-show="agePicker.start || agePicker.end">
+                    <i class="fa fa-arrows-h"></i>
+                    <i class="fa fa-birthday-cake"></i>
+                    <span translate>{{ 'from_age' }}</span>
+                    <b class="text-info" id="agepicker-from-info">{{agePicker.start}}</b>
+                    <span translate>{{ 'to_age' }}</span>
+                    <b class="text-info" id="agepicker-to-info">{{agePicker.end}}</b>
+                    <span translate>{{ '_years_old' }}</span>
+                </span>
+                <span class="text-gray" ng-show="!agePicker.start && !agePicker.end" translate>
+                    {{ 'age_filter' }}
+                </span>
+                <i class="fa fa-caret-down" ng-show="!agePicker.show"></i>
+                <i class="fa fa-caret-up" ng-show="agePicker.show"></i>
+              </button>
+              <div class="datepicker-dropdown" ng-show="agePicker.show">
+                <ul class="list-unstyled">
+                  <li><span translate>{{ 'start' }}</span>
+                    <div class="input-group black">
+                      <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
+                      <input type="number" class="form-control"  ng-model="agePicker.start" name="ageStart" required="required"/>
+                    </div>
+                  </li>
+                  <li><span translate>{{ 'end' }}</span>
+                    <div class="input-group black">
+                      <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
+                      <input type="number" class="form-control"  ng-model="agePicker.end" name="ageEnd" required="required"/>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="input-group m-l-md">
+                <span class="input-group-addon"><i class="fa fa-tag"></i> </span>
+                <select ng-model="type.selected" ng-options="type.label for type in stat.types" class="form-control"> </select>
+            </div>
+
+            <div id="customFilterPane" class="form-group datepicker-container m-l-md">
+              <button id="customFilterExpand" class="btn btn-default customMenuButton" type="button" ng-click="customFilter.show = !customFilter.show">
+                <i class="fa fa-filter"></i>
+                <span ng-show="!customFilter.criterion.key" class="text-gray" translate>{{ 'custom_filter' }}</span>
+                <span ng-show="customFilter.criterion.key">{{customFilter.criterion.label}} :</span>
+                <span ng-show="customFilter.exclude" translate>{{ 'NO_' }}</span>
+                <ng-switch on="getCustomValueInputType(customFilter.criterion)">
+                    <span ng-switch-when="input_date">{{formatDate(customFilter.value)}}</span>
+                    <span ng-switch-when="input_select">{{customFilter.value.label}}</span>
+                    <span ng-switch-default>{{customFilter.value}}</span>
+                </ng-switch>
+                <i class="fa fa-caret-down" ng-show="!customFilter.show"></i>
+                <i class="fa fa-caret-up" ng-show="customFilter.show"></i>
+              </button>
+              <div id="custom-filter-dropdown" class="datepicker-dropdown" ng-show="customFilter.show">
+                <ul class="list-unstyled">
+                  <li><span translate>{{ 'criterion' }}</span>
+                    <div class="input-group black customMenuInput">
+                      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+                      <select ng-model="customFilter.criterion"
+                              ng-options="f.label for f in filters track by f.key"
+                              ng-change="customFilter.value =  null"
+                              name="customFilterCriterion"
+                              required="required"
+                              class="form-control">
+                        <option value=""></option>
+                      </select>
+                    </div>
+                  </li>
+                  <li><span translate>{{ 'value' }}</span>
+                    <div class="input-group black customMenuInput">
+                      <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                      <ng-switch on="getCustomValueInputType(customFilter.criterion)">
+
+                        <input ng-switch-when="input_number" type="number" class="form-control customMenuInput" ng-model="customFilter.value" name="customFilterValue" required="required"/>
+
+                        <div ng-switch-when="input_date" class="input-group black" id="customDatePick">
+                          <input type="text"
+                                 class="form-control customMenuInput"
+                                 uib-datepicker-popup="{{customFilter.datePicker.format}}"
+                                 ng-model="customFilter.value"
+                                 name="customFilterValue"
+                                 is-open="customFilter.datePicker.opened"
+                                 min-date="customFilter.datePicker.minDate"
+                                 max-date="customFilter.datePicker.maxDate"
+                                 required="required"
+                                 datepicker-options="customFilter.datePicker.options"
+                                 show-button-bar="false"
+                                 ng-click="toggleCustomDatePicker($event)"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleCustomDatePicker($event)">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                          </span>
+                        </div>
+
+                        <select ng-switch-when="input_select"
+                                class="form-control customMenuInput"
+                                ng-model="customFilter.value"
+                                ng-options="v.label for v in customFilter.criterion.values"
+                                name="customFilterValue"
+                                required="required">
+                        </select>
+
+                        <input ng-switch-default
+                               type="text"
+                               class="form-control customMenuInput"
+                               ng-model="customFilter.value"
+                               name="customFilterValue"
+                               required="required"/>
+                      </ng-switch>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="customFilter.exclude"> {{ 'exclude' | translate }}
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="input-group m-l-md">
+                <button class="btn btn-default text-primary pull-right" ng-click="validateFilterChange()">
+                  <i class="fa fa-check green"></i> <span class="hidden-xs">{{ 'apply' | translate }}</span>
+                </button>
+            </div>
+
+            <div class="form-group pull-right datepicker-container">
+              <button id="datepickerExpand" class="btn btn-default" type="button" ng-click="datePicker.show = !datePicker.show">
+                <i class="fa fa-calendar"></i>
+                <i class="fa fa-arrows-h"></i>
+                <i class="fa fa-calendar"></i>
+                <span translate>{{ 'from_date' }}</span>
+                <b class="text-info" id="datepicker-from-info">{{datePickerStart.selected | amDateFormat:'L'}}</b>
+                <span translate>{{ 'to_date' }}</span>
+                <b class="text-info" id="datepicker-to-info">{{datePickerEnd.selected | amDateFormat:'L'}}</b>
+                <i class="fa fa-caret-down" ng-show="!datePicker.show"></i>
+                <i class="fa fa-caret-up" ng-show="datePicker.show"></i>
+              </button>
+              <div class="datepicker-dropdown" ng-show="datePicker.show">
+                <ul class="list-unstyled">
+                  <li class="row">
+                    <span class="col-md-4" translate>{{ 'start' }}</span>
+                    <div class="input-group black col-md-7 m-r" id="date_pick_start">
+                      <input type="text"
+                             class="form-control"
+                             uib-datepicker-popup="{{datePickerStart.format}}"
+                             ng-model="datePickerStart.selected"
+                             name="startDate"
+                             is-open="datePickerStart.opened"
+                             min-date="datePickerStart.minDate"
+                             max-date="datePickerStart.maxDate"
+                             datepicker-options="datePickerStart.options"
+                             show-button-bar="false"
+                             placeholder="{{ 'start' | translate }}"
+                             ng-click="toggleStartDatePicker($event)"
+                             required="required"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleStartDatePicker($event)">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                          </span>
+                    </div>
+                  </li>
+                  <li class="row">
+                    <span class="col-md-4" translate>{{ 'end' }}</span>
+                    <div class="input-group black col-md-7 m-r" id="date_pick_end">
+                      <input type="text"
+                             class="form-control"
+                             uib-datepicker-popup="{{datePickerEnd.format}}"
+                             ng-model="datePickerEnd.selected"
+                             name="endDate"
+                             is-open="datePickerEnd.opened"
+                             min-date="datePickerEnd.minDate"
+                             max-date="datePickerEnd.maxDate"
+                             datepicker-options="datePickerEnd.options"
+                             show-button-bar="false"
+                             placeholder="{{ 'end' | translate }}"
+                             ng-click="toggleEndDatePicker($event)"
+                             required="required"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleEndDatePicker($event)">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                          </span>
+                    </div>
+                  </li>
+                  <li>
+                    <button class="btn btn-default text-primary pull-right" ng-click="validateDateChange()">
+                      <i class="fa fa-check green"></i> <span class="hidden-xs" translate>{{ 'apply' }}</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+
+          <div id="totaux">
+            <ul>
+              <li>{{ 'entries' | translate }} {{data.length}}</li>
+              <li ng-show="selectedIndex.ca">{{ 'revenue_' | translate }} {{sumCA | currency}}</li>
+              <li>{{ 'average_age' | translate }} {{averageAge}} {{ 'years_old' | translate }}</li>
+              <li ng-if="!type.active.simple">{{ 'total' | translate }} {{type.active.label}} : {{sumStat}}</li>
+            </ul>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th translate>{{ 'date' }}</th>
+                <th translate>{{ 'user' }}</th>
+                <th translate>{{ 'gender' }}</th>
+                <th translate>{{ 'age' }}</th>
+                <th translate>{{ 'type' }}</th>
+                <th ng-if="!type.active.simple">{{type.active.label}}</th>
+                <th ng-repeat="field in selectedIndex.additional_fields">{{field.label}}</th>
+                <th ng-if="selectedIndex.ca">{{ 'revenue' | translate }}
+                  <span class="small" ng-click="toggleSorting('ca')">
+                    <ng-switch on="sorting.ca">
+                      <i class="fa fa-sort-numeric-desc" ng-switch-when="desc"></i>
+                      <i class="fa fa-sort-numeric-asc" ng-switch-when="asc"></i>
+                      <i class="fa fa-sort" ng-switch-when="none"></i>
+                    </ng-switch>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="datum in data">
+                <td>{{formatDate(datum._source.date)}}</td>
+                <td><a href="" ui-sref="app.logged.members_show({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
+                <td>{{formatSex(datum._source.gender)}}</td>
+                <td><span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span><span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span></td>
+                <td>{{formatSubtype(datum._source.subType)}}</td>
+                <td ng-if="!type.active.simple">{{datum._source.stat}}</td>
+                <td ng-repeat="field in selectedIndex.additional_fields">
+                  <ng-switch on="field.data_type">
+                    <span ng-switch-when="date">{{formatDate(datum._source[field.key])}}</span>
+                    <ul ng-switch-when="list">
+                      <li ng-repeat="elem in datum._source[field.key]">{{elem.name}}</li>
+                    </ul>
+                    <span ng-switch-default>{{datum._source[field.key]}}</span>
+                  </ng-switch>
+                </td>
+                <td ng-if="selectedIndex.ca"><span ng-if="datum._source.ca !== null">{{datum._source.ca | currency}}</span><span ng-if="datum._source.ca === null" translate>{{ 'unknown' }}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+
+  </div>
+</section>
+

@@ -70,10 +70,10 @@ export default moment.defineLocale('ar', {
     longDateFormat : {
         LT : 'HH:mm',
         LTS : 'HH:mm:ss',
-        L : 'DD/MM/YYYY',
+        L : 'D/\u200FM/\u200FYYYY',
         LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY LT',
-        LLLL : 'dddd D MMMM YYYY LT'
+        LLL : 'D MMMM YYYY HH:mm',
+        LLLL : 'dddd D MMMM YYYY HH:mm'
     },
     meridiemParse: /ص|م/,
     isPM : function (input) {
@@ -110,7 +110,7 @@ export default moment.defineLocale('ar', {
         yy : pluralize('y')
     },
     preparse: function (string) {
-        return string.replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
+        return string.replace(/\u200f/g, '').replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
             return numberMap[match];
         }).replace(/،/g, ',');
     },

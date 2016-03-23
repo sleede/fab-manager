@@ -1,0 +1,230 @@
+'use strict'
+
+Application.Controllers.controller "TrainingsController", ["$scope", "$state", "$uibModal", 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl'
+, ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl) ->
+
+
+
+  ### PUBLIC SCOPE ###
+
+  ## list of trainings
+  $scope.trainings = trainingsPromise
+
+  ## simplified list of machines
+  $scope.machines = machinesPromise
+
+  ## list of training availabilies, grouped by date
+  $scope.groupedAvailabilities = {}
+
+  ## default: accordions are not open
+  $scope.accordions = {}
+
+  ## Binding for the parseInt function
+  $scope.parseInt = parseInt
+
+  ##
+  # In the trainings listing tab, return the stringified list of machines associated with the provided training
+  # @param training {Object} Training object, inherited from $resource
+  # @returns {string}
+  ##
+  $scope.showMachines = (training) ->
+    selected = []
+    angular.forEach $scope.machines, (m) ->
+      if (training.machine_ids.indexOf(m.id) >= 0)
+        selected.push(m.name)
+    return if selected.length then selected.join(', ') else _t('none')
+
+
+
+  ##
+  # Create a new empty training object and append it to the $scope.trainings list
+  ##
+  $scope.addTraining = ->
+    $scope.inserted =
+      name: ''
+      machine_ids: []
+    $scope.trainings.push($scope.inserted)
+
+
+
+  ##
+  # Saves a new training / Update an existing training to the server (form validation callback)
+  # @param data {Object} training name, associated machine(s) and default places number
+  # @param id {number} training id, in case of update
+  ##
+  $scope.saveTraining = (data, id) ->
+    if id?
+      Training.update {id: id},
+        training: data
+    else
+      Training.save
+        training: data
+      , (resp) ->
+        $scope.trainings[$scope.trainings.length-1] = resp
+        console.log(resp)
+
+
+
+  ##
+  # Removes the newly inserted but not saved training / Cancel the current training modification
+  # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+  # @param index {number} training index in the $scope.trainings array
+  ##
+  $scope.cancelTraining = (rowform, index) ->
+    if $scope.trainings[index].id?
+      rowform.$cancel()
+    else
+      $scope.trainings.splice(index, 1)
+
+
+
+  ##
+  # In the trainings monitoring tab, callback to open a modal window displaying the current bookings for the
+  # provided training slot. The admin will be then able to validate the training for the users that followed
+  # the training.
+  # @param training {Object} Training object, inherited from $resource
+  # @param availability {Object} time slot when the training occurs
+  ##
+  $scope.showReservations = (training, availability) ->
+    $uibModal.open
+      templateUrl: '<%= asset_path "admin/trainings/validTrainingModal.html" %>'
+      controller: ['$scope', '$uibModalInstance', ($scope, $uibModalInstance) ->
+        $scope.availability = availability
+
+        $scope.usersToValid = []
+
+        ##
+        # Mark/unmark the provided user for training validation
+        # @param user {Object} from the availability.reservation_users list
+        ##
+        $scope.toggleSelection = (user) ->
+          index = $scope.usersToValid.indexOf(user)
+          if index > -1
+            $scope.usersToValid.splice(index, 1)
+          else
+            $scope.usersToValid.push user
+
+        ##
+        # Validates the modifications (training validations) and save them to the server
+        ##
+        $scope.ok = ->
+          users = $scope.usersToValid.map (u) ->
+            u.id
+          Training.update {id: training.id},
+            training:
+              users: users
+          , -> # success
+            angular.forEach $scope.usersToValid, (u) ->
+              u.is_valid = true
+            $scope.usersToValid = []
+            $uibModalInstance.close(training)
+
+        ##
+        # Cancel the modifications and close the modal window
+        ##
+        $scope.cancel = ->
+          $uibModalInstance.dismiss('cancel')
+      ]
+
+
+
+  ##
+  # Delete the provided training and, in case of sucess, remove it from the trainings list afterwards
+  # @param index {number} index of the provided training in $scope.trainings
+  # @param training {Object} training to delete
+  ##
+  $scope.removeTraining = (index, training)->
+    training.$delete ->
+      $scope.trainings.splice(index, 1)
+      growl.info(_t('training_successfully_deleted'))
+    , (error)->
+      growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it'))
+
+
+
+  ##
+  # Open the modal to edit description of the training
+  # @param training {Object} Training to edit description
+  ##
+  $scope.openModalToSetDescription = (training)->
+    $uibModal.open(
+      templateUrl: "<%= asset_path 'admin/trainings/modal_edit.html' %>"
+      controller: ['$scope', '$uibModalInstance', 'Training', 'growl', ($scope, $uibModalInstance, Training, growl)->
+          $scope.training = training
+          $scope.save = ->
+            Training.update id: training.id, { training: { description: $scope.training.description } }, (training)->
+              $uibModalInstance.close()
+              growl.success(_t('description_was_successfully_saved'))
+          return
+      ]
+    )
+
+
+
+  ##
+  # Takes a month number and return its localized literal name
+  # @param {Number} from 0 to 11
+  # @returns {String} eg. 'janvier'
+  ##
+  $scope.formatMonth = (number) ->
+    number = parseInt(number)
+    moment().month(number).format('MMMM')
+
+
+
+  ##
+  # Given a day, month and year, return a localized literal name for the day
+  # @param day {Number} from 1 to 31
+  # @param month {Number} from 0 to 11
+  # @param year {Number} Gregorian's year number
+  # @returns {String} eg. 'mercredi 12'
+  ##
+  $scope.formatDay = (day, month, year) ->
+    day = parseInt(day)
+    month = parseInt(month)
+    year = parseInt(year)
+
+    moment({year: year, month:month, day:day}).format('dddd D')
+
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    $scope.groupedAvailabilities = groupAvailabilities($scope.trainings)
+
+
+
+  ##
+  # Group the trainings availabilites by trainings and by dates and return the resulting tree
+  # @param trainings {Array} $scope.trainings is expected here
+  # @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
+  ##
+  groupAvailabilities = (trainings) ->
+    tree = {}
+    for training in trainings
+      tree[training.name] = {}
+      tree[training.name].training = training
+      for availability in training.availabilities
+        start = moment(availability.start_at)
+
+        # init the tree structure
+        if typeof tree[training.name][start.year()] == 'undefined'
+          tree[training.name][start.year()] = {}
+        if typeof tree[training.name][start.year()][start.month()] == 'undefined'
+          tree[training.name][start.year()][start.month()] = {}
+        if typeof tree[training.name][start.year()][start.month()][start.date()] == 'undefined'
+          tree[training.name][start.year()][start.month()][start.date()] = []
+
+        # add the availability at its right place
+        tree[training.name][start.year()][start.month()][start.date()].push( availability )
+    tree
+
+
+
+  # init the controller (call at the end !)
+  initialize()
+]

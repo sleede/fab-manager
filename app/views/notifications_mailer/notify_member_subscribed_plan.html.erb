@@ -1,0 +1,5 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.plan_subscribed_html', PLAN: @attached_object.plan.human_readable_name) %></p>
+
+<p><%= t('.body.subscription_stops_on', DATE: I18n.l(@attached_object.expired_at.to_date)) %><br/></p>

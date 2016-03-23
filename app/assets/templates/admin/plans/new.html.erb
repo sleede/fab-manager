@@ -1,0 +1,33 @@
+<section class="heading b-b">
+    <div class="row no-gutter">
+        <div class="col-xs-2 col-sm-2 col-md-1">
+            <section class="heading-btn">
+                <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+            </section>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+            <section class="heading-title">
+                <h1 translate>{{ 'add_a_subscription_plan' }}</h1>
+            </section>
+        </div>
+
+    </div>
+</section>
+
+<div class="row no-gutter">
+    <div class=" col-sm-12 col-md-9 b-r nopadding">
+
+        <div id="planForm">
+            <form name="planForm" novalidate="novalidate" class="col-lg-10 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
+
+                <ng-include src="'<%= asset_path 'admin/plans/_form.html' %>'"></ng-include>
+
+                <div class="panel-footer no-padder">
+                    <input type="submit" value="Enregistrer" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid || !partnerIsValid()"/>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

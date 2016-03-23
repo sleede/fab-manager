@@ -2,57 +2,65 @@
 
   <input name="_method" type="hidden" ng-value="method">
 
-  <section class="panel panel-default bg-light m-lg"> 
-  <div class="panel-body m-r"> 
+  <section class="panel panel-default bg-light m-lg">
+  <div class="panel-body m-r">
 
-    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$invalid}">
-      <label for="name" class="col-sm-2 control-label">Nom *</label>
+      <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
       <div class="col-sm-4">
         <input ng-model="machine.name" type="text" name="machine[name]" class="form-control" id="machine_name" placeholder="Nom :" required>
-        <span class="help-block" ng-show="machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$error.required">Le Nom est obligatoire.</span>
+        <span class="help-block" ng-show="machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-lg">
-      <label for="machine_image" class="col-sm-2 control-label">Visuel *</label>
+      <label for="machine_image" class="col-sm-2 control-label">{{ 'illustration' | translate }} *</label>
       <div class="col-sm-10">
         <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(machine.machine_image)">
-          <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
-            <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!machine.machine_image">
-          </div>
-          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 334px;">
-            <img ng-src="{{ machine.machine_image }}" alt="" />
-          </div>
-          <div>
-            <span class="btn btn-default btn-file"><span class="fileinput-new">Ajouter un visuel <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists">Modifier</span>
-              <input type="file" name="machine[machine_image_attributes][attachment]" ng-model="machine.machine_image" required bs-jasny-fileinput></span>
-            <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Supprimer</a>
-          </div>
+            <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
+                <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!machine.machine_image">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 334px;">
+              <img ng-src="{{ machine.machine_image }}" alt="" />
+            </div>
+            <div>
+                <span class="btn btn-default btn-file">
+                  <span class="fileinput-new">{{ 'add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
+                  <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                  <input type="file"
+                         ng-model="machine.machine_image_file"
+                         name="machine[machine_image_attributes][attachment]"
+                         accept="image/*"
+                         required
+                         bs-jasny-fileinput>
+                </span>
+                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'delete' }}</a>
+            </div>
         </div>
       </div>
     </div>
 
 
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$invalid}">
-      <label for="description" class="col-sm-2 control-label">Description *</label>
+      <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
       <div class="col-sm-10">
         <textarea ng-model="machine.description" class="form-control" rows="12" id="machine_description" placeholder="" name="machine[description]" required></textarea>
-        <span class="help-block" ng-show="machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$error.required">La Description est obligatoire.</span>
+        <span class="help-block" ng-show="machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$invalid}">
-      <label for="spec" class="col-sm-2 control-label">Caractéristiques techniques *</label>
+      <label for="spec" class="col-sm-2 control-label">{{ 'technical_specifications' | translate }} *</label>
       <div class="col-sm-10">
         <textarea ng-model="machine.spec" class="form-control" rows="12" id="machine_spec" placeholder="" name="machine[spec]" required></textarea>
-        <span class="help-block" ng-show="machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$error.required">Les Caractéristiques techniques sont obligatoires.</span>
+        <span class="help-block" ng-show="machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$error.required" translate>{{ 'technical_specifications_are_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-xl">
-      <label class="col-sm-2 control-label">Pièces jointes</label>
+      <label class="col-sm-2 control-label" translate>{{ 'attached_files_(pdf)' }}</label>
       <div class="col-sm-10">
         <div ng-repeat="file in machine.machine_files_attributes" ng-show="!file._destroy">
           <input type="hidden" ng-model="file.id" name="machine[machine_files_attributes][][id]" ng-value="file.id" />
@@ -62,20 +70,20 @@
             <div class="form-control" data-trigger="fileinput">
               <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
             </div>
-            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Joindre un fichier</span>
-              <span class="fileinput-exists">Modifier</span><input type="file" name="machine[machine_files_attributes][][attachment]"></span>
+            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'attach_a_file' }}</span>
+              <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="machine[machine_files_attributes][][attachment]" accept=".pdf"></span>
             <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
           </div>
 
         </div>
-        <a class="btn btn-default" ng-click="addFile()" role="button">Ajouter une pièce jointe  <i class="fa fa-file-o fa-fw"></i></a>
+        <a class="btn btn-default" ng-click="addFile()" role="button"> {{ 'add_an_attachment' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
       </div>
     </div>
 
   </div>   <!-- ./panel-body  -->
 
   <div class="panel-footer no-padder">
-    <input type="submit" value="Valider votre machine" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="machineForm.$invalid"/>
+    <input type="submit" value="{{ 'validate_your_machine' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="machineForm.$invalid"/>
   </div>
   </section>
 </form>

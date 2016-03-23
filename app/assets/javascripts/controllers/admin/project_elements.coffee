@@ -1,17 +1,16 @@
 'use strict'
 
-Application.Controllers.controller "projectElementsController", ["$scope", "$state", 'Component', 'Licence', 'Theme', ($scope, $state, Component, Licence, Theme) ->
+Application.Controllers.controller "ProjectElementsController", ["$scope", "$state", 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise'
+, ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise) ->
 
   ## Materials list (plastic, wood ...)
-  $scope.components = Component.query()
+  $scope.components = componentsPromise
 
   ## Licences list (Creative Common ...)
-  $scope.licences = Licence.query()
+  $scope.licences = licencesPromise
 
   ## Themes list (cooking, sport ...)
-  $scope.themes = Theme.query()
-
-
+  $scope.themes = themesPromise
 
   ##
   # Saves a new component / Update an existing material to the server (form validation callback)
@@ -153,5 +152,3 @@ Application.Controllers.controller "projectElementsController", ["$scope", "$sta
     else
       $scope.licences.splice(index, 1)
 ]
-
-

@@ -1,0 +1,51 @@
+<style type="text/css">
+  .token {
+    margin: auto;
+    width: 16em;
+    background-color: rgba(230, 208, 137, 0.49);
+    border-color: #d1d1d1;
+    border-radius: 0.2em;
+    padding: 2em;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+</style>
+
+
+<p><%= t('.body.hello', NAME: @user.profile.full_name) %> </p>
+
+<p><%= _t('.body.intro',
+          {
+            GENDER: Setting.find_by(name: 'name_genre').value,
+            FABLAB: Setting.find_by(name: 'fablab_name').value
+          })
+      # messageFormat
+   %> <%= link_to URI(root_url).host, root_url %>.
+</p>
+
+<% active_provider = AuthProvider.active %>
+<% if active_provider.providable_type == DatabaseProvider.name %>
+
+  <p><%= t('.body.connection_parameters') %></p>
+
+  <p><%= t('.body.account_name') %> <b><%= @user.email %></b></p>
+  <p><%= t('.body.password') %> <b><%= @generated_password %></b></p>
+
+  <p><%= t('.body.temporary_password') %> <%= t('.body.keep_advantages') %></p>
+
+<% else %>
+
+  <p>
+    <%= t('.body.thanks_to_') %>
+    <a href="<%= root_url+user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>?auth_token=<%= @user.auth_token %>" target="_blank">
+      <%= t('body.logon_or_login', PROVIDER: active_provider.name )%>
+    </a>
+  </p>
+
+  <p><%= t('.body.token_if_link_problem') %></p>
+
+  <div class="token">
+      <%= @user.auth_token %>
+  </div>
+<% end %>

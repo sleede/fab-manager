@@ -1,8 +1,9 @@
 
 .bg-light { background-color: $brand-light; }
-.bg-red { background-color: $red; color: white; }
-.bg-red-dark { background-color: $red-dark; }
-.bg-yellow { background-color: $yellow !important; }
+//.bg-red { background-color: $red; color: white; }
+//.bg-red-dark { background-color: $red-dark; }
+//.bg-yellow { background-color: $yellow !important; }
+.bg-token { background-color: rgba(230, 208, 137, 0.49); }
 .bg-machine { background-color: $beige; }
 .bg-formation { background-color: $violet; }
 .bg-atelier { background-color: $blue; }
@@ -30,7 +31,7 @@
 .text-black-light { color: #424242 !important; }
 .text-gray { color: #5a5a5a !important; }
 .text-white { color: #fff !important; }
-.text-yellow { color: $yellow !important; }
+//.text-yellow { color: $yellow !important; }
 .text-blue { color: $blue; }
 .text-muted { color: $text-muted; }
 .text-danger, .red { color: $red !important; }

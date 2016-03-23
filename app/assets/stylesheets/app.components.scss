@@ -7,11 +7,11 @@
 		font-weight: 600;
 		color: black;
 	}
-	h1 { 
-    font-size: rem-calc(16); text-transform: uppercase; 
+	h1 {
+    font-size: rem-calc(16); text-transform: uppercase;
   }
 	h2 { font-weight: bold; }
-	h3 { color: $red; }
+	//h3 { color: $red; }
   h4 {
     font-size: rem-calc(12);
     margin: 8px 0;
@@ -50,13 +50,14 @@
     left: 0;
     right: 0;
     margin: 0 auto;
+    max-height: 44px;
   }
   h1 {
     margin: 25px 0 20px 0;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
-    color: $red;
+    //color: $red;
   }
 }
 
@@ -129,14 +130,14 @@
   }
 
   .article-thumbnail {
-    max-height: 400px;
+    // max-height: 400px;
     overflow: hidden;
   }
 }
 
 .label-staging {
 	position: absolute;
-  top: 50px;
+	top: 50px;
 }
 
 .notification-open {
@@ -197,6 +198,7 @@
     margin: 10px 0;
     font-size: rem-calc(16);
     text-transform: uppercase;
+    color: black;
   }
   .content {
     padding: 15px 0;
@@ -206,7 +208,7 @@
       display: inline-block;
       background: white;
       @include border-radius(50%);
-      border: 3px solid $yellow;
+      border: 3px solid;// $yellow;
     }
     .price {
       position: relative;
@@ -238,15 +240,15 @@
       background-color: white;
       padding-left: 30px;
       padding-right: 30px;
-      &:hover { background-color: $yellow; }
+      //&:hover { background-color: $yellow; }
     }
   }
 }
 
 .well {
   &.well-warning {
-    border-color: #ffdc4e;
-    background-color: #ffdc4e;
+    //border-color: #ffdc4e;
+    //background-color: #ffdc4e;
     @include border-radius(3px);
     padding: 5px 10px;
   }
@@ -324,10 +326,10 @@
 
 .block-link {
   cursor: pointer;
-  &:hover { background-color: $yellow; }
+  //&:hover { background-color: $yellow; }
 }
 
-.form-control.form-control-ui-select .select2-choices .select2-search-choice {
+.form-control .ui-select-choices, .form-control .ui-select-match {
   font-size: 85% !important;
 }
 
@@ -351,16 +353,15 @@
   .about-picture {
     padding: 70px 0;
     height: 326px;
-    background: white asset-url("about-fablab.jpg") no-repeat;
     background-size: cover;
     margin-bottom: 30px;
   }
-  .about-title {
+  .about-title, .about-title p {
     margin: 0;
     font-size: rem-calc(50);
     line-height: rem-calc(48);
     color: #fff;
-    font-weight: 900; //black 
+    font-weight: 900; //black
   }
 
   .about-title-aside {
@@ -393,7 +394,7 @@
 }
 
 .event:hover {
-background-color: #cb1117;
+//background-color: #cb1117;
 color: white;
 }
 
@@ -441,3 +442,25 @@ padding: 10px;
   }
 }
 
+
+// angular-bootstrap accordions (enlightened version)
+.light-accordion > .panel-heading {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+.light-accordion > .panel-heading > .panel-title {
+  font-size: 12pt;
+}
+
+.app-generator {
+  position: absolute;
+  bottom: 0; right: 10px;
+  z-index: 100;
+  padding: 3px 15px;
+  border: 1px solid $border-color;
+  border-top-left-radius: 8px;
+  background: $bg-gray;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}

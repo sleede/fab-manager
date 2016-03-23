@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+    <h1 translate>{{ 'report_an_abuse' }}</h1>
+</div>
+<div class="modal-body">
+    <form role="form" name="signalForm" class="form-horizontal" novalidate autocomplete="off" ng-keydown="signupForm.$valid && $event.which == 13 && ok()">
+        <div class="form-group">
+
+            <div class="col-sm-6" ng-class="{'has-error': signalForm.first_name.$dirty && signalForm.first_name.$invalid}">
+                <input type="text" name="first_name" ng-model="signaler.first_name" class="form-control" placeholder="{{ 'your_first_name' | translate }}" required>
+                <span class="help-block" ng-show="signalForm.first_name.$dirty && signalForm.first_name.$error.required" translate>{{ 'your_first_name_is_required' }}</span>
+            </div>
+            <div class="m-b visible-xs"></div>
+            <div class="col-sm-6" ng-class="{'has-error': signalForm.last_name.$dirty && signalForm.last_name.$invalid}">
+                <input type="text" name="last_name" ng-model="signaler.last_name" class="form-control" placeholder="{{ 'your_surname' | translate }}" required>
+                <span class="help-block" ng-show="signalForm.last_name.$dirty && signalForm.last_name.$error.required" translate>{{ 'your_surname_is_required' }}</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signalForm.email.$dirty && signalForm.email.$invalid}">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <input type="email" name="email" ng-model="signaler.email" class="form-control" placeholder="{{ 'your_email_address' | translate }}" required>
+                </div>
+                <span class="help-block" ng-show="signalForm.email.$dirty && signalForm.email.$error.required" translate>{{ 'your_email_address_is_required' }}</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signalForm.message.$dirty && signalForm.message.$invalid}">
+            <div class="col-sm-12">
+                <textarea ng-model="signaler.message" rows="10" class="form-control" id="message" placeholder="{{ 'tell_us_why_this_looks_abusive' | translate }}" name="message" required></textarea>
+                <span class="help-block" ng-show="signalForm.message.$dirty && signalForm.message.$error.required" translate>{{ 'message_is_required' }}</span>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-info" ng-click="ok()" ng-disabled="signalForm.$invalid" translate>{{ 'report' }}</button>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

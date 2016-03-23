@@ -1,0 +1,52 @@
+<section class="heading b-b">
+  <div class="row no-gutter b-b">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1>{{ 'reservations' | translate }} {{event.title}}</h1>
+      </section>
+    </div>
+  </div>
+
+  <section class="m-lg">
+    <div class="row">
+      <div class="col-md-12">
+
+
+        <table class="table" ng-if="reservations.length > 0">
+          <thead>
+          <tr>
+            <th style="width:25%" translate>{{ 'user' }}</th>
+            <th style="width:25%" translate>{{ 'payment_date' }}</th>
+            <th style="width:25%" translate>{{ 'reserved_tickets' }}</th>
+            <th style="width:25%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="reservation in reservations">
+            <td class="text-c">
+              <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
+            </td>
+            <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
+            <td><span ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span><span ng-if="reservation.nb_reserve_reduced_places > 0">{{ 'reduced_rate_' | translate }} {{reservation.nb_reserve_reduced_places}}</span></td>
+            <td>
+              <div class="buttons">
+                <button class="btn btn-default" ui-sref="app.public.events_show({id: event.id})">
+                  <i class="fa fa-tag"></i> {{ 'show_the_event' | translate }}
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <p ng-if="reservations.length == 0" translate>{{ 'no_reservations_for_now' }}</p>
+
+        <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.events" translate>{{ 'back_to_monitoring' }}</button>
+      </div>
+    </div>
+  </section>
+</section>

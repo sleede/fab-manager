@@ -3,11 +3,9 @@ class Event < ActiveRecord::Base
 
   has_one :event_image, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :event_image, allow_destroy: true
-
   has_many :event_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :event_files, allow_destroy: true
-
-  has_and_belongs_to_many :categories, join_table: 'events_categories'
+  has_and_belongs_to_many :categories, join_table: :events_categories
 
   belongs_to :availability, dependent: :destroy
   accepts_nested_attributes_for :availability
@@ -15,6 +13,8 @@ class Event < ActiveRecord::Base
   attr_accessor :recurrence, :recurrence_end_at
 
   after_create :event_recurrence
+  before_save :set_nb_free_places
+  before_update :update_nb_free_places, if: :nb_total_places_changed?
 
   def name
     title
@@ -22,6 +22,15 @@ class Event < ActiveRecord::Base
 
   def recurrence_events
     Event.includes(:availability).where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, Time.now).references(:availabilities)
+  end
+
+  def safe_destroy
+    reservations = Reservation.where(reservable_type: 'Event', reservable_id: id)
+    if reservations.size == 0
+      destroy
+    else
+      false
+    end
   end
 
   private
@@ -70,4 +79,14 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def set_nb_free_places
+    if nb_free_places.nil?
+      self.nb_free_places = nb_total_places
+    end
+  end
+
+  def update_nb_free_places
+    diff = nb_total_places - nb_total_places_was
+    self.nb_free_places += diff
+  end
 end

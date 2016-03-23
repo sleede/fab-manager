@@ -18,8 +18,13 @@ en:
       unconfirmed: "You have to confirm your account before continuing."
     mailer:
       confirmation_instructions:
+        action:
+        instruction:
         subject: "Confirmation instructions"
       reset_password_instructions:
+        action:
+        instruction:
+        ignore_otherwise:
         subject: "Reset password instructions"
       unlock_instructions:
         subject: "Unlock Instructions"

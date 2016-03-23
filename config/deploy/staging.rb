@@ -1,7 +1,6 @@
-server "demo.fab-manager.com", :web, :app, :db, primary: true
+server "test.fab-manager.com", :web, :app, :db, primary: true
 
-set :domain, "demo.fab-manager.com"
-set :application, "fabmanager_staging"
+set :application, "fablab_staging"
 set :user, "admin"
 set :port, 22
 set :deploy_to, "/home/#{user}/apps/#{application}"
@@ -9,7 +8,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@github.com:LaCasemate/fab-manager.git"
+set :repository, "git@git.sleede.com:clients/fablab.git"
 set :scm_user, "jarod022"
 set :branch, "dev"
 
@@ -29,8 +28,8 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/unicorn_init_staging.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/uploads"
-    put File.read("config/database.yml.default"), "#{shared_path}/config/database.yml"
-    puts "Now edit #{shared_path}/config/database.yml"
+    put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
+    puts "Now edit #{shared_path}/config/database.yml and add your username and password"
     put File.read("config/application.yml"), "#{shared_path}/config/application.yml"
     puts "Now edit #{shared_path}/config/application.yml and add your ENV vars"
 
@@ -49,16 +48,17 @@ namespace :deploy do
   end
   after "deploy:create_symlink", "deploy:db_migrate"
 
-  desc "load seed to bd"
-  task :load_seed, :roles => :app do
-    run "cd #{current_path} && bundle exec rake db:seed RAILS_ENV=staging"
-  end
-
   namespace :assets do
     desc 'Run the precompile task locally and rsync with shared'
-    task :precompile, :roles => :web, :except => { :no_release => true } do
+    task :precompile, :only => { :primary => true } do
+
       %x{bundle exec rake assets:precompile RAILS_ENV=staging}
-      %x{rsync --recursive --times --rsh='ssh -p#{port}' --compress --human-readable --progress public/assets #{user}@#{domain}:#{shared_path}}
+
+      servers = find_servers :roles => [:app], :except => { :no_release => true }
+      servers.each do |server|
+        %x{rsync --recursive --times --rsh='ssh -p#{port}' --compress --human-readable --progress public/assets #{user}@#{server}:#{shared_path}}
+      end
+
       %x{bundle exec rake assets:clean}
     end
   end

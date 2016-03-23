@@ -81,27 +81,21 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.serve_static_files = true
+  # config.serve_static_assets = true
 
-  config.action_mailer.default_url_options = { :host => ENV['APPLICATION_ROOT_URL'], :protocol => ENV['APPLICATION_PROTOCOL'] }
+  config.action_mailer.default_url_options = { :host => Rails.application.secrets.default_host, :protocol => Rails.application.secrets.default_protocol }
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = false
   # config.action_mailer.default :charset => "utf-8"
 
-  # #mandrillapp
-  #  config.action_mailer.smtp_settings = {
-  #      :port =>           587,
-  #      :address =>        'smtp.mandrillapp.com',
-  #      :user_name =>      ENV['MANDRILL_USERNAME'],
-  #      :password =>       ENV['MANDRILL_APIKEY'],
-  #      :authentication       => 'plain',
-  #      :enable_starttls_auto => true
-  #  }
+  config.action_mailer.smtp_settings = {
+    :address   => Rails.application.secrets.smtp_address,
+    :port      => Rails.application.secrets.smtp_port,
+    :user_name => Rails.application.secrets.smtp_user_name,
+    :password  => Rails.application.secrets.smtp_password
+  }
 
-  # config.action_mailer.delivery_method = :smtp
-  
-  config.action_mailer.delivery_method = :mandrill
-
-  # config.action_mailer.delivery_method = :sendmail
+  # use :smtp for switch prod
+  config.action_mailer.delivery_method = Rails.application.secrets.delivery_method.to_sym
 
 end

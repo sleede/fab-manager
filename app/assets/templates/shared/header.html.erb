@@ -1,17 +1,20 @@
 
   <div class="navbar-header">
     <a ng-click="toggleNavSize($event)" class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"><i class="fa fa-bars"></i></a>
-    <a ui-sref="app.public.home" class="navbar-brand" ng-click="goabout = false"><%= image_tag("fablab.png", class: 'm-r-sm') %>
-      <%= raw "<label class='label-staging label label-warning text-sm hidden-sm hidden-xs'>Démo</label>" if Rails.env.staging? %></a>
+    <a ui-sref="app.public.home" class="navbar-brand" ng-click="goabout = false">
+      <img ng-src="{{logo.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="m-r-sm"/>
+      <%= raw "<label class='label-staging label label-warning text-sm hidden-sm hidden-xs'>Staging</label>" if Rails.env.staging? %></a>
   </div>
 
   <ul class="nav navbar-nav hidden-xs">
     <li>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.about" ng-show="!goabout">
-        <span class="label label-danger rounded text-lg text-white m-r-sm font-ebold">?</span>A propos du Fab Lab
+        <span class="label label-theme rounded text-lg text-white m-r-sm font-ebold">?</span>
+          {{ 'about_the_fablab' | translate:{ GENDER: nameGenre, NAME: fablabName }:"messageformat" }}
       </a>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.home" ng-show="goabout">
-        <span class="label label-danger label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>Retour
+        <span class="label label-theme label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>
+          {{ 'return' | translate }}
       </div>
       </a>
     </li>
@@ -22,23 +25,35 @@
     <li class="notification-open" ng-if="isAuthenticated()">
       <a ui-sref="app.logged.notifications"><i class="fa fa-bell fa-2x black"></i> <span class="badge" ng-class="{'bg-red': notifications.length > 0}">{{notifications.length}}</span></a>
     </li>
-    <li class="dropdown user-profile-nav" ng-if="isAuthenticated()" dropdown>
-      <a href="#" class="dropdown-toggle" dropdown-toggle>
-        <span class="avatar text-center">
-          <fab-user-avatar ng-model="currentUser.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
-          <span class="user-name m-l-sm text-black-light font-sbold hidden-sm">{{currentUser.name}} <b class="caret"></b></span>
-        </span>
+    <li class="dropdown user-profile-nav" ng-if="isAuthenticated()" uib-dropdown>
+      <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                    <span class="avatar text-center">
+                      <fab-user-avatar ng-model="currentUser.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
+                      <!-- <i class="on b-white bottom"></i> -->
+                      <span class="user-name m-l-sm text-black-light font-sbold hidden-sm">{{currentUser.name}} <b class="caret"></b></span>
+                    </span>
       </a>
-      <ul class="dropdown-menu animated fadeInRight">
-        <li><a href="#" ui-sref="app.logged.dashboard_profile">Mon profil</a></li>
-        <li><a href="#" ui-sref="app.logged.dashboard_projects">Mes projets</a></li>
+      <ul class="uib-dropdown-menu animated fadeInRight">
+        <li><a href="#" ui-sref="app.logged.dashboard.profile" translate>{{ 'my_profile' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.projects" translate>{{ 'my_projects' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.trainings" translate>{{ 'my_trainings' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.events" translate>{{ 'my_courses_and_workshops' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'my_invoices' }}</a></li>
 
         <li class="divider"></li>
-        <li><a href="#" class="text-black" ng-click="logout($event)"><i class="fa fa-power-off"></i> Se déconnecter</a></li>
+        <li><a href="#" class="text-black" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'sign_out' | translate }}</a></li>
       </ul>
     </li>
-    <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> S'inscrire</a></li>
-    <li ng-if="!isAuthenticated()">
-      <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> Se connecter</a>
-    </li>
+    <% active_provider = AuthProvider.active %>
+    <% if active_provider.providable_type == DatabaseProvider.name %>
+      <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
+      <li ng-if="!isAuthenticated()">
+          <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+      </li>
+    <% else %>
+        <li ng-if="!isAuthenticated()"><a href="<%= user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>" class="font-sbold label text-md"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
+        <li ng-if="!isAuthenticated()">
+            <a href="<%= user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>" class="font-sbold  label text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+        </li>
+    <% end %>
   </ul>

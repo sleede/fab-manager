@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.user_changed_group_html', NAME: @attached_object.profile.full_name) %></p>
+
+<p>
+  <small><%= t('.body.previous_group') %> <strong><%= "#{@notification.get_meta_data(:ex_group_name)}" %></strong></small>
+  <br/><%= t('.body.new_group') %> <strong><%= "#{@attached_object.group.name}" %></strong>
+</p>

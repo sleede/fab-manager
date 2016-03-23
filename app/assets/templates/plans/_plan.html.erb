@@ -1,0 +1,47 @@
+<div class="row m-t m-b padder" ng-repeat="plansGroup in plansClassifiedByGroup" ng-if="ctrl.member.group_id == plansGroup.id || !ctrl.member" ng-show="plansAreShown">
+  <div class="col-md-12 text-center">
+    <h2 class="text-u-c">{{ plansGroup.name }}</h2>
+  </div>
+
+  <div class="row row-centered padder">
+    <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter">
+
+      <!-- ng-class directive center the last item if the list length is odd -->
+      <div class="pricing-panel col-xs-6 col-md-6 col-lg-6 text-center"
+           ng-class="{'col-md-12 col-lg-12':(plansGroup.plans.length % 2 == 1 && key == plansGroup.plans.length-1)}"
+           ng-repeat="(key, plan) in plansGroup.plans | orderBy:'interval'">
+
+        <h3 class="title">{{ plan.base_name }}</h3>
+
+        <div class="content">
+          <div class="wrap">
+            <div class="price">
+              <div class="amount">{{plan.amount | currency}}</div>
+              <span class="period">{{ plan.interval | planIntervalFilter: plan.interval_count }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-button">
+          <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-class="{'bg-yellow': selectedPlan.id == plan.id}" translate>{{ 'subscribe_online' }}</button>
+        </div>
+
+      </div>
+
+      <a class="m-t-lg btn btn-small btn-default pull-right" href="#" ng-click="doNotSubscribePlan($event)">{{ 'do_not_subscribe' | translate }}  <i class="fa fa-long-arrow-right"></i></a>
+
+    </div>
+
+    <div class="row row-centered m-t-lg">
+      <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter">
+        <uib-alert type="warning m">
+          <i class="fa fa-lightbulb-o"></i>
+          <span ng-bind-html="subscriptionExplicationsAlert"></span>
+        </uib-alert>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

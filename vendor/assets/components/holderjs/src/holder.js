@@ -1229,6 +1229,7 @@ function initSVG(svg, width, height) {
     if (svg.webkitMatchesSelector) {
         svg.setAttribute('xmlns', SVG_NS);
     }
+
     //Remove comment nodes
     for (var i = 0; i < svg.childNodes.length; i++) {
         if (svg.childNodes[i].nodeType === NODE_TYPE_COMMENT) {
@@ -1252,7 +1253,7 @@ function initSVG(svg, width, height) {
 }
 
 /**
- * Returns XML processing instructions
+ * Returns serialized SVG with XML processing instructions
  *
  * @private
  * @param svg SVG context
@@ -1274,8 +1275,11 @@ function serializeSVG(svg, engineSettings) {
         }
 
         //Add <?xml ... ?> UTF-8 directive
-        var xmlpi = xml.createProcessingInstruction('xml', 'version="1.0" encoding="UTF-8" standalone="yes"');
-        xml.insertBefore(xmlpi, xml.firstChild);
+        //todo: remove in 2.7
+        /*
+            var xmlpi = xml.createProcessingInstruction('xml', 'version="1.0" encoding="UTF-8" standalone="yes"');
+            xml.insertBefore(xmlpi, xml.firstChild);
+        */
         xml.removeChild(xml.documentElement);
         svgCSS = serializer.serializeToString(xml);
     }

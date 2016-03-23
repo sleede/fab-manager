@@ -14,7 +14,7 @@ json.start_date event.availability.start_at
 json.start_time event.availability.start_at
 json.end_date event.availability.end_at
 json.end_time event.availability.end_at
-json.month t("date.month_names")[event.availability.start_at.month]
+json.month t('date.month_names')[event.availability.start_at.month]
 json.month_id event.availability.start_at.month
 json.year event.availability.start_at.year
 json.all_day event.availability.start_at.hour == 0 ? 'true' : 'false'
@@ -27,3 +27,4 @@ json.availability_id event.availability_id
 json.amount (event.amount / 100.0) if event.amount
 json.reduced_amount (event.reduced_amount / 100.0) if event.reduced_amount
 json.nb_total_places event.nb_total_places
+json.nb_free_places event.nb_free_places || event.nb_total_places

@@ -425,7 +425,7 @@
 #nav {
 	// border-right: 1px solid $red-dark;
 	.nav {
-		background-color: $red;
+		//background-color: $red;
 		> li {
 			> a {
 				padding: 13px 17px;
@@ -433,11 +433,11 @@
 				color: white;
 				&:hover,
 				&:focus, &.active {
-					background-color: $red-light;
+					//background-color: $red-light;
 					color: white;
 				}
 				&.active {
-					border-left: 3px solid #870003;
+					border-left: 3px solid;// #870003;
 				}
 			}
 		}

@@ -1,0 +1,60 @@
+<div>
+
+  <section class="heading">
+    <div class="row no-gutter">
+      <ng-include src="'<%= asset_path 'dashboard/nav.html' %>'"></ng-include>
+    </div>
+
+  </section>
+
+
+  <div class="row no-gutter">
+
+    <div class="col-md-4">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b">
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_next_trainings' | translate }}</h4>
+        </div>
+        <div class="widget-content bg-light wrapper r-b">
+          <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
+            <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'" class="m-b" ng-class="{'reservation-canceled':r.canceled_at}">
+              <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+            </li>
+          </ul>
+          <div ng-if="user.training_reservations.length == 0" translate>{{ 'no_trainings' }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b">
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_previous_trainings' | translate }}</h4>
+        </div>
+        <div class="widget-content bg-light auto wrapper r-b">
+          <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
+            <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'passed'" class="m-b" ng-class="{'reservation-canceled':r.canceled_at}">
+              <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
+            </li>
+          </ul>
+          <div ng-if="user.training_reservations.length == 0" translate>{{ 'no_trainings' }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b">
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_approved_trainings' | translate }}</h4>
+        </div>
+        <div class="widget-content bg-light auto wrapper r-b">
+          <ul class="list-unstyled" ng-if="user.trainings.length > 0">
+            <li ng-repeat="t in user.trainings" class="m-b">
+              <span class="font-sbold">{{t.name}}</span>
+            </li>
+          </ul>
+          <div ng-if="user.trainings.length == 0" translate>{{ 'no_trainings' }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
