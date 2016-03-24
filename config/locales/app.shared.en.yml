@@ -65,7 +65,7 @@ en:
         name: "Name"
         step_N: "Step {{INDEX}}"  # angular interpolation
         themes: "Themes"
-        tags: "Tages"
+        tags: "Tags"
         technical_specifications: "Technical specifications"
         online_payment: "Online payment"
         type: "Type"
