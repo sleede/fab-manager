@@ -169,7 +169,7 @@
 					&:hover,
 					&:focus,
 					&:active,
-					&.active,
+					&.active
 					{
 						> a{
 							i{
@@ -191,7 +191,7 @@
 			}
 			li:hover,
 			li:focus,
-			li:active,
+			li:active
 			{
 				> ul{
 					display: block !important;
@@ -349,7 +349,7 @@
 		display: block !important;
 		position: absolute;
 		left: 0;
-		top: 0px;
+		top: 0;
 		bottom: 0;
 		width: $off-screen-nav-width;
 		visibility: visible;
@@ -384,7 +384,7 @@
 			overflow: hidden;
 			position: absolute;
 			width: 100%;
-			top: 0px;
+			top: 0;
 			bottom: 0;
 			left: 0;
 			right: 0;

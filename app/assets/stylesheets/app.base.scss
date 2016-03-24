@@ -31,7 +31,7 @@ h5 {
    &:after {
       position: absolute;
       top: 18px;
-      left: 0px;
+      left: 0;
       content: '';
       width: 35%;
       height: 1px;
@@ -65,7 +65,7 @@ p {
       font-family: $font-proxima-condensed;
       font-size: rem-calc(16);
       line-height: rem-calc(24);
-      margin: 1.038em 0px 30px 0px;
+      margin: 1.038em 0 30px 0;
       font-weight: 600;
    }
 }
@@ -79,7 +79,7 @@ dd {
 }
 
 
-// 
+//
 // -------------------------
 
 .col-0{clear:left;}
@@ -151,7 +151,7 @@ dd {
 
 [ui-view].ng-leave {
   opacity: 1;
-  /*padding-left: 0px;*/  
+  /*padding-left: 0px;*/
   // -webkit-transform:translate3d(0, 0, 0);
   // -moz-transform:translate3d(0, 0, 0);
   // transform:translate3d(0, 0, 0);

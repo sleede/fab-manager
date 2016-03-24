@@ -115,8 +115,6 @@ gem 'stripe', '1.30.2'
 
 gem 'recurrence'
 
-gem 'newrelic_rpm'
-
 # PDF
 gem 'prawn'
 gem 'prawn-table'
