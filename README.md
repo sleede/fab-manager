@@ -7,23 +7,23 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
 3. [Setup a development environment](#setup-a-development-environment)
-3.1 [General Guidelines](#general-guidelines)
-3.2 [Environment Configuration](#environment-configuration)
+3.1. [General Guidelines](#general-guidelines)
+3.2. [Environment Configuration](#environment-configuration)
 4. [PostgreSQL](#postgresql)
-4.1 [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)
-4.2 [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)
-4.3 [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)
+4.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)
+4.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)
+4.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)
 5. [ElasticSearch](#elasticsearch)
-5.1 [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)
-5.2 [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)
-5.3 [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
+5.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)
+5.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)
+5.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
 6. [Internationalization (i18n)](#i18n)
-6.1 [Translation](#i18n-translation)
-6.1.1 [Front-end translations](#i18n-translation-front)
-6.1.2 [Back-end translations](#i18n-translation-back)
-6.2 [Configuration](#i18n-configuration)
-6.2.1 [Settings](#i18n-settings)
-6.2.2 [Applying changes](#i18n-apply)
+6.1. [Translation](#i18n-translation)
+6.1.1. [Front-end translations](#i18n-translation-front)
+6.1.2. [Back-end translations](#i18n-translation-back)
+6.2. [Configuration](#i18n-configuration)
+6.2.1. [Settings](#i18n-settings)
+6.2.2. [Applying changes](#i18n-apply)
 7. [Known issues](#known-issues)
 8. [Related Documentation](#related-documentation)
 
@@ -134,82 +134,87 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 The settings in `config/application.yml` configure the environment variables of the application.
 If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
 
-#### POSTGRES_HOST
+    POSTGRES_HOST
 
 DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](#postgresql)).
 
-#### POSTGRES_PASSWORD
+    POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
 Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for informations on how to create a user and set his password.
 
-#### REDIS_HOST
+    REDIS_HOST
 
 DNS name or IP address of the server hosting the redis database.
 
-#### ELASTICSEARCH_HOST
+    ELASTICSEARCH_HOST
 
 DNS name or IP address of the server hosting the elasticSearch database.
 
-#### SECRET_KEY_BASE
+    SECRET_KEY_BASE
 
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
 Used by Rails to generate the integrity of signed cookies.
 You can generate such a random key by running `rake secret`.
 
-#### STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
+    STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
 
 Key an secret used to identify you Stripe account through the API.
 Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
-#### STRIPE_CURRENCY
+    STRIPE_CURRENCY
 
 Currency used by stripe to charge the final customer. 
 See https://support.stripe.com/questions/which-currencies-does-stripe-support for a list of available 3-letters ISO code.
 
-#### INVOICE_PREFIX
+**BEWARE**: stripe currency cannot be changed during the application life. 
+Changing the currency after the application has already run, may result in several bugs and prevent the users to pay through stripe.
+So set this setting carefully before starting the application for the first time.
+
+    INVOICE_PREFIX
 
 When payments are done on the platform, an invoice will be generate as a PDF file.
 This value configure the prefix of the PDF file name.
 
-#### FABLAB_WITHOUT_PLANS
+    FABLAB_WITHOUT_PLANS
 
 If set to 'true', the subscription plans will be fully disabled and invisible in the application.
 
-#### DEFAULT_MAIL_FROM
+    DEFAULT_MAIL_FROM
 
 When sending notification mails, the platform will use this address to identify the sender.
 
-#### DELIVERY_METHOD
+    DELIVERY_METHOD
 
 Configure the Rails' Action Mailer delivery method.
 See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
 
-#### DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME & SMTP_PASSWORD
+    DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME & SMTP_PASSWORD
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
 See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
 DEFAULT_HOST is also used to configure Google Analytics.
 
-#### GA_ID
+    GA_ID
 
 Identifier of your Google Analytics account.
 
-#### DISQUS_SHORTNAME
+    DISQUS_SHORTNAME
 
 Unique identifier of your [Disqus](http://www.disqus.com) forum.
 Disquq forums are used to allow visitors to comment on projects.
 See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more informations.
 
-#### TWITTER_NAME
+    TWITTER_NAME
 
 Identifier of the Twitter account, for witch the last tweet will be displayed on the home page.
 
-#### TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
+    TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
 
 Keys and secrets to access the twitter API.
 
-#### Settings related to i18n
+    Settings related to i18n
+
 See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](#i18n) paragraph for a detailed description of these parameters.
 
 
@@ -435,7 +440,7 @@ If you are in a development environment, your can keep the default values, other
 
 <a name="i18n-settings"></a>
 #### Settings
-##### RAILS_LOCALE
+    RAILS_LOCALE
 
 Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured rails_locale. 
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
@@ -443,21 +448,21 @@ You can find templates of these files at https://github.com/svenfuchs/rails-i18n
 Be aware that **this file MUST contain the CURRENCY symbol used to generate invoices** (among other things). 
 Default is **en**.
 
-##### MOMENT_LOCALE
+    MOMENT_LOCALE
  
 Configure the moment.js library for l10n. 
 
 See `vendor/assets/components/moment/locale/*.js` for a list of available locales. 
 Default is **en** (even if it's not listed).
 
-##### SUMMERNOTE_LOCALE
+    SUMMERNOTE_LOCALE
 
 Configure the javascript summernote editor for l10n.
 
 See `vendor/assets/components/summernote/lang/summernote-*.js` for a list of available locales. 
 Default is **en-US** (even if it's not listed).
 
-##### ANGULAR_LOCALE
+    ANGULAR_LOCALE
 
 Configure the locale for angular-i18n.
 
@@ -467,33 +472,33 @@ _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca*
 
 See `vendor/assets/components/angular-i18n/angular-locale_*.js` for a list of available locales. Default is **en**.
 
-##### MESSAGEFORMAT_LOCALE
+    MESSAGEFORMAT_LOCALE
 
 Configure the messageformat.js library, used by angular-translate.
 
 See vendor/assets/components/messageformat/locale/*.js for a list of available locales.
 
-##### FULLCALENDAR_LOCALE
+    FULLCALENDAR_LOCALE
 
 Configure the fullCalendar JS agenda library.
 
 See `vendor/assets/components/fullcalendar/dist/lang/*.js` for a list of available locales. Default is **en** (even if it's not listed).
   
-#####  ELASTICSEARCH_LANGUAGE_ANALYZER
+    ELASTICSEARCH_LANGUAGE_ANALYZER
 
 This configure the language analyzer for indexing and searching in projects with ElasticSearch.
 See https://www.elastic.co/guide/en/elasticsearch/reference/1.7/analysis-lang-analyzer.html for a list of available analyzers (check that the doc version match your installed elasticSearch version).
 
-##### TIME_ZONE
+    TIME_ZONE
 
 In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rake time:zones:all` for a list of available time zone names. 
 Default is **UTC**.
 
-##### WEEK_STARTING_DAY
+    WEEK_STARTING_DAY
 
 Configure the first day of the week in your locale zone (generally monday or sunday).
  
-#####  D3_DATE_FORMAT
+    D3_DATE_FORMAT
 Date format for dates displayed in statistics charts. 
 See https://github.com/mbostock/d3/wiki/Time-Formatting#format for available formats.
 

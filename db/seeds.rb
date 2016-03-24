@@ -141,8 +141,6 @@ if Training.count == 0
   TrainingsPricing.all.each do |p|
     p.update_columns(amount: (rand()*50+5).floor*100)
   end
-
-  Training.create({name: "Pas de réservation"})
 end
 
 if Machine.count == 0

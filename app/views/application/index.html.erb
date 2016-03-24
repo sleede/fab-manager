@@ -104,14 +104,29 @@
 <script type="text/javascript" src="<%= asset_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>
 <script type="text/javascript" src="<%= asset_path "messageformat/locale/#{Rails.application.secrets.messageformat_locale}.js" %>"></script>
 
-<% if Rails.application.secrets.moment_locale != "en" %>
+<!-- if required locale does not exist, use the default "en" -->
+<% if Rails.application.assets.find_asset "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>
   <script type="text/javascript" src="<%= asset_path "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>"></script>
-<% end %>
-<% if Rails.application.secrets.summernote_locale != "en" %>
+<%
+  elsif Rails.application.secrets.moment_locale != 'en'
+    raise LoadError, "moment/locale/#{Rails.application.secrets.moment_locale}.js does not exists"
+  end
+%>
+<!-- if required locale does not exist, use the default "en-US" -->
+<% if Rails.application.assets.find_asset "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js" %>
   <script type="text/javascript" src="<%= asset_path "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js" %>"></script>
-<% end %>
-<% if Rails.application.secrets.fullcalendar_locale != "en" %>
+<%
+  elsif Rails.application.secrets.summernote_locale != 'en-US'
+    raise LoadError, "summernote/lang/summernote-#{Rails.application.secrets.summernote_locale}.js does not exists"
+  end
+%>
+<!-- if required locale does not exist, use the default "en" -->
+<% if Rails.application.assets.find_asset "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js" %>
   <script type="text/javascript" src="<%= asset_path "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js" %>"></script>
-<% end %>
+<%
+  elsif Rails.application.secrets.fullcalendar_locale != 'en'
+    raise LoadError, "fullcalendar/dist/lang/#{Rails.application.secrets.fullcalendar_locale}.js does not exists"
+  end
+%>
 </body>
 </html>

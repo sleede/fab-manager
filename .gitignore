@@ -19,17 +19,15 @@
 /public/uploads
 /public/assets
 
-# Ignore application configuration
+# Ignore application configurations
 /config/application.yml
+/config/database.yml
 
 *.DS_Store
 .idea
 
 # PDF invoices
 /invoices/*
-
-/config/database.yml
-/config/application.yml
 
 .DS_Store
 
