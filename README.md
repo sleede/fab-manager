@@ -24,7 +24,8 @@ The following files must be filled with the correct configuration to allow FabMa
 	- `config.action_mailer.default_url_options` -> change the URL according to the staging deployment url 
 	- `mandrill` -> change this if you're using a different mailing system
 
-- config/application.yml
+- config/application.yml.default
+    Copy/Paste this file to `config/application.yml` and modify it:
 	- `DEVISE_KEY` -> generate any secret phrase to secure the Devise authentication. You can use the `$ rake secret` command for this purpose. 
 	- `SECRET_KEY_BASE` -> generate any secret phrase here to prevent XSS attacks. You can use the `$ rake secret` command for this purpose.
 	- `DEFAULT_MAIL_FROM` -> default e-mail address from which the emails are sent 

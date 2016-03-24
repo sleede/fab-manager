@@ -27,3 +27,6 @@
 
 # machine specific database config
 /config/database.yml
+
+# application configuration
+/config/application.yml
