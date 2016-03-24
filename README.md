@@ -159,7 +159,7 @@ You can generate such a random key by running `rake secret`.
 
     STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
 
-Key an secret used to identify you Stripe account through the API.
+Key and secret used to identify you Stripe account through the API.
 Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
     STRIPE_CURRENCY
