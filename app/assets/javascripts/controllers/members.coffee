@@ -50,6 +50,10 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
   ## mapping of fields to disable
   $scope.preventField = {}
 
+  ## Should the passord be modified?
+  $scope.password =
+    change: false
+
   ## Angular-Bootstrap datepicker configuration for birthday
   $scope.datePicker =
     format: $locale.DATETIME_FORMATS.shortDate

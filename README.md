@@ -525,6 +525,8 @@ After modifying any values concerning the localisation, restart the application 
  This may happens when the `application.yml` file is missing. 
  To solve this issue copy `config/application.yml.default` to `config/application.yml`.
  This is required before the first start.
+ 
+- Due to a stripe limitation, you won't be ble to create plans longer than one year.
 
 
 <a name="related-documentation"></a>

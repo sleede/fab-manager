@@ -207,6 +207,10 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
   ## The user to edit
   $scope.user = memberPromise
 
+  ## Should the passord be modified?
+  $scope.password =
+    change: false
+
   ## the user subscription
   if $scope.user.subscribed_plan? and $scope.user.subscription?
     $scope.subscription = $scope.user.subscription
@@ -370,6 +374,10 @@ Application.Controllers.controller "NewMemberController", ["$scope", "$state", "
 
   ## Form action on the above URL
   $scope.method = 'post'
+
+  ## Should the passord be set manually or generated?
+  $scope.password =
+    change: false
 
   ## Default member's profile parameters
   $scope.user =

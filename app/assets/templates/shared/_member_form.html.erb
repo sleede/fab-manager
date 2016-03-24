@@ -5,7 +5,7 @@
 
 <div class="row m-t">
     <div class="col-sm-3 col-sm-offset-1">
-      <div class="form-group m-t-lg"> 
+      <div class="form-group m-t-lg">
           <div class="fileinput text-center" data-provides="fileinput" ng-class="fileinputClass(user.profile.user_avatar.attachment_url)">
             <div class="fileinput-new thumbnail rounded thumb-128-wrapper" style="width: 140px; height: 140px;">
               <img src="<%= image_path("no_avatar.png") %>" class="img-circle">
@@ -123,11 +123,12 @@
 
       <div class="form-group" ng-hide="preventPassword">
         <button class="btn btn-warning btn-block"
-                ng-click="change_password = !change_password; $event.stopPropagation(); $event.preventDefault()" translate>{{ 'change_password' }}</button>
+                ng-click="password.change = !password.change; $event.stopPropagation(); $event.preventDefault()"
+                translate>{{ 'change_password' }}</button>
       </div>
-      
 
-      <div class="form-group" ng-class="{'has-error': userForm['user[password]'].$dirty && userForm['user[password]'].$invalid}" ng-if="change_password">
+
+      <div class="form-group" ng-class="{'has-error': userForm['user[password]'].$dirty && userForm['user[password]'].$invalid}" ng-if="password.change">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-key"></i> </span>
           <input type="password"
@@ -143,7 +144,7 @@
         <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'password_is_too_short_(minimum_8_characters)' }}</span>
       </div>
 
-      <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="change_password">
+      <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="password.change">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-key"></i> </span>
           <input type="password"
