@@ -6,23 +6,23 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 ##### Table of Contents  
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
-3. [Setup a development environment](#setup-a-development-environment)
-3.1. [General Guidelines](#general-guidelines)
+3. [Setup a development environment](#setup-a-development-environment)<br/>
+3.1. [General Guidelines](#general-guidelines)<br/>
 3.2. [Environment Configuration](#environment-configuration)
-4. [PostgreSQL](#postgresql)
-4.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)
-4.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)
+4. [PostgreSQL](#postgresql)<br/>
+4.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
+4.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
 4.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)
-5. [ElasticSearch](#elasticsearch)
-5.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)
-5.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)
+5. [ElasticSearch](#elasticsearch)<br/>
+5.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
+5.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
 5.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
-6. [Internationalization (i18n)](#i18n)
-6.1. [Translation](#i18n-translation)
-6.1.1. [Front-end translations](#i18n-translation-front)
-6.1.2. [Back-end translations](#i18n-translation-back)
-6.2. [Configuration](#i18n-configuration)
-6.2.1. [Settings](#i18n-settings)
+6. [Internationalization (i18n)](#i18n)<br/>
+6.1. [Translation](#i18n-translation)<br/>
+6.1.1. [Front-end translations](#i18n-translation-front)<br/>
+6.1.2. [Back-end translations](#i18n-translation-back)<br/>
+6.2. [Configuration](#i18n-configuration)<br/>
+6.2.1. [Settings](#i18n-settings)<br/>
 6.2.2. [Applying changes](#i18n-apply)
 7. [Known issues](#known-issues)
 8. [Related Documentation](#related-documentation)
