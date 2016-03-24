@@ -17,7 +17,7 @@ The [issue tracker](https://github.com/LaCasemate/fab-manager/issues) is the pre
 [features requests](#features) and [submitting pull requests](#pull-requests), but please respect the following 
 restrictions:
 
-* Please **do not** use the issue tracker for personal support requests (use [the forum](http://www.fab-manager.com/forum)).
+* Please **do not** use the issue tracker for personal support requests (use [the forum](https://forum.fab-manager.com)).
 
 * Please **do not** derail or troll issues. Keep the discussion on topic and respect the opinions of others.
 

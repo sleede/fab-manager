@@ -18,44 +18,48 @@
 
   def create
     authorize Plan
-    if plan_params[:type] and plan_params[:type] == 'PartnerPlan'
+    begin
+      if plan_params[:type] and plan_params[:type] == 'PartnerPlan'
 
-      partner = User.find(params[:plan][:partner_id])
+        partner = User.find(params[:plan][:partner_id])
 
-      if plan_params[:group_id] == 'all'
-        plans = PartnerPlan.create_for_all_groups(plan_params)
-        if plans
-          plans.each { |plan| partner.add_role :partner, plan }
-          render json: { plan_ids: plans.map(&:id) }, status: :created
-        else
-          render status: :unprocessable_entity
-        end
+        if plan_params[:group_id] == 'all'
+          plans = PartnerPlan.create_for_all_groups(plan_params)
+          if plans
+            plans.each { |plan| partner.add_role :partner, plan }
+            render json: { plan_ids: plans.map(&:id) }, status: :created
+          else
+            render status: :unprocessable_entity
+          end
 
-      else
-        @plan = PartnerPlan.new(plan_params)
-        if @plan.save
-          partner.add_role :partner, @plan
-          render :show, status: :created
         else
-          render json: @plan.errors, status: :unprocessable_entity
-        end
-      end
-    else
-      if plan_params[:group_id] == 'all'
-        plans = Plan.create_for_all_groups(plan_params)
-        if plans
-          render json: { plan_ids: plans.map(&:id) }, status: :created
-        else
-          render status: :unprocessable_entity
+          @plan = PartnerPlan.new(plan_params)
+          if @plan.save
+            partner.add_role :partner, @plan
+            render :show, status: :created
+          else
+            render json: @plan.errors, status: :unprocessable_entity
+          end
         end
       else
-        @plan = Plan.new(plan_params)
-        if @plan.save
-          render :show, status: :created, location: @plan
+        if plan_params[:group_id] == 'all'
+          plans = Plan.create_for_all_groups(plan_params)
+          if plans
+            render json: { plan_ids: plans.map(&:id) }, status: :created
+          else
+            render status: :unprocessable_entity
+          end
         else
-          render json: @plan.errors, status: :unprocessable_entity
+          @plan = Plan.new(plan_params)
+          if @plan.save
+            render :show, status: :created, location: @plan
+          else
+            render json: @plan.errors, status: :unprocessable_entity
+          end
         end
       end
+    rescue Stripe::InvalidRequestError => e
+      render json: {error: e.message}, status: :unprocessable_entity
     end
   end
 

@@ -112,25 +112,7 @@ Application.Filters.filter "toTrusted", [ "$sce", ($sce) ->
 
 Application.Filters.filter "planIntervalFilter", [ ->
   (interval, intervalCount) ->
-    if typeof intervalCount != 'number'
-      switch interval
-        when 'day' then return 'jour'
-        when 'week' then return 'semaine'
-        when 'month' then return 'mois'
-        when 'year' then return 'année'
-    else
-      if intervalCount == 1
-        switch interval
-          when 'day' then return 'un jour'
-          when 'week' then return 'une semaine'
-          when 'month' then return 'un mois'
-          when 'year' then return 'un an'
-      else
-        switch interval
-          when 'day' then return intervalCount+ ' jours'
-          when 'week' then return intervalCount+ ' semaines'
-          when 'month' then return intervalCount+ ' mois'
-          when 'year' then return intervalCount+ ' ans'
+    moment.duration(intervalCount, interval).humanize()
 ]
 
 Application.Filters.filter "humanReadablePlanName", ['$filter', ($filter)->

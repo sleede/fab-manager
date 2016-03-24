@@ -47,7 +47,7 @@
                   <tr ng-repeat="plan in plans | orderBy:orderPlans">
                       <td>{{getPlanType(plan.type)}}</td>
                       <td>{{plan.base_name}}</td>
-                      <td>{{ plan.interval | planIntervalFilter }}</td>
+                      <td>{{ plan.interval | planIntervalFilter:plan.interval_count }}</td>
                       <td>{{getGroupFromId(groups, plan.group_id).name}}</td>
                       <td>{{plan.ui_weight}}</td>
                       <td>{{plan.amount | currency}}</td>
