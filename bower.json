@@ -52,7 +52,8 @@
     "angular-translate-loader-partial": "~2.8.1",
     "angular-translate-interpolation-messageformat": "~2.8.1",
     "messageformat": "=0.1.8",
-    "moment-timezone": "~0.5.0"
+    "moment-timezone": "~0.5.0",
+    "ngFitText": "~4.1.1"
   },
   "resolutions": {
     "jquery": ">=1.10.2",

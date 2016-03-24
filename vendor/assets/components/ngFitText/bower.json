@@ -1,0 +1,26 @@
+{
+  "name": "ngFitText",
+  "version": "4.1.1",
+  "main": [
+    "dist/ng-FitText.min.js"
+  ],
+  "keywords": [
+    "angular",
+    "javascript",
+    "typography"
+  ],
+  "ignore": [
+    "demo",
+    "lib",
+    "node_modules",
+    "src",
+    "test",
+    ".bowerrc",
+    "gulpfile.js",
+    "package.json",
+    "index.html"
+  ],
+  "dependencies": {
+    "angular": "1.x"
+  }
+}

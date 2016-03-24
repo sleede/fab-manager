@@ -67,6 +67,7 @@
 //= require angular-translate-loader-partial/angular-translate-loader-partial
 //= require messageformat/messageformat
 //= require angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat
+//= require ngFitText/dist/ng-FitText.min
 //= require_tree ./controllers
 //= require_tree ./services
 //= require_tree ./directives
