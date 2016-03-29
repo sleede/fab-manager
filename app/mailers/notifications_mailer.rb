@@ -28,12 +28,12 @@ class NotificationsMailer < NotifyWith::NotificationsMailer
   end
 
   def notify_user_when_invoice_ready
-    attachments['facture.pdf'] = File.read(@attached_object.file)
+    attachments[@attached_object.filename] = File.read(@attached_object.file)
     mail(to: @recipient.email, subject: t('notifications_mailer.notify_member_invoice_ready.subject'), template_name: 'notify_member_invoice_ready')
   end
 
   def notify_user_when_avoir_ready
-    attachments['avoir.pdf'] = File.read(@attached_object.file)
+    attachments[@attached_object.filename] = File.read(@attached_object.file)
     mail(to: @recipient.email, subject: t('notifications_mailer.notify_member_avoir_ready.subject'), template_name: 'notify_member_avoir_ready')
   end
 end
