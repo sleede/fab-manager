@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "_t", "$locale", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise"
-, ($scope, $rootScope, $state, _t, $locale, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise"
+, ($scope, $rootScope, $state, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise) ->
 
 
 
@@ -40,7 +40,7 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
 
   ## Angular-Bootstrap datepicker configuration for birthday
   $scope.datePicker =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     options:
       startingDay: Fablab.weekStartingDay

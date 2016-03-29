@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", "$locale", "Statistics", "es", "Member", '_t'
-, ($scope, $state, $rootScope, $locale, Statistics, es, Member, _t) ->
+Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", "Statistics", "es", "Member", '_t'
+, ($scope, $state, $rootScope, Statistics, es, Member, _t) ->
 
 
 
@@ -53,7 +53,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     value : null
     exclude: false
     datePicker:
-      format: $locale.DATETIME_FORMATS.shortDate
+      format: Fablab.uibDateFormat
       opened: false # default: datePicker is not shown
       minDate: null
       maxDate: moment().toDate()
@@ -69,7 +69,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
   ## datePicker parameters for interval beginning
   $scope.datePickerStart =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     minDate: null
     maxDate: moment().subtract(1, 'day').toDate()
@@ -79,7 +79,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
   ## datePicker parameters for interval ending
   $scope.datePickerEnd =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     minDate: null
     maxDate: moment().subtract(1, 'day').toDate()
