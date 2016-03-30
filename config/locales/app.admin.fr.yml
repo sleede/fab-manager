@@ -297,6 +297,8 @@ fr:
         do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Êtes-vous sûr(e) de vouloir supprimer le fournisseur d'authentification {{TYPE}} : {{NAME}} ?"  # angular interpolation
         authentication_provider_successfully_deleted: "Le fournisseur d'authentification a bien été supprimée."
         an_error_occurred_unable_to_delete_the_specified_provider: "Une erreur est survenue : impossible de supprimer le fournisseur spécifié."
+        local_database: "Base de données locale"
+        o_auth2: "OAuth 2.0"
 
       members_new:
         # ajouter un membre

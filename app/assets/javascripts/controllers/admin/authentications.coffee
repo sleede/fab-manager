@@ -4,17 +4,15 @@
 
 ## list of supported authentication methods
 METHODS = {
-  'DatabaseProvider' : 'Base de données locale',
-  #'OAuthProvider' : 'OAuth 1.0',
-  'OAuth2Provider' : 'OAuth 2.0',
-  #'LdapProvider' : 'LDAP'
+  'DatabaseProvider' : 'local_database',
+  'OAuth2Provider' : 'o_auth2',
 }
 
 ##
 # Iterate through the provided array and return the index of the requested element
-# @param elements {Array} array of objects with property 'id'
-# @param id {Number} id of the element to retrieve in the list
-# @returns {Number} index of the requested element, in the provided array
+# @param elements {Array<{id:*}>}
+# @param id {*} id of the element to retrieve in the list
+# @returns {number} index of the requested element, in the provided array
 ##
 findIdxById = (elements, id)->
   (elements.map (elem)->
@@ -58,7 +56,7 @@ Application.Controllers.controller "AuthentificationController", ["$scope", "$st
   $scope.getType = (type) ->
     text = METHODS[type]
     if typeof text != 'undefined'
-      return text
+      return _t(text)
     else
       return _t('unknown')+type
 
