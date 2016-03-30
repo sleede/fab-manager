@@ -21,7 +21,7 @@
 #  - $state (Ui-Router) [ 'app.admin.members' ]
 ##
 class MembersController
-  constructor: ($scope, $state, $locale, Group, Training) ->
+  constructor: ($scope, $state, Group, Training) ->
 
     ## Retrieve the profiles groups (eg. students ...)
     Group.query (groups) ->
@@ -35,7 +35,7 @@ class MembersController
 
     ## Default parameters for AngularUI-Bootstrap datepicker
     $scope.datePicker =
-      format: $locale.DATETIME_FORMATS.shortDate
+      format: Fablab.uibDateFormat
       opened: false # default: datePicker is not shown
       subscription_date_opened: false
       options:
@@ -188,8 +188,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
 ##
 # Controller used in the member edition page
 ##
-Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", '$locale', "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t'
-, ($scope, $state, $stateParams, $locale, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t) ->
+Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t'
+, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t) ->
 
 
 
@@ -245,7 +245,7 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
         $scope.free = free
         $scope.datePicker =
           opened: false
-          format: $locale.DATETIME_FORMATS.shortDate
+          format: Fablab.uibDateFormat
           options:
             startingDay: Fablab.weekStartingDay
           minDate: new Date
@@ -349,7 +349,7 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
           plan.nameToDisplay = "#{plan.base_name} - #{plan.interval}"
 
     # Using the MembersController
-    new MembersController($scope, $state, $locale, Group, Training)
+    new MembersController($scope, $state, Group, Training)
 
 
 
@@ -362,8 +362,8 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
 ##
 # Controller used in the member's creation page (admin view)
 ##
-Application.Controllers.controller "NewMemberController", ["$scope", "$state", "$locale", "$stateParams", "Member", 'Training', 'Group', 'CSRF'
-, ($scope, $state, $locale, $stateParams, Member, Training, Group, CSRF) ->
+Application.Controllers.controller "NewMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'Group', 'CSRF'
+, ($scope, $state, $stateParams, Member, Training, Group, CSRF) ->
 
   CSRF.setMetaTags()
 
@@ -386,7 +386,7 @@ Application.Controllers.controller "NewMemberController", ["$scope", "$state", "
 
 
   ## Using the MembersController
-  new MembersController($scope, $state, $locale, Group, Training)
+  new MembersController($scope, $state, Group, Training)
 ]
 
 
@@ -394,7 +394,7 @@ Application.Controllers.controller "NewMemberController", ["$scope", "$state", "
 ##
 # Controller used in the admin's creation page (admin view)
 ##
-Application.Controllers.controller 'NewAdminController', ['$state', '$scope', '$locale', 'Admin', 'growl', ($state, $scope, $locale, Admin, growl)->
+Application.Controllers.controller 'NewAdminController', ['$state', '$scope', 'Admin', 'growl', ($state, $scope, Admin, growl)->
 
   ## default admin profile
   $scope.admin =
@@ -403,7 +403,7 @@ Application.Controllers.controller 'NewAdminController', ['$state', '$scope', '$
 
   ## Default parameters for AngularUI-Bootstrap datepicker
   $scope.datePicker =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false
     options:
       startingDay: Fablab.weekStartingDay

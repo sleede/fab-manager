@@ -499,9 +499,16 @@ Default is **UTC**.
 Configure the first day of the week in your locale zone (generally monday or sunday).
  
     D3_DATE_FORMAT
+
 Date format for dates displayed in statistics charts. 
 See https://github.com/mbostock/d3/wiki/Time-Formatting#format for available formats.
 
+    UIB_DATE_FORMAT
+
+Date format for dates displayed and parsed in date pickers.
+See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a list available formats. 
+
+**BEWARE**: years format with less than 4 digits will result in problems because the system won't be able to distinct dates with the same less significant digits, eg. 50 could mean 1950 or 2050.
 
 <a name="i18n-apply"></a>
 #### Applying changes

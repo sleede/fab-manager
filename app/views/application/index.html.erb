@@ -23,11 +23,7 @@
 
       var Fablab = Fablab || {};
 
-      if ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true'){
-        Fablab.withoutPlans = true;
-      } else {
-        Fablab.withoutPlans = false;
-      }
+      Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= ENV['DEFAULT_HOST'] %>";
       Fablab.gaId = "<%= ENV['GA_ID'] %>";
@@ -48,6 +44,7 @@
       };
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
+      Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
   </script>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
