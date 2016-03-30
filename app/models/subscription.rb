@@ -29,7 +29,7 @@ class Subscription < ActiveRecord::Base
 
         reset_users_credits if expired_date_changed
 
-        # generate directement invoice
+        # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
         generate_invoice(stp_invoice.id).save if invoice
         # cancel subscription after create
@@ -209,8 +209,9 @@ class Subscription < ActiveRecord::Base
   end
 
   def expired_date_changed
-    return true if expired_at_was.nil?
-    expired_at_was.to_date != expired_at.to_date and expired_at > expired_at_was
+    p_value = self.previous_changes[:expired_at][0]
+    return true if p_value.nil?
+    p_value.to_date != expired_at.to_date and expired_at > p_value
   end
 
   def reset_users_credits

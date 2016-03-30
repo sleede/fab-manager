@@ -19,6 +19,7 @@
               <span class="btn btn-default btn-file"
                     ng-click="user.profile.user_avatar._destory = false"
                     ng-hide="preventField['profile.avatar'] && user.profile.user_avatar.attachment_url && !userForm['user[profile_attributes][user_avatar_attributes]'].$dirty">
+                    <!-- FIXME: still able to add an avatar if none is present when SSO is activated -->
                   <span class="fileinput-new" translate>{{ 'add_an_avatar' }}</span>
                   <span class="fileinput-exists" translate>{{ 'change' }}</span>
                   <input type="file" name="user[profile_attributes][user_avatar_attributes][attachment]">
