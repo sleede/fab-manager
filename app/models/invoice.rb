@@ -18,7 +18,11 @@ class Invoice < ActiveRecord::Base
 
     # create directories if they doesn't exists (invoice & user_id)
     FileUtils::mkdir_p dir
-    "#{dir}/#{ENV['INVOICE_PREFIX']}-#{self.id}_#{self.created_at.strftime('%d%m%Y')}.pdf"
+    "#{dir}/#{self.filename}"
+  end
+
+  def filename
+    "#{ENV['INVOICE_PREFIX']}-#{self.id}_#{self.created_at.strftime('%d%m%Y')}.pdf"
   end
 
 

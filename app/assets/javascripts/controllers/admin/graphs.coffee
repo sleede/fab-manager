@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "GraphsController", ["$scope", "$state", '$locale', "$rootScope",  'es', 'Statistics', '_t'
-, ($scope, $state, $locale, $rootScope, es, Statistics, _t) ->
+Application.Controllers.controller "GraphsController", ["$scope", "$state", "$rootScope",  'es', 'Statistics', '_t'
+, ($scope, $state, $rootScope, es, Statistics, _t) ->
 
 
 
@@ -50,7 +50,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", '$lo
 
   ## datePicker parameters for interval beginning
   $scope.datePickerStart =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     minDate: null
     maxDate: moment().subtract(1, 'day').toDate()
@@ -60,7 +60,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", '$lo
 
   ## datePicker parameters for interval ending
   $scope.datePickerEnd =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     minDate: null
     maxDate: moment().subtract(1, 'day').toDate()

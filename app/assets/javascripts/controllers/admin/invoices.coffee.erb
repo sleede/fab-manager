@@ -390,8 +390,8 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
 ##
 # Controller used in the invoice refunding modal window
 ##
-Application.Controllers.controller 'AvoirModalController', ["$scope", "$uibModalInstance", '$locale', "invoice", "Invoice", "growl", '_t'
-, ($scope, $uibModalInstance, $locale, invoice, Invoice, growl, _t) ->
+Application.Controllers.controller 'AvoirModalController', ["$scope", "$uibModalInstance", "invoice", "Invoice", "growl", '_t'
+, ($scope, $uibModalInstance, invoice, Invoice, growl, _t) ->
 
 
 
@@ -424,7 +424,7 @@ Application.Controllers.controller 'AvoirModalController', ["$scope", "$uibModal
 
   ## AngularUI-Bootstrap datepicker parameters to define when to refund
   $scope.datePicker =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     options:
       startingDay: Fablab.weekStartingDay

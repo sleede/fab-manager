@@ -79,7 +79,6 @@
         <input type="text"
                id="user_birthday"
                class="form-control"
-               name="admin[profile_attributes][birthday]"
                ng-model="admin.profile_attributes.birthday"
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
@@ -87,6 +86,9 @@
                placeholder="{{ 'birth_date' | translate }}"
                ng-click="openDatePicker($event)"
                />
+        <input type="hidden"
+               name="admin[profile_attributes][birthday]"
+               value="{{admin.profile_attributes.birthday | toIsoDate}}" />
       </div>
     </div>
 

@@ -15,8 +15,8 @@ Application.Controllers.controller "MembersController", ["$scope", 'membersPromi
 ##
 # Controller used when editing the current user's profile
 ##
-Application.Controllers.controller "EditProfileController", ["$scope", "$rootScope", "$state", "$window", '$locale', "Member", "Auth", "Session", "activeProviderPromise", 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t'
-, ($scope, $rootScope, $state, $window, $locale, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) ->
+Application.Controllers.controller "EditProfileController", ["$scope", "$rootScope", "$state", "$window", "Member", "Auth", "Session", "activeProviderPromise", 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t'
+, ($scope, $rootScope, $state, $window, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) ->
 
 
 
@@ -56,7 +56,7 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
 
   ## Angular-Bootstrap datepicker configuration for birthday
   $scope.datePicker =
-    format: $locale.DATETIME_FORMATS.shortDate
+    format: Fablab.uibDateFormat
     opened: false # default: datePicker is not shown
     options:
       startingDay: Fablab.weekStartingDay

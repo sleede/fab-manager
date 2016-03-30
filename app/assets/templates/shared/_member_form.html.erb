@@ -168,7 +168,6 @@
           <input type="text"
                  id="user_birthday"
                  class="form-control"
-                 name="user[profile_attributes][birthday]"
                  ng-model="user.profile.birthday"
                  uib-datepicker-popup="{{datePicker.format}}"
                  datepicker-options="datePicker.options"
@@ -177,6 +176,9 @@
                  ng-click="openDatePicker($event)"
                  ng-disabled="preventField['profile.birthday'] && user.profile.birthday && !userForm['user[profile_attributes][birthday]'].$dirty"
                  required/>
+          <input type="hidden"
+                 name="user[profile_attributes][birthday]"
+                 value="{{user.profile.birthday | toIsoDate}}" />
         </div>
         <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
       </div>

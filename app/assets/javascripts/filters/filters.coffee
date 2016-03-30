@@ -211,3 +211,10 @@ Application.Filters.filter 'toArray', [ ->
         Object.defineProperty(val, '$key', {__proto__: null, value: key})
 
 ]
+
+Application.Filters.filter 'toIsoDate', [ ->
+  (date) ->
+    return date unless (date instanceof Date || moment.isMoment(date))
+    moment(date).format('YYYY-MM-DD')
+
+]

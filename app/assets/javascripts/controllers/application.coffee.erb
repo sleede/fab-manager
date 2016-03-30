@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '$locale', '_t'
-, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, $locale, _t) ->
+Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t'
+, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t) ->
 
 
 
@@ -66,7 +66,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
       controller: ['$scope', '$uibModalInstance', 'Group', 'CustomAsset', ($scope, $uibModalInstance, Group, CustomAsset) ->
         # default parameters for the date picker in the account creation modal
         $scope.datePicker =
-          format: $locale.DATETIME_FORMATS.shortDate
+          format: Fablab.uibDateFormat
           opened: false
           options:
             startingDay: Fablab.weekStartingDay

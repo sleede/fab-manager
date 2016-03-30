@@ -23,7 +23,7 @@
 #  - $state (Ui-Router) [ 'app.public.events_list' ]
 ##
 class EventsController
-  constructor: ($scope, $state, $locale, Event, Category) ->
+  constructor: ($scope, $state, Event, Category) ->
 
     ## Retrieve the list of categories from the server (stage, atelier, ...)
     Category.query().$promise.then (data)->
@@ -33,7 +33,7 @@ class EventsController
 
     ## default parameters for AngularUI-Bootstrap datepicker
     $scope.datePicker =
-      format: $locale.DATETIME_FORMATS.shortDate
+      format: Fablab.uibDateFormat
       startOpened: false # default: datePicker is not shown
       endOpened: false
       recurrenceEndOpened: false
@@ -242,7 +242,7 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
   ## Using the EventsController
-  new EventsController($scope, $state, $locale, Event, Category)
+  new EventsController($scope, $state, Event, Category)
 ]
 
 
@@ -286,7 +286,7 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
     $scope.event.end_date = moment($scope.event.end_date).toDate()
 
     ## Using the EventsController
-    new EventsController($scope, $state, $locale, Event, Category)
+    new EventsController($scope, $state, Event, Category)
 
 
 
