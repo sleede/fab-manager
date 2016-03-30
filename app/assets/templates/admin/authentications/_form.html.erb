@@ -20,7 +20,7 @@
                 class="form-control"
                 name="auth_provider[providable_type]"
                 id="provider_type"
-                ng-options="key as value for (key, value) in authMethods"
+                ng-options="key as (value | translate) for (key, value) in authMethods"
                 ng-disabled="mode == 'edition'"
                 required>
         </select>

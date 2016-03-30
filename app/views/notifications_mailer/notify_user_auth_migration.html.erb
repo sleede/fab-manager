@@ -14,12 +14,20 @@
 
 <% active_provider = AuthProvider.active %>
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+<%
+  url_path = user_omniauth_authorize_path(active_provider.strategy_name.to_sym)
+  if url_path[0] == '/' and root_url[-1] == '/'
+    url_path = root_url + url_path[1..-1]
+  else
+    url_path = root_url + url_path
+  end
+%>
 
 <p><%= t(".body.the_platform") %> <%= Setting.find_by(name: 'fablab_name').value %> <%= t(".body.is_changing_its_auth_system_and_will_now_use") %> <%= active_provider.name %> <%= t(".body.instead_of") %> <%= AuthProvider.find_by(status: 'previous').name %>.</p>
 
 <p><%= t('.body.consequence_of_the_modification') %></p>
 
-<p><%= t('.body.to_use_the_platform_thanks_for') %> <a href="<%= root_url+user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>?auth_token=<%= @attached_object.auth_token %>" target="_blank">
+<p><%= t('.body.to_use_the_platform_thanks_for') %> <a href="<%=url_path%>?auth_token=<%= @attached_object.auth_token %>" target="_blank">
     <%= t('.body.create_an_account_on') %> <%= active_provider.name %> <%= t('.body.or_use_an_existing_account_clicking_here') %></a></p>
 
 <p><%= t('.body.in_case_of_problem_enter_the_following_code') %></p>

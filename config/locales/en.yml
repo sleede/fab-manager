@@ -37,11 +37,11 @@ en:
       <<: *errors
 
   omniauth:
-    # messages d'erreur lors de l'import d'un compte depuis un SSO
+    # error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail address \"%{OLD_MAIL}\" is already linked to another account, please input your authentication code."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Your username (%{USERNAME}) is already linked to another account, unable to update it."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) is already linked to another account, unable to update it."
-    this_account_is_already_linked_to_an_user_of_the_platform: "This account %{NAME} is already linked to an user of the platform."
+    this_account_is_already_linked_to_an_user_of_the_platform: "This %{NAME} account is already linked to an user of the platform."
 
   availabilities:
     # availability slots in the calendar

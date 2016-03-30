@@ -88,18 +88,27 @@
     <section class="widget panel b-a m m-t-lg" ng-show="ctrl.member">
       <div class="panel-heading b-b">
           <h3 ng-show="currentUser.role != 'admin'" translate>{{ 'my_group' }}</h3>
-          <h3 ng-show="currentUser.role === 'admin'">{{ 'his_group' | translate:{GENDER:getGender(currentUser)}:"messageformat" }}</h3>
+          <h3 ng-show="currentUser.role === 'admin'" translate translate-values="{GENDER:getGender(currentUser)}" translate-interpolation="messageformat">{{ 'his_group' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
           <div ng-show="!changeGroup">
               <div class="well well-warning">
                   <strong>{{getUserGroup().name}}</strong>
               </div>
-              <button class="btn btn-default m-t" ng-click="changeGroup = !changeGroup"  ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paidPlan)">{{ 'he_wants_to_change_group' | translate:{ROLE:currentUser.role}:"messageformat" }}</button>
+              <button class="btn btn-default m-t"
+                      ng-click="changeGroup = !changeGroup"
+                      ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paidPlan)"
+                      translate
+                      translate-values="{ROLE:currentUser.role}"
+                      translate-interpolation="messageformat">{{ 'he_wants_to_change_group' }}</button>
           </div>
           <div ng-show="changeGroup">
               <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="userGroup"></select>
-              <button class="btn btn-success m-t" ng-click="selectGroup()" translate translate-values="{ROLE:currentUser.role, GENDER:getGender(currentUser)}" translate-interpolation="messageformat">{{ 'change_my_group' }}</button>
+              <button class="btn btn-success m-t"
+                      ng-click="selectGroup()"
+                      translate
+                      translate-values="{ROLE:currentUser.role, GENDER:getGender(currentUser)}"
+                      translate-interpolation="messageformat">{{ 'change_my_group' }}</button>
           </div>
       </div>
     </section>

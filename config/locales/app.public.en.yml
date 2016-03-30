@@ -134,7 +134,7 @@ en:
         project_description: "Project description"
         by_name: "By {{NAME}}"  # angular interpolation
         posted_on_: "Posted on"
-        CAD_file_to_download: "{COUNT, plural, =0{No CAD file} =1{CAD file to download} other{CAD files to download}"  # messageFormat interpolation
+        CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"  # messageFormat interpolation
         licence: "Licence"
         report_an_abuse: "Report an abuse"
         unauthorized_operation: "Unauthorized operation"
