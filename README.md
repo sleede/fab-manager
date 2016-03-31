@@ -95,25 +95,26 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
    ```bash
    bundle install
    ```
+   
+7. Create the default configuration files **and configure them!** (see the [Environment Configuration](#environment-configuration) section)
+   
+   ```bash
+   cp config/database.yml.default config/database.yml
+   cp config/application.yml.default config/application.yml
+   vi config/application.yml 
+   # or use your favorite text editor instead of vi (nano, ne...)
+   ```
   
-7. Build the database. You may have to follow the steps described in [the PostgreSQL installation chapter](#postgresql) before, if you don't already have a working installation of PostgreSQL.
+8. Build the database. You may have to follow the steps described in [the PostgreSQL installation chapter](#postgresql) before, if you don't already have a working installation of PostgreSQL.
 
    ```bash
    rake db:setup
    ```
   
-8. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
+9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
 
    ```bash
    mkdir -p tmp/pids
-   ```
-   
-9. Create the default configuration file **and configure it !** (see the [Environment Configuration](#environment-configuration) section)
-   
-   ```bash
-   cp config/application.yml.default config/application.yml
-   vi config/application.yml 
-   # or use your favorite editor instead of vi (nano, ne...)  
    ```
   
 10. Start the development web server
