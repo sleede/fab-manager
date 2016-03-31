@@ -79,7 +79,6 @@ en:
         from_time: "From" # context: time. eg. "from 18:00 to 21:00"
         to_date: "to" # context: date. eg: "from 01/01 to 01/05"
         to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
-        _the_general_terms_and_conditions: "the general terms and conditions."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -143,6 +142,7 @@ en:
       stripe:
         # stripe payment modal
         i_have_read_and_accept_: "I have read, and accept"
+        _the_general_terms_and_conditions: "the general terms and conditions."
         enter_your_card_number: "Enter your card number"
         confirm_my_payment_of_: "Confirm my payment of"  # context: confirm my payment of $20.00
 
