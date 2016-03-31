@@ -179,8 +179,22 @@
             <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
           </div>
         </div>
+        <div class="form-group" ng-class="{'has-error': signupForm.cgv.$dirty && signupForm.cgv.$invalid}" ng-show="cgv">
+          <div class="col-sm-12">
+            <input type="checkbox"
+                   name="cgv"
+                   ng-model="user.cgv"
+                   value="true"
+                   ng-required="cgv != null"/>
+            <span translate>{{ 'i_ve_read_and_i_accept_' }}</span>
+            <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a>
+          </div>
+        </div>
         <div ng-if="!cgu">
             <input type="hidden" name="cgu" ng-model="user.cgu" value="true">
+        </div>
+        <div ng-if="!cgv">
+          <input type="hidden" name="cgv" ng-model="user.cgv" value="true">
         </div>
       </form>
     </div>
