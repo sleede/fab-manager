@@ -92,6 +92,7 @@ fr:
       about:
         # page à propos
         read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
+        read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
         your_fablab_s_contacts: "Vos contacts au Fab Lab"
 
       home:

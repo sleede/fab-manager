@@ -16,4 +16,8 @@ Application.Controllers.controller "AboutController", ['$scope', 'Setting', 'Cus
   # retrieve the CGU
   CustomAsset.get {name: 'cgu-file'}, (cgu) ->
     $scope.cgu = cgu.custom_asset
+
+  # retrieve the CGV
+  CustomAsset.get {name: 'cgv-file'}, (cgv) ->
+    $scope.cgv = cgv.custom_asset
 ]
