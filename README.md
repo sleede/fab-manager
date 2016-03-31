@@ -81,7 +81,7 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
    ```bash
    cd fab-manager
    rvm current
-   # Must print ruby-X.Y.Z@fablab (where X.Y.Z match the version in .ruby-version)
+   # Must print ruby-X.Y.Z@fab-manager (where X.Y.Z match the version in .ruby-version)
    ```
   
 5. Install bundler in the current RVM gemset
