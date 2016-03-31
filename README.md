@@ -269,7 +269,7 @@ Otherwise, please follow the official instructions on the project's website.
 <a name="setup-fabmanager-in-postgresql"></a>
 ### Setup the FabManager database in PostgreSQL
 
-Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml) for the `development` environment exists.
+Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
 To create it, please follow these instructions:
 
 1. Login as the postgres user
