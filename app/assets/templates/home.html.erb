@@ -48,21 +48,21 @@
 		  </div>
 
 			<div class="row m-n">
-              <div class="col-md-6 b-b b-r block-link"  ng-repeat="member in lastMembers" ui-sref="app.logged.members_show({id:member.slug})">
+        <div class="col-md-6 b-b b-r block-link"  ng-repeat="member in lastMembers" ui-sref="app.logged.members_show({id:member.slug})">
 
 
-				<div class="padder-v">
-					<span class="avatar avatar-block text-center">
-            <fab-user-avatar ng-model="member.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
-						<!-- <i class="on b-white bottom"></i> -->
-						<a ><span class="user-name m-l-sm text-black m-t-xs">{{member.name}}</span></a>
-					</span>
-				</div>
+          <div class="padder-v">
+            <span class="avatar avatar-block text-center">
+              <fab-user-avatar ng-model="member.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
+              <!-- <i class="on b-white bottom"></i> -->
+              <a ><span class="user-name m-l-sm text-black m-t-xs">{{member.name}}</span></a>
+            </span>
+          </div>
 
-              </div>
+        </div>
                 <!-- TODO EVEN <div class="col-md-6 b-b"> -->
 
-            </div>
+      </div>
 			<div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()">
 				<button href="#" ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'create_an_account' }}</button>
 			</div>
