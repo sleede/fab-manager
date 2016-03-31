@@ -79,6 +79,7 @@ en:
         from_time: "From" # context: time. eg. "from 18:00 to 21:00"
         to_date: "to" # context: date. eg: "from 01/01 to 01/05"
         to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
+        or: "or"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
