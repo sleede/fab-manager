@@ -75,7 +75,7 @@ class API::MembersController < API::ApiController
     head :no_content
   end
 
-  # export abonnements
+  # export subscriptions
   def export_subscriptions
     authorize :export
     @datas = Subscription.includes(:plan, :user).all

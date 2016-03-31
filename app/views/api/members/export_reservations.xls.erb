@@ -2,6 +2,7 @@
   <tr>
     <th><%=t('export_reservations.customer_id')%></th>
     <th><%=t('export_reservations.customer')%></th>
+    <th><%=t('export_reservations.email')%></th>
     <th><%=t('export_reservations.reservation_date')%></th>
     <th><%=t('export_reservations.reservation_type')%></th>
     <th><%=t('export_reservations.reservation_object')%></th>
@@ -12,6 +13,7 @@
   <tr>
     <td><%= d.user.id %></td>
     <td><%= d.user.profile.full_name %></td>
+    <td><%= d.user.email %></td>
     <td><%= d.created_at %></td>
     <td><%= d.reservable_type %></td>
     <td><%= d.reservable.name if !d.reservable.nil? %></td>

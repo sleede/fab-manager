@@ -129,6 +129,7 @@ fr:
     # export de la liste des réservations machines/formations/évènements au format EXCEL
     customer_id: "ID client"
     customer: "Client"
+    email: "Courriel"
     reservation_date: "Date de réservation"
     reservation_type: "Type de réservation"
     reservation_object: "Objet de la réservation"

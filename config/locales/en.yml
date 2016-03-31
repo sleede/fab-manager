@@ -129,6 +129,7 @@ en:
     # machines/trainings/events reservations list to EXCEL format
     customer_id: "Customer ID"
     customer: "Customer"
+    email: "E-mail"
     reservation_date: "Reservation date"
     reservation_type: "Reservation type"
     reservation_object: "Reservation object"
