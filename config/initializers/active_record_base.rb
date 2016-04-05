@@ -6,4 +6,13 @@ ActiveRecord::Base.class_eval do
         to_yaml.sub!(/---\s?/, "\n"))
     end
   end
+
+  def self.dump_fixtures
+    fixture_file = "#{Rails.root}/test/fixtures/#{self.table_name}.yml"
+    File.open(fixture_file, "w") do |f|
+      self.all.each do |instance|
+        f.puts({ "#{self.table_name.singularize}_#{instance.id}" => instance.attributes }.to_yaml.sub!(/---\s?/, "\n"))
+      end
+    end
+  end
 end

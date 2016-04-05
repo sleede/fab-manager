@@ -177,4 +177,13 @@ namespace :fablab do
 
     puts "\nUsers successfully notified\n\n"
   end
+
+  desc "generate fixtures from db"
+  task generate_fixtures: :environment do
+    Rails.application.eager_load!
+    ActiveRecord::Base.descendants.reject { |c| c == ActiveRecord::SchemaMigration }.each do |ar_base|
+      p "========== #{ar_base} =============="
+      ar_base.dump_fixtures
+    end
+  end
 end
