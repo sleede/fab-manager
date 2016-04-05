@@ -20,7 +20,8 @@ class Availability < ActiveRecord::Base
 
   attr_accessor :is_reserved, :slot_id, :can_modify
 
-  validate :length_must_be_1h_minimum
+  validates :start_at, :end_at, presence: true
+  validate :length_must_be_1h_minimum, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
 
   def safe_destroy
