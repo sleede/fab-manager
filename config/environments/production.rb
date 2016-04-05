@@ -92,7 +92,9 @@ Rails.application.configure do
     :address   => Rails.application.secrets.smtp_address,
     :port      => Rails.application.secrets.smtp_port,
     :user_name => Rails.application.secrets.smtp_user_name,
-    :password  => Rails.application.secrets.smtp_password
+    :password  => Rails.application.secrets.smtp_password,
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
   }
 
   # use :smtp for switch prod
