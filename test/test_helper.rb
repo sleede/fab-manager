@@ -12,6 +12,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   fixtures :all
+
+  def json_response(body)
+    JSON.parse(body, symbolize_names: true)
+  end
 end
 
 class ActionDispatch::IntegrationTest
