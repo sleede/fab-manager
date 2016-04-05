@@ -155,7 +155,7 @@ DNS name or IP address of the server hosting the elasticSearch database.
     SECRET_KEY_BASE
 
 Used by the authentication system to generate random tokens, eg. for resetting passwords.
-Used by Rails to generate the integrity of signed cookies.
+Used by Rails to verify the integrity of signed cookies.
 You can generate such a random key by running `rake secret`.
 
     STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
@@ -174,8 +174,8 @@ So set this setting carefully before starting the application for the first time
 
     INVOICE_PREFIX
 
-When payments are done on the platform, an invoice will be generate as a PDF file.
-This value configure the prefix of the PDF file name.
+When payments are done on the platform, an invoice will be generated as a PDF file.
+The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoice date) .pdf"
 
     FABLAB_WITHOUT_PLANS
 
@@ -203,7 +203,7 @@ Identifier of your Google Analytics account.
     DISQUS_SHORTNAME
 
 Unique identifier of your [Disqus](http://www.disqus.com) forum.
-Disquq forums are used to allow visitors to comment on projects.
+Disqus forums are used to allow visitors to comment on projects.
 See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more informations.
 
     TWITTER_NAME
@@ -213,6 +213,7 @@ Identifier of the Twitter account, for witch the last tweet will be displayed on
     TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
 
 Keys and secrets to access the twitter API.
+Retrieve them from https://apps.twitter.com
 
     Settings related to i18n
 
@@ -443,7 +444,9 @@ If you are in a development environment, your can keep the default values, other
 #### Settings
     RAILS_LOCALE
 
-Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured rails_locale. 
+Configure Ruby on Rails for l10n.
+
+Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured RAILS_LOCALE. 
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
 
 Be aware that **this file MUST contain the CURRENCY symbol used to generate invoices** (among other things). 
