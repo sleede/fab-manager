@@ -11,8 +11,15 @@ ActiveRecord::Base.class_eval do
     fixture_file = "#{Rails.root}/test/fixtures/#{self.table_name}.yml"
     mode = (File.exists?(fixture_file) ? 'a' : 'w')
     File.open(fixture_file, mode) do |f|
-      self.all.each do |instance|
-        f.puts({ "#{self.table_name.singularize}_#{instance.id}" => instance.attributes }.to_yaml.sub!(/---\s?/, "\n"))
+
+      if self.attribute_names.include?("id")
+        self.all.each do |instance|
+          f.puts({ "#{self.table_name.singularize}_#{instance.id}" => instance.attributes }.to_yaml.sub!(/---\s?/, "\n"))
+        end
+      else
+        self.all.each_with_index do |instance, i|
+          f.puts({ "#{self.table_name.singularize}_#{i}" => instance.attributes }.to_yaml.sub!(/---\s?/, "\n"))
+        end
       end
     end
   end
