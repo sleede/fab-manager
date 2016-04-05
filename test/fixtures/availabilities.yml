@@ -1,11 +1,110 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+availability_1:
+  id: 1
+  start_at: 2016-04-11 06:00:00.000000000 Z
+  end_at: 2016-04-11 10:00:00.000000000 Z
+  available_type: training
+  created_at: 2016-04-04 15:24:01.517486000 Z
+  updated_at: 2016-04-04 15:24:01.517486000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_2:
+  id: 2
+  start_at: 2016-04-12 06:00:00.000000000 Z
+  end_at: 2016-04-12 10:00:00.000000000 Z
+  available_type: training
+  created_at: 2016-04-04 15:24:09.169364000 Z
+  updated_at: 2016-04-04 15:24:09.169364000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_3:
+  id: 3
+  start_at: 2016-04-11 12:00:00.000000000 Z
+  end_at: 2016-04-11 18:00:00.000000000 Z
+  available_type: machines
+  created_at: 2016-04-04 15:24:27.587583000 Z
+  updated_at: 2016-04-04 15:24:27.587583000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_4:
+  id: 4
+  start_at: 2016-04-12 12:00:00.000000000 Z
+  end_at: 2016-04-12 18:00:00.000000000 Z
+  available_type: machines
+  created_at: 2016-04-04 15:24:44.044908000 Z
+  updated_at: 2016-04-04 15:24:44.044908000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_5:
+  id: 5
+  start_at: 2016-04-13 12:00:00.000000000 Z
+  end_at: 2016-04-13 18:00:00.000000000 Z
+  available_type: machines
+  created_at: 2016-04-04 15:25:48.584444000 Z
+  updated_at: 2016-04-04 15:25:48.584444000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_6:
+  id: 6
+  start_at: 2016-04-14 12:00:00.000000000 Z
+  end_at: 2016-04-14 18:00:00.000000000 Z
+  available_type: machines
+  created_at: 2016-04-04 15:26:17.953216000 Z
+  updated_at: 2016-04-04 15:26:17.953216000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_7:
+  id: 7
+  start_at: 2016-04-14 12:00:00.000000000 Z
+  end_at: 2016-04-14 18:00:00.000000000 Z
+  available_type: machines
+  created_at: 2016-04-04 15:26:39.278627000 Z
+  updated_at: 2016-04-04 15:26:39.278627000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_8:
+  id: 8
+  start_at: 2016-04-13 06:00:00.000000000 Z
+  end_at: 2016-04-13 10:00:00.000000000 Z
+  available_type: training
+  created_at: 2016-04-04 15:26:49.572724000 Z
+  updated_at: 2016-04-04 15:26:49.572724000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_9:
+  id: 9
+  start_at: 2016-04-18 16:00:28.000000000 Z
+  end_at: 2016-04-18 20:00:28.000000000 Z
+  available_type: event
+  created_at: 2016-04-04 15:44:02.228661000 Z
+  updated_at: 2016-04-04 15:44:02.228661000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_10:
+  id: 10
+  start_at: 2016-05-18 16:00:28.000000000 Z
+  end_at: 2016-05-18 20:00:28.000000000 Z
+  available_type: event
+  created_at: 2016-04-04 15:44:03.156629000 Z
+  updated_at: 2016-04-04 15:44:03.156629000 Z
+  nb_total_places: 
+  destroying: false
+
+availability_11:
+  id: 11
+  start_at: 2016-06-18 16:00:28.000000000 Z
+  end_at: 2016-06-18 20:00:28.000000000 Z
+  available_type: event
+  created_at: 2016-04-04 15:44:04.023557000 Z
+  updated_at: 2016-04-04 15:44:04.023557000 Z
+  nb_total_places: 
+  destroying: false

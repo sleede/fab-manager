@@ -1,0 +1,63 @@
+
+statistic_index_1:
+  id: 1
+  es_type_key: subscription
+  label: Abonnements
+  created_at: 2016-04-04 14:11:33.355566000 Z
+  updated_at: 2016-04-04 14:11:33.355566000 Z
+  table: true
+  ca: true
+
+statistic_index_2:
+  id: 2
+  es_type_key: machine
+  label: Heures machines
+  created_at: 2016-04-04 14:11:33.359367000 Z
+  updated_at: 2016-04-04 14:11:33.359367000 Z
+  table: true
+  ca: true
+
+statistic_index_3:
+  id: 3
+  es_type_key: training
+  label: Formations
+  created_at: 2016-04-04 14:11:33.362171000 Z
+  updated_at: 2016-04-04 14:11:33.362171000 Z
+  table: true
+  ca: true
+
+statistic_index_4:
+  id: 4
+  es_type_key: event
+  label: Ateliers/Stages
+  created_at: 2016-04-04 14:11:33.366381000 Z
+  updated_at: 2016-04-04 14:11:33.366381000 Z
+  table: true
+  ca: true
+
+statistic_index_5:
+  id: 5
+  es_type_key: account
+  label: Inscriptions
+  created_at: 2016-04-04 14:11:33.369042000 Z
+  updated_at: 2016-04-04 14:11:33.369042000 Z
+  table: true
+  ca: false
+
+statistic_index_6:
+  id: 6
+  es_type_key: project
+  label: Projets
+  created_at: 2016-04-04 14:11:33.373066000 Z
+  updated_at: 2016-04-04 14:11:33.373066000 Z
+  table: true
+  ca: false
+
+statistic_index_7:
+  id: 7
+  es_type_key: user
+  label: Utilisateurs
+  created_at: 2016-04-04 14:11:33.376810000 Z
+  updated_at: 2016-04-04 14:11:33.376810000 Z
+  table: false
+  ca: false

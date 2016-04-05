@@ -1,0 +1,80 @@
+
+trainings_pricing_1:
+  id: 1
+  group_id: 1
+  amount: 5100
+  created_at: 2016-04-04 14:11:34.062630000 Z
+  updated_at: 2016-04-04 14:11:34.062630000 Z
+  training_id: 1
+
+trainings_pricing_2:
+  id: 2
+  group_id: 2
+  amount: 4500
+  created_at: 2016-04-04 14:11:34.065365000 Z
+  updated_at: 2016-04-04 14:11:34.065365000 Z
+  training_id: 1
+
+trainings_pricing_5:
+  id: 5
+  group_id: 1
+  amount: 2900
+  created_at: 2016-04-04 14:11:34.091905000 Z
+  updated_at: 2016-04-04 14:11:34.091905000 Z
+  training_id: 2
+
+trainings_pricing_6:
+  id: 6
+  group_id: 2
+  amount: 1700
+  created_at: 2016-04-04 14:11:34.093952000 Z
+  updated_at: 2016-04-04 14:11:34.093952000 Z
+  training_id: 2
+
+trainings_pricing_9:
+  id: 9
+  group_id: 1
+  amount: 3000
+  created_at: 2016-04-04 14:11:34.122221000 Z
+  updated_at: 2016-04-04 14:11:34.122221000 Z
+  training_id: 3
+
+trainings_pricing_10:
+  id: 10
+  group_id: 2
+  amount: 2600
+  created_at: 2016-04-04 14:11:34.124626000 Z
+  updated_at: 2016-04-04 14:11:34.124626000 Z
+  training_id: 3
+
+trainings_pricing_13:
+  id: 13
+  group_id: 1
+  amount: 5200
+  created_at: 2016-04-04 14:11:34.143982000 Z
+  updated_at: 2016-04-04 14:11:34.143982000 Z
+  training_id: 4
+
+trainings_pricing_14:
+  id: 14
+  group_id: 2
+  amount: 4400
+  created_at: 2016-04-04 14:11:34.145380000 Z
+  updated_at: 2016-04-04 14:11:34.145380000 Z
+  training_id: 4
+
+trainings_pricing_17:
+  id: 17
+  group_id: 1
+  amount: 1800
+  created_at: 2016-04-04 14:11:34.165146000 Z
+  updated_at: 2016-04-04 14:11:34.165146000 Z
+  training_id: 5
+
+trainings_pricing_18:
+  id: 18
+  group_id: 2
+  amount: 1900
+  created_at: 2016-04-04 14:11:34.166759000 Z
+  updated_at: 2016-04-04 14:11:34.166759000 Z
+  training_id: 5

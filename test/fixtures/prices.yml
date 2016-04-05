@@ -1,0 +1,300 @@
+
+price_1:
+  id: 1
+  group_id: 1
+  plan_id: 
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 2400
+  created_at: 2016-04-04 14:11:34.242608000 Z
+  updated_at: 2016-04-04 14:11:34.242608000 Z
+
+price_2:
+  id: 2
+  group_id: 2
+  plan_id: 
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 5300
+  created_at: 2016-04-04 14:11:34.247363000 Z
+  updated_at: 2016-04-04 14:11:34.247363000 Z
+
+price_5:
+  id: 5
+  group_id: 1
+  plan_id: 
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 4200
+  created_at: 2016-04-04 14:11:34.290427000 Z
+  updated_at: 2016-04-04 14:11:34.290427000 Z
+
+price_6:
+  id: 6
+  group_id: 2
+  plan_id: 
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 1100
+  created_at: 2016-04-04 14:11:34.293603000 Z
+  updated_at: 2016-04-04 14:11:34.293603000 Z
+
+price_9:
+  id: 9
+  group_id: 1
+  plan_id: 
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 4100
+  created_at: 2016-04-04 14:11:34.320809000 Z
+  updated_at: 2016-04-04 14:11:34.320809000 Z
+
+price_10:
+  id: 10
+  group_id: 2
+  plan_id: 
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 5300
+  created_at: 2016-04-04 14:11:34.325274000 Z
+  updated_at: 2016-04-04 14:11:34.325274000 Z
+
+price_13:
+  id: 13
+  group_id: 1
+  plan_id: 
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 900
+  created_at: 2016-04-04 14:11:34.362313000 Z
+  updated_at: 2016-04-04 14:11:34.362313000 Z
+
+price_14:
+  id: 14
+  group_id: 2
+  plan_id: 
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 5100
+  created_at: 2016-04-04 14:11:34.366049000 Z
+  updated_at: 2016-04-04 14:11:34.366049000 Z
+
+price_17:
+  id: 17
+  group_id: 1
+  plan_id: 
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 1600
+  created_at: 2016-04-04 14:11:34.398206000 Z
+  updated_at: 2016-04-04 14:11:34.398206000 Z
+
+price_18:
+  id: 18
+  group_id: 2
+  plan_id: 
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 2000
+  created_at: 2016-04-04 14:11:34.407216000 Z
+  updated_at: 2016-04-04 14:11:34.407216000 Z
+
+price_21:
+  id: 21
+  group_id: 1
+  plan_id: 
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 3200
+  created_at: 2016-04-04 14:11:34.442054000 Z
+  updated_at: 2016-04-04 14:11:34.442054000 Z
+
+price_22:
+  id: 22
+  group_id: 2
+  plan_id: 
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 3400
+  created_at: 2016-04-04 14:11:34.445147000 Z
+  updated_at: 2016-04-04 14:11:34.445147000 Z
+
+price_25:
+  id: 25
+  group_id: 1
+  plan_id: 1
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:15:21.038387000 Z
+  updated_at: 2016-04-04 15:15:45.691674000 Z
+
+price_26:
+  id: 26
+  group_id: 1
+  plan_id: 1
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:15:21.048838000 Z
+  updated_at: 2016-04-04 15:15:45.693896000 Z
+
+price_27:
+  id: 27
+  group_id: 1
+  plan_id: 1
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 2500
+  created_at: 2016-04-04 15:15:21.053412000 Z
+  updated_at: 2016-04-04 15:15:45.697794000 Z
+
+price_28:
+  id: 28
+  group_id: 1
+  plan_id: 1
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:15:21.057117000 Z
+  updated_at: 2016-04-04 15:15:45.700657000 Z
+
+price_29:
+  id: 29
+  group_id: 1
+  plan_id: 1
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 1300
+  created_at: 2016-04-04 15:15:21.061171000 Z
+  updated_at: 2016-04-04 15:15:45.707564000 Z
+
+price_30:
+  id: 30
+  group_id: 1
+  plan_id: 1
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:15:21.065166000 Z
+  updated_at: 2016-04-04 15:15:45.710945000 Z
+
+price_31:
+  id: 31
+  group_id: 1
+  plan_id: 2
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:17:24.920457000 Z
+  updated_at: 2016-04-04 15:17:34.255229000 Z
+
+price_32:
+  id: 32
+  group_id: 1
+  plan_id: 2
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:17:24.926967000 Z
+  updated_at: 2016-04-04 15:17:34.257285000 Z
+
+price_33:
+  id: 33
+  group_id: 1
+  plan_id: 2
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 2500
+  created_at: 2016-04-04 15:17:24.932723000 Z
+  updated_at: 2016-04-04 15:17:34.258741000 Z
+
+price_34:
+  id: 34
+  group_id: 1
+  plan_id: 2
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:17:24.937168000 Z
+  updated_at: 2016-04-04 15:17:34.260503000 Z
+
+price_35:
+  id: 35
+  group_id: 1
+  plan_id: 2
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 1300
+  created_at: 2016-04-04 15:17:24.940520000 Z
+  updated_at: 2016-04-04 15:17:34.263627000 Z
+
+price_36:
+  id: 36
+  group_id: 1
+  plan_id: 2
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:17:24.944460000 Z
+  updated_at: 2016-04-04 15:17:34.267328000 Z
+
+price_37:
+  id: 37
+  group_id: 2
+  plan_id: 3
+  priceable_id: 1
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.836899000 Z
+  updated_at: 2016-04-04 15:18:50.507019000 Z
+
+price_38:
+  id: 38
+  group_id: 2
+  plan_id: 3
+  priceable_id: 2
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.842674000 Z
+  updated_at: 2016-04-04 15:18:50.508799000 Z
+
+price_39:
+  id: 39
+  group_id: 2
+  plan_id: 3
+  priceable_id: 3
+  priceable_type: Machine
+  amount: 1500
+  created_at: 2016-04-04 15:18:28.847736000 Z
+  updated_at: 2016-04-04 15:18:50.510437000 Z
+
+price_40:
+  id: 40
+  group_id: 2
+  plan_id: 3
+  priceable_id: 4
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.852783000 Z
+  updated_at: 2016-04-04 15:18:50.512239000 Z
+
+price_41:
+  id: 41
+  group_id: 2
+  plan_id: 3
+  priceable_id: 5
+  priceable_type: Machine
+  amount: 800
+  created_at: 2016-04-04 15:18:28.856602000 Z
+  updated_at: 2016-04-04 15:18:50.514062000 Z
+
+price_42:
+  id: 42
+  group_id: 2
+  plan_id: 3
+  priceable_id: 6
+  priceable_type: Machine
+  amount: 1000
+  created_at: 2016-04-04 15:18:28.860220000 Z
+  updated_at: 2016-04-04 15:18:50.517702000 Z

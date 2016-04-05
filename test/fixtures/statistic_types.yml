@@ -1,0 +1,110 @@
+
+statistic_type_1:
+  id: 1
+  statistic_index_id: 2
+  key: booking
+  label: Réservations
+  graph: true
+  created_at: 2016-04-04 14:11:33.441638000 Z
+  updated_at: 2016-04-04 14:11:33.441638000 Z
+  simple: true
+
+statistic_type_2:
+  id: 2
+  statistic_index_id: 2
+  key: hour
+  label: Nombre d'heures
+  graph: true
+  created_at: 2016-04-04 14:11:33.445526000 Z
+  updated_at: 2016-04-04 14:11:33.445526000 Z
+  simple: false
+
+statistic_type_3:
+  id: 3
+  statistic_index_id: 3
+  key: booking
+  label: Réservations
+  graph: false
+  created_at: 2016-04-04 14:11:33.448982000 Z
+  updated_at: 2016-04-04 14:11:33.448982000 Z
+  simple: true
+
+statistic_type_4:
+  id: 4
+  statistic_index_id: 3
+  key: hour
+  label: Nombre d'heures
+  graph: false
+  created_at: 2016-04-04 14:11:33.452261000 Z
+  updated_at: 2016-04-04 14:11:33.452261000 Z
+  simple: false
+
+statistic_type_5:
+  id: 5
+  statistic_index_id: 4
+  key: booking
+  label: Nombre de places
+  graph: false
+  created_at: 2016-04-04 14:11:33.455220000 Z
+  updated_at: 2016-04-04 14:11:33.455220000 Z
+  simple: false
+
+statistic_type_6:
+  id: 6
+  statistic_index_id: 4
+  key: hour
+  label: Nombre d'heures
+  graph: false
+  created_at: 2016-04-04 14:11:33.457727000 Z
+  updated_at: 2016-04-04 14:11:33.457727000 Z
+  simple: false
+
+statistic_type_7:
+  id: 7
+  statistic_index_id: 5
+  key: member
+  label: Utilisateurs
+  graph: true
+  created_at: 2016-04-04 14:11:33.460565000 Z
+  updated_at: 2016-04-04 14:11:33.460565000 Z
+  simple: true
+
+statistic_type_8:
+  id: 8
+  statistic_index_id: 6
+  key: project
+  label: Projets
+  graph: false
+  created_at: 2016-04-04 14:11:33.463420000 Z
+  updated_at: 2016-04-04 14:11:33.463420000 Z
+  simple: true
+
+statistic_type_9:
+  id: 9
+  statistic_index_id: 7
+  key: revenue
+  label: Chiffre d'affaires
+  graph: false
+  created_at: 2016-04-04 14:11:33.466257000 Z
+  updated_at: 2016-04-04 14:11:33.466257000 Z
+  simple: false
+
+statistic_type_10:
+  id: 10
+  statistic_index_id: 1
+  key: '2592000'
+  label: 'Durée : one month'
+  graph: true
+  created_at: 2016-04-04 15:15:21.110438000 Z
+  updated_at: 2016-04-04 15:15:21.110438000 Z
+  simple: true
+
+statistic_type_11:
+  id: 11
+  statistic_index_id: 1
+  key: '5184000'
+  label: 'Durée : 2 months'
+  graph: true
+  created_at: 2016-04-04 15:17:24.950033000 Z
+  updated_at: 2016-04-04 15:17:24.950033000 Z
+  simple: true
