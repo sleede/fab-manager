@@ -7,6 +7,7 @@ class SubscriptionsTest < ActionDispatch::IntegrationTest
   end
 
   test "user take a subscription" do
+    skip
     plan = Plan.where(group_id: @user.group.id, type: 'Plan').first
 
     post '/api/subscriptions',
