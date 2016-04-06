@@ -50,4 +50,29 @@ class AbusesTest < ActionDispatch::IntegrationTest
       assert_includes notified_users_ids, adm.id, "Admin #{adm.id} was not notified"
     end
   end
+
+  # Incomplete abuse report
+  test 'visitor send an invalid report' do
+    project = Project.first
+
+    post '/api/abuses',
+         {
+             abuse: {
+                 signaled_type: 'Project',
+                 signaled_id: project.id,
+                 first_name: 'John',
+                 last_name: 'Wrong',
+                 email: '',
+                 message: ''
+             }
+         }.to_json,
+         {
+             'Accept' => Mime::JSON,
+             'Content-Type' => Mime::JSON.to_s
+         }
+
+    assert_equal 422, response.status, response.body
+    assert_match /can't be blank/, response.body
+  end
+
 end
