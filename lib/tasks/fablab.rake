@@ -26,14 +26,7 @@ namespace :fablab do
     start_date = Time.new(year.to_i, month.to_i, 1)
     end_date = start_date.next_month
     puts "-> Start regenerate the invoices between #{I18n.l start_date, format: :long} in #{I18n.l end_date-1.minute, format: :long}"
-    index = '000'
     invoices = Invoice.only_invoice.where("created_at >= :start_date AND created_at < :end_date", {start_date: start_date, end_date: end_date}).order(created_at: :asc)
-    invoices.each do |i|
-      i.update_columns(reference: "#{year.to_s[2..3]}#{'%02d' % month}#{index.next!}#{i.stp_invoice_id ? '/VL' : ''}")
-      if i.avoir
-        i.avoir.update_columns(reference: "#{year.to_s[2..3]}#{'%02d' % month}#{index.next!}/A")
-      end
-    end
     invoices.each(&:regenerate_invoice_pdf)
     puts "-> Done"
   end
