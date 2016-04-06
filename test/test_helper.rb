@@ -13,6 +13,8 @@ end
 Sidekiq::Testing.inline!
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
 
+require "stripe"
+
 
 
 class ActiveSupport::TestCase
@@ -22,6 +24,17 @@ class ActiveSupport::TestCase
 
   def json_response(body)
     JSON.parse(body, symbolize_names: true)
+  end
+
+  def stripe_card_token
+    Stripe::Token.create(
+        :card => {
+            :number => "4242424242424242",
+            :exp_month => 4,
+            :exp_year => DateTime.now.next_year.year,
+            :cvc => "314"
+        },
+    ).id
   end
 end
 

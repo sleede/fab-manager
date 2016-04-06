@@ -5,6 +5,8 @@ class Abuse < ActiveRecord::Base
 
   after_create :notify_admins_abuse_reported
 
+  validates :first_name, :last_name, :email, :message, :presence => true
+
 
   private
   def notify_admins_abuse_reported
