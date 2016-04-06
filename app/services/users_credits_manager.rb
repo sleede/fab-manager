@@ -1,4 +1,4 @@
-class UsersCreditManager
+class UsersCreditsManager
   attr_reader :manager
 
   def initialize(reservation)
