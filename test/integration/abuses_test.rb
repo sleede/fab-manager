@@ -66,7 +66,7 @@ class AbusesTest < ActionDispatch::IntegrationTest
          default_headers
 
     assert_equal 422, response.status, response.body
-    assert_match /can't be blank|doit être rempli/, response.body
+    assert_match /can't be blank/, response.body
   end
 
 end
