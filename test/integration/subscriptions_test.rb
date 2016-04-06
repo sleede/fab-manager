@@ -2,12 +2,11 @@ class SubscriptionsTest < ActionDispatch::IntegrationTest
 
 
   setup do
-    @user = User.find_by_username('jdupont')
+    @user = User.find_by_username('jdupond')
     login_as(@user, scope: :user)
   end
 
   test "user take a subscription" do
-    skip
     plan = Plan.where(group_id: @user.group.id, type: 'Plan').first
 
     post '/api/subscriptions',
