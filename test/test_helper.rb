@@ -13,7 +13,6 @@ end
 Sidekiq::Testing.inline!
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
 
-require "stripe"
 
 
 
@@ -24,6 +23,10 @@ class ActiveSupport::TestCase
 
   def json_response(body)
     JSON.parse(body, symbolize_names: true)
+  end
+
+  def default_headers
+    { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
   end
 
   def stripe_card_token
