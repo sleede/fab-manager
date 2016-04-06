@@ -1,13 +1,19 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'vcr'
 require 'sidekiq/testing'
-Sidekiq::Testing.fake!
-
 require 'minitest/reporters'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "test/vcr_cassettes"
+  config.hook_into :webmock
+end
+
+Sidekiq::Testing.inline!
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
 
-require "stripe"
+
 
 
 class ActiveSupport::TestCase
@@ -17,6 +23,10 @@ class ActiveSupport::TestCase
 
   def json_response(body)
     JSON.parse(body, symbolize_names: true)
+  end
+
+  def default_headers
+    { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
   end
 
   def stripe_card_token

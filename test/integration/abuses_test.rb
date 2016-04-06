@@ -28,10 +28,7 @@ class AbusesTest < ActionDispatch::IntegrationTest
                  message: 'This project is in infringement with the patent US5014921 A.'
              }
          }.to_json,
-         {
-             'Accept' => Mime::JSON,
-             'Content-Type' => Mime::JSON.to_s
-         }
+         default_headers
 
     # Check response format & status
     assert_equal 201, response.status, response.body
@@ -66,13 +63,10 @@ class AbusesTest < ActionDispatch::IntegrationTest
                  message: ''
              }
          }.to_json,
-         {
-             'Accept' => Mime::JSON,
-             'Content-Type' => Mime::JSON.to_s
-         }
+         default_headers
 
     assert_equal 422, response.status, response.body
-    assert_match /can't be blank/, response.body
+    assert_match /can't be blank|doit être rempli/, response.body
   end
 
 end
