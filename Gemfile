@@ -58,6 +58,8 @@ group :test do
   gem 'faker'
   gem 'test_after_commit'
   gem 'minitest-reporters'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :production do
