@@ -9,18 +9,16 @@ class SubscriptionsTest < ActionDispatch::IntegrationTest
   test "user take a subscription" do
     plan = Plan.where(group_id: @user.group.id, type: 'Plan').first
 
-    post '/api/subscriptions',
-         {
-           subscription: {
-             plan_id: plan.id,
-             user_id: @user.id,
-             card_token: stripe_card_token
-           }
-         }.to_json,
-         {
-           'Accept' => Mime::JSON,
-           'Content-Type' => Mime::JSON.to_s
-         }
+    VCR.use_cassette("subscriptions_user_create_success") do
+      post '/api/subscriptions',
+           {
+             subscription: {
+               plan_id: plan.id,
+               user_id: @user.id,
+               card_token: stripe_card_token
+             }
+           }.to_json, default_headers
+  end
 
     assert_equal 201, response.status, response.body
     assert_equal Mime::JSON, response.content_type
