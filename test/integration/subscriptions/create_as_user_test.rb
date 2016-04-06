@@ -18,7 +18,7 @@ class CreateAsUserTest < ActionDispatch::IntegrationTest
                card_token: stripe_card_token
              }
            }.to_json, default_headers
-  end
+    end
 
     # Check response format & status
     assert_equal 201, response.status, response.body
