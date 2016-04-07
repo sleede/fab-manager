@@ -89,6 +89,8 @@ module UsersCredits
 
       private
         def _will_use_credits?
+          return false, 0 unless plan
+
           if machine_credit = plan.machine_credits.find_by(creditable_id: reservation.reservable_id)
             users_credit = user.users_credits.find_by(credit_id: machine_credit.id)
             already_used_hours = users_credit ? users_credit.hours_used : 0
@@ -122,6 +124,8 @@ module UsersCredits
 
       private
         def _will_use_credits?
+          return false, nil unless plan
+
           # if there is a training_credit defined for this plan and this training
           if training_credit = plan.training_credits.find_by(creditable_id: reservation.reservable_id)
             # if user has not used all the plan credits

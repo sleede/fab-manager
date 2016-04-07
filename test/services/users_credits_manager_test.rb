@@ -6,12 +6,28 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     @training = Training.find(2)
     @plan = Plan.find(3)
     @user = User.joins(:subscriptions).find_by(subscriptions: { plan: @plan })
+    @user.users_credits.destroy_all
     @availability = @machine.availabilities.first
     @reservation_machine = Reservation.new(user: @user, reservable: @machine)
     @reservation_training = Reservation.new(user: @user, reservable: @training)
   end
 
   ## context machine reservation
+  test "machine reservation from user without subscribed plan" do
+    @user.subscriptions.destroy_all
+
+    @reservation_machine.assign_attributes(slots_attributes: [{
+      start_at: @availability.start_at, end_at: @availability.start_at + 1.hour, availability_id: @availability.id
+    }])
+    manager = UsersCredits::Manager.new(reservation: @reservation_machine)
+
+    assert_equal false, manager.will_use_credits?
+    assert_equal 0, manager.free_hours_count
+
+    assert_no_difference 'UsersCredit.count' do
+      manager.update_credits
+    end
+  end
 
   test "machine reservation without credit associated" do
     Credit.where(creditable: @machine).destroy_all
@@ -100,6 +116,18 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
   end
 
   # context training reservation
+
+  test "training reservation from user without subscribed plan" do
+    @user.subscriptions.destroy_all
+
+    manager = UsersCredits::Manager.new(reservation: @reservation_training)
+
+    assert_equal false, manager.will_use_credits?
+
+    assert_no_difference 'UsersCredit.count' do
+      manager.update_credits
+    end
+  end
 
   test "training reservation without credit associated" do
     Credit.where(creditable: @training).destroy_all
