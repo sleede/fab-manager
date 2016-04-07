@@ -64,8 +64,8 @@ machine_4:
   spec: "Surface maximale de travail: 210x210x220mm \r\nRésolution méchanique: 0,02
     mm \r\nPrécision de position: +/- 0,05 \r\nLogiciel utilisé: Cura\r\nFormats de
     fichier acceptés: STL \r\nMatériaux utilisés: PLA (en stock)."
-  created_at: 2016-04-04 14:11:34.341810000 Z
-  updated_at: 2016-04-04 14:11:34.341810000 Z
+  created_at: 2001-01-01 14:11:34.341810000 Z
+  updated_at: 2001-01-01 14:11:34.341810000 Z
   slug: imprimante-3d
 
 machine_5:

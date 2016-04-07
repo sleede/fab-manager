@@ -6,7 +6,7 @@ availability_1:
   available_type: training
   created_at: 2016-04-04 15:24:01.517486000 Z
   updated_at: 2016-04-04 15:24:01.517486000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_2:
@@ -16,7 +16,7 @@ availability_2:
   available_type: training
   created_at: 2016-04-04 15:24:09.169364000 Z
   updated_at: 2016-04-04 15:24:09.169364000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_3:
@@ -26,7 +26,7 @@ availability_3:
   available_type: machines
   created_at: 2016-04-04 15:24:27.587583000 Z
   updated_at: 2016-04-04 15:24:27.587583000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_4:
@@ -36,7 +36,7 @@ availability_4:
   available_type: machines
   created_at: 2016-04-04 15:24:44.044908000 Z
   updated_at: 2016-04-04 15:24:44.044908000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_5:
@@ -46,7 +46,7 @@ availability_5:
   available_type: machines
   created_at: 2016-04-04 15:25:48.584444000 Z
   updated_at: 2016-04-04 15:25:48.584444000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_6:
@@ -56,7 +56,7 @@ availability_6:
   available_type: machines
   created_at: 2016-04-04 15:26:17.953216000 Z
   updated_at: 2016-04-04 15:26:17.953216000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_7:
@@ -66,7 +66,7 @@ availability_7:
   available_type: machines
   created_at: 2016-04-04 15:26:39.278627000 Z
   updated_at: 2016-04-04 15:26:39.278627000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_8:
@@ -76,7 +76,7 @@ availability_8:
   available_type: training
   created_at: 2016-04-04 15:26:49.572724000 Z
   updated_at: 2016-04-04 15:26:49.572724000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_9:
@@ -86,7 +86,7 @@ availability_9:
   available_type: event
   created_at: 2016-04-04 15:44:02.228661000 Z
   updated_at: 2016-04-04 15:44:02.228661000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_10:
@@ -96,7 +96,7 @@ availability_10:
   available_type: event
   created_at: 2016-04-04 15:44:03.156629000 Z
   updated_at: 2016-04-04 15:44:03.156629000 Z
-  nb_total_places: 
+  nb_total_places:
   destroying: false
 
 availability_11:
@@ -106,5 +106,15 @@ availability_11:
   available_type: event
   created_at: 2016-04-04 15:44:04.023557000 Z
   updated_at: 2016-04-04 15:44:04.023557000 Z
-  nb_total_places: 
+  nb_total_places:
+  destroying: false
+
+availability_12:
+  id: 12
+  start_at: 2012-04-11 06:00:00.000000000 Z
+  end_at: 2012-04-11 10:00:00.000000000 Z
+  available_type: training
+  created_at: 2012-04-04 15:24:01.517486000 Z
+  updated_at: 2012-04-04 15:24:01.517486000 Z
+  nb_total_places:
   destroying: false

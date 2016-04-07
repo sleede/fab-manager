@@ -7,8 +7,8 @@ profile_1:
   gender: true
   birthday: 2016-04-04
   phone: 0123456789
-  interest: 
-  software_mastered: 
+  interest:
+  software_mastered:
   created_at: 2016-04-04 14:11:33.858015000 Z
   updated_at: 2016-04-04 14:11:33.858015000 Z
 
@@ -59,8 +59,8 @@ profile_6:
   gender: true
   birthday: 2016-04-04
   phone: '0000000000'
-  interest: 
-  software_mastered: 
+  interest:
+  software_mastered:
   created_at: 2016-04-04 15:17:12.535971000 Z
   updated_at: 2016-04-04 15:17:12.535971000 Z
 
@@ -76,3 +76,16 @@ profile_3:
   software_mastered: ''
   created_at: 2016-04-04 15:07:46.687390000 Z
   updated_at: 2016-04-05 08:35:18.580745000 Z
+
+profile_7:
+  id: 7
+  user_id: 7
+  first_name: Lucile
+  last_name: Seguin
+  gender: false
+  birthday: 1969-02-03
+  phone: '0241853679'
+  interest:
+  software_mastered:
+  created_at: 2012-03-12 11:00:21.411067000 Z
+  updated_at: 2016-04-07 11:00:37.643112000 Z
