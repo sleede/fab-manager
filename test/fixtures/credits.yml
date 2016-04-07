@@ -5,8 +5,8 @@ credit_1:
   creditable_type: Training
   plan_id: 1
   hours:
-  created_at: 2016-04-04 15:19:28.414019000 Z
-  updated_at: 2016-04-04 15:19:28.414019000 Z
+  created_at: 2001-01-01 14:11:33.852721000 Z
+  updated_at: 2001-01-01 14:11:33.852721000 Z
 
 credit_2:
   id: 2
@@ -106,3 +106,12 @@ credit_14:
   hours: 1
   created_at: 2016-04-04 15:21:57.547939000 Z
   updated_at: 2016-04-04 15:21:57.547939000 Z
+
+credit_15:
+  id: 15
+  creditable_id: 4
+  creditable_type: Machine
+  plan_id: 1
+  hours: 1
+  created_at: 2001-01-01 14:11:33.852721000 Z
+  updated_at: 2001-01-01 14:11:33.852721000 Z

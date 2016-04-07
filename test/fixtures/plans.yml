@@ -6,11 +6,11 @@ plan_1:
   interval: month
   group_id: 1
   stp_plan_id: mensuel-standard-month-20160404171519
-  created_at: 2016-04-04 15:15:19.860064000 Z
-  updated_at: 2016-04-04 15:19:28.367161000 Z
+  created_at: 2001-01-01 15:15:19.860064000 Z
+  updated_at: 2001-01-01 15:19:28.367161000 Z
   training_credit_nb: 1
-  is_rolling: 
-  description: 
+  is_rolling:
+  description:
   type: Plan
   base_name: Mensuel
   ui_weight: 1
@@ -26,8 +26,8 @@ plan_2:
   created_at: 2016-04-04 15:17:24.026385000 Z
   updated_at: 2016-04-04 15:19:39.357636000 Z
   training_credit_nb: 2
-  is_rolling: 
-  description: 
+  is_rolling:
+  description:
   type: PartnerPlan
   base_name: Sleede
   ui_weight: 5
@@ -44,8 +44,8 @@ plan_3:
   created_at: 2016-04-04 15:18:27.734657000 Z
   updated_at: 2016-04-04 15:21:35.501739000 Z
   training_credit_nb: 1
-  is_rolling: 
-  description: 
+  is_rolling:
+  description:
   type: Plan
   base_name: Mensuel tarif réduit
   ui_weight: 0
