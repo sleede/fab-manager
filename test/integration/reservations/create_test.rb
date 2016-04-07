@@ -117,8 +117,9 @@ module Reservations
             reservable_type: training.class.name,
             card_token: stripe_card_token,
             slots_attributes: [
-              { start_at: availability.start_at.to_s(:iso8601),
-                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: availability.end_at.to_s(:iso8601),
                 availability_id: availability.id
               }
             ]
@@ -230,6 +231,70 @@ module Reservations
 
       # notification
       assert_not_empty Notification.where(attached_object: reservation)
+    end
+
+    test "user with subscription reserves the FIRST training with success" do
+      login_as(@user_with_subscription, scope: :user)
+      plan = @user_with_subscription.subscribed_plan
+      plan.update!(is_rolling: true)
+
+      training = Training.joins(credits: :plan).where(credits: { plan: plan }).first
+      availability = training.availabilities.first
+
+      reservations_count = Reservation.count
+      invoice_count = Invoice.count
+      invoice_items_count = InvoiceItem.count
+
+      VCR.use_cassette("reservations_create_for_training_with_subscription_success") do
+        post reservations_path, { reservation: {
+            user_id: @user_with_subscription.id,
+            reservable_id: training.id,
+            reservable_type: training.class.name,
+            card_token: stripe_card_token,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: availability.end_at.to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }}.to_json, default_headers
+      end
+
+      # general assertions
+      assert_equal 201, response.status
+      assert_equal reservations_count + 1, Reservation.count
+      assert_equal invoice_count + 1, Invoice.count
+      assert_equal invoice_items_count + 1, InvoiceItem.count
+
+      # reservation assertions
+      reservation = Reservation.last
+
+      assert reservation.invoice
+      refute reservation.stp_invoice_id.blank?
+      assert_equal 1, reservation.invoice.invoice_items.count
+
+      # invoice assertions
+      invoice = reservation.invoice
+
+      refute invoice.stp_invoice_id.blank?
+      refute invoice.total.blank?
+      # invoice_items
+      invoice_item = InvoiceItem.last
+
+      assert invoice_item.stp_invoice_item_id
+      assert_equal 0, invoice_item.amount # amount is 0 because this training is a credited training with that plan
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert invoice
+      assert File.exist?(invoice.file)
+
+      # notification
+      assert_not_empty Notification.where(attached_object: reservation)
+
+      # check that user subscription were extended
+      assert_equal reservation.slots.first.start_at + plan.duration, @user_with_subscription.subscription.expired_at
     end
   end
 end
