@@ -28,7 +28,7 @@ class Subscription < ActiveRecord::Base
         self.expired_at = Time.at(new_subscription.current_period_end)
         save!
 
-        reset_users_credits if expired_date_changed
+        UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
 
         # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
@@ -77,7 +77,7 @@ class Subscription < ActiveRecord::Base
       self.canceled_at = nil
       set_expired_at
       save!
-      reset_users_credits if expired_date_changed
+      UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
       generate_invoice.save if invoice
       return true
     else
@@ -140,7 +140,7 @@ class Subscription < ActiveRecord::Base
 
     self.expired_at = expired_at
     if save
-      reset_users_credits if !free_days
+      UsersCredits::Manager.new(user: self.user).reset_credits if !free_days
       notify_subscription_extended(free_days)
       return true
     end
@@ -213,10 +213,6 @@ class Subscription < ActiveRecord::Base
     p_value = self.previous_changes[:expired_at][0]
     return true if p_value.nil?
     p_value.to_date != expired_at.to_date and expired_at > p_value
-  end
-
-  def reset_users_credits
-    user.users_credits.destroy_all
   end
 
   # def is_being_extended?

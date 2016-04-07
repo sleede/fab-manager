@@ -56,6 +56,14 @@ module Reservations
 
       assert invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id).amount
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert invoice
+      assert File.exist?(invoice.file)
+
+      # notification
+      assert_not_empty Notification.where(attached_object: reservation)
     end
 
     test "user without subscription reserves a machine with error" do
@@ -67,6 +75,7 @@ module Reservations
       reservations_count = Reservation.count
       invoice_count = Invoice.count
       invoice_items_count = InvoiceItem.count
+      notifications_count = Notification.count
 
       VCR.use_cassette("reservations_create_for_machine_without_subscription_error") do
         post reservations_path, { reservation: {
@@ -88,6 +97,7 @@ module Reservations
       assert_equal reservations_count, Reservation.count
       assert_equal invoice_count, Invoice.count
       assert_equal invoice_items_count, InvoiceItem.count
+      assert_equal notifications_count, Notification.count
     end
 
     test "user without subscription reserves a training with success" do
@@ -138,6 +148,14 @@ module Reservations
 
       assert invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, training.amount_by_group(@user_without_subscription.group_id).amount
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert invoice
+      assert File.exist?(invoice.file)
+
+      # notification
+      assert_not_empty Notification.where(attached_object: reservation)
     end
 
     test "user with subscription reserves a machine with success" do
@@ -204,6 +222,14 @@ module Reservations
 
       assert_equal @user_with_subscription, users_credit.user
       assert_equal [reservation.slots.count, plan.machine_credits.find_by(creditable_id: machine.id).hours].min, users_credit.hours_used
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert invoice
+      assert File.exist?(invoice.file)
+
+      # notification
+      assert_not_empty Notification.where(attached_object: reservation)
     end
   end
 end
