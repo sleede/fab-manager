@@ -10,9 +10,9 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
-Sidekiq::Testing.inline! do |pp|
-  puts pp
-end
+Sidekiq::Testing.inline!# do |pp|
+  #puts pp
+#end
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
 
 
