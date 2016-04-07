@@ -6,7 +6,7 @@ class CreateAsUserTest < ActionDispatch::IntegrationTest
     login_as(@user, scope: :user)
   end
 
-  test "user takes a subscription" do
+  test 'user takes a subscription successfully' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
 
     VCR.use_cassette("subscriptions_user_create_success") do
@@ -54,6 +54,35 @@ class CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_not_nil invoice, 'Invoice was not created'
     assert File.exist?(invoice.file), 'Invoice PDF was not generated'
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
+  end
+
+
+
+  test 'user takes a subscription with error' do
+    # get plan for wrong group
+    plan = Plan.where.not(group_id: @user.group.id).first
+
+    VCR.use_cassette("subscriptions_user_create_failed") do
+      post '/api/subscriptions',
+           {
+               subscription: {
+                   plan_id: plan.id,
+                   user_id: @user.id,
+                   card_token: stripe_card_token
+               }
+           }.to_json, default_headers
+    end
+
+    # Check response format & status
+    assert_equal 422, response.status, response.body
+    assert_equal Mime::JSON, response.content_type
+
+    # Check the error was handled
+    subscription = json_response(response.body)
+    assert_match  /plan is not compatible/, response.body
+
+    # Check that the user has no subscription
+    assert_nil @user.subscription, "user's subscription was found"
   end
 
 end
