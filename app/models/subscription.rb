@@ -8,6 +8,7 @@ class Subscription < ActiveRecord::Base
   has_many :offer_days, dependent: :destroy
 
   validates_presence_of :plan_id
+  validates_with SubscriptionGroupValidator
 
   attr_accessor :card_token
 
