@@ -102,12 +102,6 @@ class Subscription < ActiveRecord::Base
     invoice.save
   end
 
-  def update_expired_date_with_first_training(training_start_at)
-    if plan.is_rolling?
-      update_columns(expired_at: training_start_at + plan.duration)
-    end
-  end
-
   def cancel
     if stp_subscription_id.present?
       stp_subscription = stripe_subscription
