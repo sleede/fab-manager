@@ -144,6 +144,10 @@ class Reservation < ActiveRecord::Base
           total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
           self.invoice.total = total
           save!
+          #
+          # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
+          # because subscription.create (in subscription.rb) will pay all waiting stripe invoice items
+          #
         else
           # error handling
           invoice_items.each(&:delete)
@@ -163,6 +167,9 @@ class Reservation < ActiveRecord::Base
               customer.save
             end
           end
+          #
+          # IMPORTANT NOTE: here, we have to create an invoice manually and pay it to pay all waiting stripe invoice items
+          #
           invoice = Stripe::Invoice.create(
             customer: user.stp_customer_id,
           )
