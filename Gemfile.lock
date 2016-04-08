@@ -59,6 +59,7 @@ GEM
       sass (>= 3.2.19)
     buftok (0.2.0)
     builder (3.2.2)
+    byebug (8.2.3)
     camertron-eprun (1.1.0)
     capistrano (2.15.5)
       highline
@@ -426,6 +427,7 @@ DEPENDENCIES
   active_record_query_trace
   awesome_print
   bootstrap-sass
+  byebug
   capistrano
   capistrano-maintenance (= 0.0.5)
   capistrano-sidekiq

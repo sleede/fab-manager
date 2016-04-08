@@ -60,6 +60,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'webmock'
   gem 'vcr'
+  gem 'byebug'
 end
 
 group :production do
