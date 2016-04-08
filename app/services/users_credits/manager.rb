@@ -7,14 +7,14 @@ module UsersCredits
     extend Forwardable
     attr_reader :manager
 
-    def initialize(reservation: nil, user: nil)
+    def initialize(reservation: nil, user: nil, plan: nil)
       if user
         @manager = Managers::User.new(user)
       elsif reservation
         if reservation.reservable_type == "Training"
-          @manager = Managers::Training.new(reservation)
+          @manager = Managers::Training.new(reservation, plan)
         elsif reservation.reservable_type == "Machine"
-          @manager = Managers::Machine.new(reservation)
+          @manager = Managers::Machine.new(reservation, plan)
         end
       end
     end
@@ -38,13 +38,14 @@ module UsersCredits
     class Reservation
       attr_reader :reservation
 
-      def initialize(reservation)
+      def initialize(reservation, plan)
         @reservation = reservation
         @already_updated = false
+        @plan = plan
       end
 
       def plan
-        user.subscribed_plan
+        @plan || user.subscribed_plan
       end
 
       def user
@@ -129,7 +130,7 @@ module UsersCredits
           # if there is a training_credit defined for this plan and this training
           if training_credit = plan.training_credits.find_by(creditable_id: reservation.reservable_id)
             # if user has not used all the plan credits
-            if user.training_credits.count < plan.training_credit_nb
+            if user.training_credits.where(plan: plan).count < plan.training_credit_nb
               return true, training_credit
             end
           end
