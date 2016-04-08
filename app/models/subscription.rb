@@ -142,18 +142,6 @@ class Subscription < ActiveRecord::Base
   end
 
   private
-  def update_payment
-    if stp_subscription_id.present?
-      stp_subscription = stripe_subscription
-      stp_subscription.plan = plan.stp_plan_id
-      stp_subscription.prorate = false
-      stp_subscription.save
-    else
-      # TODO: implement stripe payment if member update subscription
-      # must have a card
-    end
-  end
-
   def notify_member_subscribed_plan
     NotificationCenter.call type: 'notify_member_subscribed_plan',
                             receiver: user,
