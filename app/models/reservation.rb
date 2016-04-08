@@ -45,7 +45,7 @@ class Reservation < ActiveRecord::Base
       # === Machine reservation ===
       when Machine
         base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
-        users_credits_manager = UsersCredits::Manager.new(reservation: self)
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
         slots.each_with_index do |slot, index|
           description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
