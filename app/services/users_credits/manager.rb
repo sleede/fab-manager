@@ -15,7 +15,11 @@ module UsersCredits
           @manager = Managers::Training.new(reservation, plan)
         elsif reservation.reservable_type == "Machine"
           @manager = Managers::Machine.new(reservation, plan)
+        else
+          raise ArgumentError, "reservation.reservable_type must be Training or Machine"
         end
+      else
+        raise ArgumentError, "you have to pass either a reservation or a user to initialize a UsersCredits::Manager"
       end
     end
 
