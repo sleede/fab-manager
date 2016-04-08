@@ -27,7 +27,7 @@ module UsersCredits
   end
 
   module Managers
-    class User
+    class User # that class is responsible for reseting users_credits of a user
       attr_reader :user
 
       def initialize(user)
@@ -42,7 +42,7 @@ module UsersCredits
     class Reservation
       attr_reader :reservation
 
-      def initialize(reservation, plan)
+      def initialize(reservation, plan) # a plan can be passed to do a simulation (if user didn't have a subscription YET)
         @reservation = reservation
         @already_updated = false
         @plan = plan
@@ -67,8 +67,8 @@ module UsersCredits
     private_constant :Reservation
 
 
-    class Machine < Reservation
-      def will_use_credits?
+    class Machine < Reservation # that class is responsible for knowing how to update users_credit of a given user for a given reservation
+      def will_use_credits?  # to known if a credit will be used in the context of the given reservation
         _will_use_credits?[0]
       end
 
@@ -114,7 +114,7 @@ module UsersCredits
         end
     end
 
-    class Training < Reservation
+    class Training < Reservation # same as class Machine but for Training reservation
       def will_use_credits?
         _will_use_credits?[0]
       end
