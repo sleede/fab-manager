@@ -73,28 +73,12 @@ class Reservation < ActiveRecord::Base
 
       # === Training reservation ===
       when Training
-        # TO BE REFACTORED WHEN PLAN PURCHASE AND RESERVATION PURCHASE WILL BE DECOUPLED
-
         base_amount = reservable.amount_by_group(user.group_id).amount
-        if plan
-          # Return True if the subscription link a training credit for training reserved by the user
-          training_is_creditable = plan.training_credits.select {|credit| credit.creditable_id == reservable.id}.size > 0
 
-          # Training reserved by the user is free when :
+        # be careful, variable plan can be the user's plan OR the plan user is currently purchasing
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+        base_amount = 0 if users_credits_manager.will_use_credits?
 
-          # |-> the user already has a current subscription and if training_is_creditable is true and has at least one credit available.
-          if !new_plan_being_bought
-            if user.training_credits.size < plan.training_credit_nb and training_is_creditable
-              base_amount = 0
-            end
-          # |-> the user buys a new subscription and if training_is_creditable is true.
-          else
-            if training_is_creditable
-              base_amount = 0
-            end
-          end
-
-        end
         slots.each do |slot|
           description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
           ii_amount = base_amount
