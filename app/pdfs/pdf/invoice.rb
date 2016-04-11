@@ -139,8 +139,8 @@ module PDF
 
           vat_rate = Setting.find_by({name: 'invoice_VAT-rate'}).value.to_f
           vat = total / (vat_rate / 100 + 1)
-          data += [ [I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(vat)] ]
-          data += [ [I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total-vat)] ]
+          data += [ [I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(total-vat)] ]
+          data += [ [I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(vat)] ]
           data += [ [I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)] ]
 
           # checking the round number
