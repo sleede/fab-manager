@@ -524,7 +524,7 @@ After modifying any values concerning the localisation, restart the application 
 ## Known issues
 
 - When browsing a machine page, you may encounter an "InterceptError" in the console and the loading bar will stop loading before reaching its ending.
- This may append if the machine was created through a seed file without any image.
+ This may happen if the machine was created through a seed file without any image.
  To solve this, simply add an image to the machine's profile and refresh the web page.
 
 - When starting the Ruby on Rails server (eg. `foreman s`) you may receive the following error:
@@ -533,7 +533,7 @@ After modifying any values concerning the localisation, restart the application 
         web.1    | Exiting
         worker.1 | ...lib/redis/client.rb...:in `_parse_options'
 
- This may happens when the `application.yml` file is missing. 
+ This may happen when the `application.yml` file is missing. 
  To solve this issue copy `config/application.yml.default` to `config/application.yml`.
  This is required before the first start.
  
