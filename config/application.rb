@@ -30,7 +30,7 @@ module Fablab
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     #
-    # /!\ ALL locales above SHOULD be configured accordingly with this locale. /!\
+    # /!\ ALL locales SHOULD be configured accordingly with this locale. /!\
     #
     config.i18n.default_locale = Rails.application.secrets.rails_locale
 
