@@ -14,16 +14,18 @@ class API::SubscriptionsController < API::ApiController
     else
       if current_user.is_admin?
         @subscription = Subscription.find_or_initialize_by(user_id: subscription_params[:user_id])
-        # @subscription.expired_at = nil
         @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
         @subscription.attributes = subscription_params
         is_subscribe = @subscription.save_with_local_payment(!User.find(subscription_params[:user_id]).invoicing_disabled?)
       else
         @subscription = Subscription.find_or_initialize_by(user_id: current_user.id)
-        # @subscription.expired_at = nil
-        @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
-        @subscription.attributes = subscription_params.merge(user_id: current_user.id)
-        is_subscribe = @subscription.save_with_payment
+        if valid_card_token?(subscription_params[:card_token])
+          @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
+          @subscription.attributes = subscription_params.merge(user_id: current_user.id)
+          is_subscribe = @subscription.save_with_payment
+        else
+          is_subscribe = false
+        end
       end
       if is_subscribe
         render :show, status: :created, location: @subscription
@@ -60,5 +62,15 @@ class API::SubscriptionsController < API::ApiController
 
     def subscription_update_params
       params.require(:subscription).permit(:expired_at)
+    end
+
+    # TODO refactor subscriptions logic and move this in model/validator
+    def valid_card_token?(token)
+      begin
+        Stripe::Token.retrieve(token)
+      rescue Stripe::InvalidRequestError => e
+        @subscription.errors[:card_token] << e.message
+        false
+      end
     end
 end

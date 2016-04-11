@@ -76,7 +76,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_match  /No such token/, response.body
 
     # Check that the user's subscription has not changed
-    #FIXME assert_equal previous_expiration, @user.subscription.expired_at.to_i, "user's subscription has changed"
+    assert_equal previous_expiration, @user.subscription.expired_at.to_i, "user's subscription has changed"
   end
 
 end
