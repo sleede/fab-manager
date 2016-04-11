@@ -1,244 +1,244 @@
 en:
   layouts:
-    notifications_mailer:
-      see_you_later:
-      sincerely:
-      signature:
-      do_not_reply:
+    notifications_mailer: 
+      see_you_later: "See you soon on {GENDER, select, other{the}}"  # messageFormat interpolation
+      sincerely: "Sincerely,"
+      signature: "The Fab Lab team."
+      do_not_reply: "Please do not reply to this email."
 
   users_mailer:
     notify_user_account_created:
       subject: "Your FabLab account has been successfully created"
       body:
         hello: "Hello %{NAME},"
-        intro: "The FabLab team has just created an account for you, on the {FABLAB} site:"  # messageFormat interpolation
+        intro: "The FabLab team has just created an account for you, on the {FABLAB} website:"  # messageFormat interpolation
         connection_parameters: "Here are your connection parameters:"
         account_name: "Account name:"
         password: "Password:"
-        temporary_password:
-        keep_advantages:
-        thanks_to_:
-        logon_or_login:
-        token_if_link_problem:
+        temporary_password: "This is a temporary password, you can modify it in your «My account» screen."
+        keep_advantages: "With this account, you keep all the advantages linked to your Fab Lab user profile (trainings, subscriptions plans)."
+        thanks_to_: "To use the website, please"
+        logon_or_login: "create a new account or log in by clicking here"
+        token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
 
   notifications_mailer:
     notify_user_user_group_changed:
-      subject: "Your group has changed"
+      subject: "Your have changed group"
       body:
-        warning:
+        warning: "You have changed group. Inspections can be conducted at the lab to verify the legitimacy of this change."
 
     notify_admin_user_group_changed:
-      subject: "A member has changed his group"
+      subject: "A member has changed group"
       body:
-        user_changed_group_html:
-        previous_group:
-        new_group:
+        user_changed_group_html: "User <em><strong>%{NAME}</strong></em> has changed group."
+        previous_group: "Previous group:"
+        new_group: "New group:"
 
     notify_admin_subscription_extended:
       subject: "A subscription has been extended"
       body:
-        subscription_extended_html:
+        subscription_extended_html: "Subscription <strong><em>{PLAN}</em></strong> for user <strong><em>{NAME}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}."   # messageFormat interpolation
 
     notify_member_subscription_extended:
-      subject: "Your subscription has been extended"
+      subject: "Your subscription plan has been extended"
       body:
-        your_plan:
-        has_been_extended:
-        free:
-        until:
+        your_plan: "Your subscription plan"
+        has_been_extended: "has been extended"
+        free: "for free"
+        until: "until"
 
     notify_partner_subscribed_plan:
-      subject: "A subscription has been purchased"
+      subject: "A subscription plan has been purchased"
       body:
-        a_plan:
-        was_purchased_by_member:
+        a_plan: "A subscription plan"
+        was_purchased_by_member: "has been purchased by user"
 
     notify_admin_when_project_published:
       subject: "A project has been published"
       body:
-        new_project_published:
+        new_project_published: "A new project has been published:"
 
     notify_project_collaborator_to_valid:
-      subject: "Invitation to take part in a project"
+      subject: "Invitation to collaborate on a project"
       body:
-        your_are_invited_to_take_part_in_a_project:
-        to_accept_the_invitation_click_on_following_link:
+        your_are_invited_to_take_part_in_a_project: "You are invited to join this project:"
+        to_accept_the_invitation_click_on_following_link: "To accept this invitation, please click on the following link:"
 
     notify_project_author_when_collaborator_valid:
       subject: "New collaborator in your project"
       body:
-        the_member:
-        accepted_your_invitation_to_take_part_in_the_project:
+        the_member: "the user"
+        accepted_your_invitation_to_take_part_in_the_project: "has accepted your invitation to join your project:"
 
     notify_user_training_valid:
       subject: "Your training has been validated"
       body:
-        your_training:
-        has_been_validated:
+        your_training: "Your training"
+        has_been_validated: "has been validated"
 
     notify_member_subscribed_plan:
       subject: "Your subscription has been successfully purchased"
       body:
-        plan_subscribed_html:
-        subscription_stops_on:
+        plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
+        subscription_stops_on: "Your subscription plan will end on %{DATE}"
 
     notify_member_create_reservation:
-      subject: "Your réservation has been successfully saved"
+      subject: "Your reservation has been successfully saved"
       body:
-        reservation_saved_html:
-        your_reserved_slots:
+        reservation_saved_html: "You reservation <strong><em>%{RESERVATION}</em></strong> has been successfully saved"
+        your_reserved_slots: "Your reserved slots are:"
 
     notify_member_subscribed_plan_is_changed:
       subject: "Your subscription has been updated"
       body:
-        new_plan_html:
+        new_plan_html: "You have changed your plan to <strong><em>%{PLAN}</em></strong>."
 
     notify_admin_member_create_reservation:
       subject: "New reservation"
       body:
-        member_reserved_html:
-        reserved_slots:
+        member_reserved_html: "User %{NAME} has reserved <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Reserved slots are:"
 
     notify_member_slot_is_modified:
       subject: "Your reservation slot has been successfully changed"
       body:
-        reservation_changed_to:
-        previous_date:
+        reservation_changed_to: "Your reservation slot has been changed to:"
+        previous_date: "Previous date:"
 
     notify_admin_slot_is_modified:
-      subject:
+      subject: "A reservation slot has been modified"
       body:
-        slot_modified:
-        new_date:
-        old_date:
+        slot_modified: "User %{NAME} had modified his reservation slot"
+        new_date: "New slot"
+        old_date: "Previous slot"
 
     notify_admin_when_user_is_created:
       subject: "A user account has been created"
       body:
-        new_account_created:
-        invoicing_disabled_html:
+        new_account_created: "A new user account has been created on the website:"
+        invoicing_disabled_html: "Invoicing generation is <strong>disabled</strong> for this user."
 
     notify_admin_subscribed_plan:
       subject: "A subscription has been purchased"
       body:
-        plan_subscribed_html:
+        plan_subscribed_html: "A plan <strong><em>%{PLAN}</em></strong> has been subscribed by user <strong><em>%{NAME}</strong></em>."
 
     notify_member_invoice_ready:
       subject: "Your FabLab's invoice"
       body:
-        please_find_attached_html:
-        invoice_in_your_dashboard_html:
-        your_dashboard:
+        please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}."  # messageFormat interpolation
+        invoice_in_your_dashboard_html:  "You can access your invoice in %{DASHBOARD} on the Fab Lab website."
+        your_dashboard: "your dashboard"
 
     notify_member_avoir_ready:
       subject: "Your FabLab's refund invoice"
       body:
-        please_find_attached_html:
-        invoice_in_your_dashboard_html:
-        your_dashboard:
+        please_find_attached_html: "Please find as attached file your refund invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}."  # messageFormat interpolation
+        invoice_in_your_dashboard_html: "You can access your refund invoice in %{DASHBOARD} on the Fab Lab website."
+        your_dashboard: "your dashboard"
 
     notify_member_subscription_will_expire_in_7_days:
       subject: "Your subscription expires in 7 days"
       body:
-        your_plan:
-        expires_in_7_days:
-        to_renew_your_plan_follow_the_link:
+        your_plan: "you plan"
+        expires_in_7_days: "will expire in 7 days."
+        to_renew_your_plan_follow_the_link: "Please, follow this link to renew your plan"
 
     notify_member_subscription_is_expired:
       subject: "Your subscription has expired"
       body:
-        your_plan:
-        has_expired:
-        you_can_go_to:
-        to_renew_your_plan:
+        your_plan: "You plan"
+        has_expired: "has expired."
+        you_can_go_to: "Please go to"
+        to_renew_your_plan: "to renew you plan"
 
     notify_admin_subscription_will_expire_in_7_days:
       subject: "A member subscription expires in 7 days"
       body:
-        subscription_will_expire_html:
+        subscription_will_expire_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> will expire in 7 days."
 
     notify_admin_subscription_is_expired:
       subject: "A member subscription has expired"
       body:
-        subscription_expired_html:
+        subscription_expired_html: "Subscription plan for user %{NAME} <strong><em>%{PLAN}</em></strong> is now expired."
 
     notify_admin_subscription_canceled:
-      subject: "A member subscription has been canceled"
+      subject: "A member subscription has been cancelled"
       body:
-        subscription_canceled_html:
+        subscription_canceled_html: "Subscription <strong><em>%{PLAN}</em></strong> for user %{NAME} has been cancelled."
 
     notify_member_subscription_canceled:
-      subject: "Your subscription has been canceled"
+      subject: "Your subscription has been cancelled"
       body:
-        your_plan_was_canceled:
-        your_plan:
-        end_at:
+        your_plan_was_canceled: "Your subscription plan has been cancelled."
+        your_plan: "your subscription plan"
+        end_at: "ends on"
 
     notify_member_slot_is_canceled:
       subject: "Your reservation has been canceled"
       body:
-        reservation_canceled:
+        reservation_canceled: "Your reservation for %{RESERVABLE} has been canceled"
 
     notify_admin_slot_is_canceled:
-      subject: "A reservation has been canceled"
+      subject: "A reservation has been cancelled"
       body:
-        member_cancelled:
-        item_details:
-        generate_refund:
+        member_cancelled: "User %{NAME} has cancelled his reservation"
+        item_details: "%{START} - %{END}, concerning %{RESERVABLE}"
+        generate_refund: "Do not forget to generate a credit note or a refund for this cancellation."
 
     notify_admin_when_user_is_imported:
       subject: "A user account has been imported from the SSO"
       body:
-        new_account_imported:
-        provider_uid:
-        known_informations:
-        address_already_used:
-        no_more_info_available:
+        new_account_imported: "A new user account (ID: %{ID}) has been imported to the website via %{PROVIDER}."
+        provider_uid: "its provider ID is: "
+        known_informations: "Here is what we know about this provider:"
+        address_already_used: "This address is already associated with another user"
+        no_more_info_available: "No other info about this user can be provided before he completes his profile."
 
     notify_user_profile_complete:
-      subject: "You now have access to the entire platform"
+      subject: "You now have access to the whole website"
       body:
-        message:
+        message: "Your account informations has been correctly updated, you now have access to the whole website."
 
     notify_user_auth_migration:
       subject: "Important change to your FabLab account"
       body:
-        the_platform:
-        is_changing_its_auth_system_and_will_now_use:
-        instead_of:
-        consequence_of_the_modification:
-        to_use_the_platform_thanks_for:
-        create_an_account_on:
-        or_use_an_existing_account_clicking_here:
-        in_case_of_problem_enter_the_following_code:
+        the_platform: "the website"
+        is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
+        instead_of: "instead of"
+        consequence_of_the_modification: "Because of this change you won't be able to login to the website with your actual usernames"
+        to_use_the_platform_thanks_for: "to keep on using the website, please"
+        create_an_account_on: "create an account on"
+        or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
+        in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"
 
     notify_admin_user_merged:
       subject: "An imported account has been merged with an existing account"
       body:
-        imported_account_merged:
-        provider_uid:
+        imported_account_merged: "A previously imported user account via %{PROVIDER) has been merged with the existing account %{NAME}"
+        provider_uid: "its provider ID is:"
 
     notify_admin_profile_complete:
       subject: "An imported account has completed its profile"
       body:
-        account_completed:
-        provider_id:
+        account_completed: "A previously imported user account via %{PROVIDER} has completed its profile:"
+        provider_id: "its provider ID is:"
 
     notify_admin_abuse_reported:
       subject: "An abusive content has been reported"
       body:
-        intro:
-        signaled_content:
-        signaled_by:
-        signaled_on:
-        message:
+        intro: "A user has flagged a content as abusive"
+        signaled_content: "flagged content:"
+        signaled_by: "flagged by:"
+        signaled_on: "flagged on:"
+        message: "Message:"
 
     notify_admin_invoicing_changed:
       subject: "An invoicing parameter has been changed"
       body:
-        generation_status_html:
-        disabled:
-        enabled:
+        generation_status_html: "Invoicing issuing has been <strong>{STATUS, select, true{disabled} other{enabled}}</strong> for the user {NAME}."  # messageFormat interpolation
+        disabled: "From now on, no invoice will be issued when the user pays at the reception."
+        enabled: "From now on, all payments made by this user at the reception will lead to invoicing issuing. "
 
     shared:
       hello: "Hello %{user_name}"
