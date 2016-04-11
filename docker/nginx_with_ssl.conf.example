@@ -4,11 +4,11 @@ upstream puma {
 
 server {
   listen 443 ssl;
-  server_name demo.fab-manager.com;
+  server_name MAIN_DOMAIN;
   root /usr/src/app/public;
   ssl on;
-  ssl_certificate /etc/nginx/conf.d/ssl/fab-manager.crt;
-  ssl_certificate_key /etc/nginx/conf.d/ssl/fab-manager.deprotected.key;
+  ssl_certificate /etc/nginx/conf.d/ssl/MAIN_DOMAIN.crt;
+  ssl_certificate_key /etc/nginx/conf.d/ssl/MAIN_DOMAIN.deprotected.key;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
   ssl_prefer_server_ciphers on;
@@ -58,6 +58,6 @@ server {
 
 server {
   listen 80;
-  server_name demo.fab-manager.com;
-  rewrite ^ https://demo.fab-manager.com$request_uri? permanent;
+  server_name MAIN_DOMAIN ANOTHER_DOMAIN_1 ANOTHER_DOMAIN_2;
+  rewrite ^ URL_WITH_PROTOCOL_HTTPS$request_uri? permanent;
 }

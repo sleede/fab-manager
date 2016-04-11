@@ -6,26 +6,27 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 ##### Table of Contents  
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
-3. [Setup a development environment](#setup-a-development-environment)<br/>
-3.1. [General Guidelines](#general-guidelines)<br/>
-3.2. [Environment Configuration](#environment-configuration)
-4. [PostgreSQL](#postgresql)<br/>
-4.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
-4.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
-4.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)
-5. [ElasticSearch](#elasticsearch)<br/>
-5.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
-5.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
-5.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
-6. [Internationalization (i18n)](#i18n)<br/>
-6.1. [Translation](#i18n-translation)<br/>
-6.1.1. [Front-end translations](#i18n-translation-front)<br/>
-6.1.2. [Back-end translations](#i18n-translation-back)<br/>
-6.2. [Configuration](#i18n-configuration)<br/>
-6.2.1. [Settings](#i18n-settings)<br/>
-6.2.2. [Applying changes](#i18n-apply)
-7. [Known issues](#known-issues)
-8. [Related Documentation](#related-documentation)
+3. [Setup a production environment with Docker and CoreOS](#setup-a-production-environment)<br/>
+4. [Setup a development environment](#setup-a-development-environment)<br/>
+4.1. [General Guidelines](#general-guidelines)<br/>
+4.2. [Environment Configuration](#environment-configuration)
+5. [PostgreSQL](#postgresql)<br/>
+5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
+5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
+5.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)
+6. [ElasticSearch](#elasticsearch)<br/>
+6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
+6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
+6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
+7. [Internationalization (i18n)](#i18n)<br/>
+7.1. [Translation](#i18n-translation)<br/>
+7.1.1. [Front-end translations](#i18n-translation-front)<br/>
+7.1.2. [Back-end translations](#i18n-translation-back)<br/>
+7.2. [Configuration](#i18n-configuration)<br/>
+7.2.1. [Settings](#i18n-settings)<br/>
+7.2.2. [Applying changes](#i18n-apply)
+8. [Known issues](#known-issues)
+9. [Related Documentation](#related-documentation)
 
 
 
@@ -48,6 +49,11 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTING.md) for more information about the contribution process.
 
 **IMPORTANT**: **do not** update Arshaw/fullCalendar.js as it contains a hack for the remove-event cross.
+
+<a name="setup-a-production-environment"></a>
+## Setup a production environment with Docker and CoreOS
+
+[Docker Readme](docker/README.md)
 
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
@@ -543,7 +549,7 @@ After modifying any values concerning the localisation, restart the application 
 <a name="related-documentation"></a>
 ## Related Documentation
 
-- [Ruby 2.2.3](http://ruby-doc.org/core-2.2.3/)
+- [Ruby 2.3.0](http://ruby-doc.org/core-2.3.0/)
 - [Ruby on Rails](http://api.rubyonrails.org)
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
