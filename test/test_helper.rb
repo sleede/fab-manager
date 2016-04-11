@@ -10,9 +10,7 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
-Sidekiq::Testing.inline!# do |pp|
-  #puts pp
-#end
+Sidekiq::Testing.fake!
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
 
 
@@ -57,6 +55,20 @@ class ActiveSupport::TestCase
         cvc:  cvc
       },
     ).id
+  end
+
+  # Force the invoice generation worker to run NOW and check the resulting file generated.
+  # Delete the file afterwards.
+  # @param invoice {Invoice}
+  def assert_invoice_pdf(invoice)
+    assert_not_nil invoice, 'Invoice was not created'
+
+    invoice_worker = InvoiceWorker.new
+    invoice_worker.perform(invoice.id)
+
+    assert File.exist?(invoice.file), 'Invoice PDF was not generated'
+
+    File.delete(invoice.file)
   end
 end
 

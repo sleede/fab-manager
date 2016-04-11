@@ -50,8 +50,7 @@ module Subscriptions
 
       # Check generated invoice
       invoice = Invoice.find_by(invoiced_type: 'Subscription', invoiced_id: subscription[:id])
-      assert_not_nil invoice, 'Invoice was not created'
-      assert File.exist?(invoice.file), 'Invoice PDF was not generated'
+      assert_invoice_pdf invoice
       assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
     end
 

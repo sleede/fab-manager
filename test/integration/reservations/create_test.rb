@@ -59,8 +59,7 @@ module Reservations
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
-      assert invoice
-      assert File.exist?(invoice.file)
+      assert_invoice_pdf invoice
 
       # notification
       assert_not_empty Notification.where(attached_object: reservation)
@@ -152,8 +151,7 @@ module Reservations
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
-      assert invoice
-      assert File.exist?(invoice.file)
+      assert_invoice_pdf invoice
 
       # notification
       assert_not_empty Notification.where(attached_object: reservation)
@@ -226,8 +224,7 @@ module Reservations
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
-      assert invoice
-      assert File.exist?(invoice.file)
+      assert_invoice_pdf invoice
 
       # notification
       assert_not_empty Notification.where(attached_object: reservation)
@@ -287,8 +284,7 @@ module Reservations
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
-      assert invoice
-      assert File.exist?(invoice.file)
+      assert_invoice_pdf invoice
 
       # notification
       assert_not_empty Notification.where(attached_object: reservation)
