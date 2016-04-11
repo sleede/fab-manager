@@ -539,6 +539,24 @@ After modifying any values concerning the localisation, restart the application 
  
 - Due to a stripe limitation, you won't be ble to create plans longer than one year.
 
+- When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
+
+        Error:
+        ...                                                               
+        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."      
+        DETAIL:  Key (group_id)=(1) is not present in table "groups".                                                                                                   
+        : ...                                                                                                
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'                                                         
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'     
+
+ This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
+ PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
+ To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for an example).
+ Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
+ 
+        ALTER ROLE sleede WITH SUPERUSER;
+
+ DO NOT do this in a production environment, as this would lead to a serious security issue.
 
 <a name="related-documentation"></a>
 ## Related Documentation
