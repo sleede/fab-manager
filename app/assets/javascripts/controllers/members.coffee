@@ -79,6 +79,7 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
   $scope.selectGroup = ->
     Member.update {id: $scope.user.id}, {user: {group_id: $scope.userGroup}}, (user) ->
       $scope.user = user
+      $rootScope.currentUser = user
       $scope.group.change = false
       growl.success(_t('your_group_has_been_successfully_changed'))
     , (err) ->
