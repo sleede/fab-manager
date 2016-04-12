@@ -5,6 +5,10 @@ class AuthProvider < ActiveRecord::Base
     def providable_type
       DatabaseProvider.name
     end
+
+    def name
+      'DatabaseProvider::SimpleAuthProvider'
+    end
   end
 
   PROVIDABLE_TYPES = %w(DatabaseProvider OAuth2Provider)
@@ -39,6 +43,9 @@ class AuthProvider < ActiveRecord::Base
 
   ## Get the provider matching the omniAuth strategy name
   def self.from_strategy_name(strategy_name)
+    if strategy_name.blank? or all.empty?
+      return SimpleAuthProvider.new
+    end
     parsed = /^([^-]+)-(.+)$/.match(strategy_name)
     ret = nil
     all.each do |strategy|
