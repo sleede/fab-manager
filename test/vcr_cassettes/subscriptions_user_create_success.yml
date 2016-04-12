@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -106,7 +106,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -196,7 +196,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -377,7 +377,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -469,7 +469,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -605,7 +605,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -809,7 +809,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
@@ -899,7 +899,7 @@ http_interactions:
       User-Agent:
       - Stripe/v1 RubyBindings/1.30.2
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
