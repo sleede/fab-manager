@@ -95,6 +95,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         $scope.group.change = false
         if $scope.currentUser.role isnt 'admin'
           $rootScope.currentUser = user
+          Auth._currentUser.group_id = user.group_id
           growl.success(_t('your_group_was_successfully_changed'))
         else
           growl.success(_t('the_user_s_group_was_successfully_changed'))
@@ -112,7 +113,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     # @return {string} 'male' or 'female'
     ##
     $scope.getGender = (user) ->
-      if user.profile
+      if user and user.profile
         if user.profile.gender == "true" then 'male' else 'female'
       else 'other'
 
