@@ -6,7 +6,7 @@ subscription_1:
   stp_subscription_id: sub_8DGB4ErIc2asOv
   created_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   updated_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  expired_at: <%= (1.month.from_now - 10.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  expired_at: <%= (1.month.from_now - 11.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   canceled_at: <%= (10.days.ago + 1.minute).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
 
 subscription_2:
@@ -16,7 +16,7 @@ subscription_2:
   stp_subscription_id:
   created_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   updated_at: <%= 10.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  expired_at: <%= (1.month.from_now - 10.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  expired_at: <%= (1.month.from_now - 11.days).utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   canceled_at:
 
 # subscription has expired (do not change dates)
