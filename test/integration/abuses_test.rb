@@ -15,7 +15,7 @@ class AbusesTest < ActionDispatch::IntegrationTest
 
   # Abuse report
   test 'visitor report an abuse' do
-    project = Project.first
+    project = Project.take
 
     post '/api/abuses',
          {
