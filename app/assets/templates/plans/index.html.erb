@@ -91,19 +91,19 @@
           <h3 ng-show="currentUser.role === 'admin'" translate translate-values="{GENDER:getGender(currentUser)}" translate-interpolation="messageformat">{{ 'his_group' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
-          <div ng-show="!changeGroup">
+          <div ng-show="!group.change">
               <div class="well well-warning">
                   <strong>{{getUserGroup().name}}</strong>
               </div>
               <button class="btn btn-default m-t"
-                      ng-click="changeGroup = !changeGroup"
+                      ng-click="group.change = !group.change"
                       ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paidPlan)"
                       translate
                       translate-values="{ROLE:currentUser.role}"
                       translate-interpolation="messageformat">{{ 'he_wants_to_change_group' }}</button>
           </div>
-          <div ng-show="changeGroup">
-              <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="userGroup"></select>
+          <div ng-show="group.change">
+              <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="group.id"></select>
               <button class="btn btn-success m-t"
                       ng-click="selectGroup()"
                       translate

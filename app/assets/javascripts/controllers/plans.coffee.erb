@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "PlansIndexController", ["$scope", "$state", '$uibModal', 'Auth', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t'
-, ($scope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t) ->
+Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScope", "$state", '$uibModal', 'Auth', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t'
+, ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t) ->
 
 
 
@@ -11,10 +11,10 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$state", 
     $scope.groups = groupsPromise
 
     ## default : do not show the group changing form
-    $scope.changeGroup = false
-
     ## group ID of the current/selected user
-    $scope.userGroup = null
+    $scope.group =
+        change: false
+        id: null
 
     ## list of plans, classified by group
     $scope.plansClassifiedByGroup = []
@@ -45,8 +45,8 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$state", 
     $scope.updateMember = ->
       $scope.selectedPlan = null
       $scope.paidPlan = null
-      $scope.userGroup = $scope.ctrl.member.group_id
-      $scope.changeGroup = false
+      $scope.group.id = $scope.ctrl.member.group_id
+      $scope.group.change = false
 
 
 
@@ -77,24 +77,25 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$state", 
 
 
     ##
-    # Return the group object, identified by the ID set in $scope.userGroup
+    # Return the group object, identified by the ID set in $scope.group.id
     ##
     $scope.getUserGroup = ->
       for group in $scope.groups
-        if group.id == $scope.userGroup
+        if group.id == $scope.group.id
           return group
 
 
 
     ##
-    # Change the group of the current/selected user to the one set in $scope.userGroup
+    # Change the group of the current/selected user to the one set in $scope.group.id
     ##
     $scope.selectGroup = ->
-      Member.update {id: $scope.ctrl.member.id}, {user: {group_id: $scope.userGroup}}, (user) ->
+      Member.update {id: $scope.ctrl.member.id}, {user: {group_id: $scope.group.id}}, (user) ->
         $scope.ctrl.member = user
-        $scope.changeGroup = false
+        $scope.group.change = false
         if $scope.currentUser.role isnt 'admin'
-          $scope.currentUser = user
+          $rootScope.currentUser = user
+          Auth._currentUser.group_id = user.group_id
           growl.success(_t('your_group_was_successfully_changed'))
         else
           growl.success(_t('the_user_s_group_was_successfully_changed'))
@@ -112,7 +113,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$state", 
     # @return {string} 'male' or 'female'
     ##
     $scope.getGender = (user) ->
-      if user.profile
+      if user and user.profile
         if user.profile.gender == "true" then 'male' else 'female'
       else 'other'
 
@@ -128,7 +129,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$state", 
         if $scope.currentUser.role isnt 'admin'
           $scope.ctrl.member = $scope.currentUser
           $scope.paidPlan = $scope.currentUser.subscribed_plan
-          $scope.userGroup = $scope.currentUser.group_id
+          $scope.group.id = $scope.currentUser.group_id
         else
           Member.query {requested_attributes:'[subscription]'}, (members) ->
             membersNoPlan = []

@@ -2,7 +2,7 @@ development:
   adapter: postgresql
   host: localhost
   encoding: unicode
-  database: fablab_development
+  database: fabmanager_development
   pool: 25
   username: sleede
   password: sleede
@@ -14,7 +14,7 @@ test:
   adapter: postgresql
   host: localhost
   encoding: unicode
-  database: fablab_test
+  database: fabmanager_test
   pool: 25
   username: sleede
   password: sleede
@@ -23,7 +23,7 @@ staging:
   adapter: postgresql
   host: localhost
   encoding: unicode
-  database: fablab_development
+  database: fabmanager_development
   pool: 25
   username: sleede
   password: sleede
@@ -33,7 +33,7 @@ production:
   adapter: postgresql
   host: localhost
   encoding: unicode
-  database: fablab_development
+  database: fabmanager_development
   pool: 25
   username: sleede
   password: sleede

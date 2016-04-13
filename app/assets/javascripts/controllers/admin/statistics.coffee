@@ -172,7 +172,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     if sex == 'male'
       return _t('man')
     if sex == 'female'
-      return t('woman')
+      return _t('woman')
 
 
 

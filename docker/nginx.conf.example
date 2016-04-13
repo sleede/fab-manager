@@ -4,7 +4,7 @@ upstream puma {
 
 server {
   listen 80;
-  server_name demo.fab-manager.com;
+  server_name MAIN_DOMAIN;
   root /usr/src/app/public;
 
   location ^~ /assets/ {
