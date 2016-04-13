@@ -86,7 +86,7 @@ class Event < ActiveRecord::Base
   end
 
   def update_nb_free_places
-    unless nb_total_places_was.nil?
+    unless nb_total_places_was.nil? or nb_total_places.nil?
       diff = nb_total_places - nb_total_places_was
       self.nb_free_places += diff
     end
