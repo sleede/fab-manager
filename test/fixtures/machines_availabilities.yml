@@ -83,3 +83,23 @@ machines_availability_17:
   id: 17
   machine_id: 6
   availability_id: 7
+
+machines_availability_18:
+  id: 18
+  machine_id: 2
+  availability_id: 13
+
+machines_availability_19:
+  id: 19
+  machine_id: 2
+  availability_id: 14
+
+machines_availability_20:
+  id: 20
+  machine_id: 2
+  availability_id: 15
+
+machines_availability_21:
+  id: 21
+  machine_id: 2
+  availability_id: 16

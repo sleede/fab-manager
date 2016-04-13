@@ -118,3 +118,44 @@ availability_12:
   updated_at: 2012-04-04 15:24:01.517486000 Z
   nb_total_places:
   destroying: false
+
+  availability_13:
+  id: 13
+  start_at: 2015-06-15 12:00:28.000000000 Z
+  end_at: 2015-06-15 18:00:28.000000000 Z
+  available_type: machines
+  created_at: 2015-05-30 18:40:39.141601000 Z
+  updated_at: 2015-05-30 18:40:39.141601000 Z
+  nb_total_places:
+  destroying: false
+
+
+availability_14:
+  id: 14
+  start_at: <%= 20.days.from_now.utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= 20.days.from_now.utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  available_type: machines
+  created_at: 2016-04-04 15:44:04.023557000 Z
+  updated_at: 2016-04-04 15:44:04.023557000 Z
+  nb_total_places:
+  destroying: false
+
+availability_15:
+  id: 15
+  start_at: <%= 40.days.from_now.utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= 40.days.from_now.utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  available_type: machines
+  created_at: 2016-04-04 15:44:04.023557000 Z
+  updated_at: 2016-04-04 15:44:04.023557000 Z
+  nb_total_places:
+  destroying: false
+
+availability_16:
+  id: 16
+  start_at: <%= 80.days.from_now.utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= 80.days.from_now.utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  available_type: machines
+  created_at: 2016-04-04 15:44:04.023557000 Z
+  updated_at: 2016-04-04 15:44:04.023557000 Z
+  nb_total_places:
+  destroying: false
