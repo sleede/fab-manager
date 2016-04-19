@@ -106,7 +106,7 @@ en:
   trainings:
     # training availabilities
     i_ve_reserved: "I've reserved"
-    completed: "Completed"
+    completed: "Full"
 
   export_members:
     # members list export to EXCEL format
