@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   include AASM
   include NotifyWith::NotificationAttachedObject
+  include OpenlabSync
 
   # elastic initialisations
   include Elasticsearch::Model
