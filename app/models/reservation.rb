@@ -219,7 +219,7 @@ class Reservation < ActiveRecord::Base
         end
       end
 
-      UsersCredits::Manager.new(reservation: self).update_credits unless reservable_type == 'Event'
+      UsersCredits::Manager.new(reservation: self).update_credits
       true
     end
   end
@@ -252,7 +252,7 @@ class Reservation < ActiveRecord::Base
     if user.invoicing_disabled?
       if valid?
         save!
-        UsersCredits::Manager.new(reservation: self).update_credits unless reservable_type == 'Event'
+        UsersCredits::Manager.new(reservation: self).update_credits
         return true
       end
     else
@@ -279,7 +279,7 @@ class Reservation < ActiveRecord::Base
         save!
       end
 
-      UsersCredits::Manager.new(reservation: self).update_credits unless reservable_type == 'Event'
+      UsersCredits::Manager.new(reservation: self).update_credits
       return true
     end
   end
