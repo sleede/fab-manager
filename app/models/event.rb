@@ -13,8 +13,7 @@ class Event < ActiveRecord::Base
   attr_accessor :recurrence, :recurrence_end_at
 
   after_create :event_recurrence
-  before_save :set_nb_free_places
-  before_update :update_nb_free_places, if: :nb_total_places_changed?
+  before_save :update_nb_free_places
 
   def name
     title
@@ -31,6 +30,10 @@ class Event < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def reservations
+    Reservation.where(reservable: self)
   end
 
   private
@@ -79,14 +82,12 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def set_nb_free_places
-    if nb_free_places.nil?
-      self.nb_free_places = nb_total_places
-    end
-  end
-
   def update_nb_free_places
-    diff = nb_total_places - nb_total_places_was
-    self.nb_free_places += diff
+    if nb_total_places.nil?
+      self.nb_free_places = nil
+    else
+      reserved_places = reservations.map{|r| r.nb_reserve_places + r.nb_reserve_reduced_places}.inject(0){|sum, t| sum + t }
+      self.nb_free_places = (nb_total_places - reserved_places)
+    end
   end
 end
