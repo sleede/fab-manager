@@ -65,6 +65,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
 
   scope :active, -> { where(is_active: true) }
+  scope :without_subscription, -> { includes(:subscriptions).where(subscriptions: { user_id: nil }) }
+  scope :with_subscription, -> { joins(:subscriptions) }
 
   def to_builder
     Jbuilder.new do |json|

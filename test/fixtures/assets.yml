@@ -1,0 +1,126 @@
+
+asset_1:
+  id: 1
+  viewable_id: 2
+  viewable_type: Profile
+  attachment: user_avatar.jpg
+  type: UserAvatar
+  created_at: 2016-04-04 15:06:22.151882000 Z
+  updated_at: 2016-04-04 15:06:22.151882000 Z
+
+asset_2:
+  id: 2
+  viewable_id: 5
+  viewable_type: Profile
+  attachment: user_avatar.jpg
+  type: UserAvatar
+  created_at: 2016-04-04 15:31:14.607327000 Z
+  updated_at: 2016-04-04 15:31:14.607327000 Z
+
+asset_3:
+  id: 3
+  viewable_id: 1
+  viewable_type: Project
+  attachment: project_image.jpg
+  type: ProjectImage
+  created_at: 2016-04-04 15:39:08.230159000 Z
+  updated_at: 2016-04-04 15:39:08.230159000 Z
+
+asset_4:
+  id: 4
+  viewable_id: 1
+  viewable_type: Event
+  attachment: event_image.jpg
+  type: EventImage
+  created_at: 2016-04-04 15:44:02.242194000 Z
+  updated_at: 2016-04-04 15:44:02.242194000 Z
+
+asset_5:
+  id: 5
+  viewable_id: 2
+  viewable_type: Event
+  attachment: event_image.jpg
+  type: EventImage
+  created_at: 2016-04-04 15:44:03.164384000 Z
+  updated_at: 2016-04-04 15:44:03.164384000 Z
+
+asset_6:
+  id: 6
+  viewable_id: 3
+  viewable_type: Event
+  attachment: event_image.jpg
+  type: EventImage
+  created_at: 2016-04-04 15:44:04.031482000 Z
+  updated_at: 2016-04-04 15:44:04.031482000 Z
+
+asset_7:
+  id: 7
+  viewable_id: 3
+  viewable_type: Profile
+  attachment: user_avatar.jpg
+  type: UserAvatar
+  created_at: 2016-04-05 08:35:18.585573000 Z
+  updated_at: 2016-04-05 08:35:18.585573000 Z
+
+asset_4:
+  id: 4
+  viewable_id: 1
+  viewable_type: Event
+  attachment: event_image.jpg
+  type: EventImage
+  created_at: 2016-04-04 15:44:02.242194000 Z
+  updated_at: 2016-04-04 15:44:02.242194000 Z
+
+asset_5:
+  id: 5
+  viewable_id: 2
+  viewable_type: Event
+  attachment: event_image.jpg
+  type: EventImage
+  created_at: 2016-04-04 15:44:03.164384000 Z
+  updated_at: 2016-04-04 15:44:03.164384000 Z
+
+asset_6:
+  id: 6
+  viewable_id: 3
+  viewable_type: Event
+  attachment: event_image.jpg
+  type: EventImage
+  created_at: 2016-04-04 15:44:04.031482000 Z
+  updated_at: 2016-04-04 15:44:04.031482000 Z
+
+asset_3:
+  id: 3
+  viewable_id: 1
+  viewable_type: Project
+  attachment: project_image.jpg
+  type: ProjectImage
+  created_at: 2016-04-04 15:39:08.230159000 Z
+  updated_at: 2016-04-04 15:39:08.230159000 Z
+
+asset_1:
+  id: 1
+  viewable_id: 2
+  viewable_type: Profile
+  attachment: user_avatar.jpg
+  type: UserAvatar
+  created_at: 2016-04-04 15:06:22.151882000 Z
+  updated_at: 2016-04-04 15:06:22.151882000 Z
+
+asset_2:
+  id: 2
+  viewable_id: 5
+  viewable_type: Profile
+  attachment: user_avatar.jpg
+  type: UserAvatar
+  created_at: 2016-04-04 15:31:14.607327000 Z
+  updated_at: 2016-04-04 15:31:14.607327000 Z
+
+asset_7:
+  id: 7
+  viewable_id: 3
+  viewable_type: Profile
+  attachment: user_avatar.jpg
+  type: UserAvatar
+  created_at: 2016-04-05 08:35:18.585573000 Z
+  updated_at: 2016-04-05 08:35:18.585573000 Z

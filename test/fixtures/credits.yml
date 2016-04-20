@@ -1,0 +1,117 @@
+
+credit_1:
+  id: 1
+  creditable_id: 2
+  creditable_type: Training
+  plan_id: 1
+  hours:
+  created_at: 2001-01-01 14:11:33.852721000 Z
+  updated_at: 2001-01-01 14:11:33.852721000 Z
+
+credit_2:
+  id: 2
+  creditable_id: 3
+  creditable_type: Training
+  plan_id: 1
+  hours:
+  created_at: 2016-04-04 15:19:28.449511000 Z
+  updated_at: 2016-04-04 15:19:28.449511000 Z
+
+credit_3:
+  id: 3
+  creditable_id: 1
+  creditable_type: Training
+  plan_id: 1
+  hours:
+  created_at: 2016-04-04 15:19:28.495141000 Z
+  updated_at: 2016-04-04 15:19:28.495141000 Z
+
+credit_5:
+  id: 5
+  creditable_id: 2
+  creditable_type: Training
+  plan_id: 2
+  hours:
+  created_at: 2016-04-04 15:19:39.416054000 Z
+  updated_at: 2016-04-04 15:19:39.416054000 Z
+
+credit_7:
+  id: 7
+  creditable_id: 4
+  creditable_type: Training
+  plan_id: 2
+  hours:
+  created_at: 2016-04-04 15:19:39.486949000 Z
+  updated_at: 2016-04-04 15:19:39.486949000 Z
+
+credit_8:
+  id: 8
+  creditable_id: 1
+  creditable_type: Training
+  plan_id: 2
+  hours:
+  created_at: 2016-04-04 15:19:39.521993000 Z
+  updated_at: 2016-04-04 15:19:39.521993000 Z
+
+credit_9:
+  id: 9
+  creditable_id: 3
+  creditable_type: Training
+  plan_id: 2
+  hours:
+  created_at: 2016-04-04 15:19:39.553519000 Z
+  updated_at: 2016-04-04 15:19:39.553519000 Z
+
+credit_10:
+  id: 10
+  creditable_id: 2
+  creditable_type: Training
+  plan_id: 3
+  hours:
+  created_at: 2016-04-04 15:21:35.437032000 Z
+  updated_at: 2016-04-04 15:21:35.437032000 Z
+
+credit_11:
+  id: 11
+  creditable_id: 1
+  creditable_type: Training
+  plan_id: 3
+  hours:
+  created_at: 2016-04-04 15:21:35.470423000 Z
+  updated_at: 2016-04-04 15:21:35.470423000 Z
+
+credit_12:
+  id: 12
+  creditable_id: 3
+  creditable_type: Training
+  plan_id: 3
+  hours:
+  created_at: 2016-04-04 15:21:35.547043000 Z
+  updated_at: 2016-04-04 15:21:35.547043000 Z
+
+credit_13:
+  id: 13
+  creditable_id: 4
+  creditable_type: Machine
+  plan_id: 2
+  hours: 1
+  created_at: 2016-04-04 15:21:57.547939000 Z
+  updated_at: 2016-04-04 15:21:57.547939000 Z
+
+credit_14:
+  id: 14
+  creditable_id: 6
+  creditable_type: Machine
+  plan_id: 3
+  hours: 1
+  created_at: 2016-04-04 15:21:57.547939000 Z
+  updated_at: 2016-04-04 15:21:57.547939000 Z
+
+credit_15:
+  id: 15
+  creditable_id: 4
+  creditable_type: Machine
+  plan_id: 1
+  hours: 1
+  created_at: 2001-01-01 14:11:33.852721000 Z
+  updated_at: 2001-01-01 14:11:33.852721000 Z

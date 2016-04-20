@@ -1,0 +1,50 @@
+
+trainings_machine_1:
+  id: 1
+  training_id: 2
+  machine_id: 1
+
+trainings_machine_2:
+  id: 2
+  training_id: 2
+  machine_id: 2
+
+trainings_machine_3:
+  id: 3
+  training_id: 4
+  machine_id: 3
+
+trainings_machine_4:
+  id: 4
+  training_id: 1
+  machine_id: 4
+
+trainings_machine_5:
+  id: 5
+  training_id: 3
+  machine_id: 5
+
+trainings_machine_1:
+  id: 1
+  training_id: 2
+  machine_id: 1
+
+trainings_machine_2:
+  id: 2
+  training_id: 2
+  machine_id: 2
+
+trainings_machine_3:
+  id: 3
+  training_id: 4
+  machine_id: 3
+
+trainings_machine_4:
+  id: 4
+  training_id: 1
+  machine_id: 4
+
+trainings_machine_5:
+  id: 5
+  training_id: 3
+  machine_id: 5

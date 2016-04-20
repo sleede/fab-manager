@@ -1,0 +1,14 @@
+
+project_1:
+  id: 1
+  name: Presse-purée
+  description: "<p>Réalisation d'un ustensile de cuisine permettant d'écraser des
+    pommes de terre ou d'outres légumes afin de confectionner de la purée.<br></p>"
+  created_at: 2016-04-04 15:39:08.224918000 Z
+  updated_at: 2016-04-04 15:39:08.224918000 Z
+  author_id: 5
+  tags: cuisine
+  licence_id: 1
+  state: published
+  slug: presse-puree
+  published_at: 2016-04-04 15:39:08.267614000 Z

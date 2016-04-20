@@ -1,0 +1,52 @@
+
+plan_1:
+  id: 1
+  name: Mensuel - standard, association - month
+  amount: 3000
+  interval: month
+  group_id: 1
+  stp_plan_id: mensuel-standard-month-20160404171519
+  created_at: 2001-01-01 15:15:19.860064000 Z
+  updated_at: 2001-01-01 15:19:28.367161000 Z
+  training_credit_nb: 1
+  is_rolling:
+  description:
+  type: Plan
+  base_name: Mensuel
+  ui_weight: 1
+  interval_count: 1
+
+plan_2:
+  id: 2
+  name: Sleede - standard, association - month
+  amount: 10000
+  interval: month
+  group_id: 1
+  stp_plan_id: nicolas-standard-month-20160404171724
+  created_at: 2016-04-04 15:17:24.026385000 Z
+  updated_at: 2016-04-04 15:19:39.357636000 Z
+  training_credit_nb: 2
+  is_rolling:
+  description:
+  type: PartnerPlan
+  base_name: Sleede
+  ui_weight: 5
+  interval_count: 2
+
+plan_3:
+  id: 3
+  name: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur d'emploi
+    - month
+  amount: 2000
+  interval: month
+  group_id: 2
+  stp_plan_id: mensuel-tarif-reduit-student-month-20160404171827
+  created_at: 2016-04-04 15:18:27.734657000 Z
+  updated_at: 2016-04-04 15:21:35.501739000 Z
+  training_credit_nb: 1
+  is_rolling:
+  description:
+  type: Plan
+  base_name: Mensuel tarif réduit
+  ui_weight: 0
+  interval_count: 1

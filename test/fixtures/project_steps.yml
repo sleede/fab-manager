@@ -1,0 +1,18 @@
+
+project_step_1:
+  id: 1
+  description: "<p>Impression du manche à l'imprimante 3D puis découpe d'un vinyle
+    de protection à coller tout autour du manche.</p>"
+  project_id: 1
+  created_at: 2016-04-04 15:39:08.259759000 Z
+  updated_at: 2016-04-04 15:39:08.259759000 Z
+  title: Le manche
+
+project_step_2:
+  id: 2
+  description: "<p>Impression de la presse à l'imprimante 3D puis assemblage avec
+    le manche et vissage de l'ensemble.</p>"
+  project_id: 1
+  created_at: 2016-04-04 15:39:08.265840000 Z
+  updated_at: 2016-04-04 15:39:08.265840000 Z
+  title: La presse

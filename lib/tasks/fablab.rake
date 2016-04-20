@@ -31,7 +31,7 @@ namespace :fablab do
     puts "-> Done"
   end
 
-  desc "Cancel strip subscriptions"
+  desc "Cancel stripe subscriptions"
   task cancel_subscriptions: :environment do
     Subscription.where("expired_at >= ?", Time.now.at_beginning_of_day).each do |s|
       puts "-> Start cancel subscription of #{s.user.email}"
@@ -169,5 +169,25 @@ namespace :fablab do
     end
 
     puts "\nUsers successfully notified\n\n"
+  end
+
+  desc "generate fixtures from db"
+  task generate_fixtures: :environment do
+    Rails.application.eager_load!
+    ActiveRecord::Base.descendants.reject { |c| c == ActiveRecord::SchemaMigration or c == PartnerPlan }.each do |ar_base|
+      p "========== #{ar_base} =============="
+      ar_base.dump_fixtures
+    end
+  end
+
+  desc 'clean stripe secrets from VCR cassettes'
+  task clean_cassettes_secrets: :environment do
+    Dir['test/vcr_cassettes/*.yml'].each do |cassette_file|
+      cassette = File.read(cassette_file)
+      cassette.gsub!(Rails.application.secrets.stripe_api_key, 'sk_test_testfaketestfaketestfake')
+      cassette.gsub!(Rails.application.secrets.stripe_publishable_key, 'pk_test_faketestfaketestfaketest')
+      puts cassette
+      File.write(cassette_file, cassette)
+    end
   end
 end

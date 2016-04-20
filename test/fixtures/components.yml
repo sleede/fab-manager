@@ -1,0 +1,40 @@
+
+component_1:
+  id: 1
+  name: Silicone
+
+component_2:
+  id: 2
+  name: Vinyle
+
+component_3:
+  id: 3
+  name: Bois Contre plaqué
+
+component_4:
+  id: 4
+  name: Bois Medium
+
+component_5:
+  id: 5
+  name: Plexi / PMMA
+
+component_6:
+  id: 6
+  name: Flex
+
+component_7:
+  id: 7
+  name: Vinyle
+
+component_8:
+  id: 8
+  name: Parafine
+
+component_9:
+  id: 9
+  name: Fibre de verre
+
+component_10:
+  id: 10
+  name: Résine

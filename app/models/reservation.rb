@@ -45,88 +45,40 @@ class Reservation < ActiveRecord::Base
       # === Machine reservation ===
       when Machine
         base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
-        if plan
-          machine_credit = plan.machine_credits.select {|credit| credit.creditable_id == reservable_id}.first
-          if machine_credit
-            hours_available = machine_credit.hours
-            if !new_plan_being_bought
-              user_credit = user.users_credits.find_by_credit_id(machine_credit.id)
-              if user_credit
-                hours_available = machine_credit.hours - user_credit.hours_used
-              end
-            end
-            slots.each_with_index do |slot, index|
-              description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
-              ii_amount = (index < hours_available ? 0 : base_amount)
-              ii_amount = 0 if (slot.offered and on_site)
-              unless on_site
-                ii = Stripe::InvoiceItem.create(
-                    customer: user.stp_customer_id,
-                    amount: ii_amount,
-                    currency: Rails.application.secrets.stripe_currency,
-                    description: description
-                )
-                invoice_items << ii
-              end
-              self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
-            end
-          else
-            slots.each do |slot|
-              description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
-              ii_amount = base_amount
-              ii_amount = 0 if (slot.offered and on_site)
-              unless on_site
-                ii = Stripe::InvoiceItem.create(
-                    customer: user.stp_customer_id,
-                    amount: ii_amount,
-                    currency: Rails.application.secrets.stripe_currency,
-                    description: description
-                )
-                invoice_items << ii
-              end
-              self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
-            end
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+
+        slots.each_with_index do |slot, index|
+          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+
+          ii_amount = base_amount # ii_amount default to base_amount
+
+          if users_credits_manager.will_use_credits?
+            ii_amount = (index < users_credits_manager.free_hours_count) ? 0 : base_amount
           end
-        else
-          slots.each do |slot|
-            description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
-            ii_amount = base_amount
-            ii_amount = 0 if (slot.offered and on_site)
-            unless on_site
-              ii = Stripe::InvoiceItem.create(
-                  customer: user.stp_customer_id,
-                  amount: ii_amount,
-                  currency: Rails.application.secrets.stripe_currency,
-                  description: description
-              )
-              invoice_items << ii
-            end
-            self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
+
+          ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
+
+          unless on_site # if it's local payment then do not create Stripe::InvoiceItem
+            ii = Stripe::InvoiceItem.create(
+                customer: user.stp_customer_id,
+                amount: ii_amount,
+                currency: Rails.application.secrets.stripe_currency,
+                description: description
+            )
+            invoice_items << ii
           end
+          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
         end
+
 
       # === Training reservation ===
       when Training
         base_amount = reservable.amount_by_group(user.group_id).amount
-        if plan
-          # Return True if the subscription link a training credit for training reserved by the user
-          training_is_creditable = plan.training_credits.select {|credit| credit.creditable_id == reservable.id}.size > 0
 
-          # Training reserved by the user is free when :
+        # be careful, variable plan can be the user's plan OR the plan user is currently purchasing
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+        base_amount = 0 if users_credits_manager.will_use_credits?
 
-          # |-> the user already has a current subscription and if training_is_creditable is true and has at least one credit available.
-          if !new_plan_being_bought
-            if user.training_credits.size < plan.training_credit_nb and training_is_creditable
-              base_amount = 0
-            end
-          # |-> the user buys a new subscription and if training_is_creditable is true.
-          else
-            if training_is_creditable
-              base_amount = 0
-            end
-          end
-
-        end
         slots.each do |slot|
           description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
           ii_amount = base_amount
@@ -176,32 +128,6 @@ class Reservation < ActiveRecord::Base
     invoice_items
   end
 
-  def update_users_credits
-    if user.subscribed_plan
-      if reservable_type == 'Machine'
-        machine_credit = user.subscribed_plan.machine_credits.select {|credit| credit.creditable_id == reservable_id}.first
-        if machine_credit
-          hours_available = machine_credit.hours
-          user_credit = user.users_credits.find_or_initialize_by(credit_id: machine_credit.id)
-          user_credit.hours_used ||= 0
-          hours_available = machine_credit.hours - user_credit.hours_used
-          if hours_available >= slots.size
-            user_credit.hours_used = user_credit.hours_used + slots.size
-          else
-            user_credit.hours_used = machine_credit.hours
-          end
-          user_credit.save
-        end
-      elsif reservable_type == 'Training'
-        training_credit = user.subscribed_plan.training_credits.select {|credit| credit.creditable_id == reservable_id}.first
-        if user.training_credits.size < user.subscribed_plan.training_credit_nb and training_credit
-          user.credits << training_credit
-        end
-      end
-    end
-    return self
-  end
-
   def save_with_payment
     build_invoice(user: user)
     invoice_items = generate_invoice_items
@@ -218,6 +144,10 @@ class Reservation < ActiveRecord::Base
           total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
           self.invoice.total = total
           save!
+          #
+          # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
+          # because subscription.create (in subscription.rb) will pay all waiting stripe invoice items
+          #
         else
           # error handling
           invoice_items.each(&:delete)
@@ -237,6 +167,9 @@ class Reservation < ActiveRecord::Base
               customer.save
             end
           end
+          #
+          # IMPORTANT NOTE: here, we have to create an invoice manually and pay it to pay all waiting stripe invoice items
+          #
           invoice = Stripe::Invoice.create(
             customer: user.stp_customer_id,
           )
@@ -286,7 +219,8 @@ class Reservation < ActiveRecord::Base
         end
       end
 
-      update_users_credits
+      UsersCredits::Manager.new(reservation: self).update_credits
+      true
     end
   end
 
@@ -318,7 +252,7 @@ class Reservation < ActiveRecord::Base
     if user.invoicing_disabled?
       if valid?
         save!
-        update_users_credits
+        UsersCredits::Manager.new(reservation: self).update_credits
         return true
       end
     else
@@ -345,7 +279,8 @@ class Reservation < ActiveRecord::Base
         save!
       end
 
-      update_users_credits
+      UsersCredits::Manager.new(reservation: self).update_credits
+      return true
     end
   end
 

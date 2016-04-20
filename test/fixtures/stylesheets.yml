@@ -1,0 +1,39 @@
+
+stylesheet_1:
+  id: 1
+  contents: |-
+    .bg-red { background-color: #cb1117; }
+         .bg-red-dark { background-color: #cb1117; }
+         #nav .nav { background-color: #cb1117; }
+         #nav .nav > li > a { color: white; }
+         #nav .nav > li > a:hover, #nav .nav > li > a:focus { background-color: #ed2229; }
+         #nav .nav > li > a.active { border-left: 3px solid #6d090c; background-color: #ed2229; }
+         #nav .nav > li > a.active { border-left: 3px solid #6d090c; background-color: #ed2229; }
+         .btn-theme { background-color: #cb1117; color: white; }
+         .btn-theme:active, .btn-theme:hover { background-color: #6d090c; }
+         .label-theme { background-color: #cb1117 }
+         .btn-link { color: #cb1117 !important; }
+         .btn-link:hover { color: #6d090c !important; }
+         a { color: #cb1117; }
+         a:hover, a:focus { color: #6d090c; }
+         h2, h3, h5 { color: #cb1117; }
+         h5:after { background-color: #cb1117; }
+         .bg-yellow { background-color: #ffdd00 !important; }
+         .event:hover { background-color: #cb1117; }
+         .widget h3 { color: #cb1117; }
+         .modal-header h1, .custom-invoice .modal-header h1 { color: #cb1117; }
+         .block-link:hover, .fc-toolbar .fc-button:hover, .fc-toolbar .fc-button:active, .fc-toolbar .fc-button.fc-state-active { background-color: #ffdd00; }
+         .carousel-control:hover, .carousel-control:focus, .carousel-caption .title a:hover { color: #ffdd00; }
+         .well.well-warning { border-color: #ffdd00;  background-color: #ffdd00;  }
+         .text-yellow { color: #ffdd00 !important; }
+         .red { color: #cb1117 !important; }
+         .btn-warning, .editable-buttons button[type=submit].btn-primary { background-color: #ffdd00 !important; border-color: #ffdd00 !important; }
+         .btn-warning:hover, .editable-buttons button[type=submit].btn-primary:hover, .btn-warning:focus, .editable-buttons button[type=submit].btn-primary:focus, .btn-warning.focus, .editable-buttons button.focus[type=submit].btn-primary, .btn-warning:active, .editable-buttons button[type=submit].btn-primary:active, .btn-warning.active, .editable-buttons button.active[type=submit].btn-primary, .open > .btn-warning.dropdown-toggle, .editable-buttons .open > button.dropdown-toggle[type=submit].btn-primary { background-color: #998500 !important; border-color: #998500 !important; }
+         .btn-warning-full { border-color: #ffdd00; background-color: #ffdd00; }
+         .heading .heading-btn a:hover { background-color: #ffdd00; }
+         .pricing-panel .content .wrap { border-color: #ffdd00; }
+         .pricing-panel .cta-button .btn:hover, .pricing-panel .cta-button .custom-invoice .modal-body .elements li:hover, .custom-invoice .modal-body .elements .pricing-panel .cta-button li:hover { background-color: #ffdd00 !important; }
+         a.label:hover, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:hover, a.label:focus, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:focus { color: #cb1117; }
+         .about-picture { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient( rgba(203, 17, 23, 0.78), rgba(203, 17, 23, 0.82) ), url('/about-fablab.jpg') no-repeat; }
+  created_at: 2016-04-04 14:11:34.712927000 Z
+  updated_at: 2016-04-04 14:11:34.712927000 Z

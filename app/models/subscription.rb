@@ -8,6 +8,7 @@ class Subscription < ActiveRecord::Base
   has_many :offer_days, dependent: :destroy
 
   validates_presence_of :plan_id
+  validates_with SubscriptionGroupValidator
 
   attr_accessor :card_token
 
@@ -27,7 +28,7 @@ class Subscription < ActiveRecord::Base
         self.expired_at = Time.at(new_subscription.current_period_end)
         save!
 
-        reset_users_credits if expired_date_changed
+        UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
 
         # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
@@ -76,7 +77,7 @@ class Subscription < ActiveRecord::Base
       self.canceled_at = nil
       set_expired_at
       save!
-      reset_users_credits if expired_date_changed
+      UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
       generate_invoice.save if invoice
       return true
     else
@@ -99,12 +100,6 @@ class Subscription < ActiveRecord::Base
     invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
     invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: self.id)
     invoice.save
-  end
-
-  def update_expired_date_with_first_training(training_start_at)
-    if plan.is_rolling?
-      update_columns(expired_at: training_start_at + plan.duration)
-    end
   end
 
   def cancel
@@ -139,7 +134,7 @@ class Subscription < ActiveRecord::Base
 
     self.expired_at = expired_at
     if save
-      reset_users_credits if !free_days
+      UsersCredits::Manager.new(user: self.user).reset_credits if !free_days
       notify_subscription_extended(free_days)
       return true
     end
@@ -147,18 +142,6 @@ class Subscription < ActiveRecord::Base
   end
 
   private
-  def update_payment
-    if stp_subscription_id.present?
-      stp_subscription = stripe_subscription
-      stp_subscription.plan = plan.stp_plan_id
-      stp_subscription.prorate = false
-      stp_subscription.save
-    else
-      # TODO: implement stripe payment if member update subscription
-      # must have a card
-    end
-  end
-
   def notify_member_subscribed_plan
     NotificationCenter.call type: 'notify_member_subscribed_plan',
                             receiver: user,
@@ -212,10 +195,6 @@ class Subscription < ActiveRecord::Base
     p_value = self.previous_changes[:expired_at][0]
     return true if p_value.nil?
     p_value.to_date != expired_at.to_date and expired_at > p_value
-  end
-
-  def reset_users_credits
-    user.users_credits.destroy_all
   end
 
   # def is_being_extended?

@@ -1,0 +1,20 @@
+
+projects_machine_1:
+  id: 1
+  project_id: 1
+  machine_id: 6
+
+projects_machine_2:
+  id: 2
+  project_id: 1
+  machine_id: 2
+
+projects_machine_1:
+  id: 1
+  project_id: 1
+  machine_id: 6
+
+projects_machine_2:
+  id: 2
+  project_id: 1
+  machine_id: 2

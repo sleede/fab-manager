@@ -1,0 +1,245 @@
+
+statistic_type_sub_type_1:
+  id: 1
+  statistic_type_id: 6
+  statistic_sub_type_id: 1
+  created_at: 2016-04-04 14:11:33.513238000 Z
+  updated_at: 2016-04-04 14:11:33.513238000 Z
+
+statistic_type_sub_type_2:
+  id: 2
+  statistic_type_id: 5
+  statistic_sub_type_id: 1
+  created_at: 2016-04-04 14:11:33.516138000 Z
+  updated_at: 2016-04-04 14:11:33.516138000 Z
+
+statistic_type_sub_type_3:
+  id: 3
+  statistic_type_id: 6
+  statistic_sub_type_id: 2
+  created_at: 2016-04-04 14:11:33.538652000 Z
+  updated_at: 2016-04-04 14:11:33.538652000 Z
+
+statistic_type_sub_type_4:
+  id: 4
+  statistic_type_id: 5
+  statistic_sub_type_id: 2
+  created_at: 2016-04-04 14:11:33.542486000 Z
+  updated_at: 2016-04-04 14:11:33.542486000 Z
+
+statistic_type_sub_type_5:
+  id: 5
+  statistic_type_id: 7
+  statistic_sub_type_id: 3
+  created_at: 2016-04-04 14:11:33.555871000 Z
+  updated_at: 2016-04-04 14:11:33.555871000 Z
+
+statistic_type_sub_type_6:
+  id: 6
+  statistic_type_id: 8
+  statistic_sub_type_id: 4
+  created_at: 2016-04-04 14:11:33.567632000 Z
+  updated_at: 2016-04-04 14:11:33.567632000 Z
+
+statistic_type_sub_type_7:
+  id: 7
+  statistic_type_id: 9
+  statistic_sub_type_id: 5
+  created_at: 2016-04-04 14:11:33.653644000 Z
+  updated_at: 2016-04-04 14:11:33.653644000 Z
+
+statistic_type_sub_type_8:
+  id: 8
+  statistic_type_id: 9
+  statistic_sub_type_id: 6
+  created_at: 2016-04-04 14:11:33.664529000 Z
+  updated_at: 2016-04-04 14:11:33.664529000 Z
+
+statistic_type_sub_type_9:
+  id: 9
+  statistic_type_id: 9
+  statistic_sub_type_id: 7
+  created_at: 2016-04-04 14:11:33.676852000 Z
+  updated_at: 2016-04-04 14:11:33.676852000 Z
+
+statistic_type_sub_type_10:
+  id: 10
+  statistic_type_id: 9
+  statistic_sub_type_id: 8
+  created_at: 2016-04-04 14:11:33.690793000 Z
+  updated_at: 2016-04-04 14:11:33.690793000 Z
+
+statistic_type_sub_type_11:
+  id: 11
+  statistic_type_id: 4
+  statistic_sub_type_id: 9
+  created_at: 2016-04-04 14:11:34.044221000 Z
+  updated_at: 2016-04-04 14:11:34.044221000 Z
+
+statistic_type_sub_type_12:
+  id: 12
+  statistic_type_id: 3
+  statistic_sub_type_id: 9
+  created_at: 2016-04-04 14:11:34.045765000 Z
+  updated_at: 2016-04-04 14:11:34.045765000 Z
+
+statistic_type_sub_type_13:
+  id: 13
+  statistic_type_id: 4
+  statistic_sub_type_id: 10
+  created_at: 2016-04-04 14:11:34.084202000 Z
+  updated_at: 2016-04-04 14:11:34.084202000 Z
+
+statistic_type_sub_type_14:
+  id: 14
+  statistic_type_id: 3
+  statistic_sub_type_id: 10
+  created_at: 2016-04-04 14:11:34.085725000 Z
+  updated_at: 2016-04-04 14:11:34.085725000 Z
+
+statistic_type_sub_type_15:
+  id: 15
+  statistic_type_id: 4
+  statistic_sub_type_id: 11
+  created_at: 2016-04-04 14:11:34.113011000 Z
+  updated_at: 2016-04-04 14:11:34.113011000 Z
+
+statistic_type_sub_type_16:
+  id: 16
+  statistic_type_id: 3
+  statistic_sub_type_id: 11
+  created_at: 2016-04-04 14:11:34.115670000 Z
+  updated_at: 2016-04-04 14:11:34.115670000 Z
+
+statistic_type_sub_type_17:
+  id: 17
+  statistic_type_id: 4
+  statistic_sub_type_id: 12
+  created_at: 2016-04-04 14:11:34.139750000 Z
+  updated_at: 2016-04-04 14:11:34.139750000 Z
+
+statistic_type_sub_type_18:
+  id: 18
+  statistic_type_id: 3
+  statistic_sub_type_id: 12
+  created_at: 2016-04-04 14:11:34.141062000 Z
+  updated_at: 2016-04-04 14:11:34.141062000 Z
+
+statistic_type_sub_type_19:
+  id: 19
+  statistic_type_id: 4
+  statistic_sub_type_id: 13
+  created_at: 2016-04-04 14:11:34.160439000 Z
+  updated_at: 2016-04-04 14:11:34.160439000 Z
+
+statistic_type_sub_type_20:
+  id: 20
+  statistic_type_id: 3
+  statistic_sub_type_id: 13
+  created_at: 2016-04-04 14:11:34.161861000 Z
+  updated_at: 2016-04-04 14:11:34.161861000 Z
+
+statistic_type_sub_type_21:
+  id: 21
+  statistic_type_id: 2
+  statistic_sub_type_id: 14
+  created_at: 2016-04-04 14:11:34.218360000 Z
+  updated_at: 2016-04-04 14:11:34.218360000 Z
+
+statistic_type_sub_type_22:
+  id: 22
+  statistic_type_id: 1
+  statistic_sub_type_id: 14
+  created_at: 2016-04-04 14:11:34.220463000 Z
+  updated_at: 2016-04-04 14:11:34.220463000 Z
+
+statistic_type_sub_type_23:
+  id: 23
+  statistic_type_id: 2
+  statistic_sub_type_id: 15
+  created_at: 2016-04-04 14:11:34.281962000 Z
+  updated_at: 2016-04-04 14:11:34.281962000 Z
+
+statistic_type_sub_type_24:
+  id: 24
+  statistic_type_id: 1
+  statistic_sub_type_id: 15
+  created_at: 2016-04-04 14:11:34.284179000 Z
+  updated_at: 2016-04-04 14:11:34.284179000 Z
+
+statistic_type_sub_type_25:
+  id: 25
+  statistic_type_id: 2
+  statistic_sub_type_id: 16
+  created_at: 2016-04-04 14:11:34.313711000 Z
+  updated_at: 2016-04-04 14:11:34.313711000 Z
+
+statistic_type_sub_type_26:
+  id: 26
+  statistic_type_id: 1
+  statistic_sub_type_id: 16
+  created_at: 2016-04-04 14:11:34.315260000 Z
+  updated_at: 2016-04-04 14:11:34.315260000 Z
+
+statistic_type_sub_type_27:
+  id: 27
+  statistic_type_id: 2
+  statistic_sub_type_id: 17
+  created_at: 2016-04-04 14:11:34.353541000 Z
+  updated_at: 2016-04-04 14:11:34.353541000 Z
+
+statistic_type_sub_type_28:
+  id: 28
+  statistic_type_id: 1
+  statistic_sub_type_id: 17
+  created_at: 2016-04-04 14:11:34.357176000 Z
+  updated_at: 2016-04-04 14:11:34.357176000 Z
+
+statistic_type_sub_type_29:
+  id: 29
+  statistic_type_id: 2
+  statistic_sub_type_id: 18
+  created_at: 2016-04-04 14:11:34.389833000 Z
+  updated_at: 2016-04-04 14:11:34.389833000 Z
+
+statistic_type_sub_type_30:
+  id: 30
+  statistic_type_id: 1
+  statistic_sub_type_id: 18
+  created_at: 2016-04-04 14:11:34.392790000 Z
+  updated_at: 2016-04-04 14:11:34.392790000 Z
+
+statistic_type_sub_type_31:
+  id: 31
+  statistic_type_id: 2
+  statistic_sub_type_id: 19
+  created_at: 2016-04-04 14:11:34.434454000 Z
+  updated_at: 2016-04-04 14:11:34.434454000 Z
+
+statistic_type_sub_type_32:
+  id: 32
+  statistic_type_id: 1
+  statistic_sub_type_id: 19
+  created_at: 2016-04-04 14:11:34.436807000 Z
+  updated_at: 2016-04-04 14:11:34.436807000 Z
+
+statistic_type_sub_type_33:
+  id: 33
+  statistic_type_id: 10
+  statistic_sub_type_id: 20
+  created_at: 2016-04-04 15:15:21.138545000 Z
+  updated_at: 2016-04-04 15:15:21.138545000 Z
+
+statistic_type_sub_type_34:
+  id: 34
+  statistic_type_id: 11
+  statistic_sub_type_id: 21
+  created_at: 2016-04-04 15:17:24.955599000 Z
+  updated_at: 2016-04-04 15:17:24.955599000 Z
+
+statistic_type_sub_type_35:
+  id: 35
+  statistic_type_id: 10
+  statistic_sub_type_id: 22
+  created_at: 2016-04-04 15:18:28.867317000 Z
+  updated_at: 2016-04-04 15:18:28.867317000 Z

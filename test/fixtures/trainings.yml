@@ -1,0 +1,45 @@
+
+training_1:
+  id: 1
+  name: Formation Imprimante 3D
+  created_at: 2016-04-04 14:11:34.033464000 Z
+  updated_at: 2016-04-04 14:11:34.033464000 Z
+  nb_total_places:
+  slug: formation-imprimante-3d
+  description:
+
+training_2:
+  id: 2
+  name: Formation Laser / Vinyle
+  created_at: 2001-01-01 14:11:33.852721000 Z
+  updated_at: 2001-01-01 14:11:34.075249000 Z
+  nb_total_places:
+  slug: formation-laser-vinyle
+  description:
+
+training_3:
+  id: 3
+  name: Formation Petite fraiseuse numerique
+  created_at: 2016-04-04 14:11:34.103077000 Z
+  updated_at: 2016-04-04 14:11:34.103077000 Z
+  nb_total_places:
+  slug: formation-petite-fraiseuse-numerique
+  description:
+
+training_4:
+  id: 4
+  name: Formation Shopbot Grande Fraiseuse
+  created_at: 2016-04-04 14:11:34.132899000 Z
+  updated_at: 2016-04-04 14:11:34.132899000 Z
+  nb_total_places:
+  slug: formation-shopbot-grande-fraiseuse
+  description:
+
+training_5:
+  id: 5
+  name: Formation logiciel 2D
+  created_at: 2016-04-04 14:11:34.152000000 Z
+  updated_at: 2016-04-04 14:11:34.152000000 Z
+  nb_total_places:
+  slug: formation-logiciel-2d
+  description:

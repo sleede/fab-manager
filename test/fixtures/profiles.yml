@@ -1,0 +1,91 @@
+
+profile_1:
+  id: 1
+  user_id: 1
+  first_name: admin
+  last_name: admin
+  gender: true
+  birthday: 2016-04-04
+  phone: 0123456789
+  interest:
+  software_mastered:
+  created_at: 2016-04-04 14:11:33.858015000 Z
+  updated_at: 2016-04-04 14:11:33.858015000 Z
+
+profile_2:
+  id: 2
+  user_id: 2
+  first_name: Jean
+  last_name: Dupont
+  gender: true
+  birthday: 1975-06-07
+  phone: '0214321420'
+  interest: 3D printers
+  software_mastered: autocad
+  created_at: 2016-04-04 15:00:29.131180000 Z
+  updated_at: 2016-04-04 15:06:22.148303000 Z
+
+profile_4:
+  id: 4
+  user_id: 4
+  first_name: Kevin
+  last_name: Dumas
+  gender: true
+  birthday: 1998-06-05
+  phone: 0446124793
+  interest: ''
+  software_mastered: solidworks
+  created_at: 2016-04-04 15:10:42.350790000 Z
+  updated_at: 2016-04-04 15:10:42.350790000 Z
+
+profile_5:
+  id: 5
+  user_id: 5
+  first_name: Vanessa
+  last_name: Lonchamp
+  gender: false
+  birthday: 1994-05-03
+  phone: 0233412482
+  interest: vélo, natation
+  software_mastered: ''
+  created_at: 2016-04-04 15:14:08.577633000 Z
+  updated_at: 2016-04-04 15:14:08.577633000 Z
+
+profile_6:
+  id: 6
+  user_id: 6
+  first_name: Gilbert
+  last_name: Partenaire
+  gender: true
+  birthday: 2016-04-04
+  phone: '0000000000'
+  interest:
+  software_mastered:
+  created_at: 2016-04-04 15:17:12.535971000 Z
+  updated_at: 2016-04-04 15:17:12.535971000 Z
+
+profile_3:
+  id: 3
+  user_id: 3
+  first_name: Paulette
+  last_name: Durand
+  gender: false
+  birthday: 1949-06-18
+  phone: '0474264261'
+  interest: ''
+  software_mastered: ''
+  created_at: 2016-04-04 15:07:46.687390000 Z
+  updated_at: 2016-04-05 08:35:18.580745000 Z
+
+profile_7:
+  id: 7
+  user_id: 7
+  first_name: Lucile
+  last_name: Seguin
+  gender: false
+  birthday: 1969-02-03
+  phone: '0241853679'
+  interest:
+  software_mastered:
+  created_at: 2012-03-12 11:00:21.411067000 Z
+  updated_at: 2016-04-07 11:00:37.643112000 Z

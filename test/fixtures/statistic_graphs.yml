@@ -1,0 +1,48 @@
+
+statistic_graph_1:
+  id: 1
+  statistic_index_id: 1
+  chart_type: stackedAreaChart
+  limit: 0
+  created_at: 2016-04-04 14:11:33.585281000 Z
+  updated_at: 2016-04-04 14:11:33.585281000 Z
+
+statistic_graph_2:
+  id: 2
+  statistic_index_id: 2
+  chart_type: stackedAreaChart
+  limit: 0
+  created_at: 2016-04-04 14:11:33.588092000 Z
+  updated_at: 2016-04-04 14:11:33.588092000 Z
+
+statistic_graph_3:
+  id: 3
+  statistic_index_id: 3
+  chart_type: discreteBarChart
+  limit: 10
+  created_at: 2016-04-04 14:11:33.590494000 Z
+  updated_at: 2016-04-04 14:11:33.590494000 Z
+
+statistic_graph_4:
+  id: 4
+  statistic_index_id: 4
+  chart_type: discreteBarChart
+  limit: 10
+  created_at: 2016-04-04 14:11:33.592600000 Z
+  updated_at: 2016-04-04 14:11:33.592600000 Z
+
+statistic_graph_5:
+  id: 5
+  statistic_index_id: 5
+  chart_type: lineChart
+  limit: 0
+  created_at: 2016-04-04 14:11:33.594459000 Z
+  updated_at: 2016-04-04 14:11:33.594459000 Z
+
+statistic_graph_6:
+  id: 6
+  statistic_index_id: 7
+  chart_type: discreteBarChart
+  limit: 10
+  created_at: 2016-04-04 14:11:33.596654000 Z
+  updated_at: 2016-04-04 14:11:33.596654000 Z
