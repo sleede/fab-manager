@@ -33,6 +33,9 @@ class Project < ActiveRecord::Base
   has_many :project_steps, dependent: :destroy
   accepts_nested_attributes_for :project_steps, allow_destroy: true
 
+  # validations
+  validates :author, :name, presence: true
+
   after_save :after_save_and_publish
 
   aasm :column => 'state' do
