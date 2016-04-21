@@ -36,7 +36,10 @@ module Project::OpenlabSync
         collaborators: users.map { |u| u.profile.full_name },
         steps_body: steps_body,
         image_path: project_image&.attachment&.medium&.url,
-        project_path: "/#!/projects/#{slug}"
+        project_path: "/#!/projects/#{slug}",
+        updated_at: updated_at.to_s(:iso8601),
+        created_at: created_at.to_s(:iso8601),
+        published_at: published_at.to_s(:iso8601)
       }
     end
 
