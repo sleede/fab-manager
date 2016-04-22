@@ -108,7 +108,7 @@ class Project < ActiveRecord::Base
       }
     }
 
-    if params['q'].empty? # we sort by created_at if there isn't a query
+    if params['q'].blank? # we sort by created_at if there isn't a query
       search[:sort] = { created_at: { order: :desc } }
     else # otherwise we search for the word (q) in various fields
       search[:query][:filtered][:query] = {

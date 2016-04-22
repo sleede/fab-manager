@@ -51,7 +51,9 @@ class API::ProjectsController < API::ApiController
 
   def search
     query_params = JSON.parse(params[:search])
-    @projects = Project.search(query_params, current_user).page(params[:page]).records
+    records = Project.search(query_params, current_user).page(params[:page]).records
+    @total = records.total
+    @projects = records.includes(:users, :project_image)
     render :index
   end
 

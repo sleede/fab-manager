@@ -144,12 +144,12 @@ class ProjectsController
 ##
 #  Controller used on projects listing page
 ##
-Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise'
-, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise) ->
+Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl'
+, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl) ->
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # Number of notifications added to the page when the user clicks on 'load next notifications'
+  # Number of projects added to the page when the user clicks on 'load more projects'
   PROJECTS_PER_PAGE = 12
 
   ### PUBLIC SCOPE ###
@@ -167,11 +167,34 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   ## list of components / used for filtering
   $scope.components = componentsPromise
 
-  ## By default, the pagination mode is activated to limit the page size
-  $scope.paginateActive = true
+  $scope.openlab = {}
+  $scope.openlab.projectsActive = Fablab.openlabProjectsActive
+  $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive || false
 
-  ## The currently displayed page number
-  $scope.page = 1
+  normalizeProjectsAttrs = (projects)->
+    projects.map((project)->
+      project.project_image = project.image_url
+      return project
+    )
+
+  $scope.searchOverWholeNetworkChanged = ->
+    setTimeout ->
+      $scope.triggerSearch()
+    , 150
+
+  loadMoreCallback = (projectsPromise)->
+    $scope.projects = $scope.projects.concat(projectsPromise.projects)
+
+  loadMoreOpenlabCallback = (projectsPromise)->
+    $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects))
+
+
+  $scope.loadMore = ->
+    if $scope.openlab.searchOverWholeNetwork is true
+      $scope.projectsPagination.loadMore(q: $scope.search.q)
+    else
+      $scope.projectsPagination.loadMore(search: $scope.search)
+
 
   $scope.resetFilters = ->
     $scope.search.q = ""
@@ -182,22 +205,22 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
     $scope.triggerSearch()
 
   $scope.triggerSearch = ->
-    Project.search { search: $scope.search, page: 1 }, (projects)->
-      $scope.projects = projects
-      if projects.length < PROJECTS_PER_PAGE
-        $scope.paginateActive = false
-      else
-        $scope.paginateActive = true
-      $scope.page = 2
+    if $scope.openlab.searchOverWholeNetwork is true
+      $scope.projectsPagination = new paginationService.Instance(OpenlabProject, 1, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback)
+      OpenlabProject.query { q: $scope.search.q, page: 1, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
+        if projectsPromise.errors?
+          # AJOUTER UN MESSAGE GROWL INTERNATIONALISER
+          $scope.openlab.searchOverWholeNetwork = false
+          $scope.triggerSearch()
+        else
+          $scope.projectsPagination.totalCount = projectsPromise.meta.total
+          $scope.projects = normalizeProjectsAttrs(projectsPromise.projects)
 
-  $scope.loadMoreProjects = ->
-		# Project.query {page: $scope.page}, (projects) ->
-		# 	$scope.projects = $scope.projects.concat projects
-		# 	$scope.paginateActive = false if projects.length < PROJECTS_PER_PAGE
-    Project.search { search: $scope.search, page: $scope.page }, (projects)->
-    	$scope.projects = $scope.projects.concat projects
-    	$scope.paginateActive = false if projects.length < PROJECTS_PER_PAGE
-    	$scope.page += 1
+    else
+      $scope.projectsPagination = new paginationService.Instance(Project, 1, PROJECTS_PER_PAGE, null, { }, loadMoreCallback, 'search')
+      Project.search { search: $scope.search, page: 1, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
+        $scope.projectsPagination.totalCount = projectsPromise.meta.total
+        $scope.projects = projectsPromise.projects
 
 
   ##
@@ -205,8 +228,11 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   # @param project {{slug:string}} The project to display
   ##
   $scope.showProject = (project) ->
-    $state.go('app.public.projects_show', {id: project.slug})
-
+    if ($scope.openlab.searchOverWholeNetwork is true) and (project.app_id isnt Fablab.openlabAppId)
+      $window.open(project.project_url, '_blank')
+      return true
+    else
+      $state.go('app.public.projects_show', {id: project.slug})
 
 
   ## initialization

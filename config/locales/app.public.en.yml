@@ -118,6 +118,7 @@ en:
       projects_list:
         # projects gallery
         the_fablab_projects: "The Fab Lab projects"
+        search_over_the_whole_network: "Search over the whole network"
         add_a_project: "Add a project"
         filter_projects: "Filter projects:"
         reset_all_filters: "Reset all filters"

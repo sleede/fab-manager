@@ -118,6 +118,7 @@ fr:
       projects_list:
         # galerie des projets
         the_fablab_projects: "Les projets du FabLab"
+        search_over_the_whole_network: "Chercher sur tout le réseau"
         add_a_project: "Ajouter un projet"
         filter_projects: "Filtrer les projets :"
         reset_all_filters: "Réinitialiser tous les filtres"
