@@ -16,7 +16,7 @@ en:
         _is_currently_associated_with_another_account_on_this_platform: "is currently associated with another account on this platform."
         please_click_to_change_email_associated_with_your_PROVIDER_account: "If it is not yours, please click on the following button to change the email associated with your {{PROVIDER}} account."  # angular interpolation
         do_you_already_have_an_account: "Do you already have an account?"
-        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Do not fill the form beside but specify here the code you've received by email, to recover your access"
+        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Do not fill the form beside but specify here the code you've received by email, to recover your access."
         just_specify_code_here_to_recover_access: "Just specify here the code you've received by email to recover your access."
         authentification_code: "Authentification code"
         confirm_my_code: "Confirm my code"
