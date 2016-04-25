@@ -80,6 +80,12 @@ en:
         to_date: "to" # context: date. eg: "from 01/01 to 01/05"
         to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
         or: "or"
+        change_my_data: "Change my data"
+        sync_my_profile: "Sync my profile"
+        once_your_data_are_up_to_date_: "Once your data are up to date,"
+        _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
+        _disconnect_then_reconnect_: "disconnect then reconnect"
+        _for_your_changes_to_take_effect: "for your changes to take effect."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"

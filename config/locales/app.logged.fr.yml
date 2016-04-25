@@ -6,13 +6,18 @@ fr:
         confirm_your_new_account: "Confirmez votre nouveau compte"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Vous venez de créer un nouveau compte sur {GENDER, select, male{le} female{la} other{les}} {NAME}, en vous connectant depuis"  # messageFormat interpolation
         before_letting_you_use_the_application_we_need_some_more_details: "Avant de vous laisser utiliser l'application, nous avons besoin de quelques renseignements supplémentaires"
+        your_email_is_already_used_by_another_account_on_the_platform: "Mais attendez, il y a un problème ! Votre adresse de courriel est déjà utilisée par un autre compte sur cette plate-forme."
         please_fill_the_following_form: "Merci de compléter le formulaire suivant"
         some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Certaines informations peuvent nous avoir été déjà fournies par {{NAME}} et ne sont pas modifiables"  # angular interpolation
         then_click_on_: "Cliquez ensuite sur"
         _to_start_using_the_application: "pour commencer à utiliser l'application"
         new_on_this_platform: "Nouveau sur cette plate-forme ?"
+        your_email_: "Votre adresse de courriel"
+        _is_currently_associated_with_another_account_on_this_platform: "est actuellement associée avec un autre compte sur cette plate-forme."
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "Si ce n'est pas le vôtre, merci de cliquer sur le bouton ci-dessous pour changer l'adresse de courriel associée avec votre compte {{PROVIDER}}."  # angular interpolation
         do_you_already_have_an_account: "Vous possédez déjà un compte ?"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Ne remplissez pas le formulaire à gauche mais indiquez ici le code qui vous a été fourni par e-mail, cela vous permettra de récupérer l'accès à votre compte."
+        just_specify_code_here_to_recover_access: "Indiquez simplement ici le code que vous avez reçu par e-mail, cela vous permettra de récupérer l'accès à votre compte."
         authentification_code: "Code d'authentification"
         confirm_my_code: "Valider mon code"
         an_unexpected_error_occurred_check_your_authentication_code: "Une erreur inattendue est survenue, vérifiez votre code d'authentification."
@@ -33,13 +38,6 @@ fr:
           no_labels: "Aucune étiquette"
           delete_my_account: "Supprimer mon compte"
           edit_my_profile: "Éditer votre profil"
-          change_my_data: "Modifier mes données"
-          once_your_data_are_up_to_date_: "Une fois vos données à jour,"
-          _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
-          _or_: 'ou'
-          _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
-          _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-          sync_my_profile: "Synchroniser mon profil"
           your_group_has_been_successfully_changed: "Votre groupe a bien été changé."
           an_unexpected_error_prevented_your_group_from_being_changed: "Une erreur inattendue a empêché votre changement de groupe."
           do_you_really_want_to_delete_your_account: "Êtes-vous sûr de vouloir supprimer votre compte ?"

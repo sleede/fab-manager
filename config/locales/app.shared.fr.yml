@@ -80,6 +80,12 @@ fr:
         to_date: "au" # context: date. eg: "from 01/01 to 01/05"
         to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
         or: "ou"
+        change_my_data: "Modifier mes données"
+        sync_my_profile: "Synchroniser mon profil"
+        once_your_data_are_up_to_date_: "Une fois vos données à jour,"
+        _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
+        _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
+        _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"

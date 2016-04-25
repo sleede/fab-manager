@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise"
-, ($scope, $rootScope, $state, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session"
+, ($scope, $rootScope, $state, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session) ->
 
 
 
@@ -83,6 +83,8 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
       $rootScope.currentUser = content
       $state.go('app.public.home')
 
+
+
   ##
   # For use with 'ng-class', returns the CSS class name for the uploads previews.
   # The preview may show a placeholder or the content of the file depending on the upload state.
@@ -112,6 +114,8 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
         growl.error(_t('an_unexpected_error_occurred_check_your_authentication_code'))
         console.error(err)
 
+
+
   ##
   # Return the email given by the SSO provider, parsed if needed
   # @return {String} E-mail of the current user
@@ -124,6 +128,8 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
         return duplicate[1]
     email
 
+
+
   ##
   # Test if the user's mail is marked as duplicate
   # @return {boolean}
@@ -131,7 +137,21 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
   $scope.hasDuplicate = ->
     email = memberPromise.email
     if email
-      return (email.match(/^<([^>]+)>.{20}-duplicate$/) == null)
+      return !(email.match(/^<([^>]+)>.{20}-duplicate$/) == null)
+
+
+
+  ##
+  # Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
+  ##
+  $scope.syncProfile = ->
+    Auth.logout().then (oldUser) ->
+      Session.destroy()
+      $rootScope.currentUser = null
+      $rootScope.toCheckNotifications = false
+      $scope.notifications = []
+      $window.location.href = activeProviderPromise.link_to_sso_connect
+
 
 
   ### PRIVATE SCOPE ###

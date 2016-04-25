@@ -1,7 +1,8 @@
 <section class="panel panel-default bg-token m-lg">
     <div class="panel-body m-r">
         <h3 translate>{{ 'do_you_already_have_an_account' }}</h3>
-        <p translate>{{ 'do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access' }}</p>
+        <p ng-hide="hasDuplicate()" translate>{{ 'do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access' }}</p>
+        <p ng-show="hasDuplicate()" translate>{{ 'just_specify_code_here_to_recover_access' }}</p>
         <div class="row">
             <div class="col-sm-3 col-sm-offset-1"></div>
             <div class="col-sm-offset-1 col-sm-6">

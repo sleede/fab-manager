@@ -98,6 +98,8 @@ p, .widget p {
 .text-u-l, .underline {text-decoration: underline;}
 .text-c { text-transform: capitalize; }
 
+.text-italic { font-style: italic; }
+
 .text-center { text-align: center; }
 
 .text-active, .active > .text, .active > .auto .text{display: none !important;}
