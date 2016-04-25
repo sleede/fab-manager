@@ -124,6 +124,14 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
         return duplicate[1]
     email
 
+  ##
+  # Test if the user's mail is marked as duplicate
+  # @return {boolean}
+  ##
+  $scope.hasDuplicate = ->
+    email = memberPromise.email
+    if email
+      return (email.match(/^<([^>]+)>.{20}-duplicate$/) == null)
 
 
   ### PRIVATE SCOPE ###

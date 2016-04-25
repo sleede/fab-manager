@@ -464,3 +464,17 @@ padding: 10px;
     display: none;
   }
 }
+
+.disabling-overlay {
+  &:before {
+    content: "";
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(230, 230, 230, 0.7);
+    position: absolute;
+    z-index:10;
+    border-radius: 3px;
+  }
+}

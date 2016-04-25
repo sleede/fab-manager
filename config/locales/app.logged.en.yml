@@ -10,8 +10,9 @@ en:
         some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Some data may have already been provided by {{NAME}} and cannot be modified"  # angular interpolation
         then_click_on_: "Then click on"
         _to_start_using_the_application: "to start using the application"
+        new_on_this_platform: "New on this platform?"
         do_you_already_have_an_account: "Do you already have an account?"
-        do_not_fill_the_form_below_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Do not fill the form below but specify here the code you've received by email, to recover your access"
+        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Do not fill the form beside but specify here the code you've received by email, to recover your access"
         authentification_code: "Authentification code"
         confirm_my_code: "Confirm my code"
         an_unexpected_error_occurred_check_your_authentication_code: "An unexpected error occurred, please check your authentication code."

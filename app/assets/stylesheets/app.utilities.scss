@@ -10,18 +10,34 @@
 .font-felt { font-family: $font-felt; }
 
 p.font-felt {
-  
+
 }
 p, .widget p {
   &.font-felt, .font-felt { font-size: rem-calc(18) !important; }
   &.fleche-left {
     position: relative;
     padding-left: 5px;
+    span.or {
+      border: 2px solid $yellow;
+      border-radius: 50%;
+      padding: 10px 17px 10px 17px;
+    }
   }
   img.fleche-left {
     position: absolute;
     left: -35px;
     top: 15px;
+  }
+  img.fleche-right {
+    position: absolute;
+    right: -35px;
+    top: 15px;
+  }
+  img.fleche-left-from-top {
+    transform: rotate(90deg) scaleX(-1);
+  }
+  img.fleche-right-from-top {
+    transform: rotate(270deg)
   }
 }
 
