@@ -26,7 +26,7 @@
       <a href="javascript:void(0);" class="text-sm pull-right" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'reset_all_filters' | translate }}</a></h3>
     </div>
     <div class="col-md-12 m-b">
-      <span ng-if="openlab.projectsActive">
+      <span ng-if="openlab.projectsActive" uib-tooltip="{{ 'tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
         <label for="searchOverWholeNetwork" class="control-label m-r" translate>{{ 'search_over_the_whole_network' }}</label>
         <input bs-switch
                ng-model="openlab.searchOverWholeNetwork"
