@@ -144,8 +144,8 @@ class ProjectsController
 ##
 #  Controller used on projects listing page
 ##
-Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl'
-, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl) ->
+Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t'
+, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t) ->
 
   ### PRIVATE STATIC CONSTANTS ###
 
@@ -209,7 +209,7 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
       $scope.projectsPagination = new paginationService.Instance(OpenlabProject, 1, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback)
       OpenlabProject.query { q: $scope.search.q, page: 1, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
         if projectsPromise.errors?
-          # AJOUTER UN MESSAGE GROWL INTERNATIONALISER
+          growl.error(_t('openlab_search_not_available_at_the_moment'))
           $scope.openlab.searchOverWholeNetwork = false
           $scope.triggerSearch()
         else

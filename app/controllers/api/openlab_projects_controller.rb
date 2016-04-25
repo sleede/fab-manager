@@ -5,7 +5,7 @@ class API::OpenlabProjectsController < API::ApiController
     begin
       render json: PROJECTS.search(params[:q], page: params[:page], per_page: params[:per_page]).response.body
     rescue Errno::ECONNREFUSED
-      render json: { errors: ['service unavailable'] } and return
+      render json: { errors: ['service unavailable'] }
     end
   end
 end

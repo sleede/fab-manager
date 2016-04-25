@@ -119,6 +119,7 @@ en:
         # projects gallery
         the_fablab_projects: "The Fab Lab projects"
         search_over_the_whole_network: "Search over the whole network"
+        openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         add_a_project: "Add a project"
         filter_projects: "Filter projects:"
         reset_all_filters: "Reset all filters"
