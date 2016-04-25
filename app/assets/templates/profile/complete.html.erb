@@ -19,7 +19,7 @@
     </section>
 
 
-    <div class="row no-gutter ">
+    <div class="row no-gutter">
         <div class="col-sm-12 col-md-12 b-r">
             <div class="row">
                 <div class="col-md-offset-2 col-md-8 m-t-md">
@@ -34,11 +34,11 @@
                     </section>
                 </div>
             </div>
-            <div class="row col-md-2 col-md-offset-5">
+            <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs">
               <p class="font-felt fleche-left text-lg upper text-center">
-                <%= image_tag("fleche-left.png", class: 'fleche-left visible-lg fleche-left-from-top') %>
+                <%= image_tag("fleche-left.png", class: 'fleche-left visible-md fleche-left-from-top') %>
                 <span class="or" translate>{{ 'or' }}</span>
-                <%= image_tag("fleche-left.png", class: 'fleche-right visible-lg fleche-right-from-top') %>
+                <%= image_tag("fleche-left.png", class: 'fleche-right visible-md fleche-right-from-top') %>
               </p>
             </div>
             <div class="row">
@@ -137,7 +137,12 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-md-6" ng-hide="user.merged_at">
+              <div class="row col-xs-2 col-xs-offset-5 hidden-md hidden-lg">
+                <p class="font-felt fleche-left text-lg upper text-center">
+                  <span class="or" translate>{{ 'or' }}</span>
+                </p>
+              </div>
+                <div class="col-md-6 m-t-3xl-on-md" ng-hide="user.merged_at">
                     <ng-include src="'<%= asset_path 'profile/_token.html' %>'"></ng-include>
                 </div>
             </div>
