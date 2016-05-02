@@ -23,51 +23,66 @@
 <section class="m-lg">
   <div class="row m-b-md">
     <div class="col-md-12"><h3 class="m-t-xs">{{ 'filter_projects' | translate }}
-      <a href="" class="text-sm pull-right" name="button" ng-click="resetFilters()"><i class="fa fa-refresh"></i> {{ 'reset_all_filters' | translate }}</a></h3>
+      <a href="javascript:void(0);" class="text-sm pull-right" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'reset_all_filters' | translate }}</a></h3>
     </div>
     <div class="col-md-12 m-b">
-      <form class="form-inline">
+      <span ng-if="openlab.projectsActive" uib-tooltip="{{ 'tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
+        <label for="searchOverWholeNetwork" class="control-label m-r" translate>{{ 'search_over_the_whole_network' }}</label>
+        <input bs-switch
+               ng-model="openlab.searchOverWholeNetwork"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'yes' | translate }}"
+               switch-off-text="{{ 'no' | translate }}"
+               switch-animate="true"
+               ng-change="searchOverWholeNetworkChanged()"
+               />
+        {{ searchOverWholeNetwork }}
+      </span>
+      <form class="form-inline" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
             <input type="search" class="form-control" placeholder="Mots-clés" ng-model="search.q"/>
             <div class="input-group-btn">
-              <button ng-click="triggerSearch()" type="button" class="btn btn-warning" translate>{{ 'search' }}</button>
+              <button type="submit" class="btn btn-warning" translate>{{ 'search' }}</button>
             </div>
           </div>
-          
         </div>
       </form>
     </div>
-    <div class="col-md-3 m-b" ng-show="isAuthenticated()">
-      <select ng-model="search.from" ng-change="triggerSearch()" class="form-control">
-        <option value="" translate>{{ 'all_projects' }}</option>
-        <option value="mine" translate>{{ 'my_projects' }}</option>
-        <option value="collaboration" translate>{{ 'projects_to_whom_i_take_part_in' }}</option>
-      </select>
-    </div>
+    <span ng-if="!openlab.searchOverWholeNetwork">
+      <div class="col-md-3 m-b" ng-show="isAuthenticated()">
+        <select ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
+          <option value="" translate>{{ 'all_projects' }}</option>
+          <option value="mine" translate>{{ 'my_projects' }}</option>
+          <option value="collaboration" translate>{{ 'projects_to_whom_i_take_part_in' }}</option>
+        </select>
+      </div>
 
-    <div class="col-md-3 m-b">
-      <select ng-model="search.machine_id" ng-change="triggerSearch()" class="form-control" ng-options="m.id as m.name for m in machines">
-        <option value="" translate>{{ 'all_machines' }}</option>
-      </select>
-    </div>
+      <div class="col-md-3 m-b">
+        <select ng-model="search.machine_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="m.id as m.name for m in machines">
+          <option value="" translate>{{ 'all_machines' }}</option>
+        </select>
+      </div>
 
-    <div class="col-md-3 m-b">
-      <select ng-model="search.theme_id" ng-change="triggerSearch()" class="form-control" ng-options="t.id as t.name for t in themes">
-        <option value="" translate>{{ 'all_themes' }}</option>
-      </select>
-    </div>
+      <div class="col-md-3 m-b">
+        <select ng-model="search.theme_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in themes">
+          <option value="" translate>{{ 'all_themes' }}</option>
+        </select>
+      </div>
 
-    <div class="col-md-3 m-b">
-      <select ng-model="search.component_id" ng-change="triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
-        <option value="" translate>{{ 'all_materials' }}</option>
-      </select>
-    </div>
+      <div class="col-md-3 m-b">
+        <select ng-model="search.component_id" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control" ng-options="t.id as t.name for t in components">
+          <option value="" translate>{{ 'all_materials' }}</option>
+        </select>
+      </div>
+    </span>
   </div>
 
 
   <div class="row">
+    <span class="col-md-12" ng-show="projects && (projects.length == 0)"> {{ 'project_search_result_is_empty' | translate }} </span>
     <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="project in projects" ng-click="showProject(project)">
       <div class="box-thumb box-thumb-project" style="background-image: url({{project.project_image}});">
 
@@ -75,10 +90,11 @@
 
         <div class="box-content project-caption">
           <h1>{{project.name}}</h1>
+          <h3>{{ project.app_name }}</h3>
         </div>
         <div class="box-footer">
           <div class="btn-group">
-            <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="projectEditableBy(currentUser) || isAuthorized('admin')">
+            <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin') && !openlab.searchOverWholeNetwork">
               <i class="fa fa-edit"></i> {{ 'edit' | translate }}
             </div>
             <div class="btn btn-default" ng-click="showProject(project)">
@@ -92,7 +108,7 @@
 
   <div class="row">
     <div class="col-lg-12 text-center">
-        <a class="btn btn-warning" ng-click="loadMoreProjects()" ng-if="paginateActive" translate>{{ 'load_next_projects' }}</a>
+        <a class="btn btn-warning" ng-click="loadMore()" ng-if="projectsPagination.hasNextPage()" translate>{{ 'load_next_projects' }}</a>
     </div>
   </div>
 </section>

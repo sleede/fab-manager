@@ -219,7 +219,7 @@ angular.module('application.router', ['ui.router']).
 
       # projects
       .state 'app.public.projects_list',
-        url: '/projects'
+        url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network'
         views:
           'main@':
             templateUrl: '<%= asset_path "projects/index.html" %>'

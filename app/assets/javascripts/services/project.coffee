@@ -10,5 +10,5 @@ Application.Services.factory 'Project', ["$resource", ($resource)->
     search:
       method: 'GET'
       url: '/api/projects/search'
-      isArray: true
+      isArray: false
 ]

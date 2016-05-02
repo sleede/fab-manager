@@ -144,16 +144,16 @@ class ProjectsController
 ##
 #  Controller used on projects listing page
 ##
-Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise'
-, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise) ->
+Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout'
+, ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout) ->
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # Number of notifications added to the page when the user clicks on 'load next notifications'
+  # Number of projects added to the page when the user clicks on 'load more projects'
   PROJECTS_PER_PAGE = 12
 
   ### PUBLIC SCOPE ###
-  $scope.search = { q: "", from: undefined, machine_id: undefined, component_id: undefined, theme_id: undefined }
+  $scope.search = { q: ($location.$$search.q || ""), from: ($location.$$search.from || undefined), machine_id: ($location.$$search.machine_id || undefined), component_id: ($location.$$search.component_id || undefined), theme_id: ($location.$$search.theme_id || undefined) }
 
   ## list of projects to display
   $scope.projects = []
@@ -167,37 +167,68 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   ## list of components / used for filtering
   $scope.components = componentsPromise
 
-  ## By default, the pagination mode is activated to limit the page size
-  $scope.paginateActive = true
+  $scope.openlab = {}
+  $scope.openlab.projectsActive = Fablab.openlabProjectsActive
 
-  ## The currently displayed page number
-  $scope.page = 1
+  if $location.$$search.whole_network is 'f'
+    $scope.openlab.searchOverWholeNetwork = false
+  else
+    $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive || false
 
-  $scope.resetFilters = ->
+  normalizeProjectsAttrs = (projects)->
+    projects.map((project)->
+      project.project_image = project.image_url
+      return project
+    )
+
+  $scope.searchOverWholeNetworkChanged = ->
+    setTimeout ->
+      $scope.resetFiltersAndTriggerSearch()
+    , 150
+
+  loadMoreCallback = (projectsPromise)->
+    $scope.projects = $scope.projects.concat(projectsPromise.projects)
+    updateUrlParam('page', $scope.projectsPagination.currentPage)
+
+  loadMoreOpenlabCallback = (projectsPromise)->
+    $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects))
+    updateUrlParam('page', $scope.projectsPagination.currentPage)
+
+  $scope.loadMore = ->
+    if $scope.openlab.searchOverWholeNetwork is true
+      $scope.projectsPagination.loadMore(q: $scope.search.q)
+    else
+      $scope.projectsPagination.loadMore(search: $scope.search)
+
+
+  $scope.resetFiltersAndTriggerSearch = ->
     $scope.search.q = ""
     $scope.search.from = undefined
     $scope.search.machine_id = undefined
     $scope.search.component_id = undefined
     $scope.search.theme_id = undefined
+    $scope.setUrlQueryParams($scope.search)
     $scope.triggerSearch()
 
   $scope.triggerSearch = ->
-    Project.search { search: $scope.search, page: 1 }, (projects)->
-      $scope.projects = projects
-      if projects.length < PROJECTS_PER_PAGE
-        $scope.paginateActive = false
-      else
-        $scope.paginateActive = true
-      $scope.page = 2
+    currentPage = parseInt($location.$$search.page) || 1
+    if $scope.openlab.searchOverWholeNetwork is true
+      $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback)
+      OpenlabProject.query { q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
+        if projectsPromise.errors?
+          growl.error(_t('openlab_search_not_available_at_the_moment'))
+          $scope.openlab.searchOverWholeNetwork = false
+          $scope.triggerSearch()
+        else
+          $scope.projectsPagination.totalCount = projectsPromise.meta.total
+          $scope.projects = normalizeProjectsAttrs(projectsPromise.projects)
 
-  $scope.loadMoreProjects = ->
-		# Project.query {page: $scope.page}, (projects) ->
-		# 	$scope.projects = $scope.projects.concat projects
-		# 	$scope.paginateActive = false if projects.length < PROJECTS_PER_PAGE
-    Project.search { search: $scope.search, page: $scope.page }, (projects)->
-    	$scope.projects = $scope.projects.concat projects
-    	$scope.paginateActive = false if projects.length < PROJECTS_PER_PAGE
-    	$scope.page += 1
+    else
+      updateUrlParam('whole_network', 'f')
+      $scope.projectsPagination = new paginationService.Instance(Project, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreCallback, 'search')
+      Project.search { search: $scope.search, page: currentPage, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
+        $scope.projectsPagination.totalCount = projectsPromise.meta.total
+        $scope.projects = projectsPromise.projects
 
 
   ##
@@ -205,9 +236,32 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   # @param project {{slug:string}} The project to display
   ##
   $scope.showProject = (project) ->
-    $state.go('app.public.projects_show', {id: project.slug})
+    if ($scope.openlab.searchOverWholeNetwork is true) and (project.app_id isnt Fablab.openlabAppId)
+      $window.open(project.project_url, '_blank')
+      return true
+    else
+      $state.go('app.public.projects_show', {id: project.slug})
 
+  ##
+  # function to set all url query search parameters from search object
+  ##
+  $scope.setUrlQueryParams = (search)->
+    updateUrlParam('page', 1)
+    updateUrlParam('q', search.q)
+    updateUrlParam('from', search.from)
+    updateUrlParam('theme_id', search.theme_id)
+    updateUrlParam('component_id', search.component_id)
+    updateUrlParam('machine_id', search.machine_id)
 
+  ##
+  # function to update url query param, little hack to turn off reloadOnSearch and re-enable it after setting the params
+  # params example: 'q' , 'presse-purée'
+  ##
+  updateUrlParam = (name, value) ->
+    $state.current.reloadOnSearch = false
+    $location.search(name, value)
+    $timeout ->
+      $state.current.reloadOnSearch = undefined
 
   ## initialization
   $scope.triggerSearch()

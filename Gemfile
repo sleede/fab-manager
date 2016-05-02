@@ -137,3 +137,5 @@ gem 'chroma'
 gem 'protected_attributes'
 
 gem 'message_format'
+
+gem 'openlab_ruby'
