@@ -215,6 +215,7 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   $scope.triggerSearch = ->
     currentPage = parseInt($location.$$search.page) || 1
     if $scope.openlab.searchOverWholeNetwork is true
+      updateUrlParam('whole_network', 't')
       $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback)
       OpenlabProject.query { q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
         if projectsPromise.errors?
