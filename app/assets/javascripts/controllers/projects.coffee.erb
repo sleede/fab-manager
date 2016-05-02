@@ -150,7 +150,9 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   ### PRIVATE STATIC CONSTANTS ###
 
   # Number of projects added to the page when the user clicks on 'load more projects'
-  PROJECTS_PER_PAGE = 12
+  PROJECTS_PER_PAGE = 16
+
+  $scope.openlabAppId = Fablab.openlabAppId
 
   ### PUBLIC SCOPE ###
   $scope.search = { q: ($location.$$search.q || ""), from: ($location.$$search.from || undefined), machine_id: ($location.$$search.machine_id || undefined), component_id: ($location.$$search.component_id || undefined), theme_id: ($location.$$search.theme_id || undefined) }
@@ -229,7 +231,6 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
       Project.search { search: $scope.search, page: currentPage, per_page: PROJECTS_PER_PAGE }, (projectsPromise)->
         $scope.projectsPagination.totalCount = projectsPromise.meta.total
         $scope.projects = projectsPromise.projects
-
 
   ##
   # Callback to switch the user's view to the detailled project page

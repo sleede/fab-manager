@@ -118,12 +118,11 @@ en:
       projects_list:
         # projects gallery
         the_fablab_projects: "The Fab Lab projects"
-        search_over_the_whole_network: "Search over the whole network"
+        search_over_the_whole_network: "Search over the whole Fab Manager network"
         tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
         add_a_project: "Add a project"
-        filter_projects: "Filter projects:"
         reset_all_filters: "Reset all filters"
         search: "Search"
         all_projects: "All projects"
@@ -132,7 +131,7 @@ en:
         all_machines: "All machines"
         all_themes: "All themes"
         all_materials: "All materials"
-        load_next_projects: "Load next projects..."
+        load_next_projects: "Load next projects"
 
       projects_show:
         # details of a projet

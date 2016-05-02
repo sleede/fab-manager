@@ -22,12 +22,11 @@
 
 <section class="m-lg">
   <div class="row m-b-md">
-    <div class="col-md-12"><h3 class="m-t-xs">{{ 'filter_projects' | translate }}
-      <a href="javascript:void(0);" class="text-sm pull-right" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'reset_all_filters' | translate }}</a></h3>
-    </div>
     <div class="col-md-12 m-b">
+      <a href="javascript:void(0);" class="text-sm pull-right" name="button" ng-click="resetFiltersAndTriggerSearch()" ng-show="!openlab.searchOverWholeNetwork"><i class="fa fa-refresh"></i> {{ 'reset_all_filters' | translate }}</a>
+
       <span ng-if="openlab.projectsActive" uib-tooltip="{{ 'tooltip_openlab_projects_switch' | translate }}" tooltip-trigger="mouseenter">
-        <label for="searchOverWholeNetwork" class="control-label m-r" translate>{{ 'search_over_the_whole_network' }}</label>
+        <label for="searchOverWholeNetwork" class="control-label m-r text-sm" translate>{{ 'search_over_the_whole_network' }}</label>
         <input bs-switch
                ng-model="openlab.searchOverWholeNetwork"
                type="checkbox"
@@ -39,7 +38,7 @@
                />
         {{ searchOverWholeNetwork }}
       </span>
-      <form class="form-inline" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
+      <form class="form-inline m-t" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
@@ -84,24 +83,32 @@
   <div class="row">
     <span class="col-md-12" ng-show="projects && (projects.length == 0)"> {{ 'project_search_result_is_empty' | translate }} </span>
     <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="project in projects" ng-click="showProject(project)">
-      <div class="box-thumb box-thumb-project" style="background-image: url({{project.project_image}});">
 
-        <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!project.project_image">
+      <div class="card card-project">
 
-        <div class="box-content project-caption">
-          <h1>{{project.name}}</h1>
-          <h3>{{ project.app_name }}</h3>
+        <div class="card-header">
+          <div class="card-header-bg" style="background-image: url({{project.project_image}});">
+            <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!project.project_image">
+          </div>
+          
         </div>
-        <div class="box-footer">
+
+        <div class="card-block">
+          <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork && project.app_id == openlabAppId"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
+          <h1 class="card-title">{{project.name}}</h1>
+        </div>
+
+        <div class="card-overlay">
           <div class="btn-group">
-            <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin') && !openlab.searchOverWholeNetwork">
-              <i class="fa fa-edit"></i> {{ 'edit' | translate }}
-            </div>
             <div class="btn btn-default" ng-click="showProject(project)">
-              <i class="fa fa-eye"></i> {{ 'consult' | translate }}
+              <i ng-class="{'fa fa-external-link' : (openlab.searchOverWholeNetwork && project.app_id != openlabAppId) }"></i> {{ 'consult' | translate }}
+            </div>
+            <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin') && !openlab.searchOverWholeNetwork">
+              <i class="fa fa-edit"></i>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

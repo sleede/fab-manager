@@ -65,6 +65,76 @@
   height: 100%;
 }
 
+.card {
+  position: relative;
+  display: block;
+  margin-bottom: .75rem;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: .25rem;
+  height: 325px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  cursor: pointer;
+
+  .card-overlay {
+    margin: 1.25rem;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(43,46,56,0.8);
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+    height: 180px;
+    cursor: pointer;
+    .btn-group { margin-top: 70px;}
+    .btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid #fff;
+      color: #fff;
+    }
+  }
+
+  &:hover {
+    .card-overlay {
+      opacity: 1;
+    }
+  }
+
+  .card-header {
+    width: 100%;
+    display: block;
+    padding: 1.25rem;
+    .card-header-bg {
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 180px;
+    }
+    
+
+  }
+  .card-block {
+    padding: 1.25rem;
+
+    .card-title {
+      font-size: 1.6rem;
+      line-height: 2rem;
+      margin: 0;
+      text-align: center;
+    }
+    .card-meta {
+      font-size: 1.2rem;
+      margin: 0;
+      text-align: center
+    }
+  }
+}
+
 .box-thumb {
   opacity: 0.9;
   &:hover { opacity: 1;}
