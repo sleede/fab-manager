@@ -153,7 +153,7 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   PROJECTS_PER_PAGE = 12
 
   ### PUBLIC SCOPE ###
-  $scope.search = { q: ($location.$$search.q || ""), from: ($location.$$search.from || undefined), machine_id: ($location.$$search.machine_id || undefined), component_id: ($location.$$search.component_id || undefined), theme_id: ($location.$$search.theme_id || undefined) }
+  $scope.search = { q: ($location.$$search.q || ""), from: ($location.$$search.from || undefined), machine_id: (parseInt($location.$$search.machine_id) || undefined), component_id: (parseInt($location.$$search.component_id) || undefined), theme_id: (parseInt($location.$$search.theme_id) || undefined) }
 
   ## list of projects to display
   $scope.projects = []
