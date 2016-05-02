@@ -45,6 +45,12 @@
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
+      Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
+      <% if Rails.application.secrets.openlab_app_id.present? %>
+      Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
+      <% else %>
+      Fablab.openlabAppId = null;
+      <% end %>
   </script>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>

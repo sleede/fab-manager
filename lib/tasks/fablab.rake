@@ -76,9 +76,10 @@ namespace :fablab do
 
   desc "sync all/one project in elastic search index"
   task :es_build_projects_index, [:id] => :environment do |task, args|
-    unless Project.__elasticsearch__.client.indices.exists? index: 'fablab'
-      Project.__elasticsearch__.client.indices.create index: Project.index_name, body: { settings: Project.settings.to_hash, mappings: Project.mappings.to_hash }
+    if Project.__elasticsearch__.client.indices.exists? index: 'fablab'
+      Project.__elasticsearch__.client.indices.delete index: 'fablab'
     end
+    Project.__elasticsearch__.client.indices.create index: Project.index_name, body: { settings: Project.settings.to_hash, mappings: Project.mappings.to_hash }
     if args.id
       IndexerWorker.perform_async(:index, id)
     else

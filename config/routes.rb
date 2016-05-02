@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         get :search
       end
     end
+    resources :openlab_projects, only: :index
     resources :machines
     resources :components
     resources :themes
