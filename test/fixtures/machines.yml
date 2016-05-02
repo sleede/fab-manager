@@ -1,0 +1,125 @@
+
+machine_1:
+  id: 1
+  name: Découpeuse laser
+  description: "Préparation à l'utilisation de l'EPILOG Legend 36EXT\r\nInformations
+    générales    \r\n      Pour la découpe, il suffit d'apporter votre fichier vectorisé
+    type illustrator, svg ou dxf avec des \"lignes de coupe\" d'une épaisseur inférieur
+    à 0,01 mm et la machine s'occupera du reste!\r\n     La gravure est basée sur
+    le spectre noir et blanc. Les nuances sont obtenues par différentes profondeurs
+    de gravure correspondant aux niveaux de gris de votre image. Il suffit pour cela
+    d'apporter une image scannée ou un fichier photo en noir et blanc pour pouvoir
+    reproduire celle-ci sur votre support! \r\nQuels types de matériaux pouvons nous
+    graver/découper?\r\n     Du bois au tissu, du plexiglass au cuir, cette machine
+    permet de découper et graver la plupart des matériaux sauf les métaux. La gravure
+    est néanmoins possible sur les métaux recouverts d'une couche de peinture ou les
+    aluminiums anodisés. \r\n        Concernant l'épaisseur des matériaux découpés,
+    il est préférable de ne pas dépasser 5 mm pour le bois et 6 mm pour le plexiglass.\r\n"
+  spec: "Puissance: 40W\r\nSurface de travail: 914x609 mm \r\nEpaisseur maximale de
+    la matière: 305mm\r\nSource laser: tube laser type CO2\r\nContrôles de vitesse
+    et de puissance: ces deux paramètres sont ajustables en fonction du matériau (de
+    1% à 100%) .\r\n"
+  created_at: 2016-04-04 14:11:34.210242000 Z
+  updated_at: 2016-04-04 14:11:34.210242000 Z
+  slug: decoupeuse-laser
+
+machine_2:
+  id: 2
+  name: Découpeuse vinyle
+  description: "Préparation à l'utilisation de la Roland CAMM-1 GX24\r\nInformations
+    générales        \r\n     Envie de réaliser un tee shirt personnalisé ? Un sticker
+    à l'effigie votre groupe préféré? Un masque pour la réalisation d'un circuit imprimé?
+    Pour cela, il suffit simplement de venir avec votre fichier vectorisé (ne pas
+    oublier de vectoriser les textes) type illustrator svg ou dxf.\r\n \r\nMatériaux
+    utilisés:\r\n    Cette machine permet de découper principalement du vinyle,vinyle
+    réfléchissant, flex.\r\n"
+  spec: "Largeurs de support acceptées: de 50 mm à 700 mm\r\nVitesse de découpe: 50
+    cm/sec\r\nRésolution mécanique: 0,0125 mm/pas\r\n"
+  created_at: 2016-04-04 14:11:34.274025000 Z
+  updated_at: 2016-04-04 14:11:34.274025000 Z
+  slug: decoupeuse-vinyle
+
+machine_3:
+  id: 3
+  name: Shopbot / Grande fraiseuse
+  description: "La fraiseuse numérique ShopBot PRS standard\r\nInformations générales\r\nCette
+    machine est un fraiseuse 3 axes idéale pour l'usinage de pièces de grandes dimensions.
+    De la réalisation d'une chaise ou d'un meuble jusqu'à la construction d'une maison
+    ou d'un assemblage immense, le ShopBot ouvre de nombreuses portes à votre imagination!
+    \r\nMatériaux usinables\r\nLes principaux matériaux usinables sont le bois, le
+    plastique, le laiton et bien d'autres.\r\nCette machine n'usine pas les métaux.\r\n"
+  spec: "Surface maximale de travail: 2440x1220x150 (Z) mm\r\nLogiciel utilisé: Partworks
+    2D & 3D\r\nRésolution mécanique: 0,015 mm\r\nPrécision de la position: +/- 0,127mm\r\nFormats
+    acceptés: DXF, STL \r\n"
+  created_at: 2016-04-04 14:11:34.304247000 Z
+  updated_at: 2016-04-04 14:11:34.304247000 Z
+  slug: shopbot-grande-fraiseuse
+
+machine_4:
+  id: 4
+  name: Imprimante 3D
+  description: "L'utimaker est une imprimante 3D  low cost utilisant une technologie
+    FFF (Fused Filament Fabrication) avec extrusion thermoplastique.\r\nC'est une
+    machine idéale pour réaliser rapidement des prototypes 3D dans des couleurs différentes.\r\n"
+  spec: "Surface maximale de travail: 210x210x220mm \r\nRésolution méchanique: 0,02
+    mm \r\nPrécision de position: +/- 0,05 \r\nLogiciel utilisé: Cura\r\nFormats de
+    fichier acceptés: STL \r\nMatériaux utilisés: PLA (en stock)."
+  created_at: 2001-01-01 14:11:34.341810000 Z
+  updated_at: 2001-01-01 14:11:34.341810000 Z
+  slug: imprimante-3d
+
+machine_5:
+  id: 5
+  name: Petite Fraiseuse
+  description: "La fraiseuse numérique Roland Modela MDX-20\r\nInformations générales\r\nCette
+    machine est utilisée  pour l'usinage et le scannage 3D de précision. Elle permet
+    principalement d'usiner des circuits imprimés et des moules de petite taille.
+    Le faible diamètre des fraises utilisées (Ø 0,3 mm à  Ø 6mm) induit que certains
+    temps d'usinages peuvent êtres long (> 12h), c'est pourquoi cette fraiseuse peut
+    être laissée en autonomie toute une nuit afin d'obtenir le plus précis des usinages
+    au FabLab.\r\nMatériaux usinables:\r\nLes principaux matériaux usinables sont
+    le bois, plâtre, résine, cire usinable, cuivre.\r\n"
+  spec: "Taille du plateau X/Y : 220 mm x 160 mm\r\nVolume maximal de travail: 203,2
+    mm (X), 152,4 mm (Y), 60,5 mm (Z)\r\nPrécision usinage: 0,00625 mm\r\nPrécision
+    scannage: réglable de 0,05 à 5 mm (axes X,Y) et 0,025 mm (axe Z)\r\nVitesse d'analyse
+    (scannage): 4-15 mm/sec\r\n \r\n \r\nLogiciel utilisé pour le fraisage: Roland
+    Modela player 4 \r\nLogiciel utilisé pour l'usinage de circuits imprimés: Cad.py
+    (linux)\r\nFormats acceptés: STL,PNG 3D\r\nFormat d'exportation des données scannées:
+    DXF, VRML, STL, 3DMF, IGES, Grayscale, Point Group et BMP\r\n"
+  created_at: 2016-04-04 14:11:34.379481000 Z
+  updated_at: 2016-04-04 14:11:34.379481000 Z
+  slug: petite-fraiseuse
+
+machine_6:
+  id: 6
+  name: FORM1+ imprimante 3D
+  description: |-
+    Form 1+, imprimante 3D stéréolithographie.
+
+    La photopolymérisation est le premier procédé de prototypage rapide à avoir été développé dans les années 1980. Le nom de SLA (pour StereoLithography Apparatus) lui a été donné. Il repose sur les propriétés qu'ont certaines résines à se polymériser sous l'effet de la lumière et de la chaleur. (Source : <a href="http://fr.wikipedia.org/wiki/St%C3%A9r%C3%A9olithographie" target="_blank"> wikipédia</a>)
+
+    <i>Possibilité d'utiliser 3 résines de couleurs différentes au Lab : noir, blanc et translucide.</i>
+
+    <a href="http://formlabs.com/fr/products/materials/standard/" Title="http://formlabs.com/fr/products/materials/standard/" target="_blank">Plus d'infos sur le site web de Formlab</a>
+  spec: |-
+    Imprimante :
+    - Dimensions : 30 × 28 × 45 cm
+    - Poids : 8 kg
+    - Température d'utilisation : 18–28° C
+    - Alimentation : 100–240 V ; 1.5 A 50/60 Hz ; 60 W.
+
+    Caractéristiques du laser :
+    - EN 60825-1:2007 certifié
+    - Class 1 Laser Product
+    - 405nm violet laser
+
+    Propriétés d'impression :
+    - Technologie stéréolithographie (SLA)
+    - Volume d'impression : 125 × 125 × 165 mm
+    - Dimension minimale : 300 microns
+    - Épaisseur des couches (Résolution verticale) : 25, 50, 100 microns
+    - Ressources Générées automatiquement
+    - Facilement amovible
+  created_at: 2016-04-04 14:11:34.424740000 Z
+  updated_at: 2016-04-04 14:11:34.424740000 Z
+  slug: form1-imprimante-3d

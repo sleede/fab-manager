@@ -1,0 +1,47 @@
+
+invoice_item_1:
+  id: 1
+  invoice_id: 1
+  stp_invoice_item_id: sub_8DGB4ErIc2asOv
+  amount: 10000
+  created_at: 2016-04-05 08:35:52.934725000 Z
+  updated_at: 2016-04-05 08:35:52.934725000 Z
+  description: Sleede - standard, association - month
+  subscription_id: 1
+  invoice_item_id:
+
+invoice_item_2:
+  id: 2
+  invoice_id: 2
+  stp_invoice_item_id:
+  amount: 2000
+  created_at: 2016-04-05 08:36:46.856021000 Z
+  updated_at: 2016-04-05 08:36:46.856021000 Z
+  description: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur
+    d'emploi - month
+  subscription_id: 2
+  invoice_item_id:
+
+invoice_item_3:
+  id: 3
+  invoice_id: 3
+  stp_invoice_item_id:
+  amount: 3000
+  created_at: 2012-03-12 11:03:31.651441000 Z
+  updated_at: 2012-03-12 11:03:31.651441000 Z
+  description: Mensuel - standard, association - month
+  subscription_id: 3
+  invoice_item_id:
+
+
+invoice_item_4:
+  id: 4
+  invoice_id: 4
+  stp_invoice_item_id:
+  amount: 0
+  created_at: 2012-03-12 13:40:22.342717000 Z
+  updated_at: 2012-03-12 13:40:22.342717000 Z
+  description: Formation Laser / Vinyle April 11, 2012 08:00 - 12:00 PM
+  subscription_id:
+  invoice_item_id:
+

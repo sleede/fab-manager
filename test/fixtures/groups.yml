@@ -1,0 +1,14 @@
+
+group_1:
+  id: 1
+  name: standard, association
+  created_at: 2016-04-04 14:11:33.612700000 Z
+  updated_at: 2016-04-04 14:11:33.612700000 Z
+  slug: standard
+
+group_2:
+  id: 2
+  name: étudiant, - de 25 ans, enseignant, demandeur d'emploi
+  created_at: 2016-04-04 14:11:33.656537000 Z
+  updated_at: 2016-04-04 14:11:33.656537000 Z
+  slug: student

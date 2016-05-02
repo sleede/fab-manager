@@ -20,7 +20,8 @@ class Availability < ActiveRecord::Base
 
   attr_accessor :is_reserved, :slot_id, :can_modify
 
-  validate :length_must_be_1h_minimum
+  validates :start_at, :end_at, presence: true
+  validate :length_must_be_1h_minimum, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
 
   def safe_destroy
@@ -64,13 +65,13 @@ class Availability < ActiveRecord::Base
   private
   def length_must_be_1h_minimum
     if end_at < (start_at + 1.hour)
-      errors.add(:end_at, t('availabilities.must_be_at_least_1_hour_after_the_start_date'))
+      errors.add(:end_at, I18n.t('availabilities.must_be_at_least_1_hour_after_the_start_date'))
     end
   end
 
   def should_be_associated
     if available_type == 'machines' and machine_ids.count == 0
-      errors.add(:machine_ids, t('availabilities.must_be_associated_with_at_least_1_machine'))
+      errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine'))
     end
   end
 

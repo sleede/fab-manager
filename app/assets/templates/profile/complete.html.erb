@@ -19,87 +19,133 @@
     </section>
 
 
-    <div class="row no-gutter ">
+    <div class="row no-gutter">
         <div class="col-sm-12 col-md-12 b-r">
-            <div class="col-md-8 m-t-md">
-                <section class="panel panel-default bg-light m-lg">
-                    <div class="panel-body m-r">
-                        {{ 'you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName }:"messageformat" }}<br/>
-                        <img class="m-l v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
-                        <strong class="v-middle">{{activeProvider.name}} <span ng-if="ssoEmail()">({{ssoEmail()}})</span></strong><br/>
-                        <p class="m-t-md">{{ 'before_letting_you_use_the_application_we_need_some_more_details' | translate }}.<br/>
-                        {{ 'please_fill_the_following_form' | translate }}.
-                        {{ 'some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified' | translate:{NAME:activeProvider.name} }}.
-                        {{ 'then_click_on_' | translate }} <strong translate>{{ 'confirm_changes' }}</strong> {{ '_to_start_using_the_application' | translate }}.</p>
-                    </div>
-                </section>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8 m-t-md">
+                    <section class="panel panel-default bg-light m-lg">
+                        <div class="panel-body m-r">
+                            {{ 'you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName }:"messageformat" }}<br/>
+                            <img class="m-l v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
+                            <strong class="v-middle">{{activeProvider.name}} <span ng-if="ssoEmail()">({{ssoEmail()}})</span></strong><br/>
+                            <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'before_letting_you_use_the_application_we_need_some_more_details' }}.</p>
+                            <p class="m-t-md" ng-show="hasDuplicate()" translate>{{ 'your_email_is_already_used_by_another_account_on_the_platform' }}</p>
+                        </div>
+                    </section>
+                </div>
             </div>
-
-            <div class="col-md-8" ng-hide="user.merged_at">
-                <ng-include src="'<%= asset_path 'profile/_token.html' %>'"></ng-include>
+            <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs">
+              <p class="font-felt fleche-left text-lg upper text-center">
+                <%= image_tag("fleche-left.png", class: 'fleche-left visible-lg visible-md fleche-left-from-top') %>
+                <span class="or" translate>{{ 'or' }}</span>
+                <%= image_tag("fleche-left.png", class: 'fleche-right visible-lg visible-md fleche-right-from-top') %>
+              </p>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="m-lg panel panel-default bg-light pos-rlt" ng-hide="hasDuplicate()">
+                        <div ng-class="{'disabling-overlay' : !!user.auth_token}">
+                            <div class="panel-body">
+                              <h3 translate>{{ 'new_on_this_platform' }}</h3>
+                              <p translate>{{ 'please_fill_the_following_form'}}.</p>
+                              <p class="text-italic">{{ 'some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified' | translate:{NAME:activeProvider.name} }}.<br/>
+                                {{ 'then_click_on_' | translate }} <strong translate>{{ 'confirm_changes' }}</strong> {{ '_to_start_using_the_application' | translate }}.</p>
+                            </div>
+                            <form role="form"
+                                  name="userForm"
+                                  class="form-horizontal"
+                                  action="{{ actionUrl }}"
+                                  ng-upload="submited(content)"
+                                  upload-options-enable-rails-csrf="true"
+                                  novalidate>
 
-            <form role="form"
-                  name="userForm"
-                  class="form-horizontal col-md-8 m-t"
-                  action="{{ actionUrl }}"
-                  ng-upload="submited(content)"
-                  upload-options-enable-rails-csrf="true"
-                  ng-if="!user.auth_token"
-                  novalidate>
+                                <section>
 
-                <section class="panel panel-default bg-light m-lg m-t-xs">
+                                    <div class="panel-body m-r">
+                                        <!-- common fields -->
+                                        <ng-include src="'<%= asset_path 'shared/_member_form.html' %>'"></ng-include>
 
-                    <div class="panel-body m-r">
-                        <!-- common fields -->
-                        <ng-include src="'<%= asset_path 'shared/_member_form.html' %>'"></ng-include>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-sm-offset-1"></div>
+                                            <div class="col-sm-offset-1 col-sm-6">
+                                                <!-- group -->
+                                                <div class="form-group" ng-class="{'has-error': userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$invalid}">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                                        <select ng-model="user.group_id" class="form-control" name="user[group_id]" required>
+                                                            <option value=null translate>{{ 'your_user_s_profile' }}</option>
+                                                            <option ng-repeat="group in groups" value="{{group.id}}" ng-selected="group.id == user.group_id">{{group.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
+                                                </div>
 
-                        <div class="row">
-                            <div class="col-sm-3 col-sm-offset-1"></div>
-                            <div class="col-sm-offset-1 col-sm-6">
-                                <!-- group -->
-                                <div class="form-group" ng-class="{'has-error': userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$invalid}">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                                        <select ng-model="user.group_id" class="form-control" name="user[group_id]" required>
-                                            <option value=null translate>{{ 'your_user_s_profile' }}</option>
-                                            <option ng-repeat="group in groups" value="{{group.id}}" ng-selected="group.id == user.group_id">{{group.name}}</option>
-                                        </select>
+                                                <!-- allow contact-->
+                                                <div class="form-group" ng-class="{'has-error': userForm['user[is_allow_contact]'].$dirty && userForm['user[is_allow_contact]'].$invalid}">
+                                                    <input type="checkbox"
+                                                           name="user[is_allow_contact]"
+                                                           ng-model="user.is_allow_contact"
+                                                           value="true"/> {{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' | translate }}
+                                                </div>
+
+                                                <!-- accept cgu -->
+                                                <div class="form-group" ng-class="{'has-error': userForm.cgu.$dirty && userForm.cgu.$invalid}" ng-show="cgu">
+                                                    <input type="checkbox"
+                                                           name="cgu"
+                                                           ng-model="user.cgu"
+                                                           value="true"
+                                                           ng-required="cgu != null"/> {{ 'i_ve_read_and_i_accept_' | translate }} <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>   <!-- ./panel-body  -->
+
+
+                                    <div class="panel-footer no-padder">
+                                        <input type="submit"
+                                               value="{{ 'confirm_changes' | translate }}"
+                                               class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+                                               ng-disabled="userForm.$invalid"/>
                                     </div>
-                                    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
-                                </div>
-
-                                <!-- allow contact-->
-                                <div class="form-group" ng-class="{'has-error': userForm['user[is_allow_contact]'].$dirty && userForm['user[is_allow_contact]'].$invalid}">
-                                    <input type="checkbox"
-                                           name="user[is_allow_contact]"
-                                           ng-model="user.is_allow_contact"
-                                           value="true"/> {{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' | translate }}
-                                </div>
-
-                                <!-- accept cgu -->
-                                <div class="form-group" ng-class="{'has-error': userForm.cgu.$dirty && userForm.cgu.$invalid}" ng-show="cgu">
-                                    <input type="checkbox"
-                                           name="cgu"
-                                           ng-model="user.cgu"
-                                           value="true"
-                                           ng-required="cgu != null"/> {{ 'i_ve_read_and_i_accept_' | translate }} <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+                                </section>
+                            </form>
+                        </div>
+                    </div>
+                    <section class="m-lg panel panel-default bg-light pos-rlt" ng-show="hasDuplicate()">
+                        <div ng-class="{'disabling-overlay' : !!user.auth_token}">
+                            <div class="panel-body">
+                                <h3 translate>{{ 'new_on_this_platform' }}</h3>
+                                <p class="text-italic">
+                                  {{ 'your_email_' | translate }} <strong>({{ssoEmail()}})</strong> {{ '_is_currently_associated_with_another_account_on_this_platform' | translate }}
+                                  {{ 'please_click_to_change_email_associated_with_your_PROVIDER_account' | translate:{PROVDER: activeProvider.name} }}
+                                </p>
+                                <div class="row">
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <a class="btn btn-default" ng-href="{{activeProvider.link_to_sso_profile}}" target="_blank">
+                                      <i class="fa fa-edit"></i> {{ 'change_my_data' | translate }}
+                                    </a>
+                                    <p class="text-italic">{{ 'once_your_data_are_up_to_date_' | translate }} <strong translate>{{ '_click_on_the_synchronization_button_opposite_' }}</strong>  {{ 'or' | translate}} <strong translate>{{ '_disconnect_then_reconnect_' }}</strong> {{ '_for_your_changes_to_take_effect' | translate }}</p>
+                                  </div>
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <a class="btn btn-default" ng-click="syncProfile()">
+                                      <i class="fa fa-refresh"></i> {{ 'sync_my_profile' | translate }}
+                                    </a>
+                                  </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>   <!-- ./panel-body  -->
-
-
-                    <div class="panel-footer no-padder">
-                        <input type="submit"
-                               value="{{ 'confirm_changes' | translate }}"
-                               class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
-                               ng-disabled="userForm.$invalid"/>
-                    </div>
-                </section>
-            </form>
-
+                    </section>
+                </div>
+              <div class="row col-xs-2 col-xs-offset-5 hidden-md hidden-lg">
+                <p class="font-felt fleche-left text-lg upper text-center">
+                  <span class="or" translate>{{ 'or' }}</span>
+                </p>
+              </div>
+                <div class="col-md-6 m-t-3xl-on-md" ng-hide="user.merged_at">
+                    <ng-include src="'<%= asset_path 'profile/_token.html' %>'"></ng-include>
+                </div>
+            </div>
         </div>
     </div>
 </div>

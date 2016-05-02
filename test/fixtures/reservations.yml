@@ -1,0 +1,12 @@
+
+reservation_1:
+  id: 1
+  user_id: 7
+  message:
+  created_at: 2012-03-12 11:03:31.651441000 Z
+  updated_at: 2012-03-12 11:03:31.651441000 Z
+  reservable_id: 2
+  reservable_type: Training
+  stp_invoice_id:
+  nb_reserve_places:
+  nb_reserve_reduced_places:

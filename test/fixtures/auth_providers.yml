@@ -1,0 +1,9 @@
+
+auth_provider_1:
+  id: 1
+  name: Fablab
+  status: active
+  created_at: 2016-04-04 14:11:34.743728000 Z
+  updated_at: 2016-04-04 14:11:34.743728000 Z
+  providable_type: DatabaseProvider
+  providable_id: 1

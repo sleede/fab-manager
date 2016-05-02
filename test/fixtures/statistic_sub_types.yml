@@ -1,0 +1,155 @@
+
+statistic_sub_type_1:
+  id: 1
+  key: Stage
+  label: Stage
+  created_at: 2016-04-04 14:11:33.510241000 Z
+  updated_at: 2016-04-04 14:11:33.510241000 Z
+
+statistic_sub_type_2:
+  id: 2
+  key: Atelier
+  label: Atelier
+  created_at: 2016-04-04 14:11:33.535339000 Z
+  updated_at: 2016-04-04 14:11:33.535339000 Z
+
+statistic_sub_type_3:
+  id: 3
+  key: created
+  label: Création de compte
+  created_at: 2016-04-04 14:11:33.553667000 Z
+  updated_at: 2016-04-04 14:11:33.553667000 Z
+
+statistic_sub_type_4:
+  id: 4
+  key: published
+  label: Publication de projet
+  created_at: 2016-04-04 14:11:33.564828000 Z
+  updated_at: 2016-04-04 14:11:33.564828000 Z
+
+statistic_sub_type_5:
+  id: 5
+  key: standard
+  label: standard, association
+  created_at: 2016-04-04 14:11:33.652127000 Z
+  updated_at: 2016-04-04 14:11:33.652127000 Z
+
+statistic_sub_type_6:
+  id: 6
+  key: student
+  label: étudiant, - de 25 ans, enseignant, demandeur d'emploi
+  created_at: 2016-04-04 14:11:33.662695000 Z
+  updated_at: 2016-04-04 14:11:33.662695000 Z
+
+statistic_sub_type_7:
+  id: 7
+  key: merchant
+  label: artisan, commerçant, chercheur, auto-entrepreneur
+  created_at: 2016-04-04 14:11:33.674691000 Z
+  updated_at: 2016-04-04 14:11:33.674691000 Z
+
+statistic_sub_type_8:
+  id: 8
+  key: business
+  label: PME, PMI, SARL, SA
+  created_at: 2016-04-04 14:11:33.688291000 Z
+  updated_at: 2016-04-04 14:11:33.688291000 Z
+
+statistic_sub_type_9:
+  id: 9
+  key: formation-imprimante-3d
+  label: Formation Imprimante 3D
+  created_at: 2016-04-04 14:11:34.042407000 Z
+  updated_at: 2016-04-04 14:11:34.042407000 Z
+
+statistic_sub_type_10:
+  id: 10
+  key: formation-laser-vinyle
+  label: Formation Laser / Vinyle
+  created_at: 2016-04-04 14:11:34.082412000 Z
+  updated_at: 2016-04-04 14:11:34.082412000 Z
+
+statistic_sub_type_11:
+  id: 11
+  key: formation-petite-fraiseuse-numerique
+  label: Formation Petite fraiseuse numerique
+  created_at: 2016-04-04 14:11:34.109571000 Z
+  updated_at: 2016-04-04 14:11:34.109571000 Z
+
+statistic_sub_type_12:
+  id: 12
+  key: formation-shopbot-grande-fraiseuse
+  label: Formation Shopbot Grande Fraiseuse
+  created_at: 2016-04-04 14:11:34.138418000 Z
+  updated_at: 2016-04-04 14:11:34.138418000 Z
+
+statistic_sub_type_13:
+  id: 13
+  key: formation-logiciel-2d
+  label: Formation logiciel 2D
+  created_at: 2016-04-04 14:11:34.158874000 Z
+  updated_at: 2016-04-04 14:11:34.158874000 Z
+
+statistic_sub_type_14:
+  id: 14
+  key: decoupeuse-laser
+  label: Découpeuse laser
+  created_at: 2016-04-04 14:11:34.216583000 Z
+  updated_at: 2016-04-04 14:11:34.216583000 Z
+
+statistic_sub_type_15:
+  id: 15
+  key: decoupeuse-vinyle
+  label: Découpeuse vinyle
+  created_at: 2016-04-04 14:11:34.280012000 Z
+  updated_at: 2016-04-04 14:11:34.280012000 Z
+
+statistic_sub_type_16:
+  id: 16
+  key: shopbot-grande-fraiseuse
+  label: Shopbot / Grande fraiseuse
+  created_at: 2016-04-04 14:11:34.311844000 Z
+  updated_at: 2016-04-04 14:11:34.311844000 Z
+
+statistic_sub_type_17:
+  id: 17
+  key: imprimante-3d
+  label: Imprimante 3D
+  created_at: 2016-04-04 14:11:34.351362000 Z
+  updated_at: 2016-04-04 14:11:34.351362000 Z
+
+statistic_sub_type_18:
+  id: 18
+  key: petite-fraiseuse
+  label: Petite Fraiseuse
+  created_at: 2016-04-04 14:11:34.387590000 Z
+  updated_at: 2016-04-04 14:11:34.387590000 Z
+
+statistic_sub_type_19:
+  id: 19
+  key: form1-imprimante-3d
+  label: FORM1+ imprimante 3D
+  created_at: 2016-04-04 14:11:34.432323000 Z
+  updated_at: 2016-04-04 14:11:34.432323000 Z
+
+statistic_sub_type_20:
+  id: 20
+  key: mensuel-standard-month-20160404171519
+  label: Mensuel - standard, association - month
+  created_at: 2016-04-04 15:15:21.125089000 Z
+  updated_at: 2016-04-04 15:15:21.125089000 Z
+
+statistic_sub_type_21:
+  id: 21
+  key: nicolas-standard-month-20160404171724
+  label: Sleede - standard, association - month
+  created_at: 2016-04-04 15:17:24.952312000 Z
+  updated_at: 2016-04-04 15:17:24.952312000 Z
+
+statistic_sub_type_22:
+  id: 22
+  key: mensuel-tarif-reduit-student-month-20160404171827
+  label: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur d'emploi
+    - month
+  created_at: 2016-04-04 15:18:28.864495000 Z
+  updated_at: 2016-04-04 15:18:28.864495000 Z

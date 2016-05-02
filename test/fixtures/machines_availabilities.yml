@@ -1,0 +1,105 @@
+
+machines_availability_1:
+  id: 1
+  machine_id: 1
+  availability_id: 3
+
+machines_availability_2:
+  id: 2
+  machine_id: 2
+  availability_id: 3
+
+machines_availability_3:
+  id: 3
+  machine_id: 4
+  availability_id: 3
+
+machines_availability_4:
+  id: 4
+  machine_id: 6
+  availability_id: 3
+
+machines_availability_5:
+  id: 5
+  machine_id: 5
+  availability_id: 3
+
+machines_availability_6:
+  id: 6
+  machine_id: 1
+  availability_id: 4
+
+machines_availability_7:
+  id: 7
+  machine_id: 2
+  availability_id: 4
+
+machines_availability_8:
+  id: 8
+  machine_id: 4
+  availability_id: 4
+
+machines_availability_9:
+  id: 9
+  machine_id: 5
+  availability_id: 4
+
+machines_availability_10:
+  id: 10
+  machine_id: 6
+  availability_id: 4
+
+machines_availability_11:
+  id: 11
+  machine_id: 3
+  availability_id: 5
+
+machines_availability_12:
+  id: 12
+  machine_id: 3
+  availability_id: 6
+
+machines_availability_13:
+  id: 13
+  machine_id: 1
+  availability_id: 7
+
+machines_availability_14:
+  id: 14
+  machine_id: 2
+  availability_id: 7
+
+machines_availability_15:
+  id: 15
+  machine_id: 4
+  availability_id: 7
+
+machines_availability_16:
+  id: 16
+  machine_id: 5
+  availability_id: 7
+
+machines_availability_17:
+  id: 17
+  machine_id: 6
+  availability_id: 7
+
+machines_availability_18:
+  id: 18
+  machine_id: 2
+  availability_id: 13
+
+machines_availability_19:
+  id: 19
+  machine_id: 2
+  availability_id: 14
+
+machines_availability_20:
+  id: 20
+  machine_id: 2
+  availability_id: 15
+
+machines_availability_21:
+  id: 21
+  machine_id: 2
+  availability_id: 16

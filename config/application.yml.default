@@ -47,3 +47,7 @@ TIME_ZONE: 'Paris'
 WEEK_STARTING_DAY: 'monday'
 D3_DATE_FORMAT: '%d/%m/%y'
 UIB_DATE_FORMAT: 'dd/MM/yyyy'
+
+OPENLAB_APP_SECRET:
+OPENLAB_APP_ID:
+OPENLAB_BASE_URI: 'https://openprojects.fab-manager.com'

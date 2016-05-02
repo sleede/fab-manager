@@ -28,10 +28,8 @@ class API::ReservationsController < API::ApiController
       is_reserve = @reservation.save_with_payment
     end
     if is_reserve
-      reservation_user = @reservation.user
-      if @reservation.reservable_type == 'Training' and is_first_training_and_active_subscription(reservation_user)
-        reservation_user.subscription.update_expired_date_with_first_training(@reservation.slots.first.start_at)
-      end
+      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
+
       render :show, status: :created, location: @reservation
     else
       render json: @reservation.errors, status: :unprocessable_entity
@@ -56,9 +54,5 @@ class API::ReservationsController < API::ApiController
     params.require(:reservation).permit(:user_id, :message, :reservable_id, :reservable_type, :card_token, :plan_id,
                                         :nb_reserve_places, :nb_reserve_reduced_places,
                                         slots_attributes: [:id, :start_at, :end_at, :availability_id, :offered])
-  end
-
-  def is_first_training_and_active_subscription(user)
-    user.reservations.where(reservable_type: 'Training').size == 1 and user.subscription and !user.subscription.is_expired?
   end
 end

@@ -1,0 +1,47 @@
+
+licence_1:
+  id: 1
+  name: Attribution (BY)
+  description: Le titulaire des droits autorise toute exploitation de l’œuvre, y compris
+    à des fins commerciales, ainsi que la création d’œuvres dérivées, dont la distribution
+    est également autorisé sans restriction, à condition de l’attribuer à son l’auteur
+    en citant son nom. Cette licence est recommandée pour la diffusion et l’utilisation
+    maximale des œuvres.
+
+licence_2:
+  id: 2
+  name: Attribution + Pas de modification (BY ND)
+  description: Le titulaire des droits autorise toute utilisation de l’œuvre originale
+    (y compris à des fins commerciales), mais n’autorise pas la création d’œuvres
+    dérivées.
+
+licence_3:
+  id: 3
+  name: Attribution + Pas d'Utilisation Commerciale + Pas de Modification (BY NC ND)
+  description: Le titulaire des droits autorise l’utilisation de l’œuvre originale
+    à des fins non commerciales, mais n’autorise pas la création d’œuvres dérivés.
+
+licence_4:
+  id: 4
+  name: Attribution + Pas d'Utilisation Commerciale (BY NC)
+  description: Le titulaire des droits autorise l’exploitation de l’œuvre, ainsi que
+    la création d’œuvres dérivées, à condition qu’il ne s’agisse pas d’une utilisation
+    commerciale (les utilisations commerciales restant soumises à son autorisation).
+
+licence_5:
+  id: 5
+  name: Attribution + Pas d'Utilisation Commerciale + Partage dans les mêmes conditions
+    (BY NC SA)
+  description: Le titulaire des droits autorise l’exploitation de l’œuvre originale
+    à des fins non commerciales, ainsi que la création d’œuvres dérivées, à condition
+    qu’elles soient distribuées sous une licence identique à celle qui régit l’œuvre
+    originale.
+
+licence_6:
+  id: 6
+  name: Attribution + Partage dans les mêmes conditions (BY SA)
+  description: Le titulaire des droits autorise toute utilisation de l’œuvre originale
+    (y compris à des fins commerciales) ainsi que la création d’œuvres dérivées, à
+    condition qu’elles soient distribuées sous une licence identique à celle qui régit
+    l’œuvre originale. Cette licence est souvent comparée aux licences « copyleft
+    » des logiciels libres. C’est la licence utilisée par Wikipedia.

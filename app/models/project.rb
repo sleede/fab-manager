@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   include AASM
   include NotifyWith::NotificationAttachedObject
+  include OpenlabSync
 
   # elastic initialisations
   include Elasticsearch::Model
@@ -31,6 +32,9 @@ class Project < ActiveRecord::Base
 
   has_many :project_steps, dependent: :destroy
   accepts_nested_attributes_for :project_steps, allow_destroy: true
+
+  # validations
+  validates :author, :name, presence: true
 
   after_save :after_save_and_publish
 
@@ -104,7 +108,7 @@ class Project < ActiveRecord::Base
       }
     }
 
-    if params['q'].empty? # we sort by created_at if there isn't a query
+    if params['q'].blank? # we sort by created_at if there isn't a query
       search[:sort] = { created_at: { order: :desc } }
     else # otherwise we search for the word (q) in various fields
       search[:query][:filtered][:query] = {

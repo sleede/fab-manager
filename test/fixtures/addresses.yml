@@ -1,0 +1,52 @@
+
+address_1:
+  id: 1
+  address: 14 rue Brecourt, Annecy
+  street_number: 
+  route: 
+  locality: 
+  country: 
+  postal_code: 
+  placeable_id: 2
+  placeable_type: Profile
+  created_at: 2016-04-04 15:06:22.166469000 Z
+  updated_at: 2016-04-04 15:06:22.166469000 Z
+
+address_2:
+  id: 2
+  address: 23 cours Berriat, Grenoble
+  street_number: 
+  route: 
+  locality: 
+  country: 
+  postal_code: 
+  placeable_id: 4
+  placeable_type: Profile
+  created_at: 2016-04-04 15:10:42.353039000 Z
+  updated_at: 2016-04-04 15:10:42.353039000 Z
+
+address_3:
+  id: 3
+  address: 36 chemin des puits, Mousson-sur-Luire
+  street_number: 
+  route: 
+  locality: 
+  country: 
+  postal_code: 
+  placeable_id: 5
+  placeable_type: Profile
+  created_at: 2016-04-04 15:14:08.579603000 Z
+  updated_at: 2016-04-04 15:14:08.579603000 Z
+
+address_4:
+  id: 4
+  address: ''
+  street_number: 
+  route: 
+  locality: 
+  country: 
+  postal_code: 
+  placeable_id: 3
+  placeable_type: Profile
+  created_at: 2016-04-05 08:35:18.597812000 Z
+  updated_at: 2016-04-05 08:35:18.597812000 Z

@@ -45,6 +45,12 @@
       Fablab.weekStartingDay = <%= Date.parse(Rails.application.secrets.week_starting_day).strftime('%w') %>;
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
+      Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
+      <% if Rails.application.secrets.openlab_app_id.present? %>
+      Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
+      <% else %>
+      Fablab.openlabAppId = null;
+      <% end %>
   </script>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -54,8 +60,10 @@
   <% end %>
   <base href="/"></base>
 
-  <link rel="shortcut icon" type="image/x-icon" href="<%= CustomAsset.get_url('favicon-file') %>">
-  <link rel="shortcut icon" type="image/ico" href="<%= CustomAsset.get_url('favicon-file') %>">
+  <% if CustomAsset.get_url('favicon-file') %>
+    <link rel="shortcut icon" type="image/x-icon" href="<%= CustomAsset.get_url('favicon-file') %>">
+    <link rel="shortcut icon" type="image/ico" href="<%= CustomAsset.get_url('favicon-file') %>">
+  <% end %>
 
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
