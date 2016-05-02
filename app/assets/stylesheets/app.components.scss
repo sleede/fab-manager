@@ -65,6 +65,7 @@
   height: 100%;
 }
 
+// component card
 .card {
   position: relative;
   display: block;
@@ -113,71 +114,24 @@
     .card-header-bg {
       background-size: cover;
       background-repeat: no-repeat;
+      background-position: center;
       height: 180px;
     }
-    
-
   }
   .card-block {
-    padding: 1.25rem;
-
+    padding: 0 1.25rem 1.25rem 1.25rem;
     .card-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       line-height: 2rem;
       margin: 0;
       text-align: center;
+      margin-top: 5px;
     }
     .card-meta {
       font-size: 1.2rem;
       margin: 0;
       text-align: center
     }
-  }
-}
-
-.box-thumb {
-  opacity: 0.9;
-  &:hover { opacity: 1;}
-  &:hover .box-footer { opacity: 1; }
-  position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  cursor: pointer;
-  // todo
-  overflow: hidden;
-  height: 280px;
-  img {
-    opacity: 0.9;
-
-  }
-  .project-caption {
-    text-shadow: rgba(29, 29, 29, 0.5) 0 -1px, rgba(29, 29, 29, 0.5) -1px 0,
-                 rgba(29, 29, 29, 0.5) 1px 0, rgba(29, 29, 29, 0.5) 0 1px;
-  }
-  .box-content {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    right: 0;
-    h1 {
-      padding: 0 20px;
-      color: white;
-      text-transform: uppercase;
-      font-size: rem-calc(24);
-      font-weight: 900;
-      line-height: rem-calc(30);
-      text-align: center;
-    }
-  }
-  .box-footer {
-    opacity: 0;
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    text-align: center;
   }
 }
 

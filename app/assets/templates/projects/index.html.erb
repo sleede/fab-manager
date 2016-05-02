@@ -38,7 +38,7 @@
                />
         {{ searchOverWholeNetwork }}
       </span>
-      <form class="form-inline m-t" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
+      <form class="form-inline m-t text-center" role="form" ng-submit="setUrlQueryParams(search) && triggerSearch()">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
@@ -82,7 +82,7 @@
 
   <div class="row">
     <span class="col-md-12" ng-show="projects && (projects.length == 0)"> {{ 'project_search_result_is_empty' | translate }} </span>
-    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="project in projects" ng-click="showProject(project)">
+    <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="project in projects" ng-click="showProject(project)">
 
       <div class="card card-project">
 
@@ -94,7 +94,7 @@
         </div>
 
         <div class="card-block">
-          <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork && project.app_id == openlabAppId"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
+          <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork && project.app_id != openlabAppId"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
           <h1 class="card-title">{{project.name}}</h1>
         </div>
 
