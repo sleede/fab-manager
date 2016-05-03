@@ -531,9 +531,8 @@ After modifying any values concerning the localisation, restart the application 
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects). It's very simple and straightforward
-and in return, your users will be able to search over projects from all fab-manager instances from within your platform. The deal is fair, you share your projects and as reward you benefits
-from projects of the whole community.
+You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects). It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform. The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
+
 If you want to try it, you can visit [this fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different fab-managers.
 
 To start using this awesome feature, there are a few steps:
