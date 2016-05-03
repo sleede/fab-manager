@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session"
-, ($scope, $rootScope, $state, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session"
+, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session) ->
 
 
 
