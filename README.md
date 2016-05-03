@@ -1,6 +1,6 @@
 # FabManager
 
-FabManager is the FabLab management solution. It is web-based, open-source and totally free. 
+FabManager is the FabLab management solution. It is web-based, open-source and totally free.
 
 
 ##### Table of Contents  
@@ -25,8 +25,9 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 7.2. [Configuration](#i18n-configuration)<br/>
 7.2.1. [Settings](#i18n-settings)<br/>
 7.2.2. [Applying changes](#i18n-apply)
-8. [Known issues](#known-issues)
-9. [Related Documentation](#related-documentation)
+8. [Open Projects](#open-projects)
+9. [Known issues](#known-issues)
+10. [Related Documentation](#related-documentation)
 
 
 
@@ -63,7 +64,7 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 
 1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
-  
+
 2. Retrieve the project from Git
 
    ```bash
@@ -72,24 +73,24 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 
 3. Install the software dependencies.
    - For Ubuntu/Debian:
-    
+
    ```bash
    sudo apt-get install libpq-dev postgresql-9.4 redis-server imagemagick
    ```
    - For MacOS X:
-   
+
    ```bash
    brew install postgresql redis imagemagick
    ```
-   
+
 4. Init the RVM instance and check it was correctly configured
- 
+
    ```bash
    cd fab-manager
    rvm current
    # Must print ruby-X.Y.Z@fab-manager (where X.Y.Z match the version in .ruby-version)
    ```
-  
+
 5. Install bundler in the current RVM gemset
 
    ```bash
@@ -101,39 +102,39 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
    ```bash
    bundle install
    ```
-   
+
 7. Create the default configuration files **and configure them!** (see the [Environment Configuration](#environment-configuration) section)
-   
+
    ```bash
    cp config/database.yml.default config/database.yml
    cp config/application.yml.default config/application.yml
-   vi config/application.yml 
+   vi config/application.yml
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
-  
+
 8. Build the database. You may have to follow the steps described in [the PostgreSQL installation chapter](#postgresql) before, if you don't already have a working installation of PostgreSQL.
 
    ```bash
    rake db:setup
    ```
-  
+
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
 
    ```bash
    mkdir -p tmp/pids
    ```
-  
+
 10. Start the development web server
 
    ```bash
    foreman s -p 3000
    ```
-   
+
 11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
 12. You can login as the default administrator using the following credentials:
     - user: admin@fab-manager.com
-    - password: adminadmin 
+    - password: adminadmin
 
 <a name="environment-configuration"></a>
 ### Environment Configuration
@@ -171,10 +172,10 @@ Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
     STRIPE_CURRENCY
 
-Currency used by stripe to charge the final customer. 
+Currency used by stripe to charge the final customer.
 See https://support.stripe.com/questions/which-currencies-does-stripe-support for a list of available 3-letters ISO code.
 
-**BEWARE**: stripe currency cannot be changed during the application life. 
+**BEWARE**: stripe currency cannot be changed during the application life.
 Changing the currency after the application has already run, may result in several bugs and prevent the users to pay through stripe.
 So set this setting carefully before starting the application for the first time.
 
@@ -235,7 +236,7 @@ See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](
 1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one the following lines:
    - `deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main` (Ubuntu 14.04 Trusty)
    - `deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main` (Debian 8 Jessie)
-   
+
 
 2. Import the repository signing key, and update the package lists
 
@@ -249,14 +250,14 @@ See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](
    ```bash
    sudo apt-get install postgresql-9.4
    ```
-   
+
 <a name="postgresql-on-macosx"></a>
 ### Install and launch PostgreSQL on MacOS X
 
 This assumes you have [Homebrew](http://brew.sh/) installed on your system.
 Otherwise, please follow the official instructions on the project's website.
 
- 
+
 1. Update brew and install PostgreSQL
 
    ```bash
@@ -264,7 +265,7 @@ Otherwise, please follow the official instructions on the project's website.
    brew install postgres
    ```
 
-2. Launch PostgreSQL 
+2. Launch PostgreSQL
 
   ```bash
   # Start postgresql at login with launchd
@@ -272,7 +273,7 @@ Otherwise, please follow the official instructions on the project's website.
   # Load PostgreSQL now
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   ```
-  
+
 <a name="setup-fabmanager-in-postgresql"></a>
 ### Setup the FabManager database in PostgreSQL
 
@@ -290,7 +291,7 @@ To create it, please follow these instructions:
    ```bash
    psql
    ```
-  
+
 3. Create a new user in PostgreSQL (in this example, the user will be named `sleede`)
 
    ```sql
@@ -302,14 +303,14 @@ To create it, please follow these instructions:
    ```sql
    ALTER ROLE sleede WITH CREATEDB;
    ```
- 
+
 5. Then, create the fablab_development and fablab_test databases
 
    ```sql
    CREATE DATABASE fablab_development OWNER sleede;
    CREATE DATABASE fablab_test OWNER sleede;
    ```
-  
+
 6. To finish, attribute a password to this user
 
    ```sql
@@ -321,7 +322,7 @@ To create it, please follow these instructions:
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In FabManager, it is used for the admin's statistics module and to perform searches in projects. 
+In FabManager, it is used for the admin's statistics module and to perform searches in projects.
 
 <a name="elasticsearch-on-debian"></a>
 ### Install ElasticSearch on Ubuntu/Debian
@@ -330,14 +331,14 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
 
 1. Install the OpenJDK's Java Runtime Environment (JRE). ElasticSearch recommends that you install Java 8 update 20 or later.
    Please check that your distribution's version meet this requirement.
-  
+
   ```bash
   sudo apt-get install openjdk-8-jre
   ```
-  
+
 1. Create the file `/etc/apt/sources.list.d/elasticsearch-1.x.list`, and append it the following line:
    `deb http://packages.elastic.co/elasticsearch/1.x/debian stable main`
-   
+
 2. Import the repository signing key, and update the package lists
 
    ```bash
@@ -350,9 +351,9 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
    ```bash
    sudo apt-get install elasticsearch
    ```
-   
+
 4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8), you will need to run:
-   
+
    ```bash
    # System V
    sudo update-rc.d elasticsearch defaults 95 10
@@ -374,18 +375,18 @@ brew install homebrew/versions/elasticsearch17
 
 <a name="setup-fabmanager-in-elasticsearch"></a>
 ### Setup ElasticSearch for the FabManager
- 
-1. Launch the associated rake tasks in the project folder. 
+
+1. Launch the associated rake tasks in the project folder.
    This will create the fields mappings in ElasticSearch DB
 
    ```bash
    rake fablab:es_build_stats
    ```
 
-2. Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM). 
+2. Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM).
    See [schedule.yml](config/schedule.yml) to modify this behavior.
    If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following commands in a rails console.
-   
+
    ```bash
    rails c
    ```
@@ -410,7 +411,7 @@ Check the files located in `config/locales`:
 - Front app translations (angular.js) are located in  `config/locales/app.scope.XX.yml`.
  Where scope has one the following meaning :
     - admin: translations of the administrator views (manage and configure the FabLab).
-    - logged: translations of the end-user's views accessible only to connected users. 
+    - logged: translations of the end-user's views accessible only to connected users.
     - public: translation of end-user's views publicly accessible to anyone.
     - shared: translations shared by many views (like forms or buttons).
 - Back app translations (Ruby on Rails) are located in  `config/locales/XX.yml`.
@@ -432,8 +433,8 @@ Please refer to the official [angular-translate documentation](http://angular-tr
 <a name="i18n-translation-back"></a>
 #### Back-end translations
 
-Back-end translations uses the [Ruby on Rails syntax](http://guides.rubyonrails.org/i18n.html) but some complex interpolations are interpreted by [MessageFormat](https://github.com/format-message/message-format-rb) and are marked as it in comments. 
-**DO NOT confuse the syntaxes.** 
+Back-end translations uses the [Ruby on Rails syntax](http://guides.rubyonrails.org/i18n.html) but some complex interpolations are interpreted by [MessageFormat](https://github.com/format-message/message-format-rb) and are marked as it in comments.
+**DO NOT confuse the syntaxes.**
 
 In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
@@ -443,7 +444,7 @@ These comments are not required to be translated, they are intended to help the 
 <a name="i18n-configuration"></a>
 ### Configuration
 
-Locales configurations are made in `config/application.yml`. 
+Locales configurations are made in `config/application.yml`.
 If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
 
 <a name="i18n-settings"></a>
@@ -452,24 +453,24 @@ If you are in a development environment, your can keep the default values, other
 
 Configure Ruby on Rails for l10n.
 
-Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured RAILS_LOCALE. 
+Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured RAILS_LOCALE.
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
 
-Be aware that **this file MUST contain the CURRENCY symbol used to generate invoices** (among other things). 
+Be aware that **this file MUST contain the CURRENCY symbol used to generate invoices** (among other things).
 Default is **en**.
 
     MOMENT_LOCALE
- 
-Configure the moment.js library for l10n. 
 
-See `vendor/assets/components/moment/locale/*.js` for a list of available locales. 
+Configure the moment.js library for l10n.
+
+See `vendor/assets/components/moment/locale/*.js` for a list of available locales.
 Default is **en** (even if it's not listed).
 
     SUMMERNOTE_LOCALE
 
 Configure the javascript summernote editor for l10n.
 
-See `vendor/assets/components/summernote/lang/summernote-*.js` for a list of available locales. 
+See `vendor/assets/components/summernote/lang/summernote-*.js` for a list of available locales.
 Default is **en-US** (even if it's not listed).
 
     ANGULAR_LOCALE
@@ -493,7 +494,7 @@ See vendor/assets/components/messageformat/locale/*.js for a list of available l
 Configure the fullCalendar JS agenda library.
 
 See `vendor/assets/components/fullcalendar/dist/lang/*.js` for a list of available locales. Default is **en** (even if it's not listed).
-  
+
     ELASTICSEARCH_LANGUAGE_ANALYZER
 
 This configure the language analyzer for indexing and searching in projects with ElasticSearch.
@@ -501,22 +502,22 @@ See https://www.elastic.co/guide/en/elasticsearch/reference/1.7/analysis-lang-an
 
     TIME_ZONE
 
-In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rake time:zones:all` for a list of available time zone names. 
+In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rake time:zones:all` for a list of available time zone names.
 Default is **UTC**.
 
     WEEK_STARTING_DAY
 
 Configure the first day of the week in your locale zone (generally monday or sunday).
- 
+
     D3_DATE_FORMAT
 
-Date format for dates displayed in statistics charts. 
+Date format for dates displayed in statistics charts.
 See https://github.com/mbostock/d3/wiki/Time-Formatting#format for available formats.
 
     UIB_DATE_FORMAT
 
 Date format for dates displayed and parsed in date pickers.
-See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a list available formats. 
+See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a list available formats.
 
 **BEWARE**: years format with less than 4 digits will result in problems because the system won't be able to distinct dates with the same less significant digits, eg. 50 could mean 1950 or 2050.
 
@@ -525,6 +526,23 @@ See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a l
 
 After modifying any values concerning the localisation, restart the application (ie. web server) to apply these changes in the i18n configuration.
 
+<a name="open-projects"></a>
+## Open Projects
+
+**This configuration is optional.**
+
+You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects). It's very simple and straightforward
+and in return, your users will be able to search over projects from all fab-manager instances from within your platform. The deal is fair, you share your projects and as reward you benefits
+from projects of the whole community.
+If you want to try it, you can visit [this fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different fab-managers.
+
+To start using this awesome feature, there are a few steps:
+- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name of your fab-manager, they will give you an `OPENLAB_APP_ID` and an `OPENLAB_APP_SECRET`
+- fill in the value of the keys in your `application.yml`
+- start your fab-manager app
+- export your projects to open-projects (if you already have projects created on your fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
+
+Go to your project gallery and enjoy seeing your projects available from everywhere ! That's all.
 
 <a name="known-issues"></a>
 ## Known issues
@@ -539,10 +557,10 @@ After modifying any values concerning the localisation, restart the application 
         web.1    | Exiting
         worker.1 | ...lib/redis/client.rb...:in `_parse_options'
 
- This may happen when the `application.yml` file is missing. 
+ This may happen when the `application.yml` file is missing.
  To solve this issue copy `config/application.yml.default` to `config/application.yml`.
  This is required before the first start.
- 
+
 - Due to a stripe limitation, you won't be ble to create plans longer than one year.
 
 - When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
@@ -559,7 +577,7 @@ After modifying any values concerning the localisation, restart the application 
  PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for an example).
  Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
- 
+
         ALTER ROLE sleede WITH SUPERUSER;
 
  DO NOT do this in a production environment, as this would lead to a serious security issue.
@@ -572,4 +590,3 @@ After modifying any values concerning the localisation, restart the application 
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [ElasticSearch 1.7](https://www.elastic.co/guide/en/elasticsearch/reference/1.7/index.html)
-
