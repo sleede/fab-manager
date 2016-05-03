@@ -541,7 +541,7 @@ To start using this awesome feature, there are a few steps:
 - start your fab-manager app
 - export your projects to open-projects (if you already have projects created on your fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
 
-Go to your project gallery and enjoy seeing your projects available from everywhere ! That's all.
+Go to your projects gallery and enjoy seeing your projects available from everywhere ! That's all.
 
 <a name="known-issues"></a>
 ## Known issues
