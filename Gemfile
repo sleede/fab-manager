@@ -139,3 +139,5 @@ gem 'protected_attributes'
 gem 'message_format'
 
 gem 'openlab_ruby'
+
+gem 'has_secure_token'

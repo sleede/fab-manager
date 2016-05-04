@@ -164,6 +164,8 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    has_secure_token (1.0.0)
+      activerecord (>= 3.0)
     hashdiff (0.3.0)
     hashie (3.4.2)
     highline (1.7.1)
@@ -452,6 +454,7 @@ DEPENDENCIES
   foreman
   forgery
   friendly_id (~> 5.1.0)
+  has_secure_token
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
