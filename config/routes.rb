@@ -77,7 +77,7 @@ Rails.application.routes.draw do
     end
 
     resources :invoices, only: [:index, :show, :create] do
-      get ':id/download', action: 'download', on: :collection
+      get 'download', action: 'download', on: :member
     end
 
     # for admin
@@ -96,6 +96,26 @@ Rails.application.routes.draw do
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'
+  end
+
+  # open_api
+
+  namespace :open_api do
+    namespace :v1 do
+      scope only: :index do
+        resources :users
+        resources :trainings
+        resources :user_trainings
+        resources :reservations
+        resources :machines
+        resources :bookable_machines
+        resources :invoices do
+          get :download, on: :member
+        end
+        resources :events
+        resources :availabilities
+      end
+    end
   end
 
   %w(account event machine project subscription training user).each do |path|

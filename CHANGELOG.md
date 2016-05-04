@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## next deploy
+
+- fix some reservations was referencing reservable not present in databse
+run `bundle exec rake fablab:fix:reservations_not_existing_reservable` to fix it
+
 ## v2.1.1 2016 May 3
 - Fix a bug concerning openlab projects initialization in production env
 - Fix a bug: user is not redirected after changing is duplicated e-mail on the SSO provider

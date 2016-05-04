@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   has_many :event_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :event_files, allow_destroy: true, reject_if: :all_blank
   has_and_belongs_to_many :categories, join_table: :events_categories
+  has_many :reservations, as: :reservable, dependent: :destroy
 
   belongs_to :availability, dependent: :destroy
   accepts_nested_attributes_for :availability
@@ -32,9 +33,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def reservations
-    Reservation.where(reservable: self)
-  end
+  # def reservations
+  #   Reservation.where(reservable: self)
+  # end
 
   private
   def event_recurrence
