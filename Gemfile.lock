@@ -43,6 +43,8 @@ GEM
     addressable (2.3.8)
     ansi (1.5.0)
     api-pagination (4.3.0)
+    apipie-rails (0.3.6)
+      json
     arel (6.0.3)
     autoprefixer-rails (5.1.8)
       execjs
@@ -434,6 +436,7 @@ DEPENDENCIES
   actionpack-page_caching
   active_record_query_trace
   api-pagination
+  apipie-rails
   awesome_print
   bootstrap-sass
   byebug

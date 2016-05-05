@@ -1,4 +1,7 @@
 class OpenAPI::V1::ReservationsController < OpenAPI::V1::BaseController
+  extend OpenAPI::ApiDoc
+  expose_doc
+
   def index
     @reservations = Reservation.order(created_at: :desc)
 

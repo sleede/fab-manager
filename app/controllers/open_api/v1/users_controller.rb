@@ -1,9 +1,13 @@
 class OpenAPI::V1::UsersController < OpenAPI::V1::BaseController
+  extend OpenAPI::ApiDoc
+  expose_doc
+
   def index
     @users = User.order(created_at: :desc).includes(:group, :profile)
 
     if params[:email].present?
-      @users = @users.where(email: params[:email].downcase)
+      email_param = params[:email].is_a?(String) ? params[:email].downcase : params[:email].map(&:downcase)
+      @users = @users.where(email: email_param)
     end
 
     if params[:user_id].present?

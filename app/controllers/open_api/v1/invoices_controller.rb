@@ -1,4 +1,7 @@
 class OpenAPI::V1::InvoicesController < OpenAPI::V1::BaseController
+  extend OpenAPI::ApiDoc
+  expose_doc
+
   def index
     @invoices = Invoice.order(created_at: :desc)
 

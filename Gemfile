@@ -142,3 +142,4 @@ gem 'openlab_ruby'
 
 gem 'api-pagination'
 gem 'has_secure_token'
+gem 'apipie-rails'

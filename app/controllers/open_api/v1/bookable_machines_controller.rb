@@ -1,4 +1,7 @@
 class OpenAPI::V1::BookableMachinesController < OpenAPI::V1::BaseController
+  extend OpenAPI::ApiDoc
+  expose_doc
+
   def index
     raise ActionController::ParameterMissing if params[:user_id].blank?
 

@@ -1,4 +1,7 @@
 class OpenAPI::V1::UserTrainingsController < OpenAPI::V1::BaseController
+  extend OpenAPI::ApiDoc
+  expose_doc
+  
   def index
     @user_trainings = UserTraining.order(created_at: :desc)
 

@@ -1,4 +1,7 @@
 class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
+  extend OpenAPI::ApiDoc
+  expose_doc
+  
   def index
     @events = Event.order(created_at: :desc)
 
