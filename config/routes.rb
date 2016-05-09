@@ -93,6 +93,9 @@ Rails.application.routes.draw do
       get 'active', action: 'active', on: :collection
     end
     resources :abuses, only: [:create]
+    resources :open_api_clients, only: [:index, :create, :update, :destroy] do
+      patch :reset_token, on: :member
+    end
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'

@@ -352,7 +352,6 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise
           ]
-
       # trainings
       .state 'app.logged.trainings_reserve',
         url: '/trainings/reserve'
@@ -840,5 +839,19 @@ angular.module('application.router', ['ui.router']).
             Translations.query('app.admin.settings').$promise
           ]
 
+      # OpenAPI Clients
+      .state 'app.admin.open_api_clients',
+        url: '/open_api_clients'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/open_api_clients/index.html" %>'
+            controller: 'OpenAPIClientsController'
+        resolve:
+          clientsPromise: ['OpenAPIClient', (OpenAPIClient)->
+            OpenAPIClient.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.admin.open_api_clients').$promise
+          ]
 
 ]
