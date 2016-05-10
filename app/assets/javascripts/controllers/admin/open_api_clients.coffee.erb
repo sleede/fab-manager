@@ -66,22 +66,4 @@ Application.Controllers.controller "OpenAPIClientsController", ["$scope", 'clien
         growl.success(_t('access_successfully_revoked'))
 
 
-  ##
-  # Ask for confirmation then delete the specified administrator
-  # @param admins {Array} full list of administrators
-  # @param admin {Object} administrator to delete
-  ##
-  $scope.destroyAdmin = (admins, admin)->
-    dialogs.confirm
-      resolve:
-        object: ->
-          title: _t('confirmation_required')
-          msg: _t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone')
-    , -> # cancel confirmed
-      Admin.delete id: admin.id, ->
-        admins.splice(findAdminIdxById(admins, admin.id), 1)
-        growl.success(_t('administrator_successfully_deleted'))
-      , (error)->
-        growl.error(_t('unable_to_delete_the_administrator'))
-
 ]
