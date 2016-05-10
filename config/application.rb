@@ -13,12 +13,14 @@ require "rails/all"
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Fablab
   class Application < Rails::Application
+    require 'fab_manager'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -62,5 +64,14 @@ module Fablab
       config.web_console.whitelisted_ips << '10.0.2.2' #vagrant
     end
 
+    config.i18n.load_path += Dir["#{Rails.root}/plugins/*/config/locales/*.yml"]
+
+    FabManager.activate_plugins!
+
+    config.after_initialize do
+      if plugins = FabManager.plugins
+        plugins.each { |plugin| plugin.notify_after_initialize }
+      end
+    end
   end
 end
