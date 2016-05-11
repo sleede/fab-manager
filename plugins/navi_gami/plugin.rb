@@ -1,6 +1,8 @@
 register_asset "stylesheets/navi_gami.scss"
 register_asset "javascripts/navi_gami.coffee.erb"
 
+register_css('navi_gami')
+
 PLUGIN_NAME ||= "navi_gami".freeze
 
 

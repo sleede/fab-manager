@@ -62,6 +62,10 @@ module Plugin
       assets << [full_path, opts]
     end
 
+    def register_css(style)
+      styles << style
+    end
+
     def after_initialize(&block)
       initializers << block
     end

@@ -35,4 +35,8 @@
 
 @import "app.responsive";
 
-@import "navi_gami"; // change it to be dynamic !!!
+<% FabManager.plugins.each do |plugin| %>
+  <% plugin.styles.each do |style| %>
+    <%= "@import '#{style}';" %>
+  <% end %>
+<% end %>
