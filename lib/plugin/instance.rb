@@ -62,7 +62,7 @@ module Plugin
       assets << [full_path, opts]
     end
 
-    def register_css(style)
+    def register_css(style) # useless ?
       styles << style
     end
 

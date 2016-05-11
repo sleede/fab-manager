@@ -35,8 +35,7 @@
 
 @import "app.responsive";
 
-<% FabManager.plugins.each do |plugin| %>
-  <% plugin.styles.each do |style| %>
-    <%= "@import '#{style}';" %>
-  <% end %>
+<% PluginRegistry.stylesheets.each do |stylesheet| %>
+  <% basename = File.basename(stylesheet,'.scss') %>
+  <%= "@import '#{basename}';" %>
 <% end %>
