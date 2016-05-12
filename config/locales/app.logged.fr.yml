@@ -72,14 +72,6 @@ fr:
       members_show:
         # profil public d'un membre
         members_list: "Liste des membres"
-        last_activity_: "Dernière activité"
-        _on_: "le"
-        to_come: "à venir"
-        approved: "validée"
-        projects: "Projets"
-        no_projects: "Aucun projet"
-        author: "Auteur"
-        collaborator: "Collaborateur"
 
       members:
         #  liste des membres qui acceptent d'être contactés

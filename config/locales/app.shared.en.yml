@@ -267,3 +267,14 @@ en:
         machine_reservation: "Machine reservation"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
         your_training_will_occur_: "Your training will occur"
+
+      public_profile:
+        # user public profile
+        last_activity_: "Last activity"
+        _on_: "on"
+        to_come: "to come"
+        approved: "approved"
+        projects: "Projects"
+        no_projects: "No projects"
+        author: "Author"
+        collaborator: "Collaborator"

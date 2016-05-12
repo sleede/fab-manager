@@ -72,14 +72,6 @@ en:
       members_show:
         # public profil of a member
         members_list: "Members list"
-        last_activity_: "Last activity"
-        _on_: "on"
-        to_come: "to come"
-        approved: "approved"
-        projects: "Projects"
-        no_projects: "No projects"
-        author: "Author"
-        collaborator: "Collaborator"
 
       members:
         # list of members accepting to be contacted

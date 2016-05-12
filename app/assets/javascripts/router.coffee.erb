@@ -139,7 +139,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'DashboardController'
         resolve:
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.logged.dashboard.profile']).$promise
+            Translations.query(['app.logged.dashboard.profile', 'app.shared.public_profile']).$promise
           ]
       .state 'app.logged.dashboard.settings',
         url: '/settings'
