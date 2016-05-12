@@ -211,8 +211,8 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
 ##
 # Controller used on the public user's profile page (seeing another user's profile)
 ##
-Application.Controllers.controller "ShowProfileController", ["$scope", "$stateParams", 'Member', 'memberPromise', ($scope, $stateParams, Member, memberPromise) ->
+Application.Controllers.controller "ShowProfileController", ["$scope", 'memberPromise', ($scope, memberPromise) ->
 
-  ## Selected user's profile (id from the current URL)
+  ## Selected user's informations
   $scope.user = memberPromise
 ]

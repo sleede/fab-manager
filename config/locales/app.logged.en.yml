@@ -23,8 +23,11 @@ en:
         an_unexpected_error_occurred_check_your_authentication_code: "An unexpected error occurred, please check your authentication code."
 
       dashboard:
+        # dashboard: public profile
         profile:
-          # dashboard: my profile
+          empty: ''
+        settings:
+          # dashboard: edit my profile
           last_activity_on_: "Last activity on"
           i_want_to_change_group: "I want to change group!"
           your_subscription_expires_on_: "Your subscription expires on"

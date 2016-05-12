@@ -1,0 +1,91 @@
+<div class="row no-gutter wrapper">
+  <div class="col-sm-12 col-md-12 col-lg-6">
+
+
+
+    <div class="wrapper">
+      <section class="widget panel no-border bg-black-light text-white lt">
+        <div class="panel-body">
+          <div class="row m-t-xl">
+            <div class="col-xs-3 text-right padder-v">
+              <!-- <a href="#" class="btn btn-primary btn-icon btn-rounded m-t-xl"><i class="fa fa-flag"></i></a> -->
+            </div>
+            <div class="col-xs-6 text-center">
+              <div class="inline">
+                <div class="easypiechart easyPieChart" data-percent="75" data-line-width="6" data-bar-color="#fff" data-track-color="#2796de" data-scale-color="false" data-size="140" data-line-cap="butt" data-animate="1000" style="width: 140px; height: 140px; line-height: 140px;">
+                  <div class="thumb-lg avatar thumb-128-wrapper img">
+                    <fab-user-avatar ng-model="user.profile.user_avatar" avatar-class="thumb-140"></fab-user-avatar>
+                  </div>
+                  <canvas width="140" height="140"></canvas></div>
+                <div class="h4 m-t m-b-xs font-bold text-lt text-white">{{user.name}}</div>
+                <small class="text-muted m-b">{{user.username}}</small>
+              </div>
+            </div>
+            <div class="col-xs-3 padder-v">
+              <!--               <a href="#" class="btn btn-primary btn-icon btn-rounded m-t-xl" data-toggle="class:btn-danger">
+                              <i class="i i-phone text"></i>
+                              <i class="i i-phone2 text-active"></i>
+                            </a> -->
+            </div>
+          </div>
+          <div class="wrapper m-t-xl m-b">
+            <div class="row m-b">
+              <div class="col-xs-6 text-right">
+                <small translate>{{ 'last_activity_' }}</small>
+                <div class="text-lt font-bold" ng-if="user.last_sign_in_at">{{ '_on_' | translate }} {{user.last_sign_in_at | amDateFormat: 'LL'}}</div>
+              </div>
+              <div class="col-xs-6">
+                <small translate>{{ 'email_address' }}</small>
+                <div class="text-lt font-bold break-word">{{user.email}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 text-right">
+                <small translate>{{ 'CAD_softwares_mastered' }}</small>
+                <div class="text-lt font-bold">{{user.profile.software_mastered}}</div>
+              </div>
+              <div class="col-xs-6">
+                <small translate>{{ 'interests' }}</small>
+                <div class="text-lt font-bold">{{user.profile.interest}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="widget panel b-a m ">
+      <div class="panel-heading b-b">
+        <h1 class="red text-u-c" translate>{{ 'trainings' }}</h1>
+        <!-- <h3 class="text-u-c">Formations</h3> -->
+        <ul class="list-unstyled" ng-if="user.training_reservations.length > 0 || user.trainings.length > 0">
+          <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'">
+            {{r.reservable.name}} - <span class="label label-info text-white" translate>{{ 'to_come' }}</span>
+          </li>
+          <li ng-repeat="t in user.trainings">
+            {{t.name}} - <span class="label label-success text-white" translate>{{ 'approved' }}</span>
+          </li>
+        </ul>
+        <div ng-if="user.training_reservations.length == 0 && user.trainings.length == 0" translate>{{ 'no_trainings' }}</div>
+      </div>
+    </div>
+
+    <div class="widget panel b-a m ">
+      <div class="panel-heading b-b">
+        <h1 class="red text-u-c" translate>{{ 'projects' }}</h1>
+        <ul class="list-unstyled" ng-if="user.all_projects.length > 0">
+          <li ng-repeat="p in user.all_projects" class="m-t-sm">
+            <a class="text-u-c" ui-sref="app.public.projects_show({id:p.slug})" role="button">{{p.name}}  <span class="m-l-sm label label-success text-white">{{p.author_id == currentUser.id ? 'author' : 'collaborator' | translate}}</span></a>
+          </li>
+
+        </ul>
+        <div ng-if="user.all_projects.length == 0" translate>{{ 'no_projects' }}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
