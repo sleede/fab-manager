@@ -19,6 +19,7 @@ json.profile do
     json.address @member.profile.address.address
   end if @member.profile.address
   json.phone @member.profile.phone
+  json.website @member.profile.website
   json.extract! @member.profile, :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences
 end
 json.subscribed_plan do

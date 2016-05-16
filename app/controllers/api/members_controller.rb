@@ -139,14 +139,14 @@ class API::MembersController < API::ApiController
     def user_params
       if current_user.id == params[:id].to_i
         params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact,
-                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered,
+                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website,
                                      :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences,
                                      :user_avatar_attributes => [:id, :attachment, :_destroy], :address_attributes => [:id, :address]])
 
       elsif current_user.is_admin?
-        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled,
+        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled, :is_allow_contact,
                                       :group_id, training_ids: [], tag_ids: [],
-                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered,
+                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website,
                                       :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences,
                                       user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address]])
 

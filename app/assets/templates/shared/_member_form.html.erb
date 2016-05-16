@@ -214,6 +214,20 @@
         <span class="help-block" ng-show="userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
       </div>
 
+      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][website]'].$dirty && userForm['user[profile_attributes][website]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-globe"></i> </span>
+          <input type="url"
+                 name="user[profile_attributes][website]"
+                 ng-model="user.profile.website"
+                 class="form-control"
+                 id="user_website"
+                 placeholder="{{ 'website' | translate }}"
+                 ng-disabled="preventField['profile.website'] && user.profile.website && !userForm['user[profile_attributes][website]'].$dirty"/>
+        </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][website]'].$dirty && userForm['user[profile_attributes][website]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
+      </div>
+
       <div class="form-group">
         <label for="user_interest" translate>{{ 'interests' }}</label>
         <textarea name="user[profile_attributes][interest]"
@@ -234,6 +248,20 @@
                   id="user_software_mastered"
                   placeholder=""
                   ng-disabled="preventField['profile.software_mastered'] && user.profile.software_mastered && !userForm['user[profile_attributes][software_mastered]'].$dirty"></textarea>
+      </div>
+
+      <!-- allow contact-->
+      <div class="form-group">
+        <label for="allowContact" translate>{{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+        <input bs-switch
+               ng-model="user.is_allow_contact"
+               id="allowContact"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'yes' | translate }}"
+               switch-off-text="{{ 'no' | translate }}"
+               switch-animate="true"/>
+        <input type="hidden" name="user[is_allow_contact]" value="{{user.is_allow_contact}}"/>
       </div>
 
       <div id="social" ng-init="social={}">
@@ -391,20 +419,20 @@
             />
           </div>
         </div>
-      </div>
 
-      <div class="social-icons m-b">
-        <div ng-click="social.facebook = !social.facebook" ng-hide="social.facebook || user.profile.facebook"><i class="fa fa-facebook fa-2x"></i></div>
-        <div ng-click="social.twitter = !social.twitter" ng-hide="social.twitter || user.profile.twitter"><i class="fa fa-twitter fa-2x"></i></div>
-        <div ng-click="social.google_plus = !social.google_plus" ng-hide="social.google_plus || user.profile.google_plus"><i class="fa fa-google-plus fa-2x"></i></div>
-        <div ng-click="social.viadeo = !social.viadeo" ng-hide="social.viadeo || user.profile.viadeo"><i class="fa fa-viadeo fa-2x"></i></div>
-        <div ng-click="social.linkedin = !social.linkedin" ng-hide="social.linkedin || user.profile.linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
-        <div ng-click="social.instagram = !social.instagram" ng-hide="social.instagram || user.profile.instagram"><i class="fa fa-instagram fa-2x"></i></div>
-        <div ng-click="social.youtube = !social.youtube" ng-hide="social.youtube || user.profile.youtube"><i class="fa fa-youtube fa-2x"></i></div>
-        <div ng-click="social.vimeo = !social.vimeo" ng-hide="social.vimeo || user.profile.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
-        <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
-        <div ng-click="social.github = !social.github" ng-hide="social.github || user.profile.github"><i class="fa fa-github fa-2x"></i></div>
-        <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+        <div class="social-icons m-b">
+          <div ng-click="social.facebook = !social.facebook" ng-hide="social.facebook || user.profile.facebook"><i class="fa fa-facebook fa-2x"></i></div>
+          <div ng-click="social.twitter = !social.twitter" ng-hide="social.twitter || user.profile.twitter"><i class="fa fa-twitter fa-2x"></i></div>
+          <div ng-click="social.google_plus = !social.google_plus" ng-hide="social.google_plus || user.profile.google_plus"><i class="fa fa-google-plus fa-2x"></i></div>
+          <div ng-click="social.viadeo = !social.viadeo" ng-hide="social.viadeo || user.profile.viadeo"><i class="fa fa-viadeo fa-2x"></i></div>
+          <div ng-click="social.linkedin = !social.linkedin" ng-hide="social.linkedin || user.profile.linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
+          <div ng-click="social.instagram = !social.instagram" ng-hide="social.instagram || user.profile.instagram"><i class="fa fa-instagram fa-2x"></i></div>
+          <div ng-click="social.youtube = !social.youtube" ng-hide="social.youtube || user.profile.youtube"><i class="fa fa-youtube fa-2x"></i></div>
+          <div ng-click="social.vimeo = !social.vimeo" ng-hide="social.vimeo || user.profile.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
+          <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+          <div ng-click="social.github = !social.github" ng-hide="social.github || user.profile.github"><i class="fa fa-github fa-2x"></i></div>
+          <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+        </div>
       </div>
 
     </div>

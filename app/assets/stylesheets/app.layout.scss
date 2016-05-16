@@ -484,9 +484,11 @@ body.container{
     display: inline-block;
     text-align: center;
     border-radius: 3px;
+    border: 1px solid transparent;
 
     &:hover {
       background-color: $yellow;
+      border: 1px solid $border-color;
     }
   }
 }

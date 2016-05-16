@@ -104,6 +104,7 @@ fr:
         confirmation_mismatch_with_password: "La confirmation ne concorde pas avec le mot de passe."
         date_of_birth: "Date de naissance"
         date_of_birth_is_required: "La date de naissance est requise."
+        website: "Site web"
         facebook: "Facebook"
         twitter: "Twitter"
         google_plus: "Google+"

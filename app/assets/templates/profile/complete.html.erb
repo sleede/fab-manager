@@ -80,14 +80,6 @@
                                                     <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
                                                 </div>
 
-                                                <!-- allow contact-->
-                                                <div class="form-group" ng-class="{'has-error': userForm['user[is_allow_contact]'].$dirty && userForm['user[is_allow_contact]'].$invalid}">
-                                                    <input type="checkbox"
-                                                           name="user[is_allow_contact]"
-                                                           ng-model="user.is_allow_contact"
-                                                           value="true"/> {{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' | translate }}
-                                                </div>
-
                                                 <!-- accept cgu -->
                                                 <div class="form-group" ng-class="{'has-error': userForm.cgu.$dirty && userForm.cgu.$invalid}" ng-show="cgu">
                                                     <input type="checkbox"
