@@ -394,17 +394,17 @@
       </div>
 
       <div class="social-icons m-b">
-        <div ng-click="social.facebook = !social.facebook"><i class="fa fa-facebook fa-2x"></i></div>
-        <div ng-click="social.twitter = !social.twitter"><i class="fa fa-twitter fa-2x"></i></div>
-        <div ng-click="social.google_plus = !social.google_plus"><i class="fa fa-google-plus fa-2x"></i></div>
-        <div ng-click="social.viadeo = !social.viadeo"><i class="fa fa-viadeo fa-2x"></i></div>
-        <div ng-click="social.linkedin = !social.linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
-        <div ng-click="social.instagram = !social.instagram"><i class="fa fa-instagram fa-2x"></i></div>
-        <div ng-click="social.youtube = !social.youtube"><i class="fa fa-youtube fa-2x"></i></div>
-        <div ng-click="social.vimeo = !social.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
-        <div ng-click="social.dailymotion = !social.dailymotion"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
-        <div ng-click="social.github = !social.github"><i class="fa fa-github fa-2x"></i></div>
-        <div ng-click="social.echosciences = !social.echosciences"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+        <div ng-click="social.facebook = !social.facebook" ng-hide="social.facebook || user.profile.facebook"><i class="fa fa-facebook fa-2x"></i></div>
+        <div ng-click="social.twitter = !social.twitter" ng-hide="social.twitter || user.profile.twitter"><i class="fa fa-twitter fa-2x"></i></div>
+        <div ng-click="social.google_plus = !social.google_plus" ng-hide="social.google_plus || user.profile.google_plus"><i class="fa fa-google-plus fa-2x"></i></div>
+        <div ng-click="social.viadeo = !social.viadeo" ng-hide="social.viadeo || user.profile.viadeo"><i class="fa fa-viadeo fa-2x"></i></div>
+        <div ng-click="social.linkedin = !social.linkedin" ng-hide="social.linkedin || user.profile.linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
+        <div ng-click="social.instagram = !social.instagram" ng-hide="social.instagram || user.profile.instagram"><i class="fa fa-instagram fa-2x"></i></div>
+        <div ng-click="social.youtube = !social.youtube" ng-hide="social.youtube || user.profile.youtube"><i class="fa fa-youtube fa-2x"></i></div>
+        <div ng-click="social.vimeo = !social.vimeo" ng-hide="social.vimeo || user.profile.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
+        <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+        <div ng-click="social.github = !social.github" ng-hide="social.github || user.profile.github"><i class="fa fa-github fa-2x"></i></div>
+        <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
       </div>
 
     </div>
