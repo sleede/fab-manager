@@ -492,3 +492,47 @@ body.container{
     }
   }
 }
+
+.profile-top {
+  background-size: cover !important;
+
+  .profile-top-head {
+    margin: 0 15px 0 15px;
+    padding: 30px 0 30px 0;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .profile-top-corpus {
+    padding-top: 15px;
+    margin: 0 !important;
+    height: 190px;
+    overflow-y: visible;
+
+    .avatar img {
+      border: 9px solid #fff;
+      background-color: #fff;
+      box-shadow: 1px 2px 2px 0 #1f1f1f;
+      margin-top: 10px;
+    }
+
+    .profile-top-social {
+      border-left: 1px solid $border-color;
+      height: 100%;
+      top: -15px;
+
+      .social-links {
+        span {
+          border: 1px solid #fff;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: inline-block;
+          text-align: center;
+          background-color: #fff;
+
+          i { vertical-align: middle; }
+        }
+      }
+    }
+  }
+}
