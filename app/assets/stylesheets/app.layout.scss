@@ -475,3 +475,18 @@ body.container{
   width: 33%;
   left: 33%;
 }
+
+.social-icons {
+  & > div {
+    cursor: pointer;
+    padding: 0.2em;
+    width: 3em;
+    display: inline-block;
+    text-align: center;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: $yellow;
+    }
+  }
+}

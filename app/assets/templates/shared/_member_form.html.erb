@@ -236,6 +236,177 @@
                   ng-disabled="preventField['profile.software_mastered'] && user.profile.software_mastered && !userForm['user[profile_attributes][software_mastered]'].$dirty"></textarea>
       </div>
 
+      <div id="social" ng-init="social={}">
+        <div class="form-group" ng-show="social.facebook || user.profile.facebook" ng-class="{'has-error': userForm['user[profile_attributes][facebook]'].$dirty && userForm['user[profile_attributes][facebook]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][facebook]"
+                   ng-model="user.profile.facebook"
+                   class="form-control"
+                   id="user_facebook"
+                   placeholder="{{ 'facebook' | translate }}"
+                   ng-disabled="preventField['profile.facebook'] && user.profile.first_name && !userForm['user[profile_attributes][facebook]'].$dirty"
+                   />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.twitter || user.profile.twitter" ng-class="{'has-error': userForm['user[profile_attributes][twitter]'].$dirty && userForm['user[profile_attributes][twitter]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][twitter]"
+                   ng-model="user.profile.twitter"
+                   class="form-control"
+                   id="user_twitter"
+                   placeholder="{{ 'twitter' | translate }}"
+                   ng-disabled="preventField['profile.twitter'] && user.profile.first_name && !userForm['user[profile_attributes][twitter]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.google_plus || user.profile.google_plus" ng-class="{'has-error': userForm['user[profile_attributes][google_plus]'].$dirty && userForm['user[profile_attributes][google_plus]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][google_plus]"
+                   ng-model="user.profile.google_plus"
+                   class="form-control"
+                   id="user_google_plus"
+                   placeholder="{{ 'google_plus' | translate }}"
+                   ng-disabled="preventField['profile.google_plus'] && user.profile.first_name && !userForm['user[profile_attributes][google_plus]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.viadeo || user.profile.viadeo" ng-class="{'has-error': userForm['user[profile_attributes][viadeo]'].$dirty && userForm['user[profile_attributes][viadeo]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-viadeo"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][viadeo]"
+                   ng-model="user.profile.viadeo"
+                   class="form-control"
+                   id="user_viadeo"
+                   placeholder="{{ 'viadeo' | translate }}"
+                   ng-disabled="preventField['profile.viadeo'] && user.profile.first_name && !userForm['user[profile_attributes][viadeo]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.linkedin || user.profile.linkedin" ng-class="{'has-error': userForm['user[profile_attributes][linkedin]'].$dirty && userForm['user[profile_attributes][linkedin]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-linkedin"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][linkedin]"
+                   ng-model="user.profile.linkedin"
+                   class="form-control"
+                   id="user_linkedin"
+                   placeholder="{{ 'linkedin' | translate }}"
+                   ng-disabled="preventField['profile.linkedin'] && user.profile.first_name && !userForm['user[profile_attributes][linkedin]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.instagram || user.profile.instragram" ng-class="{'has-error': userForm['user[profile_attributes][instagram]'].$dirty && userForm['user[profile_attributes][instagram]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-instagram"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][instagram]"
+                   ng-model="user.profile.instagram"
+                   class="form-control"
+                   id="user_instagram"
+                   placeholder="{{ 'instagram' | translate }}"
+                   ng-disabled="preventField['profile.instagram'] && user.profile.first_name && !userForm['user[profile_attributes][instagram]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.youtube || user.profile.youtube" ng-class="{'has-error': userForm['user[profile_attributes][youtube]'].$dirty && userForm['user[profile_attributes][youtube]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-youtube"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][youtube]"
+                   ng-model="user.profile.youtube"
+                   class="form-control"
+                   id="user_youtube"
+                   placeholder="{{ 'youtube' | translate }}"
+                   ng-disabled="preventField['profile.youtube'] && user.profile.first_name && !userForm['user[profile_attributes][youtube]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.vimeo || user.profile.vimeo" ng-class="{'has-error': userForm['user[profile_attributes][vimeo]'].$dirty && userForm['user[profile_attributes][vimeo]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-vimeo"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][vimeo]"
+                   ng-model="user.profile.vimeo"
+                   class="form-control"
+                   id="user_vimeo"
+                   placeholder="{{ 'vimeo' | translate }}"
+                   ng-disabled="preventField['profile.vimeo'] && user.profile.first_name && !userForm['user[profile_attributes][vimeo]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.dailymotion || user.profile.dailymotion" ng-class="{'has-error': userForm['user[profile_attributes][dailymotion]'].$dirty && userForm['user[profile_attributes][dailymotion]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img"/></span>
+            <input type="text"
+                   name="user[profile_attributes][dailymotion]"
+                   ng-model="user.profile.dailymotion"
+                   class="form-control"
+                   id="user_dailymotion"
+                   placeholder="{{ 'dailymotion' | translate }}"
+                   ng-disabled="preventField['profile.dailymotion'] && user.profile.first_name && !userForm['user[profile_attributes][dailymotion]'].$dirty"
+            />
+          </div>
+        </div>
+
+
+        <div class="form-group" ng-show="social.github || user.profile.github" ng-class="{'has-error': userForm['user[profile_attributes][github]'].$dirty && userForm['user[profile_attributes][github]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-github"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][github]"
+                   ng-model="user.profile.github"
+                   class="form-control"
+                   id="user_github"
+                   placeholder="{{ 'github' | translate }}"
+                   ng-disabled="preventField['profile.github'] && user.profile.first_name && !userForm['user[profile_attributes][github]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.echosciences || user.profile.echosciences" ng-class="{'has-error': userForm['user[profile_attributes][echosciences]'].$dirty && userForm['user[profile_attributes][echosciences]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img"/></span>
+            <input type="text"
+                   name="user[profile_attributes][echosciences]"
+                   ng-model="user.profile.echosciences"
+                   class="form-control"
+                   id="user_echosciences"
+                   placeholder="{{ 'echosciences' | translate }}"
+                   ng-disabled="preventField['profile.echosciences'] && user.profile.first_name && !userForm['user[profile_attributes][echosciences]'].$dirty"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="social-icons m-b">
+        <div ng-click="social.facebook = !social.facebook"><i class="fa fa-facebook fa-2x"></i></div>
+        <div ng-click="social.twitter = !social.twitter"><i class="fa fa-twitter fa-2x"></i></div>
+        <div ng-click="social.google_plus = !social.google_plus"><i class="fa fa-google-plus fa-2x"></i></div>
+        <div ng-click="social.viadeo = !social.viadeo"><i class="fa fa-viadeo fa-2x"></i></div>
+        <div ng-click="social.linkedin = !social.linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
+        <div ng-click="social.instagram = !social.instagram"><i class="fa fa-instagram fa-2x"></i></div>
+        <div ng-click="social.youtube = !social.youtube"><i class="fa fa-youtube fa-2x"></i></div>
+        <div ng-click="social.vimeo = !social.vimeo"><i class="fa fa-vimeo fa-2x"></i></div>
+        <div ng-click="social.dailymotion = !social.dailymotion"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+        <div ng-click="social.github = !social.github"><i class="fa fa-github fa-2x"></i></div>
+        <div ng-click="social.echosciences = !social.echosciences"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
+      </div>
+
     </div>
 
 </div>

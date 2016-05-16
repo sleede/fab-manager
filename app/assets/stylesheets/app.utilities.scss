@@ -286,6 +286,16 @@ p, .widget p {
     max-width: 100%;
   }
 }
+.fa-img {
+  display: inline-block;
+  height: 0.9em;
+  width: auto;
+  vertical-align: sub;
+}
+.contrast-250 {
+  -webkit-filter: contrast(250%);
+  filter: contrast(250%);
+}
 .clear{display:block;overflow: hidden;}
 
 .scroll-x, .scroll-y{overflow:hidden;-webkit-overflow-scrolling:touch;}
