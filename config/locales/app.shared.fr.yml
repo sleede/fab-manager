@@ -104,6 +104,17 @@ fr:
         confirmation_mismatch_with_password: "La confirmation ne concorde pas avec le mot de passe."
         date_of_birth: "Date de naissance"
         date_of_birth_is_required: "La date de naissance est requise."
+        facebook: "Facebook"
+        twitter: "Twitter"
+        google_plus: "Google+"
+        viadeo: "Viadeo"
+        linkedin: "LinkedIn"
+        instagram: "Instagram"
+        youtube: "YouTube"
+        vimeo: "Vimeo"
+        dailymotion: "Dailymotion"
+        github: "GitHub"
+        echosciences: "EchoSciences"
 
       project:
         # formulaire d'étition d'un projet

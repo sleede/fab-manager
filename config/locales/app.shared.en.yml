@@ -104,6 +104,17 @@ en:
         confirmation_mismatch_with_password: "Confirmation mismatch with password."
         date_of_birth: "Date of birth"
         date_of_birth_is_required: "Date of birth is required."
+        facebook: "Facebook"
+        twitter: "Twitter"
+        google_plus: "Google+"
+        viadeo: "Viadeo"
+        linkedin: "LinkedIn"
+        instagram: "Instagram"
+        youtube: "YouTube"
+        vimeo: "Vimeo"
+        dailymotion: "Dailymotion"
+        github: "GitHub"
+        echosciences: "EchoSciences"
 
       project:
         # project edition form
