@@ -500,6 +500,20 @@ body.container{
   .profile-top-infos {
     margin: 0 15px 0 15px;
     padding: 30px 0 30px 0;
+
+
+    .private-profile {
+      color: #000;
+      border: 1px solid $border-color;
+      background-color: $border-color;
+      border-radius: 3px;
+      padding: 0 5px 0 5px;
+      margin-left: 2em;
+
+      i {
+        padding-right: 5px;
+      }
+    }
   }
 
   .profile-top-pictos {

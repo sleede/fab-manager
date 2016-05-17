@@ -26,15 +26,17 @@
       </div>
       <div class="col-lg-7 profile-top-infos">
         <div class="text-xl font-ebold upper">{{user.username}}</div>
-        <small class="font-bold">{{user.name}}</small> • <small class="upper">{{user.is_allow_contact ? 'Profil public' : 'Profil privé'}}</small>
-        <div class="text-italic">
-          <span class="font-bold" translate>{{ 'interests' }}</span>
-          <div class="m-b">{{user.profile.interest}}</div>
-          <span class="font-bold" translate>{{ 'CAD_softwares_mastered' }}</span>
-          <div>{{user.profile.software_mastered}}</div>
+        <small class="font-bold">{{user.name}}</small>
+        <small class="text-xs upper font-thin private-profile" ng-show="!user.is_allow_contact"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'private_profile' | translate }}</small>
+        <div class="m-t">
+          <small translate>{{ 'last_activity_' }}</small>
+          <div class="text-lt font-bold" ng-if="user.last_sign_in_at">{{ '_on_' | translate }} {{user.last_sign_in_at | amDateFormat: 'LL'}}</div>
+          <small translate>{{ 'email_address' }}</small>
+          <div class="text-lt font-bold break-word">{{user.email}}</div>
         </div>
       </div>
-      <div class="col-lg-3 profile-top-badge"></div>
+      <div class="col-lg-3 profile-top-badge">
+      </div>
     </section>
   </div>
 
@@ -48,12 +50,12 @@
           <div class="wrapper m-t-xl m-b">
             <div class="row m-b">
               <div class="col-xs-5 text-right">
-                <small translate>{{ 'last_activity_' }}</small>
-                <div class="text-lt font-bold" ng-if="user.last_sign_in_at">{{ '_on_' | translate }} {{user.last_sign_in_at | amDateFormat: 'LL'}}</div>
+                <span class="font-bold" translate>{{ 'interests' }}</span>
+                <div class="m-b m-t-sm">{{user.profile.interest}}</div>
               </div>
               <div class="col-xs-offset-1 col-xs-6">
-                <small translate>{{ 'email_address' }}</small>
-                <div class="text-lt font-bold break-word">{{user.email}}</div>
+                <span class="font-bold" translate>{{ 'CAD_softwares_mastered' }}</span>
+                <div class="m-t-sm">{{user.profile.software_mastered}}</div>
               </div>
             </div>
           </div>
