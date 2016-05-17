@@ -476,6 +476,7 @@ body.container{
   left: 33%;
 }
 
+// profile edition -- add a social network buttons
 .social-icons {
   & > div {
     cursor: pointer;
@@ -487,51 +488,53 @@ body.container{
     border: 1px solid transparent;
 
     &:hover {
-      background-color: $yellow;
       border: 1px solid $border-color;
     }
   }
 }
 
+// public profile view
 .profile-top {
   background-size: cover !important;
 
-  .profile-top-head {
+  .profile-top-infos {
     margin: 0 15px 0 15px;
     padding: 30px 0 30px 0;
-    border-bottom: 1px solid $border-color;
   }
 
-  .profile-top-corpus {
-    padding-top: 15px;
+  .profile-top-pictos {
+    padding: 15px 0 15px 0;
     margin: 0 !important;
-    height: 190px;
-    overflow-y: visible;
+    text-align: center;
 
-    .avatar img {
-      border: 9px solid #fff;
-      background-color: #fff;
-      box-shadow: 1px 2px 2px 0 #1f1f1f;
-      margin-top: 10px;
+
+    .avatar {
+      display: inline-block;
+      img {
+        border: 9px solid #fff;
+        background-color: #fff;
+        box-shadow: 1px 2px 2px 0 #1f1f1f;
+      }
     }
 
-    .profile-top-social {
-      border-left: 1px solid $border-color;
-      height: 100%;
-      top: -15px;
+    .social-links {
+      max-width: 133px;
+      display: inline-block;
+      text-align: left;
 
-      .social-links {
-        span {
-          border: 1px solid #fff;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          display: inline-block;
-          text-align: center;
-          background-color: #fff;
+      a {
+        border: 1px solid #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        background-color: #fff;
+        cursor: pointer;
+        color: $input-color;
+        margin-bottom: 5px;
 
-          i { vertical-align: middle; }
-        }
+        i { vertical-align: middle; }
       }
     }
   }

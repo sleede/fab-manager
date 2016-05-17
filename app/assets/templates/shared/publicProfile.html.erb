@@ -1,31 +1,40 @@
 <div class="row no-gutter wrapper">
 
   <div class="col-lg-12">
-    <section class="profile-top text-white widget panel b-a m">
-      <div class="profile-top-head">
-          <div class="text-xl font-ebold upper">{{user.name}}</div>
-          <small class="font-bold">{{user.username}}</small> • <small class="upper">{{user.is_allow_contact ? 'Profil public' : 'Profil public'}}</small>
-      </div>
-      <div class="row profile-top-corpus">
-        <div class="thumb-lg avatar thumb-140-wrapper img col-md-2">
+    <section class="profile-top text-white widget panel b-a m row">
+      <div class="col-lg-2 profile-top-pictos">
+        <div class="thumb-lg avatar thumb-140-wrapper img m-b-md">
           <fab-user-avatar ng-model="user.profile.user_avatar" avatar-class="thumb-140"></fab-user-avatar>
         </div>
-        <div class="m-l-lg col-md-8 text-italic">
+        <div class="social-links" ng-if="social.networks.length <= 4">
+          <ng-repeat ng-repeat="network in social.networks" >
+            <social-link network="{{network}}" user="user"></social-link>
+          </ng-repeat>
+        </div>
+        <div class="social-links" ng-if="social.networks.length > 4">
+          <ng-repeat ng-repeat="network in social.networks.slice(0,3)">
+            <social-link network="{{network}}" user="user"></social-link>
+          </ng-repeat>
+          <a href="#" ng-click="social.showAllLinks = !social.showAllLinks">
+            <i class="fa fa-plus" ng-show="!social.showAllLinks"></i>
+            <i class="fa fa-minus" ng-show="social.showAllLinks"></i>
+          </a>
+          <ng-repeat ng-repeat="network in social.networks.slice(3)" ng-show="social.showAllLinks">
+            <social-link network="{{network}}" user="user"></social-link>
+          </ng-repeat>
+        </div>
+      </div>
+      <div class="col-lg-7 profile-top-infos">
+        <div class="text-xl font-ebold upper">{{user.username}}</div>
+        <small class="font-bold">{{user.name}}</small> • <small class="upper">{{user.is_allow_contact ? 'Profil public' : 'Profil privé'}}</small>
+        <div class="text-italic">
           <span class="font-bold" translate>{{ 'interests' }}</span>
           <div class="m-b">{{user.profile.interest}}</div>
           <span class="font-bold" translate>{{ 'CAD_softwares_mastered' }}</span>
           <div>{{user.profile.software_mastered}}</div>
         </div>
-        <div class="col-md-2 profile-top-social">
-          <div class="upper text-sm m-t-xl m-b">Mes liens :</div>
-          <div class="social-links">
-            <span><i class="fa fa-facebook"></i></span>
-            <span><i class="fa fa-twitter"></i></span>
-            <span><i class="fa fa-google-plus"></i></span>
-            <span><i class="fa fa-plus"></i></span>
-          </div>
-        </div>
       </div>
+      <div class="col-lg-3 profile-top-badge"></div>
     </section>
   </div>
 
