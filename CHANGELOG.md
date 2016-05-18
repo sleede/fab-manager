@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## Next release
+- Ability for a user to add links to his social networks profiles and his personal website
+- Ability for a user to change his visibility on the platform (public / private)
+- UI re-design of user's public profile
+- [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
+
 ## v2.1.1 2016 May 3
 - Fix a bug concerning openlab projects initialization in production env
 - Fix a bug: user is not redirected after changing is duplicated e-mail on the SSO provider
