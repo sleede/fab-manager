@@ -222,6 +222,7 @@
                  ng-model="user.profile.website"
                  class="form-control"
                  id="user_website"
+                 ng-pattern="/^https?:\/\/"
                  placeholder="{{ 'website' | translate }}"
                  ng-disabled="preventField['profile.website'] && user.profile.website && !userForm['user[profile_attributes][website]'].$dirty"/>
         </div>
@@ -273,6 +274,7 @@
                    ng-model="user.profile.facebook"
                    class="form-control"
                    id="user_facebook"
+                   ng-pattern="/^https?:\/\/.*?facebook/"
                    placeholder="{{ 'facebook' | translate }}"
                    ng-disabled="preventField['profile.facebook'] && user.profile.first_name && !userForm['user[profile_attributes][facebook]'].$dirty"
                    />
@@ -287,6 +289,7 @@
                    ng-model="user.profile.twitter"
                    class="form-control"
                    id="user_twitter"
+                   ng-pattern="/^https?:\/\/.*?twitter/"
                    placeholder="{{ 'twitter' | translate }}"
                    ng-disabled="preventField['profile.twitter'] && user.profile.first_name && !userForm['user[profile_attributes][twitter]'].$dirty"
             />
@@ -301,6 +304,7 @@
                    ng-model="user.profile.google_plus"
                    class="form-control"
                    id="user_google_plus"
+                   ng-pattern="/^https?:\/\/.*?google/"
                    placeholder="{{ 'google_plus' | translate }}"
                    ng-disabled="preventField['profile.google_plus'] && user.profile.first_name && !userForm['user[profile_attributes][google_plus]'].$dirty"
             />
@@ -315,6 +319,7 @@
                    ng-model="user.profile.viadeo"
                    class="form-control"
                    id="user_viadeo"
+                   ng-pattern="/^https?:\/\/.*?viadeo/"
                    placeholder="{{ 'viadeo' | translate }}"
                    ng-disabled="preventField['profile.viadeo'] && user.profile.first_name && !userForm['user[profile_attributes][viadeo]'].$dirty"
             />
@@ -329,6 +334,7 @@
                    ng-model="user.profile.linkedin"
                    class="form-control"
                    id="user_linkedin"
+                   ng-pattern="/^https?:\/\/.*?linkedin/"
                    placeholder="{{ 'linkedin' | translate }}"
                    ng-disabled="preventField['profile.linkedin'] && user.profile.first_name && !userForm['user[profile_attributes][linkedin]'].$dirty"
             />
@@ -343,6 +349,7 @@
                    ng-model="user.profile.instagram"
                    class="form-control"
                    id="user_instagram"
+                   ng-pattern="/^https?:\/\/.*?instagram/"
                    placeholder="{{ 'instagram' | translate }}"
                    ng-disabled="preventField['profile.instagram'] && user.profile.first_name && !userForm['user[profile_attributes][instagram]'].$dirty"
             />
@@ -357,6 +364,7 @@
                    ng-model="user.profile.youtube"
                    class="form-control"
                    id="user_youtube"
+                   ng-pattern="/^https?:\/\/.*?youtube/"
                    placeholder="{{ 'youtube' | translate }}"
                    ng-disabled="preventField['profile.youtube'] && user.profile.first_name && !userForm['user[profile_attributes][youtube]'].$dirty"
             />
@@ -371,6 +379,7 @@
                    ng-model="user.profile.vimeo"
                    class="form-control"
                    id="user_vimeo"
+                   ng-pattern="/^https?:\/\/.*?vimeo/"
                    placeholder="{{ 'vimeo' | translate }}"
                    ng-disabled="preventField['profile.vimeo'] && user.profile.first_name && !userForm['user[profile_attributes][vimeo]'].$dirty"
             />
@@ -385,6 +394,7 @@
                    ng-model="user.profile.dailymotion"
                    class="form-control"
                    id="user_dailymotion"
+                   ng-pattern="/^https?:\/\/.*?dailymotion/"
                    placeholder="{{ 'dailymotion' | translate }}"
                    ng-disabled="preventField['profile.dailymotion'] && user.profile.first_name && !userForm['user[profile_attributes][dailymotion]'].$dirty"
             />
@@ -400,6 +410,7 @@
                    ng-model="user.profile.github"
                    class="form-control"
                    id="user_github"
+                   ng-pattern="/^https?:\/\/.*?github/"
                    placeholder="{{ 'github' | translate }}"
                    ng-disabled="preventField['profile.github'] && user.profile.first_name && !userForm['user[profile_attributes][github]'].$dirty"
             />
@@ -414,6 +425,7 @@
                    ng-model="user.profile.echosciences"
                    class="form-control"
                    id="user_echosciences"
+                   ng-pattern="/^https?:\/\/.*?echosciences/"
                    placeholder="{{ 'echosciences' | translate }}"
                    ng-disabled="preventField['profile.echosciences'] && user.profile.first_name && !userForm['user[profile_attributes][echosciences]'].$dirty"
             />
