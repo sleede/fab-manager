@@ -7,4 +7,12 @@ class CustomAsset < ActiveRecord::Base
     asset = CustomAsset.find_by(name: name)
     asset.custom_asset_file.attachment_url if asset and asset.custom_asset_file
   end
+
+  after_update :update_stylesheet if :viewable_changed?
+
+  def update_stylesheet
+    if %w(profile-image-file).include? self.name
+      Stylesheet.first.rebuild!
+    end
+  end
 end

@@ -439,6 +439,8 @@ en:
         primary: "Primary"
         secondary_colour: "Secondary colour:"
         secondary: "Secondary"
+        background_picture_of_the_profile_banner: "Background picture of the profile banner"
+        change_the_profile_banner: "Change the profile banner"
         home_page: "Home page"
         news_of_the_home_page: "News of the home page:"
         type_your_news_here: "Type your news here"

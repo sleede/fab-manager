@@ -468,6 +468,49 @@ body.container{
   }
 }
 
+.custom-profile-image-container {
+  max-width: 100%;
+  height: 100%;
+
+  .custom-profile-image {
+    height: 240px;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px dashed #c4c4c4;
+    border-radius: 0.7em;
+    padding: 1.6em;
+    margin-left: 1em;
+
+    img {
+      display: block;
+      width: auto;
+      max-height: 185px;
+      max-width: 100%;
+      margin:auto;
+    }
+
+    &:hover .tools-box {
+      opacity: 1;
+    }
+
+    .tools-box {
+      opacity: 0;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
+
+  .bg-dark {
+    background-color: #000;
+    opacity: 0.9;
+  }
+}
+
 .flash-message {
   position: absolute;
   top: 1%;

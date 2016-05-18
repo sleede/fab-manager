@@ -846,6 +846,9 @@ angular.module('application.router', ['ui.router']).
           faviconFile: ['CustomAsset', (CustomAsset) ->
             CustomAsset.get({name: 'favicon-file'}).$promise
           ]
+          profileImageFile: ['CustomAsset', (CustomAsset) ->
+            CustomAsset.get({name: 'profile-image-file'}).$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.settings').$promise
           ]
