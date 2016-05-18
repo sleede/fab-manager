@@ -9,6 +9,7 @@ fr:
         # sections du tableau de bord
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
+        my_settings: "Mes paramètres"
         my_projects: "Mes projets"
         my_trainings: "Mes formations"
         my_courses_and_workshops: "Mes stages et ateliers"

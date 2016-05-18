@@ -95,6 +95,7 @@ $font-size-medium:        ceil(($font-size-base * 0.875)) !default; // ~14px
 $font-size-small:         ceil(($font-size-base * 0.75)) !default; // ~12px
 
 //add sleede
+$font-size-xl:            rem-calc(32);
 $font-size-lg:            rem-calc(20);
 $font-size-md:            rem-calc(18);
 $font-size-sm:            rem-calc(14);

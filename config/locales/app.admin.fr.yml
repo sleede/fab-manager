@@ -439,6 +439,8 @@ fr:
         primary: "Primaire"
         secondary_colour: "Couleur secondaire :"
         secondary: "Secondaire"
+        background_picture_of_the_profile_banner: "Image de fond du bandeau de profil"
+        change_the_profile_banner: "Changer le bandeau de profil"
         home_page: "Page d'accueil"
         news_of_the_home_page: "Brève de la page d'accueil :"
         type_your_news_here: "Saisir votre brève ici"

@@ -1,0 +1,125 @@
+<div>
+
+  <ng-include src="'<%= asset_path 'dashboard/nav.html' %>'"></ng-include>
+
+
+
+  <div class="row no-gutter wrapper">
+    <div class="col-sm-12 col-md-12 col-lg-3">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b small text-center">
+          <span class="avatar ">
+            <fab-user-avatar ng-model="user.profile.user_avatar" avatar-class="thumb-50">test</fab-user-avatar>
+          </span>
+          <div class="font-sbold m-t-sm">{{user.name}}</div>
+          <div>{{user.email}}</div>
+          <div class="text-xs" ng-if="user.last_sign_in_at"><i>{{ 'last_activity_on_' | translate }} {{user.last_sign_in_at | amDateFormat: 'LL'}}</i></div>
+        </div>
+        <div class="widget-content no-bg b-b auto wrapper">
+          <div class="m-b-md">
+              <h3 class="text-u-c" translate>{{ 'group' }}</h3>
+              <div ng-show="!group.change">
+                  <uib-alert type="warning">
+                      <span class="text-black font-sbold">{{getUserGroup().name}}</span>
+                  </uib-alert>
+                  <button class="btn text-black btn-warning-full btn-sm m-t-n-sm" ng-click="group.change = !group.change"  ng-show="!user.subscribed_plan.name" translate>{{ 'i_want_to_change_group' }}</button>
+              </div>
+              <div ng-show="group.change">
+                  <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="userGroup"></select>
+                  <button class="btn btn-success m-t" ng-click="selectGroup()">Changer mon groupe</button>
+              </div>
+          </div>
+          <div ng-hide="fablabWithoutPlans">
+            <h3 class="text-u-c" translate>{{ 'subscription' }}</h3>
+              <div ng-show="user.subscribed_plan">
+                <uib-alert type="warning">
+                  <span class="text-black font-sbold">{{ user.subscribed_plan | humanReadablePlanName }}</span>
+                  <div class="font-sbold" ng-if="user.subscription">{{ 'your_subscription_expires_on_' | translate }} {{user.subscription.expired_at | amDateFormat: 'LL'}}</div>
+                </uib-alert>
+
+              </div>
+              <div ng-show="!user.subscribed_plan.name">{{ 'no_subscriptions' | translate }} <br><a class="btn text-black btn-warning-full btn-sm m-t-xs" ui-sref="app.public.plans" translate>{{ 'i_want_to_subscribe' }}</a></div>
+          </div>
+
+          <div class="m-t">
+            <h3 class="text-u-c" translate>{{ 'trainings' }}</h3>
+              <ul class="list-unstyled" ng-if="user.training_reservations.length > 0 || user.trainings.length > 0">
+                <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'">
+                  {{r.reservable.name}} - {{ 'to_come' | translate }}
+                </li>
+                <li ng-repeat="t in user.trainings">
+                  {{t.name}} - {{ 'approved' | translate }}
+                </li>
+              </ul>
+              <div ng-if="user.training_reservations.length == 0 && user.trainings.length == 0" translate>{{ 'no_trainings' }}</div>
+          </div>
+
+          <div class="m-t">
+            <h3 class="text-u-c" translate>{{ 'projects' }}</h3>
+              <ul class="list-unstyled" ng-if="user.all_projects.length > 0">
+                <li ng-repeat="p in user.all_projects">
+                  {{p.name}}
+                </li>
+              </ul>
+              <div ng-if="user.all_projects.length == 0" translate>{{ 'no_projects' }}</div>
+          </div>
+
+          <div class="m-t">
+              <h3 class="text-u-c" translate>{{ 'labels' }}</h3>
+              <span ng-if="user.tags.length > 0" ng-repeat="t in user.tags">
+                  <span class='label label-success text-white'>{{t.name}}</span>
+              </span>
+              <div ng-if="user.tags.length == 0" translate>{{ 'no_labels' }}</div>
+          </div>
+        </div>
+        <div class="widget-content no-bg text-center auto wrapper">
+          <button class="btn text-white btn-danger btn-sm" ng-click="deleteUser(user)"><i class="fa fa-warning"></i> {{ 'delete_my_account' | translate }}</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-9">
+      <div class="widget panel b-a m m-t-lg">
+        <div class="panel-heading b-b">
+          <h1 class="red text-u-c" translate>{{ 'edit_my_profile' }}</h1>
+        </div>
+        <form role="form" name="userForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+          <div class="widget-content no-bg auto">
+              <section class="panel panel-default bg-light m p-lg row" ng-if="hasSsoFields()">
+                  <div class="panel-heading">
+                      <h2>
+                          <img class="v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
+                          <span class="v-middle">{{activeProvider.name}}</span>
+                      </h2>
+                  </div>
+                  <div class="panel-body row">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                          <a class="btn btn-default" ng-href="{{activeProvider.link_to_sso_profile}}" target="_blank">
+                              <i class="fa fa-edit"></i> {{ 'change_my_data' | translate }}
+                          </a>
+                          <p>{{ 'once_your_data_are_up_to_date_' | translate }} <strong translate>{{ '_click_on_the_synchronization_button_opposite_' }}</strong>  {{ 'or' | translate}} <strong translate>{{ '_disconnect_then_reconnect_' }}</strong> {{ '_for_your_changes_to_take_effect' | translate }}</p>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                          <a class="btn btn-default" ng-click="syncProfile()">
+                              <i class="fa fa-refresh"></i> {{ 'sync_my_profile' | translate }}
+                          </a>
+                      </div>
+                  </div>
+              </section>
+              <section class="panel panel-default bg-light m">
+                <div class="panel-body m-r">
+                  <ng-include src="'<%= asset_path 'shared/_member_form.html' %>'"></ng-include>
+                </div>   <!-- ./panel-body  -->
+              </section>
+          </div>
+          <div class="panel-footer no-padder">
+            <input type="submit" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>

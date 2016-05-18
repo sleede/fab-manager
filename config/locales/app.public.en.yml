@@ -9,6 +9,7 @@ en:
         # dashboard sections
         dashboard: "Dashboard"
         my_profile: "My Profile"
+        my_settings: "My Settings"
         my_projects: "My Projects"
         my_trainings: "My Trainings"
         my_courses_and_workshops: "My Courses and Workshops"

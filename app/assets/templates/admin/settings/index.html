@@ -297,6 +297,34 @@
                             </form>
                         </div>
                     </div>
+                    <div class="row m-t">
+                        <div class="col-md-4">
+                            <form class="custom-profile-image-container" method="post" action="{{actionUrl.profileImage}}" novalidate name="profileImageForm" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
+                                <input type="hidden" name="custom_asset[name]" value="profile-image-file">
+                                <input name="_method" type="hidden" ng-value="methods.profileImage">
+                                <h3 class="m-l" translate>{{ 'background_picture_of_the_profile_banner' }}</h3>
+                                <div class="custom-profile-image" style="background-image: url({{profileImage}});">
+                                    <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon-xs" bs-holder ng-show="!profileImage" class="img-responsive">
+                                    <img base-sixty-four-image="profileImage" ng-show="profileImage && profileImage.base64">
+                                    <img ng-src="{{profileImage.custom_asset_file_attributes.attachment_url}}" alt="{{profileImage.custom_asset_file_attributes.attachment}}" ng-show="profileImage && profileImage.custom_asset_file_attributes" />
+                                    <div class="tools-box">
+                                        <div class="btn-group">
+                                            <div class="btn btn-default btn-file">
+                                                <i class="fa fa-edit"></i> {{ 'change_the_profile_banner' | translate }}
+                                                <input type="file"
+                                                       accept="image/png,image/x-png"
+                                                       name="custom_asset[custom_asset_file_attributes][attachment]"
+                                                       ng-model="profileImage"
+                                                       base-sixty-four-input
+                                                       required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button name="button" type="submit" class="btn btn-warning m-t m-l" ng-disabled="profileImageForm.$invalid" translate>{{ 'save' }}</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </uib-tab>

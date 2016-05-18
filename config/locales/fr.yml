@@ -208,7 +208,7 @@ fr:
       notify_partner_subscribed_plan:
         subscription_partner_PLAN_has_been_subscribed_by_USER_html: "L'abonnement partenaire <strong><em>%{PLAN}</em></strong> a été souscrit par <strong><em>%{USER}</strong></em>."
       notify_project_author_when_collaborator_valid:
-        USER_became_collaborator_of_your_project_PROJECT: "Le membre %{USER} est devenu un collaborateur de votre projet :"
+        USER_became_collaborator_of_your_project: "Le membre %{USER} est devenu un collaborateur de votre projet :"
       notify_project_collaborator_to_valid:
         you_are_invited_to_collaborate_on_the_project: "Vous êtes invité à collaborer sur le projet suivant :"
       notify_user_auth_migration:

@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "SettingsController", ["$scope", 'Setting', 'growl', 'settingsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'CSRF', '_t'
-  ($scope, Setting, growl, settingsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, CSRF, _t) ->
+Application.Controllers.controller "SettingsController", ["$scope", 'Setting', 'growl', 'settingsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t'
+  ($scope, Setting, growl, settingsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) ->
 
 
 
@@ -19,6 +19,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
         logo: "/api/custom_assets"
         logoBlack: "/api/custom_assets"
         favicon: "/api/custom_assets"
+        profileImage: "/api/custom_assets"
 
     ## Form actions on the above URL
     $scope.methods =
@@ -27,6 +28,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
         logo: "post"
         logoBlack: "post"
         favicon: "post"
+        profileImage: "post"
 
     ## Are we uploading the files currently (if so, display the loader)
     $scope.loader =
@@ -55,6 +57,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.customLogo = logoFile.custom_asset
     $scope.customLogoBlack = logoBlackFile.custom_asset
     $scope.customFavicon = faviconFile.custom_asset
+    $scope.profileImage = profileImageFile.custom_asset
 
     $scope.enableMove =
       name: 'booking_move_enable'
@@ -136,17 +139,21 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
           $scope.actionUrl.cgv += '/cgv-file' unless $scope.actionUrl.cgv.indexOf('/cgv-file') > 0
           $scope.loader.cgv = false
         else if content.custom_asset.name is 'logo-file'
-          $scope.logoFile = content.custom_asset
+          $scope.customLogo = content.custom_asset
           $scope.methods.logo = 'put'
           $scope.actionUrl.logo += '/logo-file' unless $scope.actionUrl.logo.indexOf('/logo-file') > 0
         else if content.custom_asset.name is 'logo-black-file'
-          $scope.logoBlackFile = content.custom_asset
+          $scope.customLogoBlack = content.custom_asset
           $scope.methods.logoBlack = 'put'
           $scope.actionUrl.logoBlack += '/logo-black-file' unless $scope.actionUrl.logoBlack.indexOf('/logo-black-file') > 0
         else if content.custom_asset.name is 'favicon-file'
-          $scope.faviconFile = content.custom_asset
+          $scope.customFavicon = content.custom_asset
           $scope.methods.favicon = 'put'
           $scope.actionUrl.favicon += '/favicon-file' unless $scope.actionUrl.favicon.indexOf('/favicon-file') > 0
+        else if content.custom_asset.name is 'profile-image-file'
+          $scope.profileImage = content.custom_asset
+          $scope.methods.profileImage = 'put'
+          $scope.actionUrl.profileImage += '/profile-image-file' unless $scope.actionUrl.profileImage.indexOf('/profile-image-file') > 0
 
 
 
@@ -188,6 +195,9 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
       if faviconFile.custom_asset
         $scope.methods.favicon = 'put'
         $scope.actionUrl.favicon += '/favicon-file'
+      if profileImageFile.custom_asset
+        $scope.methods.profileImage = 'put'
+        $scope.actionUrl.profileImage += '/profile-image-file'
 
 
     # init the controller (call at the end !)

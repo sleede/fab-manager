@@ -136,6 +136,16 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "dashboard/profile.html" %>'
+            controller: 'DashboardController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.logged.dashboard.profile', 'app.shared.public_profile']).$promise
+          ]
+      .state 'app.logged.dashboard.settings',
+        url: '/settings'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "dashboard/settings.html" %>'
             controller: 'EditProfileController'
         resolve:
           groups: ['Group', (Group)->
@@ -145,7 +155,7 @@ angular.module('application.router', ['ui.router']).
             AuthProvider.active().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.logged.dashboard.profile', 'app.shared.user']).$promise
+            Translations.query(['app.logged.dashboard.settings', 'app.shared.user']).$promise
           ]
       .state 'app.logged.dashboard.projects',
         url: '/projects'
@@ -201,7 +211,7 @@ angular.module('application.router', ['ui.router']).
             Member.get(id: $stateParams.id).$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.logged.members_show').$promise
+            Translations.query(['app.logged.members_show', 'app.shared.public_profile']).$promise
           ]
       .state 'app.logged.members',
         url: '/members'
@@ -835,6 +845,9 @@ angular.module('application.router', ['ui.router']).
           ]
           faviconFile: ['CustomAsset', (CustomAsset) ->
             CustomAsset.get({name: 'favicon-file'}).$promise
+          ]
+          profileImageFile: ['CustomAsset', (CustomAsset) ->
+            CustomAsset.get({name: 'profile-image-file'}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.settings').$promise
