@@ -12,6 +12,11 @@ Application.Directives.directive 'socialLink', [ ->
       else if scope.network == 'echosciences'
         scope.image = "<%= asset_path('social/echosciences.png') %>"
         scope.altText = 'E)'
+      else
+        if scope.network == 'website'
+          scope.faClass = 'fa-globe'
+        else
+          scope.faClass = 'fa-'+scope.network.replace('_', '-')
   }
 ]
 
