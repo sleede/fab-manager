@@ -524,6 +524,7 @@ body.container{
 
     .avatar {
       display: inline-block;
+      width: 140px;
       img {
         border: 9px solid #fff;
         background-color: #fff;
@@ -550,6 +551,10 @@ body.container{
 
         i { vertical-align: middle; }
       }
+    }
+
+    .links-center {
+      text-align: center !important;
     }
   }
 }

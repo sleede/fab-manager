@@ -3,10 +3,10 @@
   <div class="col-lg-12">
     <section class="profile-top text-white widget panel b-a m row">
       <div class="col-lg-2 profile-top-pictos">
-        <div class="thumb-lg avatar thumb-140-wrapper img m-b-md">
+        <div class="avatar thumb-140-wrapper img m-b-md">
           <fab-user-avatar ng-model="user.profile.user_avatar" avatar-class="thumb-140"></fab-user-avatar>
         </div>
-        <div class="social-links" ng-if="social.networks.length <= 4">
+        <div class="social-links links-center" ng-if="social.networks.length <= 4">
           <ng-repeat ng-repeat="network in social.networks" >
             <social-link network="{{network}}" user="user"></social-link>
           </ng-repeat>
