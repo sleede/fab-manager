@@ -517,7 +517,7 @@ body.container{
   }
 
   .profile-top-pictos {
-    padding: 15px 0 15px 0;
+    padding: 43px 0 15px 0;
     margin: 0 15px 0 15px;
     text-align: center;
 
@@ -557,4 +557,10 @@ body.container{
       text-align: center !important;
     }
   }
+}
+
+.bio-title {
+  display: inherit;
+  text-align: center;
+  height: 50px;
 }
