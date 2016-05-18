@@ -223,7 +223,7 @@
                  class="form-control"
                  id="user_website"
                  ng-pattern="/^https?:\/\//"
-                 placeholder="{{ 'website' | translate }}"
+                 placeholder="{{ 'website' | translate }} (http://...)"
                  ng-disabled="preventField['profile.website'] && user.profile.website && !userForm['user[profile_attributes][website]'].$dirty"/>
         </div>
         <span class="help-block" ng-show="userForm['user[profile_attributes][website]'].$dirty && userForm['user[profile_attributes][website]'].$error.required" translate>{{ 'phone_number_is_required' }}</span>
@@ -274,8 +274,8 @@
                    ng-model="user.profile.facebook"
                    class="form-control"
                    id="user_facebook"
-                   ng-pattern="/^https?:\/\/.*?facebook/"
-                   placeholder="{{ 'facebook' | translate }}"
+                   ng-pattern="/^https?:\/\/.*?facebook/i"
+                   placeholder="https://www.facebook.com/..."
                    ng-disabled="preventField['profile.facebook'] && user.profile.first_name && !userForm['user[profile_attributes][facebook]'].$dirty"
                    />
           </div>
@@ -290,7 +290,7 @@
                    class="form-control"
                    id="user_twitter"
                    ng-pattern="/^https?:\/\/.*?twitter/"
-                   placeholder="{{ 'twitter' | translate }}"
+                   placeholder="https://twitter.com/..."
                    ng-disabled="preventField['profile.twitter'] && user.profile.first_name && !userForm['user[profile_attributes][twitter]'].$dirty"
             />
           </div>
@@ -305,7 +305,7 @@
                    class="form-control"
                    id="user_google_plus"
                    ng-pattern="/^https?:\/\/.*?google/"
-                   placeholder="{{ 'google_plus' | translate }}"
+                   placeholder="https://plus.google.com/+..."
                    ng-disabled="preventField['profile.google_plus'] && user.profile.first_name && !userForm['user[profile_attributes][google_plus]'].$dirty"
             />
           </div>
@@ -320,7 +320,7 @@
                    class="form-control"
                    id="user_viadeo"
                    ng-pattern="/^https?:\/\/.*?viadeo/"
-                   placeholder="{{ 'viadeo' | translate }}"
+                   placeholder="http://www.viadeo.com/fr/profile/..."
                    ng-disabled="preventField['profile.viadeo'] && user.profile.first_name && !userForm['user[profile_attributes][viadeo]'].$dirty"
             />
           </div>
@@ -335,7 +335,7 @@
                    class="form-control"
                    id="user_linkedin"
                    ng-pattern="/^https?:\/\/.*?linkedin/"
-                   placeholder="{{ 'linkedin' | translate }}"
+                   placeholder="https://www.linkedin.com/in/..."
                    ng-disabled="preventField['profile.linkedin'] && user.profile.first_name && !userForm['user[profile_attributes][linkedin]'].$dirty"
             />
           </div>
@@ -350,7 +350,7 @@
                    class="form-control"
                    id="user_instagram"
                    ng-pattern="/^https?:\/\/.*?instagram/"
-                   placeholder="{{ 'instagram' | translate }}"
+                   placeholder="https://www.instagram.com/..."
                    ng-disabled="preventField['profile.instagram'] && user.profile.first_name && !userForm['user[profile_attributes][instagram]'].$dirty"
             />
           </div>
@@ -365,7 +365,7 @@
                    class="form-control"
                    id="user_youtube"
                    ng-pattern="/^https?:\/\/.*?youtube/"
-                   placeholder="{{ 'youtube' | translate }}"
+                   placeholder="https://www.youtube.com/..."
                    ng-disabled="preventField['profile.youtube'] && user.profile.first_name && !userForm['user[profile_attributes][youtube]'].$dirty"
             />
           </div>
@@ -380,7 +380,7 @@
                    class="form-control"
                    id="user_vimeo"
                    ng-pattern="/^https?:\/\/.*?vimeo/"
-                   placeholder="{{ 'vimeo' | translate }}"
+                   placeholder="https://vimeo.com/..."
                    ng-disabled="preventField['profile.vimeo'] && user.profile.first_name && !userForm['user[profile_attributes][vimeo]'].$dirty"
             />
           </div>
@@ -395,7 +395,7 @@
                    class="form-control"
                    id="user_dailymotion"
                    ng-pattern="/^https?:\/\/.*?dailymotion/"
-                   placeholder="{{ 'dailymotion' | translate }}"
+                   placeholder="http://www.dailymotion.com/..."
                    ng-disabled="preventField['profile.dailymotion'] && user.profile.first_name && !userForm['user[profile_attributes][dailymotion]'].$dirty"
             />
           </div>
@@ -411,7 +411,7 @@
                    class="form-control"
                    id="user_github"
                    ng-pattern="/^https?:\/\/.*?github/"
-                   placeholder="{{ 'github' | translate }}"
+                   placeholder="https://github.com/..."
                    ng-disabled="preventField['profile.github'] && user.profile.first_name && !userForm['user[profile_attributes][github]'].$dirty"
             />
           </div>
@@ -426,7 +426,7 @@
                    class="form-control"
                    id="user_echosciences"
                    ng-pattern="/^https?:\/\/.*?echosciences/"
-                   placeholder="{{ 'echosciences' | translate }}"
+                   placeholder="http://www.echosciences-local.fr/membres/..."
                    ng-disabled="preventField['profile.echosciences'] && user.profile.first_name && !userForm['user[profile_attributes][echosciences]'].$dirty"
             />
           </div>
