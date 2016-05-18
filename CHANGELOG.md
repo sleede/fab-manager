@@ -5,6 +5,7 @@
 - Ability for a user to change his visibility on the platform (public / private)
 - UI re-design of user's public profile
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
+- [TODO DEPLOY] `bundle install` and `rake db:migrate`
 
 ## v2.1.1 2016 May 3
 - Fix a bug concerning openlab projects initialization in production env
