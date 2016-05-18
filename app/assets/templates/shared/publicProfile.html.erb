@@ -84,13 +84,41 @@
 
     <div class="widget panel b-a m ">
       <div class="panel-heading b-b">
-        <h1 class="red text-u-c" translate>{{ 'projects' }}</h1>
-        <ul class="list-unstyled" ng-if="user.all_projects.length > 0">
-          <li ng-repeat="p in user.all_projects" class="m-t-sm">
-            <a class="text-u-c" ui-sref="app.public.projects_show({id:p.slug})" role="button">{{p.name}}  <span class="m-l-sm label label-success text-white">{{p.author_id == currentUser.id ? 'author' : 'collaborator' | translate}}</span></a>
-          </li>
+        <h1 class="red text-u-c m-b" translate>{{ 'projects' }}</h1>
+        <div ng-if="user.all_projects.length > 0" class="row m-t">
+          <a class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="project in user.all_projects" ui-sref="app.public.projects_show({id:project.slug})" style="display: block;">
+            <div class="card card-project">
 
-        </ul>
+              <div class="card-header">
+                <div class="card-header-bg" style="background-image: url({{project.project_image}});">
+                  <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!project.project_image">
+                </div>
+
+              </div>
+
+              <div class="card-block">
+                <h1 class="card-title">{{project.name}}</h1>
+              </div>
+
+              <div class="text-center m-t">
+                <span class="m-l-sm label label-success text-white">{{project.author_id == user.id ? 'author' : 'collaborator' | translate}}</span>
+              </div>
+
+              <div class="card-overlay">
+                <div class="btn-group">
+                  <div class="btn btn-default" ng-click="showProject(project)">
+                    {{ 'consult' | translate }}
+                  </div>
+                  <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin')">
+                    <i class="fa fa-edit"></i>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </a>
+
+        </div>
         <div ng-if="user.all_projects.length == 0" translate>{{ 'no_projects' }}</div>
       </div>
     </div>
