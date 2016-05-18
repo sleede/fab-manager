@@ -211,7 +211,7 @@ angular.module('application.router', ['ui.router']).
             Member.get(id: $stateParams.id).$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.logged.members_show').$promise
+            Translations.query(['app.logged.members_show', 'app.shared.public_profile']).$promise
           ]
       .state 'app.logged.members',
         url: '/members'
