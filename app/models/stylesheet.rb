@@ -75,7 +75,7 @@ class Stylesheet < ActiveRecord::Base
      a.label:hover, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:hover, a.label:focus, .form-control.form-control-ui-select .select2-choices a.select2-search-choice:focus { color: #{Stylesheet.primary}; }
      .about-picture { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient( #{Stylesheet.primary_with_alpha(0.78)}, #{Stylesheet.primary_with_alpha(0.82)} ), url('/about-fablab.jpg') no-repeat; }
      .social-icons > div:hover { background-color: #{Stylesheet.secondary}; }
-     .profile-top { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient(#{Stylesheet.primary_with_alpha(0.78)}, #{Stylesheet.primary_with_alpha(0.82)} ), url('#{CustomAsset.get_url('profile-image-file')}') no-repeat; }
+     .profile-top { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient(#{Stylesheet.primary_with_alpha(0.78)}, #{Stylesheet.primary_with_alpha(0.82)} ), url('#{CustomAsset.get_url('profile-image-file') || '/about-fablab.jpg'}') no-repeat; }
      .profile-top .social-links a:hover { background-color: #{Stylesheet.secondary} !important; border-color: #{Stylesheet.secondary} !important; }"
 
   end
