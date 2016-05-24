@@ -3,7 +3,7 @@ require 'plugin_registry'
 
 module Plugin
   class Instance
-    attr_accessor :path
+    attr_accessor :path#, :directory
 
     [:assets, :initializers, :javascripts, :styles].each do |att|
       class_eval %Q{
@@ -28,6 +28,7 @@ module Plugin
     def initialize(metadata=nil, path=nil)
       @metadata = metadata
       @path = path
+      #@directory = path.match(/(.*)\/plugin.rb/)[1]
       @idx = 0
     end
 

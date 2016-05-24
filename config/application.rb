@@ -64,7 +64,13 @@ module Fablab
       config.web_console.whitelisted_ips << '10.0.2.2' #vagrant
     end
 
+    # enable the app to find locales in plugins locales directory
     config.i18n.load_path += Dir["#{Rails.root}/plugins/*/config/locales/*.yml"]
+
+    # enable the app to find views in plugins views directory
+    Dir["#{Rails.root}/plugins/*/views"].each do |path|
+      Rails.application.config.paths['app/views'] << path
+    end
 
     FabManager.activate_plugins!
 
