@@ -62,6 +62,10 @@ module Plugin
       assets << [full_path, opts]
     end
 
+    def register_html_code_insertion(key, html_code)
+      PluginRegistry.code_insertions[key] = html_code
+    end
+
     def register_css(style) # useless ?
       styles << style
     end

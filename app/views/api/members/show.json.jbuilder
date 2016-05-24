@@ -1,4 +1,4 @@
-json.extract! @member, :id, :username, :email, :group_id, :slug, :invoicing_disabled, :is_allow_contact
+json.extract! @member, :id, :uid, :username, :email, :group_id, :slug, :invoicing_disabled, :is_allow_contact
 json.role @member.roles.first.name
 json.name @member.profile.full_name
 json.need_completion @member.need_completion?

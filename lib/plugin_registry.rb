@@ -14,6 +14,10 @@ class PluginRegistry
     def stylesheets
       @stylesheets ||= Set.new
     end
+
+    def code_insertions
+      @code_insertions ||= {}
+    end
   end
 
   def self.register_glob(root, extension, options=nil)

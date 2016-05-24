@@ -214,7 +214,7 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
 Application.Controllers.controller "ShowProfileController", ["$scope", 'memberPromise', 'SocialNetworks', ($scope, memberPromise, SocialNetworks) ->
 
   ## Selected user's informations
-  $scope.user = memberPromise
+  $scope.user = memberPromise # DEPENDENCY WITH NAVINUM GAMIFICATION PLUGIN !!!!
 
   ## List of social networks associated with this user and toggle 'show all' state
   $scope.social =
