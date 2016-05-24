@@ -26,16 +26,16 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
 
 
     // Google analytics
-    <% if Rails.env.production? %>
+    <% #if Rails.env.production? %>
       AnalyticsProvider.setAccount(Fablab.gaId);
       // track all routes (or not)
       AnalyticsProvider.trackPages(true);
       AnalyticsProvider.setDomainName(Fablab.defaultHost);
       AnalyticsProvider.useAnalytics(true);
       AnalyticsProvider.setPageEvent('$stateChangeSuccess');
-    <% else %>
-      AnalyticsProvider.setAccount('DISABLED');
-    <% end %>
+    <% #else %>
+      //AnalyticsProvider.setAccount('DISABLED');
+    <% #end %>
 
     // Custom messages for the date-picker widget
     uibDatepickerPopupConfig.closeText = Fablab.translations.app.shared.buttons.close;
@@ -62,8 +62,8 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
     // Set the langage of the instance (from ruby configuration)
     $translateProvider.preferredLanguage(Fablab.locale);
 
-    }]).run(["$rootScope", "$log", "AuthService", "Auth", "amMoment", "$state", "editableOptions",
-      function($rootScope, $log, AuthService, Auth, amMoment, $state, editableOptions) {
+    }]).run(["$rootScope", "$log", "AuthService", "Auth", "amMoment", "$state", "editableOptions", 'Analytics',
+      function($rootScope, $log, AuthService, Auth, amMoment, $state, editableOptions, Analytics) {
 
       // Angular-moment (date-time manipulations library)
       amMoment.changeLocale(Fablab.moment_locale);
@@ -120,6 +120,10 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
           }
         });
       });
+
+      // This code does nothing but it is here to remember to not remove the Analytics dependency,
+      // see https://github.com/revolunet/angular-google-analytics#automatic-page-view-tracking
+      Analytics.pageView();
 
   }]).constant('angularMomentConfig', {
     timezone: Fablab.timezone

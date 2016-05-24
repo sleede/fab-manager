@@ -29,7 +29,7 @@
     "angular-unsavedChanges": "~0.2.0",
     "angular-loading-bar": ">=0.4.3",
     "angular-scroll": "~0.6.5",
-    "angular-google-analytics": "~0.0.3",
+    "angular-google-analytics": "~1.1.7",
     "underscore": "~1.7.0",
     "angular-devise": "~1.0.2",
     "elasticsearch": "~3.1.1",
