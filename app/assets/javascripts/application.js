@@ -45,7 +45,7 @@
 //= require angular-unsavedChanges/src/unsavedChanges
 //= require angular-loading-bar/src/loading-bar
 //= require angular-scroll/angular-scroll
-//= require angular-google-analytics/src/angular-google-analytics
+//= require angular-google-analytics/dist/angular-google-analytics
 //= require dirDisqus
 //= require humanize
 //= require underscore/underscore

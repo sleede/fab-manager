@@ -1,9 +1,24 @@
 {
-  "author": "revolunet",
+  "authors": [
+    "Julien Bouquillon <julien@revolunet.com> (https://github.com/revolunet)",
+    "Justin Saunders (https://github.com/justinsa)",
+    "Chris Esplin (https://github.com/deltaepsilon)",
+    "Adam Misiorny (https://github.com/adam187)"
+  ],
   "name": "angular-google-analytics",
   "description": "Easy Analytics for your AngularJS application",
-  "version": "0.0.15",
+  "keywords": [
+    "analytics",
+    "angular",
+    "angularjs",
+    "angular-js",
+    "google-analytics",
+    "tracking",
+    "visitor-tracking",
+    "universal-analytics"
+  ],
   "homepage": "https://github.com/revolunet/angular-google-analytics",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/revolunet/angular-google-analytics.git"
@@ -16,13 +31,14 @@
     "angular-mocks": ">=1",
     "angular-scenario": ">=1"
   },
-  "_release": "0.0.15",
+  "version": "1.1.7",
+  "_release": "1.1.7",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.15",
-    "commit": "966ec3a7752cfe6eb11c5649134bb07e21d1207c"
+    "tag": "1.1.7",
+    "commit": "bb470439432bb3b039a0f02995b37a8843bd6df7"
   },
-  "_source": "git://github.com/revolunet/angular-google-analytics.git",
-  "_target": "~0.0.3",
+  "_source": "https://github.com/revolunet/angular-google-analytics.git",
+  "_target": "~1.1.7",
   "_originalSource": "angular-google-analytics"
 }

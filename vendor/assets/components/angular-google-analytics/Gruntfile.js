@@ -1,8 +1,6 @@
-/* global require, module, */
-
-'use strict';
-
+/* global require, module */
 module.exports = function(grunt) {
+  'use strict';
 
   // Project configuration.
   grunt.initConfig({
@@ -13,6 +11,7 @@ module.exports = function(grunt) {
       ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
       ' * @link <%= pkg.homepage %>\n' +
       ' * @author <%= pkg.author %>\n' +
+      ' * @contributors <%= pkg.contributors %>\n' +
       ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
       ' */\n'
     },
@@ -24,7 +23,7 @@ module.exports = function(grunt) {
         banner: '<%= meta.banner %>'
       },
       dist: {
-        src: ['src/*.js'],
+        src: ['index.js'],
         dest: '<%= dirs.dest %>/<%= pkg.name %>.js'
       }
     },
@@ -37,21 +36,11 @@ module.exports = function(grunt) {
         dest: '<%= dirs.dest %>/<%= pkg.name %>.min.js'
       }
     },
-    changelog: {
-      options: {
-        dest: 'CHANGELOG.md',
-        versionFile: 'package.json'
-      }
-    },
-    stage: {
-      options: {
-        files: ['CHANGELOG.md']
-      }
-    },
+    stage: {},
     release: {
       options: {
         commitMessage: '<%= version %>',
-        tagName: 'v<%= version %>',
+        tagName: '<%= version %>',
         file: 'package.json',
         push: false,
         tag: false,
@@ -60,7 +49,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'src/*.js', 'test/unit/*.js'],
+      files: ['Gruntfile.js', 'index.js', 'test/*.js', 'test/unit/*.js'],
       options: {
         curly: true,
         browser: true,
@@ -83,10 +72,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    // watch: {
-    //   files: '<config:jshint.files>',
-    //   tasks: 'default'
-    // },
     karma: {
       test: {
         options: {
@@ -100,7 +85,7 @@ module.exports = function(grunt) {
         }
       },
       options: {
-        configFile: 'test/karma.conf.js'
+        configFile: __dirname + '/test/karma.conf.js'
       }
     }
   });
@@ -114,12 +99,6 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  // Load the plugin that provides the "watch" task.
-  //grunt.loadNpmTasks('grunt-contrib-watch');
-
-  grunt.loadNpmTasks('grunt-release');
-  grunt.loadNpmTasks('grunt-conventional-changelog');
-
   grunt.registerTask('stage', 'git add files before running the release task', function () {
     var files = this.options().files;
     grunt.util.spawn({
@@ -128,12 +107,11 @@ module.exports = function(grunt) {
     }, grunt.task.current.async());
   });
 
-
-
-  grunt.renameTask('release', 'originalRelease');
-
   // Default task.
   grunt.registerTask('default', ['test']);
+
+  // Static analysis
+  grunt.registerTask('lint', ['jshint']);
 
   // Test tasks.
   grunt.registerTask('test', ['jshint', 'karma:test']);
@@ -142,16 +120,16 @@ module.exports = function(grunt) {
   // Build task.
   grunt.registerTask('build', ['test', 'concat', 'uglify']);
 
-  // release task
+  // Release task.
   grunt.registerTask('release', ['build']);
-
 
   // Provides the "karma" task.
   grunt.registerMultiTask('karma', 'Starts up a karma server.', function() {
-    var done = this.async();
-    require('karma').server.start(this.options(), function(code) {
+    var karma = require('karma'),
+        done = this.async();
+    var server = new karma.Server(this.options(), function(code) {
       done(code === 0);
     });
+    server.start();
   });
-
 };

@@ -25,8 +25,8 @@
 
       Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
-      Fablab.defaultHost = "<%= ENV['DEFAULT_HOST'] %>";
-      Fablab.gaId = "<%= ENV['GA_ID'] %>";
+      Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
+      Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
 
       // i18n stuff
       Fablab.locale = "<%= I18n.locale %>";
