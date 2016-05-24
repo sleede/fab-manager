@@ -6,7 +6,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 ##### Table of Contents  
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
-3. [Setup a production environment with Docker and CoreOS](#setup-a-production-environment)<br/>
+3. [Setup a production environment with Docker and CoreOS](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
 4.2. [Environment Configuration](#environment-configuration)

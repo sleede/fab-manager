@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+## v2.1.2 2016 May 24
+- Fix a bug: Google Analytics was not loaded and did not report any stats
+
 ## v2.1.1 2016 May 3
 - Fix a bug concerning openlab projects initialization in production env
 - Fix a bug: user is not redirected after changing is duplicated e-mail on the SSO provider
