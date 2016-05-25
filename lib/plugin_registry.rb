@@ -50,5 +50,9 @@ class PluginRegistry
     # elsif asset =~ /\.js\.handlebars$/
     #   self.handlebars << asset
     end
+
+    def self.insert_code(key)
+      self.code_insertions[key].join('\n')
+    end
   end
 end
