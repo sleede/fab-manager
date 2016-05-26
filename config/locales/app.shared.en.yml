@@ -105,6 +105,7 @@ en:
         date_of_birth: "Date of birth"
         date_of_birth_is_required: "Date of birth is required."
         website: "Website"
+        job: "Occupation"
 
       project:
         # project edition form
