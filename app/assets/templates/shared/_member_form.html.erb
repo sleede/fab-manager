@@ -432,6 +432,51 @@
           </div>
         </div>
 
+        <div class="form-group" ng-show="social.pinterest || user.profile.pinterest" ng-class="{'has-error': userForm['user[profile_attributes][pinterest]'].$dirty && userForm['user[profile_attributes][pinterest]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][pinterest]"
+                   ng-model="user.profile.pinterest"
+                   class="form-control"
+                   id="user_pinterest"
+                   ng-pattern="/^https?:\/\/.*?pinterest/"
+                   placeholder="https://fr.pinterest.com/..."
+                   ng-disabled="preventField['profile.pinterest'] && user.profile.first_name && !userForm['user[profile_attributes][pinterest]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.lastfm || user.profile.lastfm" ng-class="{'has-error': userForm['user[profile_attributes][lastfm]'].$dirty && userForm['user[profile_attributes][lastfm]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lastfm"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][lastfm]"
+                   ng-model="user.profile.lastfm"
+                   class="form-control"
+                   id="user_lastfm"
+                   ng-pattern="/^https?:\/\/.*?last.fm/"
+                   placeholder="http://www.last.fm/fr/user/..."
+                   ng-disabled="preventField['profile.lastfm'] && user.profile.first_name && !userForm['user[profile_attributes][lastfm]'].$dirty"
+            />
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="social.flickr || user.profile.flickr" ng-class="{'has-error': userForm['user[profile_attributes][flickr]'].$dirty && userForm['user[profile_attributes][flickr]'].$invalid}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-flickr"></i></span>
+            <input type="text"
+                   name="user[profile_attributes][flickr]"
+                   ng-model="user.profile.flickr"
+                   class="form-control"
+                   id="user_flickr"
+                   ng-pattern="/^https?:\/\/.*?flickr/"
+                   placeholder="https://www.flickr.com/photos/..."
+                   ng-disabled="preventField['profile.flickr'] && user.profile.flickr && !userForm['user[profile_attributes][flickr]'].$dirty"
+            />
+          </div>
+        </div>
+
         <div class="social-icons m-b">
           <div ng-click="social.facebook = !social.facebook" ng-hide="social.facebook || user.profile.facebook"><i class="fa fa-facebook fa-2x"></i></div>
           <div ng-click="social.twitter = !social.twitter" ng-hide="social.twitter || user.profile.twitter"><i class="fa fa-twitter fa-2x"></i></div>
@@ -444,6 +489,9 @@
           <div ng-click="social.dailymotion = !social.dailymotion" ng-hide="social.dailymotion || user.profile.dailymotion"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img contrast-250 fa-2x"/></div>
           <div ng-click="social.github = !social.github" ng-hide="social.github || user.profile.github"><i class="fa fa-github fa-2x"></i></div>
           <div ng-click="social.echosciences = !social.echosciences" ng-hide="social.echosciences || user.profile.echosciences"><img src="<%= asset_path('social/echosciences.png') %>" alt="E" class="fa-img contrast-250 fa-2x"/></div>
+          <div ng-click="social.pinterest = !social.pinterest" ng-hide="social.pinterest || user.profile.pinterest"><i class="fa fa-pinterest fa-2x"></i></div>
+          <div ng-click="social.lastfm = !social.lastfm" ng-hide="social.lastfm || user.profile.lastfm"><i class="fa fa-lastfm fa-2x"></i></div>
+          <div ng-click="social.flickr = !social.flickr" ng-hide="social.flickr || user.profile.flickr"><i class="fa fa-flickr fa-2x"></i></div>
         </div>
       </div>
 
