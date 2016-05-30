@@ -13,4 +13,8 @@ Application.Services.factory 'Member', ["$resource", ($resource)->
     merge:
       method: 'PUT'
       url: '/api/members/:id/merge'
+    list:
+      url: '/api/members/list'
+      method: 'POST'
+      isArray: true
 ]

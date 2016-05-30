@@ -265,6 +265,7 @@ en:
         email: "Email"
         phone: "Phone"
         user_type: "User type"
+        display_more_users: "Display more users..."
         administrators: "Administrators"
         search_for_an_administrator: "Search for an administrator"
         add_a_new_administrator: "Add a new administrator"

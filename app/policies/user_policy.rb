@@ -28,4 +28,8 @@ class UserPolicy < ApplicationPolicy
   def merge?
     user.id == record.id
   end
+
+  def list?
+    user.is_admin?
+  end
 end

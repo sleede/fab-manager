@@ -105,8 +105,15 @@ class MembersController
 ##
 # Controller used in the members/groups management page
 ##
-Application.Controllers.controller "AdminMembersController", ["$scope", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t'
-, ($scope, membersPromise, adminsPromise, growl, Admin, dialogs, _t) ->
+Application.Controllers.controller "AdminMembersController", ["$scope", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member'
+, ($scope, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member) ->
+
+
+
+  ### PRIVATE STATIC CONSTANTS ###
+
+  # 10 users loaded each time we click on 'load more...'
+  USERS_PER_PAGE = 10
 
 
 
@@ -115,11 +122,18 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
   ## members list
   $scope.members = membersPromise
 
+  $scope.member =
+    ## Members plain-text filtering. Default: not filtered
+    searchText: ''
+    ## Members ordering/sorting. Default: not sorted
+    order: 'id'
+    ## current displayed page of members
+    page: 1
+    ## true when all members where loaded
+    noMore: false
+
   ## admins list
   $scope.admins = adminsPromise.admins
-
-  ## Members ordering/sorting. Default: not sorted
-  $scope.orderMember = null
 
   ## Admins ordering/sorting. Default: not sorted
   $scope.orderAdmin = null
@@ -131,10 +145,13 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
   # @param orderBy {string} ordering criterion
   ##
   $scope.setOrderMember = (orderBy)->
-    if $scope.orderMember == orderBy
-      $scope.orderMember = '-'+orderBy
+    if $scope.member.order == orderBy
+      $scope.member.order = '-'+orderBy
     else
-      $scope.orderMember = orderBy
+      $scope.member.order = orderBy
+
+    resetSearchMember()
+    memberSearch()
 
 
 
@@ -169,6 +186,14 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
         growl.error(_t('unable_to_delete_the_administrator'))
 
 
+  $scope.showNextMembers = ->
+    $scope.member.page += 1
+    memberSearch(true)
+
+  $scope.updateTextSearch = ->
+    resetSearchMember()
+    memberSearch()
+
 
   ### PRIVATE SCOPE ###
 
@@ -182,6 +207,32 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
     (admins.map (admin)->
       admin.id
     ).indexOf(id)
+
+
+
+  ##
+  # Reinitialize the context of members's search to display new results set
+  ##
+  resetSearchMember = ->
+    $scope.member.noMore = false
+    $scope.member.page = 1
+
+
+
+  ##
+  # Run a search query with the current parameters set ($scope.member[searchText,order,page])
+  # and affect or append the result in $scope.members, depending on the concat parameter
+  # @param concat {boolean} if true, the result will be append to $scope.members instead of being affected
+  ##
+  memberSearch = (concat) ->
+    Member.list { query: { search: $scope.member.searchText, order_by: $scope.member.order, page: $scope.member.page, size: USERS_PER_PAGE } }, (members) ->
+      if (members.length < USERS_PER_PAGE)
+        $scope.member.noMore = true
+
+      if concat
+        $scope.members = $scope.members.concat(members)
+      else
+        $scope.members = members;
 ]
 
 

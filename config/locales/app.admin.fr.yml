@@ -265,6 +265,7 @@ fr:
         email: "Courriel"
         phone: "Tel."
         user_type: "Type utilisateur"
+        display_more_users: "Afficher plus d'utilisateurs ..."
         administrators: "Administrateurs"
         search_for_an_administrator: "Recherchez un administrateur"
         add_a_new_administrator: "Ajouter un nouvel administrateur"
