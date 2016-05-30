@@ -166,7 +166,8 @@ class API::MembersController < API::ApiController
     end
 
     @members = User.includes(:profile, :group)
-               .joins(:profile, :group, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
+               .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
+               .where("users.is_active = 'true' AND roles.name = 'member'")
                .order("#{order_key} #{direction}")
                .page(p[:page])
                .per(p[:size])
