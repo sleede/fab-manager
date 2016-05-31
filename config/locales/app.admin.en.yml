@@ -160,6 +160,7 @@ en:
         invoice_#: "Invoice #"
         customer: "Customer"
         credit_note: "Credit note"
+        display_more_invoices: "Display more invoices..."
         invoicing_settings: "Invoicing settings"
         change_logo: "Change logo"
         john_smith: "John Smith"

@@ -79,6 +79,7 @@ Rails.application.routes.draw do
 
     resources :invoices, only: [:index, :show, :create] do
       get ':id/download', action: 'download', on: :collection
+      post 'list', action: 'list', on: :collection
     end
 
     # for admin

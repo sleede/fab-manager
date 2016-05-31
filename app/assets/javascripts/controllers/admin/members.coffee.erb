@@ -127,7 +127,7 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
     searchText: ''
     ## Members ordering/sorting. Default: not sorted
     order: 'id'
-    ## current displayed page of members
+    ## currently displayed page of members
     page: 1
     ## true when all members where loaded
     noMore: false
@@ -186,13 +186,24 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
         growl.error(_t('unable_to_delete_the_administrator'))
 
 
+
+  ##
+  # Callback for the 'load more' button.
+  # Will load the next results of the current search, if any
+  ##
   $scope.showNextMembers = ->
     $scope.member.page += 1
     memberSearch(true)
 
+
+
+  ##
+  # Callback when the search field content changes: reload the search results
+  ##
   $scope.updateTextSearch = ->
     resetSearchMember()
     memberSearch()
+
 
 
   ### PRIVATE SCOPE ###

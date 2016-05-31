@@ -669,6 +669,11 @@ angular.module('application.router', ['ui.router']).
                   'invoice_logo'
                 ]").$promise
           ]
+          invoices: [ 'Invoice', (Invoice) ->
+            Invoice.list({
+              query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 10 }
+            }).$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.invoices').$promise
           ]

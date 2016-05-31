@@ -160,6 +160,7 @@ fr:
         invoice_#: "Facture n°"
         customer: "Client"
         credit_note: "Avoir"
+        display_more_invoices: "Afficher plus de factures ..."
         invoicing_settings: "Paramètres de facturation"
         change_logo: "Changer le logo"
         john_smith: "Jean Dupont"
