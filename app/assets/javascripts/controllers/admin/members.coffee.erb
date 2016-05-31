@@ -112,8 +112,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # 10 users loaded each time we click on 'load more...'
-  USERS_PER_PAGE = 10
+  # number of users loaded each time we click on 'load more...'
+  USERS_PER_PAGE = 20
 
 
 
@@ -209,6 +209,13 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
   ### PRIVATE SCOPE ###
 
   ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    if (!membersPromise[0] || membersPromise[0].maxInvoices <= $scope.members.length)
+      $scope.member.noMore = true
+
+  ##
   # Iterate through the provided array and return the index of the requested admin
   # @param admins {Array} full list of users with role 'admin'
   # @param id {Number} user id of the admin to retrieve in the list
@@ -237,13 +244,14 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
   ##
   memberSearch = (concat) ->
     Member.list { query: { search: $scope.member.searchText, order_by: $scope.member.order, page: $scope.member.page, size: USERS_PER_PAGE } }, (members) ->
-      if (members.length < USERS_PER_PAGE)
-        $scope.member.noMore = true
-
       if concat
         $scope.members = $scope.members.concat(members)
       else
         $scope.members = members;
+
+      if (!members[0] || members[0].maxMembers <= $scope.members.length)
+        $scope.member.noMore = true
+
 ]
 
 

@@ -1,4 +1,7 @@
+maxMembers = @members.except(:offset, :limit, :order).count
+
 json.array!(@members) do |member|
+  json.maxMembers maxMembers
   json.id member.id
   json.email member.email if current_user
   json.profile do

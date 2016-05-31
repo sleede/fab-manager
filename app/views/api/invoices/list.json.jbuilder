@@ -1,4 +1,7 @@
+maxInvoices = @invoices.except(:offset, :limit, :order).count
+
 json.array!(@invoices) do |invoice|
+  json.maxInvoices maxInvoices
   json.extract! invoice, :id, :created_at, :reference, :invoiced_type, :user_id, :avoir_date
   json.total (invoice.total / 100.00)
   json.url invoice_url(invoice, format: :json)

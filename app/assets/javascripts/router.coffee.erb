@@ -671,7 +671,7 @@ angular.module('application.router', ['ui.router']).
           ]
           invoices: [ 'Invoice', (Invoice) ->
             Invoice.list({
-              query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 10 }
+              query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
             }).$promise
           ]
           translations: [ 'Translations', (Translations) ->
@@ -697,7 +697,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'AuthentificationController'
         resolve:
           membersPromise: ['Member', (Member)->
-            Member.list({ query: { search: '', order_by: 'id', page: 1, size: 10 } }).$promise
+            Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20 } }).$promise
           ]
           adminsPromise: ['Admin', (Admin)->
             Admin.query().$promise

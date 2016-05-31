@@ -10,8 +10,8 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # 10 invoices loaded each time we click on 'load more...'
-  INVOICES_PER_PAGE = 10
+  # number of invoices loaded each time we click on 'load more...'
+  INVOICES_PER_PAGE = 20
 
 
 
@@ -371,6 +371,9 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
+    if (!invoices[0] || invoices[0].maxInvoices <= $scope.invoices.length)
+      $scope.noMoreResults = true
+
     # retrieve settings from the DB through the API
     $scope.invoice.legals.content = settings['invoice_legals']
     $scope.invoice.text.content = settings['invoice_text']
@@ -447,13 +450,13 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
         page: $scope.page
         size: INVOICES_PER_PAGE
     }, (invoices) ->
-      if (invoices.length < INVOICES_PER_PAGE)
-        $scope.noMoreResults = true
-
       if concat
         $scope.invoices = $scope.invoices.concat(invoices)
       else
         $scope.invoices = invoices
+
+      if (!invoices[0] || invoices[0].maxInvoices <= $scope.invoices.length)
+        $scope.noMoreResults = true
 
 
 
