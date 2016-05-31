@@ -3,7 +3,9 @@
 ## Next release
 - Ability for a user to add links to his social networks profiles and his personal website
 - Ability for a user to change his visibility on the platform (public / private)
+- Ability for a user to fill his employment in his profile
 - UI re-design of user's public profile
+- Admin's lists of invoices and users are not fully loaded anymore, but per 10 items. This greatly improves the load time of these pages
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
 - [TODO DEPLOY] `bundle install` and `rake db:migrate`
 
