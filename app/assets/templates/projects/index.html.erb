@@ -98,6 +98,10 @@
           <h1 class="card-title">{{project.name}}</h1>
         </div>
 
+        <div class="text-center">
+          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span>
+        </div>
+
         <div class="card-overlay">
           <div class="btn-group">
             <div class="btn btn-default" ng-click="showProject(project)">

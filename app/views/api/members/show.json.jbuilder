@@ -65,7 +65,7 @@ end
 json.last_sign_in_at @member.last_sign_in_at.iso8601 if @member.last_sign_in_at
 json.all_projects @member.all_projects do |project|
   if requested_current || project.state == 'published'
-    json.extract! project, :id, :name, :description, :author_id, :licence_id, :slug
+    json.extract! project, :id, :name, :description, :author_id, :licence_id, :slug, :state
     json.url project_url(project, format: :json)
     json.project_image project.project_image.attachment.large.url if project.project_image
     json.machine_ids project.machine_ids

@@ -12,7 +12,9 @@
       <div class="wrapper" ng-if="user.all_projects.length == 0" translate>{{ 'you_dont_have_any_projects' }}</div>
       <div class="widget panel b-a m m-t-lg" ng-repeat="project in user.all_projects">
         <div class="panel-heading b-b clearfix">
-          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4> <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'author' : 'collaborator' | translate}}</span>
+          <h4 class="text-u-c font-sbold pull-left">{{project.name}}</h4>
+          <span class="m-l-sm label label-success text-white">{{project.author_id == currentUser.id ? 'author' : 'collaborator' | translate}}</span>
+          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span>
           <div class="pull-right">
             <a class="btn btn-warning bg-white b-2x rounded upper text-sm text-black" ui-sref="app.public.projects_show({id:project.slug})" role="button" translate>{{ 'consult' }}</a>
           </div>
