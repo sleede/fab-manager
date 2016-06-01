@@ -212,7 +212,7 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    if (!membersPromise[0] || membersPromise[0].maxInvoices <= $scope.members.length)
+    if (!membersPromise[0] || membersPromise[0].maxMembers <= $scope.members.length)
       $scope.member.noMore = true
 
   ##
@@ -252,6 +252,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
       if (!members[0] || members[0].maxMembers <= $scope.members.length)
         $scope.member.noMore = true
 
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]
 
 
