@@ -75,14 +75,6 @@ class ProjectsController
 
 
     ##
-    # Changes the user's view to the projects list page
-    ##
-    $scope.cancel = ->
-      $state.go('app.public.projects_list')
-
-
-
-    ##
     # For use with 'ng-class', returns the CSS class name for the uploads previews.
     # The preview may show a placeholder or the content of the file depending on the upload state.
     # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
