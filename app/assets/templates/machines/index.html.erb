@@ -35,7 +35,7 @@
             </div>
             <div class="panel-body" style="heigth:170px;">
               <h1 class="m-b">{{machine.name}}</h1>
-              <p ng-bind-html="machine.description | simpleText | breakFilter | humanize : 140"></p>
+              <p ng-bind-html="machine.description | simpleText | humanize : 140 | breakFilter"></p>
             </div>
             <div class="panel-footer no-padder">
 

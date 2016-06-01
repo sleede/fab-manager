@@ -114,7 +114,7 @@ Application.Filters.filter "simpleText", [ ->
   (text) ->
     if text != undefined
       text = text.replace(/<br\s*\/?>/g, '\n')
-      text.replace(/<\/?\w+>/g, '')
+      text.replace(/<\/?\w+[^>]*>/g, '')
 ]
 
 Application.Filters.filter "toTrusted", [ "$sce", ($sce) ->
