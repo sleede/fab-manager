@@ -120,6 +120,7 @@ fr:
         add_a_picture: "Ajouter une image"
         change_the_picture: "Modifier l'image"
         delete_the_step: "Supprimer l'étape"
+        do_you_really_want_to_delete_this_step: "Êtes-vous sur de vouloir supprimer cette étape ?"
         add_a_new_step: "Ajouter une nouvelle étape"
         publish_your_project: "Publier votre projet"
         employed_materials: "Matériaux utilisés"

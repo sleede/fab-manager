@@ -72,14 +72,14 @@
       <div class="form-group">
         <label class="col-sm-2 control-label" translate>{{ 'steps' }}</label>
         <div class="col-sm-10">
-          <div ng-repeat="step in project.project_steps_attributes" ng-show="!step._destroy">
+          <div ng-repeat="step in project.project_steps_attributes | orderBy:'step_nb'" ng-hide="step._destroy">
             <div class="m-t-xs m-b-lg">
               <div class="btn-group" uib-dropdown is-open="status.isopen">
                 <button id="single-button" type="button" class="btn btn-warning" uib-dropdown-toggle>
-                  {{ 'step_N' | translate:{ INDEX:step.step_nb } }}/{{project.project_steps_attributes.length}} <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  {{ 'step_N' | translate:{ INDEX:step.step_nb } }}/{{totalSteps}} <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                  <li role="menuitem" ng-repeat="step_idx in intArray(1, project.project_steps_attributes.length +1)"><a href="#" ng-click="step.step_nb = step_idx">{{ 'step_N' | translate:{ INDEX:step_idx } }}</a></li>
+                  <li role="menuitem" ng-repeat="step_idx in intArray(1, totalSteps +1)"><a href="#" ng-click="changeStepIndex(step, step_idx)">{{ 'step_N' | translate:{ INDEX:step_idx } }}</a></li>
                 </ul>
               </div>
               <span class="label label-warning m-t m-b"></span>

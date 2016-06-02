@@ -7,6 +7,7 @@
 # in the various projects' admin controllers.
 #
 # Provides :
+#  - $scope.totalSteps
 #  - $scope.machines = [{Machine}]
 #  - $scope.components = [{Component}]
 #  - $scope.themes = [{Theme}]
@@ -17,6 +18,7 @@
 #  - $scope.deleteFile(file)
 #  - $scope.addStep()
 #  - $scope.deleteStep(step)
+#  - $scope.changeStepIndex(step, newIdx)
 #
 # Requires :
 #  - $scope.project.project_caos_attributes = []
@@ -24,7 +26,7 @@
 #  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
 ##
 class ProjectsController
-  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)->
+  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, dialogs, _t)->
 
     ## Retrieve the list of machines from the server
     Machine.query().$promise.then (data)->
@@ -49,6 +51,8 @@ class ProjectsController
       $scope.licences = data.map (d) ->
         id: d.id
         name: d.name
+
+    $scope.totalSteps = $scope.project.project_steps_attributes.length
 
 
 
@@ -122,22 +126,52 @@ class ProjectsController
     # This will create a single new empty entry into the project's steps list.
     ##
     $scope.addStep = ->
-      $scope.project.project_steps_attributes.push { step_nb: $scope.project.project_steps_attributes.length + 1 }
+      $scope.totalSteps += 1
+      $scope.project.project_steps_attributes.push { step_nb: $scope.totalSteps }
+
 
 
 
     ##
-    # This will remove the given stip from the project's steps list. If the step was previously saved
+    # This will remove the given step from the project's steps list. If the step was previously saved
     # on the server, it will be marked for deletion for the next saving. Otherwise, it will be simply truncated from
     # the steps array.
     # @param file {Object} the file to delete
     ##
     $scope.deleteStep = (step) ->
-      index = $scope.project.project_steps_attributes.indexOf(step)
-      if step.id?
-        step._destroy = true
-      else
-        $scope.project.project_steps_attributes.splice(index, 1)
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_step')
+        , -> # deletion confirmed
+          index = $scope.project.project_steps_attributes.indexOf(step)
+          if step.id?
+            step._destroy = true
+          else
+            $scope.project.project_steps_attributes.splice(index, 1)
+
+          # update the new total number of steps
+          $scope.totalSteps -= 1
+          # reindex the remaning steps
+          for s in $scope.project.project_steps_attributes
+            if s.step_nb > step.step_nb
+              s.step_nb -= 1
+
+
+
+    ##
+    # Change the step_nb property of the given step to the new value provided. The step that was previously at this
+    # index will be assigned to the old position of the provided step.
+    # @param step {Object} the project's step to reindex
+    # @param newIdx {number} the new index to assign to the step
+    ##
+    $scope.changeStepIndex = (step, newIdx) ->
+      for s in $scope.project.project_steps_attributes
+        if s.step_nb == newIdx
+          s.step_nb = step.step_nb
+          step.step_nb = newIdx
+          break
 
 
 
@@ -275,8 +309,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
 ##
 # Controller used in the project creation page
 ##
-Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF'
-, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF) ->
+Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'dialogs', '_t'
+, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, dialogs, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -299,7 +333,7 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
       name: d.name
 
   ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, dialogs, _t)
 ]
 
 
@@ -307,8 +341,8 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
 ##
 # Controller used in the project edition page
 ##
-Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise'
-, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise) ->
+Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'dialogs', '_t'
+, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, dialogs, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -329,7 +363,7 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
       name: d.name
 
   ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, dialogs, _t)
 ]
 
 
