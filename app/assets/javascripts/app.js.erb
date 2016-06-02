@@ -125,6 +125,20 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
       // see https://github.com/revolunet/angular-google-analytics#automatic-page-view-tracking
       Analytics.pageView();
 
+
+      /**
+       * This helper method builds and return an array contaning every integers between
+       * the provided start and end.
+       * @param start {number}
+       * @param end {number}
+       * @return {Array} [start .. end]
+       */
+      $rootScope.intArray = function(start, end) {
+        var arr = [];
+        for (var i = start; i < end; i++) { arr.push(i); }
+        return arr;
+      };
+
   }]).constant('angularMomentConfig', {
     timezone: Fablab.timezone
   });

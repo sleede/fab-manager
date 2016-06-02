@@ -122,7 +122,7 @@ class ProjectsController
     # This will create a single new empty entry into the project's steps list.
     ##
     $scope.addStep = ->
-      $scope.project.project_steps_attributes.push {}
+      $scope.project.project_steps_attributes.push { step_nb: $scope.project.project_steps_attributes.length + 1 }
 
 
 
