@@ -119,7 +119,7 @@ availability_12:
   nb_total_places:
   destroying: false
 
-  availability_13:
+availability_13:
   id: 13
   start_at: 2015-06-15 12:00:28.000000000 Z
   end_at: 2015-06-15 18:00:28.000000000 Z
