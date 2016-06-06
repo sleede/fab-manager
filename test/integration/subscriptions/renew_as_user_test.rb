@@ -9,7 +9,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
   test 'user successfully renew a subscription after it has ended' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
 
-    VCR.use_cassette("subscriptions_user_renew_success") do
+    VCR.use_cassette("subscriptions_user_renew_success", :erb => true) do
       post '/api/subscriptions',
            {
              subscription: {
