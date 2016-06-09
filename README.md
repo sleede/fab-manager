@@ -580,6 +580,10 @@ Go to your projects gallery and enjoy seeing your projects available from everyw
         ALTER ROLE sleede WITH SUPERUSER;
 
  DO NOT do this in a production environment, as this would lead to a serious security issue.
+ 
+- Using another DBMS than PostgreSQL is not supported, because of some PostgreSQL specific instructions:
+  - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
+  - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
 
 <a name="related-documentation"></a>
 ## Related Documentation
