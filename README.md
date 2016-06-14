@@ -17,7 +17,8 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 6. [ElasticSearch](#elasticsearch)<br/>
 6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
 6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
-6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
+6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)<br/>
+6.4. [Backup and Restore](#backup-and-restore-elasticsearch)
 7. [Internationalization (i18n)](#i18n)<br/>
 7.1. [Translation](#i18n-translation)<br/>
 7.1.1. [Front-end translations](#i18n-translation-front)<br/>
@@ -397,6 +398,14 @@ brew install homebrew/versions/elasticsearch17
       StatisticService.new.generate_statistic({start_date: i.day.ago.beginning_of_day,end_date: i.day.ago.end_of_day})
    end
    ```
+   
+<a name="backup-and-restore-elasticsearch"></a>
+### Backup and Restore
+
+To backup and restore the ElasticSearch database, use the [elasticsearch-dump](https://github.com/taskrabbit/elasticsearch-dump) tool.
+
+Dump the database with: `elasticdump --input=http://localhost:9200/stats --output=fablab_stats.json`.
+Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhost:9200/stats`.
 
 <a name="i18n"></a>
 ## Internationalization (i18n)
