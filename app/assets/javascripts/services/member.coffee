@@ -17,4 +17,9 @@ Application.Services.factory 'Member', ["$resource", ($resource)->
       url: '/api/members/list'
       method: 'POST'
       isArray: true
+    search:
+      method: 'GET'
+      url: '/api/members/search/:query/:subscription'
+      params: {query: "@query", subscription: "@subscription"}
+      isArray: true
 ]

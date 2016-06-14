@@ -24,8 +24,8 @@
 
   <div class="col-sm-12 col-md-12 col-lg-3">
 
-    <div>
-      <ng-include src="'<%= asset_path 'shared/_member_select.html' %>'" ng-if="currentUser.role === 'admin'"></ng-include>
+    <div ng-if="currentUser.role === 'admin'">
+      <select-member></select-member>
     </div>
 
 

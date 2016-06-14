@@ -1,11 +1,10 @@
 # Changelog Fab Manager
 
 ## Next release
-- Ability for a user to add links to his social networks profiles and his personal website
-- Ability for a user to change his visibility on the platform (public / private)
-- Ability for a user to fill his employment in his profile
-- UI re-design of user's public profile
-- Admin's lists of invoices and users are not fully loaded anymore, but per 10 items. This greatly improves the load time of these pages
+- User profile form: social networks links, personal website link, job and change profile visibility (public / private)
+- User public profile: UI re-design with possible admin's customization
+- Admin: Invoices list and users list are now loaded per 10 items to improve pages load time
+- Admin: select member (eg. to buy a subscription for a member) is now loading the user's list dynamically when you type
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
 - [TODO DEPLOY] `bundle install` and `rake db:migrate`
 

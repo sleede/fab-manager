@@ -42,9 +42,6 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   $scope.ctrl =
     member: {}
 
-  ## the full list of members, used by admin to select a user to interact with
-  $scope.members = []
-
   ## list of plans, classified by group
   $scope.plansClassifiedByGroup = []
   for group in groupsPromise
@@ -126,11 +123,13 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ##
   $scope.updateMember = ->
     if $scope.ctrl.member
-      Availability.trainings {member_id: $scope.ctrl.member.id}, (trainings) ->
-        $scope.calendar.fullCalendar 'removeEvents'
-        $scope.eventSources.push
-          events: trainings
-          textColor: 'black'
+      Member.get {id: $scope.ctrl.member.id}, (member) ->
+        $scope.ctrl.member = member
+        Availability.trainings {member_id: $scope.ctrl.member.id}, (trainings) ->
+          $scope.calendar.fullCalendar 'removeEvents'
+          $scope.eventSources.push
+            events: trainings
+            textColor: 'black'
     $scope.trainingIsValid = false
     $scope.paidTraining = null
     $scope.plansAreShown = false
@@ -324,9 +323,6 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.currentUser.role isnt 'admin'
       Member.get id: $scope.currentUser.id, (member) ->
         $scope.ctrl.member = member
-    else
-      Member.query {requested_attributes:'[subscription,credits]'}, (members) ->
-        $scope.members = members
 
 
 

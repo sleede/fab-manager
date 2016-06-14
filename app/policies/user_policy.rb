@@ -32,4 +32,8 @@ class UserPolicy < ApplicationPolicy
   def list?
     user.is_admin?
   end
+
+  def search?
+    user.is_admin?
+  end
 end

@@ -146,6 +146,7 @@ fr:
       member_select:
         # admin : choisir un membre avec lequel interagir
         select_a_member: "Sélectionnez un membre"
+        start_typing: "Commencez à taper ..."
         please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
 
       stripe:

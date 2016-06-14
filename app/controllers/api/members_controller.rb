@@ -179,6 +179,27 @@ class API::MembersController < API::ApiController
 
   end
 
+  def search
+    authorize User
+
+    if params[:subscription]
+      subscription = (params[:subscription] === 'true')
+    end
+
+    @members = User.includes(:profile)
+               .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
+               .where("users.is_active = 'true' AND roles.name = 'member'")
+               .where("lower(f_unaccent(profiles.first_name)) LIKE ('%' || lower(f_unaccent(:search)) || '%') OR lower(f_unaccent(profiles.last_name)) LIKE ('%' || lower(f_unaccent(:search)) || '%')", search: params[:query])
+
+    if params[:subscription] === 'true'
+      @members = @members.where('subscriptions.id IS NOT NULL AND subscriptions.expired_at >= :now', now: Date.today.to_s)
+    elsif params[:subscription] === 'false'
+      @members = @members.where('subscriptions.id IS NULL OR subscriptions.expired_at < :now',  now: Date.today.to_s)
+    end
+
+    @members
+  end
+
   private
     def set_member
       @member = User.find(params[:id])
