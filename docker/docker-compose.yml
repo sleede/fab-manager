@@ -1,0 +1,41 @@
+version: '2'
+services:
+  fabmanager:
+    image: sleede/fab-manager
+    environment:
+      RAILS_ENV: production
+      RACK_ENV: production
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - /home/core/fabmanager/config/env
+    volumes:
+      - /home/core/fabmanager/config/nginx:/etc/nginx/conf.d
+      - /home/core/fabmanager/public/assets:/usr/src/app/public/assets
+      - /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads
+      - /home/core/fabmanager/invoices:/usr/src/app/invoices
+      - /home/core/fabmanager/log:/var/log/supervisor
+    depends_on:
+      - fabmanager-postgres
+      - fabmanager-redis
+      - fabmanager-elastic
+    restart: always
+
+  fabmanager-postgres:
+    image: postgres:9.4
+    volumes:
+      - /home/core/fabmanager/postgresql:/var/lib/postgresql/data
+    restart: always
+
+  fabmanager-elastic:
+    image: elasticsearch:1.7
+    volumes:
+      - /home/core/fabmanager/elasticsearch:/usr/share/elasticsearch/data
+    restart: always
+
+  fabmanager-redis:
+    image: redis:3.0
+    volumes:
+      - /home/core/fabmanager/redis:/data
+    restart: always
