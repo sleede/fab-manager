@@ -515,7 +515,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'TrainingsController'
         resolve:
           trainingsPromise: ['Training', (Training)->
-            Training.query().$promise
+            Training.query({requested_attributes:'[availabilities]'}).$promise
           ]
           machinesPromise: ['Machine', (Machine)->
             Machine.query().$promise
@@ -600,6 +600,18 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.pricing').$promise
+          ]
+          trainingsPromise: ['Training', (Training) ->
+            Training.query().$promise
+          ]
+          machineCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Machine'}).$promise
+          ]
+          machinesPromise: ['Machine', (Machine) ->
+            Machine.query().$promise
+          ]
+          trainingCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Training'}).$promise
           ]
 
       # plans
