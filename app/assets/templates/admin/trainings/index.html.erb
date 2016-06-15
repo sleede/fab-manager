@@ -80,6 +80,12 @@
         </uib-tab>
 
         <uib-tab heading="{{ 'trainings_monitoring' | translate }}">
+          <div class="m-lg">
+            <label for="training_select" translate>{{ 'select_a_training' }}</label>
+            <select ng-options="training as training.name for training in trainings" ng-model="monitoring.training" class="form-control" ng-change="selectTrainingToMonitor()" name="training_select">
+            </select>
+          </div>
+
           <table class="table">
             <thead>
               <tr>

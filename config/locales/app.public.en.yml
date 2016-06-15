@@ -35,6 +35,7 @@ en:
 
         # left menu (admin)
         trainings_monitoring: "Trainings monitoring"
+        select_a_training: "Select a training"
         manage_the_calendar: "Manage the Calendar"
         manage_the_users: "Manage the Users"
         manage_the_invoices: "Manage the invoices"

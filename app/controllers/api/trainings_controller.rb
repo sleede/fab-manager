@@ -1,13 +1,21 @@
 class API::TrainingsController < API::ApiController
+  include ApplicationHelper
+
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_training, only: [:show, :update, :destroy]
+  before_action :set_training, only: [:update, :destroy]
 
   def index
     @requested_attributes = params[:requested_attributes]
     @trainings = policy_scope(Training)
+
+    if attribute_requested?(@requested_attributes, 'availabilities')
+      @trainings = @trainings.includes(:availabilities => [:slots => [:reservation => [:user => [:profile, :trainings]]]]).order('availabilities.start_at DESC')
+    end
   end
 
   def show
+    @training = Training.includes(availabilities: {slots: {reservation: {user: [:profile, :trainings] }}})
+                .where(id: params[:id]).first
   end
 
   def create

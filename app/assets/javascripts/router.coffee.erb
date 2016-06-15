@@ -515,7 +515,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'TrainingsController'
         resolve:
           trainingsPromise: ['Training', (Training)->
-            Training.query({requested_attributes:'[availabilities]'}).$promise
+            Training.query().$promise
           ]
           machinesPromise: ['Machine', (Machine)->
             Machine.query().$promise
