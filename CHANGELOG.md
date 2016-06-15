@@ -5,7 +5,8 @@
 - User public profile: UI re-design with possible admin's customization
 - Admin: Invoices list and users list are now loaded per 10 items to improve pages load time
 - Admin: select member (eg. to buy a subscription for a member) is now loading the user's list dynamically when you type
-- API: GET /api/trainings do not send the associated availabilities until they are requested
+- Admin: select a training before monitoring its reservations -> improves page load time
+- API: GET /api/trainings do not load nor send the associated availabilities until they are requested
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
 - [TODO DEPLOY] `bundle install` and `rake db:migrate`
 
