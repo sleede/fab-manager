@@ -16,10 +16,10 @@ class CreateUnaccentFunction < ActiveRecord::Migration
   end
 
   def down
-    execute 'DROP EXTENSION unaccent;'
-    execute 'DROP EXTENSION pg_trgm;'
-    execute 'DROP FUNCTION f_unaccent(text);'
     execute 'DROP INDEX profiles_lower_unaccent_first_name_trgm_idx;'
     execute 'DROP INDEX profiles_lower_unaccent_last_name_trgm_idx;'
+    execute 'DROP FUNCTION f_unaccent(text);'
+    execute 'DROP EXTENSION pg_trgm;'
+    execute 'DROP EXTENSION unaccent;'
   end
 end
