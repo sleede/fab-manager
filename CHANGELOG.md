@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## Next release
+## v2.2.0 2016 June 16
+- Built-in support for extensions plug-ins
 - User profile form: social networks links, personal website link, job and change profile visibility (public / private)
 - User public profile: UI re-design with possible admin's customization
 - Admin: Invoices list and users list are now loaded per 10 items to improve pages load time
