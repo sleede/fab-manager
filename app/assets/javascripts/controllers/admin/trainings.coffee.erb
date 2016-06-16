@@ -13,6 +13,10 @@ Application.Controllers.controller "TrainingsController", ["$scope", "$state", "
   ## simplified list of machines
   $scope.machines = machinesPromise
 
+  ## Training to monitor, binded with drop-down selection
+  $scope.monitoring =
+    training: null
+
   ## list of training availabilies, grouped by date
   $scope.groupedAvailabilities = {}
 
@@ -188,15 +192,17 @@ Application.Controllers.controller "TrainingsController", ["$scope", "$state", "
 
 
 
+  ##
+  # Callback when the drop-down selection is changed.
+  # The selected training details will be loaded from the API and rendered into the accordions.
+  ##
+  $scope.selectTrainingToMonitor = ->
+    Training.get {id: $scope.monitoring.training.id}, (training) ->
+      $scope.groupedAvailabilities = groupAvailabilities([training])
+
+
+
   ### PRIVATE SCOPE ###
-
-  ##
-  # Kind of constructor: these actions will be realized first when the controller is loaded
-  ##
-  initialize = ->
-    $scope.groupedAvailabilities = groupAvailabilities($scope.trainings)
-
-
 
   ##
   # Group the trainings availabilites by trainings and by dates and return the resulting tree
@@ -223,8 +229,4 @@ Application.Controllers.controller "TrainingsController", ["$scope", "$state", "
         tree[training.name][start.year()][start.month()][start.date()].push( availability )
     tree
 
-
-
-  # init the controller (call at the end !)
-  initialize()
 ]

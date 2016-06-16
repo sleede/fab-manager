@@ -6,6 +6,10 @@ class API::MembersController < API::ApiController
   def index
     @requested_attributes = params[:requested_attributes]
     @members = policy_scope(User)
+
+    unless params[:page].nil? and params[:size].nil?
+      @members = @members.page(params[:page].to_i).per(params[:size].to_i)
+    end
   end
 
   def last_subscribed
@@ -131,6 +135,75 @@ class API::MembersController < API::ApiController
     end
   end
 
+  def list
+    authorize User
+
+    p = params.require(:query).permit(:search, :order_by, :page, :size)
+
+    unless p[:page].is_a? Integer
+      render json: {error: 'page must be an integer'}, status: :unprocessable_entity
+    end
+
+    unless p[:size].is_a? Integer
+      render json: {error: 'size must be an integer'}, status: :unprocessable_entity
+    end
+
+
+    direction = (p[:order_by][0] == '-' ? 'DESC' : 'ASC')
+    order_key = (p[:order_by][0] == '-' ? p[:order_by][1, p[:order_by].size] : p[:order_by])
+
+    case order_key
+      when 'last_name'
+        order_key = 'profiles.last_name'
+      when 'first_name'
+        order_key = 'profiles.first_name'
+      when 'email'
+        order_key = 'users.email'
+      when 'phone'
+        order_key = 'profiles.phone'
+      when 'group'
+        order_key = 'groups.name'
+      when 'plan'
+        order_key = 'plans.base_name'
+      else
+        order_key = 'users.id'
+    end
+
+    @members = User.includes(:profile, :group)
+               .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
+               .where("users.is_active = 'true' AND roles.name = 'member'")
+               .order("#{order_key} #{direction}")
+               .page(p[:page])
+               .per(p[:size])
+
+    # ILIKE => PostgreSQL case-insensitive LIKE
+    @members = @members.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
+
+    @members
+
+  end
+
+  def search
+    @members = User.includes(:profile)
+               .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
+               .where("users.is_active = 'true' AND roles.name = 'member'")
+               .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
+
+    if current_user.is_member?
+      # non-admin can only retrieve users with "public profiles"
+      @members = @members.where("users.is_allow_contact = 'true'")
+    else
+      # only admins have the ability to filter by subscription
+      if params[:subscription] === 'true'
+        @members = @members.where('subscriptions.id IS NOT NULL AND subscriptions.expired_at >= :now', now: Date.today.to_s)
+      elsif params[:subscription] === 'false'
+        @members = @members.where('subscriptions.id IS NULL OR subscriptions.expired_at < :now',  now: Date.today.to_s)
+      end
+    end
+
+    @members
+  end
+
   private
     def set_member
       @member = User.find(params[:id])
@@ -139,13 +212,15 @@ class API::MembersController < API::ApiController
     def user_params
       if current_user.id == params[:id].to_i
         params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact,
-                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered,
+                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
+                                     :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
                                      :user_avatar_attributes => [:id, :attachment, :_destroy], :address_attributes => [:id, :address]])
 
       elsif current_user.is_admin?
-        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled,
+        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled, :is_allow_contact,
                                       :group_id, training_ids: [], tag_ids: [],
-                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered,
+                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
+                                      :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
                                       user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address]])
 
       end

@@ -339,9 +339,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.ctrl =
     member: {}
 
-  ## fablab users list
-  $scope.members = []
-
   ## current machine to reserve
   $scope.machine = {}
 
@@ -491,7 +488,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.paidMachineSlots = null
     $scope.plansAreShown = false
     $scope.selectedPlan = null
-    updateCartPrice()
+    Member.get {id: $scope.ctrl.member.id}, (member) ->
+      $scope.ctrl.member = member
+      updateCartPrice()
 
 
 
@@ -637,9 +636,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
     if $scope.currentUser.role isnt 'admin'
       $scope.ctrl.member = $scope.currentUser
-    else
-      Member.query {requested_attributes:'[subscription,credits]'}, (members) ->
-        $scope.members = members
 
     $scope.machine = Machine.get {id: $stateParams.id}
     , ->

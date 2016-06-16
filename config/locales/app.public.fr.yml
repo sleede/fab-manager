@@ -9,6 +9,7 @@ fr:
         # sections du tableau de bord
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
+        my_settings: "Mes paramètres"
         my_projects: "Mes projets"
         my_trainings: "Mes formations"
         my_courses_and_workshops: "Mes stages et ateliers"
@@ -34,6 +35,7 @@ fr:
 
         # menu de gauche (partie admin)
         trainings_monitoring: "Suivi formations"
+        select_a_training: "Sélectionnez une formation"
         manage_the_calendar: "Gérer le calendrier"
         manage_the_users: "Gérer les utilisateurs"
         manage_the_invoices: "Gérer les factures"

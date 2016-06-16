@@ -35,7 +35,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ## plan to subscribe (shopping cart)
     $scope.selectedPlan = null
 
-    ##
+    ## text that appears in the bottom-right box of the page (subscriptions rules details)
     $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value
 
     ##
@@ -45,8 +45,11 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     $scope.updateMember = ->
       $scope.selectedPlan = null
       $scope.paidPlan = null
-      $scope.group.id = $scope.ctrl.member.group_id
       $scope.group.change = false
+      Member.get {id: $scope.ctrl.member.id}, (member) ->
+        $scope.ctrl.member = member
+        $scope.group.id = $scope.ctrl.member.group_id
+
 
 
 
@@ -119,6 +122,19 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
 
 
 
+    ##
+    # Test if the provided date is in the future
+    # @param dateTime {Date}
+    # @return {boolean}
+    ##
+    $scope.isInFuture = (dateTime)->
+      if moment().diff(moment(dateTime)) < 0
+        true
+      else
+        false
+
+
+
     ### PRIVATE SCOPE ###
 
     ##
@@ -130,22 +146,11 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           $scope.ctrl.member = $scope.currentUser
           $scope.paidPlan = $scope.currentUser.subscribed_plan
           $scope.group.id = $scope.currentUser.group_id
-        else
-          Member.query {requested_attributes:'[subscription]'}, (members) ->
-            membersNoPlan = []
-            angular.forEach members, (v)->
-              membersNoPlan.push v unless v.subscribed_plan
-            $scope.members = membersNoPlan
 
       $scope.$on 'devise:new-session', (event, user)->
         $scope.ctrl.member = user
 
 
-    $scope.isInFuture = (dateTime)->
-      if moment().diff(moment(dateTime)) < 0
-        true
-      else
-        false
 
     ##
     # Open a modal window which trigger the stripe payment process

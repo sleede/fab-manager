@@ -1,16 +1,14 @@
 class TrainingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.includes(:plans, :machines, :availabilities => [:slots => [:reservation => [:user => [:profile, :trainings]]]]).order('availabilities.start_at DESC')
+      scope.includes(:plans, :machines)
     end
   end
 
-  def create?
-    user.is_admin?
-  end
-
-  def update?
-    user.is_admin?
+  %w(show create update).each do |action|
+    define_method "#{action}?" do
+      user.is_admin?
+    end
   end
 
   def destroy?

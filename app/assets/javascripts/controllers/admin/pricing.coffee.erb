@@ -3,8 +3,8 @@
 ##
 # Controller used in the prices edition page
 ##
-Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', 'Training', 'TrainingsPricing', 'Machine', '$filter', 'Credit', 'Pricing', 'Plan', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', '_t'
-, ($scope, $state, $uibModal, Training, TrainingsPricing, Machine, $filter, Credit, Pricing, Plan, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, _t) ->
+Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', 'TrainingsPricing', '$filter', 'Credit', 'Pricing', 'Plan', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', '_t'
+, ($scope, $state, $uibModal, TrainingsPricing, $filter, Credit, Pricing, Plan, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, _t) ->
 
   ### PUBLIC SCOPE ###
   ## List of machines prices (not considering any plan)
@@ -20,19 +20,19 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.groups = groups
 
   ## Associate free machine hours with subscriptions
-  $scope.machineCredits = []
+  $scope.machineCredits = machineCreditsPromise
 
   ## Array of associations (plan <-> training)
-  $scope.trainingCredits = []
+  $scope.trainingCredits = trainingCreditsPromise
 
   ## Associate a plan with all its trainings ids
   $scope.trainingCreditsGroups = {}
 
   ## List of trainings
-  $scope.trainings = []
+  $scope.trainings = trainingsPromise
 
   ## List of machines
-  $scope.machines = []
+  $scope.machines = machinesPromise
 
   ## The plans list ordering. Default: by group
   $scope.orderPlans = 'group_id'
@@ -320,23 +320,13 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   ##
   initialize = ->
 
-    Credit.query({creditable_type: 'Training'}).$promise.then (data)->
-      $scope.trainingCredits = data
-      $scope.trainingCreditsGroups = groupCreditsByPlan(data)
+    $scope.trainingCreditsGroups = groupCreditsByPlan($scope.trainingCredits)
 
-      ## adds empty array for plan which hasn't any credits yet
-      for plan in $scope.plans
-        unless $scope.trainingCreditsGroups[plan.id]?
-          $scope.trainingCreditsGroups[plan.id] = []
+    ## adds empty array for plan which hasn't any credits yet
+    for plan in $scope.plans
+      unless $scope.trainingCreditsGroups[plan.id]?
+        $scope.trainingCreditsGroups[plan.id] = []
 
-    Credit.query({creditable_type: 'Machine'}).$promise.then (data)->
-      $scope.machineCredits = data
-
-    Training.query().$promise.then (data)->
-      $scope.trainings = data
-
-    Machine.query().$promise.then (data)->
-      $scope.machines = data
 
 
   ##

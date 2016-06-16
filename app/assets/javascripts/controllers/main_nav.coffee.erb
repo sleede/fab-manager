@@ -44,7 +44,8 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
     })
 
 
-  $scope.adminNavLinks = [
+  Fablab.adminNavLinks = Fablab.adminNavLinks || []
+  Fablab.adminNavLinks = [
     {
       state: 'app.admin.trainings'
       linkText: 'trainings_monitoring'
@@ -95,5 +96,7 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
       linkText: 'customization'
       linkIcon: 'gear'
     }
-  ]
+  ].concat(Fablab.adminNavLinks)
+
+  $scope.adminNavLinks = Fablab.adminNavLinks
 ]

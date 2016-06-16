@@ -3,15 +3,34 @@
 ##
 # Controller used in the admin invoices listing page
 ##
-Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'Invoice', '$uibModal', "growl", "$filter", 'Setting', 'settings', '_t'
-, ($scope, $state, Invoice, $uibModal, growl, $filter, Setting, settings, _t) ->
+Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'Invoice', 'invoices', '$uibModal', "growl", "$filter", 'Setting', 'settings', '_t'
+, ($scope, $state, Invoice, invoices, $uibModal, growl, $filter, Setting, settings, _t) ->
+
+
+
+  ### PRIVATE STATIC CONSTANTS ###
+
+  # number of invoices loaded each time we click on 'load more...'
+  INVOICES_PER_PAGE = 20
 
 
 
   ### PUBLIC SCOPE ###
 
   ## List of all users invoices
-  $scope.invoices = Invoice.query()
+  $scope.invoices = invoices
+
+  # Invoices filters
+  $scope.searchInvoice =
+    date: null
+    name: ''
+    reference: ''
+
+  # currently displayed page of invoices (search results)
+  $scope.page = 1
+
+  # true when all invoices are loaded
+  $scope.noMoreResults = false
 
   ## Default invoices ordering/sorting
   $scope.orderInvoice = '-reference'
@@ -60,6 +79,9 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       $scope.orderInvoice = '-'+orderBy
     else
       $scope.orderInvoice = orderBy
+
+    resetSearchInvoice()
+    invoiceSearch()
 
 
 
@@ -323,12 +345,35 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
 
 
 
+  ##
+  # Callback when any of the filters changes.
+  # Full reload the results list
+  ##
+  $scope.handleFilterChange = ->
+    resetSearchInvoice()
+    invoiceSearch()
+
+
+
+  ##
+  # Callback for the 'load more' button.
+  # Will load the next results of the current search, if any
+  ##
+  $scope.showNextInvoices = ->
+    $scope.page += 1
+    invoiceSearch(true)
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
+    if (!invoices[0] || invoices[0].maxInvoices <= $scope.invoices.length)
+      $scope.noMoreResults = true
+
     # retrieve settings from the DB through the API
     $scope.invoice.legals.content = settings['invoice_legals']
     $scope.invoice.text.content = settings['invoice_text']
@@ -378,6 +423,40 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       else
         ''
     )
+
+
+
+  ##
+  # Reinitialize the context of invoices' search to display new results set
+  ##
+  resetSearchInvoice = ->
+    $scope.page = 1
+    $scope.noMoreResults = false
+
+
+
+  ##
+  # Run a search query with the current parameters set concerning invoices, then affect or concat the results
+  # to $scope.invoices
+  # @param concat {boolean} if true, the result will be append to $scope.invoices instead of being affected
+  ##
+  invoiceSearch = (concat) ->
+    Invoice.list {
+      query:
+        number: $scope.searchInvoice.reference
+        customer: $scope.searchInvoice.name
+        date: $scope.searchInvoice.date
+        order_by: $scope.orderInvoice
+        page: $scope.page
+        size: INVOICES_PER_PAGE
+    }, (invoices) ->
+      if concat
+        $scope.invoices = $scope.invoices.concat(invoices)
+      else
+        $scope.invoices = invoices
+
+      if (!invoices[0] || invoices[0].maxInvoices <= $scope.invoices.length)
+        $scope.noMoreResults = true
 
 
 

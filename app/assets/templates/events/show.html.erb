@@ -56,7 +56,9 @@
         </ul>
     </section>
 
-    <ng-include src="'<%= asset_path 'shared/_member_select.html' %>'" ng-if="currentUser.role === 'admin'"></ng-include>
+    <div ng-if="currentUser.role === 'admin'">
+      <select-member></select-member>
+    </div>
 
     <section class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">

@@ -136,6 +136,16 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "dashboard/profile.html" %>'
+            controller: 'DashboardController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.logged.dashboard.profile', 'app.shared.public_profile']).$promise
+          ]
+      .state 'app.logged.dashboard.settings',
+        url: '/settings'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "dashboard/settings.html" %>'
             controller: 'EditProfileController'
         resolve:
           groups: ['Group', (Group)->
@@ -145,7 +155,7 @@ angular.module('application.router', ['ui.router']).
             AuthProvider.active().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.logged.dashboard.profile', 'app.shared.user']).$promise
+            Translations.query(['app.logged.dashboard.settings', 'app.shared.user']).$promise
           ]
       .state 'app.logged.dashboard.projects',
         url: '/projects'
@@ -201,7 +211,7 @@ angular.module('application.router', ['ui.router']).
             Member.get(id: $stateParams.id).$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.logged.members_show').$promise
+            Translations.query(['app.logged.members_show', 'app.shared.public_profile']).$promise
           ]
       .state 'app.logged.members',
         url: '/members'
@@ -211,7 +221,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'MembersController'
         resolve:
           membersPromise: ['Member', (Member)->
-            Member.query({requested_attributes:'[profile]'}).$promise
+            Member.query({requested_attributes:'[profile]', page: 1, size: 10}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.logged.members').$promise
@@ -591,6 +601,18 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.pricing').$promise
           ]
+          trainingsPromise: ['Training', (Training) ->
+            Training.query().$promise
+          ]
+          machineCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Machine'}).$promise
+          ]
+          machinesPromise: ['Machine', (Machine) ->
+            Machine.query().$promise
+          ]
+          trainingCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Training'}).$promise
+          ]
 
       # plans
       .state 'app.admin.plans',
@@ -659,6 +681,11 @@ angular.module('application.router', ['ui.router']).
                   'invoice_logo'
                 ]").$promise
           ]
+          invoices: [ 'Invoice', (Invoice) ->
+            Invoice.list({
+              query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
+            }).$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.invoices').$promise
           ]
@@ -682,7 +709,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'AuthentificationController'
         resolve:
           membersPromise: ['Member', (Member)->
-            Member.query({requested_attributes:'[profile,group,subscription]'}).$promise
+            Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20 } }).$promise
           ]
           adminsPromise: ['Admin', (Admin)->
             Admin.query().$promise
@@ -835,6 +862,9 @@ angular.module('application.router', ['ui.router']).
           ]
           faviconFile: ['CustomAsset', (CustomAsset) ->
             CustomAsset.get({name: 'favicon-file'}).$promise
+          ]
+          profileImageFile: ['CustomAsset', (CustomAsset) ->
+            CustomAsset.get({name: 'profile-image-file'}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.settings').$promise

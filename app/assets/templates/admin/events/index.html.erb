@@ -44,7 +44,7 @@
               <a ui-sref="app.public.events_show({id: event.id})">{{ event.title }} </a>
             </td>
             <td>
-              <span> {{ 'from_DATE' | translate:{DATE:(event.start_date | amDateFormat:'LL')} }} <span class="text-sm font-thin" translate>{{ 'to_date' }}</span>{{event.end_date | amDateFormat:'LL'}}</span>
+              <span> {{ 'from_DATE' | translate:{DATE:(event.start_date | amDateFormat:'LL')} }} <span class="text-sm font-thin" translate>{{ 'to_date' }}</span> {{event.end_date | amDateFormat:'LL'}}</span>
               <br/>
               <span ng-if="event.all_day == 'true'" translate>{{ 'all_day' }}</span>
               <span ng-if="event.all_day == 'false'">

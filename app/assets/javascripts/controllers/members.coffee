@@ -3,10 +3,57 @@
 ##
 # Controller used in the members listing page
 ##
-Application.Controllers.controller "MembersController", ["$scope", 'membersPromise', ($scope, membersPromise) ->
+Application.Controllers.controller "MembersController", ["$scope", 'Member', 'membersPromise', ($scope, Member, membersPromise) ->
 
+
+  ### PRIVATE STATIC CONSTANTS ###
+
+  # number of invoices loaded each time we click on 'load more...'
+  MEMBERS_PER_PAGE = 10
+
+
+
+  ### PUBLIC SCOPE ###
+  
+  ## currently displayed page of members
+  $scope.page = 1
+  
   ## members list
   $scope.members = membersPromise
+
+  # true when all members are loaded
+  $scope.noMoreResults = false
+
+  ##
+  # Callback for the 'load more' button.
+  # Will load the next results of the current search, if any
+  ##
+  $scope.showNextMembers = ->
+    $scope.page += 1
+    Member.query {
+      requested_attributes:'[profile]', 
+      page: $scope.page, 
+      size: MEMBERS_PER_PAGE
+    }, (members) ->
+      $scope.members = $scope.members.concat(members)
+      
+      if (!members[0] || members[0].maxMembers <= $scope.members.length)
+        $scope.noMoreResults = true
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    if (!membersPromise[0] || membersPromise[0].maxMembers <= $scope.members.length)
+      $scope.noMoreResults = true
+
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 
 ]
 
@@ -211,8 +258,38 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
 ##
 # Controller used on the public user's profile page (seeing another user's profile)
 ##
-Application.Controllers.controller "ShowProfileController", ["$scope", "$stateParams", 'Member', 'memberPromise', ($scope, $stateParams, Member, memberPromise) ->
+Application.Controllers.controller "ShowProfileController", ["$scope", 'memberPromise', 'SocialNetworks', ($scope, memberPromise, SocialNetworks) ->
 
-  ## Selected user's profile (id from the current URL)
-  $scope.user = memberPromise
+  ## Selected user's informations
+  $scope.user = memberPromise # DEPENDENCY WITH NAVINUM GAMIFICATION PLUGIN !!!!
+
+  ## List of social networks associated with this user and toggle 'show all' state
+  $scope.social =
+    showAllLinks: false
+    networks: SocialNetworks
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    $scope.social.networks = filterNetworks()
+
+  ##
+  # Filter social network or website that are associated with the profile of the user provided in promise
+  # and return the filtered networks
+  # @return {Array}
+  ##
+  filterNetworks = ->
+    networks = [];
+    for network in SocialNetworks
+      if $scope.user.profile[network] && $scope.user.profile[network].length > 0
+        networks.push(network);
+    networks
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
+
 ]

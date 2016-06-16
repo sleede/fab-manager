@@ -1,4 +1,4 @@
-json.extract! @member, :id, :username, :email, :group_id, :slug, :invoicing_disabled, :is_allow_contact
+json.extract! @member, :id, :uid, :username, :email, :group_id, :slug, :invoicing_disabled, :is_allow_contact
 json.role @member.roles.first.name
 json.name @member.profile.full_name
 json.need_completion @member.need_completion?
@@ -19,6 +19,9 @@ json.profile do
     json.address @member.profile.address.address
   end if @member.profile.address
   json.phone @member.profile.phone
+  json.website @member.profile.website
+  json.job @member.profile.job
+  json.extract! @member.profile, :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
 end
 json.subscribed_plan do
   json.partial! 'api/shared/plan', plan: @member.subscribed_plan

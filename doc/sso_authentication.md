@@ -98,27 +98,27 @@ Finally you have to create an admin interface with AngularJS:
 - **app/assets/javascript/controllers/admin/authentifications.coffee**
 
 
-    ## list of supported authentication methods
-    METHODS = {
-      ...
-      'LdapProvider' : 'LDAP' # add the name of your ActiveRecord model class here as a hash key, associated with a human readable name as a hash value (string) 
-    }
+        ## list of supported authentication methods
+        METHODS = {
+          ...
+          'LdapProvider' : 'LDAP' # add the name of your ActiveRecord model class here as a hash key, associated with a human readable name as a hash value (string) 
+        }
     
-    Application.Controllers.controller "newAuthentificationController", ...
-    
-    $scope.updateProvidable = -> 
-      ...
-      if $scope.provider.providable_type == 'LdapProvider'
-        # you may want to do some stuff to initialize your provider here
+        Application.Controllers.controller "newAuthentificationController", ...
         
-    $scope.registerProvider = ->
-      ...
-      # === LdapProvider ===
-      else if $scope.provider.providable_type == 'LdapProvider'
-        # here you may want to do some data validation
-        # then: save the settings
-        AuthProvider.save auth_provider: $scope.provider, (provider) ->
-          # register was a success, display a message, redirect, etc.
+        $scope.updateProvidable = -> 
+          ...
+          if $scope.provider.providable_type == 'LdapProvider'
+            # you may want to do some stuff to initialize your provider here
+            
+        $scope.registerProvider = ->
+          ...
+          # === LdapProvider ===
+          else if $scope.provider.providable_type == 'LdapProvider'
+            # here you may want to do some data validation
+            # then: save the settings
+            AuthProvider.save auth_provider: $scope.provider, (provider) ->
+              # register was a success, display a message, redirect, etc.
           
 And to include this interface into the existing one ( **app/assets/templates/admin/authentifications/edit.html.erb**)
 

@@ -17,7 +17,8 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 6. [ElasticSearch](#elasticsearch)<br/>
 6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
 6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
-6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)
+6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)<br/>
+6.4. [Backup and Restore](#backup-and-restore-elasticsearch)
 7. [Internationalization (i18n)](#i18n)<br/>
 7.1. [Translation](#i18n-translation)<br/>
 7.1.1. [Front-end translations](#i18n-translation-front)<br/>
@@ -26,8 +27,9 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 7.2.1. [Settings](#i18n-settings)<br/>
 7.2.2. [Applying changes](#i18n-apply)
 8. [Open Projects](#open-projects)
-9. [Known issues](#known-issues)
-10. [Related Documentation](#related-documentation)
+9. [Plugins](#plugins)
+10. [Known issues](#known-issues)
+11. [Related Documentation](#related-documentation)
 
 
 
@@ -398,6 +400,14 @@ brew install homebrew/versions/elasticsearch17
    end
    ```
 
+<a name="backup-and-restore-elasticsearch"></a>
+### Backup and Restore
+
+To backup and restore the ElasticSearch database, use the [elasticsearch-dump](https://github.com/taskrabbit/elasticsearch-dump) tool.
+
+Dump the database with: `elasticdump --input=http://localhost:9200/stats --output=fablab_stats.json`.
+Restore it with: `elasticdump --input=fablab_stats.json --output=http://localhost:9200/stats`.
+
 <a name="i18n"></a>
 ## Internationalization (i18n)
 
@@ -541,7 +551,24 @@ To start using this awesome feature, there are a few steps:
 - start your fab-manager app
 - export your projects to open-projects (if you already have projects created on your fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
 
+**IMPORTANT: please run your server in production mode.**
+
 Go to your projects gallery and enjoy seeing your projects available from everywhere ! That's all.
+
+<a name="plugins"></a>
+## Plugins
+
+Fab-manager has a system of plugins mainly inspired by [Discourse](https://github.com/discourse/discourse) architecture.
+
+It enables you to write plugins which can:
+- have its proper models and database tables
+- have its proper assets (js & css)
+- override existing behaviours of Fab-manager
+- add features by adding views, controllers, ect...
+
+To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
+
+You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification)
 
 <a name="known-issues"></a>
 ## Known issues
@@ -580,6 +607,12 @@ Go to your projects gallery and enjoy seeing your projects available from everyw
         ALTER ROLE sleede WITH SUPERUSER;
 
  DO NOT do this in a production environment, as this would lead to a serious security issue.
+
+- Using another DBMS than PostgreSQL is not supported, because of some PostgreSQL specific instructions:
+  - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
+  - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
+  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
+  - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
 
 <a name="related-documentation"></a>
 ## Related Documentation

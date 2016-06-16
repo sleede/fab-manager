@@ -215,3 +215,69 @@ docker run --restart=always -d --name=fabmanager \
 
 `docker exec -it fabmanager-app bash`
 
+
+
+
+### Docker Compose
+
+#### download docker compose https://github.com/docker/compose/releases
+
+```bash
+curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > ./docker-compose
+sudo mkdir -p /opt/bin
+sudo mv docker-compose /opt/bin/
+sudo chmod +x /opt/bin/docker-compose
+```
+
+#### Setup folders and env file
+
+```bash
+mkdir -p /home/core/fabmanager/config
+```
+
+Copy the previously customized `env` file as `/home/core/fabmanager/config/env`.
+
+```bash
+mkdir -p /home/core/fabmanager/config/nginx
+```
+
+Copy the previously customized `nginx.conf` as `/home/core/fabmanager/config/nginx/fabmanager.conf`.
+
+#### copy docker-compose.yml to /home/core/
+
+#### pull images
+
+`docker-compose pull`
+
+#### create/migrate/seed db
+
+`docker-compose run --rm fabmanager bundle exec rake db:setup`
+
+#### build assets
+
+`docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+
+#### PREPARE ELASTIC
+`docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
+
+#### run create and run all services
+
+`docker-compose up -d`
+
+#### restart all services
+
+`docker-compose restart`
+
+#### show services status
+
+`docker-compose ps`
+
+#### update service fabmanager, rebuild assets and restart fabmanager
+
+```bash
+docker-compose pull fabmanager
+docker-compose stop fabmanager
+sudo rm -rf fabmanager/public/assets
+docker-compose run --rm fabmanager bundle exec rake assets:precompile
+docker-compose start fabmanager
+```

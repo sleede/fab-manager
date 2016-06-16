@@ -23,8 +23,11 @@ en:
         an_unexpected_error_occurred_check_your_authentication_code: "An unexpected error occurred, please check your authentication code."
 
       dashboard:
+        # dashboard: public profile
         profile:
-          # dashboard: my profile
+          empty: ''
+        settings:
+          # dashboard: edit my profile
           last_activity_on_: "Last activity on"
           i_want_to_change_group: "I want to change group!"
           your_subscription_expires_on_: "Your subscription expires on"
@@ -69,18 +72,12 @@ en:
       members_show:
         # public profil of a member
         members_list: "Members list"
-        last_activity_: "Last activity"
-        _on_: "on"
-        to_come: "to come"
-        approved: "approved"
-        projects: "Projects"
-        no_projects: "No projects"
-        author: "Author"
-        collaborator: "Collaborator"
 
       members:
         # list of members accepting to be contacted
         the_fablab_members: "The Fab Lab members"
+        display_more_members: "Display more members..."
+        no_members_for_now: "No members for now"
         avatar: "Avatar"
 
       projects_new:

@@ -10,4 +10,8 @@ class InvoicePolicy < ApplicationPolicy
   def create?
     user.is_admin?
   end
+
+  def list?
+    user.is_admin?
+  end
 end

@@ -104,6 +104,8 @@ en:
         confirmation_mismatch_with_password: "Confirmation mismatch with password."
         date_of_birth: "Date of birth"
         date_of_birth_is_required: "Date of birth is required."
+        website: "Website"
+        job: "Occupation"
 
       project:
         # project edition form
@@ -144,6 +146,7 @@ en:
       member_select:
         # admin: choose a member to interact with
         select_a_member: "Select a member"
+        start_typing: "Start typing..."
         please_select_a_member_first: "Please select a member first"
 
       stripe:
@@ -267,3 +270,15 @@ en:
         machine_reservation: "Machine reservation"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "You must wait for your training is being validated by the FabLab team to book this machine."
         your_training_will_occur_: "Your training will occur"
+
+      public_profile:
+        # user public profile
+        last_activity_: "Last activity"
+        _on_: "on"
+        to_come: "to come"
+        approved: "approved"
+        projects: "Projects"
+        no_projects: "No projects"
+        author: "Author"
+        collaborator: "Collaborator"
+        private_profile: "Private profile"

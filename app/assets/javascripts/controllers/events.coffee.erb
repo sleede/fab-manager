@@ -157,9 +157,6 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           $scope.reserve.toReserve = !$scope.reserve.toReserve
           if user.role isnt 'admin'
             $scope.ctrl.member = user
-          else
-            Member.query (members) ->
-              $scope.members = members
       else
         $scope.reserve.toReserve = !$scope.reserve.toReserve
 
@@ -173,7 +170,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     resetEventReserve()
     $scope.reserveSuccess = false
     if $scope.ctrl.member
-      getReservations($scope.event.id, 'Event', $scope.ctrl.member.id)
+      Member.get {id: $scope.ctrl.member.id}, (member) ->
+        $scope.ctrl.member = member
+        getReservations($scope.event.id, 'Event', $scope.ctrl.member.id)
 
 
 
@@ -323,9 +322,6 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     if $scope.currentUser
       if $scope.currentUser.role isnt 'admin'
         $scope.ctrl.member = $scope.currentUser
-      else
-        Member.query (members) ->
-          $scope.members = members
 
     # check that the event's reduced rate is initialized
     if !$scope.event.reduced_amount

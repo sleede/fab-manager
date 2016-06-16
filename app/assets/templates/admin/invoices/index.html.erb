@@ -26,7 +26,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon" translate>{{ 'invoice_#_' }}</span>
-                  <input type="text" ng-model="searchInvoice.reference" class="form-control" placeholder="">
+                  <input type="text" ng-model="searchInvoice.reference" class="form-control" placeholder="" ng-change="handleFilterChange()">
                 </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon" translate>{{ 'customer_' }}</span>
-                  <input type="text" ng-model="searchInvoice.name" class="form-control" placeholder="">
+                  <input type="text" ng-model="searchInvoice.name" class="form-control" placeholder="" ng-change="handleFilterChange()">
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">{{ "date_" | translate }}</span>
-                  <input type="date" ng-model="searchInvoice.date" class="form-control">
+                  <input type="date" ng-model="searchInvoice.date" class="form-control" ng-change="handleFilterChange()">
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
     		        </tr>
     		        </thead>
     		        <tbody>
-    		        <tr ng-repeat="invoice in invoices | filter:searchInvoice | orderBy:orderInvoice">
+    		        <tr ng-repeat="invoice in invoices">
     		          <td>{{ invoice.reference }}</td>
     		          <td ng-if="!invoice.is_avoir">{{ invoice.date | amDateFormat:'L LTS' }}</td>
     		          <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
@@ -91,6 +91,9 @@
     		        </tr>
     		        </tbody>
     		      </table>
+              <div class="text-center">
+                <button class="btn btn-warning" ng-click="showNextInvoices()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_invoices' | translate }}</button>
+              </div>
     		      <p ng-if="invoices.length == 0" translate>{{ 'no_invoices_for_now' }}</p>
 
     		    </div>

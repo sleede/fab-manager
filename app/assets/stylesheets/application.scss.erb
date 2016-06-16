@@ -34,3 +34,8 @@
 @import "modules/invoice";
 
 @import "app.responsive";
+
+<% PluginRegistry.stylesheets.each do |stylesheet| %>
+  <% basename = File.basename(stylesheet,'.scss') %>
+  <%= "@import '#{basename}';" %>
+<% end %>
