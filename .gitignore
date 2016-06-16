@@ -32,5 +32,6 @@
 .DS_Store
 
 .vagrant
+.docker
 
 /plugins/*
