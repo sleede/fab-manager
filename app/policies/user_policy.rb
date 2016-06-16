@@ -4,7 +4,7 @@ class UserPolicy < ApplicationPolicy
       if user.is_admin?
         scope.includes(:group, :training_credits, :machine_credits, :subscriptions => [:plan => [:credits]], :profile => [:user_avatar]).joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'").order('users.created_at desc')
       else
-        scope.includes(:group, :training_credits, :machine_credits, :profile => [:user_avatar]).joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'").where(is_allow_contact: true).order('users.created_at desc')
+        scope.includes(:profile => [:user_avatar]).joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'").where(is_allow_contact: true).order('users.created_at desc')
       end
     end
   end
@@ -33,7 +33,4 @@ class UserPolicy < ApplicationPolicy
     user.is_admin?
   end
 
-  def search?
-    user.is_admin?
-  end
 end
