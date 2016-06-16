@@ -221,7 +221,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'MembersController'
         resolve:
           membersPromise: ['Member', (Member)->
-            Member.query({requested_attributes:'[profile]'}).$promise
+            Member.query({requested_attributes:'[profile]', page: 1, size: 10}).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.logged.members').$promise

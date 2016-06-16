@@ -8,6 +8,7 @@
 - Project collaborators selection is now using a list dynamically loaded as you type 
 - Admin: select a training before monitoring its reservations -> improves page load time
 - API: GET /api/trainings do not load nor send the associated availabilities until they are requested
+- List of members is now loaded 10 members by 10, to improve page load time
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
 - [TODO DEPLOY] `bundle install` and `rake db:migrate`
 

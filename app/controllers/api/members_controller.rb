@@ -6,6 +6,10 @@ class API::MembersController < API::ApiController
   def index
     @requested_attributes = params[:requested_attributes]
     @members = policy_scope(User)
+
+    unless params[:page].nil? and params[:size].nil?
+      @members = @members.page(params[:page].to_i).per(params[:size].to_i)
+    end
   end
 
   def last_subscribed

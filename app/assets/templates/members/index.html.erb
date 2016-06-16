@@ -48,6 +48,10 @@
           </tr>
         </tbody>
       </table>
+      <div class="text-center">
+        <button class="btn btn-warning" ng-click="showNextMembers()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_members' | translate }}</button>
+      </div>
+      <p ng-if="members.length == 0" translate>{{ 'no_members_for_now' }}</p>
     </div>
   </div>
 </section>

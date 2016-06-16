@@ -76,6 +76,8 @@ en:
       members:
         # list of members accepting to be contacted
         the_fablab_members: "The Fab Lab members"
+        display_more_members: "Display more members..."
+        no_members_for_now: "No members for now"
         avatar: "Avatar"
 
       projects_new:
