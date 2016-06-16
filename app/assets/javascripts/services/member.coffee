@@ -19,7 +19,7 @@ Application.Services.factory 'Member', ["$resource", ($resource)->
       isArray: true
     search:
       method: 'GET'
-      url: '/api/members/search/:query/:subscription'
-      params: {query: "@query", subscription: "@subscription"}
+      url: '/api/members/search/:query'
+      params: {query: "@query"}
       isArray: true
 ]

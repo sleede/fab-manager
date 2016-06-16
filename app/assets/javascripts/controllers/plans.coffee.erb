@@ -35,7 +35,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ## plan to subscribe (shopping cart)
     $scope.selectedPlan = null
 
-    ##
+    ## text that appears in the bottom-right box of the page (subscriptions rules details)
     $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value
 
     ##
@@ -146,12 +146,6 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           $scope.ctrl.member = $scope.currentUser
           $scope.paidPlan = $scope.currentUser.subscribed_plan
           $scope.group.id = $scope.currentUser.group_id
-        else
-          Member.query {requested_attributes:'[subscription]'}, (members) ->
-            membersNoPlan = []
-            angular.forEach members, (v)->
-              membersNoPlan.push v unless v.subscribed_plan
-            $scope.members = membersNoPlan
 
       $scope.$on 'devise:new-session', (event, user)->
         $scope.ctrl.member = user
