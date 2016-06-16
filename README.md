@@ -595,8 +595,8 @@ Go to your projects gallery and enjoy seeing your projects available from everyw
 - Using another DBMS than PostgreSQL is not supported, because of some PostgreSQL specific instructions:
   - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
   - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
-  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules 
-  - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` defined in the migration above
+  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`) 
+  - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
 
 <a name="related-documentation"></a>
 ## Related Documentation

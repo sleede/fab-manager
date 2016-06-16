@@ -24,7 +24,7 @@
 #  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
 ##
 class ProjectsController
-  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)->
+  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)->
 
     ## Retrieve the list of machines from the server
     Machine.query().$promise.then (data)->
@@ -138,6 +138,17 @@ class ProjectsController
         step._destroy = true
       else
         $scope.project.project_steps_attributes.splice(index, 1)
+
+
+    $scope.autoCompleteName = (nameLookup) ->
+      unless nameLookup
+        return
+      asciiName = Diacritics.remove(nameLookup)
+
+      Member.search { query: asciiName }, (users) ->
+        $scope.matchingMembers = users
+      , (error)->
+        console.error(error)
 
 
 
@@ -275,8 +286,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
 ##
 # Controller used in the project creation page
 ##
-Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF'
-, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF) ->
+Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics'
+, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -290,16 +301,10 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
     project_steps_attributes: []
     project_caos_attributes: []
 
-  ## Other members list (project collaborators)
-  Member.query().$promise.then (data)->
-    $scope.members = data.filter (m) ->
-      m.id != $scope.currentUser.id
-    .map (d) ->
-      id: d.id
-      name: d.name
+  $scope.matchingMembers = []
 
   ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)
 ]
 
 
@@ -307,8 +312,8 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
 ##
 # Controller used in the project edition page
 ##
-Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise'
-, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise) ->
+Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics'
+, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -320,16 +325,12 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
   ## Retrieve the project's details, if an error occured, redirect the user to the projects list page
   $scope.project = projectPromise
 
-  ## Other members list (project collaborators)
-  Member.query().$promise.then (data)->
-    $scope.members = data.filter (m) ->
-      m.id != $scope.project.author_id
-    .map (d) ->
-      id: d.id
-      name: d.name
+  $scope.matchingMembers = $scope.project.project_users.map (u) ->
+    id: u.id
+    name: u.full_name
 
-  ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document)
+    ## Using the ProjectsController
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)
 ]
 
 

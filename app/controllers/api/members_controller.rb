@@ -180,7 +180,6 @@ class API::MembersController < API::ApiController
   end
 
   def search
-    authorize User
 
     if params[:subscription]
       subscription = (params[:subscription] === 'true')
@@ -189,12 +188,18 @@ class API::MembersController < API::ApiController
     @members = User.includes(:profile)
                .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
                .where("users.is_active = 'true' AND roles.name = 'member'")
-               .where("lower(f_unaccent(profiles.first_name)) LIKE ('%' || lower(f_unaccent(:search)) || '%') OR lower(f_unaccent(profiles.last_name)) LIKE ('%' || lower(f_unaccent(:search)) || '%')", search: params[:query])
+               .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
 
-    if params[:subscription] === 'true'
-      @members = @members.where('subscriptions.id IS NOT NULL AND subscriptions.expired_at >= :now', now: Date.today.to_s)
-    elsif params[:subscription] === 'false'
-      @members = @members.where('subscriptions.id IS NULL OR subscriptions.expired_at < :now',  now: Date.today.to_s)
+    if current_user.is_member?
+      # non-admin can only retrieve users with "public profiles"
+      @members = @members.where("users.is_allow_contact = 'true'")
+    else
+      # only admins have the ability to filter by subscription
+      if params[:subscription] === 'true'
+        @members = @members.where('subscriptions.id IS NOT NULL AND subscriptions.expired_at >= :now', now: Date.today.to_s)
+      elsif params[:subscription] === 'false'
+        @members = @members.where('subscriptions.id IS NULL OR subscriptions.expired_at < :now',  now: Date.today.to_s)
+      end
     end
 
     @members

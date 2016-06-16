@@ -171,7 +171,7 @@
                 <span ng-bind="$item.name"></span>
                 <input type="hidden" name="project[user_ids][]" value="{{$item.id}}" />
             </ui-select-match>
-            <ui-select-choices repeat="m.id as m in (members | filter: $select.search)">
+            <ui-select-choices repeat="m.id as m in matchingMembers" refresh="autoCompleteName($select.search)" refresh-delay="300">
                 <span ng-bind-html="m.name | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
