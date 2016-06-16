@@ -188,7 +188,7 @@ class API::MembersController < API::ApiController
     @members = User.includes(:profile)
                .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
                .where("users.is_active = 'true' AND roles.name = 'member'")
-               .where("lower(f_unaccent(profiles.first_name)) LIKE ('%' || lower(f_unaccent(:search)) || '%') OR lower(f_unaccent(profiles.last_name)) LIKE ('%' || lower(f_unaccent(:search)) || '%')", search: params[:query])
+               .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
 
     if current_user.is_member?
       # non-admin can only retrieve users with "public profiles"
