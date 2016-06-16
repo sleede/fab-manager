@@ -27,8 +27,9 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 7.2.1. [Settings](#i18n-settings)<br/>
 7.2.2. [Applying changes](#i18n-apply)
 8. [Open Projects](#open-projects)
-9. [Known issues](#known-issues)
-10. [Related Documentation](#related-documentation)
+9. [Plugins](#plugins)
+10. [Known issues](#known-issues)
+11. [Related Documentation](#related-documentation)
 
 
 
@@ -553,6 +554,21 @@ To start using this awesome feature, there are a few steps:
 **IMPORTANT: please run your server in production mode.**
 
 Go to your projects gallery and enjoy seeing your projects available from everywhere ! That's all.
+
+<a name="plugins"></a>
+## Plugins
+
+Fab-manager has a system of plugins mainly inspired by [Discourse](https://fablab.lacasemate.fr/#!/projects) architecture.
+
+It enables you to write plugins which can:
+- have its proper models and database tables
+- have its proper assets (js & css)
+- override existing behaviours of Fab-manager
+- add features by adding views, controllers, ect...
+
+To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
+
+You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification) 
 
 <a name="known-issues"></a>
 ## Known issues
