@@ -325,7 +325,9 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
   ## Retrieve the project's details, if an error occured, redirect the user to the projects list page
   $scope.project = projectPromise
 
-  $scope.matchingMembers = []
+  $scope.matchingMembers = $scope.project.project_users.map (u) ->
+    id: u.id
+    name: u.full_name
 
     ## Using the ProjectsController
   new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)
