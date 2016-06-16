@@ -399,7 +399,7 @@ brew install homebrew/versions/elasticsearch17
       StatisticService.new.generate_statistic({start_date: i.day.ago.beginning_of_day,end_date: i.day.ago.end_of_day})
    end
    ```
-   
+
 <a name="backup-and-restore-elasticsearch"></a>
 ### Backup and Restore
 
@@ -558,7 +558,7 @@ Go to your projects gallery and enjoy seeing your projects available from everyw
 <a name="plugins"></a>
 ## Plugins
 
-Fab-manager has a system of plugins mainly inspired by [Discourse](https://fablab.lacasemate.fr/#!/projects) architecture.
+Fab-manager has a system of plugins mainly inspired by [Discourse](https://github.com/discourse/discourse) architecture.
 
 It enables you to write plugins which can:
 - have its proper models and database tables
@@ -568,7 +568,7 @@ It enables you to write plugins which can:
 
 To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
 
-You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification) 
+You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification)
 
 <a name="known-issues"></a>
 ## Known issues
@@ -611,7 +611,7 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
 - Using another DBMS than PostgreSQL is not supported, because of some PostgreSQL specific instructions:
   - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
   - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
-  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`) 
+  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
   - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
 
 <a name="related-documentation"></a>
