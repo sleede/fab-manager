@@ -14,3 +14,5 @@ generate_statistic:
   cron: "0 1 * * *"
   class: "StatisticWorker"
   queue: default
+
+<%= PluginRegistry.insert_code('yml.schedule') %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613093842) do
+ActiveRecord::Schema.define(version: 20160526102307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -269,6 +269,24 @@ ActiveRecord::Schema.define(version: 20160613093842) do
 
   add_index "offer_days", ["subscription_id"], name: "index_offer_days_on_subscription_id", using: :btree
 
+  create_table "open_api_calls_count_tracings", force: :cascade do |t|
+    t.integer  "open_api_client_id"
+    t.integer  "calls_count",        null: false
+    t.datetime "at",                 null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "open_api_calls_count_tracings", ["open_api_client_id"], name: "index_open_api_calls_count_tracings_on_open_api_client_id", using: :btree
+
+  create_table "open_api_clients", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "calls_count", default: 0
+    t.string   "token"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "plans", force: :cascade do |t|
     t.string   "name",               limit: 255
     t.integer  "amount"
@@ -368,7 +386,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "published_at"
   end
 
-  add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
+  add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
 
   create_table "projects_components", force: :cascade do |t|
     t.integer "project_id"
@@ -661,6 +679,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
+  add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
   add_foreign_key "user_tags", "tags"
