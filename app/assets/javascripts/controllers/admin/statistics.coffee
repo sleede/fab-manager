@@ -5,6 +5,16 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
+  ### PRIVATE STATIC CONSTANTS ###
+
+  ## search window size
+  RESULTS_PER_PAGE = 10
+
+  ## keep search context for (delay in minutes) ...
+  ES_SCROLL_TIME = 1
+
+
+
   ### PUBLIC SCOPE ###
 
   ## ui-view transitions optimization: if true, the stats will never be refreshed
@@ -18,6 +28,15 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
   ## statistics data recovered from elasticSearch
   $scope.data = null
+
+  ## when did the search was triggered
+  $scope.searchDate = null
+
+  ## id of the elastic search context
+  $scope.scrollId = null
+
+  ## total number of results for the current query
+  $scope.totalHits = null
 
   ## configuration of the widget allowing to pick the ages range
   $scope.agePicker =
@@ -231,6 +250,22 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       return "ID "+id
 
 
+  $scope.showMoreResults = ->
+    if moment($scope.searchDate).add(ES_SCROLL_TIME, 'minutes').isBefore(moment())
+      # elastic search context has expired, so we run again the whole query
+      refreshStats()
+    else
+      es.search
+        "size": RESULTS_PER_PAGE
+        "scroll": ES_SCROLL_TIME+'m'
+        "body": $scope.scrollId
+      , (error, response) ->
+        if (error)
+          console.error "Error: something unexpected occurred during elasticSearch scroll query: "+error
+        else
+          $scope.data = $scope.data.concat(response.hits.hits)
+
+
 
   ### PRIVATE SCOPE ###
 
@@ -273,6 +308,8 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       $scope.sumCA = 0
       $scope.averageAge = 0
       $scope.sumStat = 0
+      $scope.totalHits = null
+      $scope.searchDate = new Date()
       custom = null
       if $scope.customFilter.criterion and $scope.customFilter.criterion.key and $scope.customFilter.value
         custom = {}
@@ -283,22 +320,12 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
         if (err)
           console.error("[statisticsController::refreshStats] Unable to refresh due to "+err)
         else
-          $scope.data = res.hits
-          sumCA = 0
-          sumAge = 0
-          sumStat = 0
-          if $scope.data.length > 0
-            angular.forEach $scope.data, (datum) ->
-              if datum._source.ca
-                sumCA += parseInt(datum._source.ca)
-              if datum._source.age
-                sumAge += parseInt(datum._source.age)
-              if datum._source.stat
-                sumStat += parseInt(datum._source.stat)
-            sumAge /= $scope.data.length
-          $scope.sumCA = sumCA
-          $scope.averageAge = Math.round(sumAge*100)/100
-          $scope.sumStat = sumStat
+          $scope.data = res.hits.hits
+          $scope.totalHits = res.hits.total
+          $scope.sumCA = res.aggregations.total_ca.value
+          $scope.averageAge = Math.round(res.aggregations.average_age.value * 100) / 100
+          $scope.sumStat = res.aggregations.total_stat.value
+          $scope.scrollId = res._scroll_id
 
 
 
@@ -308,7 +335,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   # @param type {String} statistics type (month|year|booking|hour|user|project)
   # @param custom {{key:{string}, value:{string}}|null} custom filter property or null to disable this filter
   # @param callback {function} function be to run after results were retrieved, it will receive
-  #   two parameters : results {Array}, error {String} (if any)
+  #   two parameters : results {Object}, error {String} (if any)
   ##
   queryElasticStats = (index, type, custom, callback) ->
     # handle invalid callback
@@ -320,13 +347,14 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     es.search
       "index": "stats"
       "type": index
-      "size": 1000000000
+      "size": RESULTS_PER_PAGE
+      "scroll": ES_SCROLL_TIME+'m'
       "body": buildElasticDataQuery(type, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
     , (error, response) ->
       if (error)
-        callback([], "Error: something unexpected occurred during elasticSearch query: "+error)
+        callback({}, "Error: something unexpected occurred during elasticSearch query: "+error)
       else
-        callback(response.hits)
+        callback(response)
 
 
 
@@ -392,6 +420,19 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
     if sortings
       q["sort"] = buildElasticSortCriteria(sortings)
+
+    # aggregations (avg age & CA sum)
+    q["aggs"] = {
+      "total_ca":
+        "sum":
+          "field": "ca"
+      "average_age":
+        "avg":
+          "field": "age"
+      "total_stat":
+        "sum":
+          "field": "sta"
+    }
     q
 
 
