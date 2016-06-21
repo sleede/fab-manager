@@ -86,6 +86,8 @@ fr:
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
+        illustration: "Visuel"
+        add_an_illustration: "Ajouter un visuel"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
@@ -129,8 +131,6 @@ fr:
       machine:
         # formulaire d'édition d'une machine
         name_is_required: "Le nom est requis."
-        illustration: "Visuel"
-        add_an_illustration: "Ajouter un visuel"
         description_is_required: "La description est requise."
         technical_specifications_are_required: "Les caractéristiques techniques sont requises."
         attached_files_(pdf): "Pièces jointes (pdf)"
@@ -210,6 +210,11 @@ fr:
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
         new_partner: "Nouveau partenaire"
         email_address_is_required: "L'adresse e-mail est requise."
+
+      trainings:
+        # formulaire d'édition d'une formation
+        add_a_new_training: "Ajouter une nouvelle formation"
+        validate_your_training: "Valider votre formation"
 
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)

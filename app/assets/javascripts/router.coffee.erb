@@ -521,7 +521,7 @@ angular.module('application.router', ['ui.router']).
             Machine.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.admin.trainings').$promise
+            Translations.query(['app.admin.trainings', 'app.shared.trainings']).$promise
           ]
       .state 'app.admin.trainings_new',
         url: '/admin/trainings/new'
@@ -544,7 +544,7 @@ angular.module('application.router', ['ui.router']).
             Training.get(id: $stateParams.id).$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.admin.trainings_edit', 'app.shared.trainings']).$promise
+            Translations.query('app.shared.trainings').$promise
           ]
       # events
       .state 'app.admin.events',

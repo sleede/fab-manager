@@ -23,7 +23,7 @@
                 <ng-include src="'<%= asset_path 'admin/plans/_form.html' %>'"></ng-include>
 
                 <div class="panel-footer no-padder">
-                    <input type="submit" value="Enregistrer" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid || !partnerIsValid()"/>
+                    <input type="submit" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid || !partnerIsValid()"/>
                 </div>
 
             </form>

@@ -46,9 +46,6 @@ en:
 
       trainings:
         # track and monitor the trainings
-        add_a_new_training: "Add a new training"
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
         training: "Training"
@@ -67,6 +64,11 @@ en:
         description_was_successfully_saved: "Description was successfully saved."
         training_successfully_deleted: "Training successfully deleted."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Unable to delete the training because some users already booked it."
+
+      trainings_new:
+        # create a new training
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
 
       events:
         # courses and workshops tracking and management

@@ -16,6 +16,17 @@ Application.Controllers.controller "NewTrainingController", [ '$scope', ($scope)
 
   ## API URL where the form will be posted
   $scope.actionUrl = '/api/trainings'
+
+  ##
+  # For use with 'ng-class', returns the CSS class name for the uploads previews.
+  # The preview may show a placeholder or the content of the file depending on the upload state.
+  # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+  ##
+  $scope.fileinputClass = (v)->
+    if v
+      'fileinput-exists'
+    else
+      'fileinput-new'
 ]
 
 
@@ -37,6 +48,17 @@ Application.Controllers.controller "EditTrainingController", [ '$scope', '$state
 
   ## Details of the training to edit (id in URL)
   $scope.training = trainingPromise
+
+  ##
+  # For use with 'ng-class', returns the CSS class name for the uploads previews.
+  # The preview may show a placeholder or the content of the file depending on the upload state.
+  # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+  ##
+  $scope.fileinputClass = (v)->
+    if v
+      'fileinput-exists'
+    else
+      'fileinput-new'
 ]
 
 

@@ -86,6 +86,8 @@ en:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
+        illustration: "Illustration"
+        add_an_illustration: "Add an illustration."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -129,8 +131,6 @@ en:
       machine:
         # machine edition form
         name_is_required: "The name is required."
-        illustration: "Illustration"
-        add_an_illustration: "Add an illustration."
         description_is_required: "Description is required."
         technical_specifications_are_required: "Technical specifications are required."
         attached_files_(pdf): "Attached files (pdf)"
@@ -210,6 +210,11 @@ en:
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "As part of a partner subscription, some notifications may be sent to this user."
         new_partner: "New partner"
         email_address_is_required: "Email address is required."
+
+      trainings:
+        # training edition form
+        add_a_new_training: "Add a new training"
+        validate_your_training: "Validate your training"
 
       user_admin:
         # partial form to edit/create an user (admin view)
