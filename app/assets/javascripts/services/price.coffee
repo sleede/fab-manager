@@ -4,7 +4,7 @@ Application.Services.factory 'Price', ["$resource", ($resource)->
   $resource "/api/prices/:id",
     {},
     query:
-      isArray: false
+      isArray: true
     update:
       method: 'PUT'
     compute:
