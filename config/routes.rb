@@ -104,6 +104,7 @@ Rails.application.routes.draw do
   %w(account event machine project subscription training user).each do |path|
     post "/stats/#{path}/_search", to: "api/statistics##{path}"
   end
+  post '_search/scroll', to: "api/statistics#scroll"
 
   match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
 

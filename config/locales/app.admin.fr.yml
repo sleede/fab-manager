@@ -388,6 +388,7 @@ fr:
         revenue: "Chiffre d'affaires"
         unknown: "Inconnu"
         user_id: "ID Utilisateur"
+        display_more_results: "Afficher plus de résultats"
 
 
       stats_graphs:

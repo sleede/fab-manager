@@ -229,7 +229,7 @@
 
           <div id="totaux">
             <ul>
-              <li>{{ 'entries' | translate }} {{data.length}}</li>
+              <li>{{ 'entries' | translate }} {{totalHits}}</li>
               <li ng-show="selectedIndex.ca">{{ 'revenue_' | translate }} {{sumCA | currency}}</li>
               <li>{{ 'average_age' | translate }} {{averageAge}} {{ 'years_old' | translate }}</li>
               <li ng-if="!type.active.simple">{{ 'total' | translate }} {{type.active.label}} : {{sumStat}}</li>
@@ -279,7 +279,7 @@
             </tbody>
           </table>
           <div class="text-center">
-            <button class="btn btn-warning" ng-click="showMoreResults()" ng-hide="member.noMore"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_results' | translate }}</button>
+            <button class="btn btn-warning" ng-click="showMoreResults()" ng-hide="data && data.length >= totalHits"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_results' | translate }}</button>
           </div>
         </uib-tab>
       </uib-tabset>

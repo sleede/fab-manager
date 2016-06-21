@@ -16,4 +16,12 @@ class API::StatisticsController < API::ApiController
       end
     }
   end
+
+  def scroll
+    authorize :statistic, :scroll?
+
+    results = Elasticsearch::Client.new.scroll scroll: params[:scroll], scroll_id: params[:scrollId]
+    render json: results
+  end
+
 end

@@ -8,7 +8,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ### PRIVATE STATIC CONSTANTS ###
 
   ## search window size
-  RESULTS_PER_PAGE = 10
+  RESULTS_PER_PAGE = 20
 
   ## keep search context for (delay in minutes) ...
   ES_SCROLL_TIME = 1
@@ -250,19 +250,28 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       return "ID "+id
 
 
+
+  ##
+  # Run a scroll query to elasticsearch to append the next packet of results to those displayed.
+  # If the ES search context has expired when the user ask for more results, we re-run the whole query.
+  ##
   $scope.showMoreResults = ->
+    # if all results were retrieved, do nothing
+    if $scope.data.length >= $scope.totalHits
+      return
+
     if moment($scope.searchDate).add(ES_SCROLL_TIME, 'minutes').isBefore(moment())
       # elastic search context has expired, so we run again the whole query
       refreshStats()
     else
-      es.search
-        "size": RESULTS_PER_PAGE
+      es.scroll
         "scroll": ES_SCROLL_TIME+'m'
-        "body": $scope.scrollId
+        "body": {scrollId: $scope.scrollId}
       , (error, response) ->
         if (error)
           console.error "Error: something unexpected occurred during elasticSearch scroll query: "+error
         else
+          $scope.scrollId = response._scroll_id
           $scope.data = $scope.data.concat(response.hits.hits)
 
 
