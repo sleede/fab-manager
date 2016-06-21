@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", "Statistics", "es", "Member", '_t'
-, ($scope, $state, $rootScope, Statistics, es, Member, _t) ->
+Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", "Statistics", "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
+, ($scope, $state, $rootScope, Statistics, es, Member, _t, membersPromise, statisticsPromise) ->
 
 
 
@@ -21,10 +21,10 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   $scope.preventRefresh = false
 
   ## statistics structure in elasticSearch
-  $scope.statistics = []
+  $scope.statistics = statisticsPromise
 
   ## fablab users list
-  $scope.members = []
+  $scope.members = membersPromise
 
   ## statistics data recovered from elasticSearch
   $scope.data = null
@@ -241,13 +241,10 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   # @param id {number} user ID
   ##
   $scope.getUserNameFromId = (id) ->
-    if $scope.members.length == 0
-      return "ID "+id
-    else
-      for member in $scope.members
-        if member.id == id
-          return member.name
-      return "ID "+id
+    name = $scope.members[id]
+    if name
+      return name
+    else "ID "+id
 
 
 
@@ -282,12 +279,6 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    Statistics.query (stats) ->
-      $scope.statistics = stats
-
-    Member.query (members) ->
-      $scope.members = members
-
     # workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
     # which will cause every tabs to reload, one by one, when the view is closed
     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->

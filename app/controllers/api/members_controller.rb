@@ -204,6 +204,12 @@ class API::MembersController < API::ApiController
     @members
   end
 
+  def mapping
+    authorize User
+
+    @members = User.includes(:profile)
+  end
+
   private
     def set_member
       @member = User.find(params[:id])

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       put ':id/merge', action: 'merge', on: :collection
       post 'list', action: 'list', on: :collection
       get 'search/:query', action: 'search', on: :collection
+      get 'mapping', action: 'mapping', on: :collection
     end
     resources :reservations, only: [:show, :create, :index, :update]
     resources :notifications, only: [:index, :show, :update] do
