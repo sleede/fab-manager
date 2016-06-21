@@ -49,9 +49,10 @@ class API::AvailabilitiesController < API::ApiController
     else
       @user = current_user
     end
+    current_user_role = current_user.is_admin? ? 'admin' : 'user'
     @machine = Machine.find(params[:machine_id])
     @slots = []
-    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id).joins(:slots).where('slots.start_at > ?', Time.now)
+    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id).includes(:slots, :user).references(:slots, :user).where('slots.start_at > ?', Time.now)
     if @user.is_admin?
       @availabilities = @machine.availabilities.where("end_at > ? AND available_type = 'machines'", Time.now)
     else
@@ -62,8 +63,8 @@ class API::AvailabilitiesController < API::ApiController
     @availabilities.each do |a|
       ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
         if (a.start_at + (i * SLOT_DURATION).minutes) > Time.now
-          slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, machine: @machine, title: '')
-          slot = verify_machine_is_reserved(slot, @reservations)
+          slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: @machine, title: '')
+          slot = verify_machine_is_reserved(slot, @reservations, current_user, current_user_role)
           @slots << slot
         end
       end
@@ -115,15 +116,14 @@ class API::AvailabilitiesController < API::ApiController
       is_reserved
     end
 
-    def verify_machine_is_reserved(slot, reservations)
-      user = current_user
+    def verify_machine_is_reserved(slot, reservations, user, user_role)
       reservations.each do |r|
         r.slots.each do |s|
           if s.start_at == slot.start_at and s.canceled_at == nil
             slot.id = s.id
             slot.is_reserved = true
             slot.title = t('availabilities.not_available')
-            slot.can_modify = true if user.is_admin?
+            slot.can_modify = true if user_role === 'admin'
             slot.reservation = r
           end
           if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
