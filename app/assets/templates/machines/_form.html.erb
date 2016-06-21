@@ -10,7 +10,7 @@
     <div class="form-group m-b-lg" ng-class="{'has-error': machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$invalid}">
       <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
       <div class="col-sm-4">
-        <input ng-model="machine.name" type="text" name="machine[name]" class="form-control" id="machine_name" placeholder="Nom :" required>
+        <input ng-model="machine.name" type="text" name="machine[name]" class="form-control" id="machine_name" placeholder="{{'name' | translate}}" required>
         <span class="help-block" ng-show="machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
       </div>
     </div>

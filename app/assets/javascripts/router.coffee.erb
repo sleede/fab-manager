@@ -523,7 +523,29 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.trainings').$promise
           ]
-
+      .state 'app.admin.trainings_new',
+        url: '/admin/trainings/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/trainings/new.html" %>'
+            controller: 'NewTrainingController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise
+          ]
+      .state 'app.admin.trainings_edit',
+        url: '/admin/trainings/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/trainings/edit.html" %>'
+            controller: 'EditTrainingController'
+        resolve:
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+            Training.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.trainings_edit', 'app.shared.trainings']).$promise
+          ]
       # events
       .state 'app.admin.events',
         url: '/admin/events'
