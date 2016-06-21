@@ -242,9 +242,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ##
   $scope.getUserNameFromId = (id) ->
     name = $scope.members[id]
-    if name
-      return name
-    else "ID "+id
+    return (if name then name else "ID "+id)
 
 
 

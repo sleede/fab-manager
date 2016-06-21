@@ -260,7 +260,7 @@
             <tbody>
               <tr ng-repeat="datum in data">
                 <td>{{formatDate(datum._source.date)}}</td>
-                <td><a href="" ui-sref="app.logged.members_show({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
+                <td><a href="" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
                 <td>{{formatSex(datum._source.gender)}}</td>
                 <td><span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span><span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span></td>
                 <td>{{formatSubtype(datum._source.subType)}}</td>
