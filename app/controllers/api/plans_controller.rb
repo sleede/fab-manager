@@ -2,14 +2,9 @@
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @attributes_requested = params[:attributes_requested]
-    @plans = Plan.all
+    @plans = Plan.includes(:plan_file)
     @plans = @plans.where(group_id: params[:group_id]) if params[:group_id]
-    if params[:shallow]
-      render :shallow_index
-    else
-      render :index
-    end
+    render :index
   end
 
   def show

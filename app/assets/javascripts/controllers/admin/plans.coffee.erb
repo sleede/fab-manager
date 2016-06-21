@@ -175,8 +175,8 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
 ##
 # Controller used in the plan edition form
 ##
-Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', '$locale'
-, ($scope, groups, plans, planPromise, machines, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, $locale) ->
+Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', '$locale', 'Plan'
+, ($scope, groups, plans, planPromise, machines, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, $locale, Plan) ->
 
 
 
@@ -207,12 +207,13 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ##
   $scope.copyPricesFromPlan = ->
     if $scope.plan.parent
-      parentPlan = $scope.getPlanFromId($scope.plan.parent)
-      for parentPrice in parentPlan.prices
-        for childKey, childPrice of $scope.plan.prices
-          if childPrice.priceable_type == parentPrice.priceable_type and childPrice.priceable_id == parentPrice.priceable_id
-            $scope.plan.prices[childKey].amount = parentPrice.amount
-            break
+      Plan.get {id: $scope.plan.parent}, (parentPlan) ->
+        for parentPrice in parentPlan.prices
+          for childKey, childPrice of $scope.plan.prices
+            if childPrice.priceable_type == parentPrice.priceable_type and childPrice.priceable_id == parentPrice.priceable_id
+              $scope.plan.prices[childKey].amount = parentPrice.amount
+              break
+
     # if no plan were selected, unset every prices
     else
       for key, price of $scope.plan.prices
