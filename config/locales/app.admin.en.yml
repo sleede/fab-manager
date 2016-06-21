@@ -388,6 +388,7 @@ en:
         revenue: "Revenue"
         unknown: "Unknown"
         user_id: "User ID"
+        display_more_results: "Display more results"
 
 
       stats_graphs:

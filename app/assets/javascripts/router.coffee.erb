@@ -808,6 +808,12 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/statistics/index.html" %>'
             controller: 'StatisticsController'
         resolve:
+          membersPromise: ['Member', (Member) ->
+            Member.mapping().$promise
+          ]
+          statisticsPromise: ['Statistics', (Statistics)->
+            Statistics.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.statistics').$promise
           ]

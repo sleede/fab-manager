@@ -13,10 +13,6 @@ class UserPolicy < ApplicationPolicy
     user.is_admin? or (record.is_allow_contact and record.is_member?) or (user.id == record.id)
   end
 
-  def create?
-    user.is_admin?
-  end
-
   def update?
     user.is_admin? or (user.id == record.id)
   end
@@ -29,8 +25,9 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id
   end
 
-  def list?
-    user.is_admin?
+  %w(list create mapping).each do |action|
+    define_method "#{action}?" do
+      user.is_admin?
+    end
   end
-
 end

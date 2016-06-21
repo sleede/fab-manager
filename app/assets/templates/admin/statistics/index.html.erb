@@ -229,7 +229,7 @@
 
           <div id="totaux">
             <ul>
-              <li>{{ 'entries' | translate }} {{data.length}}</li>
+              <li>{{ 'entries' | translate }} {{totalHits}}</li>
               <li ng-show="selectedIndex.ca">{{ 'revenue_' | translate }} {{sumCA | currency}}</li>
               <li>{{ 'average_age' | translate }} {{averageAge}} {{ 'years_old' | translate }}</li>
               <li ng-if="!type.active.simple">{{ 'total' | translate }} {{type.active.label}} : {{sumStat}}</li>
@@ -260,7 +260,7 @@
             <tbody>
               <tr ng-repeat="datum in data">
                 <td>{{formatDate(datum._source.date)}}</td>
-                <td><a href="" ui-sref="app.logged.members_show({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
+                <td><a href="" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
                 <td>{{formatSex(datum._source.gender)}}</td>
                 <td><span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span><span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span></td>
                 <td>{{formatSubtype(datum._source.subType)}}</td>
@@ -278,6 +278,9 @@
               </tr>
             </tbody>
           </table>
+          <div class="text-center">
+            <button class="btn btn-warning" ng-click="showMoreResults()" ng-hide="data && data.length >= totalHits"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_results' | translate }}</button>
+          </div>
         </uib-tab>
       </uib-tabset>
     </div>
