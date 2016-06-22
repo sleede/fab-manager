@@ -1,35 +1,79 @@
 'use strict'
 
+### COMMON CODE ###
+
+##
+# Provides a set of common callback methods to the $scope parameter. These methods are used
+# in the various trainings' admin controllers.
+#
+# Provides :
+#  - $scope.submited(content)
+#  - $scope.fileinputClass(v)
+#
+# Requires :
+#  - $state (Ui-Router) [ 'app.admin.trainings' ]
+##
+class TrainingsController
+  constructor: ($scope, $state) ->
+
+    ##
+    # For use with ngUpload (https://github.com/twilson63/ngUpload).
+    # Intended to be the callback when the upload is done: any raised error will be stacked in the
+    # $scope.alerts array. If everything goes fine, the user is redirected to the trainings list.
+    # @param content {Object} JSON - The upload's result
+    ##
+    $scope.submited = (content) ->
+      if !content.id?
+        $scope.alerts = []
+        angular.forEach content, (v, k)->
+          angular.forEach v, (err)->
+            $scope.alerts.push
+              msg: k+': '+err
+              type: 'danger'
+      else
+        $state.go('app.admin.trainings')
+
+
+
+    ##
+    # Changes the current user's view, redirecting him to the machines list
+    ##
+    $scope.cancel = ->
+      $state.go('app.admin.trainings')
+
+
+
+    ##
+    # For use with 'ng-class', returns the CSS class name for the uploads previews.
+    # The preview may show a placeholder or the content of the file depending on the upload state.
+    # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+    ##
+    $scope.fileinputClass = (v)->
+      if v
+        'fileinput-exists'
+      else
+        'fileinput-new'
+
 
 
 ##
 # Controller used in the training creation page (admin)
 ##
-Application.Controllers.controller "NewTrainingController", [ '$scope', 'machinesPromise', ($scope, machinesPromise) ->
-
-
-
-  ### PUBLIC SCOPE ###
+Application.Controllers.controller "NewTrainingController", [ '$scope', '$state', 'machinesPromise', 'CSRF'
+, ($scope, $state, machinesPromise, CSRF) ->
+  CSRF.setMetaTags()
 
   ## Form action on the following URL
   $scope.method = 'post'
 
   ## API URL where the form will be posted
-  $scope.actionUrl = '/api/trainings'
+  $scope.actionUrl = '/api/trainings/'
 
   ## list of machines
   $scope.machines = machinesPromise
 
-  ##
-  # For use with 'ng-class', returns the CSS class name for the uploads previews.
-  # The preview may show a placeholder or the content of the file depending on the upload state.
-  # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-  ##
-  $scope.fileinputClass = (v)->
-    if v
-      'fileinput-exists'
-    else
-      'fileinput-new'
+  ## Using the TrainingsController
+  new TrainingsController($scope, $state)
 ]
 
 
@@ -37,17 +81,15 @@ Application.Controllers.controller "NewTrainingController", [ '$scope', 'machine
 ##
 # Controller used in the training edition page (admin)
 ##
-Application.Controllers.controller "EditTrainingController", [ '$scope', '$stateParams', 'trainingPromise', 'machinesPromise', ($scope, $stateParams, trainingPromise, machinesPromise) ->
-
-
-
-  ### PUBLIC SCOPE ###
+Application.Controllers.controller "EditTrainingController", [ '$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF'
+, ($scope, $state, $stateParams, trainingPromise, machinesPromise, CSRF) ->
+  CSRF.setMetaTags()
 
   ## Form action on the following URL
   $scope.method = 'put'
 
   ## API URL where the form will be posted
-  $scope.actionUrl = '/api/trainings' + $stateParams.id
+  $scope.actionUrl = '/api/trainings/' + $stateParams.id
 
   ## Details of the training to edit (id in URL)
   $scope.training = trainingPromise
@@ -55,16 +97,8 @@ Application.Controllers.controller "EditTrainingController", [ '$scope', '$state
   ## list of machines
   $scope.machines = machinesPromise
 
-  ##
-  # For use with 'ng-class', returns the CSS class name for the uploads previews.
-  # The preview may show a placeholder or the content of the file depending on the upload state.
-  # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-  ##
-  $scope.fileinputClass = (v)->
-    if v
-      'fileinput-exists'
-    else
-      'fileinput-new'
+  ## Using the TrainingsController
+  new TrainingsController($scope, $state)
 ]
 
 

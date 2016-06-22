@@ -1,4 +1,11 @@
-<form role="form" name="trainingForm" class="form-horizontal" novalidate action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
+<form role="form"
+      name="trainingForm"
+      class="form-horizontal"
+      ng-attr-action="{{ actionUrl }}"
+      ng-upload="whatthefuck(content)"
+      upload-options-enable-rails-csrf="true"
+      unsaved-warning-form
+      novalidate>
 
   <input name="_method" type="hidden" ng-value="method">
 
@@ -10,7 +17,12 @@
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$invalid}">
       <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
       <div class="col-sm-4">
-        <input ng-model="training.name" type="text" name="training[name]" class="form-control" id="training_name" placeholder="{{'name' | translate}}" required>
+        <input ng-model="training.name"
+               type="text" name="training[name]"
+               class="form-control"
+               id="training_name"
+               placeholder="{{'name' | translate}}"
+               required>
         <span class="help-block" ng-show="trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
       </div>
     </div>
@@ -46,18 +58,22 @@
     <div class="form-group m-b-xl" ng-class="{'has-error': trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$invalid}">
       <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
       <div class="col-sm-10">
-        <textarea ng-model="training.description" class="form-control" rows="12" id="training_description" placeholder="" name="training[description]" required></textarea>
+        <textarea ng-model="training.description"
+                  class="form-control"
+                  rows="12"
+                  id="training_description"
+                  placeholder=""
+                  name="training[description]"
+                  required>
+        </textarea>
         <span class="help-block" ng-show="trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[machine_ids]'].$dirty && trainingForm['training[machine_ids]'].$invalid}">
-      <label for="name" class="col-sm-2 control-label">{{ 'associated_machines' | translate }}</label>
+      <label for="training_machines" class="col-sm-2 control-label">{{ 'associated_machines' | translate }}</label>
       <div class="col-sm-4">
-        <input type="hidden"
-               value="{{training.machine_ids}}"
-               name="training[machine_ids][]">
-        <ui-select multiple ng-model="training.machine_ids" name="training[machine_ids][]" class="form-control">
+        <ui-select multiple ng-model="training.machine_ids" class="form-control" id="training_machines">
           <ui-select-match>
             <span ng-bind="$item.name"></span>
             <input type="hidden" name="training[machine_ids][]" value="{{$item.id}}" />
@@ -70,10 +86,11 @@
     </div>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[nb_total_places]'].$dirty && trainingForm['training[nb_total_places]'].$invalid}">
-      <label for="name" class="col-sm-2 control-label">{{ 'number_of_tickets' | translate }}</label>
+      <label for="training_nb_total_places" class="col-sm-2 control-label">{{ 'number_of_tickets' | translate }}</label>
       <div class="col-sm-4">
         <input ng-model="training.nb_total_places"
                type="number"
+               min="0"
                name="training[nb_total_places]"
                class="form-control"
                id="training_nb_total_places">
@@ -83,7 +100,10 @@
   </div>   <!-- ./panel-body  -->
 
   <div class="panel-footer no-padder">
-    <input type="submit" value="{{ 'validate_your_training' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="trainingForm.$invalid"/>
+    <input type="submit"
+           value="{{ 'validate_your_training' | translate }}"
+           class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+           ng-disabled="trainingForm.$invalid"/>
   </div>
   </section>
 </form>

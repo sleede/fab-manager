@@ -2,6 +2,9 @@ class Training < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  has_one :training_image, as: :viewable, dependent: :destroy
+  accepts_nested_attributes_for :training_image, allow_destroy: true
+
   has_and_belongs_to_many :machines, join_table: :trainings_machines
 
   has_many :trainings_availabilities
@@ -23,7 +26,7 @@ class Training < ActiveRecord::Base
   after_update :update_statistic_subtype, if: :name_changed?
   after_destroy :remove_statistic_subtype
 
-  validates :description, length: { maximum: 255 }
+  validates_presence_of :description
 
   def amount_by_group(group)
     trainings_pricings.where(group_id: group).first
