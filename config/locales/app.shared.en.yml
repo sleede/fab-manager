@@ -215,6 +215,8 @@ en:
         # training edition form
         add_a_new_training: "Add a new training"
         validate_your_training: "Validate your training"
+        associated_machines: "Associated machines"
+        number_of_tickets: "Number of tickets"
 
       user_admin:
         # partial form to edit/create an user (admin view)

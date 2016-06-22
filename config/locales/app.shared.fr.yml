@@ -215,6 +215,8 @@ fr:
         # formulaire d'édition d'une formation
         add_a_new_training: "Ajouter une nouvelle formation"
         validate_your_training: "Valider votre formation"
+        associated_machines: "Machines associées"
+        number_of_tickets: "Nombre de places"
 
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)

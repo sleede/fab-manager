@@ -530,6 +530,9 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/trainings/new.html" %>'
             controller: 'NewTrainingController'
         resolve:
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise
           ]
@@ -542,6 +545,9 @@ angular.module('application.router', ['ui.router']).
         resolve:
           trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
             Training.get(id: $stateParams.id).$promise
+          ]
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.shared.trainings').$promise

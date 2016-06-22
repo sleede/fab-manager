@@ -46,8 +46,6 @@ fr:
 
       trainings:
         # suivre et surveiller les formations
-        associated_machines: "Machines associées"
-        number_of_tickets: "Nombre de places"
         training: "Formation"
         year_NUMBER: "Année {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Mois de {{NAME}}"  # angular interpolation

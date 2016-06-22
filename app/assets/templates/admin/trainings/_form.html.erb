@@ -51,6 +51,35 @@
       </div>
     </div>
 
+    <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[machine_ids]'].$dirty && trainingForm['training[machine_ids]'].$invalid}">
+      <label for="name" class="col-sm-2 control-label">{{ 'associated_machines' | translate }}</label>
+      <div class="col-sm-4">
+        <input type="hidden"
+               value="{{training.machine_ids}}"
+               name="training[machine_ids][]">
+        <ui-select multiple ng-model="training.machine_ids" name="training[machine_ids][]" class="form-control">
+          <ui-select-match>
+            <span ng-bind="$item.name"></span>
+            <input type="hidden" name="training[machine_ids][]" value="{{$item.id}}" />
+          </ui-select-match>
+          <ui-select-choices repeat="m.id as m in (machines | filter: $select.search)">
+            <span ng-bind-html="m.name | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[nb_total_places]'].$dirty && trainingForm['training[nb_total_places]'].$invalid}">
+      <label for="name" class="col-sm-2 control-label">{{ 'number_of_tickets' | translate }}</label>
+      <div class="col-sm-4">
+        <input ng-model="training.nb_total_places"
+               type="number"
+               name="training[nb_total_places]"
+               class="form-control"
+               id="training_nb_total_places">
+      </div>
+    </div>
+
   </div>   <!-- ./panel-body  -->
 
   <div class="panel-footer no-padder">

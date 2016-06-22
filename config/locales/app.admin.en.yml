@@ -46,8 +46,6 @@ en:
 
       trainings:
         # track and monitor the trainings
-        associated_machines: "Associated machines"
-        number_of_tickets: "Number of tickets"
         training: "Training"
         year_NUMBER: "Year {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Month of {{NAME}}"  # angular interpolation

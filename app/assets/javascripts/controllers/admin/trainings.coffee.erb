@@ -5,7 +5,7 @@
 ##
 # Controller used in the training creation page (admin)
 ##
-Application.Controllers.controller "NewTrainingController", [ '$scope', ($scope) ->
+Application.Controllers.controller "NewTrainingController", [ '$scope', 'machinesPromise', ($scope, machinesPromise) ->
 
 
 
@@ -16,6 +16,9 @@ Application.Controllers.controller "NewTrainingController", [ '$scope', ($scope)
 
   ## API URL where the form will be posted
   $scope.actionUrl = '/api/trainings'
+
+  ## list of machines
+  $scope.machines = machinesPromise
 
   ##
   # For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -34,7 +37,7 @@ Application.Controllers.controller "NewTrainingController", [ '$scope', ($scope)
 ##
 # Controller used in the training edition page (admin)
 ##
-Application.Controllers.controller "EditTrainingController", [ '$scope', '$stateParams', 'trainingPromise',  ($scope, $stateParams, trainingPromise) ->
+Application.Controllers.controller "EditTrainingController", [ '$scope', '$stateParams', 'trainingPromise', 'machinesPromise', ($scope, $stateParams, trainingPromise, machinesPromise) ->
 
 
 
@@ -48,6 +51,9 @@ Application.Controllers.controller "EditTrainingController", [ '$scope', '$state
 
   ## Details of the training to edit (id in URL)
   $scope.training = trainingPromise
+
+  ## list of machines
+  $scope.machines = machinesPromise
 
   ##
   # For use with 'ng-class', returns the CSS class name for the uploads previews.
