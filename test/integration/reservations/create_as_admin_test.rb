@@ -91,7 +91,7 @@ module Reservations
       invoice_item = InvoiceItem.last
 
       refute invoice_item.stp_invoice_item_id
-      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id).amount
+      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)

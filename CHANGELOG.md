@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## v2.2.1 2016 June 22
+- Fix a bug: field User.merged_at should not be allowed to be mapped in SSO
+- Fix a bug: integration test "user reservation without plan"
+- Fix a bug: can't click for some seconds in Chrome 51
+- Admin: statistics tables were paginated and optimized to improve load times.
+
 ## v2.2.0 2016 June 16
 - Built-in support for extensions plug-ins
 - User profile form: social networks links, personal website link, job and change profile visibility (public / private)

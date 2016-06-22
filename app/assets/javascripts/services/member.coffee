@@ -22,4 +22,7 @@ Application.Services.factory 'Member', ["$resource", ($resource)->
       url: '/api/members/search/:query'
       params: {query: "@query"}
       isArray: true
+    mapping:
+      method: 'GET'
+      url: '/api/members/mapping'
 ]
