@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## Next release
+## v2.2.1 2016 June 22
 - Fix a bug: field User.merged_at should not be allowed to be mapped in SSO
 - Fix a bug: integration test "user reservation without plan"
 - Fix a bug: can't click for some seconds in Chrome 51
