@@ -252,10 +252,12 @@ class StatisticService
 
   def members_list(options = default_options)
     result = []
-    User.with_role(:member).where('users.created_at >= :start_date AND users.created_at <= :end_date', options).each do |u|
-      result.push OpenStruct.new({
-        date: options[:start_date].to_date
-      }.merge(user_info(u)))
+    User.with_role(:member).includes(:profile).where('users.created_at >= :start_date AND users.created_at <= :end_date', options).each do |u|
+      if !u.need_completion?
+        result.push OpenStruct.new({
+          date: options[:start_date].to_date
+        }.merge(user_info(u)))
+      end
     end
     result
   end
