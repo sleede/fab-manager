@@ -69,7 +69,7 @@
 
     </div>   <!-- ./panel-body  -->
     <div class="panel-footer no-padder">
-      <input type="submit" ng-value="submitName" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="eventForm.$invalid"/>
+      <input type="submit" ng-value="submitName" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="eventForm.$invalid || event.category_ids.length === 0"/>
     </div>
     </section>
 
