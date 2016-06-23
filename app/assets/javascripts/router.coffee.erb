@@ -364,6 +364,19 @@ angular.module('application.router', ['ui.router']).
           ]
 
       # trainings
+      .state 'app.public.trainings_list',
+        url: '/trainings'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "trainings/index.html" %>'
+            controller: 'TrainingsController'
+        resolve:
+          trainingsPromise: ['Training', (Training)->
+            Training.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.trainings_list']).$promise
+          ]
       .state 'app.logged.trainings_reserve',
         url: '/trainings/reserve'
         views:

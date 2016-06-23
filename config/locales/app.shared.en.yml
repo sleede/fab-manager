@@ -88,6 +88,7 @@ en:
         _for_your_changes_to_take_effect: "for your changes to take effect."
         illustration: "Illustration"
         add_an_illustration: "Add an illustration."
+        book: "Book"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"

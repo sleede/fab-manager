@@ -1,5 +1,15 @@
 'use strict'
 
+Application.Controllers.controller "TrainingsController", ['$scope', '$state', 'trainingsPromise', ($scope, $state, trainingsPromise) ->
+  $scope.trainings = trainingsPromise
+
+  $scope.reserveTraining = (training, event) ->
+    $state.go('app.logged.trainings_reserve')
+
+  $scope.showTraining = (training) ->
+    $state.go('app.logged.trainings_reserve')
+]
+
 ##
 # Controller used in the training reservation agenda page.
 # This controller is very similar to the machine reservation controller with one major difference: here, ONLY ONE

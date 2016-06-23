@@ -88,6 +88,7 @@ fr:
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
         illustration: "Visuel"
         add_an_illustration: "Ajouter un visuel"
+        book: "Réserver"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"

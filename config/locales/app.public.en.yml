@@ -160,7 +160,6 @@ en:
         # list of machines
         the_fablab_s_machines: "The FabLab's machines"
         add_a_machine: "Add a machine"
-        book: "Book"
         _or_the_: " or the "
 
       machines_show:
