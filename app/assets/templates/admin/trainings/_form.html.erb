@@ -57,16 +57,10 @@
 
 
     <div class="form-group m-b-xl" ng-class="{'has-error': trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$invalid}">
-      <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
+      <label for="training_description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
       <div class="col-sm-10">
-        <textarea ng-model="training.description"
-                  class="form-control"
-                  rows="12"
-                  id="training_description"
-                  placeholder=""
-                  name="training[description]"
-                  required>
-        </textarea>
+        <input type="hidden" name="training[description]" ng-value="training.description" />
+        <summernote ng-model="training.description" id="training_description" placeholder="" config="summernoteOpts" name="training[description]" required></summernote>
         <span class="help-block" ng-show="trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
       </div>
     </div>
