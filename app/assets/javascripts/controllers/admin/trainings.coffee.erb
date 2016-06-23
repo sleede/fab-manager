@@ -61,7 +61,10 @@ class TrainingsController
 ##
 Application.Controllers.controller "NewTrainingController", [ '$scope', '$state', 'machinesPromise', 'CSRF'
 , ($scope, $state, machinesPromise, CSRF) ->
-  CSRF.setMetaTags()
+
+
+
+  ### PUBLIC SCOPE ###
 
   ## Form action on the following URL
   $scope.method = 'post'
@@ -72,8 +75,22 @@ Application.Controllers.controller "NewTrainingController", [ '$scope', '$state'
   ## list of machines
   $scope.machines = machinesPromise
 
-  ## Using the TrainingsController
-  new TrainingsController($scope, $state)
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    CSRF.setMetaTags()
+
+    ## Using the TrainingsController
+    new TrainingsController($scope, $state)
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]
 
 
@@ -83,10 +100,13 @@ Application.Controllers.controller "NewTrainingController", [ '$scope', '$state'
 ##
 Application.Controllers.controller "EditTrainingController", [ '$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF'
 , ($scope, $state, $stateParams, trainingPromise, machinesPromise, CSRF) ->
-  CSRF.setMetaTags()
+
+
+
+  ### PUBLIC SCOPE ###
 
   ## Form action on the following URL
-  $scope.method = 'put'
+  $scope.method = 'patch'
 
   ## API URL where the form will be posted
   $scope.actionUrl = '/api/trainings/' + $stateParams.id
@@ -97,8 +117,22 @@ Application.Controllers.controller "EditTrainingController", [ '$scope', '$state
   ## list of machines
   $scope.machines = machinesPromise
 
-  ## Using the TrainingsController
-  new TrainingsController($scope, $state)
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    CSRF.setMetaTags()
+
+    ## Using the TrainingsController
+    new TrainingsController($scope, $state)
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]
 
 

@@ -2,7 +2,7 @@
       name="trainingForm"
       class="form-horizontal"
       ng-attr-action="{{ actionUrl }}"
-      ng-upload="whatthefuck(content)"
+      ng-upload="submited(content)"
       upload-options-enable-rails-csrf="true"
       unsaved-warning-form
       novalidate>
@@ -17,12 +17,13 @@
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$invalid}">
       <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
       <div class="col-sm-4">
-        <input ng-model="training.name"
-               type="text" name="training[name]"
+        <input name="training[name]"
+               ng-model="training.name"
+               type="text"
                class="form-control"
                id="training_name"
                placeholder="{{'name' | translate}}"
-               required>
+               required/>
         <span class="help-block" ng-show="trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
       </div>
     </div>

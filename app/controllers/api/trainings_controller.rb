@@ -35,10 +35,15 @@ class API::TrainingsController < API::ApiController
       members.each do |m|
         m.trainings << @training
       end
+
+      head :no_content
     else
-      @training.update(training_params)
+      if @training.update(training_params)
+        render :show, status: :ok, location: @training
+      else
+        render json: @training.errors, status: :unprocessable_entity
+      end
     end
-    head :no_content
   end
 
   def destroy
