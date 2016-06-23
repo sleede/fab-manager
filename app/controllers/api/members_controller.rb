@@ -5,15 +5,24 @@ class API::MembersController < API::ApiController
 
   def index
     @requested_attributes = params[:requested_attributes]
-    @members = policy_scope(User)
+    @query = policy_scope(User)
 
     unless params[:page].nil? and params[:size].nil?
-      @members = @members.page(params[:page].to_i).per(params[:size].to_i)
+      @query = @query.page(params[:page].to_i).per(params[:size].to_i)
     end
+
+    # remove unmerged profiles from list
+    @members = @query.to_a
+    @members.delete_if { |u| u.need_completion? }
   end
 
   def last_subscribed
-    @members = User.active.with_role(:member).includes(:profile).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+    @query = User.active.with_role(:member).includes(:profile).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+
+    # remove unmerged profiles from list
+    @members = @query.to_a
+    @members.delete_if { |u| u.need_completion? }
+
     @requested_attributes = ['profile']
     render :index
   end
@@ -169,7 +178,7 @@ class API::MembersController < API::ApiController
         order_key = 'users.id'
     end
 
-    @members = User.includes(:profile, :group)
+    @query = User.includes(:profile, :group)
                .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
                .where("users.is_active = 'true' AND roles.name = 'member'")
                .order("#{order_key} #{direction}")
@@ -177,7 +186,11 @@ class API::MembersController < API::ApiController
                .per(p[:size])
 
     # ILIKE => PostgreSQL case-insensitive LIKE
-    @members = @members.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
+    @query = @query.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
+
+    # remove unmerged profiles from list
+    @members = @query.to_a
+    @members.delete_if { |u| u.need_completion? }
 
     @members
 
@@ -200,6 +213,10 @@ class API::MembersController < API::ApiController
         @members = @members.where('subscriptions.id IS NULL OR subscriptions.expired_at < :now',  now: Date.today.to_s)
       end
     end
+
+    # remove unmerged profiles from list
+    @members = @members.to_a
+    @members.delete_if { |u| u.need_completion? }
 
     @members
   end
