@@ -62,6 +62,7 @@ en:
         description_was_successfully_saved: "Description was successfully saved."
         training_successfully_deleted: "Training successfully deleted."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Unable to delete the training because some users already booked it."
+        do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
 
       trainings_new:
         # create a new training

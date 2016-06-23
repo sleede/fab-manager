@@ -254,7 +254,7 @@ Application.Controllers.controller "TrainingsController", ["$scope", "$state", "
       resolve:
         object: ->
           title: _t('confirmation_required')
-          msg: _t('do_you_really_want_to_delete_this_traning')
+          msg: _t('do_you_really_want_to_delete_this_training')
     , -> # deletion confirmed
       training.$delete ->
         $scope.trainings.splice(index, 1)

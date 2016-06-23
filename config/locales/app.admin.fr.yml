@@ -62,6 +62,7 @@ fr:
         description_was_successfully_saved: "La description a bien été enregistrée."
         training_successfully_deleted: "La formation a bien été supprimée."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+        do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
 
       trainings_new:
         # créer une nouvelle formation
