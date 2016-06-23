@@ -228,6 +228,7 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
     end_time: new Date()
     all_day: 'false'
     recurrence: 'none'
+    category_ids: []
 
   ## Possible types of recurrences for an event
   $scope.recurrenceTypes = [

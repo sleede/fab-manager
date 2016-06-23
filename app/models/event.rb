@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   has_many :event_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :event_files, allow_destroy: true, reject_if: :all_blank
   has_and_belongs_to_many :categories, join_table: :events_categories
+  validates :categories, presence: true
 
   belongs_to :availability, dependent: :destroy
   accepts_nested_attributes_for :availability
