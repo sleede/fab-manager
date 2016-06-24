@@ -169,7 +169,7 @@ class API::MembersController < API::ApiController
         order_key = 'users.id'
     end
 
-    @members = User.includes(:profile, :group)
+    @members = User.includes(:profile, :group, :subscriptions)
                .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
                .where("users.is_active = 'true' AND roles.name = 'member'")
                .order("#{order_key} #{direction}")
