@@ -14,6 +14,8 @@ class Event < ActiveRecord::Base
 
   after_create :event_recurrence
   before_save :update_nb_free_places
+  # update event updated_at for index cache
+  after_save -> { self.touch }
 
   def name
     title
