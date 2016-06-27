@@ -13,7 +13,7 @@ class API::MembersController < API::ApiController
   end
 
   def last_subscribed
-    @members = User.active.with_role(:member).includes(:profile).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+    @members = User.active.with_role(:member).includes(profile: [:user_avatar]).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
     @requested_attributes = ['profile']
     render :index
   end
