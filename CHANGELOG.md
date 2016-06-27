@@ -4,6 +4,11 @@
 - add json cache for machines, events, trainings
 - optimise sql query, avoid to N+1
 
+## v2.2.2 2016 June 23
+- Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation 
+- Fix a bug: unable to display next results in statistics tables
+- Admin: Category is mandatory when creating a course/workshop (event)
+
 ## v2.2.1 2016 June 22
 - Fix a bug: field User.merged_at should not be allowed to be mapped in SSO
 - Fix a bug: integration test "user reservation without plan"
