@@ -7,7 +7,8 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'trainings_planning' }}</h1>
+        <h1 ng-hide="training" translate>{{ 'trainings_planning' }}</h1>
+        <h1 ng-show="training"><span translate>{{ 'planning_of' }}</span> {{training.name}}</h1>
       </section>
 
     </div>
@@ -23,6 +24,12 @@
 
 
   <div class="col-sm-12 col-md-12 col-lg-3">
+
+    <div class="text-center m-t">
+      <a class="btn btn-warning-full width-70 rounded text-sm" ui-sref="app.logged.trainings_reserve({id:'all'})" translate>
+        {{ 'all_trainings' }}
+      </a>
+    </div>
 
     <div ng-if="currentUser.role === 'admin'">
       <select-member></select-member>

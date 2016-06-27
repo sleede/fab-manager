@@ -45,8 +45,8 @@ Application.Controllers.controller "ShowTrainingController", ['$scope', '$state'
 # training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
 ##
 
-Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', '$compile', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', '_t',
-($scope, $state, $stateParams, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, $compile, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, _t) ->
+Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t'
+, ($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t) ->
 
 
 
@@ -110,6 +110,9 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ## Once a training reservation was modified, will contains {newReservedSlot:{}, oldReservedSlot:{}}
   $scope.modifiedSlots = null
 
+  ## Selected training unless 'all' trainings are displayed
+  $scope.training = trainingPromise
+
   ## fullCalendar (v2) configuration
   $scope.calendarConfig =
     timezone: Fablab.timezone
@@ -164,7 +167,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.ctrl.member
       Member.get {id: $scope.ctrl.member.id}, (member) ->
         $scope.ctrl.member = member
-        Availability.trainings {member_id: $scope.ctrl.member.id}, (trainings) ->
+        Availability.trainings {trainingId: $stateParams.id, member_id: $scope.ctrl.member.id}, (trainings) ->
           $scope.calendar.fullCalendar 'removeEvents'
           $scope.eventSources.push
             events: trainings
@@ -480,7 +483,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ##
   eventRenderCb = (event, element, view)->
     element.attr(
-      'uib-popover': event.training.description
+      'uib-popover': $filter('humanize')($filter('simpleText')(event.training.description), 70)
       'popover-trigger': 'mouseenter'
     )
     $compile(element)($scope)

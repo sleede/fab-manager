@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
     resources :availabilities do
       get 'machines/:machine_id', action: 'machine', on: :collection
-      get 'trainings', on: :collection
+      get 'trainings/:training_id', action: 'trainings', on: :collection
       get 'reservations', on: :member
     end
 

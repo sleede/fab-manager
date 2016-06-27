@@ -128,6 +128,8 @@ en:
       trainings_reserve:
         # book a training
         trainings_planning: "Trainings planning"
+        planning_of: "Planning of"   # followed by the training name (eg. "Planning of 3d printer training")
+        all_trainings: "All trainings"
         select_a_slot_in_the_calendar: "Select a slot in the calendar"
         you_ve_just_selected_the_slot: "You've just selected the slot:"
         datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM

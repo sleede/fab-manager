@@ -391,7 +391,7 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.public.training_show']).$promise
           ]
       .state 'app.logged.trainings_reserve',
-        url: '/trainings/reserve'
+        url: '/trainings/:id/reserve'
         views:
           'main@':
             templateUrl: '<%= asset_path "trainings/reserve.html" %>'
@@ -406,8 +406,11 @@ angular.module('application.router', ['ui.router']).
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
           ]
-          availabilityTrainingsPromise: ['Availability', (Availability)->
-            Availability.trainings().$promise
+          availabilityTrainingsPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.trainings({trainingId: $stateParams.id}).$promise
+          ]
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+              Training.get({id: $stateParams.id}).$promise unless $stateParams.id == 'all'
           ]
           settingsPromise: ['Setting', (Setting)->
             Setting.query(names: "['booking_window_start',
