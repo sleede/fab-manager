@@ -471,6 +471,7 @@ en:
 
       open_api_clients:
         add_new_client: "Create new API client"
+        api_documentation: "API documentation"
         open_api_clients: "OpenAPI clients"
         calls_count: "calls count"
         created_at: "Creation date"
