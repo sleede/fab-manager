@@ -69,8 +69,8 @@
                           <i class="fa fa-times"></i> {{ 'reset_token' | translate }}
                         </button>
 
-                        <button class="btn btn-default" ng-click="deleteClient($index)" ng-show="client.calls_count == 0">
-                          <i class="fa fa-trash"></i> {{ 'delete' | translate }}
+                        <button class="btn btn-danger" ng-click="deleteClient($index)" ng-show="client.calls_count == 0">
+                          <i class="fa fa-trash"></i>
                         </button>
                     </div>
                   </td>
