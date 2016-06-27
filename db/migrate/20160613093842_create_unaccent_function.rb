@@ -2,8 +2,8 @@ class CreateUnaccentFunction < ActiveRecord::Migration
 
   # PostgreSQL only
   def up
-    execute 'CREATE EXTENSION unaccent;'
-    execute 'CREATE EXTENSION pg_trgm;'
+    execute 'CREATE EXTENSION IF NOT EXISTS unaccent;'
+    execute 'CREATE EXTENSION IF NOT EXISTS pg_trgm;'
     execute "CREATE OR REPLACE FUNCTION f_unaccent(text)
                RETURNS text AS
              $func$
