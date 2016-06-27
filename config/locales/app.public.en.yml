@@ -45,6 +45,7 @@ en:
         manage_the_projects_elements: "Manage the Projects Elements"
         statistics: "Statistics"
         customization: "Customization"
+        open_api_clients: "OpenAPI clients"
 
         # account creation modal
         create_your_account: "Create your account"

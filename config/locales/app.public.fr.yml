@@ -45,6 +45,7 @@ fr:
         manage_the_projects_elements: "Gérer les éléments projets"
         statistics: "Statistiques"
         customization: "Personnalisation"
+        open_api_clients: "Clients OpenAPI"
 
         # fenêtre de création de compte
         create_your_account: "Créer votre compte"

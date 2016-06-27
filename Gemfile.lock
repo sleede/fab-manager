@@ -42,6 +42,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     ansi (1.5.0)
+    api-pagination (4.3.0)
+    apipie-rails (0.3.6)
+      json
     arel (6.0.3)
     autoprefixer-rails (5.1.8)
       execjs
@@ -164,6 +167,8 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    has_secure_token (1.0.0)
+      activerecord (>= 3.0)
     hashdiff (0.3.0)
     hashie (3.4.2)
     highline (1.7.1)
@@ -432,6 +437,8 @@ DEPENDENCIES
   aasm
   actionpack-page_caching
   active_record_query_trace
+  api-pagination
+  apipie-rails
   awesome_print
   bootstrap-sass
   byebug
@@ -454,6 +461,7 @@ DEPENDENCIES
   foreman
   forgery
   friendly_id (~> 5.1.0)
+  has_secure_token
   jbuilder (~> 2.5)
   jbuilder_cache_multi
   jquery-rails

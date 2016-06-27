@@ -468,3 +468,17 @@ en:
         reservations_cancelling: "Reservations cancelling"
         customization_of_SETTING_successfully_saved: "Customization of {{SETTING}} successfully saved."  # angular interpolation
         file_successfully_updated: "File successfully updated."
+
+      open_api_clients:
+        add_new_client: "Create new API client"
+        open_api_clients: "OpenAPI clients"
+        calls_count: "calls count"
+        created_at: "Creation date"
+        reset_token: "revoke access"
+        client_name: "Client's name"
+        do_you_really_want_to_delete_this_open_api_client: "Do you really want to delete this OpenAPI client?"
+        do_you_really_want_to_revoke_this_open_api_access: "Do you really want to revoke this access ? It will erase and replace the current token."
+        client_successfully_created: "Client successfully created."
+        client_successfully_updated: "Client successfully updated."
+        client_successfully_deleted: "Client successfully deleted."
+        access_successfully_revoked: "Access successfully revoked."
