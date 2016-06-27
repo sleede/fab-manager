@@ -2,7 +2,7 @@ class API::TrainingsPricingsController < API::ApiController
   before_action :authenticate_user!
 
   def index
-    @trainings_pricings = TrainingsPricing.includes(:training)
+    @trainings_pricings = TrainingsPricing.all
   end
 
   def update

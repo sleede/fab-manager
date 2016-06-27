@@ -17,7 +17,7 @@ json.array!(@slots) do |slot|
   json.user do
     json.id slot.reservation.user.id
     json.name slot.reservation.user.profile.full_name
-  end if slot.reservation # ... if the slot was reserved
+  end if @current_user_role == 'admin' and slot.reservation # ... if the slot was reserved
   json.tag_ids slot.availability.tag_ids
   json.tags slot.availability.tags do |t|
     json.id t.id

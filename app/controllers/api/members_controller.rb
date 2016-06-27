@@ -13,7 +13,7 @@ class API::MembersController < API::ApiController
   end
 
   def last_subscribed
-    @members = User.active.with_role(:member).includes(:profile).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+    @members = User.active.with_role(:member).includes(profile: [:user_avatar]).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
     @requested_attributes = ['profile']
     render :index
   end
@@ -169,7 +169,7 @@ class API::MembersController < API::ApiController
         order_key = 'users.id'
     end
 
-    @members = User.includes(:profile, :group)
+    @members = User.includes(:profile, :group, :subscriptions)
                .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
                .where("users.is_active = 'true' AND roles.name = 'member'")
                .order("#{order_key} #{direction}")

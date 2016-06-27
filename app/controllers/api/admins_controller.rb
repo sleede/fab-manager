@@ -3,7 +3,7 @@ class API::AdminsController < API::ApiController
 
   def index
     authorize :admin
-    @admins = User.admins
+    @admins = User.includes(profile: [:user_avatar]).admins
   end
 
   def create

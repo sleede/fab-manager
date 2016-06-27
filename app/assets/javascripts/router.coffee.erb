@@ -330,7 +330,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'ReserveMachineController'
         resolve:
           plansPromise: ['Plan', (Plan)->
-            Plan.query(attributes_requested: "['machines_credits']").$promise
+            Plan.query().$promise
           ]
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
@@ -375,7 +375,7 @@ angular.module('application.router', ['ui.router']).
             Setting.get(name: 'training_explications_alert').$promise
           ]
           plansPromise: ['Plan', (Plan)->
-            Plan.query(attributes_requested: "['trainings_credits']").$promise
+            Plan.query().$promise
           ]
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
@@ -423,7 +423,7 @@ angular.module('application.router', ['ui.router']).
             Setting.get(name: 'subscription_explications_alert').$promise
           ]
           plansPromise: ['Plan', (Plan)->
-            Plan.query(shallow: true).$promise
+            Plan.query().$promise
           ]
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
