@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- add json cache for machines, events, trainings
+- optimise sql query, avoid to N+1
+
 ## v2.2.0 2016 June 16
 - Built-in support for extensions plug-ins
 - User profile form: social networks links, personal website link, job and change profile visibility (public / private)
