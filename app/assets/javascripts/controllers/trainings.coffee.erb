@@ -36,6 +36,12 @@ Application.Controllers.controller "ShowTrainingController", ['$scope', '$state'
   ##
   $scope.reserveTraining = (training, event) ->
     $state.go('app.logged.trainings_reserve', {id: training.id})
+
+  ##
+  # Revert view to the full list of trainings ("<-" button)
+  ##
+  $scope.cancel = (event) ->
+    $state.go('app.public.trainings_list')
 ]
 
 
