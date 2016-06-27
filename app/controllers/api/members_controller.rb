@@ -17,16 +17,12 @@ class API::MembersController < API::ApiController
   end
 
   def last_subscribed
-<<<<<<< HEAD
-    @members = User.active.with_role(:member).includes(profile: [:user_avatar]).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
-=======
-    @query = User.active.with_role(:member).includes(:profile).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+    @query = User.active.with_role(:member).includes(profile: [:user_avatar]).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
 
     # remove unmerged profiles from list
     @members = @query.to_a
     @members.delete_if { |u| u.need_completion? }
 
->>>>>>> 9ab28c1df60ab3b3a06b76025dba26d6151aa0ba
     @requested_attributes = ['profile']
     render :index
   end
