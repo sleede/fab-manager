@@ -22,7 +22,7 @@
     <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="training in trainings.slice(3*$index, 3*$index + 3)">
 
 
-      <div class="widget panel panel-default" ng-click="showTraining(training)">
+      <div class="widget panel panel-default">
         <div class="panel-heading picture" ng-if="!training.training_image">
           <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
         </div>
