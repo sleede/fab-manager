@@ -26,7 +26,10 @@
   <div class="col-sm-12 col-md-12 col-lg-3">
 
     <div class="text-center m-t">
-      <a class="btn btn-warning-full width-70 rounded text-sm" ui-sref="app.logged.trainings_reserve({id:'all'})" translate>
+      <a class="btn btn-warning-full width-70 rounded text-sm"
+         ui-sref="app.logged.trainings_reserve({id:'all'})"
+         ng-show="training"
+         translate>
         {{ 'all_trainings' }}
       </a>
     </div>
