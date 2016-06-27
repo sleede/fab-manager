@@ -377,6 +377,19 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.trainings_list']).$promise
           ]
+      .state 'app.public.training_show',
+        url: '/trainings/:id'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "trainings/show.html" %>'
+            controller: 'ShowTrainingController'
+        resolve:
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+            Training.get({id: $stateParams.id}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.training_show']).$promise
+          ]
       .state 'app.logged.trainings_reserve',
         url: '/trainings/reserve'
         views:
@@ -525,7 +538,7 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "admin/trainings/index.html" %>'
-            controller: 'TrainingsController'
+            controller: 'TrainingsAdminController'
         resolve:
           trainingsPromise: ['Training', (Training)->
             Training.query().$promise

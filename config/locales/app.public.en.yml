@@ -171,6 +171,14 @@ en:
         unauthorized_operation: "Unauthoried operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
 
+      trainings_list:
+        # list of trainings
+        the_trainings: "The trainings"
+
+      training_show:
+        # details of a training
+        book_this_training: "Book this training"
+
       plans:
         # summary of the subscriptions
         subcriptions: "Subscriptions"

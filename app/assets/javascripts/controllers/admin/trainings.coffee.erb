@@ -139,9 +139,9 @@ Application.Controllers.controller "EditTrainingController", [ '$scope', '$state
 
 
 ##
-# Controller used in the public listing page, allowing logged users to see the list of trainings
+# Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
 ##
-Application.Controllers.controller "TrainingsController", ["$scope", "$state", "$uibModal", 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs'
+Application.Controllers.controller "TrainingsAdminController", ["$scope", "$state", "$uibModal", 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs'
 , ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs) ->
 
 

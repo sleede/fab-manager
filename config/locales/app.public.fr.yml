@@ -176,6 +176,11 @@ fr:
         # liste des formations
         the_trainings: "Les formations"
 
+      training_show:
+        # détails d'une formation
+        book_this_training: "Réserver cette formation"
+
+
       plans:
         # page récapitulative des abonnements
         subcriptions: "Les abonnements"

@@ -1,14 +1,43 @@
 'use strict'
 
+##
+# Public listing of the trainings
+##
 Application.Controllers.controller "TrainingsController", ['$scope', '$state', 'trainingsPromise', ($scope, $state, trainingsPromise) ->
+
+  ## List of trainings
   $scope.trainings = trainingsPromise
 
+  ##
+  # Callback for the 'reserve' button
+  ##
   $scope.reserveTraining = (training, event) ->
-    $state.go('app.logged.trainings_reserve')
+    $state.go('app.logged.trainings_reserve', {id: training.id})
 
+  ##
+  # Callback for the 'show' button
+  ##
   $scope.showTraining = (training) ->
-    $state.go('app.logged.trainings_reserve')
+    $state.go('app.public.training_show', {id: training.id})
 ]
+
+
+
+##
+# Public view of a specific training
+##
+Application.Controllers.controller "ShowTrainingController", ['$scope', '$state', 'trainingPromise', ($scope, $state, trainingPromise) ->
+
+  ## Current training
+  $scope.training = trainingPromise
+
+  ##
+  # Callback for the 'reserve' button
+  ##
+  $scope.reserveTraining = (training, event) ->
+    $state.go('app.logged.trainings_reserve', {id: training.id})
+]
+
 
 ##
 # Controller used in the training reservation agenda page.
