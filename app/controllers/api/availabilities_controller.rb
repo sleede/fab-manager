@@ -84,7 +84,7 @@ class API::AvailabilitiesController < API::ApiController
     else
       end_at = 1.month.since
       end_at = 3.months.since if can_show_slot_plus_three_months(@user)
-      @availabilities = Availability.includes(:tags, :slots, trainings: [:machines]).trainings.where('start_at > ? AND start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = Availability.includes(:tags, :slots, trainings: [:machines]).trainings.where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
     @availabilities.each do |a|
       a = verify_training_is_reserved(a, @reservations)
