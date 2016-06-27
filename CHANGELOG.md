@@ -2,10 +2,11 @@
 
 ## next release
 
-- add json cache for machines, events, trainings
-- optimise sql query, avoid to N+1
-- fix some reservations was referencing reservable not present in database
-[TODO DEPLOY] run `bundle exec rake fablab:fix:reservations_not_existing_reservable` to fix it
+- Add json cache for machines, events, trainings
+- Optimise sql query, avoid to N+1
+- Fix a bug: some reservations was referencing reservable not present in database (#patch)
+- [TODO DEPLOY] `bundle exec rake fablab:fix:reservations_not_existing_reservable` to apply #patch
+- [TODO DEPLOY] `bundle install` and `rake db:migrate`
 
 ## v2.2.2 2016 June 23
 - Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation 
