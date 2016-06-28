@@ -156,6 +156,7 @@ fr:
         tell_us_why_this_looks_abusive: "Dites nous en quoi cela vous semble abusif"
         message_is_required: "Le message est requis."
         report: "Signaler"
+        do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
 
       machines_list:
         # liste des machines
