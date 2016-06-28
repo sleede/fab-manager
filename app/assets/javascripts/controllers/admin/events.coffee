@@ -136,7 +136,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'eventsPromise', ($scope, $state, Event, eventsPromise) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'Category', 'eventsPromise', 'categoriesPromise'
+, ($scope, $state, Event, Category, eventsPromise, categoriesPromise) ->
 
 
 
@@ -151,6 +152,9 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   ## Current virtual page
   $scope.page = 2
 
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
   ##
   # Adds a bucket of events to the bottom of the page, grouped by month
   ##
@@ -159,6 +163,52 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
       $scope.events = $scope.events.concat data
       paginationCheck(data, $scope.events)
     $scope.page += 1
+
+
+  ##
+  # Saves a new categoty / Update an existing one to the server (form validation callback)
+  # @param data {Object} category name
+  # @param [data] {number} category id, in case of update
+  ##
+  $scope.saveCategory = (data, id) ->
+    if id?
+      Category.update {id: id}, data
+    else
+      Category.save data, (resp)->
+        $scope.categories[$scope.categories.length-1].id = resp.id
+
+
+
+  ##
+  # Deletes the category at the specified index
+  # @param index {number} category index in the $scope.categories array
+  ##
+  $scope.removeCategory = (index) ->
+    Category.delete $scope.categories[index]
+    $scope.categories.splice(index, 1)
+
+
+
+  ##
+  # Creates a new empty entry in the $scope.categories array
+  ##
+  $scope.addCategory = ->
+    $scope.inserted =
+      name: ''
+    $scope.categories.push($scope.inserted)
+
+
+
+  ##
+  # Removes the newly inserted but not saved category / Cancel the current category modification
+  # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+  # @param index {number} category index in the $scope.categories array
+  ##
+  $scope.cancelCategory = (rowform, index) ->
+    if $scope.categories[index].id?
+      rowform.$cancel()
+    else
+      $scope.categories.splice(index, 1)
 
 
 

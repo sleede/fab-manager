@@ -534,6 +534,9 @@ angular.module('application.router', ['ui.router']).
           eventsPromise: ['Event', (Event)->
             Event.query(page: 1).$promise
           ]
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.events').$promise
           ]

@@ -87,7 +87,7 @@ Rails.application.routes.draw do
     # for admin
     resources :trainings
     resources :credits
-    resources :categories, only: [:index]
+    resources :categories
     resources :statistics, only: [:index]
     resources :custom_assets, only: [:show, :create, :update]
     resources :tags

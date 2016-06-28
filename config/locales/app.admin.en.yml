@@ -70,6 +70,8 @@ en:
 
       events:
         # events tracking and management
+        events_monitoring: "Events monitoring"
+        manage_filters: "Manage filters"
         fablab_events: "Fablab events"
         all_events: "All events"
         passed_events: "Passed events"
@@ -77,6 +79,8 @@ en:
         from_DATE: "From {{DATE}}"  # angular interpolation
         from_TIME: "From {{TIME}}"  # angular interpolation
         view_reservations: "View reservations"
+        categories: "Categories"
+        add_a_category: "Add a category"
 
       events_new:
         # add a new event

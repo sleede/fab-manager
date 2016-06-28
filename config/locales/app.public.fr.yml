@@ -40,7 +40,7 @@ fr:
         manage_the_users: "Gérer les utilisateurs"
         manage_the_invoices: "Gérer les factures"
         subscriptions_and_prices: "Abonnements & Tarifs"
-        events_monitoring: "Suivi des évènements"
+        manage_the_events: "Gérer les évènements"
         manage_the_machines: "Gérer les machines"
         manage_the_projects_elements: "Gérer les éléments projets"
         statistics: "Statistiques"

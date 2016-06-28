@@ -70,6 +70,8 @@ fr:
 
       events:
         # gestion et suivi des stages et ateliers
+        events_monitoring: "Suivi des évènements"
+        manage_filters: "Gérer les filtres"
         fablab_events: "Les évènements du Fab Lab"
         all_events: "Tous les évènements"
         passed_events: "Les évènements déjà passés"
@@ -77,6 +79,8 @@ fr:
         from_DATE: "Du {{DATE}}"  # angular interpolation
         from_TIME: "De {{TIME}}"  # angular interpolation
         view_reservations: "Consulter les réservations"
+        categories: "Catégories"
+        add_a_category: "Ajouter une catégorie"
 
       events_new:
         # ajouter un nouveau atelier/stage
