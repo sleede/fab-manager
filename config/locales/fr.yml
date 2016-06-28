@@ -36,6 +36,9 @@ fr:
     errors:
       <<: *errors
 
+  apipie:
+    api_documentation: "Documentation de l'API"
+
   omniauth:
     # messages d'erreur lors de l'import d'un compte depuis un SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "L'adresse de courriel \"%{OLD_MAIL}\" est déjà associée à un compte utilisateur, merci de saisir votre code d'authentification."
