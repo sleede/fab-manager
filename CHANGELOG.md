@@ -1,10 +1,14 @@
 # Changelog Fab Manager
 
-## next release
+## v2.3.0 2016 June 28
 
+- Public API with access management and online documentation
 - Add json cache for machines, events, trainings
 - Optimise sql query, avoid to N+1
-- Fix a bug: some reservations was referencing reservable not present in database (#patch)
+- Projects URL are always composed with slug instead of ID
+- Confirmation on project deletion
+- Fix a bug: unable to deploy 2.2.0+ when PostgreSQL 'unaccent' extension was already active
+- Fix a bug: some reservations was referencing reservables not present in database (#patch)
 - [TODO DEPLOY] `bundle exec rake fablab:fix:reservations_not_existing_reservable` to apply #patch
 - [TODO DEPLOY] `bundle install` and `rake db:migrate`
 
