@@ -70,7 +70,7 @@ class ProjectsController
         $('section[ui-view=main]').scrollTop(0, 200)
         return
       else
-        $state.go('app.public.projects_show', {id: content.id})
+        $state.go('app.public.projects_show', {id: content.slug})
 
 
 
@@ -338,8 +338,8 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
 ##
 # Controller used in the public project's details page
 ##
-Application.Controllers.controller "ShowProjectController", ["$scope", "$state", "projectPromise", '$location', '$uibModal', '_t'
-, ($scope, $state, projectPromise, $location, $uibModal, _t) ->
+Application.Controllers.controller "ShowProjectController", ["$scope", "$state", "projectPromise", '$location', '$uibModal', 'dialogs', '_t'
+, ($scope, $state, projectPromise, $location, $uibModal, dialogs, _t) ->
 
   ### PUBLIC SCOPE ###
 
@@ -383,8 +383,14 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
     # check the permissions
     if $scope.currentUser.role is 'admin' or $scope.projectDeletableBy($scope.currentUser)
       # delete the project then refresh the projects list
-      $scope.project.$delete ->
-        $state.go('app.public.projects_list', {}, {reload: true})
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_project')
+      , -> # cancel confirmed
+        $scope.project.$delete ->
+          $state.go('app.public.projects_list', {}, {reload: true})
     else
       console.error _t('unauthorized_operation')
 

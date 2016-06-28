@@ -1,1 +1,3 @@
-json.prices @prices, partial: 'api/prices/price', as: :price
+json.cache! @prices do
+  json.partial! 'api/prices/price', collection: @prices, as: :price
+end

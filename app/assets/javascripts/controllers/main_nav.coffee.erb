@@ -96,6 +96,11 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
       linkText: 'customization'
       linkIcon: 'gear'
     }
+    {
+      state: 'app.admin.open_api_clients'
+      linkText: 'open_api_clients'
+      linkIcon: 'cloud'
+    }
   ].concat(Fablab.adminNavLinks)
 
   $scope.adminNavLinks = Fablab.adminNavLinks

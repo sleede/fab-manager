@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :event_files, allow_destroy: true, reject_if: :all_blank
   has_and_belongs_to_many :categories, join_table: :events_categories
   validates :categories, presence: true
+  has_many :reservations, as: :reservable, dependent: :destroy
 
   belongs_to :availability, dependent: :destroy
   accepts_nested_attributes_for :availability
@@ -15,6 +16,8 @@ class Event < ActiveRecord::Base
 
   after_create :event_recurrence
   before_save :update_nb_free_places
+  # update event updated_at for index cache
+  after_save -> { self.touch }
 
   def name
     title
@@ -33,9 +36,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def reservations
-    Reservation.where(reservable: self)
-  end
+  # def reservations
+  #   Reservation.where(reservable: self)
+  # end
 
   private
   def event_recurrence

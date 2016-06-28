@@ -16,7 +16,7 @@ class Availability < ActiveRecord::Base
   accepts_nested_attributes_for :tags, allow_destroy: true
 
   scope :machines, -> { where(available_type: 'machines') }
-  scope :trainings, -> { where(available_type: 'training') }
+  scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
 
   attr_accessor :is_reserved, :slot_id, :can_modify
 
@@ -51,9 +51,10 @@ class Availability < ActiveRecord::Base
   # if haven't defined a nb_total_places, places are unlimited
   def is_completed
     return false if nb_total_places.blank?
-    nb_total_places <= slots.where(canceled_at: nil).size
+    nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
   end
 
+  # TODO: refactoring this function for avoid N+1 query
   def nb_total_places
     if read_attribute(:nb_total_places).present?
       read_attribute(:nb_total_places)

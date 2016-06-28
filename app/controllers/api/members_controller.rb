@@ -17,7 +17,7 @@ class API::MembersController < API::ApiController
   end
 
   def last_subscribed
-    @query = User.active.with_role(:member).includes(:profile).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+    @query = User.active.with_role(:member).includes(profile: [:user_avatar]).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
 
     # remove unmerged profiles from list
     @members = @query.to_a
@@ -178,7 +178,7 @@ class API::MembersController < API::ApiController
         order_key = 'users.id'
     end
 
-    @query = User.includes(:profile, :group)
+    @query = User.includes(:profile, :group, :subscriptions)
                .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
                .where("users.is_active = 'true' AND roles.name = 'member'")
                .order("#{order_key} #{direction}")

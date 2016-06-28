@@ -45,6 +45,7 @@ en:
         manage_the_projects_elements: "Manage the Projects Elements"
         statistics: "Statistics"
         customization: "Customization"
+        open_api_clients: "OpenAPI clients"
 
         # account creation modal
         create_your_account: "Create your account"
@@ -155,6 +156,7 @@ en:
         tell_us_why_this_looks_abusive: "Tell us why this looks abusive"
         message_is_required: "Message is required."
         report: "Report"
+        do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
 
       machines_list:
         # list of machines

@@ -49,21 +49,22 @@ class API::AvailabilitiesController < API::ApiController
     else
       @user = current_user
     end
+    @current_user_role = current_user.is_admin? ? 'admin' : 'user'
     @machine = Machine.find(params[:machine_id])
     @slots = []
-    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id).joins(:slots).where('slots.start_at > ?', Time.now)
+    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id).includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at > ?', Time.now)
     if @user.is_admin?
-      @availabilities = @machine.availabilities.where("end_at > ? AND available_type = 'machines'", Time.now)
+      @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND available_type = 'machines'", Time.now)
     else
       end_at = 1.month.since
       end_at = 3.months.since if is_subscription_year(@user)
-      @availabilities = @machine.availabilities.includes(:availability_tags).where("end_at > ? AND end_at < ? AND available_type = 'machines'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'machines'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
     @availabilities.each do |a|
       ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
         if (a.start_at + (i * SLOT_DURATION).minutes) > Time.now
-          slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, machine: @machine, title: '')
-          slot = verify_machine_is_reserved(slot, @reservations)
+          slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: @machine, title: '')
+          slot = verify_machine_is_reserved(slot, @reservations, current_user, @current_user_role)
           @slots << slot
         end
       end
@@ -77,13 +78,13 @@ class API::AvailabilitiesController < API::ApiController
       @user = current_user
     end
     @slots = []
-    @reservations = @user.reservations.where("reservable_type = 'Training'").joins(:slots).where('slots.start_at > ?', Time.now)
+    @reservations = @user.reservations.includes(:slots).references(:slots).where("reservable_type = 'Training' AND slots.start_at > ?", Time.now)
     if @user.is_admin?
-      @availabilities = Availability.trainings.where('start_at > ?', Time.now)
+      @availabilities = Availability.includes(:tags, :slots, trainings: [:machines]).trainings.where('availabilities.start_at > ?', Time.now)
     else
       end_at = 1.month.since
       end_at = 3.months.since if can_show_slot_plus_three_months(@user)
-      @availabilities = Availability.trainings.includes(:availability_tags).where('start_at > ? AND start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = Availability.includes(:tags, :slots, trainings: [:machines]).trainings.where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
     @availabilities.each do |a|
       a = verify_training_is_reserved(a, @reservations)
@@ -115,15 +116,14 @@ class API::AvailabilitiesController < API::ApiController
       is_reserved
     end
 
-    def verify_machine_is_reserved(slot, reservations)
-      user = current_user
+    def verify_machine_is_reserved(slot, reservations, user, user_role)
       reservations.each do |r|
         r.slots.each do |s|
           if s.start_at == slot.start_at and s.canceled_at == nil
             slot.id = s.id
             slot.is_reserved = true
             slot.title = t('availabilities.not_available')
-            slot.can_modify = true if user.is_admin?
+            slot.can_modify = true if user_role === 'admin'
             slot.reservation = r
           end
           if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil

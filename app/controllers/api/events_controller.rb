@@ -4,13 +4,14 @@ class API::EventsController < API::ApiController
   def index
     @events = policy_scope(Event)
     @total = @events.count
-    @events = @events.page(params[:page]).per(12)
+    @page = params[:page]
+    @events = @events.page(@page).per(12)
   end
 
   # GET /events/upcoming/:limit
   def upcoming
     limit = params[:limit]
-    @events = Event.includes(:event_image, :event_files, :availability)
+    @events = Event.includes(:event_image, :event_files, :availability, :categories)
                    .where('availabilities.start_at >= ?', Time.now)
                    .order('availabilities.start_at ASC').references(:availabilities).limit(limit)
   end
