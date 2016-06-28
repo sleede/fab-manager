@@ -12,7 +12,7 @@ en:
         my_settings: "My Settings"
         my_projects: "My Projects"
         my_trainings: "My Trainings"
-        my_courses_and_workshops: "My Courses and Workshops"
+        my_events: "My Events"
         my_invoices: "My Invoices"
 
         # login/logout
@@ -29,7 +29,7 @@ en:
         home: "Home"
         reserve_a_machine: "Reserve a Machine"
         trainings_registrations: "Trainings registrations"
-        courses_and_workshops_registrations: "Courses and Workshops registrations"
+        events_registrations: "Events registrations"
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
 
@@ -40,7 +40,7 @@ en:
         manage_the_users: "Manage the Users"
         manage_the_invoices: "Manage the invoices"
         subscriptions_and_prices: "Subscriptions and Prices"
-        courses_and_workshops_monitoring: "Courses and Workshops monitoring"
+        events_monitoring: "Events monitoring"
         manage_the_machines: "Manage the Machines"
         manage_the_projects_elements: "Manage the Projects Elements"
         statistics: "Statistics"
@@ -108,7 +108,7 @@ en:
         discover_members: "Discover members"
 
         # next events summary on the home page
-        fablab_s_next_courses_and_workshops: "Fablab's next courses and workshops"
+        fablab_s_next_events: "Fablab's next events"
         every_events: "Every events"
         from_date_to_date: "From {{START}} to {{END}}"  # angular interpolation
         on_the_date: "On the {{DATE}}"  # angular interpolation
@@ -199,7 +199,7 @@ en:
 
       events_list:
         # Fablab's events list
-        the_fablab_s_courses_and_workshops: "The Fablab's courses and workshops"
+        the_fablab_s_events: "The Fablab's events"
 
       events_show:
         # details and booking of an event

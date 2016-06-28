@@ -75,7 +75,7 @@ fr:
     subscription_NAME_from_START_to_END: "Abonnement - Du %{START} au %{END}"
     machine_reservation_DESCRIPTION: "Réservation Machine - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
-    courses_and_workshops_reservation_DESCRIPTION: "Réservation Ateliers et Stages - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Réservation Évènement - %{DESCRIPTION}"
     full_price_ticket:
       one: "Une place plein tarif"
       other: "%{count} places plein tarif"

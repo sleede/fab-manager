@@ -69,8 +69,8 @@ en:
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Unable to delete the training because some users already booked it."
 
       events:
-        # courses and workshops tracking and management
-        fablab_courses_and_workshops: "Fablab courses and workshops"
+        # events tracking and management
+        fablab_events: "Fablab events"
         all_events: "All events"
         passed_events: "Passed events"
         events_to_come: "Events to come"
@@ -79,7 +79,7 @@ en:
         view_reservations: "View reservations"
 
       events_new:
-        # add a new workshop/course
+        # add a new event
         none: "None"
         every_days: "Every days"
         every_week: "Every week"
@@ -318,13 +318,12 @@ en:
         next_trainings: "Next trainings"
         passed_trainings: "Passed trainings"
         validated_trainings: "Validated trainings"
-        courses_and_workshops: "Courses and workshops"
-        next_courses_and_workshops: "Next courses and workshops"
-        no_upcomning_courses_or_workshops: "No upcoming courses and workshops"
+        events: "Events"
+        next_events: "Next events"
+        no_upcoming_events: "No upcoming events"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
         NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 reduced rate ticket reserved} other{{NUMBER} reduced rate tickets reserved}}"  # messageFormat interpolation
-        passed_courses_and_workshops: "Passed courses and workshops"
-        no_passed_courses_or_workshop: "No passed courses or workshops"
+        passed_events: "Passed events"
         invoices: "Invoices"
         invoice_#: "Invoice #"
         download_the_refund_invoice: "Download the refund invoice"

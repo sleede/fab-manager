@@ -353,7 +353,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # Create an hash map implementing the Reservation specs
   # @param member {Object} User as retreived from the API: current user / selected user if current is admin
   # @param reserve {Object} Reservation parameters (places...)
-  # @param event {Object} Current event (Atelier/Stage)
+  # @param event {Object} Current event
   # @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, nb_reserve_places:Number, nb_reserve_reduced_places:Number}}
   ##
   mkReservation = (member, reserve, event) ->

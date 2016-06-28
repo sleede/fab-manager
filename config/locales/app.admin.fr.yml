@@ -70,7 +70,7 @@ fr:
 
       events:
         # gestion et suivi des stages et ateliers
-        fablab_courses_and_workshops: "Les Stages et ateliers du Fab Lab"
+        fablab_events: "Les évènements du Fab Lab"
         all_events: "Tous les évènements"
         passed_events: "Les évènements déjà passés"
         events_to_come: "Les évènements à venir"
@@ -318,13 +318,12 @@ fr:
         next_trainings: "Les prochaines formations"
         passed_trainings: "Les formations passées"
         validated_trainings: "Les formations validées"
-        courses_and_workshops: "Ateliers et stages"
-        next_courses_and_workshops: "Les prochains stages et ateliers"
-        no_upcomning_courses_or_workshops: "Aucun stage ou atelier à venir"
+        events: "Évènements"
+        next_events: "Les prochains évènements"
+        no_upcoming_events: "Aucun évènement à venir"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 place plein tarif réservée} other{{NUMBER} places plein tarif réservées}}"  # messageFormat interpolation
         NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 place à tarif réduit réservée} other{{NUMBER} places à tarif réduit réservées}}"  # messageFormat interpolation
-        passed_courses_and_workshops: "Les stages et ateliers passés"
-        no_passed_courses_or_workshop: "Aucun stage ou atelier passé"
+        passed_events: "Les évènements passés"
         invoices: "Factures"
         invoice_#: "Facture n°"
         download_the_refund_invoice: "Télécharger l'avoir"

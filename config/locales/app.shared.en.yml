@@ -54,7 +54,8 @@ en:
         confirm_and_pay: "Confirm and pay"
         your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon form your"
         add_an_event: "Add an event"
-        load_the_next_courses_and_workshops: "Load the next courses and workshops..."
+        load_the_next_events: "Load the next events..."
+        no_passed_events: "No passed events"
         dates: "Dates:"
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
         surname: "Surname"
@@ -162,7 +163,7 @@ en:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
 
       event:
-        # event edition form (courses/workshops)
+        # event edition form
         title_is_required: "Title is required."
         matching_visual: "Matching visual"
         choose_a_picture: "Choose a picture"

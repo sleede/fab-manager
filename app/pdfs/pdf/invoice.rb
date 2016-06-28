@@ -110,9 +110,9 @@ module PDF
               ### Training reservation
               when 'Training'
                 details += I18n.t('invoices.training_reservation_DESCRIPTION', DESCRIPTION: item.description)
-              ### courses and workshops reservation
+              ### events reservation
               when 'Event'
-                details += I18n.t('invoices.courses_and_workshops_reservation_DESCRIPTION', DESCRIPTION: item.description)
+                details += I18n.t('invoices.event_reservation_DESCRIPTION', DESCRIPTION: item.description)
                 # details of the number of tickets
                 details += "\n  "+I18n.t('invoices.full_price_ticket', count: invoice.invoiced.nb_reserve_places) if invoice.invoiced.nb_reserve_places > 0
                 details += "\n  "+I18n.t('invoices.reduced_rate_ticket', count: invoice.invoiced.nb_reserve_reduced_places) if invoice.invoiced.nb_reserve_reduced_places > 0

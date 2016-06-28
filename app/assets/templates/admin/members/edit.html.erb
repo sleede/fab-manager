@@ -138,11 +138,11 @@
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'courses_and_workshops' | translate }}">
+        <uib-tab heading="{{ 'events' | translate }}">
           <div class="col-md-6">
             <div class="widget panel b-a m m-t-lg">
               <div class="panel-heading b-b">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'next_courses_and_workshops' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'next_events' | translate }}</h4>
               </div>
               <div class="widget-content bg-light wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
@@ -158,14 +158,14 @@
                     </span>
                   </li>
                 </ul>
-                <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'no_upcomning_courses_or_workshops'}}</div>
+                <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'no_upcoming_events' }}</div>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="widget panel b-a m m-t-lg">
               <div class="panel-heading b-b">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'passed_courses_and_workshops' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'passed_events' | translate }}</h4>
               </div>
               <div class="widget-content bg-light auto wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
@@ -173,7 +173,7 @@
                     <span class="font-sbold">{{r.reservable.title}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
                   </li>
                 </ul>
-                <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'no_passed_courses_or_workshop' }}</div>
+                <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'no_passed_events' }}</div>
               </div>
             </div>
           </div>

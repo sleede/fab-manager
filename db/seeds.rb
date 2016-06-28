@@ -5,7 +5,7 @@ if StatisticIndex.count == 0
      {id:1, es_type_key:'subscription', label:'Abonnements'},
      {id:2, es_type_key:'machine', label:'Heures machines'},
      {id:3, es_type_key:'training', label:'Formations'},
-     {id:4, es_type_key:'event', label:'Ateliers/Stages'},
+     {id:4, es_type_key:'event', label:'Évènements'},
      {id:5, es_type_key:'account', label:'Inscriptions', ca: false},
      {id:6, es_type_key:'project', label:'Projets', ca: false},
      {id:7, es_type_key:'user', label:'Utilisateurs', table: false, ca: false}
