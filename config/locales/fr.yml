@@ -36,6 +36,9 @@ fr:
     errors:
       <<: *errors
 
+  apipie:
+    api_documentation: "Documentation de l'API"
+
   omniauth:
     # messages d'erreur lors de l'import d'un compte depuis un SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "L'adresse de courriel \"%{OLD_MAIL}\" est déjà associée à un compte utilisateur, merci de saisir votre code d'authentification."
@@ -226,3 +229,30 @@ fr:
       undefined_notification:
         unknown_notification: "Notification inconnue"
         notification_ID_wrong_type_TYPE_unknown: "Notification {ID} erronée (type {TYPE} inconnu)."
+
+  statistics:
+    # outil de statistiques pour les administrateurs
+    subscriptions: "Abonnements"
+    machines_hours: "Heures machines"
+    trainings: "Formations"
+    events: "Évènements"
+    registrations: "Inscriptions"
+    projects: "Projets"
+    users: "Utilisateurs"
+    training_id: "ID Formation"
+    training_date: "Date Formation"
+    event_id: "ID Évènement"
+    event_date: "Date Évènement"
+    event_name: "Nom Évènement"
+    themes: "Thèmes"
+    components: "Composants"
+    machines: "Machines"
+    user_id: "ID Utilisateur"
+    bookings: "Réservations"
+    hours_number: "Nombre d'heures"
+    tickets_number: "Nombre de places"
+    revenue: "Chiffre d'affaires"
+    course: "Stage"
+    workshop: "Atelier"
+    account_creation: "Création de compte"
+    project_publication: "Publication de projet"

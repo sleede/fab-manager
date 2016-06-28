@@ -36,6 +36,9 @@ en:
     errors:
       <<: *errors
 
+  apipie:
+    api_documentation: "API Documentation"
+
   omniauth:
     # error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail address \"%{OLD_MAIL}\" is already linked to another account, please input your authentication code."
@@ -226,3 +229,26 @@ en:
       undefined_notification:
         unknown_notification: "Unknown notification"
         notification_ID_wrong_type_TYPE_unknown: "Notification %{ID} wrong (type %{TYPE} unknown)"
+
+  statistics:
+    # statistics tools for admins
+    subscriptions: "Subscriptions"
+    machines_hours: "Machines hours"
+    trainings: "Trainings"
+    events: "Events"
+    registrations: "Registrations"
+    projects: "Projects"
+    users: "Users"
+    training_id: "Training ID"
+    training_date: "Training Date"
+    event_id: "Event ID"
+    event_date: "Event Date"
+    event_name: "Event Name"
+    themes: "Themes"
+    components: "Components"
+    machines: "Machines"
+    user_id: "User ID"
+    bookings: "Bookings"
+    hours_number: "Hours number"
+    tickets_number: "Tickets number"
+    revenue: "Revenue"
