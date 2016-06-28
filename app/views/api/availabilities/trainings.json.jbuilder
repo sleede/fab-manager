@@ -4,15 +4,13 @@ json.array!(@availabilities) do |a|
   if a.is_reserved
     json.is_reserved true
     json.title "#{a.trainings[0].name}' - #{t('trainings.i_ve_reserved')}"
-    json.borderColor '#b2e774'
   elsif a.is_completed
     json.is_completed true
     json.title "#{a.trainings[0].name} - #{t('trainings.completed')}"
-    json.borderColor '#eeeeee'
   else
     json.title a.trainings[0].name
-    json.borderColor '#bd7ae9'
   end
+  json.borderColor trainings_border_color(a)
   json.start a.start_at.iso8601
   json.end a.end_at.iso8601
   json.backgroundColor 'white'
