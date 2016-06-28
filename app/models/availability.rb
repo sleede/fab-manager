@@ -42,6 +42,8 @@ class Availability < ActiveRecord::Base
   def title
     if available_type == 'machines'
       machines.map(&:name).join(' - ')
+    elsif available_type == 'event'
+      event.name
     else
       trainings.map(&:name).join(' - ')
     end

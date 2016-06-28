@@ -17,9 +17,25 @@ class API::AvailabilitiesController < API::ApiController
   def public
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
-    @availabilities = Availability.includes(:machines,:tags,:trainings).where.not(available_type: 'event')
-                                  .where('start_at >= ? AND end_at <= ?', start_date, end_date)
-    render :index
+    if in_same_day(start_date, end_date)
+      @training_availabilities = Availability.includes(:tags, :trainings).where.not(available_type: 'machines')
+                                    .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
+                                    .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      @machine_slots = []
+      @machine_availabilities.each do |a|
+        a.machines.each do |machine|
+          ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
+            slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: machine, title: machine.name)
+            @machine_slots << slot
+          end
+        end
+      end
+      @availabilities = [].concat(@training_availabilities).concat(@machine_slots)
+    else
+      @availabilities = Availability.includes(:tags, :machines, :trainings, :event)
+                                    .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+    end
   end
 
   def show
@@ -187,5 +203,9 @@ class API::AvailabilitiesController < API::ApiController
 
     def is_subscription_year(user)
       user.subscription and user.subscription.plan.interval == 'year' and user.subscription.expired_at >= Time.now
+    end
+
+    def in_same_day(start_date, end_date)
+      (end_date.to_date - start_date.to_date).to_i == 1
     end
 end
