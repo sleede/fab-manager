@@ -136,8 +136,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'Category', 'EventThemes', 'eventsPromise', 'categoriesPromise', 'themesPromise'
-, ($scope, $state, Event, Category, EventThemes, eventsPromise, categoriesPromise, themesPromise) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
+, ($scope, $state, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise) ->
 
 
 
@@ -163,6 +163,9 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
 
   ## List of events themes
   $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
 
   ##
   # Adds a bucket of events to the bottom of the page, grouped by month
@@ -254,8 +257,8 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   getModel = (name) ->
     switch name
       when 'category' then [Category, $scope.categories]
-      when 'theme' then [EventThemes, $scope.themes]
-      #when 'age_range' then [AgeRange, $scope.ageRanges]
+      when 'theme' then [EventTheme, $scope.themes]
+      when 'age_range' then [AgeRange, $scope.ageRanges]
       else [null, []]
 
 

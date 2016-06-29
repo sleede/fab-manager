@@ -82,6 +82,8 @@ en:
         categories: "Categories"
         add_a_category: "Add a category"
         add_a_theme: "Add a theme"
+        age_ranges: "Age ranges"
+        add_a_range: "Add a range"
 
       events_new:
         # add a new event

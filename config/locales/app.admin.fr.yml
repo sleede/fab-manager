@@ -82,6 +82,8 @@ fr:
         categories: "Catégories"
         add_a_category: "Ajouter une catégorie"
         add_a_theme: "Ajouter une thématique"
+        age_ranges: "Tranches d'âge"
+        add_a_range: "Ajouter une tranche"
 
       events_new:
         # ajouter un nouveau atelier/stage

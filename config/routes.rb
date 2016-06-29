@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     resources :credits
     resources :categories
     resources :event_themes
+    resources :age_ranges
     resources :statistics, only: [:index]
     resources :custom_assets, only: [:show, :create, :update]
     resources :tags

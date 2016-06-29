@@ -1,6 +1,6 @@
 'use strict'
 
-Application.Services.factory 'EventThemes', ["$resource", ($resource)->
+Application.Services.factory 'EventTheme', ["$resource", ($resource)->
   $resource "/api/event_themes/:id",
     {id: "@id"},
     update:

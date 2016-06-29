@@ -537,8 +537,11 @@ angular.module('application.router', ['ui.router']).
           categoriesPromise: ['Category', (Category) ->
             Category.query().$promise
           ]
-          themesPromise: ['EventThemes', (EventThemes) ->
-            EventThemes.query().$promise
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.events').$promise
