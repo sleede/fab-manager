@@ -32,6 +32,8 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
       calendarEventClickCb(event, jsEvent, view)
     viewRender: (view, element) ->
       viewRenderCb(view, element)
+    eventRender: (event, element, view) ->
+      eventRenderCb(event, element)
 
 
   ### PRIVATE SCOPE ###
@@ -71,4 +73,12 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     if view.type == 'agendaDay'
       # get availabilties by 1 day for show machine slots
       uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
+
+  eventRenderCb = (event, element) ->
+    if event.tags.length > 0
+      html = ''
+      for tag in event.tags
+        html += "<span class='label label-success text-white'>#{tag.name}</span> "
+      element.find('.fc-title').append("<br/>"+html)
+    return
 ]
