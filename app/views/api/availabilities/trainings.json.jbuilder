@@ -10,7 +10,7 @@ json.array!(@availabilities) do |a|
   else
     json.title a.trainings[0].name
   end
-  json.borderColor trainings_border_color(a)
+  json.borderColor trainings_events_border_color(a)
   json.start a.start_at.iso8601
   json.end a.end_at.iso8601
   json.backgroundColor 'white'

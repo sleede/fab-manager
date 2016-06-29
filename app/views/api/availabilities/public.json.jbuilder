@@ -13,12 +13,25 @@ json.array!(@availabilities) do |availability|
       json.training_id availability.trainings.first.id
     end
     json.available_type availability.available_type
-    json.borderColor availability_border_color(availability)
     json.tag_ids availability.tag_ids
     json.tags availability.tags do |t|
       json.id t.id
       json.name t.name
     end
+
+    if availability.available_type != 'machines'
+      json.borderColor trainings_events_border_color(availability)
+      if availability.is_reserved
+        json.is_reserved true
+        json.title "#{availability.title}' - #{t('trainings.i_ve_reserved')}"
+      elsif availability.is_completed
+        json.is_completed true
+        json.title "#{availability.title} - #{t('trainings.completed')}"
+      end
+    else
+      json.borderColor availability_border_color(availability)
+    end
+
   # machine slot object
   else
     json.borderColor machines_slot_border_color(availability)

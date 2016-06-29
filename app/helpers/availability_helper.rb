@@ -4,7 +4,7 @@ module AvailabilityHelper
   EVENT_COLOR = '#dd7e6b'
   IS_RESERVED_BY_CURRENT_USER = '#b2e774'
   MACHINE_IS_RESERVED_BY_USER = '#1d98ec'
-  TRAINING_IS_COMPLETED = '#eeeeee'
+  IS_COMPLETED = '#eeeeee'
 
   def availability_border_color(availability)
     if availability.available_type == 'machines'
@@ -17,16 +17,20 @@ module AvailabilityHelper
   end
 
   def machines_slot_border_color(slot)
-    slot.is_reserved ? (slot.is_reserved_by_current_user ? IS_RESERVED_BY_CURRENT_USER : MACHINE_IS_RESERVED_BY_USER) : MACHINE_COLOR
+    slot.is_reserved ? (slot.is_reserved_by_current_user ? IS_RESERVED_BY_CURRENT_USER : IS_COMPLETED) : MACHINE_COLOR
   end
 
-  def trainings_border_color(availability)
+  def trainings_events_border_color(availability)
     if availability.is_reserved
       IS_RESERVED_BY_CURRENT_USER
     elsif availability.is_completed
-      TRAINING_IS_COMPLETED
+      IS_COMPLETED
     else
-      TRAINING_COLOR
+      if availability.available_type == 'training'
+        TRAINING_COLOR
+      else
+        EVENT_COLOR
+      end
     end
   end
 end
