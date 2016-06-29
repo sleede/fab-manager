@@ -18,7 +18,7 @@ class API::AvailabilitiesController < API::ApiController
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
     if in_same_day(start_date, end_date)
-      @training_availabilities = Availability.includes(:tags, :trainings).where.not(available_type: 'machines')
+      @training_and_event_availabilities = Availability.includes(:tags, :trainings).where.not(available_type: 'machines')
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
@@ -31,7 +31,7 @@ class API::AvailabilitiesController < API::ApiController
           end
         end
       end
-      @availabilities = [].concat(@training_availabilities).concat(@machine_slots)
+      @availabilities = [].concat(@training_and_event_availabilities).concat(@machine_slots)
     else
       @availabilities = Availability.includes(:tags, :machines, :trainings, :event)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
