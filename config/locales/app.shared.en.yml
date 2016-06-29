@@ -184,6 +184,8 @@ en:
         standard_rate: "Standard rate"
         0_=_free: "0 = free"
         tickets_available: "Tickets available"
+        event_theme: "Event theme"
+        age_range: "Age range"
 
       plan:
         # subscription plan edition form

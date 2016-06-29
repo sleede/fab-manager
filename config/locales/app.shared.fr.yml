@@ -184,6 +184,8 @@ fr:
         standard_rate: "Tarif standard"
         0_=_free: "0 = gratuit"
         tickets_available: "Places disponibles"
+        event_theme: "Thème de l'évènement"
+        age_range: "Tranche d'âge"
 
       plan:
         # formulaire d'édition d'une formule d'abonnement

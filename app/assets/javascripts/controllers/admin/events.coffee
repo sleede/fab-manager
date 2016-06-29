@@ -7,7 +7,6 @@
 # in the various events' admin controllers.
 #
 # Provides :
-#  - $scope.categories = [{Category}]
 #  - $scope.datePicker = {}
 #  - $scope.submited(content)
 #  - $scope.cancel()
@@ -23,13 +22,7 @@
 #  - $state (Ui-Router) [ 'app.public.events_list' ]
 ##
 class EventsController
-  constructor: ($scope, $state, Event, Category) ->
-
-    ## Retrieve the list of categories from the server (course, workshop, ...)
-    Category.query().$promise.then (data)->
-      $scope.categories = data.map (d) ->
-        id: d.id
-        name: d.name
+  constructor: ($scope, $state) ->
 
     ## default parameters for AngularUI-Bootstrap datepicker
     $scope.datePicker =
@@ -286,8 +279,8 @@ Application.Controllers.controller "ShowEventReservationsController", ["$scope",
 ##
 # Controller used in the event creation page
 ##
-Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'Event', 'Category', 'CSRF', '_t'
-, ($scope, $state, $locale, Event, Category, CSRF, _t) ->
+Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
+, ($scope, $state, $locale, CSRF, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -295,6 +288,15 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 
   ## Form action on the above URL
   $scope.method = 'post'
+
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
 
   ## Default event parameters
   $scope.event =
@@ -320,7 +322,7 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
   ## Using the EventsController
-  new EventsController($scope, $state, Event, Category)
+  new EventsController($scope, $state)
 ]
 
 
@@ -328,8 +330,8 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 ##
 # Controller used in the events edition page
 ##
-Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'Event', 'Category', 'CSRF', 'eventPromise'
-, ($scope, $state, $stateParams, $locale, Event, Category, CSRF, eventPromise) ->
+Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
+, ($scope, $state, $stateParams, $locale, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise) ->
 
   ### PUBLIC SCOPE ###
 
@@ -346,6 +348,15 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
 
   ## currency symbol for the current locale (cf. angular-i18n)
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
+
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
 
 
 
@@ -364,7 +375,7 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
     $scope.event.end_date = moment($scope.event.end_date).toDate()
 
     ## Using the EventsController
-    new EventsController($scope, $state, Event, Category)
+    new EventsController($scope, $state)
 
 
 
