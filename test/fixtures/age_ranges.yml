@@ -2,12 +2,12 @@
 
 youngs:
   id: 1
-  range: De 10 à 21 ans
+  name: De 10 à 21 ans
 
 adults:
   id: 2
-  range: A partir de 18 ans
+  name: A partir de 18 ans
 
 seniors:
   id: 3
-  range: A partir de 65 ans
+  name: A partir de 65 ans

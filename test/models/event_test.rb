@@ -13,7 +13,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'event must have an age range' do
     e = Event.find(2)
-    assert_not_nil e.age_range.range
+    assert_not_nil e.age_range.name
   end
 
   test 'event must not have any age range' do
