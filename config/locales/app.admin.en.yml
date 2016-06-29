@@ -81,6 +81,7 @@ en:
         view_reservations: "View reservations"
         categories: "Categories"
         add_a_category: "Add a category"
+        add_a_theme: "Add a theme"
 
       events_new:
         # add a new event

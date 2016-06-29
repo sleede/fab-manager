@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     resources :trainings
     resources :credits
     resources :categories
+    resources :event_themes
     resources :statistics, only: [:index]
     resources :custom_assets, only: [:show, :create, :update]
     resources :tags

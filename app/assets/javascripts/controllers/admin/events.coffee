@@ -136,8 +136,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'Category', 'eventsPromise', 'categoriesPromise'
-, ($scope, $state, Event, Category, eventsPromise, categoriesPromise) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'Category', 'EventThemes', 'eventsPromise', 'categoriesPromise', 'themesPromise'
+, ($scope, $state, Event, Category, EventThemes, eventsPromise, categoriesPromise, themesPromise) ->
 
 
 
@@ -152,8 +152,17 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   ## Current virtual page
   $scope.page = 2
 
+  ## Temporary datastore for creating new elements
+  $scope.inserted =
+    category: null
+    theme: null
+    age_range: null
+
   ## List of categories for the events
   $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
 
   ##
   # Adds a bucket of events to the bottom of the page, grouped by month
@@ -166,49 +175,53 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
 
 
   ##
-  # Saves a new categoty / Update an existing one to the server (form validation callback)
-  # @param data {Object} category name
-  # @param [data] {number} category id, in case of update
+  # Saves a new element / Update an existing one to the server (form validation callback)
+  # @param model {string} model name
+  # @param data {Object} element name
+  # @param [id] {number} element id, in case of update
   ##
-  $scope.saveCategory = (data, id) ->
+  $scope.saveElement = (model, data, id) ->
     if id?
-      Category.update {id: id}, data
+      getModel(model)[0].update {id: id}, data
     else
-      Category.save data, (resp)->
-        $scope.categories[$scope.categories.length-1].id = resp.id
+      getModel(model)[0].save data, (resp)->
+        getModel(model)[1][getModel(model)[1].length-1].id = resp.id
 
 
 
   ##
-  # Deletes the category at the specified index
-  # @param index {number} category index in the $scope.categories array
+  # Deletes the element at the specified index
+  # @param model {string} model name
+  # @param index {number} element index in the $scope[model] array
   ##
-  $scope.removeCategory = (index) ->
-    Category.delete $scope.categories[index]
-    $scope.categories.splice(index, 1)
+  $scope.removeElement = (model, index) ->
+    getModel(model)[0].delete getModel(model)[1][index]
+    getModel(model)[1].splice(index, 1)
 
 
 
   ##
-  # Creates a new empty entry in the $scope.categories array
+  # Creates a new empty entry in the $scope[model] array
+  # @param model {string} model name
   ##
-  $scope.addCategory = ->
-    $scope.inserted =
+  $scope.addElement = (model) ->
+    $scope.inserted[model] =
       name: ''
-    $scope.categories.push($scope.inserted)
+    getModel(model)[1].push($scope.inserted[model])
 
 
 
   ##
-  # Removes the newly inserted but not saved category / Cancel the current category modification
+  # Removes the newly inserted but not saved element / Cancel the current element modification
+  # @param model {string} model name
   # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-  # @param index {number} category index in the $scope.categories array
+  # @param index {number} element index in the $scope[model] array
   ##
-  $scope.cancelCategory = (rowform, index) ->
-    if $scope.categories[index].id?
+  $scope.cancelElement = (model, rowform, index) ->
+    if getModel(model)[1][index].id?
       rowform.$cancel()
     else
-      $scope.categories.splice(index, 1)
+      getModel(model)[1].splice(index, 1)
 
 
 
@@ -233,6 +246,17 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
     else
       $scope.paginateActive = false
 
+  ##
+  # Return the model and the datastore matching the given name
+  # @param name {string} 'category', 'theme' or 'age_range'
+  # @return {[Object, Array]} model and datastore
+  ##
+  getModel = (name) ->
+    switch name
+      when 'category' then [Category, $scope.categories]
+      when 'theme' then [EventThemes, $scope.themes]
+      #when 'age_range' then [AgeRange, $scope.ageRanges]
+      else [null, []]
 
 
   # init the controller (call at the end !)

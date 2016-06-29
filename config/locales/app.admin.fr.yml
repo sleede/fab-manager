@@ -81,6 +81,7 @@ fr:
         view_reservations: "Consulter les réservations"
         categories: "Catégories"
         add_a_category: "Ajouter une catégorie"
+        add_a_theme: "Ajouter une thématique"
 
       events_new:
         # ajouter un nouveau atelier/stage

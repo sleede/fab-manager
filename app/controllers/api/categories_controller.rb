@@ -1,4 +1,5 @@
 class API::CategoriesController < API::ApiController
+  before_action :authenticate_user!
   before_action :set_category, only: [:show, :update, :destroy]
 
   def index
