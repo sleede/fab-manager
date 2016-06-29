@@ -21,19 +21,19 @@
   <section class="m-lg">
 
     <div class="row m-b-md">
-      <div class="col-md-3 m-b">
+      <div class="col-md-3 m-b" ng-show="categories.length > 0">
         <select ng-model="filters.category_id" ng-change="filterEvents()" class="form-control" ng-options="c.id as c.name for c in categories">
           <option value="" translate>{{ 'all_categories' }}</option>
         </select>
       </div>
 
-      <div class="col-md-3 m-b">
+      <div class="col-md-3 m-b" ng-show="themes.length > 0">
         <select ng-model="filters.theme_id" ng-change="filterEvents()" class="form-control" ng-options="t.id as t.name for t in themes">
           <option value="" translate>{{ 'all_themes' }}</option>
         </select>
       </div>
 
-      <div class="col-md-3 m-b">
+      <div class="col-md-3 m-b" ng-show="ageRanges.length > 0">
         <select ng-model="filters.age_range_id" ng-change="filterEvents()" class="form-control" ng-options="a.id as a.name for a in ageRanges">
           <option value="" translate>{{ 'for_all' }}</option>
         </select>
