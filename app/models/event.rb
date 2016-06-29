@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :categories, join_table: :events_categories
   validates :categories, presence: true
   has_many :reservations, as: :reservable, dependent: :destroy
-  has_and_belongs_to_many :event_themes, join_table: :events_event_themes
+  has_and_belongs_to_many :event_themes, join_table: :events_event_themes, dependent: :destroy
 
   belongs_to :age_range
 
