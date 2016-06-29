@@ -13,7 +13,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
 
   ### PUBLIC SCOPE ###
 
-  ## bind the availabilities slots with full-Calendar events
+  ## add availabilities url to event sources
   $scope.eventSources = []
   $scope.eventSources.push
     url: '/api/availabilities/public'
@@ -21,7 +21,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
 
   ## fullCalendar (v2) configuration
   $scope.calendarConfig = CalendarConfig
-    slotEventOverlap: false
+    slotEventOverlap: true
     header:
       left: 'month agendaWeek agendaDay'
       center: 'title'
@@ -31,20 +31,41 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     eventClick: (event, jsEvent, view)->
       calendarEventClickCb(event, jsEvent, view)
     viewRender: (view, element) ->
-      if view.type == 'agendaDay'
-        uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
+      viewRenderCb(view, element)
 
 
   ### PRIVATE SCOPE ###
 
   calendarEventClickCb = (event, jsEvent, view) ->
-    console.log event
     ## current calendar object
     calendar = uiCalendarConfig.calendars.calendar
     if event.available_type == 'machines'
-      calendar.fullCalendar('gotoDate', event.start)
       calendar.fullCalendar('changeView', 'agendaDay')
+      calendar.fullCalendar('gotoDate', event.start)
     else
       if event.available_type == 'event'
         $state.go('app.public.events_show', {id: event.event_id})
+
+  ## agendaDay view: disable slotEventOverlap
+  ## agendaWeek view: enable slotEventOverlap
+  toggleSlotEventOverlap = (view) ->
+    # set defaultView, because when we change slotEventOverlap
+    # ui-calendar will trigger rerender calendar
+    $scope.calendarConfig.defaultView = view.type
+    today = moment().startOf('day')
+    if today > view.start and today <= view.end and today != view.start
+      $scope.calendarConfig.defaultDate = today
+    else
+      $scope.calendarConfig.defaultDate = view.start
+    if view.type == 'agendaDay'
+      $scope.calendarConfig.slotEventOverlap = false
+    else
+      $scope.calendarConfig.slotEventOverlap = true
+
+  ## function is called when calendar view is rendered or changed
+  viewRenderCb = (view, element) ->
+    toggleSlotEventOverlap(view)
+    if view.type == 'agendaDay'
+      # get availabilties by 1 day for show machine slots
+      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
 ]
