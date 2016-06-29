@@ -1,8 +1,8 @@
 user_is_admin = (current_user and current_user.is_admin?)
-maxMembers = @query.except(:offset, :limit, :order).count
+max_members = @query.except(:offset, :limit, :order).count
 
 json.array!(@members) do |member|
-  json.maxMembers maxMembers
+  json.maxMembers max_members
   json.id member.id
   json.username member.username
   json.slug member.slug

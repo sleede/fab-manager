@@ -3,9 +3,16 @@ class API::EventsController < API::ApiController
 
   def index
     @events = policy_scope(Event)
-    @total = @events.count
     @page = params[:page]
+
+    # filters
+    @events = @events.joins(:categories).where('categories.id = :category', category: params[:category_id]) if params[:category_id]
+    @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
+    @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
+
+    # paginate
     @events = @events.page(@page).per(12)
+
   end
 
   # GET /events/upcoming/:limit

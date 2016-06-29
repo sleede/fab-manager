@@ -1,9 +1,8 @@
 class API::CategoriesController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   before_action :set_category, only: [:show, :update, :destroy]
 
   def index
-    authorize Category
     @categories = Category.all
   end
 

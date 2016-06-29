@@ -1,9 +1,8 @@
 class API::EventThemesController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   before_action :set_event_theme, only: [:show, :update, :destroy]
 
   def index
-    authorize EventTheme
     @event_themes = EventTheme.all
   end
 

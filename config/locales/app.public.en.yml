@@ -132,7 +132,6 @@ en:
         my_projects: "My projects"
         projects_to_whom_i_take_part_in: "Projects to whom I take part in"
         all_machines: "All machines"
-        all_themes: "All themes"
         all_materials: "All materials"
         load_next_projects: "Load next projects"
 
@@ -200,6 +199,8 @@ en:
       events_list:
         # Fablab's events list
         the_fablab_s_events: "The Fablab's events"
+        all_categories: "All categories"
+        for_all: "For all"
 
       events_show:
         # details and booking of an event

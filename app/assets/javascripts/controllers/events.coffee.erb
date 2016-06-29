@@ -1,13 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "EventsController", ["$scope", "$state", 'Event', ($scope, $state, Event) ->
-
-
-
-  ### PRIVATE STATIC CONSTANTS ###
-
-  # Number of events added to the page when the user clicks on 'load next events'
-  EVENTS_PER_PAGE = 12
+Application.Controllers.controller "EventsController", ["$scope", "$state", 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
+, ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) ->
 
 
 
@@ -16,33 +10,37 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
   ## The events displayed on the page
   $scope.events = []
 
-  ## By default, the pagination mode is activated to limit the page size
-  $scope.paginateActive = true
-
   ## The currently displayed page number
   $scope.page = 1
 
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
+
+  ## Active filters for the events list
+  $scope.filters =
+    category_id: null
+    theme_id: null
+    age_range_id: null
+
+
+
   ##
-  # Adds EVENTS_PER_PAGE events to the bottom of the page, grouped by month
+  # Adds a resultset of events to the bottom of the page, grouped by month
   ##
   $scope.loadMoreEvents = ->
-    Event.query {page: $scope.page}, (data) ->
+    Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
       $scope.events = $scope.events.concat data
-      if data.length > 0
-        $scope.paginateActive = false if ($scope.page-2)*EVENTS_PER_PAGE+data.length >= data[0].nb_total_events
+      groupEvents(data)
+      $scope.page += 1
 
-        $scope.eventsGroupByMonth = _.groupBy($scope.events, (obj) ->
-          _.map ['month', 'year'], (key, value) -> obj[key]
-        )
-        $scope.monthOrder = _.sortBy _.keys($scope.eventsGroupByMonth), (k)->
-          monthYearArray = k.split(',')
-          date = new Date()
-          date.setMonth(monthYearArray[0])
-          date.setYear(monthYearArray[1])
-          return -date.getTime()
-      else
-        $scope.paginateActive = false
-    $scope.page += 1
+      if (!data[0] || data[0].nb_total_events <= $scope.events.length)
+        $scope.noMoreResults = true
 
 
 
@@ -55,13 +53,58 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
+  ##
+  # Callback to refresh the events list according to the filters set
+  ##
+  $scope.filterEvents = ->
+    # reinitialize results datasets
+    $scope.page = 1
+    $scope.eventsGroupByMonth = {}
+    $scope.events = []
+    $scope.monthOrder = []
+
+    # run a search query
+    Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
+      $scope.events = data
+      groupEvents(data)
+      $scope.page += 1
+
+      if (!data[0] || data[0].nb_total_events <= $scope.events.length)
+        $scope.noMoreResults = true
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    $scope.loadMoreEvents()
+    $scope.filterEvents()
+
+
+
+  ##
+  # Group the provided events by month/year and concat them with existing results
+  # Then compute the ordered list of months for the complete resultset.
+  # Affect the resulting events groups in $scope.eventsGroupByMonth and the ordered month keys in $scope.monthOrder.
+  # @param {Array} Events retrived from the API
+  ##
+  groupEvents = (events) ->
+    if events.length > 0
+      eventsGroupedByMonth = _.groupBy(events, (obj) ->
+        _.map ['month', 'year'], (key, value) -> obj[key]
+      )
+      $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth)
+
+      monthsOrder = _.sortBy _.keys($scope.eventsGroupByMonth), (k)->
+        monthYearArray = k.split(',')
+        date = new Date()
+        date.setMonth(monthYearArray[0])
+        date.setYear(monthYearArray[1])
+        return -date.getTime()
+
+      $scope.monthOrder = monthsOrder
 
 
 

@@ -1,9 +1,8 @@
 class API::AgeRangesController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   before_action :set_age_range, only: [:show, :update, :destroy]
 
   def index
-    authorize AgeRange
     @age_ranges = AgeRange.all
   end
 

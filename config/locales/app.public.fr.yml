@@ -132,7 +132,6 @@ fr:
         my_projects: "Mes projets"
         projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
         all_machines: "Toutes les machines"
-        all_themes: "Toutes les thématiques"
         all_materials: "Tous les matériaux"
         load_next_projects: "Charger les projets suivants"
 
@@ -200,6 +199,8 @@ fr:
       events_list:
         # liste des évènements du fablab
         the_fablab_s_events: "Les évènements du Fab Lab"
+        all_categories: "Toutes les catégories"
+        for_all: "Tout public"
 
       events_show:
         # détails d'un événement et réservation

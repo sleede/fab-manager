@@ -439,6 +439,15 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "events/index.html" %>'
             controller: 'EventsController'
         resolve:
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.events_list').$promise
           ]
