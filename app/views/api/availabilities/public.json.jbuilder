@@ -32,8 +32,9 @@ json.array!(@availabilities) do |availability|
       json.borderColor availability_border_color(availability)
     end
 
-  # machine slot object
+  # machine slot object ( here => availability = slot )
   else
+    json.machine_id availability.machine.id
     json.borderColor machines_slot_border_color(availability)
     json.tag_ids availability.availability.tag_ids
     json.tags availability.availability.tags do |t|

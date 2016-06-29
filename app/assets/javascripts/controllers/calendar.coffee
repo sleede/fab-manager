@@ -45,6 +45,9 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     else
       if event.available_type == 'event'
         $state.go('app.public.events_show', {id: event.event_id})
+      else if event.available_type == 'training'
+      else
+        $state.go('app.public.machines_show', {id: event.machine_id})
 
   ## agendaDay view: disable slotEventOverlap
   ## agendaWeek view: enable slotEventOverlap
