@@ -69,7 +69,11 @@
 
         <h5>{{event.categories[0].name}}</h5>
         <dl class="text-sm">
-          <dt><i class="fa fa-calendar"></i> {{ 'dates' | translate }}</dt>
+          <dt ng-if="event.event_themes.length > 0"><i class="fa fa-tags" aria-hidden="true"></i> {{event.event_themes[0].name}}</dt>
+          <dt ng-if="event.age_range"><i class="fa fa-users" aria-hidden="true"></i> {{event.age_range.name}}</dt>
+        </dl>
+        <dl class="text-sm">
+          <dt><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'dates' | translate }}</dt>
           <dd>{{ 'beginning' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'L'}}</span><br>{{ 'ending' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'L'}}</span></dd>
           <dt><i class="fa fa-clock-o"></i> {{ 'opening_hours' | translate }}</dt>
           <dd ng-if="event.all_day == 'true'"><span translate>{{ 'all_day' }}</span></dd>
