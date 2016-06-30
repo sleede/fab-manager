@@ -57,9 +57,6 @@ end
 
 if StatisticSubType.count == 0
   StatisticSubType.create!([
-    {key: 'Stage', label:I18n.t('statistics.course'), statistic_types: StatisticIndex.find_by(es_type_key: 'event').statistic_types},
-    {key: 'Atelier', label:I18n.t('statistics.workshop'), statistic_types: StatisticIndex.find_by(es_type_key: 'event').statistic_types},
-
     {key: 'created', label:I18n.t('statistics.account_creation'), statistic_types: StatisticIndex.find_by(es_type_key: 'account').statistic_types},
     {key: 'published', label:I18n.t('statistics.project_publication'), statistic_types: StatisticIndex.find_by(es_type_key: 'project').statistic_types}
   ])

@@ -254,7 +254,5 @@ fr:
     hours_number: "Nombre d'heures"
     tickets_number: "Nombre de places"
     revenue: "Chiffre d'affaires"
-    course: "Stage"
-    workshop: "Atelier"
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
