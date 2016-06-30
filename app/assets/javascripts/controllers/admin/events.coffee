@@ -194,11 +194,14 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
     if model == 'category' and getModel(model)[1].length == 1
       growl.error(_t('at_least_one_category_is_required_unable_to_delete_the_last_one'))
       return false
+    if getModel(model)[1][index].related_to > 0
+      growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', {ELEMENT:model, NUMBER:getModel(model)[1][index].related_to}, "messageformat"))
+      return false
     dialogs.confirm
       resolve:
         object: ->
           title: _t('confirmation_required')
-          msg: _t('do_you_really_want_to_delete_this_ELEMENT_used_NUMBER_times', {ELEMENT:model, NUMBER:getModel(model)[1][index].related_to}, "messageformat")
+          msg: _t('do_you_really_want_to_delete_this_ELEMENT', {ELEMENT:model}, "messageformat")
     , -> # delete confirmed
       getModel(model)[0].delete getModel(model)[1][index]
       getModel(model)[1].splice(index, 1)
