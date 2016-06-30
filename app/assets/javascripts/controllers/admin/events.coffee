@@ -129,8 +129,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
-, ($scope, $state, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs','Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
+, ($scope, $state, dialogs, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
 
 
 
@@ -191,8 +191,14 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   # @param index {number} element index in the $scope[model] array
   ##
   $scope.removeElement = (model, index) ->
-    getModel(model)[0].delete getModel(model)[1][index]
-    getModel(model)[1].splice(index, 1)
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('confirmation_required')
+          msg: _t('do_you_really_want_to_delete_this_ELEMENT_used_NUMBER_times', {ELEMENT:model, NUMBER:getModel(model)[1][index].related_to}, "messageformat")
+    , -> # delete confirmed
+      getModel(model)[0].delete getModel(model)[1][index]
+      getModel(model)[1].splice(index, 1)
 
 
 
@@ -203,6 +209,7 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   $scope.addElement = (model) ->
     $scope.inserted[model] =
       name: ''
+      related_to: 0
     getModel(model)[1].push($scope.inserted[model])
 
 

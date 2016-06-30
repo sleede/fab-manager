@@ -84,6 +84,7 @@ en:
         add_a_theme: "Add a theme"
         age_ranges: "Age ranges"
         add_a_range: "Add a range"
+        do_you_really_want_to_delete_this_ELEMENT_used_NUMBER_times: "Do you really want to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}? {NUMBER, plural, =0{It is not currently associated with any events} one{Currently, it is associated with only one event} other{Currently, it is associated with {NUMBER} events}}."  # messageFormat interpolation
 
       events_new:
         # add a new event
