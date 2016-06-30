@@ -22,6 +22,9 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
   ## List of age ranges
   $scope.ageRanges = ageRangesPromise
 
+  ## Hide or show the 'load more' button
+  $scope.noMoreResults = false
+
   ## Active filters for the events list
   $scope.filters =
     category_id: null
@@ -62,6 +65,7 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
     $scope.eventsGroupByMonth = {}
     $scope.events = []
     $scope.monthOrder = []
+    $scope.noMoreResults = false
 
     # run a search query
     Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
