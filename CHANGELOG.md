@@ -1,5 +1,13 @@
 # Changelog Fab Manager
 
+## next release
+- Admin: Events can be associated with a theme and an age range
+- Admin: Event categories, themes and age ranges can be customized
+- Filter events by category, theme and age range in public view
+- Statistics will include informations abouts events category, theme and age range
+- [TODO DEPLOY] `rake fablab:es_add_event_filters`
+- [TODO DEPLOY] `rake db:migrate`
+
 ## v2.3.0 2016 June 28
 
 - Public API with access management and online documentation
