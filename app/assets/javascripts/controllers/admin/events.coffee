@@ -129,8 +129,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs','Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
-, ($scope, $state, dialogs, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
+, ($scope, $state, dialogs, growl, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
 
 
 
@@ -191,6 +191,9 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   # @param index {number} element index in the $scope[model] array
   ##
   $scope.removeElement = (model, index) ->
+    if model == 'category' and getModel(model)[1].length == 1
+      growl.error(_t('at_least_one_category_is_required_unable_to_delete_the_last_one'))
+      return false
     dialogs.confirm
       resolve:
         object: ->

@@ -85,6 +85,7 @@ fr:
         age_ranges: "Tranches d'âge"
         add_a_range: "Ajouter une tranche"
         do_you_really_want_to_delete_this_ELEMENT_used_NUMBER_times: "Voulez-vous vraiment supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} ? {NUMBER, plural, =0{Elle n'est actuellement associée à aucun évènement} one{Elle est actuellement associée à un seul évènement} other{Elle est actuellement associée à {NUMBER} évènements}}."  # messageFormat interpolation
+        at_least_one_category_is_required_unable_to_delete_the_last_one: "Au moins une catégorie est requise. Impossible de supprimer la dernière."
 
       events_new:
         # ajouter un nouveau atelier/stage
