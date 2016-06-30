@@ -19,7 +19,7 @@ class API::AvailabilitiesController < API::ApiController
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
     @reservations = Reservation.includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
     if in_same_day(start_date, end_date)
-      @training_and_event_availabilities = Availability.includes(:tags, :trainings).where.not(available_type: 'machines')
+      @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where.not(available_type: 'machines')
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
@@ -36,7 +36,7 @@ class API::AvailabilitiesController < API::ApiController
       @availabilities = [].concat(@training_and_event_availabilities).concat(@machine_slots)
     else
 
-      @availabilities = Availability.includes(:tags, :machines, :trainings, :event)
+      @availabilities = Availability.includes(:tags, :machines, :trainings, :event, :slots)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @availabilities.each do |a|
         a = verify_training_event_is_reserved(a, @reservations)
