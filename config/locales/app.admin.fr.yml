@@ -69,7 +69,7 @@ fr:
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
       events:
-        # gestion et suivi des stages et ateliers
+        # gestion et suivi des évènements
         events_monitoring: "Suivi des évènements"
         manage_filters: "Gérer les filtres"
         fablab_events: "Les évènements du Fab Lab"
@@ -86,11 +86,12 @@ fr:
         add_a_range: "Ajouter une tranche"
         do_you_really_want_to_delete_this_ELEMENT: "Voulez-vous vraiment supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} ?"  # messageFormat interpolation
         unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Impossible de supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} car elle est actuellement associée à {NUMBER, plural, =0{aucun évènement} one{un évènement} other{{NUMBER} évènements}}."  # messageFormat interpolation
-        at_least_one_category_is_required_unable_to_delete_the_last_one: "Au moins une catégorie est requise. Impossible de supprimer la dernière."
+        at_least_one_category_is_required: "Au moins une catégorie est requise."
+        unable_to_delete_the_last_one: "Impossible de supprimer la dernière."
         unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
 
       events_new:
-        # ajouter un nouveau atelier/stage
+        # ajouter un nouvel évènement
         none: "Aucune"
         every_days: "Tous les jours"
         every_week: "Chaque semaine"

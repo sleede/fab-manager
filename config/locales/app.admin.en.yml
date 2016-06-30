@@ -86,7 +86,8 @@ en:
         add_a_range: "Add a range"
         do_you_really_want_to_delete_this_ELEMENT: "Do you really want to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}?"  # messageFormat interpolation
         unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Unable to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}} because it is already associated with {NUMBER, plural, =0{no events} one{one event} other{{NUMBER} events}}."  # messageFormat interpolation
-        at_least_one_category_is_required_unable_to_delete_the_last_one: "At least one category is required. Unable to delete the last one."
+        at_least_one_category_is_required: "At least one category is required."
+        unable_to_delete_the_last_one: "Unable to delete the last one."
         unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
 
       events_new:

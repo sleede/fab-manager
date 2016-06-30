@@ -164,7 +164,7 @@ fr:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
 
       event:
-        # formulaire d'édition d'un événement (stage/atelier)
+        # formulaire d'édition d'un événement
         title_is_required: "Le titre est requis."
         matching_visual: "Visuel associé"
         choose_a_picture: "Choisir une image"

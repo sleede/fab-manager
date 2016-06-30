@@ -192,7 +192,7 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   ##
   $scope.removeElement = (model, index) ->
     if model == 'category' and getModel(model)[1].length == 1
-      growl.error(_t('at_least_one_category_is_required_unable_to_delete_the_last_one'))
+      growl.error(_t('at_least_one_category_is_required')+' '+_t('unable_to_delete_the_last_one'))
       return false
     if getModel(model)[1][index].related_to > 0
       growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', {ELEMENT:model, NUMBER:getModel(model)[1][index].related_to}, "messageformat"))
