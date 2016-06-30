@@ -31,8 +31,11 @@ class API::AgeRangesController < API::ApiController
 
   def destroy
     authorize AgeRange
-    @age_range.destroy
-    head :no_content
+    if @age_range.safe_destroy
+      head :no_content
+    else
+      render json: @age_range.errors, status: :unprocessable_entity
+    end
   end
 
   private

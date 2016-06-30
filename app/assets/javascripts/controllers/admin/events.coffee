@@ -203,8 +203,10 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
           title: _t('confirmation_required')
           msg: _t('do_you_really_want_to_delete_this_ELEMENT', {ELEMENT:model}, "messageformat")
     , -> # delete confirmed
-      getModel(model)[0].delete getModel(model)[1][index]
-      getModel(model)[1].splice(index, 1)
+      getModel(model)[0].delete getModel(model)[1][index], null, ->
+        getModel(model)[1].splice(index, 1)
+      , ->
+        growl.error(_t('unable_to_delete_an_error_occured'))
 
 
 

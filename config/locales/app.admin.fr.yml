@@ -87,6 +87,7 @@ fr:
         do_you_really_want_to_delete_this_ELEMENT: "Voulez-vous vraiment supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} ?"  # messageFormat interpolation
         unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Impossible de supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} car elle est actuellement associée à {NUMBER, plural, =0{aucun évènement} one{un évènement} other{{NUMBER} évènements}}."  # messageFormat interpolation
         at_least_one_category_is_required_unable_to_delete_the_last_one: "Au moins une catégorie est requise. Impossible de supprimer la dernière."
+        unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
 
       events_new:
         # ajouter un nouveau atelier/stage

@@ -31,8 +31,11 @@ class API::EventThemesController < API::ApiController
 
   def destroy
     authorize EventTheme
-    @event_theme.destroy
-    head :no_content
+    if @event_theme.safe_destroy
+      head :no_content
+    else
+      render json: @event_theme.errors, status: :unprocessable_entity
+    end
   end
 
   private
