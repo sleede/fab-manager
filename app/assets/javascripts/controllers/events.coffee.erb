@@ -78,6 +78,16 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
+  ##
+  # Test if the provided event occurs on a single day or on many days
+  # @param event {{start_date:Date, end_date:Date}} Event object as retreived from the API
+  # @return {boolean} false if the event occurs on many days
+  ##
+  $scope.onSingleDay = (event) ->
+    moment(event.start_date).isSame(event.end_date, 'day')
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
