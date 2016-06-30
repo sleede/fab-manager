@@ -31,8 +31,11 @@ class API::CategoriesController < API::ApiController
 
   def destroy
     authorize Category
-    @category.destroy
-    head :no_content
+    if @category.safe_destroy
+      head :no_content
+    else
+      render json: @category.errors, status: :unprocessable_entity
+    end
   end
 
   private
