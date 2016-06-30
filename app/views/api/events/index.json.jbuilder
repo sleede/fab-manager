@@ -1,4 +1,4 @@
-total = @events.count
+total = @events.except(:offset, :limit, :order).count
 
 json.cache! [@events, @page] do
   json.array!(@events) do |event|

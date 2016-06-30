@@ -36,7 +36,7 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
   $scope.loadMoreEvents = ->
     Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
       $scope.events = $scope.events.concat data
-      groupEvents(data)
+      groupEvents($scope.events)
       $scope.page += 1
 
       if (!data[0] || data[0].nb_total_events <= $scope.events.length)
