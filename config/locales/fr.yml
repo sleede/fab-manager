@@ -244,6 +244,8 @@ fr:
     event_id: "ID Évènement"
     event_date: "Date Évènement"
     event_name: "Nom Évènement"
+    event_theme: "Thématique"
+    age_range: "Tranche d'âge"
     themes: "Thèmes"
     components: "Composants"
     machines: "Machines"

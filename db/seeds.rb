@@ -27,7 +27,9 @@ if StatisticField.count == 0
     {key:'components', label:I18n.t('statistics.components'), statistic_index_id: 6, data_type: 'list'},
     {key:'machines', label:I18n.t('statistics.machines'), statistic_index_id: 6, data_type: 'list'},
     {key:'name', label:I18n.t('statistics.event_name'), statistic_index_id: 4, data_type: 'text'},
-    {key:'userId', label:I18n.t('statistics.user_id'), statistic_index_id: 7, data_type: 'index'}
+    {key:'userId', label:I18n.t('statistics.user_id'), statistic_index_id: 7, data_type: 'index'},
+    {key:'eventTheme', label:I18n.t('statistics.event_theme'), statistic_index_id: 4, data_type: 'text'},
+    {key:'ageRange', label:I18n.t('statistics.age_range'), statistic_index_id: 4, data_type: 'text'}
   ])
 end
 

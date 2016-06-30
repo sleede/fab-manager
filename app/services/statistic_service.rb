@@ -68,7 +68,9 @@ class StatisticService
           eventId: r.event_id,
           name: r.event_name,
           eventDate: r.event_date,
-          reservationId: r.reservation_id
+          reservationId: r.reservation_id,
+          eventTheme: r.event_theme,
+          ageRange: r.age_range
         }.merge(user_info_stat(r)))
         stat.stat = (type == 'booking' ? r.nb_places : r.nb_hours)
         stat.save
@@ -201,6 +203,8 @@ class StatisticService
           event_type: r.reservable.categories.first.name,
           event_name: r.reservable.name,
           event_date: slot.start_at.to_date,
+          event_theme: (r.reservable.event_themes.first ? r.reservable.event_themes.first.name : ''),
+          age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
           nb_places: r.nb_reserve_places + r.nb_reserve_reduced_places,
           nb_hours: difference_in_hours(slot.start_at, slot.end_at),
           ca: calcul_ca(r.invoice)

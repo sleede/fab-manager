@@ -244,6 +244,8 @@ en:
     event_id: "Event ID"
     event_date: "Event Date"
     event_name: "Event Name"
+    event_theme: "Theme"
+    age_range: "Age Range"
     themes: "Themes"
     components: "Components"
     machines: "Machines"
