@@ -13,9 +13,9 @@
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
-       <span class="badge text-sm bg-formation m-t-md" translate>{{ 'trainings' }}</span>
-       <span class="badge text-sm bg-machine" translate>{{ 'machines' }}</span>
-       <span class="badge text-sm bg-event" translate>{{ 'events' }}</span>
+       <span class="badge text-sm bg-formation m-t-md" translate ng-click="filterAvailableType('training')">{{ 'trainings' }}</span>
+       <span class="badge text-sm bg-machine" translate ng-click="filterAvailableType('machines')">{{ 'machines' }}</span>
+       <span class="badge text-sm bg-event" translate ng-click="filterAvailableType('event')">{{ 'events' }}</span>
       </section>
     </div>
 

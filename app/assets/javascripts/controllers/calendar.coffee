@@ -9,18 +9,20 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
 
 
   ### PRIVATE STATIC CONSTANTS ###
+  availableTypes = ['machines', 'training', 'event']
+  availabilitySource =
+    url: "/api/availabilities/public?#{$.param({available_type: availableTypes})}"
+    textColor: 'black'
 
 
   ### PUBLIC SCOPE ###
 
-  ## add availabilities url to event sources
+  ## add availabilities source to event sources
   $scope.eventSources = []
-  $scope.eventSources.push
-    url: '/api/availabilities/public'
-    textColor: 'black'
 
   ## fullCalendar (v2) configuration
   $scope.calendarConfig = CalendarConfig
+    events: availabilitySource.url
     slotEventOverlap: true
     header:
       left: 'month agendaWeek agendaDay'
@@ -34,6 +36,15 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
       viewRenderCb(view, element)
     eventRender: (event, element, view) ->
       eventRenderCb(event, element)
+
+  $scope.filterAvailableType = (type) ->
+    index = availableTypes.indexOf(type)
+    if index != -1
+      availableTypes.splice(index, 1)
+    else
+      availableTypes.push(type)
+    availabilitySource.url = "/api/availabilities/public?#{$.param({available_type: availableTypes})}"
+    $scope.calendarConfig.events = availabilitySource.url
 
 
   ### PRIVATE SCOPE ###

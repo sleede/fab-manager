@@ -3,6 +3,7 @@ json.array!(@availabilities) do |availability|
   json.title availability.title
   json.start availability.start_at.iso8601
   json.end availability.end_at.iso8601
+  json.textColor 'black'
   json.backgroundColor 'white'
   # availability object
   if availability.try(:available_type)

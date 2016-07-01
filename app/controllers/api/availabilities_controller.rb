@@ -17,11 +17,12 @@ class API::AvailabilitiesController < API::ApiController
   def public
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
+    available_type = params[:available_type] || []
     @reservations = Reservation.includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
     if in_same_day(start_date, end_date)
-      @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where.not(available_type: 'machines')
+      @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where(available_type: available_type.dup.delete_if {|t| t == 'machines'})
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
-      @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
+      @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: available_type.dup.delete_if {|t| t == 'training' or t == 'event'})
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @machine_slots = []
       @machine_availabilities.each do |a|
@@ -37,6 +38,7 @@ class API::AvailabilitiesController < API::ApiController
     else
 
       @availabilities = Availability.includes(:tags, :machines, :trainings, :event, :slots)
+                                    .where(available_type: available_type)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @availabilities.each do |a|
         a = verify_training_event_is_reserved(a, @reservations)
