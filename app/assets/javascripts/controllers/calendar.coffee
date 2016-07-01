@@ -47,6 +47,9 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     availabilitySource.url = "/api/availabilities/public?#{$.param({available_type: availableTypes})}"
     $scope.calendarConfig.events = availabilitySource.url
 
+  $scope.isAvailableTypeInactive = (type) ->
+    index = availableTypes.indexOf(type)
+    index == -1 ? true : false
 
   ### PRIVATE SCOPE ###
 

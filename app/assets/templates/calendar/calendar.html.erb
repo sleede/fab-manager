@@ -12,10 +12,14 @@
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper">
-       <span class="badge text-sm bg-formation m-t-md" translate ng-click="filterAvailableType('training')">{{ 'trainings' }}</span>
-       <span class="badge text-sm bg-machine" translate ng-click="filterAvailableType('machines')">{{ 'machines' }}</span>
-       <span class="badge text-sm bg-event" translate ng-click="filterAvailableType('event')">{{ 'events' }}</span>
+      <section class="heading-actions wrapper calendar-filter">
+        <div>
+          <i class="fa fa-filter"></i>
+          <span translate>{{ 'filter' }}</span>
+        </div>
+        <span class="badge text-sm bg-formation" ng-class="{'inactive': isAvailableTypeInactive('training')}" translate ng-click="filterAvailableType('training')">{{ 'trainings' }}</span>
+        <span class="badge text-sm bg-machine" ng-class="{'inactive': isAvailableTypeInactive('machines')}" translate ng-click="filterAvailableType('machines')">{{ 'machines' }}</span>
+        <span class="badge text-sm bg-event" ng-class="{'inactive': isAvailableTypeInactive('event')}" translate ng-click="filterAvailableType('event')">{{ 'events' }}</span>
       </section>
     </div>
 
@@ -25,7 +29,7 @@
 
 <section class="row no-gutter">
 
-  <div class="col-sm-12 col-md-12 col-lg-9">
+  <div class="col-sm-12 col-md-12 col-lg-12">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg public-calendar"></div>
   </div>
 

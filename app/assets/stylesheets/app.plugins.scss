@@ -102,6 +102,15 @@
   display: none !important;
 }
 
+.calendar-filter {
+  .badge {
+    cursor: pointer;
+
+    &.inactive {
+      opacity: 0.2;
+    }
+  }
+}
 
 
 
