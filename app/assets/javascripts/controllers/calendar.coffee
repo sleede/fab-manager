@@ -13,6 +13,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   availabilitySource =
     url: "/api/availabilities/public?#{$.param({available_type: availableTypes})}"
     textColor: 'black'
+  currentMachineEvent = null
 
 
   ### PUBLIC SCOPE ###
@@ -53,6 +54,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     ## current calendar object
     calendar = uiCalendarConfig.calendars.calendar
     if event.available_type == 'machines'
+      currentMachineEvent = event
       calendar.fullCalendar('changeView', 'agendaDay')
       calendar.fullCalendar('gotoDate', event.start)
     else
@@ -68,7 +70,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     # set defaultView, because when we change slotEventOverlap
     # ui-calendar will trigger rerender calendar
     $scope.calendarConfig.defaultView = view.type
-    today = moment().utc().startOf('day')
+    today = currentMachineEvent or moment().utc().startOf('day')
     if today > view.start and today <= view.end and today != view.start
       $scope.calendarConfig.defaultDate = today
     else
