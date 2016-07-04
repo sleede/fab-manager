@@ -154,8 +154,11 @@
   }
 
   .article-thumbnail {
-    // max-height: 400px;
     overflow: hidden;
+
+    img {
+      height: 400px;
+    }
   }
 }
 
