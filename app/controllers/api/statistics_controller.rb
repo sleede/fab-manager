@@ -14,6 +14,16 @@ class API::StatisticsController < API::ApiController
         results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
         render json: results
       end
+
+      def export_#{path}
+        authorize :statistic, :#{path}?
+        query = MultiJson.load(request.body.read)
+        results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
+        respond_to do |format|
+          format.html
+          format.xls
+        end
+      end
     }
   end
 

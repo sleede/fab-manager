@@ -1,7 +1,9 @@
 'use strict'
 
-Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", "Statistics", "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
-, ($scope, $state, $rootScope, Statistics, es, Member, _t, membersPromise, statisticsPromise) ->
+
+
+Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", '$uibModal', "Statistics", "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
+, ($scope, $state, $rootScope, $uibModal, Statistics, es, Member, _t, membersPromise, statisticsPromise) ->
 
 
 
@@ -271,6 +273,27 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
+  ##
+  # Run the current elastic query on the server and return the result as an Excel file
+  ##
+  $scope.exportToExcel = ->
+    options =
+      templateUrl: '<%= asset_path "admin/statistics/export.html" %>'
+      size: 'sm'
+      controller: 'ExportStatisticsController'
+      resolve:
+        dates: ->
+          start: $scope.datePickerStart.selected
+          end: $scope.datePickerEnd.selected
+
+    $uibModal.open options
+    .result['finally'](null).then (info)->
+      console.info(info)
+    , (reason)->
+      console.error(reason)
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
@@ -429,7 +452,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
           "field": "age"
       "total_stat":
         "sum":
-          "field": "sta"
+          "field": "stat"
     }
     q
 
@@ -489,4 +512,56 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   # init the controller (call at the end !)
   initialize()
 
+]
+
+
+
+Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', ($scope, $uibModalInstance, dates) ->
+
+  # bindings for date range
+  $scope.dates = dates
+
+
+  $scope.export =
+    type: 'current'
+
+  ## datePicker parameters for interval beginning
+  $scope.exportStart =
+    format: Fablab.uibDateFormat
+    opened: false # default: datePicker is not shown
+    minDate: null
+    maxDate: moment().subtract(1, 'day').toDate()
+    options:
+      startingDay: Fablab.weekStartingDay
+
+  ## datePicker parameters for interval ending
+  $scope.exportEnd =
+    format: Fablab.uibDateFormat
+    opened: false # default: datePicker is not shown
+    minDate: null
+    maxDate: moment().subtract(1, 'day').toDate()
+    options:
+      startingDay: Fablab.weekStartingDay
+
+  ##
+  # Callback to open the datepicker (interval start)
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.toggleStartDatePicker = ($event) ->
+    $scope.exportStart.opened = !$scope.exportStart.opened
+
+
+
+  ##
+  # Callback to open the datepicker (interval end)
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.toggleEndDatePicker = ($event) ->
+    $scope.exportEnd.opened = !$scope.exportEnd.opened
+
+
+  $scope.ok = (info) ->
+    $uibModalInstance.close( info )
+  $scope.cancel = ->
+    $uibModalInstance.dismiss('cancel')
 ]

@@ -389,6 +389,10 @@ fr:
         unknown: "Inconnu"
         user_id: "ID Utilisateur"
         display_more_results: "Afficher plus de résultats"
+        export_statistics_to_excel: "Exporter les statistiques vers Excel"
+        export_all_statistics: "Exporter toutes les statistiques"
+        export_the_current_search_results: "Exporter les résultats de la recherche courante"
+        export: "Exporter"
 
 
       stats_graphs:
