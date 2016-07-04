@@ -58,7 +58,7 @@
               <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-if="event.reduced_amount > 0">/ {{ 'reduced_rate_' | translate }} {{event.reduced_amount | currency}}</span></h6>
             </div>
             <!-- Event Image -->
-            <div class="pull-right crop-130">
+            <div class="pull-right crop-155">
               <img class="pull-right" ng-src="{{event.event_image_small}}" title="{{event.title}}" ng-if="event.event_image">
               <img class="pull-right img-responsive" src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!event.event_image">
             </div>
