@@ -708,6 +708,21 @@ ActiveRecord::Schema.define(version: 20160714095018) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "wallet_transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "wallet_id"
+    t.integer  "transactable_id"
+    t.string   "transactable_type"
+    t.string   "transaction_type"
+    t.integer  "amount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "wallet_transactions", ["transactable_type", "transactable_id"], name: "index_wallet_transactions_on_transactable", using: :btree
+  add_index "wallet_transactions", ["user_id"], name: "index_wallet_transactions_on_user_id", using: :btree
+  add_index "wallet_transactions", ["wallet_id"], name: "index_wallet_transactions_on_wallet_id", using: :btree
+
   create_table "wallets", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "amount",     default: 0
@@ -727,5 +742,7 @@ ActiveRecord::Schema.define(version: 20160714095018) do
   add_foreign_key "prices", "plans"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
+  add_foreign_key "wallet_transactions", "users"
+  add_foreign_key "wallet_transactions", "wallets"
   add_foreign_key "wallets", "users"
 end

@@ -10,4 +10,19 @@ class WalletTest < ActiveSupport::TestCase
     w = Wallet.create
     assert w.errors[:user].present?
   end
+
+  test 'can credit amount' do
+    w = Wallet.first
+    expected_amount = w.amount + 5
+    assert w.credit(5)
+    assert_equal w.amount, expected_amount
+  end
+
+  test 'can debit amount' do
+    w = Wallet.first
+    w.credit(5)
+    expected_amount = 0
+    assert w.debit(5)
+    assert_equal w.amount, expected_amount
+  end
 end

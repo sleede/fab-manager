@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  wallet_id: 
+  transaction_type: MyString
+  amount: 1
+
+two:
+  user_id: 
+  wallet_id: 
+  transaction_type: MyString
+  amount: 1
