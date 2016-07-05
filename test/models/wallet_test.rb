@@ -21,7 +21,7 @@ class WalletTest < ActiveSupport::TestCase
   test 'can debit amount' do
     w = Wallet.first
     w.credit(5)
-    expected_amount = 0
+    expected_amount = w.amount - 5
     assert w.debit(5)
     assert_equal w.amount, expected_amount
   end

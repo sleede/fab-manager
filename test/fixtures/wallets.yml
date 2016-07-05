@@ -4,7 +4,7 @@ wallet_2:
 
 wallet_4:
   user_id: 4
-  amount: 0
+  amount: 1000
 
 wallet_6:
   user_id: 6

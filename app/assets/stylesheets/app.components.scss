@@ -514,3 +514,28 @@ padding: 10px;
     border-radius: 3px;
   }
 }
+
+.wallet-amount-container {
+  padding: 20px 0;
+  border-top: 2px dotted $border-color;
+  border-bottom: 2px dotted $border-color;
+  margin-bottom: 20px;
+  text-align: center;
+
+  .wallet-amount {
+    font-size: rem-calc(40);
+    font-weight: 700;
+    font-style: italic;
+    color: #616161;
+
+    span {
+      font-weight: 500;
+      font-size: .7em;
+    }
+
+    &.cr-green {
+      color: $green;
+    }
+  }
+}
+

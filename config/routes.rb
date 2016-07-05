@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     resources :wallet do
       get :my, on: :collection
       get '/by_user/:user_id', action: 'by_user', on: :collection
+      get :transactions, on: :member
     end
 
     # for homepage

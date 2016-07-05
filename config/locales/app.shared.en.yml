@@ -300,3 +300,8 @@ en:
         wallet: 'Wallet'
         your_wallet_amount: 'Your amount available'
         wallet_amount: 'Amount available'
+        no_transactions_for_now: 'No transactions for now'
+        operation: 'Operation'
+        operator: 'Operator'
+        amount: 'Amount'
+        credit: 'Crédit'

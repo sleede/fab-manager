@@ -300,3 +300,8 @@ fr:
         wallet: 'Porte-monnaie'
         your_wallet_amount: 'Votre montant disponible'
         wallet_amount: 'Montant disponible'
+        no_transactions_for_now: 'Aucune transaction pour le moment'
+        operation: 'Opération'
+        operator: 'Opérateur'
+        amount: 'Montant'
+        credit: 'Crédit'

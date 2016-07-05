@@ -260,8 +260,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
 ##
 # Controller used in the member edition page
 ##
-Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise'
-, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise) ->
+Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise'
+, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise) ->
 
 
 
@@ -302,6 +302,9 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
 
   ## the user wallet
   $scope.wallet = walletPromise
+
+  ## user wallet transactions
+  $scope.transactions = transactionsPromise
 
   $scope.view = 'member_edit'
 

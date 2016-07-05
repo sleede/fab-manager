@@ -207,6 +207,9 @@ angular.module('application.router', ['ui.router']).
           walletPromise: ['Wallet', (Wallet)->
             Wallet.my().$promise
           ]
+          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)->
+            Wallet.transactions(id: walletPromise.id).$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.shared.wallet']).$promise
           ]
@@ -874,6 +877,9 @@ angular.module('application.router', ['ui.router']).
           ]
           walletPromise: ['Wallet', '$stateParams', (Wallet, $stateParams)->
             Wallet.getWalletByUser(user_id: $stateParams.id).$promise
+          ]
+          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)->
+            Wallet.transactions(id: walletPromise.id).$promise
           ]
           tagsPromise: ['Tag', (Tag)->
             Tag.query().$promise
