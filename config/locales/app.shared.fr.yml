@@ -305,3 +305,8 @@ fr:
         operator: 'Opérateur'
         amount: 'Montant'
         credit: 'Crédit'
+        to_credit: 'Créditer'
+        wallet_credit_successfully: "Le porte-monnaie d'utilisateur a été chargé avec succès."
+        a_problem_occurred_for_wallet_credit: "Il y a eu un problème lors de chargement au porte-monnaie d'utilisateur."
+        amount_is_required: "Le montant est obligatoire"
+        amount_minimum_1: "Le montant minimum est d'1"

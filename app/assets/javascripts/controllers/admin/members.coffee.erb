@@ -260,8 +260,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
 ##
 # Controller used in the member edition page
 ##
-Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise'
-, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise) ->
+Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'Wallet'
+, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, Wallet) ->
 
 
 
@@ -401,6 +401,39 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
     # once the form was validated succesfully ...
     modalInstance.result.then (subscription) ->
       $scope.subscription = subscription
+
+
+  $scope.createWalletCreditModal = (user, wallet)->
+    modalInstance = $uibModal.open
+      animation: true,
+      templateUrl: '<%= asset_path "wallet/credit_modal.html" %>'
+      controller: ['$scope', '$uibModalInstance', 'Wallet', '$locale', ($scope, $uibModalInstance, Wallet, $locale) ->
+
+        ## currency symbol for the current locale (cf. angular-i18n)
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        ##
+        # Modal dialog validation callback
+        ##
+        $scope.ok = ->
+          Wallet.credit { id: wallet.id }, { amount: $scope.amount }, (_wallet)->
+
+            growl.success(_t('wallet_credit_successfully'))
+            $uibModalInstance.close(_wallet)
+          , (error)->
+            growl.error(_t('a_problem_occurred_for_wallet_credit'))
+
+        ##
+        # Modal dialog cancellation callback
+        ##
+        $scope.cancel = ->
+          $uibModalInstance.dismiss('cancel')
+      ]
+    # once the form was validated succesfully ...
+    modalInstance.result.then (wallet) ->
+      $scope.wallet = wallet
+      Wallet.transactions {id: wallet.id}, (transactions) ->
+        $scope.transactions = transactions
 
 
 

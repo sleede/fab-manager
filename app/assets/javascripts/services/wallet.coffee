@@ -15,4 +15,8 @@ Application.Services.factory 'Wallet', ["$resource", ($resource)->
       method: 'GET'
       url: '/api/wallet/:id/transactions'
       isArray: true
+    credit:
+      method: 'PUT'
+      url: '/api/wallet/:id/credit'
+      isArray: false
 ]

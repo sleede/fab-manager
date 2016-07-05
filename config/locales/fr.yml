@@ -229,6 +229,10 @@ fr:
       undefined_notification:
         unknown_notification: "Notification inconnue"
         notification_ID_wrong_type_TYPE_unknown: "Notification {ID} erronée (type {TYPE} inconnu)."
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "Votre porte-monnaie est chargé %{AMOUNT}"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "Le porte-monnaie de %{USER} est chargé %{AMOUNT}"
 
   statistics:
     # outil de statistiques pour les administrateurs

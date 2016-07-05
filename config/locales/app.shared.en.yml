@@ -304,4 +304,7 @@ en:
         operation: 'Operation'
         operator: 'Operator'
         amount: 'Amount'
-        credit: 'Crédit'
+        credit: 'Credit'
+        to_credit: 'Credit'
+        wallet_credit_successfully: "Wallet of user is credited successfully."
+        a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"

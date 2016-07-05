@@ -6,4 +6,8 @@ class WalletPolicy < ApplicationPolicy
   def transactions?
     user.is_admin? or user == record.user
   end
+
+  def credit?
+    user.is_admin?
+  end
 end

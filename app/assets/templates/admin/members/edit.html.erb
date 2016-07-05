@@ -219,6 +219,12 @@
         <uib-tab heading="{{ 'wallet' | translate }}">
           <div class="col-md-12 m m-t-lg">
             <ng-include src="'<%= asset_path 'wallet/show.html' %>'"></ng-include>
+
+            <div class="clearfix"></div>
+            <div class="col-sm-4 text-center">
+              <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'to_credit' }}</button>
+            </div>
+
           </div>
 
           <div class="col-md-12 m m-t-lg">

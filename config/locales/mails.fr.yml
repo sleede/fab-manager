@@ -240,5 +240,15 @@ fr:
         disabled: "Désormais, aucune facture ne sera générée pour les paiement de cet utilisateur effectués à l'accueil."
         enabled: "Désormais, tous les paiement de cet utilisateur effectués à l'accueil, donneront lieu à la génération d'une facture."
 
+    notify_user_wallet_is_credited:
+      subject: "Votre porte-monnaie est chargé"
+      body:
+        wallet_credit_html: "Votre porte-monnaie est chargé %{AMOUNT}."
+
+    notify_admin_user_wallet_is_credited:
+      subject: "Le porte-monnaie d'un utilisateur est chargé"
+      body:
+        wallet_credit_html: "Le porte-monnaie de %{USER} est chargé %{AMOUNT} par %{ADMIN}."
+
     shared:
       hello: "Bonjour %{user_name}"

@@ -56,4 +56,23 @@ class WalletsTest < ActionDispatch::IntegrationTest
     get "/api/wallet/#{user5.wallet.id}/transactions"
     assert_equal 403, response.status
   end
+
+  test 'admin can credit amount to a wallet' do
+    admin = users(:user_1)
+    login_as(admin, scope: :user)
+    w = @kdumas.wallet
+    amount = 10
+    expected_amount = w.amount + amount
+    put "/api/wallet/#{w.id}/credit",
+      {
+        amount: amount
+      }
+
+    assert_equal 200, response.status
+    assert_equal Mime::JSON, response.content_type
+    wallet = json_response(response.body)
+    w.reload
+    assert_equal w.amount, expected_amount
+    assert_equal w.amount, wallet[:amount]
+  end
 end

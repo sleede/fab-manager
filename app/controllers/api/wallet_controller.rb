@@ -17,4 +17,15 @@ class API::WalletController < API::ApiController
     authorize @wallet
     @wallet_transactions = @wallet.wallet_transactions.includes(:transactable, user: [:profile]).order(created_at: :desc)
   end
+
+  def credit
+    @wallet = Wallet.find(params[:id])
+    authorize @wallet
+    service = WalletService.new(user: current_user, wallet: @wallet)
+    if service.credit(params[:amount].to_f)
+      render :show
+    else
+      head 422
+    end
+  end
 end

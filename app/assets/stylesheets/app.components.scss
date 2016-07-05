@@ -539,3 +539,23 @@ padding: 10px;
   }
 }
 
+.amountGroup {
+  input {
+    display: inline-block;
+    width: 100px;
+    margin-left: 5px;
+    padding-right: 6px;
+    font-weight: bold;
+    color: $green;
+    font-size: 1.2em;
+    line-height: 0;
+  }
+  .afterAmount {
+    margin-left: -35px;
+    font-weight: bold;
+    color: $green;
+    font-size: 1.2em;
+    line-height: 0;
+  }
+}
+
