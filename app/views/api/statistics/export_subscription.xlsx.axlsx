@@ -1,0 +1,6 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Abonnements") do |sheet|
+  @results[:hits][:hits].each do |hit|
+    sheet.add_row [hit[:_source].date, hit[:_source].userId, hit[:_source].gender, hit[:_source].age, hit[:_source].planId, hit[:_source].groupName, hit[:_source].ca]
+  end
+end

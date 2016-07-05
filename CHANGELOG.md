@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+## next release
+- [TODO DEPLOY] `bundle install`
+
 ## v2.3.0 2016 June 28
 
 - Public API with access management and online documentation
