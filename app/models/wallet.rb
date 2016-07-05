@@ -5,12 +5,18 @@ class Wallet < ActiveRecord::Base
   validates_numericality_of :amount, greater_than_or_equal_to: 0
 
   def credit(amount)
-    self.amount += amount
-    save
+    if amount.is_a?(Numeric) and amount >= 0
+      self.amount += amount
+      return save
+    end
+    false
   end
 
   def debit(amount)
-    self.amount -= amount
-    save
+    if amount.is_a?(Numeric) and amount >= 0
+      self.amount -= amount
+      return save
+    end
+    false
   end
 end

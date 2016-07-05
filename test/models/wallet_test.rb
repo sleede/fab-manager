@@ -25,4 +25,15 @@ class WalletTest < ActiveSupport::TestCase
     assert w.debit(5)
     assert_equal w.amount, expected_amount
   end
+
+  test 'cant debit/credit a negative' do
+    w = Wallet.new
+    assert_not w.credit(-5)
+    assert_not w.debit(-5)
+  end
+
+  test 'wallet amount cant < 0 after debit' do
+    w = Wallet.new
+    assert_not w.debit(5)
+  end
 end
