@@ -291,10 +291,12 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       # export requested
       if info.type == 'current'
         custom = buildCustomFilterQuery()
-        Export.stats $scope.selectedIndex.es_type_key,
-          buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
+        $scope.exportUrl = '/stats/'+$scope.selectedIndex.es_type_key+'/export'
+        $scope.exportQuery = buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
+        angular.element('#export-stats').submit()
       else if info.type == 'global'
-        Export.stats 'global',
+        $scope.exportUrl = '/stats/global/export'
+        $scope.exportQuery =
           "query":
             "bool":
               "must": [
@@ -305,6 +307,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
                       "lte": moment(info.dates.end).format()
                 }
               ]
+        angular.element('#export-stats').submit()
 
 
 

@@ -289,3 +289,7 @@
   </div>
 </section>
 
+<form id="export-stats" enctype="multipart/form-data" method="post" action="{{exportUrl}}" formtarget="_blank">
+  <input type="hidden" ng-value="exportQuery" name="body" >
+</form>
+
