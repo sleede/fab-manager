@@ -2,7 +2,7 @@ require 'test_helper'
 
 class WalletTransactionTest < ActiveSupport::TestCase
   test 'transaction type must be credit or debit' do
-    transaction = WalletTransaction.new
+    transaction = WalletTransaction.new amount: 5
     transaction.transaction_type = 'credit'
     assert transaction.valid?
     transaction.transaction_type = 'debit'

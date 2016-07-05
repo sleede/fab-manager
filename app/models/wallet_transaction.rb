@@ -1,4 +1,6 @@
 class WalletTransaction < ActiveRecord::Base
+  include AmountConcern
+
   belongs_to :user
   belongs_to :wallet
   belongs_to :reservation
