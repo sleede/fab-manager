@@ -429,7 +429,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
           "field": "age"
       "total_stat":
         "sum":
-          "field": "sta"
+          "field": "stat"
     }
     q
 
