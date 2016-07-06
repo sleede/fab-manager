@@ -17,7 +17,7 @@ class API::StatisticsController < API::ApiController
 
       def export_#{path}
         authorize :statistic, :#{path}?
-        query = MultiJson.load(request.body.read)
+        query = MultiJson.load(params[:body])
         @results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
         render xlsx: 'export_#{path}.xlsx', filename: "#{path}.xlsx"
       end

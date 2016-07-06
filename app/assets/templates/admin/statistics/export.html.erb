@@ -5,7 +5,7 @@
 <div class="modal-body">
   <form>
     <div class="radio">
-        <label><input type="radio" name="scope" ng-model="export.type" value="global">{{ 'export_all_statistics' | translate }}</label>
+        <label><input type="radio" name="scope" ng-model="export.type" value="global" ng-change="setRequest()">{{ 'export_all_statistics' | translate }}</label>
     </div>
     <div ng-show="export.type == 'global'">
       <ul class="list-unstyled">
@@ -58,11 +58,16 @@
       </ul>
     </div>
     <div class="radio">
-      <label><input type="radio" name="scope" ng-model="export.type" value="current">{{ 'export_the_current_search_results' | translate }}</label>
+      <label><input type="radio" name="scope" ng-model="export.type" value="current" ng-change="setRequest()">{{ 'export_the_current_search_results' | translate }}</label>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" translate>{{ 'export' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  <form role=form" ng-submit="exportData()" name="exportForm" method="post" action="{{ actionUrl }}">
+    <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
+    <input name="_method" type="hidden" ng-value="method"/>
+    <input name="body" type="hidden" ng-value="query"/>
+    <input type="submit" class="btn btn-info" value="{{ 'export' | translate }}"/>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  </form>
 </div>

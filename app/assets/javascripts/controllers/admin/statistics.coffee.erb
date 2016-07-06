@@ -285,29 +285,15 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
         dates: ->
           start: $scope.datePickerStart.selected
           end: $scope.datePickerEnd.selected
+        query: ->
+          custom = buildCustomFilterQuery()
+          buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
+        key: ->
+          key: $scope.selectedIndex.es_type_key
 
     $uibModal.open options
     .result['finally'](null).then (info)->
-      # export requested
-      if info.type == 'current'
-        custom = buildCustomFilterQuery()
-        $scope.exportUrl = '/stats/'+$scope.selectedIndex.es_type_key+'/export'
-        $scope.exportQuery = buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
-        angular.element('#export-stats').submit()
-      else if info.type == 'global'
-        $scope.exportUrl = '/stats/global/export'
-        $scope.exportQuery =
-          "query":
-            "bool":
-              "must": [
-                {
-                  "range":
-                    "date":
-                      "gte": moment(info.dates.start).format()
-                      "lte": moment(info.dates.end).format()
-                }
-              ]
-        angular.element('#export-stats').submit()
+      console.log(info)
 
 
 
@@ -543,10 +529,24 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
-Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', ($scope, $uibModalInstance, dates) ->
+Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', 'query', 'key', 'CSRF'
+, ($scope, $uibModalInstance, dates, query, key, CSRF) ->
+
+  CSRF.setMetaTags()
 
   ## Bindings for date range
   $scope.dates = dates
+
+  ## Body of the query to export
+  $scope.query = JSON.stringify(query)
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = '/stats/'+key.key+'/export'
+
+  ## Form action on the above URL
+  $scope.method = "post"
+
+  $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content
 
   ## Binding of the export type (global / current)
   $scope.export =
@@ -590,10 +590,29 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
 
 
 
+  $scope.setRequest = ->
+    if $scope.export.type == 'global'
+      $scope.actionUrl = '/stats/global/export'
+      $scope.query = JSON.stringify(query)
+    else
+      $scope.actionUrl = '/stats/'+key.key+'/export'
+      $scope.query = JSON.stringify(
+        "query":
+          "bool":
+            "must": [
+              {
+                "range":
+                  "date":
+                    "gte": moment(info.dates.start).format()
+                    "lte": moment(info.dates.end).format()
+              }
+            ]
+      )
+
   ##
   # Callback to close the modal, telling the caller to start the export with the selected parameters
   ##
-  $scope.ok = ->
+  $scope.exportData = ->
     info =
       type: $scope.export.type
 
