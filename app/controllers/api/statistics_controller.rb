@@ -18,7 +18,13 @@ class API::StatisticsController < API::ApiController
       def export_#{path}
         authorize :statistic, :#{path}?
         query = MultiJson.load(params[:body])
-        @results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
+        @results = Elasticsearch::Model.client.search({index: 'stats', type: '#{path}', scroll: '30s', body: query})
+        scroll_id = @results['_scroll_id']
+        while @results['hits']['hits'].size != @results['hits']['total']
+          scroll_res = Elasticsearch::Model.client.scroll(scroll: '30s', scroll_id: scroll_id)
+          @results['hits']['hits'].concat(scroll_res['hits']['hits'])
+          scroll_id = scroll_res['_scroll_id']
+        end
         render xlsx: 'export_#{path}.xlsx', filename: "#{path}.xlsx"
       end
     }
@@ -26,6 +32,7 @@ class API::StatisticsController < API::ApiController
 
   def export_global
     # query all stats with range arguments
+    Elasticsearch::Model.client.search
     render xls: []
   end
 

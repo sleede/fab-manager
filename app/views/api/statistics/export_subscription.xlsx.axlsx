@@ -1,6 +1,13 @@
 wb = xlsx_package.workbook
+
+price = wb.styles.add_style :format_code => ''
+
 wb.add_worksheet(name: "Abonnements") do |sheet|
-  @results[:hits][:hits].each do |hit|
-    sheet.add_row [hit[:_source].date, hit[:_source].userId, hit[:_source].gender, hit[:_source].age, hit[:_source].planId, hit[:_source].groupName, hit[:_source].ca]
+  sheet.add_row ['Entrées', @results['hits']['total']]
+  sheet.add_row ["Chiffre d'affaires", @results['aggregations']['total_ca']['value']]
+  sheet.add_row ['Âge moyen', @results['aggregations']['average_age']['value']]
+  sheet.add_row ['Date', 'ID Utilisateur', 'Genre', 'Âge', 'Type', 'Groupe', "Chiffre d'affaire"]
+  @results['hits']['hits'].each do |hit|
+    sheet.add_row [hit['_source']['date'], hit['_source']['userId'], hit['_source']['gender'], hit['_source']['age'], hit['_source']['planId'], hit['_source']['groupName'], hit['_source']['ca']]
   end
 end
