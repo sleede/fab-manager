@@ -25,6 +25,10 @@ class API::StatisticsController < API::ApiController
           @results['hits']['hits'].concat(scroll_res['hits']['hits'])
           scroll_id = scroll_res['_scroll_id']
         end
+        ids = @results['hits']['hits'].map { |u| u['_source']['userId'] }
+        @users = User.includes(:profile).where(:id => ids)
+        type_key = query['query']['bool']['must'][0]['term']['type'].to_s
+        @subtypes = StatisticType.find_by(key: type_key, statistic_index_id: StatisticIndex.find_by(es_type_key: '#{path}').id).statistic_sub_types
         render xlsx: 'export_#{path}.xlsx', filename: "#{path}.xlsx"
       end
     }

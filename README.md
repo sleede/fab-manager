@@ -531,6 +531,11 @@ See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a l
 
 **BEWARE**: years format with less than 4 digits will result in problems because the system won't be able to distinct dates with the same less significant digits, eg. 50 could mean 1950 or 2050.
 
+    EXCEL_DATE_FORMAT
+
+Date format for dates shown in exported Excel files (eg. statistics)
+See https://support.microsoft.com/en-us/kb/264372 for a list a available formats.
+
 <a name="i18n-apply"></a>
 #### Applying changes
 

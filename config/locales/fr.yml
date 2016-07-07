@@ -256,3 +256,22 @@ fr:
     workshop: "Atelier"
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
+
+  export:
+    # export des statistiques au format excel
+    subscriptions: "Abonnements"
+    entries: "Entrées"
+    revenue_: "Chiffre d'affaires"
+    average_age: "Âge moyen"
+    total: "Total"
+    date: "Date"
+    user: "Utilisateur"
+    email: "Courriel"
+    phone: "Téléphone"
+    gender: "Genre"
+    age: "Âge"
+    type: "Type"
+    group: "Groupe"
+    revenue: "Chiffre d'affaires"
+    male: "Homme"
+    female: "Femme"

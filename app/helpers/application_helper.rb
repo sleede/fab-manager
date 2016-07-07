@@ -52,6 +52,17 @@ module ApplicationHelper
 		if (bool) then return :true else return :false end
 	end
 
+	def get_item(array, id, key = nil)
+		array.each do |i|
+			if key.nil?
+				return i if i.id == id
+			else
+				return i if i[key] == id
+			end
+
+		end
+	end
+
 
 	private
 	## inspired by gems/actionview-4.2.5/lib/action_view/helpers/translation_helper.rb

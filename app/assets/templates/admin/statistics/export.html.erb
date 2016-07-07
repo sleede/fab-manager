@@ -67,7 +67,7 @@
     <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
     <input name="_method" type="hidden" ng-value="method"/>
     <input name="body" type="hidden" ng-value="query"/>
-    <input type="submit" class="btn btn-info" value="{{ 'export' | translate }}"/>
+    <input type="submit" class="btn btn-info" value="{{ 'export' | translate }}" formtarget="_blank"/>
   </form>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

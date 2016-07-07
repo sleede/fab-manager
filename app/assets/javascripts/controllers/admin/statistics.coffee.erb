@@ -274,7 +274,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
   ##
-  # Run the current elastic query on the server and return the result as an Excel file
+  # Open a modal dialog asking the user for details about exporting the statistics tables to an excel file
   ##
   $scope.exportToExcel = ->
     options =
@@ -532,6 +532,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', 'query', 'key', 'CSRF'
 , ($scope, $uibModalInstance, dates, query, key, CSRF) ->
 
+  ## Retrieve Anti-CSRF tokens from cookies
   CSRF.setMetaTags()
 
   ## Bindings for date range
@@ -546,6 +547,7 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
   ## Form action on the above URL
   $scope.method = "post"
 
+  ## Anti-CSRF token to inject into the download form
   $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content
 
   ## Binding of the export type (global / current)
@@ -590,6 +592,10 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
 
 
 
+  ##
+  # Callback when exchanging the export type between 'global' and 'current view'
+  # Adjust the query and the requesting url according to this type.
+  ##
   $scope.setRequest = ->
     if $scope.export.type == 'global'
       $scope.actionUrl = '/stats/global/export'
