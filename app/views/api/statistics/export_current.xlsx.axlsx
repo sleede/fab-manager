@@ -46,9 +46,26 @@ wb.add_worksheet(name: @index.label) do |sheet|
       types.push :string
     end
     @fields.each do |f|
-      data.push hit['_source'][f.key]
-      styles.push nil
-      types.push :string
+      field_data = hit['_source'][f.key]
+      case f.data_type
+        when 'date'
+          data.push Date::strptime(field_data,'%Y-%m-%d')
+          styles.push date
+          types.push :date
+        when 'list'
+          data.push field_data.map{|e| e['name'] }.join(', ')
+          styles.push nil
+          types.push :string
+        when 'number'
+          data.push field_data
+          styles.push nil
+          types.push :float
+        else
+          data.push field_data
+          styles.push nil
+          types.push :string
+      end
+
     end
     if @index.ca
       data.push hit['_source']['ca']
