@@ -259,9 +259,8 @@ fr:
 
   export:
     # export des statistiques au format excel
-    subscriptions: "Abonnements"
     entries: "Entrées"
-    revenue_: "Chiffre d'affaires"
+    revenue: "Chiffre d'affaires"
     average_age: "Âge moyen"
     total: "Total"
     date: "Date"
@@ -271,7 +270,6 @@ fr:
     gender: "Genre"
     age: "Âge"
     type: "Type"
-    group: "Groupe"
     revenue: "Chiffre d'affaires"
     male: "Homme"
     female: "Femme"

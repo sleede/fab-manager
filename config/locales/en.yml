@@ -252,3 +252,20 @@ en:
     hours_number: "Hours number"
     tickets_number: "Tickets number"
     revenue: "Revenue"
+
+  export:
+    # statistics exports to the excel file format
+    entries: "Entries"
+    revenue: "Revenue"
+    average_age: "Average Age"
+    total: "Total"
+    date: "Date"
+    user: "User"
+    email: "Email"
+    phone: "Phone"
+    gender: "Gender"
+    age: "Age"
+    type: "Type"
+    revenue: "Revenue"
+    male: "Man"
+    female: "Woman"

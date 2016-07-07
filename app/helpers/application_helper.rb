@@ -59,8 +59,8 @@ module ApplicationHelper
 			else
 				return i if i[key] == id
 			end
-
 		end
+		nil
 	end
 
 
