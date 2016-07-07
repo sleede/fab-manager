@@ -15,7 +15,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
   end
 
   test 'get my wallet' do
-    get '/api/wallet/my'
+    get "/api/wallet/by_user/#{@kdumas.id}"
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     wallet = json_response(response.body)

@@ -19,6 +19,9 @@
               </div>
           </div>
 
+          <h3 ng-if="walletAmount">{{ 'you_have_amount_in_wallet' | translate:{ amount: walletAmount, currency: currencySymbol } }}</h3>
+          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic">{{'credit_amount_for_pay_reservation' | translate:{ amount: amount, currency: currencySymbol } }}</p>
+
           <div class="form-group" ng-class="{'has-error': stripeForm.number.$dirty && stripeForm.number.$invalid}">
             <div class="col-sm-12">
               <input autocomplete="off" class="form-control card-number" placeholder="{{ 'enter_your_card_number' | translate }}" type="text" data-stripe="number" name="number" ng-model="cardNumero" required ng-minlength="14" ng-maxlength="16" ng-pattern="/^\d+$/">

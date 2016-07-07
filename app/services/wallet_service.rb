@@ -16,5 +16,14 @@ class WalletService
                               attached_object: transaction
       return true
     end
+    return false
+  end
+
+  def debit(amount, transactable)
+    if @wallet.debit(amount)
+      WalletTransaction.create(user: @user, wallet: @wallet, transaction_type: 'debit', amount: amount, transactable: transactable)
+      return true
+    end
+    return false
   end
 end

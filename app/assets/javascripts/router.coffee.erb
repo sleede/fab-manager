@@ -204,8 +204,8 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "dashboard/wallet.html" %>'
             controller: 'WalletController'
         resolve:
-          walletPromise: ['Wallet', (Wallet)->
-            Wallet.my().$promise
+          walletPromise: ['Wallet', 'currentUser', (Wallet, currentUser)->
+            Wallet.getWalletByUser(user_id: currentUser.id).$promise
           ]
           transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)->
             Wallet.transactions(id: walletPromise.id).$promise
@@ -363,7 +363,7 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.machines_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
-              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal']).$promise
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal', 'app.shared.wallet']).$promise
           ]
       .state 'app.admin.machines_edit',
         url: '/machines/:id/edit'
@@ -440,7 +440,7 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.trainings_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
-              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal']).$promise
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal', 'app.shared.wallet']).$promise
           ]
       # notifications
       .state 'app.logged.notifications',
@@ -510,7 +510,7 @@ angular.module('application.router', ['ui.router']).
             Setting.get(name: 'event_reduced_amount_alert').$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.valid_reservation_modal']).$promise
+            Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.wallet']).$promise
           ]
 
       # calendar global (trainings, machines and events)

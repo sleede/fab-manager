@@ -132,8 +132,8 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
-Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'reducedAmountAlert', 'growl', '_t'
-($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, reducedAmountAlert, growl, _t) ->
+Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'reducedAmountAlert', 'growl', '_t', 'Wallet', 'helpers',
+($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, reducedAmountAlert, growl, _t, Wallet, helpers) ->
 
 
 
@@ -242,11 +242,13 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     if Object.keys($scope.ctrl.member).length > 0
       reservation = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event)
 
-      if $scope.currentUser.role isnt 'admin' and $scope.reserve.amountTotal > 0
-        payByStripe(reservation)
-      else
-        if $scope.currentUser.role is 'admin' or $scope.reserve.amountTotal is 0
-          payOnSite(reservation)
+      Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
+        amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount)
+        if $scope.currentUser.role isnt 'admin' and amountToPay > 0
+          payByStripe(reservation)
+        else
+          if $scope.currentUser.role is 'admin' or amountToPay is 0
+            payOnSite(reservation)
     else
       # otherwise we alert, this error musn't occur when the current user is not admin
       growl.error(_t('please_select_a_member_first'))
@@ -461,21 +463,28 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           reservation
         price: ->
           Price.compute({reservation: reservation}).$promise
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
         objectToPay: ->
           eventToReserve: $scope.event
           reserve: $scope.reserve
           member: $scope.ctrl.member
-      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl) ->
+      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # CGV
         $scope.cgv = cgv.custom_asset
 
         # Reservation
         $scope.reservation = reservation
+
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
         # Callback for the stripe payment authorization
         $scope.payment = (status, response) ->
@@ -511,12 +520,22 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           reservation
         price: ->
           Price.compute({reservation: reservation}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation) ->
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.price = price.price
+
+        # price to pay
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # Reservation
         $scope.reservation = reservation
+
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
         # Button label
         if $scope.amount > 0

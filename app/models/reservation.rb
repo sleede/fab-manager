@@ -17,6 +17,7 @@ class Reservation < ActiveRecord::Base
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
   after_save :update_event_nb_free_places, if: Proc.new { |reservation| reservation.reservable_type == 'Event' }
+  after_save :debit_user_wallet
 
   #
   # Generate an array of {Stripe::InvoiceItem} with the elements in the current reservation, price included.
@@ -124,6 +125,18 @@ class Reservation < ActiveRecord::Base
 
     end
 
+    total = invoice_items.map(&:amount).map(&:to_i).reduce(:+) || 0
+    wallet_amount = (user.wallet.amount * 100).to_i
+    @wallet_amount_debit = wallet_amount >= total ? total : wallet_amount
+    if @wallet_amount_debit != 0
+      invoice_items << Stripe::InvoiceItem.create(
+        customer: user.stp_customer_id,
+        amount: -@wallet_amount_debit,
+        currency: Rails.application.secrets.stripe_currency,
+        description: "wallet -#{@wallet_amount_debit / 100.0}"
+      )
+    end
+
     # let's return the resulting array of items
     invoice_items
   end
@@ -170,49 +183,49 @@ class Reservation < ActiveRecord::Base
           #
           # IMPORTANT NOTE: here, we have to create an invoice manually and pay it to pay all waiting stripe invoice items
           #
-          invoice = Stripe::Invoice.create(
+          stp_invoice = Stripe::Invoice.create(
             customer: user.stp_customer_id,
           )
-          invoice.pay
+          stp_invoice.pay
           card.delete if card
-          self.stp_invoice_id = invoice.id
-          self.invoice.stp_invoice_id = invoice.id
-          self.invoice.total = invoice.total
+          self.stp_invoice_id = stp_invoice.id
+          self.invoice.stp_invoice_id = stp_invoice.id
+          self.invoice.total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
           save!
         rescue Stripe::CardError => card_error
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.info card_error
           errors[:card] << card_error.message
           return false
         rescue Stripe::InvalidRequestError => e
           # Invalid parameters were supplied to Stripe's API
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::AuthenticationError => e
           # Authentication with Stripe's API failed
           # (maybe you changed API keys recently)
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::APIConnectionError => e
           # Network communication with Stripe failed
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::StripeError => e
           # Display a very generic error to the user, and maybe send
           # yourself an email
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue => e
           # Something else happened, completely unrelated to Stripe
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
@@ -331,5 +344,12 @@ class Reservation < ActiveRecord::Base
       nb_free_places = reservable.nb_free_places - nb_reserve_places - nb_reserve_reduced_places
     end
     reservable.update_columns(nb_free_places: nb_free_places)
+  end
+
+  def debit_user_wallet
+    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
+      amount = @wallet_amount_debit / 100.0
+      WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+    end
   end
 end
