@@ -1,6 +1,7 @@
 wb = xlsx_package.workbook
 
 bold = wb.styles.add_style :b => true
+header = wb.styles.add_style :b => true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
 date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_format
 
 wb.add_worksheet(name: @index.label) do |sheet|
@@ -23,7 +24,7 @@ wb.add_worksheet(name: @index.label) do |sheet|
     columns.push f.label
   end
   columns.push t('export.revenue') if @index.ca
-  sheet.add_row columns, :style => bold
+  sheet.add_row columns, :style => header
 
   # data rows
   @results['hits']['hits'].each do |hit|
