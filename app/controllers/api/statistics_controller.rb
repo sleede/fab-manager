@@ -19,6 +19,7 @@ class API::StatisticsController < API::ApiController
         authorize :statistic, :#{path}?
 
         query = MultiJson.load(params[:body])
+        type_key = params[:type_key]
 
         @results = Elasticsearch::Model.client.search({index: 'stats', type: '#{path}', scroll: '30s', body: query})
         scroll_id = @results['_scroll_id']
@@ -31,7 +32,6 @@ class API::StatisticsController < API::ApiController
         ids = @results['hits']['hits'].map { |u| u['_source']['userId'] }
         @users = User.includes(:profile).where(:id => ids)
 
-        type_key = query['query']['bool']['must'][0]['term']['type'].to_s
         @index = StatisticIndex.find_by(es_type_key: '#{path}')
         @type = StatisticType.find_by(key: type_key, statistic_index_id: @index.id)
         @subtypes = @type.statistic_sub_types

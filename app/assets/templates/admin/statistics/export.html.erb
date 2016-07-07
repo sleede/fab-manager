@@ -66,6 +66,7 @@
   <form role=form" ng-submit="exportData()" name="exportForm" method="post" action="{{ actionUrl }}" class="inline">
     <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
     <input name="_method" type="hidden" ng-value="method"/>
+    <input name="type_key" type="hidden" ng-value="typeKey"/>
     <input name="body" type="hidden" ng-value="query"/>
     <input type="submit" class="btn btn-info" value="{{ 'export' | translate }}" formtarget="_blank"/>
   </form>

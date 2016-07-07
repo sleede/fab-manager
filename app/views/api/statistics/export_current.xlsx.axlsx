@@ -49,7 +49,7 @@ wb.add_worksheet(name: @index.label) do |sheet|
       field_data = hit['_source'][f.key]
       case f.data_type
         when 'date'
-          data.push Date::strptime(field_data,'%Y-%m-%d')
+          data.push Date::strptime(field_data, '%Y-%m-%d')
           styles.push date
           types.push :date
         when 'list'

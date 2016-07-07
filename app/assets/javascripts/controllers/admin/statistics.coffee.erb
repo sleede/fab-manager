@@ -288,8 +288,10 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
         query: ->
           custom = buildCustomFilterQuery()
           buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
-        key: ->
+        index: ->
           key: $scope.selectedIndex.es_type_key
+        type: ->
+          key: $scope.type.active.key
 
     $uibModal.open options
     .result['finally'](null).then (info)->
@@ -529,8 +531,8 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
-Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', 'query', 'key', 'CSRF'
-, ($scope, $uibModalInstance, dates, query, key, CSRF) ->
+Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', 'query', 'index', 'type', 'CSRF'
+, ($scope, $uibModalInstance, dates, query, index, type, CSRF) ->
 
   ## Retrieve Anti-CSRF tokens from cookies
   CSRF.setMetaTags()
@@ -542,7 +544,10 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
   $scope.query = JSON.stringify(query)
 
   ## API URL where the form will be posted
-  $scope.actionUrl = '/stats/'+key.key+'/export'
+  $scope.actionUrl = '/stats/'+index.key+'/export'
+
+  ## Key of the current search' statistic type
+  $scope.typeKey = type.key
 
   ## Form action on the above URL
   $scope.method = "post"
@@ -601,7 +606,7 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
       $scope.actionUrl = '/stats/global/export'
       $scope.query = JSON.stringify(query)
     else
-      $scope.actionUrl = '/stats/'+key.key+'/export'
+      $scope.actionUrl = '/stats/'+index.key+'/export'
       $scope.query = JSON.stringify(
         "query":
           "bool":
@@ -616,7 +621,7 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
       )
 
   ##
-  # Callback to close the modal, telling the caller to start the export with the selected parameters
+  # Callback to close the modal, telling the caller what is exported
   ##
   $scope.exportData = ->
     info =
