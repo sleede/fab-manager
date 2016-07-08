@@ -16,13 +16,27 @@ class Subscription < ActiveRecord::Base
   after_save :notify_member_subscribed_plan, if: :is_new?
   after_save :notify_admin_subscribed_plan, if: :is_new?
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
+  after_save :debit_user_wallet
 
   # Stripe subscription payment
   def save_with_payment(invoice = true)
     if valid?
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
       begin
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, card: card_token)
+        # dont add a wallet invoice item if pay subscription by reservation
+        if invoice
+          @wallet_amount_debit = get_wallet_amount_debit
+          if @wallet_amount_debit != 0
+            Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -@wallet_amount_debit,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "wallet -#{@wallet_amount_debit / 100.0}"
+            )
+          end
+        end
+
+        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
         self.stp_subscription_id = new_subscription.id
         self.canceled_at = nil
         self.expired_at = Time.at(new_subscription.current_period_end)
@@ -73,6 +87,8 @@ class Subscription < ActiveRecord::Base
 
   def save_with_local_payment(invoice = true)
     if valid?
+      @wallet_amount_debit = get_wallet_amount_debit if invoice
+
       self.stp_subscription_id = nil
       self.canceled_at = nil
       set_expired_at
@@ -209,4 +225,16 @@ class Subscription < ActiveRecord::Base
     plan.is_a?(PartnerPlan)
   end
 
+  def get_wallet_amount_debit
+    total = plan.amount
+    wallet_amount = (user.wallet.amount * 100).to_i
+    return wallet_amount >= total ? total : wallet_amount
+  end
+
+  def debit_user_wallet
+    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
+      amount = @wallet_amount_debit / 100.0
+      WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+    end
+  end
 end

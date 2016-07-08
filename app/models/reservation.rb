@@ -17,7 +17,7 @@ class Reservation < ActiveRecord::Base
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
   after_save :update_event_nb_free_places, if: Proc.new { |reservation| reservation.reservable_type == 'Event' }
-  after_save :debit_user_wallet
+  after_create :debit_user_wallet
 
   #
   # Generate an array of {Stripe::InvoiceItem} with the elements in the current reservation, price included.
@@ -125,10 +125,8 @@ class Reservation < ActiveRecord::Base
 
     end
 
-    total = invoice_items.map(&:amount).map(&:to_i).reduce(:+) || 0
-    wallet_amount = (user.wallet.amount * 100).to_i
-    @wallet_amount_debit = wallet_amount >= total ? total : wallet_amount
-    if @wallet_amount_debit != 0
+    @wallet_amount_debit = get_wallet_amount_debit
+    if @wallet_amount_debit != 0 and !on_site
       invoice_items << Stripe::InvoiceItem.create(
         customer: user.stp_customer_id,
         amount: -@wallet_amount_debit,
@@ -264,6 +262,14 @@ class Reservation < ActiveRecord::Base
   def save_with_local_payment
     if user.invoicing_disabled?
       if valid?
+
+        ### generate invoice only for calcul price, to refactoring!!
+        build_invoice(user: user)
+        generate_invoice_items(true)
+        @wallet_amount_debit = get_wallet_amount_debit
+        self.invoice = nil
+        ###
+
         save!
         UsersCredits::Manager.new(reservation: self).update_credits
         return true
@@ -344,6 +350,15 @@ class Reservation < ActiveRecord::Base
       nb_free_places = reservable.nb_free_places - nb_reserve_places - nb_reserve_reduced_places
     end
     reservable.update_columns(nb_free_places: nb_free_places)
+  end
+
+  def get_wallet_amount_debit
+    total = self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0
+    if plan_id.present?
+      total += plan.amount
+    end
+    wallet_amount = (user.wallet.amount * 100).to_i
+    return wallet_amount >= total ? total : wallet_amount
   end
 
   def debit_user_wallet

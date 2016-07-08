@@ -3,10 +3,14 @@
   <h1 translate>{{ 'subscription_confirmation' }}</h1>
 </div>
 <div class="modal-body">
+  <h3 ng-if="walletAmount > 0 && price > 0">{{ 'you_have_amount_in_wallet' | translate:{ amount: walletAmount, currency: currencySymbol } }}</h3>
+  <p ng-if="walletAmount > 0 && price > 0 && amount === 0" class="text-italic">{{'wallet_pay_reservation' | translate}}</p>
+  <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic">{{'credit_amount_for_pay_reservation' | translate:{ amount: amount, currency: currencySymbol } }}</p>
+
   <p>{{ 'here_is_the_NAME_subscription_summary' | translate:{NAME:member.name} }}</p>
   <p>{{ plan | humanReadablePlanName }}</p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" translate>{{ 'confirm_(payment_on_site)' }}</button>
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting">{{validButtonName}}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

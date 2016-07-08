@@ -473,7 +473,7 @@ angular.module('application.router', ['ui.router']).
             Group.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.public.plans', 'app.shared.member_select', 'app.shared.stripe']).$promise
+            Translations.query(['app.public.plans', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet']).$promise
           ]
 
       # events
