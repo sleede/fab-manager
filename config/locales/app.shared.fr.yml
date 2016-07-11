@@ -313,3 +313,7 @@ fr:
         amount_minimum_1: "Le montant minimum est d'1"
         you_have_amount_in_wallet: "Vous avez {{amount}} {{currency}} sur votre porte-monnaie"
         wallet_pay_reservation: "Vous pouvez effectuer directement votre paiement de réservation"
+        debit_subscription: "Payer un abonnement"
+        debit_reservation_training: "Payer un reservation de formation"
+        debit_reservation_machine: "Payer un reservation de machine"
+        debit_reservation_event: "Payer un reservation d'évenement"

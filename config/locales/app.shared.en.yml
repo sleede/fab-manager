@@ -308,3 +308,7 @@ en:
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
+        debit_subscription: "Debit by subscription"
+        debit_reservation_training: "Debit by reservation of training"
+        debit_reservation_machine: "Debit by reservation of machine"
+        debit_reservation_event: "Debit by reservation of event"
