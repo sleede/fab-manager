@@ -13,8 +13,8 @@ class WalletTest < ActiveSupport::TestCase
 
   test 'can credit amount' do
     w = Wallet.first
-    expected_amount = w.amount + 5
-    assert w.credit(5)
+    expected_amount = w.amount + 5.5
+    assert w.credit(5.5)
     assert_equal w.amount, expected_amount
   end
 

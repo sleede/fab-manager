@@ -61,7 +61,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     admin = users(:user_1)
     login_as(admin, scope: :user)
     w = @vlonchamp.wallet
-    amount = 10
+    amount = 10.5
     expected_amount = w.amount + amount
     put "/api/wallet/#{w.id}/credit",
       {

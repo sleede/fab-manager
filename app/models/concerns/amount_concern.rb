@@ -8,7 +8,7 @@ module AmountConcern
       if amount.nil?
         write_attribute(:amount, amount)
       else
-        write_attribute(:amount, amount.to_i * 100)
+        write_attribute(:amount, (amount * 100).to_i)
       end
     end
 
