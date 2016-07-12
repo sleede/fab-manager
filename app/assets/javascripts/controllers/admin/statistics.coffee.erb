@@ -604,9 +604,6 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
   $scope.setRequest = ->
     if $scope.export.type == 'global'
       $scope.actionUrl = '/stats/global/export'
-      $scope.query = JSON.stringify(query)
-    else
-      $scope.actionUrl = '/stats/'+index.key+'/export'
       $scope.query = JSON.stringify(
         "query":
           "bool":
@@ -614,11 +611,16 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
               {
                 "range":
                   "date":
-                    "gte": moment(info.dates.start).format()
-                    "lte": moment(info.dates.end).format()
+                    "gte": moment($scope.dates.start).format()
+                    "lte": moment($scope.dates.end).format()
               }
             ]
       )
+    else
+      $scope.actionUrl = '/stats/'+index.key+'/export'
+      $scope.query = JSON.stringify(query)
+
+
 
   ##
   # Callback to close the modal, telling the caller what is exported

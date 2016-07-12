@@ -16,7 +16,7 @@ class API::StatisticsController < API::ApiController
       end
 
       def export_#{path}
-        authorize :statistic, :#{path}?
+        authorize :statistic, :export_#{path}?
 
         query = MultiJson.load(params[:body])
         type_key = params[:type_key]
@@ -43,9 +43,25 @@ class API::StatisticsController < API::ApiController
   end
 
   def export_global
+    authorize :statistic, :export_global?
+
     # query all stats with range arguments
-    Elasticsearch::Model.client.search
-    render xls: []
+    query = MultiJson.load(params[:body])
+
+    @results = Elasticsearch::Model.client.search({index: 'stats', scroll: '30s', body: query})
+    scroll_id = @results['_scroll_id']
+    while @results['hits']['hits'].size != @results['hits']['total']
+      scroll_res = Elasticsearch::Model.client.scroll(scroll: '30s', scroll_id: scroll_id)
+      @results['hits']['hits'].concat(scroll_res['hits']['hits'])
+      scroll_id = scroll_res['_scroll_id']
+    end
+
+    ids = @results['hits']['hits'].map { |u| u['_source']['userId'] }
+    @users = User.includes(:profile).where(:id => ids)
+
+    @indices = StatisticIndex.all.includes(:statistic_fields, :statistic_types => [:statistic_sub_types])
+
+    render xlsx: 'export_global.xlsx', filename: "statistics.xlsx"
   end
 
   def scroll

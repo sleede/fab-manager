@@ -24,6 +24,7 @@
                    show-button-bar="false"
                    placeholder="{{ 'start' | translate }}"
                    ng-click="toggleStartDatePicker($event)"
+                   ng-change="setRequest()"
                    required="required"/>
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleStartDatePicker($event)">
@@ -47,6 +48,7 @@
                    show-button-bar="false"
                    placeholder="{{ 'end' | translate }}"
                    ng-click="toggleEndDatePicker($event)"
+                   ng-change="setRequest()"
                    required="required"/>
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleEndDatePicker($event)">
