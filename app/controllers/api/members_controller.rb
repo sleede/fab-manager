@@ -106,7 +106,7 @@ class API::MembersController < API::ApiController
 
   def export_members
     authorize :export
-    @members = User.with_role(:member).includes(:group, :subscriptions, :profile)
+    @members = User.with_role(:member).includes(:group, :trainings, :tags, :invoices, :projects, :subscriptions => [:plan], :profile => [:address])
 
     render xlsx: 'export_members.xlsx', filename: "export_members.xlsx"
   end
