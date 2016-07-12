@@ -133,6 +133,8 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       sample = sample.replace(/X\[([^\]]+)\]/g, (match, p1, offset, string) ->
         p1
       )
+      # information about wallet (W[text]) - does not apply here
+      sample = sample.replace(/W\[([^\]]+)\]/g, "")
       # information about refunds (R[text]) - does not apply here
       sample = sample.replace(/R\[([^\]]+)\]/g, "")
     sample

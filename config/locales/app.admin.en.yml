@@ -201,6 +201,7 @@ en:
         day: "Day"
         "#_of_invoice": "# of invoice"
         online_sales: "Online sales"
+        wallet: "Wallet"
         refund: "Refund"
         documentation: "Documentation"
         2_digits_year_(eg_70): "2 digits year (eg. 70)"
@@ -224,6 +225,8 @@ en:
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Add a notice regarding refunds, only if the invoice is concerned."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "This will never be added when an online sales notice is present."
         (eg_R[/A]_will_add_/A_to_the_refund_invoices): '(ed. R[/A] will add "/A" to the refund invoices)'
+        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Add a notice regarding the wallet, only if the invoice is concerned."
+        (eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet): '(eg. W[/PM] will add "/PM" to the invoices settled with wallet)'
         code: "Code"
         enable_the_code: "Enable the code"
         enabled: "Enabled"
