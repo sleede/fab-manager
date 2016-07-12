@@ -145,6 +145,7 @@ en:
 
   export_subscriptions:
     # subscriptions list export to EXCEL format
+    subscriptions: "Subscriptions"
     id: "ID"
     customer: "Customer"
     email: "E-mail"

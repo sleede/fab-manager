@@ -91,11 +91,9 @@ class API::MembersController < API::ApiController
   # export subscriptions
   def export_subscriptions
     authorize :export
-    @datas = Subscription.includes(:plan, :user).all
-    respond_to do |format|
-      format.html
-      format.xls
-    end
+    @subscriptions = Subscription.includes(:plan, :user).all
+
+    render xlsx: 'export_subscriptions.xlsx', filename: "export_subscriptions.xlsx"
   end
 
   # export reservations
