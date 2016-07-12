@@ -101,11 +101,9 @@ class API::MembersController < API::ApiController
   # export reservations
   def export_reservations
     authorize :export
-    @datas = Reservation.includes(:user, :slots).all
-    respond_to do |format|
-      format.html
-      format.xls
-    end
+    @reservations = Reservation.includes(:user, :slots).all
+
+    render xlsx: 'export_reservations.xlsx', filename: "export_reservations.xlsx"
   end
 
   def export_members
