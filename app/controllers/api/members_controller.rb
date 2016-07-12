@@ -99,7 +99,7 @@ class API::MembersController < API::ApiController
   # export reservations
   def export_reservations
     authorize :export
-    @reservations = Reservation.all.includes(:slots, :user => [:profile])
+    @reservations = Reservation.all.includes(:slots, :reservable, :user => [:profile])
 
     render xlsx: 'export_reservations.xlsx', filename: "export_reservations.xlsx"
   end
