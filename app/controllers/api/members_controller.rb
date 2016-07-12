@@ -110,11 +110,9 @@ class API::MembersController < API::ApiController
 
   def export_members
     authorize :export
-    @datas = User.with_role(:member).includes(:group, :subscriptions, :profile)
-    respond_to do |format|
-      format.html
-      format.xls
-    end
+    @members = User.with_role(:member).includes(:group, :subscriptions, :profile)
+
+    render xlsx: 'export_members.xlsx', filename: "export_members.xlsx"
   end
 
   def merge

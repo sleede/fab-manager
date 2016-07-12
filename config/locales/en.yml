@@ -113,6 +113,7 @@ en:
 
   export_members:
     # members list export to EXCEL format
+    members: "Members"
     id: "ID"
     surname: "Surname"
     first_name: "First name"
