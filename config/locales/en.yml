@@ -97,6 +97,7 @@ en:
     by_transfer: "by transfer"
     by_cash: "by cash"
     no_refund: "No refund"
+    by_wallet: "by wallet"
     settlement_by_debit_card: "Settlement by debit card"
     settlement_done_at_the_reception: "Settlement done at the reception"
     on_DATE_at_TIME: "on %{DATE} at %{TIME},"

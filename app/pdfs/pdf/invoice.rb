@@ -196,6 +196,8 @@ module PDF
               payment_verbose += I18n.t('invoices.by_transfer')
             when 'cash'
               payment_verbose += I18n.t('invoices.by_cash')
+            when 'wallet'
+              payment_verbose += I18n.t('invoices.by_wallet')
             when 'none'
               payment_verbose = I18n.t('invoices.no_refund')
             else

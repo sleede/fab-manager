@@ -96,6 +96,7 @@ fr:
     by_cheque: "par chèque"
     by_transfer: "par virement"
     by_cash: "en espèces"
+    by_wallet: "par porte-monnaie"
     no_refund: "Pas de remboursement"
     settlement_by_debit_card: "Règlement effectué par carte bancaire"
     settlement_done_at_the_reception: "Règlement effectué à l'accueil"

@@ -246,6 +246,7 @@ en:
         by_cash: "By cash"
         by_cheque: "By cheque"
         by_transfer: "By transfer"
+        by_wallet: "By wallet"
         you_must_select_at_least_one_element_to_create_a_refund: "You must select at least one element, to create a refund."
         unable_to_create_the_refund: "Unable to create the refund"
         invoice_reference_successfully_saved: "Invoice reference successfully saved."

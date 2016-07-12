@@ -246,6 +246,7 @@ fr:
         by_cash: "En espèces"
         by_cheque: "Par chèque"
         by_transfer: "Par virement"
+        by_wallet: "Par porte-monnaie"
         you_must_select_at_least_one_element_to_create_a_refund: "Vous devez sélectionner au moins un élément sur lequel créer un avoir."
         unable_to_create_the_refund: "Impossible de créer l'avoir"
         invoice_reference_successfully_saved: "La référence facture a bien été enregistrée."
