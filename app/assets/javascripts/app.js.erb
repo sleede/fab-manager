@@ -128,3 +128,7 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
   }]).constant('angularMomentConfig', {
     timezone: Fablab.timezone
   });
+
+angular.isUndefinedOrNull = function(val) {
+  return angular.isUndefined(val) || val === null
+};

@@ -515,7 +515,9 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ##
   buildCustomFilterQuery = ->
     custom = null
-    if $scope.customFilter.criterion and $scope.customFilter.criterion.key and $scope.customFilter.value
+    if !angular.isUndefinedOrNull($scope.customFilter.criterion) and
+        !angular.isUndefinedOrNull($scope.customFilter.criterion.key) and
+        !angular.isUndefinedOrNull($scope.customFilter.value)
       custom = {}
       custom.key = $scope.customFilter.criterion.key
       custom.value = $scope.customFilter.value
