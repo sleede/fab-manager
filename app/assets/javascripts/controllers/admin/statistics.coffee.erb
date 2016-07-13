@@ -58,6 +58,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ## default: results are not sorted
   $scope.sorting =
     ca: 'none'
+    date: 'desc'
 
   ## active tab will be set here
   $scope.selectedIndex = null
@@ -150,6 +151,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     $scope.customFilter.value = null
     $scope.customFilter.exclude = false
     $scope.sorting.ca = 'none'
+    $scope.sorting.date = 'desc'
     buildCustomFiltersList()
     refreshStats()
 
