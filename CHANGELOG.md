@@ -5,6 +5,7 @@
 - Add a 'new project' button in dashboard/my projects
 - Open Projects: show the platform of origin even for local projects
 - Ability to use HTML in machine specs and description
+- Ability to manage project steps order
 - Fix a bug: project drafts are shown on public profiles
 
 ## v2.3.0 2016 June 28
