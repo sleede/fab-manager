@@ -40,7 +40,7 @@
       <div class="article-steps">
         <div class="row article-step m-b-lg" ng-repeat="step in project.project_steps_attributes">
           <div class="col-md-12 m-b-xs">
-             <h3 class="well well-simple step-title">{{ 'step_N' | translate:{INDEX:$index+1} }} : {{step.title}}</h3>
+             <h3 class="well well-simple step-title">{{ 'step_N' | translate:{INDEX:step.step_nb} }} : {{step.title}}</h3>
           </div>
           <div class="col-md-4" ng-if="step.project_step_image">
             <a href="{{step.project_step_image_url}}" target="_blank"><img class="img-responsive m-b" ng-src="{{step.project_step_image_url}}" alt="{{step.title}}" ></a>

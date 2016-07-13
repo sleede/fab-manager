@@ -357,6 +357,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title",       limit: 255
+    t.integer  "step_nb"
   end
 
   add_index "project_steps", ["project_id"], name: "index_project_steps_on_project_id", using: :btree

@@ -121,6 +121,7 @@ en:
         add_a_picture: "Add a picture"
         change_the_picture: "Change the picture"
         delete_the_step: "Delete the step"
+        do_you_really_want_to_delete_this_step: "Do you really want to delete this step?"
         add_a_new_step: "Add a new step"
         publish_your_project: "Publish your project"
         employed_materials: "Employed materials"
