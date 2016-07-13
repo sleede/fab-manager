@@ -9,11 +9,12 @@
 - Trainings are associated with a picture and an HTML textual description
 - Public gallery of trainings with ability to view details or to book a training on its own calendar
 - Ability to switch back to all trainings booking view
-- Fix a bug: project drafts are shown on public profiles
+- Rename "Courses and Workshops" to "Events" 
 - Admin: Events can be associated with a theme and an age range
 - Admin: Event categories, themes and age ranges can be customized
 - Filter events by category, theme and age range in public view
 - Statistics will include informations abouts events category, theme and age range
+- Fix a bug: project drafts are shown on public profiles
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 
