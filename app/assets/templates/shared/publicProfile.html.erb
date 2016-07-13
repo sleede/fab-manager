@@ -104,6 +104,7 @@
 
               <div class="text-center">
                 <span class="m-l-sm label label-success text-white">{{project.author_id == user.id ? 'author' : 'collaborator' | translate}}</span>
+                <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span>
               </div>
 
               <div class="card-overlay">
