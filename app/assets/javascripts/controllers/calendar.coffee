@@ -64,6 +64,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
       if event.available_type == 'event'
         $state.go('app.public.events_show', {id: event.event_id})
       else if event.available_type == 'training'
+        $state.go('app.public.training_show', {id: event.training_id})
       else
         $state.go('app.public.machines_show', {id: event.machine_id})
 
