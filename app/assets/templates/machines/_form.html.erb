@@ -46,7 +46,8 @@
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$invalid}">
       <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
       <div class="col-sm-10">
-        <textarea ng-model="machine.description" class="form-control" rows="12" id="machine_description" placeholder="" name="machine[description]" required></textarea>
+        <input type="hidden" name="machine[description]" ng-value="machine.description" />
+        <summernote ng-model="machine.description" id="machine_description" placeholder="" config="summernoteOpts" name="machine[description]" required></summernote>
         <span class="help-block" ng-show="machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
       </div>
     </div>
@@ -54,7 +55,8 @@
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$invalid}">
       <label for="spec" class="col-sm-2 control-label">{{ 'technical_specifications' | translate }} *</label>
       <div class="col-sm-10">
-        <textarea ng-model="machine.spec" class="form-control" rows="12" id="machine_spec" placeholder="" name="machine[spec]" required></textarea>
+        <input type="hidden" name="machine[spec]" ng-value="machine.spec" />
+        <summernote ng-model="machine.spec" id="machine_spec" placeholder="" config="summernoteOpts" name="machine[spec]" required></summernote>
         <span class="help-block" ng-show="machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$error.required" translate>{{ 'technical_specifications_are_required' }}</span>
       </div>
     </div>

@@ -98,10 +98,23 @@ Application.Filters.filter "humanize", [ ->
     Humanize.truncate(element, param, null)
 ]
 
+##
+# This filter will convert ASCII carriage-return character to the HTML break-line tag
+##
 Application.Filters.filter "breakFilter", [ ->
   (text) ->
     if text != undefined
-      text.replace(/\n/g, '<br />')
+      text.replace(/\n+/g, '<br />')
+]
+
+##
+# This filter will take a HTML text as input and will return it without the html tags
+##
+Application.Filters.filter "simpleText", [ ->
+  (text) ->
+    if text != undefined
+      text = text.replace(/<br\s*\/?>/g, '\n')
+      text.replace(/<\/?\w+[^>]*>/g, '')
 ]
 
 Application.Filters.filter "toTrusted", [ "$sce", ($sce) ->
