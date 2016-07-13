@@ -9,4 +9,8 @@ json.array!(@availabilities) do |availability|
   json.backgroundColor 'white'
   json.borderColor availability.available_type == 'machines' ? '#e4cd78' : '#bd7ae9'
   json.tag_ids availability.tag_ids
+  json.tags availability.tags do |t|
+    json.id t.id
+    json.name t.name
+  end
 end

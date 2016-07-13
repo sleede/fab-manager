@@ -51,8 +51,8 @@ Application.Controllers.controller "ShowTrainingController", ['$scope', '$state'
 # training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
 ##
 
-Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t'
-, ($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t) ->
+Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig'
+($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t, uiCalendarConfig) ->
 
 
 
@@ -76,9 +76,6 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
 
 
   ### PUBLIC SCOPE ###
-
-  ## after fullCalendar loads, provides access to its methods through $scope.calendar.fullCalendar()
-  $scope.calendar = null
 
   ## bind the trainings availabilities with full-Calendar events
   $scope.eventSources = [ { events: availabilityTrainingsPromise, textColor: 'black' } ]
@@ -148,7 +145,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     eventClick: (event, jsEvent, view) ->
       calendarEventClickCb(event, jsEvent, view)
     eventAfterAllRender: (view)->
-      $scope.events = $scope.calendar.fullCalendar 'clientEvents'
+      $scope.events = uiCalendarConfig.calendars.calendar.fullCalendar 'clientEvents'
     eventRender: (event, element, view) ->
       eventRenderCb(event, element, view)
 
@@ -174,7 +171,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
       Member.get {id: $scope.ctrl.member.id}, (member) ->
         $scope.ctrl.member = member
         Availability.trainings {trainingId: $stateParams.id, member_id: $scope.ctrl.member.id}, (trainings) ->
-          $scope.calendar.fullCalendar 'removeEvents'
+          uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents'
           $scope.eventSources.push
             events: trainings
             textColor: 'black'
@@ -210,8 +207,8 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     $scope.selectedPlan = null
     $scope.trainingIsValid = false
     $timeout ->
-      $scope.calendar.fullCalendar 'refetchEvents'
-      $scope.calendar.fullCalendar 'rerenderEvents'
+      uiCalendarConfig.calendars.fullCalendar 'refetchEvents'
+      uiCalendarConfig.calendars.fullCalendar 'rerenderEvents'
 
 
 
@@ -283,7 +280,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then $scope.slotToModify.training.name + " - " + _t('i_ve_reserved') else $scope.slotToModify.training.name
     $scope.slotToModify.backgroundColor = 'white'
     $scope.slotToModify = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -296,7 +293,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     $scope.slotToPlace.backgroundColor = 'white'
     $scope.slotToPlace.title = $scope.slotToPlace.training.name
     $scope.slotToPlace = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -329,7 +326,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
       $scope.slotToModify.can_modify = false
       $scope.slotToModify.is_completed = false if $scope.slotToModify.is_completed
       $scope.slotToModify = null
-      $scope.calendar.fullCalendar 'rerenderEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
     , -> # failure
       growl.error('an_error_occured_preventing_the_booked_slot_from_being_modified')
 
@@ -345,7 +342,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then $scope.slotToModify.training.name + " - " + _t('i_ve_reserved') else $scope.slotToModify.training.name
     $scope.slotToModify.backgroundColor = 'white'
     $scope.slotToModify = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -426,7 +423,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         angular.forEach $scope.events, (e)->
           if event.id != e.id
             e.backgroundColor = 'white'
-        $scope.calendar.fullCalendar 'rerenderEvents'
+        uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
         # two if below for move training reserved
         # if training isnt reserved and have a training to modify and same training and not complete
       else if !event.is_reserved && $scope.slotToModify && slotCanBePlaced(event)
@@ -436,7 +433,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         $scope.slotToPlace = event
         event.backgroundColor = '#bbb'
         event.title = event.training.name + ' - ' + _t('i_shift')
-        $scope.calendar.fullCalendar 'rerenderEvents'
+        uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
         # if training reserved can modify
       else if event.is_reserved and (slotCanBeModified(event) or slotCanBeCanceled(event)) and !$scope.slotToModify and !$scope.selectedTraining
         event.movable = slotCanBeModified(event)
@@ -454,7 +451,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
             $scope.slotToModify = event
             event.backgroundColor = '#eee'
             event.title = event.training.name + ' - ' + _t('i_change')
-            $scope.calendar.fullCalendar 'rerenderEvents'
+            uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
           else if type == 'cancel'
             dialogs.confirm
               resolve:
@@ -473,7 +470,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
                 $scope.canceledSlot.can_modify = false
                 $scope.canceledSlot.is_completed = false if event.is_completed
                 $scope.canceledSlot = null
-                $scope.calendar.fullCalendar 'rerenderEvents'
+                uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
               , -> # error while canceling
                 growl.error _t('cancellation_failed')
         , -> # canceled
@@ -635,8 +632,8 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     Auth._currentUser.training_credits = angular.copy(reservation.user.training_credits)
     Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits)
 
-    $scope.calendar.fullCalendar 'refetchEvents'
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 

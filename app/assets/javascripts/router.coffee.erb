@@ -506,9 +506,6 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/calendar/calendar.html" %>'
             controller: 'AdminCalendarController'
         resolve:
-          availabilitiesPromise: ['Availability', (Availability)->
-            Availability.query().$promise
-          ]
           bookingWindowStart: ['Setting', (Setting)->
             Setting.get(name: 'booking_window_start').$promise
           ]
