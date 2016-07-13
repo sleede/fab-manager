@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## next release
+- Display 'draft' badge on drafts in project galleries
+- Add a 'new project' button in dashboard/my projects
+- Open Projects: show the platform of origin even for local projects 
+- Fix a bug: project drafts are shown on public profiles
+
 ## v2.3.0 2016 June 28
 
 - Public API with access management and online documentation
