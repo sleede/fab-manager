@@ -6,6 +6,9 @@
 - Open Projects: show the platform of origin even for local projects
 - Ability to use HTML in machine specs and description
 - Ability to manage project steps order
+- Trainings are associated with a picture and an HTML textual description
+- Public gallery of trainings with ability to view details or to book a training on its own calendar
+- Ability to switch back to all trainings booking view
 - Fix a bug: project drafts are shown on public profiles
 - [TODO DEPLOY] `rake db:migrate`
 
