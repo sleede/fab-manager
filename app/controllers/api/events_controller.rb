@@ -3,9 +3,16 @@ class API::EventsController < API::ApiController
 
   def index
     @events = policy_scope(Event)
-    @total = @events.count
     @page = params[:page]
+
+    # filters
+    @events = @events.joins(:categories).where('categories.id = :category', category: params[:category_id]) if params[:category_id]
+    @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
+    @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
+
+    # paginate
     @events = @events.page(@page).per(12)
+
   end
 
   # GET /events/upcoming/:limit
@@ -57,7 +64,8 @@ class API::EventsController < API::ApiController
     def event_params
       event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
                                                     :amount, :reduced_amount, :nb_total_places, :availability_id,
-                                                    :all_day, :recurrence, :recurrence_end_at, :category_ids, category_ids: [],
+                                                    :all_day, :recurrence, :recurrence_end_at, :category_ids, :event_theme_ids,
+                                                    :age_range_id, event_theme_ids: [], category_ids: [],
                                                     event_image_attributes: [:attachment], event_files_attributes: [:id, :attachment, :_destroy])
       start_date = Time.zone.parse(event_preparams[:start_date])
       end_date = Time.zone.parse(event_preparams[:end_date])

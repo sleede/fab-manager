@@ -334,7 +334,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
           callback(results)
       recursiveCb()
     else # palmares (ranking)
-      queryElasticRanking index.es_type_key, $scope.ranking.groupCriterion, $scope.ranking.sortCriterion, index.graph.limit, (results, error) ->
+      queryElasticRanking index.es_type_key, $scope.ranking.groupCriterion, $scope.ranking.sortCriterion, (results, error) ->
         if (error)
           callback([], error)
         else
@@ -373,17 +373,18 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
 
   ##
   # For ranking displays, run the elasticSearch query to retreive the /stats/type aggregations
-  # @param esType {String} elasticSearch document type (subscription|machine|training|...)
-  # @param statType {String} statistics type (year|month|hour|booking|...)
+  # @param esType {string} elasticSearch document type (subscription|machine|training|...)
+  # @param groupKey {string} statistics subtype or custom field
+  # @param sortKey {string} statistics type or 'ca'
   # @param callback {function} function be to run after results were retrieved,
   # it will receive two parameters : results {Array}, error {String} (if any)
   ##
-  queryElasticRanking = (esType, groupKey, sortKey, limit, callback) ->
+  queryElasticRanking = (esType, groupKey, sortKey, callback) ->
     # handle invalid callback
     if typeof(callback) != "function"
       console.error('[graphsController::queryElasticRanking] Error: invalid callback provided')
       return
-    if !esType or !groupKey or !sortKey or typeof limit != 'number'
+    if !esType or !groupKey or !sortKey
       callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided')
 
     # run query

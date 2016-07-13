@@ -6,5 +6,7 @@ module Stats
 
     attribute :eventId, Integer
     attribute :eventDate, String
+    attribute :ageRange, String
+    attribute :eventTheme, String
   end
 end

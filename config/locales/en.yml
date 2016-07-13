@@ -78,7 +78,7 @@ en:
     subscription_NAME_from_START_to_END: "Subscription - From %{START} to %{END}"
     machine_reservation_DESCRIPTION: "Machine reservation - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Training reservation - %{DESCRIPTION}"
-    courses_and_workshops_reservation_DESCRIPTION: "Courses and Workshops reservation - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Event reservation - %{DESCRIPTION}"
     full_price_ticket:
       one: "One full price ticket"
       other: "%{count} full price tickets"
@@ -244,6 +244,8 @@ en:
     event_id: "Event ID"
     event_date: "Event Date"
     event_name: "Event Name"
+    event_theme: "Theme"
+    age_range: "Age Range"
     themes: "Themes"
     components: "Components"
     machines: "Machines"
@@ -252,3 +254,5 @@ en:
     hours_number: "Hours number"
     tickets_number: "Tickets number"
     revenue: "Revenue"
+    account_creation: "Account creation"
+    project_publication: "Project publication"

@@ -7,7 +7,6 @@
 # in the various events' admin controllers.
 #
 # Provides :
-#  - $scope.categories = [{Category}]
 #  - $scope.datePicker = {}
 #  - $scope.submited(content)
 #  - $scope.cancel()
@@ -23,13 +22,7 @@
 #  - $state (Ui-Router) [ 'app.public.events_list' ]
 ##
 class EventsController
-  constructor: ($scope, $state, Event, Category) ->
-
-    ## Retrieve the list of categories from the server (stage, atelier, ...)
-    Category.query().$promise.then (data)->
-      $scope.categories = data.map (d) ->
-        id: d.id
-        name: d.name
+  constructor: ($scope, $state) ->
 
     ## default parameters for AngularUI-Bootstrap datepicker
     $scope.datePicker =
@@ -136,7 +129,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'Event', 'eventsPromise', ($scope, $state, Event, eventsPromise) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
+, ($scope, $state, dialogs, growl, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
 
 
 
@@ -151,6 +145,21 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   ## Current virtual page
   $scope.page = 2
 
+  ## Temporary datastore for creating new elements
+  $scope.inserted =
+    category: null
+    theme: null
+    age_range: null
+
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
+
   ##
   # Adds a bucket of events to the bottom of the page, grouped by month
   ##
@@ -159,6 +168,71 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
       $scope.events = $scope.events.concat data
       paginationCheck(data, $scope.events)
     $scope.page += 1
+
+
+  ##
+  # Saves a new element / Update an existing one to the server (form validation callback)
+  # @param model {string} model name
+  # @param data {Object} element name
+  # @param [id] {number} element id, in case of update
+  ##
+  $scope.saveElement = (model, data, id) ->
+    if id?
+      getModel(model)[0].update {id: id}, data
+    else
+      getModel(model)[0].save data, (resp)->
+        getModel(model)[1][getModel(model)[1].length-1].id = resp.id
+
+
+
+  ##
+  # Deletes the element at the specified index
+  # @param model {string} model name
+  # @param index {number} element index in the $scope[model] array
+  ##
+  $scope.removeElement = (model, index) ->
+    if model == 'category' and getModel(model)[1].length == 1
+      growl.error(_t('at_least_one_category_is_required')+' '+_t('unable_to_delete_the_last_one'))
+      return false
+    if getModel(model)[1][index].related_to > 0
+      growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', {ELEMENT:model, NUMBER:getModel(model)[1][index].related_to}, "messageformat"))
+      return false
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('confirmation_required')
+          msg: _t('do_you_really_want_to_delete_this_ELEMENT', {ELEMENT:model}, "messageformat")
+    , -> # delete confirmed
+      getModel(model)[0].delete getModel(model)[1][index], null, ->
+        getModel(model)[1].splice(index, 1)
+      , ->
+        growl.error(_t('unable_to_delete_an_error_occured'))
+
+
+
+  ##
+  # Creates a new empty entry in the $scope[model] array
+  # @param model {string} model name
+  ##
+  $scope.addElement = (model) ->
+    $scope.inserted[model] =
+      name: ''
+      related_to: 0
+    getModel(model)[1].push($scope.inserted[model])
+
+
+
+  ##
+  # Removes the newly inserted but not saved element / Cancel the current element modification
+  # @param model {string} model name
+  # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+  # @param index {number} element index in the $scope[model] array
+  ##
+  $scope.cancelElement = (model, rowform, index) ->
+    if getModel(model)[1][index].id?
+      rowform.$cancel()
+    else
+      getModel(model)[1].splice(index, 1)
 
 
 
@@ -183,6 +257,17 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
     else
       $scope.paginateActive = false
 
+  ##
+  # Return the model and the datastore matching the given name
+  # @param name {string} 'category', 'theme' or 'age_range'
+  # @return {[Object, Array]} model and datastore
+  ##
+  getModel = (name) ->
+    switch name
+      when 'category' then [Category, $scope.categories]
+      when 'theme' then [EventTheme, $scope.themes]
+      when 'age_range' then [AgeRange, $scope.ageRanges]
+      else [null, []]
 
 
   # init the controller (call at the end !)
@@ -209,8 +294,8 @@ Application.Controllers.controller "ShowEventReservationsController", ["$scope",
 ##
 # Controller used in the event creation page
 ##
-Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'Event', 'Category', 'CSRF', '_t'
-, ($scope, $state, $locale, Event, Category, CSRF, _t) ->
+Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
+, ($scope, $state, $locale, CSRF, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -218,6 +303,15 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 
   ## Form action on the above URL
   $scope.method = 'post'
+
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
 
   ## Default event parameters
   $scope.event =
@@ -243,7 +337,7 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
   ## Using the EventsController
-  new EventsController($scope, $state, Event, Category)
+  new EventsController($scope, $state)
 ]
 
 
@@ -251,8 +345,8 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 ##
 # Controller used in the events edition page
 ##
-Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'Event', 'Category', 'CSRF', 'eventPromise'
-, ($scope, $state, $stateParams, $locale, Event, Category, CSRF, eventPromise) ->
+Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
+, ($scope, $state, $stateParams, $locale, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise) ->
 
   ### PUBLIC SCOPE ###
 
@@ -269,6 +363,15 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
 
   ## currency symbol for the current locale (cf. angular-i18n)
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
+
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
 
 
 
@@ -287,7 +390,7 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
     $scope.event.end_date = moment($scope.event.end_date).toDate()
 
     ## Using the EventsController
-    new EventsController($scope, $state, Event, Category)
+    new EventsController($scope, $state)
 
 
 

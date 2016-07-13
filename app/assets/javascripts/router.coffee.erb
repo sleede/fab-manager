@@ -468,6 +468,15 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "events/index.html" %>'
             controller: 'EventsController'
         resolve:
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.events_list').$promise
           ]
@@ -591,6 +600,15 @@ angular.module('application.router', ['ui.router']).
           eventsPromise: ['Event', (Event)->
             Event.query(page: 1).$promise
           ]
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.events').$promise
           ]
@@ -601,6 +619,15 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "events/new.html" %>'
             controller: 'NewEventController'
         resolve:
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.events_new', 'app.shared.event']).$promise
           ]
@@ -613,6 +640,15 @@ angular.module('application.router', ['ui.router']).
         resolve:
           eventPromise: ['Event', '$stateParams', (Event, $stateParams)->
             Event.get(id: $stateParams.id).$promise
+          ]
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.events_edit', 'app.shared.event']).$promise

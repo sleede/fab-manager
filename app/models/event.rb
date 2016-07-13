@@ -8,6 +8,9 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :categories, join_table: :events_categories
   validates :categories, presence: true
   has_many :reservations, as: :reservable, dependent: :destroy
+  has_and_belongs_to_many :event_themes, join_table: :events_event_themes, dependent: :destroy
+
+  belongs_to :age_range
 
   belongs_to :availability, dependent: :destroy
   accepts_nested_attributes_for :availability
@@ -21,6 +24,10 @@ class Event < ActiveRecord::Base
 
   def name
     title
+  end
+
+  def themes
+    self.event_themes
   end
 
   def recurrence_events

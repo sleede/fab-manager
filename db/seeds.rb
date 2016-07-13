@@ -27,7 +27,9 @@ if StatisticField.count == 0
     {key:'components', label:I18n.t('statistics.components'), statistic_index_id: 6, data_type: 'list'},
     {key:'machines', label:I18n.t('statistics.machines'), statistic_index_id: 6, data_type: 'list'},
     {key:'name', label:I18n.t('statistics.event_name'), statistic_index_id: 4, data_type: 'text'},
-    {key:'userId', label:I18n.t('statistics.user_id'), statistic_index_id: 7, data_type: 'index'}
+    {key:'userId', label:I18n.t('statistics.user_id'), statistic_index_id: 7, data_type: 'index'},
+    {key:'eventTheme', label:I18n.t('statistics.event_theme'), statistic_index_id: 4, data_type: 'text'},
+    {key:'ageRange', label:I18n.t('statistics.age_range'), statistic_index_id: 4, data_type: 'text'}
   ])
 end
 
@@ -55,9 +57,6 @@ end
 
 if StatisticSubType.count == 0
   StatisticSubType.create!([
-    {key: 'Stage', label:I18n.t('statistics.course'), statistic_types: StatisticIndex.find_by(es_type_key: 'event').statistic_types},
-    {key: 'Atelier', label:I18n.t('statistics.workshop'), statistic_types: StatisticIndex.find_by(es_type_key: 'event').statistic_types},
-
     {key: 'created', label:I18n.t('statistics.account_creation'), statistic_types: StatisticIndex.find_by(es_type_key: 'account').statistic_types},
     {key: 'published', label:I18n.t('statistics.project_publication'), statistic_types: StatisticIndex.find_by(es_type_key: 'project').statistic_types}
   ])

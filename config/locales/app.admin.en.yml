@@ -70,17 +70,29 @@ en:
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
 
       events:
-        # courses and workshops tracking and management
-        fablab_courses_and_workshops: "Fablab courses and workshops"
+        # events tracking and management
+        events_monitoring: "Events monitoring"
+        manage_filters: "Manage filters"
+        fablab_events: "Fablab events"
         all_events: "All events"
         passed_events: "Passed events"
         events_to_come: "Events to come"
         from_DATE: "From {{DATE}}"  # angular interpolation
         from_TIME: "From {{TIME}}"  # angular interpolation
         view_reservations: "View reservations"
+        categories: "Categories"
+        add_a_category: "Add a category"
+        add_a_theme: "Add a theme"
+        age_ranges: "Age ranges"
+        add_a_range: "Add a range"
+        do_you_really_want_to_delete_this_ELEMENT: "Do you really want to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}?"  # messageFormat interpolation
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Unable to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}} because it is already associated with {NUMBER, plural, =0{no events} one{one event} other{{NUMBER} events}}."  # messageFormat interpolation
+        at_least_one_category_is_required: "At least one category is required."
+        unable_to_delete_the_last_one: "Unable to delete the last one."
+        unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
 
       events_new:
-        # add a new workshop/course
+        # add a new event
         none: "None"
         every_days: "Every days"
         every_week: "Every week"
@@ -319,13 +331,12 @@ en:
         next_trainings: "Next trainings"
         passed_trainings: "Passed trainings"
         validated_trainings: "Validated trainings"
-        courses_and_workshops: "Courses and workshops"
-        next_courses_and_workshops: "Next courses and workshops"
-        no_upcomning_courses_or_workshops: "No upcoming courses and workshops"
+        events: "Events"
+        next_events: "Next events"
+        no_upcoming_events: "No upcoming events"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
         NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 reduced rate ticket reserved} other{{NUMBER} reduced rate tickets reserved}}"  # messageFormat interpolation
-        passed_courses_and_workshops: "Passed courses and workshops"
-        no_passed_courses_or_workshop: "No passed courses or workshops"
+        passed_events: "Passed events"
         invoices: "Invoices"
         invoice_#: "Invoice #"
         download_the_refund_invoice: "Download the refund invoice"

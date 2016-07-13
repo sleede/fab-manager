@@ -72,6 +72,28 @@ namespace :fablab do
          }
       }';`
     end
+    es_add_event_filters
+  end
+
+  desc 'add event filters to statistics'
+  task es_add_event_filters: :environment do
+    es_add_event_filters
+  end
+
+  def es_add_event_filters
+    `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/event/_mapping -d '
+      {
+         "properties": {
+            "ageRange": {
+               "type": "string",
+               "index" : "not_analyzed"
+            },
+            "eventTheme": {
+               "type": "string",
+               "index" : "not_analyzed"
+            }
+         }
+      }';`
   end
 
   desc "sync all/one project in elastic search index"

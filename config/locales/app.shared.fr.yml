@@ -54,7 +54,8 @@ fr:
         confirm_and_pay: "Valider et payer"
         your_invoice_will_be_available_soon_from_your_: "Votre facture sera bientôt disponible depuis votre"
         add_an_event: "Ajouter un évènement"
-        load_the_next_courses_and_workshops: "Charger les stages et ateliers suivants ..."
+        load_the_next_events: "Charger les évènements suivants ..."
+        no_passed_events: "Aucun évènement passé"
         dates: "Dates :"
         thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
         surname: "Nom"
@@ -92,6 +93,7 @@ fr:
         book: "Réserver"
         description_is_required: "La description est requise."
         name_is_required: "Le nom est requis."
+        all_themes: "Toutes les thématiques"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
@@ -163,7 +165,7 @@ fr:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
 
       event:
-        # formulaire d'édition d'un événement (stage/atelier)
+        # formulaire d'édition d'un événement
         title_is_required: "Le titre est requis."
         matching_visual: "Visuel associé"
         choose_a_picture: "Choisir une image"
@@ -182,6 +184,8 @@ fr:
         standard_rate: "Tarif standard"
         0_=_free: "0 = gratuit"
         tickets_available: "Places disponibles"
+        event_theme: "Thème de l'évènement"
+        age_range: "Tranche d'âge"
 
       plan:
         # formulaire d'édition d'une formule d'abonnement

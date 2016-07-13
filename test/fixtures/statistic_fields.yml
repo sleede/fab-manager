@@ -88,3 +88,23 @@ statistic_field_10:
   created_at: 2016-04-04 14:11:33.423307000 Z
   updated_at: 2016-04-04 14:11:33.423307000 Z
   data_type: text
+
+statistic_field_11:
+  id: 11
+  statistic_index_id: 4
+  key: ageRange
+  label: Tranche d'âge
+  created_at: 2016-06-30 12:10:49.812226000 Z
+  updated_at: 2016-06-30 12:10:49.812226000 Z
+  data_type: text
+
+
+statistic_field_12:
+  id: 12
+  statistic_index_id: 4
+  key: eventTheme
+  label: Thématique
+  created_at: 2016-06-30 12:10:49.814331000 Z
+  updated_at: 2016-06-30 12:10:49.814331000 Z
+  data_type: text
+

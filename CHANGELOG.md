@@ -10,6 +10,11 @@
 - Public gallery of trainings with ability to view details or to book a training on its own calendar
 - Ability to switch back to all trainings booking view
 - Fix a bug: project drafts are shown on public profiles
+- Admin: Events can be associated with a theme and an age range
+- Admin: Event categories, themes and age ranges can be customized
+- Filter events by category, theme and age range in public view
+- Statistics will include informations abouts events category, theme and age range
+- [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 
 ## v2.3.0 2016 June 28
@@ -27,7 +32,7 @@
 ## v2.2.2 2016 June 23
 - Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation 
 - Fix a bug: unable to display next results in statistics tables
-- Admin: Category is mandatory when creating a course/workshop (event)
+- Admin: Category is mandatory when creating an event
 
 ## v2.2.1 2016 June 22
 - Fix a bug: field User.merged_at should not be allowed to be mapped in SSO

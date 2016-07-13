@@ -70,17 +70,29 @@ fr:
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
 
       events:
-        # gestion et suivi des stages et ateliers
-        fablab_courses_and_workshops: "Les Stages et ateliers du Fab Lab"
+        # gestion et suivi des évènements
+        events_monitoring: "Suivi des évènements"
+        manage_filters: "Gérer les filtres"
+        fablab_events: "Les évènements du Fab Lab"
         all_events: "Tous les évènements"
         passed_events: "Les évènements déjà passés"
         events_to_come: "Les évènements à venir"
         from_DATE: "Du {{DATE}}"  # angular interpolation
         from_TIME: "De {{TIME}}"  # angular interpolation
         view_reservations: "Consulter les réservations"
+        categories: "Catégories"
+        add_a_category: "Ajouter une catégorie"
+        add_a_theme: "Ajouter une thématique"
+        age_ranges: "Tranches d'âge"
+        add_a_range: "Ajouter une tranche"
+        do_you_really_want_to_delete_this_ELEMENT: "Voulez-vous vraiment supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} ?"  # messageFormat interpolation
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Impossible de supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} car elle est actuellement associée à {NUMBER, plural, =0{aucun évènement} one{un évènement} other{{NUMBER} évènements}}."  # messageFormat interpolation
+        at_least_one_category_is_required: "Au moins une catégorie est requise."
+        unable_to_delete_the_last_one: "Impossible de supprimer la dernière."
+        unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
 
       events_new:
-        # ajouter un nouveau atelier/stage
+        # ajouter un nouvel évènement
         none: "Aucune"
         every_days: "Tous les jours"
         every_week: "Chaque semaine"
@@ -319,13 +331,12 @@ fr:
         next_trainings: "Les prochaines formations"
         passed_trainings: "Les formations passées"
         validated_trainings: "Les formations validées"
-        courses_and_workshops: "Ateliers et stages"
-        next_courses_and_workshops: "Les prochains stages et ateliers"
-        no_upcomning_courses_or_workshops: "Aucun stage ou atelier à venir"
+        events: "Évènements"
+        next_events: "Les prochains évènements"
+        no_upcoming_events: "Aucun évènement à venir"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 place plein tarif réservée} other{{NUMBER} places plein tarif réservées}}"  # messageFormat interpolation
         NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 place à tarif réduit réservée} other{{NUMBER} places à tarif réduit réservées}}"  # messageFormat interpolation
-        passed_courses_and_workshops: "Les stages et ateliers passés"
-        no_passed_courses_or_workshop: "Aucun stage ou atelier passé"
+        passed_events: "Les évènements passés"
         invoices: "Factures"
         invoice_#: "Facture n°"
         download_the_refund_invoice: "Télécharger l'avoir"
