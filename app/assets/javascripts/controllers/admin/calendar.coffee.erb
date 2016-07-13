@@ -4,8 +4,8 @@
 # Controller used in the calendar management page
 ##
 
-Application.Controllers.controller "AdminCalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig'
-($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig) ->
+Application.Controllers.controller "AdminCalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) ->
 
 
 
@@ -16,9 +16,6 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
   # The bookings can be positioned every half hours
   BOOKING_SNAP = '00:30:00'
-
-  # The calendar will be initialized positioned under 9:00 AM
-  DEFAULT_CALENDAR_POSITION = '09:00:00'
 
   # We do not allow the creation of slots that are not a multiple of 60 minutes
   SLOT_MULTIPLE = 60
@@ -40,43 +37,19 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     textColor: 'black'
 
   ## fullCalendar (v2) configuration
-  $scope.calendarConfig =
-    timezone: Fablab.timezone
-    lang: Fablab.fullcalendar_locale
-    header:
-      left: 'month agendaWeek'
-      center: 'title'
-      right: 'today prev,next'
-    firstDay: 1 # Week start on monday (France)
-    scrollTime: DEFAULT_CALENDAR_POSITION
+  $scope.calendarConfig = CalendarConfig
     slotDuration: BASE_SLOT
     snapDuration: BOOKING_SNAP
-    allDayDefault: false
-    minTime: "00:00:00"
-    maxTime: "24:00:00"
-    height: 'auto'
-    buttonIcons:
-      prev: 'left-single-arrow'
-      next: 'right-single-arrow'
-    timeFormat:
-      agenda:'H:mm'
-      month: 'H(:mm)'
-    axisFormat: 'H:mm'
-
-    allDaySlot: false
-    defaultView: 'agendaWeek'
     selectable: true
     selecHelper: true
+    minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
+    maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
     select: (start, end, jsEvent, view) ->
       calendarSelectCb(start, end, jsEvent, view)
     eventClick: (event, jsEvent, view)->
       calendarEventClickCb(event, jsEvent, view)
     eventRender: (event, element, view) ->
       eventRenderCb(event, element)
-
-  ## fullCalendar time bounds (up & down)
-  $scope.calendarConfig.minTime = moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
-  $scope.calendarConfig.maxTime = moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
 
 
 

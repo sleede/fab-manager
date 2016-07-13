@@ -91,7 +91,7 @@
   cursor: pointer;
   z-index: 9999;
   text-align: right;
-  .training-reserve &, .machine-reserve & { display: none; }
+  .training-reserve &, .machine-reserve &, .public-calendar & { display: none; }
 }
 
 .fc-v-event.fc-end {

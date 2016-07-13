@@ -268,21 +268,12 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
 # This controller workflow is pretty similar to the trainings reservation controller.
 ##
 
-Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'uiCalendarConfig',
-($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise, uiCalendarConfig) ->
+Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise, uiCalendarConfig, CalendarConfig) ->
 
 
 
   ### PRIVATE STATIC CONSTANTS ###
-
-  # The calendar is divided in slots of 60 minutes
-  BASE_SLOT = '01:00:00'
-
-  # The calendar will be initialized positioned under 9:00 AM
-  DEFAULT_CALENDAR_POSITION = '09:00:00'
-
-  # The user is unable to modify his already booked reservation 1 day before it occurs
-  PREVENT_BOOKING_MODIFICATION_DELAY = 1
 
   # Slot already booked by the current user
   FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>'
@@ -340,31 +331,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.machine = {}
 
   ## fullCalendar (v2) configuration
-  $scope.calendarConfig =
-    timezone: Fablab.timezone
-    lang: Fablab.fullcalendar_locale
-    header:
-      left: 'month agendaWeek'
-      center: 'title'
-      right: 'today prev,next'
-    firstDay: 1 # Week start on monday (France)
-    scrollTime: DEFAULT_CALENDAR_POSITION
-    slotDuration: BASE_SLOT
-    allDayDefault: false
-    minTime: '00:00:00'
-    maxTime: '24:00:00'
-    height: 'auto'
-    buttonIcons:
-      prev: 'left-single-arrow'
-      next: 'right-single-arrow'
-    timeFormat:
-      agenda:'H:mm'
-      month: 'H(:mm)'
-    axisFormat: 'H:mm'
-
-    allDaySlot: false
-    defaultView: 'agendaWeek'
-    editable: false
+  $scope.calendarConfig = CalendarConfig
+    minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
+    maxTime: moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
     eventClick: (event, jsEvent, view) ->
       calendarEventClickCb(event, jsEvent, view)
     eventRender: (event, element, view) ->
@@ -387,12 +356,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
   ## Global config: delay in hours before a booking while the cancellation is forbidden
   $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay)
-
-  ## Global config: calendar window in the morning
-  $scope.calendarConfig.minTime = moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
-
-  ## Global config: calendar window in the evening
-  $scope.calendarConfig.maxTime = moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
 
 
 

@@ -29,6 +29,7 @@ en:
         confirmation_required: "Confirmation required"
         description: "Description"
         machines: "Machines"
+        events: "Events"
         materials: "Materials"
         date: "Date"
         price: "Price"

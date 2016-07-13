@@ -497,6 +497,24 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.valid_reservation_modal']).$promise
           ]
 
+      # calendar global (trainings, machines and events)
+      .state 'app.public.calendar',
+        url: '/calendar'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "calendar/calendar.html" %>'
+            controller: 'CalendarController'
+        resolve:
+          bookingWindowStart: ['Setting', (Setting)->
+            Setting.get(name: 'booking_window_start').$promise
+          ]
+          bookingWindowEnd: ['Setting', (Setting)->
+            Setting.get(name: 'booking_window_end').$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.calendar']).$promise
+          ]
+
       # --- namespace /admin/... ---
       # calendar
       .state 'app.admin.calendar',
