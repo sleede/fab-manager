@@ -32,9 +32,9 @@ wb.add_worksheet(name: @index.label) do |sheet|
     subtype = get_item(@subtypes, hit['_source']['subType'], 'key')
     data = [
         Date::strptime(hit['_source']['date'],'%Y-%m-%d'),
-        user.profile.full_name,
-        user.email,
-        user.profile.phone,
+        (user ? user.profile.full_name : "ID #{hit['_source']['userId']}"),
+        (user ? user.email : ''),
+        (user ? user.profile.phone : ''),
         t("export.#{hit['_source']['gender']}"),
         hit['_source']['age'],
         subtype.nil? ? "" : subtype.label
