@@ -7,6 +7,7 @@
 - Ability to use HTML in machine specs and description
 - Ability to manage project steps order
 - Fix a bug: project drafts are shown on public profiles
+- [TODO DEPLOY] `rake db:migrate`
 
 ## v2.3.0 2016 June 28
 

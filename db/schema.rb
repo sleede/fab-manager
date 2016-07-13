@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613093842) do
+ActiveRecord::Schema.define(version: 20160630140204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "age_ranges", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
+
+  add_index "age_ranges", ["slug"], name: "index_age_ranges_on_slug", unique: true, using: :btree
 
   create_table "assets", force: :cascade do |t|
     t.integer  "viewable_id"
@@ -86,7 +95,10 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "components", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -114,6 +126,15 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_themes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
+
+  add_index "event_themes", ["slug"], name: "index_event_themes_on_slug", unique: true, using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "title",           limit: 255
     t.text     "description"
@@ -125,6 +146,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.integer  "nb_total_places"
     t.integer  "nb_free_places"
     t.integer  "recurrence_id"
+    t.integer  "age_range_id"
   end
 
   add_index "events", ["availability_id"], name: "index_events_on_availability_id", using: :btree
@@ -139,6 +161,14 @@ ActiveRecord::Schema.define(version: 20160613093842) do
 
   add_index "events_categories", ["category_id"], name: "index_events_categories_on_category_id", using: :btree
   add_index "events_categories", ["event_id"], name: "index_events_categories_on_event_id", using: :btree
+
+  create_table "events_event_themes", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "event_theme_id"
+  end
+
+  add_index "events_event_themes", ["event_id"], name: "index_events_event_themes_on_event_id", using: :btree
+  add_index "events_event_themes", ["event_theme_id"], name: "index_events_event_themes_on_event_theme_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -679,6 +709,8 @@ ActiveRecord::Schema.define(version: 20160613093842) do
 
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
+  add_foreign_key "events_event_themes", "event_themes"
+  add_foreign_key "events_event_themes", "events"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "prices", "groups"
