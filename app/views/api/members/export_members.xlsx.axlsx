@@ -19,46 +19,34 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
   # data rows
   @members.each do |member|
     data = [
-        member.id, member.profile.last_name, member.profile.first_name, member.email,
-        member.profile.gender ? t('export_members.man') : t('export_members.woman'),
-        member.profile.age,
-        member.profile.address ? member.profile.address.address : '',
-        member.profile.phone, member.profile.website, member.profile.job,
-        member.profile.interest, member.profile.software_mastered,
-        member.group.name,
+        member.id, member.profile.last_name, member.profile.first_name,
+        member.email, member.profile.gender ? t('export_members.man') : t('export_members.woman'), member.profile.age,
+        member.profile.address ? member.profile.address.address : '', member.profile.phone, member.profile.website,
+        member.profile.job, member.profile.interest, member.profile.software_mastered, member.group.name,
         (member.subscription and member.subscription.expired_at > Time.now) ? member.subscription.plan.name : t('export_members.without_subscriptions'),
         (member.subscription and member.subscription.expired_at > Time.now) ? member.subscription.expired_at.to_date : nil,
-        member.trainings.map(&:name).join("\n"), member.tags.map(&:name).join("\n"),
-        member.invoices.size,
-        member.projects.map(&:name).join("\n"),
-        member.profile.facebook || '', member.profile.twitter || '', member.profile.echosciences || ''
+        member.trainings.map(&:name).join("\n"), member.tags.map(&:name).join("\n"), member.invoices.size,
+        member.projects.map(&:name).join("\n"), member.profile.facebook || '', member.profile.twitter || '',
+        member.profile.echosciences || ''
     ]
     styles = [nil, nil, nil,
-              nil,
-              nil,
-              nil,
               nil, nil, nil,
-              nil, nil,
-              nil,
+              nil, nil, nil,
+              nil, nil, nil, nil,
               nil,
               date,
-              nil, nil,
-              nil,
-              nil,
-              nil, nil, nil]
+              nil, nil, nil,
+              nil, nil, nil,
+              nil]
     types = [:integer, :string, :string,
-             :string,
-             :string,
-             :integer,
+             :string, :string, :integer,
              :string, :string, :string,
-             :string, :string,
-             :string,
+             :string, :string, :string, :string,
              :string,
              :date,
-             :string, :string,
-             :integer,
-             :string,
-             :string, :string, :string]
+             :string, :string, :integer,
+             :string, :string, :string,
+             :string]
 
     sheet.add_row data, :style =>  styles, :types => types
   end
