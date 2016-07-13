@@ -1,0 +1,27 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a ng-click="cancel()"><i class="fa fa-long-arrow-left"></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1>{{ training.name }}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+      <section class="heading-actions wrapper">
+       <div class="btn btn-lg btn-block btn-default rounded m-t-xs" ng-click="cancel()" translate>{{ 'cancel' }}</div>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<div class="row no-gutter">
+  <div class="col-sm-12 col-md-12 col-lg-9 b-r-lg nopadding">
+    <ng-include src="'<%= asset_path 'admin/trainings/_form.html' %>'"></ng-include>
+  </div>
+</div>

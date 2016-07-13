@@ -87,6 +87,11 @@ en:
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
         add_a_project: "Add a project"
+        illustration: "Illustration"
+        add_an_illustration: "Add an illustration."
+        book: "Book"
+        description_is_required: "Description is required."
+        name_is_required: "Name is required."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -110,12 +115,10 @@ en:
 
       project:
         # project edition form
-        name_is_required: "Name is required."
         illustration: "Illustration"
         add_an_illustration: "Add an illustration"
         CAD_file: "CAD file"
         add_a_new_file: "Add a new file"
-        description_is_required: "Description is required."
         steps: "Steps"
         step_title: "Step title"
         add_a_picture: "Add a picture"
@@ -130,10 +133,6 @@ en:
 
       machine:
         # machine edition form
-        name_is_required: "The name is required."
-        illustration: "Illustration"
-        add_an_illustration: "Add an illustration."
-        description_is_required: "Description is required."
         technical_specifications_are_required: "Technical specifications are required."
         attached_files_(pdf): "Attached files (pdf)"
         attach_a_file: "Attach a file"
@@ -168,7 +167,6 @@ en:
         title_is_required: "Title is required."
         matching_visual: "Matching visual"
         choose_a_picture: "Choose a picture"
-        description_is_required: "Description is required."
         attachments: "Attachments"
         add_a_new_file: "Add a new file"
         event_type: "Event type"
@@ -188,7 +186,6 @@ en:
       plan:
         # subscription plan edition form
         general_informations: "General informations"
-        name_is_required: "Name is required."
         name_length_must_be_less_than_24_characters: "Name length must be less than 24 characters."
         type_is_required: "Type is required."
         group: "Group"
@@ -212,6 +209,13 @@ en:
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "As part of a partner subscription, some notifications may be sent to this user."
         new_partner: "New partner"
         email_address_is_required: "Email address is required."
+
+      trainings:
+        # training edition form
+        add_a_new_training: "Add a new training"
+        validate_your_training: "Validate your training"
+        associated_machines: "Associated machines"
+        number_of_tickets: "Number of tickets"
 
       user_admin:
         # partial form to edit/create an user (admin view)

@@ -78,14 +78,33 @@ class API::AvailabilitiesController < API::ApiController
       @user = current_user
     end
     @slots = []
-    @reservations = @user.reservations.includes(:slots).references(:slots).where("reservable_type = 'Training' AND slots.start_at > ?", Time.now)
+
+    # first, we get the already-made reservations
+    @reservations = @user.reservations.where("reservable_type = 'Training'")
+    @reservations = @reservations.where('reservable_id = :id', id: params[:training_id].to_i) if params[:training_id].is_number?
+    @reservations = @reservations.joins(:slots).where('slots.start_at > ?', Time.now)
+
+    # what is requested?
+    # 1) a single training
+    if params[:training_id].is_number?
+      @availabilities = Training.find(params[:training_id]).availabilities
+    # 2) all trainings
+    else
+      @availabilities = Availability.trainings
+    end
+
+    # who made the request?
+    # 1) an admin (he can see all future availabilities)
     if @user.is_admin?
-      @availabilities = Availability.includes(:tags, :slots, trainings: [:machines]).trainings.where('availabilities.start_at > ?', Time.now)
+      @availabilities = @availabilities.includes(:tags, :slots, trainings: [:machines]).where('availabilities.start_at > ?', Time.now)
+    # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
       end_at = 1.month.since
       end_at = 3.months.since if can_show_slot_plus_three_months(@user)
-      @availabilities = Availability.includes(:tags, :slots, trainings: [:machines]).trainings.where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = @availabilities.includes(:tags, :slots, :availability_tags, trainings: [:machines]).where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
+
+    # finally, we merge the availabilities with the reservations
     @availabilities.each do |a|
       a = verify_training_is_reserved(a, @reservations)
     end

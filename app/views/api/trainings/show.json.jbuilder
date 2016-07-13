@@ -1,5 +1,6 @@
-json.extract! @training, :id, :name, :machine_ids, :nb_total_places
-json.availabilities @training.availabilities do |a|
+json.extract! @training, :id, :name, :description, :machine_ids, :nb_total_places
+json.training_image @training.training_image.attachment.large.url if @training.training_image
+json.availabilities @training.availabilities.order('start_at DESC') do |a|
   json.id a.id
   json.start_at a.start_at.iso8601
   json.end_at a.end_at.iso8601

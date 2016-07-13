@@ -1,7 +1,148 @@
 'use strict'
 
-Application.Controllers.controller "TrainingsController", ["$scope", "$state", "$uibModal", 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl'
-, ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl) ->
+### COMMON CODE ###
+
+##
+# Provides a set of common callback methods to the $scope parameter. These methods are used
+# in the various trainings' admin controllers.
+#
+# Provides :
+#  - $scope.submited(content)
+#  - $scope.fileinputClass(v)
+#
+# Requires :
+#  - $state (Ui-Router) [ 'app.admin.trainings' ]
+##
+class TrainingsController
+  constructor: ($scope, $state) ->
+
+    ##
+    # For use with ngUpload (https://github.com/twilson63/ngUpload).
+    # Intended to be the callback when the upload is done: any raised error will be stacked in the
+    # $scope.alerts array. If everything goes fine, the user is redirected to the trainings list.
+    # @param content {Object} JSON - The upload's result
+    ##
+    $scope.submited = (content) ->
+      if !content.id?
+        $scope.alerts = []
+        angular.forEach content, (v, k)->
+          angular.forEach v, (err)->
+            $scope.alerts.push
+              msg: k+': '+err
+              type: 'danger'
+      else
+        $state.go('app.admin.trainings')
+
+
+
+    ##
+    # Changes the current user's view, redirecting him to the machines list
+    ##
+    $scope.cancel = ->
+      $state.go('app.admin.trainings')
+
+
+
+    ##
+    # For use with 'ng-class', returns the CSS class name for the uploads previews.
+    # The preview may show a placeholder or the content of the file depending on the upload state.
+    # @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+    ##
+    $scope.fileinputClass = (v)->
+      if v
+        'fileinput-exists'
+      else
+        'fileinput-new'
+
+
+
+##
+# Controller used in the training creation page (admin)
+##
+Application.Controllers.controller "NewTrainingController", [ '$scope', '$state', 'machinesPromise', 'CSRF'
+, ($scope, $state, machinesPromise, CSRF) ->
+
+
+
+  ### PUBLIC SCOPE ###
+
+  ## Form action on the following URL
+  $scope.method = 'post'
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = '/api/trainings/'
+
+  ## list of machines
+  $scope.machines = machinesPromise
+
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    CSRF.setMetaTags()
+
+    ## Using the TrainingsController
+    new TrainingsController($scope, $state)
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
+]
+
+
+
+##
+# Controller used in the training edition page (admin)
+##
+Application.Controllers.controller "EditTrainingController", [ '$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF'
+, ($scope, $state, $stateParams, trainingPromise, machinesPromise, CSRF) ->
+
+
+
+  ### PUBLIC SCOPE ###
+
+  ## Form action on the following URL
+  $scope.method = 'patch'
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = '/api/trainings/' + $stateParams.id
+
+  ## Details of the training to edit (id in URL)
+  $scope.training = trainingPromise
+
+  ## list of machines
+  $scope.machines = machinesPromise
+
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    CSRF.setMetaTags()
+
+    ## Using the TrainingsController
+    new TrainingsController($scope, $state)
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
+]
+
+
+
+
+##
+# Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
+##
+Application.Controllers.controller "TrainingsAdminController", ["$scope", "$state", "$uibModal", 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs'
+, ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs) ->
 
 
 
@@ -37,35 +178,6 @@ Application.Controllers.controller "TrainingsController", ["$scope", "$state", "
       if (training.machine_ids.indexOf(m.id) >= 0)
         selected.push(m.name)
     return if selected.length then selected.join(', ') else _t('none')
-
-
-
-  ##
-  # Create a new empty training object and append it to the $scope.trainings list
-  ##
-  $scope.addTraining = ->
-    $scope.inserted =
-      name: ''
-      machine_ids: []
-    $scope.trainings.push($scope.inserted)
-
-
-
-  ##
-  # Saves a new training / Update an existing training to the server (form validation callback)
-  # @param data {Object} training name, associated machine(s) and default places number
-  # @param id {number} training id, in case of update
-  ##
-  $scope.saveTraining = (data, id) ->
-    if id?
-      Training.update {id: id},
-        training: data
-    else
-      Training.save
-        training: data
-      , (resp) ->
-        $scope.trainings[$scope.trainings.length-1] = resp
-        console.log(resp)
 
 
 
@@ -138,30 +250,17 @@ Application.Controllers.controller "TrainingsController", ["$scope", "$state", "
   # @param training {Object} training to delete
   ##
   $scope.removeTraining = (index, training)->
-    training.$delete ->
-      $scope.trainings.splice(index, 1)
-      growl.info(_t('training_successfully_deleted'))
-    , (error)->
-      growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it'))
-
-
-
-  ##
-  # Open the modal to edit description of the training
-  # @param training {Object} Training to edit description
-  ##
-  $scope.openModalToSetDescription = (training)->
-    $uibModal.open(
-      templateUrl: "<%= asset_path 'admin/trainings/modal_edit.html' %>"
-      controller: ['$scope', '$uibModalInstance', 'Training', 'growl', ($scope, $uibModalInstance, Training, growl)->
-          $scope.training = training
-          $scope.save = ->
-            Training.update id: training.id, { training: { description: $scope.training.description } }, (training)->
-              $uibModalInstance.close()
-              growl.success(_t('description_was_successfully_saved'))
-          return
-      ]
-    )
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('confirmation_required')
+          msg: _t('do_you_really_want_to_delete_this_training')
+    , -> # deletion confirmed
+      training.$delete ->
+        $scope.trainings.splice(index, 1)
+        growl.info(_t('training_successfully_deleted'))
+      , (error)->
+        growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it'))
 
 
 

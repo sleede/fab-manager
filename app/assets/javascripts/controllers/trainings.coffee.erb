@@ -1,13 +1,58 @@
 'use strict'
 
 ##
+# Public listing of the trainings
+##
+Application.Controllers.controller "TrainingsController", ['$scope', '$state', 'trainingsPromise', ($scope, $state, trainingsPromise) ->
+
+  ## List of trainings
+  $scope.trainings = trainingsPromise
+
+  ##
+  # Callback for the 'reserve' button
+  ##
+  $scope.reserveTraining = (training, event) ->
+    $state.go('app.logged.trainings_reserve', {id: training.id})
+
+  ##
+  # Callback for the 'show' button
+  ##
+  $scope.showTraining = (training) ->
+    $state.go('app.public.training_show', {id: training.id})
+]
+
+
+
+##
+# Public view of a specific training
+##
+Application.Controllers.controller "ShowTrainingController", ['$scope', '$state', 'trainingPromise', ($scope, $state, trainingPromise) ->
+
+  ## Current training
+  $scope.training = trainingPromise
+
+  ##
+  # Callback for the 'reserve' button
+  ##
+  $scope.reserveTraining = (training, event) ->
+    $state.go('app.logged.trainings_reserve', {id: training.id})
+
+  ##
+  # Revert view to the full list of trainings ("<-" button)
+  ##
+  $scope.cancel = (event) ->
+    $state.go('app.public.trainings_list')
+]
+
+
+##
 # Controller used in the training reservation agenda page.
 # This controller is very similar to the machine reservation controller with one major difference: here, ONLY ONE
 # training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
 ##
 
-Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', '$compile', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', '_t',
-($scope, $state, $stateParams, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, $compile, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, _t) ->
+Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t'
+, ($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t) ->
 
 
 
@@ -71,6 +116,9 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ## Once a training reservation was modified, will contains {newReservedSlot:{}, oldReservedSlot:{}}
   $scope.modifiedSlots = null
 
+  ## Selected training unless 'all' trainings are displayed
+  $scope.training = trainingPromise
+
   ## fullCalendar (v2) configuration
   $scope.calendarConfig =
     timezone: Fablab.timezone
@@ -125,7 +173,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.ctrl.member
       Member.get {id: $scope.ctrl.member.id}, (member) ->
         $scope.ctrl.member = member
-        Availability.trainings {member_id: $scope.ctrl.member.id}, (trainings) ->
+        Availability.trainings {trainingId: $stateParams.id, member_id: $scope.ctrl.member.id}, (trainings) ->
           $scope.calendar.fullCalendar 'removeEvents'
           $scope.eventSources.push
             events: trainings
@@ -441,7 +489,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ##
   eventRenderCb = (event, element, view)->
     element.attr(
-      'uib-popover': event.training.description
+      'uib-popover': $filter('humanize')($filter('simpleText')(event.training.description), 70)
       'popover-trigger': 'mouseenter'
     )
     $compile(element)($scope)

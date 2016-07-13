@@ -363,8 +363,34 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise
           ]
       # trainings
+      .state 'app.public.trainings_list',
+        url: '/trainings'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "trainings/index.html" %>'
+            controller: 'TrainingsController'
+        resolve:
+          trainingsPromise: ['Training', (Training)->
+            Training.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.trainings_list']).$promise
+          ]
+      .state 'app.public.training_show',
+        url: '/trainings/:id'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "trainings/show.html" %>'
+            controller: 'ShowTrainingController'
+        resolve:
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+            Training.get({id: $stateParams.id}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.training_show']).$promise
+          ]
       .state 'app.logged.trainings_reserve',
-        url: '/trainings/reserve'
+        url: '/trainings/:id/reserve'
         views:
           'main@':
             templateUrl: '<%= asset_path "trainings/reserve.html" %>'
@@ -379,8 +405,11 @@ angular.module('application.router', ['ui.router']).
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
           ]
-          availabilityTrainingsPromise: ['Availability', (Availability)->
-            Availability.trainings().$promise
+          availabilityTrainingsPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.trainings({trainingId: $stateParams.id}).$promise
+          ]
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+              Training.get({id: $stateParams.id}).$promise unless $stateParams.id == 'all'
           ]
           settingsPromise: ['Setting', (Setting)->
             Setting.query(names: "['booking_window_start',
@@ -511,7 +540,7 @@ angular.module('application.router', ['ui.router']).
         views:
           'main@':
             templateUrl: '<%= asset_path "admin/trainings/index.html" %>'
-            controller: 'TrainingsController'
+            controller: 'TrainingsAdminController'
         resolve:
           trainingsPromise: ['Training', (Training)->
             Training.query().$promise
@@ -520,9 +549,37 @@ angular.module('application.router', ['ui.router']).
             Machine.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.admin.trainings').$promise
+            Translations.query(['app.admin.trainings', 'app.shared.trainings']).$promise
           ]
-
+      .state 'app.admin.trainings_new',
+        url: '/admin/trainings/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/trainings/new.html" %>'
+            controller: 'NewTrainingController'
+        resolve:
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise
+          ]
+      .state 'app.admin.trainings_edit',
+        url: '/admin/trainings/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/trainings/edit.html" %>'
+            controller: 'EditTrainingController'
+        resolve:
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+            Training.get(id: $stateParams.id).$promise
+          ]
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.shared.trainings').$promise
+          ]
       # events
       .state 'app.admin.events',
         url: '/admin/events'

@@ -87,6 +87,11 @@ fr:
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
         add_a_project: "Ajouter un projet"
+        illustration: "Visuel"
+        add_an_illustration: "Ajouter un visuel"
+        book: "Réserver"
+        description_is_required: "La description est requise."
+        name_is_required: "Le nom est requis."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
@@ -110,12 +115,10 @@ fr:
 
       project:
         # formulaire d'étition d'un projet
-        name_is_required: "Le nom est requis."
         illustration: "Illustration"
         add_an_illustration: "Ajouter un visuel"
         CAD_file: "Fichier CAO"
         add_a_new_file: "Ajouter un nouveau fichier"
-        description_is_required: "La description est requise."
         steps: "Étapes"
         step_title: "Titre de l'étape"
         add_a_picture: "Ajouter une image"
@@ -130,10 +133,6 @@ fr:
 
       machine:
         # formulaire d'édition d'une machine
-        name_is_required: "Le nom est requis."
-        illustration: "Visuel"
-        add_an_illustration: "Ajouter un visuel"
-        description_is_required: "La description est requise."
         technical_specifications_are_required: "Les caractéristiques techniques sont requises."
         attached_files_(pdf): "Pièces jointes (pdf)"
         attach_a_file: "Joindre un fichier"
@@ -168,7 +167,6 @@ fr:
         title_is_required: "Le titre est requis."
         matching_visual: "Visuel associé"
         choose_a_picture: "Choisir une image"
-        description_is_required: "La description est requise."
         attachments: "Pièces jointes"
         add_a_new_file: "Ajouter un nouveau fichier"
         event_type: "Type d'évènement"
@@ -188,7 +186,6 @@ fr:
       plan:
         # formulaire d'édition d'une formule d'abonnement
         general_informations: "Informations générales"
-        name_is_required: "Le nom est requis."
         name_length_must_be_less_than_24_characters: "Le nom doit faire moins de 24 caractères."
         type_is_required: "Le type est requis."
         group: "Groupe"
@@ -212,6 +209,13 @@ fr:
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
         new_partner: "Nouveau partenaire"
         email_address_is_required: "L'adresse e-mail est requise."
+
+      trainings:
+        # formulaire d'édition d'une formation
+        add_a_new_training: "Ajouter une nouvelle formation"
+        validate_your_training: "Valider votre formation"
+        associated_machines: "Machines associées"
+        number_of_tickets: "Nombre de places"
 
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)

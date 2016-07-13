@@ -14,7 +14,8 @@ Application.Services.factory 'Availability', ["$resource", ($resource)->
       isArray: true
     trainings:
       method: 'GET'
-      url: '/api/availabilities/trainings'
+      url: '/api/availabilities/trainings/:trainingId'
+      params: {trainingId: "@trainingId"}
       isArray: true
     update:
       method: 'PUT'

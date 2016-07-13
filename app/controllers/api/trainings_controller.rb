@@ -35,10 +35,15 @@ class API::TrainingsController < API::ApiController
       members.each do |m|
         m.trainings << @training
       end
+
+      head :no_content
     else
-      @training.update(training_params)
+      if @training.update(training_params)
+        render :show, status: :ok, location: @training
+      else
+        render json: @training.errors, status: :unprocessable_entity
+      end
     end
-    head :no_content
   end
 
   def destroy
@@ -57,6 +62,6 @@ class API::TrainingsController < API::ApiController
     end
 
     def training_params
-      params.require(:training).permit(:id, :name, :description, :machine_ids, :plan_ids, :nb_total_places, machine_ids: [], plan_ids: [])
+      params.require(:training).permit(:id, :name, :description, :machine_ids, :plan_ids, :nb_total_places, training_image_attributes: [:attachment], machine_ids: [], plan_ids: [])
     end
 end

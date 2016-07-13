@@ -127,7 +127,9 @@ fr:
 
       trainings_reserve:
         # réserver une formation
-        trainings_planning: "Planning formation"
+        trainings_planning: "Planning formations"
+        planning_of: "Planning de la"   # suivi du nom de la formation (eg. "Planning de la formation imprimante 3d")
+        all_trainings: "Toutes les formations"
         select_a_slot_in_the_calendar: "Sélectionnez un créneau dans le calendrier"
         you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
         datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM

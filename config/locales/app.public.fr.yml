@@ -161,7 +161,6 @@ fr:
         # liste des machines
         the_fablab_s_machines: "Les machines du FabLab"
         add_a_machine: "Ajouter une machine"
-        book: "Réserver"
         _or_the_: " ou la "
 
       machines_show:
@@ -172,6 +171,16 @@ fr:
         _or_the_: " ou la "
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+
+
+      trainings_list:
+        # liste des formations
+        the_trainings: "Les formations"
+
+      training_show:
+        # détails d'une formation
+        book_this_training: "Réserver cette formation"
+
 
       plans:
         # page récapitulative des abonnements

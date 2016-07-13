@@ -1,4 +1,11 @@
-<form role="form" name="machineForm" class="form-horizontal" novalidate action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
+<form role="form"
+      name="machineForm"
+      class="form-horizontal"
+      action="{{ actionUrl }}"
+      ng-upload="submited(content)"
+      upload-options-enable-rails-csrf="true"
+      unsaved-warning-form
+      novalidate>
 
   <input name="_method" type="hidden" ng-value="method">
 
@@ -10,7 +17,13 @@
     <div class="form-group m-b-lg" ng-class="{'has-error': machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$invalid}">
       <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
       <div class="col-sm-4">
-        <input ng-model="machine.name" type="text" name="machine[name]" class="form-control" id="machine_name" placeholder="Nom :" required>
+        <input ng-model="machine.name"
+               type="text"
+               name="machine[name]"
+               class="form-control"
+               id="machine_name"
+               placeholder="{{'name' | translate}}"
+               required>
         <span class="help-block" ng-show="machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
       </div>
     </div>
@@ -46,8 +59,16 @@
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$invalid}">
       <label for="description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
       <div class="col-sm-10">
-        <input type="hidden" name="machine[description]" ng-value="machine.description" />
-        <summernote ng-model="machine.description" id="machine_description" placeholder="" config="summernoteOpts" name="machine[description]" required></summernote>
+        <input type="hidden"
+               name="machine[description]"
+               ng-value="machine.description" />
+        <summernote ng-model="machine.description"
+                    id="machine_description"
+                    placeholder=""
+                    config="summernoteOpts"
+                    name="machine[description]"
+                    required>
+        </summernote>
         <span class="help-block" ng-show="machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
       </div>
     </div>
@@ -55,8 +76,16 @@
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$invalid}">
       <label for="spec" class="col-sm-2 control-label">{{ 'technical_specifications' | translate }} *</label>
       <div class="col-sm-10">
-        <input type="hidden" name="machine[spec]" ng-value="machine.spec" />
-        <summernote ng-model="machine.spec" id="machine_spec" placeholder="" config="summernoteOpts" name="machine[spec]" required></summernote>
+        <input type="hidden"
+               name="machine[spec]"
+               ng-value="machine.spec" />
+        <summernote ng-model="machine.spec"
+                    id="machine_spec"
+                    placeholder=""
+                    config="summernoteOpts"
+                    name="machine[spec]"
+                    required>
+        </summernote>
         <span class="help-block" ng-show="machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$error.required" translate>{{ 'technical_specifications_are_required' }}</span>
       </div>
     </div>
@@ -85,7 +114,10 @@
   </div>   <!-- ./panel-body  -->
 
   <div class="panel-footer no-padder">
-    <input type="submit" value="{{ 'validate_your_machine' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="machineForm.$invalid"/>
+    <input type="submit"
+           value="{{ 'validate_your_machine' | translate }}"
+           class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+           ng-disabled="machineForm.$invalid"/>
   </div>
   </section>
 </form>
