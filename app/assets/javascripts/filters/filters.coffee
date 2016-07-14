@@ -103,7 +103,7 @@ Application.Filters.filter "humanize", [ ->
 ##
 Application.Filters.filter "breakFilter", [ ->
   (text) ->
-    if text != undefined
+    if text?
       text.replace(/\n+/g, '<br />')
 ]
 
