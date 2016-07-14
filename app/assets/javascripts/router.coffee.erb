@@ -371,7 +371,7 @@ angular.module('application.router', ['ui.router']).
             controller: 'TrainingsController'
         resolve:
           trainingsPromise: ['Training', (Training)->
-            Training.query().$promise
+            Training.query({ public_page: true }).$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.trainings_list']).$promise

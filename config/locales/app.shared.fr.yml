@@ -220,6 +220,7 @@ fr:
         validate_your_training: "Valider votre formation"
         associated_machines: "Machines associées"
         number_of_tickets: "Nombre de places"
+        public_page: "Afficher dans la liste de formation"
 
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)

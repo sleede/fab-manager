@@ -220,6 +220,7 @@ en:
         validate_your_training: "Validate your training"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
+        public_page: "Show in training lists"
 
       user_admin:
         # partial form to edit/create an user (admin view)

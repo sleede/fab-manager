@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630140204) do
+ActiveRecord::Schema.define(version: 20160714095018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -592,6 +592,7 @@ ActiveRecord::Schema.define(version: 20160630140204) do
     t.integer  "nb_total_places"
     t.string   "slug",            limit: 255
     t.text     "description"
+    t.boolean  "public_page",                 default: true
   end
 
   add_index "trainings", ["slug"], name: "index_trainings_on_slug", unique: true, using: :btree

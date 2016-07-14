@@ -7,6 +7,9 @@ class API::TrainingsController < API::ApiController
   def index
     @requested_attributes = params[:requested_attributes]
     @trainings = policy_scope(Training)
+    if params[:public_page]
+      @trainings = @trainings.where(public_page: true)
+    end
 
     if attribute_requested?(@requested_attributes, 'availabilities')
       @trainings = @trainings.includes(:availabilities => [:slots => [:reservation => [:user => [:profile, :trainings]]]]).order('availabilities.start_at DESC')
@@ -62,6 +65,6 @@ class API::TrainingsController < API::ApiController
     end
 
     def training_params
-      params.require(:training).permit(:id, :name, :description, :machine_ids, :plan_ids, :nb_total_places, training_image_attributes: [:attachment], machine_ids: [], plan_ids: [])
+      params.require(:training).permit(:id, :name, :description, :machine_ids, :plan_ids, :nb_total_places, :public_page, training_image_attributes: [:attachment], machine_ids: [], plan_ids: [])
     end
 end
