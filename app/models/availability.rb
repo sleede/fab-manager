@@ -39,9 +39,12 @@ class Availability < ActiveRecord::Base
     end
   end
 
-  def title
+  def title(filter = {})
     if available_type == 'machines'
-      machines.map(&:name).join(' - ')
+      if filter[:machine_ids]
+        return machines.to_ary.delete_if {|m| !filter[:machine_ids].include?(m.id)}.map(&:name).join(' - ')
+      end
+      return machines.map(&:name).join(' - ')
     elsif available_type == 'event'
       event.name
     else

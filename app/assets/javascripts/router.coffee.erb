@@ -511,6 +511,12 @@ angular.module('application.router', ['ui.router']).
           bookingWindowEnd: ['Setting', (Setting)->
             Setting.get(name: 'booking_window_end').$promise
           ]
+          trainingsPromise: ['Training', (Training)->
+            Training.query().$promise
+          ]
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.calendar']).$promise
           ]

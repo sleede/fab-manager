@@ -12,14 +12,10 @@
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper calendar-filter">
-        <div>
-          <i class="fa fa-filter"></i>
-          <span translate>{{ 'filter' }}</span>
-        </div>
-        <span class="badge text-sm bg-formation" ng-class="{'inactive': isAvailableTypeInactive('training')}" translate ng-click="filterAvailableType('training')">{{ 'trainings' }}</span>
-        <span class="badge text-sm bg-machine" ng-class="{'inactive': isAvailableTypeInactive('machines')}" translate ng-click="filterAvailableType('machines')">{{ 'machines' }}</span>
-        <span class="badge text-sm bg-event" ng-class="{'inactive': isAvailableTypeInactive('event')}" translate ng-click="filterAvailableType('event')">{{ 'events' }}</span>
+      <section class="heading-actions wrapper">
+        <span class="badge text-sm bg-formation m-t" translate>{{ 'trainings' }}</span>
+        <span class="badge text-sm bg-machine" translate>{{ 'machines' }}</span>
+        <span class="badge text-sm bg-event" translate>{{ 'events' }}</span>
       </section>
     </div>
 
@@ -29,8 +25,46 @@
 
 <section class="row no-gutter">
 
-  <div class="col-sm-12 col-md-12 col-lg-12">
+  <div class="col-sm-9 col-md-9 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg public-calendar"></div>
+  </div>
+
+  <div class="col-sm-12 col-md-3 col-lg-3">
+    <div class="widget panel b-a m m-t-lg">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'filter' }}</h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper">
+        <div>
+          <div class="row">
+            <h3 class="col-md-11" translate>{{ 'trainings' }}</h3>
+            <input class="col-md-1" type="checkbox" ng-model="filter.trainings" ng-change="toggleFilter('trainings')">
+          </div>
+          <div ng-repeat="t in trainings" class="row">
+            <span class="col-md-11">{{::t.name}}</span>
+            <input class="col-md-1" type="checkbox" ng-model="t.checked" ng-change="filterAvailabilities()">
+          </div>
+        </div>
+        <div class="m-t">
+          <div class="row">
+            <h3 class="col-md-11" translate>{{ 'machines' }}</h3>
+            <input class="col-md-1" type="checkbox" ng-model="filter.machines" ng-change="toggleFilter('machines')">
+          </div>
+          <div ng-repeat="m in machines" class="row">
+            <span class="col-md-11">{{::m.name}}</span>
+            <input class="col-md-1" type="checkbox" ng-model="m.checked" ng-change="filterAvailabilities()">
+          </div>
+        </div>
+        <div class="m-t row">
+          <h3 class="col-md-11" translate>{{ 'events' }}</h3>
+          <input class="col-md-1" type="checkbox" ng-model="evt" ng-change="filterAvailabilities()">
+        </div>
+        <div class="m-t row">
+          <h3 class="col-md-11" translate>{{ 'show_no_disponible' }}</h3>
+          <input class="col-md-1" type="checkbox" ng-model="dispo" ng-change="filterAvailabilities()">
+        </div>
+      </div>
+    </div>
   </div>
 
 </section>

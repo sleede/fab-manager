@@ -4,52 +4,54 @@
 # Controller used in the public calendar global
 ##
 
-Application.Controllers.controller "CalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig'
-($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "CalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise',
+($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise) ->
 
 
   ### PRIVATE STATIC CONSTANTS ###
-  availableTypes = ['machines', 'training', 'event']
-  availabilitySource =
-    url: "/api/availabilities/public?#{$.param({available_type: availableTypes})}"
-    textColor: 'black'
   currentMachineEvent = null
+  machinesPromise.forEach((m) -> m.checked = true)
+  trainingsPromise.forEach((t) -> t.checked = true)
 
 
   ### PUBLIC SCOPE ###
 
+  ## List of trainings
+  $scope.trainings = trainingsPromise
+
+  ## List of machines
+  $scope.machines = machinesPromise
+
+  ## variable for filter event
+  $scope.evt = true
+
+  ## variable for show/hidden slot no dispo
+  $scope.dispo = true
+
   ## add availabilities source to event sources
   $scope.eventSources = []
 
-  ## fullCalendar (v2) configuration
-  $scope.calendarConfig = CalendarConfig
-    events: availabilitySource.url
-    slotEventOverlap: true
-    header:
-      left: 'month agendaWeek agendaDay'
-      center: 'title'
-      right: 'today prev,next'
-    minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
-    maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
-    eventClick: (event, jsEvent, view)->
-      calendarEventClickCb(event, jsEvent, view)
-    viewRender: (view, element) ->
-      viewRenderCb(view, element)
-    eventRender: (event, element, view) ->
-      eventRenderCb(event, element)
+  ## filter availabilities if have change
+  $scope.filterAvailabilities = ->
+    $scope.filter =
+      trainings: $scope.isSelectAll('trainings')
+      machines: $scope.isSelectAll('machines')
+    $scope.calendarConfig.events = availabilitySourceUrl()
 
-  $scope.filterAvailableType = (type) ->
-    index = availableTypes.indexOf(type)
-    if index != -1
-      availableTypes.splice(index, 1)
-    else
-      availableTypes.push(type)
-    availabilitySource.url = "/api/availabilities/public?#{$.param({available_type: availableTypes})}"
-    $scope.calendarConfig.events = availabilitySource.url
+  ## check all formation/machine is select in filter
+  $scope.isSelectAll = (type) ->
+    $scope[type].length == $scope[type].filter((t) -> t.checked).length
 
-  $scope.isAvailableTypeInactive = (type) ->
-    index = availableTypes.indexOf(type)
-    index == -1 ? true : false
+  ## a variable for formation/machine checkbox is or not checked
+  $scope.filter =
+    trainings: $scope.isSelectAll('trainings')
+    machines: $scope.isSelectAll('machines')
+
+  ## toggle to select all formation/machine
+  $scope.toggleFilter = (type) ->
+    $scope[type].forEach((t) -> t.checked = $scope.filter[type])
+    $scope.filterAvailabilities()
+
 
   ### PRIVATE SCOPE ###
 
@@ -98,4 +100,36 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
         html += "<span class='label label-success text-white'>#{tag.name}</span> "
       element.find('.fc-title').append("<br/>"+html)
     return
+
+  getFilter = ->
+    t = $scope.trainings.filter((t) -> t.checked).map((t) -> t.id)
+    m = $scope.machines.filter((m) -> m.checked).map((m) -> m.id)
+    {t: t, m: m, evt: $scope.evt, dispo: $scope.dispo}
+
+  availabilitySourceUrl = ->
+    "/api/availabilities/public?#{$.param(getFilter())}"
+
+  initialize = ->
+    ## fullCalendar (v2) configuration
+    $scope.calendarConfig = CalendarConfig
+      events: availabilitySourceUrl()
+      slotEventOverlap: true
+      header:
+        left: 'month agendaWeek agendaDay'
+        center: 'title'
+        right: 'today prev,next'
+      minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
+      maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
+      eventClick: (event, jsEvent, view)->
+        calendarEventClickCb(event, jsEvent, view)
+      viewRender: (view, element) ->
+        viewRenderCb(view, element)
+      eventRender: (event, element, view) ->
+        eventRenderCb(event, element)
+
+
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]

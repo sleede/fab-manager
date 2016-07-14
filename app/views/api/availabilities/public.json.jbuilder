@@ -1,12 +1,12 @@
 json.array!(@availabilities) do |availability|
   json.id availability.id
-  json.title availability.title
   json.start availability.start_at.iso8601
   json.end availability.end_at.iso8601
   json.textColor 'black'
   json.backgroundColor 'white'
   # availability object
   if availability.try(:available_type)
+    json.title availability.title(@title_filter)
     if availability.available_type == 'event'
       json.event_id availability.event.id
     end
@@ -35,6 +35,7 @@ json.array!(@availabilities) do |availability|
 
   # machine slot object ( here => availability = slot )
   else
+    json.title availability.title
     json.machine_id availability.machine.id
     json.borderColor machines_slot_border_color(availability)
     json.tag_ids availability.availability.tag_ids
@@ -42,5 +43,6 @@ json.array!(@availabilities) do |availability|
       json.id t.id
       json.name t.name
     end
+    json.is_reserved availability.is_reserved
   end
 end

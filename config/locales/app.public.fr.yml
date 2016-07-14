@@ -233,3 +233,4 @@ fr:
 
       calendar:
         calendar: "Calendrier"
+        show_no_disponible: "Afficher les crénaux non disponibles"
