@@ -152,6 +152,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
         right: 'today prev,next'
       minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
       maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
+      defaultView: if window.innerWidth <= 480 then 'agendaDay' else 'agendaWeek'
       eventClick: (event, jsEvent, view)->
         calendarEventClickCb(event, jsEvent, view)
       viewRender: (view, element) ->
