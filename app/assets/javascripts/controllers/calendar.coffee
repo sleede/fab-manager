@@ -76,8 +76,8 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     # set defaultView, because when we change slotEventOverlap
     # ui-calendar will trigger rerender calendar
     $scope.calendarConfig.defaultView = view.type
-    today = currentMachineEvent or moment().utc().startOf('day')
-    if today > view.start and today <= view.end and today != view.start
+    today = if currentMachineEvent then currentMachineEvent.start else moment().utc().startOf('day')
+    if today > view.start and today < view.end and today != view.start
       $scope.calendarConfig.defaultDate = today
     else
       $scope.calendarConfig.defaultDate = view.start
