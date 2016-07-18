@@ -295,3 +295,8 @@ en:
         author: "Author"
         collaborator: "Collaborator"
         private_profile: "Private profile"
+
+      wallet:
+        wallet: 'Wallet'
+        your_wallet_amount: 'Your amount available'
+        wallet_amount: 'Amount available'

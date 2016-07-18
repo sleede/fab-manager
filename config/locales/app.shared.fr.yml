@@ -295,3 +295,8 @@ fr:
         author: "Auteur"
         collaborator: "Collaborateur"
         private_profile: "Profil privé"
+
+      wallet:
+        wallet: 'Porte-monnaie'
+        your_wallet_amount: 'Votre montant disponible'
+        wallet_amount: 'Montant disponible'

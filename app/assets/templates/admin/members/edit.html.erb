@@ -215,6 +215,12 @@
 
           </div>
         </uib-tab>
+
+        <uib-tab heading="{{ 'wallet' | translate }}">
+          <div class="col-md-12 m m-t-lg">
+            <ng-include src="'<%= asset_path 'wallet/show.html' %>'"></ng-include>
+          </div>
+        </uib-tab>
       </uib-tabset>
 
     </div>

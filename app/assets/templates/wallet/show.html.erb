@@ -1,0 +1,7 @@
+<div class="col-sm-4 text-center">
+  <h4 translate ng-if="view !== 'member_edit'">{{'your_wallet_amount'}}</h4>
+  <h4 translate ng-if="view === 'member_edit'">{{'wallet_amount'}}</h4>
+  <div class="wallet-amount-container">
+    <div class="wallet-amount">{{wallet.amount | currency}}</div>
+  </div>
+</div>

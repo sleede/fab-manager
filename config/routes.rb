@@ -48,6 +48,10 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index, :show, :update] do
       match :update_all, path: '/', via: [:put, :patch], on: :collection
     end
+    resources :wallet do
+      get :my, on: :collection
+      get '/by_user/:user_id', action: 'by_user', on: :collection
+    end
 
     # for homepage
     get '/last_subscribed/:last' => "members#last_subscribed"

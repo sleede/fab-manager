@@ -708,6 +708,15 @@ ActiveRecord::Schema.define(version: 20160714095018) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "wallets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "amount",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
+
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "events_event_themes", "event_themes"
@@ -718,4 +727,5 @@ ActiveRecord::Schema.define(version: 20160714095018) do
   add_foreign_key "prices", "plans"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
+  add_foreign_key "wallets", "users"
 end

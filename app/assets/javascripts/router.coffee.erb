@@ -197,6 +197,19 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.logged.dashboard.invoices').$promise
           ]
+      .state 'app.logged.dashboard.wallet',
+        url: '/wallet'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "dashboard/wallet.html" %>'
+            controller: 'WalletController'
+        resolve:
+          walletPromise: ['Wallet', (Wallet)->
+            Wallet.my().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.shared.wallet']).$promise
+          ]
 
 
       # members
@@ -859,11 +872,14 @@ angular.module('application.router', ['ui.router']).
           memberPromise: ['Member', '$stateParams', (Member, $stateParams)->
             Member.get(id: $stateParams.id).$promise
           ]
+          walletPromise: ['Wallet', '$stateParams', (Wallet, $stateParams)->
+            Wallet.getWalletByUser(user_id: $stateParams.id).$promise
+          ]
           tagsPromise: ['Tag', (Tag)->
             Tag.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin']).$promise
+            Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin', 'app.shared.wallet']).$promise
           ]
       .state 'app.admin.admins_new',
         url: '/admin/admins/new'
