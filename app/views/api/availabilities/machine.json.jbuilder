@@ -6,7 +6,7 @@ json.array!(@slots) do |slot|
   json.end slot.end_at.iso8601
   json.is_reserved slot.is_reserved
   json.backgroundColor 'white'
-  json.borderColor slot.is_reserved ? (slot.is_reserved_by_current_user ? '#b2e774' : '#1d98ec') : '#e4cd78'
+  json.borderColor machines_slot_border_color(slot)
 
   json.availability_id slot.availability_id
   json.machine do

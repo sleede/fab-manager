@@ -29,6 +29,7 @@ en:
         confirmation_required: "Confirmation required"
         description: "Description"
         machines: "Machines"
+        events: "Events"
         materials: "Materials"
         date: "Date"
         price: "Price"
@@ -94,6 +95,7 @@ en:
         description_is_required: "Description is required."
         name_is_required: "Name is required."
         all_themes: "All themes"
+        filter: 'Filter'
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"

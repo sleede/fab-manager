@@ -112,7 +112,7 @@ Application.Filters.filter "breakFilter", [ ->
 ##
 Application.Filters.filter "simpleText", [ ->
   (text) ->
-    if text != undefined
+    if text?
       text = text.replace(/<br\s*\/?>/g, '\n')
       text.replace(/<\/?\w+[^>]*>/g, '')
     else

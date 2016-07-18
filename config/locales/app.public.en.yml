@@ -32,6 +32,7 @@ en:
         events_registrations: "Events registrations"
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
+        public_calendar: "Calendar"
 
         # left menu (admin)
         trainings_monitoring: "Trainings monitoring"
@@ -227,3 +228,8 @@ en:
         book: "Book"
         change_the_reservation: "Change the reservation"
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
+
+      calendar:
+        calendar: "Calendar"
+        show_no_disponible: "Show the slots no disponibles"
+        filter-calendar: "Filter calendar"

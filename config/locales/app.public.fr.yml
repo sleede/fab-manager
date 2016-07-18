@@ -32,6 +32,7 @@ fr:
         events_registrations: "Inscriptions aux évènements"
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
+        public_calendar: "Calendrier"
 
         # menu de gauche (partie admin)
         trainings_monitoring: "Suivi formations"
@@ -229,3 +230,8 @@ fr:
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
+
+      calendar:
+        calendar: "Calendrier"
+        show_no_disponible: "Afficher les crénaux non disponibles"
+        filter-calendar: "Filtrer le calendrier"

@@ -1,0 +1,28 @@
+<div>
+  <div class="row">
+    <h3 class="col-md-11 col-sm-11 col-xs-11 text-purple" translate>{{ 'trainings' }}</h3>
+    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.trainings" ng-change="toggleFilter('trainings', filter)">
+  </div>
+  <div ng-repeat="t in trainings" class="row">
+    <span class="col-md-11 col-sm-11 col-xs-11">{{::t.name}}</span>
+    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="t.checked" ng-change="filterAvailabilities(filter)">
+  </div>
+</div>
+<div class="m-t">
+  <div class="row">
+    <h3 class="col-md-11 col-sm-11 col-xs-11 text-beige" translate>{{ 'machines' }}</h3>
+    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.machines" ng-change="toggleFilter('machines', filter)">
+  </div>
+  <div ng-repeat="m in machines" class="row">
+    <span class="col-md-11 col-sm-11 col-xs-11">{{::m.name}}</span>
+    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="m.checked" ng-change="filterAvailabilities(filter)">
+  </div>
+</div>
+<div class="m-t row">
+  <h3 class="col-md-11 col-sm-11 col-xs-11 text-japonica" translate>{{ 'events' }}</h3>
+  <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.evt" ng-change="filterAvailabilities(filter)">
+</div>
+<div class="m-t row">
+  <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'show_no_disponible' }}</h3>
+  <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.dispo" ng-change="filterAvailabilities(filter)">
+</div>

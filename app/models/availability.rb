@@ -39,9 +39,14 @@ class Availability < ActiveRecord::Base
     end
   end
 
-  def title
+  def title(filter = {})
     if available_type == 'machines'
-      machines.map(&:name).join(' - ')
+      if filter[:machine_ids]
+        return machines.to_ary.delete_if {|m| !filter[:machine_ids].include?(m.id)}.map(&:name).join(' - ')
+      end
+      return machines.map(&:name).join(' - ')
+    elsif available_type == 'event'
+      event.name
     else
       trainings.map(&:name).join(' - ')
     end
@@ -51,15 +56,23 @@ class Availability < ActiveRecord::Base
   # if haven't defined a nb_total_places, places are unlimited
   def is_completed
     return false if nb_total_places.blank?
-    nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
+    if available_type == 'training'
+      nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
+    elsif available_type == 'event'
+      event.nb_free_places == 0
+    end
   end
 
   # TODO: refactoring this function for avoid N+1 query
   def nb_total_places
-    if read_attribute(:nb_total_places).present?
-      read_attribute(:nb_total_places)
-    else
-      trainings.first.nb_total_places unless trainings.empty?
+    if available_type == 'training'
+      if read_attribute(:nb_total_places).present?
+        read_attribute(:nb_total_places)
+      else
+        trainings.first.nb_total_places unless trainings.empty?
+      end
+    elsif available_type == 'event'
+      event.nb_total_places
     end
   end
 

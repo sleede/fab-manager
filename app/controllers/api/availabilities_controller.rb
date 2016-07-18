@@ -1,5 +1,5 @@
 class API::AvailabilitiesController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: [:show, :update, :destroy, :reservations]
   respond_to :json
 
@@ -8,7 +8,47 @@ class API::AvailabilitiesController < API::ApiController
 
   def index
     authorize Availability
+    start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
+    end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
     @availabilities = Availability.includes(:machines,:tags,:trainings).where.not(available_type: 'event')
+                                  .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+  end
+
+  def public
+    start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
+    end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
+    @reservations = Reservation.includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
+    if in_same_day(start_date, end_date)
+      @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where(available_type: ['training', 'event'])
+                                    .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
+                                    .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      @machine_slots = []
+      @machine_availabilities.each do |a|
+        a.machines.each do |machine|
+          if params[:m] and params[:m].include?(machine.id.to_s)
+            ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
+              slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: machine, title: machine.name)
+              slot = verify_machine_is_reserved(slot, @reservations, current_user, '')
+              @machine_slots << slot
+            end
+          end
+        end
+      end
+      @availabilities = [].concat(@training_and_event_availabilities).concat(@machine_slots)
+    else
+
+      @availabilities = Availability.includes(:tags, :machines, :trainings, :event, :slots)
+                                    .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      @availabilities.each do |a|
+        if a.available_type != 'machines'
+          a = verify_training_event_is_reserved(a, @reservations)
+        end
+      end
+    end
+    machine_ids = params[:m] || []
+    @title_filter = {machine_ids: machine_ids.map(&:to_i)}
+    @availabilities = filter_availabilites(@availabilities)
   end
 
   def show
@@ -106,7 +146,7 @@ class API::AvailabilitiesController < API::ApiController
 
     # finally, we merge the availabilities with the reservations
     @availabilities.each do |a|
-      a = verify_training_is_reserved(a, @reservations)
+      a = verify_training_event_is_reserved(a, @reservations)
     end
   end
 
@@ -138,31 +178,35 @@ class API::AvailabilitiesController < API::ApiController
     def verify_machine_is_reserved(slot, reservations, user, user_role)
       reservations.each do |r|
         r.slots.each do |s|
-          if s.start_at == slot.start_at and s.canceled_at == nil
-            slot.id = s.id
-            slot.is_reserved = true
-            slot.title = t('availabilities.not_available')
-            slot.can_modify = true if user_role === 'admin'
-            slot.reservation = r
-          end
-          if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
-            slot.title = t('availabilities.i_ve_reserved')
-            slot.can_modify = true
-            slot.is_reserved_by_current_user = true
+          if slot.machine.id == r.reservable_id
+            if s.start_at == slot.start_at and s.canceled_at == nil
+              slot.id = s.id
+              slot.is_reserved = true
+              slot.title = "#{slot.machine.name} - #{t('availabilities.not_available')}"
+              slot.can_modify = true if user_role === 'admin'
+              slot.reservation = r
+            end
+            if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
+              slot.title = "#{slot.machine.name} - #{t('availabilities.i_ve_reserved')}"
+              slot.can_modify = true
+              slot.is_reserved_by_current_user = true
+            end
           end
         end
       end
       slot
     end
 
-    def verify_training_is_reserved(availability, reservations)
+    def verify_training_event_is_reserved(availability, reservations)
       user = current_user
       reservations.each do |r|
         r.slots.each do |s|
-          if s.start_at == availability.start_at and s.canceled_at == nil and availability.trainings.first.id == r.reservable_id
+          if ((availability.available_type == 'training' and availability.trainings.first.id == r.reservable_id) or (availability.available_type == 'event' and availability.event.id == r.reservable_id)) and s.start_at == availability.start_at and s.canceled_at == nil
             availability.slot_id = s.id
-            availability.is_reserved = true
-            availability.can_modify = true if r.user == user
+            if r.user == user
+              availability.is_reserved = true
+              availability.can_modify = true
+            end
           end
         end
       end
@@ -176,5 +220,41 @@ class API::AvailabilitiesController < API::ApiController
 
     def is_subscription_year(user)
       user.subscription and user.subscription.plan.interval == 'year' and user.subscription.expired_at >= Time.now
+    end
+
+    def in_same_day(start_date, end_date)
+      (end_date.to_date - start_date.to_date).to_i == 1
+    end
+
+    def filter_availabilites(availabilities)
+      availabilities_filtered = []
+      availabilities.to_ary.each do |a|
+        # machine slot
+        if !a.try(:available_type)
+          availabilities_filtered << a
+        else
+          # training
+          if params[:t] and a.available_type == 'training'
+            if params[:t].include?(a.trainings.first.id.to_s)
+              availabilities_filtered << a
+            end
+          end
+          # machines
+          if params[:m] and a.available_type == 'machines'
+            if (params[:m].map(&:to_i) & a.machine_ids).any?
+              availabilities_filtered << a
+            end
+          end
+          # event
+          if params[:evt] and params[:evt] == 'true' and a.available_type == 'event'
+            availabilities_filtered << a
+          end
+        end
+      end
+      availabilities_filtered.delete_if do |a|
+        if params[:dispo] == 'false'
+          a.is_reserved or (a.try(:is_completed) and a.is_completed)
+        end
+      end
     end
 end

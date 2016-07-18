@@ -268,37 +268,25 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
 # This controller workflow is pretty similar to the trainings reservation controller.
 ##
 
-Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise',
-($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise) ->
+Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise, uiCalendarConfig, CalendarConfig) ->
 
 
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # The calendar is divided in slots of 60 minutes
-  BASE_SLOT = '01:00:00'
-
-  # The calendar will be initialized positioned under 9:00 AM
-  DEFAULT_CALENDAR_POSITION = '09:00:00'
-
-  # The user is unable to modify his already booked reservation 1 day before it occurs
-  PREVENT_BOOKING_MODIFICATION_DELAY = 1
-
   # Slot already booked by the current user
-  FREE_SLOT_BORDER_COLOR = '#e4cd78'
+  FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>'
 
   # Slot already booked by another user
-  UNAVAILABLE_SLOT_BORDER_COLOR = '#1d98ec'
+  UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_USER %>'
 
   # Slot free to be booked
-  BOOKED_SLOT_BORDER_COLOR = '#b2e774'
+  BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
 
 
 
   ### PUBLIC SCOPE ###
-
-  ## after fullCalendar loads, provides access to its methods through $scope.calendar.fullCalendar()
-  $scope.calendar = null
 
   ## bind the machine availabilities with full-Calendar events
   $scope.eventSources = []
@@ -343,31 +331,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.machine = {}
 
   ## fullCalendar (v2) configuration
-  $scope.calendarConfig =
-    timezone: Fablab.timezone
-    lang: Fablab.fullcalendar_locale
-    header:
-      left: 'month agendaWeek'
-      center: 'title'
-      right: 'today prev,next'
-    firstDay: 1 # Week start on monday (France)
-    scrollTime: DEFAULT_CALENDAR_POSITION
-    slotDuration: BASE_SLOT
-    allDayDefault: false
-    minTime: '00:00:00'
-    maxTime: '24:00:00'
-    height: 'auto'
-    buttonIcons:
-      prev: 'left-single-arrow'
-      next: 'right-single-arrow'
-    timeFormat:
-      agenda:'H:mm'
-      month: 'H(:mm)'
-    axisFormat: 'H:mm'
-
-    allDaySlot: false
-    defaultView: 'agendaWeek'
-    editable: false
+  $scope.calendarConfig = CalendarConfig
+    minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
+    maxTime: moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
     eventClick: (event, jsEvent, view) ->
       calendarEventClickCb(event, jsEvent, view)
     eventRender: (event, element, view) ->
@@ -391,12 +357,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## Global config: delay in hours before a booking while the cancellation is forbidden
   $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay)
 
-  ## Global config: calendar window in the morning
-  $scope.calendarConfig.minTime = moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
-
-  ## Global config: calendar window in the evening
-  $scope.calendarConfig.maxTime = moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
-
 
 
   ##
@@ -412,7 +372,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
     $scope.slotToModify.backgroundColor = 'white'
     $scope.slotToModify = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -425,7 +385,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.slotToPlace.backgroundColor = 'white'
     $scope.slotToPlace.title = ''
     $scope.slotToPlace = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -458,7 +418,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       $scope.slotToModify.can_modify = false
       $scope.slotToModify = null
 
-      $scope.calendar.fullCalendar 'rerenderEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
     , (err) ->  # failure
       growl.error(_t('unable_to_change_the_reservation'))
       console.error(err)
@@ -476,7 +436,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.slotToModify.backgroundColor = 'white'
     $scope.slotToModify = null
 
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -532,8 +492,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       $scope.plansAreShown = false
     updateCartPrice()
     $timeout ->
-      $scope.calendar.fullCalendar 'refetchEvents'
-      $scope.calendar.fullCalendar 'rerenderEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -732,7 +692,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           $scope.slotToModify = event
           event.backgroundColor = '#eee'
           event.title = _t('i_change')
-          $scope.calendar.fullCalendar 'rerenderEvents'
+          uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
         else if type == 'cancel'
           dialogs.confirm
             resolve:
@@ -750,7 +710,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
               $scope.canceledSlot.is_reserved = false
               $scope.canceledSlot.can_modify = false
               $scope.canceledSlot = null
-              $scope.calendar.fullCalendar 'rerenderEvents'
+              uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
             , -> # error while canceling
               growl.error _t('cancellation_failed')
       , ->
@@ -758,7 +718,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         $scope.selectedPlan = null
         $scope.modifiedSlots = null
 
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
     updateCartPrice()
 
@@ -930,8 +890,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
       $scope.plansAreShown = false
 
-    $scope.calendar.fullCalendar 'refetchEvents'
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 

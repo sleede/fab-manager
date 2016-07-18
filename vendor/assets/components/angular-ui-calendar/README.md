@@ -1,49 +1,53 @@
-# ui-calendar directive [![Build Status](https://travis-ci.org/angular-ui/ui-calendar.png?branch=master)](https://travis-ci.org/angular-ui/ui-calendar)
+# ui-calendar directive [![Build Status](https://travis-ci.org/angular-ui/ui-calendar.svg?branch=master)](https://travis-ci.org/angular-ui/ui-calendar)
+
+[![Join the chat at https://gitter.im/angular-ui/ui-calendar](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angular-ui/ui-calendar?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A complete AngularJS directive for the Arshaw FullCalendar.
 
 # Requirements
+
 - ([AngularJS](http://code.angularjs.org/1.2.1/angular.js))
 - ([fullcalendar.js 2.0 and it's dependencies](http://arshaw.com/fullcalendar/download/))
 - optional - ([gcal-plugin](http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/gcal.js))
 
-# Testing
-
-We use karma and grunt to ensure the quality of the code.
-
-    npm install -g grunt-cli
-    npm install
-    bower install
-    grunt
-
 # Usage
 
-We use [bower](http://twitter.github.com/bower/) for dependency management.  Add
+Using [bower](http://bower.io) run:
+
+    bower install --save angular-ui-calendar
+
+Alternatively you can add it to your `bower.json` like this:
 
     dependencies: {
         "angular-ui-calendar": "latest"
     }
 
-To your `components.json` file. Then run
+And then run
 
     bower install
 
-This will copy the ui-calendar files into your `components` folder, along with its dependencies. Load the script files in your application:
+This will copy the ui-calendar files into your `components` folder, along with its dependencies. Load the script and style files in your application:
 
-    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
-    <script type="text/javascript" src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
+    <!-- jquery, moment, and angular have to get included before fullcalendar -->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
-    <script type="text/javascript" src="bower_components/fullcalendar/fullcalendar.js"></script>
-    <script type="text/javascript" src="bower_components/fullcalendar/gcal.js"></script>
+    <script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
 
 Add the calendar module as a dependency to your application module:
 
-    var myAppModule = angular.module('MyApp', ['ui.calendar'])
+    var app = angular.module('App', ['ui.calendar'])
 
-Apply the directive to your div elements. The calendar must be supplied an array of decoumented event sources to render itself:
+Apply the directive to your div elements. The calendar must be supplied an array of documented event sources to render itself:
 
     <div ui-calendar ng-model="eventSources"></div>
+
+Define your model in a scope e.g.
+
+    $scope.eventSources = [];
 
 ## Options
 
@@ -73,20 +77,20 @@ All the Arshaw Fullcalendar options can be passed through the directive. This ev
 
 The ui-calendar directive plays nicely with ng-model.
 
-An Event Sources objects needs to be created to pass into ng-model. This object will be watched for changes and update the calendar accordingly, giving the calendar some Angular Magic.
+An Event Sources objects needs to be created to pass into ng-model. This object's values will be watched for changes. If a change occurs, then that specific calendar will call the appropriate fullCalendar method.
 
 The ui-calendar directive expects the eventSources object to be any type allowed in the documentation for the fullcalendar. [docs](http://arshaw.com/fullcalendar/docs/event_data/Event_Source_Object/)
 Note that all calendar options which are functions that are passed into the calendar are wrapped in an apply automatically.
 
 ## Accessing the calendar object
 
-To avoid potential issues, by default the calendar object is not available in the parent scope. Access the object by declaring a calendar attribute name:
+It is possible to access a specific calendar object by declaring a name for it on the uiCalendar directive. In this next line we are naming the calendar 'myCalendar'. This will be attached to the uiCalendarConfig constant object, that can be accessed via DI.
 
     <div ui-calendar="calendarOptions" ng-model="eventSources" calendar="myCalendar">
 
-Now the calendar object is available in the parent scope:
+Now the calendar object is available in uiCalendarConfig.calendars:
 
-    $scope.myCalendar.fullCalendar
+    uiCalendarConfig.calendars.myCalendar
 
 This allows you to declare any number of calendar objects with distinct names.
 
@@ -102,8 +106,12 @@ If you need to automatically re-render other event data, you can use `calendar-w
        returns "" + event.price;
     }
 
-    <ui-calendar calendar-watch-event="extraEventSignature" ... >
+    <ui-calendar calendar-watch-event="extraEventSignature(event)" ... >
     // will now watch for price
+
+### Adding new events issue
+
+When adding new events to the calendar they can disappear when switching months. To solve this add `stick: true` to the event object being added to the scope.
 
 ## Watching the displayed date range of the calendar
 
@@ -121,9 +129,22 @@ in a service, instead of letting fullCalendar pull them via AJAX), you can add t
         }
     };
 
+# Minify
+
+    grunt minify
+
 ## Documentation for the Calendar
 
 The calendar works alongside of all the documentation represented [here](http://arshaw.com/fullcalendar/docs)
 
 ## PR's R always Welcome
 Make sure that if a new feature is added, that the proper tests are created.
+
+# Testing
+
+We use karma and grunt to ensure the quality of the code.
+
+    npm install -g grunt-cli
+    npm install
+    bower install
+    grunt
