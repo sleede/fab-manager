@@ -4,8 +4,8 @@
 # Controller used in the public calendar global
 ##
 
-Application.Controllers.controller "CalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise',
-($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise) ->
+Application.Controllers.controller "CalendarController", ["$scope", "$state", "$aside", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise',
+($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise) ->
 
 
   ### PRIVATE STATIC CONSTANTS ###
@@ -13,6 +13,9 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   machinesPromise.forEach((m) -> m.checked = true)
   trainingsPromise.forEach((t) -> t.checked = true)
 
+  ## check all formation/machine is select in filter
+  isSelectAll = (type, scope) ->
+    scope[type].length == scope[type].filter((t) -> t.checked).length
 
   ### PUBLIC SCOPE ###
 
@@ -22,35 +25,64 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   ## List of machines
   $scope.machines = machinesPromise
 
-  ## variable for filter event
-  $scope.evt = true
-
-  ## variable for show/hidden slot no dispo
-  $scope.dispo = true
-
   ## add availabilities source to event sources
   $scope.eventSources = []
 
   ## filter availabilities if have change
-  $scope.filterAvailabilities = ->
-    $scope.filter =
-      trainings: $scope.isSelectAll('trainings')
-      machines: $scope.isSelectAll('machines')
+  $scope.filterAvailabilities = (filter, scope) ->
+    scope ||= $scope
+    scope.filter = $scope.filter =
+      trainings: isSelectAll('trainings', scope)
+      machines: isSelectAll('machines', scope)
+      evt: filter.evt
+      dispo: filter.dispo
     $scope.calendarConfig.events = availabilitySourceUrl()
 
-  ## check all formation/machine is select in filter
-  $scope.isSelectAll = (type) ->
-    $scope[type].length == $scope[type].filter((t) -> t.checked).length
 
-  ## a variable for formation/machine checkbox is or not checked
+  ## a variable for formation/machine/event/dispo checkbox is or not checked
   $scope.filter =
-    trainings: $scope.isSelectAll('trainings')
-    machines: $scope.isSelectAll('machines')
+    trainings: isSelectAll('trainings', $scope)
+    machines: isSelectAll('machines', $scope)
+    evt: true
+    dispo: true
 
   ## toggle to select all formation/machine
-  $scope.toggleFilter = (type) ->
-    $scope[type].forEach((t) -> t.checked = $scope.filter[type])
-    $scope.filterAvailabilities()
+  $scope.toggleFilter = (type, filter) ->
+    $scope[type].forEach((t) -> t.checked = filter[type])
+    $scope.filterAvailabilities(filter, $scope)
+
+  $scope.openFilterAside = ->
+    $aside.open
+      templateUrl: 'filterAside.html'
+      placement: 'right'
+      size: 'md'
+      backdrop: false
+      resolve:
+        trainings: ->
+          $scope.trainings
+        machines: ->
+          $scope.machines
+        filter: ->
+          $scope.filter
+        toggleFilter: ->
+          $scope.toggleFilter
+        filterAvailabilities: ->
+          $scope.filterAvailabilities
+      controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'filter', 'toggleFilter', 'filterAvailabilities', ($scope, $uibModalInstance, trainings, machines, filter, toggleFilter, filterAvailabilities) ->
+        $scope.trainings = trainings
+        $scope.machines = machines
+        $scope.filter = filter
+
+        $scope.toggleFilter = (type, filter) ->
+          toggleFilter(type, filter)
+
+        $scope.filterAvailabilities = (filter) ->
+          filterAvailabilities(filter, $scope)
+
+        $scope.close = (e) ->
+          $uibModalInstance.dismiss()
+          e.stopPropagation()
+      ]
 
 
   ### PRIVATE SCOPE ###
@@ -104,7 +136,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   getFilter = ->
     t = $scope.trainings.filter((t) -> t.checked).map((t) -> t.id)
     m = $scope.machines.filter((m) -> m.checked).map((m) -> m.id)
-    {t: t, m: m, evt: $scope.evt, dispo: $scope.dispo}
+    {t: t, m: m, evt: $scope.filter.evt, dispo: $scope.filter.dispo}
 
   availabilitySourceUrl = ->
     "/api/availabilities/public?#{$.param(getFilter())}"

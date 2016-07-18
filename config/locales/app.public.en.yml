@@ -232,3 +232,4 @@ en:
       calendar:
         calendar: "Calendar"
         show_no_disponible: "Show the slots no disponibles"
+        filter-calendar: "Filter calendar"
