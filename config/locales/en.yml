@@ -100,12 +100,14 @@ en:
     by_wallet: "by wallet"
     settlement_by_debit_card: "Settlement by debit card"
     settlement_done_at_the_reception: "Settlement done at the reception"
+    settlement_by_wallet: "Settlement by wallet"
     on_DATE_at_TIME: "on %{DATE} at %{TIME},"
     for_an_amount_of_AMOUNT: "for an amount of %{AMOUNT}"
     on_DATE_from_START_to_END: "On %{DATE} from %{START} to %{END}" # eg: on feb. 7 from 7AM to 9AM
     from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "From %{STARTDATE} to %{ENDDATE}, from %{STARTTIME} to %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
+    and: 'and'
 
   trainings:
     # training availabilities

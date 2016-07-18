@@ -100,12 +100,14 @@ fr:
     no_refund: "Pas de remboursement"
     settlement_by_debit_card: "Règlement effectué par carte bancaire"
     settlement_done_at_the_reception: "Règlement effectué à l'accueil"
+    settlement_by_wallet: "Règlement effectué par porte-monnaie"
     on_DATE_at_TIME: "le %{DATE} à %{TIME},"
     for_an_amount_of_AMOUNT: "pour un montant de %{AMOUNT}"
     on_DATE_from_START_to_END: "Le %{DATE} de %{START} à %{END}" # eg: on feb. 7 from 7AM to 9AM
     from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Du %{STARTDATE} au %{ENDDATE}, de %{STARTTIME} à %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Abonnement de %{NAME} pour %{DURATION} à compter du %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
+    and: 'et'
 
   trainings:
     # disponibilités formations

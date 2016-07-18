@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714095018) do
+ActiveRecord::Schema.define(version: 20160718165434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(version: 20160714095018) do
     t.string   "type",                   limit: 255
     t.boolean  "subscription_to_expire"
     t.text     "description"
+    t.integer  "wallet_amount"
   end
 
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree

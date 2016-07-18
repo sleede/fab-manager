@@ -185,6 +185,10 @@ module PDF
 
         # payment details
         move_down 20
+        if invoice.wallet_amount
+          wallet_amount = invoice.wallet_amount / 100.0
+          total = total - wallet_amount
+        end
         if invoice.is_a?(Avoir)
           payment_verbose = I18n.t('invoices.refund_on_DATE', DATE:I18n.l(invoice.avoir_date.to_date))+' '
           case invoice.avoir_mode
@@ -209,12 +213,22 @@ module PDF
           else
             payment_verbose = I18n.t('invoices.settlement_done_at_the_reception')
           end
+          if total == 0 and wallet_amount
+            payment_verbose = I18n.t('invoices.settlement_by_wallet')
+          end
         end
         unless invoice.is_a?(Avoir)
           payment_verbose += ' '+I18n.t('invoices.on_DATE_at_TIME', DATE: I18n.l(invoice.created_at.to_date), TIME:I18n.l(invoice.created_at, format: :hour_minute))
         end
         unless invoice.is_a?(Avoir) and invoice.avoir_mode == 'none'
-          payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total)) if invoice.avoir_mode != 'none'
+          payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total)) if invoice.avoir_mode != 'none' if total > 0
+        end
+        if invoice.wallet_amount
+          if total > 0
+            payment_verbose += ' '+I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+          else
+            payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+          end
         end
         text payment_verbose
 
