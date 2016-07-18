@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
+- Public calendar for show all trainings/machines/events
 - Display 'draft' badge on drafts in project galleries
 - Add a 'new project' button in dashboard/my projects
 - Open Projects: show the platform of origin even for local projects
