@@ -452,11 +452,12 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   # @see http://fullcalendar.io/docs/event_rendering/eventRender/
   ##
   eventRenderCb = (event, element, view)->
-    element.attr(
-      'uib-popover': $filter('humanize')($filter('simpleText')(event.training.description), 70)
-      'popover-trigger': 'mouseenter'
-    )
-    $compile(element)($scope)
+    # Comment these codes for show a popup of description, because we add feature page of training
+    #element.attr(
+    #  'uib-popover': $filter('humanize')($filter('simpleText')(event.training.description), 70)
+    #  'popover-trigger': 'mouseenter'
+    #)
+    #$compile(element)($scope)
 
 
 
