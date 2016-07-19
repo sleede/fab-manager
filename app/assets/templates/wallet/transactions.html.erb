@@ -13,10 +13,7 @@
       <td>{{ t.created_at | amDateFormat:'L' }}</td>
       <td>
         <span ng-if="t.transaction_type == 'credit'" translate>{{ 'credit' }}</span>
-        <span ng-if="t.transaction_type == 'debit' && t.transactable_type == 'Subscription'" translate>{{ 'debit_subscription' }}</span>
-        <span ng-if="t.transaction_type == 'debit' && t.transactable_type == 'Reservation' && t.transactable.reservable_type == 'Training'" translate>{{ 'debit_reservation_training' }}</span>
-        <span ng-if="t.transaction_type == 'debit' && t.transactable_type == 'Reservation' && t.transactable.reservable_type == 'Machine'" translate>{{ 'debit_reservation_machine' }}</span>
-        <span ng-if="t.transaction_type == 'debit' && t.transactable_type == 'Reservation' && t.transactable.reservable_type == 'Event'" translate>{{ 'debit_reservation_event' }}</span>
+        <span ng-if="t.transaction_type == 'debit'" translate>{{ 'debit' }}</span>
       </td>
       <td>{{ t.user.full_name }}</td>
       <td ng-class="{'green':t.transaction_type == 'credit', 'red':t.transaction_type == 'debit'}">
