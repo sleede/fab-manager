@@ -86,7 +86,9 @@ Rails.application.routes.draw do
     end
 
     # for admin
-    resources :trainings
+    resources :trainings do
+      get :availabilities, on: :member
+    end
     resources :credits
     resources :categories
     resources :event_themes

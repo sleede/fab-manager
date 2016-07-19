@@ -296,7 +296,7 @@ Application.Controllers.controller "TrainingsAdminController", ["$scope", "$stat
   # The selected training details will be loaded from the API and rendered into the accordions.
   ##
   $scope.selectTrainingToMonitor = ->
-    Training.get {id: $scope.monitoring.training.id}, (training) ->
+    Training.availabilities {id: $scope.monitoring.training.id}, (training) ->
       $scope.groupedAvailabilities = groupAvailabilities([training])
 
 

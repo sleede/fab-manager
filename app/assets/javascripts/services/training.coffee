@@ -5,4 +5,7 @@ Application.Services.factory 'Training', ["$resource", ($resource)->
     {id: "@id"},
     update:
       method: 'PUT'
+    availabilities:
+      method: 'GET'
+      url: "/api/trainings/:id/availabilities"
 ]
