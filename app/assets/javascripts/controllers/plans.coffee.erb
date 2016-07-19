@@ -167,7 +167,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           member: -> $scope.ctrl.member
           wallet: ->
             Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$locale', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, CustomAsset, wallet, helpers, $locale) ->
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, CustomAsset, wallet, helpers, $locale, $filter) ->
           # user wallet amount
           $scope.walletAmount = wallet.amount
 
@@ -176,6 +176,9 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           $scope.selectedPlan = selectedPlan
 
           $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+          $scope.numberFilter = $filter('number')
+
           # retrieve the CGV
           CustomAsset.get {name: 'cgv-file'}, (cgv) ->
             $scope.cgv = cgv.custom_asset
@@ -226,6 +229,8 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           $scope.amount = helpers.getAmountToPay($scope.price, wallet.amount)
 
           $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+          $scope.numberFilter = $filter('number')
 
           $scope.plan = selectedPlan
           $scope.member = member

@@ -233,9 +233,9 @@ en:
         unknown_notification: "Unknown notification"
         notification_ID_wrong_type_TYPE_unknown: "Notification %{ID} wrong (type %{TYPE} unknown)"
       notify_user_wallet_is_credited:
-        your_wallet_is_credited: "Your wallet is credited"
+        your_wallet_is_credited: "Your wallet has been credited by administrator"
       notify_admin_user_wallet_is_credited:
-        wallet_is_credited: "The wallet of %{USER} is credited %{AMOUNT}"
+        wallet_is_credited: "The wallet of member %{USER} has been credited %{AMOUNT}"
 
   statistics:
     # statistics tools for admins

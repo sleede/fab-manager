@@ -471,7 +471,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           eventToReserve: $scope.event
           reserve: $scope.reserve
           member: $scope.ctrl.member
-      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale) ->
+      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale, $filter) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -485,6 +485,8 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         $scope.reservation = reservation
 
         $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
 
         # Callback for the stripe payment authorization
         $scope.payment = (status, response) ->
@@ -522,7 +524,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           Price.compute({reservation: reservation}).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', '$filter', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers, $filter) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -536,6 +538,8 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         $scope.reservation = reservation
 
         $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
 
         # Button label
         if $scope.amount > 0

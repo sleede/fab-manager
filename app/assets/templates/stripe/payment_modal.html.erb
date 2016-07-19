@@ -10,17 +10,8 @@
       <form name="stripeForm" stripe:form="payment" class="form-horizontal">
         <div class="panel-body">
 
-          <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
-            <div class="col-sm-12 text-sm">
-              <input type="checkbox" name="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/> {{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a>
-            </div>
-              <div ng-if="!cgv">
-                  <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
-              </div>
-          </div>
-
-          <h3 ng-if="walletAmount">{{ 'you_have_amount_in_wallet' | translate:{ amount: walletAmount, currency: currencySymbol } }}</h3>
-          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic">{{'credit_amount_for_pay_reservation' | translate:{ amount: amount, currency: currencySymbol } }}</p>
+          <h3 class="m-t-xs" ng-if="walletAmount">{{ 'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol } }}</h3>
+          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic">{{'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol } }}</p>
 
           <div class="form-group" ng-class="{'has-error': stripeForm.number.$dirty && stripeForm.number.$invalid}">
             <div class="col-sm-12">
@@ -38,6 +29,15 @@
             <div class="col-sm-4" ng-class="{'has-error': stripeForm.cvc.$dirty && stripeForm.cvc.$invalid}">
               <input autocomplete="off" class="form-control card-cvc" placeholder="CVC" type="text" data-stripe="cvc" name="cvc" ng-model="cvc" required ng-minlength="3" ng-maxlength="4" ng-pattern="/^\d+$/">
             </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
+            <div class="col-sm-12 text-sm">
+              <input type="checkbox" name="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/> {{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a>
+            </div>
+              <div ng-if="!cgv">
+                  <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
+              </div>
           </div>
 
         </div>

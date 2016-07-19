@@ -160,7 +160,7 @@ fr:
         _the_general_terms_and_conditions: "les conditions générales de vente."
         enter_your_card_number: "Saisissez votre numéro de carte"
         confirm_my_payment_of_: "Valider mon paiement de"  # contexte : valider mon paiement de 20,00 €
-        credit_amount_for_pay_reservation: "Vous devez créditer {{amount}} {{currency}} pour valider votre réservation"
+        credit_amount_for_pay_reservation: "Il vous reste {{amount}} {{currency}} à payer pour valider votre réservation"
 
       valid_reservation_modal:
         # fenêtre de paiement sur place d'une réservation
@@ -306,6 +306,9 @@ fr:
         operator: 'Opérateur'
         amount: 'Montant'
         credit: 'Crédit'
+        debit: 'Débit'
+        credit_title: 'Créditer le porte-monnaie'
+        credit_label: 'Indiquez le montant à créditer'
         to_credit: 'Créditer'
         wallet_credit_successfully: "Le porte-monnaie d'utilisateur a été chargé avec succès."
         a_problem_occurred_for_wallet_credit: "Il y a eu un problème lors de chargement au porte-monnaie d'utilisateur."

@@ -160,6 +160,7 @@ en:
         _the_general_terms_and_conditions: "the general terms and conditions."
         enter_your_card_number: "Enter your card number"
         confirm_my_payment_of_: "Confirm my payment of"  # context: confirm my payment of $20.00
+        credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm your reservation"
 
       valid_reservation_modal:
         # dialog of on site payment for reservations
@@ -305,6 +306,9 @@ en:
         operator: 'Operator'
         amount: 'Amount'
         credit: 'Credit'
+        debit: 'Debit'
+        credit_title: 'Credit wallet'
+        credit_label: 'Set the amount to be credited'
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"

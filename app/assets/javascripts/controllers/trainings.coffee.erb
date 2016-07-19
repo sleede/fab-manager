@@ -480,7 +480,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation', '$locale', 'helpers', ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, $locale, helpers) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation', '$locale', 'helpers', '$filter', ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, $locale, helpers, $filter) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -494,6 +494,8 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         $scope.reservation = reservation
 
         $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
 
         ##
         # Callback to process the payment with Stripe, triggered on button click
@@ -550,6 +552,8 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         $scope.reservation = reservation
 
         $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
 
         # Button label
         if $scope.amount > 0
