@@ -16,7 +16,6 @@ class Subscription < ActiveRecord::Base
   after_save :notify_member_subscribed_plan, if: :is_new?
   after_save :notify_admin_subscribed_plan, if: :is_new?
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
-  after_save :debit_user_wallet
 
   # Stripe subscription payment
   def save_with_payment(invoice = true)
@@ -46,7 +45,12 @@ class Subscription < ActiveRecord::Base
 
         # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
-        generate_invoice(stp_invoice.id).save if invoice
+        if invoice
+          invoc = generate_invoice(stp_invoice.id)
+          # debit wallet
+          invoc.wallet_amount = @wallet_amount_debit if debit_user_wallet
+          invoc.save
+        end
         # cancel subscription after create
         cancel
         return true
@@ -94,7 +98,12 @@ class Subscription < ActiveRecord::Base
       set_expired_at
       save!
       UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-      generate_invoice.save if invoice
+      if invoice
+        invoc = generate_invoice
+        # debit wallet
+        invoc.wallet_amount = @wallet_amount_debit if debit_user_wallet
+        invoc.save
+      end
       return true
     else
       return false
@@ -235,7 +244,6 @@ class Subscription < ActiveRecord::Base
     if @wallet_amount_debit.present? and @wallet_amount_debit != 0
       amount = @wallet_amount_debit / 100.0
       WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
-      invoices.order(created_at: :ASC).last.update_columns(wallet_amount: @wallet_amount_debit)
     end
   end
 end
