@@ -41,4 +41,5 @@ Rails.application.configure do
 
   config.active_support.test_order = :random
 
+  config.log_level = Rails.application.secrets.log_level || :debug
 end
