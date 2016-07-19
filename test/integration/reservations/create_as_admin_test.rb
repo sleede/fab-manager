@@ -282,6 +282,7 @@ module Reservations
       transaction = @vlonchamp.wallet.wallet_transactions.last
       assert_equal transaction.transaction_type, 'debit'
       assert_equal transaction.amount, 10
+      assert_equal transaction.amount, invoice.wallet_amount / 100.0
     end
 
     test "user without subscription and with invoicing disabled reserves a machine and pay wallet with success" do
