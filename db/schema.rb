@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718165434) do
+ActiveRecord::Schema.define(version: 20160720124355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,10 +221,12 @@ ActiveRecord::Schema.define(version: 20160718165434) do
     t.boolean  "subscription_to_expire"
     t.text     "description"
     t.integer  "wallet_amount"
+    t.integer  "wallet_transaction_id"
   end
 
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
+  add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
 
   create_table "licences", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -737,6 +739,7 @@ ActiveRecord::Schema.define(version: 20160718165434) do
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
+  add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "prices", "groups"

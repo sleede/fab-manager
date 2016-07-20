@@ -364,8 +364,10 @@ class Reservation < ActiveRecord::Base
   def debit_user_wallet
     if @wallet_amount_debit.present? and @wallet_amount_debit != 0
       amount = @wallet_amount_debit / 100.0
-      WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
-      self.invoice.update_columns(wallet_amount: @wallet_amount_debit) if !user.invoicing_disabled?
+      wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+      if !user.invoicing_disabled? and wallet_transaction
+        self.invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
+      end
     end
   end
 end

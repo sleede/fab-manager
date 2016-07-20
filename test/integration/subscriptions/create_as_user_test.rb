@@ -141,5 +141,6 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal transaction.transaction_type, 'debit'
     assert_equal transaction.amount, 10
     assert_equal transaction.amount, invoice.wallet_amount / 100.0
+    assert_equal transaction.id, invoice.wallet_transaction_id
   end
 end

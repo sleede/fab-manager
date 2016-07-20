@@ -4,9 +4,8 @@ json.array!(@wallet_transactions) do |t|
     json.id t.user.id
     json.full_name t.user.profile.full_name
   end
-  json.transactable do
-    if t.transactable_type == 'Reservation'
-      json.reservable_type t.transactable.reservable_type
-    end
-  end if t.transactable
+  json.invoice do
+    json.id t.invoice.id
+    json.reference t.invoice.reference
+  end if t.invoice
 end

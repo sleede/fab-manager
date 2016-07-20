@@ -10,7 +10,7 @@ class API::WalletController < API::ApiController
   def transactions
     @wallet = Wallet.find(params[:id])
     authorize @wallet
-    @wallet_transactions = @wallet.wallet_transactions.includes(:transactable, user: [:profile]).order(created_at: :desc)
+    @wallet_transactions = @wallet.wallet_transactions.includes(:invoice, user: [:profile]).order(created_at: :desc)
   end
 
   def credit

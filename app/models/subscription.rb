@@ -48,7 +48,11 @@ class Subscription < ActiveRecord::Base
         if invoice
           invoc = generate_invoice(stp_invoice.id)
           # debit wallet
-          invoc.wallet_amount = @wallet_amount_debit if debit_user_wallet
+          wallet_transaction = debit_user_wallet
+          if wallet_transaction
+            invoc.wallet_amount = @wallet_amount_debit
+            invoc.wallet_transaction_id = wallet_transaction.id
+          end
           invoc.save
         end
         # cancel subscription after create
@@ -101,7 +105,11 @@ class Subscription < ActiveRecord::Base
       if invoice
         invoc = generate_invoice
         # debit wallet
-        invoc.wallet_amount = @wallet_amount_debit if debit_user_wallet
+        wallet_transaction = debit_user_wallet
+        if wallet_transaction
+          invoc.wallet_amount = @wallet_amount_debit
+          invoc.wallet_transaction_id = wallet_transaction.id
+        end
         invoc.save
       end
       return true
@@ -243,7 +251,7 @@ class Subscription < ActiveRecord::Base
   def debit_user_wallet
     if @wallet_amount_debit.present? and @wallet_amount_debit != 0
       amount = @wallet_amount_debit / 100.0
-      WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+      return WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
     end
   end
 end
