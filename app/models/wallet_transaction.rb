@@ -7,4 +7,5 @@ class WalletTransaction < ActiveRecord::Base
   belongs_to :transactable, polymorphic: true
 
   validates_inclusion_of :transaction_type, in: %w( credit debit )
+  validates :user, :wallet, presence: true
 end
