@@ -355,6 +355,7 @@ class Reservation < ActiveRecord::Base
   def get_wallet_amount_debit
     total = self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0
     if plan_id.present?
+      plan = Plan.find(plan_id)
       total += plan.amount
     end
     wallet_amount = (user.wallet.amount * 100).to_i
