@@ -313,7 +313,7 @@ fr:
         credit_label: 'Indiquez le montant à créditer'
         to_credit: 'Créditer'
         wallet_credit_successfully: "Le porte-monnaie d'utilisateur a été chargé avec succès."
-        a_problem_occurred_for_wallet_credit: "Il y a eu un problème lors de chargement au porte-monnaie d'utilisateur."
+        a_problem_occurred_for_wallet_credit: "Un problème est survenu lors du chargement du porte-monnaie."
         amount_is_required: "Le montant est obligatoire"
         amount_minimum_1: "Le montant minimum est d'1"
         you_have_amount_in_wallet: "Vous avez {{amount}} {{currency}} sur votre porte-monnaie"
