@@ -16,6 +16,7 @@ services:
       - /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads
       - /home/core/fabmanager/invoices:/usr/src/app/invoices
       - /home/core/fabmanager/log:/var/log/supervisor
+      - /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt
     depends_on:
       - fabmanager-postgres
       - fabmanager-redis

@@ -85,13 +85,62 @@ exit
 mkdir -p /home/core/fabmanager/config
 ```
 
-Copy the previously customized `env` file as `/home/core/fabmanager/config/env`.
+Copy the previously customized `env.example` file as `/home/core/fabmanager/config/env`
 
 ```bash
 mkdir -p /home/core/fabmanager/config/nginx
 ```
 
-Copy the previously customized `nginx.conf` as `/home/core/fabmanager/config/nginx/fabmanager.conf`.
+Copy the previously customized `nginx_with_ssl.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf`
+OR
+Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
+
+
+### If you want to add an SSL certificate with Letsencrypt (free)
+Let's Encrypt is a new Certificate Authority that is free, automated, and open.
+Let’s Encrypt certificates expire after 90 days, so automation of renewing your certificates is important.
+Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container
+
+```bash
+mkdir -p /home/core/fabmanager/config/nginx/ssl
+```
+Run `openssl dhparam -out dhparam.pem 4096` in the folder /home/core/fabmanager/config/nginx/ssl (generate dhparam.pem file)
+```bash
+mkdir -p /home/core/fabmanager/letsencrypt/config/
+```
+Copy the previously customized `webroot.ini.example` as `/home/core/fabmanager/letsencrypt/config/webroot.ini`
+```bash
+mkdir -p /home/core/fabmanager/letsencrypt/etc/webrootauth
+```
+
+Run `docker pull quay.io/letsencrypt/letsencrypt:latest`
+
+Create file (with sudo) /etc/systemd/system/letsencrypt.service with
+
+```bash
+[Unit]
+Description=letsencrypt cert update oneshot
+Requires=docker.service
+
+[Service]
+Type=oneshot  
+ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/home/core/fabmanager/log:/var/log/letsencrypt" -v "/home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt" -v "/home/core/fabmanager/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
+ExecStartPost=-/usr/bin/docker restart fabmanager  
+```
+
+Create file (with sudo) /etc/systemd/system/letsencrypt.timer with
+```bash
+[Unit]
+Description=letsencrypt oneshot timer  
+Requires=docker.service
+
+[Timer]
+OnCalendar=*-*-1 06:00:00
+Persistent=true
+Unit=letsencrypt.service
+```
+
+Then deploy your app and read the "Generate SSL certificate by Letsencrypt" section to complete the installation of the letsencrypt certificate.
 
 
 ### Deploy dockers containers on host
@@ -196,9 +245,24 @@ docker run --restart=always -d --name=fabmanager \
              -v /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads \
              -v /home/core/fabmanager/invoices:/usr/src/app/invoices \
              -v /home/core/fabmanager/log:/var/log/supervisor \
+             -v /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt \
              sleede/fab-manager
 ```
 
+
+### Generate SSL certificate by Letsencrypt (app must be run before start letsencrypt)
+Start letsencrypt service :
+```bash
+sudo systemctl start letsencrypt.service
+```
+If the certificate was successfully generated then update the nginx configuration file and activate the ssl port and certificate.
+Edit `/home/core/fabmanager/config/nginx/fabmanager.conf`
+Remove your app and Run your app to apply changes
+
+Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the month :
+```bash
+sudo systemctl start letsencrypt.timer
+```
 
 
 ### Dockers utils
@@ -218,7 +282,7 @@ docker run --restart=always -d --name=fabmanager \
 
 
 
-### Docker Compose
+### If you want deploy with Docker Compose
 
 #### download docker compose https://github.com/docker/compose/releases
 
