@@ -96,7 +96,7 @@ OR
 Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
 
 
-### If you want to add an SSL certificate with Letsencrypt (free)
+### SSL certificate with LetsEncrypt
 Let's Encrypt is a new Certificate Authority that is free, automated, and open.
 Let’s Encrypt certificates expire after 90 days, so automation of renewing your certificates is important.
 Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container
@@ -256,15 +256,18 @@ docker run --restart=always -d --name=fabmanager \
 
 
 ### Generate SSL certificate by Letsencrypt (app must be run before start letsencrypt)
+
 Start letsencrypt service :
 ```bash
 sudo systemctl start letsencrypt.service
 ```
+
 If the certificate was successfully generated then update the nginx configuration file and activate the ssl port and certificate.
 Edit `/home/core/fabmanager/config/nginx/fabmanager.conf`
 Remove your app and Run your app to apply changes
 
 Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the month :
+
 ```bash
 sudo systemctl start letsencrypt.timer
 ```
@@ -304,13 +307,17 @@ sudo chmod +x /opt/bin/docker-compose
 mkdir -p /home/core/fabmanager/config
 ```
 
-Copy the previously customized `env` file as `/home/core/fabmanager/config/env`.
+Copy the previously customized `env` file as `/home/core/fabmanager/config/env`
 
 ```bash
 mkdir -p /home/core/fabmanager/config/nginx
 ```
 
-Copy the previously customized `nginx.conf` as `/home/core/fabmanager/config/nginx/fabmanager.conf`.
+Copy the previously customized `nginx_with_ssl.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf`
+Read the "SSL certificate with LetsEncrypt" section
+OR
+Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
+
 
 #### copy docker-compose.yml to /home/core/
 
