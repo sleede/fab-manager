@@ -161,11 +161,13 @@ en:
         enter_your_card_number: "Enter your card number"
         confirm_my_payment_of_: "Confirm my payment of"  # context: confirm my payment of $20.00
         credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm your reservation"
+        client_credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm reservation of client"
 
       valid_reservation_modal:
         # dialog of on site payment for reservations
         booking_confirmation: "Booking confirmation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
+        confirm_client_payment_of_: "Confirm (Payment on site) of {{amount}} {{currency}}"
 
       event:
         # event edition form
@@ -312,6 +314,12 @@ en:
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
+        amount_is_required: "The amount is required"
+        amount_minimum_1: "The amount minimum is 1"
+        you_have_amount_in_wallet: "You have {{amount}} {{currency}} in your wallet"
+        client_have_amount_in_wallet: "Client has {{amount}} {{currency}} in wallet"
+        wallet_pay_reservation: "You can pay direct your reservation"
+        client_wallet_pay_reservation: "Client can pay direct reservation"
         debit_subscription: "Debit by subscription"
         debit_reservation_training: "Debit by reservation of training"
         debit_reservation_machine: "Debit by reservation of machine"

@@ -542,10 +542,14 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         $scope.numberFilter = $filter('number')
 
         # Button label
+        confirmPaymentText = if $scope.currentUser.role == 'admin' then _t('confirm_client_payment_of_') else _t('confirm_my_payment_of_')
         if $scope.amount > 0
-          $scope.validButtonName = _t('confirm_(payment_on_site)')
+          $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')($scope.amount)}"
         else
-          $scope.validButtonName = _t('confirm')
+          if price.price > 0 and $scope.walletAmount == 0
+            $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')(price.price)}"
+          else
+            $scope.validButtonName = _t('confirm')
 
         # Callback to validate the payment
         $scope.ok = ->

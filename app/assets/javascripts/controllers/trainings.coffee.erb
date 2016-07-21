@@ -556,11 +556,12 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         $scope.numberFilter = $filter('number')
 
         # Button label
+        confirmPaymentText = if $scope.currentUser.role == 'admin' then _t('confirm_client_payment_of_') else _t('confirm_my_payment_of_')
         if $scope.amount > 0
-          $scope.validButtonName = "#{_t('confirm_my_payment_of_')} #{$filter('currency')($scope.amount)}"
+          $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')($scope.amount)}"
         else
-          if price.price > 0
-            $scope.validButtonName = "#{_t('confirm_my_payment_of_')} #{$filter('currency')(price.price)}"
+          if price.price > 0 and $scope.walletAmount == 0
+            $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')(price.price)}"
           else
             $scope.validButtonName = _t('confirm')
 

@@ -3,9 +3,7 @@
   <h1 translate>{{ 'booking_confirmation' }}</h1>
 </div>
 <div class="modal-body">
-  <h3 class="m-t-xs" ng-if="walletAmount > 0 && price > 0">{{ 'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol } }}</h3>
-  <p ng-if="walletAmount > 0 && price > 0 && amount === 0" class="text-italic">{{'wallet_pay_reservation' | translate}}</p>
-  <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic">{{'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol } }}</p>
+  <ng-include src="'<%= asset_path 'shared/_wallet_amount_info.html' %>'"></ng-include>
 
   <p translate>{{ 'here_is_the_summary_of_the_slots_to_book_for_the_current_user' }}</p>
   <ul ng-repeat="slot in reservation.slots_attributes">
