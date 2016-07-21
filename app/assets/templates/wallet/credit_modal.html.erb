@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'credit_title' }}</h1>
+</div>
+<div class="modal-body">
+  <form name="walletForm" ng-class="{'has-error': walletForm.amount.$dirty && walletForm.amount.$invalid}">
+    <div class="text-center amountGroup">
+      <span class="beforeAmount" translate>{{ 'credit_label' }}</span>
+      <input class="form-control" type="number" name="amount" ng-model="amount" required min="1" step="any">
+      <span class="afterAmount">{{currencySymbol}}</span>
+      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.required" translate>{{'amount_is_required'}}</span>
+      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'amount_minimum_1' | translate }}{{currencySymbol}}</span>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="walletForm.$invalid || attempting" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

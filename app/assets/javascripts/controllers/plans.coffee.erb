@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScope", "$state", '$uibModal', 'Auth', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t'
-, ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t) ->
+Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScope", "$state", '$uibModal', 'Auth', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers'
+, ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers) ->
 
 
 
@@ -72,10 +72,13 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     # Callback to trigger the payment process of the subscription
     ##
     $scope.openSubscribePlanModal = ->
-      if $scope.currentUser.role isnt 'admin'
-        payByStripe()
-      else
-        payOnSite()
+      Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
+        amountToPay = helpers.getAmountToPay($scope.selectedPlan.amount, wallet.amount)
+        if $scope.currentUser.role isnt 'admin' and amountToPay > 0
+          payByStripe()
+        else
+          if $scope.currentUser.role is 'admin' or amountToPay is 0
+            payOnSite()
 
 
 
@@ -162,9 +165,20 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         resolve:
           selectedPlan: -> $scope.selectedPlan
           member: -> $scope.ctrl.member
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'CustomAsset', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, CustomAsset) ->
-          $scope.amount = selectedPlan.amount
+          wallet: ->
+            Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, CustomAsset, wallet, helpers, $locale, $filter) ->
+          # user wallet amount
+          $scope.walletAmount = wallet.amount
+
+          $scope.amount = helpers.getAmountToPay(selectedPlan.amount, wallet.amount)
+
           $scope.selectedPlan = selectedPlan
+
+          $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+          $scope.numberFilter = $filter('number')
+
           # retrieve the CGV
           CustomAsset.get {name: 'cgv-file'}, (cgv) ->
             $scope.cgv = cgv.custom_asset
@@ -203,9 +217,34 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         resolve:
           selectedPlan: -> $scope.selectedPlan
           member: -> $scope.ctrl.member
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription) ->
+          wallet: ->
+            Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, wallet, helpers, $locale, $filter) ->
+          # user wallet amount
+          $scope.walletAmount = wallet.amount
+
+          $scope.price = selectedPlan.amount
+
+          # price to pay
+          $scope.amount = helpers.getAmountToPay($scope.price, wallet.amount)
+
+          $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+          $scope.numberFilter = $filter('number')
+
           $scope.plan = selectedPlan
           $scope.member = member
+
+          # Button label
+          confirmPaymentText = if $scope.currentUser.role == 'admin' then _t('confirm_client_payment_of_') else _t('confirm_my_payment_of_')
+          if $scope.amount > 0
+            $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')($scope.amount)}"
+          else
+            if price.price > 0 and $scope.walletAmount == 0
+              $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')(price.price)}"
+            else
+              $scope.validButtonName = _t('confirm')
+
           $scope.ok = ->
             $scope.attempting = true
             Subscription.save

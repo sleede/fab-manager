@@ -51,8 +51,8 @@ Application.Controllers.controller "ShowTrainingController", ['$scope', '$state'
 # training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
 ##
 
-Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig'
-($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
 
 
 
@@ -188,11 +188,13 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if Object.keys($scope.ctrl.member).length > 0
       reservation = mkReservation($scope.ctrl.member, $scope.selectedTraining, $scope.selectedPlan)
 
-      if $scope.currentUser.role isnt 'admin' and $scope.amountTotal > 0
-        payByStripe(reservation)
-      else
-        if $scope.currentUser.role is 'admin' or $scope.amountTotal is 0
-          payOnSite(reservation)
+      Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
+        amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
+        if $scope.currentUser.role isnt 'admin' and amountToPay > 0
+          payByStripe(reservation)
+        else
+          if $scope.currentUser.role is 'admin' or amountToPay is 0
+            payOnSite(reservation)
     else
       # otherwise we alert, this error musn't occur when the current user is not admin
       growl.error(_t('please_select_a_member_first'))
@@ -474,17 +476,26 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
           reservation
         price: ->
           Price.compute({reservation: reservation}).$promise
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation', '$locale', 'helpers', '$filter', ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, $locale, helpers, $filter) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # CGV
         $scope.cgv = cgv.custom_asset
 
         # Reservation
         $scope.reservation = reservation
+
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
 
         ##
         # Callback to process the payment with Stripe, triggered on button click
@@ -525,18 +536,34 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
           reservation
         price: ->
           Price.compute({reservation: reservation}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation) ->
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+      controller: ['$scope', '$uibModalInstance', '$state', '$filter', 'reservation', 'price', 'wallet', 'Auth', 'Reservation', '$locale', 'helpers', ($scope, $uibModalInstance, $state, $filter, reservation, price, wallet, Auth, Reservation, $locale, helpers) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.price = price.price
+
+        # price to pay
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # Reservation
         $scope.reservation = reservation
 
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
+
         # Button label
+        confirmPaymentText = if $scope.currentUser.role == 'admin' then _t('confirm_client_payment_of_') else _t('confirm_my_payment_of_')
         if $scope.amount > 0
-          $scope.validButtonName = _t('confirm_(payment_on_site)')
+          $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')($scope.amount)}"
         else
-          $scope.validButtonName = _t('confirm')
+          if price.price > 0 and $scope.walletAmount == 0
+            $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')(price.price)}"
+          else
+            $scope.validButtonName = _t('confirm')
 
         ##
         # Callback to process the local payment, triggered on button click

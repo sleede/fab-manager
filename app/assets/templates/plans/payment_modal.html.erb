@@ -3,10 +3,12 @@
   <h1 translate>{{ 'subscription_confirmation' }}</h1>
 </div>
 <div class="modal-body">
+  <ng-include src="'<%= asset_path 'shared/_wallet_amount_info.html' %>'"></ng-include>
+
   <p>{{ 'here_is_the_NAME_subscription_summary' | translate:{NAME:member.name} }}</p>
   <p>{{ plan | humanReadablePlanName }}</p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" translate>{{ 'confirm_(payment_on_site)' }}</button>
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting">{{validButtonName}}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

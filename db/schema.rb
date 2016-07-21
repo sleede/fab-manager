@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714095018) do
+ActiveRecord::Schema.define(version: 20160720124355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,10 +220,13 @@ ActiveRecord::Schema.define(version: 20160714095018) do
     t.string   "type",                   limit: 255
     t.boolean  "subscription_to_expire"
     t.text     "description"
+    t.integer  "wallet_amount"
+    t.integer  "wallet_transaction_id"
   end
 
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
+  add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
 
   create_table "licences", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -708,14 +711,42 @@ ActiveRecord::Schema.define(version: 20160714095018) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "wallet_transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "wallet_id"
+    t.integer  "transactable_id"
+    t.string   "transactable_type"
+    t.string   "transaction_type"
+    t.integer  "amount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "wallet_transactions", ["transactable_type", "transactable_id"], name: "index_wallet_transactions_on_transactable", using: :btree
+  add_index "wallet_transactions", ["user_id"], name: "index_wallet_transactions_on_user_id", using: :btree
+  add_index "wallet_transactions", ["wallet_id"], name: "index_wallet_transactions_on_wallet_id", using: :btree
+
+  create_table "wallets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "amount",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
+
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
+  add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
+  add_foreign_key "wallet_transactions", "users"
+  add_foreign_key "wallet_transactions", "wallets"
+  add_foreign_key "wallets", "users"
 end

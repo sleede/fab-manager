@@ -514,3 +514,48 @@ padding: 10px;
     border-radius: 3px;
   }
 }
+
+.wallet-amount-container {
+  padding: 20px 0;
+  border-top: 2px dotted $border-color;
+  border-bottom: 2px dotted $border-color;
+  margin-bottom: 20px;
+  text-align: center;
+
+  .wallet-amount {
+    font-size: rem-calc(40);
+    font-weight: 700;
+    font-style: italic;
+    color: #616161;
+
+    span {
+      font-weight: 500;
+      font-size: .7em;
+    }
+
+    &.cr-green {
+      color: $green;
+    }
+  }
+}
+
+.amountGroup {
+  input {
+    display: inline-block;
+    width: 100px;
+    margin-left: 5px;
+    padding-right: 6px;
+    font-weight: bold;
+    color: $green;
+    font-size: 1.2em;
+    line-height: 0;
+  }
+  .afterAmount {
+    margin-left: -35px;
+    font-weight: bold;
+    color: $green;
+    font-size: 1.2em;
+    line-height: 0;
+  }
+}
+

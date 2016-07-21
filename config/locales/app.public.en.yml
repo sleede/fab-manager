@@ -14,6 +14,7 @@ en:
         my_trainings: "My Trainings"
         my_events: "My Events"
         my_invoices: "My Invoices"
+        my_wallet: "My Wallet"
 
         # login/logout
         sign_out: "Sign Out"

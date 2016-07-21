@@ -240,5 +240,15 @@ en:
         disabled: "From now on, no invoice will be issued when the user pays at the reception."
         enabled: "From now on, all payments made by this user at the reception will lead to invoicing issuing. "
 
+    notify_user_wallet_is_credited:
+      subject: "Your wallet has been credited"
+      body:
+        wallet_credit_html: "Your wallet has been credited %{AMOUNT} by administrator."
+
+    notify_admin_user_wallet_is_credited:
+      subject: "The wallet of an user has been credited"
+      body:
+        wallet_credit_html: "The wallet of member %{USER} has been credited %{AMOUNT} by administrator %{ADMIN}."
+
     shared:
       hello: "Hello %{user_name}"

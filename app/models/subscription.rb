@@ -22,7 +22,20 @@ class Subscription < ActiveRecord::Base
     if valid?
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
       begin
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, card: card_token)
+        # dont add a wallet invoice item if pay subscription by reservation
+        if invoice
+          @wallet_amount_debit = get_wallet_amount_debit
+          if @wallet_amount_debit != 0
+            Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -@wallet_amount_debit,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "wallet -#{@wallet_amount_debit / 100.0}"
+            )
+          end
+        end
+
+        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
         self.stp_subscription_id = new_subscription.id
         self.canceled_at = nil
         self.expired_at = Time.at(new_subscription.current_period_end)
@@ -32,7 +45,16 @@ class Subscription < ActiveRecord::Base
 
         # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
-        generate_invoice(stp_invoice.id).save if invoice
+        if invoice
+          invoc = generate_invoice(stp_invoice.id)
+          # debit wallet
+          wallet_transaction = debit_user_wallet
+          if wallet_transaction
+            invoc.wallet_amount = @wallet_amount_debit
+            invoc.wallet_transaction_id = wallet_transaction.id
+          end
+          invoc.save
+        end
         # cancel subscription after create
         cancel
         return true
@@ -73,12 +95,23 @@ class Subscription < ActiveRecord::Base
 
   def save_with_local_payment(invoice = true)
     if valid?
+      @wallet_amount_debit = get_wallet_amount_debit if invoice
+
       self.stp_subscription_id = nil
       self.canceled_at = nil
       set_expired_at
       save!
       UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-      generate_invoice.save if invoice
+      if invoice
+        invoc = generate_invoice
+        # debit wallet
+        wallet_transaction = debit_user_wallet
+        if wallet_transaction
+          invoc.wallet_amount = @wallet_amount_debit
+          invoc.wallet_transaction_id = wallet_transaction.id
+        end
+        invoc.save
+      end
       return true
     else
       return false
@@ -209,4 +242,16 @@ class Subscription < ActiveRecord::Base
     plan.is_a?(PartnerPlan)
   end
 
+  def get_wallet_amount_debit
+    total = plan.amount
+    wallet_amount = (user.wallet.amount * 100).to_i
+    return wallet_amount >= total ? total : wallet_amount
+  end
+
+  def debit_user_wallet
+    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
+      amount = @wallet_amount_debit / 100.0
+      return WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+    end
+  end
 end

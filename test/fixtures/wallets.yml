@@ -1,0 +1,27 @@
+wallet_2:
+  user_id: 2
+  amount: 0
+
+wallet_4:
+  user_id: 4
+  amount: 0
+
+wallet_6:
+  user_id: 6
+  amount: 0
+
+wallet_5:
+  user_id: 5
+  amount: 1000
+
+wallet_3:
+  user_id: 3
+  amount: 0
+
+wallet_1:
+  user_id: 1
+  amount: 0
+
+wallet_7:
+  user_id: 7
+  amount: 0

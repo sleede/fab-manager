@@ -133,6 +133,8 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       sample = sample.replace(/X\[([^\]]+)\]/g, (match, p1, offset, string) ->
         p1
       )
+      # information about wallet (W[text]) - does not apply here
+      sample = sample.replace(/W\[([^\]]+)\]/g, "")
       # information about refunds (R[text]) - does not apply here
       sample = sample.replace(/R\[([^\]]+)\]/g, "")
     sample
@@ -494,6 +496,7 @@ Application.Controllers.controller 'AvoirModalController', ["$scope", "$uibModal
     {name: _t('by_cash'), value: 'cash'}
     {name: _t('by_cheque'), value: 'cheque'}
     {name: _t('by_transfer'), value: 'transfer'}
+    {name: _t('by_wallet'), value: 'wallet'}
   ]
 
   ## If a subscription was took with the current invoice, should it be canceled or not

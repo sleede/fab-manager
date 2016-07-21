@@ -45,12 +45,15 @@ class User < ActiveRecord::Base
   has_many :tags, through: :user_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
 
+  has_one :wallet, dependent: :destroy
+
   # fix for create admin user
   before_save do
     self.email.downcase! if self.email
   end
 
   before_create :assign_default_role
+  after_create :create_a_wallet
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_admin_invoicing_changed, if: :invoicing_disabled_changed?
@@ -331,6 +334,10 @@ class User < ActiveRecord::Base
 
   def create_stripe_customer
     StripeWorker.perform_async(:create_stripe_customer, id)
+  end
+
+  def create_a_wallet
+    self.create_wallet
   end
 
   def notify_admin_when_user_is_created

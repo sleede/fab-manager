@@ -18,9 +18,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
+        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
       Content-Length:
       - '81'
   response:
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:31:05 GMT
+      - Mon, 11 Jul 2016 13:26:13 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '778'
+      - '780'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dj8hOci59D4xC
+      - req_8nflaXEiTf6O0X
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -58,10 +58,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_17xHgT2sOmf47Nz962TaLtD7",
+          "id": "tok_18W4QL2sOmf47Nz9GM695H9O",
           "object": "token",
           "card": {
-            "id": "card_17xHgT2sOmf47Nz98eSsgCfX",
+            "id": "card_18W4QL2sOmf47Nz9NuqbiJMr",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -84,20 +84,20 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "86.76.5.109",
-          "created": 1459953065,
+          "client_ip": "82.122.118.54",
+          "created": 1468243573,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:31:05 GMT
+  recorded_at: Mon, 11 Jul 2016 13:26:13 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8Di1wjdVktv5kt&amount=3200&currency=usd&description=FORM1%2B+imprimante+3D+April+11%2C+2016+14%3A00+-+03%3A00+PM
+      string: customer=cus_8Di1wjdVktv5kt&amount=3200&currency=usd&description=FORM1%2B+imprimante+3D+July+10%2C+2016+14%3A00+-+03%3A00+PM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -110,11 +110,11 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
+        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
       Content-Length:
-      - '125'
+      - '124'
   response:
     status:
       code: 200
@@ -123,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:31:06 GMT
+      - Mon, 11 Jul 2016 13:26:14 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '469'
+      - '468'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -141,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dj87wp0RJ3Z71
+      - req_8nflWbFKH0Wr7j
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -150,20 +150,20 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_17xHgU2sOmf47Nz9Pp3l4ZAA",
+          "id": "ii_18W4QM2sOmf47Nz9g7EdrbZV",
           "object": "invoiceitem",
           "amount": 3200,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1459953066,
-          "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
+          "date": 1468243574,
+          "description": "FORM1+ imprimante 3D July 10, 2016 14:00 - 03:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1459953066,
-            "end": 1459953066
+            "start": 1468243574,
+            "end": 1468243574
           },
           "plan": null,
           "proration": false,
@@ -171,7 +171,7 @@ http_interactions:
           "subscription": null
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:31:06 GMT
+  recorded_at: Mon, 11 Jul 2016 13:26:14 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
@@ -190,9 +190,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
+        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
   response:
     status:
       code: 200
@@ -201,11 +201,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:31:07 GMT
+      - Mon, 11 Jul 2016 13:26:15 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '3462'
+      - '1408'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -219,7 +219,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dj8aOsnrVp2zU
+      - req_8nflczxuJx3Fit
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -233,7 +233,7 @@ http_interactions:
           "account_balance": 0,
           "created": 1459948888,
           "currency": "usd",
-          "default_source": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
+          "default_source": "card_17z7CT2sOmf47Nz9wtWkhGor",
           "delinquent": false,
           "description": "Jean Dupond",
           "discount": null,
@@ -245,7 +245,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
+                "id": "card_17z7CT2sOmf47Nz9wtWkhGor",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -276,87 +276,20 @@ http_interactions:
           },
           "subscriptions": {
             "object": "list",
-            "data": [
-              {
-                "id": "sub_8Di9gqPLwt5IIC",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "cancel_at_period_end": true,
-                "canceled_at": 1459949404,
-                "current_period_end": 1462541399,
-                "current_period_start": 1459949399,
-                "customer": "cus_8Di1wjdVktv5kt",
-                "discount": null,
-                "ended_at": null,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1459949399,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              },
-              {
-                "id": "sub_8Di2VadRvr7A99",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "cancel_at_period_end": true,
-                "canceled_at": 1459948972,
-                "current_period_end": 1462540968,
-                "current_period_start": 1459948968,
-                "customer": "cus_8Di1wjdVktv5kt",
-                "discount": null,
-                "ended_at": null,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1459948968,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              }
-            ],
+            "data": [],
             "has_more": false,
-            "total_count": 2,
+            "total_count": 0,
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           }
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:31:07 GMT
+  recorded_at: Mon, 11 Jul 2016 13:26:15 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources
     body:
       encoding: UTF-8
-      string: card=tok_17xHgT2sOmf47Nz962TaLtD7
+      string: card=tok_18W4QL2sOmf47Nz9GM695H9O
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -369,9 +302,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
+        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
       Content-Length:
       - '33'
   response:
@@ -382,7 +315,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:31:09 GMT
+      - Mon, 11 Jul 2016 13:26:16 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -400,7 +333,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dj8Q0yiZoox2F
+      - req_8nflIAexuhWlA2
       Stripe-Version:
       - '2015-10-16'
     body:
@@ -415,10 +348,10 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:31:09 GMT
+  recorded_at: Mon, 11 Jul 2016 13:26:16 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/invoiceitems/ii_17xHgU2sOmf47Nz9Pp3l4ZAA
+    uri: https://api.stripe.com/v1/invoiceitems/ii_18W4QM2sOmf47Nz9g7EdrbZV
     body:
       encoding: US-ASCII
       string: ''
@@ -434,9 +367,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
+        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
   response:
     status:
       code: 200
@@ -445,7 +378,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:31:09 GMT
+      - Mon, 11 Jul 2016 13:26:17 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -463,7 +396,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dj86hW0UVRjBL
+      - req_8nflVBopesOpHn
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -473,8 +406,8 @@ http_interactions:
       string: |
         {
           "deleted": true,
-          "id": "ii_17xHgU2sOmf47Nz9Pp3l4ZAA"
+          "id": "ii_18W4QM2sOmf47Nz9g7EdrbZV"
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:31:09 GMT
+  recorded_at: Mon, 11 Jul 2016 13:26:17 GMT
 recorded_with: VCR 3.0.1

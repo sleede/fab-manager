@@ -69,7 +69,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                 reservable_type: 'Event',
                 nb_reserve_places: 2,
                 nb_reserve_reduced_places: 0,
-                slot_attributes: [
+                slots_attributes: [
                     {
                         start_at: e.availability.start_at,
                         end_at: e.availability.end_at,

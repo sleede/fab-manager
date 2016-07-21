@@ -7,6 +7,7 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_items, dependent: :destroy
   accepts_nested_attributes_for :invoice_items
   belongs_to :user
+  belongs_to :wallet_transaction
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
 
@@ -65,6 +66,9 @@ class Invoice < ActiveRecord::Base
     else
       reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
     end
+
+    # information about wallet (W[text])
+    reference.gsub!(/W\[([^\]]+)\]/, ''.to_s)
 
     # remove information about refunds (R[text])
     reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
