@@ -180,6 +180,7 @@ docker run --rm \
            --link=fabmanager-elastic:elasticsearch \
            -e RAILS_ENV=production \
            --env-file /home/core/fabmanager/config/env \
+           -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
            sleede/fab-manager \
            bundle exec rake db:migrate
 ```
@@ -193,6 +194,7 @@ docker run --rm \
            --link=fabmanager-elastic:elasticsearch \
            -e RAILS_ENV=production \
            --env-file /home/core/fabmanager/config/env \
+           -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
            sleede/fab-manager \
            bundle exec rake db:seed
 ```
@@ -208,6 +210,7 @@ docker run --rm \
              --link=fabmanager-elastic:elasticsearch \
              -e RAILS_ENV=production \
              --env-file /home/core/fabmanager/config/env \
+             -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
              sleede/fab-manager \
              bundle exec rake fablab:es_build_stats
 ```
@@ -223,6 +226,7 @@ docker run --rm \
              -e RAILS_ENV=production \
              --env-file /home/core/fabmanager/config/env \
              -v /home/core/fabmanager/public/assets:/usr/src/app/public/assets \
+             -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
              sleede/fab-manager \
              bundle exec rake assets:precompile
 ```
@@ -244,6 +248,7 @@ docker run --restart=always -d --name=fabmanager \
              -v /home/core/fabmanager/public/assets:/usr/src/app/public/assets \
              -v /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads \
              -v /home/core/fabmanager/invoices:/usr/src/app/invoices \
+             -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
              -v /home/core/fabmanager/log:/var/log/supervisor \
              -v /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt \
              sleede/fab-manager
