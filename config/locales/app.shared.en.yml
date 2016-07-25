@@ -96,6 +96,7 @@ en:
         name_is_required: "Name is required."
         all_themes: "All themes"
         filter: 'Filter'
+        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -159,7 +160,6 @@ en:
         i_have_read_and_accept_: "I have read, and accept"
         _the_general_terms_and_conditions: "the general terms and conditions."
         enter_your_card_number: "Enter your card number"
-        confirm_my_payment_of_: "Confirm my payment of"  # context: confirm my payment of $20.00
         credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm your reservation"
         client_credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm reservation of client"
 
@@ -167,7 +167,6 @@ en:
         # dialog of on site payment for reservations
         booking_confirmation: "Booking confirmation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
-        confirm_client_payment_of_: "Confirm (Payment on site) of {{amount}} {{currency}}"
 
       event:
         # event edition form

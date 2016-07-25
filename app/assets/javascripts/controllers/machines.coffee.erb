@@ -831,12 +831,11 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         $scope.numberFilter = $filter('number')
 
         # Button label
-        confirmPaymentText = if $scope.currentUser.role == 'admin' then _t('confirm_client_payment_of_') else _t('confirm_my_payment_of_')
         if $scope.amount > 0
-          $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')($scope.amount)}"
+          $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$scope.currentUser.role, AMOUNT:$filter('currency')($scope.amount)}, "messageformat")
         else
           if price.price > 0 and $scope.walletAmount == 0
-            $scope.validButtonName = "#{confirmPaymentText} #{$filter('currency')(price.price)}"
+            $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$scope.currentUser.role, AMOUNT:$filter('currency')(price.price)}, "messageformat")
           else
             $scope.validButtonName = _t('confirm')
 

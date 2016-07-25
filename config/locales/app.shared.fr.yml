@@ -96,6 +96,7 @@ fr:
         name_is_required: "Le nom est requis."
         all_themes: "Toutes les thématiques"
         filter: 'Filtre'
+        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # messageFormat interpolation (contexte : valider mon paiement de 20,00 €)
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
@@ -159,7 +160,6 @@ fr:
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
         _the_general_terms_and_conditions: "les conditions générales de vente."
         enter_your_card_number: "Saisissez votre numéro de carte"
-        confirm_my_payment_of_: "Valider mon paiement de"  # contexte : valider mon paiement de 20,00 €
         credit_amount_for_pay_reservation: "Il vous reste {{amount}} {{currency}} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {{amount}} {{currency}} à payer pour valider la réservation"
 
@@ -167,7 +167,6 @@ fr:
         # fenêtre de paiement sur place d'une réservation
         booking_confirmation: "Validation réservation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
-        confirm_client_payment_of_: "Valider (Paiement sur place) de {{amount}} {{currency}}"
 
       event:
         # formulaire d'édition d'un événement
