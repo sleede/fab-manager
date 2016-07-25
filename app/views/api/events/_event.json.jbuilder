@@ -5,10 +5,10 @@ json.event_files_attributes event.event_files do |f|
   json.attachment f.attachment_identifier
   json.attachment_url f.attachment_url
 end
-json.category_ids event.category_ids
-json.categories event.categories do |c|
-  json.id c.id
-  json.name c.name
+json.category_id event.category_id
+json.category do
+  json.id event.category.id
+  json.name event.category.name
 end
 json.event_theme_ids event.event_theme_ids
 json.event_themes event.event_themes do |e|

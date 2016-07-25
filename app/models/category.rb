@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_and_belongs_to_many :events, join_table: :events_categories, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   after_create :create_statistic_subtype
   after_update :update_statistic_subtype, if: :name_changed?

@@ -17,6 +17,7 @@
 - Filter events by category, theme and age range in public view
 - Statistics will include informations abouts events category, theme and age range
 - Fix a bug: project drafts are shown on public profiles
+- Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 

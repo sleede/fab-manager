@@ -97,7 +97,7 @@
                     <h1 class="m-b">{{event.title}}</h1>
                   </div>
                   <div class="col-xs-3">
-                    <span class="v-middle badge text-xs" ng-class="'bg-{{event.categories[0].name | lowercase}}'">{{event.categories[0].name}}</span>
+                    <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span>
                   </div>
               </div>
               <p>{{event.description | humanize : 500 }}</p>

@@ -17,7 +17,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                  start_time: 1.week.from_now.utc.change({hour: 16}),
                  end_date: 1.week.from_now.utc,
                  end_time: 1.week.from_now.utc.change({hour: 20}),
-                 category_ids: [Category.first.id],
+                 category_id: Category.first.id,
                  amount: 0
              }
          }.to_json,
@@ -45,7 +45,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                 start_time: 1.week.from_now.utc.change({hour: 16}),
                 end_date: 1.week.from_now.utc,
                 end_time: 1.week.from_now.utc.change({hour: 20}),
-                category_ids: [Category.first.id],
+                category_id: Category.first.id,
                 amount: 0,
                 nb_total_places: 10
             }
@@ -99,7 +99,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                 start_time: 1.week.from_now.utc.change({hour: 16}),
                 end_date: 1.week.from_now.utc,
                 end_time: 1.week.from_now.utc.change({hour: 20}),
-                category_ids: [Category.first.id],
+                category_id: Category.first.id,
                 amount: 0,
                 nb_total_places: 20
             }

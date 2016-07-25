@@ -50,7 +50,7 @@
 
           <a class="block bg-white img-full p-sm p-l-m box-h-m event b b-light-dark m-t-sm" ui-sref="app.public.events_show({id: event.id})">
             <div class="pull-left half-w m-t-n-sm">
-              <h5 class="text-xs">{{event.categories[0].name}}</h5>
+              <h5 class="text-xs">{{event.category.name}}</h5>
               <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
               <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
               <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>

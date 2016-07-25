@@ -18,7 +18,7 @@ class API::EventsController < API::ApiController
   # GET /events/upcoming/:limit
   def upcoming
     limit = params[:limit]
-    @events = Event.includes(:event_image, :event_files, :availability, :categories)
+    @events = Event.includes(:event_image, :event_files, :availability, :category)
                    .where('availabilities.start_at >= ?', Time.now)
                    .order('availabilities.start_at ASC').references(:availabilities).limit(limit)
   end
@@ -64,8 +64,8 @@ class API::EventsController < API::ApiController
     def event_params
       event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
                                                     :amount, :reduced_amount, :nb_total_places, :availability_id,
-                                                    :all_day, :recurrence, :recurrence_end_at, :category_ids, :event_theme_ids,
-                                                    :age_range_id, event_theme_ids: [], category_ids: [],
+                                                    :all_day, :recurrence, :recurrence_end_at, :category_id, :event_theme_ids,
+                                                    :age_range_id, event_theme_ids: [],
                                                     event_image_attributes: [:attachment], event_files_attributes: [:id, :attachment, :_destroy])
       start_date = Time.zone.parse(event_preparams[:start_date])
       end_date = Time.zone.parse(event_preparams[:end_date])

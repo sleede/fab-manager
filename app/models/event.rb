@@ -5,8 +5,8 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :event_image, allow_destroy: true
   has_many :event_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :event_files, allow_destroy: true, reject_if: :all_blank
-  has_and_belongs_to_many :categories, join_table: :events_categories
-  validates :categories, presence: true
+  belongs_to :category
+  validates :category, presence: true
   has_many :reservations, as: :reservable, dependent: :destroy
   has_and_belongs_to_many :event_themes, join_table: :events_event_themes, dependent: :destroy
 
@@ -81,7 +81,7 @@ class Event < ActiveRecord::Base
           event_files: efs,
           availability: Availability.new(start_at: start_at, end_at: end_at, available_type: 'event'),
           availability_id: nil,
-          category_ids: category_ids,
+          category_id: category_id,
           amount: amount,
           reduced_amount: reduced_amount,
           nb_total_places: nb_total_places,

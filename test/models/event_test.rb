@@ -3,7 +3,7 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   test 'event must have a category' do
     e = Event.first
-    assert_not_nil e.categories.first
+    assert_not_nil e.category
   end
 
   test 'event must have a theme' do

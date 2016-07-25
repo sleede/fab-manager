@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720124355) do
+ActiveRecord::Schema.define(version: 20160725135112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,20 +147,12 @@ ActiveRecord::Schema.define(version: 20160720124355) do
     t.integer  "nb_free_places"
     t.integer  "recurrence_id"
     t.integer  "age_range_id"
+    t.integer  "category_id"
   end
 
   add_index "events", ["availability_id"], name: "index_events_on_availability_id", using: :btree
+  add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
   add_index "events", ["recurrence_id"], name: "index_events_on_recurrence_id", using: :btree
-
-  create_table "events_categories", force: :cascade do |t|
-    t.integer  "event_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "events_categories", ["category_id"], name: "index_events_categories_on_category_id", using: :btree
-  add_index "events_categories", ["event_id"], name: "index_events_categories_on_event_id", using: :btree
 
   create_table "events_event_themes", force: :cascade do |t|
     t.integer "event_id"
@@ -737,6 +729,7 @@ ActiveRecord::Schema.define(version: 20160720124355) do
 
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
+  add_foreign_key "events", "categories"
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
   add_foreign_key "invoices", "wallet_transactions"

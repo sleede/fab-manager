@@ -2,12 +2,12 @@ class EventPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.nil? or (user and !user.is_admin?)
-        scope.includes(:event_image, :event_files, :availability, :categories)
+        scope.includes(:event_image, :event_files, :availability, :category)
              .where('availabilities.start_at >= ?', Time.now)
              .order('availabilities.start_at ASC')
              .references(:availabilities)
       else
-        scope.includes(:event_image, :event_files, :availability, :categories)
+        scope.includes(:event_image, :event_files, :availability, :category)
              .order('availabilities.start_at DESC')
              .references(:availabilities)
       end
