@@ -243,12 +243,12 @@ fr:
     notify_user_wallet_is_credited:
       subject: "Votre porte-monnaie a bien été crédité"
       body:
-        wallet_credit_html: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'adminitrateur."
+        wallet_credit_html: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'administrateur."
 
     notify_admin_user_wallet_is_credited:
       subject: "Le porte-monnaie d'un utilisateur a bien été crédité"
       body:
-        wallet_credit_html: "Le porte-monnaie du membre %{USER} a bien été crédité de %{AMOUNT} par l'adminitrateur %{ADMIN}."
+        wallet_credit_html: "Le porte-monnaie du membre %{USER} a bien été crédité de %{AMOUNT} par l'administrateur %{ADMIN}."
 
     shared:
       hello: "Bonjour %{user_name}"
