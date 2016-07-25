@@ -144,3 +144,8 @@ gem 'openlab_ruby'
 gem 'api-pagination'
 gem 'has_secure_token'
 gem 'apipie-rails'
+
+# XLS files generation
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'

@@ -20,6 +20,7 @@
 - Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `bundle install`
 
 ## v2.3.0 2016 June 28
 

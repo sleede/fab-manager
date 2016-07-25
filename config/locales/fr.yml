@@ -116,23 +116,36 @@ fr:
 
   export_members:
     # export de la liste des members au format EXCEL
+    members: "Membres"
     id: "ID"
     surname: "Nom"
     first_name: "Prénom"
     email: "Courriel"
     gender: "Genre"
     age: "Âge"
+    address: "Adresse"
     phone: "Tel."
+    website: "Site web"
+    job: "Profession"
+    interests: "Centres d'intérêts"
+    cad_software_mastered: "Logiciels de conception maîtrisés"
     group: "Groupe"
     subscription: "Abonnement"
     subscription_end_date: "Date de fin de l'abonnement"
     validated_trainings: "Formations validées"
+    tags: "Étiquettes"
+    number_of_invoices: "Nombre de factures"
+    projects: "Projets"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Echosciences"
     man: "Homme"
     woman: "Femme"
     without_subscriptions: "Sans Abonnement"
 
   export_reservations:
     # export de la liste des réservations machines/formations/évènements au format EXCEL
+    reservations: "Réservations"
     customer_id: "ID client"
     customer: "Client"
     email: "Courriel"
@@ -146,6 +159,7 @@ fr:
 
   export_subscriptions:
     # export de la liste des abonnements au format EXCEL
+    subscriptions: "Abonnements"
     id: "ID"
     customer: "Client"
     email: "Courriel"
@@ -263,3 +277,20 @@ fr:
     revenue: "Chiffre d'affaires"
     account_creation: "Création de compte"
     project_publication: "Publication de projet"
+
+  export:
+    # export des statistiques au format excel
+    entries: "Entrées"
+    revenue: "Chiffre d'affaires"
+    average_age: "Âge moyen"
+    total: "Total"
+    date: "Date"
+    user: "Utilisateur"
+    email: "Courriel"
+    phone: "Téléphone"
+    gender: "Genre"
+    age: "Âge"
+    type: "Type"
+    revenue: "Chiffre d'affaires"
+    male: "Homme"
+    female: "Femme"

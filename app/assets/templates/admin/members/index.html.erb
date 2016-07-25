@@ -31,13 +31,13 @@
                   <div class="col-md-12">
                       <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new" translate>{{ 'add_a_new_member' }}</button>
                       <div class="pull-right">
-                          <a class="btn btn-default" ng-href="api/members/export_members.xls" target="_blank">
+                          <a class="btn btn-default" ng-href="api/members/export_members.xlsx" target="_blank">
                               <i class="fa fa-file-excel-o"></i> {{ 'members' | translate }}
                           </a>
-                          <a class="btn btn-default" ng-href="api/members/export_subscriptions.xls" target="_blank" ng-if="!fablabWithoutPlans">
+                          <a class="btn btn-default" ng-href="api/members/export_subscriptions.xlsx" target="_blank" ng-if="!fablabWithoutPlans">
                               <i class="fa fa-file-excel-o"></i> {{ 'subscriptions' | translate }}
                           </a>
-                          <a class="btn btn-default" ng-href="api/members/export_reservations.xls" target="_blank">
+                          <a class="btn btn-default" ng-href="api/members/export_reservations.xlsx" target="_blank">
                               <i class="fa fa-file-excel-o"></i> {{ 'reservations' | translate }}
                           </a>
                       </div>

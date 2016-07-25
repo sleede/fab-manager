@@ -116,23 +116,36 @@ en:
 
   export_members:
     # members list export to EXCEL format
+    members: "Members"
     id: "ID"
     surname: "Surname"
     first_name: "First name"
     email: "E-mail"
     gender: "Gender"
     age: "Age"
+    address: "Address"
     phone: "Phone"
+    website: "Website"
+    job: "Job"
+    interests: "Interests"
+    cad_software_mastered: "CAD Softwares mastered"
     group: "Group"
     subscription: "Subscription"
     subscription_end_date: "Subscription end date"
     validated_trainings: "Validated trainings"
+    tags: "Tags"
+    number_of_invoices: "Number of invoices"
+    projects: "Projects"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Echosciences"
     man: "Man"
     woman: "Woman"
     without_subscriptions: "Without subscriptions"
 
   export_reservations:
     # machines/trainings/events reservations list to EXCEL format
+    reservations: "Reservations"
     customer_id: "Customer ID"
     customer: "Customer"
     email: "E-mail"
@@ -146,6 +159,7 @@ en:
 
   export_subscriptions:
     # subscriptions list export to EXCEL format
+    subscriptions: "Subscriptions"
     id: "ID"
     customer: "Customer"
     email: "E-mail"
@@ -263,3 +277,20 @@ en:
     revenue: "Revenue"
     account_creation: "Account creation"
     project_publication: "Project publication"
+
+  export:
+    # statistics exports to the excel file format
+    entries: "Entries"
+    revenue: "Revenue"
+    average_age: "Average Age"
+    total: "Total"
+    date: "Date"
+    user: "User"
+    email: "Email"
+    phone: "Phone"
+    gender: "Gender"
+    age: "Age"
+    type: "Type"
+    revenue: "Revenue"
+    male: "Man"
+    female: "Woman"

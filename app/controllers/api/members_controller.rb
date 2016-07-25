@@ -91,30 +91,24 @@ class API::MembersController < API::ApiController
   # export subscriptions
   def export_subscriptions
     authorize :export
-    @datas = Subscription.includes(:plan, :user).all
-    respond_to do |format|
-      format.html
-      format.xls
-    end
+    @subscriptions = Subscription.all.includes(:plan, :user => [:profile])
+
+    render xlsx: 'export_subscriptions.xlsx', filename: "export_subscriptions.xlsx"
   end
 
   # export reservations
   def export_reservations
     authorize :export
-    @datas = Reservation.includes(:user, :slots).all
-    respond_to do |format|
-      format.html
-      format.xls
-    end
+    @reservations = Reservation.all.includes(:slots, :reservable, :user => [:profile])
+
+    render xlsx: 'export_reservations.xlsx', filename: "export_reservations.xlsx"
   end
 
   def export_members
     authorize :export
-    @datas = User.with_role(:member).includes(:group, :subscriptions, :profile)
-    respond_to do |format|
-      format.html
-      format.xls
-    end
+    @members = User.with_role(:member).includes(:group, :trainings, :tags, :invoices, :projects, :subscriptions => [:plan], :profile => [:address])
+
+    render xlsx: 'export_members.xlsx', filename: "export_members.xlsx"
   end
 
   def merge

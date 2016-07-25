@@ -56,6 +56,23 @@ module ApplicationHelper
 	  amount / 100.00
 	end
 
+  ##
+  # Retrieve an item in the given array of items
+  # by default, the "id" is expected to match the given parameter but
+  # this can be overridden by passing a third parameter to specify the
+  # property to match
+  ##
+	def get_item(array, id, key = nil)
+		array.each do |i|
+			if key.nil?
+				return i if i.id == id
+			else
+				return i if i[key] == id
+			end
+		end
+		nil
+	end
+
 
 	private
 	## inspired by gems/actionview-4.2.5/lib/action_view/helpers/translation_helper.rb

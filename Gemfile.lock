@@ -54,6 +54,13 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.1.7)
+    axlsx_rails (0.4.0)
+      axlsx (>= 2.0.1)
+      rails (>= 3.1)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -174,6 +181,7 @@ GEM
     highline (1.7.1)
     hike (1.2.3)
     hitimes (1.2.2)
+    htmlentities (4.3.4)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
     http-cookie (1.0.2)
@@ -325,6 +333,7 @@ GEM
       netrc (~> 0.7)
     rolify (4.0.0)
     ruby-progressbar (1.7.5)
+    rubyzip (1.1.7)
     rufus-scheduler (3.0.9)
       tzinfo
     rvm-capistrano (1.5.6)
@@ -440,6 +449,8 @@ DEPENDENCIES
   api-pagination
   apipie-rails
   awesome_print
+  axlsx (= 2.1.0.pre)
+  axlsx_rails
   bootstrap-sass
   byebug
   capistrano
@@ -488,6 +499,7 @@ DEPENDENCIES
   recurrence
   responders (~> 2.0)
   rolify
+  rubyzip (~> 1.1.0)
   rvm-capistrano
   sass-rails (= 5.0.1)
   sdoc (~> 0.4.0)

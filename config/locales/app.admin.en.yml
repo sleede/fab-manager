@@ -405,7 +405,10 @@ en:
         unknown: "Unknown"
         user_id: "User ID"
         display_more_results: "Display more results"
-
+        export_statistics_to_excel: "Export statistics to Excel"
+        export_all_statistics: "Export all statistics"
+        export_the_current_search_results: "Export the current search results"
+        export: "Export"
 
       stats_graphs:
         # statistics graphs

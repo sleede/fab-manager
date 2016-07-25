@@ -1,7 +1,9 @@
 'use strict'
 
-Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", "Statistics", "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
-, ($scope, $state, $rootScope, Statistics, es, Member, _t, membersPromise, statisticsPromise) ->
+
+
+Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", '$uibModal', "Export", "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
+, ($scope, $state, $rootScope, $uibModal, Export, es, Member, _t, membersPromise, statisticsPromise) ->
 
 
 
@@ -56,6 +58,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ## default: results are not sorted
   $scope.sorting =
     ca: 'none'
+    date: 'desc'
 
   ## active tab will be set here
   $scope.selectedIndex = null
@@ -148,6 +151,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     $scope.customFilter.value = null
     $scope.customFilter.exclude = false
     $scope.sorting.ca = 'none'
+    $scope.sorting.date = 'desc'
     buildCustomFiltersList()
     refreshStats()
 
@@ -271,6 +275,33 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
+  ##
+  # Open a modal dialog asking the user for details about exporting the statistics tables to an excel file
+  ##
+  $scope.exportToExcel = ->
+    options =
+      templateUrl: '<%= asset_path "admin/statistics/export.html" %>'
+      size: 'sm'
+      controller: 'ExportStatisticsController'
+      resolve:
+        dates: ->
+          start: $scope.datePickerStart.selected
+          end: $scope.datePickerEnd.selected
+        query: ->
+          custom = buildCustomFilterQuery()
+          buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
+        index: ->
+          key: $scope.selectedIndex.es_type_key
+        type: ->
+          key: $scope.type.active.key
+
+    $uibModal.open options
+    .result['finally'](null).then (info)->
+      console.log(info)
+
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
@@ -308,12 +339,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       $scope.sumStat = 0
       $scope.totalHits = null
       $scope.searchDate = new Date()
-      custom = null
-      if $scope.customFilter.criterion and $scope.customFilter.criterion.key and $scope.customFilter.value
-        custom = {}
-        custom.key = $scope.customFilter.criterion.key
-        custom.value = $scope.customFilter.value
-        custom.exclude = $scope.customFilter.exclude
+      custom = buildCustomFilterQuery()
       queryElasticStats $scope.selectedIndex.es_type_key, $scope.type.active.key, custom, (res, err)->
         if (err)
           console.error("[statisticsController::refreshStats] Unable to refresh due to "+err)
@@ -485,8 +511,138 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
+  ##
+  # Build and return an object according to the custom filter set by the user, used to request elasticsearch
+  # @return {Object|null}
+  ##
+  buildCustomFilterQuery = ->
+    custom = null
+    if !angular.isUndefinedOrNull($scope.customFilter.criterion) and
+        !angular.isUndefinedOrNull($scope.customFilter.criterion.key) and
+        !angular.isUndefinedOrNull($scope.customFilter.value)
+      custom = {}
+      custom.key = $scope.customFilter.criterion.key
+      custom.value = $scope.customFilter.value
+      custom.exclude = $scope.customFilter.exclude
+    custom
+
+
 
   # init the controller (call at the end !)
   initialize()
 
+]
+
+
+
+Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', 'query', 'index', 'type', 'CSRF'
+, ($scope, $uibModalInstance, dates, query, index, type, CSRF) ->
+
+  ## Retrieve Anti-CSRF tokens from cookies
+  CSRF.setMetaTags()
+
+  ## Bindings for date range
+  $scope.dates = dates
+
+  ## Body of the query to export
+  $scope.query = JSON.stringify(query)
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = '/stats/'+index.key+'/export'
+
+  ## Key of the current search' statistic type
+  $scope.typeKey = type.key
+
+  ## Form action on the above URL
+  $scope.method = "post"
+
+  ## Anti-CSRF token to inject into the download form
+  $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content
+
+  ## Binding of the export type (global / current)
+  $scope.export =
+    type: 'current'
+
+  ## datePicker parameters for interval beginning
+  $scope.exportStart =
+    format: Fablab.uibDateFormat
+    opened: false # default: datePicker is not shown
+    minDate: null
+    maxDate: moment().subtract(1, 'day').toDate()
+    options:
+      startingDay: Fablab.weekStartingDay
+
+  ## datePicker parameters for interval ending
+  $scope.exportEnd =
+    format: Fablab.uibDateFormat
+    opened: false # default: datePicker is not shown
+    minDate: null
+    maxDate: moment().subtract(1, 'day').toDate()
+    options:
+      startingDay: Fablab.weekStartingDay
+
+
+
+  ##
+  # Callback to open the datepicker (interval start)
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.toggleStartDatePicker = ($event) ->
+    $scope.exportStart.opened = !$scope.exportStart.opened
+
+
+
+  ##
+  # Callback to open the datepicker (interval end)
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.toggleEndDatePicker = ($event) ->
+    $scope.exportEnd.opened = !$scope.exportEnd.opened
+
+
+
+  ##
+  # Callback when exchanging the export type between 'global' and 'current view'
+  # Adjust the query and the requesting url according to this type.
+  ##
+  $scope.setRequest = ->
+    if $scope.export.type == 'global'
+      $scope.actionUrl = '/stats/global/export'
+      $scope.query = JSON.stringify(
+        "query":
+          "bool":
+            "must": [
+              {
+                "range":
+                  "date":
+                    "gte": moment($scope.dates.start).format()
+                    "lte": moment($scope.dates.end).format()
+              }
+            ]
+      )
+    else
+      $scope.actionUrl = '/stats/'+index.key+'/export'
+      $scope.query = JSON.stringify(query)
+
+
+
+  ##
+  # Callback to close the modal, telling the caller what is exported
+  ##
+  $scope.exportData = ->
+    info =
+      type: $scope.export.type
+
+    if info.type == 'global'
+      info.dates = $scope.dates
+
+    $uibModalInstance.close(info)
+
+
+
+  ##
+  # Callback to cancel the export and close the modal
+  ##
+  $scope.cancel = ->
+    $uibModalInstance.dismiss('cancel')
 ]
