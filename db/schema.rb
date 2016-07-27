@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725135112) do
+ActiveRecord::Schema.define(version: 20160726144257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,18 @@ ActiveRecord::Schema.define(version: 20160725135112) do
 
   add_index "events_event_themes", ["event_id"], name: "index_events_event_themes_on_event_id", using: :btree
   add_index "events_event_themes", ["event_theme_id"], name: "index_events_event_themes_on_event_theme_id", using: :btree
+
+  create_table "exports", force: :cascade do |t|
+    t.string   "category"
+    t.string   "export_type"
+    t.string   "query"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "key"
+  end
+
+  add_index "exports", ["user_id"], name: "index_exports_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -732,6 +744,7 @@ ActiveRecord::Schema.define(version: 20160725135112) do
   add_foreign_key "events", "categories"
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
+  add_foreign_key "exports", "users"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"

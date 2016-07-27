@@ -250,5 +250,19 @@ fr:
       body:
         wallet_credit_html: "Le porte-monnaie du membre %{USER} a bien été crédité de %{AMOUNT} par l'administrateur %{ADMIN}."
 
+    notify_admin_export_complete:
+      subject: "Export terminé"
+      body:
+        you_asked_for_an_export: "Vous avez demandé un export"
+        statistics_global: "de toutes les statistiques"
+        statistics_account: "des statistiques d'inscriptions"
+        statistics_event: "des statistiques sur les évènements"
+        statistics_machine: "des statistiques d'heures machines"
+        statistics_project: "des statistiques sur les projets"
+        statistics_subscription: "des statistiques d'abonnements"
+        statistics_training: "des statistiques sur les formations"
+        click_to_download: "La génération est terminée. Pour télécharger le fichier Excel, cliquez"
+        here: "ici"
+
     shared:
       hello: "Bonjour %{user_name}"

@@ -250,6 +250,17 @@ en:
         your_wallet_is_credited: "Your wallet has been credited by administrator"
       notify_admin_user_wallet_is_credited:
         wallet_is_credited: "The wallet of member %{USER} has been credited %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "The export"
+        statistics_global: "of all the statistics"
+        statistics_account: "of the registration statistics"
+        statistics_event: "of statistics about events"
+        statistics_machine: "of statistics about machine hours"
+        statistics_project: "of statistics about projects"
+        statistics_subscription: "of subscription statistics"
+        statistics_training: "of statistics about trainings"
+        is_over: "is over."
+        download_here: "Download here"
 
   statistics:
     # statistics tools for admins

@@ -39,5 +39,6 @@ class NotificationType
     notify_admin_invoicing_changed
     notify_user_wallet_is_credited
     notify_admin_user_wallet_is_credited
+    notify_admin_export_complete
   )
 end

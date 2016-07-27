@@ -1,0 +1,10 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.you_asked_for_an_export') %>
+  <%= t(".body.#{@attached_object.category}_#{@attached_object.export_type}") %>.
+</p>
+<p>
+  <%= t('.body.click_to_download') %>
+  <%=link_to( t('.body.here'), "#{root_url}api/exports/#{@attached_object.id}/download", target: "_blank" )%>
+</p>

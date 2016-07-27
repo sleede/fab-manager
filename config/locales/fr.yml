@@ -250,6 +250,17 @@ fr:
         your_wallet_is_credited: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'administrateur"
       notify_admin_user_wallet_is_credited:
         wallet_is_credited: "Le porte-monnaie du membre %{USER} a bien été crédité de %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "L'export"
+        statistics_global: "de toutes les statistiques"
+        statistics_account: "des statistiques d'inscriptions"
+        statistics_event: "des statistiques sur les évènements"
+        statistics_machine: "des statistiques d'heures machines"
+        statistics_project: "des statistiques sur les projets"
+        statistics_subscription: "des statistiques d'abonnements"
+        statistics_training: "des statistiques sur les formations"
+        is_over: "est terminé."
+        download_here: "Téléchargez ici"
 
   statistics:
     # outil de statistiques pour les administrateurs

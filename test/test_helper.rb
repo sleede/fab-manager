@@ -70,6 +70,25 @@ class ActiveSupport::TestCase
 
     File.delete(invoice.file)
   end
+
+
+  # Force the statistics export generation worker to run NOW and check the resulting file generated.
+  # Delete the file afterwards.
+  # @param export {Export}
+  def assert_export_xlsx(export)
+    assert_not_nil export, 'Export was not created'
+
+    if export.category == 'statistics'
+      export_worker = StatisticsExportWorker.new
+      export_worker.perform(export.id)
+
+      assert File.exist?(export.file), 'Export XLSX was not generated'
+
+      File.delete(export.file)
+    else
+      skip('Unable to test export which is not of the category "statistics"')
+    end
+  end
 end
 
 class ActionDispatch::IntegrationTest

@@ -173,7 +173,7 @@ class Invoice < ActiveRecord::Base
 
   ##
   # Check if the current invoice is about a training that was previously validated for the concerned user.
-  # In that case refunding the invoice must not be not allowed.
+  # In that case refunding the invoice shouldn't be allowed.
   # @return {Boolean}
   ##
   def prevent_refund?

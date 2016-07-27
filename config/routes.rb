@@ -113,6 +113,9 @@ Rails.application.routes.draw do
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'
+
+    # XLSX exports
+    get 'exports/:id/download' => 'exports#download'
   end
 
   # open_api

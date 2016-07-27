@@ -387,17 +387,11 @@ brew install homebrew/versions/elasticsearch17
 
 2. Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM).
    See [schedule.yml](config/schedule.yml) to modify this behavior.
-   If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following commands in a rails console.
+   If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
 
    ```bash
-   rails c
-   ```
-
-   ```ruby
-   # Here for the 200 last days
-   200.times.each do |i|
-      StatisticService.new.generate_statistic({start_date: i.day.ago.beginning_of_day,end_date: i.day.ago.end_of_day})
-   end
+   # Here for the 50 last days
+   rake fablab:generate_stats[50]
    ```
 
 <a name="backup-and-restore-elasticsearch"></a>

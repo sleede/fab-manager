@@ -13,6 +13,7 @@ event_2:
   nb_free_places: 10
   recurrence_id: 1
   age_range_id: 2
+  category_id: 2
 
 event_3:
   id: 3
@@ -27,6 +28,7 @@ event_3:
   nb_total_places: 10
   nb_free_places: 10
   recurrence_id: 1
+  category_id: 2
 
 event_1:
   id: 1
@@ -41,3 +43,4 @@ event_1:
   nb_total_places: 10
   nb_free_places: 10
   recurrence_id: 1
+  category_id: 2

@@ -1,6 +1,6 @@
 en:
   layouts:
-    notifications_mailer: 
+    notifications_mailer:
       see_you_later: "See you soon on {GENDER, select, other{the}}"  # messageFormat interpolation
       sincerely: "Sincerely,"
       signature: "The Fab Lab team."
@@ -249,6 +249,20 @@ en:
       subject: "The wallet of an user has been credited"
       body:
         wallet_credit_html: "The wallet of member %{USER} has been credited %{AMOUNT} by administrator %{ADMIN}."
+
+    notify_admin_export_complete:
+      subject: "Export completed"
+      body:
+        you_asked_for_an_export: "You asked for an export"
+        statistics_global: "of all the statistics"
+        statistics_account: "of the registration statistics"
+        statistics_event: "of statistics about events"
+        statistics_machine: "of statistics about machine hours"
+        statistics_project: "of statistics about projects"
+        statistics_subscription: "of subscription statistics"
+        statistics_training: "of statistics about trainings"
+        click_to_download: "Excel file generated successfully. To download it, click"
+        here: "here"
 
     shared:
       hello: "Hello %{user_name}"

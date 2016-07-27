@@ -213,4 +213,16 @@ namespace :fablab do
       File.write(cassette_file, cassette)
     end
   end
+
+  desc '(re)generate statistics in elasticsearch for the past period'
+  task :generate_stats, [:period] => :environment do |task, args|
+    unless args.period
+      fail 'FATAL ERROR: You must pass a number of days (=> past period) to generate statistics on'
+    end
+
+    days = args.period.to_i
+    days.times.each do |i|
+      StatisticService.new.generate_statistic({start_date: i.day.ago.beginning_of_day,end_date: i.day.ago.end_of_day})
+    end
+  end
 end

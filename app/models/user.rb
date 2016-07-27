@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
 
   has_one :wallet, dependent: :destroy
 
+  has_many :exports, dependent: :destroy
+
   # fix for create admin user
   before_save do
     self.email.downcase! if self.email
