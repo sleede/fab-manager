@@ -16,6 +16,9 @@
 - Admin: Event categories, themes and age ranges can be customized
 - Filter events by category, theme and age range in public view
 - Statistics will include informations abouts events category, theme and age range
+- Ability to export the current statistics table to an Excel file
+- Ability to export every statistics on a given dates range to an Excel file
+- Unified members, subscriptions and reservations exports with the new statistics exports  
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
