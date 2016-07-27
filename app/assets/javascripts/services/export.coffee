@@ -1,6 +1,6 @@
 'use strict'
 
 Application.Services.factory 'Export', ["$http", ($http)->
-  stats: (scope, query) ->
-    $http.post('/stats/'+scope+'/export', query)
+  status: (query) ->
+    $http.post('/api/exports/status', query)
 ]

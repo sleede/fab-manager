@@ -116,6 +116,7 @@ Rails.application.routes.draw do
 
     # XLSX exports
     get 'exports/:id/download' => 'exports#download'
+    post 'exports/status' => 'exports#status'
   end
 
   # open_api

@@ -2,8 +2,8 @@
 
 
 
-Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", '$uibModal', "Export", "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
-, ($scope, $state, $rootScope, $uibModal, Export, es, Member, _t, membersPromise, statisticsPromise) ->
+Application.Controllers.controller "StatisticsController", ["$scope", "$state", "$rootScope", '$uibModal', "es", "Member", '_t', 'membersPromise', 'statisticsPromise'
+, ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise) ->
 
 
 
@@ -535,8 +535,8 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
 
 
 
-Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'dates', 'query', 'index', 'type', 'CSRF'
-, ($scope, $uibModalInstance, dates, query, index, type, CSRF) ->
+Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$uibModalInstance', 'Export','dates', 'query', 'index', 'type', 'CSRF', 'growl', '_t'
+, ($scope, $uibModalInstance, Export, dates, query, index, type, CSRF, growl, _t) ->
 
   ## Retrieve Anti-CSRF tokens from cookies
   CSRF.setMetaTags()
@@ -630,13 +630,16 @@ Application.Controllers.controller 'ExportStatisticsController', [ '$scope', '$u
   # Callback to close the modal, telling the caller what is exported
   ##
   $scope.exportData = ->
-    info =
-      type: $scope.export.type
+    statusQry = {category: 'statistics', type: $scope.export.type, query: $scope.query}
+    unless $scope.export.type == 'global'
+      statusQry['type'] = index.key
+      statusQry['key'] = type.key
 
-    if info.type == 'global'
-      info.dates = $scope.dates
+    Export.status(statusQry).then (res) ->
+      unless (res.data.exists)
+        growl.success _t('export_is_running_you_ll_be_notified_when_its_ready')
 
-    $uibModalInstance.close(info)
+    $uibModalInstance.close(statusQry)
 
 
 
