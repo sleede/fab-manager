@@ -42,6 +42,7 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/config
 RUN mkdir -p /usr/src/app/invoices
+RUN mkdir -p /usr/src/app/exports
 RUN mkdir -p /usr/src/app/log
 RUN mkdir -p /usr/src/app/public/uploads
 RUN mkdir -p /usr/src/app/public/assets
@@ -56,6 +57,7 @@ COPY . /usr/src/app
 
 # Volumes
 VOLUME /usr/src/app/invoices
+VOLUME /usr/src/app/exports
 VOLUME /usr/src/app/public/uploads
 VOLUME /usr/src/app/public/assets
 VOLUME /var/log/supervisor
