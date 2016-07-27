@@ -91,24 +91,51 @@ class API::MembersController < API::ApiController
   # export subscriptions
   def export_subscriptions
     authorize :export
-    @subscriptions = Subscription.all.includes(:plan, :user => [:profile])
 
-    render xlsx: 'export_subscriptions.xlsx', filename: "export_subscriptions.xlsx"
+    export = Export.where({category:'users', export_type: 'subscriptions'}).where('created_at > ?', Subscription.maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'users', export_type: 'subscriptions', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    end
   end
 
   # export reservations
   def export_reservations
     authorize :export
-    @reservations = Reservation.all.includes(:slots, :reservable, :user => [:profile])
 
-    render xlsx: 'export_reservations.xlsx', filename: "export_reservations.xlsx"
+    export = Export.where({category:'users', export_type: 'reservations'}).where('created_at > ?', Reservation.maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'users', export_type: 'reservations', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    end
   end
 
   def export_members
     authorize :export
-    @members = User.with_role(:member).includes(:group, :trainings, :tags, :invoices, :projects, :subscriptions => [:plan], :profile => [:address])
 
-    render xlsx: 'export_members.xlsx', filename: "export_members.xlsx"
+    export = Export.where({category:'users', export_type: 'members'}).where('created_at > ?', User.with_role(:member).maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'users', export_type: 'members', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    end
   end
 
   def merge

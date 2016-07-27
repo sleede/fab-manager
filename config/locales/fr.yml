@@ -259,6 +259,9 @@ fr:
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
+        users_members: "de la liste des membres"
+        users_subscriptions: "de la liste des abonnements"
+        users_reservations: "de la liste des réservations"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
 

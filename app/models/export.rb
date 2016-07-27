@@ -26,6 +26,8 @@ class Export < ActiveRecord::Base
     case category
       when 'statistics'
         StatisticsExportWorker.perform_async(self.id)
+      when 'users'
+        UsersExportWorker.perform_async(self.id)
       else
        raise NoMethodError, "Unknown export service for #{category}/#{export_type}"
     end
