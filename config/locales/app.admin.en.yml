@@ -409,7 +409,6 @@ en:
         export_all_statistics: "Export all statistics"
         export_the_current_search_results: "Export the current search results"
         export: "Export"
-        export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
 
       stats_graphs:
         # statistics graphs

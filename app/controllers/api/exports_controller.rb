@@ -11,7 +11,22 @@ class API::ExportsController < API::ApiController
   def status
     authorize Export
 
-    export = Export.where({category: params[:category], export_type: params[:type], query: params[:query], key: params[:key]}).last
+    export = Export.where({category: params[:category], export_type: params[:type], query: params[:query], key: params[:key]})
+
+    if params[:category] === 'users'
+      case params[:type]
+        when 'subscriptions'
+          export = export.where('created_at > ?', Subscription.maximum('updated_at'))
+        when 'reservations'
+          export = export.where('created_at > ?', Reservation.maximum('updated_at'))
+        when 'members'
+          export = export.where('created_at > ?', User.with_role(:member).maximum('updated_at'))
+        else
+          raise ArgumentError, "Unknown type #{params[:type]}"
+      end
+    end
+    export = export.last
+
     if export.nil? || !FileTest.exist?(export.file)
       render json: {exists: false, id: nil}, status: :ok
     else

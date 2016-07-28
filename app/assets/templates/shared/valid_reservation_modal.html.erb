@@ -11,6 +11,6 @@
   </ul>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting">{{validButtonName}}</button>
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

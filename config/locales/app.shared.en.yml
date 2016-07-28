@@ -97,6 +97,7 @@ en:
         all_themes: "All themes"
         filter: 'Filter'
         confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
+        export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"

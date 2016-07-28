@@ -105,8 +105,8 @@ class MembersController
 ##
 # Controller used in the members/groups management page
 ##
-Application.Controllers.controller "AdminMembersController", ["$scope", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member'
-, ($scope, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member) ->
+Application.Controllers.controller "AdminMembersController", ["$scope", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export'
+, ($scope, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) ->
 
 
 
@@ -203,6 +203,16 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
   $scope.updateTextSearch = ->
     resetSearchMember()
     memberSearch()
+
+  ##
+  # Callback to alert the admin that the export request was acknowledged and is
+  # processing right now.
+  ##
+  $scope.alertExport = (type) ->
+    Export.status({category: 'users', type: type}).then (res) ->
+      unless (res.data.exists)
+        growl.success _t('export_is_running_you_ll_be_notified_when_its_ready')
+
 
 
 
