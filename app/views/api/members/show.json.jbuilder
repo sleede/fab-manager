@@ -1,6 +1,6 @@
 requested_current = (current_user and current_user.id == @member.id)
 
-json.extract! @member, :id, :uid, :username, :email, :group_id, :slug, :invoicing_disabled, :is_allow_contact
+json.extract! @member, :id, :uid, :username, :email, :group_id, :slug, :invoicing_disabled, :is_allow_contact, :is_allow_newsletter
 json.role @member.roles.first.name
 json.name @member.profile.full_name
 json.need_completion @member.need_completion?

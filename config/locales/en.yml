@@ -121,6 +121,7 @@ en:
     surname: "Surname"
     first_name: "First name"
     email: "E-mail"
+    newsletter: "Newsletter"
     gender: "Gender"
     age: "Age"
     address: "Address"

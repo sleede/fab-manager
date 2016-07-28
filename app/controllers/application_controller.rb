@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) <<
       {profile_attributes: [:phone, :last_name, :first_name,
         :gender, :birthday, :interest, :software_mastered]}
-    devise_parameter_sanitizer.for(:sign_up).concat [:username, :is_allow_contact, :cgu, :group_id]
+    devise_parameter_sanitizer.for(:sign_up).concat [:username, :is_allow_contact, :is_allow_newsletter, :cgu, :group_id]
   end
 
   def default_url_options

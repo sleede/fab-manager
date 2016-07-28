@@ -277,6 +277,20 @@
         <input type="hidden" name="user[is_allow_contact]" value="{{user.is_allow_contact}}"/>
       </div>
 
+      <!-- allow receive newsletter -->
+      <div class="form-group">
+        <label for="allowNewsletter" translate>{{ 'i_accept_to_receive_informations_from_the_fablab' }}</label>
+        <input bs-switch
+               ng-model="user.is_allow_newsletter"
+               id="allowNewsletter"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'yes' | translate }}"
+               switch-off-text="{{ 'no' | translate }}"
+               switch-animate="true" />
+        <input type="hidden" name="user[is_allow_newsletter]" value="{{user.is_allow_newsletter}}"/>
+      </div>
+
       <div id="social" ng-init="social={}">
         <div class="form-group" ng-show="social.facebook || user.profile.facebook" ng-class="{'has-error': userForm['user[profile_attributes][facebook]'].$dirty && userForm['user[profile_attributes][facebook]'].$invalid}">
           <div class="input-group">
