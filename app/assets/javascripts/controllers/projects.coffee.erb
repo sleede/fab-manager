@@ -420,6 +420,8 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
     else
       console.error _t('unauthorized_operation')
 
+
+
   ##
   # Open a modal box containg a form that allow the end-user to signal an abusive content
   # @param e {Object} jQuery event
@@ -455,4 +457,19 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
             growl.error(_t('an_error_occured_while_sending_your_report'))
       ]
 
+
+
+  ##
+  # Return the URL allowing to share the current project on the Facebook social network
+  ##
+  $scope.shareOnFacebook = ->
+    'https://www.facebook.com/share.php?u='+$state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}).replace('#', '%23')
+
+
+
+  ##
+  # Return the URL allowing to share the current project on the Twitter social network
+  ##
+  $scope.shareOnTwitter = ->
+    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}));
 ]

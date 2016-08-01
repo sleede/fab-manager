@@ -140,6 +140,8 @@ en:
       projects_show:
         # details of a projet
         project_description: "Project description"
+        share_on_facebook: "Share on Facebook"
+        share_on_twitter: "Share on Twitter"
         by_name: "By {{NAME}}"  # angular interpolation
         posted_on_: "Posted on"
         CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"  # messageFormat interpolation

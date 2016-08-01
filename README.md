@@ -217,12 +217,18 @@ See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- 
 
     TWITTER_NAME
 
-Identifier of the Twitter account, for witch the last tweet will be displayed on the home page.
+Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page. 
+It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
 
     TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
 
 Keys and secrets to access the twitter API.
 Retrieve them from https://apps.twitter.com
+
+    FACEBOOK_APP_ID
+
+This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
+If you do so, you'll be able to customize and get statistics about project shares on Facebook.
 
     Settings related to i18n
 

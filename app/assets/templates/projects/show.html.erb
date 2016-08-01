@@ -56,6 +56,11 @@
 
     </div>
 
+    <div class="text-center" id="social-share">
+      <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'share_on_facebook' | translate }}</a>
+      <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'share_on_twitter' | translate }}</a>
+    </div>
+
     <div class="wrapper-lg">
       <dir-disqus disqus-shortname="{{ disqusShortname }}" disqus-identifier="project_{{ project.id }}" disqus-url="{{ projectUrl }}" ready-to-bind="{{ project }}">
       </dir-disqus>

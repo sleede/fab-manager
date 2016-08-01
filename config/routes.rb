@@ -20,8 +20,6 @@ Rails.application.routes.draw do
 
   constraints :user_agent => /facebookexternalhit\/[0-9]|Twitterbot|Pinterest|Google.*snippet/ do
     root :to => 'social_bot#share', as: :bot_root
-    #TODO encode '#' in url with %23
-    # button => https://www.facebook.com/share.php?u=$URL
   end
 
   ## You can have the root of your site routed with "root"
