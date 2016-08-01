@@ -39,6 +39,12 @@
       <p ng-bind-html="event.description | breakFilter"></p>
     </div>
 
+
+    <div class="text-center" id="social-share">
+      <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'share_on_facebook' | translate }}</a>
+      <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'share_on_twitter' | translate }}</a>
+    </div>
+
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-4">

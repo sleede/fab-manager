@@ -140,8 +140,6 @@ fr:
       projects_show:
         # détails d'un projet
         project_description: "Description du projet"
-        share_on_facebook: "Partager sur Facebook"
-        share_on_twitter: "Partager sur Twitter"
         by_name: "Par {{NAME}}"  # angular interpolation
         posted_on_: "posté le"
         CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"  # messageFormat interpolation

@@ -63,4 +63,9 @@ class EventImageUploader < CarrierWave::Uploader::Base
   def filename
     "#{model.class.to_s.underscore}.#{file.extension}" if original_filename
   end
+
+  # return an array like [width, height]
+  def dimensions
+    ::MiniMagick::Image.open(file.file)[:dimensions]
+  end
 end

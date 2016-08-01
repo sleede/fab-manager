@@ -98,6 +98,8 @@ fr:
         filter: 'Filtre'
         confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # messageFormat interpolation (contexte : valider mon paiement de 20,00 €)
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
+        share_on_facebook: "Partager sur Facebook"
+        share_on_twitter: "Partager sur Twitter"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
