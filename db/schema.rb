@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728095026) do
+ActiveRecord::Schema.define(version: 20160801153454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -324,6 +324,12 @@ ActiveRecord::Schema.define(version: 20160728095026) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "plans", force: :cascade do |t|
     t.string   "name",               limit: 255
     t.integer  "amount"
@@ -384,8 +390,10 @@ ActiveRecord::Schema.define(version: 20160728095026) do
     t.string   "lastfm"
     t.string   "flickr"
     t.string   "job"
+    t.integer  "organization_id"
   end
 
+  add_index "profiles", ["organization_id"], name: "index_profiles_on_organization_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "project_steps", force: :cascade do |t|
@@ -751,6 +759,7 @@ ActiveRecord::Schema.define(version: 20160728095026) do
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "profiles", "organizations"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
   add_foreign_key "wallet_transactions", "users"
