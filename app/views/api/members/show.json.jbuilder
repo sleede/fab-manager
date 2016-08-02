@@ -24,6 +24,15 @@ json.profile do
   json.website @member.profile.website
   json.job @member.profile.job
   json.extract! @member.profile, :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
+  json.organization do
+    json.id @member.profile.organization.id
+    json.name @member.profile.organization.name
+    json.address do
+      json.id @member.profile.organization.address.id
+      json.address @member.profile.organization.address.address
+    end
+  end if @member.profile.organization
+
 end
 json.subscribed_plan do
   json.partial! 'api/shared/plan', plan: @member.subscribed_plan

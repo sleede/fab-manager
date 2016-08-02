@@ -116,6 +116,8 @@ en:
         confirmation_of_password_is_required: "Confirmation of password is required."
         confirmation_of_password_is_too_short_(minimum_8_characters): "Confirmation of password is too short (minimum 8 characters)."
         confirmation_mismatch_with_password: "Confirmation mismatch with password."
+        organization_name: "Organization name"
+        organization_address: "Organization address"
         date_of_birth: "Date of birth"
         date_of_birth_is_required: "Date of birth is required."
         website: "Website"
