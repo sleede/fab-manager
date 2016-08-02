@@ -116,6 +116,7 @@ en:
       subject: "A user account has been created"
       body:
         new_account_created: "A new user account has been created on the website:"
+        account_for_organization: "This account manage an organization:"
         invoicing_disabled_html: "Invoicing generation is <strong>disabled</strong> for this user."
 
     notify_admin_subscribed_plan:

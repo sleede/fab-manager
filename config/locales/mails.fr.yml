@@ -116,6 +116,7 @@ fr:
       subject: "Un compte utilisateur a été créé"
       body:
         new_account_created: "Un nouveau compte utilisateur vient d'être créé sur la plateforme :"
+        account_for_organization: "Ce compte gère une structure :"
         invoicing_disabled_html: "La génération de factures est <strong>désactivée</strong> pour cet utilisateur."
 
     notify_admin_subscribed_plan:
