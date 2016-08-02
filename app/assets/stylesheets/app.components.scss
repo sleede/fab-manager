@@ -559,3 +559,13 @@ padding: 10px;
   }
 }
 
+.checkbox-group {
+  display: flex;
+  justify-content: flex-start;
+
+  input[type=checkbox] {
+    font-size: 16px;
+    width: 2em;
+  }
+}
+

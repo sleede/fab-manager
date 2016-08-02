@@ -258,14 +258,16 @@ class API::MembersController < API::ApiController
         params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
                                       profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
                                      :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                     :user_avatar_attributes => [:id, :attachment, :_destroy], :address_attributes => [:id, :address]])
+                                     user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address],
+                                     organization_attributes: [:name, address_attributes: [:id, :address]]])
 
       elsif current_user.is_admin?
         params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled, :is_allow_contact, :is_allow_newsletter,
                                       :group_id, training_ids: [], tag_ids: [],
                                       profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
                                       :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                      user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address]])
+                                      user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address],
+                                      organization_attributes: [:name, address_attributes: [:id, :address]]])
 
       end
     end

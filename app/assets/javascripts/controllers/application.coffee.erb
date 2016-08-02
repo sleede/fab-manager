@@ -99,11 +99,18 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         $scope.ok = ->
           # try to create the account
           $scope.alerts = []
+          # remove 'organization' attribute
+          orga = $scope.user.organization
+          delete $scope.user.organization
+          # register on server
           Auth.register($scope.user).then (user) ->
             # creation successful
             $uibModalInstance.close(user)
           , (error) ->
             # creation failed...
+            # restore organization param
+            $scope.user.organization = orga
+            # display errors
             angular.forEach error.data.errors, (v, k) ->
               angular.forEach v, (err) ->
                 $scope.alerts.push
