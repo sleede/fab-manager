@@ -18,7 +18,11 @@
 - Statistics will include informations abouts events category, theme and age range
 - Ability to export the current statistics table to an Excel file
 - Ability to export every statistics on a given dates range to an Excel file
-- Unified members, subscriptions and reservations exports with the new statistics exports  
+- More fields in members exports
+- Unified members, subscriptions and reservations exports with the new statistics exports
+- Excel exports are now asynchronously generated and cached on the server for future identical requests
+- Users have the ability to create an organizational profile when creating an account
+- Organization informations will be used in invoices generation, if present
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
