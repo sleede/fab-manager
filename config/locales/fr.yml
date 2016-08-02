@@ -140,6 +140,8 @@ fr:
     facebook: "Facebook"
     twitter: "Twitter"
     echo_sciences: "Echosciences"
+    organization: "Structure"
+    organization_address: "Adresse de la structure"
     man: "Homme"
     woman: "Femme"
     without_subscriptions: "Sans Abonnement"
