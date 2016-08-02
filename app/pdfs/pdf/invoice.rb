@@ -47,13 +47,22 @@ module PDF
           text I18n.t('invoices.invoice_issued_on_DATE', DATE:I18n.l(invoice.created_at.to_date))
         end
 
-        # user's informations
-        if invoice.user.profile.address
+        # user/organization's informations
+        if invoice&.user&.profile&.organization
+          name = invoice.user.profile.organization.name
+        else
+          name = invoice.user.profile.full_name
+        end
+
+        if invoice&.user&.profile&.organization&.address
+          address = invoice.user.profile.organization.address.address
+        elsif invoice&.user&.profile&.address
           address = invoice.user.profile.address.address
         else
           address = ''
         end
-        text_box "<b>#{invoice.user.profile.full_name}</b>\n#{invoice.user.email}\n#{address}", :at => [bounds.width - 130, bounds.top - 49], :width => 130, :align => :right, :inline_format => true
+
+        text_box "<b>#{name}</b>\n#{invoice.user.email}\n#{address}", :at => [bounds.width - 130, bounds.top - 49], :width => 130, :align => :right, :inline_format => true
 
         # object
         move_down 25
