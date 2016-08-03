@@ -1,0 +1,1 @@
+json.partial! 'api/coupons/coupon', coupon: @coupon
