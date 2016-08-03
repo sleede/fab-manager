@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Christmas deals
+  code: XMAS10
+  percent_off: 10
+  valid_until: 2015-12-31 23:59:59
+  max_usages: 0
+  usages: 1
+  active: true
+  stp_coupon_id: a3OlfO4u
+
+two:
+  name: Summer discounts
+  code: SUNNYFABLAB
+  percent_off: 15
+  valid_until: <%= 1.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  max_usages: 10
+  usages: 9
+  active: true
+  stp_coupon_id: a42pm11w

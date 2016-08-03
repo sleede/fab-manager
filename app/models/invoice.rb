@@ -8,6 +8,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_items
   belongs_to :user
   belongs_to :wallet_transaction
+  belongs_to :coupon
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
 

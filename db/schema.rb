@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801153454) do
+ActiveRecord::Schema.define(version: 20160803104701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,19 @@ ActiveRecord::Schema.define(version: 20160801153454) do
 
   create_table "components", force: :cascade do |t|
     t.string "name", limit: 255, null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.integer  "percent_off"
+    t.datetime "valid_until"
+    t.integer  "max_usages"
+    t.integer  "usages"
+    t.boolean  "active"
+    t.string   "stp_coupon_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "credits", force: :cascade do |t|
@@ -226,8 +239,10 @@ ActiveRecord::Schema.define(version: 20160801153454) do
     t.text     "description"
     t.integer  "wallet_amount"
     t.integer  "wallet_transaction_id"
+    t.integer  "coupon_id"
   end
 
+  add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
   add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
@@ -755,6 +770,7 @@ ActiveRecord::Schema.define(version: 20160801153454) do
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
   add_foreign_key "exports", "users"
+  add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
