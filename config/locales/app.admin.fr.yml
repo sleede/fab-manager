@@ -144,6 +144,18 @@ fr:
         do_you_really_want_to_delete_this_subscription_plan: "Êtes-vous sûr(e) de vouloir supprimer cette formule d'abonnement ?"
         subscription_plan_was_successfully_deleted: "La formule d'abonnement a bien été supprimée."
         unable_to_delete_the_specified_subscription_an_error_occurred: "Impossible de supprimer l'abonnement spécifié, une erreur s'est produite."
+        coupons: "Codes promotionnels"
+        list_of_the_coupons: "Liste des codes promotionnels"
+        percentage_off: "Pourcentage de réduction"
+        status: "Statut"
+        add_a_new_coupon: "Ajouter un code promotionnel"
+        disabled: "Désactivé"
+        expired: "Expiré"
+        sold_out: "Épuisé"
+        active: "Actif"
+        do_you_really_want_to_delete_this_coupon: "Êtes-vous sûr(e) de vouloir supprimer ce code promotionnel ?"
+        coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."
+        unable_to_delete_the_specified_coupon_an_error_occurred: "Impossible de supprimer le code promotionnel, une erreur s'est produite."
 
       plans:
         new:

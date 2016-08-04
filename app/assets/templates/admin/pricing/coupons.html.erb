@@ -1,0 +1,24 @@
+<h2 translate>{{ 'list_of_the_coupons' }}</h2>
+
+<button type="button" class="btn btn-warning m-t-lg m-b" ui-sref="app.admin.coupons.new" translate>{{ 'add_a_new_coupon' }}</button>
+<table class="table">
+  <thead>
+  <tr>
+    <th>{{ 'name' | translate }}</th>
+    <th>{{ 'percentage_off' | translate }}</th>
+    <th>{{ 'status' | translate }}</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="coupon in coupons">
+    <td>{{coupon.name}}</td>
+    <td>{{coupon.percent_off}} %</td>
+    <td>{{getCouponStatus(coupon)}}</td>
+    <td>
+      <button type="button" class="btn btn-default" ui-sref="app.admin.coupons.edit({id:coupon.id})"><i class="fa fa-pencil-square-o"></i></button>
+      <button type="button" class="btn btn-danger" ng-click="deleteCoupon(coupons, coupon.id)"><i class="fa fa-trash"></i></button>
+    </td>
+  </tr>
+  </tbody>
+</table>

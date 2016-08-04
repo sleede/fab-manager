@@ -742,6 +742,9 @@ angular.module('application.router', ['ui.router']).
           trainingCreditsPromise: ['Credit', (Credit) ->
             Credit.query({creditable_type: 'Training'}).$promise
           ]
+          couponsPromise: ['Coupon', (Coupon) ->
+            Coupon.query().$promise
+          ]
 
       # plans
       .state 'app.admin.plans',
@@ -786,6 +789,27 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise
           ]
 
+      # coupons
+      .state 'app.admin.coupons.new',
+        url: '/admin/coupons/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/coupons/new.html" %>'
+            controller: 'NewCouponController'
+          resolve:
+            translations: [ 'Translations', (Translations) ->
+              Translations.query(['app.admin.coupons.new', 'app.shared.coupon']).$promise
+            ]
+      .state 'app.admin.coupons.edit',
+        url: '/admin/coupons/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/coupons/edit.html" %>'
+            controller: 'EditCouponController'
+          resolve:
+            translations: [ 'Translations', (Translations) ->
+              Translations.query(['app.admin.coupons.edit', 'app.shared.coupon']).$promise
+            ]
 
 
 

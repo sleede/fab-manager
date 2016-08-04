@@ -142,8 +142,20 @@ en:
         changes_have_been_successfully_saved: "Changes have been successfully saved."
         credit_was_successfully_saved: "Credit was successfully saved."
         do_you_really_want_to_delete_this_subscription_plan: "Do you really want to delete this subscription plan?"
-        subscription_plan_was_successfully_deleted: "Subscription plan was successfully delete."
+        subscription_plan_was_successfully_deleted: "Subscription plan was successfully deleted."
         unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
+        coupons: "Coupons"
+        list_of_the_coupons: "List of the coupons"
+        percentage_off: "Percentage off"
+        status: "Status"
+        add_a_new_coupon: "Add a new coupon"
+        disabled: "Disabled"
+        expired: "Expired"
+        sold_out: "Sold out"
+        active: "Active"
+        do_you_really_want_to_delete_this_coupon: "Do you really want to delete this coupon?"
+        coupon_was_successfully_deleted: "Coupon was successfully deleted."
+        unable_to_delete_the_specified_coupon_an_error_occurred: "Unable to delete the specified coupon, an error occurred."
 
       plans:
         new:
