@@ -1,5 +1,5 @@
 class Coupon < ActiveRecord::Base
-  has_many :invoice
+  has_many :invoices
 
   validates :code, presence: true
   validates :code, format: { with: /[A-Z0-9]+/ ,message: 'only caps letters and numbers'}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803104701) do
+ActiveRecord::Schema.define(version: 20160804073558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 20160803104701) do
     t.integer  "percent_off"
     t.datetime "valid_until"
     t.integer  "max_usages"
-    t.integer  "usages"
     t.boolean  "active"
     t.string   "stp_coupon_id"
     t.datetime "created_at",    null: false
