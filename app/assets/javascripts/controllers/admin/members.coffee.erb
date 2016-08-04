@@ -270,8 +270,8 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
 ##
 # Controller used in the member edition page
 ##
-Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'Wallet'
-, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, Wallet) ->
+Application.Controllers.controller "EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet'
+, ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet) ->
 
 
 
@@ -316,7 +316,11 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
   ## user wallet transactions
   $scope.transactions = transactionsPromise
 
+  ## used in wallet partial template to identify parent view
   $scope.view = 'member_edit'
+
+  # current active authentication provider
+  $scope.activeProvider = activeProviderPromise
 
 
   ##

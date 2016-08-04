@@ -875,6 +875,9 @@ angular.module('application.router', ['ui.router']).
           memberPromise: ['Member', '$stateParams', (Member, $stateParams)->
             Member.get(id: $stateParams.id).$promise
           ]
+          activeProviderPromise: ['AuthProvider', (AuthProvider) ->
+            AuthProvider.active().$promise
+          ]
           walletPromise: ['Wallet', '$stateParams', (Wallet, $stateParams)->
             Wallet.getWalletByUser(user_id: $stateParams.id).$promise
           ]

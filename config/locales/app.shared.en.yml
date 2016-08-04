@@ -100,6 +100,7 @@ en:
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
+        incomplete_profile: "Incomplete profile"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -233,6 +234,8 @@ en:
 
       user_admin:
         # partial form to edit/create an user (admin view)
+        user_profile: "Profil utilisateur"
+        warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
         group_is_required: "Group is required"
         disable_invoices_generation: "Disable invoices generation:"

@@ -9,7 +9,8 @@
       </div>
       <div class="col-md-8 b-l b-r">
         <section class="heading-title">
-          <h1>{{ 'user' | translate }} {{ user.name }}</h1>
+          <h1 class="inline">{{ 'user' | translate }} {{ user.name }}</h1>
+          <span class="label label-danger text-white" ng-show="user.need_completion" translate>{{ 'incomplete_profile' }}</span>
         </section>
 
       </div>
@@ -33,7 +34,14 @@
 
       <uib-tabset justified="true" class="m-t">
 
-        <uib-tab heading="Profil utilisateur">
+        <uib-tab heading="{{ 'user_profile' | translate }}">
+
+          <section class="panel panel-danger m-lg" ng-show="user.need_completion && activeProvider.providable_type !== 'DatabaseProvider'">
+            <div class="panel-body m-r" translate>
+              {{ 'warning_incomplete_user_profile_probably_imported_from_sso' }}
+            </div>
+          </section>
+
           <form role="form" name="userForm" class="form-horizontal col-md-8" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
 
             <section class="panel panel-default bg-light m-lg">

@@ -1,0 +1,26 @@
+<div class="alert alert-warning m-t">
+  {{ 'these_prices_match_machine_hours_rates_' | translate }} <span class="font-bold" translate>{{ '_without_subscriptions' }}</span>.
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th style="width:20%"  translate>{{ 'machines' }}</th>
+    <th style="width:20%" ng-repeat="group in groups">
+      <span class="text-u-c text-sm">{{group.name}}</span>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="machine in machines">
+    <td>
+      {{ machine.name }}
+    </td>
+    <td ng-repeat="group in groups">
+                  <span editable-number="findPriceBy(machinesPrices, machine.id, group.id).amount"
+                        onbeforesave="updatePrice($data, findPriceBy(machinesPrices, machine.id, group.id))">
+                      {{ findPriceBy(machinesPrices, machine.id, group.id).amount | currency}}
+                  </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

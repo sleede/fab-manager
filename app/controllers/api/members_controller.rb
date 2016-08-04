@@ -209,11 +209,7 @@ class API::MembersController < API::ApiController
     # ILIKE => PostgreSQL case-insensitive LIKE
     @query = @query.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
 
-    # remove unmerged profiles from list
     @members = @query.to_a
-    @members.delete_if { |u| u.need_completion? }
-
-    @members
 
   end
 
@@ -235,11 +231,7 @@ class API::MembersController < API::ApiController
       end
     end
 
-    # remove unmerged profiles from list
     @members = @members.to_a
-    @members.delete_if { |u| u.need_completion? }
-
-    @members
   end
 
   def mapping

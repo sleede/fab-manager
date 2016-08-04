@@ -1,0 +1,38 @@
+<button type="button" class="btn btn-warning m-b m-t" ng-click="addComponent()" translate>{{ 'add_a_material' }}</button>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th style="width:80%" translate>{{ 'name' }}</th>
+    <th style="width:20%"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="component in components">
+    <td>
+                  <span editable-text="component.name" e-cols="100" e-name="name" e-form="rowform" e-required>
+                    {{ component.name }}
+                  </span>
+    </td>
+    <td>
+      <!-- form -->
+      <form editable-form name="rowform" onbeforesave="saveComponent($data, component.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == component">
+        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+          <i class="fa fa-check"></i>
+        </button>
+        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelComponent(rowform, $index)" class="btn btn-default">
+          <i class="fa fa-times"></i>
+        </button>
+      </form>
+      <div class="buttons" ng-show="!rowform.$visible">
+        <button class="btn btn-default" ng-click="rowform.$show()">
+          <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+        </button>
+        <button class="btn btn-danger" ng-click="removeComponent($index)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

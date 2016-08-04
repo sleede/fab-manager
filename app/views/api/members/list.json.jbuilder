@@ -9,6 +9,7 @@ json.array!(@members) do |member|
     json.last_name member.profile.last_name
     json.phone member.profile.phone
   end
+  json.need_completion member.need_completion?
   json.group do
     json.name member.group.name
   end

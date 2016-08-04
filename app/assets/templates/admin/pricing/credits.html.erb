@@ -1,0 +1,97 @@
+<h2 class="m-t-lg" translate>{{ 'trainings' }}</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th style="width:20%" translate>{{ 'subscription' }}</th>
+    <th style="width:10%" translate>{{ 'credits' }}</th>
+    <th style="width:50%" translate>{{ 'related_trainings' }}</th>
+    <th style="width:20%"></th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr ng-repeat="(planId, trainingIds) in trainingCreditsGroups" ng-init="plan = getPlanFromId(planId)">
+    <td>
+      {{ plan | humanReadablePlanName: groups }}
+    </td>
+    <td>
+                      <span editable-text="plan.training_credit_nb" e-form="rowform" e-name="training_credits" e-required>
+                          {{ plan.training_credit_nb }}
+                      </span>
+    </td>
+    <td>
+                      <span editable-checklist="trainingIds" e-form="rowform" e-name="training_ids" e-ng-options="t.id as t.name for t in trainings" e-required>
+                          {{ showTrainings(trainingIds) }}
+                      </span>
+    </td>
+    <td>
+      <form editable-form name="rowform" onbeforesave="saveTrainingCredits($data, planId)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == trainingIds">
+        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+          <i class="fa fa-check"></i>
+        </button>
+        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelTrainingCredit(rowform)" class="btn btn-default">
+          <i class="fa fa-times"></i>
+        </button>
+      </form>
+      <div class="buttons" ng-show="!rowform.$visible">
+        <button class="btn btn-default" ng-click="rowform.$show()">
+          <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<h2 class="m-t-lg" translate>{{ 'machines' }}</h2>
+<div class="btn-group m-t-md m-b-md">
+  <button type="button" class="btn btn-warning" ng-click="addMachineCredit($event)" translate>{{ 'add_a_machine_credit' }}</button>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th style="width:20%" translate>{{ 'machine' }}</th>
+    <th style="width:10%" translate>{{ 'hours' }}</th>
+    <th style="width:50%" translate>{{ 'related_subscriptions' }}</th>
+    <th style="width:20%"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="mc in machineCredits">
+    <td>
+                  <span editable-select="mc.creditable_id" e-name="creditable_id" e-form="rowform" e-ng-options="m.id as m.name+' ( id. '+m.id+' )' for m in machines" e-required>
+                    {{ showCreditableName(mc) }}
+                  </span>
+    </td>
+    <td>
+                  <span editable-number="mc.hours" e-name="hours" e-form="rowform" e-required>
+                    {{ mc.hours }}
+                  </span>
+    </td>
+    <td>
+                  <span editable-select="mc.plan_id" e-ng-options="p.id as humanReadablePlanName(p, groups, 'short') for p in plans" e-name="plan_id" e-form="rowform">
+                    {{ getPlanFromId(mc.plan_id) | humanReadablePlanName: groups: 'short' }}
+                  </span>
+    </td>
+    <td>
+      <form editable-form name="rowform" onbeforesave="saveMachineCredit($data, mc.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == mc">
+        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+          <i class="fa fa-check"></i>
+        </button>
+        <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelMachineCredit(rowform, $index)" class="btn btn-default">
+          <i class="fa fa-times"></i>
+        </button>
+      </form>
+      <div class="buttons" ng-show="!rowform.$visible">
+        <button class="btn btn-default" ng-click="rowform.$show()">
+          <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+        </button>
+        <button class="btn btn-danger" ng-click="removeMachineCredit($index)">
+          <i class="fa fa-trash-o"></i> {{ 'delete' | translate }} (!)
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

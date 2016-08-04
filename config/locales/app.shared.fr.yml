@@ -100,6 +100,7 @@ fr:
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
+        incomplete_profile: "Profil incomplet"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
@@ -233,6 +234,8 @@ fr:
 
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)
+        user_profile: "Profil utilisateur"
+        warning_incomplete_user_profile_probably_imported_from_sso: "Attention : Le profil de cet utilisateur est incomplet. Comme l'authentification \"single sign-on\" (SSO) est actuellement activée, il s'agit probablement d'un compte importé mais non fusionné. N'y apportez aucune modification sauf si vous savez ce que vous faites."
         group: "Groupe"
         group_is_required: "Le groupe est requis."
         disable_invoices_generation: "Désactiver la génération de factures :"
