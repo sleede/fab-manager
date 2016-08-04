@@ -331,3 +331,15 @@ fr:
         debit_reservation_training: "Payer un reservation de formation"
         debit_reservation_machine: "Payer un reservation de machine"
         debit_reservation_event: "Payer un reservation d'évenement"
+
+      coupon:
+        code: "Code"
+        code_is_required: "Le code est requis."
+        code_must_be_composed_of_capital_letters_and_or_digits: "Le code doit être composé de lettres majuscules et/ou de chiffres."
+        percent_off: "Pourcentage de réduction"
+        percent_off_is_required: "Le pourcentage de réduction est requis."
+        percentage_must_be_between_0_and_100: "Le pourcentage doit être compris entre 0 et 100."
+        valid_until: "Valable jusqu'au (inclus)"
+        max_usages: "Nombre maximum d'utilisations autorisées"
+        max_usages_must_be_equal_or_greater_than_0: "Le nombre d'utilisations maximum doit être supérieur ou égal à 0."
+        enabled: "Activé"

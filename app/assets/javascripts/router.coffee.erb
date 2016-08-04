@@ -790,26 +790,26 @@ angular.module('application.router', ['ui.router']).
           ]
 
       # coupons
-      .state 'app.admin.coupons.new',
+      .state 'app.admin.coupons_new',
         url: '/admin/coupons/new'
         views:
           'main@':
             templateUrl: '<%= asset_path "admin/coupons/new.html" %>'
             controller: 'NewCouponController'
-          resolve:
-            translations: [ 'Translations', (Translations) ->
-              Translations.query(['app.admin.coupons.new', 'app.shared.coupon']).$promise
-            ]
-      .state 'app.admin.coupons.edit',
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.coupons_new', 'app.shared.coupon']).$promise
+          ]
+      .state 'app.admin.coupons_edit',
         url: '/admin/coupons/:id/edit'
         views:
           'main@':
             templateUrl: '<%= asset_path "admin/coupons/edit.html" %>'
             controller: 'EditCouponController'
-          resolve:
-            translations: [ 'Translations', (Translations) ->
-              Translations.query(['app.admin.coupons.edit', 'app.shared.coupon']).$promise
-            ]
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.coupons_edit', 'app.shared.coupon']).$promise
+          ]
 
 
 

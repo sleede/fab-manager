@@ -157,6 +157,11 @@ fr:
         coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."
         unable_to_delete_the_specified_coupon_an_error_occurred: "Impossible de supprimer le code promotionnel, une erreur s'est produite."
 
+      coupons_new:
+        # ajouter un code promotionnel
+        add_a_coupon: "Ajouter un code promotionnel"
+        unable_to_create_the_coupon_an_error_occurred: "Impossible de créer le code promotionnel : une erreur est survenue."
+
       plans:
         new:
           # ajouter une formule d'abonnement sur la plate-forme

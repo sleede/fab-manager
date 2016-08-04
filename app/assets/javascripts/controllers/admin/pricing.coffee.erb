@@ -319,9 +319,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.getCouponStatus = (coupon) ->
     unless coupon.active
       return _t('disabled')
-    unless moment(coupon.valid).isSameOrBefore()
+    if coupon.valid_until and moment(coupon.valid_until).isAfter()
       return _t('expired')
-    unless coupon.usages <= coupon.max_usages
+    if coupon.max_usages and coupon.usages <= coupon.max_usages
       return _t('sold_out')
     return _t('active')
 
