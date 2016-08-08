@@ -30,8 +30,11 @@ class API::CouponsController < API::ApiController
 
   def destroy
     authorize Coupon
-    @coupon.destroy
-    head :no_content
+    if @coupon.safe_destroy
+      head :no_content
+    else
+      head :unprocessable_entity
+    end
   end
 
   private

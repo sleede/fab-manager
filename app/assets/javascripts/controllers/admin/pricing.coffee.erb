@@ -350,7 +350,10 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
         , (error) ->
           console.error('[EditPricingController::deleteCoupon] Error: '+error.statusText) if error.statusText
-          growl.error(_t('unable_to_delete_the_specified_coupon_an_error_occurred'))
+          if error.status == 422
+            growl.error(_t('unable_to_delete_the_specified_coupon_already_in_use'))
+          else
+            growl.error(_t('unable_to_delete_the_specified_coupon_an_unexpected_error_occurred'))
 
 
 
