@@ -63,10 +63,11 @@ Application.Controllers.controller "EditCouponController", ["$scope", "$state", 
   ### PUBLIC SCOPE ###
 
 
+  ## Used in the form to freeze unmodifiable fields
+  $scope.mode = 'EDIT'
 
   ## Coupon to edit
   $scope.coupon = couponPromise
-
 
   ## Options for the validity per user
   $scope.validities = userValidities

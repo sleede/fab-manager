@@ -312,22 +312,6 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
 
   ##
-  # Return a textual status concerning the given coupon
-  # @param coupon {Object}
-  # @return {string}
-  ##
-  $scope.getCouponStatus = (coupon) ->
-    unless coupon.active
-      return _t('disabled')
-    if coupon.valid_until and moment(coupon.valid_until).isBefore()
-      return _t('expired')
-    if coupon.max_usages and coupon.usages >= coupon.max_usages
-      return _t('sold_out')
-    return _t('active')
-
-
-
-  ##
   # Delete a coupon from the server's database and, in case of success, from the list in memory
   # @param coupons {Array<Object>} should be called with $scope.coupons
   # @param id {number} ID of the coupon to delete

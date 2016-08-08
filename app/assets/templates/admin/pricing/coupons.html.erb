@@ -6,6 +6,7 @@
   <tr>
     <th translate>{{ 'name' }}</th>
     <th translate>{{ 'percentage_off' }}</th>
+    <th translate>{{ 'nb_of_usages' }}</th>
     <th translate>{{ 'status' }}</th>
     <th></th>
   </tr>
@@ -14,7 +15,8 @@
   <tr ng-repeat="coupon in coupons">
     <td>{{coupon.name}}</td>
     <td>{{coupon.percent_off}} %</td>
-    <td>{{getCouponStatus(coupon)}}</td>
+    <td>{{coupon.usages}}</td>
+    <td translate>{{coupon.status}}</td>
     <td>
       <button type="button" class="btn btn-default" ui-sref="app.admin.coupons_edit({id:coupon.id})"><i class="fa fa-pencil-square-o"></i></button>
       <button type="button" class="btn btn-danger" ng-click="deleteCoupon(coupons, coupon.id)"><i class="fa fa-trash"></i></button>

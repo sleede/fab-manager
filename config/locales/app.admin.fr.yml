@@ -147,6 +147,7 @@ fr:
         coupons: "Codes promotionnels"
         list_of_the_coupons: "Liste des codes promotionnels"
         percentage_off: "Pourcentage de réduction"
+        nb_of_usages: "Nombre d'utilisations"
         status: "Statut"
         add_a_new_coupon: "Ajouter un code promotionnel"
         disabled: "Désactivé"

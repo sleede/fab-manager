@@ -15,6 +15,7 @@
          class="form-control"
          ng-model="coupon.code"
          ng-pattern="/^[A-Z0-9]+$/"
+         ng-disabled="mode == 'EDIT'"
          required="required"/>
   <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.required" translate>{{ 'code_is_required' }}</span>
   <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.pattern" translate>{{ 'code_must_be_composed_of_capital_letters_and_or_digits' }}</span>
@@ -29,6 +30,7 @@
            ng-model="coupon.percent_off"
            min="0"
            max="100"
+           ng-disabled="mode == 'EDIT'"
            required="required"/>
     <span class="input-group-addon"><i class="fa fa-percent"></i></span>
   </div>
@@ -43,9 +45,8 @@
           class="form-control"
           ng-model="coupon.validity_per_user"
           required="required"
-          ng-disabled="method == 'PATCH'"
-          ng-options="( validity | translate ) for validity in validities"
-          required>
+          ng-disabled="mode == 'EDIT'"
+          ng-options="( validity | translate ) for validity in validities">
   </select>
   <span class="help-block error" ng-show="couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$error.required" translate>{{ 'validity_per_user_is_required' }}</span>
 </div>
@@ -61,9 +62,10 @@
            datepicker-options="datePicker.options"
            is-open="datePicker.opened"
            min-date="datePicker.minDate"
+           ng-disabled="mode == 'EDIT'"
            ng-click="toggleDatePicker($event)"/>
     <span class="input-group-btn">
-      <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)"><i class="fa fa-calendar"></i></button>
+      <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)" ng-disabled="mode == 'EDIT'"><i class="fa fa-calendar"></i></button>
     </span>
   </div>
 </div>
@@ -74,6 +76,7 @@
          name="coupon[max_usages]"
          class="form-control"
          ng-model="coupon.max_usages"
+         ng-disabled="mode == 'EDIT'"
          min="0"/>
   <span class="help-block error" ng-show="couponForm['coupon[max_usages]'].$dirty && couponForm['coupon[max_usages]'].$error.min" translate>{{ 'max_usages_must_be_equal_or_greater_than_0' }}</span>
 </div>

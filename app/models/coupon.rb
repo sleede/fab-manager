@@ -19,6 +19,18 @@ class Coupon < ActiveRecord::Base
     end
   end
 
+  def status
+    if not active?
+      'disabled'
+    elsif (!valid_until.nil?) and valid_until.at_end_of_day < DateTime.now
+      'expired'
+    elsif (!max_usages.nil?) and invoices.count >= max_usages
+      'sold_out'
+    else
+      'active'
+    end
+  end
+
   def create_stripe_coupon
     StripeWorker.perform_async(:create_stripe_coupon, id)
   end

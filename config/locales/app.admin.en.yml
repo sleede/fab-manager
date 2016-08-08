@@ -147,6 +147,7 @@ en:
         coupons: "Coupons"
         list_of_the_coupons: "List of the coupons"
         percentage_off: "Percentage off"
+        nb_of_usages: "Number of usages"
         status: "Status"
         add_a_new_coupon: "Add a new coupon"
         disabled: "Disabled"
