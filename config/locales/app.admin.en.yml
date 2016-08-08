@@ -157,6 +157,15 @@ en:
         coupon_was_successfully_deleted: "Coupon was successfully deleted."
         unable_to_delete_the_specified_coupon_an_error_occurred: "Unable to delete the specified coupon, an error occurred."
 
+      coupons_new:
+        # ajouter un code promotionnel
+        add_a_coupon: "Add a coupon"
+        unable_to_create_the_coupon_an_error_occurred: "Unable to create the coupon: an error occurred."
+
+      coupons_edit:
+        # mettre à jour un code promotionnel
+        unable_to_update_the_coupon_an_error_occurred: "Unable to update the coupon: an error occurred."
+
       plans:
         new:
           # add a subscription plan on the platform
