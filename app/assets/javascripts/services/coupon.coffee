@@ -5,4 +5,7 @@ Application.Services.factory 'Coupon', ["$resource", ($resource)->
     {id: "@id"},
     update:
       method: 'PUT'
+    validate:
+      method: 'POST'
+      url: '/api/coupons/validate'
 ]

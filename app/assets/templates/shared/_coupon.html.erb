@@ -1,0 +1,20 @@
+<div class="form-group m-b-lg" ng-show="show">
+  <a ng-click="input = true" ng-hide="input" class="b-b">J'ai un code promo !</a>
+
+  <div ng-show="input">
+    <label for="coupon_code">Code : </label>
+    <div class="input-group">
+      <input type="text"
+             class="form-control"
+             name="coupon_code"
+             ng-model="couponCode"
+             id="coupon_code"
+             ng-model-options='{ debounce: 1000 }'
+             ng-change='validateCode()'/>
+      <span class="input-group-addon" ng-class="{'label-success': valid, 'label-danger text-white': !valid}">
+        <i class="fa fa-times" ng-hide="valid"></i>
+        <i class="fa fa-check" ng-show="valid"></i>
+      </span>
+    </div>
+  </div>
+</div>

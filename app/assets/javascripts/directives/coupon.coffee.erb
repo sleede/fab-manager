@@ -1,0 +1,41 @@
+Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, growl, _t) ->
+  {
+    restrict: 'E'
+    scope:
+      show: '='
+    templateUrl: '<%= asset_path "shared/_coupon.html" %>'
+    link: (scope, element, attributes) ->
+
+      # default: do not enable code input
+      scope.input = false
+
+      # default: coupon code is not valid
+      scope.valid = false
+
+      # for dirty checking and request response waiting
+      scope.pending = true
+
+      # binding for the code inputed
+      scope.couponCode = null
+
+
+      scope.closeAlert = (index) ->
+        scope.alerts.splice(index, 1);
+
+      ##
+      # Callback to validate the code
+      ##
+      scope.validateCode = ->
+        unless scope.couponCode == ''
+          Coupon.validate {code: scope.couponCode}, (res) ->
+            scope.valid = true
+            growl.success(res.percent_off+' % de réduction')
+            console.info(res)
+          , (err) ->
+            scope.valid = false
+            growl.error(_t(err.data.status))
+            console.error(err)
+  }
+]
+
+
