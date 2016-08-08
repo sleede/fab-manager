@@ -10,6 +10,7 @@ class Coupon < ActiveRecord::Base
   validates :code, uniqueness: true
   validates :percent_off, presence: true
   validates :percent_off, :inclusion => 0..100
+  validates :validity_per_user, presence: true
 
   def safe_destroy
     if self.invoices.size == 0

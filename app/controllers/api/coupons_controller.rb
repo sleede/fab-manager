@@ -26,7 +26,7 @@ class API::CouponsController < API::ApiController
     else
       status = @coupon.status
       if status != 'active'
-        render json: {status: status}, status: :unauthorized
+        render json: {status: status}, status: :unprocessable_entity
       else
         render :validate, status: :ok, location: @coupon
       end

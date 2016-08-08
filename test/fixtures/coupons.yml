@@ -5,10 +5,9 @@ one:
   code: XMAS10
   percent_off: 10
   valid_until: 2015-12-31 23:59:59
-  max_usages: 0
-  usages: 1
+  max_usages: nil
   active: true
-  stp_coupon_id: a3OlfO4u
+  validity_per_user: once
 
 two:
   name: Summer discounts
@@ -16,6 +15,5 @@ two:
   percent_off: 15
   valid_until: <%= 1.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   max_usages: 10
-  usages: 9
   active: true
-  stp_coupon_id: a42pm11w
+  validity_per_user: always
