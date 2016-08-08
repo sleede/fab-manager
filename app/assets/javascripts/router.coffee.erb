@@ -807,6 +807,9 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/coupons/edit.html" %>'
             controller: 'EditCouponController'
         resolve:
+          couponPromise: ['Coupon', '$stateParams', (Coupon, $stateParams) ->
+            Coupon.get({id: $stateParams.id}).$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.coupons_edit', 'app.shared.coupon']).$promise
           ]

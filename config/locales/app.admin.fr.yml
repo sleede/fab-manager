@@ -162,6 +162,10 @@ fr:
         add_a_coupon: "Ajouter un code promotionnel"
         unable_to_create_the_coupon_an_error_occurred: "Impossible de créer le code promotionnel : une erreur est survenue."
 
+      coupons_edit:
+        # mettre à jour un code promotionnel
+        unable_to_update_the_coupon_an_error_occurred: "Impossible de mettre à jour le code promotionnel : une erreur est survenue."
+
       plans:
         new:
           # ajouter une formule d'abonnement sur la plate-forme

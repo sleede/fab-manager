@@ -31,7 +31,7 @@
         <ng-include src="'<%= asset_path 'admin/coupons/_form.html' %>'"></ng-include>
 
         <div class="panel-footer no-padder">
-          <input type="submit" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="couponForm.$invalid"/>
+          <input type="button" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="couponForm.$invalid" ng-click="updateCoupon()"/>
         </div>
       </form>
     </div>
