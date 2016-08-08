@@ -161,7 +161,7 @@ fr:
       coupons_new:
         # ajouter un code promotionnel
         add_a_coupon: "Ajouter un code promotionnel"
-        unable_to_create_the_coupon_an_error_occurred: "Impossible de créer le code promotionnel : une erreur est survenue."
+        unable_to_create_the_coupon_check_code_already_used: "Impossible de créer le code promotionnel. Vérifiez que le code n'est pas utilisé."
 
       coupons_edit:
         # mettre à jour un code promotionnel

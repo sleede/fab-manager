@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804073558) do
+ActiveRecord::Schema.define(version: 20160808113930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 20160804073558) do
     t.datetime "valid_until"
     t.integer  "max_usages"
     t.boolean  "active"
-    t.string   "stp_coupon_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "validity_per_user"
   end
 
   create_table "credits", force: :cascade do |t|

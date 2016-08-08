@@ -63,13 +63,15 @@ Rails.application.routes.draw do
     get '/last_subscribed/:last' => "members#last_subscribed"
     get '/feeds/twitter_timelines' => "feeds#twitter_timelines"
 
-    get 'pricing' => "pricing#index"
-    put 'pricing' => "pricing#update"
+    get 'pricing' => 'pricing#index'
+    put 'pricing' => 'pricing#update'
 
     resources :prices, only: [:index, :update] do
       post 'compute', on: :collection
     end
-    resources :coupons
+    resources :coupons do
+      post 'validate' => 'coupons#validate'
+    end
 
     resources :trainings_pricings, only: [:index, :update]
 

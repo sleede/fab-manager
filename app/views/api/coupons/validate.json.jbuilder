@@ -1,0 +1,1 @@
+json.extract! @coupon, :id, :code, :percent_off, :stp_coupon_id

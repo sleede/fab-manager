@@ -1,3 +1,9 @@
+### COMMON CODE ###
+
+# The validity per user defines how many time a user may ba able to use the same coupon
+# Here are the various options for this parameter
+userValidities = ['once', 'forever']
+
 
 ##
 # Controller used in the coupon creation page
@@ -8,6 +14,9 @@ Application.Controllers.controller "NewCouponController", ["$scope", "$state",'C
   ## Values for the coupon currently created
   $scope.coupon =
     active: true
+
+  ## Options for the validity per user
+  $scope.validities = userValidities
 
   ## Default parameters for AngularUI-Bootstrap datepicker (used for coupon validity limit selection)
   $scope.datePicker =
@@ -37,7 +46,7 @@ Application.Controllers.controller "NewCouponController", ["$scope", "$state",'C
     Coupon.save coupon: $scope.coupon, (coupon) ->
       $state.go('app.admin.pricing')
     , (err)->
-      growl.error(_t('unable_to_create_the_coupon_an_error_occurred'))
+      growl.error(_t('unable_to_create_the_coupon_check_code_already_used'))
       console.error(err)
 ]
 
@@ -57,6 +66,10 @@ Application.Controllers.controller "EditCouponController", ["$scope", "$state", 
 
   ## Coupon to edit
   $scope.coupon = couponPromise
+
+
+  ## Options for the validity per user
+  $scope.validities = userValidities
 
   ## Default parameters for AngularUI-Bootstrap datepicker (used for coupon validity limit selection)
   $scope.datePicker =

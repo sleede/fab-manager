@@ -36,6 +36,20 @@
   <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'percentage_must_be_between_0_and_100' }}</span>
 </div>
 
+<div class="form-group" ng-class="{'has-error': couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$invalid}">
+  <label for="coupon[validity_per_user]">{{ 'validity_per_user' | translate }} *</label>
+  <select id="coupon[validity_per_user]"
+          name="coupon[validity_per_user]"
+          class="form-control"
+          ng-model="coupon.validity_per_user"
+          required="required"
+          ng-disabled="method == 'PATCH'"
+          ng-options="( validity | translate ) for validity in validities"
+          required>
+  </select>
+  <span class="help-block error" ng-show="couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$error.required" translate>{{ 'validity_per_user_is_required' }}</span>
+</div>
+
 <div class="form-group">
   <label for="coupon[valid_until]" translate>{{ 'valid_until' }}</label>
   <div class="input-group">

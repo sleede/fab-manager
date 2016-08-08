@@ -307,6 +307,7 @@ en:
         private_profile: "Private profile"
 
       wallet:
+        # wallet
         wallet: 'Wallet'
         your_wallet_amount: 'Your amount available'
         wallet_amount: 'Amount available'
@@ -333,12 +334,17 @@ en:
         debit_reservation_event: "Debit by reservation of event"
 
       coupon:
+        # promotional coupon (creation/edition form)
         code: "Code"
         code_is_required: "Code is required."
         code_must_be_composed_of_capital_letters_and_or_digits: "The code must be composed of capital letters and/or digits."
         percent_off: "Percentage off"
         percent_off_is_required: "Percentage off is required."
         percentage_must_be_between_0_and_100: "Percentage must be between 0 and 100."
+        validity_per_user: "Validity per user"
+        once: "Once"
+        forever: "Forever"
+        validity_per_user_is_required: "Validity per user is required."
         valid_until: "Valid until (included)"
         max_usages: "Maximum usages allowed"
         max_usages_must_be_equal_or_greater_than_0: "The maximum usages allowed must be greater than 0."

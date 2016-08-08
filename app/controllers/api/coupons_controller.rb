@@ -19,6 +19,21 @@ class API::CouponsController < API::ApiController
     end
   end
 
+  def validate
+    @coupon = Coupon.find_by_code(params[:code])
+    if @coupon.nil?
+      render json: {status: 'rejected'}, status: :not_found
+    elsif not @coupon.active?
+      render json: {status: 'disabled'}, status: :unauthorized
+    elsif @coupon.valid_until.is < DateTime.now
+      render json: {status: 'expired'}, status: :unauthorized
+    elsif @coupon.max_usages >= @coupon.invoices.size
+      render json: {status: 'sold_out'}, status: :unauthorized
+    else
+      render :validate, status: :ok, location: @coupon
+    end
+  end
+
   def update
     authorize Coupon
     if @coupon.update(coupon_params)
@@ -43,6 +58,6 @@ class API::CouponsController < API::ApiController
   end
 
   def coupon_params
-    params.require(:coupon).permit(:name, :code, :percent_off, :valid_until, :max_usages, :active)
+    params.require(:coupon).permit(:name, :code, :percent_off, :validity_per_user, :valid_until, :max_usages, :active)
   end
 end
