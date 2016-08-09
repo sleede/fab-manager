@@ -636,15 +636,26 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
   ##
+  # Format the parameters expected by /api/prices/compute and return the resulting object
+  # @param reservation {Object} as returned by mkReservation()
+  # @param coupon {Object} Coupon as returned from the API
+  # @return {{reservation:Object, coupon_id:number}}
+  ##
+  mkComputePriceParams = (reservation, coupon) ->
+    params = {reservation: reservation}
+    if coupon
+      params['coupon_id'] = coupon.id
+    params
+
+
+
+  ##
   # Update the total price of the current selection/reservation
   ##
   updateCartPrice = ->
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
-      params = {reservation: r}
-      if $scope.coupon.applied
-        params['coupon_id'] = $scope.coupon.applied.id
-      Price.compute params, (res) ->
+      Price.compute mkComputePriceParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
         setSlotsDetails(res.details)
     else
@@ -759,7 +770,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkComputePriceParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
@@ -816,7 +827,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkComputePriceParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
       controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', '$locale', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, $locale) ->

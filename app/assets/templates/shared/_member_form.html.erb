@@ -162,7 +162,7 @@
         <span class="help-block" ng-show="userForm['user[password_confirmation]'].$error.match" translate>{{ 'confirmation_mismatch_with_password' }}</span>
       </div>
 
-      <div class="form-group" ng-show="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$invalid}">
+      <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
           <input type="hidden"
@@ -179,7 +179,7 @@
         <span class="help-block" ng-show="userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$error.required" translate>{{ 'organization_name_is_required' }}</span>
       </div>
 
-      <div class="form-group" ng-show="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
+      <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
           <input type="hidden"
