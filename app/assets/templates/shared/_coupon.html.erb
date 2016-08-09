@@ -1,8 +1,8 @@
 <div class="form-group m-b-lg" ng-show="show">
-  <a ng-click="input = true" ng-hide="input" class="b-b">J'ai un code promo !</a>
+  <a ng-click="code. input = true" ng-hide="code.input" class="b-b" translate>{{ '  i_have_a_coupon' }}</a>
 
-  <div ng-show="input">
-    <label for="coupon_code">Code : </label>
+  <div ng-show="code.input">
+    <label for="coupon_code" translate>{{ 'code_' }}</label>
     <div class="input-group">
       <input type="text"
              class="form-control"
@@ -11,9 +11,10 @@
              id="coupon_code"
              ng-model-options='{ debounce: 1000 }'
              ng-change='validateCode()'/>
-      <span class="input-group-addon" ng-class="{'label-success': valid, 'label-danger text-white': !valid}">
-        <i class="fa fa-times" ng-hide="valid"></i>
-        <i class="fa fa-check" ng-show="valid"></i>
+      <span class="input-group-addon" ng-class="{'label-success': status == 'valid', 'label-danger text-white': status == 'invalid'}">
+        <i class="fa fa-spinner fa-pulse fa-fw" ng-show="status == 'pending'"></i>
+        <i class="fa fa-times" ng-show="status == 'invalid'"></i>
+        <i class="fa fa-check" ng-show="status == 'valid'"></i>
       </span>
     </div>
   </div>

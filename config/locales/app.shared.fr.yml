@@ -349,3 +349,13 @@ fr:
         max_usages: "Nombre maximum d'utilisations autorisées"
         max_usages_must_be_equal_or_greater_than_0: "Le nombre d'utilisations maximum doit être supérieur ou égal à 0."
         enabled: "Activé"
+
+      coupon_input:
+        # code promotionnel (zone de saisie pour les utilisateurs)
+        i_have_a_coupon: "J'ai un code promo !"
+        code_: "Code :"
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{PERCENT}} %."  # angular interpolation
+        unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
+        unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
+        unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
+        unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."
