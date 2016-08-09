@@ -14,9 +14,10 @@ class Price < ActiveRecord::Base
   # @param [plan_id] {Number} if the user is subscribing to a plan at the same time of his reservation, specify the plan's ID here
   # @param [nb_places] {Number} for _reservable_ of type Event, pass here the number of booked places
   # @param [nb_reduced_places] {Number} for _reservable_ of type Event, pass here the number of booked places at reduced price
+  # @param [coupon_id] {Number} ID of the coupon to apply to the total price
   # @return {Hash} total and price detail
   ##
-  def self.compute(admin, user, reservable, slots, plan_id = nil, nb_places = nil, nb_reduced_places = nil)
+  def self.compute(admin, user, reservable, slots, plan_id = nil, nb_places = nil, nb_reduced_places = nil, coupon_id = nil)
     _amount = 0
     _elements = Hash.new
     _elements[:slots] = Array.new
@@ -108,6 +109,12 @@ class Price < ActiveRecord::Base
     unless plan_id.nil?
       _elements[:plan] = plan.amount
       _amount += plan.amount
+    end
+
+    # === apply Coupon if any ===
+    unless coupon_id.nil?
+      _coupon = Coupon.find(coupon_id)
+      _amount = _amount - (_amount  * _coupon.percent_off / 100)
     end
 
     # return result

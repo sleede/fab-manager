@@ -268,8 +268,8 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
 # This controller workflow is pretty similar to the trainings reservation controller.
 ##
 
-Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig',
-($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'machinePromise', 'settingsPromise', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig',
+($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, machinePromise, settingsPromise, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
 
 
 
@@ -309,6 +309,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## total amount of the bill to pay
   $scope.amountTotal = 0
 
+  ## Discount coupon to apply to the basket, if any
+  $scope.coupon =
+      applied: null
+
   ## is the user allowed to change the date of his booking
   $scope.enableBookingMove = true
 
@@ -328,7 +332,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     member: {}
 
   ## current machine to reserve
-  $scope.machine = {}
+  $scope.machine = machinePromise
 
   ## fullCalendar (v2) configuration
   $scope.calendarConfig = CalendarConfig
@@ -599,11 +603,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     if $scope.currentUser.role isnt 'admin'
       $scope.ctrl.member = $scope.currentUser
 
-    $scope.machine = Machine.get {id: $stateParams.id}
-    , ->
-      return
-    , ->
-      $state.go('app.public.machines_list')
+    # watch when a coupon is applied to re-compute the total price
+    $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+      unless newValue == null and oldValue == null
+        updateCartPrice()
 
 
 
@@ -638,7 +641,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   updateCartPrice = ->
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
-      Price.compute {reservation: r}, (res) ->
+      params = {reservation: r}
+      if $scope.coupon.applied
+        params['coupon_id'] = $scope.coupon.applied.id
+      Price.compute params, (res) ->
         $scope.amountTotal = res.price
         setSlotsDetails(res.details)
     else

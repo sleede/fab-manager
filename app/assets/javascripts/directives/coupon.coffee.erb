@@ -3,6 +3,7 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
     restrict: 'E'
     scope:
       show: '='
+      coupon: '='
     templateUrl: '<%= asset_path "shared/_coupon.html" %>'
     link: ($scope, element, attributes) ->
 
@@ -24,12 +25,15 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
       $scope.validateCode = ->
         if $scope.couponCode == ''
           $scope.status = 'pending'
+          $scope.coupon = null
         else
           Coupon.validate {code: $scope.couponCode}, (res) ->
             $scope.status = 'valid'
+            $scope.coupon = res
             growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
           , (err) ->
             $scope.status = 'invalid'
+            $scope.coupon = null
             growl.error(_t('unable_to_apply_the_coupon_because_'+err.data.status))
   }
 ]

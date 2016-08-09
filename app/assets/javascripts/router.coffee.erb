@@ -351,6 +351,9 @@ angular.module('application.router', ['ui.router']).
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
           ]
+          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams)->
+            Machine.get(id: $stateParams.id).$promise
+          ]
           settingsPromise: ['Setting', (Setting)->
             Setting.query(names: "['machine_explications_alert',
                                    'booking_window_start',
