@@ -152,8 +152,7 @@ class Reservation < ActiveRecord::Base
           self.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
-          total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-          self.invoice.total = total
+          set_total_and_coupon(coupon_code)
           save!
           #
           # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
@@ -188,7 +187,7 @@ class Reservation < ActiveRecord::Base
           card.delete if card
           self.stp_invoice_id = stp_invoice.id
           self.invoice.stp_invoice_id = stp_invoice.id
-          self.invoice.total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+          set_total_and_coupon(coupon_code)
           save!
         rescue Stripe::CardError => card_error
           clear_payment_info(card, stp_invoice, invoice_items)
@@ -285,16 +284,14 @@ class Reservation < ActiveRecord::Base
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, expired_at: nil}
         if subscription.save_with_local_payment(false)
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, description: subscription.plan.name, subscription_id: subscription.id)
-          total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-          self.invoice.total = total
+          set_total_and_coupon(coupon_code)
           save!
         else
           errors[:card] << subscription.errors[:card].join
           return false
         end
       else
-        total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-        self.invoice.total = total
+        set_total_and_coupon(coupon_code)
         save!
       end
 
@@ -303,6 +300,7 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  private
   def machine_not_already_reserved
     already_reserved = false
     self.slots.each do |slot|
@@ -371,5 +369,22 @@ class Reservation < ActiveRecord::Base
         self.invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
       end
     end
+  end
+
+  ##
+  # Set the total price to the reservation's invoice, summing its whole items.
+  # Additionally a coupon may be applied to this invoice to make a discount on the total price
+  # @param [coupon_code] {String} optional coupon code to apply to the invoice
+  ##
+  def set_total_and_coupon(coupon_code = nil)
+    total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+
+    unless coupon_code.nil?
+      cp = Coupon.find_by_code(coupon_code)
+      total = total - (total  * cp.percent_off / 100)
+      self.invoice.coupon_id = cp.id
+    end
+
+    self.invoice.total = total
   end
 end

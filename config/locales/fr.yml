@@ -86,6 +86,7 @@ fr:
       one: "Une place à tarif réduit"
       other: "%{count} places à tarif réduit"
     reservation_other: "Réservation (autre)"
+    coupon_CODE_discount_of_PERCENT: "Code %{CODE} : remise de %{PERCENT} %"
     total_including_all_taxes: "Total TTC"
     including_VAT_RATE: "Dont TVA %{RATE}%"
     including_total_excluding_taxes: "Dont total HT"

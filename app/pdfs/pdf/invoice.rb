@@ -83,6 +83,8 @@ module PDF
               object = subscription_verbose(invoice.invoiced, invoice.user)
             when 'OfferDay'
               object = offer_day_verbose(invoice.invoiced, invoice.user)
+            else
+              puts "ERROR : specified invoiced type (#{invoice.invoiced_type}) is unknown"
           end
         end
         text I18n.t('invoices.object')+' '+object
@@ -134,6 +136,16 @@ module PDF
 
           data += [ [details, number_to_currency(price)] ]
           total_calc += price
+        end
+
+        # subtract the coupon, if any
+        unless invoice.coupon_id.nil?
+          cp = invoice.coupon
+          discount = total_calc  * cp.percent_off / 100
+          total_calc = total_calc - discount
+
+          # add a row for the coupon
+          data += [ [I18n.t('invoices.coupon_CODE_discount_of_PERCENT', CODE: cp.code, PERCENT: cp.percent_off), number_to_currency(-discount)] ]
         end
 
         # total verification
@@ -215,16 +227,20 @@ module PDF
           payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
 
         else
+          # subtract the wallet amount for this invoice from the total
           if invoice.wallet_amount
             wallet_amount = invoice.wallet_amount / 100.0
             total = total - wallet_amount
           end
 
+          # payment method
           if invoice.stp_invoice_id
             payment_verbose = I18n.t('invoices.settlement_by_debit_card')
           else
             payment_verbose = I18n.t('invoices.settlement_done_at_the_reception')
           end
+
+          # if the invoice was 100% payed with the wallet ...
           if total == 0 and wallet_amount
             payment_verbose = I18n.t('invoices.settlement_by_wallet')
           end

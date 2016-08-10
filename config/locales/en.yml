@@ -86,6 +86,7 @@ en:
       one: "One reduced rate ticket"
       other: "%{count} reduced rate tickets"
     reservation_other: "Reservation (other)"
+    coupon_CODE_discount_of_PERCENT: "Coupon %{CODE}: discount of %{PERCENT}%"
     total_including_all_taxes: "Total incl. all taxes"
     including_VAT_RATE: "Including VAT %{RATE}%"
     including_total_excluding_taxes: "Including Total excl. taxes"
