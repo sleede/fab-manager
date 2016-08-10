@@ -316,9 +316,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## is the user allowed to change the date of his booking
   $scope.enableBookingMove = true
 
-  ## how many hours before the reservation, the user is still allowed to change his booking
-  $scope.moveBookingDelay = 24
-
   ## list of plans, classified by group
   $scope.plansClassifiedByGroup = []
   for group in groupsPromise
@@ -636,15 +633,16 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
   ##
-  # Format the parameters expected by /api/prices/compute and return the resulting object
+  # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
   # @param reservation {Object} as returned by mkReservation()
   # @param coupon {Object} Coupon as returned from the API
   # @return {{reservation:Object, coupon_id:number}}
   ##
-  mkComputePriceParams = (reservation, coupon) ->
-    params = {reservation: reservation}
-    if coupon
-      params['coupon_id'] = coupon.id
+  mkRequestParams = (reservation, coupon) ->
+    params =
+      reservation: reservation
+      coupon_code: (coupon.code if coupon)
+
     params
 
 
@@ -655,7 +653,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   updateCartPrice = ->
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
-      Price.compute mkComputePriceParams(r, $scope.coupon.applied), (res) ->
+      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
         setSlotsDetails(res.details)
     else
@@ -770,12 +768,15 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         reservation: ->
           reservation
         price: ->
-          Price.compute(mkComputePriceParams(reservation, $scope.coupon.applied)).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $locale, $filter) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $locale, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -788,8 +789,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         # Reservation
         $scope.reservation = reservation
 
+        # Currency symbol or abreviation for the current locale
         $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
+        # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
 
         ##
@@ -801,7 +804,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           else
             $scope.attempting = true
             $scope.reservation.card_token = response.id
-            Reservation.save reservation: $scope.reservation, (reservation) ->
+            Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
@@ -827,24 +830,30 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         reservation: ->
           reservation
         price: ->
-          Price.compute(mkComputePriceParams(reservation, $scope.coupon.applied)).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', '$locale', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, $locale) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', '$locale', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, $locale, coupon) ->
+
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
-        # Price
+        # Global price (total of all items)
         $scope.price = price.price
 
-        # price to pay
+        # Price to pay (wallet deducted)
         $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # Reservation
         $scope.reservation = reservation
 
+        # Currency symbol or abreviation for the current locale
         $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
+        # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
 
         # Button label
@@ -861,7 +870,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         ##
         $scope.ok = ->
           $scope.attempting = true
-          Reservation.save reservation: $scope.reservation, (reservation) ->
+          Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
             $uibModalInstance.close(reservation)
             $scope.attempting = true
           , (response)->

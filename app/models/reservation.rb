@@ -139,7 +139,7 @@ class Reservation < ActiveRecord::Base
     invoice_items
   end
 
-  def save_with_payment
+  def save_with_payment(coupon_code = nil)
     build_invoice(user: user)
     invoice_items = generate_invoice_items
     if valid?
@@ -259,11 +259,11 @@ class Reservation < ActiveRecord::Base
   end
 
 
-  def save_with_local_payment
+  def save_with_local_payment(coupon_code = nil)
     if user.invoicing_disabled?
       if valid?
 
-        ### generate invoice only for calcul price, to refactoring!!
+        ### generate invoice only for calcul price, TODO refactor!!
         build_invoice(user: user)
         generate_invoice_items(true)
         @wallet_amount_debit = get_wallet_amount_debit
@@ -353,13 +353,14 @@ class Reservation < ActiveRecord::Base
   end
 
   def get_wallet_amount_debit
-    total = self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0
+    total = (self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
     if plan_id.present?
       plan = Plan.find(plan_id)
       total += plan.amount
     end
     wallet_amount = (user.wallet.amount * 100).to_i
-    return wallet_amount >= total ? total : wallet_amount
+
+    wallet_amount >= total ? total : wallet_amount
   end
 
   def debit_user_wallet
