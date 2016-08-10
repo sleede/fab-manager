@@ -126,7 +126,7 @@ _reserveMachine = (machine, e) ->
 
               # modal is close with validation
               $scope.ok = ->
-                $state.go('app.logged.trainings_reserve')
+                $state.go('app.logged.trainings_reserve', {id: $scope.machine.trainings[0].id})
                 $uibModalInstance.close(machine)
 
               # modal is closed with escaping
