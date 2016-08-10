@@ -19,12 +19,13 @@ class Reservation < ActiveRecord::Base
   after_save :update_event_nb_free_places, if: Proc.new { |reservation| reservation.reservable_type == 'Event' }
   after_create :debit_user_wallet
 
-  #
+  ##
   # Generate an array of {Stripe::InvoiceItem} with the elements in the current reservation, price included.
   # The training/machine price is depending of the member's group, subscription and credits already used
   # @param on_site {Boolean} true if an admin triggered the call
-  #
-  def generate_invoice_items(on_site = false)
+  # @param coupon_code {String} pass a valid code to appy a coupon
+  ##
+  def generate_invoice_items(on_site = false, coupon_code = nil)
 
     # returning array
     invoice_items = []
@@ -125,6 +126,18 @@ class Reservation < ActiveRecord::Base
 
     end
 
+    # === Coupon ===
+    unless coupon_code.nil?
+      cp = Coupon.find_by_code(coupon_code)
+      total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+      invoice_items << Stripe::InvoiceItem.create(
+          customer: user.stp_customer_id,
+          amount: -(total  * cp.percent_off / 100),
+          currency: Rails.application.secrets.stripe_currency,
+          description: "coupon #{cp.code}"
+      )
+    end
+
     @wallet_amount_debit = get_wallet_amount_debit
     if @wallet_amount_debit != 0 and !on_site
       invoice_items << Stripe::InvoiceItem.create(
@@ -141,7 +154,7 @@ class Reservation < ActiveRecord::Base
 
   def save_with_payment(coupon_code = nil)
     build_invoice(user: user)
-    invoice_items = generate_invoice_items
+    invoice_items = generate_invoice_items(false, coupon_code)
     if valid?
       # TODO: refactoring
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
@@ -264,7 +277,7 @@ class Reservation < ActiveRecord::Base
 
         ### generate invoice only for calcul price, TODO refactor!!
         build_invoice(user: user)
-        generate_invoice_items(true)
+        generate_invoice_items(true, coupon_code)
         @wallet_amount_debit = get_wallet_amount_debit
         self.invoice = nil
         ###
@@ -275,7 +288,7 @@ class Reservation < ActiveRecord::Base
       end
     else
       build_invoice(user: user)
-      generate_invoice_items(true)
+      generate_invoice_items(true, coupon_code)
     end
 
     if valid?
