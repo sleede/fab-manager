@@ -21,15 +21,40 @@ class Coupon < ActiveRecord::Base
     end
   end
 
-  def status
+  ##
+  # Check the status of the current coupon. The coupon:
+  # - may have been disabled by an admin,
+  # - may has expired because the validity date has been reached,
+  # - may have been used the maximum number of times it was allowed
+  # - may have already been used by the provided user, if the coupon is configured to allow only one use per user,
+  # - may be available for use
+  # @param [user_id] {Number} if provided and if the current coupon's validity_per_user == 'once', check that the coupon
+  # was already used by the provided user
+  # @return {String} status identifier
+  ##
+  def status(user_id = nil)
     if not active?
       'disabled'
     elsif (!valid_until.nil?) and valid_until.at_end_of_day < DateTime.now
       'expired'
     elsif (!max_usages.nil?) and invoices.count >= max_usages
       'sold_out'
+    elsif (!user_id.nil?) and validity_per_user == 'once' and users_ids.include?(user_id.to_i)
+      'already_used'
     else
       'active'
+    end
+  end
+
+  def users
+    self.invoices.map do |i|
+      i.user
+    end
+  end
+
+  def users_ids
+    users.map do |u|
+      u.id
     end
   end
 

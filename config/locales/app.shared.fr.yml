@@ -358,4 +358,5 @@ fr:
         unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
         unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
         unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
+        unable_to_apply_the_coupon_because_already_used: "Impossible d'appliquer la réduction : vous avez déjà utilisé ce code promo par le passé."
         unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."
