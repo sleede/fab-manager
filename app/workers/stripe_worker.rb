@@ -17,13 +17,20 @@ class StripeWorker
 
   def create_stripe_coupon(coupon_id)
     coupon = Coupon.find(coupon_id)
-    Stripe::Coupon.create(
+    stp_coupon = {
         id: coupon.code,
         duration: coupon.validity_per_user,
         percent_off: coupon.percent_off,
-        redeem_by: coupon.valid_until.to_i,
-        max_redemptions: coupon.max_usages,
-    )
+    }
+    unless coupon.valid_until.nil?
+      stp_coupon[:redeem_by] = coupon.valid_until.to_i
+    end
+      stp_coupon
+    unless coupon.max_usages.nil?
+      stp_coupon[max_redemptions] = coupon.max_usages
+    end
+
+    Stripe::Coupon.create(stp_coupon)
   end
 
   def delete_stripe_coupon(coupon_code)
