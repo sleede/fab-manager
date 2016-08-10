@@ -107,6 +107,10 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ## Selected training unless 'all' trainings are displayed
   $scope.training = trainingPromise
 
+  ## Discount coupon to apply to the basket, if any
+  $scope.coupon =
+    applied: null
+
   ## fullCalendar (v2) configuration
   $scope.calendarConfig = CalendarConfig
     minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
@@ -321,7 +325,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   $scope.updatePrices = ->
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.selectedTraining, $scope.selectedPlan)
-      Price.compute {reservation: r}, (res) ->
+      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
     else
       $scope.amountTotal = null
@@ -337,6 +341,11 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.currentUser.role isnt 'admin'
       Member.get id: $scope.currentUser.id, (member) ->
         $scope.ctrl.member = member
+
+    # watch when a coupon is applied to re-compute the total price
+    $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+      unless newValue == null and oldValue == null
+        $scope.updatePrices()
 
 
 
@@ -362,6 +371,21 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
       offered: training.offered || false
 
     reservation
+
+
+
+  ##
+  # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+  # @param reservation {Object} as returned by mkReservation()
+  # @param coupon {Object} Coupon as returned from the API
+  # @return {{reservation:Object, coupon_code:string}}
+  ##
+  mkRequestParams = (reservation, coupon) ->
+    params =
+      reservation: reservation
+      coupon_code: (coupon.code if coupon)
+
+    params
 
 
 
@@ -475,12 +499,15 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation', '$locale', 'helpers', '$filter', ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, $locale, helpers, $filter) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation', '$locale', 'helpers', '$filter', 'coupon'
+      ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, $locale, helpers, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -506,7 +533,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
           else
             $scope.attempting = true
             $scope.reservation.card_token = response.id
-            Reservation.save reservation: $scope.reservation, (reservation) ->
+            Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
@@ -535,10 +562,13 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', '$filter', 'reservation', 'price', 'wallet', 'Auth', 'Reservation', '$locale', 'helpers', ($scope, $uibModalInstance, $state, $filter, reservation, price, wallet, Auth, Reservation, $locale, helpers) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', '$filter', 'reservation', 'price', 'wallet', 'Auth', 'Reservation', '$locale', 'helpers', 'coupon'
+      ($scope, $uibModalInstance, $state, $filter, reservation, price, wallet, Auth, Reservation, $locale, helpers, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -569,7 +599,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         ##
         $scope.ok = ->
           $scope.attempting = true
-          Reservation.save reservation: $scope.reservation, (reservation) ->
+          Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
             $uibModalInstance.close(reservation)
             $scope.attempting = true
           , (response)->
@@ -592,7 +622,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     # first we check that a user was selected
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, training) # reservation without any Plan -> we get the training price
-      Price.compute {reservation: r}, (res) ->
+      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.selectedTrainingAmount = res.price
     else
       $scope.selectedTrainingAmount = null

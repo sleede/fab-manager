@@ -82,6 +82,8 @@
           <a class="pull-right m-t-xs text-u-l" href="#" ng-click="removeTraining($event)" ng-if="trainingIsValid" translate>{{ 'remove_this_slot' }}</a>
         </div>
 
+        <coupon show="trainingIsValid && (!plansIsShow || selectedPlan)" coupon="coupon.applied" user-id="{{ctrl.member.id}}"></coupon>
+
         <span ng-hide="fablabWithoutPlans">
           <div ng-if="trainingIsValid && !ctrl.member.subscribed_plan" ng-show="!plansIsShow">
             <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices_and_a_free_training' }}</p>

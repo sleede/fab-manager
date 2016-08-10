@@ -636,7 +636,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
   # @param reservation {Object} as returned by mkReservation()
   # @param coupon {Object} Coupon as returned from the API
-  # @return {{reservation:Object, coupon_id:number}}
+  # @return {{reservation:Object, coupon_code:string}}
   ##
   mkRequestParams = (reservation, coupon) ->
     params =
