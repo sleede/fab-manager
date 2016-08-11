@@ -9,7 +9,7 @@ json.category_id event.category_id
 json.category do
   json.id event.category.id
   json.name event.category.name
-end
+end if event.category
 json.event_theme_ids event.event_theme_ids
 json.event_themes event.event_themes do |e|
   json.name e.name
