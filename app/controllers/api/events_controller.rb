@@ -1,12 +1,12 @@
 class API::EventsController < API::ApiController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :update, :destroy]
 
   def index
     @events = policy_scope(Event)
     @page = params[:page]
 
     # filters
-    @events = @events.joins(:categories).where('categories.id = :category', category: params[:category_id]) if params[:category_id]
+    @events = @events.joins(:category).where('categories.id = :category', category: params[:category_id]) if params[:category_id]
     @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
     @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
 

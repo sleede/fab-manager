@@ -26,6 +26,7 @@
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
+- [TODO DEPLOY] `rake fablab:fix:assign_category_to_uncategorized_events`
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
 
