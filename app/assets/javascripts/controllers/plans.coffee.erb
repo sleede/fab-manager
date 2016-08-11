@@ -35,6 +35,14 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ## plan to subscribe (shopping cart)
     $scope.selectedPlan = null
 
+    ## Discount coupon to apply to the basket, if any
+    $scope.coupon =
+      applied: null
+
+    ## Storage for the total price (plan price + coupon, if any)
+    $scope.cart =
+      total: null
+
     ## text that appears in the bottom-right box of the page (subscriptions rules details)
     $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value
 
@@ -61,6 +69,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
       if $scope.isAuthenticated()
         if $scope.selectedPlan != plan
           $scope.selectedPlan = plan
+          updateCartPrice()
         else
           $scope.selectedPlan = null
       else
@@ -153,6 +162,27 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
       $scope.$on 'devise:new-session', (event, user)->
         $scope.ctrl.member = user
 
+      # watch when a coupon is applied to re-compute the total price
+      $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+        unless newValue == null and oldValue == null
+          updateCartPrice()
+
+
+
+    ##
+    # Compute the total amount for the current reservation according to the previously set parameters
+    # and assign the result in $scope.reserve.amountTotal
+    ##
+    updateCartPrice = ->
+      # first we check that a user was selected
+      if Object.keys($scope.ctrl.member).length > 0
+          $scope.cart.total = $scope.selectedPlan.amount
+          # apply the coupon if any
+          if $scope.coupon.applied
+            discount = $scope.cart.total * $scope.coupon.applied.percent_off / 100
+            $scope.cart.total -= discount
+      else
+        $scope.reserve.amountTotal = null
 
 
     ##
@@ -165,29 +195,43 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         resolve:
           selectedPlan: -> $scope.selectedPlan
           member: -> $scope.ctrl.member
+          price: -> $scope.cart.total
           wallet: ->
             Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, CustomAsset, wallet, helpers, $locale, $filter) ->
+          coupon: -> $scope.coupon.applied
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
+        ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, CustomAsset, wallet, helpers, $locale, $filter, coupon) ->
           # user wallet amount
           $scope.walletAmount = wallet.amount
 
-          $scope.amount = helpers.getAmountToPay(selectedPlan.amount, wallet.amount)
+          # Final price to pay by the user
+          $scope.amount = helpers.getAmountToPay(price, wallet.amount)
 
+          # The plan that the user is about to subscribe
           $scope.selectedPlan = selectedPlan
 
+          # Currency symbol or abreviation for the current locale
           $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
+          # Used in wallet info template to interpolate some translations
           $scope.numberFilter = $filter('number')
 
           # retrieve the CGV
           CustomAsset.get {name: 'cgv-file'}, (cgv) ->
             $scope.cgv = cgv.custom_asset
+
+          ##
+          # Callback for click on the 'proceed' button.
+          # Handle the stripe's card tokenization process response and save the subscription to the API with the
+          # card token just created.
+          ##
           $scope.payment = (status, response) ->
             if response.error
               growl.error(response.error.message)
             else
               $scope.attempting = true
               Subscription.save
+                coupon_code: coupon.code
                 subscription:
                   plan_id: selectedPlan.id
                   user_id: member.id
@@ -217,22 +261,31 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         resolve:
           selectedPlan: -> $scope.selectedPlan
           member: -> $scope.ctrl.member
+          price: -> $scope.cart.total
           wallet: ->
             Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'Subscription', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state, selectedPlan, member, Subscription, wallet, helpers, $locale, $filter) ->
+          coupon: -> $scope.coupon.applied
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
+        ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, wallet, helpers, $locale, $filter, coupon) ->
           # user wallet amount
           $scope.walletAmount = wallet.amount
 
-          $scope.price = selectedPlan.amount
+          # subcription price, coupon subtracted if any
+          $scope.price = price
 
           # price to pay
           $scope.amount = helpers.getAmountToPay($scope.price, wallet.amount)
 
+          # Currency symbol or abreviation for the current locale
           $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
+          # Used in wallet info template to interpolate some translations
           $scope.numberFilter = $filter('number')
 
+          # The plan that the user is about to subscribe
           $scope.plan = selectedPlan
+
+          # The member who is subscribing a plan
           $scope.member = member
 
           # Button label
@@ -244,9 +297,14 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
             else
               $scope.validButtonName = _t('confirm')
 
+          ##
+          # Callback for the 'proceed' button.
+          # Save the subscription to the API
+          ##
           $scope.ok = ->
             $scope.attempting = true
             Subscription.save
+              coupon_code: coupon.code
               subscription:
                 plan_id: selectedPlan.id
                 user_id: member.id
@@ -257,6 +315,10 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
               $scope.alerts.push({msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
               $scope.attempting = false
 
+          ##
+          # Callback for the 'cancel' button.
+          # Close the modal box.
+          ##
           $scope.cancel = ->
             $uibModalInstance.dismiss('cancel')
         ]

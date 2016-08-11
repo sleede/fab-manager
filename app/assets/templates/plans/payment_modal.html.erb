@@ -3,6 +3,7 @@
   <h1 translate>{{ 'subscription_confirmation' }}</h1>
 </div>
 <div class="modal-body">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
   <ng-include src="'<%= asset_path 'shared/_wallet_amount_info.html' %>'"></ng-include>
 
   <p>{{ 'here_is_the_NAME_subscription_summary' | translate:{NAME:member.name} }}</p>
