@@ -30,7 +30,8 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
       member_id: null
 
     ## already subscribed plan of the current user
-    $scope.paidPlan = null
+    $scope.paid =
+        plan: null
 
     ## plan to subscribe (shopping cart)
     $scope.selectedPlan = null
@@ -52,7 +53,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ##
     $scope.updateMember = ->
       $scope.selectedPlan = null
-      $scope.paidPlan = null
+      $scope.paid.plan = null
       $scope.group.change = false
       Member.get {id: $scope.ctrl.member.id}, (member) ->
         $scope.ctrl.member = member
@@ -156,7 +157,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
       if $scope.currentUser
         if $scope.currentUser.role isnt 'admin'
           $scope.ctrl.member = $scope.currentUser
-          $scope.paidPlan = $scope.currentUser.subscribed_plan
+          $scope.paid.plan = $scope.currentUser.subscribed_plan
           $scope.group.id = $scope.currentUser.group_id
 
       $scope.$on 'devise:new-session', (event, user)->
@@ -246,7 +247,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
       .result['finally'](null).then (subscription)->
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
-        $scope.paidPlan = angular.copy($scope.selectedPlan)
+        $scope.paid.plan = angular.copy($scope.selectedPlan)
         $scope.selectedPlan = null
 
 
@@ -325,10 +326,8 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
       .result['finally'](null).then (reservation)->
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
-        index = $scope.members.indexOf($scope.ctrl.member)
-        $scope.members.splice(index, 1)
         $scope.ctrl.member = null
-        $scope.paidPlan = angular.copy($scope.selectedPlan)
+        $scope.paid.plan = angular.copy($scope.selectedPlan)
         $scope.selectedPlan = null
 
 

@@ -97,7 +97,7 @@
               </div>
               <button class="btn btn-default m-t"
                       ng-click="group.change = !group.change"
-                      ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paidPlan)"
+                      ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paid.plan)"
                       translate
                       translate-values="{ROLE:currentUser.role}"
                       translate-interpolation="messageformat">{{ 'he_wants_to_change_group' }}</button>
@@ -150,7 +150,7 @@
     </section>
 
 
-    <section class="widget panel b-a m m-t-lg" ng-if="paidPlan">
+    <section class="widget panel b-a m m-t-lg" ng-if="paid.plan">
       <div class="panel-heading b-b">
         <h3 translate>{{ 'summary' }}</h3>
       </div>
@@ -159,8 +159,8 @@
        {{ 'you_ve_just_payed_the_' | translate }} <strong translate>{{ '_subscription' }}</strong> :
 
         <div class="well well-warning m-t-sm">
-          <i class="font-sbold">{{ paidPlan | humanReadablePlanName }}</i>
-          <div class="font-sbold">{{ 'subscription_price' | translate }} {{paidPlan.amount | currency}}</div>
+          <i class="font-sbold">{{ paid.plan | humanReadablePlanName }}</i>
+          <div class="font-sbold">{{ 'subscription_price' | translate }} {{paid.plan.amount | currency}}</div>
         </div>
 
         <div class="alert alert-success">{{ 'thank_you_your_subscription_is_successful' | translate }}<br>
