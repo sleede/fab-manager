@@ -515,10 +515,11 @@ angular.module('application.router', ['ui.router']).
             Setting.get(name: 'event_reduced_amount_alert').$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.wallet']).$promise
+            Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe',
+              'app.shared.valid_reservation_modal', 'app.shared.wallet', 'app.shared.coupon_input']).$promise
           ]
 
-      # calendar global (trainings, machines and events)
+      # global calendar (trainings, machines and events)
       .state 'app.public.calendar',
         url: '/calendar'
         views:

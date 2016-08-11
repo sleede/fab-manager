@@ -156,7 +156,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     toReserve: false
     amountTotal : 0
 
-
+  ## Discount coupon to apply to the basket, if any
+  $scope.coupon =
+    applied: null
 
   # get the details for the current event (event's id is recovered from the current URL)
   $scope.event = eventPromise
@@ -364,7 +366,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     # first we check that a user was selected
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event)
-      Price.compute {reservation: r}, (res) ->
+      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.reserve.amountTotal = res.price
     else
       $scope.reserve.amountTotal = null
@@ -410,6 +412,10 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     if $scope.currentUser
       getReservations($scope.event.id, 'Event', $scope.currentUser.id)
 
+    # watch when a coupon is applied to re-compute the total price
+    $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+      unless newValue == null and oldValue == null
+        $scope.computeEventAmount()
 
 
   ##
@@ -451,6 +457,20 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
+  # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+  # @param reservation {Object} as returned by mkReservation()
+  # @param coupon {Object} Coupon as returned from the API
+  # @return {{reservation:Object, coupon_code:string}}
+  ##
+  mkRequestParams = (reservation, coupon) ->
+    params =
+      reservation: reservation
+      coupon_code: (coupon.code if coupon)
+
+    params
+
+
+  ##
   # Set the current reservation to the default values. This implies to reservation form to be hidden.
   ##
   resetEventReserve = ->
@@ -478,7 +498,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
@@ -487,7 +507,10 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           eventToReserve: $scope.event
           reserve: $scope.reserve
           member: $scope.ctrl.member
-      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', '$filter', ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale, $filter) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -511,7 +534,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           else
             $scope.attempting = true
             $scope.reservation.card_token = response.id
-            Reservation.save reservation: $scope.reservation, (reservation) ->
+            Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
@@ -537,10 +560,13 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
         wallet: ->
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', '$filter', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers, $filter) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -569,7 +595,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         # Callback to validate the payment
         $scope.ok = ->
           $scope.attempting = true
-          Reservation.save reservation: $scope.reservation, (reservation) ->
+          Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
             $uibModalInstance.close(reservation)
             $scope.attempting = true
           , (response)->
