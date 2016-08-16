@@ -58,6 +58,12 @@ class Coupon < ActiveRecord::Base
     end
   end
 
+  def send_to(user_id)
+    NotificationCenter.call type: 'notify_member_about_coupon',
+                            receiver: User.find(user_id),
+                            attached_object: self
+  end
+
   def create_stripe_coupon
     StripeWorker.perform_async(:create_stripe_coupon, id)
   end

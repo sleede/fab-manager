@@ -160,6 +160,9 @@ en:
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Unable to delete the specified coupon: an unexpected error occurred."
         send_a_coupon: "Send a coupon"
         coupon: "Coupon"
+        usages: "Usages"
+        coupon_successfully_sent_to_USER: "Coupon successfully sent to {{USER}}"  # angular interpolation
+        an_error_occurred_unable_to_send_the_coupon: "An unexpected error prevent from sending the coupon."
 
       coupons_new:
         # ajouter un code promotionnel

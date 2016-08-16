@@ -8,4 +8,7 @@ Application.Services.factory 'Coupon', ["$resource", ($resource)->
     validate:
       method: 'POST'
       url: '/api/coupons/validate'
+    send:
+      method: 'POST'
+      url: '/api/coupons/send'
 ]

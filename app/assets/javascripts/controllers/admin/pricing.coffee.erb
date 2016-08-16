@@ -351,10 +351,26 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
       resolve:
         coupon: -> coupon
       size: 'md'
-      controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', ($scope, $uibModalInstance, Coupon, coupon) ->
+      controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', ($scope, $uibModalInstance, Coupon, coupon, _t) ->
+
+        ## Member, receiver of the coupon
+        $scope.ctrl =
+          member: null
+
+        ## Details of the coupon to send
         $scope.coupon = coupon
+
+        ## Callback to validate sending of the coupon
         $scope.ok = ->
-          $uibModalInstance.close(user)
+          Coupon.send {coupon_code: coupon.code, user_id: $scope.ctrl.member.id}, (res) ->
+            growl.success(_t('coupon_successfully_sent_to_USER', {USER: $scope.ctrl.member.name}))
+            $uibModalInstance.close({user_id: $scope.ctrl.member.id})
+          , (err) ->
+            growl.error(_t('an_error_occurred_unable_to_send_the_coupon'))
+
+        ## Callback to close the modal and cancel the sending process
+        $scope.cancel = ->
+          $uibModalInstance.dismiss('cancel')
       ]
 
 

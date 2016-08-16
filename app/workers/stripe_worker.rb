@@ -27,7 +27,7 @@ class StripeWorker
     end
       stp_coupon
     unless coupon.max_usages.nil?
-      stp_coupon[max_redemptions] = coupon.max_usages
+      stp_coupon[:max_redemptions] = coupon.max_usages
     end
 
     Stripe::Coupon.create(stp_coupon)

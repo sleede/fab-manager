@@ -268,5 +268,11 @@ en:
         click_to_download: "Excel file generated successfully. To download it, click"
         here: "here"
 
+    notify_member_about_coupon:
+      subject: "Coupon"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% on the whole site with the code %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "This coupon is valid {USAGE, plural, =1{just once} other{many times}}: for all your purchases, from now {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
+
     shared:
       hello: "Hello %{user_name}"

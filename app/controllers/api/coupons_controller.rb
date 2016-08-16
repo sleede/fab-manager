@@ -57,6 +57,21 @@ class API::CouponsController < API::ApiController
     end
   end
 
+  def send_to
+    authorize Coupon
+
+    @coupon = Coupon.find_by_code(params[:coupon_code])
+      if @coupon.nil?
+        render json: {error: "no coupon with code #{params[:coupon_code]}"}, status: :not_found
+      else
+        if @coupon.send_to(params[:user_id])
+          render :show, status: :ok, location: @coupon
+        else
+          render json: @coupon.errors, status: :unprocessable_entity
+        end
+      end
+  end
+
   private
   def set_coupon
     @coupon = Coupon.find(params[:id])

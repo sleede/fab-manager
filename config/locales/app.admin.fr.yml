@@ -160,6 +160,9 @@ fr:
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Impossible de supprimer le code promotionnel : une erreur inattendue s'est produite."
         send_a_coupon: "Envoyer un code promo"
         coupon: "Code promo"
+        usages: "Utilisations"
+        coupon_successfully_sent_to_USER: "Le code promotionnel a bien été envoyé à {{USER}}"  # angular interpolation
+        an_error_occurred_unable_to_send_the_coupon: "Une erreur inattendue a empêché l'envoi du code promotionnel."
 
       coupons_new:
         # ajouter un code promotionnel

@@ -40,5 +40,6 @@ class NotificationType
     notify_user_wallet_is_credited
     notify_admin_user_wallet_is_credited
     notify_admin_export_complete
+    notify_member_about_coupon
   )
 end

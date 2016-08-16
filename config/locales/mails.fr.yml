@@ -268,5 +268,11 @@ fr:
         click_to_download: "La génération est terminée. Pour télécharger le fichier Excel, cliquez"
         here: "ici"
 
+    notify_member_about_coupon:
+      subject: "Code promo"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % sur tout le site en utilisant le code promo %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Ce code promo est valable {USAGE, plural, =1{une seule fois} other{plusieurs fois}} : pour tous vos achats, dès maintenant {DATE, select, NO-DATE{et sans limitation de durée} other{et jusqu'au {DATE}}}."
+
     shared:
       hello: "Bonjour %{user_name}"

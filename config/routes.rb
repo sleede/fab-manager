@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     end
     resources :coupons
     post 'coupons/validate' => 'coupons#validate'
+    post 'coupons/send' => 'coupons#send_to'
 
     resources :trainings_pricings, only: [:index, :update]
 

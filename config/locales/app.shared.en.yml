@@ -101,6 +101,7 @@ en:
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
         incomplete_profile: "Incomplete profile"
+        unlimited: "Unlimited"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"

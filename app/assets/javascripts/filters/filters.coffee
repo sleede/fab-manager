@@ -233,3 +233,28 @@ Application.Filters.filter 'toIsoDate', [ ->
     moment(date).format('YYYY-MM-DD')
 
 ]
+
+Application.Filters.filter 'booleanFormat', [ '_t', (_t) ->
+  (boolean) ->
+    if boolean or boolean == 'true'
+      _t('yes')
+    else
+      _t('no')
+]
+
+Application.Filters.filter 'booleanFormat', [ '_t', (_t) ->
+  (boolean) ->
+    if (typeof boolean == 'boolean' and boolean) or (typeof boolean == 'string' and boolean == 'true')
+      _t('yes')
+    else
+      _t('no')
+]
+
+Application.Filters.filter 'maxCount', [ '_t', (_t) ->
+  (max) ->
+    if typeof max == 'undefined' or max == null or (typeof max == 'number' and max == 0)
+      _t('unlimited')
+    else
+      max
+]
+
