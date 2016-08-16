@@ -149,7 +149,7 @@ class Invoice < ActiveRecord::Base
     end
     # handle coupon
     unless avoir.coupon_id.nil?
-      discount = avoir.total  * avoir.coupon.percent_off / 100
+      discount = avoir.total  * avoir.coupon.percent_off / 100.0
       avoir.total -= discount
     end
     avoir

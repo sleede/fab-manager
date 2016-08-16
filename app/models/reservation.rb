@@ -132,7 +132,7 @@ class Reservation < ActiveRecord::Base
       total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
       invoice_items << Stripe::InvoiceItem.create(
           customer: user.stp_customer_id,
-          amount: -(total  * cp.percent_off / 100),
+          amount: -(total  * cp.percent_off / 100.0),
           currency: Rails.application.secrets.stripe_currency,
           description: "coupon #{cp.code}"
       )
@@ -394,7 +394,7 @@ class Reservation < ActiveRecord::Base
 
     unless coupon_code.nil?
       cp = Coupon.find_by_code(coupon_code)
-      total = total - (total  * cp.percent_off / 100)
+      total = total - (total  * cp.percent_off / 100.0)
       self.invoice.coupon_id = cp.id
     end
 

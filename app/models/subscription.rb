@@ -39,7 +39,7 @@ class Subscription < ActiveRecord::Base
             total = plan.amount
             Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
-                amount: -(total  * cp.percent_off / 100),
+                amount: -(total  * cp.percent_off / 100.0),
                 currency: Rails.application.secrets.stripe_currency,
                 description: "coupon #{cp.code}"
             )
@@ -136,7 +136,7 @@ class Subscription < ActiveRecord::Base
     unless coupon_code.nil?
       coupon = Coupon.find_by_code(coupon_code)
       coupon_id = coupon.id
-      total = plan.amount - (plan.amount * coupon.percent_off / 100)
+      total = plan.amount - (plan.amount * coupon.percent_off / 100.0)
     end
 
     invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id)

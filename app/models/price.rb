@@ -114,7 +114,7 @@ class Price < ActiveRecord::Base
     # === apply Coupon if any ===
     unless coupon_code.nil?
       _coupon = Coupon.find_by_code(coupon_code)
-      _amount = _amount - (_amount  * _coupon.percent_off / 100)
+      _amount = _amount - (_amount  * _coupon.percent_off / 100.0)
     end
 
     # return result

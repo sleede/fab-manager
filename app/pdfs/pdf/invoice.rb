@@ -141,7 +141,7 @@ module PDF
         # subtract the coupon, if any
         unless invoice.coupon_id.nil?
           cp = invoice.coupon
-          discount = total_calc  * cp.percent_off / 100
+          discount = total_calc  * cp.percent_off / 100.0
           total_calc = total_calc - discount
 
           # add a row for the coupon

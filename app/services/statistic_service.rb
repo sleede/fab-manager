@@ -121,10 +121,14 @@ class StatisticService
   def subscriptions_list(options = default_options)
     result = []
     InvoiceItem.where('invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date', options)
-      .eager_load(subscription: [:plan, user: [:profile, :group]]).each do |i|
+      .eager_load(invoice: [:coupon], subscription: [:plan, user: [:profile, :group]]).each do |i|
         unless i.invoice.is_a?(Avoir)
           sub = i.subscription
           if sub
+            ca = i.amount.to_i / 100.0
+            unless i.invoice.coupon_id.nil?
+              ca = ca - ( ca * i.invoice.coupon.percent_off / 100.0 )
+            end
             u = sub.user
             p = sub.plan
             result.push OpenStruct.new({
@@ -138,7 +142,7 @@ class StatisticService
               duration: p.duration.to_i,
               subscription_id: sub.id,
               invoice_item_id: i.id,
-              ca: i.amount.to_i / 100.0
+              ca: ca
             }.merge(user_info(u)))
           end
         end
@@ -337,6 +341,7 @@ class StatisticService
   def calcul_ca(invoice)
     return nil unless invoice
     ca = 0
+    # sum each items in the invoice (+ for invoices/- for refunds)
     invoice.invoice_items.each do |ii|
       unless ii.subscription_id
         if invoice.is_a?(Avoir)
@@ -346,6 +351,11 @@ class StatisticService
         end
       end
     end
+    # subtract coupon discount from invoices and refunds
+    unless invoice.coupon_id.nil?
+      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
+    end
+    # divide the result by 100 to convert from centimes to monetary unit
     ca == 0 ? ca : ca / 100.0
   end
 
@@ -353,6 +363,10 @@ class StatisticService
     ca = 0
     invoice.invoice_items.each do |ii|
       ca = ca - ii.amount.to_i
+    end
+    # subtract coupon discount from the refund
+    unless invoice.coupon_id.nil?
+      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
     end
     ca == 0 ? ca : ca / 100.0
   end
