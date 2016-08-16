@@ -735,7 +735,7 @@ angular.module('application.router', ['ui.router']).
             TrainingsPricing.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.admin.pricing').$promise
+            Translations.query(['app.admin.pricing', 'app.shared.member_select', 'app.shared.coupon']).$promise
           ]
           trainingsPromise: ['Training', (Training) ->
             Training.query().$promise

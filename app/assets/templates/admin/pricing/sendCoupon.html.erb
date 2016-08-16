@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'send_a_coupon' }}</h1>
+</div>
+<div class="">
+
+  <div class="well m-b-n">
+    <select-member></select-member>
+    <div class="widget panel b-a m">
+      <div class="panel-heading b-b small">
+        <h3 class="panel-title" translate>{{ 'coupon' }}</h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper">
+        <table>
+          <thead>
+            <tr><th style="width:60%"></th></tr>
+          </thead>
+          <tbody>
+            <tr><td translate>{{'code'}}</td><td>{{coupon.code}}</td></tr>
+            <tr><td translate>{{'percent_off'}}</td><td>{{coupon.percent_off}} %</td></tr>
+            <tr><td translate>{{'validity_per_user'}}</td><td translate>{{coupon.validity_per_user}}</td></tr>
+            <tr><td translate>{{'valid_until'}}</td><td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer no-padder">
+  <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" translate>{{ 'confirm' }}</button>
+</div>

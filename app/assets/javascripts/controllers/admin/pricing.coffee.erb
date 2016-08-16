@@ -341,6 +341,23 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
 
 
+  ##
+  # Open a modal allowing to select an user and send him the details of the provided coupon
+  # @param coupon {Object} The coupon to send
+  ##
+  $scope.sendCouponToUser = (coupon) ->
+    $uibModal.open
+      templateUrl: '<%= asset_path "admin/pricing/sendCoupon.html" %>'
+      resolve:
+        coupon: -> coupon
+      size: 'md'
+      controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', ($scope, $uibModalInstance, Coupon, coupon) ->
+        $scope.coupon = coupon
+        $scope.ok = ->
+          $uibModalInstance.close(user)
+      ]
+
+
   ### PRIVATE SCOPE ###
 
   ##

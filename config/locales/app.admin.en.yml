@@ -113,7 +113,7 @@ en:
         back_to_monitoring: "Back to monitoring"
 
       pricing:
-        # subscriptions, prices and credits management
+        # subscriptions, prices, credits and coupons management
         pricing_management: "Pricing management"
         list_of_the_subscription_plans: "List of the subscription plans"
         beware_the_subscriptions_are_disabled_on_this_application: "Beware, the subscriptions are disabled on this application."
@@ -158,6 +158,8 @@ en:
         coupon_was_successfully_deleted: "Coupon was successfully deleted."
         unable_to_delete_the_specified_coupon_already_in_use: "Unable to delete the specified coupon: it is already used with some invoices."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Unable to delete the specified coupon: an unexpected error occurred."
+        send_a_coupon: "Send a coupon"
+        coupon: "Coupon"
 
       coupons_new:
         # ajouter un code promotionnel

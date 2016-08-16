@@ -113,7 +113,7 @@ fr:
         back_to_monitoring: "Retour au suivi"
 
       pricing:
-        # gestion des abonnements, des tarifs et des crédits
+        # gestion des abonnements, des tarifs, des crédits et des codes promo
         pricing_management: "Gestion de la tarification"
         list_of_the_subscription_plans: "Liste des formules d'abonnements"
         beware_the_subscriptions_are_disabled_on_this_application: "Attention, les abonnements sont désactivés sur cette application."
@@ -158,6 +158,8 @@ fr:
         coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."
         unable_to_delete_the_specified_coupon_already_in_use: "Impossible de supprimer le code promotionnel : il est utilisé dans des factures."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Impossible de supprimer le code promotionnel : une erreur inattendue s'est produite."
+        send_a_coupon: "Envoyer un code promo"
+        coupon: "Code promo"
 
       coupons_new:
         # ajouter un code promotionnel
