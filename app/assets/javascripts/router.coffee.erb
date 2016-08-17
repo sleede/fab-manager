@@ -248,7 +248,7 @@ angular.module('application.router', ['ui.router']).
         url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network'
         views:
           'main@':
-            templateUrl: '<%= asset_path "projects/index.html" %>'
+            templateUrl: '<%= asset_path "projects/index.html.erb" %>'
             controller: 'ProjectsController'
         resolve:
           themesPromise: ['Theme', (Theme)->
@@ -306,7 +306,7 @@ angular.module('application.router', ['ui.router']).
         url: '/machines'
         views:
           'main@':
-            templateUrl: '<%= asset_path "machines/index.html" %>'
+            templateUrl: '<%= asset_path "machines/index.html.erb" %>'
             controller: 'MachinesController'
         resolve:
           machinesPromise: ['Machine', (Machine)->
@@ -387,7 +387,7 @@ angular.module('application.router', ['ui.router']).
         url: '/trainings'
         views:
           'main@':
-            templateUrl: '<%= asset_path "trainings/index.html" %>'
+            templateUrl: '<%= asset_path "trainings/index.html.erb" %>'
             controller: 'TrainingsController'
         resolve:
           trainingsPromise: ['Training', (Training)->
@@ -452,7 +452,7 @@ angular.module('application.router', ['ui.router']).
         url: '/notifications'
         views:
           'main@':
-            templateUrl: '<%= asset_path "notifications/index.html" %>'
+            templateUrl: '<%= asset_path "notifications/index.html.erb" %>'
             controller: 'NotificationsController'
         resolve:
           translations: [ 'Translations', (Translations) ->
@@ -465,7 +465,7 @@ angular.module('application.router', ['ui.router']).
         abstract: Fablab.withoutPlans
         views:
           'main@':
-            templateUrl: '<%= asset_path "plans/index.html" %>'
+            templateUrl: '<%= asset_path "plans/index.html.erb" %>'
             controller: 'PlansIndexController'
         resolve:
           subscriptionExplicationsPromise: ['Setting', (Setting)->
@@ -487,7 +487,7 @@ angular.module('application.router', ['ui.router']).
         url: '/events'
         views:
           'main@':
-            templateUrl: '<%= asset_path "events/index.html" %>'
+            templateUrl: '<%= asset_path "events/index.html.erb" %>'
             controller: 'EventsController'
         resolve:
           categoriesPromise: ['Category', (Category) ->
@@ -571,7 +571,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/project_elements'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/project_elements/index.html" %>'
+            templateUrl: '<%= asset_path "admin/project_elements/index.html.erb" %>'
             controller: 'ProjectElementsController'
         resolve:
           componentsPromise: ['Component', (Component)->
@@ -592,7 +592,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/trainings'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/trainings/index.html" %>'
+            templateUrl: '<%= asset_path "admin/trainings/index.html.erb" %>'
             controller: 'TrainingsAdminController'
         resolve:
           trainingsPromise: ['Training', (Training)->
@@ -638,7 +638,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/events'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/events/index.html" %>'
+            templateUrl: '<%= asset_path "admin/events/index.html.erb" %>'
             controller: 'AdminEventsController'
         resolve:
           eventsPromise: ['Event', (Event)->
@@ -719,7 +719,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/pricing'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/pricing/index.html" %>'
+            templateUrl: '<%= asset_path "admin/pricing/index.html.erb" %>'
             controller: 'EditPricingController'
         resolve:
           plans: ['Plan', (Plan) ->
@@ -828,7 +828,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/invoices'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/invoices/index.html" %>'
+            templateUrl: '<%= asset_path "admin/invoices/index.html.erb" %>'
             controller: 'InvoicesController'
         resolve:
           settings: ['Setting', (Setting)->
@@ -859,16 +859,16 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/members'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/members/index.html" %>'
+            templateUrl: '<%= asset_path "admin/members/index.html.erb" %>'
             controller: 'AdminMembersController'
           'groups@app.admin.members':
-            templateUrl: '<%= asset_path "admin/groups/index.html" %>'
+            templateUrl: '<%= asset_path "admin/groups/index.html.erb" %>'
             controller: 'GroupsController'
           'tags@app.admin.members':
-            templateUrl: '<%= asset_path "admin/tags/index.html" %>'
+            templateUrl: '<%= asset_path "admin/tags/index.html.erb" %>'
             controller: 'TagsController'
           'authentification@app.admin.members':
-            templateUrl: '<%= asset_path "admin/authentications/index.html" %>'
+            templateUrl: '<%= asset_path "admin/authentications/index.html.erb" %>'
             controller: 'AuthentificationController'
         resolve:
           membersPromise: ['Member', (Member)->
@@ -977,7 +977,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/statistics'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/statistics/index.html" %>'
+            templateUrl: '<%= asset_path "admin/statistics/index.html.erb" %>'
             controller: 'StatisticsController'
         resolve:
           membersPromise: ['Member', (Member) ->
@@ -1005,7 +1005,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/settings'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/settings/index.html" %>'
+            templateUrl: '<%= asset_path "admin/settings/index.html.erb" %>'
             controller: 'SettingsController'
         resolve:
           settingsPromise: ['Setting', (Setting)->
@@ -1053,7 +1053,7 @@ angular.module('application.router', ['ui.router']).
         url: '/open_api_clients'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/open_api_clients/index.html" %>'
+            templateUrl: '<%= asset_path "admin/open_api_clients/index.html.erb" %>'
             controller: 'OpenAPIClientsController'
         resolve:
           clientsPromise: ['OpenAPIClient', (OpenAPIClient)->
