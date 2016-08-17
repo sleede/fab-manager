@@ -131,6 +131,12 @@ en:
         invoice_in_your_dashboard_html:  "You can access your invoice in %{DASHBOARD} on the Fab Lab website."
         your_dashboard: "your dashboard"
 
+    notify_member_reservation_reminder:
+      subject: "Reservation reminder"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "This is a reminder about your reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "This reservation concerns the following slots:"
+
     notify_member_avoir_ready:
       subject: "Your FabLab's refund invoice"
       body:

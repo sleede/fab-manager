@@ -131,6 +131,12 @@ fr:
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
 
+    notify_member_reservation_reminder:
+      subject: "Rappel de réservation"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Ceci est un rappel concernant votre réservation <strong>%{RESERVABLE}</strong> qui aura lieu le <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Cette réservation concerne les créneaux suivants :"
+
     notify_member_avoir_ready:
       subject: "Votre facture d'avoir du FabLab"
       body:

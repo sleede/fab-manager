@@ -19,4 +19,9 @@ open_api_trace_calls_count:
   cron: "0 4 * * 0" # every sunday at 4am
   class: "OpenAPITraceCallsCountWorker"
 
+reservation_reminder:
+  cron: "1 * * * *"
+  class: "ReservationReminderWorker"
+  queue: default
+
 <%= PluginRegistry.insert_code('yml.schedule') %>

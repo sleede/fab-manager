@@ -213,6 +213,8 @@ fr:
         a_new_user_account_has_been_imported_from_PROVIDER_(UID)_html: "Un nouveau compte utilisateur vient d'être importé depuis : <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Rappel : Vous avez une réservation <strong>%{RESERVABLE}</strong> qui aura lieu le <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
         your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Votre réservation %{RESERVABLE} du %{DATE} a bien été annulée."
       notify_member_slot_is_modified:

@@ -1,0 +1,18 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html',
+        RESERVABLE: @attached_object.reservable.name,
+        DATE: I18n.l(@attached_object.slots.order(:start_at).first.start_at, format: :long)
+      )
+  %>
+</p>
+
+<p>
+  <%= t('.body.this_reservation_concerns_the_following_slots') %>
+  <ul>
+    <% @attached_object.slots.order(:start_at).each do |slot| %>
+    <li><%= "#{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}" %></li>
+    <% end %>
+  </ul>
+</p>
