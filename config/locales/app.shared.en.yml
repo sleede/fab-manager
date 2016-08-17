@@ -338,7 +338,7 @@ en:
         # promotional coupon (creation/edition form)
         code: "Code"
         code_is_required: "Code is required."
-        code_must_be_composed_of_capital_letters_and_or_digits: "The code must be composed of capital letters and/or digits."
+        code_must_be_composed_of_capital_letters_digits_and_or_dashes: "The code must be composed of capital letters, digits and/or dashes."
         percent_off: "Percentage off"
         percent_off_is_required: "Percentage off is required."
         percentage_must_be_between_0_and_100: "Percentage must be between 0 and 100."

@@ -338,7 +338,7 @@ fr:
         # code promotionnel (formulaire de création/édition)
         code: "Code"
         code_is_required: "Le code est requis."
-        code_must_be_composed_of_capital_letters_and_or_digits: "Le code doit être composé de lettres majuscules et/ou de chiffres."
+        code_must_be_composed_of_capital_letters_digits_and_or_dashes: "Le code doit être composé de lettres majuscules, de chiffres et/ou de tirets."
         percent_off: "Pourcentage de réduction"
         percent_off_is_required: "Le pourcentage de réduction est requis."
         percentage_must_be_between_0_and_100: "Le pourcentage doit être compris entre 0 et 100."

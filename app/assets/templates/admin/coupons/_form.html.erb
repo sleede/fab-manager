@@ -14,11 +14,11 @@
          name="coupon[code]"
          class="form-control"
          ng-model="coupon.code"
-         ng-pattern="/^[A-Z0-9]+$/"
+         ng-pattern="/^[A-Z0-9\-]+$/"
          ng-disabled="mode == 'EDIT'"
          required="required"/>
   <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.required" translate>{{ 'code_is_required' }}</span>
-  <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.pattern" translate>{{ 'code_must_be_composed_of_capital_letters_and_or_digits' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.pattern" translate>{{ 'code_must_be_composed_of_capital_letters_digits_and_or_dashes' }}</span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$invalid}">
