@@ -1,5 +1,5 @@
 
-class MembersFlowWorker
+class MembersProcessor
 
   attr_accessor :member
 

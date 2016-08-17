@@ -63,7 +63,7 @@ class API::MembersController < API::ApiController
 
   def update
     authorize @member
-    @flow_worker = MembersFlowWorker.new(@member)
+    @flow_worker = MembersProcessor.new(@member)
 
     if user_params[:group_id] and @member.group_id != user_params[:group_id].to_i and @member.subscribed_plan != nil
       # here a group change is requested but unprocessable, handle the exception
@@ -147,7 +147,7 @@ class API::MembersController < API::ApiController
 
     @account = User.find_by_auth_token(token)
     if @account
-      @flow_worker = MembersFlowWorker.new(@account)
+      @flow_worker = MembersProcessor.new(@account)
       begin
         if @flow_worker.merge_from_sso(@member)
           @member = @account
