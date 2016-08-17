@@ -74,6 +74,14 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.cancelDelay =
       name: 'booking_cancel_delay'
       value: parseInt(settingsPromise.booking_cancel_delay)
+      
+    $scope.enableReminder =
+      name: 'reminder_enable'
+      value: (settingsPromise.reminder_enable == 'true')
+
+    $scope.reminderDelay =
+      name: 'reminder_delay'
+      value: parseInt(settingsPromise.reminder_delay)
 
 
 
@@ -108,7 +116,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
         value = setting.value
 
       Setting.update { name: setting.name }, { value: value }, (data)->
-        growl.success(_t('customization_of_SETTING_successfully_saved', {SETTING:setting.name}))
+        growl.success(_t('customization_of_SETTING_successfully_saved', {SETTING:_t(setting.name)}))
       , (error)->
         console.log(error)
 

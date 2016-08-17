@@ -29,7 +29,9 @@ class Setting < ActiveRecord::Base
                              main_color
                              secondary_color
                              fablab_name
-                             name_genre)
+                             name_genre
+                             reminder_enable
+                             reminder_delay )
                     }
 
   after_update :update_stylesheet if :value_changed?

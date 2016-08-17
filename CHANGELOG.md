@@ -23,6 +23,8 @@
 - Excel exports are now asynchronously generated and cached on the server for future identical requests
 - Users have the ability to create an organizational profile when creating an account
 - Organization informations will be used in invoices generation, if present
+- Admins can create and enable/disable coupons. They can also notify an user about details of a coupon
+- Users and admins can apply coupons's discounts to their shopping cart
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`

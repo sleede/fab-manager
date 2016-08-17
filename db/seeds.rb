@@ -392,3 +392,15 @@ unless DatabaseProvider.count > 0
     provider.save
   end
 end
+
+unless Setting.find_by(name: 'reminder_enable').try(:value)
+  setting = Setting.find_or_initialize_by(name: 'reminder_enable')
+  setting.value = 'true'
+  setting.save
+end
+
+unless Setting.find_by(name: 'reminder_delay').try(:value)
+  setting = Setting.find_or_initialize_by(name: 'reminder_delay')
+  setting.value = '24'
+  setting.save
+end
