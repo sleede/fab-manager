@@ -288,17 +288,13 @@ Otherwise, please follow the official instructions on the project's website.
 Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
 To create it, please follow these instructions:
 
-1. Login as the postgres user
+1. Run the PostgreSQL administration command line interface, logged as the postgres user
 
    ```bash
-   sudo -i -u postgres
+   psql -U postgres
    ```
 
-2. Run the PostgreSQL administration command line interface
-
-   ```bash
-   psql
-   ```
+2. If you get an error running this command, please check your [pg_hba.conf](https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html) file.
 
 3. Create a new user in PostgreSQL (in this example, the user will be named `sleede`)
 
@@ -315,8 +311,8 @@ To create it, please follow these instructions:
 5. Then, create the fablab_development and fablab_test databases
 
    ```sql
-   CREATE DATABASE fablab_development OWNER sleede;
-   CREATE DATABASE fablab_test OWNER sleede;
+   CREATE DATABASE fabmanager_development OWNER sleede;
+   CREATE DATABASE fabmanager_test OWNER sleede;
    ```
 
 6. To finish, attribute a password to this user
