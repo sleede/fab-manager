@@ -308,7 +308,7 @@ To create it, please follow these instructions:
    ALTER ROLE sleede WITH CREATEDB;
    ```
 
-5. Then, create the fablab_development and fablab_test databases
+5. Then, create the fabmanager_development and fabmanager_test databases
 
    ```sql
    CREATE DATABASE fabmanager_development OWNER sleede;
