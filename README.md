@@ -74,15 +74,17 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
    ```
 
 3. Install the software dependencies.
+   First install [PostgreSQL](#postgresql) and [ElasticSearch](#elasticsearch) as specified in their respective documentations.
+   Then install the other dependencies:
    - For Ubuntu/Debian:
 
    ```bash
-   sudo apt-get install libpq-dev postgresql-9.4 redis-server imagemagick
+   sudo apt-get install libpq-dev redis-server imagemagick
    ```
    - For MacOS X:
 
    ```bash
-   brew install postgresql redis imagemagick
+   brew install redis imagemagick
    ```
 
 4. Init the RVM instance and check it was correctly configured
@@ -114,7 +116,7 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
-8. Build the database. You may have to follow the steps described in [the PostgreSQL installation chapter](#postgresql) before, if you don't already have a working installation of PostgreSQL.
+8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
 
    ```bash
    rake db:setup
@@ -243,6 +245,7 @@ See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](
 
 1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one the following lines:
    - `deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main` (Ubuntu 14.04 Trusty)
+   - `deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main` (Ubuntu 16.04 Xenial)
    - `deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main` (Debian 8 Jessie)
 
 
@@ -270,7 +273,7 @@ Otherwise, please follow the official instructions on the project's website.
 
    ```bash
    brew update
-   brew install postgres
+   brew install homebrew/versions/postgresql94
    ```
 
 2. Launch PostgreSQL
@@ -289,33 +292,40 @@ Before running `rake db:setup`, you have to make sure that the user configured i
 To create it, please follow these instructions:
 
 1. Run the PostgreSQL administration command line interface, logged as the postgres user
+   - For Ubuntu/Debian:
 
    ```bash
-   psql -U postgres
+   sudo -i -u postgres
+   psql
+   ```
+   - For MacOS X:
+
+   ```bash
+   sudo psql -U $(whoami) postgres
    ```
 
-2. If you get an error running this command, please check your [pg_hba.conf](https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html) file.
+   If you get an error running this command, please check your [pg_hba.conf](https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html) file.
 
-3. Create a new user in PostgreSQL (in this example, the user will be named `sleede`)
+2. Create a new user in PostgreSQL (in this example, the user will be named `sleede`)
 
    ```sql
    CREATE USER sleede;
    ```
 
-4. Grant him the right to create databases
+3. Grant him the right to create databases
 
    ```sql
    ALTER ROLE sleede WITH CREATEDB;
    ```
 
-5. Then, create the fabmanager_development and fabmanager_test databases
+4. Then, create the fabmanager_development and fabmanager_test databases
 
    ```sql
    CREATE DATABASE fabmanager_development OWNER sleede;
    CREATE DATABASE fabmanager_test OWNER sleede;
    ```
 
-6. To finish, attribute a password to this user
+5. To finish, attribute a password to this user
 
    ```sql
    ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
@@ -356,7 +366,7 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
    sudo apt-get install elasticsearch
    ```
 
-4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8), you will need to run:
+4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8/Ubuntu 16.04), you will need to run:
 
    ```bash
    # System V
@@ -364,6 +374,12 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
    # *** OR *** (systemd)
    sudo /bin/systemctl daemon-reload
    sudo /bin/systemctl enable elasticsearch.service
+   ```
+
+5. Restart the host operating system to complete the installation
+
+   ```bash
+   sudo reboot
    ```
 
 <a name="elasticsearch-on-macosx"></a>
