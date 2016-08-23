@@ -25,12 +25,14 @@
 - Organization informations will be used in invoices generation, if present
 - Admins can create and enable/disable coupons. They can also notify an user about details of a coupon
 - Users and admins can apply coupons's discounts to their shopping cart
+- Send an email reminder and system notification some hours before a reservation happens
+- Admins can toggle reminders on/off and customize the delay
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
-- [TODO DEPLOY] `rake fablab:fix:assign_category_to_uncategorized_events` (optional: will put every uncategorized event into a new category called "No Category", to ease re-categorization)
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
+- [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
 
 ## v2.3.0 2016 June 28
 
