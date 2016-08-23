@@ -90,6 +90,8 @@ en:
         at_least_one_category_is_required: "At least one category is required."
         unable_to_delete_the_last_one: "Unable to delete the last one."
         unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
+        manage_fares_categories: "Manage fares' categories"
+        fares_categories: "Fares' categories"
 
       events_new:
         # add a new event

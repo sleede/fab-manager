@@ -90,6 +90,8 @@ fr:
         at_least_one_category_is_required: "Au moins une catégorie est requise."
         unable_to_delete_the_last_one: "Impossible de supprimer la dernière."
         unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
+        manage_fares_categories: "Gérer les catégories de tarifs"
+        fares_categories: "Catégories de tarifs"
 
       events_new:
         # ajouter un nouvel évènement
