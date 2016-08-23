@@ -12,7 +12,7 @@ class ReservationReminderWorker
       starting = Time.now.beginning_of_hour + delay
       ending = starting + 1.hour
 
-      Reservation.includes(:slots).where('slots.start_at >= ? AND slots.start_at <= ?', starting, ending).each do |r|
+      Reservation.joins(:slots).where('slots.start_at >= ? AND slots.start_at <= ?', starting, ending).each do |r|
         NotificationCenter.call type: 'notify_member_reservation_reminder',
                                 receiver: r.user,
                                 attached_object: r
