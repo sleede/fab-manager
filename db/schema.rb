@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808113930) do
+ActiveRecord::Schema.define(version: 20160824084111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,17 @@ ActiveRecord::Schema.define(version: 20160808113930) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "event_price_categories", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "price_category_id"
+    t.integer  "amount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "event_price_categories", ["event_id"], name: "index_event_price_categories_on_event_id", using: :btree
+  add_index "event_price_categories", ["price_category_id"], name: "index_event_price_categories_on_price_category_id", using: :btree
 
   create_table "event_themes", force: :cascade do |t|
     t.string   "name"
@@ -365,6 +376,13 @@ ActiveRecord::Schema.define(version: 20160808113930) do
   end
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
+
+  create_table "price_categories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "prices", force: :cascade do |t|
     t.integer  "group_id"
@@ -765,6 +783,8 @@ ActiveRecord::Schema.define(version: 20160808113930) do
 
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
+  add_foreign_key "event_price_categories", "events"
+  add_foreign_key "event_price_categories", "price_categories"
   add_foreign_key "events", "categories"
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"

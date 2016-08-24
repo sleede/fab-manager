@@ -118,6 +118,7 @@ Rails.application.routes.draw do
     resources :open_api_clients, only: [:index, :create, :update, :destroy] do
       patch :reset_token, on: :member
     end
+    resources :price_categories
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'

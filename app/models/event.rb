@@ -10,6 +10,9 @@ class Event < ActiveRecord::Base
   has_many :reservations, as: :reservable, dependent: :destroy
   has_and_belongs_to_many :event_themes, join_table: :events_event_themes, dependent: :destroy
 
+  has_many :event_price_categories
+  has_many :price_categories, through: :event_price_categories
+
   belongs_to :age_range
 
   belongs_to :availability, dependent: :destroy

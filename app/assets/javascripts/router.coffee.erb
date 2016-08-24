@@ -653,6 +653,9 @@ angular.module('application.router', ['ui.router']).
           ageRangesPromise: ['AgeRange', (AgeRange) ->
             AgeRange.query().$promise
           ]
+          priceCategoriesPromise: ['PriceCategory', (PriceCategory) ->
+            PriceCategory.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.events').$promise
           ]

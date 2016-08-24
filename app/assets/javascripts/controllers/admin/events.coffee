@@ -129,8 +129,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
-, ($scope, $state, dialogs, growl, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t'
+, ($scope, $state, dialogs, growl, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) ->
 
 
 
@@ -159,6 +159,9 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
 
   ## List of age ranges
   $scope.ageRanges = ageRangesPromise
+
+  ## List of price categories for the events
+  $scope.priceCategories = priceCategoriesPromise
 
   ##
   # Adds a bucket of events to the bottom of the page, grouped by month
