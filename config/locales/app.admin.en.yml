@@ -92,6 +92,15 @@ en:
         unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
         manage_prices_categories: "Manage prices' categories"
         prices_categories: "Prices' categories"
+        add_a_price_category: "Add a price's category"
+        usages_count: "Usages count"
+        price_category: "Price category"
+        category_name: "Category's name"
+        category_name_is_required: "Category's name is required."
+        enter_here_the_conditions_under_which_this_price_is_applicable: "Enter here the conditions under which this price is applicable"
+        conditions_are_required: "Conditions are required."
+        price_category_successfully_created: "Price category successfully created."
+        unable_to_add_the_price_category_an_error_occurred: "Unable to add the price category because of an unexpected error occurred."
 
       events_new:
         # add a new event

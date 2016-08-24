@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+    <h1 translate>{{ 'price_category' }}</h1>
+</div>
+<div class="modal-body">
+    <form role="form" name="priceCategoryForm" class="form-horizontal" novalidate autocomplete="off" ng-keydown="priceCategoryForm.$valid && $event.which == 13 && ok()">
+        <div class="form-group" ng-class="{'has-error': priceCategoryForm.name.$dirty && priceCategoryForm.name.$invalid}">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                    <input type="text"
+                           name="name"
+                           ng-model="category.name"
+                           class="form-control"
+                           placeholder="{{ 'category_name' | translate }}"
+                           required />
+                </div>
+                <span class="help-block" ng-show="priceCategoryForm.name.$dirty && priceCategoryForm.name.$error.required" translate>{{ 'category_name_is_required' }}</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': priceCategoryForm.conditions.$dirty && priceCategoryForm.conditions.$invalid}">
+            <div class="col-sm-12">
+                <textarea ng-model="category.conditions"
+                          rows="10"
+                          class="form-control"
+                          id="conditions"
+                          placeholder="{{ 'enter_here_the_conditions_under_which_this_price_is_applicable' | translate }}"
+                          name="conditions"
+                          required>
+                </textarea>
+                <span class="help-block" ng-show="priceCategoryForm.conditions.$dirty && priceCategoryForm.conditions.$error.required" translate>{{ 'conditions_are_required' }}</span>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-info" ng-click="ok()" ng-disabled="priceCategoryForm.$invalid" translate>{{ 'confirm' }}</button>
+    <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

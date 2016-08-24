@@ -129,8 +129,8 @@ class EventsController
 ##
 # Controller used in the events listing page (admin view)
 ##
-Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t'
-, ($scope, $state, dialogs, growl, Event, Category, EventTheme, AgeRange, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) ->
+Application.Controllers.controller "AdminEventsController", ["$scope", "$state", 'dialogs', '$uibModal', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t'
+, ($scope, $state, dialogs, $uibModal, growl, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) ->
 
 
 
@@ -236,6 +236,29 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
       rowform.$cancel()
     else
       getModel(model)[1].splice(index, 1)
+
+
+
+  ##
+  # Open a modal dialog allowing the definition of a new price category.
+  # Save it once filled and handle the result.
+  ##
+  $scope.newPriceCategory = ->
+    $uibModal.open
+      templateUrl: '<%= asset_path "admin/events/price_form.html" %>'
+      size: 'md'
+      resolve:
+        category: -> {}
+      controller: 'PriceCategoryController'
+    .result['finally'](null).then (p_cat) ->
+      # save the price category to the API
+      PriceCategory.save p_cat, (cat) ->
+        $scope.priceCategories.push(cat)
+        growl.success(_t('price_category_successfully_created'))
+      , (err)->
+        growl.error(_t('unable_to_add_the_price_category_an_error_occurred'))
+        console.error(err)
+
 
 
 

@@ -90,8 +90,17 @@ fr:
         at_least_one_category_is_required: "Au moins une catégorie est requise."
         unable_to_delete_the_last_one: "Impossible de supprimer la dernière."
         unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
-        manage_prices_categories: "Gérer les catégories de tarifs"
-        prices_categories: "Catégories de tarifs"
+        manage_prices_categories: "Gérer les catégories tarifaires"
+        prices_categories: "Catégories tarifaires"
+        add_a_price_category: "Ajouter une catégorie tarifaire"
+        usages_count: "Nombre d'utilisations"
+        price_category: "Catégorie tarifaire"
+        category_name: "Nom de la catégorie"
+        category_name_is_required: "Le nom de la catégorie est requis."
+        enter_here_the_conditions_under_which_this_price_is_applicable: "Saisissez ici les conditions d'application du tarif"
+        conditions_are_required: "Les conditions sont requises."
+        price_category_successfully_created: "La catégorie tarifaire a bien été créée."
+        unable_to_add_the_price_category_an_error_occurred: "Impossible d'ajouter la catégorie tarifaire car une erreur inattendue est survenue."
 
       events_new:
         # ajouter un nouvel évènement

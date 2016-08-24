@@ -1,4 +1,4 @@
-class PriceCategoriesController < API::ApiController
+class API::PriceCategoriesController < API::ApiController
   before_action :authenticate_user!
   before_action :set_price_category, only: [:show, :update, :destroy]
 
@@ -43,6 +43,6 @@ class PriceCategoriesController < API::ApiController
   end
 
   def price_category_params
-    params.require(:price_category).permit(:name, :description)
+    params.require(:price_category).permit(:name, :conditions)
   end
 end

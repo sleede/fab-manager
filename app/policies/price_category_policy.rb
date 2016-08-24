@@ -1,4 +1,4 @@
-class GroupPolicy < ApplicationPolicy
+class PriceCategoryPolicy < ApplicationPolicy
   %w(index show create update destroy).each do |action|
     define_method "#{action}?" do
       user.is_admin?
