@@ -288,6 +288,31 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
 
 
 
+  ##
+  # Delete the given price category from the API
+  # @param index {number} index of the caterory in the $scope.priceCategories array
+  # @param id {number} price category ID, must match the ID of the category at the index specified above
+  ##
+  $scope.removePriceCategory = (id, index) ->
+    if $scope.priceCategories[index].id != id
+      growl.error(_t('unexpected_error_occurred_please_refresh'))
+    else if $scope.priceCategories[index].events > 0
+      growl.error(_t('unable_to_delete_this_price_category_because_it_is_already_used'))
+    else
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_price_category')
+      , -> # delete confirmed
+        PriceCategory.remove {id: id}, -> # successfully deleted
+          growl.success _t('price_category_successfully_deleted')
+          $scope.priceCategories.splice(index, 1)
+        , ->
+          growl.error _t('price_category_deletion_failed')
+
+
+
   ### PRIVATE SCOPE ###
 
   ##

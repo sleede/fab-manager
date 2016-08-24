@@ -104,6 +104,10 @@ en:
         unexpected_error_occurred_please_refresh: "An unexpected error occurred, please refresh the page."
         price_category_successfully_updated: "Price category successfully updated."
         unable_to_update_the_price_category: "Unable to update the price category."
+        unable_to_delete_this_price_category_because_it_is_already_used: "Unable to delete this price category because it is already used."
+        do_you_really_want_to_delete_this_price_category: "Do you really want to delete this price category?"
+        price_category_successfully_deleted: "Price category successfully deleted."
+        price_category_deletion_failed: "Price category deletion failed."
 
       events_new:
         # add a new event

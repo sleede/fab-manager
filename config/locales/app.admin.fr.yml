@@ -104,6 +104,10 @@ fr:
         unexpected_error_occurred_please_refresh: "Une erreur inattendue est survenue, merci de rafraîchir la page."
         price_category_successfully_updated: "La catégorie tarifaire a bien été mise à jour."
         unable_to_update_the_price_category: "Impossible de mettre à jour la catégorie tarifaire."
+        unable_to_delete_this_price_category_because_it_is_already_used: "Impossible de supprimer cette catégorie tarifaire car elle déjà utilisée."
+        do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
+        price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
+        price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
 
       events_new:
         # ajouter un nouvel évènement
