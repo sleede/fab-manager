@@ -256,9 +256,35 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
         $scope.priceCategories.push(cat)
         growl.success(_t('price_category_successfully_created'))
       , (err)->
-        growl.error(_t('unable_to_add_the_price_category_an_error_occurred'))
+        growl.error(_t('unable_to_add_the_price_category_check_name_already_used'))
         console.error(err)
 
+
+
+  ##
+  # Update the given price category with the new properties
+  # to specify in a modal dialog
+  # @param index {number} index of the caterory in the $scope.priceCategories array
+  # @param id {number} price category ID, must match the ID of the category at the index specified above
+  ##
+  $scope.editPriceCategory = (id, index) ->
+    if $scope.priceCategories[index].id != id
+      growl.error(_t('unexpected_error_occurred_please_refresh'))
+    else
+      $uibModal.open
+        templateUrl: '<%= asset_path "admin/events/price_form.html" %>'
+        size: 'md'
+        resolve:
+          category: -> $scope.priceCategories[index]
+        controller: 'PriceCategoryController'
+      .result['finally'](null).then (p_cat) ->
+        # update the price category to the API
+        PriceCategory.update {id: id}, {price_category: p_cat}, (cat) ->
+          $scope.priceCategories[index] = cat
+          growl.success(_t('price_category_successfully_updated'))
+        , (err)->
+          growl.error(_t('unable_to_update_the_price_category'))
+          console.error(err)
 
 
 

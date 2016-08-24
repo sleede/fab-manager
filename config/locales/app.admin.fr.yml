@@ -100,7 +100,10 @@ fr:
         enter_here_the_conditions_under_which_this_price_is_applicable: "Saisissez ici les conditions d'application du tarif"
         conditions_are_required: "Les conditions sont requises."
         price_category_successfully_created: "La catégorie tarifaire a bien été créée."
-        unable_to_add_the_price_category_an_error_occurred: "Impossible d'ajouter la catégorie tarifaire car une erreur inattendue est survenue."
+        unable_to_add_the_price_category_check_name_already_used: "Impossible d'ajouter la catégorie tarifaire, vérifiez que le nom n'est pas déjà utilisé."
+        unexpected_error_occurred_please_refresh: "Une erreur inattendue est survenue, merci de rafraîchir la page."
+        price_category_successfully_updated: "La catégorie tarifaire a bien été mise à jour."
+        unable_to_update_the_price_category: "Impossible de mettre à jour la catégorie tarifaire."
 
       events_new:
         # ajouter un nouvel évènement

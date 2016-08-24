@@ -100,7 +100,10 @@ en:
         enter_here_the_conditions_under_which_this_price_is_applicable: "Enter here the conditions under which this price is applicable"
         conditions_are_required: "Conditions are required."
         price_category_successfully_created: "Price category successfully created."
-        unable_to_add_the_price_category_an_error_occurred: "Unable to add the price category because of an unexpected error occurred."
+        unable_to_add_the_price_category_check_name_already_used: "Unable to add the price category, check that the name is not already used."
+        unexpected_error_occurred_please_refresh: "An unexpected error occurred, please refresh the page."
+        price_category_successfully_updated: "Price category successfully updated."
+        unable_to_update_the_price_category: "Unable to update the price category."
 
       events_new:
         # add a new event
