@@ -88,7 +88,12 @@
 
         <div class="text-sm" ng-if="event.amount">
           <div>{{ 'full_price_' | translate }} <span>{{ event.amount | currency}}</span></div>
-          <div ng-if="event.reduced_amount > 0">{{ 'reduced_rate*' | translate }} {{ event.reduced_amount | currency}}</div>
+          <div ng-repeat="price in event.prices" class="description-hover">
+            <span uib-popover="{{getPriceCategoryConditions(price.category.id)}}" popover-trigger="mouseenter">
+              {{price.category.name}} :
+            </span>
+            {{price.amount | currency}}
+          </div>
         </div>
 
         <div class="text-sm m-b" ng-if="event.nb_total_places">

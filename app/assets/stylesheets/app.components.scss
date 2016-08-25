@@ -579,3 +579,12 @@ padding: 10px;
     cursor: pointer;
   }
 }
+
+
+.description-hover {
+  span {
+    display: inline-block;
+    border-bottom: 1px dashed #00b3ee;
+    cursor: help;
+  }
+}

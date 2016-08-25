@@ -1,5 +1,5 @@
 class API::PriceCategoriesController < API::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:update, :show, :create, :destroy]
   before_action :set_price_category, only: [:show, :update, :destroy]
 
   def index
