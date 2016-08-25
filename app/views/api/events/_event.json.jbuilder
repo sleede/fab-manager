@@ -33,7 +33,13 @@ json.availability do
 end
 json.availability_id event.availability_id
 json.amount (event.amount / 100.0) if event.amount
-json.reduced_amount (event.reduced_amount / 100.0) if event.reduced_amount
+json.prices event.event_price_categories do |p_cat|
+  json.id p_cat.id
+  json.amount (p_cat.amount / 100.0)
+  json.category do
+    json.extract! p_cat.price_category, :id, :name
+  end
+end
 json.nb_total_places event.nb_total_places
 json.nb_free_places event.nb_free_places || event.nb_total_places
 

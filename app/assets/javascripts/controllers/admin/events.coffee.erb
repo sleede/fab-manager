@@ -126,6 +126,17 @@ class EventsController
 
 
 
+    ##
+    # Initialize a new price item in the additional prices list
+    ##
+    $scope.addPrice = ->
+      $scope.event.prices.push({
+        category: null,
+        amount: null,
+      })
+
+
+
 ##
 # Controller used in the events listing page (admin view)
 ##
@@ -393,9 +404,6 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
   ## List of availables price's categories
   $scope.priceCategories = priceCategoriesPromise
 
-  ## List of additional prices for the event
-  $scope.prices = []
-
   ## Default event parameters
   $scope.event =
     event_files_attributes: []
@@ -406,6 +414,7 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
     all_day: 'false'
     recurrence: 'none'
     category_id: null
+    prices: []
 
   ## Possible types of recurrences for an event
   $scope.recurrenceTypes = [
@@ -420,17 +429,6 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
 
-
-  ##
-  # Initialize a new price item in the additional prices list
-  ##
-  $scope.addPrice = ->
-    $scope.prices.push({
-      category: null,
-      amount: null,
-    })
-
-
   ## Using the EventsController
   new EventsController($scope, $state)
 ]
@@ -440,8 +438,8 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 ##
 # Controller used in the events edition page
 ##
-Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
-, ($scope, $state, $stateParams, $locale, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise) ->
+Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise'
+, ($scope, $state, $stateParams, $locale, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise) ->
 
   ### PUBLIC SCOPE ###
 
@@ -461,6 +459,9 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
 
   ## List of categories for the events
   $scope.categories = categoriesPromise
+
+  ## List of availables price's categories
+  $scope.priceCategories = priceCategoriesPromise
 
   ## List of events themes
   $scope.themes = themesPromise

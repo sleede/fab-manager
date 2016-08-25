@@ -237,7 +237,7 @@
              <span class="help-block" translate>{{ '0_=_free' }}</span>
           </div>
         </div>
-        <div class="form-group" ng-repeat="price in prices">
+        <div class="form-group" ng-repeat="price in event.prices">
           <div class="col-sm-5">
             <select class="form-control"
                     ng-model="price.category"
@@ -256,7 +256,7 @@
             </div>
           </div>
         </div>
-        <div class="link-icon m-b" ng-hide="prices.length == priceCategories.length">
+        <div class="link-icon m-b" ng-hide="event.prices.length == priceCategories.length">
           <div class="col-sm-offset-5">
             <i class="fa fa-plus"></i> <span ng-click="addPrice()">Ajouter un tarif</span>
           </div>
