@@ -239,6 +239,7 @@
         </div>
         <div class="form-group" ng-repeat="price in event.prices">
           <div class="col-sm-5">
+            <input type="hidden" name="event[event_price_categories_attributes][][id]" ng-value="price.id">
             <select class="form-control"
                     ng-model="price.category"
                     name="event[event_price_categories_attributes][][price_category_id]"

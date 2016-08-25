@@ -62,6 +62,7 @@ class API::EventsController < API::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
+      # handle general properties
       event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
                                                     :amount, :nb_total_places, :availability_id,
                                                     :all_day, :recurrence, :recurrence_end_at, :category_id, :event_theme_ids,
@@ -70,6 +71,7 @@ class API::EventsController < API::ApiController
                                                     event_files_attributes: [:id, :attachment, :_destroy],
                                                     event_price_categories_attributes: [:id, :price_category_id, :amount]
       )
+      # handle dates & times (whole-day events or not, maybe during many days)
       start_date = Time.zone.parse(event_preparams[:start_date])
       end_date = Time.zone.parse(event_preparams[:end_date])
       start_time = Time.parse(event_preparams[:start_time]) if event_preparams[:start_time]
@@ -83,10 +85,14 @@ class API::EventsController < API::ApiController
       end
       event_preparams.merge!(availability_attributes: {id: event_preparams[:availability_id], start_at: start_at, end_at: end_at, available_type: 'event'})
                      .except!(:start_date, :end_date, :start_time, :end_time, :all_day)
+      # convert main price to centimes
       event_preparams.merge!(amount: (event_preparams[:amount].to_i * 100 if event_preparams[:amount].present?))
+      # delete non-complete "other" prices and convert them to centimes
+      event_preparams[:event_price_categories_attributes].delete_if { |price_cat| price_cat[:price_category_id].empty? or price_cat[:amount].empty? }
       event_preparams[:event_price_categories_attributes].each do |price_cat|
         price_cat[:amount] = price_cat[:amount].to_i * 100
       end
+      # return the resulting params object
       event_preparams
     end
 
