@@ -569,3 +569,13 @@ padding: 10px;
   }
 }
 
+
+.link-icon {
+  color: #1c94c4;
+  i { margin: 0 5px 0 10px; }
+  span {
+    border-bottom: 1px dashed #00b3ee;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

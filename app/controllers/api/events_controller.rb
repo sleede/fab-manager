@@ -63,10 +63,13 @@ class API::EventsController < API::ApiController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
-                                                    :amount, :reduced_amount, :nb_total_places, :availability_id,
+                                                    :amount, :nb_total_places, :availability_id,
                                                     :all_day, :recurrence, :recurrence_end_at, :category_id, :event_theme_ids,
                                                     :age_range_id, event_theme_ids: [],
-                                                    event_image_attributes: [:attachment], event_files_attributes: [:id, :attachment, :_destroy])
+                                                    event_image_attributes: [:attachment],
+                                                    event_files_attributes: [:id, :attachment, :_destroy],
+                                                    event_price_categories_attributes: [:id, :price_category_id, :amount]
+      )
       start_date = Time.zone.parse(event_preparams[:start_date])
       end_date = Time.zone.parse(event_preparams[:end_date])
       start_time = Time.parse(event_preparams[:start_time]) if event_preparams[:start_time]
@@ -80,8 +83,11 @@ class API::EventsController < API::ApiController
       end
       event_preparams.merge!(availability_attributes: {id: event_preparams[:availability_id], start_at: start_at, end_at: end_at, available_type: 'event'})
                      .except!(:start_date, :end_date, :start_time, :end_time, :all_day)
-      event_preparams.merge!(amount: (event_preparams[:amount].to_i * 100 if event_preparams[:amount].present?),
-                             reduced_amount: (event_preparams[:reduced_amount].to_i * 100 if event_preparams[:reduced_amount].present?))
+      event_preparams.merge!(amount: (event_preparams[:amount].to_i * 100 if event_preparams[:amount].present?))
+      event_preparams[:event_price_categories_attributes].each do |price_cat|
+        price_cat[:amount] = price_cat[:amount].to_i * 100
+      end
+      event_preparams
     end
 
 

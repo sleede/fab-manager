@@ -371,8 +371,8 @@ Application.Controllers.controller "ShowEventReservationsController", ["$scope",
 ##
 # Controller used in the event creation page
 ##
-Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', '_t'
-, ($scope, $state, $locale, CSRF, categoriesPromise, themesPromise, ageRangesPromise, _t) ->
+Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t'
+, ($scope, $state, $locale, CSRF, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -389,6 +389,12 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 
   ## List of age ranges
   $scope.ageRanges = ageRangesPromise
+
+  ## List of availables price's categories
+  $scope.priceCategories = priceCategoriesPromise
+
+  ## List of additional prices for the event
+  $scope.prices = []
 
   ## Default event parameters
   $scope.event =
@@ -412,6 +418,18 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 
   ## currency symbol for the current locale (cf. angular-i18n)
   $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
+
+
+
+  ##
+  # Initialize a new price item in the additional prices list
+  ##
+  $scope.addPrice = ->
+    $scope.prices.push({
+      category: null,
+      amount: null,
+    })
+
 
   ## Using the EventsController
   new EventsController($scope, $state)
