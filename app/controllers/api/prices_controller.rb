@@ -61,7 +61,8 @@ class API::PricesController < API::ApiController
   end
 
   def compute_price_params
-    params.require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :user_id, :nb_reserve_places, :nb_reserve_reduced_places,
+    params.require(:reservation).permit(:reservable_id, :reservable_type, :plan_id, :user_id, :nb_reserve_places,
+                                        tickets_attributes: [:event_price_category_id, :booked],
                                         slots_attributes: [:id, :start_at, :end_at, :availability_id, :offered])
   end
 

@@ -150,9 +150,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ## parameters for a new reservation
   $scope.reserve =
     nbPlaces: []
-    nbReducedPlaces: []
+    nbReducedPlaces: [] #FIXME
     nbReservePlaces: 0
-    nbReserveReducedPlaces: 0
+    nbReserveReducedPlaces: 0 #FIXME
     toReserve: false
     amountTotal : 0
 
@@ -183,7 +183,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ##
   $scope.changeNbPlaces = ->
     reste = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
-    $scope.reserve.nbReducedPlaces = [0..reste]
+    $scope.reserve.nbReducedPlaces = [0..reste] #FIXME
     $scope.computeEventAmount()
 
 
@@ -191,7 +191,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ##
   # Callback to call when the number of discounted places change in the current booking
   ##
-  $scope.changeNbReducedPlaces = ->
+  $scope.changeNbReducedPlaces = -> #FIXME
     reste = $scope.event.nb_free_places - $scope.reserve.nbReserveReducedPlaces
     $scope.reserve.nbPlaces = [0..reste]
     $scope.computeEventAmount()
@@ -270,7 +270,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       reservable_type: 'Event'
       slots_attributes: []
       nb_reserve_places: $scope.reserve.nbReservePlaces
-      nb_reserve_reduced_places: $scope.reserve.nbReserveReducedPlaces
+      nb_reserve_reduced_places: $scope.reserve.nbReserveReducedPlaces #FIXME
     reservation.slots_attributes.push
       start_at: $scope.event.start_date
       end_at: $scope.event.end_date
@@ -420,7 +420,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
     # initialize the "reserve" object with the event's data
     $scope.reserve.nbPlaces = [0..$scope.event.nb_free_places]
-    $scope.reserve.nbReducedPlaces = [0..$scope.event.nb_free_places]
+    $scope.reserve.nbReducedPlaces = [0..$scope.event.nb_free_places] #FIXME
 
     # if non-admin, get the current user's reservations into $scope.reservations
     if $scope.currentUser
@@ -458,13 +458,18 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       reservable_type: 'Event'
       slots_attributes: []
       nb_reserve_places: reserve.nbReservePlaces
-      nb_reserve_reduced_places: reserve.nbReserveReducedPlaces
+      tickets_attributes: []
 
     reservation.slots_attributes.push
       start_at: event.start_date
       end_at: event.end_date
       availability_id: event.availability.id
       offered: event.offered || false
+
+    for price in event.prices
+      reservation.tickets_attributes.push
+        event_price_category_id: price.id
+        booked: reserve.fixme #FIXME
 
     reservation
 
@@ -491,7 +496,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     if $scope.event
       $scope.reserve =
         nbPlaces: [0..$scope.event.nb_free_places]
-        nbReducedPlaces: [0..$scope.event.nb_free_places]
+        nbReducedPlaces: [0..$scope.event.nb_free_places] #FIXME
         nbReservePlaces: 0
         nbReserveReducedPlaces: 0
         toReserve: false

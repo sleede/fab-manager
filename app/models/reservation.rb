@@ -6,6 +6,9 @@ class Reservation < ActiveRecord::Base
   accepts_nested_attributes_for :slots, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
+  has_many :tickets
+  accepts_nested_attributes_for :tickets, allow_destroy: false
+
   has_one :invoice, -> {where(type: nil)}, as: :invoiced, dependent: :destroy
 
   validates_presence_of :reservable_id, :reservable_type
