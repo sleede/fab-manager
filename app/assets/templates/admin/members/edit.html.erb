@@ -160,9 +160,9 @@
                       <br/>
                       <span translate translate-values="{ NUMBER: r.nb_reserve_places}" translate-interpolation="messageformat">{{ 'NUMBER_full_price_tickets_reserved' }}</span>
                     </span>
-                    <span ng-if="r.nb_reserve_reduced_places > 0">
+                    <span ng-repeat="ticket in r.tickets">
                       <br/>
-                      <span translate translate-values="{ NUMBER: r.nb_reserve_reduced_places}" translate-interpolation="messageformat">{{ 'NUMBER_reduced_rate_tickets_reserved' }}</span>
+                      <span translate translate-values="{ NUMBER: ticket.booked, NAME: ticket.price_category.name }" translate-interpolation="messageformat">{{ 'NUMBER_NAME_tickets_reserved' }}</span>
                     </span>
                   </li>
                 </ul>

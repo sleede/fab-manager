@@ -385,7 +385,7 @@ en:
         next_events: "Next events"
         no_upcoming_events: "No upcoming events"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
-        NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 reduced rate ticket reserved} other{{NUMBER} reduced rate tickets reserved}}"  # messageFormat interpolation
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation
         passed_events: "Passed events"
         invoices: "Invoices"
         invoice_#: "Invoice #"

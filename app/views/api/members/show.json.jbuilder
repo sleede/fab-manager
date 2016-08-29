@@ -109,7 +109,12 @@ json.events_reservations @member.reservations.where(reservable_type: 'Event').jo
   json.start_at r.slots.first.start_at
   json.end_at r.slots.first.end_at
   json.nb_reserve_places r.nb_reserve_places
-  json.nb_reserve_reduced_places r.nb_reserve_reduced_places
+  json.tickets r.tickets do |t|
+    json.booked t.booked
+    json.price_category do
+      json.name t.event_price_category.price_category.name
+    end
+  end
   json.reservable r.reservable
 end
 json.invoices @member.invoices.order('reference DESC') do |i|
