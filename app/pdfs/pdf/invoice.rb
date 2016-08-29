@@ -126,7 +126,9 @@ module PDF
                 details += I18n.t('invoices.event_reservation_DESCRIPTION', DESCRIPTION: item.description)
                 # details of the number of tickets
                 details += "\n  "+I18n.t('invoices.full_price_ticket', count: invoice.invoiced.nb_reserve_places) if invoice.invoiced.nb_reserve_places > 0
-                details += "\n  "+I18n.t('invoices.reduced_rate_ticket', count: invoice.invoiced.nb_reserve_reduced_places) if invoice.invoiced.nb_reserve_reduced_places > 0
+                invoice.invoiced.tickets.each do |t|
+                  details += "\n  "+I18n.t('invoices.other_rate_ticket', count: t.booked, NAME: t.event_price_category.price_category.name)
+                end
 
               ### Other cases (not expected)
               else

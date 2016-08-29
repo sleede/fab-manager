@@ -70,7 +70,7 @@ en:
     cancellation_of_invoice_REF: "Cancellation of invoice %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Reservation of %{USER} on %{DATE} at %{TIME}"
     cancellation: "Cancellation"
-    object: "Object:"
+    object: "Object:"COUNT
     order_summary: "Order summary:"
     details: "Details"
     amount: "Amount"
@@ -82,9 +82,9 @@ en:
     full_price_ticket:
       one: "One full price ticket"
       other: "%{count} full price tickets"
-    reduced_rate_ticket:
-      one: "One reduced rate ticket"
-      other: "%{count} reduced rate tickets"
+    other_rate_ticket:
+      one: "One %{NAME} ticket"
+      other: "%{count} %{NAME} tickets"
     reservation_other: "Reservation (other)"
     coupon_CODE_discount_of_PERCENT: "Coupon %{CODE}: discount of %{PERCENT}%"
     total_including_all_taxes: "Total incl. all taxes"

@@ -82,9 +82,9 @@ fr:
     full_price_ticket:
       one: "Une place plein tarif"
       other: "%{count} places plein tarif"
-    reduced_rate_ticket:
-      one: "Une place à tarif réduit"
-      other: "%{count} places à tarif réduit"
+    other_rate_ticket:
+      one: "Une place %{NAME}"
+      other: "%{count} places %{NAME}"
     reservation_other: "Réservation (autre)"
     coupon_CODE_discount_of_PERCENT: "Code %{CODE} : remise de %{PERCENT} %"
     total_including_all_taxes: "Total TTC"
