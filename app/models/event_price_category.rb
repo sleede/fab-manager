@@ -4,7 +4,6 @@ class EventPriceCategory < ActiveRecord::Base
 
   has_many :tickets
 
-  validates :event_id, presence: true
   validates :price_category_id, presence: true
   validates :amount, presence: true
 end

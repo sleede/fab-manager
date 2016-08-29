@@ -149,10 +149,10 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
   ## parameters for a new reservation
   $scope.reserve =
-    nbPlaces: []
-    nbReducedPlaces: [] #FIXME
+    nbPlaces:
+        normal: []
     nbReservePlaces: 0
-    nbReserveReducedPlaces: 0 #FIXME
+    tickets: {}
     toReserve: false
     amountTotal : 0
 
@@ -179,21 +179,25 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
-  # Callback to call when the number of places change in the current booking
+  # Callback to call when the number of tickets to book changes in the current booking
   ##
   $scope.changeNbPlaces = ->
-    reste = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
-    $scope.reserve.nbReducedPlaces = [0..reste] #FIXME
-    $scope.computeEventAmount()
+    # compute the total remaing places
+    remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
+    for ticket of $scope.reserve.tickets
+      remain -= $scope.reserve.tickets[ticket]
 
+    # update the availables seats for full price tickets
+    fullPriceRemains = $scope.reserve.nbReservePlaces + remain
+    $scope.reserve.nbPlaces.normal = [0..fullPriceRemains]
 
+    # update the available seats for other prices tickets
+    for key of $scope.reserve.nbPlaces
+      if key != 'normal'
+        priceRemain = $scope.reserve.tickets[key] + remain
+        $scope.reserve.nbPlaces[key] = [0..priceRemain]
 
-  ##
-  # Callback to call when the number of discounted places change in the current booking
-  ##
-  $scope.changeNbReducedPlaces = -> #FIXME
-    reste = $scope.event.nb_free_places - $scope.reserve.nbReserveReducedPlaces
-    $scope.reserve.nbPlaces = [0..reste]
+    # recompute the total price
     $scope.computeEventAmount()
 
 
@@ -409,18 +413,16 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    # gather the current user or the list of users if the current user is an admin
+    # set the controlled user as the current user if the current user is not an admin
     if $scope.currentUser
       if $scope.currentUser.role isnt 'admin'
         $scope.ctrl.member = $scope.currentUser
 
-    # check that the event's reduced rate is initialized
-    if !$scope.event.reduced_amount
-      $scope.event.reduced_amount = 0
-
     # initialize the "reserve" object with the event's data
-    $scope.reserve.nbPlaces = [0..$scope.event.nb_free_places]
-    $scope.reserve.nbReducedPlaces = [0..$scope.event.nb_free_places] #FIXME
+    $scope.reserve.nbPlaces.normal = [0..$scope.event.nb_free_places]
+    for price in $scope.event.prices
+      $scope.reserve.nbPlaces[price.id] = [0..$scope.event.nb_free_places]
+      $scope.reserve.tickets[price.id] = 0
 
     # if non-admin, get the current user's reservations into $scope.reservations
     if $scope.currentUser
@@ -469,7 +471,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     for price in event.prices
       reservation.tickets_attributes.push
         event_price_category_id: price.id
-        booked: reserve.fixme #FIXME
+        booked: reserve.tickets[price.id]
 
     reservation
 

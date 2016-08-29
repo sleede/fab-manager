@@ -113,17 +113,16 @@
                 <div class="row">
                   <label class="col-sm-6 control-label">{{ 'full_price_' | translate }} <span class="text-blue">{{event.amount | currency}}</span></label>
                   <div class="col-sm-6">
-                    <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces">
+                    <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces.normal">
                     </select> {{ 'ticket' | translate:{NUMBER:reserve.nbReservePlaces}:"messageformat" }}
                   </div>
                 </div>
-                <div class="row" ng-if="event.reduced_amount">
-                  <label class="col-sm-6 control-label">{{ 'reduced_rate*' | translate }} <span class="text-blue">{{event.reduced_amount | currency}}</span></label>
+                <div class="row" ng-repeat="price in event.prices">
+                  <label class="col-sm-6 control-label">{{price.category.name}} : <span class="text-blue">{{price.amount | currency}}</span></label>
                   <div class="col-sm-6">
-                    <select ng-model="reserve.nbReserveReducedPlaces" ng-change="changeNbReducedPlaces()" ng-options="i for i in reserve.nbReducedPlaces">
-                    </select> {{ 'ticket' | translate:{NUMBER:reserve.nbReserveReducedPlaces}:"messageformat" }}
+                    <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces[price.id]">
+                    </select> {{ 'ticket' | translate:{NUMBER:reserve.tickets[price.id]}:"messageformat" }}
                   </div>
-
                 </div>
 
                 <div ng-show="currentUser.role == 'admin'" class="m-t">
