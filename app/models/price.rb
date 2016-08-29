@@ -13,11 +13,11 @@ class Price < ActiveRecord::Base
   # @param slots {Array<Slot>} when did the reservation will occur
   # @param [plan_id] {Number} if the user is subscribing to a plan at the same time of his reservation, specify the plan's ID here
   # @param [nb_places] {Number} for _reservable_ of type Event, pass here the number of booked places
-  # @param [nb_reduced_places] {Number} for _reservable_ of type Event, pass here the number of booked places at reduced price
+  # @param [tickets] {Array<Ticket>} for _reservable_ of type Event, mapping of the number of seats booked per price's category
   # @param [coupon_code] {String} Code of the coupon to apply to the total price
   # @return {Hash} total and price detail
   ##
-  def self.compute(admin, user, reservable, slots, plan_id = nil, nb_places = nil, nb_reduced_places = nil, coupon_code = nil)
+  def self.compute(admin, user, reservable, slots, plan_id = nil, nb_places = nil, tickets = nil, coupon_code = nil)
     _amount = 0
     _elements = Hash.new
     _elements[:slots] = Array.new
@@ -91,11 +91,10 @@ class Price < ActiveRecord::Base
 
       # Event reservation
       when Event
-        if reservable.reduced_amount and nb_reduced_places
-          amount = reservable.amount * nb_places + (reservable.reduced_amount * nb_reduced_places)
-        else
-          amount = reservable.amount * nb_places
-        end
+        amount = reservable.amount * nb_places
+        tickets.each do |ticket|
+          amount += ticket[:booked] * EventPriceCategory.find(ticket[:event_price_category_id]).amount
+        end unless tickets.nil?
         slots.each do |slot|
           _amount += get_slot_price(amount, slot, admin, _elements)
         end

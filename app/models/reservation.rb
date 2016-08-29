@@ -102,10 +102,9 @@ class Reservation < ActiveRecord::Base
 
       # === Event reservation ===
       when Event
-        if reservable.reduced_amount and nb_reserve_reduced_places
-          amount = reservable.amount * nb_reserve_places + (reservable.reduced_amount * nb_reserve_reduced_places)
-        else
-          amount = reservable.amount * nb_reserve_places
+        amount = reservable.amount * nb_reserve_places
+        tickets.each do |ticket|
+          amount += ticket.booked * ticket.event_price_category.amount
         end
         slots.each do |slot|
           description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
@@ -135,7 +134,7 @@ class Reservation < ActiveRecord::Base
       total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
       invoice_items << Stripe::InvoiceItem.create(
           customer: user.stp_customer_id,
-          amount: -(total  * cp.percent_off / 100.0),
+          amount: -(total  * cp.percent_off / 100).to_i,
           currency: Rails.application.secrets.stripe_currency,
           description: "coupon #{cp.code}"
       )
@@ -356,12 +355,22 @@ class Reservation < ActiveRecord::Base
 
   def update_event_nb_free_places
     if reservable_id_was.blank?
-      nb_free_places = reservable.nb_free_places - nb_reserve_places - nb_reserve_reduced_places
+      # simple reservation creation, we subtract the number of booked seats from the previous number
+      nb_free_places = reservable.nb_free_places - nb_reserve_places
+      tickets.each do |ticket|
+        nb_free_places -= ticket.booked
+      end
     else
+      # reservation moved from another date (for recurring events)
+      seats = nb_reserve_places
+      tickets.each do |ticket|
+        seats += ticket.booked
+      end
+
       reservable_was = Event.find(reservable_id_was)
-      nb_free_places = reservable_was.nb_free_places + nb_reserve_places + nb_reserve_reduced_places
+      nb_free_places = reservable_was.nb_free_places + seats
       reservable_was.update_columns(nb_free_places: nb_free_places)
-      nb_free_places = reservable.nb_free_places - nb_reserve_places - nb_reserve_reduced_places
+      nb_free_places = reservable.nb_free_places - seats
     end
     reservable.update_columns(nb_free_places: nb_free_places)
   end

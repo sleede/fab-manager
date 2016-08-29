@@ -274,20 +274,31 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       reservable_type: 'Event'
       slots_attributes: []
       nb_reserve_places: $scope.reserve.nbReservePlaces
-      nb_reserve_reduced_places: $scope.reserve.nbReserveReducedPlaces #FIXME
+      tickets_attributes: []
+    # a single slot is used for events
     reservation.slots_attributes.push
       start_at: $scope.event.start_date
       end_at: $scope.event.end_date
       availability_id: $scope.event.availability.id
+    # iterate over reservations per prices
+    for price_id, seats of $scope.reserve.tickets
+      reservation.tickets_attributes.push
+        event_price_category_id: price_id
+        booked: seats
+    # set the attempting marker
     $scope.attempting = true
+    # save the reservation to the API
     Reservation.save reservation: reservation, (reservation) ->
+      # reservation successfull
       afterPayment(reservation)
       $scope.attempting = false
     , (response)->
+      # reservation failed
       $scope.alerts = []
       $scope.alerts.push
         msg: response.data.card[0]
         type: 'danger'
+      # unset the attempting marker
       $scope.attempting = false
 
 
@@ -419,10 +430,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         $scope.ctrl.member = $scope.currentUser
 
     # initialize the "reserve" object with the event's data
-    $scope.reserve.nbPlaces.normal = [0..$scope.event.nb_free_places]
-    for price in $scope.event.prices
-      $scope.reserve.nbPlaces[price.id] = [0..$scope.event.nb_free_places]
-      $scope.reserve.tickets[price.id] = 0
+    resetEventReserve()
 
     # if non-admin, get the current user's reservations into $scope.reservations
     if $scope.currentUser
@@ -468,10 +476,12 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       availability_id: event.availability.id
       offered: event.offered || false
 
-    for price in event.prices
-      reservation.tickets_attributes.push
-        event_price_category_id: price.id
-        booked: reserve.tickets[price.id]
+    for evt_px_cat in event.prices
+      booked = reserve.tickets[evt_px_cat.id]
+      if booked > 0
+        reservation.tickets_attributes.push
+          event_price_category_id: evt_px_cat.id
+          booked: booked
 
     reservation
 
@@ -497,12 +507,17 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   resetEventReserve = ->
     if $scope.event
       $scope.reserve =
-        nbPlaces: [0..$scope.event.nb_free_places]
-        nbReducedPlaces: [0..$scope.event.nb_free_places] #FIXME
+        nbPlaces:
+          normal: [0..$scope.event.nb_free_places]
         nbReservePlaces: 0
-        nbReserveReducedPlaces: 0
+        tickets: {}
         toReserve: false
         amountTotal : 0
+
+      for evt_px_cat in $scope.event.prices
+        $scope.reserve.nbPlaces[evt_px_cat.id] = [0..$scope.event.nb_free_places]
+        $scope.reserve.tickets[evt_px_cat.id] = 0
+
       $scope.event.offered = false
 
 
