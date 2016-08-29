@@ -62,8 +62,8 @@ en:
           your_next_events: "Your next events"
           no_events_to_come: "No events to come"
           your_previous_events: "Your previous events"
-          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =1{normal place reserved}, other{normal places reserved}}"  # messageFormat interpolation
-          NUMBER_reduced_fare_places_reserved: "{NUMBER} {NUMBER, plural, =1{reduced fare place reserved}, other{reduced fare places reserved}"  # messageFormat interpolation
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"  # messageFormat interpolation
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"  # messageFormat interpolation
         invoices:
           # dashboard: my invoices
           reference_number: "Reference number"
