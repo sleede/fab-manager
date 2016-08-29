@@ -32,7 +32,10 @@
               <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
             </td>
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
-            <td><span ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span><span ng-if="reservation.nb_reserve_reduced_places > 0">{{ 'reduced_rate_' | translate }} {{reservation.nb_reserve_reduced_places}}</span></td>
+            <td>
+              <span ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span>
+              <span ng-repeat="ticket in reservation.tickets">{{ticket.event_price_category.price_category.name}} : {{ticket.booked}}</span>
+            </td>
             <td>
               <div class="buttons">
                 <button class="btn btn-default" ui-sref="app.public.events_show({id: event.id})">
