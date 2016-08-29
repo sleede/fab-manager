@@ -55,7 +55,7 @@
               <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
               <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
 
-              <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-if="event.reduced_amount > 0">/ {{ 'reduced_rate_' | translate }} {{event.reduced_amount | currency}}</span></h6>
+              <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
 
               <div>
                 <span class="text-black-light text-xs" ng-if="event.event_themes[0]"><i class="fa fa-tags" aria-hidden="true"></i> {{event.event_themes[0].name}}</span>

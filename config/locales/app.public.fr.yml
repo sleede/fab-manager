@@ -226,7 +226,6 @@ fr:
         beginning: "Début :"
         ending: "Fin :"
         opening_hours: "Horaires :"
-        reduced_rate*: "Tarif réduit* :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet."
         free_entry: "Entrée libre"

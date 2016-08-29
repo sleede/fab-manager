@@ -224,7 +224,6 @@ en:
         beginning: "Beginning:"
         ending: "Ending:"
         opening_hours: "Opening hours:"
-        reduced_rate*: "Reduced rate*:"
         tickets_still_availables: "Tickets still available:"
         sold_out: "Sold out."
         free_entry: "Free entry"
