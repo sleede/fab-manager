@@ -408,13 +408,14 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
-  # Return the textual description of the conditions applyable to the given price's category
+  # Return the requested property of the given price's category (name or conditions)
   # @param category_id {number} ID of the price's category
+  # @param [property] {string} name of the field to get, name if undefined
   ##
-  $scope.getPriceCategoryConditions = (category_id) ->
+  $scope.getPriceCategory = (category_id, property = 'name') ->
     for cat in $scope.priceCategories
       if cat.id == category_id
-        return cat.conditions
+        return cat[property]
 
 
 

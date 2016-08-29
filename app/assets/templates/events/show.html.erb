@@ -89,7 +89,7 @@
         <div class="text-sm" ng-if="event.amount">
           <div>{{ 'full_price_' | translate }} <span>{{ event.amount | currency}}</span></div>
           <div ng-repeat="price in event.prices" class="description-hover">
-            <span uib-popover="{{getPriceCategoryConditions(price.category.id)}}" popover-trigger="mouseenter">
+            <span uib-popover="{{getPriceCategory(price.category.id, 'conditions')}}" popover-trigger="mouseenter">
               {{price.category.name}} :
             </span>
             {{price.amount | currency}}
@@ -153,7 +153,9 @@
           <div class="well well-warning m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
             <div class="font-sbold text-u-c text-sm">{{ 'you_booked_(DATE)' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
             <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'ticket' | translate:{NUMBER:reservation.nb_reserve_places}:"messageformat" }}</div>
-            <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_reduced_places > 0">{{ 'reduced_rate*' | translate }} {{reservation.nb_reserve_reduced_places}} {{ 'ticket' | translate:{NUMBER:reservation.nb_reserve_reduced_places}:"messageformat" }}</div>
+            <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
+              {{getPriceCategory(ticket.event_price_category.price_category_id)}} : {{ticket.booked}} {{ 'ticket' | translate:{NUMBER:ticket.booked}:"messageformat" }}
+            </div>
             <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
               <a class="pull-right m-t-xs text-u-l" href="#" ng-click="modifyReservation(reservation, $event)" translate>{{ 'change' }}</a>
             </div>
