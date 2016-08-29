@@ -209,7 +209,7 @@ class StatisticService
           event_date: slot.start_at.to_date,
           event_theme: (r.reservable.event_themes.first ? r.reservable.event_themes.first.name : ''),
           age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
-          nb_places: r.nb_reserve_places + r.nb_reserve_reduced_places,
+          nb_places: r.nb_reserve_places + (r.tickets.map(&:booked).map(&:to_i).reduce(:+) || 0),
           nb_hours: difference_in_hours(slot.start_at, slot.end_at),
           ca: calcul_ca(r.invoice)
         }.merge(user_info(u))) if r.reservable

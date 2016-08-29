@@ -70,7 +70,7 @@ en:
     cancellation_of_invoice_REF: "Cancellation of invoice %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Reservation of %{USER} on %{DATE} at %{TIME}"
     cancellation: "Cancellation"
-    object: "Object:"COUNT
+    object: "Object:"
     order_summary: "Order summary:"
     details: "Details"
     amount: "Amount"
