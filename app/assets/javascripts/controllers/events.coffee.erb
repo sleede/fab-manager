@@ -464,7 +464,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # @param member {Object} User as retreived from the API: current user / selected user if current is admin
   # @param reserve {Object} Reservation parameters (places...)
   # @param event {Object} Current event
-  # @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, nb_reserve_places:Number, nb_reserve_reduced_places:Number}}
+  # @return {{user_id:number, reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
   ##
   mkReservation = (member, reserve, event) ->
     reservation =
@@ -663,7 +663,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # @param resveration {Object} booked reservation
   ##
   afterPayment = (reservation)->
-    $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.nb_reserve_places - reservation.nb_reserve_reduced_places
+    $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats
     resetEventReserve()
     $scope.reserveSuccess = true
     $scope.reservations.push reservation
