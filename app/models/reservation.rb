@@ -366,16 +366,10 @@ class Reservation < ActiveRecord::Base
   def update_event_nb_free_places
     if reservable_id_was.blank?
       # simple reservation creation, we subtract the number of booked seats from the previous number
-      nb_free_places = reservable.nb_free_places - nb_reserve_places
-      tickets.each do |ticket|
-        nb_free_places -= ticket.booked
-      end
+      nb_free_places = reservable.nb_free_places - total_booked_seats
     else
       # reservation moved from another date (for recurring events)
-      seats = nb_reserve_places
-      tickets.each do |ticket|
-        seats += ticket.booked
-      end
+      seats = total_booked_seats
 
       reservable_was = Event.find(reservable_id_was)
       nb_free_places = reservable_was.nb_free_places + seats

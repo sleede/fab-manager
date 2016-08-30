@@ -9,7 +9,6 @@ class Setting < ActiveRecord::Base
                              training_explications_alert
                              training_information_message
                              subscription_explications_alert
-                             event_reduced_amount_alert
                              invoice_logo
                              invoice_reference
                              invoice_code-active

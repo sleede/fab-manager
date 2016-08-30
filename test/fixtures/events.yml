@@ -8,7 +8,6 @@ event_2:
   updated_at: 2016-04-04 15:44:03.161942000 Z
   availability_id: 10
   amount: 2000
-  reduced_amount: 1500
   nb_total_places: 10
   nb_free_places: 10
   recurrence_id: 1
@@ -24,7 +23,6 @@ event_3:
   updated_at: 2016-04-04 15:44:04.028290000 Z
   availability_id: 11
   amount: 2000
-  reduced_amount: 1500
   nb_total_places: 10
   nb_free_places: 10
   recurrence_id: 1
@@ -39,7 +37,6 @@ event_1:
   updated_at: 2016-04-04 15:44:02.236165000 Z
   availability_id: 9
   amount: 2000
-  reduced_amount: 1500
   nb_total_places: 10
   nb_free_places: 10
   recurrence_id: 1

@@ -105,7 +105,7 @@ class Event < ActiveRecord::Base
     if nb_total_places.nil?
       self.nb_free_places = nil
     else
-      reserved_places = reservations.map{|r| r.nb_reserve_places + r.nb_reserve_reduced_places}.inject(0){|sum, t| sum + t }
+      reserved_places = reservations.map(&:total_booked_seats).inject(0){|sum, t| sum + t }
       self.nb_free_places = (nb_total_places - reserved_places)
     end
   end

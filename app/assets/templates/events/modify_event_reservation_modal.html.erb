@@ -5,7 +5,7 @@
 <div class="modal-body">
   <p translate>{{ 'you_can_shift_this_reservation_on_the_following_slots' }}</p>
   <select ng-model="reservation.reservable_id" class="form-control">
-    <option value="{{e.id}}" ng-repeat="e in event.recurrence_events" ng-if="e.nb_free_places >= (reservation.nb_reserve_places + reservation.nb_reserve_reduced_places)">{{e.start_date | amDateFormat:'L'}}</option>
+    <option value="{{e.id}}" ng-repeat="e in event.recurrence_events" ng-if="e.nb_free_places >= reservation.total_booked_seats">{{e.start_date | amDateFormat:'L'}}</option>
   </select>
 </div>
 <div class="modal-footer">

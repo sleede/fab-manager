@@ -376,7 +376,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   $scope.reservationCanModify = (reservation)->
     isAble = false
     angular.forEach $scope.event.recurrence_events, (e)->
-      isAble = true if e.nb_free_places > reservation.total_booked_seats
+      isAble = true if e.nb_free_places >= reservation.total_booked_seats
     isAble
 
 

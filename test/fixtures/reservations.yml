@@ -9,4 +9,3 @@ reservation_1:
   reservable_type: Training
   stp_invoice_id:
   nb_reserve_places:
-  nb_reserve_reduced_places:
