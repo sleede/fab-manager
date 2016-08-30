@@ -164,22 +164,19 @@
 
           <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve">{{ 'book' | translate }}</button>
 
-          <coupon show="(reserve.nbReservePlaces > 0 || reserve.nbReserveReducedPlaces > 0) && ctrl.member" coupon="coupon.applied" user-id="{{ctrl.member.id}}"></coupon>
+          <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" user-id="{{ctrl.member.id}}"></coupon>
         </div>
       </div>
 
       <div class="panel-footer no-padder ng-scope" ng-if="event.amount">
-        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.nbReservePlaces > 0 || reserve.nbReserveReducedPlaces > 0">{{ 'confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
+        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
       </div>
 
       <div class="panel-footer no-padder ng-scope" ng-if="event.amount == 0">
-        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.nbReservePlaces > 0 || reserve.nbReserveReducedPlaces > 0" ng-disabled="attempting">{{ 'confirm' | translate }}</button>
+        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'confirm' | translate }}</button>
       </div>
 
     </section>
-
-     <div ng-if="event.reduced_amount" ng-bind-html="reducedAmountAlert" class="alert alert-warning text-sm m" role="alert">
-     </div>
 
   </div>
 

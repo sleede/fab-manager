@@ -154,6 +154,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     tickets: {}
     toReserve: false
     amountTotal : 0
+    totalSeats: 0
 
   ## Discount coupon to apply to the basket, if any
   $scope.coupon =
@@ -185,6 +186,8 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
     for ticket of $scope.reserve.tickets
       remain -= $scope.reserve.tickets[ticket]
+    # we store the total number of seats booked, this is used to know if the 'pay' button must be shown
+    $scope.reserve.totalSeats = $scope.event.nb_free_places - remain
 
     # update the availables seats for full price tickets
     fullPriceRemains = $scope.reserve.nbReservePlaces + remain
@@ -512,6 +515,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         tickets: {}
         toReserve: false
         amountTotal : 0
+        totalSeats: 0
 
       for evt_px_cat in $scope.event.prices
         $scope.reserve.nbPlaces[evt_px_cat.id] = [0..$scope.event.nb_free_places]
