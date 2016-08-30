@@ -17,6 +17,7 @@ json.tickets reservation.tickets do |t|
     end
   end
 end
+json.total_booked_seats reservation.total_booked_seats
 json.created_at reservation.created_at.iso8601
 json.reservable_id reservation.reservable_id
 json.reservable_type reservation.reservable_type

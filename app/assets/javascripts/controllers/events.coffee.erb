@@ -132,13 +132,12 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
-Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'reducedAmountAlert', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise',
-($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, reducedAmountAlert, growl, _t, Wallet, helpers, priceCategoriesPromise) ->
+Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise',
+($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise) ->
 
 
 
   ### PUBLIC SCOPE ###
-  $scope.reducedAmountAlert = reducedAmountAlert.setting.value
 
   ## reservations for the currently shown event
   $scope.reservations = []
@@ -306,7 +305,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ##
   # Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
   # a new date for his reservation (if any available)
-  # @param reservation {{id:number, reservable_id:number, nb_reserve_places:number, nb_reserve_reduced_places:number}}
+  # @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
   # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   ##
   $scope.modifyReservation = (reservation, e)->
@@ -326,7 +325,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
         # set the reservable_id to the first available event
         for e in event.recurrence_events
-          if e.nb_free_places > (reservation.nb_reserve_places + reservation.nb_reserve_reduced_places)
+          if e.nb_free_places > reservation.total_booked_seats
             $scope.reservation.reservable_id = e.id
             break
 
@@ -365,13 +364,13 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
-  # Checks if the provided reservation is able to be modified
-  # @param reservation {{nb_reserve_places:number, nb_reserve_reduced_places:number}}
+  # Checks if the provided reservation is able to be moved (date change)
+  # @param reservation {{total_booked_seats:number}}
   ##
   $scope.reservationCanModify = (reservation)->
     isAble = false
     angular.forEach $scope.event.recurrence_events, (e)->
-      isAble = true if e.nb_free_places > (reservation.nb_reserve_places + reservation.nb_reserve_reduced_places)
+      isAble = true if e.nb_free_places > reservation.total_booked_seats
     isAble
 
 
