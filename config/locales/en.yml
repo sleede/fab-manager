@@ -316,3 +316,8 @@ en:
     revenue: "Revenue"
     male: "Man"
     female: "Woman"
+
+  price_category:
+    # initial price's category for events, created to replace the old "reduced amount" property
+    reduced_fare: "Reduced fare"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Reduced fare if you are under 25, student or unemployed."

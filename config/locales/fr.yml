@@ -316,3 +316,8 @@ fr:
     revenue: "Chiffre d'affaires"
     male: "Homme"
     female: "Femme"
+
+  price_category:
+    # catégorie initiale de prix pour les évènements, en remplacement de l'ancienne propriété "montant réduit"
+    reduced_fare: "Tarif réduit"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarif réduit si vous avez moins de 25 ans, que vous êtes étudiant ou demandeur d'emploi."
