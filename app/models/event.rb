@@ -77,6 +77,10 @@ class Event < ActiveRecord::Base
         efs = event_files.map do |f|
           EventFile.new(attachment: f.attachment)
         end
+        event_price_cats = []
+        event_price_categories.each do |epc|
+          event_price_cats.push(EventPriceCategory.new(price_category_id: epc.price_category_id, amount: epc.amount))
+        end
         event = Event.new({
           recurrence: 'none',
           title: title,
@@ -87,7 +91,7 @@ class Event < ActiveRecord::Base
           availability_id: nil,
           category_id: category_id,
           amount: amount,
-          reduced_amount: reduced_amount,
+          event_price_categories: event_price_cats,
           nb_total_places: nb_total_places,
           recurrence_id: id
         })
