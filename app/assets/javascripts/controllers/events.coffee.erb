@@ -358,11 +358,14 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           $uibModalInstance.dismiss('cancel')
       ]
     .result['finally'](null).then (reservation)->
+      # remove the reservation from the user's reservations list for this event (occurrence)
       $scope.reservations.splice(index, 1)
-      $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.nb_reserve_places + reservation.nb_reserve_reduced_places
+      # add the number of places transfered (to the new date) to the total of free places for this event
+      $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats
+      # remove the number of places transfered from the total of free places of the receiving occurrance
       angular.forEach $scope.event.recurrence_events, (e)->
-        if e.id is parseInt(reservation.reservable_id, 10)
-          e.nb_free_places = e.nb_free_places - reservation.nb_reserve_places - reservation.nb_reserve_reduced_places
+        if e.id is parseInt(reservation.reservable.id, 10)
+          e.nb_free_places = e.nb_free_places - reservation.total_booked_seats
 
 
 

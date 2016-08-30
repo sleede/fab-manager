@@ -34,4 +34,5 @@ json.tickets @reservation.tickets do |t|
     end
   end
 end
+json.total_booked_seats @reservation.total_booked_seats
 json.created_at @reservation.created_at.iso8601

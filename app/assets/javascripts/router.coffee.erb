@@ -512,9 +512,6 @@ angular.module('application.router', ['ui.router']).
           eventPromise: ['Event', '$stateParams', (Event, $stateParams)->
             Event.get(id: $stateParams.id).$promise
           ]
-          reducedAmountAlert: ['Setting', (Setting)->
-            Setting.get(name: 'event_reduced_amount_alert').$promise
-          ]
           priceCategoriesPromise: ['PriceCategory', (PriceCategory) ->
             PriceCategory.query().$promise
           ]
