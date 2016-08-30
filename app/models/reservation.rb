@@ -132,12 +132,14 @@ class Reservation < ActiveRecord::Base
     unless coupon_code.nil?
       cp = Coupon.find_by_code(coupon_code)
       total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-      invoice_items << Stripe::InvoiceItem.create(
-          customer: user.stp_customer_id,
-          amount: -(total  * cp.percent_off / 100).to_i,
-          currency: Rails.application.secrets.stripe_currency,
-          description: "coupon #{cp.code}"
-      )
+      unless on_site
+        invoice_items << Stripe::InvoiceItem.create(
+            customer: user.stp_customer_id,
+            amount: -(total  * cp.percent_off / 100).to_i,
+            currency: Rails.application.secrets.stripe_currency,
+            description: "coupon #{cp.code}"
+        )
+      end
     end
 
     @wallet_amount_debit = get_wallet_amount_debit
@@ -313,6 +315,14 @@ class Reservation < ActiveRecord::Base
       UsersCredits::Manager.new(reservation: self).update_credits
       return true
     end
+  end
+
+  def total_booked_seats
+    total = nb_reserve_places
+    if tickets.count > 0
+      total += tickets.map(&:booked).map(&:to_i).reduce(:+)
+    end
+    total
   end
 
   private
