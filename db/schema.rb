@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830154719) do
+ActiveRecord::Schema.define(version: 20160831084519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,7 +165,6 @@ ActiveRecord::Schema.define(version: 20160830154719) do
     t.datetime "updated_at"
     t.integer  "availability_id"
     t.integer  "amount"
-    t.integer  "reduced_amount"
     t.integer  "nb_total_places"
     t.integer  "nb_free_places"
     t.integer  "recurrence_id"
@@ -497,10 +496,9 @@ ActiveRecord::Schema.define(version: 20160830154719) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "reservable_id"
-    t.string   "reservable_type",           limit: 255
-    t.string   "stp_invoice_id",            limit: 255
+    t.string   "reservable_type",   limit: 255
+    t.string   "stp_invoice_id",    limit: 255
     t.integer  "nb_reserve_places"
-    t.integer  "nb_reserve_reduced_places"
   end
 
   add_index "reservations", ["reservable_id", "reservable_type"], name: "index_reservations_on_reservable_id_and_reservable_type", using: :btree
