@@ -60,6 +60,18 @@ class PlanController
 
 
 
+    ##
+    # Retrieve the name of a machine from its ID
+    # @param machine_id {number} machine identifier
+    # @returns {string} Machine's name
+    ##
+    $scope.getMachineName = (machine_id) ->
+      for machine in $scope.machines
+        if machine.id == machine_id
+          return machine.name
+
+
+
 
 
 

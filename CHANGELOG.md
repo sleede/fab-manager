@@ -31,6 +31,7 @@
 - Admins can toggle reminders on/off and customize the delay
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
+- Fix a bug: machine name is not shown in plan edition 
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`

@@ -47,7 +47,7 @@
                   <tbody>
 
                   <tr ng-repeat="price in plan.prices">
-                      <td style="width: 60%;">{{ price.priceable_name }} (id {{ price.priceable_id }}) *</td>
+                      <td style="width: 60%;">{{ getMachineName(price.priceable_id) }} (id {{ price.priceable_id }}) *</td>
                       <td>
                           <div class="input-group" ng-class="{'has-error': planForm['plan[prices_attributes][][amount]'].$dirty && planForm['plan[prices_attributes][][amount]'].$invalid}">
                               <span class="input-group-addon">{{currencySymbol}}</span>
