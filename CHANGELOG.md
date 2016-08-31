@@ -15,6 +15,8 @@
 - Admin: Events can be associated with a theme and an age range
 - Admin: Event categories, themes and age ranges can be customized
 - Filter events by category, theme and age range in public view
+- Ability to customise price's categories for the events
+- Events can be associated with many custom price's categories, instead of only one "reduced price"
 - Statistics will include informations abouts events category, theme and age range
 - Ability to export the current statistics table to an Excel file
 - Ability to export every statistics on a given dates range to an Excel file
