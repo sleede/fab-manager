@@ -32,6 +32,7 @@
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] add `EXCEL_DATE_FORMAT` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
 
 ## v2.3.0 2016 June 28
