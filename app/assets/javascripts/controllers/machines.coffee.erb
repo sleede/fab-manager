@@ -751,8 +751,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     if $scope.currentUser.role is 'admin' and event.tags.length > 0
       html = ''
       for tag in event.tags
-        html += "<span class='label label-success text-white' title='#{tag.name}'>#{tag.name}</span>"
-      element.find('.fc-time').append(html)
+        html += "<div class='fc-title'><span class='label label-success text-white' title='#{tag.name}'>#{tag.name}</span></div>"
+      element.find('.fc-content').append(html)
+    return
 
 
 
