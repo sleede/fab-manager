@@ -37,18 +37,18 @@
                 </div>
             </div>
             <div class="row" ng-show="enableMove.value">
-                <div class="col-md-4">
+                <form class="col-md-4" name="moveDelayForm">
                     <label for="moveDelay" class="control-label m-r" translate>{{ 'prior_period_(hours)' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-clock-o"></i>
                             </div>
-                            <input type="number" class="form-control" id="moveDelay" ng-model="moveDelay.value">
+                            <input type="number" class="form-control" id="moveDelay" ng-model="moveDelay.value" min="0" ng-required="enableMove.value">
                         </div>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(moveDelay)" translate>{{ 'save' }}</button>
-                </div>
+                    <button name="button" class="btn btn-warning" ng-click="save(moveDelay)" ng-disabled="moveDelayForm.$invalid" translate>{{ 'save' }}</button>
+                </form>
             </div>
             <div class="row">
                 <h3 class="m-l" translate>{{ 'ability_for_the_users_to_cancel_their_reservations' }}</h3>
@@ -66,18 +66,18 @@
                 </div>
             </div>
             <div class="row" ng-show="enableCancel.value">
-                <div class="col-md-4">
+                <form class="col-md-4" name="cancelDelayForm">
                     <label for="cancelDelay" class="control-label m-r" translate>{{ 'prior_period_(hours)' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-clock-o"></i>
                             </div>
-                            <input type="number" class="form-control" id="cancelDelay" ng-model="cancelDelay.value">
+                            <input type="number" class="form-control" id="cancelDelay" ng-model="cancelDelay.value" min="0" ng-required="enableCancel.value">
                         </div>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(cancelDelay)" translate>{{ 'save' }}</button>
-                </div>
+                    <button name="button" class="btn btn-warning" ng-click="save(cancelDelay)" ng-disabled="cancelDelayForm.$invalid" translate>{{ 'save' }}</button>
+                </form>
             </div>
         </div>
     </div>
@@ -104,18 +104,21 @@
             </div>
         </div>
         <div class="row" ng-show="enableReminder.value">
-            <div class="col-md-4">
+            <form class="col-md-4" name="reminderDelayForm">
                 <label for="reminderDelay" class="control-label m-r" translate>{{ 'prior_period_(hours)' }}</label>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
                         </div>
-                        <input type="number" class="form-control" id="reminderDelay" ng-model="reminderDelay.value">
+                        <input type="number" class="form-control" id="reminderDelay" ng-model="reminderDelay.value" min="0">
                     </div>
+                    <span class="help-block text-info text-xs">
+                        <i class="fa fa-lightbulb-o"></i> {{ 'default_value_is_24_hours' | translate }}
+                    </span>
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(reminderDelay)" translate>{{ 'save' }}</button>
-            </div>
+                <button name="button" class="btn btn-warning" ng-click="save(reminderDelay)" ng-disabled="reminderDelayForm.$invalid" translate>{{ 'save' }}</button>
+            </form>
         </div>
     </div>
 </div>
