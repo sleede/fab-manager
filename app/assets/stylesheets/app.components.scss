@@ -424,14 +424,14 @@
 }
 
 .event:hover {
-//background-color: #cb1117;
-color: white;
+  // background-color: #cb1117;
+  color: white;
 }
 
 
 .event:hover * {
-color: #eee;
-border-color: #eee;
+  color: #eee !important;
+  border-color: #eee;
 }
 
 .box-h-m {
