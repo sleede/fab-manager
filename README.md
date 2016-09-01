@@ -6,14 +6,15 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 ##### Table of Contents  
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
-3. [Setup a production environment with Docker and CoreOS](#setup-a-production-environment)
+3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
 4.2. [Environment Configuration](#environment-configuration)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
-5.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)
+5.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)<br/>
+5.4. [PostgreSQL Limitations](#postgresql-limitations)
 6. [ElasticSearch](#elasticsearch)<br/>
 6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
 6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
@@ -38,7 +39,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 
 FabManager is a Ruby on Rails / AngularJS web application that runs on the following software:
 
-- Ubuntu/Debian
+- Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.3
 - Git 1.9.1+
 - Redis 2.8.4+
@@ -54,12 +55,15 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 **IMPORTANT**: **do not** update Arshaw/fullCalendar.js as it contains a hack for the remove-event cross.
 
 <a name="setup-a-production-environment"></a>
-## Setup a production environment with Docker and CoreOS
+## Setup a production environment
 
-[Docker Readme](docker/README.md)
+To run fab-manager as a production application, this is highly recommended to use [Docker](https://www.docker.com/).
+The procedure to follow is described in the [docker readme](docker/README.md).
 
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
+
+In you only intend to run fab-manager on your local machine for testing purposes or to contribute to the project development, you can set it up with the following procedure.
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -149,11 +153,13 @@ If you are in a development environment, your can keep the default values, other
     POSTGRES_HOST
 
 DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](#postgresql)).
+This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
 
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
 Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for informations on how to create a user and set his password.
+This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
 
     REDIS_HOST
 
@@ -330,6 +336,30 @@ To create it, please follow these instructions:
    ```sql
    ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
    ```
+6. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
+ 
+<a name="postgresql-limitations"></a>
+### PostgreSQL Limitations
+
+- While setting up the database, we'll need to active two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
+  This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role OR if these extensions were white-listed.
+  So here's your choice, mainly depending on your security requirements:
+  - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
+  - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
+    ```sql
+    ALTER USER sleede WITH SUPERUSER;
+    ```
+  - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist). 
+    Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
+- Some users may want to use another DBMS than PostgreSQL. 
+  This is currently not supported, because of some PostgreSQL specific instructions that cannot be efficiently handled with the ActiveRecord ORM:
+  - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
+  - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
+  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
+  - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
+- If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
+  This also requires your user to have the _SUPERUSER_ role. 
+  Please see the [known issues](#known-issues) for more informations about this.
 
 <a name="elasticsearch"></a>
 ## ElasticSearch
@@ -624,12 +654,6 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
         ALTER ROLE sleede WITH SUPERUSER;
 
  DO NOT do this in a production environment, as this would lead to a serious security issue.
-
-- Using another DBMS than PostgreSQL is not supported, because of some PostgreSQL specific instructions:
-  - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
-  - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
-  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
-  - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
 
 <a name="related-documentation"></a>
 ## Related Documentation
