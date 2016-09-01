@@ -165,7 +165,7 @@ class Reservation < ActiveRecord::Base
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
-        if subscription.save_with_payment(false)
+        if subscription.save_with_payment(false, coupon_code)
           self.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
