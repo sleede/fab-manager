@@ -341,8 +341,8 @@ To create it, please follow these instructions:
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
 
-- While setting up the database, we'll need to active two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
-  This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role OR if these extensions were white-listed.
+- While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
+  This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
   So here's your choice, mainly depending on your security requirements:
   - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
