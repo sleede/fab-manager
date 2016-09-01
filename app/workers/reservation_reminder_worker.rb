@@ -13,9 +13,16 @@ class ReservationReminderWorker
       ending = starting + 1.hour
 
       Reservation.joins(:slots).where('slots.start_at >= ? AND slots.start_at <= ?', starting, ending).each do |r|
-        NotificationCenter.call type: 'notify_member_reservation_reminder',
-                                receiver: r.user,
-                                attached_object: r
+        already_sent = Notification.where(
+            attached_object_type: Reservation.name,
+            attached_object_id: r.id,
+            notification_type_id: NotificationType.find_by_name('notify_member_reservation_reminder')
+        ).count
+        unless already_sent > 0
+          NotificationCenter.call type: 'notify_member_reservation_reminder',
+                                  receiver: r.user,
+                                  attached_object: r
+        end
       end
     end
   end
