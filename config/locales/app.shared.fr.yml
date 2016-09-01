@@ -345,6 +345,7 @@ fr:
         forever: "À chaque utilisation"
         validity_per_user_is_required: "La validité par utilisateur est requise."
         valid_until: "Valable jusqu'au (inclus)"
+        leave_empty_for_no_limit: "Laissez vide pour ne pas spécifier de limite."
         max_usages: "Nombre maximum d'utilisations autorisées"
         max_usages_must_be_equal_or_greater_than_0: "Le nombre d'utilisations maximum doit être supérieur ou égal à 0."
         enabled: "Activé"

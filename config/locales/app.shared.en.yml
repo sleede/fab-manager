@@ -345,6 +345,7 @@ en:
         forever: "Each use"
         validity_per_user_is_required: "Validity per user is required."
         valid_until: "Valid until (included)"
+        leave_empty_for_no_limit: "Do not specify any limit by leaving the field empty."
         max_usages: "Maximum usages allowed"
         max_usages_must_be_equal_or_greater_than_0: "The maximum usages allowed must be greater than 0."
         enabled: "Active"
