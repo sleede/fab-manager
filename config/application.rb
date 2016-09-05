@@ -63,6 +63,9 @@ module Fablab
       config.web_console.whitelisted_ips << '10.0.2.2' #vagrant
     end
 
+    # load locales for subdirectories
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/*.yml').to_s]
+
     # enable the app to find locales in plugins locales directory
     config.i18n.load_path += Dir["#{Rails.root}/plugins/*/config/locales/*.yml"]
 

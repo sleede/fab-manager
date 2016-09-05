@@ -1,0 +1,5 @@
+fr:
+  app:
+    public:
+      common:
+        return: "test"

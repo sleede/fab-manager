@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
+- Load locales for subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events
 - Display 'draft' badge on drafts in project galleries
