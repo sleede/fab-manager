@@ -108,7 +108,7 @@ namespace :fablab do
       client.indices.delete_mapping index: Project.index_name, type: Project.document_type
     end
     # create doctype
-    client.indices.put_mapping index: Project.index_name, type: Project.document_type, body: { settings: Project.settings.to_hash, mappings: Project.mappings.to_hash }
+    client.indices.put_mapping index: Project.index_name, type: Project.document_type, body: Project.mappings.to_hash
 
     # index requested documents
     if args.id
@@ -132,7 +132,7 @@ namespace :fablab do
       client.indices.delete_mapping index: Availability.index_name, type: Availability.document_type
     end
     # create doctype
-    client.indices.put_mapping index: Availability.index_name,  type: Availability.document_type, body: { settings: Availability.settings.to_hash, mappings: Availability.mappings.to_hash }
+    client.indices.put_mapping index: Availability.index_name,  type: Availability.document_type, body: Availability.mappings.to_hash
 
     # index requested documents
     if args.id
