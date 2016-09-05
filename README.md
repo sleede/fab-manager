@@ -346,9 +346,11 @@ To create it, please follow these instructions:
   So here's your choice, mainly depending on your security requirements:
   - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
+  
     ```sql
     ALTER USER sleede WITH SUPERUSER;
     ```
+  
   - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist). 
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
 - Some users may want to use another DBMS than PostgreSQL. 
