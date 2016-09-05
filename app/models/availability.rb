@@ -1,4 +1,10 @@
 class Availability < ActiveRecord::Base
+
+  # elastic initialisations
+  include Elasticsearch::Model
+  index_name 'fablab'
+  document_type 'availabilities'
+
   has_many :machines_availabilities, dependent: :destroy
   has_many :machines, through: :machines_availabilities
   accepts_nested_attributes_for :machines, allow_destroy: true
@@ -23,6 +29,17 @@ class Availability < ActiveRecord::Base
   validates :start_at, :end_at, presence: true
   validate :length_must_be_1h_minimum, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
+
+  ## elastic callbacks
+  after_save { AvailabilityIndexerWorker.perform_async(:index, self.id) }
+  after_destroy { AvailabilityIndexerWorker.perform_async(:delete, self.id) }
+
+  # elastic mapping
+  settings do
+    mappings dynamic: 'true' do
+      indexes 'available_type', analyzer: 'simple'
+    end
+  end
 
   def safe_destroy
     if available_type == 'machines'

@@ -1,4 +1,4 @@
-class IndexerWorker
+class ProjectIndexerWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'elasticsearch', retry: true
 
@@ -11,10 +11,9 @@ class IndexerWorker
     case operation.to_s
       when /index/
         record = Project.find(record_id)
-        Client.index  index: Project.index_name, type: Project.document_type, id: record.id, body: record.as_indexed_json
-        #puts record.as_indexed_json
+        Client.index  index: Project.index_name, type: Project.document_type, id: record.id, body: record.to_json
       when /delete/
-        Client.delete index: 'fablab', type: 'projects', id: record_id
+        Client.delete index: 'fablab', type: 'availabilities', id: record_id
       else raise ArgumentError, "Unknown operation '#{operation}'"
     end
   end
