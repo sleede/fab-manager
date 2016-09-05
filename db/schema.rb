@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831084519) do
+ActiveRecord::Schema.define(version: 20160905142700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -541,6 +541,17 @@ ActiveRecord::Schema.define(version: 20160831084519) do
   add_index "slots", ["availability_id"], name: "index_slots_on_availability_id", using: :btree
   add_index "slots", ["reservation_id"], name: "index_slots_on_reservation_id", using: :btree
 
+  create_table "statistic_custom_aggregations", force: :cascade do |t|
+    t.text     "query"
+    t.string   "path"
+    t.integer  "statistic_type_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "field"
+  end
+
+  add_index "statistic_custom_aggregations", ["statistic_type_id"], name: "index_statistic_custom_aggregations_on_statistic_type_id", using: :btree
+
   create_table "statistic_fields", force: :cascade do |t|
     t.integer  "statistic_index_id"
     t.string   "key",                limit: 255
@@ -805,6 +816,7 @@ ActiveRecord::Schema.define(version: 20160831084519) do
   add_foreign_key "organizations", "profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "statistic_custom_aggregations", "statistic_types"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"
   add_foreign_key "user_tags", "tags"

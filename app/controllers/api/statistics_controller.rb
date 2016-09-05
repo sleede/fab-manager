@@ -12,6 +12,7 @@ class API::StatisticsController < API::ApiController
         authorize :statistic, :#{path}?
         query = MultiJson.load(request.body.read)
         results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
+        # TODO
         render json: results
       end
 

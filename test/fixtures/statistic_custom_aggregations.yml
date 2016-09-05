@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  query: '{query:{bool:{must:[range:{start_at:{gte:"2016-08-01T02:00:00+02:00", lte:"2016-09-01T02:00:00+02:00"}, match:{available_type: "machines"}}]}}}'
+  path: "/fablab/availabilities"
+  statistic_type_id: 2
+  field: "available_hours"
