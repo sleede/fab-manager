@@ -343,7 +343,7 @@ To create it, please follow these instructions:
 
 - While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
   This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
-  So here's your choice, mainly depending on your security requirements:
+  So here's your choices, mainly depending on your security requirements:
   - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
   
@@ -361,7 +361,7 @@ To create it, please follow these instructions:
   - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
   This also requires your user to have the _SUPERUSER_ role. 
-  Please see the [known issues](#known-issues) for more informations about this.
+  Please see the [known issues](#known-issues) section for more informations about this.
 
 <a name="elasticsearch"></a>
 ## ElasticSearch
@@ -623,8 +623,8 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
 ## Known issues
 
 - When browsing a machine page, you may encounter an "InterceptError" in the console and the loading bar will stop loading before reaching its ending.
- This may happen if the machine was created through a seed file without any image.
- To solve this, simply add an image to the machine's profile and refresh the web page.
+  This may happen if the machine was created through a seed file without any image.
+  To solve this, simply add an image to the machine's profile and refresh the web page.
 
 - When starting the Ruby on Rails server (eg. `foreman s`) you may receive the following error:
 
@@ -632,9 +632,9 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
         web.1    | Exiting
         worker.1 | ...lib/redis/client.rb...:in `_parse_options'
 
- This may happen when the `application.yml` file is missing.
- To solve this issue copy `config/application.yml.default` to `config/application.yml`.
- This is required before the first start.
+  This may happen when the `application.yml` file is missing.
+  To solve this issue copy `config/application.yml.default` to `config/application.yml`.
+  This is required before the first start.
 
 - Due to a stripe limitation, you won't be ble to create plans longer than one year.
 
@@ -648,14 +648,22 @@ You can see an example on the [repo of navinum gamification plugin](https://gith
             test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'                                                         
             test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'     
 
- This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
- PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
- To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for an example).
- Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
+  This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
+  PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
+  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for an example).
+  Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
 
         ALTER ROLE sleede WITH SUPERUSER;
 
- DO NOT do this in a production environment, as this would lead to a serious security issue.
+  DO NOT do this in a production environment, unless you know what you're doing: this could lead to a serious security issue.
+
+- With Ubuntu 16.04, ElasticSearch may refuse to start even after having configured the service with systemd. 
+  To solve this issue, you may have to set `START_DAEMON` to `true` in `/etc/default/elasticsearch`.
+  Then reload ElasticSearch with:
+  
+  ```bash
+  sudo systemctl restart elasticsearch.service
+  ```
 
 <a name="related-documentation"></a>
 ## Related Documentation
