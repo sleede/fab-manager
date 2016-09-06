@@ -55,6 +55,9 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ## total of the stat field for non simple types
   $scope.sumStat = 0
 
+  ## Results of custom aggregations for the current type
+  $scope.customAggs = {}
+
   ## default: results are not sorted
   $scope.sorting =
     ca: 'none'
@@ -337,6 +340,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       $scope.sumCA = 0
       $scope.averageAge = 0
       $scope.sumStat = 0
+      $scope.customAggs = {}
       $scope.totalHits = null
       $scope.searchDate = new Date()
       custom = buildCustomFilterQuery()
@@ -350,6 +354,9 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
           $scope.averageAge = Math.round(res.aggregations.average_age.value * 100) / 100
           $scope.sumStat = res.aggregations.total_stat.value
           $scope.scrollId = res._scroll_id
+          for custom in $scope.type.active.custom_aggregations
+            $scope.customAggs[custom.field] = res.aggregations[custom.field].value
+
 
 
 
