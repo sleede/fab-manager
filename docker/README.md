@@ -257,7 +257,7 @@ docker run --restart=always -d --name=nginx \
              -v /home/core/fabmanager/config/nginx:/etc/nginx/conf.d \
              -v /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt \
              -v /home/core/fabmanager/log:/var/log/nginx \
-             --volumes-from fabmanager:ro
+             --volumes-from fabmanager:ro \
              nginx:1.9
 
 ```
