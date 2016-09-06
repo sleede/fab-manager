@@ -52,8 +52,8 @@ class Project < ActiveRecord::Base
 
   ## elastic
   # callbacks
-  after_save { IndexerWorker.perform_async(:index, self.id) }
-  after_destroy { IndexerWorker.perform_async(:delete, self.id) }
+  after_save { ProjectIndexerWorker.perform_async(:index, self.id) }
+  after_destroy { ProjectIndexerWorker.perform_async(:delete, self.id) }
 
   #
   settings do
