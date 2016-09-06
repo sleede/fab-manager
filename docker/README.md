@@ -236,23 +236,30 @@ docker run --rm \
 
 ```bash
 docker run --restart=always -d --name=fabmanager \
-             -p 80:80 \
-             -p 443:443 \
              --link=fabmanager-postgres:postgres \
              --link=fabmanager-redis:redis \
              --link=fabmanager-elastic:elasticsearch \
              -e RAILS_ENV=production \
              -e RACK_ENV=production \
              --env-file /home/core/fabmanager/config/env \
-             -v /home/core/fabmanager/config/nginx:/etc/nginx/conf.d \
              -v /home/core/fabmanager/public/assets:/usr/src/app/public/assets \
              -v /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads \
              -v /home/core/fabmanager/invoices:/usr/src/app/invoices \
              -v /home/core/fabmanager/exports:/usr/src/app/exports \
              -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
              -v /home/core/fabmanager/log:/var/log/supervisor \
-             -v /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt \
              sleede/fab-manager
+
+docker run --restart=always -d --name=nginx \
+             -p 80:80 \
+             -p 443:443 \
+             --link=fabmanager:fabmanager \
+             -v /home/core/fabmanager/config/nginx:/etc/nginx/conf.d \
+             -v /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt \
+             -v /home/core/fabmanager/log:/var/log/nginx \
+             --volumes-from fabmanager:ro
+             nginx:1.9
+
 ```
 
 

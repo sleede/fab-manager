@@ -5,40 +5,50 @@ services:
     environment:
       RAILS_ENV: production
       RACK_ENV: production
-    ports:
-      - "80:80"
-      - "443:443"
     env_file:
       - /home/core/fabmanager/config/env
     volumes:
-      - /home/core/fabmanager/config/nginx:/etc/nginx/conf.d
       - /home/core/fabmanager/public/assets:/usr/src/app/public/assets
       - /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads
       - /home/core/fabmanager/invoices:/usr/src/app/invoices
       - /home/core/fabmanager/exports:/usr/src/app/exports
       - /home/core/fabmanager/log:/var/log/supervisor
       - /home/core/fabmanager/plugins:/usr/src/app/plugins
-      - /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt
     depends_on:
-      - fabmanager-postgres
-      - fabmanager-redis
-      - fabmanager-elastic
+      - postgres
+      - redis
+      - elasticsearch
     restart: always
 
-  fabmanager-postgres:
+  postgres:
     image: postgres:9.4
     volumes:
       - /home/core/fabmanager/postgresql:/var/lib/postgresql/data
     restart: always
 
-  fabmanager-elastic:
+  elasticsearch:
     image: elasticsearch:1.7
     volumes:
       - /home/core/fabmanager/elasticsearch:/usr/share/elasticsearch/data
     restart: always
 
-  fabmanager-redis:
+  redis:
     image: redis:3.0
     volumes:
       - /home/core/fabmanager/redis:/data
+    restart: always
+
+  nginx:
+    image: nginx:1.9
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /home/core/fabmanager/config/nginx:/etc/nginx/conf.d
+      - /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt
+      - /home/core/suez-efw/log:/var/log/nginx
+    volumes_form:
+      - fabmanager:ro
+    links:
+      - fabmanager:fabmanager
     restart: always
