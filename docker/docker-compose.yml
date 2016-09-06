@@ -46,7 +46,7 @@ services:
     volumes:
       - /home/core/fabmanager/config/nginx:/etc/nginx/conf.d
       - /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt
-      - /home/core/suez-efw/log:/var/log/nginx
+      - /home/core/fabmanager/log:/var/log/nginx
     volumes_form:
       - fabmanager:ro
     links:
