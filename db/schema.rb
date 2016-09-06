@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905142700) do
+ActiveRecord::Schema.define(version: 20160906094847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -543,11 +543,12 @@ ActiveRecord::Schema.define(version: 20160905142700) do
 
   create_table "statistic_custom_aggregations", force: :cascade do |t|
     t.text     "query"
-    t.string   "path"
     t.integer  "statistic_type_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "field"
+    t.string   "es_index"
+    t.string   "es_type"
   end
 
   add_index "statistic_custom_aggregations", ["statistic_type_id"], name: "index_statistic_custom_aggregations_on_statistic_type_id", using: :btree

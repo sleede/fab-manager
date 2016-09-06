@@ -373,6 +373,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       "type": index
       "size": RESULTS_PER_PAGE
       "scroll": ES_SCROLL_TIME+'m'
+      "stat-type": type
       "body": buildElasticDataQuery(type, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
     , (error, response) ->
       if (error)

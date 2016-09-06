@@ -11,8 +11,17 @@ class API::StatisticsController < API::ApiController
       def #{path}
         authorize :statistic, :#{path}?
         query = MultiJson.load(request.body.read)
+        statistic_type = request.query_parameters.delete('stat-type')
         results = Stats::#{path.classify}.search(query, request.query_parameters.symbolize_keys).response
-        # TODO
+
+        stat_index = StatisticIndex.find_by_es_type_key("#{path}")
+        stat_type = StatisticType.where(statistic_index_id: stat_index.id, key: statistic_type).first
+        client = Elasticsearch::Model.client
+        stat_type.statistic_custom_aggregations.each do |custom|
+          c_res = client.search index: custom.es_index, type:custom.es_type, q:custom.query
+          results['aggregations'][custom.field] = c_res
+        end
+
         render json: results
       end
 
