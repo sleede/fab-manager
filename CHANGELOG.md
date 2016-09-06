@@ -1,7 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
-- Load locales for subdirectories
+- Load translation locales from subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events
 - Display 'draft' badge on drafts in project galleries
@@ -18,6 +18,8 @@
 - Filter events by category, theme and age range in public view
 - Ability to customise price's categories for the events
 - Events can be associated with many custom price's categories, instead of only one "reduced price"
+- Statistics views can trigger and display custom aggregations from ElasticSearch
+- Machine hours/Trainings statistics: display number of tickets/hours available for booking 
 - Statistics will include informations abouts events category, theme and age range
 - Ability to export the current statistics table to an Excel file
 - Ability to export every statistics on a given dates range to an Excel file
