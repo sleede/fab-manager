@@ -93,6 +93,13 @@ class Availability < ActiveRecord::Base
     end
   end
 
+
+  def as_indexed_json
+    json = JSON.parse(to_json)
+    json['hours_duration'] = (end_at - start_at) / (60*60)
+    json.to_json
+  end
+
   private
   def length_must_be_1h_minimum
     if end_at < (start_at + 1.hour)
