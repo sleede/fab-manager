@@ -445,6 +445,8 @@ en:
         average_age: "Average age:"
         years_old: "Years old"
         total: "Total"
+        available_hours: "Hours available for booking:"
+        available_tickets: "Tickets available for booking:"
         gender: "Gender"
         age: "Age"
         revenue: "Revenue"

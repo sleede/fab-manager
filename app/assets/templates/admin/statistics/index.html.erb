@@ -235,7 +235,7 @@
               <li ng-show="selectedIndex.ca">{{ 'revenue_' | translate }} {{sumCA | currency}}</li>
               <li>{{ 'average_age' | translate }} {{averageAge}} {{ 'years_old' | translate }}</li>
               <li ng-if="!type.active.simple">{{ 'total' | translate }} {{type.active.label}} : {{sumStat}}</li>
-              <li ng-repeat="custom in type.active.custom_aggregations">{{ custom.field | translate }} : {{customAggs[custom.field]}}</li>
+              <li ng-repeat="custom in type.active.custom_aggregations">{{ custom.field | translate }} {{customAggs[custom.field]}}</li>
             </ul>
           </div>
 

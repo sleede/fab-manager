@@ -445,6 +445,8 @@ fr:
         average_age: "Âge moyen :"
         years_old: "ans"
         total: "Total"
+        available_hours: "Heures disponibles à la réservation :"
+        available_tickets: "Places disponibles à la reservation :"
         gender: "Genre"
         age: "Âge"
         revenue: "Chiffre d'affaires"
