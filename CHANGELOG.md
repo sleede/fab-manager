@@ -32,6 +32,8 @@
 - Users and admins can apply coupons's discounts to their shopping cart
 - Send an email reminder and system notification some hours before a reservation happens
 - Admins can toggle reminders on/off and customize the delay
+- More file types allowed as project CAD attachements
+- Project CAD attachements are now checked by MIME type in addition of extension check
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - Fix a bug: machine name is not shown in plan edition 
