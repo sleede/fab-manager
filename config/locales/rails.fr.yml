@@ -132,6 +132,7 @@ fr:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       other_than: doit être différent de %{count}
+      wrong_content_type: "n'est pas le bon type de contenu"
     template:
       body: 'Veuillez vérifier les champs suivants : '
       header:
