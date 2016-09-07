@@ -3,7 +3,7 @@ class ProjectCao < Asset
 
   validates :attachment, file_size: { maximum: 20.megabytes.to_i }
   validates :attachment, :file_mime_type => {
-      :content_type => %w(application/pdf application/postscript application/illustrator application/postscript
+      :content_type => %w(application/pdf application/postscript application/illustrator
                           image/x-eps image/svg+xml application/sla application/dxf application/acad application/dwg
                           application/octet-stream application/step application/iges model/iges x-world/x-3dmf
                           application/ application/vnd.openxmlformats-officedocument.wordprocessingml.document
