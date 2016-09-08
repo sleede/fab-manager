@@ -36,6 +36,23 @@ class Subscription < ActiveRecord::Base
 
           unless coupon_code.nil?
             cp = Coupon.find_by_code(coupon_code)
+            if not cp.nil? and cp.status(user.id) == 'active'
+              total = plan.amount
+              Stripe::InvoiceItem.create(
+                  customer: user.stp_customer_id,
+                  amount: -(total  * cp.percent_off / 100.0).to_i,
+                  currency: Rails.application.secrets.stripe_currency,
+                  description: "coupon #{cp.code}"
+              )
+            else
+              raise InvalidCouponError
+            end
+          end
+        elsif coupon_code != nil
+          # this case applies if a subscription was took in addition of a reservation, so we create a second
+          # stripe coupon to apply the discount on the subscription item for the stripe's invoice.
+          cp = Coupon.find_by_code(coupon_code)
+          if not cp.nil? and cp.status(user.id) == 'active'
             total = plan.amount
             Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
@@ -43,18 +60,9 @@ class Subscription < ActiveRecord::Base
                 currency: Rails.application.secrets.stripe_currency,
                 description: "coupon #{cp.code}"
             )
+          else
+            raise InvalidCouponError
           end
-        elsif coupon_code != nil
-          # this case applies if a subscription was took in addition of a reservation, so we create a second
-          # stripe coupon to apply the discount on the subscription item for the stripe's invoice.
-          cp = Coupon.find_by_code(coupon_code)
-          total = plan.amount
-          Stripe::InvoiceItem.create(
-              customer: user.stp_customer_id,
-              amount: -(total  * cp.percent_off / 100.0).to_i,
-              currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{cp.code}"
-          )
         end
 
         new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)

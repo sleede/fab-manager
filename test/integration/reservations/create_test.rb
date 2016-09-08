@@ -517,5 +517,42 @@ module Reservations
       assert_not_empty Notification.where(attached_object: reservation)
       assert_not_empty Notification.where(attached_object: subscription)
     end
+
+    test 'user reserves a training with an expired coupon with error' do
+      login_as(@user_without_subscription, scope: :user)
+
+      training = Training.find(1)
+      availability = training.availabilities.first
+
+      reservations_count = Reservation.count
+      invoice_count = Invoice.count
+      invoice_items_count = InvoiceItem.count
+      notifications_count = Notification.count
+
+      VCR.use_cassette('reservations_training_with_expired_coupon_error') do
+        post reservations_path, {
+            reservation: {
+                user_id: @user_without_subscription.id,
+                reservable_id: training.id,
+                reservable_type: training.class.name,
+                card_token: stripe_card_token,
+                slots_attributes: [
+                    { start_at: availability.start_at.to_s(:iso8601),
+                      end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                      availability_id: availability.id
+                    }
+                ],
+            },
+            coupon_code: 'XMAS10'
+        }.to_json, default_headers
+      end
+
+      # general assertions
+      assert_equal 422, response.status
+      assert_equal reservations_count, Reservation.count
+      assert_equal invoice_count, Invoice.count
+      assert_equal invoice_items_count, InvoiceItem.count
+      assert_equal notifications_count, Notification.count
+    end
   end
 end
