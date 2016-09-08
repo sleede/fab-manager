@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  event_id: 
-  price_category_id: 
-  amount: 1
+  id: 1
+  event_id: 1
+  price_category_id: 1
+  amount: 1500
 
 two:
-  event_id: 
-  price_category_id: 
-  amount: 1
+  id: 2
+  event_id: 2
+  price_category_id: 1
+  amount: 1700
