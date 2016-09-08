@@ -17,7 +17,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                  start_time: 1.week.from_now.utc.change({hour: 16}),
                  end_date: 1.week.from_now.utc,
                  end_time: 1.week.from_now.utc.change({hour: 20}),
-                 category_ids: [Category.first.id],
+                 category_id: Category.first.id,
                  amount: 0
              }
          }.to_json,
@@ -45,7 +45,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                 start_time: 1.week.from_now.utc.change({hour: 16}),
                 end_date: 1.week.from_now.utc,
                 end_time: 1.week.from_now.utc.change({hour: 20}),
-                category_ids: [Category.first.id],
+                category_id: Category.first.id,
                 amount: 0,
                 nb_total_places: 10
             }
@@ -68,8 +68,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                 reservable_id: e.id,
                 reservable_type: 'Event',
                 nb_reserve_places: 2,
-                nb_reserve_reduced_places: 0,
-                slot_attributes: [
+                slots_attributes: [
                     {
                         start_at: e.availability.start_at,
                         end_at: e.availability.end_at,
@@ -99,7 +98,7 @@ class EventsTest < ActionDispatch::IntegrationTest
                 start_time: 1.week.from_now.utc.change({hour: 16}),
                 end_date: 1.week.from_now.utc,
                 end_time: 1.week.from_now.utc.change({hour: 20}),
-                category_ids: [Category.first.id],
+                category_id: Category.first.id,
                 amount: 0,
                 nb_total_places: 20
             }

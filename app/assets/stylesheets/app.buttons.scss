@@ -2,7 +2,7 @@
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
 
 	background-color: #f2f2f2;
-	
+
 }
 
 .btn{
@@ -22,6 +22,30 @@
 	&:hover {
 		background-color: white;
 	}
+}
+
+.btn-facebook {
+  border: 1px solid #8b9dc3;
+  background-color: #3b5998;
+  color: white;
+
+  &:hover {
+    border: 1px solid #7d8fb4;
+    background-color: #394c89;
+    color: white;
+  }
+}
+
+.btn-twitter {
+  border: 1px solid #ccd6dd;
+  background-color: #55acee;
+  color: white;
+
+  &:hover {
+    border: 1px solid #bdc7ce;
+    background-color: #539fdf;
+    color: white;
+  }
 }
 
 

@@ -1,0 +1,9 @@
+<%# this is a mail template of notifcation notify_admin_user_wallet_is_credited %>
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+<p>
+  <%= t('.body.wallet_credit_html',
+        AMOUNT: number_to_currency(@attached_object.amount),
+        USER: @attached_object.wallet.user.profile.full_name,
+        ADMIN: @attached_object.user.profile.full_name)
+  %>
+</p>

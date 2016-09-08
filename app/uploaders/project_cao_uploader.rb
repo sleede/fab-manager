@@ -39,7 +39,7 @@ class ProjectCaoUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(pdf ai eps cad math svg stl dxf dwg obj step iges 3dm doc docx png)
+    %w(pdf ai eps cad math svg stl dxf dwg obj step iges igs 3dm 3dmf doc docx png ino scad fcad skp sldprt sldasm slddrw slddrt tex latex ps)
   end
 
   # Override the filename of the uploaded files:

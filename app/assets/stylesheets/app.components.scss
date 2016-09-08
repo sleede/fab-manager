@@ -154,8 +154,11 @@
   }
 
   .article-thumbnail {
-    // max-height: 400px;
     overflow: hidden;
+
+    img {
+      height: 400px;
+    }
   }
 }
 
@@ -417,22 +420,23 @@
 
 .event {
   transition: all 0.07s linear;
+  overflow: hidden;
 }
 
 .event:hover {
-//background-color: #cb1117;
-color: white;
+  // background-color: #cb1117;
+  color: white;
 }
 
 
 .event:hover * {
-color: #eee;
-border-color: #eee;
+  color: #eee !important;
+  border-color: #eee;
 }
 
 .box-h-m {
-  height: 150px;
-  max-height: 150px;
+  height: 175px;
+  max-height: 175px;
 }
 
 .half-w {
@@ -446,25 +450,31 @@ border-color: #d0d0d0;
 padding: 10px;
 }
 
-.crop-130 {
-  height: 130px;
-  width: 130px;
-  max-width: 130px;
-  max-height: 130px;
+.crop-155 {
+  height: 155px;
+  width: 155px;
+  max-width: 155px;
+  max-height: 155px;
   overflow: hidden;
   vertical-align: bottom;
 }
 
-.crop-130 img {
-  height: 130px;
+.crop-155 img {
+  height: 155px;
   width: auto;
 }
 
-@media only screen and (max-width: 1280px) and (min-width: 770px) {
-  .crop-130 {
+@media only screen and (max-width: 1375px) and (min-width: 770px) {
+  .crop-155 {
     height: 90px;
     width: 90px;
-    margin-top: 25px;
+    margin-top: 35px;
+  }
+}
+
+@media only screen and (max-width: 1375px) and (min-width: 1125px) {
+  .half-w {
+    width: 60%;
   }
 }
 
@@ -502,5 +512,79 @@ padding: 10px;
     position: absolute;
     z-index:10;
     border-radius: 3px;
+  }
+}
+
+.wallet-amount-container {
+  padding: 20px 0;
+  border-top: 2px dotted $border-color;
+  border-bottom: 2px dotted $border-color;
+  margin-bottom: 20px;
+  text-align: center;
+
+  .wallet-amount {
+    font-size: rem-calc(40);
+    font-weight: 700;
+    font-style: italic;
+    color: #616161;
+
+    span {
+      font-weight: 500;
+      font-size: .7em;
+    }
+
+    &.cr-green {
+      color: $green;
+    }
+  }
+}
+
+.amountGroup {
+  input {
+    display: inline-block;
+    width: 100px;
+    margin-left: 5px;
+    padding-right: 6px;
+    font-weight: bold;
+    color: $green;
+    font-size: 1.2em;
+    line-height: 0;
+  }
+  .afterAmount {
+    margin-left: -35px;
+    font-weight: bold;
+    color: $green;
+    font-size: 1.2em;
+    line-height: 0;
+  }
+}
+
+.checkbox-group {
+  display: flex;
+  justify-content: flex-start;
+
+  input[type=checkbox] {
+    font-size: 16px;
+    width: 2em;
+  }
+}
+
+
+.link-icon {
+  color: #1c94c4;
+  i { margin: 0 5px 0 10px; }
+  span {
+    border-bottom: 1px dashed #00b3ee;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+
+.description-hover {
+  span {
+    display: inline-block;
+    border-bottom: 1px dashed #00b3ee;
+    cursor: help;
   }
 }

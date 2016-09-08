@@ -1,0 +1,35 @@
+<div class="panel panel-default m-t-md">
+    <div class="panel-body">
+
+        <div class="row m-t-lg m-b-lg">
+            <div class="col-sm-offset-4 col-sm-4">
+                <h1 ng-model="aboutTitleSetting.value" medium-editor options='{"placeholder": "{{ "title_of_the_about_page" | translate }}", "disableToolbar": true, "disableReturn": false}' class="text-u-c"></h1>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'shift_enter_to_force_carriage_return' | translate }}</span>
+                <button name="button" class="btn btn-warning" ng-click="save(aboutTitleSetting)" translate>{{ 'save' }}</button>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <div class="text-justify" ng-model="aboutBodySetting.value" medium-editor options='{"placeholder": "{{ "input_the_main_content" | translate }}",
+                  "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
+                  }'>
+
+                </div>
+                <button name="button" class="btn btn-warning" ng-click="save(aboutBodySetting)" translate>{{ 'save' }}</button>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <div ng-model="aboutContactsSetting.value" medium-editor options='{"placeholder": "{{ "input_the_fablab_contacts" | translate }}",
+                  "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
+                  }'>
+
+                </div>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'shift_enter_to_force_carriage_return' | translate }}</span>
+                <button name="button" class="btn btn-warning" ng-click="save(aboutContactsSetting)" translate>{{ 'save' }}</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

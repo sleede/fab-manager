@@ -12,6 +12,8 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="exportToExcel()"><i class="fa fa-file-excel-o"></i></a>
+        <iframe name="export-frame" height="0" width="0" class="none" id="stats-export-frame"></iframe>
         <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.stats_graphs" role="button"><i class="fa fa-line-chart"></i> {{ 'evolution' | translate }}</a>
       </section>
     </div>
@@ -229,10 +231,11 @@
 
           <div id="totaux">
             <ul>
-              <li>{{ 'entries' | translate }} {{data.length}}</li>
+              <li>{{ 'entries' | translate }} {{totalHits}}</li>
               <li ng-show="selectedIndex.ca">{{ 'revenue_' | translate }} {{sumCA | currency}}</li>
               <li>{{ 'average_age' | translate }} {{averageAge}} {{ 'years_old' | translate }}</li>
               <li ng-if="!type.active.simple">{{ 'total' | translate }} {{type.active.label}} : {{sumStat}}</li>
+              <li ng-repeat="custom in type.active.custom_aggregations">{{ custom.field | translate }} {{customAggs[custom.field]}}</li>
             </ul>
           </div>
 
@@ -260,7 +263,7 @@
             <tbody>
               <tr ng-repeat="datum in data">
                 <td>{{formatDate(datum._source.date)}}</td>
-                <td><a href="" ui-sref="app.logged.members_show({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
+                <td><a href="" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
                 <td>{{formatSex(datum._source.gender)}}</td>
                 <td><span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span><span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span></td>
                 <td>{{formatSubtype(datum._source.subType)}}</td>
@@ -278,10 +281,12 @@
               </tr>
             </tbody>
           </table>
+          <div class="text-center">
+            <button class="btn btn-warning" ng-click="showMoreResults()" ng-hide="data && data.length >= totalHits"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_results' | translate }}</button>
+          </div>
         </uib-tab>
       </uib-tabset>
     </div>
 
   </div>
 </section>
-

@@ -1,8 +1,8 @@
 user_is_admin = (current_user and current_user.is_admin?)
-maxMembers = @members.except(:offset, :limit, :order).count
+max_members = @query.except(:offset, :limit, :order).count
 
 json.array!(@members) do |member|
-  json.maxMembers maxMembers
+  json.maxMembers max_members
   json.id member.id
   json.username member.username
   json.slug member.slug
@@ -23,6 +23,7 @@ json.array!(@members) do |member|
       json.birthday member.profile.birthday.iso8601 if member.profile.birthday
     end
   end if attribute_requested?(@requested_attributes, 'profile')
+  json.need_completion member.need_completion?
   json.group_id member.group_id
   json.group do
     json.id member.group.id

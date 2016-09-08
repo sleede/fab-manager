@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   ## The priority is based upon order of creation: first created -> highest priority.
   ## See how all your routes lay out with "rake routes".
 
+
+  constraints :user_agent => /facebookexternalhit\/[0-9]|Twitterbot|Pinterest|Google.*snippet/ do
+    root :to => 'social_bot#share', as: :bot_root
+  end
+
   ## You can have the root of your site routed with "root"
   root 'application#index'
 
@@ -42,29 +47,39 @@ Rails.application.routes.draw do
       put ':id/merge', action: 'merge', on: :collection
       post 'list', action: 'list', on: :collection
       get 'search/:query', action: 'search', on: :collection
+      get 'mapping', action: 'mapping', on: :collection
     end
     resources :reservations, only: [:show, :create, :index, :update]
     resources :notifications, only: [:index, :show, :update] do
       match :update_all, path: '/', via: [:put, :patch], on: :collection
+    end
+    resources :wallet, only: [] do
+      get '/by_user/:user_id', action: 'by_user', on: :collection
+      get :transactions, on: :member
+      put :credit, on: :member
     end
 
     # for homepage
     get '/last_subscribed/:last' => "members#last_subscribed"
     get '/feeds/twitter_timelines' => "feeds#twitter_timelines"
 
-    get 'pricing' => "pricing#index"
-    put 'pricing' => "pricing#update"
+    get 'pricing' => 'pricing#index'
+    put 'pricing' => 'pricing#update'
 
     resources :prices, only: [:index, :update] do
       post 'compute', on: :collection
     end
+    resources :coupons
+    post 'coupons/validate' => 'coupons#validate'
+    post 'coupons/send' => 'coupons#send_to'
 
     resources :trainings_pricings, only: [:index, :update]
 
     resources :availabilities do
       get 'machines/:machine_id', action: 'machine', on: :collection
-      get 'trainings', on: :collection
+      get 'trainings/:training_id', action: 'trainings', on: :collection
       get 'reservations', on: :member
+      get 'public', on: :collection
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]
@@ -79,14 +94,18 @@ Rails.application.routes.draw do
     end
 
     resources :invoices, only: [:index, :show, :create] do
-      get ':id/download', action: 'download', on: :collection
+      get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
     end
 
     # for admin
-    resources :trainings
+    resources :trainings do
+      get :availabilities, on: :member
+    end
     resources :credits
-    resources :categories, only: [:index]
+    resources :categories
+    resources :event_themes
+    resources :age_ranges
     resources :statistics, only: [:index]
     resources :custom_assets, only: [:show, :create, :update]
     resources :tags
@@ -96,14 +115,45 @@ Rails.application.routes.draw do
       get 'active', action: 'active', on: :collection
     end
     resources :abuses, only: [:create]
+    resources :open_api_clients, only: [:index, :create, :update, :destroy] do
+      patch :reset_token, on: :member
+    end
+    resources :price_categories
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'
+
+    # XLSX exports
+    get 'exports/:id/download' => 'exports#download'
+    post 'exports/status' => 'exports#status'
+  end
+
+  # open_api
+
+  namespace :open_api do
+    namespace :v1 do
+      scope only: :index do
+        resources :users
+        resources :trainings
+        resources :user_trainings
+        resources :reservations
+        resources :machines
+        resources :bookable_machines
+        resources :invoices do
+          get :download, on: :member
+        end
+        resources :events
+        resources :availabilities
+      end
+    end
   end
 
   %w(account event machine project subscription training user).each do |path|
     post "/stats/#{path}/_search", to: "api/statistics##{path}"
+    post "/stats/#{path}/export", to: "api/statistics#export_#{path}"
   end
+  post '/stats/global/export', to: "api/statistics#export_global"
+  post '_search/scroll', to: "api/statistics#scroll"
 
   match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
 
@@ -111,4 +161,5 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
 
+  apipie
 end

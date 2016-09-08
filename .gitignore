@@ -18,6 +18,7 @@
 
 /public/uploads
 /public/assets
+/public/api
 
 # Ignore application configurations
 /config/application.yml
@@ -29,8 +30,14 @@
 # PDF invoices
 /invoices/*
 
+# XLSX exports
+/exports/*
+
+
 .DS_Store
 
 .vagrant
+.docker
 
+# Plugins are versioned is their own repository
 /plugins/*

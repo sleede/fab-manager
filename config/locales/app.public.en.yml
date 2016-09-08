@@ -12,8 +12,9 @@ en:
         my_settings: "My Settings"
         my_projects: "My Projects"
         my_trainings: "My Trainings"
-        my_courses_and_workshops: "My Courses and Workshops"
+        my_events: "My Events"
         my_invoices: "My Invoices"
+        my_wallet: "My Wallet"
 
         # login/logout
         sign_out: "Sign Out"
@@ -29,9 +30,10 @@ en:
         home: "Home"
         reserve_a_machine: "Reserve a Machine"
         trainings_registrations: "Trainings registrations"
-        courses_and_workshops_registrations: "Courses and Workshops registrations"
+        events_registrations: "Events registrations"
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
+        public_calendar: "Calendar"
 
         # left menu (admin)
         trainings_monitoring: "Trainings monitoring"
@@ -40,11 +42,12 @@ en:
         manage_the_users: "Manage the Users"
         manage_the_invoices: "Manage the invoices"
         subscriptions_and_prices: "Subscriptions and Prices"
-        courses_and_workshops_monitoring: "Courses and Workshops monitoring"
+        manage_the_events: "Manage the events"
         manage_the_machines: "Manage the Machines"
         manage_the_projects_elements: "Manage the Projects Elements"
         statistics: "Statistics"
         customization: "Customization"
+        open_api_clients: "OpenAPI clients"
 
         # account creation modal
         create_your_account: "Create your account"
@@ -65,6 +68,11 @@ en:
         type_your_password_again: "Type your password again"
         password_confirmation_is_required: "Password confirmation is required."
         password_does_not_match_with_confirmation: "Password does not match with confirmation."
+        i_am_an_organization: "I am an organization"
+        name_of_your_organization: "Name of your organization"
+        organization_name_is_required: "Organization name is required."
+        address_of_your_organization: "Address of your organization"
+        organization_address_is_required: "Organization address is required."
         your_user_s_profile: "Your user's profile"
         user_s_profile_is_required: "User's profile is required."
         birth_date: "Birth date"
@@ -72,6 +80,7 @@ en:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
+        i_accept_to_receive_informations_from_the_fablab: "I accept to receive informations from the FabLab"
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the FabLab policy"
 
@@ -107,7 +116,7 @@ en:
         discover_members: "Discover members"
 
         # next events summary on the home page
-        fablab_s_next_courses_and_workshops: "Fablab's next courses and workshops"
+        fablab_s_next_events: "Fablab's next events"
         every_events: "Every events"
         from_date_to_date: "From {{START}} to {{END}}"  # angular interpolation
         on_the_date: "On the {{DATE}}"  # angular interpolation
@@ -124,14 +133,12 @@ en:
         tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
-        add_a_project: "Add a project"
         reset_all_filters: "Reset all filters"
         search: "Search"
         all_projects: "All projects"
         my_projects: "My projects"
         projects_to_whom_i_take_part_in: "Projects to whom I take part in"
         all_machines: "All machines"
-        all_themes: "All themes"
         all_materials: "All materials"
         load_next_projects: "Load next projects"
 
@@ -155,12 +162,12 @@ en:
         tell_us_why_this_looks_abusive: "Tell us why this looks abusive"
         message_is_required: "Message is required."
         report: "Report"
+        do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
 
       machines_list:
         # list of machines
         the_fablab_s_machines: "The FabLab's machines"
         add_a_machine: "Add a machine"
-        book: "Book"
         _or_the_: " or the "
 
       machines_show:
@@ -171,6 +178,14 @@ en:
         _or_the_: " or the "
         unauthorized_operation: "Unauthoried operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
+
+      trainings_list:
+        # list of trainings
+        the_trainings: "The trainings"
+
+      training_show:
+        # details of a training
+        book_this_training: "Book this training"
 
       plans:
         # summary of the subscriptions
@@ -197,7 +212,9 @@ en:
 
       events_list:
         # Fablab's events list
-        the_fablab_s_courses_and_workshops: "The Fablab's courses and workshops"
+        the_fablab_s_events: "The Fablab's events"
+        all_categories: "All categories"
+        for_all: "For all"
 
       events_show:
         # details and booking of an event
@@ -207,7 +224,6 @@ en:
         beginning: "Beginning:"
         ending: "Ending:"
         opening_hours: "Opening hours:"
-        reduced_rate*: "Reduced rate*:"
         tickets_still_availables: "Tickets still available:"
         sold_out: "Sold out."
         free_entry: "Free entry"
@@ -218,3 +234,8 @@ en:
         book: "Book"
         change_the_reservation: "Change the reservation"
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
+
+      calendar:
+        calendar: "Calendar"
+        show_no_disponible: "Show the slots no disponibles"
+        filter-calendar: "Filter calendar"

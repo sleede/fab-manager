@@ -16,7 +16,8 @@ gem 'therubyracer', '= 0.12.0', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.5'
+gem 'jbuilder_cache_multi'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc #TODO remove unused ?
 
@@ -139,3 +140,12 @@ gem 'protected_attributes'
 gem 'message_format'
 
 gem 'openlab_ruby'
+
+gem 'api-pagination'
+gem 'has_secure_token'
+gem 'apipie-rails'
+
+# XLS files generation
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'

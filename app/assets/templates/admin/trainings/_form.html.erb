@@ -1,0 +1,122 @@
+<form role="form"
+      name="trainingForm"
+      class="form-horizontal"
+      ng-attr-action="{{ actionUrl }}"
+      ng-upload="submited(content)"
+      upload-options-enable-rails-csrf="true"
+      unsaved-warning-form
+      novalidate>
+
+  <input name="_method" type="hidden" ng-value="method">
+
+  <section class="panel panel-default bg-light m-lg">
+  <div class="panel-body m-r">
+
+    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+    <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$invalid}">
+      <label for="name" class="col-sm-2 control-label">{{ 'name' | translate }} *</label>
+      <div class="col-sm-4">
+        <input name="training[name]"
+               ng-model="training.name"
+               type="text"
+               class="form-control"
+               id="training_name"
+               placeholder="{{'name' | translate}}"
+               required/>
+        <span class="help-block" ng-show="trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
+      </div>
+    </div>
+
+    <div class="form-group m-b-lg">
+      <label for="training_image" class="col-sm-2 control-label">{{ 'illustration' | translate }} *</label>
+      <div class="col-sm-10">
+        <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(training.training_image)">
+            <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
+                <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!training.training_image">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 334px;">
+              <img ng-src="{{ training.training_image }}" alt="" />
+            </div>
+            <div>
+                <span class="btn btn-default btn-file">
+                  <span class="fileinput-new">{{ 'add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
+                  <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                  <input type="file"
+                         ng-model="training.training_image"
+                         name="training[training_image_attributes][attachment]"
+                         accept="image/*"
+                         required
+                         bs-jasny-fileinput>
+                </span>
+                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'delete' }}</a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group m-b-xl" ng-class="{'has-error': trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$invalid}">
+      <label for="training_description" class="col-sm-2 control-label">{{ 'description' | translate }} *</label>
+      <div class="col-sm-10">
+        <input type="hidden" name="training[description]" ng-value="training.description" />
+        <summernote ng-model="training.description" id="training_description" placeholder="" config="summernoteOpts" name="training[description]" required></summernote>
+        <span class="help-block" ng-show="trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
+      </div>
+    </div>
+
+    <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[machine_ids]'].$dirty && trainingForm['training[machine_ids]'].$invalid}">
+      <label for="training_machines" class="col-sm-2 control-label">{{ 'associated_machines' | translate }}</label>
+      <div class="col-sm-4">
+        <ui-select multiple ng-model="training.machine_ids" class="form-control" id="training_machines">
+          <ui-select-match>
+            <span ng-bind="$item.name"></span>
+            <input type="hidden" name="training[machine_ids][]" value="{{$item.id}}" />
+          </ui-select-match>
+          <ui-select-choices repeat="m.id as m in (machines | filter: $select.search)">
+            <span ng-bind-html="m.name | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+
+    <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[nb_total_places]'].$dirty && trainingForm['training[nb_total_places]'].$invalid}">
+      <label for="training_nb_total_places" class="col-sm-2 control-label">{{ 'number_of_tickets' | translate }}</label>
+      <div class="col-sm-4">
+        <input ng-model="training.nb_total_places"
+               type="number"
+               min="0"
+               name="training[nb_total_places]"
+               class="form-control"
+               id="training_nb_total_places">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="training[public_page]" class="control-label col-sm-2" translate>
+        {{ 'public_page' }}
+      </label>
+      <div class="col-sm-10">
+        <input bs-switch
+           ng-model="training.public_page"
+           name="training[public_page]"
+           type="checkbox"
+           class="form-control"
+           switch-on-text="{{ 'yes' | translate }}"
+           switch-off-text="{{ 'no' | translate }}"
+           switch-animate="true"/>
+        <input type="hidden" name="training[public_page]" value="{{training.public_page}}">
+      </div>
+    </div>
+
+  </div>   <!-- ./panel-body  -->
+
+  <div class="panel-footer no-padder">
+    <input type="submit"
+           value="{{ 'validate_your_training' | translate }}"
+           class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+           ng-disabled="trainingForm.$invalid"/>
+  </div>
+  </section>
+</form>

@@ -126,7 +126,7 @@ _reserveMachine = (machine, e) ->
 
               # modal is close with validation
               $scope.ok = ->
-                $state.go('app.logged.trainings_reserve')
+                $state.go('app.logged.trainings_reserve', {id: $scope.machine.trainings[0].id})
                 $uibModalInstance.close(machine)
 
               # modal is closed with escaping
@@ -268,37 +268,25 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
 # This controller workflow is pretty similar to the trainings reservation controller.
 ##
 
-Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'settingsPromise',
-($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, settingsPromise) ->
+Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'machinePromise', 'settingsPromise', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig',
+($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, machinePromise, settingsPromise, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
 
 
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # The calendar is divided in slots of 60 minutes
-  BASE_SLOT = '01:00:00'
-
-  # The calendar will be initialized positioned under 9:00 AM
-  DEFAULT_CALENDAR_POSITION = '09:00:00'
-
-  # The user is unable to modify his already booked reservation 1 day before it occurs
-  PREVENT_BOOKING_MODIFICATION_DELAY = 1
-
   # Slot already booked by the current user
-  FREE_SLOT_BORDER_COLOR = '#e4cd78'
+  FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>'
 
   # Slot already booked by another user
-  UNAVAILABLE_SLOT_BORDER_COLOR = '#1d98ec'
+  UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_USER %>'
 
   # Slot free to be booked
-  BOOKED_SLOT_BORDER_COLOR = '#b2e774'
+  BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
 
 
 
   ### PUBLIC SCOPE ###
-
-  ## after fullCalendar loads, provides access to its methods through $scope.calendar.fullCalendar()
-  $scope.calendar = null
 
   ## bind the machine availabilities with full-Calendar events
   $scope.eventSources = []
@@ -321,11 +309,12 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## total amount of the bill to pay
   $scope.amountTotal = 0
 
+  ## Discount coupon to apply to the basket, if any
+  $scope.coupon =
+      applied: null
+
   ## is the user allowed to change the date of his booking
   $scope.enableBookingMove = true
-
-  ## how many hours before the reservation, the user is still allowed to change his booking
-  $scope.moveBookingDelay = 24
 
   ## list of plans, classified by group
   $scope.plansClassifiedByGroup = []
@@ -340,34 +329,12 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     member: {}
 
   ## current machine to reserve
-  $scope.machine = {}
+  $scope.machine = machinePromise
 
   ## fullCalendar (v2) configuration
-  $scope.calendarConfig =
-    timezone: Fablab.timezone
-    lang: Fablab.fullcalendar_locale
-    header:
-      left: 'month agendaWeek'
-      center: 'title'
-      right: 'today prev,next'
-    firstDay: 1 # Week start on monday (France)
-    scrollTime: DEFAULT_CALENDAR_POSITION
-    slotDuration: BASE_SLOT
-    allDayDefault: false
-    minTime: '00:00:00'
-    maxTime: '24:00:00'
-    height: 'auto'
-    buttonIcons:
-      prev: 'left-single-arrow'
-      next: 'right-single-arrow'
-    timeFormat:
-      agenda:'H:mm'
-      month: 'H(:mm)'
-    axisFormat: 'H:mm'
-
-    allDaySlot: false
-    defaultView: 'agendaWeek'
-    editable: false
+  $scope.calendarConfig = CalendarConfig
+    minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
+    maxTime: moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
     eventClick: (event, jsEvent, view) ->
       calendarEventClickCb(event, jsEvent, view)
     eventRender: (event, element, view) ->
@@ -391,12 +358,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## Global config: delay in hours before a booking while the cancellation is forbidden
   $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay)
 
-  ## Global config: calendar window in the morning
-  $scope.calendarConfig.minTime = moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
-
-  ## Global config: calendar window in the evening
-  $scope.calendarConfig.maxTime = moment.duration(moment(settingsPromise.booking_window_end).format('HH:mm:ss'))
-
 
 
   ##
@@ -412,7 +373,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
     $scope.slotToModify.backgroundColor = 'white'
     $scope.slotToModify = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -425,7 +386,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.slotToPlace.backgroundColor = 'white'
     $scope.slotToPlace.title = ''
     $scope.slotToPlace = null
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -458,7 +419,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       $scope.slotToModify.can_modify = false
       $scope.slotToModify = null
 
-      $scope.calendar.fullCalendar 'rerenderEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
     , (err) ->  # failure
       growl.error(_t('unable_to_change_the_reservation'))
       console.error(err)
@@ -476,7 +437,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.slotToModify.backgroundColor = 'white'
     $scope.slotToModify = null
 
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -532,8 +493,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       $scope.plansAreShown = false
     updateCartPrice()
     $timeout ->
-      $scope.calendar.fullCalendar 'refetchEvents'
-      $scope.calendar.fullCalendar 'rerenderEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -569,11 +530,13 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     if Object.keys($scope.ctrl.member).length > 0
       reservation = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
 
-      if $scope.currentUser.role isnt 'admin' and $scope.amountTotal > 0
-        payByStripe(reservation)
-      else
-        if $scope.currentUser.role is 'admin' or $scope.amountTotal is 0
-          payOnSite(reservation)
+      Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
+        amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
+        if $scope.currentUser.role isnt 'admin' and amountToPay > 0
+          payByStripe(reservation)
+        else
+          if $scope.currentUser.role is 'admin' or amountToPay is 0
+            payOnSite(reservation)
     else
       # otherwise we alert, this error musn't occur when the current user is not admin
       growl.error(_t('please_select_a_member_first'))
@@ -637,11 +600,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     if $scope.currentUser.role isnt 'admin'
       $scope.ctrl.member = $scope.currentUser
 
-    $scope.machine = Machine.get {id: $stateParams.id}
-    , ->
-      return
-    , ->
-      $state.go('app.public.machines_list')
+    # watch when a coupon is applied to re-compute the total price
+    $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+      unless newValue == null and oldValue == null
+        updateCartPrice()
 
 
 
@@ -671,12 +633,27 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
   ##
+  # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+  # @param reservation {Object} as returned by mkReservation()
+  # @param coupon {Object} Coupon as returned from the API
+  # @return {{reservation:Object, coupon_code:string}}
+  ##
+  mkRequestParams = (reservation, coupon) ->
+    params =
+      reservation: reservation
+      coupon_code: (coupon.code if coupon)
+
+    params
+
+
+
+  ##
   # Update the total price of the current selection/reservation
   ##
   updateCartPrice = ->
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
-      Price.compute {reservation: r}, (res) ->
+      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
         setSlotsDetails(res.details)
     else
@@ -732,7 +709,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           $scope.slotToModify = event
           event.backgroundColor = '#eee'
           event.title = _t('i_change')
-          $scope.calendar.fullCalendar 'rerenderEvents'
+          uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
         else if type == 'cancel'
           dialogs.confirm
             resolve:
@@ -750,7 +727,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
               $scope.canceledSlot.is_reserved = false
               $scope.canceledSlot.can_modify = false
               $scope.canceledSlot = null
-              $scope.calendar.fullCalendar 'rerenderEvents'
+              uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
             , -> # error while canceling
               growl.error _t('cancellation_failed')
       , ->
@@ -758,14 +735,14 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         $scope.selectedPlan = null
         $scope.modifiedSlots = null
 
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
     updateCartPrice()
 
 
 
 
-    ##
+  ##
   # Triggered when fullCalendar tries to graphicaly render an event block.
   # Append the event tag into the block, just after the event title.
   # @see http://fullcalendar.io/docs/event_rendering/eventRender/
@@ -776,6 +753,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       for tag in event.tags
         html += "<span class='label label-success text-white' title='#{tag.name}'>#{tag.name}</span>"
       element.find('.fc-time').append(html)
+    return
 
 
 
@@ -791,18 +769,32 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation',  ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $locale, $filter, coupon) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # CGV
         $scope.cgv = cgv.custom_asset
 
         # Reservation
         $scope.reservation = reservation
+
+        # Currency symbol or abreviation for the current locale
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        # Used in wallet info template to interpolate some translations
+        $scope.numberFilter = $filter('number')
 
         ##
         # Callback to process the payment with Stripe, triggered on button click
@@ -813,7 +805,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           else
             $scope.attempting = true
             $scope.reservation.card_token = response.id
-            Reservation.save reservation: $scope.reservation, (reservation) ->
+            Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
@@ -839,27 +831,47 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation) ->
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', '$locale', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, $locale, coupon) ->
 
-        # Price
-        $scope.amount = price.price
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
+        # Global price (total of all items)
+        $scope.price = price.price
+
+        # Price to pay (wallet deducted)
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # Reservation
         $scope.reservation = reservation
 
+        # Currency symbol or abreviation for the current locale
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        # Used in wallet info template to interpolate some translations
+        $scope.numberFilter = $filter('number')
+
         # Button label
         if $scope.amount > 0
-          $scope.validButtonName = _t('confirm_(payment_on_site)')
+          $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$scope.currentUser.role, AMOUNT:$filter('currency')($scope.amount)}, "messageformat")
         else
-          $scope.validButtonName = _t('confirm')
+          if price.price > 0 and $scope.walletAmount == 0
+            $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$scope.currentUser.role, AMOUNT:$filter('currency')(price.price)}, "messageformat")
+          else
+            $scope.validButtonName = _t('confirm')
 
         ##
         # Callback to process the local payment, triggered on button click
         ##
         $scope.ok = ->
           $scope.attempting = true
-          Reservation.save reservation: $scope.reservation, (reservation) ->
+          Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
             $uibModalInstance.close(reservation)
             $scope.attempting = true
           , (response)->
@@ -930,8 +942,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
       $scope.plansAreShown = false
 
-    $scope.calendar.fullCalendar 'refetchEvents'
-    $scope.calendar.fullCalendar 'rerenderEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 

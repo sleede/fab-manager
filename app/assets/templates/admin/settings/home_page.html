@@ -1,0 +1,29 @@
+<div class="panel panel-default m-t-md">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 translate>{{ 'news_of_the_home_page' }}</h4>
+                <div ng-model="homeBlogpostSetting.value" class="well" medium-editor options='{"placeholder": "{{ "type_your_news_here" | translate }}",
+                  "buttons": ["bold", "italic", "anchor", "header1", "header2" ]}'></div>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'leave_it_empty_to_not_bring_up_any_news_on_the_home_page' | translate }}</span>
+                <button name="button" class="btn btn-warning" ng-click="save(homeBlogpostSetting)" translate>{{ 'save' }}</button>
+            </div>
+            <div class="col-md-6">
+                <h4 translate>{{ 'twitter_stream' }}</h4>
+                <form role="form" class="form-inline" name="twitterForm" novalidate>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-twitter"></i>
+                            </div>
+                            <input type="text" ng-model="twitterSetting.value" class="form-control" placeholder="{{ 'name_of_the_twitter_account' | translate }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button name="button" class="btn btn-warning" ng-click="save(twitterSetting)" translate>{{ 'save' }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,7 @@
 'use strict'
 
-Application.Controllers.controller "EventsController", ["$scope", "$state", 'Event', ($scope, $state, Event) ->
-
-
-
-  ### PRIVATE STATIC CONSTANTS ###
-
-  # Number of events added to the page when the user clicks on 'load next events'
-  EVENTS_PER_PAGE = 12
+Application.Controllers.controller "EventsController", ["$scope", "$state", 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise'
+, ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) ->
 
 
 
@@ -16,33 +10,40 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
   ## The events displayed on the page
   $scope.events = []
 
-  ## By default, the pagination mode is activated to limit the page size
-  $scope.paginateActive = true
-
   ## The currently displayed page number
   $scope.page = 1
 
+  ## List of categories for the events
+  $scope.categories = categoriesPromise
+
+  ## List of events themes
+  $scope.themes = themesPromise
+
+  ## List of age ranges
+  $scope.ageRanges = ageRangesPromise
+
+  ## Hide or show the 'load more' button
+  $scope.noMoreResults = false
+
+  ## Active filters for the events list
+  $scope.filters =
+    category_id: null
+    theme_id: null
+    age_range_id: null
+
+
+
   ##
-  # Adds EVENTS_PER_PAGE events to the bottom of the page, grouped by month
+  # Adds a resultset of events to the bottom of the page, grouped by month
   ##
   $scope.loadMoreEvents = ->
-    Event.query {page: $scope.page}, (data) ->
+    Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
       $scope.events = $scope.events.concat data
-      if data.length > 0
-        $scope.paginateActive = false if ($scope.page-2)*EVENTS_PER_PAGE+data.length >= data[0].nb_total_events
+      groupEvents($scope.events)
+      $scope.page += 1
 
-        $scope.eventsGroupByMonth = _.groupBy($scope.events, (obj) ->
-          _.map ['month', 'year'], (key, value) -> obj[key]
-        )
-        $scope.monthOrder = _.sortBy _.keys($scope.eventsGroupByMonth), (k)->
-          monthYearArray = k.split(',')
-          date = new Date()
-          date.setMonth(monthYearArray[0])
-          date.setYear(monthYearArray[1])
-          return -date.getTime()
-      else
-        $scope.paginateActive = false
-    $scope.page += 1
+      if (!data[0] || data[0].nb_total_events <= $scope.events.length)
+        $scope.noMoreResults = true
 
 
 
@@ -55,13 +56,69 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
+  ##
+  # Callback to refresh the events list according to the filters set
+  ##
+  $scope.filterEvents = ->
+    # reinitialize results datasets
+    $scope.page = 1
+    $scope.eventsGroupByMonth = {}
+    $scope.events = []
+    $scope.monthOrder = []
+    $scope.noMoreResults = false
+
+    # run a search query
+    Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
+      $scope.events = data
+      groupEvents(data)
+      $scope.page += 1
+
+      if (!data[0] || data[0].nb_total_events <= $scope.events.length)
+        $scope.noMoreResults = true
+
+
+
+  ##
+  # Test if the provided event occurs on a single day or on many days
+  # @param event {{start_date:Date, end_date:Date}} Event object as retreived from the API
+  # @return {boolean} false if the event occurs on many days
+  ##
+  $scope.onSingleDay = (event) ->
+    moment(event.start_date).isSame(event.end_date, 'day')
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    $scope.loadMoreEvents()
+    $scope.filterEvents()
+
+
+
+  ##
+  # Group the provided events by month/year and concat them with existing results
+  # Then compute the ordered list of months for the complete resultset.
+  # Affect the resulting events groups in $scope.eventsGroupByMonth and the ordered month keys in $scope.monthOrder.
+  # @param {Array} Events retrived from the API
+  ##
+  groupEvents = (events) ->
+    if events.length > 0
+      eventsGroupedByMonth = _.groupBy(events, (obj) ->
+        _.map ['month', 'year'], (key, value) -> obj[key]
+      )
+      $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth)
+
+      monthsOrder = _.sortBy _.keys($scope.eventsGroupByMonth), (k)->
+        monthYearArray = k.split(',')
+        date = new Date()
+        date.setMonth(monthYearArray[0])
+        date.setYear(monthYearArray[1])
+        return -date.getTime()
+
+      $scope.monthOrder = monthsOrder
 
 
 
@@ -75,13 +132,12 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
-Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'reducedAmountAlert', 'growl', '_t'
-($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, reducedAmountAlert, growl, _t) ->
+Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise',
+($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise) ->
 
 
 
   ### PUBLIC SCOPE ###
-  $scope.reducedAmountAlert = reducedAmountAlert.setting.value
 
   ## reservations for the currently shown event
   $scope.reservations = []
@@ -92,17 +148,23 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
   ## parameters for a new reservation
   $scope.reserve =
-    nbPlaces: []
-    nbReducedPlaces: []
+    nbPlaces:
+        normal: []
     nbReservePlaces: 0
-    nbReserveReducedPlaces: 0
+    tickets: {}
     toReserve: false
     amountTotal : 0
+    totalSeats: 0
 
+  ## Discount coupon to apply to the basket, if any
+  $scope.coupon =
+    applied: null
 
-
-  # get the details for the current event (event's id is recovered from the current URL)
+  ## Get the details for the current event (event's id is recovered from the current URL)
   $scope.event = eventPromise
+
+  ## List of price categories for the events
+  $scope.priceCategories = priceCategoriesPromise
 
 
 
@@ -117,21 +179,27 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
-  # Callback to call when the number of places change in the current booking
+  # Callback to call when the number of tickets to book changes in the current booking
   ##
   $scope.changeNbPlaces = ->
-    reste = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
-    $scope.reserve.nbReducedPlaces = [0..reste]
-    $scope.computeEventAmount()
+    # compute the total remaing places
+    remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
+    for ticket of $scope.reserve.tickets
+      remain -= $scope.reserve.tickets[ticket]
+    # we store the total number of seats booked, this is used to know if the 'pay' button must be shown
+    $scope.reserve.totalSeats = $scope.event.nb_free_places - remain
 
+    # update the availables seats for full price tickets
+    fullPriceRemains = $scope.reserve.nbReservePlaces + remain
+    $scope.reserve.nbPlaces.normal = [0..fullPriceRemains]
 
+    # update the available seats for other prices tickets
+    for key of $scope.reserve.nbPlaces
+      if key != 'normal'
+        priceRemain = $scope.reserve.tickets[key] + remain
+        $scope.reserve.nbPlaces[key] = [0..priceRemain]
 
-  ##
-  # Callback to call when the number of discounted places change in the current booking
-  ##
-  $scope.changeNbReducedPlaces = ->
-    reste = $scope.event.nb_free_places - $scope.reserve.nbReserveReducedPlaces
-    $scope.reserve.nbPlaces = [0..reste]
+    # recompute the total price
     $scope.computeEventAmount()
 
 
@@ -185,11 +253,13 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     if Object.keys($scope.ctrl.member).length > 0
       reservation = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event)
 
-      if $scope.currentUser.role isnt 'admin' and $scope.reserve.amountTotal > 0
-        payByStripe(reservation)
-      else
-        if $scope.currentUser.role is 'admin' or $scope.reserve.amountTotal is 0
-          payOnSite(reservation)
+      Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
+        amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount)
+        if $scope.currentUser.role isnt 'admin' and amountToPay > 0
+          payByStripe(reservation)
+        else
+          if $scope.currentUser.role is 'admin' or amountToPay is 0
+            payOnSite(reservation)
     else
       # otherwise we alert, this error musn't occur when the current user is not admin
       growl.error(_t('please_select_a_member_first'))
@@ -206,20 +276,31 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       reservable_type: 'Event'
       slots_attributes: []
       nb_reserve_places: $scope.reserve.nbReservePlaces
-      nb_reserve_reduced_places: $scope.reserve.nbReserveReducedPlaces
+      tickets_attributes: []
+    # a single slot is used for events
     reservation.slots_attributes.push
       start_at: $scope.event.start_date
       end_at: $scope.event.end_date
       availability_id: $scope.event.availability.id
+    # iterate over reservations per prices
+    for price_id, seats of $scope.reserve.tickets
+      reservation.tickets_attributes.push
+        event_price_category_id: price_id
+        booked: seats
+    # set the attempting marker
     $scope.attempting = true
+    # save the reservation to the API
     Reservation.save reservation: reservation, (reservation) ->
+      # reservation successfull
       afterPayment(reservation)
       $scope.attempting = false
     , (response)->
+      # reservation failed
       $scope.alerts = []
       $scope.alerts.push
         msg: response.data.card[0]
         type: 'danger'
+      # unset the attempting marker
       $scope.attempting = false
 
 
@@ -227,7 +308,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ##
   # Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
   # a new date for his reservation (if any available)
-  # @param reservation {{id:number, reservable_id:number, nb_reserve_places:number, nb_reserve_reduced_places:number}}
+  # @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
   # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
   ##
   $scope.modifyReservation = (reservation, e)->
@@ -247,7 +328,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
         # set the reservable_id to the first available event
         for e in event.recurrence_events
-          if e.nb_free_places > (reservation.nb_reserve_places + reservation.nb_reserve_reduced_places)
+          if e.nb_free_places > reservation.total_booked_seats
             $scope.reservation.reservable_id = e.id
             break
 
@@ -277,22 +358,25 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           $uibModalInstance.dismiss('cancel')
       ]
     .result['finally'](null).then (reservation)->
+      # remove the reservation from the user's reservations list for this event (occurrence)
       $scope.reservations.splice(index, 1)
-      $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.nb_reserve_places + reservation.nb_reserve_reduced_places
+      # add the number of places transfered (to the new date) to the total of free places for this event
+      $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats
+      # remove the number of places transfered from the total of free places of the receiving occurrance
       angular.forEach $scope.event.recurrence_events, (e)->
-        if e.id is parseInt(reservation.reservable_id, 10)
-          e.nb_free_places = e.nb_free_places - reservation.nb_reserve_places - reservation.nb_reserve_reduced_places
+        if e.id is parseInt(reservation.reservable.id, 10)
+          e.nb_free_places = e.nb_free_places - reservation.total_booked_seats
 
 
 
   ##
-  # Checks if the provided reservation is able to be modified
-  # @param reservation {{nb_reserve_places:number, nb_reserve_reduced_places:number}}
+  # Checks if the provided reservation is able to be moved (date change)
+  # @param reservation {{total_booked_seats:number}}
   ##
   $scope.reservationCanModify = (reservation)->
     isAble = false
     angular.forEach $scope.event.recurrence_events, (e)->
-      isAble = true if e.nb_free_places > (reservation.nb_reserve_places + reservation.nb_reserve_reduced_places)
+      isAble = true if e.nb_free_places >= reservation.total_booked_seats
     isAble
 
 
@@ -305,10 +389,37 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     # first we check that a user was selected
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event)
-      Price.compute {reservation: r}, (res) ->
+      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.reserve.amountTotal = res.price
     else
       $scope.reserve.amountTotal = null
+
+
+
+  ##
+  # Return the URL allowing to share the current project on the Facebook social network
+  ##
+  $scope.shareOnFacebook = ->
+    'https://www.facebook.com/share.php?u='+$state.href('app.public.events_show', {id: $scope.event.id}, {absolute: true}).replace('#', '%23')
+
+
+
+  ##
+  # Return the URL allowing to share the current project on the Twitter social network
+  ##
+  $scope.shareOnTwitter = ->
+    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.events_show', {id: $scope.event.id}, {absolute: true}));
+
+
+
+  ##
+  # Return the textual description of the conditions applyable to the given price's category
+  # @param category_id {number} ID of the price's category
+  ##
+  $scope.getPriceCategoryConditions = (category_id) ->
+    for cat in $scope.priceCategories
+      if cat.id == category_id
+        return cat.conditions
 
 
 
@@ -318,23 +429,22 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    # gather the current user or the list of users if the current user is an admin
+    # set the controlled user as the current user if the current user is not an admin
     if $scope.currentUser
       if $scope.currentUser.role isnt 'admin'
         $scope.ctrl.member = $scope.currentUser
 
-    # check that the event's reduced rate is initialized
-    if !$scope.event.reduced_amount
-      $scope.event.reduced_amount = 0
-
     # initialize the "reserve" object with the event's data
-    $scope.reserve.nbPlaces = [0..$scope.event.nb_free_places]
-    $scope.reserve.nbReducedPlaces = [0..$scope.event.nb_free_places]
+    resetEventReserve()
 
     # if non-admin, get the current user's reservations into $scope.reservations
     if $scope.currentUser
       getReservations($scope.event.id, 'Event', $scope.currentUser.id)
 
+    # watch when a coupon is applied to re-compute the total price
+    $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+      unless newValue == null and oldValue == null
+        $scope.computeEventAmount()
 
 
   ##
@@ -353,8 +463,8 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # Create an hash map implementing the Reservation specs
   # @param member {Object} User as retreived from the API: current user / selected user if current is admin
   # @param reserve {Object} Reservation parameters (places...)
-  # @param event {Object} Current event (Atelier/Stage)
-  # @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, nb_reserve_places:Number, nb_reserve_reduced_places:Number}}
+  # @param event {Object} Current event
+  # @return {{user_id:number, reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
   ##
   mkReservation = (member, reserve, event) ->
     reservation =
@@ -363,7 +473,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       reservable_type: 'Event'
       slots_attributes: []
       nb_reserve_places: reserve.nbReservePlaces
-      nb_reserve_reduced_places: reserve.nbReserveReducedPlaces
+      tickets_attributes: []
 
     reservation.slots_attributes.push
       start_at: event.start_date
@@ -371,8 +481,29 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       availability_id: event.availability.id
       offered: event.offered || false
 
+    for evt_px_cat in event.prices
+      booked = reserve.tickets[evt_px_cat.id]
+      if booked > 0
+        reservation.tickets_attributes.push
+          event_price_category_id: evt_px_cat.id
+          booked: booked
+
     reservation
 
+
+
+  ##
+  # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+  # @param reservation {Object} as returned by mkReservation()
+  # @param coupon {Object} Coupon as returned from the API
+  # @return {{reservation:Object, coupon_code:string}}
+  ##
+  mkRequestParams = (reservation, coupon) ->
+    params =
+      reservation: reservation
+      coupon_code: (coupon.code if coupon)
+
+    params
 
 
   ##
@@ -381,12 +512,18 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   resetEventReserve = ->
     if $scope.event
       $scope.reserve =
-        nbPlaces: [0..$scope.event.nb_free_places]
-        nbReducedPlaces: [0..$scope.event.nb_free_places]
+        nbPlaces:
+          normal: [0..$scope.event.nb_free_places]
         nbReservePlaces: 0
-        nbReserveReducedPlaces: 0
+        tickets: {}
         toReserve: false
         amountTotal : 0
+        totalSeats: 0
+
+      for evt_px_cat in $scope.event.prices
+        $scope.reserve.nbPlaces[evt_px_cat.id] = [0..$scope.event.nb_free_places]
+        $scope.reserve.tickets[evt_px_cat.id] = 0
+
       $scope.event.offered = false
 
 
@@ -403,22 +540,34 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         cgv: ->
           CustomAsset.get({name: 'cgv-file'}).$promise
         objectToPay: ->
           eventToReserve: $scope.event
           reserve: $scope.reserve
           member: $scope.ctrl.member
-      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl) ->
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale, $filter, coupon) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # CGV
         $scope.cgv = cgv.custom_asset
 
         # Reservation
         $scope.reservation = reservation
+
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
 
         # Callback for the stripe payment authorization
         $scope.payment = (status, response) ->
@@ -427,7 +576,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           else
             $scope.attempting = true
             $scope.reservation.card_token = response.id
-            Reservation.save reservation: $scope.reservation, (reservation) ->
+            Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
@@ -453,24 +602,42 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         reservation: ->
           reservation
         price: ->
-          Price.compute({reservation: reservation}).$promise
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation) ->
+          Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+        wallet: ->
+          Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+        coupon: ->
+          $scope.coupon.applied
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers, $filter, coupon) ->
+        # user wallet amount
+        $scope.walletAmount = wallet.amount
+
         # Price
-        $scope.amount = price.price
+        $scope.price = price.price
+
+        # price to pay
+        $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
         # Reservation
         $scope.reservation = reservation
 
+        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+
+        $scope.numberFilter = $filter('number')
+
         # Button label
         if $scope.amount > 0
-          $scope.validButtonName = _t('confirm_(payment_on_site)')
+          $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$scope.currentUser.role, AMOUNT:$filter('currency')($scope.amount)}, "messageformat")
         else
-          $scope.validButtonName = _t('confirm')
+          if price.price > 0 and $scope.walletAmount == 0
+            $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$scope.currentUser.role, AMOUNT:$filter('currency')(price.price)}, "messageformat")
+          else
+            $scope.validButtonName = _t('confirm')
 
         # Callback to validate the payment
         $scope.ok = ->
           $scope.attempting = true
-          Reservation.save reservation: $scope.reservation, (reservation) ->
+          Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
             $uibModalInstance.close(reservation)
             $scope.attempting = true
           , (response)->
@@ -496,7 +663,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # @param resveration {Object} booked reservation
   ##
   afterPayment = (reservation)->
-    $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.nb_reserve_places - reservation.nb_reserve_reduced_places
+    $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats
     resetEventReserve()
     $scope.reserveSuccess = true
     $scope.reservations.push reservation

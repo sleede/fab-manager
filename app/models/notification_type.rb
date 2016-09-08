@@ -37,5 +37,10 @@ class NotificationType
     notify_admin_profile_complete
     notify_admin_abuse_reported
     notify_admin_invoicing_changed
+    notify_user_wallet_is_credited
+    notify_admin_user_wallet_is_credited
+    notify_admin_export_complete
+    notify_member_about_coupon
+    notify_member_reservation_reminder
   )
 end

@@ -1,0 +1,31 @@
+<div>
+  <table class="table" ng-if="transactions.length > 0">
+    <thead>
+      <tr>
+        <th style="width:25%" translate>{{ 'date' }}</th>
+        <th style="width:25%" translate>{{ 'operation' }}</th>
+        <th style="width:25%" translate>{{ 'operator' }}</th>
+        <th style="width:25%" translate>{{ 'amount' }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="t in transactions">
+      <td>{{ ::t.created_at | amDateFormat:'L' }}</td>
+      <td>
+        <span ng-if="t.transaction_type == 'credit'" translate>{{ 'credit' }}</span>
+        <span ng-if="t.transaction_type == 'debit'" translate>{{ 'debit' }}</span>
+        <a ng-href="api/invoices/{{t.invoice.id}}/download" target="_blank" ng-if="t.invoice.id">
+          {{::t.invoice.reference}}
+        </a>
+      </td>
+      <td>{{ ::t.user.full_name }}</td>
+      <td ng-class="{'green':t.transaction_type == 'credit', 'red':t.transaction_type == 'debit'}">
+        <span ng-if="t.transaction_type == 'credit'">+</span>
+        <span ng-if="t.transaction_type == 'debit'">-</span>
+        <strong>{{ ::t.amount | currency }}</strong>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p ng-if="transactions.length == 0" translate>{{ 'no_transactions_for_now' }}</p>
+</div>

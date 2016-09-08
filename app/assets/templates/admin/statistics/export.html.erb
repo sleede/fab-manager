@@ -1,0 +1,76 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'export_statistics_to_excel' }}</h1>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="radio">
+        <label><input type="radio" name="scope" ng-model="export.type" value="global" ng-change="setRequest()">{{ 'export_all_statistics' | translate }}</label>
+    </div>
+    <div ng-show="export.type == 'global'">
+      <ul class="list-unstyled">
+        <li class="row">
+          <span class="col-md-4" translate>{{ 'start' }}</span>
+          <div class="input-group black col-md-7 m-r" id="date_pick_start">
+            <input type="text"
+                   class="form-control"
+                   uib-datepicker-popup="{{exportEnd.format}}"
+                   ng-model="dates.start"
+                   name="startDate"
+                   is-open="exportStart.opened"
+                   min-date="exportStart.minDate"
+                   max-date="exportStart.maxDate"
+                   datepicker-options="exportStart.options"
+                   show-button-bar="false"
+                   placeholder="{{ 'start' | translate }}"
+                   ng-click="toggleStartDatePicker($event)"
+                   ng-change="setRequest()"
+                   required="required"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleStartDatePicker($event)">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                          </span>
+          </div>
+        </li>
+        <li class="row">
+          <span class="col-md-4" translate>{{ 'end' }}</span>
+          <div class="input-group black col-md-7 m-r" id="date_pick_end">
+            <input type="text"
+                   class="form-control"
+                   uib-datepicker-popup="{{exportEnd.format}}"
+                   ng-model="dates.end"
+                   name="endDate"
+                   is-open="exportEnd.opened"
+                   min-date="exportEnd.minDate"
+                   max-date="exportEnd.maxDate"
+                   datepicker-options="datePickerEnd.options"
+                   show-button-bar="false"
+                   placeholder="{{ 'end' | translate }}"
+                   ng-click="toggleEndDatePicker($event)"
+                   ng-change="setRequest()"
+                   required="required"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-search-datepicker" ng-click="toggleEndDatePicker($event)">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                          </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="scope" ng-model="export.type" value="current" ng-change="setRequest()">{{ 'export_the_current_search_results' | translate }}</label>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <form role="form" ng-submit="exportData()" name="exportForm" method="post" action="{{ actionUrl }}" class="inline">
+    <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
+    <input name="_method" type="hidden" ng-value="method"/>
+    <input name="type_key" type="hidden" ng-value="typeKey"/>
+    <input name="body" type="hidden" ng-value="query"/>
+    <input type="submit" class="btn btn-info" value="{{ 'export' | translate }}" formtarget="export-frame"/>
+  </form>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

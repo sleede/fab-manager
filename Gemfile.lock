@@ -42,6 +42,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     ansi (1.5.0)
+    api-pagination (4.3.0)
+    apipie-rails (0.3.6)
+      json
     arel (6.0.3)
     autoprefixer-rails (5.1.8)
       execjs
@@ -51,6 +54,13 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.1.7)
+    axlsx_rails (0.4.0)
+      axlsx (>= 2.0.1)
+      rails (>= 3.1)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -164,11 +174,14 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    has_secure_token (1.0.0)
+      activerecord (>= 3.0)
     hashdiff (0.3.0)
     hashie (3.4.2)
     highline (1.7.1)
     hike (1.2.3)
     hitimes (1.2.2)
+    htmlentities (4.3.4)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
     http-cookie (1.0.2)
@@ -179,9 +192,11 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     ice_nine (0.11.1)
-    jbuilder (2.2.12)
-      activesupport (>= 3.0.0, < 5)
+    jbuilder (2.5.0)
+      activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jbuilder_cache_multi (0.0.3)
+      jbuilder (>= 1.5.0, < 3)
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -208,13 +223,13 @@ GEM
     mime-types (2.99)
     mini_magick (4.2.0)
     mini_portile2 (2.0.0)
-    minitest (5.8.4)
+    minitest (5.9.0)
     minitest-reporters (1.1.8)
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.0.0)
@@ -318,6 +333,7 @@ GEM
       netrc (~> 0.7)
     rolify (4.0.0)
     ruby-progressbar (1.7.5)
+    rubyzip (1.1.7)
     rufus-scheduler (3.0.9)
       tzinfo
     rvm-capistrano (1.5.6)
@@ -430,7 +446,11 @@ DEPENDENCIES
   aasm
   actionpack-page_caching
   active_record_query_trace
+  api-pagination
+  apipie-rails
   awesome_print
+  axlsx (= 2.1.0.pre)
+  axlsx_rails
   bootstrap-sass
   byebug
   capistrano
@@ -452,7 +472,9 @@ DEPENDENCIES
   foreman
   forgery
   friendly_id (~> 5.1.0)
-  jbuilder (~> 2.0)
+  has_secure_token
+  jbuilder (~> 2.5)
+  jbuilder_cache_multi
   jquery-rails
   kaminari
   letter_opener
@@ -477,6 +499,7 @@ DEPENDENCIES
   recurrence
   responders (~> 2.0)
   rolify
+  rubyzip (~> 1.1.0)
   rvm-capistrano
   sass-rails (= 5.0.1)
   sdoc (~> 0.4.0)
@@ -497,4 +520,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.11.2
+   1.12.5

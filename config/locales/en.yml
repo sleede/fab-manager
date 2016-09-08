@@ -36,6 +36,9 @@ en:
     errors:
       <<: *errors
 
+  apipie:
+    api_documentation: "API Documentation"
+
   omniauth:
     # error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail address \"%{OLD_MAIL}\" is already linked to another account, please input your authentication code."
@@ -75,14 +78,15 @@ en:
     subscription_NAME_from_START_to_END: "Subscription - From %{START} to %{END}"
     machine_reservation_DESCRIPTION: "Machine reservation - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Training reservation - %{DESCRIPTION}"
-    courses_and_workshops_reservation_DESCRIPTION: "Courses and Workshops reservation - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Event reservation - %{DESCRIPTION}"
     full_price_ticket:
       one: "One full price ticket"
       other: "%{count} full price tickets"
-    reduced_rate_ticket:
-      one: "One reduced rate ticket"
-      other: "%{count} reduced rate tickets"
+    other_rate_ticket:
+      one: "One %{NAME} ticket"
+      other: "%{count} %{NAME} tickets"
     reservation_other: "Reservation (other)"
+    coupon_CODE_discount_of_PERCENT: "Coupon %{CODE}: discount of %{PERCENT}%"
     total_including_all_taxes: "Total incl. all taxes"
     including_VAT_RATE: "Including VAT %{RATE}%"
     including_total_excluding_taxes: "Including Total excl. taxes"
@@ -94,14 +98,17 @@ en:
     by_transfer: "by transfer"
     by_cash: "by cash"
     no_refund: "No refund"
+    by_wallet: "by wallet"
     settlement_by_debit_card: "Settlement by debit card"
     settlement_done_at_the_reception: "Settlement done at the reception"
+    settlement_by_wallet: "Settlement by wallet"
     on_DATE_at_TIME: "on %{DATE} at %{TIME},"
     for_an_amount_of_AMOUNT: "for an amount of %{AMOUNT}"
     on_DATE_from_START_to_END: "On %{DATE} from %{START} to %{END}" # eg: on feb. 7 from 7AM to 9AM
     from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "From %{STARTDATE} to %{ENDDATE}, from %{STARTTIME} to %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
+    and: 'and'
 
   trainings:
     # training availabilities
@@ -110,23 +117,39 @@ en:
 
   export_members:
     # members list export to EXCEL format
+    members: "Members"
     id: "ID"
     surname: "Surname"
     first_name: "First name"
     email: "E-mail"
+    newsletter: "Newsletter"
     gender: "Gender"
     age: "Age"
+    address: "Address"
     phone: "Phone"
+    website: "Website"
+    job: "Job"
+    interests: "Interests"
+    cad_software_mastered: "CAD Softwares mastered"
     group: "Group"
     subscription: "Subscription"
     subscription_end_date: "Subscription end date"
     validated_trainings: "Validated trainings"
+    tags: "Tags"
+    number_of_invoices: "Number of invoices"
+    projects: "Projects"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Echosciences"
+    organization: "Organization"
+    organization_address: "Organization address"
     man: "Man"
     woman: "Woman"
     without_subscriptions: "Without subscriptions"
 
   export_reservations:
     # machines/trainings/events reservations list to EXCEL format
+    reservations: "Reservations"
     customer_id: "Customer ID"
     customer: "Customer"
     email: "E-mail"
@@ -140,6 +163,7 @@ en:
 
   export_subscriptions:
     # subscriptions list export to EXCEL format
+    subscriptions: "Subscriptions"
     id: "ID"
     customer: "Customer"
     email: "E-mail"
@@ -189,6 +213,8 @@ en:
         a_new_user_account_has_been_imported_from_PROVIDER_(UID)_html: "A new user account has been imported from: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Reminder: You have a reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
       notify_member_slot_is_canceled:
         your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Your reservation %{RESERVABLE} of %{DATE} was successfully cancelled."
       notify_member_slot_is_modified:
@@ -226,3 +252,72 @@ en:
       undefined_notification:
         unknown_notification: "Unknown notification"
         notification_ID_wrong_type_TYPE_unknown: "Notification %{ID} wrong (type %{TYPE} unknown)"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "Your wallet has been credited by administrator"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "The wallet of member %{USER} has been credited %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "The export"
+        statistics_global: "of all the statistics"
+        statistics_account: "of the registration statistics"
+        statistics_event: "of statistics about events"
+        statistics_machine: "of statistics about machine hours"
+        statistics_project: "of statistics about projects"
+        statistics_subscription: "of subscription statistics"
+        statistics_training: "of statistics about trainings"
+        users_members: "of the members' list"
+        users_subscriptions: "of the subscriptions' list"
+        users_reservations: "of the reservations' list"
+        is_over: "is over."
+        download_here: "Download here"
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% with code %{CODE}"
+
+  statistics:
+    # statistics tools for admins
+    subscriptions: "Subscriptions"
+    machines_hours: "Machines hours"
+    trainings: "Trainings"
+    events: "Events"
+    registrations: "Registrations"
+    projects: "Projects"
+    users: "Users"
+    training_id: "Training ID"
+    training_date: "Training Date"
+    event_id: "Event ID"
+    event_date: "Event Date"
+    event_name: "Event Name"
+    event_theme: "Theme"
+    age_range: "Age Range"
+    themes: "Themes"
+    components: "Components"
+    machines: "Machines"
+    user_id: "User ID"
+    bookings: "Bookings"
+    hours_number: "Hours number"
+    tickets_number: "Tickets number"
+    revenue: "Revenue"
+    account_creation: "Account creation"
+    project_publication: "Project publication"
+
+  export:
+    # statistics exports to the excel file format
+    entries: "Entries"
+    revenue: "Revenue"
+    average_age: "Average Age"
+    total: "Total"
+    date: "Date"
+    user: "User"
+    email: "Email"
+    phone: "Phone"
+    gender: "Gender"
+    age: "Age"
+    type: "Type"
+    revenue: "Revenue"
+    male: "Man"
+    female: "Woman"
+
+  price_category:
+    # initial price's category for events, created to replace the old "reduced amount" property
+    reduced_fare: "Reduced fare"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Reduced fare if you are under 25, student or unemployed."

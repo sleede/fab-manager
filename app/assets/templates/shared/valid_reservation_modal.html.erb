@@ -3,12 +3,15 @@
   <h1 translate>{{ 'booking_confirmation' }}</h1>
 </div>
 <div class="modal-body">
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <ng-include src="'<%= asset_path 'shared/_wallet_amount_info.html' %>'"></ng-include>
+
   <p translate>{{ 'here_is_the_summary_of_the_slots_to_book_for_the_current_user' }}</p>
   <ul ng-repeat="slot in reservation.slots_attributes">
     <li><strong>{{slot.start_at | amDateFormat: 'LL'}} : {{slot.start_at | amDateFormat:'LT'}} - {{slot.end_at | amDateFormat:'LT'}}</strong></li>
   </ul>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting">{{validButtonName}}</button>
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" ng-bind-html="validButtonName"></button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

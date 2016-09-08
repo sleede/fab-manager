@@ -1,0 +1,21 @@
+<div class="form-group m-b-lg" ng-show="show">
+  <a ng-click="code. input = true" ng-hide="code.input" class="b-b" translate>{{ 'i_have_a_coupon' }}</a>
+
+  <div ng-show="code.input">
+    <label for="coupon_code" translate>{{ 'code_' }}</label>
+    <div class="input-group">
+      <input type="text"
+             class="form-control"
+             name="coupon_code"
+             ng-model="couponCode"
+             id="coupon_code"
+             ng-model-options='{ debounce: 1000 }'
+             ng-change='validateCode()'/>
+      <span class="input-group-addon" ng-class="{'label-success': status == 'valid', 'label-danger text-white': status == 'invalid'}">
+        <i class="fa fa-spinner fa-pulse fa-fw" ng-show="status == 'pending'"></i>
+        <i class="fa fa-times" ng-show="status == 'invalid'"></i>
+        <i class="fa fa-check" ng-show="status == 'valid'"></i>
+      </span>
+    </div>
+  </div>
+</div>

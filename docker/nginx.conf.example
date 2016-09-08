@@ -1,5 +1,5 @@
 upstream puma {
-  server unix:/usr/src/app/tmp/sockets/fabmanager.sock fail_timeout=0;
+  server fabmanager:3000;
 }
 
 server {

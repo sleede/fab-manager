@@ -1,7 +1,7 @@
-maxMembers = @members.except(:offset, :limit, :order).count
+max_members = @query.except(:offset, :limit, :order).count
 
 json.array!(@members) do |member|
-  json.maxMembers maxMembers
+  json.maxMembers max_members
   json.id member.id
   json.email member.email if current_user
   json.profile do
@@ -9,6 +9,7 @@ json.array!(@members) do |member|
     json.last_name member.profile.last_name
     json.phone member.profile.phone
   end
+  json.need_completion member.need_completion?
   json.group do
     json.name member.group.name
   end

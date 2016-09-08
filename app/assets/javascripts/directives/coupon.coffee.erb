@@ -1,0 +1,42 @@
+Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, growl, _t) ->
+  {
+    restrict: 'E'
+    scope:
+      show: '='
+      coupon: '='
+      userId: '@'
+    templateUrl: '<%= asset_path "shared/_coupon.html" %>'
+    link: ($scope, element, attributes) ->
+
+      # Whether code input is shown or not (ie. the link 'I have a coupon' is shown)
+      $scope.code =
+          input: false
+
+      # Available status are: 'pending', 'valid', 'invalid'
+      $scope.status = 'pending'
+
+      # Binding for the code inputed
+      $scope.couponCode = null
+
+
+
+      ##
+      # Callback to validate the code
+      ##
+      $scope.validateCode = ->
+        if $scope.couponCode == ''
+          $scope.status = 'pending'
+          $scope.coupon = null
+        else
+          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId}, (res) ->
+            $scope.status = 'valid'
+            $scope.coupon = res
+            growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+          , (err) ->
+            $scope.status = 'invalid'
+            $scope.coupon = null
+            growl.error(_t('unable_to_apply_the_coupon_because_'+err.data.status))
+  }
+]
+
+

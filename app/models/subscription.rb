@@ -18,11 +18,46 @@ class Subscription < ActiveRecord::Base
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
-  def save_with_payment(invoice = true)
+  def save_with_payment(invoice = true, coupon_code = nil)
     if valid?
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
       begin
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, card: card_token)
+        # dont add a wallet invoice item if pay subscription by reservation
+        if invoice
+          @wallet_amount_debit = get_wallet_amount_debit
+          if @wallet_amount_debit != 0
+            Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -@wallet_amount_debit,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "wallet -#{@wallet_amount_debit / 100.0}"
+            )
+          end
+
+          unless coupon_code.nil?
+            cp = Coupon.find_by_code(coupon_code)
+            total = plan.amount
+            Stripe::InvoiceItem.create(
+                customer: user.stp_customer_id,
+                amount: -(total  * cp.percent_off / 100.0).to_i,
+                currency: Rails.application.secrets.stripe_currency,
+                description: "coupon #{cp.code}"
+            )
+          end
+        elsif coupon_code != nil
+          # this case applies if a subscription was took in addition of a reservation, so we create a second
+          # stripe coupon to apply the discount on the subscription item for the stripe's invoice.
+          cp = Coupon.find_by_code(coupon_code)
+          total = plan.amount
+          Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -(total  * cp.percent_off / 100.0).to_i,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "coupon #{cp.code}"
+          )
+        end
+
+        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
         self.stp_subscription_id = new_subscription.id
         self.canceled_at = nil
         self.expired_at = Time.at(new_subscription.current_period_end)
@@ -32,7 +67,16 @@ class Subscription < ActiveRecord::Base
 
         # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
-        generate_invoice(stp_invoice.id).save if invoice
+        if invoice
+          invoc = generate_invoice(stp_invoice.id, coupon_code)
+          # debit wallet
+          wallet_transaction = debit_user_wallet
+          if wallet_transaction
+            invoc.wallet_amount = @wallet_amount_debit
+            invoc.wallet_transaction_id = wallet_transaction.id
+          end
+          invoc.save
+        end
         # cancel subscription after create
         cancel
         return true
@@ -71,22 +115,42 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def save_with_local_payment(invoice = true)
+  def save_with_local_payment(invoice = true, coupon_code = nil)
     if valid?
+      @wallet_amount_debit = get_wallet_amount_debit if invoice
+
       self.stp_subscription_id = nil
       self.canceled_at = nil
       set_expired_at
       save!
       UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-      generate_invoice.save if invoice
+      if invoice
+        invoc = generate_invoice(nil, coupon_code)
+        # debit wallet
+        wallet_transaction = debit_user_wallet
+        if wallet_transaction
+          invoc.wallet_amount = @wallet_amount_debit
+          invoc.wallet_transaction_id = wallet_transaction.id
+        end
+        invoc.save
+      end
       return true
     else
       return false
     end
   end
 
-  def generate_invoice(stp_invoice_id = nil)
-    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: plan.amount, stp_invoice_id: stp_invoice_id)
+  def generate_invoice(stp_invoice_id = nil, coupon_code = nil)
+    coupon_id = nil
+    total = plan.amount
+
+    unless coupon_code.nil?
+      coupon = Coupon.find_by_code(coupon_code)
+      coupon_id = coupon.id
+      total = plan.amount - (plan.amount * coupon.percent_off / 100.0)
+    end
+
+    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id)
     invoice.invoice_items.push InvoiceItem.new(amount: plan.amount, stp_invoice_item_id: stp_subscription_id, description: plan.name, subscription_id: self.id)
     invoice
   end
@@ -209,4 +273,16 @@ class Subscription < ActiveRecord::Base
     plan.is_a?(PartnerPlan)
   end
 
+  def get_wallet_amount_debit
+    total = plan.amount
+    wallet_amount = (user.wallet.amount * 100).to_i
+    return wallet_amount >= total ? total : wallet_amount
+  end
+
+  def debit_user_wallet
+    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
+      amount = @wallet_amount_debit / 100.0
+      return WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+    end
+  end
 end

@@ -25,5 +25,14 @@ json.reservable do
   json.name @reservation.reservable.name
 end
 json.nb_reserve_places @reservation.nb_reserve_places
-json.nb_reserve_reduced_places @reservation.nb_reserve_reduced_places
+json.tickets @reservation.tickets do |t|
+  json.extract! t, :booked, :created_at
+  json.event_price_category do
+    json.extract! t.event_price_category, :id, :price_category_id
+    json.price_category do
+      json.extract! t.event_price_category.price_category, :id, :name
+    end
+  end
+end
+json.total_booked_seats @reservation.total_booked_seats
 json.created_at @reservation.created_at.iso8601

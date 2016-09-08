@@ -59,12 +59,11 @@ fr:
           your_approved_trainings: "Vos formations validées"
         events:
           # tableau de bord : mes évènements
-          your_next_courses_and_workshops: "Vos prochains stages et ateliers"
-          no_courses_or_workshops_to_come: "Aucun stage ou atelier à venir"
-          your_previous_courses_and_workshops: "Vos stages et ateliers passés"
-          no_passed_courses_or_workshops: "Aucun stage ou atelier passé"
-          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =1{place normale réservée}, other{places normales réservées}}"  # messageFormat interpolation
-          NUMBER_reduced_fare_places_reserved: "{NUMBER} {NUMBER, plural, =1{place réservée à tarif réduit}, other{places réservées à tarif réduit}"  # messageFormat interpolation
+          your_next_events: "Vos prochains évènements"
+          no_events_to_come: "Aucun évènement à venir"
+          your_previous_events: "Vos évènements passés"
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"  # messageFormat interpolation
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place {NAME} réservée} other{places {NAME} réservées}}"  # messageFormat interpolation
         invoices:
           # tableau de bord : mes factures
           reference_number: "Référence"
@@ -127,7 +126,9 @@ fr:
 
       trainings_reserve:
         # réserver une formation
-        trainings_planning: "Planning formation"
+        trainings_planning: "Planning formations"
+        planning_of: "Planning de la"   # suivi du nom de la formation (eg. "Planning de la formation imprimante 3d")
+        all_trainings: "Toutes les formations"
         select_a_slot_in_the_calendar: "Sélectionnez un créneau dans le calendrier"
         you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
         datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM

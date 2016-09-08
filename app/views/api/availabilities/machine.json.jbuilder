@@ -6,7 +6,7 @@ json.array!(@slots) do |slot|
   json.end slot.end_at.iso8601
   json.is_reserved slot.is_reserved
   json.backgroundColor 'white'
-  json.borderColor slot.is_reserved ? (slot.is_reserved_by_current_user ? '#b2e774' : '#1d98ec') : '#e4cd78'
+  json.borderColor machines_slot_border_color(slot)
 
   json.availability_id slot.availability_id
   json.machine do
@@ -17,7 +17,7 @@ json.array!(@slots) do |slot|
   json.user do
     json.id slot.reservation.user.id
     json.name slot.reservation.user.profile.full_name
-  end if slot.reservation # ... if the slot was reserved
+  end if @current_user_role == 'admin' and slot.reservation # ... if the slot was reserved
   json.tag_ids slot.availability.tag_ids
   json.tags slot.availability.tags do |t|
     json.id t.id

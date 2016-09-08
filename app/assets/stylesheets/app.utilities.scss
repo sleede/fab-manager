@@ -335,8 +335,14 @@ p, .widget p {
   }
 }
 
+.exponent {
+  font-size: 0.7em;
+  vertical-align: super
+}
+
 @media screen and (min-width: $screen-lg-min) {
   .b-r-lg {border-right: 1px solid $border-color; }
+  .hide-b-r-lg { border: none !important; }
 }
 
 

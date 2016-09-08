@@ -55,7 +55,7 @@ module Reservations
       invoice_item = InvoiceItem.last
 
       assert invoice_item.stp_invoice_item_id
-      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id).amount
+      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -291,6 +291,144 @@ module Reservations
 
       # check that user subscription were extended
       assert_equal reservation.slots.first.start_at + plan.duration, @user_with_subscription.subscription.expired_at
+    end
+
+    test "user reserves a machine and pay by wallet with success" do
+      @vlonchamp = User.find_by(username: 'vlonchamp')
+      login_as(@vlonchamp, scope: :user)
+
+      machine = Machine.find(6)
+      availability = machine.availabilities.first
+
+      reservations_count = Reservation.count
+      invoice_count = Invoice.count
+      invoice_items_count = InvoiceItem.count
+      users_credit_count = UsersCredit.count
+      wallet_transactions_count = WalletTransaction.count
+
+      VCR.use_cassette("reservations_create_for_machine_and_pay_wallet_success") do
+        post reservations_path, { reservation: {
+            user_id: @vlonchamp.id,
+            reservable_id: machine.id,
+            reservable_type: machine.class.name,
+            card_token: stripe_card_token,
+            slots_attributes: [
+              { start_at: availability.start_at.to_s(:iso8601),
+                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }}.to_json, default_headers
+      end
+
+      # general assertions
+      assert_equal 201, response.status
+      assert_equal reservations_count + 1, Reservation.count
+      assert_equal invoice_count + 1, Invoice.count
+      assert_equal invoice_items_count + 1, InvoiceItem.count
+      assert_equal users_credit_count, UsersCredit.count
+      assert_equal wallet_transactions_count + 1, WalletTransaction.count
+
+      # reservation assertions
+      reservation = Reservation.last
+
+      assert reservation.invoice
+      refute reservation.stp_invoice_id.blank?
+      assert_equal 1, reservation.invoice.invoice_items.count
+
+      # invoice assertions
+      invoice = reservation.invoice
+
+      refute invoice.stp_invoice_id.blank?
+      refute invoice.total.blank?
+
+      # invoice_items assertions
+      invoice_item = InvoiceItem.last
+
+      assert invoice_item.stp_invoice_item_id
+      assert_equal invoice_item.amount, machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert_invoice_pdf invoice
+
+      # notification
+      assert_not_empty Notification.where(attached_object: reservation)
+
+      # wallet
+      assert_equal @vlonchamp.wallet.amount, 0
+      assert_equal @vlonchamp.wallet.wallet_transactions.count, 2
+      transaction = @vlonchamp.wallet.wallet_transactions.last
+      assert_equal transaction.transaction_type, 'debit'
+      assert_equal transaction.amount, 10
+      assert_equal transaction.amount, invoice.wallet_amount / 100.0
+    end
+
+    test "user reserves a training and plan by wallet with success" do
+      @vlonchamp = User.find_by(username: 'vlonchamp')
+      login_as(@vlonchamp, scope: :user)
+
+      training = Training.first
+      availability = training.availabilities.first
+      plan = Plan.find_by(group_id: @vlonchamp.group.id, type: 'Plan', base_name: 'Mensuel tarif réduit')
+
+      reservations_count = Reservation.count
+      invoice_count = Invoice.count
+      invoice_items_count = InvoiceItem.count
+      wallet_transactions_count = WalletTransaction.count
+
+      VCR.use_cassette("reservations_create_for_training_and_plan_by_pay_wallet_success") do
+        post reservations_path, { reservation: {
+            user_id: @user_without_subscription.id,
+            reservable_id: training.id,
+            reservable_type: training.class.name,
+            card_token: stripe_card_token,
+            plan_id: plan.id,
+            slots_attributes: [
+              {
+                start_at: availability.start_at.to_s(:iso8601),
+                end_at: availability.end_at.to_s(:iso8601),
+                availability_id: availability.id
+              }
+            ]
+          }}.to_json, default_headers
+      end
+
+      # general assertions
+      assert_equal 201, response.status
+      assert_equal reservations_count + 1, Reservation.count
+      assert_equal invoice_count + 1, Invoice.count
+      assert_equal invoice_items_count + 2, InvoiceItem.count
+      assert_equal wallet_transactions_count + 1, WalletTransaction.count
+
+      # reservation assertions
+      reservation = Reservation.last
+
+      assert reservation.invoice
+      refute reservation.stp_invoice_id.blank?
+      assert_equal 2, reservation.invoice.invoice_items.count
+
+      # invoice assertions
+      invoice = reservation.invoice
+
+      refute invoice.stp_invoice_id.blank?
+      refute invoice.total.blank?
+      assert_equal invoice.total, 2000
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert_invoice_pdf invoice
+
+      # notification
+      assert_not_empty Notification.where(attached_object: reservation)
+
+      # wallet
+      assert_equal @vlonchamp.wallet.amount, 0
+      assert_equal @vlonchamp.wallet.wallet_transactions.count, 2
+      transaction = @vlonchamp.wallet.wallet_transactions.last
+      assert_equal transaction.transaction_type, 'debit'
+      assert_equal transaction.amount, 10
+      assert_equal transaction.amount, invoice.wallet_amount / 100.0
     end
   end
 end

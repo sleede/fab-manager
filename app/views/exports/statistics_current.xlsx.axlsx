@@ -1,0 +1,79 @@
+wb = xlsx_package.workbook
+
+bold = wb.styles.add_style :b => true
+header = wb.styles.add_style :b => true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
+date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_format
+
+wb.add_worksheet(name: @index.label) do |sheet|
+  ## heading stats for the current page
+  sheet.add_row [t('export.entries'), @results['hits']['total']], :style => [bold, nil], :types => [:string, :integer]
+  if @index.ca
+    sheet.add_row [t('export.revenue'), @results['aggregations']['total_ca']['value']], :style => [bold, nil], :types => [:string, :float]
+  end
+  sheet.add_row [t('export.average_age'), @results['aggregations']['average_age']['value']], :style => [bold, nil], :types => [:string, :float]
+  unless @type.simple
+    sheet.add_row ["#{t('export.total')} #{@type.label}", @results['aggregations']['total_stat']['value']], :style => [bold, nil], :types => [:string, :integer]
+  end
+  sheet.add_row []
+
+  ## data table
+  # heading labels
+  columns = [t('export.date'), t('export.user'), t('export.email'), t('export.phone'), t('export.gender'), t('export.age'), t('export.type')]
+  columns.push @type.label unless @type.simple
+  @fields.each do |f|
+    columns.push f.label
+  end
+  columns.push t('export.revenue') if @index.ca
+  sheet.add_row columns, :style => header
+
+  # data rows
+  @results['hits']['hits'].each do |hit|
+    user = get_item(@users, hit['_source']['userId'])
+    subtype = get_item(@subtypes, hit['_source']['subType'], 'key')
+    data = [
+        Date::strptime(hit['_source']['date'],'%Y-%m-%d'),
+        (user ? user.profile.full_name : "ID #{hit['_source']['userId']}"),
+        (user ? user.email : ''),
+        (user ? user.profile.phone : ''),
+        t("export.#{hit['_source']['gender']}"),
+        hit['_source']['age'],
+        subtype.nil? ? "" : subtype.label
+    ]
+    styles = [date, nil, nil, nil, nil, nil, nil]
+    types = [:date, :string, :string, :string, :string, :integer, :string]
+    unless @type.simple
+      data.push hit['_source']['stat']
+      styles.push nil
+      types.push :string
+    end
+    @fields.each do |f|
+      field_data = hit['_source'][f.key]
+      case f.data_type
+        when 'date'
+          data.push Date::strptime(field_data, '%Y-%m-%d')
+          styles.push date
+          types.push :date
+        when 'list'
+          data.push field_data.map{|e| e['name'] }.join(', ')
+          styles.push nil
+          types.push :string
+        when 'number'
+          data.push field_data
+          styles.push nil
+          types.push :float
+        else
+          data.push field_data
+          styles.push nil
+          types.push :string
+      end
+
+    end
+    if @index.ca
+      data.push hit['_source']['ca']
+      styles.push nil
+      types.push :float
+    end
+
+    sheet.add_row data, :style =>  styles, :types => types
+  end
+end

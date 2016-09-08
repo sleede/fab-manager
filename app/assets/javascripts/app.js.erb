@@ -14,13 +14,13 @@ Application.Filters = angular.module('application.filters', []);
 Application.Directives = angular.module('application.directives', []);
 
 
-angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngAnimate', 'ngCookies', 'ui.router', 'ui.bootstrap',
+angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngCookies', 'ui.router', 'ui.bootstrap',
                'ngUpload', 'duScroll', 'application.filters','application.services', 'application.directives',
                'frapontillo.bootstrap-switch', 'application.constants', 'application.controllers', 'application.router',
                'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
                'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
                'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
-               'minicolors', 'pascalprecht.translate', 'ngFitText']).
+               'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside']).
 config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfigProvider", "AnalyticsProvider", "uibDatepickerPopupConfig", "$provide", "$translateProvider",
     function($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
 
@@ -125,6 +125,24 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
       // see https://github.com/revolunet/angular-google-analytics#automatic-page-view-tracking
       Analytics.pageView();
 
+
+      /**
+       * This helper method builds and return an array contaning every integers between
+       * the provided start and end.
+       * @param start {number}
+       * @param end {number}
+       * @return {Array} [start .. end]
+       */
+      $rootScope.intArray = function(start, end) {
+        var arr = [];
+        for (var i = start; i < end; i++) { arr.push(i); }
+        return arr;
+      };
+
   }]).constant('angularMomentConfig', {
     timezone: Fablab.timezone
   });
+
+angular.isUndefinedOrNull = function(val) {
+  return angular.isUndefined(val) || val === null
+};

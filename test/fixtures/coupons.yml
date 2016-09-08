@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Christmas deals
+  code: XMAS10
+  percent_off: 10
+  valid_until: 2015-12-31 23:59:59
+  max_usages: nil
+  active: true
+  validity_per_user: once
+
+two:
+  name: Summer discounts
+  code: SUNNYFABLAB
+  percent_off: 15
+  valid_until: <%= 1.month.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  max_usages: 10
+  active: true
+  validity_per_user: always

@@ -47,13 +47,22 @@ module PDF
           text I18n.t('invoices.invoice_issued_on_DATE', DATE:I18n.l(invoice.created_at.to_date))
         end
 
-        # user's informations
-        if invoice.user.profile.address
+        # user/organization's informations
+        if invoice&.user&.profile&.organization
+          name = invoice.user.profile.organization.name
+        else
+          name = invoice.user.profile.full_name
+        end
+
+        if invoice&.user&.profile&.organization&.address
+          address = invoice.user.profile.organization.address.address
+        elsif invoice&.user&.profile&.address
           address = invoice.user.profile.address.address
         else
           address = ''
         end
-        text_box "<b>#{invoice.user.profile.full_name}</b>\n#{invoice.user.email}\n#{address}", :at => [bounds.width - 130, bounds.top - 49], :width => 130, :align => :right, :inline_format => true
+
+        text_box "<b>#{name}</b>\n#{invoice.user.email}\n#{address}", :at => [bounds.width - 130, bounds.top - 49], :width => 130, :align => :right, :inline_format => true
 
         # object
         move_down 25
@@ -74,6 +83,8 @@ module PDF
               object = subscription_verbose(invoice.invoiced, invoice.user)
             when 'OfferDay'
               object = offer_day_verbose(invoice.invoiced, invoice.user)
+            else
+              puts "ERROR : specified invoiced type (#{invoice.invoiced_type}) is unknown"
           end
         end
         text I18n.t('invoices.object')+' '+object
@@ -110,12 +121,14 @@ module PDF
               ### Training reservation
               when 'Training'
                 details += I18n.t('invoices.training_reservation_DESCRIPTION', DESCRIPTION: item.description)
-              ### courses and workshops reservation
+              ### events reservation
               when 'Event'
-                details += I18n.t('invoices.courses_and_workshops_reservation_DESCRIPTION', DESCRIPTION: item.description)
+                details += I18n.t('invoices.event_reservation_DESCRIPTION', DESCRIPTION: item.description)
                 # details of the number of tickets
                 details += "\n  "+I18n.t('invoices.full_price_ticket', count: invoice.invoiced.nb_reserve_places) if invoice.invoiced.nb_reserve_places > 0
-                details += "\n  "+I18n.t('invoices.reduced_rate_ticket', count: invoice.invoiced.nb_reserve_reduced_places) if invoice.invoiced.nb_reserve_reduced_places > 0
+                invoice.invoiced.tickets.each do |t|
+                  details += "\n  "+I18n.t('invoices.other_rate_ticket', count: t.booked, NAME: t.event_price_category.price_category.name)
+                end
 
               ### Other cases (not expected)
               else
@@ -125,6 +138,16 @@ module PDF
 
           data += [ [details, number_to_currency(price)] ]
           total_calc += price
+        end
+
+        # subtract the coupon, if any
+        unless invoice.coupon_id.nil?
+          cp = invoice.coupon
+          discount = total_calc  * cp.percent_off / 100.0
+          total_calc = total_calc - discount
+
+          # add a row for the coupon
+          data += [ [I18n.t('invoices.coupon_CODE_discount_of_PERCENT', CODE: cp.code, PERCENT: cp.percent_off), number_to_currency(-discount)] ]
         end
 
         # total verification
@@ -196,23 +219,45 @@ module PDF
               payment_verbose += I18n.t('invoices.by_transfer')
             when 'cash'
               payment_verbose += I18n.t('invoices.by_cash')
+            when 'wallet'
+              payment_verbose += I18n.t('invoices.by_wallet')
             when 'none'
               payment_verbose = I18n.t('invoices.no_refund')
             else
               puts "ERROR : specified refunding method (#{payment_verbose}) is unknown"
           end
+          payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
+
         else
+          # subtract the wallet amount for this invoice from the total
+          if invoice.wallet_amount
+            wallet_amount = invoice.wallet_amount / 100.0
+            total = total - wallet_amount
+          end
+
+          # payment method
           if invoice.stp_invoice_id
             payment_verbose = I18n.t('invoices.settlement_by_debit_card')
           else
             payment_verbose = I18n.t('invoices.settlement_done_at_the_reception')
           end
-        end
-        unless invoice.is_a?(Avoir)
+
+          # if the invoice was 100% payed with the wallet ...
+          if total == 0 and wallet_amount
+            payment_verbose = I18n.t('invoices.settlement_by_wallet')
+          end
+
           payment_verbose += ' '+I18n.t('invoices.on_DATE_at_TIME', DATE: I18n.l(invoice.created_at.to_date), TIME:I18n.l(invoice.created_at, format: :hour_minute))
-        end
-        unless invoice.is_a?(Avoir) and invoice.avoir_mode == 'none'
-          payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total)) if invoice.avoir_mode != 'none'
+          if total > 0 or !invoice.wallet_amount
+            payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
+          end
+          if invoice.wallet_amount
+            if total > 0
+              payment_verbose += ' '+I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+            else
+              payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+            end
+          end
         end
         text payment_verbose
 

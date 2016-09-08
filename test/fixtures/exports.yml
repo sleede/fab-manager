@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  category: statistics
+  export_type: global
+  query: '{"query":{"bool":{"must":[{"range":{"date":{"gte":"2016-06-25T02:00:00+02:00","lte":"2016-07-25T23:59:59+02:00"}}}]}}}'
+  created_at: 2016-07-26 13:06:28.096552
+  updated_at: 2016-07-26 13:06:28.096552
+  user_id: 1
+  key:
+
+two:
+  id: 2
+  category: statistics
+  export_type: subscription
+  query: '{"query":{"bool":{"must":[{"term":{"type":"2592000"}},{"range":{"date":{"gte":"2016-06-25T02:00:00+02:00","lte":"2016-07-25T23:59:59+02:00"}}}]}},"sort":[{"date":{"order":"desc"}}],"aggs":{"total_ca":{"sum":{"field":"ca"}},"average_age":{"avg":{"field":"age"}},"total_stat":{"sum":{"field":"stat"}}}}'
+  created_at: 2016-07-26 14:59:02.624663
+  updated_at: 2016-07-26 14:59:02.624663
+  user_id: 1
+  key: '2592000'

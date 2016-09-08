@@ -7,6 +7,7 @@
 # in the various projects' admin controllers.
 #
 # Provides :
+#  - $scope.totalSteps
 #  - $scope.machines = [{Machine}]
 #  - $scope.components = [{Component}]
 #  - $scope.themes = [{Theme}]
@@ -17,6 +18,7 @@
 #  - $scope.deleteFile(file)
 #  - $scope.addStep()
 #  - $scope.deleteStep(step)
+#  - $scope.changeStepIndex(step, newIdx)
 #
 # Requires :
 #  - $scope.project.project_caos_attributes = []
@@ -24,7 +26,7 @@
 #  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
 ##
 class ProjectsController
-  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)->
+  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)->
 
     ## Retrieve the list of machines from the server
     Machine.query().$promise.then (data)->
@@ -50,6 +52,8 @@ class ProjectsController
         id: d.id
         name: d.name
 
+    $scope.totalSteps = $scope.project.project_steps_attributes.length
+
 
 
     ##
@@ -70,15 +74,7 @@ class ProjectsController
         $('section[ui-view=main]').scrollTop(0, 200)
         return
       else
-        $state.go('app.public.projects_show', {id: content.id})
-
-
-
-    ##
-    # Changes the user's view to the projects list page
-    ##
-    $scope.cancel = ->
-      $state.go('app.public.projects_list')
+        $state.go('app.public.projects_show', {id: content.slug})
 
 
 
@@ -122,22 +118,52 @@ class ProjectsController
     # This will create a single new empty entry into the project's steps list.
     ##
     $scope.addStep = ->
-      $scope.project.project_steps_attributes.push {}
+      $scope.totalSteps += 1
+      $scope.project.project_steps_attributes.push { step_nb: $scope.totalSteps }
+
 
 
 
     ##
-    # This will remove the given stip from the project's steps list. If the step was previously saved
+    # This will remove the given step from the project's steps list. If the step was previously saved
     # on the server, it will be marked for deletion for the next saving. Otherwise, it will be simply truncated from
     # the steps array.
     # @param file {Object} the file to delete
     ##
     $scope.deleteStep = (step) ->
-      index = $scope.project.project_steps_attributes.indexOf(step)
-      if step.id?
-        step._destroy = true
-      else
-        $scope.project.project_steps_attributes.splice(index, 1)
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_step')
+        , -> # deletion confirmed
+          index = $scope.project.project_steps_attributes.indexOf(step)
+          if step.id?
+            step._destroy = true
+          else
+            $scope.project.project_steps_attributes.splice(index, 1)
+
+          # update the new total number of steps
+          $scope.totalSteps -= 1
+          # reindex the remaning steps
+          for s in $scope.project.project_steps_attributes
+            if s.step_nb > step.step_nb
+              s.step_nb -= 1
+
+
+
+    ##
+    # Change the step_nb property of the given step to the new value provided. The step that was previously at this
+    # index will be assigned to the old position of the provided step.
+    # @param step {Object} the project's step to reindex
+    # @param newIdx {number} the new index to assign to the step
+    ##
+    $scope.changeStepIndex = (step, newIdx) ->
+      for s in $scope.project.project_steps_attributes
+        if s.step_nb == newIdx
+          s.step_nb = step.step_nb
+          step.step_nb = newIdx
+          break
 
 
     $scope.autoCompleteName = (nameLookup) ->
@@ -286,8 +312,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
 ##
 # Controller used in the project creation page
 ##
-Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics'
-, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics) ->
+Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', '_t'
+, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -304,7 +330,7 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
   $scope.matchingMembers = []
 
   ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)
 ]
 
 
@@ -312,8 +338,8 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
 ##
 # Controller used in the project edition page
 ##
-Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics'
-, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics) ->
+Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', '_t'
+, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -330,7 +356,7 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
     name: u.full_name
 
     ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)
 ]
 
 
@@ -338,8 +364,8 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
 ##
 # Controller used in the public project's details page
 ##
-Application.Controllers.controller "ShowProjectController", ["$scope", "$state", "projectPromise", '$location', '$uibModal', '_t'
-, ($scope, $state, projectPromise, $location, $uibModal, _t) ->
+Application.Controllers.controller "ShowProjectController", ["$scope", "$state", "projectPromise", '$location', '$uibModal', 'dialogs', '_t'
+, ($scope, $state, projectPromise, $location, $uibModal, dialogs, _t) ->
 
   ### PUBLIC SCOPE ###
 
@@ -383,10 +409,18 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
     # check the permissions
     if $scope.currentUser.role is 'admin' or $scope.projectDeletableBy($scope.currentUser)
       # delete the project then refresh the projects list
-      $scope.project.$delete ->
-        $state.go('app.public.projects_list', {}, {reload: true})
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_project')
+      , -> # cancel confirmed
+        $scope.project.$delete ->
+          $state.go('app.public.projects_list', {}, {reload: true})
     else
       console.error _t('unauthorized_operation')
+
+
 
   ##
   # Open a modal box containg a form that allow the end-user to signal an abusive content
@@ -423,4 +457,19 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
             growl.error(_t('an_error_occured_while_sending_your_report'))
       ]
 
+
+
+  ##
+  # Return the URL allowing to share the current project on the Facebook social network
+  ##
+  $scope.shareOnFacebook = ->
+    'https://www.facebook.com/share.php?u='+$state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}).replace('#', '%23')
+
+
+
+  ##
+  # Return the URL allowing to share the current project on the Twitter social network
+  ##
+  $scope.shareOnTwitter = ->
+    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}));
 ]

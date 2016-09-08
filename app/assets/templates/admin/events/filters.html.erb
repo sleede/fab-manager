@@ -1,0 +1,120 @@
+<div class="m-t">
+  <h3 translate>{{ 'categories' }}</h3>
+  <p translate>{{ 'at_least_one_category_is_required' }}</p>
+  <button type="button" class="btn btn-warning m-b m-t" ng-click="addElement('category')" translate>{{ 'add_a_category' }}</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width:80%" translate>{{ 'name' }}</th>
+        <th style="width:20%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="category in categories">
+        <td>
+          <span editable-text="category.name" e-cols="100" e-name="name" e-form="rowform" e-required>
+            {{ category.name }}
+          </span>
+        </td>
+        <td>
+          <!-- form -->
+          <form editable-form name="rowform" onbeforesave="saveElement('category', $data, category.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted.category == category">
+            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+              <i class="fa fa-check"></i>
+            </button>
+            <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('category', rowform, $index)" class="btn btn-default">
+              <i class="fa fa-times"></i>
+            </button>
+          </form>
+          <div class="buttons" ng-show="!rowform.$visible">
+            <button class="btn btn-default" ng-click="rowform.$show()">
+              <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+            </button>
+            <button class="btn btn-danger" ng-click="removeElement('category', $index)">
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 translate>{{ 'themes' }}</h3>
+  <button type="button" class="btn btn-warning m-b m-t" ng-click="addElement('theme')" translate>{{ 'add_a_theme' }}</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:80%" translate>{{ 'name' }}</th>
+      <th style="width:20%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="theme in themes">
+      <td>
+          <span editable-text="theme.name" e-cols="100" e-name="name" e-form="rowform" e-required>
+            {{ theme.name }}
+          </span>
+      </td>
+      <td>
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="saveElement('theme', $data, theme.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted.theme == theme">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+            <i class="fa fa-check"></i>
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('theme', rowform, $index)" class="btn btn-default">
+            <i class="fa fa-times"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-default" ng-click="rowform.$show()">
+            <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+          </button>
+          <button class="btn btn-danger" ng-click="removeElement('theme', $index)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 translate>{{ 'age_ranges' }}</h3>
+  <button type="button" class="btn btn-warning m-b m-t" ng-click="addElement('age_range')" translate>{{ 'add_a_range' }}</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:80%" translate>{{ 'name' }}</th>
+      <th style="width:20%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="range in ageRanges">
+      <td>
+          <span editable-text="range.name" e-cols="100" e-name="name" e-form="rowform" e-required>
+            {{ range.name }}
+          </span>
+      </td>
+      <td>
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="saveElement('age_range', $data, range.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted.age_range == range">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-warning">
+            <i class="fa fa-check"></i>
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelElement('age_range', rowform, $index)" class="btn btn-default">
+            <i class="fa fa-times"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-default" ng-click="rowform.$show()">
+            <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+          </button>
+          <button class="btn btn-danger" ng-click="removeElement('age_range', $index)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

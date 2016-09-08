@@ -1,0 +1,1149 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/tokens
+    body:
+      encoding: UTF-8
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2017&card[cvc]=314
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      Content-Length:
+      - '81'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:41 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '778'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLLl2gl7snRL
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_18ZhUf2sOmf47Nz96Yt86HJI",
+          "object": "token",
+          "card": {
+            "id": "card_18ZhUf2sOmf47Nz9LhkQeEmO",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "cvc_check": "unchecked",
+            "dynamic_last4": null,
+            "exp_month": 4,
+            "exp_year": 2017,
+            "fingerprint": "o52jybR7bnmNn6AT",
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {},
+            "name": null,
+            "tokenization_method": null
+          },
+          "client_ip": "90.52.50.40",
+          "created": 1469108741,
+          "livemode": false,
+          "type": "card",
+          "used": false
+        }
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:41 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN&amount=0&currency=usd&description=Formation+Imprimante+3D+July+18%2C+2016+08%3A00+-+12%3A00+PM
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      Content-Length:
+      - '122'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:42 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '468'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLLf16BTkRiQ
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_18ZhUg2sOmf47Nz9vSsl5J9z",
+          "object": "invoiceitem",
+          "amount": 0,
+          "currency": "usd",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "date": 1469108742,
+          "description": "Formation Imprimante 3D July 18, 2016 08:00 - 12:00 PM",
+          "discountable": true,
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "start": 1469108742,
+            "end": 1469108742
+          },
+          "plan": null,
+          "proration": false,
+          "quantity": null,
+          "subscription": null
+        }
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:42 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN&amount=-1000&currency=usd&description=wallet+-10.0
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      Content-Length:
+      - '78'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:43 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '431'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLqGKwXBxt3a
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_18ZhUh2sOmf47Nz902ykGybB",
+          "object": "invoiceitem",
+          "amount": -1000,
+          "currency": "usd",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "date": 1469108743,
+          "description": "wallet -10.0",
+          "discountable": false,
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "start": 1469108743,
+            "end": 1469108743
+          },
+          "plan": null,
+          "proration": false,
+          "quantity": null,
+          "subscription": null
+        }
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:43 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2561'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLPVnSOwscpK
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
+        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
+        IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
+        dF9zb3VyY2UiOiAiY2FyZF8xOFc0R0syc09tZjQ3Tno5SzZkZlNtWmwiLAog
+        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
+        c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
+        InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
+        b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMThXNEdLMnNPbWY0N056
+        OUs2ZGZTbVpsIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
+        cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
+        ZHJlc3NfbGluZTIiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3N0YXRlIjog
+        bnVsbCwKICAgICAgICAiYWRkcmVzc196aXAiOiBudWxsLAogICAgICAgICJh
+        ZGRyZXNzX3ppcF9jaGVjayI6IG51bGwsCiAgICAgICAgImJyYW5kIjogIlZp
+        c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
+        IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE3
+        LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
+        ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
+        ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
+        ZSI6IG51bGwsCiAgICAgICAgInRva2VuaXphdGlvbl9tZXRob2QiOiBudWxs
+        CiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0
+        b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9jdXN0b21lcnMvY3Vz
+        XzhDek50TTA4TlZsU0dOL3NvdXJjZXMiCiAgfSwKICAic3Vic2NyaXB0aW9u
+        cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAg
+        ICAgewogICAgICAgICJpZCI6ICJzdWJfOG5mYlRHR0lRUlF6eDEiLAogICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGlj
+        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJjYW5jZWxfYXRf
+        cGVyaW9kX2VuZCI6IHRydWUsCiAgICAgICAgImNhbmNlbGVkX2F0IjogMTQ2
+        ODI0Mjk2MCwKICAgICAgICAiY3JlYXRlZCI6IDE0NjgyNDI5NTYsCiAgICAg
+        ICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE0NzA5MjEzNTYsCiAgICAgICAg
+        ImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTQ2ODI0Mjk1NiwKICAgICAgICAi
+        Y3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiZGlz
+        Y291bnQiOiBudWxsLAogICAgICAgICJlbmRlZF9hdCI6IG51bGwsCiAgICAg
+        ICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRhIjoge30s
+        CiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAibWVuc3VlbC10
+        YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAg
+        ICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFtb3VudCI6
+        IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAg
+        ICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJpbnRlcnZhbCI6
+        ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAg
+        ICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRhdGEi
+        OiB7fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVp
+        dCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFu
+        ZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0ZW1lbnRf
+        ZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9kX2Rh
+        eXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHkiOiAxLAog
+        ICAgICAgICJzdGFydCI6IDE0NjgyNDI5NTYsCiAgICAgICAgInN0YXR1cyI6
+        ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgICAg
+        ICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0YXJ0Ijog
+        bnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAg
+        ICAidG90YWxfY291bnQiOiAxLAogICAgInVybCI6ICIvdjEvY3VzdG9tZXJz
+        L2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25zIgogIH0KfQo=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:44 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:45 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2561'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLZ9w0ZwAlFB
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
+        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
+        IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
+        dF9zb3VyY2UiOiAiY2FyZF8xOFc0R0syc09tZjQ3Tno5SzZkZlNtWmwiLAog
+        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
+        c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
+        InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
+        b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMThXNEdLMnNPbWY0N056
+        OUs2ZGZTbVpsIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
+        cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
+        ZHJlc3NfbGluZTIiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3N0YXRlIjog
+        bnVsbCwKICAgICAgICAiYWRkcmVzc196aXAiOiBudWxsLAogICAgICAgICJh
+        ZGRyZXNzX3ppcF9jaGVjayI6IG51bGwsCiAgICAgICAgImJyYW5kIjogIlZp
+        c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
+        IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE3
+        LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
+        ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
+        ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
+        ZSI6IG51bGwsCiAgICAgICAgInRva2VuaXphdGlvbl9tZXRob2QiOiBudWxs
+        CiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0
+        b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9jdXN0b21lcnMvY3Vz
+        XzhDek50TTA4TlZsU0dOL3NvdXJjZXMiCiAgfSwKICAic3Vic2NyaXB0aW9u
+        cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAg
+        ICAgewogICAgICAgICJpZCI6ICJzdWJfOG5mYlRHR0lRUlF6eDEiLAogICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGlj
+        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJjYW5jZWxfYXRf
+        cGVyaW9kX2VuZCI6IHRydWUsCiAgICAgICAgImNhbmNlbGVkX2F0IjogMTQ2
+        ODI0Mjk2MCwKICAgICAgICAiY3JlYXRlZCI6IDE0NjgyNDI5NTYsCiAgICAg
+        ICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE0NzA5MjEzNTYsCiAgICAgICAg
+        ImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTQ2ODI0Mjk1NiwKICAgICAgICAi
+        Y3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiZGlz
+        Y291bnQiOiBudWxsLAogICAgICAgICJlbmRlZF9hdCI6IG51bGwsCiAgICAg
+        ICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRhIjoge30s
+        CiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAibWVuc3VlbC10
+        YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAg
+        ICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFtb3VudCI6
+        IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAg
+        ICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJpbnRlcnZhbCI6
+        ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAg
+        ICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRhdGEi
+        OiB7fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVp
+        dCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFu
+        ZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0ZW1lbnRf
+        ZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9kX2Rh
+        eXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHkiOiAxLAog
+        ICAgICAgICJzdGFydCI6IDE0NjgyNDI5NTYsCiAgICAgICAgInN0YXR1cyI6
+        ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgICAg
+        ICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0YXJ0Ijog
+        bnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAg
+        ICAidG90YWxfY291bnQiOiAxLAogICAgInVybCI6ICIvdjEvY3VzdG9tZXJz
+        L2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25zIgogIH0KfQo=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:45 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions
+    body:
+      encoding: UTF-8
+      string: plan=mensuel-tarif-reduit-student-month-20160404171827&source=tok_18ZhUf2sOmf47Nz96Yt86HJI
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      Content-Length:
+      - '90'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:46 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '926'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQL1c3JVc0vk5
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJzdWJfOHJRTGtsVVVVUWU2NmsiLAogICJvYmplY3QiOiAi
+        c3Vic2NyaXB0aW9uIiwKICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBu
+        dWxsLAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IGZhbHNlLAogICJjYW5j
+        ZWxlZF9hdCI6IG51bGwsCiAgImNyZWF0ZWQiOiAxNDY5MTA4NzQ1LAogICJj
+        dXJyZW50X3BlcmlvZF9lbmQiOiAxNDcxNzg3MTQ1LAogICJjdXJyZW50X3Bl
+        cmlvZF9zdGFydCI6IDE0NjkxMDg3NDUsCiAgImN1c3RvbWVyIjogImN1c184
+        Q3pOdE0wOE5WbFNHTiIsCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRf
+        YXQiOiBudWxsLAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJtZXRhZGF0YSI6
+        IHt9LAogICJwbGFuIjogewogICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVk
+        dWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgIm9iamVj
+        dCI6ICJwbGFuIiwKICAgICJhbW91bnQiOiAyMDAwLAogICAgImNyZWF0ZWQi
+        OiAxNDU5NzgzMTA4LAogICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAiaW50
+        ZXJ2YWwiOiAibW9udGgiLAogICAgImludGVydmFsX2NvdW50IjogMSwKICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgIm1ldGFkYXRhIjoge30sCiAgICAi
+        bmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0g
+        ZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBt
+        b250aCIsCiAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAg
+        InRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogIH0sCiAgInF1YW50aXR5Ijog
+        MSwKICAic3RhcnQiOiAxNDY5MTA4NzQ1LAogICJzdGF0dXMiOiAiYWN0aXZl
+        IiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBudWxs
+        LAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:46 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/invoices?customer=cus_8CzNtM08NVlSGN&limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:47 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3439'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLSdX3E9CFcJ
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJvYmplY3QiOiAibGlzdCIsCiAgImRhdGEiOiBbCiAgICB7CiAgICAg
+        ICJpZCI6ICJpbl8xOFpoVWoyc09tZjQ3Tno5cjhMS0lCTksiLAogICAgICAi
+        b2JqZWN0IjogImludm9pY2UiLAogICAgICAiYW1vdW50X2R1ZSI6IDEwMDAs
+        CiAgICAgICJhcHBsaWNhdGlvbl9mZWUiOiBudWxsLAogICAgICAiYXR0ZW1w
+        dF9jb3VudCI6IDEsCiAgICAgICJhdHRlbXB0ZWQiOiB0cnVlLAogICAgICAi
+        Y2hhcmdlIjogImNoXzE4WmhVazJzT21mNDdOejl2VVpXbWFZdSIsCiAgICAg
+        ICJjbG9zZWQiOiB0cnVlLAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
+        ICAgImN1c3RvbWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJk
+        YXRlIjogMTQ2OTEwODc0NSwKICAgICAgImRlc2NyaXB0aW9uIjogbnVsbCwK
+        ICAgICAgImRpc2NvdW50IjogbnVsbCwKICAgICAgImVuZGluZ19iYWxhbmNl
+        IjogMCwKICAgICAgImZvcmdpdmVuIjogZmFsc2UsCiAgICAgICJsaW5lcyI6
+        IHsKICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICJkYXRhIjog
+        WwogICAgICAgICAgewogICAgICAgICAgICAiaWQiOiAiaWlfMThaaFVoMnNP
+        bWY0N056OTAyeWtHeWJCIiwKICAgICAgICAgICAgIm9iamVjdCI6ICJsaW5l
+        X2l0ZW0iLAogICAgICAgICAgICAiYW1vdW50IjogLTEwMDAsCiAgICAgICAg
+        ICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgICAiZGVzY3JpcHRp
+        b24iOiAid2FsbGV0IC0xMC4wIiwKICAgICAgICAgICAgImRpc2NvdW50YWJs
+        ZSI6IGZhbHNlLAogICAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAg
+        ICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAgICJwZXJpb2Qi
+        OiB7CiAgICAgICAgICAgICAgInN0YXJ0IjogMTQ2OTEwODc0MywKICAgICAg
+        ICAgICAgICAiZW5kIjogMTQ2OTEwODc0MwogICAgICAgICAgICB9LAogICAg
+        ICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAgICAgICJwcm9yYXRpb24i
+        OiBmYWxzZSwKICAgICAgICAgICAgInF1YW50aXR5IjogbnVsbCwKICAgICAg
+        ICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAgICAgICJ0eXBl
+        IjogImludm9pY2VpdGVtIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAg
+        ICAgICAgICAgImlkIjogImlpXzE4WmhVZzJzT21mNDdOejl2U3NsNUo5eiIs
+        CiAgICAgICAgICAgICJvYmplY3QiOiAibGluZV9pdGVtIiwKICAgICAgICAg
+        ICAgImFtb3VudCI6IDAsCiAgICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2Qi
+        LAogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiRm9ybWF0aW9uIEltcHJp
+        bWFudGUgM0QgSnVseSAxOCwgMjAxNiAwODowMCAtIDEyOjAwIFBNIiwKICAg
+        ICAgICAgICAgImRpc2NvdW50YWJsZSI6IHRydWUsCiAgICAgICAgICAgICJs
+        aXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAibWV0YWRhdGEiOiB7fSwK
+        ICAgICAgICAgICAgInBlcmlvZCI6IHsKICAgICAgICAgICAgICAic3RhcnQi
+        OiAxNDY5MTA4NzQyLAogICAgICAgICAgICAgICJlbmQiOiAxNDY5MTA4NzQy
+        CiAgICAgICAgICAgIH0sCiAgICAgICAgICAgICJwbGFuIjogbnVsbCwKICAg
+        ICAgICAgICAgInByb3JhdGlvbiI6IGZhbHNlLAogICAgICAgICAgICAicXVh
+        bnRpdHkiOiBudWxsLAogICAgICAgICAgICAic3Vic2NyaXB0aW9uIjogbnVs
+        bCwKICAgICAgICAgICAgInR5cGUiOiAiaW52b2ljZWl0ZW0iCiAgICAgICAg
+        ICB9LAogICAgICAgICAgewogICAgICAgICAgICAiaWQiOiAic3ViXzhyUUxr
+        bFVVVVFlNjZrIiwKICAgICAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0i
+        LAogICAgICAgICAgICAiYW1vdW50IjogMjAwMCwKICAgICAgICAgICAgImN1
+        cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6IG51
+        bGwsCiAgICAgICAgICAgICJkaXNjb3VudGFibGUiOiB0cnVlLAogICAgICAg
+        ICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgICAgICJwZXJpb2QiOiB7CiAgICAgICAgICAgICAg
+        InN0YXJ0IjogMTQ2OTEwODc0NSwKICAgICAgICAgICAgICAiZW5kIjogMTQ3
+        MTc4NzE0NQogICAgICAgICAgICB9LAogICAgICAgICAgICAicGxhbiI6IHsK
+        ICAgICAgICAgICAgICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1
+        ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAgICAgIm9i
+        amVjdCI6ICJwbGFuIiwKICAgICAgICAgICAgICAiYW1vdW50IjogMjAwMCwK
+        ICAgICAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAgICAg
+        ICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICAgImludGVy
+        dmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQi
+        OiAxLAogICAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAg
+        ICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAgICJuYW1lIjog
+        Ik1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBh
+        bnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwK
+        ICAgICAgICAgICAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAog
+        ICAgICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwKICAgICAg
+        ICAgICAgfSwKICAgICAgICAgICAgInByb3JhdGlvbiI6IGZhbHNlLAogICAg
+        ICAgICAgICAicXVhbnRpdHkiOiAxLAogICAgICAgICAgICAic3Vic2NyaXB0
+        aW9uIjogbnVsbCwKICAgICAgICAgICAgInR5cGUiOiAic3Vic2NyaXB0aW9u
+        IgogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgImhhc19tb3JlIjog
+        ZmFsc2UsCiAgICAgICAgInRvdGFsX2NvdW50IjogMywKICAgICAgICAidXJs
+        IjogIi92MS9pbnZvaWNlcy9pbl8xOFpoVWoyc09tZjQ3Tno5cjhMS0lCTksv
+        bGluZXMiCiAgICAgIH0sCiAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAg
+        ICAibWV0YWRhdGEiOiB7fSwKICAgICAgIm5leHRfcGF5bWVudF9hdHRlbXB0
+        IjogbnVsbCwKICAgICAgInBhaWQiOiB0cnVlLAogICAgICAicGVyaW9kX2Vu
+        ZCI6IDE0NjkxMDg3NDUsCiAgICAgICJwZXJpb2Rfc3RhcnQiOiAxNDY4MjQy
+        OTU2LAogICAgICAicmVjZWlwdF9udW1iZXIiOiBudWxsLAogICAgICAic3Rh
+        cnRpbmdfYmFsYW5jZSI6IDAsCiAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRv
+        ciI6IG51bGwsCiAgICAgICJzdWJzY3JpcHRpb24iOiAic3ViXzhyUUxrbFVV
+        VVFlNjZrIiwKICAgICAgInN1YnRvdGFsIjogMTAwMCwKICAgICAgInRheCI6
+        IG51bGwsCiAgICAgICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgICAgICJ0b3Rh
+        bCI6IDEwMDAsCiAgICAgICJ3ZWJob29rc19kZWxpdmVyZWRfYXQiOiAxNDY5
+        MTA4NzQ2CiAgICB9CiAgXSwKICAiaGFzX21vcmUiOiB0cnVlLAogICJ1cmwi
+        OiAiL3YxL2ludm9pY2VzIgp9Cg==
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:47 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:48 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3698'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLtUHnQxh6hr
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
+        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
+        IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
+        dF9zb3VyY2UiOiAiY2FyZF8xOFpoVWYyc09tZjQ3Tno5TGhrUWVFbU8iLAog
+        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
+        c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
+        InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
+        b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMThaaFVmMnNPbWY0N056
+        OUxoa1FlRW1PIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
+        cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
+        ZHJlc3NfbGluZTIiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3N0YXRlIjog
+        bnVsbCwKICAgICAgICAiYWRkcmVzc196aXAiOiBudWxsLAogICAgICAgICJh
+        ZGRyZXNzX3ppcF9jaGVjayI6IG51bGwsCiAgICAgICAgImJyYW5kIjogIlZp
+        c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
+        IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE3
+        LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
+        ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
+        ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
+        ZSI6IG51bGwsCiAgICAgICAgInRva2VuaXphdGlvbl9tZXRob2QiOiBudWxs
+        CiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0
+        b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9jdXN0b21lcnMvY3Vz
+        XzhDek50TTA4TlZsU0dOL3NvdXJjZXMiCiAgfSwKICAic3Vic2NyaXB0aW9u
+        cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAg
+        ICAgewogICAgICAgICJpZCI6ICJzdWJfOHJRTGtsVVVVUWU2NmsiLAogICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGlj
+        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJjYW5jZWxfYXRf
+        cGVyaW9kX2VuZCI6IGZhbHNlLAogICAgICAgICJjYW5jZWxlZF9hdCI6IG51
+        bGwsCiAgICAgICAgImNyZWF0ZWQiOiAxNDY5MTA4NzQ1LAogICAgICAgICJj
+        dXJyZW50X3BlcmlvZF9lbmQiOiAxNDcxNzg3MTQ1LAogICAgICAgICJjdXJy
+        ZW50X3BlcmlvZF9zdGFydCI6IDE0NjkxMDg3NDUsCiAgICAgICAgImN1c3Rv
+        bWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICAgImRpc2NvdW50
+        IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAgICAgICJs
+        aXZlbW9kZSI6IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAg
+        ICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFyaWYt
+        cmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgICAg
+        ICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAyMDAw
+        LAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAgICAg
+        ImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9u
+        dGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjoge30s
+        CiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDD
+        qXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIg
+        ZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rlc2Ny
+        aXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjog
+        bnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAg
+        ICAic3RhcnQiOiAxNDY5MTA4NzQ1LAogICAgICAgICJzdGF0dXMiOiAiYWN0
+        aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAgICJ0
+        cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51bGwK
+        ICAgICAgfSwKICAgICAgewogICAgICAgICJpZCI6ICJzdWJfOG5mYlRHR0lR
+        UlF6eDEiLAogICAgICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAg
+        ICAgICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAg
+        ICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUsCiAgICAgICAgImNhbmNl
+        bGVkX2F0IjogMTQ2ODI0Mjk2MCwKICAgICAgICAiY3JlYXRlZCI6IDE0Njgy
+        NDI5NTYsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE0NzA5MjEz
+        NTYsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTQ2ODI0Mjk1
+        NiwKICAgICAgICAiY3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwK
+        ICAgICAgICAiZGlzY291bnQiOiBudWxsLAogICAgICAgICJlbmRlZF9hdCI6
+        IG51bGwsCiAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1l
+        dGFkYXRhIjoge30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQi
+        OiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQw
+        NDE3MTgyNyIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAg
+        ICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3
+        ODMxMDgsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAg
+        ICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291
+        bnQiOiAxLAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAg
+        ICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwg
+        dGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2Vp
+        Z25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAg
+        ICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJp
+        YWxfcGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVh
+        bnRpdHkiOiAxLAogICAgICAgICJzdGFydCI6IDE0NjgyNDI5NTYsCiAgICAg
+        ICAgInN0YXR1cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6
+        IG51bGwsCiAgICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRy
+        aWFsX3N0YXJ0IjogbnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3Jl
+        IjogZmFsc2UsCiAgICAidG90YWxfY291bnQiOiAyLAogICAgInVybCI6ICIv
+        djEvY3VzdG9tZXJzL2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25z
+        IgogIH0KfQo=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:48 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions/sub_8rQLklUUUQe66k
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:48 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '926'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLxhq9Ba8DPf
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJzdWJfOHJRTGtsVVVVUWU2NmsiLAogICJvYmplY3QiOiAi
+        c3Vic2NyaXB0aW9uIiwKICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBu
+        dWxsLAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IGZhbHNlLAogICJjYW5j
+        ZWxlZF9hdCI6IG51bGwsCiAgImNyZWF0ZWQiOiAxNDY5MTA4NzQ1LAogICJj
+        dXJyZW50X3BlcmlvZF9lbmQiOiAxNDcxNzg3MTQ1LAogICJjdXJyZW50X3Bl
+        cmlvZF9zdGFydCI6IDE0NjkxMDg3NDUsCiAgImN1c3RvbWVyIjogImN1c184
+        Q3pOdE0wOE5WbFNHTiIsCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRf
+        YXQiOiBudWxsLAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJtZXRhZGF0YSI6
+        IHt9LAogICJwbGFuIjogewogICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVk
+        dWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgIm9iamVj
+        dCI6ICJwbGFuIiwKICAgICJhbW91bnQiOiAyMDAwLAogICAgImNyZWF0ZWQi
+        OiAxNDU5NzgzMTA4LAogICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAiaW50
+        ZXJ2YWwiOiAibW9udGgiLAogICAgImludGVydmFsX2NvdW50IjogMSwKICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgIm1ldGFkYXRhIjoge30sCiAgICAi
+        bmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0g
+        ZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBt
+        b250aCIsCiAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAg
+        InRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogIH0sCiAgInF1YW50aXR5Ijog
+        MSwKICAic3RhcnQiOiAxNDY5MTA4NzQ1LAogICJzdGF0dXMiOiAiYWN0aXZl
+        IiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBudWxs
+        LAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:49 GMT
+- request:
+    method: delete
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions/sub_8rQLklUUUQe66k?at_period_end=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:49 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '931'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLffnLhxa9Y2
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJzdWJfOHJRTGtsVVVVUWU2NmsiLAogICJvYmplY3QiOiAi
+        c3Vic2NyaXB0aW9uIiwKICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBu
+        dWxsLAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUsCiAgImNhbmNl
+        bGVkX2F0IjogMTQ2OTEwODc0OSwKICAiY3JlYXRlZCI6IDE0NjkxMDg3NDUs
+        CiAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE0NzE3ODcxNDUsCiAgImN1cnJl
+        bnRfcGVyaW9kX3N0YXJ0IjogMTQ2OTEwODc0NSwKICAiY3VzdG9tZXIiOiAi
+        Y3VzXzhDek50TTA4TlZsU0dOIiwKICAiZGlzY291bnQiOiBudWxsLAogICJl
+        bmRlZF9hdCI6IG51bGwsCiAgImxpdmVtb2RlIjogZmFsc2UsCiAgIm1ldGFk
+        YXRhIjoge30sCiAgInBsYW4iOiB7CiAgICAiaWQiOiAibWVuc3VlbC10YXJp
+        Zi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAgICAi
+        b2JqZWN0IjogInBsYW4iLAogICAgImFtb3VudCI6IDIwMDAsCiAgICAiY3Jl
+        YXRlZCI6IDE0NTk3ODMxMDgsCiAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
+        ICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAiaW50ZXJ2YWxfY291bnQiOiAx
+        LAogICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAibWV0YWRhdGEiOiB7fSwK
+        ICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFu
+        dCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxv
+        aSAtIG1vbnRoIiwKICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGws
+        CiAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgfSwKICAicXVhbnRp
+        dHkiOiAxLAogICJzdGFydCI6IDE0NjkxMDg3NDUsCiAgInN0YXR1cyI6ICJh
+        Y3RpdmUiLAogICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgInRyaWFsX2VuZCI6
+        IG51bGwsCiAgInRyaWFsX3N0YXJ0IjogbnVsbAp9Cg==
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:50 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/invoiceitems/ii_18ZhUg2sOmf47Nz9vSsl5J9z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:50 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '493'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQL4mVlBuIk4d
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_18ZhUg2sOmf47Nz9vSsl5J9z",
+          "object": "invoiceitem",
+          "amount": 0,
+          "currency": "usd",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "date": 1469108742,
+          "description": "Formation Imprimante 3D July 18, 2016 08:00 - 12:00 PM",
+          "discountable": true,
+          "invoice": "in_18ZhUj2sOmf47Nz9r8LKIBNK",
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "start": 1469108742,
+            "end": 1469108742
+          },
+          "plan": null,
+          "proration": false,
+          "quantity": null,
+          "subscription": null
+        }
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:50 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/invoiceitems/ii_18ZhUg2sOmf47Nz9vSsl5J9z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Jul 2016 13:45:51 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '493'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8rQLaiuoNH33sw
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_18ZhUg2sOmf47Nz9vSsl5J9z",
+          "object": "invoiceitem",
+          "amount": 0,
+          "currency": "usd",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "date": 1469108742,
+          "description": "Formation Imprimante 3D July 18, 2016 08:00 - 12:00 PM",
+          "discountable": true,
+          "invoice": "in_18ZhUj2sOmf47Nz9r8LKIBNK",
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "start": 1469108742,
+            "end": 1469108742
+          },
+          "plan": null,
+          "proration": false,
+          "quantity": null,
+          "subscription": null
+        }
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:45:51 GMT
+recorded_with: VCR 3.0.1

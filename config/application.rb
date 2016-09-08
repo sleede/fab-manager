@@ -36,7 +36,6 @@ module Fablab
     #
     config.i18n.default_locale = Rails.application.secrets.rails_locale
 
-
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components').to_s
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
@@ -63,6 +62,9 @@ module Fablab
       config.web_console.whitelisted_ips << '192.168.99.0/16' #docker
       config.web_console.whitelisted_ips << '10.0.2.2' #vagrant
     end
+
+    # load locales for subdirectories
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/*.yml').to_s]
 
     # enable the app to find locales in plugins locales directory
     config.i18n.load_path += Dir["#{Rails.root}/plugins/*/config/locales/*.yml"]

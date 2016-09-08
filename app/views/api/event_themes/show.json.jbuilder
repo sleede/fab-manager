@@ -1,0 +1,1 @@
+json.extract! @event_theme, :id, :name

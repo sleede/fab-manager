@@ -94,8 +94,12 @@
         </div>
 
         <div class="card-block">
-          <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork && project.app_id != openlabAppId"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
+          <h3 class="card-meta" ng-if="openlab.searchOverWholeNetwork"><i class="fa fa-tag"></i> {{ project.app_name }}</h3>
           <h1 class="card-title">{{project.name}}</h1>
+        </div>
+
+        <div class="text-center">
+          <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span>
         </div>
 
         <div class="card-overlay">

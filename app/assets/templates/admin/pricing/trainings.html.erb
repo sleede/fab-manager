@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th style="width:20%" translate>{{ 'trainings' }}</th>
+    <th style="width:20%" ng-repeat="group in groups">
+      <span class="text-u-c text-sm">{{group.name}}</span>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="training in trainings">
+    <td>
+      {{ training.name }}
+    </td>
+    <td ng-repeat="group in groups">
+                  <span editable-number="findTrainingsPricing(trainingsPricings, training.id, group.id).amount"
+                        onbeforesave="updateTrainingsPricing($data, findTrainingsPricing(trainingsPricings, training.id, group.id))">
+                      {{ findTrainingsPricing(trainingsPricings, training.id, group.id).amount | currency}}
+                  </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

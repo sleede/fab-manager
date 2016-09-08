@@ -9,7 +9,6 @@ class Setting < ActiveRecord::Base
                              training_explications_alert
                              training_information_message
                              subscription_explications_alert
-                             event_reduced_amount_alert
                              invoice_logo
                              invoice_reference
                              invoice_code-active
@@ -29,7 +28,9 @@ class Setting < ActiveRecord::Base
                              main_color
                              secondary_color
                              fablab_name
-                             name_genre)
+                             name_genre
+                             reminder_enable
+                             reminder_delay )
                     }
 
   after_update :update_stylesheet if :value_changed?

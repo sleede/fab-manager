@@ -75,14 +75,6 @@ setting_7:
   created_at: 2016-04-04 14:11:34.588478000 Z
   updated_at: 2016-04-04 14:11:34.588478000 Z
 
-setting_8:
-  id: 8
-  name: event_reduced_amount_alert
-  value: "* Tarif réduit si vous avez moins de 25 ans, que vous êtes étudiant ou demandeur
-    d'emploi."
-  created_at: 2016-04-04 14:11:34.592250000 Z
-  updated_at: 2016-04-04 14:11:34.592250000 Z
-
 setting_9:
   id: 9
   name: invoice_logo

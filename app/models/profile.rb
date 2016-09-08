@@ -7,6 +7,9 @@ class Profile < ActiveRecord::Base
   has_one :address, as: :placeable, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
 
+  has_one :organization, dependent: :destroy
+  accepts_nested_attributes_for :organization, allow_destroy: false
+
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
   validates :gender, :inclusion => {:in => [true, false]}

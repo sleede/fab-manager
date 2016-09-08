@@ -1,4 +1,10 @@
 class Availability < ActiveRecord::Base
+
+  # elastic initialisations
+  include Elasticsearch::Model
+  index_name 'fablab'
+  document_type 'availabilities'
+
   has_many :machines_availabilities, dependent: :destroy
   has_many :machines, through: :machines_availabilities
   accepts_nested_attributes_for :machines, allow_destroy: true
@@ -16,13 +22,24 @@ class Availability < ActiveRecord::Base
   accepts_nested_attributes_for :tags, allow_destroy: true
 
   scope :machines, -> { where(available_type: 'machines') }
-  scope :trainings, -> { where(available_type: 'training') }
+  scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
 
   attr_accessor :is_reserved, :slot_id, :can_modify
 
   validates :start_at, :end_at, presence: true
   validate :length_must_be_1h_minimum, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
+
+  ## elastic callbacks
+  after_save { AvailabilityIndexerWorker.perform_async(:index, self.id) }
+  after_destroy { AvailabilityIndexerWorker.perform_async(:delete, self.id) }
+
+  # elastic mapping
+  settings do
+    mappings dynamic: 'true' do
+      indexes 'available_type', analyzer: 'simple'
+    end
+  end
 
   def safe_destroy
     if available_type == 'machines'
@@ -39,9 +56,14 @@ class Availability < ActiveRecord::Base
     end
   end
 
-  def title
+  def title(filter = {})
     if available_type == 'machines'
-      machines.map(&:name).join(' - ')
+      if filter[:machine_ids]
+        return machines.to_ary.delete_if {|m| !filter[:machine_ids].include?(m.id)}.map(&:name).join(' - ')
+      end
+      return machines.map(&:name).join(' - ')
+    elsif available_type == 'event'
+      event.name
     else
       trainings.map(&:name).join(' - ')
     end
@@ -51,15 +73,31 @@ class Availability < ActiveRecord::Base
   # if haven't defined a nb_total_places, places are unlimited
   def is_completed
     return false if nb_total_places.blank?
-    nb_total_places <= slots.where(canceled_at: nil).size
+    if available_type == 'training'
+      nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
+    elsif available_type == 'event'
+      event.nb_free_places == 0
+    end
   end
 
+  # TODO: refactoring this function for avoid N+1 query
   def nb_total_places
-    if read_attribute(:nb_total_places).present?
-      read_attribute(:nb_total_places)
-    else
-      trainings.first.nb_total_places unless trainings.empty?
+    if available_type == 'training'
+      if read_attribute(:nb_total_places).present?
+        read_attribute(:nb_total_places)
+      else
+        trainings.first.nb_total_places unless trainings.empty?
+      end
+    elsif available_type == 'event'
+      event.nb_total_places
     end
+  end
+
+
+  def as_indexed_json
+    json = JSON.parse(to_json)
+    json['hours_duration'] = (end_at - start_at) / (60*60)
+    json.to_json
   end
 
   private
