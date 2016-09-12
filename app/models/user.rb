@@ -234,7 +234,18 @@ class User < ActiveRecord::Base
     if parsed[1] == 'user'
       self[parsed[2].to_sym]
     elsif parsed[1] == 'profile'
-      self.profile[parsed[2].to_sym]
+      case sso_mapping
+        when 'profile.avatar'
+          self.profile.user_avatar.remote_attachment_url
+        when 'profile.address'
+          self.profile.address.address
+        when 'profile.organization_name'
+          self.profile.organization.name
+        when 'profile.organization_address'
+          self.profile.organization.address.address
+        else
+          self.profile[parsed[2].to_sym]
+      end
     end
   end
 
