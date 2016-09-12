@@ -29,8 +29,9 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 7.2.2. [Applying changes](#i18n-apply)
 8. [Open Projects](#open-projects)
 9. [Plugins](#plugins)
-10. [Known issues](#known-issues)
-11. [Related Documentation](#related-documentation)
+10. [Single Sign-On](#sso)
+11. [Known issues](#known-issues)
+12. [Related Documentation](#related-documentation)
 
 
 
@@ -618,6 +619,15 @@ It enables you to write plugins which can:
 To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
 
 You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification)
+
+<a name="sso"></a>
+## Single Sign-On
+
+Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
+Currently OAuth 2 is the only supported protocol for SSO authentication.
+
+For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
+Developers may find informations on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
 
 <a name="known-issues"></a>
 ## Known issues
