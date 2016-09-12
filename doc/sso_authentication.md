@@ -36,7 +36,7 @@ class LdapProvider < ActiveRecord::Base
   has_many :ldap_mappings, dependent: :destroy
   accepts_nested_attributes_for :ldap_mappings, allow_destroy: true
 
-  # return here the fields you want to protect from being directly on the Fab-Manager, typically mapped fields
+  # return the fields you want to protect from being directly managed by the Fab-Manager, typically mapped fields
   def protected_fields
     fields = []
     ldap_mappings.each do |mapping|
@@ -45,13 +45,13 @@ class LdapProvider < ActiveRecord::Base
     fields
   end
   
-  # return here the link the current users will have to follow to edit his profile on the SSO
+  # return the link, that the current user will have to follow, to edit his profile on the SSO
   def profile_url
     # you can also create a profile_url field in the Database model
   end
 end
 ```
-Whitelist your implementation fields in the controller ( **app/controllers/api/auth_providers_controller.rb** )
+Whitelist your implementation's fields in the controller ( **app/controllers/api/auth_providers_controller.rb** )
 
 ```ruby
 class API::AuthProvidersController < API::ApiController
@@ -140,4 +140,5 @@ And to include this interface into the existing one ( **app/assets/templates/adm
   <ng-include src="'<%= asset_path 'admin/authentifications/_ldap.html'%>'" ng-if="provider.providable_type == 'LdapProvider'"></ng-include>
 </form>
 ```
-    
+
+Do not forget that you can find examples and inspiration in the OAuth 2.0 implementation.
