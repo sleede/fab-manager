@@ -8,7 +8,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
 - Secondly, you will need to register your fab-manager instance as an application in GitHub.
   Visit https://github.com/settings/applications/new to register your instance.
   - In `Homepage URL`, put the public URL where your fab-manager's instance is located (eg. https://example.com).
-  - In `Authorization callback URL`, you must specify an URL that will match this scheme: https://example.com/users/auth/oauth2-github/callback (replace my-fablab.example.com with your own fab-manager's address).
+  - In `Authorization callback URL`, you must specify an URL that will match this scheme: https://example.com/users/auth/oauth2-github/callback (replace example.com with your own fab-manager's address).
   
 - You'll be redirected to a page displaying two important informations: your **Client ID** and your **Client Secret**.
 
