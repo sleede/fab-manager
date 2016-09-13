@@ -19,9 +19,9 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   2. This name will be occasionally displayed to end users, so prefer sweet and speaking names.
 
 - Fulfill the form with the following parameters:
-  - **Common URL**: `https://github.com/login/oauth` This is the common part in the URLs of the two following parameters.
-  - **Authorization endpoint**: `/authorize` This URL can be found [here](https://developer.github.com/v3/oauth/).
-  - **Token Acquisition Endpoint**: `/access_token` This URL can be found [here](https://developer.github.com/v3/oauth/). 
+  - **Common URL**: `https://github.com/login/oauth/` This is the common part in the URLs of the two following parameters.
+  - **Authorization endpoint**: `authorize` This URL can be found [here](https://developer.github.com/v3/oauth/).
+  - **Token Acquisition Endpoint**: `access_token` This URL can be found [here](https://developer.github.com/v3/oauth/). 
   - **Profile edition URL**: `https://github.com/settings/profile` This is the URL where you are directed when you click on `Edit profile` in your GitHub dashboard.
   - **Client identifier**: Your Client ID, collected just before.
   - **Client secret**: Your Client Secret, collected just before.
