@@ -214,7 +214,7 @@ en:
         is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
         instead_of: "instead of"
         consequence_of_the_modification: "Because of this change you won't be able to login to the website with your actual usernames"
-        to_use_the_platform_thanks_for: "to keep on using the website, please"
+        to_use_the_platform_thanks_for: "To keep on using the website, please"
         create_an_account_on: "create an account on"
         or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
         in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"

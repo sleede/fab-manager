@@ -215,6 +215,8 @@ namespace :fablab do
   desc 'notify users that the auth provider has changed'
   task notify_auth_changed: :environment do
 
+    I18n.locale = I18n.default_locale
+
     # notify every users if the provider is not local database provider
     if AuthProvider.active.providable_type != DatabaseProvider.name
       User.all.each do |user|
