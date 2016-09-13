@@ -34,10 +34,14 @@
 - Admins can toggle reminders on/off and customize the delay
 - More file types allowed as project CAD attachements
 - Project CAD attachements are now checked by MIME type in addition of extension check
+- Display strategy's name in SSO providers list
+- SSO  documentation improved with an usage example
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - Fix a bug: machine name is not shown in plan edition 
 - Fix a bug: machine slots with tags are not displayed correctly on reservation calendar
+- Fix a bug: avatar, address and organization details mapping from SSO were broken
+- Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous 
 - [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
