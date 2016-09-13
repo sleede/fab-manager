@@ -354,6 +354,7 @@ en:
         an_error_occurred_and_the_tag_deletion_failed: "An error occurred and the tag deletion failed."
         search_for_an_authentication_provider: "Search for an authentication provider"
         add_a_new_authentication_provider: "Add a new authentication provider"
+        strategy_name: "Strategy's name"
         state: "State"
         unknown: "Unknown: "
         active: "Active"

@@ -354,6 +354,7 @@ fr:
         an_error_occurred_and_the_tag_deletion_failed: "Une erreur est survenue et l'étiquette n'a pas pu être supprimé."
         search_for_an_authentication_provider: "Recherchez un fournisseur d'authentification"
         add_a_new_authentication_provider: "Ajouter un nouveau fournisseur d'authentification"
+        strategy_name: "Nom de la stratégie"
         state: "État"
         unknown: "Inconnu : "
         active: "Actif"

@@ -1,6 +1,6 @@
 # How to configure Fab-manager to use a Single Sign-On authentication?
 
-For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as an authentication provider, because it has a standard implementation of the protocol and it is free to use.
+For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as an example authentication provider, because uses OAuth 2.0 which is currently implemented in fab-manager, it has a standard implementation of that protocol and it is free to use for everyone.
 
 - First, you must have a GitHub account. This is free, so create one if you don't have any.
   Visit https://github.com/join?source=login to create an account.
@@ -9,7 +9,11 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   Visit https://github.com/settings/applications/new to register your instance.
   - In `Application name`, we advise you to set the same name as your fab-manager's instance title.
   - In `Homepage URL`, put the public URL where your fab-manager's instance is located (eg. https://example.com).
-  - In `Authorization callback URL`, you must specify an URL that will match this scheme: https://example.com/users/auth/oauth2-github/callback (replace example.com with your own fab-manager's address).
+  - In `Authorization callback URL`, you must specify an URL that will match this scheme: https://example.com/users/auth/oauth2-github/callback 
+    - **example.com** is your own fab-manager's address
+    - **oauth2-github** match the provider's "strategy name" in the fab-manager. 
+      It is composed of: **SSO's protocol**, _dash_, **slug of the provider's name**. 
+      If you have a doubt about what it will be, start by creating the authentication provider in your fab-manager (see below), then the strategy's name will be shown in the providers list.
   
 - You'll be redirected to a page displaying two important informations: your **Client ID** and your **Client Secret**.
 
@@ -18,6 +22,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   In `name`, you can set whatever you want, but you must be aware that:
   1. You will need to type this name in a terminal to activate the provider, so prefer avoiding chars that must be escaped.
   2. This name will be occasionally displayed to end users, so prefer sweet and speaking names.
+  3. The slug of this name is used in the callback URL provided to the SSO server (eg. /users/auth/oauth2-**github**/callback)
 
 - Fulfill the form with the following parameters:
   - **Common URL**: `https://github.com/login/oauth/` This is the common part in the URLs of the two following parameters.
