@@ -189,9 +189,16 @@ Application.Controllers.controller "NewAuthenticationController", ["$scope", "$s
       size: 'md'
       resolve:
         field: -> mapping
-      controller: ['$scope', '$uibModalInstance', 'field', ($scope, $uibModalInstance, field) ->
+        datatype: ->
+          for field in $scope.mappingFields[mapping.local_model]
+            if field[0] == mapping.local_field
+              return field[1]
+
+      controller: ['$scope', '$uibModalInstance', 'field', 'datatype', ($scope, $uibModalInstance, field, datatype) ->
         ## parent field
         $scope.field = field
+        ## expected data type
+        $scope.datatype = datatype
 
         ## close and save the modifications
         $scope.ok = ->
