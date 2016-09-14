@@ -250,6 +250,8 @@ en:
         authentication_type_is_required: "Authentication type is required."
         data_mapping: "Data mapping"
         expected_data_type: "Expected data type"
+        transformation_rules: "Transformation rules"
+        input_format: "Input format"
 
       oauth2:
         # edition/creation form of an OAuth2 authentication provider

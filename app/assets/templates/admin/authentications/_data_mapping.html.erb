@@ -6,7 +6,38 @@
     <span translate>{{ 'expected_data_type' }}</span> : {{datatype}}
   </div>
   <form name="mappingForm">
+    <ng-switch on="datatype">
 
+      <!-- BOOLEAN -->
+      <div ng-switch-when="boolean">
+        <h4 translate>{{ 'transformation_rules' }}</h4>
+        <label for="true_value">true</label>
+        <input type="text"
+               class="form-control"
+               name="true_value"
+               id="true_value"
+               ng-model="transformation.rules.true_value">
+
+        <label for="false_value">false</label>
+        <input type="text"
+               class="form-control"
+               name="false_value"
+               id="false_value"
+               ng-model="transformation.rules.false_value">
+      </div>
+
+      <!-- DATE -->
+      <div ng-switch-when="date">
+        <h4 translate>{{ 'transformation_rules' }}</h4>
+        <label for="date_format" translate>{{ 'input_format' }}</label>
+        <select name="date_format"
+                id="date_format"
+                class="form-control"
+                ng-model="transformation.rules.format"
+                ng-options="format.value as format.label for format in formats.date">
+        </select>
+      </div>
+    </ng-switch>
   </form>
 </div>
 <div class="modal-footer">

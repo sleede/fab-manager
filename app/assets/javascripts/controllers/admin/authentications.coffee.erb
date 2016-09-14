@@ -83,6 +83,25 @@ class AuthenticationController
           $scope.field = field
           ## expected data type
           $scope.datatype = datatype
+          ## data transformation rules
+          $scope.transformation =
+            rules: {} #TODO get from resolve
+          ## available transformation formats
+          $scope.formats =
+            date: [
+              {
+                label: 'ISO 8601',
+                value: 'iso8601'
+              },
+              {
+                label: 'Timestamp (s)'
+                value: 'timestamp-s'
+              },
+              {
+                label: 'Timestamp (ms)',
+                value: 'timestamp-ms'
+              }
+            ]
 
           ## close and save the modifications
           $scope.ok = ->
