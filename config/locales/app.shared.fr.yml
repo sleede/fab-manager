@@ -250,7 +250,6 @@ fr:
         authentication_type_is_required: "Le type d'authentification est requis."
         data_mapping: "Correspondance des données"
         expected_data_type: "Type de données attendues"
-        transformation_rules: "Règles de transformation"
         input_format: "Format d'entrée"
 
       oauth2:

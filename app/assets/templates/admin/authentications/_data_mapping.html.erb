@@ -5,12 +5,11 @@
   <div>
     <span translate>{{ 'expected_data_type' }}</span> : {{datatype}}
   </div>
-  <form name="mappingForm">
+  <form name="mappingForm" class="m-t-md">
     <ng-switch on="datatype">
 
       <!-- BOOLEAN -->
       <div ng-switch-when="boolean">
-        <h4 translate>{{ 'transformation_rules' }}</h4>
         <label for="true_value">true</label>
         <input type="text"
                class="form-control"
@@ -28,7 +27,6 @@
 
       <!-- DATE -->
       <div ng-switch-when="date">
-        <h4 translate>{{ 'transformation_rules' }}</h4>
         <label for="date_format" translate>{{ 'input_format' }}</label>
         <select name="date_format"
                 id="date_format"
