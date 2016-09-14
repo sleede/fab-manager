@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h3 class="modal-title"><span translate>{{ 'data_mapping' }}</span> : {{field.local_field[0]}}</h3>
+</div>
+<div class="modal-body m-lg">
+  <div>
+    <span translate>{{ 'expected_data_type' }}</span> : {{field.local_field[1]}}
+  </div>
+  <form name="mappingForm">
+
+  </form>
+</div>
+<div class="modal-footer">
+  <!--<button class="btn btn-primary" ng-click="ok()" ng-disabled="!mappingForm.$valid" translate>{{ 'confirm' }}</button>-->
+  <button class="btn btn-warning" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

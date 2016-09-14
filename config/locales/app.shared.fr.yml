@@ -248,6 +248,8 @@ fr:
         provider_name_is_required: "Le nom du fournisseur est requis."
         authentication_type: "Type d'authentification"
         authentication_type_is_required: "Le type d'authentification est requis."
+        data_mapping: "Correspondance des données"
+        expected_data_type: "Type de données attendues"
 
       oauth2:
         # formulaire d'édition/création d'un fournisseur d'authentification de type OAuth2

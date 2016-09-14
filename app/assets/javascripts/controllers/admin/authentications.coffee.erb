@@ -103,8 +103,8 @@ Application.Controllers.controller "AuthentificationController", ["$scope", "$st
 ##
 # Page to add a new authentication provider
 ##
-Application.Controllers.controller "NewAuthenticationController", ["$scope", "$state", "$rootScope", "dialogs", "growl", "mappingFieldsPromise", "authProvidersPromise", "AuthProvider", '_t'
-, ($scope, $state, $rootScope, dialogs, growl, mappingFieldsPromise, authProvidersPromise, AuthProvider, _t) ->
+Application.Controllers.controller "NewAuthenticationController", ["$scope", "$state", "$rootScope", "$uibModal", "dialogs", "growl", "mappingFieldsPromise", "authProvidersPromise", "AuthProvider", '_t'
+, ($scope, $state, $rootScope, $uibModal, dialogs, growl, mappingFieldsPromise, authProvidersPromise, AuthProvider, _t) ->
 
   $scope.authMethods = METHODS
 
@@ -178,6 +178,30 @@ Application.Controllers.controller "NewAuthenticationController", ["$scope", "$s
   $scope.cancel = ->
     $state.go('app.admin.members')
 
+
+
+  ##
+  # Open a modal allowing to specify the data mapping for the given field
+  ##
+  $scope.defineDataMapping = (mapping) ->
+    $uibModal.open
+      templateUrl: '<%= asset_path "admin/authentications/_data_mapping.html" %>'
+      size: 'md'
+      resolve:
+        field: -> mapping
+      controller: ['$scope', '$uibModalInstance', 'field', ($scope, $uibModalInstance, field) ->
+        ## parent field
+        $scope.field = field
+
+        ## close and save the modifications
+        $scope.ok = ->
+          console.log('TODO')
+          $uibModalInstance.close()
+
+        ## do not save the modifications
+        $scope.cancel = ->
+          $uibModalInstance.dismiss()
+      ]
 ]
 
 
