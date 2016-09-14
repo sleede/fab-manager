@@ -34,6 +34,68 @@ check_oauth2_id_is_mapped = (mappings) ->
   return false
 
 
+##
+# Provides a set of common callback methods and data to the $scope parameter. These methods are used
+# in the various authentication providers' controllers.
+#
+# Provides :
+#  - $scope.authMethods
+#  - $scope.mappingFields
+#  - $scope.cancel()
+#  - $scope.defineDataMapping(mapping)
+#
+# Requires :
+#  - mappingFieldsPromise: retrieved by AuthProvider.mapping_fields()
+#  - $state (Ui-Router) [ 'app.admin.members' ]
+##
+class AuthenticationController
+  constructor: ($scope, $state, $uibModal, mappingFieldsPromise)->
+    ## list of supported authentication methods
+    $scope.authMethods = METHODS
+
+    ## list of fields that can be mapped through the SSO
+    $scope.mappingFields = mappingFieldsPromise
+
+    ##
+    # Changes the admin's view to the members list page
+    ##
+    $scope.cancel = ->
+      $state.go('app.admin.members')
+
+
+
+    ##
+    # Open a modal allowing to specify the data mapping for the given field
+    ##
+    $scope.defineDataMapping = (mapping) ->
+      $uibModal.open
+        templateUrl: '<%= asset_path "admin/authentications/_data_mapping.html" %>'
+        size: 'md'
+        resolve:
+          field: -> mapping
+          datatype: ->
+            for field in $scope.mappingFields[mapping.local_model]
+              if field[0] == mapping.local_field
+                return field[1]
+
+        controller: ['$scope', '$uibModalInstance', 'field', 'datatype', ($scope, $uibModalInstance, field, datatype) ->
+          ## parent field
+          $scope.field = field
+          ## expected data type
+          $scope.datatype = datatype
+
+          ## close and save the modifications
+          $scope.ok = ->
+            console.log('TODO')
+            $uibModalInstance.close()
+
+          ## do not save the modifications
+          $scope.cancel = ->
+            $uibModalInstance.dismiss()
+        ]
+
+
+
 
 ##
 # Page listing all authentication providers
@@ -106,12 +168,9 @@ Application.Controllers.controller "AuthentificationController", ["$scope", "$st
 Application.Controllers.controller "NewAuthenticationController", ["$scope", "$state", "$rootScope", "$uibModal", "dialogs", "growl", "mappingFieldsPromise", "authProvidersPromise", "AuthProvider", '_t'
 , ($scope, $state, $rootScope, $uibModal, dialogs, growl, mappingFieldsPromise, authProvidersPromise, AuthProvider, _t) ->
 
-  $scope.authMethods = METHODS
-
-  $scope.mappingFields = mappingFieldsPromise
-
   $scope.mode = 'creation'
 
+  ## default parameters for the new authentication provider
   $scope.provider = {
     name: '',
     providable_type: '',
@@ -172,43 +231,8 @@ Application.Controllers.controller "NewAuthenticationController", ["$scope", "$s
 
 
 
-  ##
-  # Changes the admin's view to the members list page
-  ##
-  $scope.cancel = ->
-    $state.go('app.admin.members')
-
-
-
-  ##
-  # Open a modal allowing to specify the data mapping for the given field
-  ##
-  $scope.defineDataMapping = (mapping) ->
-    $uibModal.open
-      templateUrl: '<%= asset_path "admin/authentications/_data_mapping.html" %>'
-      size: 'md'
-      resolve:
-        field: -> mapping
-        datatype: ->
-          for field in $scope.mappingFields[mapping.local_model]
-            if field[0] == mapping.local_field
-              return field[1]
-
-      controller: ['$scope', '$uibModalInstance', 'field', 'datatype', ($scope, $uibModalInstance, field, datatype) ->
-        ## parent field
-        $scope.field = field
-        ## expected data type
-        $scope.datatype = datatype
-
-        ## close and save the modifications
-        $scope.ok = ->
-          console.log('TODO')
-          $uibModalInstance.close()
-
-        ## do not save the modifications
-        $scope.cancel = ->
-          $uibModalInstance.dismiss()
-      ]
+  ## Using the AuthenticationController
+  new AuthenticationController($scope, $state, $uibModal, mappingFieldsPromise)
 ]
 
 
@@ -216,16 +240,13 @@ Application.Controllers.controller "NewAuthenticationController", ["$scope", "$s
 ##
 # Page to edit an already added authentication provider
 ##
-Application.Controllers.controller "EditAuthenticationController", ["$scope", "$state", "$stateParams", "$rootScope", "dialogs", "growl", 'providerPromise', 'mappingFieldsPromise', 'AuthProvider', '_t'
-, ($scope, $state, $stateParams, $rootScope, dialogs, growl, providerPromise, mappingFieldsPromise, AuthProvider, _t) ->
+Application.Controllers.controller "EditAuthenticationController", ["$scope", "$state", "$stateParams", "$rootScope", "$uibModal", "dialogs", "growl", 'providerPromise', 'mappingFieldsPromise', 'AuthProvider', '_t'
+, ($scope, $state, $stateParams, $rootScope, $uibModal, dialogs, growl, providerPromise, mappingFieldsPromise, AuthProvider, _t) ->
 
+  ## parameters of the currently edited authentication provider
   $scope.provider = providerPromise
 
-  $scope.authMethods = METHODS
-
   $scope.mode = 'edition'
-
-  $scope.mappingFields = mappingFieldsPromise
 
   ##
   # Update the current provider with the new inputs
@@ -241,10 +262,8 @@ Application.Controllers.controller "EditAuthenticationController", ["$scope", "$
     , ->
       growl.error(_t('an_error_occurred_unable_to_update_the_provider'))
 
-  ##
-  # Changes the admin's view to the members list page
-  ##
-  $scope.cancel = ->
-    $state.go('app.admin.members')
 
+
+  ## Using the AuthenticationController
+  new AuthenticationController($scope, $state, $uibModal, mappingFieldsPromise)
 ]
