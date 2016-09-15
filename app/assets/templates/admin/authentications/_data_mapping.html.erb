@@ -10,19 +10,27 @@
 
       <!-- BOOLEAN -->
       <div ng-switch-when="boolean">
-        <label for="true_value">true</label>
-        <input type="text"
-               class="form-control"
-               name="true_value"
-               id="true_value"
-               ng-model="transformation.rules.true_value">
-
-        <label for="false_value">false</label>
-        <input type="text"
-               class="form-control"
-               name="false_value"
-               id="false_value"
-               ng-model="transformation.rules.false_value">
+        <label for="add_mapping" translate>{{ 'mappings' }}</label>
+        <ul class="list-unstyled">
+          <li class="m-t-sm m-l">
+            <input type="text"
+                   name="true_value"
+                   id="true_value"
+                   class="form-control inline width-35 m-r "
+                   ng-model="transformation.rules.false_value">
+            <i class="fa fa-arrows-h"></i>
+            <label for="true_value" class="m-l">true</label>
+          </li>
+          <li class="m-t-sm m-l">
+            <input type="text"
+                   name="false_value"
+                   id="false_value"
+                   class="form-control inline width-35 m-r "
+                   ng-model="transformation.rules.true_value">
+            <i class="fa fa-arrows-h"></i>
+            <label for="false_value" class="m-l">false</label>
+          </li>
+        </ul>
       </div>
 
       <!-- DATE -->
@@ -40,11 +48,11 @@
       <div ng-switch-when="integer">
         <label for="add_mapping" translate>{{ 'mappings' }}</label>
         <button class="btn btn-default pull-right" ng-click="addIntegerMapping()"><i class="fa fa-plus"></i></button>
-        <ul>
-          <li ng-repeat="map in transformation.rules.mapping" class="m-t-sm">
-              <input type="text" class="form-control inline width-35" ng-model="map.from">
+        <ul class="list-unstyled">
+          <li ng-repeat="map in transformation.rules.mapping" class="m-t-sm m-l">
+              <input type="text" class="form-control inline width-35 m-r " ng-model="map.from">
               <i class="fa fa-arrows-h"></i>
-              <input type="number" class="form-control inline width-35" ng-model="map.to">
+              <input type="number" class="form-control inline width-35 m-l" ng-model="map.to">
           </li>
         </ul>
       </div>
