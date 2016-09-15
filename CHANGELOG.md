@@ -44,6 +44,7 @@
 - Fix a bug: avatar, address and organization details mapping from SSO were broken
 - Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous 
 - Fix a bug: clicking on the text in stripe's payment modal, does not validate the checkbox
+- Fix a bug: move event reservation is not limited by admin settings (prior-delay & disable)
 - [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
