@@ -43,7 +43,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   
   Once you have completed and validated the mapping's line, an information button will be available. 
   A click on it will show you the type of data expected from the API and, in some cases, you'll be able to configure a transformation.
-  For example, the `Profile.gender` field require a boolean attribute but your API may return strings like `man / woman`.
+  For example, the `Profile.gender` field require a booleanrake diagram:all attribute but your API may return strings like `man / woman`.
   In this case, you'll be able to configure a transformation for `man` <-> `true` and `woman` <-> `false`.
   
   Now, you are free to map more fields, like `Profile.github` to `html_url`, or `Profile.avatar` to `avatar_url`...
