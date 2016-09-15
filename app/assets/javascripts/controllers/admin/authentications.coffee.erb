@@ -85,13 +85,21 @@ class AuthenticationController
           $scope.datatype = datatype
           ## data transformation rules
           $scope.transformation =
-            rules: field.transformation || {}
+            rules: field.transformation || {type: datatype}
           ## available transformation formats
           $scope.formats =
             date: [
               {
                 label: 'ISO 8601',
                 value: 'iso8601'
+              },
+              {
+                label: 'RFC 2822',
+                value: 'rfc2822'
+              },
+              {
+                label: 'RFC 3339',
+                value: 'rfc3339'
               },
               {
                 label: 'Timestamp (s)'
