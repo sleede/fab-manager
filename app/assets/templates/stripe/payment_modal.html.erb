@@ -32,8 +32,9 @@
           </div>
 
           <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
-            <div class="col-sm-12 text-sm">
-              <input type="checkbox" name="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/> {{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a>
+            <div class="col-sm-12 text-sm checkbox-group">
+              <input type="checkbox" name="acceptCondition" id="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/>
+              <label for="acceptCondition">{{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a></label>
             </div>
               <div ng-if="!cgv">
                   <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">

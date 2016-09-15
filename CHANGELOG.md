@@ -43,6 +43,7 @@
 - Fix a bug: machine slots with tags are not displayed correctly on reservation calendar
 - Fix a bug: avatar, address and organization details mapping from SSO were broken
 - Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous 
+- Fix a bug: clicking on the text in stripe's payment modal, does not validate the checkbox
 - [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
