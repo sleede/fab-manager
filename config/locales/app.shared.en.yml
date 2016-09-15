@@ -251,6 +251,7 @@ en:
         data_mapping: "Data mapping"
         expected_data_type: "Expected data type"
         input_format: "Input format"
+        mappings: "Mappings"
 
       oauth2:
         # edition/creation form of an OAuth2 authentication provider

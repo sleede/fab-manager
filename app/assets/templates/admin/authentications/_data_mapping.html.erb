@@ -35,10 +35,23 @@
                 ng-options="format.value as format.label for format in formats.date">
         </select>
       </div>
+
+      <!-- INTEGER -->
+      <div ng-switch-when="integer">
+        <label for="add_mapping" translate>{{ 'mappings' }}</label>
+        <button class="btn btn-default pull-right" ng-click="addIntegerMapping()"><i class="fa fa-plus"></i></button>
+        <ul>
+          <li ng-repeat="map in transformation.rules.mapping" class="m-t-sm">
+              <input type="text" class="form-control inline width-35" ng-model="map.from">
+              <i class="fa fa-arrows-h"></i>
+              <input type="number" class="form-control inline width-35" ng-model="map.to">
+          </li>
+        </ul>
+      </div>
     </ng-switch>
   </form>
 </div>
 <div class="modal-footer">
-  <!--<button class="btn btn-primary" ng-click="ok()" ng-disabled="!mappingForm.$valid" translate>{{ 'confirm' }}</button>-->
+  <button class="btn btn-primary" ng-click="ok()" ng-disabled="!mappingForm.$valid" ng-if="datatype != 'string' && datatype != 'text'" translate>{{ 'confirm' }}</button>
   <button class="btn btn-warning" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>

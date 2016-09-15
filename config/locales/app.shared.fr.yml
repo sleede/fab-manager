@@ -251,6 +251,7 @@ fr:
         data_mapping: "Correspondance des données"
         expected_data_type: "Type de données attendues"
         input_format: "Format d'entrée"
+        mappings: "Correspondances"
 
       oauth2:
         # formulaire d'édition/création d'un fournisseur d'authentification de type OAuth2

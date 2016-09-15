@@ -85,7 +85,7 @@ class AuthenticationController
           $scope.datatype = datatype
           ## data transformation rules
           $scope.transformation =
-            rules: {} #TODO get from resolve
+            rules: field.transformation || {}
           ## available transformation formats
           $scope.formats =
             date: [
@@ -103,15 +103,22 @@ class AuthenticationController
               }
             ]
 
+          ## Create a new mapping between anything and an expected integer
+          $scope.addIntegerMapping = ->
+            unless angular.isArray $scope.transformation.rules.mapping
+              $scope.transformation.rules.mapping = []
+            $scope.transformation.rules.mapping.push({from:'', to:0})
+
           ## close and save the modifications
           $scope.ok = ->
-            console.log('TODO')
-            $uibModalInstance.close()
+            $uibModalInstance.close($scope.transformation.rules)
 
           ## do not save the modifications
           $scope.cancel = ->
             $uibModalInstance.dismiss()
         ]
+      .result['finally'](null).then (transfo_rules) ->
+        mapping.transformation = transfo_rules
 
 
 

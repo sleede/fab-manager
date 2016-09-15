@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906145713) do
+ActiveRecord::Schema.define(version: 20160915105234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -305,6 +305,7 @@ ActiveRecord::Schema.define(version: 20160906145713) do
     t.string   "local_model"
     t.string   "api_endpoint"
     t.string   "api_data_type"
+    t.jsonb    "transformation"
   end
 
   add_index "o_auth2_mappings", ["o_auth2_provider_id"], name: "index_o_auth2_mappings_on_o_auth2_provider_id", using: :btree
