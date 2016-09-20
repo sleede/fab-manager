@@ -363,5 +363,6 @@ docker-compose pull fabmanager
 docker-compose stop fabmanager
 sudo rm -rf fabmanager/public/assets
 docker-compose run --rm fabmanager bundle exec rake assets:precompile
-docker-compose start fabmanager
+docker-compose down
+docker-compose up -d
 ```
