@@ -400,6 +400,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.ctrl.member
       # reserve a training if this training will not be reserved and is not about to move and not is completed
       if !event.is_reserved && !$scope.slotToModify && !event.is_completed
+        $scope.coupon.applied = null
         if event != $scope.selectedTraining
           $scope.selectedTraining = event
           $scope.selectedTraining.offered = false
