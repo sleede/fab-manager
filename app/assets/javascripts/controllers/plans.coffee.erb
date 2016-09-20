@@ -232,7 +232,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
             else
               $scope.attempting = true
               Subscription.save
-                coupon_code: coupon.code
+                coupon_code: (coupon.code if coupon)
                 subscription:
                   plan_id: selectedPlan.id
                   user_id: member.id
@@ -305,7 +305,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           $scope.ok = ->
             $scope.attempting = true
             Subscription.save
-              coupon_code: coupon.code
+              coupon_code: (coupon.code if coupon)
               subscription:
                 plan_id: selectedPlan.id
                 user_id: member.id
