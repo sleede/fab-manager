@@ -132,6 +132,7 @@ class Reservation < ActiveRecord::Base
     unless coupon_code.nil?
       cp = Coupon.find_by_code(coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'
+        @coupon = cp
         total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
         unless on_site
           invoice_items << Stripe::InvoiceItem.create(
@@ -388,6 +389,9 @@ class Reservation < ActiveRecord::Base
     if plan_id.present?
       plan = Plan.find(plan_id)
       total += plan.amount
+    end
+    if @coupon
+      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
     end
     wallet_amount = (user.wallet.amount * 100).to_i
 
