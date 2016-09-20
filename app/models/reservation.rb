@@ -139,7 +139,7 @@ class Reservation < ActiveRecord::Base
               customer: user.stp_customer_id,
               amount: -(total  * cp.percent_off / 100).to_i,
               currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{cp.code}"
+              description: "coupon #{cp.code} - reservation"
           )
         end
       else

@@ -21,12 +21,13 @@ class Subscription < ActiveRecord::Base
   def save_with_payment(invoice = true, coupon_code = nil)
     if valid?
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
+      invoice_items = []
       begin
         # dont add a wallet invoice item if pay subscription by reservation
         if invoice
           @wallet_amount_debit = get_wallet_amount_debit
           if @wallet_amount_debit != 0
-            Stripe::InvoiceItem.create(
+            invoice_items << Stripe::InvoiceItem.create(
               customer: user.stp_customer_id,
               amount: -@wallet_amount_debit,
               currency: Rails.application.secrets.stripe_currency,
@@ -38,7 +39,7 @@ class Subscription < ActiveRecord::Base
             cp = Coupon.find_by_code(coupon_code)
             if not cp.nil? and cp.status(user.id) == 'active'
               total = plan.amount
-              Stripe::InvoiceItem.create(
+              invoice_items << Stripe::InvoiceItem.create(
                   customer: user.stp_customer_id,
                   amount: -(total  * cp.percent_off / 100.0).to_i,
                   currency: Rails.application.secrets.stripe_currency,
@@ -54,11 +55,11 @@ class Subscription < ActiveRecord::Base
           cp = Coupon.find_by_code(coupon_code)
           if not cp.nil? and cp.status(user.id) == 'active'
             total = plan.amount
-            Stripe::InvoiceItem.create(
+            invoice_items << Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
                 amount: -(total  * cp.percent_off / 100.0).to_i,
                 currency: Rails.application.secrets.stripe_currency,
-                description: "coupon #{cp.code}"
+                description: "coupon #{cp.code} - subscription"
             )
           else
             raise InvalidCouponError
@@ -89,32 +90,38 @@ class Subscription < ActiveRecord::Base
         cancel
         return true
       rescue Stripe::CardError => card_error
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         logger.error card_error
         errors[:card] << card_error.message
         return false
       rescue Stripe::InvalidRequestError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Invalid parameters were supplied to Stripe's API
         logger.error e
         errors[:payment] << e.message
         return false
       rescue Stripe::AuthenticationError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Authentication with Stripe's API failed
         # (maybe you changed API keys recently)
         logger.error e
         errors[:payment] << e.message
         return false
       rescue Stripe::APIConnectionError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Network communication with Stripe failed
         logger.error e
         errors[:payment] << e.message
         return false
       rescue Stripe::StripeError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Display a very generic error to the user, and maybe send
         # yourself an email
         logger.error e
         errors[:payment] << e.message
         return false
       rescue => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Something else happened, completely unrelated to Stripe
         logger.error e
         errors[:payment] << e.message
@@ -291,6 +298,22 @@ class Subscription < ActiveRecord::Base
     if @wallet_amount_debit.present? and @wallet_amount_debit != 0
       amount = @wallet_amount_debit / 100.0
       return WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+    end
+  end
+
+  def clear_wallet_and_goupon_invoice_items(invoice_items)
+    begin
+      invoice_items.each(&:delete)
+    rescue Stripe::InvalidRequestError => e
+      logger.error e
+    rescue Stripe::AuthenticationError => e
+      logger.error e
+    rescue Stripe::APIConnectionError => e
+      logger.error e
+    rescue Stripe::StripeError => e
+      logger.error e
+    rescue => e
+      logger.error e
     end
   end
 end
