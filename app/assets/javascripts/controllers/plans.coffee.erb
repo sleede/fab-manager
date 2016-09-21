@@ -83,7 +83,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ##
     $scope.openSubscribePlanModal = ->
       Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
-        amountToPay = helpers.getAmountToPay($scope.selectedPlan.amount, wallet.amount)
+        amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount)
         if $scope.currentUser.role isnt 'admin' and amountToPay > 0
           payByStripe()
         else
