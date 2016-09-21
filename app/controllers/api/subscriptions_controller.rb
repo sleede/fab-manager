@@ -18,16 +18,9 @@ class API::SubscriptionsController < API::ApiController
         @subscription.attributes = subscription_params
         is_subscribe = @subscription.save_with_local_payment(!User.find(subscription_params[:user_id]).invoicing_disabled?, coupon_params[:coupon_code])
       else
-        member = User.find(subscription_params[:user_id])
-        plan = Plan.find(subscription_params[:plan_id])
         @subscription = Subscription.find_or_initialize_by(user_id: current_user.id)
-        if valid_card_token?(subscription_params[:card_token]) or (member.wallet.amount >= plan.amount / 100.0)
-          @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
-          @subscription.attributes = subscription_params.merge(user_id: current_user.id)
-          is_subscribe = @subscription.save_with_payment(true, coupon_params[:coupon_code])
-        else
-          is_subscribe = false
-        end
+        @subscription.attributes = subscription_params
+        is_subscribe = @subscription.save_with_payment(true, coupon_params[:coupon_code])
       end
       if is_subscribe
         render :show, status: :created, location: @subscription

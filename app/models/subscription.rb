@@ -20,40 +20,14 @@ class Subscription < ActiveRecord::Base
   # Stripe subscription payment
   def save_with_payment(invoice = true, coupon_code = nil)
     if valid?
-      customer = Stripe::Customer.retrieve(user.stp_customer_id)
-      invoice_items = []
       begin
-        # dont add a wallet invoice item if pay subscription by reservation
-        if invoice
-          @wallet_amount_debit = get_wallet_amount_debit
-          if @wallet_amount_debit != 0
-            invoice_items << Stripe::InvoiceItem.create(
-              customer: user.stp_customer_id,
-              amount: -@wallet_amount_debit,
-              currency: Rails.application.secrets.stripe_currency,
-              description: "wallet -#{@wallet_amount_debit / 100.0}"
-            )
-          end
+        customer = Stripe::Customer.retrieve(user.stp_customer_id)
+        invoice_items = []
 
-          unless coupon_code.nil?
-            cp = Coupon.find_by_code(coupon_code)
-            if not cp.nil? and cp.status(user.id) == 'active'
-              total = plan.amount
-              invoice_items << Stripe::InvoiceItem.create(
-                  customer: user.stp_customer_id,
-                  amount: -(total  * cp.percent_off / 100.0).to_i,
-                  currency: Rails.application.secrets.stripe_currency,
-                  description: "coupon #{cp.code}"
-              )
-            else
-              raise InvalidCouponError
-            end
-          end
-        elsif coupon_code != nil
-          # this case applies if a subscription was took in addition of a reservation, so we create a second
-          # stripe coupon to apply the discount on the subscription item for the stripe's invoice.
+        unless coupon_code.nil?
           cp = Coupon.find_by_code(coupon_code)
           if not cp.nil? and cp.status(user.id) == 'active'
+            @coupon = cp
             total = plan.amount
             invoice_items << Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
@@ -66,7 +40,25 @@ class Subscription < ActiveRecord::Base
           end
         end
 
+        # only add a wallet invoice item if pay subscription
+        # dont add if pay subscription + reservation
+        if invoice
+          @wallet_amount_debit = get_wallet_amount_debit
+          if @wallet_amount_debit != 0
+            invoice_items << Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -@wallet_amount_debit,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "wallet -#{@wallet_amount_debit / 100.0}"
+            )
+          end
+        end
+
         new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
+        # very important to set expired_at to nil that can allow method is_new? to return true
+        # for send the notification
+        # TODO: Refactoring
+        update_column(:expired_at, nil) unless new_record?
         self.stp_subscription_id = new_subscription.id
         self.canceled_at = nil
         self.expired_at = Time.at(new_subscription.current_period_end)
@@ -290,6 +282,9 @@ class Subscription < ActiveRecord::Base
 
   def get_wallet_amount_debit
     total = plan.amount
+    if @coupon
+      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+    end
     wallet_amount = (user.wallet.amount * 100).to_i
     return wallet_amount >= total ? total : wallet_amount
   end
