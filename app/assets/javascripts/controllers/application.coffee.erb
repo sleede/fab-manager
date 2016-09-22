@@ -26,6 +26,11 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     $rootScope.currentUser = user
     Session.create(user);
     getNotifications()
+    # fab-manager's app-version
+    if user.role == 'admin'
+      $scope.version = Version.get()
+    else
+      $scope.version = {version: ''}
 
 
   ##
@@ -209,10 +214,9 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     # try to retrieve any currently logged user
     Auth.login().then (user) ->
       $scope.setCurrentUser(user)
+      # force users to complete their profile if they are not
       if user.need_completion
         $state.transitionTo('app.logged.profileCompletion')
-      if user.role == 'admin'
-        $scope.version = Version.get()
     , (error) ->
       # Authentication failed...
       $rootScope.toCheckNotifications = false
