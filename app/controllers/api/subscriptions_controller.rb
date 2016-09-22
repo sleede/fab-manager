@@ -14,7 +14,6 @@ class API::SubscriptionsController < API::ApiController
     else
       if current_user.is_admin?
         @subscription = Subscription.find_or_initialize_by(user_id: subscription_params[:user_id])
-        @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
         @subscription.attributes = subscription_params
         is_subscribe = @subscription.save_with_local_payment(!User.find(subscription_params[:user_id]).invoicing_disabled?, coupon_params[:coupon_code])
       else

@@ -124,24 +124,31 @@ class Subscription < ActiveRecord::Base
 
   def save_with_local_payment(invoice = true, coupon_code = nil)
     if valid?
-      @wallet_amount_debit = get_wallet_amount_debit if invoice
-
+      # very important to set expired_at to nil that can allow method is_new? to return true
+      # for send the notification
+      # TODO: Refactoring
+      update_column(:expired_at, nil) unless new_record?
       self.stp_subscription_id = nil
       self.canceled_at = nil
       set_expired_at
-      save!
-      UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-      if invoice
-        invoc = generate_invoice(nil, coupon_code)
-        # debit wallet
-        wallet_transaction = debit_user_wallet
-        if wallet_transaction
-          invoc.wallet_amount = @wallet_amount_debit
-          invoc.wallet_transaction_id = wallet_transaction.id
+      if save
+        UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
+        if invoice
+          invoc = generate_invoice(nil, coupon_code)
+          @wallet_amount_debit = get_wallet_amount_debit
+
+          # debit wallet
+          wallet_transaction = debit_user_wallet
+          if wallet_transaction
+            invoc.wallet_amount = @wallet_amount_debit
+            invoc.wallet_transaction_id = wallet_transaction.id
+          end
+          invoc.save
         end
-        invoc.save
+        return true
+      else
+        return false
       end
-      return true
     else
       return false
     end
@@ -152,9 +159,12 @@ class Subscription < ActiveRecord::Base
     total = plan.amount
 
     unless coupon_code.nil?
-      coupon = Coupon.find_by_code(coupon_code)
-      coupon_id = coupon.id
-      total = plan.amount - (plan.amount * coupon.percent_off / 100.0)
+      cp = Coupon.find_by_code(coupon_code)
+      if not cp.nil? and cp.status(user.id) == 'active'
+        @coupon = cp
+        coupon_id = cp.id
+        total = plan.amount - (plan.amount * cp.percent_off / 100.0)
+      end
     end
 
     invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id)
