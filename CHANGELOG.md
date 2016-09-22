@@ -1,8 +1,9 @@
 # Changelog Fab Manager
 
 ## next release
-- Add a checkbox "I accept to receive informations from the FabLab" on Sign up and Profil of user
-- Share project by facebook/twitter
+- Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
+- Share project with Facebook/Twitter
+- Display fab-manager's version in "Powered by" label, when logged as admin
 - Load translation locales from subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events

@@ -100,6 +100,9 @@ en:
         your_email_address_is_unknown: "Your e-mail address is unknown."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive in a moment, an e-mail with instructions to reset your password."
 
+        # Fab-manager's version
+        version: "Version:"
+
       about:
         # about page
         read_the_fablab_policy: "Read the FabLab policy"
