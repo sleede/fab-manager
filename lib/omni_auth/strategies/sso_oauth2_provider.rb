@@ -65,6 +65,10 @@ module OmniAuth
                       break
                     end
                   end
+                  # if no transformation had set any value, set the raw value
+                  unless @parsed_info[local_sym(mapping)]
+                    @parsed_info[local_sym(mapping)] = raw_info[mapping.api_endpoint.to_sym][mapping.api_field]
+                  end
 
                 ## BOOLEAN
                 when 'boolean'
