@@ -10,8 +10,8 @@
       <form name="stripeForm" stripe:form="payment" class="form-horizontal">
         <div class="panel-body">
 
-          <h3 class="m-t-xs" ng-if="walletAmount">{{ 'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol } }}</h3>
-          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic">{{'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol } }}</p>
+          <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
+          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
 
           <div class="form-group" ng-class="{'has-error': stripeForm.number.$dirty && stripeForm.number.$invalid}">
             <div class="col-sm-12">
