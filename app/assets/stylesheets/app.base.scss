@@ -62,11 +62,9 @@ p {
    line-height: rem-calc(24);
 
    &.intro, .intro {
-      font-family: $font-proxima-condensed;
       font-size: rem-calc(16);
       line-height: rem-calc(24);
       margin: 1.038em 0 30px 0;
-      font-weight: 600;
    }
 }
 
