@@ -40,6 +40,7 @@
 - Display strategy's name in SSO providers list
 - SSO: documentation improved with an usage example
 - SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
+- Fix a bug: group cache filename too long
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - Fix a bug: machine name is not shown in plan edition 
