@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## v2.3.1 2016 September 26
+
+- Fix a bug: group cache filename too long
+
 ## v2.3.0 2016 June 28
 
 - Public API with access management and online documentation
