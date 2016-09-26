@@ -80,6 +80,14 @@ class AuthProvider < ActiveRecord::Base
     providable.profile_url
   end
 
+  def safe_destroy
+    if self.status != 'active'
+      destroy
+    else
+      false
+    end
+  end
+
   private
   def set_initial_state
     # the initial state of a new AuthProvider will be 'pending', except if there is currently
