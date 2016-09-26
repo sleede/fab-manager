@@ -471,5 +471,5 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
   # Return the URL allowing to share the current project on the Twitter social network
   ##
   $scope.shareOnTwitter = ->
-    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}));
+    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}))+'&text='+encodeURIComponent($scope.project.name)
 ]
