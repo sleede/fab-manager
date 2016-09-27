@@ -12,13 +12,13 @@ Application.Controllers.controller "TrainingsController", ['$scope', '$state', '
   # Callback for the 'reserve' button
   ##
   $scope.reserveTraining = (training, event) ->
-    $state.go('app.logged.trainings_reserve', {id: training.id})
+    $state.go('app.logged.trainings_reserve', {id: training.slug})
 
   ##
   # Callback for the 'show' button
   ##
   $scope.showTraining = (training) ->
-    $state.go('app.public.training_show', {id: training.id})
+    $state.go('app.public.training_show', {id: training.slug})
 ]
 
 
