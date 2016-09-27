@@ -28,7 +28,7 @@
       <uib-tabset justified="true">
         <uib-tab ng-repeat="stat in statistics" heading="{{stat.label}}" select="setActiveTab(stat)" ng-if="stat.table && !(stat.es_type_key == 'subscription' && fablabWithoutPlans)">
           <form id="filters_form" name="filters_form" class="form-inline m-t-md m-b-lg" novalidate="novalidate">
-            <div id="agePickerPane" class="form-group datepicker-container">
+            <div id="agePickerPane" class="form-group datepicker-container" style="z-index:102;">
               <button id="agePickerExpand" class="btn btn-default" type="button" ng-click="agePicker.show = !agePicker.show">
                 <i class="fa fa-birthday-cake"></i>
                 <span ng-show="agePicker.start || agePicker.end">
@@ -69,7 +69,7 @@
                 <select ng-model="type.selected" ng-options="type.label for type in stat.types" class="form-control"> </select>
             </div>
 
-            <div id="customFilterPane" class="form-group datepicker-container m-l-md">
+            <div id="customFilterPane" class="form-group datepicker-container m-l-md" style="z-index:101;">
               <button id="customFilterExpand" class="btn btn-default customMenuButton" type="button" ng-click="customFilter.show = !customFilter.show">
                 <i class="fa fa-filter"></i>
                 <span ng-show="!customFilter.criterion.key" class="text-gray" translate>{{ 'custom_filter' }}</span>
@@ -172,7 +172,7 @@
                 <i class="fa fa-caret-up" ng-show="datePicker.show"></i>
               </button>
               <div class="datepicker-dropdown" ng-show="datePicker.show">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled p-xs">
                   <li class="row">
                     <span class="col-md-4" translate>{{ 'start' }}</span>
                     <div class="input-group black col-md-7 m-r" id="date_pick_start">
