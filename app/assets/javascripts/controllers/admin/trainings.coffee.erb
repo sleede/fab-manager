@@ -298,6 +298,13 @@ Application.Controllers.controller "TrainingsAdminController", ["$scope", "$stat
   $scope.selectTrainingToMonitor = ->
     Training.availabilities {id: $scope.monitoring.training.id}, (training) ->
       $scope.groupedAvailabilities = groupAvailabilities([training])
+      # we open current year/month by default
+      now = moment()
+      $scope.accordions[training.name] = {}
+      $scope.accordions[training.name][now.year()] =
+        isOpenFirst: true
+      $scope.accordions[training.name][now.year()][now.month()] =
+        isOpenFirst: true
 
 
 
