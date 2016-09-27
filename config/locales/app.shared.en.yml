@@ -128,6 +128,7 @@ en:
         illustration: "Illustration"
         add_an_illustration: "Add an illustration"
         CAD_file: "CAD file"
+        allowed_extensions: "Allowed extensions:"
         add_a_new_file: "Add a new file"
         steps: "Steps"
         step_title: "Step title"

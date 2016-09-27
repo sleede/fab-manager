@@ -26,10 +26,11 @@ Rails.application.routes.draw do
   root 'application#index'
 
   namespace :api, as: nil, defaults: { format: :json } do
-    resources :projects, only: [:index, :last_published, :show, :create, :update, :destroy] do
+    resources :projects, only: [:index, :show, :create, :update, :destroy] do
       collection do
         get :last_published
         get :search
+        get :allowed_extensions
       end
     end
     resources :openlab_projects, only: :index

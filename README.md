@@ -239,6 +239,29 @@ Retrieve them from https://apps.twitter.com
 This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
 If you do so, you'll be able to customize and get statistics about project shares on Facebook.
 
+    LOG_LEVEL
+
+This parameter configures the logs verbosity. 
+Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels). 
+
+    ALLOWED_EXTENSIONS
+
+Exhaustive list of file's extensions available for public upload as project's CAO attachements.
+Each item in the list must be separated from the others by a space char.
+You will probably want to check that this list match the `ALLOWED_MIME_TYPES` values below.
+Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a **dangerous** security issue and must be avoided in any cases.
+
+    ALLOWED_MIME_TYPES
+
+Exhaustive list of file's mime-types available for public upload as project's CAO attachements.
+Each item in the list must be separated from the others by a space char.
+You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
+Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
+
+    Settings related to Open Projects
+
+See the [Open Projects](#open-projects) section for a detailed description of these parameters.
+
     Settings related to i18n
 
 See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](#i18n) paragraph for a detailed description of these parameters.

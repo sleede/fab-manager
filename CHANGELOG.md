@@ -38,6 +38,7 @@
 - Admins can toggle reminders on/off and customize the delay
 - More file types allowed as project CAD attachements
 - Project CAD attachements are now checked by MIME type in addition of extension check
+- Project CAD attachement allowed are now configured in environment variables
 - Display strategy's name in SSO providers list
 - SSO: documentation improved with an usage example
 - SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
@@ -56,7 +57,7 @@
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
-- [TODO DEPLOY] add `EXCEL_DATE_FORMAT` environment variable in `application.yml`
+- [TODO DEPLOY] add `EXCEL_DATE_FORMAT`, `ALLOWED_EXTENSIONS` and `ALLOWED_MIME_TYPES` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
 
 ## v2.3.1 2016 September 26

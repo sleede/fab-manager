@@ -11,4 +11,8 @@ Application.Services.factory 'Project', ["$resource", ($resource)->
       method: 'GET'
       url: '/api/projects/search'
       isArray: false
+    allowedExtensions:
+      method: 'GET'
+      url: '/api/projects/allowed_extensions'
+      isArray: true
 ]

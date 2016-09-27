@@ -12,6 +12,7 @@
 #  - $scope.components = [{Component}]
 #  - $scope.themes = [{Theme}]
 #  - $scope.licences = [{Licence}]
+#  - $scope.allowedExtensions = [{String}]
 #  - $scope.submited(content)
 #  - $scope.cancel()
 #  - $scope.addFile()
@@ -26,7 +27,7 @@
 #  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
 ##
 class ProjectsController
-  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)->
+  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)->
 
     ## Retrieve the list of machines from the server
     Machine.query().$promise.then (data)->
@@ -52,7 +53,11 @@ class ProjectsController
         id: d.id
         name: d.name
 
+    ## Total number of documentation steps for the current project
     $scope.totalSteps = $scope.project.project_steps_attributes.length
+
+    ## List of extensions allowed for CAD attachements upload
+    $scope.allowedExtensions = allowedExtensions
 
 
 
@@ -315,8 +320,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
 ##
 # Controller used in the project creation page
 ##
-Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', '_t'
-, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, _t) ->
+Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t'
+, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -333,7 +338,7 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
   $scope.matchingMembers = []
 
   ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
 ]
 
 
@@ -341,8 +346,8 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
 ##
 # Controller used in the project edition page
 ##
-Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', '_t'
-, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, _t) ->
+Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t'
+, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -359,7 +364,7 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
     name: u.full_name
 
     ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
 ]
 
 

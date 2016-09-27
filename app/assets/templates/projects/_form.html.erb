@@ -42,18 +42,22 @@
         <label class="col-sm-2 control-label" translate>{{ 'CAD_file' }}</label>
         <div class="col-sm-10">
           <div ng-repeat="file in project.project_caos_attributes" ng-show="!file._destroy">
-            <input type="hidden" name="project[project_caos_attributes][][id]" ng-value="file.id" />
-            <input type="hidden" name="project[project_caos_attributes][][_destroy]" ng-value="file._destroy" />
+            <div class="col-md-11 m-l-n">
+              <input type="hidden" name="project[project_caos_attributes][][id]" ng-value="file.id" />
+              <input type="hidden" name="project[project_caos_attributes][][_destroy]" ng-value="file._destroy" />
 
-            <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
-              <div class="form-control" data-trigger="fileinput">
-                <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+              <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
+                <div class="form-control" data-trigger="fileinput">
+                  <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+                </div>
+                <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
+                  <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
+                <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
               </div>
-              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
-                <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
-              <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
-
+            <div class="col-md-1 m-t-xs">
+              <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{ 'allowed_extensions' | translate }} : {{allowedExtensions.join(', ')}}" tooltip-placement="bottom" tooltip-class="media-lg"></i>
+            </div>
           </div>
           <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
         </div>

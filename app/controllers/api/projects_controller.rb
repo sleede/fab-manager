@@ -57,6 +57,10 @@ class API::ProjectsController < API::ApiController
     render :index
   end
 
+  def allowed_extensions
+    render json: ENV['ALLOWED_EXTENSIONS'].split(' '), status: :ok
+  end
+
   private
     def set_project
       @project = Project.find(params[:id])

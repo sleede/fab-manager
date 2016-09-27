@@ -270,6 +270,9 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "projects/new.html" %>'
             controller: 'NewProjectController'
         resolve:
+          allowedExtensions: ['Project', (Project)->
+            Project.allowedExtensions().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.projects_new', 'app.shared.project']).$promise
           ]
@@ -295,6 +298,9 @@ angular.module('application.router', ['ui.router']).
         resolve:
           projectPromise: ['$stateParams', 'Project', ($stateParams, Project)->
             Project.get(id: $stateParams.id).$promise
+          ]
+          allowedExtensions: ['Project', (Project)->
+              Project.allowedExtensions().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise
