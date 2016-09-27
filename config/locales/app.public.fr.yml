@@ -178,6 +178,7 @@ fr:
         files_to_download: "Fichiers à télécharger"
         projects_using_the_machine: "Projets utilisant la machine"
         _or_the_: " ou la "
+        do_you_really_want_to_delete_this_machine: "Êtes-vous sur de vouloir supprimer cette machine ?"
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
@@ -189,6 +190,9 @@ fr:
       training_show:
         # détails d'une formation
         book_this_training: "Réserver cette formation"
+        do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
+        unauthorized_operation: "Opération non autorisée"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
 
       plans:

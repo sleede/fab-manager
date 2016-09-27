@@ -179,7 +179,8 @@ en:
         files_to_download: "Files to download"
         projects_using_the_machine: "Projects using the machine"
         _or_the_: " or the "
-        unauthorized_operation: "Unauthoried operation"
+        do_you_really_want_to_delete_this_machine: "Do you really want to delete this machine?"
+        unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
 
       trainings_list:
@@ -189,6 +190,9 @@ en:
       training_show:
         # details of a training
         book_this_training: "Book this training"
+        do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
+        unauthorized_operation: "Unauthorized operation"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The training can't be deleted because it's already reserved by some users."
 
       plans:
         # summary of the subscriptions

@@ -231,8 +231,8 @@ Application.Controllers.controller "EditMachineController", ["$scope", '$state',
 ##
 # Controller used in the machine details page (public)
 ##
-Application.Controllers.controller "ShowMachineController", ['$scope', '$state', '$uibModal', '$stateParams', '_t', 'Machine', 'growl', 'machinePromise'
-, ($scope, $state, $uibModal, $stateParams, _t, Machine, growl, machinePromise) ->
+Application.Controllers.controller "ShowMachineController", ['$scope', '$state', '$uibModal', '$stateParams', '_t', 'Machine', 'growl', 'machinePromise', 'dialogs'
+, ($scope, $state, $uibModal, $stateParams, _t, Machine, growl, machinePromise, dialogs) ->
 
 ## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
   $scope.machine = machinePromise
@@ -245,11 +245,17 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
     if $scope.currentUser.role isnt 'admin'
       console.error _t('unauthorized_operation')
     else
-      # delete the machine then redirect to the machines listing
-      machine.$delete ->
-        $state.go('app.public.machines_list')
-      , (error)->
-        growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_machine')
+      , -> # deletion confirmed
+        # delete the machine then redirect to the machines listing
+        machine.$delete ->
+          $state.go('app.public.machines_list')
+        , (error)->
+          growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
   ##
   # Callback to book a reservation for the current machine
   ##
