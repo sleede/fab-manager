@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
+- Use slugs in projects URL opened from notifications
 - Ask for confirmation on machine deletion from the public view
 - Ability to delete a training from the public view for an admin
 - Project images will show in full-size on a click 
