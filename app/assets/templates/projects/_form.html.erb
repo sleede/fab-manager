@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="col-md-1 m-t-xs">
-              <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{ 'allowed_extensions' | translate }} : {{allowedExtensions.join(', ')}}" tooltip-placement="bottom" tooltip-class="media-lg"></i>
+              <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{ 'allowed_extensions' | translate }} {{allowedExtensions.join(', ')}}" tooltip-placement="bottom" tooltip-class="media-lg"></i>
             </div>
           </div>
           <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>

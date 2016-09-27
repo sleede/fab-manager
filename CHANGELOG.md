@@ -39,6 +39,7 @@
 - More file types allowed as project CAD attachements
 - Project CAD attachements are now checked by MIME type in addition of extension check
 - Project CAD attachement allowed are now configured in environment variables
+- Project CAD attachement extensions allowed are shown next to input field 
 - Display strategy's name in SSO providers list
 - SSO: documentation improved with an usage example
 - SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
