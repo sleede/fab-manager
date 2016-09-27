@@ -32,7 +32,7 @@
           <img ng-src="{{training.training_image}}" alt="{{training.name}}" class="img-responsive">
         </div>
 
-        <p class="intro" ng-bind-html="training.description | breakFilter"></p>
+        <p class="intro" ng-bind-html="training.description | toTrusted"></p>
 
       </div>
 

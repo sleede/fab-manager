@@ -40,7 +40,6 @@
 - Display strategy's name in SSO providers list
 - SSO: documentation improved with an usage example
 - SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
-- Fix a bug: group cache filename too long
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - Fix a bug: machine name is not shown in plan edition 
@@ -56,6 +55,10 @@
 - [TODO DEPLOY] `bundle install`
 - [TODO DEPLOY] add `EXCEL_DATE_FORMAT` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
+
+## v2.3.1 2016 September 26
+
+- Fix a bug: group cache filename too long
 
 ## v2.3.0 2016 June 28
 
