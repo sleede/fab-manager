@@ -132,8 +132,8 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
-Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise',
-($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise) ->
+Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise', 'settingsPromise',
+($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise, settingsPromise) ->
 
 
 
@@ -165,6 +165,12 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
   ## List of price categories for the events
   $scope.priceCategories = priceCategoriesPromise
+
+  ## Global config: is the user authorized to change his bookings slots?
+  $scope.enableBookingMove = (settingsPromise.booking_move_enable == "true")
+
+  ## Global config: delay in hours before a booking while changing the booking slot is forbidden
+  $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
 
 
 
@@ -374,10 +380,13 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # @param reservation {{total_booked_seats:number}}
   ##
   $scope.reservationCanModify = (reservation)->
+    slotStart = moment(reservation.slots[0].start_at)
+    now = moment()
+
     isAble = false
     angular.forEach $scope.event.recurrence_events, (e)->
       isAble = true if e.nb_free_places >= reservation.total_booked_seats
-    isAble
+    return (isAble and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay)
 
 
 
@@ -408,7 +417,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # Return the URL allowing to share the current project on the Twitter social network
   ##
   $scope.shareOnTwitter = ->
-    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.events_show', {id: $scope.event.id}, {absolute: true}));
+    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.events_show', {id: $scope.event.id}, {absolute: true}))+'&text='+encodeURIComponent($scope.event.title)
 
 
 

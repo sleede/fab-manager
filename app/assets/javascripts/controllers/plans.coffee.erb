@@ -83,7 +83,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ##
     $scope.openSubscribePlanModal = ->
       Wallet.getWalletByUser {user_id: $scope.ctrl.member.id}, (wallet) ->
-        amountToPay = helpers.getAmountToPay($scope.selectedPlan.amount, wallet.amount)
+        amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount)
         if $scope.currentUser.role isnt 'admin' and amountToPay > 0
           payByStripe()
         else
@@ -232,7 +232,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
             else
               $scope.attempting = true
               Subscription.save
-                coupon_code: coupon.code
+                coupon_code: (coupon.code if coupon)
                 subscription:
                   plan_id: selectedPlan.id
                   user_id: member.id
@@ -305,7 +305,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           $scope.ok = ->
             $scope.attempting = true
             Subscription.save
-              coupon_code: coupon.code
+              coupon_code: (coupon.code if coupon)
               subscription:
                 plan_id: selectedPlan.id
                 user_id: member.id

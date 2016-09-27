@@ -1,11 +1,1 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  reservation_id: 
-  event_price_category_id: 
-  booked: 1
-
-two:
-  reservation_id: 
-  event_price_category_id: 
-  booked: 1

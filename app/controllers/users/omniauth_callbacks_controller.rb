@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           @user.username = generate_unique_username(@user.username)
         end
         # If the email is mapped, we check its uniqueness. If the email is already in use, we mark it as duplicate with an
-        # unique random string because.
+        # unique random string, because:
         # - if it is the same user, his email will be filled from the SSO when he merge his accounts
         # - if it is not the same user, this will prevent the raise of PG::UniqueViolation
         if active_provider.sso_fields.include?('user.email') and email_exists?(@user.email)
@@ -22,7 +22,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           @user.email = "<#{old_mail}>#{Devise.friendly_token}-duplicate"
           flash[:alert] = t('omniauth.email_already_linked_to_another_account_please_input_your_authentication_code', OLD_MAIL: old_mail)
         end
-      else
+      else # => update of an existing user
         if username_exists?(@user.username, @user.id)
           flash[:alert] = t('omniauth.your_username_is_already_linked_to_another_account_unable_to_update_it', USERNAME: @user.username)
           @user.username = User.find(@user.id).username

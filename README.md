@@ -29,8 +29,9 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 7.2.2. [Applying changes](#i18n-apply)
 8. [Open Projects](#open-projects)
 9. [Plugins](#plugins)
-10. [Known issues](#known-issues)
-11. [Related Documentation](#related-documentation)
+10. [Single Sign-On](#sso)
+11. [Known issues](#known-issues)
+12. [Related Documentation](#related-documentation)
 
 
 
@@ -359,6 +360,8 @@ To create it, please follow these instructions:
   - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
   - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
   - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
+  - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
+  - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
   This also requires your user to have the _SUPERUSER_ role. 
   Please see the [known issues](#known-issues) section for more informations about this.
@@ -618,6 +621,15 @@ It enables you to write plugins which can:
 To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
 
 You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification)
+
+<a name="sso"></a>
+## Single Sign-On
+
+Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki/Single_sign-on) server which will provide its own authentication for the platform's users.
+Currently OAuth 2 is the only supported protocol for SSO authentication.
+
+For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
+Developers may find informations on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
 
 <a name="known-issues"></a>
 ## Known issues

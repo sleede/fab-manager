@@ -1,6 +1,10 @@
 # Changelog Fab Manager
 
 ## next release
+- Project images will show in full-size on a click 
+- Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
+- Share project with Facebook/Twitter
+- Display fab-manager's version in "Powered by" label, when logged as admin
 - Load translation locales from subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events
@@ -34,16 +38,30 @@
 - Admins can toggle reminders on/off and customize the delay
 - More file types allowed as project CAD attachements
 - Project CAD attachements are now checked by MIME type in addition of extension check
+- Display strategy's name in SSO providers list
+- SSO: documentation improved with an usage example
+- SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
 - Fix a bug: machine name is not shown in plan edition 
 - Fix a bug: machine slots with tags are not displayed correctly on reservation calendar
+- Fix a bug: avatar, address and organization details mapping from SSO were broken
+- Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous 
+- Fix a bug: clicking on the text in stripe's payment modal, does not validate the checkbox
+- Fix a bug: move event reservation is not limited by admin settings (prior-delay & disable)
+- Fix a bug: UI issues on small devices (dashboard + admin views)
+- Fix a bug: embedded video not working in training/machine description
+- Fix a bug: reordering project's steps trigger the unsaved-warning dialog
 - [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
 - [TODO DEPLOY] add `EXCEL_DATE_FORMAT` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
+
+## v2.3.1 2016 September 26
+
+- Fix a bug: group cache filename too long
 
 ## v2.3.0 2016 June 28
 

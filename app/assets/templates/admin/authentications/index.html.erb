@@ -14,6 +14,8 @@
           <tr>
               <th style="width:15%" translate>{{ 'name' }}</th>
 
+              <th style="width:15%" translate>{{ 'strategy_name' }}</th>
+
               <th style="width:15%" translate>{{ 'type' }}</th>
 
               <th style="width:15%" translate>{{ 'state' }}</th>
@@ -24,6 +26,7 @@
         <tbody>
           <tr ng-repeat="provider in providers | filter:searchFilter">
               <td>{{ provider.name }}</td>
+              <td>{{ provider.strategy_name }}</td>
               <td>{{ getType(provider.providable_type) }}</td>
               <td>{{ getState(provider.status) }}</td>
               <td>

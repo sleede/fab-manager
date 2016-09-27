@@ -126,6 +126,9 @@ Rails.application.routes.draw do
     # XLSX exports
     get 'exports/:id/download' => 'exports#download'
     post 'exports/status' => 'exports#status'
+
+    # Fab-manager's version
+    get 'version' => 'version#show'
   end
 
   # open_api

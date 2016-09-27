@@ -20,19 +20,23 @@ class API::ReservationsController < API::ApiController
   end
 
   def create
-    if current_user.is_admin?
-      @reservation = Reservation.new(reservation_params)
-      is_reserve = @reservation.save_with_local_payment(coupon_params[:coupon_code])
-    else
-      @reservation = Reservation.new(reservation_params.merge(user_id: current_user.id))
-      is_reserve = @reservation.save_with_payment(coupon_params[:coupon_code])
-    end
-    if is_reserve
-      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
+    begin
+      if current_user.is_admin?
+        @reservation = Reservation.new(reservation_params)
+        is_reserve = @reservation.save_with_local_payment(coupon_params[:coupon_code])
+      else
+        @reservation = Reservation.new(reservation_params.merge(user_id: current_user.id))
+        is_reserve = @reservation.save_with_payment(coupon_params[:coupon_code])
+      end
+      if is_reserve
+        SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
 
-      render :show, status: :created, location: @reservation
-    else
-      render json: @reservation.errors, status: :unprocessable_entity
+        render :show, status: :created, location: @reservation
+      else
+        render json: @reservation.errors, status: :unprocessable_entity
+      end
+    rescue InvalidCouponError
+      render json: {coupon_code: 'wrong coupon code or expired'}, status:  :unprocessable_entity
     end
   end
 

@@ -155,15 +155,18 @@ class ProjectsController
     ##
     # Change the step_nb property of the given step to the new value provided. The step that was previously at this
     # index will be assigned to the old position of the provided step.
+    # @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
     # @param step {Object} the project's step to reindex
     # @param newIdx {number} the new index to assign to the step
     ##
-    $scope.changeStepIndex = (step, newIdx) ->
+    $scope.changeStepIndex = (event, step, newIdx) ->
+      event.preventDefault() if event
       for s in $scope.project.project_steps_attributes
         if s.step_nb == newIdx
           s.step_nb = step.step_nb
           step.step_nb = newIdx
           break
+      false
 
 
     $scope.autoCompleteName = (nameLookup) ->
@@ -471,5 +474,5 @@ Application.Controllers.controller "ShowProjectController", ["$scope", "$state",
   # Return the URL allowing to share the current project on the Twitter social network
   ##
   $scope.shareOnTwitter = ->
-    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}));
+    'https://twitter.com/intent/tweet?url='+encodeURIComponent($state.href('app.public.projects_show', {id: $scope.project.slug}, {absolute: true}))+'&text='+encodeURIComponent($scope.project.name)
 ]

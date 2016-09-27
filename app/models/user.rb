@@ -234,7 +234,18 @@ class User < ActiveRecord::Base
     if parsed[1] == 'user'
       self[parsed[2].to_sym]
     elsif parsed[1] == 'profile'
-      self.profile[parsed[2].to_sym]
+      case sso_mapping
+        when 'profile.avatar'
+          self.profile.user_avatar.remote_attachment_url
+        when 'profile.address'
+          self.profile.address.address
+        when 'profile.organization_name'
+          self.profile.organization.name
+        when 'profile.organization_address'
+          self.profile.organization.address.address
+        else
+          self.profile[parsed[2].to_sym]
+      end
     end
   end
 
@@ -323,6 +334,17 @@ class User < ActiveRecord::Base
       # finally, save the new details
       self.save!
     end
+  end
+
+  def self.mapping
+    # we protect some fields as they are designed to be managed by the system and must not be updated externally
+    blacklist = %w(id encrypted_password reset_password_token reset_password_sent_at remember_created_at
+       sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip confirmation_token confirmed_at
+       confirmation_sent_at unconfirmed_email failed_attempts unlock_token locked_at created_at updated_at stp_customer_id slug
+       provider auth_token merged_at)
+    User.column_types
+        .map{|k,v| [k, v.type.to_s]}
+        .delete_if { |col| blacklist.include?(col[0]) }
   end
 
   protected

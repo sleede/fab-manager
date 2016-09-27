@@ -37,4 +37,16 @@ class Profile < ActiveRecord::Base
   def str_gender
     gender ? 'male' : 'female'
   end
+
+  def self.mapping
+    # we protect some fields as they are designed to be managed by the system and must not be updated externally
+    blacklist = %w(id user_id created_at updated_at)
+    # model-relationships must be added manually
+    additional = [%w(avatar string), %w(address string), %w(organization_name string), %w(organization_address string)]
+    Profile.column_types
+        .map{|k,v| [k, v.type.to_s]}
+        .delete_if { |col| blacklist.include?(col[0]) }
+        .concat(additional)
+  end
+
 end

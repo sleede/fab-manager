@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t'
-, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t) ->
+Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t', 'Version'
+, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) ->
 
 
 
@@ -14,6 +14,10 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
   ### PUBLIC SCOPE ###
 
+  ## Fab-manager's version
+  $scope.version =
+      version: ''
+
   ##
   # Set the current user to the provided value and initialize the session
   # @param user {Object} Rails/Devise user
@@ -22,6 +26,11 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     $rootScope.currentUser = user
     Session.create(user);
     getNotifications()
+    # fab-manager's app-version
+    if user.role == 'admin'
+      $scope.version = Version.get()
+    else
+      $scope.version = {version: ''}
 
 
   ##
@@ -205,6 +214,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     # try to retrieve any currently logged user
     Auth.login().then (user) ->
       $scope.setCurrentUser(user)
+      # force users to complete their profile if they are not
       if user.need_completion
         $state.transitionTo('app.logged.profileCompletion')
     , (error) ->

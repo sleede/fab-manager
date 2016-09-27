@@ -69,7 +69,7 @@ class Invoice < ActiveRecord::Base
     end
 
     # information about wallet (W[text])
-    reference.gsub!(/W\[([^\]]+)\]/, ''.to_s)
+    #reference.gsub!(/W\[([^\]]+)\]/, ''.to_s)
 
     # remove information about refunds (R[text])
     reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)

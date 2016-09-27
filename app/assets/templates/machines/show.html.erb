@@ -34,7 +34,7 @@
           <img ng-src="{{machine.machine_image}}" alt="{{machine.name}}" class="img-responsive">
         </div>
 
-        <p class="intro" ng-bind-html="machine.description | breakFilter"></p>
+        <p class="intro" ng-bind-html="machine.description | toTrusted"></p>
 
       </div>
 
@@ -48,7 +48,7 @@
         </div>
         <div class="widget-content no-bg wrapper">
           <h3></h3>
-          <p ng-bind-html="machine.spec"></p>
+          <p ng-bind-html="machine.spec | toTrusted"></p>
         </div>
       </div>
 

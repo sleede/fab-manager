@@ -27,15 +27,14 @@
       <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="machine in machines.slice(3*$index, 3*$index + 3)">
 
 
-          <div class="widget panel panel-default" ng-click="showMachine(machine)">
-            <div class="panel-heading picture" ng-if="!machine.machine_image">
+          <div class="widget panel panel-default">
+            <div class="panel-heading picture" ng-if="!machine.machine_image" ng-click="showMachine(machine)">
               <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
             </div>
-            <div class="panel-heading picture" style="background-image:url({{machine.machine_image}})" ng-if="machine.machine_image">
+            <div class="panel-heading picture" style="background-image:url({{machine.machine_image}})" ng-if="machine.machine_image" ng-click="showMachine(machine)">
             </div>
-            <div class="panel-body" style="heigth:170px;">
-              <h1 class="m-b">{{machine.name}}</h1>
-              <p ng-bind-html="machine.description | simpleText | humanize : 140 | breakFilter"></p>
+            <div class="panel-body">
+              <h1 class="text-center m-b">{{machine.name}}</h1>
             </div>
             <div class="panel-footer no-padder">
 
