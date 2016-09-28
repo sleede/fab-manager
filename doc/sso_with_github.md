@@ -43,7 +43,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   
   Once you have completed and validated the mapping's line, an information button will be available. 
   A click on it will show you the type of data expected from the API and, in some cases, you'll be able to configure a transformation.
-  For example, the `Profile.gender` field require a booleanrake diagram:all attribute but your API may return strings like `man / woman`.
+  For example, the `Profile.gender` field require a boolean attribute but your API may return strings like `man / woman`.
   In this case, you'll be able to configure a transformation for `man` <-> `true` and `woman` <-> `false`.
   
   Now, you are free to map more fields, like `Profile.github` to `html_url`, or `Profile.avatar` to `avatar_url`...
@@ -56,7 +56,9 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
 rake fablab:switch_auth_provider[GitHub]
 ```
 
-- As the command just prompted you, you have to re-compile the assets (with eg, `rake tmp:clear` - this vary with the method you used to deploy your instance)
+- As the command just prompted you, you have to re-compile the assets 
+  - In development, `rake tmp:clear` will do the job.
+  - In production with Docker, `rm -rf public/assets`, followed by `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
 - Then restart the web-server or the container.
 - Finally, to notify all existing users about the change (and send them their migration code/link), run:
 ```bash

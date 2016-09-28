@@ -207,8 +207,9 @@ namespace :fablab do
 
     puts "\n/!\\ WARNING: Please consider the following, otherwise the authentication will be bogus:"
     puts "\t1) CLEAN the cache with `rake tmp:clear`"
-    puts "\t2) RESTART the application"
-    puts "\t3) NOTIFY the current users with `rake fablab:notify_auth_changed`\n\n"
+    puts "\t2) REBUILD the assets with `rake assets:precompile`"
+    puts "\t3) RESTART the application"
+    puts "\t4) NOTIFY the current users with `rake fablab:notify_auth_changed`\n\n"
 
   end
 
