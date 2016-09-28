@@ -1,6 +1,6 @@
 # How to configure Fab-manager to use a Single Sign-On authentication?
 
-For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as an example authentication provider, because uses OAuth 2.0 which is currently implemented in fab-manager, it has a standard implementation of that protocol and it is free to use for everyone.
+For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as an example authentication provider, because it uses OAuth 2.0 which is currently implemented in fab-manager, it has a standard implementation of the protocol and it is free to use for everyone.
 
 - First, you must have a GitHub account. This is free, so create one if you don't have any.
   Visit https://github.com/join?source=login to create an account.
