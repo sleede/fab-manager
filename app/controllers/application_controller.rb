@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_url_options
-    Rails.env.production? ? { protocol: 'https' } : {}
+    { :host => Rails.application.secrets.default_host, protocol: Rails.application.secrets.default_protocol }
   end
 
   def permission_denied
