@@ -132,6 +132,13 @@ Rails.application.routes.draw do
     get 'version' => 'version#show'
   end
 
+  # rss
+
+  namespace :rss, as: nil, defaults: { format: :xml } do
+    resources :projects, only: [:index], as: 'rss_projects'
+    resources :events, only: [:index], as: 'rss_events'
+  end
+
   # open_api
 
   namespace :open_api do
