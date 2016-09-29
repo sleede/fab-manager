@@ -58,6 +58,7 @@
 - Fix a bug: embedded video not working in training/machine description
 - Fix a bug: reordering project's steps trigger the unsaved-warning dialog
 - Fix a bug: unable to compile assets in Docker with CoffeeScript error
+- Fix a bug: do not force HTTPS for URLs in production environments
 - [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es_add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
