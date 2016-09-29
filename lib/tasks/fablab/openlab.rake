@@ -1,6 +1,6 @@
 namespace :fablab do
   namespace :openlab do
-    desc 'bulk and export project to openlab'
+    desc 'bulk and export projects to openlab'
     task bulk_export: :environment do
       if Rails.application.secrets.openlab_app_secret.present?
         Project.find_each do |project|
