@@ -23,14 +23,15 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   # @param user {Object} Rails/Devise user
   ##
   $scope.setCurrentUser = (user) ->
-    $rootScope.currentUser = user
-    Session.create(user);
-    getNotifications()
-    # fab-manager's app-version
-    if user.role == 'admin'
-      $scope.version = Version.get()
-    else
-      $scope.version = {version: ''}
+    unless angular.isUndefinedOrNull(user)
+      $rootScope.currentUser = user
+      Session.create(user);
+      getNotifications()
+      # fab-manager's app-version
+      if user.role == 'admin'
+        $scope.version = Version.get()
+      else
+        $scope.version = {version: ''}
 
 
   ##
