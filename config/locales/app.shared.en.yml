@@ -323,11 +323,14 @@ en:
         debit: 'Debit'
         credit_title: 'Credit wallet'
         credit_label: 'Set the amount to be credited'
+        confirm_credit_label: 'Confirm the amount to be credited'
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
         amount_is_required: "The amount is required"
         amount_minimum_1: "The amount minimum is 1"
+        amount_confirm_is_required: "The amount confirmation is required"
+        amount_confirm_does_not_match: "The amount confirmation does not match"
         you_have_amount_in_wallet: "You have {{amount}} {{currency}} in your wallet"
         client_have_amount_in_wallet: "Client has {{amount}} {{currency}} in wallet"
         wallet_pay_reservation: "You can pay direct your reservation"
@@ -336,6 +339,7 @@ en:
         debit_reservation_training: "Debit by reservation of training"
         debit_reservation_machine: "Debit by reservation of machine"
         debit_reservation_event: "Debit by reservation of event"
+        warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
 
       coupon:
         # promotional coupon (creation/edition form)

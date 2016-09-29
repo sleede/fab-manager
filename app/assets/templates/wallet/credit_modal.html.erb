@@ -4,14 +4,38 @@
 </div>
 <div class="modal-body">
   <form name="walletForm" ng-class="{'has-error': walletForm.amount.$dirty && walletForm.amount.$invalid}">
-    <div class="text-center amountGroup">
+    <div class="text-right amountGroup m-r-md">
       <span class="beforeAmount" translate>{{ 'credit_label' }}</span>
-      <input class="form-control" type="number" name="amount" ng-model="amount" required min="1" step="any">
+      <input class="form-control m-l"
+             type="number"
+             name="amount"
+             ng-model="amount"
+             required min="1"
+             step="any">
       <span class="afterAmount">{{currencySymbol}}</span>
       <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.required" translate>{{'amount_is_required'}}</span>
-      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'amount_minimum_1' | translate }}{{currencySymbol}}</span>
+      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'amount_minimum_1' | translate }} {{currencySymbol}}.</span>
+    </div>
+    <div class="text-right amountGroup m-t m-r-md">
+      <span class="beforeAmount" translate>{{ 'confirm_credit_label' }}</span>
+      <input class="form-control m-l"
+             type="number"
+             name="amount_confirm"
+             ng-model="amount_confirm"
+             required
+             min="1"
+             step="any"
+             ng-pattern="amount.toString()">
+      <span class="afterAmount">{{currencySymbol}}</span>
+      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.required" translate>{{'amount_confirm_is_required'}}</span>
+      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.pattern">{{ 'amount_confirm_does_not_match' | translate }}</span>
     </div>
   </form>
+
+  <div class="alert alert-warning m-t-md m-b-sm">
+    <i class="fa fa-warning m-sm inline" aria-hidden="true"></i>
+    <div class="inline pull-right width-90 m-t-n-xs" translate>{{ 'warning_uneditable_credit' }}</div>
+  </div>
 
 </div>
 <div class="modal-footer">

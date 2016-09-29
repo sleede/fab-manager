@@ -323,11 +323,14 @@ fr:
         debit: 'Débit'
         credit_title: 'Créditer le porte-monnaie'
         credit_label: 'Indiquez le montant à créditer'
+        confirm_credit_label: 'Confirmez le montant à créditer'
         to_credit: 'Créditer'
         wallet_credit_successfully: "Le porte-monnaie de l'utilisateur a été chargé avec succès."
         a_problem_occurred_for_wallet_credit: "Un problème est survenu lors du chargement du porte-monnaie."
-        amount_is_required: "Le montant est obligatoire"
-        amount_minimum_1: "Le montant minimum est d'1"
+        amount_is_required: "Le montant est requis."
+        amount_minimum_1: "Le montant minimum est de 1"
+        amount_confirm_is_required: "La confirmation du montant est requise."
+        amount_confirm_does_not_match: "La confirmation du montant ne correspond pas."
         you_have_amount_in_wallet: "Vous avez {{amount}} {{currency}} sur votre porte-monnaie"
         client_have_amount_in_wallet: "Le client a {{amount}} {{currency}} sur son porte-monnaie"
         wallet_pay_reservation: "Vous pouvez effectuer directement votre paiement de réservation"
@@ -336,6 +339,7 @@ fr:
         debit_reservation_training: "Payer un reservation de formation"
         debit_reservation_machine: "Payer un reservation de machine"
         debit_reservation_event: "Payer un reservation d'évenement"
+        warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
 
       coupon:
         # code promotionnel (formulaire de création/édition)
