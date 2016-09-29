@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
+- RSS feeds to follow new projects and events published
 - Use slugs in projects URL opened from notifications
 - Ask for confirmation on machine deletion from the public view
 - Ability to delete a training from the public view for an admin
