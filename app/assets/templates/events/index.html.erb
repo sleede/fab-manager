@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'the_fablab_s_courses_and_workshops' }}</h1>
+        <h1 translate>{{ 'the_fablab_s_events' }}</h1>
       </section>
     </div>
 
@@ -20,38 +20,64 @@
 
   <section class="m-lg">
 
-  <div ng-repeat="month in monthOrder">
-    <h1>{{month.split(',')[0]}}, {{month.split(',')[1]}}</h1>
+    <div class="row m-b-md">
+      <div class="col-md-3 m-b" ng-show="categories.length > 0">
+        <select ng-model="filters.category_id" ng-change="filterEvents()" class="form-control" ng-options="c.id as c.name for c in categories">
+          <option value="" translate>{{ 'all_categories' }}</option>
+        </select>
+      </div>
 
-    <div class="row" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
+      <div class="col-md-3 m-b" ng-show="themes.length > 0">
+        <select ng-model="filters.theme_id" ng-change="filterEvents()" class="form-control" ng-options="t.id as t.name for t in themes">
+          <option value="" translate>{{ 'all_themes' }}</option>
+        </select>
+      </div>
 
-      <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" ng-click="showEvent(event)">
-
-
-        <a class="block bg-white img-full p-sm p-l-m box-h-m event b b-light-dark m-t-sm" ui-sref="app.public.events_show({id: event.id})">
-          <div class="pull-left half-w m-t-n-sm">
-            <h5 class="text-xs">{{event.categories[0].name}}</h5>
-            <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
-            <h3 class="m-n">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
-
-            <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-if="event.reduced_amount > 0">/ {{ 'reduced_rate_' | translate }} {{event.reduced_amount | currency}}</span></h6>
-          </div>
-          <!-- Event Image -->
-          <div class="pull-right crop-130">
-            <img class="pull-right" ng-src="{{event.event_image_small}}" title="{{event.title}}" ng-if="event.event_image">
-            <img class="pull-right img-responsive" src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!event.event_image">
-          </div>
-
-        </a>
-
+      <div class="col-md-3 m-b" ng-show="ageRanges.length > 0">
+        <select ng-model="filters.age_range_id" ng-change="filterEvents()" class="form-control" ng-options="a.id as a.name for a in ageRanges">
+          <option value="" translate>{{ 'for_all' }}</option>
+        </select>
       </div>
     </div>
-  </div>
+
+    <div ng-repeat="month in monthOrder">
+      <h1>{{month.split(',')[0]}}, {{month.split(',')[1]}}</h1>
+
+      <div class="row" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
+
+        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="event in eventsGroupByMonth[month].slice(3*$index, 3*$index + 3)" ng-click="showEvent(event)">
+
+
+          <a class="block bg-white img-full p-sm p-l-m box-h-m event b b-light-dark m-t-sm" ui-sref="app.public.events_show({id: event.id})">
+            <div class="pull-left half-w m-t-n-sm">
+              <h5 class="text-xs">{{event.category.name}}</h5>
+              <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
+              <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
+              <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
+
+              <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
+
+              <div>
+                <span class="text-black-light text-xs" ng-if="event.event_themes[0]"><i class="fa fa-tags" aria-hidden="true"></i> {{event.event_themes[0].name}}</span>
+                <span class="text-black-light text-xs" ng-if="event.age_range"><i class="fa fa-users" aria-hidden="true"></i> {{event.age_range.name}}</span>
+              </div>
+            </div>
+            <!-- Event Image -->
+            <div class="pull-right crop-155">
+              <img class="pull-right" ng-src="{{event.event_image_small}}" title="{{event.title}}" ng-if="event.event_image">
+              <img class="pull-right img-responsive" src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!event.event_image">
+            </div>
+
+          </a>
+
+        </div>
+      </div>
+    </div>
 
     <div class="row">
 
       <div class="col-lg-12 text-center m-t-md">
-        <a class="btn btn-warning" ng-click="loadMoreEvents()" ng-if="paginateActive" translate>{{ 'load_the_next_courses_and_workshops' }}</a>
+        <a class="btn btn-warning" ng-click="loadMoreEvents()" ng-hide="noMoreResults" translate>{{ 'load_the_next_events' }}</a>
       </div>
     </div>
 

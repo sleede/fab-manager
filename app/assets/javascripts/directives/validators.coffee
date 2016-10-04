@@ -18,7 +18,7 @@ Application.Directives.directive 'url', [ ->
 
 
 Application.Directives.directive 'endpoint', [ ->
-  ENDPOINT_REGEXP = /^\/([-._~:?#\[\]@!$&'()*+,;=%\w]+\/?)*$/
+  ENDPOINT_REGEXP = /^\/?([-._~:?#\[\]@!$&'()*+,;=%\w]+\/?)*$/
   {
     require: 'ngModel'
     link: (scope, element, attributes, ctrl) ->

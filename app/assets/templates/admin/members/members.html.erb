@@ -1,0 +1,59 @@
+<div class="col-md-5 m-t-lg">
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+      <input type="text" ng-model="member.searchText" class="form-control" placeholder="{{ 'search_for_an_user' | translate }}" ng-change="updateTextSearch()">
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.members_new" translate>{{ 'add_a_new_member' }}</button>
+  <div class="pull-right">
+    <a class="btn btn-default" ng-href="api/members/export_members.xlsx" target="export-frame" ng-click="alertExport('members')">
+      <i class="fa fa-file-excel-o"></i> {{ 'members' | translate }}
+    </a>
+    <a class="btn btn-default" ng-href="api/members/export_subscriptions.xlsx" target="export-frame" ng-if="!fablabWithoutPlans" ng-click="alertExport('subscriptions')">
+      <i class="fa fa-file-excel-o"></i> {{ 'subscriptions' | translate }}
+    </a>
+    <a class="btn btn-default" ng-href="api/members/export_reservations.xlsx" target="export-frame" ng-click="alertExport('reservations')">
+      <i class="fa fa-file-excel-o"></i> {{ 'reservations' | translate }}
+    </a>
+    <iframe name="export-frame" height="0" width="0" class="none"></iframe>
+  </div>
+
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:15%"><a href="" ng-click="setOrderMember('last_name')">{{ 'surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='last_name', 'fa fa-sort-alpha-desc': member.order=='-last_name', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:15%"><a href="" ng-click="setOrderMember('first_name')">{{ 'first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='first_name', 'fa fa-sort-alpha-desc': member.order=='-first_name', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:15%" class="hidden-xs"><a href="" ng-click="setOrderMember('email')">{{ 'email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='email', 'fa fa-sort-alpha-desc': member.order=='-email', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:10%" class="hidden-xs hidden-sm hidden-md"><a href="" ng-click="setOrderMember('phone')">{{ 'phone' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': member.order=='phone', 'fa fa-sort-numeric-desc': member.order=='-phone', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:20%" class="hidden-xs hidden-sm"><a href="" ng-click="setOrderMember('group')">{{ 'user_type' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='group', 'fa fa-sort-alpha-desc': member.order=='-group', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:15%" class="hidden-xs hidden-sm hidden-md"><a href="" ng-click="setOrderMember('plan')">{{ 'subscription' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': member.order=='plan', 'fa fa-sort-alpha-desc': member.order=='-plan', 'fa fa-arrows-v': member.order }"></i></a></th>
+      <th style="width:10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="m in members">
+      <td class="text-c">{{ m.profile.last_name }}</td>
+      <td class="text-c">{{ m.profile.first_name }}</td>
+      <td class="hidden-xs">{{ m.email }}</td>
+      <td class="hidden-xs hidden-sm hidden-md">{{ m.profile.phone }}</td>
+      <td class="text-u-c text-sm hidden-xs hidden-sm">{{ m.group.name }}</td>
+      <td class="hidden-xs hidden-sm hidden-md">{{ m.subscribed_plan | humanReadablePlanName }}</td>
+      <td>
+        <div class="buttons">
+          <button class="btn btn-default" ui-sref="app.admin.members_edit({id: m.id})">
+            <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+          </button>
+          <span class="label label-danger text-white" ng-show="m.need_completion" translate>{{ 'incomplete_profile' }}</span>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <button class="btn btn-warning" ng-click="showNextMembers()" ng-hide="member.noMore"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_users' | translate }}</button>
+  </div>
+</div>

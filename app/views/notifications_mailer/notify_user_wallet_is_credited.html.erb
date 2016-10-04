@@ -1,0 +1,2 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+<p><%= t('.body.wallet_credit_html', AMOUNT: number_to_currency(@attached_object.amount)) %></p>

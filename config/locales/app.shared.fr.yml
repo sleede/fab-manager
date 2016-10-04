@@ -29,6 +29,7 @@ fr:
         confirmation_required: "Confirmation requise"
         description: "Description"
         machines: "Machines"
+        events: "Évènements"
         materials: "Matériaux"
         date: "Date"
         price: "Prix"
@@ -43,8 +44,6 @@ fr:
         title: "Titre"
         total_: "TOTAL :"
         full_price_: "Plein tarif :"
-        reduced_rate: "Tarif réduit"
-        reduced_rate_: "Tarif réduit :"
         rough_draft: "Brouillon"
         machines_and_materials: "Machines et matériaux"
         collaborators: "Les collaborateurs"
@@ -54,7 +53,8 @@ fr:
         confirm_and_pay: "Valider et payer"
         your_invoice_will_be_available_soon_from_your_: "Votre facture sera bientôt disponible depuis votre"
         add_an_event: "Ajouter un évènement"
-        load_the_next_courses_and_workshops: "Charger les stages et ateliers suivants ..."
+        load_the_next_events: "Charger les évènements suivants ..."
+        no_passed_events: "Aucun évènement passé"
         dates: "Dates :"
         thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
         surname: "Nom"
@@ -86,6 +86,20 @@ fr:
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
+        add_a_project: "Ajouter un projet"
+        illustration: "Visuel"
+        add_an_illustration: "Ajouter un visuel"
+        book: "Réserver"
+        description_is_required: "La description est requise."
+        name_is_required: "Le nom est requis."
+        all_themes: "Toutes les thématiques"
+        filter: 'Filtre'
+        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # messageFormat interpolation (contexte : valider mon paiement de 20,00 €)
+        export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
+        share_on_facebook: "Partager sur Facebook"
+        share_on_twitter: "Partager sur Twitter"
+        incomplete_profile: "Profil incomplet"
+        unlimited: "Illimité"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
@@ -102,6 +116,8 @@ fr:
         confirmation_of_password_is_required: "La confirmation du mot de passe est requise."
         confirmation_of_password_is_too_short_(minimum_8_characters): "La confirmation du mot de passe est trop courte (au moins 8 caractères)."
         confirmation_mismatch_with_password: "La confirmation ne concorde pas avec le mot de passe."
+        organization_name: "Nom de la structure"
+        organization_address: "Adresse de la structure"
         date_of_birth: "Date de naissance"
         date_of_birth_is_required: "La date de naissance est requise."
         website: "Site web"
@@ -109,17 +125,17 @@ fr:
 
       project:
         # formulaire d'étition d'un projet
-        name_is_required: "Le nom est requis."
         illustration: "Illustration"
         add_an_illustration: "Ajouter un visuel"
         CAD_file: "Fichier CAO"
+        allowed_extensions: "Extensions autorisées :"
         add_a_new_file: "Ajouter un nouveau fichier"
-        description_is_required: "La description est requise."
         steps: "Étapes"
         step_title: "Titre de l'étape"
         add_a_picture: "Ajouter une image"
         change_the_picture: "Modifier l'image"
         delete_the_step: "Supprimer l'étape"
+        do_you_really_want_to_delete_this_step: "Êtes-vous sur de vouloir supprimer cette étape ?"
         add_a_new_step: "Ajouter une nouvelle étape"
         publish_your_project: "Publier votre projet"
         employed_materials: "Matériaux utilisés"
@@ -128,10 +144,6 @@ fr:
 
       machine:
         # formulaire d'édition d'une machine
-        name_is_required: "Le nom est requis."
-        illustration: "Visuel"
-        add_an_illustration: "Ajouter un visuel"
-        description_is_required: "La description est requise."
         technical_specifications_are_required: "Les caractéristiques techniques sont requises."
         attached_files_(pdf): "Pièces jointes (pdf)"
         attach_a_file: "Joindre un fichier"
@@ -154,7 +166,8 @@ fr:
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
         _the_general_terms_and_conditions: "les conditions générales de vente."
         enter_your_card_number: "Saisissez votre numéro de carte"
-        confirm_my_payment_of_: "Valider mon paiement de"  # contexte : valider mon paiement de 20,00 €
+        credit_amount_for_pay_reservation: "Il vous reste {{amount}} {{currency}} à payer pour valider votre réservation"
+        client_credit_amount_for_pay_reservation: "Il reste {{amount}} {{currency}} à payer pour valider la réservation"
 
       valid_reservation_modal:
         # fenêtre de paiement sur place d'une réservation
@@ -162,11 +175,10 @@ fr:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
 
       event:
-        # formulaire d'édition d'un événement (stage/atelier)
+        # formulaire d'édition d'un événement
         title_is_required: "Le titre est requis."
         matching_visual: "Visuel associé"
         choose_a_picture: "Choisir une image"
-        description_is_required: "La description est requise."
         attachments: "Pièces jointes"
         add_a_new_file: "Ajouter un nouveau fichier"
         event_type: "Type d'évènement"
@@ -182,11 +194,12 @@ fr:
         standard_rate: "Tarif standard"
         0_=_free: "0 = gratuit"
         tickets_available: "Places disponibles"
+        event_theme: "Thème de l'évènement"
+        age_range: "Tranche d'âge"
 
       plan:
         # formulaire d'édition d'une formule d'abonnement
         general_informations: "Informations générales"
-        name_is_required: "Le nom est requis."
         name_length_must_be_less_than_24_characters: "Le nom doit faire moins de 24 caractères."
         type_is_required: "Le type est requis."
         group: "Groupe"
@@ -211,8 +224,18 @@ fr:
         new_partner: "Nouveau partenaire"
         email_address_is_required: "L'adresse e-mail est requise."
 
+      trainings:
+        # formulaire d'édition d'une formation
+        add_a_new_training: "Ajouter une nouvelle formation"
+        validate_your_training: "Valider votre formation"
+        associated_machines: "Machines associées"
+        number_of_tickets: "Nombre de places"
+        public_page: "Afficher dans la liste de formation"
+
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)
+        user_profile: "Profil utilisateur"
+        warning_incomplete_user_profile_probably_imported_from_sso: "Attention : Le profil de cet utilisateur est incomplet. Comme l'authentification \"single sign-on\" (SSO) est actuellement activée, il s'agit probablement d'un compte importé mais non fusionné. N'y apportez aucune modification sauf si vous savez ce que vous faites."
         group: "Groupe"
         group_is_required: "Le groupe est requis."
         disable_invoices_generation: "Désactiver la génération de factures :"
@@ -226,6 +249,10 @@ fr:
         provider_name_is_required: "Le nom du fournisseur est requis."
         authentication_type: "Type d'authentification"
         authentication_type_is_required: "Le type d'authentification est requis."
+        data_mapping: "Correspondance des données"
+        expected_data_type: "Type de données attendues"
+        input_format: "Format d'entrée"
+        mappings: "Correspondances"
 
       oauth2:
         # formulaire d'édition/création d'un fournisseur d'authentification de type OAuth2
@@ -282,3 +309,63 @@ fr:
         author: "Auteur"
         collaborator: "Collaborateur"
         private_profile: "Profil privé"
+
+      wallet:
+        # porte-monnaie
+        wallet: 'Porte-monnaie'
+        your_wallet_amount: 'Votre montant disponible'
+        wallet_amount: 'Montant disponible'
+        no_transactions_for_now: 'Aucune transaction pour le moment'
+        operation: 'Opération'
+        operator: 'Opérateur'
+        amount: 'Montant'
+        credit: 'Crédit'
+        debit: 'Débit'
+        credit_title: 'Créditer le porte-monnaie'
+        credit_label: 'Indiquez le montant à créditer'
+        confirm_credit_label: 'Confirmez le montant à créditer'
+        to_credit: 'Créditer'
+        wallet_credit_successfully: "Le porte-monnaie de l'utilisateur a été chargé avec succès."
+        a_problem_occurred_for_wallet_credit: "Un problème est survenu lors du chargement du porte-monnaie."
+        amount_is_required: "Le montant est requis."
+        amount_minimum_1: "Le montant minimum est de 1"
+        amount_confirm_is_required: "La confirmation du montant est requise."
+        amount_confirm_does_not_match: "La confirmation du montant ne correspond pas."
+        you_have_amount_in_wallet: "Vous avez {{amount}} {{currency}} sur votre porte-monnaie"
+        client_have_amount_in_wallet: "Le client a {{amount}} {{currency}} sur son porte-monnaie"
+        wallet_pay_reservation: "Vous pouvez effectuer directement votre paiement de réservation"
+        client_wallet_pay_reservation: "Le client pouvez effectuer directement son paiement de réservation"
+        debit_subscription: "Payer un abonnement"
+        debit_reservation_training: "Payer un reservation de formation"
+        debit_reservation_machine: "Payer un reservation de machine"
+        debit_reservation_event: "Payer un reservation d'évenement"
+        warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
+
+      coupon:
+        # code promotionnel (formulaire de création/édition)
+        code: "Code"
+        code_is_required: "Le code est requis."
+        code_must_be_composed_of_capital_letters_digits_and_or_dashes: "Le code doit être composé de lettres majuscules, de chiffres et/ou de tirets."
+        percent_off: "Pourcentage de réduction"
+        percent_off_is_required: "Le pourcentage de réduction est requis."
+        percentage_must_be_between_0_and_100: "Le pourcentage doit être compris entre 0 et 100."
+        validity_per_user: "Validité par utilisateur"
+        once: "Une seule fois"
+        forever: "À chaque utilisation"
+        validity_per_user_is_required: "La validité par utilisateur est requise."
+        valid_until: "Valable jusqu'au (inclus)"
+        leave_empty_for_no_limit: "Laissez vide pour ne pas spécifier de limite."
+        max_usages: "Nombre maximum d'utilisations autorisées"
+        max_usages_must_be_equal_or_greater_than_0: "Le nombre d'utilisations maximum doit être supérieur ou égal à 0."
+        enabled: "Activé"
+
+      coupon_input:
+        # code promotionnel (zone de saisie pour les utilisateurs)
+        i_have_a_coupon: "J'ai un code promo !"
+        code_: "Code :"
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{PERCENT}} %."  # angular interpolation
+        unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
+        unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
+        unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
+        unable_to_apply_the_coupon_because_already_used: "Impossible d'appliquer la réduction : vous avez déjà utilisé ce code promo par le passé."
+        unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."

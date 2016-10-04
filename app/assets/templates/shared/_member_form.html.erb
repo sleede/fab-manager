@@ -162,6 +162,40 @@
         <span class="help-block" ng-show="userForm['user[password_confirmation]'].$error.match" translate>{{ 'confirmation_mismatch_with_password' }}</span>
       </div>
 
+      <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+          <input type="hidden"
+                 name="user[profile_attributes][organization_attributes][id]"
+                 ng-value="user.profile.organization.id" />
+          <input type="text"
+                 name="user[profile_attributes][organization_attributes][name]"
+                 ng-model="user.profile.organization.name"
+                 class="form-control"
+                 placeholder="{{ 'organization_name' | translate }}"
+                 ng-required="user.profile.organization"
+                 ng-disabled="preventField['profile.organization_name'] && user.profile.organization.name && !userForm['user[profile_attributes][organization_attributes][name]'].$dirty">
+        </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$error.required" translate>{{ 'organization_name_is_required' }}</span>
+      </div>
+
+      <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+          <input type="hidden"
+                 name="user[profile_attributes][organization_attributes][address_attributes][id]"
+                 ng-value="user.profile.organization.address.id" />
+          <input type="text"
+                 name="user[profile_attributes][organization_attributes][address_attributes][address]"
+                 ng-model="user.profile.organization.address.address"
+                 class="form-control"
+                 placeholder="{{ 'organization_address' | translate }}"
+                 ng-required="user.profile.organization"
+                 ng-disabled="preventField['profile.organization_address'] && user.profile.organization.address.address && !userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty">
+        </div>
+        <span class="help-block" ng-show="userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$error.required" translate>{{ 'organization_address_is_required' }}</span>
+      </div>
+
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
@@ -275,6 +309,20 @@
                switch-off-text="{{ 'no' | translate }}"
                switch-animate="true"/>
         <input type="hidden" name="user[is_allow_contact]" value="{{user.is_allow_contact}}"/>
+      </div>
+
+      <!-- allow receive newsletter -->
+      <div class="form-group">
+        <label for="allowNewsletter" translate>{{ 'i_accept_to_receive_informations_from_the_fablab' }}</label>
+        <input bs-switch
+               ng-model="user.is_allow_newsletter"
+               id="allowNewsletter"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'yes' | translate }}"
+               switch-off-text="{{ 'no' | translate }}"
+               switch-animate="true" />
+        <input type="hidden" name="user[is_allow_newsletter]" value="{{user.is_allow_newsletter}}"/>
       </div>
 
       <div id="social" ng-init="social={}">

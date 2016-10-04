@@ -1,5 +1,6 @@
 json.extract! @project, :id, :name, :description, :tags, :created_at, :updated_at, :author_id, :licence_id, :slug
 json.project_image @project.project_image.attachment.large.url if @project.project_image
+json.project_full_image @project.project_image.attachment.url if @project.project_image
 json.author do
   json.id @project.author_id
   json.first_name @project.author.profile.first_name
@@ -46,12 +47,14 @@ json.project_users @project.project_users do |pu|
   json.slug pu.user.slug
   json.is_valid pu.is_valid
 end
-json.project_steps_attributes @project.project_steps.order('project_steps.created_at ASC') do |s|
+json.project_steps_attributes @project.project_steps.order('project_steps.step_nb ASC') do |s|
   json.id s.id
   json.description s.description
   json.title s.title
   json.project_step_image s.project_step_image.attachment_identifier if s.project_step_image
   json.project_step_image_url s.project_step_image.attachment.medium.url if s.project_step_image
+  json.project_step_full_image_url s.project_step_image.attachment.url if s.project_step_image
+  json.step_nb s.step_nb
 end
 json.state @project.state
 json.licence do

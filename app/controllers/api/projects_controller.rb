@@ -57,6 +57,10 @@ class API::ProjectsController < API::ApiController
     render :index
   end
 
+  def allowed_extensions
+    render json: ENV['ALLOWED_EXTENSIONS'].split(' '), status: :ok
+  end
+
   private
     def set_project
       @project = Project.find(params[:id])
@@ -66,7 +70,7 @@ class API::ProjectsController < API::ApiController
       params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id, :author_id, :licence_id, :state,
                                       user_ids: [], machine_ids: [], component_ids: [], theme_ids: [], project_image_attributes: [:attachment],
                                       project_caos_attributes: [:id, :attachment, :_destroy],
-                                      project_steps_attributes: [:id, :description, :title, :_destroy,
+                                      project_steps_attributes: [:id, :description, :title, :_destroy, :step_nb,
                                         :project_step_image_attributes => :attachment])
     end
 end

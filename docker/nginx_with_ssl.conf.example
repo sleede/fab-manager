@@ -1,5 +1,5 @@
 upstream puma {
-  server unix:/usr/src/app/tmp/sockets/fabmanager.sock fail_timeout=0;
+  server fabmanager:3000;
 }
 
 server {
@@ -7,18 +7,39 @@ server {
   server_name MAIN_DOMAIN;
   root /usr/src/app/public;
   ssl on;
-  ssl_certificate /etc/nginx/conf.d/ssl/MAIN_DOMAIN.crt;
-  ssl_certificate_key /etc/nginx/conf.d/ssl/MAIN_DOMAIN.deprotected.key;
-  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-  ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+  ## with your ssl certificate
+  #ssl_certificate /etc/nginx/conf.d/ssl/MAIN_DOMAIN.crt;
+  #ssl_certificate_key /etc/nginx/conf.d/ssl/MAIN_DOMAIN.deprotected.key;
+  ##
+  ## with letsencrypt certificate (free)
+  ssl_certificate_key /etc/letsencrypt/live/MAIN_DOMAIN/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/MAIN_DOMAIN/fullchain.pem;
+  ssl_trusted_certificate /etc/letsencrypt/live/MAIN_DOMAIN/chain.pem;
+  ##
+  ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
   ssl_prefer_server_ciphers on;
-  ssl_session_cache shared:SSL:10m;
+  ssl_ciphers 'kEECDH+ECDSA+AES128 kEECDH+ECDSA+AES256 kEECDH+AES128 kEECDH+AES256 kEDH+AES128 kEDH+AES256 DES-CBC3-SHA +SHA !aNULL !eNULL !LOW !MD5 !EXP !DSS !PSK !SRP !kECDH !CAMELLIA !RC4 !SEED';
+  ssl_session_cache shared:SSL:50m;
+  ssl_session_tickets off;
+  ssl_session_timeout 1d;
+  ssl_dhparam /etc/nginx/conf.d/ssl/dhparam.pem;
+  add_header Strict-Transport-Security max-age=15768000;
+  ssl_stapling on;
+  ssl_stapling_verify on;
+
 
   location ^~ /assets/ {
     gzip_static on;
     expires max;
     add_header Cache-Control public;
   }
+
+  ## required by letsencrypt to generate the certificat
+  location /.well-known/acme-challenge {
+    root /etc/letsencrypt/webrootauth;
+    default_type "text/plain";
+  }
+  ##
 
   try_files $uri/index.html $uri @puma;
   location @puma {

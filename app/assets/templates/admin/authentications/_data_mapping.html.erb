@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h3 class="modal-title"><span translate>{{ 'data_mapping' }}</span> : {{field.local_field}}</h3>
+</div>
+<div class="modal-body m-lg">
+  <div>
+    <span translate>{{ 'expected_data_type' }}</span> : {{datatype}}
+  </div>
+  <form name="mappingForm" class="m-t-md">
+    <ng-switch on="datatype">
+
+      <!-- BOOLEAN -->
+      <div ng-switch-when="boolean">
+        <label for="add_mapping" translate>{{ 'mappings' }}</label>
+        <ul class="list-unstyled">
+          <li class="m-t-sm m-l">
+            <input type="text"
+                   name="true_value"
+                   id="true_value"
+                   class="form-control inline width-35 m-r "
+                   ng-model="transformation.rules.false_value">
+            <i class="fa fa-arrows-h"></i>
+            <label for="true_value" class="m-l">true</label>
+          </li>
+          <li class="m-t-sm m-l">
+            <input type="text"
+                   name="false_value"
+                   id="false_value"
+                   class="form-control inline width-35 m-r "
+                   ng-model="transformation.rules.true_value">
+            <i class="fa fa-arrows-h"></i>
+            <label for="false_value" class="m-l">false</label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- DATE -->
+      <div ng-switch-when="date">
+        <label for="date_format" translate>{{ 'input_format' }}</label>
+        <select name="date_format"
+                id="date_format"
+                class="form-control"
+                ng-model="transformation.rules.format"
+                ng-options="format.value as format.label for format in formats.date">
+        </select>
+      </div>
+
+      <!-- INTEGER -->
+      <div ng-switch-when="integer">
+        <label for="add_mapping" translate>{{ 'mappings' }}</label>
+        <button class="btn btn-default pull-right" ng-click="addIntegerMapping()"><i class="fa fa-plus"></i></button>
+        <ul class="list-unstyled">
+          <li ng-repeat="map in transformation.rules.mapping" class="m-t-sm m-l">
+              <input type="text" class="form-control inline width-35 m-r " ng-model="map.from">
+              <i class="fa fa-arrows-h"></i>
+              <input type="number" class="form-control inline width-35 m-l" ng-model="map.to">
+          </li>
+        </ul>
+      </div>
+    </ng-switch>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()" ng-disabled="!mappingForm.$valid" ng-if="datatype != 'string' && datatype != 'text'" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-warning" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

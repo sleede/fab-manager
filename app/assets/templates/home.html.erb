@@ -80,7 +80,7 @@
 	</div>
 
   <section class="col-lg-12 wrapper">
-      <h4 class="text-sm m-t-sm">{{ 'fablab_s_next_courses_and_workshops' | translate }} <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> {{ 'every_events' | translate }}</a></h4>
+      <h4 class="text-sm m-t-sm">{{ 'fablab_s_next_events' | translate }} <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> {{ 'every_events' | translate }}</a></h4>
 
       <div class="row" ng-repeat="event in (upcomingEvents.length/3 | array)">
 
@@ -97,7 +97,7 @@
                     <h1 class="m-b">{{event.title}}</h1>
                   </div>
                   <div class="col-xs-3">
-                    <span class="v-middle badge text-xs" ng-class="'bg-{{event.categories[0].name | lowercase}}'">{{event.categories[0].name}}</span>
+                    <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span>
                   </div>
               </div>
               <p>{{event.description | humanize : 500 }}</p>
@@ -122,7 +122,6 @@
 					            <span ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
                       <span ng-if="event.nb_total_places && event.amount == 0" translate>{{ 'free_admission' }}</span>
                       <span ng-if="event.amount > 0">{{event.amount | currency}} {{ 'full_price' | translate }}</span>
-                      <span ng-if="event.reduced_amount > 0"><br/>{{event.reduced_amount | currency}} {{ 'reduced_rate' | translate }}</span>
                       <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold bg-red" translate>{{ 'event_full' }}</span></div>
                     </h6>
 

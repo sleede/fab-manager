@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+youngs:
+  id: 1
+  name: "- de 25 ans"
+  conditions: "Tarif réservé aux jeunes de moins de 25 ans"
+
+unemployed:
+  id: 2
+  name: "chômeurs"
+  conditions: "Tarif préférentiel pour les demandeurs d'emploi pouvant justifier de leur situation."

@@ -1,0 +1,7 @@
+diy:
+  id: 1
+  name: Do it yourself
+
+robot:
+  id: 2
+  name: Robot

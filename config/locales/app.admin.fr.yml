@@ -46,11 +46,6 @@ fr:
 
       trainings:
         # suivre et surveiller les formations
-        add_a_new_training: "Ajouter une nouvelle formation"
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
-        associated_machines: "Machines associées"
-        number_of_tickets: "Nombre de places"
         training: "Formation"
         year_NUMBER: "Année {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Mois de {{NAME}}"  # angular interpolation
@@ -67,19 +62,55 @@ fr:
         description_was_successfully_saved: "La description a bien été enregistrée."
         training_successfully_deleted: "La formation a bien été supprimée."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+        do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
+
+      trainings_new:
+        # créer une nouvelle formation
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
 
       events:
-        # gestion et suivi des stages et ateliers
-        fablab_courses_and_workshops: "Les Stages et ateliers du Fab Lab"
+        # gestion et suivi des évènements
+        events_monitoring: "Suivi des évènements"
+        manage_filters: "Gérer les filtres"
+        fablab_events: "Les évènements du Fab Lab"
         all_events: "Tous les évènements"
         passed_events: "Les évènements déjà passés"
         events_to_come: "Les évènements à venir"
         from_DATE: "Du {{DATE}}"  # angular interpolation
         from_TIME: "De {{TIME}}"  # angular interpolation
         view_reservations: "Consulter les réservations"
+        categories: "Catégories"
+        add_a_category: "Ajouter une catégorie"
+        add_a_theme: "Ajouter une thématique"
+        age_ranges: "Tranches d'âge"
+        add_a_range: "Ajouter une tranche"
+        do_you_really_want_to_delete_this_ELEMENT: "Voulez-vous vraiment supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} ?"  # messageFormat interpolation
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Impossible de supprimer cette {ELEMENT, select, category{catégorie} theme{thématique} age_range{tranche d'âge} other{élément}} car elle est actuellement associée à {NUMBER, plural, =0{aucun évènement} one{un évènement} other{{NUMBER} évènements}}."  # messageFormat interpolation
+        at_least_one_category_is_required: "Au moins une catégorie est requise."
+        unable_to_delete_the_last_one: "Impossible de supprimer la dernière."
+        unable_to_delete_an_error_occured: "Impossible de supprimer : une erreur est survenue."
+        manage_prices_categories: "Gérer les catégories tarifaires"
+        prices_categories: "Catégories tarifaires"
+        add_a_price_category: "Ajouter une catégorie tarifaire"
+        usages_count: "Nombre d'utilisations"
+        price_category: "Catégorie tarifaire"
+        category_name: "Nom de la catégorie"
+        category_name_is_required: "Le nom de la catégorie est requis."
+        enter_here_the_conditions_under_which_this_price_is_applicable: "Saisissez ici les conditions d'application du tarif"
+        conditions_are_required: "Les conditions sont requises."
+        price_category_successfully_created: "La catégorie tarifaire a bien été créée."
+        unable_to_add_the_price_category_check_name_already_used: "Impossible d'ajouter la catégorie tarifaire, vérifiez que le nom n'est pas déjà utilisé."
+        unexpected_error_occurred_please_refresh: "Une erreur inattendue est survenue, merci de rafraîchir la page."
+        price_category_successfully_updated: "La catégorie tarifaire a bien été mise à jour."
+        unable_to_update_the_price_category: "Impossible de mettre à jour la catégorie tarifaire."
+        unable_to_delete_this_price_category_because_it_is_already_used: "Impossible de supprimer cette catégorie tarifaire car elle déjà utilisée."
+        do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
+        price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
+        price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
 
       events_new:
-        # ajouter un nouveau atelier/stage
+        # ajouter un nouvel évènement
         none: "Aucune"
         every_days: "Tous les jours"
         every_week: "Chaque semaine"
@@ -100,7 +131,7 @@ fr:
         back_to_monitoring: "Retour au suivi"
 
       pricing:
-        # gestion des abonnements, des tarifs et des crédits
+        # gestion des abonnements, des tarifs, des crédits et des codes promo
         pricing_management: "Gestion de la tarification"
         list_of_the_subscription_plans: "Liste des formules d'abonnements"
         beware_the_subscriptions_are_disabled_on_this_application: "Attention, les abonnements sont désactivés sur cette application."
@@ -131,6 +162,34 @@ fr:
         do_you_really_want_to_delete_this_subscription_plan: "Êtes-vous sûr(e) de vouloir supprimer cette formule d'abonnement ?"
         subscription_plan_was_successfully_deleted: "La formule d'abonnement a bien été supprimée."
         unable_to_delete_the_specified_subscription_an_error_occurred: "Impossible de supprimer l'abonnement spécifié, une erreur s'est produite."
+        coupons: "Codes promotionnels"
+        list_of_the_coupons: "Liste des codes promotionnels"
+        percentage_off: "Pourcentage de réduction"
+        nb_of_usages: "Nombre d'utilisations"
+        status: "Statut"
+        add_a_new_coupon: "Ajouter un code promotionnel"
+        disabled: "Désactivé"
+        expired: "Expiré"
+        sold_out: "Épuisé"
+        active: "Actif"
+        do_you_really_want_to_delete_this_coupon: "Êtes-vous sûr(e) de vouloir supprimer ce code promotionnel ?"
+        coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."
+        unable_to_delete_the_specified_coupon_already_in_use: "Impossible de supprimer le code promotionnel : il est utilisé dans des factures."
+        unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Impossible de supprimer le code promotionnel : une erreur inattendue s'est produite."
+        send_a_coupon: "Envoyer un code promo"
+        coupon: "Code promo"
+        usages: "Utilisations"
+        coupon_successfully_sent_to_USER: "Le code promotionnel a bien été envoyé à {{USER}}"  # angular interpolation
+        an_error_occurred_unable_to_send_the_coupon: "Une erreur inattendue a empêché l'envoi du code promotionnel."
+
+      coupons_new:
+        # ajouter un code promotionnel
+        add_a_coupon: "Ajouter un code promotionnel"
+        unable_to_create_the_coupon_check_code_already_used: "Impossible de créer le code promotionnel. Vérifiez que le code n'est pas utilisé."
+
+      coupons_edit:
+        # mettre à jour un code promotionnel
+        unable_to_update_the_coupon_an_error_occurred: "Impossible de mettre à jour le code promotionnel : une erreur est survenue."
 
       plans:
         new:
@@ -188,6 +247,7 @@ fr:
         day: "Jour"
         "#_of_invoice": "N° de facture"
         online_sales: "Vente en ligne"
+        wallet: "Porte-monnaie"
         refund: "Remboursement"
         documentation: "Documentation"
         2_digits_year_(eg_70): "Année sur 2 chiffres (ex. 70)"
@@ -211,6 +271,8 @@ fr:
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture. "
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
         (eg_R[/A]_will_add_/A_to_the_refund_invoices): '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
+        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Ajoute une information relative au paiement par le porte-monnaie, uniquement si cela concerne la facture."
+        (eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet): '(ex. W[/PM] ajoutera "/PM" aux factures réglées avec porte-monnaie)'
         code: "Code"
         enable_the_code: "Activer le code"
         enabled: "Activé"
@@ -233,6 +295,7 @@ fr:
         by_cash: "En espèces"
         by_cheque: "Par chèque"
         by_transfer: "Par virement"
+        by_wallet: "Par porte-monnaie"
         you_must_select_at_least_one_element_to_create_a_refund: "Vous devez sélectionner au moins un élément sur lequel créer un avoir."
         unable_to_create_the_refund: "Impossible de créer l'avoir"
         invoice_reference_successfully_saved: "La référence facture a bien été enregistrée."
@@ -291,6 +354,7 @@ fr:
         an_error_occurred_and_the_tag_deletion_failed: "Une erreur est survenue et l'étiquette n'a pas pu être supprimé."
         search_for_an_authentication_provider: "Recherchez un fournisseur d'authentification"
         add_a_new_authentication_provider: "Ajouter un nouveau fournisseur d'authentification"
+        strategy_name: "Nom de la stratégie"
         state: "État"
         unknown: "Inconnu : "
         active: "Actif"
@@ -318,13 +382,12 @@ fr:
         next_trainings: "Les prochaines formations"
         passed_trainings: "Les formations passées"
         validated_trainings: "Les formations validées"
-        courses_and_workshops: "Ateliers et stages"
-        next_courses_and_workshops: "Les prochains stages et ateliers"
-        no_upcomning_courses_or_workshops: "Aucun stage ou atelier à venir"
+        events: "Évènements"
+        next_events: "Les prochains évènements"
+        no_upcoming_events: "Aucun évènement à venir"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 place plein tarif réservée} other{{NUMBER} places plein tarif réservées}}"  # messageFormat interpolation
-        NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 place à tarif réduit réservée} other{{NUMBER} places à tarif réduit réservées}}"  # messageFormat interpolation
-        passed_courses_and_workshops: "Les stages et ateliers passés"
-        no_passed_courses_or_workshop: "Aucun stage ou atelier passé"
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 place {NAME} réservée} other{{NUMBER} places {NAME} réservées}}"  # messageFormat interpolation
+        passed_events: "Les évènements passés"
         invoices: "Factures"
         invoice_#: "Facture n°"
         download_the_refund_invoice: "Télécharger l'avoir"
@@ -383,13 +446,18 @@ fr:
         average_age: "Âge moyen :"
         years_old: "ans"
         total: "Total"
+        available_hours: "Heures disponibles à la réservation :"
+        available_tickets: "Places disponibles à la reservation :"
         gender: "Genre"
         age: "Âge"
         revenue: "Chiffre d'affaires"
         unknown: "Inconnu"
         user_id: "ID Utilisateur"
         display_more_results: "Afficher plus de résultats"
-
+        export_statistics_to_excel: "Exporter les statistiques vers Excel"
+        export_all_statistics: "Exporter toutes les statistiques"
+        export_the_current_search_results: "Exporter les résultats de la recherche courante"
+        export: "Exporter"
 
       stats_graphs:
         # graphiques de statistiques
@@ -424,7 +492,6 @@ fr:
         warning_message_of_the_training_booking_page: "Message d'avertissement sur la page de réservation d'une formation :"
         information_message_of_the_training_reservation_page: "Message d'information sur la page de réservation d'une formation :"
         message_of_the_subscriptions_page: "Message sur la page des abonnements :"
-        message_of_the_event_page_relative_to_the_reduced_rate_availability_conditions: "Message sur la page d'un évènement, relatif aux conditions d'application du tarif réduit :"
         legal_documents: "Documents légaux"
         if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user: "Si ces documents ne sont pas renseignés, aucun consentement à leur sujet ne sera demandé à l'utilisateur."
         general_terms_and_conditions_(T&C): "Conditions générales de vente (CGV)"
@@ -466,8 +533,31 @@ fr:
         disabled: "Désactivé"
         ability_for_the_users_to_cancel_their_reservations: "Possibilité pour l'utilisateur d'annuler ses réservations"
         reservations_cancelling: "Annulation des réservations"
+        reservations_reminders: "Rappel des réservations"
+        notification_sending_before_the_reservation_occurs: "Envoi de notification avant l'avènement de la réservation"
         customization_of_SETTING_successfully_saved: "La personnalisation de {{SETTING}} a bien été enregistrée."  # angular interpolation
         file_successfully_updated: "Le fichier a bien été mis à jour."
+        name_genre: "l'accord du nom"
+        machine_explications_alert: "l'explication sur la page de réservation d'une machine"
+        training_explications_alert: "l'explication sur la page de réservation d'une formation"
+        training_information_message: "l'information sur la page de réservation d'une formation"
+        subscription_explications_alert: "l'explication sur la page de souscription à un abonnement"
+        main_color: "la couleur principale"
+        secondary_color: "la couleur secondaire"
+        home_blogpost: "la brève de la page d'accueil"
+        twitter_name: "nom du flux Twitter"
+        about_title: "titre de la page \"À propos\""
+        about_body: "corps de la page \"À propos\""
+        about_contacts: "contacts sur la page \"À propos\""
+        booking_window_start: "l'heure d'ouverture"
+        booking_window_end: "l'heure de fermeture"
+        booking_move_enable: "l'activation du déplacement de réservation"
+        booking_move_delay: "délai préventif de déplacement"
+        booking_cancel_enable: "l'activation de l'annulation de réservation"
+        booking_cancel_delay: "délai préventif d'annulation"
+        reminder_enable: "l'activation du rappel de réservation"
+        reminder_delay: "délai avant envoi de la notification de rappel"
+        default_value_is_24_hours: "Si aucune valeur n'est renseignée : 24 heures."
 
       open_api_clients:
         add_new_client: "Créer un compte client"

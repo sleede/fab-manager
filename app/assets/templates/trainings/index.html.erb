@@ -1,0 +1,58 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate>{{ 'the_trainings' }}</h1>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="m-lg">
+
+  <div class="row" ng-repeat="training in (trainings.length/3 | array)">
+
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="training in trainings.slice(3*$index, 3*$index + 3)">
+
+
+      <div class="widget panel panel-default">
+        <div class="panel-heading picture" ng-if="!training.training_image" ng-click="showTraining(training)">
+          <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
+        </div>
+        <div class="panel-heading picture" style="background-image:url({{training.training_image}})" ng-if="training.training_image" ng-click="showTraining(training)">
+        </div>
+        <div class="panel-body">
+          <h1 class="m-b text-center">{{training.name}}</h1>
+        </div>
+        <div class="panel-footer no-padder">
+
+          <div class="text-center clearfix">
+            <div class="col-sm-6 b-r no-padder">
+              <div class="btn btn-default btn-block no-b padder-v red" ng-click="reserveTraining(training, $event)">
+                <i class="fa fa-bookmark"></i> {{ 'book' | translate }}
+              </div>
+            </div>
+            <div class="col-sm-6 no-padder">
+              <div class="btn btn-default btn-block padder-v no-b red" ng-click="showTraining(training)">
+                <i class="fa fa-eye"></i> {{ 'consult' | translate }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+</section>

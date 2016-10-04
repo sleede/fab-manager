@@ -1,5 +1,5 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
-<p><%= t(".body.your_are_invited_to_take_part_in_a_project") %> <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.id}" %></em></strong>.</p>
+<p><%= t(".body.your_are_invited_to_take_part_in_a_project") %> <strong><em><%= link_to @attached_object.project.name, "#{root_url}#!/projects/#{@attached_object.project.slug}" %></em></strong>.</p>
 
 <p><%= t(".body.to_accept_the_invitation_click_on_following_link") %> <%= link_to "#{root_url}project_collaborator/#{@attached_object.valid_token}", "#{root_url}project_collaborator/#{@attached_object.valid_token}" %></p>

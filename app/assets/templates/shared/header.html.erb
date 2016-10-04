@@ -27,19 +27,20 @@
     </li>
     <li class="dropdown user-profile-nav" ng-if="isAuthenticated()" uib-dropdown>
       <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                    <span class="avatar text-center">
-                      <fab-user-avatar ng-model="currentUser.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
-                      <!-- <i class="on b-white bottom"></i> -->
-                      <span class="user-name m-l-sm text-black-light font-sbold hidden-sm">{{currentUser.name}} <b class="caret"></b></span>
-                    </span>
+        <span class="avatar text-center">
+          <fab-user-avatar ng-model="currentUser.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
+          <span class="user-name m-l-sm text-black-light font-sbold hidden-sm">{{currentUser.name}} </span>
+          <b class="caret"></b>
+        </span>
       </a>
       <ul class="uib-dropdown-menu animated fadeInRight">
         <li><a href="#" ui-sref="app.logged.dashboard.profile" translate>{{ 'my_profile' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.settings" translate>{{ 'my_settings' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.projects" translate>{{ 'my_projects' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.trainings" translate>{{ 'my_trainings' }}</a></li>
-        <li><a href="#" ui-sref="app.logged.dashboard.events" translate>{{ 'my_courses_and_workshops' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.events" translate>{{ 'my_events' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'my_invoices' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.wallet" translate>{{ 'my_wallet' }}</a></li>
 
         <li class="divider"></li>
         <li><a href="#" class="text-black" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'sign_out' | translate }}</a></li>

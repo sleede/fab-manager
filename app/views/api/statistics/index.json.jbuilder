@@ -5,6 +5,9 @@ json.array!(@statistics) do |s|
   end
   json.types s.statistic_types do |t|
     json.extract! t, :id, :key, :label, :graph, :simple
+    json.custom_aggregations t.statistic_custom_aggregations do |c|
+      json.extract! c, :id, :field
+    end
     json.subtypes t.statistic_sub_types do |st|
       json.extract! st, :id, :key, :label
     end

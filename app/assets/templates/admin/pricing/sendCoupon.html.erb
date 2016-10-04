@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h3 class="text-center red" translate>{{ 'send_a_coupon' }}</h3>
+</div>
+<div class="modal-body">
+  <select-member></select-member>
+  <div class="widget panel b-a m">
+    <div class="panel-heading b-b small">
+      <h3 class="panel-title" translate>{{ 'coupon' }}</h3>
+    </div>
+    <div class="widget-content no-bg auto wrapper">
+      <table>
+        <thead>
+        <tr><th style="width:60%"></th></tr>
+        </thead>
+        <tbody>
+        <tr><td translate>{{'code'}}</td><td>{{coupon.code}}</td></tr>
+        <tr><td translate>{{'percent_off'}}</td><td>{{coupon.percent_off}} %</td></tr>
+        <tr><td translate>{{'validity_per_user'}}</td><td translate>{{coupon.validity_per_user}}</td></tr>
+        <tr><td translate>{{'valid_until'}}</td><td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
+        <tr><td translate>{{'usages'}}</td><td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
+        <tr><td translate>{{'enabled'}}</td><td>{{coupon.active | booleanFormat}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="ctrl.member == null" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

@@ -29,6 +29,7 @@ en:
         confirmation_required: "Confirmation required"
         description: "Description"
         machines: "Machines"
+        events: "Events"
         materials: "Materials"
         date: "Date"
         price: "Price"
@@ -43,8 +44,6 @@ en:
         title: "Title"
         total_: "TOTAL :"
         full_price_: "Full price:"
-        reduced_rate: "Reduced rate"
-        reduced_rate_: "Reduced rate:"
         rough_draft: "Rough draft"
         machines_and_materials: "Machines and materials"
         collaborators: "Collaborators"
@@ -54,7 +53,8 @@ en:
         confirm_and_pay: "Confirm and pay"
         your_invoice_will_be_available_soon_from_your_: "Your invoice will be available soon form your"
         add_an_event: "Add an event"
-        load_the_next_courses_and_workshops: "Load the next courses and workshops..."
+        load_the_next_events: "Load the next events..."
+        no_passed_events: "No passed events"
         dates: "Dates:"
         thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
         surname: "Surname"
@@ -86,6 +86,20 @@ en:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
+        add_a_project: "Add a project"
+        illustration: "Illustration"
+        add_an_illustration: "Add an illustration."
+        book: "Book"
+        description_is_required: "Description is required."
+        name_is_required: "Name is required."
+        all_themes: "All themes"
+        filter: 'Filter'
+        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
+        export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
+        share_on_facebook: "Share on Facebook"
+        share_on_twitter: "Share on Twitter"
+        incomplete_profile: "Incomplete profile"
+        unlimited: "Unlimited"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"
@@ -102,6 +116,8 @@ en:
         confirmation_of_password_is_required: "Confirmation of password is required."
         confirmation_of_password_is_too_short_(minimum_8_characters): "Confirmation of password is too short (minimum 8 characters)."
         confirmation_mismatch_with_password: "Confirmation mismatch with password."
+        organization_name: "Organization name"
+        organization_address: "Organization address"
         date_of_birth: "Date of birth"
         date_of_birth_is_required: "Date of birth is required."
         website: "Website"
@@ -109,17 +125,17 @@ en:
 
       project:
         # project edition form
-        name_is_required: "Name is required."
         illustration: "Illustration"
         add_an_illustration: "Add an illustration"
         CAD_file: "CAD file"
+        allowed_extensions: "Allowed extensions:"
         add_a_new_file: "Add a new file"
-        description_is_required: "Description is required."
         steps: "Steps"
         step_title: "Step title"
         add_a_picture: "Add a picture"
         change_the_picture: "Change the picture"
         delete_the_step: "Delete the step"
+        do_you_really_want_to_delete_this_step: "Do you really want to delete this step?"
         add_a_new_step: "Add a new step"
         publish_your_project: "Publish your project"
         employed_materials: "Employed materials"
@@ -128,10 +144,6 @@ en:
 
       machine:
         # machine edition form
-        name_is_required: "The name is required."
-        illustration: "Illustration"
-        add_an_illustration: "Add an illustration."
-        description_is_required: "Description is required."
         technical_specifications_are_required: "Technical specifications are required."
         attached_files_(pdf): "Attached files (pdf)"
         attach_a_file: "Attach a file"
@@ -154,7 +166,8 @@ en:
         i_have_read_and_accept_: "I have read, and accept"
         _the_general_terms_and_conditions: "the general terms and conditions."
         enter_your_card_number: "Enter your card number"
-        confirm_my_payment_of_: "Confirm my payment of"  # context: confirm my payment of $20.00
+        credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm your reservation"
+        client_credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm reservation of client"
 
       valid_reservation_modal:
         # dialog of on site payment for reservations
@@ -162,11 +175,10 @@ en:
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Here is the summary of the slots to book for the current user:"
 
       event:
-        # event edition form (courses/workshops)
+        # event edition form
         title_is_required: "Title is required."
         matching_visual: "Matching visual"
         choose_a_picture: "Choose a picture"
-        description_is_required: "Description is required."
         attachments: "Attachments"
         add_a_new_file: "Add a new file"
         event_type: "Event type"
@@ -182,11 +194,12 @@ en:
         standard_rate: "Standard rate"
         0_=_free: "0 = free"
         tickets_available: "Tickets available"
+        event_theme: "Event theme"
+        age_range: "Age range"
 
       plan:
         # subscription plan edition form
         general_informations: "General informations"
-        name_is_required: "Name is required."
         name_length_must_be_less_than_24_characters: "Name length must be less than 24 characters."
         type_is_required: "Type is required."
         group: "Group"
@@ -211,8 +224,18 @@ en:
         new_partner: "New partner"
         email_address_is_required: "Email address is required."
 
+      trainings:
+        # training edition form
+        add_a_new_training: "Add a new training"
+        validate_your_training: "Validate your training"
+        associated_machines: "Associated machines"
+        number_of_tickets: "Number of tickets"
+        public_page: "Show in training lists"
+
       user_admin:
         # partial form to edit/create an user (admin view)
+        user_profile: "Profil utilisateur"
+        warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
         group_is_required: "Group is required"
         disable_invoices_generation: "Disable invoices generation:"
@@ -226,6 +249,10 @@ en:
         provider_name_is_required: "Provider name is required."
         authentication_type: "Authentication type"
         authentication_type_is_required: "Authentication type is required."
+        data_mapping: "Data mapping"
+        expected_data_type: "Expected data type"
+        input_format: "Input format"
+        mappings: "Mappings"
 
       oauth2:
         # edition/creation form of an OAuth2 authentication provider
@@ -282,3 +309,63 @@ en:
         author: "Author"
         collaborator: "Collaborator"
         private_profile: "Private profile"
+
+      wallet:
+        # wallet
+        wallet: 'Wallet'
+        your_wallet_amount: 'Your amount available'
+        wallet_amount: 'Amount available'
+        no_transactions_for_now: 'No transactions for now'
+        operation: 'Operation'
+        operator: 'Operator'
+        amount: 'Amount'
+        credit: 'Credit'
+        debit: 'Debit'
+        credit_title: 'Credit wallet'
+        credit_label: 'Set the amount to be credited'
+        confirm_credit_label: 'Confirm the amount to be credited'
+        to_credit: 'Credit'
+        wallet_credit_successfully: "Wallet of user is credited successfully."
+        a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
+        amount_is_required: "The amount is required"
+        amount_minimum_1: "The amount minimum is 1"
+        amount_confirm_is_required: "The amount confirmation is required"
+        amount_confirm_does_not_match: "The amount confirmation does not match"
+        you_have_amount_in_wallet: "You have {{amount}} {{currency}} in your wallet"
+        client_have_amount_in_wallet: "Client has {{amount}} {{currency}} in wallet"
+        wallet_pay_reservation: "You can pay direct your reservation"
+        client_wallet_pay_reservation: "Client can pay direct reservation"
+        debit_subscription: "Debit by subscription"
+        debit_reservation_training: "Debit by reservation of training"
+        debit_reservation_machine: "Debit by reservation of machine"
+        debit_reservation_event: "Debit by reservation of event"
+        warning_uneditable_credit: "Warning: once validated, the credited amount won't be editable anymore."
+
+      coupon:
+        # promotional coupon (creation/edition form)
+        code: "Code"
+        code_is_required: "Code is required."
+        code_must_be_composed_of_capital_letters_digits_and_or_dashes: "The code must be composed of capital letters, digits and/or dashes."
+        percent_off: "Percentage off"
+        percent_off_is_required: "Percentage off is required."
+        percentage_must_be_between_0_and_100: "Percentage must be between 0 and 100."
+        validity_per_user: "Validity per user"
+        once: "Just once"
+        forever: "Each use"
+        validity_per_user_is_required: "Validity per user is required."
+        valid_until: "Valid until (included)"
+        leave_empty_for_no_limit: "Do not specify any limit by leaving the field empty."
+        max_usages: "Maximum usages allowed"
+        max_usages_must_be_equal_or_greater_than_0: "The maximum usages allowed must be greater than 0."
+        enabled: "Active"
+
+      coupon_input:
+        # coupon (input zone for users)
+        i_have_a_coupon: "I have a coupon!"
+        code_: "Code:"
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get {{PERCENT}}% discount."  # angular interpolation
+        unable_to_apply_the_coupon_because_disabled: "Unable to apply the coupon: this code was disabled."
+        unable_to_apply_the_coupon_because_expired: "Unable to apply the coupon: this code has expired."
+        unable_to_apply_the_coupon_because_sold_out: "Unable to apply the coupon: this code reached its quota."
+        unable_to_apply_the_coupon_because_already_used: "Unable to apply the coupon: you have already used this code once before."
+        unable_to_apply_the_coupon_because_rejected: "This code does not exists."

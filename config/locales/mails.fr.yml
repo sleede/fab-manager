@@ -116,6 +116,7 @@ fr:
       subject: "Un compte utilisateur a été créé"
       body:
         new_account_created: "Un nouveau compte utilisateur vient d'être créé sur la plateforme :"
+        account_for_organization: "Ce compte gère une structure :"
         invoicing_disabled_html: "La génération de factures est <strong>désactivée</strong> pour cet utilisateur."
 
     notify_admin_subscribed_plan:
@@ -129,6 +130,12 @@ fr:
         please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  # messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
+
+    notify_member_reservation_reminder:
+      subject: "Rappel de réservation"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Ceci est un rappel concernant votre réservation <strong>%{RESERVABLE}</strong> qui aura lieu le <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Cette réservation concerne les créneaux suivants :"
 
     notify_member_avoir_ready:
       subject: "Votre facture d'avoir du FabLab"
@@ -239,6 +246,39 @@ fr:
         generation_status_html: "La génération de factures vient d'être <strong>{STATUS, select, true{désactivée} other{activée}}</strong> pour l'utilisateur {NAME}."  # messageFormat interpolation
         disabled: "Désormais, aucune facture ne sera générée pour les paiement de cet utilisateur effectués à l'accueil."
         enabled: "Désormais, tous les paiement de cet utilisateur effectués à l'accueil, donneront lieu à la génération d'une facture."
+
+    notify_user_wallet_is_credited:
+      subject: "Votre porte-monnaie a bien été crédité"
+      body:
+        wallet_credit_html: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'administrateur."
+
+    notify_admin_user_wallet_is_credited:
+      subject: "Le porte-monnaie d'un utilisateur a bien été crédité"
+      body:
+        wallet_credit_html: "Le porte-monnaie du membre %{USER} a bien été crédité de %{AMOUNT} par l'administrateur %{ADMIN}."
+
+    notify_admin_export_complete:
+      subject: "Export terminé"
+      body:
+        you_asked_for_an_export: "Vous avez demandé un export"
+        statistics_global: "de toutes les statistiques"
+        statistics_account: "des statistiques d'inscriptions"
+        statistics_event: "des statistiques sur les évènements"
+        statistics_machine: "des statistiques d'heures machines"
+        statistics_project: "des statistiques sur les projets"
+        statistics_subscription: "des statistiques d'abonnements"
+        statistics_training: "des statistiques sur les formations"
+        users_members: "de la liste des membres"
+        users_subscriptions: "de la liste des abonnements"
+        users_reservations: "de la liste des réservations"
+        click_to_download: "La génération est terminée. Pour télécharger le fichier Excel, cliquez"
+        here: "ici"
+
+    notify_member_about_coupon:
+      subject: "Code promo"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % sur tout le site en utilisant le code promo %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Ce code promo est valable {USAGE, plural, =1{une seule fois} other{plusieurs fois}} : pour tous vos achats, dès maintenant {DATE, select, NO-DATE{et sans limitation de durée} other{et jusqu'au {DATE}}}."
 
     shared:
       hello: "Bonjour %{user_name}"

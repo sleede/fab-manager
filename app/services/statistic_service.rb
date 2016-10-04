@@ -68,7 +68,9 @@ class StatisticService
           eventId: r.event_id,
           name: r.event_name,
           eventDate: r.event_date,
-          reservationId: r.reservation_id
+          reservationId: r.reservation_id,
+          eventTheme: r.event_theme,
+          ageRange: r.age_range
         }.merge(user_info_stat(r)))
         stat.stat = (type == 'booking' ? r.nb_places : r.nb_hours)
         stat.save
@@ -119,10 +121,14 @@ class StatisticService
   def subscriptions_list(options = default_options)
     result = []
     InvoiceItem.where('invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date', options)
-      .eager_load(subscription: [:plan, user: [:profile, :group]]).each do |i|
+      .eager_load(invoice: [:coupon], subscription: [:plan, user: [:profile, :group]]).each do |i|
         unless i.invoice.is_a?(Avoir)
           sub = i.subscription
           if sub
+            ca = i.amount.to_i / 100.0
+            unless i.invoice.coupon_id.nil?
+              ca = ca - ( ca * i.invoice.coupon.percent_off / 100.0 )
+            end
             u = sub.user
             p = sub.plan
             result.push OpenStruct.new({
@@ -136,7 +142,7 @@ class StatisticService
               duration: p.duration.to_i,
               subscription_id: sub.id,
               invoice_item_id: i.id,
-              ca: i.amount.to_i / 100.0
+              ca: ca
             }.merge(user_info(u)))
           end
         end
@@ -198,10 +204,12 @@ class StatisticService
           date: options[:start_date].to_date,
           reservation_id: r.id,
           event_id: r.reservable.id,
-          event_type: r.reservable.categories.first.name,
+          event_type: r.reservable.category.name,
           event_name: r.reservable.name,
           event_date: slot.start_at.to_date,
-          nb_places: r.nb_reserve_places + r.nb_reserve_reduced_places,
+          event_theme: (r.reservable.event_themes.first ? r.reservable.event_themes.first.name : ''),
+          age_range: (r.reservable.age_range_id ? r.reservable.age_range.name : ''),
+          nb_places: r.total_booked_seats,
           nb_hours: difference_in_hours(slot.start_at, slot.end_at),
           ca: calcul_ca(r.invoice)
         }.merge(user_info(u))) if r.reservable
@@ -333,6 +341,7 @@ class StatisticService
   def calcul_ca(invoice)
     return nil unless invoice
     ca = 0
+    # sum each items in the invoice (+ for invoices/- for refunds)
     invoice.invoice_items.each do |ii|
       unless ii.subscription_id
         if invoice.is_a?(Avoir)
@@ -342,6 +351,11 @@ class StatisticService
         end
       end
     end
+    # subtract coupon discount from invoices and refunds
+    unless invoice.coupon_id.nil?
+      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
+    end
+    # divide the result by 100 to convert from centimes to monetary unit
     ca == 0 ? ca : ca / 100.0
   end
 
@@ -349,6 +363,10 @@ class StatisticService
     ca = 0
     invoice.invoice_items.each do |ii|
       ca = ca - ii.amount.to_i
+    end
+    # subtract coupon discount from the refund
+    unless invoice.coupon_id.nil?
+      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
     end
     ca == 0 ? ca : ca / 100.0
   end

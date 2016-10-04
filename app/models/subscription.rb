@@ -18,11 +18,47 @@ class Subscription < ActiveRecord::Base
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
-  def save_with_payment(invoice = true)
+  def save_with_payment(invoice = true, coupon_code = nil)
     if valid?
-      customer = Stripe::Customer.retrieve(user.stp_customer_id)
       begin
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, card: card_token)
+        customer = Stripe::Customer.retrieve(user.stp_customer_id)
+        invoice_items = []
+
+        unless coupon_code.nil?
+          cp = Coupon.find_by_code(coupon_code)
+          if not cp.nil? and cp.status(user.id) == 'active'
+            @coupon = cp
+            total = plan.amount
+            invoice_items << Stripe::InvoiceItem.create(
+                customer: user.stp_customer_id,
+                amount: -(total  * cp.percent_off / 100.0).to_i,
+                currency: Rails.application.secrets.stripe_currency,
+                description: "coupon #{cp.code} - subscription"
+            )
+          else
+            raise InvalidCouponError
+          end
+        end
+
+        # only add a wallet invoice item if pay subscription
+        # dont add if pay subscription + reservation
+        if invoice
+          @wallet_amount_debit = get_wallet_amount_debit
+          if @wallet_amount_debit != 0
+            invoice_items << Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -@wallet_amount_debit,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "wallet -#{@wallet_amount_debit / 100.0}"
+            )
+          end
+        end
+
+        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
+        # very important to set expired_at to nil that can allow method is_new? to return true
+        # for send the notification
+        # TODO: Refactoring
+        update_column(:expired_at, nil) unless new_record?
         self.stp_subscription_id = new_subscription.id
         self.canceled_at = nil
         self.expired_at = Time.at(new_subscription.current_period_end)
@@ -32,37 +68,52 @@ class Subscription < ActiveRecord::Base
 
         # generate invoice
         stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
-        generate_invoice(stp_invoice.id).save if invoice
+        if invoice
+          invoc = generate_invoice(stp_invoice.id, coupon_code)
+          # debit wallet
+          wallet_transaction = debit_user_wallet
+          if wallet_transaction
+            invoc.wallet_amount = @wallet_amount_debit
+            invoc.wallet_transaction_id = wallet_transaction.id
+          end
+          invoc.save
+        end
         # cancel subscription after create
         cancel
         return true
       rescue Stripe::CardError => card_error
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         logger.error card_error
         errors[:card] << card_error.message
         return false
       rescue Stripe::InvalidRequestError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Invalid parameters were supplied to Stripe's API
         logger.error e
         errors[:payment] << e.message
         return false
       rescue Stripe::AuthenticationError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Authentication with Stripe's API failed
         # (maybe you changed API keys recently)
         logger.error e
         errors[:payment] << e.message
         return false
       rescue Stripe::APIConnectionError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Network communication with Stripe failed
         logger.error e
         errors[:payment] << e.message
         return false
       rescue Stripe::StripeError => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Display a very generic error to the user, and maybe send
         # yourself an email
         logger.error e
         errors[:payment] << e.message
         return false
       rescue => e
+        clear_wallet_and_goupon_invoice_items(invoice_items)
         # Something else happened, completely unrelated to Stripe
         logger.error e
         errors[:payment] << e.message
@@ -71,22 +122,52 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def save_with_local_payment(invoice = true)
+  def save_with_local_payment(invoice = true, coupon_code = nil)
     if valid?
+      # very important to set expired_at to nil that can allow method is_new? to return true
+      # for send the notification
+      # TODO: Refactoring
+      update_column(:expired_at, nil) unless new_record?
       self.stp_subscription_id = nil
       self.canceled_at = nil
       set_expired_at
-      save!
-      UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-      generate_invoice.save if invoice
-      return true
+      if save
+        UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
+        if invoice
+          invoc = generate_invoice(nil, coupon_code)
+          @wallet_amount_debit = get_wallet_amount_debit
+
+          # debit wallet
+          wallet_transaction = debit_user_wallet
+          if wallet_transaction
+            invoc.wallet_amount = @wallet_amount_debit
+            invoc.wallet_transaction_id = wallet_transaction.id
+          end
+          invoc.save
+        end
+        return true
+      else
+        return false
+      end
     else
       return false
     end
   end
 
-  def generate_invoice(stp_invoice_id = nil)
-    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: plan.amount, stp_invoice_id: stp_invoice_id)
+  def generate_invoice(stp_invoice_id = nil, coupon_code = nil)
+    coupon_id = nil
+    total = plan.amount
+
+    unless coupon_code.nil?
+      cp = Coupon.find_by_code(coupon_code)
+      if not cp.nil? and cp.status(user.id) == 'active'
+        @coupon = cp
+        coupon_id = cp.id
+        total = plan.amount - (plan.amount * cp.percent_off / 100.0)
+      end
+    end
+
+    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id)
     invoice.invoice_items.push InvoiceItem.new(amount: plan.amount, stp_invoice_item_id: stp_subscription_id, description: plan.name, subscription_id: self.id)
     invoice
   end
@@ -209,4 +290,35 @@ class Subscription < ActiveRecord::Base
     plan.is_a?(PartnerPlan)
   end
 
+  def get_wallet_amount_debit
+    total = plan.amount
+    if @coupon
+      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+    end
+    wallet_amount = (user.wallet.amount * 100).to_i
+    return wallet_amount >= total ? total : wallet_amount
+  end
+
+  def debit_user_wallet
+    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
+      amount = @wallet_amount_debit / 100.0
+      return WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+    end
+  end
+
+  def clear_wallet_and_goupon_invoice_items(invoice_items)
+    begin
+      invoice_items.each(&:delete)
+    rescue Stripe::InvalidRequestError => e
+      logger.error e
+    rescue Stripe::AuthenticationError => e
+      logger.error e
+    rescue Stripe::APIConnectionError => e
+      logger.error e
+    rescue Stripe::StripeError => e
+      logger.error e
+    rescue => e
+      logger.error e
+    end
+  end
 end

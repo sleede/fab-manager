@@ -408,6 +408,14 @@ http://localhost:9200/stats/_mapping?pretty
               },
               "userId" : {
                 "type" : "long"
+              },
+              "ageRange" : {
+                "type" : "string",
+                "index" : "not_analyzed"
+              },
+              "eventTheme" : {
+                "type" : "string",
+                "index" : "not_analyzed"
               }
             }
           }

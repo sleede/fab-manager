@@ -42,6 +42,8 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/uploads"
     run "mkdir -p #{shared_path}/invoices"
+    run "mkdir -p #{shared_path}/exports"
+    run "mkdir -p #{shared_path}/plugins"
     put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit #{shared_path}/config/database.yml and add your username and password"
     put File.read("config/application.yml"), "#{shared_path}/config/application.yml"
@@ -91,6 +93,20 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/invoices/ #{release_path}/"
   end
   after "deploy:finalize_update", 'deploy:symlink_invoices_dir'
+
+  desc "Symlinks the exports dir"
+  task :symlink_exports_dir, :roles => :app do
+    run "rm -rf #{release_path}/exports"
+    run "ln -nfs #{shared_path}/exports/ #{release_path}/"
+  end
+  after "deploy:finalize_update", 'deploy:symlink_exports_dir'
+
+  desc "Symlinks the plugins dir"
+  task :symlink_plugins_dir, :roles => :app do
+    run "rm -rf #{release_path}/plugins"
+    run "ln -nfs #{shared_path}/plugins/ #{release_path}/"
+  end
+  after "deploy:finalize_update", 'deploy:symlink_plugins_dir'
 
   namespace :assets do
     desc 'Run the precompile task locally and rsync with shared'

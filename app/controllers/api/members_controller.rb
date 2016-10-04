@@ -63,7 +63,7 @@ class API::MembersController < API::ApiController
 
   def update
     authorize @member
-    @flow_worker = MembersFlowWorker.new(@member)
+    @flow_worker = MembersProcessor.new(@member)
 
     if user_params[:group_id] and @member.group_id != user_params[:group_id].to_i and @member.subscribed_plan != nil
       # here a group change is requested but unprocessable, handle the exception
@@ -91,29 +91,50 @@ class API::MembersController < API::ApiController
   # export subscriptions
   def export_subscriptions
     authorize :export
-    @datas = Subscription.includes(:plan, :user).all
-    respond_to do |format|
-      format.html
-      format.xls
+
+    export = Export.where({category:'users', export_type: 'subscriptions'}).where('created_at > ?', Subscription.maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'users', export_type: 'subscriptions', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
     end
   end
 
   # export reservations
   def export_reservations
     authorize :export
-    @datas = Reservation.includes(:user, :slots).all
-    respond_to do |format|
-      format.html
-      format.xls
+
+    export = Export.where({category:'users', export_type: 'reservations'}).where('created_at > ?', Reservation.maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'users', export_type: 'reservations', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
     end
   end
 
   def export_members
     authorize :export
-    @datas = User.with_role(:member).includes(:group, :subscriptions, :profile)
-    respond_to do |format|
-      format.html
-      format.xls
+
+    export = Export.where({category:'users', export_type: 'members'}).where('created_at > ?', User.with_role(:member).maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'users', export_type: 'members', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
     end
   end
 
@@ -126,7 +147,7 @@ class API::MembersController < API::ApiController
 
     @account = User.find_by_auth_token(token)
     if @account
-      @flow_worker = MembersFlowWorker.new(@account)
+      @flow_worker = MembersProcessor.new(@account)
       begin
         if @flow_worker.merge_from_sso(@member)
           @member = @account
@@ -188,11 +209,7 @@ class API::MembersController < API::ApiController
     # ILIKE => PostgreSQL case-insensitive LIKE
     @query = @query.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
 
-    # remove unmerged profiles from list
     @members = @query.to_a
-    @members.delete_if { |u| u.need_completion? }
-
-    @members
 
   end
 
@@ -214,11 +231,7 @@ class API::MembersController < API::ApiController
       end
     end
 
-    # remove unmerged profiles from list
     @members = @members.to_a
-    @members.delete_if { |u| u.need_completion? }
-
-    @members
   end
 
   def mapping
@@ -234,17 +247,19 @@ class API::MembersController < API::ApiController
 
     def user_params
       if current_user.id == params[:id].to_i
-        params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact,
+        params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
                                       profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
                                      :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                     :user_avatar_attributes => [:id, :attachment, :_destroy], :address_attributes => [:id, :address]])
+                                     user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address],
+                                     organization_attributes: [:id, :name, address_attributes: [:id, :address]]])
 
       elsif current_user.is_admin?
-        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled, :is_allow_contact,
+        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled, :is_allow_contact, :is_allow_newsletter,
                                       :group_id, training_ids: [], tag_ids: [],
                                       profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
                                       :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                      user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address]])
+                                      user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address],
+                                      organization_attributes: [:id, :name, address_attributes: [:id, :address]]])
 
       end
     end

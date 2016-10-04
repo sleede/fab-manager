@@ -1,6 +1,6 @@
 en:
   layouts:
-    notifications_mailer: 
+    notifications_mailer:
       see_you_later: "See you soon on {GENDER, select, other{the}}"  # messageFormat interpolation
       sincerely: "Sincerely,"
       signature: "The Fab Lab team."
@@ -116,6 +116,7 @@ en:
       subject: "A user account has been created"
       body:
         new_account_created: "A new user account has been created on the website:"
+        account_for_organization: "This account manage an organization:"
         invoicing_disabled_html: "Invoicing generation is <strong>disabled</strong> for this user."
 
     notify_admin_subscribed_plan:
@@ -129,6 +130,12 @@ en:
         please_find_attached_html: "Please find as attached file your invoice from {DATE}, with an amount of {AMOUNT} concerning your {TYPE, select, Reservation{reservation} other{subscription}}."  # messageFormat interpolation
         invoice_in_your_dashboard_html:  "You can access your invoice in %{DASHBOARD} on the Fab Lab website."
         your_dashboard: "your dashboard"
+
+    notify_member_reservation_reminder:
+      subject: "Reservation reminder"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "This is a reminder about your reservation <strong>%{RESERVABLE}</strong> to be held on <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "This reservation concerns the following slots:"
 
     notify_member_avoir_ready:
       subject: "Your FabLab's refund invoice"
@@ -207,7 +214,7 @@ en:
         is_changing_its_auth_system_and_will_now_use: "is actually changing its user identification system and will use"
         instead_of: "instead of"
         consequence_of_the_modification: "Because of this change you won't be able to login to the website with your actual usernames"
-        to_use_the_platform_thanks_for: "to keep on using the website, please"
+        to_use_the_platform_thanks_for: "To keep on using the website, please"
         create_an_account_on: "create an account on"
         or_use_an_existing_account_clicking_here: "or use an existing account by clicking here"
         in_case_of_problem_enter_the_following_code: "In case of problem with this link, you can enter the following code at your first connection attempt in order to migrate your actual account into the new authentification system:"
@@ -239,6 +246,39 @@ en:
         generation_status_html: "Invoicing issuing has been <strong>{STATUS, select, true{disabled} other{enabled}}</strong> for the user {NAME}."  # messageFormat interpolation
         disabled: "From now on, no invoice will be issued when the user pays at the reception."
         enabled: "From now on, all payments made by this user at the reception will lead to invoicing issuing. "
+
+    notify_user_wallet_is_credited:
+      subject: "Your wallet has been credited"
+      body:
+        wallet_credit_html: "Your wallet has been credited %{AMOUNT} by administrator."
+
+    notify_admin_user_wallet_is_credited:
+      subject: "The wallet of an user has been credited"
+      body:
+        wallet_credit_html: "The wallet of member %{USER} has been credited %{AMOUNT} by administrator %{ADMIN}."
+
+    notify_admin_export_complete:
+      subject: "Export completed"
+      body:
+        you_asked_for_an_export: "You asked for an export"
+        statistics_global: "of all the statistics"
+        statistics_account: "of the registration statistics"
+        statistics_event: "of statistics about events"
+        statistics_machine: "of statistics about machine hours"
+        statistics_project: "of statistics about projects"
+        statistics_subscription: "of subscription statistics"
+        statistics_training: "of statistics about trainings"
+        users_members: "of the members' list"
+        users_subscriptions: "of the subscriptions' list"
+        users_reservations: "of the reservations' list"
+        click_to_download: "Excel file generated successfully. To download it, click"
+        here: "here"
+
+    notify_member_about_coupon:
+      subject: "Coupon"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% on the whole site with the code %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "This coupon is valid {USAGE, plural, =1{just once} other{many times}}: for all your purchases, from now {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
 
     shared:
       hello: "Hello %{user_name}"

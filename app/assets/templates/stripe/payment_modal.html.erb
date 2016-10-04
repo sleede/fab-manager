@@ -10,14 +10,8 @@
       <form name="stripeForm" stripe:form="payment" class="form-horizontal">
         <div class="panel-body">
 
-          <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
-            <div class="col-sm-12 text-sm">
-              <input type="checkbox" name="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/> {{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a>
-            </div>
-              <div ng-if="!cgv">
-                  <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
-              </div>
-          </div>
+          <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
+          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
 
           <div class="form-group" ng-class="{'has-error': stripeForm.number.$dirty && stripeForm.number.$invalid}">
             <div class="col-sm-12">
@@ -37,9 +31,19 @@
             </div>
           </div>
 
+          <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
+            <div class="col-sm-12 text-sm checkbox-group">
+              <input type="checkbox" name="acceptCondition" id="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/>
+              <label for="acceptCondition">{{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a></label>
+            </div>
+              <div ng-if="!cgv">
+                  <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
+              </div>
+          </div>
+
         </div>
         <div class="panel-footer no-padder">
-           <button type="submit" class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-disabled="stripeForm.$invalid || attempting">{{ 'confirm_my_payment_of_' | translate }} {{ amount | currency }}</button>
+           <button type="submit" class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-disabled="stripeForm.$invalid || attempting" translate translate-values="{AMOUNT:(amount | currency)}" translate-interpolation="messageformat">{{ 'confirm_payment_of_html'}}</button>
         </div>
       </form>
 

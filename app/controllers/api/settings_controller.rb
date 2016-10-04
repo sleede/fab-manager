@@ -7,7 +7,7 @@ class API::SettingsController < API::ApiController
 
   def update
     authorize Setting
-    @setting = Setting.find_by(name: params[:name])
+    @setting = Setting.find_or_initialize_by(name: params[:name])
     if @setting.update(setting_params)
       render status: :ok
     else

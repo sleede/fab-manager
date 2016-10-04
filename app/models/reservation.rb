@@ -6,6 +6,9 @@ class Reservation < ActiveRecord::Base
   accepts_nested_attributes_for :slots, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
+  has_many :tickets
+  accepts_nested_attributes_for :tickets, allow_destroy: false
+
   has_one :invoice, -> {where(type: nil)}, as: :invoiced, dependent: :destroy
 
   validates_presence_of :reservable_id, :reservable_type
@@ -17,13 +20,15 @@ class Reservation < ActiveRecord::Base
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
   after_save :update_event_nb_free_places, if: Proc.new { |reservation| reservation.reservable_type == 'Event' }
+  after_create :debit_user_wallet
 
-  #
+  ##
   # Generate an array of {Stripe::InvoiceItem} with the elements in the current reservation, price included.
   # The training/machine price is depending of the member's group, subscription and credits already used
   # @param on_site {Boolean} true if an admin triggered the call
-  #
-  def generate_invoice_items(on_site = false)
+  # @param coupon_code {String} pass a valid code to appy a coupon
+  ##
+  def generate_invoice_items(on_site = false, coupon_code = nil)
 
     # returning array
     invoice_items = []
@@ -97,10 +102,9 @@ class Reservation < ActiveRecord::Base
 
       # === Event reservation ===
       when Event
-        if reservable.reduced_amount and nb_reserve_reduced_places
-          amount = reservable.amount * nb_reserve_places + (reservable.reduced_amount * nb_reserve_reduced_places)
-        else
-          amount = reservable.amount * nb_reserve_places
+        amount = reservable.amount * nb_reserve_places
+        tickets.each do |ticket|
+          amount += ticket.booked * ticket.event_price_category.amount
         end
         slots.each do |slot|
           description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
@@ -124,25 +128,53 @@ class Reservation < ActiveRecord::Base
 
     end
 
+    # === Coupon ===
+    unless coupon_code.nil?
+      cp = Coupon.find_by_code(coupon_code)
+      if not cp.nil? and cp.status(user.id) == 'active'
+        @coupon = cp
+        total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+        unless on_site
+          invoice_items << Stripe::InvoiceItem.create(
+              customer: user.stp_customer_id,
+              amount: -(total  * cp.percent_off / 100).to_i,
+              currency: Rails.application.secrets.stripe_currency,
+              description: "coupon #{cp.code} - reservation"
+          )
+        end
+      else
+        raise InvalidCouponError
+      end
+    end
+
+    @wallet_amount_debit = get_wallet_amount_debit
+    if @wallet_amount_debit != 0 and !on_site
+      invoice_items << Stripe::InvoiceItem.create(
+        customer: user.stp_customer_id,
+        amount: -@wallet_amount_debit,
+        currency: Rails.application.secrets.stripe_currency,
+        description: "wallet -#{@wallet_amount_debit / 100.0}"
+      )
+    end
+
     # let's return the resulting array of items
     invoice_items
   end
 
-  def save_with_payment
+  def save_with_payment(coupon_code = nil)
     build_invoice(user: user)
-    invoice_items = generate_invoice_items
+    invoice_items = generate_invoice_items(false, coupon_code)
     if valid?
       # TODO: refactoring
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
-        if subscription.save_with_payment(false)
+        if subscription.save_with_payment(false, coupon_code)
           self.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
-          total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-          self.invoice.total = total
+          set_total_and_coupon(coupon_code)
           save!
           #
           # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
@@ -170,49 +202,49 @@ class Reservation < ActiveRecord::Base
           #
           # IMPORTANT NOTE: here, we have to create an invoice manually and pay it to pay all waiting stripe invoice items
           #
-          invoice = Stripe::Invoice.create(
+          stp_invoice = Stripe::Invoice.create(
             customer: user.stp_customer_id,
           )
-          invoice.pay
+          stp_invoice.pay
           card.delete if card
-          self.stp_invoice_id = invoice.id
-          self.invoice.stp_invoice_id = invoice.id
-          self.invoice.total = invoice.total
+          self.stp_invoice_id = stp_invoice.id
+          self.invoice.stp_invoice_id = stp_invoice.id
+          set_total_and_coupon(coupon_code)
           save!
         rescue Stripe::CardError => card_error
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.info card_error
           errors[:card] << card_error.message
           return false
         rescue Stripe::InvalidRequestError => e
           # Invalid parameters were supplied to Stripe's API
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::AuthenticationError => e
           # Authentication with Stripe's API failed
           # (maybe you changed API keys recently)
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::APIConnectionError => e
           # Network communication with Stripe failed
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::StripeError => e
           # Display a very generic error to the user, and maybe send
           # yourself an email
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue => e
           # Something else happened, completely unrelated to Stripe
-          clear_payment_info(card, invoice, invoice_items)
+          clear_payment_info(card, stp_invoice, invoice_items)
           logger.error e
           errors[:payment] << e.message
           return false
@@ -248,16 +280,24 @@ class Reservation < ActiveRecord::Base
   end
 
 
-  def save_with_local_payment
+  def save_with_local_payment(coupon_code = nil)
     if user.invoicing_disabled?
       if valid?
+
+        ### generate invoice only for calcul price, TODO refactor!!
+        build_invoice(user: user)
+        generate_invoice_items(true, coupon_code)
+        @wallet_amount_debit = get_wallet_amount_debit
+        self.invoice = nil
+        ###
+
         save!
         UsersCredits::Manager.new(reservation: self).update_credits
         return true
       end
     else
       build_invoice(user: user)
-      generate_invoice_items(true)
+      generate_invoice_items(true, coupon_code)
     end
 
     if valid?
@@ -266,16 +306,14 @@ class Reservation < ActiveRecord::Base
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, expired_at: nil}
         if subscription.save_with_local_payment(false)
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, description: subscription.plan.name, subscription_id: subscription.id)
-          total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-          self.invoice.total = total
+          set_total_and_coupon(coupon_code)
           save!
         else
           errors[:card] << subscription.errors[:card].join
           return false
         end
       else
-        total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
-        self.invoice.total = total
+        set_total_and_coupon(coupon_code)
         save!
       end
 
@@ -284,6 +322,15 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  def total_booked_seats
+    total = nb_reserve_places
+    if tickets.count > 0
+      total += tickets.map(&:booked).map(&:to_i).reduce(:+)
+    end
+    total
+  end
+
+  private
   def machine_not_already_reserved
     already_reserved = false
     self.slots.each do |slot|
@@ -323,13 +370,62 @@ class Reservation < ActiveRecord::Base
 
   def update_event_nb_free_places
     if reservable_id_was.blank?
-      nb_free_places = reservable.nb_free_places - nb_reserve_places - nb_reserve_reduced_places
+      # simple reservation creation, we subtract the number of booked seats from the previous number
+      nb_free_places = reservable.nb_free_places - total_booked_seats
     else
+      # reservation moved from another date (for recurring events)
+      seats = total_booked_seats
+
       reservable_was = Event.find(reservable_id_was)
-      nb_free_places = reservable_was.nb_free_places + nb_reserve_places + nb_reserve_reduced_places
+      nb_free_places = reservable_was.nb_free_places + seats
       reservable_was.update_columns(nb_free_places: nb_free_places)
-      nb_free_places = reservable.nb_free_places - nb_reserve_places - nb_reserve_reduced_places
+      nb_free_places = reservable.nb_free_places - seats
     end
     reservable.update_columns(nb_free_places: nb_free_places)
+  end
+
+  def get_wallet_amount_debit
+    total = (self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
+    if plan_id.present?
+      plan = Plan.find(plan_id)
+      total += plan.amount
+    end
+    if @coupon
+      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+    end
+    wallet_amount = (user.wallet.amount * 100).to_i
+
+    wallet_amount >= total ? total : wallet_amount
+  end
+
+  def debit_user_wallet
+    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
+      amount = @wallet_amount_debit / 100.0
+      wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
+      if !user.invoicing_disabled? and wallet_transaction
+        self.invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
+      end
+    end
+  end
+
+  ##
+  # Set the total price to the reservation's invoice, summing its whole items.
+  # Additionally a coupon may be applied to this invoice to make a discount on the total price
+  # @param [coupon_code] {String} optional coupon code to apply to the invoice
+  ##
+  def set_total_and_coupon(coupon_code = nil)
+    total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+
+    unless coupon_code.nil?
+      cp = Coupon.find_by_code(coupon_code)
+      if not cp.nil? and cp.status(user.id) == 'active'
+        total = total - (total  * cp.percent_off / 100.0)
+        self.invoice.coupon_id = cp.id
+      else
+        raise InvalidCouponError
+      end
+    end
+
+    self.invoice.total = total
   end
 end

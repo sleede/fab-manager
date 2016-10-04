@@ -29,7 +29,7 @@
         <div class="form-group">
 
           <div class="col-sm-6" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
-            <input type="first_name"
+            <input type="text"
                    name="first_name"
                    ng-model="user.profile_attributes.first_name"
                    class="form-control"
@@ -39,7 +39,7 @@
           </div>
           <div class="m-b visible-xs"></div>
           <div class="col-sm-6" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
-            <input type="last_name"
+            <input type="text"
                    name="last_name"
                    ng-model="user.profile_attributes.last_name"
                    class="form-control"
@@ -53,7 +53,7 @@
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-user"></i></span>
-              <input type="username"
+              <input type="text"
                      name="username"
                      ng-model="user.username"
                      class="form-control"
@@ -105,11 +105,52 @@
                      ng-model="user.password_confirmation"
                      class="form-control"
                      placeholder="{{ 'type_your_password_again' | translate }}"
-                     required ng-minlength="8" m
-                     atch="user.password">
+                     required ng-minlength="8"
+                     match="user.password">
             </div>
             <span class="help-block" ng-show="signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$error.required" translate>{{ 'password_confirmation_is_required' }}</span>
             <span class="help-block" ng-show="signupForm.password_confirmation.$error.match" translate>{{ 'password_does_not_match_with_confirmation' }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 checkbox-group">
+            <input type="checkbox"
+                   name="organization"
+                   id="organization"
+                   ng-model="user.organization"
+                   value="false"/>
+            <label for="organization" translate>{{ 'i_am_an_organization' }}</label>
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="user.organization" ng-class="{'has-error': signupForm.organization_name.$dirty && signupForm.organization_name.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+              <input type="text"
+                     name="organization_name"
+                     ng-model="user.profile_attributes.organization_attributes.name"
+                     class="form-control"
+                     placeholder="{{ 'name_of_your_organization' | translate }}"
+                     ng-required="user.organization">
+            </div>
+            <span class="help-block" ng-show="signupForm.organization_name.$dirty && signupForm.organization_name.$error.required" translate>{{ 'organization_name_is_required' }}</span>
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="user.organization" ng-class="{'has-error': signupForm.organization_address.$dirty && signupForm.organization_address.$invalid}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+              <input type="text"
+                     name="organization_address"
+                     ng-model="user.profile_attributes.organization_attributes.address_attributes.address"
+                     class="form-control"
+                     placeholder="{{ 'address_of_your_organization' | translate }}"
+                     ng-required="user.organization">
+            </div>
+            <span class="help-block" ng-show="signupForm.organization_address.$dirty && signupForm.organization_address.$error.required" translate>{{ 'organization_address_is_required' }}</span>
           </div>
         </div>
 
@@ -159,24 +200,36 @@
         </div>
 
         <div class="form-group" ng-class="{'has-error': signupForm.is_allow_contact.$dirty && signupForm.is_allow_contact.$invalid}">
-          <div class="col-sm-12">
+          <div class="col-sm-12 checkbox-group">
             <input type="checkbox"
                    name="is_allow_contact"
+                   id="is_allow_contact"
                    ng-model="user.is_allow_contact"
                    value="true"/>
-            <span translate>{{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</span>
+            <label for="is_allow_contact" translate>{{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.is_allow_newsletter.$dirty && signupForm.is_allow_newsletter.$invalid}">
+          <div class="col-sm-12 checkbox-group">
+            <input type="checkbox"
+                   name="is_allow_newsletter"
+                   id="is_allow_newsletter"
+                   ng-model="user.is_allow_newsletter"
+                   value="true"/>
+            <label for="is_allow_newsletter" translate>{{ 'i_accept_to_receive_informations_from_the_fablab' }}</label>
           </div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': signupForm.cgu.$dirty && signupForm.cgu.$invalid}" ng-show="cgu">
-          <div class="col-sm-12">
+          <div class="col-sm-12 checkbox-group">
             <input type="checkbox"
                    name="cgu"
+                   id="cgu"
                    ng-model="user.cgu"
                    value="true"
                    ng-required="cgu != null"/>
-            <span translate>{{ 'i_ve_read_and_i_accept_' }}</span>
-            <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+            <label for="cgu"><span translate>{{ 'i_ve_read_and_i_accept_' }}</span> <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a></label>
           </div>
         </div>
         <div ng-if="!cgu">

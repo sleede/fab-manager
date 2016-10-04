@@ -1,0 +1,40 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-7 col-sm-7 col-md-8 b-l">
+      <section class="heading-title">
+        <h1>{{ 'coupon' | translate }} : {{ coupon.name }}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-3 col-md-3">
+      <section class="heading-actions wrapper">
+        <a class="btn btn-lg btn-block btn-default m-t-xs" ui-sref="app.admin.pricing" translate>{{ 'cancel' }}</a>
+      </section>
+
+    </div>
+
+
+  </div>
+</section>
+
+<div class="row no-gutter">
+  <div class=" col-sm-12 col-md-9 b-r nopadding">
+
+    <div id="couponForm">
+      <form name="couponForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group">
+
+        <ng-include src="'<%= asset_path 'admin/coupons/_form.html' %>'"></ng-include>
+
+        <div class="panel-footer no-padder">
+          <input type="button" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="couponForm.$invalid" ng-click="updateCoupon()"/>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

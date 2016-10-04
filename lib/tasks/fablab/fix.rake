@@ -8,5 +8,13 @@ namespace :fablab do
         ' AND reservations.reservable_type = \'Event\''
       )
     end
+
+    task assign_category_to_uncategorized_events: :environment do
+      c = Category.find_or_create_by!({name: 'No category'})
+      Event.where(category: nil).each do |e|
+        e.category = c
+        e.save!
+      end
+    end
   end
 end

@@ -1,0 +1,10 @@
+<div ng-if="currentUser.role != 'admin'">
+  <h3 class="m-t-xs" ng-if="walletAmount > 0 && price > 0" ng-bind-html="'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
+  <p ng-if="walletAmount > 0 && price > 0 && amount === 0" class="text-italic">{{'wallet_pay_reservation' | translate}}</p>
+  <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
+</div>
+<div ng-if="currentUser.role == 'admin'">
+  <h3 class="m-t-xs" ng-if="walletAmount > 0 && price > 0" ng-bind-html="'client_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
+  <p ng-if="walletAmount > 0 && price > 0 && amount === 0" class="text-italic">{{'client_wallet_pay_reservation' | translate}}</p>
+  <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'client_credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
+</div>

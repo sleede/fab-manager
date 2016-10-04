@@ -3,8 +3,8 @@
 ##
 # Controller used in the prices edition page
 ##
-Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', 'TrainingsPricing', '$filter', 'Credit', 'Pricing', 'Plan', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', '_t'
-, ($scope, $state, $uibModal, TrainingsPricing, $filter, Credit, Pricing, Plan, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, _t) ->
+Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', 'TrainingsPricing', '$filter', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', '_t'
+, ($scope, $state, $uibModal, TrainingsPricing, $filter, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, _t) ->
 
   ### PUBLIC SCOPE ###
   ## List of machines prices (not considering any plan)
@@ -33,6 +33,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
   ## List of machines
   $scope.machines = machinesPromise
+
+  ## List of coupons
+  $scope.coupons = couponsPromise
 
   ## The plans list ordering. Default: by group
   $scope.orderPlans = 'group_id'
@@ -275,7 +278,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   ##
   $scope.deletePlan = (plans, id) ->
     if typeof id != 'number'
-      console.error('[editPricingController::deletePlan] Error: invalid id parameter')
+      console.error('[EditPricingController::deletePlan] Error: invalid id parameter')
     else
       # open a confirmation dialog
       dialogs.confirm
@@ -287,10 +290,10 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
         # the admin has confirmed, delete the plan
         Plan.delete {id: id}, (res) ->
           growl.success(_t('subscription_plan_was_successfully_deleted'))
-          $scope.plans.splice(findPlanIdxById(plans, id), 1)
+          $scope.plans.splice(findItemIdxById(plans, id), 1)
 
         , (error) ->
-          console.error('[editPricingController::deletePlan] Error: '+error.statusText) if error.statusText
+          console.error('[EditPricingController::deletePlan] Error: '+error.statusText) if error.statusText
           growl.error(_t('unable_to_delete_the_specified_subscription_an_error_occurred'))
 
 
@@ -308,12 +311,70 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
 
 
-  ### PRIVATE SCOPE ###
+  ##
+  # Delete a coupon from the server's database and, in case of success, from the list in memory
+  # @param coupons {Array<Object>} should be called with $scope.coupons
+  # @param id {number} ID of the coupon to delete
+  ##
+  $scope.deleteCoupon = (coupons, id) ->
+    if typeof id != 'number'
+      console.error('[EditPricingController::deleteCoupon] Error: invalid id parameter')
+    else
+      # open a confirmation dialog
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('confirmation_required')
+            msg: _t('do_you_really_want_to_delete_this_coupon')
+      , ->
+        # the admin has confirmed, delete the coupon
+        Coupon.delete {id: id}, (res) ->
+          growl.success(_t('coupon_was_successfully_deleted'))
+          $scope.coupons.splice(findItemIdxById(coupons, id), 1)
 
-  findPlanIdxById = (plans, id)->
-    (plans.map (plan)->
-      plan.id
-    ).indexOf(id)
+        , (error) ->
+          console.error('[EditPricingController::deleteCoupon] Error: '+error.statusText) if error.statusText
+          if error.status == 422
+            growl.error(_t('unable_to_delete_the_specified_coupon_already_in_use'))
+          else
+            growl.error(_t('unable_to_delete_the_specified_coupon_an_unexpected_error_occurred'))
+
+
+
+  ##
+  # Open a modal allowing to select an user and send him the details of the provided coupon
+  # @param coupon {Object} The coupon to send
+  ##
+  $scope.sendCouponToUser = (coupon) ->
+    $uibModal.open
+      templateUrl: '<%= asset_path "admin/pricing/sendCoupon.html" %>'
+      resolve:
+        coupon: -> coupon
+      size: 'md'
+      controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', ($scope, $uibModalInstance, Coupon, coupon, _t) ->
+
+        ## Member, receiver of the coupon
+        $scope.ctrl =
+          member: null
+
+        ## Details of the coupon to send
+        $scope.coupon = coupon
+
+        ## Callback to validate sending of the coupon
+        $scope.ok = ->
+          Coupon.send {coupon_code: coupon.code, user_id: $scope.ctrl.member.id}, (res) ->
+            growl.success(_t('coupon_successfully_sent_to_USER', {USER: $scope.ctrl.member.name}))
+            $uibModalInstance.close({user_id: $scope.ctrl.member.id})
+          , (err) ->
+            growl.error(_t('an_error_occurred_unable_to_send_the_coupon'))
+
+        ## Callback to close the modal and cancel the sending process
+        $scope.cancel = ->
+          $uibModalInstance.dismiss('cancel')
+      ]
+
+
+  ### PRIVATE SCOPE ###
 
   ##
   # Kind of constructor: these actions will be realized first when the controller is loaded
@@ -326,6 +387,19 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
     for plan in $scope.plans
       unless $scope.trainingCreditsGroups[plan.id]?
         $scope.trainingCreditsGroups[plan.id] = []
+
+
+
+  ##
+  # Retrieve an item index by its ID from the given array of objects
+  # @param items {Array<{id:number}>}
+  # @param id {number}
+  # @returns {number} item index in the provided array
+  ##
+  findItemIdxById = (items, id)->
+    (items.map (item)->
+      item.id
+    ).indexOf(id)
 
 
 

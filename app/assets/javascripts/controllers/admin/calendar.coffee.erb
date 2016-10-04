@@ -4,8 +4,8 @@
 # Controller used in the calendar management page
 ##
 
-Application.Controllers.controller "AdminCalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'availabilitiesPromise', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t'
-($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, availabilitiesPromise, bookingWindowStart, bookingWindowEnd, machinesPromise, _t) ->
+Application.Controllers.controller "AdminCalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) ->
 
 
 
@@ -16,9 +16,6 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
   # The bookings can be positioned every half hours
   BOOKING_SNAP = '00:30:00'
-
-  # The calendar will be initialized positioned under 9:00 AM
-  DEFAULT_CALENDAR_POSITION = '09:00:00'
 
   # We do not allow the creation of slots that are not a multiple of 60 minutes
   SLOT_MULTIPLE = 60
@@ -36,50 +33,23 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   ## bind the availabilities slots with full-Calendar events
   $scope.eventSources = []
   $scope.eventSources.push
-    events: availabilitiesPromise
+    url: '/api/availabilities'
     textColor: 'black'
 
-  ## after fullCalendar loads, provides access to its methods through $scope.calendar.fullCalendar()
-  $scope.calendar = null
-
   ## fullCalendar (v2) configuration
-  $scope.calendarConfig =
-    timezone: Fablab.timezone
-    lang: Fablab.fullcalendar_locale
-    header:
-      left: 'month agendaWeek'
-      center: 'title'
-      right: 'today prev,next'
-    firstDay: 1 # Week start on monday (France)
-    scrollTime: DEFAULT_CALENDAR_POSITION
+  $scope.calendarConfig = CalendarConfig
     slotDuration: BASE_SLOT
     snapDuration: BOOKING_SNAP
-    allDayDefault: false
-    minTime: "00:00:00"
-    maxTime: "24:00:00"
-    height: 'auto'
-    buttonIcons:
-      prev: 'left-single-arrow'
-      next: 'right-single-arrow'
-    timeFormat:
-      agenda:'H:mm'
-      month: 'H(:mm)'
-    axisFormat: 'H:mm'
-
-    allDaySlot: false
-    defaultView: 'agendaWeek'
     selectable: true
     selecHelper: true
+    minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
+    maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
     select: (start, end, jsEvent, view) ->
       calendarSelectCb(start, end, jsEvent, view)
     eventClick: (event, jsEvent, view)->
       calendarEventClickCb(event, jsEvent, view)
     eventRender: (event, element, view) ->
       eventRenderCb(event, element)
-
-  ## fullCalendar time bounds (up & down)
-  $scope.calendarConfig.minTime = moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss'))
-  $scope.calendarConfig.maxTime = moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss'))
 
 
 
@@ -141,7 +111,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
           # update the machine_ids attribute
           $scope.availability.machine_ids = data.machine_ids
           $scope.availability.title = data.title
-          $scope.calendar.fullCalendar 'rerenderEvents'
+          uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
           # notify the admin
           growl.success(_t('the_machine_was_successfully_removed_from_the_slot'))
         , (data, status) -> # failed
@@ -180,7 +150,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
             end: -> end
         # when the modal is closed, we send the slot to the server for saving
         modalInstance.result.then (availability) ->
-          $scope.calendar.fullCalendar 'renderEvent',
+          uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
             id: availability.id
             title: availability.title,
             start: availability.start_at
@@ -189,12 +159,13 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
             backgroundColor: availability.backgroundColor
             borderColor: availability.borderColor
             tag_ids: availability.tag_ids
+            tags: availability.tags
             machine_ids: availability.machine_ids
           , true
         , ->
-          $scope.calendar.fullCalendar('unselect')
+          uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
 
-    $scope.calendar.fullCalendar('unselect')
+    uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
 
 
 
@@ -209,7 +180,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     # if the user has clicked on the delete event button, delete the event
     if ($(jsEvent.target).hasClass('remove-event'))
       Availability.delete id: event.id, ->
-        $scope.calendar.fullCalendar 'removeEvents', event.id
+        uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents', event.id
         for _event, i in $scope.eventSources[0].events
           if _event.id == event.id
             $scope.eventSources[0].events.splice(i,1)
@@ -231,12 +202,12 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   # @see http://fullcalendar.io/docs/event_rendering/eventRender/
   ##
   eventRenderCb = (event, element) ->
-    if event.tag_ids.length > 0
-      Availability.get {id: event.id}, (avail) ->
-        html = ''
-        for tag in avail.tags
-          html += "<span class='label label-success text-white'>#{tag.name}</span> "
-        element.find('.fc-title').append("<br/>"+html)
+    if event.tags.length > 0
+      html = ''
+      for tag in event.tags
+        html += "<span class='label label-success text-white'>#{tag.name}</span> "
+      element.find('.fc-title').append("<br/>"+html)
+    return
 
 ]
 

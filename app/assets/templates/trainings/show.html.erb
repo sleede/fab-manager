@@ -1,0 +1,45 @@
+<div>
+
+  <section class="heading b-b">
+    <div class="row no-gutter">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <section class="heading-btn">
+          <a href="#" ng-click="cancel($event)"><i class="fa fa-long-arrow-left "></i></a>
+        </section>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-7 b-l b-r-md">
+        <section class="heading-title">
+          <h1>{{ training.name }}</h1>
+        </section>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 b-t hide-b-md">
+        <section class="heading-actions wrapper">
+          <a ng-click="reserveTraining(training, $event)" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ng-if="!isAuthorized('admin')" translate>{{ 'book_this_training' }}</a>
+
+          <a ui-sref="app.admin.trainings_edit({id: training.id})" ng-if="isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs"><i class="fa fa-edit"></i> {{ 'edit' | translate }}</a>
+          <a ng-click="delete(training)" ng-if="isAuthorized('admin')" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <div class="row no-gutter">
+    <div class="col-sm-12 col-md-12 col-lg-8 b-r-lg">
+
+      <div class="article wrapper-lg" >
+
+        <div class="article-thumbnail" ng-if="training.training_image">
+          <img ng-src="{{training.training_image}}" alt="{{training.name}}" class="img-responsive">
+        </div>
+
+        <p class="intro" ng-bind-html="training.description | toTrusted"></p>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

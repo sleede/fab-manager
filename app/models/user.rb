@@ -45,12 +45,17 @@ class User < ActiveRecord::Base
   has_many :tags, through: :user_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
 
+  has_one :wallet, dependent: :destroy
+
+  has_many :exports, dependent: :destroy
+
   # fix for create admin user
   before_save do
     self.email.downcase! if self.email
   end
 
   before_create :assign_default_role
+  after_create :create_a_wallet
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_admin_invoicing_changed, if: :invoicing_disabled_changed?
@@ -229,7 +234,18 @@ class User < ActiveRecord::Base
     if parsed[1] == 'user'
       self[parsed[2].to_sym]
     elsif parsed[1] == 'profile'
-      self.profile[parsed[2].to_sym]
+      case sso_mapping
+        when 'profile.avatar'
+          self.profile.user_avatar.remote_attachment_url
+        when 'profile.address'
+          self.profile.address.address
+        when 'profile.organization_name'
+          self.profile.organization.name
+        when 'profile.organization_address'
+          self.profile.organization.address.address
+        else
+          self.profile[parsed[2].to_sym]
+      end
     end
   end
 
@@ -241,11 +257,22 @@ class User < ActiveRecord::Base
     if sso_mapping.to_s.start_with? 'user.'
       self[sso_mapping[5..-1].to_sym] = data unless data.nil?
     elsif sso_mapping.to_s.start_with? 'profile.'
-      if sso_mapping.to_s == 'profile.avatar'
-        self.profile.user_avatar ||= UserAvatar.new
-        self.profile.user_avatar.remote_attachment_url = data
-      else
-        self.profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
+      case sso_mapping.to_s
+        when 'profile.avatar'
+          self.profile.user_avatar ||= UserAvatar.new
+          self.profile.user_avatar.remote_attachment_url = data
+        when 'profile.address'
+          self.profile.address ||= Address.new
+          self.profile.address.address = data
+        when 'profile.organization_name'
+          self.profile.organization ||= Organization.new
+          self.profile.organization.name = data
+        when 'profile.organization_address'
+          self.profile.organization ||= Organization.new
+          self.profile.organization.address ||= Address.new
+          self.profile.organization.address.address = data
+        else
+          self.profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
     end
   end
@@ -309,6 +336,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.mapping
+    # we protect some fields as they are designed to be managed by the system and must not be updated externally
+    blacklist = %w(id encrypted_password reset_password_token reset_password_sent_at remember_created_at
+       sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip confirmation_token confirmed_at
+       confirmation_sent_at unconfirmed_email failed_attempts unlock_token locked_at created_at updated_at stp_customer_id slug
+       provider auth_token merged_at)
+    User.column_types
+        .map{|k,v| [k, v.type.to_s]}
+        .delete_if { |col| blacklist.include?(col[0]) }
+  end
+
   protected
   def confirmation_required?
     false
@@ -331,6 +369,10 @@ class User < ActiveRecord::Base
 
   def create_stripe_customer
     StripeWorker.perform_async(:create_stripe_customer, id)
+  end
+
+  def create_a_wallet
+    self.create_wallet
   end
 
   def notify_admin_when_user_is_created

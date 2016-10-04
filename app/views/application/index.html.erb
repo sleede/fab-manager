@@ -65,6 +65,9 @@
     <link rel="shortcut icon" type="image/ico" href="<%= CustomAsset.get_url('favicon-file') %>">
   <% end %>
 
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.events_list.the_fablab_s_events') %>" href="<%= rss_events_path %>.xml">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -101,7 +104,12 @@
 
   </section> <!-- /.vbox -->
 
-  <div class="app-generator"><span class="text-sm">Powered by <a href="http://www.fab-manager.com" target="_blank">Fab Manager</a></span></div>
+  <div class="app-generator">
+    <span class="app-version" ng-if="currentUser && currentUser.role == 'admin'" uib-tooltip="{{'version' | translate}} {{version.version}}">
+      <i class="fa fa-question-circle" aria-label="Version ?"></i>
+    </span>
+    <span class="text-sm">Powered by <a href="http://www.fab-manager.com" target="_blank">Fab Manager</a></span>
+  </div>
 
 <%= javascript_include_tag 'application' %>
 

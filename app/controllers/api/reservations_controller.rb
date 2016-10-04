@@ -20,19 +20,23 @@ class API::ReservationsController < API::ApiController
   end
 
   def create
-    if current_user.is_admin?
-      @reservation = Reservation.new(reservation_params)
-      is_reserve = @reservation.save_with_local_payment
-    else
-      @reservation = Reservation.new(reservation_params.merge(user_id: current_user.id))
-      is_reserve = @reservation.save_with_payment
-    end
-    if is_reserve
-      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
+    begin
+      if current_user.is_admin?
+        @reservation = Reservation.new(reservation_params)
+        is_reserve = @reservation.save_with_local_payment(coupon_params[:coupon_code])
+      else
+        @reservation = Reservation.new(reservation_params.merge(user_id: current_user.id))
+        is_reserve = @reservation.save_with_payment(coupon_params[:coupon_code])
+      end
+      if is_reserve
+        SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
 
-      render :show, status: :created, location: @reservation
-    else
-      render json: @reservation.errors, status: :unprocessable_entity
+        render :show, status: :created, location: @reservation
+      else
+        render json: @reservation.errors, status: :unprocessable_entity
+      end
+    rescue InvalidCouponError
+      render json: {coupon_code: 'wrong coupon code or expired'}, status:  :unprocessable_entity
     end
   end
 
@@ -52,7 +56,12 @@ class API::ReservationsController < API::ApiController
 
   def reservation_params
     params.require(:reservation).permit(:user_id, :message, :reservable_id, :reservable_type, :card_token, :plan_id,
-                                        :nb_reserve_places, :nb_reserve_reduced_places,
+                                        :nb_reserve_places,
+                                        tickets_attributes: [:event_price_category_id, :booked],
                                         slots_attributes: [:id, :start_at, :end_at, :availability_id, :offered])
+  end
+
+  def coupon_params
+    params.permit(:coupon_code)
   end
 end

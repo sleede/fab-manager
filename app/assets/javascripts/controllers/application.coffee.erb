@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t'
-, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t) ->
+Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t', 'Version'
+, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) ->
 
 
 
@@ -14,14 +14,24 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
   ### PUBLIC SCOPE ###
 
+  ## Fab-manager's version
+  $scope.version =
+      version: ''
+
   ##
   # Set the current user to the provided value and initialize the session
   # @param user {Object} Rails/Devise user
   ##
   $scope.setCurrentUser = (user) ->
-    $rootScope.currentUser = user
-    Session.create(user);
-    getNotifications()
+    unless angular.isUndefinedOrNull(user)
+      $rootScope.currentUser = user
+      Session.create(user);
+      getNotifications()
+      # fab-manager's app-version
+      if user.role == 'admin'
+        $scope.version = Version.get()
+      else
+        $scope.version = {version: ''}
 
 
   ##
@@ -88,6 +98,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         # default user's parameters
         $scope.user =
           is_allow_contact: true
+          is_allow_newsletter: false
 
         # Errors display
         $scope.alerts = []
@@ -98,11 +109,18 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
         $scope.ok = ->
           # try to create the account
           $scope.alerts = []
+          # remove 'organization' attribute
+          orga = $scope.user.organization
+          delete $scope.user.organization
+          # register on server
           Auth.register($scope.user).then (user) ->
             # creation successful
             $uibModalInstance.close(user)
           , (error) ->
             # creation failed...
+            # restore organization param
+            $scope.user.organization = orga
+            # display errors
             angular.forEach error.data.errors, (v, k) ->
               angular.forEach v, (err) ->
                 $scope.alerts.push
@@ -197,6 +215,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     # try to retrieve any currently logged user
     Auth.login().then (user) ->
       $scope.setCurrentUser(user)
+      # force users to complete their profile if they are not
       if user.need_completion
         $state.transitionTo('app.logged.profileCompletion')
     , (error) ->

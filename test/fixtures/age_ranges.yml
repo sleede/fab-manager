@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+youngs:
+  id: 1
+  name: De 10 à 21 ans
+
+adults:
+  id: 2
+  name: A partir de 18 ans
+
+seniors:
+  id: 3
+  name: A partir de 65 ans

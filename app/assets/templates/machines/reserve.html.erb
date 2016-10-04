@@ -78,6 +78,8 @@
           <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeMachineSlot(machineSlot, $event)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
         </div>
 
+        <coupon show="machineSlotsValid() && (!plansAreShown || selectedPlan)" coupon="coupon.applied" has-select-slot="machineSlotsValid()" user-id="{{ctrl.member.id}}"></coupon>
+
         <span ng-hide="fablabWithoutPlans">
           <div ng-if="machineSlotsValid() && !ctrl.member.subscribed_plan" ng-show="!plansAreShown">
             <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices' }}</p>

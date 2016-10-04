@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613093842) do
+ActiveRecord::Schema.define(version: 20160915105234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "age_ranges", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
+
+  add_index "age_ranges", ["slug"], name: "index_age_ranges_on_slug", unique: true, using: :btree
 
   create_table "assets", force: :cascade do |t|
     t.integer  "viewable_id"
@@ -86,10 +95,25 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
+
+  add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "components", force: :cascade do |t|
     t.string "name", limit: 255, null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.integer  "percent_off"
+    t.datetime "valid_until"
+    t.integer  "max_usages"
+    t.boolean  "active"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "validity_per_user"
   end
 
   create_table "credits", force: :cascade do |t|
@@ -114,6 +138,26 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_price_categories", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "price_category_id"
+    t.integer  "amount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "event_price_categories", ["event_id"], name: "index_event_price_categories_on_event_id", using: :btree
+  add_index "event_price_categories", ["price_category_id"], name: "index_event_price_categories_on_price_category_id", using: :btree
+
+  create_table "event_themes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
+
+  add_index "event_themes", ["slug"], name: "index_event_themes_on_slug", unique: true, using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "title",           limit: 255
     t.text     "description"
@@ -121,24 +165,36 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "updated_at"
     t.integer  "availability_id"
     t.integer  "amount"
-    t.integer  "reduced_amount"
     t.integer  "nb_total_places"
     t.integer  "nb_free_places"
     t.integer  "recurrence_id"
+    t.integer  "age_range_id"
+    t.integer  "category_id"
   end
 
   add_index "events", ["availability_id"], name: "index_events_on_availability_id", using: :btree
+  add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
   add_index "events", ["recurrence_id"], name: "index_events_on_recurrence_id", using: :btree
 
-  create_table "events_categories", force: :cascade do |t|
-    t.integer  "event_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "events_event_themes", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "event_theme_id"
   end
 
-  add_index "events_categories", ["category_id"], name: "index_events_categories_on_category_id", using: :btree
-  add_index "events_categories", ["event_id"], name: "index_events_categories_on_event_id", using: :btree
+  add_index "events_event_themes", ["event_id"], name: "index_events_event_themes_on_event_id", using: :btree
+  add_index "events_event_themes", ["event_theme_id"], name: "index_events_event_themes_on_event_theme_id", using: :btree
+
+  create_table "exports", force: :cascade do |t|
+    t.string   "category"
+    t.string   "export_type"
+    t.string   "query"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "key"
+  end
+
+  add_index "exports", ["user_id"], name: "index_exports_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -190,10 +246,15 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.string   "type",                   limit: 255
     t.boolean  "subscription_to_expire"
     t.text     "description"
+    t.integer  "wallet_amount"
+    t.integer  "wallet_transaction_id"
+    t.integer  "coupon_id"
   end
 
+  add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
+  add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
 
   create_table "licences", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -244,6 +305,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.string   "local_model"
     t.string   "api_endpoint"
     t.string   "api_data_type"
+    t.jsonb    "transformation"
   end
 
   add_index "o_auth2_mappings", ["o_auth2_provider_id"], name: "index_o_auth2_mappings_on_o_auth2_provider_id", using: :btree
@@ -287,6 +349,15 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "profile_id"
+  end
+
+  add_index "organizations", ["profile_id"], name: "index_organizations_on_profile_id", using: :btree
+
   create_table "plans", force: :cascade do |t|
     t.string   "name",               limit: 255
     t.integer  "amount"
@@ -305,6 +376,13 @@ ActiveRecord::Schema.define(version: 20160613093842) do
   end
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
+
+  create_table "price_categories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "conditions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "prices", force: :cascade do |t|
     t.integer  "group_id"
@@ -357,6 +435,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title",       limit: 255
+    t.integer  "step_nb"
   end
 
   add_index "project_steps", ["project_id"], name: "index_project_steps_on_project_id", using: :btree
@@ -418,10 +497,9 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "reservable_id"
-    t.string   "reservable_type",           limit: 255
-    t.string   "stp_invoice_id",            limit: 255
+    t.string   "reservable_type",   limit: 255
+    t.string   "stp_invoice_id",    limit: 255
     t.integer  "nb_reserve_places"
-    t.integer  "nb_reserve_reduced_places"
   end
 
   add_index "reservations", ["reservable_id", "reservable_type"], name: "index_reservations_on_reservable_id_and_reservable_type", using: :btree
@@ -463,6 +541,18 @@ ActiveRecord::Schema.define(version: 20160613093842) do
 
   add_index "slots", ["availability_id"], name: "index_slots_on_availability_id", using: :btree
   add_index "slots", ["reservation_id"], name: "index_slots_on_reservation_id", using: :btree
+
+  create_table "statistic_custom_aggregations", force: :cascade do |t|
+    t.text     "query"
+    t.integer  "statistic_type_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "field"
+    t.string   "es_index"
+    t.string   "es_type"
+  end
+
+  add_index "statistic_custom_aggregations", ["statistic_type_id"], name: "index_statistic_custom_aggregations_on_statistic_type_id", using: :btree
 
   create_table "statistic_fields", force: :cascade do |t|
     t.integer  "statistic_index_id"
@@ -554,6 +644,17 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.string "name", limit: 255, null: false
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.integer  "reservation_id"
+    t.integer  "event_price_category_id"
+    t.integer  "booked"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "tickets", ["event_price_category_id"], name: "index_tickets_on_event_price_category_id", using: :btree
+  add_index "tickets", ["reservation_id"], name: "index_tickets_on_reservation_id", using: :btree
+
   create_table "trainings", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.datetime "created_at"
@@ -561,6 +662,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.integer  "nb_total_places"
     t.string   "slug",            limit: 255
     t.text     "description"
+    t.boolean  "public_page",                 default: true
   end
 
   add_index "trainings", ["slug"], name: "index_trainings_on_slug", unique: true, using: :btree
@@ -645,6 +747,7 @@ ActiveRecord::Schema.define(version: 20160613093842) do
     t.string   "uid"
     t.string   "auth_token"
     t.datetime "merged_at"
+    t.boolean  "is_allow_newsletter"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree
@@ -676,12 +779,51 @@ ActiveRecord::Schema.define(version: 20160613093842) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "wallet_transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "wallet_id"
+    t.integer  "transactable_id"
+    t.string   "transactable_type"
+    t.string   "transaction_type"
+    t.integer  "amount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "wallet_transactions", ["transactable_type", "transactable_id"], name: "index_wallet_transactions_on_transactable", using: :btree
+  add_index "wallet_transactions", ["user_id"], name: "index_wallet_transactions_on_user_id", using: :btree
+  add_index "wallet_transactions", ["wallet_id"], name: "index_wallet_transactions_on_wallet_id", using: :btree
+
+  create_table "wallets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "amount",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
+
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
+  add_foreign_key "event_price_categories", "events"
+  add_foreign_key "event_price_categories", "price_categories"
+  add_foreign_key "events", "categories"
+  add_foreign_key "events_event_themes", "event_themes"
+  add_foreign_key "events_event_themes", "events"
+  add_foreign_key "exports", "users"
+  add_foreign_key "invoices", "coupons"
+  add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
+  add_foreign_key "organizations", "profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "statistic_custom_aggregations", "statistic_types"
+  add_foreign_key "tickets", "event_price_categories"
+  add_foreign_key "tickets", "reservations"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
+  add_foreign_key "wallet_transactions", "users"
+  add_foreign_key "wallet_transactions", "wallets"
+  add_foreign_key "wallets", "users"
 end

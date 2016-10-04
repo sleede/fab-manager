@@ -46,11 +46,6 @@ en:
 
       trainings:
         # track and monitor the trainings
-        add_a_new_training: "Add a new training"
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
-        associated_machines: "Associated machines"
-        number_of_tickets: "Number of tickets"
         training: "Training"
         year_NUMBER: "Year {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Month of {{NAME}}"  # angular interpolation
@@ -67,19 +62,55 @@ en:
         description_was_successfully_saved: "Description was successfully saved."
         training_successfully_deleted: "Training successfully deleted."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Unable to delete the training because some users already booked it."
+        do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
+
+      trainings_new:
+        # create a new training
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
 
       events:
-        # courses and workshops tracking and management
-        fablab_courses_and_workshops: "Fablab courses and workshops"
+        # events tracking and management
+        events_monitoring: "Events monitoring"
+        manage_filters: "Manage filters"
+        fablab_events: "Fablab events"
         all_events: "All events"
         passed_events: "Passed events"
         events_to_come: "Events to come"
         from_DATE: "From {{DATE}}"  # angular interpolation
         from_TIME: "From {{TIME}}"  # angular interpolation
         view_reservations: "View reservations"
+        categories: "Categories"
+        add_a_category: "Add a category"
+        add_a_theme: "Add a theme"
+        age_ranges: "Age ranges"
+        add_a_range: "Add a range"
+        do_you_really_want_to_delete_this_ELEMENT: "Do you really want to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}?"  # messageFormat interpolation
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Unable to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}} because it is already associated with {NUMBER, plural, =0{no events} one{one event} other{{NUMBER} events}}."  # messageFormat interpolation
+        at_least_one_category_is_required: "At least one category is required."
+        unable_to_delete_the_last_one: "Unable to delete the last one."
+        unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
+        manage_prices_categories: "Manage prices' categories"
+        prices_categories: "Prices' categories"
+        add_a_price_category: "Add a price's category"
+        usages_count: "Usages count"
+        price_category: "Price category"
+        category_name: "Category's name"
+        category_name_is_required: "Category's name is required."
+        enter_here_the_conditions_under_which_this_price_is_applicable: "Enter here the conditions under which this price is applicable"
+        conditions_are_required: "Conditions are required."
+        price_category_successfully_created: "Price category successfully created."
+        unable_to_add_the_price_category_check_name_already_used: "Unable to add the price category, check that the name is not already used."
+        unexpected_error_occurred_please_refresh: "An unexpected error occurred, please refresh the page."
+        price_category_successfully_updated: "Price category successfully updated."
+        unable_to_update_the_price_category: "Unable to update the price category."
+        unable_to_delete_this_price_category_because_it_is_already_used: "Unable to delete this price category because it is already used."
+        do_you_really_want_to_delete_this_price_category: "Do you really want to delete this price category?"
+        price_category_successfully_deleted: "Price category successfully deleted."
+        price_category_deletion_failed: "Price category deletion failed."
 
       events_new:
-        # add a new workshop/course
+        # add a new event
         none: "None"
         every_days: "Every days"
         every_week: "Every week"
@@ -100,7 +131,7 @@ en:
         back_to_monitoring: "Back to monitoring"
 
       pricing:
-        # subscriptions, prices and credits management
+        # subscriptions, prices, credits and coupons management
         pricing_management: "Pricing management"
         list_of_the_subscription_plans: "List of the subscription plans"
         beware_the_subscriptions_are_disabled_on_this_application: "Beware, the subscriptions are disabled on this application."
@@ -129,8 +160,36 @@ en:
         changes_have_been_successfully_saved: "Changes have been successfully saved."
         credit_was_successfully_saved: "Credit was successfully saved."
         do_you_really_want_to_delete_this_subscription_plan: "Do you really want to delete this subscription plan?"
-        subscription_plan_was_successfully_deleted: "Subscription plan was successfully delete."
+        subscription_plan_was_successfully_deleted: "Subscription plan was successfully deleted."
         unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
+        coupons: "Coupons"
+        list_of_the_coupons: "List of the coupons"
+        percentage_off: "Percentage off"
+        nb_of_usages: "Number of usages"
+        status: "Status"
+        add_a_new_coupon: "Add a new coupon"
+        disabled: "Disabled"
+        expired: "Expired"
+        sold_out: "Sold out"
+        active: "Active"
+        do_you_really_want_to_delete_this_coupon: "Do you really want to delete this coupon?"
+        coupon_was_successfully_deleted: "Coupon was successfully deleted."
+        unable_to_delete_the_specified_coupon_already_in_use: "Unable to delete the specified coupon: it is already used with some invoices."
+        unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "Unable to delete the specified coupon: an unexpected error occurred."
+        send_a_coupon: "Send a coupon"
+        coupon: "Coupon"
+        usages: "Usages"
+        coupon_successfully_sent_to_USER: "Coupon successfully sent to {{USER}}"  # angular interpolation
+        an_error_occurred_unable_to_send_the_coupon: "An unexpected error prevent from sending the coupon."
+
+      coupons_new:
+        # ajouter un code promotionnel
+        add_a_coupon: "Add a coupon"
+        unable_to_create_the_coupon_check_code_already_used: "Unable to create the coupon. Please check that the code is not already used"
+
+      coupons_edit:
+        # mettre à jour un code promotionnel
+        unable_to_update_the_coupon_an_error_occurred: "Unable to update the coupon: an error occurred."
 
       plans:
         new:
@@ -188,6 +247,7 @@ en:
         day: "Day"
         "#_of_invoice": "# of invoice"
         online_sales: "Online sales"
+        wallet: "Wallet"
         refund: "Refund"
         documentation: "Documentation"
         2_digits_year_(eg_70): "2 digits year (eg. 70)"
@@ -211,6 +271,8 @@ en:
         add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Add a notice regarding refunds, only if the invoice is concerned."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "This will never be added when an online sales notice is present."
         (eg_R[/A]_will_add_/A_to_the_refund_invoices): '(ed. R[/A] will add "/A" to the refund invoices)'
+        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Add a notice regarding the wallet, only if the invoice is concerned."
+        (eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet): '(eg. W[/PM] will add "/PM" to the invoices settled with wallet)'
         code: "Code"
         enable_the_code: "Enable the code"
         enabled: "Enabled"
@@ -233,6 +295,7 @@ en:
         by_cash: "By cash"
         by_cheque: "By cheque"
         by_transfer: "By transfer"
+        by_wallet: "By wallet"
         you_must_select_at_least_one_element_to_create_a_refund: "You must select at least one element, to create a refund."
         unable_to_create_the_refund: "Unable to create the refund"
         invoice_reference_successfully_saved: "Invoice reference successfully saved."
@@ -291,6 +354,7 @@ en:
         an_error_occurred_and_the_tag_deletion_failed: "An error occurred and the tag deletion failed."
         search_for_an_authentication_provider: "Search for an authentication provider"
         add_a_new_authentication_provider: "Add a new authentication provider"
+        strategy_name: "Strategy's name"
         state: "State"
         unknown: "Unknown: "
         active: "Active"
@@ -318,13 +382,12 @@ en:
         next_trainings: "Next trainings"
         passed_trainings: "Passed trainings"
         validated_trainings: "Validated trainings"
-        courses_and_workshops: "Courses and workshops"
-        next_courses_and_workshops: "Next courses and workshops"
-        no_upcomning_courses_or_workshops: "No upcoming courses and workshops"
+        events: "Events"
+        next_events: "Next events"
+        no_upcoming_events: "No upcoming events"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
-        NUMBER_reduced_rate_tickets_reserved: "{NUMBER, plural, =0{} one{1 reduced rate ticket reserved} other{{NUMBER} reduced rate tickets reserved}}"  # messageFormat interpolation
-        passed_courses_and_workshops: "Passed courses and workshops"
-        no_passed_courses_or_workshop: "No passed courses or workshops"
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation
+        passed_events: "Passed events"
         invoices: "Invoices"
         invoice_#: "Invoice #"
         download_the_refund_invoice: "Download the refund invoice"
@@ -383,13 +446,18 @@ en:
         average_age: "Average age:"
         years_old: "Years old"
         total: "Total"
+        available_hours: "Hours available for booking:"
+        available_tickets: "Tickets available for booking:"
         gender: "Gender"
         age: "Age"
         revenue: "Revenue"
         unknown: "Unknown"
         user_id: "User ID"
         display_more_results: "Display more results"
-
+        export_statistics_to_excel: "Export statistics to Excel"
+        export_all_statistics: "Export all statistics"
+        export_the_current_search_results: "Export the current search results"
+        export: "Export"
 
       stats_graphs:
         # statistics graphs
@@ -424,7 +492,6 @@ en:
         warning_message_of_the_training_booking_page: "Warning message of the training booking page:"
         information_message_of_the_training_reservation_page: "Information message of the training reservation page:"
         message_of_the_subscriptions_page: "Message of the subscriptions page:"
-        message_of_the_event_page_relative_to_the_reduced_rate_availability_conditions: "Message of the event page, relative to the reduced rate availability conditions:"
         legal_documents: "Legal documents"
         if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user: "If these documents are not filled, no consent about them will be asked."
         general_terms_and_conditions_(T&C): "General terms and conditions (T&C)"
@@ -466,8 +533,31 @@ en:
         disabled: "Disabled"
         ability_for_the_users_to_cancel_their_reservations: "Ability for the users to cancel their reservations"
         reservations_cancelling: "Reservations cancelling"
-        customization_of_SETTING_successfully_saved: "Customization of {{SETTING}} successfully saved."  # angular interpolation
+        reservations_reminders: "Reservations reminders"
+        notification_sending_before_the_reservation_occurs: "Notification sending before the reservation occurs"
+        customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation
         file_successfully_updated: "File successfully updated."
+        name_genre: "title concordance"
+        machine_explications_alert: "explanation message on the machine reservation page"
+        training_explications_alert: "explanation message on the training reservation page"
+        training_information_message: "information message on the machine reservation page"
+        subscription_explications_alert: "explanation message on the subscription page"
+        main_color: "main colour"
+        secondary_color: "secondary colour"
+        home_blogpost: "homepage's brief"
+        twitter_name: "Twitter feed name"
+        about_title: "\"About\" page title"
+        about_body: "\"About\" page content"
+        about_contacts: "\"About\" page contacts"
+        booking_window_start: "opening time"
+        booking_window_end: "closing time"
+        booking_move_enable: "reservation moving enabling"
+        booking_move_delay: "preventive delay of moving"
+        booking_cancel_enable: "reservation canceling enabling"
+        booking_cancel_delay: "preventive delay of canceling"
+        reminder_enable: "reservation reminding enabling"
+        reminder_delay: "delay before sending the reminder"
+        default_value_is_24_hours: "If the field is leaved empty: 24 hours."
 
       open_api_clients:
         add_new_client: "Create new API client"

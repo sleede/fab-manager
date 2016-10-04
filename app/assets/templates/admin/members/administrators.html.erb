@@ -1,0 +1,39 @@
+<div class="col-md-5 m-t-lg">
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+      <input type="text" ng-model="searchFilter" class="form-control" placeholder="{{ 'search_for_an_administrator' | translate }}">
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.admins_new" translate>{{ 'add_a_new_administrator' }}</button>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:15%"><a href="" ng-click="setOrderAdmin('profile_attributes.last_name')">{{ 'surname' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='profile_attributes.last_name', 'fa fa-sort-alpha-desc': orderAdmin =='-profile_attributes.last_name', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+
+      <th style="width:15%"><a href="" ng-click="setOrderAdmin('profile_attributes.first_name')">{{ 'first_name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='profile_attributes.first_name', 'fa fa-sort-alpha-desc': orderAdmin =='-profile_attributes.first_name', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+
+      <th style="width:15%"><a href="" ng-click="setOrderAdmin('email')">{{ 'email' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderAdmin =='email', 'fa fa-sort-alpha-desc': orderAdmin =='-email', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+
+      <th style="width:10%"><a href="" ng-click="setOrderAdmin('profile_attributes.phone')">{{ 'phone' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderAdmin =='profile_attributes.phone', 'fa fa-sort-numeric-desc': orderAdmin =='-profile_attributes.phone', 'fa fa-arrows-v': orderAdmin  }"></i></a></th>
+      <th style="width:10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="admin in admins | filter:searchFilter | orderBy: orderAdmin">
+      <td class="text-c">{{ admin.profile_attributes.last_name }}</td>
+      <td class="text-c">{{ admin.profile_attributes.first_name }}</td>
+      <td>{{ admin.email }}</td>
+      <td>{{ admin.profile_attributes.phone }}</td>
+      <td>
+        <button class="btn btn-danger" ng-if="admin.id != currentUser.id" ng-click="destroyAdmin(admins, admin)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

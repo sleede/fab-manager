@@ -14,18 +14,12 @@ class API::SubscriptionsController < API::ApiController
     else
       if current_user.is_admin?
         @subscription = Subscription.find_or_initialize_by(user_id: subscription_params[:user_id])
-        @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
         @subscription.attributes = subscription_params
-        is_subscribe = @subscription.save_with_local_payment(!User.find(subscription_params[:user_id]).invoicing_disabled?)
+        is_subscribe = @subscription.save_with_local_payment(!User.find(subscription_params[:user_id]).invoicing_disabled?, coupon_params[:coupon_code])
       else
         @subscription = Subscription.find_or_initialize_by(user_id: current_user.id)
-        if valid_card_token?(subscription_params[:card_token])
-          @subscription.update_column(:expired_at, nil) unless @subscription.new_record? # very important
-          @subscription.attributes = subscription_params.merge(user_id: current_user.id)
-          is_subscribe = @subscription.save_with_payment
-        else
-          is_subscribe = false
-        end
+        @subscription.attributes = subscription_params
+        is_subscribe = @subscription.save_with_payment(true, coupon_params[:coupon_code])
       end
       if is_subscribe
         render :show, status: :created, location: @subscription
@@ -58,6 +52,10 @@ class API::SubscriptionsController < API::ApiController
     # Never trust parameters from the scary internet, only allow the white list through.
     def subscription_params
       params.require(:subscription).permit(:plan_id, :user_id, :card_token)
+    end
+
+    def coupon_params
+      params.permit(:coupon_code)
     end
 
     def subscription_update_params

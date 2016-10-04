@@ -21,6 +21,9 @@
             <td>{{m.api_data_type}}</td>
             <td>{{m.api_field}}</td>
             <td>
+                <button class="btn btn-info" ng-click="defineDataMapping(m)">
+                    <i class="fa fa-info-circle"></i>
+                </button>
                 <button class="btn btn-danger" ng-click="m._destroy = true">
                     <i class="fa fa-trash-o"></i>
                 </button>
@@ -38,7 +41,7 @@
             <td ng-class="{'has-error': mappingForm['auth_mapping[local_field]'].$dirty && mappingForm['auth_mapping[local_field]'].$invalid}">
                 <select class="form-control"
                         name="auth_mapping[local_field]"
-                        ng-options="field for field in mappingFields[newMapping.local_model]"
+                        ng-options="field[0] as field[0] for field in mappingFields[newMapping.local_model]"
                         ng-model="newMapping.local_field"
                         required>
                 </select>

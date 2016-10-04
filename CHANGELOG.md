@@ -1,5 +1,73 @@
 # Changelog Fab Manager
 
+## v2.4.0 2016 October 4
+ 
+- RSS feeds to follow new projects and events published
+- Use slugs in projects URL opened from notifications
+- Ask for confirmation on machine deletion from the public view
+- Ability to delete a training from the public view for an admin
+- Project images will show in full-size on a click 
+- Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
+- Share project with Facebook/Twitter
+- Display fab-manager's version in "Powered by" label, when logged as admin
+- Load translation locales from subdirectories
+- Add wallet to user, client can pay total/partial reservation or subscription by wallet
+- Public calendar for show all trainings/machines/events
+- Display 'draft' badge on drafts in project galleries
+- Add a 'new project' button in dashboard/my projects
+- Open Projects: show the platform of origin even for local projects
+- Ability to use HTML in machine specs and description
+- Ability to manage project steps order
+- Trainings are associated with a picture and an HTML textual description
+- Public gallery of trainings with ability to view details or to book a training on its own calendar
+- Ability to switch back to all trainings booking view
+- Rename "Courses and Workshops" to "Events" 
+- Admin: Events can be associated with a theme and an age range
+- Admin: Event categories, themes and age ranges can be customized
+- Filter events by category, theme and age range in public view
+- Ability to customise price's categories for the events
+- Events can be associated with many custom price's categories, instead of only one "reduced price"
+- Statistics views can trigger and display custom aggregations from ElasticSearch
+- Machine hours/Trainings statistics: display number of tickets/hours available for booking 
+- Statistics will include informations abouts events category, theme and age range
+- Ability to export the current statistics table to an Excel file
+- Ability to export every statistics on a given dates range to an Excel file
+- More fields in members exports
+- Unified members, subscriptions and reservations exports with the new statistics exports
+- Excel exports are now asynchronously generated and cached on the server for future identical requests
+- Users have the ability to create an organizational profile when creating an account
+- Organization informations will be used in invoices generation, if present
+- Admins can create and enable/disable coupons. They can also notify an user about details of a coupon
+- Users and admins can apply coupons's discounts to their shopping cart
+- Send an email reminder and system notification some hours before a reservation happens
+- Admins can toggle reminders on/off and customize the delay
+- More file types allowed as project CAD attachements
+- Project CAD attachements are now checked by MIME type in addition of extension check
+- Project CAD attachement allowed are now configured in environment variables
+- Project CAD attachement extensions allowed are shown next to input field 
+- Display strategy's name in SSO providers list
+- SSO: documentation improved with an usage example
+- SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
+- Fix a bug: project drafts are shown on public profiles
+- Fix a bug: event category disappear when editing the event
+- Fix a bug: machine name is not shown in plan edition 
+- Fix a bug: machine slots with tags are not displayed correctly on reservation calendar
+- Fix a bug: avatar, address and organization details mapping from SSO were broken
+- Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous 
+- Fix a bug: clicking on the text in stripe's payment modal, does not validate the checkbox
+- Fix a bug: move event reservation is not limited by admin settings (prior-delay & disable)
+- Fix a bug: UI issues on small devices (dashboard + admin views)
+- Fix a bug: embedded video not working in training/machine description
+- Fix a bug: reordering project's steps trigger the unsaved-warning dialog
+- Fix a bug: unable to compile assets in Docker with CoffeeScript error
+- Fix a bug: do not force HTTPS for URLs in production environments
+- [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
+- [TODO DEPLOY] `rake fablab:es_add_event_filters`
+- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] add `EXCEL_DATE_FORMAT`, `ALLOWED_EXTENSIONS` and `ALLOWED_MIME_TYPES` environment variable in `application.yml`
+- [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
+
 ## v2.3.1 2016 September 26
 
 - Fix a bug: group cache filename too long
@@ -19,7 +87,7 @@
 ## v2.2.2 2016 June 23
 - Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation 
 - Fix a bug: unable to display next results in statistics tables
-- Admin: Category is mandatory when creating a course/workshop (event)
+- Admin: Category is mandatory when creating an event
 
 ## v2.2.1 2016 June 22
 - Fix a bug: field User.merged_at should not be allowed to be mapped in SSO

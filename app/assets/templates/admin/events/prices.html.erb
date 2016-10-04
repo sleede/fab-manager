@@ -1,0 +1,31 @@
+<div class="m-t">
+  <h3 translate>{{ 'prices_categories' }}</h3>
+
+  <button type="button" class="btn btn-warning m-b m-t" ng-click="newPriceCategory()" translate>{{ 'add_a_price_category' }}</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="width:40%" translate>{{ 'name' }}</th>
+      <th style="width:40%" translate>{{ 'usages_count' }}</th>
+      <th style="width:20%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="category in priceCategories">
+      <td>{{ category.name }}</td>
+      <td>{{ category.events }}</td>
+      <td>
+        <div class="buttons">
+          <button class="btn btn-default" ng-click="editPriceCategory(category.id, $index)">
+            <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+          </button>
+          <button class="btn btn-danger" ng-click="removePriceCategory(category.id, $index)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

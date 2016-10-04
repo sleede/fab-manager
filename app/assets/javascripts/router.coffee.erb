@@ -197,6 +197,22 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.logged.dashboard.invoices').$promise
           ]
+      .state 'app.logged.dashboard.wallet',
+        url: '/wallet'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "dashboard/wallet.html" %>'
+            controller: 'WalletController'
+        resolve:
+          walletPromise: ['Wallet', 'currentUser', (Wallet, currentUser)->
+            Wallet.getWalletByUser(user_id: currentUser.id).$promise
+          ]
+          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)->
+            Wallet.transactions(id: walletPromise.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.shared.wallet']).$promise
+          ]
 
 
       # members
@@ -232,7 +248,7 @@ angular.module('application.router', ['ui.router']).
         url: '/projects?q&page&theme_id&component_id&machine_id&from&whole_network'
         views:
           'main@':
-            templateUrl: '<%= asset_path "projects/index.html" %>'
+            templateUrl: '<%= asset_path "projects/index.html.erb" %>'
             controller: 'ProjectsController'
         resolve:
           themesPromise: ['Theme', (Theme)->
@@ -254,6 +270,9 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "projects/new.html" %>'
             controller: 'NewProjectController'
         resolve:
+          allowedExtensions: ['Project', (Project)->
+            Project.allowedExtensions().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.projects_new', 'app.shared.project']).$promise
           ]
@@ -280,6 +299,9 @@ angular.module('application.router', ['ui.router']).
           projectPromise: ['$stateParams', 'Project', ($stateParams, Project)->
             Project.get(id: $stateParams.id).$promise
           ]
+          allowedExtensions: ['Project', (Project)->
+              Project.allowedExtensions().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise
           ]
@@ -290,7 +312,7 @@ angular.module('application.router', ['ui.router']).
         url: '/machines'
         views:
           'main@':
-            templateUrl: '<%= asset_path "machines/index.html" %>'
+            templateUrl: '<%= asset_path "machines/index.html.erb" %>'
             controller: 'MachinesController'
         resolve:
           machinesPromise: ['Machine', (Machine)->
@@ -335,6 +357,9 @@ angular.module('application.router', ['ui.router']).
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
           ]
+          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams)->
+            Machine.get(id: $stateParams.id).$promise
+          ]
           settingsPromise: ['Setting', (Setting)->
             Setting.query(names: "['machine_explications_alert',
                                    'booking_window_start',
@@ -347,7 +372,8 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.machines_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
-              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal']).$promise
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
+              'app.shared.wallet', 'app.shared.coupon_input']).$promise
           ]
       .state 'app.admin.machines_edit',
         url: '/machines/:id/edit'
@@ -363,8 +389,34 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise
           ]
       # trainings
+      .state 'app.public.trainings_list',
+        url: '/trainings'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "trainings/index.html.erb" %>'
+            controller: 'TrainingsController'
+        resolve:
+          trainingsPromise: ['Training', (Training)->
+            Training.query({ public_page: true }).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.trainings_list']).$promise
+          ]
+      .state 'app.public.training_show',
+        url: '/trainings/:id'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "trainings/show.html" %>'
+            controller: 'ShowTrainingController'
+        resolve:
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+            Training.get({id: $stateParams.id}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.training_show']).$promise
+          ]
       .state 'app.logged.trainings_reserve',
-        url: '/trainings/reserve'
+        url: '/trainings/:id/reserve'
         views:
           'main@':
             templateUrl: '<%= asset_path "trainings/reserve.html" %>'
@@ -379,8 +431,11 @@ angular.module('application.router', ['ui.router']).
           groupsPromise: ['Group', (Group)->
             Group.query().$promise
           ]
-          availabilityTrainingsPromise: ['Availability', (Availability)->
-            Availability.trainings().$promise
+          availabilityTrainingsPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.trainings({trainingId: $stateParams.id}).$promise
+          ]
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+              Training.get({id: $stateParams.id}).$promise unless $stateParams.id == 'all'
           ]
           settingsPromise: ['Setting', (Setting)->
             Setting.query(names: "['booking_window_start',
@@ -395,14 +450,15 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.trainings_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
-              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal']).$promise
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
+              'app.shared.wallet', 'app.shared.coupon_input']).$promise
           ]
       # notifications
       .state 'app.logged.notifications',
         url: '/notifications'
         views:
           'main@':
-            templateUrl: '<%= asset_path "notifications/index.html" %>'
+            templateUrl: '<%= asset_path "notifications/index.html.erb" %>'
             controller: 'NotificationsController'
         resolve:
           translations: [ 'Translations', (Translations) ->
@@ -415,7 +471,7 @@ angular.module('application.router', ['ui.router']).
         abstract: Fablab.withoutPlans
         views:
           'main@':
-            templateUrl: '<%= asset_path "plans/index.html" %>'
+            templateUrl: '<%= asset_path "plans/index.html.erb" %>'
             controller: 'PlansIndexController'
         resolve:
           subscriptionExplicationsPromise: ['Setting', (Setting)->
@@ -428,7 +484,8 @@ angular.module('application.router', ['ui.router']).
             Group.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.public.plans', 'app.shared.member_select', 'app.shared.stripe']).$promise
+            Translations.query(['app.public.plans', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet',
+              'app.shared.coupon_input']).$promise
           ]
 
       # events
@@ -436,9 +493,18 @@ angular.module('application.router', ['ui.router']).
         url: '/events'
         views:
           'main@':
-            templateUrl: '<%= asset_path "events/index.html" %>'
+            templateUrl: '<%= asset_path "events/index.html.erb" %>'
             controller: 'EventsController'
         resolve:
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.public.events_list').$promise
           ]
@@ -452,11 +518,39 @@ angular.module('application.router', ['ui.router']).
           eventPromise: ['Event', '$stateParams', (Event, $stateParams)->
             Event.get(id: $stateParams.id).$promise
           ]
-          reducedAmountAlert: ['Setting', (Setting)->
-            Setting.get(name: 'event_reduced_amount_alert').$promise
+          priceCategoriesPromise: ['PriceCategory', (PriceCategory) ->
+            PriceCategory.query().$promise
+          ]
+          settingsPromise: ['Setting', (Setting)->
+            Setting.query(names: "['booking_move_enable', 'booking_move_delay']").$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.valid_reservation_modal']).$promise
+            Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe',
+              'app.shared.valid_reservation_modal', 'app.shared.wallet', 'app.shared.coupon_input']).$promise
+          ]
+
+      # global calendar (trainings, machines and events)
+      .state 'app.public.calendar',
+        url: '/calendar'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "calendar/calendar.html" %>'
+            controller: 'CalendarController'
+        resolve:
+          bookingWindowStart: ['Setting', (Setting)->
+            Setting.get(name: 'booking_window_start').$promise
+          ]
+          bookingWindowEnd: ['Setting', (Setting)->
+            Setting.get(name: 'booking_window_end').$promise
+          ]
+          trainingsPromise: ['Training', (Training)->
+            Training.query().$promise
+          ]
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.calendar']).$promise
           ]
 
       # --- namespace /admin/... ---
@@ -468,9 +562,6 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/calendar/calendar.html" %>'
             controller: 'AdminCalendarController'
         resolve:
-          availabilitiesPromise: ['Availability', (Availability)->
-            Availability.query().$promise
-          ]
           bookingWindowStart: ['Setting', (Setting)->
             Setting.get(name: 'booking_window_start').$promise
           ]
@@ -489,7 +580,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/project_elements'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/project_elements/index.html" %>'
+            templateUrl: '<%= asset_path "admin/project_elements/index.html.erb" %>'
             controller: 'ProjectElementsController'
         resolve:
           componentsPromise: ['Component', (Component)->
@@ -510,8 +601,8 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/trainings'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/trainings/index.html" %>'
-            controller: 'TrainingsController'
+            templateUrl: '<%= asset_path "admin/trainings/index.html.erb" %>'
+            controller: 'TrainingsAdminController'
         resolve:
           trainingsPromise: ['Training', (Training)->
             Training.query().$promise
@@ -520,19 +611,59 @@ angular.module('application.router', ['ui.router']).
             Machine.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.admin.trainings').$promise
+            Translations.query(['app.admin.trainings', 'app.shared.trainings']).$promise
           ]
-
+      .state 'app.admin.trainings_new',
+        url: '/admin/trainings/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/trainings/new.html" %>'
+            controller: 'NewTrainingController'
+        resolve:
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise
+          ]
+      .state 'app.admin.trainings_edit',
+        url: '/admin/trainings/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/trainings/edit.html" %>'
+            controller: 'EditTrainingController'
+        resolve:
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)->
+            Training.get(id: $stateParams.id).$promise
+          ]
+          machinesPromise: ['Machine', (Machine)->
+            Machine.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query('app.shared.trainings').$promise
+          ]
       # events
       .state 'app.admin.events',
         url: '/admin/events'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/events/index.html" %>'
+            templateUrl: '<%= asset_path "admin/events/index.html.erb" %>'
             controller: 'AdminEventsController'
         resolve:
           eventsPromise: ['Event', (Event)->
             Event.query(page: 1).$promise
+          ]
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
+          priceCategoriesPromise: ['PriceCategory', (PriceCategory) ->
+            PriceCategory.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query('app.admin.events').$promise
@@ -544,6 +675,18 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "events/new.html" %>'
             controller: 'NewEventController'
         resolve:
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
+          priceCategoriesPromise: ['PriceCategory', (PriceCategory) ->
+            PriceCategory.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.events_new', 'app.shared.event']).$promise
           ]
@@ -556,6 +699,18 @@ angular.module('application.router', ['ui.router']).
         resolve:
           eventPromise: ['Event', '$stateParams', (Event, $stateParams)->
             Event.get(id: $stateParams.id).$promise
+          ]
+          categoriesPromise: ['Category', (Category) ->
+            Category.query().$promise
+          ]
+          themesPromise: ['EventTheme', (EventTheme) ->
+            EventTheme.query().$promise
+          ]
+          ageRangesPromise: ['AgeRange', (AgeRange) ->
+            AgeRange.query().$promise
+          ]
+          priceCategoriesPromise: ['PriceCategory', (PriceCategory) ->
+            PriceCategory.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.events_edit', 'app.shared.event']).$promise
@@ -582,7 +737,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/pricing'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/pricing/index.html" %>'
+            templateUrl: '<%= asset_path "admin/pricing/index.html.erb" %>'
             controller: 'EditPricingController'
         resolve:
           plans: ['Plan', (Plan) ->
@@ -598,7 +753,7 @@ angular.module('application.router', ['ui.router']).
             TrainingsPricing.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query('app.admin.pricing').$promise
+            Translations.query(['app.admin.pricing', 'app.shared.member_select', 'app.shared.coupon']).$promise
           ]
           trainingsPromise: ['Training', (Training) ->
             Training.query().$promise
@@ -611,6 +766,9 @@ angular.module('application.router', ['ui.router']).
           ]
           trainingCreditsPromise: ['Credit', (Credit) ->
             Credit.query({creditable_type: 'Training'}).$promise
+          ]
+          couponsPromise: ['Coupon', (Coupon) ->
+            Coupon.query().$promise
           ]
 
       # plans
@@ -656,6 +814,30 @@ angular.module('application.router', ['ui.router']).
             Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise
           ]
 
+      # coupons
+      .state 'app.admin.coupons_new',
+        url: '/admin/coupons/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/coupons/new.html" %>'
+            controller: 'NewCouponController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.coupons_new', 'app.shared.coupon']).$promise
+          ]
+      .state 'app.admin.coupons_edit',
+        url: '/admin/coupons/:id/edit'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "admin/coupons/edit.html" %>'
+            controller: 'EditCouponController'
+        resolve:
+          couponPromise: ['Coupon', '$stateParams', (Coupon, $stateParams) ->
+            Coupon.get({id: $stateParams.id}).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.coupons_edit', 'app.shared.coupon']).$promise
+          ]
 
 
 
@@ -664,7 +846,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/invoices'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/invoices/index.html" %>'
+            templateUrl: '<%= asset_path "admin/invoices/index.html.erb" %>'
             controller: 'InvoicesController'
         resolve:
           settings: ['Setting', (Setting)->
@@ -695,16 +877,16 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/members'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/members/index.html" %>'
+            templateUrl: '<%= asset_path "admin/members/index.html.erb" %>'
             controller: 'AdminMembersController'
           'groups@app.admin.members':
-            templateUrl: '<%= asset_path "admin/groups/index.html" %>'
+            templateUrl: '<%= asset_path "admin/groups/index.html.erb" %>'
             controller: 'GroupsController'
           'tags@app.admin.members':
-            templateUrl: '<%= asset_path "admin/tags/index.html" %>'
+            templateUrl: '<%= asset_path "admin/tags/index.html.erb" %>'
             controller: 'TagsController'
           'authentification@app.admin.members':
-            templateUrl: '<%= asset_path "admin/authentications/index.html" %>'
+            templateUrl: '<%= asset_path "admin/authentications/index.html.erb" %>'
             controller: 'AuthentificationController'
         resolve:
           membersPromise: ['Member', (Member)->
@@ -745,11 +927,20 @@ angular.module('application.router', ['ui.router']).
           memberPromise: ['Member', '$stateParams', (Member, $stateParams)->
             Member.get(id: $stateParams.id).$promise
           ]
+          activeProviderPromise: ['AuthProvider', (AuthProvider) ->
+            AuthProvider.active().$promise
+          ]
+          walletPromise: ['Wallet', '$stateParams', (Wallet, $stateParams)->
+            Wallet.getWalletByUser(user_id: $stateParams.id).$promise
+          ]
+          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)->
+            Wallet.transactions(id: walletPromise.id).$promise
+          ]
           tagsPromise: ['Tag', (Tag)->
             Tag.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin']).$promise
+            Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin', 'app.shared.wallet']).$promise
           ]
       .state 'app.admin.admins_new',
         url: '/admin/admins/new'
@@ -804,7 +995,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/statistics'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/statistics/index.html" %>'
+            templateUrl: '<%= asset_path "admin/statistics/index.html.erb" %>'
             controller: 'StatisticsController'
         resolve:
           membersPromise: ['Member', (Member) ->
@@ -832,7 +1023,7 @@ angular.module('application.router', ['ui.router']).
         url: '/admin/settings'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/settings/index.html" %>'
+            templateUrl: '<%= asset_path "admin/settings/index.html.erb" %>'
             controller: 'SettingsController'
         resolve:
           settingsPromise: ['Setting', (Setting)->
@@ -846,7 +1037,6 @@ angular.module('application.router', ['ui.router']).
               'training_explications_alert',
               'training_information_message',
               'subscription_explications_alert',
-              'event_reduced_amount_alert',
               'booking_window_start',
               'booking_window_end',
               'booking_move_enable',
@@ -856,7 +1046,9 @@ angular.module('application.router', ['ui.router']).
               'main_color',
               'secondary_color',
               'fablab_name',
-              'name_genre'
+              'name_genre',
+              'reminder_enable',
+              'reminder_delay'
             ]").$promise
           ]
           cguFile: ['CustomAsset', (CustomAsset) ->
@@ -880,7 +1072,7 @@ angular.module('application.router', ['ui.router']).
         url: '/open_api_clients'
         views:
           'main@':
-            templateUrl: '<%= asset_path "admin/open_api_clients/index.html" %>'
+            templateUrl: '<%= asset_path "admin/open_api_clients/index.html.erb" %>'
             controller: 'OpenAPIClientsController'
         resolve:
           clientsPromise: ['OpenAPIClient', (OpenAPIClient)->

@@ -12,8 +12,9 @@ fr:
         my_settings: "Mes paramètres"
         my_projects: "Mes projets"
         my_trainings: "Mes formations"
-        my_courses_and_workshops: "Mes stages et ateliers"
+        my_events: "Mes évènements"
         my_invoices: "Mes factures"
+        my_wallet: "Mon porte-monnaie"
 
         # connexion / déconnexion
         sign_out: "Se déconnecter"
@@ -29,9 +30,10 @@ fr:
         home: "Accueil"
         reserve_a_machine: "Réserver une machine"
         trainings_registrations: "Inscriptions formations"
-        courses_and_workshops_registrations: "Inscriptions stages et ateliers"
+        events_registrations: "Inscriptions aux évènements"
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
+        public_calendar: "Calendrier"
 
         # menu de gauche (partie admin)
         trainings_monitoring: "Suivi formations"
@@ -40,7 +42,7 @@ fr:
         manage_the_users: "Gérer les utilisateurs"
         manage_the_invoices: "Gérer les factures"
         subscriptions_and_prices: "Abonnements & Tarifs"
-        courses_and_workshops_monitoring: "Suivi stages et ateliers"
+        manage_the_events: "Gérer les évènements"
         manage_the_machines: "Gérer les machines"
         manage_the_projects_elements: "Gérer les éléments projets"
         statistics: "Statistiques"
@@ -66,6 +68,11 @@ fr:
         type_your_password_again: "Ressaisissez votre mot de passe"
         password_confirmation_is_required: "La confirmation du mot de passe est requise."
         password_does_not_match_with_confirmation: "Le mot de passe ne concorde pas avec la confirmation."
+        i_am_an_organization: "Je suis une structure"
+        name_of_your_organization: "Nom de votre structure"
+        organization_name_is_required: "Le nom de la structure est requis."
+        address_of_your_organization: "Adresse de votre structure"
+        organization_address_is_required: "L'adresse de la structure est requise."
         your_user_s_profile: "Votre profil utilisateur"
         user_s_profile_is_required: "Le profil utilisateur est requis."
         birth_date: "Date de naissance"
@@ -73,6 +80,7 @@ fr:
         phone_number: "Numéro de téléphone"
         phone_number_is_required: "Le numéro de téléphone est requis."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
+        i_accept_to_receive_informations_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
 
@@ -92,6 +100,8 @@ fr:
         your_email_address_is_unknown: "Votre adresse de courriel est inconnue."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Vous allez recevoir sous quelques minutes un courriel vous indiquant comment réinitialiser votre mot de passe."
 
+        # Fab-manager's version
+        version: "Version :"
       about:
         # page à propos
         read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
@@ -108,7 +118,7 @@ fr:
         discover_members: "Découvrir les membres"
 
         # résumé des prochains évènements sur la page d'acceuil
-        fablab_s_next_courses_and_workshops: "Les prochains ateliers et stages du Fab Lab"
+        fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
         from_date_to_date: "Du {{START}} au {{END}}"  # angular interpolation
         on_the_date: "Le {{DATE}}"  # angular interpolation
@@ -125,14 +135,12 @@ fr:
         tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmis les projets de tous les Fab-managers utilisant cette fonctionnalité !"
         openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmis les projets de cette plateforme."
         project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
-        add_a_project: "Ajouter un projet"
         reset_all_filters: "Réinitialiser tous les filtres"
         search: "Rechercher"
         all_projects: "Tous les projets"
         my_projects: "Mes projets"
         projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
         all_machines: "Toutes les machines"
-        all_themes: "Toutes les thématiques"
         all_materials: "Tous les matériaux"
         load_next_projects: "Charger les projets suivants"
 
@@ -162,7 +170,6 @@ fr:
         # liste des machines
         the_fablab_s_machines: "Les machines du FabLab"
         add_a_machine: "Ajouter une machine"
-        book: "Réserver"
         _or_the_: " ou la "
 
       machines_show:
@@ -171,8 +178,22 @@ fr:
         files_to_download: "Fichiers à télécharger"
         projects_using_the_machine: "Projets utilisant la machine"
         _or_the_: " ou la "
+        do_you_really_want_to_delete_this_machine: "Êtes-vous sur de vouloir supprimer cette machine ?"
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+
+
+      trainings_list:
+        # liste des formations
+        the_trainings: "Les formations"
+
+      training_show:
+        # détails d'une formation
+        book_this_training: "Réserver cette formation"
+        do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
+        unauthorized_operation: "Opération non autorisée"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+
 
       plans:
         # page récapitulative des abonnements
@@ -199,7 +220,9 @@ fr:
 
       events_list:
         # liste des évènements du fablab
-        the_fablab_s_courses_and_workshops: "Les Stages et ateliers du Fab Lab"
+        the_fablab_s_events: "Les évènements du Fab Lab"
+        all_categories: "Toutes les catégories"
+        for_all: "Tout public"
 
       events_show:
         # détails d'un événement et réservation
@@ -209,7 +232,6 @@ fr:
         beginning: "Début :"
         ending: "Fin :"
         opening_hours: "Horaires :"
-        reduced_rate*: "Tarif réduit* :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet."
         free_entry: "Entrée libre"
@@ -220,3 +242,8 @@ fr:
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
+
+      calendar:
+        calendar: "Calendrier"
+        show_no_disponible: "Afficher les crénaux non disponibles"
+        filter-calendar: "Filtrer le calendrier"

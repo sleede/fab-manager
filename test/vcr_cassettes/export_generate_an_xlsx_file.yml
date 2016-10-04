@@ -1,0 +1,153 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:9200/stats/_search?scroll=30s
+    body:
+      encoding: UTF-8
+      string: '{"query":{"bool":{"must":[{"range":{"date":{"gte":"2016-06-25T02:00:00+02:00","lte":"2016-07-25T23:59:59+02:00"}}}]}}}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '4119'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJfc2Nyb2xsX2lkIjoiY1hWbGNubFVhR1Z1Um1WMFkyZzdOVHN4TWpFNk9X
+        eENiRkowYTE5U1UxYzNOSFZLYTFFeE56Vk9VVHN4TWpJNk9XeENiRkowYTE5
+        U1UxYzNOSFZLYTFFeE56Vk9VVHN4TWpRNk9XeENiRkowYTE5U1UxYzNOSFZL
+        YTFFeE56Vk9VVHN4TWpNNk9XeENiRkowYTE5U1UxYzNOSFZLYTFFeE56Vk9V
+        VHN4TWpVNk9XeENiRkowYTE5U1UxYzNOSFZLYTFFeE56Vk9VVHN3T3c9PSIs
+        InRvb2siOjUsInRpbWVkX291dCI6ZmFsc2UsIl9zaGFyZHMiOnsidG90YWwi
+        OjUsInN1Y2Nlc3NmdWwiOjUsImZhaWxlZCI6MH0sImhpdHMiOnsidG90YWwi
+        OjE3LCJtYXhfc2NvcmUiOjEuMCwiaGl0cyI6W3siX2luZGV4Ijoic3RhdHMi
+        LCJfdHlwZSI6ImV2ZW50IiwiX2lkIjoiQVZZblM3QzdkaDZFOXVGdWxMcnki
+        LCJfc2NvcmUiOjEuMCwiX3NvdXJjZSI6eyJjcmVhdGVkX2F0IjoiMjAxNi0w
+        Ny0yNlQxMzowMToyNy4wOTcrMDA6MDAiLCJ1cGRhdGVkX2F0IjoiMjAxNi0w
+        Ny0yNlQxMzowMToyNy4wOTcrMDA6MDAiLCJ0eXBlIjoiYm9va2luZyIsInN1
+        YlR5cGUiOiJBdGVsaWVyIiwiZGF0ZSI6IjIwMTYtMDYtMjgiLCJzdGF0Ijox
+        LCJ1c2VySWQiOjE5LCJnZW5kZXIiOiJtYWxlIiwiYWdlIjozMCwiZ3JvdXAi
+        OiJzdHVkZW50IiwicmVzZXJ2YXRpb25JZCI6MzExNSwiY2EiOjI1LjAsIm5h
+        bWUiOiJST0JPVCBCUk9TU0UgIiwiZXZlbnRJZCI6MTczLCJldmVudERhdGUi
+        OiIyMDE2LTA3LTA3IiwiYWdlUmFuZ2UiOiIiLCJldmVudFRoZW1lIjoiIn19
+        LHsiX2luZGV4Ijoic3RhdHMiLCJfdHlwZSI6ImV2ZW50IiwiX2lkIjoiQVZZ
+        blM3REhkaDZFOXVGdWxMcnoiLCJfc2NvcmUiOjEuMCwiX3NvdXJjZSI6eyJj
+        cmVhdGVkX2F0IjoiMjAxNi0wNy0yNlQxMzowMToyNy4xMDkrMDA6MDAiLCJ1
+        cGRhdGVkX2F0IjoiMjAxNi0wNy0yNlQxMzowMToyNy4xMDkrMDA6MDAiLCJ0
+        eXBlIjoiaG91ciIsInN1YlR5cGUiOiJBdGVsaWVyIiwiZGF0ZSI6IjIwMTYt
+        MDYtMjgiLCJzdGF0IjozLCJ1c2VySWQiOjE5LCJnZW5kZXIiOiJtYWxlIiwi
+        YWdlIjozMCwiZ3JvdXAiOiJzdHVkZW50IiwicmVzZXJ2YXRpb25JZCI6MzEx
+        NSwiY2EiOjI1LjAsIm5hbWUiOiJST0JPVCBCUk9TU0UgIiwiZXZlbnRJZCI6
+        MTczLCJldmVudERhdGUiOiIyMDE2LTA3LTA3IiwiYWdlUmFuZ2UiOiIiLCJl
+        dmVudFRoZW1lIjoiIn19LHsiX2luZGV4Ijoic3RhdHMiLCJfdHlwZSI6ImFj
+        Y291bnQiLCJfaWQiOiJBVlluUzZGRWRoNkU5dUZ1bExybyIsIl9zY29yZSI6
+        MS4wLCJfc291cmNlIjp7ImNyZWF0ZWRfYXQiOiIyMDE2LTA3LTI2VDEzOjAx
+        OjIzLjEzOCswMDowMCIsInVwZGF0ZWRfYXQiOiIyMDE2LTA3LTI2VDEzOjAx
+        OjIzLjEzOCswMDowMCIsInR5cGUiOiJtZW1iZXIiLCJzdWJUeXBlIjoiY3Jl
+        YXRlZCIsImRhdGUiOiIyMDE2LTA3LTI1Iiwic3RhdCI6MSwidXNlcklkIjox
+        NjY2LCJnZW5kZXIiOiJtYWxlIiwiYWdlIjo2MywiZ3JvdXAiOiJzdGFuZGFy
+        ZCJ9fSx7Il9pbmRleCI6InN0YXRzIiwiX3R5cGUiOiJzdWJzY3JpcHRpb24i
+        LCJfaWQiOiJBVlluUzZEWWRoNkU5dUZ1bExybCIsIl9zY29yZSI6MS4wLCJf
+        c291cmNlIjp7ImNyZWF0ZWRfYXQiOiIyMDE2LTA3LTI2VDEzOjAxOjIzLjAz
+        MCswMDowMCIsInVwZGF0ZWRfYXQiOiIyMDE2LTA3LTI2VDEzOjAxOjIzLjAz
+        MCswMDowMCIsInR5cGUiOiI1MTg0MDAwIiwic3ViVHlwZSI6ImJpbWVuc3Vl
+        bC1zdGFuZGFyZC1tb250aC0yMDE2MDcyNTEyNDMyNCIsImRhdGUiOiIyMDE2
+        LTA3LTI1Iiwic3RhdCI6MSwidXNlcklkIjoxNjY2LCJnZW5kZXIiOiJtYWxl
+        IiwiYWdlIjo2MywiZ3JvdXAiOiJzdGFuZGFyZCIsImNhIjo1MC4wLCJwbGFu
+        SWQiOjEwLCJzdWJzY3JpcHRpb25JZCI6MzgwLCJpbnZvaWNlSXRlbUlkIjoz
+        NTk3LCJncm91cE5hbWUiOiJzdGFuZGFyZCwgYXNzb2NpYXRpb24ifX0seyJf
+        aW5kZXgiOiJzdGF0cyIsIl90eXBlIjoidXNlciIsIl9pZCI6IkFWWW5TNkdY
+        ZGg2RTl1RnVsTHJwIiwiX3Njb3JlIjoxLjAsIl9zb3VyY2UiOnsiY3JlYXRl
+        ZF9hdCI6IjIwMTYtMDctMjZUMTM6MDE6MjMuMjIxKzAwOjAwIiwidXBkYXRl
+        ZF9hdCI6IjIwMTYtMDctMjZUMTM6MDE6MjMuMjIxKzAwOjAwIiwidHlwZSI6
+        InJldmVudWUiLCJzdWJUeXBlIjoic3R1ZGVudCIsImRhdGUiOiIyMDE2LTA3
+        LTI1Iiwic3RhdCI6MjAsInVzZXJJZCI6NSwiZ2VuZGVyIjoiZmVtYWxlIiwi
+        YWdlIjowLCJncm91cCI6InN0dWRlbnQifX0seyJfaW5kZXgiOiJzdGF0cyIs
+        Il90eXBlIjoidHJhaW5pbmciLCJfaWQiOiJBVlluUzZod2RoNkU5dUZ1bExy
+        dCIsIl9zY29yZSI6MS4wLCJfc291cmNlIjp7ImNyZWF0ZWRfYXQiOiIyMDE2
+        LTA3LTI2VDEzOjAxOjI0Ljk3MyswMDowMCIsInVwZGF0ZWRfYXQiOiIyMDE2
+        LTA3LTI2VDEzOjAxOjI0Ljk3MyswMDowMCIsInR5cGUiOiJob3VyIiwic3Vi
+        VHlwZSI6ImRvbG9yLXNpdC1hbWV0IiwiZGF0ZSI6IjIwMTYtMDctMTMiLCJz
+        dGF0IjozLCJ1c2VySWQiOjUxMCwiZ2VuZGVyIjoibWFsZSIsImFnZSI6MzMs
+        Imdyb3VwIjoic3RhbmRhcmQiLCJyZXNlcnZhdGlvbklkIjozMTE2LCJjYSI6
+        MC4wLCJuYW1lIjoiTG9yZW0gaXBzdW0iLCJ0cmFpbmluZ0lkIjoxMCwidHJh
+        aW5pbmdEYXRlIjoiMjAxNi0wNy0xNSJ9fSx7Il9pbmRleCI6InN0YXRzIiwi
+        X3R5cGUiOiJ1c2VyIiwiX2lkIjoiQVZZblM2R3FkaDZFOXVGdWxMcnIiLCJf
+        c2NvcmUiOjEuMCwiX3NvdXJjZSI6eyJjcmVhdGVkX2F0IjoiMjAxNi0wNy0y
+        NlQxMzowMToyMy4yNDArMDA6MDAiLCJ1cGRhdGVkX2F0IjoiMjAxNi0wNy0y
+        NlQxMzowMToyMy4yNDArMDA6MDAiLCJ0eXBlIjoicmV2ZW51ZSIsInN1YlR5
+        cGUiOiJzdGFuZGFyZCIsImRhdGUiOiIyMDE2LTA3LTI1Iiwic3RhdCI6NTAs
+        InVzZXJJZCI6MTY2NiwiZ2VuZGVyIjoibWFsZSIsImFnZSI6NjMsImdyb3Vw
+        Ijoic3RhbmRhcmQifX0seyJfaW5kZXgiOiJzdGF0cyIsIl90eXBlIjoidHJh
+        aW5pbmciLCJfaWQiOiJBVlluUzZoLWRoNkU5dUZ1bExydSIsIl9zY29yZSI6
+        MS4wLCJfc291cmNlIjp7ImNyZWF0ZWRfYXQiOiIyMDE2LTA3LTI2VDEzOjAx
+        OjI0Ljk4NiswMDowMCIsInVwZGF0ZWRfYXQiOiIyMDE2LTA3LTI2VDEzOjAx
+        OjI0Ljk4NiswMDowMCIsInR5cGUiOiJib29raW5nIiwic3ViVHlwZSI6ImZv
+        cm1hdGlvbi1pbXByaW1hbnRlLTNkIiwiZGF0ZSI6IjIwMTYtMDctMTMiLCJz
+        dGF0IjoxLCJ1c2VySWQiOjMzMiwiZ2VuZGVyIjoiZmVtYWxlIiwiYWdlIjox
+        OSwiZ3JvdXAiOiJzdHVkZW50IiwicmVzZXJ2YXRpb25JZCI6MzExNywiY2Ei
+        OjI1LjAsIm5hbWUiOiJGb3JtYXRpb24gSW1wcmltYW50ZSAzRCIsInRyYWlu
+        aW5nSWQiOjEsInRyYWluaW5nRGF0ZSI6IjIwMTYtMDctMTQifX0seyJfaW5k
+        ZXgiOiJzdGF0cyIsIl90eXBlIjoidXNlciIsIl9pZCI6IkFWWW5TNmtLZGg2
+        RTl1RnVsTHJ3IiwiX3Njb3JlIjoxLjAsIl9zb3VyY2UiOnsiY3JlYXRlZF9h
+        dCI6IjIwMTYtMDctMjZUMTM6MDE6MjUuMTI4KzAwOjAwIiwidXBkYXRlZF9h
+        dCI6IjIwMTYtMDctMjZUMTM6MDE6MjUuMTI5KzAwOjAwIiwidHlwZSI6InJl
+        dmVudWUiLCJzdWJUeXBlIjoic3RhbmRhcmQiLCJkYXRlIjoiMjAxNi0wNy0x
+        MyIsInN0YXQiOjAsInVzZXJJZCI6NTEwLCJnZW5kZXIiOiJtYWxlIiwiYWdl
+        IjozMywiZ3JvdXAiOiJzdGFuZGFyZCJ9fSx7Il9pbmRleCI6InN0YXRzIiwi
+        X3R5cGUiOiJzdWJzY3JpcHRpb24iLCJfaWQiOiJBVlluUzZEQWRoNkU5dUZ1
+        bExyayIsIl9zY29yZSI6MS4wLCJfc291cmNlIjp7ImNyZWF0ZWRfYXQiOiIy
+        MDE2LTA3LTI2VDEzOjAxOjIzLjAwMSswMDowMCIsInVwZGF0ZWRfYXQiOiIy
+        MDE2LTA3LTI2VDEzOjAxOjIzLjAwMSswMDowMCIsInR5cGUiOiIyNTkyMDAw
+        Iiwic3ViVHlwZSI6InN0dWRlbnQtbW9udGgiLCJkYXRlIjoiMjAxNi0wNy0y
+        NSIsInN0YXQiOjEsInVzZXJJZCI6NjI2LCJnZW5kZXIiOiJtYWxlIiwiYWdl
+        IjoxOSwiZ3JvdXAiOiJzdHVkZW50IiwiY2EiOjI1LjAsInBsYW5JZCI6Mywi
+        c3Vic2NyaXB0aW9uSWQiOjM3OSwiaW52b2ljZUl0ZW1JZCI6MzU5NiwiZ3Jv
+        dXBOYW1lIjoiw6l0dWRpYW50LCAtIGRlIDI1IGFucywgZW5zZWlnbmFudCwg
+        ZGVtYW5kZXVyIGQnZW1wbG9pIn19XX19
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 09:25:19 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/_search/scroll?scroll=30s
+    body:
+      encoding: UTF-8
+      string: cXVlcnlUaGVuRmV0Y2g7NTsxMjE6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjI6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjQ6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjM6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjU6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTswOw==
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '2843'
+    body:
+      encoding: UTF-8
+      string: '{"_scroll_id":"cXVlcnlUaGVuRmV0Y2g7NTsxMjE6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjI6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjQ6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjM6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTsxMjU6OWxCbFJ0a19SU1c3NHVKa1ExNzVOUTswOw==","took":3,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":17,"max_score":1.0,"hits":[{"_index":"stats","_type":"machine","_id":"AVYnS6EHdh6E9uFulLrm","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:23.078+00:00","updated_at":"2016-07-26T13:01:23.078+00:00","type":"booking","subType":"petite-fraiseuse","date":"2016-07-25","stat":1,"userId":5,"gender":"female","age":0,"group":"student","reservationId":3118,"ca":20.0,"name":"Petite
+        Fraiseuse","machineId":5}},{"_index":"stats","_type":"training","_id":"AVYnS6iPdh6E9uFulLrv","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:24.998+00:00","updated_at":"2016-07-26T13:01:24.998+00:00","type":"hour","subType":"formation-imprimante-3d","date":"2016-07-13","stat":4,"userId":332,"gender":"female","age":19,"group":"student","reservationId":3117,"ca":25.0,"name":"Formation
+        Imprimante 3D","trainingId":1,"trainingDate":"2016-07-14"}},{"_index":"stats","_type":"user","_id":"AVYnS7ENdh6E9uFulLr0","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:27.180+00:00","updated_at":"2016-07-26T13:01:27.180+00:00","type":"revenue","subType":"student","date":"2016-06-28","stat":25,"userId":19,"gender":"male","age":30,"group":"student"}},{"_index":"stats","_type":"machine","_id":"AVYnS6EQdh6E9uFulLrn","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:23.086+00:00","updated_at":"2016-07-26T13:01:23.086+00:00","type":"hour","subType":"petite-fraiseuse","date":"2016-07-25","stat":1,"userId":5,"gender":"female","age":0,"group":"student","reservationId":3118,"ca":20.0,"name":"Petite
+        Fraiseuse","machineId":5}},{"_index":"stats","_type":"user","_id":"AVYnS6Gfdh6E9uFulLrq","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:23.230+00:00","updated_at":"2016-07-26T13:01:23.230+00:00","type":"revenue","subType":"student","date":"2016-07-25","stat":25,"userId":626,"gender":"male","age":19,"group":"student"}},{"_index":"stats","_type":"training","_id":"AVYnS6hldh6E9uFulLrs","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:24.963+00:00","updated_at":"2016-07-26T13:01:24.963+00:00","type":"booking","subType":"dolor-sit-amet","date":"2016-07-13","stat":1,"userId":510,"gender":"male","age":33,"group":"standard","reservationId":3116,"ca":0.0,"name":"Lorem
+        ipsum","trainingId":10,"trainingDate":"2016-07-15"}},{"_index":"stats","_type":"user","_id":"AVYnS6kSdh6E9uFulLrx","_score":1.0,"_source":{"created_at":"2016-07-26T13:01:25.135+00:00","updated_at":"2016-07-26T13:01:25.135+00:00","type":"revenue","subType":"student","date":"2016-07-13","stat":25,"userId":332,"gender":"female","age":19,"group":"student"}}]}}'
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 09:25:19 GMT
+recorded_with: VCR 3.0.1

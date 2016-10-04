@@ -210,6 +210,7 @@
                   <li ng-click="invoice.reference.help = 'addDay.html'">{{ 'day' | translate }}</li>
                   <li ng-click="invoice.reference.help = 'addInvoiceNumber.html'">{{ '#_of_invoice' | translate }}</li>
                   <li ng-click="invoice.reference.help = 'addOnlineInfo.html'">{{ 'online_sales' | translate }}</li>
+                  <%# <li ng-click="invoice.reference.help = 'addWalletInfo.html'">{{ 'wallet' | translate }}</li> %>
                   <li ng-click="invoice.reference.help = 'addRefundInfo.html'">{{ 'refund' | translate }}</li>
               </ul>
           </div>
@@ -276,6 +277,12 @@
 <script type="text/ng-template" id="addOnlineInfo.html">
     <table class="invoice-element-legend">
         <tr><td><strong>X[texte]</strong></td><td>{{ 'add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ '(eg_X[/VL]_will_add_/VL_to_the_invoices_settled_with_stripe)' | translate }}</td></tr>
+    </table>
+</script>
+
+<script type="text/ng-template" id="addWalletInfo.html">
+    <table class="invoice-element-legend">
+        <tr><td><strong>W[texte]</strong></td><td>{{ 'add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ '(eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet)' | translate }}</td></tr>
     </table>
 </script>
 

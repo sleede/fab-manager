@@ -1,0 +1,10 @@
+rsa-key-size = 4096
+server = https://acme-v01.api.letsencrypt.org/directory
+email = REPLACE_WITH_YOUR@EMAIL.COM
+text = True
+agree-tos = True
+agree-dev-preview = True
+renew-by-default = True
+authenticator = webroot
+domains = MAIN_DOMAIN, ANOTHER_DOMAIN_1, ANOTHER_DOMAIN_2
+webroot-path = /etc/letsencrypt/webrootauth
