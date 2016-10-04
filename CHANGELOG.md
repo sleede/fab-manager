@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.0 2016 October 4
+ 
 - RSS feeds to follow new projects and events published
 - Use slugs in projects URL opened from notifications
 - Ask for confirmation on machine deletion from the public view
