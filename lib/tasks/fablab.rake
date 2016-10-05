@@ -134,13 +134,21 @@ namespace :fablab do
     # create doctype
     client.indices.put_mapping index: Availability.index_name,  type: Availability.document_type, body: Availability.mappings.to_hash
 
-    # index requested documents
-    if args.id
-      AvailabilityIndexerWorker.perform_async(:index, id)
-    else
-      Availability.pluck(:id).each do |availability_id|
-        AvailabilityIndexerWorker.perform_async(:index, availability_id)
+    # verify doctype creation was successful
+    if client.indices.exists_type? index: Availability.index_name, type: Availability.document_type
+      puts "[ElasticSearch] #{Availability.index_name}/#{Availability.document_type} successfully created with its mapping."
+
+      # index requested documents
+      if args.id
+        AvailabilityIndexerWorker.perform_async(:index, id)
+      else
+        Availability.pluck(:id).each do |availability_id|
+          AvailabilityIndexerWorker.perform_async(:index, availability_id)
+        end
       end
+    else
+      puts "[ElasticSearch] An error occurred while creating #{Availability.index_name}/#{Availability.document_type}. Please check your ElasticSearch configuration."
+      puts "\nCancelling..."
     end
   end
 
