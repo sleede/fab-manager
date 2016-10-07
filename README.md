@@ -159,7 +159,7 @@ This value is only used when deploying with Docker, otherwise this is configured
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
-Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for informations on how to create a user and set his password.
+Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
 
     REDIS_HOST
@@ -222,11 +222,11 @@ Identifier of your Google Analytics account.
 
 Unique identifier of your [Disqus](http://www.disqus.com) forum.
 Disqus forums are used to allow visitors to comment on projects.
-See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more informations.
+See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
 
     TWITTER_NAME
 
-Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page. 
+Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
 It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
 
     TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
@@ -241,8 +241,8 @@ If you do so, you'll be able to customize and get statistics about project share
 
     LOG_LEVEL
 
-This parameter configures the logs verbosity. 
-Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels). 
+This parameter configures the logs verbosity.
+Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
 
     ALLOWED_EXTENSIONS
 
@@ -361,7 +361,7 @@ To create it, please follow these instructions:
    ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
    ```
 6. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
- 
+
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
 
@@ -370,14 +370,14 @@ To create it, please follow these instructions:
   So here's your choices, mainly depending on your security requirements:
   - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
-  
+
     ```sql
     ALTER USER sleede WITH SUPERUSER;
     ```
-  
-  - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist). 
+
+  - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
-- Some users may want to use another DBMS than PostgreSQL. 
+- Some users may want to use another DBMS than PostgreSQL.
   This is currently not supported, because of some PostgreSQL specific instructions that cannot be efficiently handled with the ActiveRecord ORM:
   - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
   - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
@@ -386,8 +386,8 @@ To create it, please follow these instructions:
   - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
-  This also requires your user to have the _SUPERUSER_ role. 
-  Please see the [known issues](#known-issues) section for more informations about this.
+  This also requires your user to have the _SUPERUSER_ role.
+  Please see the [known issues](#known-issues) section for more information about this.
 
 <a name="elasticsearch"></a>
 ## ElasticSearch
@@ -518,7 +518,7 @@ Back-end translations uses the [Ruby on Rails syntax](http://guides.rubyonrails.
 
 In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
-These comments are not required to be translated, they are intended to help the translator to have some context informations about the sentence to translate.
+These comments are not required to be translated, they are intended to help the translator to have some context information about the sentence to translate.
 
 
 <a name="i18n-configuration"></a>
@@ -652,7 +652,7 @@ Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki
 Currently OAuth 2 is the only supported protocol for SSO authentication.
 
 For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
-Developers may find informations on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
+Developers may find information on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
 
 <a name="known-issues"></a>
 ## Known issues
@@ -692,10 +692,10 @@ Developers may find informations on how to implement their own authentication pr
 
   DO NOT do this in a production environment, unless you know what you're doing: this could lead to a serious security issue.
 
-- With Ubuntu 16.04, ElasticSearch may refuse to start even after having configured the service with systemd. 
+- With Ubuntu 16.04, ElasticSearch may refuse to start even after having configured the service with systemd.
   To solve this issue, you may have to set `START_DAEMON` to `true` in `/etc/default/elasticsearch`.
   Then reload ElasticSearch with:
-  
+
   ```bash
   sudo systemctl restart elasticsearch.service
   ```

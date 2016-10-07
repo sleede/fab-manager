@@ -80,7 +80,7 @@ en:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
-        i_accept_to_receive_informations_from_the_fablab: "I accept to receive informations from the FabLab"
+        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the FabLab policy"
 
@@ -200,7 +200,7 @@ en:
         i_choose_that_plan: "I choose that plan"
         i_subscribe_online: "I subscribe online"
         i_already_subscribed: "I already subscribed"
-        more_informations: "More informations"
+        more_information: "More information"
         your_subscription_expires_on_the_DATE: "Your subscription expires on the {{DATE}}"  # angular interpolation
         my_group: "My group"
         his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"  # messageFormat interpolation

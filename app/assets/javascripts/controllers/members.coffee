@@ -14,10 +14,10 @@ Application.Controllers.controller "MembersController", ["$scope", 'Member', 'me
 
 
   ### PUBLIC SCOPE ###
-  
+
   ## currently displayed page of members
   $scope.page = 1
-  
+
   ## members list
   $scope.members = membersPromise
 
@@ -31,12 +31,12 @@ Application.Controllers.controller "MembersController", ["$scope", 'Member', 'me
   $scope.showNextMembers = ->
     $scope.page += 1
     Member.query {
-      requested_attributes:'[profile]', 
-      page: $scope.page, 
+      requested_attributes:'[profile]',
+      page: $scope.page,
       size: MEMBERS_PER_PAGE
     }, (members) ->
       $scope.members = $scope.members.concat(members)
-      
+
       if (!members[0] || members[0].maxMembers <= $scope.members.length)
         $scope.noMoreResults = true
 
@@ -260,7 +260,7 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
 ##
 Application.Controllers.controller "ShowProfileController", ["$scope", 'memberPromise', 'SocialNetworks', ($scope, memberPromise, SocialNetworks) ->
 
-  ## Selected user's informations
+  ## Selected user's information
   $scope.user = memberPromise # DEPENDENCY WITH NAVINUM GAMIFICATION PLUGIN !!!!
 
   ## List of social networks associated with this user and toggle 'show all' state

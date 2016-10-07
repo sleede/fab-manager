@@ -27,7 +27,7 @@ module PDF
       image StringIO.new( Base64.decode64(img_b64.value) ), :fit => [415,40]
       move_down 20
       font('Open-Sans', :size => 10) do
-        # general informations
+        # general information
         if invoice.is_a?(Avoir)
           text I18n.t('invoices.refund_invoice_reference', REF:invoice.reference), :leading => 3
         else
@@ -47,7 +47,7 @@ module PDF
           text I18n.t('invoices.invoice_issued_on_DATE', DATE:I18n.l(invoice.created_at.to_date))
         end
 
-        # user/organization's informations
+        # user/organization's information
         if invoice&.user&.profile&.organization
           name = invoice.user.profile.organization.name
         else
@@ -261,7 +261,7 @@ module PDF
         end
         text payment_verbose
 
-        # important informations
+        # important information
         move_down 40
         txt = parse_html(Setting.find_by({name: 'invoice_text'}).value)
         txt.each_line do |line|
@@ -269,7 +269,7 @@ module PDF
         end
 
 
-        # address and legals informations
+        # address and legals information
         move_down 40
         txt = parse_html(Setting.find_by({name: 'invoice_legals'}).value)
         txt.each_line do |line|
