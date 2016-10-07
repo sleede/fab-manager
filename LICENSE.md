@@ -39,14 +39,14 @@ Some other used libraries/components are licenced under the terms of the
 
 Errors and omissions excepted, the other external libraries used in this
 project are licenced under the terms of the [MIT Licence](https://opensource.org/licenses/MIT).
-Please refer to the libraries documentation for more informations about
-their licences. 
+Please refer to the libraries documentation for more information about
+their licences.
 
 Complete lists of used libraries are available in `bower.json` for the
 EcmaScript libraries and in `Gemfile` for Ruby libraries.
 
 
-    
+
 
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007

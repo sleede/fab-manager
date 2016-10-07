@@ -20,13 +20,13 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
   ## name of the current fablab application (eg. "Fablab de la Casemate")
   $scope.fablabName = settingsPromise.fablab_name
 
-  ## informations from the current SSO provider
+  ## information from the current SSO provider
   $scope.activeProvider = activeProviderPromise
 
   ## list of user's groups (student/standard/...)
   $scope.groups = groupsPromise
 
-  ## current user, contains informations retrieved from the SSO
+  ## current user, contains information retrieved from the SSO
   $scope.user = memberPromise
 
   ## disallow the user to change his password as he connect from SSO

@@ -109,7 +109,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
       groupObj.plans.push(plan) if plan.group_id == group.id
     $scope.plansClassifiedByGroup.push(groupObj)
 
-  ## indicates the state of the current view : calendar or plans informations
+  ## indicates the state of the current view : calendar or plans information
   $scope.plansAreShown = false
 
   ## indicates if the selected training was validated (ie. added to the shopping cart)

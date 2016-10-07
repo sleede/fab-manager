@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
 
     where(provider: auth.provider, uid: auth.uid).first_or_create.tap do |user|
       # execute this regardless of whether record exists or not (-> User#tap)
-      # this will init or update the user thanks to the informations retrieved from the SSO
+      # this will init or update the user thanks to the information retrieved from the SSO
       user.profile ||= Profile.new
       auth.info.mapping.each do |key, value|
         user.set_data_from_sso_mapping(key, value)

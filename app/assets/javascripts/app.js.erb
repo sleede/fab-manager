@@ -71,7 +71,7 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
       // Angular-xeditable (click-to-edit elements, used in admin backoffice)
       editableOptions.theme = 'bs3';
 
-      // Alter the UI-Router's $state, registering into some informations concerning the previous $state.
+      // Alter the UI-Router's $state, registering into some information concerning the previous $state.
       // This is used to allow the user to navigate to the previous state
       $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
         $state.prevState = fromState;
