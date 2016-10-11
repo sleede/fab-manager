@@ -198,7 +198,7 @@ fr:
       body:
         new_account_imported: "Un nouveau compte utilisateur (ID: %{ID}) vient d'être importé sur la plate-forme via %{PROVIDER}."
         provider_uid: "Son identifiant fournisseur est %{UID}."
-        known_informations: "Voici les informations connues à son propos :"
+        known_information: "Voici les informations connues à son propos :"
         address_already_used: "Cette adresse est déjà associée à un autre utilisateur"
         no_more_info_available: "Aucune autre information sur cet utilisateur n'est disponible tant que celui-ci n'aura pas complété son profil."
 

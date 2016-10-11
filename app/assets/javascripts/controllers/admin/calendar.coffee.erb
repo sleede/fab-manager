@@ -50,6 +50,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       calendarEventClickCb(event, jsEvent, view)
     eventRender: (event, element, view) ->
       eventRenderCb(event, element)
+    loading: (isLoading, view ) ->
+      loadingCb(isLoading, view)
 
 
 
@@ -181,11 +183,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     if ($(jsEvent.target).hasClass('remove-event'))
       Availability.delete id: event.id, ->
         uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents', event.id
-        for _event, i in $scope.eventSources[0].events
-          if _event.id == event.id
-            $scope.eventSources[0].events.splice(i,1)
 
-        growl.success(_t('the_slot_START-END_has_been_successfully_deleted', {START:+moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+        growl.success(_t('the_slot_START-END_has_been_successfully_deleted', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
       ,->
         growl.error(_t('unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:+moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
     # if the user has only clicked on the event, display its reservations
@@ -207,7 +206,19 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       for tag in event.tags
         html += "<span class='label label-success text-white'>#{tag.name}</span> "
       element.find('.fc-title').append("<br/>"+html)
+    # force return to prevent coffee-script auto-return to return random value (possiblity falsy)
     return
+
+
+
+  ##
+  # Triggered when resource fetching starts/stops.
+  # @see https://fullcalendar.io/docs/resource_data/loading/
+  ##
+  loadingCb = (isLoading, view) ->
+    if (isLoading)
+      # we remove existing events when fetching starts to prevent duplicates
+      uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents')
 
 ]
 

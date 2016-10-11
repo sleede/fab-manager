@@ -1,5 +1,12 @@
 # Changelog Fab Manager
 
+## v2.4.1 2016 October 11
+
+- Fix a bug: unable to share a project/event without image on social networks 
+- Fix a bug: after creating an element in the admin calendar, browsing through the calendar and coming back cause the element to appear duplicated
+- Fix a bug: after deleting an element in the admin calendar, the confirmation message is wrong and an error is logged in the console
+- Fix a bug: erroneous syntax in docker env example file
+
 ## v2.4.0 2016 October 4
  
 - RSS feeds to follow new projects and events published

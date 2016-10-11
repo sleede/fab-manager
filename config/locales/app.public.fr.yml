@@ -80,7 +80,7 @@ fr:
         phone_number: "Numéro de téléphone"
         phone_number_is_required: "Le numéro de téléphone est requis."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
-        i_accept_to_receive_informations_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
+        i_accept_to_receive_information_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
 
@@ -201,7 +201,7 @@ fr:
         i_choose_that_plan: "Je choisis cette formule"
         i_subscribe_online: "Je m'abonne en ligne"
         i_already_subscribed: "Je suis déjà abonné"
-        more_informations: "Plus d'infos"
+        more_information: "Plus d'infos"
         your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}"  # angular interpolation
         my_group: "Mon groupe"
         his_group: "Son groupe"  # messageFormat interpolation
@@ -228,7 +228,7 @@ fr:
         # détails d'un événement et réservation
         event_description: "Description de l'évènement"
         downloadable_documents: "Documents à télécharger"
-        informations_and_booking: "Informations et réservation"
+        information_and_booking: "Informations et réservation"
         beginning: "Début :"
         ending: "Fin :"
         opening_hours: "Horaires :"
