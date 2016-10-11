@@ -198,7 +198,7 @@ en:
       body:
         new_account_imported: "A new user account (ID: %{ID}) has been imported to the website via %{PROVIDER}."
         provider_uid: "its provider ID is: "
-        known_informations: "Here is what we know about this provider:"
+        known_information: "Here is what we know about this provider:"
         address_already_used: "This address is already associated with another user"
         no_more_info_available: "No other info about this user can be provided before he completes his profile."
 

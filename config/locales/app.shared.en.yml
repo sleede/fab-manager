@@ -199,7 +199,7 @@ en:
 
       plan:
         # subscription plan edition form
-        general_informations: "General informations"
+        general_information: "General information"
         name_length_must_be_less_than_24_characters: "Name length must be less than 24 characters."
         type_is_required: "Type is required."
         group: "Group"
