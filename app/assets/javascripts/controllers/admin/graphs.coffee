@@ -362,6 +362,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
       "index": "stats"
       "type": esType
       "searchType": "count"
+      "stat-type": statType
       "body": buildElasticAggregationsQuery(statType, $scope.display.interval, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
     , (error, response) ->
       if (error)
