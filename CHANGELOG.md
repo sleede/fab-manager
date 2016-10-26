@@ -3,7 +3,8 @@
 ## next release
 
 - Ability to use HTML in event's descriptions using a WYSIWYG editor
-- Fix a bug: statistics graphs were not showing  
+- Fix a bug: statistics graphs were not showing
+- In the sign-up modal, the translation for 'i_accept_to_receive_information_from_the_fablab' was not loaded
 
 ## v2.4.1 2016 October 11
 
