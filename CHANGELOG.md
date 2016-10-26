@@ -2,6 +2,7 @@
 
 ## next release
 
+- Ability to use HTML in event's descriptions using a WYSIWYG editor
 - Fix a bug: statistics graphs were not showing  
 
 ## v2.4.1 2016 October 11

@@ -40,7 +40,16 @@
       <div class="form-group" ng-class="{'has-error': eventForm['event[description]'].$dirty && eventForm['event[description]'].$invalid}">
         <label for="description" class="col-sm-3 control-label">{{ 'description' | translate }} *</label>
         <div class="col-sm-9">
-          <textarea ng-model="event.description" rows="16" class="form-control" id="event_description" placeholder="" name="event[description]" required></textarea>
+          <input type="hidden"
+                 name="event[description]"
+                 ng-value="event.description" />
+          <summernote ng-model="event.description"
+                      id="event_description"
+                      placeholder=""
+                      config="summernoteOpts"
+                      name="event[description]"
+                      required>
+          </summernote>
           <span class="help-block" ng-show="eventForm['event[description]'].$dirty && eventForm['event[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
         </div>
       </div>
