@@ -13,9 +13,8 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/LaCasemate/fab-manager/issues) is the preferred channel for [bug reports](#bugs), 
-[features requests](#features) and [submitting pull requests](#pull-requests), but please respect the following 
-restrictions:
+The [issue tracker](https://github.com/LaCasemate/fab-manager/issues) is the preferred channel for [bug reports](#bugs)
+and [submitting pull requests](#pull-requests), but please respect the following restrictions:
 
 * Please **do not** use the issue tracker for personal support requests (use [the forum](https://forum.fab-manager.com)).
 
@@ -69,6 +68,9 @@ Example:
 Feature requests are welcome. But take a moment to find out whether your idea fits with the scope and aims of the 
 project. It's up to *you* to make a strong case to convince the project's developers of the merits of this feature. 
 Please provide as much detail and context as possible.
+
+Please note also that [the forum](https://forum.fab-manager.com) is probably a better place for discussing about feature 
+requests.
 
 
 <a name="pull-requests"></a>
