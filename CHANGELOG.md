@@ -2,6 +2,7 @@
 
 ## next release
 
+- Allow add more picture for project step
 - Ability to use HTML in event's descriptions using a WYSIWYG editor
 - Fix a bug: statistics graphs were not showing
 - In the sign-up modal, the translation for 'i_accept_to_receive_information_from_the_fablab' was not loaded

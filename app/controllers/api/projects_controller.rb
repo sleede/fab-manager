@@ -71,6 +71,6 @@ class API::ProjectsController < API::ApiController
                                       user_ids: [], machine_ids: [], component_ids: [], theme_ids: [], project_image_attributes: [:attachment],
                                       project_caos_attributes: [:id, :attachment, :_destroy],
                                       project_steps_attributes: [:id, :description, :title, :_destroy, :step_nb,
-                                        :project_step_image_attributes => :attachment])
+                                        :project_step_images_attributes => [:id, :attachment, :_destroy]])
     end
 end

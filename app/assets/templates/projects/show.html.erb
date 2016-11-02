@@ -42,10 +42,10 @@
           <div class="col-md-12 m-b-xs">
              <h3 class="well well-simple step-title">{{ 'step_N' | translate:{INDEX:step.step_nb} }} : {{step.title}}</h3>
           </div>
-          <div class="col-md-4" ng-if="step.project_step_image">
-            <a href="{{step.project_step_full_image_url}}" target="_blank"><img class="img-responsive m-b" ng-src="{{step.project_step_image_url}}" alt="{{step.title}}" ></a>
+          <div class="col-md-4" ng-repeat="image in step.project_step_images_attributes">
+            <a href="{{image.attachment_full_url}}" target="_blank"><img class="img-responsive m-b" ng-src="{{image.attachment_url}}" alt="{{image.attachment}}" ></a>
           </div>
-          <div class="col-md-8" ng-class="{'col-md-12' : step.project_step_image == undefined}">
+          <div class="col-md-8" ng-class="{'col-md-12' : step.project_step_images_attributes.length > 1 || step.project_step_images_attributes.length == 0}">
 
               <p ng-bind-html="step.description | toTrusted"></p>
           </div>
