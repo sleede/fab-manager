@@ -15,6 +15,16 @@
 .note-editor .note-editable {
   background-color: white;
 }
+.note-editor {
+  .form-group {
+    margin-left:  0px;
+    margin-right: 0px;
+  }
+
+  .modal-header {
+    padding: 15px;
+  }
+}
 
 
 // Growl
