@@ -2,6 +2,7 @@
 
 ## next release
 
+- Fix bug: Event date period dont show correct in invoice
 - Image max size is configutable, size by default is 2 megabytes
 - Allow add more picture for project step
 - Ability to use HTML in event's descriptions using a WYSIWYG editor
