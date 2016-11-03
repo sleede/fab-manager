@@ -101,7 +101,8 @@
               <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description]></summernote>
 
               <div class="row">
-                <div class="col-md-4" ng-repeat="image in step.project_step_images_attributes" ng-show="!image._destroy">
+                <div ng-repeat-start="image in step.project_step_images_attributes" class="clearfix" ng-if="$index % 3 == 0"></div>
+                <div class="col-md-4" ng-repeat-end ng-show="!image._destroy">
                   <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][id]" ng-value="image.id" />
                   <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][_destroy]" ng-value="image._destroy" />
 

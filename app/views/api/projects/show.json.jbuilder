@@ -51,7 +51,7 @@ json.project_steps_attributes @project.project_steps.order('project_steps.step_n
   json.id s.id
   json.description s.description
   json.title s.title
-  json.project_step_images_attributes s.project_step_images do |si|
+  json.project_step_images_attributes s.project_step_images.order('created_at ASC') do |si|
     json.id si.id
     json.attachment si.attachment_identifier
     json.attachment_url si.attachment.medium.url
