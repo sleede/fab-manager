@@ -107,7 +107,11 @@ class Reservation < ActiveRecord::Base
           amount += ticket.booked * ticket.event_price_category.amount
         end
         slots.each do |slot|
-          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+          description = "#{reservable.name} "
+          (slot.start_at.to_date..slot.end_at.to_date).each do |d|
+            description += "\n" if slot.start_at.to_date != slot.end_at.to_date
+            description += "#{I18n.l d, format: :long} #{I18n.l slot.start_at, format: :hour_minute} - #{I18n.l slot.end_at, format: :hour_minute}"
+          end
           ii_amount = amount
           ii_amount = 0 if (slot.offered and on_site)
           unless on_site

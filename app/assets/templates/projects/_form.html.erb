@@ -100,15 +100,32 @@
               <input type="hidden" name="project[project_steps_attributes][][description]" ng-value="step.description" />
               <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description]></summernote>
 
-              <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(step.project_step_image)">
-                <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'add_a_picture' | translate }} <i class="fa fa-file-image-o m-l-sm" aria-hidden="true"></i></span><span class="fileinput-exists" translate>{{ 'change_the_picture' }}</span>
-                  <input type="file"
-                         name="project[project_steps_attributes][][project_step_image_attributes][attachment]"></span>
-                <span class="fileinput-filename">{{step.project_step_image}}</span>
-                <a class="close fileinput-exists" data-dismiss="fileinput" style="float: none"><i class="fa fa-trash-o"></i></a>
+              <div class="row">
+                <div ng-repeat-start="image in step.project_step_images_attributes" class="clearfix" ng-if="$index % 3 == 0"></div>
+                <div class="col-md-4" ng-repeat-end ng-show="!image._destroy">
+                  <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][id]" ng-value="image.id" />
+                  <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][_destroy]" ng-value="image._destroy" />
+
+                  <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(image.attachment)" style="width: 100%;">
+                    <div class="fileinput-new thumbnail" style="width: 100%; height: 200px;">
+                      <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!image.attachment">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
+                      <img ng-src="{{ image.attachment_url }}" alt="{{image.attachment}}" />
+                    </div>
+                    <div>
+                      <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'browse' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'change' }}</span>
+                        <input type="file" name="project[project_steps_attributes][][project_step_images_attributes][][attachment]"></span>
+                      <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteProjectStepImage(step, image)" translate>{{ 'delete' }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a class="btn btn-default" ng-click="addProjectStepImage(step)" role="button">{{ 'add_a_picture' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
               </div>
 
-              <div>
+              <div class="m-t">
                 <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o m-r-xs"></i> {{ 'delete_the_step' | translate }}</a>
               </div>
             </div>

@@ -124,7 +124,7 @@ class ProjectsController
     ##
     $scope.addStep = ->
       $scope.totalSteps += 1
-      $scope.project.project_steps_attributes.push { step_nb: $scope.totalSteps }
+      $scope.project.project_steps_attributes.push { step_nb: $scope.totalSteps, project_step_images_attributes: [] }
 
 
 
@@ -184,6 +184,26 @@ class ProjectsController
       , (error)->
         console.error(error)
 
+
+    ##
+    # This will create a single new empty entry into the project's step image list.
+    ##
+    $scope.addProjectStepImage = (step)->
+      step.project_step_images_attributes.push {}
+
+
+
+    ##
+    # This will remove the given image from the project's step image list.
+    # @param step {Object} the project step has images
+    # @param image {Object} the image to delete
+    ##
+    $scope.deleteProjectStepImage = (step, image) ->
+      index = step.project_step_images_attributes.indexOf(image)
+      if image.id?
+        image._destroy = true
+      else
+        step.project_step_images_attributes.splice(index, 1)
 
 
 ##

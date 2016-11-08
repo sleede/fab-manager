@@ -258,6 +258,12 @@ Each item in the list must be separated from the others by a space char.
 You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
 Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
 
+    MAX_IMAGE_SIZE
+
+Maximum size (in bytes) allowed for image uploaded on the platform. 
+This parameter concerns events, plans, user's avatars, projects and steps of projects.
+If this parameter is not specified the maximum size allowed will be 2MB.
+
     Settings related to Open Projects
 
 See the [Open Projects](#open-projects) section for a detailed description of these parameters.

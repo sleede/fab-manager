@@ -1,5 +1,15 @@
 # Changelog Fab Manager
 
+## v2.4.2 2016 November 8
+
+- Image max size is configurable, default size is 2 megabytes
+- Allow add more pictures for project step
+- Ability to use HTML in event's descriptions using a WYSIWYG editor
+- Fix a bug: statistics graphs were not showing
+- Fix a bug: On invoices, only starting date is shown for multi-days events
+- Fix a bug: In the sign-up modal, the translation for 'i_accept_to_receive_information_from_the_fablab' was not loaded
+- [TODO DEPLOY] add `MAX_IMAGE_SIZE` environment variable in `application.yml` and docker env
+
 ## v2.4.1 2016 October 11
 
 - Fix a bug: unable to share a project/event without image on social networks 
