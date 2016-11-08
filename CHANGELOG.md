@@ -1,13 +1,13 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.2 2016 November 8
 
-- Fix bug: Event date period dont show correct in invoice
-- Image max size is configutable, size by default is 2 megabytes
-- Allow add more picture for project step
+- Image max size is configurable, default size is 2 megabytes
+- Allow add more pictures for project step
 - Ability to use HTML in event's descriptions using a WYSIWYG editor
 - Fix a bug: statistics graphs were not showing
-- In the sign-up modal, the translation for 'i_accept_to_receive_information_from_the_fablab' was not loaded
+- Fix a bug: On invoices, only starting date is shown for multi-days events
+- Fix a bug: In the sign-up modal, the translation for 'i_accept_to_receive_information_from_the_fablab' was not loaded
 - [TODO DEPLOY] add `MAX_IMAGE_SIZE` environment variable in `application.yml` and docker env
 
 ## v2.4.1 2016 October 11
