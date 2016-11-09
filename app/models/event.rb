@@ -108,6 +108,8 @@ class Event < ActiveRecord::Base
           availability: Availability.new(start_at: start_at, end_at: end_at, available_type: 'event'),
           availability_id: nil,
           category_id: category_id,
+          age_range_id: age_range_id,
+          event_themes: event_themes,
           amount: amount,
           event_price_categories: event_price_cats,
           nb_total_places: nb_total_places,
