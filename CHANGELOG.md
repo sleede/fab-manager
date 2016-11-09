@@ -2,6 +2,7 @@
 
 ## next release
 
+- Fix a bug: conflict between similar translations around "reservations"
 - Fix a bug: later occurrences of recurrent events does not have the initially configured theme and age range
 
 ## v2.4.2 2016 November 8
