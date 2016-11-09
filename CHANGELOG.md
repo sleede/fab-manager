@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fix a bug: later occurrences of recurrent events does not have the initially configured theme and age range
+
 ## v2.4.2 2016 November 8
 
 - Image max size is configurable, default size is 2 megabytes
