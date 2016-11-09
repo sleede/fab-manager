@@ -159,6 +159,9 @@
             <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
               <a class="pull-right m-t-xs text-u-l" href="#" ng-click="modifyReservation(reservation, $event)" translate>{{ 'change' }}</a>
             </div>
+            <div class="clear" ng-if="reservationCanCancel(reservation)">
+              <a class="pull-right m-t-xs text-u-l" href="#" ng-click="cancelReservation(reservation, $event)" translate>{{ 'cancel' }}</a>
+            </div>
           </div>
 
 

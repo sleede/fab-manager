@@ -327,7 +327,11 @@ class Reservation < ActiveRecord::Base
   end
 
   def total_booked_seats
-    total = nb_reserve_places
+    total = 0
+    unless slots.first.canceled_at
+      total = nb_reserve_places
+    end
+
     if tickets.count > 0
       total += tickets.map(&:booked).map(&:to_i).reduce(:+)
     end
@@ -356,7 +360,7 @@ class Reservation < ActiveRecord::Base
 
   def training_not_fully_reserved
     slot = self.slots.first
-    errors.add(:training, "already fully reserved") if Availability.find(slot.availability_id).is_completed
+    errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).is_completed
   end
 
   private

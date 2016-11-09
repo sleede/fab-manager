@@ -241,6 +241,9 @@ en:
         book: "Book"
         change_the_reservation: "Change the reservation"
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
+        cancel_the_reservation: "Cancel the reservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
+        cancellation_failed: "Cancellation failed."
 
       calendar:
         calendar: "Calendar"

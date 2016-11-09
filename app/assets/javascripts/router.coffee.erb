@@ -522,7 +522,7 @@ angular.module('application.router', ['ui.router']).
             PriceCategory.query().$promise
           ]
           settingsPromise: ['Setting', (Setting)->
-            Setting.query(names: "['booking_move_enable', 'booking_move_delay']").$promise
+            Setting.query(names: "['booking_move_enable', 'booking_move_delay', 'booking_cancel_enable', 'booking_cancel_delay']").$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe',

@@ -242,6 +242,9 @@ fr:
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
+        cancel_the_reservation: "Annuler la réservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
+        cancellation_failed: "L'annulation a échoué."
 
       calendar:
         calendar: "Calendrier"

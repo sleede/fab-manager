@@ -132,8 +132,8 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
-Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise', 'settingsPromise',
-($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise, settingsPromise) ->
+Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise', 'settingsPromise', 'dialogs',
+($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise, settingsPromise, dialogs) ->
 
 
 
@@ -169,8 +169,14 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ## Global config: is the user authorized to change his bookings slots?
   $scope.enableBookingMove = (settingsPromise.booking_move_enable == "true")
 
-  ## Global config: delay in hours before a booking while changing the booking slot is forbidden
+  ## Global config: delay in hours from now while changing the booking slot is forbidden
   $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
+
+  ## Global config: is the user authorized to cancel his booking slots?
+  $scope.enableBookingCancel = (settingsPromise.booking_cancel_enable == "true")
+
+  ## Global config: delay in hours from now when rectrictions occurs about cancelling reservations
+  $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay)
 
 
 
@@ -236,7 +242,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
 
-  ##
+  ##reservationCanCan
   # Callback to deal with the reservations of the user selected in the dropdown list instead of the current user's
   # reservations. (admins only)
   ##
@@ -312,6 +318,29 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
+  #
+  # @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.cancelReservation = (reservation, e)->
+    e.preventDefault()
+    e.stopPropagation()
+
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('cancel_the_reservation')
+          msg: _t('do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets')
+    , -> # cancel confirmed
+      Slot.cancel {id: reservation.slots[0].id}, -> # successfully canceled
+        growl.success _t('reservation_was_successfully_cancelled')
+        index = $scope.reservations.indexOf(reservation)
+        $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats
+        $scope.reservations.splice(index, 1)
+      , (error)->
+        growl.warning(_t('cancellation_failed'))
+
+  ##
   # Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
   # a new date for his reservation (if any available)
   # @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
@@ -333,9 +362,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         $scope.reservation = angular.copy reservation
 
         # set the reservable_id to the first available event
-        for e in event.recurrence_events
-          if e.nb_free_places > reservation.total_booked_seats
-            $scope.reservation.reservable_id = e.id
+        for evt in event.recurrence_events
+          if evt.nb_free_places > reservation.total_booked_seats
+            $scope.reservation.reservable_id = evt.id
             break
 
         # Callback to validate the new reservation's date
@@ -377,7 +406,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
   ##
   # Checks if the provided reservation is able to be moved (date change)
-  # @param reservation {{total_booked_seats:number}}
+  # @param reservation {{slots:[], total_booked_seats:number}}
   ##
   $scope.reservationCanModify = (reservation)->
     slotStart = moment(reservation.slots[0].start_at)
@@ -388,6 +417,17 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       isAble = true if e.nb_free_places >= reservation.total_booked_seats
     return (isAble and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay)
 
+
+
+  ##
+  # Checks if the provided reservation is able to be cancelled
+  # @param reservation {{slots:[]}}
+  ##
+  $scope.reservationCanCancel = (reservation)->
+    slotStart = moment(reservation.slots[0].start_at)
+    now = moment()
+
+    return ($scope.enableBookingCancel and slotStart.diff(now, "hours") >= $scope.cancelBookingDelay)
 
 
   ##
@@ -516,7 +556,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
 
   ##
-  # Set the current reservation to the default values. This implies to reservation form to be hidden.
+  # Set the current reservation to the default values. This implies the reservation form to be hidden.
   ##
   resetEventReserve = ->
     if $scope.event
