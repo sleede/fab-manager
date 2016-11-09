@@ -123,7 +123,7 @@ fr:
 
       event_reservations:
         # liste des réservations sur un évènement
-        reservations: "Les réservations :"
+        the_reservations: "Les réservations :"
         payment_date: "Date de paiement"
         reserved_tickets: "Places réservées"
         show_the_event: "Afficher l'évènement"
