@@ -2,8 +2,10 @@
 
 ## next release
 
+- Fix a bug: number of reserved seats for an event is always of 1 in the excel export of reservations 
 - Fix a bug: conflict between similar translations around "reservations"
 - Fix a bug: later occurrences of recurrent events does not have the initially configured theme and age range
+- [TODO DEPLOY] delete the `exports/users/reservations` folder to prevent the usage of old invalid exports
 
 ## v2.4.2 2016 November 8
 
