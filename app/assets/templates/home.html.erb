@@ -100,7 +100,7 @@
                     <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span>
                   </div>
               </div>
-              <p>{{event.description | humanize : 500 }}</p>
+              <p ng-bind-html="event.description | simpleText | humanize : 500 | breakFilter"></p>
 
               <hr/>
               <div class="row">

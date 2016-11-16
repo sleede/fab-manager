@@ -3,6 +3,7 @@
 ## next release
 
 - Export user's invoicing status in members' excel export
+- Fix a bug: Next events descriptions, shown on the home page, display raw html 
 - Fix a bug: number of reserved seats for an event is always of 1 in the excel export of reservations 
 - Fix a bug: conflict between similar translations around "reservations"
 - Fix a bug: later occurrences of recurrent events does not have the initially configured theme and age range
