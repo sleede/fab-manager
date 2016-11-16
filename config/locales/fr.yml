@@ -138,6 +138,7 @@ fr:
     validated_trainings: "Formations validées"
     tags: "Étiquettes"
     number_of_invoices: "Nombre de factures"
+    invoicing_disabled: "Facturation désactivée"
     projects: "Projets"
     facebook: "Facebook"
     twitter: "Twitter"

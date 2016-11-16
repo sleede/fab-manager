@@ -7,51 +7,68 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
 
   ## data table
   # heading labels
-  columns = [t('export_members.id'), t('export_members.surname'), t('export_members.first_name'), t('export_members.email'),
-             t('export_members.newsletter'), t('export_members.gender'), t('export_members.age'), t('export_members.address'), t('export_members.phone'),
-             t('export_members.website'), t('export_members.job'), t('export_members.interests'),
-             t('export_members.cad_software_mastered'), t('export_members.group'), t('export_members.subscription'),
-             t('export_members.subscription_end_date'), t('export_members.validated_trainings'), t('export_members.tags'),
-             t('export_members.number_of_invoices'), t('export_members.projects'), t('export_members.facebook'),
-             t('export_members.twitter'), t('export_members.echo_sciences'),
-             t('export_members.organization'), t('export_members.organization_address')]
+  columns = [t('export_members.id'),
+             t('export_members.surname'),
+             t('export_members.first_name'),
+             t('export_members.email'),
+             t('export_members.newsletter'),
+             t('export_members.gender'),
+             t('export_members.age'),
+             t('export_members.address'),
+             t('export_members.phone'),
+             t('export_members.website'),
+             t('export_members.job'),
+             t('export_members.interests'),
+             t('export_members.cad_software_mastered'),
+             t('export_members.group'),
+             t('export_members.subscription'),
+             t('export_members.subscription_end_date'),
+             t('export_members.validated_trainings'),
+             t('export_members.tags'),
+             t('export_members.number_of_invoices'),
+             t('export_members.invoicing_disabled'),
+             t('export_members.projects'),
+             t('export_members.facebook'),
+             t('export_members.twitter'),
+             t('export_members.echo_sciences'),
+             t('export_members.organization'),
+             t('export_members.organization_address')]
   sheet.add_row columns, :style => header
 
   # data rows
   @members.each do |member|
     data = [
-        member.id, member.profile.last_name, member.profile.first_name,
-        member.email, member.is_allow_newsletter, member.profile.gender ? t('export_members.man') : t('export_members.woman'), member.profile.age,
-        member.profile.address ? member.profile.address.address : '', member.profile.phone, member.profile.website,
-        member.profile.job, member.profile.interest, member.profile.software_mastered, member.group.name,
+        member.id,
+        member.profile.last_name,
+        member.profile.first_name,
+        member.email,
+        member.is_allow_newsletter,
+        member.profile.gender ? t('export_members.man') : t('export_members.woman'),
+        member.profile.age,
+        member.profile.address ? member.profile.address.address : '',
+        member.profile.phone,
+        member.profile.website,
+        member.profile.job,
+        member.profile.interest,
+        member.profile.software_mastered,
+        member.group.name,
         (member.subscription and member.subscription.expired_at > Time.now) ? member.subscription.plan.name : t('export_members.without_subscriptions'),
         (member.subscription and member.subscription.expired_at > Time.now) ? member.subscription.expired_at.to_date : nil,
-        member.trainings.map(&:name).join("\n"), member.tags.map(&:name).join("\n"), member.invoices.size,
-        member.projects.map(&:name).join("\n"), member.profile.facebook || '', member.profile.twitter || '',
+        member.trainings.map(&:name).join("\n"),
+        member.tags.map(&:name).join("\n"),
+        member.invoices.size,
+        member.invoicing_disabled,
+        member.projects.map(&:name).join("\n"),
+        member.profile.facebook || '',
+        member.profile.twitter || '',
         member.profile.echosciences || '',
-        member.profile.organization ? member.profile.organization.name : '', member.profile.organization ? member.profile.organization.address.address : ''
+        member.profile.organization ? member.profile.organization.name : '',
+        member.profile.organization ? member.profile.organization.address.address : ''
     ]
-    styles = [nil, nil, nil,
-              nil, nil, nil, nil,
-              nil, nil, nil,
-              nil, nil, nil, nil,
-              nil,
-              date,
-              nil, nil, nil,
-              nil, nil, nil,
-              nil,
-              nil, nil
-    ]
-    types = [:integer, :string, :string,
-             :string, :boolean, :string, :integer,
-             :string, :string, :string,
-             :string, :string, :string, :string,
-             :string,
-             :date,
-             :string, :string, :integer,
-             :string, :string, :string,
-             :string,
-             :string, :string]
+    styles = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+
+    types = [:integer, :string, :string, :string, :boolean, :string, :integer, :string, :string, :string, :string, :string,
+             :string, :string, :string, :date, :string, :string, :integer, :boolean, :string, :string, :string, :string, :string, :string]
 
     sheet.add_row data, :style =>  styles, :types => types
   end

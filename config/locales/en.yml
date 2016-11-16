@@ -138,6 +138,7 @@ en:
     validated_trainings: "Validated trainings"
     tags: "Tags"
     number_of_invoices: "Number of invoices"
+    invoicing_disabled: "Invoicing disabled"
     projects: "Projects"
     facebook: "Facebook"
     twitter: "Twitter"
