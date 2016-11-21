@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.3 2016 November 21
 
 - Export user's invoicing status in members' excel export
 - Fix a bug: Next events descriptions, shown on the home page, display raw html 
