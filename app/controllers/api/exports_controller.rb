@@ -5,7 +5,11 @@ class API::ExportsController < API::ApiController
   def download
     authorize @export
 
-    send_file File.join(Rails.root, @export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    if FileTest.exist?(@export.file)
+      send_file File.join(Rails.root, @export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    else
+      render text: I18n.t('errors.messages.export_not_found'), status: :not_found
+    end
   end
 
   def status

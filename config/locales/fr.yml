@@ -31,6 +31,7 @@ fr:
       wrong_size: "ne fait pas la taille du fichier (doit comporter %{file_size})"
       size_too_small: "est trop petite (au moins %{file_size})"
       size_too_big: "est trop grande (pas plus de %{file_size})"
+      export_not_found: "L'export demandé n'a pas été trouvé. Il a probablement été supprimé, veuillez lancer la génération d'un nouvel export."
 
   activemodel:
     errors:
@@ -137,6 +138,7 @@ fr:
     validated_trainings: "Formations validées"
     tags: "Étiquettes"
     number_of_invoices: "Nombre de factures"
+    invoicing_disabled: "Facturation désactivée"
     projects: "Projets"
     facebook: "Facebook"
     twitter: "Twitter"

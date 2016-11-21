@@ -31,6 +31,7 @@ en:
       wrong_size: "is the wrong size (should be %{file_size})"
       size_too_small: "is too small (should be at least %{file_size})"
       size_too_big: "is too big (should be at most %{file_size})"
+      export_not_found: "Requested export was not found. It was probably deleted, please generate a new export."
 
   activemodel:
     errors:
@@ -137,6 +138,7 @@ en:
     validated_trainings: "Validated trainings"
     tags: "Tags"
     number_of_invoices: "Number of invoices"
+    invoicing_disabled: "Invoicing disabled"
     projects: "Projects"
     facebook: "Facebook"
     twitter: "Twitter"
