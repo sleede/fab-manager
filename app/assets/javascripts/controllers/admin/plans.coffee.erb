@@ -78,8 +78,8 @@ class PlanController
 ##
 # Controller used in the plan creation form
 ##
-Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 'groups', 'plans', 'machines', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t', '$locale'
-, ($scope, $uibModal, groups, plans, machines, prices, partners, CSRF, $state, growl, _t, $locale) ->
+Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 'groups', 'plans', 'machines', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t'
+, ($scope, $uibModal, groups, plans, machines, prices, partners, CSRF, $state, growl, _t) ->
 
 
 
@@ -117,10 +117,6 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
 
   ## HTTP method for the rest API
   $scope.method = 'POST'
-
-
-  ## currency symbol for the current locale (cf. angular-i18n)
-  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
 
 
@@ -187,8 +183,8 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
 ##
 # Controller used in the plan edition form
 ##
-Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', '$locale', 'Plan'
-, ($scope, groups, plans, planPromise, machines, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, $locale, Plan) ->
+Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', 'Plan'
+, ($scope, groups, plans, planPromise, machines, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, Plan) ->
 
 
 
@@ -206,10 +202,6 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
 
   ## HTTP method for the rest API
   $scope.method = 'PATCH'
-
-
-  ## currency symbol for the current locale (cf. angular-i18n)
-  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
 
 

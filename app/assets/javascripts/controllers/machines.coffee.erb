@@ -782,8 +782,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           CustomAsset.get({name: 'cgv-file'}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $locale, $filter, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -795,9 +795,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
         # Reservation
         $scope.reservation = reservation
-
-        # Currency symbol or abreviation for the current locale
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
         # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
@@ -842,8 +839,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', '$locale', 'coupon',
-      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, $locale, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) ->
 
         # user wallet amount
         $scope.walletAmount = wallet.amount
@@ -856,9 +853,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
         # Reservation
         $scope.reservation = reservation
-
-        # Currency symbol or abreviation for the current locale
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
         # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
