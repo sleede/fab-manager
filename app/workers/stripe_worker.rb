@@ -20,10 +20,14 @@ class StripeWorker
     stp_coupon = {
         id: coupon.code,
         duration: coupon.validity_per_user,
-        percent_off: coupon.percent_off,
-        amount_off: coupon.amount_off,
-        currency: Rails.application.secrets.stripe_currency,
     }
+    if coupon.type == 'percent_off'
+      stp_coupon[:percent_off] = coupon.percent_off
+    elsif coupon.type == 'amount_off'
+      stp_coupon[:amount_off] = coupon.amount_off
+      stp_coupon[:currency] = Rails.application.secrets.stripe_currency
+    end
+
     unless coupon.valid_until.nil?
       stp_coupon[:redeem_by] = coupon.valid_until.to_i
     end

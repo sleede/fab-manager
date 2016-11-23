@@ -92,8 +92,6 @@
             plan_file_attributes: [:id, :attachment, :_destroy],
             prices_attributes: [:id, :amount]
         )
-
-        @parameters
       end
     end
 end
