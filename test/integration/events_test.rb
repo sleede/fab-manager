@@ -64,7 +64,7 @@ class EventsTest < ActionDispatch::IntegrationTest
     post '/api/reservations',
         {
             reservation: {
-                user_id: User.find_by_username('pdurand').id,
+                user_id: User.find_by(username: 'pdurand').id,
                 reservable_id: e.id,
                 reservable_type: 'Event',
                 nb_reserve_places: 2,
@@ -159,7 +159,7 @@ class EventsTest < ActionDispatch::IntegrationTest
     post '/api/reservations',
          {
              reservation: {
-                 user_id: User.find_by_username('lseguin').id,
+                 user_id: User.find_by(username: 'lseguin').id,
                  reservable_id: e.id,
                  reservable_type: 'Event',
                  nb_reserve_places: 4,

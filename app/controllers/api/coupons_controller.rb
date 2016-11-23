@@ -20,7 +20,7 @@ class API::CouponsController < API::ApiController
   end
 
   def validate
-    @coupon = Coupon.find_by_code(params[:code])
+    @coupon = Coupon.find_by(code: params[:code])
     if @coupon.nil?
       render json: {status: 'rejected'}, status: :not_found
     else
@@ -60,7 +60,7 @@ class API::CouponsController < API::ApiController
   def send_to
     authorize Coupon
 
-    @coupon = Coupon.find_by_code(params[:coupon_code])
+    @coupon = Coupon.find_by(code: params[:coupon_code])
       if @coupon.nil?
         render json: {error: "no coupon with code #{params[:coupon_code]}"}, status: :not_found
       else

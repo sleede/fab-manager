@@ -69,7 +69,7 @@ json.training_credits @member.training_credits do |tc|
 end
 json.machine_credits @member.machine_credits do |mc|
   json.machine_id mc.creditable_id
-  json.hours_used mc.users_credits.find_by_user_id(@member.id).hours_used
+  json.hours_used mc.users_credits.find_by(user_id: @member.id).hours_used
 end
 json.last_sign_in_at @member.last_sign_in_at.iso8601 if @member.last_sign_in_at
 json.all_projects @member.all_projects do |project|

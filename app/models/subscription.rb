@@ -25,7 +25,7 @@ class Subscription < ActiveRecord::Base
         invoice_items = []
 
         unless coupon_code.nil?
-          cp = Coupon.find_by_code(coupon_code)
+          cp = Coupon.find_by(code: coupon_code)
           if not cp.nil? and cp.status(user.id) == 'active'
             @coupon = cp
             total = plan.amount
@@ -159,7 +159,7 @@ class Subscription < ActiveRecord::Base
     total = plan.amount
 
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
+      cp = Coupon.find_by(code: coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'
         @coupon = cp
         coupon_id = cp.id

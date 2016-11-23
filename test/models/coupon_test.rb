@@ -7,7 +7,7 @@ class CouponTest < ActiveSupport::TestCase
   end
 
   test 'expired coupon must return the proper status' do
-    c = Coupon.find_by_code('XMAS10')
+    c = Coupon.find_by(code: 'XMAS10')
     assert c.status == 'expired'
   end
 
