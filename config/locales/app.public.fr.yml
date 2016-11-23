@@ -205,7 +205,7 @@ fr:
         your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}"  # angular interpolation
         my_group: "Mon groupe"
         his_group: "Son groupe"  # messageFormat interpolation
-        he_wants_to_change_group: "{ROLE, select, admin{Il veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
+        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
         change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"  # messageFormat interpolation
         your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {{DATE}}"  # angular interpolation
         you_ve_just_payed_the_: "Vous venez de régler l'"
