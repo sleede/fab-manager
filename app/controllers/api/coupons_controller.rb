@@ -78,7 +78,7 @@ class API::CouponsController < API::ApiController
   end
 
   def coupon_params
-    params.require(:coupon).permit(:name, :code, :percent_off, :validity_per_user, :valid_until, :max_usages, :active)
+    params.require(:coupon).permit(:name, :code, :percent_off, :amount_off, :validity_per_user, :valid_until, :max_usages, :active)
   end
 
   def coupon_editable_params

@@ -8,10 +8,9 @@ class Coupon < ActiveRecord::Base
   validates :code, presence: true
   validates :code, format: { with: /\A[A-Z0-9\-]+\z/ ,message: 'only caps letters, numbers, and dashes'}
   validates :code, uniqueness: true
-  validates :percent_off, presence: true
-  validates :percent_off, :inclusion => 0..100
   validates :validity_per_user, presence: true
   validates :validity_per_user, inclusion: { in: %w(once forever) }
+  validates_with CouponDiscountValidator
 
   def safe_destroy
     if self.invoices.size == 0
@@ -43,6 +42,14 @@ class Coupon < ActiveRecord::Base
       'already_used'
     else
       'active'
+    end
+  end
+
+  def type
+    if amount_off.nil? and !percent_off.nil?
+      'percent_off'
+    elsif percent_off.nil? and !amount_off.nil?
+      'amount_off'
     end
   end
 

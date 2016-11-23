@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915105234) do
+ActiveRecord::Schema.define(version: 20161123104604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160915105234) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "validity_per_user"
+    t.integer  "amount_off"
   end
 
   create_table "credits", force: :cascade do |t|
@@ -319,6 +320,7 @@ ActiveRecord::Schema.define(version: 20160915105234) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "profile_url"
+    t.string   "logout_endpoint"
   end
 
   create_table "offer_days", force: :cascade do |t|

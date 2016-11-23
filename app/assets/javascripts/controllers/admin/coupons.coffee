@@ -8,12 +8,17 @@ userValidities = ['once', 'forever']
 ##
 # Controller used in the coupon creation page
 ##
-Application.Controllers.controller "NewCouponController", ["$scope", "$state",'Coupon', 'growl', '_t'
-, ($scope, $state, Coupon, growl, _t) ->
+Application.Controllers.controller "NewCouponController", ["$scope", "$state", '$locale', 'Coupon', 'growl', '_t'
+, ($scope, $state, $locale, Coupon, growl, _t) ->
 
   ## Values for the coupon currently created
   $scope.coupon =
     active: true
+    type: 'percent_off'
+
+
+  ## currency symbol for the current locale (cf. angular-i18n)
+  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
   ## Options for the validity per user
   $scope.validities = userValidities
@@ -57,8 +62,8 @@ Application.Controllers.controller "NewCouponController", ["$scope", "$state",'C
 ##
 # Controller used in the coupon edition page
 ##
-Application.Controllers.controller "EditCouponController", ["$scope", "$state", 'Coupon', 'couponPromise', '_t'
-, ($scope, $state, Coupon, couponPromise, _t) ->
+Application.Controllers.controller "EditCouponController", ["$scope", "$state", '$locale', 'Coupon', 'couponPromise', '_t'
+, ($scope, $state, $locale, Coupon, couponPromise, _t) ->
 
   ### PUBLIC SCOPE ###
 
@@ -71,6 +76,9 @@ Application.Controllers.controller "EditCouponController", ["$scope", "$state", 
 
   ## Options for the validity per user
   $scope.validities = userValidities
+
+  ## currency symbol for the current locale (cf. angular-i18n)
+  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
   ## Default parameters for AngularUI-Bootstrap datepicker (used for coupon validity limit selection)
   $scope.datePicker =

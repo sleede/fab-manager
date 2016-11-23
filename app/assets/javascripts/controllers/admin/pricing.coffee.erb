@@ -3,8 +3,8 @@
 ##
 # Controller used in the prices edition page
 ##
-Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', 'TrainingsPricing', '$filter', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', '_t'
-, ($scope, $state, $uibModal, TrainingsPricing, $filter, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, _t) ->
+Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$locale', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', '_t'
+, ($scope, $state, $uibModal, $locale, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, _t) ->
 
   ### PUBLIC SCOPE ###
   ## List of machines prices (not considering any plan)
@@ -43,6 +43,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   ## Status of the drop-down menu in Credits tab
   $scope.status =
     isopen: false
+
+  ## currency symbol for the current locale (cf. angular-i18n)
+  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
 
 
