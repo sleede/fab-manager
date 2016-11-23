@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+- Fix a bug: unable to rollback migration 20160906145713
+- Fix a bug: Title's translation for plan's forms is not loaded in French
+
 ## v2.4.3 2016 November 21
 
 - Export user's invoicing status in members' excel export
