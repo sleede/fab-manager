@@ -177,11 +177,14 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     updateCartPrice = ->
       # first we check that a user was selected
       if Object.keys($scope.ctrl.member).length > 0
-          $scope.cart.total = $scope.selectedPlan.amount
-          # apply the coupon if any
-          if $scope.coupon.applied
+        $scope.cart.total = $scope.selectedPlan.amount
+        # apply the coupon if any
+        if $scope.coupon.applied
+          if $scope.coupon.applied.type == 'percent_off'
             discount = $scope.cart.total * $scope.coupon.applied.percent_off / 100
-            $scope.cart.total -= discount
+          else if $scope.coupon.applied.type == 'amount_off'
+            discount =  $scope.coupon.applied.amount_off
+          $scope.cart.total -= discount
       else
         $scope.reserve.amountTotal = null
 

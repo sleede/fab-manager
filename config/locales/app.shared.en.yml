@@ -373,4 +373,5 @@ en:
         unable_to_apply_the_coupon_because_sold_out: "Unable to apply the coupon: this code reached its quota."
         unable_to_apply_the_coupon_because_already_used: "Unable to apply the coupon: you have already used this code once before."
         unable_to_apply_the_coupon_because_amount_exceeded: "Unable to apply the coupon: the discount exceed the total amount of this purchase."
+        unable_to_apply_the_coupon_because_undefined: "Unable to apply the coupon: an unexpected error occurred, please contact the Fablab's manager."
         unable_to_apply_the_coupon_because_rejected: "This code does not exists."

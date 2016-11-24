@@ -141,7 +141,7 @@
           <div class="font-sbold">{{ 'subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
         </div>
 
-        <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" user-id="{{ctrl.member.id}}"></coupon>
+        <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" total="selectedPlan.amount" user-id="{{ctrl.member.id}}"></coupon>
       </div>
 
       <div class="widget-footer">
