@@ -677,7 +677,7 @@ Developers may find information on how to implement their own authentication pro
   To solve this issue copy `config/application.yml.default` to `config/application.yml`.
   This is required before the first start.
 
-- Due to a stripe limitation, you won't be ble to create plans longer than one year.
+- Due to a stripe limitation, you won't be able to create plans longer than one year.
 
 - When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
 
