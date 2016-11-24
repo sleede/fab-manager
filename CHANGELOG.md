@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: invoice of reservation show payment by debit card when user pay with wallet
+
 ## v2.4.3 2016 November 21
 
 - Export user's invoicing status in members' excel export
