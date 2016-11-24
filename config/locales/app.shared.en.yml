@@ -368,7 +368,7 @@ en:
         i_have_a_coupon: "I have a coupon!"
         code_: "Code:"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get a {{PERCENT}}% discount."  # angular interpolation
-        the_coupon_has_been_applied_you_get_DISCOUNT_CURRENCY: "The coupon has been applied. You get a discount of {{DISCOUNT}} {{CURRENCY}}."  # angular interpolation
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "The coupon has been applied. You get a discount of {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
         unable_to_apply_the_coupon_because_disabled: "Unable to apply the coupon: this code was disabled."
         unable_to_apply_the_coupon_because_expired: "Unable to apply the coupon: this code has expired."
         unable_to_apply_the_coupon_because_sold_out: "Unable to apply the coupon: this code reached its quota."

@@ -38,7 +38,7 @@ Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_
             if res.type == 'percent_off'
               growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
             else
-              growl.success(_t('the_coupon_has_been_applied_you_get_DISCOUNT_CURRENCY', {DISCOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
+              growl.success(_t('the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', {AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
           , (err) ->
             $scope.status = 'invalid'
             $scope.coupon = null

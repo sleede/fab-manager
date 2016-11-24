@@ -368,7 +368,7 @@ fr:
         i_have_a_coupon: "J'ai un code promo !"
         code_: "Code :"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{PERCENT}} %."  # angular interpolation
-        the_coupon_has_been_applied_you_get_DISCOUNT_CURRENCY: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{DISCOUNT}} {{CURRENCY}}."  # angular interpolation
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
         unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
         unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
         unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
