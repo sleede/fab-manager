@@ -1,4 +1,4 @@
-Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, growl, _t) ->
+Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_t', ($rootScope, Coupon, growl, _t) ->
   {
     restrict: 'E'
     scope:
@@ -35,7 +35,10 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
           Coupon.validate {code: $scope.couponCode, user_id: $scope.userId, amount: $scope.total}, (res) ->
             $scope.status = 'valid'
             $scope.coupon = res
-            growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+            if res.type == 'percent_off'
+              growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+            else
+              growl.success(_t('the_coupon_has_been_applied_you_get_DISCOUNT_CURRENCY', {DISCOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
           , (err) ->
             $scope.status = 'invalid'
             $scope.coupon = null
