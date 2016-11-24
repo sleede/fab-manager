@@ -4,6 +4,7 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
     scope:
       show: '='
       coupon: '='
+      total: '@'
       userId: '@'
     templateUrl: '<%= asset_path "shared/_coupon.html" %>'
     link: ($scope, element, attributes) ->
@@ -15,10 +16,8 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
       # Available status are: 'pending', 'valid', 'invalid'
       $scope.status = 'pending'
 
-      # Binding for the code inputed
+      # Binding for the code inputed (see the attached template)
       $scope.couponCode = null
-
-
 
       ##
       # Callback to validate the code
@@ -28,7 +27,7 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
           $scope.status = 'pending'
           $scope.coupon = null
         else
-          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId}, (res) ->
+          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId, amount: $scope.total}, (res) ->
             $scope.status = 'valid'
             $scope.coupon = res
             growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))

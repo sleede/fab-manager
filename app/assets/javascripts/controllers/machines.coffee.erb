@@ -315,6 +315,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## total amount of the bill to pay
   $scope.amountTotal = 0
 
+  ## total amount of the elements in the cart, without considering any coupon
+  $scope.totalNoCoupon = 0
+
   ## Discount coupon to apply to the basket, if any
   $scope.coupon =
       applied: null
@@ -661,6 +664,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
       Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
+        $scope.totalNoCoupon = res.price_without_coupon
         setSlotsDetails(res.details)
     else
       # otherwise we alert, this error musn't occur when the current user is not admin
