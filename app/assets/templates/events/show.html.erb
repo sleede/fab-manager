@@ -164,7 +164,7 @@
 
           <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve">{{ 'book' | translate }}</button>
 
-          <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" user-id="{{ctrl.member.id}}"></coupon>
+          <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" total="reserve.totalNoCoupon" user-id="{{ctrl.member.id}}"></coupon>
         </div>
       </div>
 

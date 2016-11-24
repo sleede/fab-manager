@@ -30,7 +30,8 @@ class API::CouponsController < API::ApiController
         _user_id = params[:user_id]
       end
 
-      status = @coupon.status(_user_id, params[:amount])
+      amount = params[:amount].to_f * 100.0
+      status = @coupon.status(_user_id, amount)
       if status != 'active'
         render json: {status: status}, status: :unprocessable_entity
       else

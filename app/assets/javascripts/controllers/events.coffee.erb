@@ -154,6 +154,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     tickets: {}
     toReserve: false
     amountTotal : 0
+    totalNoCoupon: 0
     totalSeats: 0
 
   ## Discount coupon to apply to the basket, if any
@@ -400,6 +401,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       r = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event)
       Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.reserve.amountTotal = res.price
+        $scope.reserve.totalNoCoupon = res.price_without_coupon
     else
       $scope.reserve.amountTotal = null
 
