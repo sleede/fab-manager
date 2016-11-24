@@ -426,7 +426,6 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.ctrl.member
       # reserve a training if this training will not be reserved and is not about to move and not is completed
       if !event.is_reserved && !$scope.slotToModify && !event.is_completed
-        $scope.coupon.applied = null
         if event != $scope.selectedTraining
           $scope.selectedTraining = event
           $scope.selectedTraining.offered = false
@@ -647,7 +646,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     # first we check that a user was selected
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, training) # reservation without any Plan -> we get the training price
-      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
+      Price.compute mkRequestParams(r), (res) ->
         $scope.selectedTrainingAmount = res.price
     else
       $scope.selectedTrainingAmount = null

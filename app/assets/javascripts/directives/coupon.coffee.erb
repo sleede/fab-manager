@@ -5,7 +5,6 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
       show: '='
       coupon: '='
       userId: '@'
-      hasSelectSlot: '='
     templateUrl: '<%= asset_path "shared/_coupon.html" %>'
     link: ($scope, element, attributes) ->
 
@@ -19,11 +18,6 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
       # Binding for the code inputed
       $scope.couponCode = null
 
-      $scope.$watch 'hasSelectSlot', (newValue) ->
-        unless newValue
-          $scope.coupon = null
-          $scope.couponCode = null
-          $scope.code.input = false
 
 
       ##
