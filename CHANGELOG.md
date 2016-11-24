@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.4 2016 November 24
+
 - Fix a bug: unable to rollback migration 20160906145713
 - Fix a bug: Title's translation for plan's forms is not loaded in French
 - Fix a bug: invoice of reservation show payment by debit card when user pay with wallet
