@@ -12,13 +12,14 @@ class CouponApplyService
   def call(total, coupon, user_id = nil)
     price = total
 
+    _coupon = nil
     if coupon.instance_of? Coupon
       _coupon = coupon
     elsif coupon.instance_of? String
       _coupon = Coupon.find_by(code: coupon)
     end
 
-    unless coupon.nil?
+    unless _coupon.nil?
       if _coupon.status(user_id, total) == 'active'
         if _coupon.type == 'percent_off'
           price = price - (price * _coupon.percent_off / 100.0)
