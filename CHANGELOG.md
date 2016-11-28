@@ -1,8 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
-- Fix a bug: unable to rollback migration 20160906145713
-- Fix a bug: Title's translation for plan's forms is not loaded in French
+- Ability to create coupons with cash amounts (previously only percentages were allowed)
 - Fix a bug: misconfigured Twitter's ENV variables results in HTTP error 500
 
 ## v2.4.3 2016 November 21
