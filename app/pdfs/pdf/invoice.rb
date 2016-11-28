@@ -141,14 +141,22 @@ module PDF
           total_calc += price
         end
 
-        # subtract the coupon, if any
+        ## subtract the coupon, if any
         unless invoice.coupon_id.nil?
           cp = invoice.coupon
           discount = 0
           if cp.type == 'percent_off'
             discount = total_calc  * cp.percent_off / 100.0
           elsif cp.type == 'amount_off'
-            discount = cp.amount_off / 100.00
+            # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
+            if invoice.is_a?(Avoir)
+              paid_items = invoice.invoice.invoice_items.select{ |ii| ii.amount > 0 }.length
+              refund_items = invoice.invoice_items.select{ |ii| ii.amount > 0 }.length
+
+              discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.0
+            else
+              discount = cp.amount_off / 100.00
+            end
           else
             raise InvalidCouponError
           end
@@ -158,7 +166,7 @@ module PDF
           # discount textual description
           literal_discount = cp.percent_off
           if cp.type == 'amount_off'
-            literal_discount = number_to_currency(discount)
+            literal_discount = number_to_currency(cp.amount_off / 100.00)
           end
 
           # add a row for the coupon
