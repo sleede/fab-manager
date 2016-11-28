@@ -11,3 +11,15 @@ two:
   event_id: 2
   price_category_id: 1
   amount: 1700
+
+radio_youngs:
+  id: 3
+  event_id: 4
+  price_category_id: 1
+  amount: 7500
+
+radio_unemployed:
+  id: 4
+  event_id: 4
+  price_category_id: 2
+  amount: 8000

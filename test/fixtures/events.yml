@@ -41,3 +41,16 @@ event_1:
   nb_free_places: 10
   recurrence_id: 1
   category_id: 2
+
+event_4:
+  id: 4
+  title: Radio numérique
+  description: "Confectionnez votre propre récepteur FM compatible avec la radio numérique terrestre (RNT) :\r\n- logiciel
+    embarqué\r\n- électronique\r\n- démodulation d'ondes porteuses\r\n- conception et réalisation du design"
+  created_at: 2016-11-28 10:52:50.615611000 Z
+  updated_at: 2016-11-28 10:52:50.615611000 Z
+  availability_id: 17
+  amount: 10000
+  nb_total_places: 10
+  nb_free_places: 10
+  category_id: 1
