@@ -201,4 +201,40 @@ class EventsTest < ActionDispatch::IntegrationTest
     assert_equal (4 * 20) + (4 * 16), r.invoice.total / 100.0
 
   end
+
+  test 'reserve event with many prices and payment means' do
+
+    radio = Event.find(4)
+
+    # Reserve the 'radio' event
+    post '/api/reservations',
+         {
+             reservation: {
+                 user_id: User.find_by(username: 'lseguin').id,
+                 reservable_id: radio.id,
+                 reservable_type: 'Event',
+                 nb_reserve_places: 2,
+                 slots_attributes: [
+                     {
+                         start_at: radio.availability.start_at,
+                         end_at: radio.availability.end_at,
+                         availability_id: radio.availability.id,
+                         offered: false
+                     }
+                 ],
+                 tickets_attributes: [
+                     {
+                         event_price_category_id: radio.event_price_categories.first.id,
+                         booked: 2
+                     },
+                     {
+                         event_price_category_id: radio.event_price_categories.last.id,
+                         booked: 2
+                     }
+                 ]
+             }
+         }.to_json,
+         default_headers
+
+  end
 end
