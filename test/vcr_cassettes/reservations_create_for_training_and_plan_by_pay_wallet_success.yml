@@ -19,8 +19,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '81'
   response:
@@ -90,7 +90,7 @@ http_interactions:
           "type": "card",
           "used": false
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:41 GMT
 - request:
     method: post
@@ -111,8 +111,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '122'
   response:
@@ -170,7 +170,7 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:42 GMT
 - request:
     method: post
@@ -191,8 +191,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '78'
   response:
@@ -250,7 +250,7 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:43 GMT
 - request:
     method: get
@@ -271,8 +271,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -364,7 +364,7 @@ http_interactions:
         bnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAg
         ICAidG90YWxfY291bnQiOiAxLAogICAgInVybCI6ICIvdjEvY3VzdG9tZXJz
         L2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25zIgogIH0KfQo=
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:44 GMT
 - request:
     method: get
@@ -385,8 +385,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -478,7 +478,7 @@ http_interactions:
         bnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAg
         ICAidG90YWxfY291bnQiOiAxLAogICAgInVybCI6ICIvdjEvY3VzdG9tZXJz
         L2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25zIgogIH0KfQo=
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:45 GMT
 - request:
     method: post
@@ -499,8 +499,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '90'
   response:
@@ -558,7 +558,7 @@ http_interactions:
         MSwKICAic3RhcnQiOiAxNDY5MTA4NzQ1LAogICJzdGF0dXMiOiAiYWN0aXZl
         IiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBudWxs
         LAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:46 GMT
 - request:
     method: get
@@ -579,8 +579,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -692,7 +692,7 @@ http_interactions:
         bCI6IDEwMDAsCiAgICAgICJ3ZWJob29rc19kZWxpdmVyZWRfYXQiOiAxNDY5
         MTA4NzQ2CiAgICB9CiAgXSwKICAiaGFzX21vcmUiOiB0cnVlLAogICJ1cmwi
         OiAiL3YxL2ludm9pY2VzIgp9Cg==
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:47 GMT
 - request:
     method: get
@@ -713,8 +713,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -832,7 +832,7 @@ http_interactions:
         IjogZmFsc2UsCiAgICAidG90YWxfY291bnQiOiAyLAogICAgInVybCI6ICIv
         djEvY3VzdG9tZXJzL2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25z
         IgogIH0KfQo=
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:48 GMT
 - request:
     method: get
@@ -853,8 +853,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -910,7 +910,7 @@ http_interactions:
         MSwKICAic3RhcnQiOiAxNDY5MTA4NzQ1LAogICJzdGF0dXMiOiAiYWN0aXZl
         IiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBudWxs
         LAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:49 GMT
 - request:
     method: delete
@@ -931,8 +931,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -988,7 +988,7 @@ http_interactions:
         dHkiOiAxLAogICJzdGFydCI6IDE0NjkxMDg3NDUsCiAgInN0YXR1cyI6ICJh
         Y3RpdmUiLAogICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgInRyaWFsX2VuZCI6
         IG51bGwsCiAgInRyaWFsX3N0YXJ0IjogbnVsbAp9Cg==
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:50 GMT
 - request:
     method: get
@@ -1009,8 +1009,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -1066,7 +1066,7 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:50 GMT
 - request:
     method: get
@@ -1087,8 +1087,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
-        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+        integration 15.6.0 Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34
+        PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -1144,6 +1144,6 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 21 Jul 2016 13:45:51 GMT
 recorded_with: VCR 3.0.1
