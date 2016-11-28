@@ -19,8 +19,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '81'
   response:
@@ -90,7 +90,7 @@ http_interactions:
           "type": "card",
           "used": false
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:21 GMT
 - request:
     method: post
@@ -111,8 +111,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '126'
   response:
@@ -170,7 +170,7 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:22 GMT
 - request:
     method: get
@@ -191,8 +191,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -351,7 +351,7 @@ http_interactions:
         ICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRv
         dGFsX2NvdW50IjogNCwKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNf
         OERpMXdqZFZrdHY1a3Qvc3Vic2NyaXB0aW9ucyIKICB9Cn0K
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:23 GMT
 - request:
     method: post
@@ -372,8 +372,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '33'
   response:
@@ -435,7 +435,7 @@ http_interactions:
           "name": null,
           "tokenization_method": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:24 GMT
 - request:
     method: post
@@ -456,8 +456,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '44'
   response:
@@ -634,7 +634,7 @@ http_interactions:
         IjogbnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2Us
         CiAgICAidG90YWxfY291bnQiOiA0LAogICAgInVybCI6ICIvdjEvY3VzdG9t
         ZXJzL2N1c184RGkxd2pkVmt0djVrdC9zdWJzY3JpcHRpb25zIgogIH0KfQo=
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:25 GMT
 - request:
     method: post
@@ -655,8 +655,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '27'
   response:
@@ -752,7 +752,7 @@ http_interactions:
           "total": 5100,
           "webhooks_delivered_at": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:26 GMT
 - request:
     method: post
@@ -773,8 +773,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
       Content-Length:
       - '0'
   response:
@@ -870,7 +870,7 @@ http_interactions:
           "total": 5100,
           "webhooks_delivered_at": 1460041346
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:27 GMT
 - request:
     method: delete
@@ -891,8 +891,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
+        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -931,6 +931,6 @@ http_interactions:
           "deleted": true,
           "id": "card_17xeeH2sOmf47Nz9qkD2jaiS"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Apr 2016 15:02:28 GMT
 recorded_with: VCR 3.0.1
