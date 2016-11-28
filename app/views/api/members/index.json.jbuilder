@@ -54,7 +54,7 @@ json.array!(@members) do |member|
 
   json.machine_credits member.machine_credits do |mc|
     json.machine_id mc.creditable_id
-    json.hours_used mc.users_credits.find_by_user_id(member.id).hours_used
+    json.hours_used mc.users_credits.find_by(user_id: member.id).hours_used
   end if attribute_requested?(@requested_attributes, 'credits') or attribute_requested?(@requested_attributes, 'machine_credits')
 
   json.tags member.tags do |t|

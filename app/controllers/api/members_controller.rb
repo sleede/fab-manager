@@ -145,7 +145,7 @@ class API::MembersController < API::ApiController
 
     token = params.require(:user).permit(:auth_token)[:auth_token]
 
-    @account = User.find_by_auth_token(token)
+    @account = User.find_by(auth_token: token)
     if @account
       @flow_worker = MembersProcessor.new(@account)
       begin

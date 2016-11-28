@@ -41,7 +41,7 @@ class API::ProjectsController < API::ApiController
   end
 
   def collaborator_valid
-    project_user = ProjectUser.find_by_valid_token params[:valid_token]
+    project_user = ProjectUser.find_by(valid_token: params[:valid_token])
     if project_user
       project_user.update(is_valid: true, valid_token: '')
       redirect_to "/#!/projects/#{project_user.project.id}" and return

@@ -177,11 +177,14 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     updateCartPrice = ->
       # first we check that a user was selected
       if Object.keys($scope.ctrl.member).length > 0
-          $scope.cart.total = $scope.selectedPlan.amount
-          # apply the coupon if any
-          if $scope.coupon.applied
+        $scope.cart.total = $scope.selectedPlan.amount
+        # apply the coupon if any
+        if $scope.coupon.applied
+          if $scope.coupon.applied.type == 'percent_off'
             discount = $scope.cart.total * $scope.coupon.applied.percent_off / 100
-            $scope.cart.total -= discount
+          else if $scope.coupon.applied.type == 'amount_off'
+            discount =  $scope.coupon.applied.amount_off
+          $scope.cart.total -= discount
       else
         $scope.reserve.amountTotal = null
 
@@ -200,9 +203,9 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           wallet: ->
             Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
           coupon: -> $scope.coupon.applied
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
-        ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, CustomAsset, wallet, helpers, $locale, $filter, coupon) ->
-          # user wallet amount
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
+        ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, CustomAsset, wallet, helpers, $filter, coupon) ->
+          # User's wallet amount
           $scope.walletAmount = wallet.amount
 
           # Final price to pay by the user
@@ -210,9 +213,6 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
 
           # The plan that the user is about to subscribe
           $scope.selectedPlan = selectedPlan
-
-          # Currency symbol or abreviation for the current locale
-          $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
           # Used in wallet info template to interpolate some translations
           $scope.numberFilter = $filter('number')
@@ -266,8 +266,8 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
           wallet: ->
             Wallet.getWalletByUser({user_id: $scope.ctrl.member.id}).$promise
           coupon: -> $scope.coupon.applied
-        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
-        ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, wallet, helpers, $locale, $filter, coupon) ->
+        controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon',
+        ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, wallet, helpers, $filter, coupon) ->
           # user wallet amount
           $scope.walletAmount = wallet.amount
 
@@ -276,9 +276,6 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
 
           # price to pay
           $scope.amount = helpers.getAmountToPay($scope.price, wallet.amount)
-
-          # Currency symbol or abreviation for the current locale
-          $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
           # Used in wallet info template to interpolate some translations
           $scope.numberFilter = $filter('number')

@@ -164,7 +164,7 @@ en:
         unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
         coupons: "Coupons"
         list_of_the_coupons: "List of the coupons"
-        percentage_off: "Percentage off"
+        discount: "Discount"
         nb_of_usages: "Number of usages"
         status: "Status"
         add_a_new_coupon: "Add a new coupon"

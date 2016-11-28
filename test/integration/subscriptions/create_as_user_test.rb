@@ -2,7 +2,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
 
 
   setup do
-    @user = User.find_by_username('jdupond')
+    @user = User.find_by(username: 'jdupond')
     login_as(@user, scope: :user)
   end
 
@@ -38,7 +38,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal @user.subscription.plan.training_credit_nb, plan.training_credit_nb, 'trainings credits were not allocated'
 
     # Check that the user benefit from prices of his plan
-    printer = Machine.find_by_slug('imprimante-3d')
+    printer = Machine.find_by(slug: 'imprimante-3d')
     assert_equal 15, (printer.prices.find_by(group_id: @user.group_id, plan_id: @user.subscription.plan_id).amount / 100), 'machine hourly price does not match'
 
     # Check notifications were sent for every admins
@@ -118,7 +118,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal @vlonchamp.subscription.plan.training_credit_nb, plan.training_credit_nb, 'trainings credits were not allocated'
 
     # Check that the user benefit from prices of his plan
-    printer = Machine.find_by_slug('imprimante-3d')
+    printer = Machine.find_by(slug: 'imprimante-3d')
     assert_equal 10, (printer.prices.find_by(group_id: @vlonchamp.group_id, plan_id: @vlonchamp.subscription.plan_id).amount / 100), 'machine hourly price does not match'
 
     # Check notifications were sent for every admins

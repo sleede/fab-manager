@@ -2,7 +2,7 @@ namespace :fablab do
   # desc "Get all stripe plans and create in fablab app"
   # task stripe_plan: :environment do
   #   Stripe::Plan.all.data.each do |plan|
-  #     unless Plan.find_by_stp_plan_id(plan.id)
+  #     unless Plan.find_by(stp_plan_id: plan.id)
   #       group = Group.friendly.find(plan.id.split('-').first)
   #       if group
   #         Plan.create(stp_plan_id: plan.id, name: plan.name, amount: plan.amount, interval: plan.interval, group_id: group.id, skip_create_stripe_plan: true)

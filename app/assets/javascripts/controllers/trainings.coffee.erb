@@ -137,6 +137,12 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   $scope.coupon =
     applied: null
 
+  ## Total price of the cart, that the user will pay
+  $scope.amountTotal = 0
+
+  ## Total amount of the elements in the cart, without considering any coupon
+  $scope.totalNoCoupon = 0
+
   ## fullCalendar (v2) configuration
   $scope.calendarConfig = CalendarConfig
     minTime: moment.duration(moment(settingsPromise.booking_window_start).format('HH:mm:ss'))
@@ -353,6 +359,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
       r = mkReservation($scope.ctrl.member, $scope.selectedTraining, $scope.selectedPlan)
       Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
+        $scope.totalNoCoupon = res.price_without_coupon
     else
       $scope.amountTotal = null
 
@@ -426,7 +433,6 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.ctrl.member
       # reserve a training if this training will not be reserved and is not about to move and not is completed
       if !event.is_reserved && !$scope.slotToModify && !event.is_completed
-        $scope.coupon.applied = null
         if event != $scope.selectedTraining
           $scope.selectedTraining = event
           $scope.selectedTraining.offered = false
@@ -533,9 +539,9 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
           CustomAsset.get({name: 'cgv-file'}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation', '$locale', 'helpers', '$filter', 'coupon'
-      ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, $locale, helpers, $filter, coupon) ->
-        # user wallet amount
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'wallet', 'cgv', 'Auth', 'Reservation',  'helpers', '$filter', 'coupon'
+      ($scope, $uibModalInstance, $state, reservation, price, wallet, cgv, Auth, Reservation, helpers, $filter, coupon) ->
+        # User's wallet amount
         $scope.walletAmount = wallet.amount
 
         # Price
@@ -547,8 +553,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         # Reservation
         $scope.reservation = reservation
 
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
-
+        # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
 
         ##
@@ -594,9 +599,9 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', '$filter', 'reservation', 'price', 'wallet', 'Auth', 'Reservation', '$locale', 'helpers', 'coupon'
-      ($scope, $uibModalInstance, $state, $filter, reservation, price, wallet, Auth, Reservation, $locale, helpers, coupon) ->
-        # user wallet amount
+      controller: ['$scope', '$uibModalInstance', '$state', '$filter', 'reservation', 'price', 'wallet', 'Auth', 'Reservation',  'helpers', 'coupon'
+      ($scope, $uibModalInstance, $state, $filter, reservation, price, wallet, Auth, Reservation, helpers, coupon) ->
+        # User's wallet amount
         $scope.walletAmount = wallet.amount
 
         # Price
@@ -608,8 +613,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
         # Reservation
         $scope.reservation = reservation
 
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
-
+        # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
 
         # Button label
@@ -649,7 +653,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     # first we check that a user was selected
     if Object.keys($scope.ctrl.member).length > 0
       r = mkReservation($scope.ctrl.member, training) # reservation without any Plan -> we get the training price
-      Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
+      Price.compute mkRequestParams(r), (res) ->
         $scope.selectedTrainingAmount = res.price
     else
       $scope.selectedTrainingAmount = null

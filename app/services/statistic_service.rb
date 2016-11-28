@@ -127,7 +127,7 @@ class StatisticService
           if sub
             ca = i.amount.to_i / 100.0
             unless i.invoice.coupon_id.nil?
-              ca = ca - ( ca * i.invoice.coupon.percent_off / 100.0 )
+              ca = CouponApplyService.new(ca, i.invoice.coupon)
             end
             u = sub.user
             p = sub.plan
@@ -353,7 +353,7 @@ class StatisticService
     end
     # subtract coupon discount from invoices and refunds
     unless invoice.coupon_id.nil?
-      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
+      ca = CouponApplyService.new(ca, invoice.coupon)
     end
     # divide the result by 100 to convert from centimes to monetary unit
     ca == 0 ? ca : ca / 100.0
@@ -366,7 +366,7 @@ class StatisticService
     end
     # subtract coupon discount from the refund
     unless invoice.coupon_id.nil?
-      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
+      ca = CouponApplyService.new(ca, invoice.coupon)
     end
     ca == 0 ? ca : ca / 100.0
   end

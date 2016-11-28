@@ -13,12 +13,12 @@
         <tr><th style="width:60%"></th></tr>
         </thead>
         <tbody>
-        <tr><td translate>{{'code'}}</td><td>{{coupon.code}}</td></tr>
-        <tr><td translate>{{'percent_off'}}</td><td>{{coupon.percent_off}} %</td></tr>
-        <tr><td translate>{{'validity_per_user'}}</td><td translate>{{coupon.validity_per_user}}</td></tr>
-        <tr><td translate>{{'valid_until'}}</td><td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
-        <tr><td translate>{{'usages'}}</td><td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
-        <tr><td translate>{{'enabled'}}</td><td>{{coupon.active | booleanFormat}}</td></tr>
+        <tr><td translate>{{'code'}}</td>               <td>{{coupon.code}}</td></tr>
+        <tr><td translate>{{'discount'}}</td>           <td><span ng-show="coupon.type == 'percent_off'">{{coupon.percent_off}} %</span><span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span></td></tr>
+        <tr><td translate>{{'validity_per_user'}}</td>  <td translate>{{coupon.validity_per_user}}</td></tr>
+        <tr><td translate>{{'valid_until'}}</td>        <td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
+        <tr><td translate>{{'usages'}}</td>             <td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
+        <tr><td translate>{{'enabled'}}</td>            <td>{{coupon.active | booleanFormat}}</td></tr>
         </tbody>
       </table>
     </div>

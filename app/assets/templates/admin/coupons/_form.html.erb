@@ -21,7 +21,20 @@
   <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.pattern" translate>{{ 'code_must_be_composed_of_capital_letters_digits_and_or_dashes' }}</span>
 </div>
 
-<div class="form-group" ng-class="{'has-error': couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$invalid}">
+<div class="form-group">
+  <label for="coupon[type]">{{ 'kind_of_coupon' | translate }} *</label>
+  <select id="coupon[type]"
+          name="coupon[type]"
+          class="form-control"
+          ng-model="coupon.type"
+          ng-disabled="mode == 'EDIT'"
+          required="required">
+    <option value="percent_off" translate>{{ 'percentage' }}</option>
+    <option value="amount_off" translate>{{ 'amount' }}</option>
+  </select>
+</div>
+
+<div class="form-group" ng-class="{'has-error': couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$invalid}" ng-show="coupon.type == 'percent_off'">
   <label for="coupon[percent_off]">{{ 'percent_off' | translate }} *</label>
   <div class="input-group">
     <input type="number" id="coupon[percent_off]"
@@ -31,8 +44,25 @@
            min="0"
            max="100"
            ng-disabled="mode == 'EDIT'"
-           required="required"/>
+           ng-required="coupon.type == 'percent_off'"/>
     <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+  </div>
+  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$error.required" translate>{{ 'percent_off_is_required' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'percentage_must_be_between_0_and_100' }}</span>
+</div>
+
+
+<div class="form-group" ng-class="{'has-error': couponForm['coupon[amount_off]'].$dirty && couponForm['coupon[amount_off]'].$invalid}" ng-show="coupon.type == 'amount_off'">
+  <label for="coupon[amount_off]">{{ 'amount_off' | translate }} *</label>
+  <div class="input-group">
+    <span class="input-group-addon">{{currencySymbol}}</span>
+    <input type="number" id="coupon[amount_off]"
+           name="coupon[amount_off]"
+           class="form-control"
+           ng-model="coupon.amount_off"
+           min="0"
+           ng-disabled="mode == 'EDIT'"
+           ng-required="coupon.type == 'amount_off'"/>
   </div>
   <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$error.required" translate>{{ 'percent_off_is_required' }}</span>
   <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'percentage_must_be_between_0_and_100' }}</span>

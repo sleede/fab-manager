@@ -134,16 +134,25 @@ class Reservation < ActiveRecord::Base
 
     # === Coupon ===
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
-      if not cp.nil? and cp.status(user.id) == 'active'
-        @coupon = cp
+      @coupon = Coupon.find_by(code: coupon_code)
+      if not @coupon.nil? and @coupon.status(user.id) == 'active'
         total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+
+        discount = 0
+        if @coupon.type == 'percent_off'
+          discount = (total  * @coupon.percent_off / 100).to_i
+        elsif @coupon.type == 'amount_off'
+          discount = @coupon.amount_off
+        else
+          raise InvalidCouponError
+        end
+
         unless on_site
           invoice_items << Stripe::InvoiceItem.create(
               customer: user.stp_customer_id,
-              amount: -(total  * cp.percent_off / 100).to_i,
+              amount: -discount,
               currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{cp.code} - reservation"
+              description: "coupon #{@coupon.code} - reservation"
           )
         end
       else
@@ -395,7 +404,7 @@ class Reservation < ActiveRecord::Base
       total += plan.amount
     end
     if @coupon
-      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+      total = CouponApplyService.new.(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
 
@@ -427,9 +436,9 @@ class Reservation < ActiveRecord::Base
     total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
 
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
+      cp = Coupon.find_by(code: coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'
-        total = total - (total  * cp.percent_off / 100.0)
+        total = CouponApplyService.new.(total, cp, user.id)
         self.invoice.coupon_id = cp.id
       else
         raise InvalidCouponError

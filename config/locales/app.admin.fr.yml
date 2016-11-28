@@ -164,7 +164,7 @@ fr:
         unable_to_delete_the_specified_subscription_an_error_occurred: "Impossible de supprimer l'abonnement spécifié, une erreur s'est produite."
         coupons: "Codes promotionnels"
         list_of_the_coupons: "Liste des codes promotionnels"
-        percentage_off: "Pourcentage de réduction"
+        discount: "Réduction"
         nb_of_usages: "Nombre d'utilisations"
         status: "Statut"
         add_a_new_coupon: "Ajouter un code promotionnel"

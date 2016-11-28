@@ -20,7 +20,7 @@ module Availabilities
     end
 
     test 'get machine availabilities as admin' do
-      m = Machine.find_by_slug('decoupeuse-vinyle')
+      m = Machine.find_by(slug: 'decoupeuse-vinyle')
 
       get "/api/availabilities/machines/#{m.id}"
 

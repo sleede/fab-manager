@@ -421,10 +421,7 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
     modalInstance = $uibModal.open
       animation: true,
       templateUrl: '<%= asset_path "wallet/credit_modal.html" %>'
-      controller: ['$scope', '$uibModalInstance', 'Wallet', '$locale', ($scope, $uibModalInstance, Wallet, $locale) ->
-
-        ## currency symbol for the current locale (cf. angular-i18n)
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+      controller: ['$scope', '$uibModalInstance', 'Wallet', ($scope, $uibModalInstance, Wallet) ->
 
         ##
         # Modal dialog validation callback

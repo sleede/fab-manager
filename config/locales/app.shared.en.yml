@@ -346,6 +346,10 @@ en:
         code: "Code"
         code_is_required: "Code is required."
         code_must_be_composed_of_capital_letters_digits_and_or_dashes: "The code must be composed of capital letters, digits and/or dashes."
+        kind_of_coupon: "Kind of coupon"
+        percentage: "Percentage"
+        amount: "Amount"
+        amount_off: "Amount off"
         percent_off: "Percentage off"
         percent_off_is_required: "Percentage off is required."
         percentage_must_be_between_0_and_100: "Percentage must be between 0 and 100."
@@ -363,9 +367,12 @@ en:
         # coupon (input zone for users)
         i_have_a_coupon: "I have a coupon!"
         code_: "Code:"
-        the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get {{PERCENT}}% discount."  # angular interpolation
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "The coupon has been applied. You get a {{PERCENT}}% discount."  # angular interpolation
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "The coupon has been applied. You get a discount of {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
         unable_to_apply_the_coupon_because_disabled: "Unable to apply the coupon: this code was disabled."
         unable_to_apply_the_coupon_because_expired: "Unable to apply the coupon: this code has expired."
         unable_to_apply_the_coupon_because_sold_out: "Unable to apply the coupon: this code reached its quota."
         unable_to_apply_the_coupon_because_already_used: "Unable to apply the coupon: you have already used this code once before."
+        unable_to_apply_the_coupon_because_amount_exceeded: "Unable to apply the coupon: the discount exceed the total amount of this purchase."
+        unable_to_apply_the_coupon_because_undefined: "Unable to apply the coupon: an unexpected error occurred, please contact the Fablab's manager."
         unable_to_apply_the_coupon_because_rejected: "This code does not exists."

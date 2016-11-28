@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+- Ability to create coupons with cash amounts (previously only percentages were allowed)
+- Fix a bug: misconfigured Twitter's ENV variables results in HTTP error 500
+
 ## v2.4.4 2016 November 24
 
 - Fix a bug: unable to rollback migration 20160906145713

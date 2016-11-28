@@ -131,7 +131,7 @@ class User < ActiveRecord::Base
       end
       json.machine_credits machine_credits do |mc|
         json.machine_id mc.creditable_id
-        json.hours_used mc.users_credits.find_by_user_id(id).hours_used
+        json.hours_used mc.users_credits.find_by(user_id: id).hours_used
       end
       json.last_sign_in_at last_sign_in_at.iso8601 if last_sign_in_at
     end

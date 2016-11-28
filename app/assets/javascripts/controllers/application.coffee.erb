@@ -1,7 +1,7 @@
 'use strict'
 
-Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t', 'Version'
-, ($rootScope, $scope, $window, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) ->
+Application.Controllers.controller 'ApplicationController', ["$rootScope", "$scope", "$window", '$locale', "Session", "AuthService", "Auth", "$uibModal", "$state", 'growl', 'Notification', '$interval', "Setting", '_t', 'Version'
+, ($rootScope, $scope, $window, $locale, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) ->
 
 
 
@@ -17,6 +17,10 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   ## Fab-manager's version
   $scope.version =
       version: ''
+
+  ## currency symbol for the current locale (cf. angular-i18n)
+  $rootScope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
+
 
   ##
   # Set the current user to the provided value and initialize the session

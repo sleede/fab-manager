@@ -1,4 +1,5 @@
 json.price @amount[:total] / 100.00
+json.price_without_coupon @amount[:before_coupon] / 100.00
 json.details do
   json.slots @amount[:elements][:slots] do |slot|
     json.start_at slot[:start_at]

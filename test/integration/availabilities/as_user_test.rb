@@ -1,11 +1,11 @@
 class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
   setup do
-    user = User.find_by_username('kdumas')
+    user = User.find_by(username: 'kdumas')
     login_as(user, scope: :user)
   end
 
   test 'get machine availabilities as user' do
-    m = Machine.find_by_slug('decoupeuse-vinyle')
+    m = Machine.find_by(slug: 'decoupeuse-vinyle')
 
     get "/api/availabilities/machines/#{m.id}"
 

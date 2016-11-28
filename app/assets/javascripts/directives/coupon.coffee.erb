@@ -1,11 +1,11 @@
-Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, growl, _t) ->
+Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_t', ($rootScope, Coupon, growl, _t) ->
   {
     restrict: 'E'
     scope:
       show: '='
       coupon: '='
+      total: '='
       userId: '@'
-      hasSelectSlot: '='
     templateUrl: '<%= asset_path "shared/_coupon.html" %>'
     link: ($scope, element, attributes) ->
 
@@ -16,15 +16,13 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
       # Available status are: 'pending', 'valid', 'invalid'
       $scope.status = 'pending'
 
-      # Binding for the code inputed
+      # Binding for the code inputed (see the attached template)
       $scope.couponCode = null
 
-      $scope.$watch 'hasSelectSlot', (newValue) ->
-        unless newValue
-          $scope.coupon = null
-          $scope.couponCode = null
-          $scope.code.input = false
-
+      # Re-compute if the code can be applied when the total of the cart changes
+      $scope.$watch 'total', (newValue, oldValue) ->
+        if newValue and newValue != oldValue and $scope.couponCode
+          $scope.validateCode()
 
       ##
       # Callback to validate the code
@@ -34,10 +32,13 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
           $scope.status = 'pending'
           $scope.coupon = null
         else
-          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId}, (res) ->
+          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId, amount: $scope.total}, (res) ->
             $scope.status = 'valid'
             $scope.coupon = res
-            growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+            if res.type == 'percent_off'
+              growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+            else
+              growl.success(_t('the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', {AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
           , (err) ->
             $scope.status = 'invalid'
             $scope.coupon = null

@@ -25,15 +25,24 @@ class Subscription < ActiveRecord::Base
         invoice_items = []
 
         unless coupon_code.nil?
-          cp = Coupon.find_by_code(coupon_code)
-          if not cp.nil? and cp.status(user.id) == 'active'
-            @coupon = cp
+          @coupon = Coupon.find_by(code: coupon_code)
+          if not @coupon.nil? and @coupon.status(user.id) == 'active'
             total = plan.amount
+
+            discount = 0
+            if @coupon.type == 'percent_off'
+              discount = (total  * @coupon.percent_off / 100).to_i
+            elsif @coupon.type == 'amount_off'
+              discount = @coupon.amount_off
+            else
+              raise InvalidCouponError
+            end
+
             invoice_items << Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
-                amount: -(total  * cp.percent_off / 100.0).to_i,
+                amount: -discount,
                 currency: Rails.application.secrets.stripe_currency,
-                description: "coupon #{cp.code} - subscription"
+                description: "coupon #{@coupon.code} - subscription"
             )
           else
             raise InvalidCouponError
@@ -159,11 +168,11 @@ class Subscription < ActiveRecord::Base
     total = plan.amount
 
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
-      if not cp.nil? and cp.status(user.id) == 'active'
-        @coupon = cp
-        coupon_id = cp.id
-        total = plan.amount - (plan.amount * cp.percent_off / 100.0)
+      @coupon = Coupon.find_by(code: coupon_code)
+
+      unless @coupon.nil?
+        total = CouponApplyService.new.(plan.amount, @coupon, user.id)
+        coupon_id = @coupon.id
       end
     end
 
@@ -293,7 +302,7 @@ class Subscription < ActiveRecord::Base
   def get_wallet_amount_debit
     total = plan.amount
     if @coupon
-      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+      total = CouponApplyService.new.(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
     return wallet_amount >= total ? total : wallet_amount

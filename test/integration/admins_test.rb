@@ -3,7 +3,7 @@ class AdminsTest < ActionDispatch::IntegrationTest
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
-    @admin = User.find_by_username('admin')
+    @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
   end
 
