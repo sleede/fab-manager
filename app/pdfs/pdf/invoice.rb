@@ -3,6 +3,7 @@ module PDF
   class Invoice < Prawn::Document
     require 'stringio'
     include ActionView::Helpers::NumberHelper
+    include ApplicationHelper
 
     def initialize(invoice)
       super(:margin => 70)
@@ -147,15 +148,21 @@ module PDF
           if cp.type == 'percent_off'
             discount = total_calc  * cp.percent_off / 100.0
           elsif cp.type == 'amount_off'
-            discount = cp.amount_off
+            discount = cp.amount_off / 100.00
           else
             raise InvalidCouponError
           end
 
           total_calc = total_calc - discount
 
+          # discount textual description
+          literal_discount = cp.percent_off
+          if cp.type == 'amount_off'
+            literal_discount = number_to_currency(discount)
+          end
+
           # add a row for the coupon
-          data += [ [I18n.t('invoices.coupon_CODE_discount_of_PERCENT', CODE: cp.code, PERCENT: cp.percent_off), number_to_currency(-discount)] ]
+          data += [ [_t('invoices.coupon_CODE_discount_of_DISCOUNT', {CODE: cp.code, DISCOUNT: literal_discount, TYPE: cp.type}), number_to_currency(-discount)] ]
         end
 
         # total verification
