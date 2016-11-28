@@ -1,0 +1,954 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/tokens
+    body:
+      encoding: UTF-8
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2017&card[cvc]=314
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '81'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:21 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '779'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4YKniSPeMq2N
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_19KmOv2sOmf47Nz90KKaBGgJ",
+          "object": "token",
+          "card": {
+            "id": "card_19KmOv2sOmf47Nz94YYaGGHa",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "cvc_check": "unchecked",
+            "dynamic_last4": null,
+            "exp_month": 4,
+            "exp_year": 2017,
+            "fingerprint": "o52jybR7bnmNn6AT",
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {},
+            "name": null,
+            "tokenization_method": null
+          },
+          "client_ip": "90.52.237.73",
+          "created": 1480329021,
+          "livemode": false,
+          "type": "card",
+          "used": false
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:21 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN&amount=51000&currency=usd&description=Radio+num%C3%A9rique+%0ADecember+08%2C+2016+11%3A00+AM+-+07%3A00+PM%0ADecember+09%2C+2016+11%3A00+AM+-+07%3A00+PM%0ADecember+10%2C+2016+11%3A00+AM+-+07%3A00+PM
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '225'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '552'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4Y3qKoP2Yqmq
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJpaV8xOUttT3cyc09tZjQ3Tno5ZjBQYktiSHEiLAogICJv
+        YmplY3QiOiAiaW52b2ljZWl0ZW0iLAogICJhbW91bnQiOiA1MTAwMCwKICAi
+        Y3VycmVuY3kiOiAidXNkIiwKICAiY3VzdG9tZXIiOiAiY3VzXzhDek50TTA4
+        TlZsU0dOIiwKICAiZGF0ZSI6IDE0ODAzMjkwMjIsCiAgImRlc2NyaXB0aW9u
+        IjogIlJhZGlvIG51bcOpcmlxdWUgXG5EZWNlbWJlciAwOCwgMjAxNiAxMTow
+        MCBBTSAtIDA3OjAwIFBNXG5EZWNlbWJlciAwOSwgMjAxNiAxMTowMCBBTSAt
+        IDA3OjAwIFBNXG5EZWNlbWJlciAxMCwgMjAxNiAxMTowMCBBTSAtIDA3OjAw
+        IFBNIiwKICAiZGlzY291bnRhYmxlIjogdHJ1ZSwKICAiaW52b2ljZSI6IG51
+        bGwsCiAgImxpdmVtb2RlIjogZmFsc2UsCiAgIm1ldGFkYXRhIjoge30sCiAg
+        InBlcmlvZCI6IHsKICAgICJzdGFydCI6IDE0ODAzMjkwMjIsCiAgICAiZW5k
+        IjogMTQ4MDMyOTAyMgogIH0sCiAgInBsYW4iOiBudWxsLAogICJwcm9yYXRp
+        b24iOiBmYWxzZSwKICAicXVhbnRpdHkiOiBudWxsLAogICJzdWJzY3JpcHRp
+        b24iOiBudWxsCn0K
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:22 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN&amount=-7650&currency=usd&description=coupon+SUNNYFABLAB+-+reservation
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '98'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '451'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4YzTw5ITNQ7t
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_19KmOw2sOmf47Nz9fMgjHIhg",
+          "object": "invoiceitem",
+          "amount": -7650,
+          "currency": "usd",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "date": 1480329022,
+          "description": "coupon SUNNYFABLAB - reservation",
+          "discountable": false,
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "start": 1480329022,
+            "end": 1480329022
+          },
+          "plan": null,
+          "proration": false,
+          "quantity": null,
+          "subscription": null
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:23 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN&amount=-1000&currency=usd&description=wallet+-10.0
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '78'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '431'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4YHcxKC6TIpx
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_19KmOx2sOmf47Nz9XIzvTjLC",
+          "object": "invoiceitem",
+          "amount": -1000,
+          "currency": "usd",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "date": 1480329023,
+          "description": "wallet -10.0",
+          "discountable": false,
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "start": 1480329023,
+            "end": 1480329023
+          },
+          "plan": null,
+          "proration": false,
+          "quantity": null,
+          "subscription": null
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:23 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:24 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1415'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4YUv3IAopxIK
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_8CzNtM08NVlSGN",
+          "object": "customer",
+          "account_balance": 0,
+          "created": 1459782849,
+          "currency": "usd",
+          "default_source": "card_18ZhUf2sOmf47Nz9LhkQeEmO",
+          "delinquent": false,
+          "description": "Vanessa Lonchamp",
+          "discount": null,
+          "email": "vanessa.lonchamp@sfr.fr",
+          "livemode": false,
+          "metadata": {},
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_18ZhUf2sOmf47Nz9LhkQeEmO",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8CzNtM08NVlSGN",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2017,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": null,
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_8CzNtM08NVlSGN/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_8CzNtM08NVlSGN/subscriptions"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:24 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/sources
+    body:
+      encoding: UTF-8
+      string: card=tok_19KmOv2sOmf47Nz90KKaBGgJ
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '33'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '577'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4Ychb7UhSBol
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "card_19KmOv2sOmf47Nz94YYaGGHa",
+          "object": "card",
+          "address_city": null,
+          "address_country": null,
+          "address_line1": null,
+          "address_line1_check": null,
+          "address_line2": null,
+          "address_state": null,
+          "address_zip": null,
+          "address_zip_check": null,
+          "brand": "Visa",
+          "country": "US",
+          "customer": "cus_8CzNtM08NVlSGN",
+          "cvc_check": "pass",
+          "dynamic_last4": null,
+          "exp_month": 4,
+          "exp_year": 2017,
+          "fingerprint": "o52jybR7bnmNn6AT",
+          "funding": "credit",
+          "last4": "4242",
+          "metadata": {},
+          "name": null,
+          "tokenization_method": null
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:25 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
+    body:
+      encoding: UTF-8
+      string: default_source=card_19KmOv2sOmf47Nz94YYaGGHa
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '44'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:26 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2143'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4Y7M4v5B4FLQ
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_8CzNtM08NVlSGN",
+          "object": "customer",
+          "account_balance": 0,
+          "created": 1459782849,
+          "currency": "usd",
+          "default_source": "card_19KmOv2sOmf47Nz94YYaGGHa",
+          "delinquent": false,
+          "description": "Vanessa Lonchamp",
+          "discount": null,
+          "email": "vanessa.lonchamp@sfr.fr",
+          "livemode": false,
+          "metadata": {},
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_19KmOv2sOmf47Nz94YYaGGHa",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8CzNtM08NVlSGN",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2017,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": null,
+                "tokenization_method": null
+              },
+              {
+                "id": "card_18ZhUf2sOmf47Nz9LhkQeEmO",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8CzNtM08NVlSGN",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2017,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": null,
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 2,
+            "url": "/v1/customers/cus_8CzNtM08NVlSGN/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_8CzNtM08NVlSGN/subscriptions"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:26 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoices
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '27'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2516'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4YqC96ZArjnb
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJpbl8xOUttUDEyc09tZjQ3Tno5Umw2YUtXRjgiLAogICJv
+        YmplY3QiOiAiaW52b2ljZSIsCiAgImFtb3VudF9kdWUiOiA0MjM1MCwKICAi
+        YXBwbGljYXRpb25fZmVlIjogbnVsbCwKICAiYXR0ZW1wdF9jb3VudCI6IDAs
+        CiAgImF0dGVtcHRlZCI6IGZhbHNlLAogICJjaGFyZ2UiOiBudWxsLAogICJj
+        bG9zZWQiOiBmYWxzZSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAiZGF0ZSI6IDE0ODAzMjkw
+        MjcsCiAgImRlc2NyaXB0aW9uIjogbnVsbCwKICAiZGlzY291bnQiOiBudWxs
+        LAogICJlbmRpbmdfYmFsYW5jZSI6IG51bGwsCiAgImZvcmdpdmVuIjogZmFs
+        c2UsCiAgImxpbmVzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJk
+        YXRhIjogWwogICAgICB7CiAgICAgICAgImlkIjogImlpXzE5S21PeDJzT21m
+        NDdOejlYSXp2VGpMQyIsCiAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0i
+        LAogICAgICAgICJhbW91bnQiOiAtMTAwMCwKICAgICAgICAiY3VycmVuY3ki
+        OiAidXNkIiwKICAgICAgICAiZGVzY3JpcHRpb24iOiAid2FsbGV0IC0xMC4w
+        IiwKICAgICAgICAiZGlzY291bnRhYmxlIjogZmFsc2UsCiAgICAgICAgImxp
+        dmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAg
+        ICAgInBlcmlvZCI6IHsKICAgICAgICAgICJzdGFydCI6IDE0ODAzMjkwMjMs
+        CiAgICAgICAgICAiZW5kIjogMTQ4MDMyOTAyMwogICAgICAgIH0sCiAgICAg
+        ICAgInBsYW4iOiBudWxsLAogICAgICAgICJwcm9yYXRpb24iOiBmYWxzZSwK
+        ICAgICAgICAicXVhbnRpdHkiOiBudWxsLAogICAgICAgICJzdWJzY3JpcHRp
+        b24iOiBudWxsLAogICAgICAgICJ0eXBlIjogImludm9pY2VpdGVtIgogICAg
+        ICB9LAogICAgICB7CiAgICAgICAgImlkIjogImlpXzE5S21PdzJzT21mNDdO
+        ejlmTWdqSEloZyIsCiAgICAgICAgIm9iamVjdCI6ICJsaW5lX2l0ZW0iLAog
+        ICAgICAgICJhbW91bnQiOiAtNzY1MCwKICAgICAgICAiY3VycmVuY3kiOiAi
+        dXNkIiwKICAgICAgICAiZGVzY3JpcHRpb24iOiAiY291cG9uIFNVTk5ZRkFC
+        TEFCIC0gcmVzZXJ2YXRpb24iLAogICAgICAgICJkaXNjb3VudGFibGUiOiBm
+        YWxzZSwKICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAibWV0
+        YWRhdGEiOiB7fSwKICAgICAgICAicGVyaW9kIjogewogICAgICAgICAgInN0
+        YXJ0IjogMTQ4MDMyOTAyMiwKICAgICAgICAgICJlbmQiOiAxNDgwMzI5MDIy
+        CiAgICAgICAgfSwKICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAgInBy
+        b3JhdGlvbiI6IGZhbHNlLAogICAgICAgICJxdWFudGl0eSI6IG51bGwsCiAg
+        ICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAgInR5cGUiOiAi
+        aW52b2ljZWl0ZW0iCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQiOiAi
+        aWlfMTlLbU93MnNPbWY0N056OWYwUGJLYkhxIiwKICAgICAgICAib2JqZWN0
+        IjogImxpbmVfaXRlbSIsCiAgICAgICAgImFtb3VudCI6IDUxMDAwLAogICAg
+        ICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICJkZXNjcmlwdGlvbiI6
+        ICJSYWRpbyBudW3DqXJpcXVlIFxuRGVjZW1iZXIgMDgsIDIwMTYgMTE6MDAg
+        QU0gLSAwNzowMCBQTVxuRGVjZW1iZXIgMDksIDIwMTYgMTE6MDAgQU0gLSAw
+        NzowMCBQTVxuRGVjZW1iZXIgMTAsIDIwMTYgMTE6MDAgQU0gLSAwNzowMCBQ
+        TSIsCiAgICAgICAgImRpc2NvdW50YWJsZSI6IHRydWUsCiAgICAgICAgImxp
+        dmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAg
+        ICAgInBlcmlvZCI6IHsKICAgICAgICAgICJzdGFydCI6IDE0ODAzMjkwMjIs
+        CiAgICAgICAgICAiZW5kIjogMTQ4MDMyOTAyMgogICAgICAgIH0sCiAgICAg
+        ICAgInBsYW4iOiBudWxsLAogICAgICAgICJwcm9yYXRpb24iOiBmYWxzZSwK
+        ICAgICAgICAicXVhbnRpdHkiOiBudWxsLAogICAgICAgICJzdWJzY3JpcHRp
+        b24iOiBudWxsLAogICAgICAgICJ0eXBlIjogImludm9pY2VpdGVtIgogICAg
+        ICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAidG90YWxf
+        Y291bnQiOiAzLAogICAgInVybCI6ICIvdjEvaW52b2ljZXMvaW5fMTlLbVAx
+        MnNPbWY0N056OVJsNmFLV0Y4L2xpbmVzIgogIH0sCiAgImxpdmVtb2RlIjog
+        ZmFsc2UsCiAgIm1ldGFkYXRhIjoge30sCiAgIm5leHRfcGF5bWVudF9hdHRl
+        bXB0IjogMTQ4MDMzMjYyNywKICAicGFpZCI6IGZhbHNlLAogICJwZXJpb2Rf
+        ZW5kIjogMTQ4MDMyOTAyNywKICAicGVyaW9kX3N0YXJ0IjogMTQ4MDMyOTAy
+        NywKICAicmVjZWlwdF9udW1iZXIiOiBudWxsLAogICJzdGFydGluZ19iYWxh
+        bmNlIjogMCwKICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICJz
+        dWJzY3JpcHRpb24iOiBudWxsLAogICJzdWJ0b3RhbCI6IDQyMzUwLAogICJ0
+        YXgiOiBudWxsLAogICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgInRvdGFsIjog
+        NDIzNTAsCiAgIndlYmhvb2tzX2RlbGl2ZXJlZF9hdCI6IG51bGwKfQo=
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:27 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoices/in_19KmP12sOmf47Nz9Rl6aKWF8/pay
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+      Content-Length:
+      - '0'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2535'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4Y7QI51Jw753
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJpbl8xOUttUDEyc09tZjQ3Tno5Umw2YUtXRjgiLAogICJv
+        YmplY3QiOiAiaW52b2ljZSIsCiAgImFtb3VudF9kdWUiOiA0MjM1MCwKICAi
+        YXBwbGljYXRpb25fZmVlIjogbnVsbCwKICAiYXR0ZW1wdF9jb3VudCI6IDEs
+        CiAgImF0dGVtcHRlZCI6IHRydWUsCiAgImNoYXJnZSI6ICJjaF8xOUttUDIy
+        c09tZjQ3Tno5M2lmYklVMmkiLAogICJjbG9zZWQiOiB0cnVlLAogICJjdXJy
+        ZW5jeSI6ICJ1c2QiLAogICJjdXN0b21lciI6ICJjdXNfOEN6TnRNMDhOVmxT
+        R04iLAogICJkYXRlIjogMTQ4MDMyOTAyNywKICAiZGVzY3JpcHRpb24iOiBu
+        dWxsLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVuZGluZ19iYWxhbmNlIjog
+        MCwKICAiZm9yZ2l2ZW4iOiBmYWxzZSwKICAibGluZXMiOiB7CiAgICAib2Jq
+        ZWN0IjogImxpc3QiLAogICAgImRhdGEiOiBbCiAgICAgIHsKICAgICAgICAi
+        aWQiOiAiaWlfMTlLbU94MnNPbWY0N056OVhJenZUakxDIiwKICAgICAgICAi
+        b2JqZWN0IjogImxpbmVfaXRlbSIsCiAgICAgICAgImFtb3VudCI6IC0xMDAw
+        LAogICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICJkZXNjcmlw
+        dGlvbiI6ICJ3YWxsZXQgLTEwLjAiLAogICAgICAgICJkaXNjb3VudGFibGUi
+        OiBmYWxzZSwKICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAi
+        bWV0YWRhdGEiOiB7fSwKICAgICAgICAicGVyaW9kIjogewogICAgICAgICAg
+        InN0YXJ0IjogMTQ4MDMyOTAyMywKICAgICAgICAgICJlbmQiOiAxNDgwMzI5
+        MDIzCiAgICAgICAgfSwKICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAg
+        InByb3JhdGlvbiI6IGZhbHNlLAogICAgICAgICJxdWFudGl0eSI6IG51bGws
+        CiAgICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAgInR5cGUi
+        OiAiaW52b2ljZWl0ZW0iCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQi
+        OiAiaWlfMTlLbU93MnNPbWY0N056OWZNZ2pISWhnIiwKICAgICAgICAib2Jq
+        ZWN0IjogImxpbmVfaXRlbSIsCiAgICAgICAgImFtb3VudCI6IC03NjUwLAog
+        ICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICJkZXNjcmlwdGlv
+        biI6ICJjb3Vwb24gU1VOTllGQUJMQUIgLSByZXNlcnZhdGlvbiIsCiAgICAg
+        ICAgImRpc2NvdW50YWJsZSI6IGZhbHNlLAogICAgICAgICJsaXZlbW9kZSI6
+        IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJwZXJp
+        b2QiOiB7CiAgICAgICAgICAic3RhcnQiOiAxNDgwMzI5MDIyLAogICAgICAg
+        ICAgImVuZCI6IDE0ODAzMjkwMjIKICAgICAgICB9LAogICAgICAgICJwbGFu
+        IjogbnVsbCwKICAgICAgICAicHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICAg
+        InF1YW50aXR5IjogbnVsbCwKICAgICAgICAic3Vic2NyaXB0aW9uIjogbnVs
+        bCwKICAgICAgICAidHlwZSI6ICJpbnZvaWNlaXRlbSIKICAgICAgfSwKICAg
+        ICAgewogICAgICAgICJpZCI6ICJpaV8xOUttT3cyc09tZjQ3Tno5ZjBQYkti
+        SHEiLAogICAgICAgICJvYmplY3QiOiAibGluZV9pdGVtIiwKICAgICAgICAi
+        YW1vdW50IjogNTEwMDAsCiAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAg
+        ICAgICAgImRlc2NyaXB0aW9uIjogIlJhZGlvIG51bcOpcmlxdWUgXG5EZWNl
+        bWJlciAwOCwgMjAxNiAxMTowMCBBTSAtIDA3OjAwIFBNXG5EZWNlbWJlciAw
+        OSwgMjAxNiAxMTowMCBBTSAtIDA3OjAwIFBNXG5EZWNlbWJlciAxMCwgMjAx
+        NiAxMTowMCBBTSAtIDA3OjAwIFBNIiwKICAgICAgICAiZGlzY291bnRhYmxl
+        IjogdHJ1ZSwKICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAi
+        bWV0YWRhdGEiOiB7fSwKICAgICAgICAicGVyaW9kIjogewogICAgICAgICAg
+        InN0YXJ0IjogMTQ4MDMyOTAyMiwKICAgICAgICAgICJlbmQiOiAxNDgwMzI5
+        MDIyCiAgICAgICAgfSwKICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAg
+        InByb3JhdGlvbiI6IGZhbHNlLAogICAgICAgICJxdWFudGl0eSI6IG51bGws
+        CiAgICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAgInR5cGUi
+        OiAiaW52b2ljZWl0ZW0iCiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUi
+        OiBmYWxzZSwKICAgICJ0b3RhbF9jb3VudCI6IDMsCiAgICAidXJsIjogIi92
+        MS9pbnZvaWNlcy9pbl8xOUttUDEyc09tZjQ3Tno5Umw2YUtXRjgvbGluZXMi
+        CiAgfSwKICAibGl2ZW1vZGUiOiBmYWxzZSwKICAibWV0YWRhdGEiOiB7fSwK
+        ICAibmV4dF9wYXltZW50X2F0dGVtcHQiOiBudWxsLAogICJwYWlkIjogdHJ1
+        ZSwKICAicGVyaW9kX2VuZCI6IDE0ODAzMjkwMjcsCiAgInBlcmlvZF9zdGFy
+        dCI6IDE0ODAzMjkwMjcsCiAgInJlY2VpcHRfbnVtYmVyIjogbnVsbCwKICAi
+        c3RhcnRpbmdfYmFsYW5jZSI6IDAsCiAgInN0YXRlbWVudF9kZXNjcmlwdG9y
+        IjogbnVsbCwKICAic3Vic2NyaXB0aW9uIjogbnVsbCwKICAic3VidG90YWwi
+        OiA0MjM1MCwKICAidGF4IjogbnVsbCwKICAidGF4X3BlcmNlbnQiOiBudWxs
+        LAogICJ0b3RhbCI6IDQyMzUwLAogICJ3ZWJob29rc19kZWxpdmVyZWRfYXQi
+        OiAxNDgwMzI5MDI3Cn0K
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:28 GMT
+- request:
+    method: delete
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/sources/card_19KmOv2sOmf47Nz94YYaGGHa
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.4.0-47-generic (buildd@lcy01-03) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.2) ) #68-Ubuntu SMP Wed Oct 26 19:39:52 UTC 2016","hostname":"sylvain-sleede-pc"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 28 Nov 2016 10:30:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '63'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9e4YMgucjzDaXM
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "deleted": true,
+          "id": "card_19KmOv2sOmf47Nz94YYaGGHa"
+        }
+    http_version: 
+  recorded_at: Mon, 28 Nov 2016 10:30:29 GMT
+recorded_with: VCR 3.0.1

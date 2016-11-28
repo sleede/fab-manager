@@ -1,211 +1,19 @@
 module Events
-  class AsAdminTest < ActionDispatch::IntegrationTest
-
-    setup do
-      admin = User.with_role(:admin).first
-      login_as(admin, scope: :user)
-    end
-
-    test 'creation modification reservation and re-modification scenario' do
-
-      # First, we create a new event
-      post '/api/events',
-           {
-               event: {
-                   title: 'OpenLab discovery day',
-                   description: 'A day to discover the Fablab and try its machines and possibilities.',
-                   start_date: 1.week.from_now.utc,
-                   start_time: 1.week.from_now.utc.change({hour: 16}),
-                   end_date: 1.week.from_now.utc,
-                   end_time: 1.week.from_now.utc.change({hour: 20}),
-                   category_id: Category.first.id,
-                   amount: 0
-               }
-           }.to_json,
-           default_headers
-
-      # Check response format & status
-      assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
-
-      # Check the event was created correctly
-      event = json_response(response.body)
-      e = Event.where(id: event[:id]).first
-      assert_not_nil e, 'Event was not created in database'
-
-      # Check the remaining free places are not defined
-      assert_nil e.nb_free_places, "Free places shouldn't be defined"
-
-      # Then, modify the event to set a nb of places
-      put "/api/events/#{e.id}",
-          {
-              event: {
-                  title: 'OpenLab discovery day',
-                  description: 'A day to discover the Fablab and try its machines and possibilities.',
-                  start_date: 1.week.from_now.utc,
-                  start_time: 1.week.from_now.utc.change({hour: 16}),
-                  end_date: 1.week.from_now.utc,
-                  end_time: 1.week.from_now.utc.change({hour: 20}),
-                  category_id: Category.first.id,
-                  amount: 0,
-                  nb_total_places: 10
-              }
-          }
-
-      # Check response format & status
-      assert_equal 200, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
-
-      # Check the places numbers were updated successfully
-      e = Event.where(id: event[:id]).first
-      assert_equal 10, e.nb_total_places, 'Total number of places was not updated'
-      assert_equal 10, e.nb_free_places, 'Number of free places was not updated'
-
-      # Now, let's make a reservation on this event
-      post '/api/reservations',
-          {
-              reservation: {
-                  user_id: User.find_by(username: 'pdurand').id,
-                  reservable_id: e.id,
-                  reservable_type: 'Event',
-                  nb_reserve_places: 2,
-                  slots_attributes: [
-                      {
-                          start_at: e.availability.start_at,
-                          end_at: e.availability.end_at,
-                          availability_id: e.availability.id,
-                          offered: false
-                      }
-                  ]
-              }
-          }.to_json,
-          default_headers
-
-      # Check response format & status
-      assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
-
-      # Check the remaining places were updated successfully
-      e = Event.where(id: event[:id]).first
-      assert_equal 8, e.nb_free_places, 'Number of free places was not updated'
-
-      # Finally, modify the event to add some places
-      put "/api/events/#{e.id}",
-          {
-              event: {
-                  title: 'OpenLab discovery day',
-                  description: 'A day to discover the Fablab and try its machines and possibilities.',
-                  start_date: 1.week.from_now.utc,
-                  start_time: 1.week.from_now.utc.change({hour: 16}),
-                  end_date: 1.week.from_now.utc,
-                  end_time: 1.week.from_now.utc.change({hour: 20}),
-                  category_id: Category.first.id,
-                  amount: 0,
-                  nb_total_places: 20
-              }
-          }
-
-      # Check response format & status
-      assert_equal 200, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
-
-      # Check the places numbers were updated successfully
-      e = Event.where(id: event[:id]).first
-      assert_equal 20, e.nb_total_places, 'Total number of places was not updated'
-      assert_equal 18, e.nb_free_places, 'Number of free places was not updated'
-    end
-
-    test 'create event with custom price and reserve it with success' do
-
-      price_category = PriceCategory.first
-
-      # First, we create a new event
-      post '/api/events',
-           {
-               event: {
-                   title: 'Electronics initiation',
-                   description: 'A workshop about electronics and the abilities to create robots.',
-                   start_date: 1.week.from_now.utc + 2.days,
-                   start_time: 1.week.from_now.utc.change({hour: 18}) + 2.days,
-                   end_date: 1.week.from_now.utc + 2.days,
-                   end_time: 1.week.from_now.utc.change({hour: 22}) + 2.days,
-                   category_id: Category.last.id,
-                   amount: 20,
-                   nb_total_places: 10,
-                   event_price_categories_attributes: [
-                       {
-                          price_category_id: price_category.id.to_s,
-                          amount: 16.to_s
-                       }
-                   ]
-               }
-           }.to_json,
-           default_headers
-
-      # Check response format & status
-      assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
-
-      # Check the event was created correctly
-      event = json_response(response.body)
-      e = Event.where(id: event[:id]).first
-      assert_not_nil e, 'Event was not created in database'
-
-      # Check the places numbers were set successfully
-      e = Event.where(id: event[:id]).first
-      assert_equal 10, e.nb_total_places, 'Total number of places was not updated'
-      assert_equal 10, e.nb_free_places, 'Number of free places was not updated'
-
-      # Now, let's make a reservation on this event
-      post '/api/reservations',
-           {
-               reservation: {
-                   user_id: User.find_by(username: 'lseguin').id,
-                   reservable_id: e.id,
-                   reservable_type: 'Event',
-                   nb_reserve_places: 4,
-                   slots_attributes: [
-                       {
-                           start_at: e.availability.start_at,
-                           end_at: e.availability.end_at,
-                           availability_id: e.availability.id,
-                           offered: false
-                       }
-                   ],
-                   tickets_attributes: [
-                       {
-                           event_price_category_id: e.event_price_categories.first.id,
-                           booked: 4
-                       }
-                   ]
-               }
-           }.to_json,
-           default_headers
-
-      # Check response format & status
-      assert_equal 201, response.status, response.body
-      assert_equal Mime::JSON, response.content_type
-
-      # Check the reservation match the required event
-      reservation = json_response(response.body)
-      r = Reservation.find(reservation[:id])
-
-      assert_equal e.id, r.reservable_id
-      assert_equal 'Event', r.reservable_type
-
-      # Check the remaining places were updated successfully
-      e = Event.where(id: event[:id]).first
-      assert_equal 2, e.nb_free_places, 'Number of free places was not updated'
-
-      # Check the resulting invoice generation and it has right price
-      assert_invoice_pdf r.invoice
-      assert_equal (4 * 20) + (4 * 16), r.invoice.total / 100.0
-
-    end
+  class AsUserTest < ActionDispatch::IntegrationTest
 
     test 'reserve event with many prices and payment means' do
 
+      vlonchamp = User.find_by(username: 'vlonchamp')
+      login_as(vlonchamp, scope: :user)
+
       radio = Event.find(4)
+      availability = radio.availability
+
+      reservations_count = Reservation.count
+      invoice_count = Invoice.count
+      invoice_items_count = InvoiceItem.count
+      users_credit_count = UsersCredit.count
+      wallet_transactions_count = WalletTransaction.count
 
       # Reserve the 'radio' event
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means') do
@@ -218,9 +26,9 @@ module Events
                 card_token: stripe_card_token,
                 slots_attributes: [
                     {
-                        start_at: radio.availability.start_at,
-                        end_at: radio.availability.end_at,
-                        availability_id: radio.availability.id,
+                        start_at: availability.start_at,
+                        end_at: availability.end_at,
+                        availability_id: availability.id,
                         offered: false
                     }
                 ],
@@ -234,9 +42,61 @@ module Events
                         booked: 2
                     }
                 ]
-            }
+            },
+            coupon_code: 'SUNNYFABLAB'
         }.to_json, default_headers
       end
+
+      # general assertions
+      assert_equal 201, response.status
+      assert_equal reservations_count + 1, Reservation.count
+      assert_equal invoice_count + 1, Invoice.count
+      assert_equal invoice_items_count + 1, InvoiceItem.count
+      assert_equal users_credit_count, UsersCredit.count
+      assert_equal wallet_transactions_count + 1, WalletTransaction.count
+
+      # reservation assertions
+      reservation = Reservation.last
+
+      assert reservation.invoice
+      refute reservation.stp_invoice_id.blank?
+      assert_equal 1, reservation.invoice.invoice_items.count
+
+      # invoice assertions
+      invoice = reservation.invoice
+
+      refute invoice.stp_invoice_id.blank?
+      refute invoice.total.blank?
+      assert_equal 43350, invoice.total
+
+      # invoice_items assertions
+      ## reservation
+      reservation_item = invoice.invoice_items.first
+
+      assert_not_nil reservation_item
+      assert reservation_item.stp_invoice_item_id
+      assert_equal 51000, reservation_item.amount
+
+      # invoice assertions
+      invoice = Invoice.find_by(invoiced: reservation)
+      assert_invoice_pdf invoice
+
+      VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do
+        stp_invoice = Stripe::Invoice.retrieve(invoice.stp_invoice_id)
+        assert_equal stp_invoice.total, (invoice.total - invoice.wallet_amount)
+      end
+
+      # wallet assertions
+      assert_equal vlonchamp.wallet.amount, 0
+      assert_equal vlonchamp.wallet.wallet_transactions.count, 2
+      transaction = vlonchamp.wallet.wallet_transactions.last
+      assert_equal transaction.transaction_type, 'debit'
+      assert_equal transaction.amount, 10
+      assert_equal transaction.amount, invoice.wallet_amount / 100.0
+
+      # notifications
+      assert_not_empty Notification.where(attached_object: reservation)
+      assert_not_empty Notification.where(attached_object: invoice)
 
     end
   end
