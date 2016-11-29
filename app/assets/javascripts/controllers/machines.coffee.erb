@@ -816,14 +816,19 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
-              if response.status != 500
-                $scope.alerts.push
-                  msg: response.data.card[0]
-                  type: 'danger'
-              else
+              if response.status == 500
                 $scope.alerts.push
                   msg: response.statusText
                   type: 'danger'
+              else
+                if response.data.card and response.data.card.join('').length > 0
+                  $scope.alerts.push
+                    msg: response.data.card.join('. ')
+                    type: 'danger'
+                else if response.data.payment and response.data.payment.join('').length > 0
+                  $scope.alerts.push
+                    msg: response.data.payment.join('. ')
+                    type: 'danger'
               $scope.attempting = false
       ]
     .result['finally'](null).then (reservation)->
