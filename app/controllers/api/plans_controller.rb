@@ -81,9 +81,9 @@
         @parameters
       else
         @parameters = params
-        @parameters[:plan][:amount] = @parameters[:plan][:amount].to_i * 100.0 if @parameters[:plan][:amount]
+        @parameters[:plan][:amount] = @parameters[:plan][:amount].to_f * 100.0 if @parameters[:plan][:amount]
         @parameters[:plan][:prices_attributes] = @parameters[:plan][:prices_attributes].map do |price|
-          { amount: price[:amount].to_i * 100.0, id: price[:id] }
+          { amount: price[:amount].to_f * 100.0, id: price[:id] }
         end if @parameters[:plan][:prices_attributes]
 
         @parameters = @parameters.require(:plan).permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,

@@ -83,7 +83,7 @@ class API::CouponsController < API::ApiController
       @parameters
     else
       @parameters = params
-      @parameters[:coupon][:amount_off] = @parameters[:coupon][:amount_off].to_i * 100.0 if @parameters[:coupon][:amount_off]
+      @parameters[:coupon][:amount_off] = @parameters[:coupon][:amount_off].to_f * 100.0 if @parameters[:coupon][:amount_off]
 
       @parameters = @parameters.require(:coupon).permit(:name, :code, :percent_off, :amount_off, :validity_per_user, :valid_until, :max_usages, :active)
     end
