@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.5 2016 November 29
+
 - Ability to create coupons with cash amounts (previously only percentages were allowed)
 - Improved error messages when something wrong append when paying a machine reservation by stripe
 - Ability to display optional information message on event reservation page
