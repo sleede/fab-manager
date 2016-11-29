@@ -18,6 +18,8 @@ class Subscription < ActiveRecord::Base
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
+  # @params [invoice] if true then subscription pay itself, dont pay with reservation
+  #                   if false then subscription pay with reservation
   def save_with_payment(invoice = true, coupon_code = nil)
     if valid?
       begin
@@ -131,6 +133,8 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  # @params [invoice] if true then subscription pay itself, dont pay with reservation
+  #                   if false then subscription pay with reservation
   def save_with_local_payment(invoice = true, coupon_code = nil)
     if valid?
       # very important to set expired_at to nil that can allow method is_new? to return true
@@ -143,16 +147,19 @@ class Subscription < ActiveRecord::Base
       if save
         UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
         if invoice
-          invoc = generate_invoice(nil, coupon_code)
           @wallet_amount_debit = get_wallet_amount_debit
 
           # debit wallet
           wallet_transaction = debit_user_wallet
-          if wallet_transaction
-            invoc.wallet_amount = @wallet_amount_debit
-            invoc.wallet_transaction_id = wallet_transaction.id
+
+          if !self.user.invoicing_disabled?
+            invoc = generate_invoice(nil, coupon_code)
+            if wallet_transaction
+              invoc.wallet_amount = @wallet_amount_debit
+              invoc.wallet_transaction_id = wallet_transaction.id
+            end
+            invoc.save
           end
-          invoc.save
         end
         return true
       else
