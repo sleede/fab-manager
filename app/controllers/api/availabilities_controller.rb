@@ -126,8 +126,8 @@ class API::AvailabilitiesController < API::ApiController
 
     # what is requested?
     # 1) a single training
-    if params[:training_id].is_number?
-      @availabilities = Training.find(params[:training_id]).availabilities
+    if params[:training_id].is_number? or (params[:training_id].length > 0 and params[:training_id] != 'all')
+      @availabilities = Training.friendly.find(params[:training_id]).availabilities
     # 2) all trainings
     else
       @availabilities = Availability.trainings

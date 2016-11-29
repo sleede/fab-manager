@@ -6,6 +6,7 @@
 - Fix a bug: misconfigured Twitter's ENV variables results in HTTP error 500
 - Fix a bug: wallet is not debited when paying locally with a user who have invoices disabled
 - Fix a bug: wrong error message about rounding inconsistency is logged on invoice generation
+- Fix a bug: reservation calendar of a specific training shows availabilities for all trainings
 
 ## v2.4.4 2016 November 24
 
