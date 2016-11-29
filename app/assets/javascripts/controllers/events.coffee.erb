@@ -173,6 +173,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   ## Global config: delay in hours before a booking while changing the booking slot is forbidden
   $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
 
+  ## Message displayed to the end user about rules that applies to events reservations
+  $scope.eventExplicationsAlert = settingsPromise.event_explications_alert
+
 
 
   ##

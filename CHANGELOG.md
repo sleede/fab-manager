@@ -3,6 +3,7 @@
 ## next release
 - Ability to create coupons with cash amounts (previously only percentages were allowed)
 - Improved error messages when something wrong append when paying a machine reservation by stripe
+- Ability to display optional information message on event reservation page
 - Fix a bug: misconfigured Twitter's ENV variables results in HTTP error 500
 - Fix a bug: wallet is not debited when paying locally with a user who have invoices disabled
 - Fix a bug: wrong error message about rounding inconsistency is logged on invoice generation

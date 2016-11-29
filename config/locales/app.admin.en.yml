@@ -492,6 +492,7 @@ en:
         warning_message_of_the_training_booking_page: "Warning message of the training booking page:"
         information_message_of_the_training_reservation_page: "Information message of the training reservation page:"
         message_of_the_subscriptions_page: "Message of the subscriptions page:"
+        message_of_the_events_page: "Message of the events page:"
         legal_documents: "Legal documents"
         if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user: "If these documents are not filled, no consent about them will be asked."
         general_terms_and_conditions_(T&C): "General terms and conditions (T&C)"

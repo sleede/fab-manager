@@ -178,6 +178,13 @@
 
     </section>
 
+    <uib-alert type="warning m" ng-if="eventExplicationsAlert.length > 0">
+      <p class="text-sm pull-left">
+        <i class="fa fa-warning"></i>
+        <div class="m-l-lg" ng-bind-html="eventExplicationsAlert"></div>
+      </p>
+    </uib-alert>
+
   </div>
 
 </div>
