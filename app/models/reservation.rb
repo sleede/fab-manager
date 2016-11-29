@@ -136,7 +136,7 @@ class Reservation < ActiveRecord::Base
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)
       if not @coupon.nil? and @coupon.status(user.id) == 'active'
-        total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+        total = get_cart_total
 
         discount = 0
         if @coupon.type == 'percent_off'
@@ -152,7 +152,7 @@ class Reservation < ActiveRecord::Base
               customer: user.stp_customer_id,
               amount: -discount,
               currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{@coupon.code} - reservation"
+              description: "coupon #{@coupon.code}"
           )
         end
       else
@@ -183,7 +183,7 @@ class Reservation < ActiveRecord::Base
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
-        if subscription.save_with_payment(false, coupon_code)
+        if subscription.save_with_payment(false)
           self.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
@@ -397,12 +397,17 @@ class Reservation < ActiveRecord::Base
     reservable.update_columns(nb_free_places: nb_free_places)
   end
 
-  def get_wallet_amount_debit
+  def get_cart_total
     total = (self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
     if plan_id.present?
       plan = Plan.find(plan_id)
       total += plan.amount
     end
+    total
+  end
+
+  def get_wallet_amount_debit
+    total = get_cart_total
     if @coupon
       total = CouponApplyService.new.(total, @coupon, user.id)
     end
