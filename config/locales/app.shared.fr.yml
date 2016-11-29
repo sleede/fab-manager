@@ -346,6 +346,10 @@ fr:
         code: "Code"
         code_is_required: "Le code est requis."
         code_must_be_composed_of_capital_letters_digits_and_or_dashes: "Le code doit être composé de lettres majuscules, de chiffres et/ou de tirets."
+        kind_of_coupon: "Type de réduction"
+        percentage: "Pourcentage"
+        amount: "Montant"
+        amount_off: "Montant de la réduction"
         percent_off: "Pourcentage de réduction"
         percent_off_is_required: "Le pourcentage de réduction est requis."
         percentage_must_be_between_0_and_100: "Le pourcentage doit être compris entre 0 et 100."
@@ -364,8 +368,11 @@ fr:
         i_have_a_coupon: "J'ai un code promo !"
         code_: "Code :"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{PERCENT}} %."  # angular interpolation
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
         unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
         unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
         unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
         unable_to_apply_the_coupon_because_already_used: "Impossible d'appliquer la réduction : vous avez déjà utilisé ce code promo par le passé."
+        unable_to_apply_the_coupon_because_amount_exceeded: "Impossible d'appliquer la réduction : la réduction dépasse le total de cet achat."
+        unable_to_apply_the_coupon_because_undefined: "Impossible d'appliquer la réduction : une erreur inattendue s'est produite, veuillez contacter le gestionnaire du Fablab."
         unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."

@@ -45,7 +45,7 @@ class Price < ActiveRecord::Base
           if machine_credit
             hours_available = machine_credit.hours
             if !new_plan_being_bought
-              user_credit = user.users_credits.find_by_credit_id(machine_credit.id)
+              user_credit = user.users_credits.find_by(credit_id: machine_credit.id)
               if user_credit
                 hours_available = machine_credit.hours - user_credit.hours_used
               end
@@ -111,13 +111,11 @@ class Price < ActiveRecord::Base
     end
 
     # === apply Coupon if any ===
-    unless coupon_code.nil?
-      _coupon = Coupon.find_by_code(coupon_code)
-      _amount = _amount - (_amount  * _coupon.percent_off / 100.0)
-    end
+    _amount_no_coupon = _amount
+    _amount = CouponService.new.apply(_amount, coupon_code)
 
     # return result
-    {elements: _elements, total: _amount}
+    {elements: _elements, total: _amount, before_coupon: _amount_no_coupon}
   end
 
   private

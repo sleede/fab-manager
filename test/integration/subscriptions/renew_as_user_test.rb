@@ -2,7 +2,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
 
   setup do
-    @user = User.find_by_username('lseguin')
+    @user = User.find_by(username: 'lseguin')
     login_as(@user, scope: :user)
   end
 

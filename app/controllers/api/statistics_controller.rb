@@ -22,7 +22,7 @@ class API::StatisticsController < API::ApiController
 
         # run additional custom aggregations, if any
         if statistic_type and start_date and end_date
-          stat_index = StatisticIndex.find_by_es_type_key("#{path}")
+          stat_index = StatisticIndex.find_by(es_type_key: "#{path}")
           stat_type = StatisticType.where(statistic_index_id: stat_index.id, key: statistic_type).first
           client = Elasticsearch::Model.client
           stat_type.statistic_custom_aggregations.each do |custom|

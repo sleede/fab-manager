@@ -20,7 +20,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
       Content-Length:
       - '81'
   response:
@@ -90,7 +90,7 @@ http_interactions:
           "type": "card",
           "used": false
         }
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:41 GMT
 - request:
     method: get
@@ -112,7 +112,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -180,7 +180,7 @@ http_interactions:
           "type": "card",
           "used": false
         }
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:42 GMT
 - request:
     method: get
@@ -202,7 +202,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -361,7 +361,7 @@ http_interactions:
         ICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRv
         dGFsX2NvdW50IjogNCwKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNf
         OERpMXdqZFZrdHY1a3Qvc3Vic2NyaXB0aW9ucyIKICB9Cn0K
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:42 GMT
 - request:
     method: post
@@ -383,7 +383,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
       Content-Length:
       - '76'
   response:
@@ -453,7 +453,7 @@ http_interactions:
           "trial_end": null,
           "trial_start": null
         }
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:44 GMT
 - request:
     method: get
@@ -475,7 +475,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -589,7 +589,7 @@ http_interactions:
           "has_more": true,
           "url": "/v1/invoices"
         }
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:47 GMT
 - request:
     method: get
@@ -611,7 +611,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -793,7 +793,7 @@ http_interactions:
         ICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRvdGFsX2NvdW50IjogNSwK
         ICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNfOERpMXdqZFZrdHY1a3Qv
         c3Vic2NyaXB0aW9ucyIKICB9Cn0K
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:48 GMT
 - request:
     method: get
@@ -815,7 +815,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -883,7 +883,7 @@ http_interactions:
           "trial_end": null,
           "trial_start": null
         }
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:49 GMT
 - request:
     method: delete
@@ -905,7 +905,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"Sylvain-desktop"}'
+        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -973,6 +973,6 @@ http_interactions:
           "trial_end": null,
           "trial_start": null
         }
-    http_version: 
+    http_version:
   recorded_at: Mon, 11 Apr 2016 15:43:50 GMT
 recorded_with: VCR 3.0.1

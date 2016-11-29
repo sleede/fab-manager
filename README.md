@@ -227,6 +227,7 @@ See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- 
     TWITTER_NAME
 
 Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
+This value can be graphically overridden during the application's lifecycle in Admin/Customization/Home page/Twitter Feed.
 It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
 
     TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET

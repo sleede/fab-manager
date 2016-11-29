@@ -315,6 +315,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## total amount of the bill to pay
   $scope.amountTotal = 0
 
+  ## total amount of the elements in the cart, without considering any coupon
+  $scope.totalNoCoupon = 0
+
   ## Discount coupon to apply to the basket, if any
   $scope.coupon =
       applied: null
@@ -661,6 +664,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       r = mkReservation($scope.ctrl.member, $scope.eventsReserved, $scope.selectedPlan)
       Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.amountTotal = res.price
+        $scope.totalNoCoupon = res.price_without_coupon
         setSlotsDetails(res.details)
     else
       # otherwise we alert, this error musn't occur when the current user is not admin
@@ -782,8 +786,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           CustomAsset.get({name: 'cgv-file'}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $locale, $filter, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon) ->
         # user wallet amount
         $scope.walletAmount = wallet.amount
 
@@ -795,9 +799,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
         # Reservation
         $scope.reservation = reservation
-
-        # Currency symbol or abreviation for the current locale
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
         # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
@@ -815,9 +816,19 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
               $uibModalInstance.close(reservation)
             , (response)->
               $scope.alerts = []
-              $scope.alerts.push
-                msg: response.data.card[0]
-                type: 'danger'
+              if response.status == 500
+                $scope.alerts.push
+                  msg: response.statusText
+                  type: 'danger'
+              else
+                if response.data.card and response.data.card.join('').length > 0
+                  $scope.alerts.push
+                    msg: response.data.card.join('. ')
+                    type: 'danger'
+                else if response.data.payment and response.data.payment.join('').length > 0
+                  $scope.alerts.push
+                    msg: response.data.payment.join('. ')
+                    type: 'danger'
               $scope.attempting = false
       ]
     .result['finally'](null).then (reservation)->
@@ -842,8 +853,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', '$locale', 'coupon',
-      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, $locale, coupon) ->
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) ->
 
         # user wallet amount
         $scope.walletAmount = wallet.amount
@@ -856,9 +867,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
         # Reservation
         $scope.reservation = reservation
-
-        # Currency symbol or abreviation for the current locale
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
         # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
@@ -942,6 +950,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.paidMachineSlots = $scope.eventsReserved
 
     $scope.eventsReserved = []
+    $scope.coupon.applied = null
 
     if $scope.selectedPlan
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)

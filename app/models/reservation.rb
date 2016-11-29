@@ -134,16 +134,25 @@ class Reservation < ActiveRecord::Base
 
     # === Coupon ===
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
-      if not cp.nil? and cp.status(user.id) == 'active'
-        @coupon = cp
-        total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+      @coupon = Coupon.find_by(code: coupon_code)
+      if not @coupon.nil? and @coupon.status(user.id) == 'active'
+        total = get_cart_total
+
+        discount = 0
+        if @coupon.type == 'percent_off'
+          discount = (total  * @coupon.percent_off / 100).to_i
+        elsif @coupon.type == 'amount_off'
+          discount = @coupon.amount_off
+        else
+          raise InvalidCouponError
+        end
+
         unless on_site
           invoice_items << Stripe::InvoiceItem.create(
               customer: user.stp_customer_id,
-              amount: -(total  * cp.percent_off / 100).to_i,
+              amount: -discount,
               currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{cp.code} - reservation"
+              description: "coupon #{@coupon.code}"
           )
         end
       else
@@ -174,7 +183,7 @@ class Reservation < ActiveRecord::Base
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
-        if subscription.save_with_payment(false, coupon_code)
+        if subscription.save_with_payment(false)
           self.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
@@ -388,14 +397,19 @@ class Reservation < ActiveRecord::Base
     reservable.update_columns(nb_free_places: nb_free_places)
   end
 
-  def get_wallet_amount_debit
+  def get_cart_total
     total = (self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
     if plan_id.present?
       plan = Plan.find(plan_id)
       total += plan.amount
     end
+    total
+  end
+
+  def get_wallet_amount_debit
+    total = get_cart_total
     if @coupon
-      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+      total = CouponService.new.apply(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
 
@@ -427,9 +441,9 @@ class Reservation < ActiveRecord::Base
     total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
 
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
+      cp = Coupon.find_by(code: coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'
-        total = total - (total  * cp.percent_off / 100.0)
+        total = CouponService.new.apply(total, cp, user.id)
         self.invoice.coupon_id = cp.id
       else
         raise InvalidCouponError

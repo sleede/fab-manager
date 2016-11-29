@@ -86,12 +86,12 @@ class API::EventsController < API::ApiController
       event_preparams.merge!(availability_attributes: {id: event_preparams[:availability_id], start_at: start_at, end_at: end_at, available_type: 'event'})
                      .except!(:start_date, :end_date, :start_time, :end_time, :all_day)
       # convert main price to centimes
-      event_preparams.merge!(amount: (event_preparams[:amount].to_i * 100 if event_preparams[:amount].present?))
+      event_preparams.merge!(amount: (event_preparams[:amount].to_f * 100 if event_preparams[:amount].present?))
       # delete non-complete "other" prices and convert them to centimes
       unless event_preparams[:event_price_categories_attributes].nil?
         event_preparams[:event_price_categories_attributes].delete_if { |price_cat| price_cat[:price_category_id].empty? or price_cat[:amount].empty? }
         event_preparams[:event_price_categories_attributes].each do |price_cat|
-          price_cat[:amount] = price_cat[:amount].to_i * 100
+          price_cat[:amount] = price_cat[:amount].to_f * 100
         end
       end
       # return the resulting params object

@@ -20,7 +20,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -184,6 +184,6 @@ http_interactions:
           "total": 3825,
           "webhooks_delivered_at": 1473321652
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:25:04 GMT
 recorded_with: VCR 3.0.1

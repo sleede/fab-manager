@@ -1,13 +1,13 @@
 class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
   setup do
-    @admin = User.find_by_username('admin')
+    @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
   end
 
   test 'admin successfully renew a subscription before it has ended' do
 
-    user = User.find_by_username('kdumas')
+    user = User.find_by(username: 'kdumas')
     plan = Plan.find_by(base_name: 'Mensuel tarif réduit')
 
     VCR.use_cassette("subscriptions_admin_renew_success") do
@@ -38,7 +38,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal user.subscription.plan.training_credit_nb, plan.training_credit_nb, 'trainings credits were not allocated'
 
     # Check that the user benefit from prices of his plan
-    printer = Machine.find_by_slug('imprimante-3d')
+    printer = Machine.find_by(slug: 'imprimante-3d')
     assert_equal 10, (printer.prices.find_by(group_id: user.group_id, plan_id: user.subscription.plan_id).amount / 100), 'machine hourly price does not match'
 
     # Check notification was sent to the user

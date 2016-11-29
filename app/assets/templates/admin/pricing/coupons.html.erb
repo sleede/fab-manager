@@ -5,7 +5,7 @@
   <thead>
   <tr>
     <th translate>{{ 'name' }}</th>
-    <th translate>{{ 'percentage_off' }}</th>
+    <th translate>{{ 'discount' }}</th>
     <th translate>{{ 'nb_of_usages' }}</th>
     <th translate>{{ 'status' }}</th>
     <th></th>
@@ -14,7 +14,10 @@
   <tbody>
   <tr ng-repeat="coupon in coupons">
     <td>{{coupon.name}}</td>
-    <td>{{coupon.percent_off}} %</td>
+    <td>
+      <span ng-show="coupon.type == 'percent_off'">{{coupon.percent_off}} %</span>
+      <span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span>
+    </td>
     <td>{{coupon.usages}}</td>
     <td translate>{{coupon.status}}</td>
     <td>

@@ -77,6 +77,14 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(subscriptionExplicationsAlert)" translate>{{ 'save' }}</button>
             </div>
+            <div class="col-md-3">
+                <h4 translate>{{ 'message_of_the_events_page' }}</h4>
+                <div ng-model="eventExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "type_the_message_content" | translate }}",
+                      "buttons": ["bold", "italic", "unorderedlist", "header2" ]
+                      }'>
+                </div>
+                <button name="button" class="btn btn-warning" ng-click="save(eventExplicationsAlert)" translate>{{ 'save' }}</button>
+            </div>
         </div>
     </div>
 </div>

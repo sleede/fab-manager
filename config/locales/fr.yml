@@ -87,7 +87,7 @@ fr:
       one: "Une place %{NAME}"
       other: "%{count} places %{NAME}"
     reservation_other: "Réservation (autre)"
-    coupon_CODE_discount_of_PERCENT: "Code %{CODE} : remise de %{PERCENT} %"
+    coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
     total_including_all_taxes: "Total TTC"
     including_VAT_RATE: "Dont TVA %{RATE}%"
     including_total_excluding_taxes: "Dont total HT"

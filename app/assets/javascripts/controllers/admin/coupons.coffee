@@ -8,12 +8,13 @@ userValidities = ['once', 'forever']
 ##
 # Controller used in the coupon creation page
 ##
-Application.Controllers.controller "NewCouponController", ["$scope", "$state",'Coupon', 'growl', '_t'
+Application.Controllers.controller "NewCouponController", ["$scope", "$state", 'Coupon', 'growl', '_t'
 , ($scope, $state, Coupon, growl, _t) ->
 
   ## Values for the coupon currently created
   $scope.coupon =
     active: true
+    type: 'percent_off'
 
   ## Options for the validity per user
   $scope.validities = userValidities
@@ -57,7 +58,7 @@ Application.Controllers.controller "NewCouponController", ["$scope", "$state",'C
 ##
 # Controller used in the coupon edition page
 ##
-Application.Controllers.controller "EditCouponController", ["$scope", "$state", 'Coupon', 'couponPromise', '_t'
+Application.Controllers.controller "EditCouponController", ["$scope", "$state",  'Coupon', 'couponPromise', '_t'
 , ($scope, $state, Coupon, couponPromise, _t) ->
 
   ### PUBLIC SCOPE ###

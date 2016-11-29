@@ -138,9 +138,14 @@ class Invoice < ActiveRecord::Base
     # override created_at to compute CA in stats
     avoir.created_at = avoir.avoir_date
     avoir.total = 0
+    # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
+    paid_items = 0
+    refund_items = 0
     invoice_items.each do |ii|
-      if attrs[:invoice_items_ids].include? ii.id
-        raise Exception if ii.invoice_item
+      paid_items += 1 unless ii.amount == 0
+      if attrs[:invoice_items_ids].include? ii.id  # list of items to refund (partial refunds)
+        raise Exception if ii.invoice_item  # cannot refund an item that was already refunded
+        refund_items += 1 unless ii.amount == 0
         avoir_ii = avoir.invoice_items.build(ii.dup.attributes)
         avoir_ii.created_at = avoir.avoir_date
         avoir_ii.invoice_item_id = ii.id
@@ -149,7 +154,14 @@ class Invoice < ActiveRecord::Base
     end
     # handle coupon
     unless avoir.coupon_id.nil?
-      discount = avoir.total  * avoir.coupon.percent_off / 100.0
+      discount = avoir.total
+      if avoir.coupon.type == 'percent_off'
+        discount = avoir.total * avoir.coupon.percent_off / 100.0
+      elsif avoir.coupon.type == 'amount_off'
+        discount = (avoir.coupon.amount_off / paid_items) * refund_items
+      else
+        raise InvalidCouponError
+      end
       avoir.total -= discount
     end
     avoir

@@ -17,3 +17,12 @@ two:
   max_usages: 10
   active: true
   validity_per_user: always
+
+cash:
+  name: Cash Code
+  code: ZERG6H1R65H
+  amount_off: 10000
+  valid_until: <%= 1.year.from_now.utc.strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  max_usages: 1
+  active: true
+  validity_per_user: once

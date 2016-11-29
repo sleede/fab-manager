@@ -154,6 +154,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     tickets: {}
     toReserve: false
     amountTotal : 0
+    totalNoCoupon: 0
     totalSeats: 0
 
   ## Discount coupon to apply to the basket, if any
@@ -171,6 +172,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
 
   ## Global config: delay in hours before a booking while changing the booking slot is forbidden
   $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
+
+  ## Message displayed to the end user about rules that applies to events reservations
+  $scope.eventExplicationsAlert = settingsPromise.event_explications_alert
 
 
 
@@ -400,6 +404,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
       r = mkReservation($scope.ctrl.member, $scope.reserve, $scope.event)
       Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
         $scope.reserve.amountTotal = res.price
+        $scope.reserve.totalNoCoupon = res.price_without_coupon
     else
       $scope.reserve.amountTotal = null
 
@@ -560,9 +565,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           member: $scope.ctrl.member
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$locale', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $locale, $filter, coupon) ->
-        # user wallet amount
+      controller: ['$scope', '$uibModalInstance', '$state',  'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state,  reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $filter, coupon) ->
+        # User's wallet amount
         $scope.walletAmount = wallet.amount
 
         # Price
@@ -574,8 +579,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         # Reservation
         $scope.reservation = reservation
 
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
-
+        # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
 
         # Callback for the stripe payment authorization
@@ -616,9 +620,9 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
           Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
         coupon: ->
           $scope.coupon.applied
-      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', '$locale', 'helpers', '$filter', 'coupon',
-      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, $locale, helpers, $filter, coupon) ->
-        # user wallet amount
+      controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+      ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) ->
+        # User's wallet amount
         $scope.walletAmount = wallet.amount
 
         # Price
@@ -630,8 +634,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
         # Reservation
         $scope.reservation = reservation
 
-        $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
-
+        # Used in wallet info template to interpolate some translations
         $scope.numberFilter = $filter('number')
 
         # Button label
@@ -675,6 +678,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats
     resetEventReserve()
     $scope.reserveSuccess = true
+    $scope.coupon.applied = null
     $scope.reservations.push reservation
     if $scope.currentUser.role == 'admin'
       $scope.ctrl.member = null

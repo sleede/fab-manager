@@ -382,8 +382,8 @@ Application.Controllers.controller "ShowEventReservationsController", ["$scope",
 ##
 # Controller used in the event creation page
 ##
-Application.Controllers.controller "NewEventController", ["$scope", "$state", "$locale", 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t'
-, ($scope, $state, $locale, CSRF, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) ->
+Application.Controllers.controller "NewEventController", ["$scope", "$state", 'CSRF', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t'
+, ($scope, $state, CSRF, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -425,10 +425,6 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
     {label: _t('every_year'), value: 'year'}
   ]
 
-  ## currency symbol for the current locale (cf. angular-i18n)
-  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
-
-
   ## Using the EventsController
   new EventsController($scope, $state)
 ]
@@ -438,8 +434,8 @@ Application.Controllers.controller "NewEventController", ["$scope", "$state", "$
 ##
 # Controller used in the events edition page
 ##
-Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", "$locale", 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise'
-, ($scope, $state, $stateParams, $locale, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise) ->
+Application.Controllers.controller "EditEventController", ["$scope", "$state", "$stateParams", 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise'
+, ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise) ->
 
   ### PUBLIC SCOPE ###
 
@@ -453,9 +449,6 @@ Application.Controllers.controller "EditEventController", ["$scope", "$state", "
 
   ## Retrieve the event details, in case of error the user is redirected to the events listing
   $scope.event = eventPromise
-
-  ## currency symbol for the current locale (cf. angular-i18n)
-  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
   ## List of categories for the events
   $scope.categories = categoriesPromise

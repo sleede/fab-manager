@@ -28,7 +28,7 @@ class MigrateEventReducedAmountToPriceCategory < ActiveRecord::Migration
   end
 
   def down
-    pc = PriceCategory.find_by_name(I18n.t('price_category.reduced_fare'))
+    pc = PriceCategory.find_by(name: I18n.t('price_category.reduced_fare'))
     EventPriceCategory.where(price_category_id: pc.id).each do |epc|
       epc.event.update_column(:reduced_amount, epc.amount)
 

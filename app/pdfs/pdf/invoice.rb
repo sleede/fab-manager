@@ -3,6 +3,7 @@ module PDF
   class Invoice < Prawn::Document
     require 'stringio'
     include ActionView::Helpers::NumberHelper
+    include ApplicationHelper
 
     def initialize(invoice)
       super(:margin => 70)
@@ -140,14 +141,36 @@ module PDF
           total_calc += price
         end
 
-        # subtract the coupon, if any
+        ## subtract the coupon, if any
         unless invoice.coupon_id.nil?
           cp = invoice.coupon
-          discount = total_calc  * cp.percent_off / 100.0
+          discount = 0
+          if cp.type == 'percent_off'
+            discount = total_calc  * cp.percent_off / 100.0
+          elsif cp.type == 'amount_off'
+            # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
+            if invoice.is_a?(Avoir)
+              paid_items = invoice.invoice.invoice_items.select{ |ii| ii.amount > 0 }.length
+              refund_items = invoice.invoice_items.select{ |ii| ii.amount > 0 }.length
+
+              discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.0
+            else
+              discount = cp.amount_off / 100.00
+            end
+          else
+            raise InvalidCouponError
+          end
+
           total_calc = total_calc - discount
 
+          # discount textual description
+          literal_discount = cp.percent_off
+          if cp.type == 'amount_off'
+            literal_discount = number_to_currency(cp.amount_off / 100.00)
+          end
+
           # add a row for the coupon
-          data += [ [I18n.t('invoices.coupon_CODE_discount_of_PERCENT', CODE: cp.code, PERCENT: cp.percent_off), number_to_currency(-discount)] ]
+          data += [ [_t('invoices.coupon_CODE_discount_of_DISCOUNT', {CODE: cp.code, DISCOUNT: literal_discount, TYPE: cp.type}), number_to_currency(-discount)] ]
         end
 
         # total verification
@@ -167,8 +190,8 @@ module PDF
           data += [ [I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)] ]
 
           # checking the round number
-          rounded = sprintf('%.2f', vat).to_i + sprintf('%.2f', total-vat).to_i
-          if rounded != sprintf('%.2f', total_calc).to_i
+          rounded = sprintf('%.2f', vat).to_f + sprintf('%.2f', total-vat).to_f
+          if rounded != sprintf('%.2f', total_calc).to_f
             puts "ERROR: rounding the numbers cause an invoice inconsistency. Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
           end
         else

@@ -24,7 +24,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin can get wallet by user id' do
-    @admin = User.find_by_username('admin')
+    @admin = User.find_by(username: 'admin')
     login_as(@admin, scope: :user)
     @user1 = User.first
     get "/api/wallet/by_user/#{@user1.id}"
