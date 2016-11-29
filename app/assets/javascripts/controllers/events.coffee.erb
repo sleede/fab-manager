@@ -675,6 +675,7 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
     $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats
     resetEventReserve()
     $scope.reserveSuccess = true
+    $scope.coupon.applied = null
     $scope.reservations.push reservation
     if $scope.currentUser.role == 'admin'
       $scope.ctrl.member = null

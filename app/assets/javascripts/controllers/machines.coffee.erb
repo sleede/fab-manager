@@ -950,6 +950,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.paidMachineSlots = $scope.eventsReserved
 
     $scope.eventsReserved = []
+    $scope.coupon.applied = null
 
     if $scope.selectedPlan
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)

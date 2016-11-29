@@ -249,6 +249,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
         $scope.paid.plan = angular.copy($scope.selectedPlan)
         $scope.selectedPlan = null
+        $scope.coupon.applied = null
 
 
 
@@ -326,6 +327,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
         $scope.ctrl.member = null
         $scope.paid.plan = angular.copy($scope.selectedPlan)
         $scope.selectedPlan = null
+        $scope.coupon.applied = null
 
 
 

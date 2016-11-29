@@ -676,6 +676,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
 
     $scope.selectedTraining = null
     $scope.trainingIsValid = false
+    $scope.coupon.applied = null
 
     if $scope.selectedPlan
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
