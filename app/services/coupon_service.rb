@@ -1,4 +1,4 @@
-class CouponApplyService
+class CouponService
   ##
   # Apply the provided coupon, if active, to the given price. Usability tests will be run depending on the
   # provided parameters.
@@ -9,7 +9,7 @@ class CouponApplyService
   # @param user_id {Number} user's id against the coupon will be tested for usability
   # @return {Number}
   ##
-  def call(total, coupon, user_id = nil)
+  def apply(total, coupon, user_id = nil)
     price = total
 
     _coupon = nil
@@ -32,6 +32,29 @@ class CouponApplyService
       end
     end
 
+    price
+  end
+
+
+  ##
+  # Ventilate the discount of the provided coupon over the given amount proportionately to the invoice's total
+  # @param total {Number} total amount of the invoice expressed in monetary units
+  # @param amount {Number} price of the invoice's sub-item expressed in monetary units
+  # @param coupon {Coupon} coupon applied to the invoice, amount_off expressed in centimes if applicable
+  ##
+  def ventilate(total, amount, coupon)
+    price = amount
+    if !coupon.nil? and total != 0
+      if coupon.type == 'percent_off'
+        price = amount - ( amount * coupon.percent_off / 100.0 )
+      elsif coupon.type == 'amount_off'
+        ratio = (coupon.amount_off / 100.0) / total
+        discount = amount * ratio.abs
+        price = amount - discount
+      else
+        raise InvalidCouponError
+      end
+    end
     price
   end
 end

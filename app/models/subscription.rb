@@ -178,7 +178,7 @@ class Subscription < ActiveRecord::Base
       @coupon = Coupon.find_by(code: coupon_code)
 
       unless @coupon.nil?
-        total = CouponApplyService.new.(plan.amount, @coupon, user.id)
+        total = CouponService.new.apply(plan.amount, @coupon, user.id)
         coupon_id = @coupon.id
       end
     end
@@ -309,7 +309,7 @@ class Subscription < ActiveRecord::Base
   def get_wallet_amount_debit
     total = plan.amount
     if @coupon
-      total = CouponApplyService.new.(total, @coupon, user.id)
+      total = CouponService.new.apply(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
     return wallet_amount >= total ? total : wallet_amount

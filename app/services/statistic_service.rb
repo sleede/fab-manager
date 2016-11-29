@@ -127,7 +127,7 @@ class StatisticService
           if sub
             ca = i.amount.to_i / 100.0
             unless i.invoice.coupon_id.nil?
-              ca = CouponApplyService.new.(ca, i.invoice.coupon)
+              ca = CouponService.new.ventilate(get_invoice_total_no_coupon(i.invoice), ca, i.invoice.coupon)
             end
             u = sub.user
             p = sub.plan
@@ -261,7 +261,7 @@ class StatisticService
   def members_list(options = default_options)
     result = []
     User.with_role(:member).includes(:profile).where('users.created_at >= :start_date AND users.created_at <= :end_date', options).each do |u|
-      if !u.need_completion?
+      unless u.need_completion?
         result.push OpenStruct.new({
           date: options[:start_date].to_date
         }.merge(user_info(u)))
@@ -353,7 +353,7 @@ class StatisticService
     end
     # subtract coupon discount from invoices and refunds
     unless invoice.coupon_id.nil?
-      ca = CouponApplyService.new.(ca, invoice.coupon)
+      ca = CouponService.new.ventilate(get_invoice_total_no_coupon(invoice), ca, invoice.coupon)
     end
     # divide the result by 100 to convert from centimes to monetary unit
     ca == 0 ? ca : ca / 100.0
@@ -366,7 +366,7 @@ class StatisticService
     end
     # subtract coupon discount from the refund
     unless invoice.coupon_id.nil?
-      ca = CouponApplyService.new.(ca, invoice.coupon)
+      ca = CouponService.new.ventilate(get_invoice_total_no_coupon(invoice), ca, invoice.coupon)
     end
     ca == 0 ? ca : ca / 100.0
   end
@@ -449,6 +449,11 @@ class StatisticService
       ca.user_id == user.id
     end
     user_subscription_ca.inject {|sum,x| sum.ca + x.ca } || 0
+  end
+
+  def get_invoice_total_no_coupon(invoice)
+    total = (invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
+    total / 100.0
   end
 
   def find_or_create_user_info_info_list(user, list)

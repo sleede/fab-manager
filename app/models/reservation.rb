@@ -409,7 +409,7 @@ class Reservation < ActiveRecord::Base
   def get_wallet_amount_debit
     total = get_cart_total
     if @coupon
-      total = CouponApplyService.new.(total, @coupon, user.id)
+      total = CouponService.new.apply(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
 
@@ -443,7 +443,7 @@ class Reservation < ActiveRecord::Base
     unless coupon_code.nil?
       cp = Coupon.find_by(code: coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'
-        total = CouponApplyService.new.(total, cp, user.id)
+        total = CouponService.new.apply(total, cp, user.id)
         self.invoice.coupon_id = cp.id
       else
         raise InvalidCouponError

@@ -112,7 +112,7 @@ class Price < ActiveRecord::Base
 
     # === apply Coupon if any ===
     _amount_no_coupon = _amount
-    _amount = CouponApplyService.new.(_amount, coupon_code)
+    _amount = CouponService.new.apply(_amount, coupon_code)
 
     # return result
     {elements: _elements, total: _amount, before_coupon: _amount_no_coupon}
