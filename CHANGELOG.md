@@ -9,6 +9,7 @@
 - Fix a bug: wallet is not debited when paying locally with a user who have invoices disabled
 - Fix a bug: wrong error message about rounding inconsistency is logged on invoice generation
 - Fix a bug: reservation calendar of a specific training shows availabilities for all trainings
+- [TODO DEPLOY] `rake db:migrate`
 
 ## v2.4.4 2016 November 24
 
