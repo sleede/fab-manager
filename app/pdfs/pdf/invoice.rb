@@ -190,8 +190,8 @@ module PDF
           data += [ [I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)] ]
 
           # checking the round number
-          rounded = sprintf('%.2f', vat).to_i + sprintf('%.2f', total-vat).to_i
-          if rounded != sprintf('%.2f', total_calc).to_i
+          rounded = sprintf('%.2f', vat).to_f + sprintf('%.2f', total-vat).to_f
+          if rounded != sprintf('%.2f', total_calc).to_f
             puts "ERROR: rounding the numbers cause an invoice inconsistency. Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
           end
         else
