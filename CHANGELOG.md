@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## v2.4.6 2016 Novembre 30
+
+- Change display of message about coupon application status
+- Fix a bug: compute price API return error 500 if reservable_id is not provided 
+
 ## v2.4.5 2016 November 29
 
 - Ability to create coupons with cash amounts (previously only percentages were allowed)
