@@ -1,4 +1,4 @@
-Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_t', ($rootScope, Coupon, growl, _t) ->
+Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', '_t', ($rootScope, Coupon, _t) ->
   {
     restrict: 'E'
     scope:
@@ -19,6 +19,9 @@ Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_
       # Binding for the code inputed (see the attached template)
       $scope.couponCode = null
 
+      # Code validation messages
+      $scope.messages = []
+
       # Re-compute if the code can be applied when the total of the cart changes
       $scope.$watch 'total', (newValue, oldValue) ->
         if newValue and newValue != oldValue and $scope.couponCode
@@ -28,6 +31,7 @@ Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_
       # Callback to validate the code
       ##
       $scope.validateCode = ->
+        $scope.messages = []
         if $scope.couponCode == ''
           $scope.status = 'pending'
           $scope.coupon = null
@@ -36,13 +40,19 @@ Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', 'growl', '_
             $scope.status = 'valid'
             $scope.coupon = res
             if res.type == 'percent_off'
-              growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+              $scope.messages.push(type: 'success', message: _t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
             else
-              growl.success(_t('the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', {AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
+              $scope.messages.push(type: 'success', message: _t('the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', {AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
           , (err) ->
             $scope.status = 'invalid'
             $scope.coupon = null
-            growl.error(_t('unable_to_apply_the_coupon_because_'+err.data.status))
+            $scope.messages.push(type: 'danger', message: _t('unable_to_apply_the_coupon_because_'+err.data.status))
+
+      ##
+      # Callback to remove the message at provided index from the displayed list
+      ##
+      $scope.closeMessage = (index) ->
+        $scope.messages.splice(index, 1);
   }
 ]
 

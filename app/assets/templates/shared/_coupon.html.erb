@@ -3,7 +3,7 @@
 
   <div ng-show="code.input">
     <label for="coupon_code" translate>{{ 'code_' }}</label>
-    <div class="input-group">
+    <div class="input-group m-b">
       <input type="text"
              class="form-control"
              name="coupon_code"
@@ -17,5 +17,7 @@
         <i class="fa fa-check" ng-show="status == 'valid'"></i>
       </span>
     </div>
+
+    <uib-alert ng-repeat="msg in messages" type="{{msg.type}}"  close="closeMessage($index)">{{msg.message}}</uib-alert>
   </div>
 </div>
