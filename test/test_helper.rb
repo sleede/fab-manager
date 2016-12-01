@@ -89,7 +89,9 @@ class ActiveSupport::TestCase
 
     if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
       vat_rate = Setting.find_by({name: 'invoice_VAT-rate'}).value.to_f
-      assert_equal (invoice.total / (vat_rate / 100 + 1)), ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correct'
+      computed_ht = sprintf('%.2f', (invoice.total / (vat_rate / 100 + 1)) / 100.0).to_f
+
+      assert_equal computed_ht, ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correctly'
     else
       assert_equal invoice.total, ht_amount, 'VAT information was rendered in the PDF file despite that VAT was disabled'
     end

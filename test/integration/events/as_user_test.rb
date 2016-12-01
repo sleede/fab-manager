@@ -1,7 +1,7 @@
 module Events
   class AsUserTest < ActionDispatch::IntegrationTest
 
-    test 'reserve event with many prices and payment means' do
+    test 'reserve event with many prices and payment means and VAT' do
 
       vlonchamp = User.find_by(username: 'vlonchamp')
       login_as(vlonchamp, scope: :user)
@@ -14,6 +14,15 @@ module Events
       invoice_items_count = InvoiceItem.count
       users_credit_count = UsersCredit.count
       wallet_transactions_count = WalletTransaction.count
+
+      # Enable the VAT at 19.6%
+      vat_active = Setting.find_by(name: 'invoice_VAT-active')
+      vat_active.value = 'true'
+      vat_active.save!
+
+      vat_rate = Setting.find_by(name: 'invoice_VAT-rate')
+      vat_rate.value = '19.6'
+      vat_rate.save!
 
       # Reserve the 'radio' event
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means') do
