@@ -62,6 +62,7 @@ group :test do
   gem 'webmock'
   gem 'vcr'
   gem 'byebug'
+  gem 'pdf-reader'
 end
 
 group :production do

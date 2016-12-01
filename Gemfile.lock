@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     aasm (4.1.0)
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
@@ -41,6 +42,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    afm (0.2.2)
     ansi (1.5.0)
     api-pagination (4.3.0)
     apipie-rails (0.3.6)
@@ -177,6 +179,7 @@ GEM
     has_secure_token (1.0.0)
       activerecord (>= 3.0)
     hashdiff (0.3.0)
+    hashery (2.1.2)
     hashie (3.4.2)
     highline (1.7.1)
     hike (1.2.3)
@@ -265,6 +268,12 @@ GEM
       httparty (~> 0.13)
     orm_adapter (0.5.0)
     pdf-core (0.5.1)
+    pdf-reader (1.4.0)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pg (0.18.1)
     pkg-config (1.1.7)
     prawn (2.0.1)
@@ -335,6 +344,7 @@ GEM
       netrc (~> 0.7)
     rolify (4.0.0)
     ruby-progressbar (1.7.5)
+    ruby-rc4 (0.1.5)
     rubyzip (1.1.7)
     rufus-scheduler (3.0.9)
       tzinfo
@@ -488,6 +498,7 @@ DEPENDENCIES
   omniauth
   omniauth-oauth2
   openlab_ruby
+  pdf-reader
   pg
   prawn
   prawn-table
@@ -522,4 +533,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
