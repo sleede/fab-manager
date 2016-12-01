@@ -124,7 +124,7 @@ Requires=docker.service
 
 [Service]
 Type=oneshot  
-ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/apps/recreanglais/log:/var/log/letsencrypt" -v "/apps/recreanglais/letsencrypt/etc:/etc/letsencrypt" -v "/apps/recreanglais/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
+ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/home/core/fabmanager/log:/var/log/letsencrypt" -v "/home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt" -v "/home/core/fabmanager/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
 ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1  
 ```
 
