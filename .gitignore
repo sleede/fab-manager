@@ -15,6 +15,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/coverage
 
 /public/uploads
 /public/assets
@@ -38,6 +39,7 @@
 
 .vagrant
 .docker
+
 # Do not versionate coveralls token
 .coveralls.yml
 

@@ -52,6 +52,8 @@ group :development do
   gem 'capistrano-maintenance', '0.0.5', require: false
 
   gem 'active_record_query_trace'
+
+  gem 'coveralls', require: false
 end
 
 group :test do
