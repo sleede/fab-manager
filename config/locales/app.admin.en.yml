@@ -336,6 +336,7 @@ en:
         groups: "Groups"
         authentication: "Authentication"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Do you really want to delete this administrator? This cannot be undone."
+        this_may_take_a_while_please_wait: "Warning: this may take a while, please be patient."
         administrator_successfully_deleted: "Administrator successfully deleted."
         unable_to_delete_the_administrator: "Unable to delete the administrator."
         add_a_group: "Add a group"

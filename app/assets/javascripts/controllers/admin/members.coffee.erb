@@ -105,8 +105,8 @@ class MembersController
 ##
 # Controller used in the members/groups management page
 ##
-Application.Controllers.controller "AdminMembersController", ["$scope", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export'
-, ($scope, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) ->
+Application.Controllers.controller "AdminMembersController", ["$scope","$sce", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export'
+, ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) ->
 
 
 
@@ -177,7 +177,7 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
       resolve:
         object: ->
           title: _t('confirmation_required')
-          msg: _t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone')
+          msg: $sce.trustAsHtml(_t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone') + '<br/><br/>' +_t('this_may_take_a_while_please_wait'))
     , -> # cancel confirmed
       Admin.delete id: admin.id, ->
         admins.splice(findAdminIdxById(admins, admin.id), 1)

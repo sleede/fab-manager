@@ -336,6 +336,7 @@ fr:
         groups: "Groupes"
         authentication: "Authentification"
         do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "Êtes-vous sûr de vouloir supprimer cet administrateur ? Cette opération est irréversible."
+        this_may_take_a_while_please_wait: "Attention : ceci peut prendre un certain temps, merci de patienter."
         administrator_successfully_deleted: "L'administrateur a bien été supprimé."
         unable_to_delete_the_administrator: "L'administrateur n'a pas pu être supprimé."
         add_a_group: "Ajouter un groupe"
