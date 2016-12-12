@@ -1,9 +1,14 @@
 # Changelog Fab Manager
 
+## next release
+- Improved automated testing
+- Added an information notice about the processing time of deleting an administrator
+- Fix a bug: unable to run rake db:migrate on first install
+
 ## v2.4.6 2016 Novembre 30
 
 - Change display of message about coupon application status
-- Fix a bug: compute price API return error 500 if reservable_id is not provided 
+- Fix a bug: compute price API return error 500 if reservable_id is not provided
 
 ## v2.4.5 2016 November 29
 
@@ -25,8 +30,8 @@
 ## v2.4.3 2016 November 21
 
 - Export user's invoicing status in members' excel export
-- Fix a bug: Next events descriptions, shown on the home page, display raw html 
-- Fix a bug: number of reserved seats for an event is always of 1 in the excel export of reservations 
+- Fix a bug: Next events descriptions, shown on the home page, display raw html
+- Fix a bug: number of reserved seats for an event is always of 1 in the excel export of reservations
 - Fix a bug: conflict between similar translations around "reservations"
 - Fix a bug: later occurrences of recurrent events does not have the initially configured theme and age range
 - Fix a bug: some graphs do not display: events, users, trainings and machine hours
@@ -44,18 +49,18 @@
 
 ## v2.4.1 2016 October 11
 
-- Fix a bug: unable to share a project/event without image on social networks 
+- Fix a bug: unable to share a project/event without image on social networks
 - Fix a bug: after creating an element in the admin calendar, browsing through the calendar and coming back cause the element to appear duplicated
 - Fix a bug: after deleting an element in the admin calendar, the confirmation message is wrong and an error is logged in the console
 - Fix a bug: erroneous syntax in docker env example file
 
 ## v2.4.0 2016 October 4
- 
+
 - RSS feeds to follow new projects and events published
 - Use slugs in projects URL opened from notifications
 - Ask for confirmation on machine deletion from the public view
 - Ability to delete a training from the public view for an admin
-- Project images will show in full-size on a click 
+- Project images will show in full-size on a click
 - Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
 - Share project with Facebook/Twitter
 - Display fab-manager's version in "Powered by" label, when logged as admin
@@ -70,14 +75,14 @@
 - Trainings are associated with a picture and an HTML textual description
 - Public gallery of trainings with ability to view details or to book a training on its own calendar
 - Ability to switch back to all trainings booking view
-- Rename "Courses and Workshops" to "Events" 
+- Rename "Courses and Workshops" to "Events"
 - Admin: Events can be associated with a theme and an age range
 - Admin: Event categories, themes and age ranges can be customized
 - Filter events by category, theme and age range in public view
 - Ability to customise price's categories for the events
 - Events can be associated with many custom price's categories, instead of only one "reduced price"
 - Statistics views can trigger and display custom aggregations from ElasticSearch
-- Machine hours/Trainings statistics: display number of tickets/hours available for booking 
+- Machine hours/Trainings statistics: display number of tickets/hours available for booking
 - Statistics will include informations abouts events category, theme and age range
 - Ability to export the current statistics table to an Excel file
 - Ability to export every statistics on a given dates range to an Excel file
@@ -93,16 +98,16 @@
 - More file types allowed as project CAD attachements
 - Project CAD attachements are now checked by MIME type in addition of extension check
 - Project CAD attachement allowed are now configured in environment variables
-- Project CAD attachement extensions allowed are shown next to input field 
+- Project CAD attachement extensions allowed are shown next to input field
 - Display strategy's name in SSO providers list
 - SSO: documentation improved with an usage example
 - SSO: mapped fields display their data type. Integers, booleans and dates allow some transformations.
 - Fix a bug: project drafts are shown on public profiles
 - Fix a bug: event category disappear when editing the event
-- Fix a bug: machine name is not shown in plan edition 
+- Fix a bug: machine name is not shown in plan edition
 - Fix a bug: machine slots with tags are not displayed correctly on reservation calendar
 - Fix a bug: avatar, address and organization details mapping from SSO were broken
-- Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous 
+- Fix a bug: in SSO configuration some valid endpoints were recognized as erroneous
 - Fix a bug: clicking on the text in stripe's payment modal, does not validate the checkbox
 - Fix a bug: move event reservation is not limited by admin settings (prior-delay & disable)
 - Fix a bug: UI issues on small devices (dashboard + admin views)
@@ -134,7 +139,7 @@
 - [TODO DEPLOY] `bundle install` and `rake db:migrate`
 
 ## v2.2.2 2016 June 23
-- Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation 
+- Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation
 - Fix a bug: unable to display next results in statistics tables
 - Admin: Category is mandatory when creating an event
 
@@ -150,7 +155,7 @@
 - User public profile: UI re-design with possible admin's customization
 - Admin: Invoices list and users list are now loaded per 10 items to improve pages load time
 - Admin: select member (eg. to buy a subscription for a member) is now loading the user's list dynamically when you type
-- Project collaborators selection is now using a list dynamically loaded as you type 
+- Project collaborators selection is now using a list dynamically loaded as you type
 - Admin: select a training before monitoring its reservations -> improves page load time
 - API: GET /api/trainings do not load nor send the associated availabilities until they are requested
 - List of members is now loaded 10 members by 10, to improve page load time
