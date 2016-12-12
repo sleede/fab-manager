@@ -68,6 +68,7 @@ en:
     order_number: "Order #: %{NUMBER}"
     invoice_issued_on_DATE: "Invoice issued on %{DATE}"
     refund_invoice_issued_on_DATE: "Refund invoice issued on %{DATE}"
+    wallet_credit: "Wallet credit"
     cancellation_of_invoice_REF: "Cancellation of invoice %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Reservation of %{USER} on %{DATE} at %{TIME}"
     cancellation: "Cancellation"

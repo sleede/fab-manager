@@ -37,10 +37,12 @@ module PDF
         if Setting.find_by({name: 'invoice_code-active'}).value == 'true'
           text I18n.t('invoices.code', CODE:Setting.find_by({name: 'invoice_code-value'}).value), :leading => 3
         end
-        if invoice.is_a?(Avoir)
-          text I18n.t('invoices.order_number', NUMBER:invoice.invoice.order_number), :leading => 3
-        else
-          text I18n.t('invoices.order_number', NUMBER:invoice.order_number), :leading => 3
+        if invoice.invoiced_type != WalletTransaction.name
+          if invoice.is_a?(Avoir)
+            text I18n.t('invoices.order_number', NUMBER:invoice.invoice.order_number), :leading => 3
+          else
+            text I18n.t('invoices.order_number', NUMBER:invoice.order_number), :leading => 3
+          end
         end
         if invoice.is_a?(Avoir)
           text I18n.t('invoices.refund_invoice_issued_on_DATE', DATE:I18n.l(invoice.avoir_date.to_date))
@@ -68,7 +70,11 @@ module PDF
         # object
         move_down 25
         if invoice.is_a?(Avoir)
-          object = I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
+          if invoice.invoiced_type == WalletTransaction.name
+            object = I18n.t('invoices.wallet_credit')
+          else
+            object = I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
+          end
         else
           case invoice.invoiced_type
             when 'Reservation'
