@@ -14,13 +14,22 @@ class API::WalletController < API::ApiController
   end
 
   def credit
-    @wallet = Wallet.find(params[:id])
+    @wallet = Wallet.find(credit_params[:id])
     authorize @wallet
     service = WalletService.new(user: current_user, wallet: @wallet)
-    if service.credit(params[:amount].to_f)
+    transaction = service.credit(credit_params[:amount].to_f)
+    if transaction
+      if credit_params[:avoir]
+        service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description])
+      end
       render :show
     else
       head 422
     end
+  end
+
+  private
+  def credit_params
+    params.permit(:id, :amount, :avoir, :avoir_date, :avoir_description)
   end
 end

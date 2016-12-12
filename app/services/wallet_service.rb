@@ -21,7 +21,7 @@ class WalletService
       end
       raise ActiveRecord::Rollback
     end
-    return false
+    false
   end
 
   ## debit an amount to wallet, if debit success then return a wallet transaction
@@ -35,6 +35,21 @@ class WalletService
       end
       raise ActiveRecord::Rollback
     end
-    return false
+    false
+  end
+
+  ## create a refund invoice associated with the given wallet transaction
+  def create_avoir(wallet_transaction, avoir_date, description)
+    avoir = Avoir.new
+    avoir.type = 'Avoir'
+    avoir.invoiced = wallet_transaction
+    avoir.avoir_date = avoir_date
+    avoir.created_at = avoir_date
+    avoir.description = description
+    avoir.avoir_mode = 'wallet'
+    avoir.subscription_to_expire = false
+    avoir.user_id = wallet_transaction.wallet.user_id
+    avoir.total = wallet_transaction.amount * 100.0
+    avoir.save!
   end
 end

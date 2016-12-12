@@ -3,11 +3,18 @@
   <h1 translate>{{ 'credit_title' }}</h1>
 </div>
 <div class="modal-body">
+
+  <div class="alert alert-warning m-b-md m-b-sm">
+    <i class="fa fa-warning m-sm inline" aria-hidden="true"></i>
+    <div class="inline pull-right width-90 m-t-n-xs" translate>{{ 'warning_uneditable_credit' }}</div>
+  </div>
+
   <form name="walletForm" ng-class="{'has-error': walletForm.amount.$dirty && walletForm.amount.$invalid}">
     <div class="text-right amountGroup m-r-md">
-      <span class="beforeAmount" translate>{{ 'credit_label' }}</span>
+      <label for="amount" class="beforeAmount" translate>{{ 'credit_label' }}</label>
       <input class="form-control m-l"
              type="number"
+             id="amount"
              name="amount"
              ng-model="amount"
              required min="1"
@@ -16,10 +23,11 @@
       <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.required" translate>{{'amount_is_required'}}</span>
       <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'amount_minimum_1' | translate }} {{currencySymbol}}.</span>
     </div>
-    <div class="text-right amountGroup m-t m-r-md">
-      <span class="beforeAmount" translate>{{ 'confirm_credit_label' }}</span>
+    <div class="text-right amountGroup m-t m-r-md" ng-class="{'has-error': walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$invalid }">
+      <label for="amount_confirm" class="beforeAmount" translate>{{ 'confirm_credit_label' }}</label>
       <input class="form-control m-l"
              type="number"
+             id="amount_confirm"
              name="amount_confirm"
              ng-model="amount_confirm"
              required
@@ -30,12 +38,53 @@
       <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.required" translate>{{'amount_confirm_is_required'}}</span>
       <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.pattern">{{ 'amount_confirm_does_not_match' | translate }}</span>
     </div>
-  </form>
 
-  <div class="alert alert-warning m-t-md m-b-sm">
-    <i class="fa fa-warning m-sm inline" aria-hidden="true"></i>
-    <div class="inline pull-right width-90 m-t-n-xs" translate>{{ 'warning_uneditable_credit' }}</div>
-  </div>
+    <hr/>
+    <div class="text-right m-t">
+      <label for="generate_avoir" translate>{{ 'generate_a_refund_invoice' }}</label>
+      <div class="inline m-l">
+        <input bs-switch
+               ng-model="generate_avoir"
+               id="generate_avoir"
+               name="generate_avoir"
+               type="checkbox"
+               switch-on-text="{{ 'yes' | translate }}"
+               switch-off-text="{{ 'no' | translate }}"
+               switch-animate="true"/>
+      </div>
+    </div>
+
+    <div ng-show="generate_avoir">
+      <div class="m-t" ng-class="{'has-error': walletForm.avoir_date.$dirty && walletForm.avoir_date.$invalid }">
+        <label  for="avoir_date" translate>{{ 'creation_date_for_the_refund' }}</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input type="text"
+                   class="form-control"
+                   id="avoir_date"
+                   name="avoir_date"
+                   ng-model="avoir_date"
+                   uib-datepicker-popup="{{datePicker.format}}"
+                   datepicker-options="datePicker.options"
+                   is-open="datePicker.opened"
+                   placeholder="{{datePicker.format}}"
+                   ng-click="toggleDatePicker($event)"
+                   ng-required="generate_avoir"/>
+          </div>
+        <span class="help-block" ng-show="walletForm.avoir_date.$dirty && walletForm.avoir_date.$error.required" translate>{{ 'creation_date_is_required' }}</span>
+      </div>
+
+      <div class="m-t">
+        <label for="description" translate>{{ 'description_(optional)' }}</label>
+        <p translate>{{ 'will_appear_on_the_refund_invoice' }}</p>
+        <textarea class="form-control m-t-sm"
+                  id="description"
+                  name="description"
+                  ng-model="description">
+        </textarea>
+      </div>
+    </div>
+  </form>
 
 </div>
 <div class="modal-footer">
