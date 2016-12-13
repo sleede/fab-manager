@@ -58,8 +58,8 @@ Application.Controllers.controller "NewCouponController", ["$scope", "$state", '
 ##
 # Controller used in the coupon edition page
 ##
-Application.Controllers.controller "EditCouponController", ["$scope", "$state",  'Coupon', 'couponPromise', '_t'
-, ($scope, $state, Coupon, couponPromise, _t) ->
+Application.Controllers.controller "EditCouponController", ["$scope", "$state",  'Coupon', 'couponPromise', '_t', 'growl'
+, ($scope, $state, Coupon, couponPromise, _t, growl) ->
 
   ### PUBLIC SCOPE ###
 

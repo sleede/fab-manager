@@ -11,6 +11,7 @@ class Coupon < ActiveRecord::Base
   validates :validity_per_user, presence: true
   validates :validity_per_user, inclusion: { in: %w(once forever) }
   validates_with CouponDiscountValidator
+  validates_with CouponExpirationValidator
 
   def safe_destroy
     if self.invoices.size == 0
@@ -76,6 +77,7 @@ class Coupon < ActiveRecord::Base
                             attached_object: self
   end
 
+  private
   def create_stripe_coupon
     StripeWorker.perform_async(:create_stripe_coupon, id)
   end
