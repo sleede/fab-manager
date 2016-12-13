@@ -72,6 +72,7 @@ fr:
     order_number: "N° Commande : %{NUMBER}"
     invoice_issued_on_DATE: "Facture éditée le %{DATE}"
     refund_invoice_issued_on_DATE: "Avoir édité le %{DATE}"
+    wallet_credit: "Crédit du porte-monnaie"
     cancellation_of_invoice_REF: "Annulation de la facture %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Réservation de %{USER} le %{DATE} à %{TIME}"
     cancellation: "Annulation"

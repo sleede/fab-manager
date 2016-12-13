@@ -324,6 +324,11 @@ en:
         credit_title: 'Credit wallet'
         credit_label: 'Set the amount to be credited'
         confirm_credit_label: 'Confirm the amount to be credited'
+        generate_a_refund_invoice: "Generate a refund invoice"
+        creation_date_for_the_refund: "Creation date for the refund"
+        creation_date_is_required: "Creation date is required."
+        description_(optional): "Description (optional):"
+        will_appear_on_the_refund_invoice: "Will appear on the refund invoice."
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"

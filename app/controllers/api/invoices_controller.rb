@@ -57,7 +57,7 @@ class API::InvoicesController < API::ApiController
 
   end
 
-  # only for create avoir
+  # only for create refund invoices (avoir)
   def create
     authorize Invoice
     invoice = Invoice.only_invoice.find(avoir_params[:invoice_id])

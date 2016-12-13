@@ -423,11 +423,40 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
       templateUrl: '<%= asset_path "wallet/credit_modal.html" %>'
       controller: ['$scope', '$uibModalInstance', 'Wallet', ($scope, $uibModalInstance, Wallet) ->
 
+        # default: do not generate a refund invoice
+        $scope.generate_avoir = false
+
+        # date of the generated refund invoice
+        $scope.avoir_date = null
+
+        # optional description shown on the refund invoice
+        $scope.description = ''
+
+        # default configuration for the avoir date selector widget
+        $scope.datePicker =
+          format: Fablab.uibDateFormat
+          opened: false
+          options:
+            startingDay: Fablab.weekStartingDay
+
+        ##
+        # Callback to open/close the date picker
+        ##
+        $scope.toggleDatePicker = ($event) ->
+          $event.preventDefault()
+          $event.stopPropagation()
+          $scope.datePicker.opened = !$scope.datePicker.opened
+
         ##
         # Modal dialog validation callback
         ##
         $scope.ok = ->
-          Wallet.credit { id: wallet.id }, { amount: $scope.amount }, (_wallet)->
+          Wallet.credit { id: wallet.id },
+            amount: $scope.amount
+            avoir: $scope.generate_avoir
+            avoir_date: $scope.avoir_date
+            avoir_description: $scope.description
+          , (_wallet)->
 
             growl.success(_t('wallet_credit_successfully'))
             $uibModalInstance.close(_wallet)

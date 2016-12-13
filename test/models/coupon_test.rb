@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class CouponTest < ActiveSupport::TestCase
+
+  test 'valid coupon with percentage' do
+    c = Coupon.new({name: 'Hot deals', code: 'HOT15', percent_off: 15, validity_per_user: 'once', valid_until: (Time.now + 2.weeks), max_usages: 100, active: true})
+    assert c.valid?
+    assert_equal 'active', c.status, 'Invalid coupon status'
+    assert_equal 'percent_off', c.type, 'Invalid coupon type'
+  end
+
   test 'coupon must have a valid percentage' do
     c = Coupon.new({name: 'Amazing deal', code: 'DISCOUNT', percent_off: 200, validity_per_user: 'once'})
     assert c.invalid?
