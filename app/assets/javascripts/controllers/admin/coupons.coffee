@@ -73,6 +73,9 @@ Application.Controllers.controller "EditCouponController", ["$scope", "$state", 
   ## Options for the validity per user
   $scope.validities = userValidities
 
+  ## Mapping for validation errors
+  $scope.errors = {}
+
   ## Default parameters for AngularUI-Bootstrap datepicker (used for coupon validity limit selection)
   $scope.datePicker =
     format: Fablab.uibDateFormat
@@ -98,11 +101,12 @@ Application.Controllers.controller "EditCouponController", ["$scope", "$state", 
   # Callback to save the coupon's changes to the API
   ##
   $scope.updateCoupon = ->
+    $scope.errors = {}
     Coupon.update {id: $scope.coupon.id}, coupon: $scope.coupon, (coupon) ->
       $state.go('app.admin.pricing')
     , (err)->
       growl.error(_t('unable_to_update_the_coupon_an_error_occurred'))
-      console.error(err)
+      $scope.errors = err.data
 
 
 

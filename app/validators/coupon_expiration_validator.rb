@@ -8,11 +8,11 @@ class CouponExpirationValidator < ActiveModel::Validator
 
     unless current.blank?
       if current.end_of_day < Time.now
-        record.errors[:valid_until] << 'New expiration date cannot be in the past'
+        record.errors[:valid_until] << I18n.t('errors.messages.cannot_be_in_the_past')
       end
 
       if !previous.blank? and current.end_of_day < previous.end_of_day
-        record.errors[:valid_until] << 'New expiration date cannot be before the previous one'
+        record.errors[:valid_until] << I18n.t('errors.messages.cannot_be_before_previous_value')
       end
     end
   end
