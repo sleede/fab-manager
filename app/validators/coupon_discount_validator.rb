@@ -1,7 +1,7 @@
 class CouponDiscountValidator < ActiveModel::Validator
   def validate(record)
     if !record.percent_off.nil?
-      unless [0..100].include? record.percent_off
+      unless (0..100).include? record.percent_off
         record.errors[:percent_off] << 'Percentage must be included between 0 and 100'
       end
     elsif !record.amount_off.nil?

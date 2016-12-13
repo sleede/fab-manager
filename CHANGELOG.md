@@ -4,6 +4,7 @@
 - Improved automated testing
 - Added an information notice about the processing time of deleting an administrator
 - Fix a bug: unable to run rake db:migrate on first install
+- Fix a bug: unable to create or edit a coupon of type 'percentage'
 
 ## v2.4.6 2016 Novembre 30
 
