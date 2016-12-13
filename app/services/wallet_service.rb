@@ -51,5 +51,11 @@ class WalletService
     avoir.user_id = wallet_transaction.wallet.user_id
     avoir.total = wallet_transaction.amount * 100.0
     avoir.save!
+
+    ii = InvoiceItem.new
+    ii.amount = wallet_transaction.amount * 100.0
+    ii.description = I18n.t('invoices.wallet_credit')
+    ii.invoice = avoir
+    ii.save!
   end
 end

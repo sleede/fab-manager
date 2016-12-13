@@ -121,7 +121,7 @@ module PDF
 
 
           else ### Reservation
-            case invoice.invoiced.reservable_type
+            case invoice.invoiced.try(:reservable_type)
               ### Machine reservation
               when 'Machine'
                 details += I18n.t('invoices.machine_reservation_DESCRIPTION', DESCRIPTION: item.description)
@@ -136,6 +136,9 @@ module PDF
                 invoice.invoiced.tickets.each do |t|
                   details += "\n  "+I18n.t('invoices.other_rate_ticket', count: t.booked, NAME: t.event_price_category.price_category.name)
                 end
+              ### wallet credit
+              when nil
+                details = item.description
 
               ### Other cases (not expected)
               else
