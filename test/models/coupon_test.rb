@@ -24,9 +24,11 @@ class CouponTest < ActiveSupport::TestCase
     assert c.invalid?
   end
 
-  test 'coupon with cash amount has amount_off type' do
-    c = Coupon.new({name: 'Essential Box', code: 'KWXX2M', amount_off: 2000, validity_per_user: 'once', max_usages: 1})
-    assert_equal 'amount_off', c.type
+  test 'valid coupon with cash amount' do
+    c = Coupon.new({name: 'Essential Box', code: 'KWXX2M', amount_off: 2000, validity_per_user: 'once', max_usages: 1, active: true})
+    assert c.valid?
+    assert_equal 'active', c.status, 'Invalid coupon status'
+    assert_equal 'amount_off', c.type, 'Invalid coupon type'
   end
 
   test 'coupon with cash amount cannot be used with cheaper cart' do
