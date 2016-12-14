@@ -90,6 +90,6 @@ class API::CouponsController < API::ApiController
   end
 
   def coupon_editable_params
-    params.require(:coupon).permit(:name, :active)
+    params.require(:coupon).permit(:name, :active, :valid_until)
   end
 end

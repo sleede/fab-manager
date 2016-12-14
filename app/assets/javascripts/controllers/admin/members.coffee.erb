@@ -105,8 +105,8 @@ class MembersController
 ##
 # Controller used in the members/groups management page
 ##
-Application.Controllers.controller "AdminMembersController", ["$scope", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export'
-, ($scope, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) ->
+Application.Controllers.controller "AdminMembersController", ["$scope","$sce", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export'
+, ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) ->
 
 
 
@@ -177,7 +177,7 @@ Application.Controllers.controller "AdminMembersController", ["$scope", 'members
       resolve:
         object: ->
           title: _t('confirmation_required')
-          msg: _t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone')
+          msg: $sce.trustAsHtml(_t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone') + '<br/><br/>' +_t('this_may_take_a_while_please_wait'))
     , -> # cancel confirmed
       Admin.delete id: admin.id, ->
         admins.splice(findAdminIdxById(admins, admin.id), 1)
@@ -423,11 +423,40 @@ Application.Controllers.controller "EditMemberController", ["$scope", "$state", 
       templateUrl: '<%= asset_path "wallet/credit_modal.html" %>'
       controller: ['$scope', '$uibModalInstance', 'Wallet', ($scope, $uibModalInstance, Wallet) ->
 
+        # default: do not generate a refund invoice
+        $scope.generate_avoir = false
+
+        # date of the generated refund invoice
+        $scope.avoir_date = null
+
+        # optional description shown on the refund invoice
+        $scope.description = ''
+
+        # default configuration for the avoir date selector widget
+        $scope.datePicker =
+          format: Fablab.uibDateFormat
+          opened: false
+          options:
+            startingDay: Fablab.weekStartingDay
+
+        ##
+        # Callback to open/close the date picker
+        ##
+        $scope.toggleDatePicker = ($event) ->
+          $event.preventDefault()
+          $event.stopPropagation()
+          $scope.datePicker.opened = !$scope.datePicker.opened
+
         ##
         # Modal dialog validation callback
         ##
         $scope.ok = ->
-          Wallet.credit { id: wallet.id }, { amount: $scope.amount }, (_wallet)->
+          Wallet.credit { id: wallet.id },
+            amount: $scope.amount
+            avoir: $scope.generate_avoir
+            avoir_date: $scope.avoir_date
+            avoir_description: $scope.description
+          , (_wallet)->
 
             growl.success(_t('wallet_credit_successfully'))
             $uibModalInstance.close(_wallet)

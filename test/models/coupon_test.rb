@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class CouponTest < ActiveSupport::TestCase
+
+  test 'valid coupon with percentage' do
+    c = Coupon.new({name: 'Hot deals', code: 'HOT15', percent_off: 15, validity_per_user: 'once', valid_until: (Time.now + 2.weeks), max_usages: 100, active: true})
+    assert c.valid?
+    assert_equal 'active', c.status, 'Invalid coupon status'
+    assert_equal 'percent_off', c.type, 'Invalid coupon type'
+  end
+
   test 'coupon must have a valid percentage' do
     c = Coupon.new({name: 'Amazing deal', code: 'DISCOUNT', percent_off: 200, validity_per_user: 'once'})
     assert c.invalid?
@@ -16,9 +24,11 @@ class CouponTest < ActiveSupport::TestCase
     assert c.invalid?
   end
 
-  test 'coupon with cash amount has amount_off type' do
-    c = Coupon.new({name: 'Essential Box', code: 'KWXX2M', amount_off: 2000, validity_per_user: 'once', max_usages: 1})
-    assert_equal 'amount_off', c.type
+  test 'valid coupon with cash amount' do
+    c = Coupon.new({name: 'Essential Box', code: 'KWXX2M', amount_off: 2000, validity_per_user: 'once', max_usages: 1, active: true})
+    assert c.valid?
+    assert_equal 'active', c.status, 'Invalid coupon status'
+    assert_equal 'amount_off', c.type, 'Invalid coupon type'
   end
 
   test 'coupon with cash amount cannot be used with cheaper cart' do

@@ -32,6 +32,10 @@ fr:
       size_too_small: "est trop petite (au moins %{file_size})"
       size_too_big: "est trop grande (pas plus de %{file_size})"
       export_not_found: "L'export demandé n'a pas été trouvé. Il a probablement été supprimé, veuillez lancer la génération d'un nouvel export."
+      percentage_out_of_range: "Le pourcentage doit être inclus entre 0 et 100"
+      cannot_be_blank_at_same_time: "ou %{field} doit être rempli(e)"
+      cannot_be_in_the_past: "ne peut pas être dans le passé"
+      cannot_be_before_previous_value: "ne peut pas être antérieur(e) à la valeur précédente"
 
   activemodel:
     errors:
@@ -68,6 +72,7 @@ fr:
     order_number: "N° Commande : %{NUMBER}"
     invoice_issued_on_DATE: "Facture éditée le %{DATE}"
     refund_invoice_issued_on_DATE: "Avoir édité le %{DATE}"
+    wallet_credit: "Crédit du porte-monnaie"
     cancellation_of_invoice_REF: "Annulation de la facture %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Réservation de %{USER} le %{DATE} à %{TIME}"
     cancellation: "Annulation"

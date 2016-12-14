@@ -324,6 +324,11 @@ fr:
         credit_title: 'Créditer le porte-monnaie'
         credit_label: 'Indiquez le montant à créditer'
         confirm_credit_label: 'Confirmez le montant à créditer'
+        generate_a_refund_invoice: "Générer une facture d'avoir"
+        creation_date_for_the_refund: "Date d'émission de l'avoir"
+        creation_date_is_required: "La date d'émission est requise."
+        description_(optional): "Description (optionnelle) :"
+        will_appear_on_the_refund_invoice: "Apparaîtra sur la facture de remboursement."
         to_credit: 'Créditer'
         wallet_credit_successfully: "Le porte-monnaie de l'utilisateur a été chargé avec succès."
         a_problem_occurred_for_wallet_credit: "Un problème est survenu lors du chargement du porte-monnaie."

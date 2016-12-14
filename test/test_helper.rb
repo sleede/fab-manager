@@ -1,3 +1,6 @@
+require 'coveralls'
+Coveralls.wear!('rails')
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
@@ -68,6 +71,33 @@ class ActiveSupport::TestCase
 
     assert File.exist?(invoice.file), 'Invoice PDF was not generated'
 
+    # now we check the file content
+    reader = PDF::Reader.new(invoice.file)
+    assert_equal 1, reader.page_count # single page invoice
+
+    ht_amount = invoice.total
+    page = reader.pages.first
+    lines = page.text.scan(/^.+/)
+    lines.each do |line|
+      # check that the numbers printed into the PDF file match the total stored in DB
+      if line.include? I18n.t('invoices.total_amount')
+        assert_equal invoice.total / 100.0, parse_amount_from_invoice_line(line), 'Invoice total rendered in the PDF file does not match'
+      end
+
+      # check that the VAT was correctly applied if it was configured
+      if line.include? I18n.t('invoices.including_total_excluding_taxes')
+        ht_amount = parse_amount_from_invoice_line(line)
+      end
+    end
+
+    if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
+      vat_rate = Setting.find_by({name: 'invoice_VAT-rate'}).value.to_f
+      computed_ht = sprintf('%.2f', (invoice.total / (vat_rate / 100 + 1)) / 100.0).to_f
+
+      assert_equal computed_ht, ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correctly'
+    else
+      assert_equal invoice.total, ht_amount, 'VAT information was rendered in the PDF file despite that VAT was disabled'
+    end
     File.delete(invoice.file)
   end
 
@@ -88,6 +118,15 @@ class ActiveSupport::TestCase
     else
       skip('Unable to test export which is not of the category "statistics"')
     end
+  end
+
+  private
+
+  # Parse a line of text read from a PDF file and return the price included inside
+  # Line of text should be of form 'Label              $10.00'
+  # @returns {float}
+  def parse_amount_from_invoice_line line
+    line[line.rindex(' ')+1..-1].tr(I18n.t('number.currency.format.unit'), '').to_f
   end
 end
 

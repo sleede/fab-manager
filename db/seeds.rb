@@ -397,3 +397,29 @@ unless Setting.find_by(name: 'reminder_delay').try(:value)
   setting.value = '24'
   setting.save
 end
+
+if StatisticCustomAggregation.count == 0
+  # available reservations hours for machines
+  machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)
+
+  available_hours = StatisticCustomAggregation.new({
+                       statistic_type_id: machine_hours.id,
+                       es_index: 'fablab',
+                       es_type: 'availabilities',
+                       field: 'available_hours',
+                       query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"hours_duration"}}}, "query":{"bool":{"must":[{"range":{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"machines"}}]}}}'
+                    })
+  available_hours.save!
+
+  # available training tickets
+  training_bookings = StatisticType.find_by(key: 'booking', statistic_index_id: 3)
+
+  available_tickets = StatisticCustomAggregation.new({
+                         statistic_type_id: training_bookings.id,
+                         es_index: 'fablab',
+                         es_type: 'availabilities',
+                         field: 'available_tickets',
+                         query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"nb_total_places"}}}, "query":{"bool":{"must":[{"range":{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"training"}}]}}}'
+                      })
+  available_tickets.save!
+end
