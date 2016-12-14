@@ -30,7 +30,7 @@ json.profile do
     json.address do
       json.id @member.profile.organization.address.id
       json.address @member.profile.organization.address.address
-    end
+    end if @member.profile.organization.address
   end if @member.profile.organization
 
 end
