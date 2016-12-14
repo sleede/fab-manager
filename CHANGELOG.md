@@ -1,13 +1,15 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.7 2016 December 14
+
 - Improved automated testing
 - Added an information notice about the processing time of deleting an administrator
 - Ability to change the expiration date of a coupon after its creation
+- Ability to generate a refund invoice when crediting user's wallet
 - Fix a bug: unable to run rake db:migrate on first install
 - Fix a bug: unable to create or edit a coupon of type 'percentage'
 
-## v2.4.6 2016 Novembre 30
+## v2.4.6 2016 November 30
 
 - Change display of message about coupon application status
 - Fix a bug: compute price API return error 500 if reservable_id is not provided
