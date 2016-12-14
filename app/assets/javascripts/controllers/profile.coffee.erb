@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session"
-, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session", "dialogs"
+, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs) ->
 
 
 
@@ -138,6 +138,28 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
     email = memberPromise.email
     if email
       return !(email.match(/^<([^>]+)>.{20}-duplicate$/) == null)
+
+
+
+  ##
+  # Ask for email confirmation and send the SSO merging token again
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.resendCode = (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    # TODO show modal only IF email is not mapped to sso OR email = null
+    dialogs.confirm
+      templateUrl: '<%= asset_path "profile/resend_code_modal.html" %>'
+      resolve:
+        object: ->
+          email: memberPromise.email
+    , (email) ->
+      console.log(email)
+      # TODO update email
+    # TODO in every cases, resend email
+    # TODO growl result
+
 
 
 
