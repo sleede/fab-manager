@@ -5,8 +5,8 @@ fr:
         # page de complétion du profil utilisateur, à la première connexion depuis un SSO
         confirm_your_new_account: "Confirmez votre nouveau compte"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Vous venez de créer un nouveau compte sur {GENDER, select, male{le} female{la} other{les}} {NAME}, en vous connectant depuis"  # messageFormat interpolation
-        before_letting_you_use_the_application_we_need_some_more_details: "Avant de vous laisser utiliser l'application, nous avons besoin de quelques renseignements supplémentaires"
-        your_email_is_already_used_by_another_account_on_the_platform: "Mais attendez, il y a un problème ! Votre adresse de courriel est déjà utilisée par un autre compte sur cette plate-forme."
+        we_need_some_more_details: "Afin de finaliser le paramétrage de la plate-forme, nous avons besoin de quelques renseignements supplémentaires"
+        your_email_is_already_used_by_another_account_on_the_platform: "Il semblerait que votre adresse de courriel soit déjà utilisée par un autre utilisateur. Vérifiez votre adresse électronique et veuillez saisir ci-dessous le code qui vient de vous être envoyé."
         please_fill_the_following_form: "Merci de compléter le formulaire suivant"
         some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Certaines informations peuvent nous avoir été déjà fournies par {{NAME}} et ne sont pas modifiables"  # angular interpolation
         then_click_on_: "Cliquez ensuite sur"
