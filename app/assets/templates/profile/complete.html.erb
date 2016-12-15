@@ -28,7 +28,7 @@
                             {{ 'you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName }:"messageformat" }}<br/>
                             <img class="m-l v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
                             <strong class="v-middle">{{activeProvider.name}} <span ng-if="ssoEmail()">({{ssoEmail()}})</span></strong><br/>
-                            <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'before_letting_you_use_the_application_we_need_some_more_details' }}.</p>
+                            <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'we_need_some_more_details' }}.</p>
                             <p class="m-t-md" ng-show="hasDuplicate()" translate>{{ 'your_email_is_already_used_by_another_account_on_the_platform' }}</p>
                         </div>
                     </section>

@@ -1,5 +1,12 @@
 # Changelog Fab Manager
 
+## v2.4.8 2016 December 15
+
+- Added asterisks on mandatory fields in member's form
+- Fixed wording on SSO screens
+- Ability to send again the auth-system migration token by email
+- Fix a bug: notification email about refund invoice tells about subscription while concerning wallet credit
+
 ## v2.4.7 2016 December 14
 
 - Improved automated testing

@@ -114,6 +114,7 @@ Rails.application.routes.draw do
     resources :auth_providers do
       get 'mapping_fields', on: :collection
       get 'active', action: 'active', on: :collection
+      post 'send_code', action: 'send_code', on: :collection
     end
     resources :abuses, only: [:create]
     resources :open_api_clients, only: [:index, :create, :update, :destroy] do

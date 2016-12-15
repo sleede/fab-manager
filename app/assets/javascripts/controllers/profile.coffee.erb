@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session"
-, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session", "dialogs", "AuthProvider"
+, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs, AuthProvider) ->
 
 
 
@@ -138,6 +138,27 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
     email = memberPromise.email
     if email
       return !(email.match(/^<([^>]+)>.{20}-duplicate$/) == null)
+
+
+
+  ##
+  # Ask for email confirmation and send the SSO merging token again
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.resendCode = (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    dialogs.confirm
+      templateUrl: '<%= asset_path "profile/resend_code_modal.html" %>'
+      resolve:
+        object: ->
+          email: memberPromise.email
+    , (email) ->
+      # Request the server to send an auth-migration email to the current user
+      AuthProvider.send_code {email: email}, (res) ->
+        growl.info(_t('code_successfully_sent_again'))
+      , (err) ->
+        growl.error(err.data.error)
 
 
 

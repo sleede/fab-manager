@@ -16,4 +16,7 @@ class AuthProviderPolicy < ApplicationPolicy
     user
   end
 
+  def send_code?
+    user
+  end
 end
