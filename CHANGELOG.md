@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## next release
+- Added asterisks on mandatory fields in member's form
+- Fixed wording on SSO screens
+- Ability to send again the auth-system migration token by email
+
 ## v2.4.7 2016 December 14
 
 - Improved automated testing
