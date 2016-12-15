@@ -63,6 +63,8 @@ fr:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
     please_input_the_authentication_code_sent_to_the_address: "Merci d'enter le code d'authentification qui a été envoyé à l'adresse de courriel %{EMAIL}"
     your_authentication_code_is_not_valid: "Votre code d'authentification n'est pas valide."
+    current_authentication_method_no_code: "La méthode d'authentification actuelle ne requiert pas de code de migration"
+    requested_account_does_not_exists: "Le compte utilisateur demandé n'existe pas"
 
   invoices:
     # génération des factures en PDF

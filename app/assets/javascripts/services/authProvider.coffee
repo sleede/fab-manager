@@ -11,4 +11,7 @@ Application.Services.factory 'AuthProvider', ["$resource", ($resource)->
     active:
       method: 'GET'
       url: '/api/auth_providers/active'
+    send_code:
+      method: 'POST'
+      url: '/api/auth_providers/send_code'
 ]
