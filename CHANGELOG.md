@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.8 2016 December 15
+
 - Added asterisks on mandatory fields in member's form
 - Fixed wording on SSO screens
 - Ability to send again the auth-system migration token by email
