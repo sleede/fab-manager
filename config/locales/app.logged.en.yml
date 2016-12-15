@@ -23,7 +23,9 @@ en:
         confirm_my_code: "Confirm my code"
         an_unexpected_error_occurred_check_your_authentication_code: "An unexpected error occurred, please check your authentication code."
         send_code_again: "Send the code again"
+        email_address_associated_with_your_account: "Email address associated with your account"
         email_format_is_incorrect: "Email format is incorrect"
+        code_successfully_sent_again: "Code successfully sent again"
 
       dashboard:
         # dashboard: public profile

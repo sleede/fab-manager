@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session", "dialogs"
-, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session", "dialogs", "AuthProvider"
+, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs, AuthProvider) ->
 
 
 
@@ -148,18 +148,17 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
   $scope.resendCode = (event) ->
     event.preventDefault()
     event.stopPropagation()
-    # TODO show modal only IF email is not mapped to sso OR email = null
     dialogs.confirm
       templateUrl: '<%= asset_path "profile/resend_code_modal.html" %>'
       resolve:
         object: ->
           email: memberPromise.email
     , (email) ->
-      console.log(email)
-      # TODO update email
-    # TODO in every cases, resend email
-    # TODO growl result
-
+      # Request the server to send an auth-migration email to the current user
+      AuthProvider.send_code {email: email}, (res) ->
+        growl.info(_t('code_successfully_sent_again'))
+      , (err) ->
+        growl.error(err.data.error)
 
 
 

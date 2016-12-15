@@ -23,7 +23,9 @@ fr:
         confirm_my_code: "Valider mon code"
         an_unexpected_error_occurred_check_your_authentication_code: "Une erreur inattendue est survenue, vérifiez votre code d'authentification."
         send_code_again: "Renvoyer le code"
+        email_address_associated_with_your_account: "Adresse électronique associée à votre compte"
         email_format_is_incorrect: "Le format de l'adresse email est incorrect"
+        code_successfully_sent_again: "Le code a bien été renvoyé"
 
       dashboard:
         # tableau de bord: profile publique
