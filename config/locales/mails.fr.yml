@@ -140,7 +140,7 @@ fr:
     notify_member_avoir_ready:
       subject: "Votre facture d'avoir du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  # messageFormat interpolation
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} WalletTransaction{crédit du porte-monnaie} other{abonnement}}."  # messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture d'avoir dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
 
