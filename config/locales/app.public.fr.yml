@@ -102,6 +102,10 @@ fr:
 
         # Fab-manager's version
         version: "Version :"
+
+        # Notifications
+        and_NUMBER_other_notifications: "et {{NUMBER}} autres notifications ..."  # angular interpolation
+
       about:
         # page à propos
         read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"

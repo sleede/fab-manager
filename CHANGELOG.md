@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+- Mask new notifications alerts when more than 3
+- Fix a bug: display more than 15 unread notifications (number on the bell icon & full list)
+
 ## v2.4.8 2016 December 15
 
 - Added asterisks on mandatory fields in member's form

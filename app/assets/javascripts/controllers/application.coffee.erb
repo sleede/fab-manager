@@ -260,7 +260,9 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   getNotifications = ->
     $rootScope.toCheckNotifications = true
     unless $rootScope.checkNotificationsIsInit or !$rootScope.currentUser
-      $scope.notifications = Notification.query {is_read: false}
+      setTimeout ->
+        $scope.notifications = Notification.query {is_read: false}
+      , 2000
       $scope.$watch 'notifications', (newValue, oldValue) ->
         diff = []
         angular.forEach newValue, (value) ->
@@ -273,6 +275,9 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
           unless find
             diff.push(value)
 
+        remain = 3
+        if diff.length >= remain
+          diff.splice(remain, (diff.length - remain), {message: {description: _t('and_NUMBER_other_notifications', {NUMBER: diff.length - remain})}})
 
         angular.forEach diff, (notification, key) ->
           growl.info(notification.message.description)
