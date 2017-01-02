@@ -3,6 +3,7 @@
 ## next release
 - Mask new notifications alerts when more than 3
 - Fix a bug: display more than 15 unread notifications (number on the bell icon & full list)
+- Fix a bug: in invoice configuration panel, VAT amount and total excl. taxes are inverted
 
 ## v2.4.8 2016 December 15
 
