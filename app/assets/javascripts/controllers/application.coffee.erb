@@ -277,7 +277,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
         remain = 3
         if diff.length >= remain
-          diff.splice(remain, (diff.length - remain), {message: {description: _t('and_NUMBER_other_notifications', {NUMBER: diff.length - remain + 1})}})
+          diff.splice(remain, (diff.length - remain), {message: {description: _t('and_NUMBER_other_notifications', {NUMBER: diff.length - remain})}})
 
         angular.forEach diff, (notification, key) ->
           growl.info(notification.message.description)
