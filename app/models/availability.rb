@@ -96,7 +96,7 @@ class Availability < ActiveRecord::Base
 
   def as_indexed_json
     json = JSON.parse(to_json)
-    json['hours_duration'] = (end_at - start_at) / (60*60)
+    json['hours_duration'] = (end_at - start_at) / (60 * 60)
     json.to_json
   end
 

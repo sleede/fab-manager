@@ -2,6 +2,7 @@
 
 ## next release
 - Mask new notifications alerts when more than 3
+- Added an asterisk on group select in admin's member form
 - Fix a bug: display more than 15 unread notifications (number on the bell icon & full list)
 - Fix a bug: in invoice configuration panel, VAT amount and total excl. taxes are inverted
 - Fix a bug: unable to compute user's age when they were born on february 29th and current year is not a leap year
