@@ -407,7 +407,7 @@ if StatisticCustomAggregation.count == 0
                        es_index: 'fablab',
                        es_type: 'availabilities',
                        field: 'available_hours',
-                       query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"hours_duration"}}}, "query":{"bool":{"must":[{"range":{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"machines"}}]}}}'
+                       query: '{"size":0, "aggregations":{"%{aggs_name}":{"sum":{"field":"bookable_hours"}}}, "query":{"bool":{"must":[{"range":{"start_at":{"gte":"%{start_date}", "lte":"%{end_date}"}}}, {"match":{"available_type":"machines"}}]}}}'
                     })
   available_hours.save!
 

@@ -6,7 +6,9 @@
 - Fix a bug: display more than 15 unread notifications (number on the bell icon & full list)
 - Fix a bug: in invoice configuration panel, VAT amount and total excl. taxes are inverted
 - Fix a bug: unable to compute user's age when they were born on february 29th and current year is not a leap year
+- Fix a bug: wrong statistics about hours available for reservation. Fix requires user action (1)
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
+- [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
 
 ## v2.4.8 2016 December 15
 

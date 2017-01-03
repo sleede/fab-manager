@@ -97,6 +97,8 @@ class Availability < ActiveRecord::Base
   def as_indexed_json
     json = JSON.parse(to_json)
     json['hours_duration'] = (end_at - start_at) / (60 * 60)
+    json['machines'] = machines_availabilities.map{|ma| ma.machine.friendly_id}
+    json['bookable_hours'] = json['hours_duration'] * json['machines'].length
     json.to_json
   end
 
