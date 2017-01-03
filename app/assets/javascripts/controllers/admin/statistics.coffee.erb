@@ -380,6 +380,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       "size": RESULTS_PER_PAGE
       "scroll": ES_SCROLL_TIME+'m'
       "stat-type": type
+      "custom-query": if custom then JSON.stringify(Object.assign({exclude: custom.exclude}, buildElasticCustomCriterion(custom))) else ''
       "start-date": moment($scope.datePickerStart.selected).format()
       "end-date": moment($scope.datePickerEnd.selected).format()
       "body": buildElasticDataQuery(type, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
@@ -427,15 +428,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
             "lte": ageMax
     # optional criterion
     if custom
-      criterion = {
-        "match" : {}
-      }
-      switch $scope.getCustomValueInputType($scope.customFilter.criterion)
-        when 'input_date' then criterion.match[custom.key] = moment(custom.value).format('YYYY-MM-DD')
-        when 'input_select' then criterion.match[custom.key] = custom.value.key
-        when 'input_list' then criterion.match[custom.key+".name"] = custom.value
-        else criterion.match[custom.key] = custom.value
-
+      criterion = buildElasticCustomCriterion(custom)
       if (custom.exclude)
         q = "query": {
           "filtered": {
@@ -467,6 +460,27 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
           "field": "stat"
     }
     q
+
+
+
+  ##
+  # Build the elasticSearch query DSL to match the selected cutom filter
+  # @param custom {Object} if custom is empty or undefined, an empty string will be returned
+  # @returns {{match:{*}}|string}
+  ##
+  buildElasticCustomCriterion = (custom) ->
+    if (custom)
+      criterion = {
+        "match" : {}
+      }
+      switch $scope.getCustomValueInputType($scope.customFilter.criterion)
+        when 'input_date' then criterion.match[custom.key] = moment(custom.value).format('YYYY-MM-DD')
+        when 'input_select' then criterion.match[custom.key] = custom.value.key
+        when 'input_list' then criterion.match[custom.key+".name"] = custom.value
+        else criterion.match[custom.key] = custom.value
+      criterion
+    else
+      ''
 
 
 

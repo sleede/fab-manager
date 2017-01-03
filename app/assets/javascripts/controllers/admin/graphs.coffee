@@ -363,6 +363,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
       "type": esType
       "searchType": "count"
       "stat-type": statType
+      "custom-query": ''
       "start-date": moment($scope.datePickerStart.selected).format()
       "end-date": moment($scope.datePickerEnd.selected).format()
       "body": buildElasticAggregationsQuery(statType, $scope.display.interval, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))

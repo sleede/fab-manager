@@ -3,10 +3,12 @@
 ## next release
 - Mask new notifications alerts when more than 3
 - Added an asterisk on group select in admin's member form
+- Statistics custom aggregations can handle custom filtering
+- Statistics about hours available for machine reservations and tickets available for training reservations, now handle custom filtering on date and type
 - Fix a bug: display more than 15 unread notifications (number on the bell icon & full list)
 - Fix a bug: in invoice configuration panel, VAT amount and total excl. taxes are inverted
 - Fix a bug: unable to compute user's age when they were born on february 29th and current year is not a leap year
-- Fix a bug: wrong statistics about hours available for reservation. Fix requires user action (1)
+- Fix a bug: wrong statistics about hours available for machines reservation. Fix requires user action (1)
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
 - [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
 

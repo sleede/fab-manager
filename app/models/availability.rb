@@ -38,6 +38,7 @@ class Availability < ActiveRecord::Base
   settings do
     mappings dynamic: 'true' do
       indexes 'available_type', analyzer: 'simple'
+      indexes 'subType', index: 'not_analyzed'
     end
   end
 
@@ -97,8 +98,15 @@ class Availability < ActiveRecord::Base
   def as_indexed_json
     json = JSON.parse(to_json)
     json['hours_duration'] = (end_at - start_at) / (60 * 60)
-    json['machines'] = machines_availabilities.map{|ma| ma.machine.friendly_id}
-    json['bookable_hours'] = json['hours_duration'] * json['machines'].length
+    if available_type == 'machines'
+      json['subType'] = machines_availabilities.map{|ma| ma.machine.friendly_id}
+    elsif available_type == 'training'
+      json['subType'] = trainings_availabilities.map{|ta| ta.training.friendly_id}
+    elsif available_type == 'event'
+      json['subType'] = [event.category.friendly_id]
+    end
+    json['bookable_hours'] = json['hours_duration'] * json['subType'].length
+    json['date'] = start_at.to_date
     json.to_json
   end
 
