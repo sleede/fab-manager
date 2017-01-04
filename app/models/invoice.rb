@@ -13,7 +13,7 @@ class Invoice < ActiveRecord::Base
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
 
   after_create :update_reference
-  after_commit :generate_and_send_invoice, on: [:create]
+  after_commit :generate_and_send_invoice, on: [:create], :if => :persisted?
 
   def file
     dir = "invoices/#{user.id}"
@@ -204,6 +204,7 @@ class Invoice < ActiveRecord::Base
 
   private
   def generate_and_send_invoice
+    puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), invoiced_type(#{invoiced_type}), user_id(#{user_id})"
     InvoiceWorker.perform_async(id)
   end
 
