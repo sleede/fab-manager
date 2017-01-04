@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## next release
+## v2.4.9 2017 January 4
+
 - Mask new notifications alerts when more than 3
 - Added an asterisk on group select in admin's member form
 - Statistics custom aggregations can handle custom filtering
@@ -9,10 +10,11 @@
 - Fix a bug: in invoice configuration panel, VAT amount and total excl. taxes are inverted
 - Fix a bug: unable to compute user's age when they were born on february 29th and current year is not a leap year
 - Fix a bug: wrong statistics about hours available for machines reservation. Fix requires user action (1)
-- Fix a bug: when regenerating statistics, previous values are not fully removed (only 10 firsts), resulting in wrong statistics generation
+- Fix a bug: when regenerating statistics, previous values are not fully removed (only 10 firsts), resulting in wrong statistics generation (2)
 - Fix a bug: when deleting an availability just after its creation, the indexer workers crash and retries for a month
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
 - [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
+- [TODO DEPLOY] `fablab:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
 
 ## v2.4.8 2016 December 15
 
