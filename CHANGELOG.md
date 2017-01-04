@@ -10,6 +10,7 @@
 - Fix a bug: unable to compute user's age when they were born on february 29th and current year is not a leap year
 - Fix a bug: wrong statistics about hours available for machines reservation. Fix requires user action (1)
 - Fix a bug: when regenerating statistics, previous values are not fully removed (only 10 firsts), resulting in wrong statistics generation
+- Fix a bug: when deleting an availability just after its creation, the indexer workers crash and retries for a month
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
 - [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
 
