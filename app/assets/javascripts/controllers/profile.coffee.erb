@@ -170,7 +170,9 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
       Session.destroy()
       $rootScope.currentUser = null
       $rootScope.toCheckNotifications = false
-      $scope.notifications = []
+      $scope.notifications =
+        total: 0
+        unread: 0
       $window.location.href = activeProviderPromise.link_to_sso_connect
 
 

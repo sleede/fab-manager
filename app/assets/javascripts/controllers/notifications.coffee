@@ -2,7 +2,7 @@
 
 ##
 # Controller used in notifications page
-# inherits $scope.$parent.notifications (unread notifications) from ApplicationController
+# inherits $scope.$parent.notifications (global notifications state) from ApplicationController
 ##
 Application.Controllers.controller "NotificationsController", ["$scope", 'Notification', ($scope, Notification) ->
 
@@ -19,6 +19,15 @@ Application.Controllers.controller "NotificationsController", ["$scope", 'Notifi
 
   ## Array containg the archived notifications (already read)
   $scope.notificationsRead = []
+
+  ## Array containg the new notifications (not read)
+  $scope.notificationsUnread = []
+
+  ## Total number of notifications for the current user
+  $scope.total = 0
+
+  ## Total number of unread notifications for the current user
+  $scope.totalUnread = 0
 
   ## By default, the pagination mode is activated to limit the page size
   $scope.paginateActive = true
@@ -39,10 +48,15 @@ Application.Controllers.controller "NotificationsController", ["$scope", 'Notifi
     Notification.update {id: notification.id},
       id: notification.id
       is_read: true
-    , ->
-      index = $scope.$parent.notifications.indexOf(notification)
-      $scope.$parent.notifications.splice(index,1)
-      $scope.notificationsRead.push notification
+    , (updatedNotif) ->
+      # remove notif from unreads
+      index = $scope.notificationsUnread.indexOf(notification)
+      $scope.notificationsUnread.splice(index,1)
+      # add update notif to read
+      $scope.notificationsRead.push updatedNotif
+      # update counters
+      $scope.$parent.notifications.unread -= 1
+      $scope.totalUnread -= 1
 
 
 
@@ -52,21 +66,32 @@ Application.Controllers.controller "NotificationsController", ["$scope", 'Notifi
   $scope.markAllAsRead = ->
     Notification.update {}
     , -> # success
-      angular.forEach $scope.$parent.notifications, (n)->
+      # add notifs to read
+      angular.forEach $scope.notificationsUnread, (n)->
+        n.is_read = true
         $scope.notificationsRead.push n
-
-      $scope.$parent.notifications.splice(0, $scope.$parent.notifications.length)
+      # clear unread
+      $scope.notificationsUnread = []
+      # update counters
+      $scope.$parent.notifications.unread = 0
+      $scope.totalUnread = 0
 
 
 
   ##
-  # Request the server to retrieve the next undisplayed notifications and add them
-  # to the archived notifications list.
+  # Request the server to retrieve the next notifications and add them
+  # to their corresponding notifications list (read or unread).
   ##
-  $scope.addMoreNotificationsReaded = ->
-    Notification.query {is_read: true, page: $scope.page}, (notifications) ->
-      $scope.notificationsRead = $scope.notificationsRead.concat notifications
-      $scope.paginateActive = false if notifications.length < NOTIFICATIONS_PER_PAGE
+  $scope.addMoreNotifications = ->
+    Notification.query {page: $scope.page}, (notifications) ->
+      $scope.total = notifications.totals.total
+      $scope.totalUnread = notifications.totals.unread
+      angular.forEach notifications.notifications, (notif) ->
+        if notif.is_read
+          $scope.notificationsRead.push(notif)
+        else
+          $scope.notificationsUnread.push(notif)
+      $scope.paginateActive = (notifications.totals.total > ($scope.notificationsRead.length + $scope.notificationsUnread.length))
 
     $scope.page += 1
 
@@ -78,7 +103,7 @@ Application.Controllers.controller "NotificationsController", ["$scope", 'Notifi
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    $scope.addMoreNotificationsReaded()
+    $scope.addMoreNotifications()
 
 
 

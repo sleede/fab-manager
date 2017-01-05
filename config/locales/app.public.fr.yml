@@ -104,7 +104,7 @@ fr:
         version: "Version :"
 
         # Notifications
-        and_NUMBER_other_notifications: "et {{NUMBER}} autres notifications ..."  # angular interpolation
+        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}} ..."  # messageFormat interpolation
 
       about:
         # page à propos
