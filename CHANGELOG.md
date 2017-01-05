@@ -4,6 +4,7 @@
 
 - Optimized notifications system
 - Fix a bug: when many users with too many unread notifications are connected at the same time, the system kill the application due to memory overflow
+- Fix a bug: ReservationReminderWorker crash with undefined method find_by
 
 ## v2.4.9 2017 January 4
 

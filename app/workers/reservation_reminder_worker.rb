@@ -16,7 +16,7 @@ class ReservationReminderWorker
         already_sent = Notification.where(
             attached_object_type: Reservation.name,
             attached_object_id: r.id,
-            notification_type_id: NotificationType.find_by(name: 'notify_member_reservation_reminder')
+            notification_type_id: NotificationType.find_by_name('notify_member_reservation_reminder')
         ).count
         unless already_sent > 0
           NotificationCenter.call type: 'notify_member_reservation_reminder',
