@@ -1,5 +1,14 @@
 # Changelog Fab Manager
 
+## v2.4.10 2017 January 9
+
+- Optimized notifications system
+- Fix a bug: when many users with too many unread notifications are connected at the same time, the system kill the application due to memory overflow
+- Fix a bug: ReservationReminderWorker crash with undefined method find_by
+- Fix a bug: navigation to about page duplicates admin's links in left menu
+- Fix a bug: changing the price of a plan lost its past statistics
+- [TODO DEPLOY] `rake fablab:set_plans_slugs`
+
 ## v2.4.9 2017 January 4
 
 - Mask new notifications alerts when more than 3
@@ -14,7 +23,7 @@
 - Fix a bug: when deleting an availability just after its creation, the indexer workers crash and retries for a month
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
 - [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
-- [TODO DEPLOY] `fablab:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
+- [TODO DEPLOY] `rake fablab:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
 
 ## v2.4.8 2016 December 15
 

@@ -53,6 +53,8 @@ Rails.application.routes.draw do
     resources :reservations, only: [:show, :create, :index, :update]
     resources :notifications, only: [:index, :show, :update] do
       match :update_all, path: '/', via: [:put, :patch], on: :collection
+      get 'polling', action: 'polling', on: :collection
+      get 'last_unread', action: 'last_unread', on: :collection
     end
     resources :wallet, only: [] do
       get '/by_user/:user_id', action: 'by_user', on: :collection

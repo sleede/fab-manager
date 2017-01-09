@@ -9,6 +9,9 @@ class Plan < ActiveRecord::Base
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   accepts_nested_attributes_for :prices
   accepts_nested_attributes_for :plan_file, allow_destroy: true, reject_if: :all_blank
 
@@ -94,7 +97,7 @@ class Plan < ActiveRecord::Base
   end
 
   def create_statistic_subtype
-    StatisticSubType.create!({key: self.stp_plan_id, label: self.name})
+    StatisticSubType.create!({key: self.slug, label: self.name})
   end
 
   def create_statistic_association(stat_type, stat_subtype)

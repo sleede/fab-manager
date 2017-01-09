@@ -60,7 +60,9 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
       Session.destroy()
       $rootScope.currentUser = null
       $rootScope.toCheckNotifications = false
-      $scope.notifications = []
+      $scope.notifications =
+        total: 0
+        unread: 0
       $state.go('app.public.home')
     , (error) ->
       # An error occurred logging out.
@@ -261,33 +263,30 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
     $rootScope.toCheckNotifications = true
     unless $rootScope.checkNotificationsIsInit or !$rootScope.currentUser
       setTimeout ->
-        $scope.notifications = Notification.query {is_read: false}
+        # we request the most recent notifications
+        Notification.last_unread (notifications) ->
+          $rootScope.lastCheck = new Date()
+          $scope.notifications = notifications.totals
+
+          toDisplay = []
+          angular.forEach notifications.notifications, (n) ->
+            toDisplay.push(n)
+
+          if toDisplay.length < notifications.totals.unread
+            toDisplay.push({message: {description: _t('and_NUMBER_other_notifications', {NUMBER: notifications.totals.unread - toDisplay.length}, "messageformat")}})
+
+          angular.forEach toDisplay, (notification) ->
+            growl.info(notification.message.description)
       , 2000
-      $scope.$watch 'notifications', (newValue, oldValue) ->
-        diff = []
-        angular.forEach newValue, (value) ->
-          find = false
-          for i in [0..oldValue.length] by 1
-            if oldValue[i] and (value.id is oldValue[i].id)
-              find = true
-              break
-
-          unless find
-            diff.push(value)
-
-        remain = 3
-        if diff.length >= remain
-          diff.splice(remain, (diff.length - remain), {message: {description: _t('and_NUMBER_other_notifications', {NUMBER: diff.length - remain})}})
-
-        angular.forEach diff, (notification, key) ->
-          growl.info(notification.message.description)
-
-      , true
 
       checkNotifications = ->
         if $rootScope.toCheckNotifications
-          Notification.query({is_read: false}).$promise.then (data) ->
-            $scope.notifications = data;
+          Notification.polling({last_poll: $rootScope.lastCheck}).$promise.then (data) ->
+            $rootScope.lastCheck = new Date()
+            $scope.notifications = data.totals
+
+            angular.forEach data.notifications, (notification) ->
+              growl.info(notification.message.description)
 
       $interval(checkNotifications, NOTIFICATIONS_CHECK_PERIOD)
       $rootScope.checkNotificationsIsInit = true

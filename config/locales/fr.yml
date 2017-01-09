@@ -260,7 +260,7 @@ fr:
         your_invoice_is_ready_html: "Votre facture n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prête. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Cliquez ici pour la télécharger</a>."
       undefined_notification:
         unknown_notification: "Notification inconnue"
-        notification_ID_wrong_type_TYPE_unknown: "Notification {ID} erronée (type {TYPE} inconnu)."
+        notification_ID_wrong_type_TYPE_unknown: "Notification %{ID} erronée (type %{TYPE} inconnu)."
       notify_user_wallet_is_credited:
         your_wallet_is_credited: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'administrateur"
       notify_admin_user_wallet_is_credited:

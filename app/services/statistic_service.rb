@@ -12,7 +12,7 @@ class StatisticService
       Stats::Subscription.create({
         date: format_date(s.date),
         type: s.duration,
-        subType: s.stp_plan_id,
+        subType: s.slug,
         stat: 1,
         ca: s.ca,
         planId: s.plan_id,
@@ -138,7 +138,7 @@ class StatisticService
               plan_interval: p.interval,
               plan_interval_count: p.interval_count,
               plan_group_name: p.group.name,
-              stp_plan_id: p.stp_plan_id,
+              slug: p.slug,
               duration: p.duration.to_i,
               subscription_id: sub.id,
               invoice_item_id: i.id,

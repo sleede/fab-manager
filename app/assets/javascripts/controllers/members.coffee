@@ -225,7 +225,9 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
       Session.destroy()
       $rootScope.currentUser = null
       $rootScope.toCheckNotifications = false
-      $scope.notifications = []
+      $scope.notifications =
+        total: 0
+        unread: 0
       $window.location.href = $scope.activeProvider.link_to_sso_connect
 
 
