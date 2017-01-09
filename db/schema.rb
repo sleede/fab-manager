@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123104604) do
+ActiveRecord::Schema.define(version: 20170109085345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 20161123104604) do
     t.boolean  "is_read",                          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "receiver_type",        limit: 255
+    t.string   "receiver_type"
     t.boolean  "is_send",                          default: false
     t.jsonb    "meta_data",                        default: {}
   end
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(version: 20161123104604) do
     t.string   "base_name"
     t.integer  "ui_weight",                      default: 0
     t.integer  "interval_count",                 default: 1
+    t.string   "slug"
   end
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
@@ -466,7 +467,7 @@ ActiveRecord::Schema.define(version: 20161123104604) do
     t.datetime "published_at"
   end
 
-  add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
+  add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
 
   create_table "projects_components", force: :cascade do |t|
     t.integer "project_id"
@@ -535,8 +536,8 @@ ActiveRecord::Schema.define(version: 20161123104604) do
     t.datetime "updated_at"
     t.integer  "availability_id"
     t.datetime "ex_start_at"
-    t.datetime "canceled_at"
     t.datetime "ex_end_at"
+    t.datetime "canceled_at"
     t.boolean  "offered",         default: false
   end
 
@@ -718,7 +719,6 @@ ActiveRecord::Schema.define(version: 20161123104604) do
   add_index "user_trainings", ["user_id"], name: "index_user_trainings_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",               limit: 255
     t.string   "email",                  limit: 255, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
@@ -741,6 +741,7 @@ ActiveRecord::Schema.define(version: 20161123104604) do
     t.boolean  "is_allow_contact",                   default: true
     t.integer  "group_id"
     t.string   "stp_customer_id",        limit: 255
+    t.string   "username",               limit: 255
     t.string   "slug",                   limit: 255
     t.boolean  "is_active",                          default: true
     t.boolean  "invoicing_disabled",                 default: false

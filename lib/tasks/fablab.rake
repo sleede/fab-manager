@@ -269,4 +269,14 @@ namespace :fablab do
       StatisticService.new.generate_statistic({start_date: i.day.ago.beginning_of_day,end_date: i.day.ago.end_of_day})
     end
   end
+
+
+  desc 'set slugs to plans'
+  task set_plans_slugs: :environment do
+    # this will maintain compatibility with existing statistics
+    Plan.all.each do |p|
+      p.slug = p.stp_plan_id
+      p.save
+    end
+  end
 end
