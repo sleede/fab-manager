@@ -7,6 +7,7 @@
 - Fix a bug: ReservationReminderWorker crash with undefined method find_by
 - Fix a bug: navigation to about page duplicates admin's links in left menu
 - Fix a bug: changing the price of a plan lost its past statistics
+- [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `rake fablab:set_plans_slugs`
 
 ## v2.4.9 2017 January 4
