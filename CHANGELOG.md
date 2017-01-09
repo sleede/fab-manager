@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release v2.4.10
+## v2.4.10 2017 January 9
 
 - Optimized notifications system
 - Fix a bug: when many users with too many unread notifications are connected at the same time, the system kill the application due to memory overflow
