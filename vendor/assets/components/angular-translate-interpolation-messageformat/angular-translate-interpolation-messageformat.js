@@ -79,6 +79,8 @@ function $translateMessageFormatInterpolation($translateSanitization, $cacheFact
   $translateInterpolator.setLocale = function (locale) {
     $mf = $cache.get(locale);
     if (!$mf) {
+	if(locale === "pt-BR")
+		locale = "br";
       $mf = new MessageFormat(locale);
       $cache.put(locale, $mf);
     }
