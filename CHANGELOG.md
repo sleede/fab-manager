@@ -5,8 +5,8 @@
 - TODO bug: calendar (github#59)
 - TODO bug: delete event (github#61)
 - ONGOING spaces reservation
-- [TODO DEPLOY] `rake db:migrate`
- - [TODO DEPLOY] `rake db:seed`
+- [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
+
 ## v2.4.10 2017 January 9
 
 - Optimized notifications system

@@ -430,5 +430,4 @@ unless StatisticIndex.find_by(es_type_key: 'space')
     {statistic_index_id: index.id, key: 'booking', label:I18n.t('statistics.bookings'), graph: true, simple: true},
     {statistic_index_id: index.id, key: 'hour', label:I18n.t('statistics.hours_number'), graph: true, simple: false}
   ])
-
 end

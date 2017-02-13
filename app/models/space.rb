@@ -4,6 +4,8 @@ class Space < ActiveRecord::Base
 
   has_one :space_image, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :space_image, allow_destroy: true
+  has_many :space_files, as: :viewable, dependent: :destroy
+  accepts_nested_attributes_for :space_files, allow_destroy: true, reject_if: :all_blank
 
   has_and_belongs_to_many :projects, join_table: :projects_spaces
 
