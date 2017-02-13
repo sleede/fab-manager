@@ -123,6 +123,7 @@ Rails.application.routes.draw do
       patch :reset_token, on: :member
     end
     resources :price_categories
+    resources :spaces
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'

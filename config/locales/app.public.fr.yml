@@ -31,6 +31,7 @@ fr:
         reserve_a_machine: "Réserver une machine"
         trainings_registrations: "Inscriptions formations"
         events_registrations: "Inscriptions aux évènements"
+        reserve_a_space: "Réserver un espace"
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Calendrier"
@@ -44,6 +45,7 @@ fr:
         subscriptions_and_prices: "Abonnements & Tarifs"
         manage_the_events: "Gérer les évènements"
         manage_the_machines: "Gérer les machines"
+        manage_the_spaces: "Gérer les espaces"
         manage_the_projects_elements: "Gérer les éléments projets"
         statistics: "Statistiques"
         customization: "Personnalisation"
@@ -248,6 +250,12 @@ fr:
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
 
       calendar:
+        # calendrier publique
         calendar: "Calendrier"
         show_no_disponible: "Afficher les crénaux non disponibles"
         filter-calendar: "Filtrer le calendrier"
+
+      spaces_list:
+        # liste des espaces
+        the_spaces: "Les espaces"
+        add_a_space: "Ajouter un espace"

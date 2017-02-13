@@ -388,6 +388,26 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise
           ]
+
+      # spaces
+      .state 'app.public.spaces_list',
+        url: '/spaces'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/index.html.erb" %>'
+            controller: 'SpacesController'
+        resolve:
+          spacesPromise: ['Space', (Space)->
+            Space.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.spaces_list']).$promise
+          ]
+      .state 'app.logged.space_reserve',
+        url: '/spaces/:id/reserve'
+      .state 'app.admin.space_new',
+        url: '/spaces/new'
+
       # trainings
       .state 'app.public.trainings_list',
         url: '/trainings'

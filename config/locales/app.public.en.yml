@@ -31,6 +31,7 @@ en:
         reserve_a_machine: "Reserve a Machine"
         trainings_registrations: "Trainings registrations"
         events_registrations: "Events registrations"
+        reserve_a_space: "Reserve a Space"
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
@@ -44,6 +45,7 @@ en:
         subscriptions_and_prices: "Subscriptions and Prices"
         manage_the_events: "Manage the events"
         manage_the_machines: "Manage the Machines"
+        manage_the_spaces: "Manage the Spaces"
         manage_the_projects_elements: "Manage the Projects Elements"
         statistics: "Statistics"
         customization: "Customization"
@@ -246,6 +248,12 @@ en:
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
 
       calendar:
+        # public calendar
         calendar: "Calendar"
         show_no_disponible: "Show the slots no disponibles"
         filter-calendar: "Filter calendar"
+
+      spaces_list:
+        # list of spaces
+        the_spaces: "The spaces"
+        add_a_space: "Add a space"
