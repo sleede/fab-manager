@@ -69,6 +69,12 @@ en:
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
 
+      space_new:
+        # create a new space
+        add_a_new_space: "Add a new space"
+        watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new space, its prices are initialized at 0 for all subscriptions."
+        consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
+
       events:
         # events tracking and management
         events_monitoring: "Events monitoring"

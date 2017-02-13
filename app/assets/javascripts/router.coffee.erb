@@ -407,6 +407,14 @@ angular.module('application.router', ['ui.router']).
         url: '/spaces/:id/reserve'
       .state 'app.admin.space_new',
         url: '/spaces/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/new.html" %>'
+            controller: 'NewSpaceController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.space_new', 'app.shared.space']).$promise
+          ]
 
       # trainings
       .state 'app.public.trainings_list',

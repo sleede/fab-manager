@@ -43,3 +43,24 @@ Application.Controllers.controller "SpacesController", ["$scope", "$state", 'spa
     $state: $state
 ]
 
+
+
+##
+# Controller used in the space creation page (admin)
+##
+Application.Controllers.controller "NewSpaceController", ["$scope", "$state", 'CSRF',($scope, $state, CSRF) ->
+  CSRF.setMetaTags()
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = "/api/spaces/"
+
+  ## Form action on the above URL
+  $scope.method = "post"
+
+  ## default machine parameters
+  $scope.space =
+    space_files_attributes: []
+
+  ## Using the SpacesController
+  new SpacesController($scope, $state)
+]

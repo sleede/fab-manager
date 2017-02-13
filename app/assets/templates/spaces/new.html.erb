@@ -1,0 +1,33 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-md-1 hidden-xs">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-md-8 b-l b-r">
+      <section class="heading-title">
+        <h1 translate>{{ 'add_a_new_space' }}</h1>
+      </section>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="row no-gutter" >
+
+  <div class="col-md-9 b-r nopadding">
+
+    <div class="m-lg alert alert-warning" role="alert">
+      {{ 'watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions' | translate}}
+      {{ 'consider_changing_its_prices_before_creating_any_reservation_slot' | translate }}
+    </div>
+
+    <ng-include src="'<%= asset_path 'spaces/_form.html' %>'"></ng-include>
+  </div>
+
+  <div class="col-md-3"/>
+</div>
