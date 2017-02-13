@@ -286,6 +286,7 @@ en:
     # statistics tools for admins
     subscriptions: "Subscriptions"
     machines_hours: "Machines hours"
+    spaces: "Spaces"
     trainings: "Trainings"
     events: "Events"
     registrations: "Registrations"
