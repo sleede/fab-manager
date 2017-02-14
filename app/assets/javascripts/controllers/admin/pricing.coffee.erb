@@ -56,7 +56,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
     if data?
       TrainingsPricing.update({ id: trainingsPricing.id }, { trainings_pricing: { amount: data } }).$promise
     else
-      _t('please_specify_a_number')
+      _t('pricing.please_specify_a_number')
 
   ##
   # Retrieve a plan from its given identifier and returns it
@@ -89,13 +89,13 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   ##
   $scope.showTrainings = (trainings) ->
     unless angular.isArray(trainings) and trainings.length > 0
-      return _t('none')
+      return _t('pricing.none')
 
     selected = []
     angular.forEach $scope.trainings, (t) ->
       if trainings.indexOf(t.id) >= 0
         selected.push t.name
-    return if selected.length then selected.join(' | ') else _t('none')
+    return if selected.length then selected.join(' | ') else _t('pricing.none')
 
 
 
@@ -110,7 +110,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
       training_credit_nb: newdata.training_credits
     , angular.noop() # do nothing in case of success
     , (error) ->
-       growl.error(_t('an_error_occurred_while_saving_the_number_of_credits'))
+       growl.error(_t('pricing.an_error_occurred_while_saving_the_number_of_credits'))
 
     # save the associated trainings
     angular.forEach $scope.trainingCreditsGroups, (original, key) ->
@@ -126,9 +126,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
                   $scope.trainingCredits.splice($scope.trainingCredits.indexOf(tc), 1)
                   $scope.trainingCreditsGroups[planId].splice($scope.trainingCreditsGroups[planId].indexOf(tc.id), 1)
                 , (error) ->
-                  growl.error(_t('an_error_occurred_while_deleting_credit_with_the_TRAINING', {TRAINING:tc.creditable.name}))
+                  growl.error(_t('pricing.an_error_occurred_while_deleting_credit_with_the_TRAINING', {TRAINING:tc.creditable.name}))
               else
-                growl.error(_t('an_error_occurred_unable_to_find_the_credit_to_revoke'))
+                growl.error(_t('pricing.an_error_occurred_unable_to_find_the_credit_to_revoke'))
 
           # iterate through the new credits to add
           angular.forEach newdata.training_ids, (newTrainingId) ->
@@ -143,7 +143,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
                 $scope.trainingCreditsGroups[newTc.plan_id].push(newTc.creditable_id)
               , (error) -> # failed
                   training = getTrainingFromId(newTrainingId)
-                  growl.error(_t('an_error_occurred_while_creating_credit_with_the_TRAINING', {TRAINING: training.name}))
+                  growl.error(_t('pricing.an_error_occurred_while_creating_credit_with_the_TRAINING', {TRAINING: training.name}))
                   console.error(error)
 
 
@@ -177,7 +177,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   # @param credit {Object} credit object, inherited from $resource
   ##
   $scope.showCreditableName = (credit) ->
-    selected = _t('not_set')
+    selected = _t('pricing.not_set')
     if credit and credit.creditable_id
       angular.forEach $scope.machines, (m)->
         if m.id == credit.creditable_id
@@ -195,21 +195,21 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.saveMachineCredit = (data, id) ->
     for mc in $scope.machineCredits
       if mc.plan_id == data.plan_id and mc.creditable_id == data.creditable_id and (id == null or mc.id != id)
-        growl.error(_t('error_a_credit_linking_this_machine_with_that_subscription_already_exists'))
+        growl.error(_t('pricing.error_a_credit_linking_this_machine_with_that_subscription_already_exists'))
         unless id
           $scope.machineCredits.pop()
         return false
 
     if id?
       Credit.update {id: id}, credit: data, ->
-        growl.success(_t('changes_have_been_successfully_saved'))
+        growl.success(_t('pricing.changes_have_been_successfully_saved'))
     else
       data.creditable_type = 'Machine'
       Credit.save
         credit: data
       , (resp) ->
         $scope.machineCredits[$scope.machineCredits.length-1].id = resp.id
-        growl.success(_t('credit_was_successfully_saved'))
+        growl.success(_t('pricing.credit_was_successfully_saved'))
 
 
   ##
@@ -242,8 +242,8 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   ##
   $scope.getPlanType = (type) ->
     if type == 'PartnerPlan'
-      return _t('partner')
-    else return _t('standard')
+      return _t('pricing.partner')
+    else return _t('pricing.standard')
 
   ##
   # Change the plans ordering criterion to the one provided
@@ -270,7 +270,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
     if data?
       Price.update({ id: price.id }, { price: { amount: data } }).$promise
     else
-      _t('please_specify_a_number')
+      _t('pricing.please_specify_a_number')
 
   ##
   # Delete the specified subcription plan
@@ -284,17 +284,17 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
       dialogs.confirm
         resolve:
           object: ->
-            title: _t('confirmation_required')
-            msg: _t('do_you_really_want_to_delete_this_subscription_plan')
+            title: _t('pricing.confirmation_required')
+            msg: _t('pricing.do_you_really_want_to_delete_this_subscription_plan')
       , ->
         # the admin has confirmed, delete the plan
         Plan.delete {id: id}, (res) ->
-          growl.success(_t('subscription_plan_was_successfully_deleted'))
+          growl.success(_t('pricing.subscription_plan_was_successfully_deleted'))
           $scope.plans.splice(findItemIdxById(plans, id), 1)
 
         , (error) ->
           console.error('[EditPricingController::deletePlan] Error: '+error.statusText) if error.statusText
-          growl.error(_t('unable_to_delete_the_specified_subscription_an_error_occurred'))
+          growl.error(_t('pricing.unable_to_delete_the_specified_subscription_an_error_occurred'))
 
 
 
@@ -324,8 +324,8 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
       dialogs.confirm
         resolve:
           object: ->
-            title: _t('confirmation_required')
-            msg: _t('do_you_really_want_to_delete_this_coupon')
+            title: _t('pricing.confirmation_required')
+            msg: _t('pricing.do_you_really_want_to_delete_this_coupon')
       , ->
         # the admin has confirmed, delete the coupon
         Coupon.delete {id: id}, (res) ->
@@ -335,9 +335,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
         , (error) ->
           console.error('[EditPricingController::deleteCoupon] Error: '+error.statusText) if error.statusText
           if error.status == 422
-            growl.error(_t('unable_to_delete_the_specified_coupon_already_in_use'))
+            growl.error(_t('pricing.unable_to_delete_the_specified_coupon_already_in_use'))
           else
-            growl.error(_t('unable_to_delete_the_specified_coupon_an_unexpected_error_occurred'))
+            growl.error(_t('pricing.unable_to_delete_the_specified_coupon_an_unexpected_error_occurred'))
 
 
 
@@ -363,10 +363,10 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
         ## Callback to validate sending of the coupon
         $scope.ok = ->
           Coupon.send {coupon_code: coupon.code, user_id: $scope.ctrl.member.id}, (res) ->
-            growl.success(_t('coupon_successfully_sent_to_USER', {USER: $scope.ctrl.member.name}))
+            growl.success(_t('pricing.coupon_successfully_sent_to_USER', {USER: $scope.ctrl.member.name}))
             $uibModalInstance.close({user_id: $scope.ctrl.member.id})
           , (err) ->
-            growl.error(_t('an_error_occurred_unable_to_send_the_coupon'))
+            growl.error(_t('pricing.an_error_occurred_unable_to_send_the_coupon'))
 
         ## Callback to close the modal and cancel the sending process
         $scope.cancel = ->
