@@ -838,14 +838,8 @@ angular.module('application.router', ['ui.router']).
           prices: ['Pricing', (Pricing) ->
             Pricing.query().$promise
           ]
-          machines: ['Machine', (Machine) ->
-            Machine.query().$promise
-          ]
           groups: ['Group', (Group) ->
             Group.query().$promise
-          ]
-          plans: ['Plan', (Plan) ->
-            Plan.query().$promise
           ]
           partners: ['User', (User) ->
             User.query({role: 'partner'}).$promise
@@ -867,6 +861,15 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/plans/edit.html" %>'
             controller: 'EditPlanController'
         resolve:
+          spaces: ['Space', (Space) ->
+            Space.query().$promise
+          ]
+          machines: ['Machine', (Machine) ->
+            Machine.query().$promise
+          ]
+          plans: ['Plan', (Plan) ->
+            Plan.query().$promise
+          ]
           planPromise: ['Plan', '$stateParams', (Plan, $stateParams) ->
             Plan.get({id: $stateParams.id}).$promise
           ]

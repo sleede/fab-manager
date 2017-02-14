@@ -228,6 +228,8 @@ fr:
             machines: "Machines"
             machine: "Machine"
             hourly_rate: "Tarif horaire"
+            spaces: "Espaces"
+            space: "Espace"
             unable_to_save_subscription_changes_please_try_again: "Les modifications de l'abonnement n'ont pas pu être enregistrées. Veuillez réessayer."
             subscription_successfully_changed: "Modification de l'abonnement réussie."
 

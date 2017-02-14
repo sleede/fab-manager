@@ -228,6 +228,8 @@ en:
             machines: "Machines"
             machine: "Machine"
             hourly_rate: "Hourly rate"
+            spaces: "Spaces"
+            space: "Space"
             unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."
             subscription_successfully_changed: "Subscription successfully changed."
 
