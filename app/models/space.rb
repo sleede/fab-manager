@@ -2,6 +2,8 @@ class Space < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  validates :name, :default_places, presence: true
+
   has_one :space_image, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :space_image, allow_destroy: true
   has_many :space_files, as: :viewable, dependent: :destroy

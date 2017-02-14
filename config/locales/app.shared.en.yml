@@ -381,3 +381,21 @@ en:
         unable_to_apply_the_coupon_because_amount_exceeded: "Unable to apply the coupon: the discount exceed the total amount of this purchase."
         unable_to_apply_the_coupon_because_undefined: "Unable to apply the coupon: an unexpected error occurred, please contact the Fablab's manager."
         unable_to_apply_the_coupon_because_rejected: "This code does not exists."
+
+      space:
+        # form to create/edit a space
+        space:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Illustration"
+          add_an_illustration: "Add an illustration"
+          description: "Description"
+          description_is_required: "Description is required."
+          characteristics: "Characteristics"
+          characteristics_are_required: "Characteristics are required."
+          attached_files_(pdf): "Attached files (pdf)"
+          attach_a_file: "Attach a file"
+          add_an_attachment: "Add an attachment"
+          add_this_space: "Add this space"
+          default_places: "Default maximum tickets"
+          default_places_is_required: "Default maximum tickets is required."

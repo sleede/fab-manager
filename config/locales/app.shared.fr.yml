@@ -381,3 +381,21 @@ fr:
         unable_to_apply_the_coupon_because_amount_exceeded: "Impossible d'appliquer la réduction : la réduction dépasse le total de cet achat."
         unable_to_apply_the_coupon_because_undefined: "Impossible d'appliquer la réduction : une erreur inattendue s'est produite, veuillez contacter le gestionnaire du Fablab."
         unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."
+
+      space:
+        # formulaire de création/modification d'un espace
+        space:
+          name: "Nom"
+          name_is_required: "Le nom est requis."
+          illustration: "Visuel"
+          add_an_illustration: "Ajouter un visuel"
+          description: "Description"
+          description_is_required: "La description est requise."
+          characteristics: "Caractéristiques"
+          characteristics_are_required: "Les caractéristiques sont requises."
+          attached_files_(pdf): "Pièces jointes (pdf)"
+          attach_a_file: "Joindre un fichier"
+          add_an_attachment: "Ajouter une pièce jointe"
+          add_this_space: "Ajouter cet espace"
+          default_places: "Maximum de places par défaut"
+          default_places_is_required: "Le nombre de places maximum par défaut est requis."

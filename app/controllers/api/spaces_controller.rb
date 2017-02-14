@@ -42,7 +42,7 @@ class API::SpacesController < API::ApiController
     end
 
     def space_params
-      params.require(:space).permit(:name, :description, :characteristics, space_image_attributes: [:attachment],
+      params.require(:space).permit(:name, :description, :characteristics, :default_places, space_image_attributes: [:attachment],
                                       space_files_attributes: [:id, :attachment, :_destroy])
     end
 end
