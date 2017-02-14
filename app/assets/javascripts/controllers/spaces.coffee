@@ -116,6 +116,26 @@ Application.Controllers.controller 'NewSpaceController', ['$scope', '$state', 'C
   new SpacesController($scope, $state)
 ]
 
+
+##
+# Controller used in the space edition page (admin)
+##
+Application.Controllers.controller 'EditSpaceController', ['$scope', '$state', '$stateParams', 'spacePromise', 'CSRF',($scope, $state, $stateParams, spacePromise, CSRF) ->
+  CSRF.setMetaTags()
+
+  ## API URL where the form will be posted
+  $scope.actionUrl = "/api/spaces/" + $stateParams.id
+
+  ## Form action on the above URL
+  $scope.method = "put"
+
+  ## space to modify
+  $scope.space = spacePromise
+
+  ## Using the SpacesController
+  new SpacesController($scope, $state)
+]
+
 Application.Controllers.controller 'ShowSpaceController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', 'growl', ($scope, $state, spacePromise, _t, dialogs, growl) ->
 
   ## Details of the space witch id/slug is provided in the URL

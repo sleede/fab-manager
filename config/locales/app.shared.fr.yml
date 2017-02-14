@@ -396,6 +396,5 @@ fr:
           attached_files_(pdf): "Pièces jointes (pdf)"
           attach_a_file: "Joindre un fichier"
           add_an_attachment: "Ajouter une pièce jointe"
-          add_this_space: "Ajouter cet espace"
           default_places: "Maximum de places par défaut"
           default_places_is_required: "Le nombre de places maximum par défaut est requis."
