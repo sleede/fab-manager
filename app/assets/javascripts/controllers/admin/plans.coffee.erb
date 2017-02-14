@@ -146,7 +146,7 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
             $scope.partner.name = "#{user.first_name} #{user.last_name}"
             $uibModalInstance.close($scope.partner)
           , (error)->
-            growl.error(_t('unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
+            growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
         $scope.cancel = ->
           $uibModalInstance.dismiss('cancel')
       ]
@@ -164,9 +164,9 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
   ##
   $scope.afterSubmit = (content) ->
     if !content.id? and !content.plan_ids?
-      growl.error(_t('unable_to_create_the_subscription_please_try_again'))
+      growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'))
     else
-      growl.success(_t('successfully_created_subscription(s)_dont_forget_to_redefine_prices'))
+      growl.success(_t('new_plan.successfully_created_subscription(s)_dont_forget_to_redefine_prices'))
       if content.plan_ids?
         $state.go('app.admin.pricing')
       else
@@ -231,9 +231,9 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ##
   $scope.afterSubmit = (content) ->
     if !content.id? and !content.plan_ids?
-      growl.error(_t('unable_to_save_subscription_changes_please_try_again'))
+      growl.error(_t('confirm_changes.unable_to_save_subscription_changes_please_try_again'))
     else
-      growl.success(_t('subscription_successfully_changed'))
+      growl.success(_t('confirm_changes.subscription_successfully_changed'))
       $state.go('app.admin.pricing')
 
 

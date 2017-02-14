@@ -214,19 +214,22 @@ en:
       plans:
         new:
           # add a subscription plan on the platform
-          add_a_subscription_plan: "Add a subscription plan"
-          unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
-          successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
-          unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
+          new_plan:
+            add_a_subscription_plan: "Add a subscription plan"
+            unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
+            successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
+            unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
         edit:
           # edit a subscription plan / machine hours prices
-          subscription_plan: "Subscription plan:"
-          prices: "Prices"
-          copy_prices_from: "Copy prices from"
-          machine: "Machine"
-          hourly_rate: "Hourly rate"
-          unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."
-          subscription_successfully_changed: "Subscription successfully changed."
+          edit_plan:
+            subscription_plan: "Subscription plan:"
+            prices: "Prices"
+            copy_prices_from: "Copy prices from"
+            machines: "Machines"
+            machine: "Machine"
+            hourly_rate: "Hourly rate"
+            unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."
+            subscription_successfully_changed: "Subscription successfully changed."
 
       invoices:
         # list of all invoices & invoicing parameters

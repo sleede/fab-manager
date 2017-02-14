@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-10 col-sm-10 col-md-8 b-l">
             <section class="heading-title">
-                <h1>{{ 'subscription_plan' | translate }} {{ plan.base_name }}</h1>
+                <h1>{{ 'edit_plan.subscription_plan' | translate }} {{ plan.base_name }}</h1>
             </section>
         </div>
 
@@ -30,19 +30,19 @@
 
               <ng-include src="'<%= asset_path 'admin/plans/_form.html' %>'"></ng-include>
 
-              <h2 class="m-t-xl" translate>{{ 'prices' }}</h2>
+              <h2 class="m-t-xl" translate>{{ 'edit_plan.prices' }}</h2>
               <div class="form-group col-md-6 col-lg-offset-6">
                   <input type="hidden" ng-model="plan.parent" name="plan[parent_id]" ng-value="plan.parent"/>
-                  <label for="parentPlan" translate>{{ 'copy_prices_from' }}</label>
+                  <label for="parentPlan" translate>{{ 'edit_plan.copy_prices_from' }}</label>
                   <select id="parentPlan" ng-options="plan.id as humanReadablePlanName(plan, groups) for plan in plans" ng-model="plan.parent" ng-change="copyPricesFromPlan()" class="form-control">
                       <option value=""></option>
                   </select>
               </div>
-              <h3 translate>{{ 'machines' }}</h3>
+              <h3 translate>{{ 'edit_plan.machines' }}</h3>
               <table class="table">
                   <thead>
-                      <th translate>{{ 'machine' }}</th>
-                      <th translate>{{ 'hourly_rate' }}</th>
+                      <th translate>{{ 'edit_plan.machine' }}</th>
+                      <th translate>{{ 'edit_plan.hourly_rate' }}</th>
                   </thead>
                   <tbody>
 
