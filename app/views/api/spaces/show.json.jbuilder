@@ -5,3 +5,6 @@ json.space_files_attributes @space.space_files do |f|
   json.attachment f.attachment_identifier
   json.attachment_url f.attachment_url
 end
+json.space_projects @space.projects do |p|
+  json.extract! p, :slug, :name
+end

@@ -257,3 +257,15 @@ en:
         # list of spaces
         the_spaces: "The spaces"
         add_a_space: "Add a space"
+
+      space_show:
+        # display the details of a space
+        space_show:
+          book_this_space: "Book this space"
+          unauthorized_operation: "Unauthorized operation"
+          confirmation_required: "Confirmation required"
+          do_you_really_want_to_delete_this_space: "Do you really want to delete this space?"
+          the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Unable to delete this space, because it is already reserved by some users."
+          characteristics: "Characteristics"
+          files_to_download: "Files to download"
+          projects_using_the_space: "Projects using the space"

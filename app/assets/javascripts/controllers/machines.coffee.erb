@@ -234,7 +234,7 @@ Application.Controllers.controller "EditMachineController", ["$scope", '$state',
 Application.Controllers.controller "ShowMachineController", ['$scope', '$state', '$uibModal', '$stateParams', '_t', 'Machine', 'growl', 'machinePromise', 'dialogs'
 , ($scope, $state, $uibModal, $stateParams, _t, Machine, growl, machinePromise, dialogs) ->
 
-## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
+  ## Retrieve the details for the machine id in the URL, if an error occurs redirect the user to the machines list
   $scope.machine = machinePromise
 
   ##

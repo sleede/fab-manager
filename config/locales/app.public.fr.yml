@@ -259,3 +259,15 @@ fr:
         # liste des espaces
         the_spaces: "Les espaces"
         add_a_space: "Ajouter un espace"
+
+      space_show:
+        # affichage des détails d'un espace
+        space_show:
+          book_this_space: "Réserver cet espace"
+          unauthorized_operation: "Opération non autorisée"
+          confirmation_required: "Confirmation requise"
+          do_you_really_want_to_delete_this_space: "Voulez-vous vraiment supprimer cet espace ?"
+          the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "L'espace ne peut pas être supprimé car il a déjà été réservé par des utilisateurs."
+          characteristics: "Caractéristiques"
+          files_to_download: "Fichiers à télécharger"
+          projects_using_the_space: "Projets utilisant l'espace"

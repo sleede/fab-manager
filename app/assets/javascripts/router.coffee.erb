@@ -394,7 +394,7 @@ angular.module('application.router', ['ui.router']).
         url: '/spaces'
         views:
           'main@':
-            templateUrl: '<%= asset_path "spaces/index.html.erb" %>'
+            templateUrl: '<%= asset_path "spaces/index.html" %>'
             controller: 'SpacesController'
         resolve:
           spacesPromise: ['Space', (Space)->
@@ -402,6 +402,19 @@ angular.module('application.router', ['ui.router']).
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.spaces_list']).$promise
+          ]
+      .state 'app.public.space_show',
+        url: '/spaces/:id'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/show.html" %>'
+            controller: 'ShowSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.space_show']).$promise
           ]
       .state 'app.logged.space_reserve',
         url: '/spaces/:id/reserve'

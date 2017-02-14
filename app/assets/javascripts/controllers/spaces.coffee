@@ -71,32 +71,12 @@ class SpacesController
       else
         $scope.space.space_files_attributes.splice(index, 1)
 
-##
-# Manages the transition when a user clicks on the reservation button.
-# According to the status of user currently logged into the system, redirect him to the reservation page,
-# or display a modal window asking him to login or to create an account.
-# @param space {{id:number}} An object containg the id of the space to book,
-#   the object will be completed before the fonction returns.
-# @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-##
-_reserveSpace = (space, e) ->
-  _this = this
-  e.preventDefault()
-  e.stopPropagation()
-
-  # if a user is authenticated ...
-  if _this.$scope.isAuthenticated()
-    _this.$state.go('app.logged.space_reserve', { id: space.id })
-  # if the user is not logged, open the login modal window
-  else
-    _this.$scope.login()
-
 
 
 ##
 # Controller used in the public listing page, allowing everyone to see the list of spaces
 ##
-Application.Controllers.controller "SpacesController", ["$scope", "$state", 'spacesPromise', ($scope, $state, spacesPromise) ->
+Application.Controllers.controller 'SpacesController', ['$scope', '$state', 'spacesPromise', ($scope, $state, spacesPromise) ->
 
   ## Retrieve the list of spaces
   $scope.spaces = spacesPromise
@@ -110,9 +90,8 @@ Application.Controllers.controller "SpacesController", ["$scope", "$state", 'spa
   ##
   # Callback to book a reservation for the current space
   ##
-  $scope.reserveSpace = _reserveSpace.bind
-    $scope: $scope
-    $state: $state
+  $scope.reserveSpace = (space) ->
+    $state.go('app.logged.space_reserve', { id: space.slug })
 ]
 
 
@@ -120,7 +99,7 @@ Application.Controllers.controller "SpacesController", ["$scope", "$state", 'spa
 ##
 # Controller used in the space creation page (admin)
 ##
-Application.Controllers.controller "NewSpaceController", ["$scope", "$state", 'CSRF',($scope, $state, CSRF) ->
+Application.Controllers.controller 'NewSpaceController', ['$scope', '$state', 'CSRF',($scope, $state, CSRF) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -135,4 +114,41 @@ Application.Controllers.controller "NewSpaceController", ["$scope", "$state", 'C
 
   ## Using the SpacesController
   new SpacesController($scope, $state)
+]
+
+Application.Controllers.controller 'ShowSpaceController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', ($scope, $state, spacePromise, _t, dialogs) ->
+
+  ## Details of the space witch id/slug is provided in the URL
+  $scope.space = spacePromise
+
+  ##
+  # Callback to book a reservation for the current space
+  # @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.reserveSpace = (event) ->
+    event.preventDefault()
+    $state.go('app.logged.space_reserve', { id: $scope.space.slug })
+
+  ##
+  # Callback to book a reservation for the current space
+  # @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.deleteSpace = (event) ->
+    event.preventDefault()
+    # check the permissions
+    if $scope.currentUser.role isnt 'admin'
+      console.error _t('space_show.unauthorized_operation')
+    else
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('space_show.confirmation_required')
+            msg: _t('space_show.do_you_really_want_to_delete_this_space')
+      , -> # deletion confirmed
+        # delete the machine then redirect to the machines listing
+        $scope.space.$delete ->
+          $state.go('app.public.machines_list')
+        , (error)->
+          growl.warning(_t('space_show.the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
+##
 ]
