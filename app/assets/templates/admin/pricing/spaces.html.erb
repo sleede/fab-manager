@@ -1,0 +1,26 @@
+<div class="alert alert-warning m-t">
+  {{ 'pricing.these_prices_match_space_hours_rates_' | translate }} <span class="font-bold" translate>{{ 'pricing._without_subscriptions' }}</span>.
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th style="width:20%"  translate>{{ 'pricing.spaces' }}</th>
+    <th style="width:20%" ng-repeat="group in groups">
+      <span class="text-u-c text-sm">{{group.name}}</span>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="space in spaces">
+    <td>
+      {{ space.name }}
+    </td>
+    <td ng-repeat="group in groups">
+                  <span editable-number="findPriceBy(spacesPrices, space.id, group.id).amount"
+                        onbeforesave="updatePrice($data, findPriceBy(spacesPrices, space.id, group.id))">
+                      {{ findPriceBy(spacesPrices, space.id, group.id).amount | currency}}
+                  </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

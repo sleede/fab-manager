@@ -199,6 +199,8 @@ en:
           once: "Just once"
           forever: "Each use"
           valid_until: "Valid until (included)"
+          spaces: "Spaces"
+          these_prices_match_space_hours_rates_: "These prices match space hours rates"
 
       coupons_new:
         # ajouter un code promotionnel

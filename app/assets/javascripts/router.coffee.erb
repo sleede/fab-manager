@@ -824,6 +824,12 @@ angular.module('application.router', ['ui.router']).
           couponsPromise: ['Coupon', (Coupon) ->
             Coupon.query().$promise
           ]
+          spacesPromise: ['Space', (Space) ->
+            Space.query().$promise
+          ]
+          spacesPricesPromise: ['Price', (Price)->
+            Price.query(priceable_type: 'Space', plan_id: 'null').$promise
+          ]
 
       # plans
       .state 'app.admin.plans',

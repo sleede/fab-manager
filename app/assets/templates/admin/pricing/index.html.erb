@@ -33,6 +33,10 @@
           <ng-include src="'<%= asset_path 'admin/pricing/machine_hours.html' %>'"></ng-include>
         </uib-tab>
 
+        <uib-tab heading="{{ 'pricing.spaces' | translate }}">
+          <ng-include src="'<%= asset_path 'admin/pricing/spaces.html' %>'"></ng-include>
+        </uib-tab>
+
         <uib-tab heading="{{ 'pricing.credits' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/credits.html' %>'"></ng-include>
         </uib-tab>
