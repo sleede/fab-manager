@@ -3,8 +3,8 @@
 ##
 # Controller used in the prices edition page
 ##
-Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', '_t'
-, ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, _t) ->
+Application.Controllers.controller "EditPricingController", ["$scope", "$state", '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t'
+, ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, _t) ->
 
   ### PUBLIC SCOPE ###
   ## List of machines prices (not considering any plan)
@@ -39,6 +39,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
   ## List of spaces
   $scope.spaces = spacesPromise
+
+  ## Associate free space hours with subscriptions
+  $scope.spaceCredits = spacesCreditsPromise
 
   ## List of spaces prices (not considering any plan)
   $scope.spacesPrices = spacesPricesPromise
@@ -185,9 +188,14 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.showCreditableName = (credit) ->
     selected = _t('pricing.not_set')
     if credit and credit.creditable_id
-      angular.forEach $scope.machines, (m)->
-        if m.id == credit.creditable_id
-          selected = m.name+' ( id. '+m.id+' )'
+      if credit.creditable_type == 'Machine'
+        angular.forEach $scope.machines, (m)->
+          if m.id == credit.creditable_id
+            selected = m.name + ' ( id. ' + m.id + ' )'
+      else if credit.creditable_type == 'Space'
+        angular.forEach $scope.spaces, (s)->
+          if s.id == credit.creditable_id
+            selected = s.name
     return selected
 
 
@@ -221,7 +229,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   ##
   # Removes the newly inserted but not saved machine credit / Cancel the current machine credit modification
   # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-  # @param index {number} theme index in the $scope.machineCredits array
+  # @param index {number} credit index in the $scope.machineCredits array
   ##
   $scope.cancelMachineCredit = (rowform, index) ->
     if $scope.machineCredits[index].id?
@@ -238,6 +246,70 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.removeMachineCredit = (index) ->
     Credit.delete $scope.machineCredits[index]
     $scope.machineCredits.splice(index, 1)
+
+
+
+  ##
+  # Create a new empty entry in the $scope.spaceCredits array
+  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+  ##
+  $scope.addSpaceCredit = (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    $scope.inserted =
+      creditable_type: 'Space'
+    $scope.spaceCredits.push($scope.inserted)
+    $scope.status.isopen = !$scope.status.isopen
+
+
+
+  ##
+  # Validation callback when editing space's credits. Save the changes.
+  # This will prevent the creation of two credits associated with the same space and plan.
+  # @param data {Object} space, associated plan and number of credit hours.
+  # @param [id] {number} credit id for edition, create a new credit object if not provided
+  ##
+  $scope.saveSpaceCredit = (data, id) ->
+    for sc in $scope.spaceCredits
+      if sc.plan_id == data.plan_id and sc.creditable_id == data.creditable_id and (id == null or sc.id != id)
+        growl.error(_t('pricing.error_a_credit_linking_this_space_with_that_subscription_already_exists'))
+        unless id
+          $scope.spaceCredits.pop()
+        return false
+
+    if id?
+      Credit.update {id: id}, credit: data, ->
+        growl.success(_t('pricing.changes_have_been_successfully_saved'))
+    else
+      data.creditable_type = 'Space'
+      Credit.save
+        credit: data
+      , (resp) ->
+        $scope.spaceCredits[$scope.spaceCredits.length - 1].id = resp.id
+        growl.success(_t('pricing.credit_was_successfully_saved'))
+
+
+
+  ##
+  # Removes the newly inserted but not saved space credit / Cancel the current space credit modification
+  # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+  # @param index {number} credit index in the $scope.spaceCredits array
+  ##
+  $scope.cancelSpaceCredit = (rowform, index) ->
+    if $scope.spaceCredits[index].id?
+      rowform.$cancel()
+    else
+      $scope.spaceCredits.splice(index, 1)
+
+
+
+  ##
+  # Deletes the space credit at the specified index
+  # @param index {number} space credit index in the $scope.spaceCredits array
+  ##
+  $scope.removeSpaceCredit = (index) ->
+    Credit.delete $scope.spaceCredits[index]
+    $scope.spaceCredits.splice(index, 1)
 
 
 

@@ -830,6 +830,9 @@ angular.module('application.router', ['ui.router']).
           spacesPricesPromise: ['Price', (Price)->
             Price.query(priceable_type: 'Space', plan_id: 'null').$promise
           ]
+          spacesCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Space'}).$promise
+          ]
 
       # plans
       .state 'app.admin.plans',

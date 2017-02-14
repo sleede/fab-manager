@@ -201,6 +201,9 @@ fr:
           valid_until: "Valable jusqu'au (inclus)"
           spaces: "Espaces"
           these_prices_match_space_hours_rates_: "Ces tarifs correspondent au prix d'une heure espace"
+          add_a_space_credit: "Ajouter un crédit Espace"
+          space: "Espace"
+          error_a_credit_linking_this_space_with_that_subscription_already_exists: "Erreur : un crédit associant cet espace et cet abonnement existe déjà."
 
       coupons_new:
         # ajouter un code promotionnel
