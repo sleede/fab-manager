@@ -31,6 +31,7 @@ class API::SpacesController < API::ApiController
   end
 
   def destroy
+    @space = get_space
     authorize @space
     @space.destroy
     head :no_content

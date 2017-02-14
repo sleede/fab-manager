@@ -403,6 +403,16 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.spaces_list']).$promise
           ]
+      .state 'app.admin.space_new',
+        url: '/spaces/new'
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/new.html" %>'
+            controller: 'NewSpaceController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.space_new', 'app.shared.space']).$promise
+          ]
       .state 'app.public.space_show',
         url: '/spaces/:id'
         views:
@@ -418,16 +428,6 @@ angular.module('application.router', ['ui.router']).
           ]
       .state 'app.logged.space_reserve',
         url: '/spaces/:id/reserve'
-      .state 'app.admin.space_new',
-        url: '/spaces/new'
-        views:
-          'main@':
-            templateUrl: '<%= asset_path "spaces/new.html" %>'
-            controller: 'NewSpaceController'
-        resolve:
-          translations: [ 'Translations', (Translations) ->
-            Translations.query(['app.admin.space_new', 'app.shared.space']).$promise
-          ]
 
       # trainings
       .state 'app.public.trainings_list',

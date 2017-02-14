@@ -116,7 +116,7 @@ Application.Controllers.controller 'NewSpaceController', ['$scope', '$state', 'C
   new SpacesController($scope, $state)
 ]
 
-Application.Controllers.controller 'ShowSpaceController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', ($scope, $state, spacePromise, _t, dialogs) ->
+Application.Controllers.controller 'ShowSpaceController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', 'growl', ($scope, $state, spacePromise, _t, dialogs, growl) ->
 
   ## Details of the space witch id/slug is provided in the URL
   $scope.space = spacePromise
@@ -147,8 +147,7 @@ Application.Controllers.controller 'ShowSpaceController', ['$scope', '$state', '
       , -> # deletion confirmed
         # delete the machine then redirect to the machines listing
         $scope.space.$delete ->
-          $state.go('app.public.machines_list')
+          $state.go('app.public.spaces_list')
         , (error)->
           growl.warning(_t('space_show.the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
-##
 ]
