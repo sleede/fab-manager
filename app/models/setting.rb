@@ -31,7 +31,8 @@ class Setting < ActiveRecord::Base
                              name_genre
                              reminder_enable
                              reminder_delay
-                             event_explications_alert )
+                             event_explications_alert
+                             space_explications_alert )
                     }
 
   after_update :update_stylesheet if :value_changed?
