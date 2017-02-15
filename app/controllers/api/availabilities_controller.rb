@@ -10,7 +10,7 @@ class API::AvailabilitiesController < API::ApiController
     authorize Availability
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
-    @availabilities = Availability.includes(:machines,:tags,:trainings).where.not(available_type: 'event')
+    @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces).where.not(available_type: 'event')
                                   .where('start_at >= ? AND end_at <= ?', start_date, end_date)
   end
 
@@ -161,7 +161,7 @@ class API::AvailabilitiesController < API::ApiController
     end
 
     def availability_params
-      params.require(:availability).permit(:start_at, :end_at, :available_type, :machine_ids, :training_ids, :nb_total_places, machine_ids: [], training_ids: [], tag_ids: [],
+      params.require(:availability).permit(:start_at, :end_at, :available_type, :machine_ids, :training_ids, :nb_total_places, machine_ids: [], training_ids: [], space_ids: [], tag_ids: [],
                                            :machines_attributes => [:id, :_destroy])
     end
 

@@ -64,8 +64,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     dialogs.confirm
       resolve:
         object: ->
-          title: _t('confirmation_required')
-          msg: _t("do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION"
+          title: _t('admin_calendar.confirmation_required')
+          msg: _t("admin_calendar.do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION"
           , { GENDER:getGender($scope.currentUser), USER:slot.user.name, DATE:moment(slot.start_at).format('L'), TIME:moment(slot.start_at).format('LT'), RESERVATION:slot.reservable.name }
           , 'messageformat')
     , ->
@@ -78,9 +78,9 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
             resa.canceled_at = data.canceled_at
             break
         # notify the admin
-        growl.success(_t('reservation_was_successfully_cancelled'))
+        growl.success(_t('admin_calendar.reservation_was_successfully_cancelled'))
       , (data, status) -> # failed
-        growl.error(_t('reservation_cancellation_failed'))
+        growl.error(_t('admin_calendar.reservation_cancellation_failed'))
 
 
 
@@ -91,16 +91,16 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   ##
   $scope.removeMachine = (machine) ->
     if $scope.availability.machine_ids.length == 1
-      growl.error(_t('unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather'))
+      growl.error(_t('admin_calendar.unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather'))
     else
       # open a confirmation dialog
       dialogs.confirm
         resolve:
           object: ->
-            title: _t('confirmation_required')
-            msg: _t('do_you_really_want_to_remove_MACHINE_from_this_slot', {GENDER:getGender($scope.currentUser), MACHINE:machine.name}, "messageformat") + ' ' +
-             _t('this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + ' ' +
-             _t('beware_this_cannot_be_reverted')
+            title: _t('admin_calendar.confirmation_required')
+            msg: _t('admin_calendar.do_you_really_want_to_remove_MACHINE_from_this_slot', {GENDER:getGender($scope.currentUser), MACHINE:machine.name}, "messageformat") + ' ' +
+             _t('admin_calendar.this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + ' ' +
+             _t('admin_calendar.beware_this_cannot_be_reverted')
       , ->
         # the admin has confirmed, remove the machine
         machines = $scope.availability.machine_ids
@@ -115,9 +115,9 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
           $scope.availability.title = data.title
           uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
           # notify the admin
-          growl.success(_t('the_machine_was_successfully_removed_from_the_slot'))
+          growl.success(_t('admin_calendar.the_machine_was_successfully_removed_from_the_slot'))
         , (data, status) -> # failed
-          growl.error(_t('deletion_failed'))
+          growl.error(_t('admin_calendar.deletion_failed'))
 
 
 
@@ -193,9 +193,9 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       Availability.delete id: event.id, ->
         uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents', event.id
 
-        growl.success(_t('the_slot_START-END_has_been_successfully_deleted', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+        growl.success(_t('admin_calendar.the_slot_START-END_has_been_successfully_deleted', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
       ,->
-        growl.error(_t('unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:+moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+        growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:+moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
     # if the user has only clicked on the event, display its reservations
     else
       Availability.reservations {id: event.id}, (reservations) ->
@@ -303,14 +303,16 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   # Callback for the modal window validation: save the slot and closes the modal
   ##
   $scope.ok = ->
-    if $scope.availability.available_type == "machines"
+    if $scope.availability.available_type == 'machines'
       if $scope.selectedMachines.length > 0
         $scope.availability.machine_ids = $scope.selectedMachines.map (m) -> m.id
       else
-        growl.error(_t('you_should_link_a_training_or_a_machine_to_this_slot'))
+        growl.error(_t('admin_calendar.you_should_select_at_least_a_machine'))
         return
-    else
+    else if $scope.availability.available_type == 'training'
       $scope.availability.training_ids = [$scope.selectedTraining.id]
+    else if $scope.availability.available_type == 'space'
+      $scope.availability.space_ids = [$scope.selectedSpace.id]
     Availability.save
       availability: $scope.availability
     , (availability) ->

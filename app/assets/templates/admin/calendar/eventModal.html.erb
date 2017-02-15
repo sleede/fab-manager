@@ -1,27 +1,27 @@
 <div class="modal-header">
   <h3 class="text-center red">
-      {{ 'calendar.DATE_slot' | translate:{DATE:(start | amDateFormat: 'LL')} }} {{start | amDateFormat:'LT'}} - {{end | amDateFormat:'LT'}}
+      {{ 'admin_calendar.DATE_slot' | translate:{DATE:(start | amDateFormat: 'LL')} }} {{start | amDateFormat:'LT'}} - {{end | amDateFormat:'LT'}}
   </h3>
 </div>
 <div class="modal-body" ng-show="step === 1">
-  <label class="m-t-sm" translate>{{ 'calendar.what_kind_of_slot_do_you_want_to_create' }}</label>
+  <label class="m-t-sm" translate>{{ 'admin_calendar.what_kind_of_slot_do_you_want_to_create' }}</label>
   <div class="form-group">
     <div class="radio">
       <label>
         <input type="radio" id="training" name="available_type" value="training" ng-model="availability.available_type">
-        <span translate>{{ 'calendar.training' }}</span>
+        <span translate>{{ 'admin_calendar.training' }}</span>
       </label>
     </div>
     <div class="radio">
       <label>
         <input type="radio" id="machine" name="available_type" value="machines" ng-model="availability.available_type">
-        <span translate>{{ 'calendar.machine' }}</span>
+        <span translate>{{ 'admin_calendar.machine' }}</span>
       </label>
     </div>
     <div class="radio">
       <label>
         <input type="radio" id="space" name="available_type" value="space" ng-model="availability.available_type">
-        <span translate>{{ 'calendar.space' }}</span>
+        <span translate>{{ 'admin_calendar.space' }}</span>
       </label>
     </div>
   </div>
@@ -29,7 +29,7 @@
 <div class="modal-body" ng-show="step === 2">
 
   <div ng-show="availability.available_type == 'machines'">
-    <p class="text-center font-sbold m-t-sm">{{ 'calendar.select_some_machines' | translate }}</p>
+    <p class="text-center font-sbold m-t-sm">{{ 'admin_calendar.select_some_machines' | translate }}</p>
 
     <div class="form-group m-l-xl">
       <label class="checkbox" ng-repeat="machine in machines">
@@ -43,7 +43,7 @@
     </select>
     <div class="row m-t">
       <div class="form-group">
-        <label class="col-sm-6 control-label" for="nb_places_training" translate>{{ 'calendar.number_of_tickets' }}</label>
+        <label class="col-sm-6 control-label" for="nb_places_training" translate>{{ 'admin_calendar.number_of_tickets' }}</label>
         <div class="col-sm-6">
           <input type="number" id="nb_places_training" class="form-control" ng-model="availability.nb_total_places">
         </div>
@@ -56,7 +56,7 @@
     </select>
     <div class="row m-t">
       <div class="form-group">
-        <label class="col-sm-6 control-label" for="nb_places_space" translate>{{ 'calendar.number_of_tickets' }}</label>
+        <label class="col-sm-6 control-label" for="nb_places_space" translate>{{ 'admin_calendar.number_of_tickets' }}</label>
         <div class="col-sm-6">
           <input type="number" id="nb_places_space" class="form-control" ng-model="availability.nb_total_places">
         </div>
@@ -66,19 +66,19 @@
 </div>
 <div class="modal-body" ng-show="step === 3">
   <div id="timeAdjust" class="m-t-sm">
-      <p class="text-center font-sbold" translate>{{ 'calendar.adjust_the_opening_hours' }}</p>
+      <p class="text-center font-sbold" translate>{{ 'admin_calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
           <div class="col-md-3 col-md-offset-2">
               <uib-timepicker ng-model="start" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
           </div>
-          <span class="col-md-1 m-t-xl m-l" translate>{{ 'calendar.to_time' }}</span>
+          <span class="col-md-1 m-t-xl m-l" translate>{{ 'admin_calendar.to_time' }}</span>
           <fieldset ng-disabled="endDateReadOnly" class="col-md-5">
               <uib-timepicker ng-model="end" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
           </fieldset>
       </div>
   </div>
   <div id="tagAssociate" class="m-t-lg">
-      <p class="text-center font-sbold" translate>{{ 'calendar.restrict_this_slot_with_labels_(optional)' }}</p>
+      <p class="text-center font-sbold" translate>{{ 'admin_calendar.restrict_this_slot_with_labels_(optional)' }}</p>
       <div class="row">
           <div class="col-sm-12">
               <ui-select multiple ng-model="availability.tag_ids" class="form-control">
@@ -94,12 +94,12 @@
   </div>
 </div>
 <div class="modal-footer" ng-show="step < 3">
-  <button class="btn btn-info" ng-click="previous()" ng-disabled="step === 1" translate>{{ 'calendar.previous' }}</button>
-  <button class="btn btn-info" ng-click="next()" translate>{{ 'calendar.next' }}</button>
+  <button class="btn btn-info" ng-click="previous()" ng-disabled="step === 1" translate>{{ 'admin_calendar.previous' }}</button>
+  <button class="btn btn-info" ng-click="next()" translate>{{ 'admin_calendar.next' }}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>
 <div class="modal-footer" ng-show="step === 3">
-  <button class="btn btn-info" ng-click="previous()" translate>{{ 'calendar.previous' }}</button>
+  <button class="btn btn-info" ng-click="previous()" translate>{{ 'admin_calendar.previous' }}</button>
   <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>
