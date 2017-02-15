@@ -85,7 +85,7 @@
                 </div>
                 <button name="button" class="btn btn-warning" ng-click="save(eventExplicationsAlert)" translate>{{ 'save' }}</button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" ng-hide="fablabWithoutSpaces">
                 <h4 translate>{{ 'settings.message_of_the_spaces_page' }}</h4>
                 <div ng-model="spaceExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]

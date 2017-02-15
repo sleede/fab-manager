@@ -392,6 +392,7 @@ angular.module('application.router', ['ui.router']).
       # spaces
       .state 'app.public.spaces_list',
         url: '/spaces'
+        abstract: Fablab.withoutSpaces
         views:
           'main@':
             templateUrl: '<%= asset_path "spaces/index.html" %>'
@@ -405,6 +406,7 @@ angular.module('application.router', ['ui.router']).
           ]
       .state 'app.admin.space_new',
         url: '/spaces/new'
+        abstract: Fablab.withoutSpaces
         views:
           'main@':
             templateUrl: '<%= asset_path "spaces/new.html" %>'
@@ -415,6 +417,7 @@ angular.module('application.router', ['ui.router']).
           ]
       .state 'app.public.space_show',
         url: '/spaces/:id'
+        abstract: Fablab.withoutSpaces
         views:
           'main@':
             templateUrl: '<%= asset_path "spaces/show.html" %>'
@@ -428,6 +431,7 @@ angular.module('application.router', ['ui.router']).
           ]
       .state 'app.admin.space_edit',
         url: '/spaces/:id/edit'
+        abstract: Fablab.withoutSpaces
         views:
           'main@':
             templateUrl: '<%= asset_path "spaces/edit.html" %>'

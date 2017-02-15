@@ -144,7 +144,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
   ##
   # Callback called when the active tab is changed.
   # recover the current tab and store its value in $scope.selectedIndex
-  # @param tab {Object} elasticsearch statistic structure
+  # @param tab {Object} elasticsearch statistic structure (from statistic_indices table)
   ##
   $scope.setActiveTab = (tab) ->
     $scope.selectedIndex = tab
@@ -157,6 +157,23 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     $scope.sorting.date = 'desc'
     buildCustomFiltersList()
     refreshStats()
+
+
+
+  ##
+  # Returns true if the provided tab must be hidden due to some global or local configuration
+  # @param tab {Object} elasticsearch statistic structure (from statistic_indices table)
+  ##
+  $scope.hiddenTab = (tab) ->
+    if tab.table
+      if tab.es_type_key == 'subscription' && $rootScope.fablabWithoutPlans
+        true
+      else if tab.es_type_key == 'space' && $rootScope.fablabWithoutSpaces
+        true
+      else
+        false
+    else
+      true
 
 
 

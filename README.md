@@ -3,7 +3,7 @@
 FabManager is the FabLab management solution. It is web-based, open-source and totally free.
 
 
-##### Table of Contents  
+##### Table of Contents
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
 3. [Setup a production environment](#setup-a-production-environment)
@@ -198,6 +198,12 @@ The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoic
     FABLAB_WITHOUT_PLANS
 
 If set to 'true', the subscription plans will be fully disabled and invisible in the application.
+It is not recommended to disable plans if at least one subscription was took on the platform.
+
+    FABLAB_WITHOUT_SPACES
+
+If set to 'false', enable the spaces management and reservation in the application.
+It is not recommended to disable spaces if at least one space reservation was made on the system.
 
     DEFAULT_MAIL_FROM
 
@@ -261,7 +267,7 @@ Please consider that allowing file archives (eg. application/zip) or binary exec
 
     MAX_IMAGE_SIZE
 
-Maximum size (in bytes) allowed for image uploaded on the platform. 
+Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
 
@@ -683,12 +689,12 @@ Developers may find information on how to implement their own authentication pro
 - When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
 
         Error:
-        ...                                                               
-        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."      
-        DETAIL:  Key (group_id)=(1) is not present in table "groups".                                                                                                   
-        : ...                                                                                                
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'                                                         
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'     
+        ...
+        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."
+        DETAIL:  Key (group_id)=(1) is not present in table "groups".
+        : ...
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.

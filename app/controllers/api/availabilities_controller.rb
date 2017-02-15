@@ -1,4 +1,6 @@
 class API::AvailabilitiesController < API::ApiController
+  include FablabConfiguration
+
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: [:show, :update, :destroy, :reservations]
   respond_to :json
@@ -12,6 +14,10 @@ class API::AvailabilitiesController < API::ApiController
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
     @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces).where.not(available_type: 'event')
                                   .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+
+    if fablab_spaces_deactivated?
+      @availabilities = @availabilities.where.not(available_type: 'space')
+    end
   end
 
   def public
