@@ -7,14 +7,15 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'calendar_management' }}</h1>
+        <h1 translate>{{ 'calendar.calendar_management' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper">
-       <span class="badge text-sm bg-formation m-t-sm" translate>{{ 'trainings' }}</span><br>
-       <span class="badge text-sm bg-machine" translate>{{ 'machines' }}</span>
+      <section class="heading-actions wrapper p-s">
+       <span class="badge text-sm bg-formation" translate>{{ 'calendar.trainings' }}</span><br>
+       <span class="badge text-sm bg-machine" translate>{{ 'calendar.machines' }}</span><br>
+        <span class="badge text-sm bg-space" translate>{{ 'calendar.spaces' }}</span>
       </section>
     </div>
 
@@ -31,7 +32,7 @@
   <div class="col-sm-12 col-md-12 col-lg-3">
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'ongoing_reservations' }}</h3>
+        <h3 translate>{{ 'calendar.ongoing_reservations' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
         <ul class="list-unstyled" ng-if="reservations.length > 0">
@@ -42,7 +43,7 @@
               <span class="btn btn-warning btn-xs" ng-click="cancelBooking(r)" ng-if="!r.canceled_at"><i class="fa fa-times red"></i></span>
           </li>
         </ul>
-        <div ng-if="reservations.length == 0" translate>{{ 'no_reservations' }}</div>
+        <div ng-if="reservations.length == 0" translate>{{ 'calendar.no_reservations' }}</div>
       </div>
     </div>
   </div>
@@ -50,7 +51,7 @@
   <div class="col-sm-12 col-md-12 col-lg-3" ng-if="availability.machine_ids.length > 0">
       <div class="widget panel b-a m m-t-lg">
           <div class="panel-heading b-b small">
-              <h3 translate>{{ 'machines' }}</h3>
+              <h3 translate>{{ 'calendar.machines' }}</h3>
           </div>
           <div class="widget-content no-bg auto wrapper">
               <ul class="list-unstyled">

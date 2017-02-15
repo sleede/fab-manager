@@ -150,6 +150,15 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
           resolve:
             start: -> start
             end: -> end
+            machinesPromise: ['Machine', (Machine)->
+              Machine.query().$promise
+            ]
+            trainingsPromise: ['Training', (Training)->
+              Training.query().$promise
+            ]
+            spacesPromise: ['Space', (Space)->
+              Space.query().$promise
+            ]
         # when the modal is closed, we send the slot to the server for saving
         modalInstance.result.then (availability) ->
           uiCalendarConfig.calendars.calendar.fullCalendar 'renderEvent',
@@ -227,7 +236,8 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 ##
 # Controller used in the slot creation modal window
 ##
-Application.Controllers.controller 'CreateEventModalController', ["$scope", "$uibModalInstance", "moment", "start", "end", "Machine", "Availability", "Training", 'Tag', 'growl', '_t', ($scope, $uibModalInstance, moment, start, end, Machine, Availability, Training, Tag, growl, _t) ->
+Application.Controllers.controller 'CreateEventModalController', ["$scope", "$uibModalInstance", "moment", "start", "end", "machinesPromise", "Availability", "trainingsPromise", "spacesPromise", 'Tag', 'growl', '_t'
+, ($scope, $uibModalInstance, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, Tag, growl, _t) ->
 
   ## $uibModal parameter
   $scope.start = start
@@ -236,13 +246,25 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.end = end
 
   ## machines list
-  $scope.machines = []
+  $scope.machines = machinesPromise
 
   ## trainings list
-  $scope.trainings = []
+  $scope.trainings = trainingsPromise
+
+  ## spaces list
+  $scope.spaces = spacesPromise
 
   ## machines associated with the created slot
   $scope.selectedMachines = []
+
+  ## training associated with the created slot
+  $scope.selectedTraining = null
+
+  ## space associated with the created slot
+  $scope.selectedSpace = null
+
+  ## UI step
+  $scope.step = 1
 
   ## the user is not able to edit the ending time of the availability, unless he set the type to 'training'
   $scope.endDateReadOnly = true
@@ -297,6 +319,23 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
 
 
   ##
+  # Move the modal UI to the next step
+  ##
+  $scope.next = ->
+    $scope.setNbTotalPlaces() if $scope.step == 1
+    $scope.step++
+
+
+
+  ##
+  # Move the modal UI to the next step
+  ##
+  $scope.previous = ->
+    $scope.step--
+
+
+
+  ##
   # Callback to cancel the slot creation
   ##
   $scope.cancel = ->
@@ -305,21 +344,13 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
 
 
   ##
-  # Switches the slot type : machine availability or training availability
-  ##
-  $scope.changeAvailableType = ->
-    if $scope.availability.available_type == "machines"
-      $scope.availability.available_type = "training"
-    else
-      $scope.availability.available_type = "machines"
-
-
-
-  ##
   # For training avaiabilities, set the maximum number of people allowed to register on this slot
   ##
   $scope.setNbTotalPlaces = ->
-    $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
+    if $scope.availability.available_type == 'training'
+      $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
+    else if $scope.availability.available_type == 'space'
+      $scope.availability.nb_total_places = $scope.selectedSpace.default_places
 
 
   ### PRIVATE SCOPE ###
@@ -328,18 +359,11 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   # Kind of constructor: these actions will be realized first when the controller is loaded
   ##
   initialize = ->
-    Machine.query().$promise.then (data)->
-      $scope.machines = data.map (d) ->
-        id: d.id
-        name: d.name
-    Training.query().$promise.then (data)->
-      $scope.trainings = data.map (d) ->
-        id: d.id
-        name: d.name
-        nb_total_places: d.nb_total_places
-      if $scope.trainings.length > 0
-        $scope.selectedTraining = $scope.trainings[0]
-        $scope.setNbTotalPlaces()
+    if $scope.trainings.length > 0
+      $scope.selectedTraining = $scope.trainings[0]
+    if $scope.spaces.length > 0
+      $scope.selectedSpace = $scope.spaces[0]
+
     Tag.query().$promise.then (data) ->
       $scope.tags = data
 

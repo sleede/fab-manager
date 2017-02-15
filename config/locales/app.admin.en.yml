@@ -13,28 +13,36 @@ en:
 
       calendar:
         # manage the trainings & machines slots
-        calendar_management: "Calendar management"
-        ongoing_reservations: "Ongoing reservations"
-        no_reservations: "No reservations"
-        do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"  # messageFormat interpolation
-        reservation_cancellation_failed: "Reservation cancellation failed."
-        unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Unable to remove the last machine of the slot. Delete the slot rather."
-        do_you_really_want_to_remove_MACHINE_from_this_slot: "Do you really want to remove \"{MACHINE}\" from this slot?"  # messageFormat interpolation
-        this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "This will prevent any new reservation on this slot but won't cancel those existing."
-        beware_this_cannot_be_reverted: "Beware: this cannot be reverted."
-        the_machine_was_successfully_removed_from_the_slot: "The machine was successfully removed from the slot."
-        deletion_failed: "Deletion failed."
-        DATE_slot: "{{DATE}} slot:"  # angular interpolation
-        you_can_define_a_training_on_that_slot: "You can define a training on that slot:"
-        link_a_training: "Link a training"
-        or_: "Or"
-        _select_some_machines: "select some machines"
-        number_of_tickets: "Number of tickets: "
-        adjust_the_opening_hours: "Adjust the opening hours"
-        restrict_this_slot_with_labels_(optional): "Restrict this slot with labels (optional)"
-        the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
-        unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
-        you_should_link_a_training_or_a_machine_to_this_slot: "You should link a training or a machine to this slot."
+        calendar:
+          calendar_management: "Calendar management"
+          trainings: "Trainings"
+          machines: "Machines"
+          spaces: "Spaces"
+          ongoing_reservations: "Ongoing reservations"
+          no_reservations: "No reservations"
+          do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"  # messageFormat interpolation
+          reservation_cancellation_failed: "Reservation cancellation failed."
+          unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Unable to remove the last machine of the slot. Delete the slot rather."
+          do_you_really_want_to_remove_MACHINE_from_this_slot: "Do you really want to remove \"{MACHINE}\" from this slot?"  # messageFormat interpolation
+          this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "This will prevent any new reservation on this slot but won't cancel those existing."
+          beware_this_cannot_be_reverted: "Beware: this cannot be reverted."
+          the_machine_was_successfully_removed_from_the_slot: "The machine was successfully removed from the slot."
+          deletion_failed: "Deletion failed."
+          DATE_slot: "{{DATE}} slot:"  # angular interpolation
+          what_kind_of_slot_do_you_want_to_create: "What kind of slot do you want to create?"
+          training: "Training"
+          machine: "Machine"
+          space: "Space"
+          next: "Next >"
+          previous: "< Previous"
+          select_some_machines: "Select some machines"
+          number_of_tickets: "Number of tickets: "
+          adjust_the_opening_hours: "Adjust the opening hours"
+          to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
+          restrict_this_slot_with_labels_(optional): "Restrict this slot with labels (optional)"
+          the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
+          unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
+          you_should_link_a_training_or_a_machine_to_this_slot: "You should link a training or a machine to this slot."
 
       project_elements:
         # management of the projects' components
