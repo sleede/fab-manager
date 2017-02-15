@@ -18,7 +18,7 @@
         <span translate>{{ 'admin_calendar.machine' }}</span>
       </label>
     </div>
-    <div class="radio">
+    <div class="radio" ng-hide="fablabWithoutSpaces">
       <label>
         <input type="radio" id="space" name="available_type" value="space" ng-model="availability.available_type">
         <span translate>{{ 'admin_calendar.space' }}</span>

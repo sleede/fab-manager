@@ -340,7 +340,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ##
   # Cancel the current booking modification, reseting the whole process
   ##
-  $scope.cancelModifyMachineSlot = ->
+  $scope.cancelModifyTrainingSlot = ->
     $scope.slotToPlace.backgroundColor = 'white'
     $scope.slotToPlace.title = $scope.slotToPlace.training.name
     $scope.slotToPlace = null
