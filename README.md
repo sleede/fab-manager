@@ -122,9 +122,12 @@ In you only intend to run fab-manager on your local machine for testing purposes
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+   **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions. 
 
    ```bash
-   rake db:setup
+   rake db:create
+   rake db:migrate
+   rake db:seed
    ```
 
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -325,7 +328,7 @@ Otherwise, please follow the official instructions on the project's website.
 <a name="setup-fabmanager-in-postgresql"></a>
 ### Setup the FabManager database in PostgreSQL
 
-Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
+Before running `rake db:create`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
 To create it, please follow these instructions:
 
 1. Run the PostgreSQL administration command line interface, logged as the postgres user
@@ -355,19 +358,13 @@ To create it, please follow these instructions:
    ALTER ROLE sleede WITH CREATEDB;
    ```
 
-4. Then, create the fabmanager_development and fabmanager_test databases
-
-   ```sql
-   CREATE DATABASE fabmanager_development OWNER sleede;
-   CREATE DATABASE fabmanager_test OWNER sleede;
-   ```
-
-5. To finish, attribute a password to this user
+4. Then, attribute a password to this user
 
    ```sql
    ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
    ```
-6. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
+
+5. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
 
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
