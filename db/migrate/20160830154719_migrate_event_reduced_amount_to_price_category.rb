@@ -29,21 +29,23 @@ class MigrateEventReducedAmountToPriceCategory < ActiveRecord::Migration
 
   def down
     pc = PriceCategory.find_by(name: I18n.t('price_category.reduced_fare'))
-    EventPriceCategory.where(price_category_id: pc.id).each do |epc|
-      epc.event.update_column(:reduced_amount, epc.amount)
+    unless pc.nil?
+      EventPriceCategory.where(price_category_id: pc.id).each do |epc|
+        epc.event.update_column(:reduced_amount, epc.amount)
 
-      Reservation.where(reservable_type: 'Event', reservable_id: epc.event.id).each do |r|
-        r.tickets.each do |t|
-          if t.event_price_category_id == epc.id
-            r.update_column(:nb_reserve_reduced_places, t.booked)
-            t.destroy!
-            break
+        Reservation.where(reservable_type: 'Event', reservable_id: epc.event.id).each do |r|
+          r.tickets.each do |t|
+            if t.event_price_category_id == epc.id
+              r.update_column(:nb_reserve_reduced_places, t.booked)
+              t.destroy!
+              break
+            end
           end
         end
+        epc.destroy!
       end
-      epc.destroy!
-    end
 
-    pc.destroy!
+      pc.destroy!
+    end
   end
 end
