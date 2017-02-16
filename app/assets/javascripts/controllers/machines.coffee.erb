@@ -322,6 +322,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.coupon =
       applied: null
 
+  $scope.selectionTime = null
+
+  $scope.selectedEvent = null
+
   ## is the user allowed to change the date of his booking
   $scope.enableBookingMove = true
 
@@ -593,6 +597,13 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         return true
     false
 
+  $scope.updateCalendar = ->
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
+
+  $scope.refetchCalendar = ->
+    $timeout ->
+      uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
   ### PRIVATE SCOPE ###
@@ -687,67 +698,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # if it's too late).
   ##
   calendarEventClickCb = (event, jsEvent, view) ->
-
-    if !event.is_reserved && !$scope.slotToModify
-      index = $scope.eventsReserved.indexOf(event)
-      if index == -1
-        event.backgroundColor = FREE_SLOT_BORDER_COLOR
-        event.title = _t('i_reserve')
-        $scope.eventsReserved.push event
-      else
-        $scope.removeMachineSlot(event)
-      $scope.paidMachineSlots = null
-      $scope.selectedPlan = null
-      $scope.modifiedSlots = null
-    else if !event.is_reserved && $scope.slotToModify
-      if $scope.slotToPlace
-        $scope.slotToPlace.backgroundColor = 'white'
-        $scope.slotToPlace.title = ''
-      $scope.slotToPlace = event
-      event.backgroundColor = '#bbb'
-      event.title = _t('i_shift')
-    else if event.is_reserved and (slotCanBeModified(event) or slotCanBeCanceled(event)) and !$scope.slotToModify and $scope.eventsReserved.length == 0
-      event.movable = slotCanBeModified(event)
-      event.cancelable = slotCanBeCanceled(event)
-      dialogs.confirm
-        templateUrl: '<%= asset_path "shared/confirm_modify_slot_modal.html" %>'
-        resolve:
-          object: -> event
-      , (type) ->
-        if type == 'move'
-          $scope.modifiedSlots = null
-          $scope.slotToModify = event
-          event.backgroundColor = '#eee'
-          event.title = _t('i_change')
-          uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-        else if type == 'cancel'
-          dialogs.confirm
-            resolve:
-              object: ->
-                title: _t('confirmation_required')
-                msg: _t('do_you_really_want_to_cancel_this_reservation')
-          , -> # cancel confirmed
-            Slot.cancel {id: event.id}, -> # successfully canceled
-              growl.success _t('reservation_was_cancelled_successfully')
-              $scope.canceledSlot = event
-              $scope.canceledSlot.backgroundColor = 'white'
-              $scope.canceledSlot.title = ''
-              $scope.canceledSlot.borderColor = FREE_SLOT_BORDER_COLOR
-              $scope.canceledSlot.id = null
-              $scope.canceledSlot.is_reserved = false
-              $scope.canceledSlot.can_modify = false
-              $scope.canceledSlot = null
-              uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-            , -> # error while canceling
-              growl.error _t('cancellation_failed')
-      , ->
-        $scope.paidMachineSlots = null
-        $scope.selectedPlan = null
-        $scope.modifiedSlots = null
-
-    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-
-    updateCartPrice()
+    $scope.selectedEvent = event
+    $scope.selectionTime = new Date()
 
 
 

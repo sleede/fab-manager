@@ -1,0 +1,231 @@
+### PRIVATE STATIC CONSTANTS ###
+
+# Slot already booked by the current user
+FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>'
+
+# Slot already booked by another user
+UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_USER %>'
+
+# Slot free to be booked
+BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
+
+
+Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Price', '_t', ($rootScope, dialogs, growl, Price, _t) ->
+  {
+    restrict: 'E'
+    scope:
+      slot: '='
+      selectionTime: '='
+      onUpdate: '='
+      onOutdated: '='
+      user: '='
+    templateUrl: '<%= asset_path "shared/_cart.html" %>'
+    link: ($scope, element, attributes) ->
+
+      ## fullCalendar event. An already booked slot that the user want to modify
+      $scope.slotToModify = null
+
+      ## array of fullCalendar events. Slots where the user want to book
+      $scope.eventsReserved = []
+
+      ## fullCalendar event. The last selected slot that the user want to book
+      $scope.slotToPlace = null
+
+      $scope.paidMachineSlots = null
+
+      ## will store the user's plan if he choosed to buy one
+      $scope.selectedPlan = null
+
+      $scope.modifiedSlots = null
+
+      $scope.canceledSlot = null
+
+      ## total amount of the bill to pay
+      $scope.amountTotal = 0
+
+      ## total amount of the elements in the cart, without considering any coupon
+      $scope.totalNoCoupon = 0
+
+      ## Discount coupon to apply to the basket, if any
+      $scope.coupon =
+        applied: null
+
+
+      # What the binded slot
+      $scope.$watch 'selectionTime', (newValue, oldValue) ->
+        if newValue != oldValue
+          slotSelectionChanged()
+
+      ##
+      # Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
+      # and increment the total amount of the cart if needed.
+      # @param machineSlot {Object} fullCalendar event object
+      ##
+      $scope.validMachineSlot = (machineSlot)->
+        machineSlot.isValid = true
+        updateCartPrice()
+
+
+
+      ##
+      # Remove the provided slot from the shopping cart (state transition from 'about to be reserved' to free)
+      # and decrement the total amount of the cart if needed.
+      # @param machineSlot {Object} fullCalendar event object
+      # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+      ##
+      $scope.removeMachineSlot = (machineSlot, e)->
+        e.preventDefault() if e
+        machineSlot.backgroundColor = 'white'
+        machineSlot.borderColor = FREE_SLOT_BORDER_COLOR
+        machineSlot.title = ''
+        machineSlot.isValid = false
+
+        if machineSlot.machine.is_reduced_amount
+          angular.forEach $scope.user.machine_credits, (credit)->
+            if credit.machine_id = machineSlot.machine.id
+              credit.hours_used--
+          machineSlot.machine.is_reduced_amount = false
+
+        index = $scope.eventsReserved.indexOf(machineSlot)
+        $scope.eventsReserved.splice(index, 1)
+        if $scope.eventsReserved.length == 0
+          if $scope.plansAreShown
+            $scope.selectedPlan = null
+          $scope.plansAreShown = false
+        updateCartPrice()
+        $scope.onOutdated() if typeof $scope.onOutdated == 'function'
+
+
+
+      ##
+      # Callback triggered when the selected slot changed
+      ##
+      slotSelectionChanged = ->
+        if !$scope.slot.is_reserved && !$scope.slotToModify
+          index = $scope.eventsReserved.indexOf($scope.slot)
+          if index == -1
+            $scope.slot.backgroundColor = FREE_SLOT_BORDER_COLOR
+            $scope.slot.title = _t('i_reserve')
+            $scope.eventsReserved.push $scope.slot
+          else
+            $scope.removeMachineSlot($scope.slot)
+          $scope.paidMachineSlots = null
+          $scope.selectedPlan = null
+          $scope.modifiedSlots = null
+        else if !$scope.slot.is_reserved && $scope.slotToModify
+          if $scope.slotToPlace
+            $scope.slotToPlace.backgroundColor = 'white'
+            $scope.slotToPlace.title = ''
+          $scope.slotToPlace = $scope.slot
+          $scope.slot.backgroundColor = '#bbb'
+          $scope.slot.title = _t('i_shift')
+        else if $scope.slot.is_reserved and (slotCanBeModified($scope.slot) or slotCanBeCanceled($scope.slot)) and !$scope.slotToModify and $scope.eventsReserved.length == 0
+          $scope.slot.movable = slotCanBeModified($scope.slot)
+          $scope.slot.cancelable = slotCanBeCanceled($scope.slot)
+          dialogs.confirm
+            templateUrl: '<%= asset_path "shared/confirm_modify_slot_modal.html" %>'
+            resolve:
+              object: -> $scope.slot
+          , (type) ->
+            if type == 'move'
+              $scope.modifiedSlots = null
+              $scope.slotToModify = $scope.slot
+              $scope.slot.backgroundColor = '#eee'
+              $scope.slot.title = _t('i_change')
+              $scope.onUpdate() if typeof $scope.onUpdate == 'function'
+            else if type == 'cancel'
+              dialogs.confirm
+                resolve:
+                  object: ->
+                    title: _t('confirmation_required')
+                    msg: _t('do_you_really_want_to_cancel_this_reservation')
+              , -> # cancel confirmed
+                Slot.cancel {id: $scope.slot.id}, -> # successfully canceled
+                  growl.success _t('reservation_was_cancelled_successfully')
+                  $scope.canceledSlot = $scope.slot
+                  $scope.canceledSlot.backgroundColor = 'white'
+                  $scope.canceledSlot.title = ''
+                  $scope.canceledSlot.borderColor = FREE_SLOT_BORDER_COLOR
+                  $scope.canceledSlot.id = null
+                  $scope.canceledSlot.is_reserved = false
+                  $scope.canceledSlot.can_modify = false
+                  $scope.canceledSlot = null
+                  $scope.onUpdate() if typeof $scope.onUpdate == 'function'
+                , -> # error while canceling
+                  growl.error _t('cancellation_failed')
+          , ->
+            $scope.paidMachineSlots = null
+            $scope.selectedPlan = null
+            $scope.modifiedSlots = null
+
+        $scope.onUpdate() if typeof $scope.onUpdate == 'function'
+
+        updateCartPrice()
+
+
+
+      ##
+      # Update the total price of the current selection/reservation
+      ##
+      updateCartPrice = ->
+        if Object.keys($scope.user).length > 0
+          r = mkReservation($scope.user, $scope.eventsReserved, $scope.selectedPlan)
+          Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
+            $scope.amountTotal = res.price
+            $scope.totalNoCoupon = res.price_without_coupon
+            setSlotsDetails(res.details)
+        else
+          # otherwise we alert, this error musn't occur when the current user is not admin
+          growl.warning(_t('please_select_a_member_first'))
+          $scope.amountTotal = null
+
+
+      setSlotsDetails = (details) ->
+        angular.forEach $scope.eventsReserved, (slot) ->
+          angular.forEach details.slots, (s) ->
+            if moment(s.start_at).isSame(slot.start)
+              slot.promo = s.promo
+              slot.price = s.price
+
+
+      ##
+      # Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+      # @param reservation {Object} as returned by mkReservation()
+      # @param coupon {Object} Coupon as returned from the API
+      # @return {{reservation:Object, coupon_code:string}}
+      ##
+      mkRequestParams = (reservation, coupon) ->
+        params =
+          reservation: reservation
+          coupon_code: (coupon.code if coupon)
+
+        params
+
+
+
+      ##
+      # Create an hash map implementing the Reservation specs
+      # @param member {Object} User as retreived from the API: current user / selected user if current is admin
+      # @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
+      # @param [plan] {Object} Plan as retrived from the API: plan to buy with the current reservation
+      # @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, plan_id:Number|null}}
+      ##
+      mkReservation = (member, slots, plan = null) ->
+        reservation =
+          user_id: member.id
+          reservable_id: (slots[0].machine.id if slots.length > 0)
+          reservable_type: 'Machine'
+          slots_attributes: []
+          plan_id: (plan.id if plan)
+        angular.forEach slots, (slot, key) ->
+          reservation.slots_attributes.push
+            start_at: slot.start
+            end_at: slot.end
+            availability_id: slot.availability_id
+            offered: slot.offered || false
+
+        reservation
+  }
+]
+
+
