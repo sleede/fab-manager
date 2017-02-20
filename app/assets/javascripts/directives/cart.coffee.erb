@@ -10,26 +10,26 @@ UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_
 BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
 
 
-Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Auth', 'Price', '_t', ($rootScope, dialogs, growl, Auth, Price, _t) ->
+Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'helpers', '_t'
+, ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, helpers, _t) ->
   {
     restrict: 'E'
     scope:
       slot: '='
       slotSelectionTime: '='
+      eventsReserved: '='
       onUpdate: '='
       onOutdated: '='
       user: '='
       modePlans: '='
       plan: '='
       planSelectionTime: '='
+      afterPayment: '='
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
 
       ## fullCalendar event. An already booked slot that the user want to modify
       $scope.slotToModify = null
-
-      ## array of fullCalendar events. Slots where the user want to book
-      $scope.eventsReserved = []
 
       ## fullCalendar event. The last selected slot that the user want to book
       $scope.slotToPlace = null
@@ -113,6 +113,25 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Au
       ##
       $scope.showPlans = ->
         $scope.modePlans = true
+
+      ##
+      # Validates the shopping chart and redirect the user to the payment step
+      ##
+      $scope.payMachine = ->
+        # first, we check that a user was selected
+        if Object.keys($scope.user).length > 0
+          reservation = mkReservation($scope.user, $scope.eventsReserved, $scope.selectedPlan)
+
+          Wallet.getWalletByUser {user_id: $scope.user.id}, (wallet) ->
+            amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
+            if $rootScope.currentUser.role isnt 'admin' and amountToPay > 0
+              payByStripe(reservation)
+            else
+              if $rootScope.currentUser.role is 'admin' or amountToPay is 0
+                payOnSite(reservation)
+        else
+          # otherwise we alert, this error musn't occur when the current user is not admin
+          growl.error(_t('please_select_a_member_first'))
 
 
 
@@ -205,7 +224,23 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Au
         updateCartPrice()
 
 
+
       ##
+      # Determines if the provided booked slot is able to be modified by the user.
+      # @param slot {Object} fullCalendar event object
+      ##
+      slotCanBeModified = (slot)->
+        return true if $rootScope.currentUser.role is 'admin'
+        slotStart = moment(slot.start)
+        now = moment()
+        if slot.can_modify and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay #FIXME
+          return true
+        else
+          return false
+
+
+
+        ##
       # Callback triggered when the selected slot changed
       ##
       planSelectionChanged = ->
@@ -285,7 +320,138 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Au
 
 
 
-      ## !!! MUST BE CALLED AT THE END of the directive
+      ##
+      # Open a modal window that allows the user to process a credit card payment for his current shopping cart.
+      ##
+      payByStripe = (reservation) ->
+        $uibModal.open
+          templateUrl: '<%= asset_path "stripe/payment_modal.html" %>'
+          size: 'md'
+          resolve:
+            reservation: ->
+              reservation
+            price: ->
+              Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+            wallet: ->
+              Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+            cgv: ->
+              CustomAsset.get({name: 'cgv-file'}).$promise
+            coupon: ->
+              $scope.coupon.applied
+          controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+            ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon) ->
+              # user wallet amount
+              $scope.walletAmount = wallet.amount
+
+              # Price
+              $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
+
+              # CGV
+              $scope.cgv = cgv.custom_asset
+
+              # Reservation
+              $scope.reservation = reservation
+
+              # Used in wallet info template to interpolate some translations
+              $scope.numberFilter = $filter('number')
+
+              ##
+              # Callback to process the payment with Stripe, triggered on button click
+              ##
+              $scope.payment = (status, response) ->
+                if response.error
+                  growl.error(response.error.message)
+                else
+                  $scope.attempting = true
+                  $scope.reservation.card_token = response.id
+                  Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
+                    $uibModalInstance.close(reservation)
+                  , (response)->
+                    $scope.alerts = []
+                    if response.status == 500
+                      $scope.alerts.push
+                        msg: response.statusText
+                        type: 'danger'
+                    else
+                      if response.data.card and response.data.card.join('').length > 0
+                        $scope.alerts.push
+                          msg: response.data.card.join('. ')
+                          type: 'danger'
+                      else if response.data.payment and response.data.payment.join('').length > 0
+                        $scope.alerts.push
+                          msg: response.data.payment.join('. ')
+                          type: 'danger'
+                    $scope.attempting = false
+          ]
+        .result['finally'](null).then (reservation)->
+          $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
+
+
+
+      ##
+      # Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
+      ##
+      payOnSite = (reservation) ->
+        $uibModal.open
+          templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>'
+          size: 'sm'
+          resolve:
+            reservation: ->
+              reservation
+            price: ->
+              Price.compute(mkRequestParams(reservation, $scope.coupon.applied)).$promise
+            wallet: ->
+              Wallet.getWalletByUser({user_id: reservation.user_id}).$promise
+            coupon: ->
+              $scope.coupon.applied
+          controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
+            ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) ->
+
+              # user wallet amount
+              $scope.walletAmount = wallet.amount
+
+              # Global price (total of all items)
+              $scope.price = price.price
+
+              # Price to pay (wallet deducted)
+              $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
+
+              # Reservation
+              $scope.reservation = reservation
+
+              # Used in wallet info template to interpolate some translations
+              $scope.numberFilter = $filter('number')
+
+              # Button label
+              if $scope.amount > 0
+                $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$rootScope.currentUser.role, AMOUNT:$filter('currency')($scope.amount)}, "messageformat")
+              else
+                if price.price > 0 and $scope.walletAmount == 0
+                  $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$rootScope.currentUser.role, AMOUNT:$filter('currency')(price.price)}, "messageformat")
+                else
+                  $scope.validButtonName = _t('confirm')
+
+              ##
+              # Callback to process the local payment, triggered on button click
+              ##
+              $scope.ok = ->
+                $scope.attempting = true
+                Reservation.save mkRequestParams($scope.reservation, coupon), (reservation) ->
+                  $uibModalInstance.close(reservation)
+                  $scope.attempting = true
+                , (response)->
+                  $scope.alerts = []
+                  $scope.alerts.push({msg: _t('a_problem_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
+                  $scope.attempting = false
+              $scope.cancel = ->
+                $uibModalInstance.dismiss('cancel')
+          ]
+        .result['finally'](null).then (reservation)->
+          $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
+
+
+
+        ## !!! MUST BE CALLED AT THE END of the directive
       initialize()
   }
 ]

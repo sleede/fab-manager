@@ -36,10 +36,10 @@
       <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeMachineSlot(machineSlot, $event)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
     </div>
 
-    <coupon show="machineSlotsValid() && (!plansAreShown || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+    <coupon show="machineSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
     <span ng-hide="fablabWithoutPlans">
-      <div ng-if="machineSlotsValid() && !user.subscribed_plan" ng-show="!plansAreShown">
+      <div ng-if="machineSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
         <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices' }}</p>
         <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'view_our_subscriptions' }}</button></div>
         <p class="font-bold text-base text-u-c text-center m-b-xs" translate>{{ 'or' }}</p>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="panel-footer no-padder" ng-if="eventsReserved.length > 0">
-    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payMachine()" ng-if="machineSlotsValid() && (!plansAreShown || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
+    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payMachine()" ng-if="machineSlotsValid() && (!modePlans || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="paidMachineSlots">
