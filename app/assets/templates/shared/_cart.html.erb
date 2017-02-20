@@ -39,22 +39,22 @@
     <coupon show="machineSlotsValid() && (!plansAreShown || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
     <span ng-hide="fablabWithoutPlans">
-          <div ng-if="machineSlotsValid() && !user.subscribed_plan" ng-show="!plansAreShown">
-            <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices' }}</p>
-            <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'view_our_subscriptions' }}</button></div>
-            <p class="font-bold text-base text-u-c text-center m-b-xs" translate>{{ 'or' }}</p>
-          </div>
+      <div ng-if="machineSlotsValid() && !user.subscribed_plan" ng-show="!plansAreShown">
+        <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices' }}</p>
+        <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'view_our_subscriptions' }}</button></div>
+        <p class="font-bold text-base text-u-c text-center m-b-xs" translate>{{ 'or' }}</p>
+      </div>
 
-          <div ng-if="selectedPlan">
-            <div class="m-t-md m-b-sm text-base">{{ 'you_ve_just_selected_a_' | translate }} <br> <span class="font-sbold" translate>{{ '_subscription' }}</span> :</div>
-            <div class="panel panel-default bg-light m-n">
-              <div class="panel-body m-b-md">
-                <div class="font-sbold text-u-c">{{selectedPlan | humanReadablePlanName }}</div>
-                <div class="text-base">{{ 'cost_of_the_subscription' | translate }} <span class="text-blue">{{selectedPlan.amount | currency}}</span></div>
-              </div>
-            </div>
+      <div ng-if="selectedPlan">
+        <div class="m-t-md m-b-sm text-base">{{ 'you_ve_just_selected_a_' | translate }} <br> <span class="font-sbold" translate>{{ '_subscription' }}</span> :</div>
+        <div class="panel panel-default bg-light m-n">
+          <div class="panel-body m-b-md">
+            <div class="font-sbold text-u-c">{{selectedPlan | humanReadablePlanName }}</div>
+            <div class="text-base">{{ 'cost_of_the_subscription' | translate }} <span class="text-blue">{{selectedPlan.amount | currency}}</span></div>
           </div>
-        </span>
+        </div>
+      </div>
+    </span>
 
   </div>
 

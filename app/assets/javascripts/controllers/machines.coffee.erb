@@ -309,6 +309,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## will store the user's plan if he choosed to buy one
   $scope.selectedPlan = null
 
+  $scope.planSelectionTime = null
+
   ## array of fullCalendar events. Slots where the user want to book
   $scope.eventsReserved = []
 
@@ -568,22 +570,12 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # @param plan {Object} the plan to subscribe
   ##
   $scope.selectPlan = (plan) ->
-    if $scope.isAuthenticated()
-      angular.forEach $scope.eventsReserved, (machineSlot)->
-        angular.forEach $scope.ctrl.member.machine_credits, (credit)->
-          if credit.machine_id = machineSlot.machine.id
-            credit.hours_used = 0
-        machineSlot.machine.is_reduced_amount = false
-
-      if $scope.selectedPlan != plan
-        $scope.selectedPlan = plan
-      else
-        $scope.selectedPlan = null
-      updateCartPrice()
+    $scope.planSelectionTime = new Date()
+    # toggle selected plan
+    if $scope.selectedPlan != plan
+      $scope.selectedPlan = plan
     else
-      $scope.login null, ->
-        $scope.selectedPlan = plan
-        updateCartPrice()
+      $scope.selectedPlan = null
 
 
 

@@ -10,15 +10,18 @@ UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_
 BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
 
 
-Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Price', '_t', ($rootScope, dialogs, growl, Price, _t) ->
+Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Auth', 'Price', '_t', ($rootScope, dialogs, growl, Auth, Price, _t) ->
   {
     restrict: 'E'
     scope:
       slot: '='
-      selectionTime: '='
+      slotSelectionTime: '='
       onUpdate: '='
       onOutdated: '='
       user: '='
+      modePlans: '='
+      plan: '='
+      planSelectionTime: '='
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
 
@@ -51,10 +54,6 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Pr
         applied: null
 
 
-      # What the binded slot
-      $scope.$watch 'selectionTime', (newValue, oldValue) ->
-        if newValue != oldValue
-          slotSelectionChanged()
 
       ##
       # Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
@@ -94,6 +93,49 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Pr
           $scope.plansAreShown = false
         updateCartPrice()
         $scope.onOutdated() if typeof $scope.onOutdated == 'function'
+
+
+
+      ##
+      # Checks that every selected slots were added to the shopping cart. Ie. will return false if
+      # any checked slot was not validated by the user.
+      ##
+      $scope.machineSlotsValid = ->
+        isValid = true
+        angular.forEach $scope.eventsReserved, (m)->
+          isValid = false if !m.isValid
+        isValid
+
+
+
+      ##
+      # Switch the user's view from the reservation agenda to the plan subscription
+      ##
+      $scope.showPlans = ->
+        $scope.modePlans = true
+
+
+
+      ### PRIVATE SCOPE ###
+
+      ##
+      # Kind of constructor: these actions will be realized first when the directive is loaded
+      ##
+      initialize = ->
+        # What the binded slot
+        $scope.$watch 'slotSelectionTime', (newValue, oldValue) ->
+          if newValue != oldValue
+            slotSelectionChanged()
+        $scope.$watch 'user', (newValue, oldValue) ->
+          if newValue != oldValue
+            slotSelectionChanged()
+        $scope.$watch 'planSelectionTime', (newValue, oldValue) ->
+          if newValue != oldValue
+            planSelectionChanged()
+        # watch when a coupon is applied to re-compute the total price
+        $scope.$watch 'coupon.applied', (newValue, oldValue) ->
+          unless newValue == null and oldValue == null
+            updateCartPrice()
 
 
 
@@ -163,6 +205,21 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Pr
         updateCartPrice()
 
 
+      ##
+      # Callback triggered when the selected slot changed
+      ##
+      planSelectionChanged = ->
+        if Auth.isAuthenticated()
+          if $scope.selectedPlan != $scope.plan
+            $scope.selectedPlan = $scope.plan
+          else
+            $scope.selectedPlan = null
+          updateCartPrice()
+        else
+          $rootScope.login null, ->
+            $scope.selectedPlan = $scope.plan
+            updateCartPrice()
+
 
       ##
       # Update the total price of the current selection/reservation
@@ -225,6 +282,11 @@ Application.Directives.directive 'cart', [ '$rootScope', 'dialogs', 'growl', 'Pr
             offered: slot.offered || false
 
         reservation
+
+
+
+      ## !!! MUST BE CALLED AT THE END of the directive
+      initialize()
   }
 ]
 

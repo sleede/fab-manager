@@ -41,10 +41,13 @@
 
 
     <cart slot="selectedEvent"
-          selection-time="selectionTime"
+          slot-selection-time="selectionTime"
           on-update="updateCalendar"
           on-outdated="refetchCalendar"
-          user="ctrl.member"></cart>
+          user="ctrl.member"
+          mode-plans="plansAreShown"
+          plan="selectedPlan"
+          plan-selection-time="planSelectionTime"></cart>
 
     <uib-alert type="warning m">
       <p class="text-sm">
