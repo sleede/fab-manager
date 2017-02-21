@@ -172,6 +172,20 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.events.modifiable = null
         uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
+
+
+      ##
+      # Checks if $scope.events.modifiable and $scope.events.placable have tag incompatibilities
+      # @returns {boolean} true in case of incompatibility
+      ##
+      $scope.tagMissmatch = ->
+        for tag in $scope.events.modifiable.tags
+          if tag.id not in $scope.events.placable.tag_ids
+            return true
+        false
+
+
+
       ### PRIVATE SCOPE ###
 
       ##
