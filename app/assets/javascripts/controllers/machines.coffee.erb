@@ -379,14 +379,14 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.selectedEvent.title = _t('i_reserve')
     updateCalendar()
 
-  $scope.markSlotAsRemoved = ->
-    $scope.selectedEvent.backgroundColor = 'white'
-    $scope.selectedEvent.borderColor = FREE_SLOT_BORDER_COLOR
-    $scope.selectedEvent.title = ''
-    $scope.selectedEvent.isValid = false
-    $scope.selectedEvent.id = null
-    $scope.selectedEvent.is_reserved = false
-    $scope.selectedEvent.can_modify = false
+  $scope.markSlotAsRemoved = (slot) ->
+    slot.backgroundColor = 'white'
+    slot.borderColor = FREE_SLOT_BORDER_COLOR
+    slot.title = ''
+    slot.isValid = false
+    slot.id = null
+    slot.is_reserved = false
+    slot.can_modify = false
     refetchCalendar()
 
   $scope.markSlotAsModifying = ->

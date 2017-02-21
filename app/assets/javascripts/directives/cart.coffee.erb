@@ -52,10 +52,10 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       # Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
       # and increment the total amount of the cart if needed.
-      # @param machineSlot {Object} fullCalendar event object
+      # @param slot {Object} fullCalendar event object
       ##
-      $scope.validMachineSlot = (machineSlot)->
-        machineSlot.isValid = true
+      $scope.validateSlot = (slot)->
+        slot.isValid = true
         updateCartPrice()
 
 
@@ -70,10 +70,11 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.events.reserved.splice(index, 1)
         # if is was the last slot, we remove any plan from the cart
         if $scope.events.reserved.length == 0
-            $scope.selectedPlan = null
-            $scope.plansAreShown = false
+          $scope.selectedPlan = null
+          $scope.plan = null
+          $scope.modePlans = false
+        $scope.onSlotRemovedFromCart(machineSlot) if typeof $scope.onSlotRemovedFromCart == 'function'
         updateCartPrice()
-        $scope.onSlotRemovedFromCart() if typeof $scope.onSlotRemovedFromCart == 'function'
 
 
 
