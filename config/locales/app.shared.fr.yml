@@ -404,3 +404,12 @@ fr:
           add_an_attachment: "Ajouter une pièce jointe"
           default_places: "Maximum de places par défaut"
           default_places_is_required: "Le nombre de places maximum par défaut est requis."
+
+      cart:
+        # module de panier d'achat de réservations
+        cart:
+          summary: "Résumé"
+          select_one_or_more_slots_in_the_calendar: "Sélectionnez un ou plusieurs créneaux dans le calendrier"
+          you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
+          datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+          cost_of_a_machine_hour: "Coût de l'heure machine"
