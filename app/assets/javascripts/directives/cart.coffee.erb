@@ -22,6 +22,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       afterPayment: '='
       reservableId: '@'
       reservableType: '@'
+      reservableName: '@'
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
       ## will store the user's plan if he choosed to buy one

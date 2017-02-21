@@ -63,7 +63,7 @@
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.paid && events.paid.length > 0">
-    {{ 'you_have_settled_the_following_machine_hours' | translate }} <strong>{{machine.name}}</strong>:
+    {{ 'you_have_settled_the_following_machine_hours' | translate }} <strong>{{reservableName}}</strong>:
 
     <div class="well well-warning m-t-sm" ng-repeat="paidSlot in events.paid">
       <i class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(paidSlot.start | amDateFormat:'LLLL'), END_TIME:(paidSlot.end | amDateFormat:'LT') } }}</i>
