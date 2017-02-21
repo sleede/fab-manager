@@ -33,13 +33,13 @@
         <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(machineSlot)" ng-if="!machineSlot.isValid" translate>{{ 'confirm_this_slot' }}</button>
       </div>
 
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeMachineSlot(machineSlot, $index, $event)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(machineSlot, $index, $event)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
     </div>
 
-    <coupon show="machineSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+    <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
 
     <span ng-hide="fablabWithoutPlans">
-      <div ng-if="machineSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
+      <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
         <p class="font-sbold text-base l-h-2x" translate>{{ 'to_benefit_from_attractive_prices' }}</p>
         <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'view_our_subscriptions' }}</button></div>
         <p class="font-bold text-base text-u-c text-center m-b-xs" translate>{{ 'or' }}</p>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="panel-footer no-padder" ng-if="events.reserved.length > 0">
-    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payMachine()" ng-if="machineSlotsValid() && (!modePlans || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
+    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="paidMachineSlots">
@@ -99,7 +99,7 @@
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(events.modifiable.start | amDateFormat:'LLLL'), END_TIME:(events.modifiable.end | amDateFormat:'LT') } }}</div>
       </div>
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="cancelModifyMachineSlot($event)" translate>{{ 'cancel_my_modification' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="cancelModifySlot($event)" translate>{{ 'cancel_my_modification' }}</a></div>
     </div>
 
     <div class="widget-content no-bg">
@@ -134,9 +134,9 @@
 
 
   <div class="panel-footer no-padder" ng-if="events.modifiable && events.placable">
-    <button class="btn btn-invalid btn-default btn-block p-l btn-lg text-u-c r-n text-base" ng-click="cancelModifyMachineSlot()" translate>{{ 'cancel' }}</button>
+    <button class="btn btn-invalid btn-default btn-block p-l btn-lg text-u-c r-n text-base" ng-click="cancelModifySlot()" translate>{{ 'cancel' }}</button>
     <div>
-      <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="modifyMachineSlot()" translate>{{ 'confirm_my_modification' }}</button>
+      <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="modifySlot()" translate>{{ 'confirm_my_modification' }}</button>
     </div>
   </div>
 

@@ -6,6 +6,11 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       slot: '='
       slotSelectionTime: '='
       events: '='
+      user: '='
+      modePlans: '='
+      plan: '='
+      planSelectionTime: '='
+      settings: '='
       onSlotAddedToCart: '='
       onSlotRemovedFromCart: '='
       onSlotStartToModify: '='
@@ -14,12 +19,9 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       onSlotModifyCancel: '='
       onSlotModifyUnselect: '='
       onSlotCancelSuccess: '='
-      user: '='
-      modePlans: '='
-      plan: '='
-      planSelectionTime: '='
       afterPayment: '='
-      settings: '='
+      reservableId: '@'
+      reservableType: '@'
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
       ## will store the user's plan if he choosed to buy one
@@ -63,11 +65,11 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       # Remove the provided slot from the shopping cart (state transition from 'about to be reserved' to free)
       # and decrement the total amount of the cart if needed.
-      # @param machineSlot {Object} fullCalendar event object
+      # @param slot {Object} fullCalendar event object
       # @param index {number} index of the slot in the reservation array
       # @param [event] {Object} see https://docs.angularjs.org/guide/expression#-event-
       ##
-      $scope.removeMachineSlot = (machineSlot, index, event)->
+      $scope.removeSlot = (slot, index, event)->
         event.preventDefault() if event
         $scope.events.reserved.splice(index, 1)
         # if is was the last slot, we remove any plan from the cart
@@ -75,7 +77,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
           $scope.selectedPlan = null
           $scope.plan = null
           $scope.modePlans = false
-        $scope.onSlotRemovedFromCart(machineSlot) if typeof $scope.onSlotRemovedFromCart == 'function'
+        $scope.onSlotRemovedFromCart(slot) if typeof $scope.onSlotRemovedFromCart == 'function'
         updateCartPrice()
 
 
@@ -84,7 +86,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # Checks that every selected slots were added to the shopping cart. Ie. will return false if
       # any checked slot was not validated by the user.
       ##
-      $scope.machineSlotsValid = ->
+      $scope.isSlotsValid = ->
         isValid = true
         angular.forEach $scope.events.reserved, (m)->
           isValid = false if !m.isValid
@@ -101,7 +103,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       # Validates the shopping chart and redirect the user to the payment step
       ##
-      $scope.payMachine = ->
+      $scope.payCart = ->
         # first, we check that a user was selected
         if Object.keys($scope.user).length > 0
           reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan)
@@ -121,7 +123,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       # When modifying an already booked reservation, confirm the modification.
       ##
-      $scope.modifyMachineSlot = ->
+      $scope.modifySlot = ->
         Slot.update {id: $scope.events.modifiable.id},
           slot:
             start_at: $scope.events.placable.start
@@ -138,7 +140,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       # Cancel the current booking modification, reseting the whole process
       ##
-      $scope.cancelModifyMachineSlot = ->
+      $scope.cancelModifySlot = ->
         $scope.onSlotModifyCancel() if typeof $scope.onSlotModifyCancel == 'function'
         $scope.events.placable = null
         $scope.events.modifiable = null
@@ -207,7 +209,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
               $scope.onSlotAddedToCart() if typeof $scope.onSlotAddedToCart == 'function'
             else
               # slot is in the cart, remove it
-              $scope.removeMachineSlot($scope.slot, index)
+              $scope.removeSlot($scope.slot, index)
             # finally, we update the prices
             updateCartPrice()
           else if !$scope.slot.is_reserved && $scope.events.modifiable
@@ -222,7 +224,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
           else if $scope.slot.is_reserved and $scope.events.modifiable and $scope.slot.is_reserved._id == $scope.events.modifiable._id
             # slot is reserved and currently modified
             # -> we cancel the modification
-            $scope.cancelModifyMachineSlot()
+            $scope.cancelModifySlot()
           else if $scope.slot.is_reserved and (slotCanBeModified($scope.slot) or slotCanBeCanceled($scope.slot)) and !$scope.events.modifiable and $scope.events.reserved.length == 0
             # slot is reserved and is ok to be modified or cancelled
             # but we are not currently running a modification or having any slots in the cart
@@ -349,8 +351,8 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       mkReservation = (member, slots, plan = null) ->
         reservation =
           user_id: member.id
-          reservable_id: (slots[0].machine.id if slots.length > 0)
-          reservable_type: 'Machine'
+          reservable_id: $scope.reservableId
+          reservable_type: $scope.reservableType
           slots_attributes: []
           plan_id: (plan.id if plan)
         angular.forEach slots, (slot, key) ->

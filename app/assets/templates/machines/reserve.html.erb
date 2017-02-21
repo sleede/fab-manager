@@ -55,7 +55,9 @@
           on-slot-modify-cancel="cancelModifyMachineSlot"
           on-slot-modify-unselect="changeModifyMachineSlot"
           on-slot-cancel-success="markSlotAsRemoved"
-          after-payment="afterPayment"></cart>
+          after-payment="afterPayment"
+          reservable-id="{{machine.id}}"
+          reservable-type="Machine"></cart>
 
     <uib-alert type="warning m">
       <p class="text-sm">
