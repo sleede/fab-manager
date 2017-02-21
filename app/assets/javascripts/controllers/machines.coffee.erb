@@ -375,11 +375,19 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
 
+  ##
+  # Change the last selected slot's appearence to looks like 'added to cart'
+  ##
   $scope.markSlotAsAdded = ->
     $scope.selectedEvent.backgroundColor = FREE_SLOT_BORDER_COLOR
     $scope.selectedEvent.title = _t('i_reserve')
     updateCalendar()
 
+
+
+  ##
+  # Change the last selected slot's appearence to looks like 'never added to cart'
+  ##
   $scope.markSlotAsRemoved = (slot) ->
     slot.backgroundColor = 'white'
     slot.borderColor = FREE_SLOT_BORDER_COLOR
@@ -390,11 +398,21 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     slot.can_modify = false
     updateCalendar()
 
+
+
+  ##
+  # Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
+  ##
   $scope.markSlotAsModifying = ->
     $scope.selectedEvent.backgroundColor = '#eee'
     $scope.selectedEvent.title = _t('i_change')
     updateCalendar()
 
+
+
+  ##
+  # Change the last selected slot's appearence to looks like 'the slot being exchanged will take this place'
+  ##
   $scope.changeModifyMachineSlot = ->
     if $scope.events.placable
       $scope.events.placable.backgroundColor = 'white'
@@ -405,7 +423,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     updateCalendar()
 
 
-    ##
+  ##
   # When modifying an already booked reservation, callback when the modification was successfully done.
   ##
   $scope.modifyMachineSlot = ->
@@ -489,18 +507,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       $scope.selectedPlan = plan
     else
       $scope.selectedPlan = null
-
-
-
-  ##
-  # Checks if $scope.events.modifiable and $scope.events.placable have tag incompatibilities
-  # @returns {boolean} true in case of incompatibility
-  ##
-  $scope.tagMissmatch = ->
-    for tag in $scope.events.modifiable.tags
-      if tag.id not in $scope.events.placable.tag_ids
-        return true
-    false
 
 
 
@@ -595,11 +601,18 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         slot.user = user
 
 
+
+  ##
+  # Update the calendar's display to render the new attributes of the events
+  ##
   updateCalendar = ->
     uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
+  ##
+  # Asynchronously fetch the events from the API and refresh the calendar's view with these new events
+  ##
   refetchCalendar = ->
     $timeout ->
       uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
