@@ -3,7 +3,7 @@
     <h3 translate>{{ 'summary' }}</h3>
   </div>
 
-  <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!paidMachineSlots || paidMachineSlots.length == 0)">
+  <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
     <p class="font-felt fleche-left text-lg"><%= image_tag("fleche-left.png", class: 'fleche-left visible-lg') %>
       {{ 'select_one_or_more_slots_in_the_calendar' | translate }}</p>
   </div>
@@ -12,28 +12,28 @@
 
     <div class="font-sbold m-b-sm " translate>{{ 'you_ve_just_selected_the_slot' }}</div>
 
-    <div class="panel panel-default bg-light" ng-repeat="machineSlot in events.reserved">
+    <div class="panel panel-default bg-light" ng-repeat="slot in events.reserved">
       <div class="panel-body">
-        <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(machineSlot.start | amDateFormat:'LLLL'), END_TIME:(machineSlot.end | amDateFormat:'LT') } }}</div>
-        <div class="text-base">{{ 'cost_of_a_machine_hour' | translate }} <span ng-class="{'text-blue': !machineSlot.promo, 'red': machineSlot.promo}">{{machineSlot.price | currency}}</span></div>
+        <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(slot.start | amDateFormat:'LLLL'), END_TIME:(slot.end | amDateFormat:'LT') } }}</div>
+        <div class="text-base">{{ 'cost_of_a_machine_hour' | translate }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
         <div ng-show="currentUser.role == 'admin'" class="m-t">
           <label for="offerSlot" class="control-label m-r" translate>{{ 'offer_this_slot' }}</label>
           <input bs-switch
-                 ng-model="machineSlot.offered"
+                 ng-model="slot.offered"
                  id="offerSlot"
                  type="checkbox"
                  class="form-control"
                  switch-on-text="{{ 'yes' | translate}}"
                  switch-off-text="{{ 'no' | translate}}"
                  switch-animate="true"
-                 switch-readonly="{{machineSlot.isValid}}"/>
+                 switch-readonly="{{slot.isValid}}"/>
         </div>
       </div>
       <div>
-        <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(machineSlot)" ng-if="!machineSlot.isValid" translate>{{ 'confirm_this_slot' }}</button>
+        <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'confirm_this_slot' }}</button>
       </div>
 
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(machineSlot, $index, $event)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
     </div>
 
     <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
@@ -62,12 +62,12 @@
     <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
-  <div class="widget-content no-bg auto wrapper" ng-if="paidMachineSlots">
+  <div class="widget-content no-bg auto wrapper" ng-show="events.paid && events.paid.length > 0">
     {{ 'you_have_settled_the_following_machine_hours' | translate }} <strong>{{machine.name}}</strong>:
 
-    <div class="well well-warning m-t-sm" ng-repeat="paidSlot in paidMachineSlots">
+    <div class="well well-warning m-t-sm" ng-repeat="paidSlot in events.paid">
       <i class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(paidSlot.start | amDateFormat:'LLLL'), END_TIME:(paidSlot.end | amDateFormat:'LT') } }}</i>
-      <div class="font-sbold">{{ 'cost_of_a_machine_hour' | translate }} {{paidSlot.machine.amount() | currency}}</div>
+      <div class="font-sbold">{{ 'cost_of_a_machine_hour' | translate }} {{paidSlot.price | currency}}</div>
     </div>
 
     <div ng-if="selectedPlan">

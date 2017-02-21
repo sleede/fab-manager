@@ -210,6 +210,11 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             else
               # slot is in the cart, remove it
               $scope.removeSlot($scope.slot, index)
+            # in every cases, because a new reservation has started
+            # we reset the array of settled events, the selected plan and the coupon
+            $scope.events.paid = []
+            $scope.selectedPlan = null
+            $scope.coupon.applied = null
             # finally, we update the prices
             updateCartPrice()
           else if !$scope.slot.is_reserved && $scope.events.modifiable
@@ -430,6 +435,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                     $scope.attempting = false
           ]
         .result['finally'](null).then (reservation)->
+          $scope.events.paid = $scope.events.reserved
           $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
 
 
@@ -493,6 +499,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                 $uibModalInstance.dismiss('cancel')
           ]
         .result['finally'](null).then (reservation)->
+          $scope.events.paid = $scope.events.reserved
           $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
 
 
