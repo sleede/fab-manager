@@ -65,8 +65,10 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # and decrement the total amount of the cart if needed.
       # @param machineSlot {Object} fullCalendar event object
       # @param index {number} index of the slot in the reservation array
+      # @param [event] {Object} see https://docs.angularjs.org/guide/expression#-event-
       ##
-      $scope.removeMachineSlot = (machineSlot, index)->
+      $scope.removeMachineSlot = (machineSlot, index, event)->
+        event.preventDefault() if event
         $scope.events.reserved.splice(index, 1)
         # if is was the last slot, we remove any plan from the cart
         if $scope.events.reserved.length == 0

@@ -93,7 +93,7 @@ _reserveMachine = (machine, e) ->
     # if the currently logged'in user has completed the training for this machine, or this machine does not require
     # a prior training, just redirect him to the machine's booking page
     if machine.current_user_is_training or machine.trainings.length == 0
-      _this.$state.go('app.logged.machines_reserve', {id: machine.id})
+      _this.$state.go('app.logged.machines_reserve', {id: machine.slug})
     else
       # otherwise, if a user is authenticated ...
       if _this.$scope.isAuthenticated()
@@ -387,7 +387,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     slot.id = null
     slot.is_reserved = false
     slot.can_modify = false
-    refetchCalendar()
+    updateCalendar()
 
   $scope.markSlotAsModifying = ->
     $scope.selectedEvent.backgroundColor = '#eee'

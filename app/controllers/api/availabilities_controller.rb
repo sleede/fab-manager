@@ -96,7 +96,7 @@ class API::AvailabilitiesController < API::ApiController
       @user = current_user
     end
     @current_user_role = current_user.is_admin? ? 'admin' : 'user'
-    @machine = Machine.find(params[:machine_id])
+    @machine = Machine.friendly.find(params[:machine_id])
     @slots = []
     @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id).includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at > ?', Time.now)
     if @user.is_admin?

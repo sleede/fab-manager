@@ -33,7 +33,7 @@
         <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(machineSlot)" ng-if="!machineSlot.isValid" translate>{{ 'confirm_this_slot' }}</button>
       </div>
 
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeMachineSlot(machineSlot, $index)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeMachineSlot(machineSlot, $index, $event)" ng-if="machineSlot.isValid" translate>{{ 'remove_this_slot' }}</a></div>
     </div>
 
     <coupon show="machineSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
