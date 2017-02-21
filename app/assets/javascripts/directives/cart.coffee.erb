@@ -1,15 +1,3 @@
-### PRIVATE STATIC CONSTANTS ###
-
-# Slot already booked by the current user
-FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>'
-
-# Slot already booked by another user
-UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_USER %>'
-
-# Slot free to be booked
-BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
-
-
 Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'helpers', '_t'
 , ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, helpers, _t) ->
   {
@@ -34,9 +22,6 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       settings: '='
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
-
-      $scope.paidMachineSlots = null
-
       ## will store the user's plan if he choosed to buy one
       $scope.selectedPlan = null
 

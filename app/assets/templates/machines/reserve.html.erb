@@ -43,6 +43,11 @@
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"
           events="events"
+          user="ctrl.member"
+          mode-plans="plansAreShown"
+          plan="selectedPlan"
+          plan-selection-time="planSelectionTime"
+          settings="settings"
           on-slot-added-to-cart="markSlotAsAdded"
           on-slot-removed-from-cart="markSlotAsRemoved"
           on-slot-start-to-modify="markSlotAsModifying"
@@ -50,12 +55,7 @@
           on-slot-modify-cancel="cancelModifyMachineSlot"
           on-slot-modify-unselect="changeModifyMachineSlot"
           on-slot-cancel-success="markSlotAsRemoved"
-          user="ctrl.member"
-          mode-plans="plansAreShown"
-          plan="selectedPlan"
-          plan-selection-time="planSelectionTime"
-          after-payment="afterPayment"
-          settings="settings"></cart>
+          after-payment="afterPayment"></cart>
 
     <uib-alert type="warning m">
       <p class="text-sm">

@@ -281,13 +281,13 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
   ### PRIVATE STATIC CONSTANTS ###
 
-  # Slot already booked by the current user
+  # Slot free to be booked
   FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_COLOR %>'
 
   # Slot already booked by another user
   UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_USER %>'
 
-  # Slot free to be booked
+  # Slot already booked by the current user
   BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
 
 
@@ -509,7 +509,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # @param reservation {Object}
   ##
   $scope.afterPayment = (reservation)->
-    angular.forEach $scope.eventsReserved, (machineSlot, key) ->
+    angular.forEach $scope.events.reserved, (machineSlot, key) ->
       machineSlot.is_reserved = true
       machineSlot.can_modify = true
       if $scope.currentUser.role isnt 'admin'
@@ -521,9 +521,9 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR
         updateMachineSlot(machineSlot, reservation, $scope.ctrl.member)
       machineSlot.backgroundColor = 'white'
-    $scope.paidMachineSlots = $scope.eventsReserved
+    $scope.paidMachineSlots = $scope.events.reserved
 
-    $scope.eventsReserved = []
+    $scope.events.reserved = []
     $scope.coupon.applied = null
 
     if $scope.selectedPlan
