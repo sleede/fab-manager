@@ -10,38 +10,35 @@ UNAVAILABLE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::MACHINE_IS_RESERVED_BY_
 BOOKED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
 
 
-Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'helpers', '_t'
-, ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, helpers, _t) ->
+Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'helpers', '_t'
+, ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, helpers, _t) ->
   {
     restrict: 'E'
     scope:
       slot: '='
       slotSelectionTime: '='
-      eventsReserved: '='
-      onUpdate: '='
-      onOutdated: '='
+      events: '='
+      onSlotAddedToCart: '='
+      onSlotRemovedFromCart: '='
+      onSlotStartToModify: '='
+      onSlotModifyDestination: '='
+      onSlotModifySuccess: '='
+      onSlotModifyCancel: '='
+      onSlotModifyUnselect: '='
+      onSlotCancelSuccess: '='
       user: '='
       modePlans: '='
       plan: '='
       planSelectionTime: '='
       afterPayment: '='
+      settings: '='
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
-
-      ## fullCalendar event. An already booked slot that the user want to modify
-      $scope.slotToModify = null
-
-      ## fullCalendar event. The last selected slot that the user want to book
-      $scope.slotToPlace = null
 
       $scope.paidMachineSlots = null
 
       ## will store the user's plan if he choosed to buy one
       $scope.selectedPlan = null
-
-      $scope.modifiedSlots = null
-
-      $scope.canceledSlot = null
 
       ## total amount of the bill to pay
       $scope.amountTotal = 0
@@ -52,6 +49,18 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ## Discount coupon to apply to the basket, if any
       $scope.coupon =
         applied: null
+
+      ## Global config: is the user authorized to change his bookings slots?
+      $scope.enableBookingMove = ($scope.settings.booking_move_enable == "true")
+
+      ## Global config: delay in hours before a booking while changing the booking slot is forbidden
+      $scope.moveBookingDelay = parseInt($scope.settings.booking_move_delay)
+
+      ## Global config: is the user authorized to cancel his bookings?
+      $scope.enableBookingCancel = ($scope.settings.booking_cancel_enable == "true")
+
+      ## Global config: delay in hours before a booking while the cancellation is forbidden
+      $scope.cancelBookingDelay = parseInt($scope.settings.booking_cancel_delay)
 
 
 
@@ -70,29 +79,16 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # Remove the provided slot from the shopping cart (state transition from 'about to be reserved' to free)
       # and decrement the total amount of the cart if needed.
       # @param machineSlot {Object} fullCalendar event object
-      # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+      # @param index {number} index of the slot in the reservation array
       ##
-      $scope.removeMachineSlot = (machineSlot, e)->
-        e.preventDefault() if e
-        machineSlot.backgroundColor = 'white'
-        machineSlot.borderColor = FREE_SLOT_BORDER_COLOR
-        machineSlot.title = ''
-        machineSlot.isValid = false
-
-        if machineSlot.machine.is_reduced_amount
-          angular.forEach $scope.user.machine_credits, (credit)->
-            if credit.machine_id = machineSlot.machine.id
-              credit.hours_used--
-          machineSlot.machine.is_reduced_amount = false
-
-        index = $scope.eventsReserved.indexOf(machineSlot)
-        $scope.eventsReserved.splice(index, 1)
-        if $scope.eventsReserved.length == 0
-          if $scope.plansAreShown
+      $scope.removeMachineSlot = (machineSlot, index)->
+        $scope.events.reserved.splice(index, 1)
+        # if is was the last slot, we remove any plan from the cart
+        if $scope.events.reserved.length == 0
             $scope.selectedPlan = null
-          $scope.plansAreShown = false
+            $scope.plansAreShown = false
         updateCartPrice()
-        $scope.onOutdated() if typeof $scope.onOutdated == 'function'
+        $scope.onSlotRemovedFromCart() if typeof $scope.onSlotRemovedFromCart == 'function'
 
 
 
@@ -102,7 +98,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       $scope.machineSlotsValid = ->
         isValid = true
-        angular.forEach $scope.eventsReserved, (m)->
+        angular.forEach $scope.events.reserved, (m)->
           isValid = false if !m.isValid
         isValid
 
@@ -120,7 +116,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       $scope.payMachine = ->
         # first, we check that a user was selected
         if Object.keys($scope.user).length > 0
-          reservation = mkReservation($scope.user, $scope.eventsReserved, $scope.selectedPlan)
+          reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan)
 
           Wallet.getWalletByUser {user_id: $scope.user.id}, (wallet) ->
             amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
@@ -134,6 +130,56 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
           growl.error(_t('please_select_a_member_first'))
 
 
+      ##
+      # When modifying an already booked reservation, confirm the modification.
+      ##
+      $scope.modifyMachineSlot = ->
+        Slot.update {id: $scope.events.modifiable.id},
+          slot:
+            start_at: $scope.events.placable.start
+            end_at: $scope.events.placable.end
+            availability_id: $scope.events.placable.availability_id
+        , -> # success
+          $scope.onSlotModifySuccess() if typeof $scope.onSlotModifySuccess == 'function'
+        , (err) ->  # failure
+          growl.error(_t('unable_to_change_the_reservation'))
+          console.error(err)
+
+
+
+      ##
+      # Cancel the current booking modification, reseting the whole process
+      ##
+      $scope.cancelModifyMachineSlot = ->
+        $scope.onSlotModifyCancel() if typeof $scope.onSlotModifyCancel == 'function'
+        $scope.events.placable = null
+        $scope.events.modifiable = null
+
+
+
+      ##
+      # When modifying an already booked reservation, cancel the choice of the new slot
+      # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+      ##
+      $scope.removeSlotToPlace = (e)->
+        e.preventDefault()
+        $scope.onSlotModifyUnselect() if typeof $scope.onSlotModifyUnselect == 'function'
+        $scope.events.placable = null
+
+      ##
+      # Cancel the current booking modification, removing the previously booked slot from the selection
+      # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+      ##
+      $scope.removeSlotToModify = (e) ->
+        e.preventDefault()
+        if $scope.events.placable
+          $scope.events.placable.backgroundColor = 'white'
+          $scope.events.placable.title = ''
+          $scope.events.placable = null
+        $scope.events.modifiable.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
+        $scope.events.modifiable.backgroundColor = 'white'
+        $scope.events.modifiable = null
+        uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
       ### PRIVATE SCOPE ###
 
@@ -162,66 +208,61 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # Callback triggered when the selected slot changed
       ##
       slotSelectionChanged = ->
-        if !$scope.slot.is_reserved && !$scope.slotToModify
-          index = $scope.eventsReserved.indexOf($scope.slot)
-          if index == -1
-            $scope.slot.backgroundColor = FREE_SLOT_BORDER_COLOR
-            $scope.slot.title = _t('i_reserve')
-            $scope.eventsReserved.push $scope.slot
-          else
-            $scope.removeMachineSlot($scope.slot)
-          $scope.paidMachineSlots = null
-          $scope.selectedPlan = null
-          $scope.modifiedSlots = null
-        else if !$scope.slot.is_reserved && $scope.slotToModify
-          if $scope.slotToPlace
-            $scope.slotToPlace.backgroundColor = 'white'
-            $scope.slotToPlace.title = ''
-          $scope.slotToPlace = $scope.slot
-          $scope.slot.backgroundColor = '#bbb'
-          $scope.slot.title = _t('i_shift')
-        else if $scope.slot.is_reserved and (slotCanBeModified($scope.slot) or slotCanBeCanceled($scope.slot)) and !$scope.slotToModify and $scope.eventsReserved.length == 0
-          $scope.slot.movable = slotCanBeModified($scope.slot)
-          $scope.slot.cancelable = slotCanBeCanceled($scope.slot)
-          dialogs.confirm
-            templateUrl: '<%= asset_path "shared/confirm_modify_slot_modal.html" %>'
-            resolve:
-              object: -> $scope.slot
-          , (type) ->
-            if type == 'move'
-              $scope.modifiedSlots = null
-              $scope.slotToModify = $scope.slot
-              $scope.slot.backgroundColor = '#eee'
-              $scope.slot.title = _t('i_change')
-              $scope.onUpdate() if typeof $scope.onUpdate == 'function'
-            else if type == 'cancel'
-              dialogs.confirm
-                resolve:
-                  object: ->
-                    title: _t('confirmation_required')
-                    msg: _t('do_you_really_want_to_cancel_this_reservation')
-              , -> # cancel confirmed
-                Slot.cancel {id: $scope.slot.id}, -> # successfully canceled
-                  growl.success _t('reservation_was_cancelled_successfully')
-                  $scope.canceledSlot = $scope.slot
-                  $scope.canceledSlot.backgroundColor = 'white'
-                  $scope.canceledSlot.title = ''
-                  $scope.canceledSlot.borderColor = FREE_SLOT_BORDER_COLOR
-                  $scope.canceledSlot.id = null
-                  $scope.canceledSlot.is_reserved = false
-                  $scope.canceledSlot.can_modify = false
-                  $scope.canceledSlot = null
-                  $scope.onUpdate() if typeof $scope.onUpdate == 'function'
-                , -> # error while canceling
-                  growl.error _t('cancellation_failed')
-          , ->
-            $scope.paidMachineSlots = null
-            $scope.selectedPlan = null
-            $scope.modifiedSlots = null
-
-        $scope.onUpdate() if typeof $scope.onUpdate == 'function'
-
-        updateCartPrice()
+        if $scope.slot
+          if !$scope.slot.is_reserved && !$scope.events.modifiable
+            # slot is not reserved and we are not currently modifying a slot
+            # -> can be added to cart or removed if already present
+            index = $scope.events.reserved.indexOf($scope.slot)
+            if index == -1
+              # slot is not in the cart, so we add it
+              $scope.events.reserved.push $scope.slot
+              $scope.onSlotAddedToCart() if typeof $scope.onSlotAddedToCart == 'function'
+            else
+              # slot is in the cart, remove it
+              $scope.removeMachineSlot($scope.slot, index)
+            # finally, we update the prices
+            updateCartPrice()
+          else if !$scope.slot.is_reserved && $scope.events.modifiable
+            # slot is not reserved but we are currently modifying a slot
+            # -> we request the calender to change the rendering
+            $scope.onSlotModifyUnselect() if typeof $scope.onSlotModifyUnselect == 'function'
+            # -> then, we re-affect the destination slot
+            if !$scope.events.placable or $scope.events.placable._id != $scope.slot._id
+              $scope.events.placable = $scope.slot
+            else
+              $scope.events.placable = null
+          else if $scope.slot.is_reserved and $scope.events.modifiable and $scope.slot.is_reserved._id == $scope.events.modifiable._id
+            # slot is reserved and currently modified
+            # -> we cancel the modification
+            $scope.cancelModifyMachineSlot()
+          else if $scope.slot.is_reserved and (slotCanBeModified($scope.slot) or slotCanBeCanceled($scope.slot)) and !$scope.events.modifiable and $scope.events.reserved.length == 0
+            # slot is reserved and is ok to be modified or cancelled
+            # but we are not currently running a modification or having any slots in the cart
+            # -> first the affect the modification/cancellation rights attributes to the current slot
+            $scope.slot.movable = slotCanBeModified($scope.slot)
+            $scope.slot.cancelable = slotCanBeCanceled($scope.slot)
+            # -> then, we open a dialog to ask to the user to choose an action
+            dialogs.confirm
+              templateUrl: '<%= asset_path "shared/confirm_modify_slot_modal.html" %>'
+              resolve:
+                object: -> $scope.slot
+            , (type) ->
+              # the user has choosen an action, so we proceed
+              if type == 'move'
+                $scope.onSlotStartToModify() if typeof $scope.onSlotStartToModify == 'function'
+                $scope.events.modifiable = $scope.slot
+              else if type == 'cancel'
+                dialogs.confirm
+                  resolve:
+                    object: ->
+                      title: _t('confirmation_required')
+                      msg: _t('do_you_really_want_to_cancel_this_reservation')
+                , -> # cancel confirmed
+                  Slot.cancel {id: $scope.slot.id}, -> # successfully canceled
+                    growl.success _t('reservation_was_cancelled_successfully')
+                    $scope.onSlotCancelSuccess() if typeof $scope.onSlotCancelSuccess == 'function'
+                  , -> # error while canceling
+                    growl.error _t('cancellation_failed')
 
 
 
@@ -233,14 +274,29 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
         return true if $rootScope.currentUser.role is 'admin'
         slotStart = moment(slot.start)
         now = moment()
-        if slot.can_modify and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay #FIXME
+        if slot.can_modify and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay
           return true
         else
           return false
 
 
 
-        ##
+      ##
+      # Determines if the provided booked slot is able to be canceled by the user.
+      # @param slot {Object} fullCalendar event object
+      ##
+      slotCanBeCanceled = (slot) ->
+        return true if $rootScope.currentUser.role is 'admin'
+        slotStart = moment(slot.start)
+        now = moment()
+        if slot.can_modify and $scope.enableBookingCancel and slotStart.diff(now, "hours") >= $scope.cancelBookingDelay
+          return true
+        else
+          return false
+
+
+
+      ##
       # Callback triggered when the selected slot changed
       ##
       planSelectionChanged = ->
@@ -261,7 +317,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       updateCartPrice = ->
         if Object.keys($scope.user).length > 0
-          r = mkReservation($scope.user, $scope.eventsReserved, $scope.selectedPlan)
+          r = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan)
           Price.compute mkRequestParams(r, $scope.coupon.applied), (res) ->
             $scope.amountTotal = res.price
             $scope.totalNoCoupon = res.price_without_coupon
@@ -273,7 +329,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
 
       setSlotsDetails = (details) ->
-        angular.forEach $scope.eventsReserved, (slot) ->
+        angular.forEach $scope.events.reserved, (slot) ->
           angular.forEach details.slots, (s) ->
             if moment(s.start_at).isSame(slot.start)
               slot.promo = s.promo

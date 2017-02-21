@@ -297,12 +297,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## bind the machine availabilities with full-Calendar events
   $scope.eventSources = []
 
-  ## fullCalendar event. The last selected slot that the user want to book
-  $scope.slotToPlace = null
-
-  ## fullCalendar event. An already booked slot that the user want to modify
-  $scope.slotToModify = null
-
   ## indicates the state of the current view : calendar or plans information
   $scope.plansAreShown = false
 
@@ -312,7 +306,10 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.planSelectionTime = null
 
   ## array of fullCalendar events. Slots where the user want to book
-  $scope.eventsReserved = []
+  $scope.events =
+    reserved: []
+    modifiable: null
+    placable: null
 
   ## total amount of the bill to pay
   $scope.amountTotal = 0
@@ -327,6 +324,8 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.selectionTime = null
 
   $scope.selectedEvent = null
+
+  $scope.settings = settingsPromise
 
   ## is the user allowed to change the date of his booking
   $scope.enableBookingMove = true
@@ -375,69 +374,60 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
 
-  ##
-  # Cancel the current booking modification, removing the previously booked slot from the selection
-  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-  ##
-  $scope.removeSlotToModify = (e) ->
-    e.preventDefault()
-    if $scope.slotToPlace
-      $scope.slotToPlace.backgroundColor = 'white'
-      $scope.slotToPlace.title = ''
-      $scope.slotToPlace = null
-    $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
-    $scope.slotToModify.backgroundColor = 'white'
-    $scope.slotToModify = null
-    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
+  $scope.markSlotAsAdded = ->
+    $scope.selectedEvent.backgroundColor = FREE_SLOT_BORDER_COLOR
+    $scope.selectedEvent.title = _t('i_reserve')
+    updateCalendar()
+
+  $scope.markSlotAsRemoved = ->
+    $scope.selectedEvent.backgroundColor = 'white'
+    $scope.selectedEvent.borderColor = FREE_SLOT_BORDER_COLOR
+    $scope.selectedEvent.title = ''
+    $scope.selectedEvent.isValid = false
+    $scope.selectedEvent.id = null
+    $scope.selectedEvent.is_reserved = false
+    $scope.selectedEvent.can_modify = false
+    refetchCalendar()
+
+  $scope.markSlotAsModifying = ->
+    $scope.selectedEvent.backgroundColor = '#eee'
+    $scope.selectedEvent.title = _t('i_change')
+    updateCalendar()
+
+  $scope.changeModifyMachineSlot = ->
+    if $scope.events.placable
+      $scope.events.placable.backgroundColor = 'white'
+      $scope.events.placable.title = ''
+    if !$scope.events.placable or $scope.events.placable._id != $scope.selectedEvent._id
+      $scope.selectedEvent.backgroundColor = '#bbb'
+      $scope.selectedEvent.title = _t('i_shift')
+    updateCalendar()
 
 
-
-  ##
-  # When modifying an already booked reservation, cancel the choice of the new slot
-  # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-  ##
-  $scope.removeSlotToPlace = (e)->
-    e.preventDefault()
-    $scope.slotToPlace.backgroundColor = 'white'
-    $scope.slotToPlace.title = ''
-    $scope.slotToPlace = null
-    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-
-
-
-  ##
-  # When modifying an already booked reservation, confirm the modification.
+    ##
+  # When modifying an already booked reservation, callback when the modification was successfully done.
   ##
   $scope.modifyMachineSlot = ->
-    Slot.update {id: $scope.slotToModify.id},
-      slot:
-        start_at: $scope.slotToPlace.start
-        end_at: $scope.slotToPlace.end
-        availability_id: $scope.slotToPlace.availability_id
-    , -> # success
-      $scope.modifiedSlots =
-        newReservedSlot: $scope.slotToPlace
-        oldReservedSlot: $scope.slotToModify
-      $scope.slotToPlace.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
-      $scope.slotToPlace.backgroundColor = 'white'
-      $scope.slotToPlace.borderColor = $scope.slotToModify.borderColor
-      $scope.slotToPlace.id = $scope.slotToModify.id
-      $scope.slotToPlace.is_reserved = true
-      $scope.slotToPlace.can_modify = true
-      $scope.slotToPlace = null
+    $scope.modifiedSlots =
+      newReservedSlot: $scope.events.placable
+      oldReservedSlot: $scope.events.modifiable
+    $scope.events.placable.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
+    $scope.events.placable.backgroundColor = 'white'
+    $scope.events.placable.borderColor = $scope.events.modifiable.borderColor
+    $scope.events.placable.id = $scope.events.modifiable.id
+    $scope.events.placable.is_reserved = true
+    $scope.events.placable.can_modify = true
+    $scope.events.placable = null
 
-      $scope.slotToModify.backgroundColor = 'white'
-      $scope.slotToModify.title = ''
-      $scope.slotToModify.borderColor = FREE_SLOT_BORDER_COLOR
-      $scope.slotToModify.id = null
-      $scope.slotToModify.is_reserved = false
-      $scope.slotToModify.can_modify = false
-      $scope.slotToModify = null
+    $scope.events.modifiable.backgroundColor = 'white'
+    $scope.events.modifiable.title = ''
+    $scope.events.modifiable.borderColor = FREE_SLOT_BORDER_COLOR
+    $scope.events.modifiable.id = null
+    $scope.events.modifiable.is_reserved = false
+    $scope.events.modifiable.can_modify = false
+    $scope.events.modifiable = null
 
-      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-    , (err) ->  # failure
-      growl.error(_t('unable_to_change_the_reservation'))
-      console.error(err)
+    updateCalendar()
 
 
 
@@ -445,14 +435,13 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # Cancel the current booking modification, reseting the whole process
   ##
   $scope.cancelModifyMachineSlot = ->
-    $scope.slotToPlace.backgroundColor = 'white'
-    $scope.slotToPlace.title = ''
-    $scope.slotToPlace = null
-    $scope.slotToModify.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
-    $scope.slotToModify.backgroundColor = 'white'
-    $scope.slotToModify = null
+    if $scope.events.placable
+      $scope.events.placable.backgroundColor = 'white'
+      $scope.events.placable.title = ''
+    $scope.events.modifiable.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
+    $scope.events.modifiable.backgroundColor = 'white'
 
-    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
+    updateCalendar()
 
 
 
@@ -503,26 +492,14 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
   ##
-  # Checks if $scope.slotToModify and $scope.slotToPlace have tag incompatibilities
+  # Checks if $scope.events.modifiable and $scope.events.placable have tag incompatibilities
   # @returns {boolean} true in case of incompatibility
   ##
   $scope.tagMissmatch = ->
-    for tag in $scope.slotToModify.tags
-      if tag.id not in $scope.slotToPlace.tag_ids
+    for tag in $scope.events.modifiable.tags
+      if tag.id not in $scope.events.placable.tag_ids
         return true
     false
-
-
-
-  $scope.updateCalendar = ->
-    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-
-
-
-  $scope.refetchCalendar = ->
-    $timeout ->
-      uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
-      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
 
@@ -554,8 +531,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
       $scope.plansAreShown = false
 
-    uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
-    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
+    refetchCalendar()
 
 
 
@@ -617,6 +593,16 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         slot.id = s.id
         slot.user = user
 
+
+  updateCalendar = ->
+    uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
+
+
+
+  refetchCalendar = ->
+    $timeout ->
+      uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+      uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
 
 
   ## !!! MUST BE CALLED AT THE END of the controller

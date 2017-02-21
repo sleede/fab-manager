@@ -29,7 +29,7 @@
       <select-member></select-member>
     </div>
 
-    <div class="widget panel b-a m m-t-lg" ng-show="!ctrl.member && currentUser.role == 'admin' && eventsReserved.length == 0 && (!paidMachineSlots || paidMachineSlots.length == 0) && !slotToModify && !modifiedSlots">
+    <div class="widget panel b-a m m-t-lg" ng-show="!ctrl.member && currentUser.role == 'admin' && eventsReserved.length == 0 && (!paidMachineSlots || paidMachineSlots.length == 0) && !events.modifiable && !modifiedSlots">
       <div class="panel-heading b-b small">
         <h3 translate>{{ 'summary' }}</h3>
       </div>
@@ -42,14 +42,20 @@
 
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"
-          events-reserved="eventsReserved"
-          on-update="updateCalendar"
-          on-outdated="refetchCalendar"
+          events="events"
+          on-slot-added-to-cart="markSlotAsAdded"
+          on-slot-removed-from-cart="markSlotAsRemoved"
+          on-slot-start-to-modify="markSlotAsModifying"
+          on-slot-modify-success="modifyMachineSlot"
+          on-slot-modify-cancel="cancelModifyMachineSlot"
+          on-slot-modify-unselect="changeModifyMachineSlot"
+          on-slot-cancel-success="markSlotAsRemoved"
           user="ctrl.member"
           mode-plans="plansAreShown"
           plan="selectedPlan"
           plan-selection-time="planSelectionTime"
-          after-payment="afterPayment"></cart>
+          after-payment="afterPayment"
+          settings="settings"></cart>
 
     <uib-alert type="warning m">
       <p class="text-sm">

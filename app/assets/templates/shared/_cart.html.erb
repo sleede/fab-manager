@@ -1,18 +1,18 @@
-<div class="widget panel b-a m m-t-lg" ng-if="user && !slotToModify && !modifiedSlots">
+<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !modifiedSlots">
   <div class="panel-heading b-b small">
     <h3 translate>{{ 'summary' }}</h3>
   </div>
 
-  <div class="widget-content no-bg auto wrapper" ng-show="eventsReserved.length == 0 && (!paidMachineSlots || paidMachineSlots.length == 0)">
+  <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!paidMachineSlots || paidMachineSlots.length == 0)">
     <p class="font-felt fleche-left text-lg"><%= image_tag("fleche-left.png", class: 'fleche-left visible-lg') %>
       {{ 'select_one_or_more_slots_in_the_calendar' | translate }}</p>
   </div>
 
-  <div class="widget-content no-bg auto wrapper" ng-if="eventsReserved.length > 0">
+  <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">
 
     <div class="font-sbold m-b-sm " translate>{{ 'you_ve_just_selected_the_slot' }}</div>
 
-    <div class="panel panel-default bg-light" ng-repeat="machineSlot in eventsReserved">
+    <div class="panel panel-default bg-light" ng-repeat="machineSlot in events.reserved">
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(machineSlot.start | amDateFormat:'LLLL'), END_TIME:(machineSlot.end | amDateFormat:'LT') } }}</div>
         <div class="text-base">{{ 'cost_of_a_machine_hour' | translate }} <span ng-class="{'text-blue': !machineSlot.promo, 'red': machineSlot.promo}">{{machineSlot.price | currency}}</span></div>
@@ -58,7 +58,7 @@
 
   </div>
 
-  <div class="panel-footer no-padder" ng-if="eventsReserved.length > 0">
+  <div class="panel-footer no-padder" ng-if="events.reserved.length > 0">
     <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payMachine()" ng-if="machineSlotsValid() && (!modePlans || selectedPlan)">{{ 'confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
   </div>
 
@@ -88,18 +88,18 @@
 </div>
 
 
-<div class="widget panel b-a m m-t-lg" ng-if="slotToModify || modifiedSlots">
+<div class="widget panel b-a m m-t-lg" ng-if="events.modifiable || modifiedSlots">
   <div class="panel-heading b-b small">
     <h3 translate>{{ 'summary' }}</h3>
   </div>
-  <div class="widget-content no-bg auto wrapper" ng-if="slotToModify">
+  <div class="widget-content no-bg auto wrapper" ng-if="events.modifiable">
     <div class="font-sbold m-b-sm " translate>{{ 'i_want_to_change_the_following_reservation' }}</div>
 
     <div class="panel panel-warning bg-yellow">
       <div class="panel-body">
-        <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(slotToModify.start | amDateFormat:'LLLL'), END_TIME:(slotToModify.end | amDateFormat:'LT') } }}</div>
+        <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(events.modifiable.start | amDateFormat:'LLLL'), END_TIME:(events.modifiable.end | amDateFormat:'LT') } }}</div>
       </div>
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToModify($event)" translate>{{ 'cancel_my_modification' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="cancelModifyMachineSlot($event)" translate>{{ 'cancel_my_modification' }}</a></div>
     </div>
 
     <div class="widget-content no-bg">
@@ -107,24 +107,24 @@
         {{ 'select_a_new_slot_in_the_calendar' | translate }}</p>
     </div>
 
-    <div class="panel panel-info bg-info text-white" ng-if="slotToPlace">
+    <div class="panel panel-info bg-info text-white" ng-if="events.placable">
       <div class="panel-body">
-        <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(slotToPlace.start | amDateFormat:'LLLL'), END_TIME:(slotToPlace.end | amDateFormat:'LT') } }}</div>
+        <div class="font-sbold text-u-c">{{ 'datetime_to_time' | translate:{START_DATETIME:(events.placable.start | amDateFormat:'LLLL'), END_TIME:(events.placable.end | amDateFormat:'LT') } }}</div>
       </div>
       <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToPlace($event)" translate>{{ 'cancel_my_selection' }}</a></div>
     </div>
 
-    <div ng-if="slotToPlace && slotToModify.tags.length > 0 && slotToPlace.tags.length > 0" ng-class="{'panel panel-danger bg-red': tagMissmatch()}">
+    <div ng-if="events.placable && events.modifiable.tags.length > 0 && events.placable.tags.length > 0" ng-class="{'panel panel-danger bg-red': tagMissmatch()}">
       <div class="panel-body">
         <div id="fromTags">
           {{ 'tags_of_the_original_slot' | translate }}<br/>
-          <span ng-repeat="tag in slotToModify.tags">
+          <span ng-repeat="tag in events.modifiable.tags">
                 <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
               </span>
         </div><br/>
         <div id="toTags">
           {{ 'tags_of_the_destination_slot' | translate }}<br/>
-          <span ng-repeat="tag in slotToPlace.tags">
+          <span ng-repeat="tag in events.placable.tags">
                 <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
               </span>
         </div>
@@ -133,7 +133,7 @@
   </div>
 
 
-  <div class="panel-footer no-padder" ng-if="slotToModify && slotToPlace">
+  <div class="panel-footer no-padder" ng-if="events.modifiable && events.placable">
     <button class="btn btn-invalid btn-default btn-block p-l btn-lg text-u-c r-n text-base" ng-click="cancelModifyMachineSlot()" translate>{{ 'cancel' }}</button>
     <div>
       <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="modifyMachineSlot()" translate>{{ 'confirm_my_modification' }}</button>
