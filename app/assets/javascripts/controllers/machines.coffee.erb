@@ -306,23 +306,13 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## the moment when the plan selection changed for the last time, used to trigger changes in the cart
   $scope.planSelectionTime = null
 
-  ## array of fullCalendar events. Slots where the user want to book
+  ## mapping of fullCalendar events.
   $scope.events =
-    reserved: []
-    modifiable: null
-    placable: null
-    paid: []
-    moved: null
-
-  ## total amount of the bill to pay
-  $scope.amountTotal = 0
-
-  ## total amount of the elements in the cart, without considering any coupon
-  $scope.totalNoCoupon = 0
-
-  ## Discount coupon to apply to the basket, if any
-  $scope.coupon =
-      applied: null
+    reserved: [] # Slots that the user wants to book
+    modifiable: null # Slot that the user wants to change
+    placable: null # Destination slot for the change
+    paid: [] # Slots that were just booked by the user (transaction ok)
+    moved: null # Slots that were just moved by the user (change done) -> {newSlot:* oldSlot: *}
 
   ## the moment when the slot selection changed for the last time, used to trigger changes in the cart
   $scope.selectionTime = null
@@ -360,7 +350,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## Global config: message to the end user concerning the subscriptions rules
   $scope.subscriptionExplicationsAlert = settingsPromise.subscription_explications_alert
 
-  ## Gloabl config: message to the end user concerning the machine bookings
+  ## Global config: message to the end user concerning the machine bookings
   $scope.machineExplicationsAlert = settingsPromise.machine_explications_alert
 
 
@@ -386,6 +376,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     slot.id = null
     slot.is_reserved = false
     slot.can_modify = false
+    slot.offered = false
     updateCalendar()
 
 
