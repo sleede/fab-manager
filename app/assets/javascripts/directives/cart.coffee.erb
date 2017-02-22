@@ -263,6 +263,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             # slot is reserved and is ok to be modified or cancelled
             # but we are not currently running a modification or having any slots in the cart
             # -> first the affect the modification/cancellation rights attributes to the current slot
+            resetCartState()
             $scope.slot.movable = slotCanBeModified($scope.slot)
             $scope.slot.cancelable = slotCanBeCanceled($scope.slot)
             # -> then, we open a dialog to ask to the user to choose an action
