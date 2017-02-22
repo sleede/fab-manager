@@ -412,7 +412,7 @@ en:
           select_one_or_more_slots_in_the_calendar: "Select one or more slots in the calendar"
           you_ve_just_selected_the_slot: "You've just selected the slot:"
           datetime_to_time: "{{START_DATETIME}} to {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-          cost_of_a_machine_hour: "Cost of a machine hour"
+          cost_of_TYPE: "Cost of {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"  # messageFormat interpolation
           offer_this_slot: "Offer this slot"
           confirm_this_slot: "Confirm this slot"
           remove_this_slot: "Remove this slot"
@@ -423,7 +423,7 @@ en:
           _subscription: "subscription"
           cost_of_the_subscription: "Cost of the subscription"
           confirm_and_pay: "Confirm and pay"
-          you_have_settled_the_following_machine_hours: "You have settled the following machine hours:"
+          you_have_settled_the_following_machine_hours: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
           you_have_settled_a_: "You have settled a"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"
