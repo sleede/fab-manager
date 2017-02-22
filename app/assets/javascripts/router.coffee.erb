@@ -373,7 +373,7 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.machines_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
-              'app.shared.wallet', 'app.shared.coupon_input']).$promise
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
       .state 'app.admin.machines_edit',
         url: '/machines/:id/edit'
@@ -509,7 +509,7 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.trainings_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
-              'app.shared.wallet', 'app.shared.coupon_input']).$promise
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
       # notifications
       .state 'app.logged.notifications',

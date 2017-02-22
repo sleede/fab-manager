@@ -404,3 +404,46 @@ fr:
           add_an_attachment: "Ajouter une pièce jointe"
           default_places: "Maximum de places par défaut"
           default_places_is_required: "Le nombre de places maximum par défaut est requis."
+
+      cart:
+        # module de panier d'achat de réservations
+        cart:
+          summary: "Résumé"
+          select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"  # messageFormat interpolation
+          you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
+          datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+          cost_of_TYPE: "Coût de {TYPE, select, Machine{l'heure machine} Training{la formation} other{l'élément}}"  # messageFormat interpolation
+          offer_this_slot: "Offrir ce créneau"
+          confirm_this_slot: "Valider ce créneau"
+          remove_this_slot: "Supprimer ce créneau"
+          to_benefit_from_attractive_prices: "Pour bénéficier de prix avantageux"
+          view_our_subscriptions: "Consultez nos abonnements"
+          or: "ou"
+          you_ve_just_selected_a_: "Vous venez de sélectionner un"
+          _subscription: "abonnement"
+          cost_of_the_subscription: "Coût de l'abonnement"
+          confirm_and_pay: "Valider et payer"
+          you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les heures machines suivantes} Training{la formation suivante} other{les éléments suivants}} :"  # messageFormat interpolation
+          you_have_settled_a_: "Vous avez réglé un"
+          total_: "TOTAL :"
+          thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
+          your_invoice_will_be_available_soon_from_your_: "Votre facture sera bientôt disponible depuis votre"
+          dashboard: "Tableau de bord"
+          i_want_to_change_the_following_reservation: "Je souhaite modifier ma réservation suivante :"
+          cancel_my_modification: "Annuler ma modification"
+          select_a_new_slot_in_the_calendar: "Sélectionnez un nouveau créneau dans le calendrier"
+          cancel_my_selection: "Annuler ma sélection"
+          tags_of_the_original_slot: "Étiquettes du créneau d'origine :"
+          tags_of_the_destination_slot: "Étiquettes du créneau de destination :"
+          confirm_my_modification: "Valider ma modification"
+          your_booking_slot_was_successfully_moved_from_: "Votre créneau de réservation a bien été déplacé du"
+          to_date: "au" # context: date. eg: "from 01/01 to 01/05"
+          please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
+          unable_to_change_the_reservation: "Impossible de modifier la réservation"
+          confirmation_required: "Confirmation requise"
+          do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"
+          reservation_was_cancelled_successfully: "La réservation a bien été annulée."
+          cancellation_failed: "L'annulation a échouée."
+          confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # messageFormat interpolation (contexte : valider mon paiement de 20,00 €)
+          a_problem_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
+          none: "Aucune"

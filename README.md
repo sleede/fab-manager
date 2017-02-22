@@ -122,7 +122,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
-   **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions. 
+   **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
 
    ```bash
    rake db:create
