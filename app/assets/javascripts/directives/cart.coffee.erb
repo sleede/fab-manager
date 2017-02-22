@@ -111,14 +111,14 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
           Wallet.getWalletByUser {user_id: $scope.user.id}, (wallet) ->
             amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount)
-            if $rootScope.currentUser.role isnt 'admin' and amountToPay > 0
+            if not $scope.isAdmin() and amountToPay > 0
               payByStripe(reservation)
             else
-              if $rootScope.currentUser.role is 'admin' or amountToPay is 0
+              if $scope.isAdmin() or amountToPay is 0
                 payOnSite(reservation)
         else
           # otherwise we alert, this error musn't occur when the current user is not admin
-          growl.error(_t('please_select_a_member_first'))
+          growl.error(_t('cart.please_select_a_member_first'))
 
 
       ##
@@ -133,7 +133,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
         , -> # success
           $scope.onSlotModifySuccess() if typeof $scope.onSlotModifySuccess == 'function'
         , (err) ->  # failure
-          growl.error(_t('unable_to_change_the_reservation'))
+          growl.error(_t('cart.unable_to_change_the_reservation'))
           console.error(err)
 
 
@@ -157,21 +157,6 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.onSlotModifyUnselect() if typeof $scope.onSlotModifyUnselect == 'function'
         $scope.events.placable = null
 
-      ##
-      # Cancel the current booking modification, removing the previously booked slot from the selection
-      # @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-      ##
-      $scope.removeSlotToModify = (e) ->
-        e.preventDefault()
-        if $scope.events.placable
-          $scope.events.placable.backgroundColor = 'white'
-          $scope.events.placable.title = ''
-          $scope.events.placable = null
-        $scope.events.modifiable.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
-        $scope.events.modifiable.backgroundColor = 'white'
-        $scope.events.modifiable = null
-        uiCalendarConfig.calendars.calendar.fullCalendar 'rerenderEvents'
-
 
 
       ##
@@ -183,6 +168,15 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
           if tag.id not in $scope.events.placable.tag_ids
             return true
         false
+
+
+
+      ##
+      # Check if the currently logged user has teh 'admin' role?
+      # @returns {boolean}
+      ##
+      $scope.isAdmin = ->
+        $rootScope.currentUser and $rootScope.currentUser.role is 'admin'
 
 
 
@@ -265,14 +259,14 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                 dialogs.confirm
                   resolve:
                     object: ->
-                      title: _t('confirmation_required')
-                      msg: _t('do_you_really_want_to_cancel_this_reservation')
+                      title: _t('cart.confirmation_required')
+                      msg: _t('cart.do_you_really_want_to_cancel_this_reservation')
                 , -> # cancel confirmed
                   Slot.cancel {id: $scope.slot.id}, -> # successfully canceled
-                    growl.success _t('reservation_was_cancelled_successfully')
+                    growl.success _t('cart.reservation_was_cancelled_successfully')
                     $scope.onSlotCancelSuccess() if typeof $scope.onSlotCancelSuccess == 'function'
                   , -> # error while canceling
-                    growl.error _t('cancellation_failed')
+                    growl.error _t('cart.cancellation_failed')
 
 
 
@@ -281,7 +275,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # @param slot {Object} fullCalendar event object
       ##
       slotCanBeModified = (slot)->
-        return true if $rootScope.currentUser.role is 'admin'
+        return true if $scope.isAdmin()
         slotStart = moment(slot.start)
         now = moment()
         if slot.can_modify and $scope.enableBookingMove and slotStart.diff(now, "hours") >= $scope.moveBookingDelay
@@ -296,7 +290,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # @param slot {Object} fullCalendar event object
       ##
       slotCanBeCanceled = (slot) ->
-        return true if $rootScope.currentUser.role is 'admin'
+        return true if $scope.isAdmin()
         slotStart = moment(slot.start)
         now = moment()
         if slot.can_modify and $scope.enableBookingCancel and slotStart.diff(now, "hours") >= $scope.cancelBookingDelay
@@ -334,7 +328,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             setSlotsDetails(res.details)
         else
           # otherwise we alert, this error musn't occur when the current user is not admin
-          growl.warning(_t('please_select_a_member_first'))
+          growl.warning(_t('cart.please_select_a_member_first'))
           $scope.amountTotal = null
 
 
@@ -491,10 +485,10 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
               # Button label
               if $scope.amount > 0
-                $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$rootScope.currentUser.role, AMOUNT:$filter('currency')($scope.amount)}, "messageformat")
+                $scope.validButtonName = _t('cart.confirm_payment_of_html', {ROLE:$rootScope.currentUser.role, AMOUNT:$filter('currency')($scope.amount)}, "messageformat")
               else
                 if price.price > 0 and $scope.walletAmount == 0
-                  $scope.validButtonName = _t('confirm_payment_of_html', {ROLE:$rootScope.currentUser.role, AMOUNT:$filter('currency')(price.price)}, "messageformat")
+                  $scope.validButtonName = _t('cart.confirm_payment_of_html', {ROLE:$rootScope.currentUser.role, AMOUNT:$filter('currency')(price.price)}, "messageformat")
                 else
                   $scope.validButtonName = _t('confirm')
 
@@ -508,7 +502,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                   $scope.attempting = true
                 , (response)->
                   $scope.alerts = []
-                  $scope.alerts.push({msg: _t('a_problem_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
+                  $scope.alerts.push({msg: _t('cart.a_problem_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
                   $scope.attempting = false
               $scope.cancel = ->
                 $uibModalInstance.dismiss('cancel')
