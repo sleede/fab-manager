@@ -6,7 +6,7 @@
 - TODO bug: delete event (github#61)
 - ONGOING spaces reservation
 - Improved admin's interface to create availabilities
-- Complete rewrote of the shopping cart functionality for reservations with stability and performance improvements
+- Complete rewrote of the reservation cart functionality with stability and performance improvements
 - Fix a bug: trainings reservations are not shown in the admin's calendar
 - Fix a bug: unable to delete an administrator from the system
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
