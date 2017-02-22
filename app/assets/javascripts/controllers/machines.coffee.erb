@@ -311,6 +311,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     modifiable: null
     placable: null
     paid: []
+    moved: null
 
   ## total amount of the bill to pay
   $scope.amountTotal = 0
@@ -427,16 +428,12 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # When modifying an already booked reservation, callback when the modification was successfully done.
   ##
   $scope.modifyMachineSlot = ->
-    $scope.modifiedSlots =
-      newReservedSlot: $scope.events.placable
-      oldReservedSlot: $scope.events.modifiable
     $scope.events.placable.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else _t('not_available')
     $scope.events.placable.backgroundColor = 'white'
     $scope.events.placable.borderColor = $scope.events.modifiable.borderColor
     $scope.events.placable.id = $scope.events.modifiable.id
     $scope.events.placable.is_reserved = true
     $scope.events.placable.can_modify = true
-    $scope.events.placable = null
 
     $scope.events.modifiable.backgroundColor = 'white'
     $scope.events.modifiable.title = ''
@@ -444,7 +441,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     $scope.events.modifiable.id = null
     $scope.events.modifiable.is_reserved = false
     $scope.events.modifiable.can_modify = false
-    $scope.events.modifiable = null
 
     updateCalendar()
 

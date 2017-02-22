@@ -99,7 +99,13 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # Switch the user's view from the reservation agenda to the plan subscription
       ##
       $scope.showPlans = ->
-        $scope.modePlans = true
+        # first, we ensure that a user was selected (admin) or logged (member)
+        if Object.keys($scope.user).length > 0
+          $scope.modePlans = true
+        else
+          # otherwise we alert, this error musn't occur when the current user hasn't the admin role
+          growl.error(_t('cart.please_select_a_member_first'))
+
 
       ##
       # Validates the shopping chart and redirect the user to the payment step
@@ -131,7 +137,15 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             end_at: $scope.events.placable.end
             availability_id: $scope.events.placable.availability_id
         , -> # success
+          # -> run the callback
           $scope.onSlotModifySuccess() if typeof $scope.onSlotModifySuccess == 'function'
+          # -> set the events as successfully moved (to display a summary)
+          $scope.events.moved =
+            newSlot: $scope.events.placable
+            oldSlot: $scope.events.modifiable
+          # -> reset the 'moving' status
+          $scope.events.placable = null
+          $scope.events.modifiable = null
         , (err) ->  # failure
           growl.error(_t('cart.unable_to_change_the_reservation'))
           console.error(err)
@@ -140,8 +154,10 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
 
       ##
       # Cancel the current booking modification, reseting the whole process
+      # @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
       ##
-      $scope.cancelModifySlot = ->
+      $scope.cancelModifySlot = (event) ->
+        event.preventDefault() if event
         $scope.onSlotModifyCancel() if typeof $scope.onSlotModifyCancel == 'function'
         $scope.events.placable = null
         $scope.events.modifiable = null
@@ -222,6 +238,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             # in every cases, because a new reservation has started
             # we reset the array of settled events, the selected plan and the coupon
             $scope.events.paid = []
+            $scope.events.moved = null
             $scope.selectedPlan = null
             $scope.coupon.applied = null
             # finally, we update the prices

@@ -29,17 +29,6 @@
       <select-member></select-member>
     </div>
 
-    <div class="widget panel b-a m m-t-lg" ng-show="!ctrl.member && currentUser.role == 'admin' && eventsReserved.length == 0 && (!paidMachineSlots || paidMachineSlots.length == 0) && !events.modifiable && !modifiedSlots">
-      <div class="panel-heading b-b small">
-        <h3 translate>{{ 'summary' }}</h3>
-      </div>
-      <div class="widget-content no-bg auto wrapper">
-        <p class="font-felt fleche-left text-lg"><%= image_tag("fleche-left.png", class: 'fleche-left visible-lg') %>
-        {{ 'select_one_or_more_slots_in_the_calendar' | translate }}</p>
-      </div>
-    </div>
-
-
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"
           events="events"
