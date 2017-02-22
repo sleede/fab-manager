@@ -173,7 +173,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     slot.backgroundColor = 'white'
     slot.title = slot.training.name
     slot.borderColor = FREE_SLOT_BORDER_COLOR
-    slot.slot_id = null
+    slot.id = null
     slot.isValid = false
     slot.is_reserved = false
     slot.can_modify = false
@@ -181,6 +181,13 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     slot.is_completed = false if slot.is_completed
     updateCalendar()
 
+
+
+  ##
+  # Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
+  ##
+  $scope.slotCancelled = ->
+    $scope.markSlotAsRemoved($scope.selectedEvent)
 
 
 
@@ -214,14 +221,14 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     $scope.events.placable.title = if $scope.currentUser.role isnt 'admin' then $scope.events.placable.training.name + " - " + _t('i_ve_reserved') else $scope.events.placable.training.name
     $scope.events.placable.backgroundColor = 'white'
     $scope.events.placable.borderColor = $scope.events.modifiable.borderColor
-    $scope.events.placable.slot_id = $scope.events.modifiable.slot_id
+    $scope.events.placable.id = $scope.events.modifiable.id
     $scope.events.placable.is_reserved = true
     $scope.events.placable.can_modify = true
 
     $scope.events.modifiable.backgroundColor = 'white'
     $scope.events.modifiable.title = $scope.events.modifiable.training.name
     $scope.events.modifiable.borderColor = FREE_SLOT_BORDER_COLOR
-    $scope.events.modifiable.slot_id = null
+    $scope.events.modifiable.id = null
     $scope.events.modifiable.is_reserved = false
     $scope.events.modifiable.can_modify = false
     $scope.events.modifiable.is_completed = false if $scope.events.modifiable.is_completed
@@ -378,7 +385,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   updateTrainingSlotId = (slot, reservation)->
     angular.forEach reservation.slots, (s)->
       if slot.start_at == slot.start_at
-        slot.slot_id = s.id
+        slot.id = s.id
 
 
 

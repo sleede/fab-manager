@@ -382,6 +382,14 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
 
   ##
+  # Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
+  ##
+  $scope.slotCancelled = ->
+    $scope.markSlotAsRemoved($scope.selectedEvent)
+
+
+
+  ##
   # Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
   ##
   $scope.markSlotAsModifying = ->
