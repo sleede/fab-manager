@@ -461,8 +461,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                     $scope.attempting = false
           ]
         .result['finally'](null).then (reservation)->
-          $scope.events.paid = $scope.events.reserved
-          $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
+          afterPayment(reservation)
 
 
 
@@ -525,12 +524,25 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                 $uibModalInstance.dismiss('cancel')
           ]
         .result['finally'](null).then (reservation)->
-          $scope.events.paid = $scope.events.reserved
-          $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
+          afterPayment(reservation)
 
 
 
-        ## !!! MUST BE CALLED AT THE END of the directive
+      ##
+      # Actions to run after the payment was successfull
+      ##
+      afterPayment = (reservation) ->
+        # we set the cart content as 'paid' to display a summary of the transaction
+        $scope.events.paid = $scope.events.reserved
+        # we call the external callback if present
+        $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
+        # we reset the coupon and the cart content
+        $scope.events.reserved = []
+        $scope.coupon.applied = null
+
+
+
+      ## !!! MUST BE CALLED AT THE END of the directive
       initialize()
   }
 ]

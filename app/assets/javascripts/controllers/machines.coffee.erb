@@ -303,6 +303,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   ## will store the user's plan if he choosed to buy one
   $scope.selectedPlan = null
 
+  ## the moment when the plan selection changed for the last time, used to trigger changes in the cart
   $scope.planSelectionTime = null
 
   ## array of fullCalendar events. Slots where the user want to book
@@ -323,14 +324,14 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   $scope.coupon =
       applied: null
 
+  ## the moment when the slot selection changed for the last time, used to trigger changes in the cart
   $scope.selectionTime = null
 
+  ## the last clicked event in the calender
   $scope.selectedEvent = null
 
+  ## the application global settings
   $scope.settings = settingsPromise
-
-  ## is the user allowed to change the date of his booking
-  $scope.enableBookingMove = true
 
   ## list of plans, classified by group
   $scope.plansClassifiedByGroup = []
@@ -361,18 +362,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
 
   ## Gloabl config: message to the end user concerning the machine bookings
   $scope.machineExplicationsAlert = settingsPromise.machine_explications_alert
-
-  ## Global config: is the user authorized to change his bookings slots?
-  $scope.enableBookingMove = (settingsPromise.booking_move_enable == "true")
-
-  ## Global config: delay in hours before a booking while changing the booking slot is forbidden
-  $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
-
-  ## Global config: is the user authorized to cancel his bookings?
-  $scope.enableBookingCancel = (settingsPromise.booking_cancel_enable == "true")
-
-  ## Global config: delay in hours before a booking while the cancellation is forbidden
-  $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay)
 
 
 
@@ -465,7 +454,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # reservations. (admins only)
   ##
   $scope.updateMember = ->
-    $scope.paidMachineSlots = null
     $scope.plansAreShown = false
     $scope.selectedPlan = null
     Member.get {id: $scope.ctrl.member.id}, (member) ->
@@ -524,10 +512,6 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
         machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR
         updateMachineSlot(machineSlot, reservation, $scope.ctrl.member)
       machineSlot.backgroundColor = 'white'
-    $scope.paidMachineSlots = $scope.events.reserved
-
-    $scope.events.reserved = []
-    $scope.coupon.applied = null
 
     if $scope.selectedPlan
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
