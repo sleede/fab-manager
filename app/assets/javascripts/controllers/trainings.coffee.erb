@@ -77,8 +77,8 @@ Application.Controllers.controller "ShowTrainingController", ['$scope', '$state'
 # training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
 ##
 
-Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig'
-($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
 
 
 
@@ -252,7 +252,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     if $scope.ctrl.member
       Member.get {id: $scope.ctrl.member.id}, (member) ->
         $scope.ctrl.member = member
-        Availability.trainings {trainingId: $stateParams.id, member_id: $scope.ctrl.member.id}, (trainings) ->
+        Availability.trainings {trainingId: $scope.training.id, member_id: $scope.ctrl.member.id}, (trainings) ->
           uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents'
           $scope.eventSources.splice(0, 1,
             events: trainings

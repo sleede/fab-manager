@@ -48,7 +48,7 @@ class API::AvailabilitiesController < API::ApiController
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @availabilities.each do |a|
         if a.available_type != 'machines'
-          a = verify_training_event_is_reserved(a, @reservations)
+          a = verify_training_event_is_reserved(a, @reservations, current_user)
         end
       end
     end
@@ -141,7 +141,7 @@ class API::AvailabilitiesController < API::ApiController
 
     # who made the request?
     # 1) an admin (he can see all future availabilities)
-    if @user.is_admin?
+    if current_user.is_admin?
       @availabilities = @availabilities.includes(:tags, :slots, trainings: [:machines]).where('availabilities.start_at > ?', Time.now)
     # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
@@ -152,7 +152,7 @@ class API::AvailabilitiesController < API::ApiController
 
     # finally, we merge the availabilities with the reservations
     @availabilities.each do |a|
-      a = verify_training_event_is_reserved(a, @reservations)
+      a = verify_training_event_is_reserved(a, @reservations, @user)
     end
   end
 
@@ -203,8 +203,7 @@ class API::AvailabilitiesController < API::ApiController
       slot
     end
 
-    def verify_training_event_is_reserved(availability, reservations)
-      user = current_user
+    def verify_training_event_is_reserved(availability, reservations, user)
       reservations.each do |r|
         r.slots.each do |s|
           if ((availability.available_type == 'training' and availability.trainings.first.id == r.reservable_id) or (availability.available_type == 'event' and availability.event.id == r.reservable_id)) and s.start_at == availability.start_at and s.canceled_at == nil
