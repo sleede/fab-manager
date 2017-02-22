@@ -508,6 +508,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
       $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
       Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
       $scope.plansAreShown = false
+      $scope.selectedPlan = null
 
     refetchCalendar()
 

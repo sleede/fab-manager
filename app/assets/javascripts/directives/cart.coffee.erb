@@ -210,8 +210,8 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             slotSelectionChanged()
         $scope.$watch 'user', (newValue, oldValue) ->
           if newValue != oldValue
-            $scope.events.paid = []
-            slotSelectionChanged()
+            resetCartState()
+            updateCartPrice()
         $scope.$watch 'planSelectionTime', (newValue, oldValue) ->
           if newValue != oldValue
             planSelectionChanged()
@@ -232,7 +232,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             # -> can be added to cart or removed if already present
             index = $scope.events.reserved.indexOf($scope.slot)
             if index == -1
-              if $scope.limitToOneSlot == 'true' and $scope.events.reserved[0]
+              if $scope.limitToOneSlot is 'true' and $scope.events.reserved[0]
                 # if we limit the number of slots in the cart to 1, and there is already
                 # a slot in the cart, we remove it before adding the new one
                 $scope.removeSlot($scope.events.reserved[0], 0)
@@ -242,12 +242,8 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             else
               # slot is in the cart, remove it
               $scope.removeSlot($scope.slot, index)
-            # in every cases, because a new reservation has started
-            # we reset the array of settled events, the selected plan and the coupon
-            $scope.events.paid = []
-            $scope.events.moved = null
-            $scope.selectedPlan = null
-            $scope.coupon.applied = null
+            # in every cases, because a new reservation has started, we reset the cart content
+            resetCartState()
             # finally, we update the prices
             updateCartPrice()
           else if !$scope.slot.is_reserved && $scope.events.modifiable
@@ -291,6 +287,17 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
                     $scope.onSlotCancelSuccess() if typeof $scope.onSlotCancelSuccess == 'function'
                   , -> # error while canceling
                     growl.error _t('cart.cancellation_failed')
+
+
+
+      ##
+      # Reset the parameters that may lead to a wrong price but leave the content (events added to cart)
+      ##
+      resetCartState = ->
+        $scope.selectedPlan = null
+        $scope.coupon.applied = null
+        $scope.events.moved = null
+        $scope.events.paid = []
 
 
 
