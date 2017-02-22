@@ -409,7 +409,7 @@ fr:
         # module de panier d'achat de réservations
         cart:
           summary: "Résumé"
-          select_one_or_more_slots_in_the_calendar: "Sélectionnez un ou plusieurs créneaux dans le calendrier"
+          select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"  # messageFormat interpolation
           you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
           datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
           cost_of_TYPE: "Coût de {TYPE, select, Machine{l'heure machine} Training{la formation} other{l'élément}}"  # messageFormat interpolation

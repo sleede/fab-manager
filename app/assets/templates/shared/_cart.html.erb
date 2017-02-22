@@ -5,7 +5,7 @@
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
     <p class="font-felt fleche-left text-lg"><%= image_tag('fleche-left.png', class: 'fleche-left visible-lg') %>
-      {{ 'cart.select_one_or_more_slots_in_the_calendar' | translate }}</p>
+      {{ 'cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot}:"messageformat" }}</p>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">
