@@ -23,6 +23,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       reservableId: '@'
       reservableType: '@'
       reservableName: '@'
+      limitToOneSlot: '@'
     templateUrl: '<%= asset_path "shared/_cart.html" %>'
     link: ($scope, element, attributes) ->
       ## will store the user's plan if he choosed to buy one
@@ -231,6 +232,10 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             # -> can be added to cart or removed if already present
             index = $scope.events.reserved.indexOf($scope.slot)
             if index == -1
+              if $scope.limitToOneSlot == 'true' and $scope.events.reserved[0]
+                # if we limit the number of slots in the cart to 1, and there is already
+                # a slot in the cart, we remove it before adding the new one
+                $scope.removeSlot($scope.events.reserved[0], 0)
               # slot is not in the cart, so we add it
               $scope.events.reserved.push $scope.slot
               $scope.onSlotAddedToCart() if typeof $scope.onSlotAddedToCart == 'function'
