@@ -180,6 +180,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       # @returns {boolean} true in case of incompatibility
       ##
       $scope.tagMissmatch = ->
+        return false if $scope.events.placable.tag_ids.length == 0
         for tag in $scope.events.modifiable.tags
           if tag.id not in $scope.events.placable.tag_ids
             return true
@@ -208,6 +209,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             slotSelectionChanged()
         $scope.$watch 'user', (newValue, oldValue) ->
           if newValue != oldValue
+            $scope.events.paid = []
             slotSelectionChanged()
         $scope.$watch 'planSelectionTime', (newValue, oldValue) ->
           if newValue != oldValue
@@ -536,9 +538,11 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.events.paid = $scope.events.reserved
         # we call the external callback if present
         $scope.afterPayment(reservation) if typeof $scope.afterPayment == 'function'
-        # we reset the coupon and the cart content
+        # we reset the coupon and the cart content and we unselect the slot
         $scope.events.reserved = []
         $scope.coupon.applied = null
+        $scope.slot = null
+        $scope.selectedPlan = null
 
 
 

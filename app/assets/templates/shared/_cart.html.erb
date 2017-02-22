@@ -114,19 +114,25 @@
       <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToPlace($event)" translate>{{ 'cart.cancel_my_selection' }}</a></div>
     </div>
 
-    <div ng-if="events.placable && events.modifiable.tags.length > 0 && events.placable.tags.length > 0" ng-class="{'panel panel-danger bg-red': tagMissmatch()}">
+    <div ng-if="events.placable && (events.modifiable.tags.length > 0 || events.placable.tags.length > 0)" ng-class="{'panel panel-danger bg-red': tagMissmatch()}">
       <div class="panel-body">
         <div id="fromTags">
           {{ 'cart.tags_of_the_original_slot' | translate }}<br/>
           <span ng-repeat="tag in events.modifiable.tags">
-                <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
-              </span>
+            <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
+          </span>
+          <span ng-show="events.modifiable.tags.length == 0">
+            <span class='label label-warning text-white' title="{{ 'cart.none' | translate }}" translate>{{ 'cart.none' }}</span>
+          </span>
         </div><br/>
         <div id="toTags">
           {{ 'cart.tags_of_the_destination_slot' | translate }}<br/>
           <span ng-repeat="tag in events.placable.tags">
-                <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
-              </span>
+            <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
+          </span>
+          <span ng-show="events.placable.tags.length == 0">
+            <span class='label label-warning text-white' title="{{ 'cart.none' | translate }}" translate>{{ 'cart.none' }}</span>
+          </span>
         </div>
       </div>
     </div>
