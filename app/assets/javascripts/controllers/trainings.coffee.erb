@@ -132,8 +132,11 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", '$sta
   ## the moment when the plan selection changed for the last time, used to trigger changes in the cart
   $scope.planSelectionTime = null
 
-  ## Selected training unless 'all' trainings are displayed
+  ## Selected training
   $scope.training = trainingPromise
+
+  ## 'all' OR training's slug
+  $scope.mode = $stateParams.id
 
   ## fullCalendar (v2) configuration
   $scope.calendarConfig = CalendarConfig
