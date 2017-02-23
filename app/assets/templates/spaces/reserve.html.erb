@@ -7,17 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 ng-hide="training" translate>{{ 'trainings_planning' }}</h1>
-        <h1 ng-show="training"><span translate>{{ 'planning_of' }}</span> {{training.name}}</h1>
-      </section>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper">
-        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs"
-           ui-sref="app.logged.trainings_reserve({id:'all'})"
-           ng-show="training"
-           role="button"
-           translate>{{ 'all_trainings' }}</a>
+        <h1 translate translate-values="{NAME:space.name}">{{ 'space_reserve.planning_of_space_NAME' }}</h1>
       </section>
     </div>
   </div>
@@ -37,8 +27,6 @@
       <select-member></select-member>
     </div>
 
-
-
     <cart slot="selectedEvent"
           slot-selection-time="selectionTime"
           events="events"
@@ -55,27 +43,17 @@
           on-slot-modify-unselect="changeModifyTrainingSlot"
           on-slot-cancel-success="slotCancelled"
           after-payment="afterPayment"
-          reservable-id="{{training.id}}"
-          reservable-type="Training"
-          reservable-name="{{training.name}}"
-          limit-to-one-slot="true"></cart>
+          reservable-id="{{space.id}}"
+          reservable-type="Space"
+          reservable-name="{{space.name}}"></cart>
 
-
-    <uib-alert type="info m">
-      <p class="text-sm font-bold">
-        <i class="fa fa-lightbulb-o"></i>
-        <span ng-bind-html="trainingInformationMessage"></span>
-      </p>
-    </uib-alert>
 
     <uib-alert type="warning m">
       <p class="text-sm">
         <i class="fa fa-warning"></i>
-        <span ng-bind-html="trainingExplicationsAlert"></span>
+        <span ng-bind-html="spaceExplicationsAlert"></span>
       </p>
     </uib-alert>
 
   </div>
-
-
 </div>

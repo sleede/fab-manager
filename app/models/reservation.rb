@@ -126,6 +126,28 @@ class Reservation < ActiveRecord::Base
           self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
         end
 
+      # === Space reservation ===
+      when Space
+        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+
+        slots.each_with_index do |slot, index|
+          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+
+          ii_amount = base_amount # ii_amount default to base_amount
+          ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
+
+          unless on_site # if it's local payment then do not create Stripe::InvoiceItem
+            ii = Stripe::InvoiceItem.create(
+                customer: user.stp_customer_id,
+                amount: ii_amount,
+                currency: Rails.application.secrets.stripe_currency,
+                description: description
+            )
+            invoice_items << ii
+          end
+          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
+        end
+
       # === Unknown reservation type ===
       else
         raise NotImplementedError

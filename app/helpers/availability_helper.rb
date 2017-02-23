@@ -21,7 +21,23 @@ module AvailabilityHelper
   end
 
   def machines_slot_border_color(slot)
-    slot.is_reserved ? (slot.is_reserved_by_current_user ? IS_RESERVED_BY_CURRENT_USER : IS_COMPLETED) : MACHINE_COLOR
+    if slot.is_reserved
+      slot.is_reserved_by_current_user ? IS_RESERVED_BY_CURRENT_USER : IS_COMPLETED
+    else
+      MACHINE_COLOR
+    end
+  end
+
+  def space_slot_border_color(slot)
+    if slot.is_reserved
+      if slot.is_reserved_by_current_user
+        IS_RESERVED_BY_CURRENT_USER
+      elsif slot.availability.is_completed
+        IS_COMPLETED
+      end
+    else
+      SPACE_COLOR
+    end
   end
 
   def trainings_events_border_color(availability)
@@ -30,10 +46,15 @@ module AvailabilityHelper
     elsif availability.is_completed
       IS_COMPLETED
     else
-      if availability.available_type == 'training'
-        TRAINING_COLOR
-      else
-        EVENT_COLOR
+      case availability.available_type
+        when 'training'
+          TRAINING_COLOR
+        when 'event'
+          EVENT_COLOR
+        when 'space'
+          SPACE_COLOR
+        else
+          '#000'
       end
     end
   end

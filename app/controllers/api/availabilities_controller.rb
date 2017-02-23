@@ -156,6 +156,34 @@ class API::AvailabilitiesController < API::ApiController
     end
   end
 
+  def spaces
+    if params[:member_id]
+      @user = User.find(params[:member_id])
+    else
+      @user = current_user
+    end
+    @current_user_role = current_user.is_admin? ? 'admin' : 'user'
+    @space = Space.friendly.find(params[:space_id])
+    @slots = []
+    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @space.class.to_s, @space.id).includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at > ?', Time.now)
+    if @user.is_admin?
+      @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND available_type = 'space'", Time.now)
+    else
+      end_at = 1.month.since
+      end_at = 3.months.since if is_subscription_year(@user)
+      @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'space'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+    end
+    @availabilities.each do |a|
+      ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
+        if (a.start_at + (i * SLOT_DURATION).minutes) > Time.now
+          slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: @machine, title: '')
+          slot = verify_space_is_reserved(slot, @reservations, current_user, @current_user_role)
+          @slots << slot
+        end
+      end
+    end
+  end
+
   def reservations
     authorize Availability
     @reservation_slots = @availability.slots.includes(reservation: [user: [:profile]]).order('slots.start_at ASC')
@@ -194,6 +222,28 @@ class API::AvailabilitiesController < API::ApiController
             end
             if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
               slot.title = "#{slot.machine.name} - #{t('availabilities.i_ve_reserved')}"
+              slot.can_modify = true
+              slot.is_reserved_by_current_user = true
+            end
+          end
+        end
+      end
+      slot
+    end
+
+    def verify_space_is_reserved(slot, reservations, user, user_role)
+      reservations.each do |r|
+        r.slots.each do |s|
+          if slot.availability.spaces.first.id == r.reservable_id
+            if s.start_at == slot.start_at and s.canceled_at == nil
+              slot.id = s.id
+              slot.is_reserved = true
+              slot.title = t('availabilities.not_available')
+              slot.can_modify = true if user_role === 'admin'
+              slot.reservation = r
+            end
+            if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
+              slot.title = t('availabilities.i_ve_reserved')
               slot.can_modify = true
               slot.is_reserved_by_current_user = true
             end

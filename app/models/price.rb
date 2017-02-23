@@ -99,6 +99,13 @@ class Price < ActiveRecord::Base
           _amount += get_slot_price(amount, slot, admin, _elements)
         end
 
+      # Space reservation
+      when Space
+        amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+        slots.each do |slot|
+          _amount += get_slot_price(amount, slot, admin, _elements)
+        end
+
       # Unknown reservation type
       else
         raise NotImplementedError

@@ -112,6 +112,14 @@ en:
         cancel_my_selection: "Cancel my selection"
         i_ve_reserved: "I've reserved"
 
+      space_reserve:
+        # book a space
+        space_reserve:
+          planning_of_space_NAME: "Planning of the {{NAME}} space"  # angular interpolation
+          i_ve_reserved: "I've reserved"
+          i_shift: "I shift"
+          i_change: "I change"
+
       notifications:
         notifications_center: "Notifications center"
         mark_all_as_read: "Mark all as read"

@@ -11,17 +11,19 @@ module UsersCredits
       if user
         @manager = Managers::User.new(user)
       elsif reservation
-        if reservation.reservable_type == "Training"
+        if reservation.reservable_type == 'Training'
           @manager = Managers::Training.new(reservation, plan)
-        elsif reservation.reservable_type == "Machine"
+        elsif reservation.reservable_type == 'Machine'
           @manager = Managers::Machine.new(reservation, plan)
-        elsif reservation.reservable_type == "Event"
+        elsif reservation.reservable_type == 'Event'
           @manager = Managers::Event.new(reservation, plan)
+        elsif reservation.reservable_type == 'Space'
+          @manager = Managers::Space.new(reservation, plan)
         else
-          raise ArgumentError, "reservation.reservable_type must be Training, Machine or Event"
+          raise ArgumentError, 'reservation.reservable_type must be Training, Machine, Space or Event'
         end
       else
-        raise ArgumentError, "you have to pass either a reservation or a user to initialize a UsersCredits::Manager"
+        raise ArgumentError, 'you have to pass either a reservation or a user to initialize a UsersCredits::Manager'
       end
     end
 
@@ -145,6 +147,15 @@ module UsersCredits
     end
 
     class Event < Reservation
+      def will_use_credits?
+        false
+      end
+
+      def update_credits
+      end
+    end
+
+    class Space < Reservation
       def will_use_credits?
         false
       end

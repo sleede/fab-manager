@@ -112,6 +112,14 @@ fr:
         cancel_my_selection: "Annuler ma sélection"
         i_ve_reserved: "J'ai réservé"
 
+      space_reserve:
+        # réserver un espace
+        space_reserve:
+          planning_of_space_NAME: "Planning de l'espace {{NAME}}"  # angular interpolation
+          i_ve_reserved: "J'ai réservé"
+          i_shift: "Je déplace"
+          i_change: "Je change"
+
       notifications:
         notifications_center: "Centre de notifications"
         mark_all_as_read: "Tout marquer comme lu"

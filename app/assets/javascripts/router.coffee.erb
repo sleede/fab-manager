@@ -445,6 +445,39 @@ angular.module('application.router', ['ui.router']).
           ]
       .state 'app.logged.space_reserve',
         url: '/spaces/:id/reserve'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/reserve.html" %>'
+            controller: 'ReserveSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.spaces({spaceId: $stateParams.id}).$promise
+          ]
+          plansPromise: ['Plan', (Plan)->
+            Plan.query().$promise
+          ]
+          groupsPromise: ['Group', (Group)->
+            Group.query().$promise
+          ]
+          settingsPromise: ['Setting', (Setting)->
+            Setting.query(names: "['booking_window_start',
+                                   'booking_window_end',
+                                   'booking_move_enable',
+                                   'booking_move_delay',
+                                   'booking_cancel_enable',
+                                   'booking_cancel_delay',
+                                   'subscription_explications_alert',
+                                   'space_explications_alert']").$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.logged.space_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
+          ]
 
       # trainings
       .state 'app.public.trainings_list',
