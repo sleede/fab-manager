@@ -77,8 +77,8 @@ Application.Controllers.controller "ShowTrainingController", ['$scope', '$state'
 # training can be reserved during the reservation process (the shopping cart may contains only one training and a subscription).
 ##
 
-Application.Controllers.controller "ReserveTrainingController", ["$scope", "$state", '$stateParams', '$filter', '$compile', "$uibModal", 'Auth', 'dialogs', '$timeout', 'Price', 'Availability', 'Slot', 'Member', 'Setting', 'CustomAsset', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'growl', 'settingsPromise', 'trainingPromise', '_t', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig'
-($scope, $state, $stateParams, $filter, $compile, $uibModal, Auth, dialogs, $timeout, Price, Availability, Slot, Member, Setting, CustomAsset, availabilityTrainingsPromise, plansPromise, groupsPromise, growl, settingsPromise, trainingPromise, _t, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "ReserveTrainingController", ["$scope", '$stateParams', 'Auth', '$timeout', 'Availability', 'Member', 'availabilityTrainingsPromise', 'plansPromise', 'groupsPromise', 'settingsPromise', 'trainingPromise', '_t', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $stateParams, Auth, $timeout, Availability, Member, availabilityTrainingsPromise, plansPromise, groupsPromise, settingsPromise, trainingPromise, _t, uiCalendarConfig, CalendarConfig) ->
 
 
 

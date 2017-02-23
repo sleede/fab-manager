@@ -274,8 +274,8 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
 # This controller workflow is pretty similar to the trainings reservation controller.
 ##
 
-Application.Controllers.controller "ReserveMachineController", ["$scope", "$state", '$stateParams', "$uibModal", '_t', "moment", 'Machine', 'Auth', 'dialogs', '$timeout', 'Price', 'Member', 'Availability', 'Slot', 'Setting', 'CustomAsset',  'plansPromise', 'groupsPromise', 'growl', 'machinePromise', 'settingsPromise', 'Wallet', 'helpers', 'uiCalendarConfig', 'CalendarConfig',
-($scope, $state, $stateParams, $uibModal, _t, moment, Machine, Auth, dialogs, $timeout, Price, Member, Availability, Slot, Setting, CustomAsset, plansPromise, groupsPromise, growl, machinePromise, settingsPromise, Wallet, helpers, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "ReserveMachineController", ["$scope", '$stateParams', '_t', "moment", 'Auth', '$timeout', 'Member', 'Availability', 'plansPromise', 'groupsPromise', 'machinePromise', 'settingsPromise', 'uiCalendarConfig', 'CalendarConfig',
+($scope, $stateParams, _t, moment, Auth, $timeout, Member, Availability, plansPromise, groupsPromise, machinePromise, settingsPromise, uiCalendarConfig, CalendarConfig) ->
 
 
 
