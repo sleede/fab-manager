@@ -278,12 +278,12 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   # @param plan {Object} the plan to subscribe
   ##
   $scope.selectPlan = (plan) ->
-    $scope.planSelectionTime = new Date()
     # toggle selected plan
     if $scope.selectedPlan != plan
       $scope.selectedPlan = plan
     else
       $scope.selectedPlan = null
+    $scope.planSelectionTime = new Date()
 
 
 
@@ -295,6 +295,7 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
     e.preventDefault()
     $scope.plansAreShown = false
     $scope.selectedPlan = null
+    $scope.planSelectionTime = new Date()
 
 
 

@@ -468,6 +468,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
     e.preventDefault()
     $scope.plansAreShown = false
     $scope.selectPlan($scope.selectedPlan)
+    $scope.planSelectionTime = new Date()
 
 
 
@@ -484,12 +485,12 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", "$stat
   # @param plan {Object} the plan to subscribe
   ##
   $scope.selectPlan = (plan) ->
-    $scope.planSelectionTime = new Date()
     # toggle selected plan
     if $scope.selectedPlan != plan
       $scope.selectedPlan = plan
     else
       $scope.selectedPlan = null
+    $scope.planSelectionTime = new Date()
 
 
 
