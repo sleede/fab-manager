@@ -15,7 +15,7 @@ json.array!(@availabilities) do |a|
   json.backgroundColor 'white'
   json.can_modify a.can_modify
   json.nb_total_places a.nb_total_places
-  json.availability_id a.trainings.first.id
+  json.availability_id a.id
 
   json.training do
     json.id a.trainings.first.id
