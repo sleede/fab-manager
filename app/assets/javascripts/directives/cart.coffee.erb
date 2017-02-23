@@ -227,7 +227,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
       ##
       slotSelectionChanged = ->
         if $scope.slot
-          if !$scope.slot.is_reserved && !$scope.events.modifiable
+          if not $scope.slot.is_reserved and not $scope.events.modifiable and not $scope.slot.is_completed
             # slot is not reserved and we are not currently modifying a slot
             # -> can be added to cart or removed if already present
             index = $scope.events.reserved.indexOf($scope.slot)
