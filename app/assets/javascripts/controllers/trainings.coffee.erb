@@ -306,8 +306,6 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
 
 
 
-
-
   ##
   # Once the reservation is booked (payment process successfully completed), change the event style
   # in fullCalendar, update the user's subscription and free-credits if needed
@@ -357,6 +355,8 @@ Application.Controllers.controller "ReserveTrainingController", ["$scope", "$sta
   ##
   calendarEventClickCb = (event, jsEvent, view) ->
     $scope.selectedEvent = event
+    if $stateParams.id is 'all'
+      $scope.training = event.training
     $scope.selectionTime = new Date()
 
 
