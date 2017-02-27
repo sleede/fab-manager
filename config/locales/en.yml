@@ -85,6 +85,7 @@ en:
     subscription_extended_for_free_from_START_to_END: "Subscription extended for free - From %{START} to %{END}"
     subscription_NAME_from_START_to_END: "Subscription - From %{START} to %{END}"
     machine_reservation_DESCRIPTION: "Machine reservation - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Space reservation - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Training reservation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Event reservation - %{DESCRIPTION}"
     full_price_ticket:

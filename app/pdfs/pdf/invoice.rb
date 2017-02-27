@@ -125,6 +125,8 @@ module PDF
               ### Machine reservation
               when 'Machine'
                 details += I18n.t('invoices.machine_reservation_DESCRIPTION', DESCRIPTION: item.description)
+              when 'Space'
+                details += I18n.t('invoices.space_reservation_DESCRIPTION', DESCRIPTION: item.description)
               ### Training reservation
               when 'Training'
                 details += I18n.t('invoices.training_reservation_DESCRIPTION', DESCRIPTION: item.description)
