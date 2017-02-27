@@ -177,7 +177,7 @@ class API::AvailabilitiesController < API::ApiController
       ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
         if (a.start_at + (i * SLOT_DURATION).minutes) > Time.now
           slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, space: @space, title: '')
-          slot = verify_space_is_reserved(slot, @reservations, current_user, @current_user_role)
+          slot = verify_space_is_reserved(slot, @reservations, @user, @current_user_role)
           @slots << slot
         end
       end
@@ -218,7 +218,7 @@ class API::AvailabilitiesController < API::ApiController
               slot.is_reserved = true
               slot.title = "#{slot.machine.name} - #{t('availabilities.not_available')}"
               slot.can_modify = true if user_role === 'admin'
-              slot.reservation = r
+              slot.reservations.push r
             end
             if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
               slot.title = "#{slot.machine.name} - #{t('availabilities.i_ve_reserved')}"
@@ -238,7 +238,7 @@ class API::AvailabilitiesController < API::ApiController
             if s.start_at == slot.start_at and s.canceled_at == nil
               slot.id = s.id
               slot.can_modify = true if user_role === 'admin'
-              slot.reservation = r
+              slot.reservations.push r
             end
             if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
               slot.title = t('availabilities.i_ve_reserved')
