@@ -193,6 +193,9 @@ Application.Controllers.controller "ReserveSpaceController", ["$scope", '$stateP
     # Slot free to be booked
     FREE_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::SPACE_COLOR %>'
 
+    # Slot with reservation from current user
+    RESERVED_SLOT_BORDER_COLOR = '<%= AvailabilityHelper::IS_RESERVED_BY_CURRENT_USER %>'
+
 
 
     ### PUBLIC SCOPE ###
@@ -412,12 +415,13 @@ Application.Controllers.controller "ReserveSpaceController", ["$scope", '$stateP
     # @param reservation {Object}
     ##
     $scope.afterPayment = (reservation)->
-      $scope.events.paid[0].backgroundColor = 'white'
-      $scope.events.paid[0].is_reserved = true
-      $scope.events.paid[0].can_modify = true
-      updateSpaceSlotId($scope.events.paid[0], reservation)
-      $scope.events.paid[0].borderColor = '#b2e774'
-      $scope.events.paid[0].title = _t('space_reserve.i_ve_reserved')
+      angular.forEach $scope.events.paid, (spaceSlot, key) ->
+        spaceSlot.is_reserved = true
+        spaceSlot.can_modify = true
+        spaceSlot.title = _t('space_reserve.i_ve_reserved')
+        spaceSlot.backgroundColor = 'white'
+        spaceSlot.borderColor = RESERVED_SLOT_BORDER_COLOR
+        updateSpaceSlotId(spaceSlot, reservation)
 
 
       if $scope.selectedPlan
