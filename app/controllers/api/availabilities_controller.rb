@@ -191,7 +191,7 @@ class API::AvailabilitiesController < API::ApiController
 
   def reservations
     authorize Availability
-    @reservation_slots = @availability.slots.includes(reservation: [user: [:profile]]).order('slots.start_at ASC')
+    @reservation_slots = @availability.slots.includes(reservations: [user: [:profile]]).order('slots.start_at ASC')
   end
 
   private
