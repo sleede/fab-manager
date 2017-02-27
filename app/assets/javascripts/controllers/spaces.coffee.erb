@@ -318,7 +318,7 @@ Application.Controllers.controller "ReserveSpaceController", ["$scope", '$stateP
     # When modifying an already booked reservation, callback when the modification was successfully done.
     ##
     $scope.modifyTrainingSlot = ->
-      $scope.events.placable.title = if $scope.currentUser.role isnt 'admin' then _t('space_reserve.i_ve_reserved') else ''
+      $scope.events.placable.title = _t('space_reserve.i_ve_reserved')
       $scope.events.placable.backgroundColor = 'white'
       $scope.events.placable.borderColor = $scope.events.modifiable.borderColor
       $scope.events.placable.id = $scope.events.modifiable.id
@@ -343,8 +343,8 @@ Application.Controllers.controller "ReserveSpaceController", ["$scope", '$stateP
     $scope.cancelModifyTrainingSlot = ->
       if $scope.events.placable
         $scope.events.placable.backgroundColor = 'white'
-        $scope.events.placable.title = $scope.events.placable.training.name
-      $scope.events.modifiable.title = if $scope.currentUser.role isnt 'admin' then _t('i_ve_reserved') else ''
+        $scope.events.placable.title = ''
+      $scope.events.modifiable.title = _t('space_reserve.i_ve_reserved')
       $scope.events.modifiable.backgroundColor = 'white'
 
       updateCalendar()

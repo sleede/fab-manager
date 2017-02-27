@@ -183,7 +183,7 @@ class API::AvailabilitiesController < API::ApiController
       end
     end
     @slots.each do |s|
-      if s.is_complete?
+      if s.is_complete? and not s.is_reserved
         s.title = t('availabilities.not_available')
       end
     end
