@@ -132,11 +132,17 @@ class Reservation < ActiveRecord::Base
       # === Space reservation ===
       when Space
         base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
         slots.each_with_index do |slot, index|
           description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
 
           ii_amount = base_amount # ii_amount default to base_amount
+
+          if users_credits_manager.will_use_credits?
+            ii_amount = (index < users_credits_manager.free_hours_count) ? 0 : base_amount
+          end
+
           ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
 
           unless on_site # if it's local payment then do not create Stripe::InvoiceItem

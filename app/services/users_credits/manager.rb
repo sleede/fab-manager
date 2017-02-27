@@ -156,11 +156,49 @@ module UsersCredits
     end
 
     class Space < Reservation
-      def will_use_credits?
-        false
+      def will_use_credits?  # to known if a credit will be used in the context of the given reservation
+        _will_use_credits?[0]
+      end
+
+      def free_hours_count
+        _will_use_credits?[1]
       end
 
       def update_credits
+        super
+
+        will_use_credits, free_hours_count, space_credit = _will_use_credits?
+        if will_use_credits
+          users_credit = user.users_credits.find_or_initialize_by(credit_id: space_credit.id)
+
+          if users_credit.new_record?
+            users_credit.hours_used = free_hours_count
+          else
+            users_credit.hours_used += free_hours_count
+          end
+          users_credit.save!
+        end
+      end
+
+      private
+      def _will_use_credits?
+        return false, 0 unless plan
+
+        if space_credit = plan.space_credits.find_by(creditable_id: reservation.reservable_id)
+          users_credit = user.users_credits.find_by(credit_id: space_credit.id)
+          already_used_hours = users_credit ? users_credit.hours_used : 0
+
+          remaining_hours = space_credit.hours - already_used_hours
+
+          free_hours_count = [remaining_hours, reservation.slots.size].min
+
+          if free_hours_count > 0
+            return true, free_hours_count, space_credit
+          else
+            return false, free_hours_count, space_credit
+          end
+        end
+        return false, 0
       end
     end
   end
