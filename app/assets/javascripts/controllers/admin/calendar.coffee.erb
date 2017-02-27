@@ -195,7 +195,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
         growl.success(_t('admin_calendar.the_slot_START-END_has_been_successfully_deleted', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
       ,->
-        growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:+moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+        growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
     # if the user has only clicked on the event, display its reservations
     else
       Availability.reservations {id: event.id}, (reservations) ->
