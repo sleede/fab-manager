@@ -22,6 +22,10 @@ class Slot < ActiveRecord::Base
     super
   end
 
+  def is_complete?
+    reservations.length >= availability.nb_total_places
+  end
+
   private
   def notify_member_and_admin_slot_is_modified
     NotificationCenter.call type: 'notify_member_slot_is_modified',

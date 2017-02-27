@@ -182,6 +182,11 @@ class API::AvailabilitiesController < API::ApiController
         end
       end
     end
+    @slots.each do |s|
+      if s.is_complete?
+        s.title = t('availabilities.not_available')
+      end
+    end
   end
 
   def reservations
@@ -243,7 +248,7 @@ class API::AvailabilitiesController < API::ApiController
             if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
               slot.title = t('availabilities.i_ve_reserved')
               slot.can_modify = true
-              slot.is_reserved_by_current_user = true
+              slot.is_reserved = true
             end
           end
         end

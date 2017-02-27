@@ -30,11 +30,9 @@ module AvailabilityHelper
 
   def space_slot_border_color(slot)
     if slot.is_reserved
-      if slot.is_reserved_by_current_user
-        IS_RESERVED_BY_CURRENT_USER
-      elsif slot.availability.is_completed
-        IS_COMPLETED
-      end
+      IS_RESERVED_BY_CURRENT_USER
+    elsif slot.is_complete?
+      IS_COMPLETED
     else
       SPACE_COLOR
     end
