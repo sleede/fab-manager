@@ -7,7 +7,7 @@ class MigrateSlotsReservations < ActiveRecord::Migration
 
   def down
     SlotsReservation.all.each do |sr|
-      Slot.find(sr.slot_id).update_attributes(:availability_id => sr.availability_id)
+      Slot.find(sr.slot_id).update_attributes(:reservation_id => sr.reservation_id)
     end
   end
 end
