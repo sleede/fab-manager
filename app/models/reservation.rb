@@ -195,7 +195,7 @@ class Reservation < ActiveRecord::Base
     if @wallet_amount_debit != 0 and !on_site
       invoice_items << Stripe::InvoiceItem.create(
         customer: user.stp_customer_id,
-        amount: -@wallet_amount_debit,
+        amount: -@wallet_amount_debit.to_i,
         currency: Rails.application.secrets.stripe_currency,
         description: "wallet -#{@wallet_amount_debit / 100.0}"
       )
