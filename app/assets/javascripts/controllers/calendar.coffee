@@ -106,13 +106,16 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     else if event.available_type == 'space'
       calendar.fullCalendar('changeView', 'agendaDay')
       calendar.fullCalendar('gotoDate', event.start)
+    else if event.available_type == 'event'
+      $state.go('app.public.events_show', {id: event.event_id})
+    else if event.available_type == 'training'
+      $state.go('app.public.training_show', {id: event.training_id})
     else
-      if event.available_type == 'event'
-        $state.go('app.public.events_show', {id: event.event_id})
-      else if event.available_type == 'training'
-        $state.go('app.public.training_show', {id: event.training_id})
-      else
+      if event.machine_id
         $state.go('app.public.machines_show', {id: event.machine_id})
+      else if event.space_id
+        $state.go('app.public.space_show', {id: event.space_id})
+
 
   ## agendaDay view: disable slotEventOverlap
   ## agendaWeek view: enable slotEventOverlap
