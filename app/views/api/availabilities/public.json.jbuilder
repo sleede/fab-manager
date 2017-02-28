@@ -5,7 +5,7 @@ json.array!(@availabilities) do |availability|
   json.textColor 'black'
   json.backgroundColor 'white'
   # availability object
-  if availability.try(:available_type)
+  if availability.instance_of? Availability
     json.title availability.title(@title_filter)
     if availability.available_type == 'event'
       json.event_id availability.event.id
@@ -20,7 +20,7 @@ json.array!(@availabilities) do |availability|
       json.name t.name
     end
 
-    if availability.available_type != 'machines'
+    if availability.available_type == 'training' or availability.available_type == 'event'
       json.borderColor trainings_events_border_color(availability)
       if availability.is_reserved
         json.is_reserved true
@@ -29,20 +29,38 @@ json.array!(@availabilities) do |availability|
         json.is_completed true
         json.title "#{availability.title} - #{t('trainings.completed')}"
       end
+    elsif availability.available_type == 'space'
+      complete = availability.slots.map{ |s| s.is_complete? }.reduce :&
+      json.is_completed complete
+      json.borderColor availability_border_color(availability)
+      if complete
+        json.title "#{availability.title} - #{t('trainings.completed')}"
+      end
     else
       json.borderColor availability_border_color(availability)
     end
 
-  # machine slot object ( here => availability = slot )
-  else
+  # slot object ( here => availability = slot )
+  # -> machines / spaces
+  elsif availability.instance_of? Slot
     json.title availability.title
-    json.machine_id availability.machine.id
-    json.borderColor machines_slot_border_color(availability)
     json.tag_ids availability.availability.tag_ids
     json.tags availability.availability.tags do |t|
       json.id t.id
       json.name t.name
     end
-    json.is_reserved availability.is_reserved
+    if availability.try(:machine)
+      json.machine_id availability.machine.id
+      json.borderColor machines_slot_border_color(availability)
+      json.is_reserved availability.is_reserved
+    elsif availability.try(:space)
+      json.space_id availability.space.id
+      json.borderColor space_slot_border_color(availability)
+      json.is_completed availability.is_complete?
+    else
+      json.title 'Unknown slot'
+    end
+  else
+    json.title 'Unknown object'
   end
 end

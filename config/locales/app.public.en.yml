@@ -249,9 +249,14 @@ en:
 
       calendar:
         # public calendar
-        calendar: "Calendar"
-        show_no_disponible: "Show the slots no disponibles"
-        filter-calendar: "Filter calendar"
+        calendar:
+          calendar: "Calendar"
+          show_unavailables: "Show unavailable slots"
+          filter_calendar: "Filter calendar"
+          trainings: "Trainings"
+          machines: "Machines"
+          spaces: "Spaces"
+          events: "Events"
 
       spaces_list:
         # list of spaces

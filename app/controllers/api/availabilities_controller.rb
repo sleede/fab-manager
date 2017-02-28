@@ -24,9 +24,13 @@ class API::AvailabilitiesController < API::ApiController
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
     @reservations = Reservation.includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
+
+    # request for 1 single day
     if in_same_day(start_date, end_date)
-      @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where(available_type: ['training', 'event'])
+      # trainings, events
+      @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where(available_type: %w(training event))
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      # machines
       @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @machine_slots = []
@@ -41,10 +45,27 @@ class API::AvailabilitiesController < API::ApiController
           end
         end
       end
-      @availabilities = [].concat(@training_and_event_availabilities).concat(@machine_slots)
+
+      # spaces
+      @space_availabilities = Availability.includes(:tags, :spaces).where(available_type: 'space')
+                                          .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+      @space_slots = []
+      @space_availabilities.each do |a|
+        space = a.spaces.first
+        ((a.end_at - a.start_at)/SLOT_DURATION.minutes).to_i.times do |i|
+          if (a.start_at + (i * SLOT_DURATION).minutes) > Time.now
+            slot = Slot.new(start_at: a.start_at + (i*SLOT_DURATION).minutes, end_at: a.start_at + (i*SLOT_DURATION).minutes + SLOT_DURATION.minutes, availability_id: a.id, availability: a, space: space, title: space.name)
+            slot = verify_space_is_reserved(slot, @reservations, current_user, '')
+            @space_slots << slot
+          end
+        end
+      end
+      @availabilities = [].concat(@training_and_event_availabilities).concat(@machine_slots).concat(@space_slots)
+
+    # request for many days (week or month)
     else
 
-      @availabilities = Availability.includes(:tags, :machines, :trainings, :event, :slots)
+      @availabilities = Availability.includes(:tags, :machines, :trainings, :spaces, :event, :slots)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @availabilities.each do |a|
         if a.available_type != 'machines'
@@ -294,6 +315,12 @@ class API::AvailabilitiesController < API::ApiController
           # training
           if params[:t] and a.available_type == 'training'
             if params[:t].include?(a.trainings.first.id.to_s)
+              availabilities_filtered << a
+            end
+          end
+          # space
+          if params[:m] and a.available_type == 'space'
+            if params[:t].include?(a.spaces.first.id.to_s)
               availabilities_filtered << a
             end
           end

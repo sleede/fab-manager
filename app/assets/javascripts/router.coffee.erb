@@ -640,6 +640,9 @@ angular.module('application.router', ['ui.router']).
           machinesPromise: ['Machine', (Machine)->
             Machine.query().$promise
           ]
+          spacesPromise: ['Space', (Space) ->
+            Space.query().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.calendar']).$promise
           ]
