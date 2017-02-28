@@ -39,6 +39,23 @@ class StatisticService
       end
     end
 
+    # space list
+    reservations_space_list(options).each do |r|
+      %w(booking hour).each do |type|
+        stat = Stats::Space.new({
+          date: format_date(r.date),
+          type: type,
+          subType: r.space_type,
+          ca: r.ca,
+          spaceId: r.space_id,
+          name: r.space_name,
+          reservationId: r.reservation_id
+        }.merge(user_info_stat(r)))
+        stat.stat = (type == 'booking' ? 1 : r.nb_hours)
+        stat.save
+      end
+    end
+
     # training list
     reservations_training_list(options).each do |r|
       %w(booking hour).each do |type|
@@ -166,6 +183,27 @@ class StatisticService
           nb_hours: r.slots.size,
           ca: calcul_ca(r.invoice)
         }.merge(user_info(u))) if r.reservable
+    end
+    result
+  end
+
+
+  def reservations_space_list(options = default_options)
+    result = []
+    Reservation
+        .where("reservable_type = 'Space' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
+        .eager_load(:slots, user: [:profile, :group], invoice: [:invoice_items])
+        .each do |r|
+      u = r.user
+      result.push OpenStruct.new({
+         date: options[:start_date].to_date,
+         reservation_id: r.id,
+         space_id: r.reservable.id,
+         space_name: r.reservable.name,
+         space_type: r.reservable.slug,
+         nb_hours: r.slots.size,
+         ca: calcul_ca(r.invoice)
+      }.merge(user_info(u))) if r.reservable
     end
     result
   end
