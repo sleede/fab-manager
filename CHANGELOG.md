@@ -11,6 +11,7 @@
 - Fix a bug: unable to delete an administrator from the system
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
+- [TODO DEPLOY] `rake fablab:es_add_spaces`
 
 ## v2.4.10 2017 January 9
 
