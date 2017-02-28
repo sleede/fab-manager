@@ -1,5 +1,8 @@
 class Availability < ActiveRecord::Base
 
+  ## machine/spaces availabilities are divided in multiple slots of 60 minutes
+  SLOT_DURATION = 60
+
   # elastic initialisations
   include Elasticsearch::Model
   index_name 'fablab'
@@ -66,6 +69,13 @@ class Availability < ActiveRecord::Base
       destroy
     else
       false
+    end
+  end
+
+  ## compute the total number of places over the whole space availability
+  def available_space_places
+    if available_type === 'space'
+      ((end_at - start_at)/SLOT_DURATION.minutes).to_i * nb_total_places
     end
   end
 

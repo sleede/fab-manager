@@ -5,7 +5,7 @@ class API::AvailabilitiesController < API::ApiController
   before_action :set_availability, only: [:show, :update, :destroy, :reservations]
   respond_to :json
 
-  ## machine availabilities are divided in multiple slots of 60 minutes
+  ## machine/spaces availabilities are divided in multiple slots of 60 minutes
   SLOT_DURATION = 60
 
   def index
@@ -68,8 +68,10 @@ class API::AvailabilitiesController < API::ApiController
       @availabilities = Availability.includes(:tags, :machines, :trainings, :spaces, :event, :slots)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @availabilities.each do |a|
-        if a.available_type != 'machines'
+        if a.available_type == 'training' or a.available_type == 'event'
           a = verify_training_event_is_reserved(a, @reservations, current_user)
+        elsif a.available_type == 'space'
+          a.is_reserved = is_reserved_availability(a, current_user.id)
         end
       end
     end
@@ -223,6 +225,16 @@ class API::AvailabilitiesController < API::ApiController
     def availability_params
       params.require(:availability).permit(:start_at, :end_at, :available_type, :machine_ids, :training_ids, :nb_total_places, machine_ids: [], training_ids: [], space_ids: [], tag_ids: [],
                                            :machines_attributes => [:id, :_destroy])
+    end
+
+    def is_reserved_availability(availability, user_id)
+      reserved_slots = []
+      availability.slots.each do |s|
+        if s.canceled_at.nil?
+          reserved_slots << s
+        end
+      end
+      reserved_slots.map(&:reservations).flatten.map(&:user_id).include? user_id
     end
 
     def is_reserved(start_at, reservations)

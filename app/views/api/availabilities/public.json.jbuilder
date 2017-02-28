@@ -30,11 +30,16 @@ json.array!(@availabilities) do |availability|
         json.title "#{availability.title} - #{t('trainings.completed')}"
       end
     elsif availability.available_type == 'space'
-      complete = availability.slots.map{ |s| s.is_complete? }.reduce :&
+      complete = availability.slots.length >= availability.available_space_places
       json.is_completed complete
       json.borderColor availability_border_color(availability)
       if complete
         json.title "#{availability.title} - #{t('trainings.completed')}"
+        json.borderColor AvailabilityHelper::IS_COMPLETED
+      end
+      if availability.is_reserved
+        json.is_reserved true
+        json.title "#{availability.title} - #{t('trainings.i_ve_reserved')}"
       end
     else
       json.borderColor availability_border_color(availability)
