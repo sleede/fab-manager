@@ -260,11 +260,9 @@ class API::AvailabilitiesController < API::ApiController
     def verify_space_is_reserved(slot, reservations, user, user_role)
       reservations.each do |r|
         r.slots.each do |s|
-          if slot.availability.spaces.first.id == r.reservable_id
+          if slot.space.id == r.reservable_id
             if s.start_at == slot.start_at and s.canceled_at == nil
               slot.id = s.id
-              slot.is_reserved = true
-              slot.title = t('availabilities.not_available')
               slot.can_modify = true if user_role === 'admin'
               slot.reservations.push r
             end
