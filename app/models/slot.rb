@@ -1,26 +1,15 @@
 class Slot < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
-  has_many :slots_reservations, dependent: :destroy
-  has_many :reservations, through: :slots_reservations
+  belongs_to :reservation
   belongs_to :availability
 
-  attr_accessor :is_reserved, :machine, :space, :title, :can_modify, :is_reserved_by_current_user
+  attr_accessor :is_reserved, :machine, :title, :can_modify, :is_reserved_by_current_user
 
   after_update :set_ex_start_end_dates_attrs, if: :dates_were_modified?
   after_update :notify_member_and_admin_slot_is_modified, if: :dates_were_modified?
 
   after_update :notify_member_and_admin_slot_is_canceled, if: :canceled?
-
-  # for backward compatibility
-  def reservation
-    reservations.first
-  end
-
-  def destroy
-    update_column(:destroying, true)
-    super
-  end
 
   def is_complete?
     reservations.length >= availability.nb_total_places

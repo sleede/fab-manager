@@ -11,8 +11,8 @@ json.array!(@slots) do |slot|
 
   json.availability_id slot.availability_id
   json.space do
-    json.id slot.space.id
-    json.name slot.space.name
+    json.id slot.availability.spaces.first.id
+    json.name slot.availability.spaces.first.name
   end
   # the user who booked the slot ...
   json.user do

@@ -2,10 +2,7 @@ class Reservation < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :user
-
-  has_many :slots_reservations, dependent: :destroy
-  has_many :slots, through: :slots_reservations
-
+  has_many :slots, dependent: :destroy
   accepts_nested_attributes_for :slots, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
@@ -378,7 +375,7 @@ class Reservation < ActiveRecord::Base
   def machine_not_already_reserved
     already_reserved = false
     self.slots.each do |slot|
-      same_hour_slots = Slot.joins(:reservations).where(
+      same_hour_slots = Slot.joins(:reservation).where(
                         reservations: { reservable_type: self.reservable_type,
                                        reservable_id: self.reservable_id
                                      },
