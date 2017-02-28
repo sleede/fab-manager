@@ -151,7 +151,8 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   getFilter = ->
     t = $scope.trainings.filter((t) -> t.checked).map((t) -> t.id)
     m = $scope.machines.filter((m) -> m.checked).map((m) -> m.id)
-    {t: t, m: m, evt: $scope.filter.evt, dispo: $scope.filter.dispo}
+    s = $scope.spaces.filter((s) -> s.checked).map((s) -> s.id)
+    {t: t, m: m, s: s, evt: $scope.filter.evt, dispo: $scope.filter.dispo}
 
   availabilitySourceUrl = ->
     "/api/availabilities/public?#{$.param(getFilter())}"

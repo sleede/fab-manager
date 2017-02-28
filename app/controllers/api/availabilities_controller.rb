@@ -49,6 +49,11 @@ class API::AvailabilitiesController < API::ApiController
       # spaces
       @space_availabilities = Availability.includes(:tags, :spaces).where(available_type: 'space')
                                           .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+
+      if params[:s]
+        @space_availabilities.where(available_id: params[:s])
+      end
+
       @space_slots = []
       @space_availabilities.each do |a|
         space = a.spaces.first
@@ -331,8 +336,8 @@ class API::AvailabilitiesController < API::ApiController
             end
           end
           # space
-          if params[:m] and a.available_type == 'space'
-            if params[:t].include?(a.spaces.first.id.to_s)
+          if params[:s] and a.available_type == 'space'
+            if params[:s].include?(a.spaces.first.id.to_s)
               availabilities_filtered << a
             end
           end

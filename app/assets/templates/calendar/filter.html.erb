@@ -21,7 +21,7 @@
 <div class="m-t">
   <div class="row">
     <h3 class="col-md-11 col-sm-11 col-xs-11 text-cyan" translate>{{ 'calendar.spaces' }}</h3>
-    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.machines" ng-change="toggleFilter('spaces', filter)">
+    <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.spaces" ng-change="toggleFilter('spaces', filter)">
   </div>
   <div ng-repeat="s in spaces" class="row">
     <span class="col-md-11 col-sm-11 col-xs-11">{{::s.name}}</span>
