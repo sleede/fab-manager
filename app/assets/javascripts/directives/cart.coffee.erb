@@ -246,7 +246,7 @@ Application.Directives.directive 'cart', [ '$rootScope', '$uibModal', 'dialogs',
             resetCartState()
             # finally, we update the prices
             updateCartPrice()
-          else if !$scope.slot.is_reserved && $scope.events.modifiable
+          else if !$scope.slot.is_reserved and !$scope.slot.is_completed and $scope.events.modifiable
             # slot is not reserved but we are currently modifying a slot
             # -> we request the calender to change the rendering
             $scope.onSlotModifyUnselect() if typeof $scope.onSlotModifyUnselect == 'function'
