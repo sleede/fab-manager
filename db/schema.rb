@@ -542,11 +542,11 @@ ActiveRecord::Schema.define(version: 20170227114634) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "availability_id"
-    t.boolean  "destroying",      default: false
-    t.boolean  "offered"
-    t.datetime "canceled_at"
-    t.datetime "ex_end_at"
     t.datetime "ex_start_at"
+    t.datetime "ex_end_at"
+    t.datetime "canceled_at"
+    t.boolean  "offered",         default: false
+    t.boolean  "destroying",      default: false
   end
 
   add_index "slots", ["availability_id"], name: "index_slots_on_availability_id", using: :btree

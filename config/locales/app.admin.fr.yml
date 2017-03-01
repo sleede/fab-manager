@@ -585,6 +585,8 @@ fr:
           training_explications_alert: "l'explication sur la page de réservation d'une formation"
           training_information_message: "l'information sur la page de réservation d'une formation"
           subscription_explications_alert: "l'explication sur la page de souscription à un abonnement"
+          event_explications_alert: "l'explication sur la page de réservation d'un évènement"
+          space_explications_alert: "l'explication sur la page de réservation d'un espace"
           main_color: "la couleur principale"
           secondary_color: "la couleur secondaire"
           home_blogpost: "la brève de la page d'accueil"

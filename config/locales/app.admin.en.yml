@@ -585,6 +585,8 @@ en:
           training_explications_alert: "explanation message on the training reservation page"
           training_information_message: "information message on the machine reservation page"
           subscription_explications_alert: "explanation message on the subscription page"
+          event_explications_alert: "explanation message on the event reservation page"
+          space_explications_alert: "explanation message on the space reservation page"
           main_color: "main colour"
           secondary_color: "secondary colour"
           home_blogpost: "homepage's brief"
