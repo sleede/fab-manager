@@ -373,7 +373,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     ## time must be dividable by 60 minutes (base slot duration). For training availabilities, the user
     ## can configure any duration as it does not matters.
     $scope.$watch 'availability.available_type', (newValue, oldValue, scope) ->
-      if newValue == 'machines'
+      if newValue == 'machines' or newValue == 'space'
         $scope.endDateReadOnly = true
         diff = moment($scope.end).diff($scope.start, 'hours') # the result is rounded down by moment.js
         $scope.end = moment($scope.start).add(diff, 'hours').toDate()
@@ -384,8 +384,8 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
     ## When the start date is changed, if we are configuring a machine availability,
     ## maintain the relative length of the slot (ie. change the end time accordingly)
     $scope.$watch 'start', (newValue, oldValue, scope) ->
-      # for machine availabilities, adjust the end time
-      if $scope.availability.available_type == 'machines'
+      # for machine or space availabilities, adjust the end time
+      if $scope.availability.available_type == 'machines' or $scope.availability.available_type == 'space'
         end = moment($scope.end)
         end.add(moment(newValue).diff(oldValue), 'milliseconds')
         $scope.end = end.toDate()
