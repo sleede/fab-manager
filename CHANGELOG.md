@@ -4,9 +4,9 @@
 - TODO export availabilities (taiga#57)
 - TODO bug: calendar (github#59)
 - TODO bug: delete event (github#61)
-- ONGOING spaces reservation
+- Ability to create, manage and reserve spaces
 - Improved admin's interface to create availabilities
-- Complete rewrote of the reservation cart functionality with stability and performance improvements
+- Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
 - Fix a bug: trainings reservations are not shown in the admin's calendar
 - Fix a bug: unable to delete an administrator from the system
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
