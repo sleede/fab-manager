@@ -59,8 +59,8 @@
                   </tbody>
               </table>
 
-              <h3 translate>{{ 'edit_plan.spaces' }}</h3>
-              <table class="table">
+              <h3 ng-hide="fablabWithoutSpaces" translate>{{ 'edit_plan.spaces' }}</h3>
+              <table class="table" ng-hide="fablabWithoutSpaces">
                 <thead>
                   <th translate>{{ 'edit_plan.space' }}</th>
                   <th translate>{{ 'edit_plan.hourly_rate' }}</th>
