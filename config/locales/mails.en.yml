@@ -268,6 +268,7 @@ en:
         statistics_project: "of statistics about projects"
         statistics_subscription: "of subscription statistics"
         statistics_training: "of statistics about trainings"
+        statistics_space: "of statistics about spaces"
         users_members: "of the members' list"
         users_subscriptions: "of the subscriptions' list"
         users_reservations: "of the reservations' list"
