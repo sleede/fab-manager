@@ -124,10 +124,10 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     # ui-calendar will trigger rerender calendar
     $scope.calendarConfig.defaultView = view.type
     today = if currentMachineEvent then currentMachineEvent.start else moment().utc().startOf('day')
-    if today > view.start and today < view.end and today != view.start
+    if today > view.intervalStart and today < view.intervalEnd and today != view.intervalStart
       $scope.calendarConfig.defaultDate = today
     else
-      $scope.calendarConfig.defaultDate = view.start
+      $scope.calendarConfig.defaultDate = view.intervalStart
     if view.type == 'agendaDay'
       $scope.calendarConfig.slotEventOverlap = false
     else
