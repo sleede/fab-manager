@@ -40,7 +40,7 @@ class StatisticsExportService
     File.open(export.file,"w+b") {|f| f.puts content }
   end
 
-  %w(account event machine project subscription training).each do |path|
+  %w(account event machine project subscription training space).each do |path|
     class_eval %{
       def export_#{path}(export)
 

@@ -48,6 +48,13 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
         linkIcon: 'credit-card'
     })
 
+  unless Fablab.withoutSpaces
+    $scope.navLinks.splice(3, 0, {
+      state: 'app.public.spaces_list'
+      linkText: 'reserve_a_space'
+      linkIcon: 'rocket'
+    })
+
 
   Fablab.adminNavLinks = Fablab.adminNavLinks || []
   adminNavLinks = [
@@ -109,4 +116,11 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
   ].concat(Fablab.adminNavLinks)
 
   $scope.adminNavLinks = adminNavLinks
+
+  unless Fablab.withoutSpaces
+    $scope.adminNavLinks.splice(7, 0, {
+      state: 'app.public.spaces_list'
+      linkText: 'manage_the_spaces'
+      linkIcon: 'rocket'
+    })
 ]

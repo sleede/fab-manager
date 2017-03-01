@@ -1,0 +1,9 @@
+space_1:
+  id: 1
+  name: Atelier Bois
+  default_places: 10
+  description: Devenez un véritable menuisier à l'espace atelier bois de votre fablab
+  slug: atelier-bois
+  created_at: 2017-02-15 15:55:04.123928000 Z
+  updated_at: 2017-02-15 15:55:04.123928000 Z
+  characteristics: Scie à chantourner, rabot, dégauchisseuse, chanfreineuse et pyrograveur

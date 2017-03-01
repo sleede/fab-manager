@@ -2,7 +2,10 @@ class Reservation < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :user
-  has_many :slots, dependent: :destroy
+
+  has_many :slots_reservations, dependent: :destroy
+  has_many :slots, through: :slots_reservations
+
   accepts_nested_attributes_for :slots, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
@@ -126,6 +129,34 @@ class Reservation < ActiveRecord::Base
           self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
         end
 
+      # === Space reservation ===
+      when Space
+        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+
+        slots.each_with_index do |slot, index|
+          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+
+          ii_amount = base_amount # ii_amount default to base_amount
+
+          if users_credits_manager.will_use_credits?
+            ii_amount = (index < users_credits_manager.free_hours_count) ? 0 : base_amount
+          end
+
+          ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
+
+          unless on_site # if it's local payment then do not create Stripe::InvoiceItem
+            ii = Stripe::InvoiceItem.create(
+                customer: user.stp_customer_id,
+                amount: ii_amount,
+                currency: Rails.application.secrets.stripe_currency,
+                description: description
+            )
+            invoice_items << ii
+          end
+          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
+        end
+
       # === Unknown reservation type ===
       else
         raise NotImplementedError
@@ -164,7 +195,7 @@ class Reservation < ActiveRecord::Base
     if @wallet_amount_debit != 0 and !on_site
       invoice_items << Stripe::InvoiceItem.create(
         customer: user.stp_customer_id,
-        amount: -@wallet_amount_debit,
+        amount: -@wallet_amount_debit.to_i,
         currency: Rails.application.secrets.stripe_currency,
         description: "wallet -#{@wallet_amount_debit / 100.0}"
       )
@@ -347,7 +378,7 @@ class Reservation < ActiveRecord::Base
   def machine_not_already_reserved
     already_reserved = false
     self.slots.each do |slot|
-      same_hour_slots = Slot.joins(:reservation).where(
+      same_hour_slots = Slot.joins(:reservations).where(
                         reservations: { reservable_type: self.reservable_type,
                                        reservable_id: self.reservable_id
                                      },

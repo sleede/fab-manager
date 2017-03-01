@@ -1,5 +1,18 @@
 # Changelog Fab Manager
 
+## next release
+- TODO export availabilities (taiga#57)
+- TODO bug: calendar (github#59)
+- TODO bug: delete event (github#61)
+- Ability to create, manage and reserve spaces
+- Improved admin's interface to create availabilities
+- Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
+- Fix a bug: trainings reservations are not shown in the admin's calendar
+- Fix a bug: unable to delete an administrator from the system
+- [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
+- [TODO DEPLOY] `rake fablab:es_add_spaces`
+
 ## v2.4.10 2017 January 9
 
 - Optimized notifications system

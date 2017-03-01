@@ -250,8 +250,9 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
 
     # shorthands
-    $scope.isAuthenticated = Auth.isAuthenticated;
-    $scope.isAuthorized = AuthService.isAuthorized;
+    $scope.isAuthenticated = Auth.isAuthenticated
+    $scope.isAuthorized = AuthService.isAuthorized
+    $rootScope.login = $scope.login
 
 
 

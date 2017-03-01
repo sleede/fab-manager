@@ -17,6 +17,11 @@ Application.Services.factory 'Availability', ["$resource", ($resource)->
       url: '/api/availabilities/trainings/:trainingId'
       params: {trainingId: "@trainingId"}
       isArray: true
+    spaces:
+      method: 'GET'
+      url: '/api/availabilities/spaces/:spaceId'
+      params: {spaceId: "@spaceId"}
+      isArray: true
     update:
       method: 'PUT'
 ]

@@ -1,13 +1,13 @@
-<h2 translate>{{ 'list_of_the_coupons' }}</h2>
+<h2 translate>{{ 'pricing.list_of_the_coupons' }}</h2>
 
-<button type="button" class="btn btn-warning m-t-lg m-b" ui-sref="app.admin.coupons_new" translate>{{ 'add_a_new_coupon' }}</button>
+<button type="button" class="btn btn-warning m-t-lg m-b" ui-sref="app.admin.coupons_new" translate>{{ 'pricing.add_a_new_coupon' }}</button>
 <table class="table">
   <thead>
   <tr>
-    <th translate>{{ 'name' }}</th>
-    <th translate>{{ 'discount' }}</th>
-    <th translate>{{ 'nb_of_usages' }}</th>
-    <th translate>{{ 'status' }}</th>
+    <th translate>{{ 'pricing.name' }}</th>
+    <th translate>{{ 'pricing.discount' }}</th>
+    <th translate>{{ 'pricing.nb_of_usages' }}</th>
+    <th translate>{{ 'pricing.status' }}</th>
     <th></th>
   </tr>
   </thead>
@@ -19,7 +19,7 @@
       <span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span>
     </td>
     <td>{{coupon.usages}}</td>
-    <td translate>{{coupon.status}}</td>
+    <td translate>{{'pricing.'+coupon.status}}</td>
     <td>
       <button type="button" class="btn btn-default" ng-click="sendCouponToUser(coupon)"><i class="fa fa-send-o"></i> </button>
       <button type="button" class="btn btn-default" ui-sref="app.admin.coupons_edit({id:coupon.id})"><i class="fa fa-pencil-square-o"></i></button>

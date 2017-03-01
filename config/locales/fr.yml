@@ -85,6 +85,7 @@ fr:
     subscription_extended_for_free_from_START_to_END: "Abonnement prolongé gratuitement - Du %{START} au %{END}"
     subscription_NAME_from_START_to_END: "Abonnement - Du %{START} au %{END}"
     machine_reservation_DESCRIPTION: "Réservation Machine - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Réservation Espace - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Réservation Évènement - %{DESCRIPTION}"
     full_price_ticket:
@@ -274,6 +275,7 @@ fr:
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
+        statistics_space: "des statistiques sur les espaces"
         users_members: "de la liste des membres"
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
@@ -286,6 +288,7 @@ fr:
     # outil de statistiques pour les administrateurs
     subscriptions: "Abonnements"
     machines_hours: "Heures machines"
+    spaces: "Espaces"
     trainings: "Formations"
     events: "Évènements"
     registrations: "Inscriptions"

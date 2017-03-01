@@ -1,11 +1,11 @@
 <div class="modal-header">
-  <h3 class="text-center red" translate>{{ 'send_a_coupon' }}</h3>
+  <h3 class="text-center red" translate>{{ 'pricing.send_a_coupon' }}</h3>
 </div>
 <div class="modal-body">
   <select-member></select-member>
   <div class="widget panel b-a m">
     <div class="panel-heading b-b small">
-      <h3 class="panel-title" translate>{{ 'coupon' }}</h3>
+      <h3 class="panel-title" translate>{{ 'pricing.coupon' }}</h3>
     </div>
     <div class="widget-content no-bg auto wrapper">
       <table>
@@ -13,12 +13,12 @@
         <tr><th style="width:60%"></th></tr>
         </thead>
         <tbody>
-        <tr><td translate>{{'code'}}</td>               <td>{{coupon.code}}</td></tr>
-        <tr><td translate>{{'discount'}}</td>           <td><span ng-show="coupon.type == 'percent_off'">{{coupon.percent_off}} %</span><span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span></td></tr>
-        <tr><td translate>{{'validity_per_user'}}</td>  <td translate>{{coupon.validity_per_user}}</td></tr>
-        <tr><td translate>{{'valid_until'}}</td>        <td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
-        <tr><td translate>{{'usages'}}</td>             <td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
-        <tr><td translate>{{'enabled'}}</td>            <td>{{coupon.active | booleanFormat}}</td></tr>
+        <tr><td translate>{{'pricing.code'}}</td>               <td>{{coupon.code}}</td></tr>
+        <tr><td translate>{{'pricing.discount'}}</td>           <td><span ng-show="coupon.type == 'percent_off'">{{coupon.percent_off}} %</span><span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span></td></tr>
+        <tr><td translate>{{'pricing.validity_per_user'}}</td>  <td translate>{{'pricing.'+coupon.validity_per_user}}</td></tr>
+        <tr><td translate>{{'pricing.valid_until'}}</td>        <td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
+        <tr><td translate>{{'pricing.usages'}}</td>             <td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
+        <tr><td translate>{{'pricing.enabled'}}</td>            <td>{{coupon.active | booleanFormat}}</td></tr>
         </tbody>
       </table>
     </div>
