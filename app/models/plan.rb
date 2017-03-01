@@ -19,6 +19,7 @@ class Plan < ActiveRecord::Base
   after_update :update_stripe_plan, if: :amount_changed?
   after_create :create_stripe_plan, unless: :skip_create_stripe_plan
   after_create :create_machines_prices
+  after_create :create_spaces_prices
   after_create :create_statistic_type
   after_destroy :delete_stripe_plan
 
@@ -54,6 +55,12 @@ class Plan < ActiveRecord::Base
   def create_machines_prices
     Machine.all.each do |machine|
       Price.create(priceable: machine, plan: self, group_id: self.group_id, amount: 0)
+    end
+  end
+
+  def create_spaces_prices
+    Space.all.each do |space|
+      Price.create(priceable: space, plan: self, group_id: self.group_id, amount: 0)
     end
   end
 
