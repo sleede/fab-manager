@@ -279,11 +279,11 @@ class API::AvailabilitiesController < API::ApiController
         r.slots.each do |s|
           if slot.space.id == r.reservable_id
             if s.start_at == slot.start_at and s.canceled_at == nil
-              slot.id = s.id
               slot.can_modify = true if user_role === 'admin'
               slot.reservations.push r
             end
             if s.start_at == slot.start_at and r.user == user and s.canceled_at == nil
+              slot.id = s.id
               slot.title = t('availabilities.i_ve_reserved')
               slot.can_modify = true
               slot.is_reserved = true
