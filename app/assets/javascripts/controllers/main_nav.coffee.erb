@@ -49,7 +49,7 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
     })
 
   unless Fablab.withoutSpaces
-    $scope.navLinks.splice(5, 0, {
+    $scope.navLinks.splice(3, 0, {
       state: 'app.public.spaces_list'
       linkText: 'reserve_a_space'
       linkIcon: 'rocket'
@@ -118,7 +118,7 @@ Application.Controllers.controller "MainNavController", ["$scope", "$location", 
   $scope.adminNavLinks = adminNavLinks
 
   unless Fablab.withoutSpaces
-    $scope.adminNavLinks.splice(8, 0, {
+    $scope.adminNavLinks.splice(7, 0, {
       state: 'app.public.spaces_list'
       linkText: 'manage_the_spaces'
       linkIcon: 'rocket'
