@@ -5,6 +5,8 @@ json.space_files_attributes @space.space_files do |f|
   json.attachment f.attachment_identifier
   json.attachment_url f.attachment_url
 end
-json.space_projects @space.projects do |p|
-  json.extract! p, :slug, :name
-end
+# Unused for the moment. May be used to show a list of projects
+# using the space in the space_show screen
+# json.space_projects @space.projects do |p|
+#   json.extract! p, :slug, :name
+# end
