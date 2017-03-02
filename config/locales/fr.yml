@@ -196,6 +196,7 @@ fr:
     slot: "Créneau"
     machine: "Machine"
     training: "Formation"
+    space: "Espace"
     reservations: "Réservations"
     available_seats: "Places disponibles"
 

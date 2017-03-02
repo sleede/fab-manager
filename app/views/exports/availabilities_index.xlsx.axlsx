@@ -64,3 +64,36 @@ wb.add_worksheet(name: t('export_availabilities.trainings')) do |sheet|
     sheet.add_row data, :style => styles, :types => types
   end
 end
+
+## Spaces slots
+if Rails.application.secrets.fablab_without_spaces != 'false'
+  wb.add_worksheet(name: t('export_availabilities.spaces')) do |sheet|
+
+    ## data table
+    # heading labels
+    columns = [t('export_availabilities.date'), t('export_availabilities.slot'), t('export_availabilities.space'),
+               t('export_availabilities.reservations'), t('export_availabilities.available_seats')]
+    sheet.add_row columns, :style => header
+
+    # data rows
+    @availabilities.where(available_type: 'space').order(:start_at).each do |a|
+      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
+        start_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes
+        end_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes
+        reservations = a.slots.where(start_at: start_at).count
+
+        data = [
+            start_at.to_date,
+            print_slot(start_at, end_at),
+            a.spaces.first.name,
+            reservations,
+            a.nb_total_places
+        ]
+        styles = [date, nil, nil, nil, nil]
+        types = [:date, :string, :string, :integer, :integer]
+
+        sheet.add_row data, :style =>  styles, :types => types
+      end
+    end
+  end
+end
