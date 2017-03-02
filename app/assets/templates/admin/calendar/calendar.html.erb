@@ -31,7 +31,13 @@
 
   <div class="col-sm-12 col-md-12 col-lg-3">
     <div class="m text-center">
-      <a class="btn btn-default" ng-href="api/availabilities/export_index.xlsx" target="export-frame" ng-click="alertExport('index')">
+      <a class="btn btn-default"
+         ng-href="api/availabilities/export_index.xlsx"
+         target="export-frame"
+         ng-click="alertExport('index')"
+         uib-popover="{{ 'admin_calendar.availabilities_notice' | translate}}"
+         popover-trigger="mouseenter"
+         popover-placement="bottom">
         <i class="fa fa-file-excel-o"></i> {{ 'admin_calendar.availabilities' | translate }}
       </a>
       <iframe name="export-frame" height="0" width="0" class="none"></iframe>

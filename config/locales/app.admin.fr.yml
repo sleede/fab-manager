@@ -19,6 +19,7 @@ fr:
           machines: "Machines"
           spaces: "Espaces"
           availabilities: "Disponibilités"
+          availabilities_notice: "Exporter dans un classeur Excel tous les créneaux ouverts à la réservation et leurs taux d'occupation."
           ongoing_reservations: "Réservations en cours"
           no_reservations: "Aucune réservation"
           confirmation_required: "Confirmation requise"

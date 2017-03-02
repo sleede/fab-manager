@@ -19,6 +19,7 @@ en:
           machines: "Machines"
           spaces: "Spaces"
           availabilities: "Availabilities"
+          availabilities_notice: "Export to an Excel workbook every slots available for reservation, and their occupancy rate."
           ongoing_reservations: "Ongoing reservations"
           no_reservations: "No reservations"
           confirmation_required: "Confirmation required"
