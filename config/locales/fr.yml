@@ -195,7 +195,9 @@ fr:
     date: "Date"
     slot: "Créneau"
     machine: "Machine"
+    training: "Formation"
     reservations: "Réservations"
+    available_seats: "Places disponibles"
 
 
   api:

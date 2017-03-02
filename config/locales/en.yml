@@ -195,7 +195,9 @@ en:
     date: "Date"
     slot: "Slot"
     machine: "Machine"
+    training: "Training"
     reservations: "Reservations"
+    available_seats: "Available seats"
 
 
   api:

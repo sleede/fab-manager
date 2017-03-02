@@ -38,3 +38,29 @@ wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
     end
   end
 end
+
+
+## Trainings slots
+wb.add_worksheet(name: t('export_availabilities.trainings')) do |sheet|
+
+  ## data table
+  # heading labels
+  columns = [t('export_availabilities.date'), t('export_availabilities.slot'), t('export_availabilities.training'),
+             t('export_availabilities.reservations'), t('export_availabilities.available_seats')]
+  sheet.add_row columns, :style => header
+
+  # data rows
+  @availabilities.where(available_type: 'training').order(:start_at).each do |a|
+    data = [
+        a.start_at.to_date,
+        print_slot(a.start_at, a.end_at),
+        a.trainings.first.name,
+        a.reservations.count,
+        a.nb_total_places
+    ]
+    styles = [date, nil, nil, nil, nil]
+    types = [:date, :string, :string, :integer, :integer]
+
+    sheet.add_row data, :style => styles, :types => types
+  end
+end
