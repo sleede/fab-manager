@@ -124,6 +124,11 @@ en:
     i_ve_reserved: "I've reserved"
     completed: "Full"
 
+  events:
+    # error messages when updating an event
+    error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
+    other_error: "An unexpected error occurred while updating the event"
+
   export_members:
     # members list export to EXCEL format
     members: "Members"

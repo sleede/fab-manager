@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 ## next release (v2.5.0)
+- Ability to remove an unused custom price for an event (#61)
 - Prevent polling notifications when the application is in background
 - Ability to export the availabilities and their reservation rate from the admin calendar
 - Ability to create, manage and reserve spaces

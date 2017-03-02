@@ -124,6 +124,11 @@ fr:
     i_ve_reserved: "J'ai réservé"
     completed: "Complet"
 
+  events:
+    # messages d'erreur lors de la mise à jour d'un évènement
+    error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
+    other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
+
   export_members:
     # export de la liste des members au format EXCEL
     members: "Membres"
