@@ -148,6 +148,9 @@ In you only intend to run fab-manager on your local machine for testing purposes
     - user: admin@fab-manager.com
     - password: adminadmin
 
+13. Email notifications will be caught by MailCatcher.
+    To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
+
 <a name="environment-configuration"></a>
 ### Environment Configuration
 
