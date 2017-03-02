@@ -1,7 +1,8 @@
 # Changelog Fab Manager
 
-## next release
-- TODO export availabilities (taiga#57)
+## next release (v2.5.0)
+- Prevent polling notifications when the application is in background
+- Ability to export the availabilities and their reservation rate from the admin calendar
 - Ability to create, manage and reserve spaces
 - Improved admin's interface to create availabilities
 - Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
