@@ -197,6 +197,7 @@ fr:
     machine: "Machine"
     training: "Formation"
     space: "Espace"
+    event: "Évènement"
     reservations: "Réservations"
     available_seats: "Places disponibles"
 
