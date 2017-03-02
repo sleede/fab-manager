@@ -4,8 +4,8 @@
 # Controller used in the calendar management page
 ##
 
-Application.Controllers.controller "AdminCalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig'
-($scope, $state, $uibModal, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) ->
+Application.Controllers.controller "AdminCalendarController", ["$scope", "$state", "$uibModal", "moment", "Availability", 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig'
+($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) ->
 
 
 
@@ -118,6 +118,17 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
           growl.success(_t('admin_calendar.the_machine_was_successfully_removed_from_the_slot'))
         , (data, status) -> # failed
           growl.error(_t('admin_calendar.deletion_failed'))
+
+
+
+  ##
+  # Callback to alert the admin that the export request was acknowledged and is
+  # processing right now.
+  ##
+  $scope.alertExport = (type) ->
+    Export.status({category: 'availabilities', type: type}).then (res) ->
+      unless (res.data.exists)
+        growl.success _t('admin_calendar.export_is_running_you_ll_be_notified_when_its_ready')
 
 
 

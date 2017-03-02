@@ -6,7 +6,7 @@ class API::AvailabilitiesController < API::ApiController
   respond_to :json
 
   ## machine/spaces availabilities are divided in multiple slots of 60 minutes
-  SLOT_DURATION = 60
+  SLOT_DURATION = ApplicationHelper::SLOT_DURATION
 
   def index
     authorize Availability
@@ -69,7 +69,6 @@ class API::AvailabilitiesController < API::ApiController
 
     # request for many days (week or month)
     else
-
       @availabilities = Availability.includes(:tags, :machines, :trainings, :spaces, :event, :slots)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
       @availabilities.each do |a|
@@ -220,6 +219,22 @@ class API::AvailabilitiesController < API::ApiController
   def reservations
     authorize Availability
     @reservation_slots = @availability.slots.includes(reservations: [user: [:profile]]).order('slots.start_at ASC')
+  end
+
+  def export_availabilities
+    authorize :export
+
+    export = Export.where({category:'availabilities', export_type: 'index'}).where('created_at > ?', Availability.maximum('updated_at')).last
+    if export.nil? || !FileTest.exist?(export.file)
+      @export = Export.new({category:'availabilities', export_type: 'index', user: current_user})
+      if @export.save
+        render json: {export_id: @export.id}, status: :ok
+      else
+        render json: @export.errors, status: :unprocessable_entity
+      end
+    else
+      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    end
   end
 
   private

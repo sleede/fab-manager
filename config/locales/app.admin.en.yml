@@ -18,6 +18,7 @@ en:
           trainings: "Trainings"
           machines: "Machines"
           spaces: "Spaces"
+          availabilities: "Availabilities"
           ongoing_reservations: "Ongoing reservations"
           no_reservations: "No reservations"
           confirmation_required: "Confirmation required"
@@ -45,6 +46,7 @@ en:
           the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
           you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
+          export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
 
       project_elements:
         # management of the projects' components

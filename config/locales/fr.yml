@@ -186,6 +186,18 @@ fr:
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
 
+  export_availabilities:
+    # export des listes de créneaux de réservations, par type, au format EXCEL
+    machines: "Machines"
+    trainings: "Formations"
+    spaces: "Espaces"
+    events: "Évènements"
+    date: "Date"
+    slot: "Créneau"
+    machine: "Machine"
+    reservations: "Réservations"
+
+
   api:
     notifications:
       # notifications internes à l'application
@@ -279,6 +291,7 @@ fr:
         users_members: "de la liste des membres"
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
+        availabilities_index: "des disponibilités de réservations"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
       notify_member_about_coupon:

@@ -1,4 +1,4 @@
-class UsersExportWorker
+class AvailabilitiesExportWorker
   include Sidekiq::Worker
 
   def perform(export_id)
@@ -8,14 +8,14 @@ class UsersExportWorker
       raise SecurityError, 'Not allowed to export'
     end
 
-    unless export.category == 'users'
+    unless export.category == 'availabilities'
       raise KeyError, 'Wrong worker called'
     end
 
-    service = UsersExportService.new
+    service = AvailabilitiesExportService.new
     method_name = "export_#{export.export_type}"
 
-    if %w(members subscriptions reservations).include?(export.export_type) and service.respond_to?(method_name)
+    if %w(index).include?(export.export_type) and service.respond_to?(method_name)
       service.public_send(method_name, export)
 
       NotificationCenter.call type: :notify_admin_export_complete,

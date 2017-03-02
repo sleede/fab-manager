@@ -84,6 +84,7 @@ Rails.application.routes.draw do
       get 'spaces/:space_id', action: 'spaces', on: :collection
       get 'reservations', on: :member
       get 'public', on: :collection
+      get '/export_index', action: 'export_availabilities', on: :collection
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]
