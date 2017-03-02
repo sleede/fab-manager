@@ -192,6 +192,7 @@ en:
     trainings: "Trainings"
     spaces: "Spaces"
     events: "Events"
+    day_of_week: "Day of week"
     date: "Date"
     slot: "Slot"
     machine: "Machine"

@@ -192,6 +192,7 @@ fr:
     trainings: "Formations"
     spaces: "Espaces"
     events: "Évènements"
+    day_of_week: "Jour de la semaine"
     date: "Date"
     slot: "Créneau"
     machine: "Machine"

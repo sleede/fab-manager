@@ -8,8 +8,8 @@ wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
 
   ## data table
   # heading labels
-  columns = [t('export_availabilities.date'), t('export_availabilities.slot'), t('export_availabilities.machine'),
-             t('export_availabilities.reservations')]
+  columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+             t('export_availabilities.machine'), t('export_availabilities.reservations')]
   sheet.add_row columns, :style => header
 
   # data rows
@@ -25,12 +25,13 @@ wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
 
         data = [
             start_at.to_date,
+            I18n.l(start_at, format: '%A').capitalize,
             print_slot(start_at, end_at),
             m.name,
             reservations
         ]
-        styles = [date, nil, nil, nil]
-        types = [:date, :string, :string, :integer]
+        styles = [date, nil, nil, nil, nil]
+        types = [:date, :string, :string, :string, :integer]
 
         sheet.add_row data, :style =>  styles, :types => types
 
@@ -45,21 +46,23 @@ wb.add_worksheet(name: t('export_availabilities.trainings')) do |sheet|
 
   ## data table
   # heading labels
-  columns = [t('export_availabilities.date'), t('export_availabilities.slot'), t('export_availabilities.training'),
-             t('export_availabilities.reservations'), t('export_availabilities.available_seats')]
+  columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+             t('export_availabilities.training'), t('export_availabilities.reservations'),
+             t('export_availabilities.available_seats')]
   sheet.add_row columns, :style => header
 
   # data rows
   @availabilities.where(available_type: 'training').order(:start_at).each do |a|
     data = [
         a.start_at.to_date,
+        I18n.l(a.start_at, format: '%A').capitalize,
         print_slot(a.start_at, a.end_at),
         a.trainings.first.name,
         a.reservations.count,
         a.nb_total_places
     ]
-    styles = [date, nil, nil, nil, nil]
-    types = [:date, :string, :string, :integer, :integer]
+    styles = [date, nil, nil, nil, nil, nil]
+    types = [:date, :string, :string, :string, :integer, :integer]
 
     sheet.add_row data, :style => styles, :types => types
   end
@@ -71,8 +74,9 @@ if Rails.application.secrets.fablab_without_spaces != 'false'
 
     ## data table
     # heading labels
-    columns = [t('export_availabilities.date'), t('export_availabilities.slot'), t('export_availabilities.space'),
-               t('export_availabilities.reservations'), t('export_availabilities.available_seats')]
+    columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+               t('export_availabilities.space'), t('export_availabilities.reservations'),
+               t('export_availabilities.available_seats')]
     sheet.add_row columns, :style => header
 
     # data rows
@@ -84,13 +88,14 @@ if Rails.application.secrets.fablab_without_spaces != 'false'
 
         data = [
             start_at.to_date,
+            I18n.l(start_at, format: '%A').capitalize,
             print_slot(start_at, end_at),
             a.spaces.first.name,
             reservations,
             a.nb_total_places
         ]
-        styles = [date, nil, nil, nil, nil]
-        types = [:date, :string, :string, :integer, :integer]
+        styles = [date, nil, nil, nil, nil, nil]
+        types = [:date, :string, :string, :string, :integer, :integer]
 
         sheet.add_row data, :style =>  styles, :types => types
       end
@@ -104,21 +109,23 @@ wb.add_worksheet(name: t('export_availabilities.events')) do |sheet|
 
   ## data table
   # heading labels
-  columns = [t('export_availabilities.date'), t('export_availabilities.slot'), t('export_availabilities.event'),
-             t('export_availabilities.reservations'), t('export_availabilities.available_seats')]
+  columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+             t('export_availabilities.event'), t('export_availabilities.reservations'),
+             t('export_availabilities.available_seats')]
   sheet.add_row columns, :style => header
 
   # data rows
   @availabilities.where(available_type: 'event').order(:start_at).each do |a|
     data = [
         a.start_at.to_date,
+        I18n.l(a.start_at, format: '%A').capitalize,
         print_slot(a.start_at, a.end_at),
         a.event.title,
         a.reservations.map(&:nb_reserve_places).reduce(:+) || 0,
         a.nb_total_places
     ]
-    styles = [date, nil, nil, nil, nil]
-    types = [:date, :string, :string, :integer, :integer]
+    styles = [date, nil, nil, nil, nil, nil]
+    types = [:date, :string, :string, :string, :integer, :integer]
 
     sheet.add_row data, :style => styles, :types => types
   end
