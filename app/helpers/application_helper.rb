@@ -4,7 +4,7 @@ module ApplicationHelper
 	require 'message_format'
 
 	## machine/spaces availabilities are divided in multiple slots of 60 minutes
-	SLOT_DURATION = 60
+	SLOT_DURATION ||= 60
 
 	##
 	# Verify if the provided attribute is in the provided attributes array, whatever it exists or not
