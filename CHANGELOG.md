@@ -16,6 +16,10 @@
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
 - [TODO DEPLOY] `rake fablab:es_add_spaces`
 
+## v2.4.11 2017 March 15
+- Fix a bug: editing and saving a plan, result in removing the rolling attribute
+- [TODO DEPLOY] `rake fablab:fix:rolling_plans`
+
 ## v2.4.10 2017 January 9
 
 - Optimized notifications system
