@@ -12,6 +12,7 @@
 - Fix a bug: unable to delete an administrator from the system
 - Fix a bug: unable to delete an event with a linked custom price (#61)
 - Fix a bug: navigation in client calendar is bogus when browsing months (#59)
+- Fix a bug: subscription name is not shown in invoices
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
 - [TODO DEPLOY] `rake fablab:es_add_spaces`
