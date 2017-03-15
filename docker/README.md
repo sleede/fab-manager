@@ -125,7 +125,7 @@ Requires=docker.service
 [Service]
 Type=oneshot  
 ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/home/core/fabmanager/log:/var/log/letsencrypt" -v "/home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt" -v "/home/core/fabmanager/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
-ExecStartPost=-/usr/bin/docker restart fabmanager  
+ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1  
 ```
 
 Create file (with sudo) /etc/systemd/system/letsencrypt.timer with
@@ -138,6 +138,9 @@ Requires=docker.service
 OnCalendar=*-*-1 06:00:00
 Persistent=true
 Unit=letsencrypt.service
+
+[Install]
+WantedBy=timers.target
 ```
 
 Then deploy your app and read the "Generate SSL certificate by Letsencrypt" section to complete the installation of the letsencrypt certificate.
@@ -277,7 +280,9 @@ Remove your app and Run your app to apply changes
 Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the month :
 
 ```bash
+sudo systemctl enable letsencrypt.timer
 sudo systemctl start letsencrypt.timer
+(check) sudo systemctl list-timers
 ```
 
 
@@ -335,7 +340,9 @@ Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/co
 
 #### create/migrate/seed db
 
-`docker-compose run --rm fabmanager bundle exec rake db:setup`
+`docker-compose run --rm fabmanager bundle exec rake db:create`
+`docker-compose run --rm fabmanager bundle exec rake db:migrate`
+`docker-compose run --rm fabmanager bundle exec rake db:seed`
 
 #### build assets
 

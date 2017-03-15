@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :tags, allow_destroy: true
 
   has_one :wallet, dependent: :destroy
+  has_many :wallet_transactions, dependent: :destroy
 
   has_many :exports, dependent: :destroy
 
@@ -131,7 +132,7 @@ class User < ActiveRecord::Base
       end
       json.machine_credits machine_credits do |mc|
         json.machine_id mc.creditable_id
-        json.hours_used mc.users_credits.find_by_user_id(id).hours_used
+        json.hours_used mc.users_credits.find_by(user_id: id).hours_used
       end
       json.last_sign_in_at last_sign_in_at.iso8601 if last_sign_in_at
     end
@@ -213,7 +214,7 @@ class User < ActiveRecord::Base
 
     where(provider: auth.provider, uid: auth.uid).first_or_create.tap do |user|
       # execute this regardless of whether record exists or not (-> User#tap)
-      # this will init or update the user thanks to the informations retrieved from the SSO
+      # this will init or update the user thanks to the information retrieved from the SSO
       user.profile ||= Profile.new
       auth.info.mapping.each do |key, value|
         user.set_data_from_sso_mapping(key, value)

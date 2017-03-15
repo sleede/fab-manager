@@ -28,7 +28,7 @@ class Profile < ActiveRecord::Base
   def age
     if birthday.present?
       now = Time.now.utc.to_date
-      now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+      (now - birthday).to_f / 365.2425
     else
       ''
     end

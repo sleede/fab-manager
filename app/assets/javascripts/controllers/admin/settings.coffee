@@ -45,6 +45,8 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.trainingExplicationsAlert = { name: 'training_explications_alert', value: settingsPromise.training_explications_alert }
     $scope.trainingInformationMessage = { name: 'training_information_message', value: settingsPromise.training_information_message}
     $scope.subscriptionExplicationsAlert = { name: 'subscription_explications_alert', value: settingsPromise.subscription_explications_alert }
+    $scope.eventExplicationsAlert = {name: 'event_explications_alert', value: settingsPromise.event_explications_alert }
+    $scope.spaceExplicationsAlert = { name: 'space_explications_alert', value: settingsPromise.space_explications_alert }
     $scope.windowStart = { name: 'booking_window_start', value: settingsPromise.booking_window_start }
     $scope.windowEnd = { name: 'booking_window_end', value: settingsPromise.booking_window_end }
     $scope.mainColorSetting = { name: 'main_color', value: settingsPromise.main_color }
@@ -73,7 +75,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.cancelDelay =
       name: 'booking_cancel_delay'
       value: parseInt(settingsPromise.booking_cancel_delay)
-      
+
     $scope.enableReminder =
       name: 'reminder_enable'
       value: (settingsPromise.reminder_enable == 'true')
@@ -115,7 +117,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
         value = setting.value
 
       Setting.update { name: setting.name }, { value: value }, (data)->
-        growl.success(_t('customization_of_SETTING_successfully_saved', {SETTING:_t(setting.name)}))
+        growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING:_t('settings.' + setting.name) }))
       , (error)->
         console.log(error)
 
@@ -134,7 +136,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
           angular.forEach v, (err)->
             growl.error(err)
       else
-        growl.success(_t('file_successfully_updated'))
+        growl.success(_t('settings.file_successfully_updated'))
         if content.custom_asset.name is 'cgu-file'
           $scope.cguFile = content.custom_asset
           $scope.methods.cgu = 'put'

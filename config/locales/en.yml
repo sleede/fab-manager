@@ -31,6 +31,11 @@ en:
       wrong_size: "is the wrong size (should be %{file_size})"
       size_too_small: "is too small (should be at least %{file_size})"
       size_too_big: "is too big (should be at most %{file_size})"
+      export_not_found: "Requested export was not found. It was probably deleted, please generate a new export."
+      percentage_out_of_range: "Percentage must be included between 0 and 100"
+      cannot_be_blank_at_same_time: "cannot be blank when %{field} is blank too"
+      cannot_be_in_the_past: "cannot be in the past"
+      cannot_be_before_previous_value: "cannot be before the previous value"
 
   activemodel:
     errors:
@@ -58,6 +63,8 @@ en:
     unable_to_change_the_group_while_a_subscription_is_running: "Unable to change the group while a subscription is running"
     please_input_the_authentication_code_sent_to_the_address: "Please input the authentication code sent to the e-mail address %{EMAIL}"
     your_authentication_code_is_not_valid: "Your authentication code is not valid."
+    current_authentication_method_no_code: "The current authentication method does not require any migration code"
+    requested_account_does_not_exists: "The requested account does not exist"
 
   invoices:
     # PDF invoices generation
@@ -67,6 +74,7 @@ en:
     order_number: "Order #: %{NUMBER}"
     invoice_issued_on_DATE: "Invoice issued on %{DATE}"
     refund_invoice_issued_on_DATE: "Refund invoice issued on %{DATE}"
+    wallet_credit: "Wallet credit"
     cancellation_of_invoice_REF: "Cancellation of invoice %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Reservation of %{USER} on %{DATE} at %{TIME}"
     cancellation: "Cancellation"
@@ -77,6 +85,7 @@ en:
     subscription_extended_for_free_from_START_to_END: "Subscription extended for free - From %{START} to %{END}"
     subscription_NAME_from_START_to_END: "Subscription - From %{START} to %{END}"
     machine_reservation_DESCRIPTION: "Machine reservation - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Space reservation - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Training reservation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Event reservation - %{DESCRIPTION}"
     full_price_ticket:
@@ -86,7 +95,7 @@ en:
       one: "One %{NAME} ticket"
       other: "%{count} %{NAME} tickets"
     reservation_other: "Reservation (other)"
-    coupon_CODE_discount_of_PERCENT: "Coupon %{CODE}: discount of %{PERCENT}%"
+    coupon_CODE_discount_of_DISCOUNT: "Coupon {CODE}: discount of {DISCOUNT}{TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
     total_including_all_taxes: "Total incl. all taxes"
     including_VAT_RATE: "Including VAT %{RATE}%"
     including_total_excluding_taxes: "Including Total excl. taxes"
@@ -115,6 +124,11 @@ en:
     i_ve_reserved: "I've reserved"
     completed: "Full"
 
+  events:
+    # error messages when updating an event
+    error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
+    other_error: "An unexpected error occurred while updating the event"
+
   export_members:
     # members list export to EXCEL format
     members: "Members"
@@ -137,6 +151,7 @@ en:
     validated_trainings: "Validated trainings"
     tags: "Tags"
     number_of_invoices: "Number of invoices"
+    invoicing_disabled: "Invoicing disabled"
     projects: "Projects"
     facebook: "Facebook"
     twitter: "Twitter"
@@ -176,6 +191,23 @@ en:
     local_payment: "Payment at the reception"
     online_payment: "Online payment"
 
+  export_availabilities:
+    # reservation slots export, by type, to EXCEL format
+    machines: "Machines"
+    trainings: "Trainings"
+    spaces: "Spaces"
+    events: "Events"
+    day_of_week: "Day of week"
+    date: "Date"
+    slot: "Slot"
+    machine: "Machine"
+    training: "Training"
+    space: "Space"
+    event: "Event"
+    reservations: "Reservations"
+    available_seats: "Available seats"
+
+
   api:
     notifications:
       # internal app notifications
@@ -186,7 +218,7 @@ en:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation was made by <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_(UID)_has_completed_its_informations_html: "Account imported from <strong><em>%{PROVIDER} </strong> (%{UID})</em> has completed its informations."
+        account_imported_from_PROVIDER_(UID)_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER} </strong> (%{UID})</em> has completed its information."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "<strong><em>%{USER}</em></strong>'s reservation, on the %{DATE}, was cancelled. Remember to generate a refund invoice if applicable."
       notify_admin_slot_is_modified:
@@ -265,9 +297,11 @@ en:
         statistics_project: "of statistics about projects"
         statistics_subscription: "of subscription statistics"
         statistics_training: "of statistics about trainings"
+        statistics_space: "of statistics about spaces"
         users_members: "of the members' list"
         users_subscriptions: "of the subscriptions' list"
         users_reservations: "of the reservations' list"
+        availabilities_index: "of the reservations availabilities"
         is_over: "is over."
         download_here: "Download here"
       notify_member_about_coupon:
@@ -277,6 +311,7 @@ en:
     # statistics tools for admins
     subscriptions: "Subscriptions"
     machines_hours: "Machines hours"
+    spaces: "Spaces"
     trainings: "Trainings"
     events: "Events"
     registrations: "Registrations"

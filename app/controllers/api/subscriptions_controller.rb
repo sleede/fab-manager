@@ -15,7 +15,7 @@ class API::SubscriptionsController < API::ApiController
       if current_user.is_admin?
         @subscription = Subscription.find_or_initialize_by(user_id: subscription_params[:user_id])
         @subscription.attributes = subscription_params
-        is_subscribe = @subscription.save_with_local_payment(!User.find(subscription_params[:user_id]).invoicing_disabled?, coupon_params[:coupon_code])
+        is_subscribe = @subscription.save_with_local_payment(true, coupon_params[:coupon_code])
       else
         @subscription = Subscription.find_or_initialize_by(user_id: current_user.id)
         @subscription.attributes = subscription_params

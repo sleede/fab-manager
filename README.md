@@ -3,7 +3,7 @@
 FabManager is the FabLab management solution. It is web-based, open-source and totally free.
 
 
-##### Table of Contents  
+##### Table of Contents
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
 3. [Setup a production environment](#setup-a-production-environment)
@@ -122,9 +122,12 @@ In you only intend to run fab-manager on your local machine for testing purposes
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+   **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
 
    ```bash
-   rake db:setup
+   rake db:create
+   rake db:migrate
+   rake db:seed
    ```
 
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -145,6 +148,9 @@ In you only intend to run fab-manager on your local machine for testing purposes
     - user: admin@fab-manager.com
     - password: adminadmin
 
+13. Email notifications will be caught by MailCatcher.
+    To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
+
 <a name="environment-configuration"></a>
 ### Environment Configuration
 
@@ -159,7 +165,7 @@ This value is only used when deploying with Docker, otherwise this is configured
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
-Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for informations on how to create a user and set his password.
+Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
 
     REDIS_HOST
@@ -198,6 +204,12 @@ The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoic
     FABLAB_WITHOUT_PLANS
 
 If set to 'true', the subscription plans will be fully disabled and invisible in the application.
+It is not recommended to disable plans if at least one subscription was took on the platform.
+
+    FABLAB_WITHOUT_SPACES
+
+If set to 'false', enable the spaces management and reservation in the application.
+It is not recommended to disable spaces if at least one space reservation was made on the system.
 
     DEFAULT_MAIL_FROM
 
@@ -222,11 +234,12 @@ Identifier of your Google Analytics account.
 
 Unique identifier of your [Disqus](http://www.disqus.com) forum.
 Disqus forums are used to allow visitors to comment on projects.
-See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more informations.
+See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
 
     TWITTER_NAME
 
-Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page. 
+Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
+This value can be graphically overridden during the application's lifecycle in Admin/Customization/Home page/Twitter Feed.
 It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
 
     TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
@@ -238,6 +251,35 @@ Retrieve them from https://apps.twitter.com
 
 This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
 If you do so, you'll be able to customize and get statistics about project shares on Facebook.
+
+    LOG_LEVEL
+
+This parameter configures the logs verbosity.
+Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
+
+    ALLOWED_EXTENSIONS
+
+Exhaustive list of file's extensions available for public upload as project's CAO attachements.
+Each item in the list must be separated from the others by a space char.
+You will probably want to check that this list match the `ALLOWED_MIME_TYPES` values below.
+Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a **dangerous** security issue and must be avoided in any cases.
+
+    ALLOWED_MIME_TYPES
+
+Exhaustive list of file's mime-types available for public upload as project's CAO attachements.
+Each item in the list must be separated from the others by a space char.
+You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
+Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
+
+    MAX_IMAGE_SIZE
+
+Maximum size (in bytes) allowed for image uploaded on the platform.
+This parameter concerns events, plans, user's avatars, projects and steps of projects.
+If this parameter is not specified the maximum size allowed will be 2MB.
+
+    Settings related to Open Projects
+
+See the [Open Projects](#open-projects) section for a detailed description of these parameters.
 
     Settings related to i18n
 
@@ -295,7 +337,7 @@ Otherwise, please follow the official instructions on the project's website.
 <a name="setup-fabmanager-in-postgresql"></a>
 ### Setup the FabManager database in PostgreSQL
 
-Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
+Before running `rake db:create`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
 To create it, please follow these instructions:
 
 1. Run the PostgreSQL administration command line interface, logged as the postgres user
@@ -325,20 +367,14 @@ To create it, please follow these instructions:
    ALTER ROLE sleede WITH CREATEDB;
    ```
 
-4. Then, create the fabmanager_development and fabmanager_test databases
-
-   ```sql
-   CREATE DATABASE fabmanager_development OWNER sleede;
-   CREATE DATABASE fabmanager_test OWNER sleede;
-   ```
-
-5. To finish, attribute a password to this user
+4. Then, attribute a password to this user
 
    ```sql
    ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
    ```
-6. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
- 
+
+5. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
+
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
 
@@ -347,14 +383,14 @@ To create it, please follow these instructions:
   So here's your choices, mainly depending on your security requirements:
   - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
-  
+
     ```sql
     ALTER USER sleede WITH SUPERUSER;
     ```
-  
-  - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist). 
+
+  - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
-- Some users may want to use another DBMS than PostgreSQL. 
+- Some users may want to use another DBMS than PostgreSQL.
   This is currently not supported, because of some PostgreSQL specific instructions that cannot be efficiently handled with the ActiveRecord ORM:
   - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
   - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
@@ -363,8 +399,8 @@ To create it, please follow these instructions:
   - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
-  This also requires your user to have the _SUPERUSER_ role. 
-  Please see the [known issues](#known-issues) section for more informations about this.
+  This also requires your user to have the _SUPERUSER_ role.
+  Please see the [known issues](#known-issues) section for more information about this.
 
 <a name="elasticsearch"></a>
 ## ElasticSearch
@@ -495,7 +531,7 @@ Back-end translations uses the [Ruby on Rails syntax](http://guides.rubyonrails.
 
 In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
-These comments are not required to be translated, they are intended to help the translator to have some context informations about the sentence to translate.
+These comments are not required to be translated, they are intended to help the translator to have some context information about the sentence to translate.
 
 
 <a name="i18n-configuration"></a>
@@ -629,7 +665,7 @@ Fab-manager can be connected to a [Single Sign-On](https://en.wikipedia.org/wiki
 Currently OAuth 2 is the only supported protocol for SSO authentication.
 
 For an example of how to use configure a SSO in Fab-manager, please read [sso_with_github.md](doc/sso_with_github.md).
-Developers may find informations on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
+Developers may find information on how to implement their own authentication protocol in [sso_authentication.md](doc/sso_authentication.md).
 
 <a name="known-issues"></a>
 ## Known issues
@@ -648,17 +684,17 @@ Developers may find informations on how to implement their own authentication pr
   To solve this issue copy `config/application.yml.default` to `config/application.yml`.
   This is required before the first start.
 
-- Due to a stripe limitation, you won't be ble to create plans longer than one year.
+- Due to a stripe limitation, you won't be able to create plans longer than one year.
 
 - When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
 
         Error:
-        ...                                                               
-        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."      
-        DETAIL:  Key (group_id)=(1) is not present in table "groups".                                                                                                   
-        : ...                                                                                                
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'                                                         
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'     
+        ...
+        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."
+        DETAIL:  Key (group_id)=(1) is not present in table "groups".
+        : ...
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
@@ -669,10 +705,10 @@ Developers may find informations on how to implement their own authentication pr
 
   DO NOT do this in a production environment, unless you know what you're doing: this could lead to a serious security issue.
 
-- With Ubuntu 16.04, ElasticSearch may refuse to start even after having configured the service with systemd. 
+- With Ubuntu 16.04, ElasticSearch may refuse to start even after having configured the service with systemd.
   To solve this issue, you may have to set `START_DAEMON` to `true` in `/etc/default/elasticsearch`.
   Then reload ElasticSearch with:
-  
+
   ```bash
   sudo systemctl restart elasticsearch.service
   ```

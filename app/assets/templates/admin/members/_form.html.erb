@@ -1,5 +1,8 @@
 <div class="form-group" ng-class="{'has-error': userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$invalid}">
-  <label for="user_group_id" class="col-sm-3 control-label" translate>{{ 'group' }}</label>
+  <label for="user_group_id" class="col-sm-3 control-label">
+    <span translate>{{ 'group' }}</span>
+    <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+  </label>
   <div class="col-sm-9">
     <select ng-model="user.group_id" ng-disabled="user.subscribed_plan" class="form-control" name="user[group_id]" id="user_group_id" ng-options="g.id as g.name for g in groups" required>
     </select>

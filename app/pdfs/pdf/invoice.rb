@@ -3,6 +3,7 @@ module PDF
   class Invoice < Prawn::Document
     require 'stringio'
     include ActionView::Helpers::NumberHelper
+    include ApplicationHelper
 
     def initialize(invoice)
       super(:margin => 70)
@@ -27,7 +28,7 @@ module PDF
       image StringIO.new( Base64.decode64(img_b64.value) ), :fit => [415,40]
       move_down 20
       font('Open-Sans', :size => 10) do
-        # general informations
+        # general information
         if invoice.is_a?(Avoir)
           text I18n.t('invoices.refund_invoice_reference', REF:invoice.reference), :leading => 3
         else
@@ -36,10 +37,12 @@ module PDF
         if Setting.find_by({name: 'invoice_code-active'}).value == 'true'
           text I18n.t('invoices.code', CODE:Setting.find_by({name: 'invoice_code-value'}).value), :leading => 3
         end
-        if invoice.is_a?(Avoir)
-          text I18n.t('invoices.order_number', NUMBER:invoice.invoice.order_number), :leading => 3
-        else
-          text I18n.t('invoices.order_number', NUMBER:invoice.order_number), :leading => 3
+        if invoice.invoiced_type != WalletTransaction.name
+          if invoice.is_a?(Avoir)
+            text I18n.t('invoices.order_number', NUMBER:invoice.invoice.order_number), :leading => 3
+          else
+            text I18n.t('invoices.order_number', NUMBER:invoice.order_number), :leading => 3
+          end
         end
         if invoice.is_a?(Avoir)
           text I18n.t('invoices.refund_invoice_issued_on_DATE', DATE:I18n.l(invoice.avoir_date.to_date))
@@ -47,7 +50,7 @@ module PDF
           text I18n.t('invoices.invoice_issued_on_DATE', DATE:I18n.l(invoice.created_at.to_date))
         end
 
-        # user/organization's informations
+        # user/organization's information
         if invoice&.user&.profile&.organization
           name = invoice.user.profile.organization.name
         else
@@ -67,7 +70,11 @@ module PDF
         # object
         move_down 25
         if invoice.is_a?(Avoir)
-          object = I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
+          if invoice.invoiced_type == WalletTransaction.name
+            object = I18n.t('invoices.wallet_credit')
+          else
+            object = I18n.t('invoices.cancellation_of_invoice_REF', REF: invoice.invoice.reference)
+          end
         else
           case invoice.invoiced_type
             when 'Reservation'
@@ -114,10 +121,12 @@ module PDF
 
 
           else ### Reservation
-            case invoice.invoiced.reservable_type
+            case invoice.invoiced.try(:reservable_type)
               ### Machine reservation
               when 'Machine'
                 details += I18n.t('invoices.machine_reservation_DESCRIPTION', DESCRIPTION: item.description)
+              when 'Space'
+                details += I18n.t('invoices.space_reservation_DESCRIPTION', DESCRIPTION: item.description)
               ### Training reservation
               when 'Training'
                 details += I18n.t('invoices.training_reservation_DESCRIPTION', DESCRIPTION: item.description)
@@ -129,6 +138,9 @@ module PDF
                 invoice.invoiced.tickets.each do |t|
                   details += "\n  "+I18n.t('invoices.other_rate_ticket', count: t.booked, NAME: t.event_price_category.price_category.name)
                 end
+              ### wallet credit
+              when nil
+                details = item.description
 
               ### Other cases (not expected)
               else
@@ -140,14 +152,36 @@ module PDF
           total_calc += price
         end
 
-        # subtract the coupon, if any
+        ## subtract the coupon, if any
         unless invoice.coupon_id.nil?
           cp = invoice.coupon
-          discount = total_calc  * cp.percent_off / 100.0
+          discount = 0
+          if cp.type == 'percent_off'
+            discount = total_calc  * cp.percent_off / 100.0
+          elsif cp.type == 'amount_off'
+            # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
+            if invoice.is_a?(Avoir)
+              paid_items = invoice.invoice.invoice_items.select{ |ii| ii.amount > 0 }.length
+              refund_items = invoice.invoice_items.select{ |ii| ii.amount > 0 }.length
+
+              discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.0
+            else
+              discount = cp.amount_off / 100.00
+            end
+          else
+            raise InvalidCouponError
+          end
+
           total_calc = total_calc - discount
 
+          # discount textual description
+          literal_discount = cp.percent_off
+          if cp.type == 'amount_off'
+            literal_discount = number_to_currency(cp.amount_off / 100.00)
+          end
+
           # add a row for the coupon
-          data += [ [I18n.t('invoices.coupon_CODE_discount_of_PERCENT', CODE: cp.code, PERCENT: cp.percent_off), number_to_currency(-discount)] ]
+          data += [ [_t('invoices.coupon_CODE_discount_of_DISCOUNT', {CODE: cp.code, DISCOUNT: literal_discount, TYPE: cp.type}), number_to_currency(-discount)] ]
         end
 
         # total verification
@@ -167,8 +201,8 @@ module PDF
           data += [ [I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)] ]
 
           # checking the round number
-          rounded = sprintf('%.2f', vat).to_i + sprintf('%.2f', total-vat).to_i
-          if rounded != sprintf('%.2f', total_calc).to_i
+          rounded = sprintf('%.2f', vat).to_f + sprintf('%.2f', total-vat).to_f
+          if rounded != sprintf('%.2f', total_calc).to_f
             puts "ERROR: rounding the numbers cause an invoice inconsistency. Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
           end
         else
@@ -261,7 +295,7 @@ module PDF
         end
         text payment_verbose
 
-        # important informations
+        # important information
         move_down 40
         txt = parse_html(Setting.find_by({name: 'invoice_text'}).value)
         txt.each_line do |line|
@@ -269,7 +303,7 @@ module PDF
         end
 
 
-        # address and legals informations
+        # address and legals information
         move_down 40
         txt = parse_html(Setting.find_by({name: 'invoice_legals'}).value)
         txt.each_line do |line|

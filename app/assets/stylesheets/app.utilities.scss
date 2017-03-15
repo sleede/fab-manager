@@ -56,6 +56,7 @@ p, .widget p {
 .block.hide{display: none;}
 .inline{display:inline-block !important;}
 .none{display: none;}
+.pull-left{float: left;}
 .pull-right-lg{float: right;}
 .pull-none{float: none;}
 .rounded{border-radius: 500px;}
@@ -102,6 +103,7 @@ p, .widget p {
 .text-italic { font-style: italic; }
 
 .text-center { text-align: center; }
+.text-right { text-align: right; }
 
 .text-active, .active > .text, .active > .auto .text{display: none !important;}
 .active > .text-active, .active > .auto .text-active{display: inline-block !important;}
@@ -127,6 +129,7 @@ p, .widget p {
 
 .width-35 { width: 35% !important; }
 .width-70 { width: 70%; }
+.width-90 { width: 90%; }
 
 .b{border: 1px solid rgba(0, 0, 0, 0.05)}
 .b-a{border: 1px solid $border-color}
@@ -173,6 +176,7 @@ p, .widget p {
 .r-n { border-radius: 0 0 0 0; }
 
 .p-xs { padding: 5px;}
+.p-s { padding: 10px;}
 .p-lg { padding: 30px; }
 .p-l { padding: 16px; }
 

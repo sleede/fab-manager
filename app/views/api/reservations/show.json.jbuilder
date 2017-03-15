@@ -10,7 +10,7 @@ json.user do
   end
   json.machine_credits @reservation.user.machine_credits do |mc|
     json.machine_id mc.creditable_id
-    json.hours_used mc.users_credits.find_by_user_id(@reservation.user_id).hours_used
+    json.hours_used mc.users_credits.find_by(user_id: @reservation.user_id).hours_used
   end
 end
 json.message @reservation.message

@@ -20,7 +20,7 @@ class API::CouponsController < API::ApiController
   end
 
   def validate
-    @coupon = Coupon.find_by_code(params[:code])
+    @coupon = Coupon.find_by(code: params[:code])
     if @coupon.nil?
       render json: {status: 'rejected'}, status: :not_found
     else
@@ -30,7 +30,8 @@ class API::CouponsController < API::ApiController
         _user_id = params[:user_id]
       end
 
-      status = @coupon.status(_user_id)
+      amount = params[:amount].to_f * 100.0
+      status = @coupon.status(_user_id, amount)
       if status != 'active'
         render json: {status: status}, status: :unprocessable_entity
       else
@@ -60,7 +61,7 @@ class API::CouponsController < API::ApiController
   def send_to
     authorize Coupon
 
-    @coupon = Coupon.find_by_code(params[:coupon_code])
+    @coupon = Coupon.find_by(code: params[:coupon_code])
       if @coupon.nil?
         render json: {error: "no coupon with code #{params[:coupon_code]}"}, status: :not_found
       else
@@ -78,10 +79,17 @@ class API::CouponsController < API::ApiController
   end
 
   def coupon_params
-    params.require(:coupon).permit(:name, :code, :percent_off, :validity_per_user, :valid_until, :max_usages, :active)
+    if @parameters
+      @parameters
+    else
+      @parameters = params
+      @parameters[:coupon][:amount_off] = @parameters[:coupon][:amount_off].to_f * 100.0 if @parameters[:coupon][:amount_off]
+
+      @parameters = @parameters.require(:coupon).permit(:name, :code, :percent_off, :amount_off, :validity_per_user, :valid_until, :max_usages, :active)
+    end
   end
 
   def coupon_editable_params
-    params.require(:coupon).permit(:name, :active)
+    params.require(:coupon).permit(:name, :active, :valid_until)
   end
 end

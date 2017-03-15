@@ -6,7 +6,7 @@
 
 class PlanController
 
-  constructor: ($scope, groups, plans, machines, prices, partners, CSRF) ->
+  constructor: ($scope, groups, prices, partners, CSRF) ->
     # protection against request forgery
     CSRF.setMetaTags()
 
@@ -14,12 +14,6 @@ class PlanController
 
     ## groups list
     $scope.groups = groups
-
-    ## plans list
-    $scope.plans = plans
-
-    ## machines list
-    $scope.machines = machines
 
     ## users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users
@@ -48,38 +42,11 @@ class PlanController
 
 
 
-    ##
-    # Retrieve a plan from its numeric identifier
-    # @param id {number} plan ID
-    # @returns {Object} Plan, inherits from $resource
-    ##
-    $scope.getPlanFromId = (id) ->
-      for plan in $scope.plans
-        if plan.id == id
-          return plan
-
-
-
-    ##
-    # Retrieve the name of a machine from its ID
-    # @param machine_id {number} machine identifier
-    # @returns {string} Machine's name
-    ##
-    $scope.getMachineName = (machine_id) ->
-      for machine in $scope.machines
-        if machine.id == machine_id
-          return machine.name
-
-
-
-
-
-
 ##
 # Controller used in the plan creation form
 ##
-Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 'groups', 'plans', 'machines', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t', '$locale'
-, ($scope, $uibModal, groups, plans, machines, prices, partners, CSRF, $state, growl, _t, $locale) ->
+Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t'
+, ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t) ->
 
 
 
@@ -119,10 +86,6 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
   $scope.method = 'POST'
 
 
-  ## currency symbol for the current locale (cf. angular-i18n)
-  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
-
-
 
   ##
   # Checks if the partner contact is a valid data. Used in the form validation process
@@ -150,7 +113,7 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
             $scope.partner.name = "#{user.first_name} #{user.last_name}"
             $uibModalInstance.close($scope.partner)
           , (error)->
-            growl.error(_t('unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
+            growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
         $scope.cancel = ->
           $uibModalInstance.dismiss('cancel')
       ]
@@ -168,9 +131,9 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
   ##
   $scope.afterSubmit = (content) ->
     if !content.id? and !content.plan_ids?
-      growl.error(_t('unable_to_create_the_subscription_please_try_again'))
+      growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'))
     else
-      growl.success(_t('successfully_created_subscription(s)_dont_forget_to_redefine_prices'))
+      growl.success(_t('new_plan.successfully_created_subscription(s)_dont_forget_to_redefine_prices'))
       if content.plan_ids?
         $state.go('app.admin.pricing')
       else
@@ -179,7 +142,7 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
 
 
 
-  new PlanController($scope, groups, plans, machines, prices, partners, CSRF)
+  new PlanController($scope, groups, prices, partners, CSRF)
 ]
 
 
@@ -187,13 +150,25 @@ Application.Controllers.controller 'NewPlanController', ['$scope', '$uibModal', 
 ##
 # Controller used in the plan edition form
 ##
-Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', '$locale', 'Plan'
-, ($scope, groups, plans, planPromise, machines, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, $locale, Plan) ->
+Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', 'Plan'
+, ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, Plan) ->
 
 
 
   ### PUBLIC SCOPE ###
+
+  ## List of spaces
+  $scope.spaces = spaces
+
+  ## List of plans
+  $scope.plans = plans
+
+  ## List of machines
+  $scope.machines = machines
+
+  ## List of groups
   $scope.groups = groups
+
   ## current form is used for edition mode
   $scope.mode = 'edition'
 
@@ -206,10 +181,6 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
 
   ## HTTP method for the rest API
   $scope.method = 'PATCH'
-
-
-  ## currency symbol for the current locale (cf. angular-i18n)
-  $scope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
 
 
@@ -239,9 +210,9 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ##
   $scope.afterSubmit = (content) ->
     if !content.id? and !content.plan_ids?
-      growl.error(_t('unable_to_save_subscription_changes_please_try_again'))
+      growl.error(_t('edit_plan.unable_to_save_subscription_changes_please_try_again'))
     else
-      growl.success(_t('subscription_successfully_changed'))
+      growl.success(_t('edit_plan.subscription_successfully_changed'))
       $state.go('app.admin.pricing')
 
 
@@ -259,6 +230,30 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
 
 
 
+  ##
+  # Retrieve the name of a machine from its ID
+  # @param machine_id {number} machine identifier
+  # @returns {string} Machine's name
+  ##
+  $scope.getMachineName = (machine_id) ->
+    for machine in $scope.machines
+      if machine.id == machine_id
+        return machine.name
+
+
+
+  ##
+  # Retrieve the name of a space from its ID
+  # @param space_id {number} space identifier
+  # @returns {string} Space's name
+  ##
+  $scope.getSpaceName = (space_id) ->
+    for space in $scope.spaces
+      if space.id == space_id
+        return space.name
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
@@ -266,7 +261,7 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ##
   initialize = ->
     # Using the PlansController
-    new PlanController($scope, groups, plans, machines, prices, partners, CSRF)
+    new PlanController($scope, groups, prices, partners, CSRF)
 
   ## !!! MUST BE CALLED AT THE END of the controller
   initialize()

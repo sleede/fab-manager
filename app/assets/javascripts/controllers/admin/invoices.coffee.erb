@@ -125,7 +125,7 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       sample = sample.replace(/y+(?![^\[]*])/g, (match, offset, string) ->
         padWithZeros(8, match.length)
       )
-      # date informations
+      # date information
       sample = sample.replace(/[YMD]+(?![^\[]*])/g, (match, offset, string) ->
         $scope.today.format(match)
       )
@@ -133,9 +133,8 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       sample = sample.replace(/X\[([^\]]+)\]/g, (match, p1, offset, string) ->
         p1
       )
-      # # information about wallet (W[text]) - does not apply here
-      # sample = sample.replace(/W\[([^\]]+)\]/g, "")
-
+      # information about wallet (W[text]) - does not apply here
+      sample = sample.replace(/W\[([^\]]+)\]/g, "")
       # information about refunds (R[text]) - does not apply here
       sample = sample.replace(/R\[([^\]]+)\]/g, "")
     sample
@@ -164,7 +163,7 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
       sample = sample.replace(/d+(?![^\[]*])/g, (match, offset, string) ->
         padWithZeros(2, match.length)
       )
-      # date informations
+      # date information
       sample = sample.replace(/[YMD]+(?![^\[]*])/g, (match, offset, string) ->
         $scope.today.format(match)
       )
@@ -335,7 +334,7 @@ Application.Controllers.controller "InvoicesController", ["$scope", "$state", 'I
 
 
   ##
-  # Callback to save the value of the legal informations zone when editing is done
+  # Callback to save the value of the legal information zone when editing is done
   ##
   $scope.legalsEditEnd = (event) ->
     parsed = parseHtml($scope.invoice.legals.content)

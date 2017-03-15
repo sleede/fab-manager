@@ -5,7 +5,11 @@ class API::ExportsController < API::ApiController
   def download
     authorize @export
 
-    send_file File.join(Rails.root, @export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    if FileTest.exist?(@export.file)
+      send_file File.join(Rails.root, @export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+    else
+      render text: I18n.t('errors.messages.export_not_found'), status: :not_found
+    end
   end
 
   def status
@@ -22,7 +26,14 @@ class API::ExportsController < API::ApiController
         when 'members'
           export = export.where('created_at > ?', User.with_role(:member).maximum('updated_at'))
         else
-          raise ArgumentError, "Unknown type #{params[:type]}"
+          raise ArgumentError, "Unknown export users/#{params[:type]}"
+      end
+    elsif params[:category] === 'availabilities'
+      case params[:type]
+        when 'index'
+          export = export.where('created_at > ?', Availability.maximum('updated_at'))
+        else
+          raise ArgumentError, "Unknown type availabilities/#{params[:type]}"
       end
     end
     export = export.last

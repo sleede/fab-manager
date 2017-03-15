@@ -17,7 +17,7 @@ class API::TrainingsController < API::ApiController
   end
 
   def show
-    @training = Training.find(params[:id])
+    @training = Training.friendly.find(params[:id])
   end
 
   def create

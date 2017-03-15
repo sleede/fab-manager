@@ -12,6 +12,7 @@
 #  - $scope.components = [{Component}]
 #  - $scope.themes = [{Theme}]
 #  - $scope.licences = [{Licence}]
+#  - $scope.allowedExtensions = [{String}]
 #  - $scope.submited(content)
 #  - $scope.cancel()
 #  - $scope.addFile()
@@ -26,7 +27,7 @@
 #  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
 ##
 class ProjectsController
-  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)->
+  constructor: ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)->
 
     ## Retrieve the list of machines from the server
     Machine.query().$promise.then (data)->
@@ -52,7 +53,11 @@ class ProjectsController
         id: d.id
         name: d.name
 
+    ## Total number of documentation steps for the current project
     $scope.totalSteps = $scope.project.project_steps_attributes.length
+
+    ## List of extensions allowed for CAD attachements upload
+    $scope.allowedExtensions = allowedExtensions
 
 
 
@@ -119,7 +124,7 @@ class ProjectsController
     ##
     $scope.addStep = ->
       $scope.totalSteps += 1
-      $scope.project.project_steps_attributes.push { step_nb: $scope.totalSteps }
+      $scope.project.project_steps_attributes.push { step_nb: $scope.totalSteps, project_step_images_attributes: [] }
 
 
 
@@ -180,6 +185,26 @@ class ProjectsController
         console.error(error)
 
 
+    ##
+    # This will create a single new empty entry into the project's step image list.
+    ##
+    $scope.addProjectStepImage = (step)->
+      step.project_step_images_attributes.push {}
+
+
+
+    ##
+    # This will remove the given image from the project's step image list.
+    # @param step {Object} the project step has images
+    # @param image {Object} the image to delete
+    ##
+    $scope.deleteProjectStepImage = (step, image) ->
+      index = step.project_step_images_attributes.indexOf(image)
+      if image.id?
+        image._destroy = true
+      else
+        step.project_step_images_attributes.splice(index, 1)
+
 
 ##
 #  Controller used on projects listing page
@@ -192,10 +217,25 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   # Number of projects added to the page when the user clicks on 'load more projects'
   PROJECTS_PER_PAGE = 16
 
-  $scope.openlabAppId = Fablab.openlabAppId
+
 
   ### PUBLIC SCOPE ###
-  $scope.search = { q: ($location.$$search.q || ""), from: ($location.$$search.from || undefined), machine_id: (parseInt($location.$$search.machine_id) || undefined), component_id: (parseInt($location.$$search.component_id) || undefined), theme_id: (parseInt($location.$$search.theme_id) || undefined) }
+
+  ## Fab-manager's instance ID in the openLab network
+  $scope.openlabAppId = Fablab.openlabAppId
+
+  ## Is openLab enabled on the instance?
+  $scope.openlab =
+    projectsActive: Fablab.openlabProjectsActive
+    searchOverWholeNetwork: false
+
+  ## default search parameters
+  $scope.search =
+    q: ($location.$$search.q || "")
+    from: ($location.$$search.from || undefined)
+    machine_id: (parseInt($location.$$search.machine_id) || undefined)
+    component_id: (parseInt($location.$$search.component_id) || undefined)
+    theme_id: (parseInt($location.$$search.theme_id) || undefined)
 
   ## list of projects to display
   $scope.projects = []
@@ -209,38 +249,21 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
   ## list of components / used for filtering
   $scope.components = componentsPromise
 
-  $scope.openlab = {}
-  $scope.openlab.projectsActive = Fablab.openlabProjectsActive
 
-  if $location.$$search.whole_network is 'f'
-    $scope.openlab.searchOverWholeNetwork = false
-  else
-    $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive || false
-
-  normalizeProjectsAttrs = (projects)->
-    projects.map((project)->
-      project.project_image = project.image_url
-      return project
-    )
 
   $scope.searchOverWholeNetworkChanged = ->
     setTimeout ->
       $scope.resetFiltersAndTriggerSearch()
     , 150
 
-  loadMoreCallback = (projectsPromise)->
-    $scope.projects = $scope.projects.concat(projectsPromise.projects)
-    updateUrlParam('page', $scope.projectsPagination.currentPage)
 
-  loadMoreOpenlabCallback = (projectsPromise)->
-    $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects))
-    updateUrlParam('page', $scope.projectsPagination.currentPage)
 
   $scope.loadMore = ->
     if $scope.openlab.searchOverWholeNetwork is true
       $scope.projectsPagination.loadMore(q: $scope.search.q)
     else
       $scope.projectsPagination.loadMore(search: $scope.search)
+
 
 
   $scope.resetFiltersAndTriggerSearch = ->
@@ -251,6 +274,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
     $scope.search.theme_id = undefined
     $scope.setUrlQueryParams($scope.search)
     $scope.triggerSearch()
+
+
 
   $scope.triggerSearch = ->
     currentPage = parseInt($location.$$search.page) || 1
@@ -273,6 +298,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
         $scope.projectsPagination.totalCount = projectsPromise.meta.total
         $scope.projects = projectsPromise.projects
 
+
+
   ##
   # Callback to switch the user's view to the detailled project page
   # @param project {{slug:string}} The project to display
@@ -283,6 +310,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
       return true
     else
       $state.go('app.public.projects_show', {id: project.slug})
+
+
 
   ##
   # function to set all url query search parameters from search object
@@ -295,6 +324,21 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
     updateUrlParam('component_id', search.component_id)
     updateUrlParam('machine_id', search.machine_id)
 
+
+
+  ### PRIVATE SCOPE ###
+
+  ##
+  # Kind of constructor: these actions will be realized first when the controller is loaded
+  ##
+  initialize = ->
+    if $location.$$search.whole_network is 'f'
+      $scope.openlab.searchOverWholeNetwork = false
+    else
+      $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive || false
+    $scope.triggerSearch()
+
+
   ##
   # function to update url query param, little hack to turn off reloadOnSearch and re-enable it after setting the params
   # params example: 'q' , 'presse-purée'
@@ -305,9 +349,30 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
     $timeout ->
       $state.current.reloadOnSearch = undefined
 
-  ## initialization
-  $scope.triggerSearch()
 
+
+  loadMoreCallback = (projectsPromise)->
+    $scope.projects = $scope.projects.concat(projectsPromise.projects)
+    updateUrlParam('page', $scope.projectsPagination.currentPage)
+
+
+
+  loadMoreOpenlabCallback = (projectsPromise)->
+    $scope.projects = $scope.projects.concat(normalizeProjectsAttrs(projectsPromise.projects))
+    updateUrlParam('page', $scope.projectsPagination.currentPage)
+
+
+
+  normalizeProjectsAttrs = (projects)->
+    projects.map((project)->
+      project.project_image = project.image_url
+      return project
+    )
+
+
+
+  ## !!! MUST BE CALLED AT THE END of the controller
+  initialize()
 ]
 
 
@@ -315,8 +380,8 @@ Application.Controllers.controller "ProjectsController", ["$scope", "$state", 'P
 ##
 # Controller used in the project creation page
 ##
-Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', '_t'
-, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, _t) ->
+Application.Controllers.controller "NewProjectController", ["$scope", "$state", 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t'
+, ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -333,7 +398,7 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
   $scope.matchingMembers = []
 
   ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
 ]
 
 
@@ -341,8 +406,8 @@ Application.Controllers.controller "NewProjectController", ["$scope", "$state", 
 ##
 # Controller used in the project edition page
 ##
-Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', '_t'
-, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, _t) ->
+Application.Controllers.controller "EditProjectController", ["$scope", "$state", '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t'
+, ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) ->
   CSRF.setMetaTags()
 
   ## API URL where the form will be posted
@@ -359,7 +424,7 @@ Application.Controllers.controller "EditProjectController", ["$scope", "$state",
     name: u.full_name
 
     ## Using the ProjectsController
-  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, _t)
+  new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
 ]
 
 

@@ -61,7 +61,7 @@
               </div>
 
               <br ng-show="!plan.plan_file_url">  <!-- TODO Refacto with CSS -->
-              <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'more_informations' }}</a>
+              <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'more_information' }}</a>
           </div>
 
         </div>
@@ -141,7 +141,7 @@
           <div class="font-sbold">{{ 'subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
         </div>
 
-        <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" user-id="{{ctrl.member.id}}"></coupon>
+        <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" total="selectedPlan.amount" user-id="{{ctrl.member.id}}"></coupon>
       </div>
 
       <div class="widget-footer">

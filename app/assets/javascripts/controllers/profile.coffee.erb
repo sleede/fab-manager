@@ -1,8 +1,8 @@
 
 'use strict'
 
-Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session"
-, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session) ->
+Application.Controllers.controller "CompleteProfileController", ["$scope", "$rootScope", "$state", "$window", "_t", "growl", "CSRF", "Auth", "Member", "settingsPromise", "activeProviderPromise", "groupsPromise", "cguFile", "memberPromise", "Session", "dialogs", "AuthProvider"
+, ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs, AuthProvider) ->
 
 
 
@@ -20,13 +20,13 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
   ## name of the current fablab application (eg. "Fablab de la Casemate")
   $scope.fablabName = settingsPromise.fablab_name
 
-  ## informations from the current SSO provider
+  ## information from the current SSO provider
   $scope.activeProvider = activeProviderPromise
 
   ## list of user's groups (student/standard/...)
   $scope.groups = groupsPromise
 
-  ## current user, contains informations retrieved from the SSO
+  ## current user, contains information retrieved from the SSO
   $scope.user = memberPromise
 
   ## disallow the user to change his password as he connect from SSO
@@ -142,6 +142,27 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
 
 
   ##
+  # Ask for email confirmation and send the SSO merging token again
+  # @param $event {Object} jQuery event object
+  ##
+  $scope.resendCode = (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    dialogs.confirm
+      templateUrl: '<%= asset_path "profile/resend_code_modal.html" %>'
+      resolve:
+        object: ->
+          email: memberPromise.email
+    , (email) ->
+      # Request the server to send an auth-migration email to the current user
+      AuthProvider.send_code {email: email}, (res) ->
+        growl.info(_t('code_successfully_sent_again'))
+      , (err) ->
+        growl.error(err.data.error)
+
+
+
+  ##
   # Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
   ##
   $scope.syncProfile = ->
@@ -149,7 +170,9 @@ Application.Controllers.controller "CompleteProfileController", ["$scope", "$roo
       Session.destroy()
       $rootScope.currentUser = null
       $rootScope.toCheckNotifications = false
-      $scope.notifications = []
+      $scope.notifications =
+        total: 0
+        unread: 0
       $window.location.href = activeProviderPromise.link_to_sso_connect
 
 

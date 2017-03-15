@@ -217,7 +217,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
               for it_st in [0.. cur_type.subtypes.length-1] by 1 # when we've found it, iterate over its subtypes ...
                 cur_subtype = cur_type.subtypes[it_st]
                 if subgroup.key == cur_subtype.key # ... which match $SUBTYPE
-                  # then we construct NVD3 dataSource according to these informations
+                  # then we construct NVD3 dataSource according to these information
                   dataSource =
                     values: []
                     key: cur_subtype.label
@@ -362,6 +362,10 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
       "index": "stats"
       "type": esType
       "searchType": "count"
+      "stat-type": statType
+      "custom-query": ''
+      "start-date": moment($scope.datePickerStart.selected).format()
+      "end-date": moment($scope.datePickerEnd.selected).format()
       "body": buildElasticAggregationsQuery(statType, $scope.display.interval, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
     , (error, response) ->
       if (error)

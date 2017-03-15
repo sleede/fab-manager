@@ -31,6 +31,7 @@ en:
         reserve_a_machine: "Reserve a Machine"
         trainings_registrations: "Trainings registrations"
         events_registrations: "Events registrations"
+        reserve_a_space: "Reserve a Space"
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
@@ -44,6 +45,7 @@ en:
         subscriptions_and_prices: "Subscriptions and Prices"
         manage_the_events: "Manage the events"
         manage_the_machines: "Manage the Machines"
+        manage_the_spaces: "Manage the Spaces"
         manage_the_projects_elements: "Manage the Projects Elements"
         statistics: "Statistics"
         customization: "Customization"
@@ -80,7 +82,7 @@ en:
         phone_number: "Phone number"
         phone_number_is_required: "Phone number is required."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
-        i_accept_to_receive_informations_from_the_fablab: "I accept to receive informations from the FabLab"
+        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the FabLab policy"
 
@@ -102,6 +104,9 @@ en:
 
         # Fab-manager's version
         version: "Version:"
+
+        # Notifications
+        and_NUMBER_other_notifications: "and {NUMBER, plural, =0{no other notifications} =1{one other notification} other{{NUMBER} other notifications}}..."  # messageFormat interpolation
 
       about:
         # about page
@@ -179,7 +184,8 @@ en:
         files_to_download: "Files to download"
         projects_using_the_machine: "Projects using the machine"
         _or_the_: " or the "
-        unauthorized_operation: "Unauthoried operation"
+        do_you_really_want_to_delete_this_machine: "Do you really want to delete this machine?"
+        unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
 
       trainings_list:
@@ -189,6 +195,9 @@ en:
       training_show:
         # details of a training
         book_this_training: "Book this training"
+        do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
+        unauthorized_operation: "Unauthorized operation"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The training can't be deleted because it's already reserved by some users."
 
       plans:
         # summary of the subscriptions
@@ -196,11 +205,11 @@ en:
         i_choose_that_plan: "I choose that plan"
         i_subscribe_online: "I subscribe online"
         i_already_subscribed: "I already subscribed"
-        more_informations: "More informations"
+        more_information: "More information"
         your_subscription_expires_on_the_DATE: "Your subscription expires on the {{DATE}}"  # angular interpolation
         my_group: "My group"
         his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"  # messageFormat interpolation
-        he_wants_to_change_group: "{ROLE, select, admin{He wants} other{I want}} to change group"  # messageFormat interpolation
+        he_wants_to_change_group: "{ROLE, select, admin{The user wants} other{I want}} to change group"  # messageFormat interpolation
         change_my_group: "Change {ROLE, select, admin{{GENDER, select, male{his} female{her} other{its}}} other{my}} group"  # messageFormat interpolation
         your_subscription_has_expired_on_the_DATE: "Your subscription has expired on the {{DATE}}"  # angular interpolation
         you_ve_just_payed_the_: "You've just payed the"
@@ -239,6 +248,29 @@ en:
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
 
       calendar:
-        calendar: "Calendar"
-        show_no_disponible: "Show the slots no disponibles"
-        filter-calendar: "Filter calendar"
+        # public calendar
+        calendar:
+          calendar: "Calendar"
+          show_unavailables: "Show unavailable slots"
+          filter_calendar: "Filter calendar"
+          trainings: "Trainings"
+          machines: "Machines"
+          spaces: "Spaces"
+          events: "Events"
+
+      spaces_list:
+        # list of spaces
+        the_spaces: "The spaces"
+        add_a_space: "Add a space"
+
+      space_show:
+        # display the details of a space
+        space_show:
+          book_this_space: "Book this space"
+          unauthorized_operation: "Unauthorized operation"
+          confirmation_required: "Confirmation required"
+          do_you_really_want_to_delete_this_space: "Do you really want to delete this space?"
+          the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Unable to delete this space, because it is already reserved by some users."
+          characteristics: "Characteristics"
+          files_to_download: "Files to download"
+          projects_using_the_space: "Projects using the space"

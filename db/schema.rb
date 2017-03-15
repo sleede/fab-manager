@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915105234) do
+ActiveRecord::Schema.define(version: 20170227114634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160915105234) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "validity_per_user"
+    t.integer  "amount_off"
   end
 
   create_table "credits", force: :cascade do |t|
@@ -373,6 +374,7 @@ ActiveRecord::Schema.define(version: 20160915105234) do
     t.string   "base_name"
     t.integer  "ui_weight",                      default: 0
     t.integer  "interval_count",                 default: 1
+    t.string   "slug"
   end
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
@@ -483,6 +485,14 @@ ActiveRecord::Schema.define(version: 20160915105234) do
   add_index "projects_machines", ["machine_id"], name: "index_projects_machines_on_machine_id", using: :btree
   add_index "projects_machines", ["project_id"], name: "index_projects_machines_on_project_id", using: :btree
 
+  create_table "projects_spaces", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "space_id"
+  end
+
+  add_index "projects_spaces", ["project_id"], name: "index_projects_spaces_on_project_id", using: :btree
+  add_index "projects_spaces", ["space_id"], name: "index_projects_spaces_on_space_id", using: :btree
+
   create_table "projects_themes", force: :cascade do |t|
     t.integer "project_id"
     t.integer "theme_id"
@@ -529,7 +539,6 @@ ActiveRecord::Schema.define(version: 20160915105234) do
   create_table "slots", force: :cascade do |t|
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer  "reservation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "availability_id"
@@ -537,10 +546,38 @@ ActiveRecord::Schema.define(version: 20160915105234) do
     t.datetime "ex_end_at"
     t.datetime "canceled_at"
     t.boolean  "offered",         default: false
+    t.boolean  "destroying",      default: false
   end
 
   add_index "slots", ["availability_id"], name: "index_slots_on_availability_id", using: :btree
-  add_index "slots", ["reservation_id"], name: "index_slots_on_reservation_id", using: :btree
+
+  create_table "slots_reservations", force: :cascade do |t|
+    t.integer "slot_id"
+    t.integer "reservation_id"
+  end
+
+  add_index "slots_reservations", ["reservation_id"], name: "index_slots_reservations_on_reservation_id", using: :btree
+  add_index "slots_reservations", ["slot_id"], name: "index_slots_reservations_on_slot_id", using: :btree
+
+  create_table "spaces", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "default_places"
+    t.text     "description"
+    t.string   "slug"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "characteristics"
+  end
+
+  create_table "spaces_availabilities", force: :cascade do |t|
+    t.integer  "space_id"
+    t.integer  "availability_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "spaces_availabilities", ["availability_id"], name: "index_spaces_availabilities_on_availability_id", using: :btree
+  add_index "spaces_availabilities", ["space_id"], name: "index_spaces_availabilities_on_space_id", using: :btree
 
   create_table "statistic_custom_aggregations", force: :cascade do |t|
     t.text     "query"
@@ -818,6 +855,12 @@ ActiveRecord::Schema.define(version: 20160915105234) do
   add_foreign_key "organizations", "profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "projects_spaces", "projects"
+  add_foreign_key "projects_spaces", "spaces"
+  add_foreign_key "slots_reservations", "reservations"
+  add_foreign_key "slots_reservations", "slots"
+  add_foreign_key "spaces_availabilities", "availabilities"
+  add_foreign_key "spaces_availabilities", "spaces"
   add_foreign_key "statistic_custom_aggregations", "statistic_types"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"

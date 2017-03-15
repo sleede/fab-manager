@@ -10,9 +10,9 @@ class Event < ActiveRecord::Base
   has_many :reservations, as: :reservable, dependent: :destroy
   has_and_belongs_to_many :event_themes, join_table: :events_event_themes, dependent: :destroy
 
-  has_many :event_price_categories
+  has_many :event_price_categories, dependent: :destroy
   has_many :price_categories, through: :event_price_categories
-  accepts_nested_attributes_for :event_price_categories, allow_destroy: false
+  accepts_nested_attributes_for :event_price_categories, allow_destroy: true
 
   belongs_to :age_range
 
@@ -108,6 +108,8 @@ class Event < ActiveRecord::Base
           availability: Availability.new(start_at: start_at, end_at: end_at, available_type: 'event'),
           availability_id: nil,
           category_id: category_id,
+          age_range_id: age_range_id,
+          event_themes: event_themes,
           amount: amount,
           event_price_categories: event_price_cats,
           nb_total_places: nb_total_places,

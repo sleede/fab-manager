@@ -157,11 +157,11 @@
 
               <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
                   <td>{{ 'including_VAT' | translate }} {{invoice.VAT.rate}} %</td>
-                  <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
+                  <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
               </tr>
               <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
                   <td translate>{{ 'including_total_excluding_taxes' }}</td>
-                  <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
+                  <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
               </tr>
               <tr class="invoice-payed vat-line bold" ng-show="invoice.VAT.active">
                   <td translate>{{ 'including_amount_payed_on_ordering' }}</td>

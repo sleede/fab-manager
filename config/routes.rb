@@ -26,10 +26,11 @@ Rails.application.routes.draw do
   root 'application#index'
 
   namespace :api, as: nil, defaults: { format: :json } do
-    resources :projects, only: [:index, :last_published, :show, :create, :update, :destroy] do
+    resources :projects, only: [:index, :show, :create, :update, :destroy] do
       collection do
         get :last_published
         get :search
+        get :allowed_extensions
       end
     end
     resources :openlab_projects, only: :index
@@ -52,6 +53,8 @@ Rails.application.routes.draw do
     resources :reservations, only: [:show, :create, :index, :update]
     resources :notifications, only: [:index, :show, :update] do
       match :update_all, path: '/', via: [:put, :patch], on: :collection
+      get 'polling', action: 'polling', on: :collection
+      get 'last_unread', action: 'last_unread', on: :collection
     end
     resources :wallet, only: [] do
       get '/by_user/:user_id', action: 'by_user', on: :collection
@@ -78,8 +81,10 @@ Rails.application.routes.draw do
     resources :availabilities do
       get 'machines/:machine_id', action: 'machine', on: :collection
       get 'trainings/:training_id', action: 'trainings', on: :collection
+      get 'spaces/:space_id', action: 'spaces', on: :collection
       get 'reservations', on: :member
       get 'public', on: :collection
+      get '/export_index', action: 'export_availabilities', on: :collection
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]
@@ -113,12 +118,14 @@ Rails.application.routes.draw do
     resources :auth_providers do
       get 'mapping_fields', on: :collection
       get 'active', action: 'active', on: :collection
+      post 'send_code', action: 'send_code', on: :collection
     end
     resources :abuses, only: [:create]
     resources :open_api_clients, only: [:index, :create, :update, :destroy] do
       patch :reset_token, on: :member
     end
     resources :price_categories
+    resources :spaces
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'
@@ -129,6 +136,13 @@ Rails.application.routes.draw do
 
     # Fab-manager's version
     get 'version' => 'version#show'
+  end
+
+  # rss
+
+  namespace :rss, as: nil, defaults: { format: :xml } do
+    resources :projects, only: [:index], as: 'rss_projects'
+    resources :events, only: [:index], as: 'rss_events'
   end
 
   # open_api
@@ -151,7 +165,7 @@ Rails.application.routes.draw do
     end
   end
 
-  %w(account event machine project subscription training user).each do |path|
+  %w(account event machine project subscription training user space).each do |path|
     post "/stats/#{path}/_search", to: "api/statistics##{path}"
     post "/stats/#{path}/export", to: "api/statistics#export_#{path}"
   end

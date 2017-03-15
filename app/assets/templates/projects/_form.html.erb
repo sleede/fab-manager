@@ -42,18 +42,22 @@
         <label class="col-sm-2 control-label" translate>{{ 'CAD_file' }}</label>
         <div class="col-sm-10">
           <div ng-repeat="file in project.project_caos_attributes" ng-show="!file._destroy">
-            <input type="hidden" name="project[project_caos_attributes][][id]" ng-value="file.id" />
-            <input type="hidden" name="project[project_caos_attributes][][_destroy]" ng-value="file._destroy" />
+            <div class="col-md-11 m-l-n">
+              <input type="hidden" name="project[project_caos_attributes][][id]" ng-value="file.id" />
+              <input type="hidden" name="project[project_caos_attributes][][_destroy]" ng-value="file._destroy" />
 
-            <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
-              <div class="form-control" data-trigger="fileinput">
-                <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+              <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
+                <div class="form-control" data-trigger="fileinput">
+                  <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+                </div>
+                <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
+                  <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
+                <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
               </div>
-              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
-                <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="project[project_caos_attributes][][attachment]"></span>
-              <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
-
+            <div class="col-md-1 m-t-xs">
+              <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{ 'allowed_extensions' | translate }} {{allowedExtensions.join(', ')}}" tooltip-placement="bottom" tooltip-class="media-lg"></i>
+            </div>
           </div>
           <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
         </div>
@@ -96,15 +100,32 @@
               <input type="hidden" name="project[project_steps_attributes][][description]" ng-value="step.description" />
               <summernote ng-model="step.description" placeholder="" config="summernoteOpts" name=project[project_steps_attributes][][description]></summernote>
 
-              <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(step.project_step_image)">
-                <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'add_a_picture' | translate }} <i class="fa fa-file-image-o m-l-sm" aria-hidden="true"></i></span><span class="fileinput-exists" translate>{{ 'change_the_picture' }}</span>
-                  <input type="file"
-                         name="project[project_steps_attributes][][project_step_image_attributes][attachment]"></span>
-                <span class="fileinput-filename">{{step.project_step_image}}</span>
-                <a class="close fileinput-exists" data-dismiss="fileinput" style="float: none"><i class="fa fa-trash-o"></i></a>
+              <div class="row">
+                <div ng-repeat-start="image in step.project_step_images_attributes" class="clearfix" ng-if="$index % 3 == 0"></div>
+                <div class="col-md-4" ng-repeat-end ng-show="!image._destroy">
+                  <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][id]" ng-value="image.id" />
+                  <input type="hidden" name="project[project_steps_attributes][][project_step_images_attributes][][_destroy]" ng-value="image._destroy" />
+
+                  <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(image.attachment)" style="width: 100%;">
+                    <div class="fileinput-new thumbnail" style="width: 100%; height: 200px;">
+                      <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!image.attachment">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 334px;">
+                      <img ng-src="{{ image.attachment_url }}" alt="{{image.attachment}}" />
+                    </div>
+                    <div>
+                      <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'browse' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'change' }}</span>
+                        <input type="file" name="project[project_steps_attributes][][project_step_images_attributes][][attachment]"></span>
+                      <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteProjectStepImage(step, image)" translate>{{ 'delete' }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a class="btn btn-default" ng-click="addProjectStepImage(step)" role="button">{{ 'add_a_picture' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
               </div>
 
-              <div>
+              <div class="m-t">
                 <a class="btn btn-sm btn-danger" ng-click="deleteStep(step)" role="button"><i class="fa fa-trash-o m-r-xs"></i> {{ 'delete_the_step' | translate }}</a>
               </div>
             </div>

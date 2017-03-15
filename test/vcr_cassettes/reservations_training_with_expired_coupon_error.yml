@@ -20,7 +20,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '81'
   response:
@@ -90,7 +90,7 @@ http_interactions:
           "type": "card",
           "used": false
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:30 GMT
 - request:
     method: post
@@ -112,7 +112,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '130'
   response:
@@ -170,7 +170,7 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:31 GMT
 - request:
     method: post
@@ -192,7 +192,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '78'
   response:
@@ -250,7 +250,7 @@ http_interactions:
           "quantity": null,
           "subscription": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:32 GMT
 - request:
     method: get
@@ -272,7 +272,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -398,7 +398,7 @@ http_interactions:
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:33 GMT
 - request:
     method: post
@@ -420,7 +420,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '33'
   response:
@@ -482,7 +482,7 @@ http_interactions:
           "name": null,
           "tokenization_method": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:34 GMT
 - request:
     method: post
@@ -504,7 +504,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '44'
   response:
@@ -657,7 +657,7 @@ http_interactions:
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           }
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:35 GMT
 - request:
     method: post
@@ -679,7 +679,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '27'
   response:
@@ -794,7 +794,7 @@ http_interactions:
           "total": 4590,
           "webhooks_delivered_at": null
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:36 GMT
 - request:
     method: post
@@ -816,7 +816,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
       Content-Length:
       - '0'
   response:
@@ -931,7 +931,7 @@ http_interactions:
           "total": 4590,
           "webhooks_delivered_at": 1473338736
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:37 GMT
 - request:
     method: delete
@@ -953,7 +953,7 @@ http_interactions:
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
         version 4.4.0-36-generic (buildd@lcy01-01) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"sylvain-sleede-pc"}'
+        5.4.0-6ubuntu1~16.04.2) ) #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016","hostname":"integration"}'
   response:
     status:
       code: 200
@@ -992,6 +992,6 @@ http_interactions:
           "deleted": true,
           "id": "card_18rRuI2sOmf47Nz9TSeEZ96o"
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 08 Sep 2016 12:45:38 GMT
 recorded_with: VCR 3.0.1

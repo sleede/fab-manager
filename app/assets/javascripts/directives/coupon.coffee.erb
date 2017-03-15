@@ -1,11 +1,11 @@
-Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, growl, _t) ->
+Application.Directives.directive 'coupon', [ '$rootScope', 'Coupon', '_t', ($rootScope, Coupon, _t) ->
   {
     restrict: 'E'
     scope:
       show: '='
       coupon: '='
+      total: '='
       userId: '@'
-      hasSelectSlot: '='
     templateUrl: '<%= asset_path "shared/_coupon.html" %>'
     link: ($scope, element, attributes) ->
 
@@ -16,32 +16,43 @@ Application.Directives.directive 'coupon', [ 'Coupon', 'growl', '_t', (Coupon, g
       # Available status are: 'pending', 'valid', 'invalid'
       $scope.status = 'pending'
 
-      # Binding for the code inputed
+      # Binding for the code inputed (see the attached template)
       $scope.couponCode = null
 
-      $scope.$watch 'hasSelectSlot', (newValue) ->
-        unless newValue
-          $scope.coupon = null
-          $scope.couponCode = null
-          $scope.code.input = false
+      # Code validation messages
+      $scope.messages = []
 
+      # Re-compute if the code can be applied when the total of the cart changes
+      $scope.$watch 'total', (newValue, oldValue) ->
+        if newValue and newValue != oldValue and $scope.couponCode
+          $scope.validateCode()
 
       ##
       # Callback to validate the code
       ##
       $scope.validateCode = ->
+        $scope.messages = []
         if $scope.couponCode == ''
           $scope.status = 'pending'
           $scope.coupon = null
         else
-          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId}, (res) ->
+          Coupon.validate {code: $scope.couponCode, user_id: $scope.userId, amount: $scope.total}, (res) ->
             $scope.status = 'valid'
             $scope.coupon = res
-            growl.success(_t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+            if res.type == 'percent_off'
+              $scope.messages.push(type: 'success', message: _t('the_coupon_has_been_applied_you_get_PERCENT_discount', {PERCENT: res.percent_off}))
+            else
+              $scope.messages.push(type: 'success', message: _t('the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY', {AMOUNT: res.amount_off, CURRENCY: $rootScope.currencySymbol}))
           , (err) ->
             $scope.status = 'invalid'
             $scope.coupon = null
-            growl.error(_t('unable_to_apply_the_coupon_because_'+err.data.status))
+            $scope.messages.push(type: 'danger', message: _t('unable_to_apply_the_coupon_because_'+err.data.status))
+
+      ##
+      # Callback to remove the message at provided index from the displayed list
+      ##
+      $scope.closeMessage = (index) ->
+        $scope.messages.splice(index, 1);
   }
 ]
 

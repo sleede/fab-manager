@@ -31,6 +31,7 @@ fr:
         reserve_a_machine: "Réserver une machine"
         trainings_registrations: "Inscriptions formations"
         events_registrations: "Inscriptions aux évènements"
+        reserve_a_space: "Réserver un espace"
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Calendrier"
@@ -44,6 +45,7 @@ fr:
         subscriptions_and_prices: "Abonnements & Tarifs"
         manage_the_events: "Gérer les évènements"
         manage_the_machines: "Gérer les machines"
+        manage_the_spaces: "Gérer les espaces"
         manage_the_projects_elements: "Gérer les éléments projets"
         statistics: "Statistiques"
         customization: "Personnalisation"
@@ -80,7 +82,7 @@ fr:
         phone_number: "Numéro de téléphone"
         phone_number_is_required: "Le numéro de téléphone est requis."
         i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
-        i_accept_to_receive_informations_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
+        i_accept_to_receive_information_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
 
@@ -102,6 +104,10 @@ fr:
 
         # Fab-manager's version
         version: "Version :"
+
+        # Notifications
+        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}} ..."  # messageFormat interpolation
+
       about:
         # page à propos
         read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
@@ -178,6 +184,7 @@ fr:
         files_to_download: "Fichiers à télécharger"
         projects_using_the_machine: "Projets utilisant la machine"
         _or_the_: " ou la "
+        do_you_really_want_to_delete_this_machine: "Êtes-vous sur de vouloir supprimer cette machine ?"
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
@@ -189,6 +196,9 @@ fr:
       training_show:
         # détails d'une formation
         book_this_training: "Réserver cette formation"
+        do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
+        unauthorized_operation: "Opération non autorisée"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
 
       plans:
@@ -197,11 +207,11 @@ fr:
         i_choose_that_plan: "Je choisis cette formule"
         i_subscribe_online: "Je m'abonne en ligne"
         i_already_subscribed: "Je suis déjà abonné"
-        more_informations: "Plus d'infos"
+        more_information: "Plus d'infos"
         your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}"  # angular interpolation
         my_group: "Mon groupe"
         his_group: "Son groupe"  # messageFormat interpolation
-        he_wants_to_change_group: "{ROLE, select, admin{Il veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
+        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
         change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"  # messageFormat interpolation
         your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {{DATE}}"  # angular interpolation
         you_ve_just_payed_the_: "Vous venez de régler l'"
@@ -224,7 +234,7 @@ fr:
         # détails d'un événement et réservation
         event_description: "Description de l'évènement"
         downloadable_documents: "Documents à télécharger"
-        informations_and_booking: "Informations et réservation"
+        information_and_booking: "Informations et réservation"
         beginning: "Début :"
         ending: "Fin :"
         opening_hours: "Horaires :"
@@ -240,6 +250,29 @@ fr:
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
 
       calendar:
-        calendar: "Calendrier"
-        show_no_disponible: "Afficher les crénaux non disponibles"
-        filter-calendar: "Filtrer le calendrier"
+        # calendrier publique
+        calendar:
+          calendar: "Calendrier"
+          show_unavailables: "Afficher les créneaux non disponibles"
+          filter_calendar: "Filtrer le calendrier"
+          trainings: "Formations"
+          machines: "Machines"
+          spaces: "Espaces"
+          events: "Évènements"
+
+      spaces_list:
+        # liste des espaces
+        the_spaces: "Les espaces"
+        add_a_space: "Ajouter un espace"
+
+      space_show:
+        # affichage des détails d'un espace
+        space_show:
+          book_this_space: "Réserver cet espace"
+          unauthorized_operation: "Opération non autorisée"
+          confirmation_required: "Confirmation requise"
+          do_you_really_want_to_delete_this_space: "Voulez-vous vraiment supprimer cet espace ?"
+          the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "L'espace ne peut pas être supprimé car il a déjà été réservé par des utilisateurs."
+          characteristics: "Caractéristiques"
+          files_to_download: "Fichiers à télécharger"
+          projects_using_the_space: "Projets utilisant l'espace"

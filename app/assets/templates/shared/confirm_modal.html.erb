@@ -3,7 +3,7 @@
   <h1>{{object.title}}</h1>
 </div>
 <div class="modal-body">
-  <p>{{object.msg}}</p>
+  <p ng-bind-html="object.msg"></p>
 </div>
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" translate>{{ 'confirm' }}</button>

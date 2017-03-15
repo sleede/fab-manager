@@ -1,7 +1,6 @@
 class API::AuthProvidersController < API::ApiController
 
   before_action :set_provider, only: [:show, :update, :destroy]
-
   def index
     @providers = policy_scope(AuthProvider)
   end
@@ -46,6 +45,25 @@ class API::AuthProvidersController < API::ApiController
   def active
     authorize AuthProvider
     @provider = AuthProvider.active
+  end
+
+
+  def send_code
+    authorize AuthProvider
+    user = User.find_by(email: params[:email])
+
+    if user&.auth_token
+      if AuthProvider.active.providable_type != DatabaseProvider.name
+        NotificationCenter.call type: 'notify_user_auth_migration',
+                                receiver: user,
+                                attached_object: user
+        render json: {status: 'processing'}, status: :ok
+      else
+        render json: {status: 'error', error: I18n.t('members.current_authentication_method_no_code')}, status: :bad_request
+      end
+    else
+      render json: {status: 'error', error: I18n.t('members.requested_account_does_not_exists')}, status: :bad_request
+    end
   end
 
   private

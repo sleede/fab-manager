@@ -2,7 +2,10 @@ class Reservation < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :user
-  has_many :slots, dependent: :destroy
+
+  has_many :slots_reservations, dependent: :destroy
+  has_many :slots, through: :slots_reservations
+
   accepts_nested_attributes_for :slots, allow_destroy: true
   belongs_to :reservable, polymorphic: true
 
@@ -107,10 +110,42 @@ class Reservation < ActiveRecord::Base
           amount += ticket.booked * ticket.event_price_category.amount
         end
         slots.each do |slot|
-          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+          description = "#{reservable.name} "
+          (slot.start_at.to_date..slot.end_at.to_date).each do |d|
+            description += "\n" if slot.start_at.to_date != slot.end_at.to_date
+            description += "#{I18n.l d, format: :long} #{I18n.l slot.start_at, format: :hour_minute} - #{I18n.l slot.end_at, format: :hour_minute}"
+          end
           ii_amount = amount
           ii_amount = 0 if (slot.offered and on_site)
           unless on_site
+            ii = Stripe::InvoiceItem.create(
+                customer: user.stp_customer_id,
+                amount: ii_amount,
+                currency: Rails.application.secrets.stripe_currency,
+                description: description
+            )
+            invoice_items << ii
+          end
+          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
+        end
+
+      # === Space reservation ===
+      when Space
+        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+
+        slots.each_with_index do |slot, index|
+          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+
+          ii_amount = base_amount # ii_amount default to base_amount
+
+          if users_credits_manager.will_use_credits?
+            ii_amount = (index < users_credits_manager.free_hours_count) ? 0 : base_amount
+          end
+
+          ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
+
+          unless on_site # if it's local payment then do not create Stripe::InvoiceItem
             ii = Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
                 amount: ii_amount,
@@ -130,16 +165,25 @@ class Reservation < ActiveRecord::Base
 
     # === Coupon ===
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
-      if not cp.nil? and cp.status(user.id) == 'active'
-        @coupon = cp
-        total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+      @coupon = Coupon.find_by(code: coupon_code)
+      if not @coupon.nil? and @coupon.status(user.id) == 'active'
+        total = get_cart_total
+
+        discount = 0
+        if @coupon.type == 'percent_off'
+          discount = (total  * @coupon.percent_off / 100).to_i
+        elsif @coupon.type == 'amount_off'
+          discount = @coupon.amount_off
+        else
+          raise InvalidCouponError
+        end
+
         unless on_site
           invoice_items << Stripe::InvoiceItem.create(
               customer: user.stp_customer_id,
-              amount: -(total  * cp.percent_off / 100).to_i,
+              amount: -discount,
               currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{cp.code} - reservation"
+              description: "coupon #{@coupon.code}"
           )
         end
       else
@@ -151,7 +195,7 @@ class Reservation < ActiveRecord::Base
     if @wallet_amount_debit != 0 and !on_site
       invoice_items << Stripe::InvoiceItem.create(
         customer: user.stp_customer_id,
-        amount: -@wallet_amount_debit,
+        amount: -@wallet_amount_debit.to_i,
         currency: Rails.application.secrets.stripe_currency,
         description: "wallet -#{@wallet_amount_debit / 100.0}"
       )
@@ -170,7 +214,7 @@ class Reservation < ActiveRecord::Base
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
         self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
-        if subscription.save_with_payment(false, coupon_code)
+        if subscription.save_with_payment(false)
           self.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
           self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
@@ -334,7 +378,7 @@ class Reservation < ActiveRecord::Base
   def machine_not_already_reserved
     already_reserved = false
     self.slots.each do |slot|
-      same_hour_slots = Slot.joins(:reservation).where(
+      same_hour_slots = Slot.joins(:reservations).where(
                         reservations: { reservable_type: self.reservable_type,
                                        reservable_id: self.reservable_id
                                      },
@@ -384,14 +428,19 @@ class Reservation < ActiveRecord::Base
     reservable.update_columns(nb_free_places: nb_free_places)
   end
 
-  def get_wallet_amount_debit
+  def get_cart_total
     total = (self.invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
     if plan_id.present?
       plan = Plan.find(plan_id)
       total += plan.amount
     end
+    total
+  end
+
+  def get_wallet_amount_debit
+    total = get_cart_total
     if @coupon
-      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+      total = CouponService.new.apply(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
 
@@ -402,8 +451,14 @@ class Reservation < ActiveRecord::Base
     if @wallet_amount_debit.present? and @wallet_amount_debit != 0
       amount = @wallet_amount_debit / 100.0
       wallet_transaction = WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
-      if !user.invoicing_disabled? and wallet_transaction
-        self.invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
+      # wallet debit success
+      if wallet_transaction
+        # payment by online or (payment by local and invoice isnt disabled)
+        if stp_invoice_id or !user.invoicing_disabled?
+          self.invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
+        end
+      else
+        raise DebitWalletError
       end
     end
   end
@@ -417,9 +472,9 @@ class Reservation < ActiveRecord::Base
     total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
 
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
+      cp = Coupon.find_by(code: coupon_code)
       if not cp.nil? and cp.status(user.id) == 'active'
-        total = total - (total  * cp.percent_off / 100.0)
+        total = CouponService.new.apply(total, cp, user.id)
         self.invoice.coupon_id = cp.id
       else
         raise InvalidCouponError

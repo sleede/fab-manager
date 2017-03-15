@@ -31,6 +31,7 @@ class Price < ActiveRecord::Base
       new_plan_being_bought = true
     else
       plan = nil
+      new_plan_being_bought = false
     end
 
     # === compute reservation price ===
@@ -41,13 +42,13 @@ class Price < ActiveRecord::Base
       when Machine
         base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
         if plan
-          machine_credit = plan.machine_credits.select {|credit| credit.creditable_id == reservable.id}.first
-          if machine_credit
-            hours_available = machine_credit.hours
-            if !new_plan_being_bought
-              user_credit = user.users_credits.find_by_credit_id(machine_credit.id)
+          space_credit = plan.machine_credits.select {|credit| credit.creditable_id == reservable.id}.first
+          if space_credit
+            hours_available = space_credit.hours
+            unless new_plan_being_bought
+              user_credit = user.users_credits.find_by(credit_id: space_credit.id)
               if user_credit
-                hours_available = machine_credit.hours - user_credit.hours_used
+                hours_available = space_credit.hours - user_credit.hours_used
               end
             end
             slots.each_with_index do |slot, index|
@@ -69,18 +70,18 @@ class Price < ActiveRecord::Base
         amount = reservable.amount_by_group(user.group_id).amount
         if plan
           # Return True if the subscription link a training credit for training reserved by the user
-          training_is_creditable = plan.training_credits.select {|credit| credit.creditable_id == reservable.id}.size > 0
+          space_is_creditable = plan.training_credits.select {|credit| credit.creditable_id == reservable.id}.size > 0
 
           # Training reserved by the user is free when :
 
-          # |-> the user already has a current subscription and if training_is_creditable is true and has at least one credit available.
+          # |-> the user already has a current subscription and if space_is_creditable is true and has at least one credit available.
           if !new_plan_being_bought
-            if user.training_credits.size < plan.training_credit_nb and training_is_creditable
+            if user.training_credits.size < plan.training_credit_nb and space_is_creditable
               amount = 0
             end
-          # |-> the user buys a new subscription and if training_is_creditable is true.
+          # |-> the user buys a new subscription and if space_is_creditable is true.
           else
-            if training_is_creditable
+            if space_is_creditable
               amount = 0
             end
           end
@@ -99,6 +100,34 @@ class Price < ActiveRecord::Base
           _amount += get_slot_price(amount, slot, admin, _elements)
         end
 
+      # Space reservation
+      when Space
+        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+
+        if plan
+          space_credit = plan.space_credits.select {|credit| credit.creditable_id == reservable.id}.first
+          if space_credit
+            hours_available = space_credit.hours
+            unless new_plan_being_bought
+              user_credit = user.users_credits.find_by(credit_id: space_credit.id)
+              if user_credit
+                hours_available = space_credit.hours - user_credit.hours_used
+              end
+            end
+            slots.each_with_index do |slot, index|
+              _amount += get_slot_price(base_amount, slot, admin, _elements, (index < hours_available))
+            end
+          else
+            slots.each do |slot|
+              _amount += get_slot_price(base_amount, slot, admin, _elements)
+            end
+          end
+        else
+          slots.each do |slot|
+            _amount += get_slot_price(base_amount, slot, admin, _elements)
+          end
+        end
+
       # Unknown reservation type
       else
         raise NotImplementedError
@@ -111,13 +140,11 @@ class Price < ActiveRecord::Base
     end
 
     # === apply Coupon if any ===
-    unless coupon_code.nil?
-      _coupon = Coupon.find_by_code(coupon_code)
-      _amount = _amount - (_amount  * _coupon.percent_off / 100.0)
-    end
+    _amount_no_coupon = _amount
+    _amount = CouponService.new.apply(_amount, coupon_code)
 
     # return result
-    {elements: _elements, total: _amount}
+    {elements: _elements, total: _amount, before_coupon: _amount_no_coupon}
   end
 
   private

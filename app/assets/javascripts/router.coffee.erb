@@ -270,6 +270,9 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "projects/new.html" %>'
             controller: 'NewProjectController'
         resolve:
+          allowedExtensions: ['Project', (Project)->
+            Project.allowedExtensions().$promise
+          ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.projects_new', 'app.shared.project']).$promise
           ]
@@ -295,6 +298,9 @@ angular.module('application.router', ['ui.router']).
         resolve:
           projectPromise: ['$stateParams', 'Project', ($stateParams, Project)->
             Project.get(id: $stateParams.id).$promise
+          ]
+          allowedExtensions: ['Project', (Project)->
+              Project.allowedExtensions().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise
@@ -367,7 +373,7 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.machines_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
-              'app.shared.wallet', 'app.shared.coupon_input']).$promise
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
       .state 'app.admin.machines_edit',
         url: '/machines/:id/edit'
@@ -382,6 +388,97 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise
           ]
+
+      # spaces
+      .state 'app.public.spaces_list',
+        url: '/spaces'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/index.html" %>'
+            controller: 'SpacesController'
+        resolve:
+          spacesPromise: ['Space', (Space)->
+            Space.query().$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.spaces_list']).$promise
+          ]
+      .state 'app.admin.space_new',
+        url: '/spaces/new'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/new.html" %>'
+            controller: 'NewSpaceController'
+        resolve:
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.space_new', 'app.shared.space']).$promise
+          ]
+      .state 'app.public.space_show',
+        url: '/spaces/:id'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/show.html" %>'
+            controller: 'ShowSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.public.space_show']).$promise
+          ]
+      .state 'app.admin.space_edit',
+        url: '/spaces/:id/edit'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/edit.html" %>'
+            controller: 'EditSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.admin.space_edit', 'app.shared.space']).$promise
+          ]
+      .state 'app.logged.space_reserve',
+        url: '/spaces/:id/reserve'
+        abstract: Fablab.withoutSpaces
+        views:
+          'main@':
+            templateUrl: '<%= asset_path "spaces/reserve.html" %>'
+            controller: 'ReserveSpaceController'
+        resolve:
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams)->
+            Space.get(id: $stateParams.id).$promise
+          ]
+          availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams)->
+            Availability.spaces({spaceId: $stateParams.id}).$promise
+          ]
+          plansPromise: ['Plan', (Plan)->
+            Plan.query().$promise
+          ]
+          groupsPromise: ['Group', (Group)->
+            Group.query().$promise
+          ]
+          settingsPromise: ['Setting', (Setting)->
+            Setting.query(names: "['booking_window_start',
+                                   'booking_window_end',
+                                   'booking_move_enable',
+                                   'booking_move_delay',
+                                   'booking_cancel_enable',
+                                   'booking_cancel_delay',
+                                   'subscription_explications_alert',
+                                   'space_explications_alert']").$promise
+          ]
+          translations: [ 'Translations', (Translations) ->
+            Translations.query(['app.logged.space_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
+              'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
+          ]
+
       # trainings
       .state 'app.public.trainings_list',
         url: '/trainings'
@@ -445,7 +542,7 @@ angular.module('application.router', ['ui.router']).
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.logged.trainings_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
-              'app.shared.wallet', 'app.shared.coupon_input']).$promise
+              'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
           ]
       # notifications
       .state 'app.logged.notifications',
@@ -516,7 +613,7 @@ angular.module('application.router', ['ui.router']).
             PriceCategory.query().$promise
           ]
           settingsPromise: ['Setting', (Setting)->
-            Setting.query(names: "['booking_move_enable', 'booking_move_delay']").$promise
+            Setting.query(names: "['booking_move_enable', 'booking_move_delay', 'event_explications_alert']").$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe',
@@ -542,6 +639,9 @@ angular.module('application.router', ['ui.router']).
           ]
           machinesPromise: ['Machine', (Machine)->
             Machine.query().$promise
+          ]
+          spacesPromise: ['Space', (Space) ->
+            Space.query().$promise
           ]
           translations: [ 'Translations', (Translations) ->
             Translations.query(['app.public.calendar']).$promise
@@ -764,6 +864,15 @@ angular.module('application.router', ['ui.router']).
           couponsPromise: ['Coupon', (Coupon) ->
             Coupon.query().$promise
           ]
+          spacesPromise: ['Space', (Space) ->
+            Space.query().$promise
+          ]
+          spacesPricesPromise: ['Price', (Price)->
+            Price.query(priceable_type: 'Space', plan_id: 'null').$promise
+          ]
+          spacesCreditsPromise: ['Credit', (Credit) ->
+            Credit.query({creditable_type: 'Space'}).$promise
+          ]
 
       # plans
       .state 'app.admin.plans',
@@ -772,14 +881,8 @@ angular.module('application.router', ['ui.router']).
           prices: ['Pricing', (Pricing) ->
             Pricing.query().$promise
           ]
-          machines: ['Machine', (Machine) ->
-            Machine.query().$promise
-          ]
           groups: ['Group', (Group) ->
             Group.query().$promise
-          ]
-          plans: ['Plan', (Plan) ->
-            Plan.query().$promise
           ]
           partners: ['User', (User) ->
             User.query({role: 'partner'}).$promise
@@ -801,6 +904,15 @@ angular.module('application.router', ['ui.router']).
             templateUrl: '<%= asset_path "admin/plans/edit.html" %>'
             controller: 'EditPlanController'
         resolve:
+          spaces: ['Space', (Space) ->
+            Space.query().$promise
+          ]
+          machines: ['Machine', (Machine) ->
+            Machine.query().$promise
+          ]
+          plans: ['Plan', (Plan) ->
+            Plan.query().$promise
+          ]
           planPromise: ['Plan', '$stateParams', (Plan, $stateParams) ->
             Plan.get({id: $stateParams.id}).$promise
           ]
@@ -1031,6 +1143,8 @@ angular.module('application.router', ['ui.router']).
               'training_explications_alert',
               'training_information_message',
               'subscription_explications_alert',
+              'event_explications_alert',
+              'space_explications_alert',
               'booking_window_start',
               'booking_window_end',
               'booking_move_enable',

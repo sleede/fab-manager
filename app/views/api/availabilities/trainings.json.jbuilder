@@ -1,6 +1,5 @@
 json.array!(@availabilities) do |a|
-  json.id a.id
-  json.slot_id a.slot_id if a.slot_id
+  json.id a.slot_id if a.slot_id
   if a.is_reserved
     json.is_reserved true
     json.title "#{a.trainings[0].name}' - #{t('trainings.i_ve_reserved')}"
@@ -16,6 +15,7 @@ json.array!(@availabilities) do |a|
   json.backgroundColor 'white'
   json.can_modify a.can_modify
   json.nb_total_places a.nb_total_places
+  json.availability_id a.id
 
   json.training do
     json.id a.trainings.first.id

@@ -31,6 +31,11 @@ fr:
       wrong_size: "ne fait pas la taille du fichier (doit comporter %{file_size})"
       size_too_small: "est trop petite (au moins %{file_size})"
       size_too_big: "est trop grande (pas plus de %{file_size})"
+      export_not_found: "L'export demandé n'a pas été trouvé. Il a probablement été supprimé, veuillez lancer la génération d'un nouvel export."
+      percentage_out_of_range: "Le pourcentage doit être inclus entre 0 et 100"
+      cannot_be_blank_at_same_time: "ou %{field} doit être rempli(e)"
+      cannot_be_in_the_past: "ne peut pas être dans le passé"
+      cannot_be_before_previous_value: "ne peut pas être antérieur(e) à la valeur précédente"
 
   activemodel:
     errors:
@@ -58,6 +63,8 @@ fr:
     unable_to_change_the_group_while_a_subscription_is_running: "Impossible de changer le groupe tant qu'un abonnement est en cours"
     please_input_the_authentication_code_sent_to_the_address: "Merci d'enter le code d'authentification qui a été envoyé à l'adresse de courriel %{EMAIL}"
     your_authentication_code_is_not_valid: "Votre code d'authentification n'est pas valide."
+    current_authentication_method_no_code: "La méthode d'authentification actuelle ne requiert pas de code de migration"
+    requested_account_does_not_exists: "Le compte utilisateur demandé n'existe pas"
 
   invoices:
     # génération des factures en PDF
@@ -67,6 +74,7 @@ fr:
     order_number: "N° Commande : %{NUMBER}"
     invoice_issued_on_DATE: "Facture éditée le %{DATE}"
     refund_invoice_issued_on_DATE: "Avoir édité le %{DATE}"
+    wallet_credit: "Crédit du porte-monnaie"
     cancellation_of_invoice_REF: "Annulation de la facture %{REF}"
     reservation_of_USER_on_DATE_at_TIME: "Réservation de %{USER} le %{DATE} à %{TIME}"
     cancellation: "Annulation"
@@ -77,6 +85,7 @@ fr:
     subscription_extended_for_free_from_START_to_END: "Abonnement prolongé gratuitement - Du %{START} au %{END}"
     subscription_NAME_from_START_to_END: "Abonnement - Du %{START} au %{END}"
     machine_reservation_DESCRIPTION: "Réservation Machine - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Réservation Espace - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Réservation Évènement - %{DESCRIPTION}"
     full_price_ticket:
@@ -86,7 +95,7 @@ fr:
       one: "Une place %{NAME}"
       other: "%{count} places %{NAME}"
     reservation_other: "Réservation (autre)"
-    coupon_CODE_discount_of_PERCENT: "Code %{CODE} : remise de %{PERCENT} %"
+    coupon_CODE_discount_of_DISCOUNT: "Code {CODE} : remise de {DISCOUNT} {TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
     total_including_all_taxes: "Total TTC"
     including_VAT_RATE: "Dont TVA %{RATE}%"
     including_total_excluding_taxes: "Dont total HT"
@@ -115,6 +124,11 @@ fr:
     i_ve_reserved: "J'ai réservé"
     completed: "Complet"
 
+  events:
+    # messages d'erreur lors de la mise à jour d'un évènement
+    error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
+    other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
+
   export_members:
     # export de la liste des members au format EXCEL
     members: "Membres"
@@ -137,6 +151,7 @@ fr:
     validated_trainings: "Formations validées"
     tags: "Étiquettes"
     number_of_invoices: "Nombre de factures"
+    invoicing_disabled: "Facturation désactivée"
     projects: "Projets"
     facebook: "Facebook"
     twitter: "Twitter"
@@ -175,6 +190,23 @@ fr:
     payment_method: "Méthode de paiement"
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
+
+  export_availabilities:
+    # export des listes de créneaux de réservations, par type, au format EXCEL
+    machines: "Machines"
+    trainings: "Formations"
+    spaces: "Espaces"
+    events: "Évènements"
+    day_of_week: "Jour de la semaine"
+    date: "Date"
+    slot: "Créneau"
+    machine: "Machine"
+    training: "Formation"
+    space: "Espace"
+    event: "Évènement"
+    reservations: "Réservations"
+    available_seats: "Places disponibles"
+
 
   api:
     notifications:
@@ -251,7 +283,7 @@ fr:
         your_invoice_is_ready_html: "Votre facture n°%{REFERENCE}, d'un montant de %{AMOUNT}, est prête. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Cliquez ici pour la télécharger</a>."
       undefined_notification:
         unknown_notification: "Notification inconnue"
-        notification_ID_wrong_type_TYPE_unknown: "Notification {ID} erronée (type {TYPE} inconnu)."
+        notification_ID_wrong_type_TYPE_unknown: "Notification %{ID} erronée (type %{TYPE} inconnu)."
       notify_user_wallet_is_credited:
         your_wallet_is_credited: "Votre porte-monnaie a bien été crédité de %{AMOUNT} par l'administrateur"
       notify_admin_user_wallet_is_credited:
@@ -265,9 +297,11 @@ fr:
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
+        statistics_space: "des statistiques sur les espaces"
         users_members: "de la liste des membres"
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
+        availabilities_index: "des disponibilités de réservations"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
       notify_member_about_coupon:
@@ -277,6 +311,7 @@ fr:
     # outil de statistiques pour les administrateurs
     subscriptions: "Abonnements"
     machines_hours: "Heures machines"
+    spaces: "Espaces"
     trainings: "Formations"
     events: "Évènements"
     registrations: "Inscriptions"

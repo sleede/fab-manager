@@ -55,13 +55,16 @@
                    ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
-          <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
+        <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+
+        <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
       </div>
 
 
       <div class="form-group" ng-class="{'has-error': userForm['user[username]'].$dirty && userForm['user[username]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          </span>
           <input type="text"
                  name="user[username]"
                  ng-model="user.username"
@@ -78,7 +81,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  name="user[profile_attributes][last_name]"
                  ng-model="user.profile.last_name"
@@ -93,7 +96,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  name="user[profile_attributes][first_name]"
                  ng-model="user.profile.first_name"
@@ -108,7 +111,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[email]'].$dirty && userForm['user[email]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+          <span class="input-group-addon"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="email"
                  name="user[email]"
                  ng-model="user.email"
@@ -130,7 +133,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[password]'].$dirty && userForm['user[password]'].$invalid}" ng-if="password.change">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-key"></i> </span>
+          <span class="input-group-addon"><i class="fa fa-key"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="password"
                  name="user[password]"
                  ng-model="user.password"
@@ -146,7 +149,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="password.change">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-key"></i> </span>
+          <span class="input-group-addon"><i class="fa fa-key"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="password"
                  name="user[password_confirmation]"
                  ng-model="user.password_confirmation"
@@ -164,7 +167,7 @@
 
       <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+          <span class="input-group-addon"><i class="fa fa-building-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="hidden"
                  name="user[profile_attributes][organization_attributes][id]"
                  ng-value="user.profile.organization.id" />
@@ -181,7 +184,7 @@
 
       <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+          <span class="input-group-addon"><i class="fa fa-map-marker"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="hidden"
                  name="user[profile_attributes][organization_attributes][address_attributes][id]"
                  ng-value="user.profile.organization.address.id" />
@@ -198,7 +201,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
+          <span class="input-group-addon"><i class="fa fa-calendar-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  id="user_birthday"
                  class="form-control"
@@ -235,7 +238,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+          <span class="input-group-addon"><i class="fa fa-phone"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  name="user[profile_attributes][phone]"
                  ng-model="user.profile.phone"
@@ -313,7 +316,7 @@
 
       <!-- allow receive newsletter -->
       <div class="form-group">
-        <label for="allowNewsletter" translate>{{ 'i_accept_to_receive_informations_from_the_fablab' }}</label>
+        <label for="allowNewsletter" translate>{{ 'i_accept_to_receive_information_from_the_fablab' }}</label>
         <input bs-switch
                ng-model="user.is_allow_newsletter"
                id="allowNewsletter"

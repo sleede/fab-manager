@@ -41,10 +41,10 @@ class API::PricesController < API::ApiController
     _user = User.find(_price_params[:user_id])
     # reservable
     if _price_params[:reservable_id].nil?
-      @amount = {elements: nil, total: 0}
+      @amount = {elements: nil, total: 0, before_coupon: 0}
     else
       _reservable = _price_params[:reservable_type].constantize.find(_price_params[:reservable_id])
-      @amount = Price.compute(current_user.is_admin?, _user, _reservable, _price_params[:slots_attributes], _price_params[:plan_id], _price_params[:nb_reserve_places], _price_params[:tickets_attributes], coupon_params[:coupon_code])
+      @amount = Price.compute(current_user.is_admin?, _user, _reservable, _price_params[:slots_attributes] || [], _price_params[:plan_id], _price_params[:nb_reserve_places], _price_params[:tickets_attributes], coupon_params[:coupon_code])
     end
 
 

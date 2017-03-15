@@ -8,10 +8,10 @@ class Coupon < ActiveRecord::Base
   validates :code, presence: true
   validates :code, format: { with: /\A[A-Z0-9\-]+\z/ ,message: 'only caps letters, numbers, and dashes'}
   validates :code, uniqueness: true
-  validates :percent_off, presence: true
-  validates :percent_off, :inclusion => 0..100
   validates :validity_per_user, presence: true
   validates :validity_per_user, inclusion: { in: %w(once forever) }
+  validates_with CouponDiscountValidator
+  validates_with CouponExpirationValidator
 
   def safe_destroy
     if self.invoices.size == 0
@@ -27,12 +27,15 @@ class Coupon < ActiveRecord::Base
   # - may has expired because the validity date has been reached,
   # - may have been used the maximum number of times it was allowed
   # - may have already been used by the provided user, if the coupon is configured to allow only one use per user,
+  # - may exceed the current cart's total amount, if the coupon is configured to discount an amount (and not a percentage)
   # - may be available for use
   # @param [user_id] {Number} if provided and if the current coupon's validity_per_user == 'once', check that the coupon
   # was already used by the provided user
+  # @param [amount] {Number} if provided and if the current coupon's type == 'amont_off' check that the coupon
+  # does not exceed the cart total price
   # @return {String} status identifier
   ##
-  def status(user_id = nil)
+  def status(user_id = nil, amount = nil)
     if not active?
       'disabled'
     elsif (!valid_until.nil?) and valid_until.at_end_of_day < DateTime.now
@@ -41,8 +44,18 @@ class Coupon < ActiveRecord::Base
       'sold_out'
     elsif (!user_id.nil?) and validity_per_user == 'once' and users_ids.include?(user_id.to_i)
       'already_used'
+    elsif (!amount.nil?) and type == 'amount_off' and amount_off > amount.to_f
+      'amount_exceeded'
     else
       'active'
+    end
+  end
+
+  def type
+    if amount_off.nil? and !percent_off.nil?
+      'percent_off'
+    elsif percent_off.nil? and !amount_off.nil?
+      'amount_off'
     end
   end
 
@@ -64,6 +77,7 @@ class Coupon < ActiveRecord::Base
                             attached_object: self
   end
 
+  private
   def create_stripe_coupon
     StripeWorker.perform_async(:create_stripe_coupon, id)
   end

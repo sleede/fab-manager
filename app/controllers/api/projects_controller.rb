@@ -41,7 +41,7 @@ class API::ProjectsController < API::ApiController
   end
 
   def collaborator_valid
-    project_user = ProjectUser.find_by_valid_token params[:valid_token]
+    project_user = ProjectUser.find_by(valid_token: params[:valid_token])
     if project_user
       project_user.update(is_valid: true, valid_token: '')
       redirect_to "/#!/projects/#{project_user.project.id}" and return
@@ -57,6 +57,10 @@ class API::ProjectsController < API::ApiController
     render :index
   end
 
+  def allowed_extensions
+    render json: ENV['ALLOWED_EXTENSIONS'].split(' '), status: :ok
+  end
+
   private
     def set_project
       @project = Project.find(params[:id])
@@ -67,6 +71,6 @@ class API::ProjectsController < API::ApiController
                                       user_ids: [], machine_ids: [], component_ids: [], theme_ids: [], project_image_attributes: [:attachment],
                                       project_caos_attributes: [:id, :attachment, :_destroy],
                                       project_steps_attributes: [:id, :description, :title, :_destroy, :step_nb,
-                                        :project_step_image_attributes => :attachment])
+                                        :project_step_images_attributes => [:id, :attachment, :_destroy]])
     end
 end

@@ -1,4 +1,4 @@
-json.extract! @machine, :id, :name, :description, :spec, :created_at, :updated_at
+json.extract! @machine, :id, :name, :description, :spec, :created_at, :updated_at, :slug
 json.machine_image @machine.machine_image.attachment.large.url if @machine.machine_image
 json.machine_files_attributes @machine.machine_files do |f|
   json.id f.id

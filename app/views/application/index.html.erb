@@ -24,6 +24,7 @@
       var Fablab = Fablab || {};
 
       Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');
+      Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' != 'false');
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
@@ -65,6 +66,9 @@
     <link rel="shortcut icon" type="image/ico" href="<%= CustomAsset.get_url('favicon-file') %>">
   <% end %>
 
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.events_list.the_fablab_s_events') %>" href="<%= rss_events_path %>.xml">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>

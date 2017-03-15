@@ -2,7 +2,7 @@ namespace :fablab do
   # desc "Get all stripe plans and create in fablab app"
   # task stripe_plan: :environment do
   #   Stripe::Plan.all.data.each do |plan|
-  #     unless Plan.find_by_stp_plan_id(plan.id)
+  #     unless Plan.find_by(stp_plan_id: plan.id)
   #       group = Group.friendly.find(plan.id.split('-').first)
   #       if group
   #         Plan.create(stp_plan_id: plan.id, name: plan.name, amount: plan.amount, interval: plan.interval, group_id: group.id, skip_create_stripe_plan: true)
@@ -49,7 +49,7 @@ namespace :fablab do
     puts "PUT index stats"
     `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats`
 
-    %w[account event machine project subscription training user].each do |stat|
+    %w[account event machine project subscription training user space].each do |stat|
       puts "PUT Mapping stats/#{stat}"
         `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/#{stat}/_mapping -d '
       {
@@ -96,6 +96,31 @@ namespace :fablab do
       }';`
   end
 
+
+  desc 'add spaces reservations to statistics'
+  task es_add_spaces: :environment do
+    `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/space/_mapping -d '
+      {
+         "properties": {
+            "type": {
+               "type": "string",
+               "index" : "not_analyzed"
+            },
+            "subType": {
+               "type": "string",
+               "index" : "not_analyzed"
+            },
+            "date": {
+               "type": "date"
+            },
+            "name": {
+               "type": "string",
+               "index" : "not_analyzed"
+            }
+         }
+      }';`
+  end
+
   desc 'sync all/one project in ElasticSearch index'
   task :es_build_projects_index, [:id] => :environment do |task, args|
     client = Project.__elasticsearch__.client
@@ -134,13 +159,21 @@ namespace :fablab do
     # create doctype
     client.indices.put_mapping index: Availability.index_name,  type: Availability.document_type, body: Availability.mappings.to_hash
 
-    # index requested documents
-    if args.id
-      AvailabilityIndexerWorker.perform_async(:index, id)
-    else
-      Availability.pluck(:id).each do |availability_id|
-        AvailabilityIndexerWorker.perform_async(:index, availability_id)
+    # verify doctype creation was successful
+    if client.indices.exists_type? index: Availability.index_name, type: Availability.document_type
+      puts "[ElasticSearch] #{Availability.index_name}/#{Availability.document_type} successfully created with its mapping."
+
+      # index requested documents
+      if args.id
+        AvailabilityIndexerWorker.perform_async(:index, id)
+      else
+        Availability.pluck(:id).each do |availability_id|
+          AvailabilityIndexerWorker.perform_async(:index, availability_id)
+        end
       end
+    else
+      puts "[ElasticSearch] An error occurred while creating #{Availability.index_name}/#{Availability.document_type}. Please check your ElasticSearch configuration."
+      puts "\nCancelling..."
     end
   end
 
@@ -207,8 +240,9 @@ namespace :fablab do
 
     puts "\n/!\\ WARNING: Please consider the following, otherwise the authentication will be bogus:"
     puts "\t1) CLEAN the cache with `rake tmp:clear`"
-    puts "\t2) RESTART the application"
-    puts "\t3) NOTIFY the current users with `rake fablab:notify_auth_changed`\n\n"
+    puts "\t2) REBUILD the assets with `rake assets:precompile`"
+    puts "\t3) RESTART the application"
+    puts "\t4) NOTIFY the current users with `rake fablab:notify_auth_changed`\n\n"
 
   end
 
@@ -258,6 +292,16 @@ namespace :fablab do
     days = args.period.to_i
     days.times.each do |i|
       StatisticService.new.generate_statistic({start_date: i.day.ago.beginning_of_day,end_date: i.day.ago.end_of_day})
+    end
+  end
+
+
+  desc 'set slugs to plans'
+  task set_plans_slugs: :environment do
+    # this will maintain compatibility with existing statistics
+    Plan.all.each do |p|
+      p.slug = p.stp_plan_id
+      p.save
     end
   end
 end

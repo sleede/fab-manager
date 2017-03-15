@@ -1,0 +1,59 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate translate-values="{NAME:space.name}">{{ 'space_reserve.planning_of_space_NAME' }}</h1>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<div class="row no-gutter training-reserve">
+  <div class="col-sm-12 col-md-12 col-lg-9">
+    <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg" ng-show="!plansAreShown"></div>
+    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path 'plans/_plan.html' %>'"></ng-include>
+  </div>
+
+
+  <div class="col-sm-12 col-md-12 col-lg-3">
+
+    <div ng-if="currentUser.role === 'admin'">
+      <select-member></select-member>
+    </div>
+
+    <cart slot="selectedEvent"
+          slot-selection-time="selectionTime"
+          events="events"
+          user="ctrl.member"
+          mode-plans="plansAreShown"
+          plan="selectedPlan"
+          plan-selection-time="planSelectionTime"
+          settings="settings"
+          on-slot-added-to-cart="markSlotAsAdded"
+          on-slot-removed-from-cart="markSlotAsRemoved"
+          on-slot-start-to-modify="markSlotAsModifying"
+          on-slot-modify-success="modifyTrainingSlot"
+          on-slot-modify-cancel="cancelModifyTrainingSlot"
+          on-slot-modify-unselect="changeModifyTrainingSlot"
+          on-slot-cancel-success="slotCancelled"
+          after-payment="afterPayment"
+          reservable-id="{{space.id}}"
+          reservable-type="Space"
+          reservable-name="{{space.name}}"></cart>
+
+
+    <uib-alert type="warning m" ng-show="spaceExplicationsAlert">
+      <p class="text-sm pull-left">
+        <i class="fa fa-warning"></i>
+        <div class="m-l-lg" ng-bind-html="spaceExplicationsAlert"></div>
+      </p>
+    </uib-alert>
+
+  </div>
+</div>

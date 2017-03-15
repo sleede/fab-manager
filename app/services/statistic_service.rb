@@ -12,7 +12,7 @@ class StatisticService
       Stats::Subscription.create({
         date: format_date(s.date),
         type: s.duration,
-        subType: s.stp_plan_id,
+        subType: s.slug,
         stat: 1,
         ca: s.ca,
         planId: s.plan_id,
@@ -32,6 +32,23 @@ class StatisticService
           ca: r.ca,
           machineId: r.machine_id,
           name: r.machine_name,
+          reservationId: r.reservation_id
+        }.merge(user_info_stat(r)))
+        stat.stat = (type == 'booking' ? 1 : r.nb_hours)
+        stat.save
+      end
+    end
+
+    # space list
+    reservations_space_list(options).each do |r|
+      %w(booking hour).each do |type|
+        stat = Stats::Space.new({
+          date: format_date(r.date),
+          type: type,
+          subType: r.space_type,
+          ca: r.ca,
+          spaceId: r.space_id,
+          name: r.space_name,
           reservationId: r.reservation_id
         }.merge(user_info_stat(r)))
         stat.stat = (type == 'booking' ? 1 : r.nb_hours)
@@ -127,7 +144,7 @@ class StatisticService
           if sub
             ca = i.amount.to_i / 100.0
             unless i.invoice.coupon_id.nil?
-              ca = ca - ( ca * i.invoice.coupon.percent_off / 100.0 )
+              ca = CouponService.new.ventilate(get_invoice_total_no_coupon(i.invoice), ca, i.invoice.coupon)
             end
             u = sub.user
             p = sub.plan
@@ -138,7 +155,7 @@ class StatisticService
               plan_interval: p.interval,
               plan_interval_count: p.interval_count,
               plan_group_name: p.group.name,
-              stp_plan_id: p.stp_plan_id,
+              slug: p.slug,
               duration: p.duration.to_i,
               subscription_id: sub.id,
               invoice_item_id: i.id,
@@ -166,6 +183,27 @@ class StatisticService
           nb_hours: r.slots.size,
           ca: calcul_ca(r.invoice)
         }.merge(user_info(u))) if r.reservable
+    end
+    result
+  end
+
+
+  def reservations_space_list(options = default_options)
+    result = []
+    Reservation
+        .where("reservable_type = 'Space' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
+        .eager_load(:slots, user: [:profile, :group], invoice: [:invoice_items])
+        .each do |r|
+      u = r.user
+      result.push OpenStruct.new({
+         date: options[:start_date].to_date,
+         reservation_id: r.id,
+         space_id: r.reservable.id,
+         space_name: r.reservable.name,
+         space_type: r.reservable.slug,
+         nb_hours: r.slots.size,
+         ca: calcul_ca(r.invoice)
+      }.merge(user_info(u))) if r.reservable
     end
     result
   end
@@ -261,7 +299,7 @@ class StatisticService
   def members_list(options = default_options)
     result = []
     User.with_role(:member).includes(:profile).where('users.created_at >= :start_date AND users.created_at <= :end_date', options).each do |u|
-      if !u.need_completion?
+      unless u.need_completion?
         result.push OpenStruct.new({
           date: options[:start_date].to_date
         }.merge(user_info(u)))
@@ -297,8 +335,10 @@ class StatisticService
   end
 
   def clean_stat(options = default_options)
-    %w{Account Event Machine Project Subscription Training User}.each do |o|
-      "Stats::#{o}".constantize.search(query: {match: {date: format_date(options[:start_date])}}).results.each(&:destroy)
+    client = Elasticsearch::Model.client
+    %w{Account Event Machine Project Subscription Training User Space}.each do |o|
+      model = "Stats::#{o}".constantize
+      client.delete_by_query(index: model.index_name, type: model.document_type, body: {query: {match: {date: format_date(options[:start_date])}}})
     end
   end
 
@@ -353,7 +393,7 @@ class StatisticService
     end
     # subtract coupon discount from invoices and refunds
     unless invoice.coupon_id.nil?
-      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
+      ca = CouponService.new.ventilate(get_invoice_total_no_coupon(invoice), ca, invoice.coupon)
     end
     # divide the result by 100 to convert from centimes to monetary unit
     ca == 0 ? ca : ca / 100.0
@@ -366,7 +406,7 @@ class StatisticService
     end
     # subtract coupon discount from the refund
     unless invoice.coupon_id.nil?
-      ca = ca - ( ca * invoice.coupon.percent_off / 100.0 )
+      ca = CouponService.new.ventilate(get_invoice_total_no_coupon(invoice), ca, invoice.coupon)
     end
     ca == 0 ? ca : ca / 100.0
   end
@@ -449,6 +489,11 @@ class StatisticService
       ca.user_id == user.id
     end
     user_subscription_ca.inject {|sum,x| sum.ca + x.ca } || 0
+  end
+
+  def get_invoice_total_no_coupon(invoice)
+    total = (invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
+    total / 100.0
   end
 
   def find_or_create_user_info_info_list(user, list)

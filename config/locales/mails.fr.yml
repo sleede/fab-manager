@@ -140,7 +140,7 @@ fr:
     notify_member_avoir_ready:
       subject: "Votre facture d'avoir du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  # messageFormat interpolation
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} WalletTransaction{crédit du porte-monnaie} other{abonnement}}."  # messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture d'avoir dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
 
@@ -198,7 +198,7 @@ fr:
       body:
         new_account_imported: "Un nouveau compte utilisateur (ID: %{ID}) vient d'être importé sur la plate-forme via %{PROVIDER}."
         provider_uid: "Son identifiant fournisseur est %{UID}."
-        known_informations: "Voici les informations connues à son propos :"
+        known_information: "Voici les informations connues à son propos :"
         address_already_used: "Cette adresse est déjà associée à un autre utilisateur"
         no_more_info_available: "Aucune autre information sur cet utilisateur n'est disponible tant que celui-ci n'aura pas complété son profil."
 
@@ -268,9 +268,11 @@ fr:
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
+        statistics_space: "des statistiques sur les espaces"
         users_members: "de la liste des membres"
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
+        availabilities_index: "des disponibilités de réservations"
         click_to_download: "La génération est terminée. Pour télécharger le fichier Excel, cliquez"
         here: "ici"
 
@@ -278,7 +280,8 @@ fr:
       subject: "Code promo"
       body:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % sur tout le site en utilisant le code promo %{CODE}."
-        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Ce code promo est valable {USAGE, plural, =1{une seule fois} other{plusieurs fois}} : pour tous vos achats, dès maintenant {DATE, select, NO-DATE{et sans limitation de durée} other{et jusqu'au {DATE}}}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} sur tout le site en utilisant le code promo %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Ce code promo est valable {USAGE, plural, =1{une seule fois} other{plusieurs fois}} : pour tous vos achats {TYPE, select, amount_off{dont le montant est au moins égal à celui du code promo} other{}}, dès maintenant {DATE, select, NO-DATE{et sans limitation de durée} other{et jusqu'au {DATE}}}."
 
     shared:
       hello: "Bonjour %{user_name}"

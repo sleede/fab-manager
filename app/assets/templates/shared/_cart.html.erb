@@ -1,0 +1,167 @@
+<div class="widget panel b-a m m-t-lg" ng-if="user && !events.modifiable && !events.moved">
+  <div class="panel-heading b-b small">
+    <h3 translate>{{ 'cart.summary' }}</h3>
+  </div>
+
+  <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
+    <p class="font-felt fleche-left text-lg"><%= image_tag('fleche-left.png', class: 'fleche-left visible-lg') %>
+      {{ 'cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot}:"messageformat" }}</p>
+  </div>
+
+  <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">
+
+    <div class="font-sbold m-b-sm " translate>{{ 'cart.you_ve_just_selected_the_slot' }}</div>
+
+    <div class="panel panel-default bg-light" ng-repeat="slot in events.reserved">
+      <div class="panel-body">
+        <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(slot.start | amDateFormat:'LLLL'), END_TIME:(slot.end | amDateFormat:'LT') } }}</div>
+        <div class="text-base">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
+        <div ng-show="isAdmin()" class="m-t">
+          <label for="offerSlot" class="control-label m-r" translate>{{ 'cart.offer_this_slot' }}</label>
+          <input bs-switch
+                 ng-model="slot.offered"
+                 id="offerSlot"
+                 type="checkbox"
+                 class="form-control"
+                 switch-on-text="{{ 'yes' | translate}}"
+                 switch-off-text="{{ 'no' | translate}}"
+                 switch-animate="true"
+                 switch-readonly="{{slot.isValid}}"/>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'cart.confirm_this_slot' }}</button>
+      </div>
+
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'cart.remove_this_slot' }}</a></div>
+    </div>
+
+    <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>
+
+    <div ng-hide="fablabWithoutPlans">
+      <div ng-if="isSlotsValid() && !user.subscribed_plan" ng-show="!modePlans">
+        <p class="font-sbold text-base l-h-2x" translate>{{ 'cart.to_benefit_from_attractive_prices' }}</p>
+        <div><button class="btn btn-warning-full rounded btn-block text-xs" ng-click="showPlans()" translate>{{ 'cart.view_our_subscriptions' }}</button></div>
+        <p class="font-bold text-base text-u-c text-center m-b-xs" translate>{{ 'cart.or' }}</p>
+      </div>
+
+      <div ng-if="selectedPlan">
+        <div class="m-t-md m-b-sm text-base">{{ 'cart.you_ve_just_selected_a_' | translate }} <br> <span class="font-sbold" translate>{{ 'cart._subscription' }}</span> :</div>
+        <div class="panel panel-default bg-light m-n">
+          <div class="panel-body m-b-md">
+            <div class="font-sbold text-u-c">{{selectedPlan | humanReadablePlanName }}</div>
+            <div class="text-base">{{ 'cart.cost_of_the_subscription' | translate }} <span class="text-blue">{{selectedPlan.amount | currency}}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel-footer no-padder" ng-if="events.reserved.length > 0">
+    <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payCart()" ng-if="isSlotsValid() && (!modePlans || selectedPlan)">{{ 'cart.confirm_and_pay' | translate }} {{amountTotal | currency}}</button>
+  </div>
+
+  <div class="widget-content no-bg auto wrapper" ng-show="events.paid && events.paid.length > 0">
+    {{ 'cart.you_have_settled_the_following_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} <strong>{{reservableName}}</strong>:
+
+    <div class="well well-warning m-t-sm" ng-repeat="paidSlot in events.paid">
+      <i class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(paidSlot.start | amDateFormat:'LLLL'), END_TIME:(paidSlot.end | amDateFormat:'LT') } }}</i>
+      <div class="font-sbold">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} {{paidSlot.price | currency}}</div>
+    </div>
+
+    <div ng-if="selectedPlan">
+      <div class="m-t-md m-b-sm text-base">{{ 'cart.you_have_settled_a_' | translate }} <br> <span class="font-sbold" translate>{{ 'cart._subscription' }}</span> :</div>
+      <div class="well well-warning m-t-sm">
+        <i class="font-sbold  text-u-c">{{selectedPlan | humanReadablePlanName }}</i>
+        <div class="font-sbold">{{ 'cart.cost_of_the_subscription' | translate }} {{selectedPlan.amount | currency}}</div>
+      </div>
+    </div>
+
+    <div class="m-t-md font-sbold">{{ 'cart.total_' | translate }} {{amountTotal | currency}}</div>
+
+    <div class="alert alert-success" ng-if="user.subscribed_plan">{{ 'cart.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
+      {{ 'cart.your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'cart.dashboard' }}</a>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="widget panel b-a m m-t-lg" ng-if="events.modifiable || events.moved">
+  <div class="panel-heading b-b small">
+    <h3 translate>{{ 'cart.summary' }}</h3>
+  </div>
+  <div class="widget-content no-bg auto wrapper" ng-if="events.modifiable">
+    <div class="font-sbold m-b-sm " translate>{{ 'cart.i_want_to_change_the_following_reservation' }}</div>
+
+    <div class="panel panel-warning bg-yellow">
+      <div class="panel-body">
+        <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(events.modifiable.start | amDateFormat:'LLLL'), END_TIME:(events.modifiable.end | amDateFormat:'LT') } }}</div>
+      </div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="cancelModifySlot($event)" translate>{{ 'cart.cancel_my_modification' }}</a></div>
+    </div>
+
+    <div class="widget-content no-bg">
+      <p class="font-felt fleche-left text-lg"><%= image_tag('fleche-left.png', class: 'fleche-left visible-lg') %>
+        {{ 'cart.select_a_new_slot_in_the_calendar' | translate }}</p>
+    </div>
+
+    <div class="panel panel-info bg-info text-white" ng-if="events.placable">
+      <div class="panel-body">
+        <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(events.placable.start | amDateFormat:'LLLL'), END_TIME:(events.placable.end | amDateFormat:'LT') } }}</div>
+      </div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlotToPlace($event)" translate>{{ 'cart.cancel_my_selection' }}</a></div>
+    </div>
+
+    <div ng-if="events.placable && (events.modifiable.tags.length > 0 || events.placable.tags.length > 0)" ng-class="{'panel panel-danger bg-red': tagMissmatch()}">
+      <div class="panel-body">
+        <div id="fromTags">
+          {{ 'cart.tags_of_the_original_slot' | translate }}<br/>
+          <span ng-repeat="tag in events.modifiable.tags">
+            <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
+          </span>
+          <span ng-show="events.modifiable.tags.length == 0">
+            <span class='label label-warning text-white' title="{{ 'cart.none' | translate }}" translate>{{ 'cart.none' }}</span>
+          </span>
+        </div><br/>
+        <div id="toTags">
+          {{ 'cart.tags_of_the_destination_slot' | translate }}<br/>
+          <span ng-repeat="tag in events.placable.tags">
+            <span class='label label-success text-white' title="{{tag.name}}">{{tag.name}}</span>
+          </span>
+          <span ng-show="events.placable.tags.length == 0">
+            <span class='label label-warning text-white' title="{{ 'cart.none' | translate }}" translate>{{ 'cart.none' }}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel-footer no-padder" ng-if="events.modifiable && events.placable">
+    <button class="btn btn-invalid btn-default btn-block p-l btn-lg text-u-c r-n text-base" ng-click="cancelModifySlot()" translate>{{ 'cancel' }}</button>
+    <div>
+      <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="modifySlot()" translate>{{ 'cart.confirm_my_modification' }}</button>
+    </div>
+  </div>
+
+  <div class="widget-content no-bg auto wrapper" ng-show="events.moved">
+    <div class="font-sbold m-b-sm " translate>{{ 'cart.your_booking_slot_was_successfully_moved_from_' }}</div>
+
+    <div class="panel panel-default bg-light">
+      <div class="panel-body">
+        <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(events.moved.oldSlot.start | amDateFormat:'LLLL'), END_TIME:(events.moved.oldSlot.end | amDateFormat:'LT') } }}</div>
+      </div>
+    </div>
+
+    <p class="text-center font-bold m-b-sm text-u-c" translate>{{ 'cart.to_date' }}</p>
+
+    <div class="panel panel-success bg-success bg-light">
+      <div class="panel-body">
+        <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(events.moved.newSlot.start | amDateFormat:'LLLL'), END_TIME:(events.moved.newSlot.end | amDateFormat:'LT') } }}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

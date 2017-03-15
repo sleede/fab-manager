@@ -18,6 +18,8 @@ class Subscription < ActiveRecord::Base
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
+  # @params [invoice] if true then subscription pay itself, dont pay with reservation
+  #                   if false then subscription pay with reservation
   def save_with_payment(invoice = true, coupon_code = nil)
     if valid?
       begin
@@ -25,15 +27,24 @@ class Subscription < ActiveRecord::Base
         invoice_items = []
 
         unless coupon_code.nil?
-          cp = Coupon.find_by_code(coupon_code)
-          if not cp.nil? and cp.status(user.id) == 'active'
-            @coupon = cp
+          @coupon = Coupon.find_by(code: coupon_code)
+          if not @coupon.nil? and @coupon.status(user.id) == 'active'
             total = plan.amount
+
+            discount = 0
+            if @coupon.type == 'percent_off'
+              discount = (total  * @coupon.percent_off / 100).to_i
+            elsif @coupon.type == 'amount_off'
+              discount = @coupon.amount_off
+            else
+              raise InvalidCouponError
+            end
+
             invoice_items << Stripe::InvoiceItem.create(
                 customer: user.stp_customer_id,
-                amount: -(total  * cp.percent_off / 100.0).to_i,
+                amount: -discount,
                 currency: Rails.application.secrets.stripe_currency,
-                description: "coupon #{cp.code} - subscription"
+                description: "coupon #{@coupon.code} - subscription"
             )
           else
             raise InvalidCouponError
@@ -122,6 +133,8 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  # @params [invoice] if true then subscription pay itself, dont pay with reservation
+  #                   if false then subscription pay with reservation
   def save_with_local_payment(invoice = true, coupon_code = nil)
     if valid?
       # very important to set expired_at to nil that can allow method is_new? to return true
@@ -134,16 +147,19 @@ class Subscription < ActiveRecord::Base
       if save
         UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
         if invoice
-          invoc = generate_invoice(nil, coupon_code)
           @wallet_amount_debit = get_wallet_amount_debit
 
           # debit wallet
           wallet_transaction = debit_user_wallet
-          if wallet_transaction
-            invoc.wallet_amount = @wallet_amount_debit
-            invoc.wallet_transaction_id = wallet_transaction.id
+
+          if !self.user.invoicing_disabled?
+            invoc = generate_invoice(nil, coupon_code)
+            if wallet_transaction
+              invoc.wallet_amount = @wallet_amount_debit
+              invoc.wallet_transaction_id = wallet_transaction.id
+            end
+            invoc.save
           end
-          invoc.save
         end
         return true
       else
@@ -159,11 +175,11 @@ class Subscription < ActiveRecord::Base
     total = plan.amount
 
     unless coupon_code.nil?
-      cp = Coupon.find_by_code(coupon_code)
-      if not cp.nil? and cp.status(user.id) == 'active'
-        @coupon = cp
-        coupon_id = cp.id
-        total = plan.amount - (plan.amount * cp.percent_off / 100.0)
+      @coupon = Coupon.find_by(code: coupon_code)
+
+      unless @coupon.nil?
+        total = CouponService.new.apply(plan.amount, @coupon, user.id)
+        coupon_id = @coupon.id
       end
     end
 
@@ -293,7 +309,7 @@ class Subscription < ActiveRecord::Base
   def get_wallet_amount_debit
     total = plan.amount
     if @coupon
-      total = (total - (total  * @coupon.percent_off / 100.0)).to_i
+      total = CouponService.new.apply(total, @coupon, user.id)
     end
     wallet_amount = (user.wallet.amount * 100).to_i
     return wallet_amount >= total ? total : wallet_amount
