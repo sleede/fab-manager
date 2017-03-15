@@ -16,5 +16,14 @@ namespace :fablab do
         e.save!
       end
     end
+
+    task rolling_plans: :environment do
+      Plan.where(is_rolling: nil).each do |p|
+        if p.is_rolling.nil? and p.is_rolling != false
+          p.is_rolling = true
+          p.save!
+        end
+      end
+    end
   end
 end
