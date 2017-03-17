@@ -99,7 +99,7 @@
 <div class="input-group m-t-md">
     <label for="plan[is_rolling]" class="control-label m-r-md">{{ 'rolling_subscription' | translate }} *</label>
     <input bs-switch
-           ng-model="plan.isRolling"
+           ng-model="plan.is_rolling"
            id="plan[is_rolling]"
            ng-if="method != 'PATCH'"
            type="checkbox"
@@ -110,7 +110,7 @@
            ng-true-value="'true'"
            ng-false-value="'false'"/>
     <span ng-if="method == 'PATCH'">{{ (plan.is_rolling ? 'yes' : 'no') | translate }}</span>
-    <input type="hidden" name="plan[is_rolling]" value="{{plan.isRolling}}"/>
+    <input type="hidden" name="plan[is_rolling]" value="{{plan.is_rolling}}"/>
     <span class="help-block">
       {{ 'a_rolling_subscription_will_begin_the_day_of_the_first_training' | translate }}
       {{ 'otherwise_it_will_begin_as_soon_as_it_is_bought' | translate }}
