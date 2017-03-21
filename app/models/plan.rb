@@ -27,7 +27,7 @@ class Plan < ActiveRecord::Base
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
-  validates :interval, inclusion: { in: %w(year month) }
+  validates :interval, inclusion: { in: %w(year month week) }
 
   def self.create_for_all_groups(plan_params)
     plans = []
