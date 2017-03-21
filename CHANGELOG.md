@@ -8,6 +8,7 @@
 - Improved admin's interface to create availabilities
 - Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
 - Replaced letter_opener by MailCatcher to preview e-mails in development environments
+- Ability to create plans with durations based on weeks
 - Fix a bug: trainings reservations are not shown in the admin's calendar
 - Fix a bug: unable to delete an administrator from the system
 - Fix a bug: unable to delete an event with a linked custom price (#61)
