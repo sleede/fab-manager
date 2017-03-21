@@ -13,9 +13,11 @@
 - Fix a bug: unable to delete an event with a linked custom price (#61)
 - Fix a bug: navigation in client calendar is bogus when browsing months (#59)
 - Fix a bug: subscription name is not shown in invoices
+- Fix a bug: news plans statistics are not shown
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
 - [TODO DEPLOY] `rake fablab:es_add_spaces`
+- [TODO DEPLOY] `rake fablab:fix:new_plans_statistics` if you have created plans from v2.4.10
 
 ## v2.4.11 2017 March 15
 - Fix a bug: editing and saving a plan, result in removing the rolling attribute

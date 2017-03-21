@@ -25,5 +25,15 @@ namespace :fablab do
         end
       end
     end
+
+    task new_plans_statistics: :environment do
+      StatisticSubType.where(key: nil).each do |sst|
+        p = Plan.find_by(name: sst.label)
+        if p
+          sst.key = p.slug
+          sst.save!
+        end
+      end
+    end
   end
 end
