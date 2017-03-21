@@ -20,6 +20,7 @@
 - [TODO DEPLOY] `rake fablab:fix:new_plans_statistics` if you have created plans from v2.4.10
 
 ## v2.4.11 2017 March 15
+
 - Fix a bug: editing and saving a plan, result in removing the rolling attribute
 - [TODO DEPLOY] `rake fablab:fix:rolling_plans`
 
