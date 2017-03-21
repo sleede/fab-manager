@@ -28,10 +28,10 @@
 
 
           <div class="widget panel panel-default">
-            <div class="panel-heading picture" ng-if="!space.space_image" ng-click="showMachine(space)">
+            <div class="panel-heading picture" ng-if="!space.space_image" ng-click="showSpace(space)">
               <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
             </div>
-            <div class="panel-heading picture" style="background-image:url({{space.space_image}})" ng-if="space.space_image" ng-click="showMachine(space)">
+            <div class="panel-heading picture" style="background-image:url({{space.space_image}})" ng-if="space.space_image" ng-click="showSpace(space)">
             </div>
             <div class="panel-body">
               <h1 class="text-center m-b">{{space.name}}</h1>
