@@ -213,6 +213,7 @@ fr:
           period: "Période"
           year: "Année"
           month: "Mois"
+          week: "Semaine"
           period_is_required: "La période est requise."
           subscription_price: "Coût de l'abonnement"
           price_is_required: "Le prix est requis."

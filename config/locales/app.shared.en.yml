@@ -213,6 +213,7 @@ en:
           period: "Period"
           year: "Year"
           month: "Month"
+          week: "Week"
           period_is_required: "Period is required."
           subscription_price: "Subscription price"
           price_is_required: "Price is required."

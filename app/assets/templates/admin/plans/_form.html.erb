@@ -49,6 +49,7 @@
             ng-model="plan.interval"
             ng-disabled="method == 'PATCH'"
             required="required">
+        <option value="week" ng-selected="plan.interval == 'week'" translate>{{ 'plan_form.week' }}</option>
         <option value="month" ng-selected="plan.interval == 'month'" translate>{{ 'plan_form.month' }}</option>
         <option value="year" ng-selected="plan.interval == 'year'" translate>{{ 'plan_form.year' }}</option>
     </select>
