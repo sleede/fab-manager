@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## v2.5.1 2017 March 28
+- hide spaces in admin's credit management if spaces are disabled
+- Fix a bug : Can not display training tracking (this bug was introduced in version 2.5.0)
+- [TODO DEPLOY] `rake assets:precompile`
+
 ## v2.5.0 2017 March 28
 
 - Ability to remove an unused custom price for an event (#61)
