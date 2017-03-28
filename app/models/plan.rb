@@ -4,13 +4,14 @@ class Plan < ActiveRecord::Base
   has_many :credits, dependent: :destroy
   has_many :training_credits, -> {where(creditable_type: 'Training')}, class_name: 'Credit'
   has_many :machine_credits, -> {where(creditable_type: 'Machine')}, class_name: 'Credit'
+  has_many :space_credits, -> {where(creditable_type: 'Space')}, class_name: 'Credit'
   has_many :subscriptions
   has_one :plan_image, as: :viewable, dependent: :destroy
   has_one :plan_file, as: :viewable, dependent: :destroy
   has_many :prices, dependent: :destroy
 
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :base_name, use: :slugged
 
   accepts_nested_attributes_for :prices
   accepts_nested_attributes_for :plan_file, allow_destroy: true, reject_if: :all_blank
@@ -18,6 +19,7 @@ class Plan < ActiveRecord::Base
   after_update :update_stripe_plan, if: :amount_changed?
   after_create :create_stripe_plan, unless: :skip_create_stripe_plan
   after_create :create_machines_prices
+  after_create :create_spaces_prices
   after_create :create_statistic_type
   after_destroy :delete_stripe_plan
 
@@ -25,7 +27,8 @@ class Plan < ActiveRecord::Base
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
-  validates :interval, inclusion: { in: %w(year month) }
+  validates :interval, inclusion: { in: %w(year month week) }
+  validates :base_name, :slug, presence: true
 
   def self.create_for_all_groups(plan_params)
     plans = []
@@ -53,6 +56,12 @@ class Plan < ActiveRecord::Base
   def create_machines_prices
     Machine.all.each do |machine|
       Price.create(priceable: machine, plan: self, group_id: self.group_id, amount: 0)
+    end
+  end
+
+  def create_spaces_prices
+    Space.all.each do |space|
+      Price.create(priceable: space, plan: self, group_id: self.group_id, amount: 0)
     end
   end
 

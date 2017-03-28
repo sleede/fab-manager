@@ -83,8 +83,9 @@ fr:
     details: "Détails"
     amount: "Montant"
     subscription_extended_for_free_from_START_to_END: "Abonnement prolongé gratuitement - Du %{START} au %{END}"
-    subscription_NAME_from_START_to_END: "Abonnement - Du %{START} au %{END}"
+    subscription_NAME_from_START_to_END: "Abonnement %{NAME} - Du %{START} au %{END}"
     machine_reservation_DESCRIPTION: "Réservation Machine - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Réservation Espace - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Réservation Évènement - %{DESCRIPTION}"
     full_price_ticket:
@@ -122,6 +123,11 @@ fr:
     # disponibilités formations
     i_ve_reserved: "J'ai réservé"
     completed: "Complet"
+
+  events:
+    # messages d'erreur lors de la mise à jour d'un évènement
+    error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
+    other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
 
   export_members:
     # export de la liste des members au format EXCEL
@@ -184,6 +190,23 @@ fr:
     payment_method: "Méthode de paiement"
     local_payment: "Paiement à l'accueil"
     online_payment: "Paiement en ligne"
+
+  export_availabilities:
+    # export des listes de créneaux de réservations, par type, au format EXCEL
+    machines: "Machines"
+    trainings: "Formations"
+    spaces: "Espaces"
+    events: "Évènements"
+    day_of_week: "Jour de la semaine"
+    date: "Date"
+    slot: "Créneau"
+    machine: "Machine"
+    training: "Formation"
+    space: "Espace"
+    event: "Évènement"
+    reservations: "Réservations"
+    available_seats: "Places disponibles"
+
 
   api:
     notifications:
@@ -274,9 +297,11 @@ fr:
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
+        statistics_space: "des statistiques sur les espaces"
         users_members: "de la liste des membres"
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
+        availabilities_index: "des disponibilités de réservations"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
       notify_member_about_coupon:
@@ -286,6 +311,7 @@ fr:
     # outil de statistiques pour les administrateurs
     subscriptions: "Abonnements"
     machines_hours: "Heures machines"
+    spaces: "Espaces"
     trainings: "Formations"
     events: "Évènements"
     registrations: "Inscriptions"

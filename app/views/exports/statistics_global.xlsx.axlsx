@@ -68,7 +68,7 @@ date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_
               end
 
             end
-            # proceed teh 'ca' field if requested
+            # proceed the 'ca' field if requested
             if index.ca
               data.push hit['_source']['ca']
               styles.push nil

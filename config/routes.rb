@@ -81,8 +81,10 @@ Rails.application.routes.draw do
     resources :availabilities do
       get 'machines/:machine_id', action: 'machine', on: :collection
       get 'trainings/:training_id', action: 'trainings', on: :collection
+      get 'spaces/:space_id', action: 'spaces', on: :collection
       get 'reservations', on: :member
       get 'public', on: :collection
+      get '/export_index', action: 'export_availabilities', on: :collection
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]
@@ -123,6 +125,7 @@ Rails.application.routes.draw do
       patch :reset_token, on: :member
     end
     resources :price_categories
+    resources :spaces
 
     # i18n
     get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'
@@ -162,7 +165,7 @@ Rails.application.routes.draw do
     end
   end
 
-  %w(account event machine project subscription training user).each do |path|
+  %w(account event machine project subscription training user space).each do |path|
     post "/stats/#{path}/_search", to: "api/statistics##{path}"
     post "/stats/#{path}/export", to: "api/statistics#export_#{path}"
   end

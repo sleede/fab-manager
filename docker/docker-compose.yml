@@ -6,14 +6,14 @@ services:
       RAILS_ENV: production
       RACK_ENV: production
     env_file:
-      - /home/core/fabmanager/config/env
+      - ${PWD}/config/env
     volumes:
-      - /home/core/fabmanager/public/assets:/usr/src/app/public/assets
-      - /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads
-      - /home/core/fabmanager/invoices:/usr/src/app/invoices
-      - /home/core/fabmanager/exports:/usr/src/app/exports
-      - /home/core/fabmanager/log:/var/log/supervisor
-      - /home/core/fabmanager/plugins:/usr/src/app/plugins
+      - ${PWD}/public/assets:/usr/src/app/public/assets
+      - ${PWD}/public/uploads:/usr/src/app/public/uploads
+      - ${PWD}/invoices:/usr/src/app/invoices
+      - ${PWD}/exports:/usr/src/app/exports
+      - ${PWD}/log:/var/log/supervisor
+      - ${PWD}/plugins:/usr/src/app/plugins
     depends_on:
       - postgres
       - redis
@@ -23,19 +23,19 @@ services:
   postgres:
     image: postgres:9.4
     volumes:
-      - /home/core/fabmanager/postgresql:/var/lib/postgresql/data
+      - ${PWD}/postgresql:/var/lib/postgresql/data
     restart: always
 
   elasticsearch:
     image: elasticsearch:1.7
     volumes:
-      - /home/core/fabmanager/elasticsearch:/usr/share/elasticsearch/data
+      - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
     restart: always
 
   redis:
     image: redis:3.0
     volumes:
-      - /home/core/fabmanager/redis:/data
+      - ${PWD}/redis:/data
     restart: always
 
   nginx:
@@ -44,9 +44,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /home/core/fabmanager/config/nginx:/etc/nginx/conf.d
-      - /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt
-      - /home/core/fabmanager/log:/var/log/nginx
+      - ${PWD}/config/nginx:/etc/nginx/conf.d
+      - ${PWD}/letsencrypt/etc:/etc/letsencrypt
+      - ${PWD}/log:/var/log/nginx
     volumes_from:
       - fabmanager:ro
     links:

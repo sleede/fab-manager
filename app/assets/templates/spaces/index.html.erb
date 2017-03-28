@@ -1,0 +1,63 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate>{{ 'the_spaces' }}</h1>
+      </section>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
+      <section class="heading-actions wrapper">
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.space_new" role="button" translate>{{ 'add_a_space' }}</a>
+      </section>
+    </div>
+  </div>
+</section>
+
+
+<section class="m-lg">
+
+    <div class="row" ng-repeat="space in (spaces.length/3 | array)">
+
+      <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="space in spaces.slice(3*$index, 3*$index + 3)">
+
+
+          <div class="widget panel panel-default">
+            <div class="panel-heading picture" ng-if="!space.space_image" ng-click="showSpace(space)">
+              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
+            </div>
+            <div class="panel-heading picture" style="background-image:url({{space.space_image}})" ng-if="space.space_image" ng-click="showSpace(space)">
+            </div>
+            <div class="panel-body">
+              <h1 class="text-center m-b">{{space.name}}</h1>
+            </div>
+            <div class="panel-footer no-padder">
+
+              <div class="text-center clearfix">
+                <div class="col-sm-6 b-r no-padder">
+                   <div class="btn btn-default btn-block no-b padder-v red" ng-click="reserveSpace(space, $event)">
+                     <i class="fa fa-bookmark"></i> {{ 'book' | translate }}
+                   </div>
+                </div>
+                <div class="col-sm-6 no-padder">
+                    <div class="btn btn-default btn-block padder-v no-b red" ng-click="showSpace(space)">
+                      <i class="fa fa-eye"></i> {{ 'consult' | translate }}
+                    </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+
+
+
+</section>

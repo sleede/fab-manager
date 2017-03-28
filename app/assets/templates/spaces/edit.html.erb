@@ -1,0 +1,50 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-md-1 hidden-xs">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-md-8 b-l b-r">
+      <section class="heading-title">
+        <h1 translate translate-values="{NAME: space.name}">{{ 'space_edit.edit_the_space_NAME' }}</h1>
+      </section>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="row no-gutter" >
+
+  <div class="col-md-9 b-r nopadding">
+    <form role="form"
+          name="spaceForm"
+          class="form-horizontal"
+          action="{{ actionUrl }}"
+          ng-upload="submited(content)"
+          upload-options-enable-rails-csrf="true"
+          unsaved-warning-form
+          novalidate>
+
+      <input name="_method" type="hidden" ng-value="method">
+
+      <section class="panel panel-default bg-light m-lg">
+        <div class="panel-body m-r">
+          <ng-include src="'<%= asset_path 'spaces/_form.html' %>'"></ng-include>
+        </div>
+
+        <div class="panel-footer no-padder">
+          <input type="submit"
+                 value="{{ 'space_edit.validate_the_changes' | translate }}"
+                 class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
+                 ng-disabled="spaceForm.$invalid"/>
+        </div>
+      </section>
+    </form>
+  </div>
+
+  <div class="col-md-3"/>
+</div>

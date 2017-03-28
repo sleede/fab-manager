@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :tags, allow_destroy: true
 
   has_one :wallet, dependent: :destroy
+  has_many :wallet_transactions, dependent: :destroy
 
   has_many :exports, dependent: :destroy
 

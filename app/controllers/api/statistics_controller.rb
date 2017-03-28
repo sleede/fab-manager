@@ -6,7 +6,7 @@ class API::StatisticsController < API::ApiController
     @statistics = StatisticIndex.all
   end
 
-  %w(account event machine project subscription training user).each do |path|
+  %w(account event machine project subscription training user space).each do |path|
     class_eval %{
       def #{path}
         authorize :statistic, :#{path}?
