@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## next release (v2.5.0)
+## v2.5.0 2017 March 28
+
 - Ability to remove an unused custom price for an event (#61)
 - Prevent polling notifications when the application is in background
 - Ability to export the availabilities and their reservation rate from the admin calendar
@@ -9,12 +10,13 @@
 - Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
 - Replaced letter_opener by MailCatcher to preview e-mails in development environments
 - Ability to create plans with durations based on weeks
+- Ease installations with docker-compose, in any directory (#63)
 - Fix a bug: trainings reservations are not shown in the admin's calendar
 - Fix a bug: unable to delete an administrator from the system
 - Fix a bug: unable to delete an event with a linked custom price (#61)
 - Fix a bug: navigation in client calendar is bogus when browsing months (#59)
 - Fix a bug: subscription name is not shown in invoices
-- Fix a bug: news plans statistics are not shown
+- Fix a bug: new plans statistics are not shown
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
 - [TODO DEPLOY] `rake fablab:es_add_spaces`
