@@ -1,6 +1,12 @@
 # Changelog Fab Manager
 
-## next release (v2.5.0)
+## v2.5.1 2017 March 28
+- hide spaces in admin's credit management if spaces are disabled
+- Fix a bug : Can not display training tracking (this bug was introduced in version 2.5.0)
+- [TODO DEPLOY] `rake assets:precompile`
+
+## v2.5.0 2017 March 28
+
 - Ability to remove an unused custom price for an event (#61)
 - Prevent polling notifications when the application is in background
 - Ability to export the availabilities and their reservation rate from the admin calendar
@@ -8,13 +14,23 @@
 - Improved admin's interface to create availabilities
 - Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
 - Replaced letter_opener by MailCatcher to preview e-mails in development environments
+- Ability to create plans with durations based on weeks
+- Ease installations with docker-compose, in any directory (#63)
 - Fix a bug: trainings reservations are not shown in the admin's calendar
 - Fix a bug: unable to delete an administrator from the system
 - Fix a bug: unable to delete an event with a linked custom price (#61)
 - Fix a bug: navigation in client calendar is bogus when browsing months (#59)
+- Fix a bug: subscription name is not shown in invoices
+- Fix a bug: new plans statistics are not shown
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
 - [TODO DEPLOY] `rake fablab:es_add_spaces`
+- [TODO DEPLOY] `rake fablab:fix:new_plans_statistics` if you have created plans from v2.4.10
+
+## v2.4.11 2017 March 15
+
+- Fix a bug: editing and saving a plan, result in removing the rolling attribute
+- [TODO DEPLOY] `rake fablab:fix:rolling_plans`
 
 ## v2.4.10 2017 January 9
 

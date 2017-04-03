@@ -83,7 +83,7 @@ fr:
     details: "Détails"
     amount: "Montant"
     subscription_extended_for_free_from_START_to_END: "Abonnement prolongé gratuitement - Du %{START} au %{END}"
-    subscription_NAME_from_START_to_END: "Abonnement - Du %{START} au %{END}"
+    subscription_NAME_from_START_to_END: "Abonnement %{NAME} - Du %{START} au %{END}"
     machine_reservation_DESCRIPTION: "Réservation Machine - %{DESCRIPTION}"
     space_reservation_DESCRIPTION: "Réservation Espace - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Réservation Formation - %{DESCRIPTION}"
