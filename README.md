@@ -277,6 +277,10 @@ Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
 
+    ADMIN_EMAIL, ADMIN_PASSWORD
+
+Credentials for the first admin user created when seeding the project.
+
     Settings related to Open Projects
 
 See the [Open Projects](#open-projects) section for a detailed description of these parameters.
