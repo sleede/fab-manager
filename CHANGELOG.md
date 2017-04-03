@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+## Next Release
+- Extracts first admin created email and password into environment variables
+
 ## v2.5.1 2017 March 28
 - hide spaces in admin's credit management if spaces are disabled
 - Fix a bug : Can not display training tracking (this bug was introduced in version 2.5.0)

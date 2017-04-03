@@ -27,6 +27,9 @@ SMTP_PASSWORD:
 GA_ID: ''
 ##
 
+ADMIN_EMAIL: 'admin@fab-manager.com'
+ADMIN_PASSWORD: 'adminadmin'
+
 DISQUS_SHORTNAME:
 
 TWITTER_NAME: 'FablabGrenoble'
@@ -63,6 +66,3 @@ ALLOWED_MIME_TYPES: application/pdf application/postscript application/illustrat
 
 # 10485760 = 10 megabytes
 MAX_IMAGE_SIZE: '10485760'
-
-ADMIN_EMAIL: ''
-ADMIN_PASSWORD: ''
