@@ -1,7 +1,8 @@
 # Changelog Fab Manager
 
-## Next Release
+## v2.5.2 April 12
 - Extracts first admin created email and password into environment variables
+- [OPTIONAL: Only for a new installation] add `ADMIN_EMAIL` and  `ADMIN_PASSWORD` environment variable in `application.yml` or `env` file (with docker)
 
 ## v2.5.1 2017 March 28
 - hide spaces in admin's credit management if spaces are disabled
