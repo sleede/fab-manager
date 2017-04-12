@@ -83,11 +83,10 @@ if Group.count == 0
 end
 
 # Create the admin if it does not exist yet
-if User.find_by(email: 'admin@fab-manager.com').nil?
-    admin = User.new(username: 'admin', email: 'admin@fab-manager.com', password: 'adminadmin', password_confirmation: 'adminadmin', group_id: Group.first.id,
-                     profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
+if User.find_by(email: Rails.application.secrets.admin_email).nil?
+    admin = User.new(username: 'admin', email: Rails.application.secrets.admin_email, password: Rails.application.secrets.admin_password, password_confirmation: Rails.application.secrets.admin_password, group_id: Group.first.id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
     admin.add_role 'admin'
-    admin.save
+    admin.save!
 end
 
 if Component.count == 0
