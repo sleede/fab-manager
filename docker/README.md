@@ -332,7 +332,7 @@ OR
 Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
 
 
-#### copy docker-compose.yml to /home/core/
+#### copy docker-compose.yml to /home/core/fabmanager
 
 #### pull images
 
