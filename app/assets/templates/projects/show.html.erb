@@ -31,7 +31,7 @@
     <div class="article wrapper-lg">
 
       <div class="article-thumbnail" ng-if="project.project_image">
-        <a href="{{project.project_full_image}}" target="_blank"><img ng-src="{{project.project_image}}" alt="{{project.name}}" class="img-responsive"></a>
+        <a href="{{project.project_full_image}}" target="_blank"><img ng-src="{{project.project_image}}" alt="{{project.name}}"></a>
       </div>
 
       <h3 translate>{{ 'project_description' }}</h3>
@@ -44,7 +44,7 @@
           </div>
           <div ng-repeat-start="image in step.project_step_images_attributes" class="clearfix" ng-if="$index % 3 == 0"></div>
           <div class="col-md-4" ng-repeat-end>
-            <a href="{{image.attachment_full_url}}" target="_blank"><img class="img-responsive m-b" ng-src="{{image.attachment_url}}" alt="{{image.attachment}}" ></a>
+            <a href="{{image.attachment_full_url}}" target="_blank"><img class="m-b" ng-src="{{image.attachment_url}}" alt="{{image.attachment}}" ></a>
           </div>
           <div class="col-md-8" ng-class="{'col-md-12' : step.project_step_images_attributes.length > 1 || step.project_step_images_attributes.length == 0}">
 
