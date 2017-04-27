@@ -548,13 +548,16 @@ If you are in a development environment, your can keep the default values, other
 #### Settings
     RAILS_LOCALE
 
-Configure Ruby on Rails for l10n.
+Configure Ruby on Rails localization settings (currency, dates, number formats ...).
 
-Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured RAILS_LOCALE.
+Please, be aware that **the configured locale will imply the CURRENCY symbol used to generate invoices**.
+
+_Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
+
+See `config/locales/rails.*.yml` for a list of available locales. Default is **en**.
+
+If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
-
-Be aware that **this file MUST contain the CURRENCY symbol used to generate invoices** (among other things).
-Default is **en**.
 
     MOMENT_LOCALE
 
@@ -576,7 +579,7 @@ Configure the locale for angular-i18n.
 
 Please, be aware that **the configured locale will imply the CURRENCY displayed to front-end users.**
 
-_Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `angular_locale` to simple **fr** (without country indication) will probably not do what you expect._
+_Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
 See `vendor/assets/components/angular-i18n/angular-locale_*.js` for a list of available locales. Default is **en**.
 
