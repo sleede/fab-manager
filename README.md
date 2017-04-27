@@ -546,6 +546,12 @@ If you are in a development environment, your can keep the default values, other
 
 <a name="i18n-settings"></a>
 #### Settings
+    APP_LOCALE
+
+Configure application's main localization and translation settings.
+
+See `config/locales/app.*.yml` for a list of available locales. Default is **en**.
+
     RAILS_LOCALE
 
 Configure Ruby on Rails localization settings (currency, dates, number formats ...).

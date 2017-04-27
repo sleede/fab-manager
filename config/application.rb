@@ -35,6 +35,7 @@ module Fablab
     # /!\ ALL locales SHOULD be configured accordingly with this locale. /!\
     #
     config.i18n.default_locale = Rails.application.secrets.rails_locale
+    config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components').to_s
 

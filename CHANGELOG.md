@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## Next Release
+- Fix a bug: Unable to define application locale other than `fr` or `en`.
+- [TODO DEPLOY] add `APP_LOCALE` environment variable (see README.md for configuration details)
+
 ## v2.5.3 2017 April 27
 
 - Project view: added responsive support on external images
@@ -13,7 +17,7 @@
 ## v2.5.1 2017 March 28
 
 - hide spaces in admin's credit management if spaces are disabled
-- Fix a bug : Can not display training tracking (this bug was introduced in version 2.5.0)
+- Fix a bug: Can not display training tracking (this bug was introduced in version 2.5.0)
 - [TODO DEPLOY] `rake assets:precompile`
 
 ## v2.5.0 2017 March 28
