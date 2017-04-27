@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## Next Release
+## v2.5.3 2017 April 27
 
 - Project view: added responsive support on external images
 - Include rails localization support for 115 new locations
