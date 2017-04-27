@@ -1,4 +1,3 @@
----
 fr-CH:
   date:
     abbr_day_names:
@@ -10,7 +9,7 @@ fr-CH:
     - ven
     - sam
     abbr_month_names:
-    - 
+    -
     - jan.
     - fév.
     - mar.
@@ -36,7 +35,7 @@ fr-CH:
       long: "%e %B %Y"
       short: "%e %b"
     month_names:
-    - 
+    -
     - janvier
     - février
     - mars
@@ -133,6 +132,7 @@ fr-CH:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       other_than: doit être différent de %{count}
+      wrong_content_type: "ce type de contenu n'est pas autorisé"
     template:
       body: 'Veuillez vérifier les champs suivants : '
       header:
