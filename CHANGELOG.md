@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
-## Next Release
+## v2.5.4 2017 May 4
+
 - Fix a bug: Unable to define application locale other than `fr` or `en`.
 - [TODO DEPLOY] add `APP_LOCALE` environment variable (see README.md for configuration details)
 
