@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+## next release
+
+
 ## v2.5.4 2017 May 4
 
 - Fix a bug: Unable to define application locale other than `fr` or `en`.
