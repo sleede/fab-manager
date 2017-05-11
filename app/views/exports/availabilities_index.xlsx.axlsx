@@ -1,0 +1,132 @@
+wb = xlsx_package.workbook
+
+header = wb.styles.add_style :b => true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
+date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_format
+
+## Machines slots
+wb.add_worksheet(name: t('export_availabilities.machines')) do |sheet|
+
+  ## data table
+  # heading labels
+  columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+             t('export_availabilities.machine'), t('export_availabilities.reservations')]
+  sheet.add_row columns, :style => header
+
+  # data rows
+  @availabilities.where(available_type: 'machines').order(:start_at).each do |a|
+    a.machines.each do |m|
+      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
+        start_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes
+        end_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes
+        reservations = 0
+        if a.slots and a.slots.map(&:start_at).include? start_at
+          reservations = 1
+        end
+
+        data = [
+            start_at.to_date,
+            I18n.l(start_at, format: '%A').capitalize,
+            print_slot(start_at, end_at),
+            m.name,
+            reservations
+        ]
+        styles = [date, nil, nil, nil, nil]
+        types = [:date, :string, :string, :string, :integer]
+
+        sheet.add_row data, :style =>  styles, :types => types
+
+      end
+    end
+  end
+end
+
+
+## Trainings availabilities
+wb.add_worksheet(name: t('export_availabilities.trainings')) do |sheet|
+
+  ## data table
+  # heading labels
+  columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+             t('export_availabilities.training'), t('export_availabilities.reservations'),
+             t('export_availabilities.available_seats')]
+  sheet.add_row columns, :style => header
+
+  # data rows
+  @availabilities.where(available_type: 'training').order(:start_at).each do |a|
+    data = [
+        a.start_at.to_date,
+        I18n.l(a.start_at, format: '%A').capitalize,
+        print_slot(a.start_at, a.end_at),
+        a.trainings.first.name,
+        a.reservations.count,
+        a.nb_total_places
+    ]
+    styles = [date, nil, nil, nil, nil, nil]
+    types = [:date, :string, :string, :string, :integer, :integer]
+
+    sheet.add_row data, :style => styles, :types => types
+  end
+end
+
+## Spaces slots
+if Rails.application.secrets.fablab_without_spaces != 'false'
+  wb.add_worksheet(name: t('export_availabilities.spaces')) do |sheet|
+
+    ## data table
+    # heading labels
+    columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+               t('export_availabilities.space'), t('export_availabilities.reservations'),
+               t('export_availabilities.available_seats')]
+    sheet.add_row columns, :style => header
+
+    # data rows
+    @availabilities.where(available_type: 'space').order(:start_at).each do |a|
+      ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
+        start_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes
+        end_at = a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes
+        reservations = a.slots.where(start_at: start_at).count
+
+        data = [
+            start_at.to_date,
+            I18n.l(start_at, format: '%A').capitalize,
+            print_slot(start_at, end_at),
+            a.spaces.first.name,
+            reservations,
+            a.nb_total_places
+        ]
+        styles = [date, nil, nil, nil, nil, nil]
+        types = [:date, :string, :string, :string, :integer, :integer]
+
+        sheet.add_row data, :style =>  styles, :types => types
+      end
+    end
+  end
+end
+
+
+## Events availabilities
+wb.add_worksheet(name: t('export_availabilities.events')) do |sheet|
+
+  ## data table
+  # heading labels
+  columns = [t('export_availabilities.date'), t('export_availabilities.day_of_week'), t('export_availabilities.slot'),
+             t('export_availabilities.event'), t('export_availabilities.reservations'),
+             t('export_availabilities.available_seats')]
+  sheet.add_row columns, :style => header
+
+  # data rows
+  @availabilities.where(available_type: 'event').order(:start_at).each do |a|
+    data = [
+        a.start_at.to_date,
+        I18n.l(a.start_at, format: '%A').capitalize,
+        print_slot(a.start_at, a.end_at),
+        a.event.title,
+        a.reservations.map(&:nb_reserve_places).reduce(:+) || 0,
+        a.nb_total_places
+    ]
+    styles = [date, nil, nil, nil, nil, nil]
+    types = [:date, :string, :string, :string, :integer, :integer]
+
+    sheet.add_row data, :style => styles, :types => types
+  end
+end

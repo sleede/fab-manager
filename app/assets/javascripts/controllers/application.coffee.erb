@@ -242,6 +242,10 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
           # user is not logged in
           openLoginModal(toState, toParams)
 
+    # we stop polling notifications when the page is not in foreground
+    onPageVisible (state) ->
+      $rootScope.toCheckNotifications = (state is 'visible')
+
     Setting.get { name: 'fablab_name' }, (data)->
       $scope.fablabName = data.setting.value
     Setting.get { name: 'name_genre' }, (data)->
@@ -250,8 +254,9 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
 
     # shorthands
-    $scope.isAuthenticated = Auth.isAuthenticated;
-    $scope.isAuthorized = AuthService.isAuthorized;
+    $scope.isAuthenticated = Auth.isAuthenticated
+    $scope.isAuthorized = AuthService.isAuthorized
+    $rootScope.login = $scope.login
 
 
 
@@ -367,6 +372,52 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
 
   # otherwise the user just closed the modal
   <% end %>
+
+
+
+  ##
+  # Detect if the current page (tab/window) is active of put as background.
+  # When the status changes, the callback is triggered with the new status as parameter
+  # Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
+  ##
+  onPageVisible = (callback) ->
+    hidden = 'hidden'
+
+    onchange = (evt) ->
+      v = 'visible'
+      h = 'hidden'
+      evtMap =
+        focus: v
+        focusin: v
+        pageshow: v
+        blur: h
+        focusout: h
+        pagehide: h
+      evt = evt or window.event
+      if evt.type of evtMap
+        if typeof callback == 'function' then callback(evtMap[evt.type])
+      else
+        if typeof callback == 'function' then callback(if @[hidden] then 'hidden' else 'visible')
+      return
+
+    # Standards:
+    if hidden of document
+      document.addEventListener 'visibilitychange', onchange
+    else if (hidden = 'mozHidden') of document
+      document.addEventListener 'mozvisibilitychange', onchange
+    else if (hidden = 'webkitHidden') of document
+      document.addEventListener 'webkitvisibilitychange', onchange
+    else if (hidden = 'msHidden') of document
+      document.addEventListener 'msvisibilitychange', onchange
+    # IE 9 and lower
+    else if 'onfocusin' of document
+      document.onfocusin = document.onfocusout = onchange
+    # All others
+    else
+      window.onpageshow = window.onpagehide = window.onfocus = window.onblur = onchange
+    # set the initial state (but only if browser supports the Page Visibility API)
+    if document[hidden] != undefined
+      onchange type: if document[hidden] then 'blur' else 'focus'
 
 
 

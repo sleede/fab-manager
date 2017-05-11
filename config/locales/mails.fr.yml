@@ -268,9 +268,11 @@ fr:
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
+        statistics_space: "des statistiques sur les espaces"
         users_members: "de la liste des membres"
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
+        availabilities_index: "des disponibilités de réservations"
         click_to_download: "La génération est terminée. Pour télécharger le fichier Excel, cliquez"
         here: "ici"
 

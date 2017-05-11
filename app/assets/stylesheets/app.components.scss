@@ -160,6 +160,11 @@
       height: 400px;
     }
   }
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 .label-staging {

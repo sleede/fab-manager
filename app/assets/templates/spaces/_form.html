@@ -1,0 +1,109 @@
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+<div class="form-group m-b-lg" ng-class="{'has-error': spaceForm['space[name]'].$dirty && spaceForm['space[name]'].$invalid}">
+    <label for="space_name" class="col-sm-2 control-label">{{ 'space.name' | translate }} *</label>
+    <div class="col-sm-4">
+        <input ng-model="space.name"
+               type="text"
+               name="space[name]"
+               class="form-control"
+               id="space_name"
+               placeholder="{{'space.name' | translate}}"
+               required>
+        <span class="help-block" ng-show="spaceForm['space[name]'].$dirty && spaceForm['space[name]'].$error.required" translate>{{ 'space.name_is_required' }}</span>
+    </div>
+</div>
+
+<div class="form-group m-b-lg">
+    <label for="space_image" class="col-sm-2 control-label">{{ 'space.illustration' | translate }} *</label>
+    <div class="col-sm-10">
+        <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(space.space_image)">
+            <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
+                <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!space.space_image">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 334px;">
+                <img ng-src="{{ space.space_image }}" alt="" />
+            </div>
+            <div>
+    <span class="btn btn-default btn-file">
+      <span class="fileinput-new">{{ 'space.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
+      <span class="fileinput-exists" translate>{{ 'change' }}</span>
+      <input type="file"
+             id="space_image"
+             ng-model="space.space_image"
+             name="space[space_image_attributes][attachment]"
+             accept="image/*"
+             required
+             bs-jasny-fileinput>
+    </span>
+                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'delete' }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group m-b-xl" ng-class="{'has-error': spaceForm['space[default_places]'].$dirty && spaceForm['space[default_places]'].$invalid}">
+    <label for="default_places" class="col-sm-2 control-label">{{ 'space.default_places' | translate }} *</label>
+    <div class="col-sm-10">
+        <input type="number"
+               name="space[default_places]"
+               ng-model="space.default_places"
+               id="default_places"
+               class="form-control"
+               required>
+        <span class="help-block" ng-show="spaceForm['space[default_places]'].$dirty && spaceForm['space[default_places]'].$error.required" translate>{{ 'space.default_places_is_required' }}</span>
+    </div>
+</div>
+
+
+<div class="form-group m-b-xl">
+    <label for="space_description" class="col-sm-2 control-label" translate>{{ 'space.description' }}</label>
+    <div class="col-sm-10">
+        <input type="hidden"
+               name="space[description]"
+               ng-value="space.description" />
+        <summernote ng-model="space.description"
+                    id="space_description"
+                    placeholder=""
+                    config="summernoteOpts"
+                    name="space[description]">
+        </summernote>
+    </div>
+</div>
+
+<div class="form-group m-b-xl">
+    <label for="space_characteristics" class="col-sm-2 control-label" translate>{{ 'space.characteristics' }}</label>
+    <div class="col-sm-10">
+        <input type="hidden"
+               name="space[characteristics]"
+               ng-value="space.characteristics" />
+        <summernote ng-model="space.characteristics"
+                    id="space_characteristics"
+                    placeholder=""
+                    config="summernoteOpts"
+                    name="space[characteristics]">
+        </summernote>
+    </div>
+</div>
+
+<div class="form-group m-b-xl">
+    <label class="col-sm-2 control-label" translate>{{ 'space.attached_files_(pdf)' }}</label>
+    <div class="col-sm-10">
+        <div ng-repeat="file in space.space_files_attributes" ng-show="!file._destroy">
+            <input type="hidden" ng-model="file.id" name="space[space_files_attributes][][id]" ng-value="file.id" />
+            <input type="hidden" ng-model="file._destroy" name="space[space_files_attributes][][_destroy]" ng-value="file._destroy"/>
+
+            <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(file.attachment)">
+                <div class="form-control" data-trigger="fileinput">
+                    <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
+                </div>
+                <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'space.attach_a_file' }}</span>
+                <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="space[space_files_attributes][][attachment]" accept=".pdf"></span>
+                <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
+            </div>
+
+        </div>
+        <a class="btn btn-default" ng-click="addFile()" role="button"> {{ 'space.add_an_attachment' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+    </div>
+</div>

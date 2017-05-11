@@ -3,7 +3,7 @@
 FabManager is the FabLab management solution. It is web-based, open-source and totally free.
 
 
-##### Table of Contents  
+##### Table of Contents
 1. [Software stack](#software-stack)
 2. [Contributing](#contributing)
 3. [Setup a production environment](#setup-a-production-environment)
@@ -122,9 +122,12 @@ In you only intend to run fab-manager on your local machine for testing purposes
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+   **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
 
    ```bash
-   rake db:setup
+   rake db:create
+   rake db:migrate
+   rake db:seed
    ```
 
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -144,6 +147,9 @@ In you only intend to run fab-manager on your local machine for testing purposes
 12. You can login as the default administrator using the following credentials:
     - user: admin@fab-manager.com
     - password: adminadmin
+
+13. Email notifications will be caught by MailCatcher.
+    To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
 <a name="environment-configuration"></a>
 ### Environment Configuration
@@ -198,6 +204,12 @@ The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoic
     FABLAB_WITHOUT_PLANS
 
 If set to 'true', the subscription plans will be fully disabled and invisible in the application.
+It is not recommended to disable plans if at least one subscription was took on the platform.
+
+    FABLAB_WITHOUT_SPACES
+
+If set to 'false', enable the spaces management and reservation in the application.
+It is not recommended to disable spaces if at least one space reservation was made on the system.
 
     DEFAULT_MAIL_FROM
 
@@ -261,9 +273,13 @@ Please consider that allowing file archives (eg. application/zip) or binary exec
 
     MAX_IMAGE_SIZE
 
-Maximum size (in bytes) allowed for image uploaded on the platform. 
+Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
+
+    ADMIN_EMAIL, ADMIN_PASSWORD
+
+Credentials for the first admin user created when seeding the project.
 
     Settings related to Open Projects
 
@@ -325,7 +341,7 @@ Otherwise, please follow the official instructions on the project's website.
 <a name="setup-fabmanager-in-postgresql"></a>
 ### Setup the FabManager database in PostgreSQL
 
-Before running `rake db:setup`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
+Before running `rake db:create`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
 To create it, please follow these instructions:
 
 1. Run the PostgreSQL administration command line interface, logged as the postgres user
@@ -355,19 +371,13 @@ To create it, please follow these instructions:
    ALTER ROLE sleede WITH CREATEDB;
    ```
 
-4. Then, create the fabmanager_development and fabmanager_test databases
-
-   ```sql
-   CREATE DATABASE fabmanager_development OWNER sleede;
-   CREATE DATABASE fabmanager_test OWNER sleede;
-   ```
-
-5. To finish, attribute a password to this user
+4. Then, attribute a password to this user
 
    ```sql
    ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
    ```
-6. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
+
+5. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
 
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
@@ -536,15 +546,24 @@ If you are in a development environment, your can keep the default values, other
 
 <a name="i18n-settings"></a>
 #### Settings
+    APP_LOCALE
+
+Configure application's main localization and translation settings.
+
+See `config/locales/app.*.yml` for a list of available locales. Default is **en**.
+
     RAILS_LOCALE
 
-Configure Ruby on Rails for l10n.
+Configure Ruby on Rails localization settings (currency, dates, number formats ...).
 
-Be sure that `config/locales/rails.XX.yml` exists, where `XX` match your configured RAILS_LOCALE.
+Please, be aware that **the configured locale will imply the CURRENCY symbol used to generate invoices**.
+
+_Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
+
+See `config/locales/rails.*.yml` for a list of available locales. Default is **en**.
+
+If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
-
-Be aware that **this file MUST contain the CURRENCY symbol used to generate invoices** (among other things).
-Default is **en**.
 
     MOMENT_LOCALE
 
@@ -566,7 +585,7 @@ Configure the locale for angular-i18n.
 
 Please, be aware that **the configured locale will imply the CURRENCY displayed to front-end users.**
 
-_Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `angular_locale` to simple **fr** (without country indication) will probably not do what you expect._
+_Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
 See `vendor/assets/components/angular-i18n/angular-locale_*.js` for a list of available locales. Default is **en**.
 
@@ -683,12 +702,12 @@ Developers may find information on how to implement their own authentication pro
 - When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
 
         Error:
-        ...                                                               
-        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."      
-        DETAIL:  Key (group_id)=(1) is not present in table "groups".                                                                                                   
-        : ...                                                                                                
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'                                                         
-            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'     
+        ...
+        ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."
+        DETAIL:  Key (group_id)=(1) is not present in table "groups".
+        : ...
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'
+            test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.

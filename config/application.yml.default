@@ -12,6 +12,7 @@ STRIPE_CURRENCY: 'eur'
 
 INVOICE_PREFIX: Demo-FabLab-facture
 FABLAB_WITHOUT_PLANS: 'false'
+FABLAB_WITHOUT_SPACES: 'true'
 
 DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
 
@@ -26,6 +27,9 @@ SMTP_PASSWORD:
 GA_ID: ''
 ##
 
+ADMIN_EMAIL: 'admin@fab-manager.com'
+ADMIN_PASSWORD: 'adminadmin'
+
 DISQUS_SHORTNAME:
 
 TWITTER_NAME: 'FablabGrenoble'
@@ -37,6 +41,7 @@ TWITTER_ACCESS_TOKEN_SECRET: ''
 FACEBOOK_APP_ID: ''
 
 RAILS_LOCALE: 'fr'
+APP_LOCALE: 'fr'
 MOMENT_LOCALE: 'fr'
 SUMMERNOTE_LOCALE: 'fr-FR'
 ANGULAR_LOCALE: 'fr-fr'

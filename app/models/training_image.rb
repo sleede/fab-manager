@@ -1,4 +1,4 @@
 
 class TrainingImage < Asset
-  mount_uploader :attachment, MachineImageUploader
+  mount_uploader :attachment, TrainingImageUploader
 end

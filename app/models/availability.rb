@@ -12,6 +12,9 @@ class Availability < ActiveRecord::Base
   has_many :trainings_availabilities, dependent: :destroy
   has_many :trainings, through: :trainings_availabilities
 
+  has_many :spaces_availabilities, dependent: :destroy
+  has_many :spaces, through: :spaces_availabilities
+
   has_many :slots
   has_many :reservations, through: :slots
 
@@ -23,6 +26,7 @@ class Availability < ActiveRecord::Base
 
   scope :machines, -> { where(available_type: 'machines') }
   scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
+  scope :spaces, -> { includes(:spaces).where(available_type: 'space') }
 
   attr_accessor :is_reserved, :slot_id, :can_modify
 
@@ -43,10 +47,18 @@ class Availability < ActiveRecord::Base
   end
 
   def safe_destroy
-    if available_type == 'machines'
-      reservations = Reservation.where(reservable_type: 'Machine', reservable_id: machine_ids).joins(:slots).where('slots.availability_id = ?', id)
-    else
-      reservations = Reservation.where(reservable_type: 'Training', reservable_id: training_ids).joins(:slots).where('slots.availability_id = ?', id)
+    case available_type
+      when 'machines'
+        reservations = Reservation.where(reservable_type: 'Machine', reservable_id: machine_ids).joins(:slots).where('slots.availability_id = ?', id)
+      when 'training'
+        reservations = Reservation.where(reservable_type: 'Training', reservable_id: training_ids).joins(:slots).where('slots.availability_id = ?', id)
+      when 'space'
+        reservations = Reservation.where(reservable_type: 'Space', reservable_id: space_ids).joins(:slots).where('slots.availability_id = ?', id)
+      when 'event'
+        reservations = Reservation.where(reservable_type: 'Event', reservable_id: event&.id).joins(:slots).where('slots.availability_id = ?', id)
+      else
+        STDERR.puts "[safe_destroy] Availability with unknown type #{available_type}"
+        reservations = []
     end
     if reservations.size == 0
       # this update may not call any rails callbacks, that's why we use direct SQL update
@@ -57,16 +69,29 @@ class Availability < ActiveRecord::Base
     end
   end
 
+  ## compute the total number of places over the whole space availability
+  def available_space_places
+    if available_type === 'space'
+      ((end_at - start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i * nb_total_places
+    end
+  end
+
   def title(filter = {})
-    if available_type == 'machines'
-      if filter[:machine_ids]
-        return machines.to_ary.delete_if {|m| !filter[:machine_ids].include?(m.id)}.map(&:name).join(' - ')
-      end
-      return machines.map(&:name).join(' - ')
-    elsif available_type == 'event'
-      event.name
-    else
-      trainings.map(&:name).join(' - ')
+    case available_type
+      when 'machines'
+        if filter[:machine_ids]
+          return machines.to_ary.delete_if {|m| !filter[:machine_ids].include?(m.id)}.map(&:name).join(' - ')
+        end
+        return machines.map(&:name).join(' - ')
+      when 'event'
+        event.name
+      when 'training'
+        trainings.map(&:name).join(' - ')
+      when 'space'
+        spaces.map(&:name).join(' - ')
+      else
+        STDERR.puts "[title] Availability with unknown type #{available_type}"
+        '???'
     end
   end
 
@@ -74,23 +99,23 @@ class Availability < ActiveRecord::Base
   # if haven't defined a nb_total_places, places are unlimited
   def is_completed
     return false if nb_total_places.blank?
-    if available_type == 'training'
+    if available_type == 'training' || available_type == 'space'
       nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
     elsif available_type == 'event'
       event.nb_free_places == 0
     end
   end
 
-  # TODO: refactoring this function for avoid N+1 query
   def nb_total_places
-    if available_type == 'training'
-      if read_attribute(:nb_total_places).present?
-        read_attribute(:nb_total_places)
+    case available_type
+      when 'training'
+        super.presence || trainings.map {|t| t.nb_total_places}.reduce(:+)
+      when 'event'
+        event.nb_total_places
+      when 'space'
+        super.presence || spaces.map {|s| s.default_places}.reduce(:+)
       else
-        trainings.first.nb_total_places unless trainings.empty?
-      end
-    elsif available_type == 'event'
-      event.nb_total_places
+        nil
     end
   end
 
@@ -98,12 +123,17 @@ class Availability < ActiveRecord::Base
   def as_indexed_json
     json = JSON.parse(to_json)
     json['hours_duration'] = (end_at - start_at) / (60 * 60)
-    if available_type == 'machines'
-      json['subType'] = machines_availabilities.map{|ma| ma.machine.friendly_id}
-    elsif available_type == 'training'
-      json['subType'] = trainings_availabilities.map{|ta| ta.training.friendly_id}
-    elsif available_type == 'event'
-      json['subType'] = [event.category.friendly_id]
+    case available_type
+      when 'machines'
+        json['subType'] = machines_availabilities.map{|ma| ma.machine.friendly_id}
+      when'training'
+        json['subType'] = trainings_availabilities.map{|ta| ta.training.friendly_id}
+      when 'event'
+        json['subType'] = [event.category.friendly_id]
+      when 'space'
+        json['subType'] = spaces_availabilities.map{|sa| sa.space.friendly_id}
+      else
+        json['subType'] = []
     end
     json['bookable_hours'] = json['hours_duration'] * json['subType'].length
     json['date'] = start_at.to_date

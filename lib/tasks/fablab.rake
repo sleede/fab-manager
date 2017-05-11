@@ -49,7 +49,7 @@ namespace :fablab do
     puts "PUT index stats"
     `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats`
 
-    %w[account event machine project subscription training user].each do |stat|
+    %w[account event machine project subscription training user space].each do |stat|
       puts "PUT Mapping stats/#{stat}"
         `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/#{stat}/_mapping -d '
       {
@@ -89,6 +89,31 @@ namespace :fablab do
                "index" : "not_analyzed"
             },
             "eventTheme": {
+               "type": "string",
+               "index" : "not_analyzed"
+            }
+         }
+      }';`
+  end
+
+
+  desc 'add spaces reservations to statistics'
+  task es_add_spaces: :environment do
+    `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/space/_mapping -d '
+      {
+         "properties": {
+            "type": {
+               "type": "string",
+               "index" : "not_analyzed"
+            },
+            "subType": {
+               "type": "string",
+               "index" : "not_analyzed"
+            },
+            "date": {
+               "type": "date"
+            },
+            "name": {
                "type": "string",
                "index" : "not_analyzed"
             }

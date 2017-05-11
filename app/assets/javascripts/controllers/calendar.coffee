@@ -4,14 +4,15 @@
 # Controller used in the public calendar global
 ##
 
-Application.Controllers.controller "CalendarController", ["$scope", "$state", "$aside", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise',
-($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise) ->
+Application.Controllers.controller "CalendarController", ["$scope", "$state", "$aside", "moment", "Availability", 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise',
+($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise) ->
 
 
   ### PRIVATE STATIC CONSTANTS ###
   currentMachineEvent = null
   machinesPromise.forEach((m) -> m.checked = true)
   trainingsPromise.forEach((t) -> t.checked = true)
+  spacesPromise.forEach((s) -> s.checked = true)
 
   ## check all formation/machine is select in filter
   isSelectAll = (type, scope) ->
@@ -25,6 +26,9 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   ## List of machines
   $scope.machines = machinesPromise
 
+  ## List of spaces
+  $scope.spaces = spacesPromise
+
   ## add availabilities source to event sources
   $scope.eventSources = []
 
@@ -34,6 +38,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     scope.filter = $scope.filter =
       trainings: isSelectAll('trainings', scope)
       machines: isSelectAll('machines', scope)
+      spaces: isSelectAll('spaces', scope)
       evt: filter.evt
       dispo: filter.dispo
     $scope.calendarConfig.events = availabilitySourceUrl()
@@ -43,6 +48,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   $scope.filter =
     trainings: isSelectAll('trainings', $scope)
     machines: isSelectAll('machines', $scope)
+    spaces: isSelectAll('spaces', $scope)
     evt: true
     dispo: true
 
@@ -62,15 +68,18 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
           $scope.trainings
         machines: ->
           $scope.machines
+        spaces: ->
+          $scope.spaces
         filter: ->
           $scope.filter
         toggleFilter: ->
           $scope.toggleFilter
         filterAvailabilities: ->
           $scope.filterAvailabilities
-      controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'filter', 'toggleFilter', 'filterAvailabilities', ($scope, $uibModalInstance, trainings, machines, filter, toggleFilter, filterAvailabilities) ->
+      controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'spaces', 'filter', 'toggleFilter', 'filterAvailabilities', ($scope, $uibModalInstance, trainings, machines, spaces, filter, toggleFilter, filterAvailabilities) ->
         $scope.trainings = trainings
         $scope.machines = machines
+        $scope.spaces = spaces
         $scope.filter = filter
 
         $scope.toggleFilter = (type, filter) ->
@@ -94,13 +103,19 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
       currentMachineEvent = event
       calendar.fullCalendar('changeView', 'agendaDay')
       calendar.fullCalendar('gotoDate', event.start)
+    else if event.available_type == 'space'
+      calendar.fullCalendar('changeView', 'agendaDay')
+      calendar.fullCalendar('gotoDate', event.start)
+    else if event.available_type == 'event'
+      $state.go('app.public.events_show', {id: event.event_id})
+    else if event.available_type == 'training'
+      $state.go('app.public.training_show', {id: event.training_id})
     else
-      if event.available_type == 'event'
-        $state.go('app.public.events_show', {id: event.event_id})
-      else if event.available_type == 'training'
-        $state.go('app.public.training_show', {id: event.training_id})
-      else
+      if event.machine_id
         $state.go('app.public.machines_show', {id: event.machine_id})
+      else if event.space_id
+        $state.go('app.public.space_show', {id: event.space_id})
+
 
   ## agendaDay view: disable slotEventOverlap
   ## agendaWeek view: enable slotEventOverlap
@@ -109,10 +124,10 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
     # ui-calendar will trigger rerender calendar
     $scope.calendarConfig.defaultView = view.type
     today = if currentMachineEvent then currentMachineEvent.start else moment().utc().startOf('day')
-    if today > view.start and today < view.end and today != view.start
+    if today > view.intervalStart and today < view.intervalEnd and today != view.intervalStart
       $scope.calendarConfig.defaultDate = today
     else
-      $scope.calendarConfig.defaultDate = view.start
+      $scope.calendarConfig.defaultDate = view.intervalStart
     if view.type == 'agendaDay'
       $scope.calendarConfig.slotEventOverlap = false
     else
@@ -136,7 +151,8 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   getFilter = ->
     t = $scope.trainings.filter((t) -> t.checked).map((t) -> t.id)
     m = $scope.machines.filter((m) -> m.checked).map((m) -> m.id)
-    {t: t, m: m, evt: $scope.filter.evt, dispo: $scope.filter.dispo}
+    s = $scope.spaces.filter((s) -> s.checked).map((s) -> s.id)
+    {t: t, m: m, s: s, evt: $scope.filter.evt, dispo: $scope.filter.dispo}
 
   availabilitySourceUrl = ->
     "/api/availabilities/public?#{$.param(getFilter())}"
