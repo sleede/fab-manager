@@ -85,6 +85,7 @@ pt-BR:
     subscription_extended_for_free_from_START_to_END: "Assinatura grátis extendida - De %{START} até %{END}"
     subscription_NAME_from_START_to_END: "Assinatura - De %{START} até %{END}"
     machine_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Reserva de treinamneto - %{DESCRIPTION}"
     event_reservation_DESCRIPTION: "Reserva de evento - %{DESCRIPTION}"
     full_price_ticket:
@@ -122,6 +123,11 @@ pt-BR:
     # training availabilities
     i_ve_reserved: "Eu reservei"
     completed: "Cheio"
+
+  events:
+    # error messages when updating an event
+    error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
+    other_error: "Um erro inesperado ocorreu enquanto o evento era atualizado"
 
   export_members:
     # members list export to EXCEL format
@@ -184,6 +190,23 @@ pt-BR:
     payment_method: "Método de pagamento"
     local_payment: "Pagamento na recepção"
     online_payment: "Pagamento online"
+
+  export_availabilities:
+    # reservation slots export, by type, to EXCEL format
+    machines: "Máquinas"
+    trainings: "Treinamentos"
+    spaces: "Espaços"
+    events: "Eventos"
+    day_of_week: "Dia da semana"
+    date: "Data"
+    slot: "Slot"
+    machine: "Máquina"
+    training: "Treinamento"
+    space: "Espaço"
+    event: "Evento"
+    reservations: "Reservas"
+    available_seats: "Assentos disponíveis"
+
 
   api:
     notifications:
@@ -274,9 +297,11 @@ pt-BR:
         statistics_project: "de estatísticas sobre projetos"
         statistics_subscription: "de estatísticas de assinatura"
         statistics_training: "de estatísticas sobre treinamentos"
+        statistics_space: "as estatísticas sobre reserva de espaços"
         users_members: "da lista de membros"
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
+        availabilities_index: "de reservas disponíveis"
         is_over: "está finalizado."
         download_here: "Baixe aqui"
       notify_member_about_coupon:
@@ -286,6 +311,7 @@ pt-BR:
     # statistics tools for admins
     subscriptions: "Assinaturas"
     machines_hours: "Horas de máquina"
+    spaces: "Espaços"
     trainings: "Treinamentos"
     events: "Eventos"
     registrations: "Inscrições"

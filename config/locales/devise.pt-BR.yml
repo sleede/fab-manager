@@ -1,8 +1,5 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
-# Utilize-o em 'config/locales/', com o nome de 'devise.pt-BR.yml'.
-# Em 'config/application.rb', utilize => config.i18n.default_locale = :'pt-BR'
-
 pt-BR:
   devise:
     confirmations:
@@ -21,8 +18,13 @@ pt-BR:
       unconfirmed: "Você precisa confirmar sua conta, antes de continuar."
     mailer:
       confirmation_instructions:
+      action:
+        instruction:
         subject: "Instruções de confirmação"
       reset_password_instructions:
+      action:
+        instruction:
+        ignore_otherwise:
         subject: "Instruções para redefinir sua senha"
       unlock_instructions:
         subject: "Instruções para desbloquear sua conta"
@@ -46,7 +48,6 @@ pt-BR:
     sessions:
       signed_in: "Logado com sucesso."
       signed_out: "Saiu com sucesso."
-      already_signed_out: "Saiu com sucesso."
     unlocks:
       send_instructions: "Você receberá um e-mail com instruções sobre como desbloquear sua conta, em poucos minutos."
       send_paranoid_instructions: "Se a sua conta existir, você receberá um e-mail com instruções sobre como desbloqueá-la, em poucos minutos."

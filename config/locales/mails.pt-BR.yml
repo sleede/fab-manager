@@ -268,9 +268,11 @@ pt-BR:
         statistics_project: "das estatísticas de projetos"
         statistics_subscription: "das estatísticas de assinaturas"
         statistics_training: "das estatísticas de treinamento"
+        statistics_space: "as estatísticas sobre espaço"
         users_members: "da lista de membros"
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
+        availabilities_index: "as reservas disponíveis"
         click_to_download: "Arquivo do Excel gerado com êxito. Para fazer o download, clique"
         here: "aqui"
 

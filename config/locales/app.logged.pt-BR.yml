@@ -98,67 +98,27 @@ pt-BR:
       machines_reserve:
         # book a machine
         machine_planning: "Planejamento de máquinas"
-        select_one_or_more_slots_in_the_calendar: "Selecione um ou mais slots no calendário"
-        you_ve_just_selected_the_slot: "Você acabou de selecionar o slot:"
-        datetime_to_time: "{{START_DATETIME}} ás {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-        cost_of_a_machine_hour: "Custo de uma hora de máquina"
-        offer_this_slot: "Oferecer este slot"
-        confirm_this_slot: "Confirmar este slot"
-        remove_this_slot: "Remover este slot"
-        to_benefit_from_attractive_prices: "To benefit from attractive prices"
-        view_our_subscriptions: "Ver nossas inscrições"
-        cost_of_the_subscription: "Custo de inscrições"
-        you_have_settled_the_following_machine_hours: "Você selecionou as seguintes horas de máquina:"
-        you_have_settled_a_: "Você selecionou um"
-        i_want_to_change_the_following_reservation: "Eu quero alterar as seguintes reservas:"
-        cancel_my_modification: "Cancelar minhas modificações"
-        select_a_new_slot_in_the_calendar: "Selecionar um novo slot no calendário"
-        cancel_my_selection: "Cancelar minha seleção"
-        tags_of_the_original_slot: "Tags do slot original:"
-        tags_of_the_destination_slot: "Tags do slot de destino:"
-        confirm_my_modification: "Confirmar minha modificação"
-        your_booking_slot_was_successfully_moved_from_: "Seu slot de agendamento foi movido com sucesso para"
-        i_ve_reserved: "Reservei"
+        i_ve_reserved: "Eu tenho reserva"        
         not_available: "Não disponível"
-        unable_to_change_the_reservation: "Não permitido alterar reserva"
         i_reserve: "Eu reservo"
         i_shift: "Eu mudo"
         i_change: "Eu altero"
-        do_you_really_want_to_cancel_this_reservation: "Você realmente deseja cancelar essa reserva?"
-        reservation_was_cancelled_successfully: "Reserva foi cancelada com sucesso."
-        cancellation_failed: "Cancelamento falhou."
-        a_problem_occured_during_the_payment_process_please_try_again_later: "Um erro ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
-
+       
       trainings_reserve:
         # book a training
         trainings_planning: "Planos de treinamento"
         planning_of: "Planejamento de"   # followed by the training name (eg. "Planning of 3d printer training")
         all_trainings: "Todos treinamentos"
-        select_a_slot_in_the_calendar: "Selecionar slot no calendário"
-        you_ve_just_selected_the_slot: "Você acaba de selecionar o slot:"
-        datetime_to_time: "{{START_DATETIME}} ás {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-        offer_this_training: "Oferecer este treinamento"
-        confirm_this_slot: "Confirmar este slot"
-        remove_this_slot: "Remover este slot"
-        to_benefit_from_attractive_prices_and_a_free_training: "To benefit from attractives prices and a free training"
-        view_our_subscriptions: "Ver suas inscrições"
-        subscription_cost: "Custo de inscrições"
-        you_have_settled_the_training: "Você escolheu o treinamento"
-        training_cost_: "Custo de treinamento:"
-        you_have_settled_a_: "Você escolheu o"
-        i_want_to_change_the_following_reservation: "Eu quero alterar as seguintes reservas:"
-        cancel_my_modification: "Cancelar minha modificação"
-        select_a_new_slot_in_the_calendar: "Selecionar um novo slot no calendário"
-        cancel_my_selection: "Cancelar minha seleção"
-        confirm_my_modification: "Confirmar minha modificação"
-        your_booking_slot_was_successfully_moved_from_: "Sua reserva foi movida com sucesso para"
-        i_ve_reserved: "Eu reservei"
-        an_error_occured_preventing_the_booked_slot_from_being_modified: "Um erro impediu do slot selecionado de ser modificado."
-        i_shift: "Eu mudo"
-        i_change: "Eu altero"
-        do_you_really_want_to_cancel_this_reservation: "Você realmente deseja cancelar esta reserva?"
-        cancellation_failed: "Cancellation failed."
-        a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor, tente novamente mais tarde."
+        cancel_my_selection: "Cancelar minha seleção"        
+        i_ve_reserved: "Eu reservei"     
+
+      space_reserve:
+        # book a space
+        space_reserve:
+          planning_of_space_NAME: "Plano de {{NAME}} espaço"  # angular interpolation
+          i_ve_reserved: "Eu reservei"
+          i_shift: "Eu troco"
+          i_change: "Eu altero"  
 
       notifications:
         notifications_center: "Centro de notificações"
