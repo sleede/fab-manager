@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release
+## v2.5.5 2017 May 15
 
 - Fix a bug: New groups does not have their spaces prices initialized
 - Fix a bug: Unable to delete a group when its space prices are set
