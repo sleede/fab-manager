@@ -2,6 +2,9 @@
 
 ## next release
 
+- Fix a bug: New groups does not have their spaces prices initialized
+- Fix a bug: Unable to delete a group when its space prices are set
+- [TODO DEPLOY] `rake fablab:fix:new_group_space_prices` only if module 'Spaces' is/was enabled
 
 ## v2.5.4 2017 May 4
 

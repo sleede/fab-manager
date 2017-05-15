@@ -3,6 +3,7 @@ class Group < ActiveRecord::Base
   has_many :users
   has_many :trainings_pricings, dependent: :destroy
   has_many :machines_prices, ->{ where(priceable_type: 'Machine') }, class_name: 'Price', dependent: :destroy
+  has_many :spaces_prices, ->{ where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -21,6 +22,7 @@ class Group < ActiveRecord::Base
     def create_prices
       create_trainings_pricings
       create_machines_prices
+      create_spaces_prices
     end
 
     def create_trainings_pricings
@@ -34,6 +36,12 @@ class Group < ActiveRecord::Base
         Price.create(priceable: machine, group: self, amount: 0)
       end
     end
+
+  def create_spaces_prices
+    Space.all.each do |space|
+      Price.create(priceable: space, group: self, amount: 0)
+    end
+  end
 
   def create_statistic_subtype
     user_index = StatisticIndex.find_by(es_type_key: 'user')

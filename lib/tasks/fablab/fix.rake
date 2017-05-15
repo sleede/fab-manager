@@ -35,5 +35,17 @@ namespace :fablab do
         end
       end
     end
+
+    task new_group_space_prices: :environment do
+      Space.all.each do |space|
+        Group.all.each do |group|
+          begin
+            Price.find(priceable: space, group: group)
+          rescue ActiveRecord::RecordNotFound
+            Price.create(priceable: space, group: group, amount: 0)
+          end
+        end
+      end
+    end
   end
 end
