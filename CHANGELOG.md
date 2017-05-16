@@ -3,6 +3,7 @@
 ## next release
 
 - Ability for admins to create users as organizations
+- Invoices object will contain the organization name if any (#64)
 
 ## v2.5.5 2017 May 15
 
