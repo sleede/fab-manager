@@ -4,6 +4,7 @@
 
 - Ability for admins to create users as organizations
 - Invoices object will contain the organization name if any (#64)
+- RSS feeds will return more data about events and projects, especially images
 
 ## v2.5.5 2017 May 15
 
