@@ -1,5 +1,12 @@
 # Changelog Fab Manager
 
+## v2.5.6 2017 May 18
+
+- Ability for admins to create users as organizations
+- Invoices object will contain the organization name if any (#64)
+- RSS feeds will return more data about events and projects, especially images
+- Improved Docker documentation (#65)
+
 ## v2.5.5 2017 May 15
 
 - Fix a bug: New groups does not have their spaces prices initialized

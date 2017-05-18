@@ -410,7 +410,9 @@ en:
 
       members_new:
         # add a member
-        add_a_member: "Add a member"
+        members_new:
+          add_a_member: "Add a member"
+          user_is_an_organization: "User is an organization"
 
       members_edit:
         # edit a member

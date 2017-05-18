@@ -53,8 +53,10 @@ module PDF
         # user/organization's information
         if invoice&.user&.profile&.organization
           name = invoice.user.profile.organization.name
+          full_name = "#{name} (#{invoice.user.profile.full_name})"
         else
           name = invoice.user.profile.full_name
+          full_name = name
         end
 
         if invoice&.user&.profile&.organization&.address
@@ -66,6 +68,7 @@ module PDF
         end
 
         text_box "<b>#{name}</b>\n#{invoice.user.email}\n#{address}", :at => [bounds.width - 130, bounds.top - 49], :width => 130, :align => :right, :inline_format => true
+        name = full_name
 
         # object
         move_down 25
@@ -78,18 +81,18 @@ module PDF
         else
           case invoice.invoiced_type
             when 'Reservation'
-              object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME', USER:invoice.user.profile.full_name, DATE:I18n.l(invoice.invoiced.slots[0].start_at.to_date), TIME:I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
+              object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME', USER:name, DATE:I18n.l(invoice.invoiced.slots[0].start_at.to_date), TIME:I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
               invoice.invoice_items.each do |item|
                 if item.subscription_id
                   subscription = Subscription.find item.subscription_id
-                  object = "\n- #{object}\n- #{(invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation')+' - ' : '') + subscription_verbose(subscription, invoice.user)}"
+                  object = "\n- #{object}\n- #{(invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation')+' - ' : '') + subscription_verbose(subscription, name)}"
                   break
                 end
               end
             when 'Subscription'
-              object = subscription_verbose(invoice.invoiced, invoice.user)
+              object = subscription_verbose(invoice.invoiced, name)
             when 'OfferDay'
-              object = offer_day_verbose(invoice.invoiced, invoice.user)
+              object = offer_day_verbose(invoice.invoiced, name)
             else
               puts "ERROR : specified invoiced type (#{invoice.invoiced_type}) is unknown"
           end
@@ -324,7 +327,7 @@ module PDF
     def subscription_verbose(subscription, user)
       subscription_start_at = subscription.expired_at - subscription.plan.duration
       duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
-      I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE', NAME: user.profile.full_name, DURATION: duration_verbose, DATE: I18n.l(subscription_start_at.to_date))
+      I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE', NAME: user, DURATION: duration_verbose, DATE: I18n.l(subscription_start_at.to_date))
     end
 
     def offer_day_verbose(offer_day, user)

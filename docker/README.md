@@ -332,7 +332,7 @@ OR
 Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
 
 
-#### copy docker-compose.yml to /home/core/
+#### copy docker-compose.yml to /home/core/fabmanager
 
 #### pull images
 
@@ -340,9 +340,11 @@ Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/co
 
 #### create/migrate/seed db
 
-`docker-compose run --rm fabmanager bundle exec rake db:create`
-`docker-compose run --rm fabmanager bundle exec rake db:migrate`
-`docker-compose run --rm fabmanager bundle exec rake db:seed`
+```bash
+docker-compose run --rm fabmanager bundle exec rake db:create
+docker-compose run --rm fabmanager bundle exec rake db:migrate
+docker-compose run --rm fabmanager bundle exec rake db:seed
+```
 
 #### build assets
 
