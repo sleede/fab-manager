@@ -1,0 +1,69 @@
+-# Add application configuration variables here, as shown below.
+-
+-POSTGRES_HOST: localhost
+-POSTGRES_PASSWORD:
+-REDIS_HOST: localhost
+-ELASTICSEARCH_HOST: localhost
+-
+-SECRET_KEY_BASE: 83daf5e7b80d990f037407bab78dff9904aaf3c195a50f84fa8695a22287e707dfbd9524b403b1dcf116ae1d8c06844c3d7ed942564e5b46be6ae3ead93a9d30
+-STRIPE_API_KEY:
+-STRIPE_PUBLISHABLE_KEY:
+-STRIPE_CURRENCY: 'eur'
+-
+-INVOICE_PREFIX: Demo-FabLab-facture
+-FABLAB_WITHOUT_PLANS: 'false'
+-FABLAB_WITHOUT_SPACES: 'true'
+-
+-DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
+-
+-# For prod & staging env only
+-DEFAULT_HOST: fab-manager.com
+-DEFAULT_PROTOCOL: https
+-DELIVERY_METHOD: smtp
+-SMTP_ADDRESS:
+-SMTP_PORT: '587'
+-SMTP_USER_NAME:
+-SMTP_PASSWORD:
+-GA_ID: ''
+-##
+-
+-ADMIN_EMAIL: 'admin@fab-manager.com'
+-ADMIN_PASSWORD: 'adminadmin'
+-
+-DISQUS_SHORTNAME:
+-
+-TWITTER_NAME: 'FablabGrenoble'
+-TWITTER_CONSUMER_KEY: ''
+-TWITTER_CONSUMER_SECRET: ''
+-TWITTER_ACCESS_TOKEN: ''
+-TWITTER_ACCESS_TOKEN_SECRET: ''
+-
+-FACEBOOK_APP_ID: ''
+-
+-RAILS_LOCALE: 'fr'
+-APP_LOCALE: 'fr'
+-MOMENT_LOCALE: 'fr'
+-SUMMERNOTE_LOCALE: 'fr-FR'
+-ANGULAR_LOCALE: 'fr-fr'
+-MESSAGEFORMAT_LOCALE: 'fr'
+-FULLCALENDAR_LOCALE: 'fr'
+-
+-ELASTICSEARCH_LANGUAGE_ANALYZER: 'french'
+-
+-TIME_ZONE: 'Paris'
+-WEEK_STARTING_DAY: 'monday'
+-D3_DATE_FORMAT: '%d/%m/%y'
+-UIB_DATE_FORMAT: 'dd/MM/yyyy'
+-EXCEL_DATE_FORMAT: 'dd/mm/yyyy'
+-
+-OPENLAB_APP_SECRET:
+-OPENLAB_APP_ID:
+-OPENLAB_BASE_URI: 'https://openprojects.fab-manager.com'
+-
+-LOG_LEVEL: 'debug'
+-
+-ALLOWED_EXTENSIONS: pdf ai eps cad math svg stl dxf dwg obj step iges igs 3dm 3dmf doc docx png ino scad fcad skp sldprt sldasm slddrw slddrt tex latex ps
+-ALLOWED_MIME_TYPES: application/pdf application/postscript application/illustrator image/x-eps image/svg+xml application/sla application/dxf application/acad application/dwg application/octet-stream application/step application/iges model/iges x-world/x-3dmf application/vnd.openxmlformats-officedocument.wordprocessingml.document image/png text/x-arduino text/plain application/scad application/vnd.sketchup.skp application/x-koan application/vnd-koan koan/x-skm application/vnd.koan application/x-tex application/x-latex
+-
+-# 10485760 = 10 megabytes
+-MAX_IMAGE_SIZE: '10485760'
