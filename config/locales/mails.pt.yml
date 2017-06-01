@@ -1,4 +1,4 @@
-pt-BR:
+pt:
   layouts:
     notifications_mailer:
       see_you_later: "Te vejo em breve em {GENDER, select, other{the}}"  # messageFormat interpolation
