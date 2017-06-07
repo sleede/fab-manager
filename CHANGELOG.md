@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+
+- Portuguese and Brazilian support
+
 ## v2.5.6 2017 May 18
 
 - Ability for admins to create users as organizations
