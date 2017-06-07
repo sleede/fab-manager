@@ -212,15 +212,15 @@ pt:
     notifications:
       # internal app notifications
       notify_admin_abuse_reported:
-        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Um abuso foi relatado em <strong> %{TYPE} %{ID}: <em> %{NAME} </ em> </ strong>."
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Um abuso foi relatado em <strong> %{TYPE} %{ID}: <em> %{NAME} </em> </strong>."
       notify_admin_invoicing_changed:
-        invoices_generation_was_STATUS_for_user_NAME_html: "A geração de faturas foi <strong> {STATUS, select, true {disabled} other {enabled}} </ strong> para o usuário {NAME}."  # messageFormat interpolation
+        invoices_generation_was_STATUS_for_user_NAME_html: "A geração de faturas foi <strong> {STATUS, select, true {disabled} other {enabled}} </strong> para o usuário {NAME}."  # messageFormat interpolation
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reserva foi feita por <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_(UID)_has_completed_its_information_html: "Conta importada para <strong><em>%{PROVIDER} </strong> (%{UID})</em> completou a sua informação."
       notify_admin_slot_is_canceled:
-        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "A reserva de <strong> <em> %{USER} </ em> </ strong>, na %{DATA}, foi cancelada. Lembre-se de gerar uma fatura de reembolso, se aplicável."
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "A reserva de <strong> <em> %{USER} </em> </strong>, na %{DATE}, foi cancelada. Lembre-se de gerar uma fatura de reembolso, se aplicável."
       notify_admin_slot_is_modified:
         a_booking_slot_was_modified: "Um slot de reserva foi modificado."
       notify_admin_subscribed_plan:
@@ -228,7 +228,7 @@ pt:
       notify_admin_subscription_canceled:
         USER_s_subscription_has_been_cancelled: "Assinatura do usuário %{USER} foi cancelado."
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "A assinatura <strong> <em> {PLAN} </ em> </ strong> do membro <strong> <em> {USER} </ strong> </ em> foi extendida {FREE, select, true{grátis} other{}} until {DATE}."  # messageFormat interpolation
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "A assinatura <strong> <em> {PLAN} </em> </strong> do membro <strong> <em> {USER} </strong> </em> foi extendida {FREE, select, true{grátis} other{}} until {DATE}."  # messageFormat interpolation
       notify_admin_subscription_is_expired:
         USER_s_subscription_has_expired: "A assinatura do usuário %{USER} expirou."
       notify_admin_subscription_will_expire_in_7_days:
@@ -236,7 +236,7 @@ pt:
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "Usuário <strong><em>{NAME}</strong></em> mudou {GENDER, select, true{seu} other{seu}} grupo."  # messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html: "Usuário <strong><em>{NAME}</strong></em> vinculou {GENDER, select, true{sua} other{sua}} conta com a importada de <strong> <em> {PROVIDER} </ strong> ({UID}) </ em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html: "Usuário <strong><em>{NAME}</strong></em> vinculou {GENDER, select, true{sua} other{sua}} conta com a importada de <strong> <em> {PROVIDER} </strong> ({UID}) </em>."  # messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Projeto <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> foi publicado."
       notify_admin_when_user_is_created:
@@ -254,17 +254,17 @@ pt:
       notify_member_subscribed_plan:
         you_have_subscribed_to_PLAN_html: "Você assinou <strong><em>%{PLAN}</em></strong>."
       notify_member_subscribed_plan_is_changed:
-        you_have_changed_your_subscription_to_PLAN_html: "Você alterou sua assinatura para <strong> <em> %{PLAN} </ em> </ strong>."
+        you_have_changed_your_subscription_to_PLAN_html: "Você alterou sua assinatura para <strong> <em> %{PLAN} </em> </strong>."
       notify_member_subscription_canceled:
         your_subscription_PLAN_was_successfully_cancelled_html: "Sua assinatura <strong><em>%{PLAN}</em></strong> foi cancelada com sucesso."
       notify_member_subscription_extended:
-        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Sua inscrição <strong> <em> {PLAN} </ em> </ strong> foi estendida {FREE, select, true{for free} other{}} until {DATE}."  # messageFormat interpolation
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Sua inscrição <strong> <em> {PLAN} </em> </strong> foi estendida {FREE, select, true{for free} other{}} until {DATE}."  # messageFormat interpolation
       notify_member_subscription_is_expired:
         your_subscription_has_expired: "Sua assinatura expirou."
       notify_member_subscription_will_expire_in_7_days:
         your_subscription_will_expire_in_7_days: "Sua assiantura expira em 7 dias."
       notify_partner_subscribed_plan:
-        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "A assinatura de parceiros <strong> <em>%{PLAN} </ em> </ strong> foi assinada por <strong> <em> %{USER} </ strong> </ em."
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "A assinatura de parceiros <strong> <em>%{PLAN} </em> </strong> foi assinada por <strong> <em> %{USER} </strong> </ em."
       notify_project_author_when_collaborator_valid:
         USER_became_collaborator_of_your_project: "%{USER} tornou-se colaborador do seu projeto:"
       notify_project_collaborator_to_valid:
@@ -274,7 +274,7 @@ pt:
       notify_user_profile_complete:
         your_profile_was_completed: "Seu perfil foi concluído com êxito, agora você tem acesso a toda a plataforma."
       notify_user_training_valid:
-        your_TRAINING_was_validated_html: "Seu treinamento <strong> <em>%{TRAINING} </ em> </ strong> foi validado com êxito."
+        your_TRAINING_was_validated_html: "Seu treinamento <strong> <em>%{TRAINING} </em> </strong> foi validado com êxito."
       notify_user_user_group_changed:
         your_group_has_changed: "O seu grupo mudou."
       notify_user_when_avoir_ready:
