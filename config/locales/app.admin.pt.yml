@@ -410,7 +410,9 @@ pt:
 
       members_new:
         # add a member
-        add_a_member: "Adicionar membro"
+        members_new:
+          add_a_member: "Adicionar membro"
+          user_is_an_organization: "Usuário é uma organização"
 
       members_edit:
         # edit a member

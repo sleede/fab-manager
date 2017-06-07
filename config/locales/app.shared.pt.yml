@@ -410,10 +410,10 @@ pt:
         # module de panier d'achat de réservations
         cart:
           summary: "Sumário"
-          select_one_or_more_slots_in_the_calendar: "Selecionar um {SINGLE, select, true{slot} outro {ou mais slots}} no calendário"  # messageFormat interpolation
+          select_one_or_more_slots_in_the_calendar: "Selecionar um {SINGLE, select, true{slot} other{ou mais slots}} no calendário"  # messageFormat interpolation
           you_ve_just_selected_the_slot: "Você selecionou apenas o slot:"
           datetime_to_time: "{{START_DATETIME}} até {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-          cost_of_TYPE: "Custo de {TYPE, select, Máquina{máquina hora} Treinamento{o treinamento} outro{o elemento}}"  # messageFormat interpolation
+          cost_of_TYPE: "Custo de {TYPE, select, Machine{máquina hora} Training{o treinamento} other{o elemento}}"  # messageFormat interpolation
           offer_this_slot: "Oferecer este slot"
           confirm_this_slot: "Confirmar este slot"
           remove_this_slot: "Remover este slot"
@@ -424,7 +424,7 @@ pt:
           _subscription: "inscrição"
           cost_of_the_subscription: "Custo da inscrição"
           confirm_and_pay: "Confirmar e pagar"
-          you_have_settled_the_following_machine_hours: "Você liquidou o seguinte {TYPE, select, Máquina{horas máquina} Treinamento{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_the_following_machine_hours: "Você liquidou o seguinte {TYPE, select, Machine{horas máquina} Training{training} other{elements}}:"  # messageFormat interpolation
           you_have_settled_a_: "Você tem liquidado:"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso !"
