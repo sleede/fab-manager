@@ -206,8 +206,15 @@ class Reservation < ActiveRecord::Base
   end
 
   def save_with_payment(coupon_code = nil)
-    build_invoice(user: user)
-    invoice_items = generate_invoice_items(false, coupon_code)
+    begin
+      clean_pending_strip_invoice_items
+      build_invoice(user: user)
+      invoice_items = generate_invoice_items(false, coupon_code)
+    rescue => e
+      logger.error e
+      errors[:payment] << e.message
+      return false
+    end
     if valid?
       # TODO: refactoring
       customer = Stripe::Customer.retrieve(user.stp_customer_id)
@@ -249,6 +256,12 @@ class Reservation < ActiveRecord::Base
           stp_invoice = Stripe::Invoice.create(
             customer: user.stp_customer_id,
           )
+          # cf: https://board.sleede.com/project/sleede-fab-manager/issue/77
+          # this function only check reservation total is equal strip invoice total when
+          # pay only reservation not reservation + subscription
+          #if !is_equal_reservation_total_and_stp_invoice_total(stp_invoice, coupon_code)
+            #raise InvoiceTotalDiffrentError
+          #end
           stp_invoice.pay
           card.delete if card
           self.stp_invoice_id = stp_invoice.id
@@ -256,39 +269,39 @@ class Reservation < ActiveRecord::Base
           set_total_and_coupon(coupon_code)
           save!
         rescue Stripe::CardError => card_error
-          clear_payment_info(card, stp_invoice, invoice_items)
+          clear_payment_info(card, stp_invoice)
           logger.info card_error
           errors[:card] << card_error.message
           return false
         rescue Stripe::InvalidRequestError => e
           # Invalid parameters were supplied to Stripe's API
-          clear_payment_info(card, stp_invoice, invoice_items)
+          clear_payment_info(card, stp_invoice)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::AuthenticationError => e
           # Authentication with Stripe's API failed
           # (maybe you changed API keys recently)
-          clear_payment_info(card, stp_invoice, invoice_items)
+          clear_payment_info(card, stp_invoice)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::APIConnectionError => e
           # Network communication with Stripe failed
-          clear_payment_info(card, stp_invoice, invoice_items)
+          clear_payment_info(card, stp_invoice)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue Stripe::StripeError => e
           # Display a very generic error to the user, and maybe send
           # yourself an email
-          clear_payment_info(card, stp_invoice, invoice_items)
+          clear_payment_info(card, stp_invoice)
           logger.error e
           errors[:payment] << e.message
           return false
         rescue => e
           # Something else happened, completely unrelated to Stripe
-          clear_payment_info(card, stp_invoice, invoice_items)
+          clear_payment_info(card, stp_invoice)
           logger.error e
           errors[:payment] << e.message
           return false
@@ -300,15 +313,20 @@ class Reservation < ActiveRecord::Base
     end
   end
 
-  def clear_payment_info(card, invoice, invoice_items)
+  # check reservation amount total and strip invoice total to pay is equal
+  # @params stp_invoice[Stripe::Invoice]
+  # @params coupon_code[String]
+  # return Boolean
+  def is_equal_reservation_total_and_stp_invoice_total(stp_invoice, coupon_code = nil)
+    compute_amount_total_to_pay(coupon_code) == stp_invoice.total
+  end
+
+  def clear_payment_info(card, invoice)
     begin
       card.delete if card
       if invoice
         invoice.closed = true
         invoice.save
-      end
-      if invoice_items.size > 0
-        invoice_items.each(&:delete)
       end
     rescue Stripe::InvalidRequestError => e
       logger.error e
@@ -323,6 +341,12 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  def clean_pending_strip_invoice_items
+    pending_invoice_items = Stripe::InvoiceItem.list(customer: user.stp_customer_id, limit: 100).data.select { |ii| ii.invoice.nil? }
+    pending_invoice_items.each do |ii|
+      ii.delete
+    end
+  end
 
   def save_with_local_payment(coupon_code = nil)
     if user.invoicing_disabled?
@@ -461,6 +485,20 @@ class Reservation < ActiveRecord::Base
         raise DebitWalletError
       end
     end
+  end
+
+  # this function only use for compute total of reservation before save
+  def compute_amount_total_to_pay(coupon_code = nil)
+    total = invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+)
+    unless coupon_code.nil?
+      cp = Coupon.find_by(code: coupon_code)
+      if not cp.nil? and cp.status(user.id) == 'active'
+        total = CouponService.new.apply(total, cp, user.id)
+      else
+        raise InvalidCouponError
+      end
+    end
+    return total - get_wallet_amount_debit
   end
 
   ##
