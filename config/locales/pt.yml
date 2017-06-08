@@ -1,0 +1,358 @@
+pt:
+
+  duration:
+    # subscription plan duration
+    year:
+      one: 'um ano'
+      other: '%{count} anos'
+    month:
+      one: 'um mês'
+      other: '%{count} meses'
+    week:
+      one: 'uma semana'
+      other: '%{count} semanas'
+
+  time:
+    formats:
+      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
+      hour_minute: "%I:%M %p"
+
+  errors: &errors
+    messages: &errors_messages
+      # CarrierWave
+      carrierwave_processing_error: "falhou ao ser processado"
+      carrierwave_integrity_error: "não é de um tipo de arquivo permitido"
+      carrierwave_download_error: "não pode ser baixado"
+      extension_white_list_error: "Você não tem permissão para fazer o upload de arquivos com esta extensão %{extension}, tipos permitidos: %{allowed_types}"
+      extension_black_list_error: "Você não tem permissão para carregar arquivos %{extension}, tipos proibidos: %{prohibited_types}"
+      rmagick_processing_error: "Falha ao manipular com rmagick, talvez não seja uma imagem? Erro original: %{e}"
+      mime_types_processing_error: "Falha ao processar arquivo com MIME::Types, talvez o conteúdo não seja válido? Erro original: %{e}"
+      mini_magick_processing_error: "Falha na manipulação com MiniMagick, talvez isso não seja uma imagem? Erro original: %{e}"
+      wrong_size: "é o tamanho errado (deveria ser %{file_size})"
+      size_too_small: "é muito pequeno (deve ser pelo menos %{file_size})"
+      size_too_big: "é muito grande (deve ser no máximo %{file_size})"
+      export_not_found: "A exportação solicitada não foi encontrada. Ele provavelmente foi excluído, por favor, gere uma nova exportação."
+      percentage_out_of_range: "A porcentagem deve ser incluída entre 0 e 100"
+      cannot_be_blank_at_same_time: "Não pode ficar em branco quando %{field} estiver em branco também"
+      cannot_be_in_the_past: "não pode ser no passado"
+      cannot_be_before_previous_value: "não pode ser antes do valor anterior"
+
+  activemodel:
+    errors:
+      <<: *errors
+
+  apipie:
+    api_documentation: "Documentação da API"
+
+  omniauth:
+    # error messages when importing an account from a SSO
+    email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\" já está vinculado a outra conta, insira seu código de autenticação."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Seu nome de usuário ( %{USERNAME}) já está vinculado a outra conta, não conseguindo atualizá-lo."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Seu endereço de e-mail ( %{EMAIL}) já está vinculado a outra conta, não conseguindo atualizá-lo."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Esta conta %{NAME} já está ligada a um utilizador da plataforma."
+
+  availabilities:
+    # availability slots in the calendar
+    not_available: "Não disponível "
+    i_ve_reserved: "Eu reservei"
+    must_be_at_least_1_hour_after_the_start_date: "deve ser pelo menos 1 hora após a data de início"
+    must_be_associated_with_at_least_1_machine: "deve estar associada a pelo menos uma máquina"
+
+  members:
+    # members management
+    unable_to_change_the_group_while_a_subscription_is_running: "Não é possível alterar o grupo enquanto uma assinatura está sendo executada"
+    please_input_the_authentication_code_sent_to_the_address: "Por favor insira o código de autenticação enviado para seu endereço de email %{EMAIL}"
+    your_authentication_code_is_not_valid: "Seu código de autentiicação não é válido."
+    current_authentication_method_no_code: "O método de autenticação atual não requer nenhum código de migração"
+    requested_account_does_not_exists: "A conta requisitada não existe"
+
+  invoices:
+    # PDF invoices generation
+    refund_invoice_reference: "Referência da fatura de reembolso: %{REF}"
+    invoice_reference: "Fatura de referência: %{REF}"
+    code: "Código: %{CODE}"
+    order_number: "Ordem #: %{NUMBER}"
+    invoice_issued_on_DATE: "Fatura emitida em %{DATE}"
+    refund_invoice_issued_on_DATE: "Reembolso emitido em %{DATE}"
+    wallet_credit: "Carteira de crédito"
+    cancellation_of_invoice_REF: "Cancelamento de fatura %{REF}"
+    reservation_of_USER_on_DATE_at_TIME: "Reserva de %{USER} em %{DATE} ás %{TIME}"
+    cancellation: "Cancelamento"
+    object: "Objeto:"
+    order_summary: "Sumário de ordem:"
+    details: "Detalhes"
+    amount: "Montante"
+    subscription_extended_for_free_from_START_to_END: "Assinatura grátis extendida - De %{START} até %{END}"
+    subscription_NAME_from_START_to_END: "Assinatura - De %{START} até %{END}"
+    machine_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
+    space_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
+    training_reservation_DESCRIPTION: "Reserva de treinamneto - %{DESCRIPTION}"
+    event_reservation_DESCRIPTION: "Reserva de evento - %{DESCRIPTION}"
+    full_price_ticket:
+      one: "Um ticket de preço cheio"
+      other: "%{count} tickets de preço cheio"
+    other_rate_ticket:
+      one: "Um %{NAME} ticket"
+      other: "%{count} %{NAME} tickets"
+    reservation_other: "Reserva (outro)"
+    coupon_CODE_discount_of_DISCOUNT: "Cupom {CODE}: desconto de {DISCOUNT}{TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
+    total_including_all_taxes: "Total de taxas inclusas"
+    including_VAT_RATE: "Incluindo VAT %{RATE}%"
+    including_total_excluding_taxes: "Incluindo total de faixas exclusas"
+    including_amount_payed_on_ordering: "Incluindo o valor pago na encomenda"
+    total_amount: "Montante total"
+    refund_on_DATE: "Reembolso em %{DATE}"
+    by_stripe_online_payment: "por Stripe (pagamento online)"
+    by_cheque: "em cheque"
+    by_transfer: "por transferência"
+    by_cash: "em dinheiro"
+    no_refund: "Sem reembolso"
+    by_wallet: "pela carteira"
+    settlement_by_debit_card: "Liquidação por cartão de débito"
+    settlement_done_at_the_reception: "Liquidação feita na recepção"
+    settlement_by_wallet: "Liquidação por carteira"
+    on_DATE_at_TIME: "em %{DATE} ás %{TIME},"
+    for_an_amount_of_AMOUNT: "para uma quantidade de %{AMOUNT}"
+    on_DATE_from_START_to_END: "Em %{DATE} de %{START} até %{END}" # eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "De %{STARTDATE} até %{ENDDATE}, das %{STARTTIME} ás %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Assinatura de %{NAME} de %{DURATION} começando em %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Assinatura de %{NAME} estendida (dias livres) a partir de% STARTDATE até %{ENDDATE}"
+    and: 'e'
+
+  trainings:
+    # training availabilities
+    i_ve_reserved: "Eu reservei"
+    completed: "Cheio"
+
+  events:
+    # error messages when updating an event
+    error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
+    other_error: "Um erro inesperado ocorreu enquanto o evento era atualizado"
+
+  export_members:
+    # members list export to EXCEL format
+    members: "Membros"
+    id: "ID"
+    surname: "Sobrenome"
+    first_name: "Primeiro nome"
+    email: "E-mail"
+    newsletter: "Newsletter"
+    gender: "Gênero"
+    age: "Idade"
+    address: "Endereço"
+    phone: "Telefone"
+    website: "Website"
+    job: "Emprego"
+    interests: "Interesses"
+    cad_software_mastered: "CAD Softwares mastered"
+    group: "Grupo"
+    subscription: "Assinatura"
+    subscription_end_date: "Assinatura e data"
+    validated_trainings: "Treinamentos validados"
+    tags: "Tags"
+    number_of_invoices: "Número de faturas"
+    invoicing_disabled: "Fatura desativada"
+    projects: "Projetos"
+    facebook: "Facebook"
+    twitter: "Twitter"
+    echo_sciences: "Ecociências"
+    organization: "Organização"
+    organization_address: "Endereço da organização"
+    man: "Homem"
+    woman: "Mulher"
+    without_subscriptions: "Sem assinaturas"
+
+  export_reservations:
+    # machines/trainings/events reservations list to EXCEL format
+    reservations: "Reservas"
+    customer_id: "ID do cliente"
+    customer: "Cliente"
+    email: "E-mail"
+    reservation_date: "Data de reserva"
+    reservation_type: "Tipo de reserva"
+    reservation_object: "Objeto de reserva"
+    slots_number_hours_tickets: "Número de slots (horas/tickets)"
+    payment_method: "Método de pagamento"
+    local_payment: "Pagamento na recepção"
+    online_payment: "Pagamento online"
+
+  export_subscriptions:
+    # subscriptions list export to EXCEL format
+    subscriptions: "Assinaturas"
+    id: "ID"
+    customer: "Cliente"
+    email: "E-mail"
+    subscription: "Assiantura"
+    period: "Período"
+    start_date: "Data de início"
+    expiration_date: "Data de expiração"
+    amount: "Montante"
+    payment_method: "Método de pagamento"
+    local_payment: "Pagamento na recepção"
+    online_payment: "Pagamento online"
+
+  export_availabilities:
+    # reservation slots export, by type, to EXCEL format
+    machines: "Máquinas"
+    trainings: "Treinamentos"
+    spaces: "Espaços"
+    events: "Eventos"
+    day_of_week: "Dia da semana"
+    date: "Data"
+    slot: "Slot"
+    machine: "Máquina"
+    training: "Treinamento"
+    space: "Espaço"
+    event: "Evento"
+    reservations: "Reservas"
+    available_seats: "Assentos disponíveis"
+
+
+  api:
+    notifications:
+      # internal app notifications
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "Um abuso foi relatado em <strong> %{TYPE} %{ID}: <em> %{NAME} </em> </strong>."
+      notify_admin_invoicing_changed:
+        invoices_generation_was_STATUS_for_user_NAME_html: "A geração de faturas foi <strong> {STATUS, select, true {disabled} other {enabled}} </strong> para o usuário {NAME}."  # messageFormat interpolation
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reserva foi feita por <strong><em>%{USER}</em></strong>."
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_(UID)_has_completed_its_information_html: "Conta importada para <strong><em>%{PROVIDER} </strong> (%{UID})</em> completou a sua informação."
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "A reserva de <strong> <em> %{USER} </em> </strong>, na %{DATE}, foi cancelada. Lembre-se de gerar uma fatura de reembolso, se aplicável."
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "Um slot de reserva foi modificado."
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "Assinatura <strong><em>%{PLAN}</em></strong> foi adquirida por <strong><em>%{USER}</strong></em>."
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "Assinatura do usuário %{USER} foi cancelado."
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "A assinatura <strong> <em> {PLAN} </em> </strong> do membro <strong> <em> {USER} </strong> </em> foi extendida {FREE, select, true{grátis} other{}} until {DATE}."  # messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "A assinatura do usuário %{USER} expirou."
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "A assinatura do usuário %{USER} expira em 7 dias."
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "Usuário <strong><em>{NAME}</strong></em> mudou {GENDER, select, true{seu} other{seu}} grupo."  # messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html: "Usuário <strong><em>{NAME}</strong></em> vinculou {GENDER, select, true{sua} other{sua}} conta com a importada de <strong> <em> {PROVIDER} </strong> ({UID}) </em>."  # messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "Projeto <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> foi publicado."
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "Nova conta de usuário foi criada: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_(UID)_html: "Nova conta de usuário foi importada de: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "Sua reserva <strong><em>%{RESERVABLE}</em></strong> foi feita com sucesso."
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "Lembrete: Você tem uma reserva <strong>%{RESERVABLE}</strong> a ser realizada em <em>%{DATE}</em>"
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "Sua reserva %{RESERVABLE} em %{DATE} foi cancelada com sucesso."
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "Seu slot de reserva foi alterado com sucesso."
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "Você assinou <strong><em>%{PLAN}</em></strong>."
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "Você alterou sua assinatura para <strong> <em> %{PLAN} </em> </strong>."
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "Sua assinatura <strong><em>%{PLAN}</em></strong> foi cancelada com sucesso."
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Sua inscrição <strong> <em> {PLAN} </em> </strong> foi estendida {FREE, select, true{for free} other{}} until {DATE}."  # messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "Sua assinatura expirou."
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "Sua assiantura expira em 7 dias."
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "A assinatura de parceiros <strong> <em>%{PLAN} </em> </strong> foi assinada por <strong> <em> %{USER} </strong> </ em."
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project: "%{USER} tornou-se colaborador do seu projeto:"
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "Você está convidado a colaborar no projeto:"
+      notify_user_auth_migration:
+        your_account_was_migrated: "Sua conta foi migrada com êxito para o novo sistema de autenticação."
+      notify_user_profile_complete:
+        your_profile_was_completed: "Seu perfil foi concluído com êxito, agora você tem acesso a toda a plataforma."
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "Seu treinamento <strong> <em>%{TRAINING} </em> </strong> foi validado com êxito."
+      notify_user_user_group_changed:
+        your_group_has_changed: "O seu grupo mudou."
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "Sua fatura de reembolso #%{REFERENCE}, de %{AMOUNT}, está pronta. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Clique aqui para fazer o download</a>."
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "Sua fatura #%{REFERENCE}, de %{AMOUNT} está pronta. <a href='api/invoices/%{INVOICE_ID}/download' target='_blank'>Clique aqui para fazer o download</a>."
+      undefined_notification:
+        unknown_notification: "Notificação desconhecida"
+        notification_ID_wrong_type_TYPE_unknown: "Notificação %{ID} errada (tipo %{TYPE} desconhecido)"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "Sua carteira foi creditada pelo administrador"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "A carteira do membro %{USER} foi creditada %{AMOUNT}"
+      notify_admin_export_complete:
+        export: "A exportação"
+        statistics_global: "de todas as estatísticas"
+        statistics_account: "das estatísticas de registro"
+        statistics_event: "de estatísticas sobre eventos"
+        statistics_machine: "de estatísticas sobre horas de máquina"
+        statistics_project: "de estatísticas sobre projetos"
+        statistics_subscription: "de estatísticas de assinatura"
+        statistics_training: "de estatísticas sobre treinamentos"
+        statistics_space: "as estatísticas sobre reserva de espaços"
+        users_members: "da lista de membros"
+        users_subscriptions: "da lista de assinaturas"
+        users_reservations: "da lista de reservas"
+        availabilities_index: "de reservas disponíveis"
+        is_over: "está finalizado."
+        download_here: "Baixe aqui"
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
+
+  statistics:
+    # statistics tools for admins
+    subscriptions: "Assinaturas"
+    machines_hours: "Horas de máquina"
+    spaces: "Espaços"
+    trainings: "Treinamentos"
+    events: "Eventos"
+    registrations: "Inscrições"
+    projects: "Projetos"
+    users: "Usuários"
+    training_id: "ID de treinamento"
+    training_date: "Data de treinamento"
+    event_id: "ID de evento"
+    event_date: "Data do evento"
+    event_name: "Nome do evento"
+    event_theme: "Tema"
+    age_range: "Faixa etária"
+    themes: "Temas"
+    components: "Componentes"
+    machines: "Máquinas"
+    user_id: "ID de usuário"
+    bookings: "Reservas"
+    hours_number: "Número de horas"
+    tickets_number: "Número de vagas"
+    revenue: "Receita"
+    account_creation: "Criação de conta"
+    project_publication: "Publicação de projeto"
+
+  export:
+    # statistics exports to the excel file format
+    entries: "Entradas"
+    revenue: "Receita"
+    average_age: "Idade média"
+    total: "Total"
+    date: "Data"
+    user: "Usuário"
+    email: "Email"
+    phone: "Telefone"
+    gender: "Gênero"
+    age: "Idade"
+    type: "Tipo"
+    revenue: "Receita"
+    male: "Homem"
+    female: "Mulher"
+
+  price_category:
+    # initial price's category for events, created to replace the old "reduced amount" property
+    reduced_fare: "Tarifa reduzida"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarifa reduzida se tiver menos de 25 anos, estudante ou desempregado."
