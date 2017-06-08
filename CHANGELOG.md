@@ -1,8 +1,9 @@
 # Changelog Fab Manager
 
-## next release
+## v2.5.7 2017 June 8
 
 - Portuguese and Brazilian support
+- Fix a bug: reservation amount total isnt equal stripe invoice amount that be paid by customer
 
 ## v2.5.6 2017 May 18
 
