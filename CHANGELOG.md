@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- add task `rake fablab:get_incoherent_invoice` allow find the invoices incoherent
+
 ## v2.5.7 2017 June 8
 
 - Portuguese and Brazilian support
