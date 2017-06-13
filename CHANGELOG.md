@@ -2,6 +2,7 @@
 
 ## next release
 
+- Fix a bug: hide spaces in public calendar when module is disabled
 - Fix a bug: confirmation message not shown after admin creation
 - add task `rake fablab:get_incoherent_invoice` allow find the invoices incoherent
 
