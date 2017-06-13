@@ -555,7 +555,7 @@ Application.Controllers.controller "NewMemberController", ["$scope", "$state", "
 ##
 # Controller used in the admin's creation page (admin view)
 ##
-Application.Controllers.controller 'NewAdminController', ['$state', '$scope', 'Admin', 'growl', ($state, $scope, Admin, growl)->
+Application.Controllers.controller 'NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', ($state, $scope, Admin, growl, _t)->
 
   ## default admin profile
   $scope.admin =

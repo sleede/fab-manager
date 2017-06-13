@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fix a bug: confirmation message not shown after admin creation
 - add task `rake fablab:get_incoherent_invoice` allow find the invoices incoherent
 
 ## v2.5.7 2017 June 8
