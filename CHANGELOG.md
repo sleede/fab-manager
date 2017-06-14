@@ -2,6 +2,7 @@
 
 ## next release
 
+- Fix a bug: when upgrading from version < 2.5.0, `db:seed` will throw an error if ADMIN_EMAIL does not match any admin in database
 - Fix a bug: hide spaces in public calendar when module is disabled
 - Fix a bug: confirmation message not shown after admin creation
 - add task `rake fablab:get_incoherent_invoice` allow find the invoices incoherent
