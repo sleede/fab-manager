@@ -12,7 +12,6 @@ class API::EventsController < API::ApiController
 
     # paginate
     @events = @events.page(@page).per(12)
-
   end
 
   # GET /events/upcoming/:limit
@@ -38,11 +37,20 @@ class API::EventsController < API::ApiController
 
   def update
     authorize Event
-    if @event.update(event_params.permit!)
-      render :show, status: :ok, location: @event
-    else
-      render json: @event.errors, status: :unprocessable_entity
+    begin
+      if @event.update(event_params.permit!)
+        render :show, status: :ok, location: @event
+      else
+        render json: @event.errors, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordNotDestroyed => e
+      if e.record.class.name == 'EventPriceCategory'
+        render json: {error: ["#{e.record.price_category.name}: #{t('events.error_deleting_reserved_price')}"]}, status: :unprocessable_entity
+      else
+        render json: {error: [t('events.other_error')]}, status: :unprocessable_entity
+      end
     end
+
   end
 
   def destroy
@@ -69,7 +77,7 @@ class API::EventsController < API::ApiController
                                                     :age_range_id, event_theme_ids: [],
                                                     event_image_attributes: [:attachment],
                                                     event_files_attributes: [:id, :attachment, :_destroy],
-                                                    event_price_categories_attributes: [:id, :price_category_id, :amount]
+                                                    event_price_categories_attributes: [:id, :price_category_id, :amount, :_destroy]
       )
       # handle dates & times (whole-day events or not, maybe during many days)
       start_date = Time.zone.parse(event_preparams[:start_date])

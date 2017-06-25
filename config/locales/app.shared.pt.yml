@@ -1,0 +1,450 @@
+pt:
+  app:
+    shared:
+      buttons:
+        # translations of common buttons
+        confirm_changes: "Confirmar mudanças"
+        consult: "Consultar"
+        edit: "Editar"
+        change: "Alterar"
+        delete: "Deletar"
+        browse: "Navegar"
+        cancel: "Cancelar"
+        close: "Fechar"
+        clear: "Limpar"
+        today: "Hoje"
+        confirm: "Confirmar"
+        save: "Salvar"
+        "yes": "Sim"
+        "no": "Não"
+        apply: "Aplicar"
+        confirm_(payment_on_site): "Confirmar (Pagamento no site)"
+
+      elements:
+        # various translations used many times in the application
+        group: "Grupo"
+        subscription: "Assinaturas"
+        trainings: "Treinamentos"
+        no_trainings: "Sem treinamentos"
+        confirmation_required: "Confirmação obrigatória"
+        description: "Descrição"
+        machines: "Máquinas"
+        events: "Eventos"
+        materials: "Materiais"
+        date: "Data"
+        price: "Preço"
+        download_the_invoice: "Baixar a fatura"
+        download_the_credit_note: "Baixar a nota de crédito"
+        no_invoices_for_now: "Nenhuma fatura."
+        email_address: "Email"
+        user: "Usuário"
+        pseudonym: "Apelido"
+        all_day: "Dia todo"
+        reservation_was_successfully_cancelled: "Reserva cancelada com sucesso."
+        title: "Título"
+        total_: "TOTAL :"
+        full_price_: "Valor inteira:"
+        rough_draft: "Rascunho"
+        machines_and_materials: "Máquinas e materiais"
+        collaborators: "Colaboradores"
+        summary: "Sumário"
+        you_ve_just_selected_a_: "Você selecionou apenas o"  # you_ve_just_selected_a_ + _subscription
+        _subscription: "inscrição"
+        confirm_and_pay: "Confirmar e pagar"
+        your_invoice_will_be_available_soon_from_your_: "Sua fatura estará disponível em breve"
+        add_an_event: "Adicionar um evento"
+        load_the_next_events: "Carregar próximos eventos..."
+        no_passed_events: "Sem eventos"
+        dates: "Datas:"
+        thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso !"
+        surname: "Sobrenome"
+        first_name: "Primeiro nome"
+        address: "Endereço"
+        interests: "Interesses"
+        CAD_softwares_mastered: "CAD Softwares mastered"
+        name: "Nome"
+        step_N: "Passo {{INDEX}}"  # angular interpolation
+        themes: "Temas"
+        tags: "Tags"
+        technical_specifications: "Especificações técnicas"
+        online_payment: "Pagamento Online"
+        type: "Tipo"
+        partner: "Parceiro"
+        standard: "Padrão"
+        year: "Ano"
+        month: "Mês"
+        subscription_price: "Preço da assinatura"
+        model: "Modelo"
+        from_date: "De" # context: date. eg: "from 01/01 to 01/05"
+        from_time: "De" # context: time. eg. "from 18:00 to 21:00"
+        to_date: "até" # context: date. eg: "from 01/01 to 01/05"
+        to_time: "até"  # context: time. eg. "from 18:00 to 21:00"
+        or: "ou"
+        change_my_data: "Alterar meus dados"
+        sync_my_profile: "Sincronizar meu perfil"
+        once_your_data_are_up_to_date_: "Uma vez que seus dados estão atualizados,"
+        _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização"
+        _disconnect_then_reconnect_: "disconecte e se conecte novamente"
+        _for_your_changes_to_take_effect: "para que suas alterações tenham efeitos."
+        add_a_project: "Adicionar projeto"
+        illustration: "Ilustração"
+        add_an_illustration: "Adicionar ilustração."
+        book: "Agendar"
+        description_is_required: "Descrição é obrigatório."
+        name_is_required: "Nome é obrigatório."
+        all_themes: "Todos temas"
+        filter: 'Filtro'
+        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
+        export_is_running_you_ll_be_notified_when_its_ready: "Exportação em andamento. Você será notificado quando terminar."
+        share_on_facebook: "Compartilhar no Facebook"
+        share_on_twitter: "Compartilhar no Twitter"
+        incomplete_profile: "Perfil incompleto"
+        unlimited: "Ilimitado"
+
+      messages:
+        you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Você irá perder todas as modificações não salvas se sair desta página"
+        you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Você irá perder todas as modificações não salvas se recarregar desta página"
+
+      user:
+        # user edition form
+        add_an_avatar: "Adicionar avatar"
+        pseudonym: "Apelido"
+        email_address_is_required: "E-mail é obrigatório."
+        change_password: "Alterar senha"
+        new_password: "Nova senha"
+        confirmation_of_new_password: "Confirmação da nova senha"
+        confirmation_of_password_is_required: "A confirmação da senha é obrigatória."
+        confirmation_of_password_is_too_short_(minimum_8_characters): "A confirmação da senha é muito curta (mínimo 8 caracteres)."
+        confirmation_mismatch_with_password: "Confirmação de senha é diferente da senha."
+        organization_name: "Nome da organização"
+        organization_address: "Endereço da organização"
+        date_of_birth: "Data de nascimento"
+        date_of_birth_is_required: "Data de nascimento é obrigatório."
+        website: "Website"
+        job: "Ocupação"
+
+      project:
+        # project edition form
+        illustration: "Ilustração"
+        add_an_illustration: "Adicionar ilustração"
+        CAD_file: "Arquivo do CAD"
+        allowed_extensions: "Extensões permitidas:"
+        add_a_new_file: "Adicionar novo arquivo"
+        steps: "Passos"
+        step_title: "Passo Título"
+        add_a_picture: "Adicionar imagem"
+        change_the_picture: "Alterar imagem"
+        delete_the_step: "Deletar este passo"
+        do_you_really_want_to_delete_this_step: "Você realmente deseja deletar este passo?"
+        add_a_new_step: "Adicionar novo passo"
+        publish_your_project: "Publicar seu projeto"
+        employed_materials: "Materiais utilizados"
+        employed_machines: "Máquinas utilizadas"
+        creative_commons_licences: "Licença Creative Commons"
+
+      machine:
+        # machine edition form
+        technical_specifications_are_required: "Especificações técnicas são obrigatórias."
+        attached_files_(pdf): "Arquivos anexos (pdf)"
+        attach_a_file: "Anexar arquivo"
+        add_an_attachment: "Adicionar anexo"
+        validate_your_machine: "Validar sua máquina"
+
+      plan_subscribe:
+        # frame to select a plan to subscribe
+        subscribe_online: "Inscrição online"
+        do_not_subscribe: "não inscrito"
+
+      member_select:
+        # admin: choose a member to interact with
+        select_a_member: "Selecionar um membro"
+        start_typing: "Escrevendo..."
+        please_select_a_member_first: "Por favor, primeiramente selecione um membro"
+
+      stripe:
+        # stripe payment modal
+        i_have_read_and_accept_: "Eu li e aceito"
+        _the_general_terms_and_conditions: "os termos e condições."
+        enter_your_card_number: "Entre com o número do seu cartão"
+        credit_amount_for_pay_reservation: "{{amount}} {{currency}} a ser pago para confirmar sua inscrição"
+        client_credit_amount_for_pay_reservation: "{{amount}} {{currency}}  a ser pago para confirmar a inscrição do cliente"
+
+      valid_reservation_modal:
+        # dialog of on site payment for reservations
+        booking_confirmation: "Confirmação de reserva"
+        here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Aqui está um resumo das reservas para o usuário atual:"
+
+      event:
+        # event edition form
+        title_is_required: "Título é obrigatório."
+        matching_visual: "Correspondência visual"
+        choose_a_picture: "Escolha uma imagem"
+        attachments: "Anexos"
+        add_a_new_file: "Adicionar um novo arquivo"
+        event_type: "Tipo de evento"
+        dates_and_opening_hours: "Datas e horas"
+        all_day: "Dia todo"
+        start_date: "Data de início"
+        end_date: "Data de término"
+        start_time: "Horário de início"
+        end_time: "Horário de término"
+        recurrence: "Recorrência"
+        _and_ends_on: "e acaba em"
+        prices_and_availabilities: "Preços e disponibilidades"
+        standard_rate: "Taxa padrão"
+        0_=_free: "0 = grátis"
+        tickets_available: "Tickets disponíveis"
+        event_theme: "Tema do evento"
+        age_range: "Faixa etária"
+
+      plan:
+        # subscription plan edition form
+        plan_form:
+          general_information: "Informação geral"
+          name: "Nome"
+          name_length_must_be_less_than_24_characters: "O nome deve conter no máximo 24 caracteres."
+          type: "Tipo"
+          type_is_required: "Tipo é obrigatório."
+          group: "Grupo"
+          transversal_(all_groups): "Transversal (todos os grupos)"
+          group_is_required: "Grupo é obrigatório."
+          number_of_periods: "Número de períodos"
+          number_of_periods_is_required: "Número de períodos é obrigatório."
+          period: "Período"
+          year: "Ano"
+          month: "Mês"
+          week: "Semana"
+          period_is_required: "Período é obrigatório."
+          subscription_price: "Preço de inscrição"
+          price_is_required: "Preço é obrigatório."
+          visual_prominence_of_the_subscription: "Proeminência visual da assinatura"
+          on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "Na página de inscrições a inscrição mais relevante aparecerá no topo da lista."
+          an_evelated_number_means_a_higher_prominence: "Um número elevado significa uma maior relevância."
+          rolling_subscription: "Assinatura contínua?"
+          a_rolling_subscription_will_begin_the_day_of_the_first_training: "A assinatura contínua começarrá no primeiro dia de treinamento."
+          otherwise_it_will_begin_as_soon_as_it_is_bought: "Caso contrário, elecomeçará assim que for comprado."
+          information_sheet: "Folha de informação"
+          attach_an_information_sheet: "Anexar folha de informação"
+          notified_partner: "Parceiro notificado"
+          new_user: "Novo usuário ..."
+          as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Como parte da inscrição do parceiro, algumas notificações podem ser enviadas para este usuário."
+          new_partner: "Novo parceiro"
+          email_address_is_required: "Email é obrigatório."
+
+      trainings:
+        # training edition form
+        add_a_new_training: "Adicionar um novo treinamento"
+        validate_your_training: "Validar seu treinamento"
+        associated_machines: "Máquinas associadas"
+        number_of_tickets: "Número de vagas"
+        public_page: "Mostrar na lista de treinamentos"
+
+      user_admin:
+        # partial form to edit/create an user (admin view)
+        user_profile: "Perfil de usuário"
+        warning_incomplete_user_profile_probably_imported_from_sso: "Atenção: Esse perfil de usuário está incompleto. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
+        group: "Grupo"
+        group_is_required: "Grupo é obrigatório"
+        disable_invoices_generation: "Desativar geração de faturas:"
+        no_more_invoices_will_be_generated_for_: "Mais nenhuma fatura será gerada para"
+        _the_payments_carried_out_at_the_reception_: "os pagamentos efetuados"
+        _regarding_this_user: "sobre este usuário."
+        trainings: "Treinamentos"
+
+      authentication:
+        # partial form to edit/create an authentication provider (SSO)
+        provider_name_is_required: "Nome da provider é obrigatório."
+        authentication_type: "Tipo de autenticação"
+        authentication_type_is_required: "Tipo de autenticação é obrigatório."
+        data_mapping: "Mapeando dados"
+        expected_data_type: "Esperado tipo de dado"
+        input_format: "Insira o formato"
+        mappings: "Mapeamentos"
+
+      oauth2:
+        # edition/creation form of an OAuth2 authentication provider
+        common_url: "Common URL"
+        common_url_is_required: "Common URL is required."
+        provided_url_is_not_a_valid_url: "Provided URL is not a valid URL."
+        authorization_endpoint: "Authorization endpoint"
+        oauth2_authorization_endpoint_is_required: "OAuth 2.0 authorization endpoint is required."
+        provided_endpoint_is_not_valid: "Provided endpoint is not valid."
+        token_acquisition_endpoint: "Token acquisition endpoint"
+        oauth2_token_acquisition_endpoint_is_required: "OAuth 2.0 token acquisition endpoint is required."
+        profil_edition_url: "Profil edition URL"
+        profile_edition_url_is_required: "Profile edition URL is required."
+        client_identifier: "Client identifier"
+        oauth2_client_identifier_is_required: "OAuth 2.0 client identifier is required."
+        obtain_it_when_registering_with_your_provider: "Obtain it when registering with your provider."
+        client_secret: "Client secret"
+        oauth2_client_secret_is_required: "OAuth 2.0 client secret is required."
+        define_the_fields_mapping: "Define the fields mapping"
+        add_a_match: "Add a match"
+        field: "Linhas"
+        api_endpoint_url: "API endpoint URL"
+        api_type: "API tipo"
+        api_fields: "API linhas"
+
+      confirm_modify_slot_modal:
+        # machine/training slot modification modal
+        change_the_slot: "Alterar o slot"
+        do_you_want_to_change_your_booking_slot_initially_planned_at: "Você deseja alterar seu agendamento, inicialmente marcado para:"
+        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Você deseja alterar o agendamento do usuário {{NAME}}, inicialmente marcado para:"  # angular interpolation
+        cancel_this_reservation: "Cancelar essa reserva"
+        i_want_to_change_date: "Eu quero alterar a data"
+
+      request_training_modal:
+        # modal introducing that a training is requested before booking a machine
+        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Para agendar \"{{MACHINE}}\" você deve completar o treinamento {{TRAINING}}."  # angular interpolation
+        register_for_the_training: "Inscrever-se no treinamento"
+        i_dont_want_to_register_now: "Não desejo me inscrever agora"
+
+      training_reservation_modal:
+        # modal introducing that a user must wait for his training being validated before booking a machine
+        machine_reservation: "Reserva de máquina"
+        you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Você deve esperar que seu treinamento seja validado pela equipe do FabLab para reservar esta máquina."
+        your_training_will_occur_: "Seu treinamento ocorrerá"
+
+      public_profile:
+        # user public profile
+        last_activity_: "Última atividade"
+        _on_: "em"
+        to_come: "vir"
+        approved: "aprovado"
+        projects: "Projetos"
+        no_projects: "Sem projetos"
+        author: "Autor"
+        collaborator: "Colaboradores"
+        private_profile: "Perfil privado"
+
+      wallet:
+        # wallet
+        wallet: 'Carteira'
+        your_wallet_amount: 'Seus créditos disponíveis'
+        wallet_amount: 'Crédito disponível'
+        no_transactions_for_now: 'Sem transações'
+        operation: 'Operação'
+        operator: 'Operador'
+        amount: 'Montante'
+        credit: 'Crédito'
+        debit: 'Débito'
+        credit_title: 'Crédito na carteira'
+        credit_label: 'Digite a quantia a ser creditada'
+        confirm_credit_label: 'Confirme a quantia a ser creditada'
+        generate_a_refund_invoice: "Gerar uma fatura de reembolso"
+        creation_date_for_the_refund: "Data de criação de reembolso"
+        creation_date_is_required: "Data de criação é obrigatório."
+        description_(optional): "Descrição (opcional):"
+        will_appear_on_the_refund_invoice: "Aparecerá na fatura de reembolso."
+        to_credit: 'Crédito'
+        wallet_credit_successfully: "Carteira de usuário creditada com sucesso."
+        a_problem_occurred_for_wallet_credit: "Um erro ocorreu ao creditar a carteira"
+        amount_is_required: "A quantia é obrigatório"
+        amount_minimum_1: "A quantia mínima é 1"
+        amount_confirm_is_required: "A confirmação da quantia é obrigatório"
+        amount_confirm_does_not_match: "A confirmação da quantia não é a mesma da quantia"
+        you_have_amount_in_wallet: "Você tem {{amount}} {{currency}} em sua carteira"
+        client_have_amount_in_wallet: "O cliente possui {{amount}} {{currency}} em sua carteira"
+        wallet_pay_reservation: "Você pode pagar diretamente sua reserva"
+        client_wallet_pay_reservation: "O cliente pode pagar diretamente a reserva"
+        debit_subscription: "Débito por inscrição"
+        debit_reservation_training: "Débito por reserva de treinamento"
+        debit_reservation_machine: "Débito por reserva de máquina"
+        debit_reservation_event: "Débito por reserva de evento"
+        warning_uneditable_credit: "Aviso: uma vez validado, o valor creditado não será mais editado."
+
+      coupon:
+        # promotional coupon (creation/edition form)
+        code: "Código"
+        code_is_required: "Código é obrigatório."
+        code_must_be_composed_of_capital_letters_digits_and_or_dashes: "O código deve ser composto de letras maiúsculas, dígitos e / ou traços."
+        kind_of_coupon: "Tipo de cupom"
+        percentage: "Porcentagem"
+        amount: "Quantia"
+        amount_off: "Desconto"
+        percent_off: "Desconto"
+        percent_off_is_required: "Desconto é obrigatório."
+        percentage_must_be_between_0_and_100: "A porcentagem deve estar entre 0 e 100."
+        validity_per_user: "Validar pelo usuário"
+        once: "Apenas uma vez"
+        forever: "Cada uso"
+        validity_per_user_is_required: "Validação por usuário é obrigatório."
+        valid_until: "Valido até (incluso)"
+        leave_empty_for_no_limit: "Não especifique nenhum limite deixando o campo vazio."
+        max_usages: "Máximo de usos permitido"
+        max_usages_must_be_equal_or_greater_than_0: "Os usos máximos permitidos devem ser maiores que 0."
+        enabled: "Ativo"
+
+      coupon_input:
+        # coupon (input zone for users)
+        i_have_a_coupon: "Eu tenho um cupom!"
+        code_: "Código:"
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "O cupom foi aplicado. Você recebeu {{PERCENT}}% de desconto."  # angular interpolation
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "O cupom foi aplicado. Você recebeu um desconto de {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
+        unable_to_apply_the_coupon_because_disabled: "Não é possível aplicar o cupom: este código foi desabilitado."
+        unable_to_apply_the_coupon_because_expired: "Não é possível aplicar o cupom: este código expirou."
+        unable_to_apply_the_coupon_because_sold_out: "Não é possível aplicar o cupom: este código atingiu sua quota."
+        unable_to_apply_the_coupon_because_already_used: "Não é possível aplicar o cupom: você já utilizou este código antes."
+        unable_to_apply_the_coupon_because_amount_exceeded: "Não é possível aplicar o cupom: o desconto excede o valor total desta compra."
+        unable_to_apply_the_coupon_because_undefined: "Não é possível aplicar o cupom: um erro inesperado aconteceu, por favor entre em contato com o FabLab."
+        unable_to_apply_the_coupon_because_rejected: "Este código não existe."
+
+      space:
+        # form to create/edit a space
+          space:
+            name: "Nome"
+            name_is_required: "Nome é obrigatório."
+            illustration: "Ilustração"
+            add_an_illustration: "Adicionar ilustração"
+            description: "Descrição"
+            description_is_required: "Descrição é obrigatório."
+            characteristics: "Características"
+            characteristics_are_required: "Características são obrigatórias."
+            attached_files_(pdf): "Arquivos anexos (pdf)"
+            attach_a_file: "Anexar arquivo"
+            add_an_attachment: "Adicionar um anexo"
+            default_places: "Tickets máximo padrão"
+            default_places_is_required: "Tickets máximo padrão é obrigatório."
+
+      cart:
+        # module de panier d'achat de réservations
+        cart:
+          summary: "Sumário"
+          select_one_or_more_slots_in_the_calendar: "Selecionar um {SINGLE, select, true{slot} other{ou mais slots}} no calendário"  # messageFormat interpolation
+          you_ve_just_selected_the_slot: "Você selecionou apenas o slot:"
+          datetime_to_time: "{{START_DATETIME}} até {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+          cost_of_TYPE: "Custo de {TYPE, select, Machine{máquina hora} Training{o treinamento} other{o elemento}}"  # messageFormat interpolation
+          offer_this_slot: "Oferecer este slot"
+          confirm_this_slot: "Confirmar este slot"
+          remove_this_slot: "Remover este slot"
+          to_benefit_from_attractive_prices: "Para se beneficiar de preços atractivos"
+          view_our_subscriptions: "Ver suas inscrições"
+          or: "ou"
+          you_ve_just_selected_a_: "Você selecionou apenas"
+          _subscription: "inscrição"
+          cost_of_the_subscription: "Custo da inscrição"
+          confirm_and_pay: "Confirmar e pagar"
+          you_have_settled_the_following_machine_hours: "Você liquidou o seguinte {TYPE, select, Machine{horas máquina} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_a_: "Você tem liquidado:"
+          total_: "TOTAL :"
+          thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso !"
+          your_invoice_will_be_available_soon_from_your_: "Sua fatura estará disponível em breve"
+          dashboard: "Dashboard"
+          i_want_to_change_the_following_reservation: "Eu quero mudar a seguinte reserva:"
+          cancel_my_modification: "Cancelar minha modificação"
+          select_a_new_slot_in_the_calendar: "Selecionar um novo slot no calendário"
+          cancel_my_selection: "Cancelar minha seleção"
+          tags_of_the_original_slot: "Tags do slot original:"
+          tags_of_the_destination_slot: "Tags do slot de destino:"
+          confirm_my_modification: "Confirmar minha modificação"
+          your_booking_slot_was_successfully_moved_from_: "Seu slot de reserva foi movido com sucesso para"
+          to_date: "até" # context: date. eg: "from 01/01 to 01/05"
+          please_select_a_member_first: "Por favor selecione o membro primeiramente"
+          unable_to_change_the_reservation: "Não permitido alterar esta reserva"
+          confirmation_required: "Confirmação é obrigatória"
+          do_you_really_want_to_cancel_this_reservation: "Você realmente quer cancelar essa reserva?"
+          reservation_was_cancelled_successfully: "Reserva a foi cancelada com sucesso."
+          cancellation_failed: "Cancelamento falhou."
+          confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
+          a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
+          none: "Vazio"

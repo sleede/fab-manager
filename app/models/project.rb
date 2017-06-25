@@ -21,6 +21,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :project_caos, allow_destroy: true, reject_if: :all_blank
 
   has_and_belongs_to_many :machines, join_table: :projects_machines
+  has_and_belongs_to_many :spaces, join_table: :projects_spaces
   has_and_belongs_to_many :components, join_table: :projects_components
   has_and_belongs_to_many :themes, join_table: :projects_themes
 

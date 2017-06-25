@@ -80,6 +80,8 @@ config(['$httpProvider', 'AuthProvider', "growlProvider", "unsavedWarningsConfig
 
       // Global config: if true, the whole 'Plans & Subscriptions' feature will be disabled in the application
       $rootScope.fablabWithoutPlans = Fablab.withoutPlans;
+      // Global config: it true, the whole 'Spaces' features will be disabled in the application
+      $rootScope.fablabWithoutSpaces = Fablab.withoutSpaces;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

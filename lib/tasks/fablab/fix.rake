@@ -25,5 +25,27 @@ namespace :fablab do
         end
       end
     end
+
+    task new_plans_statistics: :environment do
+      StatisticSubType.where(key: nil).each do |sst|
+        p = Plan.find_by(name: sst.label)
+        if p
+          sst.key = p.slug
+          sst.save!
+        end
+      end
+    end
+
+    task new_group_space_prices: :environment do
+      Space.all.each do |space|
+        Group.all.each do |group|
+          begin
+            Price.find(priceable: space, group: group)
+          rescue ActiveRecord::RecordNotFound
+            Price.create(priceable: space, group: group, amount: 0)
+          end
+        end
+      end
+    end
   end
 end

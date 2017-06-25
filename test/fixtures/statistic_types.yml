@@ -108,3 +108,23 @@ statistic_type_11:
   created_at: 2016-04-04 15:17:24.950033000 Z
   updated_at: 2016-04-04 15:17:24.950033000 Z
   simple: true
+
+statistic_type_12:
+  id: 12
+  statistic_index_id: 8
+  key: booking
+  label: Réservations
+  graph: true
+  created_at: 2017-02-13 14:11:24.742280000 Z
+  updated_at: 2017-02-13 14:11:24.742280000 Z
+  simple: true
+
+statistic_type_13:
+  id: 13
+  statistic_index_id: 8
+  key: hour
+  label: Nombre d'heures
+  graph: true
+  created_at: 2017-02-13 14:11:45.196140000 Z
+  updated_at: 2017-02-13 14:11:45.196140000 Z
+  simple: false

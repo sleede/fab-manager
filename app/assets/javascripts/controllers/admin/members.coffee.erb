@@ -535,6 +535,15 @@ Application.Controllers.controller "NewMemberController", ["$scope", "$state", "
   $scope.user =
     plan_interval: ''
 
+  ## Callback when the admin check/unckeck the box telling that the new user is an organization.
+  ## Disable or enable the organization fields in the form, accordingly
+  $scope.toggleOrganization = ->
+    if $scope.user.organization
+      $scope.user.profile = {} unless $scope.user.profile
+      $scope.user.profile.organization = {}
+    else
+      $scope.user.profile.organization = undefined
+
 
 
   ## Using the MembersController

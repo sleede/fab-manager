@@ -204,7 +204,9 @@ class Invoice < ActiveRecord::Base
 
   private
   def generate_and_send_invoice
-    puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), invoiced_type(#{invoiced_type}), user_id(#{user_id})"
+    unless Rails.env.test?
+      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), invoiced_type(#{invoiced_type}), user_id(#{user_id})"
+    end
     InvoiceWorker.perform_async(id)
   end
 

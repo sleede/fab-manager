@@ -1,6 +1,68 @@
 # Changelog Fab Manager
 
+## v2.5.7 2017 June 8
+
+- Portuguese and Brazilian support
+- Fix a bug: reservation amount total isnt equal stripe invoice amount that be paid by customer
+
+## v2.5.6 2017 May 18
+
+- Ability for admins to create users as organizations
+- Invoices object will contain the organization name if any (#64)
+- RSS feeds will return more data about events and projects, especially images
+- Improved Docker documentation (#65)
+
+## v2.5.5 2017 May 15
+
+- Fix a bug: New groups does not have their spaces prices initialized
+- Fix a bug: Unable to delete a group when its space prices are set
+- [TODO DEPLOY] `rake fablab:fix:new_group_space_prices` only if module 'Spaces' is/was enabled
+
+## v2.5.4 2017 May 4
+
+- Fix a bug: Unable to define application locale other than `fr` or `en`.
+- [TODO DEPLOY] add `APP_LOCALE` environment variable (see README.md for configuration details)
+
+## v2.5.3 2017 April 27
+
+- Project view: added responsive support on external images
+- Include rails localization support for 115 new locations
+
+## v2.5.2 2017 April 12
+
+- Extracts first admin created email and password into environment variables
+- [OPTIONAL: Only for a new installation] add `ADMIN_EMAIL` and  `ADMIN_PASSWORD` environment variable in `application.yml` or `env` file (with docker)
+
+## v2.5.1 2017 March 28
+
+- hide spaces in admin's credit management if spaces are disabled
+- Fix a bug: Can not display training tracking (this bug was introduced in version 2.5.0)
+- [TODO DEPLOY] `rake assets:precompile`
+
+## v2.5.0 2017 March 28
+
+- Ability to remove an unused custom price for an event (#61)
+- Prevent polling notifications when the application is in background
+- Ability to export the availabilities and their reservation rate from the admin calendar
+- Ability to create, manage and reserve spaces
+- Improved admin's interface to create availabilities
+- Complete rewrote of the reservation cart functionality with improved stability, performance and sustainability
+- Replaced letter_opener by MailCatcher to preview e-mails in development environments
+- Ability to create plans with durations based on weeks
+- Ease installations with docker-compose, in any directory (#63)
+- Fix a bug: trainings reservations are not shown in the admin's calendar
+- Fix a bug: unable to delete an administrator from the system
+- Fix a bug: unable to delete an event with a linked custom price (#61)
+- Fix a bug: navigation in client calendar is bogus when browsing months (#59)
+- Fix a bug: subscription name is not shown in invoices
+- Fix a bug: new plans statistics are not shown
+- [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
+- [TODO DEPLOY] `rake fablab:es_add_spaces`
+- [TODO DEPLOY] `rake fablab:fix:new_plans_statistics` if you have created plans from v2.4.10
+
 ## v2.4.11 2017 March 15
+
 - Fix a bug: editing and saving a plan, result in removing the rolling attribute
 - [TODO DEPLOY] `rake fablab:fix:rolling_plans`
 

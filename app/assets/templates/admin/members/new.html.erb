@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-8 b-l b-r">
         <section class="heading-title">
-          <h1 translate>{{ 'add_a_member' }}</h1>
+          <h1 translate>{{ 'members_new.add_a_member' }}</h1>
         </section>
 
       </div>
@@ -33,8 +33,23 @@
 
       <form role="form" name="userForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
 
-        <section class="panel panel-default bg-light m-lg"> 
-          <div class="panel-body m-r"> 
+        <section class="panel panel-default bg-light m-lg">
+          <div class="panel-body m-r">
+
+            <div class="row m-t">
+              <div class="col-sm-6 col-sm-offset-5">
+                <div class="form-group checkbox-group">
+                  <input type="checkbox"
+                         name="organization"
+                         id="organization"
+                         ng-model="user.organization"
+                         ng-change="toggleOrganization()"
+                         value="false"/>
+                  <label for="organization" translate>{{ 'members_new.user_is_an_organization' }}</label>
+                </div>
+              </div>
+            </div>
+
             <ng-include src="'<%= asset_path 'shared/_member_form.html' %>'"></ng-include>
 
             <ng-include src="'<%= asset_path 'admin/members/_form.html' %>'"></ng-include>

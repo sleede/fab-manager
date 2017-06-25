@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'pricing_management' }}</h1>
+        <h1 translate>{{ 'pricing.pricing_management' }}</h1>
       </section>
     </div>
 
@@ -21,23 +21,27 @@
     <div class="col-md-12">
       <uib-tabset justified="true">
 
-        <uib-tab heading="{{ 'subscriptions' | translate }}">
+        <uib-tab heading="{{ 'pricing.subscriptions' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/subscriptions.html' %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'trainings' | translate }}">
+        <uib-tab heading="{{ 'pricing.trainings' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/trainings.html' %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'machine_hours' | translate }}">
+        <uib-tab heading="{{ 'pricing.machine_hours' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/machine_hours.html' %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'credits' | translate }}">
+        <uib-tab heading="{{ 'pricing.spaces' | translate }}" ng-hide="fablabWithoutSpaces">
+          <ng-include src="'<%= asset_path 'admin/pricing/spaces.html' %>'"></ng-include>
+        </uib-tab>
+
+        <uib-tab heading="{{ 'pricing.credits' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/credits.html' %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'coupons' | translate }}">
+        <uib-tab heading="{{ 'pricing.coupons' | translate }}">
           <ng-include src="'<%= asset_path 'admin/pricing/coupons.html' %>'"></ng-include>
         </uib-tab>
       </uib-tabset>

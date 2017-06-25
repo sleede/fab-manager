@@ -4,7 +4,7 @@ class MachinesAvailability < ActiveRecord::Base
   after_destroy :cleanup_availability
 
   # when the MachinesAvailability is deleted (from Machine destroy cascade), we delete the corresponding
-  # availability if the deleted machine was the last is this availability slot and teh availability is not
+  # availability if the deleted machine was the last of this availability slot, and the availability is not
   # currently being destroyed.
   def cleanup_availability
     unless availability.destroying

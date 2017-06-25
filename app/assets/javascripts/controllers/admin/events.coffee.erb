@@ -16,6 +16,8 @@
 #  - $scope.toggleStartDatePicker($event)
 #  - $scope.toggleEndDatePicker($event)
 #  - $scope.toggleRecurrenceEnd(e)
+#  - $scope.addPrice()
+#  - $scope.removePrice(price, $event)
 #
 # Requires :
 #  - $scope.event.event_files_attributes = []
@@ -134,6 +136,21 @@ class EventsController
         category: null,
         amount: null,
       })
+
+
+
+    ##
+    # Remove the price or mark it as 'to delete'
+    ##
+    $scope.removePrice = (price, event) ->
+      event.preventDefault()
+      event.stopPropagation()
+      if price.id
+        price._destroy = true
+      else
+        index = $scope.event.prices.indexOf(price)
+        $scope.event.prices.splice(index, 1)
+
 
 
 

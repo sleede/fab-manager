@@ -40,7 +40,7 @@ end
 
 group :development do
   # Preview mail in the browser
-  gem 'letter_opener'
+  gem 'mailcatcher'
   gem 'awesome_print'
 
   gem "puma"

@@ -24,12 +24,13 @@
       var Fablab = Fablab || {};
 
       Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');
+      Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' != 'false');
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
 
       // i18n stuff
-      Fablab.locale = "<%= I18n.locale %>";
+      Fablab.locale = "<%= Rails.application.secrets.app_locale %>";
       Fablab.moment_locale = "<%= Rails.application.secrets.moment_locale %>";
       Fablab.summernote_locale = "<%= Rails.application.secrets.summernote_locale %>";
       Fablab.fullcalendar_locale = "<%= Rails.application.secrets.fullcalendar_locale %>";
