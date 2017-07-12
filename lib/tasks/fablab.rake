@@ -304,4 +304,22 @@ namespace :fablab do
       p.save
     end
   end
+
+  desc 'get incoherent invoice'
+  task :get_incoherent_invoice, [:start_date] => :environment do |task, args|
+    date = Date.parse('2017-05-01')
+    if args.start_date
+      begin
+        date = Date.parse(args.start_date)
+      rescue => e
+        fail e
+      end
+    end
+    Invoice.where('created_at > ? AND stp_invoice_id IS NOT NULL', date).each do |invoice|
+      stp_invoice = Stripe::Invoice.retrieve(invoice.stp_invoice_id)
+      if invoice.amount_paid != stp_invoice.total
+        puts "Id: #{invoice.id}, reference: #{invoice.reference}, stripe id: #{stp_invoice.id}, invoice total: #{invoice.amount_paid / 100.0}, stripe invoice total: #{stp_invoice.total / 100.0}, date: #{invoice.created_at}"
+      end
+    end
+  end
 end

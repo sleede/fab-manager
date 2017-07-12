@@ -202,6 +202,11 @@ class Invoice < ActiveRecord::Base
     end
   end
 
+  # get amount total paid
+  def amount_paid
+    total - (wallet_amount ? wallet_amount : 0)
+  end
+
   private
   def generate_and_send_invoice
     unless Rails.env.test?
