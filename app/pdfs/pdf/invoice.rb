@@ -81,7 +81,7 @@ module PDF
         else
           case invoice.invoiced_type
             when 'Reservation'
-              object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME', USER:name, DATE:I18n.l(invoice.invoiced.slots[0].start_at.to_date), TIME:I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
+              object = I18n.t('invoices.reservation_of_USER_on_DATE_at_TIME', USER: name, DATE: I18n.l(invoice.invoiced.slots[0].start_at.to_date), TIME: I18n.l(invoice.invoiced.slots[0].start_at, format: :hour_minute))
               invoice.invoice_items.each do |item|
                 if item.subscription_id
                   subscription = Subscription.find item.subscription_id
@@ -324,14 +324,14 @@ module PDF
       end
     end
 
-    def subscription_verbose(subscription, user)
+    def subscription_verbose(subscription, username)
       subscription_start_at = subscription.expired_at - subscription.plan.duration
       duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
-      I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE', NAME: user, DURATION: duration_verbose, DATE: I18n.l(subscription_start_at.to_date))
+      I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE', NAME: username, DURATION: duration_verbose, DATE: I18n.l(subscription_start_at.to_date))
     end
 
-    def offer_day_verbose(offer_day, user)
-      I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE', NAME: user.profile.full_name, STARTDATE: I18n.l(offer_day.start_at.to_date), ENDDATE: I18n.l(offer_day.end_at.to_date))
+    def offer_day_verbose(offer_day, username)
+      I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE', NAME: username, STARTDATE: I18n.l(offer_day.start_at.to_date), ENDDATE: I18n.l(offer_day.end_at.to_date))
     end
 
 
