@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fixed invalid syntax for configuration file application.yml.default
+
 ## v2.5.8 2017 July 12
 
 - Fix a bug: when upgrading from version < 2.5.0, `db:seed` will throw an error if ADMIN_EMAIL does not match any admin in database
