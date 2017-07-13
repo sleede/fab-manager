@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## v2.5.9 2017 July 13
+
+- Fixed invalid syntax for configuration file application.yml.default
+- db:seed improves test if there is already an admin, not failing anymore if role 'admin' doesn't exist
+
 ## v2.5.8 2017 July 12
 
 - Fix a bug: when upgrading from version < 2.5.0, `db:seed` will throw an error if ADMIN_EMAIL does not match any admin in database
