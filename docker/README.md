@@ -195,7 +195,7 @@ docker run --rm \
            --link=fabmanager-postgres:postgres \
            --link=fabmanager-redis:redis \
            --link=fabmanager-elastic:elasticsearch \
-           -e RAILS_ENV=production \
+           -e RAILS_ENV=production ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword \
            --env-file /home/core/fabmanager/config/env \
            -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
            sleede/fab-manager \

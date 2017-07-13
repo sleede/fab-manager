@@ -84,7 +84,7 @@ end
 
 # Create the default admin if none exists yet
 if Role.where(name: 'admin').joins(:users).count === 0
-    admin = User.new(username: 'admin', email: Rails.application.secrets.admin_email, password: Rails.application.secrets.admin_password, password_confirmation: Rails.application.secrets.admin_password, group_id: Group.first.id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
+    admin = User.new(username: 'admin', email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], password_confirmation: Rails.application.secrets.admin_password, group_id: Group.first.id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
     admin.add_role 'admin'
     admin.save!
 end

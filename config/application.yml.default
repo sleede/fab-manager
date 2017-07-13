@@ -27,9 +27,6 @@ SMTP_PASSWORD:
 GA_ID: ''
 ##
 
-ADMIN_EMAIL: 'admin@fab-manager.com'
-ADMIN_PASSWORD: 'adminadmin'
-
 DISQUS_SHORTNAME:
 
 TWITTER_NAME: 'FablabGrenoble'
