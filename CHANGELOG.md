@@ -1,8 +1,9 @@
 # Changelog Fab Manager
 
-## next release
+## v2.5.9 2017 July 13
 
 - Fixed invalid syntax for configuration file application.yml.default
+- db:seed improves test if there is already an admin, not failing anymore if role 'admin' doesn't exist
 
 ## v2.5.8 2017 July 12
 
