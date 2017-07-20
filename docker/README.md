@@ -6,37 +6,34 @@ In order to make it work, please use the same directories structure as described
 ##### Table of contents
 
 1. [Preliminary steps](#preliminary-steps)<br/>
-1.1. [docker/env file](#docker-env)<br/>
-1.2. [docker/nginx_with_ssl.conf.example file](#nginx-conf)<br/>
-1.3. [setup the server](#setup-server)<br/>
-1.4. [buy a domain name and link it with the droplet](#buy-domain-link-droplet)<br/>
-1.5. [connect to the droplet via SSH](#connect-to-droplet)<br/>
-1.6. [create SWAP file in coreOs](#create-swap-file)<br/>
-1.7. [setup folders and env file](#setup-folders-env-file)<br/>
-1.8. [SSL certificate with LetsEncrypt](#ssl-certificate-letsencrypt)<br/>
-1.9. [install docker-compose](#install-docker-compose)
+1.1. docker/env file<br/>
+1.2. docker/nginx_with_ssl.conf.example file<br/>
+1.3. setup the server<br/>
+1.4. buy a domain name and link it with the droplet<br/>
+1.5. connect to the droplet via SSH<br/>
+1.6. create SWAP file in coreOs<br/>
+1.7. setup folders and env file<br/>
+1.8. SSL certificate with LetsEncrypt<br/>
+1.9. install docker-compose
 2. [Deployment](#deployment)<br/>
-2.1. [pull images](#pull-images)<br/>
-2.2. [setup database](#setup-database)<br/>
-2.3. [build assets](#build-assets)<br/>
-2.4. [prepare Elasticsearch (search engine)](#prepare-elastic)<br/>
-2.5. [start all services](#start-services)
-3. [Generate SSL certificate by Letsencrypt](#generate-sll-cert-letsencrypt)
+2.1. pull images</br>
+2.2. setup database</br>
+2.3. build assets</br>
+2.4. prepare Elasticsearch (search engine)</br>
+2.5. start all services
+3. [Generate SSL certificate by Letsencrypt](#generate-sll-certificate-by-letsencrypt)
 4. [Docker utils](#docker-utils)
-5. [Fabmanager update](#update-fabmanager)<br/>
-5.1. [Steps](#update-steps)<br/>
-5.2. [Good to know](#good-to-know)
+5. [Fabmanager update](#fabmanager-update)<br/>
+5.1. Steps<br/>
+5.2. Good to know
 
-<a id="preliminary-steps"></a>
 ## Preliminary steps
 
-<a id="docker-env"></a>
 ### docker/env file
 
 Make a copy of the **docker/env.example** file and use it as a starting point.
 Set all the environment variables needed by your application. Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md) for explanations about those variables.
 
-<a id="nginx-conf"></a>
 ### docker/nginx_with_ssl.conf.example file
 
 * Replace **MAIN_DOMAIN** (example: fab-manager.com).
@@ -45,27 +42,23 @@ Set all the environment variables needed by your application. Please refer to th
 
 **Use nginx.conf.example if you don't want SSL for your app.**
 
-<a id="setup-server"></a>
 ### setup the server
 
 Go to [DigitalOcean](https://www.digitalocean.com/) and create a Droplet with operating system coreOS **stable**.
 You need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
 Choose a datacenter. Set the hostname as your domain name.
 
-<a id="buy-domain-link-droplet"></a>
 ### buy a domain name and link it with the droplet
 
 1. Buy a domain name on [OVH](https://www.ovh.com/fr/)
 2. Replace the IP address of the domain with the droplet's IP (you can enable the flexible ip and use it)
 3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient. 
 
-<a id="connect-to-droplet"></a>
 ### connect to the droplet via SSH
 
 You can already connect to the server with this command: `ssh core@droplet-ip`. When DNS propagation will be done, you will be able to
 connect to the server with `ssh core@your-domain-name`.
 
-<a id="create-swap-file"></a>
 ### create SWAP file in coreOS
 
 Switch to sudo and create a swap file:
@@ -104,7 +97,6 @@ systemctl start swap
 exit
 ```
 
-<a id="setup-folders-env-file"></a>
 ### setup folders and env file
 
 Create the config folder:
@@ -126,7 +118,6 @@ Copy the previously customized `nginx_with_ssl.conf.example` as `/home/core/fabm
 
 Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want to use ssl (not recommended !).
 
-<a id="ssl-certificate-letsencrypt"></a>
 ### SSL certificate with LetsEncrypt
 
 **FOLLOW THOSE INSTRUCTIONS ONLY IF YOU WANT TO USE SSL**.
@@ -179,7 +170,6 @@ WantedBy=timers.target
 
 That's all for the moment. Keep on with the installation, we'll complete that part after deployment in the [Generate SSL certificate by Letsencrypt](#generate-ssl-cert-letsencrypt).
 
-<a id="install-docker-compose"></a>
 ### Install docker-compose
 
 ```bash
@@ -191,17 +181,14 @@ sudo chmod +x /opt/bin/docker-compose
 
 Then copy docker-compose.yml to your app folder `/home/core/fabmanager`.
 
-<a id="deployment"></a>
 ## Deployment
 
-<a id="pull-images"></a>
 ### pull images
 
 ```bash
 docker-compose pull
 ```
 
-<a id="setup-database"></a> 
 ### setup database
 
 ```bash
@@ -210,22 +197,18 @@ docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the mig
 docker-compose run --rm fabmanager bundle exec rake db:seed # seed the database
 ```
 
-<a id="build-assets"></a>
 ### build assets
 
 `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
 
-<a id="prepare-elastic"></a>
 ### prepare Elasticsearch (search engine)
 
 `docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
 
-<a id="start-services"></a>
 #### start all services
 
 `docker-compose up -d`
 
-<a id="generate-ssl-cert-letsencrypt"></a>
 ### Generate SSL certificate by Letsencrypt 
 
 **Important: app must be run before starting letsencrypt**
@@ -252,7 +235,6 @@ sudo systemctl start letsencrypt.timer
 (check) sudo systemctl list-timers
 ```
 
-<a id="docker-utils"></a>
 ## Docker utils
 
 ### Restart app
@@ -275,12 +257,10 @@ sudo systemctl start letsencrypt.timer
 
 `docker-compose restart`
 
-<a id="update-fabmanager"></a>
 ## Fabmanager update
 
 *This procedure updates fabmanager to the last version by default.*
 
-<a id="update-steps"></a>
 ### Steps
 
 
@@ -323,7 +303,6 @@ They execute specific tasks so they can't be automatic and have to be run by han
 
 You can check that all containers are running with `docker ps`.
 
-<a id="good-to-know"></a>
 ### Good to know
 
 #### Is it possible to update several versions at the same time ?
