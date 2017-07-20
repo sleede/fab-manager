@@ -5,26 +5,26 @@ In order to make it work, please use the same directories structure as described
 
 ##### Table of contents
 
-1. [Preliminary steps](#preliminary-steps)
-1.1. [docker/env file](#docker-env)
-1.2. [docker/nginx_with_ssl.conf.example file](#nginx-conf)
-1.3. [setup the server](#setup-server)
-1.4. [buy a domain name and link it with the droplet](#buy-domain-link-droplet)
-1.5. [connect to the droplet via SSH](#connect-to-droplet)
-1.6. [create SWAP file in coreOs](#create-swap-file)
-1.7. [setup folders and env file](#setup-folders-env-file)
-1.8. [SSL certificate with LetsEncrypt](#ssl-certificate-letsencrypt)
+1. [Preliminary steps](#preliminary-steps))<br/>
+1.1. [docker/env file](#docker-env))<br/>
+1.2. [docker/nginx_with_ssl.conf.example file](#nginx-conf))<br/>
+1.3. [setup the server](#setup-server))<br/>
+1.4. [buy a domain name and link it with the droplet](#buy-domain-link-droplet))<br/>
+1.5. [connect to the droplet via SSH](#connect-to-droplet))<br/>
+1.6. [create SWAP file in coreOs](#create-swap-file))<br/>
+1.7. [setup folders and env file](#setup-folders-env-file))<br/>
+1.8. [SSL certificate with LetsEncrypt](#ssl-certificate-letsencrypt))<br/>
 1.9. [install docker-compose](#install-docker-compose)
-2. [Deployment](#deployment)
-2.1. [pull images](#pull-images)
-2.2. [setup database](#setup-database)
-2.3. [build assets](#build-assets)
-2.4. [prepare Elasticsearch (search engine)](#prepare-elastic)
+2. [Deployment](#deployment))<br/>
+2.1. [pull images](#pull-images))<br/>
+2.2. [setup database](#setup-database))<br/>
+2.3. [build assets](#build-assets))<br/>
+2.4. [prepare Elasticsearch (search engine)](#prepare-elastic))<br/>
 2.5. [start all services](#start-services)
 3. [Generate SSL certificate by Letsencrypt](#generate-sll-cert-letsencrypt)
 4. [Docker utils](#docker-utils)
-5. [Fabmanager update](#update-fabmanager)
-5.1. [Steps](#update-steps)
+5. [Fabmanager update](#update-fabmanager))<br/>
+5.1. [Steps](#update-steps))<br/>
 5.2. [Good to know](#good-to-know)
 
 ## Preliminary steps
