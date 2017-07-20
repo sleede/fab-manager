@@ -1,49 +1,44 @@
-# full procedure to put into production a fabmanager app with Docker
+# Install Fabmanager app in production with Docker
 
 This README tries to describe all steps to put a fabmanager app into production on a server, based on a solution using Docker and DigitalOcean.
-In order to make all this stuff working, please use the same directories structure as described in this guide in your fabmanager app folder.
+In order to make it work, please use the same directories structure as described in this guide in your fabmanager app folder.
 
-### docker/env
+## Preliminary steps
+
+### file docker/env
 
 Make a copy of the **env.example** and use it as a starting point.
-List all the environment variables needed by your application.
+Set all the environment variables needed by your application. Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md) for explanations about those variables.
 
-### docker/nginx_with_ssl.conf.example
+### file docker/nginx_with_ssl.conf.example
 
-* Use nginx.conf.example especially if you are not using **SSL**
 * Replace **MAIN_DOMAIN** (example: fab-manager.com).
 * Replace **URL_WITH_PROTOCOL_HTTPS** (example: https://www.fab-manager.com).
 * Replace **ANOTHER_URL_1**, **ANOTHER_URL_2** (example: .fab-manager.fr)
 
-
-
-## Things are getting serious, starting deployment process guys
-
+Side note:
+* Use nginx.conf.example if you are not using **SSL**
 
 ### setup the server
 
 Go to **DigitalOcean** and create a Droplet with operating system coreOS **stable**.
-You need at least 2GB of addressable memory (RAM + swap) to install and use FabManager!.
-Choose datacenter. Set hostname as your domain name.
+You need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
+Choose a datacenter. Set the hostname as your domain name.
 
-
-### Buy domain name and link it with the droplet
+### Buy a domain name and link it with the droplet
 
 1. Buy a domain name on OVH
-2. Replace IP of the domain with droplet's IP (you can enable the flexible ip and use it)
-3. **Do not** fuck up trying to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient.
-
+2. Replace the IP address of the domain with the droplet's IP (you can enable the flexible ip and use it)
+3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient. 
 
 ### Connect to the droplet via SSH
 
 You can already connect to the server with this command: `ssh core@droplet-ip`. When DNS propagation will be done, you will be able to
 connect to the server with `ssh core@your-domain-name`.
 
-
-
 ### Create SWAP file in coreOS
 
-Firstly, switch to sudo and create swap file
+Firstly, switch to sudo and create a swap file
 
 ```bash
 sudo -i  
@@ -95,11 +90,11 @@ Copy the previously customized `nginx_with_ssl.conf.example` as `/home/core/fabm
 OR
 Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
 
-
 ### SSL certificate with LetsEncrypt
+
 Let's Encrypt is a new Certificate Authority that is free, automated, and open.
 Let’s Encrypt certificates expire after 90 days, so automation of renewing your certificates is important.
-Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container
+Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container:
 
 ```bash
 mkdir -p /home/core/fabmanager/config/nginx/ssl
@@ -115,7 +110,7 @@ mkdir -p /home/core/fabmanager/letsencrypt/etc/webrootauth
 
 Run `docker pull quay.io/letsencrypt/letsencrypt:latest`
 
-Create file (with sudo) /etc/systemd/system/letsencrypt.service with
+Create file (with sudo) /etc/systemd/system/letsencrypt.service and paste the following configuration into it:
 
 ```bash
 [Unit]
@@ -128,7 +123,7 @@ ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/home/core/fabmanager/
 ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1  
 ```
 
-Create file (with sudo) /etc/systemd/system/letsencrypt.timer with
+Create file (with sudo) /etc/systemd/system/letsencrypt.timer and paste the following configuration into it:
 ```bash
 [Unit]
 Description=letsencrypt oneshot timer  
@@ -143,139 +138,66 @@ Unit=letsencrypt.service
 WantedBy=timers.target
 ```
 
-Then deploy your app and read the "Generate SSL certificate by Letsencrypt" section to complete the installation of the letsencrypt certificate.
+That's all for the moment. Keep on with the installation, we'll complete that part after deployment in the [Generate SSL certificate by Letsencrypt](#generate-ssl-cert-letsencrypt).
 
-
-### Deploy dockers containers on host
-
-```bash
-docker pull redis:3.0
-docker pull postgres:9.4
-docker pull elasticsearch:1.7
-docker pull sleede/fab-manager
-
-docker run --restart=always -d --name=fabmanager-postgres -v /home/core/fabmanager/postgresql:/var/lib/postgresql/data postgres:9.4
-docker run --restart=always -d --name=fabmanager-redis -v /home/core/fabmanager/redis:/data redis:3.0
-docker run --restart=always  -d --name=fabmanager-elastic -v /home/core/fabmanager/elasticsearch:/usr/share/elasticsearch/data elasticsearch:1.7
-```
-
-### Rails specific commands
-
-#### DB CREATE
+### Install docker-compose
 
 ```bash
-docker run --rm \
-           --link=fabmanager-postgres:postgres \
-           --link=fabmanager-redis:redis \
-           --link=fabmanager-elastic:elasticsearch \
-           -e RAILS_ENV=production \
-           --env-file /home/core/fabmanager/config/env \
-           sleede/fab-manager \
-           bundle exec rake db:create
+curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > ./docker-compose
+sudo mkdir -p /opt/bin
+sudo mv docker-compose /opt/bin/
+sudo chmod +x /opt/bin/docker-compose
 ```
 
-#### DB MIGRATE
+Then copy docker-compose.yml to your app folder `/home/core/fabmanager`.
+
+## Deployment
+
+### pull images
 
 ```bash
-docker run --rm \
-           --link=fabmanager-postgres:postgres \
-           --link=fabmanager-redis:redis \
-           --link=fabmanager-elastic:elasticsearch \
-           -e RAILS_ENV=production \
-           --env-file /home/core/fabmanager/config/env \
-           -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
-           sleede/fab-manager \
-           bundle exec rake db:migrate
+docker-compose pull
 ```
 
-#### DB SEED
+### setup database 
 
 ```bash
-docker run --rm \
-           --link=fabmanager-postgres:postgres \
-           --link=fabmanager-redis:redis \
-           --link=fabmanager-elastic:elasticsearch \
-           -e RAILS_ENV=production ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword \
-           --env-file /home/core/fabmanager/config/env \
-           -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
-           sleede/fab-manager \
-           bundle exec rake db:seed
+docker-compose run --rm fabmanager bundle exec rake db:create # create the database
+docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
+docker-compose run --rm fabmanager bundle exec rake db:seed # seed the database
 ```
 
+### build assets
 
-#### PREPARE ELASTIC
+`docker-compose run --rm fabmanager bundle exec rake assets:precompile`
 
-```bash
-docker run --rm \
-             --link=fabmanager-postgres:postgres \
-             --link=fabmanager-postgres:postgres \
-             --link=fabmanager-redis:redis \
-             --link=fabmanager-elastic:elasticsearch \
-             -e RAILS_ENV=production \
-             --env-file /home/core/fabmanager/config/env \
-             -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
-             sleede/fab-manager \
-             bundle exec rake fablab:es_build_stats
-```
+### prepare elastic (search engine)
+
+`docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
+
+#### start all services
+
+`docker-compose up -d`
 
 
-#### BUILD ASSETS
+### Generate SSL certificate by Letsencrypt 
+<a name="generate-ssl-cert-letsencrypt"></a>
 
-```bash
-docker run --rm \
-             --link=fabmanager-postgres:postgres \
-             --link=fabmanager-redis:redis \
-             --link=fabmanager-elastic:elasticsearch \
-             -e RAILS_ENV=production \
-             --env-file /home/core/fabmanager/config/env \
-             -v /home/core/fabmanager/public/assets:/usr/src/app/public/assets \
-             -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
-             sleede/fab-manager \
-             bundle exec rake assets:precompile
-```
-
-
-#### RUN APP
-
-```bash
-docker run --restart=always -d --name=fabmanager \
-             --link=fabmanager-postgres:postgres \
-             --link=fabmanager-redis:redis \
-             --link=fabmanager-elastic:elasticsearch \
-             -e RAILS_ENV=production \
-             -e RACK_ENV=production \
-             --env-file /home/core/fabmanager/config/env \
-             -v /home/core/fabmanager/public/assets:/usr/src/app/public/assets \
-             -v /home/core/fabmanager/public/uploads:/usr/src/app/public/uploads \
-             -v /home/core/fabmanager/invoices:/usr/src/app/invoices \
-             -v /home/core/fabmanager/exports:/usr/src/app/exports \
-             -v /home/core/fabmanager/plugins:/usr/src/app/plugins \
-             -v /home/core/fabmanager/log:/var/log/supervisor \
-             sleede/fab-manager
-
-docker run --restart=always -d --name=nginx \
-             -p 80:80 \
-             -p 443:443 \
-             --link=fabmanager:fabmanager \
-             -v /home/core/fabmanager/config/nginx:/etc/nginx/conf.d \
-             -v /home/core/fabmanager/letsencrypt/etc:/etc/letsencrypt \
-             -v /home/core/fabmanager/log:/var/log/nginx \
-             --volumes-from fabmanager:ro \
-             nginx:1.9
-
-```
-
-
-### Generate SSL certificate by Letsencrypt (app must be run before start letsencrypt)
+**Important: app must be run before starting letsencrypt**
 
 Start letsencrypt service :
 ```bash
 sudo systemctl start letsencrypt.service
 ```
 
-If the certificate was successfully generated then update the nginx configuration file and activate the ssl port and certificate.
-Edit `/home/core/fabmanager/config/nginx/fabmanager.conf`
-Remove your app and Run your app to apply changes
+If the certificate was successfully generated then update the nginx configuration file and activate the ssl port and certificate
+editing the file `/home/core/fabmanager/config/nginx/fabmanager.conf`.
+
+Remove your app container and run your app to apply the changes running the following commands:
+```bash
+docker-compose down
+docker-compose up -d
+```
 
 Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the month :
 
@@ -285,93 +207,73 @@ sudo systemctl start letsencrypt.timer
 (check) sudo systemctl list-timers
 ```
 
+## Docker utils
 
-### Dockers utils
-
-#### Restart app
+### Restart app
 
 `docker restart fabmanager-app`
 
-#### Remove app
+### Remove app
 
 `docker rm -f fabmanager-app`
 
-#### Open a bash in the app context
+### Open a bash in the app context
 
 `docker exec -it fabmanager-app bash`
 
-
-
-
-### If you want deploy with Docker Compose
-
-#### download docker compose https://github.com/docker/compose/releases
-
-```bash
-curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > ./docker-compose
-sudo mkdir -p /opt/bin
-sudo mv docker-compose /opt/bin/
-sudo chmod +x /opt/bin/docker-compose
-```
-
-#### Setup folders and env file
-
-```bash
-mkdir -p /home/core/fabmanager/config
-```
-
-Copy the previously customized `env` file as `/home/core/fabmanager/config/env`
-
-```bash
-mkdir -p /home/core/fabmanager/config/nginx
-```
-
-Copy the previously customized `nginx_with_ssl.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf`
-Read the "SSL certificate with LetsEncrypt" section
-OR
-Copy the previously customized `nginx.conf.example` as `/home/core/fabmanager/config/nginx/fabmanager.conf` if you do not want ssl support (not recommended !).
-
-
-#### copy docker-compose.yml to /home/core/fabmanager
-
-#### pull images
-
-`docker-compose pull`
-
-#### create/migrate/seed db
-
-```bash
-docker-compose run --rm fabmanager bundle exec rake db:create
-docker-compose run --rm fabmanager bundle exec rake db:migrate
-docker-compose run --rm fabmanager bundle exec rake db:seed
-```
-
-#### build assets
-
-`docker-compose run --rm fabmanager bundle exec rake assets:precompile`
-
-#### PREPARE ELASTIC
-`docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
-
-#### run create and run all services
-
-`docker-compose up -d`
-
-#### restart all services
-
-`docker-compose restart`
-
-#### show services status
+### Show services status
 
 `docker-compose ps`
 
-#### update service fabmanager, rebuild assets and restart fabmanager
+### Restart all services
+
+`docker-compose restart`
+
+## How to update Fabmanager (to the last version)
+
+When a new version is available, this is how to update fabmanager app in a production environment, using docker-compose :
+
+### go to your app folder
+
+`cd fabmananger`
+
+### pull last docker images 
+
+`docker-compose pull`
+
+### stop the app
+
+`docker-compose stop fabmanager`
+
+### remove old assets
+
+`sudo rm -Rf public/assets/`
+
+### compile new assets
+
+`docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+
+### run specific commands
+
+Do not forget to check if there are any command to run for your upgrade. Those commands 
+are always specified in the [CHANGELOG](https://github.com/LaCasemate/fab-manager/blob/master/CHANGELOG.md) and prefixed by *[TODO DEPLOY]*. 
+They are also present in the [release pages](https://github.com/LaCasemate/fab-manager/releases).
+
+They execute specific tasks so they can't be automatic and have to be run by hand.
+
+### restart all containers
 
 ```bash
-docker-compose pull fabmanager
-docker-compose stop fabmanager
-sudo rm -rf fabmanager/public/assets
-docker-compose run --rm fabmanager bundle exec rake assets:precompile
-docker-compose down
-docker-compose up -d
+  docker-compose down
+  docker-compose up -d
 ```
+
+You can check that all containers are running with `docker ps`.
+
+### Good to know
+
+#### Is it possible to update several versions at the same time ?
+
+Yes, indeed. It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
+Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/LaCasemate/fab-manager/blob/master/CHANGELOG.md) between your actual
+and the new version in sequential order. (Example: to update from 2.4.0 to 2.4.3, you will run the specific commands for the 2.4.1, then for the 2.4.2 and then for the 2.4.3).
