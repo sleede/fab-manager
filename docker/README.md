@@ -21,7 +21,7 @@ In order to make it work, please use the same directories structure as described
 2.3. build assets</br>
 2.4. prepare Elasticsearch (search engine)</br>
 2.5. start all services
-3. [Generate SSL certificate by Letsencrypt](#generate-sll-certificate-by-letsencrypt)
+3. [Generate SSL certificate by Letsencrypt](#generate-ssl-certificate-by-letsencrypt)
 4. [Docker utils](#docker-utils)
 5. [Fabmanager update](#fabmanager-update)<br/>
 5.1. Steps<br/>
