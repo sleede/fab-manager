@@ -267,38 +267,38 @@ When a new version is available, this is how to update fabmanager app in a produ
 
 1. go to your app folder
 
-  `cd fabmananger`
+   `cd fabmananger`
 
 2. pull last docker images 
 
-  `docker-compose pull`
+   `docker-compose pull`
 
 3. stop the app
 
-  `docker-compose stop fabmanager`
+   `docker-compose stop fabmanager`
 
 4. remove old assets
 
-  `sudo rm -Rf public/assets/`
+   `sudo rm -Rf public/assets/`
 
 5. compile new assets
 
-  `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+   `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
 
 6. run specific commands
 
-  **Do not forget** to check if there are commands to run for your upgrade. Those commands 
-  are always specified in the [CHANGELOG](https://github.com/LaCasemate/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**. 
-  They are also present in the [releases page](https://github.com/LaCasemate/fab-manager/releases).
-
-  Those commands execute specific tasks and have to be run by hand.
+   **Do not forget** to check if there are commands to run for your upgrade. Those commands 
+   are always specified in the [CHANGELOG](https://github.com/LaCasemate/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**. 
+   They are also present in the [releases page](https://github.com/LaCasemate/fab-manager/releases).
+ 
+   Those commands execute specific tasks and have to be run by hand.
 
 7. restart all containers
 
-  ```bash
-    docker-compose down
-    docker-compose up -d
-  ```
+   ```bash
+     docker-compose down
+     docker-compose up -d
+   ```
 
 You can check that all containers are running with `docker ps`.
 
