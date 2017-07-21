@@ -18,11 +18,11 @@ You will need to be root through the rest of the setup.
 1.7. SSL certificate with LetsEncrypt<br/>
 1.8. requirements
 2. [Install Fabmanager](#install-fabmanager)<br/>
-2.1. Add docker-compose.yml file</br>
-2.2. pull images</br>
-2.3. setup database</br>
-2.4. build assets</br>
-2.5. prepare Elasticsearch (search engine)</br>
+2.1. Add docker-compose.yml file<br/>
+2.2. pull images<br/>
+2.3. setup database<br/>
+2.4. build assets<br/>
+2.5. prepare Elasticsearch (search engine)<br/>
 2.6. start all services
 3. [Generate SSL certificate by Letsencrypt](#generate-ssl-certificate-by-letsencrypt)
 4. [Docker utils](#docker-utils)
