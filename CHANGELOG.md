@@ -3,7 +3,8 @@
 ## next release
 
 - Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the trainings API
- - Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the groups API
+- Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the groups API 
+- update docker/README.md
 
 ## v2.5.9 2017 July 13
 
