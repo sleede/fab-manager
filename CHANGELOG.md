@@ -2,8 +2,8 @@
 
 ## next release
 
-- Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the trainings API
-- Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the groups API 
+- Updated axlsx gem for excel files generation, possible fix for #489
+- Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the following API: trainings, groups, events, prices
 - update docker/README.md
 
 ## v2.5.9 2017 July 13
