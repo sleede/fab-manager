@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## v2.5.10 2017 August 16
+
+- Updated axlsx gem for excel files generation, possible fix for #489
+- Fix a bug: on some linux hosts, a filename too long error is triggered when accessing the following API: trainings, groups, events, prices
+- update docker/README.md
+
 ## v2.5.9 2017 July 13
 
 - Fixed invalid syntax for configuration file application.yml.default

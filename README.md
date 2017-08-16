@@ -127,7 +127,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
    ```bash
    rake db:create
    rake db:migrate
-   rake db:seed
+   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword rake db:seed
    ```
 
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -279,7 +279,7 @@ If this parameter is not specified the maximum size allowed will be 2MB.
 
     ADMIN_EMAIL, ADMIN_PASSWORD
 
-Credentials for the first admin user created when seeding the project.
+Credentials for the first admin user created when seeding the project. (not present in application.yml because they are only used once when running the database seed with the command `rake db:seed`)
 
     Settings related to Open Projects
 
