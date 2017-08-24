@@ -424,7 +424,7 @@ pt:
           _subscription: "inscrição"
           cost_of_the_subscription: "Custo da inscrição"
           confirm_and_pay: "Confirmar e pagar"
-          you_have_settled_the_following_machine_hours: "Você liquidou o seguinte {TYPE, select, Machine{horas máquina} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_the_following_TYPE: "Você liquidou o seguinte {TYPE, select, Machine{horas máquina} Training{training} other{elements}}:"  # messageFormat interpolation
           you_have_settled_a_: "Você tem liquidado:"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso !"
