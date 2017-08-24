@@ -3,6 +3,8 @@
 ## next release
 
 - Fix a bug: missing translation after payment in english and portuguese
+- Updated puma for compatibility with openSSL > 1.0 
+- Documented installation on ArchLinux
 
 ## v2.5.10 2017 August 16
 

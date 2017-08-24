@@ -71,6 +71,7 @@ In you only intend to run fab-manager on your local machine for testing purposes
 
 1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
+   If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before. 
 
 2. Retrieve the project from Git
 
