@@ -22,7 +22,34 @@
                 </div>
             </div>
             <div class="row">
-                <h3 class="m-l" translate>{{ 'settings.ability_for_the_users_to_move_their_reservations' }}</h3>
+                <h3 class="m-l m-t-lg" translate>{{ 'settings.max_visibility' }}</h3>
+                <form class="col-md-4" name="visibilityYearlyForm">
+                    <label for="yearlySubscribers" class="control-label m-r" translate>{{ 'settings.visibility_for_yearly_members' }}</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="number" class="form-control" id="yearlySubscribers" ng-model="visibilityYearly.value" min="1" required>
+                        </div>
+                    </div>
+                    <button name="button" class="btn btn-warning" ng-click="save(visibilityYearly)" ng-disabled="visibilityYearlyForm.$invalid" translate>{{ 'save' }}</button>
+                </form>
+                <form class="col-md-4 col-md-offset-2" name="visibilityOthersForm">
+                    <label for="others" class="control-label m-r" translate>{{ 'settings.visibility_for_other_members' }}</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="number" class="form-control" id="others" ng-model="visibilityOthers.value" min="1" required>
+                        </div>
+                    </div>
+                    <button name="button" class="btn btn-warning" ng-click="save(visibilityOthers)" ng-disabled="visibilityOthersForm.$invalid" translate>{{ 'save' }}</button>
+                </form>
+            </div>
+            <div class="row">
+                <h3 class="m-l m-t-lg" translate>{{ 'settings.ability_for_the_users_to_move_their_reservations' }}</h3>
                 <div class="form-group m-l">
                     <label for="enableMove" class="control-label m-r" translate>{{ 'settings.reservations_shifting' }}</label>
                     <input bs-switch
@@ -51,7 +78,7 @@
                 </form>
             </div>
             <div class="row">
-                <h3 class="m-l" translate>{{ 'settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
+                <h3 class="m-l m-t-lg" translate>{{ 'settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
                 <div class="form-group m-l">
                     <label for="enableCancel" class="control-label m-r" translate>{{ 'settings.reservations_cancelling' }}</label>
                     <input bs-switch

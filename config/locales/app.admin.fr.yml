@@ -574,6 +574,9 @@ fr:
           confine_the_booking_agenda: "Borner l'agenda de réservation"
           opening_time: "Heure d'ouverture"
           closing_time: "Heure de fermeture"
+          max_visibility: "Visibilité maximum (en mois)"
+          visibility_for_yearly_members: "Pour les abonnements en cours d'au moins 1 an"
+          visibility_for_other_members: "Pour tous les autres membres"
           ability_for_the_users_to_move_their_reservations: "Possibilité pour l'utilisateur de déplacer ses réservations"
           reservations_shifting: "Déplacement des réservations"
           prior_period_(hours): "Délai préalable (en heures)"
@@ -608,6 +611,8 @@ fr:
           reminder_enable: "l'activation du rappel de réservation"
           reminder_delay: "délai avant envoi de la notification de rappel"
           default_value_is_24_hours: "Si aucune valeur n'est renseignée : 24 heures."
+          visibility_yearly: "la visibilité maximum pour les abonnées annuels"
+          visibility_others: "la visibilité maximum pour les autres membres"
 
       open_api_clients:
         add_new_client: "Créer un compte client"

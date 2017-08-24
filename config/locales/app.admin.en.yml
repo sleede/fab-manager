@@ -574,6 +574,9 @@ en:
           confine_the_booking_agenda: "Confine the booking agenda"
           opening_time: "Opening time"
           closing_time: "Closing time"
+          max_visibility: "Maximum visibility (in months)"
+          visibility_for_yearly_members: "For currently running subscriptions, at least 1 year long"
+          visibility_for_other_members: "For all other members"
           ability_for_the_users_to_move_their_reservations: "Ability for the users to move their reservations"
           reservations_shifting: "Reservations shifting"
           prior_period_(hours): "Prior period (hours)"
@@ -608,6 +611,8 @@ en:
           reminder_enable: "reservation reminding enabling"
           reminder_delay: "delay before sending the reminder"
           default_value_is_24_hours: "If the field is leaved empty: 24 hours."
+          visibility_yearly: "maximum visibility for annual subscribers"
+          visibility_others: "maximum visibility for other members"
 
       open_api_clients:
         add_new_client: "Create new API client"

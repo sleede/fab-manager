@@ -2,10 +2,12 @@
 
 ## next release
 
+- Ability for admins to configure the maximum visibility for availabilities reservation
 - Fix a bug: admins cannot see all availabilities for spaces in reservation calendar when a user is selected
 - Fix a bug: missing translation after payment in english and portuguese
-- Updated puma for compatibility with openSSL > 1.0 
+- Updated puma for compatibility with openSSL > 1.0
 - Documented installation on ArchLinux
+- [TODO DEPLOY] `rake db:seed`
 
 ## v2.5.10 2017 August 16
 

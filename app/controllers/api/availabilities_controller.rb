@@ -3,6 +3,7 @@ class API::AvailabilitiesController < API::ApiController
 
   before_action :authenticate_user!, except: [:public]
   before_action :set_availability, only: [:show, :update, :destroy, :reservations]
+  before_action :define_max_visibility, only: [:machine, :trainings, :spaces]
   respond_to :json
 
   def index
@@ -126,8 +127,8 @@ class API::AvailabilitiesController < API::ApiController
     if @user.is_admin?
       @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND available_type = 'machines'", Time.now)
     else
-      end_at = 1.month.since
-      end_at = 3.months.since if is_subscription_year(@user)
+      end_at = @visi_max_other
+      end_at = @visi_max_year if is_subscription_year(@user)
       @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'machines'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
     @availabilities.each do |a|
@@ -169,8 +170,8 @@ class API::AvailabilitiesController < API::ApiController
       @availabilities = @availabilities.includes(:tags, :slots, trainings: [:machines]).where('availabilities.start_at > ?', Time.now)
     # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
-      end_at = 1.month.since
-      end_at = 3.months.since if can_show_slot_plus_three_months(@user)
+      end_at = @visi_max_year
+      end_at = @visi_max_year if can_show_slot_plus_three_months(@user)
       @availabilities = @availabilities.includes(:tags, :slots, :availability_tags, trainings: [:machines]).where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
 
@@ -193,8 +194,8 @@ class API::AvailabilitiesController < API::ApiController
     if current_user.is_admin?
       @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND available_type = 'space'", Time.now)
     else
-      end_at = 1.month.since
-      end_at = 3.months.since if is_subscription_year(@user)
+      end_at = @visi_max_other
+      end_at = @visi_max_year if is_subscription_year(@user)
       @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'space'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
     end
     @availabilities.each do |a|
@@ -371,4 +372,9 @@ class API::AvailabilitiesController < API::ApiController
         end
       end
     end
+
+  def define_max_visibility
+    @visi_max_year = Setting.find_by(name: 'visibility_yearly').value.to_i.months.since
+    @visi_max_other = Setting.find_by(name: 'visibility_others').value.to_i.months.since
+  end
 end

@@ -66,7 +66,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
 
     $scope.moveDelay =
       name: 'booking_move_delay'
-      value: parseInt(settingsPromise.booking_move_delay)
+      value: parseInt(settingsPromise.booking_move_delay, 10)
 
     $scope.enableCancel =
       name: 'booking_cancel_enable'
@@ -74,7 +74,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
 
     $scope.cancelDelay =
       name: 'booking_cancel_delay'
-      value: parseInt(settingsPromise.booking_cancel_delay)
+      value: parseInt(settingsPromise.booking_cancel_delay, 10)
 
     $scope.enableReminder =
       name: 'reminder_enable'
@@ -82,7 +82,15 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
 
     $scope.reminderDelay =
       name: 'reminder_delay'
-      value: parseInt(settingsPromise.reminder_delay)
+      value: parseInt(settingsPromise.reminder_delay, 10)
+
+    $scope.visibilityYearly =
+      name: 'visibility_yearly'
+      value: parseInt(settingsPromise.visibility_yearly, 10)
+
+    $scope.visibilityOthers =
+      name: 'visibility_others'
+      value: parseInt(settingsPromise.visibility_others, 10)
 
 
 

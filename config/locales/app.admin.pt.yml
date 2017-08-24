@@ -574,6 +574,9 @@ pt:
           confine_the_booking_agenda: "Confine a agenda de reserva"
           opening_time: "Horário de abertura"
           closing_time: "Horário de fechamento"
+          max_visibility: "Visibilidade máxima (em meses)"
+          visibility_for_yearly_members: "Para inscrições atuais de pelo menos 1 ano"
+          visibility_for_other_members: "Para todos os outros membros"
           ability_for_the_users_to_move_their_reservations: "Habilidade para os usuários mover suas reservas"
           reservations_shifting: "Mudança de reservas"
           prior_period_(hours): "Período anterior (horas)"
@@ -608,6 +611,8 @@ pt:
           reminder_enable: "Recordar reserva ativo"
           reminder_delay: "Atraso antes de enviar o lembrete"
           default_value_is_24_hours: "Se o campo estiver vazio: 24 horas."
+          visibility_yearly: "visibilidade máxima para assinantes anuais"
+          visibility_others: "visibilidade máxima para outros membros"
 
       open_api_clients:
         add_new_client: "Criar novo cliente de API"
