@@ -190,7 +190,7 @@ class API::AvailabilitiesController < API::ApiController
     @space = Space.friendly.find(params[:space_id])
     @slots = []
     @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @space.class.to_s, @space.id).includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at > ?', Time.now)
-    if @user.is_admin?
+    if current_user.is_admin?
       @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND available_type = 'space'", Time.now)
     else
       end_at = 1.month.since
