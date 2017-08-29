@@ -568,6 +568,7 @@ en:
           title_of_the_about_page: "Title of the About page"
           shift_enter_to_force_carriage_return: "SHIFT + ENTER to force carriage return"
           input_the_main_content: "Input the main content"
+          drag_and_drop_to_insert_images: "Drap and drop to insert images"
           input_the_fablab_contacts: "Input the FabLab contacts"
           reservations: "Reservations"
           reservations_parameters: "Reservations parameters"

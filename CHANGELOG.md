@@ -2,6 +2,7 @@
 
 ## next release
 
+- Added tooltip concerning images insertion while configuring the about page
 - Ability for admins to configure the maximum visibility for availabilities reservation
 - Fix a bug: admins cannot see all availabilities for spaces in reservation calendar when a user is selected
 - Fix a bug: missing translation after payment in english and portuguese

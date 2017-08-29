@@ -568,6 +568,7 @@ fr:
           title_of_the_about_page: "Titre page A propos"
           shift_enter_to_force_carriage_return: "MAJ. + ENTRÉE pour forcer le retour à la ligne"
           input_the_main_content: "Saisir le contenu principal"
+          drag_and_drop_to_insert_images: "Faites un glisser-déposer pour insérer des images"
           input_the_fablab_contacts: "Saisir les Contacts du FabLab"
           reservations: "Réservations"
           reservations_parameters: "Paramètres des réservations"
