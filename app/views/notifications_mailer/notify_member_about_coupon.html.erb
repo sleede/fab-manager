@@ -15,7 +15,7 @@
 <% end %>
 
 <%
-  # we must tell the use if he could use the code just once or many times (in case we won't specify)
+  # we must tell the user if he can use the code just once or many times (== maximum wasn't specified)
   usages = 999 # just a number > 1
   if @attached_object.validity_per_user == 'once'
     usages = 1

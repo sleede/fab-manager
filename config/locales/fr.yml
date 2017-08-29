@@ -306,6 +306,7 @@ fr:
         download_here: "Téléchargez ici"
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} avec le code %{CODE}"
 
   statistics:
     # outil de statistiques pour les administrateurs
