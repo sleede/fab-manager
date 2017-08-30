@@ -4,12 +4,14 @@
 
 - Added tooltip concerning images insertion while configuring the about page
 - Ability for admins to configure the maximum visibility for availabilities reservation
+- Administrators isolation in a special group
 - Fix a bug: admins cannot see all availabilities for spaces in reservation calendar when a user is selected
 - Fix a bug: missing translation after payment in english and portuguese
 - Fix a bug: invalid notification when sending monetary coupon to users
+- Fix a bug: unable to delete group "standard"
 - Updated puma for compatibility with openSSL > 1.0
 - Documented installation on ArchLinux
-- [TODO DEPLOY] `rake db:seed`
+- [TODO DEPLOY] `rake db:seed` then `rake fablab:fix:migrate_admins_group`
 
 ## v2.5.10 2017 August 16
 

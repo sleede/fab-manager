@@ -47,5 +47,15 @@ namespace :fablab do
         end
       end
     end
+
+    task migrate_admins_group: :environment do
+      admins = Group.find_by(slug: 'admins')
+      User.all.each do |user|
+        if user.is_admin?
+          user.group = admins
+          user.save!
+        end
+      end
+    end
   end
 end
