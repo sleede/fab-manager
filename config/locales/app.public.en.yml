@@ -97,6 +97,7 @@ en:
         not_registered_to_the_fablab: "Not registered to the Fablab?"
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."
+        caps_lock_is_on: "Caps lock key is on."
 
         # forgotten password modal
         your_email_address_is_unknown: "Your e-mail address is unknown."
