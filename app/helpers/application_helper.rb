@@ -80,6 +80,18 @@ module ApplicationHelper
 		nil
 	end
 
+	##
+	# Apply a correction for a future DateTime due to change in Daylight Saving Time (DST) period
+	# @param datetime {DateTime}
+	# Inspired by https://stackoverflow.com/a/12065605
+	##
+	def dst_correction(datetime)
+		datetime = datetime.in_time_zone(Time.zone.tzinfo.name)
+		datetime = datetime - 1.hour if datetime.dst? && !Time.now.dst?
+		datetime = datetime + 1.hour if Time.now.dst? && !datetime.dst?
+		datetime
+	end
+
 
 	private
 	## inspired by gems/actionview-4.2.5/lib/action_view/helpers/translation_helper.rb
