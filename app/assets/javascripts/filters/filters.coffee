@@ -170,21 +170,27 @@ Application.Filters.filter "trainingReservationsFilter", [ ->
 Application.Filters.filter "eventsReservationsFilter", [ ->
   (elements, selectedScope) ->
     if !angular.isUndefined(elements) and !angular.isUndefined(selectedScope) and elements? and selectedScope? and selectedScope != ""
+      switch selectedScope
+        when "all"
+          filteredElements = elements  
+        when "passed"
+          filteredElements = []
+          angular.forEach elements, (element)->
+            element.start_at = element.availability.start_at if angular.isUndefined(element.start_at)
+            if new Date(element.start_at) < new Date
+              filteredElements.push(element)
+              filteredElements.reverse()
+        else
+          return []
+      filteredElements
+
+    else
       filteredElements = []
       angular.forEach elements, (element)->
         element.start_at = element.availability.start_at if angular.isUndefined(element.start_at)
-        switch selectedScope
-          when "future"
-            if new Date(element.start_at) > new Date
-              filteredElements.push(element)
-          when "passed"
-            if new Date(element.start_at) <= new Date
-              filteredElements.push(element)
-          else
-            return []
-      filteredElements
-    else
-      elements
+        if new Date(element.start_at) >= new Date
+          filteredElements.push(element)
+      filteredElements.reverse()
 ]
 
 Application.Filters.filter "groupFilter", [ ->
