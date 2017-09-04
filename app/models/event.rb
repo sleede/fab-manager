@@ -88,10 +88,10 @@ class Event < ActiveRecord::Base
       r.events.each do |date|
         days_diff = availability.end_at.day - availability.start_at.day
         start_at = DateTime.new(date.year, date.month, date.day, availability.start_at.hour, availability.start_at.min, availability.start_at.sec, availability.start_at.zone)
-        start_at = dst_correction(start_at)
+        start_at = dst_correction(availability.start_at,start_at)
         end_date = date + days_diff.days
         end_at = DateTime.new(end_date.year, end_date.month, end_date.day, availability.end_at.hour, availability.end_at.min, availability.end_at.sec, availability.end_at.zone)
-        end_at = dst_correction(end_at)
+        end_at = dst_correction(availability.start_at,end_at)
         if event_image
           ei = EventImage.new(attachment: event_image.attachment)
         end

@@ -82,14 +82,15 @@ module ApplicationHelper
 
 	##
 	# Apply a correction for a future DateTime due to change in Daylight Saving Time (DST) period
+	# @param reference {ActiveSupport::TimeWithZone}
 	# @param datetime {DateTime}
 	# Inspired by https://stackoverflow.com/a/12065605
 	##
-	def dst_correction(datetime)
-		datetime = datetime.in_time_zone(Time.zone.tzinfo.name)
-		datetime = datetime - 1.hour if datetime.dst? && !Time.now.dst?
-		datetime = datetime + 1.hour if Time.now.dst? && !datetime.dst?
-		datetime
+	def dst_correction(reference, datetime)
+		res = datetime.in_time_zone(reference.time_zone.tzinfo.name)
+		res = res - 1.hour if res.dst? && !reference.dst?
+		res = res + 1.hour if reference.dst? && !res.dst?
+		res
 	end
 
 
