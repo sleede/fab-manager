@@ -12,6 +12,7 @@
 - Updated puma for compatibility with openSSL > 1.0
 - Documented installation on ArchLinux
 - [TODO DEPLOY] `rake db:seed` then `rake fablab:fix:migrate_admins_group`
+- [TODO DEPLAY] `rake fablab:fix:recursive_events_over_DST`
 
 ## v2.5.10 2017 August 16
 
