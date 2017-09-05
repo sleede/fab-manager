@@ -59,16 +59,17 @@ namespace :fablab do
     end
 
     task recursive_events_over_DST: :environment do
-      #TODO intensive testing before release
       include ApplicationHelper
       groups = Event.group(:recurrence_id).count
       groups.keys.each do |recurrent_event_id|
         initial_event = Event.find(recurrent_event_id)
         Event.where(recurrence_id: recurrent_event_id).where.not(id: recurrent_event_id).each do |event|
           availability = event.availability
-          availability.start_at = dst_correction(initial_event.availability.start_at, availability.start_at)
-          availability.end_at = dst_correction(initial_event.availability.end_at, availability.end_at)
-          availability.save!
+          if initial_event.availability.start_at.hour != availability.start_at.hour
+            availability.start_at = dst_correction(initial_event.availability.start_at, availability.start_at)
+            availability.end_at = dst_correction(initial_event.availability.end_at, availability.end_at)
+            availability.save!
+          end
         end
       end
     end
