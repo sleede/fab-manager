@@ -5,6 +5,7 @@
 - Added tooltip concerning images insertion while configuring the about page
 - Ability for admins to configure the maximum visibility for availabilities reservation
 - Administrators isolation in a special group
+- Fix a bug: recursive events crossing Daylight Saving Time period changes are shifted by 1 hour
 - Fix a bug: admins cannot see all availabilities for spaces in reservation calendar when a user is selected
 - Fix a bug: missing translation after payment in english and portuguese
 - Fix a bug: invalid notification when sending monetary coupon to users
