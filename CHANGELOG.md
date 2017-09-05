@@ -6,6 +6,7 @@
 - Ability for admins to configure the maximum visibility for availabilities reservation
 - Administrators isolation in a special group
 - In login modal, displays an alert if Caps lock key is pressed
+- Prevent creation of irregular yearly plans (eg. 12 months)
 - Fix a bug: admins cannot see all availabilities for spaces in reservation calendar when a user is selected
 - Fix a bug: missing translation after payment in english and portuguese
 - Fix a bug: invalid notification when sending monetary coupon to users
