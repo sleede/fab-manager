@@ -48,6 +48,16 @@ fr:
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Le créneau {{START}} - {{END}} n'a pu être supprimé car il est déjà réservé par un membre"  # angular interpolation
           you_should_select_at_least_a_machine: "Vous devriez sélectionne au moins une machine pour ce créneau."
           export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
+          actions: "Actions"
+          block_reservations: "Bloquer les réservations"
+          do_you_really_want_to_block_this_slot_html: "Êtes vous sur de vouloir bloquer les nouvelles réservations sur ce créneau ? Il deviendra alors invisible pour les utilisateurs. <br/><strong>Attention</strong> : cela n'annulera pas les réservations existantes."
+          locking_success: "Le créneau a bien été verrouillé, il n'apparaitra plus dans le calendrier utilisateur"
+          locking_failed: "Une erreur est survenue. Le verrouillage du créneau a échoué"
+          allow_reservations: "Autoriser les réservations"
+          do_you_really_want_to_allow_reservations: "Êtes vous sur de vouloir autoriser de nouveau la prise de réservations sur ce créneau ? Il deviendra alors visible pour les utilisateurs."
+          unlocking_success: "Le créneau a bien été déverrouillé, il apparaîtra de nouveau dans le calendrier utilisateur"
+          unlocking_failed: "Une erreur est survenue. Le déverrouillage du créneau a échoué"
+          reservations_locked: "Réservations bloquées"
 
       project_elements:
         # gestion des éléments constituant les projets

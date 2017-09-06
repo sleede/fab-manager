@@ -2,7 +2,7 @@ class API::AvailabilitiesController < API::ApiController
   include FablabConfiguration
 
   before_action :authenticate_user!, except: [:public]
-  before_action :set_availability, only: [:show, :update, :destroy, :reservations]
+  before_action :set_availability, only: [:show, :update, :destroy, :reservations, :lock]
   before_action :define_max_visibility, only: [:machine, :trainings, :spaces]
   respond_to :json
 
@@ -235,6 +235,15 @@ class API::AvailabilitiesController < API::ApiController
     end
   end
 
+  def lock
+    authorize @availability
+    if @availability.update_attributes(lock: lock_params)
+      render :show, status: :ok, location: @availability
+    else
+      render json: @availability.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     def set_availability
       @availability = Availability.find(params[:id])
@@ -243,6 +252,10 @@ class API::AvailabilitiesController < API::ApiController
     def availability_params
       params.require(:availability).permit(:start_at, :end_at, :available_type, :machine_ids, :training_ids, :nb_total_places, machine_ids: [], training_ids: [], space_ids: [], tag_ids: [],
                                            :machines_attributes => [:id, :_destroy])
+    end
+
+    def lock_params
+      params.require(:lock)
     end
 
     def is_reserved_availability(availability, user_id)
