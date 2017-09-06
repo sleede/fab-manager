@@ -21,22 +21,32 @@ class API::AvailabilitiesController < API::ApiController
   def public
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
-    @reservations = Reservation.includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
+    @reservations = Reservation.includes(:slots, user: [:profile]).references(:slots, :user)
+                        .where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
 
     # request for 1 single day
     if in_same_day(start_date, end_date)
       # trainings, events
       @training_and_event_availabilities = Availability.includes(:tags, :trainings, :event, :slots).where(available_type: %w(training event))
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+                                    .where(lock: false)
       # machines
       @machine_availabilities = Availability.includes(:tags, :machines).where(available_type: 'machines')
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+                                    .where(lock: false)
       @machine_slots = []
       @machine_availabilities.each do |a|
         a.machines.each do |machine|
           if params[:m] and params[:m].include?(machine.id.to_s)
             ((a.end_at - a.start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-              slot = Slot.new(start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes, end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: machine, title: machine.name)
+              slot = Slot.new(
+                  start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes,
+                  end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+                  availability_id: a.id,
+                  availability: a,
+                  machine: machine,
+                  title: machine.name
+              )
               slot = verify_machine_is_reserved(slot, @reservations, current_user, '')
               @machine_slots << slot
             end
@@ -47,6 +57,7 @@ class API::AvailabilitiesController < API::ApiController
       # spaces
       @space_availabilities = Availability.includes(:tags, :spaces).where(available_type: 'space')
                                           .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+                                          .where(lock: false)
 
       if params[:s]
         @space_availabilities.where(available_id: params[:s])
@@ -57,7 +68,14 @@ class API::AvailabilitiesController < API::ApiController
         space = a.spaces.first
         ((a.end_at - a.start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
           if (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
-            slot = Slot.new(start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes, end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes, availability_id: a.id, availability: a, space: space, title: space.name)
+            slot = Slot.new(
+                start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes,
+                end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+                availability_id: a.id,
+                availability: a,
+                space: space,
+                title: space.name
+            )
             slot = verify_space_is_reserved(slot, @reservations, current_user, '')
             @space_slots << slot
           end
@@ -69,6 +87,7 @@ class API::AvailabilitiesController < API::ApiController
     else
       @availabilities = Availability.includes(:tags, :machines, :trainings, :spaces, :event, :slots)
                                     .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+                                    .where(lock: false)
       @availabilities.each do |a|
         if a.available_type == 'training' or a.available_type == 'event'
           a = verify_training_event_is_reserved(a, @reservations, current_user)
@@ -125,16 +144,27 @@ class API::AvailabilitiesController < API::ApiController
     @slots = []
     @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id).includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at > ?', Time.now)
     if @user.is_admin?
-      @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND available_type = 'machines'", Time.now)
+      @availabilities = @machine.availabilities.includes(:tags)
+                            .where("end_at > ? AND available_type = 'machines'", Time.now)
+                            .where(lock: false)
     else
       end_at = @visi_max_other
       end_at = @visi_max_year if is_subscription_year(@user)
-      @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'machines'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = @machine.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'machines'", Time.now, end_at)
+                            .where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+                            .where(lock: false)
     end
     @availabilities.each do |a|
       ((a.end_at - a.start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
         if (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
-          slot = Slot.new(start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes, end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes, availability_id: a.id, availability: a, machine: @machine, title: '')
+          slot = Slot.new(
+              start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes,
+              end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+              availability_id: a.id,
+              availability: a,
+              machine: @machine,
+              title: ''
+          )
           slot = verify_machine_is_reserved(slot, @reservations, current_user, @current_user_role)
           @slots << slot
         end
@@ -167,12 +197,17 @@ class API::AvailabilitiesController < API::ApiController
     # who made the request?
     # 1) an admin (he can see all future availabilities)
     if current_user.is_admin?
-      @availabilities = @availabilities.includes(:tags, :slots, trainings: [:machines]).where('availabilities.start_at > ?', Time.now)
+      @availabilities = @availabilities.includes(:tags, :slots, trainings: [:machines])
+                            .where('availabilities.start_at > ?', Time.now)
+                            .where(lock: false)
     # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
       end_at = @visi_max_year
       end_at = @visi_max_year if can_show_slot_plus_three_months(@user)
-      @availabilities = @availabilities.includes(:tags, :slots, :availability_tags, trainings: [:machines]).where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = @availabilities.includes(:tags, :slots, :availability_tags, trainings: [:machines])
+                            .where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at)
+                            .where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+                            .where(lock: false)
     end
 
     # finally, we merge the availabilities with the reservations
@@ -190,18 +225,32 @@ class API::AvailabilitiesController < API::ApiController
     @current_user_role = current_user.is_admin? ? 'admin' : 'user'
     @space = Space.friendly.find(params[:space_id])
     @slots = []
-    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @space.class.to_s, @space.id).includes(:slots, user: [:profile]).references(:slots, :user).where('slots.start_at > ?', Time.now)
+    @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @space.class.to_s, @space.id)
+                        .includes(:slots, user: [:profile]).references(:slots, :user)
+                        .where('slots.start_at > ?', Time.now)
     if current_user.is_admin?
-      @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND available_type = 'space'", Time.now)
+      @availabilities = @space.availabilities.includes(:tags)
+                            .where("end_at > ? AND available_type = 'space'", Time.now)
+                            .where(lock: false)
     else
       end_at = @visi_max_other
       end_at = @visi_max_year if is_subscription_year(@user)
-      @availabilities = @space.availabilities.includes(:tags).where("end_at > ? AND end_at < ? AND available_type = 'space'", Time.now, end_at).where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+      @availabilities = @space.availabilities.includes(:tags)
+                            .where("end_at > ? AND end_at < ? AND available_type = 'space'", Time.now, end_at)
+                            .where('availability_tags.tag_id' => @user.tag_ids.concat([nil]))
+                            .where(lock: false)
     end
     @availabilities.each do |a|
       ((a.end_at - a.start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
         if (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
-          slot = Slot.new(start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes, end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes, availability_id: a.id, availability: a, space: @space, title: '')
+          slot = Slot.new(
+              start_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes,
+              end_at: a.start_at + (i*ApplicationHelper::SLOT_DURATION).minutes + ApplicationHelper::SLOT_DURATION.minutes,
+              availability_id: a.id,
+              availability: a,
+              space: @space,
+              title: ''
+          )
           slot = verify_space_is_reserved(slot, @reservations, @user, @current_user_role)
           @slots << slot
         end

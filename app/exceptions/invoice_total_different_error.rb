@@ -1,3 +1,3 @@
-# Raised when total of reservation isnt equal total of strip's invoice
-class InvoiceTotalDiffrentError < StandardError
+# Raised when total of reservation isn't equal to the total of stripe's invoice
+class InvoiceTotalDifferentError < StandardError
 end

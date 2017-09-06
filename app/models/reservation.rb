@@ -47,6 +47,13 @@ class Reservation < ActiveRecord::Base
       plan = nil
     end
 
+    # check that none of the reserved availabilities was locked
+    slots.each do |slot|
+      if slot.availability.lock
+        raise LockedError
+      end
+    end
+
 
     case reservable
 
@@ -260,7 +267,7 @@ class Reservation < ActiveRecord::Base
           # this function only check reservation total is equal strip invoice total when
           # pay only reservation not reservation + subscription
           #if !is_equal_reservation_total_and_stp_invoice_total(stp_invoice, coupon_code)
-            #raise InvoiceTotalDiffrentError
+            #raise InvoiceTotalDifferentError
           #end
           stp_invoice.pay
           card.delete if card

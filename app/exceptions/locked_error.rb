@@ -1,3 +1,3 @@
-# Raised when debit wallet fail
-class DebitWalletError < StandardError
+# Raised when reserving on a locked availability
+class LockedError < StandardError
 end
