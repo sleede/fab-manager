@@ -256,6 +256,9 @@ Application.Controllers.controller "ShowMachineController", ['$scope', '$state',
           $state.go('app.public.machines_list')
         , (error)->
           growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
+
+
+
   ##
   # Callback to book a reservation for the current machine
   ##
@@ -410,6 +413,7 @@ Application.Controllers.controller "ReserveMachineController", ["$scope", '$stat
       $scope.selectedEvent.backgroundColor = '#bbb'
       $scope.selectedEvent.title = _t('i_shift')
     updateCalendar()
+
 
 
   ##
