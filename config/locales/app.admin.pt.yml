@@ -48,6 +48,17 @@ pt:
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Não é possível deletar o slot {{START}} - {{END}} porque já foi reservado por um membro"  # angular interpolation
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
           export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
+          actions: "Ações"
+          block_reservations: "Impedir reservas"
+          do_you_really_want_to_block_this_slot: "Você realmente quer bloquear novas reservas neste slot? Isso se tornará invisível para os usuários."
+          locking_success: "Slot bloqueado com êxito, ela não aparecerá mais tempo no calendário do usuário"
+          locking_failed: "Um erro ocorreu. O bloqueio do slot falhou"
+          allow_reservations: "Permitir a reserva"
+          do_you_really_want_to_allow_reservations: "Você realmente quer permitir a reserva novamente neste slot? Será visível para os usuários."
+          unlocking_success: "Slot desbloqueado com sucesso, ele aparecerá novamente no calendário do usuário"
+          unlocking_failed: "Um erro ocorreu. O desbloqueio do slot falhou"
+          reservations_locked: "Reserva é bloqueado"
+          unlockable_because_reservations: "Não é possível bloquear a reserva neste slot porque existem algumas reservas não cancelados nele."
 
       project_elements:
         # management of the projects' components

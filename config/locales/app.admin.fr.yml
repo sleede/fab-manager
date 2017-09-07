@@ -50,7 +50,7 @@ fr:
           export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
           actions: "Actions"
           block_reservations: "Bloquer les réservations"
-          do_you_really_want_to_block_this_slot_html: "Êtes vous sur de vouloir bloquer les nouvelles réservations sur ce créneau ? Il deviendra alors invisible pour les utilisateurs. <br/><strong>Attention</strong> : cela n'annulera pas les réservations existantes."
+          do_you_really_want_to_block_this_slot: "Êtes vous sur de vouloir bloquer les nouvelles réservations sur ce créneau ? Il deviendra alors invisible pour les utilisateurs."
           locking_success: "Le créneau a bien été verrouillé, il n'apparaitra plus dans le calendrier utilisateur"
           locking_failed: "Une erreur est survenue. Le verrouillage du créneau a échoué"
           allow_reservations: "Autoriser les réservations"

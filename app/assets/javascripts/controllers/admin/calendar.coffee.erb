@@ -151,7 +151,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
         resolve:
           object: ->
             title: _t('admin_calendar.confirmation_required')
-            msg: if locked then _t("admin_calendar.do_you_really_want_to_allow_reservations") else _t("admin_calendar.do_you_really_want_to_block_this_slot_html")
+            msg: if locked then _t("admin_calendar.do_you_really_want_to_allow_reservations") else _t("admin_calendar.do_you_really_want_to_block_this_slot")
       , ->
         # the admin has confirmed, lock/unlock the slot
         Availability.lock {id: $scope.availability.id}, {lock: !locked}
