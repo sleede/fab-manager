@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release
+## v2.5.11 2017 September 7
 
 - Added tooltip concerning images insertion while configuring the about page
 - Ability for admins to configure the maximum visibility for availabilities reservation
@@ -17,7 +17,7 @@
 - Updated puma for compatibility with openSSL > 1.0
 - Documented installation on ArchLinux
 - [TODO DEPLOY] `rake db:seed` then `rake fablab:fix:migrate_admins_group`
-- [TODO DEPLAY] `rake fablab:fix:recursive_events_over_DST`
+- [TODO DEPLOY] `rake fablab:fix:recursive_events_over_DST`
 
 ## v2.5.10 2017 August 16
 
