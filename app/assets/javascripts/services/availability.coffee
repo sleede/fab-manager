@@ -24,4 +24,7 @@ Application.Services.factory 'Availability', ["$resource", ($resource)->
       isArray: true
     update:
       method: 'PUT'
+    lock:
+      method: 'PUT'
+      url: '/api/availabilities/:id/lock'
 ]

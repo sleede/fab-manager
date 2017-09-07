@@ -43,7 +43,7 @@ group :development do
   gem 'mailcatcher'
   gem 'awesome_print'
 
-  gem "puma"
+  gem 'puma'
   gem 'foreman'
 
   gem 'capistrano'

@@ -22,7 +22,12 @@
                   <uib-alert type="warning">
                       <span class="text-black font-sbold">{{getUserGroup().name}}</span>
                   </uib-alert>
-                  <button class="btn text-black btn-warning-full btn-sm m-t-n-sm" ng-click="group.change = !group.change"  ng-show="!user.subscribed_plan.name" translate>{{ 'i_want_to_change_group' }}</button>
+                  <button class="btn text-black btn-warning-full btn-sm m-t-n-sm"
+                          ng-click="group.change = !group.change"
+                          ng-hide="user.subscribed_plan.name || user.role === 'admin'"
+                          translate>
+                    {{ 'i_want_to_change_group' }}
+                  </button>
               </div>
               <div ng-show="group.change">
                   <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="userGroup"></select>

@@ -85,6 +85,7 @@ Rails.application.routes.draw do
       get 'reservations', on: :member
       get 'public', on: :collection
       get '/export_index', action: 'export_availabilities', on: :collection
+      put ':id/lock', action: 'lock', on: :collection
     end
 
     resources :groups, only: [:index, :create, :update, :destroy]

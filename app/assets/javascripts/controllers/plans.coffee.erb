@@ -8,7 +8,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ### PUBLIC SCOPE ###
 
     ## list of groups
-    $scope.groups = groupsPromise
+    $scope.groups = groupsPromise.filter (g) -> g.slug != 'admins'
 
     ## default : do not show the group changing form
     ## group ID of the current/selected user
@@ -18,7 +18,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
 
     ## list of plans, classified by group
     $scope.plansClassifiedByGroup = []
-    for group in groupsPromise
+    for group in $scope.groups
       groupObj = { id: group.id, name: group.name, plans: [] }
       for plan in plansPromise
         groupObj.plans.push(plan) if plan.group_id == group.id

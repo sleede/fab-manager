@@ -1,5 +1,24 @@
 # Changelog Fab Manager
 
+## v2.5.11 2017 September 7
+
+- Added tooltip concerning images insertion while configuring the about page
+- Ability for admins to configure the maximum visibility for availabilities reservation
+- Administrators isolation in a special group
+- In login modal, displays an alert if Caps lock key is pressed
+- Prevent creation of irregular yearly plans (eg. 12 months)
+- Ability to lock machine, space or training availability slots, to prevent new reservations on them
+- Fix a bug: admins cannot see all availabilities for spaces in reservation calendar when a user is selected
+- Fix a bug: missing translation after payment in english and portuguese
+- Fix a bug: invalid notification when sending monetary coupon to users
+- Fix a bug: unable to delete group "standard"
+- Fix a bug: recursive events crossing Daylight Saving Time period changes are shifted by 1 hour
+- Fix a bug: unable to see availabilities in the public calendar when browsing as a visitor (non-connected)
+- Updated puma for compatibility with openSSL > 1.0
+- Documented installation on ArchLinux
+- [TODO DEPLOY] `rake db:seed` then `rake fablab:fix:migrate_admins_group`
+- [TODO DEPLOY] `rake fablab:fix:recursive_events_over_DST`
+
 ## v2.5.10 2017 August 16
 
 - Updated axlsx gem for excel files generation, possible fix for #489

@@ -27,6 +27,8 @@ class Plan < ActiveRecord::Base
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :interval_count, numericality: { less_than: 12 }, if: Proc.new {|plan| plan.interval == 'month'}
+  validates :interval_count, numericality: { less_than: 52 }, if: Proc.new {|plan| plan.interval == 'week'}
   validates :interval, inclusion: { in: %w(year month week) }
   validates :base_name, :slug, presence: true
 

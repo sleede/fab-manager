@@ -306,6 +306,7 @@ pt:
         download_here: "Baixe aqui"
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} com o código %{CODE}"
 
   statistics:
     # statistics tools for admins
@@ -356,3 +357,7 @@ pt:
     # initial price's category for events, created to replace the old "reduced amount" property
     reduced_fare: "Tarifa reduzida"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarifa reduzida se tiver menos de 25 anos, estudante ou desempregado."
+
+  group:
+    # name of the user's group for administrators
+    admins: 'Administradores'

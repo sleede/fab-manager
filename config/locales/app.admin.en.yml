@@ -48,6 +48,17 @@ en:
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
           you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
           export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
+          actions: "Actions"
+          block_reservations: "Block reservations"
+          do_you_really_want_to_block_this_slot: "Do you really want to block new reservations on this slot? It will become invisible to users."
+          locking_success: "Slot successfully locked, it won't appear any longer in the user calendar"
+          locking_failed: "An error occurred. Slot locking has failed"
+          allow_reservations: "Allow reservations"
+          do_you_really_want_to_allow_reservations: "Do you really want to allow booking again on this slot? It will become visible for the users."
+          unlocking_success: "Slot successfully unlocked, it will appear again in the user calendar"
+          unlocking_failed: "An error occurred. Slot unlocking has failed"
+          reservations_locked: "Booking is blocked"
+          unlockable_because_reservations: "Unable to block booking on this slot because some uncancelled reservations exist on it."
 
       project_elements:
         # management of the projects' components
@@ -568,12 +579,16 @@ en:
           title_of_the_about_page: "Title of the About page"
           shift_enter_to_force_carriage_return: "SHIFT + ENTER to force carriage return"
           input_the_main_content: "Input the main content"
+          drag_and_drop_to_insert_images: "Drap and drop to insert images"
           input_the_fablab_contacts: "Input the FabLab contacts"
           reservations: "Reservations"
           reservations_parameters: "Reservations parameters"
           confine_the_booking_agenda: "Confine the booking agenda"
           opening_time: "Opening time"
           closing_time: "Closing time"
+          max_visibility: "Maximum visibility (in months)"
+          visibility_for_yearly_members: "For currently running subscriptions, at least 1 year long"
+          visibility_for_other_members: "For all other members"
           ability_for_the_users_to_move_their_reservations: "Ability for the users to move their reservations"
           reservations_shifting: "Reservations shifting"
           prior_period_(hours): "Prior period (hours)"
@@ -608,6 +623,8 @@ en:
           reminder_enable: "reservation reminding enabling"
           reminder_delay: "delay before sending the reminder"
           default_value_is_24_hours: "If the field is leaved empty: 24 hours."
+          visibility_yearly: "maximum visibility for annual subscribers"
+          visibility_others: "maximum visibility for other members"
 
       open_api_clients:
         add_new_client: "Create new API client"

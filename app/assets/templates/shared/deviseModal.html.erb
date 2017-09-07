@@ -42,6 +42,10 @@
                          ng-minlength="8"/>
                 </div>
                 <a href="#" ng-click="openResetPassword($event)" class="text-xs">{{ 'password_forgotten' | translate }}</a>
+                <div class="alert alert-warning m-t-sm m-b-none text-xs p-sm" ng-show='isCapsLockOn' role="alert">
+                  <i class="fa fa-warning"></i>
+                  {{ 'caps_lock_is_on' | translate }}
+                </div>
               </div>
             </div>
 

@@ -82,9 +82,13 @@ if Group.count == 0
   ])
 end
 
+unless Group.find_by(slug: 'admins')
+  Group.create! name: I18n.t('group.admins'), slug: 'admins'
+end
+
 # Create the default admin if none exists yet
 if Role.where(name: 'admin').joins(:users).count === 0
-    admin = User.new(username: 'admin', email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], password_confirmation: Rails.application.secrets.admin_password, group_id: Group.first.id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
+    admin = User.new(username: 'admin', email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id, profile_attributes: {first_name: 'admin', last_name: 'admin', gender: true, phone: '0123456789', birthday: Time.now})
     admin.add_role 'admin'
     admin.save!
 end
@@ -394,6 +398,18 @@ end
 unless Setting.find_by(name: 'reminder_delay').try(:value)
   setting = Setting.find_or_initialize_by(name: 'reminder_delay')
   setting.value = '24'
+  setting.save
+end
+
+unless Setting.find_by(name: 'visibility_yearly').try(:value)
+  setting = Setting.find_or_initialize_by(name: 'visibility_yearly')
+  setting.value = '3'
+  setting.save
+end
+
+unless Setting.find_by(name: 'visibility_others').try(:value)
+  setting = Setting.find_or_initialize_by(name: 'visibility_others')
+  setting.value = '1'
   setting.save
 end
 

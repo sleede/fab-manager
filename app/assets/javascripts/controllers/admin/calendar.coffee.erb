@@ -132,6 +132,40 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
 
 
+  ##
+  # Mark the selected slot as unavailable for new reservations or allow reservations again on it
+  ##
+  $scope.toggleLockReservations = ->
+    # first, define a shortcut to the lock property
+    locked = $scope.availability.lock
+    # then check if we'll allow reservations locking
+    prevent = !locked # if currently locked, allow unlock anyway
+    if (!locked)
+        prevent = false
+        angular.forEach $scope.reservations, (r) ->
+          if r.canceled_at == null
+            prevent = true # if currently unlocked and has any non-cancelled reservation, disallow locking
+    if (!prevent)
+      # open a confirmation dialog
+      dialogs.confirm
+        resolve:
+          object: ->
+            title: _t('admin_calendar.confirmation_required')
+            msg: if locked then _t("admin_calendar.do_you_really_want_to_allow_reservations") else _t("admin_calendar.do_you_really_want_to_block_this_slot")
+      , ->
+        # the admin has confirmed, lock/unlock the slot
+        Availability.lock {id: $scope.availability.id}, {lock: !locked}
+        , (data) -> # success
+          $scope.availability = data
+          growl.success(if locked then _t('admin_calendar.unlocking_success') else _t('admin_calendar.locking_success') )
+          uiCalendarConfig.calendars.calendar.fullCalendar 'refetchEvents'
+        , (error) -> # failed
+          growl.error(if locked then _t('admin_calendar.unlocking_failed') else _t('admin_calendar.locking_failed'))
+    else
+      growl.error(_t('admin_calendar.unlockable_because_reservations'))
+
+
+
   ### PRIVATE SCOPE ###
 
   ##
