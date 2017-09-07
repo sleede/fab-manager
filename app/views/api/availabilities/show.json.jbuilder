@@ -11,3 +11,4 @@ json.tags @availability.tags do |t|
   json.id t.id
   json.name t.name
 end
+json.lock @availability.lock

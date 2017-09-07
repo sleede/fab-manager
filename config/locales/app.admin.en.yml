@@ -48,6 +48,17 @@ en:
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
           you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
           export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
+          actions: "Actions"
+          block_reservations: "Block reservations"
+          do_you_really_want_to_block_this_slot: "Do you really want to block new reservations on this slot? It will become invisible to users."
+          locking_success: "Slot successfully locked, it won't appear any longer in the user calendar"
+          locking_failed: "An error occurred. Slot locking has failed"
+          allow_reservations: "Allow reservations"
+          do_you_really_want_to_allow_reservations: "Do you really want to allow booking again on this slot? It will become visible for the users."
+          unlocking_success: "Slot successfully unlocked, it will appear again in the user calendar"
+          unlocking_failed: "An error occurred. Slot unlocking has failed"
+          reservations_locked: "Booking is blocked"
+          unlockable_because_reservations: "Unable to block booking on this slot because some uncancelled reservations exist on it."
 
       project_elements:
         # management of the projects' components

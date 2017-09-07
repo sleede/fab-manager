@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227114634) do
+ActiveRecord::Schema.define(version: 20170906100906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170227114634) do
     t.datetime "updated_at"
     t.integer  "nb_total_places"
     t.boolean  "destroying",      default: false
+    t.boolean  "lock",            default: false
   end
 
   create_table "availability_tags", force: :cascade do |t|
