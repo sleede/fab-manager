@@ -13,6 +13,7 @@
 - Fix a bug: invalid notification when sending monetary coupon to users
 - Fix a bug: unable to delete group "standard"
 - Fix a bug: recursive events crossing Daylight Saving Time period changes are shifted by 1 hour
+- Fix a bug: unable to see availabilities in the public calendar when browsing as a visitor (non-connected)
 - Updated puma for compatibility with openSSL > 1.0
 - Documented installation on ArchLinux
 - [TODO DEPLOY] `rake db:seed` then `rake fablab:fix:migrate_admins_group`

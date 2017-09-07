@@ -92,7 +92,7 @@ class API::AvailabilitiesController < API::ApiController
         if a.available_type == 'training' or a.available_type == 'event'
           a = verify_training_event_is_reserved(a, @reservations, current_user)
         elsif a.available_type == 'space'
-          a.is_reserved = is_reserved_availability(a, current_user.id)
+          a.is_reserved = is_reserved_availability(a, current_user)
         end
       end
     end
@@ -307,14 +307,18 @@ class API::AvailabilitiesController < API::ApiController
       params.require(:lock)
     end
 
-    def is_reserved_availability(availability, user_id)
-      reserved_slots = []
-      availability.slots.each do |s|
-        if s.canceled_at.nil?
-          reserved_slots << s
+    def is_reserved_availability(availability, user)
+      if user
+        reserved_slots = []
+        availability.slots.each do |s|
+          if s.canceled_at.nil?
+            reserved_slots << s
+          end
         end
+        reserved_slots.map(&:reservations).flatten.map(&:user_id).include? user.id
+      else
+        false
       end
-      reserved_slots.map(&:reservations).flatten.map(&:user_id).include? user_id
     end
 
     def is_reserved(start_at, reservations)
