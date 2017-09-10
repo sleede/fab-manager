@@ -301,8 +301,7 @@ GEM
     prawn-table (0.2.1)
     protected_attributes (1.1.3)
       activemodel (>= 4.0.1, < 5.0)
-    puma (2.11.1)
-      rack (>= 1.1, < 2.0)
+    puma (3.10.0)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
     rack (1.6.8)
@@ -568,4 +567,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.15.3
+   1.15.4

@@ -424,7 +424,7 @@ en:
           _subscription: "subscription"
           cost_of_the_subscription: "Cost of the subscription"
           confirm_and_pay: "Confirm and pay"
-          you_have_settled_the_following_machine_hours: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_the_following_TYPE: "You have settled the following {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
           you_have_settled_a_: "You have settled a"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Thank you. Your payment has been successfully registered !"

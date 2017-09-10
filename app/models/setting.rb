@@ -32,7 +32,9 @@ class Setting < ActiveRecord::Base
                              reminder_enable
                              reminder_delay
                              event_explications_alert
-                             space_explications_alert )
+                             space_explications_alert
+                             visibility_yearly
+                             visibility_others )
                     }
 
   after_update :update_stylesheet if :value_changed?

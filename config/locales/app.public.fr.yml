@@ -97,6 +97,7 @@ fr:
         not_registered_to_the_fablab: "Vous n'êtes pas inscrit au FAB LAB ?"
         create_an_account: "Créer un compte"
         wrong_email_or_password: "Adresse courriel ou mot de passe incorrect."
+        caps_lock_is_on: "La touche de verrouillage des majuscules est activée."
 
         # mot de passe oublié
         your_email_address_is_unknown: "Votre adresse de courriel est inconnue."

@@ -17,7 +17,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.plans = plans
 
   ## List of groups (eg. normal, student ...)
-  $scope.groups = groups
+  $scope.groups = groups.filter (g) -> g.slug != 'admins'
 
   ## Associate free machine hours with subscriptions
   $scope.machineCredits = machineCreditsPromise

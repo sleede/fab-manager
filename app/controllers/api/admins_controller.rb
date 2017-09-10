@@ -12,8 +12,8 @@ class API::AdminsController < API::ApiController
     @admin = User.new(admin_params.merge(password: generated_password))
     @admin.send :set_slug
 
-    # we associate any random group to the admin as it is mandatory for users but useless for admins
-    @admin.group = Group.first
+    # we associate the admin group to prevent linking any other 'normal' group (which won't be deletable afterwards)
+    @admin.group = Group.find_by(slug: 'admins')
 
     # if the authentication is made through an SSO, generate a migration token
     unless AuthProvider.active.providable_type == DatabaseProvider.name

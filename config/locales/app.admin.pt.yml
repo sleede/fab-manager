@@ -48,6 +48,17 @@ pt:
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Não é possível deletar o slot {{START}} - {{END}} porque já foi reservado por um membro"  # angular interpolation
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
           export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
+          actions: "Ações"
+          block_reservations: "Impedir reservas"
+          do_you_really_want_to_block_this_slot: "Você realmente quer bloquear novas reservas neste slot? Isso se tornará invisível para os usuários."
+          locking_success: "Slot bloqueado com êxito, ela não aparecerá mais tempo no calendário do usuário"
+          locking_failed: "Um erro ocorreu. O bloqueio do slot falhou"
+          allow_reservations: "Permitir a reserva"
+          do_you_really_want_to_allow_reservations: "Você realmente quer permitir a reserva novamente neste slot? Será visível para os usuários."
+          unlocking_success: "Slot desbloqueado com sucesso, ele aparecerá novamente no calendário do usuário"
+          unlocking_failed: "Um erro ocorreu. O desbloqueio do slot falhou"
+          reservations_locked: "Reserva é bloqueado"
+          unlockable_because_reservations: "Não é possível bloquear a reserva neste slot porque existem algumas reservas não cancelados nele."
 
       project_elements:
         # management of the projects' components
@@ -568,12 +579,16 @@ pt:
           title_of_the_about_page: "Título da página sobre"
           shift_enter_to_force_carriage_return: "SHIFT + ENTER para forçar o retorno"
           input_the_main_content: "Introduza o conteúdo principal"
+          drag_and_drop_to_insert_images: "Arrastar e soltar para inserir imagens"
           input_the_fablab_contacts: "Insira os contatos do FabLab"
           reservations: "Reservas"
           reservations_parameters: "Parâmetros das reservas"
           confine_the_booking_agenda: "Confine a agenda de reserva"
           opening_time: "Horário de abertura"
           closing_time: "Horário de fechamento"
+          max_visibility: "Visibilidade máxima (em meses)"
+          visibility_for_yearly_members: "Para inscrições atuais de pelo menos 1 ano"
+          visibility_for_other_members: "Para todos os outros membros"
           ability_for_the_users_to_move_their_reservations: "Habilidade para os usuários mover suas reservas"
           reservations_shifting: "Mudança de reservas"
           prior_period_(hours): "Período anterior (horas)"
@@ -608,6 +623,8 @@ pt:
           reminder_enable: "Recordar reserva ativo"
           reminder_delay: "Atraso antes de enviar o lembrete"
           default_value_is_24_hours: "Se o campo estiver vazio: 24 horas."
+          visibility_yearly: "visibilidade máxima para assinantes anuais"
+          visibility_others: "visibilidade máxima para outros membros"
 
       open_api_clients:
         add_new_client: "Criar novo cliente de API"

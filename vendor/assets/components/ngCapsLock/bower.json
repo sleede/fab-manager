@@ -1,0 +1,13 @@
+{
+  "name": "ngCapsLock",
+  "version": "1.0.2",
+  "main": "./ng-caps-lock.js",
+  "license": "MIT",
+  "authors": [
+    "Fábio Rodrigues <fabio.info@gmail.com>"
+  ],
+  "dependencies": {
+    "angular": ">=1.1"
+  },
+  "homepage": "https://github.com/FabioMR/ng-caps-lock"
+}

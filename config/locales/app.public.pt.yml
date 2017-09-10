@@ -97,6 +97,7 @@ pt:
           not_registered_to_the_fablab: "Ainda não registrado no Fablab?"
           create_an_account: "Criar conta"
           wrong_email_or_password: "E-mail ou senha incorretos."
+          caps_lock_is_on: "A tecla Caps Lock está ativada."
 
           # forgotten password modal
           your_email_address_is_unknown: "Seu e-mail não está cadastrado."
