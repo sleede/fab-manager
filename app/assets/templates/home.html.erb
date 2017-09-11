@@ -79,7 +79,7 @@
 
 	</div>
 
-  <section class="col-lg-12 wrapper">
+  <section class="home-events col-lg-12 wrapper">
       <h4 class="text-sm m-t-sm">{{ 'fablab_s_next_events' | translate }} <a ui-sref="app.public.events_list" class="pull-right"><i class="fa fa-tags"></i> {{ 'every_events' | translate }}</a></h4>
 
       <div class="row" ng-repeat="event in (upcomingEvents.length/3 | array)">
@@ -100,7 +100,7 @@
                     <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span>
                   </div>
               </div>
-              <p ng-bind-html="event.description | simpleText | humanize : 500 | breakFilter"></p>
+              <p class="event-description" ng-bind-html="event.description | simpleText | humanize : 500 | breakFilter"></p>
 
               <hr/>
               <div class="row">

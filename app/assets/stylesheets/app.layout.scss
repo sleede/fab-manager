@@ -619,3 +619,9 @@ body.container{
 .calendar-filter-aside {
   padding: 20px;
 }
+
+.home-events {
+  .event-description {
+    overflow: hidden;
+  }
+}
