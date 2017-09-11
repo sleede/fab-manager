@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release
+## v2.5.13 2017 September 11
 
 - Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with recursive events which the initial event was deleted 
 
