@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST
+
 ## v2.5.11 2017 September 7
 
 - Added tooltip concerning images insertion while configuring the about page
