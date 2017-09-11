@@ -62,13 +62,19 @@ namespace :fablab do
       include ApplicationHelper
       groups = Event.group(:recurrence_id).count
       groups.keys.each do |recurrent_event_id|
-        initial_event = Event.find(recurrent_event_id)
-        Event.where(recurrence_id: recurrent_event_id).where.not(id: recurrent_event_id).each do |event|
-          availability = event.availability
-          if initial_event.availability.start_at.hour != availability.start_at.hour
-            availability.start_at = dst_correction(initial_event.availability.start_at, availability.start_at)
-            availability.end_at = dst_correction(initial_event.availability.end_at, availability.end_at)
-            availability.save!
+        if recurrent_event_id
+          initial_event = Event.find(recurrent_event_id)
+          if initial_event
+            Event.where(recurrence_id: recurrent_event_id).where.not(id: recurrent_event_id).each do |event|
+              availability = event.availability
+              if initial_event.availability.start_at.hour != availability.start_at.hour
+                availability.start_at = dst_correction(initial_event.availability.start_at, availability.start_at)
+                availability.end_at = dst_correction(initial_event.availability.end_at, availability.end_at)
+                availability.save!
+              end
+            end
+          else
+            puts "Error: The initial event (id: #{recurrent_event_id}) of the recurrence was not found. You may have to correct events manually"
           end
         end
       end

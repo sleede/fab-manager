@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## v2.5.12 2017 September 11
+
+- Fix a bug: Long words overflow from homepage's events blocks
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST
+
 ## v2.5.11 2017 September 7
 
 - Added tooltip concerning images insertion while configuring the about page
