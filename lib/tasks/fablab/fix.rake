@@ -82,7 +82,7 @@ namespace :fablab do
 
       if failed_ids.size > 0
         puts "WARNING: The events with IDs #{failed_ids} were not found.\n These were initial events of a recurrence.\n\n You may have to correct the following events manually (IDs): "
-        puts "#{Events.where(recurrence_id: failed_ids).map(&:id)}"
+        puts "#{Event.where(recurrence_id: failed_ids).map(&:id)}"
       end
     end
   end
