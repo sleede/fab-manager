@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2017&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -18,9 +18,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:52 GMT
+      - Mon, 18 Sep 2017 08:54:58 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '780'
+      - '779'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -44,12 +44,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbr26ZMi1nMx
+      - req_nqq9N9aArJQxcT
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -58,10 +60,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_18W4GK2sOmf47Nz9I7fm3Y18",
+          "id": "tok_1B3L1q2sOmf47Nz9S4Af81m3",
           "object": "token",
           "card": {
-            "id": "card_18W4GK2sOmf47Nz9K6dfSmZl",
+            "id": "card_1B3L1q2sOmf47Nz9b903fHHV",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -76,7 +78,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2017,
+            "exp_year": 2018,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -84,104 +86,14 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "82.122.118.54",
-          "created": 1468242952,
+          "client_ip": "90.112.59.71",
+          "created": 1505724898,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:52 GMT
-- request:
-    method: get
-    uri: https://api.stripe.com/v1/tokens/tok_18W4GK2sOmf47Nz9I7fm3Y18
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Stripe/v1 RubyBindings/1.30.2
-      Authorization:
-      - Bearer sk_test_testfaketestfaketestfake
-      Content-Type:
-      - application/x-www-form-urlencoded
-      X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Mon, 11 Jul 2016 13:15:53 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '780'
-      Connection:
-      - keep-alive
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Max-Age:
-      - '300'
-      Cache-Control:
-      - no-cache, no-store
-      Request-Id:
-      - req_8nfbbQfs4YR066
-      Stripe-Version:
-      - '2015-10-16'
-      Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "tok_18W4GK2sOmf47Nz9I7fm3Y18",
-          "object": "token",
-          "card": {
-            "id": "card_18W4GK2sOmf47Nz9K6dfSmZl",
-            "object": "card",
-            "address_city": null,
-            "address_country": null,
-            "address_line1": null,
-            "address_line1_check": null,
-            "address_line2": null,
-            "address_state": null,
-            "address_zip": null,
-            "address_zip_check": null,
-            "brand": "Visa",
-            "country": "US",
-            "cvc_check": "unchecked",
-            "dynamic_last4": null,
-            "exp_month": 4,
-            "exp_year": 2017,
-            "fingerprint": "o52jybR7bnmNn6AT",
-            "funding": "credit",
-            "last4": "4242",
-            "metadata": {},
-            "name": null,
-            "tokenization_method": null
-          },
-          "client_ip": "82.122.118.54",
-          "created": 1468242952,
-          "livemode": false,
-          "type": "card",
-          "used": false
-        }
-    http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:53 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:58 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
@@ -200,9 +112,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -211,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:54 GMT
+      - Mon, 18 Sep 2017 08:54:59 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '655'
+      - '8094'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -224,50 +136,203 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfb0Ez5UgkL6i
+      - req_suenXAM64j8E8N
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "cus_8CzNtM08NVlSGN",
-          "object": "customer",
-          "account_balance": 0,
-          "created": 1459782849,
-          "currency": null,
-          "default_source": null,
-          "delinquent": false,
-          "description": "Vanessa Lonchamp",
-          "discount": null,
-          "email": "vanessa.lonchamp@sfr.fr",
-          "livemode": false,
-          "metadata": {},
-          "shipping": null,
-          "sources": {
-            "object": "list",
-            "data": [],
-            "has_more": false,
-            "total_count": 0,
-            "url": "/v1/customers/cus_8CzNtM08NVlSGN/sources"
-          },
-          "subscriptions": {
-            "object": "list",
-            "data": [],
-            "has_more": false,
-            "total_count": 0,
-            "url": "/v1/customers/cus_8CzNtM08NVlSGN/subscriptions"
-          }
-        }
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
+        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
+        IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
+        dF9zb3VyY2UiOiAiY2FyZF8xQjNMMGwyc09tZjQ3Tno5M0o5ZHVBemQiLAog
+        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
+        c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
+        InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
+        b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMUIzTDBsMnNPbWY0N056
+        OTNKOWR1QXpkIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
+        cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
+        ZHJlc3NfbGluZTIiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3N0YXRlIjog
+        bnVsbCwKICAgICAgICAiYWRkcmVzc196aXAiOiBudWxsLAogICAgICAgICJh
+        ZGRyZXNzX3ppcF9jaGVjayI6IG51bGwsCiAgICAgICAgImJyYW5kIjogIlZp
+        c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
+        IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE4
+        LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
+        ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
+        ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
+        ZSI6IG51bGwsCiAgICAgICAgInRva2VuaXphdGlvbl9tZXRob2QiOiBudWxs
+        CiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0
+        b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9jdXN0b21lcnMvY3Vz
+        XzhDek50TTA4TlZsU0dOL3NvdXJjZXMiCiAgfSwKICAic3Vic2NyaXB0aW9u
+        cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAg
+        ICAgewogICAgICAgICJpZCI6ICJzdWJfQlFCTm5rVWxjaWkzcjEiLAogICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGlj
+        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJiaWxsaW5nIjog
+        ImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAgICAgICAiY2FuY2VsX2F0X3Bl
+        cmlvZF9lbmQiOiB0cnVlLAogICAgICAgICJjYW5jZWxlZF9hdCI6IDE1MDU3
+        MjQ4NDEsCiAgICAgICAgImNyZWF0ZWQiOiAxNTA1NzI0ODM3LAogICAgICAg
+        ICJjdXJyZW50X3BlcmlvZF9lbmQiOiAxNTA4MzE2ODM3LAogICAgICAgICJj
+        dXJyZW50X3BlcmlvZF9zdGFydCI6IDE1MDU3MjQ4MzcsCiAgICAgICAgImN1
+        c3RvbWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICAgImRpc2Nv
+        dW50IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAgICAg
+        ICJpdGVtcyI6IHsKICAgICAgICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAg
+        ICAgICAiZGF0YSI6IFsKICAgICAgICAgICAgewogICAgICAgICAgICAgICJp
+        ZCI6ICJzaV8xQjNMMHIyc09tZjQ3Tno5S0tkVjF6c0oiLAogICAgICAgICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uX2l0ZW0iLAogICAgICAgICAg
+        ICAgICJjcmVhdGVkIjogMTUwNTcyNDgzOCwKICAgICAgICAgICAgICAibWV0
+        YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAicGxhbiI6IHsKICAgICAgICAg
+        ICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50LW1v
+        bnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAgICAgICAgICJvYmplY3Qi
+        OiAicGxhbiIsCiAgICAgICAgICAgICAgICAiYW1vdW50IjogMjAwMCwKICAg
+        ICAgICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4MzEwOCwKICAgICAgICAg
+        ICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgICAgICAgImlu
+        dGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgICAgICJpbnRlcnZhbF9j
+        b3VudCI6IDEsCiAgICAgICAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwK
+        ICAgICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAg
+        ICAgIm5hbWUiOiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0dWRpYW50
+        LCAtIGRlIDI1IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQnZW1wbG9p
+        IC0gbW9udGgiLAogICAgICAgICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlw
+        dG9yIjogbnVsbCwKICAgICAgICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5
+        cyI6IG51bGwKICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICJxdWFu
+        dGl0eSI6IDEKICAgICAgICAgICAgfQogICAgICAgICAgXSwKICAgICAgICAg
+        ICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICAgInRvdGFsX2NvdW50Ijog
+        MSwKICAgICAgICAgICJ1cmwiOiAiL3YxL3N1YnNjcmlwdGlvbl9pdGVtcz9z
+        dWJzY3JpcHRpb249c3ViX0JRQk5ua1VsY2lpM3IxIgogICAgICAgIH0sCiAg
+        ICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRhIjog
+        e30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAibWVuc3Vl
+        bC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIs
+        CiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFtb3Vu
+        dCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAg
+        ICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJpbnRlcnZh
+        bCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAog
+        ICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRh
+        dGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOp
+        ZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRl
+        bWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0ZW1l
+        bnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9k
+        X2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHkiOiAx
+        LAogICAgICAgICJzdGFydCI6IDE1MDU3MjQ4MzcsCiAgICAgICAgInN0YXR1
+        cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGwsCiAg
+        ICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0YXJ0
+        IjogbnVsbAogICAgICB9LAogICAgICB7CiAgICAgICAgImlkIjogInN1Yl9C
+        UUJJSW11VVdicmp6QiIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRp
+        b24iLAogICAgICAgICJhcHBsaWNhdGlvbl9mZWVfcGVyY2VudCI6IG51bGws
+        CiAgICAgICAgImJpbGxpbmciOiAiY2hhcmdlX2F1dG9tYXRpY2FsbHkiLAog
+        ICAgICAgICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUsCiAgICAgICAg
+        ImNhbmNlbGVkX2F0IjogMTUwNTcyNDUwNywKICAgICAgICAiY3JlYXRlZCI6
+        IDE1MDU3MjQ1MDMsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE1
+        MDgzMTY1MDMsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTUw
+        NTcyNDUwMywKICAgICAgICAiY3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZs
+        U0dOIiwKICAgICAgICAiZGlzY291bnQiOiBudWxsLAogICAgICAgICJlbmRl
+        ZF9hdCI6IG51bGwsCiAgICAgICAgIml0ZW1zIjogewogICAgICAgICAgIm9i
+        amVjdCI6ICJsaXN0IiwKICAgICAgICAgICJkYXRhIjogWwogICAgICAgICAg
+        ICB7CiAgICAgICAgICAgICAgImlkIjogInNpXzFCM0t2VDJzT21mNDdOejl1
+        M2lNYTVTeiIsCiAgICAgICAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRp
+        b25faXRlbSIsCiAgICAgICAgICAgICAgImNyZWF0ZWQiOiAxNTA1NzI0NTAz
+        LAogICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAg
+        ICJwbGFuIjogewogICAgICAgICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFy
+        aWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAg
+        ICAgICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICAgICAg
+        ICJhbW91bnQiOiAyMDAwLAogICAgICAgICAgICAgICAgImNyZWF0ZWQiOiAx
+        NDU5NzgzMTA4LAogICAgICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIs
+        CiAgICAgICAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9udGgiLAogICAgICAg
+        ICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICAgICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlm
+        IHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50
+        LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAgICAg
+        ICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgICAg
+        ICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogICAgICAgICAgICAgIH0s
+        CiAgICAgICAgICAgICAgInF1YW50aXR5IjogMQogICAgICAgICAgICB9CiAg
+        ICAgICAgICBdLAogICAgICAgICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAg
+        ICAgICAidG90YWxfY291bnQiOiAxLAogICAgICAgICAgInVybCI6ICIvdjEv
+        c3Vic2NyaXB0aW9uX2l0ZW1zP3N1YnNjcmlwdGlvbj1zdWJfQlFCSUltdVVX
+        YnJqekIiCiAgICAgICAgfSwKICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwK
+        ICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6IHsKICAg
+        ICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50LW1v
+        bnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAgICJvYmplY3QiOiAicGxh
+        biIsCiAgICAgICAgICAiYW1vdW50IjogMjAwMCwKICAgICAgICAgICJjcmVh
+        dGVkIjogMTQ1OTc4MzEwOCwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2Qi
+        LAogICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJp
+        bnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgIm5hbWUi
+        OiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0dWRpYW50LCAtIGRlIDI1
+        IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQnZW1wbG9pIC0gbW9udGgi
+        LAogICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAg
+        ICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwKICAgICAgICB9LAog
+        ICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgInN0YXJ0IjogMTUwNTcy
+        NDUwMywKICAgICAgICAic3RhdHVzIjogImFjdGl2ZSIsCiAgICAgICAgInRh
+        eF9wZXJjZW50IjogbnVsbCwKICAgICAgICAidHJpYWxfZW5kIjogbnVsbCwK
+        ICAgICAgICAidHJpYWxfc3RhcnQiOiBudWxsCiAgICAgIH0sCiAgICAgIHsK
+        ICAgICAgICAiaWQiOiAic3ViX0JRQkhIUEJqTzU3M0pXIiwKICAgICAgICAi
+        b2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgICAgICAgImFwcGxpY2F0aW9u
+        X2ZlZV9wZXJjZW50IjogbnVsbCwKICAgICAgICAiYmlsbGluZyI6ICJjaGFy
+        Z2VfYXV0b21hdGljYWxseSIsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2Rf
+        ZW5kIjogdHJ1ZSwKICAgICAgICAiY2FuY2VsZWRfYXQiOiAxNTA1NzI0NDU4
+        LAogICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDQ1MiwKICAgICAgICAiY3Vy
+        cmVudF9wZXJpb2RfZW5kIjogMTUwODMxNjQ1MiwKICAgICAgICAiY3VycmVu
+        dF9wZXJpb2Rfc3RhcnQiOiAxNTA1NzI0NDUyLAogICAgICAgICJjdXN0b21l
+        ciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAgICJkaXNjb3VudCI6
+        IG51bGwsCiAgICAgICAgImVuZGVkX2F0IjogbnVsbCwKICAgICAgICAiaXRl
+        bXMiOiB7CiAgICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICAg
+        ImRhdGEiOiBbCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAiaWQiOiAi
+        c2lfMUIzS3VlMnNPbWY0N056OTJQQ3ZEVVpLIiwKICAgICAgICAgICAgICAi
+        b2JqZWN0IjogInN1YnNjcmlwdGlvbl9pdGVtIiwKICAgICAgICAgICAgICAi
+        Y3JlYXRlZCI6IDE1MDU3MjQ0NTMsCiAgICAgICAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICAg
+        ICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0y
+        MDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAgICAgICAib2JqZWN0IjogInBs
+        YW4iLAogICAgICAgICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAg
+        ICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAgICAgICAgICAg
+        ICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICAgICAgICJpbnRlcnZh
+        bCI6ICJtb250aCIsCiAgICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQi
+        OiAxLAogICAgICAgICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAg
+        ICAgICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAgICJu
+        YW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBk
+        ZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1v
+        bnRoIiwKICAgICAgICAgICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6
+        IG51bGwsCiAgICAgICAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBu
+        dWxsCiAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAicXVhbnRpdHki
+        OiAxCiAgICAgICAgICAgIH0KICAgICAgICAgIF0sCiAgICAgICAgICAiaGFz
+        X21vcmUiOiBmYWxzZSwKICAgICAgICAgICJ0b3RhbF9jb3VudCI6IDEsCiAg
+        ICAgICAgICAidXJsIjogIi92MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2Ny
+        aXB0aW9uPXN1Yl9CUUJISFBCak81NzNKVyIKICAgICAgICB9LAogICAgICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAog
+        ICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFy
+        aWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAg
+        ICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAy
+        MDAwLAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAg
+        ICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAi
+        bW9udGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAg
+        ICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjog
+        e30sCiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQg
+        LSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRl
+        dXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rl
+        c2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlz
+        IjogbnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAg
+        ICAgICAic3RhcnQiOiAxNTA1NzI0NDUyLAogICAgICAgICJzdGF0dXMiOiAi
+        YWN0aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAg
+        ICJ0cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51
+        bGwKICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAg
+        InRvdGFsX2NvdW50IjogMywKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9j
+        dXNfOEN6TnRNMDhOVmxTR04vc3Vic2NyaXB0aW9ucyIKICB9Cn0K
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:54 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:59 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
@@ -286,9 +351,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '78'
   response:
@@ -299,7 +364,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:55 GMT
+      - Mon, 18 Sep 2017 08:55:00 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -312,12 +377,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbS1DU8keH5x
+      - req_pF0zyB1PHHa0vK
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -326,20 +393,20 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_18W4GN2sOmf47Nz9K1dTfTyA",
+          "id": "ii_1B3L1s2sOmf47Nz9ZDp4PC5j",
           "object": "invoiceitem",
           "amount": -1000,
           "currency": "usd",
           "customer": "cus_8CzNtM08NVlSGN",
-          "date": 1468242955,
+          "date": 1505724900,
           "description": "wallet -10.0",
           "discountable": false,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1468242955,
-            "end": 1468242955
+            "start": 1505724900,
+            "end": 1505724900
           },
           "plan": null,
           "proration": false,
@@ -347,13 +414,13 @@ http_interactions:
           "subscription": null
         }
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:55 GMT
+  recorded_at: Mon, 18 Sep 2017 08:55:00 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions
     body:
       encoding: UTF-8
-      string: plan=mensuel-tarif-reduit-student-month-20160404171827&source=tok_18W4GK2sOmf47Nz9I7fm3Y18
+      string: plan=mensuel-tarif-reduit-student-month-20160404171827&source=tok_1B3L1q2sOmf47Nz9S4Af81m3
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -366,9 +433,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '90'
   response:
@@ -379,11 +446,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:57 GMT
+      - Mon, 18 Sep 2017 08:55:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '926'
+      - '1829'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -392,12 +459,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbYSDVSvjiep
+      - req_jmFKLSWMGW5vX4
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -405,29 +474,49 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        ewogICJpZCI6ICJzdWJfOG5mYlRHR0lRUlF6eDEiLAogICJvYmplY3QiOiAi
+        ewogICJpZCI6ICJzdWJfQlFCT2o2SVBDeXZrc08iLAogICJvYmplY3QiOiAi
         c3Vic2NyaXB0aW9uIiwKICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBu
-        dWxsLAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IGZhbHNlLAogICJjYW5j
-        ZWxlZF9hdCI6IG51bGwsCiAgImNyZWF0ZWQiOiAxNDY4MjQyOTU2LAogICJj
-        dXJyZW50X3BlcmlvZF9lbmQiOiAxNDcwOTIxMzU2LAogICJjdXJyZW50X3Bl
-        cmlvZF9zdGFydCI6IDE0NjgyNDI5NTYsCiAgImN1c3RvbWVyIjogImN1c184
-        Q3pOdE0wOE5WbFNHTiIsCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRf
-        YXQiOiBudWxsLAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJtZXRhZGF0YSI6
-        IHt9LAogICJwbGFuIjogewogICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVk
-        dWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgIm9iamVj
-        dCI6ICJwbGFuIiwKICAgICJhbW91bnQiOiAyMDAwLAogICAgImNyZWF0ZWQi
-        OiAxNDU5NzgzMTA4LAogICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAiaW50
-        ZXJ2YWwiOiAibW9udGgiLAogICAgImludGVydmFsX2NvdW50IjogMSwKICAg
-        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgIm1ldGFkYXRhIjoge30sCiAgICAi
-        bmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0g
-        ZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBt
-        b250aCIsCiAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAg
-        InRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogIH0sCiAgInF1YW50aXR5Ijog
-        MSwKICAic3RhcnQiOiAxNDY4MjQyOTU2LAogICJzdGF0dXMiOiAiYWN0aXZl
-        IiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBudWxs
-        LAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
+        dWxsLAogICJiaWxsaW5nIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAi
+        Y2FuY2VsX2F0X3BlcmlvZF9lbmQiOiBmYWxzZSwKICAiY2FuY2VsZWRfYXQi
+        OiBudWxsLAogICJjcmVhdGVkIjogMTUwNTcyNDkwMSwKICAiY3VycmVudF9w
+        ZXJpb2RfZW5kIjogMTUwODMxNjkwMSwKICAiY3VycmVudF9wZXJpb2Rfc3Rh
+        cnQiOiAxNTA1NzI0OTAxLAogICJjdXN0b21lciI6ICJjdXNfOEN6TnRNMDhO
+        VmxTR04iLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVuZGVkX2F0IjogbnVs
+        bCwKICAiaXRlbXMiOiB7CiAgICAib2JqZWN0IjogImxpc3QiLAogICAgImRh
+        dGEiOiBbCiAgICAgIHsKICAgICAgICAiaWQiOiAic2lfMUIzTDF0MnNPbWY0
+        N056OVlJa1duUmpiIiwKICAgICAgICAib2JqZWN0IjogInN1YnNjcmlwdGlv
+        bl9pdGVtIiwKICAgICAgICAiY3JlYXRlZCI6IDE1MDU3MjQ5MDIsCiAgICAg
+        ICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAg
+        ICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0y
+        MDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAog
+        ICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6
+        IDE0NTk3ODMxMDgsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
+        ICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2
+        YWxfY291bnQiOiAxLAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAg
+        ICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1l
+        bnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMs
+        IGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAg
+        ICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAg
+        ICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAg
+        ICAicXVhbnRpdHkiOiAxCiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUi
+        OiBmYWxzZSwKICAgICJ0b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92
+        MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2NyaXB0aW9uPXN1Yl9CUUJPajZJ
+        UEN5dmtzTyIKICB9LAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJtZXRhZGF0
+        YSI6IHt9LAogICJwbGFuIjogewogICAgImlkIjogIm1lbnN1ZWwtdGFyaWYt
+        cmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgIm9i
+        amVjdCI6ICJwbGFuIiwKICAgICJhbW91bnQiOiAyMDAwLAogICAgImNyZWF0
+        ZWQiOiAxNDU5NzgzMTA4LAogICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAi
+        aW50ZXJ2YWwiOiAibW9udGgiLAogICAgImludGVydmFsX2NvdW50IjogMSwK
+        ICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgIm1ldGFkYXRhIjoge30sCiAg
+        ICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQs
+        IC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kg
+        LSBtb250aCIsCiAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAog
+        ICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogIH0sCiAgInF1YW50aXR5
+        IjogMSwKICAic3RhcnQiOiAxNTA1NzI0OTAxLAogICJzdGF0dXMiOiAiYWN0
+        aXZlIiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBu
+        dWxsLAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:57 GMT
+  recorded_at: Mon, 18 Sep 2017 08:55:02 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoices?customer=cus_8CzNtM08NVlSGN&limit=1
@@ -446,9 +535,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -457,11 +546,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:58 GMT
+      - Mon, 18 Sep 2017 08:55:03 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2835'
+      - '2974'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -470,12 +559,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbi8eORMWkgD
+      - req_xiy9OnbA17A4u0
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -484,70 +575,74 @@ http_interactions:
       encoding: ASCII-8BIT
       string: !binary |-
         ewogICJvYmplY3QiOiAibGlzdCIsCiAgImRhdGEiOiBbCiAgICB7CiAgICAg
-        ICJpZCI6ICJpbl8xOFc0R08yc09tZjQ3Tno5b291RFEzaGUiLAogICAgICAi
+        ICJpZCI6ICJpbl8xQjNMMXQyc09tZjQ3Tno5N3N6ZnlaQVEiLAogICAgICAi
         b2JqZWN0IjogImludm9pY2UiLAogICAgICAiYW1vdW50X2R1ZSI6IDEwMDAs
         CiAgICAgICJhcHBsaWNhdGlvbl9mZWUiOiBudWxsLAogICAgICAiYXR0ZW1w
         dF9jb3VudCI6IDEsCiAgICAgICJhdHRlbXB0ZWQiOiB0cnVlLAogICAgICAi
-        Y2hhcmdlIjogImNoXzE4VzRHTzJzT21mNDdOejlnb1k2T3lEbCIsCiAgICAg
-        ICJjbG9zZWQiOiB0cnVlLAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
-        ICAgImN1c3RvbWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJk
-        YXRlIjogMTQ2ODI0Mjk1NiwKICAgICAgImRlc2NyaXB0aW9uIjogbnVsbCwK
-        ICAgICAgImRpc2NvdW50IjogbnVsbCwKICAgICAgImVuZGluZ19iYWxhbmNl
-        IjogMCwKICAgICAgImZvcmdpdmVuIjogZmFsc2UsCiAgICAgICJsaW5lcyI6
-        IHsKICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICJkYXRhIjog
-        WwogICAgICAgICAgewogICAgICAgICAgICAiaWQiOiAiaWlfMThXNEdOMnNP
-        bWY0N056OUsxZFRmVHlBIiwKICAgICAgICAgICAgIm9iamVjdCI6ICJsaW5l
-        X2l0ZW0iLAogICAgICAgICAgICAiYW1vdW50IjogLTEwMDAsCiAgICAgICAg
-        ICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgICAiZGVzY3JpcHRp
-        b24iOiAid2FsbGV0IC0xMC4wIiwKICAgICAgICAgICAgImRpc2NvdW50YWJs
-        ZSI6IGZhbHNlLAogICAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAg
-        ICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAgICJwZXJpb2Qi
-        OiB7CiAgICAgICAgICAgICAgInN0YXJ0IjogMTQ2ODI0Mjk1NSwKICAgICAg
-        ICAgICAgICAiZW5kIjogMTQ2ODI0Mjk1NQogICAgICAgICAgICB9LAogICAg
-        ICAgICAgICAicGxhbiI6IG51bGwsCiAgICAgICAgICAgICJwcm9yYXRpb24i
-        OiBmYWxzZSwKICAgICAgICAgICAgInF1YW50aXR5IjogbnVsbCwKICAgICAg
-        ICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAgICAgICJ0eXBl
-        IjogImludm9pY2VpdGVtIgogICAgICAgICAgfSwKICAgICAgICAgIHsKICAg
-        ICAgICAgICAgImlkIjogInN1Yl84bmZiVEdHSVFSUXp4MSIsCiAgICAgICAg
-        ICAgICJvYmplY3QiOiAibGluZV9pdGVtIiwKICAgICAgICAgICAgImFtb3Vu
-        dCI6IDIwMDAsCiAgICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAg
-        ICAgICAgICAiZGVzY3JpcHRpb24iOiBudWxsLAogICAgICAgICAgICAiZGlz
-        Y291bnRhYmxlIjogdHJ1ZSwKICAgICAgICAgICAgImxpdmVtb2RlIjogZmFs
-        c2UsCiAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAi
-        cGVyaW9kIjogewogICAgICAgICAgICAgICJzdGFydCI6IDE0NjgyNDI5NTYs
-        CiAgICAgICAgICAgICAgImVuZCI6IDE0NzA5MjEzNTYKICAgICAgICAgICAg
-        fSwKICAgICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICAgImlkIjog
-        Im1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQx
-        NzE4MjciLAogICAgICAgICAgICAgICJvYmplY3QiOiAicGxhbiIsCiAgICAg
-        ICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAgICAgICAgImNyZWF0
-        ZWQiOiAxNDU5NzgzMTA4LAogICAgICAgICAgICAgICJjdXJyZW5jeSI6ICJ1
-        c2QiLAogICAgICAgICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAg
-        ICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICAgICAi
-        bGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICAgICAibWV0YWRhdGEiOiB7
-        fSwKICAgICAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1
-        aXQgLSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1h
-        bmRldXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAgICAgInN0YXRl
-        bWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICAgICAgICAgICAidHJpYWxf
-        cGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgICAgIH0sCiAgICAgICAgICAg
-        ICJwcm9yYXRpb24iOiBmYWxzZSwKICAgICAgICAgICAgInF1YW50aXR5Ijog
-        MSwKICAgICAgICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAg
-        ICAgICJ0eXBlIjogInN1YnNjcmlwdGlvbiIKICAgICAgICAgIH0KICAgICAg
-        ICBdLAogICAgICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICJ0b3Rh
-        bF9jb3VudCI6IDIsCiAgICAgICAgInVybCI6ICIvdjEvaW52b2ljZXMvaW5f
-        MThXNEdPMnNPbWY0N056OW9vdURRM2hlL2xpbmVzIgogICAgICB9LAogICAg
-        ICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAg
-        ICAgICJuZXh0X3BheW1lbnRfYXR0ZW1wdCI6IG51bGwsCiAgICAgICJwYWlk
-        IjogdHJ1ZSwKICAgICAgInBlcmlvZF9lbmQiOiAxNDY4MjQyOTU2LAogICAg
-        ICAicGVyaW9kX3N0YXJ0IjogMTQ2ODI0Mjk1NiwKICAgICAgInJlY2VpcHRf
-        bnVtYmVyIjogbnVsbCwKICAgICAgInN0YXJ0aW5nX2JhbGFuY2UiOiAwLAog
-        ICAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAic3Vi
-        c2NyaXB0aW9uIjogInN1Yl84bmZiVEdHSVFSUXp4MSIsCiAgICAgICJzdWJ0
-        b3RhbCI6IDEwMDAsCiAgICAgICJ0YXgiOiBudWxsLAogICAgICAidGF4X3Bl
-        cmNlbnQiOiBudWxsLAogICAgICAidG90YWwiOiAxMDAwLAogICAgICAid2Vi
-        aG9va3NfZGVsaXZlcmVkX2F0IjogMTQ2ODI0Mjk1NgogICAgfQogIF0sCiAg
-        Imhhc19tb3JlIjogZmFsc2UsCiAgInVybCI6ICIvdjEvaW52b2ljZXMiCn0K
+        YmlsbGluZyI6ICJjaGFyZ2VfYXV0b21hdGljYWxseSIsCiAgICAgICJjaGFy
+        Z2UiOiAiY2hfMUIzTDF0MnNPbWY0N056OXVjeUlma3poIiwKICAgICAgImNs
+        b3NlZCI6IHRydWUsCiAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAi
+        Y3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgImRhdGUi
+        OiAxNTA1NzI0OTAxLAogICAgICAiZGVzY3JpcHRpb24iOiBudWxsLAogICAg
+        ICAiZGlzY291bnQiOiBudWxsLAogICAgICAiZW5kaW5nX2JhbGFuY2UiOiAw
+        LAogICAgICAiZm9yZ2l2ZW4iOiBmYWxzZSwKICAgICAgImxpbmVzIjogewog
+        ICAgICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAgICAgImRhdGEiOiBbCiAg
+        ICAgICAgICB7CiAgICAgICAgICAgICJpZCI6ICJpaV8xQjNMMXMyc09tZjQ3
+        Tno5WkRwNFBDNWoiLAogICAgICAgICAgICAib2JqZWN0IjogImxpbmVfaXRl
+        bSIsCiAgICAgICAgICAgICJhbW91bnQiOiAtMTAwMCwKICAgICAgICAgICAg
+        ImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICJkZXNjcmlwdGlvbiI6
+        ICJ3YWxsZXQgLTEwLjAiLAogICAgICAgICAgICAiZGlzY291bnRhYmxlIjog
+        ZmFsc2UsCiAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAg
+        ICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgInBlcmlvZCI6IHsK
+        ICAgICAgICAgICAgICAic3RhcnQiOiAxNTA1NzI0OTAwLAogICAgICAgICAg
+        ICAgICJlbmQiOiAxNTA1NzI0OTAwCiAgICAgICAgICAgIH0sCiAgICAgICAg
+        ICAgICJwbGFuIjogbnVsbCwKICAgICAgICAgICAgInByb3JhdGlvbiI6IGZh
+        bHNlLAogICAgICAgICAgICAicXVhbnRpdHkiOiBudWxsLAogICAgICAgICAg
+        ICAic3Vic2NyaXB0aW9uIjogbnVsbCwKICAgICAgICAgICAgInR5cGUiOiAi
+        aW52b2ljZWl0ZW0iCiAgICAgICAgICB9LAogICAgICAgICAgewogICAgICAg
+        ICAgICAiaWQiOiAic3ViX0JRQk9qNklQQ3l2a3NPIiwKICAgICAgICAgICAg
+        Im9iamVjdCI6ICJsaW5lX2l0ZW0iLAogICAgICAgICAgICAiYW1vdW50Ijog
+        MjAwMCwKICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAg
+        ICAgICJkZXNjcmlwdGlvbiI6IG51bGwsCiAgICAgICAgICAgICJkaXNjb3Vu
+        dGFibGUiOiB0cnVlLAogICAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwK
+        ICAgICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAgICJwZXJp
+        b2QiOiB7CiAgICAgICAgICAgICAgInN0YXJ0IjogMTUwNTcyNDkwMSwKICAg
+        ICAgICAgICAgICAiZW5kIjogMTUwODMxNjkwMQogICAgICAgICAgICB9LAog
+        ICAgICAgICAgICAicGxhbiI6IHsKICAgICAgICAgICAgICAiaWQiOiAibWVu
+        c3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgy
+        NyIsCiAgICAgICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAg
+        ICAgICAiYW1vdW50IjogMjAwMCwKICAgICAgICAgICAgICAiY3JlYXRlZCI6
+        IDE0NTk3ODMxMDgsCiAgICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIs
+        CiAgICAgICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAg
+        ICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAgICAgICAgICJsaXZl
+        bW9kZSI6IGZhbHNlLAogICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAog
+        ICAgICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAt
+        IMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1
+        ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICAgICAic3RhdGVtZW50
+        X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgICAgICJ0cmlhbF9wZXJp
+        b2RfZGF5cyI6IG51bGwKICAgICAgICAgICAgfSwKICAgICAgICAgICAgInBy
+        b3JhdGlvbiI6IGZhbHNlLAogICAgICAgICAgICAicXVhbnRpdHkiOiAxLAog
+        ICAgICAgICAgICAic3Vic2NyaXB0aW9uIjogbnVsbCwKICAgICAgICAgICAg
+        InN1YnNjcmlwdGlvbl9pdGVtIjogInNpXzFCM0wxdDJzT21mNDdOejlZSWtX
+        blJqYiIsCiAgICAgICAgICAgICJ0eXBlIjogInN1YnNjcmlwdGlvbiIKICAg
+        ICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJoYXNfbW9yZSI6IGZhbHNl
+        LAogICAgICAgICJ0b3RhbF9jb3VudCI6IDIsCiAgICAgICAgInVybCI6ICIv
+        djEvaW52b2ljZXMvaW5fMUIzTDF0MnNPbWY0N056OTdzemZ5WkFRL2xpbmVz
+        IgogICAgICB9LAogICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgIm1l
+        dGFkYXRhIjoge30sCiAgICAgICJuZXh0X3BheW1lbnRfYXR0ZW1wdCI6IG51
+        bGwsCiAgICAgICJudW1iZXIiOiAiOWViZmVhZDIwYi0wMDA4IiwKICAgICAg
+        InBhaWQiOiB0cnVlLAogICAgICAicGVyaW9kX2VuZCI6IDE1MDU3MjQ5MDEs
+        CiAgICAgICJwZXJpb2Rfc3RhcnQiOiAxNTA1NzI0NDUyLAogICAgICAicmVj
+        ZWlwdF9udW1iZXIiOiBudWxsLAogICAgICAic3RhcnRpbmdfYmFsYW5jZSI6
+        IDAsCiAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAg
+        ICJzdWJzY3JpcHRpb24iOiAic3ViX0JRQk9qNklQQ3l2a3NPIiwKICAgICAg
+        InN1YnRvdGFsIjogMTAwMCwKICAgICAgInRheCI6IG51bGwsCiAgICAgICJ0
+        YXhfcGVyY2VudCI6IG51bGwsCiAgICAgICJ0b3RhbCI6IDEwMDAsCiAgICAg
+        ICJ3ZWJob29rc19kZWxpdmVyZWRfYXQiOiAxNTA1NzI0OTAyCiAgICB9CiAg
+        XSwKICAiaGFzX21vcmUiOiB0cnVlLAogICJ1cmwiOiAiL3YxL2ludm9pY2Vz
+        Igp9Cg==
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:58 GMT
+  recorded_at: Mon, 18 Sep 2017 08:55:03 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
@@ -566,9 +661,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -577,11 +672,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:59 GMT
+      - Mon, 18 Sep 2017 08:55:04 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2556'
+      - '10314'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -590,12 +685,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbxXXi48kJ9H
+      - req_rQYKrDVDUg2F4l
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -606,14 +703,14 @@ http_interactions:
         ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
         Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
         IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
-        dF9zb3VyY2UiOiAiY2FyZF8xOFc0R0syc09tZjQ3Tno5SzZkZlNtWmwiLAog
+        dF9zb3VyY2UiOiAiY2FyZF8xQjNMMXEyc09tZjQ3Tno5YjkwM2ZISFYiLAog
         ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
         c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
         InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
         ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
         b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
-        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMThXNEdLMnNPbWY0N056
-        OUs2ZGZTbVpsIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMUIzTDFxMnNPbWY0N056
+        OWI5MDNmSEhWIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
         ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
         cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
         ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
@@ -623,7 +720,7 @@ http_interactions:
         c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
         ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
         IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
-        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE3
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE4
         LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
         ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
         ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
@@ -632,39 +729,212 @@ http_interactions:
         b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9jdXN0b21lcnMvY3Vz
         XzhDek50TTA4TlZsU0dOL3NvdXJjZXMiCiAgfSwKICAic3Vic2NyaXB0aW9u
         cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAg
-        ICAgewogICAgICAgICJpZCI6ICJzdWJfOG5mYlRHR0lRUlF6eDEiLAogICAg
+        ICAgewogICAgICAgICJpZCI6ICJzdWJfQlFCT2o2SVBDeXZrc08iLAogICAg
         ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGlj
-        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJjYW5jZWxfYXRf
-        cGVyaW9kX2VuZCI6IGZhbHNlLAogICAgICAgICJjYW5jZWxlZF9hdCI6IG51
-        bGwsCiAgICAgICAgImNyZWF0ZWQiOiAxNDY4MjQyOTU2LAogICAgICAgICJj
-        dXJyZW50X3BlcmlvZF9lbmQiOiAxNDcwOTIxMzU2LAogICAgICAgICJjdXJy
-        ZW50X3BlcmlvZF9zdGFydCI6IDE0NjgyNDI5NTYsCiAgICAgICAgImN1c3Rv
-        bWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICAgImRpc2NvdW50
-        IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAgICAgICJs
-        aXZlbW9kZSI6IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAg
-        ICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFyaWYt
-        cmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgICAg
-        ICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAyMDAw
-        LAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAgICAg
-        ImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9u
-        dGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAg
-        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjoge30s
-        CiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDD
-        qXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIg
-        ZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rlc2Ny
-        aXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjog
-        bnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAg
-        ICAic3RhcnQiOiAxNDY4MjQyOTU2LAogICAgICAgICJzdGF0dXMiOiAiYWN0
-        aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAgICJ0
-        cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51bGwK
-        ICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRv
-        dGFsX2NvdW50IjogMSwKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNf
-        OEN6TnRNMDhOVmxTR04vc3Vic2NyaXB0aW9ucyIKICB9Cn0K
+        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJiaWxsaW5nIjog
+        ImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAgICAgICAiY2FuY2VsX2F0X3Bl
+        cmlvZF9lbmQiOiBmYWxzZSwKICAgICAgICAiY2FuY2VsZWRfYXQiOiBudWxs
+        LAogICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDkwMSwKICAgICAgICAiY3Vy
+        cmVudF9wZXJpb2RfZW5kIjogMTUwODMxNjkwMSwKICAgICAgICAiY3VycmVu
+        dF9wZXJpb2Rfc3RhcnQiOiAxNTA1NzI0OTAxLAogICAgICAgICJjdXN0b21l
+        ciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAgICJkaXNjb3VudCI6
+        IG51bGwsCiAgICAgICAgImVuZGVkX2F0IjogbnVsbCwKICAgICAgICAiaXRl
+        bXMiOiB7CiAgICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICAg
+        ImRhdGEiOiBbCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAiaWQiOiAi
+        c2lfMUIzTDF0MnNPbWY0N056OVlJa1duUmpiIiwKICAgICAgICAgICAgICAi
+        b2JqZWN0IjogInN1YnNjcmlwdGlvbl9pdGVtIiwKICAgICAgICAgICAgICAi
+        Y3JlYXRlZCI6IDE1MDU3MjQ5MDIsCiAgICAgICAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICAg
+        ICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0y
+        MDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAgICAgICAib2JqZWN0IjogInBs
+        YW4iLAogICAgICAgICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAg
+        ICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAgICAgICAgICAg
+        ICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICAgICAgICJpbnRlcnZh
+        bCI6ICJtb250aCIsCiAgICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQi
+        OiAxLAogICAgICAgICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAg
+        ICAgICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAgICJu
+        YW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBk
+        ZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1v
+        bnRoIiwKICAgICAgICAgICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6
+        IG51bGwsCiAgICAgICAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBu
+        dWxsCiAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAicXVhbnRpdHki
+        OiAxCiAgICAgICAgICAgIH0KICAgICAgICAgIF0sCiAgICAgICAgICAiaGFz
+        X21vcmUiOiBmYWxzZSwKICAgICAgICAgICJ0b3RhbF9jb3VudCI6IDEsCiAg
+        ICAgICAgICAidXJsIjogIi92MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2Ny
+        aXB0aW9uPXN1Yl9CUUJPajZJUEN5dmtzTyIKICAgICAgICB9LAogICAgICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAog
+        ICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFy
+        aWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAg
+        ICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAy
+        MDAwLAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAg
+        ICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAi
+        bW9udGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAg
+        ICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjog
+        e30sCiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQg
+        LSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRl
+        dXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rl
+        c2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlz
+        IjogbnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAg
+        ICAgICAic3RhcnQiOiAxNTA1NzI0OTAxLAogICAgICAgICJzdGF0dXMiOiAi
+        YWN0aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAg
+        ICJ0cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51
+        bGwKICAgICAgfSwKICAgICAgewogICAgICAgICJpZCI6ICJzdWJfQlFCTm5r
+        VWxjaWkzcjEiLAogICAgICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwK
+        ICAgICAgICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAg
+        ICAgICJiaWxsaW5nIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAgICAg
+        ICAiY2FuY2VsX2F0X3BlcmlvZF9lbmQiOiB0cnVlLAogICAgICAgICJjYW5j
+        ZWxlZF9hdCI6IDE1MDU3MjQ4NDEsCiAgICAgICAgImNyZWF0ZWQiOiAxNTA1
+        NzI0ODM3LAogICAgICAgICJjdXJyZW50X3BlcmlvZF9lbmQiOiAxNTA4MzE2
+        ODM3LAogICAgICAgICJjdXJyZW50X3BlcmlvZF9zdGFydCI6IDE1MDU3MjQ4
+        MzcsCiAgICAgICAgImN1c3RvbWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIs
+        CiAgICAgICAgImRpc2NvdW50IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQi
+        OiBudWxsLAogICAgICAgICJpdGVtcyI6IHsKICAgICAgICAgICJvYmplY3Qi
+        OiAibGlzdCIsCiAgICAgICAgICAiZGF0YSI6IFsKICAgICAgICAgICAgewog
+        ICAgICAgICAgICAgICJpZCI6ICJzaV8xQjNMMHIyc09tZjQ3Tno5S0tkVjF6
+        c0oiLAogICAgICAgICAgICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uX2l0
+        ZW0iLAogICAgICAgICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDgzOCwKICAg
+        ICAgICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAicGxh
+        biI6IHsKICAgICAgICAgICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJl
+        ZHVpdC1zdHVkZW50LW1vbnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAg
+        ICAgICAgICJvYmplY3QiOiAicGxhbiIsCiAgICAgICAgICAgICAgICAiYW1v
+        dW50IjogMjAwMCwKICAgICAgICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4
+        MzEwOCwKICAgICAgICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAg
+        ICAgICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAg
+        ICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAgICAgICAibGl2
+        ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9
+        LAogICAgICAgICAgICAgICAgIm5hbWUiOiAiTWVuc3VlbCB0YXJpZiByw6lk
+        dWl0IC0gw6l0dWRpYW50LCAtIGRlIDI1IGFucywgZW5zZWlnbmFudCwgZGVt
+        YW5kZXVyIGQnZW1wbG9pIC0gbW9udGgiLAogICAgICAgICAgICAgICAgInN0
+        YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICAgICAgICAgICAgICJ0
+        cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwKICAgICAgICAgICAgICB9LAogICAg
+        ICAgICAgICAgICJxdWFudGl0eSI6IDEKICAgICAgICAgICAgfQogICAgICAg
+        ICAgXSwKICAgICAgICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICAg
+        InRvdGFsX2NvdW50IjogMSwKICAgICAgICAgICJ1cmwiOiAiL3YxL3N1YnNj
+        cmlwdGlvbl9pdGVtcz9zdWJzY3JpcHRpb249c3ViX0JRQk5ua1VsY2lpM3Ix
+        IgogICAgICAgIH0sCiAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAg
+        ICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAg
+        ICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0y
+        MDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAog
+        ICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6
+        IDE0NTk3ODMxMDgsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
+        ICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2
+        YWxfY291bnQiOiAxLAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAg
+        ICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1l
+        bnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMs
+        IGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAg
+        ICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAg
+        ICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAg
+        ICAicXVhbnRpdHkiOiAxLAogICAgICAgICJzdGFydCI6IDE1MDU3MjQ4Mzcs
+        CiAgICAgICAgInN0YXR1cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVy
+        Y2VudCI6IG51bGwsCiAgICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAg
+        ICAgInRyaWFsX3N0YXJ0IjogbnVsbAogICAgICB9LAogICAgICB7CiAgICAg
+        ICAgImlkIjogInN1Yl9CUUJJSW11VVdicmp6QiIsCiAgICAgICAgIm9iamVj
+        dCI6ICJzdWJzY3JpcHRpb24iLAogICAgICAgICJhcHBsaWNhdGlvbl9mZWVf
+        cGVyY2VudCI6IG51bGwsCiAgICAgICAgImJpbGxpbmciOiAiY2hhcmdlX2F1
+        dG9tYXRpY2FsbHkiLAogICAgICAgICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6
+        IHRydWUsCiAgICAgICAgImNhbmNlbGVkX2F0IjogMTUwNTcyNDUwNywKICAg
+        ICAgICAiY3JlYXRlZCI6IDE1MDU3MjQ1MDMsCiAgICAgICAgImN1cnJlbnRf
+        cGVyaW9kX2VuZCI6IDE1MDgzMTY1MDMsCiAgICAgICAgImN1cnJlbnRfcGVy
+        aW9kX3N0YXJ0IjogMTUwNTcyNDUwMywKICAgICAgICAiY3VzdG9tZXIiOiAi
+        Y3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiZGlzY291bnQiOiBudWxs
+        LAogICAgICAgICJlbmRlZF9hdCI6IG51bGwsCiAgICAgICAgIml0ZW1zIjog
+        ewogICAgICAgICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICAgICAgICJkYXRh
+        IjogWwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgImlkIjogInNpXzFC
+        M0t2VDJzT21mNDdOejl1M2lNYTVTeiIsCiAgICAgICAgICAgICAgIm9iamVj
+        dCI6ICJzdWJzY3JpcHRpb25faXRlbSIsCiAgICAgICAgICAgICAgImNyZWF0
+        ZWQiOiAxNTA1NzI0NTAzLAogICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9
+        LAogICAgICAgICAgICAgICJwbGFuIjogewogICAgICAgICAgICAgICAgImlk
+        IjogIm1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0
+        MDQxNzE4MjciLAogICAgICAgICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwK
+        ICAgICAgICAgICAgICAgICJhbW91bnQiOiAyMDAwLAogICAgICAgICAgICAg
+        ICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAgICAgICAgICAgImN1
+        cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAgICAgICAiaW50ZXJ2YWwiOiAi
+        bW9udGgiLAogICAgICAgICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwK
+        ICAgICAgICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAg
+        ICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAgICAgICAibmFtZSI6
+        ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0gZGUgMjUg
+        YW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBtb250aCIs
+        CiAgICAgICAgICAgICAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxs
+        LAogICAgICAgICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAog
+        ICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgInF1YW50aXR5IjogMQog
+        ICAgICAgICAgICB9CiAgICAgICAgICBdLAogICAgICAgICAgImhhc19tb3Jl
+        IjogZmFsc2UsCiAgICAgICAgICAidG90YWxfY291bnQiOiAxLAogICAgICAg
+        ICAgInVybCI6ICIvdjEvc3Vic2NyaXB0aW9uX2l0ZW1zP3N1YnNjcmlwdGlv
+        bj1zdWJfQlFCSUltdVVXYnJqekIiCiAgICAgICAgfSwKICAgICAgICAibGl2
+        ZW1vZGUiOiBmYWxzZSwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAg
+        ICAicGxhbiI6IHsKICAgICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJl
+        ZHVpdC1zdHVkZW50LW1vbnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAg
+        ICJvYmplY3QiOiAicGxhbiIsCiAgICAgICAgICAiYW1vdW50IjogMjAwMCwK
+        ICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4MzEwOCwKICAgICAgICAgICJj
+        dXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgImludGVydmFsIjogIm1vbnRo
+        IiwKICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAi
+        bGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAog
+        ICAgICAgICAgIm5hbWUiOiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0
+        dWRpYW50LCAtIGRlIDI1IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQn
+        ZW1wbG9pIC0gbW9udGgiLAogICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlw
+        dG9yIjogbnVsbCwKICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51
+        bGwKICAgICAgICB9LAogICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAg
+        InN0YXJ0IjogMTUwNTcyNDUwMywKICAgICAgICAic3RhdHVzIjogImFjdGl2
+        ZSIsCiAgICAgICAgInRheF9wZXJjZW50IjogbnVsbCwKICAgICAgICAidHJp
+        YWxfZW5kIjogbnVsbCwKICAgICAgICAidHJpYWxfc3RhcnQiOiBudWxsCiAg
+        ICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQiOiAic3ViX0JRQkhIUEJqTzU3
+        M0pXIiwKICAgICAgICAib2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgICAg
+        ICAgImFwcGxpY2F0aW9uX2ZlZV9wZXJjZW50IjogbnVsbCwKICAgICAgICAi
+        YmlsbGluZyI6ICJjaGFyZ2VfYXV0b21hdGljYWxseSIsCiAgICAgICAgImNh
+        bmNlbF9hdF9wZXJpb2RfZW5kIjogdHJ1ZSwKICAgICAgICAiY2FuY2VsZWRf
+        YXQiOiAxNTA1NzI0NDU4LAogICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDQ1
+        MiwKICAgICAgICAiY3VycmVudF9wZXJpb2RfZW5kIjogMTUwODMxNjQ1MiwK
+        ICAgICAgICAiY3VycmVudF9wZXJpb2Rfc3RhcnQiOiAxNTA1NzI0NDUyLAog
+        ICAgICAgICJjdXN0b21lciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAg
+        ICAgICJkaXNjb3VudCI6IG51bGwsCiAgICAgICAgImVuZGVkX2F0IjogbnVs
+        bCwKICAgICAgICAiaXRlbXMiOiB7CiAgICAgICAgICAib2JqZWN0IjogImxp
+        c3QiLAogICAgICAgICAgImRhdGEiOiBbCiAgICAgICAgICAgIHsKICAgICAg
+        ICAgICAgICAiaWQiOiAic2lfMUIzS3VlMnNPbWY0N056OTJQQ3ZEVVpLIiwK
+        ICAgICAgICAgICAgICAib2JqZWN0IjogInN1YnNjcmlwdGlvbl9pdGVtIiwK
+        ICAgICAgICAgICAgICAiY3JlYXRlZCI6IDE1MDU3MjQ0NTMsCiAgICAgICAg
+        ICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAgICAgInBsYW4iOiB7
+        CiAgICAgICAgICAgICAgICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQt
+        c3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAgICAg
+        ICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgICAgICAgImFtb3VudCI6
+        IDIwMDAsCiAgICAgICAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgs
+        CiAgICAgICAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAg
+        ICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAgICAgICAi
+        aW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAgICAgICAgICAgImxpdmVtb2Rl
+        IjogZmFsc2UsCiAgICAgICAgICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAg
+        ICAgICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAt
+        IMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1
+        ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICAgICAgICJzdGF0ZW1l
+        bnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAgICAgICAidHJpYWxf
+        cGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgICAgICAgfSwKICAgICAgICAg
+        ICAgICAicXVhbnRpdHkiOiAxCiAgICAgICAgICAgIH0KICAgICAgICAgIF0s
+        CiAgICAgICAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICAgICAgICJ0b3Rh
+        bF9jb3VudCI6IDEsCiAgICAgICAgICAidXJsIjogIi92MS9zdWJzY3JpcHRp
+        b25faXRlbXM/c3Vic2NyaXB0aW9uPXN1Yl9CUUJISFBCak81NzNKVyIKICAg
+        ICAgICB9LAogICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICJt
+        ZXRhZGF0YSI6IHt9LAogICAgICAgICJwbGFuIjogewogICAgICAgICAgImlk
+        IjogIm1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0
+        MDQxNzE4MjciLAogICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAg
+        ICAgICJhbW91bnQiOiAyMDAwLAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5
+        NzgzMTA4LAogICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAg
+        ICAiaW50ZXJ2YWwiOiAibW9udGgiLAogICAgICAgICAgImludGVydmFsX2Nv
+        dW50IjogMSwKICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAg
+        ICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVs
+        IHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNl
+        aWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAg
+        ICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgInRy
+        aWFsX3BlcmlvZF9kYXlzIjogbnVsbAogICAgICAgIH0sCiAgICAgICAgInF1
+        YW50aXR5IjogMSwKICAgICAgICAic3RhcnQiOiAxNTA1NzI0NDUyLAogICAg
+        ICAgICJzdGF0dXMiOiAiYWN0aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQi
+        OiBudWxsLAogICAgICAgICJ0cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0
+        cmlhbF9zdGFydCI6IG51bGwKICAgICAgfQogICAgXSwKICAgICJoYXNfbW9y
+        ZSI6IGZhbHNlLAogICAgInRvdGFsX2NvdW50IjogNCwKICAgICJ1cmwiOiAi
+        L3YxL2N1c3RvbWVycy9jdXNfOEN6TnRNMDhOVmxTR04vc3Vic2NyaXB0aW9u
+        cyIKICB9Cn0K
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:58 GMT
+  recorded_at: Mon, 18 Sep 2017 08:55:04 GMT
 - request:
     method: get
-    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions/sub_8nfbTGGIQRQzx1
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions/sub_BQBOj6IPCyvksO
     body:
       encoding: US-ASCII
       string: ''
@@ -680,9 +950,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -691,11 +961,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:15:59 GMT
+      - Mon, 18 Sep 2017 08:55:05 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '926'
+      - '1829'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -704,12 +974,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbwT9nBtTlrw
+      - req_5mJe5DBAT3uyMw
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -717,32 +989,52 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        ewogICJpZCI6ICJzdWJfOG5mYlRHR0lRUlF6eDEiLAogICJvYmplY3QiOiAi
+        ewogICJpZCI6ICJzdWJfQlFCT2o2SVBDeXZrc08iLAogICJvYmplY3QiOiAi
         c3Vic2NyaXB0aW9uIiwKICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBu
-        dWxsLAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IGZhbHNlLAogICJjYW5j
-        ZWxlZF9hdCI6IG51bGwsCiAgImNyZWF0ZWQiOiAxNDY4MjQyOTU2LAogICJj
-        dXJyZW50X3BlcmlvZF9lbmQiOiAxNDcwOTIxMzU2LAogICJjdXJyZW50X3Bl
-        cmlvZF9zdGFydCI6IDE0NjgyNDI5NTYsCiAgImN1c3RvbWVyIjogImN1c184
-        Q3pOdE0wOE5WbFNHTiIsCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRf
-        YXQiOiBudWxsLAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJtZXRhZGF0YSI6
-        IHt9LAogICJwbGFuIjogewogICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVk
-        dWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgIm9iamVj
-        dCI6ICJwbGFuIiwKICAgICJhbW91bnQiOiAyMDAwLAogICAgImNyZWF0ZWQi
-        OiAxNDU5NzgzMTA4LAogICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAiaW50
-        ZXJ2YWwiOiAibW9udGgiLAogICAgImludGVydmFsX2NvdW50IjogMSwKICAg
-        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgIm1ldGFkYXRhIjoge30sCiAgICAi
-        bmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0g
-        ZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBt
-        b250aCIsCiAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAg
-        InRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogIH0sCiAgInF1YW50aXR5Ijog
-        MSwKICAic3RhcnQiOiAxNDY4MjQyOTU2LAogICJzdGF0dXMiOiAiYWN0aXZl
-        IiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBudWxs
-        LAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
+        dWxsLAogICJiaWxsaW5nIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAi
+        Y2FuY2VsX2F0X3BlcmlvZF9lbmQiOiBmYWxzZSwKICAiY2FuY2VsZWRfYXQi
+        OiBudWxsLAogICJjcmVhdGVkIjogMTUwNTcyNDkwMSwKICAiY3VycmVudF9w
+        ZXJpb2RfZW5kIjogMTUwODMxNjkwMSwKICAiY3VycmVudF9wZXJpb2Rfc3Rh
+        cnQiOiAxNTA1NzI0OTAxLAogICJjdXN0b21lciI6ICJjdXNfOEN6TnRNMDhO
+        VmxTR04iLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVuZGVkX2F0IjogbnVs
+        bCwKICAiaXRlbXMiOiB7CiAgICAib2JqZWN0IjogImxpc3QiLAogICAgImRh
+        dGEiOiBbCiAgICAgIHsKICAgICAgICAiaWQiOiAic2lfMUIzTDF0MnNPbWY0
+        N056OVlJa1duUmpiIiwKICAgICAgICAib2JqZWN0IjogInN1YnNjcmlwdGlv
+        bl9pdGVtIiwKICAgICAgICAiY3JlYXRlZCI6IDE1MDU3MjQ5MDIsCiAgICAg
+        ICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAg
+        ICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0y
+        MDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAog
+        ICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6
+        IDE0NTk3ODMxMDgsCiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
+        ICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2
+        YWxfY291bnQiOiAxLAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAg
+        ICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1l
+        bnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMs
+        IGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAg
+        ICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAg
+        ICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAg
+        ICAicXVhbnRpdHkiOiAxCiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUi
+        OiBmYWxzZSwKICAgICJ0b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92
+        MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2NyaXB0aW9uPXN1Yl9CUUJPajZJ
+        UEN5dmtzTyIKICB9LAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJtZXRhZGF0
+        YSI6IHt9LAogICJwbGFuIjogewogICAgImlkIjogIm1lbnN1ZWwtdGFyaWYt
+        cmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgIm9i
+        amVjdCI6ICJwbGFuIiwKICAgICJhbW91bnQiOiAyMDAwLAogICAgImNyZWF0
+        ZWQiOiAxNDU5NzgzMTA4LAogICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAi
+        aW50ZXJ2YWwiOiAibW9udGgiLAogICAgImludGVydmFsX2NvdW50IjogMSwK
+        ICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgIm1ldGFkYXRhIjoge30sCiAg
+        ICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQs
+        IC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kg
+        LSBtb250aCIsCiAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAog
+        ICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogIH0sCiAgInF1YW50aXR5
+        IjogMSwKICAic3RhcnQiOiAxNTA1NzI0OTAxLAogICJzdGF0dXMiOiAiYWN0
+        aXZlIiwKICAidGF4X3BlcmNlbnQiOiBudWxsLAogICJ0cmlhbF9lbmQiOiBu
+        dWxsLAogICJ0cmlhbF9zdGFydCI6IG51bGwKfQo=
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:15:59 GMT
+  recorded_at: Mon, 18 Sep 2017 08:55:05 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions/sub_8nfbTGGIQRQzx1?at_period_end=true
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/subscriptions/sub_BQBOj6IPCyvksO?at_period_end=true
     body:
       encoding: US-ASCII
       string: ''
@@ -758,9 +1050,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
-        mbp-sleede-peng.home 15.4.0 Darwin Kernel Version 15.4.0: Fri Feb 26 22:08:05
-        PST 2016; root:xnu-3248.40.184~3/RELEASE_X86_64 x86_64","hostname":"mbp-sleede-peng.home"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -769,11 +1061,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Jul 2016 13:16:00 GMT
+      - Mon, 18 Sep 2017 08:55:06 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '931'
+      - '1834'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -782,12 +1074,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8nfbwqRs1dLP5C
+      - req_HZJNo9ZE0A7NTg
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -795,27 +1089,47 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        ewogICJpZCI6ICJzdWJfOG5mYlRHR0lRUlF6eDEiLAogICJvYmplY3QiOiAi
+        ewogICJpZCI6ICJzdWJfQlFCT2o2SVBDeXZrc08iLAogICJvYmplY3QiOiAi
         c3Vic2NyaXB0aW9uIiwKICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQiOiBu
-        dWxsLAogICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUsCiAgImNhbmNl
-        bGVkX2F0IjogMTQ2ODI0Mjk2MCwKICAiY3JlYXRlZCI6IDE0NjgyNDI5NTYs
-        CiAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE0NzA5MjEzNTYsCiAgImN1cnJl
-        bnRfcGVyaW9kX3N0YXJ0IjogMTQ2ODI0Mjk1NiwKICAiY3VzdG9tZXIiOiAi
-        Y3VzXzhDek50TTA4TlZsU0dOIiwKICAiZGlzY291bnQiOiBudWxsLAogICJl
-        bmRlZF9hdCI6IG51bGwsCiAgImxpdmVtb2RlIjogZmFsc2UsCiAgIm1ldGFk
-        YXRhIjoge30sCiAgInBsYW4iOiB7CiAgICAiaWQiOiAibWVuc3VlbC10YXJp
-        Zi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAgICAi
-        b2JqZWN0IjogInBsYW4iLAogICAgImFtb3VudCI6IDIwMDAsCiAgICAiY3Jl
-        YXRlZCI6IDE0NTk3ODMxMDgsCiAgICAiY3VycmVuY3kiOiAidXNkIiwKICAg
-        ICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAiaW50ZXJ2YWxfY291bnQiOiAx
-        LAogICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAibWV0YWRhdGEiOiB7fSwK
-        ICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFu
-        dCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxv
-        aSAtIG1vbnRoIiwKICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGws
-        CiAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgfSwKICAicXVhbnRp
-        dHkiOiAxLAogICJzdGFydCI6IDE0NjgyNDI5NTYsCiAgInN0YXR1cyI6ICJh
-        Y3RpdmUiLAogICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgInRyaWFsX2VuZCI6
-        IG51bGwsCiAgInRyaWFsX3N0YXJ0IjogbnVsbAp9Cg==
+        dWxsLAogICJiaWxsaW5nIjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAi
+        Y2FuY2VsX2F0X3BlcmlvZF9lbmQiOiB0cnVlLAogICJjYW5jZWxlZF9hdCI6
+        IDE1MDU3MjQ5MDUsCiAgImNyZWF0ZWQiOiAxNTA1NzI0OTAxLAogICJjdXJy
+        ZW50X3BlcmlvZF9lbmQiOiAxNTA4MzE2OTAxLAogICJjdXJyZW50X3Blcmlv
+        ZF9zdGFydCI6IDE1MDU3MjQ5MDEsCiAgImN1c3RvbWVyIjogImN1c184Q3pO
+        dE0wOE5WbFNHTiIsCiAgImRpc2NvdW50IjogbnVsbCwKICAiZW5kZWRfYXQi
+        OiBudWxsLAogICJpdGVtcyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAg
+        ICAiZGF0YSI6IFsKICAgICAgewogICAgICAgICJpZCI6ICJzaV8xQjNMMXQy
+        c09tZjQ3Tno5WUlrV25SamIiLAogICAgICAgICJvYmplY3QiOiAic3Vic2Ny
+        aXB0aW9uX2l0ZW0iLAogICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDkwMiwK
+        ICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6IHsKICAg
+        ICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50LW1v
+        bnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAgICJvYmplY3QiOiAicGxh
+        biIsCiAgICAgICAgICAiYW1vdW50IjogMjAwMCwKICAgICAgICAgICJjcmVh
+        dGVkIjogMTQ1OTc4MzEwOCwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2Qi
+        LAogICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJp
+        bnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgIm5hbWUi
+        OiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0dWRpYW50LCAtIGRlIDI1
+        IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQnZW1wbG9pIC0gbW9udGgi
+        LAogICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAg
+        ICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwKICAgICAgICB9LAog
+        ICAgICAgICJxdWFudGl0eSI6IDEKICAgICAgfQogICAgXSwKICAgICJoYXNf
+        bW9yZSI6IGZhbHNlLAogICAgInRvdGFsX2NvdW50IjogMSwKICAgICJ1cmwi
+        OiAiL3YxL3N1YnNjcmlwdGlvbl9pdGVtcz9zdWJzY3JpcHRpb249c3ViX0JR
+        Qk9qNklQQ3l2a3NPIgogIH0sCiAgImxpdmVtb2RlIjogZmFsc2UsCiAgIm1l
+        dGFkYXRhIjoge30sCiAgInBsYW4iOiB7CiAgICAiaWQiOiAibWVuc3VlbC10
+        YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIsCiAg
+        ICAib2JqZWN0IjogInBsYW4iLAogICAgImFtb3VudCI6IDIwMDAsCiAgICAi
+        Y3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAiY3VycmVuY3kiOiAidXNkIiwK
+        ICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAiaW50ZXJ2YWxfY291bnQi
+        OiAxLAogICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAibWV0YWRhdGEiOiB7
+        fSwKICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVk
+        aWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2Vt
+        cGxvaSAtIG1vbnRoIiwKICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51
+        bGwsCiAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgfSwKICAicXVh
+        bnRpdHkiOiAxLAogICJzdGFydCI6IDE1MDU3MjQ5MDEsCiAgInN0YXR1cyI6
+        ICJhY3RpdmUiLAogICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgInRyaWFsX2Vu
+        ZCI6IG51bGwsCiAgInRyaWFsX3N0YXJ0IjogbnVsbAp9Cg==
     http_version: 
-  recorded_at: Mon, 11 Jul 2016 13:16:00 GMT
+  recorded_at: Mon, 18 Sep 2017 08:55:06 GMT
 recorded_with: VCR 3.0.1
