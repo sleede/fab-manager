@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fix a typo: error message while creating a machine slot
+- Updated test data to allow passing test suite
+
 ## v2.5.14 2017 September 12
 
 - Fix a bug: Error message in fix:recursive_events_over_DST failed and does not report events to check
