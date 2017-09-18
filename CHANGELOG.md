@@ -2,6 +2,9 @@
 
 ## next release
 
+- Additional button to delete a slot, allowing to delete slots masked by others
+- Removed cross hack in full-calendar
+- Confirmation before slot delete
 - Fix a typo: error message while creating a machine slot
 - Updated test data to allow passing test suite
 

@@ -59,6 +59,8 @@ fr:
           unlocking_failed: "Une erreur est survenue. Le déverrouillage du créneau a échoué"
           reservations_locked: "Réservations bloquées"
           unlockable_because_reservations: "Impossible de bloquer les réservations sur ce créneau car il existe des réservations non annulées sur celui-ci."
+          delete_slot: "Supprimer le créneau"
+          do_you_really_want_to_delete_this_slot: "Êtes vous sur de vouloir supprimer ce créneau ?"
 
       project_elements:
         # gestion des éléments constituant les projets

@@ -59,6 +59,8 @@ en:
           unlocking_failed: "An error occurred. Slot unlocking has failed"
           reservations_locked: "Booking is blocked"
           unlockable_because_reservations: "Unable to block booking on this slot because some uncancelled reservations exist on it."
+          delete_slot: "Delete this slot"
+          do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
 
       project_elements:
         # management of the projects' components

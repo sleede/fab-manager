@@ -59,6 +59,8 @@ pt:
           unlocking_failed: "Um erro ocorreu. O desbloqueio do slot falhou"
           reservations_locked: "Reserva é bloqueado"
           unlockable_because_reservations: "Não é possível bloquear a reserva neste slot porque existem algumas reservas não cancelados nele."
+          delete_slot: "Exclua o slot"
+          do_you_really_want_to_delete_this_slot: "Você realmente quer excluir esse slot?"
 
       project_elements:
         # management of the projects' components
