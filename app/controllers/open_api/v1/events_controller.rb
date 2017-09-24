@@ -20,10 +20,6 @@ class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
       @events = @events.page(params[:page]).per(per_page)
       paginate @events, per_page: per_page
     end
-	
-	if params[:limit].present?
-	  @events = @events.limit(params[:limit])
-	end
   end
 
   private
