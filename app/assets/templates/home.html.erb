@@ -116,18 +116,26 @@
                         <span ng-if="event.all_day == 'false'">{{ 'from_time_to_time' | translate:{START:(event.start_date | amDateFormat:'LT'), END:(event.end_date | amDateFormat:'LT')} }}</span>
                     </h6>
                   </div>
-                  <div class="col-sm-12 row m-b">
-                    <i class="fa fa-bookmark red col-xs-1 padder-icon"></i>
-                    <h6 class="m-n col-xs-10">
-					            <span ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
-                      <span ng-if="event.nb_total_places && event.amount == 0" translate>{{ 'free_admission' }}</span>
-                      <span ng-if="event.amount > 0">{{event.amount | currency}} {{ 'full_price' | translate }}</span>
-                      <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold bg-red" translate>{{ 'event_full' }}</span></div>
-                    </h6>
-
-                  </div>
-
               </div>
+
+              <div class="row">
+                  <div class="col-sm-6 row m-b-sm">
+                    <i class="fa fa-user red col-xs-3 padder-icon"></i>
+                    <h6 class="m-n col-xs-9 ">
+                      <span ng-if="event.nb_free_places > 0">{{ 'still_available' | translate }} {{event.nb_free_places}}</span>
+                      <span ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
+                      <span ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'event_full' }}</span>
+                    </h6>
+                  </div>
+                  <div class="col-sm-6 row m-b-sm">
+                    <i class="fa fa-bookmark red col-xs-3 padder-icon"></i>
+                    <h6 class="m-n col-xs-9">
+                      <span ng-if="event.amount == 0" translate>{{ 'free_admission' }}</span>
+                      <span ng-if="event.amount > 0">{{ 'full_price' | translate }} {{event.amount | currency}}</span>
+                    </h6>
+                  </div>
+              </div>
+
               <div class="text-center clearfix ">
                 <div class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm m-b-sm upper text-sm width-70" ui-sref="app.public.events_show({id: event.id})" ><span translate>{{ 'consult' }}</span></div>
               </div>
