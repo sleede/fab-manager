@@ -60,17 +60,29 @@ namespace :fablab do
 
     task recursive_events_over_DST: :environment do
       include ApplicationHelper
+      failed_ids = []
       groups = Event.group(:recurrence_id).count
       groups.keys.each do |recurrent_event_id|
-        initial_event = Event.find(recurrent_event_id)
-        Event.where(recurrence_id: recurrent_event_id).where.not(id: recurrent_event_id).each do |event|
-          availability = event.availability
-          if initial_event.availability.start_at.hour != availability.start_at.hour
-            availability.start_at = dst_correction(initial_event.availability.start_at, availability.start_at)
-            availability.end_at = dst_correction(initial_event.availability.end_at, availability.end_at)
-            availability.save!
+        if recurrent_event_id
+          begin
+            initial_event = Event.find(recurrent_event_id)
+            Event.where(recurrence_id: recurrent_event_id).where.not(id: recurrent_event_id).each do |event|
+              availability = event.availability
+              if initial_event.availability.start_at.hour != availability.start_at.hour
+                availability.start_at = dst_correction(initial_event.availability.start_at, availability.start_at)
+                availability.end_at = dst_correction(initial_event.availability.end_at, availability.end_at)
+                availability.save!
+              end
+            end
+          rescue ActiveRecord::RecordNotFound
+            failed_ids.push recurrent_event_id
           end
         end
+      end
+
+      if failed_ids.size > 0
+        puts "WARNING: The events with IDs #{failed_ids} were not found.\n These were initial events of a recurrence.\n\n You may have to correct the following events manually (IDs): "
+        puts "#{Event.where(recurrence_id: failed_ids).map(&:id)}"
       end
     end
   end

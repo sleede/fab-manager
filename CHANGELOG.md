@@ -1,5 +1,18 @@
 # Changelog Fab Manager
 
+## v2.5.14 2017 September 12
+
+- Fix a bug: Error message in fix:recursive_events_over_DST failed and does not report events to check
+
+## v2.5.13 2017 September 11
+
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with recursive events which the initial event was deleted 
+
+## v2.5.12 2017 September 11
+
+- Fix a bug: Long words overflow from homepage's events blocks
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with non-recursive events 
+
 ## v2.5.11 2017 September 7
 
 - Added tooltip concerning images insertion while configuring the about page
@@ -16,6 +29,7 @@
 - Fix a bug: unable to see availabilities in the public calendar when browsing as a visitor (non-connected)
 - Updated puma for compatibility with openSSL > 1.0
 - Documented installation on ArchLinux
+- [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `rake db:seed` then `rake fablab:fix:migrate_admins_group`
 - [TODO DEPLOY] `rake fablab:fix:recursive_events_over_DST`
 

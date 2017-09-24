@@ -75,7 +75,7 @@ mkdir -p /apps/fabmanager/config
 ```
 
 Make a copy of the **docker/env.example** file and use it as a starting point.
-Set all the environment variables needed by your application. Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md) for explanations about those variables.
+Set all the environment variables needed by your application. Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md#environment-configuration) for explanations about those variables.
 
 
 Then, copy the previously customized `env.example` file as `/apps/fabmanager/config/env`
