@@ -101,8 +101,15 @@ en:
         all_events: "All events"
         passed_events: "Passed events"
         events_to_come: "Events to come"
-        from_DATE: "From {{DATE}}"  # angular interpolation
-        from_TIME: "From {{TIME}}"  # angular interpolation
+        events_to_come_asc: "Events to come | chronological order"
+        on_DATE: "on {{DATE}}"  	# angular interpolation
+        from_DATE: "from {{DATE}}"  # angular interpolation
+        from_TIME: "from {{TIME}}"  # angular interpolation
+        booking: "Booking"
+        sold_out: "Sold out"
+        cancelled: "Cancelled"
+        free_entry: "Free entry"
+        free_admission: "Free admission"
         view_reservations: "View reservations"
         categories: "Categories"
         add_a_category: "Add a category"

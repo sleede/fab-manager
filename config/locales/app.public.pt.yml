@@ -127,13 +127,14 @@ pt:
           # next events summary on the home page
           fablab_s_next_events: "Próximos eventos do FabLab"
           every_events: "Todos Eventos"
-          from_date_to_date: "De {{START}} até {{END}}"  # angular interpolation
-          on_the_date: "Em {{DATE}}"  # angular interpolation
+          from_date_to_date: "De {{START}} até {{END}}"   # angular interpolation
+          on_the_date: "Em {{DATE}}"                      # angular interpolation
           from_time_to_time: "Das {{START}} até {{END}}"  # angular interpolation
           free_entry: "Entrada franca"
           free_admission: "Admissão grátis"
           full_price: "Valor inteira"
           event_full: "Evento lotado"
+          still_available: "Available place(s)"           # traduction_missing
 
         projects_list:
           # projects gallery
@@ -228,6 +229,11 @@ pt:
           the_fablab_s_events: "Eventos do Fablab"
           all_categories: "Todas categorias"
           for_all: "Para todos"
+          sold_out: "Esgotado."
+          cancelled: "Cancelled"                        #translation_missing
+          free_admission: "Admissão grátis"
+          still_available: "available place(s)"         #translation_missing
+          free_entry: "Entrada franca"
 
         events_show:
           # details and booking of an event
@@ -240,6 +246,7 @@ pt:
           tickets_still_availables: "Tickets ainda disponíveis:"
           sold_out: "Esgotado."
           free_entry: "Entrada franca"
+          cancelled: "Cancelled"                        #translation_missing
           ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
           make_a_gift_of_this_reservation: "Doe esta reserva"
           you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
