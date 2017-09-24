@@ -101,7 +101,7 @@ fr:
         all_events: "Tous les évènements"
         passed_events: "Les évènements déjà passés"
         events_to_come: "Les évènements à venir"
-        prices: "Tarifs"
+        events_to_come_asc: "Les évènements à venir | ordre chronologique"
         on_DATE: "le {{DATE}}"    # angular interpolation
         from_DATE: "du {{DATE}}"  # angular interpolation
         from_TIME: "de {{TIME}}"  # angular interpolation
