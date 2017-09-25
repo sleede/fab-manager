@@ -191,11 +191,15 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   ## List of price categories for the events
   $scope.priceCategories = priceCategoriesPromise
 
+  ## Default: we display all events (no restriction)
+  $scope.eventsScope =
+      selected: ''
+
   ##
   # Adds a bucket of events to the bottom of the page, grouped by month
   ##
   $scope.loadMoreEvents = ->
-    Event.query {page: $scope.page}, (data)->
+    Event.query {page: $scope.page, scope: $scope.eventsScope.selected}, (data)->
       $scope.events = $scope.events.concat data
       paginationCheck(data, $scope.events)
     $scope.page += 1
@@ -340,6 +344,13 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
           growl.error _t('price_category_deletion_failed')
 
 
+  $scope.changeScope = ->
+    Event.query {page: 0, scope: $scope.eventsScope.selected}, (data)->
+      $scope.events = data
+      paginationCheck(data, $scope.events)
+    $scope.page = 0
+
+
 
   ### PRIVATE SCOPE ###
 
@@ -358,7 +369,10 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   ##
   paginationCheck = (lastEvents, events)->
     if lastEvents.length > 0
-      $scope.paginateActive = false if events.length >= lastEvents[0].nb_total_events
+      if events.length >= lastEvents[0].nb_total_events
+        $scope.paginateActive = false
+      else
+        $scope.paginateActive = true
     else
       $scope.paginateActive = false
 

@@ -6,6 +6,7 @@
 - Removed cross hack in full-calendar
 - Confirmation before slot delete
 - Fix a typo: error message while creating a machine slot
+- Fix a bug: events pagination is bogus in admin's monitoring when selecting non default filter
 - Updated test data to allow passing test suite
 
 ## v2.5.14 2017 September 12
