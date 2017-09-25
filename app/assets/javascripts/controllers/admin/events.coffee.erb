@@ -344,6 +344,10 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
           growl.error _t('price_category_deletion_failed')
 
 
+  ##
+  # Triggered when the admin changes the events filter (all, passed, future).
+  # We request the first page of corresponding events to the API
+  ##
   $scope.changeScope = ->
     Event.query {page: 0, scope: $scope.eventsScope.selected}, (data)->
       $scope.events = data
