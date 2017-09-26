@@ -31,12 +31,12 @@
     </td>
     <td>
       <div class="buttons">
-        <button class="btn btn-default" ui-sref="app.admin.event_reservations({id: event.id})">
+        <a class="btn btn-default" ui-sref="app.admin.event_reservations({id: event.id})">
           <i class="fa fa-bookmark"></i> {{ 'view_reservations' | translate }}
-        </button>
-        <button class="btn btn-default" ui-sref="app.admin.events_edit({id: event.id})">
+        </a>
+        <a class="btn btn-default" ui-sref="app.admin.events_edit({id: event.id})">
           <i class="fa fa-edit"></i> {{ 'edit' | translate }}
-        </button>
+        </a>
       </div>
     </td>
   </tr>
