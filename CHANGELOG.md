@@ -7,6 +7,8 @@
 - Confirmation before slot delete
 - Fix a typo: error message while creating a machine slot
 - Fix a bug: events pagination is bogus in admin's monitoring when selecting non default filter
+- Fix a bug: social sharing failed for projects with an underscore in their name
+- Fix a bug: html tags of events description not stripped when sharing on social network
 - Updated test data to allow passing test suite
 
 ## v2.5.14 2017 September 12
