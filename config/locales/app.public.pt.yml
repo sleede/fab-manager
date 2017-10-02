@@ -247,6 +247,10 @@ pt:
           book: "Reservar"
           change_the_reservation: "Alterar reserva"
           you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
+          confirmation_required: "Confirmação obrigatória"
+          do_you_really_want_to_delete_this_event:  "Vocêrealmente deseja remover este evento?"
+          event_successfully_deleted: "Evento excluído com sucesso"
+          unable_to_delete_the_event_because_some_users_alredy_booked_it: "Não foi possível excluir este evento, já pode ter sido reservado por alguns usuários."
 
         calendar:
           # public calendar

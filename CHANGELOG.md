@@ -5,6 +5,7 @@
 - Additional button to delete a slot, allowing to delete slots masked by others
 - Removed cross hack in full-calendar
 - Confirmation before slot delete
+- Confirmation and error handling while deleting an event
 - Fix a typo: error message while creating a machine slot
 - Fix a bug: events pagination is bogus in admin's monitoring when selecting non default filter
 - Fix a bug: social sharing failed for projects with an underscore in their name

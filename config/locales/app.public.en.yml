@@ -247,6 +247,10 @@ en:
         book: "Book"
         change_the_reservation: "Change the reservation"
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
+        confirmation_required: "Confirmation required"
+        do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"
+        event_successfully_deleted: "Event successfully deleted"
+        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."
 
       calendar:
         # public calendar
