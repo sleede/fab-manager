@@ -30,6 +30,21 @@
 
               <ng-include src="'<%= asset_path 'admin/plans/_form.html' %>'"></ng-include>
 
+              <div class="input-group m-t-md">
+                <label for="plan[disabled]" class="control-label m-r-md">{{ 'plan_form.disabled' | translate }}</label>
+                <input bs-switch
+                       ng-model="plan.disabled"
+                       id="plan[disabled]"
+                       type="checkbox"
+                       class="form-control"
+                       switch-on-text="{{ 'yes' | translate }}"
+                       switch-off-text="{{ 'no' | translate }}"
+                       switch-animate="true"
+                       ng-true-value="'true'"
+                       ng-false-value="'false'"/>
+                <input type="hidden" name="plan[disabled]" value="{{plan.disabled}}"/>
+              </div>
+
               <h2 class="m-t-xl" translate>{{ 'edit_plan.prices' }}</h2>
               <div class="form-group col-md-6 col-lg-offset-6">
                   <input type="hidden" ng-model="plan.parent" name="plan[parent_id]" ng-value="plan.parent"/>

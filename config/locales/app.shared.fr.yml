@@ -230,6 +230,7 @@ fr:
           as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
           new_partner: "Nouveau partenaire"
           email_address_is_required: "L'adresse e-mail est requise."
+          disabled: "Désactiver l'abonnement"
 
       trainings:
         # formulaire d'édition d'une formation

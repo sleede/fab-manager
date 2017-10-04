@@ -230,6 +230,7 @@ en:
           as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "As part of a partner subscription, some notifications may be sent to this user."
           new_partner: "New partner"
           email_address_is_required: "Email address is required."
+          disabled: "Disable subscription"
 
       trainings:
         # training edition form

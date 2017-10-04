@@ -625,3 +625,15 @@ body.container{
     overflow: hidden;
   }
 }
+
+.disabled-line {
+  color: $gray;
+  background-color: $gray-lighter;
+
+  & td:first-child:before {
+    font-family: 'fontawesome' !important;
+    content: '\f023';
+    position: absolute;
+    left: -4px;
+  }
+}

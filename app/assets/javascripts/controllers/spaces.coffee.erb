@@ -438,6 +438,14 @@ Application.Controllers.controller "ReserveSpaceController", ["$scope", '$stateP
 
 
 
+    ##
+    # To use as callback in Array.prototype.filter to get only enabled plans
+    ##
+    $scope.filterDisabledPlans = (plan) ->
+      !plan.disabled
+
+
+
     ### PRIVATE SCOPE ###
 
     ##

@@ -1,4 +1,4 @@
-json.extract! plan, :id, :base_name, :name, :interval, :interval_count, :group_id, :training_credit_nb, :is_rolling, :description, :type, :ui_weight
+json.extract! plan, :id, :base_name, :name, :interval, :interval_count, :group_id, :training_credit_nb, :is_rolling, :description, :type, :ui_weight, :disabled
 json.amount (plan.amount / 100.00)
 json.prices plan.prices, partial: 'api/prices/price', as: :price
 json.plan_file_attributes do

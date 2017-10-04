@@ -175,6 +175,7 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ## edited plan data
   $scope.plan = planPromise
   $scope.plan.type = "Plan" if $scope.plan.type == null
+  $scope.plan.disabled = 'true' if $scope.plan.disabled
 
   ## API URL where the form will be posted
   $scope.actionUrl = "/api/plans/" + $stateParams.id

@@ -230,6 +230,7 @@ pt:
           as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Como parte da inscrição do parceiro, algumas notificações podem ser enviadas para este usuário."
           new_partner: "Novo parceiro"
           email_address_is_required: "Email é obrigatório."
+          disabled: "Disable subscrição"
 
       trainings:
         # training edition form

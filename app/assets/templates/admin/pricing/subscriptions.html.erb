@@ -20,7 +20,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="plan in plans | orderBy:orderPlans">
+  <tr ng-repeat="plan in plans | orderBy:orderPlans" ng-class="{'disabled-line' : plan.disabled}">
     <td>{{getPlanType(plan.type)}}</td>
     <td>{{plan.base_name}}</td>
     <td>{{ plan.interval | planIntervalFilter:plan.interval_count }}</td>

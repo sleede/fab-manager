@@ -8,8 +8,8 @@
 
       <!-- ng-class directive center the last item if the list length is odd -->
       <div class="pricing-panel col-xs-6 col-md-6 col-lg-6 text-center"
-           ng-class="{'col-md-12 col-lg-12':(plansGroup.plans.length % 2 == 1 && key == plansGroup.plans.length-1)}"
-           ng-repeat="(key, plan) in plansGroup.plans | orderBy:'interval'">
+           ng-class="{'col-md-12 col-lg-12':(plansGroup.plans.filter(filterDisabledPlans).length % 2 == 1 && key == plansGroup.plans.filter(filterDisabledPlans).length-1)}"
+           ng-repeat="(key, plan) in plansGroup.plans.filter(filterDisabledPlans) | orderBy:'interval'">
 
         <h3 class="title">{{ plan.base_name }}</h3>
 
