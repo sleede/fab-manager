@@ -231,6 +231,7 @@ pt:
           new_partner: "Novo parceiro"
           email_address_is_required: "Email é obrigatório."
           disabled: "Disable subscrição"
+          disable_plan_will_not_unsubscribe_users: "Aviso: desativar a assinatura não desautorizará os usuários que atualmente possuem esta assinatura ativa."
 
       trainings:
         # training edition form

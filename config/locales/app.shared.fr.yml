@@ -231,6 +231,7 @@ fr:
           new_partner: "Nouveau partenaire"
           email_address_is_required: "L'adresse e-mail est requise."
           disabled: "Désactiver l'abonnement"
+          disable_plan_will_not_unsubscribe_users: "Attention : désactiver l'abonnement ne désabonnera pas les utilisateurs ayant actuellement cet abonnement actif."
 
       trainings:
         # formulaire d'édition d'une formation

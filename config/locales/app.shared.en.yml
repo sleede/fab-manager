@@ -231,6 +231,7 @@ en:
           new_partner: "New partner"
           email_address_is_required: "Email address is required."
           disabled: "Disable subscription"
+          disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
 
       trainings:
         # training edition form
