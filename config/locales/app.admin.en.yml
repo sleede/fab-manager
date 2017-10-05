@@ -230,6 +230,9 @@ en:
           add_a_space_credit: "Add a Space credit"
           space: "Espace"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error : a credit linking this space with that subscription already exists."
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
 
       coupons_new:
         # ajouter un code promotionnel

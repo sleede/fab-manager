@@ -6,7 +6,21 @@
   <br>{{ 'pricing.for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later' | translate }}
 </div>
 
-<button type="button" class="btn btn-warning m-t-lg m-b" ui-sref="app.admin.plans.new" translate>{{ 'pricing.add_a_new_subscription_plan' }}</button>
+<div class="m-t-lg">
+  <button type="button" class="btn btn-warning" ui-sref="app.admin.plans.new">
+    <i class="fa fa-plus m-r"></i>
+    <span translate>{{ 'pricing.add_a_new_subscription_plan' }}</span>
+  </button>
+  <div class="form-group pull-right">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+      <select ng-model="planFiltering" class="form-control">
+        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'pricing.status_'+status }}</option>
+      </select>
+    </div>
+  </div>
+
+</div>
 <table class="table">
   <thead>
   <tr>
@@ -20,7 +34,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="plan in plans | orderBy:orderPlans" ng-class="{'disabled-line' : plan.disabled}">
+  <tr ng-repeat="plan in plans | filterDisabled:planFiltering | orderBy:orderPlans" ng-class="{'disabled-line' : plan.disabled && planFiltering === 'all'}">
     <td>{{getPlanType(plan.type)}}</td>
     <td>{{plan.base_name}}</td>
     <td>{{ plan.interval | planIntervalFilter:plan.interval_count }}</td>
