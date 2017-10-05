@@ -423,6 +423,22 @@ pt:
         an_error_occurred_unable_to_delete_the_specified_provider: "Ocorreu um erro: não é possível excluir o provedor especificado."
         local_database: "Database local"
         o_auth2: "OAuth 2.0"
+        group_form:
+          add_a_group: "Adicionar grupo"
+          group_name: "Nome do grupo"
+          disable: "Desativar"
+          enable: "Habilitar"
+          changes_successfully_saved: "Mudanças salvas com sucesso."
+          an_error_occurred_while_saving_changes: "Um erro ocorreu ao salvar mudanças."
+          new_group_successfully_saved: "Novo grupo salvo com sucesso."
+          an_error_occurred_when_saving_the_new_group: "Um erro ocorreu ao salvar novo grupo."
+          group_successfully_deleted: "Grupo excluido com sucesso."
+          unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Não é possível excluir o grupo porque alguns usuários e / ou grupos ainda estão vinculados a ele."
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation
+          status_enabled: "Ativos"
+          status_disabled: "Desabilitados"
+          status_all: "Todos"
 
       members_new:
         # add a member

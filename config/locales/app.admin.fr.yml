@@ -430,6 +430,9 @@ fr:
           unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Le groupe n'a pas pu être supprimé car des utilisateurs et/ou des abonnements sont toujours associés à ce dernier."
           group_successfully_enabled_disabled: "Le groupe a bien été {STATUS, select, true{désactivé} other{activé}}."  # messageFormat interpolation
           unable_to_enable_disable_group: "Impossible {STATUS, select, true{de désactiver} other{d'activer}} le groupe."  # messageFormat interpolation
+          status_enabled: "Activés"
+          status_disabled: "Désactivés"
+          status_all: "Tous"
 
       members_new:
         # ajouter un membre

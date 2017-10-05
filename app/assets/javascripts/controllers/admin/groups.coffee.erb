@@ -3,6 +3,15 @@ Application.Controllers.controller "GroupsController", ["$scope", 'groupsPromise
   ## List of users groups
   $scope.groups = groupsPromise
 
+  ## Default: we show only enabled plans
+  $scope.groupFiltering = 'enabled'
+
+  ## Available options for filtering plans by status
+  $scope.filterDisabled = [
+    'enabled',
+    'disabled',
+    'all',
+  ]
 
 
   ##
