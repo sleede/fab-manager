@@ -34,11 +34,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="plan in plans | filterDisabled:planFiltering | orderBy:orderPlans" ng-class="{'disabled-line' : plan.disabled && planFiltering === 'all'}">
+  <tr ng-repeat="plan in plans | filterDisabled:planFiltering | orderBy:orderPlans"
+      ng-class="{'disabled-line' : plan.disabled && planFiltering === 'all'}"
+      ng-init="group = getGroupFromId(groups, plan.group_id)"
+      ng-hide="group.disabled">
     <td>{{getPlanType(plan.type)}}</td>
     <td>{{plan.base_name}}</td>
     <td>{{ plan.interval | planIntervalFilter:plan.interval_count }}</td>
-    <td>{{getGroupFromId(groups, plan.group_id).name}}</td>
+    <td>{{group.name}}</td>
     <td class="hidden-xs">{{plan.ui_weight}}</td>
     <td>{{plan.amount | currency}}</td>
     <td><button type="button" class="btn btn-default" ui-sref="app.admin.plans.edit({id:plan.id})"><i class="fa fa-pencil-square-o"></i></button> <button type="button" class="btn btn-danger" ng-click="deletePlan(plans, plan.id)"><i class="fa fa-trash"></i></button></td>

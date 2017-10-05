@@ -77,11 +77,14 @@ Application.Controllers.controller "GroupsController", ["$scope", 'groupsPromise
   ##
   $scope.toggleDisableGroup = (index) ->
     group = $scope.groups[index]
-    Group.update {id: group.id}, { group: { disabled: !group.disabled } }, (response) ->
-      $scope.groups[index] = response
-      growl.success(_t('group_form.group_successfully_enabled_disabled', { STATUS: response.disabled }, 'messageformat'))
-    , (error) ->
-      growl.error(_t('group_form.unable_to_enable_disable_group', { STATUS: !group.disabled }, 'messageformat'))
+    if (!group.disabled && group.users > 0)
+      growl.error(_t('group_form.unable_to_disable_group_with_users', { USERS: group.users }, 'messageformat'))
+    else
+      Group.update {id: group.id}, { group: { disabled: !group.disabled } }, (response) ->
+        $scope.groups[index] = response
+        growl.success(_t('group_form.group_successfully_enabled_disabled', { STATUS: response.disabled }, 'messageformat'))
+      , (error) ->
+        growl.error(_t('group_form.unable_to_enable_disable_group', { STATUS: !group.disabled }, 'messageformat'))
 
 
 ]

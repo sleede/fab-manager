@@ -13,7 +13,7 @@ class PlanController
 
 
     ## groups list
-    $scope.groups = groups.filter (g) -> g.slug != 'admins'
+    $scope.groups = groups.filter (g) -> g.slug != 'admins' && !g.disabled
 
     ## users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users

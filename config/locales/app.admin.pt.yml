@@ -434,8 +434,9 @@ pt:
           an_error_occurred_when_saving_the_new_group: "Um erro ocorreu ao salvar novo grupo."
           group_successfully_deleted: "Grupo excluido com sucesso."
           unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Não é possível excluir o grupo porque alguns usuários e / ou grupos ainda estão vinculados a ele."
-          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation
-          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation TODO
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation TODO
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation TODO
           status_enabled: "Ativos"
           status_disabled: "Desabilitados"
           status_all: "Todos"

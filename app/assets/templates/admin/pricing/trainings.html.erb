@@ -12,7 +12,7 @@
     <td>
       {{ training.name }}
     </td>
-    <td ng-repeat="group in groups">
+    <td ng-repeat="group in enabledGroups">
                   <span editable-number="findTrainingsPricing(trainingsPricings, training.id, group.id).amount"
                         onbeforesave="updateTrainingsPricing($data, findTrainingsPricing(trainingsPricings, training.id, group.id))">
                       {{ findTrainingsPricing(trainingsPricings, training.id, group.id).amount | currency}}

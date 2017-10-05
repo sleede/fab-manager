@@ -430,6 +430,7 @@ en:
           unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Unable to delete group because some users and/or groups are still linked to it."
           group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation
           unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation
           status_enabled: "Enabled"
           status_disabled: "Disabled"
           status_all: "All"

@@ -8,7 +8,7 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ### PUBLIC SCOPE ###
 
     ## list of groups
-    $scope.groups = groupsPromise.filter (g) -> g.slug != 'admins'
+    $scope.groups = groupsPromise.filter (g) -> g.slug != 'admins' & !g.disabled
 
     ## default : do not show the group changing form
     ## group ID of the current/selected user
