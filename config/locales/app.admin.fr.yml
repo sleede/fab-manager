@@ -396,14 +396,8 @@ fr:
         this_may_take_a_while_please_wait: "Attention : ceci peut prendre un certain temps, merci de patienter."
         administrator_successfully_deleted: "L'administrateur a bien été supprimé."
         unable_to_delete_the_administrator: "L'administrateur n'a pas pu être supprimé."
-        add_a_group: "Ajouter un groupe"
-        group_name: "Nom du groupe"
         changes_successfully_saved: "Les modifications ont bien été enregistrées."
         an_error_occurred_while_saving_changes: "Une erreur est survenue lors de l'enregistrement des modifications."
-        new_group_successfully_saved: "Le nouveau groupe a bien été enregistré."
-        an_error_occurred_when_saving_the_new_group: "Une erreur est survenue lors de l'enregistrement du nouveau groupe."
-        group_successfully_deleted: "Le groupe a bien été supprimé."
-        unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Le groupe n'a pas pu être supprimé car des utilisateurs et/ou des abonnements sont toujours associés à ce dernier."
         add_a_tag: "Ajouter une étiquette"
         tag_name: "Nom de l'étiquette"
         new_tag_successfully_saved: "La nouvelle étiquette a bien été enregistrée."
@@ -423,6 +417,19 @@ fr:
         an_error_occurred_unable_to_delete_the_specified_provider: "Une erreur est survenue : impossible de supprimer le fournisseur spécifié."
         local_database: "Base de données locale"
         o_auth2: "OAuth 2.0"
+        group_form:
+          add_a_group: "Ajouter un groupe"
+          group_name: "Nom du groupe"
+          disable: "Désactiver"
+          enable: "Activer"
+          changes_successfully_saved: "Les modifications ont bien été enregistrées."
+          an_error_occurred_while_saving_changes: "Une erreur est survenue lors de l'enregistrement des modifications."
+          new_group_successfully_saved: "Le nouveau groupe a bien été enregistré."
+          an_error_occurred_when_saving_the_new_group: "Une erreur est survenue lors de l'enregistrement du nouveau groupe."
+          group_successfully_deleted: "Le groupe a bien été supprimé."
+          unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Le groupe n'a pas pu être supprimé car des utilisateurs et/ou des abonnements sont toujours associés à ce dernier."
+          group_successfully_enabled_disabled: "Le groupe a bien été {STATUS, select, true{désactivé} other{activé}}."  # messageFormat interpolation
+          unable_to_enable_disable_group: "Impossible {STATUS, select, true{de désactiver} other{d'activer}} le groupe."  # messageFormat interpolation
 
       members_new:
         # ajouter un membre

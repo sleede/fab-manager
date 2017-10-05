@@ -1,1 +1,1 @@
-json.extract! group, :id, :slug, :name
+json.extract! group, :id, :slug, :name, :disabled

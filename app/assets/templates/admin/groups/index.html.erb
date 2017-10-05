@@ -1,8 +1,8 @@
-<button type="button" class="btn btn-warning m-b m-t-lg" ng-click="addGroup()" translate>{{ 'add_a_group' }}</button>
+<button type="button" class="btn btn-warning m-b m-t-lg" ng-click="addGroup()" translate>{{ 'group_form.add_a_group' }}</button>
 <table class="table">
     <thead>
     <tr>
-        <th style="width: 80%;" translate>{{ 'group_name' }}</th>
+        <th style="width: 80%;" translate>{{ 'group_form.group_name' }}</th>
         <th style="width: 20%"></th>
     </tr>
     </thead>
@@ -26,6 +26,10 @@
             <div class="buttons" ng-show="!rowform.$visible" ng-hide="group.slug === 'admins'">
                 <button class="btn btn-default" ng-click="rowform.$show()">
                     <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+                </button>
+                <button class="btn btn-default" ng-click="toggleDisableGroup($index)">
+                    <span ng-hide="group.disabled"><i class="fa fa-lock"></i> <span translate>{{ 'group_form.disable' }}</span></span>
+                    <span ng-show="group.disabled"><i class="fa fa-unlock"></i> <span translate>{{ 'group_form.enable' }}</span></span>
                 </button>
                 <button class="btn btn-danger" ng-click="removeGroup($index)">
                     <i class="fa fa-trash-o"></i>
