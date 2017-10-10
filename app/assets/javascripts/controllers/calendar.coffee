@@ -21,7 +21,7 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   ### PUBLIC SCOPE ###
 
   ## List of trainings
-  $scope.trainings = trainingsPromise
+  $scope.trainings = trainingsPromise.filter (t) -> !t.disabled
 
   ## List of machines
   $scope.machines = machinesPromise
