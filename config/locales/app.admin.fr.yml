@@ -73,6 +73,9 @@ fr:
       trainings:
         # suivre et surveiller les formations
         training: "Formation"
+        add_a_new_training: "Ajouter une nouvelle formation"
+        associated_machines: "Machines associées"
+        number_of_tickets: "Nombre de places"
         year_NUMBER: "Année {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Mois de {{NAME}}"  # angular interpolation
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, =0{réservation} one{réservation} other{réservations}}"  # messageFormat interpolation
@@ -89,11 +92,16 @@ fr:
         training_successfully_deleted: "La formation a bien été supprimée."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
         do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
+        status_enabled: "Actifs"
+        status_disabled: "Désactivés"
+        status_all: "Tous"
 
       trainings_new:
         # créer une nouvelle formation
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
+        trainings_new:
+          add_a_new_training: "Ajouter une nouvelle formation"
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
 
       events:
         # gestion et suivi des évènements

@@ -177,6 +177,16 @@ Application.Controllers.controller "TrainingsAdminController", ["$scope", "$stat
   ## Binding for the parseInt function
   $scope.parseInt = parseInt
 
+  ## Default: we show only enabled trainings
+  $scope.trainingFiltering = 'enabled'
+
+  ## Available options for filtering trainings by status
+  $scope.filterDisabled = [
+    'enabled',
+    'disabled',
+    'all',
+  ]
+
   ##
   # In the trainings listing tab, return the stringified list of machines associated with the provided training
   # @param training {Object} Training object, inherited from $resource

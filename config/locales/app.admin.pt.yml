@@ -73,6 +73,9 @@ pt:
       trainings:
         # track and monitor the trainings
         training: "Treinamento"
+        add_a_new_training: "Adicionar um novo treinamento"
+        associated_machines: "Máquinas associadas"
+        number_of_tickets: "Número de vagas"
         year_NUMBER: "Ano {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Mês de {{NAME}}"  # angular interpolation
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reserva} other{reservas}}"  # messageFormat interpolation
@@ -89,11 +92,16 @@ pt:
         training_successfully_deleted: "O treinamento foi deletado com sucesso."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Não é possível deletar o treinamento, pois alguns membros já o reservaram."
         do_you_really_want_to_delete_this_training: "Você realmente quer deletar este treinamento?"
+        status_enabled: "Ativos"
+        status_disabled: "Desabilitados"
+        status_all: "Todos"
 
       trainings_new:
         # create a new training
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Cuidado, ao criar um treinamento, seu preço de reserva é inicializado em zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Não se esqueça de alterá-lo antes de criar slots para este treinamento."
+        trainings_new:
+          add_a_new_training: "Adicionar um novo treinamento"
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Cuidado, ao criar um treinamento, seu preço de reserva é inicializado em zero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "Não se esqueça de alterá-lo antes de criar slots para este treinamento."
 
       events:
         # events tracking and management
