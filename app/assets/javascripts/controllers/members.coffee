@@ -73,7 +73,7 @@ Application.Controllers.controller "EditProfileController", ["$scope", "$rootSco
   $scope.actionUrl = "/api/members/" + $scope.currentUser.id
 
   ## list of groups
-  $scope.groups = groups
+  $scope.groups = groups.filter (g) -> !g.disabled
 
   ## Form action on the above URL
   $scope.method = 'patch'
