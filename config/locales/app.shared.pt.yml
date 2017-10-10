@@ -235,11 +235,19 @@ pt:
 
       trainings:
         # training edition form
-        add_a_new_training: "Adicionar um novo treinamento"
-        validate_your_training: "Validar seu treinamento"
-        associated_machines: "Máquinas associadas"
-        number_of_tickets: "Número de vagas"
-        public_page: "Mostrar na lista de treinamentos"
+        trainings_form:
+          name: "Nome"
+          name_is_required: "Nome é obrigatório."
+          illustration: "Ilustração"
+          add_an_illustration: "Adicionar ilustração"
+          description: "Descrição"
+          description_is_required: "Descrição é obrigatório."
+          add_a_new_training: "Adicionar um novo treinamento"
+          validate_your_training: "Validar seu treinamento"
+          associated_machines: "Máquinas associadas"
+          number_of_tickets: "Número de vagas"
+          public_page: "Mostrar na lista de treinamentos"
+          disable_training: "Disable the training" # TODO
 
       user_admin:
         # partial form to edit/create an user (admin view)
