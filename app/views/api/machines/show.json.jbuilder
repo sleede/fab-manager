@@ -5,7 +5,7 @@ json.machine_files_attributes @machine.machine_files do |f|
   json.attachment f.attachment_identifier
   json.attachment_url f.attachment_url
 end
-json.trainings @machine.trainings.each, :id, :name
+json.trainings @machine.trainings.each, :id, :name, :disabled
 json.current_user_is_training current_user.is_training_machine?(@machine) if current_user
 json.current_user_training_reservation do
   json.partial! 'api/reservations/reservation', reservation: current_user.training_reservation_by_machine(@machine)

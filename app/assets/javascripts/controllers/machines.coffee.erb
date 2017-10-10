@@ -108,32 +108,40 @@ _reserveMachine = (machine, e) ->
                 $uibModalInstance.dismiss('cancel')
             ]
         # ... but does not have booked the training, tell him to register for a training session first
+        # unless all associated trainings are disabled
         else
-          _this.$uibModal.open
-            templateUrl: '<%= asset_path "machines/request_training_modal.html" %>'
-            controller: ['$scope', '$uibModalInstance', '$state', ($scope, $uibModalInstance, $state) ->
-              $scope.machine = machine
-              $scope.member = _this.$scope.currentUser
+          # if all trainings are disabled, just redirect the user to the reservation calendar
+          if machine.trainings.map((t) -> t.disabled).reduce(((acc, val) -> acc && val), true)
+            _this.$state.go('app.logged.machines_reserve', {id: machine.slug})
+          # otherwise open the information modal
+          else
+            _this.$uibModal.open
+              templateUrl: '<%= asset_path "machines/request_training_modal.html" %>'
+              controller: ['$scope', '$uibModalInstance', '$state', ($scope, $uibModalInstance, $state) ->
+                $scope.machine = machine
+                $scope.member = _this.$scope.currentUser
 
-              # transform the name of the trainings associated with the machine to integrate them in a sentence
-              $scope.humanizeTrainings = ->
-                text = ''
-                angular.forEach $scope.machine.trainings, (training) ->
-                  if text.length > 0
-                    text += _this._t('_or_the_')
-                  text += training.name.substr(0,1).toLowerCase() + training.name.substr(1)
-                text
+                # transform the name of the trainings associated with the machine to integrate them in a sentence
+                $scope.humanizeTrainings = ->
+                  text = ''
+                  angular.forEach $scope.machine.trainings, (training) ->
+                    if text.length > 0
+                      text += _this._t('_or_the_')
+                    text += training.name.substr(0,1).toLowerCase() + training.name.substr(1)
+                  text
 
-              # modal is close with validation
-              $scope.ok = ->
-                $state.go('app.logged.trainings_reserve', {id: $scope.machine.trainings[0].id})
-                $uibModalInstance.close(machine)
+                # modal is closed with validation
+                $scope.ok = ->
+                  $state.go('app.logged.trainings_reserve', {id: $scope.machine.trainings[0].id})
+                  $uibModalInstance.close(machine)
 
-              # modal is closed with escaping
-              $scope.cancel = (e)->
-                e.preventDefault()
-                $uibModalInstance.dismiss('cancel')
-            ]
+                # modal is closed with escaping
+                $scope.cancel = (e)->
+                  e.preventDefault()
+                  $uibModalInstance.dismiss('cancel')
+              ]
+
+
       # if the user is not logged, open the login modal window
       else
         _this.$scope.login()
