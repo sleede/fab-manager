@@ -37,7 +37,7 @@
                     <i class="fa fa-times"></i>
                 </button>
             </form>
-            <div class="buttons" ng-show="!rowform.$visible" ng-hide="group.slug === 'admins'">
+            <div class="buttons" ng-hide="rowform.$visible || group.slug === 'admins'">
                 <button class="btn btn-default" ng-click="rowform.$show()">
                     <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
                 </button>
