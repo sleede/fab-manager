@@ -35,6 +35,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
   ## List of machines
   $scope.machines = machinesPromise
+  $scope.enabledMachines = machinesPromise.filter (t) -> !t.disabled
 
   ## List of coupons
   $scope.coupons = couponsPromise
@@ -193,21 +194,37 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
 
   ##
-  # In the Credits tab, while editing a machine credit row, select the current machine from the
-  # drop-down list of machines as the current item.
+  # In the Credits tab, return the name of the machine/space associated with the given credit
   # @param credit {Object} credit object, inherited from $resource
+  # @returns {String}
   ##
   $scope.showCreditableName = (credit) ->
     selected = _t('pricing.not_set')
     if credit and credit.creditable_id
+      object = $scope.getCreditable(credit)
+      selected = object.name
+      if credit.creditable_type == 'Machine'
+        selected += ' ( id. ' + object.id + ' )'
+    return selected
+
+
+
+  ##
+  # In the Credits tab, return the machine/space associated with the given credit
+  # @param credit {Object} credit object, inherited from $resource
+  # @returns {Object}
+  ##
+  $scope.getCreditable = (credit) ->
+    selected = undefined
+    if credit and credit.creditable_id
       if credit.creditable_type == 'Machine'
         angular.forEach $scope.machines, (m)->
           if m.id == credit.creditable_id
-            selected = m.name + ' ( id. ' + m.id + ' )'
+            selected = m
       else if credit.creditable_type == 'Space'
         angular.forEach $scope.spaces, (s)->
           if s.id == credit.creditable_id
-            selected = s.name
+            selected = s
     return selected
 
 
@@ -236,6 +253,9 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
       , (resp) ->
         $scope.machineCredits[$scope.machineCredits.length-1].id = resp.id
         growl.success(_t('pricing.credit_was_successfully_saved'))
+      , (err) ->
+        $scope.machineCredits.pop()
+        growl.error(_t('pricing.error_creating_credit'))
 
 
   ##
@@ -299,10 +319,14 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
       , (resp) ->
         $scope.spaceCredits[$scope.spaceCredits.length - 1].id = resp.id
         growl.success(_t('pricing.credit_was_successfully_saved'))
+      , (err) ->
+        $scope.spaceCredits.pop()
+        growl.error(_t('pricing.error_creating_credit'))
 
 
 
-  ##
+
+    ##
   # Removes the newly inserted but not saved space credit / Cancel the current space credit modification
   # @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
   # @param index {number} credit index in the $scope.spaceCredits array

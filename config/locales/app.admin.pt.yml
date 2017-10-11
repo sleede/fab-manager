@@ -204,6 +204,7 @@ pt:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Erro : um link de crédito entre esta máquina e esta assinatura já existe."
           changes_have_been_successfully_saved: "As modificações foram salvas com sucesso."
           credit_was_successfully_saved: "Crédito salvo com sucesso."
+          error_creating_credit: "Unable to create credit, an error occurred" # TODO
           do_you_really_want_to_delete_this_subscription_plan: "Você realmente deletar esse plano de assinatura?"
           subscription_plan_was_successfully_deleted: "Plano de assinatura foi deletado com sucesso."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Não é possível deletar a assinatura específicada, um erro ocorreu."

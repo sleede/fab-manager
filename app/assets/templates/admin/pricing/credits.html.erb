@@ -58,7 +58,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="mc in machineCredits" ng-init="plan = getPlanFromId(mc.plan_id)" ng-hide="plan.disabled">
+  <tr ng-repeat="mc in machineCredits" ng-hide="getPlanFromId(mc.plan_id).disabled || getCreditable(mc).disabled">
     <td>
                   <span editable-select="mc.creditable_id" e-name="creditable_id" e-form="rowform" e-ng-options="m.id as m.name+' ( id. '+m.id+' )' for m in machines" e-required>
                     {{ showCreditableName(mc) }}
@@ -71,7 +71,7 @@
     </td>
     <td>
                   <span editable-select="mc.plan_id" e-ng-options="p.id as humanReadablePlanName(p, groups, 'short') for p in enabledPlans" e-name="plan_id" e-form="rowform">
-                    {{ plan | humanReadablePlanName: groups: 'short' }}
+                    {{ getPlanFromId(mc.plan_id) | humanReadablePlanName: groups: 'short' }}
                   </span>
     </td>
     <td>
@@ -110,7 +110,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="sc in spaceCredits" ng-init="plan = getPlanFromId(sc.plan_id)" ng-hide="plan.disabled">
+  <tr ng-repeat="sc in spaceCredits" ng-hide="getPlanFromId(sc.plan_id).disabled || getCreditable(sc).disabled">
     <td>
                   <span editable-select="sc.creditable_id" e-name="creditable_id" e-form="rowform" e-ng-options="s.id as s.name for s in spaces" e-required>
                     {{ showCreditableName(sc) }}
@@ -123,7 +123,7 @@
     </td>
     <td>
                   <span editable-select="sc.plan_id" e-ng-options="p.id as humanReadablePlanName(p, groups, 'short') for p in enabledPlans" e-name="plan_id" e-form="rowform">
-                    {{ plan | humanReadablePlanName: groups: 'short' }}
+                    {{ getPlanFromId(sc.plan_id) | humanReadablePlanName: groups: 'short' }}
                   </span>
     </td>
     <td>

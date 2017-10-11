@@ -232,14 +232,14 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
 
 
   ##
-  # Retrieve the name of a machine from its ID
+  # Retrieve the machine from its ID
   # @param machine_id {number} machine identifier
-  # @returns {string} Machine's name
+  # @returns {object} Machine
   ##
-  $scope.getMachineName = (machine_id) ->
+  $scope.getMachine = (machine_id) ->
     for machine in $scope.machines
       if machine.id == machine_id
-        return machine.name
+        return machine
 
 
 

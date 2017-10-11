@@ -204,6 +204,7 @@ fr:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Erreur : un crédit associant cette machine et cet abonnement existe déjà."
           changes_have_been_successfully_saved: "Les modifications ont bien été enregistrées."
           credit_was_successfully_saved: "Le crédit a bien été enregistré."
+          error_creating_credit: "Impossible de créer le credit, une erreur est survenue"
           do_you_really_want_to_delete_this_subscription_plan: "Êtes-vous sûr(e) de vouloir supprimer cette formule d'abonnement ?"
           subscription_plan_was_successfully_deleted: "La formule d'abonnement a bien été supprimée."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Impossible de supprimer l'abonnement spécifié, une erreur s'est produite."

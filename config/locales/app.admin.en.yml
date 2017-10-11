@@ -204,6 +204,7 @@ en:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Error : a credit linking this machine with that subscription already exists."
           changes_have_been_successfully_saved: "Changes have been successfully saved."
           credit_was_successfully_saved: "Credit was successfully saved."
+          error_creating_credit: "Unable to create credit, an error occurred"
           do_you_really_want_to_delete_this_subscription_plan: "Do you really want to delete this subscription plan?"
           subscription_plan_was_successfully_deleted: "Subscription plan was successfully deleted."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
