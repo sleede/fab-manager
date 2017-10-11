@@ -309,13 +309,13 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.end = end
 
   ## machines list
-  $scope.machines = machinesPromise.filter (t) -> !t.disabled
+  $scope.machines = machinesPromise.filter (m) -> !m.disabled
 
   ## trainings list
   $scope.trainings = trainingsPromise.filter (t) -> !t.disabled
 
   ## spaces list
-  $scope.spaces = spacesPromise
+  $scope.spaces = spacesPromise.filter (s) -> !s.disabled
 
   ## machines associated with the created slot
   $scope.selectedMachines = []
