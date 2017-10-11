@@ -32,7 +32,7 @@
     </div>
 
 
-    <div class="col-xs-12 col-sm-6 col-lg-4 machine-card" ng-class="{'disabled-machine' : machine.disabled && machineFiltering === 'all'}" ng-repeat="machine in machines | filterDisabled:machineFiltering">
+    <div class="col-xs-12 col-sm-6 col-lg-4 reservable-card" ng-class="{'disabled-reservable' : machine.disabled && machineFiltering === 'all'}" ng-repeat="machine in machines | filterDisabled:machineFiltering">
       <div class="widget panel panel-default">
         <div class="panel-heading picture" ng-if="!machine.machine_image" ng-click="showMachine(machine)">
           <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">

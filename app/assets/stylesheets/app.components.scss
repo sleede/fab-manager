@@ -599,12 +599,12 @@ padding: 10px;
   }
 }
 
-.machine-card {
+.reservable-card {
   @media only screen and (min-width: 768px) {
     height: 24em;
   }
 }
 
-.disabled-machine {
+.disabled-reservable {
   opacity: 0.5 !important;
 }

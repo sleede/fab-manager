@@ -270,8 +270,13 @@ en:
 
       spaces_list:
         # list of spaces
-        the_spaces: "The spaces"
-        add_a_space: "Add a space"
+        spaces_list:
+          the_spaces: "The spaces"
+          add_a_space: "Add a space"
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
+          book: "Book"
 
       space_show:
         # display the details of a space

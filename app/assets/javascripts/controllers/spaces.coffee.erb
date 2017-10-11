@@ -92,6 +92,17 @@ Application.Controllers.controller 'SpacesController', ['$scope', '$state', 'spa
   ##
   $scope.reserveSpace = (space) ->
     $state.go('app.logged.space_reserve', { id: space.slug })
+
+
+  ## Default: we show only enabled spaces
+  $scope.spaceFiltering = 'enabled'
+
+  ## Available options for filtering spaces by status
+  $scope.filterDisabled = [
+    'enabled',
+    'disabled',
+    'all',
+  ]
 ]
 
 
