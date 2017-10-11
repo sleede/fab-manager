@@ -309,7 +309,7 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.end = end
 
   ## machines list
-  $scope.machines = machinesPromise
+  $scope.machines = machinesPromise.filter (t) -> !t.disabled
 
   ## trainings list
   $scope.trainings = trainingsPromise.filter (t) -> !t.disabled
