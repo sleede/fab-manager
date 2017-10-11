@@ -16,6 +16,7 @@
 - Fix a bug: profile completion of non SSO-imported users trigger a fuzzy email
 - Fix a bug: creation of negative credits
 - Updated test data to allow passing test suite
+- [TODO DEPLOY] `rake db:migrate`
 
 ## v2.5.14 2017 September 12
 
