@@ -7,13 +7,13 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'the_fablab_s_machines' }}</h1>
+        <h1 translate>{{ 'machines_list.the_fablab_s_machines' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
       <section class="heading-actions wrapper">
-       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.machines_new" role="button" translate>{{ 'add_a_machine' }}</a>
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.machines_new" role="button" translate>{{ 'machines_list.add_a_machine' }}</a>
       </section>
     </div>
   </div>
@@ -22,42 +22,46 @@
 
 <section class="m-lg">
 
-    <div class="row" ng-repeat="machine in (machines.length/3 | array)">
-
-      <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="machine in machines.slice(3*$index, 3*$index + 3)">
-
-
-          <div class="widget panel panel-default">
-            <div class="panel-heading picture" ng-if="!machine.machine_image" ng-click="showMachine(machine)">
-              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
-            </div>
-            <div class="panel-heading picture" style="background-image:url({{machine.machine_image}})" ng-if="machine.machine_image" ng-click="showMachine(machine)">
-            </div>
-            <div class="panel-body">
-              <h1 class="text-center m-b">{{machine.name}}</h1>
-            </div>
-            <div class="panel-footer no-padder">
-
-              <div class="text-center clearfix">
-                <div class="col-sm-6 b-r no-padder">
-                   <div class="btn btn-default btn-block no-b padder-v red" ng-click="reserveMachine(machine, $event)">
-                     <i class="fa fa-bookmark"></i> {{ 'book' | translate }}
-                   </div>
-                </div>
-                <div class="col-sm-6 no-padder">
-                    <div class="btn btn-default btn-block padder-v no-b red" ng-click="showMachine(machine)">
-                      <i class="fa fa-eye"></i> {{ 'consult' | translate }}
-                    </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-
+    <div class="form-group row">
+      <div class="input-group col-md-3 m-l-lg m-b">
+        <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+        <select ng-model="machineFiltering" class="form-control">
+          <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'machines_list.status_'+status }}</option>
+        </select>
       </div>
     </div>
 
+
+    <div class="col-xs-12 col-sm-6 col-lg-4 machine-card" ng-class="{'disabled-machine' : machine.disabled && machineFiltering === 'all'}" ng-repeat="machine in machines | filterDisabled:machineFiltering">
+      <div class="widget panel panel-default">
+        <div class="panel-heading picture" ng-if="!machine.machine_image" ng-click="showMachine(machine)">
+          <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder class="img-responsive">
+        </div>
+        <div class="panel-heading picture" style="background-image:url({{machine.machine_image}})" ng-if="machine.machine_image" ng-click="showMachine(machine)">
+        </div>
+        <div class="panel-body">
+          <h1 class="text-center m-b">{{machine.name}}</h1>
+        </div>
+        <div class="panel-footer no-padder">
+
+          <div class="text-center clearfix">
+            <div class="col-sm-6 b-r no-padder">
+               <div class="btn btn-default btn-block no-b padder-v red" ng-click="reserveMachine(machine, $event)" ng-hide="machine.disabled">
+                 <i class="fa fa-bookmark m-r-xs"></i>
+                 <span class="hidden-sm" translate>{{ 'machines_list.book' }}</span>
+               </div>
+            </div>
+            <div class="no-padder" ng-class="{'col-sm-6': !machine.disabled}">
+                <div class="btn btn-default btn-block padder-v no-b red" ng-click="showMachine(machine)">
+                  <i class="fa fa-eye m-r-xs"></i>
+                  <span class="hidden-sm" translate>{{ 'consult' }}</span>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
 
 </section>

@@ -126,7 +126,7 @@ _reserveMachine = (machine, e) ->
                   text = ''
                   angular.forEach $scope.machine.trainings, (training) ->
                     if text.length > 0
-                      text += _this._t('_or_the_')
+                      text += _this._t('machines_list._or_the_')
                     text += training.name.substr(0,1).toLowerCase() + training.name.substr(1)
                   text
 
@@ -172,6 +172,16 @@ Application.Controllers.controller "MachinesController", ["$scope", "$state", '_
     _t: _t
     $uibModal: $uibModal
     Machine: Machine
+
+  ## Default: we show only enabled machines
+  $scope.machineFiltering = 'enabled'
+
+  ## Available options for filtering machines by status
+  $scope.filterDisabled = [
+    'enabled',
+    'disabled',
+    'all',
+  ]
 ]
 
 

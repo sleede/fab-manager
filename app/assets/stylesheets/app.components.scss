@@ -598,3 +598,13 @@ padding: 10px;
     cursor: help;
   }
 }
+
+.machine-card {
+  @media only screen and (min-width: 768px) {
+    height: 24em;
+  }
+}
+
+.disabled-machine {
+  opacity: 0.5 !important;
+}

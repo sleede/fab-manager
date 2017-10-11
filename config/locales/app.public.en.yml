@@ -175,9 +175,14 @@ en:
 
       machines_list:
         # list of machines
-        the_fablab_s_machines: "The FabLab's machines"
-        add_a_machine: "Add a machine"
-        _or_the_: " or the "
+        machines_list:
+          the_fablab_s_machines: "The FabLab's machines"
+          add_a_machine: "Add a machine"
+          book: "Book"
+          _or_the_: " or the "
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
 
       machines_show:
         # details of a machine

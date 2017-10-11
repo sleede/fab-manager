@@ -175,9 +175,14 @@ fr:
 
       machines_list:
         # liste des machines
-        the_fablab_s_machines: "Les machines du FabLab"
-        add_a_machine: "Ajouter une machine"
-        _or_the_: " ou la "
+        machines_list:
+          the_fablab_s_machines: "Les machines du FabLab"
+          add_a_machine: "Ajouter une machine"
+          book: "Réserver"
+          _or_the_: " ou la "
+          status_enabled: "Actives"
+          status_disabled: "Désactivées"
+          status_all: "Toutes"
 
       machines_show:
         # détail d'une machine
