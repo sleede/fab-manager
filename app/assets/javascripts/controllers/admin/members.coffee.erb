@@ -27,11 +27,12 @@ class MembersController
     Group.query (groups) ->
       $scope.groups = groups.filter (g) -> g.slug != 'admins' && !g.disabled
 
-    ## Retrieve the list the available trainings
+    ## Retrieve the list of available trainings
     Training.query().$promise.then (data)->
       $scope.trainings = data.map (d) ->
         id: d.id
         name: d.name
+        disabled: d.disabled
 
     ## Default parameters for AngularUI-Bootstrap datepicker
     $scope.datePicker =

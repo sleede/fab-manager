@@ -40,7 +40,7 @@
             <span ng-bind="$item.name"></span>
             <input type="hidden" name="user[training_ids][]" value="{{$item.id}}" />
         </ui-select-match>
-        <ui-select-choices repeat="t.id as t in (trainings | filter: $select.search)">
+        <ui-select-choices ui-disable-choice="t.disabled" repeat="t.id as t in (trainings | filter: $select.search)">
             <span ng-bind-html="t.name | highlight: $select.search"></span>
         </ui-select-choices>
     </ui-select>
