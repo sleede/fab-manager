@@ -73,7 +73,7 @@
             <span ng-bind="$item.name"></span>
             <input type="hidden" name="training[machine_ids][]" value="{{$item.id}}" />
           </ui-select-match>
-          <ui-select-choices repeat="m.id as m in (machines | filter: $select.search)">
+          <ui-select-choices ui-disable-choice="m.disabled" repeat="m.id as m in (machines | filter: $select.search)">
             <span ng-bind-html="m.name | highlight: $select.search"></span>
           </ui-select-choices>
         </ui-select>
