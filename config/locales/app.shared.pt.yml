@@ -415,6 +415,7 @@ pt:
             add_an_attachment: "Adicionar um anexo"
             default_places: "Tickets máximo padrão"
             default_places_is_required: "Tickets máximo padrão é obrigatório."
+            disable_space: "Disable space" # TODO
 
       cart:
         # module de panier d'achat de réservations

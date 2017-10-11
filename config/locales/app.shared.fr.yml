@@ -424,6 +424,7 @@ fr:
           add_an_attachment: "Ajouter une pièce jointe"
           default_places: "Maximum de places par défaut"
           default_places_is_required: "Le nombre de places maximum par défaut est requis."
+          disable_space: "Désactiver l'espace"
 
       cart:
         # module de panier d'achat de réservations

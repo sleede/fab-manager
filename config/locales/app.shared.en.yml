@@ -415,6 +415,7 @@ en:
           add_an_attachment: "Add an attachment"
           default_places: "Default maximum tickets"
           default_places_is_required: "Default maximum tickets is required."
+          disable_space: "Disable space"
 
       cart:
         # module de panier d'achat de réservations

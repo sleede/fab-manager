@@ -1,4 +1,4 @@
-json.extract! @space, :id, :name, :description, :characteristics, :created_at, :updated_at, :slug, :default_places
+json.extract! @space, :id, :name, :description, :characteristics, :created_at, :updated_at, :slug, :default_places, :disabled
 json.space_image @space.space_image.attachment.large.url if @space.space_image
 json.space_files_attributes @space.space_files do |f|
   json.id f.id
