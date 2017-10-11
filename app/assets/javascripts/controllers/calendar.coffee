@@ -24,10 +24,10 @@ Application.Controllers.controller "CalendarController", ["$scope", "$state", "$
   $scope.trainings = trainingsPromise.filter (t) -> !t.disabled
 
   ## List of machines
-  $scope.machines = machinesPromise
+  $scope.machines = machinesPromise.filter (t) -> !t.disabled
 
   ## List of spaces
-  $scope.spaces = spacesPromise
+  $scope.spaces = spacesPromise.filter (t) -> !t.disabled
 
   ## add availabilities source to event sources
   $scope.eventSources = []
