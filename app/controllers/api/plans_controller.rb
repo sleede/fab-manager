@@ -87,8 +87,7 @@
         end if @parameters[:plan][:prices_attributes]
 
         @parameters = @parameters.require(:plan).permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,
-            :training_credit_nb,
-            :ui_weight,
+            :training_credit_nb, :ui_weight, :disabled,
             plan_file_attributes: [:id, :attachment, :_destroy],
             prices_attributes: [:id, :amount]
         )

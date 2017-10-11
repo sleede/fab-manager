@@ -228,7 +228,8 @@ pt:
     notify_admin_profile_complete:
       subject: "Uma conta importada teve o perfil completado"
       body:
-        account_completed: "Uma conta de usuário importada anteriormente via %{PROVIDER} completou seu perfil:"
+        account_completed: "Uma conta de usuário completou seu perfil:"
+        imported_account_completed: "Uma conta de usuário importada anteriormente via %{PROVIDER} completou seu perfil:"
         provider_id: "Seu ID de provedor é:"
 
     notify_admin_abuse_reported:

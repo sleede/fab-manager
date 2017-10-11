@@ -598,3 +598,13 @@ padding: 10px;
     cursor: help;
   }
 }
+
+.reservable-card {
+  @media only screen and (min-width: 768px) {
+    height: 24em;
+  }
+}
+
+.disabled-reservable {
+  opacity: 0.5 !important;
+}

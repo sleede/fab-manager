@@ -73,6 +73,9 @@ pt:
       trainings:
         # track and monitor the trainings
         training: "Treinamento"
+        add_a_new_training: "Adicionar um novo treinamento"
+        associated_machines: "Máquinas associadas"
+        number_of_tickets: "Número de vagas"
         year_NUMBER: "Ano {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Mês de {{NAME}}"  # angular interpolation
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reserva} other{reservas}}"  # messageFormat interpolation
@@ -89,11 +92,16 @@ pt:
         training_successfully_deleted: "O treinamento foi deletado com sucesso."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Não é possível deletar o treinamento, pois alguns membros já o reservaram."
         do_you_really_want_to_delete_this_training: "Você realmente quer deletar este treinamento?"
+        status_enabled: "Ativos"
+        status_disabled: "Desabilitados"
+        status_all: "Todos"
 
       trainings_new:
         # create a new training
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Cuidado, ao criar um treinamento, seu preço de reserva é inicializado em zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Não se esqueça de alterá-lo antes de criar slots para este treinamento."
+        trainings_new:
+          add_a_new_training: "Adicionar um novo treinamento"
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Cuidado, ao criar um treinamento, seu preço de reserva é inicializado em zero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "Não se esqueça de alterá-lo antes de criar slots para este treinamento."
 
       events:
         # events tracking and management
@@ -196,6 +204,7 @@ pt:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Erro : um link de crédito entre esta máquina e esta assinatura já existe."
           changes_have_been_successfully_saved: "As modificações foram salvas com sucesso."
           credit_was_successfully_saved: "Crédito salvo com sucesso."
+          error_creating_credit: "Unable to create credit, an error occurred" # TODO
           do_you_really_want_to_delete_this_subscription_plan: "Você realmente deletar esse plano de assinatura?"
           subscription_plan_was_successfully_deleted: "Plano de assinatura foi deletado com sucesso."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Não é possível deletar a assinatura específicada, um erro ocorreu."
@@ -230,6 +239,9 @@ pt:
           add_a_space_credit: "Adicionar espaço de crédito"
           space: "Espaço"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Erro: um crédito que vincula esse espaço com essa assinatura já existe."
+          status_enabled: "Ativos"
+          status_disabled: "Desabilitados"
+          status_all: "Todos"
 
       coupons_new:
         # ajouter un code promotionnel
@@ -420,6 +432,23 @@ pt:
         an_error_occurred_unable_to_delete_the_specified_provider: "Ocorreu um erro: não é possível excluir o provedor especificado."
         local_database: "Database local"
         o_auth2: "OAuth 2.0"
+        group_form:
+          add_a_group: "Adicionar grupo"
+          group_name: "Nome do grupo"
+          disable: "Desativar"
+          enable: "Habilitar"
+          changes_successfully_saved: "Mudanças salvas com sucesso."
+          an_error_occurred_while_saving_changes: "Um erro ocorreu ao salvar mudanças."
+          new_group_successfully_saved: "Novo grupo salvo com sucesso."
+          an_error_occurred_when_saving_the_new_group: "Um erro ocorreu ao salvar novo grupo."
+          group_successfully_deleted: "Grupo excluido com sucesso."
+          unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Não é possível excluir o grupo porque alguns usuários e / ou grupos ainda estão vinculados a ele."
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation TODO
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation TODO
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation TODO
+          status_enabled: "Ativos"
+          status_disabled: "Desabilitados"
+          status_all: "Todos"
 
       members_new:
         # add a member

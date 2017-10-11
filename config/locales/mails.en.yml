@@ -228,7 +228,8 @@ en:
     notify_admin_profile_complete:
       subject: "An imported account has completed its profile"
       body:
-        account_completed: "A previously imported user account via %{PROVIDER} has completed its profile:"
+        account_completed: "An user account has completed its profile:"
+        imported_account_completed: "An user account, previously imported through %{PROVIDER}, has completed its profile:"
         provider_id: "its provider ID is:"
 
     notify_admin_abuse_reported:

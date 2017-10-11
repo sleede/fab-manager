@@ -9,9 +9,11 @@
 # Provides :
 #  - $scope.submited(content)
 #  - $scope.fileinputClass(v)
+#  - $scope.onDisableToggled
 #
 # Requires :
 #  - $state (Ui-Router) [ 'app.admin.trainings' ]
+#  - $scope.training
 ##
 class TrainingsController
   constructor: ($scope, $state) ->
@@ -40,6 +42,14 @@ class TrainingsController
     ##
     $scope.cancel = ->
       $state.go('app.admin.trainings')
+
+
+
+    ##
+    # Force the 'public_page' attribute to false when the current training is disabled
+    ##
+    $scope.onDisableToggled = ->
+      $scope.training.public_page = !$scope.training.disabled
 
 
 
@@ -166,6 +176,16 @@ Application.Controllers.controller "TrainingsAdminController", ["$scope", "$stat
 
   ## Binding for the parseInt function
   $scope.parseInt = parseInt
+
+  ## Default: we show only enabled trainings
+  $scope.trainingFiltering = 'enabled'
+
+  ## Available options for filtering trainings by status
+  $scope.filterDisabled = [
+    'enabled',
+    'disabled',
+    'all',
+  ]
 
   ##
   # In the trainings listing tab, return the stringified list of machines associated with the provided training

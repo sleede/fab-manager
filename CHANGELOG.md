@@ -6,11 +6,15 @@
 - Removed cross hack in full-calendar
 - Confirmation before slot delete
 - Confirmation and error handling while deleting an event
+- Ability to disable groups, machines, plans, spaces and trainings
+- Improved responsiveness of machines and spaces lists
 - Fix a typo: error message while creating a machine slot
 - Fix a bug: events pagination is bogus in admin's monitoring when selecting non default filter
 - Fix a bug: social sharing failed for projects with an underscore in their name
 - Fix a bug: html tags of events description not stripped when sharing on social network
 - Fix a bug: event, space, training or machine main image on description page is deformed on small devices
+- Fix a bug: profile completion of non SSO-imported users trigger a fuzzy email
+- Fix a bug: creation of negative credits
 - Updated test data to allow passing test suite
 
 ## v2.5.14 2017 September 12

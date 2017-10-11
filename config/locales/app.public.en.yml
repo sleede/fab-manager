@@ -175,9 +175,14 @@ en:
 
       machines_list:
         # list of machines
-        the_fablab_s_machines: "The FabLab's machines"
-        add_a_machine: "Add a machine"
-        _or_the_: " or the "
+        machines_list:
+          the_fablab_s_machines: "The FabLab's machines"
+          add_a_machine: "Add a machine"
+          book: "Book"
+          _or_the_: " or the "
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
 
       machines_show:
         # details of a machine
@@ -265,8 +270,13 @@ en:
 
       spaces_list:
         # list of spaces
-        the_spaces: "The spaces"
-        add_a_space: "Add a space"
+        spaces_list:
+          the_spaces: "The spaces"
+          add_a_space: "Add a space"
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
+          book: "Book"
 
       space_show:
         # display the details of a space

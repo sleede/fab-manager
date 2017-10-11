@@ -230,14 +230,24 @@ en:
           as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "As part of a partner subscription, some notifications may be sent to this user."
           new_partner: "New partner"
           email_address_is_required: "Email address is required."
+          disabled: "Disable subscription"
+          disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
 
       trainings:
         # training edition form
-        add_a_new_training: "Add a new training"
-        validate_your_training: "Validate your training"
-        associated_machines: "Associated machines"
-        number_of_tickets: "Number of tickets"
-        public_page: "Show in training lists"
+        trainings_form:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Illustration"
+          add_an_illustration: "Add an illustration"
+          description: "Description"
+          description_is_required: "Description is required."
+          add_a_new_training: "Add a new training"
+          validate_your_training: "Validate your training"
+          associated_machines: "Associated machines"
+          number_of_tickets: "Number of tickets"
+          public_page: "Show in training lists"
+          disable_training: "Disable the training"
 
       user_admin:
         # partial form to edit/create an user (admin view)
@@ -405,6 +415,7 @@ en:
           add_an_attachment: "Add an attachment"
           default_places: "Default maximum tickets"
           default_places_is_required: "Default maximum tickets is required."
+          disable_space: "Disable space"
 
       cart:
         # module de panier d'achat de réservations

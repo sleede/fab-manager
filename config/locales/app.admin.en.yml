@@ -73,6 +73,9 @@ en:
       trainings:
         # track and monitor the trainings
         training: "Training"
+        add_a_new_training: "Add a new training"
+        associated_machines: "Associated machines"
+        number_of_tickets: "Number of tickets"
         year_NUMBER: "Year {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Month of {{NAME}}"  # angular interpolation
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"  # messageFormat interpolation
@@ -89,11 +92,16 @@ en:
         training_successfully_deleted: "Training successfully deleted."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "Unable to delete the training because some users already booked it."
         do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
+        status_enabled: "Enabled"
+        status_disabled: "Disabled"
+        status_all: "All"
 
       trainings_new:
         # create a new training
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
+        trainings_new:
+          add_a_new_training: "Add a new training"
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
 
       events:
         # events tracking and management
@@ -196,6 +204,7 @@ en:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Error : a credit linking this machine with that subscription already exists."
           changes_have_been_successfully_saved: "Changes have been successfully saved."
           credit_was_successfully_saved: "Credit was successfully saved."
+          error_creating_credit: "Unable to create credit, an error occurred"
           do_you_really_want_to_delete_this_subscription_plan: "Do you really want to delete this subscription plan?"
           subscription_plan_was_successfully_deleted: "Subscription plan was successfully deleted."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Unable to delete the specified subscription, an error occurred."
@@ -230,6 +239,9 @@ en:
           add_a_space_credit: "Add a Space credit"
           space: "Espace"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error : a credit linking this space with that subscription already exists."
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
 
       coupons_new:
         # ajouter un code promotionnel
@@ -393,14 +405,8 @@ en:
         this_may_take_a_while_please_wait: "Warning: this may take a while, please be patient."
         administrator_successfully_deleted: "Administrator successfully deleted."
         unable_to_delete_the_administrator: "Unable to delete the administrator."
-        add_a_group: "Add a group"
-        group_name: "Group name"
         changes_successfully_saved: "Changes successfully saved."
         an_error_occurred_while_saving_changes: "An error occurred when saving changes."
-        new_group_successfully_saved: "New group successfully saved."
-        an_error_occurred_when_saving_the_new_group: "An error occurred when saving the new group."
-        group_successfully_deleted: "Group successfully deleted."
-        unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Unable to delete group because some users and/or groups are still linked to it."
         add_a_tag: "Add a tag"
         tag_name: "Tag name"
         new_tag_successfully_saved: "New tag successfully saved."
@@ -420,6 +426,23 @@ en:
         an_error_occurred_unable_to_delete_the_specified_provider: "An error occurred: unable to delete the specified provider."
         local_database: "Local database"
         o_auth2: "OAuth 2.0"
+        group_form:
+          add_a_group: "Add a group"
+          group_name: "Group name"
+          disable: "Disable"
+          enable: "Enable"
+          changes_successfully_saved: "Changes successfully saved."
+          an_error_occurred_while_saving_changes: "An error occurred when saving changes."
+          new_group_successfully_saved: "New group successfully saved."
+          an_error_occurred_when_saving_the_new_group: "An error occurred when saving the new group."
+          group_successfully_deleted: "Group successfully deleted."
+          unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Unable to delete group because some users and/or groups are still linked to it."
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation
+          status_enabled: "Enabled"
+          status_disabled: "Disabled"
+          status_all: "All"
 
       members_new:
         # add a member

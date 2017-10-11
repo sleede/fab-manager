@@ -258,3 +258,14 @@ Application.Filters.filter 'maxCount', [ '_t', (_t) ->
       max
 ]
 
+Application.Filters.filter 'filterDisabled', [ ->
+  (list, filter) ->
+    if angular.isArray(list)
+      list.filter (e) ->
+        switch filter
+          when 'disabled' then e.disabled
+          when 'enabled' then !e.disabled
+          else true
+    else
+      list
+]

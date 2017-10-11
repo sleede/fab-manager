@@ -85,7 +85,7 @@
                   <p translate>
                     {{ 'user_has_no_current_subscription' }}
                   </p>
-                  <button class="btn btn-default" ng-click="createSubscriptionModal(user, plans)" translate>{{ 'subscribe_to_a_plan' }}</button>
+                  <button class="btn btn-default" ng-click="createSubscriptionModal(user, plans.filter(filterDisabledPlans))" translate>{{ 'subscribe_to_a_plan' }}</button>
                 </div>
 
               </div>
