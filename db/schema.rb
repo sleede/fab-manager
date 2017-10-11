@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010143708) do
+ActiveRecord::Schema.define(version: 20171011100640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,6 +271,7 @@ ActiveRecord::Schema.define(version: 20171010143708) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug",        limit: 255
+    t.boolean  "disabled"
   end
 
   add_index "machines", ["slug"], name: "index_machines_on_slug", unique: true, using: :btree
