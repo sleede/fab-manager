@@ -234,7 +234,7 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ##
   # Retrieve the machine from its ID
   # @param machine_id {number} machine identifier
-  # @returns {object} Machine
+  # @returns {Object} Machine
   ##
   $scope.getMachine = (machine_id) ->
     for machine in $scope.machines
@@ -244,14 +244,14 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
 
 
   ##
-  # Retrieve the name of a space from its ID
+  # Retrieve the space from its ID
   # @param space_id {number} space identifier
-  # @returns {string} Space's name
+  # @returns {Object} Space
   ##
-  $scope.getSpaceName = (space_id) ->
+  $scope.getSpace = (space_id) ->
     for space in $scope.spaces
       if space.id == space_id
-        return space.name
+        return space
 
 
 

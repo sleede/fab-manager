@@ -35,13 +35,14 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
 
   ## List of machines
   $scope.machines = machinesPromise
-  $scope.enabledMachines = machinesPromise.filter (t) -> !t.disabled
+  $scope.enabledMachines = machinesPromise.filter (m) -> !m.disabled
 
   ## List of coupons
   $scope.coupons = couponsPromise
 
   ## List of spaces
   $scope.spaces = spacesPromise
+  $scope.enabledSpaces = spacesPromise.filter (s) -> !s.disabled
 
   ## Associate free space hours with subscriptions
   $scope.spaceCredits = spacesCreditsPromise
