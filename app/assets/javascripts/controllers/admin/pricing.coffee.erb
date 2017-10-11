@@ -31,7 +31,7 @@ Application.Controllers.controller "EditPricingController", ["$scope", "$state",
   $scope.trainingCreditsGroups = {}
 
   ## List of trainings
-  $scope.trainings = trainingsPromise
+  $scope.trainings = trainingsPromise.filter (t) -> !t.disabled
 
   ## List of machines
   $scope.machines = machinesPromise
