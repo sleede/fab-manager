@@ -17,6 +17,7 @@
     </td>
     <td ng-repeat="group in enabledGroups">
                   <span editable-number="findPriceBy(machinesPrices, machine.id, group.id).amount"
+                        e-step="any"
                         onbeforesave="updatePrice($data, findPriceBy(machinesPrices, machine.id, group.id))">
                       {{ findPriceBy(machinesPrices, machine.id, group.id).amount | currency}}
                   </span>

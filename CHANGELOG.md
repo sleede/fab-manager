@@ -8,6 +8,7 @@
 - Confirmation and error handling while deleting an event
 - Ability to disable groups, machines, plans, spaces and trainings
 - Improved responsiveness of machines and spaces lists
+- Allow setting of decimal prices
 - Fix a typo: error message while creating a machine slot
 - Fix a bug: events pagination is bogus in admin's monitoring when selecting non default filter
 - Fix a bug: social sharing failed for projects with an underscore in their name
