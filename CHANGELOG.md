@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release
+## v2.6.0 2017 November 13
 
 - Additional button to delete a slot, allowing to delete slots masked by others
 - Removed cross hack in full-calendar
@@ -14,7 +14,7 @@
 - Fix a bug: social sharing failed for projects with an underscore in their name
 - Fix a bug: html tags of events description not stripped when sharing on social network
 - Fix a bug: event, space, training or machine main image on description page is deformed on small devices
-- Fix a bug: profile completion of non SSO-imported users trigger a fuzzy email
+- Fix a bug: profile completion of non-SSO imported users trigger a fuzzy email
 - Fix a bug: creation of negative credits
 - Fix a bug: unable to display profiles of users whom any reservation is associated with a deleted object
 - Updated test data to allow passing test suite
