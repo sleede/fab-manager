@@ -18,6 +18,7 @@
 - Fix a bug: creation of negative credits
 - Fix a bug: unable to display profiles of users whom any reservation is associated with a deleted object
 - Updated test data to allow passing test suite
+- Upgraded rails minor version
 - [TODO DEPLOY] `rake db:migrate`
 
 ## v2.5.14 2017 September 12
