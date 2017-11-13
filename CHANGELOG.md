@@ -20,6 +20,7 @@
 - Updated test data to allow passing test suite
 - Upgraded rails minor version
 - [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `bundle install`
 
 ## v2.5.14 2017 September 12
 
