@@ -61,7 +61,7 @@ json.training_reservations @member.reservations.where(reservable_type: 'Training
   json.start_at r.slots.first.start_at
   json.end_at r.slots.first.end_at
   json.reservable r.reservable
-  json.is_valid @member.training_ids.include?(r.reservable.id)
+  json.is_valid @member.training_ids.include?(r.reservable_id)
   json.canceled_at r.slots.first.canceled_at
 end
 json.training_credits @member.training_credits do |tc|

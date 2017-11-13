@@ -16,6 +16,7 @@
 - Fix a bug: event, space, training or machine main image on description page is deformed on small devices
 - Fix a bug: profile completion of non SSO-imported users trigger a fuzzy email
 - Fix a bug: creation of negative credits
+- Fix a bug: unable to display profiles of users whom any reservation is associated with a deleted object
 - Updated test data to allow passing test suite
 - [TODO DEPLOY] `rake db:migrate`
 
