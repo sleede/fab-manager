@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2017&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -19,8 +19,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:41 GMT
+      - Mon, 18 Sep 2017 08:54:50 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -44,12 +44,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRwZhpRvOW2K
+      - req_xGDFaSDmVbL2m9
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -58,10 +60,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_17z7CT2sOmf47Nz9bO1WBtba",
+          "id": "tok_1B3L1i2sOmf47Nz9CpbaBivb",
           "object": "token",
           "card": {
-            "id": "card_17z7CT2sOmf47Nz9wtWkhGor",
+            "id": "card_1B3L1h2sOmf47Nz9NAHrANqS",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -76,7 +78,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2017,
+            "exp_year": 2018,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -84,104 +86,14 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "90.42.87.235",
-          "created": 1460389421,
+          "client_ip": "90.112.59.71",
+          "created": 1505724890,
           "livemode": false,
           "type": "card",
           "used": false
         }
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:41 GMT
-- request:
-    method: get
-    uri: https://api.stripe.com/v1/tokens/tok_17z7CT2sOmf47Nz9bO1WBtba
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Stripe/v1 RubyBindings/1.30.2
-      Authorization:
-      - Bearer sk_test_testfaketestfaketestfake
-      Content-Type:
-      - application/x-www-form-urlencoded
-      X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Mon, 11 Apr 2016 15:43:41 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '779'
-      Connection:
-      - keep-alive
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Max-Age:
-      - '300'
-      Cache-Control:
-      - no-cache, no-store
-      Request-Id:
-      - req_8FcRgivvsrn6Jy
-      Stripe-Version:
-      - '2015-10-16'
-      Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "tok_17z7CT2sOmf47Nz9bO1WBtba",
-          "object": "token",
-          "card": {
-            "id": "card_17z7CT2sOmf47Nz9wtWkhGor",
-            "object": "card",
-            "address_city": null,
-            "address_country": null,
-            "address_line1": null,
-            "address_line1_check": null,
-            "address_line2": null,
-            "address_state": null,
-            "address_zip": null,
-            "address_zip_check": null,
-            "brand": "Visa",
-            "country": "US",
-            "cvc_check": "unchecked",
-            "dynamic_last4": null,
-            "exp_month": 4,
-            "exp_year": 2017,
-            "fingerprint": "o52jybR7bnmNn6AT",
-            "funding": "credit",
-            "last4": "4242",
-            "metadata": {},
-            "name": null,
-            "tokenization_method": null
-          },
-          "client_ip": "90.42.87.235",
-          "created": 1460389421,
-          "livemode": false,
-          "type": "card",
-          "used": false
-        }
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:42 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:50 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
@@ -201,8 +113,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -211,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:42 GMT
+      - Mon, 18 Sep 2017 08:54:51 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '5571'
+      - '7733'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -224,151 +136,280 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRWeqA3l7Zyc
+      - req_jc6NgRbYP6JYBW
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJpZCI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICJvYmplY3QiOiAi
-        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
-        IjogMTQ1OTk0ODg4OCwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
-        dF9zb3VyY2UiOiAiY2FyZF8xN3haV3Qyc09tZjQ3Tno5ZVZVQ2k1M0EiLAog
-        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIkplYW4g
-        RHVwb25kIiwKICAiZGlzY291bnQiOiBudWxsLAogICJlbWFpbCI6ICJqZWFu
-        LmR1cG9uZEBnbWFpbC5jb20iLAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJt
-        ZXRhZGF0YSI6IHt9LAogICJzaGlwcGluZyI6IG51bGwsCiAgInNvdXJjZXMi
-        OiB7CiAgICAib2JqZWN0IjogImxpc3QiLAogICAgImRhdGEiOiBbCiAgICAg
-        IHsKICAgICAgICAiaWQiOiAiY2FyZF8xN3haV3Qyc09tZjQ3Tno5ZVZVQ2k1
-        M0EiLAogICAgICAgICJvYmplY3QiOiAiY2FyZCIsCiAgICAgICAgImFkZHJl
-        c3NfY2l0eSI6IG51bGwsCiAgICAgICAgImFkZHJlc3NfY291bnRyeSI6IG51
-        bGwsCiAgICAgICAgImFkZHJlc3NfbGluZTEiOiBudWxsLAogICAgICAgICJh
-        ZGRyZXNzX2xpbmUxX2NoZWNrIjogbnVsbCwKICAgICAgICAiYWRkcmVzc19s
-        aW5lMiI6IG51bGwsCiAgICAgICAgImFkZHJlc3Nfc3RhdGUiOiBudWxsLAog
-        ICAgICAgICJhZGRyZXNzX3ppcCI6IG51bGwsCiAgICAgICAgImFkZHJlc3Nf
-        emlwX2NoZWNrIjogbnVsbCwKICAgICAgICAiYnJhbmQiOiAiVmlzYSIsCiAg
-        ICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAgICJjdXN0b21lciI6ICJj
-        dXNfOERpMXdqZFZrdHY1a3QiLAogICAgICAgICJjdmNfY2hlY2siOiAicGFz
-        cyIsCiAgICAgICAgImR5bmFtaWNfbGFzdDQiOiBudWxsLAogICAgICAgICJl
-        eHBfbW9udGgiOiA0LAogICAgICAgICJleHBfeWVhciI6IDIwMTcsCiAgICAg
-        ICAgImZpbmdlcnByaW50IjogIm81Mmp5YlI3Ym5tTm42QVQiLAogICAgICAg
-        ICJmdW5kaW5nIjogImNyZWRpdCIsCiAgICAgICAgImxhc3Q0IjogIjQyNDIi
-        LAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJuYW1lIjogbnVs
-        bCwKICAgICAgICAidG9rZW5pemF0aW9uX21ldGhvZCI6IG51bGwKICAgICAg
-        fQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRvdGFsX2Nv
-        dW50IjogMSwKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNfOERpMXdq
-        ZFZrdHY1a3Qvc291cmNlcyIKICB9LAogICJzdWJzY3JpcHRpb25zIjogewog
-        ICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjogWwogICAgICB7CiAg
-        ICAgICAgImlkIjogInN1Yl84RTFhZmtUQm4yZGMxRCIsCiAgICAgICAgIm9i
-        amVjdCI6ICJzdWJzY3JpcHRpb24iLAogICAgICAgICJhcHBsaWNhdGlvbl9m
-        ZWVfcGVyY2VudCI6IG51bGwsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2Rf
-        ZW5kIjogdHJ1ZSwKICAgICAgICAiY2FuY2VsZWRfYXQiOiAxNDYwMDIxNjcw
-        LAogICAgICAgICJjdXJyZW50X3BlcmlvZF9lbmQiOiAxNDYyNjEzNjY1LAog
-        ICAgICAgICJjdXJyZW50X3BlcmlvZF9zdGFydCI6IDE0NjAwMjE2NjUsCiAg
-        ICAgICAgImN1c3RvbWVyIjogImN1c184RGkxd2pkVmt0djVrdCIsCiAgICAg
-        ICAgImRpc2NvdW50IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxs
-        LAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJwbGFuIjogewog
-        ICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0dWRlbnQt
-        bW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgICAgICAgIm9iamVjdCI6ICJw
-        bGFuIiwKICAgICAgICAgICJhbW91bnQiOiAyMDAwLAogICAgICAgICAgImNy
-        ZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAgICAgImN1cnJlbmN5IjogInVz
-        ZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9udGgiLAogICAgICAgICAg
-        ImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICJsaXZlbW9kZSI6IGZh
-        bHNlLAogICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgICAibmFt
-        ZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0gZGUg
-        MjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBtb250
-        aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAog
-        ICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogICAgICAgIH0s
-        CiAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAgICAic3RhcnQiOiAxNDYw
-        MDIxNjY1LAogICAgICAgICJzdGF0dXMiOiAiYWN0aXZlIiwKICAgICAgICAi
-        dGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAgICJ0cmlhbF9lbmQiOiBudWxs
-        LAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51bGwKICAgICAgfSwKICAgICAg
-        ewogICAgICAgICJpZCI6ICJzdWJfOERrcUJjUjFiUXZyNUciLAogICAgICAg
-        ICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGljYXRp
-        b25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJjYW5jZWxfYXRfcGVy
-        aW9kX2VuZCI6IHRydWUsCiAgICAgICAgImNhbmNlbGVkX2F0IjogMTQ1OTk1
-        OTM4NiwKICAgICAgICAiY3VycmVudF9wZXJpb2RfZW5kIjogMTQ2MjU1MTM4
-        MiwKICAgICAgICAiY3VycmVudF9wZXJpb2Rfc3RhcnQiOiAxNDU5OTU5Mzgy
-        LAogICAgICAgICJjdXN0b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAog
-        ICAgICAgICJkaXNjb3VudCI6IG51bGwsCiAgICAgICAgImVuZGVkX2F0Ijog
-        bnVsbCwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6
-        IHsKICAgICAgICAgICJpZCI6ICJtZW5zdWVsLXN0YW5kYXJkLW1vbnRoLTIw
-        MTYwNDA0MTcxNTE5IiwKICAgICAgICAgICJvYmplY3QiOiAicGxhbiIsCiAg
-        ICAgICAgICAiYW1vdW50IjogMzAwMCwKICAgICAgICAgICJjcmVhdGVkIjog
-        MTQ1OTc4MjkyMSwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAg
-        ICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJpbnRlcnZh
-        bF9jb3VudCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAg
-        ICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgIm5hbWUiOiAiTWVu
-        c3VlbCAtIHN0YW5kYXJkLCBhc3NvY2lhdGlvbiAtIG1vbnRoIiwKICAgICAg
-        ICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAi
-        dHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAi
-        cXVhbnRpdHkiOiAxLAogICAgICAgICJzdGFydCI6IDE0NTk5NTkzODIsCiAg
-        ICAgICAgInN0YXR1cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2Vu
-        dCI6IG51bGwsCiAgICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAg
-        InRyaWFsX3N0YXJ0IjogbnVsbAogICAgICB9LAogICAgICB7CiAgICAgICAg
-        ImlkIjogInN1Yl84RGk5Z3FQTHd0NUlJQyIsCiAgICAgICAgIm9iamVjdCI6
-        ICJzdWJzY3JpcHRpb24iLAogICAgICAgICJhcHBsaWNhdGlvbl9mZWVfcGVy
-        Y2VudCI6IG51bGwsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2RfZW5kIjog
-        dHJ1ZSwKICAgICAgICAiY2FuY2VsZWRfYXQiOiAxNDU5OTQ5NDA0LAogICAg
-        ICAgICJjdXJyZW50X3BlcmlvZF9lbmQiOiAxNDYyNTQxMzk5LAogICAgICAg
-        ICJjdXJyZW50X3BlcmlvZF9zdGFydCI6IDE0NTk5NDkzOTksCiAgICAgICAg
-        ImN1c3RvbWVyIjogImN1c184RGkxd2pkVmt0djVrdCIsCiAgICAgICAgImRp
-        c2NvdW50IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAg
-        ICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJwbGFuIjogewogICAgICAg
-        ICAgImlkIjogIm1lbnN1ZWwtc3RhbmRhcmQtbW9udGgtMjAxNjA0MDQxNzE1
-        MTkiLAogICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJh
-        bW91bnQiOiAzMDAwLAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgyOTIx
-        LAogICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50
-        ZXJ2YWwiOiAibW9udGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50Ijog
-        MSwKICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1l
-        dGFkYXRhIjoge30sCiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIC0gc3Rh
-        bmRhcmQsIGFzc29jaWF0aW9uIC0gbW9udGgiLAogICAgICAgICAgInN0YXRl
-        bWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICAgICAgICJ0cmlhbF9wZXJp
-        b2RfZGF5cyI6IG51bGwKICAgICAgICB9LAogICAgICAgICJxdWFudGl0eSI6
-        IDEsCiAgICAgICAgInN0YXJ0IjogMTQ1OTk0OTM5OSwKICAgICAgICAic3Rh
-        dHVzIjogImFjdGl2ZSIsCiAgICAgICAgInRheF9wZXJjZW50IjogbnVsbCwK
-        ICAgICAgICAidHJpYWxfZW5kIjogbnVsbCwKICAgICAgICAidHJpYWxfc3Rh
-        cnQiOiBudWxsCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQiOiAic3Vi
-        XzhEaTJWYWRSdnI3QTk5IiwKICAgICAgICAib2JqZWN0IjogInN1YnNjcmlw
-        dGlvbiIsCiAgICAgICAgImFwcGxpY2F0aW9uX2ZlZV9wZXJjZW50IjogbnVs
-        bCwKICAgICAgICAiY2FuY2VsX2F0X3BlcmlvZF9lbmQiOiB0cnVlLAogICAg
-        ICAgICJjYW5jZWxlZF9hdCI6IDE0NTk5NDg5NzIsCiAgICAgICAgImN1cnJl
-        bnRfcGVyaW9kX2VuZCI6IDE0NjI1NDA5NjgsCiAgICAgICAgImN1cnJlbnRf
-        cGVyaW9kX3N0YXJ0IjogMTQ1OTk0ODk2OCwKICAgICAgICAiY3VzdG9tZXIi
-        OiAiY3VzXzhEaTF3amRWa3R2NWt0IiwKICAgICAgICAiZGlzY291bnQiOiBu
-        dWxsLAogICAgICAgICJlbmRlZF9hdCI6IG51bGwsCiAgICAgICAgIm1ldGFk
-        YXRhIjoge30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAi
-        bWVuc3VlbC1zdGFuZGFyZC1tb250aC0yMDE2MDQwNDE3MTUxOSIsCiAgICAg
-        ICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFtb3VudCI6IDMw
-        MDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODI5MjEsCiAgICAgICAg
-        ICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJpbnRlcnZhbCI6ICJt
-        b250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAg
-        ICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRhdGEiOiB7
-        fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgLSBzdGFuZGFyZCwgYXNz
-        b2NpYXRpb24gLSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rlc2Ny
-        aXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjog
-        bnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAg
-        ICAic3RhcnQiOiAxNDU5OTQ4OTY4LAogICAgICAgICJzdGF0dXMiOiAiYWN0
-        aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAgICJ0
-        cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51bGwK
-        ICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRv
-        dGFsX2NvdW50IjogNCwKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNf
-        OERpMXdqZFZrdHY1a3Qvc3Vic2NyaXB0aW9ucyIKICB9Cn0K
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:42 GMT
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_8Di1wjdVktv5kt",
+          "object": "customer",
+          "account_balance": 0,
+          "created": 1459948888,
+          "currency": "usd",
+          "default_source": "card_1B3Kzy2sOmf47Nz9TT6Gk2oJ",
+          "delinquent": false,
+          "description": "Jean Dupond",
+          "discount": null,
+          "email": "jean.dupond@gmail.com",
+          "livemode": false,
+          "metadata": {},
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_1B3Kzy2sOmf47Nz9TT6Gk2oJ",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8Di1wjdVktv5kt",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2018,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": null,
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [
+              {
+                "id": "sub_BQBMKKS6nutZLr",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724793,
+                "created": 1505724789,
+                "current_period_end": 1508316789,
+                "current_period_start": 1505724789,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3L052sOmf47Nz9MoxGlk6i",
+                      "object": "subscription_item",
+                      "created": 1505724789,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBMKKS6nutZLr"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724789,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBH03MUz5WO4y",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724499,
+                "created": 1505724494,
+                "current_period_end": 1508316494,
+                "current_period_start": 1505724494,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3KvK2sOmf47Nz9mNLN0l2q",
+                      "object": "subscription_item",
+                      "created": 1505724494,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBH03MUz5WO4y"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724494,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBGRftUBikhtm",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724425,
+                "created": 1505724421,
+                "current_period_end": 1508316421,
+                "current_period_start": 1505724421,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3Ku92sOmf47Nz9sdo927vf",
+                      "object": "subscription_item",
+                      "created": 1505724421,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBGRftUBikhtm"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724421,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 3,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:52 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/subscriptions
     body:
       encoding: UTF-8
-      string: plan=mensuel-standard-month-20160404171519&card=tok_17z7CT2sOmf47Nz9bO1WBtba
+      string: plan=mensuel-standard-month-20160404171519&source=tok_1B3L1i2sOmf47Nz9CpbaBivb
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -382,10 +423,10 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
-      - '76'
+      - '78'
   response:
     status:
       code: 200
@@ -394,11 +435,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:44 GMT
+      - Mon, 18 Sep 2017 08:54:53 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '821'
+      - '1711'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -407,12 +448,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRItYpDN04OA
+      - req_w127ZjwMeU3Ikd
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -421,16 +464,48 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "sub_8FcRar5XrAGnL0",
+          "id": "sub_BQBOHLXRrG3Z1Q",
           "object": "subscription",
           "application_fee_percent": null,
+          "billing": "charge_automatically",
           "cancel_at_period_end": false,
           "canceled_at": null,
-          "current_period_end": 1462981423,
-          "current_period_start": 1460389423,
+          "created": 1505724892,
+          "current_period_end": 1508316892,
+          "current_period_start": 1505724892,
           "customer": "cus_8Di1wjdVktv5kt",
           "discount": null,
           "ended_at": null,
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_1B3L1k2sOmf47Nz9Ua5wYTNH",
+                "object": "subscription_item",
+                "created": 1505724893,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_BQBOHLXRrG3Z1Q"
+          },
+          "livemode": false,
           "metadata": {},
           "plan": {
             "id": "mensuel-standard-month-20160404171519",
@@ -447,14 +522,14 @@ http_interactions:
             "trial_period_days": null
           },
           "quantity": 1,
-          "start": 1460389423,
+          "start": 1505724892,
           "status": "active",
           "tax_percent": null,
           "trial_end": null,
           "trial_start": null
         }
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:44 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:53 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoices?customer=cus_8Di1wjdVktv5kt&limit=1
@@ -474,8 +549,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -484,11 +559,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:47 GMT
+      - Mon, 18 Sep 2017 08:54:54 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2207'
+      - '2960'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -497,12 +572,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRkV7kaP4d74
+      - req_Mh3Lj8hxg2TXFk
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -514,17 +591,18 @@ http_interactions:
           "object": "list",
           "data": [
             {
-              "id": "in_17z7CV2sOmf47Nz9GowUoPMG",
+              "id": "in_1B3L1k2sOmf47Nz9WrVocGx4",
               "object": "invoice",
-              "amount_due": 3000,
+              "amount_due": 8100,
               "application_fee": null,
               "attempt_count": 1,
               "attempted": true,
-              "charge": "ch_17z7CV2sOmf47Nz9v4oKnmLc",
+              "billing": "charge_automatically",
+              "charge": "ch_1B3L1k2sOmf47Nz9lkDNMQnv",
               "closed": true,
               "currency": "usd",
               "customer": "cus_8Di1wjdVktv5kt",
-              "date": 1460389423,
+              "date": 1505724892,
               "description": null,
               "discount": null,
               "ending_balance": 0,
@@ -533,7 +611,26 @@ http_interactions:
                 "object": "list",
                 "data": [
                   {
-                    "id": "sub_8FcRar5XrAGnL0",
+                    "id": "ii_1B3L0k2sOmf47Nz9y87SMg3r",
+                    "object": "line_item",
+                    "amount": 5100,
+                    "currency": "usd",
+                    "description": "Formation Imprimante 3D September 18, 2017 08:00 - 09:00 AM",
+                    "discountable": true,
+                    "livemode": false,
+                    "metadata": {},
+                    "period": {
+                      "start": 1505724830,
+                      "end": 1505724830
+                    },
+                    "plan": null,
+                    "proration": false,
+                    "quantity": null,
+                    "subscription": null,
+                    "type": "invoiceitem"
+                  },
+                  {
+                    "id": "sub_BQBOHLXRrG3Z1Q",
                     "object": "line_item",
                     "amount": 3000,
                     "currency": "usd",
@@ -542,8 +639,8 @@ http_interactions:
                     "livemode": false,
                     "metadata": {},
                     "period": {
-                      "start": 1460389423,
-                      "end": 1462981423
+                      "start": 1505724892,
+                      "end": 1508316892
                     },
                     "plan": {
                       "id": "mensuel-standard-month-20160404171519",
@@ -562,35 +659,37 @@ http_interactions:
                     "proration": false,
                     "quantity": 1,
                     "subscription": null,
+                    "subscription_item": "si_1B3L1k2sOmf47Nz9Ua5wYTNH",
                     "type": "subscription"
                   }
                 ],
                 "has_more": false,
-                "total_count": 1,
-                "url": "/v1/invoices/in_17z7CV2sOmf47Nz9GowUoPMG/lines"
+                "total_count": 2,
+                "url": "/v1/invoices/in_1B3L1k2sOmf47Nz9WrVocGx4/lines"
               },
               "livemode": false,
               "metadata": {},
               "next_payment_attempt": null,
+              "number": "d4cc0e661c-0008",
               "paid": true,
-              "period_end": 1460389423,
-              "period_start": 1459948968,
+              "period_end": 1505724892,
+              "period_start": 1505724421,
               "receipt_number": null,
               "starting_balance": 0,
               "statement_descriptor": null,
-              "subscription": "sub_8FcRar5XrAGnL0",
-              "subtotal": 3000,
+              "subscription": "sub_BQBOHLXRrG3Z1Q",
+              "subtotal": 8100,
               "tax": null,
               "tax_percent": null,
-              "total": 3000,
-              "webhooks_delivered_at": 1460389424
+              "total": 8100,
+              "webhooks_delivered_at": 1505724893
             }
           ],
           "has_more": true,
           "url": "/v1/invoices"
         }
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:47 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:54 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
@@ -610,8 +709,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -620,11 +719,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:48 GMT
+      - Mon, 18 Sep 2017 08:54:55 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '6591'
+      - '9835'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -633,171 +732,342 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRzywC1ZKG1q
+      - req_TcwwuN6UqqEKmV
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJpZCI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICJvYmplY3QiOiAi
-        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
-        IjogMTQ1OTk0ODg4OCwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
-        dF9zb3VyY2UiOiAiY2FyZF8xN3o3Q1Qyc09tZjQ3Tno5d3RXa2hHb3IiLAog
-        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIkplYW4g
-        RHVwb25kIiwKICAiZGlzY291bnQiOiBudWxsLAogICJlbWFpbCI6ICJqZWFu
-        LmR1cG9uZEBnbWFpbC5jb20iLAogICJsaXZlbW9kZSI6IGZhbHNlLAogICJt
-        ZXRhZGF0YSI6IHt9LAogICJzaGlwcGluZyI6IG51bGwsCiAgInNvdXJjZXMi
-        OiB7CiAgICAib2JqZWN0IjogImxpc3QiLAogICAgImRhdGEiOiBbCiAgICAg
-        IHsKICAgICAgICAiaWQiOiAiY2FyZF8xN3o3Q1Qyc09tZjQ3Tno5d3RXa2hH
-        b3IiLAogICAgICAgICJvYmplY3QiOiAiY2FyZCIsCiAgICAgICAgImFkZHJl
-        c3NfY2l0eSI6IG51bGwsCiAgICAgICAgImFkZHJlc3NfY291bnRyeSI6IG51
-        bGwsCiAgICAgICAgImFkZHJlc3NfbGluZTEiOiBudWxsLAogICAgICAgICJh
-        ZGRyZXNzX2xpbmUxX2NoZWNrIjogbnVsbCwKICAgICAgICAiYWRkcmVzc19s
-        aW5lMiI6IG51bGwsCiAgICAgICAgImFkZHJlc3Nfc3RhdGUiOiBudWxsLAog
-        ICAgICAgICJhZGRyZXNzX3ppcCI6IG51bGwsCiAgICAgICAgImFkZHJlc3Nf
-        emlwX2NoZWNrIjogbnVsbCwKICAgICAgICAiYnJhbmQiOiAiVmlzYSIsCiAg
-        ICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAgICJjdXN0b21lciI6ICJj
-        dXNfOERpMXdqZFZrdHY1a3QiLAogICAgICAgICJjdmNfY2hlY2siOiAicGFz
-        cyIsCiAgICAgICAgImR5bmFtaWNfbGFzdDQiOiBudWxsLAogICAgICAgICJl
-        eHBfbW9udGgiOiA0LAogICAgICAgICJleHBfeWVhciI6IDIwMTcsCiAgICAg
-        ICAgImZpbmdlcnByaW50IjogIm81Mmp5YlI3Ym5tTm42QVQiLAogICAgICAg
-        ICJmdW5kaW5nIjogImNyZWRpdCIsCiAgICAgICAgImxhc3Q0IjogIjQyNDIi
-        LAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJuYW1lIjogbnVs
-        bCwKICAgICAgICAidG9rZW5pemF0aW9uX21ldGhvZCI6IG51bGwKICAgICAg
-        fQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRvdGFsX2Nv
-        dW50IjogMSwKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNfOERpMXdq
-        ZFZrdHY1a3Qvc291cmNlcyIKICB9LAogICJzdWJzY3JpcHRpb25zIjogewog
-        ICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjogWwogICAgICB7CiAg
-        ICAgICAgImlkIjogInN1Yl84RmNSYXI1WHJBR25MMCIsCiAgICAgICAgIm9i
-        amVjdCI6ICJzdWJzY3JpcHRpb24iLAogICAgICAgICJhcHBsaWNhdGlvbl9m
-        ZWVfcGVyY2VudCI6IG51bGwsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2Rf
-        ZW5kIjogZmFsc2UsCiAgICAgICAgImNhbmNlbGVkX2F0IjogbnVsbCwKICAg
-        ICAgICAiY3VycmVudF9wZXJpb2RfZW5kIjogMTQ2Mjk4MTQyMywKICAgICAg
-        ICAiY3VycmVudF9wZXJpb2Rfc3RhcnQiOiAxNDYwMzg5NDIzLAogICAgICAg
-        ICJjdXN0b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICAgICAgICJk
-        aXNjb3VudCI6IG51bGwsCiAgICAgICAgImVuZGVkX2F0IjogbnVsbCwKICAg
-        ICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6IHsKICAgICAg
-        ICAgICJpZCI6ICJtZW5zdWVsLXN0YW5kYXJkLW1vbnRoLTIwMTYwNDA0MTcx
-        NTE5IiwKICAgICAgICAgICJvYmplY3QiOiAicGxhbiIsCiAgICAgICAgICAi
-        YW1vdW50IjogMzAwMCwKICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4Mjky
-        MSwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgImlu
-        dGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6
-        IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJt
-        ZXRhZGF0YSI6IHt9LAogICAgICAgICAgIm5hbWUiOiAiTWVuc3VlbCAtIHN0
-        YW5kYXJkLCBhc3NvY2lhdGlvbiAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0
-        ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVy
-        aW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHki
-        OiAxLAogICAgICAgICJzdGFydCI6IDE0NjAzODk0MjMsCiAgICAgICAgInN0
-        YXR1cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGws
-        CiAgICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0
-        YXJ0IjogbnVsbAogICAgICB9LAogICAgICB7CiAgICAgICAgImlkIjogInN1
-        Yl84RTFhZmtUQm4yZGMxRCIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3Jp
-        cHRpb24iLAogICAgICAgICJhcHBsaWNhdGlvbl9mZWVfcGVyY2VudCI6IG51
-        bGwsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2RfZW5kIjogdHJ1ZSwKICAg
-        ICAgICAiY2FuY2VsZWRfYXQiOiAxNDYwMDIxNjcwLAogICAgICAgICJjdXJy
-        ZW50X3BlcmlvZF9lbmQiOiAxNDYyNjEzNjY1LAogICAgICAgICJjdXJyZW50
-        X3BlcmlvZF9zdGFydCI6IDE0NjAwMjE2NjUsCiAgICAgICAgImN1c3RvbWVy
-        IjogImN1c184RGkxd2pkVmt0djVrdCIsCiAgICAgICAgImRpc2NvdW50Ijog
-        bnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAgICAgICJtZXRh
-        ZGF0YSI6IHt9LAogICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjog
-        Im1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQx
-        NzE4MjciLAogICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAg
-        ICJhbW91bnQiOiAyMDAwLAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5Nzgz
-        MTA4LAogICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAi
-        aW50ZXJ2YWwiOiAibW9udGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50
-        IjogMSwKICAgICAgICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAg
-        Im1ldGFkYXRhIjoge30sCiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRh
-        cmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWdu
-        YW50LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAi
-        c3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFs
-        X3BlcmlvZF9kYXlzIjogbnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50
-        aXR5IjogMSwKICAgICAgICAic3RhcnQiOiAxNDYwMDIxNjY1LAogICAgICAg
-        ICJzdGF0dXMiOiAiYWN0aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBu
-        dWxsLAogICAgICAgICJ0cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlh
-        bF9zdGFydCI6IG51bGwKICAgICAgfSwKICAgICAgewogICAgICAgICJpZCI6
-        ICJzdWJfOERrcUJjUjFiUXZyNUciLAogICAgICAgICJvYmplY3QiOiAic3Vi
-        c2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGljYXRpb25fZmVlX3BlcmNlbnQi
-        OiBudWxsLAogICAgICAgICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUs
-        CiAgICAgICAgImNhbmNlbGVkX2F0IjogMTQ1OTk1OTM4NiwKICAgICAgICAi
-        Y3VycmVudF9wZXJpb2RfZW5kIjogMTQ2MjU1MTM4MiwKICAgICAgICAiY3Vy
-        cmVudF9wZXJpb2Rfc3RhcnQiOiAxNDU5OTU5MzgyLAogICAgICAgICJjdXN0
-        b21lciI6ICJjdXNfOERpMXdqZFZrdHY1a3QiLAogICAgICAgICJkaXNjb3Vu
-        dCI6IG51bGwsCiAgICAgICAgImVuZGVkX2F0IjogbnVsbCwKICAgICAgICAi
-        bWV0YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6IHsKICAgICAgICAgICJp
-        ZCI6ICJtZW5zdWVsLXN0YW5kYXJkLW1vbnRoLTIwMTYwNDA0MTcxNTE5IiwK
-        ICAgICAgICAgICJvYmplY3QiOiAicGxhbiIsCiAgICAgICAgICAiYW1vdW50
-        IjogMzAwMCwKICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4MjkyMSwKICAg
-        ICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgImludGVydmFs
-        IjogIm1vbnRoIiwKICAgICAgICAgICJpbnRlcnZhbF9jb3VudCI6IDEsCiAg
-        ICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAgICJtZXRhZGF0
-        YSI6IHt9LAogICAgICAgICAgIm5hbWUiOiAiTWVuc3VlbCAtIHN0YW5kYXJk
-        LCBhc3NvY2lhdGlvbiAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0ZW1lbnRf
-        ZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9kX2Rh
-        eXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHkiOiAxLAog
-        ICAgICAgICJzdGFydCI6IDE0NTk5NTkzODIsCiAgICAgICAgInN0YXR1cyI6
-        ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGwsCiAgICAg
-        ICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0YXJ0Ijog
-        bnVsbAogICAgICB9LAogICAgICB7CiAgICAgICAgImlkIjogInN1Yl84RGk5
-        Z3FQTHd0NUlJQyIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRpb24i
-        LAogICAgICAgICJhcHBsaWNhdGlvbl9mZWVfcGVyY2VudCI6IG51bGwsCiAg
-        ICAgICAgImNhbmNlbF9hdF9wZXJpb2RfZW5kIjogdHJ1ZSwKICAgICAgICAi
-        Y2FuY2VsZWRfYXQiOiAxNDU5OTQ5NDA0LAogICAgICAgICJjdXJyZW50X3Bl
-        cmlvZF9lbmQiOiAxNDYyNTQxMzk5LAogICAgICAgICJjdXJyZW50X3Blcmlv
-        ZF9zdGFydCI6IDE0NTk5NDkzOTksCiAgICAgICAgImN1c3RvbWVyIjogImN1
-        c184RGkxd2pkVmt0djVrdCIsCiAgICAgICAgImRpc2NvdW50IjogbnVsbCwK
-        ICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAgICAgICJtZXRhZGF0YSI6
-        IHt9LAogICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogIm1lbnN1
-        ZWwtc3RhbmRhcmQtbW9udGgtMjAxNjA0MDQxNzE1MTkiLAogICAgICAgICAg
-        Im9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAzMDAwLAog
-        ICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgyOTIxLAogICAgICAgICAgImN1
-        cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9udGgi
-        LAogICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICJs
-        aXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAg
-        ICAgICAgICAibmFtZSI6ICJNZW5zdWVsIC0gc3RhbmRhcmQsIGFzc29jaWF0
-        aW9uIC0gbW9udGgiLAogICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9y
-        IjogbnVsbCwKICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwK
-        ICAgICAgICB9LAogICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgInN0
-        YXJ0IjogMTQ1OTk0OTM5OSwKICAgICAgICAic3RhdHVzIjogImFjdGl2ZSIs
-        CiAgICAgICAgInRheF9wZXJjZW50IjogbnVsbCwKICAgICAgICAidHJpYWxf
-        ZW5kIjogbnVsbCwKICAgICAgICAidHJpYWxfc3RhcnQiOiBudWxsCiAgICAg
-        IH0sCiAgICAgIHsKICAgICAgICAiaWQiOiAic3ViXzhEaTJWYWRSdnI3QTk5
-        IiwKICAgICAgICAib2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgICAgICAg
-        ImFwcGxpY2F0aW9uX2ZlZV9wZXJjZW50IjogbnVsbCwKICAgICAgICAiY2Fu
-        Y2VsX2F0X3BlcmlvZF9lbmQiOiB0cnVlLAogICAgICAgICJjYW5jZWxlZF9h
-        dCI6IDE0NTk5NDg5NzIsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6
-        IDE0NjI1NDA5NjgsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0Ijog
-        MTQ1OTk0ODk2OCwKICAgICAgICAiY3VzdG9tZXIiOiAiY3VzXzhEaTF3amRW
-        a3R2NWt0IiwKICAgICAgICAiZGlzY291bnQiOiBudWxsLAogICAgICAgICJl
-        bmRlZF9hdCI6IG51bGwsCiAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAg
-        ICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAibWVuc3VlbC1zdGFuZGFy
-        ZC1tb250aC0yMDE2MDQwNDE3MTUxOSIsCiAgICAgICAgICAib2JqZWN0Ijog
-        InBsYW4iLAogICAgICAgICAgImFtb3VudCI6IDMwMDAsCiAgICAgICAgICAi
-        Y3JlYXRlZCI6IDE0NTk3ODI5MjEsCiAgICAgICAgICAiY3VycmVuY3kiOiAi
-        dXNkIiwKICAgICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIsCiAgICAgICAg
-        ICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAgICAgImxpdmVtb2RlIjog
-        ZmFsc2UsCiAgICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICJu
-        YW1lIjogIk1lbnN1ZWwgLSBzdGFuZGFyZCwgYXNzb2NpYXRpb24gLSBtb250
-        aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAog
-        ICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogICAgICAgIH0s
-        CiAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAgICAic3RhcnQiOiAxNDU5
-        OTQ4OTY4LAogICAgICAgICJzdGF0dXMiOiAiYWN0aXZlIiwKICAgICAgICAi
-        dGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAgICJ0cmlhbF9lbmQiOiBudWxs
-        LAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51bGwKICAgICAgfQogICAgXSwK
-        ICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgInRvdGFsX2NvdW50IjogNSwK
-        ICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9jdXNfOERpMXdqZFZrdHY1a3Qv
-        c3Vic2NyaXB0aW9ucyIKICB9Cn0K
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:48 GMT
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_8Di1wjdVktv5kt",
+          "object": "customer",
+          "account_balance": 0,
+          "created": 1459948888,
+          "currency": "usd",
+          "default_source": "card_1B3L1h2sOmf47Nz9NAHrANqS",
+          "delinquent": false,
+          "description": "Jean Dupond",
+          "discount": null,
+          "email": "jean.dupond@gmail.com",
+          "livemode": false,
+          "metadata": {},
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_1B3L1h2sOmf47Nz9NAHrANqS",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_8Di1wjdVktv5kt",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 4,
+                "exp_year": 2018,
+                "fingerprint": "o52jybR7bnmNn6AT",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": null,
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [
+              {
+                "id": "sub_BQBOHLXRrG3Z1Q",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": false,
+                "canceled_at": null,
+                "created": 1505724892,
+                "current_period_end": 1508316892,
+                "current_period_start": 1505724892,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3L1k2sOmf47Nz9Ua5wYTNH",
+                      "object": "subscription_item",
+                      "created": 1505724893,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBOHLXRrG3Z1Q"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724892,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBMKKS6nutZLr",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724793,
+                "created": 1505724789,
+                "current_period_end": 1508316789,
+                "current_period_start": 1505724789,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3L052sOmf47Nz9MoxGlk6i",
+                      "object": "subscription_item",
+                      "created": 1505724789,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBMKKS6nutZLr"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724789,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBH03MUz5WO4y",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724499,
+                "created": 1505724494,
+                "current_period_end": 1508316494,
+                "current_period_start": 1505724494,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3KvK2sOmf47Nz9mNLN0l2q",
+                      "object": "subscription_item",
+                      "created": 1505724494,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBH03MUz5WO4y"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724494,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBGRftUBikhtm",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724425,
+                "created": 1505724421,
+                "current_period_end": 1508316421,
+                "current_period_start": 1505724421,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3Ku92sOmf47Nz9sdo927vf",
+                      "object": "subscription_item",
+                      "created": 1505724421,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBGRftUBikhtm"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724421,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 4,
+            "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:55 GMT
 - request:
     method: get
-    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/subscriptions/sub_8FcRar5XrAGnL0
+    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/subscriptions/sub_BQBOHLXRrG3Z1Q
     body:
       encoding: US-ASCII
       string: ''
@@ -814,8 +1084,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -824,11 +1094,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:48 GMT
+      - Mon, 18 Sep 2017 08:54:56 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '821'
+      - '1711'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -837,12 +1107,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRg1EQDVfpku
+      - req_ZjIgDQ34jlghLo
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -851,16 +1123,48 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "sub_8FcRar5XrAGnL0",
+          "id": "sub_BQBOHLXRrG3Z1Q",
           "object": "subscription",
           "application_fee_percent": null,
+          "billing": "charge_automatically",
           "cancel_at_period_end": false,
           "canceled_at": null,
-          "current_period_end": 1462981423,
-          "current_period_start": 1460389423,
+          "created": 1505724892,
+          "current_period_end": 1508316892,
+          "current_period_start": 1505724892,
           "customer": "cus_8Di1wjdVktv5kt",
           "discount": null,
           "ended_at": null,
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_1B3L1k2sOmf47Nz9Ua5wYTNH",
+                "object": "subscription_item",
+                "created": 1505724893,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_BQBOHLXRrG3Z1Q"
+          },
+          "livemode": false,
           "metadata": {},
           "plan": {
             "id": "mensuel-standard-month-20160404171519",
@@ -877,17 +1181,17 @@ http_interactions:
             "trial_period_days": null
           },
           "quantity": 1,
-          "start": 1460389423,
+          "start": 1505724892,
           "status": "active",
           "tax_percent": null,
           "trial_end": null,
           "trial_start": null
         }
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:49 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:56 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/subscriptions/sub_8FcRar5XrAGnL0?at_period_end=true
+    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/subscriptions/sub_BQBOHLXRrG3Z1Q?at_period_end=true
     body:
       encoding: US-ASCII
       string: ''
@@ -904,8 +1208,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.4.5-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP
-        PREEMPT Thu Mar 10 07:38:19 CET 2016","hostname":"integration"}'
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -914,11 +1218,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 11 Apr 2016 15:43:49 GMT
+      - Mon, 18 Sep 2017 08:54:57 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '826'
+      - '1716'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -927,12 +1231,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8FcRvdzGhluZiD
+      - req_KxbHmVYfDwpiHi
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -941,16 +1247,48 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "sub_8FcRar5XrAGnL0",
+          "id": "sub_BQBOHLXRrG3Z1Q",
           "object": "subscription",
           "application_fee_percent": null,
+          "billing": "charge_automatically",
           "cancel_at_period_end": true,
-          "canceled_at": 1460389429,
-          "current_period_end": 1462981423,
-          "current_period_start": 1460389423,
+          "canceled_at": 1505724897,
+          "created": 1505724892,
+          "current_period_end": 1508316892,
+          "current_period_start": 1505724892,
           "customer": "cus_8Di1wjdVktv5kt",
           "discount": null,
           "ended_at": null,
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_1B3L1k2sOmf47Nz9Ua5wYTNH",
+                "object": "subscription_item",
+                "created": 1505724893,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_BQBOHLXRrG3Z1Q"
+          },
+          "livemode": false,
           "metadata": {},
           "plan": {
             "id": "mensuel-standard-month-20160404171519",
@@ -967,12 +1305,12 @@ http_interactions:
             "trial_period_days": null
           },
           "quantity": 1,
-          "start": 1460389423,
+          "start": 1505724892,
           "status": "active",
           "tax_percent": null,
           "trial_end": null,
           "trial_start": null
         }
-    http_version:
-  recorded_at: Mon, 11 Apr 2016 15:43:50 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:57 GMT
 recorded_with: VCR 3.0.1

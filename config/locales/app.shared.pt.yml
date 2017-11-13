@@ -230,14 +230,24 @@ pt:
           as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Como parte da inscrição do parceiro, algumas notificações podem ser enviadas para este usuário."
           new_partner: "Novo parceiro"
           email_address_is_required: "Email é obrigatório."
+          disabled: "Disable subscrição"
+          disable_plan_will_not_unsubscribe_users: "Aviso: desativar a assinatura não desautorizará os usuários que atualmente possuem esta assinatura ativa."
 
       trainings:
         # training edition form
-        add_a_new_training: "Adicionar um novo treinamento"
-        validate_your_training: "Validar seu treinamento"
-        associated_machines: "Máquinas associadas"
-        number_of_tickets: "Número de vagas"
-        public_page: "Mostrar na lista de treinamentos"
+        trainings_form:
+          name: "Nome"
+          name_is_required: "Nome é obrigatório."
+          illustration: "Ilustração"
+          add_an_illustration: "Adicionar ilustração"
+          description: "Descrição"
+          description_is_required: "Descrição é obrigatório."
+          add_a_new_training: "Adicionar um novo treinamento"
+          validate_your_training: "Validar seu treinamento"
+          associated_machines: "Máquinas associadas"
+          number_of_tickets: "Número de vagas"
+          public_page: "Mostrar na lista de treinamentos"
+          disable_training: "Disable the training" # TODO
 
       user_admin:
         # partial form to edit/create an user (admin view)
@@ -405,6 +415,7 @@ pt:
             add_an_attachment: "Adicionar um anexo"
             default_places: "Tickets máximo padrão"
             default_places_is_required: "Tickets máximo padrão é obrigatório."
+            disable_space: "Disable space" # TODO
 
       cart:
         # module de panier d'achat de réservations

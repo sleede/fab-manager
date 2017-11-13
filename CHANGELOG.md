@@ -1,5 +1,26 @@
 # Changelog Fab Manager
 
+## v2.6.0 2017 November 13
+
+- Additional button to delete a slot, allowing to delete slots masked by others
+- Removed cross hack in full-calendar
+- Confirmation before slot delete
+- Confirmation and error handling while deleting an event
+- Ability to disable groups, machines, plans, spaces and trainings
+- Improved responsiveness of machines and spaces lists
+- Allow setting of decimal prices
+- Fix a typo: error message while creating a machine slot
+- Fix a bug: events pagination is bogus in admin's monitoring when selecting non default filter
+- Fix a bug: social sharing failed for projects with an underscore in their name
+- Fix a bug: html tags of events description not stripped when sharing on social network
+- Fix a bug: event, space, training or machine main image on description page is deformed on small devices
+- Fix a bug: profile completion of non-SSO imported users trigger a fuzzy email
+- Fix a bug: creation of negative credits
+- Fix a bug: unable to display profiles of users whom any reservation is associated with a deleted object
+- Updated test data to allow passing test suite
+- Upgraded rails minor version
+- [TODO DEPLOY] `rake db:migrate`
+
 ## v2.5.14 2017 September 12
 
 - Fix a bug: Error message in fix:recursive_events_over_DST failed and does not report events to check

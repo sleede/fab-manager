@@ -4,11 +4,25 @@ class API::EventsController < API::ApiController
   def index
     @events = policy_scope(Event)
     @page = params[:page]
+    @scope = params[:scope]
 
     # filters
     @events = @events.joins(:category).where('categories.id = :category', category: params[:category_id]) if params[:category_id]
     @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
     @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
+
+    if current_user and current_user.is_admin?
+      case params[:scope]
+        when 'future'
+          @events = @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at DESC')
+        when 'future_asc'
+          @events = @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at ASC')
+        when 'passed'
+          @events = @events.where('availabilities.start_at < ?', Time.now).order('availabilities.start_at DESC')
+        else
+          @events = @events.order('availabilities.start_at DESC')
+      end
+    end
 
     # paginate
     @events = @events.page(@page).per(12)

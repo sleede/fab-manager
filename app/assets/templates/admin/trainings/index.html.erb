@@ -21,7 +21,20 @@
     <div class="col-md-12">
       <uib-tabset justified="true">
         <uib-tab heading="{{ 'trainings' | translate }}">
-          <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.trainings_new" translate>{{ 'add_a_new_training' }}</button>
+          <div class="m-t m-b">
+            <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new">
+              <i class="fa fa-plus m-r"></i>
+              <span translate>{{ 'add_a_new_training' }}</span>
+            </button>
+            <div class="form-group pull-right">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+                <select ng-model="trainingFiltering" class="form-control">
+                  <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'status_'+status }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
           <table class="table">
             <thead>
@@ -33,7 +46,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="training in trainings">
+              <tr ng-repeat="training in trainings | filterDisabled:trainingFiltering" ng-class="{'disabled-line' : training.disabled && trainingFiltering === 'all'}">
                 <td>{{ training.name }}</td>
                 <td>{{ showMachines(training) }}</td>
                 <td>{{ training.nb_total_places }}</td>

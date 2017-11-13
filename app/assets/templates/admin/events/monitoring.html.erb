@@ -1,5 +1,5 @@
 <div class="col-md-6 m-b m-t">
-  <select ng-model="selectedTimezone" class="form-control">
+  <select ng-model="eventsScope.selected" class="form-control" ng-change="changeScope()">
     <option value="" translate>{{ 'all_events' }}</option>
     <option value="passed" translate>{{ 'passed_events' }}</option>
     <option value="future" translate>{{ 'events_to_come' }}</option>
@@ -15,7 +15,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="event in filtered = (events | eventsReservationsFilter:selectedTimezone)">
+  <tr ng-repeat="event in events">
     <td>
       <a ui-sref="app.public.events_show({id: event.id})">{{ event.title }} </a>
     </td>
@@ -31,12 +31,12 @@
     </td>
     <td>
       <div class="buttons">
-        <button class="btn btn-default" ui-sref="app.admin.event_reservations({id: event.id})">
+        <a class="btn btn-default" ui-sref="app.admin.event_reservations({id: event.id})">
           <i class="fa fa-bookmark"></i> {{ 'view_reservations' | translate }}
-        </button>
-        <button class="btn btn-default" ui-sref="app.admin.events_edit({id: event.id})">
+        </a>
+        <a class="btn btn-default" ui-sref="app.admin.events_edit({id: event.id})">
           <i class="fa fa-edit"></i> {{ 'edit' | translate }}
-        </button>
+        </a>
       </div>
     </td>
   </tr>

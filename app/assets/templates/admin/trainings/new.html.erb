@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8 b-l b-r">
       <section class="heading-title">
-        <h1 translate>{{ 'add_a_new_training' }}</h1>
+        <h1 translate>{{ 'trainings_new.add_a_new_training' }}</h1>
       </section>
 
     </div>
@@ -22,8 +22,8 @@
   <div class="col-md-9 b-r nopadding">
 
     <div class="alert alert-warning m-lg" role="alert">
-      {{ 'beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero' | translate }}
-      {{ 'dont_forget_to_change_them_before_creating_slots_for_this_training' | translate }}
+      {{ 'trainings_new.beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero' | translate }}
+      {{ 'trainings_new.dont_forget_to_change_them_before_creating_slots_for_this_training' | translate }}
     </div>
 
     <ng-include src="'<%= asset_path 'admin/trainings/_form.html' %>'"></ng-include>

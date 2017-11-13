@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2017&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -18,9 +18,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:58 GMT
+      - Mon, 18 Sep 2017 08:54:04 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '778'
+      - '779'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -44,12 +44,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigzZOUKbFLP8
+      - req_UlHcT5pRxquOpo
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -58,10 +60,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_17xHFG2sOmf47Nz9pZ4CafpU",
+          "id": "tok_1B3L0y2sOmf47Nz9WFqPXvM7",
           "object": "token",
           "card": {
-            "id": "card_17xHFG2sOmf47Nz95yErDQbL",
+            "id": "card_1B3L0y2sOmf47Nz9AZVEmtnY",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -76,7 +78,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2017,
+            "exp_year": 2018,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -84,20 +86,20 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "86.76.5.109",
-          "created": 1459951378,
+          "client_ip": "90.112.59.71",
+          "created": 1505724844,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:02:58 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:05 GMT
 - request:
-    method: post
-    uri: https://api.stripe.com/v1/invoiceitems
+    method: get
+    uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8CzNtM08NVlSGN&limit=100
     body:
-      encoding: UTF-8
-      string: customer=cus_8CzNtM08NVlSGN&amount=3200&currency=usd&description=FORM1%2B+imprimante+3D+April+11%2C+2016+14%3A00+-+03%3A00+PM
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -110,11 +112,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
-      Content-Length:
-      - '125'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -123,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:58 GMT
+      - Mon, 18 Sep 2017 08:54:05 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '469'
+      - '10932'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -136,12 +136,318 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigTaKJ04PVMc
+      - req_CSg72e4uSh053r
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJvYmplY3QiOiAibGlzdCIsCiAgImRhdGEiOiBbCiAgICB7CiAgICAg
+        ICJpZCI6ICJpaV8xQjNMMG8yc09tZjQ3Tno5RUJWU3pZMzYiLAogICAgICAi
+        b2JqZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IC0xMDAw
+        LAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjog
+        ImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTUwNTcyNDgz
+        NCwKICAgICAgImRlc2NyaXB0aW9uIjogIndhbGxldCAtMTAuMCIsCiAgICAg
+        ICJkaXNjb3VudGFibGUiOiBmYWxzZSwKICAgICAgImludm9pY2UiOiAiaW5f
+        MUIzTDByMnNPbWY0N056OTRaTXlLVXAxIiwKICAgICAgImxpdmVtb2RlIjog
+        ZmFsc2UsCiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVyaW9kIjog
+        ewogICAgICAgICJzdGFydCI6IDE1MDU3MjQ4MzQsCiAgICAgICAgImVuZCI6
+        IDE1MDU3MjQ4MzQKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxsLAogICAg
+        ICAicHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6IG51bGws
+        CiAgICAgICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9LAogICAgewogICAg
+        ICAiaWQiOiAiaWlfMUIzTDBuMnNPbWY0N056OUF1enFsWGtUIiwKICAgICAg
+        Im9iamVjdCI6ICJpbnZvaWNlaXRlbSIsCiAgICAgICJhbW91bnQiOiAwLAog
+        ICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjogImN1
+        c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTUwNTcyNDgzMywK
+        ICAgICAgImRlc2NyaXB0aW9uIjogIkZvcm1hdGlvbiBJbXByaW1hbnRlIDNE
+        IFNlcHRlbWJlciAxOCwgMjAxNyAwODowMCAtIDEyOjAwIFBNIiwKICAgICAg
+        ImRpc2NvdW50YWJsZSI6IHRydWUsCiAgICAgICJpbnZvaWNlIjogImluXzFC
+        M0wwcjJzT21mNDdOejk0Wk15S1VwMSIsCiAgICAgICJsaXZlbW9kZSI6IGZh
+        bHNlLAogICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgInBlcmlvZCI6IHsK
+        ICAgICAgICAic3RhcnQiOiAxNTA1NzI0ODMzLAogICAgICAgICJlbmQiOiAx
+        NTA1NzI0ODMzCiAgICAgIH0sCiAgICAgICJwbGFuIjogbnVsbCwKICAgICAg
+        InByb3JhdGlvbiI6IGZhbHNlLAogICAgICAicXVhbnRpdHkiOiBudWxsLAog
+        ICAgICAic3Vic2NyaXB0aW9uIjogbnVsbAogICAgfSwKICAgIHsKICAgICAg
+        ImlkIjogImlpXzFCM0t6bTJzT21mNDdOejl1MndXQWhrYiIsCiAgICAgICJv
+        YmplY3QiOiAiaW52b2ljZWl0ZW0iLAogICAgICAiYW1vdW50IjogLTEwMDAs
+        CiAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAiY3VzdG9tZXIiOiAi
+        Y3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgImRhdGUiOiAxNTA1NzI0Nzcw
+        LAogICAgICAiZGVzY3JpcHRpb24iOiAid2FsbGV0IC0xMC4wIiwKICAgICAg
+        ImRpc2NvdW50YWJsZSI6IGZhbHNlLAogICAgICAiaW52b2ljZSI6ICJpbl8x
+        QjNLenEyc09tZjQ3Tno5SVg3cmxIU3UiLAogICAgICAibGl2ZW1vZGUiOiBm
+        YWxzZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJpb2QiOiB7
+        CiAgICAgICAgInN0YXJ0IjogMTUwNTcyNDc3MCwKICAgICAgICAiZW5kIjog
+        MTUwNTcyNDc3MAogICAgICB9LAogICAgICAicGxhbiI6IG51bGwsCiAgICAg
+        ICJwcm9yYXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5IjogbnVsbCwK
+        ICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7CiAgICAg
+        ICJpZCI6ICJpaV8xQjNLemwyc09tZjQ3Tno5bzF1blptc3YiLAogICAgICAi
+        b2JqZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IC03NjUw
+        LAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjog
+        ImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTUwNTcyNDc2
+        OSwKICAgICAgImRlc2NyaXB0aW9uIjogImNvdXBvbiBTVU5OWUZBQkxBQiIs
+        CiAgICAgICJkaXNjb3VudGFibGUiOiBmYWxzZSwKICAgICAgImludm9pY2Ui
+        OiAiaW5fMUIzS3pxMnNPbWY0N056OUlYN3JsSFN1IiwKICAgICAgImxpdmVt
+        b2RlIjogZmFsc2UsCiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVy
+        aW9kIjogewogICAgICAgICJzdGFydCI6IDE1MDU3MjQ3NjksCiAgICAgICAg
+        ImVuZCI6IDE1MDU3MjQ3NjkKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxs
+        LAogICAgICAicHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6
+        IG51bGwsCiAgICAgICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9LAogICAg
+        ewogICAgICAiaWQiOiAiaWlfMUIzS3prMnNPbWY0N056OU8zM29BRVM5IiwK
+        ICAgICAgIm9iamVjdCI6ICJpbnZvaWNlaXRlbSIsCiAgICAgICJhbW91bnQi
+        OiA1MTAwMCwKICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0
+        b21lciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAiZGF0ZSI6IDE1
+        MDU3MjQ3NjgsCiAgICAgICJkZXNjcmlwdGlvbiI6ICJSYWRpbyBudW3DqXJp
+        cXVlIFxuU2VwdGVtYmVyIDI4LCAyMDE3IDEyOjAwIFBNIC0gMDg6MDAgUE1c
+        blNlcHRlbWJlciAyOSwgMjAxNyAxMjowMCBQTSAtIDA4OjAwIFBNXG5TZXB0
+        ZW1iZXIgMzAsIDIwMTcgMTI6MDAgUE0gLSAwODowMCBQTSIsCiAgICAgICJk
+        aXNjb3VudGFibGUiOiB0cnVlLAogICAgICAiaW52b2ljZSI6ICJpbl8xQjNL
+        enEyc09tZjQ3Tno5SVg3cmxIU3UiLAogICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJpb2QiOiB7CiAg
+        ICAgICAgInN0YXJ0IjogMTUwNTcyNDc2OCwKICAgICAgICAiZW5kIjogMTUw
+        NTcyNDc2OAogICAgICB9LAogICAgICAicGxhbiI6IG51bGwsCiAgICAgICJw
+        cm9yYXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5IjogbnVsbCwKICAg
+        ICAgInN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7CiAgICAgICJp
+        ZCI6ICJpaV8xQjNLdlMyc09tZjQ3Tno5ZFJlUGxEN3YiLAogICAgICAib2Jq
+        ZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IC0xMDAwLAog
+        ICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjogImN1
+        c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTUwNTcyNDUwMiwK
+        ICAgICAgImRlc2NyaXB0aW9uIjogIndhbGxldCAtMTAuMCIsCiAgICAgICJk
+        aXNjb3VudGFibGUiOiBmYWxzZSwKICAgICAgImludm9pY2UiOiAiaW5fMUIz
+        S3ZUMnNPbWY0N056OURWdjVyT0xRIiwKICAgICAgImxpdmVtb2RlIjogZmFs
+        c2UsCiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVyaW9kIjogewog
+        ICAgICAgICJzdGFydCI6IDE1MDU3MjQ1MDIsCiAgICAgICAgImVuZCI6IDE1
+        MDU3MjQ1MDIKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxsLAogICAgICAi
+        cHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6IG51bGwsCiAg
+        ICAgICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9LAogICAgewogICAgICAi
+        aWQiOiAiaWlfMUIzS3Y1MnNPbWY0N056OXpNZ21KQmpuIiwKICAgICAgIm9i
+        amVjdCI6ICJpbnZvaWNlaXRlbSIsCiAgICAgICJhbW91bnQiOiAtMTAwMCwK
+        ICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0b21lciI6ICJj
+        dXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAiZGF0ZSI6IDE1MDU3MjQ0Nzks
+        CiAgICAgICJkZXNjcmlwdGlvbiI6ICJ3YWxsZXQgLTEwLjAiLAogICAgICAi
+        ZGlzY291bnRhYmxlIjogZmFsc2UsCiAgICAgICJpbnZvaWNlIjogImluXzFC
+        M0t2OTJzT21mNDdOejlrckFvbmg1WSIsCiAgICAgICJsaXZlbW9kZSI6IGZh
+        bHNlLAogICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgInBlcmlvZCI6IHsK
+        ICAgICAgICAic3RhcnQiOiAxNTA1NzI0NDc5LAogICAgICAgICJlbmQiOiAx
+        NTA1NzI0NDc5CiAgICAgIH0sCiAgICAgICJwbGFuIjogbnVsbCwKICAgICAg
+        InByb3JhdGlvbiI6IGZhbHNlLAogICAgICAicXVhbnRpdHkiOiBudWxsLAog
+        ICAgICAic3Vic2NyaXB0aW9uIjogbnVsbAogICAgfSwKICAgIHsKICAgICAg
+        ImlkIjogImlpXzFCM0t2NDJzT21mNDdOejk3b1NLYnhhSSIsCiAgICAgICJv
+        YmplY3QiOiAiaW52b2ljZWl0ZW0iLAogICAgICAiYW1vdW50IjogLTc2NTAs
+        CiAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAiY3VzdG9tZXIiOiAi
+        Y3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgImRhdGUiOiAxNTA1NzI0NDc4
+        LAogICAgICAiZGVzY3JpcHRpb24iOiAiY291cG9uIFNVTk5ZRkFCTEFCIiwK
+        ICAgICAgImRpc2NvdW50YWJsZSI6IGZhbHNlLAogICAgICAiaW52b2ljZSI6
+        ICJpbl8xQjNLdjkyc09tZjQ3Tno5a3JBb25oNVkiLAogICAgICAibGl2ZW1v
+        ZGUiOiBmYWxzZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJp
+        b2QiOiB7CiAgICAgICAgInN0YXJ0IjogMTUwNTcyNDQ3OCwKICAgICAgICAi
+        ZW5kIjogMTUwNTcyNDQ3OAogICAgICB9LAogICAgICAicGxhbiI6IG51bGws
+        CiAgICAgICJwcm9yYXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5Ijog
+        bnVsbCwKICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7
+        CiAgICAgICJpZCI6ICJpaV8xQjNLdjMyc09tZjQ3Tno5blUzc0JtaU4iLAog
+        ICAgICAib2JqZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6
+        IDUxMDAwLAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3Rv
+        bWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTUw
+        NTcyNDQ3NywKICAgICAgImRlc2NyaXB0aW9uIjogIlJhZGlvIG51bcOpcmlx
+        dWUgXG5TZXB0ZW1iZXIgMjgsIDIwMTcgMTI6MDAgUE0gLSAwODowMCBQTVxu
+        U2VwdGVtYmVyIDI5LCAyMDE3IDEyOjAwIFBNIC0gMDg6MDAgUE1cblNlcHRl
+        bWJlciAzMCwgMjAxNyAxMjowMCBQTSAtIDA4OjAwIFBNIiwKICAgICAgImRp
+        c2NvdW50YWJsZSI6IHRydWUsCiAgICAgICJpbnZvaWNlIjogImluXzFCM0t2
+        OTJzT21mNDdOejlrckFvbmg1WSIsCiAgICAgICJsaXZlbW9kZSI6IGZhbHNl
+        LAogICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgInBlcmlvZCI6IHsKICAg
+        ICAgICAic3RhcnQiOiAxNTA1NzI0NDc3LAogICAgICAgICJlbmQiOiAxNTA1
+        NzI0NDc3CiAgICAgIH0sCiAgICAgICJwbGFuIjogbnVsbCwKICAgICAgInBy
+        b3JhdGlvbiI6IGZhbHNlLAogICAgICAicXVhbnRpdHkiOiBudWxsLAogICAg
+        ICAic3Vic2NyaXB0aW9uIjogbnVsbAogICAgfSwKICAgIHsKICAgICAgImlk
+        IjogImlpXzFCM0t1YzJzT21mNDdOejk2ajBlMzlZbiIsCiAgICAgICJvYmpl
+        Y3QiOiAiaW52b2ljZWl0ZW0iLAogICAgICAiYW1vdW50IjogLTEwMDAsCiAg
+        ICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAiY3VzdG9tZXIiOiAiY3Vz
+        XzhDek50TTA4TlZsU0dOIiwKICAgICAgImRhdGUiOiAxNTA1NzI0NDUwLAog
+        ICAgICAiZGVzY3JpcHRpb24iOiAid2FsbGV0IC0xMC4wIiwKICAgICAgImRp
+        c2NvdW50YWJsZSI6IGZhbHNlLAogICAgICAiaW52b2ljZSI6ICJpbl8xQjNL
+        dWUyc09tZjQ3Tno5VFZrM0sxTVkiLAogICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJpb2QiOiB7CiAg
+        ICAgICAgInN0YXJ0IjogMTUwNTcyNDQ1MCwKICAgICAgICAiZW5kIjogMTUw
+        NTcyNDQ1MAogICAgICB9LAogICAgICAicGxhbiI6IG51bGwsCiAgICAgICJw
+        cm9yYXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5IjogbnVsbCwKICAg
+        ICAgInN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7CiAgICAgICJp
+        ZCI6ICJpaV8xQjNLdWIyc09tZjQ3Tno5aGtpMDJ6UlciLAogICAgICAib2Jq
+        ZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IDAsCiAgICAg
+        ICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAiY3VzdG9tZXIiOiAiY3VzXzhD
+        ek50TTA4TlZsU0dOIiwKICAgICAgImRhdGUiOiAxNTA1NzI0NDQ5LAogICAg
+        ICAiZGVzY3JpcHRpb24iOiAiRm9ybWF0aW9uIEltcHJpbWFudGUgM0QgU2Vw
+        dGVtYmVyIDE4LCAyMDE3IDA4OjAwIC0gMTI6MDAgUE0iLAogICAgICAiZGlz
+        Y291bnRhYmxlIjogdHJ1ZSwKICAgICAgImludm9pY2UiOiAiaW5fMUIzS3Vl
+        MnNPbWY0N056OVRWazNLMU1ZIiwKICAgICAgImxpdmVtb2RlIjogZmFsc2Us
+        CiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVyaW9kIjogewogICAg
+        ICAgICJzdGFydCI6IDE1MDU3MjQ0NDksCiAgICAgICAgImVuZCI6IDE1MDU3
+        MjQ0NDkKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxsLAogICAgICAicHJv
+        cmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6IG51bGwsCiAgICAg
+        ICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9LAogICAgewogICAgICAiaWQi
+        OiAiaWlfMUIzS3RuMnNPbWY0N056OUd4OW9lS3d2IiwKICAgICAgIm9iamVj
+        dCI6ICJpbnZvaWNlaXRlbSIsCiAgICAgICJhbW91bnQiOiAtMTAwMCwKICAg
+        ICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0b21lciI6ICJjdXNf
+        OEN6TnRNMDhOVmxTR04iLAogICAgICAiZGF0ZSI6IDE1MDU3MjQzOTksCiAg
+        ICAgICJkZXNjcmlwdGlvbiI6ICJ3YWxsZXQgLTEwLjAiLAogICAgICAiZGlz
+        Y291bnRhYmxlIjogZmFsc2UsCiAgICAgICJpbnZvaWNlIjogImluXzFCM0t0
+        cjJzT21mNDdOejlzdVUwak9DOCIsCiAgICAgICJsaXZlbW9kZSI6IGZhbHNl
+        LAogICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgInBlcmlvZCI6IHsKICAg
+        ICAgICAic3RhcnQiOiAxNTA1NzI0Mzk5LAogICAgICAgICJlbmQiOiAxNTA1
+        NzI0Mzk5CiAgICAgIH0sCiAgICAgICJwbGFuIjogbnVsbCwKICAgICAgInBy
+        b3JhdGlvbiI6IGZhbHNlLAogICAgICAicXVhbnRpdHkiOiBudWxsLAogICAg
+        ICAic3Vic2NyaXB0aW9uIjogbnVsbAogICAgfSwKICAgIHsKICAgICAgImlk
+        IjogImlpXzFCM0t0bjJzT21mNDdOejlMWVV3NzNzQiIsCiAgICAgICJvYmpl
+        Y3QiOiAiaW52b2ljZWl0ZW0iLAogICAgICAiYW1vdW50IjogMzQwMCwKICAg
+        ICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0b21lciI6ICJjdXNf
+        OEN6TnRNMDhOVmxTR04iLAogICAgICAiZGF0ZSI6IDE1MDU3MjQzOTksCiAg
+        ICAgICJkZXNjcmlwdGlvbiI6ICJGT1JNMSsgaW1wcmltYW50ZSAzRCBTZXB0
+        ZW1iZXIgMTcsIDIwMTcgMTQ6MDAgLSAwMzowMCBQTSIsCiAgICAgICJkaXNj
+        b3VudGFibGUiOiB0cnVlLAogICAgICAiaW52b2ljZSI6ICJpbl8xQjNLdHIy
+        c09tZjQ3Tno5c3VVMGpPQzgiLAogICAgICAibGl2ZW1vZGUiOiBmYWxzZSwK
+        ICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJpb2QiOiB7CiAgICAg
+        ICAgInN0YXJ0IjogMTUwNTcyNDM5OSwKICAgICAgICAiZW5kIjogMTUwNTcy
+        NDM5OQogICAgICB9LAogICAgICAicGxhbiI6IG51bGwsCiAgICAgICJwcm9y
+        YXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5IjogbnVsbCwKICAgICAg
+        InN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7CiAgICAgICJpZCI6
+        ICJpaV8xOUttT3gyc09tZjQ3Tno5WEl6dlRqTEMiLAogICAgICAib2JqZWN0
+        IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IC0xMDAwLAogICAg
+        ICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjogImN1c184
+        Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTQ4MDMyOTAyMywKICAg
+        ICAgImRlc2NyaXB0aW9uIjogIndhbGxldCAtMTAuMCIsCiAgICAgICJkaXNj
+        b3VudGFibGUiOiBmYWxzZSwKICAgICAgImludm9pY2UiOiAiaW5fMTlLbVAx
+        MnNPbWY0N056OVJsNmFLV0Y4IiwKICAgICAgImxpdmVtb2RlIjogZmFsc2Us
+        CiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVyaW9kIjogewogICAg
+        ICAgICJzdGFydCI6IDE0ODAzMjkwMjMsCiAgICAgICAgImVuZCI6IDE0ODAz
+        MjkwMjMKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxsLAogICAgICAicHJv
+        cmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6IG51bGwsCiAgICAg
+        ICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9LAogICAgewogICAgICAiaWQi
+        OiAiaWlfMTlLbU93MnNPbWY0N056OWZNZ2pISWhnIiwKICAgICAgIm9iamVj
+        dCI6ICJpbnZvaWNlaXRlbSIsCiAgICAgICJhbW91bnQiOiAtNzY1MCwKICAg
+        ICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICJjdXN0b21lciI6ICJjdXNf
+        OEN6TnRNMDhOVmxTR04iLAogICAgICAiZGF0ZSI6IDE0ODAzMjkwMjIsCiAg
+        ICAgICJkZXNjcmlwdGlvbiI6ICJjb3Vwb24gU1VOTllGQUJMQUIgLSByZXNl
+        cnZhdGlvbiIsCiAgICAgICJkaXNjb3VudGFibGUiOiBmYWxzZSwKICAgICAg
+        Imludm9pY2UiOiAiaW5fMTlLbVAxMnNPbWY0N056OVJsNmFLV0Y4IiwKICAg
+        ICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICJtZXRhZGF0YSI6IHt9LAog
+        ICAgICAicGVyaW9kIjogewogICAgICAgICJzdGFydCI6IDE0ODAzMjkwMjIs
+        CiAgICAgICAgImVuZCI6IDE0ODAzMjkwMjIKICAgICAgfSwKICAgICAgInBs
+        YW4iOiBudWxsLAogICAgICAicHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICJx
+        dWFudGl0eSI6IG51bGwsCiAgICAgICJzdWJzY3JpcHRpb24iOiBudWxsCiAg
+        ICB9LAogICAgewogICAgICAiaWQiOiAiaWlfMTlLbU93MnNPbWY0N056OWYw
+        UGJLYkhxIiwKICAgICAgIm9iamVjdCI6ICJpbnZvaWNlaXRlbSIsCiAgICAg
+        ICJhbW91bnQiOiA1MTAwMCwKICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAg
+        ICAgICJjdXN0b21lciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAi
+        ZGF0ZSI6IDE0ODAzMjkwMjIsCiAgICAgICJkZXNjcmlwdGlvbiI6ICJSYWRp
+        byBudW3DqXJpcXVlIFxuRGVjZW1iZXIgMDgsIDIwMTYgMTE6MDAgQU0gLSAw
+        NzowMCBQTVxuRGVjZW1iZXIgMDksIDIwMTYgMTE6MDAgQU0gLSAwNzowMCBQ
+        TVxuRGVjZW1iZXIgMTAsIDIwMTYgMTE6MDAgQU0gLSAwNzowMCBQTSIsCiAg
+        ICAgICJkaXNjb3VudGFibGUiOiB0cnVlLAogICAgICAiaW52b2ljZSI6ICJp
+        bl8xOUttUDEyc09tZjQ3Tno5Umw2YUtXRjgiLAogICAgICAibGl2ZW1vZGUi
+        OiBmYWxzZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJpb2Qi
+        OiB7CiAgICAgICAgInN0YXJ0IjogMTQ4MDMyOTAyMiwKICAgICAgICAiZW5k
+        IjogMTQ4MDMyOTAyMgogICAgICB9LAogICAgICAicGxhbiI6IG51bGwsCiAg
+        ICAgICJwcm9yYXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5IjogbnVs
+        bCwKICAgICAgInN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7CiAg
+        ICAgICJpZCI6ICJpaV8xOFpoVWgyc09tZjQ3Tno5MDJ5a0d5YkIiLAogICAg
+        ICAib2JqZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IC0x
+        MDAwLAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVy
+        IjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTQ2OTEw
+        ODc0MywKICAgICAgImRlc2NyaXB0aW9uIjogIndhbGxldCAtMTAuMCIsCiAg
+        ICAgICJkaXNjb3VudGFibGUiOiBmYWxzZSwKICAgICAgImludm9pY2UiOiAi
+        aW5fMThaaFVqMnNPbWY0N056OXI4TEtJQk5LIiwKICAgICAgImxpdmVtb2Rl
+        IjogZmFsc2UsCiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVyaW9k
+        IjogewogICAgICAgICJzdGFydCI6IDE0NjkxMDg3NDMsCiAgICAgICAgImVu
+        ZCI6IDE0NjkxMDg3NDMKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxsLAog
+        ICAgICAicHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6IG51
+        bGwsCiAgICAgICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9LAogICAgewog
+        ICAgICAiaWQiOiAiaWlfMThaaFVnMnNPbWY0N056OXZTc2w1Sjl6IiwKICAg
+        ICAgIm9iamVjdCI6ICJpbnZvaWNlaXRlbSIsCiAgICAgICJhbW91bnQiOiAw
+        LAogICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjog
+        ImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTQ2OTEwODc0
+        MiwKICAgICAgImRlc2NyaXB0aW9uIjogIkZvcm1hdGlvbiBJbXByaW1hbnRl
+        IDNEIEp1bHkgMTgsIDIwMTYgMDg6MDAgLSAxMjowMCBQTSIsCiAgICAgICJk
+        aXNjb3VudGFibGUiOiB0cnVlLAogICAgICAiaW52b2ljZSI6ICJpbl8xOFpo
+        VWoyc09tZjQ3Tno5cjhMS0lCTksiLAogICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICJwZXJpb2QiOiB7CiAg
+        ICAgICAgInN0YXJ0IjogMTQ2OTEwODc0MiwKICAgICAgICAiZW5kIjogMTQ2
+        OTEwODc0MgogICAgICB9LAogICAgICAicGxhbiI6IG51bGwsCiAgICAgICJw
+        cm9yYXRpb24iOiBmYWxzZSwKICAgICAgInF1YW50aXR5IjogbnVsbCwKICAg
+        ICAgInN1YnNjcmlwdGlvbiI6IG51bGwKICAgIH0sCiAgICB7CiAgICAgICJp
+        ZCI6ICJpaV8xOFc0R04yc09tZjQ3Tno5SzFkVGZUeUEiLAogICAgICAib2Jq
+        ZWN0IjogImludm9pY2VpdGVtIiwKICAgICAgImFtb3VudCI6IC0xMDAwLAog
+        ICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgImN1c3RvbWVyIjogImN1
+        c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICJkYXRlIjogMTQ2ODI0Mjk1NSwK
+        ICAgICAgImRlc2NyaXB0aW9uIjogIndhbGxldCAtMTAuMCIsCiAgICAgICJk
+        aXNjb3VudGFibGUiOiBmYWxzZSwKICAgICAgImludm9pY2UiOiAiaW5fMThX
+        NEdPMnNPbWY0N056OW9vdURRM2hlIiwKICAgICAgImxpdmVtb2RlIjogZmFs
+        c2UsCiAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAicGVyaW9kIjogewog
+        ICAgICAgICJzdGFydCI6IDE0NjgyNDI5NTUsCiAgICAgICAgImVuZCI6IDE0
+        NjgyNDI5NTUKICAgICAgfSwKICAgICAgInBsYW4iOiBudWxsLAogICAgICAi
+        cHJvcmF0aW9uIjogZmFsc2UsCiAgICAgICJxdWFudGl0eSI6IG51bGwsCiAg
+        ICAgICJzdWJzY3JpcHRpb24iOiBudWxsCiAgICB9CiAgXSwKICAiaGFzX21v
+        cmUiOiBmYWxzZSwKICAidXJsIjogIi92MS9pbnZvaWNlaXRlbXMiCn0K
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:54:05 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8CzNtM08NVlSGN&amount=3400&currency=usd&description=FORM1%2B+imprimante+3D+September+17%2C+2017+14%3A00+-+03%3A00+PM
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
+      Content-Length:
+      - '129'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 18 Sep 2017 08:54:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '473'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_sWYQa245x6J8qZ
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -150,20 +456,20 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+          "id": "ii_1B3L102sOmf47Nz9bcXk9I95",
           "object": "invoiceitem",
-          "amount": 3200,
+          "amount": 3400,
           "currency": "usd",
           "customer": "cus_8CzNtM08NVlSGN",
-          "date": 1459951378,
-          "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
+          "date": 1505724846,
+          "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1459951378,
-            "end": 1459951378
+            "start": 1505724846,
+            "end": 1505724846
           },
           "plan": null,
           "proration": false,
@@ -171,13 +477,13 @@ http_interactions:
           "subscription": null
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:02:58 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:06 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8CzNtM08NVlSGN&amount=-1000&currency=usd&description=Wallet+-1000
+      string: customer=cus_8CzNtM08NVlSGN&amount=-1000&currency=usd&description=wallet+-10.0
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -190,11 +496,11 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
-      - '125'
+      - '78'
   response:
     status:
       code: 200
@@ -203,11 +509,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:58 GMT
+      - Mon, 18 Sep 2017 08:54:07 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '469'
+      - '431'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -216,12 +522,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigTaKJ04PVMc
+      - req_dDXoARWpOFwudA
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -230,20 +538,20 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_17xHFG2sOmf47N59hh8aJSt6",
+          "id": "ii_1B3L112sOmf47Nz9HhdRh67V",
           "object": "invoiceitem",
           "amount": -1000,
           "currency": "usd",
           "customer": "cus_8CzNtM08NVlSGN",
-          "date": 1459951378,
-          "description": "Wallet -1000",
-          "discountable": true,
+          "date": 1505724847,
+          "description": "wallet -10.0",
+          "discountable": false,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1459951378,
-            "end": 1459951378
+            "start": 1505724847,
+            "end": 1505724847
           },
           "plan": null,
           "proration": false,
@@ -251,7 +559,7 @@ http_interactions:
           "subscription": null
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:02:58 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:07 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
@@ -270,9 +578,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -281,11 +589,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:59 GMT
+      - Mon, 18 Sep 2017 08:54:08 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '3462'
+      - '8094'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -294,149 +602,209 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Digc2V3aKSGrn
+      - req_kcnUGOiWRKdP18
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "cus_8CzNtM08NVlSGN",
-          "object": "customer",
-          "account_balance": 0,
-          "created": 1459948888,
-          "currency": "usd",
-          "default_source": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
-          "delinquent": false,
-          "description": "Jean Dupond",
-          "discount": null,
-          "email": "jean.dupond@gmail.com",
-          "livemode": false,
-          "metadata": {},
-          "shipping": null,
-          "sources": {
-            "object": "list",
-            "data": [
-              {
-                "id": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
-                "object": "card",
-                "address_city": null,
-                "address_country": null,
-                "address_line1": null,
-                "address_line1_check": null,
-                "address_line2": null,
-                "address_state": null,
-                "address_zip": null,
-                "address_zip_check": null,
-                "brand": "Visa",
-                "country": "US",
-                "customer": "cus_8CzNtM08NVlSGN",
-                "cvc_check": "pass",
-                "dynamic_last4": null,
-                "exp_month": 4,
-                "exp_year": 2017,
-                "fingerprint": "o52jybR7bnmNn6AT",
-                "funding": "credit",
-                "last4": "4242",
-                "metadata": {},
-                "name": null,
-                "tokenization_method": null
-              }
-            ],
-            "has_more": false,
-            "total_count": 1,
-            "url": "/v1/customers/cus_8CzNtM08NVlSGN/sources"
-          },
-          "subscriptions": {
-            "object": "list",
-            "data": [
-              {
-                "id": "sub_8Di9gqPLwt5IIC",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "cancel_at_period_end": true,
-                "canceled_at": 1459949404,
-                "current_period_end": 1462541399,
-                "current_period_start": 1459949399,
-                "customer": "cus_8CzNtM08NVlSGN",
-                "discount": null,
-                "ended_at": null,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1459949399,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              },
-              {
-                "id": "sub_8Di2VadRvr7A99",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "cancel_at_period_end": true,
-                "canceled_at": 1459948972,
-                "current_period_end": 1462540968,
-                "current_period_start": 1459948968,
-                "customer": "cus_8CzNtM08NVlSGN",
-                "discount": null,
-                "ended_at": null,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1459948968,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              }
-            ],
-            "has_more": false,
-            "total_count": 2,
-            "url": "/v1/customers/cus_8CzNtM08NVlSGN/subscriptions"
-          }
-        }
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
+        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
+        IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
+        dF9zb3VyY2UiOiAiY2FyZF8xQjNMMGwyc09tZjQ3Tno5M0o5ZHVBemQiLAog
+        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
+        c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
+        InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
+        b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMUIzTDBsMnNPbWY0N056
+        OTNKOWR1QXpkIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
+        cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
+        ZHJlc3NfbGluZTIiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3N0YXRlIjog
+        bnVsbCwKICAgICAgICAiYWRkcmVzc196aXAiOiBudWxsLAogICAgICAgICJh
+        ZGRyZXNzX3ppcF9jaGVjayI6IG51bGwsCiAgICAgICAgImJyYW5kIjogIlZp
+        c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
+        IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE4
+        LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
+        ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
+        ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
+        ZSI6IG51bGwsCiAgICAgICAgInRva2VuaXphdGlvbl9tZXRob2QiOiBudWxs
+        CiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0
+        b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9jdXN0b21lcnMvY3Vz
+        XzhDek50TTA4TlZsU0dOL3NvdXJjZXMiCiAgfSwKICAic3Vic2NyaXB0aW9u
+        cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFsKICAg
+        ICAgewogICAgICAgICJpZCI6ICJzdWJfQlFCTm5rVWxjaWkzcjEiLAogICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBwbGlj
+        YXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJiaWxsaW5nIjog
+        ImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAgICAgICAiY2FuY2VsX2F0X3Bl
+        cmlvZF9lbmQiOiB0cnVlLAogICAgICAgICJjYW5jZWxlZF9hdCI6IDE1MDU3
+        MjQ4NDEsCiAgICAgICAgImNyZWF0ZWQiOiAxNTA1NzI0ODM3LAogICAgICAg
+        ICJjdXJyZW50X3BlcmlvZF9lbmQiOiAxNTA4MzE2ODM3LAogICAgICAgICJj
+        dXJyZW50X3BlcmlvZF9zdGFydCI6IDE1MDU3MjQ4MzcsCiAgICAgICAgImN1
+        c3RvbWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICAgImRpc2Nv
+        dW50IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAgICAg
+        ICJpdGVtcyI6IHsKICAgICAgICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAg
+        ICAgICAiZGF0YSI6IFsKICAgICAgICAgICAgewogICAgICAgICAgICAgICJp
+        ZCI6ICJzaV8xQjNMMHIyc09tZjQ3Tno5S0tkVjF6c0oiLAogICAgICAgICAg
+        ICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uX2l0ZW0iLAogICAgICAgICAg
+        ICAgICJjcmVhdGVkIjogMTUwNTcyNDgzOCwKICAgICAgICAgICAgICAibWV0
+        YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAicGxhbiI6IHsKICAgICAgICAg
+        ICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50LW1v
+        bnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAgICAgICAgICJvYmplY3Qi
+        OiAicGxhbiIsCiAgICAgICAgICAgICAgICAiYW1vdW50IjogMjAwMCwKICAg
+        ICAgICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4MzEwOCwKICAgICAgICAg
+        ICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgICAgICAgImlu
+        dGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgICAgICJpbnRlcnZhbF9j
+        b3VudCI6IDEsCiAgICAgICAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwK
+        ICAgICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAg
+        ICAgIm5hbWUiOiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0dWRpYW50
+        LCAtIGRlIDI1IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQnZW1wbG9p
+        IC0gbW9udGgiLAogICAgICAgICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlw
+        dG9yIjogbnVsbCwKICAgICAgICAgICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5
+        cyI6IG51bGwKICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICJxdWFu
+        dGl0eSI6IDEKICAgICAgICAgICAgfQogICAgICAgICAgXSwKICAgICAgICAg
+        ICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICAgInRvdGFsX2NvdW50Ijog
+        MSwKICAgICAgICAgICJ1cmwiOiAiL3YxL3N1YnNjcmlwdGlvbl9pdGVtcz9z
+        dWJzY3JpcHRpb249c3ViX0JRQk5ua1VsY2lpM3IxIgogICAgICAgIH0sCiAg
+        ICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRhIjog
+        e30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAibWVuc3Vl
+        bC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgyNyIs
+        CiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFtb3Vu
+        dCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAg
+        ICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJpbnRlcnZh
+        bCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAog
+        ICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0YWRh
+        dGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOp
+        ZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRl
+        bWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0ZW1l
+        bnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVyaW9k
+        X2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHkiOiAx
+        LAogICAgICAgICJzdGFydCI6IDE1MDU3MjQ4MzcsCiAgICAgICAgInN0YXR1
+        cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGwsCiAg
+        ICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0YXJ0
+        IjogbnVsbAogICAgICB9LAogICAgICB7CiAgICAgICAgImlkIjogInN1Yl9C
+        UUJJSW11VVdicmp6QiIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRp
+        b24iLAogICAgICAgICJhcHBsaWNhdGlvbl9mZWVfcGVyY2VudCI6IG51bGws
+        CiAgICAgICAgImJpbGxpbmciOiAiY2hhcmdlX2F1dG9tYXRpY2FsbHkiLAog
+        ICAgICAgICJjYW5jZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUsCiAgICAgICAg
+        ImNhbmNlbGVkX2F0IjogMTUwNTcyNDUwNywKICAgICAgICAiY3JlYXRlZCI6
+        IDE1MDU3MjQ1MDMsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE1
+        MDgzMTY1MDMsCiAgICAgICAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTUw
+        NTcyNDUwMywKICAgICAgICAiY3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZs
+        U0dOIiwKICAgICAgICAiZGlzY291bnQiOiBudWxsLAogICAgICAgICJlbmRl
+        ZF9hdCI6IG51bGwsCiAgICAgICAgIml0ZW1zIjogewogICAgICAgICAgIm9i
+        amVjdCI6ICJsaXN0IiwKICAgICAgICAgICJkYXRhIjogWwogICAgICAgICAg
+        ICB7CiAgICAgICAgICAgICAgImlkIjogInNpXzFCM0t2VDJzT21mNDdOejl1
+        M2lNYTVTeiIsCiAgICAgICAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRp
+        b25faXRlbSIsCiAgICAgICAgICAgICAgImNyZWF0ZWQiOiAxNTA1NzI0NTAz
+        LAogICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAg
+        ICJwbGFuIjogewogICAgICAgICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFy
+        aWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAg
+        ICAgICAgICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICAgICAg
+        ICJhbW91bnQiOiAyMDAwLAogICAgICAgICAgICAgICAgImNyZWF0ZWQiOiAx
+        NDU5NzgzMTA4LAogICAgICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIs
+        CiAgICAgICAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9udGgiLAogICAgICAg
+        ICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICAgICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlm
+        IHLDqWR1aXQgLSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50
+        LCBkZW1hbmRldXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAgICAg
+        ICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgICAg
+        ICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogICAgICAgICAgICAgIH0s
+        CiAgICAgICAgICAgICAgInF1YW50aXR5IjogMQogICAgICAgICAgICB9CiAg
+        ICAgICAgICBdLAogICAgICAgICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAg
+        ICAgICAidG90YWxfY291bnQiOiAxLAogICAgICAgICAgInVybCI6ICIvdjEv
+        c3Vic2NyaXB0aW9uX2l0ZW1zP3N1YnNjcmlwdGlvbj1zdWJfQlFCSUltdVVX
+        YnJqekIiCiAgICAgICAgfSwKICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwK
+        ICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6IHsKICAg
+        ICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50LW1v
+        bnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAgICJvYmplY3QiOiAicGxh
+        biIsCiAgICAgICAgICAiYW1vdW50IjogMjAwMCwKICAgICAgICAgICJjcmVh
+        dGVkIjogMTQ1OTc4MzEwOCwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2Qi
+        LAogICAgICAgICAgImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJp
+        bnRlcnZhbF9jb3VudCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgIm5hbWUi
+        OiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0dWRpYW50LCAtIGRlIDI1
+        IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQnZW1wbG9pIC0gbW9udGgi
+        LAogICAgICAgICAgInN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAg
+        ICAgICAgICJ0cmlhbF9wZXJpb2RfZGF5cyI6IG51bGwKICAgICAgICB9LAog
+        ICAgICAgICJxdWFudGl0eSI6IDEsCiAgICAgICAgInN0YXJ0IjogMTUwNTcy
+        NDUwMywKICAgICAgICAic3RhdHVzIjogImFjdGl2ZSIsCiAgICAgICAgInRh
+        eF9wZXJjZW50IjogbnVsbCwKICAgICAgICAidHJpYWxfZW5kIjogbnVsbCwK
+        ICAgICAgICAidHJpYWxfc3RhcnQiOiBudWxsCiAgICAgIH0sCiAgICAgIHsK
+        ICAgICAgICAiaWQiOiAic3ViX0JRQkhIUEJqTzU3M0pXIiwKICAgICAgICAi
+        b2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgICAgICAgImFwcGxpY2F0aW9u
+        X2ZlZV9wZXJjZW50IjogbnVsbCwKICAgICAgICAiYmlsbGluZyI6ICJjaGFy
+        Z2VfYXV0b21hdGljYWxseSIsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2Rf
+        ZW5kIjogdHJ1ZSwKICAgICAgICAiY2FuY2VsZWRfYXQiOiAxNTA1NzI0NDU4
+        LAogICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDQ1MiwKICAgICAgICAiY3Vy
+        cmVudF9wZXJpb2RfZW5kIjogMTUwODMxNjQ1MiwKICAgICAgICAiY3VycmVu
+        dF9wZXJpb2Rfc3RhcnQiOiAxNTA1NzI0NDUyLAogICAgICAgICJjdXN0b21l
+        ciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAgICJkaXNjb3VudCI6
+        IG51bGwsCiAgICAgICAgImVuZGVkX2F0IjogbnVsbCwKICAgICAgICAiaXRl
+        bXMiOiB7CiAgICAgICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICAg
+        ImRhdGEiOiBbCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAiaWQiOiAi
+        c2lfMUIzS3VlMnNPbWY0N056OTJQQ3ZEVVpLIiwKICAgICAgICAgICAgICAi
+        b2JqZWN0IjogInN1YnNjcmlwdGlvbl9pdGVtIiwKICAgICAgICAgICAgICAi
+        Y3JlYXRlZCI6IDE1MDU3MjQ0NTMsCiAgICAgICAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICAg
+        ICAiaWQiOiAibWVuc3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0y
+        MDE2MDQwNDE3MTgyNyIsCiAgICAgICAgICAgICAgICAib2JqZWN0IjogInBs
+        YW4iLAogICAgICAgICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAg
+        ICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgsCiAgICAgICAgICAgICAg
+        ICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICAgICAgICJpbnRlcnZh
+        bCI6ICJtb250aCIsCiAgICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQi
+        OiAxLAogICAgICAgICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAg
+        ICAgICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAgICJu
+        YW1lIjogIk1lbnN1ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBk
+        ZSAyNSBhbnMsIGVuc2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1v
+        bnRoIiwKICAgICAgICAgICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6
+        IG51bGwsCiAgICAgICAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBu
+        dWxsCiAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAicXVhbnRpdHki
+        OiAxCiAgICAgICAgICAgIH0KICAgICAgICAgIF0sCiAgICAgICAgICAiaGFz
+        X21vcmUiOiBmYWxzZSwKICAgICAgICAgICJ0b3RhbF9jb3VudCI6IDEsCiAg
+        ICAgICAgICAidXJsIjogIi92MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2Ny
+        aXB0aW9uPXN1Yl9CUUJISFBCak81NzNKVyIKICAgICAgICB9LAogICAgICAg
+        ICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAog
+        ICAgICAgICJwbGFuIjogewogICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFy
+        aWYtcmVkdWl0LXN0dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAg
+        ICAgICAgIm9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAy
+        MDAwLAogICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAg
+        ICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAi
+        bW9udGgiLAogICAgICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAg
+        ICAgICJsaXZlbW9kZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjog
+        e30sCiAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQg
+        LSDDqXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRl
+        dXIgZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rl
+        c2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlz
+        IjogbnVsbAogICAgICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAg
+        ICAgICAic3RhcnQiOiAxNTA1NzI0NDUyLAogICAgICAgICJzdGF0dXMiOiAi
+        YWN0aXZlIiwKICAgICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAg
+        ICJ0cmlhbF9lbmQiOiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51
+        bGwKICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAg
+        InRvdGFsX2NvdW50IjogMywKICAgICJ1cmwiOiAiL3YxL2N1c3RvbWVycy9j
+        dXNfOEN6TnRNMDhOVmxTR04vc3Vic2NyaXB0aW9ucyIKICB9Cn0K
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:02:59 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:08 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/sources
     body:
       encoding: UTF-8
-      string: card=tok_17xHFG2sOmf47Nz9pZ4CafpU
+      string: card=tok_1B3L0y2sOmf47Nz9WFqPXvM7
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -449,9 +817,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '33'
   response:
@@ -462,7 +830,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:00 GMT
+      - Mon, 18 Sep 2017 08:54:09 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -475,12 +843,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigAxuQClwx3A
+      - req_IXKMjO7F6pXcr0
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -489,7 +859,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_17xHFG2sOmf47Nz95yErDQbL",
+          "id": "card_1B3L0y2sOmf47Nz9AZVEmtnY",
           "object": "card",
           "address_city": null,
           "address_country": null,
@@ -505,7 +875,7 @@ http_interactions:
           "cvc_check": "pass",
           "dynamic_last4": null,
           "exp_month": 4,
-          "exp_year": 2017,
+          "exp_year": 2018,
           "fingerprint": "o52jybR7bnmNn6AT",
           "funding": "credit",
           "last4": "4242",
@@ -514,13 +884,13 @@ http_interactions:
           "tokenization_method": null
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:03:00 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:09 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN
     body:
       encoding: UTF-8
-      string: default_source=card_17xHFG2sOmf47Nz95yErDQbL
+      string: default_source=card_1B3L0y2sOmf47Nz9AZVEmtnY
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -533,9 +903,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '44'
   response:
@@ -546,11 +916,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:01 GMT
+      - Mon, 18 Sep 2017 08:54:10 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '4190'
+      - '8822'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -559,168 +929,220 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dig1Js3cBEeqQ
+      - req_0J2EyTu1iiAIGn
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "cus_8CzNtM08NVlSGN",
-          "object": "customer",
-          "account_balance": 0,
-          "created": 1459948888,
-          "currency": "usd",
-          "default_source": "card_17xHFG2sOmf47Nz95yErDQbL",
-          "delinquent": false,
-          "description": "Jean Dupond",
-          "discount": null,
-          "email": "jean.dupond@gmail.com",
-          "livemode": false,
-          "metadata": {},
-          "shipping": null,
-          "sources": {
-            "object": "list",
-            "data": [
-              {
-                "id": "card_17xHFG2sOmf47Nz95yErDQbL",
-                "object": "card",
-                "address_city": null,
-                "address_country": null,
-                "address_line1": null,
-                "address_line1_check": null,
-                "address_line2": null,
-                "address_state": null,
-                "address_zip": null,
-                "address_zip_check": null,
-                "brand": "Visa",
-                "country": "US",
-                "customer": "cus_8CzNtM08NVlSGN",
-                "cvc_check": "pass",
-                "dynamic_last4": null,
-                "exp_month": 4,
-                "exp_year": 2017,
-                "fingerprint": "o52jybR7bnmNn6AT",
-                "funding": "credit",
-                "last4": "4242",
-                "metadata": {},
-                "name": null,
-                "tokenization_method": null
-              },
-              {
-                "id": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
-                "object": "card",
-                "address_city": null,
-                "address_country": null,
-                "address_line1": null,
-                "address_line1_check": null,
-                "address_line2": null,
-                "address_state": null,
-                "address_zip": null,
-                "address_zip_check": null,
-                "brand": "Visa",
-                "country": "US",
-                "customer": "cus_8CzNtM08NVlSGN",
-                "cvc_check": "pass",
-                "dynamic_last4": null,
-                "exp_month": 4,
-                "exp_year": 2017,
-                "fingerprint": "o52jybR7bnmNn6AT",
-                "funding": "credit",
-                "last4": "4242",
-                "metadata": {},
-                "name": null,
-                "tokenization_method": null
-              }
-            ],
-            "has_more": false,
-            "total_count": 2,
-            "url": "/v1/customers/cus_8CzNtM08NVlSGN/sources"
-          },
-          "subscriptions": {
-            "object": "list",
-            "data": [
-              {
-                "id": "sub_8Di9gqPLwt5IIC",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "cancel_at_period_end": true,
-                "canceled_at": 1459949404,
-                "current_period_end": 1462541399,
-                "current_period_start": 1459949399,
-                "customer": "cus_8CzNtM08NVlSGN",
-                "discount": null,
-                "ended_at": null,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1459949399,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              },
-              {
-                "id": "sub_8Di2VadRvr7A99",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "cancel_at_period_end": true,
-                "canceled_at": 1459948972,
-                "current_period_end": 1462540968,
-                "current_period_start": 1459948968,
-                "customer": "cus_8CzNtM08NVlSGN",
-                "discount": null,
-                "ended_at": null,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1459948968,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              }
-            ],
-            "has_more": false,
-            "total_count": 2,
-            "url": "/v1/customers/cus_8CzNtM08NVlSGN/subscriptions"
-          }
-        }
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICJvYmplY3QiOiAi
+        Y3VzdG9tZXIiLAogICJhY2NvdW50X2JhbGFuY2UiOiAwLAogICJjcmVhdGVk
+        IjogMTQ1OTc4Mjg0OSwKICAiY3VycmVuY3kiOiAidXNkIiwKICAiZGVmYXVs
+        dF9zb3VyY2UiOiAiY2FyZF8xQjNMMHkyc09tZjQ3Tno5QVpWRW10blkiLAog
+        ICJkZWxpbnF1ZW50IjogZmFsc2UsCiAgImRlc2NyaXB0aW9uIjogIlZhbmVz
+        c2EgTG9uY2hhbXAiLAogICJkaXNjb3VudCI6IG51bGwsCiAgImVtYWlsIjog
+        InZhbmVzc2EubG9uY2hhbXBAc2ZyLmZyIiwKICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAibWV0YWRhdGEiOiB7fSwKICAic2hpcHBpbmciOiBudWxsLAogICJz
+        b3VyY2VzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjog
+        WwogICAgICB7CiAgICAgICAgImlkIjogImNhcmRfMUIzTDB5MnNPbWY0N056
+        OUFaVkVtdG5ZIiwKICAgICAgICAib2JqZWN0IjogImNhcmQiLAogICAgICAg
+        ICJhZGRyZXNzX2NpdHkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2NvdW50
+        cnkiOiBudWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMV9jaGVjayI6IG51bGwsCiAgICAgICAgImFk
+        ZHJlc3NfbGluZTIiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3N0YXRlIjog
+        bnVsbCwKICAgICAgICAiYWRkcmVzc196aXAiOiBudWxsLAogICAgICAgICJh
+        ZGRyZXNzX3ppcF9jaGVjayI6IG51bGwsCiAgICAgICAgImJyYW5kIjogIlZp
+        c2EiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAiY3VzdG9t
+        ZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAgICAiY3ZjX2NoZWNr
+        IjogInBhc3MiLAogICAgICAgICJkeW5hbWljX2xhc3Q0IjogbnVsbCwKICAg
+        ICAgICAiZXhwX21vbnRoIjogNCwKICAgICAgICAiZXhwX3llYXIiOiAyMDE4
+        LAogICAgICAgICJmaW5nZXJwcmludCI6ICJvNTJqeWJSN2JubU5uNkFUIiwK
+        ICAgICAgICAiZnVuZGluZyI6ICJjcmVkaXQiLAogICAgICAgICJsYXN0NCI6
+        ICI0MjQyIiwKICAgICAgICAibWV0YWRhdGEiOiB7fSwKICAgICAgICAibmFt
+        ZSI6IG51bGwsCiAgICAgICAgInRva2VuaXphdGlvbl9tZXRob2QiOiBudWxs
+        CiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQiOiAiY2FyZF8xQjNMMGwy
+        c09tZjQ3Tno5M0o5ZHVBemQiLAogICAgICAgICJvYmplY3QiOiAiY2FyZCIs
+        CiAgICAgICAgImFkZHJlc3NfY2l0eSI6IG51bGwsCiAgICAgICAgImFkZHJl
+        c3NfY291bnRyeSI6IG51bGwsCiAgICAgICAgImFkZHJlc3NfbGluZTEiOiBu
+        dWxsLAogICAgICAgICJhZGRyZXNzX2xpbmUxX2NoZWNrIjogbnVsbCwKICAg
+        ICAgICAiYWRkcmVzc19saW5lMiI6IG51bGwsCiAgICAgICAgImFkZHJlc3Nf
+        c3RhdGUiOiBudWxsLAogICAgICAgICJhZGRyZXNzX3ppcCI6IG51bGwsCiAg
+        ICAgICAgImFkZHJlc3NfemlwX2NoZWNrIjogbnVsbCwKICAgICAgICAiYnJh
+        bmQiOiAiVmlzYSIsCiAgICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAg
+        ICJjdXN0b21lciI6ICJjdXNfOEN6TnRNMDhOVmxTR04iLAogICAgICAgICJj
+        dmNfY2hlY2siOiAicGFzcyIsCiAgICAgICAgImR5bmFtaWNfbGFzdDQiOiBu
+        dWxsLAogICAgICAgICJleHBfbW9udGgiOiA0LAogICAgICAgICJleHBfeWVh
+        ciI6IDIwMTgsCiAgICAgICAgImZpbmdlcnByaW50IjogIm81Mmp5YlI3Ym5t
+        Tm42QVQiLAogICAgICAgICJmdW5kaW5nIjogImNyZWRpdCIsCiAgICAgICAg
+        Imxhc3Q0IjogIjQyNDIiLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAg
+        ICAgICJuYW1lIjogbnVsbCwKICAgICAgICAidG9rZW5pemF0aW9uX21ldGhv
+        ZCI6IG51bGwKICAgICAgfQogICAgXSwKICAgICJoYXNfbW9yZSI6IGZhbHNl
+        LAogICAgInRvdGFsX2NvdW50IjogMiwKICAgICJ1cmwiOiAiL3YxL2N1c3Rv
+        bWVycy9jdXNfOEN6TnRNMDhOVmxTR04vc291cmNlcyIKICB9LAogICJzdWJz
+        Y3JpcHRpb25zIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRh
+        IjogWwogICAgICB7CiAgICAgICAgImlkIjogInN1Yl9CUUJObmtVbGNpaTNy
+        MSIsCiAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRpb24iLAogICAgICAg
+        ICJhcHBsaWNhdGlvbl9mZWVfcGVyY2VudCI6IG51bGwsCiAgICAgICAgImJp
+        bGxpbmciOiAiY2hhcmdlX2F1dG9tYXRpY2FsbHkiLAogICAgICAgICJjYW5j
+        ZWxfYXRfcGVyaW9kX2VuZCI6IHRydWUsCiAgICAgICAgImNhbmNlbGVkX2F0
+        IjogMTUwNTcyNDg0MSwKICAgICAgICAiY3JlYXRlZCI6IDE1MDU3MjQ4Mzcs
+        CiAgICAgICAgImN1cnJlbnRfcGVyaW9kX2VuZCI6IDE1MDgzMTY4MzcsCiAg
+        ICAgICAgImN1cnJlbnRfcGVyaW9kX3N0YXJ0IjogMTUwNTcyNDgzNywKICAg
+        ICAgICAiY3VzdG9tZXIiOiAiY3VzXzhDek50TTA4TlZsU0dOIiwKICAgICAg
+        ICAiZGlzY291bnQiOiBudWxsLAogICAgICAgICJlbmRlZF9hdCI6IG51bGws
+        CiAgICAgICAgIml0ZW1zIjogewogICAgICAgICAgIm9iamVjdCI6ICJsaXN0
+        IiwKICAgICAgICAgICJkYXRhIjogWwogICAgICAgICAgICB7CiAgICAgICAg
+        ICAgICAgImlkIjogInNpXzFCM0wwcjJzT21mNDdOejlLS2RWMXpzSiIsCiAg
+        ICAgICAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRpb25faXRlbSIsCiAg
+        ICAgICAgICAgICAgImNyZWF0ZWQiOiAxNTA1NzI0ODM4LAogICAgICAgICAg
+        ICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgICAgICJwbGFuIjogewog
+        ICAgICAgICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0
+        dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgICAgICAgICAgICAg
+        Im9iamVjdCI6ICJwbGFuIiwKICAgICAgICAgICAgICAgICJhbW91bnQiOiAy
+        MDAwLAogICAgICAgICAgICAgICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAog
+        ICAgICAgICAgICAgICAgImN1cnJlbmN5IjogInVzZCIsCiAgICAgICAgICAg
+        ICAgICAiaW50ZXJ2YWwiOiAibW9udGgiLAogICAgICAgICAgICAgICAgImlu
+        dGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICAgICAgICJsaXZlbW9kZSI6
+        IGZhbHNlLAogICAgICAgICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAg
+        ICAgICAgICAgICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDD
+        qXR1ZGlhbnQsIC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIg
+        ZCdlbXBsb2kgLSBtb250aCIsCiAgICAgICAgICAgICAgICAic3RhdGVtZW50
+        X2Rlc2NyaXB0b3IiOiBudWxsLAogICAgICAgICAgICAgICAgInRyaWFsX3Bl
+        cmlvZF9kYXlzIjogbnVsbAogICAgICAgICAgICAgIH0sCiAgICAgICAgICAg
+        ICAgInF1YW50aXR5IjogMQogICAgICAgICAgICB9CiAgICAgICAgICBdLAog
+        ICAgICAgICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAgICAgICAidG90YWxf
+        Y291bnQiOiAxLAogICAgICAgICAgInVybCI6ICIvdjEvc3Vic2NyaXB0aW9u
+        X2l0ZW1zP3N1YnNjcmlwdGlvbj1zdWJfQlFCTm5rVWxjaWkzcjEiCiAgICAg
+        ICAgfSwKICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAibWV0
+        YWRhdGEiOiB7fSwKICAgICAgICAicGxhbiI6IHsKICAgICAgICAgICJpZCI6
+        ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50LW1vbnRoLTIwMTYwNDA0
+        MTcxODI3IiwKICAgICAgICAgICJvYmplY3QiOiAicGxhbiIsCiAgICAgICAg
+        ICAiYW1vdW50IjogMjAwMCwKICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4
+        MzEwOCwKICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAg
+        ImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICJpbnRlcnZhbF9jb3Vu
+        dCI6IDEsCiAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxzZSwKICAgICAgICAg
+        ICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAgIm5hbWUiOiAiTWVuc3VlbCB0
+        YXJpZiByw6lkdWl0IC0gw6l0dWRpYW50LCAtIGRlIDI1IGFucywgZW5zZWln
+        bmFudCwgZGVtYW5kZXVyIGQnZW1wbG9pIC0gbW9udGgiLAogICAgICAgICAg
+        InN0YXRlbWVudF9kZXNjcmlwdG9yIjogbnVsbCwKICAgICAgICAgICJ0cmlh
+        bF9wZXJpb2RfZGF5cyI6IG51bGwKICAgICAgICB9LAogICAgICAgICJxdWFu
+        dGl0eSI6IDEsCiAgICAgICAgInN0YXJ0IjogMTUwNTcyNDgzNywKICAgICAg
+        ICAic3RhdHVzIjogImFjdGl2ZSIsCiAgICAgICAgInRheF9wZXJjZW50Ijog
+        bnVsbCwKICAgICAgICAidHJpYWxfZW5kIjogbnVsbCwKICAgICAgICAidHJp
+        YWxfc3RhcnQiOiBudWxsCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaWQi
+        OiAic3ViX0JRQklJbXVVV2JyanpCIiwKICAgICAgICAib2JqZWN0IjogInN1
+        YnNjcmlwdGlvbiIsCiAgICAgICAgImFwcGxpY2F0aW9uX2ZlZV9wZXJjZW50
+        IjogbnVsbCwKICAgICAgICAiYmlsbGluZyI6ICJjaGFyZ2VfYXV0b21hdGlj
+        YWxseSIsCiAgICAgICAgImNhbmNlbF9hdF9wZXJpb2RfZW5kIjogdHJ1ZSwK
+        ICAgICAgICAiY2FuY2VsZWRfYXQiOiAxNTA1NzI0NTA3LAogICAgICAgICJj
+        cmVhdGVkIjogMTUwNTcyNDUwMywKICAgICAgICAiY3VycmVudF9wZXJpb2Rf
+        ZW5kIjogMTUwODMxNjUwMywKICAgICAgICAiY3VycmVudF9wZXJpb2Rfc3Rh
+        cnQiOiAxNTA1NzI0NTAzLAogICAgICAgICJjdXN0b21lciI6ICJjdXNfOEN6
+        TnRNMDhOVmxTR04iLAogICAgICAgICJkaXNjb3VudCI6IG51bGwsCiAgICAg
+        ICAgImVuZGVkX2F0IjogbnVsbCwKICAgICAgICAiaXRlbXMiOiB7CiAgICAg
+        ICAgICAib2JqZWN0IjogImxpc3QiLAogICAgICAgICAgImRhdGEiOiBbCiAg
+        ICAgICAgICAgIHsKICAgICAgICAgICAgICAiaWQiOiAic2lfMUIzS3ZUMnNP
+        bWY0N056OXUzaU1hNVN6IiwKICAgICAgICAgICAgICAib2JqZWN0IjogInN1
+        YnNjcmlwdGlvbl9pdGVtIiwKICAgICAgICAgICAgICAiY3JlYXRlZCI6IDE1
+        MDU3MjQ1MDMsCiAgICAgICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAg
+        ICAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAgICAgICAiaWQiOiAibWVu
+        c3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgy
+        NyIsCiAgICAgICAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAg
+        ICAgICAgICAgImFtb3VudCI6IDIwMDAsCiAgICAgICAgICAgICAgICAiY3Jl
+        YXRlZCI6IDE0NTk3ODMxMDgsCiAgICAgICAgICAgICAgICAiY3VycmVuY3ki
+        OiAidXNkIiwKICAgICAgICAgICAgICAgICJpbnRlcnZhbCI6ICJtb250aCIs
+        CiAgICAgICAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAxLAogICAgICAg
+        ICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAgICAgICAi
+        bWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAgICJuYW1lIjogIk1lbnN1
+        ZWwgdGFyaWYgcsOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVu
+        c2VpZ25hbnQsIGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAg
+        ICAgICAgICAgICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAg
+        ICAgICAgICAgICAidHJpYWxfcGVyaW9kX2RheXMiOiBudWxsCiAgICAgICAg
+        ICAgICAgfSwKICAgICAgICAgICAgICAicXVhbnRpdHkiOiAxCiAgICAgICAg
+        ICAgIH0KICAgICAgICAgIF0sCiAgICAgICAgICAiaGFzX21vcmUiOiBmYWxz
+        ZSwKICAgICAgICAgICJ0b3RhbF9jb3VudCI6IDEsCiAgICAgICAgICAidXJs
+        IjogIi92MS9zdWJzY3JpcHRpb25faXRlbXM/c3Vic2NyaXB0aW9uPXN1Yl9C
+        UUJJSW11VVdicmp6QiIKICAgICAgICB9LAogICAgICAgICJsaXZlbW9kZSI6
+        IGZhbHNlLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJwbGFu
+        IjogewogICAgICAgICAgImlkIjogIm1lbnN1ZWwtdGFyaWYtcmVkdWl0LXN0
+        dWRlbnQtbW9udGgtMjAxNjA0MDQxNzE4MjciLAogICAgICAgICAgIm9iamVj
+        dCI6ICJwbGFuIiwKICAgICAgICAgICJhbW91bnQiOiAyMDAwLAogICAgICAg
+        ICAgImNyZWF0ZWQiOiAxNDU5NzgzMTA4LAogICAgICAgICAgImN1cnJlbmN5
+        IjogInVzZCIsCiAgICAgICAgICAiaW50ZXJ2YWwiOiAibW9udGgiLAogICAg
+        ICAgICAgImludGVydmFsX2NvdW50IjogMSwKICAgICAgICAgICJsaXZlbW9k
+        ZSI6IGZhbHNlLAogICAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAg
+        ICAibmFtZSI6ICJNZW5zdWVsIHRhcmlmIHLDqWR1aXQgLSDDqXR1ZGlhbnQs
+        IC0gZGUgMjUgYW5zLCBlbnNlaWduYW50LCBkZW1hbmRldXIgZCdlbXBsb2kg
+        LSBtb250aCIsCiAgICAgICAgICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBu
+        dWxsLAogICAgICAgICAgInRyaWFsX3BlcmlvZF9kYXlzIjogbnVsbAogICAg
+        ICAgIH0sCiAgICAgICAgInF1YW50aXR5IjogMSwKICAgICAgICAic3RhcnQi
+        OiAxNTA1NzI0NTAzLAogICAgICAgICJzdGF0dXMiOiAiYWN0aXZlIiwKICAg
+        ICAgICAidGF4X3BlcmNlbnQiOiBudWxsLAogICAgICAgICJ0cmlhbF9lbmQi
+        OiBudWxsLAogICAgICAgICJ0cmlhbF9zdGFydCI6IG51bGwKICAgICAgfSwK
+        ICAgICAgewogICAgICAgICJpZCI6ICJzdWJfQlFCSEhQQmpPNTczSlciLAog
+        ICAgICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uIiwKICAgICAgICAiYXBw
+        bGljYXRpb25fZmVlX3BlcmNlbnQiOiBudWxsLAogICAgICAgICJiaWxsaW5n
+        IjogImNoYXJnZV9hdXRvbWF0aWNhbGx5IiwKICAgICAgICAiY2FuY2VsX2F0
+        X3BlcmlvZF9lbmQiOiB0cnVlLAogICAgICAgICJjYW5jZWxlZF9hdCI6IDE1
+        MDU3MjQ0NTgsCiAgICAgICAgImNyZWF0ZWQiOiAxNTA1NzI0NDUyLAogICAg
+        ICAgICJjdXJyZW50X3BlcmlvZF9lbmQiOiAxNTA4MzE2NDUyLAogICAgICAg
+        ICJjdXJyZW50X3BlcmlvZF9zdGFydCI6IDE1MDU3MjQ0NTIsCiAgICAgICAg
+        ImN1c3RvbWVyIjogImN1c184Q3pOdE0wOE5WbFNHTiIsCiAgICAgICAgImRp
+        c2NvdW50IjogbnVsbCwKICAgICAgICAiZW5kZWRfYXQiOiBudWxsLAogICAg
+        ICAgICJpdGVtcyI6IHsKICAgICAgICAgICJvYmplY3QiOiAibGlzdCIsCiAg
+        ICAgICAgICAiZGF0YSI6IFsKICAgICAgICAgICAgewogICAgICAgICAgICAg
+        ICJpZCI6ICJzaV8xQjNLdWUyc09tZjQ3Tno5MlBDdkRVWksiLAogICAgICAg
+        ICAgICAgICJvYmplY3QiOiAic3Vic2NyaXB0aW9uX2l0ZW0iLAogICAgICAg
+        ICAgICAgICJjcmVhdGVkIjogMTUwNTcyNDQ1MywKICAgICAgICAgICAgICAi
+        bWV0YWRhdGEiOiB7fSwKICAgICAgICAgICAgICAicGxhbiI6IHsKICAgICAg
+        ICAgICAgICAgICJpZCI6ICJtZW5zdWVsLXRhcmlmLXJlZHVpdC1zdHVkZW50
+        LW1vbnRoLTIwMTYwNDA0MTcxODI3IiwKICAgICAgICAgICAgICAgICJvYmpl
+        Y3QiOiAicGxhbiIsCiAgICAgICAgICAgICAgICAiYW1vdW50IjogMjAwMCwK
+        ICAgICAgICAgICAgICAgICJjcmVhdGVkIjogMTQ1OTc4MzEwOCwKICAgICAg
+        ICAgICAgICAgICJjdXJyZW5jeSI6ICJ1c2QiLAogICAgICAgICAgICAgICAg
+        ImludGVydmFsIjogIm1vbnRoIiwKICAgICAgICAgICAgICAgICJpbnRlcnZh
+        bF9jb3VudCI6IDEsCiAgICAgICAgICAgICAgICAibGl2ZW1vZGUiOiBmYWxz
+        ZSwKICAgICAgICAgICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICAg
+        ICAgICAgIm5hbWUiOiAiTWVuc3VlbCB0YXJpZiByw6lkdWl0IC0gw6l0dWRp
+        YW50LCAtIGRlIDI1IGFucywgZW5zZWlnbmFudCwgZGVtYW5kZXVyIGQnZW1w
+        bG9pIC0gbW9udGgiLAogICAgICAgICAgICAgICAgInN0YXRlbWVudF9kZXNj
+        cmlwdG9yIjogbnVsbCwKICAgICAgICAgICAgICAgICJ0cmlhbF9wZXJpb2Rf
+        ZGF5cyI6IG51bGwKICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICJx
+        dWFudGl0eSI6IDEKICAgICAgICAgICAgfQogICAgICAgICAgXSwKICAgICAg
+        ICAgICJoYXNfbW9yZSI6IGZhbHNlLAogICAgICAgICAgInRvdGFsX2NvdW50
+        IjogMSwKICAgICAgICAgICJ1cmwiOiAiL3YxL3N1YnNjcmlwdGlvbl9pdGVt
+        cz9zdWJzY3JpcHRpb249c3ViX0JRQkhIUEJqTzU3M0pXIgogICAgICAgIH0s
+        CiAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgIm1ldGFkYXRh
+        Ijoge30sCiAgICAgICAgInBsYW4iOiB7CiAgICAgICAgICAiaWQiOiAibWVu
+        c3VlbC10YXJpZi1yZWR1aXQtc3R1ZGVudC1tb250aC0yMDE2MDQwNDE3MTgy
+        NyIsCiAgICAgICAgICAib2JqZWN0IjogInBsYW4iLAogICAgICAgICAgImFt
+        b3VudCI6IDIwMDAsCiAgICAgICAgICAiY3JlYXRlZCI6IDE0NTk3ODMxMDgs
+        CiAgICAgICAgICAiY3VycmVuY3kiOiAidXNkIiwKICAgICAgICAgICJpbnRl
+        cnZhbCI6ICJtb250aCIsCiAgICAgICAgICAiaW50ZXJ2YWxfY291bnQiOiAx
+        LAogICAgICAgICAgImxpdmVtb2RlIjogZmFsc2UsCiAgICAgICAgICAibWV0
+        YWRhdGEiOiB7fSwKICAgICAgICAgICJuYW1lIjogIk1lbnN1ZWwgdGFyaWYg
+        csOpZHVpdCAtIMOpdHVkaWFudCwgLSBkZSAyNSBhbnMsIGVuc2VpZ25hbnQs
+        IGRlbWFuZGV1ciBkJ2VtcGxvaSAtIG1vbnRoIiwKICAgICAgICAgICJzdGF0
+        ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgICAgICAgICAidHJpYWxfcGVy
+        aW9kX2RheXMiOiBudWxsCiAgICAgICAgfSwKICAgICAgICAicXVhbnRpdHki
+        OiAxLAogICAgICAgICJzdGFydCI6IDE1MDU3MjQ0NTIsCiAgICAgICAgInN0
+        YXR1cyI6ICJhY3RpdmUiLAogICAgICAgICJ0YXhfcGVyY2VudCI6IG51bGws
+        CiAgICAgICAgInRyaWFsX2VuZCI6IG51bGwsCiAgICAgICAgInRyaWFsX3N0
+        YXJ0IjogbnVsbAogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFs
+        c2UsCiAgICAidG90YWxfY291bnQiOiAzLAogICAgInVybCI6ICIvdjEvY3Vz
+        dG9tZXJzL2N1c184Q3pOdE0wOE5WbFNHTi9zdWJzY3JpcHRpb25zIgogIH0K
+        fQo=
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:03:01 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:10 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoices
@@ -739,9 +1161,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '27'
   response:
@@ -752,11 +1174,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:02 GMT
+      - Mon, 18 Sep 2017 08:54:11 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1426'
+      - '1990'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -765,12 +1187,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigRXqOIStdA0
+      - req_MD7tR4VWUwGjSi
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -779,17 +1203,18 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_17xHFK2sOmf47Nz9jegPFlNt",
+          "id": "in_1B3L152sOmf47Nz9z31UmWS7",
           "object": "invoice",
-          "amount_due": 2200,
+          "amount_due": 2400,
           "application_fee": null,
           "attempt_count": 0,
           "attempted": false,
+          "billing": "charge_automatically",
           "charge": null,
           "closed": false,
           "currency": "usd",
           "customer": "cus_8CzNtM08NVlSGN",
-          "date": 1459951382,
+          "date": 1505724851,
           "description": null,
           "discount": null,
           "ending_balance": null,
@@ -798,17 +1223,17 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+                "id": "ii_1B3L112sOmf47Nz9HhdRh67V",
                 "object": "line_item",
-                "amount": 3200,
+                "amount": -1000,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
-                "discountable": true,
+                "description": "wallet -10.0",
+                "discountable": false,
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1459951378,
-                  "end": 1459951378
+                  "start": 1505724847,
+                  "end": 1505724847
                 },
                 "plan": null,
                 "proration": false,
@@ -817,52 +1242,51 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_17xHFG2sOmf47N59hh8aJSt6",
-                "object": "invoiceitem",
-                "amount": -1000,
+                "id": "ii_1B3L102sOmf47Nz9bcXk9I95",
+                "object": "line_item",
+                "amount": 3400,
                 "currency": "usd",
-                "customer": "cus_8CzNtM08NVlSGN",
-                "date": 1459951378,
-                "description": "Wallet -1000",
+                "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
                 "discountable": true,
-                "invoice": null,
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1459951378,
-                  "end": 1459951378
+                  "start": 1505724846,
+                  "end": 1505724846
                 },
                 "plan": null,
                 "proration": false,
                 "quantity": null,
-                "subscription": null
+                "subscription": null,
+                "type": "invoiceitem"
               }
             ],
             "has_more": false,
-            "total_count": 1,
-            "url": "/v1/invoices/in_17xHFK2sOmf47Nz9jegPFlNt/lines"
+            "total_count": 2,
+            "url": "/v1/invoices/in_1B3L152sOmf47Nz9z31UmWS7/lines"
           },
           "livemode": false,
           "metadata": {},
-          "next_payment_attempt": 1459954982,
+          "next_payment_attempt": 1505728451,
+          "number": "9ebfead20b-0007",
           "paid": false,
-          "period_end": 1459951382,
-          "period_start": 1459948968,
+          "period_end": 1508316452,
+          "period_start": 1505724452,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
           "subscription": null,
-          "subtotal": 2200,
+          "subtotal": 2400,
           "tax": null,
           "tax_percent": null,
-          "total": 2200,
+          "total": 2400,
           "webhooks_delivered_at": null
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:03:02 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:11 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/invoices/in_17xHFK2sOmf47Nz9jegPFlNt/pay
+    uri: https://api.stripe.com/v1/invoices/in_1B3L152sOmf47Nz9z31UmWS7/pay
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -878,9 +1302,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '0'
   response:
@@ -891,11 +1315,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:03 GMT
+      - Mon, 18 Sep 2017 08:54:13 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1445'
+      - '2009'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -904,12 +1328,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigckzVuj8MLI
+      - req_frf59awTiJQwLz
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -918,17 +1344,18 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_17xHFK2sOmf47Nz9jegPFlNt",
+          "id": "in_1B3L152sOmf47Nz9z31UmWS7",
           "object": "invoice",
-          "amount_due": 2200,
+          "amount_due": 2400,
           "application_fee": null,
           "attempt_count": 1,
           "attempted": true,
-          "charge": "ch_17xHFL2sOmf47Nz9FCQ0BJKc",
+          "billing": "charge_automatically",
+          "charge": "ch_1B3L162sOmf47Nz9qcHIrHQK",
           "closed": true,
           "currency": "usd",
           "customer": "cus_8CzNtM08NVlSGN",
-          "date": 1459951382,
+          "date": 1505724851,
           "description": null,
           "discount": null,
           "ending_balance": 0,
@@ -937,17 +1364,17 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+                "id": "ii_1B3L112sOmf47Nz9HhdRh67V",
                 "object": "line_item",
-                "amount": 3200,
+                "amount": -1000,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
-                "discountable": true,
+                "description": "wallet -10.0",
+                "discountable": false,
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1459951378,
-                  "end": 1459951378
+                  "start": 1505724847,
+                  "end": 1505724847
                 },
                 "plan": null,
                 "proration": false,
@@ -956,52 +1383,51 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_17xHFG2sOmf47N59hh8aJSt6",
-                "object": "invoiceitem",
-                "amount": -1000,
+                "id": "ii_1B3L102sOmf47Nz9bcXk9I95",
+                "object": "line_item",
+                "amount": 3400,
                 "currency": "usd",
-                "customer": "cus_8CzNtM08NVlSGN",
-                "date": 1459951378,
-                "description": "Wallet -1000",
+                "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
                 "discountable": true,
-                "invoice": null,
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1459951378,
-                  "end": 1459951378
+                  "start": 1505724846,
+                  "end": 1505724846
                 },
                 "plan": null,
                 "proration": false,
                 "quantity": null,
-                "subscription": null
+                "subscription": null,
+                "type": "invoiceitem"
               }
             ],
             "has_more": false,
-            "total_count": 1,
-            "url": "/v1/invoices/in_17xHFK2sOmf47Nz9jegPFlNt/lines"
+            "total_count": 2,
+            "url": "/v1/invoices/in_1B3L152sOmf47Nz9z31UmWS7/lines"
           },
           "livemode": false,
           "metadata": {},
           "next_payment_attempt": null,
+          "number": "9ebfead20b-0007",
           "paid": true,
-          "period_end": 1459951382,
-          "period_start": 1459948968,
+          "period_end": 1508316452,
+          "period_start": 1505724452,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
           "subscription": null,
-          "subtotal": 2200,
+          "subtotal": 2400,
           "tax": null,
           "tax_percent": null,
-          "total": 2200,
-          "webhooks_delivered_at": 1459951382
+          "total": 2400,
+          "webhooks_delivered_at": 1505724851
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:03:03 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:13 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/sources/card_17xHFG2sOmf47Nz95yErDQbL
+    uri: https://api.stripe.com/v1/customers/cus_8CzNtM08NVlSGN/sources/card_1B3L0y2sOmf47Nz9AZVEmtnY
     body:
       encoding: US-ASCII
       string: ''
@@ -1017,9 +1443,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-sleede-Nicolas.local 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"MBP-sleede-Nicolas.local"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -1028,7 +1454,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:04 GMT
+      - Mon, 18 Sep 2017 08:54:14 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1041,12 +1467,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dig3VHawFrxab
+      - req_tk6tIKk8cV3KXX
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1056,8 +1484,8 @@ http_interactions:
       string: |
         {
           "deleted": true,
-          "id": "card_17xHFG2sOmf47Nz95yErDQbL"
+          "id": "card_1B3L0y2sOmf47Nz9AZVEmtnY"
         }
     http_version: 
-  recorded_at: Wed, 06 Apr 2016 14:03:04 GMT
+  recorded_at: Mon, 18 Sep 2017 08:54:14 GMT
 recorded_with: VCR 3.0.1

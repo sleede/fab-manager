@@ -132,8 +132,8 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
 
 
 
-Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'priceCategoriesPromise', 'settingsPromise',
-($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, priceCategoriesPromise, settingsPromise) ->
+Application.Controllers.controller "ShowEventController", ["$scope", "$state", "$stateParams", "Event", '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
+($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) ->
 
 
 
@@ -183,8 +183,18 @@ Application.Controllers.controller "ShowEventController", ["$scope", "$state", "
   # @param event {$resource} angular's Event $resource
   ##
   $scope.deleteEvent = (event) ->
-    event.$delete ->
-      $state.go('app.public.events_list')
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('confirmation_required')
+          msg: _t('do_you_really_want_to_delete_this_event')
+    , ->
+      # the admin has confirmed, delete
+      event.$delete ->
+        $state.go('app.public.events_list')
+        growl.info(_t('event_successfully_deleted'))
+      , (error)->
+        growl.error(_t('unable_to_delete_the_event_because_some_users_alredy_booked_it'))
 
 
 

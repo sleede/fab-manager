@@ -175,9 +175,14 @@ fr:
 
       machines_list:
         # liste des machines
-        the_fablab_s_machines: "Les machines du FabLab"
-        add_a_machine: "Ajouter une machine"
-        _or_the_: " ou la "
+        machines_list:
+          the_fablab_s_machines: "Les machines du FabLab"
+          add_a_machine: "Ajouter une machine"
+          book: "Réserver"
+          _or_the_: " ou la "
+          status_enabled: "Actives"
+          status_disabled: "Désactivées"
+          status_all: "Toutes"
 
       machines_show:
         # détail d'une machine
@@ -249,6 +254,10 @@ fr:
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
+        confirmation_required: "Confirmation requise"
+        do_you_really_want_to_delete_this_event:  "Voulez-vous vraiment supprimer cet évènement ?"
+        event_successfully_deleted: "L'évènement a bien été supprimé."
+        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Impossible de supprimer l'évènement, il est peut-être déjà réservé par certains utilisateurs."
 
       calendar:
         # calendrier publique
@@ -263,8 +272,13 @@ fr:
 
       spaces_list:
         # liste des espaces
-        the_spaces: "Les espaces"
-        add_a_space: "Ajouter un espace"
+        spaces_list:
+          the_spaces: "Les espaces"
+          add_a_space: "Ajouter un espace"
+          status_enabled: "Activés"
+          status_disabled: "Désactivés"
+          status_all: "Tous"
+          book: "Réserver"
 
       space_show:
         # affichage des détails d'un espace

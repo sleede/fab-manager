@@ -228,7 +228,8 @@ fr:
     notify_admin_profile_complete:
       subject: "Un compte importé a complété ses informations"
       body:
-        account_completed: "Un compte utilisateur précédemment importé via %{PROVIDER} vient de compléter ses informations de profil :"
+        account_completed: "Un compte utilisateur vient de compléter ses informations de profil :"
+        imported_account_completed: "Un compte utilisateur précédemment importé via %{PROVIDER} vient de compléter ses informations de profil :"
         provider_id: "Son identifiant fournisseur est %{UID}"
 
     notify_admin_abuse_reported:

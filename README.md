@@ -53,8 +53,6 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 
 Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTING.md) for more information about the contribution process.
 
-**IMPORTANT**: **do not** update Arshaw/fullCalendar.js as it contains a hack for the remove-event cross.
-
 <a name="setup-a-production-environment"></a>
 ## Setup a production environment
 

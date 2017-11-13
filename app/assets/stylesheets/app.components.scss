@@ -157,7 +157,7 @@
     overflow: hidden;
 
     img {
-      height: 400px;
+      max-height: 400px;
     }
   }
   img {
@@ -597,4 +597,14 @@ padding: 10px;
     border-bottom: 1px dashed #00b3ee;
     cursor: help;
   }
+}
+
+.reservable-card {
+  @media only screen and (min-width: 768px) {
+    height: 24em;
+  }
+}
+
+.disabled-reservable {
+  opacity: 0.5 !important;
 }

@@ -165,8 +165,30 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
       growl.error(_t('admin_calendar.unlockable_because_reservations'))
 
 
+  ##
+  # Confirm and destroy the slot in $scope.availability
+  ##
+  $scope.removeSlot = ->
+    # open a confirmation dialog
+    dialogs.confirm
+      resolve:
+        object: ->
+          title: _t('admin_calendar.confirmation_required')
+          msg: _t("admin_calendar.do_you_really_want_to_delete_this_slot")
+    , ->
+      # the admin has confirmed, delete the slot
+        Availability.delete id: $scope.availability.id, ->
+          uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents', $scope.availability.id
 
-  ### PRIVATE SCOPE ###
+          growl.success(_t('admin_calendar.the_slot_START-END_has_been_successfully_deleted', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+          $scope.availability = null
+        ,->
+          growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+
+
+
+
+    ### PRIVATE SCOPE ###
 
   ##
   # Return an enumerable meaninful string for the gender of the provider user
@@ -235,12 +257,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
 
     # if the user has clicked on the delete event button, delete the event
     if ($(jsEvent.target).hasClass('remove-event'))
-      Availability.delete id: event.id, ->
-        uiCalendarConfig.calendars.calendar.fullCalendar 'removeEvents', event.id
-
-        growl.success(_t('admin_calendar.the_slot_START-END_has_been_successfully_deleted', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
-      ,->
-        growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', {START:moment(event.start).format('LL LT'), END:moment(event.end).format('LT')}))
+      $scope.removeSlot()
     # if the user has only clicked on the event, display its reservations
     else
       Availability.reservations {id: event.id}, (reservations) ->
@@ -255,6 +272,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
   # @see http://fullcalendar.io/docs/event_rendering/eventRender/
   ##
   eventRenderCb = (event, element) ->
+    element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>')
     if event.tags.length > 0
       html = ''
       for tag in event.tags
@@ -291,13 +309,13 @@ Application.Controllers.controller 'CreateEventModalController', ["$scope", "$ui
   $scope.end = end
 
   ## machines list
-  $scope.machines = machinesPromise
+  $scope.machines = machinesPromise.filter (m) -> !m.disabled
 
   ## trainings list
-  $scope.trainings = trainingsPromise
+  $scope.trainings = trainingsPromise.filter (t) -> !t.disabled
 
   ## spaces list
-  $scope.spaces = spacesPromise
+  $scope.spaces = spacesPromise.filter (s) -> !s.disabled
 
   ## machines associated with the created slot
   $scope.selectedMachines = []

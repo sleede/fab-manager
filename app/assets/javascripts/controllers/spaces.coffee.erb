@@ -92,6 +92,17 @@ Application.Controllers.controller 'SpacesController', ['$scope', '$state', 'spa
   ##
   $scope.reserveSpace = (space) ->
     $state.go('app.logged.space_reserve', { id: space.slug })
+
+
+  ## Default: we show only enabled spaces
+  $scope.spaceFiltering = 'enabled'
+
+  ## Available options for filtering spaces by status
+  $scope.filterDisabled = [
+    'enabled',
+    'disabled',
+    'all',
+  ]
 ]
 
 
@@ -435,6 +446,14 @@ Application.Controllers.controller "ReserveSpaceController", ["$scope", '$stateP
       Auth._currentUser.machine_credits = angular.copy(reservation.user.machine_credits)
 
       refetchCalendar()
+
+
+
+    ##
+    # To use as callback in Array.prototype.filter to get only enabled plans
+    ##
+    $scope.filterDisabledPlans = (plan) ->
+      !plan.disabled
 
 
 

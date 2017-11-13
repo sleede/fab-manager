@@ -5,18 +5,19 @@
   <thead>
   <tr>
     <th style="width:20%"  translate>{{ 'pricing.machines' }}</th>
-    <th style="width:20%" ng-repeat="group in groups">
+    <th style="width:20%" ng-repeat="group in enabledGroups">
       <span class="text-u-c text-sm">{{group.name}}</span>
     </th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="machine in machines">
+  <tr ng-repeat="machine in enabledMachines">
     <td>
       {{ machine.name }}
     </td>
-    <td ng-repeat="group in groups">
+    <td ng-repeat="group in enabledGroups">
                   <span editable-number="findPriceBy(machinesPrices, machine.id, group.id).amount"
+                        e-step="any"
                         onbeforesave="updatePrice($data, findPriceBy(machinesPrices, machine.id, group.id))">
                       {{ findPriceBy(machinesPrices, machine.id, group.id).amount | currency}}
                   </span>

@@ -5067,8 +5067,6 @@ DayGrid.mixin({
 					) +
 			'>' +
 				'<div class="fc-content">' +
-				  // modified sleede peng
-			    '<span class="remove-event">x&nbsp;</span>' +
 					(this.isRTL ?
 						titleHtml + ' ' + timeHtml : // put a natural space in between
 						timeHtml + ' ' + titleHtml   //
@@ -6272,8 +6270,6 @@ TimeGrid.mixin({
 				) +
 			'>' +
 				'<div class="fc-content">' +
-				  // modified sleede peng
-			    '<span class="remove-event">x&nbsp;</span>' +
 					(timeText ?
 						'<div class="fc-time"' +
 						' data-start="' + htmlEscape(startTimeText) + '"' +

@@ -13,7 +13,7 @@ class PlanController
 
 
     ## groups list
-    $scope.groups = groups.filter (g) -> g.slug != 'admins'
+    $scope.groups = groups.filter (g) -> g.slug != 'admins' && !g.disabled
 
     ## users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users
@@ -175,6 +175,7 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
   ## edited plan data
   $scope.plan = planPromise
   $scope.plan.type = "Plan" if $scope.plan.type == null
+  $scope.plan.disabled = 'true' if $scope.plan.disabled
 
   ## API URL where the form will be posted
   $scope.actionUrl = "/api/plans/" + $stateParams.id
@@ -231,26 +232,26 @@ Application.Controllers.controller 'EditPlanController', ['$scope', 'groups', 'p
 
 
   ##
-  # Retrieve the name of a machine from its ID
+  # Retrieve the machine from its ID
   # @param machine_id {number} machine identifier
-  # @returns {string} Machine's name
+  # @returns {Object} Machine
   ##
-  $scope.getMachineName = (machine_id) ->
+  $scope.getMachine = (machine_id) ->
     for machine in $scope.machines
       if machine.id == machine_id
-        return machine.name
+        return machine
 
 
 
   ##
-  # Retrieve the name of a space from its ID
+  # Retrieve the space from its ID
   # @param space_id {number} space identifier
-  # @returns {string} Space's name
+  # @returns {Object} Space
   ##
-  $scope.getSpaceName = (space_id) ->
+  $scope.getSpace = (space_id) ->
     for space in $scope.spaces
       if space.id == space_id
-        return space.name
+        return space
 
 
 

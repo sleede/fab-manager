@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2017&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -18,9 +18,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:58 GMT
+      - Mon, 18 Sep 2017 08:53:36 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '778'
+      - '779'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -44,12 +44,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigzZOUKbFLP8
+      - req_IxVJETx0YE83qh
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -58,10 +60,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_17xHFG2sOmf47Nz9pZ4CafpU",
+          "id": "tok_1B3L0W2sOmf47Nz9YIxXHgWn",
           "object": "token",
           "card": {
-            "id": "card_17xHFG2sOmf47Nz95yErDQbL",
+            "id": "card_1B3L0W2sOmf47Nz9IWFm3G6v",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -76,7 +78,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2017,
+            "exp_year": 2018,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -84,20 +86,20 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "86.76.5.109",
-          "created": 1459951378,
+          "client_ip": "90.112.59.71",
+          "created": 1505724816,
           "livemode": false,
           "type": "card",
           "used": false
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:02:58 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:36 GMT
 - request:
-    method: post
-    uri: https://api.stripe.com/v1/invoiceitems
+    method: get
+    uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8Di1wjdVktv5kt&limit=100
     body:
-      encoding: UTF-8
-      string: customer=cus_8Di1wjdVktv5kt&amount=3200&currency=usd&description=FORM1%2B+imprimante+3D+April+11%2C+2016+14%3A00+-+03%3A00+PM
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -110,11 +112,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
-      Content-Length:
-      - '125'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -123,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:58 GMT
+      - Mon, 18 Sep 2017 08:53:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '469'
+      - '9205'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -136,12 +136,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigTaKJ04PVMc
+      - req_v0QlFIQhn3VFHz
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -150,28 +152,495 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+          "object": "list",
+          "data": [
+            {
+              "id": "ii_1B3L0T2sOmf47Nz9OXEMdidl",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724813,
+              "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": null,
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724813,
+                "end": 1505724813
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3L0J2sOmf47Nz9lKSNNF1U",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724803,
+              "description": "Formation Imprimante 3D September 18, 2017 08:00 - 12:00 PM",
+              "discountable": true,
+              "invoice": "in_1B3L0N2sOmf47Nz9YpYod08J",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724803,
+                "end": 1505724803
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3L012sOmf47Nz948JNFRoK",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724785,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1B3L052sOmf47Nz9zx9vIGks",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724785,
+                "end": 1505724785
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3L002sOmf47Nz9FjqPZEye",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724784,
+              "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_1B3L052sOmf47Nz9zx9vIGks",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724784,
+                "end": 1505724784
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3Kuo2sOmf47Nz9egmtGncE",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724462,
+              "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_1B3Kut2sOmf47Nz9ht8mAIGU",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724462,
+                "end": 1505724462
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3KuK2sOmf47Nz9RqRGmh0l",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724432,
+              "description": "Formation Imprimante 3D September 18, 2017 08:00 - 12:00 PM",
+              "discountable": true,
+              "invoice": "in_1B3KuO2sOmf47Nz9invMhPqV",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724432,
+                "end": 1505724432
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3Ku62sOmf47Nz92wSUMzHq",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724418,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1B3Ku92sOmf47Nz9MmYnmpwr",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724418,
+                "end": 1505724418
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_1B3Ku52sOmf47Nz9vmqyS5Gy",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1505724417,
+              "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_1B3Ku92sOmf47Nz9MmYnmpwr",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1505724417,
+                "end": 1505724417
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_18rRuK2sOmf47Nz9ye4DQ4PM",
+              "object": "invoiceitem",
+              "amount": -510,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1473338732,
+              "description": "coupon XMAS10",
+              "discountable": false,
+              "invoice": "in_18rRuO2sOmf47Nz9qbfxBA0D",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1473338732,
+                "end": 1473338732
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_18rRuJ2sOmf47Nz9S7f6qfEz",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1473338731,
+              "description": "Formation Imprimante 3D September 05, 2016 08:00 - 09:00 AM",
+              "discountable": true,
+              "invoice": "in_18rRuO2sOmf47Nz9qbfxBA0D",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1473338731,
+                "end": 1473338731
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_18rNSp2sOmf47Nz9S0rJVP2a",
+              "object": "invoiceitem",
+              "amount": -450,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1473321651,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_18rNSq2sOmf47Nz91hxlGSa7",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1473321651,
+                "end": 1473321651
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_18rNSm2sOmf47Nz9R11Svoer",
+              "object": "invoiceitem",
+              "amount": -225,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1473321648,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_18rNSq2sOmf47Nz91hxlGSa7",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1473321648,
+                "end": 1473321648
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_18rNSm2sOmf47Nz9avgL9KyW",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1473321648,
+              "description": "FORM1+ imprimante 3D September 04, 2016 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_18rNSq2sOmf47Nz91hxlGSa7",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1473321648,
+                "end": 1473321648
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_17xeeI2sOmf47Nz9qEhwu9J6",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1460041342,
+              "description": "Formation Imprimante 3D April 12, 2016 08:00 - 12:00 PM",
+              "discountable": true,
+              "invoice": "in_17xeeM2sOmf47Nz9kzn0pC8f",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1460041342,
+                "end": 1460041342
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1459951378,
+              "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_17xHFK2sOmf47Nz9jegPFlNt",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1459951378,
+                "end": 1459951378
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            },
+            {
+              "id": "ii_17xHF82sOmf47Nz9QT6BnkAZ",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1459951370,
+              "description": "Formation Imprimante 3D April 12, 2016 08:00 - 09:00 AM",
+              "discountable": true,
+              "invoice": "in_17xHFC2sOmf47Nz9ZZeO0yST",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1459951370,
+                "end": 1459951370
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": null,
+              "subscription": null
+            }
+          ],
+          "has_more": false,
+          "url": "/v1/invoiceitems"
+        }
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:37 GMT
+- request:
+    method: delete
+    uri: https://api.stripe.com/v1/invoiceitems/ii_1B3L0T2sOmf47Nz9OXEMdidl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 18 Sep 2017 08:53:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '61'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_apPZpzQnYfS7IC
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "deleted": true,
+          "id": "ii_1B3L0T2sOmf47Nz9OXEMdidl"
+        }
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:38 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/invoiceitems
+    body:
+      encoding: UTF-8
+      string: customer=cus_8Di1wjdVktv5kt&amount=3200&currency=usd&description=FORM1%2B+imprimante+3D+September+17%2C+2017+14%3A00+-+03%3A00+PM
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.30.2
+      Authorization:
+      - Bearer sk_test_testfaketestfaketestfake
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
+      Content-Length:
+      - '129'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 18 Sep 2017 08:53:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '473'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_xeDUKVhcpnww2l
+      Stripe-Version:
+      - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ii_1B3L0Y2sOmf47Nz9e9W8bl2Z",
           "object": "invoiceitem",
           "amount": 3200,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1459951378,
-          "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
+          "date": 1505724818,
+          "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1459951378,
-            "end": 1459951378
+            "start": 1505724818,
+            "end": 1505724818
           },
           "plan": null,
           "proration": false,
           "quantity": null,
           "subscription": null
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:02:58 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:38 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
@@ -190,9 +659,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -201,11 +670,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:02:59 GMT
+      - Mon, 18 Sep 2017 08:53:40 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '3462'
+      - '7733'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -214,12 +683,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Digc2V3aKSGrn
+      - req_NRtlLT39ygNjWM
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -233,7 +704,7 @@ http_interactions:
           "account_balance": 0,
           "created": 1459948888,
           "currency": "usd",
-          "default_source": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
+          "default_source": "card_1B3Kzy2sOmf47Nz9TT6Gk2oJ",
           "delinquent": false,
           "description": "Jean Dupond",
           "discount": null,
@@ -245,7 +716,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
+                "id": "card_1B3Kzy2sOmf47Nz9TT6Gk2oJ",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -261,7 +732,7 @@ http_interactions:
                 "cvc_check": "pass",
                 "dynamic_last4": null,
                 "exp_month": 4,
-                "exp_year": 2017,
+                "exp_year": 2018,
                 "fingerprint": "o52jybR7bnmNn6AT",
                 "funding": "credit",
                 "last4": "4242",
@@ -278,16 +749,48 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "sub_8Di9gqPLwt5IIC",
+                "id": "sub_BQBMKKS6nutZLr",
                 "object": "subscription",
                 "application_fee_percent": null,
+                "billing": "charge_automatically",
                 "cancel_at_period_end": true,
-                "canceled_at": 1459949404,
-                "current_period_end": 1462541399,
-                "current_period_start": 1459949399,
+                "canceled_at": 1505724793,
+                "created": 1505724789,
+                "current_period_end": 1508316789,
+                "current_period_start": 1505724789,
                 "customer": "cus_8Di1wjdVktv5kt",
                 "discount": null,
                 "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3L052sOmf47Nz9MoxGlk6i",
+                      "object": "subscription_item",
+                      "created": 1505724789,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBMKKS6nutZLr"
+                },
+                "livemode": false,
                 "metadata": {},
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -304,23 +807,55 @@ http_interactions:
                   "trial_period_days": null
                 },
                 "quantity": 1,
-                "start": 1459949399,
+                "start": 1505724789,
                 "status": "active",
                 "tax_percent": null,
                 "trial_end": null,
                 "trial_start": null
               },
               {
-                "id": "sub_8Di2VadRvr7A99",
+                "id": "sub_BQBH03MUz5WO4y",
                 "object": "subscription",
                 "application_fee_percent": null,
+                "billing": "charge_automatically",
                 "cancel_at_period_end": true,
-                "canceled_at": 1459948972,
-                "current_period_end": 1462540968,
-                "current_period_start": 1459948968,
+                "canceled_at": 1505724499,
+                "created": 1505724494,
+                "current_period_end": 1508316494,
+                "current_period_start": 1505724494,
                 "customer": "cus_8Di1wjdVktv5kt",
                 "discount": null,
                 "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3KvK2sOmf47Nz9mNLN0l2q",
+                      "object": "subscription_item",
+                      "created": 1505724494,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBH03MUz5WO4y"
+                },
+                "livemode": false,
                 "metadata": {},
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -337,7 +872,72 @@ http_interactions:
                   "trial_period_days": null
                 },
                 "quantity": 1,
-                "start": 1459948968,
+                "start": 1505724494,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBGRftUBikhtm",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724425,
+                "created": 1505724421,
+                "current_period_end": 1508316421,
+                "current_period_start": 1505724421,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3Ku92sOmf47Nz9sdo927vf",
+                      "object": "subscription_item",
+                      "created": 1505724421,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBGRftUBikhtm"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724421,
                 "status": "active",
                 "tax_percent": null,
                 "trial_end": null,
@@ -345,18 +945,18 @@ http_interactions:
               }
             ],
             "has_more": false,
-            "total_count": 2,
+            "total_count": 3,
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           }
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:02:59 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:40 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources
     body:
       encoding: UTF-8
-      string: card=tok_17xHFG2sOmf47Nz9pZ4CafpU
+      string: card=tok_1B3L0W2sOmf47Nz9YIxXHgWn
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -369,9 +969,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '33'
   response:
@@ -382,7 +982,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:00 GMT
+      - Mon, 18 Sep 2017 08:53:41 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -395,12 +995,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigAxuQClwx3A
+      - req_tPZGiOLb8nT67d
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -409,7 +1011,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_17xHFG2sOmf47Nz95yErDQbL",
+          "id": "card_1B3L0W2sOmf47Nz9IWFm3G6v",
           "object": "card",
           "address_city": null,
           "address_country": null,
@@ -425,7 +1027,7 @@ http_interactions:
           "cvc_check": "pass",
           "dynamic_last4": null,
           "exp_month": 4,
-          "exp_year": 2017,
+          "exp_year": 2018,
           "fingerprint": "o52jybR7bnmNn6AT",
           "funding": "credit",
           "last4": "4242",
@@ -433,14 +1035,14 @@ http_interactions:
           "name": null,
           "tokenization_method": null
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:03:00 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:42 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
     body:
       encoding: UTF-8
-      string: default_source=card_17xHFG2sOmf47Nz95yErDQbL
+      string: default_source=card_1B3L0W2sOmf47Nz9IWFm3G6v
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -453,9 +1055,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '44'
   response:
@@ -466,11 +1068,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:01 GMT
+      - Mon, 18 Sep 2017 08:53:42 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '4190'
+      - '8461'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -479,12 +1081,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dig1Js3cBEeqQ
+      - req_UzJfZWItnduFA2
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -498,7 +1102,7 @@ http_interactions:
           "account_balance": 0,
           "created": 1459948888,
           "currency": "usd",
-          "default_source": "card_17xHFG2sOmf47Nz95yErDQbL",
+          "default_source": "card_1B3L0W2sOmf47Nz9IWFm3G6v",
           "delinquent": false,
           "description": "Jean Dupond",
           "discount": null,
@@ -510,7 +1114,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_17xHFG2sOmf47Nz95yErDQbL",
+                "id": "card_1B3L0W2sOmf47Nz9IWFm3G6v",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -526,7 +1130,7 @@ http_interactions:
                 "cvc_check": "pass",
                 "dynamic_last4": null,
                 "exp_month": 4,
-                "exp_year": 2017,
+                "exp_year": 2018,
                 "fingerprint": "o52jybR7bnmNn6AT",
                 "funding": "credit",
                 "last4": "4242",
@@ -535,7 +1139,7 @@ http_interactions:
                 "tokenization_method": null
               },
               {
-                "id": "card_17xGjJ2sOmf47Nz9UrQOP8Cl",
+                "id": "card_1B3Kzy2sOmf47Nz9TT6Gk2oJ",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -551,7 +1155,7 @@ http_interactions:
                 "cvc_check": "pass",
                 "dynamic_last4": null,
                 "exp_month": 4,
-                "exp_year": 2017,
+                "exp_year": 2018,
                 "fingerprint": "o52jybR7bnmNn6AT",
                 "funding": "credit",
                 "last4": "4242",
@@ -568,16 +1172,48 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "sub_8Di9gqPLwt5IIC",
+                "id": "sub_BQBMKKS6nutZLr",
                 "object": "subscription",
                 "application_fee_percent": null,
+                "billing": "charge_automatically",
                 "cancel_at_period_end": true,
-                "canceled_at": 1459949404,
-                "current_period_end": 1462541399,
-                "current_period_start": 1459949399,
+                "canceled_at": 1505724793,
+                "created": 1505724789,
+                "current_period_end": 1508316789,
+                "current_period_start": 1505724789,
                 "customer": "cus_8Di1wjdVktv5kt",
                 "discount": null,
                 "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3L052sOmf47Nz9MoxGlk6i",
+                      "object": "subscription_item",
+                      "created": 1505724789,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBMKKS6nutZLr"
+                },
+                "livemode": false,
                 "metadata": {},
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -594,23 +1230,55 @@ http_interactions:
                   "trial_period_days": null
                 },
                 "quantity": 1,
-                "start": 1459949399,
+                "start": 1505724789,
                 "status": "active",
                 "tax_percent": null,
                 "trial_end": null,
                 "trial_start": null
               },
               {
-                "id": "sub_8Di2VadRvr7A99",
+                "id": "sub_BQBH03MUz5WO4y",
                 "object": "subscription",
                 "application_fee_percent": null,
+                "billing": "charge_automatically",
                 "cancel_at_period_end": true,
-                "canceled_at": 1459948972,
-                "current_period_end": 1462540968,
-                "current_period_start": 1459948968,
+                "canceled_at": 1505724499,
+                "created": 1505724494,
+                "current_period_end": 1508316494,
+                "current_period_start": 1505724494,
                 "customer": "cus_8Di1wjdVktv5kt",
                 "discount": null,
                 "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3KvK2sOmf47Nz9mNLN0l2q",
+                      "object": "subscription_item",
+                      "created": 1505724494,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBH03MUz5WO4y"
+                },
+                "livemode": false,
                 "metadata": {},
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -627,7 +1295,72 @@ http_interactions:
                   "trial_period_days": null
                 },
                 "quantity": 1,
-                "start": 1459948968,
+                "start": 1505724494,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_BQBGRftUBikhtm",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "cancel_at_period_end": true,
+                "canceled_at": 1505724425,
+                "created": 1505724421,
+                "current_period_end": 1508316421,
+                "current_period_start": 1505724421,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_1B3Ku92sOmf47Nz9sdo927vf",
+                      "object": "subscription_item",
+                      "created": 1505724421,
+                      "metadata": {},
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "amount": 3000,
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {},
+                        "name": "Mensuel - standard, association - month",
+                        "statement_descriptor": null,
+                        "trial_period_days": null
+                      },
+                      "quantity": 1
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_BQBGRftUBikhtm"
+                },
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "amount": 3000,
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "Mensuel - standard, association - month",
+                  "statement_descriptor": null,
+                  "trial_period_days": null
+                },
+                "quantity": 1,
+                "start": 1505724421,
                 "status": "active",
                 "tax_percent": null,
                 "trial_end": null,
@@ -635,12 +1368,12 @@ http_interactions:
               }
             ],
             "has_more": false,
-            "total_count": 2,
+            "total_count": 3,
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           }
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:03:01 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:43 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoices
@@ -659,9 +1392,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '27'
   response:
@@ -672,11 +1405,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:02 GMT
+      - Mon, 18 Sep 2017 08:53:44 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1426'
+      - '1498'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -685,12 +1418,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigRXqOIStdA0
+      - req_iD3i9JZhcdLh0e
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -699,17 +1434,18 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_17xHFK2sOmf47Nz9jegPFlNt",
+          "id": "in_1B3L0d2sOmf47Nz9sybqyVQx",
           "object": "invoice",
           "amount_due": 3200,
           "application_fee": null,
           "attempt_count": 0,
           "attempted": false,
+          "billing": "charge_automatically",
           "charge": null,
           "closed": false,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1459951382,
+          "date": 1505724823,
           "description": null,
           "discount": null,
           "ending_balance": null,
@@ -718,17 +1454,17 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+                "id": "ii_1B3L0Y2sOmf47Nz9e9W8bl2Z",
                 "object": "line_item",
                 "amount": 3200,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
                 "discountable": true,
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1459951378,
-                  "end": 1459951378
+                  "start": 1505724818,
+                  "end": 1505724818
                 },
                 "plan": null,
                 "proration": false,
@@ -739,14 +1475,15 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/invoices/in_17xHFK2sOmf47Nz9jegPFlNt/lines"
+            "url": "/v1/invoices/in_1B3L0d2sOmf47Nz9sybqyVQx/lines"
           },
           "livemode": false,
           "metadata": {},
-          "next_payment_attempt": 1459954982,
+          "next_payment_attempt": 1505728423,
+          "number": "d4cc0e661c-0007",
           "paid": false,
-          "period_end": 1459951382,
-          "period_start": 1459948968,
+          "period_end": 1508316421,
+          "period_start": 1505724421,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
@@ -757,11 +1494,11 @@ http_interactions:
           "total": 3200,
           "webhooks_delivered_at": null
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:03:02 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:44 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/invoices/in_17xHFK2sOmf47Nz9jegPFlNt/pay
+    uri: https://api.stripe.com/v1/invoices/in_1B3L0d2sOmf47Nz9sybqyVQx/pay
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -777,9 +1514,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '0'
   response:
@@ -790,11 +1527,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:03 GMT
+      - Mon, 18 Sep 2017 08:53:45 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1445'
+      - '1517'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -803,12 +1540,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8DigckzVuj8MLI
+      - req_lmWhdNT85zChxE
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -817,17 +1556,18 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_17xHFK2sOmf47Nz9jegPFlNt",
+          "id": "in_1B3L0d2sOmf47Nz9sybqyVQx",
           "object": "invoice",
           "amount_due": 3200,
           "application_fee": null,
           "attempt_count": 1,
           "attempted": true,
-          "charge": "ch_17xHFL2sOmf47Nz9FCQ0BJKc",
+          "billing": "charge_automatically",
+          "charge": "ch_1B3L0e2sOmf47Nz9z1pvTozK",
           "closed": true,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1459951382,
+          "date": 1505724823,
           "description": null,
           "discount": null,
           "ending_balance": 0,
@@ -836,17 +1576,17 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
+                "id": "ii_1B3L0Y2sOmf47Nz9e9W8bl2Z",
                 "object": "line_item",
                 "amount": 3200,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D April 11, 2016 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D September 17, 2017 14:00 - 03:00 PM",
                 "discountable": true,
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1459951378,
-                  "end": 1459951378
+                  "start": 1505724818,
+                  "end": 1505724818
                 },
                 "plan": null,
                 "proration": false,
@@ -857,14 +1597,15 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/invoices/in_17xHFK2sOmf47Nz9jegPFlNt/lines"
+            "url": "/v1/invoices/in_1B3L0d2sOmf47Nz9sybqyVQx/lines"
           },
           "livemode": false,
           "metadata": {},
           "next_payment_attempt": null,
+          "number": "d4cc0e661c-0007",
           "paid": true,
-          "period_end": 1459951382,
-          "period_start": 1459948968,
+          "period_end": 1508316421,
+          "period_start": 1505724421,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
@@ -873,13 +1614,13 @@ http_interactions:
           "tax": null,
           "tax_percent": null,
           "total": 3200,
-          "webhooks_delivered_at": 1459951382
+          "webhooks_delivered_at": 1505724823
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:03:03 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:45 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources/card_17xHFG2sOmf47Nz95yErDQbL
+    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources/card_1B3L0W2sOmf47Nz9IWFm3G6v
     body:
       encoding: US-ASCII
       string: ''
@@ -895,9 +1636,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
-        integration 14.5.0 Darwin Kernel Version 14.5.0: Wed Jul 29 02:26:53
-        PDT 2015; root:xnu-2782.40.9~1/RELEASE_X86_64 x86_64","hostname":"integration"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
+        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -906,7 +1647,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 06 Apr 2016 14:03:04 GMT
+      - Mon, 18 Sep 2017 08:53:47 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -919,12 +1660,14 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_8Dig3VHawFrxab
+      - req_UcuYTs0yXoHJnn
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -934,8 +1677,8 @@ http_interactions:
       string: |
         {
           "deleted": true,
-          "id": "card_17xHFG2sOmf47Nz95yErDQbL"
+          "id": "card_1B3L0W2sOmf47Nz9IWFm3G6v"
         }
-    http_version:
-  recorded_at: Wed, 06 Apr 2016 14:03:04 GMT
+    http_version: 
+  recorded_at: Mon, 18 Sep 2017 08:53:47 GMT
 recorded_with: VCR 3.0.1

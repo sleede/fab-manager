@@ -8,7 +8,6 @@ class EventPolicy < ApplicationPolicy
              .references(:availabilities)
       else
         scope.includes(:event_image, :event_files, :availability, :category)
-             .order('availabilities.start_at DESC')
              .references(:availabilities)
       end
     end

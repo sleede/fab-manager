@@ -11,9 +11,14 @@ Apipie.configure do |config|
     Pagination is done using headers. Following RFC-5988 standard for web linking.
     It uses headers *Link*, *Total* and *Per-Page*.
 
-    = Authentification
+    = Authentication
     ---
-    Authentification is done using *Authorization* header.
+    Authentication is done using *Authorization* header.
     You just have to set header *Authorization* to <tt>Token token=YOUR_TOKEN</tt> for every request.
+
+    = Json
+    ---
+    Depending on your client, you may have to set header <tt>Accept: application/json</tt> for every request, 
+    otherwise some clients may request *html* by default which will result in error.
   EOS
 end
