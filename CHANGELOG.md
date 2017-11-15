@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fixed deploy instructions with docker-compose
+
 ## v2.6.0 2017 November 13
 
 - Additional button to delete a slot, allowing to delete slots masked by others
