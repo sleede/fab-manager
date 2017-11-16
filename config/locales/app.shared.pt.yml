@@ -144,11 +144,20 @@ pt:
 
       machine:
         # machine edition form
-        technical_specifications_are_required: "Especificações técnicas são obrigatórias."
-        attached_files_(pdf): "Arquivos anexos (pdf)"
-        attach_a_file: "Anexar arquivo"
-        add_an_attachment: "Adicionar anexo"
-        validate_your_machine: "Validar sua máquina"
+        machine_form:
+          name: "Nome"
+          name_is_required: "Nome é obrigatório."
+          illustration: "Ilustração"
+          add_an_illustration: "Adicionar ilustração"
+          description: "Descrição"
+          description_is_required: "Especificações técnica é obrigatório."
+          technical_specifications: "Especificações técnicas"
+          technical_specifications_are_required: "Especificações técnicas são obrigatórias."
+          attached_files_(pdf): "Arquivos anexos (pdf)"
+          attach_a_file: "Anexar arquivo"
+          add_an_attachment: "Adicionar anexo"
+          disable_machine: "Desativar máquina"
+          validate_your_machine: "Validar sua máquina"
 
       plan_subscribe:
         # frame to select a plan to subscribe
@@ -247,7 +256,7 @@ pt:
           associated_machines: "Máquinas associadas"
           number_of_tickets: "Número de vagas"
           public_page: "Mostrar na lista de treinamentos"
-          disable_training: "Disable the training" # TODO
+          disable_training: "Desativar treinamento"
 
       user_admin:
         # partial form to edit/create an user (admin view)
@@ -415,7 +424,7 @@ pt:
             add_an_attachment: "Adicionar um anexo"
             default_places: "Tickets máximo padrão"
             default_places_is_required: "Tickets máximo padrão é obrigatório."
-            disable_space: "Disable space" # TODO
+            disable_space: "Desativar espaço"
 
       cart:
         # module de panier d'achat de réservations
@@ -459,3 +468,4 @@ pt:
           confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
           a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
           none: "Vazio"
+          
