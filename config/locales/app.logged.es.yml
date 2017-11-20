@@ -1,0 +1,130 @@
+es:
+  app:
+    logged:
+      profileCompletion:
+        # user's profile completion page when logging from an SSO provider
+        confirm_your_new_account: "Confirme su nueva cuenta"
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "acaba de crear una nueva cuenta {NAME}, al iniciar sesión desde"  # messageFormat interpolation
+        we_need_some_more_details: "Para finalizar la configuración de la plataforma, necesitamos algunos detalles más."
+        your_email_is_already_used_by_another_account_on_the_platform: "Parece que su dirección de correo electrónico ya está siendo utilizada por otro usuario. Compruebe su dirección de correo electrónico e ingrese debajo del código que le hemos enviado."
+        please_fill_the_following_form: "rellene el siguiente formulario, por favor"
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Algunos datos pueden haber sido proporcionados ya por {{NAME}} y no pueden modificarse"  # angular interpolation
+        then_click_on_: "haz click en"
+        _to_start_using_the_application: "para empezar a usar la aplicación"
+        new_on_this_platform: "¿Nuevo en esta plataforma?"
+        your_email_: "Su e-mail"
+        _is_currently_associated_with_another_account_on_this_platform: "ya está asociado con otra cuenta en esta plataforma."
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "Si este no es su mail, por favor, haz click en el siguiente botón para cambiar el mail asociado con su cuenta {{PROVIDER}} ."  # angular interpolation
+        do_you_already_have_an_account: "¿Ya tiene una cuenta?"
+        do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "No rellene el formulario,escriba aquí el código que ha recibido por correo electrónico para recuperar su acceso."
+        just_specify_code_here_to_recover_access: "Simplemente especifica aquí el código que has recibido en tu correo electrónico para recuperar tu acceso."
+        i_did_not_receive_the_code: "No he recibido ningún código"
+        authentification_code: "Código de autentificación"
+        confirm_my_code: "Confirmar código"
+        an_unexpected_error_occurred_check_your_authentication_code: "Ha ocurrido un error inesperado, por favor, revise su código de autentificación."
+        send_code_again: "Enviar el código de nuevo"
+        email_address_associated_with_your_account: "Email asociado con su cuenta"
+        email_format_is_incorrect: "El formato de email incorrecto"
+        code_successfully_sent_again: "El mail ha sido enviado otra vez con éxito"
+
+      dashboard:
+        # dashboard: public profile
+        profile:
+          empty: ''
+        settings:
+          # dashboard: edit my profile
+          last_activity_on_: "Última vez activo"
+          i_want_to_change_group: "Quiero cambiar de grupo"
+          your_subscription_expires_on_: "su suscripción acaba el"
+          no_subscriptions: "Sin suscripciones"
+          i_want_to_subscribe: "Quiero suscribirme"
+          to_come: "por venir"
+          approved: "aprobado"
+          projects: "Projectos"
+          no_projects: "Sin projectos"
+          labels: "Etiquetas"
+          no_labels: "Sin etiquetas"
+          delete_my_account: "Eliminar mi cuenta"
+          edit_my_profile: "Editar mi perfil"
+          your_group_has_been_successfully_changed: "Su grupo ha sido cambiado con exito."
+          an_unexpected_error_prevented_your_group_from_being_changed: "Un error inesperado impidió que su grupo fuese cambiado."
+          do_you_really_want_to_delete_your_account: "¿Está seguro de querer eliminar su cuenta?"
+          all_data_relative_to_your_projects_will_be_lost: "Todo dato relacionado con sus proyectos se perderá"
+          your_user_account_has_been_successfully_deleted_goodbye: "Su cuenta ha sido eliminada con éxito. Adiós"
+          an_error_occured_preventing_your_account_from_being_deleted: "Un error inesperado impidió que su cuenta fuese eliminada."
+        projects:
+          # dashboard: my projects
+          you_dont_have_any_projects: "Aún no tiene proyectos."
+          author: "Autor"
+          collaborator: "Colaborador"
+        trainings:
+          # dashboard: my trainings
+          your_next_trainings: "Sus próximos cursos"
+          your_previous_trainings: "Sus cursos anteriores"
+          your_approved_trainings: "Sus cursos aprobados"
+        events:
+          # dashboard: my events
+          your_next_events: "Sus próximos eventos"
+          no_events_to_come: "No hay próximos eventos"
+          your_previous_events: "Sus eventos anteriores"
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"  # messageFormat interpolation
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"  # messageFormat interpolation
+        invoices:
+          # dashboard: my invoices
+          reference_number: "Numero de referencia"
+
+      members_show:
+        # public profil of a member
+        members_list: "Lista de miembros"
+
+      members:
+        # list of members accepting to be contacted
+        the_fablab_members: "Los miembros del fablab"
+        display_more_members: "Ver más miembros"
+        no_members_for_now: "Aún no hay miembros"
+        avatar: "Avatar"
+
+      projects_new:
+        # add a new project
+        add_a_new_project: "Añadir nuevo proyecto"
+        save_button_value: "Guardar borrador"  # "Guardar borrador"
+
+      projects_edit:
+        # modify an existing project
+        save_button_value: "Guardar"  # "Guardar"
+        edit_the_project: "Editar proyecto"
+        publish: "Publicar"
+
+      machines_reserve:
+        # book a machine
+        machine_planning: "Planning de la máquina"
+        i_ve_reserved: "He reservado"
+        not_available: "No disponible"
+        i_reserve: "reservo"
+        i_shift: "reemplazo"
+        i_change: "cambio"
+
+      trainings_reserve:
+        # book a training
+        trainings_planning: "Plan de curso"
+        planning_of: "Plan de "   # followed by the training name (eg. "Planning of 3d printer training")
+        all_trainings: "Todos los cursos"
+        cancel_my_selection: "Cancelar mi selección"
+        i_ve_reserved: "He reservado"
+
+      space_reserve:
+        # book a space
+        space_reserve:
+          planning_of_space_NAME: "Planes de {{NAME}} "  # angular interpolation
+          i_ve_reserved: "he reservado"
+          i_shift: "reemplazo"
+          i_change: "cambio"
+
+      notifications:
+        notifications_center: "Centro de notificaciones"
+        mark_all_as_read: "Marcar como leido"
+        notif_title: "Titulo"
+        no_new_notifications: "No hay notificaciones nuevas."
+        archives: "Archivos"
+        no_archived_notifications: "No hay notificaciones archivadas."
+        load_the_next_notifications: "Cargar las siguientes notificaciones..."
