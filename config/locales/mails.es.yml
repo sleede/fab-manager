@@ -248,7 +248,7 @@ es:
         enabled: "A partir de ahora, todos los pagos realizados por este usuario en la recepción llevarán a la emisión de facturación. "
 
     notify_user_wallet_is_credited:
-      subject: ""
+      subject: ""                                                                                   #translation_missing
       body:
         wallet_credit_html: "Se han ingresado %{AMOUNT} por el administrador."
 

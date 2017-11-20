@@ -32,8 +32,10 @@ class API::EventsController < API::ApiController
   def upcoming
     limit = params[:limit]
     @events = Event.includes(:event_image, :event_files, :availability, :category)
+                   .where('events.nb_total_places != -1 OR events.nb_total_places IS NULL')
                    .where('availabilities.start_at >= ?', Time.now)
-                   .order('availabilities.start_at ASC').references(:availabilities).limit(limit)
+                   .order('availabilities.start_at ASC').references(:availabilities)
+                   .limit(limit)
   end
 
   def show

@@ -3,6 +3,7 @@
     <option value="" translate>{{ 'all_events' }}</option>
     <option value="passed" translate>{{ 'passed_events' }}</option>
     <option value="future" translate>{{ 'events_to_come' }}</option>
+    <option value="future_asc" translate>{{ 'events_to_come_asc' }}</option>
   </select>
 </div>
 
@@ -11,25 +12,49 @@
   <tr>
     <th style="width:30%" translate>{{ 'title' }}</th>
     <th style="width:30%" translate>{{ 'dates' }}</th>
-    <th style="width:40%"></th>
+	  <th style="width:10%" translate>{{ 'booking' }}</th>
+    <th style="width:30%"></th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="event in events">
-    <td>
+  <tr height="80px" ng-repeat="event in events">
+
+    <td style="vertical-align:middle">
       <a ui-sref="app.public.events_show({id: event.id})">{{ event.title }} </a>
     </td>
-    <td>
-      <span> {{ 'from_DATE' | translate:{DATE:(event.start_date | amDateFormat:'LL')} }} <span class="text-sm font-thin" translate>{{ 'to_date' }}</span> {{event.end_date | amDateFormat:'LL'}}</span>
-      <br/>
-      <span ng-if="event.all_day == 'true'" translate>{{ 'all_day' }}</span>
-                  <span ng-if="event.all_day == 'false'">
-                    {{ 'from_TIME' | translate:{TIME:(event.start_date | amDateFormat:'LT')} }}
-                    <span class="text-sm font-thin" translate>{{ 'to_time' }}</span>
-                    {{event.end_date | amDateFormat:'LT'}}
-                  </span>
+
+    <td style="vertical-align:middle">
+
+      <!--One day event-->
+	  <span ng-if="(event.start_date | amDateFormat:'LL')==(event.end_date | amDateFormat:'LL')">
+		{{ 'on_DATE' | translate:{DATE:(event.start_date | amDateFormat:'LL')} }}
+        <span ng-if="event.all_day == 'false'">
+          {{ 'from_TIME' | translate:{TIME:(event.start_date | amDateFormat:'LT')} }}
+          <span class="text-sm font-thin" translate>{{ 'to_time' }}</span>
+          {{event.end_date | amDateFormat:'LT'}}
+        </span>
+	  </span>
+
+      <!--Multiple days event-->
+	  <span ng-if="(event.start_date | amDateFormat:'LL')!=(event.end_date | amDateFormat:'LL')">
+	    {{'from_DATE' | translate:{DATE:(event.start_date | amDateFormat:'LL')} }}
+	    {{'to_date' | translate}} {{event.end_date | amDateFormat:'LL'}}
+        <br ng-if="event.all_day == 'false'"/>
+        <span ng-if="event.all_day == 'false'">
+          {{ 'from_TIME' | translate:{TIME:(event.start_date | amDateFormat:'LT')} }}
+          <span class="text-sm font-thin" translate>{{ 'to_time' }}</span>
+          {{event.end_date | amDateFormat:'LT'}}
+        </span>
+      </span>
     </td>
-    <td>
+
+	<td style="vertical-align:middle">
+	  <span class="ng-binding" ng-if="event.nb_total_places > 0">{{ event.nb_total_places - event.nb_free_places }} / {{ event.nb_total_places }}</span>
+	  <span class="badge font-sbold cancelled" ng-if="event.nb_total_places == -1" translate>{{ 'cancelled' }}</span>
+      <span class="badge font-sbold" ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
+	</td>
+
+    <td style="vertical-align:middle">
       <div class="buttons">
         <a class="btn btn-default" ui-sref="app.admin.event_reservations({id: event.id})">
           <i class="fa fa-bookmark"></i> {{ 'view_reservations' | translate }}

@@ -127,13 +127,14 @@ fr:
         # résumé des prochains évènements sur la page d'acceuil
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
-        from_date_to_date: "Du {{START}} au {{END}}"  # angular interpolation
-        on_the_date: "Le {{DATE}}"  # angular interpolation
-        from_time_to_time: "De {{START}} à {{END}}"  # angular interpolation
-        free_entry: "Entrée libre"
+        from_date_to_date: "du {{START}} au {{END}}"  # angular interpolation
+        on_the_date: "le {{DATE}}"                    # angular interpolation
+        from_time_to_time: "de {{START}} à {{END}}"   # angular interpolation
+        free_entry: "Accès libre"
         free_admission: "Entrée gratuite"
-        full_price: "Plein tarif"
+        full_price: "Plein tarif : "
         event_full: "Événement complet"
+        still_available: "Place(s) disponible(s) :"
 
       projects_list:
         # galerie des projets
@@ -235,6 +236,11 @@ fr:
         the_fablab_s_events: "Les évènements du Fab Lab"
         all_categories: "Toutes les catégories"
         for_all: "Tout public"
+        sold_out: "Complet"
+        cancelled: "Annulé"
+        free_admission: "Gratuit"
+        still_available: "place(s) disponible(s)"
+        free_entry: "Accès libre"
 
       events_show:
         # détails d'un événement et réservation
@@ -245,8 +251,9 @@ fr:
         ending: "Fin :"
         opening_hours: "Horaires :"
         tickets_still_availables: "Places encore disponibles :"
-        sold_out: "Événement complet."
-        free_entry: "Entrée libre"
+        sold_out: "Événement complet"
+        free_entry: "Accès libre"
+        cancelled: "Annulé"
         ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Offrir cette réservation"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"

@@ -59,6 +59,8 @@ es:
           unlocking_failed: "Ocurrió un error. El desbloqueo de la ranura ha fallado"
           reservations_locked: "La reserva está bloqueada"
           unlockable_because_reservations: "No se puede bloquear la reserva en esta ranura porque existen algunas reservas no canceladas."
+          delete_slot: "Delete this slot"                                                          # translation_missing
+          do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
 
       project_elements:
         # management of the projects' components
@@ -71,6 +73,9 @@ es:
       trainings:
         # track and monitor the trainings
         training: "Formación"
+        add_a_new_training: "Add a new training"                                                   # translation_missing
+        associated_machines: "Associated machines"                                                 # translation_missing
+        number_of_tickets: "Number of tickets"                                                     # translation_missing
         year_NUMBER: "Año {{NUMBER}}"  # angular interpolation
         month_of_NAME: "Mes of {{NAME}}"  # angular interpolation
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"  # messageFormat interpolation
@@ -87,11 +92,16 @@ es:
         training_successfully_deleted: "Entrenamiento eliminado correctamente."
         unable_to_delete_the_training_because_some_users_alredy_booked_it: "No se puede eliminar el entrenamiento porque algunos usuarios ya lo han reservado."
         do_you_really_want_to_delete_this_training: "¿De verdad quieres eliminar este entrenamiento?"
+        status_enabled: "Enabled"                                                                  # translation_missing
+        status_disabled: "Disabled"                                                                # translation_missing
+        status_all: "All"                                                                          # translation_missing
 
       trainings_new:
         # create a new training
-        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Tenga cuidado, al crear una formación, sus precios de reserva se inicializan en cero."
-        dont_forget_to_change_them_before_creating_slots_for_this_training: "No olvides cambiarlos antes de crear espacios para esta formación."
+        trainings_new:
+          add_a_new_training: "Add a new training"                                                 # translation_missing
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Tenga cuidado, al crear una formación, sus precios de reserva se inicializan en cero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "No olvides cambiarlos antes de crear espacios para esta formación."
 
       events:
         # events tracking and management
@@ -101,8 +111,15 @@ es:
         all_events: "Todos los eventos"
         passed_events: "Eventos pasados"
         events_to_come: "Eventos por venir"
-        from_DATE: "Desde {{DATE}}"  # angular interpolation
-        from_TIME: "Desde {{TIME}}"  # angular interpolation
+        events_to_come_asc: "Events to come | chronological order"
+        on_DATE: "on {{DATE}}"  # angular interpolation                                            # translation_missing
+        from_DATE: "Desde {{DATE}}"  # angular interpolation                                       # translation_missing
+        from_TIME: "Desde {{TIME}}"  # angular interpolation                                       # translation_missing
+        booking: "Booking"                                                                         # translation_missing
+        sold_out: "Sold out"                                                                       # translation_missing
+        cancelled: "Cancelled"                                                                     # translation_missing
+        free_entry: "Free entry"                                                                   # translation_missing
+        free_admission: "Free admission"                                                           # translation_missing
         view_reservations: "Ver reservas"
         categories: "Categorías"
         add_a_category: "Añadir una categoría"
@@ -194,6 +211,7 @@ es:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Error: un crédito que vincula esta máquina con esa suscripción ya existe."
           changes_have_been_successfully_saved: "Los cambios se han guardado correctamented."
           credit_was_successfully_saved: "El crédito se ha guardado correctamente."
+          error_creating_credit: "Unable to create credit, an error occurred"                      # translation_missing
           do_you_really_want_to_delete_this_subscription_plan: "¿Realmente desea eliminar este plan de suscripción?"
           subscription_plan_was_successfully_deleted: "Plan de suscripción eliminado correctamente."
           unable_to_delete_the_specified_subscription_an_error_occurred: "No se pudo eliminar la suscripción especificada, se produjo un error.."
@@ -228,6 +246,9 @@ es:
           add_a_space_credit: "Añadir un crédito de espacio"
           space: "Espacio"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error: un crédito que vincula este espacio con esa suscripción ya existe."
+          status_enabled: "Enabled"                                                                # translation_missing
+          status_disabled: "Disabled"                                                              # translation_missing
+          status_all: "All"                                                                        # translation_missing
 
       coupons_new:
         # ajouter un code promotionnel
@@ -359,7 +380,7 @@ es:
         an_error_occurred_while_activating_the_invoicing_code: "Se ha producido un error al activar el código de facturación."
         order_number_successfully_saved: "Número de pedido guardado correctamente."
         an_error_occurred_while_saving_the_order_number: "Se ha producido un error al guardar el número de orden."
-        VAT_rate_successfully_saved: "VAT rate successfully saved."
+        VAT_rate_successfully_saved: "VAT rate successfully saved."                                # translation_missing
         an_error_occurred_while_saving_the_VAT_rate: "La tasa de IVA se ha guardado correctamente."
         VAT_successfully_activated: "IVA activado correctamente."
         VAT_successfully_disabled: "IVA desactivado correctamente."
@@ -391,14 +412,8 @@ es:
         this_may_take_a_while_please_wait: "Advertencia: esto puede tomar un tiempo, por favor, tenga paciencia."
         administrator_successfully_deleted: "Administrador eliminado correctamente."
         unable_to_delete_the_administrator: "No se puede eliminar el administrador."
-        add_a_group: "Añadir un grupo"
-        group_name: "Nombre del grupo"
         changes_successfully_saved: "Cambios guardados correctamente."
         an_error_occurred_while_saving_changes: "Se ha producido un error al guardar los cambios."
-        new_group_successfully_saved: "Nuevo grupo guardado correctamente."
-        an_error_occurred_when_saving_the_new_group: "Se ha producido un error al guardar el nuevo grupo."
-        group_successfully_deleted: "Grupo eliminado correctamente."
-        unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "No se puede eliminar el grupo porque algunos usuarios y / o grupos todavía están vinculados a él."
         add_a_tag: "Añadir una etiqueta"
         tag_name: "Nombre de la etiqueta"
         new_tag_successfully_saved: "Nueva etiqueta guardada correctamente."
@@ -418,6 +433,23 @@ es:
         an_error_occurred_unable_to_delete_the_specified_provider: "Se ha producido un error: no se puede eliminar el proveedor especificado."
         local_database: "Base de datos local"
         o_auth2: "OAuth 2.0"
+        group_form:
+          add_a_group: "Añadir un grupo"
+          group_name: "Nombre del grupo"
+          disable: "Disable"                                                                       # translation_missing
+          enable: "Enable"                                                                         # translation_missing
+          changes_successfully_saved: "Changes successfully saved."                                # translation_missing
+          an_error_occurred_while_saving_changes: "An error occurred when saving changes."         # translation_missing
+          new_group_successfully_saved: "Nuevo grupo guardado correctamente."
+          an_error_occurred_when_saving_the_new_group: "Se ha producido un error al guardar el nuevo grupo."
+          group_successfully_deleted: "Grupo eliminado correctamente."
+          unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "No se puede eliminar el grupo porque algunos usuarios y / o grupos todavía están vinculados a él."
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation                                        # translation_missing
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation                                                  # translation_missing
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation    # translation_missing
+          status_enabled: "Enabled"                                                                # translation_missing
+          status_disabled: "Disabled"                                                              # translation_missing
+          status_all: "All"                                                                        # translation_missing
 
       members_new:
         # add a member
@@ -440,8 +472,8 @@ es:
         events: "Eventos"
         next_events: "Próximos eventos"
         no_upcoming_events: "No hay próximos eventos"
-        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
-        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation
+        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation       # translation_missing
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation                     # translation_missing
         passed_events: "Eventos pasados"
         invoices: "Facturas"
         invoice_#: "Factura #"
@@ -449,7 +481,7 @@ es:
         expiration_date: "Fecha de caducidad"
         you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days: "Usted intencionalmente decide extender la suscripción del usuario ofreciéndole días libres."
         you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Usted intencionalmente decide extender la suscripción del usuario al cobrarle de nuevo por su suscripción actual."
-        until_(expiration_date): "Until (expiration date):"
+        until_(expiration_date): "Until (expiration date):"                                        # translation_missing
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Ha cambiado correctamente la fecha de caducidad de la suscripción del usuario"
         a_problem_occurred_while_saving_the_date: "Se ha producido un problema al guardar la fecha."
         new_subscription: "Nueva suscripción"
@@ -546,8 +578,8 @@ es:
           customize_information_messages: "Personalizar mensajes de información"
           message_of_the_machine_booking_page: "Mensaje de la página de reserva de la máquina:"
           type_the_message_content: "Escriba el contenido del mensaje"
-          warning_message_of_the_training_booking_page: "Warning message of the training booking page:"
-          information_message_of_the_training_reservation_page: "Information message of the training reservation page:"
+          warning_message_of_the_training_booking_page: "Warning message of the training booking page:"                                          # translation_missing
+          information_message_of_the_training_reservation_page: "Information message of the training reservation page:"                          # translation_missing
           message_of_the_subscriptions_page: "Mensaje de advertencia de la página de reserva de formación:"
           message_of_the_events_page: "Mensaje de la página de eventos:"
           message_of_the_spaces_page: "Mensaje de la página de espacios:"
@@ -574,7 +606,7 @@ es:
           news_of_the_home_page: "Noticias de la página principal:"
           type_your_news_here: "Escriba sus noticias aquí"
           leave_it_empty_to_not_bring_up_any_news_on_the_home_page: "Déjelo vacío para no abrir ninguna noticia en la página principal"
-          twitter_stream: "Twitter Stream:"
+          twitter_stream: "Twitter Stream:"                                                        # translation_missing
           name_of_the_twitter_account: "Nombre de la cuenta de Twitter"
           title_of_the_about_page: "Título de la página Acerca de"
           shift_enter_to_force_carriage_return: "MAYÚS + ENTRAR para forzar el retorno de carro"
@@ -610,7 +642,7 @@ es:
           main_color: "Color principal"
           secondary_color: "color secundario"
           home_blogpost: "Resumen de la página de inicio"
-          twitter_name: "Twitter feed name"
+          twitter_name: "Twitter feed name"                                                        # translation_missing
           about_title: "Título de la página \"Acerca de\""
           about_body: "Contenido de la página \"Acerca de\""
           about_contacts: "Página contactos\"Acerca de\""
@@ -645,12 +677,12 @@ es:
         # create a new space
         space_new:
           add_a_new_space: "Añadir un espacio nuevo"
-          watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: ¡Cuidado! Al crear un nuevo espacio, sus precios se inicializan en 0 para todas las suscripciones."
+          watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "¡Cuidado! Al crear un nuevo espacio, sus precios se inicializan en 0 para todas las suscripciones."
           consider_changing_its_prices_before_creating_any_reservation_slot: "Considere cambiar sus precios antes de crear cualquier espacio de reserva."
           add_this_space: "Añadir este espacio"
 
       space_edit:
         # modify an exiting space
         space_edit:
-          edit_the_space_NAME: "Edit the space: {{NAME}}"  # angular interpolation
+          edit_the_space_NAME: "Edit the space: {{NAME}}"  # angular interpolation                 # translation_missing
           validate_the_changes: "Validar los cambios"

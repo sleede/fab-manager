@@ -134,6 +134,7 @@ es:
         free_admission: "Admisión gratuita"
         full_price: "Precio final"
         event_full: "Evento lleno"
+        still_available: "Available place(s)"                                                       #translation_missing
 
       projects_list:
         # projects gallery
@@ -175,9 +176,14 @@ es:
 
       machines_list:
         # list of machines
-        the_fablab_s_machines: "Las máquinas del FabLab"
-        add_a_machine: "Añadir una máquina"
-        _or_the_: " o el "
+        machines_list:
+          the_fablab_s_machines: "Las máquinas del FabLab"
+          add_a_machine: "Añadir una máquina"
+          book: "Book"                                                                              #translation_missing
+          _or_the_: " o el "
+          status_enabled: "Enabled"                                                                 #translation_missing
+          status_disabled: "Disabled"                                                               #translation_missing
+          status_all: "All"                                                                         #translation_missing
 
       machines_show:
         # details of a machine
@@ -228,6 +234,11 @@ es:
         the_fablab_s_events: "Los eventos del FabLab"
         all_categories: "Todas las categorías"
         for_all: "Para todo"
+        sold_out: "Sold Out"                                                                        #translation_missing
+        cancelled: "Cancelled"                                                                      #translation_missing
+        free_admission: "Free admission"                                                            #translation_missing
+        still_available: "available place(s)"                                                       #translation_missing
+        free_entry: "Free entry"                                                                    #translation_missing
 
       events_show:
         # details and booking of an event
@@ -240,6 +251,7 @@ es:
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
         free_entry: "Entrada gratuita"
+        cancelled: "Cancelled"                                                                      #translation_missing
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
@@ -247,6 +259,10 @@ es:
         book: "Reservar"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
+        confirmation_required: "Confirmation required"                                              #translation_missing
+        do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"        #translation_missing
+        event_successfully_deleted: "Event successfully deleted"                                    #translation_missing
+        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."             #translation_missing
 
       calendar:
         # public calendar
@@ -261,8 +277,13 @@ es:
 
       spaces_list:
         # list of spaces
-        the_spaces: "Espacios"
-        add_a_space: "Añadir espacios"
+        spaces_list:
+          the_spaces: "Espacios"
+          add_a_space: "Añadir espacios"
+          status_enabled: "Enabled"                                                                 #translation_missing
+          status_disabled: "Disabled"                                                               #translation_missing
+          status_all: "All"                                                                         #translation_missing
+          book: "Book"                                                                              #translation_missing
 
       space_show:
         # display the details of a space

@@ -98,7 +98,8 @@
 
         <div class="text-sm m-b" ng-if="event.nb_total_places">
           <div ng-if="event.nb_free_places > 0">{{ 'tickets_still_availables' | translate }} <span  class="font-sbold">{{event.nb_free_places}}</span></div>
-          <div ng-if="event.nb_free_places == 0"><span class="badge font-sbold" translate>{{ 'sold_out' }}</span></div>
+          <div ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0"><span class="badge font-sbold" translate>{{ 'sold_out' }}</span></div>
+          <div ng-if="event.nb_total_places == -1"><span class="badge font-sbold" translate>{{ 'cancelled' }}</span></div>
         </div>
         <div class="text-sm m-b" ng-if="!event.nb_total_places">
           <div><span class="badge font-sbold" translate>{{ 'free_entry' }}</span></div>

@@ -134,6 +134,7 @@ en:
         free_admission: "Free admission"
         full_price: "Full price"
         event_full: "Event full"
+        still_available: "Available place(s)"
 
       projects_list:
         # projects gallery
@@ -233,6 +234,11 @@ en:
         the_fablab_s_events: "The Fablab's events"
         all_categories: "All categories"
         for_all: "For all"
+        sold_out: "Sold Out"
+        cancelled: "Cancelled"
+        free_admission: "Free admission"
+        still_available: "available place(s)"
+        free_entry: "Free entry"
 
       events_show:
         # details and booking of an event
@@ -245,6 +251,7 @@ en:
         tickets_still_availables: "Tickets still available:"
         sold_out: "Sold out."
         free_entry: "Free entry"
+        cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Make a gift of this reservation"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"

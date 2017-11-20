@@ -173,16 +173,24 @@ Application.Filters.filter "eventsReservationsFilter", [ ->
       filteredElements = []
       angular.forEach elements, (element)->
         element.start_at = element.availability.start_at if angular.isUndefined(element.start_at)
+        element.end_at = element.availability.end_at if angular.isUndefined(element.end_at)
         switch selectedScope
           when "future"
-            if new Date(element.start_at) > new Date
+            if new Date(element.end_at) >= new Date
+              filteredElements.push(element)
+          when "future_asc"
+            if new Date(element.end_at) >= new Date
               filteredElements.push(element)
           when "passed"
-            if new Date(element.start_at) <= new Date
+            if new Date(element.end_at) <= new Date
               filteredElements.push(element)
           else
             return []
-      filteredElements
+      switch selectedScope
+        when "future_asc"
+          filteredElements.reverse()
+        else
+          filteredElements
     else
       elements
 ]
