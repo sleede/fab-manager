@@ -42,6 +42,11 @@ server {
     root /usr/src/app/public/;
     rewrite ^(.*)$ /maintenance.html break;
   }
+  
+  location /.well-known/acme-challenge {
+    root /etc/letsencrypt/webrootauth;
+    default_type "text/plain";
+  }
 
   # no spam bot
   if ($http_referer ~* (guardlink.org|free-share-buttons|social-buttons|buy-cheap-online.info|social-buttons.com|free-share-buttons.com|darodar.com|blackhatworth.com|hulfingtonpost.com|priceg.com|semalt.com|imaspammer.com|iedit.ilovevitaly.com|7makemoneyonline.com|iedit.ilovevitaly.com|7makemoneyonline.com|gamersyde.com|iloveitaly.com|econom.co|semalt.com|forum.topic44637676.darodar.com|darodar.com|iskalko.ru|ilovevitaly.ru|ilovevitaly.com|ilovevitaly.co|o-o-8-o-o.ru|o-o-6-o-o.ru|buttons-for-website.com|semalt.semalt.com|cenoval.ru|priceg.com|darodar.com|cenokos.ru|seoexperimenty.ru|gobongo.info|vodkoved.ru|adcash.com|websocial.me|cityadspix.com|luxup.ru|ykecwqlixx.ru|superiends.org|slftsdybbg.ru|edakgfvwql.ru|socialseet.ru|screentoolkit.com|econom.co|semalt.com|savetubevideo.com|shopping.ilovevitaly.com|iedit.ilovevitaly.com|forum.topic52548358.darodar.com|forum.topic53813291.darodar.com|share-buttons.com|event-tracking.com|success-seo.com|free-floating-buttons.com|get-free-social-traffic.com|chinese-amezon.com|get-free-traffic-now.com|free-social-buttons.com|videos-for-your-business.com)) { return 403; }
