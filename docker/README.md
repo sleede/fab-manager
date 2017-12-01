@@ -196,7 +196,7 @@ docker-compose pull
 ```bash
 docker-compose run --rm fabmanager bundle exec rake db:create # create the database
 docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
-docker-compose run --rm -e ADMIN_EMAIL=xxx ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed # seed the database
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed # seed the database
 ```
 
 ### build assets
@@ -273,7 +273,7 @@ sudo systemctl start letsencrypt.timer
  
 ### Example of command passing env variables
 
-docker-compose run --rm -e ADMIN_EMAIL=xxx ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
 
 ## update Fabmanager
 
