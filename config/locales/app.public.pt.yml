@@ -134,7 +134,7 @@ pt:
           free_admission: "Admissão grátis"
           full_price: "Valor inteira"
           event_full: "Evento lotado"
-          still_available: "Available place(s)"           # traduction_missing
+          still_available: "Locais disponíveis"
 
         projects_list:
           # projects gallery
