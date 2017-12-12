@@ -111,15 +111,15 @@ pt:
         all_events: "Todos eventos"
         passed_events: "Eventos anteriores"
         events_to_come: "Eventos futuros"
-        events_to_come_asc: "Eventos futuros | ordem cronológica"	#translation_fixed
-        on_DATE: "No {{DATE}}"	  # angular interpolation 			#translation_fixed
+        events_to_come_asc: "Eventos futuros | ordem cronológica"
+        on_DATE: "No {{DATE}}"	  # angular interpolation
         from_DATE: "Em {{DATE}}"  # angular interpolation 
         from_TIME: "Ás {{TIME}}"  # angular interpolation 
-        booking: "Reserva"											#translation_fixed
-        sold_out: "Esgotado"										#translation_fixed
-        cancelled: "Cancelado"										#translation_fixed
-        free_entry: "Entrada gratuita"									#translation_fixed
-        free_admission: "Admissão gratuita"							#translation_fixed
+        booking: "Reserva"
+        sold_out: "Esgotado"
+        cancelled: "Cancelado"
+        free_entry: "Entrada gratuita"
+        free_admission: "Admissão gratuita"
         view_reservations: "Ver reservas"
         categories: "Categorias"
         add_a_category: "Adicionar categoria"
