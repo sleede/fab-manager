@@ -235,9 +235,9 @@ pt:
           all_categories: "Todas categorias"
           for_all: "Para todos"
           sold_out: "Esgotado."
-          cancelled: "Cancelled"                        #translation_missing
+          cancelled: "Cancelado"
           free_admission: "Admissão grátis"
-          still_available: "available place(s)"         #translation_missing
+          still_available: "lugares disponíveis"
           free_entry: "Entrada franca"
 
         events_show:
@@ -251,7 +251,7 @@ pt:
           tickets_still_availables: "Tickets ainda disponíveis:"
           sold_out: "Esgotado."
           free_entry: "Entrada franca"
-          cancelled: "Cancelled"                        #translation_missing
+          cancelled: "Cancelado"
           ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
           make_a_gift_of_this_reservation: "Doe esta reserva"
           you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
