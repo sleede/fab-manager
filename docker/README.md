@@ -9,15 +9,15 @@ You will need to be root through the rest of the setup.
 ##### Table of contents
 
 1. [Preliminary steps](#preliminary-steps)<br/>
-1.1. setup the server<br/>
-1.2. buy a domain name and link it with the droplet<br/>
-1.3. connect to the droplet via SSH<br/>
-1.4. prepare server<br/>
-1.5. setup folders and env file<br/>
+1.1. Setup the server<br/>
+1.2. Setup the domain name<br/>
+1.3. Connect through SSH<br/>
+1.4. Prepare the server<br/>
+1.5. Setup folders and env file<br/>
 1.6. setup nginx file<br/>
 1.7. SSL certificate with LetsEncrypt<br/>
 1.8. requirements
-2. [Install Fabmanager](#install-fabmanager)<br/>
+2. [Install Fab-manager](#install-fabmanager)<br/>
 2.1. Add docker-compose.yml file<br/>
 2.2. pull images<br/>
 2.3. setup database<br/>
@@ -30,48 +30,73 @@ You will need to be root through the rest of the setup.
 5.1. Steps<br/>
 5.2. Good to know
 
+<a name="preliminary-steps"></a>
 ## Preliminary steps
 
-### setup the server
+### Setup the server
 
-Go to [DigitalOcean](https://www.digitalocean.com/) and create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"** (Docker and Docker-compose are preinstalled).
-You need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
+There are many hosting providers on the internet, providing affordable virtual private serveurs (VPS).
+Here's a non exhaustive list:
+- [DigitalOcean](https://www.digitalocean.com/pricing/#droplet)
+- [OVH](https://www.ovh.com/fr/vps/) 
+- [Amazon](https://aws.amazon.com/fr/ec2/)
+- [Gandi](https://v4.gandi.net/hebergement/serveur/prix)
+- [Ikoula](https://express.ikoula.com/fr/serveur-virtuel)
+- [1&1](https://www.1and1.fr/serveurs-virtuels)
+- [GoDaddy](https://fr.godaddy.com/hosting/vps-hosting)
+- [and many others...](https://www.google.fr/search?q=vps+hosting)
+Choose one, depending on your budget, on the server's location, on the uptime guarantee, etc.
+
+You will need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
 We recommend 4 GB RAM for larger communities.
-Choose a datacenter. Set the hostname as your domain name.
 
-### buy a domain name and link it with the server
+On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"**. 
+This way, Docker and Docker-compose are preinstalled.
+Choose a datacenter and set the hostname as your domain name.
 
-1. Buy a domain name on [OVH](https://www.ovh.com/fr/)
-2. Replace the IP address of the domain with the droplet's IP (you can enable the flexible ip and use it)
+With other providers, choose a [supported operating system](../README.md#software-stack) and install docker on it:
+- [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) 
+- [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+Then install [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Setup the domain name
+
+There are many domain name registrars on the internet, you may choose one that fit your needs.
+You can find an exhaustive list [on the ICANN website](https://www.icann.org/registrar-reports/accredited-list.html)
+
+1. Once done, buy a domain name on it 
+2. Replace the IP address of the domain with the IP address of your VPS (This is a DNS record type A)
 3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient. 
 
-### connect to the server via SSH
+### Connect through SSH
 
 You can already connect to the server with this command: `ssh root@server-ip`. When DNS propagation will be done, you will be able to
 connect to the server with `ssh root@your-domain-name`.
 
-### prepare server
+### Prepare the server
 
-We recommend you to :
-- ugprade your system
-- add at least 2GB of swap
-- verify that you are using a connection via an SSH key. If so, you can set the root passord (for the debug console) and disable password connection.
-To do this, you can use the following script :
+Before installing fab-manager, we recommend you to:
+- Upgrade your system
+- Setup the server timezone
+- Add at least 2GB of swap memory
+- Protect your SSH connection forcing it through a RSA key
+
+You can run the following script to easily perform all these operations:
 
 ```bash
 cd /root
-git clone https://github.com/sleede/lazyscripts.git
-cd lazyscripts/
-chmod a+x prepare-vps.sh
+wget https://raw.githubusercontent.com/sleede/lazyscripts/master/prepare-vps.sh
+chmod +x prepare-vps.sh
 ./prepare-vps
 ```
 
 
-### setup folders and env file
+### Setup folders and env file
 
 Create the config folder:
 ```bash
 mkdir -p /apps/fabmanager/config
+cp docker/env.exemple /apps/fabmanager/config/env
 ```
 
 Make a copy of the **docker/env.example** file and use it as a starting point.
