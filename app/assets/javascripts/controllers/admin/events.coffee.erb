@@ -171,7 +171,7 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   $scope.events = eventsPromise
 
   ## Current virtual page
-  $scope.page = 2
+  $scope.page = 1
 
   ## Temporary datastore for creating new elements
   $scope.inserted =
@@ -199,10 +199,10 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   # Adds a bucket of events to the bottom of the page, grouped by month
   ##
   $scope.loadMoreEvents = ->
-    Event.query {page: $scope.page, scope: $scope.eventsScope.selected}, (data)->
+    $scope.page += 1
+    Event.query { page: $scope.page, scope: $scope.eventsScope.selected }, (data)->
       $scope.events = $scope.events.concat data
       paginationCheck(data, $scope.events)
-    $scope.page += 1
 
 
   ##
@@ -349,10 +349,10 @@ Application.Controllers.controller "AdminEventsController", ["$scope", "$state",
   # We request the first page of corresponding events to the API
   ##
   $scope.changeScope = ->
-    Event.query {page: 0, scope: $scope.eventsScope.selected}, (data)->
+    Event.query {page: 1, scope: $scope.eventsScope.selected}, (data)->
       $scope.events = data
       paginationCheck(data, $scope.events)
-    $scope.page = 0
+    $scope.page = 1
 
 
 
