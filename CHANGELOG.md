@@ -2,6 +2,12 @@
 
 ## next release
 
+- Updated Portuguese translations (#91)
+- Added Spanish translations (#87)
+- Added Central Africa & Cameroon currency symbol (#90)
+- Fix nginx configuration to allow initial Let's Encrypt configuration (#92)
+- Events: open api and monitor improvement (#79)
+- Fix a bug: refund an invoice with a subscription and disabling it a the same time cause the resulting PDF to display the wrong dates
 - Fixed deploy instructions with docker-compose
 
 ## v2.6.0 2017 November 13

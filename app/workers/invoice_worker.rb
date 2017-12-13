@@ -1,10 +1,10 @@
 class InvoiceWorker
   include Sidekiq::Worker
 
-  def perform(invoice_id)
+  def perform(invoice_id, subscription_expiration_date)
     # generate a invoice
     invoice = Invoice.find invoice_id
-    pdf = ::PDF::Invoice.new(invoice).render
+    pdf = ::PDF::Invoice.new(invoice, subscription_expiration_date).render
 
     # store invoice on drive
     File.binwrite(invoice.file, pdf)

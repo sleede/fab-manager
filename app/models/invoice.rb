@@ -212,7 +212,7 @@ class Invoice < ActiveRecord::Base
     unless Rails.env.test?
       puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), invoiced_type(#{invoiced_type}), user_id(#{user_id})"
     end
-    InvoiceWorker.perform_async(id)
+    InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
 
   ##
