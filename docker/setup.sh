@@ -2,7 +2,7 @@
 
 prepare_config()
 {
-  FABMANAGER_PATH = ${1:-/apps/fabmanager/config}
+  FABMANAGER_PATH=${1:-/apps/fabmanager}
 
   mkdir -p "$FABMANAGER_PATH/example"
 
