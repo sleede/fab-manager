@@ -10,6 +10,7 @@
 - Fix a bug: refund an invoice with a subscription and disabling it a the same time cause the resulting PDF to display the wrong dates
 - Fix a security issue: in development environments, web-console has a vulnerability as described in CVE-2015-3224
 - Fixed deploy instructions with docker-compose
+- Updated docker installation instructions
 
 ## v2.6.0 2017 November 13
 
