@@ -67,7 +67,7 @@ class ActiveSupport::TestCase
     assert_not_nil invoice, 'Invoice was not created'
 
     invoice_worker = InvoiceWorker.new
-    invoice_worker.perform(invoice.id)
+    invoice_worker.perform(invoice.id, invoice&.user&.subscription&.expired_at)
 
     assert File.exist?(invoice.file), 'Invoice PDF was not generated'
 
