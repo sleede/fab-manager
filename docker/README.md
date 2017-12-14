@@ -47,6 +47,7 @@ Here's a non exhaustive list:
 - [1&1](https://www.1and1.fr/serveurs-virtuels)
 - [GoDaddy](https://fr.godaddy.com/hosting/vps-hosting)
 - [and many others...](https://www.google.fr/search?q=vps+hosting)
+
 Choose one, depending on your budget, on the server's location, on the uptime guarantee, etc.
 
 You will need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
@@ -59,6 +60,7 @@ Choose a datacenter and set the hostname as your domain name.
 With other providers, choose a [supported operating system](https://github.com/LaCasemate/fab-manager/blob/master/README.md#software-stack) and install docker on it:
 - [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) 
 - [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+
 Then install [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Setup the domain name
@@ -133,6 +135,7 @@ Customize the following values:
 ### SSL certificate with LetsEncrypt
 
 **FOLLOW THOSE INSTRUCTIONS ONLY IF YOU WANT TO USE SSL**.
+
 If you have chosen the SSL configuration at the previous point, you must follow these instructions to make it work.
 
 Let's Encrypt is a new Certificate Authority that is free, automated, and open.
@@ -161,7 +164,7 @@ Run `docker pull quay.io/letsencrypt/letsencrypt:latest`
 
 Create file (with sudo) /etc/systemd/system/letsencrypt.service and paste the following configuration into it:
 
-```bash
+```systemd
 [Unit]
 Description=letsencrypt cert update oneshot
 Requires=docker.service
@@ -173,7 +176,7 @@ ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1
 ```
 
 Create file (with sudo) /etc/systemd/system/letsencrypt.timer and paste the following configuration into it:
-```bash
+```systemd
 [Unit]
 Description=letsencrypt oneshot timer  
 Requires=docker.service
