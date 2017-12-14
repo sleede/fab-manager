@@ -19,8 +19,9 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
+        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
+        UTC 2017","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -29,11 +30,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Sep 2017 08:54:39 GMT
+      - Thu, 14 Dec 2017 15:16:24 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '3521'
+      - '3543'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,11 +50,11 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_FQpTWfxasxmQeV
+      - req_6LXPuSODUn5uJ2
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
+      - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |
@@ -63,7 +64,7 @@ http_interactions:
           "account_balance": 0,
           "created": 1460026822,
           "currency": "usd",
-          "default_source": "card_1B3Kvf2sOmf47Nz9casnR7cT",
+          "default_source": "card_1BYyQ32sOmf47Nz9BKCE2qig",
           "delinquent": false,
           "description": "Lucile Seguin",
           "discount": null,
@@ -75,7 +76,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_1B3Kvf2sOmf47Nz9casnR7cT",
+                "id": "card_1BYyQ32sOmf47Nz9BKCE2qig",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -108,25 +109,26 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "sub_BQBIpVl9mVtxpX",
+                "id": "sub_BwsAa2guSea26d",
                 "object": "subscription",
                 "application_fee_percent": null,
                 "billing": "charge_automatically",
                 "cancel_at_period_end": true,
-                "canceled_at": 1505724520,
-                "created": 1505724517,
-                "current_period_end": 1508316517,
-                "current_period_start": 1505724517,
+                "canceled_at": 1513264490,
+                "created": 1513264485,
+                "current_period_end": 1515942885,
+                "current_period_start": 1513264485,
                 "customer": "cus_8E2ys9zDZgetWX",
+                "days_until_due": null,
                 "discount": null,
                 "ended_at": null,
                 "items": {
                   "object": "list",
                   "data": [
                     {
-                      "id": "si_1B3Kvh2sOmf47Nz9KDhFJgbP",
+                      "id": "si_BwsA4akiGbwgjQ",
                       "object": "subscription_item",
-                      "created": 1505724517,
+                      "created": 1513264486,
                       "metadata": {},
                       "plan": {
                         "id": "mensuel-standard-month-20160404171519",
@@ -147,7 +149,7 @@ http_interactions:
                   ],
                   "has_more": false,
                   "total_count": 1,
-                  "url": "/v1/subscription_items?subscription=sub_BQBIpVl9mVtxpX"
+                  "url": "/v1/subscription_items?subscription=sub_BwsAa2guSea26d"
                 },
                 "livemode": false,
                 "metadata": {},
@@ -166,7 +168,7 @@ http_interactions:
                   "trial_period_days": null
                 },
                 "quantity": 1,
-                "start": 1505724517,
+                "start": 1513264485,
                 "status": "active",
                 "tax_percent": null,
                 "trial_end": null,
@@ -179,7 +181,7 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Mon, 18 Sep 2017 08:54:39 GMT
+  recorded_at: Thu, 14 Dec 2017 15:16:25 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8E2ys9zDZgetWX/subscriptions
@@ -199,8 +201,9 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-33-generic (buildd@lgw01-22) (gcc version 5.4.0 20160609 (Ubuntu
-        5.4.0-6ubuntu1~16.04.4) ) #37~16.04.1-Ubuntu SMP Fri Aug 11 14:07:24 UTC 2017","hostname":"Sleede-SylvainPC"}'
+        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
+        UTC 2017","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '68'
   response:
@@ -211,7 +214,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Sep 2017 08:54:39 GMT
+      - Thu, 14 Dec 2017 15:16:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -231,7 +234,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_VhkGKEe7LIBwBN
+      - req_nhQmz71ymY1dVq
       Stripe-Version:
       - '2015-10-16'
     body:
@@ -245,5 +248,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Mon, 18 Sep 2017 08:54:39 GMT
+  recorded_at: Thu, 14 Dec 2017 15:16:25 GMT
 recorded_with: VCR 3.0.1

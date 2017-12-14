@@ -24,7 +24,7 @@ class API::SubscriptionsController < API::ApiController
       if is_subscribe
         render :show, status: :created, location: @subscription
       else
-        head 422
+        render json: @subscription.errors, status: :unprocessable_entity
       end
     end
   end
