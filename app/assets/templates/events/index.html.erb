@@ -55,13 +55,22 @@
               <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
               <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
 
+              <h6 class="m-n" ng-if="!event.amount" translate>{{ 'free_admission' }}</h6>
               <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
 
               <div>
                 <span class="text-black-light text-xs" ng-if="event.event_themes[0]"><i class="fa fa-tags" aria-hidden="true"></i> {{event.event_themes[0].name}}</span>
                 <span class="text-black-light text-xs" ng-if="event.age_range"><i class="fa fa-users" aria-hidden="true"></i> {{event.age_range.name}}</span>
               </div>
+
+              <div>
+                <span class="text-black-light text-xs" ng-if="event.nb_free_places > 0">{{event.nb_free_places}} {{ 'still_available' | translate }}</span>
+                <span class="text-black-light text-xs" ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'sold_out' }}</span>
+                <span class="text-black-light text-xs" ng-if="event.nb_total_places == -1" translate>{{ 'cancelled' }}</span>
+                <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
+              </div>
             </div>
+
             <!-- Event Image -->
             <div class="pull-right crop-155">
               <img class="pull-right" ng-src="{{event.event_image_small}}" title="{{event.title}}" ng-if="event.event_image">

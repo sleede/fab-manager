@@ -1,0 +1,688 @@
+es:
+  app:
+    admin:
+      machines_new:
+        # add a new machine
+        declare_a_new_machine: "Declara una nueva máquina"
+        watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Cuidado al crear una nueva máquina, los precios están inicializados a 0 para todas las subscripciones."
+        consider_changing_them_before_creating_any_reservation_slot: "Considera cambiarlos antes de crear cualquier ranura de reserva."
+
+      machines_edit:
+        # machine edition
+        machine_edit: "Editar una máquina"
+
+      calendar:
+        # manage the trainings & machines slots
+        admin_calendar:
+          calendar_management: "Administración de calendario"
+          trainings: "Formación"
+          machines: "Máquinas"
+          spaces: "Espacios"
+          availabilities: "Disponibilidades"
+          availabilities_notice: "Exportar a un libro de trabajo de Excel cada ranura disponible para reserva, y su ratio de ocupación."
+          ongoing_reservations: "Reservas en curso"
+          no_reservations: "Sin reservas"
+          confirmation_required: "Confirmación requerida"
+          do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Realmente quieres cancelar la reserva del {USER}, en {DATE} a las {TIME}, respecto {RESERVATION}?"  # messageFormat interpolation
+          reservation_was_successfully_cancelled: "La reserva fué cancelada con éxito."
+          reservation_cancellation_failed: "Fallo al cancelar la reserva."
+          unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "No se puede quitar la última máquina de la ranura. Eliminar la ranura en su lugar."
+          do_you_really_want_to_remove_MACHINE_from_this_slot: "Realmente quieres borrar la \"{MACHINE}\" de este espacio?"  # messageFormat interpolation
+          this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "Esto evitará cualquier nueva reserva en esta ranura, pero no cancelará las existentes."
+          beware_this_cannot_be_reverted: "Beware: esto no puede ser revertido."
+          the_machine_was_successfully_removed_from_the_slot: "La máquina se eliminó correctamente de la ranura."
+          deletion_failed: "Fallo al borrar."
+          DATE_slot: "{{DATE}} espacio:"  # angular interpolation
+          what_kind_of_slot_do_you_want_to_create: "¿Qué tipo de ranura desea crear??"
+          training: "Formación"
+          machine: "Máquina"
+          space: "Espacio"
+          next: "Siguiente >"
+          previous: "< Anterior"
+          select_some_machines: "Seleccione algunas máquinas"
+          number_of_tickets: "Número de tickets: "
+          adjust_the_opening_hours: "Ajustar el horario de apertura"
+          to_time: "to"  # context: hora. ej. "de 18:00 a 21:00"
+          restrict_this_slot_with_labels_(optional): "Restringir esta ranura con etiquetas (opcional)"
+          the_slot_START-END_has_been_successfully_deleted: "La ranura {{START}} - {{END}} se ha eliminado correctamente"  # angular interpolation
+          unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "No se puede eliminar la ranura {{START}} - {{END}} porque ya está reservada por un miembror"  # angular interpolation
+          you_should_select_at_least_a_machine: "Debe seleccionar al menos una máquina en esta ranura."
+          export_is_running_you_ll_be_notified_when_its_ready: "La exportación se está ejecutando. Se le notificará cuando esté listo."
+          actions: "Acciones"
+          block_reservations: "Reservas de bloques"
+          do_you_really_want_to_block_this_slot: "¿Realmente desea bloquear nuevas reservas en esta ranura? Se volverá invisible para los usuarios."
+          locking_success: "Ranura correctamente bloqueada, no aparecerá más en el calendario del usuario"
+          locking_failed: "Ocurrió un error. El bloqueo de la ranura ha fallado"
+          allow_reservations: "Permitir reservas"
+          do_you_really_want_to_allow_reservations: "¿Realmente desea permitir la reserva de nuevo en esta ranura? Será visible para los usuarios."
+          unlocking_success: "Ranura desbloqueada con éxito, aparecerá de nuevo en el calendario de usuario"
+          unlocking_failed: "Ocurrió un error. El desbloqueo de la ranura ha fallado"
+          reservations_locked: "La reserva está bloqueada"
+          unlockable_because_reservations: "No se puede bloquear la reserva en esta ranura porque existen algunas reservas no canceladas."
+          delete_slot: "Delete this slot"                                                          # translation_missing
+          do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
+
+      project_elements:
+        # management of the projects' components
+        projects_elements_management: "Gestión de elementos de proyectos"
+        add_a_material: "Añadir un material"
+        add_a_new_theme: "Añadir un nuevo tema"
+        licences: "Licencias"
+        add_a_new_licence: "Agregar una nueva licencia"
+
+      trainings:
+        # track and monitor the trainings
+        training: "Formación"
+        add_a_new_training: "Add a new training"                                                   # translation_missing
+        associated_machines: "Associated machines"                                                 # translation_missing
+        number_of_tickets: "Number of tickets"                                                     # translation_missing
+        year_NUMBER: "Año {{NUMBER}}"  # angular interpolation
+        month_of_NAME: "Mes of {{NAME}}"  # angular interpolation
+        NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"  # messageFormat interpolation
+        none: "Nada"
+        training_validation: "Validación de la formación"
+        training_of_the_ : "Training of the "  # context: fecha. p.ej. "entrenamiento del 1 de septiembre 2012"
+        you_can_validate_the_training_of_the_following_members: "Puede validar la formación de los siguientes miembros:"
+        no_reservation: "Sin reserva"
+        validate_the_trainings: "Validar los entrenamientos"
+        edition_of_the_description_tooltip: "Edición de la descripción tooltip"
+        describe_the_training_in_a_few_words: "Describa el entrenamiento en pocas palabras."
+        description_is_limited_to_255_characters: "La descripción está limitada a 255 caracteres."
+        description_was_successfully_saved: "La descripción se ha guardado correctamente."
+        training_successfully_deleted: "Entrenamiento eliminado correctamente."
+        unable_to_delete_the_training_because_some_users_alredy_booked_it: "No se puede eliminar el entrenamiento porque algunos usuarios ya lo han reservado."
+        do_you_really_want_to_delete_this_training: "¿De verdad quieres eliminar este entrenamiento?"
+        status_enabled: "Enabled"                                                                  # translation_missing
+        status_disabled: "Disabled"                                                                # translation_missing
+        status_all: "All"                                                                          # translation_missing
+
+      trainings_new:
+        # create a new training
+        trainings_new:
+          add_a_new_training: "Add a new training"                                                 # translation_missing
+          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Tenga cuidado, al crear una formación, sus precios de reserva se inicializan en cero."
+          dont_forget_to_change_them_before_creating_slots_for_this_training: "No olvides cambiarlos antes de crear espacios para esta formación."
+
+      events:
+        # events tracking and management
+        events_monitoring: "Monitoreo de eventos"
+        manage_filters: "Administrar filtros"
+        fablab_events: "Eventos de Fablab"
+        all_events: "Todos los eventos"
+        passed_events: "Eventos pasados"
+        events_to_come: "Eventos por venir"
+        events_to_come_asc: "Events to come | chronological order"
+        on_DATE: "on {{DATE}}"  # angular interpolation                                            # translation_missing
+        from_DATE: "Desde {{DATE}}"  # angular interpolation                                       # translation_missing
+        from_TIME: "Desde {{TIME}}"  # angular interpolation                                       # translation_missing
+        booking: "Booking"                                                                         # translation_missing
+        sold_out: "Sold out"                                                                       # translation_missing
+        cancelled: "Cancelled"                                                                     # translation_missing
+        free_entry: "Free entry"                                                                   # translation_missing
+        free_admission: "Free admission"                                                           # translation_missing
+        view_reservations: "Ver reservas"
+        categories: "Categorías"
+        add_a_category: "Añadir una categoría"
+        add_a_theme: "Añadir un tema"
+        age_ranges: "Rango de edad"
+        add_a_range: "Añadir un rango"
+        do_you_really_want_to_delete_this_ELEMENT: "¿Realmente desea eliminar este {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}?"  # messageFormat interpolation
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "No se puede eliminar este {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}} porque ya está asociado con {NUMBER, plural, =0{no events} one{one event} other{{NUMBER} events}}."  # messageFormat interpolation
+        at_least_one_category_is_required: "Se requiere por lo menos una categoría."
+        unable_to_delete_the_last_one: "No se pudo eliminar el último."
+        unable_to_delete_an_error_occured: "No se pudo eliminar: se ha producido un error.."
+        manage_prices_categories: "Gestionar categorías de precios"
+        prices_categories: "Categorías de precios"
+        add_a_price_category: "Agregar una categoría de precios"
+        usages_count: "Cuenta de uso"
+        price_category: "Categoría de precios"
+        category_name: "Nombre de la categoría"
+        category_name_is_required: "El nombre de la categoría es obligatorio."
+        enter_here_the_conditions_under_which_this_price_is_applicable: "Introduzca aquí las condiciones bajo las cuales este precio es aplicable"
+        conditions_are_required: "Se requieren condiciones."
+        price_category_successfully_created: "Categoría de precios creada correctamente."
+        unable_to_add_the_price_category_check_name_already_used: "No se puede agregar la categoría de precio, compruebe que el nombre no está ya utilizado."
+        unexpected_error_occurred_please_refresh: "Se ha producido un error inesperado. Actualice la página.."
+        price_category_successfully_updated: "Categoría de precio actualizada correctamente."
+        unable_to_update_the_price_category: "No se puede actualizar la categoría de precios."
+        unable_to_delete_this_price_category_because_it_is_already_used: "No se puede eliminar esta categoría de precio ya que se está utilizando."
+        do_you_really_want_to_delete_this_price_category: "¿Desea realmente eliminar esta categoría de precios?"
+        price_category_successfully_deleted: "Categoría de precio eliminada correctamente."
+        price_category_deletion_failed: "Error al eliminar la categoría de precio."
+
+      events_new:
+        # add a new event
+        none: "Nada"
+        every_days: "Todos los dias"
+        every_week: "Cada semana"
+        every_month: "Cada mes"
+        every_year: "Cada año"
+
+      events_edit:
+        # edit an existing event
+        edit_the_event: "Editar el evento"
+
+      event_reservations:
+        # event reservations list
+        the_reservations: "Reservas :"
+        payment_date: "Fecha de pago"
+        reserved_tickets: "Tickets reservados "
+        show_the_event: "Mostrar el evento"
+        no_reservations_for_now: "No hay reservas por ahora."
+        back_to_monitoring: "Volver a monitorizar"
+
+      pricing:
+        # subscriptions, prices, credits and coupons management
+        pricing:
+          pricing_management: "Gestión de precios"
+          subscriptions: "Suscripciones"
+          trainings: "Formaciones"
+          list_of_the_subscription_plans: "Lista de los planes de suscripción"
+          beware_the_subscriptions_are_disabled_on_this_application: "Atención, las suscripciones están inhabilitadas en esta aplicación."
+          you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager: "Puede crear algunos, pero no estarán disponibles hasta que el proyecto sea reasignado por el administrador del servidor."
+          for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later: "Por razones de seguridad, no cree suscripciones si no tiene la intención de usarlas más tarde."
+          add_a_new_subscription_plan: "Agregar un nuevo plan de suscripción"
+          type: "Tipo"
+          partner: "Socio"
+          standard: "Estándar"
+          name: "Nombre"
+          duration: "Duración"
+          group: "Grupo"
+          prominence: "Prominencia"
+          price: "Precio"
+          machine_hours: "Horas de la máquina"
+          these_prices_match_machine_hours_rates_: "Estos precios se ajustan a la tarifas de máquina por horas"
+          _without_subscriptions: "Sin suscripciones"
+          machines: "Máquinas"
+          credits: "Créditos"
+          subscription: "Suscripción"
+          related_trainings: "Formación relacionada"
+          add_a_machine_credit: "Agregar un crédito de máquina"
+          machine: "Máquina"
+          hours: "Horas"
+          related_subscriptions: "Suscripciónes relacionada"
+          please_specify_a_number: "Por favor, especifique un número."
+          none: "Nada"  # nota gramatical: concordancia con "formación".
+          an_error_occurred_while_saving_the_number_of_credits: "Se ha producido un error al guardar el número de créditos."
+          an_error_occurred_while_deleting_credit_with_the_TRAINING: "Se ha producido un error al eliminar el crédito con la {{TRAINING}}."  # angular interpolation
+          an_error_occurred_unable_to_find_the_credit_to_revoke: "Se ha producido un error: no se puede encontrar el crédito a revocar."
+          an_error_occurred_while_creating_credit_with_the_TRAINING: "Se ha producido un error al crear crédito con la {{TRAINING}}."  # angular interpolation
+          not_set: "No establecido"
+          error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Error: un crédito que vincula esta máquina con esa suscripción ya existe."
+          changes_have_been_successfully_saved: "Los cambios se han guardado correctamented."
+          credit_was_successfully_saved: "El crédito se ha guardado correctamente."
+          error_creating_credit: "Unable to create credit, an error occurred"                      # translation_missing
+          do_you_really_want_to_delete_this_subscription_plan: "¿Realmente desea eliminar este plan de suscripción?"
+          subscription_plan_was_successfully_deleted: "Plan de suscripción eliminado correctamente."
+          unable_to_delete_the_specified_subscription_an_error_occurred: "No se pudo eliminar la suscripción especificada, se produjo un error.."
+          coupons: "Cupones"
+          list_of_the_coupons: "Lista de los cupones"
+          discount: "Descuento"
+          nb_of_usages: "Número de usos"
+          status: "Estado"
+          add_a_new_coupon: "Añadir un nuevo cupón"
+          disabled: "Desactivado"
+          expired: "Expirado"
+          sold_out: "Agotado"
+          active: "Activo"
+          confirmation_required: "Confirmación requerida"
+          do_you_really_want_to_delete_this_coupon: "¿Desea realmente eliminar este cupón?"
+          coupon_was_successfully_deleted: "El cupón se eliminó correctamente."
+          unable_to_delete_the_specified_coupon_already_in_use: "No se puede eliminar el cupón especificado: ya se utiliza con algunas facturas."
+          unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "No se pudo eliminar el cupón especificado: se produjo un error inesperado."
+          send_a_coupon: "Enviar un cupón"
+          coupon: "Cupón"
+          usages: "Usos"
+          coupon_successfully_sent_to_USER: "Cupón enviado correctamente a {{USER}}"  # angular interpolation
+          an_error_occurred_unable_to_send_the_coupon: "Un error inesperado impidió el envío del cupón.."
+          code: "Código"
+          enabled: "Habilitado"
+          validity_per_user: "Validez por usuario"
+          once: "Sólo una vez"
+          forever: "Cada uso"
+          valid_until: "Válido hasta (incluido)"
+          spaces: "Espacios"
+          these_prices_match_space_hours_rates_: "Estos precios coinciden con las tarifas de espacio por horas"
+          add_a_space_credit: "Añadir un crédito de espacio"
+          space: "Espacio"
+          error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error: un crédito que vincula este espacio con esa suscripción ya existe."
+          status_enabled: "Enabled"                                                                # translation_missing
+          status_disabled: "Disabled"                                                              # translation_missing
+          status_all: "All"                                                                        # translation_missing
+
+      coupons_new:
+        # ajouter un code promotionnel
+        add_a_coupon: "Añadir un cupón"
+        unable_to_create_the_coupon_check_code_already_used: "No se puede crear el cupón. Compruebe que el código no esté ya utilizado"
+
+      coupons_edit:
+        # mettre à jour un code promotionnel
+        unable_to_update_the_coupon_an_error_occurred: "No se puede actualizar el cupón: se ha producido un error."
+
+      plans:
+        new:
+          # add a subscription plan on the platform
+          new_plan:
+            add_a_subscription_plan: "Agregar un plan de suscripción"
+            unable_to_create_the_subscription_please_try_again: "No se puede crear el plan de suscripción. Por favor, inténtelo de nuevo."
+            successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Suscripción(es) creada correctamente. No olvide redefinir los precios."
+            unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "No se puede guardar este usuario. Compruebe que no hay un usuario ya definido con el mismo nombre."
+        edit:
+          # edit a subscription plan / machine hours prices
+          edit_plan:
+            subscription_plan: "Plan de suscripción:"
+            prices: "Precios"
+            copy_prices_from: "Copia los precios desde"
+            machines: "Máquinas"
+            machine: "Máquina"
+            hourly_rate: "Tarifa por hora"
+            spaces: "Espacios"
+            space: "Espacio"
+            unable_to_save_subscription_changes_please_try_again: "No se pueden guardar los cambios de suscripción. Por favor, inténtelo de nuevo."
+            subscription_successfully_changed: "Suscripción cambiada correctamente."
+
+      invoices:
+        # list of all invoices & invoicing parameters
+        invoices: "Facturas"
+        invoices_list: "Lista de facturas"
+        filter_invoices: "Filtrar facturas"
+        invoice_#_: "Factura #:"
+        customer_: "Cliente:"
+        date_: "Fecha:"
+        invoice_#: "Factura #"
+        customer: "Cliente"
+        credit_note: "Nota de crédito"
+        display_more_invoices: "Mostrar más facturas..."
+        invoicing_settings: "Configuración de facturación"
+        change_logo: "Cambio de logotipo"
+        john_smith: "John Smith"
+        john_smith@example_com: "jean.smith@example.com"
+        invoice_reference_: "Referencia de factura:"
+        code_: "Código:"
+        code_disabled: "Código inhabilitado"
+        order_#: "Orden #:"
+        invoice_issued_on_DATE_at_TIME: "Factura emitida el {{DATE}} a las {{TIME}}"  # angular interpolation
+        object_reservation_of_john_smith_on_DATE_at_TIME: "Objeto: Reserva de John Smith el {{DATE}} a las {{TIME}}"  # angular interpolation
+        order_summary: "Resumen del pedido:"
+        details: "Detalles"
+        amount: "Cantidad"
+        machine_booking-3D_printer: "Reserva de la máquina- Impresora 3D"
+        total_amount: "Cantidad total"
+        total_including_all_taxes: "Total incl. todos los impuestos"
+        VAT_disabled: "VAT disabled"
+        including_VAT: "IVA desactivado"
+        including_total_excluding_taxes: "Incluido Total excl. impuestos"
+        including_amount_payed_on_ordering: "Incluido el monto pagado en el pedido"
+        settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Liquidación por tarjeta de débito el {{DATE}} a las {{TIME}}, por una cantidad de {{AMOUNT}}"
+        important_notes: "Notas importantes"
+        address_and_legal_information: "Dirección e información legal"
+        invoice_reference: "Referencia de factura"
+        day: "Día"
+        "#_of_invoice": "# de factura"
+        online_sales: "Ventas en línea"
+        wallet: "Cartera"
+        refund: "Reembolso"
+        documentation: "Documentación"
+        2_digits_year_(eg_70): "2 dígitos del año (por ejemplo, 70)"
+        4_digits_year_(eg_1970): "4 dígitos del año (por ejemplo, 70)"
+        month_number_(eg_1): "Número del mes (por ejemplo, 1)"
+        2_digits_month_number_(eg_01): "Número de mes de 2 dígitos (por ejemplo, 01)"
+        3_characters_month_name_(eg_JAN): "3 caracteres nombre del mes (por ejemplo, ENE)"
+        day_in_the_month_(eg_1): "Día del mes (por ejemplo, 1)"
+        2_digits_day_in_the_month_(eg_01): "2 dígitos en el mes (por ejemplo, 01)"
+        (n)_digits_daily_count_of_invoices_(eg_ddd_002_2nd_invoice_of_the_day): "(n) dígitos, cuenta diaria de facturas (por ejemplo, ddd => 002: 2ª factura del día)"
+        (n)_digits_monthly_count_of_invoices_(eg_mmmm_0012_12th_invoice_of_this_month): "(n) dígitos, recuento mensual de facturas (por ejemplo, mmmm => 0012: 12ª factura del mes)"
+        (n)_digits_annual_amount_of_invoices_(eg_yyyyyy_000008_8th_invoice_of_this_year): "(n) dígitos, recuento anual de facturas (ej. aaaaa => 000008: 8ª factura de este año)"
+        beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left: "Cuidado: si el número excede la longitud especificada, será aproximado por la izquierda."
+        (n)_digits_count_of_orders_(eg_nnnn_0327_327th_order): "(n) dígitos, cuenta diaria de órdenes (eg ddd => 002: segunda orden del día)"
+        (n)_digits_daily_count_of_orders_(eg_ddd_002_2nd_order_of_the_day): "((n) dígitos, cuenta diaria de órdenes (eg ddd => 002: segunda orden del día)"
+        (n)_digits_monthly_count_of_orders_(eg_mmmm_0012_12th_order_of_this_month): "(n) dígitos, recuento mensual de pedidos (por ejemplo, mmmm => 0012: 12º orden del mes)"
+        (n)_digits_annual_amount_of_orders_(eg_yyyyyy_000008_8th_order_of_this_year): "(n) dígitos, recuento anual de órdenes (ej: aaaaa => 000008: octava orden de este año)"
+        add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Añadir un aviso con respecto a las ventas en línea, sólo si la factura es de interés."
+        this_will_never_be_added_when_a_refund_notice_is_present: "Esto nunca se agregará cuando se presente un aviso de reembolso."
+        (eg_X[/VL]_will_add_/VL_to_the_invoices_settled_with_stripe): '(por ejemplo, X [/ VL] agregará "/ VL" a las facturas liquidadas con la raya)'
+        add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Añada un aviso con respecto a los reembolsos, sólo si la factura es de interés."
+        this_will_never_be_added_when_an_online_sales_notice_is_present: "Esto nunca se agregará cuando un aviso de venta en línea está presente."
+        (eg_R[/A]_will_add_/A_to_the_refund_invoices): '(ed. R[/A] añadirá "/A" a las facturas de reembolso)'
+        add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Añadir un aviso con respecto a la cartera, sólo si la factura es de interés."
+        (eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet): '(eg. W[/PM] añadirá "/PM" a las facturas liquidadas con cartera)'
+        code: "Código"
+        enable_the_code: "Habilitar el código"
+        enabled: "Habilitado"
+        disabled: "Desactivado"
+        order_number: "Número de orden"
+        elements: "Elementos"
+        VAT: "IVA"
+        enable_VAT: "Habilitar IVA"
+        VAT_rate: "Ratio IVA"
+        refund_invoice_successfully_created: "Factura de reembolso creada correctamente."
+        create_a_refund_on_this_invoice: "Crear un reembolso en esta factura"
+        creation_date_for_the_refund: "Fecha de creación del reembolso"
+        creation_date_is_required: "Se requiere la fecha de creación."
+        refund_mode: "Modo de reembolso:"
+        do_you_want_to_disable_the_user_s_subscription: "¿Quieres inhabilitar la suscripción del usuario?:"
+        elements_to_refund: "Elementos a reembolsar"
+        description_(optional): "Descripción (opcional):"
+        will_appear_on_the_refund_invoice: "Aparecerá en la factura de reembolso."
+        none: "Nada"  # grammar note: concordancia con "medio de pago""
+        by_cash: "En efectivo"
+        by_cheque: "Mediante cheque"
+        by_transfer: "Por transferencia"
+        by_wallet: "Por cartera"
+        you_must_select_at_least_one_element_to_create_a_refund: "Debe seleccionar al menos un elemento, para crear un reembolso."
+        unable_to_create_the_refund: "No se puede crear el reembolso"
+        invoice_reference_successfully_saved: "Referencia de factura guardada correctamente."
+        an_error_occurred_while_saving_invoice_reference: "Se ha producido un error al guardar la referencia de la factura."
+        invoicing_code_succesfully_saved: "Código de facturación guardado correctamente."
+        an_error_occurred_while_saving_the_invoicing_code: "Se ha producido un error al guardar el código de facturación.."
+        code_successfully_activated: "Código activado correctamente."
+        code_successfully_disabled: "Código deshabilitado correctamente."
+        an_error_occurred_while_activating_the_invoicing_code: "Se ha producido un error al activar el código de facturación."
+        order_number_successfully_saved: "Número de pedido guardado correctamente."
+        an_error_occurred_while_saving_the_order_number: "Se ha producido un error al guardar el número de orden."
+        VAT_rate_successfully_saved: "VAT rate successfully saved."                                # translation_missing
+        an_error_occurred_while_saving_the_VAT_rate: "La tasa de IVA se ha guardado correctamente."
+        VAT_successfully_activated: "IVA activado correctamente."
+        VAT_successfully_disabled: "IVA desactivado correctamente."
+        an_error_occurred_while_activating_the_VAT: "Se ha producido un error al activar el IVA."
+        text_successfully_saved: "Texto guardado correctamente."
+        an_error_occurred_while_saving_the_text: "Se ha producido un error al guardar el texto."
+        address_and_legal_information_successfully_saved: "Dirección e información legal guardada correctamente."
+        an_error_occurred_while_saving_the_address_and_the_legal_information: "Se ha producido un error al guardar la dirección y la información legal."
+        logo_successfully_saved: "Logo guardado correctamente."
+        an_error_occurred_while_saving_the_logo: "Se ha producido un error al guardar el logotipo.."
+
+      members:
+        # management of users, labels, groups, and so on
+        users_management: "Gestión de usuarios"
+        members: "Miembros"
+        search_for_an_user: "Buscar un usuario"
+        add_a_new_member: "Añadir un nuevo miembro"
+        reservations: "Reservas"
+        email: "Email"
+        phone: "Teléfono"
+        user_type: "Tipo de usuario"
+        display_more_users: "Mostrar más usuarios...."
+        administrators: "Administradores"
+        search_for_an_administrator: "Buscar un administrador"
+        add_a_new_administrator: "Agregar un nuevo administrador"
+        groups: "Grupos"
+        authentication: "Autenticación"
+        do_you_really_want_to_delete_this_administrator_this_cannot_be_undone: "¿Desea realmente eliminar este administrador? Esto no se puede deshacer."
+        this_may_take_a_while_please_wait: "Advertencia: esto puede tomar un tiempo, por favor, tenga paciencia."
+        administrator_successfully_deleted: "Administrador eliminado correctamente."
+        unable_to_delete_the_administrator: "No se puede eliminar el administrador."
+        changes_successfully_saved: "Cambios guardados correctamente."
+        an_error_occurred_while_saving_changes: "Se ha producido un error al guardar los cambios."
+        add_a_tag: "Añadir una etiqueta"
+        tag_name: "Nombre de la etiqueta"
+        new_tag_successfully_saved: "Nueva etiqueta guardada correctamente."
+        an_error_occurred_while_saving_the_new_tag: "Se ha producido un error al guardar la nueva etiqueta.."
+        tag_successfully_deleted: "Etiqueta eliminada correctamente."
+        an_error_occurred_and_the_tag_deletion_failed: "Se ha producido un error y no se ha podido eliminar la etiqueta.."
+        search_for_an_authentication_provider: "Buscar un proveedor de autenticación"
+        add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"
+        strategy_name: "Nombre de la estrategia"
+        state: "Estado"
+        unknown: "Desconocido: "
+        active: "Activo"
+        pending: "Pendiente"
+        previous_provider: "Proveedor anteriorr"
+        do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "¿Realmente desea eliminar la {{TYPE}} proveedor de autenticación: {{NAME}}?"  # angular interpolation
+        authentication_provider_successfully_deleted: "El proveedor de autenticación se eliminó correctamente."
+        an_error_occurred_unable_to_delete_the_specified_provider: "Se ha producido un error: no se puede eliminar el proveedor especificado."
+        local_database: "Base de datos local"
+        o_auth2: "OAuth 2.0"
+        group_form:
+          add_a_group: "Añadir un grupo"
+          group_name: "Nombre del grupo"
+          disable: "Disable"                                                                       # translation_missing
+          enable: "Enable"                                                                         # translation_missing
+          changes_successfully_saved: "Changes successfully saved."                                # translation_missing
+          an_error_occurred_while_saving_changes: "An error occurred when saving changes."         # translation_missing
+          new_group_successfully_saved: "Nuevo grupo guardado correctamente."
+          an_error_occurred_when_saving_the_new_group: "Se ha producido un error al guardar el nuevo grupo."
+          group_successfully_deleted: "Grupo eliminado correctamente."
+          unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "No se puede eliminar el grupo porque algunos usuarios y / o grupos todavía están vinculados a él."
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation                                        # translation_missing
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation                                                  # translation_missing
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation    # translation_missing
+          status_enabled: "Enabled"                                                                # translation_missing
+          status_disabled: "Disabled"                                                              # translation_missing
+          status_all: "All"                                                                        # translation_missing
+
+      members_new:
+        # add a member
+        members_new:
+          add_a_member: "Agregar un miembro"
+          user_is_an_organization: "El usuario es una organización"
+
+      members_edit:
+        # edit a member
+        duration: "Duración:"
+        expires_at: "Caduca en:"
+        price_: "Precio:"
+        offer_free_days: "Ofrecer días gratis"
+        extend_subscription: "Ampliar suscripción"
+        user_has_no_current_subscription: "El usuario no tiene una suscripción actual."
+        subscribe_to_a_plan: "Suscribirse a un plan"
+        next_trainings: "Próxima formación"
+        passed_trainings: "Formación completada"
+        validated_trainings: "Formación validada"
+        events: "Eventos"
+        next_events: "Próximos eventos"
+        no_upcoming_events: "No hay próximos eventos"
+        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation       # translation_missing
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation                     # translation_missing
+        passed_events: "Eventos pasados"
+        invoices: "Facturas"
+        invoice_#: "Factura #"
+        download_the_refund_invoice: "Descargar la factura de reembolso"
+        expiration_date: "Fecha de caducidad"
+        you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days: "Usted intencionalmente decide extender la suscripción del usuario ofreciéndole días libres."
+        you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Usted intencionalmente decide extender la suscripción del usuario al cobrarle de nuevo por su suscripción actual."
+        until_(expiration_date): "Until (expiration date):"                                        # translation_missing
+        you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Ha cambiado correctamente la fecha de caducidad de la suscripción del usuario"
+        a_problem_occurred_while_saving_the_date: "Se ha producido un problema al guardar la fecha."
+        new_subscription: "Nueva suscripción"
+        you_are_about_to_purchase_a_subscription_to_NAME: "Estás a punto de comprar una suscripción a {{NAME}}."  # angular interpolation
+        subscription_successfully_purchased: "Suscripción comprada correctamente."
+        a_problem_occurred_while_taking_the_subscription: "Se ha producido un problema al realizar la suscripción."
+
+      admins_new:
+        # add a new administrator to the platform
+        add_an_administrator: "Agregar un administrador"
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "administrador creado correctamente. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} directivas de conexión por e-mail."  # messageFormat interpolation
+
+      authentication_new:
+        # add a new authentication provider (SSO)
+        add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"
+        a_local_database_provider_already_exists_unable_to_create_another: "A proveedor de \"Base de datos local\"  ya existe. No se puede crear otro."
+        local_provider_successfully_saved: "Proveedor local guardado correctamente."
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor"
+        security_issue_detected: "Se ha detectado un problema de seguridad"
+        beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "Tenga cuidado: el proveedor de OAuth 2 que va a agregar no está usando HTTPS."
+        this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "Este es un grave problema de seguridad en Internet y nunca debe utilizarse excepto para fines de prueba."
+        do_you_really_want_to_continue: "¿De verdad quieres continuar?"
+        unsecured_oauth2_provider_successfully_added: "Proveedor de OAuth 2.0 no seguro, se ha agregado correctamente."
+        oauth2_provider_successfully_added: "OAuth 2.0 proveedor agregado correctamente."
+
+      authentication_edit:
+        # edit an authentication provider (SSO)
+        provider: "Proveedor :"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor"
+        provider_successfully_updated: "Proveedor actualizado correctamente"
+        an_error_occurred_unable_to_update_the_provider: "Se ha producido un error: no se puede actualizar el proveedor."
+
+      statistics:
+        # statistics tables
+        evolution: "Evolución"
+        age_filter: "Filtro de edad"
+        from_age: "Desde"  # contexto: edad. por ejemplo: de 8 a 40 años
+        to_age: "a"  # contexto: edad. por ejemplo: de 8 a 40 años
+        _years_old: "años"
+        start: "Principio:"
+        end: "Final:"
+        custom_filter: "Filtro personalizado"
+        NO_: "NO"
+        criterion: "Criterio:"
+        value: "Valor:"
+        exclude: "Excluir"
+        entries: "Entradas:"
+        revenue_: "Ingresos:"
+        average_age: "Edad media:"
+        years_old: "años"
+        total: "Total"
+        available_hours: "Horas disponibles para reservar:"
+        available_tickets: "Tickets disponibles para reservar:"
+        gender: "Genero"
+        age: "Edad"
+        revenue: "Ingresos"
+        unknown: "Desconocido"
+        user_id: "ID de usuario"
+        display_more_results: "Mostrar más resultados"
+        export_statistics_to_excel: "Exportar estadísticas a Excel"
+        export_all_statistics: "Exportar todas las estadísticas"
+        export_the_current_search_results: "Exportar los resultados de búsqueda actuales"
+        export: "Exportar"
+
+      stats_graphs:
+        # statistics graphs
+        data: "Datos"
+        day: "Dia"
+        week: "Semana"
+        start: "Inicio:"
+        end: "Final:"
+        revenue: "Ingresos"
+        top_list_of: "Lista top de"
+        number: "Número"
+        week_short: "Semana"
+        week_of_START_to_END: "Semana del {{START}} a {{END}}"  # angular interpolation
+        no_data_for_this_period: "No hay datos para este periodo"
+
+      settings:
+        # global application parameters and customization
+        settings:
+          title: "Título"
+          customize_the_application: "Personalizar la aplicación"
+          general: "General"
+          fablab_title: "Título del FabLab"
+          fablab_name: "Nombre del FabLab "
+          title_concordance: "Concordancia de título"
+          male: "Masculino."
+          female: "Hembra."
+          eg: "ej:"
+          about: "Sobre"
+          male_preposition: "el"
+          female_preposition: "la"
+          customize_information_messages: "Personalizar mensajes de información"
+          message_of_the_machine_booking_page: "Mensaje de la página de reserva de la máquina:"
+          type_the_message_content: "Escriba el contenido del mensaje"
+          warning_message_of_the_training_booking_page: "Warning message of the training booking page:"                                          # translation_missing
+          information_message_of_the_training_reservation_page: "Information message of the training reservation page:"                          # translation_missing
+          message_of_the_subscriptions_page: "Mensaje de advertencia de la página de reserva de formación:"
+          message_of_the_events_page: "Mensaje de la página de eventos:"
+          message_of_the_spaces_page: "Mensaje de la página de espacios:"
+          legal_documents: "Documentos legales"
+          if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user: "Si no se llenan estos documentos, no se pedirá su consentimiento."
+          general_terms_and_conditions_(T&C): "Términos Generales y Condiciones (T&C)"
+          terms_of_service_(TOS): "Términos de servicio (TOS)"
+          customize_the_graphics: "Personalizar los gráficos"
+          for_an_optimal_rendering_the_logo_image_must_be_at_the_PNG_format_with_a_transparent_background_and_with_an_aspect_ratio_3.5_times_wider_than_the_height: "Para una representación óptima, la imagen del logotipo debe estar en el formato PNG con un fondo transparente y una relación de aspecto 3,5 más ancha que la altura."
+          concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "En cuanto al favicon, debe estar en formato ICO con un tamaño de 16x16 píxeles." 
+          remember_to_refresh_the_page_for_the_changes_to_take_effect: "Recuerde actualizar la página para que los cambios surtan efecto."
+          logo_(white_background): "Logo (fondo blanco)"
+          change_the_logo: "Cambiar el logotipo"
+          logo_(black_background): "Logo (fondo negro)"
+          favicon: "Favicon"
+          change_the_favicon: "Cambiar el favicon"
+          main_colour: "Color principal:"
+          primary: "Primario"
+          secondary_colour: "Color secundario:"
+          secondary: "Secundario"
+          background_picture_of_the_profile_banner: "Imagen de fondo de la bandera del perfil"
+          change_the_profile_banner: "Cambiar la bandera del perfil"
+          home_page: "Página de inicio"
+          news_of_the_home_page: "Noticias de la página principal:"
+          type_your_news_here: "Escriba sus noticias aquí"
+          leave_it_empty_to_not_bring_up_any_news_on_the_home_page: "Déjelo vacío para no abrir ninguna noticia en la página principal"
+          twitter_stream: "Twitter Stream:"                                                        # translation_missing
+          name_of_the_twitter_account: "Nombre de la cuenta de Twitter"
+          title_of_the_about_page: "Título de la página Acerca de"
+          shift_enter_to_force_carriage_return: "MAYÚS + ENTRAR para forzar el retorno de carro"
+          input_the_main_content: "Introduzca el contenido principal"
+          drag_and_drop_to_insert_images: "Arrastrar y soltar para insertar imágenes"
+          input_the_fablab_contacts: "Ingrese los contactos de FabLab"
+          reservations: "Reservas"
+          reservations_parameters: "Parámetros de reservas"
+          confine_the_booking_agenda: "Confine la agenda de reserva"
+          opening_time: "Hora de apertura"
+          closing_time: "Tiempo de cierre"
+          max_visibility: "Máxima visibilidad (en meses)"
+          visibility_for_yearly_members: "Para las suscripciones en curso, por lo menos 1 año"
+          visibility_for_other_members: "Para todos los demás miembros"
+          ability_for_the_users_to_move_their_reservations: "Capacidad para que los usuarios muevan sus reservas"
+          reservations_shifting: "Cambio de reservas"
+          prior_period_(hours): "Período anterior (horas)"
+          enabled: "Habilitado"
+          disabled: "Deshabilitado"
+          ability_for_the_users_to_cancel_their_reservations: "Capacidad para que los usuarios cancelen sus reservas"
+          reservations_cancelling: "Cancelaciones de reservas"
+          reservations_reminders: "Recordatorios de reservas"
+          notification_sending_before_the_reservation_occurs: "Envío de notificaciones antes de la reserva"
+          customization_of_SETTING_successfully_saved: "Personalización de la {{SETTING}} guardado con éxito."  # angular interpolation
+          file_successfully_updated: "Archivo actualizado correctamente."
+          name_genre: "Concordancia del título"
+          machine_explications_alert: "mensaje de explicación en la página de reserva de la máquina"
+          training_explications_alert: "mensaje de explicación en la página de reserva de formación"
+          training_information_message: "mensaje de información en la página de reserva de la máquina"
+          subscription_explications_alert: "mensaje de explicación en la página de suscripción"
+          event_explications_alert: "mensaje de explicación en la página de reserva del evento"
+          space_explications_alert: "mensaje de explicación en la página de reserva de espacio"
+          main_color: "Color principal"
+          secondary_color: "color secundario"
+          home_blogpost: "Resumen de la página de inicio"
+          twitter_name: "Twitter feed name"                                                        # translation_missing
+          about_title: "Título de la página \"Acerca de\""
+          about_body: "Contenido de la página \"Acerca de\""
+          about_contacts: "Página contactos\"Acerca de\""
+          booking_window_start: "hora de apertura"
+          booking_window_end: "hora de cierre"
+          booking_move_enable: "Activar cambio de reserva"
+          booking_move_delay: "Demora de reserva"
+          booking_cancel_enable: "Habilitar cancelar reserva"
+          booking_cancel_delay: "Cancelar demora de reserva"
+          reminder_enable: "Recordatorio de reserva"
+          reminder_delay: "demora antes de enviar el recordatorio"
+          default_value_is_24_hours: "Si el campo es dejado vacio: 24 horas."
+          visibility_yearly: "máxima visibilidad para suscriptores anuales"
+          visibility_others: "máxima visibilidad para otros miembros"
+
+      open_api_clients:
+        add_new_client: "Crear un nuevo cliente de API"
+        api_documentation: "Documentation API"
+        open_api_clients: "Clientes OpenAPI"
+        calls_count: "Número de llamadas"
+        created_at: "Fecha de creación"
+        reset_token: "revocar el acceso"
+        client_name: "Nombre del cliente"
+        do_you_really_want_to_delete_this_open_api_client: "¿Desea realmente eliminar este cliente OpenAPI?"
+        do_you_really_want_to_revoke_this_open_api_access: "¿Realmente desea revocar este acceso? Se borrará y reemplazará el token actual."
+        client_successfully_created: "Cliente creado correctamente."
+        client_successfully_updated: "Cliente actualizado correctamente."
+        client_successfully_deleted: "Cliente borrado correctamente."
+        access_successfully_revoked: "Acceso revocado correctamente."
+
+      space_new:
+        # create a new space
+        space_new:
+          add_a_new_space: "Añadir un espacio nuevo"
+          watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "¡Cuidado! Al crear un nuevo espacio, sus precios se inicializan en 0 para todas las suscripciones."
+          consider_changing_its_prices_before_creating_any_reservation_slot: "Considere cambiar sus precios antes de crear cualquier espacio de reserva."
+          add_this_space: "Añadir este espacio"
+
+      space_edit:
+        # modify an exiting space
+        space_edit:
+          edit_the_space_NAME: "Edit the space: {{NAME}}"  # angular interpolation                 # translation_missing
+          validate_the_changes: "Validar los cambios"

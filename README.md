@@ -62,7 +62,8 @@ The procedure to follow is described in the [docker readme](docker/README.md).
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
 
-In you only intend to run fab-manager on your local machine for testing purposes or to contribute to the project development, you can set it up with the following procedure.
+In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up with the following procedure.
+This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker installation method](docker/README.md).
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -295,10 +296,10 @@ See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](
 <a name="postgresql-on-debian"></a>
 ### Install PostgreSQL 9.4 on Ubuntu/Debian
 
-1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one the following lines:
-   - `deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main` (Ubuntu 14.04 Trusty)
-   - `deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main` (Ubuntu 16.04 Xenial)
-   - `deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main` (Debian 8 Jessie)
+1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one your distribution source:
+   ```bash
+   sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+   ```
 
 
 2. Import the repository signing key, and update the package lists
@@ -440,7 +441,7 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
    sudo apt-get install elasticsearch
    ```
 
-4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8/Ubuntu 16.04), you will need to run:
+4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8+/Ubuntu 16.04+), you will need to run:
 
    ```bash
    # System V

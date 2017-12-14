@@ -63,6 +63,11 @@ class API::InvoicesController < API::ApiController
     invoice = Invoice.only_invoice.find(avoir_params[:invoice_id])
     @avoir = invoice.build_avoir(avoir_params)
     if @avoir.save
+      # when saved, expire the subscription if needed
+      if @avoir.subscription_to_expire
+        @avoir.expire_subscription
+      end
+      # then answer the API call
       render :avoir, status: :created
     else
       render json: @avoir.errors, status: :unprocessable_entity

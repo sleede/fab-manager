@@ -1,0 +1,287 @@
+es:
+  layouts:
+    notifications_mailer:
+      see_you_later: "Nos vemos pronto en {GENDER, select, other{the}}"  # messageFormat interpolation
+      sincerely: "Atentamente,"
+      signature: "El equipo del FabLab."
+      do_not_reply: "Por favor no conteste a este mail."
+
+  users_mailer:
+    notify_user_account_created:
+      subject: "Tu cuenta FabLab se ha creado con éxito"
+      body:
+        hello: "Hola %{NAME},"
+        intro: "El equipo FabLab acaba de crear una cuenta para ti, en la web de {FABLAB}"  # messageFormat interpolation
+        connection_parameters: "Estos son los datos asociados a tu cuenta:"
+        account_name: "Nombre de usuario:"
+        password: "Contraseña:"
+        temporary_password: "Esta es una contraseña temporal, puede modificarla en la pantalla <<Mi cuenta>>."
+        keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (cursos, planes de suscripción)."
+        thanks_to_: "Para usar el sitio web, por favor"
+        logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí"
+        token_if_link_problem: "Si experimenta problemas con el enlace, puede introducir el siguiente código en el primer intento de conexión:"
+
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "Tu has cambiado grupo"
+      body:
+        warning: "Has cambiado de grupo. Se pueden realizar inspecciones en el laboratorio para verificar la legitimidad de este cambio.."
+
+    notify_admin_user_group_changed:
+      subject: "Un miembro ha cambiado de grupo."
+      body:
+        user_changed_group_html: "El usuario <em><strong>%{NAME}</strong></em> ha cambiado de grupo."
+        previous_group: "Grupo anterior:"
+        new_group: "Nuevo grupo:"
+
+    notify_admin_subscription_extended:
+      subject: "Una suscripción ha sido extendida"
+      body:
+        subscription_extended_html: "La suscripción <strong><em>{PLAN}</em></strong> del usuario <strong><em>{NAME}</strong></em> ha sido extendida {FREE, select, true{for free} other{}} until {DATE}."   # messageFormat interpolation
+
+    notify_member_subscription_extended:
+      subject: "Su suscripción ha sido extendida"
+      body:
+        your_plan: "Su plan de suscripción"
+        has_been_extended: "ha sido extendida"
+        free: "gratuitamente"
+        until: "hasta"
+
+    notify_partner_subscribed_plan:
+      subject: "Ha adquirido un plan de suscripción"
+      body:
+        a_plan: "Un plan de suscripción"
+        was_purchased_by_member: "ha sido adquirido por el usuario"
+
+    notify_admin_when_project_published:
+      subject: "Un proyecto ha sido publicado"
+      body:
+        new_project_published: "Un nuevo proyecto ha sido publicado:"
+
+    notify_project_collaborator_to_valid:
+      subject: "Invitación de colaboración a un proyecto"
+      body:
+        your_are_invited_to_take_part_in_a_project: "Ha sido invitado a colaborar en el proyecto:"
+        to_accept_the_invitation_click_on_following_link: "Para aceptar la invitación por favor haga clic en el siguiente enlace:"
+
+    notify_project_author_when_collaborator_valid:
+      subject: "Nuevo colaborador en tu proyecto"
+      body:
+        the_member: "El usuario"
+        accepted_your_invitation_to_take_part_in_the_project: "ha aceptado unirse a tu proyecto:"
+
+    notify_user_training_valid:
+      subject: "Su curso ha sido validado"
+      body:
+        your_training: "Su curso"
+        has_been_validated: "Ha sido validado"
+
+    notify_member_subscribed_plan:
+      subject: "Su suscripción ha sido correctamente comprada"
+      body:
+        plan_subscribed_html: "Se ha suscrito al plan: <strong><em>%{PLAN}</em></strong>."
+        subscription_stops_on: "Su suscripción terminará el %{DATE}"
+
+    notify_member_create_reservation:
+      subject: "Su reserva se ha registrado correctamente"
+      body:
+        reservation_saved_html: "Su reserva <strong><em>%{RESERVATION}</em></strong> se ha registrado correctamente"
+        your_reserved_slots: "Sus espacios reservados son:"
+
+    notify_member_subscribed_plan_is_changed:
+      subject: "Su suscripción ha sido actualizada"
+      body:
+        new_plan_html: "Ha cambiado su plan a <strong><em>%{PLAN}</em></strong>."
+
+    notify_admin_member_create_reservation:
+      subject: "Nueva reserva"
+      body:
+        member_reserved_html: "El usuario %{NAME} ha reservado <strong><em>%{RESERVABLE}</em></strong>."
+        reserved_slots: "Los espacios de reserva están aquí:"
+
+    notify_member_slot_is_modified:
+      subject: "Su espacio de reserva ha sido cambiado correctamente"
+      body:
+        reservation_changed_to: "Su espacio de reserva se ha cambiado a:"
+        previous_date: "Fecha anterior:"
+
+    notify_admin_slot_is_modified:
+      subject: "Un espacio de reservra ha sido modificado"
+      body:
+        slot_modified: "El usuario %{NAME} ha modificado su reserva"
+        new_date: "Nuevo espacio"
+        old_date: "Espacio anterior"
+
+    notify_admin_when_user_is_created:
+      subject: "Se ha creado una nueva cuenta"
+      body:
+        new_account_created: "Se ha creado un nuevo usuario en la web:"
+        account_for_organization: "Esta cuenta gestiona una organización :"
+        invoicing_disabled_html: "La generación de facturación para este usuario es <strong>disabled</strong>."
+
+    notify_admin_subscribed_plan:
+      subject: "Se ha adquirido un plan de suscripción"
+      body:
+        plan_subscribed_html: "Un plan de suscripción <strong><em>%{PLAN}</em></strong> ha sido adquirido por el usuario <strong><em>%{NAME}</strong></em>."
+
+    notify_member_invoice_ready:
+      subject: "La factura de su FabLab"
+      body:
+        please_find_attached_html: "Por favor, encuentre como archivo adjunto su factura de {DATE}, por un valor de {AMOUNT} referente a {TYPE, select, Reservation{reservation} other{subscription}}."  # messageFormat interpolation
+        invoice_in_your_dashboard_html:  "Puede acceder a su factura en %{DASHBOARD} en la web del FabLab."
+        your_dashboard: "Su Panel"
+
+    notify_member_reservation_reminder:
+      subject: "Recordatorio de reserva"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "Este es un recordatorio sobre su reserva <strong>%{RESERVABLE}</strong> a realizarse en <em>%{DATE}</em>"
+        this_reservation_concerns_the_following_slots: "Esta reserva involucra los siguientes espacios:"
+
+    notify_member_avoir_ready:
+      subject: "Su factura de reembolso de FabLab"
+      body:
+        please_find_attached_html: "Por favor, encuentre como archivo adjunto su factura de reembolso de {DATE}, con una cantidad de {AMOUNT} referente a su {TYPE, select, Reservation{reservation} WalletTransaction{wallet credit} other{subscription}}."  # messageFormat interpolation
+        invoice_in_your_dashboard_html: "Puede acceder a su factura en %{DASHBOARD} en la web del FabLab."
+        your_dashboard: "Su panel"
+
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "Su suscripción expira en 7 dias"
+      body:
+        your_plan: "su plan de suscripción"
+        expires_in_7_days: "expirará en 7 dias."
+        to_renew_your_plan_follow_the_link: "Por favor, haga clic en el siguiente enlace para renovar su suscripción"
+
+    notify_member_subscription_is_expired:
+      subject: "Su suscripción ha expirado"
+      body:
+        your_plan: "Su plan de suscripción"
+        has_expired: "ha expirado."
+        you_can_go_to: "Por favor acceda a"
+        to_renew_your_plan: "para renovar su suscripción"
+
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "La suscripción de un miembre expira en 7 días"
+      body:
+        subscription_will_expire_html: "El plan de suscripción de %{NAME} <strong><em>%{PLAN}</em></strong> expirará en 7 días."
+
+    notify_admin_subscription_is_expired:
+      subject: "La suscripción de un miembro ha expirado"
+      body:
+        subscription_expired_html: "La suscripción del usuario %{NAME} <strong><em>%{PLAN}</em></strong> ha expirado."
+
+    notify_admin_subscription_canceled:
+      subject: "La suscripción de un miembro ha sido cancelada"
+      body:
+        subscription_canceled_html: "La suscripción <strong><em>%{PLAN}</em></strong> del usuario %{NAME} ha sido cancelada."
+
+    notify_member_subscription_canceled:
+      subject: "Su suscripción ha sido cancelada"
+      body:
+        your_plan_was_canceled: "Su suscripción ha sido cancelada."
+        your_plan: "Su suscripción"
+        end_at: "termina el"
+
+    notify_member_slot_is_canceled:
+      subject: "Su reserva ha sido cancelada"
+      body:
+        reservation_canceled: "Su reserva para %{RESERVABLE} ha sido cancelada"
+
+    notify_admin_slot_is_canceled:
+      subject: "Una reserva ha sido cancelada"
+      body:
+        member_cancelled: "El usuario %{NAME} ha cancelado una reserva"
+        item_details: "%{START} - %{END}, referido a %{RESERVABLE}"
+        generate_refund: "No olvide generar una nota de crédito o un reembolso por esta cancelación."
+
+    notify_admin_when_user_is_imported:
+      subject: "Una cuenta de usuario ha sido importada (SSO)"
+      body:
+        new_account_imported: "Una nueva cuenta (ID: %{ID}) ha sido importada a la web via %{PROVIDER}."
+        provider_uid: "El ID del proveedor es: "
+        known_information: "Esto es lo que sabemos del proveedor:"
+        address_already_used: "Esta dirección ya está asociada con otro usuario."
+        no_more_info_available: "No se puede proporcionar ninguna otra información sobre este usuario antes de completar su perfil."
+
+    notify_user_profile_complete:
+      subject: "Ahora tienes acceso a nuestra web"
+      body:
+        message: "La información de su cuenta se ha actualizado correctamente, ahora tiene acceso a todo el sitio web."
+
+    notify_user_auth_migration:
+      subject: "Cambio importante a su cuenta FabLab"
+      body:
+        the_platform: "La web"
+        is_changing_its_auth_system_and_will_now_use: "en realidad está cambiando su sistema de identificación de usuario y usará"
+        instead_of: "en lugar de"
+        consequence_of_the_modification: "Debido a este cambio, no podrá iniciar sesión en el sitio web con sus nombres de usuario actual."
+        to_use_the_platform_thanks_for: "Para seguir usando el sitio web, por favor"
+        create_an_account_on: "cree una cuenta en"
+        or_use_an_existing_account_clicking_here: "o utilice una cuenta existente haciendo clic aquí"
+        in_case_of_problem_enter_the_following_code: "En caso de problemas con este enlace, puede ingresar el siguiente código en su primer intento de conexión para migrar su cuenta real al nuevo sistema de autenticación:"
+
+    notify_admin_user_merged:
+      subject: "Una cuenta importada se ha fusionado con una cuenta existente"
+      body:
+        imported_account_merged: "Una cuenta de usuario previamente importada vía %{PROVIDER) se ha fusionado con la cuenta existente %{NAME}"
+        provider_uid: "La identificación del proveedor es:"
+
+    notify_admin_profile_complete:
+      subject: "Una cuenta importada ha completado su perfil"
+      body:
+        account_completed: "Una cuenta de usuario importada previamente %{PROVIDER} ha completado su perfil:"
+        provider_id: "su ID de proveedor es:"
+
+    notify_admin_abuse_reported:
+      subject: "Se ha informado un contenido abusivo"
+      body:
+        intro: "Un usuario ha marcado un contenido como abusivo"
+        signaled_content: "contenido marcado:"
+        signaled_by: "marcado por:"
+        signaled_on: "marcado el:"
+        message: "Mensaje:"
+
+    notify_admin_invoicing_changed:
+      subject: "Se ha cambiado un parámetro de facturación."
+      body:
+        generation_status_html: "Un parámetro de facturación ha sido cambiado <strong>{STATUS, select, true{disabled} other{enabled}}</strong> por el usuario {NAME}."  # messageFormat interpolation
+        disabled: "A partir de ahora, no se emitirá factura cuando el usuario paga en la recepción."
+        enabled: "A partir de ahora, todos los pagos realizados por este usuario en la recepción llevarán a la emisión de facturación. "
+
+    notify_user_wallet_is_credited:
+      subject: ""                                                                                   #translation_missing
+      body:
+        wallet_credit_html: "Se han ingresado %{AMOUNT} por el administrador."
+
+    notify_admin_user_wallet_is_credited:
+      subject: "Se han ingresado fondos en la cartera de un usuario"
+      body:
+        wallet_credit_html: "Se han ingresado %{AMOUNT} fondos en la cartera del usuario %{USER} por el administrador %{ADMIN}."
+
+    notify_admin_export_complete:
+      subject: "Exportación completada"
+      body:
+        you_asked_for_an_export: "Usted solicitó una exportación"
+        statistics_global: "de todas las estadísticas"
+        statistics_account: "de las estadísticas de registro"
+        statistics_event: "de estadísticas sobre eventos"
+        statistics_machine: "de estadísticas sobre horas de máquina"
+        statistics_project: "de estadísticas sobre proyectos"
+        statistics_subscription: "de estadísticas de suscripción"
+        statistics_training: "de estadísticas sobre entrenamientos"
+        statistics_space: "de estadísticas sobre espacios"
+        users_members: "de la lista de miembros"
+        users_subscriptions: "de la lista de suscripciones"
+        users_reservations: "de la lista de reservas"
+        availabilities_index: "de las reservas disponibles"
+        click_to_download: " archivo Excel generado correctamente. Para descargarlo, haga clic "
+        here: "aquí"
+
+    notify_member_about_coupon:
+      subject: "Cupón"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento del %{PERCENT}% en toda la web con el código %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE:  "Disfruta de un descuento de %{AMOUNT} en toda la web con el código %{CODE}."
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Este cupón es válido {USAGE, plural, =1{just once} other{many times}}: para todas tus compras {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, desde ahora {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
+
+    shared:
+      hello: "¡Hola %{user_name}!"

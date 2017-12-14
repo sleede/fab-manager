@@ -9,123 +9,162 @@ You will need to be root through the rest of the setup.
 ##### Table of contents
 
 1. [Preliminary steps](#preliminary-steps)<br/>
-1.1. setup the server<br/>
-1.2. buy a domain name and link it with the droplet<br/>
-1.3. connect to the droplet via SSH<br/>
-1.4. prepare server<br/>
-1.5. setup folders and env file<br/>
-1.6. setup nginx file<br/>
-1.7. SSL certificate with LetsEncrypt<br/>
-1.8. requirements
-2. [Install Fabmanager](#install-fabmanager)<br/>
+1.1. Setup the server<br/>
+1.2. Setup the domain name<br/>
+1.3. Connect through SSH<br/>
+1.4. Prepare the server<br/>
+1.5. Retrieve the initial configuration files<br/>
+1.6. Setup folders and env file<br/>
+1.7. Setup nginx configuration<br/>
+1.8. SSL certificate with LetsEncrypt<br/>
+1.9. Requirements
+2. [Install Fab-manager](#install-fabmanager)<br/>
 2.1. Add docker-compose.yml file<br/>
 2.2. pull images<br/>
 2.3. setup database<br/>
 2.4. build assets<br/>
 2.5. prepare Elasticsearch (search engine)<br/>
-2.6. start all services
-3. [Generate SSL certificate by Letsencrypt](#generate-ssl-certificate-by-letsencrypt)
+2.6. start all services<br/>
+2.7. Generate SSL certificate by Let's encrypt
 4. [Docker utils](#docker-utils)
-5. [Update Fabmanager](#update-fabmanager)<br/>
+5. [Update Fab-manager](#update-fabmanager)<br/>
 5.1. Steps<br/>
 5.2. Good to know
 
+<a name="preliminary-steps"></a>
 ## Preliminary steps
 
-### setup the server
+<a name="setup-the-server"></a>
+### Setup the server
 
-Go to [DigitalOcean](https://www.digitalocean.com/) and create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"** (Docker and Docker-compose are preinstalled).
-You need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
+There are many hosting providers on the internet, providing affordable virtual private serveurs (VPS).
+Here's a non exhaustive list:
+- [DigitalOcean](https://www.digitalocean.com/pricing/#droplet)
+- [OVH](https://www.ovh.com/fr/vps/) 
+- [Amazon](https://aws.amazon.com/fr/ec2/)
+- [Gandi](https://v4.gandi.net/hebergement/serveur/prix)
+- [Ikoula](https://express.ikoula.com/fr/serveur-virtuel)
+- [1&1](https://www.1and1.fr/serveurs-virtuels)
+- [GoDaddy](https://fr.godaddy.com/hosting/vps-hosting)
+- [and many others...](https://www.google.fr/search?q=vps+hosting)
+
+Choose one, depending on your budget, on the server's location, on the uptime guarantee, etc.
+
+You will need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
 We recommend 4 GB RAM for larger communities.
-Choose a datacenter. Set the hostname as your domain name.
 
-### buy a domain name and link it with the server
+On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"**. 
+This way, Docker and Docker-compose are preinstalled.
+Choose a datacenter and set the hostname as your domain name.
 
-1. Buy a domain name on [OVH](https://www.ovh.com/fr/)
-2. Replace the IP address of the domain with the droplet's IP (you can enable the flexible ip and use it)
+With other providers, choose a [supported operating system](https://github.com/LaCasemate/fab-manager/blob/master/README.md#software-stack) and install docker on it:
+- [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) 
+- [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+
+Then install [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Setup the domain name
+
+There are many domain name registrars on the internet, you may choose one that fit your needs.
+You can find an exhaustive list [on the ICANN website](https://www.icann.org/registrar-reports/accredited-list.html)
+
+1. Once done, buy a domain name on it 
+2. Replace the IP address of the domain with the IP address of your VPS (This is a DNS record type A)
 3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient. 
 
-### connect to the server via SSH
+### Connect through SSH
 
 You can already connect to the server with this command: `ssh root@server-ip`. When DNS propagation will be done, you will be able to
 connect to the server with `ssh root@your-domain-name`.
 
-### prepare server
+### Prepare the server
 
-We recommend you to :
-- ugprade your system
-- add at least 2GB of swap
-- verify that you are using a connection via an SSH key. If so, you can set the root passord (for the debug console) and disable password connection.
-To do this, you can use the following script :
+Before installing fab-manager, we recommend you to:
+- Upgrade your system
+- Setup the server timezone
+- Add at least 2GB of swap memory
+- Protect your SSH connection by forcing it through a RSA key
+
+You can run the following script as root to easily perform all these operations:
 
 ```bash
-cd /root
-git clone https://github.com/sleede/lazyscripts.git
-cd lazyscripts/
-chmod a+x prepare-vps.sh
-./prepare-vps
+\curl -sSL prepare-vps.sleede.com | bash
 ```
 
+<a name="retrieve-config-files"></a>
+### Retrieve the initial configuration files
 
-### setup folders and env file
+```bash
+\curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/setup.sh | bash
+```
 
-Create the config folder:
+### Setup folders and env file
+
+Create the config folder, copy the environnement variables configuration file and edit it:
 ```bash
 mkdir -p /apps/fabmanager/config
+cd /apps/famanager
+cp example/env.exemple config/env
+vi config/env
+# or use your favorite text editor instead of vi (nano, ne...)
 ```
+You need to carefully configure each variable before starting fab-manager.
+Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md#environment-configuration) for explanations about those variables.
 
-Make a copy of the **docker/env.example** file and use it as a starting point.
-Set all the environment variables needed by your application. Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md#environment-configuration) for explanations about those variables.
 
+### Setup nginx configuration
 
-Then, copy the previously customized `env.example` file as `/apps/fabmanager/config/env`
-
-### setup nginx file
-
-Create the nginx folder:
+Create the nginx folder, copy the example configuration file and edit it:
 ```bash
 mkdir -p /apps/fabmanager/config/nginx
+# whether you want you fab-manager to use SSL encryption or not, you should copy one of the following file
+### with SSL ### 
+cp example/nginx_with_ssl.conf.example config/nginx/fabmanager.conf
+### OR without SSL ###
+cp example/nginx.conf.example config/nginx/fabmanager.conf
+
+vi config/nginx/fabmanager.conf
+# or use your favorite text editor instead of vi (nano, ne...)
 ```
 
-Customize the docker/nginx_with_ssl.conf.example file
+Customize the following values:
 * Replace **MAIN_DOMAIN** (example: fab-manager.com).
 * Replace **URL_WITH_PROTOCOL_HTTPS** (example: https://www.fab-manager.com).
 * Replace **ANOTHER_URL_1**, **ANOTHER_URL_2** (example: .fab-manager.fr)
-
-**Use nginx.conf.example if you don't want SSL for your app.**
-
-Then,
-Copy the previously customized `nginx_with_ssl.conf.example` as `/apps/fabmanager/config/nginx/fabmanager.conf`
-
-**OR**
-
-Copy the previously customized `nginx.conf.example` as `/apps/fabmanager/config/nginx/fabmanager.conf` if you do not want to use ssl (not recommended !).
 
 ### SSL certificate with LetsEncrypt
 
 **FOLLOW THOSE INSTRUCTIONS ONLY IF YOU WANT TO USE SSL**.
 
+If you have chosen the SSL configuration at the previous point, you must follow these instructions to make it work.
+
 Let's Encrypt is a new Certificate Authority that is free, automated, and open.
 Let’s Encrypt certificates expire after 90 days, so automation of renewing your certificates is important.
 Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container:
 
+Generate the dhparam.pem file 
 ```bash
 mkdir -p /apps/fabmanager/config/nginx/ssl
+cd /apps/fabmanager/config/nginx/ssl
+openssl dhparam -out dhparam.pem 4096
 ```
-Run `openssl dhparam -out dhparam.pem 4096` in the folder /apps/fabmanager/config/nginx/ssl (generate dhparam.pem file)
+
+Copy the initial configuration file and customize it
 ```bash
-mkdir -p /apps/fabmanager/letsencrypt/config/
-```
-Copy the previously customized `webroot.ini.example` as `/appsfabmanager/letsencrypt/config/webroot.ini`
-```bash
-mkdir -p /apps/fabmanager/letsencrypt/etc/webrootauth
+cd /apps/fabmanager/
+mkdir -p letsencrypt/config/
+mkdir -p letsencrypt/etc/webrootauth
+
+cp example/webroot.ini.example /apps/fabmanager/letsencrypt/config/webroot.ini
+vi letsencrypt/config/webroot.ini
+# or use your favorite text editor instead of vi (nano, ne...)
 ```
 
 Run `docker pull quay.io/letsencrypt/letsencrypt:latest`
 
 Create file (with sudo) /etc/systemd/system/letsencrypt.service and paste the following configuration into it:
 
-```bash
+```systemd
 [Unit]
 Description=letsencrypt cert update oneshot
 Requires=docker.service
@@ -137,7 +176,7 @@ ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1
 ```
 
 Create file (with sudo) /etc/systemd/system/letsencrypt.timer and paste the following configuration into it:
-```bash
+```systemd
 [Unit]
 Description=letsencrypt oneshot timer  
 Requires=docker.service
@@ -151,7 +190,7 @@ Unit=letsencrypt.service
 WantedBy=timers.target
 ```
 
-That's all for the moment. Keep on with the installation, we'll complete that part after deployment in the [Generate SSL certificate by Letsencrypt](#generate-ssl-cert-letsencrypt).
+That's all for the moment. Keep on with the installation, we'll complete that part after deployment in the [Generate SSL certificate by Let's encrypt](#generate-ssl-cert-letsencrypt).
 
 ### Requirements
 
@@ -164,25 +203,16 @@ docker info
 docker-compose -v
 ```
 
-Otherwise, you can install docker to ubuntu with the following instructions :
-https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repository
+Otherwise, follow the instructions provided in the section [Setup the server](#setup-the-server) to install.
 
-To install docker-compose :
-
-```bash
-curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > ./docker-compose
-sudo mkdir -p /opt/bin
-sudo mv docker-compose /opt/bin/
-sudo chmod +x /opt/bin/docker-compose
-```
-
-
-
+<a name="install-fabmanager"></a>
 ## Install Fabmanager
 
 ### Add docker-compose.yml file
 
-Copy docker-compose.yml to your app folder `/apps/fabmanager`.
+You should already have a `docker-compose.yml` file in your app folder `/apps/fabmanager`.
+Otherwise, see the section [Retrieve the initial configuration files](#retrieve-config-files) to get it.
+
 The docker-compose commands must be launched from the folder `/apps/fabmanager`.
 
 ### pull images
@@ -196,7 +226,8 @@ docker-compose pull
 ```bash
 docker-compose run --rm fabmanager bundle exec rake db:create # create the database
 docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
-docker-compose run --rm -e ADMIN_EMAIL=xxx ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed # seed the database
+# replace xxx with your default admin email/password
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed # seed the database
 ```
 
 ### build assets
@@ -207,11 +238,12 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx ADMIN_PASSWORD=xxx fabmanager bundle 
 
 `docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
 
-#### start all services
+### start all services
 
 `docker-compose up -d`
 
-### Generate SSL certificate by Letsencrypt 
+<a name="generate-ssl-cert-letsencrypt"></a>
+### Generate SSL certificate by Let's encrypt 
 
 **Important: app must be run on http before starting letsencrypt**
 
@@ -234,9 +266,11 @@ Finally, if everything is ok, start letsencrypt timer to update the certificate 
 ```bash
 sudo systemctl enable letsencrypt.timer
 sudo systemctl start letsencrypt.timer
-(check) sudo systemctl list-timers
+# check status with
+sudo systemctl list-timers
 ```
 
+<a name="docker-utils"></a>
 ## Docker utils with docker-compose
 
 ### Restart app
@@ -275,7 +309,8 @@ sudo systemctl start letsencrypt.timer
 
 docker-compose run --rm -e ADMIN_EMAIL=xxx ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
 
-## update Fabmanager
+<a name="update-fabmanager"></a>
+## Update Fab-manager
 
 *This procedure updates fabmanager to the most recent version by default.*
 

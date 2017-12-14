@@ -111,8 +111,15 @@ pt:
         all_events: "Todos eventos"
         passed_events: "Eventos anteriores"
         events_to_come: "Eventos futuros"
-        from_DATE: "Em {{DATE}}"  # angular interpolation
-        from_TIME: "Ás {{TIME}}"  # angular interpolation
+        events_to_come_asc: "Eventos futuros | ordem cronológica"
+        on_DATE: "No {{DATE}}"	  # angular interpolation
+        from_DATE: "Em {{DATE}}"  # angular interpolation 
+        from_TIME: "Ás {{TIME}}"  # angular interpolation 
+        booking: "Reserva"
+        sold_out: "Esgotado"
+        cancelled: "Cancelado"
+        free_entry: "Entrada gratuita"
+        free_admission: "Admissão gratuita"
         view_reservations: "Ver reservas"
         categories: "Categorias"
         add_a_category: "Adicionar categoria"
@@ -204,7 +211,7 @@ pt:
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Erro : um link de crédito entre esta máquina e esta assinatura já existe."
           changes_have_been_successfully_saved: "As modificações foram salvas com sucesso."
           credit_was_successfully_saved: "Crédito salvo com sucesso."
-          error_creating_credit: "Unable to create credit, an error occurred" # TODO
+          error_creating_credit: "Não foi possível criar crédito, um erro ocorreu"
           do_you_really_want_to_delete_this_subscription_plan: "Você realmente deletar esse plano de assinatura?"
           subscription_plan_was_successfully_deleted: "Plano de assinatura foi deletado com sucesso."
           unable_to_delete_the_specified_subscription_an_error_occurred: "Não é possível deletar a assinatura específicada, um erro ocorreu."
@@ -405,14 +412,8 @@ pt:
         this_may_take_a_while_please_wait: "Atenção: Isso pode demorar um pouco, por favor, seja paciente."
         administrator_successfully_deleted: "Administrator excluído com sucesso."
         unable_to_delete_the_administrator: "Impossível excluir administrador."
-        add_a_group: "Adicionar grupo"
-        group_name: "Nome do grupo"
         changes_successfully_saved: "Mudanças salvas com sucesso."
-        an_error_occurred_while_saving_changes: "Um erro ocorreu ao salvar mudanças."
-        new_group_successfully_saved: "Novo grupo salvo com sucesso."
         an_error_occurred_when_saving_the_new_group: "Um erro ocorreu ao salvar novo grupo."
-        group_successfully_deleted: "Grupo excluido com sucesso."
-        unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Não é possível excluir o grupo porque alguns usuários e / ou grupos ainda estão vinculados a ele."
         add_a_tag: "Adicionar tag"
         tag_name: "Nome da tag"
         new_tag_successfully_saved: "Nova tag salva com sucesso."
@@ -443,9 +444,9 @@ pt:
           an_error_occurred_when_saving_the_new_group: "Um erro ocorreu ao salvar novo grupo."
           group_successfully_deleted: "Grupo excluido com sucesso."
           unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Não é possível excluir o grupo porque alguns usuários e / ou grupos ainda estão vinculados a ele."
-          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation TODO
-          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation TODO
-          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation TODO
+          group_successfully_enabled_disabled: "Grupo {STATUS, select, true{desativado} other{ativado}} com sucesso." 
+          unable_to_enable_disable_group: "Não foi possível {STATUS, select, true{desativar} other{ativar}} grupo."  
+          unable_to_disable_group_with_users: "Não é possível desabilitar grupo porque {USERS, plural, =1{existe} other{existem}} {USERS} {USERS, plural, =1{usuário} other{usuários}} {USERS, plural, =1{ativo} other{ativos}}."
           status_enabled: "Ativos"
           status_disabled: "Desabilitados"
           status_all: "Todos"

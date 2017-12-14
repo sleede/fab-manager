@@ -5,7 +5,7 @@ module PDF
     include ActionView::Helpers::NumberHelper
     include ApplicationHelper
 
-    def initialize(invoice)
+    def initialize(invoice, subscription_expiration_date)
       super(:margin => 70)
 
       # fonts
@@ -118,8 +118,9 @@ module PDF
             if invoice.invoiced_type == 'OfferDay'
               details += I18n.t('invoices.subscription_extended_for_free_from_START_to_END', START:I18n.l(invoice.invoiced.start_at.to_date), END:I18n.l(invoice.invoiced.end_at.to_date))
             else
-              subscription_start_at = subscription.expired_at - subscription.plan.duration
-              details += I18n.t('invoices.subscription_NAME_from_START_to_END', NAME:item.description, START:I18n.l(subscription_start_at.to_date), END:I18n.l(subscription.expired_at.to_date))
+              subscription_end_at = subscription_expiration_date.is_a?(Time) ? subscription_expiration_date : DateTime.parse(subscription_expiration_date)
+              subscription_start_at = subscription_end_at - subscription.plan.duration
+              details += I18n.t('invoices.subscription_NAME_from_START_to_END', NAME:item.description, START:I18n.l(subscription_start_at.to_date), END:I18n.l(subscription_expiration_date.to_date))
             end
 
 

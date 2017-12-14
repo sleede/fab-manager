@@ -1,8 +1,8 @@
 
 availability_1:
   id: 1
-  start_at: <%= DateTime.now.monday.utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.now.monday.utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.now.utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= DateTime.now.utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: training
   created_at: 2016-04-04 15:24:01.517486000 Z
   updated_at: 2016-04-04 15:24:01.517486000 Z
@@ -11,8 +11,8 @@ availability_1:
 
 availability_2:
   id: 2
-  start_at: <%= (DateTime.now.monday + 1.day).utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.now.monday + 1.day).utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.now + 1.day).utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= (DateTime.now + 1.day).utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: training
   created_at: 2016-04-04 15:24:09.169364000 Z
   updated_at: 2016-04-04 15:24:09.169364000 Z
@@ -21,8 +21,8 @@ availability_2:
 
 availability_3:
   id: 3
-  start_at: <%= DateTime.now.monday.utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= DateTime.now.monday.utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= DateTime.now.utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= DateTime.now.utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: machines
   created_at: 2016-04-04 15:24:27.587583000 Z
   updated_at: 2016-04-04 15:24:27.587583000 Z
@@ -31,8 +31,8 @@ availability_3:
 
 availability_4:
   id: 4
-  start_at: <%= (DateTime.now.monday + 1.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.now.monday + 1.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.now + 1.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= (DateTime.now + 1.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: machines
   created_at: 2016-04-04 15:24:44.044908000 Z
   updated_at: 2016-04-04 15:24:44.044908000 Z
@@ -41,8 +41,8 @@ availability_4:
 
 availability_5:
   id: 5
-  start_at: <%= (DateTime.now.monday + 2.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.now.monday + 2.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.now + 2.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= (DateTime.now + 2.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: machines
   created_at: 2016-04-04 15:25:48.584444000 Z
   updated_at: 2016-04-04 15:25:48.584444000 Z
@@ -51,8 +51,8 @@ availability_5:
 
 availability_6:
   id: 6
-  start_at: <%= (DateTime.now.monday + 3.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.now.monday + 3.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.now + 3.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= (DateTime.now + 3.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: machines
   created_at: 2016-04-04 15:26:17.953216000 Z
   updated_at: 2016-04-04 15:26:17.953216000 Z
@@ -61,8 +61,8 @@ availability_6:
 
 availability_7:
   id: 7
-  start_at: <%= (DateTime.now.monday + 3.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.now.monday + 3.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.now + 3.day).utc.change({hour: 12}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= (DateTime.now + 3.day).utc.change({hour: 18}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: machines
   created_at: 2016-04-04 15:26:39.278627000 Z
   updated_at: 2016-04-04 15:26:39.278627000 Z
@@ -71,8 +71,8 @@ availability_7:
 
 availability_8:
   id: 8
-  start_at: <%= (DateTime.now.monday + 2.day).utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
-  end_at: <%= (DateTime.now.monday + 2.day).utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  start_at: <%= (DateTime.now + 2.day).utc.change({hour: 6}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
+  end_at: <%= (DateTime.now + 2.day).utc.change({hour: 10}).strftime('%Y-%m-%d %H:%M:%S.%9N Z') %>
   available_type: training
   created_at: 2016-04-04 15:26:49.572724000 Z
   updated_at: 2016-04-04 15:26:49.572724000 Z

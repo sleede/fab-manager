@@ -78,7 +78,10 @@
 
     </div>   <!-- ./panel-body  -->
     <div class="panel-footer no-padder">
-      <input type="submit" ng-value="submitName" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="eventForm.$invalid || event.category_id === null"/>
+      <input type="submit" 
+		     ng-value="submitName" 
+			 class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" 
+			 ng-disabled="eventForm.$invalid || event.category_id === null"/>
     </div>
     </section>
 
@@ -194,14 +197,14 @@
               <label translate>{{ 'start_time' }}</label>
               <div>
                 <input type="hidden" name="event[start_time]" ng-value="event.start_time">
-                <uib-timepicker ng-model="event.start_time" hour-step="1" minute-step="1" show-meridian="ismeridian"></uib-timepicker>
+                <uib-timepicker ng-model="event.start_time" mousewheel="false" hour-step="1" minute-step="1" show-meridian="ismeridian"></uib-timepicker>
               </div>
           </div>
           <div class="col-xs-6">
             <label translate>{{ 'end_time' }}</label>
             <div>
               <input type="hidden" name="event[end_time]" ng-value="event.end_time">
-              <uib-timepicker ng-model="event.end_time" hour-step="1" minute-step="1" show-meridian="ismeridian"></uib-timepicker>
+              <uib-timepicker ng-model="event.end_time" mousewheel="false" hour-step="1" minute-step="1" show-meridian="ismeridian"></uib-timepicker>
             </div>
           </div>
         </div>

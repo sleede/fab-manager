@@ -37,10 +37,10 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
   # Adds a resultset of events to the bottom of the page, grouped by month
   ##
   $scope.loadMoreEvents = ->
+    $scope.page += 1
     Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
       $scope.events = $scope.events.concat data
       groupEvents($scope.events)
-      $scope.page += 1
 
       if (!data[0] || data[0].nb_total_events <= $scope.events.length)
         $scope.noMoreResults = true
@@ -71,7 +71,6 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
     Event.query Object.assign({page: $scope.page}, $scope.filters), (data) ->
       $scope.events = data
       groupEvents(data)
-      $scope.page += 1
 
       if (!data[0] || data[0].nb_total_events <= $scope.events.length)
         $scope.noMoreResults = true

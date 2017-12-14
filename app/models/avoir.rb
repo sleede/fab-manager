@@ -1,6 +1,5 @@
 class Avoir < Invoice
   belongs_to :invoice
-  after_create :expire_subscription, if: :subscription_to_expire
 
   validates :avoir_mode, :inclusion => {:in => %w(stripe cheque transfer none cash wallet)}
 

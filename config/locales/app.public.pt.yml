@@ -127,13 +127,14 @@ pt:
           # next events summary on the home page
           fablab_s_next_events: "Próximos eventos do FabLab"
           every_events: "Todos Eventos"
-          from_date_to_date: "De {{START}} até {{END}}"  # angular interpolation
-          on_the_date: "Em {{DATE}}"  # angular interpolation
+          from_date_to_date: "De {{START}} até {{END}}"   # angular interpolation
+          on_the_date: "Em {{DATE}}"                      # angular interpolation
           from_time_to_time: "Das {{START}} até {{END}}"  # angular interpolation
           free_entry: "Entrada franca"
           free_admission: "Admissão grátis"
           full_price: "Valor inteira"
           event_full: "Evento lotado"
+          still_available: "Locais disponíveis"
 
         projects_list:
           # projects gallery
@@ -180,9 +181,9 @@ pt:
             add_a_machine: "Adicionar uma máquina"
             book: "Reservar"
             _or_the_: " ou o "
-            status_enabled: "Ativos" # TODO
-            status_disabled: "Desabilitados" # TODO
-            status_all: "Todos" # TODO
+            status_enabled: "Ativo" 
+            status_disabled: "Desabilitado" 
+            status_all: "Todos"
 
         machines_show:
           # details of a machine
@@ -233,6 +234,11 @@ pt:
           the_fablab_s_events: "Eventos do Fablab"
           all_categories: "Todas categorias"
           for_all: "Para todos"
+          sold_out: "Esgotado."
+          cancelled: "Cancelado"
+          free_admission: "Admissão grátis"
+          still_available: "lugares disponíveis"
+          free_entry: "Entrada franca"
 
         events_show:
           # details and booking of an event
@@ -245,6 +251,7 @@ pt:
           tickets_still_availables: "Tickets ainda disponíveis:"
           sold_out: "Esgotado."
           free_entry: "Entrada franca"
+          cancelled: "Cancelado"
           ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
           make_a_gift_of_this_reservation: "Doe esta reserva"
           you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
@@ -273,9 +280,9 @@ pt:
           spaces_list:
             the_spaces: "Os espaços"
             add_a_space: "Adicionar espaço"
-            status_enabled: "Ativos" # TODO
-            status_disabled: "Desabilitados" # TODO
-            status_all: "Todos" # TODO
+            status_enabled: "Ativo"
+            status_disabled: "Desabilitado"
+            status_all: "Todos" 
             book: "Reservar"
 
         space_show:
@@ -284,7 +291,7 @@ pt:
             book_this_space: "Marcar este espaço"
             unauthorized_operation: "Operação não autorizada"
             confirmation_required: "Confirmação obrigatória"
-            do_you_really_want_to_delete_this_space: "Vocêrealmente deseja remover este espaço?"
+            do_you_really_want_to_delete_this_space: "Você realmente deseja remover este espaço?"
             the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Impossível remover este espaço, pois ele já foi reservado por alguns usuários."
             characteristics: "Características"
             files_to_download: "Arquivo para download"

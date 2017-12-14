@@ -55,7 +55,7 @@ fr:
         add_an_event: "Ajouter un évènement"
         load_the_next_events: "Charger les évènements suivants ..."
         no_passed_events: "Aucun évènement passé"
-        dates: "Dates :"
+        dates: "Dates"
         thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
         surname: "Nom"
         first_name: "Prénom"

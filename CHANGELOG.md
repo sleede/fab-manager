@@ -1,5 +1,18 @@
 # Changelog Fab Manager
 
+## v2.6.1 2017 December 14
+
+- Updated Portuguese translations (#91)
+- Added Spanish translations (#87)
+- Added Central Africa & Cameroon currency symbol (#90)
+- Fix nginx configuration to allow initial Let's Encrypt configuration (#92)
+- Events: open api and monitor improvement (#79)
+- Fix a bug: refund an invoice with a subscription and disabling it a the same time cause the resulting PDF to display the wrong dates
+- Fix a bug: unable to successfully run the test suite after wednesday
+- Fix a security issue: in development environments, web-console has a vulnerability as described in CVE-2015-3224
+- Fixed deploy instructions with docker-compose
+- Updated docker installation instructions
+
 ## v2.6.0 2017 November 13
 
 - Additional button to delete a slot, allowing to delete slots masked by others
