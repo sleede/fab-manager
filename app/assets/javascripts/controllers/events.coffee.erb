@@ -31,7 +31,7 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
     theme_id: null
     age_range_id: null
 
-
+  $scope.monthNames = [<%= t('date.month_names')[1..-1].map { |m| "\"#{m}\"" }.join(', ') %>]
 
   ##
   # Adds a resultset of events to the bottom of the page, grouped by month
@@ -106,19 +106,10 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
   groupEvents = (events) ->
     if events.length > 0
       eventsGroupedByMonth = _.groupBy(events, (obj) ->
-        _.map ['month', 'year'], (key, value) -> obj[key]
+        _.map ['month_id', 'year'], (key, value) -> obj[key]
       )
       $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth)
-
-      monthsOrder = _.sortBy _.keys($scope.eventsGroupByMonth), (k)->
-        monthYearArray = k.split(',')
-        date = new Date()
-        date.setMonth(monthYearArray[0])
-        date.setYear(monthYearArray[1])
-        return -date.getTime()
-
-      $scope.monthOrder = monthsOrder
-
+      $scope.monthOrder = Object.keys($scope.eventsGroupByMonth)
 
 
   ## !!! MUST BE CALLED AT THE END of the controller
