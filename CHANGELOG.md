@@ -4,6 +4,7 @@
 
 - Support for internet explorer 11
 - Fix a bug: events order in public list
+- Fix a bug: unable to create a training credit
 - Corrected typos in documentation (#96)
 
 ## v2.6.1 2017 December 14
