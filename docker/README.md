@@ -307,7 +307,7 @@ sudo systemctl list-timers
  
 ### Example of command passing env variables
 
-docker-compose run --rm -e ADMIN_EMAIL=xxx ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
 
 <a name="update-fabmanager"></a>
 ## Update Fab-manager

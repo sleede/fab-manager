@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## v2.6.2 2017 December 21
+
+- Support for internet explorer 11
+- Fix a bug: events order in public list
+- Corrected typos in documentation (#96)
+
 ## v2.6.1 2017 December 14
 
 - Updated Portuguese translations (#91)
