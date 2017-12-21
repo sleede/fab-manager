@@ -127,7 +127,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```bash
    rake db:create
    rake db:migrate
-   ADMIN_EMAIL=youradminemail ADMIN_PASSWORD=youradminpassword rake db:seed
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    ```
 
 9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`

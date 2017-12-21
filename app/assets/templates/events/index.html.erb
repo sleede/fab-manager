@@ -41,7 +41,7 @@
     </div>
 
     <div ng-repeat="month in monthOrder">
-      <h1>{{month.split(',')[0]}}, {{month.split(',')[1]}}</h1>
+      <h1>{{monthNames[month.split(',')[0] - 1]}}, {{month.split(',')[1]}}</h1>
 
       <div class="row" ng-repeat="event in (eventsGroupByMonth[month].length/3 | array)">
 
