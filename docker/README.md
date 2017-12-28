@@ -103,7 +103,7 @@ You can run the following script as root to easily perform all these operations:
 Create the config folder, copy the environnement variables configuration file and edit it:
 ```bash
 mkdir -p /apps/fabmanager/config
-cd /apps/famanager
+cd /apps/fabmanager
 cp example/env.exemple config/env
 vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
