@@ -17,7 +17,7 @@ prepare_config()
   \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/webroot.ini.example > "$FABMANAGER_PATH/example/webroot.ini.example"
 
   # docker-compose
-  \curl -sSL https://github.com/LaCasemate/fab-manager/blob/master/docker/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
+  \curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
 }
 
 prepare_config "$@"
