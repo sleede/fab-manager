@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## v2.6.3 2018 January 2
+
+- Fix a bug: wrong docker-compose url in setup script (#98)
+- Typo correction in docker README (#97)
+
 ## v2.6.2 2017 December 21
 
 - Support for internet explorer 11
