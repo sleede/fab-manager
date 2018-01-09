@@ -55,4 +55,9 @@ class TrainingImageUploader < CarrierWave::Uploader::Base
   def filename
     "training_image.#{file.extension}" if original_filename
   end
+
+  # return an array like [width, height]
+  def dimensions
+    ::MiniMagick::Image.open(file.file)[:dimensions]
+  end
 end
