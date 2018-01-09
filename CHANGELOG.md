@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fix a bug: a reminder notification were sent for canceled reservations
+
 ## v2.6.3 2018 January 2
 
 - Fix a bug: wrong docker-compose url in setup script (#98)
