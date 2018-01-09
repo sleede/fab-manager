@@ -12,7 +12,7 @@
 
   <!-- Facebook Open Graph -->
   <meta property="og:title" content="<%= @event.title %>"/>
-  <meta property="og:description" content="<%= @event.description %>"/>
+  <meta property="og:description" content="<%= strip_tags(@event.description) %>"/>
   <% if @event.event_image %>
     <meta property="og:image" content="<%= root_url+image.url %>"/>
     <meta property="og:image:width" content="<%= width%>" />

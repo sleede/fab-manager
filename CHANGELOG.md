@@ -3,6 +3,7 @@
 ## next release
 
 - Fix a bug: a reminder notification were sent for canceled reservations
+- Fix a bug: sharing an event on facebook has HTML tags in the description
 
 ## v2.6.3 2018 January 2
 
