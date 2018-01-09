@@ -1,0 +1,34 @@
+<%
+  if @training.training_image
+    image = @training.training_image.attachment.medium
+    width, height = image.dimensions
+  end
+%>
+
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Facebook Open Graph -->
+  <meta property="og:title" content="<%= @training.name %>"/>
+  <meta property="og:description" content="<%= strip_tags(@training.description) %>"/>
+  <% if @training.training_image %>
+    <meta property="og:image" content="<%= root_url+image.url %>"/>
+    <meta property="og:image:width" content="<%= width%>" />
+    <meta property="og:image:height" content="<%=height%>" />
+  <% end %>
+  <meta property="fb:app_id" content="<%= Rails.application.secrets.facebook_app_id%>" />
+  <meta property="og:url" content="<%= root_url+'#!/trainings/'+@training.slug %>" />
+
+  <!-- Twitter Cards-->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="<%= ENV['TWITTER_NAME'] %>">
+  <meta name="twitter:title" content="<%= @training.name %>">
+  <meta name="twitter:description" content="<%= strip_tags(@training.description) %>">
+  <% if @training.training_image %>
+    <meta name="twitter:image" content="<%= root_url+image.url %>">
+  <% end %>
+
+</head>
+</html>

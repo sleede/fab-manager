@@ -7,6 +7,9 @@ class SocialBotController < ActionController::Base
       when /(=%2F|\/)events(%2F|\/)([0-9]+)/
         @event = Event.find("#{$3}".to_i)
         render :event, status: :ok
+      when /(=%2F|\/)trainings(%2F|\/)([\-0-9a-z_]+)/
+        @training = Training.friendly.find("#{$3}")
+      render :training, status: :ok
       else
         puts "unknown bot request : #{request.original_url}"
     end

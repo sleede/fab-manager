@@ -2,6 +2,7 @@
 
 ## next release
 
+- Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
 
