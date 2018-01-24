@@ -18,9 +18,8 @@ es:
 
         # login/logout
         sign_out: "Salir"
-        sign_up: "Entrar"
-        sign_in: "Registrarse"
-
+        sign_up: "Registrarse"
+        sign_in: "Entrar"
         # left menu
         notifications: "Notificaciones"
         admin: "Administrador"
