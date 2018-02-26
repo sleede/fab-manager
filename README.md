@@ -349,10 +349,14 @@ environment.
    cp config/application.yml.default config/application.yml
    ```
 
-10. Set up the databases. (You should provide the desired admin credentials):
+10. Set up the databases. (Note that you should provide the desired admin credentials and that these
+    specific set of commands must be used to set up the database as some raw SQL instructions are
+    included in the migrations):
 
    ```bash
-   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:setup
+   rake db:create
+   rake db:migrate
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    rake fablab:es_build_stats
    ```
 
