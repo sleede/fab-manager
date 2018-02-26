@@ -307,7 +307,7 @@ environment.
 2. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/MakerNetwork/MakerNet.work.git
+   git clone https://github.com/LaCasemate/fab-manager
    ```
 
 3. From the project directory, run:
