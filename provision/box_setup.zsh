@@ -1,5 +1,19 @@
 #!/usr/bin/env zsh
 
+# Set environmen values #######################################################
+
+  # Virtual environment flag
+  echo '# Set virtual environment flag' >> ~/.profile
+  echo 'export VIRTUAL_DEV_ENV=true' >> ~/.profile
+  echo "\n" >>  ~/.profile
+
+  # Language configuration
+  echo '# Set locale configuration' >> ~/.profile
+  echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
+  echo 'export LANG=en_US.UTF-8' >> ~/.profile
+  echo 'export LANGUAGE=en_US.UTF-8' >> ~/.profile
+  echo "\n" >>  ~/.profile
+
 # Install and setup PostgreSQL ################################################
 
 echo "***************************************************"
@@ -93,14 +107,6 @@ echo "***************************************************"
 echo "Checking for NVM... "
 echo "***************************************************"
 if [[ ! -x "$HOME/.nvm" ]]; then
-
-  # Set language configuration
-  echo '# Set locale configuration' >> ~/.profile
-  echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
-  echo 'export LANG=en_US.UTF-8' >> ~/.profile
-  echo 'export LANGUAGE=en_US.UTF-8' >> ~/.profile
-  echo "\n" >>  ~/.profile
-
   wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
   echo '# Node Version Manager' >> ~/.profile

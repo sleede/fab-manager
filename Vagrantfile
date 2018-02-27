@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Provisioning
-  config.vm.provision "shell", privileged: true, run: "always" do |s|
+  config.vm.provision "shell", privileged: true, run: "once" do |s|
     s.inline = "export LC_ALL=en_US.UTF-8\n" \
                "export LANG=en_US.UTF-8\n" \
                "export LANGUAGE=en_US.UTF-8"
