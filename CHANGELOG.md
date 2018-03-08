@@ -5,6 +5,7 @@
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
+- fix stripe api version, all fabmanagers has to use this version because codebase relies on it
 
 ## v2.6.3 2018 January 2
 
