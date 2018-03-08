@@ -104,7 +104,7 @@ Create the config folder, copy the environnement variables configuration file an
 ```bash
 mkdir -p /apps/fabmanager/config
 cd /apps/fabmanager
-cp example/env.exemple config/env
+cp example/env.example config/env
 vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
 ```

@@ -10,6 +10,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
 4.2. [Environment Configuration](#environment-configuration)
+4.3. [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
@@ -70,7 +71,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
-   If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before. 
+   If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
 
 2. Retrieve the project from Git
 
@@ -289,6 +290,81 @@ See the [Open Projects](#open-projects) section for a detailed description of th
 
 See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](#i18n) paragraph for a detailed description of these parameters.
 
+
+<a name="virtual-machine-instructions"></a>
+### Virtual Machine Instructtions
+
+These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
+machine, with most of the software dependencies installed automatically and avoiding to install a lot
+of software and services directly on the host computer.
+
+**Note:** The provision scripts configure the sofware dependencies to play nice with each other while
+they are inside the same virtual environment but said configuration is not optimized for a production
+environment.
+
+1. Install [Vagrant][vagrant] and [Virtual Box][virtualbox] (with the extension package).
+
+2. Retrieve the project from Git
+
+   ```bash
+   git clone https://github.com/LaCasemate/fab-manager
+   ```
+
+3. From the project directory, run:
+
+   ```bash
+   vagrant up
+   ```
+
+4. Once the virtual machine finished building, reload it with:
+
+   ```bash
+   vagrant reload
+   ```
+
+5. Log into the virtual machine with:
+
+   ```bash
+   vagrant ssh
+   ```
+
+6. While logged in, navigate to the project folder and install the Gemfile
+   dependencies:
+
+   ```bash
+   cd /vagrant
+   bundle install
+   ```
+
+7. Set a directory for Sidekick pids:
+
+   ```bash
+   mkdir -p tmp/pids
+   ```
+
+8. Copy the default configuration files:
+
+   ```bash
+   cp config/database.yml.virtual config/database.yml
+   cp config/application.yml.default config/application.yml
+   ```
+
+10. Set up the databases. (Note that you should provide the desired admin credentials and that these
+    specific set of commands must be used to set up the database as some raw SQL instructions are
+    included in the migrations):
+
+   ```bash
+   rake db:create
+   rake db:migrate
+   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
+   rake fablab:es_build_stats
+   ```
+
+11. Start the application and visit `localhost:3000` on your browser to check that it works:
+
+   ```bash
+   foreman s -p 3000
+   ```
 
 <a name="postgresql"></a>
 ## PostgreSQL
@@ -734,3 +810,8 @@ Developers may find information on how to implement their own authentication pro
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [ElasticSearch 1.7](https://www.elastic.co/guide/en/elasticsearch/reference/1.7/index.html)
+
+
+---
+[vagrant]: https://www.vagrantup.com/downloads.html
+[virtualbox]: https://www.virtualbox.org/wiki/Downloads
