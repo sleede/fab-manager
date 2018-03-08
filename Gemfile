@@ -151,3 +151,5 @@ gem 'apipie-rails'
 # XLS files generation
 gem 'axlsx', git: 'https://github.com/randym/axlsx', branch: 'release-3.0.0'
 gem 'axlsx_rails'
+
+gem "rack-protection", "1.5.5"

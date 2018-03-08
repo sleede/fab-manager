@@ -308,8 +308,8 @@ GEM
     puma (3.10.0)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
-    rack (1.6.8)
-    rack-protection (1.5.3)
+    rack (1.6.9)
+    rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -544,6 +544,7 @@ DEPENDENCIES
   protected_attributes
   puma
   pundit
+  rack-protection (= 1.5.5)
   railroady
   rails (= 4.2.10)
   rails-observers
