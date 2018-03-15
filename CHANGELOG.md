@@ -2,12 +2,15 @@
 
 ## next release
 
+## v2.6.4 2018 March 15
+
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
 - fix stripe api version, all fabmanagers has to use this version because codebase relies on it
 - updates omniauth to ~> 1.3.2 (security vulnerability)
 - updates rack-protection to 1.5.5 (security vulnerability) see [this link](https://github.com/sinatra/sinatra/issues/1408) and [this link](https://github.com/sinatra/rack-protection/pull/122)
+- updates twitter gem in order to get rid of security warning from gem "http"
 
 ## v2.6.3 2018 January 2
 
