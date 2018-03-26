@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 ## next release
+- Updated Omniauth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
 
 ## v2.6.4 2018 March 15
 
