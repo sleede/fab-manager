@@ -1,17 +1,18 @@
 # Changelog Fab Manager
 
 ## next release
-- Updated Omniauth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
+- Updated OmniAuth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
+- Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-8048](https://github.com/flavorjones/loofah/issues/144)
 
 ## v2.6.4 2018 March 15
 
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
-- fix stripe api version, all fabmanagers has to use this version because codebase relies on it
-- updates omniauth to ~> 1.3.2 (security vulnerability)
-- updates rack-protection to 1.5.5 (security vulnerability) see [this link](https://github.com/sinatra/sinatra/issues/1408) and [this link](https://github.com/sinatra/rack-protection/pull/122)
-- updates twitter gem in order to get rid of security warning from gem "http"
+- Set Stripe API version, all fab-managers has to use this version because codebase relies on it
+- Fix a security issue: OmniAuth < 1.3.2  has a security vulnerability described in [CVE-2017-18076](https://nvd.nist.gov/vuln/detail/CVE-2017-18076)
+- Fix a security issue: rack-protection < 1.5.5 has a security vulnerability described in [CVE-2018-1000119](https://nvd.nist.gov/vuln/detail/CVE-2018-1000119)
+- Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency 
 
 ## v2.6.3 2018 January 2
 
