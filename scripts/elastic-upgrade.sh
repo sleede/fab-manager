@@ -133,10 +133,13 @@ upgrade_docker()
   local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed 's/map\[\(.*\):0x[a-f0-9]*\]/\1/')
   # get container mapping to data folder
   local mounts=$(docker inspect -f '{{.Mounts}}' suez-elastic | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true rprivate}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
+  # stop elastic 1.7
   docker stop "$name"
   docker rm -f "$name"
+  # run elastic 2.4
   docker pull elasticsearch:2.4
   docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" elasticsearch:2.4
+  # check status
   sleep 10
   STATUS=$(test_running)
   if [[ "$STATUS" = "ONLINE" ]]; then
@@ -150,9 +153,32 @@ upgrade_docker()
 
 upgrade_classic()
 {
-  echo "Automated upgrade of local installation is not supported."
-  echo "Please refer to your distribution instructions to install ElasticSearch 2.4"
-  echo "For more informations: https://www.elastic.co/guide/en/elasticsearch/reference/2.0/setup-upgrade.html"
+  local system=$(uname -s)
+  case "$system" in
+    Linux*)
+      if [ -f /etc/os-release ]
+      then
+        . /etc/os-release
+        if [ $ID = 'debian' ] || [[ $ID_LIKE = *'debian'* ]]
+        then
+          # Debian compatible
+          wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+          echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+          sudo apt-get update && sudo apt-get upgrade
+        fi
+      fi
+      ;;
+    Darwin*)
+      echo "OS X"
+      brew update
+      brew install homebrew/versions/elasticsearch24
+      ;;
+    *)
+      echo "Automated upgrade of your elasticSearch installation is not supported on your system."
+      echo "Please refer to your distribution instructions to install ElasticSearch 2.4"
+      echo "For more informations: https://www.elastic.co/guide/en/elasticsearch/reference/2.0/setup-upgrade.html"
+      ;;
+  esac
 }
 
 start_upgrade()
