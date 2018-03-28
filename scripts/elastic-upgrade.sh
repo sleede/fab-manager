@@ -130,11 +130,21 @@ upgrade_docker()
   # get container name
   local name=$(docker inspect -f '{{.Name}}' "$id" | sed s:^/::g)
   # get container network name
-  local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed)
+  local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed 's/map\[\(.*\):0x[a-f0-9]*\]/\1/')
   # get container mapping to data folder
+  local mounts=$(docker inspect -f '{{.Mounts}}' suez-elastic | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true rprivate}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
+  docker stop "$name"
+  docker rm -f "$name"
   docker pull elasticsearch:2.4
-  docker run --restart=always  -d --name=fabmanager-elastic -v /home/core/fabmanager/elasticsearch:/usr/share/elasticsearch/data elasticsearch:2.4
-
+  docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" elasticsearch:2.4
+  sleep 10
+  STATUS=$(test_running)
+  if [[ "$STATUS" = "ONLINE" ]]; then
+    echo "Migration to elastic 2.4 was successful."
+  else
+    echo "Unable to find an active ElasticSearch instance, something may have went wrong, exiting..."
+    exit 4
+  fi
 }
 
 
