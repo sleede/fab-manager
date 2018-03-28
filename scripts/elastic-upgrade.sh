@@ -5,17 +5,24 @@
 # - docker "simple"
 # - classic installation
 #   > macOS
-#   > ubuntu
-#   > debian
+#   > debian/ubuntu
+#   > other linux
 
 
 config()
 {
   FM_PATH=$(pwd)
-  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n)" confirm </dev/tty
+  TYPE="NOT-FOUND"
+  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
-    ES_HOST=$(cat "$FM_PATH/config/application.yml" | grep ELASTICSEARCH_HOST | awk '{print $2}')
+    if [ -f "$FM_PATH/config/application.yml" ]
+    then
+      ES_HOST=$(cat "$FM_PATH/config/application.yml" | grep ELASTICSEARCH_HOST | awk '{print $2}')
+    elif [ -f "$FM_PATH/config/env" ]
+    then
+      ES_HOST=$(cat "$FM_PATH/config/env" | grep ELASTICSEARCH_HOST | awk '{split($0,a,"="); print a[2]}')
+    fi
     ES_IP=$(getent hosts "$ES_HOST" | awk '{ print $1 }')
   else
     echo "Please run this script from the fab-manager's installation folder"
@@ -25,11 +32,15 @@ config()
 
 test_docker_compose()
 {
-  ls "$FM_PATH/docker-compose.yml"
-  if [[ $? = 0 ]]
+  if [[ -f "$FM_PATH/docker-compose.yml" ]]
   then
     docker-compose ps | grep elastic
-    if [[ $? = 0 ]]; then echo "DOCKER-COMPOSE"; fi
+    if [[ $? = 0 ]]
+    then
+      TYPE="DOCKER-COMPOSE"
+      local container_id=$(docker-compose ps | grep elastic | awk '{print $1}')
+      ES_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container_id")
+    fi
   fi
 }
 
@@ -40,23 +51,23 @@ test_docker()
   then
     local containers=$(docker ps | grep elasticsearch:1.7)
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(echo "$containers" | awk '{print $1}') | grep "$ES_IP"
-    if [[ $? = 0 ]]; then echo "DOCKER"; fi
+    if [[ $? = 0 ]]; then TYPE="DOCKER"; fi
   fi
 }
 
 test_classic()
 {
-  if [[ "$ES_IP" = "127.0.0.1" || "$ES_IP" = "::1" ]]
+  if [ "$ES_IP" = "127.0.0.1" ] || [ "$ES_IP" = "::1" ]
   then
     whereis -b elasticsearch | grep "/"
-    if [[ $? = 0 ]]; then echo "CLASSIC"; fi
+    if [[ $? = 0 ]]; then TYPE="CLASSIC"; fi
   fi
 }
 
 test_running()
 {
-  local http_res=$(curl -I "$ES_HOST:9200" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-  if [ "$http_res" -eq 200 ]
+  local http_res=$(curl -I "$ES_IP:9200" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+  if [ "$http_res" = "200" ]
   then
     echo "ONLINE"
   else
@@ -64,28 +75,32 @@ test_running()
   fi
 }
 
+test_version()
+{
+  local version=$(curl "$ES_IP:9200"  2>/dev/null | grep number | awk '{print $3}')
+  if [[ "$version" = *\"1.7* ]]; then echo "1.7"
+  elif [[ "$version" = *\"2.4* ]]; then echo "2.4"
+  fi
+}
+
 detect_installation()
 {
   echo "Detecting installation type..."
 
-  TYPE="NOT-FOUND"
-  local compose=$(test_docker_compose)
-  if [[ "$compose" = "DOCKER-COMPOSE" ]]
+  test_docker_compose
+  if [[ "$TYPE" = "DOCKER-COMPOSE" ]]
   then
     echo "Docker-compose installation detected."
-    TYPE="DOCKER-COMPOSE"
   else
-    local docker=$(test_docker)
-    if [[ "$docker" = "DOCKER-COMPOSE" ]]
+    test_docker
+    if [[ "$TYPE" = "DOCKER" ]]
     then
     echo "Classical docker installation detected."
-      TYPE="DOCKER"
     else
-      local classic=$(test_classic)
-      if [[ "$classic" = "CLASSIC" ]]
+      test_classic
+      if [[ "$TYPE" = "CLASSIC" ]]
       then
         echo "Local installation detected on the host system."
-        TYPE="CLASSIC"
       fi
     fi
   fi
@@ -108,15 +123,17 @@ upgrade_compose()
   echo "Upgrading docker-compose installation..."
   docker-compose stop elasticsearch
   docker-compose rm -f elasticsearch
-  sed -i.bak s/image: elasticsearch:1.7/image: elasticsearch:2.4/g "$FM_PATH/docker-compose.yml"
+  sed -i.bak 's/image: elasticsearch:1.7/image: elasticsearch:2.4/g' "$FM_PATH/docker-compose.yml"
   docker-compose pull
   docker-compose up -d
   sleep 10
   STATUS=$(test_running)
-  if [[ "$STATUS" = "ONLINE" ]]; then
+  local version=$(test_version)
+  if [ "$STATUS" = "ONLINE" ] && [ "$version" = "2.4" ]; then
     echo "Migration to elastic 2.4 was successful."
   else
-    echo "Unable to find an active ElasticSearch instance, something may have went wrong, exiting..."
+    echo "Unable to find an active ElasticSearch 2.4 instance, something may have went wrong, exiting..."
+    echo "status: $STATUS, version: $version"
     exit 4
   fi
 }
@@ -142,10 +159,12 @@ upgrade_docker()
   # check status
   sleep 10
   STATUS=$(test_running)
-  if [[ "$STATUS" = "ONLINE" ]]; then
+  local version=$(test_version)
+  if [ "$STATUS" = "ONLINE" ] && [ "$version" = "2.4" ]; then
     echo "Migration to elastic 2.4 was successful."
   else
-    echo "Unable to find an active ElasticSearch instance, something may have went wrong, exiting..."
+    echo "Unable to find an active ElasticSearch 2.4 instance, something may have went wrong, exiting..."
+    echo "status: $STATUS, version: $version"
     exit 4
   fi
 }
@@ -159,7 +178,7 @@ upgrade_classic()
       if [ -f /etc/os-release ]
       then
         . /etc/os-release
-        if [ $ID = 'debian' ] || [[ $ID_LIKE = *'debian'* ]]
+        if [ "$ID" = 'debian' ] || [[ "$ID_LIKE" = *'debian'* ]]
         then
           # Debian compatible
           wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
