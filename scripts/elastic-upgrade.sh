@@ -11,6 +11,12 @@
 
 config()
 {
+  if ! command -v curl
+  then
+    echo "Please install curl before running this script."
+    echo "curl was not found, exiting..."
+    exit 1
+  fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
   read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
@@ -120,19 +126,21 @@ detect_installation()
 
 upgrade_compose()
 {
+  local current=$1
+  local target=$2
   echo "Upgrading docker-compose installation..."
   docker-compose stop elasticsearch
   docker-compose rm -f elasticsearch
-  sed -i.bak 's/image: elasticsearch:1.7/image: elasticsearch:2.4/g' "$FM_PATH/docker-compose.yml"
+  sed -i.bak "s/image: elasticsearch:$current/image: elasticsearch:$target/g" "$FM_PATH/docker-compose.yml"
   docker-compose pull
   docker-compose up -d
   sleep 10
   STATUS=$(test_running)
   local version=$(test_version)
-  if [ "$STATUS" = "ONLINE" ] && [ "$version" = "2.4" ]; then
-    echo "Migration to elastic 2.4 was successful."
+  if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
+    echo "Migration to elastic $target was successful."
   else
-    echo "Unable to find an active ElasticSearch 2.4 instance, something may have went wrong, exiting..."
+    echo "Unable to find an active ElasticSearch $target instance, something may have went wrong, exiting..."
     echo "status: $STATUS, version: $version"
     exit 4
   fi
@@ -140,8 +148,10 @@ upgrade_compose()
 
 upgrade_docker()
 {
+  local current=$1
+  local target=$2
   echo "Upgrading docker installation..."
-  local containers=$(docker ps | grep elasticsearch:1.7)
+  local containers=$(docker ps | grep "elasticsearch:$current")
   # get container id
   local id=$(docker inspect -f '{{.Id}} {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(echo "$containers" | awk '{print $1}') | grep "$ES_IP" | awk '{print $1}')
   # get container name
@@ -150,28 +160,37 @@ upgrade_docker()
   local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed 's/map\[\(.*\):0x[a-f0-9]*\]/\1/')
   # get container mapping to data folder
   local mounts=$(docker inspect -f '{{.Mounts}}' "$id" | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true \(rprivate\)\?}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
-  # stop elastic 1.7
+  # stop current elastic
   docker stop "$name"
   docker rm -f "$name"
-  # run elastic 2.4
-  docker pull elasticsearch:2.4
-  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" elasticsearch:2.4 | bash
+  # run target elastic
+  docker pull "elasticsearch:$target"
+  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "elasticsearch:$target" | bash
   # check status
   sleep 10
   STATUS=$(test_running)
   local version=$(test_version)
-  if [ "$STATUS" = "ONLINE" ] && [ "$version" = "2.4" ]; then
-    echo "Migration to elastic 2.4 was successful."
+  if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
+    echo "Migration to elastic $target was successful."
   else
-    echo "Unable to find an active ElasticSearch 2.4 instance, something may have went wrong, exiting..."
+    echo "Unable to find an active ElasticSearch $target instance, something may have went wrong, exiting..."
     echo "status: $STATUS, version: $version"
     exit 4
   fi
 }
 
+unsupported_message()
+{
+  local version=$1
+  echo "Automated upgrade of your elasticSearch installation is not supported on your system."
+  echo "Please refer to your vendor's instructions to install ElasticSearch $version"
+  echo "For more informations: https://www.elastic.co/guide/en/elasticsearch/reference/$version/setup-upgrade.html"
+  exit 5
+}
 
 upgrade_classic()
 {
+  local target=$1
   local system=$(uname -s)
   case "$system" in
     Linux*)
@@ -182,35 +201,115 @@ upgrade_classic()
         then
           # Debian compatible
           wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-          echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee /etc/apt/sources.list.d/elasticsearch-2.x.list
+          case "$target" in
+          "2.4")
+            echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee /etc/apt/sources.list.d/elasticsearch-2.x.list
+            ;;
+          esac
           sudo apt-get update && sudo apt-get install --only-upgrade elasticsearch
+        else
+          unsupported_message
         fi
       fi
       ;;
     Darwin*)
-      echo "OS X"
+      # Mac OS X
       brew update
-      brew install homebrew/versions/elasticsearch24
+      case "$target" in
+      "2.4")
+        brew install homebrew/versions/elasticsearch24
+        ;;
+      esac
       ;;
     *)
-      echo "Automated upgrade of your elasticSearch installation is not supported on your system."
-      echo "Please refer to your distribution instructions to install ElasticSearch 2.4"
-      echo "For more informations: https://www.elastic.co/guide/en/elasticsearch/reference/2.0/setup-upgrade.html"
+      unsupported_message
       ;;
   esac
 }
 
+reindex_indices()
+{
+  local indices=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $3}')
+  for index in indices
+  do
+    local migration_index="$index""_$1"
+    curl -XPUT "http://$ES_IP:9200/$migration_index/" -d '{
+      "settings" : {
+        "index" : {
+          "number_of_shards" : 0,
+          "number_of_replicas" : 0,
+          "refresh_interval": -1
+        }
+      }
+    }'
+    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d "{
+      'source': {
+        'index': '$index'
+      },
+      'dest': {
+        'index': '$migration_index'
+      }
+    }"
+  done
+  echo "Reindex completed, deleting previous index..."
+  echo "Indices are reindexing, waiting to finish..."
+  local state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+  while [ "$state" = "green" ]
+  do
+    sleep 1
+    state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+  done
+  echo "Reindex completed, deleting previous index..."
+  for index in indices
+  do
+    curl -XDELETE "$ES_IP:9200/$index?pretty"
+  done
+}
+
+reindex_final_indices()
+{
+  local previous=$1
+  local indices=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $3}')
+  for index in indices
+  do
+    local final_index=$(echo "$index" | sed "s/\(.*\)_$previous$/\1/")
+    curl -XPUT "http://$ES_IP:9200/$final_index"
+    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d "{
+      'source': {
+        'index': '$index'
+      },
+      'dest': {
+        'index': '$final_index'
+      }
+    }"
+  done
+  echo "Indices are reindexing, waiting to finish..."
+  local state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+  while [ "$state" != "green" ]
+  do
+    sleep 1
+    state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+  done
+  echo "Reindex completed, deleting previous index..."
+  for index in indices
+  do
+    curl -XDELETE "$ES_IP:9200/$index?pretty"
+  done
+}
+
 start_upgrade()
 {
+  # $1: current version
+  # $2: target version
   case "$TYPE" in
   "DOCKER-COMPOSE")
-    upgrade_compose
+    upgrade_compose $1 $2
     ;;
   "DOCKER")
-    upgrade_docker
+    upgrade_docker $1 $2
     ;;
   "CLASSIC")
-    upgrade_classic
+    upgrade_classic $2
     ;;
   *)
     echo "Unexpected ElasticSearch installation $TYPE"
@@ -222,7 +321,12 @@ upgrade_elastic()
 {
   config
   detect_installation
-  start_upgrade
+  start_upgrade '1.7' '2.4'
+  reindex_indices '24'
+  start_upgrade '2.4' '5.6'
+  reindex_indices '56'
+  start_upgrade '5.6' '6.2'
+  reindex_final_indices '56'
 }
 
 upgrade_elastic "$@"
