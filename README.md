@@ -145,9 +145,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
-12. You can login as the default administrator using the following credentials:
-    - user: admin@fab-manager.com
-    - password: adminadmin
+12. You can login as the default administrator using the credentials defined previously.
 
 13. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
