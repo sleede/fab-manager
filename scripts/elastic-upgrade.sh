@@ -205,6 +205,12 @@ upgrade_classic()
           "2.4")
             echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee /etc/apt/sources.list.d/elasticsearch-2.x.list
             ;;
+          "5.6")
+            echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-5.x.list
+            ;;
+          "6.2")
+            echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-6.x.list
+            ;;
           esac
           sudo apt-get update && sudo apt-get install --only-upgrade elasticsearch
         else
@@ -218,6 +224,12 @@ upgrade_classic()
       case "$target" in
       "2.4")
         brew install homebrew/versions/elasticsearch24
+        ;;
+      "5.6")
+        brew install homebrew/versions/elasticsearch56
+        ;;
+      "6.2")
+        brew install homebrew/versions/elasticsearch62
         ;;
       esac
       ;;
