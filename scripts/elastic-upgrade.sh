@@ -11,6 +11,7 @@
 
 config()
 {
+  echo "detecting curl..."
   if ! command -v curl
   then
     echo "Please install curl before running this script."
@@ -29,7 +30,7 @@ config()
     then
       ES_HOST=$(cat "$FM_PATH/config/env" | grep ELASTICSEARCH_HOST | awk '{split($0,a,"="); print a[2]}')
     fi
-    ES_IP=$(getent hosts "$ES_HOST" | awk '{ print $1 }')
+    ES_IP=$(getent ahostsv4 "$ES_HOST" | awk '{ print $1 }' | uniq)
   else
     echo "Please run this script from the fab-manager's installation folder"
     exit 1
@@ -200,6 +201,7 @@ upgrade_classic()
         if [ "$ID" = 'debian' ] || [[ "$ID_LIKE" = *'debian'* ]]
         then
           # Debian compatible
+          echo "Updating ElasticSearch to $target"
           wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
           case "$target" in
           "2.4")
@@ -213,6 +215,7 @@ upgrade_classic()
             ;;
           esac
           sudo apt-get update && sudo apt-get install --only-upgrade elasticsearch
+          sudo systemctl restart elasticsearch.service # TODO test if working on ubuntu 14.04
         else
           unsupported_message
         fi
@@ -241,35 +244,34 @@ upgrade_classic()
 
 reindex_indices()
 {
-  local indices=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $3}')
-  for index in indices
+  local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
+  for index in $indices # do not surround $indices with quotes
   do
     local migration_index="$index""_$1"
     curl -XPUT "http://$ES_IP:9200/$migration_index/" -d '{
       "settings" : {
         "index" : {
-          "number_of_shards" : 0,
-          "number_of_replicas" : 0,
+          "number_of_shards": 1,
+          "number_of_replicas": 0,
           "refresh_interval": -1
         }
       }
     }'
-    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d "{
-      'source': {
-        'index': '$index'
+    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d '{
+      "source": {
+        "index": "'"$index"'"
       },
-      'dest': {
-        'index': '$migration_index'
+      "dest": {
+        "index": "'"$migration_index"'"
       }
-    }"
+    }'
   done
-  echo "Reindex completed, deleting previous index..."
   echo "Indices are reindexing, waiting to finish..."
-  local state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
-  while [ "$state" = "green" ]
+  local state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
+  while [ "$state" != "green" ]
   do
     sleep 1
-    state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+    state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
   done
   echo "Reindex completed, deleting previous index..."
   for index in indices
@@ -281,26 +283,26 @@ reindex_indices()
 reindex_final_indices()
 {
   local previous=$1
-  local indices=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $3}')
-  for index in indices
+  local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
+  for index in $indices # do not surround $indices with quotes
   do
     local final_index=$(echo "$index" | sed "s/\(.*\)_$previous$/\1/")
     curl -XPUT "http://$ES_IP:9200/$final_index"
-    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d "{
-      'source': {
-        'index': '$index'
+    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d '{
+      "source": {
+        "index": "'"$index"'"
       },
-      'dest': {
-        'index': '$final_index'
+      "dest": {
+        "index": "'"$final_index"'"
       }
-    }"
+    }'
   done
   echo "Indices are reindexing, waiting to finish..."
-  local state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+  local state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
   while [ "$state" != "green" ]
   do
     sleep 1
-    state=$(curl "$ES_IP:9200/_cat/indices?v" 2>/dev/null | grep [[:digit:]] | awk '{print $1}' | sort | uniq)
+    state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
   done
   echo "Reindex completed, deleting previous index..."
   for index in indices
