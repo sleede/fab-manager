@@ -149,14 +149,13 @@ upgrade_docker()
   # get container network name
   local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed 's/map\[\(.*\):0x[a-f0-9]*\]/\1/')
   # get container mapping to data folder
-  # TODO FIXME if only one volume
-  local mounts=$(docker inspect -f '{{.Mounts}}' "$id" | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true rprivate}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
+  local mounts=$(docker inspect -f '{{.Mounts}}' "$id" | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true \(rprivate\)\?}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
   # stop elastic 1.7
   docker stop "$name"
   docker rm -f "$name"
   # run elastic 2.4
   docker pull elasticsearch:2.4
-  docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" elasticsearch:2.4
+  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" elasticsearch:2.4 | bash
   # check status
   sleep 10
   STATUS=$(test_running)
