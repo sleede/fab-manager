@@ -289,6 +289,7 @@ upgrade_classic()
         then
           # Debian compatible
           echo -e "\nUpdating ElasticSearch to $target"
+          # TODO https://www.elastic.co/guide/en/elasticsearch/reference/2.4/restart-upgrade.html
           wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
           case "$target" in
           "2.4")
@@ -452,7 +453,7 @@ upgrade_elastic()
     start_upgrade '2.4' '5.6'
     reindex_indices '56'
     start_upgrade '5.6' '6.2'
-    reindex_final_indices '56'
+    reindex_final_indices '24_56'
   fi
 }
 
