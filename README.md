@@ -493,14 +493,17 @@ In FabManager, it is used for the admin's statistics module and to perform searc
 For a more detailed guide concerning the ElasticSearch installation, please check the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html)
 
 1. Install the OpenJDK's Java Runtime Environment (JRE). ElasticSearch recommends that you install Java 8 update 20 or later.
-   Please check that your distribution's version meet this requirement.
+   Please check that your distribution's version meet this requirement. 
+   With Ubuntu 14.04, see https://askubuntu.com/a/944260, otherwise use the following command
 
   ```bash
   sudo apt-get install openjdk-8-jre
   ```
 
-1. Create the file `/etc/apt/sources.list.d/elasticsearch-1.x.list`, and append it the following line:
-   `deb http://packages.elastic.co/elasticsearch/1.x/debian stable main`
+1. Create the repository definition file
+   ```bash
+   echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
+   ```
 
 2. Import the repository signing key, and update the package lists
 
