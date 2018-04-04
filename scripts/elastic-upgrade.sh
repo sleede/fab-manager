@@ -18,6 +18,13 @@ config()
     echo "curl was not found, exiting..."
     exit 1
   fi
+  echo "detecting jq..."
+  if ! command -v jq
+  then
+    echo "Please install jq before running this script."
+    echo "jq was not found, exiting..."
+    exit 1
+  fi
   echo "checking memory..."
   mem=$(free -mt | grep Total | awk '{print $2}')
   if [ "$mem" -lt 4000 ]
@@ -339,12 +346,12 @@ upgrade_classic()
 
 reindex_indices()
 {
-  # todo get index/_mapping then put index/_mapping
   local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
   for index in $indices # do not surround $indices with quotes
   do
-    local migration_index="$index""_$1"
-    curl -XPUT "http://$ES_IP:9200/$migration_index/" -d '{
+    # get the mapping of the existing index
+    local mapping=$(curl "http://$ES_IP:9200/$index/_mapping" 2>/dev/null | jq -c -M -r ".$index")
+    local definition=$(echo "$mapping" '{
       "settings" : {
         "index" : {
           "number_of_shards": 1,
@@ -352,7 +359,12 @@ reindex_indices()
           "refresh_interval": -1
         }
       }
-    }'
+    }' | jq -s add)
+    #
+    local migration_index="$index""_$1"
+    # create the temporary migration index with the previous mapping
+    curl -XPUT "http://$ES_IP:9200/$migration_index/" -H 'Content-Type: application/json' -d "$definition"
+    # reindex data content to the new migration index
     curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d '{
       "source": {
         "index": "'"$index"'"
