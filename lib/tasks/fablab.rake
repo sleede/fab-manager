@@ -47,7 +47,16 @@ namespace :fablab do
     `curl -XDELETE http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats`
 
     puts "PUT index stats"
-    `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats`
+    `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats -d'
+    {
+      "settings" : {
+        "index" : {
+          "number_of_replicas" : 0
+        }
+      }
+    }
+    '`
+
 
     %w[account event machine project subscription training user space].each do |stat|
       puts "PUT Mapping stats/#{stat}"
@@ -126,7 +135,7 @@ namespace :fablab do
     client = Project.__elasticsearch__.client
     # create index if not exists
     unless client.indices.exists? index: Project.index_name
-      client.indices.create Project.index_name
+      Project.__elasticsearch__.create_index! force: true
     end
     # delete doctype if exists
     if client.indices.exists_type? index: Project.index_name, type: Project.document_type
@@ -150,7 +159,7 @@ namespace :fablab do
     client = Availability.__elasticsearch__.client
     # create index if not exists
     unless client.indices.exists? index: Availability.index_name
-      client.indices.create Availability.index_name
+      Availability.__elasticsearch__.create_index! force: true
     end
     # delete doctype if exists
     if client.indices.exists_type? index: Availability.index_name, type: Availability.document_type

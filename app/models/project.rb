@@ -56,8 +56,8 @@ class Project < ActiveRecord::Base
   after_save { ProjectIndexerWorker.perform_async(:index, self.id) }
   after_destroy { ProjectIndexerWorker.perform_async(:delete, self.id) }
 
-  #
-  settings do
+  # mapping
+  settings index: { number_of_replicas: 0 } do
     mappings dynamic: 'true' do
       indexes 'state', analyzer: 'simple'
       indexes 'tags', analyzer: Rails.application.secrets.elasticsearch_language_analyzer

@@ -39,7 +39,7 @@ class Availability < ActiveRecord::Base
   after_destroy { AvailabilityIndexerWorker.perform_async(:delete, self.id) }
 
   # elastic mapping
-  settings do
+  settings index: { number_of_replicas: 0 } do
     mappings dynamic: 'true' do
       indexes 'available_type', analyzer: 'simple'
       indexes 'subType', index: 'not_analyzed'

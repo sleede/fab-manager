@@ -3,6 +3,7 @@
 ## next release
 - Updated OmniAuth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
 - Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-8048](https://github.com/flavorjones/loofah/issues/144)
+- Ensure elasticSearch indices are started with green status on new installations
 
 ## v2.6.4 2018 March 15
 
