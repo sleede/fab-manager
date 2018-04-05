@@ -50,6 +50,14 @@ config()
   read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
+    # checking disk space (minimum required = 1168323380)
+    space=$(df $FM_PATH | awk '/[0-9]%/{print $(NF-2)}')
+    if [ "$space" -lt 1258291200 ]
+    then
+      echo "Not enough free disk space to perform upgrade. Please free at least 1,2GB of disk space and try again"
+      df -h $FM_PATH
+      exit 7
+    fi
     if [ -f "$FM_PATH/config/application.yml" ]
     then
       ES_HOST=$(cat "$FM_PATH/config/application.yml" | grep ELASTICSEARCH_HOST | awk '{print $2}')
@@ -537,9 +545,7 @@ upgrade_elastic()
     start_upgrade '1.7' '2.4'
     reindex_indices '24'
     start_upgrade '2.4' '5.6'
-    reindex_indices '56'
-    start_upgrade '5.6' '6.2'
-    reindex_final_indices '24_56'
+    reindex_final_indices '24'
   fi
 }
 
