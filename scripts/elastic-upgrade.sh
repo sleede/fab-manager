@@ -190,7 +190,7 @@ ensure_initial_status_green()
       local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
       for index in $indices # do not surround $indices with quotes
       do
-        curl -XPUT "$ES_IP:9200/$index/_settings" -H 'Content-Type: application/json' -d '{
+        curl -XPUT "$ES_IP:9200/$index/_settings" 2>/dev/null -H 'Content-Type: application/json' -d '{
           "index": {
             "number_of_replicas": 0
           }
@@ -214,19 +214,44 @@ wait_for_online()
   done
 }
 
+prepare_upgrade()
+{
+  curl -XPUT "$ES_IP:9200/_cluster/settings?pretty" 2>/dev/null -H 'Content-Type: application/json' -d'{
+    "persistent": {
+      "cluster.routing.allocation.enable": "none"
+    },
+    "transient": {
+      "cluster.routing.allocation.enable": "none"
+    }
+  }'
+  curl -XPOST 2>/dev/null "$ES_IP:9200/_flush/synced?pretty"
+}
+
+reenable_allocation()
+{
+  curl -XPUT "$ES_IP:9200/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'{
+    "transient": {
+      "cluster.routing.allocation.enable": "all"
+    }
+  }'
+}
+
 upgrade_compose()
 {
   local current=$1
   local target=$2
   echo -e "\nUpgrading docker-compose installation from $current to $target..."
+  prepare_upgrade
   docker-compose stop elasticsearch
   docker-compose rm -f elasticsearch
   local image="elasticsearch:$target"
-  if [ $target = '6.2' ]; then image="docker.elastic.co/elasticsearch/elasticsearch-oss:$target"; fi
+  if [ $target = '6.2' ]; then image="docker.elastic.co\/elasticsearch\/elasticsearch-oss:6.2.3"; fi
   sed -i.bak "s/image: elasticsearch:$current/image: $image/g" "$FM_PATH/docker-compose.yml"
   docker-compose pull
   docker-compose up -d
   wait_for_online
+  reenable_allocation
+  # check status
   local version=$(test_version)
   if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
     echo "Migration to elastic $target was successful."
@@ -251,16 +276,23 @@ upgrade_docker()
   local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed 's/map\[\(.*\):0x[a-f0-9]*\]/\1/')
   # get container mapping to data folder
   local mounts=$(docker inspect -f '{{.Mounts}}' "$id" | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true \(rprivate\)\?}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
+  prepare_upgrade
   # stop current elastic
   docker stop "$name"
   docker rm -f "$name"
   # run target elastic
   local image="elasticsearch:$target"
-  if [ $target = '6.2' ]; then image="docker.elastic.co/elasticsearch/elasticsearch-oss:$target"; fi
+  local image_name="$image"
+  if [ $target = '6.2' ]
+  then 
+    image_name="elasticsearch-oss:$target"
+    image="docker.elastic.co/elasticsearch/$image_name"
+  fi
   docker pull "$image"
-  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$image" | bash
-  # check status
+  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$image_name" | bash
   wait_for_online
+  reenable_allocation
+  # check status
   local version=$(test_version)
   if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
     echo "Migration to elastic $target was successful."
@@ -293,7 +325,15 @@ upgrade_classic()
         then
           # Debian compatible
           echo -e "\nUpdating ElasticSearch to $target"
-          # TODO https://www.elastic.co/guide/en/elasticsearch/reference/2.4/restart-upgrade.html
+          prepare_upgrade
+          # stop elasticsearch
+          if command -v systemctl
+          then
+            sudo systemctl stop elasticsearch.service
+          else
+            sudo /etc/init.d/elasticsearch stop
+          fi
+          # process with package upgrade
           wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
           case "$target" in
           "2.4")
@@ -307,11 +347,12 @@ upgrade_classic()
             ;;
           esac
           sudo apt-get update && sudo apt-get install --only-upgrade elasticsearch
+          # restart elasticsearch service
           if command -v systemctl
           then
-            sudo systemctl restart elasticsearch.service
+            sudo systemctl start elasticsearch.service
           else
-            sudo /etc/init.d/elasticsearch restart
+            sudo /etc/init.d/elasticsearch start
           fi
         else
           unsupported_message
@@ -320,6 +361,8 @@ upgrade_classic()
       ;;
     Darwin*)
       # Mac OS X
+      echo -e "\nUpdating ElasticSearch to $target"
+      prepare_upgrade
       brew update
       case "$target" in
       "2.4")
@@ -337,8 +380,9 @@ upgrade_classic()
       unsupported_message
       ;;
   esac
-  # check status
   wait_for_online
+  reenable_allocation
+  # check status
   local version=$(test_version)
   if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
     echo "Migration to elastic $target was successful."
@@ -368,9 +412,9 @@ reindex_indices()
     #
     local migration_index="$index""_$1"
     # create the temporary migration index with the previous mapping
-    curl -XPUT "http://$ES_IP:9200/$migration_index/" -H 'Content-Type: application/json' -d "$definition"
+    curl -XPUT "http://$ES_IP:9200/$migration_index/" 2>/dev/null -H 'Content-Type: application/json' -d "$definition" 
     # reindex data content to the new migration index
-    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d '{
+    curl -XPOST "$ES_IP:9200/_reindex?pretty" 2>/dev/null -H 'Content-Type: application/json' -d '{
       "source": {
         "index": "'"$index"'"
       },
@@ -401,8 +445,8 @@ reindex_final_indices()
   for index in $indices # do not surround $indices with quotes
   do
     local final_index=$(echo "$index" | sed "s/\(.*\)_$previous$/\1/")
-    curl -XPUT "http://$ES_IP:9200/$final_index"
-    curl -XPOST "$ES_IP:9200/_reindex?pretty" -H 'Content-Type: application/json' -d '{
+    curl -XPUT "http://$ES_IP:9200/$final_index" 2>/dev/null
+    curl -XPOST "$ES_IP:9200/_reindex?pretty" 2>/dev/null -H 'Content-Type: application/json' -d '{
       "source": {
         "index": "'"$index"'"
       },
@@ -421,7 +465,7 @@ reindex_final_indices()
   echo "Reindex completed, deleting previous index..."
   for index in $indices # do not surround $indices with quotes
   do
-    curl -XDELETE "$ES_IP:9200/$index?pretty"
+    curl -XDELETE "$ES_IP:9200/$index?pretty" 2>/dev/null
   done
 }
 
