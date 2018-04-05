@@ -8,7 +8,6 @@
 #   > debian/ubuntu
 #   > other linux
 
-
 config()
 {
   echo "detecting curl..."
@@ -38,7 +37,7 @@ config()
       sudo mkswap /swapfile
       sudo swapon /swapfile
       echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-      echo 'vm.swappiness = 10' | sudo tee -a /etc/sysctl.conf
+      echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
       echo 'vm.vfs_cache_pressure=50' | sudo tee -a /etc/sysctl.conf
     else
       echo "Please upgrade memory to 4GB or more to allow the upgrade to run."
@@ -214,12 +213,19 @@ wait_for_online()
   done
 }
 
+wait_for_green_status()
+{
+  local state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
+  while [ "$state" != "green" ]
+  do
+    sleep 1
+    state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
+  done
+}
+
 prepare_upgrade()
 {
   curl -XPUT "$ES_IP:9200/_cluster/settings?pretty" 2>/dev/null -H 'Content-Type: application/json' -d'{
-    "persistent": {
-      "cluster.routing.allocation.enable": "none"
-    },
     "transient": {
       "cluster.routing.allocation.enable": "none"
     }
@@ -250,11 +256,11 @@ upgrade_compose()
   docker-compose pull
   docker-compose up -d
   wait_for_online
-  reenable_allocation
+  wait_for_green_status
   # check status
   local version=$(test_version)
   if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
-    echo "Migration to elastic $target was successful."
+    echo "Installation of elasticsearch $target was successful."
   else
     echo "Unable to find an active ElasticSearch $target instance, something may have went wrong, exiting..."
     echo "status: $STATUS, version: $version"
@@ -291,11 +297,11 @@ upgrade_docker()
   docker pull "$image"
   echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$image_name" | bash
   wait_for_online
-  reenable_allocation
+  wait_for_green_status
   # check status
   local version=$(test_version)
   if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
-    echo "Migration to elastic $target was successful."
+    echo "Installation of elasticsearch $target was successful."
   else
     echo "Unable to find an active ElasticSearch $target instance, something may have went wrong, exiting..."
     echo "status: $STATUS, version: $version"
@@ -363,6 +369,7 @@ upgrade_classic()
       # Mac OS X
       echo -e "\nUpdating ElasticSearch to $target"
       prepare_upgrade
+      brew services stop elasticsearch
       brew update
       case "$target" in
       "2.4")
@@ -375,17 +382,18 @@ upgrade_classic()
         brew install elasticsearch
         ;;
       esac
+      brew services start elasticsearch
       ;;
     *)
       unsupported_message
       ;;
   esac
   wait_for_online
-  reenable_allocation
+  wait_for_green_status
   # check status
   local version=$(test_version)
   if [ "$STATUS" = "ONLINE" ] && [ "$version" = "$target" ]; then
-    echo "Migration to elastic $target was successful."
+    echo "Installation of elasticsearch $target was successful."
   else
     echo "Unable to find an active ElasticSearch $target instance, something may have went wrong, exiting..."
     echo "status: $STATUS, version: $version"
@@ -395,7 +403,12 @@ upgrade_classic()
 
 reindex_indices()
 {
+  # get number of documents
+  local docs=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+  # get all indices
   local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
+  
+  local migration_indices=""
   for index in $indices # do not surround $indices with quotes
   do
     # get the mapping of the existing index
@@ -409,8 +422,8 @@ reindex_indices()
         }
       }
     }' | jq -s add)
-    #
     local migration_index="$index""_$1"
+    migration_indices+="$migration_index,"
     # create the temporary migration index with the previous mapping
     curl -XPUT "http://$ES_IP:9200/$migration_index/" 2>/dev/null -H 'Content-Type: application/json' -d "$definition" 
     # reindex data content to the new migration index
@@ -423,29 +436,49 @@ reindex_indices()
       }
     }'
   done
-  echo "Indices are reindexing, waiting to finish..."
-  local state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
-  while [ "$state" != "green" ]
+  echo "Indices are reindexing. This may take a while, waiting to finish... "
+  # first we wait for all indices states became green
+  wait_for_green_status
+  # then we wait for all documents to be reindexed
+  local new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$migration_indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+  while [ "$new_docs" != "$docs" ]
   do
+    echo -ne "\rdocs: $docs, reindexed: $new_docs"
     sleep 1
-    state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
+    new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$migration_indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
   done
-  echo "Reindex completed, deleting previous index..."
-  read -n1 -p "Press any key to continue..." ans </dev/tty
+  echo -e "\nReindex completed, deleting previous index..."
   for index in $indices # do not surround $indices with quotes
   do
     curl -XDELETE "$ES_IP:9200/$index?pretty"
   done
+  reenable_allocation
 }
 
 reindex_final_indices()
 {
   local previous=$1
+  # get number of documents
+  local docs=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+  # get all indices
   local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
+  local final_indices=""
   for index in $indices # do not surround $indices with quotes
   do
+    # get the mapping of the existing index
+    local mapping=$(curl "http://$ES_IP:9200/$index/_mapping" 2>/dev/null | jq -c -M -r ".$index")
+    local definition=$(echo "$mapping" '{
+      "settings" : {
+        "index" : {
+          "number_of_shards": 1,
+          "number_of_replicas": 0,
+          "refresh_interval": -1
+        }
+      }
+    }' | jq -s add)
     local final_index=$(echo "$index" | sed "s/\(.*\)_$previous$/\1/")
-    curl -XPUT "http://$ES_IP:9200/$final_index" 2>/dev/null
+    final_indices+="$final_index,"
+    curl -XPUT "http://$ES_IP:9200/$final_index" 2>/dev/null -H 'Content-Type: application/json' -d "$definition" 
     curl -XPOST "$ES_IP:9200/_reindex?pretty" 2>/dev/null -H 'Content-Type: application/json' -d '{
       "source": {
         "index": "'"$index"'"
@@ -455,14 +488,18 @@ reindex_final_indices()
       }
     }'
   done
-  echo "Indices are reindexing, waiting to finish..."
-  local state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
-  while [ "$state" != "green" ]
+  echo -e "Indices are reindexing, waiting to finish..."
+  # first we wait for all indices states became green
+  wait_for_green_status
+  # then we wait for all documents to be reindexed  
+  local new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+  while [ "$new_docs" != "$docs" ]
   do
+    echo -ne "\rdocs: $docs, reindexed: $new_docs"
     sleep 1
-    state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
+    new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
   done
-  echo "Reindex completed, deleting previous index..."
+  echo "\nReindex completed, deleting previous index..."
   for index in $indices # do not surround $indices with quotes
   do
     curl -XDELETE "$ES_IP:9200/$index?pretty" 2>/dev/null
@@ -498,15 +535,10 @@ upgrade_elastic()
   then
     ensure_initial_status_green
     start_upgrade '1.7' '2.4'
-    read -n1 -p "Press any key to continue..." ans </dev/tty
     reindex_indices '24'
-    read -n1 -p "Press any key to continue..." ans </dev/tty
     start_upgrade '2.4' '5.6'
-    read -n1 -p "Press any key to continue..." ans </dev/tty
     reindex_indices '56'
-    read -n1 -p "Press any key to continue..." ans </dev/tty
     start_upgrade '5.6' '6.2'
-    read -n1 -p "Press any key to continue..." ans </dev/tty
     reindex_final_indices '24_56'
   fi
 }
