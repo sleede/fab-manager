@@ -50,9 +50,9 @@ config()
   read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
-    # checking disk space (minimum required = 1168323380)
+    # checking disk space (minimum required = 1168323KB)
     space=$(df $FM_PATH | awk '/[0-9]%/{print $(NF-2)}')
-    if [ "$space" -lt 1258291200 ]
+    if [ "$space" -lt 1258291 ]
     then
       echo "Not enough free disk space to perform upgrade. Please free at least 1,2GB of disk space and try again"
       df -h $FM_PATH
@@ -411,11 +411,11 @@ upgrade_classic()
 
 reindex_indices()
 {
-  # get number of documents
+  # get number of documents (from elastic 5.x, docs.count is at column 7)
   local docs=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
   # get all indices
   local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
-  
+
   local migration_indices=""
   for index in $indices # do not surround $indices with quotes
   do
@@ -458,7 +458,7 @@ reindex_indices()
   echo -e "\nReindex completed, deleting previous index..."
   for index in $indices # do not surround $indices with quotes
   do
-    curl -XDELETE "$ES_IP:9200/$index?pretty"
+    curl -XDELETE "$ES_IP:9200/$index?pretty" 2>/dev/null
   done
   reenable_allocation
 }
@@ -466,10 +466,11 @@ reindex_indices()
 reindex_final_indices()
 {
   local previous=$1
-  # get number of documents
-  local docs=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+  # get number of documents (from elastic 5.x, docs.count is at column 7)
+  local docs=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{s+=$7} END {printf "%.0f", s}')
   # get all indices
   local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
+
   local final_indices=""
   for index in $indices # do not surround $indices with quotes
   do
@@ -486,7 +487,9 @@ reindex_final_indices()
     }' | jq -s add)
     local final_index=$(echo "$index" | sed "s/\(.*\)_$previous$/\1/")
     final_indices+="$final_index,"
+    # create the final index with the previous mapping
     curl -XPUT "http://$ES_IP:9200/$final_index" 2>/dev/null -H 'Content-Type: application/json' -d "$definition" 
+    # reindex data content to the new migration index
     curl -XPOST "$ES_IP:9200/_reindex?pretty" 2>/dev/null -H 'Content-Type: application/json' -d '{
       "source": {
         "index": "'"$index"'"
@@ -496,22 +499,23 @@ reindex_final_indices()
       }
     }'
   done
-  echo -e "Indices are reindexing, waiting to finish..."
+  echo "Indices are reindexing. This may take a while, waiting to finish... "
   # first we wait for all indices states became green
   wait_for_green_status
   # then we wait for all documents to be reindexed  
-  local new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+  local new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$7} END {printf "%.0f", s}')
   while [ "$new_docs" != "$docs" ]
   do
     echo -ne "\rdocs: $docs, reindexed: $new_docs"
     sleep 1
-    new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
+    new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$7} END {printf "%.0f", s}')
   done
-  echo "\nReindex completed, deleting previous index..."
+  echo -e "\nReindex completed, deleting previous index..."
   for index in $indices # do not surround $indices with quotes
   do
     curl -XDELETE "$ES_IP:9200/$index?pretty" 2>/dev/null
   done
+  reenable_allocation
 }
 
 start_upgrade()
