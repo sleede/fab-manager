@@ -222,7 +222,7 @@ upgrade_compose()
   docker-compose stop elasticsearch
   docker-compose rm -f elasticsearch
   local image="elasticsearch:$target"
-  if [ $target = '6.2' ]; then image="elasticsearch-oss:$target"; fi
+  if [ $target = '6.2' ]; then image="docker.elastic.co/elasticsearch/elasticsearch-oss:$target"; fi
   sed -i.bak "s/image: elasticsearch:$current/image: $image/g" "$FM_PATH/docker-compose.yml"
   docker-compose pull
   docker-compose up -d
@@ -256,7 +256,7 @@ upgrade_docker()
   docker rm -f "$name"
   # run target elastic
   local image="elasticsearch:$target"
-  if [ $target = '6.2' ]; then image="elasticsearch-oss:$target"; fi
+  if [ $target = '6.2' ]; then image="docker.elastic.co/elasticsearch/elasticsearch-oss:$target"; fi
   docker pull "$image"
   echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$image" | bash
   # check status
@@ -387,6 +387,7 @@ reindex_indices()
     state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
   done
   echo "Reindex completed, deleting previous index..."
+  read -n1 -p "Press any key to continue..." ans </dev/tty
   for index in $indices # do not surround $indices with quotes
   do
     curl -XDELETE "$ES_IP:9200/$index?pretty"
@@ -453,10 +454,15 @@ upgrade_elastic()
   then
     ensure_initial_status_green
     start_upgrade '1.7' '2.4'
+    read -n1 -p "Press any key to continue..." ans </dev/tty
     reindex_indices '24'
+    read -n1 -p "Press any key to continue..." ans </dev/tty
     start_upgrade '2.4' '5.6'
+    read -n1 -p "Press any key to continue..." ans </dev/tty
     reindex_indices '56'
+    read -n1 -p "Press any key to continue..." ans </dev/tty
     start_upgrade '5.6' '6.2'
+    read -n1 -p "Press any key to continue..." ans </dev/tty
     reindex_final_indices '24_56'
   fi
 }
