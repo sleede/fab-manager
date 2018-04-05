@@ -221,7 +221,9 @@ upgrade_compose()
   echo -e "\nUpgrading docker-compose installation from $current to $target..."
   docker-compose stop elasticsearch
   docker-compose rm -f elasticsearch
-  sed -i.bak "s/image: elasticsearch:$current/image: elasticsearch:$target/g" "$FM_PATH/docker-compose.yml"
+  local image="elasticsearch:$target"
+  if [ $target = '6.2' ]; then image="elasticsearch-oss:$target"; fi
+  sed -i.bak "s/image: elasticsearch:$current/image: $image/g" "$FM_PATH/docker-compose.yml"
   docker-compose pull
   docker-compose up -d
   wait_for_online
@@ -253,8 +255,10 @@ upgrade_docker()
   docker stop "$name"
   docker rm -f "$name"
   # run target elastic
-  docker pull "elasticsearch:$target"
-  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "elasticsearch:$target" | bash
+  local image="elasticsearch:$target"
+  if [ $target = '6.2' ]; then image="elasticsearch-oss:$target"; fi
+  docker pull "$image"
+  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$image" | bash
   # check status
   wait_for_online
   local version=$(test_version)
@@ -319,13 +323,13 @@ upgrade_classic()
       brew update
       case "$target" in
       "2.4")
-        brew install homebrew/versions/elasticsearch24
+        brew install elasticsearch@2.4
         ;;
       "5.6")
-        brew install homebrew/versions/elasticsearch56
+        brew install elasticsearch@5.6
         ;;
       "6.2")
-        brew install homebrew/versions/elasticsearch62
+        brew install elasticsearch
         ;;
       esac
       ;;
