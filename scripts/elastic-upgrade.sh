@@ -213,22 +213,35 @@ ensure_initial_status_green()
 
 wait_for_online()
 {
+  local counter=0
+  echo -n "Waiting for ElasticSearch instance to came online"
   STATUS=$(test_running)
   while [ "$STATUS" != "ONLINE" ]
   do
+    echo -n "."
     sleep 1
     STATUS=$(test_running)
+    ((++counter))
+    if [ "$counter" -eq 120 ]
+    then
+      echo -e "\nThe ElasticSearch instance did not came online for 2 minutes, please check the logs for any errors. Exiting..."
+      exit 8
+    fi
   done
+  echo -e "\n"
 }
 
 wait_for_green_status()
 {
+  echo -n "Waiting for ElasticSearch indices to have green status"
   local state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
   while [ "$state" != "green" ]
   do
+    echo -n "."
     sleep 1
     state=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $1}' | sort | uniq)
   done
+  echo -e "\n"
 }
 
 prepare_upgrade()
@@ -261,6 +274,14 @@ upgrade_compose()
   local image="elasticsearch:$target"
   if [ $target = '6.2' ]; then image="docker.elastic.co\/elasticsearch\/elasticsearch-oss:6.2.3"; fi
   sed -i.bak "s/image: elasticsearch:$current/image: $image/g" "$FM_PATH/docker-compose.yml"
+  if ! grep -qe "ES_JAVA_OPTS" docker-compose.yml
+  then
+    sed -i.bak "/image: $image/s/.*/&\n    environment:\n      - \"ES_JAVA_OPTS=-Xms512m -Xmx512m\"/" "$FM_PATH/docker-compose.yml"
+  fi
+  if ! grep -qe "ulimits" docker-compose.yml
+  then
+    sed -i.bak "/image: $image/s/.*/&\n    ulimits:\n      memlock:\n        soft: -1\n        hard: -1/" "$FM_PATH/docker-compose.yml"
+  fi
   docker-compose pull
   docker-compose up -d
   wait_for_online
