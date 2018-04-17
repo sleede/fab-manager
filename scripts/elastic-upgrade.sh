@@ -442,7 +442,7 @@ upgrade_classic()
 
 reindex_indices()
 {
-  # get number of documents (from elastic 5.x, docs.count is at column 7)
+  # get number of documents (before elastic 5.x, docs.count is at column 6)
   local docs=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{s+=$6} END {printf "%.0f", s}')
   # get all indices
   local indices=$(curl "$ES_IP:9200/_cat/indices" 2>/dev/null | awk '{print $3}')
