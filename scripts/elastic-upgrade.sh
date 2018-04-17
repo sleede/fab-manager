@@ -180,7 +180,7 @@ detect_installation()
             then
             echo "Note: You can use \`sudo journalctl -u elasticsearch.service\` or \`vi /var/log/elasticsearch/elasticsearch.log.$\(date --rfc-3339=date\)\` to view the logs, depending on your installation";
           else
-            echo "Note: You can use \`docker logs \$instance-name\` to view the logs";
+            echo "Note: You can use \`docker logs CONTAINER\` to view the logs";
           fi
         fi
     fi
