@@ -173,6 +173,16 @@ detect_installation()
     then
         STATUS=$(test_running)
         echo "$STATUS"
+        if [ "$STATUS" = "OFFLINE" ]
+        then
+          echo "Your ElasticSearch instance is offline. Please check the logs and verify that no problems prevent the upgrade..."
+          if [ "$TYPE" = "CLASSIC" ];
+            then
+            echo "Note: You can use \`sudo journalctl -u elasticsearch.service\` or \`vi /var/log/elasticsearch/elasticsearch.log.$\(date --rfc-3339=date\)\` to view the logs, depending on your installation";
+          else
+            echo "Note: You can use \`docker logs \$instance-name\` to view the logs";
+          fi
+        fi
     fi
   fi
 }
