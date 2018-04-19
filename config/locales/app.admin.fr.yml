@@ -576,7 +576,7 @@ fr:
           about: "A propos"
           male_preposition: "du"
           female_preposition: "de la"
-          nothing_preposition: "test"
+          nothing_preposition: ""
           customize_information_messages: "Personnaliser les messages d'informations"
           message_of_the_machine_booking_page: "Message sur la page de réservation d'une machine :"
           type_the_message_content: "Saisir le contenu du message"
