@@ -26,6 +26,9 @@
                         <br/>
                         <input type="radio" name="nameGenre" id="nameGenreFemale" ng-model="nameGenre.value" ng-value="'female'" />
                         <label for="nameGenreFemale">{{ 'settings.female' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.female_preposition' }}</strong> {{fablabName.value}}</cite></span></label>
+                        <br />
+                        <input type="radio" name="nameGenre" id="nameGenreApostrophe" ng-model="nameGenre.value" ng-value="'apostrophe'" />
+                        <label for="nameGenreApostrophe">{{ 'settings.apostrophe' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.apostrophe_preposition' }}</strong> {{fablabName.value}}</cite></span></label>
                     </div>
                     <button name="button" class="btn btn-warning" ng-click="save(nameGenre)" translate>{{ 'save' }}</button>
                 </form>
