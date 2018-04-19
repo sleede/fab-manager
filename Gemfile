@@ -79,7 +79,7 @@ gem 'pg'
 gem 'devise'
 gem 'devise-async'
 
-gem 'omniauth', '~> 1.3.2'
+gem 'omniauth', '~> 1.6.0'
 gem 'omniauth-oauth2'
 
 gem 'rolify'
