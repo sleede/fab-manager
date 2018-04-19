@@ -3,7 +3,7 @@ fr:
     public:
       common:
         # en-tête et page "à propos"
-        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} other{des}} {NAME}"  # messageFormat interpolation
+        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} other{des} nothing{}} {NAME}"  # messageFormat interpolation
         return: "Retour"
 
         # sections du tableau de bord
