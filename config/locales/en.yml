@@ -160,6 +160,7 @@ en:
     organization_address: "Organization address"
     man: "Man"
     woman: "Woman"
+    other: "Other"
     without_subscriptions: "Without subscriptions"
 
   export_reservations:

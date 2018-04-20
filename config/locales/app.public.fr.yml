@@ -55,6 +55,7 @@ fr:
         create_your_account: "Créer votre compte"
         man: "Homme"
         woman: "Femme"
+        other: "Autre"
         gender_is_required: "Le genre est requis."
         your_first_name: "Votre prénom"
         first_name_is_required: "Le prénom est requis."

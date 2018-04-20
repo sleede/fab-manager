@@ -160,6 +160,7 @@ pt:
     organization_address: "Endereço da organização"
     man: "Homem"
     woman: "Mulher"
+    other: "Outro"
     without_subscriptions: "Sem assinaturas"
 
   export_reservations:

@@ -55,6 +55,14 @@
                    ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
+          <label class="checkbox-inline btn btn-default">
+            <input type="radio"
+                   name="user[profile_attributes][gender]"
+                   ng-model="user.profile.gender"
+                   value="false"
+                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
+              <i class="fa fa-transgender-alt  m-l-sm"></i> {{ 'other' | translate }}
+          </label>
         <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
 
         <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>

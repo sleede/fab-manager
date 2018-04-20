@@ -16,6 +16,13 @@
                  ng-value="false"/>
             <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
         </label>
+        <label class="checkbox-inline btn btn-default">
+          <input type="radio"
+                 name="admin[profile_attributes][gender]"
+                 ng-model="admin.profile_attributes.gender"
+                 ng-value="false"/>
+            <i class="fa fa-transgender-alt  m-l-sm"></i> {{ 'other' | translate }}
+        </label>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$invalid}">
