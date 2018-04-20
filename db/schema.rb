@@ -408,7 +408,7 @@ ActiveRecord::Schema.define(version: 20171011125217) do
     t.integer  "user_id"
     t.string   "first_name",        limit: 255
     t.string   "last_name",         limit: 255
-    t.boolean  "gender"
+    t.string  "gender"
     t.date     "birthday"
     t.string   "phone",             limit: 255
     t.text     "interest"

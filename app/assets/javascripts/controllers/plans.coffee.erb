@@ -130,7 +130,9 @@ Application.Controllers.controller "PlansIndexController", ["$scope", "$rootScop
     ##
     $scope.getGender = (user) ->
       if user and user.profile
-        if user.profile.gender == "true" then 'male' else 'female'
+        if user.profile.gender == "male" then 'male'
+        else if user.profile.gender == "female" then 'female'
+        else if user.profile.gender == "other" then 'other'
       else 'other'
 
 
