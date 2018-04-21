@@ -42,7 +42,7 @@
             <input type="radio"
                    name="user[profile_attributes][gender]"
                    ng-model="user.profile.gender"
-                   value="true"
+                   value="male"
                    ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"
                    required/>
               <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
@@ -51,7 +51,7 @@
             <input type="radio"
                    name="user[profile_attributes][gender]"
                    ng-model="user.profile.gender"
-                   value="false"
+                   value="female"
                    ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
@@ -59,7 +59,7 @@
             <input type="radio"
                    name="user[profile_attributes][gender]"
                    ng-model="user.profile.gender"
-                   value="false"
+                   value="other"
                    ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-transgender-alt  m-l-sm"></i> {{ 'other' | translate }}
           </label>
