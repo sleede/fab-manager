@@ -55,6 +55,7 @@ en:
         create_your_account: "Create your account"
         man: "Man"
         woman: "Woman"
+        other: "Other"
         gender_is_required: "Gender is required."
         your_first_name: "Your first name"
         first_name_is_required: "First name is required."

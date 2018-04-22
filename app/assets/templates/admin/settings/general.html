@@ -26,6 +26,9 @@
                         <br/>
                         <input type="radio" name="nameGenre" id="nameGenreFemale" ng-model="nameGenre.value" ng-value="'female'" />
                         <label for="nameGenreFemale">{{ 'settings.female' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.female_preposition' }}</strong> {{fablabName.value}}</cite></span></label>
+                        <br />
+                        <input type="radio" name="nameGenre" id="nameGenrenothing" ng-model="nameGenre.value" ng-value="'nothing'" />
+                        <label for="nameGenrenothing">{{ 'settings.nothing' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.nothing_preposition' }}</strong> {{fablabName.value}}</cite></span></label>
                     </div>
                     <button name="button" class="btn btn-warning" ng-click="save(nameGenre)" translate>{{ 'save' }}</button>
                 </form>

@@ -54,6 +54,7 @@ es:
         create_your_account: "Crear su cuenta"
         man: "Hombre"
         woman: "Mujer"
+        other: "Otro"
         gender_is_required: "El genero es obligatorio."
         your_first_name: "Su nombre"
         first_name_is_required: "El nombre es obligatorio."

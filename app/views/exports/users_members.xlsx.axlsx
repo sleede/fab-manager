@@ -1,4 +1,4 @@
-wb = xlsx_package.workbook
+$wb = xlsx_package.workbook
 
 header = wb.styles.add_style :b => true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
 date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_format
@@ -43,7 +43,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
         member.profile.first_name,
         member.email,
         member.is_allow_newsletter,
-        member.profile.gender ? t('export_members.man') : t('export_members.woman'),
+        member.profile.gender ? t('export_members.man') : t('export_members.woman') : t('export_members.other),
         member.profile.age,
         member.profile.address ? member.profile.address.address : '',
         member.profile.phone,

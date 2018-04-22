@@ -5,7 +5,7 @@
           <input type="radio"
                  name="admin[profile_attributes][gender]"
                  ng-model="admin.profile_attributes.gender"
-                 ng-value="true"
+                 ng-value="male"
                  required/>
             <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
         </label>
@@ -13,8 +13,15 @@
           <input type="radio"
                  name="admin[profile_attributes][gender]"
                  ng-model="admin.profile_attributes.gender"
-                 ng-value="false"/>
+                 ng-value="female"/>
             <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
+        </label>
+        <label class="checkbox-inline btn btn-default">
+          <input type="radio"
+                 name="admin[profile_attributes][gender]"
+                 ng-model="admin.profile_attributes.gender"
+                 ng-value="other"/>
+            <i class="fa fa-transgender-alt  m-l-sm"></i> {{ 'other' | translate }}
         </label>
     </div>
 

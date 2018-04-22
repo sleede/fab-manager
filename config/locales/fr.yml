@@ -160,6 +160,7 @@ fr:
     organization_address: "Adresse de la structure"
     man: "Homme"
     woman: "Femme"
+    other: "Autre"
     without_subscriptions: "Sans Abonnement"
 
   export_reservations:

@@ -12,7 +12,8 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
-  validates :gender, :inclusion => {:in => [true, false]}
+  #validates :gender, :inclusion => {:in => [true, false]}
+  validates :gender, presence: true, length: { maximum: 30 }
   validates :birthday, presence: true
   validates_numericality_of :phone, only_integer: true, allow_blank: false
 

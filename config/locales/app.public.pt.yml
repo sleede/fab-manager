@@ -3,7 +3,7 @@ pt:
       public:
         common:
           # header and "about" page
-          about_the_fablab: "Sobre {GENDER, select, male{o} female{a} other{do}} {NAME}"  # messageFormat interpolation
+          about_the_fablab: "Sobre {GENDER, select, male{o} female{a} other{do} nothing{}} {NAME}"  # messageFormat interpolation
           return: "Voltar"
 
           # dashboard sections
@@ -55,6 +55,7 @@ pt:
           create_your_account: "Criar sua conta"
           man: "Masculino"
           woman: "Feminino"
+          other: "Outro"
           gender_is_required: "Gênero é obrigatório."
           your_first_name: "Seu primeiro nome"
           first_name_is_required: "Primeiro nome é obrigatório."

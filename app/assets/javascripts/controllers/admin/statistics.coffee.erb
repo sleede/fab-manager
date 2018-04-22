@@ -216,7 +216,8 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
       return _t('man')
     if sex == 'female'
       return _t('woman')
-
+    if sex == 'other'
+      return _t('other')
 
 
   ##
@@ -526,7 +527,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     filters = [
       {key: 'date', label: _t('date'), values: ['input_date']},
       {key: 'userId', label: _t('user_id'), values: ['input_number']},
-      {key: 'gender', label: _t('gender'), values: [{key:'male', label:_t('man')}, {key:'female', label:_t('woman')}]},
+      {key: 'gender', label: _t('gender'), values: [{key:'male', label:_t('man')}, {key:'other', label:_t('other')}, {key:'female', label:_t('woman')}]},
       {key: 'age', label: _t('age'), values: ['input_number']},
       {key: 'subType', label: _t('type'), values: $scope.type.active.subtypes},
       {key: 'ca', label: _t('revenue'), values: ['input_number']}
