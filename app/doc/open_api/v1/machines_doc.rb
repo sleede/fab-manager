@@ -9,6 +9,8 @@ class OpenAPI::V1::MachinesDoc < OpenAPI::V1::BaseDoc
   doc_for :index do
     api :GET, "/#{API_VERSION}/machines", "Machines index"
     description "Machines index. Order by *created_at* ascendant."
+    param_group :pagination
+    param :machine_id, [Integer, Array], optional: true, desc: "Filter users by *id* using strict matching."
     example <<-EOS
       # /open_api/v1/machines
       {
