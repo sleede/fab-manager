@@ -10,7 +10,8 @@ We've wrote a script to automate the process while keeping your data integrity, 
   The script will try to add 4GB of swap memory if this requirement is detected as missing but this will consume you hard disk space (see below).
 - 1,17GB of free disk space are also required to perform the data migration.
   Please ensure that you'll have enough space, considering the point above. The script won't run otherwise.
-- This script will run on any Debian compatible OS (like Ubuntu) and on MacOS X, on any other systems you'll need to perform the upgrade yourself manually. 
+- This script will run on any Debian compatible OS (like Ubuntu) and on MacOS X, on any other systems you'll need to perform the upgrade yourself manually.
+- If your ElasticSearch instance uses replicas shards, you can't use this script and you must perform a manual upgrade.
 
 Once you've understood all the points above, you can run the migration script with the following:
 
