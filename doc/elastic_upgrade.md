@@ -17,4 +17,5 @@ Once you've understood all the points above, you can run the migration script wi
 ```bash
 cd /apps/fabmanager
 # do not run as root, elevation will be prompted if needed
+\curl https://raw.githubusercontent.com/LaCasemate/fab-manager/master/scripts/elastic-upgrade.sh | bash
 ```
