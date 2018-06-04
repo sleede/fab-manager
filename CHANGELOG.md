@@ -1,9 +1,12 @@
 # Changelog Fab Manager
 
 ## next release
+
+- Upgraded ElasticSearch from 1.7 to 5.6
 - Updated OmniAuth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
 - Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-8048](https://github.com/flavorjones/loofah/issues/144)
 - Ensure elasticSearch indices are started with green status on new installations
+- [TODO DEPLOY] **REQUIRED** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 
 ## v2.6.4 2018 March 15
 

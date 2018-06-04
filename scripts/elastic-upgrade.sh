@@ -24,6 +24,12 @@ config()
     echo "jq was not found, exiting..."
     exit 1
   fi
+  if ! command -v sudo
+  then
+    echo "Please install and configure sudo before running this script."
+    echo "sudo was not found, exiting..."
+    exit 1
+  fi
   echo "checking memory..."
   mem=$(free -mt | grep Total | awk '{print $2}')
   if [ "$mem" -lt 4000 ]
