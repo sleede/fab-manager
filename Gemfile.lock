@@ -154,24 +154,24 @@ GEM
     docile (1.1.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
-    elasticsearch (1.0.12)
-      elasticsearch-api (= 1.0.12)
-      elasticsearch-transport (= 1.0.12)
-    elasticsearch-api (1.0.12)
+    elasticsearch (5.0.5)
+      elasticsearch-api (= 5.0.5)
+      elasticsearch-transport (= 5.0.5)
+    elasticsearch-api (5.0.5)
       multi_json
-    elasticsearch-model (0.1.7)
+    elasticsearch-model (5.0.2)
       activesupport (> 3)
-      elasticsearch (> 0.4)
+      elasticsearch (~> 5)
       hashie
-    elasticsearch-persistence (0.1.7)
-      activemodel (> 3)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      elasticsearch-model (>= 0.1)
+    elasticsearch-persistence (5.0.2)
+      activemodel (> 4)
+      activesupport (> 4)
+      elasticsearch (~> 5)
+      elasticsearch-model (~> 5)
       hashie
       virtus
-    elasticsearch-rails (0.1.7)
-    elasticsearch-transport (1.0.12)
+    elasticsearch-rails (5.0.2)
+    elasticsearch-transport (5.0.5)
       faraday
       multi_json
     equalizer (0.0.11)
@@ -217,7 +217,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
-    ice_nine (0.11.1)
+    ice_nine (0.11.2)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -520,9 +520,9 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-async
-  elasticsearch-model
-  elasticsearch-persistence
-  elasticsearch-rails
+  elasticsearch-model (~> 5)
+  elasticsearch-persistence (~> 5)
+  elasticsearch-rails (~> 5)
   faker
   figaro
   font-awesome-rails
