@@ -361,7 +361,8 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
     es.search
       "index": "stats"
       "type": esType
-      "searchType": "count"
+      "searchType": "query_then_fetch"
+      "size": 0
       "stat-type": statType
       "custom-query": ''
       "start-date": moment($scope.datePickerStart.selected).format()
@@ -395,7 +396,8 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
     es.search
       "index": "stats"
       "type": esType
-      "searchType": "count"
+      "searchType": "query_then_fetch"
+      "size": 0
       "body": buildElasticAggregationsRankingQuery(groupKey, sortKey, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
     , (error, response) ->
       if (error)
@@ -458,12 +460,11 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
 
     # scale weeks on sunday as nvd3 supports only these weeks
     if interval == 'week'
-      q.aggregations.subgroups.aggregations.intervals.date_histogram['post_offset'] = '-1d'
-      q.aggregations.subgroups.aggregations.intervals.date_histogram['pre_offset'] = '-1d'
+      q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = '-1d'
     # scale days to UTC time
     else if interval == 'day'
       offset = moment().utcOffset()
-      q.aggregations.subgroups.aggregations.intervals.date_histogram['post_offset'] = (-offset)+'m'
+      q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = (-offset)+'m'
     q
 
 
@@ -504,7 +505,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
     # we group the results by the custom given key (eg. by event date)
     q.aggregations.subgroups.terms =
       field: groupKey
-      size: 0
+      size: 2147483647 #FIXME https://github.com/elastic/elasticsearch/issues/22136
 
     # results must be sorted and limited later by angular
     if sortKey != 'ca'
