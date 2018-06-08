@@ -437,7 +437,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
             }
           ]
     # optional date range
-    if ageMin && ageMax
+    if typeof ageMin == 'number' && typeof ageMax == 'number'
       q.query.bool.must.push
         "range":
           "age":
