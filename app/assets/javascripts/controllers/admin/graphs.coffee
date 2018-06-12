@@ -505,7 +505,7 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
     # we group the results by the custom given key (eg. by event date)
     q.aggregations.subgroups.terms =
       field: groupKey
-      size: 2147483647 #FIXME https://github.com/elastic/elasticsearch/issues/22136
+      size: 2147483647 #FIXME https://discuss.elastic.co/t/aggregation-size-0-for-top-results/135512/2
 
     # results must be sorted and limited later by angular
     if sortKey != 'ca'
