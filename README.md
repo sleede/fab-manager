@@ -391,6 +391,12 @@ environment.
    sudo apt-get install postgresql-9.4
    ```
 
+4. Start PostgreSQL 9.4
+
+   ```bash
+   sudo service postgresql start
+   ```
+
 <a name="postgresql-on-macosx"></a>
 ### Install and launch PostgreSQL on MacOS X
 
