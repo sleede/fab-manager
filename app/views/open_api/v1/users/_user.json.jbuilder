@@ -2,7 +2,17 @@ json.extract! user, :id, :email, :created_at
 
 if user.association(:profile).loaded?
   json.full_name user.profile.full_name
+  json.first_name user.profile.first_name
+  json.last_name user.profile.last_name
+  json.avatar_url user.profile.user_avatar.attachment_url if user.profile.user_avatar
+  json.interest user.profile.interest
+  json.software_mastered user.profile.software_mastered
 end
+
+json.trainings user.trainings do |training|
+  json.id training.id
+  json.name training.name
+end if user.trainings
 
 if user.association(:group).loaded?
   json.group do
