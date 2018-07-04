@@ -9,8 +9,8 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
-4.2. [Environment Configuration](#environment-configuration)
-4.3. [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
+4.2. [Environment Configuration](#environment-configuration)<br/>
+4.3. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
@@ -290,7 +290,7 @@ See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](
 
 
 <a name="virtual-machine-instructions"></a>
-### Virtual Machine Instructtions
+### Virtual Machine Instructions
 
 These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
 machine, with most of the software dependencies installed automatically and avoiding to install a lot
