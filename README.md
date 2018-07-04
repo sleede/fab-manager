@@ -123,7 +123,8 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
-   **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+   - **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
    ```bash
    rake db:create
@@ -349,7 +350,7 @@ environment.
 
 10. Set up the databases. (Note that you should provide the desired admin credentials and that these
     specific set of commands must be used to set up the database as some raw SQL instructions are
-    included in the migrations):
+    included in the migrations. Password minimal length is 8 characters):
 
    ```bash
    rake db:create
@@ -724,7 +725,9 @@ After modifying any values concerning the localisation, restart the application 
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects). It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform. The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
+You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects).
+It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform.
+The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
 
 If you want to try it, you can visit [this fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different fab-managers.
 
