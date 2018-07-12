@@ -85,5 +85,26 @@ namespace :fablab do
         puts "#{Event.where(recurrence_id: failed_ids).map(&:id)}"
       end
     end
+
+    desc 'reset slug in events categories'
+    task categories_slugs: :environment do
+      Category.all.each do |cat|
+        `curl -XPOST http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/event/_update_by_query?conflicts=proceed&refresh&wait_for_completion -d '
+        {
+          "script": {
+            "source": "ctx._source.subType = params.slug",
+            "lang": "painless",
+            "params": {
+              "slug": "#{cat.slug}"
+            }
+          },
+          "query": {
+            "term": {
+              "subType": "#{cat.name}"
+            }
+          }
+        }';`
+      end
+    end
   end
 end
