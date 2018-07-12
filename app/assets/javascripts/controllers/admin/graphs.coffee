@@ -387,10 +387,9 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
   queryElasticRanking = (esType, groupKey, sortKey, callback) ->
     # handle invalid callback
     if typeof(callback) != "function"
-      console.error('[graphsController::queryElasticRanking] Error: invalid callback provided')
-      return
+      return console.error('[graphsController::queryElasticRanking] Error: invalid callback provided')
     if !esType or !groupKey or !sortKey
-      callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided')
+      return callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided')
 
     # run query
     es.search
@@ -496,16 +495,20 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
       "aggregations":
         "subgroups":
           "terms":
-            "field": "subType"
+            "field": groupKey
+            "size": 10
+            "order":
+              "total": "desc"
           "aggregations":
+            "top_events":
+              "top_hits":
+                "size": 1
+                "sort": [
+                  { "ca": "desc" }
+                ]
             "total":
               "sum":
                 "field": "stat"
-
-    # we group the results by the custom given key (eg. by event date)
-    q.aggregations.subgroups.terms =
-      field: groupKey
-      size: 2147483647 #FIXME https://discuss.elastic.co/t/aggregation-size-0-for-top-results/135512/2
 
     # results must be sorted and limited later by angular
     if sortKey != 'ca'
