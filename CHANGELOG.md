@@ -15,6 +15,7 @@
 - Fixed syntax and typos in README 
 - [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
+- [TODO DEPLOY] `bundle install`
 
 ## v2.6.4 2018 March 15
 
