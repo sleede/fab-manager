@@ -29,7 +29,7 @@ class CustomAggregationService
 
           exclude = custom_query.delete('exclude')
           if exclude
-            query = {query: { filtered: { query: query['query'], filter: { not: { term: custom_query['match'] } } } }, aggregations: query['aggregations'], size: query['size']}
+            query['query']['bool']['must_not'] = [{ term: custom_query['match'] }]
           else
             query['query']['bool']['must'].push(custom_query)
           end

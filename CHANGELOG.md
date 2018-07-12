@@ -4,12 +4,15 @@
 
 - Upgraded ElasticSearch from 1.7 to 5.6
 - Updated OmniAuth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
+- Fix a bug: unable to filter statistics from age 0
+- Fix a bug: events categories are not reported correctly in statistics
 - Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-8048](https://github.com/flavorjones/loofah/issues/144)
 - Fix a security issue: rails-html-sanitizer < 1.0.3 has a security vulnerability described in [CVE-2018-3741](https://nvd.nist.gov/vuln/detail/CVE-2018-3741)
 - Ensure elasticSearch indices are started with green status on new installations
 - Refactored User.as_json to remove code duplication
-- Fixed syntax and typos in README
-- [TODO DEPLOY] **REQUIRED** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
+- Fixed syntax and typos in README 
+- [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
+- [TODO DEPLOY] `rake fablab:fix:categories_slugs`
 
 ## v2.6.4 2018 March 15
 

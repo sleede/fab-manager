@@ -437,7 +437,7 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
             }
           ]
     # optional date range
-    if ageMin && ageMax
+    if typeof ageMin == 'number' && typeof ageMax == 'number'
       q.query.bool.must.push
         "range":
           "age":
@@ -447,16 +447,9 @@ Application.Controllers.controller "StatisticsController", ["$scope", "$state", 
     if custom
       criterion = buildElasticCustomCriterion(custom)
       if (custom.exclude)
-        q = "query": {
-          "filtered": {
-            "query": q.query,
-            "filter": {
-              "not": {
-                "term": criterion.match
-              }
-            }
-          }
-        }
+        q.query.bool.must_not = [
+          "term": criterion.match
+        ]
       else
         q.query.bool.must.push(criterion)
 
