@@ -8,6 +8,7 @@
 - Fix a bug: events categories are not reported correctly in statistics
 - Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-8048](https://github.com/flavorjones/loofah/issues/144)
 - Fix a security issue: rails-html-sanitizer < 1.0.3 has a security vulnerability described in [CVE-2018-3741](https://nvd.nist.gov/vuln/detail/CVE-2018-3741)
+- Fix a security issue: nokogiri < 1.8.2 has a security vulnerability as described in [CVE-2017-18258](https://nvd.nist.gov/vuln/detail/CVE-2017-18258)
 - Ensure elasticSearch indices are started with green status on new installations
 - Refactored User.as_json to remove code duplication
 - Fixed syntax and typos in README 
