@@ -1,16 +1,33 @@
 # Changelog Fab Manager
 
-## next release
+## v2.6.5 2018 July 24
+
+- Upgraded ElasticSearch from 1.7 to 5.6
+- Ability to display the name of the user who booked a machine slot to other members
+- Updated OmniAuth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
+- Fix a bug: unable to filter statistics from age 0
+- Fix a bug: events categories are not reported correctly in statistics
+- Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-8048](https://github.com/flavorjones/loofah/issues/144)
+- Fix a security issue: rails-html-sanitizer < 1.0.3 has a security vulnerability described in [CVE-2018-3741](https://nvd.nist.gov/vuln/detail/CVE-2018-3741)
+- Fix a security issue: nokogiri < 1.8.2 has a security vulnerability as described in [CVE-2017-18258](https://nvd.nist.gov/vuln/detail/CVE-2017-18258)
+- Fix a security issue: sprockets < 2.12.5 has a security vulnerability as described in [CVE-2018-3760](https://nvd.nist.gov/vuln/detail/CVE-2018-3760)
+- Ensure elasticSearch indices are started with green status on new installations
+- Refactored User.to_json to remove code duplication
+- Fixed syntax and typos in README 
+- [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
+- [TODO DEPLOY] `rake fablab:fix:categories_slugs`
+- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] `rake db:seed`
 
 ## v2.6.4 2018 March 15
 
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
-- fix stripe api version, all fabmanagers has to use this version because codebase relies on it
-- updates omniauth to ~> 1.3.2 (security vulnerability)
-- updates rack-protection to 1.5.5 (security vulnerability) see [this link](https://github.com/sinatra/sinatra/issues/1408) and [this link](https://github.com/sinatra/rack-protection/pull/122)
-- updates twitter gem in order to get rid of security warning from gem "http"
+- Set Stripe API version, all fab-managers has to use this version because codebase relies on it
+- Fix a security issue: OmniAuth < 1.3.2  has a security vulnerability described in [CVE-2017-18076](https://nvd.nist.gov/vuln/detail/CVE-2017-18076)
+- Fix a security issue: rack-protection < 1.5.5 has a security vulnerability described in [CVE-2018-1000119](https://nvd.nist.gov/vuln/detail/CVE-2018-1000119)
+- Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency 
 
 ## v2.6.3 2018 January 2
 

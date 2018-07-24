@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2019&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -17,11 +17,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -32,11 +34,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:18:35 GMT
+      - Tue, 24 Jul 2018 12:33:33 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '779'
+      - '780'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -46,13 +48,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_KMROhlO5Nkbk3a
+      - req_QXRQUHInmNlZmv
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -61,10 +63,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1BYyTn2sOmf47Nz9LTDfT8V0",
+          "id": "tok_1CrPhp2sOmf47Nz97FwR0N0Q",
           "object": "token",
           "card": {
-            "id": "card_1BYyTn2sOmf47Nz9GS7ahF4Z",
+            "id": "card_1CrPhp2sOmf47Nz9kdpFLmfl",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -79,7 +81,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2018,
+            "exp_year": 2019,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -87,14 +89,14 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "90.112.59.71",
-          "created": 1513264715,
+          "client_ip": "90.112.128.65",
+          "created": 1532435613,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:18:36 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:33 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8Di1wjdVktv5kt&limit=100
@@ -112,11 +114,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -125,11 +129,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:18:36 GMT
+      - Tue, 24 Jul 2018 12:33:34 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '11529'
+      - '14389'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -139,13 +143,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_lqMxqsZcDSN1eL
+      - req_LVVZrf5H4q95se
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -156,6 +160,94 @@ http_interactions:
         {
           "object": "list",
           "data": [
+            {
+              "id": "ii_1CrPhR2sOmf47Nz9GjDTPM59",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1532435589,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1CrPhU2sOmf47Nz9LcjmZ0k4",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1532435589,
+                "end": 1532435589
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
+            },
+            {
+              "id": "ii_1CrPhQ2sOmf47Nz9Kgf1w9jh",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1532435588,
+              "description": "FORM1+ imprimante 3D July 24, 2018 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_1CrPhU2sOmf47Nz9LcjmZ0k4",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1532435588,
+                "end": 1532435588
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
+            },
+            {
+              "id": "ii_1CrPgp2sOmf47Nz9KqyvABF7",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1532435551,
+              "description": "FORM1+ imprimante 3D July 24, 2018 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_1CrPgu2sOmf47Nz9SQCXCWyv",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1532435551,
+                "end": 1532435551
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
+            },
+            {
+              "id": "ii_1BYyTt2sOmf47Nz9h7btfoKd",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1513264721,
+              "description": "FORM1+ imprimante 3D December 10, 2017 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1BYyTz2sOmf47Nz9jyWUyIeG",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1513264721,
+                "end": 1513264721
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
+            },
             {
               "id": "ii_1BYyTK2sOmf47Nz93VzSjIeZ",
               "object": "invoiceitem",
@@ -174,8 +266,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
             },
             {
               "id": "ii_1BYyTJ2sOmf47Nz9zcESvCJe",
@@ -195,8 +288,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
             },
             {
               "id": "ii_1BYySW2sOmf47Nz9UnnvBAh3",
@@ -216,8 +310,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_1B3L0k2sOmf47Nz9y87SMg3r",
@@ -237,8 +332,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_1B3L0Y2sOmf47Nz9e9W8bl2Z",
@@ -258,8 +354,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
             },
             {
               "id": "ii_1B3L0J2sOmf47Nz9lKSNNF1U",
@@ -279,8 +376,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_1B3L012sOmf47Nz948JNFRoK",
@@ -300,8 +398,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
             },
             {
               "id": "ii_1B3L002sOmf47Nz9FjqPZEye",
@@ -321,8 +420,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
             },
             {
               "id": "ii_1B3Kuo2sOmf47Nz9egmtGncE",
@@ -342,8 +442,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
             },
             {
               "id": "ii_1B3KuK2sOmf47Nz9RqRGmh0l",
@@ -363,8 +464,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_1B3Ku62sOmf47Nz92wSUMzHq",
@@ -384,8 +486,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
             },
             {
               "id": "ii_1B3Ku52sOmf47Nz9vmqyS5Gy",
@@ -405,8 +508,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
             },
             {
               "id": "ii_18rRuK2sOmf47Nz9ye4DQ4PM",
@@ -426,8 +530,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -510
             },
             {
               "id": "ii_18rRuJ2sOmf47Nz9S7f6qfEz",
@@ -447,8 +552,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_18rNSp2sOmf47Nz9S0rJVP2a",
@@ -468,8 +574,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -450
             },
             {
               "id": "ii_18rNSm2sOmf47Nz9R11Svoer",
@@ -489,8 +596,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -225
             },
             {
               "id": "ii_18rNSm2sOmf47Nz9avgL9KyW",
@@ -510,8 +618,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
             },
             {
               "id": "ii_17xeeI2sOmf47Nz9qEhwu9J6",
@@ -531,8 +640,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_17xHFG2sOmf47Nz9hhIaJZtF",
@@ -552,8 +662,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
             },
             {
               "id": "ii_17xHF82sOmf47Nz9QT6BnkAZ",
@@ -573,21 +684,22 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             }
           ],
           "has_more": false,
           "url": "/v1/invoiceitems"
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:18:36 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:34 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8Di1wjdVktv5kt&amount=5100&currency=usd&description=Formation+Imprimante+3D+December+11%2C+2017+07%3A00+-+08%3A00+AM
+      string: customer=cus_8Di1wjdVktv5kt&amount=5100&currency=usd&description=Formation+Imprimante+3D+July+25%2C+2018+08%3A00+-+09%3A00+AM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -599,13 +711,15 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
-      - '129'
+      - '125'
   response:
     status:
       code: 200
@@ -614,11 +728,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:18:37 GMT
+      - Tue, 24 Jul 2018 12:33:35 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '475'
+      - '491'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -628,13 +742,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_dvk3QZvjLMgO1s
+      - req_F24qmWZDgelQ3p
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -643,26 +757,27 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1BYyTp2sOmf47Nz9ukiXGo41",
+          "id": "ii_1CrPhr2sOmf47Nz90bCUiJHE",
           "object": "invoiceitem",
           "amount": 5100,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1513264717,
-          "description": "Formation Imprimante 3D December 11, 2017 07:00 - 08:00 AM",
+          "date": 1532435615,
+          "description": "Formation Imprimante 3D July 25, 2018 08:00 - 09:00 AM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1513264717,
-            "end": 1513264717
+            "start": 1532435615,
+            "end": 1532435615
           },
           "plan": null,
           "proration": false,
-          "quantity": null,
-          "subscription": null
+          "quantity": 1,
+          "subscription": null,
+          "unit_amount": 5100
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:18:37 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:35 GMT
 recorded_with: VCR 3.0.1

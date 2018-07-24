@@ -77,7 +77,7 @@
   <![endif]-->
 </head>
 
-<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_builder.target! : 'null' %>)" ng-cloak>
+<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_json : 'null' %>)" ng-cloak>
   <div growl></div>
 
   <%= flash_messages %>

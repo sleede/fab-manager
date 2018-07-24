@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2019&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -17,11 +17,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -32,11 +34,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:16:12 GMT
+      - Tue, 24 Jul 2018 12:34:32 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '779'
+      - '780'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -46,13 +48,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_XqhUMqt5Xlh260
+      - req_P0NzzZbjWI5WVK
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -61,10 +63,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1BYyRU2sOmf47Nz9nONn350z",
+          "id": "tok_1CrPim2sOmf47Nz91VDOPKSG",
           "object": "token",
           "card": {
-            "id": "card_1BYyRU2sOmf47Nz9AcduZEmd",
+            "id": "card_1CrPim2sOmf47Nz9Twiepne1",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -79,7 +81,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2018,
+            "exp_year": 2019,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -87,12 +89,12 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "90.112.59.71",
-          "created": 1513264572,
+          "client_ip": "90.112.128.65",
+          "created": 1532435672,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:16:13 GMT
+  recorded_at: Tue, 24 Jul 2018 12:34:33 GMT
 recorded_with: VCR 3.0.1

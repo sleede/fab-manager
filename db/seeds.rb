@@ -413,6 +413,12 @@ unless Setting.find_by(name: 'visibility_others').try(:value)
   setting.save
 end
 
+unless Setting.find_by(name: 'display_name_enable').try(:value)
+  setting = Setting.find_or_initialize_by(name: 'display_name_enable')
+  setting.value = 'false'
+  setting.save
+end
+
 if StatisticCustomAggregation.count == 0
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

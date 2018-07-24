@@ -361,7 +361,8 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
     es.search
       "index": "stats"
       "type": esType
-      "searchType": "count"
+      "searchType": "query_then_fetch"
+      "size": 0
       "stat-type": statType
       "custom-query": ''
       "start-date": moment($scope.datePickerStart.selected).format()
@@ -386,16 +387,16 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
   queryElasticRanking = (esType, groupKey, sortKey, callback) ->
     # handle invalid callback
     if typeof(callback) != "function"
-      console.error('[graphsController::queryElasticRanking] Error: invalid callback provided')
-      return
+      return console.error('[graphsController::queryElasticRanking] Error: invalid callback provided')
     if !esType or !groupKey or !sortKey
-      callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided')
+      return callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided')
 
     # run query
     es.search
       "index": "stats"
       "type": esType
-      "searchType": "count"
+      "searchType": "query_then_fetch"
+      "size": 0
       "body": buildElasticAggregationsRankingQuery(groupKey, sortKey, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected))
     , (error, response) ->
       if (error)
@@ -458,12 +459,11 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
 
     # scale weeks on sunday as nvd3 supports only these weeks
     if interval == 'week'
-      q.aggregations.subgroups.aggregations.intervals.date_histogram['post_offset'] = '-1d'
-      q.aggregations.subgroups.aggregations.intervals.date_histogram['pre_offset'] = '-1d'
+      q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = '-1d'
     # scale days to UTC time
     else if interval == 'day'
       offset = moment().utcOffset()
-      q.aggregations.subgroups.aggregations.intervals.date_histogram['post_offset'] = (-offset)+'m'
+      q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = (-offset)+'m'
     q
 
 
@@ -495,16 +495,20 @@ Application.Controllers.controller "GraphsController", ["$scope", "$state", "$ro
       "aggregations":
         "subgroups":
           "terms":
-            "field": "subType"
+            "field": groupKey
+            "size": 10
+            "order":
+              "total": "desc"
           "aggregations":
+            "top_events":
+              "top_hits":
+                "size": 1
+                "sort": [
+                  { "ca": "desc" }
+                ]
             "total":
               "sum":
                 "field": "stat"
-
-    # we group the results by the custom given key (eg. by event date)
-    q.aggregations.subgroups.terms =
-      field: groupKey
-      size: 0
 
     # results must be sorted and limited later by angular
     if sortKey != 'ca'

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2018&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2019&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -17,11 +17,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -32,11 +34,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:40 GMT
+      - Tue, 24 Jul 2018 12:32:55 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '779'
+      - '780'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -46,13 +48,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_RGBTcAr2p3kDS4
+      - req_VnExXVxQmtWznf
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -61,10 +63,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1BYySu2sOmf47Nz9OFoj8wmr",
+          "id": "tok_1CrPhD2sOmf47Nz91iPGT1PT",
           "object": "token",
           "card": {
-            "id": "card_1BYySu2sOmf47Nz97I4Dfiar",
+            "id": "card_1CrPhD2sOmf47Nz9q5D2w1Zx",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -79,7 +81,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2018,
+            "exp_year": 2019,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -87,14 +89,14 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "90.112.59.71",
-          "created": 1513264660,
+          "client_ip": "90.112.128.65",
+          "created": 1532435575,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:40 GMT
+  recorded_at: Tue, 24 Jul 2018 12:32:55 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8CzKe50I0J1gaI&limit=100
@@ -112,11 +114,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -125,11 +129,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:41 GMT
+      - Tue, 24 Jul 2018 12:32:56 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '6476'
+      - '7922'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -139,13 +143,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_mOgR5BqHZDlvP6
+      - req_gXQXLIul0XLRgM
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -156,6 +160,50 @@ http_interactions:
         {
           "object": "list",
           "data": [
+            {
+              "id": "ii_1BYySx2sOmf47Nz9wGkamKx1",
+              "object": "invoiceitem",
+              "amount": 1000,
+              "currency": "usd",
+              "customer": "cus_8CzKe50I0J1gaI",
+              "date": 1513264663,
+              "description": "FORM1+ imprimante 3D December 10, 2017 14:00 - 03:00 PM",
+              "discountable": true,
+              "invoice": "in_1BYyT12sOmf47Nz9Z3r4gEjJ",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1513264663,
+                "end": 1513264663
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1000
+            },
+            {
+              "id": "ii_1BYySw2sOmf47Nz9KRWFUWF2",
+              "object": "invoiceitem",
+              "amount": 0,
+              "currency": "usd",
+              "customer": "cus_8CzKe50I0J1gaI",
+              "date": 1513264662,
+              "description": "FORM1+ imprimante 3D December 10, 2017 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1BYyT12sOmf47Nz9Z3r4gEjJ",
+              "livemode": false,
+              "metadata": {},
+              "period": {
+                "start": 1513264662,
+                "end": 1513264662
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
+            },
             {
               "id": "ii_1BYySE2sOmf47Nz9sEPH6aQI",
               "object": "invoiceitem",
@@ -174,8 +222,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_1B3L1K2sOmf47Nz9qJv9M20Q",
@@ -195,8 +244,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1000
             },
             {
               "id": "ii_1B3L1J2sOmf47Nz9Qjf0ElJ7",
@@ -216,8 +266,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_1B3L1B2sOmf47Nz9dbDfy0so",
@@ -237,8 +288,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_1B3Kty2sOmf47Nz96UsCcZKF",
@@ -258,8 +310,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_1B3Kso2sOmf47Nz9XnTBtpv8",
@@ -279,8 +332,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1000
             },
             {
               "id": "ii_1B3Ksn2sOmf47Nz9SArgrvPT",
@@ -300,8 +354,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_17xeim2sOmf47Nz9aoVFuMOo",
@@ -321,8 +376,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_17xefB2sOmf47Nz90DXwNFPG",
@@ -342,8 +398,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             },
             {
               "id": "ii_17xIU92sOmf47Nz98bi7Z01X",
@@ -363,8 +420,9 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1000
             },
             {
               "id": "ii_17xIU92sOmf47Nz9JiLpXlHs",
@@ -384,21 +442,22 @@ http_interactions:
               },
               "plan": null,
               "proration": false,
-              "quantity": null,
-              "subscription": null
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 0
             }
           ],
           "has_more": false,
           "url": "/v1/invoiceitems"
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:41 GMT
+  recorded_at: Tue, 24 Jul 2018 12:32:56 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8CzKe50I0J1gaI&amount=0&currency=usd&description=FORM1%2B+imprimante+3D+December+10%2C+2017+13%3A00+-+02%3A00+PM
+      string: customer=cus_8CzKe50I0J1gaI&amount=0&currency=usd&description=FORM1%2B+imprimante+3D+July+24%2C+2018+14%3A00+-+03%3A00+PM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -410,13 +469,15 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
-      - '125'
+      - '121'
   response:
     status:
       code: 200
@@ -425,11 +486,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:42 GMT
+      - Tue, 24 Jul 2018 12:32:57 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '469'
+      - '482'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -439,13 +500,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_SU9xth4Lx3szWa
+      - req_6zVP1TTpSsGbA1
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -454,34 +515,35 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1BYySw2sOmf47Nz9KRWFUWF2",
+          "id": "ii_1CrPhF2sOmf47Nz9S1rA6fRy",
           "object": "invoiceitem",
           "amount": 0,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1513264662,
-          "description": "FORM1+ imprimante 3D December 10, 2017 13:00 - 02:00 PM",
+          "date": 1532435577,
+          "description": "FORM1+ imprimante 3D July 24, 2018 14:00 - 03:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1513264662,
-            "end": 1513264662
+            "start": 1532435577,
+            "end": 1532435577
           },
           "plan": null,
           "proration": false,
-          "quantity": null,
-          "subscription": null
+          "quantity": 1,
+          "subscription": null,
+          "unit_amount": 0
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:42 GMT
+  recorded_at: Tue, 24 Jul 2018 12:32:57 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8CzKe50I0J1gaI&amount=1000&currency=usd&description=FORM1%2B+imprimante+3D+December+10%2C+2017+14%3A00+-+03%3A00+PM
+      string: customer=cus_8CzKe50I0J1gaI&amount=1000&currency=usd&description=FORM1%2B+imprimante+3D+July+24%2C+2018+15%3A00+-+04%3A00+PM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -493,13 +555,15 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
-      - '128'
+      - '124'
   response:
     status:
       code: 200
@@ -508,11 +572,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:43 GMT
+      - Tue, 24 Jul 2018 12:32:58 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '472'
+      - '488'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -522,13 +586,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_P4Fdxw7fhTJ33g
+      - req_bSSbFbRQX1fTX0
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -537,28 +601,29 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1BYySx2sOmf47Nz9wGkamKx1",
+          "id": "ii_1CrPhG2sOmf47Nz9ghLTVtos",
           "object": "invoiceitem",
           "amount": 1000,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1513264663,
-          "description": "FORM1+ imprimante 3D December 10, 2017 14:00 - 03:00 PM",
+          "date": 1532435578,
+          "description": "FORM1+ imprimante 3D July 24, 2018 15:00 - 04:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {},
           "period": {
-            "start": 1513264663,
-            "end": 1513264663
+            "start": 1532435578,
+            "end": 1532435578
           },
           "plan": null,
           "proration": false,
-          "quantity": null,
-          "subscription": null
+          "quantity": 1,
+          "subscription": null,
+          "unit_amount": 1000
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:43 GMT
+  recorded_at: Tue, 24 Jul 2018 12:32:58 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI
@@ -576,11 +641,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -589,11 +656,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:44 GMT
+      - Tue, 24 Jul 2018 12:32:59 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '649'
+      - '680'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -603,13 +670,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_ooXIMx2poetvfA
+      - req_S22tr53bLH4JKX
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -628,6 +695,7 @@ http_interactions:
           "description": "Kevin Dumas",
           "discount": null,
           "email": "kevin.dumas@orange.fr",
+          "invoice_prefix": "CAA9D6C",
           "livemode": false,
           "metadata": {},
           "shipping": null,
@@ -647,13 +715,13 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:44 GMT
+  recorded_at: Tue, 24 Jul 2018 12:32:59 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI/sources
     body:
       encoding: UTF-8
-      string: card=tok_1BYySu2sOmf47Nz9OFoj8wmr
+      string: card=tok_1CrPhD2sOmf47Nz91iPGT1PT
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -665,11 +733,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '33'
   response:
@@ -680,7 +750,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:45 GMT
+      - Tue, 24 Jul 2018 12:33:00 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -694,13 +764,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_WqmVkGhACEzH85
+      - req_kTE3d2WjQj9Ya1
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -709,7 +779,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_1BYySu2sOmf47Nz97I4Dfiar",
+          "id": "card_1CrPhD2sOmf47Nz9q5D2w1Zx",
           "object": "card",
           "address_city": null,
           "address_country": null,
@@ -725,7 +795,7 @@ http_interactions:
           "cvc_check": "pass",
           "dynamic_last4": null,
           "exp_month": 4,
-          "exp_year": 2018,
+          "exp_year": 2019,
           "fingerprint": "o52jybR7bnmNn6AT",
           "funding": "credit",
           "last4": "4242",
@@ -734,7 +804,7 @@ http_interactions:
           "tokenization_method": null
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:45 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:00 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoices
@@ -752,11 +822,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '27'
   response:
@@ -767,11 +839,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:48 GMT
+      - Tue, 24 Jul 2018 12:33:01 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2047'
+      - '2295'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -781,13 +853,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_rLzEDIZ16gq0Av
+      - req_fWkUkOBu1yXIxo
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -796,76 +868,84 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1BYyT12sOmf47Nz9Z3r4gEjJ",
+          "id": "in_1CrPhJ2sOmf47Nz9k0LdKsrT",
           "object": "invoice",
           "amount_due": 1000,
+          "amount_paid": 0,
+          "amount_remaining": 1000,
           "application_fee": null,
           "attempt_count": 0,
           "attempted": false,
+          "auto_advance": true,
           "billing": "charge_automatically",
+          "billing_reason": "manual",
           "charge": null,
           "closed": false,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1513264667,
+          "date": 1532435581,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": null,
           "forgiven": false,
+          "hosted_invoice_url": null,
+          "invoice_pdf": null,
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1BYySx2sOmf47Nz9wGkamKx1",
+                "id": "ii_1CrPhG2sOmf47Nz9ghLTVtos",
                 "object": "line_item",
                 "amount": 1000,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D December 10, 2017 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D July 24, 2018 15:00 - 04:00 PM",
                 "discountable": true,
+                "invoice_item": "ii_1CrPhG2sOmf47Nz9ghLTVtos",
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1513264663,
-                  "end": 1513264663
+                  "end": 1532435578,
+                  "start": 1532435578
                 },
                 "plan": null,
                 "proration": false,
-                "quantity": null,
+                "quantity": 1,
                 "subscription": null,
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1BYySw2sOmf47Nz9KRWFUWF2",
+                "id": "ii_1CrPhF2sOmf47Nz9S1rA6fRy",
                 "object": "line_item",
                 "amount": 0,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D December 10, 2017 13:00 - 02:00 PM",
+                "description": "FORM1+ imprimante 3D July 24, 2018 14:00 - 03:00 PM",
                 "discountable": true,
+                "invoice_item": "ii_1CrPhF2sOmf47Nz9S1rA6fRy",
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1513264662,
-                  "end": 1513264662
+                  "end": 1532435577,
+                  "start": 1532435577
                 },
                 "plan": null,
                 "proration": false,
-                "quantity": null,
+                "quantity": 1,
                 "subscription": null,
                 "type": "invoiceitem"
               }
             ],
             "has_more": false,
             "total_count": 2,
-            "url": "/v1/invoices/in_1BYyT12sOmf47Nz9Z3r4gEjJ/lines"
+            "url": "/v1/invoices/in_1CrPhJ2sOmf47Nz9k0LdKsrT/lines"
           },
           "livemode": false,
           "metadata": {},
-          "next_payment_attempt": 1513268267,
-          "number": "80bcaa9d6c-0006",
+          "next_payment_attempt": 1532439181,
+          "number": "CAA9D6C-0007",
           "paid": false,
-          "period_end": 1513264667,
-          "period_start": 1513264667,
+          "period_end": 1532435581,
+          "period_start": 1532435581,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
@@ -877,10 +957,10 @@ http_interactions:
           "webhooks_delivered_at": null
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:48 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:01 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/invoices/in_1BYyT12sOmf47Nz9Z3r4gEjJ/pay
+    uri: https://api.stripe.com/v1/invoices/in_1CrPhJ2sOmf47Nz9k0LdKsrT/pay
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -895,11 +975,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '0'
   response:
@@ -910,11 +992,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:49 GMT
+      - Tue, 24 Jul 2018 12:33:03 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2066'
+      - '2441'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -924,13 +1006,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_iXDzR7kNuDh0ac
+      - req_szxwB7qgF3wuBo
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -939,76 +1021,84 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1BYyT12sOmf47Nz9Z3r4gEjJ",
+          "id": "in_1CrPhJ2sOmf47Nz9k0LdKsrT",
           "object": "invoice",
           "amount_due": 1000,
+          "amount_paid": 1000,
+          "amount_remaining": 0,
           "application_fee": null,
           "attempt_count": 1,
           "attempted": true,
+          "auto_advance": false,
           "billing": "charge_automatically",
-          "charge": "ch_1BYyT32sOmf47Nz9LA8ru5Lk",
+          "billing_reason": "manual",
+          "charge": "ch_1CrPhK2sOmf47Nz9LgWgJFw2",
           "closed": true,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1513264667,
+          "date": 1532435581,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
           "forgiven": false,
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_VfwgUVvXQkEwN1cZQJufuaFwNT",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_VfwgUVvXQkEwN1cZQJufuaFwNT/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1BYySx2sOmf47Nz9wGkamKx1",
+                "id": "ii_1CrPhG2sOmf47Nz9ghLTVtos",
                 "object": "line_item",
                 "amount": 1000,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D December 10, 2017 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D July 24, 2018 15:00 - 04:00 PM",
                 "discountable": true,
+                "invoice_item": "ii_1CrPhG2sOmf47Nz9ghLTVtos",
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1513264663,
-                  "end": 1513264663
+                  "end": 1532435578,
+                  "start": 1532435578
                 },
                 "plan": null,
                 "proration": false,
-                "quantity": null,
+                "quantity": 1,
                 "subscription": null,
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1BYySw2sOmf47Nz9KRWFUWF2",
+                "id": "ii_1CrPhF2sOmf47Nz9S1rA6fRy",
                 "object": "line_item",
                 "amount": 0,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D December 10, 2017 13:00 - 02:00 PM",
+                "description": "FORM1+ imprimante 3D July 24, 2018 14:00 - 03:00 PM",
                 "discountable": true,
+                "invoice_item": "ii_1CrPhF2sOmf47Nz9S1rA6fRy",
                 "livemode": false,
                 "metadata": {},
                 "period": {
-                  "start": 1513264662,
-                  "end": 1513264662
+                  "end": 1532435577,
+                  "start": 1532435577
                 },
                 "plan": null,
                 "proration": false,
-                "quantity": null,
+                "quantity": 1,
                 "subscription": null,
                 "type": "invoiceitem"
               }
             ],
             "has_more": false,
             "total_count": 2,
-            "url": "/v1/invoices/in_1BYyT12sOmf47Nz9Z3r4gEjJ/lines"
+            "url": "/v1/invoices/in_1CrPhJ2sOmf47Nz9k0LdKsrT/lines"
           },
           "livemode": false,
           "metadata": {},
           "next_payment_attempt": null,
-          "number": "80bcaa9d6c-0006",
+          "number": "CAA9D6C-0007",
           "paid": true,
-          "period_end": 1513264667,
-          "period_start": 1513264667,
+          "period_end": 1532435581,
+          "period_start": 1532435581,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
@@ -1017,13 +1107,13 @@ http_interactions:
           "tax": null,
           "tax_percent": null,
           "total": 1000,
-          "webhooks_delivered_at": 1513264668
+          "webhooks_delivered_at": 1532435581
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:49 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:04 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI/sources/card_1BYySu2sOmf47Nz97I4Dfiar
+    uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI/sources/card_1CrPhD2sOmf47Nz9q5D2w1Zx
     body:
       encoding: US-ASCII
       string: ''
@@ -1038,11 +1128,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -1051,11 +1143,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:17:50 GMT
+      - Tue, 24 Jul 2018 12:33:04 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '63'
+      - '83'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -1065,13 +1157,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_Df4wZ2ucDoUxsE
+      - req_LRs2qVz3kd6PD2
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1080,9 +1172,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "deleted": true,
-          "id": "card_1BYySu2sOmf47Nz97I4Dfiar"
+          "id": "card_1CrPhD2sOmf47Nz9q5D2w1Zx",
+          "object": "card",
+          "deleted": true
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:17:50 GMT
+  recorded_at: Tue, 24 Jul 2018 12:33:05 GMT
 recorded_with: VCR 3.0.1

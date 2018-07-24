@@ -17,11 +17,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -30,11 +32,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:16:24 GMT
+      - Tue, 24 Jul 2018 12:34:15 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '3543'
+      - '1441'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -44,13 +46,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6LXPuSODUn5uJ2
+      - req_XKFJ9GjNWcim5R
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -64,11 +66,12 @@ http_interactions:
           "account_balance": 0,
           "created": 1460026822,
           "currency": "usd",
-          "default_source": "card_1BYyQ32sOmf47Nz9BKCE2qig",
+          "default_source": "card_1BYyRi2sOmf47Nz9yj9PfHSf",
           "delinquent": false,
           "description": "Lucile Seguin",
           "discount": null,
           "email": "lucile.seguin@live.fr",
+          "invoice_prefix": "BCC32B8",
           "livemode": false,
           "metadata": {},
           "shipping": null,
@@ -76,7 +79,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_1BYyQ32sOmf47Nz9BKCE2qig",
+                "id": "card_1BYyRi2sOmf47Nz9yj9PfHSf",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -107,81 +110,14 @@ http_interactions:
           },
           "subscriptions": {
             "object": "list",
-            "data": [
-              {
-                "id": "sub_BwsAa2guSea26d",
-                "object": "subscription",
-                "application_fee_percent": null,
-                "billing": "charge_automatically",
-                "cancel_at_period_end": true,
-                "canceled_at": 1513264490,
-                "created": 1513264485,
-                "current_period_end": 1515942885,
-                "current_period_start": 1513264485,
-                "customer": "cus_8E2ys9zDZgetWX",
-                "days_until_due": null,
-                "discount": null,
-                "ended_at": null,
-                "items": {
-                  "object": "list",
-                  "data": [
-                    {
-                      "id": "si_BwsA4akiGbwgjQ",
-                      "object": "subscription_item",
-                      "created": 1513264486,
-                      "metadata": {},
-                      "plan": {
-                        "id": "mensuel-standard-month-20160404171519",
-                        "object": "plan",
-                        "amount": 3000,
-                        "created": 1459782921,
-                        "currency": "usd",
-                        "interval": "month",
-                        "interval_count": 1,
-                        "livemode": false,
-                        "metadata": {},
-                        "name": "Mensuel - standard, association - month",
-                        "statement_descriptor": null,
-                        "trial_period_days": null
-                      },
-                      "quantity": 1
-                    }
-                  ],
-                  "has_more": false,
-                  "total_count": 1,
-                  "url": "/v1/subscription_items?subscription=sub_BwsAa2guSea26d"
-                },
-                "livemode": false,
-                "metadata": {},
-                "plan": {
-                  "id": "mensuel-standard-month-20160404171519",
-                  "object": "plan",
-                  "amount": 3000,
-                  "created": 1459782921,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "Mensuel - standard, association - month",
-                  "statement_descriptor": null,
-                  "trial_period_days": null
-                },
-                "quantity": 1,
-                "start": 1513264485,
-                "status": "active",
-                "tax_percent": null,
-                "trial_end": null,
-                "trial_start": null
-              }
-            ],
+            "data": [],
             "has_more": false,
-            "total_count": 1,
+            "total_count": 0,
             "url": "/v1/customers/cus_8E2ys9zDZgetWX/subscriptions"
           }
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:16:25 GMT
+  recorded_at: Tue, 24 Jul 2018 12:34:15 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8E2ys9zDZgetWX/subscriptions
@@ -199,11 +135,13 @@ http_interactions:
       - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
+      Stripe-Version:
+      - '2015-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.10.0-42-generic (buildd@lgw01-amd64-007) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.5) ) #46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59
-        UTC 2017","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '68'
   response:
@@ -214,11 +152,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Dec 2017 15:16:25 GMT
+      - Tue, 24 Jul 2018 12:34:16 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '132'
+      - '235'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -228,25 +166,29 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
-      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_nhQmz71ymY1dVq
+      - req_d8IWU2WIXkPxDa
       Stripe-Version:
       - '2015-10-16'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |
         {
           "error": {
-            "type": "invalid_request_error",
+            "code": "resource_missing",
+            "doc_url": "https://stripe.com/docs/error-codes/resource-missing",
             "message": "No such token: invalid_card_token",
-            "param": "source"
+            "param": "source",
+            "type": "invalid_request_error"
           }
         }
     http_version: 
-  recorded_at: Thu, 14 Dec 2017 15:16:25 GMT
+  recorded_at: Tue, 24 Jul 2018 12:34:16 GMT
 recorded_with: VCR 3.0.1

@@ -79,7 +79,7 @@ gem 'pg'
 gem 'devise'
 gem 'devise-async'
 
-gem 'omniauth', '~> 1.3.2'
+gem 'omniauth', '~> 1.6.0'
 gem 'omniauth-oauth2'
 
 gem 'rolify'
@@ -122,9 +122,9 @@ gem 'recurrence'
 gem 'prawn'
 gem 'prawn-table'
 
-gem 'elasticsearch-rails'
-gem 'elasticsearch-model'
-gem 'elasticsearch-persistence'
+gem 'elasticsearch-rails', '~> 5'
+gem 'elasticsearch-model', '~> 5'
+gem 'elasticsearch-persistence', '~> 5'
 
 gem 'notify_with'
 

@@ -657,6 +657,10 @@ es:
           default_value_is_24_hours: "Si el campo es dejado vacio: 24 horas."
           visibility_yearly: "máxima visibilidad para suscriptores anuales"
           visibility_others: "máxima visibilidad para otros miembros"
+          confidentiality: "Confidencialidad"
+          display_machine_reservation_user_name: "Mostrar el nombre del usuario que ha reservado una maquina"
+          display_name: "Mostrar el nombre"
+          display_name_enable: "la visualización del nombre"
 
       open_api_clients:
         add_new_client: "Crear un nuevo cliente de API"

@@ -657,6 +657,10 @@ pt:
           default_value_is_24_hours: "Se o campo estiver vazio: 24 horas."
           visibility_yearly: "visibilidade máxima para assinantes anuais"
           visibility_others: "visibilidade máxima para outros membros"
+          confidentiality: "TODO"
+          display_machine_reservation_user_name: "TODO"
+          display_name: "TODO"
+          display_name_enable: "TODO"
 
       open_api_clients:
         add_new_client: "Criar novo cliente de API"

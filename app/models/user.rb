@@ -74,72 +74,13 @@ class User < ActiveRecord::Base
   scope :without_subscription, -> { includes(:subscriptions).where(subscriptions: { user_id: nil }) }
   scope :with_subscription, -> { joins(:subscriptions) }
 
-  def to_builder
-    Jbuilder.new do |json|
-      json.id id
-      json.username username
-      json.email email
-      json.role roles.first.name
-      json.group_id group_id
-      json.name profile.full_name
-      json.need_completion need_completion?
-      json.profile do
-        json.user_avatar do
-          json.id profile.user_avatar.id
-          json.attachment_url profile.user_avatar.attachment_url
-        end if profile.user_avatar
-        json.first_name profile.first_name
-        json.last_name profile.last_name
-        json.gender profile.gender.to_s
-        json.birthday profile.birthday.iso8601 if profile.birthday
-        json.interest profile.interest
-        json.software_mastered profile.software_mastered
-        json.address profile.address.address if profile.address
-        json.phone profile.phone
-      end
-      json.subscribed_plan do
-        json.id subscribed_plan.id
-        json.name subscribed_plan.name
-        json.base_name subscribed_plan.base_name
-        json.amount (subscribed_plan.amount / 100.0)
-        json.interval subscribed_plan.interval
-        json.interval_count subscribed_plan.interval_count
-        json.training_credit_nb subscribed_plan.training_credit_nb
-        json.training_credits subscribed_plan.training_credits do |tc|
-          json.training_id tc.creditable_id
-        end
-        json.machine_credits subscribed_plan.machine_credits do |mc|
-          json.machine_id mc.creditable_id
-          json.hours mc.hours
-        end
-      end if subscribed_plan
-      json.subscription do
-        json.id subscription.id
-        json.expired_at subscription.expired_at.iso8601
-        json.canceled_at subscription.canceled_at.iso8601 if subscription.canceled_at
-        json.stripe subscription.stp_subscription_id.present?
-        json.plan do
-          json.id subscription.plan.id
-          json.base_name subscription.plan.base_name
-          json.name subscription.plan.name
-          json.interval subscription.plan.interval
-          json.interval_count subscription.plan.interval_count
-          json.amount subscription.plan.amount ? (subscription.plan.amount / 100.0) : 0
-        end
-      end if subscription
-      json.training_credits training_credits do |tc|
-        json.training_id tc.creditable_id
-      end
-      json.machine_credits machine_credits do |mc|
-        json.machine_id mc.creditable_id
-        json.hours_used mc.users_credits.find_by(user_id: id).hours_used
-      end
-      json.last_sign_in_at last_sign_in_at.iso8601 if last_sign_in_at
-    end
-  end
-
-  def to_json(options)
-    to_builder.target!
+  def to_json(options = {})
+    ApplicationController.new.view_context.render(
+        partial: 'api/members/member',
+        locals: { :member => self },
+        formats: [:json],
+        handlers: [:jbuilder]
+    )
   end
 
   def self.admins

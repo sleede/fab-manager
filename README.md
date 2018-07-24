@@ -9,8 +9,8 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
-4.2. [Environment Configuration](#environment-configuration)
-4.3. [Virtual Machine Instructions](#virtual-machine-instructions)<br/>
+4.2. [Environment Configuration](#environment-configuration)<br/>
+4.3. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
@@ -46,7 +46,7 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 - Git 1.9.1+
 - Redis 2.8.4+
 - Sidekiq 3.3.4+
-- Elasticsearch 1.7
+- Elasticsearch 5.6
 - PostgreSQL 9.4
 
 <a name="contributing"></a>
@@ -123,7 +123,8 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
-   **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+   - **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
    ```bash
    rake db:create
@@ -145,9 +146,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
-12. You can login as the default administrator using the following credentials:
-    - user: admin@fab-manager.com
-    - password: adminadmin
+12. You can login as the default administrator using the credentials defined previously.
 
 13. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
@@ -292,7 +291,7 @@ See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](
 
 
 <a name="virtual-machine-instructions"></a>
-### Virtual Machine Instructtions
+### Virtual Machine Instructions
 
 These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
 machine, with most of the software dependencies installed automatically and avoiding to install a lot
@@ -351,7 +350,7 @@ environment.
 
 10. Set up the databases. (Note that you should provide the desired admin credentials and that these
     specific set of commands must be used to set up the database as some raw SQL instructions are
-    included in the migrations):
+    included in the migrations. Password minimal length is 8 characters):
 
    ```bash
    rake db:create
@@ -494,30 +493,38 @@ In FabManager, it is used for the admin's statistics module and to perform searc
 
 For a more detailed guide concerning the ElasticSearch installation, please check the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html)
 
-1. Install the OpenJDK's Java Runtime Environment (JRE). ElasticSearch recommends that you install Java 8 update 20 or later.
-   Please check that your distribution's version meet this requirement.
+1. Install the OpenJDK's Java Runtime Environment (JRE). ElasticSearch recommends that you install Java 8 update 131 or later.
+   Please check that your distribution's version meet this requirement. 
+   Using Ubuntu 14.04, see https://askubuntu.com/a/944260. With other systems, use the following command
 
   ```bash
   sudo apt-get install openjdk-8-jre
   ```
+  
+2. Install HTTPS support for aptitude
+  ```bash
+  sudo apt-get install apt-transport-https
+  ```
 
-1. Create the file `/etc/apt/sources.list.d/elasticsearch-1.x.list`, and append it the following line:
-   `deb http://packages.elastic.co/elasticsearch/1.x/debian stable main`
+3. Create the repository definition file
+   ```bash
+   echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+   ```
 
-2. Import the repository signing key, and update the package lists
+4. Import the repository signing key, and update the package lists
 
    ```bash
    wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
    sudo apt-get update
    ```
 
-3. Install ElasticSearch 1.7
+5. Install ElasticSearch 5.6
 
    ```bash
    sudo apt-get install elasticsearch
    ```
 
-4. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8+/Ubuntu 16.04+), you will need to run:
+6. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8+/Ubuntu 16.04+), you will need to run:
 
    ```bash
    # System V
@@ -527,7 +534,7 @@ For a more detailed guide concerning the ElasticSearch installation, please chec
    sudo /bin/systemctl enable elasticsearch.service
    ```
 
-5. Restart the host operating system to complete the installation
+7. Restart the host operating system to complete the installation
 
    ```bash
    sudo reboot
@@ -541,7 +548,7 @@ Otherwise, please follow the official instructions on the project's website.
 
 ```bash
 brew update
-brew install homebrew/versions/elasticsearch17
+brew install elasticsearch@5.6
 ```
 
 <a name="setup-fabmanager-in-elasticsearch"></a>
@@ -680,7 +687,7 @@ See `vendor/assets/components/fullcalendar/dist/lang/*.js` for a list of availab
     ELASTICSEARCH_LANGUAGE_ANALYZER
 
 This configure the language analyzer for indexing and searching in projects with ElasticSearch.
-See https://www.elastic.co/guide/en/elasticsearch/reference/1.7/analysis-lang-analyzer.html for a list of available analyzers (check that the doc version match your installed elasticSearch version).
+See https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html for a list of available analyzers.
 
     TIME_ZONE
 
@@ -718,7 +725,9 @@ After modifying any values concerning the localisation, restart the application 
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects). It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform. The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
+You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects).
+It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform.
+The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
 
 If you want to try it, you can visit [this fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different fab-managers.
 
@@ -809,7 +818,7 @@ Developers may find information on how to implement their own authentication pro
 - [Ruby on Rails](http://api.rubyonrails.org)
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
-- [ElasticSearch 1.7](https://www.elastic.co/guide/en/elasticsearch/reference/1.7/index.html)
+- [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)
 
 
 ---

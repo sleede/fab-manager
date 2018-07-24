@@ -56,8 +56,8 @@ class Project < ActiveRecord::Base
   after_save { ProjectIndexerWorker.perform_async(:index, self.id) }
   after_destroy { ProjectIndexerWorker.perform_async(:delete, self.id) }
 
-  #
-  settings do
+  # mapping
+  settings index: { number_of_replicas: 0 } do
     mappings dynamic: 'true' do
       indexes 'state', analyzer: 'simple'
       indexes 'tags', analyzer: Rails.application.secrets.elasticsearch_language_analyzer
@@ -98,13 +98,10 @@ class Project < ActiveRecord::Base
   def self.build_search_query_from_context(params, current_user)
     search = {
       query: {
-        filtered: {
-          filter: {
-            bool: {
-              must: [],
-              should: []
-            }
-          }
+        bool: {
+          must: [],
+          should: [],
+          filter: [],
         }
       }
     }
@@ -112,7 +109,7 @@ class Project < ActiveRecord::Base
     if params['q'].blank? # we sort by created_at if there isn't a query
       search[:sort] = { created_at: { order: :desc } }
     else # otherwise we search for the word (q) in various fields
-      search[:query][:filtered][:query] = {
+      search[:query][:bool][:must] << {
         multi_match: {
           query: params['q'],
           type: 'most_fields',
@@ -123,25 +120,25 @@ class Project < ActiveRecord::Base
 
     params.each do |name, value| # we filter by themes, components, machines
       if name =~ /(.+_id$)/
-        search[:query][:filtered][:filter][:bool][:must] << { term: { "#{name}s" => value } } if value
+        search[:query][:bool][:filter] << { term: { "#{name}s" => value } } if value
       end
     end
 
     if current_user and params.key?('from') # if use select filter 'my project' or 'my collaborations'
       if params['from'] == 'mine'
-        search[:query][:filtered][:filter][:bool][:must] << { term: { author_id: current_user.id } }
+        search[:query][:bool][:filter] << { term: { author_id: current_user.id } }
       end
       if params['from'] == 'collaboration'
-        search[:query][:filtered][:filter][:bool][:must] << { term: { user_ids: current_user.id } }
+        search[:query][:bool][:filter] << { term: { user_ids: current_user.id } }
       end
     end
 
-    if current_user # if user is connect, also display his draft projects
-      search[:query][:filtered][:filter][:bool][:should] << { term: { state: 'published' } }
-      search[:query][:filtered][:filter][:bool][:should] << { term: { author_id: current_user.id } }
-      search[:query][:filtered][:filter][:bool][:should] << { term: { user_ids: current_user.id } }
+    if current_user # if user is connected, also display his draft projects
+      search[:query][:bool][:should] << { term: { state: 'published' } }
+      search[:query][:bool][:should] << { term: { author_id: current_user.id } }
+      search[:query][:bool][:should] << { term: { user_ids: current_user.id } }
     else # otherwise display only published projects
-      search[:query][:filtered][:filter][:bool][:must] << { term: { state: 'published' } }
+      search[:query][:bool][:must] << { term: { state: 'published' } }
     end
 
     search

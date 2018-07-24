@@ -53,7 +53,7 @@ Choose one, depending on your budget, on the server's location, on the uptime gu
 You will need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
 We recommend 4 GB RAM for larger communities.
 
-On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"**. 
+On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"**.
 This way, Docker and Docker-compose are preinstalled.
 Choose a datacenter and set the hostname as your domain name.
 
