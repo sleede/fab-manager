@@ -30,7 +30,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check that the user has the correct subscription
     assert_not_nil @user.subscription, "user's subscription was not found"
-    assert (@user.subscription.expired_at > DateTime.now), "user's subscription expiration was not updated"
+    assert (@user.subscription.expired_at > DateTime.now), "user's subscription expiration was not updated ... VCR cassettes may be outdated, please check the gitlab wiki"
     assert_in_delta 5, (DateTime.now.to_i - @user.subscription.updated_at.to_i), 10, "user's subscription was not updated recently"
 
     # Check that the credits were reset correctly
