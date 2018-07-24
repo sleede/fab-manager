@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-## next release
+## v2.6.5 2018 July 24
 
 - Upgraded ElasticSearch from 1.7 to 5.6
 - Ability to display the name of the user who booked a machine slot to other members

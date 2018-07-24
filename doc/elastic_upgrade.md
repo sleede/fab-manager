@@ -12,7 +12,7 @@ We've wrote a script to automate the process while keeping your data integrity, 
   Please ensure that you'll have enough space, considering the point above. The script won't run otherwise.
 - This script will run on any Linux or Macintoch systems if you installed ElasticSearch using docker or docker-compose.
   Otherwise, only Debian compatible OS (like Ubuntu) and MacOS X are supported for classical installations. On any other cases you'll need to perform the upgrade yourself manually.
-- If your ElasticSearch instance uses replicas shards, you can't use this script and you must perform a manual upgrade (you're not concerned if you have a standard installation).
+- If your ElasticSearch instance uses replicas shards, you can't use this script and you must perform a manual upgrade (if you have a standard fab-manager installation and you don't understand what this mean, you're probably not concerned).
 
 Once you've understood all the points above, you can run the migration script with the following:
 
