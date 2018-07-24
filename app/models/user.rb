@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
   scope :without_subscription, -> { includes(:subscriptions).where(subscriptions: { user_id: nil }) }
   scope :with_subscription, -> { joins(:subscriptions) }
 
-  def as_json
+  def to_json(options)
     ApplicationController.new.view_context.render(
         partial: 'api/members/member',
         locals: { :member => self },

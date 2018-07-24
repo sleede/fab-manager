@@ -11,7 +11,7 @@
 - Fix a security issue: nokogiri < 1.8.2 has a security vulnerability as described in [CVE-2017-18258](https://nvd.nist.gov/vuln/detail/CVE-2017-18258)
 - Fix a security issue: sprockets < 2.12.5 has a security vulnerability as described in [CVE-2018-3760](https://nvd.nist.gov/vuln/detail/CVE-2018-3760)
 - Ensure elasticSearch indices are started with green status on new installations
-- Refactored User.as_json to remove code duplication
+- Refactored User.to_json to remove code duplication
 - Fixed syntax and typos in README 
 - [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
