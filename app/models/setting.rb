@@ -34,7 +34,8 @@ class Setting < ActiveRecord::Base
                              event_explications_alert
                              space_explications_alert
                              visibility_yearly
-                             visibility_others )
+                             visibility_others
+                             display_name_enable )
                     }
 
   after_update :update_stylesheet if :value_changed?

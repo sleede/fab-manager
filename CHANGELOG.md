@@ -3,6 +3,7 @@
 ## next release
 
 - Upgraded ElasticSearch from 1.7 to 5.6
+- Ability to display the name of the user who booked a machine slot to other members
 - Updated OmniAuth to fix Hashie warnings [omniauth#872](https://github.com/omniauth/omniauth/issues/872)
 - Fix a bug: unable to filter statistics from age 0
 - Fix a bug: events categories are not reported correctly in statistics
@@ -16,6 +17,7 @@
 - [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
 - [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] `rake db:seed`
 
 ## v2.6.4 2018 March 15
 

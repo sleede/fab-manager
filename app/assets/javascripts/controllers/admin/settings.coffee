@@ -92,6 +92,10 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
       name: 'visibility_others'
       value: parseInt(settingsPromise.visibility_others, 10)
 
+    $scope.displayNameEnable =
+      name: 'display_name_enable'
+      value: (settingsPromise.display_name_enable == 'true')
+
 
 
     ##

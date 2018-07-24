@@ -239,3 +239,10 @@ setting_31:
   value: 1
   created_at: 2017-09-18 10:27:42.846510000 Z
   updated_at: 2017-09-18 10:27:42.846510000 Z
+
+setting_32:
+  id: 32
+  name: display_name_enable
+  value: false
+  created_at: 2018-07-24 11:45:31.512710000 Z
+  updated_at: 2018-07-24 11:45:31.512710000 Z

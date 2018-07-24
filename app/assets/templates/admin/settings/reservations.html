@@ -149,3 +149,27 @@
         </div>
     </div>
 </div>
+
+
+<div class="panel panel-default m-t-lg">
+    <div class="panel-heading">
+        <span class="font-sbold" translate>{{ 'settings.confidentiality' }}</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <h3 class="m-l" translate>{{ 'settings.display_machine_reservation_user_name' }}</h3>
+            <div class="form-group m-l">
+                <label for="displayNameEnable" class="control-label m-r" translate>{{ 'settings.display_name' }}</label>
+                <input bs-switch
+                       ng-model="displayNameEnable.value"
+                       id="displayNameEnable"
+                       type="checkbox"
+                       class="form-control"
+                       switch-on-text="{{ 'settings.enabled' | translate }}"
+                       switch-off-text="{{ 'settings.disabled' | translate }}"
+                       switch-animate="true"/>
+                <button name="button" class="btn btn-warning m-l" ng-click="save(displayNameEnable)" translate>{{ 'save' }}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -332,13 +332,14 @@ class API::AvailabilitiesController < API::ApiController
     end
 
     def verify_machine_is_reserved(slot, reservations, user, user_role)
+      show_name = (user_role == 'admin' or Setting.find_by(name: 'display_name_enable').value == 'true')
       reservations.each do |r|
         r.slots.each do |s|
           if slot.machine.id == r.reservable_id
             if s.start_at == slot.start_at and s.canceled_at == nil
               slot.id = s.id
               slot.is_reserved = true
-              slot.title = "#{slot.machine.name} - #{t('availabilities.not_available')}"
+              slot.title = "#{slot.machine.name} - #{show_name ? r.user.profile.full_name : t('availabilities.not_available')}"
               slot.can_modify = true if user_role === 'admin'
               slot.reservations.push r
             end
