@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+## next release
+
+- Fix a bug: rake task fablab:fix:categories_slugs bash interpretation error
+- [TODO DEPLOY] `rake fablab:fix:categories_slugs`
+
 ## v2.6.5 2018 July 24
 
 - Upgraded ElasticSearch from 1.7 to 5.6
