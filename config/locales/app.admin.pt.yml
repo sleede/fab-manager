@@ -661,6 +661,15 @@ pt:
           display_machine_reservation_user_name: "TODO"
           display_name: "TODO"
           display_name_enable: "TODO"
+          machines_sort_by: "TODO"
+          elements_ordering: "TODO"
+          machines_order: "TODO"
+          display_machines_sorted_by: "TODO"
+          sort_by:
+            default: "TODO"
+            name: "Nome"
+            created_at: "TODO"
+            updated_at: "TODO"
 
       open_api_clients:
         add_new_client: "Criar novo cliente de API"

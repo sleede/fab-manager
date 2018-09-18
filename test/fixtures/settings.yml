@@ -246,3 +246,10 @@ setting_32:
   value: false
   created_at: 2018-07-24 11:45:31.512710000 Z
   updated_at: 2018-07-24 11:45:31.512710000 Z
+
+setting_33:
+  id: 33
+  name: machines_sort_by
+  value: default
+  created_at: 2018-09-18 15:09:48.176240000 Z
+  updated_at: 2018-09-18 15:09:48.176240000 Z

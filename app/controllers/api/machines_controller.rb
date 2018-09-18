@@ -4,7 +4,12 @@ class API::MachinesController < API::ApiController
   respond_to :json
 
   def index
-    @machines = Machine.includes(:machine_image, :plans)
+    sort_by = Setting.find_by(name: 'machines_sort_by').value || 'default'
+    if sort_by === 'default'
+      @machines = Machine.includes(:machine_image, :plans)
+    else
+      @machines = Machine.includes(:machine_image, :plans).order(sort_by)
+    end
   end
 
   def show

@@ -315,3 +315,28 @@
         </div>
     </div>
 </div>
+
+<div class="panel panel-default m-t-lg">
+    <div class="panel-heading">
+        <span class="font-sbold" translate>{{ 'settings.elements_ordering' }}</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="m-l" translate>{{ 'settings.machines_order' }}</h3>
+                <div class="form-group m-l">
+                    <label for="machinesSortBy" class="control-label m-r" translate>{{ 'settings.display_machines_sorted_by' }}</label>
+                    <select id="machinesSortBy"
+                            class="form-control"
+                            ng-model="machinesSortBy.value">
+                      <option value="default" translate>{{ 'settings.sort_by.default' }}</option>
+                      <option value="name" translate>{{ 'settings.sort_by.name' }}</option>
+                      <option value="created_at" translate>{{ 'settings.sort_by.created_at' }}</option>
+                      <option value="updated_at" translate>{{ 'settings.sort_by.updated_at' }}</option>
+                    </select>
+                    <button name="button" class="btn btn-warning m-t" ng-click="save(machinesSortBy)" translate>{{ 'save' }}</button>
+                </div>
+            <div class="col-md-4">
+        </div>
+    </div>
+</div>

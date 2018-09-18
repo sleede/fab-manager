@@ -35,7 +35,8 @@ class Setting < ActiveRecord::Base
                              space_explications_alert
                              visibility_yearly
                              visibility_others
-                             display_name_enable )
+                             display_name_enable
+                             machines_sort_by )
                     }
 
   after_update :update_stylesheet if :value_changed?
