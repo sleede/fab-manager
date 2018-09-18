@@ -1,12 +1,13 @@
 # Changelog Fab Manager
 
-## next release
+## v2.6.6 2018 September 18
 
 - Ability to parametrize machines order on the booking page
 - Ability to set a neutral gender for the fablab's title (#108)
 - Fix a bug: rake task fablab:fix:categories_slugs bash interpretation error
 - Fix a bug: file inputs filled with long filenames render improperly with an overflow
 - Fix a bug: title concordance radio buttons render improperly on smaller screens
+- Improved verifications in ElasticSearch upgrade script
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
 - [TODO DEPLOY] `rake db:seed`
 
