@@ -10,6 +10,11 @@
 
 config()
 {
+  if [ "$(whoami)" != "root" ]
+  then
+    echo "Please do not run this script as root, elevation will be prompted if needed."
+    exit 1
+  fi
   echo "detecting curl..."
   if ! command -v curl
   then
@@ -70,6 +75,9 @@ config()
     elif [ -f "$FM_PATH/config/env" ]
     then
       ES_HOST=$(cat "$FM_PATH/config/env" | grep ELASTICSEARCH_HOST | awk '{split($0,a,"="); print a[2]}')
+    else
+      echo "Fab-manager's environment file not found, please run this script from the installation folder"
+      exit 1
     fi
     ES_IP=$(getent ahostsv4 "$ES_HOST" | awk '{ print $1 }' | uniq)
   else
@@ -188,6 +196,7 @@ detect_installation()
           else
             echo "Note: You can use \`docker logs CONTAINER\` to view the logs";
           fi
+          exit 2
         fi
     fi
   fi
