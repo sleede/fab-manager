@@ -53,6 +53,7 @@ Application.Controllers.controller "SettingsController", ["$scope", 'Setting', '
     $scope.secondColorSetting = { name: 'secondary_color', value: settingsPromise.secondary_color }
     $scope.fablabName = { name: 'fablab_name', value: settingsPromise.fablab_name }
     $scope.nameGenre = { name: 'name_genre', value: settingsPromise.name_genre }
+    $scope.machinesSortBy = { name: 'machines_sort_by', value: settingsPromise.machines_sort_by }
     $scope.cguFile = cguFile.custom_asset
     $scope.cgvFile = cgvFile.custom_asset
     $scope.customLogo = logoFile.custom_asset

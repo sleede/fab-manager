@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.stripe.com/v1/invoices/in_1CrPhU2sOmf47Nz9LcjmZ0k4
+    uri: https://api.stripe.com/v1/invoices/in_1DBjLu2sOmf47Nz91ECKgcXI
     body:
       encoding: US-ASCII
       string: ''
@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        version 4.15.0-34-generic (buildd@lgw01-amd64-037) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #37~16.04.1-Ubuntu SMP Tue Aug 28 10:44:06
         UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
@@ -32,11 +32,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 24 Jul 2018 12:33:20 GMT
+      - Tue, 18 Sep 2018 13:35:01 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '3693'
+      - '3739'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -52,7 +52,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_9af8n3gaGxRtGl
+      - req_tOssXwdmZN7m0v
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -61,7 +61,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1CrPhU2sOmf47Nz9LcjmZ0k4",
+          "id": "in_1DBjLu2sOmf47Nz91ECKgcXI",
           "object": "invoice",
           "amount_due": 3825,
           "amount_paid": 3825,
@@ -72,34 +72,35 @@ http_interactions:
           "auto_advance": false,
           "billing": "charge_automatically",
           "billing_reason": "subscription_update",
-          "charge": "ch_1CrPhU2sOmf47Nz9tZ1Tmt7D",
+          "charge": "ch_1DBjLu2sOmf47Nz9nlI2EZ92",
           "closed": true,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1532435591,
+          "date": 1537277694,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
           "forgiven": false,
-          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_GsIkBaLI4vqX5AwRYOa5utSHNz",
-          "invoice_pdf": "https://pay.stripe.com/invoice/invst_GsIkBaLI4vqX5AwRYOa5utSHNz/pdf",
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_wcAjpSKl0w4lzY3bcXdf30hNPP",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_wcAjpSKl0w4lzY3bcXdf30hNPP/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1CrPhR2sOmf47Nz9GjDTPM59",
+                "id": "ii_1DBjLr2sOmf47Nz9PQCNMqd6",
                 "object": "line_item",
                 "amount": -675,
                 "currency": "usd",
                 "description": "coupon SUNNYFABLAB",
                 "discountable": false,
-                "invoice_item": "ii_1CrPhR2sOmf47Nz9GjDTPM59",
+                "invoice_item": "ii_1DBjLr2sOmf47Nz9PQCNMqd6",
                 "livemode": false,
-                "metadata": {},
+                "metadata": {
+                },
                 "period": {
-                  "end": 1532435589,
-                  "start": 1532435589
+                  "end": 1537277691,
+                  "start": 1537277691
                 },
                 "plan": null,
                 "proration": false,
@@ -108,18 +109,19 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1CrPhQ2sOmf47Nz9Kgf1w9jh",
+                "id": "ii_1DBjLq2sOmf47Nz95FQPuH6g",
                 "object": "line_item",
                 "amount": 1500,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D July 24, 2018 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D September 18, 2018 14:00 - 03:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1CrPhQ2sOmf47Nz9Kgf1w9jh",
+                "invoice_item": "ii_1DBjLq2sOmf47Nz95FQPuH6g",
                 "livemode": false,
-                "metadata": {},
+                "metadata": {
+                },
                 "period": {
-                  "end": 1532435588,
-                  "start": 1532435588
+                  "end": 1537277690,
+                  "start": 1537277690
                 },
                 "plan": null,
                 "proration": false,
@@ -128,17 +130,18 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "sub_DHzgkL0eTyA8FA",
+                "id": "sub_DczKcMrcLxVA6D",
                 "object": "line_item",
                 "amount": 3000,
                 "currency": "usd",
                 "description": null,
                 "discountable": true,
                 "livemode": false,
-                "metadata": {},
+                "metadata": {
+                },
                 "period": {
-                  "end": 1535113991,
-                  "start": 1532435591
+                  "end": 1539869694,
+                  "start": 1537277694
                 },
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -152,7 +155,8 @@ http_interactions:
                   "interval": "month",
                   "interval_count": 1,
                   "livemode": false,
-                  "metadata": {},
+                  "metadata": {
+                  },
                   "name": "Mensuel - standard, association - month",
                   "nickname": null,
                   "product": "prod_BV0emghsuiUJDn",
@@ -166,31 +170,32 @@ http_interactions:
                 "proration": false,
                 "quantity": 1,
                 "subscription": null,
-                "subscription_item": "si_DHzgliNXiATx4R",
+                "subscription_item": "si_DczKPF3HpxL1xI",
                 "type": "subscription"
               }
             ],
             "has_more": false,
             "total_count": 3,
-            "url": "/v1/invoices/in_1CrPhU2sOmf47Nz9LcjmZ0k4/lines"
+            "url": "/v1/invoices/in_1DBjLu2sOmf47Nz91ECKgcXI/lines"
           },
           "livemode": false,
-          "metadata": {},
+          "metadata": {
+          },
           "next_payment_attempt": null,
-          "number": "C0E661C-0014",
+          "number": "C0E661C-0020",
           "paid": true,
-          "period_end": 1532435591,
-          "period_start": 1532435591,
+          "period_end": 1537277694,
+          "period_start": 1537277694,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
-          "subscription": "sub_DHzgkL0eTyA8FA",
+          "subscription": "sub_DczKcMrcLxVA6D",
           "subtotal": 3825,
           "tax": null,
           "tax_percent": null,
           "total": 3825,
-          "webhooks_delivered_at": 1532435593
+          "webhooks_delivered_at": 1537277695
         }
     http_version: 
-  recorded_at: Tue, 24 Jul 2018 12:33:20 GMT
+  recorded_at: Tue, 18 Sep 2018 13:35:02 GMT
 recorded_with: VCR 3.0.1

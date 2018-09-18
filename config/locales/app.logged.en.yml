@@ -4,7 +4,7 @@ en:
       profileCompletion:
         # user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirm your new account"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "You've just created a new account on the {NAME}, by logging from"  # messageFormat interpolation
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"  # messageFormat interpolation
         we_need_some_more_details: "To finalize the platform setup, we need some more details"
         your_email_is_already_used_by_another_account_on_the_platform: "It looks like your email address is already used by another user. Check your email address and please input below the code sent to you."
         please_fill_the_following_form: "Please fill the following form"

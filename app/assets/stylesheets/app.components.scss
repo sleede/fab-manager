@@ -608,3 +608,12 @@ padding: 10px;
 .disabled-reservable {
   opacity: 0.5 !important;
 }
+
+.fileinput.input-group > div.form-control {
+  display: inline-flex;
+  align-items: center;
+
+  & > i.fileinput-exists {
+    margin-right: 5px;
+  }
+}

@@ -3,7 +3,7 @@ es:
     public:
       common:
         # header and "about" page
-        about_the_fablab: "Sobre {NAME}"  # messageFormat interpolation
+        about_the_fablab: "Sobre {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"  # messageFormat interpolation
         return: "Volver"
 
         # dashboard sections

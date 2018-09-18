@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        version 4.15.0-34-generic (buildd@lgw01-amd64-037) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #37~16.04.1-Ubuntu SMP Tue Aug 28 10:44:06
         UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
@@ -32,11 +32,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 24 Jul 2018 12:34:15 GMT
+      - Tue, 18 Sep 2018 13:35:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1441'
+      - '1512'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -52,7 +52,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_XKFJ9GjNWcim5R
+      - req_MSi7aoOD0OJDYr
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -66,20 +66,21 @@ http_interactions:
           "account_balance": 0,
           "created": 1460026822,
           "currency": "usd",
-          "default_source": "card_1BYyRi2sOmf47Nz9yj9PfHSf",
+          "default_source": "card_1CrPiX2sOmf47Nz9wzEfS1UE",
           "delinquent": false,
           "description": "Lucile Seguin",
           "discount": null,
           "email": "lucile.seguin@live.fr",
           "invoice_prefix": "BCC32B8",
           "livemode": false,
-          "metadata": {},
+          "metadata": {
+          },
           "shipping": null,
           "sources": {
             "object": "list",
             "data": [
               {
-                "id": "card_1BYyRi2sOmf47Nz9yj9PfHSf",
+                "id": "card_1CrPiX2sOmf47Nz9wzEfS1UE",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -95,11 +96,12 @@ http_interactions:
                 "cvc_check": "pass",
                 "dynamic_last4": null,
                 "exp_month": 4,
-                "exp_year": 2018,
+                "exp_year": 2019,
                 "fingerprint": "o52jybR7bnmNn6AT",
                 "funding": "credit",
                 "last4": "4242",
-                "metadata": {},
+                "metadata": {
+                },
                 "name": null,
                 "tokenization_method": null
               }
@@ -110,14 +112,18 @@ http_interactions:
           },
           "subscriptions": {
             "object": "list",
-            "data": [],
+            "data": [
+
+            ],
             "has_more": false,
             "total_count": 0,
             "url": "/v1/customers/cus_8E2ys9zDZgetWX/subscriptions"
-          }
+          },
+          "tax_info": null,
+          "tax_info_verification": null
         }
     http_version: 
-  recorded_at: Tue, 24 Jul 2018 12:34:15 GMT
+  recorded_at: Tue, 18 Sep 2018 13:35:02 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8E2ys9zDZgetWX/subscriptions
@@ -139,8 +145,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        version 4.15.0-34-generic (buildd@lgw01-amd64-037) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #37~16.04.1-Ubuntu SMP Tue Aug 28 10:44:06
         UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '68'
@@ -152,7 +158,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 24 Jul 2018 12:34:16 GMT
+      - Tue, 18 Sep 2018 13:35:03 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -172,7 +178,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_d8IWU2WIXkPxDa
+      - req_asbpYOWy0ll5hW
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -190,5 +196,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Tue, 24 Jul 2018 12:34:16 GMT
+  recorded_at: Tue, 18 Sep 2018 13:35:03 GMT
 recorded_with: VCR 3.0.1

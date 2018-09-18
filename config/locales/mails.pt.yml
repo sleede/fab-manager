@@ -1,7 +1,7 @@
 pt:
   layouts:
     notifications_mailer:
-      see_you_later: "Te vejo em breve em {GENDER, select, other{the}}"  # messageFormat interpolation
+      see_you_later: "Te vejo em breve em {GENDER, select, male{o} female{a} neutral{} other{do}}"  # messageFormat interpolation
       sincerely: "Atenciosamente,"
       signature: "Equipe do Fab Lab."
       do_not_reply: "Por favor não responda este email."
@@ -11,7 +11,7 @@ pt:
       subject: "Sua conta no FabLab foi criada com sucesso"
       body:
         hello: "Olá %{NAME},"
-        intro: "A equipe do FabLab acaba de criar uma conta para você em {FABLAB} website:"  # messageFormat interpolation
+        intro: "A equipe do FabLab acaba de criar uma conta para você em {GENDER, select, male{o} female{a} neutral{} other{do}} {FABLAB} website:"  # messageFormat interpolation
         connection_parameters: "Aqui estão seus parâmetros de conexão:"
         account_name: "Nome da conta:"
         password: "Senha:"

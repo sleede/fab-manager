@@ -571,10 +571,12 @@ en:
           title_concordance: "Title concordance"
           male: "Male."
           female: "Female."
+          neutral: "Neutral."
           eg: "eg:"
           about: "About"
           male_preposition: "the"
           female_preposition: "the"
+          neutral_preposition: ""
           customize_information_messages: "Customize information messages"
           message_of_the_machine_booking_page: "Message of the machine booking page:"
           type_the_message_content: "Type the message content"
@@ -661,6 +663,15 @@ en:
           display_machine_reservation_user_name: "Display the full name of the user who booked a machine slot"
           display_name: "Display the name"
           display_name_enable: "name display"
+          machines_sort_by: "machines display order"
+          elements_ordering: "Elements ordering"
+          machines_order: "Machines order"
+          display_machines_sorted_by: "Display machines sorted by"
+          sort_by:
+            default: "Default"
+            name: "Name"
+            created_at: "Creation date"
+            updated_at: "Last update date"
 
       open_api_clients:
         add_new_client: "Create new API client"
