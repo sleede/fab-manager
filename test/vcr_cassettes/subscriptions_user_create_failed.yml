@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-29-generic (buildd@lcy01-amd64-024) (gcc version 5.4.0 20160609
-        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04
+        version 4.15.0-34-generic (buildd@lgw01-amd64-037) (gcc version 5.4.0 20160609
+        (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #37~16.04.1-Ubuntu SMP Tue Aug 28 10:44:06
         UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
@@ -34,11 +34,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 24 Jul 2018 12:34:32 GMT
+      - Tue, 18 Sep 2018 13:33:00 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '780'
+      - '785'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -54,7 +54,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_P0NzzZbjWI5WVK
+      - req_3LsOIxhZjFBPXC
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -63,10 +63,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1CrPim2sOmf47Nz91VDOPKSG",
+          "id": "tok_1DBjK42sOmf47Nz9fUQ4Wn01",
           "object": "token",
           "card": {
-            "id": "card_1CrPim2sOmf47Nz9Twiepne1",
+            "id": "card_1DBjK42sOmf47Nz9VA6UEVUP",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -85,16 +85,17 @@ http_interactions:
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
-            "metadata": {},
+            "metadata": {
+            },
             "name": null,
             "tokenization_method": null
           },
           "client_ip": "90.112.128.65",
-          "created": 1532435672,
+          "created": 1537277580,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Tue, 24 Jul 2018 12:34:33 GMT
+  recorded_at: Tue, 18 Sep 2018 13:33:00 GMT
 recorded_with: VCR 3.0.1
