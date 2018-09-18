@@ -21,11 +21,15 @@
                 <form role="form" novalidate>
                     <h4 class="control-label m-r" translate>{{ 'settings.title_concordance' }}</h4>
                     <div class="form-group">
-                        <input type="radio" name="nameGenre" id="nameGenreMale" ng-model="nameGenre.value" ng-value="'male'" />
-                        <label for="nameGenreMale">{{ 'settings.male' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.male_preposition' }}</strong> {{fablabName.value}}</cite></span></label>
+                        <label for="nameGenreMale">
+                          <input type="radio" name="nameGenre" id="nameGenreMale" ng-model="nameGenre.value" ng-value="'male'" />
+                          {{ 'settings.male' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.male_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                        </label>
                         <br/>
-                        <input type="radio" name="nameGenre" id="nameGenreFemale" ng-model="nameGenre.value" ng-value="'female'" />
-                        <label for="nameGenreFemale">{{ 'settings.female' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.female_preposition' }}</strong> {{fablabName.value}}</cite></span></label>
+                        <label for="nameGenreFemale">
+                          <input type="radio" name="nameGenre" id="nameGenreFemale" ng-model="nameGenre.value" ng-value="'female'" />
+                          {{ 'settings.female' | translate }} <span style="font-weight: normal">{{ 'settings.eg' | translate }} <cite>{{ 'settings.about' | translate }} <strong translate>{{ 'settings.female_preposition' }}</strong> {{fablabName.value}}</cite></span>
+                        </label>
                     </div>
                     <button name="button" class="btn btn-warning" ng-click="save(nameGenre)" translate>{{ 'save' }}</button>
                 </form>
