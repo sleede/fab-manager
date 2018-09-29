@@ -123,7 +123,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    ```
 
 8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
-   - **Warning**: **NO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
+   - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
    - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
    ```bash
