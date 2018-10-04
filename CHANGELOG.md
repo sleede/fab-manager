@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v2.6.7 2018 October 4
+
 - Ability to configure SMTP more precisely
 - Typo correction in README (#121)
 - [TODO DEPLOY] add the following environment variables: `SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO, SMTP_OPENSSL_VERIFY_MODE`
