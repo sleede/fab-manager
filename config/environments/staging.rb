@@ -92,8 +92,11 @@ Rails.application.configure do
     :address   => Rails.application.secrets.smtp_address,
     :port      => Rails.application.secrets.smtp_port,
     :user_name => Rails.application.secrets.smtp_user_name,
-    :password  => Rails.application.secrets.smtp_password
-  }
+    :password  => Rails.application.secrets.smtp_password,
+    :authentication       => Rails.application.secrets.smtp_authentication,
+    :enable_starttls_auto => Rails.application.secrets.smtp_enable_starttls_auto,
+    :openssl_verify_mode  => Rails.application.secrets.smtp_openssl_verify_mode,
+    }
 
   # use :smtp for switch prod
   config.action_mailer.delivery_method = Rails.application.secrets.delivery_method.to_sym

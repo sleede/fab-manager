@@ -220,10 +220,10 @@ When sending notification mails, the platform will use this address to identify 
 Configure the Rails' Action Mailer delivery method.
 See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
 
-    DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME & SMTP_PASSWORD
+    DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO & SMTP_OPENSSL_VERIFY_MODE
 
 When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
-See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
+See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
 DEFAULT_HOST is also used to configure Google Analytics.
 
     GA_ID
