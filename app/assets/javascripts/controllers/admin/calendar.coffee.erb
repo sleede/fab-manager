@@ -207,7 +207,7 @@ Application.Controllers.controller "AdminCalendarController", ["$scope", "$state
     start = moment.tz(start.toISOString(), Fablab.timezone)
     end = moment.tz(end.toISOString(), Fablab.timezone)
     # first we check that the selected slot is an N-hours multiple (ie. not decimal)
-    if Number.isInteger(parseInt((end.valueOf() - start.valueOf()) / (SLOT_MULTIPLE * 1000), 10)/SLOT_MULTIPLE)
+    if Number.isInteger(parseInt((end.valueOf() - start.valueOf()) / (SLOT_MULTIPLE * 1000), 10) / SLOT_MULTIPLE)
       today = new Date()
       if (parseInt((start.valueOf() - today) / (60 * 1000), 10) >= 0)
         # then we open a modal window to let the admin specify the slot type

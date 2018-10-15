@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: on small screens, display of button "change group" overflow
+
 ## v2.6.7 2018 October 4
 
 - Ability to configure SMTP more precisely
