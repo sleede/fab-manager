@@ -1,28 +1,42 @@
-'use strict'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+'use strict';
 
-Application.Services.factory 'Member', ["$resource", ($resource)->
-  $resource "/api/members/:id",
-    {id: "@id"},
-    update:
+Application.Services.factory('Member', ["$resource", $resource=>
+  $resource("/api/members/:id",
+    {id: "@id"}, {
+    update: {
       method: 'PUT'
-    lastSubscribed:
-      method: 'GET'
-      url: '/api/last_subscribed/:limit'
-      params: {limit: "@limit"}
+    },
+    lastSubscribed: {
+      method: 'GET',
+      url: '/api/last_subscribed/:limit',
+      params: {limit: "@limit"},
       isArray: true
-    merge:
-      method: 'PUT'
+    },
+    merge: {
+      method: 'PUT',
       url: '/api/members/:id/merge'
-    list:
-      url: '/api/members/list'
-      method: 'POST'
+    },
+    list: {
+      url: '/api/members/list',
+      method: 'POST',
       isArray: true
-    search:
-      method: 'GET'
-      url: '/api/members/search/:query'
-      params: {query: "@query"}
+    },
+    search: {
+      method: 'GET',
+      url: '/api/members/search/:query',
+      params: {query: "@query"},
       isArray: true
-    mapping:
-      method: 'GET'
+    },
+    mapping: {
+      method: 'GET',
       url: '/api/members/mapping'
-]
+    }
+  }
+  )
+
+]);

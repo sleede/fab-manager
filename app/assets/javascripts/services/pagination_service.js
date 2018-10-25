@@ -1,50 +1,65 @@
-'use strict'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+'use strict';
 
-Application.Services.factory("paginationService", [->
-  helpers = {}
+Application.Services.factory("paginationService", [function() {
+  const helpers = {};
 
-  helpers.pageCount = (totalCount, perPage)->
-    Math.ceil(totalCount/perPage)
+  helpers.pageCount = (totalCount, perPage)=> Math.ceil(totalCount/perPage);
 
-  helpers.hasNextPage = (currentPage, totalCount, perPage)->
-    _pageCount = helpers.pageCount(totalCount, perPage)
-    (_pageCount != currentPage) and (_pageCount != 0)
+  helpers.hasNextPage = function(currentPage, totalCount, perPage){
+    const _pageCount = helpers.pageCount(totalCount, perPage);
+    return (_pageCount !== currentPage) && (_pageCount !== 0);
+  };
 
-  Instance = (resourceService, currentPage, perPage, totalCount, defaultQueryParams, callback, functionName)->
-    @resourceService = resourceService
-    @currentPage = currentPage
-    @perPage = perPage
-    @totalCount = totalCount
-    @defaultQueryParams = defaultQueryParams
-    @callback = callback
-    @functionName = functionName || 'query'
-    @loading = false
+  const Instance = function(resourceService, currentPage, perPage, totalCount, defaultQueryParams, callback, functionName){
+    this.resourceService = resourceService;
+    this.currentPage = currentPage;
+    this.perPage = perPage;
+    this.totalCount = totalCount;
+    this.defaultQueryParams = defaultQueryParams;
+    this.callback = callback;
+    this.functionName = functionName || 'query';
+    this.loading = false;
 
-    @pageCount = ->
-      helpers.pageCount(@totalCount, @perPage)
+    this.pageCount = function() {
+      return helpers.pageCount(this.totalCount, this.perPage);
+    };
 
-    @hasNextPage = ->
-      helpers.hasNextPage(@currentPage, @totalCount, @perPage)
+    this.hasNextPage = function() {
+      return helpers.hasNextPage(this.currentPage, this.totalCount, this.perPage);
+    };
 
-    @loadMore = (queryParams)->
-      @currentPage += 1
-      @loading = true
+    this.loadMore = function(queryParams){
+      let k, v;
+      this.currentPage += 1;
+      this.loading = true;
 
-      _queryParams = { page: @currentPage, per_page: @perPage }
+      const _queryParams = { page: this.currentPage, per_page: this.perPage };
 
-      if queryParams
-        for k,v of queryParams
-          _queryParams[k] = v
+      if (queryParams) {
+        for (k in queryParams) {
+          v = queryParams[k];
+          _queryParams[k] = v;
+        }
+      }
 
-      for k,v of @defaultQueryParams
-        _queryParams[k] = v
+      for (k in this.defaultQueryParams) {
+        v = this.defaultQueryParams[k];
+        _queryParams[k] = v;
+      }
 
-      @resourceService[@functionName](_queryParams, (dataPromise)=>
-        @callback(dataPromise)
-        @loading = false
-      )
+      return this.resourceService[this.functionName](_queryParams, dataPromise=> {
+        this.callback(dataPromise);
+        return this.loading = false;
+      });
+    };
 
-    return
+  };
 
-  return { Instance: Instance }
-])
+  return { Instance };
+}
+]);

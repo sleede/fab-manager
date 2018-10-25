@@ -1,14 +1,25 @@
-'use strict'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+'use strict';
 
-Application.Services.factory 'Price', ["$resource", ($resource)->
-  $resource "/api/prices/:id",
-    {},
-    query:
+Application.Services.factory('Price', ["$resource", $resource=>
+  $resource("/api/prices/:id",
+    {}, {
+    query: {
       isArray: true
-    update:
+    },
+    update: {
       method: 'PUT'
-    compute:
-      method: 'POST'
-      url: '/api/prices/compute'
+    },
+    compute: {
+      method: 'POST',
+      url: '/api/prices/compute',
       isArray: false
-]
+    }
+  }
+  )
+
+]);

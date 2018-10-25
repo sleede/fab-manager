@@ -1,12 +1,24 @@
-'use strict'
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS207: Consider shorter variations of null checks
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+'use strict';
 
-Application.Services.factory 'AuthService', ["Session", (Session) ->
-    isAuthenticated: ->
-      Session.currentUser? and Session.currentUser.id?
+Application.Services.factory('AuthService', ["Session", function(Session) {
+    return {
+      isAuthenticated() {
+        return (Session.currentUser != null) && (Session.currentUser.id != null);
+      },
 
-    isAuthorized: (authorizedRoles) ->
-      if !angular.isArray(authorizedRoles)
-        authorizedRoles = [authorizedRoles]
+      isAuthorized(authorizedRoles) {
+        if (!angular.isArray(authorizedRoles)) {
+          authorizedRoles = [authorizedRoles];
+        }
 
-      @isAuthenticated() and authorizedRoles.indexOf(Session.currentUser.role) != -1
-  ]
+        return this.isAuthenticated() && (authorizedRoles.indexOf(Session.currentUser.role) !== -1);
+      }
+    };
+  }
+  ]);
