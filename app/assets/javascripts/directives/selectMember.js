@@ -1,44 +1,49 @@
+/* eslint-disable
+    no-return-assign,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict';
+'use strict'
 
-//#
+// #
 // This directive will allow to select a member.
 // Please surround it with a ng-if directive to prevent it from being used by a non-admin user.
 // The resulting member will be set into the parent $scope (=> $scope.ctrl.member).
 // The directive takes an optional parameter "subscription" as a "boolean string" that will filter the user
 // which have a valid running subscription or not.
 // Usage: <select-member [subscription="false|true"]></select-member>
-//#
+// #
 Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', (Diacritics, Member) =>
   ({
     restrict: 'E',
     templateUrl: '<%= asset_path "shared/_member_select.html" %>',
-    link(scope, element, attributes) {
-      return scope.autoCompleteName = function(nameLookup) {
+    link (scope, element, attributes) {
+      return scope.autoCompleteName = function (nameLookup) {
         if (!nameLookup) {
-          return;
+          return
         }
-        scope.isLoadingMembers = true;
-        const asciiName = Diacritics.remove(nameLookup);
+        scope.isLoadingMembers = true
+        const asciiName = Diacritics.remove(nameLookup)
 
-        const q = { query: asciiName };
+        const q = { query: asciiName }
         if (attributes.subscription) {
-          q['subscription'] = attributes.subscription;
+          q['subscription'] = attributes.subscription
         }
 
-        return Member.search(q, function(users) {
-          scope.matchingMembers = users;
-          return scope.isLoadingMembers = false;
+        return Member.search(q, function (users) {
+          scope.matchingMembers = users
+          return scope.isLoadingMembers = false
         }
-        , error=> console.error(error));
-      };
+        , error => console.error(error))
+      }
     }
 
   })
 
-]);
-
+])

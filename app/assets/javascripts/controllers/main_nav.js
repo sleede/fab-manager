@@ -1,16 +1,20 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict';
+'use strict'
 
-//#
+// #
 // Navigation controller. List the links availables in the left navigation pane and their icon.
-//#
-Application.Controllers.controller("MainNavController", ["$scope", "$location", "$cookies", function($scope, $location, $cookies) {
-
-  //# Common links (public application)
+// #
+Application.Controllers.controller('MainNavController', ['$scope', '$location', '$cookies', function ($scope, $location, $cookies) {
+  // # Common links (public application)
   $scope.navLinks = [
     {
       state: 'app.public.home',
@@ -44,14 +48,14 @@ Application.Controllers.controller("MainNavController", ["$scope", "$location", 
       linkIcon: 'th'
     }
 
-  ];
+  ]
 
   if (!Fablab.withoutPlans) {
     $scope.navLinks.push({
-        state: 'app.public.plans',
-        linkText: 'subscriptions',
-        linkIcon: 'credit-card'
-    });
+      state: 'app.public.plans',
+      linkText: 'subscriptions',
+      linkIcon: 'credit-card'
+    })
   }
 
   if (!Fablab.withoutSpaces) {
@@ -59,11 +63,10 @@ Application.Controllers.controller("MainNavController", ["$scope", "$location", 
       state: 'app.public.spaces_list',
       linkText: 'reserve_a_space',
       linkIcon: 'rocket'
-    });
+    })
   }
 
-
-  Fablab.adminNavLinks = Fablab.adminNavLinks || [];
+  Fablab.adminNavLinks = Fablab.adminNavLinks || []
   const adminNavLinks = [
     {
       state: 'app.admin.trainings',
@@ -120,16 +123,16 @@ Application.Controllers.controller("MainNavController", ["$scope", "$location", 
       linkText: 'open_api_clients',
       linkIcon: 'cloud'
     }
-  ].concat(Fablab.adminNavLinks);
+  ].concat(Fablab.adminNavLinks)
 
-  $scope.adminNavLinks = adminNavLinks;
+  $scope.adminNavLinks = adminNavLinks
 
   if (!Fablab.withoutSpaces) {
     return $scope.adminNavLinks.splice(7, 0, {
       state: 'app.public.spaces_list',
       linkText: 'manage_the_spaces',
       linkIcon: 'rocket'
-    });
+    })
   }
 }
-]);
+])

@@ -1,20 +1,25 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict';
+'use strict'
 
-Application.Services.factory('Translations', ["$translatePartialLoader", "$translate", ($translatePartialLoader, $translate)=>
+Application.Services.factory('Translations', ['$translatePartialLoader', '$translate', ($translatePartialLoader, $translate) =>
   ({
-    query(stateName) {
+    query (stateName) {
       if (angular.isArray((stateName))) {
-        angular.forEach(stateName, state => $translatePartialLoader.addPart(state));
+        angular.forEach(stateName, state => $translatePartialLoader.addPart(state))
       } else {
-        $translatePartialLoader.addPart(stateName);
+        $translatePartialLoader.addPart(stateName)
       }
-      return $translate.refresh();
+      return $translate.refresh()
     }
   })
 
-]);
+])

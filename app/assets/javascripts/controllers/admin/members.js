@@ -1,3 +1,11 @@
+/* eslint-disable
+    handle-callback-err,
+    no-return-assign,
+    no-self-assign,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS101: Remove unnecessary use of Array.from
@@ -5,11 +13,11 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict';
+'use strict'
 
 /* COMMON CODE */
 
-//#
+// #
 // Provides a set of common properties and methods to the $scope parameter. They are used
 // in the various members' admin controllers.
 //
@@ -26,15 +34,14 @@
 //
 // Requires :
 //  - $state (Ui-Router) [ 'app.admin.members' ]
-//#
+// #
 class MembersController {
-  constructor($scope, $state, Group, Training) {
+  constructor ($scope, $state, Group, Training) {
+    // # Retrieve the profiles groups (eg. students ...)
+    Group.query(groups => $scope.groups = groups.filter(g => (g.slug !== 'admins') && !g.disabled))
 
-    //# Retrieve the profiles groups (eg. students ...)
-    Group.query(groups => $scope.groups = groups.filter(g => (g.slug !== 'admins') && !g.disabled));
-
-    //# Retrieve the list of available trainings
-    Training.query().$promise.then(data=>
+    // # Retrieve the list of available trainings
+    Training.query().$promise.then(data =>
       $scope.trainings = data.map(d =>
         ({
           id: d.id,
@@ -42,9 +49,9 @@ class MembersController {
           disabled: d.disabled
         })
       )
-    );
+    )
 
-    //# Default parameters for AngularUI-Bootstrap datepicker
+    // # Default parameters for AngularUI-Bootstrap datepicker
     $scope.datePicker = {
       format: Fablab.uibDateFormat,
       opened: false, // default: datePicker is not shown
@@ -52,637 +59,563 @@ class MembersController {
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    };
+    }
 
-    //#
+    // #
     // Shows the birth day datepicker
     // @param $event {Object} jQuery event object
-    //#
-    $scope.openDatePicker = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      return $scope.datePicker.opened = true;
-    };
+    // #
+    $scope.openDatePicker = function ($event) {
+      $event.preventDefault()
+      $event.stopPropagation()
+      return $scope.datePicker.opened = true
+    }
 
-
-
-    //#
+    // #
     // Shows the end of subscription datepicker
     // @param $event {Object} jQuery event object
-    //#
-    $scope.openSubscriptionDatePicker = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      return $scope.datePicker.subscription_date_opened = true;
-    };
+    // #
+    $scope.openSubscriptionDatePicker = function ($event) {
+      $event.preventDefault()
+      $event.stopPropagation()
+      return $scope.datePicker.subscription_date_opened = true
+    }
 
-
-
-    //#
+    // #
     // For use with ngUpload (https://github.com/twilson63/ngUpload).
     // Intended to be the callback when an upload is done: any raised error will be stacked in the
     // $scope.alerts array. If everything goes fine, the user is redirected to the members listing page.
     // @param content {Object} JSON - The upload's result
-    //#
-    $scope.submited = function(content) {
+    // #
+    $scope.submited = function (content) {
       if ((content.id == null)) {
-        $scope.alerts = [];
-        return angular.forEach(content, (v, k)=>
-          angular.forEach(v, err=>
+        $scope.alerts = []
+        return angular.forEach(content, (v, k) =>
+          angular.forEach(v, err =>
             $scope.alerts.push({
-              msg: k+': '+err,
+              msg: k + ': ' + err,
               type: 'danger'
             })
           )
-        );
+        )
       } else {
-        return $state.go('app.admin.members');
+        return $state.go('app.admin.members')
       }
-    };
+    }
 
-
-
-    //#
+    // #
     // Changes the admin's view to the members list page
-    //#
-    $scope.cancel = () => $state.go('app.admin.members');
+    // #
+    $scope.cancel = () => $state.go('app.admin.members')
 
-
-
-    //#
+    // #
     // For use with 'ng-class', returns the CSS class name for the uploads previews.
     // The preview may show a placeholder or the content of the file depending on the upload state.
     // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    //#
-    $scope.fileinputClass = function(v){
+    // #
+    $scope.fileinputClass = function (v) {
       if (v) {
-        return 'fileinput-exists';
+        return 'fileinput-exists'
       } else {
-        return 'fileinput-new';
+        return 'fileinput-new'
       }
-    };
+    }
   }
 }
 
-
-//#
+// #
 // Controller used in the members/groups management page
-//#
-Application.Controllers.controller("AdminMembersController", ["$scope","$sce", 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export'
-, function($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) {
-
-
-
+// #
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export',
+  function ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) {
   /* PRIVATE STATIC CONSTANTS */
 
-  // number of users loaded each time we click on 'load more...'
-  const USERS_PER_PAGE = 20;
+    // number of users loaded each time we click on 'load more...'
+    const USERS_PER_PAGE = 20
 
+    /* PUBLIC SCOPE */
 
+    // # members list
+    $scope.members = membersPromise
 
-  /* PUBLIC SCOPE */
-
-  //# members list
-  $scope.members = membersPromise;
-
-  $scope.member = {
-    //# Members plain-text filtering. Default: not filtered
-    searchText: '',
-    //# Members ordering/sorting. Default: not sorted
-    order: 'id',
-    //# currently displayed page of members
-    page: 1,
-    //# true when all members where loaded
-    noMore: false
-  };
-
-  //# admins list
-  $scope.admins = adminsPromise.admins;
-
-  //# Admins ordering/sorting. Default: not sorted
-  $scope.orderAdmin = null;
-
-
-
-  //#
-  // Change the members ordering criterion to the one provided
-  // @param orderBy {string} ordering criterion
-  //#
-  $scope.setOrderMember = function(orderBy){
-    if ($scope.member.order === orderBy) {
-      $scope.member.order = `-${orderBy}`;
-    } else {
-      $scope.member.order = orderBy;
+    $scope.member = {
+    // # Members plain-text filtering. Default: not filtered
+      searchText: '',
+      // # Members ordering/sorting. Default: not sorted
+      order: 'id',
+      // # currently displayed page of members
+      page: 1,
+      // # true when all members where loaded
+      noMore: false
     }
 
-    resetSearchMember();
-    return memberSearch();
-  };
+    // # admins list
+    $scope.admins = adminsPromise.admins
 
+    // # Admins ordering/sorting. Default: not sorted
+    $scope.orderAdmin = null
 
+    // #
+    // Change the members ordering criterion to the one provided
+    // @param orderBy {string} ordering criterion
+    // #
+    $scope.setOrderMember = function (orderBy) {
+      if ($scope.member.order === orderBy) {
+        $scope.member.order = `-${orderBy}`
+      } else {
+        $scope.member.order = orderBy
+      }
 
-  //#
-  // Change the admins ordering criterion to the one provided
-  // @param orderBy {string} ordering criterion
-  //#
-  $scope.setOrderAdmin = function(orderAdmin){
-    if ($scope.orderAdmin === orderAdmin) {
-      return $scope.orderAdmin = `-${orderAdmin}`;
-    } else {
-      return $scope.orderAdmin = orderAdmin;
+      resetSearchMember()
+      return memberSearch()
     }
-  };
 
+    // #
+    // Change the admins ordering criterion to the one provided
+    // @param orderBy {string} ordering criterion
+    // #
+    $scope.setOrderAdmin = function (orderAdmin) {
+      if ($scope.orderAdmin === orderAdmin) {
+        return $scope.orderAdmin = `-${orderAdmin}`
+      } else {
+        return $scope.orderAdmin = orderAdmin
+      }
+    }
 
-
-  //#
-  // Ask for confirmation then delete the specified administrator
-  // @param admins {Array} full list of administrators
-  // @param admin {Object} administrator to delete
-  //#
-  $scope.destroyAdmin = (admins, admin)=>
-    dialogs.confirm({
-      resolve: {
-        object() {
-          return {
-            title: _t('confirmation_required'),
-            msg: $sce.trustAsHtml(_t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone') + '<br/><br/>' +_t('this_may_take_a_while_please_wait'))
-          };
+    // #
+    // Ask for confirmation then delete the specified administrator
+    // @param admins {Array} full list of administrators
+    // @param admin {Object} administrator to delete
+    // #
+    $scope.destroyAdmin = (admins, admin) =>
+      dialogs.confirm({
+        resolve: {
+          object () {
+            return {
+              title: _t('confirmation_required'),
+              msg: $sce.trustAsHtml(_t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone') + '<br/><br/>' + _t('this_may_take_a_while_please_wait'))
+            }
+          }
         }
       }
+      , () => // cancel confirmed
+        Admin.delete({ id: admin.id }, function () {
+          admins.splice(findAdminIdxById(admins, admin.id), 1)
+          return growl.success(_t('administrator_successfully_deleted'))
+        }
+        , error => growl.error(_t('unable_to_delete_the_administrator')))
+      )
+
+    // #
+    // Callback for the 'load more' button.
+    // Will load the next results of the current search, if any
+    // #
+    $scope.showNextMembers = function () {
+      $scope.member.page += 1
+      return memberSearch(true)
     }
-    , () => // cancel confirmed
-      Admin.delete({id: admin.id}, function() {
-        admins.splice(findAdminIdxById(admins, admin.id), 1);
-        return growl.success(_t('administrator_successfully_deleted'));
-      }
-      , error=> growl.error(_t('unable_to_delete_the_administrator')))
-    )
-  ;
 
-
-
-  //#
-  // Callback for the 'load more' button.
-  // Will load the next results of the current search, if any
-  //#
-  $scope.showNextMembers = function() {
-    $scope.member.page += 1;
-    return memberSearch(true);
-  };
-
-
-
-  //#
-  // Callback when the search field content changes: reload the search results
-  //#
-  $scope.updateTextSearch = function() {
-    resetSearchMember();
-    return memberSearch();
-  };
-
-  //#
-  // Callback to alert the admin that the export request was acknowledged and is
-  // processing right now.
-  //#
-  $scope.alertExport = type =>
-    Export.status({category: 'users', type}).then(function(res) {
-      if (!res.data.exists) {
-        return growl.success(_t('export_is_running_you_ll_be_notified_when_its_ready'));
-      }
-    })
-  ;
-
-
-
-
-  /* PRIVATE SCOPE */
-
-  //#
-  // Kind of constructor: these actions will be realized first when the controller is loaded
-  //#
-  const initialize = function() {
-    if (!membersPromise[0] || (membersPromise[0].maxMembers <= $scope.members.length)) {
-      return $scope.member.noMore = true;
+    // #
+    // Callback when the search field content changes: reload the search results
+    // #
+    $scope.updateTextSearch = function () {
+      resetSearchMember()
+      return memberSearch()
     }
-  };
 
-  //#
-  // Iterate through the provided array and return the index of the requested admin
-  // @param admins {Array} full list of users with role 'admin'
-  // @param id {Number} user id of the admin to retrieve in the list
-  // @returns {Number} index of the requested admin, in the provided array
-  //#
-  var findAdminIdxById = (admins, id)=>
-    (admins.map(admin=> admin.id)).indexOf(id)
-  ;
+    // #
+    // Callback to alert the admin that the export request was acknowledged and is
+    // processing right now.
+    // #
+    $scope.alertExport = type =>
+      Export.status({ category: 'users', type }).then(function (res) {
+        if (!res.data.exists) {
+          return growl.success(_t('export_is_running_you_ll_be_notified_when_its_ready'))
+        }
+      })
 
+    /* PRIVATE SCOPE */
 
-
-  //#
-  // Reinitialize the context of members's search to display new results set
-  //#
-  var resetSearchMember = function() {
-    $scope.member.noMore = false;
-    return $scope.member.page = 1;
-  };
-
-
-
-  //#
-  // Run a search query with the current parameters set ($scope.member[searchText,order,page])
-  // and affect or append the result in $scope.members, depending on the concat parameter
-  // @param concat {boolean} if true, the result will be append to $scope.members instead of being affected
-  //#
-  var memberSearch = concat =>
-    Member.list({ query: { search: $scope.member.searchText, order_by: $scope.member.order, page: $scope.member.page, size: USERS_PER_PAGE } }, function(members) {
-      if (concat) {
-        $scope.members = $scope.members.concat(members);
-      } else {
-        $scope.members = members;
+    // #
+    // Kind of constructor: these actions will be realized first when the controller is loaded
+    // #
+    const initialize = function () {
+      if (!membersPromise[0] || (membersPromise[0].maxMembers <= $scope.members.length)) {
+        return $scope.member.noMore = true
       }
+    }
 
-      if (!members[0] || (members[0].maxMembers <= $scope.members.length)) {
-        return $scope.member.noMore = true;
-      }
-    })
-  ;
+    // #
+    // Iterate through the provided array and return the index of the requested admin
+    // @param admins {Array} full list of users with role 'admin'
+    // @param id {Number} user id of the admin to retrieve in the list
+    // @returns {Number} index of the requested admin, in the provided array
+    // #
+    var findAdminIdxById = (admins, id) =>
+      (admins.map(admin => admin.id)).indexOf(id)
 
-  //# !!! MUST BE CALLED AT THE END of the controller
-  return initialize();
-}
-]);
+    // #
+    // Reinitialize the context of members's search to display new results set
+    // #
+    var resetSearchMember = function () {
+      $scope.member.noMore = false
+      return $scope.member.page = 1
+    }
 
+    // #
+    // Run a search query with the current parameters set ($scope.member[searchText,order,page])
+    // and affect or append the result in $scope.members, depending on the concat parameter
+    // @param concat {boolean} if true, the result will be append to $scope.members instead of being affected
+    // #
+    var memberSearch = concat =>
+      Member.list({ query: { search: $scope.member.searchText, order_by: $scope.member.order, page: $scope.member.page, size: USERS_PER_PAGE } }, function (members) {
+        if (concat) {
+          $scope.members = $scope.members.concat(members)
+        } else {
+          $scope.members = members
+        }
 
-//#
-// Controller used in the member edition page
-//#
-Application.Controllers.controller("EditMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet'
-, function($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet) {
+        if (!members[0] || (members[0].maxMembers <= $scope.members.length)) {
+          return $scope.member.noMore = true
+        }
+      })
 
-
-
-  /* PUBLIC SCOPE */
-
-  //# API URL where the form will be posted
-  $scope.actionUrl = `/api/members/${$stateParams.id}`;
-
-  //# Form action on the above URL
-  $scope.method = 'patch';
-
-  //# List of tags associables with user
-  $scope.tags = tagsPromise;
-
-  //# The user to edit
-  $scope.user = memberPromise;
-
-  //# Should the passord be modified?
-  $scope.password =
-    {change: false};
-
-  //# the user subscription
-  if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
-    $scope.subscription = $scope.user.subscription;
-    $scope.subscription.expired_at = $scope.subscription.expired_at;
-  } else {
-    Plan.query({group_id: $scope.user.group_id}, function(plans){
-      $scope.plans = plans;
-      return Array.from($scope.plans).map((plan) =>
-        (plan.nameToDisplay = $filter('humanReadablePlanName')(plan)));
-    });
+    // # !!! MUST BE CALLED AT THE END of the controller
+    return initialize()
   }
+])
 
-
-  //# Available trainings list
-  $scope.trainings = [];
-
-  //# Profiles types (student/standard/...)
-  $scope.groups = [];
-
-  //# the user wallet
-  $scope.wallet = walletPromise;
-
-  //# user wallet transactions
-  $scope.transactions = transactionsPromise;
-
-  //# used in wallet partial template to identify parent view
-  $scope.view = 'member_edit';
-
-  // current active authentication provider
-  $scope.activeProvider = activeProviderPromise;
-
-
-  //#
-  // Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)
-  // @param subscription {Object} User's subscription object
-  // @param free {boolean} True if the extent is offered, false otherwise
-  //#
-  $scope.updateSubscriptionModal = function(subscription, free){
-    const modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: '<%= asset_path "admin/subscriptions/expired_at_modal.html" %>',
-      size: 'lg',
-      controller: ['$scope', '$uibModalInstance', 'Subscription', function($scope, $uibModalInstance, Subscription) {
-        $scope.new_expired_at = angular.copy(subscription.expired_at);
-        $scope.free = free;
-        $scope.datePicker = {
-          opened: false,
-          format: Fablab.uibDateFormat,
-          options: {
-            startingDay: Fablab.weekStartingDay
-          },
-          minDate: new Date
-        };
-
-        $scope.openDatePicker = function(ev){
-          ev.preventDefault();
-          ev.stopPropagation();
-          return $scope.datePicker.opened = true;
-        };
-
-
-        $scope.ok = () =>
-          Subscription.update({ id: subscription.id }, { subscription: { expired_at: $scope.new_expired_at, free } }, function(_subscription){
-            growl.success(_t('you_successfully_changed_the_expiration_date_of_the_user_s_subscription'));
-            return $uibModalInstance.close(_subscription);
-          }
-          , error=> growl.error(_t('a_problem_occurred_while_saving_the_date')))
-        ;
-        return $scope.cancel = () => $uibModalInstance.dismiss('cancel');
-      }
-      ]});
-    // once the form was validated succesfully ...
-    return modalInstance.result.then(subscription => $scope.subscription.expired_at = subscription.expired_at);
-  };
-
-
-
-  //#
-  // Open a modal dialog allowing the admin to set a subscription for the given user.
-  // @param user {Object} User object, user currently reviewed, as recovered from GET /api/members/:id
-  // @param plans {Array} List of plans, availables for the currently reviewed user, as recovered from GET /api/plans
-  //#
-  $scope.createSubscriptionModal = function(user, plans){
-    const modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: '<%= asset_path "admin/subscriptions/create_modal.html" %>',
-      size: 'lg',
-      controller: ['$scope', '$uibModalInstance', 'Subscription', 'Group', function($scope, $uibModalInstance, Subscription, Group) {
-
-        //# selected user
-        $scope.user = user;
-
-        //# available plans for the selected user
-        $scope.plans = plans;
-
-        //#
-        // Generate a string identifying the given plan by literal humain-readable name
-        // @param plan {Object} Plan object, as recovered from GET /api/plan/:id
-        // @param groups {Array} List of Groups objects, as recovered from GET /api/groups
-        // @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
-        // will be included.
-        // @returns {String}
-        //#
-        $scope.humanReadablePlanName = (plan, groups, short)=> `${$filter('humanReadablePlanName')(plan, groups, short)}`;
-
-        //#
-        // Modal dialog validation callback
-        //#
-        $scope.ok = function() {
-          $scope.subscription.user_id = user.id;
-          return Subscription.save({ }, { subscription: $scope.subscription }, function(_subscription){
-
-            growl.success(_t('subscription_successfully_purchased'));
-            $uibModalInstance.close(_subscription);
-            return $state.reload();
-          }
-          , error=> growl.error(_t('a_problem_occurred_while_taking_the_subscription')));
-        };
-
-        //#
-        // Modal dialog cancellation callback
-        //#
-        return $scope.cancel = () => $uibModalInstance.dismiss('cancel');
-      }
-      ]});
-    // once the form was validated succesfully ...
-    return modalInstance.result.then(subscription => $scope.subscription = subscription);
-  };
-
-
-  $scope.createWalletCreditModal = function(user, wallet){
-    const modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: '<%= asset_path "wallet/credit_modal.html" %>',
-      controller: ['$scope', '$uibModalInstance', 'Wallet', function($scope, $uibModalInstance, Wallet) {
-
-        // default: do not generate a refund invoice
-        $scope.generate_avoir = false;
-
-        // date of the generated refund invoice
-        $scope.avoir_date = null;
-
-        // optional description shown on the refund invoice
-        $scope.description = '';
-
-        // default configuration for the avoir date selector widget
-        $scope.datePicker = {
-          format: Fablab.uibDateFormat,
-          opened: false,
-          options: {
-            startingDay: Fablab.weekStartingDay
-          }
-        };
-
-        //#
-        // Callback to open/close the date picker
-        //#
-        $scope.toggleDatePicker = function($event) {
-          $event.preventDefault();
-          $event.stopPropagation();
-          return $scope.datePicker.opened = !$scope.datePicker.opened;
-        };
-
-        //#
-        // Modal dialog validation callback
-        //#
-        $scope.ok = () =>
-          Wallet.credit({ id: wallet.id }, {
-            amount: $scope.amount,
-            avoir: $scope.generate_avoir,
-            avoir_date: $scope.avoir_date,
-            avoir_description: $scope.description
-          }
-          , function(_wallet){
-
-            growl.success(_t('wallet_credit_successfully'));
-            return $uibModalInstance.close(_wallet);
-          }
-          , error=> growl.error(_t('a_problem_occurred_for_wallet_credit')))
-        ;
-
-        //#
-        // Modal dialog cancellation callback
-        //#
-        return $scope.cancel = () => $uibModalInstance.dismiss('cancel');
-      }
-      ]});
-    // once the form was validated succesfully ...
-    return modalInstance.result.then(function(wallet) {
-      $scope.wallet = wallet;
-      return Wallet.transactions({id: wallet.id}, transactions => $scope.transactions = transactions);
-    });
-  };
-
-
-
-  //#
-  // To use as callback in Array.prototype.filter to get only enabled plans
-  //#
-  $scope.filterDisabledPlans = plan => !plan.disabled;
-
-
-
-  /* PRIVATE SCOPE */
-
-
-
-  //#
-  // Kind of constructor: these actions will be realized first when the controller is loaded
-  //#
-  const initialize = function() {
-    CSRF.setMetaTags();
-
-    // init the birth date to JS object
-    $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate();
-
-    //# the user subscription
-    if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
-      $scope.subscription = $scope.user.subscription;
-      $scope.subscription.expired_at = $scope.subscription.expired_at;
-    } else {
-      Plan.query({group_id: $scope.user.group_id}, function(plans){
-        $scope.plans = plans;
-        return Array.from($scope.plans).map((plan) =>
-          (plan.nameToDisplay = `${plan.base_name} - ${plan.interval}`));
-      });
-    }
-
-    // Using the MembersController
-    return new MembersController($scope, $state, Group, Training);
-  };
-
-
-
-  //# !!! MUST BE CALLED AT THE END of the controller
-  return initialize();
-}
-]);
-
-
-
-//#
-// Controller used in the member's creation page (admin view)
-//#
-Application.Controllers.controller("NewMemberController", ["$scope", "$state", "$stateParams", "Member", 'Training', 'Group', 'CSRF'
-, function($scope, $state, $stateParams, Member, Training, Group, CSRF) {
-
-  CSRF.setMetaTags();
-
+// #
+// Controller used in the member edition page
+// #
+Application.Controllers.controller('EditMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'dialogs', 'growl', 'Group', 'Subscription', 'CSRF', 'memberPromise', 'tagsPromise', '$uibModal', 'Plan', '$filter', '_t', 'walletPromise', 'transactionsPromise', 'activeProviderPromise', 'Wallet',
+  function ($scope, $state, $stateParams, Member, Training, dialogs, growl, Group, Subscription, CSRF, memberPromise, tagsPromise, $uibModal, Plan, $filter, _t, walletPromise, transactionsPromise, activeProviderPromise, Wallet) {
   /* PUBLIC SCOPE */
 
-  //# API URL where the form will be posted
-  $scope.actionUrl = "/api/members";
+    // # API URL where the form will be posted
+    $scope.actionUrl = `/api/members/${$stateParams.id}`
 
-  //# Form action on the above URL
-  $scope.method = 'post';
+    // # Form action on the above URL
+    $scope.method = 'patch'
 
-  //# Should the passord be set manually or generated?
-  $scope.password =
-    {change: false};
+    // # List of tags associables with user
+    $scope.tags = tagsPromise
 
-  //# Default member's profile parameters
-  $scope.user =
-    {plan_interval: ''};
+    // # The user to edit
+    $scope.user = memberPromise
 
-  //# Callback when the admin check/unckeck the box telling that the new user is an organization.
-  //# Disable or enable the organization fields in the form, accordingly
-  $scope.toggleOrganization = function() {
-    if ($scope.user.organization) {
-      if (!$scope.user.profile) { $scope.user.profile = {}; }
-      return $scope.user.profile.organization = {};
+    // # Should the passord be modified?
+    $scope.password =
+    { change: false }
+
+    // # the user subscription
+    if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
+      $scope.subscription = $scope.user.subscription
+      $scope.subscription.expired_at = $scope.subscription.expired_at
     } else {
-      return $scope.user.profile.organization = undefined;
+      Plan.query({ group_id: $scope.user.group_id }, function (plans) {
+        $scope.plans = plans
+        return Array.from($scope.plans).map((plan) =>
+          (plan.nameToDisplay = $filter('humanReadablePlanName')(plan)))
+      })
     }
-  };
 
+    // # Available trainings list
+    $scope.trainings = []
 
+    // # Profiles types (student/standard/...)
+    $scope.groups = []
 
-  //# Using the MembersController
-  return new MembersController($scope, $state, Group, Training);
-}
-]);
+    // # the user wallet
+    $scope.wallet = walletPromise
 
+    // # user wallet transactions
+    $scope.transactions = transactionsPromise
 
+    // # used in wallet partial template to identify parent view
+    $scope.view = 'member_edit'
 
-//#
+    // current active authentication provider
+    $scope.activeProvider = activeProviderPromise
+
+    // #
+    // Open a modal dialog, allowing the admin to extend the current user's subscription (freely or not)
+    // @param subscription {Object} User's subscription object
+    // @param free {boolean} True if the extent is offered, false otherwise
+    // #
+    $scope.updateSubscriptionModal = function (subscription, free) {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "admin/subscriptions/expired_at_modal.html" %>',
+        size: 'lg',
+        controller: ['$scope', '$uibModalInstance', 'Subscription', function ($scope, $uibModalInstance, Subscription) {
+          $scope.new_expired_at = angular.copy(subscription.expired_at)
+          $scope.free = free
+          $scope.datePicker = {
+            opened: false,
+            format: Fablab.uibDateFormat,
+            options: {
+              startingDay: Fablab.weekStartingDay
+            },
+            minDate: new Date()
+          }
+
+          $scope.openDatePicker = function (ev) {
+            ev.preventDefault()
+            ev.stopPropagation()
+            return $scope.datePicker.opened = true
+          }
+
+          $scope.ok = () =>
+            Subscription.update({ id: subscription.id }, { subscription: { expired_at: $scope.new_expired_at, free } }, function (_subscription) {
+              growl.success(_t('you_successfully_changed_the_expiration_date_of_the_user_s_subscription'))
+              return $uibModalInstance.close(_subscription)
+            }
+            , error => growl.error(_t('a_problem_occurred_while_saving_the_date')))
+
+          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+        }
+        ] })
+      // once the form was validated succesfully ...
+      return modalInstance.result.then(subscription => $scope.subscription.expired_at = subscription.expired_at)
+    }
+
+    // #
+    // Open a modal dialog allowing the admin to set a subscription for the given user.
+    // @param user {Object} User object, user currently reviewed, as recovered from GET /api/members/:id
+    // @param plans {Array} List of plans, availables for the currently reviewed user, as recovered from GET /api/plans
+    // #
+    $scope.createSubscriptionModal = function (user, plans) {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "admin/subscriptions/create_modal.html" %>',
+        size: 'lg',
+        controller: ['$scope', '$uibModalInstance', 'Subscription', 'Group', function ($scope, $uibModalInstance, Subscription, Group) {
+        // # selected user
+          $scope.user = user
+
+          // # available plans for the selected user
+          $scope.plans = plans
+
+          // #
+          // Generate a string identifying the given plan by literal humain-readable name
+          // @param plan {Object} Plan object, as recovered from GET /api/plan/:id
+          // @param groups {Array} List of Groups objects, as recovered from GET /api/groups
+          // @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
+          // will be included.
+          // @returns {String}
+          // #
+          $scope.humanReadablePlanName = (plan, groups, short) => `${$filter('humanReadablePlanName')(plan, groups, short)}`
+
+          // #
+          // Modal dialog validation callback
+          // #
+          $scope.ok = function () {
+            $scope.subscription.user_id = user.id
+            return Subscription.save({ }, { subscription: $scope.subscription }, function (_subscription) {
+              growl.success(_t('subscription_successfully_purchased'))
+              $uibModalInstance.close(_subscription)
+              return $state.reload()
+            }
+            , error => growl.error(_t('a_problem_occurred_while_taking_the_subscription')))
+          }
+
+          // #
+          // Modal dialog cancellation callback
+          // #
+          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+        }
+        ] })
+      // once the form was validated succesfully ...
+      return modalInstance.result.then(subscription => $scope.subscription = subscription)
+    }
+
+    $scope.createWalletCreditModal = function (user, wallet) {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "wallet/credit_modal.html" %>',
+        controller: ['$scope', '$uibModalInstance', 'Wallet', function ($scope, $uibModalInstance, Wallet) {
+        // default: do not generate a refund invoice
+          $scope.generate_avoir = false
+
+          // date of the generated refund invoice
+          $scope.avoir_date = null
+
+          // optional description shown on the refund invoice
+          $scope.description = ''
+
+          // default configuration for the avoir date selector widget
+          $scope.datePicker = {
+            format: Fablab.uibDateFormat,
+            opened: false,
+            options: {
+              startingDay: Fablab.weekStartingDay
+            }
+          }
+
+          // #
+          // Callback to open/close the date picker
+          // #
+          $scope.toggleDatePicker = function ($event) {
+            $event.preventDefault()
+            $event.stopPropagation()
+            return $scope.datePicker.opened = !$scope.datePicker.opened
+          }
+
+          // #
+          // Modal dialog validation callback
+          // #
+          $scope.ok = () =>
+            Wallet.credit({ id: wallet.id }, {
+              amount: $scope.amount,
+              avoir: $scope.generate_avoir,
+              avoir_date: $scope.avoir_date,
+              avoir_description: $scope.description
+            }
+            , function (_wallet) {
+              growl.success(_t('wallet_credit_successfully'))
+              return $uibModalInstance.close(_wallet)
+            }
+            , error => growl.error(_t('a_problem_occurred_for_wallet_credit')))
+
+          // #
+          // Modal dialog cancellation callback
+          // #
+          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+        }
+        ] })
+      // once the form was validated succesfully ...
+      return modalInstance.result.then(function (wallet) {
+        $scope.wallet = wallet
+        return Wallet.transactions({ id: wallet.id }, transactions => $scope.transactions = transactions)
+      })
+    }
+
+    // #
+    // To use as callback in Array.prototype.filter to get only enabled plans
+    // #
+    $scope.filterDisabledPlans = plan => !plan.disabled
+
+    /* PRIVATE SCOPE */
+
+    // #
+    // Kind of constructor: these actions will be realized first when the controller is loaded
+    // #
+    const initialize = function () {
+      CSRF.setMetaTags()
+
+      // init the birth date to JS object
+      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
+
+      // # the user subscription
+      if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
+        $scope.subscription = $scope.user.subscription
+        $scope.subscription.expired_at = $scope.subscription.expired_at
+      } else {
+        Plan.query({ group_id: $scope.user.group_id }, function (plans) {
+          $scope.plans = plans
+          return Array.from($scope.plans).map((plan) =>
+            (plan.nameToDisplay = `${plan.base_name} - ${plan.interval}`))
+        })
+      }
+
+      // Using the MembersController
+      return new MembersController($scope, $state, Group, Training)
+    }
+
+    // # !!! MUST BE CALLED AT THE END of the controller
+    return initialize()
+  }
+])
+
+// #
+// Controller used in the member's creation page (admin view)
+// #
+Application.Controllers.controller('NewMemberController', ['$scope', '$state', '$stateParams', 'Member', 'Training', 'Group', 'CSRF',
+  function ($scope, $state, $stateParams, Member, Training, Group, CSRF) {
+    CSRF.setMetaTags()
+
+    /* PUBLIC SCOPE */
+
+    // # API URL where the form will be posted
+    $scope.actionUrl = '/api/members'
+
+    // # Form action on the above URL
+    $scope.method = 'post'
+
+    // # Should the passord be set manually or generated?
+    $scope.password =
+    { change: false }
+
+    // # Default member's profile parameters
+    $scope.user =
+    { plan_interval: '' }
+
+    // # Callback when the admin check/unckeck the box telling that the new user is an organization.
+    // # Disable or enable the organization fields in the form, accordingly
+    $scope.toggleOrganization = function () {
+      if ($scope.user.organization) {
+        if (!$scope.user.profile) { $scope.user.profile = {} }
+        return $scope.user.profile.organization = {}
+      } else {
+        return $scope.user.profile.organization = undefined
+      }
+    }
+
+    // # Using the MembersController
+    return new MembersController($scope, $state, Group, Training)
+  }
+])
+
+// #
 // Controller used in the admin's creation page (admin view)
-//#
-Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', function($state, $scope, Admin, growl, _t){
-
-  //# default admin profile
-  let getGender;
+// #
+Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', function ($state, $scope, Admin, growl, _t) {
+  // # default admin profile
+  let getGender
   $scope.admin = {
     profile_attributes: {
       gender: true
     }
-  };
+  }
 
-  //# Default parameters for AngularUI-Bootstrap datepicker
+  // # Default parameters for AngularUI-Bootstrap datepicker
   $scope.datePicker = {
     format: Fablab.uibDateFormat,
     opened: false,
     options: {
       startingDay: Fablab.weekStartingDay
     }
-  };
+  }
 
-
-
-  //#
+  // #
   // Shows the birth day datepicker
   // @param $event {Object} jQuery event object
-  //#
-  $scope.openDatePicker = $event=> $scope.datePicker.opened = true;
+  // #
+  $scope.openDatePicker = $event => $scope.datePicker.opened = true
 
-
-
-  //#
+  // #
   // Send the new admin, currently stored in $scope.admin, to the server for database saving
-  //#
+  // #
   $scope.saveAdmin = () =>
-    Admin.save({}, { admin: $scope.admin }, function() {
-      growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', {GENDER:getGender($scope.admin)}, "messageformat"));
-      return $state.go('app.admin.members');
+    Admin.save({}, { admin: $scope.admin }, function () {
+      growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }, 'messageformat'))
+      return $state.go('app.admin.members')
     }
-    , error=> console.log(error))
-  ;
-
-
+    , error => console.log(error))
 
   /* PRIVATE SCOPE */
 
-  //#
+  // #
   // Return an enumerable meaninful string for the gender of the provider user
   // @param user {Object} Database user record
   // @return {string} 'male' or 'female'
-  //#
-  return getGender = function(user) {
+  // #
+  return getGender = function (user) {
     if (user.profile_attributes) {
-      if (user.profile_attributes.gender) { return 'male'; } else { return 'female'; }
-    } else { return 'other'; }
-  };
+      if (user.profile_attributes.gender) { return 'male' } else { return 'female' }
+    } else { return 'other' }
+  }
 }
 
-
-]);
+])

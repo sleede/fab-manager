@@ -1,12 +1,18 @@
+/* eslint-disable
+    no-return-assign,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-angular.module('application.router', ['ui.router']).
-  config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-    $locationProvider.hashPrefix('!');
-    $urlRouterProvider.otherwise("/");
+angular.module('application.router', ['ui.router'])
+  .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    $locationProvider.hashPrefix('!')
+    $urlRouterProvider.otherwise('/')
 
     // abstract root parents states
     // these states controls the access rights to the various routes inherited from them
@@ -24,32 +30,32 @@ angular.module('application.router', ['ui.router']).
           'main': {}
         },
         resolve: {
-          logoFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'logo-file'}).$promise
+          logoFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'logo-file' }).$promise
           ],
-          logoBlackFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'logo-black-file'}).$promise
+          logoBlackFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'logo-black-file' }).$promise
           ],
           commonTranslations: [ 'Translations', Translations => Translations.query(['app.public.common', 'app.shared.buttons', 'app.shared.elements']).$promise
           ]
         },
-        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', function($rootScope, logoFile, logoBlackFile) {
-          //# Application logo
-          $rootScope.logo = logoFile.custom_asset;
-          return $rootScope.logoBlack = logoBlackFile.custom_asset;
+        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', function ($rootScope, logoFile, logoBlackFile) {
+          // # Application logo
+          $rootScope.logo = logoFile.custom_asset
+          return $rootScope.logoBlack = logoBlackFile.custom_asset
         }
         ]
       })
       .state('app.public',
-        {abstract: true})
+        { abstract: true })
       .state('app.logged', {
         abstract: true,
         data: {
           authorizedRoles: ['member', 'admin']
         },
         resolve: {
-          currentUser: ['Auth', Auth=> Auth.currentUser()
+          currentUser: ['Auth', Auth => Auth.currentUser()
           ]
         },
-        onEnter: ["$state", "$timeout", "currentUser", "$rootScope", ($state, $timeout, currentUser, $rootScope)=> $rootScope.currentUser = currentUser
+        onEnter: ['$state', '$timeout', 'currentUser', '$rootScope', ($state, $timeout, currentUser, $rootScope) => $rootScope.currentUser = currentUser
         ]
       })
       .state('app.admin', {
@@ -58,14 +64,12 @@ angular.module('application.router', ['ui.router']).
           authorizedRoles: ['admin']
         },
         resolve: {
-          currentUser: ['Auth', Auth=> Auth.currentUser()
+          currentUser: ['Auth', Auth => Auth.currentUser()
           ]
         },
-        onEnter: ["$state", "$timeout", "currentUser", "$rootScope", ($state, $timeout, currentUser, $rootScope)=> $rootScope.currentUser = currentUser
+        onEnter: ['$state', '$timeout', 'currentUser', '$rootScope', ($state, $timeout, currentUser, $rootScope) => $rootScope.currentUser = currentUser
         ]
       })
-
-
 
       // main pages
       .state('app.public.about', {
@@ -90,15 +94,15 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          lastMembersPromise: ['Member', Member=> Member.lastSubscribed({limit: 4}).$promise
+          lastMembersPromise: ['Member', Member => Member.lastSubscribed({ limit: 4 }).$promise
           ],
-          lastProjectsPromise: ['Project', Project=> Project.lastPublished().$promise
+          lastProjectsPromise: ['Project', Project => Project.lastPublished().$promise
           ],
-          upcomingEventsPromise: ['Event', Event=> Event.upcoming({limit: 3}).$promise
+          upcomingEventsPromise: ['Event', Event => Event.upcoming({ limit: 3 }).$promise
           ],
-          homeBlogpostPromise: ['Setting', Setting=> Setting.get({name: 'home_blogpost'}).$promise
+          homeBlogpostPromise: ['Setting', Setting => Setting.get({ name: 'home_blogpost' }).$promise
           ],
-          twitterNamePromise: ['Setting', Setting=> Setting.get({name: 'twitter_name'}).$promise
+          twitterNamePromise: ['Setting', Setting => Setting.get({ name: 'twitter_name' }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.public.home').$promise
           ]
@@ -115,29 +119,27 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          settingsPromise: ['Setting', Setting=> Setting.query({names: "['fablab_name', 'name_genre']"}).$promise
+          settingsPromise: ['Setting', Setting => Setting.query({ names: "['fablab_name', 'name_genre']" }).$promise
           ],
           activeProviderPromise: ['AuthProvider', AuthProvider => AuthProvider.active().$promise
           ],
-          groupsPromise: ['Group', Group=> Group.query().$promise
+          groupsPromise: ['Group', Group => Group.query().$promise
           ],
-          cguFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'cgu-file'}).$promise
+          cguFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'cgu-file' }).$promise
           ],
-          memberPromise: ['Member', 'currentUser', (Member, currentUser)=> Member.get({id: currentUser.id}).$promise
+          memberPromise: ['Member', 'currentUser', (Member, currentUser) => Member.get({ id: currentUser.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.logged.profileCompletion', 'app.shared.user']).$promise
           ]
         }
       })
 
-
-
       // dashboard
       .state('app.logged.dashboard', {
         abstract: true,
         url: '/dashboard',
         resolve: {
-          memberPromise: ['Member', 'currentUser', (Member, currentUser)=> Member.get({id: currentUser.id}).$promise
+          memberPromise: ['Member', 'currentUser', (Member, currentUser) => Member.get({ id: currentUser.id }).$promise
           ]
         }
       })
@@ -163,7 +165,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          groups: ['Group', Group=> Group.query().$promise
+          groups: ['Group', Group => Group.query().$promise
           ],
           activeProviderPromise: ['AuthProvider', AuthProvider => AuthProvider.active().$promise
           ],
@@ -232,15 +234,14 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          walletPromise: ['Wallet', 'currentUser', (Wallet, currentUser)=> Wallet.getWalletByUser({user_id: currentUser.id}).$promise
+          walletPromise: ['Wallet', 'currentUser', (Wallet, currentUser) => Wallet.getWalletByUser({ user_id: currentUser.id }).$promise
           ],
-          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)=> Wallet.transactions({id: walletPromise.id}).$promise
+          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise) => Wallet.transactions({ id: walletPromise.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.shared.wallet']).$promise
           ]
         }
       })
-
 
       // members
       .state('app.logged.members_show', {
@@ -252,7 +253,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          memberPromise: ['$stateParams', 'Member', ($stateParams, Member)=> Member.get({id: $stateParams.id}).$promise
+          memberPromise: ['$stateParams', 'Member', ($stateParams, Member) => Member.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.logged.members_show', 'app.shared.public_profile']).$promise
           ]
@@ -267,7 +268,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          membersPromise: ['Member', Member=> Member.query({requested_attributes:'[profile]', page: 1, size: 10}).$promise
+          membersPromise: ['Member', Member => Member.query({ requested_attributes: '[profile]', page: 1, size: 10 }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.logged.members').$promise
           ]
@@ -284,11 +285,11 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          themesPromise: ['Theme', Theme=> Theme.query().$promise
+          themesPromise: ['Theme', Theme => Theme.query().$promise
           ],
-          componentsPromise: ['Component', Component=> Component.query().$promise
+          componentsPromise: ['Component', Component => Component.query().$promise
           ],
-          machinesPromise: ['Machine', Machine=> Machine.query().$promise
+          machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.public.projects_list').$promise
           ]
@@ -303,7 +304,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          allowedExtensions: ['Project', Project=> Project.allowedExtensions().$promise
+          allowedExtensions: ['Project', Project => Project.allowedExtensions().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.logged.projects_new', 'app.shared.project']).$promise
           ]
@@ -318,7 +319,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          projectPromise: ['$stateParams', 'Project', ($stateParams, Project)=> Project.get({id: $stateParams.id}).$promise
+          projectPromise: ['$stateParams', 'Project', ($stateParams, Project) => Project.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.public.projects_show').$promise
           ]
@@ -333,15 +334,14 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          projectPromise: ['$stateParams', 'Project', ($stateParams, Project)=> Project.get({id: $stateParams.id}).$promise
+          projectPromise: ['$stateParams', 'Project', ($stateParams, Project) => Project.get({ id: $stateParams.id }).$promise
           ],
-          allowedExtensions: ['Project', Project=> Project.allowedExtensions().$promise
+          allowedExtensions: ['Project', Project => Project.allowedExtensions().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise
           ]
         }
       })
-
 
       // machines
       .state('app.public.machines_list', {
@@ -353,7 +353,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          machinesPromise: ['Machine', Machine=> Machine.query().$promise
+          machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.public.machines_list', 'app.shared.training_reservation_modal', 'app.shared.request_training_modal']).$promise
           ]
@@ -381,7 +381,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams)=> Machine.get({id: $stateParams.id}).$promise
+          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams) => Machine.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.public.machines_show', 'app.shared.training_reservation_modal', 'app.shared.request_training_modal']).$promise
           ]
@@ -396,28 +396,28 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          plansPromise: ['Plan', Plan=> Plan.query().$promise
+          plansPromise: ['Plan', Plan => Plan.query().$promise
           ],
-          groupsPromise: ['Group', Group=> Group.query().$promise
+          groupsPromise: ['Group', Group => Group.query().$promise
           ],
-          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams)=> Machine.get({id: $stateParams.id}).$promise
+          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams) => Machine.get({ id: $stateParams.id }).$promise
           ],
-          settingsPromise: ['Setting', Setting=>
-            Setting.query({names: `['machine_explications_alert', \
+          settingsPromise: ['Setting', Setting =>
+            Setting.query({ names: `['machine_explications_alert', \
 'booking_window_start', \
 'booking_window_end', \
 'booking_move_enable', \
 'booking_move_delay', \
 'booking_cancel_enable', \
 'booking_cancel_delay', \
-'subscription_explications_alert']`}).$promise
-          
+'subscription_explications_alert']` }).$promise
+
           ],
           translations: [ 'Translations', Translations =>
             Translations.query(['app.logged.machines_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
-          
+
           ]
         }
       })
@@ -430,7 +430,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams)=> Machine.get({id: $stateParams.id}).$promise
+          machinePromise: ['Machine', '$stateParams', (Machine, $stateParams) => Machine.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise
           ]
@@ -448,7 +448,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          spacesPromise: ['Space', Space=> Space.query().$promise
+          spacesPromise: ['Space', Space => Space.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.public.spaces_list']).$promise
           ]
@@ -478,7 +478,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          spacePromise: ['Space', '$stateParams', (Space, $stateParams)=> Space.get({id: $stateParams.id}).$promise
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams) => Space.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.public.space_show']).$promise
           ]
@@ -494,7 +494,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          spacePromise: ['Space', '$stateParams', (Space, $stateParams)=> Space.get({id: $stateParams.id}).$promise
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams) => Space.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.space_edit', 'app.shared.space']).$promise
           ]
@@ -510,30 +510,30 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          spacePromise: ['Space', '$stateParams', (Space, $stateParams)=> Space.get({id: $stateParams.id}).$promise
+          spacePromise: ['Space', '$stateParams', (Space, $stateParams) => Space.get({ id: $stateParams.id }).$promise
           ],
-          availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams)=> Availability.spaces({spaceId: $stateParams.id}).$promise
+          availabilitySpacesPromise: ['Availability', '$stateParams', (Availability, $stateParams) => Availability.spaces({ spaceId: $stateParams.id }).$promise
           ],
-          plansPromise: ['Plan', Plan=> Plan.query().$promise
+          plansPromise: ['Plan', Plan => Plan.query().$promise
           ],
-          groupsPromise: ['Group', Group=> Group.query().$promise
+          groupsPromise: ['Group', Group => Group.query().$promise
           ],
-          settingsPromise: ['Setting', Setting=>
-            Setting.query({names: `['booking_window_start', \
+          settingsPromise: ['Setting', Setting =>
+            Setting.query({ names: `['booking_window_start', \
 'booking_window_end', \
 'booking_move_enable', \
 'booking_move_delay', \
 'booking_cancel_enable', \
 'booking_cancel_delay', \
 'subscription_explications_alert', \
-'space_explications_alert']`}).$promise
-          
+'space_explications_alert']` }).$promise
+
           ],
           translations: [ 'Translations', Translations =>
             Translations.query(['app.logged.space_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
-          
+
           ]
         }
       })
@@ -548,7 +548,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          trainingsPromise: ['Training', Training=> Training.query({ public_page: true }).$promise
+          trainingsPromise: ['Training', Training => Training.query({ public_page: true }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.public.trainings_list']).$promise
           ]
@@ -563,7 +563,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)=> Training.get({id: $stateParams.id}).$promise
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams) => Training.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.public.training_show']).$promise
           ]
@@ -578,20 +578,20 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          explicationAlertPromise: ['Setting', Setting=> Setting.get({name: 'training_explications_alert'}).$promise
+          explicationAlertPromise: ['Setting', Setting => Setting.get({ name: 'training_explications_alert' }).$promise
           ],
-          plansPromise: ['Plan', Plan=> Plan.query().$promise
+          plansPromise: ['Plan', Plan => Plan.query().$promise
           ],
-          groupsPromise: ['Group', Group=> Group.query().$promise
+          groupsPromise: ['Group', Group => Group.query().$promise
           ],
-          availabilityTrainingsPromise: ['Availability', '$stateParams', (Availability, $stateParams)=> Availability.trainings({trainingId: $stateParams.id}).$promise
+          availabilityTrainingsPromise: ['Availability', '$stateParams', (Availability, $stateParams) => Availability.trainings({ trainingId: $stateParams.id }).$promise
           ],
-          trainingPromise: ['Training', '$stateParams', function(Training, $stateParams){
-              if ($stateParams.id !== 'all') { return Training.get({id: $stateParams.id}).$promise; }
-            }
+          trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) {
+            if ($stateParams.id !== 'all') { return Training.get({ id: $stateParams.id }).$promise }
+          }
           ],
-          settingsPromise: ['Setting', Setting=>
-            Setting.query({names: `['booking_window_start', \
+          settingsPromise: ['Setting', Setting =>
+            Setting.query({ names: `['booking_window_start', \
 'booking_window_end', \
 'booking_move_enable', \
 'booking_move_delay', \
@@ -599,14 +599,14 @@ angular.module('application.router', ['ui.router']).
 'booking_cancel_delay', \
 'subscription_explications_alert', \
 'training_explications_alert', \
-'training_information_message']`}).$promise
-          
+'training_information_message']` }).$promise
+
           ],
           translations: [ 'Translations', Translations =>
             Translations.query(['app.logged.trainings_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise
-          
+
           ]
         }
       })
@@ -636,16 +636,16 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          subscriptionExplicationsPromise: ['Setting', Setting=> Setting.get({name: 'subscription_explications_alert'}).$promise
+          subscriptionExplicationsPromise: ['Setting', Setting => Setting.get({ name: 'subscription_explications_alert' }).$promise
           ],
-          plansPromise: ['Plan', Plan=> Plan.query().$promise
+          plansPromise: ['Plan', Plan => Plan.query().$promise
           ],
-          groupsPromise: ['Group', Group=> Group.query().$promise
+          groupsPromise: ['Group', Group => Group.query().$promise
           ],
           translations: [ 'Translations', Translations =>
             Translations.query(['app.public.plans', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet',
               'app.shared.coupon_input']).$promise
-          
+
           ]
         }
       })
@@ -679,16 +679,16 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          eventPromise: ['Event', '$stateParams', (Event, $stateParams)=> Event.get({id: $stateParams.id}).$promise
+          eventPromise: ['Event', '$stateParams', (Event, $stateParams) => Event.get({ id: $stateParams.id }).$promise
           ],
           priceCategoriesPromise: ['PriceCategory', PriceCategory => PriceCategory.query().$promise
           ],
-          settingsPromise: ['Setting', Setting=> Setting.query({names: "['booking_move_enable', 'booking_move_delay', 'event_explications_alert']"}).$promise
+          settingsPromise: ['Setting', Setting => Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'event_explications_alert']" }).$promise
           ],
           translations: [ 'Translations', Translations =>
             Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe',
               'app.shared.valid_reservation_modal', 'app.shared.wallet', 'app.shared.coupon_input']).$promise
-          
+
           ]
         }
       })
@@ -703,13 +703,13 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          bookingWindowStart: ['Setting', Setting=> Setting.get({name: 'booking_window_start'}).$promise
+          bookingWindowStart: ['Setting', Setting => Setting.get({ name: 'booking_window_start' }).$promise
           ],
-          bookingWindowEnd: ['Setting', Setting=> Setting.get({name: 'booking_window_end'}).$promise
+          bookingWindowEnd: ['Setting', Setting => Setting.get({ name: 'booking_window_end' }).$promise
           ],
-          trainingsPromise: ['Training', Training=> Training.query().$promise
+          trainingsPromise: ['Training', Training => Training.query().$promise
           ],
-          machinesPromise: ['Machine', Machine=> Machine.query().$promise
+          machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
           spacesPromise: ['Space', Space => Space.query().$promise
           ],
@@ -729,9 +729,9 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          bookingWindowStart: ['Setting', Setting=> Setting.get({name: 'booking_window_start'}).$promise
+          bookingWindowStart: ['Setting', Setting => Setting.get({ name: 'booking_window_start' }).$promise
           ],
-          bookingWindowEnd: ['Setting', Setting=> Setting.get({name: 'booking_window_end'}).$promise
+          bookingWindowEnd: ['Setting', Setting => Setting.get({ name: 'booking_window_end' }).$promise
           ],
           machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
@@ -750,11 +750,11 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          componentsPromise: ['Component', Component=> Component.query().$promise
+          componentsPromise: ['Component', Component => Component.query().$promise
           ],
-          licencesPromise: ['Licence', Licence=> Licence.query().$promise
+          licencesPromise: ['Licence', Licence => Licence.query().$promise
           ],
-          themesPromise: ['Theme', Theme=> Theme.query().$promise
+          themesPromise: ['Theme', Theme => Theme.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.project_elements').$promise
           ]
@@ -771,9 +771,9 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          trainingsPromise: ['Training', Training=> Training.query().$promise
+          trainingsPromise: ['Training', Training => Training.query().$promise
           ],
-          machinesPromise: ['Machine', Machine=> Machine.query().$promise
+          machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.trainings', 'app.shared.trainings']).$promise
           ]
@@ -788,7 +788,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          machinesPromise: ['Machine', Machine=> Machine.query().$promise
+          machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise
           ]
@@ -803,9 +803,9 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          trainingPromise: ['Training', '$stateParams', (Training, $stateParams)=> Training.get({id: $stateParams.id}).$promise
+          trainingPromise: ['Training', '$stateParams', (Training, $stateParams) => Training.get({ id: $stateParams.id }).$promise
           ],
-          machinesPromise: ['Machine', Machine=> Machine.query().$promise
+          machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.shared.trainings').$promise
           ]
@@ -821,7 +821,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          eventsPromise: ['Event', Event=> Event.query({page: 1}).$promise
+          eventsPromise: ['Event', Event => Event.query({ page: 1 }).$promise
           ],
           categoriesPromise: ['Category', Category => Category.query().$promise
           ],
@@ -865,7 +865,7 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          eventPromise: ['Event', '$stateParams', (Event, $stateParams)=> Event.get({id: $stateParams.id}).$promise
+          eventPromise: ['Event', '$stateParams', (Event, $stateParams) => Event.get({ id: $stateParams.id }).$promise
           ],
           categoriesPromise: ['Category', Category => Category.query().$promise
           ],
@@ -888,9 +888,9 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          eventPromise: ['Event', '$stateParams', (Event, $stateParams)=> Event.get({id: $stateParams.id}).$promise
+          eventPromise: ['Event', '$stateParams', (Event, $stateParams) => Event.get({ id: $stateParams.id }).$promise
           ],
-          reservationsPromise: ['Reservation', '$stateParams', (Reservation, $stateParams)=> Reservation.query({reservable_id: $stateParams.id, reservable_type: 'Event'}).$promise
+          reservationsPromise: ['Reservation', '$stateParams', (Reservation, $stateParams) => Reservation.query({ reservable_id: $stateParams.id, reservable_type: 'Event' }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.event_reservations').$promise
           ]
@@ -911,27 +911,27 @@ angular.module('application.router', ['ui.router']).
           ],
           groups: ['Group', Group => Group.query().$promise
           ],
-          machinesPricesPromise: ['Price', Price=> Price.query({priceable_type: 'Machine', plan_id: 'null'}).$promise
+          machinesPricesPromise: ['Price', Price => Price.query({ priceable_type: 'Machine', plan_id: 'null' }).$promise
           ],
-          trainingsPricingsPromise: ['TrainingsPricing', TrainingsPricing=> TrainingsPricing.query().$promise
+          trainingsPricingsPromise: ['TrainingsPricing', TrainingsPricing => TrainingsPricing.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.pricing', 'app.shared.member_select', 'app.shared.coupon']).$promise
           ],
           trainingsPromise: ['Training', Training => Training.query().$promise
           ],
-          machineCreditsPromise: ['Credit', Credit => Credit.query({creditable_type: 'Machine'}).$promise
+          machineCreditsPromise: ['Credit', Credit => Credit.query({ creditable_type: 'Machine' }).$promise
           ],
           machinesPromise: ['Machine', Machine => Machine.query().$promise
           ],
-          trainingCreditsPromise: ['Credit', Credit => Credit.query({creditable_type: 'Training'}).$promise
+          trainingCreditsPromise: ['Credit', Credit => Credit.query({ creditable_type: 'Training' }).$promise
           ],
           couponsPromise: ['Coupon', Coupon => Coupon.query().$promise
           ],
           spacesPromise: ['Space', Space => Space.query().$promise
           ],
-          spacesPricesPromise: ['Price', Price=> Price.query({priceable_type: 'Space', plan_id: 'null'}).$promise
+          spacesPricesPromise: ['Price', Price => Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise
           ],
-          spacesCreditsPromise: ['Credit', Credit => Credit.query({creditable_type: 'Space'}).$promise
+          spacesCreditsPromise: ['Credit', Credit => Credit.query({ creditable_type: 'Space' }).$promise
           ]
         }
       })
@@ -944,7 +944,7 @@ angular.module('application.router', ['ui.router']).
           ],
           groups: ['Group', Group => Group.query().$promise
           ],
-          partners: ['User', User => User.query({role: 'partner'}).$promise
+          partners: ['User', User => User.query({ role: 'partner' }).$promise
           ]
         }
       })
@@ -976,7 +976,7 @@ angular.module('application.router', ['ui.router']).
           ],
           plans: ['Plan', Plan => Plan.query().$promise
           ],
-          planPromise: ['Plan', '$stateParams', (Plan, $stateParams) => Plan.get({id: $stateParams.id}).$promise
+          planPromise: ['Plan', '$stateParams', (Plan, $stateParams) => Plan.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise
           ]
@@ -1006,14 +1006,12 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          couponPromise: ['Coupon', '$stateParams', (Coupon, $stateParams) => Coupon.get({id: $stateParams.id}).$promise
+          couponPromise: ['Coupon', '$stateParams', (Coupon, $stateParams) => Coupon.get({ id: $stateParams.id }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.coupons_edit', 'app.shared.coupon']).$promise
           ]
         }
       })
-
-
 
       // invoices
       .state('app.admin.invoices', {
@@ -1025,8 +1023,8 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          settings: ['Setting', Setting=>
-            Setting.query({names: `[ \
+          settings: ['Setting', Setting =>
+            Setting.query({ names: `[ \
 'invoice_legals', \
 'invoice_text', \
 'invoice_VAT-rate', \
@@ -1036,20 +1034,19 @@ angular.module('application.router', ['ui.router']).
 'invoice_code-active', \
 'invoice_reference', \
 'invoice_logo' \
-]`}).$promise
-          
+]` }).$promise
+
           ],
           invoices: [ 'Invoice', Invoice =>
             Invoice.list({
               query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
             }).$promise
-          
+
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.invoices').$promise
           ]
         }
       })
-
 
       // members
       .state('app.admin.members', {
@@ -1073,15 +1070,15 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          membersPromise: ['Member', Member=> Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20 } }).$promise
+          membersPromise: ['Member', Member => Member.list({ query: { search: '', order_by: 'id', page: 1, size: 20 } }).$promise
           ],
-          adminsPromise: ['Admin', Admin=> Admin.query().$promise
+          adminsPromise: ['Admin', Admin => Admin.query().$promise
           ],
-          groupsPromise: ['Group', Group=> Group.query().$promise
+          groupsPromise: ['Group', Group => Group.query().$promise
           ],
-          tagsPromise: ['Tag', Tag=> Tag.query().$promise
+          tagsPromise: ['Tag', Tag => Tag.query().$promise
           ],
-          authProvidersPromise: ['AuthProvider', AuthProvider=> AuthProvider.query().$promise
+          authProvidersPromise: ['AuthProvider', AuthProvider => AuthProvider.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.members').$promise
           ]
@@ -1109,15 +1106,15 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          memberPromise: ['Member', '$stateParams', (Member, $stateParams)=> Member.get({id: $stateParams.id}).$promise
+          memberPromise: ['Member', '$stateParams', (Member, $stateParams) => Member.get({ id: $stateParams.id }).$promise
           ],
           activeProviderPromise: ['AuthProvider', AuthProvider => AuthProvider.active().$promise
           ],
-          walletPromise: ['Wallet', '$stateParams', (Wallet, $stateParams)=> Wallet.getWalletByUser({user_id: $stateParams.id}).$promise
+          walletPromise: ['Wallet', '$stateParams', (Wallet, $stateParams) => Wallet.getWalletByUser({ user_id: $stateParams.id }).$promise
           ],
-          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise)=> Wallet.transactions({id: walletPromise.id}).$promise
+          transactionsPromise: ['Wallet', 'walletPromise', (Wallet, walletPromise) => Wallet.transactions({ id: walletPromise.id }).$promise
           ],
-          tagsPromise: ['Tag', Tag=> Tag.query().$promise
+          tagsPromise: ['Tag', Tag => Tag.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin', 'app.shared.wallet']).$promise
           ]
@@ -1137,7 +1134,6 @@ angular.module('application.router', ['ui.router']).
         }
       })
 
-
       // authentification providers
       .state('app.admin.authentication_new', {
         url: '/admin/authentications/new',
@@ -1148,9 +1144,9 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          mappingFieldsPromise: ['AuthProvider', AuthProvider=> AuthProvider.mapping_fields().$promise
+          mappingFieldsPromise: ['AuthProvider', AuthProvider => AuthProvider.mapping_fields().$promise
           ],
-          authProvidersPromise: ['AuthProvider', AuthProvider=> AuthProvider.query().$promise
+          authProvidersPromise: ['AuthProvider', AuthProvider => AuthProvider.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.authentication_new', 'app.shared.authentication', 'app.shared.oauth2']).$promise
           ]
@@ -1165,16 +1161,14 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          providerPromise: ['AuthProvider', '$stateParams', (AuthProvider, $stateParams)=> AuthProvider.get({id: $stateParams.id}).$promise
+          providerPromise: ['AuthProvider', '$stateParams', (AuthProvider, $stateParams) => AuthProvider.get({ id: $stateParams.id }).$promise
           ],
-          mappingFieldsPromise: ['AuthProvider', AuthProvider=> AuthProvider.mapping_fields().$promise
+          mappingFieldsPromise: ['AuthProvider', AuthProvider => AuthProvider.mapping_fields().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query(['app.admin.authentication_edit', 'app.shared.authentication', 'app.shared.oauth2']).$promise
           ]
         }
       })
-
-
 
       // statistics
       .state('app.admin.statistics', {
@@ -1188,7 +1182,7 @@ angular.module('application.router', ['ui.router']).
         resolve: {
           membersPromise: ['Member', Member => Member.mapping().$promise
           ],
-          statisticsPromise: ['Statistics', Statistics=> Statistics.query().$promise
+          statisticsPromise: ['Statistics', Statistics => Statistics.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.statistics').$promise
           ]
@@ -1218,8 +1212,8 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          settingsPromise: ['Setting', Setting=>
-            Setting.query({names: `[ \
+          settingsPromise: ['Setting', Setting =>
+            Setting.query({ names: `[ \
 'twitter_name', \
 'about_title', \
 'about_body', \
@@ -1247,16 +1241,16 @@ angular.module('application.router', ['ui.router']).
 'visibility_others', \
 'display_name_enable', \
 'machines_sort_by' \
-]`}).$promise
-          
+]` }).$promise
+
           ],
-          cguFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'cgu-file'}).$promise
+          cguFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'cgu-file' }).$promise
           ],
-          cgvFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'cgv-file'}).$promise
+          cgvFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'cgv-file' }).$promise
           ],
-          faviconFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'favicon-file'}).$promise
+          faviconFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'favicon-file' }).$promise
           ],
-          profileImageFile: ['CustomAsset', CustomAsset => CustomAsset.get({name: 'profile-image-file'}).$promise
+          profileImageFile: ['CustomAsset', CustomAsset => CustomAsset.get({ name: 'profile-image-file' }).$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.settings').$promise
           ]
@@ -1273,12 +1267,12 @@ angular.module('application.router', ['ui.router']).
           }
         },
         resolve: {
-          clientsPromise: ['OpenAPIClient', OpenAPIClient=> OpenAPIClient.query().$promise
+          clientsPromise: ['OpenAPIClient', OpenAPIClient => OpenAPIClient.query().$promise
           ],
           translations: [ 'Translations', Translations => Translations.query('app.admin.open_api_clients').$promise
           ]
         }
-      });
+      })
   }
 
-]);
+  ])
