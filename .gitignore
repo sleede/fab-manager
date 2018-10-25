@@ -45,3 +45,6 @@
 
 # Plugins are versioned is their own repository
 /plugins/*
+
+# Ignore node.js dev dependencies
+/node_modules
