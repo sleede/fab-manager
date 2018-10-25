@@ -333,10 +333,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     // Open the modal window allowing the user to log in.
     // #
     var openLoginModal = function (toState, toParams, callback) {
-      // <% active_provider = AuthProvider.active %>
-      // <% if active_provider.providable_type != DatabaseProvider.name %>
+      <% active_provider = AuthProvider.active %>
+      <% if active_provider.providable_type != DatabaseProvider.name %>
       $window.location.href = '<%=user_omniauth_authorize_path(AuthProvider.active.strategy_name.to_sym)%>'
-      // <% else %>
+      <% else %>
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/deviseModal.html" %>',
         size: 'sm',
@@ -414,7 +414,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     }
 
     // otherwise the user just closed the modal
-    // <% end %>
+    <% end %>
 
     // #
     // Detect if the current page (tab/window) is active of put as background.
