@@ -31,7 +31,7 @@ Application.Controllers.controller "EventsController", ["$scope", "$state", 'Eve
     theme_id: null
     age_range_id: null
 
-  $scope.monthNames = [<%= t('date.month_names')[1..-1].map { |m| "\"#{m}\"" }.join(', ') %>]
+  # $scope.monthNames = [<%= t('date.month_names')[1..-1].map { |m| "\"#{m}\"" }.join(', ') %>]
 
   ##
   # Adds a resultset of events to the bottom of the page, grouped by month

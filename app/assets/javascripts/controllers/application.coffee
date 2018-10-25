@@ -302,10 +302,10 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
   # Open the modal window allowing the user to log in.
   ##
   openLoginModal = (toState, toParams, callback) ->
-  <% active_provider = AuthProvider.active %>
-  <% if active_provider.providable_type != DatabaseProvider.name %>
+  # <% active_provider = AuthProvider.active %>
+  # <% if active_provider.providable_type != DatabaseProvider.name %>
     $window.location.href = '<%=user_omniauth_authorize_path(AuthProvider.active.strategy_name.to_sym)%>'
-  <% else %>
+  # <% else %>
     $uibModal.open
       templateUrl: '<%= asset_path "shared/deviseModal.html" %>'
       size: 'sm'
@@ -371,7 +371,7 @@ Application.Controllers.controller 'ApplicationController', ["$rootScope", "$sco
           growl.info(_t('you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password'))
 
   # otherwise the user just closed the modal
-  <% end %>
+  # <% end %>
 
 
 
