@@ -12,7 +12,6 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
 
 Application.Controllers.controller('EventsController', ['$scope', '$state', 'Event', 'categoriesPromise', 'themesPromise', 'ageRangesPromise',
   function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) {
@@ -170,7 +169,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Callback to delete the provided event (admins only)
      * @param event {$resource} angular's Event $resource
      */
-    $scope.deleteEvent = event =>
+    $scope.deleteEvent = function (event) {
       dialogs.confirm({
         resolve: {
           object () {
@@ -444,12 +443,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     /**
      * Return the URL allowing to share the current project on the Facebook social network
      */
-    $scope.shareOnFacebook = () => `https://www.facebook.com/share.php?u=${$state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }).replace('#', '%23')}`
+    $scope.shareOnFacebook =  function () { return `https://www.facebook.com/share.php?u=${$state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }).replace('#', '%23')}`; }
 
     /**
      * Return the URL allowing to share the current project on the Twitter social network
      */
-    $scope.shareOnTwitter = () => `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }))}&text=${encodeURIComponent($scope.event.title)}`
+    $scope.shareOnTwitter =  function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }))}&text=${encodeURIComponent($scope.event.title)}`; }
 
     /**
      * Return the textual description of the conditions applyable to the given price's category
@@ -498,8 +497,13 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservable_type {string} 'Event'
      * @param user_id {number} the user's id (current or managed)
      */
-    var getReservations = (reservable_id, reservable_type, user_id) =>
-      Reservation.query({ reservable_id, reservable_type, user_id }).$promise.then(reservations => $scope.reservations = reservations)
+    var getReservations = function (reservable_id, reservable_type, user_id) {
+      Reservation.query({
+        reservable_id,
+        reservable_type,
+        user_id
+      }).$promise.then(function (reservations) { $scope.reservations = reservations })
+    };
 
     /**
      * Create an hash map implementing the Reservation specs
@@ -582,7 +586,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Open a modal window which trigger the stripe payment process
      * @param reservation {Object} to book
      */
-    var payByStripe = reservation =>
+    var payByStripe = function (reservation) {
       $uibModal.open({
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
         size: 'md',
@@ -654,7 +658,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * Open a modal window which trigger the local payment process
      * @param reservation {Object} to book
      */
-    var payOnSite = reservation =>
+    var payOnSite = function (reservation) {
       $uibModal.open({
         templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>',
         size: 'sm',

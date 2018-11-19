@@ -30,10 +30,10 @@
  * Requires :
  *  - $scope.machine.machine_files_attributes = []
  *  - $state (Ui-Router) [ 'app.public.machines_list' ]
-/*
+ */
 class MachinesController {
   constructor ($scope, $state) {
-    /*
+    /**
      * For use with ngUpload (https://github.com/twilson63/ngUpload).
      * Intended to be the callback when the upload is done: any raised error will be stacked in the
      * $scope.alerts array. If everything goes fine, the user is redirected to the machines list.
@@ -42,14 +42,14 @@ class MachinesController {
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
-        return angular.forEach(content, (v, k) =>
-          angular.forEach(v, err =>
+        angular.forEach(content, function (v, k) {
+          angular.forEach(function (v, err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'
             })
-          )
-        )
+          })
+        })
       } else {
         return $state.go('app.public.machines_list')
       }
@@ -58,7 +58,7 @@ class MachinesController {
     /**
      * Changes the current user's view, redirecting him to the machines list
      */
-    $scope.cancel = () => $state.go('app.public.machines_list')
+    $scope.cancel = function () { $state.go('app.public.machines_list') }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -76,7 +76,7 @@ class MachinesController {
     /**
      * This will create a single new empty entry into the machine attachements list.
      */
-    $scope.addFile = () => $scope.machine.machine_files_attributes.push({})
+    $scope.addFile =  function () { $scope.machine.machine_files_attributes.push({}) }
 
     /**
      * This will remove the given file from the machine attachements list. If the file was previously uploaded
@@ -124,14 +124,14 @@ const _reserveMachine = function (machine, e) {
             templateUrl: '<%= asset_path "machines/training_reservation_modal.html" %>',
             controller: ['$scope', '$uibModalInstance', '$state', function ($scope, $uibModalInstance, $state) {
               $scope.machine = machine
-              return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+              return $scope.cancel =  function () { $uibModalInstance.dismiss('cancel') }
             }
             ] })
         // ... but does not have booked the training, tell him to register for a training session first
         // unless all associated trainings are disabled
         } else {
           // if all trainings are disabled, just redirect the user to the reservation calendar
-          if (machine.trainings.map(t => t.disabled).reduce((acc, val) => acc && val, true)) {
+          if (machine.trainings.map(function (t) { return t.disabled }).reduce(function (acc, val) { return acc && val; }, true)) {
             return _this.$state.go('app.logged.machines_reserve', { id: machine.slug })
           // otherwise open the information modal
           } else {
@@ -187,7 +187,7 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
   /**
    * Redirect the user to the machine details page
    */
-  $scope.showMachine = machine => $state.go('app.public.machines_show', { id: machine.slug })
+  $scope.showMachine = function (machine) { $state.go('app.public.machines_show', { id: machine.slug }) }
 
   /**
    * Callback to book a reservation for the current machine
@@ -279,9 +279,9 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
     $scope.delete = function (machine) {
     // check the permissions
       if ($scope.currentUser.role !== 'admin') {
-        return console.error(_t('unauthorized_operation'))
+        console.error(_t('unauthorized_operation'))
       } else {
-        return dialogs.confirm({
+        dialogs.confirm({
           resolve: {
             object () {
               return {
@@ -291,11 +291,13 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
             }
           }
         }
-        , () => // deletion confirmed
+        ,  function () { // deletion confirmed
         // delete the machine then redirect to the machines listing
-          machine.$delete(() => $state.go('app.public.machines_list')
-            , error => growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users')))
-        )
+          machine.$delete(
+            function () { $state.go('app.public.machines_list') },
+            function (error) { growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users')); console.error(error); }
+          )
+        });
       }
     }
 
@@ -424,7 +426,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     /**
      * Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
      */
-    $scope.slotCancelled = () => $scope.markSlotAsRemoved($scope.selectedEvent)
+    $scope.slotCancelled =  function () { $scope.markSlotAsRemoved($scope.selectedEvent) }
 
     /**
      * Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
@@ -492,7 +494,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     $scope.updateMember = function () {
       $scope.plansAreShown = false
       $scope.selectedPlan = null
-      return Member.get({ id: $scope.ctrl.member.id }, member => $scope.ctrl.member = member)
+      Member.get({ id: $scope.ctrl.member.id }, function (member) { $scope.ctrl.member = member; })
     }
 
     /**
@@ -509,7 +511,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     /**
      * Switch the user's view from the reservation agenda to the plan subscription
      */
-    $scope.showPlans = () => $scope.plansAreShown = true
+    $scope.showPlans =  function () { $scope.plansAreShown = true }
 
     /**
      * Add the provided plan to the current shopping cart
@@ -559,7 +561,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     /**
      * To use as callback in Array.prototype.filter to get only enabled plans
      */
-    $scope.filterDisabledPlans = plan => !plan.disabled
+    $scope.filterDisabledPlans = function (plan) { return !plan.disabled }
 
     /* PRIVATE SCOPE */
 
@@ -567,12 +569,12 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-      Availability.machine({ machineId: $stateParams.id }, availabilities =>
+      Availability.machine({ machineId: $stateParams.id }, function (availabilities) {
         $scope.eventSources.push({
           events: availabilities,
           textColor: 'black'
         })
-      )
+      })
 
       if ($scope.currentUser.role !== 'admin') {
         return $scope.ctrl.member = $scope.currentUser
@@ -613,27 +615,29 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * @param reservation {Object}
      * @param user {Object} user associated with the slot
      */
-    var updateMachineSlot = (slot, reservation, user) =>
+    var updateMachineSlot = function (slot, reservation, user) {
       angular.forEach(reservation.slots, function (s) {
         if (slot.start.isSame(s.start_at)) {
           slot.id = s.id
           return slot.user = user
         }
       })
+    }
 
     /**
      * Update the calendar's display to render the new attributes of the events
      */
-    var updateCalendar = () => uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents')
+    var updateCalendar =  function () { uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents') }
 
     /**
      * Asynchronously fetch the events from the API and refresh the calendar's view with these new events
      */
-    var refetchCalendar = () =>
+    var refetchCalendar = function () {
       $timeout(function () {
         uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
         return uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents')
       })
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
