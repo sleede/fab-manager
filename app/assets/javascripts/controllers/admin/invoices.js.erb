@@ -14,9 +14,9 @@
  */
 'use strict'
 
-// #
-// Controller used in the admin invoices listing page
-// #
+/**
+ * Controller used in the admin invoices listing page
+ */
 Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'invoices', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
   function ($scope, $state, Invoice, invoices, $uibModal, growl, $filter, Setting, settings, _t) {
   /* PRIVATE STATIC CONSTANTS */
@@ -26,7 +26,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     /* PUBLIC SCOPE */
 
-    // # List of all users invoices
+    // List of all users invoices
     $scope.invoices = invoices
 
     // Invoices filters
@@ -42,10 +42,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     // true when all invoices are loaded
     $scope.noMoreResults = false
 
-    // # Default invoices ordering/sorting
+    // Default invoices ordering/sorting
     $scope.orderInvoice = '-reference'
 
-    // # Invoices parameters
+    // Invoices parameters
     $scope.invoice = {
       logo: null,
       reference: {
@@ -76,19 +76,19 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       }
     }
 
-    // # Placeholding date for the invoice creation
+    // Placeholding date for the invoice creation
     $scope.today = moment()
 
-    // # Placeholding date for the reservation begin
+    // Placeholding date for the reservation begin
     $scope.inOneWeek = moment().add(1, 'week').startOf('hour')
 
-    // # Placeholding date for the reservation end
+    // Placeholding date for the reservation end
     $scope.inOneWeekAndOneHour = moment().add(1, 'week').add(1, 'hour').startOf('hour')
 
-    // #
-    // Change the invoices ordering criterion to the one provided
-    // @param orderBy {string} ordering criterion
-    // #
+    /**
+     * Change the invoices ordering criterion to the one provided
+     * @param orderBy {string} ordering criterion
+     */
     $scope.setOrderInvoice = function (orderBy) {
       if ($scope.orderInvoice === orderBy) {
         $scope.orderInvoice = `-${orderBy}`
@@ -100,10 +100,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return invoiceSearch()
     }
 
-    // #
-    // Open a modal window asking the admin the details to refund the user about the provided invoice
-    // @param invoice {Object} invoice inherited from angular's $resource
-    // #
+    /**
+     * Open a modal window asking the admin the details to refund the user about the provided invoice
+     * @param invoice {Object} invoice inherited from angular's $resource
+     */
     $scope.generateAvoirForInvoice = function (invoice) {
     // open modal
       const modalInstance = $uibModal.open({
@@ -124,10 +124,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       })
     }
 
-    // #
-    // Generate an invoice reference sample from the parametrized model
-    // @returns {string} invoice reference sample
-    // #
+    /**
+     * Generate an invoice reference sample from the parametrized model
+     * @returns {string} invoice reference sample
+     */
     $scope.mkReference = function () {
       let sample = $scope.invoice.reference.model
       if (sample) {
@@ -149,10 +149,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return sample
     }
 
-    // #
-    // Generate an order nmuber sample from the parametrized model
-    // @returns {string} invoice reference sample
-    // #
+    /**
+     * Generate an order nmuber sample from the parametrized model
+     * @returns {string} invoice reference sample
+     */
     $scope.mkNumber = function () {
       let sample = $scope.invoice.number.model
       if (sample) {
@@ -170,9 +170,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return sample
     }
 
-    // #
-    // Open a modal dialog allowing the user to edit the invoice reference generation template
-    // #
+    /**
+     * Open a modal dialog allowing the user to edit the invoice reference generation template
+     */
     $scope.openEditReference = function () {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -202,9 +202,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       )
     }
 
-    // #
-    // Open a modal dialog allowing the user to edit the invoice code
-    // #
+    /**
+     * Open a modal dialog allowing the user to edit the invoice code
+     */
     $scope.openEditCode = function () {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -254,9 +254,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       })
     }
 
-    // #
-    // Open a modal dialog allowing the user to edit the invoice number
-    // #
+    /**
+     * Open a modal dialog allowing the user to edit the invoice number
+     */
     $scope.openEditInvoiceNb = function () {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -286,10 +286,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       )
     }
 
-    // #
-    // Open a modal dialog allowing the user to edit the VAT parameters for the invoices
-    // The VAT can be disabled and its rate can be configured
-    // #
+    /**
+     * Open a modal dialog allowing the user to edit the VAT parameters for the invoices
+     * The VAT can be disabled and its rate can be configured
+     */
     $scope.openEditVAT = function () {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -339,9 +339,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       })
     }
 
-    // #
-    // Callback to save the value of the text zone when editing is done
-    // #
+    /**
+     * Callback to save the value of the text zone when editing is done
+     */
     $scope.textEditEnd = function (event) {
       const parsed = parseHtml($scope.invoice.text.content)
       return Setting.update({ name: 'invoice_text' }, { value: parsed }, function (data) {
@@ -354,9 +354,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       })
     }
 
-    // #
-    // Callback to save the value of the legal information zone when editing is done
-    // #
+    /**
+     * Callback to save the value of the legal information zone when editing is done
+     */
     $scope.legalsEditEnd = function (event) {
       const parsed = parseHtml($scope.invoice.legals.content)
       return Setting.update({ name: 'invoice_legals' }, { value: parsed }, function (data) {
@@ -369,19 +369,19 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       })
     }
 
-    // #
-    // Callback when any of the filters changes.
-    // Full reload the results list
-    // #
+    /**
+     * Callback when any of the filters changes.
+     * Full reload the results list
+     */
     $scope.handleFilterChange = function () {
       resetSearchInvoice()
       return invoiceSearch()
     }
 
-    // #
-    // Callback for the 'load more' button.
-    // Will load the next results of the current search, if any
-    // #
+    /**
+     * Callback for the 'load more' button.
+     * Will load the next results of the current search, if any
+     */
     $scope.showNextInvoices = function () {
       $scope.page += 1
       return invoiceSearch(true)
@@ -389,9 +389,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       if (!invoices[0] || (invoices[0].maxInvoices <= $scope.invoices.length)) {
         $scope.noMoreResults = true
@@ -424,20 +424,20 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       })
     }
 
-    // #
-    // Output the given integer with leading zeros. If the given value is longer than the given
-    // length, it will be truncated.
-    // @param value {number} the integer to pad
-    // @param length {number} the length of the resulting string.
-    // #
+    /**
+     * Output the given integer with leading zeros. If the given value is longer than the given
+     * length, it will be truncated.
+     * @param value {number} the integer to pad
+     * @param length {number} the length of the resulting string.
+     */
     var padWithZeros = (value, length) => (1e15 + value + '').slice(-length)
 
-    // #
-    // Remove every unsupported html tag from the given html text (like <p>, <span>, ...).
-    // The supported tags are <b>, <u>, <i> and <br>.
-    // @param html {string} single line html text
-    // @return {string} multi line simplified html text
-    // #
+    /**
+     * Remove every unsupported html tag from the given html text (like <p>, <span>, ...).
+     * The supported tags are <b>, <u>, <i> and <br>.
+     * @param html {string} single line html text
+     * @return {string} multi line simplified html text
+     */
     var parseHtml = html =>
       html = html.replace(/<\/?(\w+)((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g, function (match, p1, offset, string) {
         if (['b', 'u', 'i', 'br'].includes(p1)) {
@@ -447,19 +447,19 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
       })
 
-    // #
-    // Reinitialize the context of invoices' search to display new results set
-    // #
+    /**
+     * Reinitialize the context of invoices' search to display new results set
+     */
     var resetSearchInvoice = function () {
       $scope.page = 1
       return $scope.noMoreResults = false
     }
 
-    // #
-    // Run a search query with the current parameters set concerning invoices, then affect or concat the results
-    // to $scope.invoices
-    // @param concat {boolean} if true, the result will be append to $scope.invoices instead of being affected
-    // #
+    /**
+     * Run a search query with the current parameters set concerning invoices, then affect or concat the results
+     * to $scope.invoices
+     * @param concat {boolean} if true, the result will be append to $scope.invoices instead of being affected
+     */
     var invoiceSearch = concat =>
       Invoice.list({
         query: {
@@ -482,32 +482,32 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
       })
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
 
-// #
-// Controller used in the invoice refunding modal window
-// #
+/**
+ * Controller used in the invoice refunding modal window
+ */
 Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'Invoice', 'growl', '_t',
   function ($scope, $uibModalInstance, invoice, Invoice, growl, _t) {
   /* PUBLIC SCOPE */
 
-    // # invoice linked to the current refund
+    // invoice linked to the current refund
     $scope.invoice = invoice
 
-    // # Associative array containing invoice_item ids associated with boolean values
+    // Associative array containing invoice_item ids associated with boolean values
     $scope.partial = {}
 
-    // # Default refund parameters
+    // Default refund parameters
     $scope.avoir = {
       invoice_id: invoice.id,
       subscription_to_expire: false,
       invoice_items_ids: []
     }
 
-    // # Possible refunding methods
+    // Possible refunding methods
     $scope.avoirModes = [
       { name: _t('none'), value: 'none' },
       { name: _t('by_cash'), value: 'cash' },
@@ -516,12 +516,12 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       { name: _t('by_wallet'), value: 'wallet' }
     ]
 
-    // # If a subscription was took with the current invoice, should it be canceled or not
+    // If a subscription was took with the current invoice, should it be canceled or not
     $scope.subscriptionExpireOptions = {}
     $scope.subscriptionExpireOptions[_t('yes')] = true
     $scope.subscriptionExpireOptions[_t('no')] = false
 
-    // # AngularUI-Bootstrap datepicker parameters to define when to refund
+    // AngularUI-Bootstrap datepicker parameters to define when to refund
     $scope.datePicker = {
       format: Fablab.uibDateFormat,
       opened: false, // default: datePicker is not shown
@@ -530,18 +530,18 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       }
     }
 
-    // #
-    // Callback to open the datepicker
-    // #
+    /**
+     * Callback to open the datepicker
+     */
     $scope.openDatePicker = function ($event) {
       $event.preventDefault()
       $event.stopPropagation()
       return $scope.datePicker.opened = true
     }
 
-    // #
-    // Validate the refunding and generate a refund invoice
-    // #
+    /**
+     * Validate the refunding and generate a refund invoice
+     */
     $scope.ok = function () {
     // check that at least 1 element of the invoice is refunded
       $scope.avoir.invoice_items_ids = []
@@ -564,18 +564,18 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       }
     }
 
-    // #
-    // Cancel the refund, dismiss the modal window
-    // #
+    /**
+     * Cancel the refund, dismiss the modal window
+     */
     $scope.cancel = () => $uibModalInstance.dismiss('cancel')
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
-    // # if the invoice was payed with stripe, allow to refund through stripe
+    // if the invoice was payed with stripe, allow to refund through stripe
       Invoice.get({ id: invoice.id }, function (data) {
         $scope.invoice = data
         // default : all elements of the invoice are refund
@@ -588,7 +588,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       }
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

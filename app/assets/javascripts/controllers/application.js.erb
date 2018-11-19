@@ -22,17 +22,17 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
     /* PUBLIC SCOPE */
 
-    // # Fab-manager's version
+    // Fab-manager's version
     $scope.version =
       { version: '' }
 
-    // # currency symbol for the current locale (cf. angular-i18n)
+    // currency symbol for the current locale (cf. angular-i18n)
     $rootScope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
 
-    // #
-    // Set the current user to the provided value and initialize the session
-    // @param user {Object} Rails/Devise user
-    // #
+    /**
+     * Set the current user to the provided value and initialize the session
+     * @param user {Object} Rails/Devise user
+     */
     $scope.setCurrentUser = function (user) {
       if (!angular.isUndefinedOrNull(user)) {
         $rootScope.currentUser = user
@@ -47,20 +47,20 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       }
     }
 
-    // #
-    // Login callback
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // @param callback {function}
-    // #
+    /**
+     * Login callback
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     * @param callback {function}
+     */
     $scope.login = function (e, callback) {
       if (e) { e.preventDefault() }
       return openLoginModal(null, null, callback)
     }
 
-    // #
-    // Logout callback
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Logout callback
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.logout = function (e) {
       e.preventDefault()
       return Auth.logout().then(function (oldUser) {
@@ -78,10 +78,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     }
     // An error occurred logging out.
 
-    // #
-    // Open the modal window allowing the user to create an account.
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Open the modal window allowing the user to create an account.
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.signup = function (e) {
       if (e) { e.preventDefault() }
 
@@ -156,10 +156,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         )
     }
 
-    // #
-    // Open the modal window allowing the user to change his password.
-    // @param token {string} security token for password changing. The user should have recieved it by mail
-    // #
+    /**
+     * Open the modal window allowing the user to change his password.
+     * @param token {string} security token for password changing. The user should have recieved it by mail
+     */
     $scope.editPassword = token =>
       $uibModal.open({
         templateUrl: '<%= asset_path "shared/passwordEditModal.html" %>',
@@ -193,10 +193,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
     // Authentication failed...
 
-    // #
-    // Compact/Expend the width of the left navigation bar
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Compact/Expend the width of the left navigation bar
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.toggleNavSize = function (event) {
       let $classes, $targets
       if (typeof event === 'undefined') {
@@ -242,9 +242,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     }
 
     /* PRIVATE SCOPE */
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
     // try to retrieve any currently logged user
       Auth.login().then(function (user) {
@@ -288,10 +288,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       return $rootScope.login = $scope.login
     }
 
-    // #
-    // Retreive once the notifications from the server and display a message popup for each new one.
-    // Then, periodically check for new notifications.
-    // #
+    /**
+     * Retreive once the notifications from the server and display a message popup for each new one.
+     * Then, periodically check for new notifications.
+     */
     var getNotifications = function () {
       $rootScope.toCheckNotifications = true
       if (!$rootScope.checkNotificationsIsInit && !!$rootScope.currentUser) {
@@ -329,9 +329,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       }
     }
 
-    // #
-    // Open the modal window allowing the user to log in.
-    // #
+    /**
+     * Open the modal window allowing the user to log in.
+     */
     var openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
@@ -416,11 +416,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     // otherwise the user just closed the modal
     <% end %>
 
-    // #
-    // Detect if the current page (tab/window) is active of put as background.
-    // When the status changes, the callback is triggered with the new status as parameter
-    // Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
-    // #
+    /**
+     * Detect if the current page (tab/window) is active of put as background.
+     * When the status changes, the callback is triggered with the new status as parameter
+     * Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
+     */
     var onPageVisible = function (callback) {
       let hidden = 'hidden'
 
@@ -465,7 +465,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       }
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

@@ -16,27 +16,27 @@
 
 /* COMMON CODE */
 
-// #
-// Provides a set of common callback methods to the $scope parameter. These methods are used
-// in the various trainings' admin controllers.
-//
-// Provides :
-//  - $scope.submited(content)
-//  - $scope.fileinputClass(v)
-//  - $scope.onDisableToggled
-//
-// Requires :
-//  - $state (Ui-Router) [ 'app.admin.trainings' ]
-//  - $scope.training
-// #
+/**
+ * Provides a set of common callback methods to the $scope parameter. These methods are used
+ * in the various trainings' admin controllers.
+ *
+ * Provides :
+ *  - $scope.submited(content)
+ *  - $scope.fileinputClass(v)
+ *  - $scope.onDisableToggled
+ *
+ * Requires :
+ *  - $state (Ui-Router) [ 'app.admin.trainings' ]
+ *  - $scope.training
+/*
 class TrainingsController {
   constructor ($scope, $state) {
-    // #
-    // For use with ngUpload (https://github.com/twilson63/ngUpload).
-    // Intended to be the callback when the upload is done: any raised error will be stacked in the
-    // $scope.alerts array. If everything goes fine, the user is redirected to the trainings list.
-    // @param content {Object} JSON - The upload's result
-    // #
+    /*
+     * For use with ngUpload (https://github.com/twilson63/ngUpload).
+     * Intended to be the callback when the upload is done: any raised error will be stacked in the
+     * $scope.alerts array. If everything goes fine, the user is redirected to the trainings list.
+     * @param content {Object} JSON - The upload's result
+     */
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
@@ -53,21 +53,21 @@ class TrainingsController {
       }
     }
 
-    // #
-    // Changes the current user's view, redirecting him to the machines list
-    // #
+    /**
+     * Changes the current user's view, redirecting him to the machines list
+     */
     $scope.cancel = () => $state.go('app.admin.trainings')
 
-    // #
-    // Force the 'public_page' attribute to false when the current training is disabled
-    // #
+    /**
+     * Force the 'public_page' attribute to false when the current training is disabled
+     */
     $scope.onDisableToggled = () => $scope.training.public_page = !$scope.training.disabled
 
-    // #
-    // For use with 'ng-class', returns the CSS class name for the uploads previews.
-    // The preview may show a placeholder or the content of the file depending on the upload state.
-    // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    // #
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
     $scope.fileinputClass = function (v) {
       if (v) {
         return 'fileinput-exists'
@@ -78,117 +78,117 @@ class TrainingsController {
   }
 }
 
-// #
-// Controller used in the training creation page (admin)
-// #
+/**
+ * Controller used in the training creation page (admin)
+ */
 Application.Controllers.controller('NewTrainingController', [ '$scope', '$state', 'machinesPromise', 'CSRF',
   function ($scope, $state, machinesPromise, CSRF) {
   /* PUBLIC SCOPE */
 
-    // # Form action on the following URL
+    // Form action on the following URL
     $scope.method = 'post'
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = '/api/trainings/'
 
-    // # list of machines
+    // list of machines
     $scope.machines = machinesPromise
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       CSRF.setMetaTags()
 
-      // # Using the TrainingsController
+      // Using the TrainingsController
       return new TrainingsController($scope, $state)
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
 
-// #
-// Controller used in the training edition page (admin)
-// #
+/**
+ * Controller used in the training edition page (admin)
+ */
 Application.Controllers.controller('EditTrainingController', [ '$scope', '$state', '$stateParams', 'trainingPromise', 'machinesPromise', 'CSRF',
   function ($scope, $state, $stateParams, trainingPromise, machinesPromise, CSRF) {
   /* PUBLIC SCOPE */
 
-    // # Form action on the following URL
+    // Form action on the following URL
     $scope.method = 'patch'
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = `/api/trainings/${$stateParams.id}`
 
-    // # Details of the training to edit (id in URL)
+    // Details of the training to edit (id in URL)
     $scope.training = trainingPromise
 
-    // # list of machines
+    // list of machines
     $scope.machines = machinesPromise
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       CSRF.setMetaTags()
 
-      // # Using the TrainingsController
+      // Using the TrainingsController
       return new TrainingsController($scope, $state)
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
 
-// #
-// Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
-// #
+/**
+ * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
+ */
 Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs',
   function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs) {
   /* PUBLIC SCOPE */
 
-    // # list of trainings
+    // list of trainings
     let groupAvailabilities
     $scope.trainings = trainingsPromise
 
-    // # simplified list of machines
+    // simplified list of machines
     $scope.machines = machinesPromise
 
-    // # Training to monitor, binded with drop-down selection
+    // Training to monitor, binded with drop-down selection
     $scope.monitoring =
     { training: null }
 
-    // # list of training availabilies, grouped by date
+    // list of training availabilies, grouped by date
     $scope.groupedAvailabilities = {}
 
-    // # default: accordions are not open
+    // default: accordions are not open
     $scope.accordions = {}
 
-    // # Binding for the parseInt function
+    // Binding for the parseInt function
     $scope.parseInt = parseInt
 
-    // # Default: we show only enabled trainings
+    // Default: we show only enabled trainings
     $scope.trainingFiltering = 'enabled'
 
-    // # Available options for filtering trainings by status
+    // Available options for filtering trainings by status
     $scope.filterDisabled = [
       'enabled',
       'disabled',
       'all'
     ]
 
-    // #
-    // In the trainings listing tab, return the stringified list of machines associated with the provided training
-    // @param training {Object} Training object, inherited from $resource
-    // @returns {string}
-    // #
+    /**
+     * In the trainings listing tab, return the stringified list of machines associated with the provided training
+     * @param training {Object} Training object, inherited from $resource
+     * @returns {string}
+     */
     $scope.showMachines = function (training) {
       const selected = []
       angular.forEach($scope.machines, function (m) {
@@ -199,11 +199,11 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       if (selected.length) { return selected.join(', ') } else { return _t('none') }
     }
 
-    // #
-    // Removes the newly inserted but not saved training / Cancel the current training modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // @param index {number} training index in the $scope.trainings array
-    // #
+    /**
+     * Removes the newly inserted but not saved training / Cancel the current training modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} training index in the $scope.trainings array
+     */
     $scope.cancelTraining = function (rowform, index) {
       if ($scope.trainings[index].id != null) {
         return rowform.$cancel()
@@ -212,13 +212,13 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       }
     }
 
-    // #
-    // In the trainings monitoring tab, callback to open a modal window displaying the current bookings for the
-    // provided training slot. The admin will be then able to validate the training for the users that followed
-    // the training.
-    // @param training {Object} Training object, inherited from $resource
-    // @param availability {Object} time slot when the training occurs
-    // #
+    /**
+     * In the trainings monitoring tab, callback to open a modal window displaying the current bookings for the
+     * provided training slot. The admin will be then able to validate the training for the users that followed
+     * the training.
+     * @param training {Object} Training object, inherited from $resource
+     * @param availability {Object} time slot when the training occurs
+     */
     $scope.showReservations = (training, availability) =>
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/trainings/validTrainingModal.html" %>',
@@ -227,10 +227,10 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
 
           $scope.usersToValid = []
 
-          // #
-          // Mark/unmark the provided user for training validation
-          // @param user {Object} from the availability.reservation_users list
-          // #
+          /**
+           * Mark/unmark the provided user for training validation
+           * @param user {Object} from the availability.reservation_users list
+           */
           $scope.toggleSelection = function (user) {
             const index = $scope.usersToValid.indexOf(user)
             if (index > -1) {
@@ -240,9 +240,9 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
             }
           }
 
-          // #
-          // Validates the modifications (training validations) and save them to the server
-          // #
+          /**
+           * Validates the modifications (training validations) and save them to the server
+           */
           $scope.ok = function () {
             const users = $scope.usersToValid.map(u => u.id)
             return Training.update({ id: training.id }, {
@@ -257,18 +257,18 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
             })
           }
 
-          // #
-          // Cancel the modifications and close the modal window
-          // #
+          /**
+           * Cancel the modifications and close the modal window
+           */
           return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
         }
         ] })
 
-    // #
-    // Delete the provided training and, in case of sucess, remove it from the trainings list afterwards
-    // @param index {number} index of the provided training in $scope.trainings
-    // @param training {Object} training to delete
-    // #
+    /**
+     * Delete the provided training and, in case of sucess, remove it from the trainings list afterwards
+     * @param index {number} index of the provided training in $scope.trainings
+     * @param training {Object} training to delete
+     */
     $scope.removeTraining = (index, training) =>
       dialogs.confirm({
         resolve: {
@@ -288,23 +288,23 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
         , error => growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it')))
       )
 
-    // #
-    // Takes a month number and return its localized literal name
-    // @param {Number} from 0 to 11
-    // @returns {String} eg. 'janvier'
-    // #
+    /**
+     * Takes a month number and return its localized literal name
+     * @param {Number} from 0 to 11
+     * @returns {String} eg. 'janvier'
+     */
     $scope.formatMonth = function (number) {
       number = parseInt(number)
       return moment().month(number).format('MMMM')
     }
 
-    // #
-    // Given a day, month and year, return a localized literal name for the day
-    // @param day {Number} from 1 to 31
-    // @param month {Number} from 0 to 11
-    // @param year {Number} Gregorian's year number
-    // @returns {String} eg. 'mercredi 12'
-    // #
+    /**
+     * Given a day, month and year, return a localized literal name for the day
+     * @param day {Number} from 1 to 31
+     * @param month {Number} from 0 to 11
+     * @param year {Number} Gregorian's year number
+     * @returns {String} eg. 'mercredi 12'
+     */
     $scope.formatDay = function (day, month, year) {
       day = parseInt(day)
       month = parseInt(month)
@@ -313,10 +313,10 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       return moment({ year, month, day }).format('dddd D')
     }
 
-    // #
-    // Callback when the drop-down selection is changed.
-    // The selected training details will be loaded from the API and rendered into the accordions.
-    // #
+    /**
+     * Callback when the drop-down selection is changed.
+     * The selected training details will be loaded from the API and rendered into the accordions.
+     */
     $scope.selectTrainingToMonitor = () =>
       Training.availabilities({ id: $scope.monitoring.training.id }, function (training) {
         $scope.groupedAvailabilities = groupAvailabilities([training])
@@ -331,11 +331,11 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Group the trainings availabilites by trainings and by dates and return the resulting tree
-    // @param trainings {Array} $scope.trainings is expected here
-    // @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
-    // #
+    /**
+     * Group the trainings availabilites by trainings and by dates and return the resulting tree
+     * @param trainings {Array} $scope.trainings is expected here
+     * @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
+     */
     return groupAvailabilities = function (trainings) {
       const tree = {}
       for (let training of Array.from(trainings)) {

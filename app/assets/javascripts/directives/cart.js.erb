@@ -39,48 +39,48 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
       },
       templateUrl: '<%= asset_path "shared/_cart.html" %>',
       link ($scope, element, attributes) {
-      // # will store the user's plan if he choosed to buy one
+      // will store the user's plan if he choosed to buy one
         $scope.selectedPlan = null
 
-        // # total amount of the bill to pay
+        // total amount of the bill to pay
         $scope.amountTotal = 0
 
-        // # total amount of the elements in the cart, without considering any coupon
+        // total amount of the elements in the cart, without considering any coupon
         $scope.totalNoCoupon = 0
 
-        // # Discount coupon to apply to the basket, if any
+        // Discount coupon to apply to the basket, if any
         $scope.coupon =
         { applied: null }
 
-        // # Global config: is the user authorized to change his bookings slots?
+        // Global config: is the user authorized to change his bookings slots?
         $scope.enableBookingMove = ($scope.settings.booking_move_enable === 'true')
 
-        // # Global config: delay in hours before a booking while changing the booking slot is forbidden
+        // Global config: delay in hours before a booking while changing the booking slot is forbidden
         $scope.moveBookingDelay = parseInt($scope.settings.booking_move_delay)
 
-        // # Global config: is the user authorized to cancel his bookings?
+        // Global config: is the user authorized to cancel his bookings?
         $scope.enableBookingCancel = ($scope.settings.booking_cancel_enable === 'true')
 
-        // # Global config: delay in hours before a booking while the cancellation is forbidden
+        // Global config: delay in hours before a booking while the cancellation is forbidden
         $scope.cancelBookingDelay = parseInt($scope.settings.booking_cancel_delay)
 
-        // #
-        // Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
-        // and increment the total amount of the cart if needed.
-        // @param slot {Object} fullCalendar event object
-        // #
+        /**
+         * Add the provided slot to the shopping cart (state transition from free to 'about to be reserved')
+         * and increment the total amount of the cart if needed.
+         * @param slot {Object} fullCalendar event object
+         */
         $scope.validateSlot = function (slot) {
           slot.isValid = true
           return updateCartPrice()
         }
 
-        // #
-        // Remove the provided slot from the shopping cart (state transition from 'about to be reserved' to free)
-        // and decrement the total amount of the cart if needed.
-        // @param slot {Object} fullCalendar event object
-        // @param index {number} index of the slot in the reservation array
-        // @param [event] {Object} see https://docs.angularjs.org/guide/expression#-event-
-        // #
+        /**
+         * Remove the provided slot from the shopping cart (state transition from 'about to be reserved' to free)
+         * and decrement the total amount of the cart if needed.
+         * @param slot {Object} fullCalendar event object
+         * @param index {number} index of the slot in the reservation array
+         * @param [event] {Object} see https://docs.angularjs.org/guide/expression#-event-
+         */
         $scope.removeSlot = function (slot, index, event) {
           if (event) { event.preventDefault() }
           $scope.events.reserved.splice(index, 1)
@@ -94,10 +94,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return updateCartPrice()
         }
 
-        // #
-        // Checks that every selected slots were added to the shopping cart. Ie. will return false if
-        // any checked slot was not validated by the user.
-        // #
+        /**
+         * Checks that every selected slots were added to the shopping cart. Ie. will return false if
+         * any checked slot was not validated by the user.
+         */
         $scope.isSlotsValid = function () {
           let isValid = true
           angular.forEach($scope.events.reserved, function (m) {
@@ -106,9 +106,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return isValid
         }
 
-        // #
-        // Switch the user's view from the reservation agenda to the plan subscription
-        // #
+        /**
+         * Switch the user's view from the reservation agenda to the plan subscription
+         */
         $scope.showPlans = function () {
         // first, we ensure that a user was selected (admin) or logged (member)
           if (Object.keys($scope.user).length > 0) {
@@ -119,9 +119,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         }
 
-        // #
-        // Validates the shopping chart and redirect the user to the payment step
-        // #
+        /**
+         * Validates the shopping chart and redirect the user to the payment step
+         */
         $scope.payCart = function () {
         // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
@@ -143,9 +143,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         }
 
-        // #
-        // When modifying an already booked reservation, confirm the modification.
-        // #
+        /**
+         * When modifying an already booked reservation, confirm the modification.
+         */
         $scope.modifySlot = () =>
           Slot.update({ id: $scope.events.modifiable.id }, {
             slot: {
@@ -171,10 +171,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             return console.error(err)
           })
 
-        // #
-        // Cancel the current booking modification, reseting the whole process
-        // @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
-        // #
+        /**
+         * Cancel the current booking modification, reseting the whole process
+         * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+         */
         $scope.cancelModifySlot = function (event) {
           if (event) { event.preventDefault() }
           if (typeof $scope.onSlotModifyCancel === 'function') { $scope.onSlotModifyCancel() }
@@ -182,20 +182,20 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return $scope.events.modifiable = null
         }
 
-        // #
-        // When modifying an already booked reservation, cancel the choice of the new slot
-        // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-        // #
+        /**
+         * When modifying an already booked reservation, cancel the choice of the new slot
+         * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+         */
         $scope.removeSlotToPlace = function (e) {
           e.preventDefault()
           if (typeof $scope.onSlotModifyUnselect === 'function') { $scope.onSlotModifyUnselect() }
           return $scope.events.placable = null
         }
 
-        // #
-        // Checks if $scope.events.modifiable and $scope.events.placable have tag incompatibilities
-        // @returns {boolean} true in case of incompatibility
-        // #
+        /**
+         * Checks if $scope.events.modifiable and $scope.events.placable have tag incompatibilities
+         * @returns {boolean} true in case of incompatibility
+         */
         $scope.tagMissmatch = function () {
           if ($scope.events.placable.tag_ids.length === 0) { return false }
           for (let tag of Array.from($scope.events.modifiable.tags)) {
@@ -206,17 +206,17 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return false
         }
 
-        // #
-        // Check if the currently logged user has teh 'admin' role?
-        // @returns {boolean}
-        // #
+        /**
+         * Check if the currently logged user has teh 'admin' role?
+         * @returns {boolean}
+         */
         $scope.isAdmin = () => $rootScope.currentUser && ($rootScope.currentUser.role === 'admin')
 
         /* PRIVATE SCOPE */
 
-        // #
-        // Kind of constructor: these actions will be realized first when the directive is loaded
-        // #
+        /**
+         * Kind of constructor: these actions will be realized first when the directive is loaded
+         */
         const initialize = function () {
         // What the binded slot
           $scope.$watch('slotSelectionTime', function (newValue, oldValue) {
@@ -243,9 +243,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           })
         }
 
-        // #
-        // Callback triggered when the selected slot changed
-        // #
+        /**
+         * Callback triggered when the selected slot changed
+         */
         var slotSelectionChanged = function () {
           if ($scope.slot) {
             if (!$scope.slot.is_reserved && !$scope.events.modifiable && !$scope.slot.is_completed) {
@@ -328,9 +328,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         }
 
-        // #
-        // Reset the parameters that may lead to a wrong price but leave the content (events added to cart)
-        // #
+        /**
+         * Reset the parameters that may lead to a wrong price but leave the content (events added to cart)
+         */
         var resetCartState = function () {
           $scope.selectedPlan = null
           $scope.coupon.applied = null
@@ -340,10 +340,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return $scope.events.placable = null
         }
 
-        // #
-        // Determines if the provided booked slot is able to be modified by the user.
-        // @param slot {Object} fullCalendar event object
-        // #
+        /**
+         * Determines if the provided booked slot is able to be modified by the user.
+         * @param slot {Object} fullCalendar event object
+         */
         var slotCanBeModified = function (slot) {
           if ($scope.isAdmin()) { return true }
           const slotStart = moment(slot.start)
@@ -355,10 +355,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         }
 
-        // #
-        // Determines if the provided booked slot is able to be canceled by the user.
-        // @param slot {Object} fullCalendar event object
-        // #
+        /**
+         * Determines if the provided booked slot is able to be canceled by the user.
+         * @param slot {Object} fullCalendar event object
+         */
         var slotCanBeCanceled = function (slot) {
           if ($scope.isAdmin()) { return true }
           const slotStart = moment(slot.start)
@@ -370,9 +370,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         }
 
-        // #
-        // Callback triggered when the selected slot changed
-        // #
+        /**
+         * Callback triggered when the selected slot changed
+         */
         var planSelectionChanged = function () {
           if (Auth.isAuthenticated()) {
             if ($scope.selectedPlan !== $scope.plan) {
@@ -389,9 +389,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }
         }
 
-        // #
-        // Update the total price of the current selection/reservation
-        // #
+        /**
+         * Update the total price of the current selection/reservation
+         */
         var updateCartPrice = function () {
           if (Object.keys($scope.user).length > 0) {
             const r = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan)
@@ -417,12 +417,12 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             })
           )
 
-        // #
-        // Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
-        // @param reservation {Object} as returned by mkReservation()
-        // @param coupon {Object} Coupon as returned from the API
-        // @return {{reservation:Object, coupon_code:string}}
-        // #
+        /**
+         * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+         * @param reservation {Object} as returned by mkReservation()
+         * @param coupon {Object} Coupon as returned from the API
+         * @return {{reservation:Object, coupon_code:string}}
+         */
         var mkRequestParams = function (reservation, coupon) {
           const params = {
             reservation,
@@ -432,13 +432,13 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return params
         }
 
-        // #
-        // Create an hash map implementing the Reservation specs
-        // @param member {Object} User as retreived from the API: current user / selected user if current is admin
-        // @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
-        // @param [plan] {Object} Plan as retrived from the API: plan to buy with the current reservation
-        // @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, plan_id:Number|null}}
-        // #
+        /**
+         * Create an hash map implementing the Reservation specs
+         * @param member {Object} User as retreived from the API: current user / selected user if current is admin
+         * @param slots {Array<Object>} Array of fullCalendar events: slots selected on the calendar
+         * @param [plan] {Object} Plan as retrived from the API: plan to buy with the current reservation
+         * @return {{user_id:Number, reservable_id:Number, reservable_type:String, slots_attributes:Array<Object>, plan_id:Number|null}}
+         */
         var mkReservation = function (member, slots, plan = null) {
           const reservation = {
             user_id: member.id,
@@ -459,9 +459,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return reservation
         }
 
-        // #
-        // Open a modal window that allows the user to process a credit card payment for his current shopping cart.
-        // #
+        /**
+         * Open a modal window that allows the user to process a credit card payment for his current shopping cart.
+         */
         var payByStripe = reservation =>
           $uibModal.open({
             templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
@@ -500,9 +500,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 // Used in wallet info template to interpolate some translations
                 $scope.numberFilter = $filter('number')
 
-                // #
-                // Callback to process the payment with Stripe, triggered on button click
-                // #
+                /**
+                 * Callback to process the payment with Stripe, triggered on button click
+                 */
                 return $scope.payment = function (status, response) {
                   if (response.error) {
                     return growl.error(response.error.message)
@@ -538,9 +538,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             ] })
             .result['finally'](null).then(reservation => afterPayment(reservation))
 
-        // #
-        // Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
-        // #
+        /**
+         * Open a modal window that allows the user to process a local payment for his current shopping cart (admin only).
+         */
         var payOnSite = reservation =>
           $uibModal.open({
             templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>',
@@ -587,9 +587,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   }
                 }
 
-                // #
-                // Callback to process the local payment, triggered on button click
-                // #
+                /**
+                 * Callback to process the local payment, triggered on button click
+                 */
                 $scope.ok = function () {
                   $scope.attempting = true
                   return Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) {
@@ -607,9 +607,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             ] })
             .result['finally'](null).then(reservation => afterPayment(reservation))
 
-        // #
-        // Actions to run after the payment was successfull
-        // #
+        /**
+         * Actions to run after the payment was successfull
+         */
         var afterPayment = function (reservation) {
         // we set the cart content as 'paid' to display a summary of the transaction
           $scope.events.paid = $scope.events.reserved
@@ -622,7 +622,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return $scope.selectedPlan = null
         }
 
-        // # !!! MUST BE CALLED AT THE END of the directive
+        // !!! MUST BE CALLED AT THE END of the directive
         return initialize()
       }
     })

@@ -18,25 +18,25 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   function ($scope, $state, Event, categoriesPromise, themesPromise, ageRangesPromise) {
   /* PUBLIC SCOPE */
 
-    // # The events displayed on the page
+    // The events displayed on the page
     $scope.events = []
 
-    // # The currently displayed page number
+    // The currently displayed page number
     $scope.page = 1
 
-    // # List of categories for the events
+    // List of categories for the events
     $scope.categories = categoriesPromise
 
-    // # List of events themes
+    // List of events themes
     $scope.themes = themesPromise
 
-    // # List of age ranges
+    // List of age ranges
     $scope.ageRanges = ageRangesPromise
 
-    // # Hide or show the 'load more' button
+    // Hide or show the 'load more' button
     $scope.noMoreResults = false
 
-    // # Active filters for the events list
+    // Active filters for the events list
     $scope.filters = {
       category_id: null,
       theme_id: null,
@@ -45,9 +45,9 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
 
     $scope.monthNames = [<%= t('date.month_names')[1..-1].map { |m| "\"#{m}\"" }.join(', ') %>]
 
-    // #
-    // Adds a resultset of events to the bottom of the page, grouped by month
-    // #
+    /**
+     * Adds a resultset of events to the bottom of the page, grouped by month
+     */
     $scope.loadMoreEvents = function () {
       $scope.page += 1
       return Event.query(Object.assign({ page: $scope.page }, $scope.filters), function (data) {
@@ -60,15 +60,15 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
       })
     }
 
-    // #
-    // Callback to redirect the user to the specified event page
-    // @param event {{id:number}}
-    // #
+    /**
+     * Callback to redirect the user to the specified event page
+     * @param event {{id:number}}
+     */
     $scope.showEvent = event => $state.go('app.public.events_show', { id: event.id })
 
-    // #
-    // Callback to refresh the events list according to the filters set
-    // #
+    /**
+     * Callback to refresh the events list according to the filters set
+     */
     $scope.filterEvents = function () {
     // reinitialize results datasets
       $scope.page = 1
@@ -88,26 +88,26 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
       })
     }
 
-    // #
-    // Test if the provided event occurs on a single day or on many days
-    // @param event {{start_date:Date, end_date:Date}} Event object as retreived from the API
-    // @return {boolean} false if the event occurs on many days
-    // #
+    /**
+     * Test if the provided event occurs on a single day or on many days
+     * @param event {{start_date:Date, end_date:Date}} Event object as retreived from the API
+     * @return {boolean} false if the event occurs on many days
+     */
     $scope.onSingleDay = event => moment(event.start_date).isSame(event.end_date, 'day')
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = () => $scope.filterEvents()
 
-    // #
-    // Group the provided events by month/year and concat them with existing results
-    // Then compute the ordered list of months for the complete resultset.
-    // Affect the resulting events groups in $scope.eventsGroupByMonth and the ordered month keys in $scope.monthOrder.
-    // @param {Array} Events retrived from the API
-    // #
+    /**
+     * Group the provided events by month/year and concat them with existing results
+     * Then compute the ordered list of months for the complete resultset.
+     * Affect the resulting events groups in $scope.eventsGroupByMonth and the ordered month keys in $scope.monthOrder.
+     * @param {Array} Events retrived from the API
+     */
     var groupEvents = function (events) {
       if (events.length > 0) {
         const eventsGroupedByMonth = _.groupBy(events, obj => _.map(['month_id', 'year'], (key, value) => obj[key]))
@@ -116,7 +116,7 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
       }
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
@@ -125,14 +125,14 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
   function ($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
   /* PUBLIC SCOPE */
 
-    // # reservations for the currently shown event
+    // reservations for the currently shown event
     $scope.reservations = []
 
-    // # user to deal with
+    // user to deal with
     $scope.ctrl =
       { member: {} }
 
-    // # parameters for a new reservation
+    // parameters for a new reservation
     $scope.reserve = {
       nbPlaces: {
         normal: []
@@ -145,29 +145,29 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       totalSeats: 0
     }
 
-    // # Discount coupon to apply to the basket, if any
+    // Discount coupon to apply to the basket, if any
     $scope.coupon =
     { applied: null }
 
-    // # Get the details for the current event (event's id is recovered from the current URL)
+    // Get the details for the current event (event's id is recovered from the current URL)
     $scope.event = eventPromise
 
-    // # List of price categories for the events
+    // List of price categories for the events
     $scope.priceCategories = priceCategoriesPromise
 
-    // # Global config: is the user authorized to change his bookings slots?
+    // Global config: is the user authorized to change his bookings slots?
     $scope.enableBookingMove = (settingsPromise.booking_move_enable === 'true')
 
-    // # Global config: delay in hours before a booking while changing the booking slot is forbidden
+    // Global config: delay in hours before a booking while changing the booking slot is forbidden
     $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay)
 
-    // # Message displayed to the end user about rules that applies to events reservations
+    // Message displayed to the end user about rules that applies to events reservations
     $scope.eventExplicationsAlert = settingsPromise.event_explications_alert
 
-    // #
-    // Callback to delete the provided event (admins only)
-    // @param event {$resource} angular's Event $resource
-    // #
+    /**
+     * Callback to delete the provided event (admins only)
+     * @param event {$resource} angular's Event $resource
+     */
     $scope.deleteEvent = event =>
       dialogs.confirm({
         resolve: {
@@ -188,9 +188,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         , error => growl.error(_t('unable_to_delete_the_event_because_some_users_alredy_booked_it')))
       )
 
-    // #
-    // Callback to call when the number of tickets to book changes in the current booking
-    // #
+    /**
+     * Callback to call when the number of tickets to book changes in the current booking
+     */
     $scope.changeNbPlaces = function () {
     // compute the total remaing places
       let remain = $scope.event.nb_free_places - $scope.reserve.nbReservePlaces
@@ -216,18 +216,18 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       return $scope.computeEventAmount()
     }
 
-    // #
-    // Callback to reset the current reservation parameters
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Callback to reset the current reservation parameters
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.cancelReserve = function (e) {
       e.preventDefault()
       return resetEventReserve()
     }
 
-    // #
-    // Callback to allow the user to set the details for his reservation
-    // #
+    /**
+     * Callback to allow the user to set the details for his reservation
+     */
     $scope.reserveEvent = function () {
       if ($scope.event.nb_total_places > 0) {
         $scope.reserveSuccess = false
@@ -244,10 +244,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     }
 
-    // #
-    // Callback to deal with the reservations of the user selected in the dropdown list instead of the current user's
-    // reservations. (admins only)
-    // #
+    /**
+     * Callback to deal with the reservations of the user selected in the dropdown list instead of the current user's
+     * reservations. (admins only)
+     */
     $scope.updateMember = function () {
       resetEventReserve()
       $scope.reserveSuccess = false
@@ -259,9 +259,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     }
 
-    // #
-    // Callback to trigger the payment process of the current reservation
-    // #
+    /**
+     * Callback to trigger the payment process of the current reservation
+     */
     $scope.payEvent = function () {
     // first, we check that a user was selected
       if (Object.keys($scope.ctrl.member).length > 0) {
@@ -283,9 +283,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     }
 
-    // #
-    // Callback to validate the booking of a free event
-    // #
+    /**
+     * Callback to validate the booking of a free event
+     */
     $scope.validReserveEvent = function () {
       const reservation = {
         user_id: $scope.ctrl.member.id,
@@ -329,12 +329,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       })
     }
 
-    // #
-    // Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
-    // a new date for his reservation (if any available)
-    // @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
+     * a new date for his reservation (if any available)
+     * @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.modifyReservation = function (reservation, e) {
       e.preventDefault()
       e.stopPropagation()
@@ -403,10 +403,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         })
     }
 
-    // #
-    // Checks if the provided reservation is able to be moved (date change)
-    // @param reservation {{total_booked_seats:number}}
-    // #
+    /**
+     * Checks if the provided reservation is able to be moved (date change)
+     * @param reservation {{total_booked_seats:number}}
+     */
     $scope.reservationCanModify = function (reservation) {
       const slotStart = moment(reservation.slots[0].start_at)
       const now = moment()
@@ -418,10 +418,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       return (isAble && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay))
     }
 
-    // #
-    // Compute the total amount for the current reservation according to the previously set parameters
-    // and assign the result in $scope.reserve.amountTotal
-    // #
+    /**
+     * Compute the total amount for the current reservation according to the previously set parameters
+     * and assign the result in $scope.reserve.amountTotal
+     */
     $scope.computeEventAmount = function () {
     // first we check that a user was selected
       if (Object.keys($scope.ctrl.member).length > 0) {
@@ -435,20 +435,20 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     }
 
-    // #
-    // Return the URL allowing to share the current project on the Facebook social network
-    // #
+    /**
+     * Return the URL allowing to share the current project on the Facebook social network
+     */
     $scope.shareOnFacebook = () => `https://www.facebook.com/share.php?u=${$state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }).replace('#', '%23')}`
 
-    // #
-    // Return the URL allowing to share the current project on the Twitter social network
-    // #
+    /**
+     * Return the URL allowing to share the current project on the Twitter social network
+     */
     $scope.shareOnTwitter = () => `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.events_show', { id: $scope.event.id }, { absolute: true }))}&text=${encodeURIComponent($scope.event.title)}`
 
-    // #
-    // Return the textual description of the conditions applyable to the given price's category
-    // @param category_id {number} ID of the price's category
-    // #
+    /**
+     * Return the textual description of the conditions applyable to the given price's category
+     * @param category_id {number} ID of the price's category
+     */
     $scope.getPriceCategoryConditions = function (category_id) {
       for (let cat of Array.from($scope.priceCategories)) {
         if (cat.id === category_id) {
@@ -459,9 +459,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
     // set the controlled user as the current user if the current user is not an admin
       if ($scope.currentUser) {
@@ -486,22 +486,22 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       })
     }
 
-    // #
-    // Retrieve the reservations for the couple event / user
-    // @param reservable_id {number} the current event id
-    // @param reservable_type {string} 'Event'
-    // @param user_id {number} the user's id (current or managed)
-    // #
+    /**
+     * Retrieve the reservations for the couple event / user
+     * @param reservable_id {number} the current event id
+     * @param reservable_type {string} 'Event'
+     * @param user_id {number} the user's id (current or managed)
+     */
     var getReservations = (reservable_id, reservable_type, user_id) =>
       Reservation.query({ reservable_id, reservable_type, user_id }).$promise.then(reservations => $scope.reservations = reservations)
 
-    // #
-    // Create an hash map implementing the Reservation specs
-    // @param member {Object} User as retreived from the API: current user / selected user if current is admin
-    // @param reserve {Object} Reservation parameters (places...)
-    // @param event {Object} Current event
-    // @return {{user_id:number, reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
-    // #
+    /**
+     * Create an hash map implementing the Reservation specs
+     * @param member {Object} User as retreived from the API: current user / selected user if current is admin
+     * @param reserve {Object} Reservation parameters (places...)
+     * @param event {Object} Current event
+     * @return {{user_id:number, reservable_id:number, reservable_type:string, slots_attributes:Array<Object>, nb_reserve_places:number}}
+     */
     var mkReservation = function (member, reserve, event) {
       const reservation = {
         user_id: member.id,
@@ -532,12 +532,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       return reservation
     }
 
-    // #
-    // Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
-    // @param reservation {Object} as returned by mkReservation()
-    // @param coupon {Object} Coupon as returned from the API
-    // @return {{reservation:Object, coupon_code:string}}
-    // #
+    /**
+     * Format the parameters expected by /api/prices/compute or /api/reservations and return the resulting object
+     * @param reservation {Object} as returned by mkReservation()
+     * @param coupon {Object} Coupon as returned from the API
+     * @return {{reservation:Object, coupon_code:string}}
+     */
     var mkRequestParams = function (reservation, coupon) {
       const params = {
         reservation,
@@ -547,9 +547,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       return params
     }
 
-    // #
-    // Set the current reservation to the default values. This implies to reservation form to be hidden.
-    // #
+    /**
+     * Set the current reservation to the default values. This implies to reservation form to be hidden.
+     */
     var resetEventReserve = function () {
       if ($scope.event) {
         $scope.reserve = {
@@ -572,10 +572,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     }
 
-    // #
-    // Open a modal window which trigger the stripe payment process
-    // @param reservation {Object} to book
-    // #
+    /**
+     * Open a modal window which trigger the stripe payment process
+     * @param reservation {Object} to book
+     */
     var payByStripe = reservation =>
       $uibModal.open({
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
@@ -643,10 +643,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         ] })
         .result['finally'](null).then(reservation => afterPayment(reservation))
 
-    // #
-    // Open a modal window which trigger the local payment process
-    // @param reservation {Object} to book
-    // #
+    /**
+     * Open a modal window which trigger the local payment process
+     * @param reservation {Object} to book
+     */
     var payOnSite = reservation =>
       $uibModal.open({
         templateUrl: '<%= asset_path "shared/valid_reservation_modal.html" %>',
@@ -720,10 +720,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         ] })
         .result['finally'](null).then(reservation => afterPayment(reservation))
 
-    // #
-    // What to do after the payment was successful
-    // @param resveration {Object} booked reservation
-    // #
+    /**
+     * What to do after the payment was successful
+     * @param resveration {Object} booked reservation
+     */
     var afterPayment = function (reservation) {
       $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats
       resetEventReserve()
@@ -735,7 +735,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

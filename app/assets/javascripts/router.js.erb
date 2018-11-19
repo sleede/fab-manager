@@ -38,7 +38,7 @@ angular.module('application.router', ['ui.router'])
           ]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', function ($rootScope, logoFile, logoBlackFile) {
-          // # Application logo
+          // Application logo
           $rootScope.logo = logoFile.custom_asset
           return $rootScope.logoBlack = logoBlackFile.custom_asset
         }

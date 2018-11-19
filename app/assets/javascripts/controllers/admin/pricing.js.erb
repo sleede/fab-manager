@@ -15,66 +15,66 @@
  */
 'use strict'
 
-// #
-// Controller used in the prices edition page
-// #
+/**
+ * Controller used in the prices edition page
+ */
 Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t',
   function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, _t) {
   /* PUBLIC SCOPE */
-    // # List of machines prices (not considering any plan)
+    // List of machines prices (not considering any plan)
     $scope.machinesPrices = machinesPricesPromise
 
-    // # List of trainings pricing
+    // List of trainings pricing
     $scope.trainingsPricings = trainingsPricingsPromise
 
-    // # List of available subscriptions plans (eg. student/month, PME/year ...)
+    // List of available subscriptions plans (eg. student/month, PME/year ...)
     $scope.plans = plans
     $scope.enabledPlans = plans.filter(p => !p.disabled)
 
-    // # List of groups (eg. normal, student ...)
+    // List of groups (eg. normal, student ...)
     $scope.groups = groups.filter(g => g.slug !== 'admins')
     $scope.enabledGroups = groups.filter(g => (g.slug !== 'admins') && !g.disabled)
 
-    // # Associate free machine hours with subscriptions
+    // Associate free machine hours with subscriptions
     $scope.machineCredits = machineCreditsPromise
 
-    // # Array of associations (plan <-> training)
+    // Array of associations (plan <-> training)
     $scope.trainingCredits = trainingCreditsPromise
 
-    // # Associate a plan with all its trainings ids
+    // Associate a plan with all its trainings ids
     $scope.trainingCreditsGroups = {}
 
-    // # List of trainings
+    // List of trainings
     $scope.trainings = trainingsPromise.filter(t => !t.disabled)
 
-    // # List of machines
+    // List of machines
     $scope.machines = machinesPromise
     $scope.enabledMachines = machinesPromise.filter(m => !m.disabled)
 
-    // # List of coupons
+    // List of coupons
     $scope.coupons = couponsPromise
 
-    // # List of spaces
+    // List of spaces
     $scope.spaces = spacesPromise
     $scope.enabledSpaces = spacesPromise.filter(s => !s.disabled)
 
-    // # Associate free space hours with subscriptions
+    // Associate free space hours with subscriptions
     $scope.spaceCredits = spacesCreditsPromise
 
-    // # List of spaces prices (not considering any plan)
+    // List of spaces prices (not considering any plan)
     $scope.spacesPrices = spacesPricesPromise
 
-    // # The plans list ordering. Default: by group
+    // The plans list ordering. Default: by group
     $scope.orderPlans = 'group_id'
 
-    // # Status of the drop-down menu in Credits tab
+    // Status of the drop-down menu in Credits tab
     $scope.status =
     { isopen: false }
 
-    // # Default: we show only enabled plans
+    // Default: we show only enabled plans
     $scope.planFiltering = 'enabled'
 
-    // # Available options for filtering plans by status
+    // Available options for filtering plans by status
     $scope.filterDisabled = [
       'enabled',
       'disabled',
@@ -97,11 +97,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Retrieve a plan from its given identifier and returns it
-    // @param id {number} plan ID
-    // @returns {Object} Plan, inherits from $resource
-    // #
+    /**
+     * Retrieve a plan from its given identifier and returns it
+     * @param id {number} plan ID
+     * @returns {Object} Plan, inherits from $resource
+     */
     $scope.getPlanFromId = function (id) {
       for (let plan of Array.from($scope.plans)) {
         if (plan.id === parseInt(id)) {
@@ -110,11 +110,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Retrieve a group from its given identifier and returns it
-    // @param id {number} group ID
-    // @returns {Object} Group, inherits from $resource
-    // #
+    /**
+     * Retrieve a group from its given identifier and returns it
+     * @param id {number} group ID
+     * @returns {Object} Group, inherits from $resource
+     */
     $scope.getGroupFromId = function (groups, id) {
       for (let group of Array.from(groups)) {
         if (group.id === parseInt(id)) {
@@ -123,12 +123,12 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Returns a human readable string of named trainings, according to the provided array.
-    // $scope.trainings may contains the full list of training. The returned string will only contains the trainings
-    // whom ID are given in the provided parameter
-    // @param trainings {Array<number>} trainings IDs array
-    // #
+    /**
+     * Returns a human readable string of named trainings, according to the provided array.
+     * $scope.trainings may contains the full list of training. The returned string will only contains the trainings
+     * whom ID are given in the provided parameter
+     * @param trainings {Array<number>} trainings IDs array
+     */
     $scope.showTrainings = function (trainings) {
       if (!angular.isArray(trainings) || !(trainings.length > 0)) {
         return _t('pricing.none')
@@ -143,11 +143,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       if (selected.length) { return selected.join(' | ') } else { return _t('pricing.none') }
     }
 
-    // #
-    // Validation callback when editing training's credits. Save the changes.
-    // @param newdata {Object} training and associated plans
-    // @param planId {number|string} plan id
-    // #
+    /**
+     * Validation callback when editing training's credits. Save the changes.
+     * @param newdata {Object} training and associated plans
+     * @param planId {number|string} plan id
+     */
     $scope.saveTrainingCredits = function (newdata, planId) {
     // save the number of credits
       Plan.update({ id: planId },
@@ -202,16 +202,16 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       })
     }
 
-    // #
-    // Cancel the current training credit modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // #
+    /**
+     * Cancel the current training credit modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     */
     $scope.cancelTrainingCredit = rowform => rowform.$cancel()
 
-    // #
-    // Create a new empty entry in the $scope.machineCredits array
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Create a new empty entry in the $scope.machineCredits array
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.addMachineCredit = function (e) {
       e.preventDefault()
       e.stopPropagation()
@@ -221,11 +221,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       return $scope.status.isopen = !$scope.status.isopen
     }
 
-    // #
-    // In the Credits tab, return the name of the machine/space associated with the given credit
-    // @param credit {Object} credit object, inherited from $resource
-    // @returns {String}
-    // #
+    /**
+     * In the Credits tab, return the name of the machine/space associated with the given credit
+     * @param credit {Object} credit object, inherited from $resource
+     * @returns {String}
+     */
     $scope.showCreditableName = function (credit) {
       let selected = _t('pricing.not_set')
       if (credit && credit.creditable_id) {
@@ -238,11 +238,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       return selected
     }
 
-    // #
-    // In the Credits tab, return the machine/space associated with the given credit
-    // @param credit {Object} credit object, inherited from $resource
-    // @returns {Object}
-    // #
+    /**
+     * In the Credits tab, return the machine/space associated with the given credit
+     * @param credit {Object} credit object, inherited from $resource
+     * @returns {Object}
+     */
     $scope.getCreditable = function (credit) {
       let selected
       if (credit && credit.creditable_id) {
@@ -263,12 +263,12 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       return selected
     }
 
-    // #
-    // Validation callback when editing machine's credits. Save the changes.
-    // This will prevent the creation of two credits associating the same machine and plan.
-    // @param data {Object} machine, associated plan and number of credit hours.
-    // @param [id] {number} credit id for edition, create a new credit object if not provided
-    // #
+    /**
+     * Validation callback when editing machine's credits. Save the changes.
+     * This will prevent the creation of two credits associating the same machine and plan.
+     * @param data {Object} machine, associated plan and number of credit hours.
+     * @param [id] {number} credit id for edition, create a new credit object if not provided
+     */
     $scope.saveMachineCredit = function (data, id) {
       for (let mc of Array.from($scope.machineCredits)) {
         if ((mc.plan_id === data.plan_id) && (mc.creditable_id === data.creditable_id) && ((id === null) || (mc.id !== id))) {
@@ -297,11 +297,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Removes the newly inserted but not saved machine credit / Cancel the current machine credit modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // @param index {number} credit index in the $scope.machineCredits array
-    // #
+    /**
+     * Removes the newly inserted but not saved machine credit / Cancel the current machine credit modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} credit index in the $scope.machineCredits array
+     */
     $scope.cancelMachineCredit = function (rowform, index) {
       if ($scope.machineCredits[index].id != null) {
         return rowform.$cancel()
@@ -310,19 +310,19 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    //  Deletes the machine credit at the specified index
-    // @param index {number} machine credit index in the $scope.machineCredits array
-    // #
+    /**
+     *  Deletes the machine credit at the specified index
+     * @param index {number} machine credit index in the $scope.machineCredits array
+     */
     $scope.removeMachineCredit = function (index) {
       Credit.delete($scope.machineCredits[index])
       return $scope.machineCredits.splice(index, 1)
     }
 
-    // #
-    // Create a new empty entry in the $scope.spaceCredits array
-    // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // #
+    /**
+     * Create a new empty entry in the $scope.spaceCredits array
+     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
     $scope.addSpaceCredit = function (e) {
       e.preventDefault()
       e.stopPropagation()
@@ -332,12 +332,12 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       return $scope.status.isopen = !$scope.status.isopen
     }
 
-    // #
-    // Validation callback when editing space's credits. Save the changes.
-    // This will prevent the creation of two credits associated with the same space and plan.
-    // @param data {Object} space, associated plan and number of credit hours.
-    // @param [id] {number} credit id for edition, create a new credit object if not provided
-    // #
+    /**
+     * Validation callback when editing space's credits. Save the changes.
+     * This will prevent the creation of two credits associated with the same space and plan.
+     * @param data {Object} space, associated plan and number of credit hours.
+     * @param [id] {number} credit id for edition, create a new credit object if not provided
+     */
     $scope.saveSpaceCredit = function (data, id) {
       for (let sc of Array.from($scope.spaceCredits)) {
         if ((sc.plan_id === data.plan_id) && (sc.creditable_id === data.creditable_id) && ((id === null) || (sc.id !== id))) {
@@ -366,11 +366,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Removes the newly inserted but not saved space credit / Cancel the current space credit modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // @param index {number} credit index in the $scope.spaceCredits array
-    // #
+    /**
+     * Removes the newly inserted but not saved space credit / Cancel the current space credit modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} credit index in the $scope.spaceCredits array
+     */
     $scope.cancelSpaceCredit = function (rowform, index) {
       if ($scope.spaceCredits[index].id != null) {
         return rowform.$cancel()
@@ -379,30 +379,30 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Deletes the space credit at the specified index
-    // @param index {number} space credit index in the $scope.spaceCredits array
-    // #
+    /**
+     * Deletes the space credit at the specified index
+     * @param index {number} space credit index in the $scope.spaceCredits array
+     */
     $scope.removeSpaceCredit = function (index) {
       Credit.delete($scope.spaceCredits[index])
       return $scope.spaceCredits.splice(index, 1)
     }
 
-    // #
-    // If the plan does not have a type, return a default value for display purposes
-    // @param type {string|undefined|null} plan's type (eg. 'partner')
-    // @returns {string}
-    // #
+    /**
+     * If the plan does not have a type, return a default value for display purposes
+     * @param type {string|undefined|null} plan's type (eg. 'partner')
+     * @returns {string}
+     */
     $scope.getPlanType = function (type) {
       if (type === 'PartnerPlan') {
         return _t('pricing.partner')
       } else { return _t('pricing.standard') }
     }
 
-    // #
-    // Change the plans ordering criterion to the one provided
-    // @param orderBy {string} ordering criterion
-    // #
+    /**
+     * Change the plans ordering criterion to the one provided
+     * @param orderBy {string} ordering criterion
+     */
     $scope.setOrderPlans = function (orderBy) {
       if ($scope.orderPlans === orderBy) {
         return $scope.orderPlans = `-${orderBy}`
@@ -411,9 +411,9 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Retrieve a price from prices array by a machineId and a groupId
-    // #
+    /**
+     * Retrieve a price from prices array by a machineId and a groupId
+     */
     $scope.findPriceBy = function (prices, machineId, groupId) {
       for (let price of Array.from(prices)) {
         if ((price.priceable_id === machineId) && (price.group_id === groupId)) {
@@ -422,9 +422,9 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // update a price for a machine and a group, not considering any plan
-    // #
+    /**
+     * update a price for a machine and a group, not considering any plan
+     */
     $scope.updatePrice = function (data, price) {
       if (data != null) {
         return Price.update({ id: price.id }, { price: { amount: data } }).$promise
@@ -433,10 +433,10 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Delete the specified subcription plan
-    // @param id {number} plan id
-    // #
+    /**
+     * Delete the specified subcription plan
+     * @param id {number} plan id
+     */
     $scope.deletePlan = function (plans, id) {
       if (typeof id !== 'number') {
         return console.error('[EditPricingController::deletePlan] Error: invalid id parameter')
@@ -467,21 +467,21 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Generate a string identifying the given plan by literal humain-readable name
-    // @param plan {Object} Plan object, as recovered from GET /api/plan/:id
-    // @param groups {Array} List of Groups objects, as recovered from GET /api/groups
-    // @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
-    // will be included.
-    // @returns {String}
-    // #
+    /**
+     * Generate a string identifying the given plan by literal humain-readable name
+     * @param plan {Object} Plan object, as recovered from GET /api/plan/:id
+     * @param groups {Array} List of Groups objects, as recovered from GET /api/groups
+     * @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
+     * will be included.
+     * @returns {String}
+     */
     $scope.humanReadablePlanName = (plan, groups, short) => `${$filter('humanReadablePlanName')(plan, groups, short)}`
 
-    // #
-    // Delete a coupon from the server's database and, in case of success, from the list in memory
-    // @param coupons {Array<Object>} should be called with $scope.coupons
-    // @param id {number} ID of the coupon to delete
-    // #
+    /**
+     * Delete a coupon from the server's database and, in case of success, from the list in memory
+     * @param coupons {Array<Object>} should be called with $scope.coupons
+     * @param id {number} ID of the coupon to delete
+     */
     $scope.deleteCoupon = function (coupons, id) {
       if (typeof id !== 'number') {
         return console.error('[EditPricingController::deleteCoupon] Error: invalid id parameter')
@@ -516,10 +516,10 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Open a modal allowing to select an user and send him the details of the provided coupon
-    // @param coupon {Object} The coupon to send
-    // #
+    /**
+     * Open a modal allowing to select an user and send him the details of the provided coupon
+     * @param coupon {Object} The coupon to send
+     */
     $scope.sendCouponToUser = coupon =>
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/pricing/sendCoupon.html" %>',
@@ -528,14 +528,14 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         },
         size: 'md',
         controller: ['$scope', '$uibModalInstance', 'Coupon', 'coupon', '_t', function ($scope, $uibModalInstance, Coupon, coupon, _t) {
-        // # Member, receiver of the coupon
+        // Member, receiver of the coupon
           $scope.ctrl =
           { member: null }
 
-          // # Details of the coupon to send
+          // Details of the coupon to send
           $scope.coupon = coupon
 
-          // # Callback to validate sending of the coupon
+          // Callback to validate sending of the coupon
           $scope.ok = () =>
             Coupon.send({ coupon_code: coupon.code, user_id: $scope.ctrl.member.id }, function (res) {
               growl.success(_t('pricing.coupon_successfully_sent_to_USER', { USER: $scope.ctrl.member.name }))
@@ -543,20 +543,20 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             }
             , err => growl.error(_t('pricing.an_error_occurred_unable_to_send_the_coupon')))
 
-          // # Callback to close the modal and cancel the sending process
+          // Callback to close the modal and cancel the sending process
           return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
         }
         ] })
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       $scope.trainingCreditsGroups = groupCreditsByPlan($scope.trainingCredits)
 
-      // # adds empty array for plan which hasn't any credits yet
+      // adds empty array for plan which hasn't any credits yet
       return (() => {
         const result = []
         for (let plan of Array.from($scope.plans)) {
@@ -570,19 +570,19 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       })()
     }
 
-    // #
-    // Retrieve an item index by its ID from the given array of objects
-    // @param items {Array<{id:number}>}
-    // @param id {number}
-    // @returns {number} item index in the provided array
-    // #
+    /**
+     * Retrieve an item index by its ID from the given array of objects
+     * @param items {Array<{id:number}>}
+     * @param id {number}
+     * @returns {number} item index in the provided array
+     */
     var findItemIdxById = (items, id) =>
       (items.map(item => item.id)).indexOf(id)
 
-    // #
-    // Group the given credits array into a map associating the plan ID with its associated trainings/machines
-    // @return {Object} the association map
-    // #
+    /**
+     * Group the given credits array into a map associating the plan ID with its associated trainings/machines
+     * @return {Object} the association map
+     */
     var groupCreditsByPlan = function (credits) {
       const creditsMap = {}
       angular.forEach(credits, function (c) {
@@ -594,11 +594,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       return creditsMap
     }
 
-    // #
-    // Iterate through $scope.traininfCredits to find the credit matching the given criterion
-    // @param trainingId {number|string} training ID
-    // @param planId {number|string} plan ID
-    // #
+    /**
+     * Iterate through $scope.traininfCredits to find the credit matching the given criterion
+     * @param trainingId {number|string} training ID
+     * @param planId {number|string} plan ID
+     */
     var findTrainingCredit = function (trainingId, planId) {
       trainingId = parseInt(trainingId)
       planId = parseInt(planId)
@@ -610,11 +610,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Retrieve a training from its given identifier and returns it
-    // @param id {number} training ID
-    // @returns {Object} Training inherited from $resource
-    // #
+    /**
+     * Retrieve a training from its given identifier and returns it
+     * @param id {number} training ID
+     * @returns {Object} Training inherited from $resource
+     */
     var getTrainingFromId = function (id) {
       for (let training of Array.from($scope.trainings)) {
         if (training.id === parseInt(id)) {
@@ -623,7 +623,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

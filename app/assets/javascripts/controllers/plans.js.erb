@@ -16,18 +16,18 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
   function ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers) {
     /* PUBLIC SCOPE */
 
-    // # list of groups
+    // list of groups
     let plan
     $scope.groups = groupsPromise.filter(g => (g.slug !== 'admins') & !g.disabled)
 
-    // # default : do not show the group changing form
-    // # group ID of the current/selected user
+    // default : do not show the group changing form
+    // group ID of the current/selected user
     $scope.group = {
       change: false,
       id: null
     }
 
-    // # list of plans, classified by group
+    // list of plans, classified by group
     $scope.plansClassifiedByGroup = []
     for (var group of Array.from($scope.groups)) {
       const groupObj = { id: group.id, name: group.name, plans: [] }
@@ -37,34 +37,34 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       $scope.plansClassifiedByGroup.push(groupObj)
     }
 
-    // # user to deal with
+    // user to deal with
     $scope.ctrl = {
       member: null,
       member_id: null
     }
 
-    // # already subscribed plan of the current user
+    // already subscribed plan of the current user
     $scope.paid =
         { plan: null }
 
-    // # plan to subscribe (shopping cart)
+    // plan to subscribe (shopping cart)
     $scope.selectedPlan = null
 
-    // # Discount coupon to apply to the basket, if any
+    // Discount coupon to apply to the basket, if any
     $scope.coupon =
       { applied: null }
 
-    // # Storage for the total price (plan price + coupon, if any)
+    // Storage for the total price (plan price + coupon, if any)
     $scope.cart =
       { total: null }
 
-    // # text that appears in the bottom-right box of the page (subscriptions rules details)
+    // text that appears in the bottom-right box of the page (subscriptions rules details)
     $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value
 
-    // #
-    // Callback to deal with the subscription of the user selected in the dropdown list instead of the current user's
-    // subscription. (admins only)
-    // #
+    /**
+     * Callback to deal with the subscription of the user selected in the dropdown list instead of the current user's
+     * subscription. (admins only)
+     */
     $scope.updateMember = function () {
       $scope.selectedPlan = null
       $scope.paid.plan = null
@@ -75,10 +75,10 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       })
     }
 
-    // #
-    // Add the provided plan to the shopping basket
-    // @param plan {Object} The plan to subscribe to
-    // #
+    /**
+     * Add the provided plan to the shopping basket
+     * @param plan {Object} The plan to subscribe to
+     */
     $scope.selectPlan = function (plan) {
       if ($scope.isAuthenticated()) {
         if ($scope.selectedPlan !== plan) {
@@ -92,9 +92,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       }
     }
 
-    // #
-    // Callback to trigger the payment process of the subscription
-    // #
+    /**
+     * Callback to trigger the payment process of the subscription
+     */
     $scope.openSubscribePlanModal = () =>
       Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
         const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount)
@@ -107,9 +107,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         }
       })
 
-    // #
-    // Return the group object, identified by the ID set in $scope.group.id
-    // #
+    /**
+     * Return the group object, identified by the ID set in $scope.group.id
+     */
     $scope.getUserGroup = function () {
       for (group of Array.from($scope.groups)) {
         if (group.id === $scope.group.id) {
@@ -118,9 +118,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       }
     }
 
-    // #
-    // Change the group of the current/selected user to the one set in $scope.group.id
-    // #
+    /**
+     * Change the group of the current/selected user to the one set in $scope.group.id
+     */
     $scope.selectGroup = () =>
       Member.update({ id: $scope.ctrl.member.id }, { user: { group_id: $scope.group.id } }, function (user) {
         $scope.ctrl.member = user
@@ -142,22 +142,22 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         return console.error(err)
       })
 
-    // #
-    // Return an enumerable meaninful string for the gender of the provider user
-    // @param user {Object} Database user record
-    // @return {string} 'male' or 'female'
-    // #
+    /**
+     * Return an enumerable meaninful string for the gender of the provider user
+     * @param user {Object} Database user record
+     * @return {string} 'male' or 'female'
+     */
     $scope.getGender = function (user) {
       if (user && user.profile) {
         if (user.profile.gender === 'true') { return 'male' } else { return 'female' }
       } else { return 'other' }
     }
 
-    // #
-    // Test if the provided date is in the future
-    // @param dateTime {Date}
-    // @return {boolean}
-    // #
+    /**
+     * Test if the provided date is in the future
+     * @param dateTime {Date}
+     * @return {boolean}
+     */
     $scope.isInFuture = function (dateTime) {
       if (moment().diff(moment(dateTime)) < 0) {
         return true
@@ -166,16 +166,16 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       }
     }
 
-    // #
-    // To use as callback in Array.prototype.filter to get only enabled plans
-    // #
+    /**
+     * To use as callback in Array.prototype.filter to get only enabled plans
+     */
     $scope.filterDisabledPlans = plan => !plan.disabled
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       if ($scope.currentUser) {
         if ($scope.currentUser.role !== 'admin') {
@@ -195,10 +195,10 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       })
     }
 
-    // #
-    // Compute the total amount for the current reservation according to the previously set parameters
-    // and assign the result in $scope.reserve.amountTotal
-    // #
+    /**
+     * Compute the total amount for the current reservation according to the previously set parameters
+     * and assign the result in $scope.reserve.amountTotal
+     */
     var updateCartPrice = function () {
       // first we check that a user was selected
       if (Object.keys($scope.ctrl.member).length > 0) {
@@ -218,9 +218,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       }
     }
 
-    // #
-    // Open a modal window which trigger the stripe payment process
-    // #
+    /**
+     * Open a modal window which trigger the stripe payment process
+     */
     var payByStripe = () =>
       $uibModal.open({
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
@@ -251,11 +251,11 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
             // retrieve the CGV
             CustomAsset.get({ name: 'cgv-file' }, cgv => $scope.cgv = cgv.custom_asset)
 
-            // #
-            // Callback for click on the 'proceed' button.
-            // Handle the stripe's card tokenization process response and save the subscription to the API with the
-            // card token just created.
-            // #
+            /**
+             * Callback for click on the 'proceed' button.
+             * Handle the stripe's card tokenization process response and save the subscription to the API with the
+             * card token just created.
+             */
             return $scope.payment = function (status, response) {
               if (response.error) {
                 return growl.error(response.error.message)
@@ -289,9 +289,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
           return $scope.coupon.applied = null
         })
 
-    // #
-    // Open a modal window which trigger the local payment process
-    // #
+    /**
+     * Open a modal window which trigger the local payment process
+     */
     var payOnSite = () =>
       $uibModal.open({
         templateUrl: '<%= asset_path "plans/payment_modal.html" %>',
@@ -336,10 +336,10 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
               }
             }
 
-            // #
-            // Callback for the 'proceed' button.
-            // Save the subscription to the API
-            // #
+            /**
+             * Callback for the 'proceed' button.
+             * Save the subscription to the API
+             */
             $scope.ok = function () {
               $scope.attempting = true
               return Subscription.save({
@@ -359,10 +359,10 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
               })
             }
 
-            // #
-            // Callback for the 'cancel' button.
-            // Close the modal box.
-            // #
+            /**
+             * Callback for the 'cancel' button.
+             * Close the modal box.
+             */
             return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
           }
         ] })
@@ -375,7 +375,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
           return $scope.coupon.applied = null
         })
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
