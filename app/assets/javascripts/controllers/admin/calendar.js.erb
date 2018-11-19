@@ -14,9 +14,9 @@
  */
 'use strict'
 
-// #
-// Controller used in the calendar management page
-// #
+/**
+ * Controller used in the calendar management page
+ */
 
 Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig',
   function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) {
@@ -34,20 +34,20 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     /* PUBLIC SCOPE */
 
-    // # list of the FabLab machines
+    // list of the FabLab machines
     $scope.machines = machinesPromise
 
-    // # currently selected availability
+    // currently selected availability
     $scope.availability = null
 
-    // # bind the availabilities slots with full-Calendar events
+    // bind the availabilities slots with full-Calendar events
     $scope.eventSources = []
     $scope.eventSources.push({
       url: '/api/availabilities',
       textColor: 'black'
     })
 
-    // # fullCalendar (v2) configuration
+    // fullCalendar (v2) configuration
     $scope.calendarConfig = CalendarConfig({
       slotDuration: BASE_SLOT,
       snapDuration: BOOKING_SNAP,
@@ -69,10 +69,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       }
     })
 
-    // #
-    // Open a confirmation modal to cancel the booking of a user for the currently selected event.
-    // @param slot {Object} reservation slot of a user, inherited from $resource
-    // #
+    /**
+     * Open a confirmation modal to cancel the booking of a user for the currently selected event.
+     * @param slot {Object} reservation slot of a user, inherited from $resource
+     */
     $scope.cancelBooking = slot =>
     // open a confirmation dialog
       dialogs.confirm({
@@ -106,11 +106,11 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         )
       )
 
-    // #
-    // Open a confirmation modal to remove a machine for the currently selected availability,
-    // except if it is the last machine of the reservation.
-    // @param machine {Object} must contain the machine ID and name
-    // #
+    /**
+     * Open a confirmation modal to remove a machine for the currently selected availability,
+     * except if it is the last machine of the reservation.
+     * @param machine {Object} must contain the machine ID and name
+     */
     $scope.removeMachine = function (machine) {
       if ($scope.availability.machine_ids.length === 1) {
         return growl.error(_t('admin_calendar.unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather'))
@@ -154,10 +154,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       }
     }
 
-    // #
-    // Callback to alert the admin that the export request was acknowledged and is
-    // processing right now.
-    // #
+    /**
+     * Callback to alert the admin that the export request was acknowledged and is
+     * processing right now.
+     */
     $scope.alertExport = type =>
       Export.status({ category: 'availabilities', type }).then(function (res) {
         if (!res.data.exists) {
@@ -165,9 +165,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         }
       })
 
-    // #
-    // Mark the selected slot as unavailable for new reservations or allow reservations again on it
-    // #
+    /**
+     * Mark the selected slot as unavailable for new reservations or allow reservations again on it
+     */
     $scope.toggleLockReservations = function () {
     // first, define a shortcut to the lock property
       const locked = $scope.availability.lock
@@ -210,9 +210,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       }
     }
 
-    // #
-    // Confirm and destroy the slot in $scope.availability
-    // #
+    /**
+     * Confirm and destroy the slot in $scope.availability
+     */
     $scope.removeSlot = () =>
     // open a confirmation dialog
       dialogs.confirm({
@@ -238,11 +238,11 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Return an enumerable meaninful string for the gender of the provider user
-    // @param user {Object} Database user record
-    // @return {string} 'male' or 'female'
-    // #
+    /**
+     * Return an enumerable meaninful string for the gender of the provider user
+     * @param user {Object} Database user record
+     * @return {string} 'male' or 'female'
+     */
     var getGender = function (user) {
       if (user.profile) {
         if (user.profile.gender === 'true') { return 'male' } else { return 'female' }
@@ -251,7 +251,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     // Triggered when the admin drag on the agenda to create a new reservable slot.
     // @see http://fullcalendar.io/docs/selection/select_callback/
-    // #
+    // 
     var calendarSelectCb = function (start, end, jsEvent, view) {
       start = moment.tz(start.toISOString(), Fablab.timezone)
       end = moment.tz(end.toISOString(), Fablab.timezone)
@@ -296,10 +296,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       return uiCalendarConfig.calendars.calendar.fullCalendar('unselect')
     }
 
-    // #
-    // Triggered when the admin clicks on a availability slot in the agenda.
-    // @see http://fullcalendar.io/docs/mouse/eventClick/
-    // #
+    /**
+     * Triggered when the admin clicks on a availability slot in the agenda.
+     * @see http://fullcalendar.io/docs/mouse/eventClick/
+     */
     var calendarEventClickCb = function (event, jsEvent, view) {
       $scope.availability = event
 
@@ -312,11 +312,11 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       }
     }
 
-    // #
-    // Triggered when fullCalendar tries to graphicaly render an event block.
-    // Append the event tag into the block, just after the event title.
-    // @see http://fullcalendar.io/docs/event_rendering/eventRender/
-    // #
+    /**
+     * Triggered when fullCalendar tries to graphicaly render an event block.
+     * Append the event tag into the block, just after the event title.
+     * @see http://fullcalendar.io/docs/event_rendering/eventRender/
+     */
     var eventRenderCb = function (event, element) {
       element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>')
       if (event.tags.length > 0) {
@@ -329,10 +329,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     // force return to prevent coffee-script auto-return to return random value (possiblity falsy)
     }
 
-    // #
-    // Triggered when resource fetching starts/stops.
-    // @see https://fullcalendar.io/docs/resource_data/loading/
-    // #
+    /**
+     * Triggered when resource fetching starts/stops.
+     * @see https://fullcalendar.io/docs/resource_data/loading/
+     */
     return loadingCb = function (isLoading, view) {
       if (isLoading) {
       // we remove existing events when fetching starts to prevent duplicates
@@ -343,42 +343,42 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
 ])
 
-// #
-// Controller used in the slot creation modal window
-// #
+/**
+ * Controller used in the slot creation modal window
+ */
 Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'Tag', 'growl', '_t',
   function ($scope, $uibModalInstance, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, Tag, growl, _t) {
-  // # $uibModal parameter
+  // $uibModal parameter
     $scope.start = start
 
-    // # $uibModal parameter
+    // $uibModal parameter
     $scope.end = end
 
-    // # machines list
+    // machines list
     $scope.machines = machinesPromise.filter(m => !m.disabled)
 
-    // # trainings list
+    // trainings list
     $scope.trainings = trainingsPromise.filter(t => !t.disabled)
 
-    // # spaces list
+    // spaces list
     $scope.spaces = spacesPromise.filter(s => !s.disabled)
 
-    // # machines associated with the created slot
+    // machines associated with the created slot
     $scope.selectedMachines = []
 
-    // # training associated with the created slot
+    // training associated with the created slot
     $scope.selectedTraining = null
 
-    // # space associated with the created slot
+    // space associated with the created slot
     $scope.selectedSpace = null
 
-    // # UI step
+    // UI step
     $scope.step = 1
 
-    // # the user is not able to edit the ending time of the availability, unless he set the type to 'training'
+    // the user is not able to edit the ending time of the availability, unless he set the type to 'training'
     $scope.endDateReadOnly = true
 
-    // # timepickers configuration
+    // timepickers configuration
     $scope.timepickers = {
       start: {
         hstep: 1,
@@ -390,17 +390,17 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
     }
 
-    // # slot details
+    // slot details
     $scope.availability = {
       start_at: start,
       end_at: end,
       available_type: 'machines' // default
     }
 
-    // #
-    // Adds or removes the provided machine from the current slot
-    // @param machine {Object}
-    // #
+    /**
+     * Adds or removes the provided machine from the current slot
+     * @param machine {Object}
+     */
     $scope.toggleSelection = function (machine) {
       const index = $scope.selectedMachines.indexOf(machine)
       if (index > -1) {
@@ -410,9 +410,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
     }
 
-    // #
-    // Callback for the modal window validation: save the slot and closes the modal
-    // #
+    /**
+     * Callback for the modal window validation: save the slot and closes the modal
+     */
     $scope.ok = function () {
       if ($scope.availability.available_type === 'machines') {
         if ($scope.selectedMachines.length > 0) {
@@ -431,27 +431,27 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         , availability => $uibModalInstance.close(availability))
     }
 
-    // #
-    // Move the modal UI to the next step
-    // #
+    /**
+     * Move the modal UI to the next step
+     */
     $scope.next = function () {
       if ($scope.step === 1) { $scope.setNbTotalPlaces() }
       return $scope.step++
     }
 
-    // #
-    // Move the modal UI to the next step
-    // #
+    /**
+     * Move the modal UI to the next step
+     */
     $scope.previous = () => $scope.step--
 
-    // #
-    // Callback to cancel the slot creation
-    // #
+    /**
+     * Callback to cancel the slot creation
+     */
     $scope.cancel = () => $uibModalInstance.dismiss('cancel')
 
-    // #
-    // For training avaiabilities, set the maximum number of people allowed to register on this slot
-    // #
+    /**
+     * For training avaiabilities, set the maximum number of people allowed to register on this slot
+     */
     $scope.setNbTotalPlaces = function () {
       if ($scope.availability.available_type === 'training') {
         return $scope.availability.nb_total_places = $scope.selectedTraining.nb_total_places
@@ -462,9 +462,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       if ($scope.trainings.length > 0) {
         $scope.selectedTraining = $scope.trainings[0]
@@ -475,9 +475,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
       Tag.query().$promise.then(data => $scope.tags = data)
 
-      // # When we configure a machine availability, do not let the user change the end time, as the total
-      // # time must be dividable by 60 minutes (base slot duration). For training availabilities, the user
-      // # can configure any duration as it does not matters.
+      // When we configure a machine availability, do not let the user change the end time, as the total
+      // time must be dividable by 60 minutes (base slot duration). For training availabilities, the user
+      // can configure any duration as it does not matters.
       $scope.$watch('availability.available_type', function (newValue, oldValue, scope) {
         if ((newValue === 'machines') || (newValue === 'space')) {
           $scope.endDateReadOnly = true
@@ -489,8 +489,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         }
       })
 
-      // # When the start date is changed, if we are configuring a machine availability,
-      // # maintain the relative length of the slot (ie. change the end time accordingly)
+      // When the start date is changed, if we are configuring a machine availability,
+      // maintain the relative length of the slot (ie. change the end time accordingly)
       $scope.$watch('start', function (newValue, oldValue, scope) {
       // for machine or space availabilities, adjust the end time
         if (($scope.availability.available_type === 'machines') || ($scope.availability.available_type === 'space')) {
@@ -507,9 +507,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         return $scope.availability.start_at = $scope.start
       })
 
-      // # Maintain consistency between the end time and the date object in the availability object
+      // Maintain consistency between the end time and the date object in the availability object
       return $scope.$watch('end', function (newValue, oldValue, scope) {
-      // # we prevent the admin from setting the end of the availability before its begining
+      // we prevent the admin from setting the end of the availability before its begining
         if (moment($scope.start).add(1, 'hour').isAfter(newValue)) {
           $scope.end = oldValue
         }
@@ -518,7 +518,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       })
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

@@ -40,9 +40,9 @@ Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', ($roo
         }
       })
 
-      // #
-      // Callback to validate the code
-      // #
+      /**
+       * Callback to validate the code
+       */
       $scope.validateCode = function () {
         $scope.messages = []
         if ($scope.couponCode === '') {
@@ -66,9 +66,9 @@ Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', ($roo
         }
       }
 
-      // #
-      // Callback to remove the message at provided index from the displayed list
-      // #
+      /**
+       * Callback to remove the message at provided index from the displayed list
+       */
       return $scope.closeMessage = index => $scope.messages.splice(index, 1)
     }
   })

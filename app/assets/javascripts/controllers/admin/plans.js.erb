@@ -25,20 +25,20 @@ class PlanController {
     // protection against request forgery
     CSRF.setMetaTags()
 
-    // # groups list
+    // groups list
     $scope.groups = groups.filter(g => (g.slug !== 'admins') && !g.disabled)
 
-    // # users with role 'partner', notifiables for a partner plan
+    // users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users
 
-    // # Subscriptions prices, machines prices and training prices, per groups
+    // Subscriptions prices, machines prices and training prices, per groups
     $scope.group_pricing = prices
 
-    // #
-    // For use with 'ng-class', returns the CSS class name for the uploads previews.
-    // The preview may show a placeholder or the content of the file depending on the upload state.
-    // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    // #
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
     $scope.fileinputClass = function (v) {
       if (v) {
         return 'fileinput-exists'
@@ -47,10 +47,10 @@ class PlanController {
       }
     }
 
-    // #
-    // Mark the provided file for deletion
-    // @param file {Object}
-    // #
+    /**
+     * Mark the provided file for deletion
+     * @param file {Object}
+     */
     $scope.deleteFile = function (file) {
       if ((file != null) && (file.id != null)) {
         return file._destroy = true
@@ -59,30 +59,30 @@ class PlanController {
   }
 }
 
-// #
-// Controller used in the plan creation form
-// #
+/**
+ * Controller used in the plan creation form
+ */
 Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t',
   function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t) {
     ({
     /* PRIVATE STATIC CONSTANTS */
 
-      // # when creating a new contact for a partner plan, this ID will be sent to the server
+      // when creating a new contact for a partner plan, this ID will be sent to the server
       NEW_PARTNER_ID: null
 
     /* PUBLIC SCOPE */
     })
 
-    // # current form is used to create a new plan
+    // current form is used to create a new plan
     $scope.mode = 'creation'
 
-    // # prices bindings
+    // prices bindings
     $scope.prices = {
       training: {},
       machine: {}
     }
 
-    // # form inputs bindings
+    // form inputs bindings
     $scope.plan = {
       type: null,
       group_id: null,
@@ -95,21 +95,21 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       ui_weight: 0
     }
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = '/api/plans/'
 
-    // # HTTP method for the rest API
+    // HTTP method for the rest API
     $scope.method = 'POST'
 
-    // #
-    // Checks if the partner contact is a valid data. Used in the form validation process
-    // @returns {boolean}
-    // #
+    /**
+     * Checks if the partner contact is a valid data. Used in the form validation process
+     * @returns {boolean}
+     */
     $scope.partnerIsValid = () => ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email))
 
-    // #
-    // Open a modal dialog allowing the admin to create a new partner user
-    // #
+    /**
+     * Open a modal dialog allowing the admin to create a new partner user
+     */
     $scope.openPartnerNewModal = function (subscription) {
       const modalInstance = $uibModal.open({
         animation: true,
@@ -136,11 +136,11 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       })
     }
 
-    // #
-    // Display some messages and redirect the user, once the form was submitted, depending on the result status
-    // (failed/succeeded).
-    // @param content {Object}
-    // #
+    /**
+     * Display some messages and redirect the user, once the form was submitted, depending on the result status
+     * (failed/succeeded).
+     * @param content {Object}
+     */
     $scope.afterSubmit = function (content) {
       if ((content.id == null) && (content.plan_ids == null)) {
         return growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'))
@@ -160,43 +160,43 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
   }
 ])
 
-// #
-// Controller used in the plan edition form
-// #
+/**
+ * Controller used in the plan edition form
+ */
 Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'plans', 'planPromise', 'machines', 'spaces', 'prices', 'partners', 'CSRF', '$state', '$stateParams', 'growl', '$filter', '_t', 'Plan',
   function ($scope, groups, plans, planPromise, machines, spaces, prices, partners, CSRF, $state, $stateParams, growl, $filter, _t, Plan) {
   /* PUBLIC SCOPE */
 
-    // # List of spaces
+    // List of spaces
     $scope.spaces = spaces
 
-    // # List of plans
+    // List of plans
     $scope.plans = plans
 
-    // # List of machines
+    // List of machines
     $scope.machines = machines
 
-    // # List of groups
+    // List of groups
     $scope.groups = groups
 
-    // # current form is used for edition mode
+    // current form is used for edition mode
     $scope.mode = 'edition'
 
-    // # edited plan data
+    // edited plan data
     $scope.plan = planPromise
     if ($scope.plan.type === null) { $scope.plan.type = 'Plan' }
     if ($scope.plan.disabled) { $scope.plan.disabled = 'true' }
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = `/api/plans/${$stateParams.id}`
 
-    // # HTTP method for the rest API
+    // HTTP method for the rest API
     $scope.method = 'PATCH'
 
-    // #
-    // If a parent plan was set ($scope.plan.parent), the prices will be copied from this parent plan into
-    // the current plan prices list. Otherwise, the current plan prices will be erased.
-    // #
+    /**
+     * If a parent plan was set ($scope.plan.parent), the prices will be copied from this parent plan into
+     * the current plan prices list. Otherwise, the current plan prices will be erased.
+     */
     $scope.copyPricesFromPlan = function () {
       if ($scope.plan.parent) {
         return Plan.get({ id: $scope.plan.parent }, parentPlan =>
@@ -229,10 +229,10 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
       }
     }
 
-    // #
-    // Display some messages once the form was submitted, depending on the result status (failed/succeeded)
-    // @param content {Object}
-    // #
+    /**
+     * Display some messages once the form was submitted, depending on the result status (failed/succeeded)
+     * @param content {Object}
+     */
     $scope.afterSubmit = function (content) {
       if ((content.id == null) && (content.plan_ids == null)) {
         return growl.error(_t('edit_plan.unable_to_save_subscription_changes_please_try_again'))
@@ -242,21 +242,21 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
       }
     }
 
-    // #
-    // Generate a string identifying the given plan by literal humain-readable name
-    // @param plan {Object} Plan object, as recovered from GET /api/plan/:id
-    // @param groups {Array} List of Groups objects, as recovered from GET /api/groups
-    // @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
-    // will be included.
-    // @returns {String}
-    // #
+    /**
+     * Generate a string identifying the given plan by literal humain-readable name
+     * @param plan {Object} Plan object, as recovered from GET /api/plan/:id
+     * @param groups {Array} List of Groups objects, as recovered from GET /api/groups
+     * @param short {boolean} If true, the generated name will contains the group slug, otherwise the group full name
+     * will be included.
+     * @returns {String}
+     */
     $scope.humanReadablePlanName = (plan, groups, short) => `${$filter('humanReadablePlanName')(plan, groups, short)}`
 
-    // #
-    // Retrieve the machine from its ID
-    // @param machine_id {number} machine identifier
-    // @returns {Object} Machine
-    // #
+    /**
+     * Retrieve the machine from its ID
+     * @param machine_id {number} machine identifier
+     * @returns {Object} Machine
+     */
     $scope.getMachine = function (machine_id) {
       for (let machine of Array.from($scope.machines)) {
         if (machine.id === machine_id) {
@@ -265,11 +265,11 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
       }
     }
 
-    // #
-    // Retrieve the space from its ID
-    // @param space_id {number} space identifier
-    // @returns {Object} Space
-    // #
+    /**
+     * Retrieve the space from its ID
+     * @param space_id {number} space identifier
+     * @returns {Object} Space
+     */
     $scope.getSpace = function (space_id) {
       for (let space of Array.from($scope.spaces)) {
         if (space.id === space_id) {
@@ -280,14 +280,14 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = () =>
     // Using the PlansController
       new PlanController($scope, groups, prices, partners, CSRF)
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

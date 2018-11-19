@@ -15,27 +15,27 @@
 
 /* COMMON CODE */
 
-// # list of supported authentication methods
+// list of supported authentication methods
 const METHODS = {
   'DatabaseProvider': 'local_database',
   'OAuth2Provider': 'o_auth2'
 }
 
-// #
-// Iterate through the provided array and return the index of the requested element
-// @param elements {Array<{id:*}>}
-// @param id {*} id of the element to retrieve in the list
-// @returns {number} index of the requested element, in the provided array
-// #
+/**
+ * Iterate through the provided array and return the index of the requested element
+ * @param elements {Array<{id:*}>}
+ * @param id {*} id of the element to retrieve in the list
+ * @returns {number} index of the requested element, in the provided array
+ */
 const findIdxById = (elements, id) =>
   (elements.map(elem => elem.id)).indexOf(id)
 
-// #
-// For OAuth2 ententications, mapping the user's ID is mendatory. This function will check that this mapping
-// is effective and will return false otherwise
-// @param mappings {Array<Object>} expected: $scope.provider.providable_attributes.o_auth2_mappings_attributes
-// @returns {Boolean} true if the mapping is declared
-// #
+/**
+ * For OAuth2 ententications, mapping the user's ID is mendatory. This function will check that this mapping
+ * is effective and will return false otherwise
+ * @param mappings {Array<Object>} expected: $scope.provider.providable_attributes.o_auth2_mappings_attributes
+ * @returns {Boolean} true if the mapping is declared
+ */
 const check_oauth2_id_is_mapped = function (mappings) {
   for (let mapping of Array.from(mappings)) {
     if ((mapping.local_model === 'user') && (mapping.local_field === 'uid') && !mapping._destroy) {
@@ -45,36 +45,36 @@ const check_oauth2_id_is_mapped = function (mappings) {
   return false
 }
 
-// #
-// Provides a set of common callback methods and data to the $scope parameter. These methods are used
-// in the various authentication providers' controllers.
-//
-// Provides :
-//  - $scope.authMethods
-//  - $scope.mappingFields
-//  - $scope.cancel()
-//  - $scope.defineDataMapping(mapping)
-//
-// Requires :
-//  - mappingFieldsPromise: retrieved by AuthProvider.mapping_fields()
-//  - $state (Ui-Router) [ 'app.admin.members' ]
-// #
+/**
+ * Provides a set of common callback methods and data to the $scope parameter. These methods are used
+ * in the various authentication providers' controllers.
+ *
+ * Provides :
+ *  - $scope.authMethods
+ *  - $scope.mappingFields
+ *  - $scope.cancel()
+ *  - $scope.defineDataMapping(mapping)
+ *
+ * Requires :
+ *  - mappingFieldsPromise: retrieved by AuthProvider.mapping_fields()
+ *  - $state (Ui-Router) [ 'app.admin.members' ]
+ */
 class AuthenticationController {
   constructor ($scope, $state, $uibModal, mappingFieldsPromise) {
-    // # list of supported authentication methods
+    // list of supported authentication methods
     $scope.authMethods = METHODS
 
-    // # list of fields that can be mapped through the SSO
+    // list of fields that can be mapped through the SSO
     $scope.mappingFields = mappingFieldsPromise
 
-    // #
-    // Changes the admin's view to the members list page
-    // #
+    /**
+     * Changes the admin's view to the members list page
+     */
     $scope.cancel = () => $state.go('app.admin.members')
 
-    // #
-    // Open a modal allowing to specify the data mapping for the given field
-    // #
+    /**
+     * Open a modal allowing to specify the data mapping for the given field
+     */
     $scope.defineDataMapping = mapping =>
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/authentications/_data_mapping.html" %>',
@@ -91,14 +91,14 @@ class AuthenticationController {
         },
 
         controller: ['$scope', '$uibModalInstance', 'field', 'datatype', function ($scope, $uibModalInstance, field, datatype) {
-          // # parent field
+          // parent field
           $scope.field = field
-          // # expected data type
+          // expected data type
           $scope.datatype = datatype
-          // # data transformation rules
+          // data transformation rules
           $scope.transformation =
             { rules: field.transformation || { type: datatype } }
-          // # available transformation formats
+          // available transformation formats
           $scope.formats = {
             date: [
               {
@@ -124,7 +124,7 @@ class AuthenticationController {
             ]
           }
 
-          // # Create a new mapping between anything and an expected integer
+          // Create a new mapping between anything and an expected integer
           $scope.addIntegerMapping = function () {
             if (!angular.isArray($scope.transformation.rules.mapping)) {
               $scope.transformation.rules.mapping = []
@@ -132,10 +132,10 @@ class AuthenticationController {
             return $scope.transformation.rules.mapping.push({ from: '', to: 0 })
           }
 
-          // # close and save the modifications
+          // close and save the modifications
           $scope.ok = () => $uibModalInstance.close($scope.transformation.rules)
 
-          // # do not save the modifications
+          // do not save the modifications
           return $scope.cancel = () => $uibModalInstance.dismiss()
         }
         ] })
@@ -143,21 +143,21 @@ class AuthenticationController {
   }
 }
 
-// #
-// Page listing all authentication providers
-// #
+/**
+ * Page listing all authentication providers
+ */
 Application.Controllers.controller('AuthentificationController', ['$scope', '$state', '$rootScope', 'dialogs', 'growl', 'authProvidersPromise', 'AuthProvider', '_t',
   function ($scope, $state, $rootScope, dialogs, growl, authProvidersPromise, AuthProvider, _t) {
   /* PUBLIC SCOPE */
 
-    // # full list of authentication providers
+    // full list of authentication providers
     $scope.providers = authProvidersPromise
 
-    // #
-    // Translate the classname into an explicit textual message
-    // @param type {string} Ruby polymorphic model classname
-    // @returns {string}
-    // #
+    /**
+     * Translate the classname into an explicit textual message
+     * @param type {string} Ruby polymorphic model classname
+     * @returns {string}
+     */
     $scope.getType = function (type) {
       const text = METHODS[type]
       if (typeof text !== 'undefined') {
@@ -167,11 +167,11 @@ Application.Controllers.controller('AuthentificationController', ['$scope', '$st
       }
     }
 
-    // #
-    // Translate the status string into an explicit textual message
-    // @param status {string} active | pending | previous
-    // @returns {string}
-    // #
+    /**
+     * Translate the status string into an explicit textual message
+     * @param status {string} active | pending | previous
+     * @returns {string}
+     */
     $scope.getState = function (status) {
       switch (status) {
         case 'active': return _t('active')
@@ -181,11 +181,11 @@ Application.Controllers.controller('AuthentificationController', ['$scope', '$st
       }
     }
 
-    // #
-    // Ask for confirmation then delete the specified provider
-    // @param providers {Array} full list of authentication providers
-    // @param provider {Object} provider to delete
-    // #
+    /**
+     * Ask for confirmation then delete the specified provider
+     * @param providers {Array} full list of authentication providers
+     * @param provider {Object} provider to delete
+     */
     return $scope.destroyProvider = (providers, provider) =>
       dialogs.confirm({
         resolve: {
@@ -210,23 +210,23 @@ Application.Controllers.controller('AuthentificationController', ['$scope', '$st
 
 ])
 
-// #
-// Page to add a new authentication provider
-// #
+/**
+ * Page to add a new authentication provider
+ */
 Application.Controllers.controller('NewAuthenticationController', ['$scope', '$state', '$rootScope', '$uibModal', 'dialogs', 'growl', 'mappingFieldsPromise', 'authProvidersPromise', 'AuthProvider', '_t',
   function ($scope, $state, $rootScope, $uibModal, dialogs, growl, mappingFieldsPromise, authProvidersPromise, AuthProvider, _t) {
     $scope.mode = 'creation'
 
-    // # default parameters for the new authentication provider
+    // default parameters for the new authentication provider
     $scope.provider = {
       name: '',
       providable_type: '',
       providable_attributes: {}
     }
 
-    // #
-    // Initialize some provider's specific properties when selecting the provider type
-    // #
+    /**
+     * Initialize some provider's specific properties when selecting the provider type
+     */
     $scope.updateProvidable = function () {
     // === OAuth2Provider ===
       if ($scope.provider.providable_type === 'OAuth2Provider') {
@@ -237,9 +237,9 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
     }
     // Add others providers initializers here if needed ...
 
-    // #
-    // Validate and save the provider parameters in database
-    // #
+    /**
+     * Validate and save the provider parameters in database
+     */
     $scope.registerProvider = function () {
     // === DatabaseProvider ===
       let provider
@@ -292,24 +292,24 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
       }
     }
 
-    // # Using the AuthenticationController
+    // Using the AuthenticationController
     return new AuthenticationController($scope, $state, $uibModal, mappingFieldsPromise)
   }
 ])
 
-// #
-// Page to edit an already added authentication provider
-// #
+/**
+ * Page to edit an already added authentication provider
+ */
 Application.Controllers.controller('EditAuthenticationController', ['$scope', '$state', '$stateParams', '$rootScope', '$uibModal', 'dialogs', 'growl', 'providerPromise', 'mappingFieldsPromise', 'AuthProvider', '_t',
   function ($scope, $state, $stateParams, $rootScope, $uibModal, dialogs, growl, providerPromise, mappingFieldsPromise, AuthProvider, _t) {
-  // # parameters of the currently edited authentication provider
+  // parameters of the currently edited authentication provider
     $scope.provider = providerPromise
 
     $scope.mode = 'edition'
 
-    // #
-    // Update the current provider with the new inputs
-    // #
+    /**
+     * Update the current provider with the new inputs
+     */
     $scope.updateProvider = function () {
     // check the ID mapping
       if (!check_oauth2_id_is_mapped($scope.provider.providable_attributes.o_auth2_mappings_attributes)) {
@@ -323,7 +323,7 @@ Application.Controllers.controller('EditAuthenticationController', ['$scope', '$
       , () => growl.error(_t('an_error_occurred_unable_to_update_the_provider')))
     }
 
-    // # Using the AuthenticationController
+    // Using the AuthenticationController
     return new AuthenticationController($scope, $state, $uibModal, mappingFieldsPromise)
   }
 ])

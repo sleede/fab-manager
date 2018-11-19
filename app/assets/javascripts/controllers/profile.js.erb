@@ -17,37 +17,37 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
   function ($scope, $rootScope, $state, $window, _t, growl, CSRF, Auth, Member, settingsPromise, activeProviderPromise, groupsPromise, cguFile, memberPromise, Session, dialogs, AuthProvider) {
   /* PUBLIC SCOPE */
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = `/api/members/${memberPromise.id}`
 
-    // # Form action on the above URL
+    // Form action on the above URL
     $scope.method = 'patch'
 
-    // # genre of the application name (eg. "_le_ Fablab" or "_la_ Fabrique")
+    // genre of the application name (eg. "_le_ Fablab" or "_la_ Fabrique")
     $scope.nameGenre = settingsPromise.name_genre
 
-    // # name of the current fablab application (eg. "Fablab de la Casemate")
+    // name of the current fablab application (eg. "Fablab de la Casemate")
     $scope.fablabName = settingsPromise.fablab_name
 
-    // # information from the current SSO provider
+    // information from the current SSO provider
     $scope.activeProvider = activeProviderPromise
 
-    // # list of user's groups (student/standard/...)
+    // list of user's groups (student/standard/...)
     $scope.groups = groupsPromise
 
-    // # current user, contains information retrieved from the SSO
+    // current user, contains information retrieved from the SSO
     $scope.user = memberPromise
 
-    // # disallow the user to change his password as he connect from SSO
+    // disallow the user to change his password as he connect from SSO
     $scope.preventPassword = true
 
-    // # mapping of fields to disable
+    // mapping of fields to disable
     $scope.preventField = {}
 
-    // # CGU
+    // CGU
     $scope.cgu = cguFile.custom_asset
 
-    // # Angular-Bootstrap datepicker configuration for birthday
+    // Angular-Bootstrap datepicker configuration for birthday
     $scope.datePicker = {
       format: Fablab.uibDateFormat,
       opened: false, // default: datePicker is not shown
@@ -56,23 +56,23 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       }
     }
 
-    // #
-    // Callback to diplay the datepicker as a dropdown when clicking on the input field
-    // @param $event {Object} jQuery event object
-    // #
+    /**
+     * Callback to diplay the datepicker as a dropdown when clicking on the input field
+     * @param $event {Object} jQuery event object
+     */
     $scope.openDatePicker = function ($event) {
       $event.preventDefault()
       $event.stopPropagation()
       return $scope.datePicker.opened = true
     }
 
-    // #
-    // For use with ngUpload (https://github.com/twilson63/ngUpload).
-    // Intended to be the callback when the upload is done: any raised error will be stacked in the
-    // $scope.alerts array. If everything goes fine, the user's profile is updated and the user is
-    // redirected to the home page
-    // @param content {Object} JSON - The upload's result
-    // #
+    /**
+     * For use with ngUpload (https://github.com/twilson63/ngUpload).
+     * Intended to be the callback when the upload is done: any raised error will be stacked in the
+     * $scope.alerts array. If everything goes fine, the user's profile is updated and the user is
+     * redirected to the home page
+     * @param content {Object} JSON - The upload's result
+     */
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
@@ -96,11 +96,11 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       }
     }
 
-    // #
-    // For use with 'ng-class', returns the CSS class name for the uploads previews.
-    // The preview may show a placeholder or the content of the file depending on the upload state.
-    // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    // #
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
     $scope.fileinputClass = function (v) {
       if (v) {
         return 'fileinput-exists'
@@ -109,9 +109,9 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       }
     }
 
-    // #
-    // Merge the current user into the account with the given auth_token
-    // #
+    /**
+     * Merge the current user into the account with the given auth_token
+     */
     $scope.registerAuthToken = () =>
       Member.merge({ id: $rootScope.currentUser.id }, { user: { auth_token: $scope.user.auth_token } }, function (user) {
         $scope.user = user
@@ -128,10 +128,10 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
         }
       })
 
-    // #
-    // Return the email given by the SSO provider, parsed if needed
-    // @return {String} E-mail of the current user
-    // #
+    /**
+     * Return the email given by the SSO provider, parsed if needed
+     * @return {String} E-mail of the current user
+     */
     $scope.ssoEmail = function () {
       const { email } = memberPromise
       if (email) {
@@ -143,10 +143,10 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       return email
     }
 
-    // #
-    // Test if the user's mail is marked as duplicate
-    // @return {boolean}
-    // #
+    /**
+     * Test if the user's mail is marked as duplicate
+     * @return {boolean}
+     */
     $scope.hasDuplicate = function () {
       const { email } = memberPromise
       if (email) {
@@ -154,10 +154,10 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       }
     }
 
-    // #
-    // Ask for email confirmation and send the SSO merging token again
-    // @param $event {Object} jQuery event object
-    // #
+    /**
+     * Ask for email confirmation and send the SSO merging token again
+     * @param $event {Object} jQuery event object
+     */
     $scope.resendCode = function (event) {
       event.preventDefault()
       event.stopPropagation()
@@ -176,9 +176,9 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       )
     }
 
-    // #
-    // Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
-    // #
+    /**
+     * Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
+     */
     $scope.syncProfile = () =>
       Auth.logout().then(function (oldUser) {
         Session.destroy()
@@ -193,9 +193,9 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       CSRF.setMetaTags()
 
@@ -206,7 +206,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true)
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 

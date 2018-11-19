@@ -17,33 +17,33 @@
 
 /* COMMON CODE */
 
-// #
-// Provides a set of common properties and methods to the $scope parameter. They are used
-// in the various projects' admin controllers.
-//
-// Provides :
-//  - $scope.totalSteps
-//  - $scope.machines = [{Machine}]
-//  - $scope.components = [{Component}]
-//  - $scope.themes = [{Theme}]
-//  - $scope.licences = [{Licence}]
-//  - $scope.allowedExtensions = [{String}]
-//  - $scope.submited(content)
-//  - $scope.cancel()
-//  - $scope.addFile()
-//  - $scope.deleteFile(file)
-//  - $scope.addStep()
-//  - $scope.deleteStep(step)
-//  - $scope.changeStepIndex(step, newIdx)
-//
-// Requires :
-//  - $scope.project.project_caos_attributes = []
-//  - $scope.project.project_steps_attributes = []
-//  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
-// #
+/**
+ * Provides a set of common properties and methods to the $scope parameter. They are used
+ * in the various projects' admin controllers.
+ *
+ * Provides :
+ *  - $scope.totalSteps
+ *  - $scope.machines = [{Machine}]
+ *  - $scope.components = [{Component}]
+ *  - $scope.themes = [{Theme}]
+ *  - $scope.licences = [{Licence}]
+ *  - $scope.allowedExtensions = [{String}]
+ *  - $scope.submited(content)
+ *  - $scope.cancel()
+ *  - $scope.addFile()
+ *  - $scope.deleteFile(file)
+ *  - $scope.addStep()
+ *  - $scope.deleteStep(step)
+ *  - $scope.changeStepIndex(step, newIdx)
+ *
+ * Requires :
+ *  - $scope.project.project_caos_attributes = []
+ *  - $scope.project.project_steps_attributes = []
+ *  - $state (Ui-Router) [ 'app.public.projects_show', 'app.public.projects_list' ]
+ */
 class ProjectsController {
   constructor ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t) {
-    // # Retrieve the list of machines from the server
+    // Retrieve the list of machines from the server
     Machine.query().$promise.then(data =>
       $scope.machines = data.map(d =>
         ({
@@ -53,7 +53,7 @@ class ProjectsController {
       )
     )
 
-    // # Retrieve the list of components from the server
+    // Retrieve the list of components from the server
     Component.query().$promise.then(data =>
       $scope.components = data.map(d =>
         ({
@@ -63,7 +63,7 @@ class ProjectsController {
       )
     )
 
-    // # Retrieve the list of themes from the server
+    // Retrieve the list of themes from the server
     Theme.query().$promise.then(data =>
       $scope.themes = data.map(d =>
         ({
@@ -73,7 +73,7 @@ class ProjectsController {
       )
     )
 
-    // # Retrieve the list of licences from the server
+    // Retrieve the list of licences from the server
     Licence.query().$promise.then(data =>
       $scope.licences = data.map(d =>
         ({
@@ -83,18 +83,18 @@ class ProjectsController {
       )
     )
 
-    // # Total number of documentation steps for the current project
+    // Total number of documentation steps for the current project
     $scope.totalSteps = $scope.project.project_steps_attributes.length
 
-    // # List of extensions allowed for CAD attachements upload
+    // List of extensions allowed for CAD attachements upload
     $scope.allowedExtensions = allowedExtensions
 
-    // #
-    // For use with ngUpload (https://github.com/twilson63/ngUpload).
-    // Intended to be the callback when an upload is done: any raised error will be stacked in the
-    // $scope.alerts array. If everything goes fine, the user is redirected to the project page.
-    // @param content {Object} JSON - The upload's result
-    // #
+    /**
+     * For use with ngUpload (https://github.com/twilson63/ngUpload).
+     * Intended to be the callback when an upload is done: any raised error will be stacked in the
+     * $scope.alerts array. If everything goes fine, the user is redirected to the project page.
+     * @param content {Object} JSON - The upload's result
+     */
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
@@ -113,11 +113,11 @@ class ProjectsController {
       }
     }
 
-    // #
-    // For use with 'ng-class', returns the CSS class name for the uploads previews.
-    // The preview may show a placeholder or the content of the file depending on the upload state.
-    // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    // #
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
     $scope.fileinputClass = function (v) {
       if (v) {
         return 'fileinput-exists'
@@ -126,17 +126,17 @@ class ProjectsController {
       }
     }
 
-    // #
-    // This will create a single new empty entry into the project's CAO attachements list.
-    // #
+    /**
+     * This will create a single new empty entry into the project's CAO attachements list.
+     */
     $scope.addFile = () => $scope.project.project_caos_attributes.push({})
 
-    // #
-    // This will remove the given file from the project's CAO attachements list. If the file was previously uploaded
-    // to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
-    // the CAO attachements array.
-    // @param file {Object} the file to delete
-    // #
+    /**
+     * This will remove the given file from the project's CAO attachements list. If the file was previously uploaded
+     * to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
+     * the CAO attachements array.
+     * @param file {Object} the file to delete
+     */
     $scope.deleteFile = function (file) {
       const index = $scope.project.project_caos_attributes.indexOf(file)
       if (file.id != null) {
@@ -146,20 +146,20 @@ class ProjectsController {
       }
     }
 
-    // #
-    // This will create a single new empty entry into the project's steps list.
-    // #
+    /**
+     * This will create a single new empty entry into the project's steps list.
+     */
     $scope.addStep = function () {
       $scope.totalSteps += 1
       return $scope.project.project_steps_attributes.push({ step_nb: $scope.totalSteps, project_step_images_attributes: [] })
     }
 
-    // #
-    // This will remove the given step from the project's steps list. If the step was previously saved
-    // on the server, it will be marked for deletion for the next saving. Otherwise, it will be simply truncated from
-    // the steps array.
-    // @param file {Object} the file to delete
-    // #
+    /**
+     * This will remove the given step from the project's steps list. If the step was previously saved
+     * on the server, it will be marked for deletion for the next saving. Otherwise, it will be simply truncated from
+     * the steps array.
+     * @param file {Object} the file to delete
+     */
     $scope.deleteStep = step =>
       dialogs.confirm({
         resolve: {
@@ -195,13 +195,13 @@ class ProjectsController {
         })()
       })
 
-    // #
-    // Change the step_nb property of the given step to the new value provided. The step that was previously at this
-    // index will be assigned to the old position of the provided step.
-    // @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
-    // @param step {Object} the project's step to reindex
-    // @param newIdx {number} the new index to assign to the step
-    // #
+    /**
+     * Change the step_nb property of the given step to the new value provided. The step that was previously at this
+     * index will be assigned to the old position of the provided step.
+     * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+     * @param step {Object} the project's step to reindex
+     * @param newIdx {number} the new index to assign to the step
+     */
     $scope.changeStepIndex = function (event, step, newIdx) {
       if (event) { event.preventDefault() }
       for (let s of Array.from($scope.project.project_steps_attributes)) {
@@ -224,16 +224,16 @@ class ProjectsController {
         , error => console.error(error))
     }
 
-    // #
-    // This will create a single new empty entry into the project's step image list.
-    // #
+    /**
+     * This will create a single new empty entry into the project's step image list.
+     */
     $scope.addProjectStepImage = step => step.project_step_images_attributes.push({})
 
-    // #
-    // This will remove the given image from the project's step image list.
-    // @param step {Object} the project step has images
-    // @param image {Object} the image to delete
-    // #
+    /**
+     * This will remove the given image from the project's step image list.
+     * @param step {Object} the project step has images
+     * @param image {Object} the image to delete
+     */
     $scope.deleteProjectStepImage = function (step, image) {
       const index = step.project_step_images_attributes.indexOf(image)
       if (image.id != null) {
@@ -245,9 +245,9 @@ class ProjectsController {
   }
 }
 
-// #
-//  Controller used on projects listing page
-// #
+/**
+ *  Controller used on projects listing page
+ */
 Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'Project', 'machinesPromise', 'themesPromise', 'componentsPromise', 'paginationService', 'OpenlabProject', '$window', 'growl', '_t', '$location', '$timeout',
   function ($scope, $state, Project, machinesPromise, themesPromise, componentsPromise, paginationService, OpenlabProject, $window, growl, _t, $location, $timeout) {
   /* PRIVATE STATIC CONSTANTS */
@@ -257,16 +257,16 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     /* PUBLIC SCOPE */
 
-    // # Fab-manager's instance ID in the openLab network
+    // Fab-manager's instance ID in the openLab network
     $scope.openlabAppId = Fablab.openlabAppId
 
-    // # Is openLab enabled on the instance?
+    // Is openLab enabled on the instance?
     $scope.openlab = {
       projectsActive: Fablab.openlabProjectsActive,
       searchOverWholeNetwork: false
     }
 
-    // # default search parameters
+    // default search parameters
     $scope.search = {
       q: ($location.$$search.q || ''),
       from: ($location.$$search.from || undefined),
@@ -275,16 +275,16 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       theme_id: (parseInt($location.$$search.theme_id) || undefined)
     }
 
-    // # list of projects to display
+    // list of projects to display
     $scope.projects = []
 
-    // # list of machines / used for filtering
+    // list of machines / used for filtering
     $scope.machines = machinesPromise
 
-    // # list of themes / used for filtering
+    // list of themes / used for filtering
     $scope.themes = themesPromise
 
-    // # list of components / used for filtering
+    // list of components / used for filtering
     $scope.components = componentsPromise
 
     $scope.searchOverWholeNetworkChanged = () =>
@@ -334,10 +334,10 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       }
     }
 
-    // #
-    // Callback to switch the user's view to the detailled project page
-    // @param project {{slug:string}} The project to display
-    // #
+    /**
+     * Callback to switch the user's view to the detailled project page
+     * @param project {{slug:string}} The project to display
+     */
     $scope.showProject = function (project) {
       if (($scope.openlab.searchOverWholeNetwork === true) && (project.app_id !== Fablab.openlabAppId)) {
         $window.open(project.project_url, '_blank')
@@ -347,9 +347,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       }
     }
 
-    // #
-    // function to set all url query search parameters from search object
-    // #
+    /**
+     * function to set all url query search parameters from search object
+     */
     $scope.setUrlQueryParams = function (search) {
       updateUrlParam('page', 1)
       updateUrlParam('q', search.q)
@@ -361,9 +361,9 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       if ($location.$$search.whole_network === 'f') {
         $scope.openlab.searchOverWholeNetwork = false
@@ -373,10 +373,10 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       return $scope.triggerSearch()
     }
 
-    // #
-    // function to update url query param, little hack to turn off reloadOnSearch and re-enable it after setting the params
-    // params example: 'q' , 'presse-purée'
-    // #
+    /**
+     * function to update url query param, little hack to turn off reloadOnSearch and re-enable it after setting the params
+     * params example: 'q' , 'presse-purée'
+     */
     var updateUrlParam = function (name, value) {
       $state.current.reloadOnSearch = false
       $location.search(name, value)
@@ -399,25 +399,25 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         return project
       })
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
 
-// #
-// Controller used in the project creation page
-// #
+/**
+ * Controller used in the project creation page
+ */
 Application.Controllers.controller('NewProjectController', ['$scope', '$state', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
   function ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, Diacritics, dialogs, allowedExtensions, _t) {
     CSRF.setMetaTags()
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = '/api/projects/'
 
-    // # Form action on the above URL
+    // Form action on the above URL
     $scope.method = 'post'
 
-    // # Default project parameters
+    // Default project parameters
     $scope.project = {
       project_steps_attributes: [],
       project_caos_attributes: []
@@ -425,25 +425,25 @@ Application.Controllers.controller('NewProjectController', ['$scope', '$state', 
 
     $scope.matchingMembers = []
 
-    // # Using the ProjectsController
+    // Using the ProjectsController
     return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
   }
 ])
 
-// #
-// Controller used in the project edition page
-// #
+/**
+ * Controller used in the project edition page
+ */
 Application.Controllers.controller('EditProjectController', ['$scope', '$state', '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
   function ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
     CSRF.setMetaTags()
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = `/api/projects/${$stateParams.id}`
 
-    // # Form action on the above URL
+    // Form action on the above URL
     $scope.method = 'put'
 
-    // # Retrieve the project's details, if an error occured, redirect the user to the projects list page
+    // Retrieve the project's details, if an error occured, redirect the user to the projects list page
     $scope.project = projectPromise
 
     $scope.matchingMembers = $scope.project.project_users.map(u =>
@@ -453,28 +453,28 @@ Application.Controllers.controller('EditProjectController', ['$scope', '$state',
       })
     )
 
-    // # Using the ProjectsController
+    // Using the ProjectsController
     return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
   }
 ])
 
-// #
-// Controller used in the public project's details page
-// #
+/**
+ * Controller used in the public project's details page
+ */
 Application.Controllers.controller('ShowProjectController', ['$scope', '$state', 'projectPromise', '$location', '$uibModal', 'dialogs', '_t',
   function ($scope, $state, projectPromise, $location, $uibModal, dialogs, _t) {
   /* PUBLIC SCOPE */
 
-    // # Store the project's details
+    // Store the project's details
     $scope.project = projectPromise
     $scope.projectUrl = $location.absUrl()
     $scope.disqusShortname = Fablab.disqusShortname
 
-    // #
-    // Test if the provided user has the edition rights on the current project
-    // @param [user] {{id:number}} (optional) the user to check rights
-    // @returns boolean
-    // #
+    /**
+     * Test if the provided user has the edition rights on the current project
+     * @param [user] {{id:number}} (optional) the user to check rights
+     * @returns boolean
+     */
     $scope.projectEditableBy = function (user) {
       if ((user == null)) { return false }
       if ($scope.project.author_id === user.id) { return true }
@@ -485,20 +485,20 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
       return canEdit
     }
 
-    // #
-    // Test if the provided user has the deletion rights on the current project
-    // @param [user] {{id:number}} (optional) the user to check rights
-    // @returns boolean
-    // #
+    /**
+     * Test if the provided user has the deletion rights on the current project
+     * @param [user] {{id:number}} (optional) the user to check rights
+     * @returns boolean
+     */
     $scope.projectDeletableBy = function (user) {
       if ((user == null)) { return false }
       if ($scope.project.author_id === user.id) { return true }
     }
 
-    // #
-    // Callback to delete the current project. Then, the user is redirected to the projects list page,
-    // which is refreshed. Admins and project owner only are allowed to delete a project
-    // #
+    /**
+     * Callback to delete the current project. Then, the user is redirected to the projects list page,
+     * which is refreshed. Admins and project owner only are allowed to delete a project
+     */
     $scope.deleteProject = function () {
     // check the permissions
       if (($scope.currentUser.role === 'admin') || $scope.projectDeletableBy($scope.currentUser)) {
@@ -521,10 +521,10 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
       }
     }
 
-    // #
-    // Open a modal box containg a form that allow the end-user to signal an abusive content
-    // @param e {Object} jQuery event
-    // #
+    /**
+     * Open a modal box containg a form that allow the end-user to signal an abusive content
+     * @param e {Object} jQuery event
+     */
     $scope.signalAbuse = function (e) {
       if (e) { e.preventDefault() }
 
@@ -559,14 +559,14 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
         ] })
     }
 
-    // #
-    // Return the URL allowing to share the current project on the Facebook social network
-    // #
+    /**
+     * Return the URL allowing to share the current project on the Facebook social network
+     */
     $scope.shareOnFacebook = () => `https://www.facebook.com/share.php?u=${$state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }).replace('#', '%23')}`
 
-    // #
-    // Return the URL allowing to share the current project on the Twitter social network
-    // #
+    /**
+     * Return the URL allowing to share the current project on the Twitter social network
+     */
     return $scope.shareOnTwitter = () => `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }))}&text=${encodeURIComponent($scope.project.name)}`
   }
 ])
