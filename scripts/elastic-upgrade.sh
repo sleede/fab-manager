@@ -10,7 +10,7 @@
 
 config()
 {
-  if [ "$(whoami)" != "root" ]
+  if [ "$(whoami)" = "root" ]
   then
     echo "Please do not run this script as root, elevation will be prompted if needed."
     exit 1
