@@ -27,11 +27,12 @@ const METHODS = {
  * @param id {*} id of the element to retrieve in the list
  * @returns {number} index of the requested element, in the provided array
  */
-const findIdxById = (elements, id) =>
-  (elements.map(elem => elem.id)).indexOf(id)
+const findIdxById = function (elements, id) {
+  return (elements.map(function (elem) { return elem.id })).indexOf(id)
+}
 
 /**
- * For OAuth2 ententications, mapping the user's ID is mendatory. This function will check that this mapping
+ * For OAuth2 authentications, mapping the user's ID is mandatory. This function will check that this mapping
  * is effective and will return false otherwise
  * @param mappings {Array<Object>} expected: $scope.provider.providable_attributes.o_auth2_mappings_attributes
  * @returns {Boolean} true if the mapping is declared
@@ -70,12 +71,12 @@ class AuthenticationController {
     /**
      * Changes the admin's view to the members list page
      */
-    $scope.cancel = () => $state.go('app.admin.members')
+    $scope.cancel = function() { $state.go('app.admin.members') }
 
     /**
      * Open a modal allowing to specify the data mapping for the given field
      */
-    $scope.defineDataMapping = mapping =>
+    $scope.defineDataMapping = function (mapping) {
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/authentications/_data_mapping.html" %>',
         size: 'md',
@@ -133,13 +134,14 @@ class AuthenticationController {
           }
 
           // close and save the modifications
-          $scope.ok = () => $uibModalInstance.close($scope.transformation.rules)
+          $scope.ok = function () { $uibModalInstance.close($scope.transformation.rules) }
 
           // do not save the modifications
-          return $scope.cancel = () => $uibModalInstance.dismiss()
+          return $scope.cancel = function () { $uibModalInstance.dismiss() }
         }
         ] })
-        .result['finally'](null).then(transfo_rules => mapping.transformation = transfo_rules)
+        .result['finally'](null).then(function (transfo_rules) { mapping.transformation = transfo_rules })
+      }
   }
 }
 
@@ -186,26 +188,31 @@ Application.Controllers.controller('AuthentificationController', ['$scope', '$st
      * @param providers {Array} full list of authentication providers
      * @param provider {Object} provider to delete
      */
-    return $scope.destroyProvider = (providers, provider) =>
-      dialogs.confirm({
-        resolve: {
-          object () {
-            return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME', { TYPE: $scope.getType(provider.providable_type), NAME: provider.name })
+    $scope.destroyProvider = function (providers, provider) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('confirmation_required'),
+                msg: _t('do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME', { TYPE: $scope.getType(provider.providable_type), NAME: provider.name })
+              }
             }
           }
+        },
+        function() {
+          // the admin has confirmed, delete
+          AuthProvider.delete(
+            { id: provider.id },
+            function () {
+              providers.splice(findIdxById(providers, provider.id), 1)
+              growl.success(_t('authentication_provider_successfully_deleted'))
+            },
+            function () { growl.error(_t('an_error_occurred_unable_to_delete_the_specified_provider')) }
+          )
         }
-      }
-      , () =>
-        // the admin has confirmed, delete
-        AuthProvider.delete({ id: provider.id }
-          , function () {
-            providers.splice(findIdxById(providers, provider.id), 1)
-            return growl.success(_t('authentication_provider_successfully_deleted'))
-          }
-          , () => growl.error(_t('an_error_occurred_unable_to_delete_the_specified_provider')))
       )
+    }
   }
 
 ])
@@ -264,27 +271,29 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
         }
         // discourage the use of unsecure SSO
         if (!($scope.provider.providable_attributes.base_url.indexOf('https://') > -1)) {
-          return dialogs.confirm({
-            size: 'l',
-            resolve: {
-              object () {
-                return {
-                  title: _t('security_issue_detected'),
-                  msg: _t('beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS') +
-                    _t('this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes') +
-                    _t('do_you_really_want_to_continue')
+          dialogs.confirm(
+            {
+              size: 'l',
+              resolve: {
+                object () {
+                  return {
+                    title: _t('security_issue_detected'),
+                    msg: _t('beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS') +
+                      _t('this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes') +
+                      _t('do_you_really_want_to_continue')
+                  }
                 }
               }
+            },
+            function () { // unsecured http confirmed
+              AuthProvider.save({auth_provider: $scope.provider}, function (provider) {
+                growl.success(_t('unsecured_oauth2_provider_successfully_added'))
+                return $state.go('app.admin.members')
+              })
             }
-          }
-          , () => // unsecured http confirmed
-            AuthProvider.save({ auth_provider: $scope.provider }, function (provider) {
-              growl.success(_t('unsecured_oauth2_provider_successfully_added'))
-              return $state.go('app.admin.members')
-            })
           )
         } else {
-          return AuthProvider.save({ auth_provider: $scope.provider }, function (provider) {
+          AuthProvider.save({ auth_provider: $scope.provider }, function (provider) {
             growl.success(_t('oauth2_provider_successfully_added'))
             return $state.go('app.admin.members')
           })
@@ -316,11 +325,15 @@ Application.Controllers.controller('EditAuthenticationController', ['$scope', '$
         growl.error(_t('it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider'))
         return false
       }
-      return AuthProvider.update({ id: $scope.provider.id }, { auth_provider: $scope.provider }, function (provider) {
-        growl.success(_t('provider_successfully_updated'))
-        return $state.go('app.admin.members')
-      }
-      , () => growl.error(_t('an_error_occurred_unable_to_update_the_provider')))
+      return AuthProvider.update(
+        { id: $scope.provider.id },
+        { auth_provider: $scope.provider },
+        function (provider) {
+          growl.success(_t('provider_successfully_updated'))
+          $state.go('app.admin.members')
+        },
+        function() { growl.error(_t('an_error_occurred_unable_to_update_the_provider')) }
+      )
     }
 
     // Using the AuthenticationController

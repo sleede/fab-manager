@@ -28,7 +28,7 @@
  * Requires :
  *  - $state (Ui-Router) [ 'app.admin.trainings' ]
  *  - $scope.training
-/*
+ */
 class TrainingsController {
   constructor ($scope, $state) {
     /*
@@ -40,14 +40,14 @@ class TrainingsController {
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
-        return angular.forEach(content, (v, k) =>
-          angular.forEach(v, err =>
+        return angular.forEach(content, function(v, k) {
+          angular.forEach(v, function (err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'
             })
-          )
-        )
+          })
+        })
       } else {
         return $state.go('app.admin.trainings')
       }
@@ -56,12 +56,12 @@ class TrainingsController {
     /**
      * Changes the current user's view, redirecting him to the machines list
      */
-    $scope.cancel = () => $state.go('app.admin.trainings')
+    $scope.cancel = function() { $state.go('app.admin.trainings') }
 
     /**
      * Force the 'public_page' attribute to false when the current training is disabled
      */
-    $scope.onDisableToggled = () => $scope.training.public_page = !$scope.training.disabled
+    $scope.onDisableToggled = function() { $scope.training.public_page = !$scope.training.disabled }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -219,7 +219,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      * @param training {Object} Training object, inherited from $resource
      * @param availability {Object} time slot when the training occurs
      */
-    $scope.showReservations = (training, availability) =>
+    $scope.showReservations = function(training, availability) {
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/trainings/validTrainingModal.html" %>',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
@@ -244,14 +244,14 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
            * Validates the modifications (training validations) and save them to the server
            */
           $scope.ok = function () {
-            const users = $scope.usersToValid.map(u => u.id)
+            const users = $scope.usersToValid.map(function (u) { return u.id })
             return Training.update({ id: training.id }, {
               training: {
                 users
               }
             }
             , function () { // success
-              angular.forEach($scope.usersToValid, u => u.is_valid = true)
+              angular.forEach($scope.usersToValid, function(u) { u.is_valid = true })
               $scope.usersToValid = []
               return $uibModalInstance.close(training)
             })
@@ -260,37 +260,44 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
           /**
            * Cancel the modifications and close the modal window
            */
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+          return $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
         }
         ] })
+      }
 
     /**
-     * Delete the provided training and, in case of sucess, remove it from the trainings list afterwards
+     * Delete the provided training and, in case of success, remove it from the trainings list afterwards
      * @param index {number} index of the provided training in $scope.trainings
      * @param training {Object} training to delete
      */
-    $scope.removeTraining = (index, training) =>
-      dialogs.confirm({
-        resolve: {
-          object () {
-            return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_training')
+    $scope.removeTraining = function (index, training) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('confirmation_required'),
+                msg: _t('do_you_really_want_to_delete_this_training')
+              }
             }
           }
+        },
+        function() { // deletion confirmed
+          training.$delete(function () {
+            $scope.trainings.splice(index, 1);
+            growl.info(_t('training_successfully_deleted'))
+          },
+          function (error) {
+            growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it'));
+            console.error(error)
+          })
         }
-      }
-      , () => // deletion confirmed
-        training.$delete(function () {
-          $scope.trainings.splice(index, 1)
-          return growl.info(_t('training_successfully_deleted'))
-        }
-        , error => growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it')))
       )
+    }
 
     /**
      * Takes a month number and return its localized literal name
-     * @param {Number} from 0 to 11
+     * @param number {Number} from 0 to 11
      * @returns {String} eg. 'janvier'
      */
     $scope.formatMonth = function (number) {
@@ -317,22 +324,21 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      * Callback when the drop-down selection is changed.
      * The selected training details will be loaded from the API and rendered into the accordions.
      */
-    $scope.selectTrainingToMonitor = () =>
+    $scope.selectTrainingToMonitor = function () {
       Training.availabilities({ id: $scope.monitoring.training.id }, function (training) {
         $scope.groupedAvailabilities = groupAvailabilities([training])
         // we open current year/month by default
         const now = moment()
         $scope.accordions[training.name] = {}
-        $scope.accordions[training.name][now.year()] =
-        { isOpenFirst: true }
-        return $scope.accordions[training.name][now.year()][now.month()] =
-        { isOpenFirst: true }
+        $scope.accordions[training.name][now.year()] = { isOpenFirst: true }
+        $scope.accordions[training.name][now.year()][now.month()] = { isOpenFirst: true }
       })
+    }
 
     /* PRIVATE SCOPE */
 
     /**
-     * Group the trainings availabilites by trainings and by dates and return the resulting tree
+     * Group the trainings availabilities by trainings and by dates and return the resulting tree
      * @param trainings {Array} $scope.trainings is expected here
      * @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
      */

@@ -26,7 +26,7 @@ class PlanController {
     CSRF.setMetaTags()
 
     // groups list
-    $scope.groups = groups.filter(g => (g.slug !== 'admins') && !g.disabled)
+    $scope.groups = groups.filter(function(g) { return (g.slug !== 'admins') && !g.disabled })
 
     // users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users
@@ -64,14 +64,8 @@ class PlanController {
  */
 Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t',
   function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t) {
-    ({
-    /* PRIVATE STATIC CONSTANTS */
-
-      // when creating a new contact for a partner plan, this ID will be sent to the server
-      NEW_PARTNER_ID: null
 
     /* PUBLIC SCOPE */
-    })
 
     // current form is used to create a new plan
     $scope.mode = 'creation'
@@ -105,7 +99,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
      * Checks if the partner contact is a valid data. Used in the form validation process
      * @returns {boolean}
      */
-    $scope.partnerIsValid = () => ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email))
+    $scope.partnerIsValid = function() { return ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email)) }
 
     /**
      * Open a modal dialog allowing the admin to create a new partner user
@@ -118,18 +112,25 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
         controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
           $scope.partner = {}
 
-          $scope.ok = () =>
-            User.save({}, { user: $scope.partner }, function (user) {
-              $scope.partner.id = user.id
-              $scope.partner.name = `${user.first_name} ${user.last_name}`
-              return $uibModalInstance.close($scope.partner)
-            }
-            , error => growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name')))
-
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
-        }
-        ] })
-      // once the form was validated succesfully ...
+          $scope.ok = function() {
+            User.save(
+              {},
+              { user: $scope.partner },
+              function (user) {
+                $scope.partner.id = user.id
+                $scope.partner.name = `${user.first_name} ${user.last_name}`
+                $uibModalInstance.close($scope.partner)
+              },
+              function (error) {
+                growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
+                console.error(error);
+              }
+            )
+          }
+          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+        }]
+      })
+      // once the form was validated successfully ...
       return modalInstance.result.then(function (partner) {
         $scope.partners.push(partner)
         return $scope.plan.partnerId = partner.id
@@ -199,9 +200,9 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      */
     $scope.copyPricesFromPlan = function () {
       if ($scope.plan.parent) {
-        return Plan.get({ id: $scope.plan.parent }, parentPlan =>
-          Array.from(parentPlan.prices).map((parentPrice) =>
-            (() => {
+        return Plan.get({ id: $scope.plan.parent }, function (parentPlan) {
+          Array.from(parentPlan.prices).map(function (parentPrice) {
+            return (function () {
               const result = []
               for (let childKey in $scope.plan.prices) {
                 const childPrice = $scope.plan.prices[childKey]
@@ -213,12 +214,13 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
                 }
               }
               return result
-            })())
+            })()})
+          }
         )
 
         // if no plan were selected, unset every prices
       } else {
-        return (() => {
+        return (function () {
           const result = []
           for (let key in $scope.plan.prices) {
             const price = $scope.plan.prices[key]
@@ -250,7 +252,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      * will be included.
      * @returns {String}
      */
-    $scope.humanReadablePlanName = (plan, groups, short) => `${$filter('humanReadablePlanName')(plan, groups, short)}`
+    $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}` }
 
     /**
      * Retrieve the machine from its ID
@@ -278,16 +280,8 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
       }
     }
 
-    /* PRIVATE SCOPE */
 
-    /**
-     * Kind of constructor: these actions will be realized first when the controller is loaded
-     */
-    const initialize = () =>
     // Using the PlansController
-      new PlanController($scope, groups, prices, partners, CSRF)
-
-    // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return new PlanController($scope, groups, prices, partners, CSRF)
   }
 ])

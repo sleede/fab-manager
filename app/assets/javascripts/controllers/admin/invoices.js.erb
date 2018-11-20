@@ -132,15 +132,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       let sample = $scope.invoice.reference.model
       if (sample) {
       // invoice number per day (dd..dd)
-        sample = sample.replace(/d+(?![^\[]*])/g, (match, offset, string) => padWithZeros(2, match.length))
+        sample = sample.replace(/d+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(2, match.length) })
         // invoice number per month (mm..mm)
-        sample = sample.replace(/m+(?![^\[]*])/g, (match, offset, string) => padWithZeros(12, match.length))
+        sample = sample.replace(/m+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(12, match.length) })
         // invoice number per year (yy..yy)
-        sample = sample.replace(/y+(?![^\[]*])/g, (match, offset, string) => padWithZeros(8, match.length))
+        sample = sample.replace(/y+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(8, match.length) })
         // date information
-        sample = sample.replace(/[YMD]+(?![^\[]*])/g, (match, offset, string) => $scope.today.format(match))
+        sample = sample.replace(/[YMD]+(?![^\[]*])/g, function (match, offset, string) { return $scope.today.format(match) })
         // information about online selling (X[text])
-        sample = sample.replace(/X\[([^\]]+)\]/g, (match, p1, offset, string) => p1)
+        sample = sample.replace(/X\[([^\]]+)\]/g, function (match, p1, offset, string) { return p1 })
         // information about wallet (W[text]) - does not apply here
         sample = sample.replace(/W\[([^\]]+)\]/g, '')
         // information about refunds (R[text]) - does not apply here
@@ -157,15 +157,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       let sample = $scope.invoice.number.model
       if (sample) {
       // global order number (nn..nn)
-        sample = sample.replace(/n+(?![^\[]*])/g, (match, offset, string) => padWithZeros(327, match.length))
+        sample = sample.replace(/n+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(327, match.length) })
         // order number per year (yy..yy)
-        sample = sample.replace(/y+(?![^\[]*])/g, (match, offset, string) => padWithZeros(8, match.length))
+        sample = sample.replace(/y+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(8, match.length) })
         // order number per month (mm..mm)
-        sample = sample.replace(/m+(?![^\[]*])/g, (match, offset, string) => padWithZeros(12, match.length))
+        sample = sample.replace(/m+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(12, match.length) })
         // order number per day (dd..dd)
-        sample = sample.replace(/d+(?![^\[]*])/g, (match, offset, string) => padWithZeros(2, match.length))
+        sample = sample.replace(/d+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(2, match.length) })
         // date information
-        sample = sample.replace(/[YMD]+(?![^\[]*])/g, (match, offset, string) => $scope.today.format(match))
+        sample = sample.replace(/[YMD]+(?![^\[]*])/g, function (match, offset, string) { return $scope.today.format(match) })
       }
       return sample
     }
@@ -185,21 +185,21 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         },
         controller ($scope, $uibModalInstance, model) {
           $scope.model = model
-          $scope.ok = () => $uibModalInstance.close($scope.model)
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+          $scope.ok = function() { $uibModalInstance.close($scope.model) }
+          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
         }
       })
 
-      return modalInstance.result.then(model =>
+      modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_reference' }, { value: model }, function (data) {
           $scope.invoice.reference.model = model
-          return growl.success(_t('invoice_reference_successfully_saved'))
+          growl.success(_t('invoice_reference_successfully_saved'))
         }
         , function (error) {
           growl.error(_t('an_error_occurred_while_saving_invoice_reference'))
-          return console.error(error)
+          console.error(error)
         })
-      )
+      })
     }
 
     /**
@@ -222,8 +222,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.codeModel = model
           $scope.isSelected = active
 
-          $scope.ok = () => $uibModalInstance.close({ model: $scope.codeModel, active: $scope.isSelected })
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+          $scope.ok = function() { $uibModalInstance.close({ model: $scope.codeModel, active: $scope.isSelected }) }
+          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
         }
       })
 
@@ -269,12 +269,12 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         },
         controller ($scope, $uibModalInstance, model) {
           $scope.model = model
-          $scope.ok = () => $uibModalInstance.close($scope.model)
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+          $scope.ok = function() { $uibModalInstance.close($scope.model) }
+          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
         }
       })
 
-      return modalInstance.result.then(model =>
+      return modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_order-nb' }, { value: model }, function (data) {
           $scope.invoice.number.model = model
           return growl.success(_t('order_number_successfully_saved'))
@@ -283,7 +283,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           growl.error(_t('an_error_occurred_while_saving_the_order_number'))
           return console.error(error)
         })
-      )
+      })
     }
 
     /**
@@ -307,8 +307,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.rate = rate
           $scope.isSelected = active
 
-          $scope.ok = () => $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected })
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+          $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }) }
+          return $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }
       })
 
@@ -415,11 +415,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       // Watch the logo, when a change occurs, save it
       return $scope.$watch('invoice.logo', function () {
         if ($scope.invoice.logo && $scope.invoice.logo.filesize) {
-          return Setting.update({ name: 'invoice_logo' }, { value: $scope.invoice.logo.base64 }, data => growl.success(_t('logo_successfully_saved'))
-            , function (error) {
+          return Setting.update(
+            { name: 'invoice_logo' },
+            { value: $scope.invoice.logo.base64 },
+            function (data) { growl.success(_t('logo_successfully_saved')) },
+            function (error) {
               growl.error(_t('an_error_occurred_while_saving_the_logo'))
               return console.error(error)
-            })
+            }
+          )
         }
       })
     }
@@ -430,7 +434,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param value {number} the integer to pad
      * @param length {number} the length of the resulting string.
      */
-    var padWithZeros = (value, length) => (1e15 + value + '').slice(-length)
+    var padWithZeros = function (value, length) { return (1e15 + value + '').slice(-length) }
 
     /**
      * Remove every unsupported html tag from the given html text (like <p>, <span>, ...).
@@ -438,14 +442,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param html {string} single line html text
      * @return {string} multi line simplified html text
      */
-    var parseHtml = html =>
-      html = html.replace(/<\/?(\w+)((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g, function (match, p1, offset, string) {
+    var parseHtml = function (html) {
+      return html.replace(/<\/?(\w+)((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g, function (match, p1, offset, string) {
         if (['b', 'u', 'i', 'br'].includes(p1)) {
           return match
         } else {
           return ''
         }
       })
+    }
 
     /**
      * Reinitialize the context of invoices' search to display new results set
@@ -460,7 +465,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * to $scope.invoices
      * @param concat {boolean} if true, the result will be append to $scope.invoices instead of being affected
      */
-    var invoiceSearch = concat =>
+    var invoiceSearch = function(concat) {
       Invoice.list({
         query: {
           number: $scope.searchInvoice.reference,
@@ -481,6 +486,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return $scope.noMoreResults = true
         }
       })
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
@@ -553,13 +559,14 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       if ($scope.avoir.invoice_items_ids.length === 0) {
         return growl.error(_t('you_must_select_at_least_one_element_to_create_a_refund'))
       } else {
-        return Invoice.save({ avoir: $scope.avoir }, avoir =>
-        // success
-          $uibModalInstance.close({ avoir, invoice: $scope.invoice })
-
-        , err =>
-        // failed
-          growl.error(_t('unable_to_create_the_refund'))
+        return Invoice.save(
+          { avoir: $scope.avoir },
+          function(avoir) { // success
+            $uibModalInstance.close({avoir, invoice: $scope.invoice})
+          },
+          function (err) { // failed
+            growl.error(_t('unable_to_create_the_refund'))
+          }
         )
       }
     }
@@ -567,7 +574,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
     /**
      * Cancel the refund, dismiss the modal window
      */
-    $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
 
     /* PRIVATE SCOPE */
 
@@ -579,8 +586,9 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       Invoice.get({ id: invoice.id }, function (data) {
         $scope.invoice = data
         // default : all elements of the invoice are refund
-        return Array.from(data.items).map((item) =>
-          ($scope.partial[item.id] = (typeof item.avoir_item_id !== 'number')))
+        return Array.from(data.items).map(function (item) {
+          return ($scope.partial[item.id] = (typeof item.avoir_item_id !== 'number'))
+        })
       })
 
       if (invoice.stripe) {

@@ -76,14 +76,14 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
-        return angular.forEach(content, (v, k) =>
-          angular.forEach(v, err =>
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'
             })
-          )
-        )
+          })
+        })
       } else {
         $scope.user.profile.user_avatar = content.profile.user_avatar
         Auth._currentUser.profile.user_avatar = content.profile.user_avatar
@@ -112,21 +112,22 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
     /**
      * Merge the current user into the account with the given auth_token
      */
-    $scope.registerAuthToken = () =>
+    $scope.registerAuthToken = function () {
       Member.merge({ id: $rootScope.currentUser.id }, { user: { auth_token: $scope.user.auth_token } }, function (user) {
-        $scope.user = user
-        Auth._currentUser = user
-        $rootScope.currentUser = user
-        return $state.go('app.public.home')
-      }
-      , function (err) {
-        if (err.data.error) {
-          return growl.error(err.data.error)
-        } else {
-          growl.error(_t('an_unexpected_error_occurred_check_your_authentication_code'))
-          return console.error(err)
+          $scope.user = user
+          Auth._currentUser = user
+          $rootScope.currentUser = user
+          $state.go('app.public.home')
         }
-      })
+        , function (err) {
+          if (err.data.error) {
+            growl.error(err.data.error)
+          } else {
+            growl.error(_t('an_unexpected_error_occurred_check_your_authentication_code'))
+            console.error(err)
+          }
+        })
+    }
 
     /**
      * Return the email given by the SSO provider, parsed if needed
@@ -156,30 +157,34 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
 
     /**
      * Ask for email confirmation and send the SSO merging token again
-     * @param $event {Object} jQuery event object
+     * @param event {Object} jQuery event object
      */
     $scope.resendCode = function (event) {
       event.preventDefault()
       event.stopPropagation()
-      return dialogs.confirm({
-        templateUrl: '<%= asset_path "profile/resend_code_modal.html" %>',
-        resolve: {
-          object () {
-            return { email: memberPromise.email }
+      dialogs.confirm(
+        {
+          templateUrl: '<%= asset_path "profile/resend_code_modal.html" %>',
+          resolve: {
+            object () {
+              return { email: memberPromise.email }
+            }
           }
+        },
+        function (email) {
+          // Request the server to send an auth-migration email to the current user
+          AuthProvider.send_code({ email },
+            function (res) { growl.info(_t('code_successfully_sent_again')) },
+            function (err) { growl.error(err.data.error) }
+          )
         }
-      }
-      , email =>
-      // Request the server to send an auth-migration email to the current user
-        AuthProvider.send_code({ email }, res => growl.info(_t('code_successfully_sent_again'))
-          , err => growl.error(err.data.error))
       )
     }
 
     /**
      * Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
      */
-    $scope.syncProfile = () =>
+    $scope.syncProfile = function () {
       Auth.logout().then(function (oldUser) {
         Session.destroy()
         $rootScope.currentUser = null
@@ -188,8 +193,9 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
           total: 0,
           unread: 0
         }
-        return $window.location.href = activeProviderPromise.link_to_sso_connect
+        $window.location.href = activeProviderPromise.link_to_sso_connect
       })
+    }
 
     /* PRIVATE SCOPE */
 
@@ -203,7 +209,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
 
       // bind fields protection with sso fields
-      return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true)
+      angular.forEach(activeProviderPromise.mapping, function (map) { $scope.preventField[map] = true; })
     }
 
     // !!! MUST BE CALLED AT THE END of the controller

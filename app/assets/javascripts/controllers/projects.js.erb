@@ -44,44 +44,44 @@
 class ProjectsController {
   constructor ($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t) {
     // Retrieve the list of machines from the server
-    Machine.query().$promise.then(data =>
-      $scope.machines = data.map(d =>
+    Machine.query().$promise.then(function (data) {
+      $scope.machines = data.map(function (d) {
         ({
           id: d.id,
           name: d.name
         })
-      )
-    )
+      })
+    })
 
     // Retrieve the list of components from the server
-    Component.query().$promise.then(data =>
-      $scope.components = data.map(d =>
+    Component.query().$promise.then(function (data) {
+      $scope.components = data.map(function (d) {
         ({
           id: d.id,
           name: d.name
         })
-      )
-    )
+      })
+    })
 
     // Retrieve the list of themes from the server
-    Theme.query().$promise.then(data =>
-      $scope.themes = data.map(d =>
+    Theme.query().$promise.then(function (data) {
+      $scope.themes = data.map(function (d) {
         ({
           id: d.id,
           name: d.name
         })
-      )
-    )
+      })
+    })
 
     // Retrieve the list of licences from the server
-    Licence.query().$promise.then(data =>
-      $scope.licences = data.map(d =>
+    Licence.query().$promise.then(function (data) {
+      $scope.licences = data.map(function (d) {
         ({
           id: d.id,
           name: d.name
         })
-      )
-    )
+      })
+    })
 
     // Total number of documentation steps for the current project
     $scope.totalSteps = $scope.project.project_steps_attributes.length
@@ -98,14 +98,14 @@ class ProjectsController {
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
-        angular.forEach(content, (v, k) =>
-          angular.forEach(v, err =>
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'
             })
-          )
-        )
+          })
+        })
         // using https://github.com/oblador/angular-scroll
         $('section[ui-view=main]').scrollTop(0, 200)
       } else {
@@ -129,7 +129,7 @@ class ProjectsController {
     /**
      * This will create a single new empty entry into the project's CAO attachements list.
      */
-    $scope.addFile = () => $scope.project.project_caos_attributes.push({})
+    $scope.addFile = function() { $scope.project.project_caos_attributes.push({}) }
 
     /**
      * This will remove the given file from the project's CAO attachements list. If the file was previously uploaded
@@ -158,42 +158,43 @@ class ProjectsController {
      * This will remove the given step from the project's steps list. If the step was previously saved
      * on the server, it will be marked for deletion for the next saving. Otherwise, it will be simply truncated from
      * the steps array.
-     * @param file {Object} the file to delete
+     * @param step {Object} the step to delete
      */
-    $scope.deleteStep = step =>
+    $scope.deleteStep = function (step) {
       dialogs.confirm({
-        resolve: {
-          object () {
-            return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_step')
+          resolve: {
+            object() {
+              return {
+                title: _t('confirmation_required'),
+                msg: _t('do_you_really_want_to_delete_this_step')
+              }
             }
           }
         }
-      }
-      , function () { // deletion confirmed
-        const index = $scope.project.project_steps_attributes.indexOf(step)
-        if (step.id != null) {
-          step._destroy = true
-        } else {
-          $scope.project.project_steps_attributes.splice(index, 1)
-        }
+        , function () { // deletion confirmed
+          const index = $scope.project.project_steps_attributes.indexOf(step)
+          if (step.id != null) {
+            step._destroy = true
+          } else {
+            $scope.project.project_steps_attributes.splice(index, 1)
+          }
 
-        // update the new total number of steps
-        $scope.totalSteps -= 1
-        // reindex the remaning steps
-        return (() => {
-          const result = []
-          for (let s of Array.from($scope.project.project_steps_attributes)) {
-            if (s.step_nb > step.step_nb) {
-              result.push(s.step_nb -= 1)
-            } else {
-              result.push(undefined)
+          // update the new total number of steps
+          $scope.totalSteps -= 1
+          // reindex the remaining steps
+          return (function () {
+            const result = []
+            for (let s of Array.from($scope.project.project_steps_attributes)) {
+              if (s.step_nb > step.step_nb) {
+                result.push(s.step_nb -= 1)
+              } else {
+                result.push(undefined)
+              }
             }
-          }
-          return result
-        })()
-      })
+            return result
+          })()
+        })
+    }
 
     /**
      * Change the step_nb property of the given step to the new value provided. The step that was previously at this
@@ -220,14 +221,17 @@ class ProjectsController {
       }
       const asciiName = Diacritics.remove(nameLookup)
 
-      return Member.search({ query: asciiName }, users => $scope.matchingMembers = users
-        , error => console.error(error))
+      Member.search(
+        { query: asciiName },
+        function (users) { $scope.matchingMembers = users },
+        function (error) { console.error(error) }
+      )
     }
 
     /**
      * This will create a single new empty entry into the project's step image list.
      */
-    $scope.addProjectStepImage = step => step.project_step_images_attributes.push({})
+    $scope.addProjectStepImage = function (step) { step.project_step_images_attributes.push({}) }
 
     /**
      * This will remove the given image from the project's step image list.
@@ -287,9 +291,12 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     // list of components / used for filtering
     $scope.components = componentsPromise
 
-    $scope.searchOverWholeNetworkChanged = () =>
-      setTimeout(() => $scope.resetFiltersAndTriggerSearch()
-        , 150)
+    $scope.searchOverWholeNetworkChanged = function () {
+      setTimeout(
+        function() { $scope.resetFiltersAndTriggerSearch() },
+        150
+      )
+    }
 
     $scope.loadMore = function () {
       if ($scope.openlab.searchOverWholeNetwork === true) {
@@ -380,7 +387,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     var updateUrlParam = function (name, value) {
       $state.current.reloadOnSearch = false
       $location.search(name, value)
-      return $timeout(() => $state.current.reloadOnSearch = undefined)
+      return $timeout(function() { $state.current.reloadOnSearch = undefined})
     }
 
     var loadMoreCallback = function (projectsPromise) {
@@ -393,11 +400,12 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       return updateUrlParam('page', $scope.projectsPagination.currentPage)
     }
 
-    var normalizeProjectsAttrs = projects =>
+    var normalizeProjectsAttrs = function (projects) {
       projects.map(function (project) {
         project.project_image = project.image_url
         return project
       })
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
@@ -446,12 +454,12 @@ Application.Controllers.controller('EditProjectController', ['$scope', '$state',
     // Retrieve the project's details, if an error occured, redirect the user to the projects list page
     $scope.project = projectPromise
 
-    $scope.matchingMembers = $scope.project.project_users.map(u =>
-      ({
+    $scope.matchingMembers = $scope.project.project_users.map(function (u) {
+      return ({
         id: u.id,
         name: u.full_name
       })
-    )
+    })
 
     // Using the ProjectsController
     return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t)
@@ -513,9 +521,9 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
             }
           }
         }
-        , () => // cancel confirmed
-          $scope.project.$delete(() => $state.go('app.public.projects_list', {}, { reload: true }))
-        )
+        , function () { // cancel confirmed
+            $scope.project.$delete(function() { $state.go('app.public.projects_list', {}, { reload: true }) })
+          })
       } else {
         return console.error(_t('unauthorized_operation'))
       }
@@ -528,7 +536,7 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
     $scope.signalAbuse = function (e) {
       if (e) { e.preventDefault() }
 
-      return $uibModal.open({
+      $uibModal.open({
         templateUrl: '<%= asset_path "shared/signalAbuseModal.html" %>',
         size: 'md',
         resolve: {
@@ -542,31 +550,36 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
           }
 
           // callback for signaling cancellation
-          $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
 
           // callback for form validation
-          return $scope.ok = () =>
-            Abuse.save({}, { abuse: $scope.signaler }, function (res) {
-            // creation successful
-              growl.success(_t('your_report_was_successful_thanks'))
-              return $uibModalInstance.close(res)
-            }
-            , error =>
-            // creation failed...
-              growl.error(_t('an_error_occured_while_sending_your_report'))
+          return $scope.ok = function() {
+            Abuse.save(
+              {},
+              { abuse: $scope.signaler },
+              function (res) {
+                // creation successful
+                growl.success(_t('your_report_was_successful_thanks'))
+                return $uibModalInstance.close(res)
+              }
+              , function (error) {
+                // creation failed...
+                growl.error(_t('an_error_occured_while_sending_your_report'))
+              }
             )
-        }
-        ] })
+          }
+        }]
+      })
     }
 
     /**
      * Return the URL allowing to share the current project on the Facebook social network
      */
-    $scope.shareOnFacebook = () => `https://www.facebook.com/share.php?u=${$state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }).replace('#', '%23')}`
+    $scope.shareOnFacebook = function () { return `https://www.facebook.com/share.php?u=${$state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }).replace('#', '%23')}` }
 
     /**
      * Return the URL allowing to share the current project on the Twitter social network
      */
-    return $scope.shareOnTwitter = () => `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }))}&text=${encodeURIComponent($scope.project.name)}`
+    $scope.shareOnTwitter = function () { return `https://twitter.com/intent/tweet?url=${encodeURIComponent($state.href('app.public.projects_show', { id: $scope.project.slug }, { absolute: true }))}&text=${encodeURIComponent($scope.project.name)}` }
   }
 ])

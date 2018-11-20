@@ -17,8 +17,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     /* PUBLIC SCOPE */
 
     // list of groups
-    let plan
-    $scope.groups = groupsPromise.filter(g => (g.slug !== 'admins') & !g.disabled)
+    $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') & !g.disabled; } )
 
     // default : do not show the group changing form
     // group ID of the current/selected user
@@ -31,7 +30,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.plansClassifiedByGroup = []
     for (var group of Array.from($scope.groups)) {
       const groupObj = { id: group.id, name: group.name, plans: [] }
-      for (plan of Array.from(plansPromise)) {
+      for (let plan of Array.from(plansPromise)) {
         if (plan.group_id === group.id) { groupObj.plans.push(plan) }
       }
       $scope.plansClassifiedByGroup.push(groupObj)
@@ -95,7 +94,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     /**
      * Callback to trigger the payment process of the subscription
      */
-    $scope.openSubscribePlanModal = () =>
+    $scope.openSubscribePlanModal = function () {
       Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
         const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount)
         if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
@@ -106,6 +105,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
           }
         }
       })
+    }
 
     /**
      * Return the group object, identified by the ID set in $scope.group.id
@@ -121,26 +121,27 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     /**
      * Change the group of the current/selected user to the one set in $scope.group.id
      */
-    $scope.selectGroup = () =>
+    $scope.selectGroup = function () {
       Member.update({ id: $scope.ctrl.member.id }, { user: { group_id: $scope.group.id } }, function (user) {
-        $scope.ctrl.member = user
-        $scope.group.change = false
-        if ($scope.currentUser.role !== 'admin') {
-          $rootScope.currentUser = user
-          Auth._currentUser.group_id = user.group_id
-          return growl.success(_t('your_group_was_successfully_changed'))
-        } else {
-          return growl.success(_t('the_user_s_group_was_successfully_changed'))
+          $scope.ctrl.member = user
+          $scope.group.change = false
+          if ($scope.currentUser.role !== 'admin') {
+            $rootScope.currentUser = user
+            Auth._currentUser.group_id = user.group_id
+            growl.success(_t('your_group_was_successfully_changed'))
+          } else {
+            growl.success(_t('the_user_s_group_was_successfully_changed'))
+          }
         }
-      }
-      , function (err) {
-        if ($scope.currentUser.role !== 'admin') {
-          growl.error(_t('an_error_prevented_your_group_from_being_changed'))
-        } else {
-          growl.error(_t('an_error_prevented_to_change_the_user_s_group'))
-        }
-        return console.error(err)
-      })
+        , function (err) {
+          if ($scope.currentUser.role !== 'admin') {
+            growl.error(_t('an_error_prevented_your_group_from_being_changed'))
+          } else {
+            growl.error(_t('an_error_prevented_to_change_the_user_s_group'))
+          }
+          console.error(err)
+        })
+    }
 
     /**
      * Return an enumerable meaninful string for the gender of the provider user
@@ -159,17 +160,13 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * @return {boolean}
      */
     $scope.isInFuture = function (dateTime) {
-      if (moment().diff(moment(dateTime)) < 0) {
-        return true
-      } else {
-        return false
-      }
+      return (moment().diff(moment(dateTime)) < 0);
     }
 
     /**
      * To use as callback in Array.prototype.filter to get only enabled plans
      */
-    $scope.filterDisabledPlans = plan => !plan.disabled
+    $scope.filterDisabledPlans = function (plan) { return !plan.disabled }
 
     /* PRIVATE SCOPE */
 
@@ -185,7 +182,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         }
       }
 
-      $scope.$on('devise:new-session', (event, user) => $scope.ctrl.member = user)
+      $scope.$on('devise:new-session', function (event, user) { $scope.ctrl.member = user; });
 
       // watch when a coupon is applied to re-compute the total price
       return $scope.$watch('coupon.applied', function (newValue, oldValue) {
@@ -221,7 +218,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     /**
      * Open a modal window which trigger the stripe payment process
      */
-    var payByStripe = () =>
+    var payByStripe = function () {
       $uibModal.open({
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
         size: 'md',
@@ -236,7 +233,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         },
         controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
           function ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, CustomAsset, wallet, helpers, $filter, coupon) {
-          // User's wallet amount
+            // User's wallet amount
             $scope.walletAmount = wallet.amount
 
             // Final price to pay by the user
@@ -249,50 +246,52 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
             $scope.numberFilter = $filter('number')
 
             // retrieve the CGV
-            CustomAsset.get({ name: 'cgv-file' }, cgv => $scope.cgv = cgv.custom_asset)
+            CustomAsset.get({ name: 'cgv-file' }, function (cgv) { $scope.cgv = cgv.custom_asset; });
 
             /**
              * Callback for click on the 'proceed' button.
              * Handle the stripe's card tokenization process response and save the subscription to the API with the
              * card token just created.
              */
-            return $scope.payment = function (status, response) {
+            $scope.payment = function (status, response) {
               if (response.error) {
-                return growl.error(response.error.message)
+                growl.error(response.error.message)
               } else {
                 $scope.attempting = true
-                return Subscription.save({
-                  coupon_code: ((coupon ? coupon.code : undefined)),
-                  subscription: {
-                    plan_id: selectedPlan.id,
-                    user_id: member.id,
-                    card_token: response.id
+                Subscription.save({
+                    coupon_code: ((coupon ? coupon.code : undefined)),
+                    subscription: {
+                      plan_id: selectedPlan.id,
+                      user_id: member.id,
+                      card_token: response.id
+                    }
                   }
-                }
-                , (data, status) => // success
-                  $uibModalInstance.close(data)
-
-                , function (data, status) { // failed
-                  $scope.alerts = []
-                  $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
-                  return $scope.attempting = false
-                })
+                  , function (data) { // success
+                    $uibModalInstance.close(data)
+                  }
+                  , function (data, status) { // failed
+                    $scope.alerts = []
+                    $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
+                    $scope.attempting = false
+                  }
+                )
               }
             }
           }
-        ] })
-        .result['finally'](null).then(function (subscription) {
-          $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
-          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
-          $scope.paid.plan = angular.copy($scope.selectedPlan)
-          $scope.selectedPlan = null
-          return $scope.coupon.applied = null
-        })
+        ]
+      }).result['finally'](null).then(function (subscription) {
+        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
+        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
+        $scope.paid.plan = angular.copy($scope.selectedPlan)
+        $scope.selectedPlan = null
+        $scope.coupon.applied = null
+      })
+    }
 
     /**
      * Open a modal window which trigger the local payment process
      */
-    var payOnSite = () =>
+    var payOnSite = function () {
       $uibModal.open({
         templateUrl: '<%= asset_path "plans/payment_modal.html" %>',
         size: 'sm',
@@ -307,7 +306,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         },
         controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon',
           function ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, wallet, helpers, $filter, coupon) {
-          // user wallet amount
+            // user wallet amount
             $scope.walletAmount = wallet.amount
 
             // subcription price, coupon subtracted if any
@@ -342,38 +341,40 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
              */
             $scope.ok = function () {
               $scope.attempting = true
-              return Subscription.save({
-                coupon_code: ((coupon ? coupon.code : undefined)),
-                subscription: {
-                  plan_id: selectedPlan.id,
-                  user_id: member.id
+              Subscription.save({
+                  coupon_code: ((coupon ? coupon.code : undefined)),
+                  subscription: {
+                    plan_id: selectedPlan.id,
+                    user_id: member.id
+                  }
                 }
-              }
-              , (data, status) => // success
-                $uibModalInstance.close(data)
-
-              , function (data, status) { // failed
+                , function (data) { // success
+                  $uibModalInstance.close(data)
+                }
+                , function (data, status) { // failed
                 $scope.alerts = []
-                $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
-                return $scope.attempting = false
-              })
+                  $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
+                  $scope.attempting = false
+                }
+              )
             }
 
             /**
              * Callback for the 'cancel' button.
              * Close the modal box.
              */
-            return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+            $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
           }
-        ] })
-        .result['finally'](null).then(function (reservation) {
-          $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
-          Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
-          $scope.ctrl.member = null
-          $scope.paid.plan = angular.copy($scope.selectedPlan)
-          $scope.selectedPlan = null
-          return $scope.coupon.applied = null
-        })
+        ]
+      }).result['finally'](null).then(function (reservation) {
+        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
+        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
+        $scope.ctrl.member = null
+        $scope.paid.plan = angular.copy($scope.selectedPlan)
+        $scope.selectedPlan = null
+        return $scope.coupon.applied = null
+      })
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize()

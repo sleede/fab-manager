@@ -42,23 +42,23 @@ class SpacesController {
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
-        return angular.forEach(content, (v, k) =>
-          angular.forEach(v, err =>
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'
             })
-          )
-        )
+          })
+        })
       } else {
-        return $state.go('app.public.spaces_list')
+        $state.go('app.public.spaces_list')
       }
     }
 
     /**
      * Changes the current user's view, redirecting him to the spaces list
      */
-    $scope.cancel = () => $state.go('app.public.spaces_list')
+    $scope.cancel = function() { $state.go('app.public.spaces_list') }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -74,14 +74,14 @@ class SpacesController {
     }
 
     /**
-     * This will create a single new empty entry into the space attachements list.
+     * This will create a single new empty entry into the space attachments list.
      */
-    $scope.addFile = () => $scope.space.space_files_attributes.push({})
+    $scope.addFile = function() { $scope.space.space_files_attributes.push({}) }
 
     /**
-     * This will remove the given file from the space attachements list. If the file was previously uploaded
+     * This will remove the given file from the space attachments list. If the file was previously uploaded
      * to the server, it will be marked for deletion on the server. Otherwise, it will be simply truncated from
-     * the attachements array.
+     * the attachments array.
      * @param file {Object} the file to delete
      */
     $scope.deleteFile = function (file) {
@@ -105,24 +105,23 @@ Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spa
   /**
    * Redirect the user to the space details page
    */
-  $scope.showSpace = space => $state.go('app.public.space_show', { id: space.slug })
+  $scope.showSpace = function (space) { $state.go('app.public.space_show', { id: space.slug }) }
 
   /**
    * Callback to book a reservation for the current space
    */
-  $scope.reserveSpace = space => $state.go('app.logged.space_reserve', { id: space.slug })
+  $scope.reserveSpace = function (space) { $state.go('app.logged.space_reserve', { id: space.slug }) }
 
   // Default: we show only enabled spaces
   $scope.spaceFiltering = 'enabled'
 
   // Available options for filtering spaces by status
-  return $scope.filterDisabled = [
+  $scope.filterDisabled = [
     'enabled',
     'disabled',
     'all'
   ]
-}
-])
+}])
 
 /**
  * Controller used in the space creation page (admin)
@@ -142,8 +141,7 @@ Application.Controllers.controller('NewSpaceController', ['$scope', '$state', 'C
 
   // Using the SpacesController
   return new SpacesController($scope, $state)
-}
-])
+}])
 
 /**
  * Controller used in the space edition page (admin)
@@ -162,8 +160,7 @@ Application.Controllers.controller('EditSpaceController', ['$scope', '$state', '
 
   // Using the SpacesController
   return new SpacesController($scope, $state)
-}
-])
+}])
 
 Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', 'spacePromise', '_t', 'dialogs', 'growl', function ($scope, $state, spacePromise, _t, dialogs, growl) {
   // Details of the space witch id/slug is provided in the URL
@@ -182,7 +179,7 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
    * Callback to book a reservation for the current space
    * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
    */
-  return $scope.deleteSpace = function (event) {
+  $scope.deleteSpace = function (event) {
     event.preventDefault()
     // check the permissions
     if ($scope.currentUser.role !== 'admin') {
@@ -198,15 +195,21 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
           }
         }
       }
-      , () => // deletion confirmed
+      , function() { // deletion confirmed
         // delete the machine then redirect to the machines listing
-        $scope.space.$delete(() => $state.go('app.public.spaces_list')
-          , error => growl.warning(_t('space_show.the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users')))
-      )
+        $scope.space.$delete(
+          function () {
+            $state.go('app.public.spaces_list')
+          },
+          function (error) {
+            growl.warning(_t('space_show.the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users'));
+            console.error(error)
+          }
+        )
+      })
     }
   }
-}
-])
+}])
 
 /**
  * Controller used in the spaces reservation agenda page.
@@ -321,7 +324,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     /**
      * Callback when a slot was successfully cancelled. Reset the slot style as 'ready to book'
      */
-    $scope.slotCancelled = () => $scope.markSlotAsRemoved($scope.selectedEvent)
+    $scope.slotCancelled = function() { $scope.markSlotAsRemoved($scope.selectedEvent) }
 
     /**
      * Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
@@ -435,7 +438,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     /**
      * Switch the user's view from the reservation agenda to the plan subscription
      */
-    $scope.showPlans = () => $scope.plansAreShown = true
+    $scope.showPlans = function () { $scope.plansAreShown = true }
 
     /**
      * Once the reservation is booked (payment process successfully completed), change the event style
@@ -469,7 +472,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
     /**
      * To use as callback in Array.prototype.filter to get only enabled plans
      */
-    $scope.filterDisabledPlans = plan => !plan.disabled
+    $scope.filterDisabledPlans = function (plan) { return !plan.disabled; }
 
     /* PRIVATE SCOPE */
 
@@ -478,7 +481,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
      */
     const initialize = function () {
       if ($scope.currentUser.role !== 'admin') {
-        return Member.get({ id: $scope.currentUser.id }, member => $scope.ctrl.member = member)
+        return Member.get({ id: $scope.currentUser.id }, function (member) { $scope.ctrl.member = member })
       }
     }
 
@@ -518,26 +521,28 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
      * @param slot {Object}
      * @param reservation {Object}
      */
-    var updateSpaceSlotId = (slot, reservation) =>
+    var updateSpaceSlotId = function (slot, reservation) {
       angular.forEach(reservation.slots, function (s) {
         if (slot.start_at === slot.start_at) {
           return slot.id = s.id
         }
       })
+    }
 
     /**
      * Update the calendar's display to render the new attributes of the events
      */
-    var updateCalendar = () => uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents')
+    var updateCalendar = function() { uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents') }
 
     /**
      * Asynchronously fetch the events from the API and refresh the calendar's view with these new events
      */
-    var refetchCalendar = () =>
+    var refetchCalendar = function () {
       $timeout(function () {
         uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents')
         return uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents')
       })
+    }
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize()

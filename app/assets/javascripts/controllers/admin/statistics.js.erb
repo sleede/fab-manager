@@ -134,19 +134,19 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Callback to open the datepicker (interval start)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleStartDatePicker = $event => toggleDatePicker($event, $scope.datePickerStart)
+    $scope.toggleStartDatePicker = function ($event) { toggleDatePicker($event, $scope.datePickerStart) }
 
     /**
      * Callback to open the datepicker (interval end)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleEndDatePicker = $event => toggleDatePicker($event, $scope.datePickerEnd)
+    $scope.toggleEndDatePicker = function ($event) { toggleDatePicker($event, $scope.datePickerEnd) }
 
     /**
      * Callback to open the datepicker (custom filter)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleCustomDatePicker = $event => toggleDatePicker($event, $scope.customFilter.datePicker)
+    $scope.toggleCustomDatePicker = function ($event) { toggleDatePicker($event, $scope.customFilter.datePicker) }
 
     /**
      * Callback called when the active tab is changed.
@@ -207,7 +207,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Parse the given date and return a user-friendly string
      * @param date {Date} JS date or ant moment.js compatible date string
      */
-    $scope.formatDate = date => moment(date).format('LL')
+    $scope.formatDate = function (date) { return moment(date).format('LL') }
 
     /**
      * Parse the sex and return a user-friendly string
@@ -332,7 +332,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       }
 
       return $uibModal.open(options)
-        .result['finally'](null).then(info => console.log(info))
+        .result['finally'](null).then(function (info) { console.log(info) })
     }
 
     /* PRIVATE SCOPE */
@@ -340,14 +340,15 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = () =>
-    // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
-    // which will cause every tabs to reload, one by one, when the view is closed
+    const initialize = function () {
+      // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
+      // which will cause every tabs to reload, one by one, when the view is closed
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         if ((fromState.name === 'app.admin.statistics') && (Object.keys(fromParams).length === 0)) {
           return $scope.preventRefresh = true
         }
       })
+    }
 
     /**
      * Generic function to toggle a bootstrap datePicker
@@ -383,7 +384,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
             $scope.averageAge = Math.round(res.aggregations.average_age.value * 100) / 100
             $scope.sumStat = res.aggregations.total_stat.value
             $scope.scrollId = res._scroll_id
-            return (() => {
+            return (function () {
               const result = []
               for (custom of Array.from($scope.type.active.custom_aggregations)) {
                 result.push($scope.customAggs[custom.field] = res.aggregations[custom.field].value)
@@ -515,7 +516,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     /**
      * Build the elasticSearch query DSL to match the selected cutom filter
      * @param custom {Object} if custom is empty or undefined, an empty string will be returned
-     * @returns {{match:{*}}|string}
+     * @returns {{match:*}|string}
      */
     var buildElasticCustomCriterion = function (custom) {
       if (custom) {
@@ -555,9 +556,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * properties and on index-specific properties (additional_fields)
      */
     var buildCustomFiltersList = function () {
-      $scope.filters = []
 
-      const filters = [
+      $scope.filters = [
         { key: 'date', label: _t('date'), values: ['input_date'] },
         { key: 'userId', label: _t('user_id'), values: ['input_number'] },
         { key: 'gender', label: _t('gender'), values: [{ key: 'male', label: _t('man') }, { key: 'female', label: _t('woman') }] },
@@ -565,8 +565,6 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         { key: 'subType', label: _t('type'), values: $scope.type.active.subtypes },
         { key: 'ca', label: _t('revenue'), values: ['input_number'] }
       ]
-
-      $scope.filters = filters
 
       if (!$scope.type.active.simple) {
         const f = { key: 'stat', label: $scope.type.active.label, values: ['input_number'] }
@@ -663,13 +661,13 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
      * Callback to open the datepicker (interval start)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleStartDatePicker = $event => $scope.exportStart.opened = !$scope.exportStart.opened
+    $scope.toggleStartDatePicker = function ($event) { $scope.exportStart.opened = !$scope.exportStart.opened }
 
     /**
      * Callback to open the datepicker (interval end)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleEndDatePicker = $event => $scope.exportEnd.opened = !$scope.exportEnd.opened
+    $scope.toggleEndDatePicker = function ($event) { $scope.exportEnd.opened = !$scope.exportEnd.opened }
 
     /**
      * Callback when exchanging the export type between 'global' and 'current view'
@@ -696,7 +694,7 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
         })
       } else {
         $scope.actionUrl = `/stats/${index.key}/export`
-        return $scope.query = JSON.stringify(query)
+        $scope.query = JSON.stringify(query)
       }
     }
 
@@ -722,6 +720,6 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
     /**
      * Callback to cancel the export and close the modal
      */
-    return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
+    $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
   }
 ])
