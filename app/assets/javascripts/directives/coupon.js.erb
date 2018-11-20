@@ -9,8 +9,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', ($rootScope, Coupon, _t) =>
-  ({
+Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', function ($rootScope, Coupon, _t) {
+  return ({
     restrict: 'E',
     scope: {
       show: '=',
@@ -69,8 +69,7 @@ Application.Directives.directive('coupon', [ '$rootScope', 'Coupon', '_t', ($roo
       /**
        * Callback to remove the message at provided index from the displayed list
        */
-      return $scope.closeMessage = index => $scope.messages.splice(index, 1)
+      $scope.closeMessage = function (index) { $scope.messages.splice(index, 1) }
     }
   })
-
-])
+}])

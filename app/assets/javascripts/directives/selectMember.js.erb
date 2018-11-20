@@ -19,8 +19,8 @@
  * which have a valid running subscription or not.
  * Usage: <select-member [subscription="false|true"]></select-member>
  */
-Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', (Diacritics, Member) =>
-  ({
+Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', function (Diacritics, Member) {
+  return ({
     restrict: 'E',
     templateUrl: '<%= asset_path "shared/_member_select.html" %>',
     link (scope, element, attributes) {
@@ -40,10 +40,10 @@ Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', (Diac
           scope.matchingMembers = users
           return scope.isLoadingMembers = false
         }
-        , error => console.error(error))
+        , function (error) { console.error(error) })
       }
     }
 
   })
 
-])
+}])
