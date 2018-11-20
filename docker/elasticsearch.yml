@@ -1,0 +1,6 @@
+http.host: 0.0.0.0
+script.inline: true
+script.stored: true
+script.painless.regex.enabled: true
+path.repo: /usr/share/elasticsearch
+
