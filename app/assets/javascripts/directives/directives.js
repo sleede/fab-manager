@@ -81,14 +81,14 @@ Application.Directives.directive('publishProject', [ () =>
 
 ])
 
-Application.Directives.directive('disableAnimation', $animate =>
+Application.Directives.directive('disableAnimation', ['$animate', ($animate) =>
   ({
     restrict: 'A',
     link (scope, elem, attrs) {
       return attrs.$observe('disableAnimation', value => $animate.enabled(!value, elem))
     }
   })
-)
+])
 
 // #
 // Isolate a form's scope from its parent : no nested validation

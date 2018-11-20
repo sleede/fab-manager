@@ -111,7 +111,11 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
      */
     const groupEvents = function (events) {
       if (events.length > 0) {
-        const eventsGroupedByMonth = _.groupBy(function(events, obj) { _.map(['month_id', 'year'], function(key) { return obj[key]; }); })
+        const eventsGroupedByMonth = _.groupBy(events, function(obj) {
+          return _.map(['month_id', 'year'], function(key) {
+            return obj[key];
+          });
+        })
         $scope.eventsGroupByMonth = Object.assign($scope.eventsGroupByMonth, eventsGroupedByMonth)
         return $scope.monthOrder = Object.keys($scope.eventsGroupByMonth)
       }
