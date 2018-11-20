@@ -11,8 +11,8 @@
  */
 'use strict'
 
-Application.Services.factory('dialogs', ['$uibModal', $uibModal =>
-  ({
+Application.Services.factory('dialogs', ['$uibModal', function ($uibModal) {
+  return ({
     confirm (options, success, error) {
       const defaultOpts = {
         templateUrl: '<%= asset_path "shared/confirm_modal.html" %>',
@@ -27,10 +27,9 @@ Application.Services.factory('dialogs', ['$uibModal', $uibModal =>
         },
         controller: ['$scope', '$uibModalInstance', '$state', 'object', function ($scope, $uibModalInstance, $state, object) {
           $scope.object = object
-          $scope.ok = info => $uibModalInstance.close(info)
-          return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
-        }
-        ]
+          $scope.ok = function (info) { $uibModalInstance.close(info) }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+        }]
       }
       if (angular.isObject(options)) { angular.extend(defaultOpts, options) }
       return $uibModal.open(defaultOpts)
@@ -47,4 +46,4 @@ Application.Services.factory('dialogs', ['$uibModal', $uibModal =>
     }
   })
 
-])
+}])
