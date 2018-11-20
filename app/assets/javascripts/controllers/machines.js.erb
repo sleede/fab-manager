@@ -180,7 +180,8 @@ const _reserveMachine = function (machine, e) {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'Machine', '$uibModal', 'machinesPromise', function ($scope, $state, _t, Machine, $uibModal, machinesPromise) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'Machine', '$uibModal', 'machinesPromise',
+  function ($scope, $state, _t, Machine, $uibModal, machinesPromise) {
 // Retrieve the list of machines
   $scope.machines = machinesPromise
 
@@ -236,7 +237,8 @@ Application.Controllers.controller('NewMachineController', ['$scope', '$state', 
 /**
  * Controller used in the machine edition page (admin)
  */
-Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$stateParams', 'machinePromise', 'CSRF', function ($scope, $state, $stateParams, machinePromise, CSRF) {
+Application.Controllers.controller('EditMachineController', ['$scope', '$state', '$stateParams', 'machinePromise', 'CSRF',
+  function ($scope, $state, $stateParams, machinePromise, CSRF) {
   /* PUBLIC SCOPE */
 
   // API URL where the form will be posted

@@ -11,7 +11,8 @@
  */
 'use strict'
 
-Application.Controllers.controller('WalletController', ['$scope', 'walletPromise', 'transactionsPromise', function ($scope, walletPromise, transactionsPromise) {
+Application.Controllers.controller('WalletController', ['$scope', 'walletPromise', 'transactionsPromise',
+  function ($scope, walletPromise, transactionsPromise) {
   /* PUBLIC SCOPE */
 
   // # current user wallet

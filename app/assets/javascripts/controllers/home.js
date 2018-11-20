@@ -10,7 +10,8 @@
  */
 'use strict'
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise', function ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise',
+  function ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise) {
   /* PUBLIC SCOPE */
 
   // # The last registered members who confirmed their addresses

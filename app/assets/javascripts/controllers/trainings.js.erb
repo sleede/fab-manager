@@ -17,7 +17,8 @@
 /**
  * Public listing of the trainings
  */
-Application.Controllers.controller('TrainingsController', ['$scope', '$state', 'trainingsPromise', function ($scope, $state, trainingsPromise) {
+Application.Controllers.controller('TrainingsController', ['$scope', '$state', 'trainingsPromise',
+  function ($scope, $state, trainingsPromise) {
   // List of trainings
   $scope.trainings = trainingsPromise
 
@@ -29,13 +30,14 @@ Application.Controllers.controller('TrainingsController', ['$scope', '$state', '
   /**
    * Callback for the 'show' button
    */
-  return $scope.showTraining = function (training) { $state.go('app.public.training_show', { id: training.slug }) }
+  $scope.showTraining = function (training) { $state.go('app.public.training_show', { id: training.slug }) }
 }])
 
 /**
  * Public view of a specific training
  */
-Application.Controllers.controller('ShowTrainingController', ['$scope', '$state', 'trainingPromise', 'growl', '_t', 'dialogs', function ($scope, $state, trainingPromise, growl, _t, dialogs) {
+Application.Controllers.controller('ShowTrainingController', ['$scope', '$state', 'trainingPromise', 'growl', '_t', 'dialogs',
+  function ($scope, $state, trainingPromise, growl, _t, dialogs) {
   // Current training
   $scope.training = trainingPromise
 
