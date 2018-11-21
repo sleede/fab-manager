@@ -82,12 +82,12 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       if ($scope.isAuthenticated()) {
         if ($scope.selectedPlan !== plan) {
           $scope.selectedPlan = plan;
-          return updateCartPrice();
+          updateCartPrice();
         } else {
-          return $scope.selectedPlan = null;
+          $scope.selectedPlan = null;
         }
       } else {
-        return $scope.login();
+        $scope.login();
       }
     };
 
@@ -125,6 +125,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       Member.update({ id: $scope.ctrl.member.id }, { user: { group_id: $scope.group.id } }, function (user) {
         $scope.ctrl.member = user;
         $scope.group.change = false;
+        $scope.selectedPlan = null;
         if ($scope.currentUser.role !== 'admin') {
           $rootScope.currentUser = user;
           Auth._currentUser.group_id = user.group_id;

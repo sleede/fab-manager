@@ -122,11 +122,11 @@ const _reserveMachine = function (machine, e) {
         if (machine.current_user_training_reservation) {
           return _this.$uibModal.open({
             templateUrl: '<%= asset_path "machines/training_reservation_modal.html" %>',
-            controller: ['$scope', '$uibModalInstance', '$state', function ($scope, $uibModalInstance, $state) {
+            controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
               $scope.machine = machine;
               return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
-            }
-            ] });
+            }]
+          });
         // ... but does not have booked the training, tell him to register for a training session first
         // unless all associated trainings are disabled
         } else {
