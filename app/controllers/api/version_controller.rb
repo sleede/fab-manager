@@ -4,7 +4,8 @@ class API::VersionController < API::ApiController
 
   def show
     authorize :version
-    version = File.read('.fabmanager-version')
-    render json: {version: version}, status: :ok
+    package = File.read('package.json')
+    version = JSON.parse(package)['version']
+    render json: { version: version }, status: :ok
   end
 end
