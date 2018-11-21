@@ -2,9 +2,12 @@ class API::NotificationsController < API::ApiController
   include NotifyWith::NotificationsApi
   before_action :authenticate_user!
 
+  # Number of notifications added to the page when the user clicks on 'load next notifications'
+  NOTIFICATIONS_PER_PAGE = 15
+
   def index
     loop do
-      @notifications = current_user.notifications.page(params[:page]).per(15).order('created_at DESC')
+      @notifications = current_user.notifications.page(params[:page]).per(NOTIFICATIONS_PER_PAGE).order('created_at DESC')
       # we delete obsolete notifications on first access
       break unless delete_obsoletes(@notifications)
     end
@@ -38,6 +41,7 @@ class API::NotificationsController < API::ApiController
   end
 
   private
+
   def delete_obsoletes(notifications)
     cleaned = false
     notifications.each do |n|

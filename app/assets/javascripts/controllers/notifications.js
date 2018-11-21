@@ -17,11 +17,6 @@
  * inherits $scope.$parent.notifications (global notifications state) from ApplicationController
  */
 Application.Controllers.controller('NotificationsController', ['$scope', 'Notification', function ($scope, Notification) {
-  /* PRIVATE STATIC CONSTANTS */
-
-  // Number of notifications added to the page when the user clicks on 'load next notifications'
-  const NOTIFICATIONS_PER_PAGE = 15;
-
   /* PUBLIC SCOPE */
 
   // Array containg the archived notifications (already read)

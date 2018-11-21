@@ -14,20 +14,19 @@
 
 Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
   function ($rootScope, $scope, $window, $locale, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
-
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
-    const NOTIFICATIONS_CHECK_PERIOD = 30000
+    const NOTIFICATIONS_CHECK_PERIOD = 30000;
 
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
     // Fab-manager's version
     $scope.version =
-      { version: '' }
+      { version: '' };
 
     // currency symbol for the current locale (cf. angular-i18n)
-    $rootScope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM
+    $rootScope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
 
     /**
      * Set the current user to the provided value and initialize the session
@@ -35,17 +34,17 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      */
     $scope.setCurrentUser = function (user) {
       if (!angular.isUndefinedOrNull(user)) {
-        $rootScope.currentUser = user
-        Session.create(user)
-        getNotifications()
+        $rootScope.currentUser = user;
+        Session.create(user);
+        getNotifications();
         // fab-manager's app-version
         if (user.role === 'admin') {
-          return $scope.version = Version.get()
+          return $scope.version = Version.get();
         } else {
-          return $scope.version = { version: '' }
+          return $scope.version = { version: '' };
         }
       }
-    }
+    };
 
     /**
      * Login callback
@@ -53,36 +52,36 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * @param callback {function}
      */
     $scope.login = function (e, callback) {
-      if (e) { e.preventDefault() }
-      return openLoginModal(null, null, callback)
-    }
+      if (e) { e.preventDefault(); }
+      return openLoginModal(null, null, callback);
+    };
 
     /**
      * Logout callback
      * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
      */
     $scope.logout = function (e) {
-      e.preventDefault()
+      e.preventDefault();
       return Auth.logout().then(function () {
-        Session.destroy()
-        $rootScope.currentUser = null
-        $rootScope.toCheckNotifications = false
+        Session.destroy();
+        $rootScope.currentUser = null;
+        $rootScope.toCheckNotifications = false;
         $scope.notifications = {
           total: 0,
           unread: 0
-        }
-        return $state.go('app.public.home')
+        };
+        return $state.go('app.public.home');
       }, function (error) {
-          console.error(`An error occurred logging out: ${error}`);
-      })
-    }
+        console.error(`An error occurred logging out: ${error}`);
+      });
+    };
 
     /**
      * Open the modal window allowing the user to create an account.
      * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
      */
     $scope.signup = function (e) {
-      if (e) { e.preventDefault() }
+      if (e) { e.preventDefault(); }
 
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/signupModal.html" %>',
@@ -95,33 +94,33 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             options: {
               startingDay: Fablab.weekStartingDay
             }
-          }
+          };
 
           // callback to open the date picker (account creation modal)
           $scope.openDatePicker = function ($event) {
-            $event.preventDefault()
-            $event.stopPropagation()
-            return $scope.datePicker.opened = true
-          }
+            $event.preventDefault();
+            $event.stopPropagation();
+            return $scope.datePicker.opened = true;
+          };
 
           // retrieve the groups (standard, student ...)
-          Group.query(function(groups) {
+          Group.query(function (groups) {
             $scope.groups = groups;
-          })
+          });
 
           // retrieve the CGU
-          CustomAsset.get({ name: 'cgu-file' }, function(cgu) {
+          CustomAsset.get({ name: 'cgu-file' }, function (cgu) {
             $scope.cgu = cgu.custom_asset;
-          })
+          });
 
           // default user's parameters
           $scope.user = {
             is_allow_contact: true,
             is_allow_newsletter: false
-          }
+          };
 
           // Errors display
-          $scope.alerts = []
+          $scope.alerts = [];
           $scope.closeAlert = function (index) {
             $scope.alerts.splice(index, 1);
           };
@@ -134,15 +133,15 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             const orga = $scope.user.organization;
             delete $scope.user.organization;
             // register on server
-            return Auth.register($scope.user).then(function(user) {
+            return Auth.register($scope.user).then(function (user) {
               // creation successful
-              $uibModalInstance.close(user)
+              $uibModalInstance.close(user);
             }, function (error) {
               // creation failed...
               // restore organization param
-              $scope.user.organization = orga
+              $scope.user.organization = orga;
               // display errors
-              angular.forEach(error.data.errors, function(v, k) {
+              angular.forEach(error.data.errors, function (v, k) {
                 angular.forEach(function (v, err) {
                   $scope.alerts.push({
                     msg: k + ': ' + err,
@@ -150,20 +149,20 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                   });
                 });
               });
-            })
+            });
           };
         }]
-      }).result['finally'](null).then(function(user) {
+      }).result['finally'](null).then(function (user) {
         // when the account was created successfully, set the session to the newly created account
-        $scope.setCurrentUser(user)
-      })
-    }
+        $scope.setCurrentUser(user);
+      });
+    };
 
     /**
      * Open the modal window allowing the user to change his password.
      * @param token {string} security token for password changing. The user should have recieved it by mail
      */
-    $scope.editPassword = function(token) {
+    $scope.editPassword = function (token) {
       $uibModal.open({
         templateUrl: '<%= asset_path "shared/passwordEditModal.html" %>',
         size: 'md',
@@ -171,32 +170,32 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           $scope.user = { reset_password_token: token };
           $scope.alerts = [];
           $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1)
+            $scope.alerts.splice(index, 1);
           };
 
           return $scope.changePassword = function () {
-            $scope.alerts = []
-            return $http.put('/users/password.json', { user: $scope.user }).success(function () { $uibModalInstance.close() }).error(function (data) {
-              angular.forEach(data.errors, function(v, k) {
-                angular.forEach(function(v, err) {
+            $scope.alerts = [];
+            return $http.put('/users/password.json', { user: $scope.user }).success(function () { $uibModalInstance.close(); }).error(function (data) {
+              angular.forEach(data.errors, function (v, k) {
+                angular.forEach(function (v, err) {
                   $scope.alerts.push({
                     msg: k + ': ' + err,
                     type: 'danger'
                   });
                 });
               });
-            })
-          }
+            });
+          };
         }]
       }).result['finally'](null).then(function () {
-        growl.success(_t('your_password_was_successfully_changed'))
-        return Auth.login().then(function(user) {
-          $scope.setCurrentUser(user)
+        growl.success(_t('your_password_was_successfully_changed'));
+        return Auth.login().then(function (user) {
+          $scope.setCurrentUser(user);
         }, function (error) {
           console.error(`Authentication failed: ${error}`);
         }
-      )
-      })
+        );
+      });
     };
 
     /**
@@ -204,25 +203,25 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
      */
     $scope.toggleNavSize = function (event) {
-      let $classes, $targets
+      let $classes, $targets;
       if (typeof event === 'undefined') {
-        console.error('[ApplicationController::toggleNavSize] Missing event parameter')
-        return
+        console.error('[ApplicationController::toggleNavSize] Missing event parameter');
+        return;
       }
 
-      let toggler = $(event.target)
-      if (!toggler.data('toggle')) { toggler = toggler.closest('[data-toggle^="class"]') }
+      let toggler = $(event.target);
+      if (!toggler.data('toggle')) { toggler = toggler.closest('[data-toggle^="class"]'); }
 
-      const $class = toggler.data()['toggle']
-      const $target = toggler.data('target') || toggler.attr('data-link')
+      const $class = toggler.data()['toggle'];
+      const $target = toggler.data('target') || toggler.attr('data-link');
 
       if ($class) {
-        const $tmp = $class.split(':')[1]
-        if ($tmp) { $classes = $tmp.split(',') }
+        const $tmp = $class.split(':')[1];
+        if ($tmp) { $classes = $tmp.split(','); }
       }
 
       if ($target) {
-        $targets = $target.split(',')
+        $targets = $target.split(',');
       }
 
       if ($classes && $classes.length) {
@@ -230,93 +229,92 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           if ($classes[index].indexOf('*') !== -1) {
             const patt = new RegExp('\\s',
               +$classes[index].replace(/\*/g, '[A-Za-z0-9-_]+').split(' ').join('\\s|\\s'),
-              +'\\s', 'g')
+              +'\\s', 'g');
             $(toggler).each(function (i, it) {
-              let cn = ` ${it.className} `
+              let cn = ` ${it.className} `;
               while (patt.test(cn)) {
-                cn = cn.replace(patt, ' ')
+                cn = cn.replace(patt, ' ');
               }
-              return it.className = $.trim(cn)
-            })
+              return it.className = $.trim(cn);
+            });
           }
 
-          return (($targets[index] !== '#') && $($targets[index]).toggleClass($classes[index])) || toggler.toggleClass($classes[index])
-        })
+          return (($targets[index] !== '#') && $($targets[index]).toggleClass($classes[index])) || toggler.toggleClass($classes[index]);
+        });
       }
 
-      toggler.toggleClass('active')
-    }
+      toggler.toggleClass('active');
+    };
 
-  /* PRIVATE SCOPE */
+    /* PRIVATE SCOPE */
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
       // try to retrieve any currently logged user
       Auth.login().then(function (user) {
-        $scope.setCurrentUser(user)
+        $scope.setCurrentUser(user);
         // force users to complete their profile if they are not
         if (user.need_completion) {
-          return $state.transitionTo('app.logged.profileCompletion')
+          return $state.transitionTo('app.logged.profileCompletion');
         }
-      }, function(error) {
+      }, function (error) {
         console.error(`Authentication failed: ${error}`);
-        $rootScope.toCheckNotifications = false
-      })
+        $rootScope.toCheckNotifications = false;
+      });
 
       // bind to the $stateChangeStart event (AngularJS/UI-Router)
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        if (!toState.data) { return }
+        if (!toState.data) { return; }
 
-        const { authorizedRoles } = toState.data
+        const { authorizedRoles } = toState.data;
         if (!AuthService.isAuthorized(authorizedRoles)) {
-          event.preventDefault()
+          event.preventDefault();
           if (AuthService.isAuthenticated()) {
           // user is not allowed
-            console.error('[ApplicationController::initialize] user is not allowed')
+            console.error('[ApplicationController::initialize] user is not allowed');
           } else {
           // user is not logged in
-            openLoginModal(toState, toParams)
+            openLoginModal(toState, toParams);
           }
         }
-      })
+      });
 
       // we stop polling notifications when the page is not in foreground
-      onPageVisible(function(state) { $rootScope.toCheckNotifications = (state === 'visible') })
+      onPageVisible(function (state) { $rootScope.toCheckNotifications = (state === 'visible'); });
 
-      Setting.get({ name: 'fablab_name' }, function(data) { $scope.fablabName = data.setting.value })
-      Setting.get({ name: 'name_genre' }, function(data) { $scope.nameGenre = data.setting.value })
+      Setting.get({ name: 'fablab_name' }, function (data) { $scope.fablabName = data.setting.value; });
+      Setting.get({ name: 'name_genre' }, function (data) { $scope.nameGenre = data.setting.value; });
 
       // shorthands
-      $scope.isAuthenticated = Auth.isAuthenticated
-      $scope.isAuthorized = AuthService.isAuthorized
-      return $rootScope.login = $scope.login
-    }
+      $scope.isAuthenticated = Auth.isAuthenticated;
+      $scope.isAuthorized = AuthService.isAuthorized;
+      return $rootScope.login = $scope.login;
+    };
 
     /**
      * Retreive once the notifications from the server and display a message popup for each new one.
      * Then, periodically check for new notifications.
      */
     var getNotifications = function () {
-      $rootScope.toCheckNotifications = true
+      $rootScope.toCheckNotifications = true;
       if (!$rootScope.checkNotificationsIsInit && !!$rootScope.currentUser) {
-        setTimeout(function() {
+        setTimeout(function () {
           // we request the most recent notifications
           Notification.last_unread(function (notifications) {
-            $rootScope.lastCheck = new Date()
-            $scope.notifications = notifications.totals
+            $rootScope.lastCheck = new Date();
+            $scope.notifications = notifications.totals;
 
             const toDisplay = [];
-            angular.forEach(notifications.notifications, function(n) { toDisplay.push(n) });
+            angular.forEach(notifications.notifications, function (n) { toDisplay.push(n); });
 
             if (toDisplay.length < notifications.totals.unread) {
               toDisplay.push({ message: { description: _t('and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }, 'messageformat') } });
             }
 
-            angular.forEach(toDisplay, function(notification) { growl.info(notification.message.description); })
-          })
-
-        }, 2000)
+            angular.forEach(toDisplay, function (notification) { growl.info(notification.message.description); });
+          });
+        }, 2000);
 
         const checkNotifications = function () {
           if ($rootScope.toCheckNotifications) {
@@ -324,15 +322,15 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $rootScope.lastCheck = new Date();
               $scope.notifications = data.totals;
 
-              angular.forEach(data.notifications, function(notification) { growl.info(notification.message.description) });
-            })
+              angular.forEach(data.notifications, function (notification) { growl.info(notification.message.description); });
+            });
           }
         };
 
         $interval(checkNotifications, NOTIFICATIONS_CHECK_PERIOD);
         $rootScope.checkNotificationsIsInit = true;
       }
-    }
+    };
 
     /**
      * Open the modal window allowing the user to log in.
@@ -340,19 +338,19 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     var openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
-      $window.location.href = '<%=user_omniauth_authorize_path(AuthProvider.active.strategy_name.to_sym)%>'
+      $window.location.href = '<%=user_omniauth_authorize_path(AuthProvider.active.strategy_name.to_sym)%>';
       <% else %>
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/deviseModal.html" %>',
         size: 'sm',
         controller: ['$scope', '$uibModalInstance', '_t', function ($scope, $uibModalInstance, _t) {
-          const user = ($scope.user = {})
-          $scope.login = function() {
+          const user = ($scope.user = {});
+          $scope.login = function () {
             Auth.login(user).then(function (user) {
               // Authentication succeeded ...
-              $uibModalInstance.close(user)
+              $uibModalInstance.close(user);
               if (callback && (typeof callback === 'function')) {
-                return callback(user)
+                return callback(user);
               }
             }
             , function (error) {
@@ -361,57 +359,57 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               return $scope.alerts.push({
                 msg: _t('wrong_email_or_password'),
                 type: 'danger'
-              })
-            })
-          }
+              });
+            });
+          };
           // handle modal behaviors. The provided reason will be used to define the following actions
-          $scope.dismiss = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.dismiss = function () { $uibModalInstance.dismiss('cancel'); };
 
           $scope.openSignup = function (e) {
-            e.preventDefault()
-            return $uibModalInstance.dismiss('signup')
-          }
+            e.preventDefault();
+            return $uibModalInstance.dismiss('signup');
+          };
 
           return $scope.openResetPassword = function (e) {
-            e.preventDefault()
-            return $uibModalInstance.dismiss('resetPassword')
-          }
+            e.preventDefault();
+            return $uibModalInstance.dismiss('resetPassword');
+          };
         }]
       }).result['finally'](null).then(function (user) {
-          // what to do when the modal is closed
+        // what to do when the modal is closed
 
-          // authentication succeeded, set the session, gather the notifications and redirect
-          $scope.setCurrentUser(user);
+        // authentication succeeded, set the session, gather the notifications and redirect
+        $scope.setCurrentUser(user);
 
-          if ((toState !== null) && (toParams !== null)) {
-            return $state.go(toState, toParams)
-          }
-        }, function (reason) {
-          // authentication did not ended successfully
-          if (reason === 'signup') {
-            // open signup modal
-            $scope.signup();
-          } else if (reason === 'resetPassword') {
-            // open the 'reset password' modal
-            return $uibModal.open({
-              templateUrl: '<%= asset_path "shared/passwordNewModal.html" %>',
-              size: 'sm',
-              controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
-                $scope.user = { email: '' }
-                return $scope.sendReset = function () {
-                  $scope.alerts = []
-                  return $http.post('/users/password.json', { user: $scope.user }).success(function() { $uibModalInstance.close() }).error(function() {
-                    $scope.alerts.push({
-                      msg: _t('your_email_address_is_unknown'),
-                      type: 'danger'
-                    });
-                  })
-                }
-              }]
-            }).result['finally'](null).then(function() { growl.info(_t('you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')) })
-          }
-        })
-    }
+        if ((toState !== null) && (toParams !== null)) {
+          return $state.go(toState, toParams);
+        }
+      }, function (reason) {
+        // authentication did not ended successfully
+        if (reason === 'signup') {
+          // open signup modal
+          $scope.signup();
+        } else if (reason === 'resetPassword') {
+          // open the 'reset password' modal
+          return $uibModal.open({
+            templateUrl: '<%= asset_path "shared/passwordNewModal.html" %>',
+            size: 'sm',
+            controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
+              $scope.user = { email: '' };
+              return $scope.sendReset = function () {
+                $scope.alerts = [];
+                return $http.post('/users/password.json', { user: $scope.user }).success(function () { $uibModalInstance.close(); }).error(function () {
+                  $scope.alerts.push({
+                    msg: _t('your_email_address_is_unknown'),
+                    type: 'danger'
+                  });
+                });
+              };
+            }]
+          }).result['finally'](null).then(function () { growl.info(_t('you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
+        }
+      });
+    };
 
     // otherwise the user just closed the modal
     <% end %>
@@ -422,11 +420,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
      */
     var onPageVisible = function (callback) {
-      let hidden = 'hidden'
+      let hidden = 'hidden';
 
       const onchange = function (evt) {
-        const v = 'visible'
-        const h = 'hidden'
+        const v = 'visible';
+        const h = 'hidden';
         const evtMap = {
           focus: v,
           focusin: v,
@@ -434,38 +432,38 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           blur: h,
           focusout: h,
           pagehide: h
-        }
-        evt = evt || window.event
+        };
+        evt = evt || window.event;
         if (evt.type in evtMap) {
-          if (typeof callback === 'function') { callback(evtMap[evt.type]) }
+          if (typeof callback === 'function') { callback(evtMap[evt.type]); }
         } else {
-          if (typeof callback === 'function') { callback(this[hidden] ? 'hidden' : 'visible') }
+          if (typeof callback === 'function') { callback(this[hidden] ? 'hidden' : 'visible'); }
         }
-      }
+      };
 
       // Standards:
       if (hidden in document) {
-        document.addEventListener('visibilitychange', onchange)
+        document.addEventListener('visibilitychange', onchange);
       } else if ((hidden = 'mozHidden') in document) {
-        document.addEventListener('mozvisibilitychange', onchange)
+        document.addEventListener('mozvisibilitychange', onchange);
       } else if ((hidden = 'webkitHidden') in document) {
-        document.addEventListener('webkitvisibilitychange', onchange)
+        document.addEventListener('webkitvisibilitychange', onchange);
       } else if ((hidden = 'msHidden') in document) {
-        document.addEventListener('msvisibilitychange', onchange)
+        document.addEventListener('msvisibilitychange', onchange);
         // IE 9 and lower
       } else if ('onfocusin' in document) {
-        document.onfocusin = (document.onfocusout = onchange)
+        document.onfocusin = (document.onfocusout = onchange);
         // All others
       } else {
-        window.onpageshow = (window.onpagehide = (window.onfocus = (window.onblur = onchange)))
+        window.onpageshow = (window.onpagehide = (window.onfocus = (window.onblur = onchange)));
       }
       // set the initial state (but only if browser supports the Page Visibility API)
       if (document[hidden] !== undefined) {
-        return onchange({ type: document[hidden] ? 'blur' : 'focus' })
+        return onchange({ type: document[hidden] ? 'blur' : 'focus' });
       }
-    }
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);

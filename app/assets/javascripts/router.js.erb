@@ -32,7 +32,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           logoFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-file' }).$promise; }],
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
-          commonTranslations: [ 'Translations', function (Translations) { return Translations.query(['app.public.common', 'app.shared.buttons', 'app.shared.elements']).$promise; }]
+          commonTranslations: ['Translations', function (Translations) { return Translations.query(['app.public.common', 'app.shared.buttons', 'app.shared.elements']).$promise; }]
         },
         onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', function ($rootScope, logoFile, logoBlackFile) {
           // Application logo
@@ -78,7 +78,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.public.about').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.public.about').$promise; }]
         }
       })
       .state('app.public.home', {
@@ -95,7 +95,7 @@ angular.module('application.router', ['ui.router'])
           upcomingEventsPromise: ['Event', function (Event) { return Event.upcoming({ limit: 3 }).$promise; }],
           homeBlogpostPromise: ['Setting', function (Setting) { return Setting.get({ name: 'home_blogpost' }).$promise; }],
           twitterNamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'twitter_name' }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.public.home').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.public.home').$promise; }]
         }
       })
 
@@ -114,7 +114,7 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
           memberPromise: ['Member', 'currentUser', function (Member, currentUser) { return Member.get({ id: currentUser.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.logged.profileCompletion', 'app.shared.user']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.logged.profileCompletion', 'app.shared.user']).$promise; }]
         }
       })
 
@@ -135,7 +135,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.logged.dashboard.profile', 'app.shared.public_profile']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.logged.dashboard.profile', 'app.shared.public_profile']).$promise; }]
         }
       })
       .state('app.logged.dashboard.settings', {
@@ -149,7 +149,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           groups: ['Group', function (Group) { return Group.query().$promise; }],
           activeProviderPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.active().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.logged.dashboard.settings', 'app.shared.user']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.logged.dashboard.settings', 'app.shared.user']).$promise; }]
         }
       })
       .state('app.logged.dashboard.projects', {
@@ -161,7 +161,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.logged.dashboard.projects').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.logged.dashboard.projects').$promise; }]
         }
       })
       .state('app.logged.dashboard.trainings', {
@@ -173,7 +173,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.logged.dashboard.trainings').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.logged.dashboard.trainings').$promise; }]
         }
       })
       .state('app.logged.dashboard.events', {
@@ -185,7 +185,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.logged.dashboard.events').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.logged.dashboard.events').$promise; }]
         }
       })
       .state('app.logged.dashboard.invoices', {
@@ -197,7 +197,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.logged.dashboard.invoices').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.logged.dashboard.invoices').$promise; }]
         }
       })
       .state('app.logged.dashboard.wallet', {
@@ -211,7 +211,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           walletPromise: ['Wallet', 'currentUser', function (Wallet, currentUser) { return Wallet.getWalletByUser({ user_id: currentUser.id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.shared.wallet']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.shared.wallet']).$promise; }]
         }
       })
 
@@ -226,7 +226,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           memberPromise: ['$stateParams', 'Member', function ($stateParams, Member) { return Member.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.logged.members_show', 'app.shared.public_profile']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.logged.members_show', 'app.shared.public_profile']).$promise; }]
         }
       })
       .state('app.logged.members', {
@@ -239,7 +239,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           membersPromise: ['Member', function (Member) { return Member.query({ requested_attributes: '[profile]', page: 1, size: 10 }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.logged.members').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.logged.members').$promise; }]
         }
       })
 
@@ -256,7 +256,7 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.public.projects_list').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.public.projects_list').$promise; }]
         }
       })
       .state('app.logged.projects_new', {
@@ -269,7 +269,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           allowedExtensions: ['Project', function (Project) { return Project.allowedExtensions().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.logged.projects_new', 'app.shared.project']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.logged.projects_new', 'app.shared.project']).$promise; }]
         }
       })
       .state('app.public.projects_show', {
@@ -282,7 +282,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           projectPromise: ['$stateParams', 'Project', function ($stateParams, Project) { return Project.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.public.projects_show').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.public.projects_show').$promise; }]
         }
       })
       .state('app.logged.projects_edit', {
@@ -296,7 +296,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           projectPromise: ['$stateParams', 'Project', function ($stateParams, Project) { return Project.get({ id: $stateParams.id }).$promise; }],
           allowedExtensions: ['Project', function (Project) { return Project.allowedExtensions().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise; }]
         }
       })
 
@@ -311,7 +311,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.machines_list', 'app.shared.training_reservation_modal', 'app.shared.request_training_modal']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.machines_list', 'app.shared.training_reservation_modal', 'app.shared.request_training_modal']).$promise; }]
         }
       })
       .state('app.admin.machines_new', {
@@ -323,7 +323,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.machines_new', 'app.shared.machine']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.machines_new', 'app.shared.machine']).$promise; }]
         }
       })
       .state('app.public.machines_show', {
@@ -336,7 +336,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.machines_show', 'app.shared.training_reservation_modal', 'app.shared.request_training_modal']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.machines_show', 'app.shared.training_reservation_modal', 'app.shared.request_training_modal']).$promise; }]
         }
       })
       .state('app.logged.machines_reserve', {
@@ -363,7 +363,7 @@ angular.module('application.router', ['ui.router'])
                        'subscription_explications_alert']`
             }).$promise;
           }],
-          translations: [ 'Translations', function (Translations) {
+          translations: ['Translations', function (Translations) {
             return Translations.query(['app.logged.machines_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise;
@@ -380,7 +380,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           machinePromise: ['Machine', '$stateParams', function (Machine, $stateParams) { return Machine.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.machines_edit', 'app.shared.machine']).$promise; }]
         }
       })
 
@@ -396,7 +396,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.spaces_list']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.spaces_list']).$promise; }]
         }
       })
       .state('app.admin.space_new', {
@@ -409,7 +409,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.space_new', 'app.shared.space']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.space_new', 'app.shared.space']).$promise; }]
         }
       })
       .state('app.public.space_show', {
@@ -423,7 +423,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           spacePromise: ['Space', '$stateParams', function (Space, $stateParams) { return Space.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.space_show']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.space_show']).$promise; }]
         }
       })
       .state('app.admin.space_edit', {
@@ -437,7 +437,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           spacePromise: ['Space', '$stateParams', function (Space, $stateParams) { return Space.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.space_edit', 'app.shared.space']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.space_edit', 'app.shared.space']).$promise; }]
         }
       })
       .state('app.logged.space_reserve', {
@@ -465,7 +465,7 @@ angular.module('application.router', ['ui.router'])
                        'subscription_explications_alert', \
                        'space_explications_alert']` }).$promise;
           }],
-          translations: [ 'Translations', function (Translations) {
+          translations: ['Translations', function (Translations) {
             return Translations.query(['app.logged.space_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise;
@@ -484,7 +484,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           trainingsPromise: ['Training', function (Training) { return Training.query({ public_page: true }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.trainings_list']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.trainings_list']).$promise; }]
         }
       })
       .state('app.public.training_show', {
@@ -497,7 +497,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) { return Training.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.training_show']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.training_show']).$promise; }]
         }
       })
       .state('app.logged.trainings_reserve', {
@@ -528,7 +528,7 @@ angular.module('application.router', ['ui.router'])
                        'training_explications_alert', \
                        'training_information_message']` }).$promise;
           }],
-          translations: [ 'Translations', function (Translations) {
+          translations: ['Translations', function (Translations) {
             return Translations.query(['app.logged.trainings_reserve', 'app.shared.plan_subscribe', 'app.shared.member_select',
               'app.shared.stripe', 'app.shared.valid_reservation_modal', 'app.shared.confirm_modify_slot_modal',
               'app.shared.wallet', 'app.shared.coupon_input', 'app.shared.cart']).$promise;
@@ -545,7 +545,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.logged.notifications').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.logged.notifications').$promise; }]
         }
       })
 
@@ -563,7 +563,7 @@ angular.module('application.router', ['ui.router'])
           subscriptionExplicationsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'subscription_explications_alert' }).$promise; }],
           plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
-          translations: [ 'Translations', function (Translations) {
+          translations: ['Translations', function (Translations) {
             return Translations.query(['app.public.plans', 'app.shared.member_select', 'app.shared.stripe', 'app.shared.wallet',
               'app.shared.coupon_input']).$promise;
           }]
@@ -583,7 +583,7 @@ angular.module('application.router', ['ui.router'])
           categoriesPromise: ['Category', function (Category) { return Category.query().$promise; }],
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.public.events_list').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.public.events_list').$promise; }]
         }
       })
       .state('app.public.events_show', {
@@ -598,7 +598,7 @@ angular.module('application.router', ['ui.router'])
           eventPromise: ['Event', '$stateParams', function (Event, $stateParams) { return Event.get({ id: $stateParams.id }).$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
           settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['booking_move_enable', 'booking_move_delay', 'event_explications_alert']" }).$promise; }],
-          translations: [ 'Translations', function (Translations) {
+          translations: ['Translations', function (Translations) {
             return Translations.query(['app.public.events_show', 'app.shared.member_select', 'app.shared.stripe',
               'app.shared.valid_reservation_modal', 'app.shared.wallet', 'app.shared.coupon_input']).$promise;
           }]
@@ -620,7 +620,7 @@ angular.module('application.router', ['ui.router'])
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.public.calendar']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.public.calendar']).$promise; }]
         }
       })
 
@@ -638,7 +638,7 @@ angular.module('application.router', ['ui.router'])
           bookingWindowStart: ['Setting', function (Setting) { return Setting.get({ name: 'booking_window_start' }).$promise; }],
           bookingWindowEnd: ['Setting', function (Setting) { return Setting.get({ name: 'booking_window_end' }).$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.calendar').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.calendar').$promise; }]
         }
       })
 
@@ -655,7 +655,7 @@ angular.module('application.router', ['ui.router'])
           componentsPromise: ['Component', function (Component) { return Component.query().$promise; }],
           licencesPromise: ['Licence', function (Licence) { return Licence.query().$promise; }],
           themesPromise: ['Theme', function (Theme) { return Theme.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.project_elements').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.project_elements').$promise; }]
         }
       })
 
@@ -671,7 +671,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.trainings', 'app.shared.trainings']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.trainings', 'app.shared.trainings']).$promise; }]
         }
       })
       .state('app.admin.trainings_new', {
@@ -684,7 +684,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.trainings_new', 'app.shared.trainings']).$promise; }]
         }
       })
       .state('app.admin.trainings_edit', {
@@ -698,7 +698,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           trainingPromise: ['Training', '$stateParams', function (Training, $stateParams) { return Training.get({ id: $stateParams.id }).$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.shared.trainings').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.shared.trainings').$promise; }]
         }
       })
       // events
@@ -716,7 +716,7 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.events').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.events').$promise; }]
         }
       })
       .state('app.admin.events_new', {
@@ -732,7 +732,7 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.events_new', 'app.shared.event']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.events_new', 'app.shared.event']).$promise; }]
         }
       })
       .state('app.admin.events_edit', {
@@ -749,7 +749,7 @@ angular.module('application.router', ['ui.router'])
           themesPromise: ['EventTheme', function (EventTheme) { return EventTheme.query().$promise; }],
           ageRangesPromise: ['AgeRange', function (AgeRange) { return AgeRange.query().$promise; }],
           priceCategoriesPromise: ['PriceCategory', function (PriceCategory) { return PriceCategory.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.events_edit', 'app.shared.event']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.events_edit', 'app.shared.event']).$promise; }]
         }
       })
       .state('app.admin.event_reservations', {
@@ -763,7 +763,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           eventPromise: ['Event', '$stateParams', function (Event, $stateParams) { return Event.get({ id: $stateParams.id }).$promise; }],
           reservationsPromise: ['Reservation', '$stateParams', function (Reservation, $stateParams) { return Reservation.query({ reservable_id: $stateParams.id, reservable_type: 'Event' }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.event_reservations').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.event_reservations').$promise; }]
         }
       })
 
@@ -781,7 +781,7 @@ angular.module('application.router', ['ui.router'])
           groups: ['Group', function (Group) { return Group.query().$promise; }],
           machinesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Machine', plan_id: 'null' }).$promise; }],
           trainingsPricingsPromise: ['TrainingsPricing', function (TrainingsPricing) { return TrainingsPricing.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.pricing', 'app.shared.member_select', 'app.shared.coupon']).$promise; }],
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.pricing', 'app.shared.member_select', 'app.shared.coupon']).$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machineCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Machine' }).$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
@@ -811,7 +811,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.plans.new', 'app.shared.plan']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.plans.new', 'app.shared.plan']).$promise; }]
         }
       })
       .state('app.admin.plans.edit', {
@@ -827,7 +827,7 @@ angular.module('application.router', ['ui.router'])
           machines: ['Machine', function (Machine) { return Machine.query().$promise; }],
           plans: ['Plan', function (Plan) { return Plan.query().$promise; }],
           planPromise: ['Plan', '$stateParams', function (Plan, $stateParams) { return Plan.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.plans.edit', 'app.shared.plan']).$promise; }]
         }
       })
 
@@ -841,7 +841,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.coupons_new', 'app.shared.coupon']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.coupons_new', 'app.shared.coupon']).$promise; }]
         }
       })
       .state('app.admin.coupons_edit', {
@@ -854,7 +854,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           couponPromise: ['Coupon', '$stateParams', function (Coupon, $stateParams) { return Coupon.get({ id: $stateParams.id }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.coupons_edit', 'app.shared.coupon']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.coupons_edit', 'app.shared.coupon']).$promise; }]
         }
       })
 
@@ -885,7 +885,7 @@ angular.module('application.router', ['ui.router'])
               query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
             }).$promise;
           }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.invoices').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.invoices').$promise; }]
         }
       })
 
@@ -916,7 +916,7 @@ angular.module('application.router', ['ui.router'])
           groupsPromise: ['Group', function (Group) { return Group.query().$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
           authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.members').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.members').$promise; }]
         }
       })
       .state('app.admin.members_new', {
@@ -928,7 +928,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.members_new', 'app.shared.user', 'app.shared.user_admin']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.members_new', 'app.shared.user', 'app.shared.user_admin']).$promise; }]
         }
       })
       .state('app.admin.members_edit', {
@@ -945,7 +945,7 @@ angular.module('application.router', ['ui.router'])
           walletPromise: ['Wallet', '$stateParams', function (Wallet, $stateParams) { return Wallet.getWalletByUser({ user_id: $stateParams.id }).$promise; }],
           transactionsPromise: ['Wallet', 'walletPromise', function (Wallet, walletPromise) { return Wallet.transactions({ id: walletPromise.id }).$promise; }],
           tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin', 'app.shared.wallet']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.members_edit', 'app.shared.user', 'app.shared.user_admin', 'app.shared.wallet']).$promise; }]
         }
       })
       .state('app.admin.admins_new', {
@@ -957,7 +957,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.admins_new').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.admins_new').$promise; }]
         }
       })
 
@@ -973,7 +973,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           mappingFieldsPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.mapping_fields().$promise; }],
           authProvidersPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.authentication_new', 'app.shared.authentication', 'app.shared.oauth2']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.authentication_new', 'app.shared.authentication', 'app.shared.oauth2']).$promise; }]
         }
       })
       .state('app.admin.authentication_edit', {
@@ -987,7 +987,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           providerPromise: ['AuthProvider', '$stateParams', function (AuthProvider, $stateParams) { return AuthProvider.get({ id: $stateParams.id }).$promise; }],
           mappingFieldsPromise: ['AuthProvider', function (AuthProvider) { return AuthProvider.mapping_fields().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query(['app.admin.authentication_edit', 'app.shared.authentication', 'app.shared.oauth2']).$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.authentication_edit', 'app.shared.authentication', 'app.shared.oauth2']).$promise; }]
         }
       })
 
@@ -1003,7 +1003,7 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           membersPromise: ['Member', function (Member) { return Member.mapping().$promise; }],
           statisticsPromise: ['Statistics', function (Statistics) { return Statistics.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.statistics').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.statistics').$promise; }]
         }
       })
       .state('app.admin.stats_graphs', {
@@ -1015,7 +1015,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.stats_graphs').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.stats_graphs').$promise; }]
         }
       })
 
@@ -1063,7 +1063,7 @@ angular.module('application.router', ['ui.router'])
           cgvFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgv-file' }).$promise; }],
           faviconFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'favicon-file' }).$promise; }],
           profileImageFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'profile-image-file' }).$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.settings').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.settings').$promise; }]
         }
       })
 
@@ -1078,7 +1078,7 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           clientsPromise: ['OpenAPIClient', function (OpenAPIClient) { return OpenAPIClient.query().$promise; }],
-          translations: [ 'Translations', function (Translations) { return Translations.query('app.admin.open_api_clients').$promise; }]
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.open_api_clients').$promise; }]
         }
       });
   }
