@@ -1,4 +1,7 @@
 {
-  "extends": "standard"
+  "extends": "standard",
+  "rules": {
+    "semi": ["error", "always"]
+  }
 }
 

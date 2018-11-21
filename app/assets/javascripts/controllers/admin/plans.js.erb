@@ -16,23 +16,23 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 /* COMMON CODE */
 
 class PlanController {
   constructor ($scope, groups, prices, partners, CSRF) {
     // protection against request forgery
-    CSRF.setMetaTags()
+    CSRF.setMetaTags();
 
     // groups list
-    $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled })
+    $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
 
     // users with role 'partner', notifiables for a partner plan
-    $scope.partners = partners.users
+    $scope.partners = partners.users;
 
     // Subscriptions prices, machines prices and training prices, per groups
-    $scope.group_pricing = prices
+    $scope.group_pricing = prices;
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -41,11 +41,11 @@ class PlanController {
      */
     $scope.fileinputClass = function (v) {
       if (v) {
-        return 'fileinput-exists'
+        return 'fileinput-exists';
       } else {
-        return 'fileinput-new'
+        return 'fileinput-new';
       }
-    }
+    };
 
     /**
      * Mark the provided file for deletion
@@ -53,9 +53,9 @@ class PlanController {
      */
     $scope.deleteFile = function (file) {
       if ((file != null) && (file.id != null)) {
-        return file._destroy = true
+        return file._destroy = true;
       }
-    }
+    };
   }
 }
 
@@ -67,13 +67,13 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
     /* PUBLIC SCOPE */
 
     // current form is used to create a new plan
-    $scope.mode = 'creation'
+    $scope.mode = 'creation';
 
     // prices bindings
     $scope.prices = {
       training: {},
       machine: {}
-    }
+    };
 
     // form inputs bindings
     $scope.plan = {
@@ -86,19 +86,19 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       partnerId: null,
       partnerContact: null,
       ui_weight: 0
-    }
+    };
 
     // API URL where the form will be posted
-    $scope.actionUrl = '/api/plans/'
+    $scope.actionUrl = '/api/plans/';
 
     // HTTP method for the rest API
-    $scope.method = 'POST'
+    $scope.method = 'POST';
 
     /**
      * Checks if the partner contact is a valid data. Used in the form validation process
      * @returns {boolean}
      */
-    $scope.partnerIsValid = function () { return ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email)) }
+    $scope.partnerIsValid = function () { return ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email)); };
 
     /**
      * Open a modal dialog allowing the admin to create a new partner user
@@ -109,32 +109,32 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
         templateUrl: '<%= asset_path "shared/_partner_new_modal.html" %>',
         size: 'lg',
         controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
-          $scope.partner = {}
+          $scope.partner = {};
 
           $scope.ok = function () {
             User.save(
               {},
               { user: $scope.partner },
               function (user) {
-                $scope.partner.id = user.id
-                $scope.partner.name = `${user.first_name} ${user.last_name}`
-                $uibModalInstance.close($scope.partner)
+                $scope.partner.id = user.id;
+                $scope.partner.name = `${user.first_name} ${user.last_name}`;
+                $uibModalInstance.close($scope.partner);
               },
               function (error) {
-                growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
-                console.error(error)
+                growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'));
+                console.error(error);
               }
-            )
-          }
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+            );
+          };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }]
-      })
+      });
       // once the form was validated successfully ...
       return modalInstance.result.then(function (partner) {
-        $scope.partners.push(partner)
-        return $scope.plan.partnerId = partner.id
-      })
-    }
+        $scope.partners.push(partner);
+        return $scope.plan.partnerId = partner.id;
+      });
+    };
 
     /**
      * Display some messages and redirect the user, once the form was submitted, depending on the result status
@@ -143,22 +143,22 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
      */
     $scope.afterSubmit = function (content) {
       if ((content.id == null) && (content.plan_ids == null)) {
-        return growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'))
+        return growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'));
       } else {
-        growl.success(_t('new_plan.successfully_created_subscription(s)_dont_forget_to_redefine_prices'))
+        growl.success(_t('new_plan.successfully_created_subscription(s)_dont_forget_to_redefine_prices'));
         if (content.plan_ids != null) {
-          return $state.go('app.admin.pricing')
+          return $state.go('app.admin.pricing');
         } else {
           if (content.id != null) {
-            return $state.go('app.admin.plans.edit', { id: content.id })
+            return $state.go('app.admin.plans.edit', { id: content.id });
           }
         }
       }
-    }
+    };
 
-    return new PlanController($scope, groups, prices, partners, CSRF)
+    return new PlanController($scope, groups, prices, partners, CSRF);
   }
-])
+]);
 
 /**
  * Controller used in the plan edition form
@@ -168,30 +168,30 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
   /* PUBLIC SCOPE */
 
     // List of spaces
-    $scope.spaces = spaces
+    $scope.spaces = spaces;
 
     // List of plans
-    $scope.plans = plans
+    $scope.plans = plans;
 
     // List of machines
-    $scope.machines = machines
+    $scope.machines = machines;
 
     // List of groups
-    $scope.groups = groups
+    $scope.groups = groups;
 
     // current form is used for edition mode
-    $scope.mode = 'edition'
+    $scope.mode = 'edition';
 
     // edited plan data
-    $scope.plan = planPromise
-    if ($scope.plan.type === null) { $scope.plan.type = 'Plan' }
-    if ($scope.plan.disabled) { $scope.plan.disabled = 'true' }
+    $scope.plan = planPromise;
+    if ($scope.plan.type === null) { $scope.plan.type = 'Plan'; }
+    if ($scope.plan.disabled) { $scope.plan.disabled = 'true'; }
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/plans/${$stateParams.id}`
+    $scope.actionUrl = `/api/plans/${$stateParams.id}`;
 
     // HTTP method for the rest API
-    $scope.method = 'PATCH'
+    $scope.method = 'PATCH';
 
     /**
      * If a parent plan was set ($scope.plan.parent), the prices will be copied from this parent plan into
@@ -202,34 +202,34 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
         return Plan.get({ id: $scope.plan.parent }, function (parentPlan) {
           Array.from(parentPlan.prices).map(function (parentPrice) {
             return (function () {
-              const result = []
+              const result = [];
               for (let childKey in $scope.plan.prices) {
-                const childPrice = $scope.plan.prices[childKey]
+                const childPrice = $scope.plan.prices[childKey];
                 if ((childPrice.priceable_type === parentPrice.priceable_type) && (childPrice.priceable_id === parentPrice.priceable_id)) {
-                  $scope.plan.prices[childKey].amount = parentPrice.amount
-                  break
+                  $scope.plan.prices[childKey].amount = parentPrice.amount;
+                  break;
                 } else {
-                  result.push(undefined)
+                  result.push(undefined);
                 }
               }
-              return result
-            })()
-          })
+              return result;
+            })();
+          });
         }
-        )
+        );
 
         // if no plan were selected, unset every prices
       } else {
         return (function () {
-          const result = []
+          const result = [];
           for (let key in $scope.plan.prices) {
-            const price = $scope.plan.prices[key]
-            result.push($scope.plan.prices[key].amount = 0)
+            const price = $scope.plan.prices[key];
+            result.push($scope.plan.prices[key].amount = 0);
           }
-          return result
-        })()
+          return result;
+        })();
       }
-    }
+    };
 
     /**
      * Display some messages once the form was submitted, depending on the result status (failed/succeeded)
@@ -237,12 +237,12 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      */
     $scope.afterSubmit = function (content) {
       if ((content.id == null) && (content.plan_ids == null)) {
-        return growl.error(_t('edit_plan.unable_to_save_subscription_changes_please_try_again'))
+        return growl.error(_t('edit_plan.unable_to_save_subscription_changes_please_try_again'));
       } else {
-        growl.success(_t('edit_plan.subscription_successfully_changed'))
-        return $state.go('app.admin.pricing')
+        growl.success(_t('edit_plan.subscription_successfully_changed'));
+        return $state.go('app.admin.pricing');
       }
-    }
+    };
 
     /**
      * Generate a string identifying the given plan by literal humain-readable name
@@ -252,7 +252,7 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      * will be included.
      * @returns {String}
      */
-    $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}` }
+    $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}`; };
 
     /**
      * Retrieve the machine from its ID
@@ -262,10 +262,10 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     $scope.getMachine = function (machine_id) {
       for (let machine of Array.from($scope.machines)) {
         if (machine.id === machine_id) {
-          return machine
+          return machine;
         }
       }
-    }
+    };
 
     /**
      * Retrieve the space from its ID
@@ -275,12 +275,12 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
     $scope.getSpace = function (space_id) {
       for (let space of Array.from($scope.spaces)) {
         if (space.id === space_id) {
-          return space
+          return space;
         }
       }
-    }
+    };
 
     // Using the PlansController
-    return new PlanController($scope, groups, prices, partners, CSRF)
+    return new PlanController($scope, groups, prices, partners, CSRF);
   }
-])
+]);

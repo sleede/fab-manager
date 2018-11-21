@@ -8,7 +8,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 Application.Services.factory('Event', ['$resource', $resource =>
   $resource('/api/events/:id',
@@ -25,4 +25,4 @@ Application.Services.factory('Event', ['$resource', $resource =>
     }
   )
 
-])
+]);

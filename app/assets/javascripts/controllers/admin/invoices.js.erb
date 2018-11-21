@@ -12,7 +12,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 /**
  * Controller used in the admin invoices listing page
@@ -22,28 +22,28 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
-    const INVOICES_PER_PAGE = 20
+    const INVOICES_PER_PAGE = 20;
 
     /* PUBLIC SCOPE */
 
     // List of all users invoices
-    $scope.invoices = invoices
+    $scope.invoices = invoices;
 
     // Invoices filters
     $scope.searchInvoice = {
       date: null,
       name: '',
       reference: ''
-    }
+    };
 
     // currently displayed page of invoices (search results)
-    $scope.page = 1
+    $scope.page = 1;
 
     // true when all invoices are loaded
-    $scope.noMoreResults = false
+    $scope.noMoreResults = false;
 
     // Default invoices ordering/sorting
-    $scope.orderInvoice = '-reference'
+    $scope.orderInvoice = '-reference';
 
     // Invoices parameters
     $scope.invoice = {
@@ -74,16 +74,16 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       legals: {
         content: ''
       }
-    }
+    };
 
     // Placeholding date for the invoice creation
-    $scope.today = moment()
+    $scope.today = moment();
 
     // Placeholding date for the reservation begin
-    $scope.inOneWeek = moment().add(1, 'week').startOf('hour')
+    $scope.inOneWeek = moment().add(1, 'week').startOf('hour');
 
     // Placeholding date for the reservation end
-    $scope.inOneWeekAndOneHour = moment().add(1, 'week').add(1, 'hour').startOf('hour')
+    $scope.inOneWeekAndOneHour = moment().add(1, 'week').add(1, 'hour').startOf('hour');
 
     /**
      * Change the invoices ordering criterion to the one provided
@@ -91,14 +91,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      */
     $scope.setOrderInvoice = function (orderBy) {
       if ($scope.orderInvoice === orderBy) {
-        $scope.orderInvoice = `-${orderBy}`
+        $scope.orderInvoice = `-${orderBy}`;
       } else {
-        $scope.orderInvoice = orderBy
+        $scope.orderInvoice = orderBy;
       }
 
-      resetSearchInvoice()
-      return invoiceSearch()
-    }
+      resetSearchInvoice();
+      return invoiceSearch();
+    };
 
     /**
      * Open a modal window asking the admin the details to refund the user about the provided invoice
@@ -110,65 +110,65 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         templateUrl: '<%= asset_path "admin/invoices/avoirModal.html" %>',
         controller: 'AvoirModalController',
         resolve: {
-          invoice () { return invoice }
+          invoice () { return invoice; }
         }
-      })
+      });
 
       // once done, update the invoice model and inform the admin
       return modalInstance.result.then(function (res) {
-        $scope.invoices.unshift(res.avoir)
+        $scope.invoices.unshift(res.avoir);
         return Invoice.get({ id: invoice.id }, function (data) {
-          invoice.has_avoir = data.has_avoir
-          return growl.success(_t('refund_invoice_successfully_created'))
-        })
-      })
-    }
+          invoice.has_avoir = data.has_avoir;
+          return growl.success(_t('refund_invoice_successfully_created'));
+        });
+      });
+    };
 
     /**
      * Generate an invoice reference sample from the parametrized model
      * @returns {string} invoice reference sample
      */
     $scope.mkReference = function () {
-      let sample = $scope.invoice.reference.model
+      let sample = $scope.invoice.reference.model;
       if (sample) {
       // invoice number per day (dd..dd)
-        sample = sample.replace(/d+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(2, match.length) })
+        sample = sample.replace(/d+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(2, match.length); });
         // invoice number per month (mm..mm)
-        sample = sample.replace(/m+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(12, match.length) })
+        sample = sample.replace(/m+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(12, match.length); });
         // invoice number per year (yy..yy)
-        sample = sample.replace(/y+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(8, match.length) })
+        sample = sample.replace(/y+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(8, match.length); });
         // date information
-        sample = sample.replace(/[YMD]+(?![^\[]*])/g, function (match, offset, string) { return $scope.today.format(match) })
+        sample = sample.replace(/[YMD]+(?![^\[]*])/g, function (match, offset, string) { return $scope.today.format(match); });
         // information about online selling (X[text])
-        sample = sample.replace(/X\[([^\]]+)\]/g, function (match, p1, offset, string) { return p1 })
+        sample = sample.replace(/X\[([^\]]+)\]/g, function (match, p1, offset, string) { return p1; });
         // information about wallet (W[text]) - does not apply here
-        sample = sample.replace(/W\[([^\]]+)\]/g, '')
+        sample = sample.replace(/W\[([^\]]+)\]/g, '');
         // information about refunds (R[text]) - does not apply here
-        sample = sample.replace(/R\[([^\]]+)\]/g, '')
+        sample = sample.replace(/R\[([^\]]+)\]/g, '');
       }
-      return sample
-    }
+      return sample;
+    };
 
     /**
      * Generate an order nmuber sample from the parametrized model
      * @returns {string} invoice reference sample
      */
     $scope.mkNumber = function () {
-      let sample = $scope.invoice.number.model
+      let sample = $scope.invoice.number.model;
       if (sample) {
       // global order number (nn..nn)
-        sample = sample.replace(/n+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(327, match.length) })
+        sample = sample.replace(/n+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(327, match.length); });
         // order number per year (yy..yy)
-        sample = sample.replace(/y+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(8, match.length) })
+        sample = sample.replace(/y+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(8, match.length); });
         // order number per month (mm..mm)
-        sample = sample.replace(/m+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(12, match.length) })
+        sample = sample.replace(/m+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(12, match.length); });
         // order number per day (dd..dd)
-        sample = sample.replace(/d+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(2, match.length) })
+        sample = sample.replace(/d+(?![^\[]*])/g, function (match, offset, string) { return padWithZeros(2, match.length); });
         // date information
-        sample = sample.replace(/[YMD]+(?![^\[]*])/g, function (match, offset, string) { return $scope.today.format(match) })
+        sample = sample.replace(/[YMD]+(?![^\[]*])/g, function (match, offset, string) { return $scope.today.format(match); });
       }
-      return sample
-    }
+      return sample;
+    };
 
     /**
      * Open a modal dialog allowing the user to edit the invoice reference generation template
@@ -180,27 +180,27 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         size: 'lg',
         resolve: {
           model () {
-            return $scope.invoice.reference.model
+            return $scope.invoice.reference.model;
           }
         },
         controller ($scope, $uibModalInstance, model) {
-          $scope.model = model
-          $scope.ok = function () { $uibModalInstance.close($scope.model) }
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+          $scope.model = model;
+          $scope.ok = function () { $uibModalInstance.close($scope.model); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-      })
+      });
 
       modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_reference' }, { value: model }, function (data) {
-          $scope.invoice.reference.model = model
-          growl.success(_t('invoice_reference_successfully_saved'))
+          $scope.invoice.reference.model = model;
+          growl.success(_t('invoice_reference_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_invoice_reference'))
-          console.error(error)
-        })
-      })
-    }
+          growl.error(_t('an_error_occurred_while_saving_invoice_reference'));
+          console.error(error);
+        });
+      });
+    };
 
     /**
      * Open a modal dialog allowing the user to edit the invoice code
@@ -212,47 +212,47 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         size: 'lg',
         resolve: {
           model () {
-            return $scope.invoice.code.model
+            return $scope.invoice.code.model;
           },
           active () {
-            return $scope.invoice.code.active
+            return $scope.invoice.code.active;
           }
         },
         controller ($scope, $uibModalInstance, model, active) {
-          $scope.codeModel = model
-          $scope.isSelected = active
+          $scope.codeModel = model;
+          $scope.isSelected = active;
 
-          $scope.ok = function () { $uibModalInstance.close({ model: $scope.codeModel, active: $scope.isSelected }) }
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+          $scope.ok = function () { $uibModalInstance.close({ model: $scope.codeModel, active: $scope.isSelected }); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-      })
+      });
 
       return modalInstance.result.then(function (result) {
         Setting.update({ name: 'invoice_code-value' }, { value: result.model }, function (data) {
-          $scope.invoice.code.model = result.model
+          $scope.invoice.code.model = result.model;
           if (result.active) {
-            return growl.success(_t('invoicing_code_succesfully_saved'))
+            return growl.success(_t('invoicing_code_succesfully_saved'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_invoicing_code'))
-          return console.error(error)
-        })
+          growl.error(_t('an_error_occurred_while_saving_the_invoicing_code'));
+          return console.error(error);
+        });
 
         return Setting.update({ name: 'invoice_code-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
-          $scope.invoice.code.active = result.active
+          $scope.invoice.code.active = result.active;
           if (result.active) {
-            return growl.success(_t('code_successfully_activated'))
+            return growl.success(_t('code_successfully_activated'));
           } else {
-            return growl.success(_t('code_successfully_disabled'))
+            return growl.success(_t('code_successfully_disabled'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_activating_the_invoicing_code'))
-          return console.error(error)
-        })
-      })
-    }
+          growl.error(_t('an_error_occurred_while_activating_the_invoicing_code'));
+          return console.error(error);
+        });
+      });
+    };
 
     /**
      * Open a modal dialog allowing the user to edit the invoice number
@@ -264,27 +264,27 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         size: 'lg',
         resolve: {
           model () {
-            return $scope.invoice.number.model
+            return $scope.invoice.number.model;
           }
         },
         controller ($scope, $uibModalInstance, model) {
-          $scope.model = model
-          $scope.ok = function () { $uibModalInstance.close($scope.model) }
-          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+          $scope.model = model;
+          $scope.ok = function () { $uibModalInstance.close($scope.model); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-      })
+      });
 
       return modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_order-nb' }, { value: model }, function (data) {
-          $scope.invoice.number.model = model
-          return growl.success(_t('order_number_successfully_saved'))
+          $scope.invoice.number.model = model;
+          return growl.success(_t('order_number_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_order_number'))
-          return console.error(error)
-        })
-      })
-    }
+          growl.error(_t('an_error_occurred_while_saving_the_order_number'));
+          return console.error(error);
+        });
+      });
+    };
 
     /**
      * Open a modal dialog allowing the user to edit the VAT parameters for the invoices
@@ -297,95 +297,95 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         size: 'lg',
         resolve: {
           rate () {
-            return $scope.invoice.VAT.rate
+            return $scope.invoice.VAT.rate;
           },
           active () {
-            return $scope.invoice.VAT.active
+            return $scope.invoice.VAT.active;
           }
         },
         controller ($scope, $uibModalInstance, rate, active) {
-          $scope.rate = rate
-          $scope.isSelected = active
+          $scope.rate = rate;
+          $scope.isSelected = active;
 
-          $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }) }
-          return $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+          $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }); };
+          return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-      })
+      });
 
       return modalInstance.result.then(function (result) {
         Setting.update({ name: 'invoice_VAT-rate' }, { value: result.rate + '' }, function (data) {
-          $scope.invoice.VAT.rate = result.rate
+          $scope.invoice.VAT.rate = result.rate;
           if (result.active) {
-            return growl.success(_t('VAT_rate_successfully_saved'))
+            return growl.success(_t('VAT_rate_successfully_saved'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_VAT_rate'))
-          return console.error(error)
-        })
+          growl.error(_t('an_error_occurred_while_saving_the_VAT_rate'));
+          return console.error(error);
+        });
 
         return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
-          $scope.invoice.VAT.active = result.active
+          $scope.invoice.VAT.active = result.active;
           if (result.active) {
-            return growl.success(_t('VAT_successfully_activated'))
+            return growl.success(_t('VAT_successfully_activated'));
           } else {
-            return growl.success(_t('VAT_successfully_disabled'))
+            return growl.success(_t('VAT_successfully_disabled'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_activating_the_VAT'))
-          return console.error(error)
-        })
-      })
-    }
+          growl.error(_t('an_error_occurred_while_activating_the_VAT'));
+          return console.error(error);
+        });
+      });
+    };
 
     /**
      * Callback to save the value of the text zone when editing is done
      */
     $scope.textEditEnd = function (event) {
-      const parsed = parseHtml($scope.invoice.text.content)
+      const parsed = parseHtml($scope.invoice.text.content);
       return Setting.update({ name: 'invoice_text' }, { value: parsed }, function (data) {
-        $scope.invoice.text.content = parsed
-        return growl.success(_t('text_successfully_saved'))
+        $scope.invoice.text.content = parsed;
+        return growl.success(_t('text_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('an_error_occurred_while_saving_the_text'))
-        return console.error(error)
-      })
-    }
+        growl.error(_t('an_error_occurred_while_saving_the_text'));
+        return console.error(error);
+      });
+    };
 
     /**
      * Callback to save the value of the legal information zone when editing is done
      */
     $scope.legalsEditEnd = function (event) {
-      const parsed = parseHtml($scope.invoice.legals.content)
+      const parsed = parseHtml($scope.invoice.legals.content);
       return Setting.update({ name: 'invoice_legals' }, { value: parsed }, function (data) {
-        $scope.invoice.legals.content = parsed
-        return growl.success(_t('address_and_legal_information_successfully_saved'))
+        $scope.invoice.legals.content = parsed;
+        return growl.success(_t('address_and_legal_information_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('an_error_occurred_while_saving_the_address_and_the_legal_information'))
-        return console.error(error)
-      })
-    }
+        growl.error(_t('an_error_occurred_while_saving_the_address_and_the_legal_information'));
+        return console.error(error);
+      });
+    };
 
     /**
      * Callback when any of the filters changes.
      * Full reload the results list
      */
     $scope.handleFilterChange = function () {
-      resetSearchInvoice()
-      return invoiceSearch()
-    }
+      resetSearchInvoice();
+      return invoiceSearch();
+    };
 
     /**
      * Callback for the 'load more' button.
      * Will load the next results of the current search, if any
      */
     $scope.showNextInvoices = function () {
-      $scope.page += 1
-      return invoiceSearch(true)
-    }
+      $scope.page += 1;
+      return invoiceSearch(true);
+    };
 
     /* PRIVATE SCOPE */
 
@@ -394,23 +394,23 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      */
     const initialize = function () {
       if (!invoices[0] || (invoices[0].maxInvoices <= $scope.invoices.length)) {
-        $scope.noMoreResults = true
+        $scope.noMoreResults = true;
       }
 
       // retrieve settings from the DB through the API
-      $scope.invoice.legals.content = settings['invoice_legals']
-      $scope.invoice.text.content = settings['invoice_text']
-      $scope.invoice.VAT.rate = parseFloat(settings['invoice_VAT-rate'])
-      $scope.invoice.VAT.active = (settings['invoice_VAT-active'] === 'true')
-      $scope.invoice.number.model = settings['invoice_order-nb']
-      $scope.invoice.code.model = settings['invoice_code-value']
-      $scope.invoice.code.active = (settings['invoice_code-active'] === 'true')
-      $scope.invoice.reference.model = settings['invoice_reference']
+      $scope.invoice.legals.content = settings['invoice_legals'];
+      $scope.invoice.text.content = settings['invoice_text'];
+      $scope.invoice.VAT.rate = parseFloat(settings['invoice_VAT-rate']);
+      $scope.invoice.VAT.active = (settings['invoice_VAT-active'] === 'true');
+      $scope.invoice.number.model = settings['invoice_order-nb'];
+      $scope.invoice.code.model = settings['invoice_code-value'];
+      $scope.invoice.code.active = (settings['invoice_code-active'] === 'true');
+      $scope.invoice.reference.model = settings['invoice_reference'];
       $scope.invoice.logo = {
         filetype: 'image/png',
         filename: 'logo.png',
         base64: settings['invoice_logo']
-      }
+      };
 
       // Watch the logo, when a change occurs, save it
       return $scope.$watch('invoice.logo', function () {
@@ -418,15 +418,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return Setting.update(
             { name: 'invoice_logo' },
             { value: $scope.invoice.logo.base64 },
-            function (data) { growl.success(_t('logo_successfully_saved')) },
+            function (data) { growl.success(_t('logo_successfully_saved')); },
             function (error) {
-              growl.error(_t('an_error_occurred_while_saving_the_logo'))
-              return console.error(error)
+              growl.error(_t('an_error_occurred_while_saving_the_logo'));
+              return console.error(error);
             }
-          )
+          );
         }
-      })
-    }
+      });
+    };
 
     /**
      * Output the given integer with leading zeros. If the given value is longer than the given
@@ -434,7 +434,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param value {number} the integer to pad
      * @param length {number} the length of the resulting string.
      */
-    var padWithZeros = function (value, length) { return (1e15 + value + '').slice(-length) }
+    var padWithZeros = function (value, length) { return (1e15 + value + '').slice(-length); };
 
     /**
      * Remove every unsupported html tag from the given html text (like <p>, <span>, ...).
@@ -445,20 +445,20 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     var parseHtml = function (html) {
       return html.replace(/<\/?(\w+)((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g, function (match, p1, offset, string) {
         if (['b', 'u', 'i', 'br'].includes(p1)) {
-          return match
+          return match;
         } else {
-          return ''
+          return '';
         }
-      })
-    }
+      });
+    };
 
     /**
      * Reinitialize the context of invoices' search to display new results set
      */
     var resetSearchInvoice = function () {
-      $scope.page = 1
-      return $scope.noMoreResults = false
-    }
+      $scope.page = 1;
+      return $scope.noMoreResults = false;
+    };
 
     /**
      * Run a search query with the current parameters set concerning invoices, then affect or concat the results
@@ -477,21 +477,21 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
       }, function (invoices) {
         if (concat) {
-          $scope.invoices = $scope.invoices.concat(invoices)
+          $scope.invoices = $scope.invoices.concat(invoices);
         } else {
-          $scope.invoices = invoices
+          $scope.invoices = invoices;
         }
 
         if (!invoices[0] || (invoices[0].maxInvoices <= $scope.invoices.length)) {
-          return $scope.noMoreResults = true
+          return $scope.noMoreResults = true;
         }
-      })
-    }
+      });
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);
 
 /**
  * Controller used in the invoice refunding modal window
@@ -501,17 +501,17 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
   /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
-    $scope.invoice = invoice
+    $scope.invoice = invoice;
 
     // Associative array containing invoice_item ids associated with boolean values
-    $scope.partial = {}
+    $scope.partial = {};
 
     // Default refund parameters
     $scope.avoir = {
       invoice_id: invoice.id,
       subscription_to_expire: false,
       invoice_items_ids: []
-    }
+    };
 
     // Possible refunding methods
     $scope.avoirModes = [
@@ -520,12 +520,12 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       { name: _t('by_cheque'), value: 'cheque' },
       { name: _t('by_transfer'), value: 'transfer' },
       { name: _t('by_wallet'), value: 'wallet' }
-    ]
+    ];
 
     // If a subscription was took with the current invoice, should it be canceled or not
-    $scope.subscriptionExpireOptions = {}
-    $scope.subscriptionExpireOptions[_t('yes')] = true
-    $scope.subscriptionExpireOptions[_t('no')] = false
+    $scope.subscriptionExpireOptions = {};
+    $scope.subscriptionExpireOptions[_t('yes')] = true;
+    $scope.subscriptionExpireOptions[_t('no')] = false;
 
     // AngularUI-Bootstrap datepicker parameters to define when to refund
     $scope.datePicker = {
@@ -534,47 +534,47 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     /**
      * Callback to open the datepicker
      */
     $scope.openDatePicker = function ($event) {
-      $event.preventDefault()
-      $event.stopPropagation()
-      return $scope.datePicker.opened = true
-    }
+      $event.preventDefault();
+      $event.stopPropagation();
+      return $scope.datePicker.opened = true;
+    };
 
     /**
      * Validate the refunding and generate a refund invoice
      */
     $scope.ok = function () {
     // check that at least 1 element of the invoice is refunded
-      $scope.avoir.invoice_items_ids = []
+      $scope.avoir.invoice_items_ids = [];
       for (let itemId in $scope.partial) {
-        const refundItem = $scope.partial[itemId]
-        if (refundItem) { $scope.avoir.invoice_items_ids.push(parseInt(itemId)) }
+        const refundItem = $scope.partial[itemId];
+        if (refundItem) { $scope.avoir.invoice_items_ids.push(parseInt(itemId)); }
       }
 
       if ($scope.avoir.invoice_items_ids.length === 0) {
-        return growl.error(_t('you_must_select_at_least_one_element_to_create_a_refund'))
+        return growl.error(_t('you_must_select_at_least_one_element_to_create_a_refund'));
       } else {
         return Invoice.save(
           { avoir: $scope.avoir },
           function (avoir) { // success
-            $uibModalInstance.close({ avoir, invoice: $scope.invoice })
+            $uibModalInstance.close({ avoir, invoice: $scope.invoice });
           },
           function (err) { // failed
-            growl.error(_t('unable_to_create_the_refund'))
+            growl.error(_t('unable_to_create_the_refund'));
           }
-        )
+        );
       }
-    }
+    };
 
     /**
      * Cancel the refund, dismiss the modal window
      */
-    $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
     /* PRIVATE SCOPE */
 
@@ -584,19 +584,19 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
     const initialize = function () {
     // if the invoice was payed with stripe, allow to refund through stripe
       Invoice.get({ id: invoice.id }, function (data) {
-        $scope.invoice = data
+        $scope.invoice = data;
         // default : all elements of the invoice are refund
         return Array.from(data.items).map(function (item) {
-          return ($scope.partial[item.id] = (typeof item.avoir_item_id !== 'number'))
-        })
-      })
+          return ($scope.partial[item.id] = (typeof item.avoir_item_id !== 'number'));
+        });
+      });
 
       if (invoice.stripe) {
-        return $scope.avoirModes.push({ name: _t('online_payment'), value: 'stripe' })
+        return $scope.avoirModes.push({ name: _t('online_payment'), value: 'stripe' });
       }
-    }
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);

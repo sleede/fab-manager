@@ -9,16 +9,16 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 Application.Services.factory('CalendarConfig', [() =>
   function (options) {
     // The calendar is divided in slots of 1 hour
-    if (options == null) { options = {} }
-    const BASE_SLOT = '01:00:00'
+    if (options == null) { options = {}; }
+    const BASE_SLOT = '01:00:00';
 
     // The calendar will be initialized positioned under 9:00 AM
-    const DEFAULT_CALENDAR_POSITION = '09:00:00'
+    const DEFAULT_CALENDAR_POSITION = '09:00:00';
 
     const defaultOptions = {
       timezone: Fablab.timezone,
@@ -48,9 +48,9 @@ Application.Services.factory('CalendarConfig', [() =>
       allDaySlot: false,
       defaultView: 'agendaWeek',
       editable: false
-    }
+    };
 
-    return Object.assign({}, defaultOptions, options)
+    return Object.assign({}, defaultOptions, options);
   }
 
-])
+]);

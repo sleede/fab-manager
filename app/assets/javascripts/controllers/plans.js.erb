@@ -10,69 +10,69 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScope', '$state', '$uibModal', 'Auth', 'dialogs', 'growl', 'plansPromise', 'groupsPromise', 'Subscription', 'Member', 'subscriptionExplicationsPromise', '_t', 'Wallet', 'helpers',
   function ($scope, $rootScope, $state, $uibModal, Auth, dialogs, growl, plansPromise, groupsPromise, Subscription, Member, subscriptionExplicationsPromise, _t, Wallet, helpers) {
     /* PUBLIC SCOPE */
 
     // list of groups
-    $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') & !g.disabled })
+    $scope.groups = groupsPromise.filter(function (g) { return (g.slug !== 'admins') & !g.disabled; });
 
     // default : do not show the group changing form
     // group ID of the current/selected user
     $scope.group = {
       change: false,
       id: null
-    }
+    };
 
     // list of plans, classified by group
-    $scope.plansClassifiedByGroup = []
+    $scope.plansClassifiedByGroup = [];
     for (var group of Array.from($scope.groups)) {
-      const groupObj = { id: group.id, name: group.name, plans: [] }
+      const groupObj = { id: group.id, name: group.name, plans: [] };
       for (let plan of Array.from(plansPromise)) {
-        if (plan.group_id === group.id) { groupObj.plans.push(plan) }
+        if (plan.group_id === group.id) { groupObj.plans.push(plan); }
       }
-      $scope.plansClassifiedByGroup.push(groupObj)
+      $scope.plansClassifiedByGroup.push(groupObj);
     }
 
     // user to deal with
     $scope.ctrl = {
       member: null,
       member_id: null
-    }
+    };
 
     // already subscribed plan of the current user
     $scope.paid =
-        { plan: null }
+        { plan: null };
 
     // plan to subscribe (shopping cart)
-    $scope.selectedPlan = null
+    $scope.selectedPlan = null;
 
     // Discount coupon to apply to the basket, if any
     $scope.coupon =
-      { applied: null }
+      { applied: null };
 
     // Storage for the total price (plan price + coupon, if any)
     $scope.cart =
-      { total: null }
+      { total: null };
 
     // text that appears in the bottom-right box of the page (subscriptions rules details)
-    $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value
+    $scope.subscriptionExplicationsAlert = subscriptionExplicationsPromise.setting.value;
 
     /**
      * Callback to deal with the subscription of the user selected in the dropdown list instead of the current user's
      * subscription. (admins only)
      */
     $scope.updateMember = function () {
-      $scope.selectedPlan = null
-      $scope.paid.plan = null
-      $scope.group.change = false
+      $scope.selectedPlan = null;
+      $scope.paid.plan = null;
+      $scope.group.change = false;
       return Member.get({ id: $scope.ctrl.member.id }, function (member) {
-        $scope.ctrl.member = member
-        return $scope.group.id = $scope.ctrl.member.group_id
-      })
-    }
+        $scope.ctrl.member = member;
+        return $scope.group.id = $scope.ctrl.member.group_id;
+      });
+    };
 
     /**
      * Add the provided plan to the shopping basket
@@ -81,31 +81,31 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.selectPlan = function (plan) {
       if ($scope.isAuthenticated()) {
         if ($scope.selectedPlan !== plan) {
-          $scope.selectedPlan = plan
-          return updateCartPrice()
+          $scope.selectedPlan = plan;
+          return updateCartPrice();
         } else {
-          return $scope.selectedPlan = null
+          return $scope.selectedPlan = null;
         }
       } else {
-        return $scope.login()
+        return $scope.login();
       }
-    }
+    };
 
     /**
      * Callback to trigger the payment process of the subscription
      */
     $scope.openSubscribePlanModal = function () {
       Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
-        const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount)
+        const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount);
         if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
-          return payByStripe()
+          return payByStripe();
         } else {
           if (($scope.currentUser.role === 'admin') || (amountToPay === 0)) {
-            return payOnSite()
+            return payOnSite();
           }
         }
-      })
-    }
+      });
+    };
 
     /**
      * Return the group object, identified by the ID set in $scope.group.id
@@ -113,35 +113,35 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     $scope.getUserGroup = function () {
       for (group of Array.from($scope.groups)) {
         if (group.id === $scope.group.id) {
-          return group
+          return group;
         }
       }
-    }
+    };
 
     /**
      * Change the group of the current/selected user to the one set in $scope.group.id
      */
     $scope.selectGroup = function () {
       Member.update({ id: $scope.ctrl.member.id }, { user: { group_id: $scope.group.id } }, function (user) {
-        $scope.ctrl.member = user
-        $scope.group.change = false
+        $scope.ctrl.member = user;
+        $scope.group.change = false;
         if ($scope.currentUser.role !== 'admin') {
-          $rootScope.currentUser = user
-          Auth._currentUser.group_id = user.group_id
-          growl.success(_t('your_group_was_successfully_changed'))
+          $rootScope.currentUser = user;
+          Auth._currentUser.group_id = user.group_id;
+          growl.success(_t('your_group_was_successfully_changed'));
         } else {
-          growl.success(_t('the_user_s_group_was_successfully_changed'))
+          growl.success(_t('the_user_s_group_was_successfully_changed'));
         }
       }
       , function (err) {
         if ($scope.currentUser.role !== 'admin') {
-          growl.error(_t('an_error_prevented_your_group_from_being_changed'))
+          growl.error(_t('an_error_prevented_your_group_from_being_changed'));
         } else {
-          growl.error(_t('an_error_prevented_to_change_the_user_s_group'))
+          growl.error(_t('an_error_prevented_to_change_the_user_s_group'));
         }
-        console.error(err)
-      })
-    }
+        console.error(err);
+      });
+    };
 
     /**
      * Return an enumerable meaninful string for the gender of the provider user
@@ -150,9 +150,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      */
     $scope.getGender = function (user) {
       if (user && user.profile) {
-        if (user.profile.gender === 'true') { return 'male' } else { return 'female' }
-      } else { return 'other' }
-    }
+        if (user.profile.gender === 'true') { return 'male'; } else { return 'female'; }
+      } else { return 'other'; }
+    };
 
     /**
      * Test if the provided date is in the future
@@ -160,13 +160,13 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
      * @return {boolean}
      */
     $scope.isInFuture = function (dateTime) {
-      return (moment().diff(moment(dateTime)) < 0)
-    }
+      return (moment().diff(moment(dateTime)) < 0);
+    };
 
     /**
      * To use as callback in Array.prototype.filter to get only enabled plans
      */
-    $scope.filterDisabledPlans = function (plan) { return !plan.disabled }
+    $scope.filterDisabledPlans = function (plan) { return !plan.disabled; };
 
     /* PRIVATE SCOPE */
 
@@ -176,21 +176,21 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     const initialize = function () {
       if ($scope.currentUser) {
         if ($scope.currentUser.role !== 'admin') {
-          $scope.ctrl.member = $scope.currentUser
-          $scope.paid.plan = $scope.currentUser.subscribed_plan
-          $scope.group.id = $scope.currentUser.group_id
+          $scope.ctrl.member = $scope.currentUser;
+          $scope.paid.plan = $scope.currentUser.subscribed_plan;
+          $scope.group.id = $scope.currentUser.group_id;
         }
       }
 
-      $scope.$on('devise:new-session', function (event, user) { $scope.ctrl.member = user })
+      $scope.$on('devise:new-session', function (event, user) { $scope.ctrl.member = user; });
 
       // watch when a coupon is applied to re-compute the total price
       return $scope.$watch('coupon.applied', function (newValue, oldValue) {
         if ((newValue !== null) || (oldValue !== null)) {
-          return updateCartPrice()
+          return updateCartPrice();
         }
-      })
-    }
+      });
+    };
 
     /**
      * Compute the total amount for the current reservation according to the previously set parameters
@@ -199,21 +199,21 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
     var updateCartPrice = function () {
       // first we check that a user was selected
       if (Object.keys($scope.ctrl.member).length > 0) {
-        $scope.cart.total = $scope.selectedPlan.amount
+        $scope.cart.total = $scope.selectedPlan.amount;
         // apply the coupon if any
         if ($scope.coupon.applied) {
-          let discount
+          let discount;
           if ($scope.coupon.applied.type === 'percent_off') {
-            discount = ($scope.cart.total * $scope.coupon.applied.percent_off) / 100
+            discount = ($scope.cart.total * $scope.coupon.applied.percent_off) / 100;
           } else if ($scope.coupon.applied.type === 'amount_off') {
-            discount = $scope.coupon.applied.amount_off
+            discount = $scope.coupon.applied.amount_off;
           }
-          return $scope.cart.total -= discount
+          return $scope.cart.total -= discount;
         }
       } else {
-        return $scope.reserve.amountTotal = null
+        return $scope.reserve.amountTotal = null;
       }
-    }
+    };
 
     /**
      * Open a modal window which trigger the stripe payment process
@@ -223,30 +223,30 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         templateUrl: '<%= asset_path "stripe/payment_modal.html" %>',
         size: 'md',
         resolve: {
-          selectedPlan () { return $scope.selectedPlan },
-          member () { return $scope.ctrl.member },
-          price () { return $scope.cart.total },
+          selectedPlan () { return $scope.selectedPlan; },
+          member () { return $scope.ctrl.member; },
+          price () { return $scope.cart.total; },
           wallet () {
-            return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }).$promise
+            return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }).$promise;
           },
-          coupon () { return $scope.coupon.applied }
+          coupon () { return $scope.coupon.applied; }
         },
         controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'CustomAsset', 'wallet', 'helpers', '$filter', 'coupon',
           function ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, CustomAsset, wallet, helpers, $filter, coupon) {
             // User's wallet amount
-            $scope.walletAmount = wallet.amount
+            $scope.walletAmount = wallet.amount;
 
             // Final price to pay by the user
-            $scope.amount = helpers.getAmountToPay(price, wallet.amount)
+            $scope.amount = helpers.getAmountToPay(price, wallet.amount);
 
             // The plan that the user is about to subscribe
-            $scope.selectedPlan = selectedPlan
+            $scope.selectedPlan = selectedPlan;
 
             // Used in wallet info template to interpolate some translations
-            $scope.numberFilter = $filter('number')
+            $scope.numberFilter = $filter('number');
 
             // retrieve the CGV
-            CustomAsset.get({ name: 'cgv-file' }, function (cgv) { $scope.cgv = cgv.custom_asset })
+            CustomAsset.get({ name: 'cgv-file' }, function (cgv) { $scope.cgv = cgv.custom_asset; });
 
             /**
              * Callback for click on the 'proceed' button.
@@ -255,9 +255,9 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
              */
             $scope.payment = function (status, response) {
               if (response.error) {
-                growl.error(response.error.message)
+                growl.error(response.error.message);
               } else {
-                $scope.attempting = true
+                $scope.attempting = true;
                 Subscription.save({
                   coupon_code: ((coupon ? coupon.code : undefined)),
                   subscription: {
@@ -267,26 +267,26 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
                   }
                 }
                 , function (data) { // success
-                  $uibModalInstance.close(data)
+                  $uibModalInstance.close(data);
                 }
                 , function (data, status) { // failed
-                  $scope.alerts = []
-                  $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
-                  $scope.attempting = false
+                  $scope.alerts = [];
+                  $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                  $scope.attempting = false;
                 }
-                )
+                );
               }
-            }
+            };
           }
         ]
       }).result['finally'](null).then(function (subscription) {
-        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
-        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
-        $scope.paid.plan = angular.copy($scope.selectedPlan)
-        $scope.selectedPlan = null
-        $scope.coupon.applied = null
-      })
-    }
+        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
+        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        $scope.paid.plan = angular.copy($scope.selectedPlan);
+        $scope.selectedPlan = null;
+        $scope.coupon.applied = null;
+      });
+    };
 
     /**
      * Open a modal window which trigger the local payment process
@@ -296,42 +296,42 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
         templateUrl: '<%= asset_path "plans/payment_modal.html" %>',
         size: 'sm',
         resolve: {
-          selectedPlan () { return $scope.selectedPlan },
-          member () { return $scope.ctrl.member },
-          price () { return $scope.cart.total },
+          selectedPlan () { return $scope.selectedPlan; },
+          member () { return $scope.ctrl.member; },
+          price () { return $scope.cart.total; },
           wallet () {
-            return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }).$promise
+            return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }).$promise;
           },
-          coupon () { return $scope.coupon.applied }
+          coupon () { return $scope.coupon.applied; }
         },
         controller: ['$scope', '$uibModalInstance', '$state', 'selectedPlan', 'member', 'price', 'Subscription', 'wallet', 'helpers', '$filter', 'coupon',
           function ($scope, $uibModalInstance, $state, selectedPlan, member, price, Subscription, wallet, helpers, $filter, coupon) {
             // user wallet amount
-            $scope.walletAmount = wallet.amount
+            $scope.walletAmount = wallet.amount;
 
             // subcription price, coupon subtracted if any
-            $scope.price = price
+            $scope.price = price;
 
             // price to pay
-            $scope.amount = helpers.getAmountToPay($scope.price, wallet.amount)
+            $scope.amount = helpers.getAmountToPay($scope.price, wallet.amount);
 
             // Used in wallet info template to interpolate some translations
-            $scope.numberFilter = $filter('number')
+            $scope.numberFilter = $filter('number');
 
             // The plan that the user is about to subscribe
-            $scope.plan = selectedPlan
+            $scope.plan = selectedPlan;
 
             // The member who is subscribing a plan
-            $scope.member = member
+            $scope.member = member;
 
             // Button label
             if ($scope.amount > 0) {
-              $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) }, 'messageformat')
+              $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) }, 'messageformat');
             } else {
               if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) }, 'messageformat')
+                $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) }, 'messageformat');
               } else {
-                $scope.validButtonName = _t('confirm')
+                $scope.validButtonName = _t('confirm');
               }
             }
 
@@ -340,7 +340,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
              * Save the subscription to the API
              */
             $scope.ok = function () {
-              $scope.attempting = true
+              $scope.attempting = true;
               Subscription.save({
                 coupon_code: ((coupon ? coupon.code : undefined)),
                 subscription: {
@@ -349,34 +349,34 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
                 }
               }
               , function (data) { // success
-                $uibModalInstance.close(data)
+                $uibModalInstance.close(data);
               }
               , function (data, status) { // failed
-                $scope.alerts = []
-                $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' })
-                $scope.attempting = false
+                $scope.alerts = [];
+                $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                $scope.attempting = false;
               }
-              )
-            }
+              );
+            };
 
             /**
              * Callback for the 'cancel' button.
              * Close the modal box.
              */
-            $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+            $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
           }
         ]
       }).result['finally'](null).then(function (reservation) {
-        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan)
-        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan)
-        $scope.ctrl.member = null
-        $scope.paid.plan = angular.copy($scope.selectedPlan)
-        $scope.selectedPlan = null
-        return $scope.coupon.applied = null
-      })
-    }
+        $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
+        Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
+        $scope.ctrl.member = null;
+        $scope.paid.plan = angular.copy($scope.selectedPlan);
+        $scope.selectedPlan = null;
+        return $scope.coupon.applied = null;
+      });
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);

@@ -15,51 +15,51 @@
  * DS205: Consider reworking code to avoid use of IIFEs
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 Application.Controllers.controller('GraphsController', ['$scope', '$state', '$rootScope', 'es', 'Statistics', '_t',
   function ($scope, $state, $rootScope, es, Statistics, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
     // height of the HTML/SVG charts elements in pixels
-    const CHART_HEIGHT = 500
+    const CHART_HEIGHT = 500;
 
     // Label of the charts' horizontal axes
-    const X_AXIS_LABEL = _t('date')
+    const X_AXIS_LABEL = _t('date');
 
     // Label of the charts' vertical axes
-    const Y_AXIS_LABEL = _t('number')
+    const Y_AXIS_LABEL = _t('number');
 
     // Colors for the line charts. Each new line uses the next color in this array
-    const CHART_COLORS = ['#b35a94', '#1c5794', '#00b49e', '#6fac48', '#ebcf4a', '#fd7e33', '#ca3436', '#a26e3a']
+    const CHART_COLORS = ['#b35a94', '#1c5794', '#00b49e', '#6fac48', '#ebcf4a', '#fd7e33', '#ca3436', '#a26e3a'];
 
     /* PUBLIC SCOPE */
 
     // ui-view transitions optimization: if true, the charts will never be refreshed
-    $scope.preventRefresh = false
+    $scope.preventRefresh = false;
 
     // statistics structure in elasticSearch
-    $scope.statistics = []
+    $scope.statistics = [];
 
     // statistics data recovered from elasticSearch
-    $scope.data = null
+    $scope.data = null;
 
     // default interval: one day
     $scope.display =
-    { interval: 'week' }
+    { interval: 'week' };
 
     // active tab will be set here
-    $scope.selectedIndex = null
+    $scope.selectedIndex = null;
 
     // for palmares graphs, filters values are stored here
     $scope.ranking = {
       sortCriterion: 'ca',
       groupCriterion: 'subType'
-    }
+    };
 
     // default: we do not open the datepicker menu
     $scope.datePicker =
-    { show: false }
+    { show: false };
 
     // datePicker parameters for interval beginning
     $scope.datePickerStart = {
@@ -71,7 +71,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     // datePicker parameters for interval ending
     $scope.datePickerEnd = {
@@ -83,19 +83,19 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     /**
      * Callback to open the datepicker (interval start)
      * @param {Object} jQuery event object
      */
-    $scope.toggleStartDatePicker = $event => toggleDatePicker($event, $scope.datePickerStart)
+    $scope.toggleStartDatePicker = $event => toggleDatePicker($event, $scope.datePickerStart);
 
     /**
      * Callback to open the datepicker (interval end)
      * @param {Object} jQuery event object
      */
-    $scope.toggleEndDatePicker = $event => toggleDatePicker($event, $scope.datePickerEnd)
+    $scope.toggleEndDatePicker = $event => toggleDatePicker($event, $scope.datePickerEnd);
 
     /**
      * Callback called when the active tab is changed.
@@ -103,23 +103,23 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param tab {Object} elasticsearch statistic structure
      */
     $scope.setActiveTab = function (tab) {
-      $scope.selectedIndex = tab
-      $scope.ranking.groupCriterion = 'subType'
+      $scope.selectedIndex = tab;
+      $scope.ranking.groupCriterion = 'subType';
       if (tab.ca) {
-        $scope.ranking.sortCriterion = 'ca'
+        $scope.ranking.sortCriterion = 'ca';
       } else {
-        $scope.ranking.sortCriterion = tab.types[0].key
+        $scope.ranking.sortCriterion = tab.types[0].key;
       }
-      return refreshChart()
-    }
+      return refreshChart();
+    };
 
     /**
      * Callback to close the date-picking popup and refresh the results
      */
     $scope.validateDateChange = function () {
-      $scope.datePicker.show = false
-      return refreshChart()
-    }
+      $scope.datePicker.show = false;
+      return refreshChart();
+    };
 
     /* PRIVATE SCOPE */
 
@@ -128,25 +128,25 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      */
     const initialize = function () {
       Statistics.query(function (stats) {
-        $scope.statistics = stats
+        $scope.statistics = stats;
         // watch the interval changes to refresh the graph
         $scope.$watch(scope => scope.display.interval
-          , (newValue, oldValue) => refreshChart())
+          , (newValue, oldValue) => refreshChart());
         $scope.$watch(scope => scope.ranking.sortCriterion
-          , (newValue, oldValue) => refreshChart())
+          , (newValue, oldValue) => refreshChart());
         $scope.$watch(scope => scope.ranking.groupCriterion
-          , (newValue, oldValue) => refreshChart())
-        return refreshChart()
-      })
+          , (newValue, oldValue) => refreshChart());
+        return refreshChart();
+      });
 
       // workaround for angular-bootstrap::tabs behavior: on tab deletion, another tab will be selected
       // which will cause every tabs to reload, one by one, when the view is closed
       return $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         if ((fromState.name === 'app.admin.stats_graphs') && (Object.keys(fromParams).length === 0)) {
-          return $scope.preventRefresh = true
+          return $scope.preventRefresh = true;
         }
-      })
-    }
+      });
+    };
 
     /**
      * Generic function to toggle a bootstrap datePicker
@@ -154,10 +154,10 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param datePicker {Object} settings object of the concerned datepicker. Must have an 'opened' property
      */
     var toggleDatePicker = function ($event, datePicker) {
-      $event.preventDefault()
-      $event.stopPropagation()
-      return datePicker.opened = !datePicker.opened
-    }
+      $event.preventDefault();
+      $event.stopPropagation();
+      return datePicker.opened = !datePicker.opened;
+    };
 
     /**
      * Query elasticSearch according to the current parameters and update the chart
@@ -166,19 +166,19 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       if ($scope.selectedIndex && !$scope.preventRefresh) {
         return query($scope.selectedIndex, function (aggregations, error) {
           if (error) {
-            return console.error(error)
+            return console.error(error);
           } else {
             if ($scope.selectedIndex.graph.chart_type !== 'discreteBarChart') {
-              $scope.data = formatAggregations(aggregations)
-              return angular.forEach($scope.data, (datum, key) => updateChart($scope.selectedIndex.graph.chart_type, datum, key))
+              $scope.data = formatAggregations(aggregations);
+              return angular.forEach($scope.data, (datum, key) => updateChart($scope.selectedIndex.graph.chart_type, datum, key));
             } else {
-              $scope.data = formatRankingAggregations(aggregations, $scope.selectedIndex.graph.limit, $scope.ranking.groupCriterion)
-              return updateChart($scope.selectedIndex.graph.chart_type, $scope.data.ranking, $scope.selectedIndex.es_type_key)
+              $scope.data = formatRankingAggregations(aggregations, $scope.selectedIndex.graph.limit, $scope.ranking.groupCriterion);
+              return updateChart($scope.selectedIndex.graph.chart_type, $scope.data.ranking, $scope.selectedIndex.es_type_key);
             }
           }
-        })
+        });
       }
-    }
+    };
 
     /**
      * Callback used in NVD3 to print timestamps as literal dates on the X axis
@@ -187,45 +187,45 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     /* WARNING !! These tests (typeof/instanceof) may become broken on nvd3 update */
       if ($scope.display.interval === 'day') {
         if ((typeof d === 'number') || d instanceof Date) {
-          return d3.time.format(Fablab.d3DateFormat)(moment(d).toDate())
+          return d3.time.format(Fablab.d3DateFormat)(moment(d).toDate());
         } else { // typeof d == 'string'
-          return d
+          return d;
         }
       } else if ($scope.display.interval === 'week') {
         if ((typeof x === 'number') || d instanceof Date) {
-          return d3.time.format(_t('week_short') + ' %U')(moment(d).toDate())
+          return d3.time.format(_t('week_short') + ' %U')(moment(d).toDate());
         } else if (typeof d === 'number') {
-          return _t('week_of_START_to_END', { START: moment(d).format('L'), END: moment(d).add(6, 'days').format('L') })
+          return _t('week_of_START_to_END', { START: moment(d).format('L'), END: moment(d).add(6, 'days').format('L') });
         } else { // typeof d == 'string'
-          return d
+          return d;
         }
       } else if ($scope.display.interval === 'month') {
         if (typeof d === 'number') {
-          const label = moment(d).format('MMMM YYYY')
-          return label.substr(0, 1).toUpperCase() + label.substr(1).toLowerCase()
+          const label = moment(d).format('MMMM YYYY');
+          return label.substr(0, 1).toUpperCase() + label.substr(1).toLowerCase();
         } else { // typeof d == 'string'
-          return d
+          return d;
         }
       }
-    }
+    };
 
     /**
      * Format aggregations as retuned by elasticSearch to an understandable format for NVD3
      * @param aggs {Object} as returned by elasticsearch
      */
     var formatAggregations = function (aggs) {
-      const format = {}
+      const format = {};
 
       angular.forEach(aggs, function (type, type_key) { // go through aggs[$TYPE] where $TYPE = month|year|hour|booking|...
-        format[type_key] = []
+        format[type_key] = [];
         if (type.subgroups) {
           return angular.forEach(type.subgroups.buckets, subgroup => // go through aggs.$TYPE.subgroups.buckets where each bucket represent a $SUBTYPE
             angular.forEach($scope.selectedIndex.types, function (cur_type) { // in the mean time, go through the types of the current index (active tab) ...
               if (cur_type.key === type_key) { // ... looking for the type matching $TYPE
                 return (() => {
-                  const result = []
+                  const result = [];
                   for (let it_st = 0, end = cur_type.subtypes.length - 1; it_st <= end; it_st++) { // when we've found it, iterate over its subtypes ...
-                    const cur_subtype = cur_type.subtypes[it_st]
+                    const cur_subtype = cur_type.subtypes[it_st];
                     if (subgroup.key === cur_subtype.key) { // ... which match $SUBTYPE
                     // then we construct NVD3 dataSource according to these information
                       var dataSource = {
@@ -234,31 +234,31 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
                         total: 0,
                         color: CHART_COLORS[it_st],
                         area: true
-                      }
+                      };
                       // finally, we iterate over 'intervals' buckets witch contains
                       // per date aggregations for our current dataSource
                       angular.forEach(subgroup.intervals.buckets, function (interval) {
                         dataSource.values.push({
                           x: interval.key,
                           y: interval.total.value
-                        })
-                        return dataSource.total += parseInt(interval.total.value)
-                      })
-                      dataSource.key += ` (${dataSource.total})`
-                      result.push(format[type_key].push(dataSource))
+                        });
+                        return dataSource.total += parseInt(interval.total.value);
+                      });
+                      dataSource.key += ` (${dataSource.total})`;
+                      result.push(format[type_key].push(dataSource));
                     } else {
-                      result.push(undefined)
+                      result.push(undefined);
                     }
                   }
-                  return result
-                })()
+                  return result;
+                })();
               }
             })
-          )
+          );
         }
-      })
-      return format
-    }
+      });
+      return format;
+    };
 
     /**
      * Format aggregations for ranking charts to an understandable format for NVD3
@@ -268,31 +268,31 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      */
     var formatRankingAggregations = function (aggs, limit, typeKey) {
       const format =
-      { ranking: [] }
+      { ranking: [] };
 
-      let it = 0
+      let it = 0;
       while (it < aggs.subgroups.buckets.length) {
-        const bucket = aggs.subgroups.buckets[it]
+        const bucket = aggs.subgroups.buckets[it];
         const dataSource = {
           values: [],
           key: getRankingLabel(bucket.key, typeKey),
           color: CHART_COLORS[it],
           area: true
-        }
+        };
         dataSource.values.push({
           x: getRankingLabel(bucket.key, typeKey),
           y: bucket.total.value
-        })
-        format.ranking.push(dataSource)
-        it++
+        });
+        format.ranking.push(dataSource);
+        it++;
       }
-      const getY = object => object.values[0].y
-      format.ranking = stableSort(format.ranking, 'DESC', getY).slice(0, limit)
+      const getY = object => object.values[0].y;
+      format.ranking = stableSort(format.ranking, 'DESC', getY).slice(0, limit);
       for (let i = 0, end = format.ranking.length; i <= end; i++) {
-        if (typeof format.ranking[i] === 'undefined') { format.ranking.splice(i, 1) }
+        if (typeof format.ranking[i] === 'undefined') { format.ranking.splice(i, 1); }
       }
-      return format
-    }
+      return format;
+    };
 
     /**
      * For BarCharts, return the label for a given bar
@@ -305,7 +305,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
           for (let type of Array.from($scope.selectedIndex.types)) {
             for (let subtype of Array.from(type.subtypes)) {
               if (subtype.key === key) {
-                return subtype.label
+                return subtype.label;
               }
             }
           }
@@ -313,15 +313,15 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
           for (let field of Array.from($scope.selectedIndex.additional_fields)) {
             if (field.key === typeKey) {
               switch (field.data_type) {
-                case 'date': return moment(key).format('LL'); break
-                case 'list': return key.name; break
-                default: return key
+                case 'date': return moment(key).format('LL'); break;
+                case 'list': return key.name; break;
+                default: return key;
               }
             }
           }
         }
       }
-    }
+    };
 
     /**
      * Prepare the elasticSearch query for the stats matching the current controller's parameters
@@ -333,57 +333,57 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     var query = function (index, callback) {
     // invalid callback handeling
       if (typeof (callback) !== 'function') {
-        console.error('[graphsController::query] Error: invalid callback provided')
-        return
+        console.error('[graphsController::query] Error: invalid callback provided');
+        return;
       }
       if (!index) {
-        callback([], '[graphsController::query] Error: invalid index provided')
-        return
+        callback([], '[graphsController::query] Error: invalid index provided');
+        return;
       }
 
       if (index.graph.chart_type !== 'discreteBarChart') {
       // list statistics types
-        const stat_types = []
+        const stat_types = [];
         for (let t of Array.from(index.types)) {
           if (t.graph) {
-            stat_types.push(t.key)
+            stat_types.push(t.key);
           }
         }
 
         // exception handeling
         if (stat_types.length === 0) {
-          callback([], 'Error: Unable to retrieve any graphical statistic types in the provided index')
+          callback([], 'Error: Unable to retrieve any graphical statistic types in the provided index');
         }
 
-        let type_it = 0
-        const results = {}
-        let error = ''
+        let type_it = 0;
+        const results = {};
+        let error = '';
         var recursiveCb = function () {
           if (type_it < stat_types.length) {
             return queryElasticStats(index.es_type_key, stat_types[type_it], function (prevResults, prevError) {
               if (prevError) {
-                console.error(`[graphsController::query] ${prevError}`)
-                error += `\n${prevError}`
+                console.error(`[graphsController::query] ${prevError}`);
+                error += `\n${prevError}`;
               }
-              results[stat_types[type_it]] = prevResults
-              type_it++
-              return recursiveCb()
-            })
+              results[stat_types[type_it]] = prevResults;
+              type_it++;
+              return recursiveCb();
+            });
           } else {
-            return callback(results)
+            return callback(results);
           }
-        }
-        return recursiveCb()
+        };
+        return recursiveCb();
       } else { // palmares (ranking)
         return queryElasticRanking(index.es_type_key, $scope.ranking.groupCriterion, $scope.ranking.sortCriterion, function (results, error) {
           if (error) {
-            return callback([], error)
+            return callback([], error);
           } else {
-            return callback(results)
+            return callback(results);
           }
-        })
+        });
       }
-    }
+    };
 
     /**
      * Run the elasticSearch query to retreive the /stats/type aggregations
@@ -395,11 +395,11 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     var queryElasticStats = function (esType, statType, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
-        console.error('[graphsController::queryElasticStats] Error: invalid callback provided')
-        return
+        console.error('[graphsController::queryElasticStats] Error: invalid callback provided');
+        return;
       }
       if (!esType || !statType) {
-        callback([], '[graphsController::queryElasticStats] Error: invalid parameters provided')
+        callback([], '[graphsController::queryElasticStats] Error: invalid parameters provided');
       }
 
       // run query
@@ -416,12 +416,12 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
       , function (error, response) {
         if (error) {
-          return callback([], `Error: something unexpected occurred during elasticSearch query: ${error}`)
+          return callback([], `Error: something unexpected occurred during elasticSearch query: ${error}`);
         } else {
-          return callback(response.aggregations)
+          return callback(response.aggregations);
         }
-      })
-    }
+      });
+    };
 
     /**
      * For ranking displays, run the elasticSearch query to retreive the /stats/type aggregations
@@ -434,10 +434,10 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     var queryElasticRanking = function (esType, groupKey, sortKey, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
-        return console.error('[graphsController::queryElasticRanking] Error: invalid callback provided')
+        return console.error('[graphsController::queryElasticRanking] Error: invalid callback provided');
       }
       if (!esType || !groupKey || !sortKey) {
-        return callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided')
+        return callback([], '[graphsController::queryElasticRanking] Error: invalid parameters provided');
       }
 
       // run query
@@ -450,18 +450,18 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
       , function (error, response) {
         if (error) {
-          return callback([], `Error: something unexpected occurred during elasticSearch query: ${error}`)
+          return callback([], `Error: something unexpected occurred during elasticSearch query: ${error}`);
         } else {
-          return callback(response.aggregations)
+          return callback(response.aggregations);
         }
-      })
-    }
+      });
+    };
 
     /**
      * Parse a final elastic results bucket and return a D3 compatible object
      * @param bucket {{key_as_string:{String}, key:{Number}, doc_count:{Number}, total:{{value:{Number}}}}} interval bucket
      */
-    const parseElasticBucket = bucket => [ bucket.key, bucket.total.value ]
+    const parseElasticBucket = bucket => [ bucket.key, bucket.total.value ];
 
     /**
      * Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
@@ -519,18 +519,18 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
             }
           }
         }
-      }
+      };
 
       // scale weeks on sunday as nvd3 supports only these weeks
       if (interval === 'week') {
-        q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = '-1d'
+        q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = '-1d';
         // scale days to UTC time
       } else if (interval === 'day') {
-        const offset = moment().utcOffset()
-        q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = (-offset) + 'm'
+        const offset = moment().utcOffset();
+        q.aggregations.subgroups.aggregations.intervals.date_histogram['offset'] = (-offset) + 'm';
       }
-      return q
-    }
+      return q;
+    };
 
     /**
      * Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
@@ -587,21 +587,21 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
             }
           }
         }
-      }
+      };
 
       // results must be sorted and limited later by angular
       if (sortKey !== 'ca') {
         angular.forEach(q.query.bool.must, function (must) {
           if (must.term) {
-            return must.term.type = sortKey
+            return must.term.type = sortKey;
           }
-        })
+        });
       } else {
-        q.aggregations.subgroups.aggregations.total.sum.field = sortKey
+        q.aggregations.subgroups.aggregations.total.sum.field = sortKey;
       }
 
-      return q
-    }
+      return q;
+    };
 
     /**
      * Redraw the NDV3 chart using the provided data
@@ -610,76 +610,76 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      * @param type {String} which chart to update (statistic type key)
      */
     var updateChart = function (chart_type, data, type) {
-      const id = `#chart-${type} svg`
+      const id = `#chart-${type} svg`;
 
       // clean old charts
-      d3.selectAll(id + ' > *').remove()
+      d3.selectAll(id + ' > *').remove();
 
       return nv.addGraph(function () {
       // no data or many dates, display line charts
-        let chart
+        let chart;
         if ((data.length === 0) || ((data[0].values.length > 1) && (chart_type !== 'discreteBarChart'))) {
           if (chart_type === 'stackedAreaChart') {
-            chart = nv.models.stackedAreaChart().useInteractiveGuideline(true)
+            chart = nv.models.stackedAreaChart().useInteractiveGuideline(true);
           } else {
-            chart = nv.models.lineChart().useInteractiveGuideline(true)
+            chart = nv.models.lineChart().useInteractiveGuideline(true);
           }
 
           if (data.length > 0) {
             if ($scope.display.interval === 'day') {
-              setTimeScale(chart.xAxis, chart.xScale, [d3.time.day, data[0].values.length])
+              setTimeScale(chart.xAxis, chart.xScale, [d3.time.day, data[0].values.length]);
             } else if ($scope.display.interval === 'week') {
-              setTimeScale(chart.xAxis, chart.xScale, [d3.time.week, data[0].values.length])
+              setTimeScale(chart.xAxis, chart.xScale, [d3.time.week, data[0].values.length]);
             } else if ($scope.display.interval === 'month') {
-              setTimeScale(chart.xAxis, chart.xScale, [d3.time.month, data[0].values.length])
+              setTimeScale(chart.xAxis, chart.xScale, [d3.time.month, data[0].values.length]);
             }
           }
 
-          chart.xAxis.tickFormat(xAxisTickFormatFunction)
-          chart.yAxis.tickFormat(d3.format('d'))
+          chart.xAxis.tickFormat(xAxisTickFormatFunction);
+          chart.yAxis.tickFormat(d3.format('d'));
 
-          chart.xAxis.axisLabel(X_AXIS_LABEL)
-          chart.yAxis.axisLabel(Y_AXIS_LABEL)
+          chart.xAxis.axisLabel(X_AXIS_LABEL);
+          chart.yAxis.axisLabel(Y_AXIS_LABEL);
 
         // only one date, display histograms
         } else {
-          chart = nv.models.discreteBarChart()
-          chart.tooltip.enabled(false)
-          chart.showValues(true)
-          chart.x(d => d.label)
-          chart.y(d => d.value)
-          data = prepareDataForBarChart(data, type)
+          chart = nv.models.discreteBarChart();
+          chart.tooltip.enabled(false);
+          chart.showValues(true);
+          chart.x(d => d.label);
+          chart.y(d => d.value);
+          data = prepareDataForBarChart(data, type);
         }
 
         // common for each charts
-        chart.margin({ left: 100, right: 100 })
-        chart.noData(_t('no_data_for_this_period'))
-        chart.height(CHART_HEIGHT)
+        chart.margin({ left: 100, right: 100 });
+        chart.noData(_t('no_data_for_this_period'));
+        chart.height(CHART_HEIGHT);
 
         // add new chart to the page
-        d3.select(id).datum(data).transition().duration(350).call(chart)
+        d3.select(id).datum(data).transition().duration(350).call(chart);
 
         // resize the graph when the page is resized
-        nv.utils.windowResize(chart.update)
+        nv.utils.windowResize(chart.update);
         // return the chart
-        return chart
-      })
-    }
+        return chart;
+      });
+    };
 
     /**
      * Given an NVD3 line chart axis, scale it to display ordinated dates, according to the given arguments
      */
     var setTimeScale = function (nvd3Axis, nvd3Scale, argsArray) {
-      const scale = d3.time.scale()
+      const scale = d3.time.scale();
 
-      nvd3Axis.scale(scale)
-      nvd3Scale(scale)
+      nvd3Axis.scale(scale);
+      nvd3Scale(scale);
 
       if (!argsArray && !argsArray.length) {
-        const oldTicks = nvd3Axis.axis.ticks
-        return nvd3Axis.axis.ticks = () => oldTicks.apply(nvd3Axis.axis, argsArray)
+        const oldTicks = nvd3Axis.axis.ticks;
+        return nvd3Axis.axis.ticks = () => oldTicks.apply(nvd3Axis.axis, argsArray);
       }
-    }
+    };
 
     /**
      * Translate line chart data in dates row to bar chart data, one bar per type.
@@ -689,19 +689,19 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
         key: type,
         values: []
       }
-      ]
+      ];
       for (let info of Array.from(data)) {
         if (info) {
           newData[0].values.push({
             'label': info.key,
             'value': info.values[0].y,
             'color': info.color
-          })
+          });
         }
       }
 
-      return newData
-    }
+      return newData;
+    };
 
     /**
      * Sort the provided array, in the specified order, on the value returned by the callback.
@@ -714,37 +714,37 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
      */
     var stableSort = function (array, order, getValue) {
     // prepare sorting
-      const keys_order = []
-      const result = []
+      const keys_order = [];
+      const result = [];
       for (let i = 0, end = array.length; i <= end; i++) {
-        keys_order[array[i]] = i
-        result.push(array[i])
+        keys_order[array[i]] = i;
+        result.push(array[i]);
       }
 
       // callback for javascript native Array.sort()
       const sort_fc = function (a, b) {
-        const val_a = getValue(a)
-        const val_b = getValue(b)
+        const val_a = getValue(a);
+        const val_b = getValue(b);
         if (val_a === val_b) {
-          return keys_order[a] - keys_order[b]
+          return keys_order[a] - keys_order[b];
         }
         if (val_a < val_b) {
           if (order === 'ASC') {
-            return -1
-          } else { return 1 }
+            return -1;
+          } else { return 1; }
         } else {
           if (order === 'ASC') {
-            return 1
-          } else { return -1 }
+            return 1;
+          } else { return -1; }
         }
-      }
+      };
 
       // finish the sort
-      result.sort(sort_fc)
-      return result
-    }
+      result.sort(sort_fc);
+      return result;
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);

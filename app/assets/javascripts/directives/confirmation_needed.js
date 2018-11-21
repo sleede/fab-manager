@@ -14,25 +14,25 @@ Application.Directives.directive('confirmationNeeded', [() =>
     priority: 1,
     terminal: true,
     link (scope, element, attrs) {
-      const msg = attrs.confirmationNeeded || 'Are you sure?'
-      const clickAction = attrs.ngClick
+      const msg = attrs.confirmationNeeded || 'Are you sure?';
+      const clickAction = attrs.ngClick;
       return element.bind('click', function () {
         if (attrs.confirmationNeededIf != null) {
-          const confirmNeededIf = scope.$eval(attrs.confirmationNeededIf)
+          const confirmNeededIf = scope.$eval(attrs.confirmationNeededIf);
           if (confirmNeededIf === true) {
             if (window.confirm(msg)) {
-              return scope.$eval(clickAction)
+              return scope.$eval(clickAction);
             }
           } else {
-            return scope.$eval(clickAction)
+            return scope.$eval(clickAction);
           }
         } else {
           if (window.confirm(msg)) {
-            return scope.$eval(clickAction)
+            return scope.$eval(clickAction);
           }
         }
-      })
+      });
     }
   })
 
-])
+]);

@@ -13,74 +13,74 @@
  * DS205: Consider reworking code to avoid use of IIFEs
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise',
   function ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise) {
   /* PRIVATE STATIC CONSTANTS */
 
     // search window size
-    const RESULTS_PER_PAGE = 20
+    const RESULTS_PER_PAGE = 20;
 
     // keep search context for (delay in minutes) ...
-    const ES_SCROLL_TIME = 1
+    const ES_SCROLL_TIME = 1;
 
     /* PUBLIC SCOPE */
 
     // ui-view transitions optimization: if true, the stats will never be refreshed
-    $scope.preventRefresh = false
+    $scope.preventRefresh = false;
 
     // statistics structure in elasticSearch
-    $scope.statistics = statisticsPromise
+    $scope.statistics = statisticsPromise;
 
     // fablab users list
-    $scope.members = membersPromise
+    $scope.members = membersPromise;
 
     // statistics data recovered from elasticSearch
-    $scope.data = null
+    $scope.data = null;
 
     // when did the search was triggered
-    $scope.searchDate = null
+    $scope.searchDate = null;
 
     // id of the elastic search context
-    $scope.scrollId = null
+    $scope.scrollId = null;
 
     // total number of results for the current query
-    $scope.totalHits = null
+    $scope.totalHits = null;
 
     // configuration of the widget allowing to pick the ages range
     $scope.agePicker = {
       show: false,
       start: null,
       end: null
-    }
+    };
 
     // total CA for the current view
-    $scope.sumCA = 0
+    $scope.sumCA = 0;
 
     // average users' age for the current view
-    $scope.averageAge = 0
+    $scope.averageAge = 0;
 
     // total of the stat field for non simple types
-    $scope.sumStat = 0
+    $scope.sumStat = 0;
 
     // Results of custom aggregations for the current type
-    $scope.customAggs = {}
+    $scope.customAggs = {};
 
     // default: results are not sorted
     $scope.sorting = {
       ca: 'none',
       date: 'desc'
-    }
+    };
 
     // active tab will be set here
-    $scope.selectedIndex = null
+    $scope.selectedIndex = null;
 
     // type filter binding
     $scope.type = {
       selected: null,
       active: null
-    }
+    };
 
     // selected custom filter
     $scope.customFilter = {
@@ -97,14 +97,14 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
           startingDay: 1
         }
       } // France: the week starts on monday
-    }
+    };
 
     // available custom filters
-    $scope.filters = []
+    $scope.filters = [];
 
     // default: we do not open the datepicker menu
     $scope.datePicker =
-    { show: false }
+    { show: false };
 
     // datePicker parameters for interval beginning
     $scope.datePickerStart = {
@@ -116,7 +116,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     // datePicker parameters for interval ending
     $scope.datePickerEnd = {
@@ -128,25 +128,25 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     /**
      * Callback to open the datepicker (interval start)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleStartDatePicker = function ($event) { toggleDatePicker($event, $scope.datePickerStart) }
+    $scope.toggleStartDatePicker = function ($event) { toggleDatePicker($event, $scope.datePickerStart); };
 
     /**
      * Callback to open the datepicker (interval end)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleEndDatePicker = function ($event) { toggleDatePicker($event, $scope.datePickerEnd) }
+    $scope.toggleEndDatePicker = function ($event) { toggleDatePicker($event, $scope.datePickerEnd); };
 
     /**
      * Callback to open the datepicker (custom filter)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleCustomDatePicker = function ($event) { toggleDatePicker($event, $scope.customFilter.datePicker) }
+    $scope.toggleCustomDatePicker = function ($event) { toggleDatePicker($event, $scope.customFilter.datePicker); };
 
     /**
      * Callback called when the active tab is changed.
@@ -154,17 +154,17 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * @param tab {Object} elasticsearch statistic structure (from statistic_indices table)
      */
     $scope.setActiveTab = function (tab) {
-      $scope.selectedIndex = tab
-      $scope.type.selected = tab.types[0]
-      $scope.type.active = $scope.type.selected
-      $scope.customFilter.criterion = {}
-      $scope.customFilter.value = null
-      $scope.customFilter.exclude = false
-      $scope.sorting.ca = 'none'
-      $scope.sorting.date = 'desc'
-      buildCustomFiltersList()
-      return refreshStats()
-    }
+      $scope.selectedIndex = tab;
+      $scope.type.selected = tab.types[0];
+      $scope.type.active = $scope.type.selected;
+      $scope.customFilter.criterion = {};
+      $scope.customFilter.value = null;
+      $scope.customFilter.exclude = false;
+      $scope.sorting.ca = 'none';
+      $scope.sorting.date = 'desc';
+      buildCustomFiltersList();
+      return refreshStats();
+    };
 
     /**
      * Returns true if the provided tab must be hidden due to some global or local configuration
@@ -173,41 +173,41 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     $scope.hiddenTab = function (tab) {
       if (tab.table) {
         if ((tab.es_type_key === 'subscription') && $rootScope.fablabWithoutPlans) {
-          return true
+          return true;
         } else if ((tab.es_type_key === 'space') && $rootScope.fablabWithoutSpaces) {
-          return true
+          return true;
         } else {
-          return false
+          return false;
         }
       } else {
-        return true
+        return true;
       }
-    }
+    };
 
     /**
      * Callback to validate the filters and send a new request to elastic
      */
     $scope.validateFilterChange = function () {
-      $scope.agePicker.show = false
-      $scope.customFilter.show = false
-      $scope.type.active = $scope.type.selected
-      buildCustomFiltersList()
-      return refreshStats()
-    }
+      $scope.agePicker.show = false;
+      $scope.customFilter.show = false;
+      $scope.type.active = $scope.type.selected;
+      buildCustomFiltersList();
+      return refreshStats();
+    };
 
     /**
      * Callback to validate the dates range and refresh the data from elastic
      */
     $scope.validateDateChange = function () {
-      $scope.datePicker.show = false
-      return refreshStats()
-    }
+      $scope.datePicker.show = false;
+      return refreshStats();
+    };
 
     /**
      * Parse the given date and return a user-friendly string
      * @param date {Date} JS date or ant moment.js compatible date string
      */
-    $scope.formatDate = function (date) { return moment(date).format('LL') }
+    $scope.formatDate = function (date) { return moment(date).format('LL'); };
 
     /**
      * Parse the sex and return a user-friendly string
@@ -215,26 +215,26 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.formatSex = function (sex) {
       if (sex === 'male') {
-        return _t('man')
+        return _t('man');
       }
       if (sex === 'female') {
-        return _t('woman')
+        return _t('woman');
       }
-    }
+    };
 
     /**
      * Retrieve the label for the given subtype in the current type
      * @param key {string} statistic subtype key
      */
     $scope.formatSubtype = function (key) {
-      let label = ''
+      let label = '';
       angular.forEach($scope.type.active.subtypes, function (subtype) {
         if (subtype.key === key) {
-          return label = subtype.label
+          return label = subtype.label;
         }
-      })
-      return label
-    }
+      });
+      return label;
+    };
 
     /**
      * Helper usable in ng-switch to determine the input type to display for custom filter value
@@ -243,14 +243,14 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     $scope.getCustomValueInputType = function (filter) {
       if (filter && filter.values) {
         if (typeof (filter.values[0]) === 'string') {
-          return filter.values[0]
+          return filter.values[0];
         } else if (typeof (filter.values[0] === 'object')) {
-          return 'input_select'
+          return 'input_select';
         }
       } else {
-        return 'input_text'
+        return 'input_text';
       }
-    }
+    };
 
     /**
      * Change the sorting order and refresh the results to match the new order
@@ -258,21 +258,21 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.toggleSorting = function (filter) {
       switch ($scope.sorting[filter]) {
-        case 'none': $scope.sorting[filter] = 'asc'; break
-        case 'asc': $scope.sorting[filter] = 'desc'; break
-        case 'desc': $scope.sorting[filter] = 'none'; break
+        case 'none': $scope.sorting[filter] = 'asc'; break;
+        case 'asc': $scope.sorting[filter] = 'desc'; break;
+        case 'desc': $scope.sorting[filter] = 'none'; break;
       }
-      return refreshStats()
-    }
+      return refreshStats();
+    };
 
     /**
      * Return the user's name from his given ID
      * @param id {number} user ID
      */
     $scope.getUserNameFromId = function (id) {
-      const name = $scope.members[id]
-      return (name || `ID ${id}`)
-    }
+      const name = $scope.members[id];
+      return (name || `ID ${id}`);
+    };
 
     /**
      * Run a scroll query to elasticsearch to append the next packet of results to those displayed.
@@ -281,12 +281,12 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     $scope.showMoreResults = function () {
     // if all results were retrieved, do nothing
       if ($scope.data.length >= $scope.totalHits) {
-        return
+        return;
       }
 
       if (moment($scope.searchDate).add(ES_SCROLL_TIME, 'minutes').isBefore(moment())) {
       // elastic search context has expired, so we run again the whole query
-        return refreshStats()
+        return refreshStats();
       } else {
         return es.scroll({
           'scroll': ES_SCROLL_TIME + 'm',
@@ -294,14 +294,14 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         }
         , function (error, response) {
           if (error) {
-            return console.error(`Error: something unexpected occurred during elasticSearch scroll query: ${error}`)
+            return console.error(`Error: something unexpected occurred during elasticSearch scroll query: ${error}`);
           } else {
-            $scope.scrollId = response._scroll_id
-            return $scope.data = $scope.data.concat(response.hits.hits)
+            $scope.scrollId = response._scroll_id;
+            return $scope.data = $scope.data.concat(response.hits.hits);
           }
-        })
+        });
       }
-    }
+    };
 
     /**
      * Open a modal dialog asking the user for details about exporting the statistics tables to an excel file
@@ -316,24 +316,24 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
             return {
               start: $scope.datePickerStart.selected,
               end: $scope.datePickerEnd.selected
-            }
+            };
           },
           query () {
-            const custom = buildCustomFilterQuery()
-            return buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting)
+            const custom = buildCustomFilterQuery();
+            return buildElasticDataQuery($scope.type.active.key, custom, $scope.agePicker.start, $scope.agePicker.end, moment($scope.datePickerStart.selected), moment($scope.datePickerEnd.selected), $scope.sorting);
           },
           index () {
-            return { key: $scope.selectedIndex.es_type_key }
+            return { key: $scope.selectedIndex.es_type_key };
           },
           type () {
-            return { key: $scope.type.active.key }
+            return { key: $scope.type.active.key };
           }
         }
-      }
+      };
 
       return $uibModal.open(options)
-        .result['finally'](null).then(function (info) { console.log(info) })
-    }
+        .result['finally'](null).then(function (info) { console.log(info); });
+    };
 
     /* PRIVATE SCOPE */
 
@@ -345,10 +345,10 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       // which will cause every tabs to reload, one by one, when the view is closed
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         if ((fromState.name === 'app.admin.statistics') && (Object.keys(fromParams).length === 0)) {
-          return $scope.preventRefresh = true
+          return $scope.preventRefresh = true;
         }
-      })
-    }
+      });
+    };
 
     /**
      * Generic function to toggle a bootstrap datePicker
@@ -356,45 +356,45 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * @param datePicker {Object} settings object of the concerned datepicker. Must have an 'opened' property
      */
     var toggleDatePicker = function ($event, datePicker) {
-      $event.preventDefault()
-      $event.stopPropagation()
-      return datePicker.opened = !datePicker.opened
-    }
+      $event.preventDefault();
+      $event.stopPropagation();
+      return datePicker.opened = !datePicker.opened;
+    };
 
     /**
      * Force update the statistics table, querying elasticSearch according to the current config values
      */
     var refreshStats = function () {
       if ($scope.selectedIndex && !$scope.preventRefresh) {
-        $scope.data = []
-        $scope.sumCA = 0
-        $scope.averageAge = 0
-        $scope.sumStat = 0
-        $scope.customAggs = {}
-        $scope.totalHits = null
-        $scope.searchDate = new Date()
-        let custom = buildCustomFilterQuery()
+        $scope.data = [];
+        $scope.sumCA = 0;
+        $scope.averageAge = 0;
+        $scope.sumStat = 0;
+        $scope.customAggs = {};
+        $scope.totalHits = null;
+        $scope.searchDate = new Date();
+        let custom = buildCustomFilterQuery();
         return queryElasticStats($scope.selectedIndex.es_type_key, $scope.type.active.key, custom, function (res, err) {
           if (err) {
-            return console.error(`[statisticsController::refreshStats] Unable to refresh due to ${err}`)
+            return console.error(`[statisticsController::refreshStats] Unable to refresh due to ${err}`);
           } else {
-            $scope.data = res.hits.hits
-            $scope.totalHits = res.hits.total
-            $scope.sumCA = res.aggregations.total_ca.value
-            $scope.averageAge = Math.round(res.aggregations.average_age.value * 100) / 100
-            $scope.sumStat = res.aggregations.total_stat.value
-            $scope.scrollId = res._scroll_id
+            $scope.data = res.hits.hits;
+            $scope.totalHits = res.hits.total;
+            $scope.sumCA = res.aggregations.total_ca.value;
+            $scope.averageAge = Math.round(res.aggregations.average_age.value * 100) / 100;
+            $scope.sumStat = res.aggregations.total_stat.value;
+            $scope.scrollId = res._scroll_id;
             return (function () {
-              const result = []
+              const result = [];
               for (custom of Array.from($scope.type.active.custom_aggregations)) {
-                result.push($scope.customAggs[custom.field] = res.aggregations[custom.field].value)
+                result.push($scope.customAggs[custom.field] = res.aggregations[custom.field].value);
               }
-              return result
-            })()
+              return result;
+            })();
           }
-        })
+        });
       }
-    }
+    };
 
     /**
      * Run the elasticSearch query to retreive the /stats/type aggregations
@@ -407,8 +407,8 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     var queryElasticStats = function (index, type, custom, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
-        console.error('[statisticsController::queryElasticStats] Error: invalid callback provided')
-        return
+        console.error('[statisticsController::queryElasticStats] Error: invalid callback provided');
+        return;
       }
 
       // run query
@@ -425,12 +425,12 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       }
       , function (error, response) {
         if (error) {
-          return callback({}, `Error: something unexpected occurred during elasticSearch query: ${error}`)
+          return callback({}, `Error: something unexpected occurred during elasticSearch query: ${error}`);
         } else {
-          return callback(response)
+          return callback(response);
         }
-      })
-    }
+      });
+    };
 
     /**
      * Build an object representing the content of the REST-JSON query to elasticSearch,
@@ -464,7 +464,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
             ]
           }
         }
-      }
+      };
       // optional date range
       if ((typeof ageMin === 'number') && (typeof ageMax === 'number')) {
         q.query.bool.must.push({
@@ -474,22 +474,22 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
               'lte': ageMax
             }
           }
-        })
+        });
       }
       // optional criterion
       if (custom) {
-        const criterion = buildElasticCustomCriterion(custom)
+        const criterion = buildElasticCustomCriterion(custom);
         if (custom.exclude) {
           q.query.bool.must_not = [
             { 'term': criterion.match }
-          ]
+          ];
         } else {
-          q.query.bool.must.push(criterion)
+          q.query.bool.must.push(criterion);
         }
       }
 
       if (sortings) {
-        q['sort'] = buildElasticSortCriteria(sortings)
+        q['sort'] = buildElasticSortCriteria(sortings);
       }
 
       // aggregations (avg age & CA sum)
@@ -509,9 +509,9 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
             'field': 'stat'
           }
         }
-      }
-      return q
-    }
+      };
+      return q;
+    };
 
     /**
      * Build the elasticSearch query DSL to match the selected cutom filter
@@ -522,34 +522,34 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       if (custom) {
         const criterion = {
           'match': {}
-        }
+        };
         switch ($scope.getCustomValueInputType($scope.customFilter.criterion)) {
-          case 'input_date': criterion.match[custom.key] = moment(custom.value).format('YYYY-MM-DD'); break
-          case 'input_select': criterion.match[custom.key] = custom.value.key; break
-          case 'input_list': criterion.match[custom.key + '.name'] = custom.value; break
-          default: criterion.match[custom.key] = custom.value
+          case 'input_date': criterion.match[custom.key] = moment(custom.value).format('YYYY-MM-DD'); break;
+          case 'input_select': criterion.match[custom.key] = custom.value.key; break;
+          case 'input_list': criterion.match[custom.key + '.name'] = custom.value; break;
+          default: criterion.match[custom.key] = custom.value;
         }
-        return criterion
+        return criterion;
       } else {
-        return ''
+        return '';
       }
-    }
+    };
 
     /**
      * Parse the provided criteria array and return the corresponding elasticSearch syntax
      * @param criteria {Array} array of {key_to_sort:order}
      */
     var buildElasticSortCriteria = function (criteria) {
-      const crits = []
+      const crits = [];
       angular.forEach(criteria, function (value, key) {
         if ((typeof value !== 'undefined') && (value !== null) && (value !== 'none')) {
-          const c = {}
-          c[key] = { 'order': value }
-          return crits.push(c)
+          const c = {};
+          c[key] = { 'order': value };
+          return crits.push(c);
         }
-      })
-      return crits
-    }
+      });
+      return crits;
+    };
 
     /**
      * Fullfil the list of available options in the custom filter panel. The list will be based on common
@@ -563,76 +563,76 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         { key: 'age', label: _t('age'), values: ['input_number'] },
         { key: 'subType', label: _t('type'), values: $scope.type.active.subtypes },
         { key: 'ca', label: _t('revenue'), values: ['input_number'] }
-      ]
+      ];
 
       if (!$scope.type.active.simple) {
-        const f = { key: 'stat', label: $scope.type.active.label, values: ['input_number'] }
-        $scope.filters.push(f)
+        const f = { key: 'stat', label: $scope.type.active.label, values: ['input_number'] };
+        $scope.filters.push(f);
       }
 
       return angular.forEach($scope.selectedIndex.additional_fields, function (field) {
-        const filter = { key: field.key, label: field.label, values: [] }
+        const filter = { key: field.key, label: field.label, values: [] };
         switch (field.data_type) {
-          case 'index': filter.values.push('input_number'); break
-          case 'number': filter.values.push('input_number'); break
-          case 'date': filter.values.push('input_date'); break
-          case 'list': filter.values.push('input_list'); break
-          default: filter.values.push('input_text')
+          case 'index': filter.values.push('input_number'); break;
+          case 'number': filter.values.push('input_number'); break;
+          case 'date': filter.values.push('input_date'); break;
+          case 'list': filter.values.push('input_list'); break;
+          default: filter.values.push('input_text');
         }
 
-        return $scope.filters.push(filter)
-      })
-    }
+        return $scope.filters.push(filter);
+      });
+    };
 
     /**
      * Build and return an object according to the custom filter set by the user, used to request elasticsearch
      * @return {Object|null}
      */
     var buildCustomFilterQuery = function () {
-      let custom = null
+      let custom = null;
       if (!angular.isUndefinedOrNull($scope.customFilter.criterion) &&
         !angular.isUndefinedOrNull($scope.customFilter.criterion.key) &&
         !angular.isUndefinedOrNull($scope.customFilter.value)) {
-        custom = {}
-        custom.key = $scope.customFilter.criterion.key
-        custom.value = $scope.customFilter.value
-        custom.exclude = $scope.customFilter.exclude
+        custom = {};
+        custom.key = $scope.customFilter.criterion.key;
+        custom.value = $scope.customFilter.value;
+        custom.exclude = $scope.customFilter.exclude;
       }
-      return custom
-    }
+      return custom;
+    };
 
     // init the controller (call at the end !)
-    return initialize()
+    return initialize();
   }
 
-])
+]);
 
 Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$uibModalInstance', 'Export', 'dates', 'query', 'index', 'type', 'CSRF', 'growl', '_t',
   function ($scope, $uibModalInstance, Export, dates, query, index, type, CSRF, growl, _t) {
   // Retrieve Anti-CSRF tokens from cookies
-    CSRF.setMetaTags()
+    CSRF.setMetaTags();
 
     // Bindings for date range
-    $scope.dates = dates
+    $scope.dates = dates;
 
     // Body of the query to export
-    $scope.query = JSON.stringify(query)
+    $scope.query = JSON.stringify(query);
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/stats/${index.key}/export`
+    $scope.actionUrl = `/stats/${index.key}/export`;
 
     // Key of the current search' statistic type
-    $scope.typeKey = type.key
+    $scope.typeKey = type.key;
 
     // Form action on the above URL
-    $scope.method = 'post'
+    $scope.method = 'post';
 
     // Anti-CSRF token to inject into the download form
-    $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content
+    $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content;
 
     // Binding of the export type (global / current)
     $scope.export =
-    { type: 'current' }
+    { type: 'current' };
 
     // datePicker parameters for interval beginning
     $scope.exportStart = {
@@ -643,7 +643,7 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     // datePicker parameters for interval ending
     $scope.exportEnd = {
@@ -654,19 +654,19 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
       options: {
         startingDay: Fablab.weekStartingDay
       }
-    }
+    };
 
     /**
      * Callback to open the datepicker (interval start)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleStartDatePicker = function ($event) { $scope.exportStart.opened = !$scope.exportStart.opened }
+    $scope.toggleStartDatePicker = function ($event) { $scope.exportStart.opened = !$scope.exportStart.opened; };
 
     /**
      * Callback to open the datepicker (interval end)
      * @param $event {Object} jQuery event object
      */
-    $scope.toggleEndDatePicker = function ($event) { $scope.exportEnd.opened = !$scope.exportEnd.opened }
+    $scope.toggleEndDatePicker = function ($event) { $scope.exportEnd.opened = !$scope.exportEnd.opened; };
 
     /**
      * Callback when exchanging the export type between 'global' and 'current view'
@@ -674,7 +674,7 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
      */
     $scope.setRequest = function () {
       if ($scope.export.type === 'global') {
-        $scope.actionUrl = '/stats/global/export'
+        $scope.actionUrl = '/stats/global/export';
         return $scope.query = JSON.stringify({
           'query': {
             'bool': {
@@ -690,35 +690,35 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
               ]
             }
           }
-        })
+        });
       } else {
-        $scope.actionUrl = `/stats/${index.key}/export`
-        $scope.query = JSON.stringify(query)
+        $scope.actionUrl = `/stats/${index.key}/export`;
+        $scope.query = JSON.stringify(query);
       }
-    }
+    };
 
     /**
      * Callback to close the modal, telling the caller what is exported
      */
     $scope.exportData = function () {
-      const statusQry = { category: 'statistics', type: $scope.export.type, query: $scope.query }
+      const statusQry = { category: 'statistics', type: $scope.export.type, query: $scope.query };
       if ($scope.export.type !== 'global') {
-        statusQry['type'] = index.key
-        statusQry['key'] = type.key
+        statusQry['type'] = index.key;
+        statusQry['key'] = type.key;
       }
 
       Export.status(statusQry).then(function (res) {
         if (!res.data.exists) {
-          return growl.success(_t('export_is_running_you_ll_be_notified_when_its_ready'))
+          return growl.success(_t('export_is_running_you_ll_be_notified_when_its_ready'));
         }
-      })
+      });
 
-      return $uibModalInstance.close(statusQry)
-    }
+      return $uibModalInstance.close(statusQry);
+    };
 
     /**
      * Callback to cancel the export and close the modal
      */
-    $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
   }
-])
+]);

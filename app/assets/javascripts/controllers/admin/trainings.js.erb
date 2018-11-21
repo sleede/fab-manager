@@ -12,7 +12,7 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 /* COMMON CODE */
 
@@ -39,29 +39,29 @@ class TrainingsController {
      */
     $scope.submited = function (content) {
       if ((content.id == null)) {
-        $scope.alerts = []
+        $scope.alerts = [];
         return angular.forEach(content, function (v, k) {
           angular.forEach(v, function (err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'
-            })
-          })
-        })
+            });
+          });
+        });
       } else {
-        return $state.go('app.admin.trainings')
+        return $state.go('app.admin.trainings');
       }
-    }
+    };
 
     /**
      * Changes the current user's view, redirecting him to the machines list
      */
-    $scope.cancel = function () { $state.go('app.admin.trainings') }
+    $scope.cancel = function () { $state.go('app.admin.trainings'); };
 
     /**
      * Force the 'public_page' attribute to false when the current training is disabled
      */
-    $scope.onDisableToggled = function () { $scope.training.public_page = !$scope.training.disabled }
+    $scope.onDisableToggled = function () { $scope.training.public_page = !$scope.training.disabled; };
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -70,11 +70,11 @@ class TrainingsController {
      */
     $scope.fileinputClass = function (v) {
       if (v) {
-        return 'fileinput-exists'
+        return 'fileinput-exists';
       } else {
-        return 'fileinput-new'
+        return 'fileinput-new';
       }
-    }
+    };
   }
 }
 
@@ -86,13 +86,13 @@ Application.Controllers.controller('NewTrainingController', [ '$scope', '$state'
   /* PUBLIC SCOPE */
 
     // Form action on the following URL
-    $scope.method = 'post'
+    $scope.method = 'post';
 
     // API URL where the form will be posted
-    $scope.actionUrl = '/api/trainings/'
+    $scope.actionUrl = '/api/trainings/';
 
     // list of machines
-    $scope.machines = machinesPromise
+    $scope.machines = machinesPromise;
 
     /* PRIVATE SCOPE */
 
@@ -100,16 +100,16 @@ Application.Controllers.controller('NewTrainingController', [ '$scope', '$state'
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-      CSRF.setMetaTags()
+      CSRF.setMetaTags();
 
       // Using the TrainingsController
-      return new TrainingsController($scope, $state)
-    }
+      return new TrainingsController($scope, $state);
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);
 
 /**
  * Controller used in the training edition page (admin)
@@ -119,16 +119,16 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
   /* PUBLIC SCOPE */
 
     // Form action on the following URL
-    $scope.method = 'patch'
+    $scope.method = 'patch';
 
     // API URL where the form will be posted
-    $scope.actionUrl = `/api/trainings/${$stateParams.id}`
+    $scope.actionUrl = `/api/trainings/${$stateParams.id}`;
 
     // Details of the training to edit (id in URL)
-    $scope.training = trainingPromise
+    $scope.training = trainingPromise;
 
     // list of machines
-    $scope.machines = machinesPromise
+    $scope.machines = machinesPromise;
 
     /* PRIVATE SCOPE */
 
@@ -136,16 +136,16 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-      CSRF.setMetaTags()
+      CSRF.setMetaTags();
 
       // Using the TrainingsController
-      return new TrainingsController($scope, $state)
-    }
+      return new TrainingsController($scope, $state);
+    };
 
     // !!! MUST BE CALLED AT THE END of the controller
-    return initialize()
+    return initialize();
   }
-])
+]);
 
 /**
  * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
@@ -155,34 +155,34 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
   /* PUBLIC SCOPE */
 
     // list of trainings
-    let groupAvailabilities
-    $scope.trainings = trainingsPromise
+    let groupAvailabilities;
+    $scope.trainings = trainingsPromise;
 
     // simplified list of machines
-    $scope.machines = machinesPromise
+    $scope.machines = machinesPromise;
 
     // Training to monitor, binded with drop-down selection
     $scope.monitoring =
-    { training: null }
+    { training: null };
 
     // list of training availabilies, grouped by date
-    $scope.groupedAvailabilities = {}
+    $scope.groupedAvailabilities = {};
 
     // default: accordions are not open
-    $scope.accordions = {}
+    $scope.accordions = {};
 
     // Binding for the parseInt function
-    $scope.parseInt = parseInt
+    $scope.parseInt = parseInt;
 
     // Default: we show only enabled trainings
-    $scope.trainingFiltering = 'enabled'
+    $scope.trainingFiltering = 'enabled';
 
     // Available options for filtering trainings by status
     $scope.filterDisabled = [
       'enabled',
       'disabled',
       'all'
-    ]
+    ];
 
     /**
      * In the trainings listing tab, return the stringified list of machines associated with the provided training
@@ -190,14 +190,14 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      * @returns {string}
      */
     $scope.showMachines = function (training) {
-      const selected = []
+      const selected = [];
       angular.forEach($scope.machines, function (m) {
         if (training.machine_ids.indexOf(m.id) >= 0) {
-          return selected.push(m.name)
+          return selected.push(m.name);
         }
-      })
-      if (selected.length) { return selected.join(', ') } else { return _t('none') }
-    }
+      });
+      if (selected.length) { return selected.join(', '); } else { return _t('none'); }
+    };
 
     /**
      * Removes the newly inserted but not saved training / Cancel the current training modification
@@ -206,11 +206,11 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      */
     $scope.cancelTraining = function (rowform, index) {
       if ($scope.trainings[index].id != null) {
-        return rowform.$cancel()
+        return rowform.$cancel();
       } else {
-        return $scope.trainings.splice(index, 1)
+        return $scope.trainings.splice(index, 1);
       }
-    }
+    };
 
     /**
      * In the trainings monitoring tab, callback to open a modal window displaying the current bookings for the
@@ -223,47 +223,47 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/trainings/validTrainingModal.html" %>',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-          $scope.availability = availability
+          $scope.availability = availability;
 
-          $scope.usersToValid = []
+          $scope.usersToValid = [];
 
           /**
            * Mark/unmark the provided user for training validation
            * @param user {Object} from the availability.reservation_users list
            */
           $scope.toggleSelection = function (user) {
-            const index = $scope.usersToValid.indexOf(user)
+            const index = $scope.usersToValid.indexOf(user);
             if (index > -1) {
-              return $scope.usersToValid.splice(index, 1)
+              return $scope.usersToValid.splice(index, 1);
             } else {
-              return $scope.usersToValid.push(user)
+              return $scope.usersToValid.push(user);
             }
-          }
+          };
 
           /**
            * Validates the modifications (training validations) and save them to the server
            */
           $scope.ok = function () {
-            const users = $scope.usersToValid.map(function (u) { return u.id })
+            const users = $scope.usersToValid.map(function (u) { return u.id; });
             return Training.update({ id: training.id }, {
               training: {
                 users
               }
             }
             , function () { // success
-              angular.forEach($scope.usersToValid, function (u) { u.is_valid = true })
-              $scope.usersToValid = []
-              return $uibModalInstance.close(training)
-            })
-          }
+              angular.forEach($scope.usersToValid, function (u) { u.is_valid = true; });
+              $scope.usersToValid = [];
+              return $uibModalInstance.close(training);
+            });
+          };
 
           /**
            * Cancel the modifications and close the modal window
            */
-          return $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
+          return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }
-        ] })
-    }
+        ] });
+    };
 
     /**
      * Delete the provided training and, in case of success, remove it from the trainings list afterwards
@@ -278,22 +278,22 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
               return {
                 title: _t('confirmation_required'),
                 msg: _t('do_you_really_want_to_delete_this_training')
-              }
+              };
             }
           }
         },
         function () { // deletion confirmed
           training.$delete(function () {
-            $scope.trainings.splice(index, 1)
-            growl.info(_t('training_successfully_deleted'))
+            $scope.trainings.splice(index, 1);
+            growl.info(_t('training_successfully_deleted'));
           },
           function (error) {
-            growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it'))
-            console.error(error)
-          })
+            growl.warning(_t('unable_to_delete_the_training_because_some_users_alredy_booked_it'));
+            console.error(error);
+          });
         }
-      )
-    }
+      );
+    };
 
     /**
      * Takes a month number and return its localized literal name
@@ -301,9 +301,9 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      * @returns {String} eg. 'janvier'
      */
     $scope.formatMonth = function (number) {
-      number = parseInt(number)
-      return moment().month(number).format('MMMM')
-    }
+      number = parseInt(number);
+      return moment().month(number).format('MMMM');
+    };
 
     /**
      * Given a day, month and year, return a localized literal name for the day
@@ -313,12 +313,12 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      * @returns {String} eg. 'mercredi 12'
      */
     $scope.formatDay = function (day, month, year) {
-      day = parseInt(day)
-      month = parseInt(month)
-      year = parseInt(year)
+      day = parseInt(day);
+      month = parseInt(month);
+      year = parseInt(year);
 
-      return moment({ year, month, day }).format('dddd D')
-    }
+      return moment({ year, month, day }).format('dddd D');
+    };
 
     /**
      * Callback when the drop-down selection is changed.
@@ -326,14 +326,14 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      */
     $scope.selectTrainingToMonitor = function () {
       Training.availabilities({ id: $scope.monitoring.training.id }, function (training) {
-        $scope.groupedAvailabilities = groupAvailabilities([training])
+        $scope.groupedAvailabilities = groupAvailabilities([training]);
         // we open current year/month by default
-        const now = moment()
-        $scope.accordions[training.name] = {}
-        $scope.accordions[training.name][now.year()] = { isOpenFirst: true }
-        $scope.accordions[training.name][now.year()][now.month()] = { isOpenFirst: true }
-      })
-    }
+        const now = moment();
+        $scope.accordions[training.name] = {};
+        $scope.accordions[training.name][now.year()] = { isOpenFirst: true };
+        $scope.accordions[training.name][now.year()][now.month()] = { isOpenFirst: true };
+      });
+    };
 
     /* PRIVATE SCOPE */
 
@@ -343,30 +343,30 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
      * @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
      */
     return groupAvailabilities = function (trainings) {
-      const tree = {}
+      const tree = {};
       for (let training of Array.from(trainings)) {
-        tree[training.name] = {}
-        tree[training.name].training = training
+        tree[training.name] = {};
+        tree[training.name].training = training;
         for (let availability of Array.from(training.availabilities)) {
-          const start = moment(availability.start_at)
+          const start = moment(availability.start_at);
 
           // init the tree structure
           if (typeof tree[training.name][start.year()] === 'undefined') {
-            tree[training.name][start.year()] = {}
+            tree[training.name][start.year()] = {};
           }
           if (typeof tree[training.name][start.year()][start.month()] === 'undefined') {
-            tree[training.name][start.year()][start.month()] = {}
+            tree[training.name][start.year()][start.month()] = {};
           }
           if (typeof tree[training.name][start.year()][start.month()][start.date()] === 'undefined') {
-            tree[training.name][start.year()][start.month()][start.date()] = []
+            tree[training.name][start.year()][start.month()][start.date()] = [];
           }
 
           // add the availability at its right place
-          tree[training.name][start.year()][start.month()][start.date()].push(availability)
+          tree[training.name][start.year()][start.month()][start.date()].push(availability);
         }
       }
-      return tree
-    }
+      return tree;
+    };
   }
 
-])
+]);

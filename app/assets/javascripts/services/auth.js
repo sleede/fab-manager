@@ -9,21 +9,21 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-'use strict'
+'use strict';
 
 Application.Services.factory('AuthService', ['Session', function (Session) {
   return {
     isAuthenticated () {
-      return (Session.currentUser != null) && (Session.currentUser.id != null)
+      return (Session.currentUser != null) && (Session.currentUser.id != null);
     },
 
     isAuthorized (authorizedRoles) {
       if (!angular.isArray(authorizedRoles)) {
-        authorizedRoles = [authorizedRoles]
+        authorizedRoles = [authorizedRoles];
       }
 
-      return this.isAuthenticated() && (authorizedRoles.indexOf(Session.currentUser.role) !== -1)
+      return this.isAuthenticated() && (authorizedRoles.indexOf(Session.currentUser.role) !== -1);
     }
-  }
+  };
 }
-])
+]);
