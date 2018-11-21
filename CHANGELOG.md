@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Nom using standard [package.json](package.json) file to save application version number
 - Fix a bug: on small screens, display of button "change group" overflow
 
 ## v2.6.7 2018 October 4
