@@ -12,24 +12,24 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise', 'Group', 'growl', '_t', function ($scope, groupsPromise, Group, growl, _t) {
-  // # List of users groups
+  // List of users groups
   $scope.groups = groupsPromise
 
-  // # Default: we show only enabled groups
+  // Default: we show only enabled groups
   $scope.groupFiltering = 'enabled'
 
-  // # Available options for filtering groups by status
+  // Available options for filtering groups by status
   $scope.filterDisabled = [
     'enabled',
     'disabled',
     'all'
   ]
 
-  // #
-  // Removes the newly inserted but not saved group / Cancel the current group modification
-  // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-  // @param index {number} group index in the $scope.groups array
-  // #
+  /**
+   * Removes the newly inserted but not saved group / Cancel the current group modification
+   * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+   * @param index {number} group index in the $scope.groups array
+   */
   $scope.cancelGroup = function (rowform, index) {
     if ($scope.groups[index].id != null) {
       return rowform.$cancel()
@@ -38,20 +38,20 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
     }
   }
 
-  // #
-  // Creates a new empty entry in the $scope.groups array
-  // #
+  /**
+   * Creates a new empty entry in the $scope.groups array
+   */
   $scope.addGroup = function () {
     $scope.inserted =
       { name: '' }
     return $scope.groups.push($scope.inserted)
   }
 
-  // #
-  // Saves a new group / Update an existing group to the server (form validation callback)
-  // @param data {Object} group name
-  // @param [id] {number} group id, in case of update
-  // #
+  /**
+   * Saves a new group / Update an existing group to the server (form validation callback)
+   * @param data {Object} group name
+   * @param [id] {number} group id, in case of update
+   */
   $scope.saveGroup = function (data, id) {
     if (id != null) {
       return Group.update({ id }, { group: data }, response => growl.success(_t('group_form.changes_successfully_saved'))
@@ -68,10 +68,10 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
     }
   }
 
-  // #
-  // Deletes the group at the specified index
-  // @param index {number} group index in the $scope.groups array
-  // #
+  /**
+   * Deletes the group at the specified index
+   * @param index {number} group index in the $scope.groups array
+   */
   $scope.removeGroup = index =>
     Group.delete({ id: $scope.groups[index].id }, function (resp) {
       growl.success(_t('group_form.group_successfully_deleted'))
@@ -79,10 +79,10 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
     }
     , error => growl.error(_t('group_form.unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it')))
 
-  // #
-  // Enable/disable the group at the specified index
-  // @param index {number} group index in the $scope.groups array
-  // #
+  /**
+   * Enable/disable the group at the specified index
+   * @param index {number} group index in the $scope.groups array
+   */
   return $scope.toggleDisableGroup = function (index) {
     const group = $scope.groups[index]
     if (!group.disabled && (group.users > 0)) {

@@ -90,9 +90,9 @@ Application.Directives.directive('disableAnimation', ['$animate', ($animate) =>
   })
 ])
 
-// #
-// Isolate a form's scope from its parent : no nested validation
-// #
+/**
+ * Isolate a form's scope from its parent : no nested validation
+ */
 Application.Directives.directive('isolateForm', [ () =>
   ({
     restrict: 'A',

@@ -14,20 +14,20 @@
 
 Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise',
   function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise) {
-  // # Materials list (plastic, wood ...)
+  // Materials list (plastic, wood ...)
     $scope.components = componentsPromise
 
-    // # Licences list (Creative Common ...)
+    // Licences list (Creative Common ...)
     $scope.licences = licencesPromise
 
-    // # Themes list (cooking, sport ...)
+    // Themes list (cooking, sport ...)
     $scope.themes = themesPromise
 
-    // #
-    // Saves a new component / Update an existing material to the server (form validation callback)
-    // @param data {Object} component name
-    // @param [data] {number} component id, in case of update
-    // #
+    /**
+     * Saves a new component / Update an existing material to the server (form validation callback)
+     * @param data {Object} component name
+     * @param [data] {number} component id, in case of update
+     */
     $scope.saveComponent = function (data, id) {
       if (id != null) {
         return Component.update({ id }, data)
@@ -36,29 +36,29 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       }
     }
 
-    // #
-    // Deletes the component at the specified index
-    // @param index {number} component index in the $scope.components array
-    // #
+    /**
+     * Deletes the component at the specified index
+     * @param index {number} component index in the $scope.components array
+     */
     $scope.removeComponent = function (index) {
       Component.delete($scope.components[index])
       return $scope.components.splice(index, 1)
     }
 
-    // #
-    // Creates a new empty entry in the $scope.components array
-    // #
+    /**
+     * Creates a new empty entry in the $scope.components array
+     */
     $scope.addComponent = function () {
       $scope.inserted =
       { name: '' }
       return $scope.components.push($scope.inserted)
     }
 
-    // #
-    // Removes the newly inserted but not saved component / Cancel the current component modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // @param index {number} component index in the $scope.components array
-    // #
+    /**
+     * Removes the newly inserted but not saved component / Cancel the current component modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} component index in the $scope.components array
+     */
     $scope.cancelComponent = function (rowform, index) {
       if ($scope.components[index].id != null) {
         return rowform.$cancel()
@@ -67,11 +67,11 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       }
     }
 
-    // #
-    // Saves a new theme / Update an existing theme to the server (form validation callback)
-    // @param data {Object} theme name
-    // @param [data] {number} theme id, in case of update
-    // #
+    /**
+     * Saves a new theme / Update an existing theme to the server (form validation callback)
+     * @param data {Object} theme name
+     * @param [data] {number} theme id, in case of update
+     */
     $scope.saveTheme = function (data, id) {
       if (id != null) {
         return Theme.update({ id }, data)
@@ -80,29 +80,29 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       }
     }
 
-    // #
-    // Deletes the theme at the specified index
-    // @param index {number} theme index in the $scope.themes array
-    // #
+    /**
+     * Deletes the theme at the specified index
+     * @param index {number} theme index in the $scope.themes array
+     */
     $scope.removeTheme = function (index) {
       Theme.delete($scope.themes[index])
       return $scope.themes.splice(index, 1)
     }
 
-    // #
-    // Creates a new empty entry in the $scope.themes array
-    // #
+    /**
+     * Creates a new empty entry in the $scope.themes array
+     */
     $scope.addTheme = function () {
       $scope.inserted =
       { name: '' }
       return $scope.themes.push($scope.inserted)
     }
 
-    // #
-    // Removes the newly inserted but not saved theme / Cancel the current theme modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // @param index {number} theme index in the $scope.themes array
-    // #
+    /**
+     * Removes the newly inserted but not saved theme / Cancel the current theme modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} theme index in the $scope.themes array
+     */
     $scope.cancelTheme = function (rowform, index) {
       if ($scope.themes[index].id != null) {
         return rowform.$cancel()
@@ -111,11 +111,11 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       }
     }
 
-    // #
-    // Saves a new licence / Update an existing licence to the server (form validation callback)
-    // @param data {Object} licence name and description
-    // @param [data] {number} licence id, in case of update
-    // #
+    /**
+     * Saves a new licence / Update an existing licence to the server (form validation callback)
+     * @param data {Object} licence name and description
+     * @param [data] {number} licence id, in case of update
+     */
     $scope.saveLicence = function (data, id) {
       if (id != null) {
         return Licence.update({ id }, data)
@@ -124,18 +124,18 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       }
     }
 
-    // #
-    // Deletes the licence at the specified index
-    // @param index {number} licence index in the $scope.licences array
-    // #
+    /**
+     * Deletes the licence at the specified index
+     * @param index {number} licence index in the $scope.licences array
+     */
     $scope.removeLicence = function (index) {
       Licence.delete($scope.licences[index])
       return $scope.licences.splice(index, 1)
     }
 
-    // #
-    // Creates a new empty entry in the $scope.licences array
-    // #
+    /**
+     * Creates a new empty entry in the $scope.licences array
+     */
     $scope.addLicence = function () {
       $scope.inserted = {
         name: '',
@@ -144,11 +144,11 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       return $scope.licences.push($scope.inserted)
     }
 
-    // #
-    // Removes the newly inserted but not saved licence / Cancel the current licence modification
-    // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-    // @param index {number} licence index in the $scope.licences array
-    // #
+    /**
+     * Removes the newly inserted but not saved licence / Cancel the current licence modification
+     * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+     * @param index {number} licence index in the $scope.licences array
+     */
     return $scope.cancelLicence = function (rowform, index) {
       if ($scope.licences[index].id != null) {
         return rowform.$cancel()

@@ -13,9 +13,9 @@
  */
 'use strict'
 
-// #
-// Controller used in the members listing page
-// #
+/**
+ * Controller used in the members listing page
+ */
 Application.Controllers.controller('MembersController', ['$scope', 'Member', 'membersPromise', function ($scope, Member, membersPromise) {
   /* PRIVATE STATIC CONSTANTS */
 
@@ -24,19 +24,19 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 
   /* PUBLIC SCOPE */
 
-  // # currently displayed page of members
+  // currently displayed page of members
   $scope.page = 1
 
-  // # members list
+  // members list
   $scope.members = membersPromise
 
   // true when all members are loaded
   $scope.noMoreResults = false
 
-  // #
-  // Callback for the 'load more' button.
-  // Will load the next results of the current search, if any
-  // #
+  /**
+   * Callback for the 'load more' button.
+   * Will load the next results of the current search, if any
+   */
   $scope.showNextMembers = function () {
     $scope.page += 1
     return Member.query({
@@ -54,61 +54,61 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 
   /* PRIVATE SCOPE */
 
-  // #
-  // Kind of constructor: these actions will be realized first when the controller is loaded
-  // #
+  /**
+   * Kind of constructor: these actions will be realized first when the controller is loaded
+   */
   const initialize = function () {
     if (!membersPromise[0] || (membersPromise[0].maxMembers <= $scope.members.length)) {
       return $scope.noMoreResults = true
     }
   }
 
-  // # !!! MUST BE CALLED AT THE END of the controller
+  // !!! MUST BE CALLED AT THE END of the controller
   return initialize()
 }
 
 ])
 
-// #
-// Controller used when editing the current user's profile
-// #
+/**
+ * Controller used when editing the current user's profile
+ */
 Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
   function ($scope, $rootScope, $state, $window, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
   /* PUBLIC SCOPE */
 
-    // # API URL where the form will be posted
+    // API URL where the form will be posted
     $scope.actionUrl = `/api/members/${$scope.currentUser.id}`
 
-    // # list of groups
+    // list of groups
     $scope.groups = groups.filter(g => !g.disabled)
 
-    // # Form action on the above URL
+    // Form action on the above URL
     $scope.method = 'patch'
 
-    // # Current user's profile
+    // Current user's profile
     $scope.user = memberPromise
 
-    // # default : do not show the group changing form
+    // default : do not show the group changing form
     $scope.group =
       { change: false }
 
-    // # group ID of the current/selected user
+    // group ID of the current/selected user
     $scope.userGroup = memberPromise.group_id
 
-    // # active authentication provider parameters
+    // active authentication provider parameters
     $scope.activeProvider = activeProviderPromise
 
-    // # allow the user to change his password except if he connect from an SSO
+    // allow the user to change his password except if he connect from an SSO
     $scope.preventPassword = false
 
-    // # mapping of fields to disable
+    // mapping of fields to disable
     $scope.preventField = {}
 
-    // # Should the passord be modified?
+    // Should the passord be modified?
     $scope.password =
     { change: false }
 
-    // # Angular-Bootstrap datepicker configuration for birthday
+    // Angular-Bootstrap datepicker configuration for birthday
     $scope.datePicker = {
       format: Fablab.uibDateFormat,
       opened: false, // default: datePicker is not shown
@@ -117,9 +117,9 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }
     }
 
-    // #
-    // Return the group object, identified by the ID set in $scope.userGroup
-    // #
+    /**
+     * Return the group object, identified by the ID set in $scope.userGroup
+     */
     $scope.getUserGroup = function () {
       for (let group of Array.from($scope.groups)) {
         if (group.id === $scope.userGroup) {
@@ -128,9 +128,9 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }
     }
 
-    // #
-    // Change the group of the current user to the one set in $scope.userGroup
-    // #
+    /**
+     * Change the group of the current user to the one set in $scope.userGroup
+     */
     $scope.selectGroup = () =>
       Member.update({ id: $scope.user.id }, { user: { group_id: $scope.userGroup } }, function (user) {
         $scope.user = user
@@ -144,23 +144,23 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         return console.error(err)
       })
 
-    // #
-    // Callback to diplay the datepicker as a dropdown when clicking on the input field
-    // @param $event {Object} jQuery event object
-    // #
+    /**
+     * Callback to diplay the datepicker as a dropdown when clicking on the input field
+     * @param $event {Object} jQuery event object
+     */
     $scope.openDatePicker = function ($event) {
       $event.preventDefault()
       $event.stopPropagation()
       return $scope.datePicker.opened = true
     }
 
-    // #
-    // For use with ngUpload (https://github.com/twilson63/ngUpload).
-    // Intended to be the callback when the upload is done: any raised error will be stacked in the
-    // $scope.alerts array. If everything goes fine, the user's profile is updated and the user is
-    // redirected to the home page
-    // @param content {Object} JSON - The upload's result
-    // #
+    /**
+     * For use with ngUpload (https://github.com/twilson63/ngUpload).
+     * Intended to be the callback when the upload is done: any raised error will be stacked in the
+     * $scope.alerts array. If everything goes fine, the user's profile is updated and the user is
+     * redirected to the home page
+     * @param content {Object} JSON - The upload's result
+     */
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
@@ -184,10 +184,10 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }
     }
 
-    // #
-    // Ask for confirmation then delete the current user's account
-    // @param user {Object} the current user (to delete)
-    // #
+    /**
+     * Ask for confirmation then delete the current user's account
+     * @param user {Object} the current user (to delete)
+     */
     $scope.deleteUser = user =>
       dialogs.confirm({
         resolve: {
@@ -212,11 +212,11 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         })
       )
 
-    // #
-    // For use with 'ng-class', returns the CSS class name for the uploads previews.
-    // The preview may show a placeholder or the content of the file depending on the upload state.
-    // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    // #
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
     $scope.fileinputClass = function (v) {
       if (v) {
         return 'fileinput-exists'
@@ -225,18 +225,18 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       }
     }
 
-    // #
-    // Check if the of the properties editable by the user are linked to the SSO
-    // @return {boolean} true if some editable fields are mapped with the SSO, false otherwise
-    // #
+    /**
+     * Check if the of the properties editable by the user are linked to the SSO
+     * @return {boolean} true if some editable fields are mapped with the SSO, false otherwise
+     */
     $scope.hasSsoFields = () =>
     // if check if keys > 1 because there's a minimum of 1 mapping (id <-> provider-uid)
     // so the user may want to edit his profile on the SSO if at least 2 mappings exists
       Object.keys($scope.preventField).length > 1
 
-    // #
-    // Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
-    // #
+    /**
+     * Disconnect and re-connect the user to the SSO to force the synchronisation of the profile's data
+     */
     $scope.syncProfile = () =>
       Auth.logout().then(function (oldUser) {
         Session.destroy()
@@ -251,9 +251,9 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       CSRF.setMetaTags()
 
@@ -267,19 +267,19 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       return angular.forEach(activeProviderPromise.mapping, map => $scope.preventField[map] = true)
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
 
-// #
-// Controller used on the public user's profile page (seeing another user's profile)
-// #
+/**
+ * Controller used on the public user's profile page (seeing another user's profile)
+ */
 Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPromise', 'SocialNetworks', function ($scope, memberPromise, SocialNetworks) {
-  // # Selected user's information
+  // Selected user's information
   $scope.user = memberPromise // DEPENDENCY WITH NAVINUM GAMIFICATION PLUGIN !!!!
 
-  // # List of social networks associated with this user and toggle 'show all' state
+  // List of social networks associated with this user and toggle 'show all' state
   $scope.social = {
     showAllLinks: false,
     networks: SocialNetworks
@@ -287,16 +287,16 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
 
   /* PRIVATE SCOPE */
 
-  // #
-  // Kind of constructor: these actions will be realized first when the controller is loaded
-  // #
+  /**
+   * Kind of constructor: these actions will be realized first when the controller is loaded
+   */
   const initialize = () => $scope.social.networks = filterNetworks()
 
-  // #
-  // Filter social network or website that are associated with the profile of the user provided in promise
-  // and return the filtered networks
-  // @return {Array}
-  // #
+  /**
+   * Filter social network or website that are associated with the profile of the user provided in promise
+   * and return the filtered networks
+   * @return {Array}
+   */
   var filterNetworks = function () {
     const networks = []
     for (let network of Array.from(SocialNetworks)) {
@@ -307,7 +307,7 @@ Application.Controllers.controller('ShowProfileController', ['$scope', 'memberPr
     return networks
   }
 
-  // # !!! MUST BE CALLED AT THE END of the controller
+  // !!! MUST BE CALLED AT THE END of the controller
   return initialize()
 }
 

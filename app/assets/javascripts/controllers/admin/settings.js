@@ -16,13 +16,13 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
   function ($scope, Setting, growl, settingsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
     /* PUBLIC SCOPE */
 
-    // # timepickers steps configuration
+    // timepickers steps configuration
     $scope.timepicker = {
       hstep: 1,
       mstep: 15
     }
 
-    // # API URL where the upload forms will be posted
+    // API URL where the upload forms will be posted
     $scope.actionUrl = {
       cgu: '/api/custom_assets',
       cgv: '/api/custom_assets',
@@ -32,7 +32,7 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       profileImage: '/api/custom_assets'
     }
 
-    // # Form actions on the above URL
+    // Form actions on the above URL
     $scope.methods = {
       cgu: 'post',
       cgv: 'post',
@@ -42,13 +42,13 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       profileImage: 'post'
     }
 
-    // # Are we uploading the files currently (if so, display the loader)
+    // Are we uploading the files currently (if so, display the loader)
     $scope.loader = {
       cgu: false,
       cgv: false
     }
 
-    // # various parametrable settings
+    // various parametrable settings
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name }
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title }
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body }
@@ -119,11 +119,11 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       value: (settingsPromise.display_name_enable === 'true')
     }
 
-    // #
-    // For use with 'ng-class', returns the CSS class name for the uploads previews.
-    // The preview may show a placeholder or the content of the file depending on the upload state.
-    // @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
-    // #
+    /**
+     * For use with 'ng-class', returns the CSS class name for the uploads previews.
+     * The preview may show a placeholder or the content of the file depending on the upload state.
+     * @param v {*} any attribute, will be tested for truthiness (see JS evaluation rules)
+     */
     $scope.fileinputClass = function (v) {
       if (v) {
         return 'fileinput-exists'
@@ -132,10 +132,10 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       }
     }
 
-    // #
-    // Callback to save the setting value to the database
-    // @param setting {{value:*, name:string}} note that the value will be stringified
-    // #
+    /**
+     * Callback to save the setting value to the database
+     * @param setting {{value:*, name:string}} note that the value will be stringified
+     */
     $scope.save = function (setting) {
       // trim empty html
       let value
@@ -157,12 +157,12 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
         , error => console.log(error))
     }
 
-    // #
-    // For use with ngUpload (https://github.com/twilson63/ngUpload).
-    // Intended to be the callback when the upload is done: Any raised error will be displayed in a growl
-    // message. If everything goes fine, a growl success message is shown.
-    // @param content {Object} JSON - The upload's result
-    // #
+    /**
+     * For use with ngUpload (https://github.com/twilson63/ngUpload).
+     * Intended to be the callback when the upload is done: Any raised error will be displayed in a growl
+     * message. If everything goes fine, a growl success message is shown.
+     * @param content {Object} JSON - The upload's result
+     */
     $scope.submited = function (content) {
       if ((content.custom_asset == null)) {
         $scope.alerts = []
@@ -201,16 +201,16 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       }
     }
 
-    // #
-    // @param target {String} 'cgu' | 'cgv'
-    // #
+    /**
+     * @param target {String} 'cgu' | 'cgv'
+     */
     $scope.addLoader = target => $scope.loader[target] = true
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       // set the authenticity tokens in the forms
       CSRF.setMetaTags()

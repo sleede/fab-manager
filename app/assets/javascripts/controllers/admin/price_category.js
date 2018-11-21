@@ -11,22 +11,22 @@
  */
 'use strict'
 
-// #
-// Controller used in price category creation/edition form dialog
-// #
+/**
+ * Controller used in price category creation/edition form dialog
+ */
 Application.Controllers.controller('PriceCategoryController', ['$scope', '$uibModalInstance', 'category',
   function ($scope, $uibModalInstance, category) {
-    // # Price category to edit/empty object for new category
+    // Price category to edit/empty object for new category
     $scope.category = category
 
-    // #
-    // Callback for form validation
-    // #
+    /**
+     * Callback for form validation
+     */
     $scope.ok = () => $uibModalInstance.close($scope.category)
 
-    // #
-    // Do not validate the modifications, hide the modal
-    // #
+    /**
+     * Do not validate the modifications, hide the modal
+     */
     return $scope.cancel = () => $uibModalInstance.dismiss('cancel')
   }
 ])

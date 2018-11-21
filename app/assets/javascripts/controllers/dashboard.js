@@ -13,10 +13,10 @@
 'use strict'
 
 Application.Controllers.controller('DashboardController', ['$scope', 'memberPromise', 'SocialNetworks', function ($scope, memberPromise, SocialNetworks) {
-  // # Current user's profile
+  // Current user's profile
   $scope.user = memberPromise
 
-  // # List of social networks associated with this user and toggle 'show all' state
+  // List of social networks associated with this user and toggle 'show all' state
   $scope.social = {
     showAllLinks: false,
     networks: SocialNetworks
@@ -24,16 +24,16 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
 
   /* PRIVATE SCOPE */
 
-  // #
-  // Kind of constructor: these actions will be realized first when the controller is loaded
-  // #
+  /**
+   * Kind of constructor: these actions will be realized first when the controller is loaded
+   */
   const initialize = () => $scope.social.networks = filterNetworks()
 
-  // #
-  // Filter social network or website that are associated with the profile of the user provided in promise
-  // and return the filtered networks
-  // @return {Array}
-  // #
+  /**
+   * Filter social network or website that are associated with the profile of the user provided in promise
+   * and return the filtered networks
+   * @return {Array}
+   */
   var filterNetworks = function () {
     const networks = []
     for (let network of Array.from(SocialNetworks)) {
@@ -44,7 +44,7 @@ Application.Controllers.controller('DashboardController', ['$scope', 'memberProm
     return networks
   }
 
-  // # !!! MUST BE CALLED AT THE END of the controller
+  // !!! MUST BE CALLED AT THE END of the controller
   return initialize()
 }
 

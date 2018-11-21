@@ -14,7 +14,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
   function ($scope, clientsPromise, growl, OpenAPIClient, dialogs, _t) {
   /* PUBLIC SCOPE */
 
-    // # clients list
+    // clients list
     $scope.clients = clientsPromise
     $scope.order = null
     $scope.clientFormVisible = false
@@ -24,7 +24,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
 
     // Change the order criterion to the one provided
     // @param orderBy {string} ordering criterion
-    // #
+    // 
     $scope.setOrder = function (orderBy) {
       if ($scope.order === orderBy) {
         return $scope.order = `-${orderBy}`

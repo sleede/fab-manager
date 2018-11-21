@@ -21,47 +21,47 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
   function ($scope, $state, $rootScope, es, Statistics, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
-    // # height of the HTML/SVG charts elements in pixels
+    // height of the HTML/SVG charts elements in pixels
     const CHART_HEIGHT = 500
 
-    // # Label of the charts' horizontal axes
+    // Label of the charts' horizontal axes
     const X_AXIS_LABEL = _t('date')
 
-    // # Label of the charts' vertical axes
+    // Label of the charts' vertical axes
     const Y_AXIS_LABEL = _t('number')
 
-    // # Colors for the line charts. Each new line uses the next color in this array
+    // Colors for the line charts. Each new line uses the next color in this array
     const CHART_COLORS = ['#b35a94', '#1c5794', '#00b49e', '#6fac48', '#ebcf4a', '#fd7e33', '#ca3436', '#a26e3a']
 
     /* PUBLIC SCOPE */
 
-    // # ui-view transitions optimization: if true, the charts will never be refreshed
+    // ui-view transitions optimization: if true, the charts will never be refreshed
     $scope.preventRefresh = false
 
-    // # statistics structure in elasticSearch
+    // statistics structure in elasticSearch
     $scope.statistics = []
 
-    // # statistics data recovered from elasticSearch
+    // statistics data recovered from elasticSearch
     $scope.data = null
 
-    // # default interval: one day
+    // default interval: one day
     $scope.display =
     { interval: 'week' }
 
-    // # active tab will be set here
+    // active tab will be set here
     $scope.selectedIndex = null
 
-    // # for palmares graphs, filters values are stored here
+    // for palmares graphs, filters values are stored here
     $scope.ranking = {
       sortCriterion: 'ca',
       groupCriterion: 'subType'
     }
 
-    // # default: we do not open the datepicker menu
+    // default: we do not open the datepicker menu
     $scope.datePicker =
     { show: false }
 
-    // # datePicker parameters for interval beginning
+    // datePicker parameters for interval beginning
     $scope.datePickerStart = {
       format: Fablab.uibDateFormat,
       opened: false, // default: datePicker is not shown
@@ -73,7 +73,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // # datePicker parameters for interval ending
+    // datePicker parameters for interval ending
     $scope.datePickerEnd = {
       format: Fablab.uibDateFormat,
       opened: false, // default: datePicker is not shown
@@ -85,23 +85,23 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // #
-    // Callback to open the datepicker (interval start)
-    // @param {Object} jQuery event object
-    // #
+    /**
+     * Callback to open the datepicker (interval start)
+     * @param {Object} jQuery event object
+     */
     $scope.toggleStartDatePicker = $event => toggleDatePicker($event, $scope.datePickerStart)
 
-    // #
-    // Callback to open the datepicker (interval end)
-    // @param {Object} jQuery event object
-    // #
+    /**
+     * Callback to open the datepicker (interval end)
+     * @param {Object} jQuery event object
+     */
     $scope.toggleEndDatePicker = $event => toggleDatePicker($event, $scope.datePickerEnd)
 
-    // #
-    // Callback called when the active tab is changed.
-    // Recover the current tab and store its value in $scope.selectedIndex
-    // @param tab {Object} elasticsearch statistic structure
-    // #
+    /**
+     * Callback called when the active tab is changed.
+     * Recover the current tab and store its value in $scope.selectedIndex
+     * @param tab {Object} elasticsearch statistic structure
+     */
     $scope.setActiveTab = function (tab) {
       $scope.selectedIndex = tab
       $scope.ranking.groupCriterion = 'subType'
@@ -113,9 +113,9 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return refreshChart()
     }
 
-    // #
-    // Callback to close the date-picking popup and refresh the results
-    // #
+    /**
+     * Callback to close the date-picking popup and refresh the results
+     */
     $scope.validateDateChange = function () {
       $scope.datePicker.show = false
       return refreshChart()
@@ -123,9 +123,9 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
     /* PRIVATE SCOPE */
 
-    // #
-    // Kind of constructor: these actions will be realized first when the controller is loaded
-    // #
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       Statistics.query(function (stats) {
         $scope.statistics = stats
@@ -148,20 +148,20 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       })
     }
 
-    // #
-    // Generic function to toggle a bootstrap datePicker
-    // @param $event {Object} jQuery event object
-    // @param datePicker {Object} settings object of the concerned datepicker. Must have an 'opened' property
-    // #
+    /**
+     * Generic function to toggle a bootstrap datePicker
+     * @param $event {Object} jQuery event object
+     * @param datePicker {Object} settings object of the concerned datepicker. Must have an 'opened' property
+     */
     var toggleDatePicker = function ($event, datePicker) {
       $event.preventDefault()
       $event.stopPropagation()
       return datePicker.opened = !datePicker.opened
     }
 
-    // #
-    // Query elasticSearch according to the current parameters and update the chart
-    // #
+    /**
+     * Query elasticSearch according to the current parameters and update the chart
+     */
     var refreshChart = function () {
       if ($scope.selectedIndex && !$scope.preventRefresh) {
         return query($scope.selectedIndex, function (aggregations, error) {
@@ -180,9 +180,9 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // #
-    // Callback used in NVD3 to print timestamps as literal dates on the X axis
-    // #
+    /**
+     * Callback used in NVD3 to print timestamps as literal dates on the X axis
+     */
     const xAxisTickFormatFunction = function (d, x, y) {
     /* WARNING !! These tests (typeof/instanceof) may become broken on nvd3 update */
       if ($scope.display.interval === 'day') {
@@ -209,10 +209,10 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // #
-    // Format aggregations as retuned by elasticSearch to an understandable format for NVD3
-    // @param aggs {Object} as returned by elasticsearch
-    // #
+    /**
+     * Format aggregations as retuned by elasticSearch to an understandable format for NVD3
+     * @param aggs {Object} as returned by elasticsearch
+     */
     var formatAggregations = function (aggs) {
       const format = {}
 
@@ -260,12 +260,12 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return format
     }
 
-    // #
-    // Format aggregations for ranking charts to an understandable format for NVD3
-    // @param aggs {Object} as returned by elasticsearch
-    // @param limit {number} limit the number of stats in the bar chart
-    // @param typeKey {String} field name witch results are grouped by
-    // #
+    /**
+     * Format aggregations for ranking charts to an understandable format for NVD3
+     * @param aggs {Object} as returned by elasticsearch
+     * @param limit {number} limit the number of stats in the bar chart
+     * @param typeKey {String} field name witch results are grouped by
+     */
     var formatRankingAggregations = function (aggs, limit, typeKey) {
       const format =
       { ranking: [] }
@@ -294,11 +294,11 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return format
     }
 
-    // #
-    // For BarCharts, return the label for a given bar
-    // @param key {string} raw value of the label
-    // @param typeKey {string} name of the field the results are grouped by
-    // #
+    /**
+     * For BarCharts, return the label for a given bar
+     * @param key {string} raw value of the label
+     * @param typeKey {string} name of the field the results are grouped by
+     */
     var getRankingLabel = function (key, typeKey) {
       if ($scope.selectedIndex) {
         if (typeKey === 'subType') {
@@ -323,13 +323,13 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // #
-    // Prepare the elasticSearch query for the stats matching the current controller's parameters
-    // @param index {{id:{number}, es_type_key:{string}, label:{string}, table:{boolean}, additional_fields:{Array},
-    //   types:{Array}, graph:{Object}}} elasticSearch type in stats index to query
-    // @param callback {function} function be to run after results were retrieved,
-    //   it will receive two parameters : results {Array}, error {String} (if any)
-    // #
+    /**
+     * Prepare the elasticSearch query for the stats matching the current controller's parameters
+     * @param index {{id:{number}, es_type_key:{string}, label:{string}, table:{boolean}, additional_fields:{Array},
+     *   types:{Array}, graph:{Object}}} elasticSearch type in stats index to query
+     * @param callback {function} function be to run after results were retrieved,
+     *   it will receive two parameters : results {Array}, error {String} (if any)
+     */
     var query = function (index, callback) {
     // invalid callback handeling
       if (typeof (callback) !== 'function') {
@@ -385,13 +385,13 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // #
-    // Run the elasticSearch query to retreive the /stats/type aggregations
-    // @param esType {String} elasticSearch document type (subscription|machine|training|...)
-    // @param statType {String} statistics type (year|month|hour|booking|...)
-    // @param callback {function} function be to run after results were retrieved,
-    //   it will receive two parameters : results {Array}, error {String} (if any)
-    // #
+    /**
+     * Run the elasticSearch query to retreive the /stats/type aggregations
+     * @param esType {String} elasticSearch document type (subscription|machine|training|...)
+     * @param statType {String} statistics type (year|month|hour|booking|...)
+     * @param callback {function} function be to run after results were retrieved,
+     *   it will receive two parameters : results {Array}, error {String} (if any)
+     */
     var queryElasticStats = function (esType, statType, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
@@ -423,14 +423,14 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       })
     }
 
-    // #
-    // For ranking displays, run the elasticSearch query to retreive the /stats/type aggregations
-    // @param esType {string} elasticSearch document type (subscription|machine|training|...)
-    // @param groupKey {string} statistics subtype or custom field
-    // @param sortKey {string} statistics type or 'ca'
-    // @param callback {function} function be to run after results were retrieved,
-    // it will receive two parameters : results {Array}, error {String} (if any)
-    // #
+    /**
+     * For ranking displays, run the elasticSearch query to retreive the /stats/type aggregations
+     * @param esType {string} elasticSearch document type (subscription|machine|training|...)
+     * @param groupKey {string} statistics subtype or custom field
+     * @param sortKey {string} statistics type or 'ca'
+     * @param callback {function} function be to run after results were retrieved,
+     * it will receive two parameters : results {Array}, error {String} (if any)
+     */
     var queryElasticRanking = function (esType, groupKey, sortKey, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
@@ -457,20 +457,20 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       })
     }
 
-    // #
-    // Parse a final elastic results bucket and return a D3 compatible object
-    // @param bucket {{key_as_string:{String}, key:{Number}, doc_count:{Number}, total:{{value:{Number}}}}} interval bucket
-    // #
+    /**
+     * Parse a final elastic results bucket and return a D3 compatible object
+     * @param bucket {{key_as_string:{String}, key:{Number}, doc_count:{Number}, total:{{value:{Number}}}}} interval bucket
+     */
     const parseElasticBucket = bucket => [ bucket.key, bucket.total.value ]
 
-    // #
-    // Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
-    // currently defined for data aggegations.
-    // @param type {String} statistics type (visit|rdv|rating|ca|plan|account|search|...)
-    // @param interval {String} statistics interval (year|quarter|month|week|day|hour|minute|second)
-    // @param intervalBegin {moment} statitics interval beginning (moment.js type)
-    // @param intervalEnd {moment} statitics interval ending (moment.js type)
-    // #
+    /**
+     * Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
+     * currently defined for data aggegations.
+     * @param type {String} statistics type (visit|rdv|rating|ca|plan|account|search|...)
+     * @param interval {String} statistics interval (year|quarter|month|week|day|hour|minute|second)
+     * @param intervalBegin {moment} statitics interval beginning (moment.js type)
+     * @param intervalEnd {moment} statitics interval ending (moment.js type)
+     */
     var buildElasticAggregationsQuery = function (type, interval, intervalBegin, intervalEnd) {
       const q = {
         'query': {
@@ -532,14 +532,14 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return q
     }
 
-    // #
-    // Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
-    // currently defined for data aggegations.
-    // @param groupKey {String} statistics subtype or custom field
-    // @param sortKey {String} statistics type or 'ca'
-    // @param intervalBegin {moment} statitics interval beginning (moment.js type)
-    // @param intervalEnd {moment} statitics interval ending (moment.js type)
-    // #
+    /**
+     * Build an object representing the content of the REST-JSON query to elasticSearch, based on the parameters
+     * currently defined for data aggegations.
+     * @param groupKey {String} statistics subtype or custom field
+     * @param sortKey {String} statistics type or 'ca'
+     * @param intervalBegin {moment} statitics interval beginning (moment.js type)
+     * @param intervalEnd {moment} statitics interval ending (moment.js type)
+     */
     var buildElasticAggregationsRankingQuery = function (groupKey, sortKey, intervalBegin, intervalEnd) {
       const q = {
         'query': {
@@ -603,12 +603,12 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return q
     }
 
-    // #
-    // Redraw the NDV3 chart using the provided data
-    // @param chart_type {String} stackedAreaChart|discreteBarChart|lineChart
-    // @param data {Array} array of NVD3 dataSources
-    // @param type {String} which chart to update (statistic type key)
-    // #
+    /**
+     * Redraw the NDV3 chart using the provided data
+     * @param chart_type {String} stackedAreaChart|discreteBarChart|lineChart
+     * @param data {Array} array of NVD3 dataSources
+     * @param type {String} which chart to update (statistic type key)
+     */
     var updateChart = function (chart_type, data, type) {
       const id = `#chart-${type} svg`
 
@@ -666,9 +666,9 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       })
     }
 
-    // #
-    // Given an NVD3 line chart axis, scale it to display ordinated dates, according to the given arguments
-    // #
+    /**
+     * Given an NVD3 line chart axis, scale it to display ordinated dates, according to the given arguments
+     */
     var setTimeScale = function (nvd3Axis, nvd3Scale, argsArray) {
       const scale = d3.time.scale()
 
@@ -681,9 +681,9 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       }
     }
 
-    // #
-    // Translate line chart data in dates row to bar chart data, one bar per type.
-    // #
+    /**
+     * Translate line chart data in dates row to bar chart data, one bar per type.
+     */
     var prepareDataForBarChart = function (data, type) {
       const newData = [{
         key: type,
@@ -703,15 +703,15 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return newData
     }
 
-    // #
-    // Sort the provided array, in the specified order, on the value returned by the callback.
-    // This is a stable-sorting algorithm implementation, ie. two call with the same array will return the same results
-    // orders, especially with equal values.
-    // @param array {Array} the array to sort
-    // @param order {string} 'ASC' or 'DESC'
-    // @param getValue {function} the callback which will return the value on which the sort will occurs
-    // @returns {Array}
-    // #
+    /**
+     * Sort the provided array, in the specified order, on the value returned by the callback.
+     * This is a stable-sorting algorithm implementation, ie. two call with the same array will return the same results
+     * orders, especially with equal values.
+     * @param array {Array} the array to sort
+     * @param order {string} 'ASC' or 'DESC'
+     * @param getValue {function} the callback which will return the value on which the sort will occurs
+     * @returns {Array}
+     */
     var stableSort = function (array, order, getValue) {
     // prepare sorting
       const keys_order = []
@@ -744,7 +744,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
       return result
     }
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])

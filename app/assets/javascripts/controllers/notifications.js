@@ -12,10 +12,10 @@
  */
 'use strict'
 
-// #
-// Controller used in notifications page
-// inherits $scope.$parent.notifications (global notifications state) from ApplicationController
-// #
+/**
+ * Controller used in notifications page
+ * inherits $scope.$parent.notifications (global notifications state) from ApplicationController
+ */
 Application.Controllers.controller('NotificationsController', ['$scope', 'Notification', function ($scope, Notification) {
   /* PRIVATE STATIC CONSTANTS */
 
@@ -24,30 +24,30 @@ Application.Controllers.controller('NotificationsController', ['$scope', 'Notifi
 
   /* PUBLIC SCOPE */
 
-  // # Array containg the archived notifications (already read)
+  // Array containg the archived notifications (already read)
   $scope.notificationsRead = []
 
-  // # Array containg the new notifications (not read)
+  // Array containg the new notifications (not read)
   $scope.notificationsUnread = []
 
-  // # Total number of notifications for the current user
+  // Total number of notifications for the current user
   $scope.total = 0
 
-  // # Total number of unread notifications for the current user
+  // Total number of unread notifications for the current user
   $scope.totalUnread = 0
 
-  // # By default, the pagination mode is activated to limit the page size
+  // By default, the pagination mode is activated to limit the page size
   $scope.paginateActive = true
 
-  // # The currently displayed page number
+  // The currently displayed page number
   $scope.page = 1
 
-  // #
-  // Mark the provided notification as read, updating its status on the server and moving it
-  // to the already read notifications list.
-  // @param notification {{id:number}} the notification to mark as read
-  // @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
-  // #
+  /**
+   * Mark the provided notification as read, updating its status on the server and moving it
+   * to the already read notifications list.
+   * @param notification {{id:number}} the notification to mark as read
+   * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
+   */
   $scope.markAsRead = function (notification, e) {
     e.preventDefault()
     return Notification.update({ id: notification.id }, {
@@ -66,9 +66,9 @@ Application.Controllers.controller('NotificationsController', ['$scope', 'Notifi
     })
   }
 
-  // #
-  // Mark every unread notifications as read and move them for the unread list to to read array.
-  // #
+  /**
+   * Mark every unread notifications as read and move them for the unread list to to read array.
+   */
   $scope.markAllAsRead = () =>
     Notification.update({}
       , function () { // success
@@ -84,10 +84,10 @@ Application.Controllers.controller('NotificationsController', ['$scope', 'Notifi
         return $scope.totalUnread = 0
       })
 
-  // #
-  // Request the server to retrieve the next notifications and add them
-  // to their corresponding notifications list (read or unread).
-  // #
+  /**
+   * Request the server to retrieve the next notifications and add them
+   * to their corresponding notifications list (read or unread).
+   */
   $scope.addMoreNotifications = function () {
     Notification.query({ page: $scope.page }, function (notifications) {
       $scope.total = notifications.totals.total
@@ -107,12 +107,12 @@ Application.Controllers.controller('NotificationsController', ['$scope', 'Notifi
 
   /* PRIVATE SCOPE */
 
-  // #
-  // Kind of constructor: these actions will be realized first when the controller is loaded
-  // #
+  /**
+   * Kind of constructor: these actions will be realized first when the controller is loaded
+   */
   const initialize = () => $scope.addMoreNotifications()
 
-  // # !!! MUST BE CALLED AT THE END of the controller
+  // !!! MUST BE CALLED AT THE END of the controller
   return initialize()
 }
 ])

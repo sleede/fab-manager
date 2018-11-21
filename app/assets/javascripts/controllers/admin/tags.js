@@ -12,14 +12,14 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 Application.Controllers.controller('TagsController', ['$scope', 'tagsPromise', 'Tag', 'growl', '_t', function ($scope, tagsPromise, Tag, growl, _t) {
-  // # List of users's tags
+  // List of users's tags
   $scope.tags = tagsPromise
 
-  // #
-  // Removes the newly inserted but not saved tag / Cancel the current tag modification
-  // @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
-  // @param index {number} tag index in the $scope.tags array
-  // #
+  /**
+   * Removes the newly inserted but not saved tag / Cancel the current tag modification
+   * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
+   * @param index {number} tag index in the $scope.tags array
+   */
   $scope.cancelTag = function (rowform, index) {
     if ($scope.tags[index].id != null) {
       return rowform.$cancel()
@@ -28,20 +28,20 @@ Application.Controllers.controller('TagsController', ['$scope', 'tagsPromise', '
     }
   }
 
-  // #
-  // Creates a new empty entry in the $scope.tags array
-  // #
+  /**
+   * Creates a new empty entry in the $scope.tags array
+   */
   $scope.addTag = function () {
     $scope.inserted =
       { name: '' }
     return $scope.tags.push($scope.inserted)
   }
 
-  // #
-  // Saves a new tag / Update an existing tag to the server (form validation callback)
-  // @param data {Object} tag name
-  // @param [data] {number} tag id, in case of update
-  // #
+  /**
+   * Saves a new tag / Update an existing tag to the server (form validation callback)
+   * @param data {Object} tag name
+   * @param [data] {number} tag id, in case of update
+   */
   $scope.saveTag = function (data, id) {
     if (id != null) {
       return Tag.update({ id }, { tag: data }, response => growl.success(_t('changes_successfully_saved'))
@@ -58,10 +58,10 @@ Application.Controllers.controller('TagsController', ['$scope', 'tagsPromise', '
     }
   }
 
-  // #
-  // Deletes the tag at the specified index
-  // @param index {number} tag index in the $scope.tags array
-  // #
+  /**
+   * Deletes the tag at the specified index
+   * @param index {number} tag index in the $scope.tags array
+   */
   return $scope.removeTag = index =>
     // TODO add confirmation : les utilisateurs seront déasociés
     Tag.delete({ id: $scope.tags[index].id }, function (resp) {

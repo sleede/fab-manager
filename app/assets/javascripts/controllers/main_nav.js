@@ -10,11 +10,11 @@
  */
 'use strict'
 
-// #
-// Navigation controller. List the links availables in the left navigation pane and their icon.
-// #
+/**
+ * Navigation controller. List the links availables in the left navigation pane and their icon.
+ */
 Application.Controllers.controller('MainNavController', ['$scope', '$location', '$cookies', function ($scope, $location, $cookies) {
-  // # Common links (public application)
+  // Common links (public application)
   $scope.navLinks = [
     {
       state: 'app.public.home',

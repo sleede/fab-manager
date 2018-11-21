@@ -148,9 +148,9 @@ Application.Filters.filter('humanize', [ () =>
 
 ])
 
-// #
-// This filter will convert ASCII carriage-return character to the HTML break-line tag
-// #
+/**
+ * This filter will convert ASCII carriage-return character to the HTML break-line tag
+ */
 Application.Filters.filter('breakFilter', [ () =>
   function (text) {
     if (text != null) {
@@ -160,9 +160,9 @@ Application.Filters.filter('breakFilter', [ () =>
 
 ])
 
-// #
-// This filter will take a HTML text as input and will return it without the html tags
-// #
+/**
+ * This filter will take a HTML text as input and will return it without the html tags
+ */
 Application.Filters.filter('simpleText', [ () =>
   function (text) {
     if (text != null) {

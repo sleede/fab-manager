@@ -15,10 +15,10 @@ Application.Controllers.controller('WalletController', ['$scope', 'walletPromise
   function ($scope, walletPromise, transactionsPromise) {
   /* PUBLIC SCOPE */
 
-  // # current user wallet
+  // current user wallet
   $scope.wallet = walletPromise
 
-  // # current wallet transactions
+  // current wallet transactions
   return $scope.transactions = transactionsPromise
 }
 ])

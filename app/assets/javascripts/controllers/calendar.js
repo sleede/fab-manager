@@ -12,9 +12,9 @@
  */
 'use strict'
 
-// #
-// Controller used in the public calendar global
-// #
+/**
+ * Controller used in the public calendar global
+ */
 
 Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise',
   function ($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise) {
@@ -24,24 +24,24 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     trainingsPromise.forEach(t => t.checked = true)
     spacesPromise.forEach(s => s.checked = true)
 
-    // # check all formation/machine is select in filter
+    // check all formation/machine is select in filter
     const isSelectAll = (type, scope) => scope[type].length === scope[type].filter(t => t.checked).length
 
     /* PUBLIC SCOPE */
 
-    // # List of trainings
+    // List of trainings
     $scope.trainings = trainingsPromise.filter(t => !t.disabled)
 
-    // # List of machines
+    // List of machines
     $scope.machines = machinesPromise.filter(t => !t.disabled)
 
-    // # List of spaces
+    // List of spaces
     $scope.spaces = spacesPromise.filter(t => !t.disabled)
 
-    // # add availabilities source to event sources
+    // add availabilities source to event sources
     $scope.eventSources = []
 
-    // # filter availabilities if have change
+    // filter availabilities if have change
     $scope.filterAvailabilities = function (filter, scope) {
       if (!scope) { scope = $scope }
       scope.filter = ($scope.filter = {
@@ -54,7 +54,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       return $scope.calendarConfig.events = availabilitySourceUrl()
     }
 
-    // # a variable for formation/machine/event/dispo checkbox is or not checked
+    // a variable for formation/machine/event/dispo checkbox is or not checked
     $scope.filter = {
       trainings: isSelectAll('trainings', $scope),
       machines: isSelectAll('machines', $scope),
@@ -63,7 +63,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       dispo: true
     }
 
-    // # toggle to select all formation/machine
+    // toggle to select all formation/machine
     $scope.toggleFilter = function (type, filter) {
       $scope[type].forEach(t => t.checked = filter[type])
       return $scope.filterAvailabilities(filter, $scope)
@@ -115,7 +115,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     /* PRIVATE SCOPE */
 
     const calendarEventClickCb = function (event, jsEvent, view) {
-    // # current calendar object
+    // current calendar object
       const { calendar } = uiCalendarConfig.calendars
       if (event.available_type === 'machines') {
         currentMachineEvent = event
@@ -137,8 +137,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       }
     }
 
-    // # agendaDay view: disable slotEventOverlap
-    // # agendaWeek view: enable slotEventOverlap
+    // agendaDay view: disable slotEventOverlap
+    // agendaWeek view: enable slotEventOverlap
     const toggleSlotEventOverlap = function (view) {
     // set defaultView, because when we change slotEventOverlap
     // ui-calendar will trigger rerender calendar
@@ -156,7 +156,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       }
     }
 
-    // # function is called when calendar view is rendered or changed
+    // function is called when calendar view is rendered or changed
     const viewRenderCb = function (view, element) {
       toggleSlotEventOverlap(view)
       if (view.type === 'agendaDay') {
@@ -185,7 +185,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     var availabilitySourceUrl = () => `/api/availabilities/public?${$.param(getFilter())}`
 
     const initialize = () =>
-    // # fullCalendar (v2) configuration
+    // fullCalendar (v2) configuration
       $scope.calendarConfig = CalendarConfig({
         events: availabilitySourceUrl(),
         slotEventOverlap: true,
@@ -208,7 +208,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         }
       })
 
-    // # !!! MUST BE CALLED AT THE END of the controller
+    // !!! MUST BE CALLED AT THE END of the controller
     return initialize()
   }
 ])
