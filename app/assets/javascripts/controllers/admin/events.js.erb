@@ -58,8 +58,8 @@ class EventsController {
     $scope.submited = function (content) {
       if ((content.id == null)) {
         $scope.alerts = []
-        angular.forEach(content, function(v, k) {
-          angular.forEach(v, function(err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }) })
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }) })
         })
       } else {
         $state.go('app.public.events_list')
@@ -69,7 +69,7 @@ class EventsController {
     /**
      * Changes the user's view to the events list page
      */
-    $scope.cancel = function() { $state.go('app.public.events_list') }
+    $scope.cancel = function () { $state.go('app.public.events_list') }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -87,7 +87,7 @@ class EventsController {
     /**
      * This will create a single new empty entry into the event's attachements list.
      */
-    $scope.addFile = function() { $scope.event.event_files_attributes.push({}) }
+    $scope.addFile = function () { $scope.event.event_files_attributes.push({}) }
 
     /**
      * This will remove the given file from the event's attachements list. If the file was previously uploaded
@@ -134,7 +134,7 @@ class EventsController {
     /**
      * Initialize a new price item in the additional prices list
      */
-    $scope.addPrice = function() {
+    $scope.addPrice = function () {
       $scope.event.prices.push({
         category: null,
         amount: null
@@ -217,7 +217,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
       if (id != null) {
         return getModel(model)[0].update({ id }, data)
       } else {
-        return getModel(model)[0].save(data, function(resp) { getModel(model)[1][getModel(model)[1].length - 1].id = resp.id })
+        return getModel(model)[0].save(data, function (resp) { getModel(model)[1][getModel(model)[1].length - 1].id = resp.id })
       }
     }
 
@@ -246,8 +246,8 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         }
       }
       , function () { // delete confirmed
-        getModel(model)[0].delete(getModel(model)[1][index], null, function() { getModel(model)[1].splice(index, 1) }
-          , function() { growl.error(_t('unable_to_delete_an_error_occured')) })
+        getModel(model)[0].delete(getModel(model)[1][index], null, function () { getModel(model)[1].splice(index, 1) }
+          , function () { growl.error(_t('unable_to_delete_an_error_occured')) })
       })
     }
 
@@ -281,23 +281,23 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      * Open a modal dialog allowing the definition of a new price category.
      * Save it once filled and handle the result.
      */
-    $scope.newPriceCategory = function() {
+    $scope.newPriceCategory = function () {
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/events/price_form.html" %>',
         size: 'md',
         resolve: {
           category () { return {} }
         },
-        controller: 'PriceCategoryController' }).result['finally'](null).then(function(p_cat) {
-          // save the price category to the API
-          PriceCategory.save(p_cat, function (cat) {
-            $scope.priceCategories.push(cat)
-            return growl.success(_t('price_category_successfully_created'))
-          }
-          , function (err) {
-            growl.error(_t('unable_to_add_the_price_category_check_name_already_used'))
-            return console.error(err)
-          })
+        controller: 'PriceCategoryController' }).result['finally'](null).then(function (p_cat) {
+        // save the price category to the API
+        PriceCategory.save(p_cat, function (cat) {
+          $scope.priceCategories.push(cat)
+          return growl.success(_t('price_category_successfully_created'))
+        }
+        , function (err) {
+          growl.error(_t('unable_to_add_the_price_category_check_name_already_used'))
+          return console.error(err)
+        })
       })
     }
     /**
@@ -316,16 +316,16 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
           resolve: {
             category () { return $scope.priceCategories[index] }
           },
-          controller: 'PriceCategoryController' }).result['finally'](null).then(function(p_cat) {
-            // update the price category to the API
-            PriceCategory.update({id}, {price_category: p_cat}, function (cat) {
-              $scope.priceCategories[index] = cat
-              return growl.success(_t('price_category_successfully_updated'))
-            }
-            , function (err) {
-              growl.error(_t('unable_to_update_the_price_category'))
-              return console.error(err)
-            })
+          controller: 'PriceCategoryController' }).result['finally'](null).then(function (p_cat) {
+          // update the price category to the API
+          PriceCategory.update({ id }, { price_category: p_cat }, function (cat) {
+            $scope.priceCategories[index] = cat
+            return growl.success(_t('price_category_successfully_updated'))
+          }
+          , function (err) {
+            growl.error(_t('unable_to_update_the_price_category'))
+            return console.error(err)
+          })
         })
       }
     }
@@ -352,14 +352,14 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
               }
             }
           },
-          function() { // delete confirmed
+          function () { // delete confirmed
             PriceCategory.remove(
-              {id},
+              { id },
               function () { // successfully deleted
                 growl.success(_t('price_category_successfully_deleted'))
                 $scope.priceCategories.splice(index, 1)
               },
-              function() { growl.error(_t('price_category_deletion_failed')) }
+              function () { growl.error(_t('price_category_deletion_failed')) }
             )
           }
         )
@@ -383,7 +383,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function() { paginationCheck(eventsPromise, $scope.events) }
+    const initialize = function () { paginationCheck(eventsPromise, $scope.events) }
 
     /**
      * Check if all events are already displayed OR if the button 'load more events'

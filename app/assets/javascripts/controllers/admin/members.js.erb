@@ -38,7 +38,7 @@
 class MembersController {
   constructor ($scope, $state, Group, Training) {
     // Retrieve the profiles groups (eg. students ...)
-    Group.query(function(groups) { $scope.groups = groups.filter(function(g) { return (g.slug !== 'admins') && !g.disabled }) })
+    Group.query(function (groups) { $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled }) })
 
     // Retrieve the list of available trainings
     Training.query().$promise.then(function (data) {
@@ -106,7 +106,7 @@ class MembersController {
     /**
      * Changes the admin's view to the members list page
      */
-    $scope.cancel = function() { $state.go('app.admin.members') }
+    $scope.cancel = function () { $state.go('app.admin.members') }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -259,7 +259,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      * @returns {Number} index of the requested admin, in the provided array
      */
     var findAdminIdxById = function (admins, id) {
-      return (admins.map(function(admin) { return admin.id })).indexOf(id)
+      return (admins.map(function (admin) { return admin.id })).indexOf(id)
     }
 
     /**
@@ -331,7 +331,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     } else {
       Plan.query({ group_id: $scope.user.group_id }, function (plans) {
         $scope.plans = plans
-        return Array.from($scope.plans).map( function(plan) {
+        return Array.from($scope.plans).map(function (plan) {
           return (plan.nameToDisplay = $filter('humanReadablePlanName')(plan))
         })
       })
@@ -399,7 +399,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
         }]
       })
       // once the form was validated successfully ...
-      return modalInstance.result.then(function(subscription) { $scope.subscription.expired_at = subscription.expired_at })
+      return modalInstance.result.then(function (subscription) { $scope.subscription.expired_at = subscription.expired_at })
     }
 
     /**
@@ -427,7 +427,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
            * will be included.
            * @returns {String}
            */
-          $scope.humanReadablePlanName = function(plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}` }
+          $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}` }
 
           /**
            * Modal dialog validation callback
@@ -441,18 +441,18 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
             }
             , function (error) {
               growl.error(_t('a_problem_occurred_while_taking_the_subscription'))
-              console.error(error);
+              console.error(error)
             })
           }
 
           /**
            * Modal dialog cancellation callback
            */
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }]
       })
       // once the form was validated succesfully ...
-      return modalInstance.result.then(function(subscription) { $scope.subscription = subscription })
+      return modalInstance.result.then(function (subscription) { $scope.subscription = subscription })
     }
 
     $scope.createWalletCreditModal = function (user, wallet) {
@@ -490,7 +490,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           /**
            * Modal dialog validation callback
            */
-          $scope.ok = function() {
+          $scope.ok = function () {
             Wallet.credit(
               { id: wallet.id },
               {
@@ -503,8 +503,8 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
                 growl.success(_t('wallet_credit_successfully'))
                 return $uibModalInstance.close(_wallet)
               },
-              function(error) {
-                growl.error(_t('a_problem_occurred_for_wallet_credit'));
+              function (error) {
+                growl.error(_t('a_problem_occurred_for_wallet_credit'))
                 console.error(error)
               }
             )
@@ -513,7 +513,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           /**
            * Modal dialog cancellation callback
            */
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }
         ] })
       // once the form was validated succesfully ...
@@ -625,17 +625,17 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
    * Shows the birth day datepicker
    * @param $event {Object} jQuery event object
    */
-  $scope.openDatePicker = function($event) { $scope.datePicker.opened = true }
+  $scope.openDatePicker = function ($event) { $scope.datePicker.opened = true }
 
   /**
    * Send the new admin, currently stored in $scope.admin, to the server for database saving
    */
-  $scope.saveAdmin = function() {
+  $scope.saveAdmin = function () {
     Admin.save(
       {},
       { admin: $scope.admin },
       function () {
-        growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', {GENDER: getGender($scope.admin)}, 'messageformat'))
+        growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }, 'messageformat'))
         return $state.go('app.admin.members')
       }
       , function (error) {

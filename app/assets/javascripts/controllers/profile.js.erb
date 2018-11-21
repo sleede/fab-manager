@@ -114,19 +114,19 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
      */
     $scope.registerAuthToken = function () {
       Member.merge({ id: $rootScope.currentUser.id }, { user: { auth_token: $scope.user.auth_token } }, function (user) {
-          $scope.user = user
-          Auth._currentUser = user
-          $rootScope.currentUser = user
-          $state.go('app.public.home')
+        $scope.user = user
+        Auth._currentUser = user
+        $rootScope.currentUser = user
+        $state.go('app.public.home')
+      }
+      , function (err) {
+        if (err.data.error) {
+          growl.error(err.data.error)
+        } else {
+          growl.error(_t('an_unexpected_error_occurred_check_your_authentication_code'))
+          console.error(err)
         }
-        , function (err) {
-          if (err.data.error) {
-            growl.error(err.data.error)
-          } else {
-            growl.error(_t('an_unexpected_error_occurred_check_your_authentication_code'))
-            console.error(err)
-          }
-        })
+      })
     }
 
     /**
@@ -209,7 +209,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
       $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate()
 
       // bind fields protection with sso fields
-      angular.forEach(activeProviderPromise.mapping, function (map) { $scope.preventField[map] = true; })
+      angular.forEach(activeProviderPromise.mapping, function (map) { $scope.preventField[map] = true })
     }
 
     // !!! MUST BE CALLED AT THE END of the controller

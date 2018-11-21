@@ -33,7 +33,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
 
     // List of groups (eg. normal, student ...)
     $scope.groups = groups.filter(function (g) { return g.slug !== 'admins' })
-    $scope.enabledGroups = groups.filter(function(g) { return (g.slug !== 'admins') && !g.disabled })
+    $scope.enabledGroups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled })
 
     // Associate free machine hours with subscriptions
     $scope.machineCredits = machineCreditsPromise
@@ -154,8 +154,8 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         { id: planId },
         { training_credit_nb: newdata.training_credits }
         , angular.noop() // do nothing in case of success
-        , function(error) {
-          growl.error(_t('pricing.an_error_occurred_while_saving_the_number_of_credits'));
+        , function (error) {
+          growl.error(_t('pricing.an_error_occurred_while_saving_the_number_of_credits'))
           console.error(error)
         }
       )
@@ -175,7 +175,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
                       return $scope.trainingCreditsGroups[planId].splice($scope.trainingCreditsGroups[planId].indexOf(tc.id), 1)
                     }
                     , function (error) {
-                      growl.error(_t('pricing.an_error_occurred_while_deleting_credit_with_the_TRAINING', { TRAINING: tc.creditable.name }));
+                      growl.error(_t('pricing.an_error_occurred_while_deleting_credit_with_the_TRAINING', { TRAINING: tc.creditable.name }))
                       console.error(error)
                     })
                 } else {
@@ -214,7 +214,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      * Cancel the current training credit modification
      * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
      */
-    $scope.cancelTrainingCredit = function(rowform) { rowform.$cancel() }
+    $scope.cancelTrainingCredit = function (rowform) { rowform.$cancel() }
 
     /**
      * Create a new empty entry in the $scope.machineCredits array
@@ -289,7 +289,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
 
       if (id != null) {
-        return Credit.update({ id }, { credit: data }, function() { growl.success(_t('pricing.changes_have_been_successfully_saved')) })
+        return Credit.update({ id }, { credit: data }, function () { growl.success(_t('pricing.changes_have_been_successfully_saved')) })
       } else {
         data.creditable_type = 'Machine'
         return Credit.save(
@@ -299,9 +299,9 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             return growl.success(_t('pricing.credit_was_successfully_saved'))
           }
           , function (err) {
-            $scope.machineCredits.pop();
-            growl.error(_t('pricing.error_creating_credit'));
-            console.error(err);
+            $scope.machineCredits.pop()
+            growl.error(_t('pricing.error_creating_credit'))
+            console.error(err)
           })
       }
     }
@@ -359,7 +359,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
 
       if (id != null) {
-        return Credit.update({ id }, { credit: data }, function() { growl.success(_t('pricing.changes_have_been_successfully_saved')) })
+        return Credit.update({ id }, { credit: data }, function () { growl.success(_t('pricing.changes_have_been_successfully_saved')) })
       } else {
         data.creditable_type = 'Space'
         return Credit.save(
@@ -488,7 +488,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      * will be included.
      * @returns {String}
      */
-    $scope.humanReadablePlanName = function(plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}` }
+    $scope.humanReadablePlanName = function (plan, groups, short) { return `${$filter('humanReadablePlanName')(plan, groups, short)}` }
 
     /**
      * Delete a coupon from the server's database and, in case of success, from the list in memory
@@ -510,7 +510,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             }
           }
         }
-        , function() {
+        , function () {
         // the admin has confirmed, delete the coupon
           Coupon.delete({ id }, function (res) {
             growl.success(_t('coupon_was_successfully_deleted'))
@@ -533,7 +533,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      * Open a modal allowing to select an user and send him the details of the provided coupon
      * @param coupon {Object} The coupon to send
      */
-    $scope.sendCouponToUser = function(coupon) {
+    $scope.sendCouponToUser = function (coupon) {
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/pricing/sendCoupon.html" %>',
         resolve: {
@@ -549,18 +549,18 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
           $scope.coupon = coupon
 
           // Callback to validate sending of the coupon
-          $scope.ok = function() {
+          $scope.ok = function () {
             Coupon.send({ coupon_code: coupon.code, user_id: $scope.ctrl.member.id }, function (res) {
               growl.success(_t('pricing.coupon_successfully_sent_to_USER', { USER: $scope.ctrl.member.name }))
               return $uibModalInstance.close({ user_id: $scope.ctrl.member.id })
             }
-            , function(err) {
+            , function (err) {
               growl.error(_t('pricing.an_error_occurred_unable_to_send_the_coupon'))
               console.error(err)
             })
           }
           // Callback to close the modal and cancel the sending process
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }]
       })
     }
@@ -574,7 +574,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       $scope.trainingCreditsGroups = groupCreditsByPlan($scope.trainingCredits)
 
       // adds empty array for plan which hasn't any credits yet
-      return (function() {
+      return (function () {
         const result = []
         for (let plan of Array.from($scope.plans)) {
           if ($scope.trainingCreditsGroups[plan.id] == null) {

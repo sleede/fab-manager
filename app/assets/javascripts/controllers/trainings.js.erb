@@ -20,18 +20,18 @@
 Application.Controllers.controller('TrainingsController', ['$scope', '$state', 'trainingsPromise',
   function ($scope, $state, trainingsPromise) {
   // List of trainings
-  $scope.trainings = trainingsPromise
+    $scope.trainings = trainingsPromise
 
-  /**
+    /**
    * Callback for the 'reserve' button
    */
-  $scope.reserveTraining = function (training, event) { $state.go('app.logged.trainings_reserve', { id: training.slug }) }
+    $scope.reserveTraining = function (training, event) { $state.go('app.logged.trainings_reserve', { id: training.slug }) }
 
-  /**
+    /**
    * Callback for the 'show' button
    */
-  $scope.showTraining = function (training) { $state.go('app.public.training_show', { id: training.slug }) }
-}])
+    $scope.showTraining = function (training) { $state.go('app.public.training_show', { id: training.slug }) }
+  }])
 
 /**
  * Public view of a specific training
@@ -39,51 +39,51 @@ Application.Controllers.controller('TrainingsController', ['$scope', '$state', '
 Application.Controllers.controller('ShowTrainingController', ['$scope', '$state', 'trainingPromise', 'growl', '_t', 'dialogs',
   function ($scope, $state, trainingPromise, growl, _t, dialogs) {
   // Current training
-  $scope.training = trainingPromise
+    $scope.training = trainingPromise
 
-  /**
+    /**
    * Callback to delete the current training (admins only)
    */
-  $scope.delete = function (training) {
+    $scope.delete = function (training) {
     // check the permissions
-    if ($scope.currentUser.role !== 'admin') {
-      console.error(_t('unauthorized_operation'))
-    } else {
-      dialogs.confirm(
-        {
-          resolve: {
-            object () {
-              return {
-                title: _t('confirmation_required'),
-                msg: _t('do_you_really_want_to_delete_this_training')
+      if ($scope.currentUser.role !== 'admin') {
+        console.error(_t('unauthorized_operation'))
+      } else {
+        dialogs.confirm(
+          {
+            resolve: {
+              object () {
+                return {
+                  title: _t('confirmation_required'),
+                  msg: _t('do_you_really_want_to_delete_this_training')
+                }
               }
             }
-          }
-        },
-        function() { // deletion confirmed
+          },
+          function () { // deletion confirmed
           // delete the training then redirect to the trainings listing
-          training.$delete(
-            function() { $state.go('app.public.trainings_list') },
-            function (error) {
-              growl.warning(_t('the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users'));
-              console.error(error);
-            }
-          )
-        }
-      )
+            training.$delete(
+              function () { $state.go('app.public.trainings_list') },
+              function (error) {
+                growl.warning(_t('the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users'))
+                console.error(error)
+              }
+            )
+          }
+        )
+      }
     }
-  }
 
-  /**
+    /**
    * Callback for the 'reserve' button
    */
-  $scope.reserveTraining = function (training, event) { $state.go('app.logged.trainings_reserve', { id: training.id }) }
+    $scope.reserveTraining = function (training, event) { $state.go('app.logged.trainings_reserve', { id: training.id }) }
 
-  /**
+    /**
    * Revert view to the full list of trainings ("<-" button)
    */
-  $scope.cancel = function (event) { $state.go('app.public.trainings_list') }
-}])
+    $scope.cancel = function (event) { $state.go('app.public.trainings_list') }
+  }])
 
 /**
  * Controller used in the training reservation agenda page.

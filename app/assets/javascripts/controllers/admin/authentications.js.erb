@@ -71,7 +71,7 @@ class AuthenticationController {
     /**
      * Changes the admin's view to the members list page
      */
-    $scope.cancel = function() { $state.go('app.admin.members') }
+    $scope.cancel = function () { $state.go('app.admin.members') }
 
     /**
      * Open a modal allowing to specify the data mapping for the given field
@@ -141,7 +141,7 @@ class AuthenticationController {
         }
         ] })
         .result['finally'](null).then(function (transfo_rules) { mapping.transformation = transfo_rules })
-      }
+    }
   }
 }
 
@@ -200,7 +200,7 @@ Application.Controllers.controller('AuthentificationController', ['$scope', '$st
             }
           }
         },
-        function() {
+        function () {
           // the admin has confirmed, delete
           AuthProvider.delete(
             { id: provider.id },
@@ -286,7 +286,7 @@ Application.Controllers.controller('NewAuthenticationController', ['$scope', '$s
               }
             },
             function () { // unsecured http confirmed
-              AuthProvider.save({auth_provider: $scope.provider}, function (provider) {
+              AuthProvider.save({ auth_provider: $scope.provider }, function (provider) {
                 growl.success(_t('unsecured_oauth2_provider_successfully_added'))
                 return $state.go('app.admin.members')
               })
@@ -332,7 +332,7 @@ Application.Controllers.controller('EditAuthenticationController', ['$scope', '$
           growl.success(_t('provider_successfully_updated'))
           $state.go('app.admin.members')
         },
-        function() { growl.error(_t('an_error_occurred_unable_to_update_the_provider')) }
+        function () { growl.error(_t('an_error_occurred_unable_to_update_the_provider')) }
       )
     }
 

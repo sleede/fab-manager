@@ -517,7 +517,7 @@ angular.module('application.router', ['ui.router'])
             if ($stateParams.id !== 'all') { return Training.get({ id: $stateParams.id }).$promise }
           }],
           settingsPromise: ['Setting', function (Setting) {
-            return Setting.query({ 
+            return Setting.query({
               names: `['booking_window_start', \
                        'booking_window_end', \
                        'booking_move_enable', \

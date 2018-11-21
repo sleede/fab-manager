@@ -185,8 +185,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         },
         controller ($scope, $uibModalInstance, model) {
           $scope.model = model
-          $scope.ok = function() { $uibModalInstance.close($scope.model) }
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.ok = function () { $uibModalInstance.close($scope.model) }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }
       })
 
@@ -222,8 +222,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           $scope.codeModel = model
           $scope.isSelected = active
 
-          $scope.ok = function() { $uibModalInstance.close({ model: $scope.codeModel, active: $scope.isSelected }) }
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.ok = function () { $uibModalInstance.close({ model: $scope.codeModel, active: $scope.isSelected }) }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }
       })
 
@@ -269,8 +269,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         },
         controller ($scope, $uibModalInstance, model) {
           $scope.model = model
-          $scope.ok = function() { $uibModalInstance.close($scope.model) }
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.ok = function () { $uibModalInstance.close($scope.model) }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }
       })
 
@@ -465,7 +465,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * to $scope.invoices
      * @param concat {boolean} if true, the result will be append to $scope.invoices instead of being affected
      */
-    var invoiceSearch = function(concat) {
+    var invoiceSearch = function (concat) {
       Invoice.list({
         query: {
           number: $scope.searchInvoice.reference,
@@ -561,8 +561,8 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       } else {
         return Invoice.save(
           { avoir: $scope.avoir },
-          function(avoir) { // success
-            $uibModalInstance.close({avoir, invoice: $scope.invoice})
+          function (avoir) { // success
+            $uibModalInstance.close({ avoir, invoice: $scope.invoice })
           },
           function (err) { // failed
             growl.error(_t('unable_to_create_the_refund'))

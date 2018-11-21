@@ -48,3 +48,4 @@
 
 # Ignore node.js dev dependencies
 /node_modules
+npm-debug.log

@@ -556,7 +556,6 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * properties and on index-specific properties (additional_fields)
      */
     var buildCustomFiltersList = function () {
-
       $scope.filters = [
         { key: 'date', label: _t('date'), values: ['input_date'] },
         { key: 'userId', label: _t('user_id'), values: ['input_number'] },
@@ -720,6 +719,6 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
     /**
      * Callback to cancel the export and close the modal
      */
-    $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
   }
 ])

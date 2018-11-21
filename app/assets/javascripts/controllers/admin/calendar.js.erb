@@ -73,7 +73,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Open a confirmation modal to cancel the booking of a user for the currently selected event.
      * @param slot {Object} reservation slot of a user, inherited from $resource
      */
-    $scope.cancelBooking = function(slot) {
+    $scope.cancelBooking = function (slot) {
     // open a confirmation dialog
       dialogs.confirm(
         {
@@ -88,7 +88,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             }
           }
         },
-        function() {
+        function () {
           // the admin has confirmed, cancel the subscription
           Slot.cancel(
             { id: slot.slot_id },
@@ -152,7 +152,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               // notify the admin
               return growl.success(_t('admin_calendar.the_machine_was_successfully_removed_from_the_slot'))
             }
-            , function(data, status) { // failed
+            , function (data, status) { // failed
               growl.error(_t('admin_calendar.deletion_failed'))
             }
           )
@@ -164,7 +164,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Callback to alert the admin that the export request was acknowledged and is
      * processing right now.
      */
-    $scope.alertExport = function(type) {
+    $scope.alertExport = function (type) {
       Export.status({ category: 'availabilities', type }).then(function (res) {
         if (!res.data.exists) {
           return growl.success(_t('admin_calendar.export_is_running_you_ll_be_notified_when_its_ready'))
@@ -201,7 +201,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               }
             }
           },
-          function() {
+          function () {
             // the admin has confirmed, lock/unlock the slot
             Availability.lock(
               { id: $scope.availability.id },
@@ -226,7 +226,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     /**
      * Confirm and destroy the slot in $scope.availability
      */
-    $scope.removeSlot = function() {
+    $scope.removeSlot = function () {
       // open a confirmation dialog
       dialogs.confirm(
         {
@@ -239,7 +239,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             }
           }
         },
-        function() {
+        function () {
           // the admin has confirmed, delete the slot
           Availability.delete(
             { id: $scope.availability.id },
@@ -271,7 +271,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     // Triggered when the admin drag on the agenda to create a new reservable slot.
     // @see http://fullcalendar.io/docs/selection/select_callback/
-    // 
+    //
     var calendarSelectCb = function (start, end, jsEvent, view) {
       start = moment.tz(start.toISOString(), Fablab.timezone)
       end = moment.tz(end.toISOString(), Fablab.timezone)
@@ -310,7 +310,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
                 true
               )
             },
-            function() { uiCalendarConfig.calendars.calendar.fullCalendar('unselect') }
+            function () { uiCalendarConfig.calendars.calendar.fullCalendar('unselect') }
           )
         }
       }
@@ -377,7 +377,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.end = end
 
     // machines list
-    $scope.machines = machinesPromise.filter(function(m) { return !m.disabled })
+    $scope.machines = machinesPromise.filter(function (m) { return !m.disabled })
 
     // trainings list
     $scope.trainings = trainingsPromise.filter(function (t) { return !t.disabled })

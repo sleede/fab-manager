@@ -129,7 +129,7 @@ class ProjectsController {
     /**
      * This will create a single new empty entry into the project's CAO attachements list.
      */
-    $scope.addFile = function() { $scope.project.project_caos_attributes.push({}) }
+    $scope.addFile = function () { $scope.project.project_caos_attributes.push({}) }
 
     /**
      * This will remove the given file from the project's CAO attachements list. If the file was previously uploaded
@@ -162,38 +162,38 @@ class ProjectsController {
      */
     $scope.deleteStep = function (step) {
       dialogs.confirm({
-          resolve: {
-            object() {
-              return {
-                title: _t('confirmation_required'),
-                msg: _t('do_you_really_want_to_delete_this_step')
-              }
+        resolve: {
+          object () {
+            return {
+              title: _t('confirmation_required'),
+              msg: _t('do_you_really_want_to_delete_this_step')
             }
           }
         }
-        , function () { // deletion confirmed
-          const index = $scope.project.project_steps_attributes.indexOf(step)
-          if (step.id != null) {
-            step._destroy = true
-          } else {
-            $scope.project.project_steps_attributes.splice(index, 1)
-          }
+      }
+      , function () { // deletion confirmed
+        const index = $scope.project.project_steps_attributes.indexOf(step)
+        if (step.id != null) {
+          step._destroy = true
+        } else {
+          $scope.project.project_steps_attributes.splice(index, 1)
+        }
 
-          // update the new total number of steps
-          $scope.totalSteps -= 1
-          // reindex the remaining steps
-          return (function () {
-            const result = []
-            for (let s of Array.from($scope.project.project_steps_attributes)) {
-              if (s.step_nb > step.step_nb) {
-                result.push(s.step_nb -= 1)
-              } else {
-                result.push(undefined)
-              }
+        // update the new total number of steps
+        $scope.totalSteps -= 1
+        // reindex the remaining steps
+        return (function () {
+          const result = []
+          for (let s of Array.from($scope.project.project_steps_attributes)) {
+            if (s.step_nb > step.step_nb) {
+              result.push(s.step_nb -= 1)
+            } else {
+              result.push(undefined)
             }
-            return result
-          })()
-        })
+          }
+          return result
+        })()
+      })
     }
 
     /**
@@ -293,7 +293,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
 
     $scope.searchOverWholeNetworkChanged = function () {
       setTimeout(
-        function() { $scope.resetFiltersAndTriggerSearch() },
+        function () { $scope.resetFiltersAndTriggerSearch() },
         150
       )
     }
@@ -387,7 +387,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     var updateUrlParam = function (name, value) {
       $state.current.reloadOnSearch = false
       $location.search(name, value)
-      return $timeout(function() { $state.current.reloadOnSearch = undefined})
+      return $timeout(function () { $state.current.reloadOnSearch = undefined })
     }
 
     var loadMoreCallback = function (projectsPromise) {
@@ -522,8 +522,8 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
           }
         }
         , function () { // cancel confirmed
-            $scope.project.$delete(function() { $state.go('app.public.projects_list', {}, { reload: true }) })
-          })
+          $scope.project.$delete(function () { $state.go('app.public.projects_list', {}, { reload: true }) })
+        })
       } else {
         return console.error(_t('unauthorized_operation'))
       }
@@ -550,10 +550,10 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
           }
 
           // callback for signaling cancellation
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
 
           // callback for form validation
-          return $scope.ok = function() {
+          return $scope.ok = function () {
             Abuse.save(
               {},
               { abuse: $scope.signaler },

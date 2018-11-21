@@ -26,7 +26,7 @@ class PlanController {
     CSRF.setMetaTags()
 
     // groups list
-    $scope.groups = groups.filter(function(g) { return (g.slug !== 'admins') && !g.disabled })
+    $scope.groups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled })
 
     // users with role 'partner', notifiables for a partner plan
     $scope.partners = partners.users
@@ -64,7 +64,6 @@ class PlanController {
  */
 Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 'groups', 'prices', 'partners', 'CSRF', '$state', 'growl', '_t',
   function ($scope, $uibModal, groups, prices, partners, CSRF, $state, growl, _t) {
-
     /* PUBLIC SCOPE */
 
     // current form is used to create a new plan
@@ -99,7 +98,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
      * Checks if the partner contact is a valid data. Used in the form validation process
      * @returns {boolean}
      */
-    $scope.partnerIsValid = function() { return ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email)) }
+    $scope.partnerIsValid = function () { return ($scope.plan.type === 'Plan') || ($scope.plan.partnerId || ($scope.plan.partnerContact && $scope.plan.partnerContact.email)) }
 
     /**
      * Open a modal dialog allowing the admin to create a new partner user
@@ -112,7 +111,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
         controller: ['$scope', '$uibModalInstance', 'User', function ($scope, $uibModalInstance, User) {
           $scope.partner = {}
 
-          $scope.ok = function() {
+          $scope.ok = function () {
             User.save(
               {},
               { user: $scope.partner },
@@ -123,11 +122,11 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
               },
               function (error) {
                 growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'))
-                console.error(error);
+                console.error(error)
               }
             )
           }
-          $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
         }]
       })
       // once the form was validated successfully ...
@@ -214,8 +213,9 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
                 }
               }
               return result
-            })()})
-          }
+            })()
+          })
+        }
         )
 
         // if no plan were selected, unset every prices
@@ -279,7 +279,6 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
         }
       }
     }
-
 
     // Using the PlansController
     return new PlanController($scope, groups, prices, partners, CSRF)

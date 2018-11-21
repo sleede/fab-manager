@@ -210,7 +210,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * Check if the currently logged user has teh 'admin' role?
          * @returns {boolean}
          */
-        $scope.isAdmin = function() { return $rootScope.currentUser && ($rootScope.currentUser.role === 'admin') }
+        $scope.isAdmin = function () { return $rootScope.currentUser && ($rootScope.currentUser.role === 'admin') }
 
         /* PRIVATE SCOPE */
 
@@ -319,7 +319,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                         growl.success(_t('cart.reservation_was_cancelled_successfully'))
                         if (typeof $scope.onSlotCancelSuccess === 'function') { return $scope.onSlotCancelSuccess() }
                       }
-                      , function() { // error while canceling
+                      , function () { // error while canceling
                         growl.error(_t('cart.cancellation_failed'))
                       })
                     }
@@ -512,7 +512,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                     $scope.reservation.card_token = response.id
                     Reservation.save(
                       mkRequestParams($scope.reservation, coupon),
-                      function(reservation) { $uibModalInstance.close(reservation) },
+                      function (reservation) { $uibModalInstance.close(reservation) },
                       function (response) {
                         $scope.alerts = []
                         if (response.status === 500) {
@@ -566,19 +566,19 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
               function ($scope, $uibModalInstance, $state, reservation, price, Auth, Reservation, wallet, helpers, $filter, coupon) {
               // user wallet amount
-              $scope.walletAmount = wallet.amount
+                $scope.walletAmount = wallet.amount
 
-              // Global price (total of all items)
-              $scope.price = price.price
+                // Global price (total of all items)
+                $scope.price = price.price
 
-              // Price to pay (wallet deducted)
-              $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
+                // Price to pay (wallet deducted)
+                $scope.amount = helpers.getAmountToPay(price.price, wallet.amount)
 
-              // Reservation
-              $scope.reservation = reservation
+                // Reservation
+                $scope.reservation = reservation
 
-              // Used in wallet info template to interpolate some translations
-              $scope.numberFilter = $filter('number')
+                // Used in wallet info template to interpolate some translations
+                $scope.numberFilter = $filter('number')
 
                 // Button label
                 if ($scope.amount > 0) {
@@ -606,10 +606,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                     return $scope.attempting = false
                   })
                 }
-                $scope.cancel = function() { $uibModalInstance.dismiss('cancel') }
+                $scope.cancel = function () { $uibModalInstance.dismiss('cancel') }
               }
             ]
-          }).result['finally'](null).then(function(reservation) { afterPayment(reservation) })
+          }).result['finally'](null).then(function (reservation) { afterPayment(reservation) })
         }
         /**
          * Actions to run after the payment was successfull

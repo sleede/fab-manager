@@ -8,7 +8,7 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('fabUserAvatar', [ function() {
+Application.Directives.directive('fabUserAvatar', [ function () {
   return ({
     restrict: 'E',
     scope: {
@@ -17,5 +17,4 @@ Application.Directives.directive('fabUserAvatar', [ function() {
     },
     templateUrl: '<%= asset_path "shared/_user_avatar.html" %>'
   })
-
 }])
