@@ -37,7 +37,7 @@ module Fablab
     config.i18n.default_locale = Rails.application.secrets.rails_locale
     config.i18n.fallbacks = [Rails.application.secrets.app_locale, :en]
 
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'components').to_s
+    config.assets.paths << Rails.root.join('node_modules').to_s
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

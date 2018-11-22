@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Nom using standard [package.json](package.json) file to save application version number
+- Now using Yarn instead of deprecated Bower as the front-end dependencies manager
 - Migrated front-end application from CoffeeScript to ECMAScript 6 (JS)
 - Integration of Eslint and Rubocop coding rules
 - Fix a bug: on small screens, display of button "change group" overflow

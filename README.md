@@ -70,16 +70,19 @@ This procedure is not easy to follow so if you don't need to write some code for
 ### General Guidelines
 
 1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
-   For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
+   For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
    If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
+   
+2. Install Yarn, the front-end package manager.
+   Depending on your system, the installation process may differ, please read the [official Yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable).
 
-2. Retrieve the project from Git
+3. Retrieve the project from Git
 
    ```bash
    git clone https://github.com/LaCasemate/fab-manager.git
    ```
 
-3. Install the software dependencies.
+4. Install the software dependencies.
    First install [PostgreSQL](#postgresql) and [ElasticSearch](#elasticsearch) as specified in their respective documentations.
    Then install the other dependencies:
    - For Ubuntu/Debian:
@@ -93,7 +96,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    brew install redis imagemagick
    ```
 
-4. Init the RVM instance and check it was correctly configured
+5. Init the RVM instance and check it was correctly configured
 
    ```bash
    cd fab-manager
@@ -101,19 +104,20 @@ This procedure is not easy to follow so if you don't need to write some code for
    # Must print ruby-X.Y.Z@fab-manager (where X.Y.Z match the version in .ruby-version)
    ```
 
-5. Install bundler in the current RVM gemset
+6. Install bundler in the current RVM gemset
 
    ```bash
    gem install bundler
    ```
 
-6. Install the required ruby gems
+7. Install the required ruby gems and javascript plugins
 
    ```bash
    bundle install
+   yarn install
    ```
 
-7. Create the default configuration files **and configure them!** (see the [Environment Configuration](#environment-configuration) section)
+8. Create the default configuration files **and configure them!** (see the [Environment Configuration](#environment-configuration) section)
 
    ```bash
    cp config/database.yml.default config/database.yml
@@ -122,7 +126,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
-8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+9. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
    - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
    - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
@@ -132,23 +136,23 @@ This procedure is not easy to follow so if you don't need to write some code for
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    ```
 
-9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
+10. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
 
    ```bash
    mkdir -p tmp/pids
    ```
 
-10. Start the development web server
+11. Start the development web server
 
    ```bash
    foreman s -p 3000
    ```
 
-11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+12. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
-12. You can login as the default administrator using the credentials defined previously.
+13. You can login as the default administrator using the credentials defined previously.
 
-13. Email notifications will be caught by MailCatcher.
+14. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
 <a name="environment-configuration"></a>
