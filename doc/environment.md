@@ -11,9 +11,10 @@
 ## Introduction
 
 The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences. 
-If you are in a development environment, your can keep most the default values, otherwise, in production, values must be configured carefully.
-The settings in [config/application.yml](config/application.yml.default) configure the environment variables when the application run in development mode.
-If you run the application in production with docker, the settings are localized in [config/env](docker/env.example).
+If you are in a development environment, your can keep most of the default values, otherwise, in production, values must be configured carefully.
+
+The settings in [config/application.yml](../config/application.yml.default) configure the environment variables when the application run in development mode.
+If you run the application in production with docker, the settings are localized in [config/env](../docker/env.example).
 
 <a name="general-settings"></a>
 ## General settings
@@ -21,14 +22,14 @@ If you run the application in production with docker, the settings are localized
 
     POSTGRES_HOST
 
-DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](#postgresql)).
-This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
+DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](../README.md#postgresql)).
+This value is only used when deploying with Docker, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
-Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
-This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
+Please see [Setup the FabManager database in PostgreSQL](../README.md#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
+This value is only used when deploying with Docker, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 
     REDIS_HOST
 

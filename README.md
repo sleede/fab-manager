@@ -122,7 +122,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    yarn install
    ```
 
-9. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md)
+9. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md))
 
    ```bash
    cp config/database.yml.default config/database.yml
