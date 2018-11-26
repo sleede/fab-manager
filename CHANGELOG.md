@@ -6,6 +6,7 @@
 - Integration of Eslint and Rubocop coding rules
 - Fix a bug: on small screens, display of button "change group" overflows
 - Fix a bug: creating a transverse plan, create one for the hidden admins group
+- Fix a bug: on some classical docker installations, the elastic-upgrade.sh script won't run successfully
 - Fix a security issue: dependency rack has a vulnerability as described in [CVE-2018-16471](https://nvd.nist.gov/vuln/detail/CVE-2018-16471)
 - Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-16468](https://github.com/flavorjones/loofah/issues/154)
 - Updated documentation
