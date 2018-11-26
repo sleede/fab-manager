@@ -27,19 +27,19 @@ class Plan < ActiveRecord::Base
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
-  validates :interval_count, numericality: { less_than: 12 }, if: Proc.new {|plan| plan.interval == 'month'}
-  validates :interval_count, numericality: { less_than: 52 }, if: Proc.new {|plan| plan.interval == 'week'}
-  validates :interval, inclusion: { in: %w(year month week) }
+  validates :interval_count, numericality: { less_than: 12 }, if: proc { |plan| plan.interval == 'month' }
+  validates :interval_count, numericality: { less_than: 52 }, if: proc { |plan| plan.interval == 'week' }
+  validates :interval, inclusion: { in: %w[year month week] }
   validates :base_name, :slug, presence: true
 
   def self.create_for_all_groups(plan_params)
     plans = []
-    Group.all.each do |group|
-      if plan_params[:type] == 'PartnerPlan'
-        plan = PartnerPlan.new(plan_params.except(:group_id, :type))
-      else
-        plan = Plan.new(plan_params.except(:group_id, :type))
-      end
+    Group.all_except_admins.each do |group|
+      plan = if plan_params[:type] == 'PartnerPlan'
+               PartnerPlan.new(plan_params.except(:group_id, :type))
+             else
+               Plan.new(plan_params.except(:group_id, :type))
+             end
       plan.group = group
       if plan.save
         plans << plan
@@ -48,7 +48,7 @@ class Plan < ActiveRecord::Base
         return false
       end
     end
-    return plans
+    plans
   end
 
   def destroyable?
@@ -73,27 +73,34 @@ class Plan < ActiveRecord::Base
 
   def human_readable_duration
     i18n_key = "duration.#{interval}"
-    "#{I18n.t(i18n_key, count: interval_count)}"
+    I18n.t(i18n_key, count: interval_count).to_s
   end
 
   def human_readable_name(opts = {})
-    result = "#{base_name}"
+    result = base_name.to_s
     result += " - #{group.slug}" if opts[:group]
     result + " - #{human_readable_duration}"
   end
 
   # must be publicly accessible for the migration
   def create_statistic_type
-    stat_index = StatisticIndex.where({es_type_key: 'subscription'})
-    type = StatisticType.find_by(statistic_index_id: stat_index.first.id, key: self.duration.to_i)
-    if type == nil
-      type = StatisticType.create!({statistic_index_id: stat_index.first.id, key: self.duration.to_i, label: 'Durée : '+self.human_readable_duration, graph: true, simple: true})
+    stat_index = StatisticIndex.where(es_type_key: 'subscription')
+    type = StatisticType.find_by(statistic_index_id: stat_index.first.id, key: duration.to_i)
+    if type.nil?
+      type = StatisticType.create!(
+        statistic_index_id: stat_index.first.id,
+        key: duration.to_i,
+        label: "Durée : #{human_readable_duration}",
+        graph: true,
+        simple: true
+      )
     end
     subtype = create_statistic_subtype
     create_statistic_association(type, subtype)
   end
 
   private
+
   def create_stripe_plan
     stripe_plan = Stripe::Plan.create(
       amount: amount,
@@ -108,12 +115,12 @@ class Plan < ActiveRecord::Base
   end
 
   def create_statistic_subtype
-    StatisticSubType.create!({key: self.slug, label: self.name})
+    StatisticSubType.create!(key: slug, label: name)
   end
 
   def create_statistic_association(stat_type, stat_subtype)
-    if stat_type != nil and stat_subtype != nil
-      StatisticTypeSubType.create!({statistic_type: stat_type, statistic_sub_type: stat_subtype})
+    if !stat_type.nil? && !stat_subtype.nil?
+      StatisticTypeSubType.create!(statistic_type: stat_type, statistic_sub_type: stat_subtype)
     else
       puts 'ERROR: Unable to create the statistics association for the new plan. '+
            'Possible causes: the type or the subtype were not created successfully.'
