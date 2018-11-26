@@ -334,8 +334,11 @@ upgrade_docker()
   local name=$(docker inspect -f '{{.Name}}' "$id" | sed s:^/::g)
   # get container network name
   local network=$(docker inspect -f '{{.NetworkSettings.Networks}}' "$id" | sed 's/map\[\(.*\):0x[a-f0-9]*\]/\1/')
-  # get container mapping to data folder
-  local mounts=$(docker inspect -f '{{.Mounts}}' "$id" | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true \(rprivate\)\?}\?]\?$/-v \1:\2/g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
+  # get container mappings
+  local volumes=$(docker inspect -f '{{.Mounts}}' "$id" | sed 's/} {/\n/g' | sed 's/^\[\?{\?bind[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*\([^[:blank:]]*\)[[:blank:]]*true \(rprivate\)\?}\?]\?$/-v \1:\2/g')
+  local mounts=$(echo "$volumes" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g')
+  # get mapped ports
+  local ports=$(docker inspect -f '{{.NetworkSettings.Ports}}' "$id") | sed 's!\([0-9]*\)/tcp:\[{0\.0\.0\.0 \([0-9]*\)}\]!\1:\2!g' | sed 's/^map\[\(.*\)\]/\1/'| sed 's/^map\[\(.*\)\]/\1/' | sed 's/ / -p /' | sed 's/^/-p /'
   prepare_upgrade
   # stop current elastic
   docker stop "$name"
@@ -344,12 +347,18 @@ upgrade_docker()
   local image="elasticsearch:$target"
   local image_name="$image"
   if [ $target = '6.2' ]
-  then 
+  then
     image_name="elasticsearch-oss:$target"
     image="docker.elastic.co/elasticsearch/$image_name"
+  elif [ $target = '5.6' ]
+  then
+    configdir=$(echo "$volumes" | grep config | awk -F'[ :]' '{print $2}')
+    echo -e "\nCopying ElasticSearch 2.4 configuration files from $(pwd)/docker to $configdir..."
+    sudo cp docker/elasticsearch.yml "$configdir"
+    sudo cp docker/log4j2.properties "$configdir"
   fi
   docker pull "$image"
-  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$image_name" | bash
+  echo docker run --restart=always  -d --name="$name" --network="$network" --ip="$ES_IP" "$mounts" "$ports" "$image_name" | bash
   wait_for_online
   wait_for_green_status
   # check status
@@ -479,7 +488,7 @@ reindex_indices()
     local migration_index="$index""_$1"
     migration_indices+="$migration_index,"
     # create the temporary migration index with the previous mapping
-    curl -XPUT "http://$ES_IP:9200/$migration_index/" 2>/dev/null -H 'Content-Type: application/json' -d "$definition" 
+    curl -XPUT "http://$ES_IP:9200/$migration_index/" 2>/dev/null -H 'Content-Type: application/json' -d "$definition"
     # reindex data content to the new migration index
     curl -XPOST "$ES_IP:9200/_reindex?pretty" 2>/dev/null -H 'Content-Type: application/json' -d '{
       "source": {
@@ -534,7 +543,7 @@ reindex_final_indices()
     local final_index=$(echo "$index" | sed "s/\(.*\)_$previous$/\1/")
     final_indices+="$final_index,"
     # create the final index with the previous mapping
-    curl -XPUT "http://$ES_IP:9200/$final_index" 2>/dev/null -H 'Content-Type: application/json' -d "$definition" 
+    curl -XPUT "http://$ES_IP:9200/$final_index" 2>/dev/null -H 'Content-Type: application/json' -d "$definition"
     # reindex data content to the new migration index
     curl -XPOST "$ES_IP:9200/_reindex?pretty" 2>/dev/null -H 'Content-Type: application/json' -d '{
       "source": {
@@ -548,7 +557,7 @@ reindex_final_indices()
   echo "Indices are reindexing. This may take a while, waiting to finish... "
   # first we wait for all indices states became green
   wait_for_green_status
-  # then we wait for all documents to be reindexed  
+  # then we wait for all documents to be reindexed
   local new_docs=$(curl "$ES_IP:9200/_cat/indices?index=$final_indices" 2>/dev/null | awk '{s+=$7} END {printf "%.0f", s}')
   while [ "$new_docs" != "$docs" ]
   do

@@ -80,10 +80,14 @@ This procedure is not easy to follow so if you don't need to write some code for
    Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
    Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
 
-5. Add your current user to the docker group and restart. 
+5. Add your current user to the docker group, to allow using docker without sudo. 
    This may not be required on some systems, if docker was already installed.
    ```bash
+   # add the docker group if it doesn't already exist
+   sudo groupadd doker
+   # add the current user to the docker group
    sudo usermod -aG docker $(whoami)
+   # restart to validate changes
    sudo reboot
    ```
 
