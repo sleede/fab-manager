@@ -109,7 +109,7 @@ vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
 ```
 You need to carefully configure each variable before starting fab-manager.
-Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md#environment-configuration) for explanations about those variables.
+Please refer to the [environment configuration documentation](../doc/environment.md) for explanations about those variables.
 
 
 ### Setup nginx configuration

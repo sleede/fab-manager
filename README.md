@@ -9,8 +9,7 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
-4.2. [Environment Configuration](#environment-configuration)<br/>
-4.3. [Virtual Machine Instructions](#virtual-machine-instructions)
+4.2. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
 5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
@@ -69,20 +68,23 @@ This procedure is not easy to follow so if you don't need to write some code for
 <a name="general-guidelines"></a>
 ### General Guidelines
 
-1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
+1. Install RVM, with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
    If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
    
-2. Install Yarn, the front-end package manager.
+2. Install NVM, withe the node.js version specified in the [.nvmrc file](.nvmrc).
+   For instructions about installing NVM, please refer to [the NVM readme](https://github.com/creationix/nvm#installation).
+   
+3. Install Yarn, the front-end package manager.
    Depending on your system, the installation process may differ, please read the [official Yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable).
 
-3. Retrieve the project from Git
+4. Retrieve the project from Git
 
    ```bash
    git clone https://github.com/LaCasemate/fab-manager.git
    ```
 
-4. Install the software dependencies.
+5. Install the software dependencies.
    First install [PostgreSQL](#postgresql) and [ElasticSearch](#elasticsearch) as specified in their respective documentations.
    Then install the other dependencies:
    - For Ubuntu/Debian:
@@ -96,28 +98,31 @@ This procedure is not easy to follow so if you don't need to write some code for
    brew install redis imagemagick
    ```
 
-5. Init the RVM instance and check it was correctly configured
+6. Init the RVM and NVM instances and check they were correctly configured
 
    ```bash
    cd fab-manager
-   rvm current
-   # Must print ruby-X.Y.Z@fab-manager (where X.Y.Z match the version in .ruby-version)
+   rvm current | grep -q `cat .ruby-version`@fab-manager && echo "ok"
+   # Must print ok
+   nvm use
+   node --version | grep -q `cat .nvmrc` && echo "ok"
+   # Must print ok
    ```
 
-6. Install bundler in the current RVM gemset
+7. Install bundler in the current RVM gemset
 
    ```bash
    gem install bundler
    ```
 
-7. Install the required ruby gems and javascript plugins
+8. Install the required ruby gems and javascript plugins
 
    ```bash
    bundle install
    yarn install
    ```
 
-8. Create the default configuration files **and configure them!** (see the [Environment Configuration](#environment-configuration) section)
+9. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md)
 
    ```bash
    cp config/database.yml.default config/database.yml
@@ -126,7 +131,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
-9. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+10. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
    - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
    - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
@@ -136,163 +141,24 @@ This procedure is not easy to follow so if you don't need to write some code for
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    ```
 
-10. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
+11. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
 
    ```bash
    mkdir -p tmp/pids
    ```
 
-11. Start the development web server
+12. Start the development web server
 
    ```bash
    foreman s -p 3000
    ```
 
-12. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+13. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
-13. You can login as the default administrator using the credentials defined previously.
+14. You can login as the default administrator using the credentials defined previously.
 
-14. Email notifications will be caught by MailCatcher.
+15. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
-
-<a name="environment-configuration"></a>
-### Environment Configuration
-
-The settings in `config/application.yml` configure the environment variables of the application.
-If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
-
-    POSTGRES_HOST
-
-DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](#postgresql)).
-This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
-
-    POSTGRES_PASSWORD
-
-Password for the PostgreSQL user, as specified in `database.yml`.
-Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
-This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
-
-    REDIS_HOST
-
-DNS name or IP address of the server hosting the redis database.
-
-    ELASTICSEARCH_HOST
-
-DNS name or IP address of the server hosting the elasticSearch database.
-
-    SECRET_KEY_BASE
-
-Used by the authentication system to generate random tokens, eg. for resetting passwords.
-Used by Rails to verify the integrity of signed cookies.
-You can generate such a random key by running `rake secret`.
-
-    STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
-
-Key and secret used to identify you Stripe account through the API.
-Retrieve them from https://dashboard.stripe.com/account/apikeys.
-
-    STRIPE_CURRENCY
-
-Currency used by stripe to charge the final customer.
-See https://support.stripe.com/questions/which-currencies-does-stripe-support for a list of available 3-letters ISO code.
-
-**BEWARE**: stripe currency cannot be changed during the application life.
-Changing the currency after the application has already run, may result in several bugs and prevent the users to pay through stripe.
-So set this setting carefully before starting the application for the first time.
-
-    INVOICE_PREFIX
-
-When payments are done on the platform, an invoice will be generated as a PDF file.
-The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoice date) .pdf"
-
-    FABLAB_WITHOUT_PLANS
-
-If set to 'true', the subscription plans will be fully disabled and invisible in the application.
-It is not recommended to disable plans if at least one subscription was took on the platform.
-
-    FABLAB_WITHOUT_SPACES
-
-If set to 'false', enable the spaces management and reservation in the application.
-It is not recommended to disable spaces if at least one space reservation was made on the system.
-
-    DEFAULT_MAIL_FROM
-
-When sending notification mails, the platform will use this address to identify the sender.
-
-    DELIVERY_METHOD
-
-Configure the Rails' Action Mailer delivery method.
-See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-
-    DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO & SMTP_OPENSSL_VERIFY_MODE
-
-When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
-See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-DEFAULT_HOST is also used to configure Google Analytics.
-
-    GA_ID
-
-Identifier of your Google Analytics account.
-
-    DISQUS_SHORTNAME
-
-Unique identifier of your [Disqus](http://www.disqus.com) forum.
-Disqus forums are used to allow visitors to comment on projects.
-See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
-
-    TWITTER_NAME
-
-Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
-This value can be graphically overridden during the application's lifecycle in Admin/Customization/Home page/Twitter Feed.
-It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
-
-    TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
-
-Keys and secrets to access the twitter API.
-Retrieve them from https://apps.twitter.com
-
-    FACEBOOK_APP_ID
-
-This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
-If you do so, you'll be able to customize and get statistics about project shares on Facebook.
-
-    LOG_LEVEL
-
-This parameter configures the logs verbosity.
-Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
-
-    ALLOWED_EXTENSIONS
-
-Exhaustive list of file's extensions available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_MIME_TYPES` values below.
-Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a **dangerous** security issue and must be avoided in any cases.
-
-    ALLOWED_MIME_TYPES
-
-Exhaustive list of file's mime-types available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
-Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
-
-    MAX_IMAGE_SIZE
-
-Maximum size (in bytes) allowed for image uploaded on the platform.
-This parameter concerns events, plans, user's avatars, projects and steps of projects.
-If this parameter is not specified the maximum size allowed will be 2MB.
-
-    ADMIN_EMAIL, ADMIN_PASSWORD
-
-Credentials for the first admin user created when seeding the project. (not present in application.yml because they are only used once when running the database seed with the command `rake db:seed`)
-
-    Settings related to Open Projects
-
-See the [Open Projects](#open-projects) section for a detailed description of these parameters.
-
-    Settings related to i18n
-
-See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](#i18n) paragraph for a detailed description of these parameters.
-
 
 <a name="virtual-machine-instructions"></a>
 ### Virtual Machine Instructions
@@ -633,91 +499,8 @@ If you are in a development environment, your can keep the default values, other
 
 <a name="i18n-settings"></a>
 #### Settings
-    APP_LOCALE
 
-Configure application's main localization and translation settings.
-
-See `config/locales/app.*.yml` for a list of available locales. Default is **en**.
-
-    RAILS_LOCALE
-
-Configure Ruby on Rails localization settings (currency, dates, number formats ...).
-
-Please, be aware that **the configured locale will imply the CURRENCY symbol used to generate invoices**.
-
-_Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
-
-See `config/locales/rails.*.yml` for a list of available locales. Default is **en**.
-
-If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
-You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
-
-    MOMENT_LOCALE
-
-Configure the moment.js library for l10n.
-
-See `vendor/assets/components/moment/locale/*.js` for a list of available locales.
-Default is **en** (even if it's not listed).
-
-    SUMMERNOTE_LOCALE
-
-Configure the javascript summernote editor for l10n.
-
-See `vendor/assets/components/summernote/lang/summernote-*.js` for a list of available locales.
-Default is **en-US** (even if it's not listed).
-
-    ANGULAR_LOCALE
-
-Configure the locale for angular-i18n.
-
-Please, be aware that **the configured locale will imply the CURRENCY displayed to front-end users.**
-
-_Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
-
-See `vendor/assets/components/angular-i18n/angular-locale_*.js` for a list of available locales. Default is **en**.
-
-    MESSAGEFORMAT_LOCALE
-
-Configure the messageformat.js library, used by angular-translate.
-
-See vendor/assets/components/messageformat/locale/*.js for a list of available locales.
-
-    FULLCALENDAR_LOCALE
-
-Configure the fullCalendar JS agenda library.
-
-See `vendor/assets/components/fullcalendar/dist/lang/*.js` for a list of available locales. Default is **en** (even if it's not listed).
-
-    ELASTICSEARCH_LANGUAGE_ANALYZER
-
-This configure the language analyzer for indexing and searching in projects with ElasticSearch.
-See https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html for a list of available analyzers.
-
-    TIME_ZONE
-
-In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rake time:zones:all` for a list of available time zone names.
-Default is **UTC**.
-
-    WEEK_STARTING_DAY
-
-Configure the first day of the week in your locale zone (generally monday or sunday).
-
-    D3_DATE_FORMAT
-
-Date format for dates displayed in statistics charts.
-See https://github.com/mbostock/d3/wiki/Time-Formatting#format for available formats.
-
-    UIB_DATE_FORMAT
-
-Date format for dates displayed and parsed in date pickers.
-See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a list available formats.
-
-**BEWARE**: years format with less than 4 digits will result in problems because the system won't be able to distinct dates with the same less significant digits, eg. 50 could mean 1950 or 2050.
-
-    EXCEL_DATE_FORMAT
-
-Date format for dates shown in exported Excel files (eg. statistics)
-See https://support.microsoft.com/en-us/kb/264372 for a list a available formats.
+Please refer to the [environment configuration documentation](doc/environment.md#internationalization-settings)
 
 <a name="i18n-apply"></a>
 #### Applying changes
