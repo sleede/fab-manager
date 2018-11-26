@@ -11,15 +11,13 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 4.1. [General Guidelines](#general-guidelines)<br/>
 4.2. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
-5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
-5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
-5.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)<br/>
-5.4. [PostgreSQL Limitations](#postgresql-limitations)
+5.1. [Install PostgreSQL 9.4](#setup-postgresql)<br/>
+5.2. [Run the PostgreSQL command line interface](#run-postgresql-cli)<br/>
+5.3. [PostgreSQL Limitations](#postgresql-limitations)
 6. [ElasticSearch](#elasticsearch)<br/>
-6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
-6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
-6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)<br/>
-6.4. [Backup and Restore](#backup-and-restore-elasticsearch)
+6.1. [Install ElasticSearch](#setup-elasticsearch)<br/>
+6.2. [Rebuild statistics](#rebuild-stats)<br/>
+6.3. [Backup and Restore](#backup-and-restore-elasticsearch)
 7. [Internationalization (i18n)](#i18n)<br/>
 7.1. [Translation](#i18n-translation)<br/>
 7.1.1. [Front-end translations](#i18n-translation-front)<br/>
@@ -63,7 +61,7 @@ The procedure to follow is described in the [docker readme](docker/README.md).
 ## Setup a development environment
 
 In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up with the following procedure.
-This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker installation method](docker/README.md).
+This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker-compose installation method](docker/README.md).
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -77,19 +75,39 @@ This procedure is not easy to follow so if you don't need to write some code for
    
 3. Install Yarn, the front-end package manager.
    Depending on your system, the installation process may differ, please read the [official Yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable).
+   
+4. Install docker.
+   Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
+   Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
 
-4. Retrieve the project from Git
+5. Add your current user to the docker group and restart. 
+   This may not be required on some systems, if docker was already installed.
+   ```bash
+   sudo usermod -aG docker $(whoami)
+   sudo reboot
+   ```
+
+6. Create a docker network for fab-manager.
+   You may have to change the network address if it is already in use.
+   ```bash
+   docker network create --subnet=172.18.0.0/16 fabmanager
+   ``` 
+
+7. Retrieve the project from Git
 
    ```bash
    git clone https://github.com/LaCasemate/fab-manager.git
    ```
 
-5. Install the software dependencies.
+8. Install the software dependencies.
    First install [PostgreSQL](#postgresql) and [ElasticSearch](#elasticsearch) as specified in their respective documentations.
    Then install the other dependencies:
    - For Ubuntu/Debian:
 
    ```bash
+   # on Ubuntu 18.04 server, you may have to enable the "universe" repository
+   sudo add-apt-repository universe
+   # then, install the dependencies
    sudo apt-get install libpq-dev redis-server imagemagick
    ```
    - For MacOS X:
@@ -98,7 +116,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    brew install redis imagemagick
    ```
 
-6. Init the RVM and NVM instances and check they were correctly configured
+9. Init the RVM and NVM instances and check they were correctly configured
 
    ```bash
    cd fab-manager
@@ -109,20 +127,20 @@ This procedure is not easy to follow so if you don't need to write some code for
    # Must print ok
    ```
 
-7. Install bundler in the current RVM gemset
+10. Install bundler in the current RVM gemset
 
    ```bash
    gem install bundler
    ```
 
-8. Install the required ruby gems and javascript plugins
+11. Install the required ruby gems and javascript plugins
 
    ```bash
    bundle install
    yarn install
    ```
 
-9. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md))
+12. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md))
 
    ```bash
    cp config/database.yml.default config/database.yml
@@ -131,7 +149,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
-10. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+13. Build the databases.
    - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
    - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
@@ -139,25 +157,26 @@ This procedure is not easy to follow so if you don't need to write some code for
    rake db:create
    rake db:migrate
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
+   rake fablab:es_build_stats
    ```
 
-11. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
+14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
 
    ```bash
    mkdir -p tmp/pids
    ```
 
-12. Start the development web server
+15. Start the development web server
 
    ```bash
    foreman s -p 3000
    ```
 
-13. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+16. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
-14. You can login as the default administrator using the credentials defined previously.
+17. You can login as the default administrator using the credentials defined previously.
 
-15. Email notifications will be caught by MailCatcher.
+18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
 <a name="virtual-machine-instructions"></a>
@@ -238,91 +257,50 @@ environment.
 <a name="postgresql"></a>
 ## PostgreSQL
 
-<a name="postgresql-on-debian"></a>
-### Install PostgreSQL 9.4 on Ubuntu/Debian
+<a name="setup-postgresql"></a>
+### Install PostgreSQL 9.4
 
-1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one your distribution source:
+We will use docker to easily install the required version of PostgreSQL.
+
+1. Create the docker binding folder
    ```bash
-   sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+   mkdir -p .docker/postgresql
    ```
 
-
-2. Import the repository signing key, and update the package lists
-
+2. Start the PostgreSQL container.
    ```bash
-   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-   sudo apt-get update
+   docker run --restart=always -d --name fabmanager-postgres \
+   -v $(pwd)/.docker/postgresql:/var/lib/postgresql/data \
+   --network fabmanager --ip 172.18.0.2 \
+   -p 5432:5432 \
+   postgres:9.4
    ```
 
-3. Install PostgreSQL 9.4
+3. Configure fab-manager to use it.
+   On linux systems, PostgreSQL will be available at 172.18.0.2.
+   On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
+   See [environment.md](doc/environment.md) for more details.
 
+4. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
+
+
+<a name="run-postgresql-cli"></a>
+### Run the PostgreSQL command line interface
+
+You may want to access the psql command line tool to check the content of the database, or to run some maintenance routines.
+This can be achieved doing the following:
+
+1. Enter into the PostgreSQL container
    ```bash
-   sudo apt-get install postgresql-9.4
+   docker exec -it fabmanager-postgres bash
    ```
 
-<a name="postgresql-on-macosx"></a>
-### Install and launch PostgreSQL on MacOS X
-
-This assumes you have [Homebrew](http://brew.sh/) installed on your system.
-Otherwise, please follow the official instructions on the project's website.
-
-
-1. Update brew and install PostgreSQL
-
+2. Run the PostgreSQL administration command line interface, logged as the postgres user
+   
    ```bash
-   brew update
-   brew install homebrew/versions/postgresql94
-   ```
-
-2. Launch PostgreSQL
-
-  ```bash
-  # Start postgresql at login with launchd
-  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-  # Load PostgreSQL now
-  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-  ```
-
-<a name="setup-fabmanager-in-postgresql"></a>
-### Setup the FabManager database in PostgreSQL
-
-Before running `rake db:create`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
-To create it, please follow these instructions:
-
-1. Run the PostgreSQL administration command line interface, logged as the postgres user
-   - For Ubuntu/Debian:
-
-   ```bash
-   sudo -i -u postgres
+   su postgres
    psql
    ```
-   - For MacOS X:
-
-   ```bash
-   sudo psql -U $(whoami) postgres
-   ```
-
-   If you get an error running this command, please check your [pg_hba.conf](https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html) file.
-
-2. Create a new user in PostgreSQL (in this example, the user will be named `sleede`)
-
-   ```sql
-   CREATE USER sleede;
-   ```
-
-3. Grant him the right to create databases
-
-   ```sql
-   ALTER ROLE sleede WITH CREATEDB;
-   ```
-
-4. Then, attribute a password to this user
-
-   ```sql
-   ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
-   ```
-
-5. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
 
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
@@ -330,11 +308,11 @@ To create it, please follow these instructions:
 - While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
   This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
   So here's your choices, mainly depending on your security requirements:
-  - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
-  - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
+  - Use the default PostgreSQL super-user (postgres) as the database user. This is the default behavior in fab-manager.
+  - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `username` with you user name):
 
     ```sql
-    ALTER USER sleede WITH SUPERUSER;
+    ALTER USER username WITH SUPERUSER;
     ```
 
   - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
@@ -358,87 +336,50 @@ ElasticSearch is a powerful search engine based on Apache Lucene combined with a
 
 In FabManager, it is used for the admin's statistics module and to perform searches in projects.
 
-<a name="elasticsearch-on-debian"></a>
-### Install ElasticSearch on Ubuntu/Debian
+<a name="setup-elasticsearch"></a>
+### Install ElasticSearch
 
-For a more detailed guide concerning the ElasticSearch installation, please check the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html)
-
-1. Install the OpenJDK's Java Runtime Environment (JRE). ElasticSearch recommends that you install Java 8 update 131 or later.
-   Please check that your distribution's version meet this requirement. 
-   Using Ubuntu 14.04, see https://askubuntu.com/a/944260. With other systems, use the following command
-
-  ```bash
-  sudo apt-get install openjdk-8-jre
-  ```
-  
-2. Install HTTPS support for aptitude
-  ```bash
-  sudo apt-get install apt-transport-https
-  ```
-
-3. Create the repository definition file
+1. Create the docker binding folders
    ```bash
-   echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+   mkdir -p .docker/elasticsearch/config
+   mkdir -p .docker/elasticsearch/plugins
+   mkdir -p .docker/elasticsearch/backups
+   ```
+   
+2. Copy the default configuration files
+   ```bash
+   cp docker/elasticsearch.yml .docker/elasticsearch/config
+   cp docker/log4j2.properties .docker/elasticsearch/config
    ```
 
-4. Import the repository signing key, and update the package lists
-
+3. Start the ElasticSearch container.
    ```bash
-   wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-   sudo apt-get update
+   docker run --restart=always -d --name fabmanager-elastic \
+   -v $(pwd)/.docker/elasticsearch/config:/usr/share/elasticsearch/config \
+   -v $(pwd)/.docker/elasticsearch:/usr/share/elasticsearch/data \
+   -v $(pwd)/.docker/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+   -v $(pwd)/.docker/elasticsearch/backups:/usr/share/elasticsearch/backups \
+   --network fabmanager --ip 172.18.0.3 \
+   -p 9200:9200 -p 9300:9300 \
+   elasticsearch:5.6
    ```
 
-5. Install ElasticSearch 5.6
+4. Configure fab-manager to use it.
+   On linux systems, ElasticSearch will be available at 172.18.0.3.
+   On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
+   See [environment.md](doc/environment.md) for more details.
 
-   ```bash
-   sudo apt-get install elasticsearch
-   ```
+<a name="rebuild-stats"></a>
+### Rebuild statistics
 
-6. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8+/Ubuntu 16.04+), you will need to run:
-
-   ```bash
-   # System V
-   sudo update-rc.d elasticsearch defaults 95 10
-   # *** OR *** (systemd)
-   sudo /bin/systemctl daemon-reload
-   sudo /bin/systemctl enable elasticsearch.service
-   ```
-
-7. Restart the host operating system to complete the installation
-
-   ```bash
-   sudo reboot
-   ```
-
-<a name="elasticsearch-on-macosx"></a>
-### Install ElasticSearch on MacOS X
-
-This assumes you have [Homebrew](http://brew.sh/) installed on your system.
-Otherwise, please follow the official instructions on the project's website.
+Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM) and stored in ElastricSearch.
+See [schedule.yml](config/schedule.yml) to modify this behavior.
+If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
 
 ```bash
-brew update
-brew install elasticsearch@5.6
+# Here for the 50 last days
+rake fablab:generate_stats[50]
 ```
-
-<a name="setup-fabmanager-in-elasticsearch"></a>
-### Setup ElasticSearch for the FabManager
-
-1. Launch the associated rake tasks in the project folder.
-   This will create the fields mappings in ElasticSearch DB
-
-   ```bash
-   rake fablab:es_build_stats
-   ```
-
-2. Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM).
-   See [schedule.yml](config/schedule.yml) to modify this behavior.
-   If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
-
-   ```bash
-   # Here for the 50 last days
-   rake fablab:generate_stats[50]
-   ```
 
 <a name="backup-and-restore-elasticsearch"></a>
 ### Backup and Restore

@@ -23,13 +23,13 @@ If you run the application in production with docker, the settings are localized
     POSTGRES_HOST
 
 DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](../README.md#postgresql)).
-This value is only used when deploying with Docker, otherwise this is configured in [config/database.yml](../config/database.yml.default).
+This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml`.
 Please see [Setup the FabManager database in PostgreSQL](../README.md#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
-This value is only used when deploying with Docker, otherwise this is configured in [config/database.yml](../config/database.yml.default).
+This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 
     REDIS_HOST
 
@@ -49,7 +49,8 @@ You can generate such a random key by running `rake secret`.
 
 Key and secret used to identify you Stripe account through the API.
 Retrieve them from https://dashboard.stripe.com/account/apikeys.
-Even you don't want to charge your customers, you must fill this settings. 
+
+**MANDATORY**: Even if you don't want to charge your customers, you must fill this settings. 
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
 
     STRIPE_CURRENCY
