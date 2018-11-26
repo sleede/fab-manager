@@ -227,7 +227,7 @@ GEM
       activesupport (>= 3.0.0)
     kgio (2.9.3)
     libv8 (3.16.14.11)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -307,7 +307,7 @@ GEM
     puma (3.10.0)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
-    rack (1.6.10)
+    rack (1.6.11)
     rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
