@@ -4,7 +4,7 @@
 - Now using Yarn instead of deprecated Bower as the front-end dependencies manager
 - Migrated front-end application from CoffeeScript to ECMAScript 6 (JS)
 - Integration of Eslint and Rubocop coding rules
-- Fix a bug: on small screens, display of button "change group" overflow
+- Fix a bug: on small screens, display of button "change group" overflows
 
 ## v2.6.7 2018 October 4
 

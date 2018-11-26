@@ -1,10 +1,18 @@
 FROM ruby:2.3
 MAINTAINER peng@sleede.com
 
+# First we need to be able to fetch from https repositories
+RUN apt-get update && \
+    apt-get install -y apt-transport-https \
+      ca-certificates
+
+
 # Add sources for external tools to APT
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+RUN echo "deb https://deb.nodesource.com/node_10.x jessie main" > /etc/apt/sources.list.d/nodesource.list
+RUN echo "deb-src https://deb.nodesource.com/node_10.x jessie main" >> /etc/apt/sources.list.d/nodesource.list
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
