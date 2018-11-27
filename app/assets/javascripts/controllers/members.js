@@ -74,7 +74,7 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
  */
 Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
   function ($scope, $rootScope, $state, $window, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
     $scope.actionUrl = `/api/members/${$scope.currentUser.id}`;

@@ -1,17 +1,7 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('OpenAPIClient', ['$resource', $resource =>
-  $resource('/api/open_api_clients/:id',
+Application.Services.factory('OpenAPIClient', ['$resource', function ($resource) {
+  return $resource('/api/open_api_clients/:id',
     { id: '@id' }, {
       resetToken: {
         method: 'PATCH',
@@ -21,6 +11,5 @@ Application.Services.factory('OpenAPIClient', ['$resource', $resource =>
         method: 'PUT'
       }
     }
-  )
-
-]);
+  );
+}]);

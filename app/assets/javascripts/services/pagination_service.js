@@ -1,14 +1,3 @@
-/* eslint-disable
-    no-return-assign,
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
 Application.Services.factory('paginationService', [function () {
@@ -58,9 +47,9 @@ Application.Services.factory('paginationService', [function () {
         _queryParams[k] = v;
       }
 
-      return this.resourceService[this.functionName](_queryParams, dataPromise => {
+      this.resourceService[this.functionName](_queryParams, dataPromise => {
         this.callback(dataPromise);
-        return this.loading = false;
+        this.loading = false;
       });
     };
   };

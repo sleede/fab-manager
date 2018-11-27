@@ -62,10 +62,10 @@ ambi@^2.2.0:
     editions "^1.1.1"
     typechecker "^4.3.0"
 
-angular-animate@1.3:
-  version "1.3.20"
-  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.3.20.tgz#d1707c727f8ad0df21c4a2dec20cd7fc4945b52a"
-  integrity sha1-0XB8cn+K0N8hxKLewgzX/ElFtSo=
+angular-animate@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.5.11.tgz#1baa43c303d1b93c4e6aa89453b39114b7a1c669"
+  integrity sha1-G6pDwwPRuTxOaqiUU7ORFLehxmk=
 
 angular-aside@1.3:
   version "1.3.2"
@@ -82,10 +82,10 @@ angular-bootstrap-switch@0.4.0:
   resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.4.0.tgz#8f4d45a0de5ff1227bd6ae2c5348e4c821d9303a"
   integrity sha1-j01FoN5f8SJ71q4sU0jkyCHZMDo=
 
-angular-cookies@1.3:
-  version "1.3.20"
-  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.3.20.tgz#590ed18501815a7898aa734e411d409ef390348b"
-  integrity sha1-WQ7RhQGBWniYqnNOQR1AnvOQNIs=
+angular-cookies@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.5.11.tgz#88558de7c5044dcc3abeb79614d7ef8107ba49c0"
+  integrity sha1-iFWN58UETcw6vreWFNfvgQe6ScA=
 
 angular-google-analytics@1.1:
   version "1.1.8"
@@ -96,10 +96,10 @@ angular-google-analytics@1.1:
   version "0.7.9"
   resolved "https://github.com/JanStevens/angular-growl-2.git#2a3a40e01419af879f80f582baaeceef3408e295"
 
-angular-i18n@1.3.15:
-  version "1.3.15"
-  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.3.15.tgz#8c497a7926b08a2fdf39f3ed61a65b4172f45332"
-  integrity sha1-jEl6eSawii/fOfPtYaZbQXL0UzI=
+angular-i18n@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.5.11.tgz#3d0482032d06f1437c6192cd8ef6045e692aa689"
+  integrity sha1-PQSCAy0G8UN8YZLNjvYEXmkqpok=
 
 angular-loading-bar@^0.9.0:
   version "0.9.0"
@@ -121,15 +121,15 @@ angular-moment@0.10:
   dependencies:
     moment ">=2.8.0 <2.11.0"
 
-angular-resource@1.3:
-  version "1.3.20"
-  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.3.20.tgz#5415731074439efff5abad0dd9d4c51b63d951b8"
-  integrity sha1-VBVzEHRDnv/1q60N2dTFG2PZUbg=
+angular-resource@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.5.11.tgz#d93ea619184a2e0ee3ae338265758363172929f0"
+  integrity sha1-2T6mGRhKLg7jrjOCZXWDYxcpKfA=
 
-angular-sanitize@1.3:
-  version "1.3.20"
-  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.3.20.tgz#5b1caa4176b8db2039d7d1c1527537a61be3cd67"
-  integrity sha1-WxyqQXa42yA519HBUnU3phvjzWc=
+angular-sanitize@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.5.11.tgz#ebfb3f343e543f9b2ef050fb4c2e9ee048d1772f"
+  integrity sha1-6/s/ND5UP5su8FD7TC6e4EjRdy8=
 
 angular-scroll@0.6:
   version "0.6.5"
@@ -141,10 +141,10 @@ angular-summernote@0.7.1:
   resolved "https://registry.yarnpkg.com/angular-summernote/-/angular-summernote-0.7.1.tgz#c4bfa83020c4e32f96955b9974c43e5eaeea342e"
   integrity sha1-xL+oMCDE4y+WlVuZdMQ+Xq7qNC4=
 
-angular-touch@1.3:
-  version "1.3.20"
-  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.3.20.tgz#3363d28fe9091fab2669d524a0b9a9d247d814a4"
-  integrity sha1-M2PSj+kJH6smadUkoLmp0kfYFKQ=
+angular-touch@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.5.11.tgz#61f469c47ecf8979fb410c8d3a615d324d2b15ef"
+  integrity sha1-YfRpxH7PiXn7QQyNOmFdMk0rFe8=
 
 angular-translate-interpolation-messageformat@2.8:
   version "2.8.1"
@@ -190,10 +190,10 @@ angular-xeditable@0.1:
     jquery "^1.11.1"
     moment "^2.5.0"
 
-angular@1.4:
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.4.14.tgz#9d0feaf60ce6e52ce50f49ee328656d1e1875c37"
-  integrity sha1-nQ/q9gzm5SzlD0nuMoZW0eGHXDc=
+angular@1.5:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
+  integrity sha1-jFunOG8VllyazzQp9ogVU6raMNY=
 
 angular@^1.0.8, angular@~1.x:
   version "1.7.5"
@@ -1483,9 +1483,10 @@ typechecker@~2.0.1:
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-2.0.8.tgz#e83da84bb64c584ccb345838576c40b0337db82e"
   integrity sha1-6D2oS7ZMWEzLNFg4V2xAsDN9uC4=
 
-"ui-select@https://github.com/angular-ui/ui-select.git#0.13.2":
-  version "0.13.2"
-  resolved "https://github.com/angular-ui/ui-select.git#a7dc9d0226130d288fbc97ad93930da38225234a"
+ui-select@0.19:
+  version "0.19.8"
+  resolved "https://registry.yarnpkg.com/ui-select/-/ui-select-0.19.8.tgz#74860848a7fd8bc494d9856d2f62776ea98637c1"
+  integrity sha1-dIYISKf9i8SU2YVtL2J3bqmGN8E=
 
 underscore@1.7:
   version "1.7.0"

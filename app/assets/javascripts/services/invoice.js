@@ -1,17 +1,7 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('Invoice', ['$resource', $resource =>
-  $resource('/api/invoices/:id',
+Application.Services.factory('Invoice', ['$resource', function ($resource) {
+  return $resource('/api/invoices/:id',
     { id: '@id' }, {
       update: {
         method: 'PUT'
@@ -22,6 +12,5 @@ Application.Services.factory('Invoice', ['$resource', $resource =>
         isArray: true
       }
     }
-  )
-
-]);
+  );
+}]);
