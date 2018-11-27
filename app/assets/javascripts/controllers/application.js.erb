@@ -323,6 +323,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $scope.notifications = data.totals;
 
               angular.forEach(data.notifications, function (notification) { growl.info(notification.message.description); });
+            }).catch(function (error) {
+              console.error('Error while polling notifications', error);
             });
           }
         };
