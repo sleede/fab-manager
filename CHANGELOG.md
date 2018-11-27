@@ -1,5 +1,18 @@
 # Changelog Fab Manager
 
+# v2.7.0 2018 November 27
+
+- Nom using standard [package.json](package.json) file to save application version number
+- Now using Yarn instead of deprecated Bower as the front-end dependencies manager
+- Migrated front-end application from CoffeeScript to ECMAScript 6 (JS)
+- Integration of Eslint and Rubocop coding rules
+- Fix a bug: on small screens, display of button "change group" overflows
+- Fix a bug: creating a transverse plan, create one for the hidden admins group
+- Fix a bug: on some classical docker installations, the elastic-upgrade.sh script won't run successfully
+- Fix a security issue: dependency rack has a vulnerability as described in [CVE-2018-16471](https://nvd.nist.gov/vuln/detail/CVE-2018-16471)
+- Fix a security issue: dependency loofah has a vulnerability as described in [CVE-2018-16468](https://github.com/flavorjones/loofah/issues/154)
+- Updated documentation
+
 ## v2.6.7 2018 October 4
 
 - Ability to configure SMTP more precisely

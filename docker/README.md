@@ -109,7 +109,7 @@ vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
 ```
 You need to carefully configure each variable before starting fab-manager.
-Please refer to the [FabManager README](https://github.com/LaCasemate/fab-manager/blob/master/README.md#environment-configuration) for explanations about those variables.
+Please refer to the [environment configuration documentation](../doc/environment.md) for explanations about those variables.
 
 
 ### Setup nginx configuration
@@ -316,7 +316,8 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bund
 
 ### Steps
 
-When a new version is available, this is how to update fabmanager app in a production environment, using docker-compose :
+When a new version is available, follow this procedure to update fab-manager app in a production environment, using docker-compose.
+You can subscribe to [this atom feed](https://github.com/LaCasemate/fab-manager/releases.atom) to get notified when a new release comes out.
 
 1. go to your app folder
 

@@ -1,0 +1,6 @@
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 16
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent

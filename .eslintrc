@@ -1,0 +1,12 @@
+{
+  "extends": "standard",
+  "rules": {
+    "semi": ["error", "always"]
+  },
+  "globals": {
+    "Application": true,
+    "angular": true,
+    "Fablab": true
+  }
+}
+

@@ -1,13 +1,27 @@
 FROM ruby:2.3
 MAINTAINER peng@sleede.com
 
+# First we need to be able to fetch from https repositories
+RUN apt-get update && \
+    apt-get install -y apt-transport-https \
+      ca-certificates
+
+
+# Add sources for external tools to APT
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+RUN echo "deb https://deb.nodesource.com/node_10.x jessie main" > /etc/apt/sources.list.d/nodesource.list
+RUN echo "deb-src https://deb.nodesource.com/node_10.x jessie main" >> /etc/apt/sources.list.d/nodesource.list
+
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
 # Debian image, we use apt-get to install those.
 RUN apt-get update && \
     apt-get install -y \
       nodejs \
-      supervisor
+      supervisor \
+      yarn
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
@@ -17,6 +31,9 @@ WORKDIR /tmp
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
 RUN bundle install --binstubs
+
+# Run Yarn
+RUN yarn install
 
 # Clean up APT when done.
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

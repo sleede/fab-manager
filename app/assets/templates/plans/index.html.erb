@@ -95,7 +95,7 @@
               <div class="well well-warning">
                   <strong>{{getUserGroup().name}}</strong>
               </div>
-              <button class="btn btn-default m-t"
+              <button class="btn btn-default btn-no-overflow m-t"
                       ng-click="group.change = !group.change"
                       ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paid.plan)"
                       translate

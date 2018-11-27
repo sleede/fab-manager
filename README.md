@@ -9,18 +9,15 @@ FabManager is the FabLab management solution. It is web-based, open-source and t
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
-4.2. [Environment Configuration](#environment-configuration)<br/>
-4.3. [Virtual Machine Instructions](#virtual-machine-instructions)
+4.2. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
-5.1. [Install PostgreSQL 9.4 on Ubuntu/Debian](#postgresql-on-debian)<br/>
-5.2. [Install and launch PostgreSQL on MacOS X](#postgresql-on-macosx)<br/>
-5.3. [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql)<br/>
-5.4. [PostgreSQL Limitations](#postgresql-limitations)
+5.1. [Install PostgreSQL 9.4](#setup-postgresql)<br/>
+5.2. [Run the PostgreSQL command line interface](#run-postgresql-cli)<br/>
+5.3. [PostgreSQL Limitations](#postgresql-limitations)
 6. [ElasticSearch](#elasticsearch)<br/>
-6.1. [Install ElasticSearch on Ubuntu/Debian](#elasticsearch-on-debian)<br/>
-6.2. [Install ElasticSearch on MacOS X](#elasticsearch-on-macosx)<br/>
-6.3. [Setup ElasticSearch for the FabManager](#setup-fabmanager-in-elasticsearch)<br/>
-6.4. [Backup and Restore](#backup-and-restore-elasticsearch)
+6.1. [Install ElasticSearch](#setup-elasticsearch)<br/>
+6.2. [Rebuild statistics](#rebuild-stats)<br/>
+6.3. [Backup and Restore](#backup-and-restore-elasticsearch)
 7. [Internationalization (i18n)](#i18n)<br/>
 7.1. [Translation](#i18n-translation)<br/>
 7.1.1. [Front-end translations](#i18n-translation-front)<br/>
@@ -64,27 +61,57 @@ The procedure to follow is described in the [docker readme](docker/README.md).
 ## Setup a development environment
 
 In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up with the following procedure.
-This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker installation method](docker/README.md).
+This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker-compose installation method](docker/README.md).
 
 <a name="general-guidelines"></a>
 ### General Guidelines
 
-1. Install RVM with the ruby version specified in the [.ruby-version file](.ruby-version).
-   For more details about the process, Please read the [official RVM documentation](http://rvm.io/rvm/install).
+1. Install RVM, with the ruby version specified in the [.ruby-version file](.ruby-version).
+   For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
    If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
+   
+2. Install NVM, withe the node.js version specified in the [.nvmrc file](.nvmrc).
+   For instructions about installing NVM, please refer to [the NVM readme](https://github.com/creationix/nvm#installation).
+   
+3. Install Yarn, the front-end package manager.
+   Depending on your system, the installation process may differ, please read the [official Yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable).
+   
+4. Install docker.
+   Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
+   Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
 
-2. Retrieve the project from Git
+5. Add your current user to the docker group, to allow using docker without sudo. 
+   This may not be required on some systems, if docker was already installed.
+   ```bash
+   # add the docker group if it doesn't already exist
+   sudo groupadd doker
+   # add the current user to the docker group
+   sudo usermod -aG docker $(whoami)
+   # restart to validate changes
+   sudo reboot
+   ```
+
+6. Create a docker network for fab-manager.
+   You may have to change the network address if it is already in use.
+   ```bash
+   docker network create --subnet=172.18.0.0/16 fabmanager
+   ``` 
+
+7. Retrieve the project from Git
 
    ```bash
    git clone https://github.com/LaCasemate/fab-manager.git
    ```
 
-3. Install the software dependencies.
+8. Install the software dependencies.
    First install [PostgreSQL](#postgresql) and [ElasticSearch](#elasticsearch) as specified in their respective documentations.
    Then install the other dependencies:
    - For Ubuntu/Debian:
 
    ```bash
+   # on Ubuntu 18.04 server, you may have to enable the "universe" repository
+   sudo add-apt-repository universe
+   # then, install the dependencies
    sudo apt-get install libpq-dev redis-server imagemagick
    ```
    - For MacOS X:
@@ -93,27 +120,31 @@ This procedure is not easy to follow so if you don't need to write some code for
    brew install redis imagemagick
    ```
 
-4. Init the RVM instance and check it was correctly configured
+9. Init the RVM and NVM instances and check they were correctly configured
 
    ```bash
    cd fab-manager
-   rvm current
-   # Must print ruby-X.Y.Z@fab-manager (where X.Y.Z match the version in .ruby-version)
+   rvm current | grep -q `cat .ruby-version`@fab-manager && echo "ok"
+   # Must print ok
+   nvm use
+   node --version | grep -q `cat .nvmrc` && echo "ok"
+   # Must print ok
    ```
 
-5. Install bundler in the current RVM gemset
+10. Install bundler in the current RVM gemset
 
    ```bash
    gem install bundler
    ```
 
-6. Install the required ruby gems
+11. Install the required ruby gems and javascript plugins
 
    ```bash
    bundle install
+   yarn install
    ```
 
-7. Create the default configuration files **and configure them!** (see the [Environment Configuration](#environment-configuration) section)
+12. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md))
 
    ```bash
    cp config/database.yml.default config/database.yml
@@ -122,7 +153,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    # or use your favorite text editor instead of vi (nano, ne...)
    ```
 
-8. Build the database. You may have to follow the steps described in [the PostgreSQL configuration chapter](#setup-fabmanager-in-postgresql) before, if you don't already had done it.
+13. Build the databases.
    - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
    - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
@@ -130,165 +161,27 @@ This procedure is not easy to follow so if you don't need to write some code for
    rake db:create
    rake db:migrate
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
+   rake fablab:es_build_stats
    ```
 
-9. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
+14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
 
    ```bash
    mkdir -p tmp/pids
    ```
 
-10. Start the development web server
+15. Start the development web server
 
    ```bash
    foreman s -p 3000
    ```
 
-11. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+16. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
 
-12. You can login as the default administrator using the credentials defined previously.
+17. You can login as the default administrator using the credentials defined previously.
 
-13. Email notifications will be caught by MailCatcher.
+18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
-
-<a name="environment-configuration"></a>
-### Environment Configuration
-
-The settings in `config/application.yml` configure the environment variables of the application.
-If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
-
-    POSTGRES_HOST
-
-DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](#postgresql)).
-This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
-
-    POSTGRES_PASSWORD
-
-Password for the PostgreSQL user, as specified in `database.yml`.
-Please see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
-This value is only used when deploying with Docker, otherwise this is configured in `config/database.yml`.
-
-    REDIS_HOST
-
-DNS name or IP address of the server hosting the redis database.
-
-    ELASTICSEARCH_HOST
-
-DNS name or IP address of the server hosting the elasticSearch database.
-
-    SECRET_KEY_BASE
-
-Used by the authentication system to generate random tokens, eg. for resetting passwords.
-Used by Rails to verify the integrity of signed cookies.
-You can generate such a random key by running `rake secret`.
-
-    STRIPE_API_KEY & STRIPE_PUBLISHABLE_KEY
-
-Key and secret used to identify you Stripe account through the API.
-Retrieve them from https://dashboard.stripe.com/account/apikeys.
-
-    STRIPE_CURRENCY
-
-Currency used by stripe to charge the final customer.
-See https://support.stripe.com/questions/which-currencies-does-stripe-support for a list of available 3-letters ISO code.
-
-**BEWARE**: stripe currency cannot be changed during the application life.
-Changing the currency after the application has already run, may result in several bugs and prevent the users to pay through stripe.
-So set this setting carefully before starting the application for the first time.
-
-    INVOICE_PREFIX
-
-When payments are done on the platform, an invoice will be generated as a PDF file.
-The PDF file name will be of the form "(INVOICE_PREFIX) - (invoice ID) _ (invoice date) .pdf"
-
-    FABLAB_WITHOUT_PLANS
-
-If set to 'true', the subscription plans will be fully disabled and invisible in the application.
-It is not recommended to disable plans if at least one subscription was took on the platform.
-
-    FABLAB_WITHOUT_SPACES
-
-If set to 'false', enable the spaces management and reservation in the application.
-It is not recommended to disable spaces if at least one space reservation was made on the system.
-
-    DEFAULT_MAIL_FROM
-
-When sending notification mails, the platform will use this address to identify the sender.
-
-    DELIVERY_METHOD
-
-Configure the Rails' Action Mailer delivery method.
-See http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-
-    DEFAULT_HOST, DEFAULT_PROTOCOL, SMTP_ADDRESS, SMTP_PORT, SMTP_USER_NAME, SMTP_PASSWORD, SMTP_AUTHENTICATION, SMTP_ENABLE_STARTTLS_AUTO & SMTP_OPENSSL_VERIFY_MODE
-
-When DELIVERY_METHOD is set to **smtp**, configure the SMTP server parameters.
-See https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration for more details.
-DEFAULT_HOST is also used to configure Google Analytics.
-
-    GA_ID
-
-Identifier of your Google Analytics account.
-
-    DISQUS_SHORTNAME
-
-Unique identifier of your [Disqus](http://www.disqus.com) forum.
-Disqus forums are used to allow visitors to comment on projects.
-See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- for more information.
-
-    TWITTER_NAME
-
-Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
-This value can be graphically overridden during the application's lifecycle in Admin/Customization/Home page/Twitter Feed.
-It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
-
-    TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
-
-Keys and secrets to access the twitter API.
-Retrieve them from https://apps.twitter.com
-
-    FACEBOOK_APP_ID
-
-This is optional. You can follow [this guide to get your personal App ID](https://developers.facebook.com/docs/apps/register).
-If you do so, you'll be able to customize and get statistics about project shares on Facebook.
-
-    LOG_LEVEL
-
-This parameter configures the logs verbosity.
-Available log levels can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html#log-levels).
-
-    ALLOWED_EXTENSIONS
-
-Exhaustive list of file's extensions available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_MIME_TYPES` values below.
-Please consider that allowing file archives (eg. ZIP) or binary executable (eg. EXE) may result in a **dangerous** security issue and must be avoided in any cases.
-
-    ALLOWED_MIME_TYPES
-
-Exhaustive list of file's mime-types available for public upload as project's CAO attachements.
-Each item in the list must be separated from the others by a space char.
-You will probably want to check that this list match the `ALLOWED_EXTENSIONS` values above.
-Please consider that allowing file archives (eg. application/zip) or binary executable (eg. application/exe) may result in a **dangerous** security issue and must be avoided in any cases.
-
-    MAX_IMAGE_SIZE
-
-Maximum size (in bytes) allowed for image uploaded on the platform.
-This parameter concerns events, plans, user's avatars, projects and steps of projects.
-If this parameter is not specified the maximum size allowed will be 2MB.
-
-    ADMIN_EMAIL, ADMIN_PASSWORD
-
-Credentials for the first admin user created when seeding the project. (not present in application.yml because they are only used once when running the database seed with the command `rake db:seed`)
-
-    Settings related to Open Projects
-
-See the [Open Projects](#open-projects) section for a detailed description of these parameters.
-
-    Settings related to i18n
-
-See the [Settings](#i18n-settings) section of the [Internationalization (i18n)](#i18n) paragraph for a detailed description of these parameters.
-
 
 <a name="virtual-machine-instructions"></a>
 ### Virtual Machine Instructions
@@ -368,91 +261,50 @@ environment.
 <a name="postgresql"></a>
 ## PostgreSQL
 
-<a name="postgresql-on-debian"></a>
-### Install PostgreSQL 9.4 on Ubuntu/Debian
+<a name="setup-postgresql"></a>
+### Install PostgreSQL 9.4
 
-1. Create the file `/etc/apt/sources.list.d/pgdg.list`, and append it one your distribution source:
+We will use docker to easily install the required version of PostgreSQL.
+
+1. Create the docker binding folder
    ```bash
-   sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+   mkdir -p .docker/postgresql
    ```
 
-
-2. Import the repository signing key, and update the package lists
-
+2. Start the PostgreSQL container.
    ```bash
-   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-   sudo apt-get update
+   docker run --restart=always -d --name fabmanager-postgres \
+   -v $(pwd)/.docker/postgresql:/var/lib/postgresql/data \
+   --network fabmanager --ip 172.18.0.2 \
+   -p 5432:5432 \
+   postgres:9.4
    ```
 
-3. Install PostgreSQL 9.4
+3. Configure fab-manager to use it.
+   On linux systems, PostgreSQL will be available at 172.18.0.2.
+   On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
+   See [environment.md](doc/environment.md) for more details.
 
+4. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
+
+
+<a name="run-postgresql-cli"></a>
+### Run the PostgreSQL command line interface
+
+You may want to access the psql command line tool to check the content of the database, or to run some maintenance routines.
+This can be achieved doing the following:
+
+1. Enter into the PostgreSQL container
    ```bash
-   sudo apt-get install postgresql-9.4
+   docker exec -it fabmanager-postgres bash
    ```
 
-<a name="postgresql-on-macosx"></a>
-### Install and launch PostgreSQL on MacOS X
-
-This assumes you have [Homebrew](http://brew.sh/) installed on your system.
-Otherwise, please follow the official instructions on the project's website.
-
-
-1. Update brew and install PostgreSQL
-
+2. Run the PostgreSQL administration command line interface, logged as the postgres user
+   
    ```bash
-   brew update
-   brew install homebrew/versions/postgresql94
-   ```
-
-2. Launch PostgreSQL
-
-  ```bash
-  # Start postgresql at login with launchd
-  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-  # Load PostgreSQL now
-  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-  ```
-
-<a name="setup-fabmanager-in-postgresql"></a>
-### Setup the FabManager database in PostgreSQL
-
-Before running `rake db:create`, you have to make sure that the user configured in [config/database.yml](config/database.yml.default) for the `development` environment exists.
-To create it, please follow these instructions:
-
-1. Run the PostgreSQL administration command line interface, logged as the postgres user
-   - For Ubuntu/Debian:
-
-   ```bash
-   sudo -i -u postgres
+   su postgres
    psql
    ```
-   - For MacOS X:
-
-   ```bash
-   sudo psql -U $(whoami) postgres
-   ```
-
-   If you get an error running this command, please check your [pg_hba.conf](https://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html) file.
-
-2. Create a new user in PostgreSQL (in this example, the user will be named `sleede`)
-
-   ```sql
-   CREATE USER sleede;
-   ```
-
-3. Grant him the right to create databases
-
-   ```sql
-   ALTER ROLE sleede WITH CREATEDB;
-   ```
-
-4. Then, attribute a password to this user
-
-   ```sql
-   ALTER USER sleede WITH ENCRYPTED PASSWORD 'sleede';
-   ```
-
-5. Finally, have a look at the [PostgreSQL Limitations](#postgresql-limitations) section or some errors will occurs preventing you from finishing the installation procedure.
 
 <a name="postgresql-limitations"></a>
 ### PostgreSQL Limitations
@@ -460,11 +312,11 @@ To create it, please follow these instructions:
 - While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
   This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
   So here's your choices, mainly depending on your security requirements:
-  - Use the default PostgreSQL super-user (postgres) as the database user of fab-manager.
-  - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `sleede` with you user name):
+  - Use the default PostgreSQL super-user (postgres) as the database user. This is the default behavior in fab-manager.
+  - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `username` with you user name):
 
     ```sql
-    ALTER USER sleede WITH SUPERUSER;
+    ALTER USER username WITH SUPERUSER;
     ```
 
   - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
@@ -488,87 +340,50 @@ ElasticSearch is a powerful search engine based on Apache Lucene combined with a
 
 In FabManager, it is used for the admin's statistics module and to perform searches in projects.
 
-<a name="elasticsearch-on-debian"></a>
-### Install ElasticSearch on Ubuntu/Debian
+<a name="setup-elasticsearch"></a>
+### Install ElasticSearch
 
-For a more detailed guide concerning the ElasticSearch installation, please check the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html)
-
-1. Install the OpenJDK's Java Runtime Environment (JRE). ElasticSearch recommends that you install Java 8 update 131 or later.
-   Please check that your distribution's version meet this requirement. 
-   Using Ubuntu 14.04, see https://askubuntu.com/a/944260. With other systems, use the following command
-
-  ```bash
-  sudo apt-get install openjdk-8-jre
-  ```
-  
-2. Install HTTPS support for aptitude
-  ```bash
-  sudo apt-get install apt-transport-https
-  ```
-
-3. Create the repository definition file
+1. Create the docker binding folders
    ```bash
-   echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+   mkdir -p .docker/elasticsearch/config
+   mkdir -p .docker/elasticsearch/plugins
+   mkdir -p .docker/elasticsearch/backups
+   ```
+   
+2. Copy the default configuration files
+   ```bash
+   cp docker/elasticsearch.yml .docker/elasticsearch/config
+   cp docker/log4j2.properties .docker/elasticsearch/config
    ```
 
-4. Import the repository signing key, and update the package lists
-
+3. Start the ElasticSearch container.
    ```bash
-   wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-   sudo apt-get update
+   docker run --restart=always -d --name fabmanager-elastic \
+   -v $(pwd)/.docker/elasticsearch/config:/usr/share/elasticsearch/config \
+   -v $(pwd)/.docker/elasticsearch:/usr/share/elasticsearch/data \
+   -v $(pwd)/.docker/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+   -v $(pwd)/.docker/elasticsearch/backups:/usr/share/elasticsearch/backups \
+   --network fabmanager --ip 172.18.0.3 \
+   -p 9200:9200 -p 9300:9300 \
+   elasticsearch:5.6
    ```
 
-5. Install ElasticSearch 5.6
+4. Configure fab-manager to use it.
+   On linux systems, ElasticSearch will be available at 172.18.0.3.
+   On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
+   See [environment.md](doc/environment.md) for more details.
 
-   ```bash
-   sudo apt-get install elasticsearch
-   ```
+<a name="rebuild-stats"></a>
+### Rebuild statistics
 
-6. To automatically start ElasticSearch during bootup, then, depending if your system is compatible with SysV (eg. Ubuntu 14.04) or uses systemd (eg. Debian 8+/Ubuntu 16.04+), you will need to run:
-
-   ```bash
-   # System V
-   sudo update-rc.d elasticsearch defaults 95 10
-   # *** OR *** (systemd)
-   sudo /bin/systemctl daemon-reload
-   sudo /bin/systemctl enable elasticsearch.service
-   ```
-
-7. Restart the host operating system to complete the installation
-
-   ```bash
-   sudo reboot
-   ```
-
-<a name="elasticsearch-on-macosx"></a>
-### Install ElasticSearch on MacOS X
-
-This assumes you have [Homebrew](http://brew.sh/) installed on your system.
-Otherwise, please follow the official instructions on the project's website.
+Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM) and stored in ElastricSearch.
+See [schedule.yml](config/schedule.yml) to modify this behavior.
+If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
 
 ```bash
-brew update
-brew install elasticsearch@5.6
+# Here for the 50 last days
+rake fablab:generate_stats[50]
 ```
-
-<a name="setup-fabmanager-in-elasticsearch"></a>
-### Setup ElasticSearch for the FabManager
-
-1. Launch the associated rake tasks in the project folder.
-   This will create the fields mappings in ElasticSearch DB
-
-   ```bash
-   rake fablab:es_build_stats
-   ```
-
-2. Every nights, the statistics for the day that just ended are built automatically at 01:00 (AM).
-   See [schedule.yml](config/schedule.yml) to modify this behavior.
-   If the scheduled task wasn't executed for any reason (eg. you are in a dev environment and your computer was turned off at 1 AM), you can force the statistics data generation in ElasticSearch, running the following command.
-
-   ```bash
-   # Here for the 50 last days
-   rake fablab:generate_stats[50]
-   ```
 
 <a name="backup-and-restore-elasticsearch"></a>
 ### Backup and Restore
@@ -629,91 +444,8 @@ If you are in a development environment, your can keep the default values, other
 
 <a name="i18n-settings"></a>
 #### Settings
-    APP_LOCALE
 
-Configure application's main localization and translation settings.
-
-See `config/locales/app.*.yml` for a list of available locales. Default is **en**.
-
-    RAILS_LOCALE
-
-Configure Ruby on Rails localization settings (currency, dates, number formats ...).
-
-Please, be aware that **the configured locale will imply the CURRENCY symbol used to generate invoices**.
-
-_Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
-
-See `config/locales/rails.*.yml` for a list of available locales. Default is **en**.
-
-If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
-You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
-
-    MOMENT_LOCALE
-
-Configure the moment.js library for l10n.
-
-See `vendor/assets/components/moment/locale/*.js` for a list of available locales.
-Default is **en** (even if it's not listed).
-
-    SUMMERNOTE_LOCALE
-
-Configure the javascript summernote editor for l10n.
-
-See `vendor/assets/components/summernote/lang/summernote-*.js` for a list of available locales.
-Default is **en-US** (even if it's not listed).
-
-    ANGULAR_LOCALE
-
-Configure the locale for angular-i18n.
-
-Please, be aware that **the configured locale will imply the CURRENCY displayed to front-end users.**
-
-_Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
-
-See `vendor/assets/components/angular-i18n/angular-locale_*.js` for a list of available locales. Default is **en**.
-
-    MESSAGEFORMAT_LOCALE
-
-Configure the messageformat.js library, used by angular-translate.
-
-See vendor/assets/components/messageformat/locale/*.js for a list of available locales.
-
-    FULLCALENDAR_LOCALE
-
-Configure the fullCalendar JS agenda library.
-
-See `vendor/assets/components/fullcalendar/dist/lang/*.js` for a list of available locales. Default is **en** (even if it's not listed).
-
-    ELASTICSEARCH_LANGUAGE_ANALYZER
-
-This configure the language analyzer for indexing and searching in projects with ElasticSearch.
-See https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html for a list of available analyzers.
-
-    TIME_ZONE
-
-In Rails: set Time.zone default to the specified zone and make Active Record auto-convert to this zone. Run `rake time:zones:all` for a list of available time zone names.
-Default is **UTC**.
-
-    WEEK_STARTING_DAY
-
-Configure the first day of the week in your locale zone (generally monday or sunday).
-
-    D3_DATE_FORMAT
-
-Date format for dates displayed in statistics charts.
-See https://github.com/mbostock/d3/wiki/Time-Formatting#format for available formats.
-
-    UIB_DATE_FORMAT
-
-Date format for dates displayed and parsed in date pickers.
-See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a list available formats.
-
-**BEWARE**: years format with less than 4 digits will result in problems because the system won't be able to distinct dates with the same less significant digits, eg. 50 could mean 1950 or 2050.
-
-    EXCEL_DATE_FORMAT
-
-Date format for dates shown in exported Excel files (eg. statistics)
-See https://support.microsoft.com/en-us/kb/264372 for a list a available formats.
+Please refer to the [environment configuration documentation](doc/environment.md#internationalization-settings)
 
 <a name="i18n-apply"></a>
 #### Applying changes

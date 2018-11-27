@@ -1,15 +1,13 @@
 source 'https://rubygems.org'
 
+gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
-gem 'compass-rails', '2.0.4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', '= 0.12.0', platforms: :ruby
 
@@ -39,37 +37,33 @@ group :development, :test do
 end
 
 group :development do
+  gem 'active_record_query_trace'
+  gem 'awesome_print'
+  gem 'capistrano'
+  gem 'capistrano-maintenance', '0.0.5', require: false
+  gem 'capistrano-sidekiq', require: false
+  gem 'coveralls', require: false
+  gem 'foreman'
   # Preview mail in the browser
   gem 'mailcatcher'
-  gem 'awesome_print'
-
   gem 'puma'
-  gem 'foreman'
-
-  gem 'capistrano'
   gem 'rvm-capistrano', require: false
-  gem 'capistrano-sidekiq', require: false
-  gem 'capistrano-maintenance', '0.0.5', require: false
-
-  gem 'active_record_query_trace'
-
-  gem 'coveralls', require: false
 end
 
 group :test do
+  gem 'byebug'
   gem 'database_cleaner'
   gem 'faker'
-  gem 'test_after_commit'
   gem 'minitest-reporters'
-  gem 'webmock'
-  gem 'vcr'
-  gem 'byebug'
   gem 'pdf-reader'
+  gem 'test_after_commit'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do
-  gem 'unicorn'
   gem 'rails_12factor'
+  gem 'unicorn'
 end
 
 gem 'seed_dump'
@@ -90,9 +84,6 @@ gem 'figaro'
 
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
-
-#using bower instead
-#gem 'angularjs-rails'
 
 # Image processing ruby wrapper for ImageMagick
 gem 'mini_magick'
@@ -122,9 +113,9 @@ gem 'recurrence'
 gem 'prawn'
 gem 'prawn-table'
 
-gem 'elasticsearch-rails', '~> 5'
 gem 'elasticsearch-model', '~> 5'
 gem 'elasticsearch-persistence', '~> 5'
+gem 'elasticsearch-rails', '~> 5'
 
 gem 'notify_with'
 
@@ -145,11 +136,11 @@ gem 'message_format'
 gem 'openlab_ruby'
 
 gem 'api-pagination'
-gem 'has_secure_token'
 gem 'apipie-rails'
+gem 'has_secure_token'
 
 # XLS files generation
 gem 'axlsx', git: 'https://github.com/randym/axlsx', branch: 'release-3.0.0'
 gem 'axlsx_rails'
 
-gem "rack-protection", "1.5.5"
+gem 'rack-protection', '1.5.5'
