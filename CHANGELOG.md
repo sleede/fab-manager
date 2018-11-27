@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+# v2.7.0 2018 November 27
+
 - Nom using standard [package.json](package.json) file to save application version number
 - Now using Yarn instead of deprecated Bower as the front-end dependencies manager
 - Migrated front-end application from CoffeeScript to ECMAScript 6 (JS)
