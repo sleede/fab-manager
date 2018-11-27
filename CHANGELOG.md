@@ -4,6 +4,7 @@
 - Fix a security issue: dependency jQuery < 3.0.0 has a vulnerability as described in [CVE-2015-9251](https://nvd.nist.gov/vuln/detail/CVE-2015-9251)
 - Fix a security issue: dependency moment < 2.11.2 has a vulnerability as described in [CVE-2016-4055](https://nvd.nist.gov/vuln/detail/CVE-2016-4055)
 - Fix a security issue: dependency moment < 2.19.3 has a vulnerability as described in [CVE-2017-18214](https://nvd.nist.gov/vuln/detail/CVE-2017-18214)
+- Fix a security issue: dependency RubyZip < 1.1.2 has a vulnerability as described in [CVE-2018-1000544](https://nvd.nist.gov/vuln/detail/CVE-2018-1000544)
 
 # v2.7.0 2018 November 27
 

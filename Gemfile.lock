@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/randym/axlsx
-  revision: 977c09de1515e86536f0c952c08be319fbbab870
-  branch: release-3.0.0
+  revision: c593a08b2a929dac7aa8dc418b55e26b4c49dc34
+  branch: master
   specs:
     axlsx (3.0.0.pre)
-      htmlentities (~> 4.3.4)
+      htmlentities (~> 4.3, >= 4.3.4)
       mimemagic (~> 0.3)
-      nokogiri (>= 1.7.1)
+      nokogiri (~> 1.8, >= 1.8.2)
       rubyzip (~> 1.2, >= 1.2.1)
 
 GEM
@@ -366,7 +366,7 @@ GEM
     rolify (4.0.0)
     ruby-progressbar (1.7.5)
     ruby-rc4 (0.1.5)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     rufus-scheduler (3.0.9)
       tzinfo
     rvm-capistrano (1.5.6)
@@ -550,6 +550,7 @@ DEPENDENCIES
   recurrence
   responders (~> 2.0)
   rolify
+  rubyzip (>= 1.2.2)
   rvm-capistrano
   sass-rails (= 5.0.1)
   sdoc (~> 0.4.0)

@@ -140,7 +140,8 @@ gem 'apipie-rails'
 gem 'has_secure_token'
 
 # XLS files generation
-gem 'axlsx', git: 'https://github.com/randym/axlsx', branch: 'release-3.0.0'
+gem 'axlsx', git: 'https://github.com/randym/axlsx', branch: 'master'
 gem 'axlsx_rails'
+gem 'rubyzip', '>= 1.2.2'
 
 gem 'rack-protection', '1.5.5'
