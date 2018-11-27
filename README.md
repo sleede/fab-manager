@@ -54,8 +54,8 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 <a name="setup-a-production-environment"></a>
 ## Setup a production environment
 
-To run fab-manager as a production application, this is highly recommended to use [Docker](https://www.docker.com/).
-The procedure to follow is described in the [docker readme](docker/README.md).
+To run fab-manager as a production application, this is highly recommended to use [Docker-compose](https://docs.docker.com/compose/overview/).
+The procedure to follow is described in the [docker-compose readme](docker/README.md).
 
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
@@ -70,7 +70,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
    If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
    
-2. Install NVM, withe the node.js version specified in the [.nvmrc file](.nvmrc).
+2. Install NVM, with the node.js version specified in the [.nvmrc file](.nvmrc).
    For instructions about installing NVM, please refer to [the NVM readme](https://github.com/creationix/nvm#installation).
    
 3. Install Yarn, the front-end package manager.
@@ -80,8 +80,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
    Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
 
-5. Add your current user to the docker group, to allow using docker without sudo. 
-   This may not be required on some systems, if docker was already installed.
+5. Add your current user to the docker group, to allow using docker without `sudo`.
    ```bash
    # add the docker group if it doesn't already exist
    sudo groupadd doker
