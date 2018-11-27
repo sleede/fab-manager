@@ -112,6 +112,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
           if (currentUser.need_completion && toState.name !== 'app.logged.profileCompletion') {
             $state.go('app.logged.profileCompletion');
           }
+        }).catch(() => {
+          // no one is logged, just ignore
         });
       });
 

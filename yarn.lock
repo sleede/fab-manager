@@ -62,10 +62,10 @@ ambi@^2.2.0:
     editions "^1.1.1"
     typechecker "^4.3.0"
 
-angular-animate@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.5.11.tgz#1baa43c303d1b93c4e6aa89453b39114b7a1c669"
-  integrity sha1-G6pDwwPRuTxOaqiUU7ORFLehxmk=
+angular-animate@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.6.10.tgz#c520f6d341370e34e0a62060c99bcf47b7d7db8c"
+  integrity sha512-RU9ZJbTspq0W0x675H5k1DeSgKbAFfp2aiYoNGdlD+wQNKvwwMR5ho+EkDKkx9zE02a5goe8Z6EhhYPQSff9dA==
 
 angular-aside@1.3:
   version "1.3.2"
@@ -82,10 +82,10 @@ angular-bootstrap-switch@0.4.0:
   resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.4.0.tgz#8f4d45a0de5ff1227bd6ae2c5348e4c821d9303a"
   integrity sha1-j01FoN5f8SJ71q4sU0jkyCHZMDo=
 
-angular-cookies@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.5.11.tgz#88558de7c5044dcc3abeb79614d7ef8107ba49c0"
-  integrity sha1-iFWN58UETcw6vreWFNfvgQe6ScA=
+angular-cookies@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.10.tgz#20a014d501242e2edacd21397c0e5480e08dee00"
+  integrity sha512-ADfbqXLhwcaecAiWIaxpl8XWFJgWsrDl/ksSEkYm5dSoXHYlj3HKlAhPbjBv/foYS7pdI0apmSGHWrBPqdjF/g==
 
 angular-google-analytics@1.1:
   version "1.1.8"
@@ -96,10 +96,10 @@ angular-google-analytics@1.1:
   version "0.7.9"
   resolved "https://github.com/JanStevens/angular-growl-2.git#2a3a40e01419af879f80f582baaeceef3408e295"
 
-angular-i18n@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.5.11.tgz#3d0482032d06f1437c6192cd8ef6045e692aa689"
-  integrity sha1-PQSCAy0G8UN8YZLNjvYEXmkqpok=
+angular-i18n@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.6.10.tgz#16d9d6e6f9501a2cb80bce30c5cd1c76ddb5a545"
+  integrity sha512-/57YZVxgyGmdCDttNe9fuAepI/c3lA9KgER9IY4U75f6K8eM8Y7GVhqBy3x2QQ9uTiubfvlcmoOJKCC621pPFw==
 
 angular-loading-bar@^0.9.0:
   version "0.9.0"
@@ -121,15 +121,15 @@ angular-moment@0.10:
   dependencies:
     moment ">=2.8.0 <2.11.0"
 
-angular-resource@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.5.11.tgz#d93ea619184a2e0ee3ae338265758363172929f0"
-  integrity sha1-2T6mGRhKLg7jrjOCZXWDYxcpKfA=
+angular-resource@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.6.10.tgz#28c1834e9fa623467d2f9894716a4e6c7e077459"
+  integrity sha512-jrYXUGPtpv/lTBlYZ6HZefIV6Lb+6e1HUavBPg9TSzW7s4zYRBWzMj6vMg8gZzVjWdH/nYBWfilV0qfnmZSI+A==
 
-angular-sanitize@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.5.11.tgz#ebfb3f343e543f9b2ef050fb4c2e9ee048d1772f"
-  integrity sha1-6/s/ND5UP5su8FD7TC6e4EjRdy8=
+angular-sanitize@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.6.10.tgz#635a362afb2dd040179f17d3a5455962b2c1918f"
+  integrity sha512-01i1Xoq9ykUrsoYQMSB6dWZmPp9Df5hfCqMAGGzJBWZ7L2WY0OtUphdI0YvR8ZF9lAsWtGNtsEFilObjq5nTgQ==
 
 angular-scroll@0.6:
   version "0.6.5"
@@ -141,10 +141,10 @@ angular-summernote@0.7.1:
   resolved "https://registry.yarnpkg.com/angular-summernote/-/angular-summernote-0.7.1.tgz#c4bfa83020c4e32f96955b9974c43e5eaeea342e"
   integrity sha1-xL+oMCDE4y+WlVuZdMQ+Xq7qNC4=
 
-angular-touch@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.5.11.tgz#61f469c47ecf8979fb410c8d3a615d324d2b15ef"
-  integrity sha1-YfRpxH7PiXn7QQyNOmFdMk0rFe8=
+angular-touch@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.6.10.tgz#bd51fa48bd2c2c477fea776817535601e6340c2f"
+  integrity sha512-ZblW46aN5s7OOihpXDa0qzrJXdaVGE44jc+a8e1NpOjhCKZDQze+nBHh3xw3toAF1BIfDJIkRstadk4h2R/uLg==
 
 angular-translate-interpolation-messageformat@2.8:
   version "2.8.1"
@@ -190,10 +190,10 @@ angular-xeditable@0.1:
     jquery "^1.11.1"
     moment "^2.5.0"
 
-angular@1.5:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
-  integrity sha1-jFunOG8VllyazzQp9ogVU6raMNY=
+angular@1.6:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.10.tgz#eed3080a34d29d0f681ff119b18ce294e3f74826"
+  integrity sha512-PCZ5/hVdvPQiYyH0VwsPjrErPHRcITnaXxhksceOXgtJeesKHLA7KDu4X/yvcAi+1zdGgGF+9pDxkJvghXI9Wg==
 
 angular@^1.0.8, angular@~1.x:
   version "1.7.5"
