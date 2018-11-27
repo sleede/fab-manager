@@ -1,17 +1,7 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('Price', ['$resource', $resource =>
-  $resource('/api/prices/:id',
+Application.Services.factory('Price', ['$resource', function ($resource) {
+  return $resource('/api/prices/:id',
     {}, {
       query: {
         isArray: true
@@ -25,6 +15,5 @@ Application.Services.factory('Price', ['$resource', $resource =>
         isArray: false
       }
     }
-  )
-
-]);
+  );
+}]);

@@ -1,17 +1,7 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('Availability', ['$resource', $resource =>
-  $resource('/api/availabilities/:id',
+Application.Services.factory('Availability', ['$resource', function ($resource) {
+  return $resource('/api/availabilities/:id',
     { id: '@id' }, {
       machine: {
         method: 'GET',
@@ -44,6 +34,5 @@ Application.Services.factory('Availability', ['$resource', $resource =>
         url: '/api/availabilities/:id/lock'
       }
     }
-  )
-
-]);
+  );
+}]);

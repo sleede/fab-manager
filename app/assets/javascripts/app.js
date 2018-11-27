@@ -14,7 +14,7 @@ Application.Controllers = angular.module('application.controllers', []);
 Application.Filters = angular.module('application.filters', []);
 Application.Directives = angular.module('application.directives', []);
 
-angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngCookies', 'ui.router', 'ui.bootstrap',
+angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap',
   'ngUpload', 'duScroll', 'application.filters', 'application.services', 'application.directives',
   'frapontillo.bootstrap-switch', 'application.constants', 'application.controllers', 'application.router',
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
@@ -112,6 +112,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ngCooki
           if (currentUser.need_completion && toState.name !== 'app.logged.profileCompletion') {
             $state.go('app.logged.profileCompletion');
           }
+        }).catch(() => {
+          // no one is logged, just ignore
         });
       });
 

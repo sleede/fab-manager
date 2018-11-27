@@ -1,22 +1,11 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('Admin', ['$resource', $resource =>
-  $resource('/api/admins/:id',
+Application.Services.factory('Admin', ['$resource', function ($resource) {
+  return $resource('/api/admins/:id',
     { id: '@id' }, {
       query: {
         isArray: false
       }
     }
-  )
-
-]);
+  );
+}]);

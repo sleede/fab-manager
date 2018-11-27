@@ -258,8 +258,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         if (user.need_completion) {
           return $state.transitionTo('app.logged.profileCompletion');
         }
-      }, function (error) {
-        console.error(`Authentication failed: ${error}`);
+      }, function () {
+        console.info('No users currently logged');
         $rootScope.toCheckNotifications = false;
       });
 
@@ -289,7 +289,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       // shorthands
       $scope.isAuthenticated = Auth.isAuthenticated;
       $scope.isAuthorized = AuthService.isAuthorized;
-      return $rootScope.login = $scope.login;
+      $rootScope.login = $scope.login;
     };
 
     /**
@@ -323,6 +323,8 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $scope.notifications = data.totals;
 
               angular.forEach(data.notifications, function (notification) { growl.info(notification.message.description); });
+            }).catch(function (error) {
+              console.error('Error while polling notifications', error);
             });
           }
         };

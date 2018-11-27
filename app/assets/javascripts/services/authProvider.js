@@ -1,17 +1,7 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('AuthProvider', ['$resource', $resource =>
-  $resource('/api/auth_providers/:id',
+Application.Services.factory('AuthProvider', ['$resource', function ($resource) {
+  return $resource('/api/auth_providers/:id',
     { id: '@id' }, {
       update: {
         method: 'PUT'
@@ -29,6 +19,5 @@ Application.Services.factory('AuthProvider', ['$resource', $resource =>
         url: '/api/auth_providers/send_code'
       }
     }
-  )
-
-]);
+  );
+}]);

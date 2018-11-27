@@ -1,22 +1,11 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('Theme', ['$resource', $resource =>
-  $resource('/api/themes/:id',
+Application.Services.factory('Theme', ['$resource', function ($resource) {
+  return $resource('/api/themes/:id',
     { id: '@id' }, {
       update: {
         method: 'PUT'
       }
     }
-  )
-
-]);
+  );
+}]);

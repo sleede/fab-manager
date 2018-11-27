@@ -13,7 +13,7 @@
 /**
  * Navigation controller. List the links availables in the left navigation pane and their icon.
  */
-Application.Controllers.controller('MainNavController', ['$scope', '$location', '$cookies', function ($scope, $location, $cookies) {
+Application.Controllers.controller('MainNavController', ['$scope', function ($scope) {
   // Common links (public application)
   $scope.navLinks = [
     {

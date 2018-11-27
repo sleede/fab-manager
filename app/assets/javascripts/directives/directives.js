@@ -85,7 +85,7 @@ Application.Directives.directive('disableAnimation', ['$animate', ($animate) =>
   ({
     restrict: 'A',
     link (scope, elem, attrs) {
-      return attrs.$observe('disableAnimation', value => $animate.enabled(!value, elem));
+      return attrs.$observe('disableAnimation', value => $animate.enabled(elem, !value));
     }
   })
 ]);

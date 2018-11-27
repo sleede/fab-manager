@@ -13,8 +13,8 @@
  */
 'use strict';
 
-Application.Filters.filter('array', [ () =>
-  function (arrayLength) {
+Application.Filters.filter('array', [function () {
+  return function (arrayLength) {
     if (arrayLength) {
       arrayLength = Math.ceil(arrayLength);
       const arr = new Array(arrayLength);
@@ -25,13 +25,12 @@ Application.Filters.filter('array', [ () =>
 
       return arr;
     }
-  }
-
-]);
+  };
+}]);
 
 // filter for projects and trainings
-Application.Filters.filter('machineFilter', [ () =>
-  function (elements, selectedMachine) {
+Application.Filters.filter('machineFilter', [function () {
+  return function (elements, selectedMachine) {
     if (!angular.isUndefined(elements) && !angular.isUndefined(selectedMachine) && (elements != null) && (selectedMachine != null)) {
       const filteredElements = [];
       angular.forEach(elements, function (element) {
@@ -43,12 +42,11 @@ Application.Filters.filter('machineFilter', [ () =>
     } else {
       return elements;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('projectMemberFilter', [ 'Auth', Auth =>
-  function (projects, selectedMember) {
+Application.Filters.filter('projectMemberFilter', [ 'Auth', function (Auth) {
+  return function (projects, selectedMember) {
     if (!angular.isUndefined(projects) && angular.isDefined(selectedMember) && (projects != null) && (selectedMember != null) && (selectedMember !== '')) {
       const filteredProject = [];
       // Mes projets
@@ -70,12 +68,11 @@ Application.Filters.filter('projectMemberFilter', [ 'Auth', Auth =>
     } else {
       return projects;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('themeFilter', [ () =>
-  function (projects, selectedTheme) {
+Application.Filters.filter('themeFilter', [function () {
+  return function (projects, selectedTheme) {
     if (!angular.isUndefined(projects) && !angular.isUndefined(selectedTheme) && (projects != null) && (selectedTheme != null)) {
       const filteredProjects = [];
       angular.forEach(projects, function (project) {
@@ -87,12 +84,11 @@ Application.Filters.filter('themeFilter', [ () =>
     } else {
       return projects;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('componentFilter', [ () =>
-  function (projects, selectedComponent) {
+Application.Filters.filter('componentFilter', [function () {
+  return function (projects, selectedComponent) {
     if (!angular.isUndefined(projects) && !angular.isUndefined(selectedComponent) && (projects != null) && (selectedComponent != null)) {
       const filteredProjects = [];
       angular.forEach(projects, function (project) {
@@ -104,12 +100,11 @@ Application.Filters.filter('componentFilter', [ () =>
     } else {
       return projects;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('projectsByAuthor', [ () =>
-  function (projects, authorId) {
+Application.Filters.filter('projectsByAuthor', [function () {
+  return function (projects, authorId) {
     if (!angular.isUndefined(projects) && angular.isDefined(authorId) && (projects != null) && (authorId != null) && (authorId !== '')) {
       const filteredProject = [];
       angular.forEach(projects, function (project) {
@@ -121,12 +116,11 @@ Application.Filters.filter('projectsByAuthor', [ () =>
     } else {
       return projects;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('projectsCollabored', [ () =>
-  function (projects, memberId) {
+Application.Filters.filter('projectsCollabored', [function () {
+  return function (projects, memberId) {
     if (!angular.isUndefined(projects) && angular.isDefined(memberId) && (projects != null) && (memberId != null) && (memberId !== '')) {
       const filteredProject = [];
       angular.forEach(projects, function (project) {
@@ -138,55 +132,49 @@ Application.Filters.filter('projectsCollabored', [ () =>
     } else {
       return projects;
     }
-  }
-
-]);
+  };
+}]);
 
 // depend on humanize.js lib in /vendor
-Application.Filters.filter('humanize', [ () =>
-  (element, param) => Humanize.truncate(element, param, null)
-
-]);
+Application.Filters.filter('humanize', [function () {
+  return (element, param) => Humanize.truncate(element, param, null);
+}]);
 
 /**
  * This filter will convert ASCII carriage-return character to the HTML break-line tag
  */
-Application.Filters.filter('breakFilter', [ () =>
-  function (text) {
+Application.Filters.filter('breakFilter', [function () {
+  return function (text) {
     if (text != null) {
       return text.replace(/\n+/g, '<br />');
     }
-  }
-
-]);
+  };
+}]);
 
 /**
  * This filter will take a HTML text as input and will return it without the html tags
  */
-Application.Filters.filter('simpleText', [ () =>
-  function (text) {
+Application.Filters.filter('simpleText', [function () {
+  return function (text) {
     if (text != null) {
       text = text.replace(/<br\s*\/?>/g, '\n');
       return text.replace(/<\/?\w+[^>]*>/g, '');
     } else {
       return '';
     }
-  }
+  };
+}]);
 
-]);
+Application.Filters.filter('toTrusted', [ '$sce', function ($sce) {
+  return text => $sce.trustAsHtml(text);
+}]);
 
-Application.Filters.filter('toTrusted', [ '$sce', $sce =>
-  text => $sce.trustAsHtml(text)
+Application.Filters.filter('planIntervalFilter', [function () {
+  return (interval, intervalCount) => moment.duration(intervalCount, interval).humanize();
+}]);
 
-]);
-
-Application.Filters.filter('planIntervalFilter', [ () =>
-  (interval, intervalCount) => moment.duration(intervalCount, interval).humanize()
-
-]);
-
-Application.Filters.filter('humanReadablePlanName', ['$filter', $filter =>
-  function (plan, groups, short) {
+Application.Filters.filter('humanReadablePlanName', ['$filter', function ($filter) {
+  return function (plan, groups, short) {
     if (plan != null) {
       let result = plan.base_name;
       if (groups != null) {
@@ -203,12 +191,11 @@ Application.Filters.filter('humanReadablePlanName', ['$filter', $filter =>
       result += ` - ${$filter('planIntervalFilter')(plan.interval, plan.interval_count)}`;
       return result;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('trainingReservationsFilter', [ () =>
-  function (elements, selectedScope) {
+Application.Filters.filter('trainingReservationsFilter', [function () {
+  return function (elements, selectedScope) {
     if (!angular.isUndefined(elements) && !angular.isUndefined(selectedScope) && (elements != null) && (selectedScope != null)) {
       const filteredElements = [];
       angular.forEach(elements, function (element) {
@@ -236,12 +223,11 @@ Application.Filters.filter('trainingReservationsFilter', [ () =>
     } else {
       return elements;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('eventsReservationsFilter', [ () =>
-  function (elements, selectedScope) {
+Application.Filters.filter('eventsReservationsFilter', [function () {
+  return function (elements, selectedScope) {
     if (!angular.isUndefined(elements) && !angular.isUndefined(selectedScope) && (elements != null) && (selectedScope != null) && (selectedScope !== '')) {
       const filteredElements = [];
       angular.forEach(elements, function (element) {
@@ -276,12 +262,11 @@ Application.Filters.filter('eventsReservationsFilter', [ () =>
     } else {
       return elements;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('groupFilter', [ () =>
-  function (elements, member) {
+Application.Filters.filter('groupFilter', [function () {
+  return function (elements, member) {
     if (!angular.isUndefined(elements) && !angular.isUndefined(member) && (elements != null) && (member != null)) {
       const filteredElements = [];
       angular.forEach(elements, function (element) {
@@ -293,86 +278,78 @@ Application.Filters.filter('groupFilter', [ () =>
     } else {
       return elements;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('groupByFilter', [ () =>
-  _.memoize((elements, field) => _.groupBy(elements, field))
-
-]);
+Application.Filters.filter('groupByFilter', [function () {
+  return _.memoize((elements, field) => _.groupBy(elements, field));
+}]);
 
 Application.Filters.filter('capitalize', [() =>
   text => `${text.charAt(0).toUpperCase()}${text.slice(1).toLowerCase()}`
 
 ]);
 
-Application.Filters.filter('reverse', [ () =>
-  function (items) {
+Application.Filters.filter('reverse', [function () {
+  return function (items) {
     if (!angular.isArray(items)) {
       return items;
     }
 
     return items.slice().reverse();
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('toArray', [ () =>
-  function (obj) {
+Application.Filters.filter('toArray', [function () {
+  return function (obj) {
     if (!(obj instanceof Object)) { return obj; }
     return _.map(obj, function (val, key) {
       if (angular.isObject(val)) {
         return Object.defineProperty(val, '$key', { __proto__: null, value: key });
       }
     });
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('toIsoDate', [ () =>
-  function (date) {
+Application.Filters.filter('toIsoDate', [function () {
+  return function (date) {
     if (!(date instanceof Date) && !moment.isMoment(date)) { return date; }
     return moment(date).format('YYYY-MM-DD');
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('booleanFormat', [ '_t', _t =>
-  function (boolean) {
+Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
+  return function (boolean) {
     if (boolean || (boolean === 'true')) {
       return _t('yes');
     } else {
       return _t('no');
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('booleanFormat', [ '_t', _t =>
-  function (boolean) {
+Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
+  return function (boolean) {
     if (((typeof boolean === 'boolean') && boolean) || ((typeof boolean === 'string') && (boolean === 'true'))) {
       return _t('yes');
     } else {
       return _t('no');
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('maxCount', [ '_t', _t =>
-  function (max) {
+Application.Filters.filter('maxCount', [ '_t', function (_t) {
+  return function (max) {
     if ((typeof max === 'undefined') || (max === null) || ((typeof max === 'number') && (max === 0))) {
       return _t('unlimited');
     } else {
       return max;
     }
-  }
+  };
+}]);
 
-]);
-
-Application.Filters.filter('filterDisabled', [ () =>
-  function (list, filter) {
+Application.Filters.filter('filterDisabled', [function () {
+  return function (list, filter) {
     if (angular.isArray(list)) {
       return list.filter(function (e) {
         switch (filter) {
@@ -384,6 +361,5 @@ Application.Filters.filter('filterDisabled', [ () =>
     } else {
       return list;
     }
-  }
-
-]);
+  };
+}]);

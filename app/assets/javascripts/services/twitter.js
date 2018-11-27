@@ -1,14 +1,5 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Services.factory('Twitter', ['$resource', $resource => $resource('/api/feeds/twitter_timelines')
-]);
+Application.Services.factory('Twitter', ['$resource', function ($resource) {
+  return $resource('/api/feeds/twitter_timelines');
+}]);
