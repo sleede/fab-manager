@@ -114,12 +114,12 @@ angular-loading-bar@^0.9.0:
   version "0.0.0"
   resolved "https://github.com/kaihenzler/angular-minicolors.git#0bf9edcb45eea49210e2f6355e24f162362eeb5a"
 
-angular-moment@0.10:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/angular-moment/-/angular-moment-0.10.3.tgz#63775c8e12f68fb353b8c80bc79db45689f8bf9d"
-  integrity sha1-Y3dcjhL2j7NTuMgLx520Von4v50=
+angular-moment@1.3:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/angular-moment/-/angular-moment-1.3.0.tgz#f501f66b6fcc832d8d36f8905cc7a93123ab2af0"
+  integrity sha512-KG8rvO9MoaBLwtGnxTeUveSyNtrL+RNgGl1zqWN36+HDCCVGk2DGWOzqKWB6o+eTTbO3Opn4hupWKIElc8XETA==
   dependencies:
-    moment ">=2.8.0 <2.11.0"
+    moment ">=2.8.0 <3.0.0"
 
 angular-resource@1.6:
   version "1.6.10"
@@ -1010,12 +1010,7 @@ moment-timezone@0.5:
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.10.6, "moment@>=2.8.0 <2.11.0":
-  version "2.10.6"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.10.6.tgz#6cb21967c79cba7b0ca5e66644f173662b3efa77"
-  integrity sha1-bLIZZ8ecunsMpeZmRPFzZis++nc=
-
-"moment@>= 2.9.0", moment@>=2.5.0, moment@^2.5.0:
+moment@2.22, "moment@>= 2.9.0", moment@>=2.5.0, "moment@>=2.8.0 <3.0.0", moment@^2.5.0:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
