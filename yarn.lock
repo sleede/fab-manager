@@ -880,15 +880,15 @@ jquery-minicolors@^2.1.10:
   version "1.10.4"
   resolved "https://github.com/devongovett/jqueryui-npm.git#51bc3549dd6530a18f43be45c3e8ae520805b9e4"
 
-jquery@1, jquery@^1.11.1:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
-  integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
-
-"jquery@>= 1.7.x", jquery@>=1.7.1, jquery@>=1.9.0:
+jquery@3, "jquery@>= 1.7.x", jquery@>=1.7.1, jquery@>=1.9.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
   integrity sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==
+
+jquery@^1.11.1:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+  integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
 
 js-tokens@^4.0.0:
   version "4.0.0"

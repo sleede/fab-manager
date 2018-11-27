@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Updated angular.js to 1.6
+- Fix a security issue: dependency jQuery < 3.0.0 has a vulnerability as described in [CVE-2015-9251](https://nvd.nist.gov/vuln/detail/CVE-2015-9251)
+
 # v2.7.0 2018 November 27
 
 - Nom using standard [package.json](package.json) file to save application version number

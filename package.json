@@ -60,7 +60,7 @@
     "fullcalendar": "2.3.1",
     "holderjs": "2.6",
     "jasny-bootstrap": "3.1",
-    "jquery": "1",
+    "jquery": "3",
     "jquery-minicolors": "^2.1.10",
     "jquery-ui": "https://github.com/devongovett/jqueryui-npm.git#1.10.4",
     "medium-editor": "4.4.0",
