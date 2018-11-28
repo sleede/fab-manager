@@ -12,8 +12,9 @@ config()
 {
   if [ "$(whoami)" = "root" ]
   then
-    echo "Please do not run this script as root, elevation will be prompted if needed."
-    exit 1
+    echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
+    read -rp "Continue anyway? (y/n) " confirm </dev/tty
+    if [[ "$confirm" = "n" ]]; then exit 1; fi
   fi
   echo "detecting curl..."
   if ! command -v curl
