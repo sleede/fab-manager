@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix rake task fablab:es_build_projects_index for ElasticSearch > 1.7
+
 # v2.7.2 2018 November 29
 
 - Allow running the ElasticSearch upgrade script while being root
