@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+# v2.7.2 2018 November 29
+
 - Allow running the ElasticSearch upgrade script while being root
 - Fix an issue with ES upgrade script, preventing reindexing in some cases
 - Improved ES upgrade documentation
