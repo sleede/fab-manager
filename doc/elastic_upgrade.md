@@ -114,3 +114,43 @@ You can check for any error during container startup, using:
 ```bash
 docker-compose logs elasticsearch 
 ```
+
+## Skip the upgrade
+
+The upgrade is not working and you can't debug it?
+You can skip it by deleting your ES database, installing ES 5.6 and resynchronizing ES from your PostgreSQL database.
+
+**This is not recommended on old installations as this can lead to data losses.**
+
+Here's the procedure:
+
+```bash
+curl -XDELETE "$ES_IP:9200/fablab"
+curl -XDELETE "$ES_IP:9200/stats"
+# delete any other index, if applicable
+```
+Stop and remove your container, then edit your [docker-compose.yml](../docker/docker-compose.yml) and set the following:
+
+```yml
+  elasticsearch:
+    image: elasticsearch:5.6
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ${PWD}/elasticsearch/config:/usr/share/elasticsearch/config
+      - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
+    restart: always
+```
+
+Copy [elasticsearch.yml](../docker/elasticsearch.yml) and [log4j2.properties](../docker/log4j2.properties) to `elasticsearch/config`, then pull and restart your containers.
+
+Finally reindex your data:
+```bash
+rake fablab:es_build_stats
+rake fablab:generate_stats[3000]
+rake fablab:es_build_projects_index
+```
