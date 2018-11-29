@@ -308,6 +308,19 @@ upgrade_compose()
   then
     sed -i.bak "/image: $image/s/.*/&\n    ulimits:\n      memlock:\n        soft: -1\n        hard: -1/" "$FM_PATH/docker-compose.yml"
   fi
+  if [ $target = '2.4' ]
+  then
+    # get current data directory
+    dir=$(awk 'BEGIN { FS="\n"; RS="";} { match($0, /image: elasticsearch:2\.4(\n|.)+volumes:(\n|.)+(-.*elasticsearch\/data)/, lines); FS="[ :]+"; RS="\r\n"; split(lines[3], line); print line[2] }' "$FM_PATH/docker-compose.yml")
+    # set the configuration directory
+    dir=$(echo "${dir//[$'\t\r\n ']}/config")
+    # insert configuration directory into docker-compose bindings
+    awk "BEGIN { FS=\"\n\"; RS=\"\";} { print gensub(/(image: elasticsearch:2\.4(\n|.)+)volumes:\n/, \"\\1volumes:\n      - ${dir}:/usr/share/elasticsearch/config\n\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
+    echo -e "\nCopying ElasticSearch 2.4 configuration files from $(pwd)/docker to $dir..."
+    mkdir -p "$dir"
+    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/elasticsearch.yml > "$dir/elasticsearch.yml"
+    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/log4j2.properties > "$dir/log4j2.properties"
+  fi
   docker-compose pull
   docker-compose up -d
   wait_for_online
@@ -351,7 +364,7 @@ upgrade_docker()
   then
     image_name="elasticsearch-oss:$target"
     image="docker.elastic.co/elasticsearch/$image_name"
-  elif [ $target = '5.6' ]
+  elif [ $target = '2.4' ]
   then
     configdir=$(echo "$volumes" | grep config | awk -F'[ :]' '{print $2}')
     echo -e "\nCopying ElasticSearch 2.4 configuration files from $(pwd)/docker to $configdir..."
@@ -497,6 +510,9 @@ reindex_indices()
       },
       "dest": {
         "index": "'"$migration_index"'"
+      },
+      "script": {
+        "inline": "ctx._source.remove('"'"'_id'"'"')"
       }
     }'
   done

@@ -1,5 +1,7 @@
 # Instructions for upgrading ElasticSearch
 
+## Automatic upgrade
+
 Fab-manager release 2.6.5 has upgraded its dependency to ElasticSearch from version 1.7 to version 5.6 as the previous was unsupported for months.
 To keep using fab-manager you need to upgrade your installation with the new version.
 We've wrote a script to automate the process while keeping your data integrity, but there's some requirements to understand before running it.
@@ -22,6 +24,93 @@ cd /apps/fabmanager
 \curl https://raw.githubusercontent.com/LaCasemate/fab-manager/master/scripts/elastic-upgrade.sh | bash
 ```
 
+## Manual upgrade
+
 For instructions regarding a manual upgrade, please refer to the official documentation:
+
 - https://www.elastic.co/guide/en/elasticsearch/reference/2.4/restart-upgrade.html
 - https://www.elastic.co/guide/en/elasticsearch/reference/5.6/restart-upgrade.html
+
+## Revert the upgrade
+
+So something goes wrong and the upgrade was not successful. 
+Sad news, but everything isn't lost, follow this procedure to downgrade to ElasticSearch 1.7.
+
+First, check the status of your indices:
+
+```bash
+# Replace fabmanager_elasticsearch_1 in the next command with your container's name. 
+# You can get it running `docker ps`
+ES_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' fabmanager_elasticsearch_1)
+curl "$ES_IP:9200/_cat/indices?v"
+```
+
+You should get something like this:
+```
+health status index     pri rep docs.count docs.deleted store.size pri.store.size 
+green  open   fablab_24   1   0       1944            0        1mb            1mb 
+green  open   stats_24    1   0          0            0      2.8mb           104b 
+green  open   stats       5   0      13515            0      2.7mb          2.7mb 
+green  open   fablab      5   0       1944            4      1.2mb          1.2mb 
+```
+
+Here, we can see that the migration is not complete, as *docs.count* are not equal for `stat_24` and `stats`.
+
+
+Now let's stop and remove the ElasticSearch container.
+
+```bash
+docker-compose stop elasticsearch
+docker-compose rm -f elasticsearch
+docker-compose down
+```
+
+Then, edit your [docker-compose.yml](../docker/docker-compose.yml) and change the *elasticsearch* block according to the following: 
+
+<table>
+<tr><td>
+<pre style="max-width:350px; overflow-y: scroll">
+  elasticsearch:
+    image: elasticsearch:2.4
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ${PWD}/elasticsearch/config:/usr/share/elasticsearch/config
+      - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
+    restart: always
+</pre>
+</td>
+<td>
+=>
+</td>
+<td>
+<pre style="max-width:350px; overflow-y: scroll">
+  elasticsearch:
+    image: elasticsearch:1.7
+    volumes:
+      - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
+    restart: always
+</pre>
+</td></tr>
+</table>
+
+Restart your containers:
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+Now you're back with ElasticSearch 1.7. You can safely restart the upgrade script.
+
+## Debugging the upgrade
+
+You can check for any error during container startup, using:
+
+```bash
+docker-compose logs elasticsearch 
+```

@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+- Allow running the ElasticSearch upgrade script while being root
+- Fix an issue with ES upgrade script, preventing reindexing in some cases
+- Improved ES upgrade documentation
+
 # v2.7.1 2018 November 27
 
 - Updated angular.js to 1.6
