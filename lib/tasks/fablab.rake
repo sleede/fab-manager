@@ -43,10 +43,10 @@ namespace :fablab do
   desc '(re)Build ElasticSearch fablab base for stats'
   task es_build_stats: :environment do
 
-    puts "DELETE stats"
+    puts 'DELETE stats'
     `curl -XDELETE http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats`
 
-    puts "PUT index stats"
+    puts 'PUT index stats'
     `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats -d'
     {
       "settings" : {
@@ -60,7 +60,7 @@ namespace :fablab do
 
     %w[account event machine project subscription training user space].each do |stat|
       puts "PUT Mapping stats/#{stat}"
-        `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/#{stat}/_mapping -d '
+      `curl -XPUT http://#{ENV["ELASTICSEARCH_HOST"]}:9200/stats/#{stat}/_mapping -d '
       {
          "properties": {
             "type": {
