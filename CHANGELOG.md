@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Fix rake task fablab:es_build_projects_index for ElasticSearch > 1.7
+- Fix Dockerfile: yarn was not setup correctly
 
 # v2.7.2 2018 November 29
 
