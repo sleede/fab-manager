@@ -1,5 +1,12 @@
 # Changelog Fab Manager
 
+# v2.7.3 2018 December 03
+
+- Updated Uglifier gem to support ES6 syntax
+- Fix rake task fablab:es_build_projects_index for ElasticSearch > 1.7
+- Fix Dockerfile: yarn was not setup correctly
+- Fix: unable to build assets
+
 # v2.7.2 2018 November 29
 
 - Allow running the ElasticSearch upgrade script while being root

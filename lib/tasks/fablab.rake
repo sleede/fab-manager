@@ -137,12 +137,6 @@ namespace :fablab do
     unless client.indices.exists? index: Project.index_name
       Project.__elasticsearch__.create_index! force: true
     end
-    # delete doctype if exists
-    if client.indices.exists_type? index: Project.index_name, type: Project.document_type
-      client.indices.delete_mapping index: Project.index_name, type: Project.document_type
-    end
-    # create doctype
-    client.indices.put_mapping index: Project.index_name, type: Project.document_type, body: Project.mappings.to_hash
 
     # index requested documents
     if args.id

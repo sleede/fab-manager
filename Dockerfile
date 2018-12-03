@@ -32,8 +32,6 @@ COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/
 RUN bundle install --binstubs
 
-# Run Yarn
-RUN yarn install
 
 # Clean up APT when done.
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -52,6 +50,11 @@ RUN mkdir -p /usr/src/app/tmp/pids
 WORKDIR /usr/src/app
 
 COPY docker/database.yml /usr/src/app/config/database.yml
+COPY package.json /usr/src/app/package.json
+COPY yarn.lock /usr/src/app/yarn.lock
+
+# Run Yarn
+RUN yarn install
 
 COPY . /usr/src/app
 
