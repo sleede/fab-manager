@@ -435,7 +435,7 @@ class API::AvailabilitiesController < API::ApiController
       end
       availabilities_filtered.delete_if do |a|
         if params[:dispo] == 'false'
-          a.is_reserved or (a.try(:is_completed) and a.is_completed)
+          a.is_reserved or (a.try(:completed?) and a.completed?)
         end
       end
     end

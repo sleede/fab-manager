@@ -427,7 +427,7 @@ class Reservation < ActiveRecord::Base
 
   def training_not_fully_reserved
     slot = self.slots.first
-    errors.add(:training, "already fully reserved") if Availability.find(slot.availability_id).is_completed
+    errors.add(:training, "already fully reserved") if Availability.find(slot.availability_id).completed?
   end
 
   private

@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Applied rubocop roles to ruby files
+- Prevent running elastic-upgrade script with wrong awk version 
+
 # v2.7.3 2018 December 03
 
 - Updated Uglifier gem to support ES6 syntax

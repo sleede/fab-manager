@@ -6,15 +6,15 @@ class Coupon < ActiveRecord::Base
 
   validates :name, presence: true
   validates :code, presence: true
-  validates :code, format: { with: /\A[A-Z0-9\-]+\z/ ,message: 'only caps letters, numbers, and dashes'}
+  validates :code, format: { with: /\A[A-Z0-9\-]+\z/, message: 'only caps letters, numbers, and dashes'}
   validates :code, uniqueness: true
   validates :validity_per_user, presence: true
-  validates :validity_per_user, inclusion: { in: %w(once forever) }
+  validates :validity_per_user, inclusion: { in: %w[once forever] }
   validates_with CouponDiscountValidator
   validates_with CouponExpirationValidator
 
   def safe_destroy
-    if self.invoices.size == 0
+    if invoices.size.zero?
       destroy
     else
       false
@@ -36,15 +36,15 @@ class Coupon < ActiveRecord::Base
   # @return {String} status identifier
   ##
   def status(user_id = nil, amount = nil)
-    if not active?
+    if !active?
       'disabled'
-    elsif (!valid_until.nil?) and valid_until.at_end_of_day < DateTime.now
+    elsif !valid_until.nil? && valid_until.at_end_of_day < DateTime.now
       'expired'
-    elsif (!max_usages.nil?) and invoices.count >= max_usages
+    elsif !max_usages.nil? && invoices.count >= max_usages
       'sold_out'
-    elsif (!user_id.nil?) and validity_per_user == 'once' and users_ids.include?(user_id.to_i)
+    elsif !user_id.nil? && validity_per_user == 'once' && users_ids.include?(user_id.to_i)
       'already_used'
-    elsif (!amount.nil?) and type == 'amount_off' and amount_off > amount.to_f
+    elsif !amount.nil? && type == 'amount_off' && amount_off > amount.to_f
       'amount_exceeded'
     else
       'active'
@@ -60,15 +60,11 @@ class Coupon < ActiveRecord::Base
   end
 
   def users
-    self.invoices.map do |i|
-      i.user
-    end
+    invoices.map(&:user)
   end
 
   def users_ids
-    users.map do |u|
-      u.id
-    end
+    users.map(&:id)
   end
 
   def send_to(user_id)
@@ -78,6 +74,7 @@ class Coupon < ActiveRecord::Base
   end
 
   private
+
   def create_stripe_coupon
     StripeWorker.perform_async(:create_stripe_coupon, id)
   end

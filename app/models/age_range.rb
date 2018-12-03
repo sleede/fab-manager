@@ -5,7 +5,7 @@ class AgeRange < ActiveRecord::Base
   has_many :events, dependent: :nullify
 
   def safe_destroy
-    if self.events.count == 0
+    if events.count.zero?
       destroy
     else
       false
