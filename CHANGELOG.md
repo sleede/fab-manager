@@ -2,6 +2,7 @@
 
 - Fix rake task fablab:es_build_projects_index for ElasticSearch > 1.7
 - Fix Dockerfile: yarn was not setup correctly
+- Updated Uglifier gem to support ES6 syntax
 
 # v2.7.2 2018 November 29
 

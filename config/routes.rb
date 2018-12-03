@@ -113,7 +113,7 @@ Rails.application.routes.draw do
     resources :event_themes
     resources :age_ranges
     resources :statistics, only: [:index]
-    resources :custom_assets, only: [:show, :create, :update]
+    resources :custom_assets, only: %i[show create update]
     resources :tags
     resources :stylesheets, only: [:show]
     resources :auth_providers do
@@ -122,14 +122,15 @@ Rails.application.routes.draw do
       post 'send_code', action: 'send_code', on: :collection
     end
     resources :abuses, only: [:create]
-    resources :open_api_clients, only: [:index, :create, :update, :destroy] do
+    resources :open_api_clients, only: %i[index create update destroy] do
       patch :reset_token, on: :member
     end
     resources :price_categories
     resources :spaces
 
     # i18n
-    get 'translations/:locale/:state' => 'translations#show', :constraints => { :state => /[^\/]+/ } # allow dots in URL for 'state'
+    # regex allows using dots in URL for 'state'
+    get 'translations/:locale/:state' => 'translations#show', :constraints => { state: /[^\/]+/ }
 
     # XLSX exports
     get 'exports/:id/download' => 'exports#download'
@@ -166,12 +167,12 @@ Rails.application.routes.draw do
     end
   end
 
-  %w(account event machine project subscription training user space).each do |path|
+  %w[account event machine project subscription training user space].each do |path|
     post "/stats/#{path}/_search", to: "api/statistics##{path}"
     post "/stats/#{path}/export", to: "api/statistics#export_#{path}"
   end
-  post '/stats/global/export', to: "api/statistics#export_global"
-  post '_search/scroll', to: "api/statistics#scroll"
+  post '/stats/global/export', to: 'api/statistics#export_global'
+  post '_search/scroll', to: 'api/statistics#scroll'
 
   match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
 

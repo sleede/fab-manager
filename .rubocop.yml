@@ -4,3 +4,5 @@ Metrics/MethodLength:
   Max: 16
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
