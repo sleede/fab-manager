@@ -321,7 +321,7 @@ upgrade_compose()
     # set the configuration directory
     dir=$(echo "${dir//[$'\t\r\n ']}/config")
     # insert configuration directory into docker-compose bindings
-    awk "BEGIN { FS=\"\n\"; RS=\"\";} { print gensub(/(image: elasticsearch:2\.4(\n|.)+)volumes:\n/, \"\\1volumes:\n      - ${dir}:/usr/share/elasticsearch/config\n\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
+    awk "BEGIN { FS=\"\n\"; RS=\"\";} { print gensub(/(image: elasticsearch:2\.4(\n|.)+)volumes:\n/, \"\\\\1volumes:\n      - ${dir}:/usr/share/elasticsearch/config\n\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
     echo -e "\nCopying ElasticSearch 2.4 configuration files from $(pwd)/docker to $dir..."
     mkdir -p "$dir"
     curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/elasticsearch.yml > "$dir/elasticsearch.yml"
