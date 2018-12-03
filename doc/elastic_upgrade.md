@@ -31,10 +31,10 @@ For instructions regarding a manual upgrade, please refer to the official docume
 - https://www.elastic.co/guide/en/elasticsearch/reference/2.4/restart-upgrade.html
 - https://www.elastic.co/guide/en/elasticsearch/reference/5.6/restart-upgrade.html
 
-## Revert the upgrade
+## Restart the upgrade
 
-So something goes wrong and the upgrade was not successful. 
-Sad news, but everything isn't lost, follow this procedure to downgrade to ElasticSearch 1.7.
+So something goes wrong and the upgrade failed during ES 2.4 reindexing? 
+Sad news, but everything isn't lost, follow this procedure to start the upgrade again.
 
 First, check the status of your indices:
 
@@ -56,13 +56,11 @@ green  open   fablab      5   0       1944            4      1.2mb          1.2m
 
 Here, we can see that the migration is not complete, as *docs.count* are not equal for `stat_24` and `stats`.
 
-
-Now let's stop and remove the ElasticSearch container.
+Let's remove the bogus indices:
 
 ```bash
-docker-compose stop elasticsearch
-docker-compose rm -f elasticsearch
-docker-compose down
+curl -XDELETE "$ES_IP:9200/fablab_24"
+curl -XDELETE "$ES_IP:9200/stats_24"
 ```
 
 Then, edit your [docker-compose.yml](../docker/docker-compose.yml) and change the *elasticsearch* block according to the following: 
@@ -98,14 +96,11 @@ Then, edit your [docker-compose.yml](../docker/docker-compose.yml) and change th
 </td></tr>
 </table>
 
-Restart your containers:
+Now you can safely restart the upgrade script.
 
 ```bash
-docker-compose pull
-docker-compose up -d
+\curl https://raw.githubusercontent.com/LaCasemate/fab-manager/master/scripts/elastic-upgrade.sh | bash
 ```
-
-Now you're back with ElasticSearch 1.7. You can safely restart the upgrade script.
 
 ## Debugging the upgrade
 

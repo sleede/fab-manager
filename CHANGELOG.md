@@ -4,6 +4,7 @@
 - Prevent running elastic-upgrade script with wrong awk version
 - Fix ElasticSearch upgrade script
 - Setup ElasticSearch configuration files for new installations
+- Improved ES upgrade documentation
 
 # v2.7.3 2018 December 03
 
