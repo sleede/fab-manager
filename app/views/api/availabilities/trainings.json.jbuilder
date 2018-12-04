@@ -3,7 +3,7 @@ json.array!(@availabilities) do |a|
   if a.is_reserved
     json.is_reserved true
     json.title "#{a.trainings[0].name}' - #{t('trainings.i_ve_reserved')}"
-  elsif a.is_completed
+  elsif a.completed?
     json.is_completed true
     json.title "#{a.trainings[0].name} - #{t('trainings.completed')}"
   else

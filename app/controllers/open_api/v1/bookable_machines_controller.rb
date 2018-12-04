@@ -14,7 +14,7 @@ class OpenAPI::V1::BookableMachinesController < OpenAPI::V1::BaseController
     user = User.find(params[:user_id])
 
     @machines.delete_if do |machine|
-      (machine.trainings.count != 0) and !user.is_training_machine?(machine)
+      (machine.trainings.count != 0) and !user.training_machine?(machine)
     end
 
 

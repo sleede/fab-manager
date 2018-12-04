@@ -35,6 +35,7 @@ services:
         soft: -1
         hard: -1
     volumes:
+      - ${PWD}/elasticsearch/config:/usr/share/elasticsearch/config
       - ${PWD}/elasticsearch:/usr/share/elasticsearch/data
     restart: always
 

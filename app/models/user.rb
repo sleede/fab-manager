@@ -3,13 +3,13 @@ class User < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :async
   rolify
 
   # enable OmniAuth authentication only if needed
-  devise :omniauthable, :omniauth_providers => [AuthProvider.active.strategy_name.to_sym] unless AuthProvider.active.providable_type == DatabaseProvider.name
+  devise :omniauthable, omniauth_providers: [AuthProvider.active.strategy_name.to_sym] unless
+      AuthProvider.active.providable_type == DatabaseProvider.name
 
   extend FriendlyId
   friendly_id :username, use: :slugged
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy
   accepts_nested_attributes_for :reservations, allow_destroy: true
 
-  # Les formations sont déjà faites
+  # Trainings that were already passed
   has_many :user_trainings, dependent: :destroy
   has_many :trainings, through: :user_trainings
 
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 
   # fix for create admin user
   before_save do
-    self.email.downcase! if self.email
+    email&.downcase!
   end
 
   before_create :assign_default_role
@@ -76,10 +76,10 @@ class User < ActiveRecord::Base
 
   def to_json(options = {})
     ApplicationController.new.view_context.render(
-        partial: 'api/members/member',
-        locals: { :member => self },
-        formats: [:json],
-        handlers: [:jbuilder]
+      partial: 'api/members/member',
+      locals: { member: self },
+      formats: [:json],
+      handlers: [:jbuilder]
     )
   end
 
@@ -87,11 +87,10 @@ class User < ActiveRecord::Base
     User.with_role(:admin)
   end
 
-  def is_training_machine?(machine)
+  def training_machine?(machine)
     return true if is_admin?
-    trainings.map do |t|
-      t.machines
-    end.flatten.uniq.include?(machine)
+
+    trainings.map(&:machines).flatten.uniq.include?(machine)
   end
 
   def training_reservation_by_machine(machine)
@@ -100,6 +99,7 @@ class User < ActiveRecord::Base
 
   def subscribed_plan
     return nil if subscription.nil? or subscription.expired_at < Time.now
+
     subscription.plan
   end
 
@@ -120,12 +120,12 @@ class User < ActiveRecord::Base
   end
 
   def generate_admin_invoice(offer_day = false, offer_day_start_at = nil)
-    if self.subscription
-      if offer_day
-        self.subscription.generate_and_save_offer_day_invoice(offer_day_start_at) unless self.invoicing_disabled?
-      else
-        self.subscription.generate_and_save_invoice unless self.invoicing_disabled?
-      end
+    return unless subscription
+
+    if offer_day
+      subscription.generate_and_save_offer_day_invoice(offer_day_start_at) unless invoicing_disabled?
+    else
+      subscription.generate_and_save_invoice unless invoicing_disabled?
     end
   end
 
@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
   end
 
   def active_for_authentication?
-    super and self.is_active?
+    super && is_active?
   end
 
   def self.from_omniauth(auth)
@@ -165,8 +165,8 @@ class User < ActiveRecord::Base
   end
 
   def need_completion?
-    profile.gender.nil? or profile.first_name.blank? or profile.last_name.blank? or username.blank? or
-    email.blank? or encrypted_password.blank? or group_id.nil? or profile.birthday.blank? or profile.phone.blank?
+    profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
+      email.blank? || encrypted_password.blank? || group_id.nil? || profile.birthday.blank? || profile.phone.blank?
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
@@ -177,20 +177,19 @@ class User < ActiveRecord::Base
       self[parsed[2].to_sym]
     elsif parsed[1] == 'profile'
       case sso_mapping
-        when 'profile.avatar'
-          self.profile.user_avatar.remote_attachment_url
-        when 'profile.address'
-          self.profile.address.address
-        when 'profile.organization_name'
-          self.profile.organization.name
-        when 'profile.organization_address'
-          self.profile.organization.address.address
-        else
-          self.profile[parsed[2].to_sym]
+      when 'profile.avatar'
+        profile.user_avatar.remote_attachment_url
+      when 'profile.address'
+        profile.address.address
+      when 'profile.organization_name'
+        profile.organization.name
+      when 'profile.organization_address'
+        profile.organization.address.address
+      else
+        profile[parsed[2].to_sym]
       end
     end
   end
-
 
   ## Set some data on the current user, according to the sso_key given
   ## @param sso_mapping {String} must be of form 'user._field_' or 'profile._field_'. Eg. 'user.email'
@@ -200,21 +199,21 @@ class User < ActiveRecord::Base
       self[sso_mapping[5..-1].to_sym] = data unless data.nil?
     elsif sso_mapping.to_s.start_with? 'profile.'
       case sso_mapping.to_s
-        when 'profile.avatar'
-          self.profile.user_avatar ||= UserAvatar.new
-          self.profile.user_avatar.remote_attachment_url = data
-        when 'profile.address'
-          self.profile.address ||= Address.new
-          self.profile.address.address = data
-        when 'profile.organization_name'
-          self.profile.organization ||= Organization.new
-          self.profile.organization.name = data
-        when 'profile.organization_address'
-          self.profile.organization ||= Organization.new
-          self.profile.organization.address ||= Address.new
-          self.profile.organization.address.address = data
-        else
-          self.profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
+      when 'profile.avatar'
+        profile.user_avatar ||= UserAvatar.new
+        profile.user_avatar.remote_attachment_url = data
+      when 'profile.address'
+        profile.address ||= Address.new
+        profile.address.address = data
+      when 'profile.organization_name'
+        profile.organization ||= Organization.new
+        profile.organization.name = data
+      when 'profile.organization_address'
+        profile.organization ||= Organization.new
+        profile.organization.address ||= Address.new
+        profile.organization.address.address = data
+      else
+        profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
     end
   end
@@ -232,7 +231,7 @@ class User < ActiveRecord::Base
       raise SecurityError, 'The identity provider does not match the activated one'
     end
 
-    if User.where(provider: auth.provider, uid: auth.uid).size > 0
+    if User.where(provider: auth.provider, uid: auth.uid).size.positive?
       raise DuplicateIndexError, "This #{active_provider.name} account is already linked to an existing user"
     end
 
@@ -253,9 +252,7 @@ class User < ActiveRecord::Base
     # check that the email duplication was resolved
     if sso_user.email.end_with? '-duplicate'
       email_addr = sso_user.email.match(/^<([^>]+)>.{20}-duplicate$/)[1]
-      unless email_addr == self.email
-        raise DuplicateIndexError, email_addr
-      end
+      raise(DuplicateIndexError, email_addr) unless email_addr == email
     end
 
     # update the user's profile to set the data managed by the SSO
@@ -264,9 +261,7 @@ class User < ActiveRecord::Base
       value = sso_user.get_data_from_sso_mapping(field)
       # we do not merge the email field if its end with the special value '-duplicate' as this means
       # that the user is currently merging with the account that have the same email than the sso
-      unless field == 'user.email' and value.end_with? '-duplicate'
-        self.set_data_from_sso_mapping(field, value)
-      end
+      set_data_from_sso_mapping(field, value) unless field == 'user.email' && value.end_with?('-duplicate')
     end
 
     # run the account transfert in an SQL transaction to ensure data integrity
@@ -274,34 +269,40 @@ class User < ActiveRecord::Base
       # remove the temporary account
       sso_user.destroy
       # finally, save the new details
-      self.save!
+      save!
     end
   end
 
   def self.mapping
     # we protect some fields as they are designed to be managed by the system and must not be updated externally
-    blacklist = %w(id encrypted_password reset_password_token reset_password_sent_at remember_created_at
-       sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip confirmation_token confirmed_at
-       confirmation_sent_at unconfirmed_email failed_attempts unlock_token locked_at created_at updated_at stp_customer_id slug
-       provider auth_token merged_at)
+    blacklist = %w[id encrypted_password reset_password_token reset_password_sent_at remember_created_at
+                   sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip confirmation_token
+                   confirmed_at confirmation_sent_at unconfirmed_email failed_attempts unlock_token locked_at created_at
+                   updated_at stp_customer_id slug provider auth_token merged_at]
     User.column_types
-        .map{|k,v| [k, v.type.to_s]}
+        .map { |k, v| [k, v.type.to_s] }
         .delete_if { |col| blacklist.include?(col[0]) }
   end
 
   protected
+
   def confirmation_required?
     false
   end
 
 
   private
+
   def assign_default_role
-    add_role(:member) if self.roles.blank?
+    add_role(:member) if roles.blank?
   end
 
   def cached_has_role?(role)
-    roles = Rails.cache.fetch(roles_for: { object_id: self.object_id }, expires_in: 1.day, race_condition_ttl: 2.seconds) { self.roles.map(&:name) }
+    roles = Rails.cache.fetch(
+      roles_for: { object_id: object_id },
+      expires_in: 1.day,
+      race_condition_ttl: 2.seconds
+    ) { roles.map(&:name) }
     roles.include?(role.to_s)
   end
 
@@ -314,7 +315,7 @@ class User < ActiveRecord::Base
   end
 
   def create_a_wallet
-    self.create_wallet
+    create_wallet
   end
 
   def notify_admin_when_user_is_created
@@ -330,19 +331,19 @@ class User < ActiveRecord::Base
   end
 
   def notify_group_changed
-    if changes[:group_id].first != nil
-      ex_group = Group.find(changes[:group_id].first)
-      meta_data = { ex_group_name: ex_group.name }
+    return if changes[:group_id].first.nil?
 
-      User.admins.each do |admin|
-        notification = Notification.new(meta_data: meta_data)
-        notification.send_notification(type: :notify_admin_user_group_changed, attached_object: self).to(admin).deliver_later
-      end
+    ex_group = Group.find(changes[:group_id].first)
+    meta_data = { ex_group_name: ex_group.name }
 
-      NotificationCenter.call type: :notify_user_user_group_changed,
-                              receiver: self,
-                              attached_object: self
+    User.admins.each do |admin|
+      notification = Notification.new(meta_data: meta_data)
+      notification.send_notification(type: :notify_admin_user_group_changed, attached_object: self).to(admin).deliver_later
     end
+
+    NotificationCenter.call type: :notify_user_user_group_changed,
+                            receiver: self,
+                            attached_object: self
   end
 
   def notify_admin_invoicing_changed
