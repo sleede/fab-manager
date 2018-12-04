@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+# v2.7.4 2018 December 04
+
 - Applied Rubocop rules to some ruby files
 - Prevent running elastic-upgrade script with wrong awk version
 - Fix ElasticSearch upgrade script
