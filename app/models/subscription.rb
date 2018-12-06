@@ -13,161 +13,148 @@ class Subscription < ActiveRecord::Base
   attr_accessor :card_token
 
   # creation
-  after_save :notify_member_subscribed_plan, if: :is_new?
-  after_save :notify_admin_subscribed_plan, if: :is_new?
+  after_save :notify_member_subscribed_plan, if: :new?
+  after_save :notify_admin_subscribed_plan, if: :new?
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
   # @params [invoice] if true then subscription pay itself, dont pay with reservation
   #                   if false then subscription pay with reservation
   def save_with_payment(invoice = true, coupon_code = nil)
-    if valid?
-      begin
-        customer = Stripe::Customer.retrieve(user.stp_customer_id)
-        invoice_items = []
+    return unless valid?
 
-        unless coupon_code.nil?
-          @coupon = Coupon.find_by(code: coupon_code)
-          if not @coupon.nil? and @coupon.status(user.id) == 'active'
-            total = plan.amount
+    begin
+      customer = Stripe::Customer.retrieve(user.stp_customer_id)
+      invoice_items = []
 
-            discount = 0
-            if @coupon.type == 'percent_off'
-              discount = (total  * @coupon.percent_off / 100).to_i
-            elsif @coupon.type == 'amount_off'
-              discount = @coupon.amount_off
-            else
-              raise InvalidCouponError
-            end
+      unless coupon_code.nil?
+        @coupon = Coupon.find_by(code: coupon_code)
+        raise InvalidCouponError if @coupon.nil? || @coupon.status(user.id) != 'active'
 
-            invoice_items << Stripe::InvoiceItem.create(
-                customer: user.stp_customer_id,
-                amount: -discount,
-                currency: Rails.application.secrets.stripe_currency,
-                description: "coupon #{@coupon.code} - subscription"
-            )
-          else
-            raise InvalidCouponError
-          end
+        total = plan.amount
+
+        discount = 0
+        if @coupon.type == 'percent_off'
+          discount = (total  * @coupon.percent_off / 100).to_i
+        elsif @coupon.type == 'amount_off'
+          discount = @coupon.amount_off
+        else
+          raise InvalidCouponError
         end
 
-        # only add a wallet invoice item if pay subscription
-        # dont add if pay subscription + reservation
-        if invoice
-          @wallet_amount_debit = get_wallet_amount_debit
-          if @wallet_amount_debit != 0
-            invoice_items << Stripe::InvoiceItem.create(
-              customer: user.stp_customer_id,
-              amount: -@wallet_amount_debit,
-              currency: Rails.application.secrets.stripe_currency,
-              description: "wallet -#{@wallet_amount_debit / 100.0}"
-            )
-          end
-        end
-
-        new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
-        # very important to set expired_at to nil that can allow method is_new? to return true
-        # for send the notification
-        # TODO: Refactoring
-        update_column(:expired_at, nil) unless new_record?
-        self.stp_subscription_id = new_subscription.id
-        self.canceled_at = nil
-        self.expired_at = Time.at(new_subscription.current_period_end)
-        save!
-
-        UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-
-        # generate invoice
-        stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
-        if invoice
-          invoc = generate_invoice(stp_invoice.id, coupon_code)
-          # debit wallet
-          wallet_transaction = debit_user_wallet
-          if wallet_transaction
-            invoc.wallet_amount = @wallet_amount_debit
-            invoc.wallet_transaction_id = wallet_transaction.id
-          end
-          invoc.save
-        end
-        # cancel subscription after create
-        cancel
-        return true
-      rescue Stripe::CardError => card_error
-        clear_wallet_and_goupon_invoice_items(invoice_items)
-        logger.error card_error
-        errors[:card] << card_error.message
-        return false
-      rescue Stripe::InvalidRequestError => e
-        clear_wallet_and_goupon_invoice_items(invoice_items)
-        # Invalid parameters were supplied to Stripe's API
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue Stripe::AuthenticationError => e
-        clear_wallet_and_goupon_invoice_items(invoice_items)
-        # Authentication with Stripe's API failed
-        # (maybe you changed API keys recently)
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue Stripe::APIConnectionError => e
-        clear_wallet_and_goupon_invoice_items(invoice_items)
-        # Network communication with Stripe failed
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue Stripe::StripeError => e
-        clear_wallet_and_goupon_invoice_items(invoice_items)
-        # Display a very generic error to the user, and maybe send
-        # yourself an email
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue => e
-        clear_wallet_and_goupon_invoice_items(invoice_items)
-        # Something else happened, completely unrelated to Stripe
-        logger.error e
-        errors[:payment] << e.message
-        return false
+        invoice_items << Stripe::InvoiceItem.create(
+          customer: user.stp_customer_id,
+          amount: -discount,
+          currency: Rails.application.secrets.stripe_currency,
+          description: "coupon #{@coupon.code} - subscription"
+        )
       end
-    end
-  end
 
-  # @params [invoice] if true then subscription pay itself, dont pay with reservation
-  #                   if false then subscription pay with reservation
-  def save_with_local_payment(invoice = true, coupon_code = nil)
-    if valid?
+      # only add a wallet invoice item if pay subscription
+      # dont add if pay subscription + reservation
+      if invoice
+        @wallet_amount_debit = get_wallet_amount_debit
+        if @wallet_amount_debit != 0
+          invoice_items << Stripe::InvoiceItem.create(
+            customer: user.stp_customer_id,
+            amount: -@wallet_amount_debit,
+            currency: Rails.application.secrets.stripe_currency,
+            description: "wallet -#{@wallet_amount_debit / 100.0}"
+          )
+        end
+      end
+
+      new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
       # very important to set expired_at to nil that can allow method is_new? to return true
       # for send the notification
       # TODO: Refactoring
       update_column(:expired_at, nil) unless new_record?
-      self.stp_subscription_id = nil
+      self.stp_subscription_id = new_subscription.id
       self.canceled_at = nil
-      set_expired_at
-      if save
-        UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
-        if invoice
-          @wallet_amount_debit = get_wallet_amount_debit
+      self.expired_at = Time.at(new_subscription.current_period_end)
+      save!
 
-          # debit wallet
-          wallet_transaction = debit_user_wallet
+      UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
 
-          if !self.user.invoicing_disabled?
-            invoc = generate_invoice(nil, coupon_code)
-            if wallet_transaction
-              invoc.wallet_amount = @wallet_amount_debit
-              invoc.wallet_transaction_id = wallet_transaction.id
-            end
-            invoc.save
-          end
+      # generate invoice
+      stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
+      if invoice
+        invoc = generate_invoice(stp_invoice.id, coupon_code)
+        # debit wallet
+        wallet_transaction = debit_user_wallet
+        if wallet_transaction
+          invoc.wallet_amount = @wallet_amount_debit
+          invoc.wallet_transaction_id = wallet_transaction.id
         end
-        return true
-      else
-        return false
+        invoc.save
       end
-    else
+      # cancel subscription after create
+      cancel
+      return true
+    rescue Stripe::CardError => card_error
+      clear_wallet_and_goupon_invoice_items(invoice_items)
+      logger.error card_error
+      errors[:card] << card_error.message
+      return false
+    rescue Stripe::InvalidRequestError => e
+      clear_wallet_and_goupon_invoice_items(invoice_items)
+      # Invalid parameters were supplied to Stripe's API
+      logger.error e
+      errors[:payment] << e.message
+      return false
+    rescue Stripe::AuthenticationError => e
+      clear_wallet_and_goupon_invoice_items(invoice_items)
+      # Authentication with Stripe's API failed
+      # (maybe you changed API keys recently)
+      logger.error e
+      errors[:payment] << e.message
+      return false
+    rescue Stripe::APIConnectionError => e
+      clear_wallet_and_goupon_invoice_items(invoice_items)
+      # Network communication with Stripe failed
+      logger.error e
+      errors[:payment] << e.message
+      return false
+    rescue Stripe::StripeError => e
+      clear_wallet_and_goupon_invoice_items(invoice_items)
+      # Display a very generic error to the user, and maybe send
+      # yourself an email
+      logger.error e
+      errors[:payment] << e.message
+      return false
+    rescue => e
+      clear_wallet_and_goupon_invoice_items(invoice_items)
+      # Something else happened, completely unrelated to Stripe
+      logger.error e
+      errors[:payment] << e.message
       return false
     end
+  end
+
+  # @params [invoice] if true then only the subscription is payed, without reservation
+  #                   if false then the subscription is payed with reservation
+  def save_with_local_payment(invoice = true, coupon_code = nil)
+    return false unless valid?
+
+    return false unless save
+
+    UsersCredits::Manager.new(user: user).reset_credits if expired_date_changed
+    if invoice
+      @wallet_amount_debit = get_wallet_amount_debit
+
+      # debit wallet
+      wallet_transaction = debit_user_wallet
+
+      unless user.invoicing_disabled?
+        invoc = generate_invoice(nil, coupon_code)
+        if wallet_transaction
+          invoc.wallet_amount = @wallet_amount_debit
+          invoc.wallet_transaction_id = wallet_transaction.id
+        end
+        invoc.save
+      end
+    end
+    true
   end
 
   def generate_invoice(stp_invoice_id = nil, coupon_code = nil)
@@ -200,11 +187,11 @@ class Subscription < ActiveRecord::Base
   end
 
   def cancel
-    if stp_subscription_id.present?
-      stp_subscription = stripe_subscription
-      stp_subscription.delete(at_period_end: true)
-      update_columns(canceled_at: Time.now)
-    end
+    return unless stp_subscription_id.present?
+
+    stp_subscription = stripe_subscription
+    stp_subscription.delete(at_period_end: true)
+    update_columns(canceled_at: Time.now)
   end
 
   def stripe_subscription
@@ -212,7 +199,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def expire(time)
-    if !is_expired?
+    if !expired?
       update_columns(expired_at: time, canceled_at: time)
       notify_admin_subscription_canceled
       notify_member_subscription_canceled
@@ -222,7 +209,7 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def is_expired?
+  def expired?
     expired_at <= Time.now
   end
 
@@ -231,14 +218,15 @@ class Subscription < ActiveRecord::Base
 
     self.expired_at = expired_at
     if save
-      UsersCredits::Manager.new(user: self.user).reset_credits if !free_days
+      UsersCredits::Manager.new(user: user).reset_credits unless free_days
       notify_subscription_extended(free_days)
       return true
     end
-    return false
+    false
   end
 
   private
+
   def notify_member_subscribed_plan
     NotificationCenter.call type: 'notify_member_subscribed_plan',
                             receiver: user,
@@ -289,8 +277,9 @@ class Subscription < ActiveRecord::Base
   end
 
   def expired_date_changed
-    p_value = self.previous_changes[:expired_at][0]
+    p_value = previous_changes[:expired_at][0]
     return true if p_value.nil?
+
     p_value.to_date != expired_at.to_date and expired_at > p_value
   end
 
@@ -298,7 +287,7 @@ class Subscription < ActiveRecord::Base
   #   !expired_at_was.nil? and expired_at_changed?
   # end
 
-  def is_new?
+  def new?
     expired_at_was.nil?
   end
 
@@ -308,18 +297,16 @@ class Subscription < ActiveRecord::Base
 
   def get_wallet_amount_debit
     total = plan.amount
-    if @coupon
-      total = CouponService.new.apply(total, @coupon, user.id)
-    end
+    total = CouponService.new.apply(total, @coupon, user.id) if @coupon
     wallet_amount = (user.wallet.amount * 100).to_i
-    return wallet_amount >= total ? total : wallet_amount
+    wallet_amount >= total ? total : wallet_amount
   end
 
   def debit_user_wallet
-    if @wallet_amount_debit.present? and @wallet_amount_debit != 0
-      amount = @wallet_amount_debit / 100.0
-      return WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
-    end
+    return unless @wallet_amount_debit.present? || @wallet_amount_debit.zero?
+
+    amount = @wallet_amount_debit / 100.0
+    WalletService.new(user: user, wallet: user.wallet).debit(amount, self)
   end
 
   def clear_wallet_and_goupon_invoice_items(invoice_items)

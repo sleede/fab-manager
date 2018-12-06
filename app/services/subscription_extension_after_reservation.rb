@@ -2,7 +2,8 @@ class SubscriptionExtensionAfterReservation
   attr_accessor :user, :reservation
 
   def initialize(reservation)
-    @user, @reservation = reservation.user, reservation
+    @user = reservation.user
+    @reservation = reservation
   end
 
   def extend_subscription_if_eligible
@@ -13,9 +14,10 @@ class SubscriptionExtensionAfterReservation
     return false unless reservation.reservable_type == 'Training'
     return false if user.reservations.where(reservable_type: 'Training').count != 1
     return false unless user.subscription
-    return false if user.subscription.is_expired?
+    return false if user.subscription.expired?
     return false unless user.subscribed_plan.is_rolling
-    return true
+
+    true
   end
 
   def extend_subscription

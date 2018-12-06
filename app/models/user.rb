@@ -220,7 +220,7 @@ class User < ActiveRecord::Base
 
   ## used to allow the migration of existing users between authentication providers
   def generate_auth_migration_token
-    update_attributes(:auth_token => Devise.friendly_token)
+    update_attributes(auth_token: Devise.friendly_token)
   end
 
   ## link the current user to the given provider (omniauth attributes hash)
@@ -241,7 +241,7 @@ class User < ActiveRecord::Base
   ## Merge the provided User's SSO details into the current user and drop the provided user to ensure the unity
   ## @param sso_user {User} the provided user will be DELETED after the merge was successful
   def merge_from_sso(sso_user)
-    # update the attibutes to link the account to the sso account
+    # update the attributes to link the account to the sso account
     self.provider = sso_user.provider
     self.uid = sso_user.uid
 
@@ -264,7 +264,7 @@ class User < ActiveRecord::Base
       set_data_from_sso_mapping(field, value) unless field == 'user.email' && value.end_with?('-duplicate')
     end
 
-    # run the account transfert in an SQL transaction to ensure data integrity
+    # run the account transfer in an SQL transaction to ensure data integrity
     User.transaction do
       # remove the temporary account
       sso_user.destroy
@@ -319,7 +319,7 @@ class User < ActiveRecord::Base
   end
 
   def notify_admin_when_user_is_created
-    if need_completion? and not provider.nil?
+    if need_completion? && !provider.nil?
       NotificationCenter.call type: 'notify_admin_when_user_is_imported',
                               receiver: User.admins,
                               attached_object: self
