@@ -286,7 +286,7 @@ module Reservations
       assert_equal transaction.id, invoice.wallet_transaction_id
     end
 
-    test "user reserves a machine and plan pay by wallet with success" do
+    test 'user reserves a machine and plan pay by wallet with success' do
       @vlonchamp = User.find_by(username: 'vlonchamp')
       machine = Machine.find(6)
       availability = machine.availabilities.first
@@ -299,17 +299,18 @@ module Reservations
       wallet_transactions_count = WalletTransaction.count
 
       post reservations_path, { reservation: {
-          user_id: @vlonchamp.id,
-          reservable_id: machine.id,
-          reservable_type: machine.class.name,
-          plan_id: plan.id,
-          slots_attributes: [
-            { start_at: availability.start_at.to_s(:iso8601),
-              end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        }}.to_json, default_headers
+        user_id: @vlonchamp.id,
+        reservable_id: machine.id,
+        reservable_type: machine.class.name,
+        plan_id: plan.id,
+        slots_attributes: [
+          {
+            start_at: availability.start_at.to_s(:iso8601),
+            end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+            availability_id: availability.id
+          }
+        ]
+      } }.to_json, default_headers
 
       # general assertions
       assert_equal 201, response.status

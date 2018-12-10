@@ -378,9 +378,13 @@ class Reservation < ActiveRecord::Base
     if valid?
       if plan_id
         self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
-        self.subscription.attributes = {plan_id: plan_id, user_id: user.id, expired_at: nil}
+        subscription.attributes = { plan_id: plan_id, user_id: user.id, expiration_date: nil }
         if subscription.save_with_local_payment(false)
-          self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, description: subscription.plan.name, subscription_id: subscription.id)
+          invoice.invoice_items.push InvoiceItem.new(
+            amount: subscription.plan.amount,
+            description: subscription.plan.name,
+            subscription_id: subscription.id
+          )
           set_total_and_coupon(coupon_code)
           save!
         else

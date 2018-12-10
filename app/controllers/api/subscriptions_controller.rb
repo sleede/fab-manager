@@ -16,7 +16,8 @@ class API::SubscriptionsController < API::ApiController
       user_id = current_user.is_admin? ? subscription_params[:user_id] : current_user.id
 
       @subscription = Subscription.new(subscription_params)
-      is_subscribe = Subscribe.new(user_id).pay_and_save(@subscription, method, coupon_params[:coupon_code], true)
+      is_subscribe = Subscriptions::Subscribe.new(user_id)
+                                             .pay_and_save(@subscription, method, coupon_params[:coupon_code], true)
 
       if is_subscribe
         render :show, status: :created, location: @subscription
@@ -31,8 +32,8 @@ class API::SubscriptionsController < API::ApiController
 
     free_days = params[:subscription][:free] || false
 
-    if Subscribe.new(@subscription.user_id)
-                .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
+    if Subscriptions::Subscribe.new(@subscription.user_id)
+                               .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
       render status: :ok
     else
       render status: :unprocessable_entity

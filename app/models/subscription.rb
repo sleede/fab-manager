@@ -13,8 +13,8 @@ class Subscription < ActiveRecord::Base
   attr_accessor :card_token
 
   # creation
-  after_save :notify_member_subscribed_plan, if: :new?
-  after_save :notify_admin_subscribed_plan, if: :new?
+  after_save :notify_member_subscribed_plan
+  after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
@@ -67,10 +67,10 @@ class Subscription < ActiveRecord::Base
       new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
       self.stp_subscription_id = new_subscription.id
       self.canceled_at = nil
-      self.expired_at = Time.at(new_subscription.current_period_end)
+      self.expiration_date = Time.at(new_subscription.current_period_end)
       save!
 
-      UsersCredits::Manager.new(user: user).reset_credits if expired_date_changed
+      UsersCredits::Manager.new(user: user).reset_credits
 
       # generate invoice
       stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
@@ -134,7 +134,7 @@ class Subscription < ActiveRecord::Base
 
     return false unless save
 
-    UsersCredits::Manager.new(user: user).reset_credits if expired_date_changed
+    UsersCredits::Manager.new(user: user).reset_credits
     if invoice
       @wallet_amount_debit = get_wallet_amount_debit
 
@@ -189,7 +189,7 @@ class Subscription < ActiveRecord::Base
 
   def expire(time)
     if !expired?
-      update_columns(expired_at: time, canceled_at: time)
+      update_columns(expiration_date: time, canceled_at: time)
       notify_admin_subscription_canceled
       notify_member_subscription_canceled
       true
@@ -266,28 +266,6 @@ class Subscription < ActiveRecord::Base
       notification = Notification.new(meta_data: meta_data)
       notification.send_notification(type: :notify_admin_subscription_extended, attached_object: self).to(admin).deliver_later
     end
-  end
-
-  # set a expired date by plan
-  # expired_at will be updated when has a new payment
-  def set_expired_at
-    start_at = Time.now
-    self.expired_at = start_at + plan.duration
-  end
-
-  def expired_date_changed
-    p_value = previous_changes[:expired_at][0]
-    return true if p_value.nil?
-
-    p_value.to_date != expired_at.to_date and expired_at > p_value
-  end
-
-  # def is_being_extended?
-  #   !expired_at_was.nil? and expired_at_changed?
-  # end
-
-  def new?
-    expired_at_was.nil?
   end
 
   def of_partner_plan?

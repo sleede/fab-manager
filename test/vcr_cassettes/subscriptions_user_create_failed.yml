@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-39-generic (buildd@lgw01-amd64-054) (gcc version 7.3.0 (Ubuntu
-        7.3.0-16ubuntu3)) #42-Ubuntu SMP Tue Oct 23 15:48:01 UTC 2018","hostname":"Sleede-SylvainPC"}'
+        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
+        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '81'
   response:
@@ -33,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 27 Nov 2018 09:04:53 GMT
+      - Mon, 10 Dec 2018 14:36:13 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '784'
+      - '785'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_GufMv7GOqXAbqH
+      - req_gkOTZhTJTZZnpm
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1Db2Uz2sOmf47Nz99fRp3yNx",
+          "id": "tok_1Dfprl2sOmf47Nz9Y0iFjhZK",
           "object": "token",
           "card": {
-            "id": "card_1Db2Uz2sOmf47Nz9IHZrRDDw",
+            "id": "card_1Dfprk2sOmf47Nz95PeBOX0O",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -89,12 +89,12 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "90.112.76.28",
-          "created": 1543309493,
+          "client_ip": "92.157.28.112",
+          "created": 1544452573,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Tue, 27 Nov 2018 09:04:53 GMT
+  recorded_at: Mon, 10 Dec 2018 14:36:13 GMT
 recorded_with: VCR 3.0.1
