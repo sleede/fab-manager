@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
   end
 
   def subscription
-    subscriptions.last
+    subscriptions.order(:created_at).last
   end
 
   def is_admin?
@@ -119,14 +119,10 @@ class User < ActiveRecord::Base
     my_projects.to_a.concat projects
   end
 
-  def generate_admin_invoice(offer_day = false, offer_day_start_at = nil)
+  def generate_subscription_invoice
     return unless subscription
 
-    if offer_day
-      subscription.generate_and_save_offer_day_invoice(offer_day_start_at) unless invoicing_disabled?
-    else
-      subscription.generate_and_save_invoice unless invoicing_disabled?
-    end
+    subscription.generate_and_save_invoice unless invoicing_disabled?
   end
 
   def stripe_customer

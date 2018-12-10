@@ -35,7 +35,7 @@ class Subscription < ActiveRecord::Base
 
         discount = 0
         if @coupon.type == 'percent_off'
-          discount = (total  * @coupon.percent_off / 100).to_i
+          discount = (total * @coupon.percent_off / 100).to_i
         elsif @coupon.type == 'amount_off'
           discount = @coupon.amount_off
         else
@@ -65,28 +65,24 @@ class Subscription < ActiveRecord::Base
       end
 
       new_subscription = customer.subscriptions.create(plan: plan.stp_plan_id, source: card_token)
-      # very important to set expired_at to nil that can allow method is_new? to return true
-      # for send the notification
-      # TODO: Refactoring
-      update_column(:expired_at, nil) unless new_record?
       self.stp_subscription_id = new_subscription.id
       self.canceled_at = nil
       self.expired_at = Time.at(new_subscription.current_period_end)
       save!
 
-      UsersCredits::Manager.new(user: self.user).reset_credits if expired_date_changed
+      UsersCredits::Manager.new(user: user).reset_credits if expired_date_changed
 
       # generate invoice
       stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
       if invoice
-        invoc = generate_invoice(stp_invoice.id, coupon_code)
+        db_invoice = generate_invoice(stp_invoice.id, coupon_code)
         # debit wallet
         wallet_transaction = debit_user_wallet
         if wallet_transaction
-          invoc.wallet_amount = @wallet_amount_debit
-          invoc.wallet_transaction_id = wallet_transaction.id
+          db_invoice.wallet_amount = @wallet_amount_debit
+          db_invoice.wallet_transaction_id = wallet_transaction.id
         end
-        invoc.save
+        db_invoice.save
       end
       # cancel subscription after create
       cancel
@@ -122,7 +118,7 @@ class Subscription < ActiveRecord::Base
       logger.error e
       errors[:payment] << e.message
       return false
-    rescue => e
+    rescue StandardError => e
       clear_wallet_and_goupon_invoice_items(invoice_items)
       # Something else happened, completely unrelated to Stripe
       logger.error e
@@ -179,13 +175,6 @@ class Subscription < ActiveRecord::Base
     generate_invoice(stp_invoice_id).save
   end
 
-  def generate_and_save_offer_day_invoice(offer_day_start_at)
-    od = offer_days.create(start_at: offer_day_start_at, end_at: expired_at)
-    invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
-    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: self.id)
-    invoice.save
-  end
-
   def cancel
     return unless stp_subscription_id.present?
 
@@ -213,13 +202,23 @@ class Subscription < ActiveRecord::Base
     expired_at <= Time.now
   end
 
-  def extend_expired_date(expired_at, free_days = false)
-    return false if expired_at <= self.expired_at
+  def expired_at
+    last_offered = offer_days.order(:end_at).last
+    return last_offered.end_at if last_offered
 
-    self.expired_at = expired_at
+    expiration_date
+  end
+
+  def free_extend(expiration)
+    return false if expiration <= expired_at
+
+    od = offer_days.create(start_at: expired_at, end_at: expiration)
+    invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
+    invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id)
+    invoice.save
+
     if save
-      UsersCredits::Manager.new(user: user).reset_credits unless free_days
-      notify_subscription_extended(free_days)
+      notify_subscription_extended(true)
       return true
     end
     false

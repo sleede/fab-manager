@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011125217) do
+ActiveRecord::Schema.define(version: 20181210105917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -667,7 +667,7 @@ ActiveRecord::Schema.define(version: 20171011125217) do
     t.string   "stp_subscription_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "expired_at"
+    t.datetime "expiration_date"
     t.datetime "canceled_at"
   end
 

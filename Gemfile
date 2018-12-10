@@ -34,6 +34,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'railroady'
+
+  gem 'rubocop', '~> 0.61.1', require: false
 end
 
 group :development do
