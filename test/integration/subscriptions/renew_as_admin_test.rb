@@ -33,6 +33,11 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_not_nil user.subscription.plan, "user's subscribed plan was not found"
     assert_equal plan.id, user.subscription.plan_id, "user's plan does not match"
 
+    # Check the expiration date
+    assert_equal (user.subscription.created_at + plan.interval_count.send(plan.interval)).iso8601,
+                 subscription[:expired_at],
+                 'subscription expiration date does not match'
+
     # Check that the training credits were set correctly
     assert_empty user.training_credits, 'training credits were not reset'
     assert_equal user.subscription.plan.training_credit_nb, plan.training_credit_nb, 'trainings credits were not allocated'
@@ -60,7 +65,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
   test 'admin successfully offer free days' do
     user = User.find_by(username: 'pdurand')
-    subscription = user.subscription
+    subscription = user.subscription.clone
     new_date = (1.month.from_now - 4.days).utc
 
     VCR.use_cassette('subscriptions_admin_offer_free_days') do
@@ -86,6 +91,44 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     # Check notification was sent to the user
     notification = Notification.find_by(
       notification_type_id: NotificationType.find_by_name('notify_member_subscription_extended'),
+      attached_object_type: 'Subscription',
+      attached_object_id: subscription[:id]
+    )
+    assert_not_nil notification, 'user notification was not created'
+    assert_not_nil notification.get_meta_data(:free_days),
+                   "notification didn't says to the user that her extent was for free"
+    assert_equal user.id, notification.receiver_id, 'wrong user notified'
+  end
+
+  test 'admin successfully extends a subscription' do
+    user = User.find_by(username: 'pdurand')
+    subscription = user.subscription.clone
+    new_date = (1.month.from_now - 4.days).utc
+
+    VCR.use_cassette('subscriptions_admin_extends_subscription') do
+      put "/api/subscriptions/#{subscription.id}",
+          {
+            subscription: {
+              expired_at: new_date.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+            }
+          }.to_json, default_headers
+    end
+
+    # Check response format & status
+    assert_equal 201, response.status, response.body
+    assert_equal Mime::JSON, response.content_type
+
+    # Check that the subscribed plan is still the same
+    res_subscription = json_response(response.body)
+    assert_equal subscription.plan_id, res_subscription[:plan_id], 'subscribed plan does not match'
+
+    # Check that the subscription is new
+    assert_not_equal subscription.id, res_subscription[:id], 'subscription id has not changed'
+    assert_dates_equal new_date, res_subscription[:expired_at], 'subscription end date does not match'
+
+    # Check notification was sent to the user
+    notification = Notification.find_by(
+      notification_type_id: NotificationType.find_by_name('notify_member_subscribed_plan'),
       attached_object_type: 'Subscription',
       attached_object_id: subscription[:id]
     )

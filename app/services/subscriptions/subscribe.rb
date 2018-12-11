@@ -25,7 +25,7 @@ module Subscriptions
       )
       if new_sub.save
         new_sub.user.generate_subscription_invoice
-        return true
+        return new_sub
       end
       false
     end

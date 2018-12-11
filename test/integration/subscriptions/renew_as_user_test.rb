@@ -8,6 +8,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
   test 'user successfully renew a subscription after it has ended' do
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
+    stripe_subscription = nil
 
     VCR.use_cassette('subscriptions_user_renew_success', erb: true) do
       post '/api/subscriptions',
@@ -18,6 +19,7 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
                card_token: stripe_card_token
              }
            }.to_json, default_headers
+      stripe_subscription = Stripe::Customer.retrieve(@user.stp_customer_id).subscriptions.retrieve(@user.subscription.stp_subscription_id)
     end
 
     # Check response format & status
@@ -30,8 +32,14 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check that the user has the correct subscription
     assert_not_nil @user.subscription, "user's subscription was not found"
+
+    # Check the expiration date
     assert (@user.subscription.expired_at > DateTime.now),
            "user's subscription expiration was not updated ... VCR cassettes may be outdated, please check the gitlab wiki"
+    assert_equal @user.subscription.expired_at.iso8601,
+                 Time.at(stripe_subscription.current_period_end).iso8601,
+                 'subscription expiration date does not match'
+
     assert_in_delta 5,
                     (DateTime.now.to_i - @user.subscription.updated_at.to_i),
                     10,

@@ -12,17 +12,17 @@ class Reservation < ActiveRecord::Base
   has_many :tickets
   accepts_nested_attributes_for :tickets, allow_destroy: false
 
-  has_one :invoice, -> {where(type: nil)}, as: :invoiced, dependent: :destroy
+  has_one :invoice, -> { where(type: nil) }, as: :invoiced, dependent: :destroy
 
   validates_presence_of :reservable_id, :reservable_type
-  validate :machine_not_already_reserved, if: -> { self.reservable.is_a?(Machine) }
-  validate :training_not_fully_reserved, if: -> { self.reservable.is_a?(Training) }
+  validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
+  validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
 
   attr_accessor :card_token, :plan_id, :subscription
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
-  after_save :update_event_nb_free_places, if: Proc.new { |reservation| reservation.reservable_type == 'Event' }
+  after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
   after_create :debit_user_wallet
 
   ##
@@ -161,7 +161,7 @@ class Reservation < ActiveRecord::Base
           ii_amount = index < users_credits_manager.free_hours_count ? 0 : base_amount
         end
 
-        ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
+        ii_amount = 0 if slot.offered && on_site # if it's a local payment and slot is offered free
 
         unless on_site # if it's local payment then do not create Stripe::InvoiceItem
           ii = Stripe::InvoiceItem.create(
@@ -188,33 +188,30 @@ class Reservation < ActiveRecord::Base
     # === Coupon ===
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)
-      if not @coupon.nil? and @coupon.status(user.id) == 'active'
-        total = get_cart_total
+      raise InvalidCouponError if @coupon.nil? || @coupon.status(user.id) != 'active'
 
-        discount = 0
-        if @coupon.type == 'percent_off'
-          discount = (total  * @coupon.percent_off / 100).to_i
-        elsif @coupon.type == 'amount_off'
-          discount = @coupon.amount_off
-        else
-          raise InvalidCouponError
-        end
+      total = get_cart_total
 
-        unless on_site
-          invoice_items << Stripe::InvoiceItem.create(
-            customer: user.stp_customer_id,
-            amount: -discount,
-            currency: Rails.application.secrets.stripe_currency,
-            description: "coupon #{@coupon.code}"
-          )
-        end
-      else
-        raise InvalidCouponError
+      discount = if @coupon.type == 'percent_off'
+                   (total * @coupon.percent_off / 100).to_i
+                 elsif @coupon.type == 'amount_off'
+                   @coupon.amount_off
+                 else
+                   raise InvalidCouponError
+                 end
+
+      unless on_site
+        invoice_items << Stripe::InvoiceItem.create(
+          customer: user.stp_customer_id,
+          amount: -discount,
+          currency: Rails.application.secrets.stripe_currency,
+          description: "coupon #{@coupon.code}"
+        )
       end
     end
 
     @wallet_amount_debit = get_wallet_amount_debit
-    if @wallet_amount_debit != 0 and !on_site
+    if @wallet_amount_debit != 0 && !on_site
       invoice_items << Stripe::InvoiceItem.create(
         customer: user.stp_customer_id,
         amount: -@wallet_amount_debit.to_i,

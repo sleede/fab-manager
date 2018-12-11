@@ -32,8 +32,12 @@ class API::SubscriptionsController < API::ApiController
 
     free_days = params[:subscription][:free] || false
 
-    if Subscriptions::Subscribe.new(@subscription.user_id)
-                               .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
+    res = Subscriptions::Subscribe.new(@subscription.user_id)
+                                  .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
+    if res.is_a?(Subscription)
+      @subscription = res
+      render status: :created
+    elsif res
       render status: :ok
     else
       render status: :unprocessable_entity
