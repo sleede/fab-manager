@@ -132,6 +132,7 @@ class Subscription < ActiveRecord::Base
   def save_with_local_payment(invoice = true, coupon_code = nil)
     return false unless valid?
 
+    set_expiration_date
     return false unless save
 
     UsersCredits::Manager.new(user: user).reset_credits
@@ -266,6 +267,11 @@ class Subscription < ActiveRecord::Base
       notification = Notification.new(meta_data: meta_data)
       notification.send_notification(type: :notify_admin_subscription_extended, attached_object: self).to(admin).deliver_later
     end
+  end
+
+  def set_expiration_date
+    start_at = Time.now
+    self.expiration_date = start_at + plan.duration
   end
 
   def of_partner_plan?

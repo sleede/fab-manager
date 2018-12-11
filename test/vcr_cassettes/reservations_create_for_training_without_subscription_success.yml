@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '81'
   response:
@@ -33,7 +33,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:40 GMT
+      - Tue, 11 Dec 2018 14:05:18 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_BNxZLbuMr6YlAM
+      - req_70HtDYSyJKi6b0
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1DfptA2sOmf47Nz9YtKWHGaE",
+          "id": "tok_1DgBrO2sOmf47Nz9HEGBJOa4",
           "object": "token",
           "card": {
-            "id": "card_1DfptA2sOmf47Nz9hUuHhi84",
+            "id": "card_1DgBrO2sOmf47Nz94ifgfCFR",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -90,13 +90,13 @@ http_interactions:
             "tokenization_method": null
           },
           "client_ip": "92.157.28.112",
-          "created": 1544452660,
+          "created": 1544537118,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:40 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:18 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8Di1wjdVktv5kt&limit=100
@@ -118,8 +118,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
   response:
     status:
       code: 200
@@ -128,11 +128,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:41 GMT
+      - Tue, 11 Dec 2018 14:05:19 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '24278'
+      - '27299'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -148,7 +148,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_FQOqFBtqULUmj2
+      - req_o8lt0FdUdD8TvA
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -160,27 +160,142 @@ http_interactions:
           "object": "list",
           "data": [
             {
-              "id": "ii_1Dfpsp2sOmf47Nz9A6j2mUUj",
+              "id": "ii_1DgBqi2sOmf47Nz9ZJEZbjPP",
               "object": "invoiceitem",
-              "amount": 3200,
+              "amount": -675,
               "currency": "usd",
               "customer": "cus_8Di1wjdVktv5kt",
-              "date": 1544452639,
-              "description": "FORM1+ imprimante 3D December 10, 2018 13:00 - 02:00 PM",
-              "discountable": true,
-              "invoice": null,
+              "date": 1544537076,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1DgBqm2sOmf47Nz9EQHAqXU4",
               "livemode": false,
               "metadata": {
               },
               "period": {
-                "end": 1544452639,
-                "start": 1544452639
+                "end": 1544537076,
+                "start": 1544537076
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
+            },
+            {
+              "id": "ii_1DgBqh2sOmf47Nz9y4io6YMf",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544537075,
+              "description": "FORM1+ imprimante 3D December 11, 2018 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DgBqm2sOmf47Nz9EQHAqXU4",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544537075,
+                "start": 1544537075
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
+            },
+            {
+              "id": "ii_1DgBqQ2sOmf47Nz98Cb2yhy4",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544537058,
+              "description": "FORM1+ imprimante 3D December 11, 2018 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DgBqV2sOmf47Nz9BrVvzRfj",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544537058,
+                "start": 1544537058
               },
               "plan": null,
               "proration": false,
               "quantity": 1,
               "subscription": null,
               "unit_amount": 3200
+            },
+            {
+              "id": "ii_1DfptR2sOmf47Nz9hnNOqacD",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544452677,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1DgBpd2sOmf47Nz97rF6mKkH",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544452677,
+                "start": 1544452677
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
+            },
+            {
+              "id": "ii_1DfptQ2sOmf47Nz9aWS1D7HI",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544452676,
+              "description": "FORM1+ imprimante 3D December 10, 2018 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DgBpd2sOmf47Nz97rF6mKkH",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544452676,
+                "start": 1544452676
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
+            },
+            {
+              "id": "ii_1DfptD2sOmf47Nz9ujNy6NBV",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544452663,
+              "description": "Formation Imprimante 3D December 11, 2018 07:00 - 11:00 AM",
+              "discountable": true,
+              "invoice": "in_1DfptJ2sOmf47Nz9tCnkLEdX",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544452663,
+                "start": 1544452663
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
             },
             {
               "id": "ii_1Dfpse2sOmf47Nz909VGFg0J",
@@ -1084,79 +1199,13 @@ http_interactions:
           "url": "/v1/invoiceitems"
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:41 GMT
-- request:
-    method: delete
-    uri: https://api.stripe.com/v1/invoiceitems/ii_1Dfpsp2sOmf47Nz9A6j2mUUj
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Stripe/v1 RubyBindings/1.30.2
-      Authorization:
-      - Bearer sk_test_testfaketestfaketestfake
-      Content-Type:
-      - application/x-www-form-urlencoded
-      Stripe-Version:
-      - '2015-10-16'
-      X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Mon, 10 Dec 2018 14:37:42 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '88'
-      Connection:
-      - keep-alive
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
-      Access-Control-Max-Age:
-      - '300'
-      Cache-Control:
-      - no-cache, no-store
-      Request-Id:
-      - req_iyHQTJShcDE2H2
-      Stripe-Version:
-      - '2015-10-16'
-      Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains; preload
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "ii_1Dfpsp2sOmf47Nz9A6j2mUUj",
-          "object": "invoiceitem",
-          "deleted": true
-        }
-    http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:42 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:19 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8Di1wjdVktv5kt&amount=5100&currency=usd&description=Formation+Imprimante+3D+December+11%2C+2018+07%3A00+-+11%3A00+AM
+      string: customer=cus_8Di1wjdVktv5kt&amount=5100&currency=usd&description=Formation+Imprimante+3D+December+12%2C+2018+07%3A00+-+11%3A00+AM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1172,8 +1221,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '129'
   response:
@@ -1184,7 +1233,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:43 GMT
+      - Tue, 11 Dec 2018 14:05:20 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1204,7 +1253,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_DMSg2ITFIxdLTR
+      - req_EwXzbm0nF3o7T9
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1213,21 +1262,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1DfptD2sOmf47Nz9ujNy6NBV",
+          "id": "ii_1DgBrQ2sOmf47Nz9KroQ2LOG",
           "object": "invoiceitem",
           "amount": 5100,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1544452663,
-          "description": "Formation Imprimante 3D December 11, 2018 07:00 - 11:00 AM",
+          "date": 1544537120,
+          "description": "Formation Imprimante 3D December 12, 2018 07:00 - 11:00 AM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {
           },
           "period": {
-            "end": 1544452663,
-            "start": 1544452663
+            "end": 1544537120,
+            "start": 1544537120
           },
           "plan": null,
           "proration": false,
@@ -1236,7 +1285,7 @@ http_interactions:
           "unit_amount": 5100
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:43 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:20 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
@@ -1258,8 +1307,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
   response:
     status:
       code: 200
@@ -1268,11 +1317,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:45 GMT
+      - Tue, 11 Dec 2018 14:05:21 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '13347'
+      - '19269'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -1288,7 +1337,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_zVMLsLpPFU5ErD
+      - req_FtL7t57tg6JxGm
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1302,7 +1351,7 @@ http_interactions:
           "account_balance": 0,
           "created": 1459948888,
           "currency": "usd",
-          "default_source": "card_1DfprR2sOmf47Nz97Es3VcfI",
+          "default_source": "card_1DgBqe2sOmf47Nz9XSr6qUxW",
           "delinquent": false,
           "description": "Jean Dupond",
           "discount": null,
@@ -1316,7 +1365,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_1DfprR2sOmf47Nz97Es3VcfI",
+                "id": "card_1DgBqe2sOmf47Nz9XSr6qUxW",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -1349,6 +1398,188 @@ http_interactions:
           "subscriptions": {
             "object": "list",
             "data": [
+              {
+                "id": "sub_E8SmWM7CrOq8TU",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1544537080,
+                "cancel_at_period_end": true,
+                "canceled_at": 1544537086,
+                "created": 1544537080,
+                "current_period_end": 1547215480,
+                "current_period_start": 1544537080,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_source": null,
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_E8SmO448vMdzJ6",
+                      "object": "subscription_item",
+                      "created": 1544537081,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 3000,
+                        "billing_scheme": "per_unit",
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "name": "Mensuel - standard, association - month",
+                        "nickname": null,
+                        "product": "prod_BV0emghsuiUJDn",
+                        "statement_descriptor": null,
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_E8SmWM7CrOq8TU"
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_E8SmWM7CrOq8TU"
+                },
+                "livemode": false,
+                "metadata": {
+                },
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 3000,
+                  "billing_scheme": "per_unit",
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "name": "Mensuel - standard, association - month",
+                  "nickname": null,
+                  "product": "prod_BV0emghsuiUJDn",
+                  "statement_descriptor": null,
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "start": 1544537080,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_E8SlJ4lpE3AKJj",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1544537009,
+                "cancel_at_period_end": true,
+                "canceled_at": 1544537014,
+                "created": 1544537009,
+                "current_period_end": 1547215409,
+                "current_period_start": 1544537009,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_source": null,
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_E8Slg6VKbmrLco",
+                      "object": "subscription_item",
+                      "created": 1544537009,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 3000,
+                        "billing_scheme": "per_unit",
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "name": "Mensuel - standard, association - month",
+                        "nickname": null,
+                        "product": "prod_BV0emghsuiUJDn",
+                        "statement_descriptor": null,
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_E8SlJ4lpE3AKJj"
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_E8SlJ4lpE3AKJj"
+                },
+                "livemode": false,
+                "metadata": {
+                },
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 3000,
+                  "billing_scheme": "per_unit",
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "name": "Mensuel - standard, association - month",
+                  "nickname": null,
+                  "product": "prod_BV0emghsuiUJDn",
+                  "statement_descriptor": null,
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "start": 1544537009,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
               {
                 "id": "sub_E863BsPcMPQSbg",
                 "object": "subscription",
@@ -1715,20 +1946,20 @@ http_interactions:
               }
             ],
             "has_more": false,
-            "total_count": 4,
+            "total_count": 6,
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           },
           "tax_info": null,
           "tax_info_verification": null
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:45 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:21 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources
     body:
       encoding: UTF-8
-      string: card=tok_1DfptA2sOmf47Nz9YtKWHGaE
+      string: card=tok_1DgBrO2sOmf47Nz9HEGBJOa4
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1744,8 +1975,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '33'
   response:
@@ -1756,7 +1987,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:46 GMT
+      - Tue, 11 Dec 2018 14:05:23 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1776,7 +2007,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_J7SVkiqpZO8dwn
+      - req_tBR1pqYdLyPMoD
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1785,7 +2016,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_1DfptA2sOmf47Nz9hUuHhi84",
+          "id": "card_1DgBrO2sOmf47Nz94ifgfCFR",
           "object": "card",
           "address_city": null,
           "address_country": null,
@@ -1811,13 +2042,13 @@ http_interactions:
           "tokenization_method": null
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:47 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:23 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt
     body:
       encoding: UTF-8
-      string: default_source=card_1DfptA2sOmf47Nz9hUuHhi84
+      string: default_source=card_1DgBrO2sOmf47Nz94ifgfCFR
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1833,8 +2064,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '44'
   response:
@@ -1845,11 +2076,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:48 GMT
+      - Tue, 11 Dec 2018 14:05:24 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '14084'
+      - '20006'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -1865,7 +2096,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_Tm48tigByFTXdH
+      - req_PmDpONxvtiInbH
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1879,7 +2110,7 @@ http_interactions:
           "account_balance": 0,
           "created": 1459948888,
           "currency": "usd",
-          "default_source": "card_1DfptA2sOmf47Nz9hUuHhi84",
+          "default_source": "card_1DgBrO2sOmf47Nz94ifgfCFR",
           "delinquent": false,
           "description": "Jean Dupond",
           "discount": null,
@@ -1893,7 +2124,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_1DfptA2sOmf47Nz9hUuHhi84",
+                "id": "card_1DgBrO2sOmf47Nz94ifgfCFR",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -1919,7 +2150,7 @@ http_interactions:
                 "tokenization_method": null
               },
               {
-                "id": "card_1DfprR2sOmf47Nz97Es3VcfI",
+                "id": "card_1DgBqe2sOmf47Nz9XSr6qUxW",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -1953,6 +2184,188 @@ http_interactions:
             "object": "list",
             "data": [
               {
+                "id": "sub_E8SmWM7CrOq8TU",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1544537080,
+                "cancel_at_period_end": true,
+                "canceled_at": 1544537086,
+                "created": 1544537080,
+                "current_period_end": 1547215480,
+                "current_period_start": 1544537080,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_source": null,
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_E8SmO448vMdzJ6",
+                      "object": "subscription_item",
+                      "created": 1544537081,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 3000,
+                        "billing_scheme": "per_unit",
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "name": "Mensuel - standard, association - month",
+                        "nickname": null,
+                        "product": "prod_BV0emghsuiUJDn",
+                        "statement_descriptor": null,
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_E8SmWM7CrOq8TU"
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_E8SmWM7CrOq8TU"
+                },
+                "livemode": false,
+                "metadata": {
+                },
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 3000,
+                  "billing_scheme": "per_unit",
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "name": "Mensuel - standard, association - month",
+                  "nickname": null,
+                  "product": "prod_BV0emghsuiUJDn",
+                  "statement_descriptor": null,
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "start": 1544537080,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
+                "id": "sub_E8SlJ4lpE3AKJj",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "billing": "charge_automatically",
+                "billing_cycle_anchor": 1544537009,
+                "cancel_at_period_end": true,
+                "canceled_at": 1544537014,
+                "created": 1544537009,
+                "current_period_end": 1547215409,
+                "current_period_start": 1544537009,
+                "customer": "cus_8Di1wjdVktv5kt",
+                "days_until_due": null,
+                "default_source": null,
+                "discount": null,
+                "ended_at": null,
+                "items": {
+                  "object": "list",
+                  "data": [
+                    {
+                      "id": "si_E8Slg6VKbmrLco",
+                      "object": "subscription_item",
+                      "created": 1544537009,
+                      "metadata": {
+                      },
+                      "plan": {
+                        "id": "mensuel-standard-month-20160404171519",
+                        "object": "plan",
+                        "active": true,
+                        "aggregate_usage": null,
+                        "amount": 3000,
+                        "billing_scheme": "per_unit",
+                        "created": 1459782921,
+                        "currency": "usd",
+                        "interval": "month",
+                        "interval_count": 1,
+                        "livemode": false,
+                        "metadata": {
+                        },
+                        "name": "Mensuel - standard, association - month",
+                        "nickname": null,
+                        "product": "prod_BV0emghsuiUJDn",
+                        "statement_descriptor": null,
+                        "tiers": null,
+                        "tiers_mode": null,
+                        "transform_usage": null,
+                        "trial_period_days": null,
+                        "usage_type": "licensed"
+                      },
+                      "quantity": 1,
+                      "subscription": "sub_E8SlJ4lpE3AKJj"
+                    }
+                  ],
+                  "has_more": false,
+                  "total_count": 1,
+                  "url": "/v1/subscription_items?subscription=sub_E8SlJ4lpE3AKJj"
+                },
+                "livemode": false,
+                "metadata": {
+                },
+                "plan": {
+                  "id": "mensuel-standard-month-20160404171519",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 3000,
+                  "billing_scheme": "per_unit",
+                  "created": 1459782921,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                  },
+                  "name": "Mensuel - standard, association - month",
+                  "nickname": null,
+                  "product": "prod_BV0emghsuiUJDn",
+                  "statement_descriptor": null,
+                  "tiers": null,
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "quantity": 1,
+                "start": 1544537009,
+                "status": "active",
+                "tax_percent": null,
+                "trial_end": null,
+                "trial_start": null
+              },
+              {
                 "id": "sub_E863BsPcMPQSbg",
                 "object": "subscription",
                 "application_fee_percent": null,
@@ -2318,14 +2731,14 @@ http_interactions:
               }
             ],
             "has_more": false,
-            "total_count": 4,
+            "total_count": 6,
             "url": "/v1/customers/cus_8Di1wjdVktv5kt/subscriptions"
           },
           "tax_info": null,
           "tax_info_verification": null
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:48 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:24 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoices
@@ -2347,8 +2760,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '27'
   response:
@@ -2359,7 +2772,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:49 GMT
+      - Tue, 11 Dec 2018 14:05:26 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2379,7 +2792,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_IGRqdEkXSVQtdA
+      - req_kk6wcYOUGa7CQQ
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -2388,7 +2801,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1DfptJ2sOmf47Nz9tCnkLEdX",
+          "id": "in_1DgBrV2sOmf47Nz9TlpwehNz",
           "object": "invoice",
           "amount_due": 5100,
           "amount_paid": 0,
@@ -2403,7 +2816,7 @@ http_interactions:
           "closed": false,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1544452669,
+          "date": 1544537125,
           "default_source": null,
           "description": null,
           "discount": null,
@@ -2417,19 +2830,19 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_1DfptD2sOmf47Nz9ujNy6NBV",
+                "id": "ii_1DgBrQ2sOmf47Nz9KroQ2LOG",
                 "object": "line_item",
                 "amount": 5100,
                 "currency": "usd",
-                "description": "Formation Imprimante 3D December 11, 2018 07:00 - 11:00 AM",
+                "description": "Formation Imprimante 3D December 12, 2018 07:00 - 11:00 AM",
                 "discountable": true,
-                "invoice_item": "ii_1DfptD2sOmf47Nz9ujNy6NBV",
+                "invoice_item": "ii_1DgBrQ2sOmf47Nz9KroQ2LOG",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1544452663,
-                  "start": 1544452663
+                  "end": 1544537120,
+                  "start": 1544537120
                 },
                 "plan": null,
                 "proration": false,
@@ -2440,13 +2853,13 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/invoices/in_1DfptJ2sOmf47Nz9tCnkLEdX/lines"
+            "url": "/v1/invoices/in_1DgBrV2sOmf47Nz9TlpwehNz/lines"
           },
           "livemode": false,
           "metadata": {
           },
-          "next_payment_attempt": 1544456269,
-          "number": "C0E661C-0032",
+          "next_payment_attempt": 1544540725,
+          "number": "C0E661C-0036",
           "paid": false,
           "payment_intent": null,
           "period_end": 1545901505,
@@ -2463,10 +2876,10 @@ http_interactions:
           "webhooks_delivered_at": null
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:49 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:26 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/invoices/in_1DfptJ2sOmf47Nz9tCnkLEdX/pay
+    uri: https://api.stripe.com/v1/invoices/in_1DgBrV2sOmf47Nz9TlpwehNz/pay
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -2485,8 +2898,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '0'
   response:
@@ -2497,7 +2910,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:51 GMT
+      - Tue, 11 Dec 2018 14:05:28 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2517,7 +2930,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_tZZMDv1U8B4Qm8
+      - req_cCP6gsO4jj700x
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -2526,7 +2939,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1DfptJ2sOmf47Nz9tCnkLEdX",
+          "id": "in_1DgBrV2sOmf47Nz9TlpwehNz",
           "object": "invoice",
           "amount_due": 5100,
           "amount_paid": 5100,
@@ -2537,37 +2950,37 @@ http_interactions:
           "auto_advance": false,
           "billing": "charge_automatically",
           "billing_reason": "manual",
-          "charge": "ch_1DfptK2sOmf47Nz9PU7nUDEI",
+          "charge": "ch_1DgBrW2sOmf47Nz9RfkSK1lw",
           "closed": true,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1544452669,
+          "date": 1544537125,
           "default_source": null,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
-          "finalized_at": 1544452670,
+          "finalized_at": 1544537126,
           "forgiven": false,
-          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_rTXiPDvnSevTWx91tML8fwjepF",
-          "invoice_pdf": "https://pay.stripe.com/invoice/invst_rTXiPDvnSevTWx91tML8fwjepF/pdf",
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_q7yxjIa50fm9Lmka8tOqzfhCc8",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_q7yxjIa50fm9Lmka8tOqzfhCc8/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1DfptD2sOmf47Nz9ujNy6NBV",
+                "id": "ii_1DgBrQ2sOmf47Nz9KroQ2LOG",
                 "object": "line_item",
                 "amount": 5100,
                 "currency": "usd",
-                "description": "Formation Imprimante 3D December 11, 2018 07:00 - 11:00 AM",
+                "description": "Formation Imprimante 3D December 12, 2018 07:00 - 11:00 AM",
                 "discountable": true,
-                "invoice_item": "ii_1DfptD2sOmf47Nz9ujNy6NBV",
+                "invoice_item": "ii_1DgBrQ2sOmf47Nz9KroQ2LOG",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1544452663,
-                  "start": 1544452663
+                  "end": 1544537120,
+                  "start": 1544537120
                 },
                 "plan": null,
                 "proration": false,
@@ -2578,13 +2991,13 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/invoices/in_1DfptJ2sOmf47Nz9tCnkLEdX/lines"
+            "url": "/v1/invoices/in_1DgBrV2sOmf47Nz9TlpwehNz/lines"
           },
           "livemode": false,
           "metadata": {
           },
           "next_payment_attempt": null,
-          "number": "C0E661C-0032",
+          "number": "C0E661C-0036",
           "paid": true,
           "payment_intent": null,
           "period_end": 1545901505,
@@ -2598,13 +3011,13 @@ http_interactions:
           "tax": 0,
           "tax_percent": null,
           "total": 5100,
-          "webhooks_delivered_at": 1544452669
+          "webhooks_delivered_at": 1544537126
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:51 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:28 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources/card_1DfptA2sOmf47Nz9hUuHhi84
+    uri: https://api.stripe.com/v1/customers/cus_8Di1wjdVktv5kt/sources/card_1DgBrO2sOmf47Nz94ifgfCFR
     body:
       encoding: US-ASCII
       string: ''
@@ -2623,8 +3036,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
   response:
     status:
       code: 200
@@ -2633,7 +3046,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:37:53 GMT
+      - Tue, 11 Dec 2018 14:05:29 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2653,7 +3066,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_dzvilqIZufCYiA
+      - req_aMTAy3IQkYKntQ
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -2662,10 +3075,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_1DfptA2sOmf47Nz9hUuHhi84",
+          "id": "card_1DgBrO2sOmf47Nz94ifgfCFR",
           "object": "card",
           "deleted": true
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:37:53 GMT
+  recorded_at: Tue, 11 Dec 2018 14:05:29 GMT
 recorded_with: VCR 3.0.1

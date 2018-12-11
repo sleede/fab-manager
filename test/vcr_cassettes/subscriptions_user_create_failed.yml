@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.4-arch1-1-ARCH (builduser@heftig-22537) (gcc version 8.2.1 20180831
-        (GCC)) #1 SMP PREEMPT Fri Nov 23 09:06:58 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
+        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
       Content-Length:
       - '81'
   response:
@@ -33,7 +33,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 10 Dec 2018 14:36:13 GMT
+      - Tue, 11 Dec 2018 14:03:36 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_gkOTZhTJTZZnpm
+      - req_IR7v65Z8yE1MXV
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1Dfprl2sOmf47Nz9Y0iFjhZK",
+          "id": "tok_1DgBpk2sOmf47Nz96loe84j5",
           "object": "token",
           "card": {
-            "id": "card_1Dfprk2sOmf47Nz95PeBOX0O",
+            "id": "card_1DgBpk2sOmf47Nz9uyHEKYDj",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -90,11 +90,11 @@ http_interactions:
             "tokenization_method": null
           },
           "client_ip": "92.157.28.112",
-          "created": 1544452573,
+          "created": 1544537016,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Mon, 10 Dec 2018 14:36:13 GMT
+  recorded_at: Tue, 11 Dec 2018 14:03:36 GMT
 recorded_with: VCR 3.0.1
