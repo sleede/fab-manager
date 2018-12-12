@@ -120,6 +120,11 @@ class ActiveSupport::TestCase
     end
   end
 
+  def assert_dates_equal(expected, actual, msg = nil)
+    assert_not_nil actual, msg
+    assert_equal expected.to_date, actual.to_date, msg
+  end
+
   private
 
   # Parse a line of text read from a PDF file and return the price included inside

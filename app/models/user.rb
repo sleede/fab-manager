@@ -98,13 +98,13 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_plan
-    return nil if subscription.nil? or subscription.expired_at < Time.now
+    return nil if subscription.nil? || subscription.expired_at < Time.now
 
     subscription.plan
   end
 
   def subscription
-    subscriptions.last
+    subscriptions.order(:created_at).last
   end
 
   def is_admin?
@@ -119,14 +119,10 @@ class User < ActiveRecord::Base
     my_projects.to_a.concat projects
   end
 
-  def generate_admin_invoice(offer_day = false, offer_day_start_at = nil)
+  def generate_subscription_invoice
     return unless subscription
 
-    if offer_day
-      subscription.generate_and_save_offer_day_invoice(offer_day_start_at) unless invoicing_disabled?
-    else
-      subscription.generate_and_save_invoice unless invoicing_disabled?
-    end
+    subscription.generate_and_save_invoice unless invoicing_disabled?
   end
 
   def stripe_customer
@@ -220,7 +216,7 @@ class User < ActiveRecord::Base
 
   ## used to allow the migration of existing users between authentication providers
   def generate_auth_migration_token
-    update_attributes(:auth_token => Devise.friendly_token)
+    update_attributes(auth_token: Devise.friendly_token)
   end
 
   ## link the current user to the given provider (omniauth attributes hash)
@@ -241,7 +237,7 @@ class User < ActiveRecord::Base
   ## Merge the provided User's SSO details into the current user and drop the provided user to ensure the unity
   ## @param sso_user {User} the provided user will be DELETED after the merge was successful
   def merge_from_sso(sso_user)
-    # update the attibutes to link the account to the sso account
+    # update the attributes to link the account to the sso account
     self.provider = sso_user.provider
     self.uid = sso_user.uid
 
@@ -264,7 +260,7 @@ class User < ActiveRecord::Base
       set_data_from_sso_mapping(field, value) unless field == 'user.email' && value.end_with?('-duplicate')
     end
 
-    # run the account transfert in an SQL transaction to ensure data integrity
+    # run the account transfer in an SQL transaction to ensure data integrity
     User.transaction do
       # remove the temporary account
       sso_user.destroy
@@ -319,7 +315,7 @@ class User < ActiveRecord::Base
   end
 
   def notify_admin_when_user_is_created
-    if need_completion? and not provider.nil?
+    if need_completion? && !provider.nil?
       NotificationCenter.call type: 'notify_admin_when_user_is_imported',
                               receiver: User.admins,
                               attached_object: self

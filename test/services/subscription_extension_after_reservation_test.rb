@@ -19,11 +19,11 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
     @reservation_training.save!
   end
 
-  test "is eligible for extension because all conditions are met by default (test setup)" do
+  test 'is eligible for extension because all conditions are met by default (test setup)' do
     assert SubscriptionExtensionAfterReservation.new(@reservation_training).eligible_to_extension?
   end
 
-  test "not eligible if reservable is a machine" do
+  test 'not eligible if reservable is a machine' do
     @reservation_machine.save!
     refute SubscriptionExtensionAfterReservation.new(@reservation_machine).eligible_to_extension?
   end
@@ -33,8 +33,8 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
     refute SubscriptionExtensionAfterReservation.new(@reservation_training).eligible_to_extension?
   end
 
-  test "not eligible if subscription is expired" do
-    @user.subscription.update!(expired_at: 10.years.ago)
+  test 'not eligible if subscription is expired' do
+    @user.subscription.update!(expiration_date: 10.years.ago)
     refute SubscriptionExtensionAfterReservation.new(@reservation_training).eligible_to_extension?
   end
 
@@ -43,7 +43,7 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
     refute SubscriptionExtensionAfterReservation.new(@reservation_training).eligible_to_extension?
   end
 
-  test "method extend_subscription" do
+  test 'method extend_subscription' do
     SubscriptionExtensionAfterReservation.new(@reservation_training).extend_subscription
     assert_equal @reservation_training.slots.first.start_at + @plan.duration, @user.subscription.expired_at
   end

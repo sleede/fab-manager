@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+- Refactored subscriptions to keep track of the previous ones
+- Improved automated tests suite
+- Added Rubocop gem to the Gemfile
+- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `bundle install`
+
 # v2.7.4 2018 December 04
 
 - Applied Rubocop rules to some ruby files

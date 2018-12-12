@@ -33,7 +33,7 @@ namespace :fablab do
 
   desc 'Cancel stripe subscriptions'
   task cancel_subscriptions: :environment do
-    Subscription.where('expired_at >= ?', Time.now.at_beginning_of_day).each do |s|
+    Subscription.where('expiration_date >= ?', Time.now.at_beginning_of_day).each do |s|
       puts "-> Start cancel subscription of #{s.user.email}"
       s.cancel
       puts '-> Done'

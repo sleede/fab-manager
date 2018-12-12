@@ -12,17 +12,17 @@ class Reservation < ActiveRecord::Base
   has_many :tickets
   accepts_nested_attributes_for :tickets, allow_destroy: false
 
-  has_one :invoice, -> {where(type: nil)}, as: :invoiced, dependent: :destroy
+  has_one :invoice, -> { where(type: nil) }, as: :invoiced, dependent: :destroy
 
   validates_presence_of :reservable_id, :reservable_type
-  validate :machine_not_already_reserved, if: -> { self.reservable.is_a?(Machine) }
-  validate :training_not_fully_reserved, if: -> { self.reservable.is_a?(Training) }
+  validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
+  validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
 
   attr_accessor :card_token, :plan_id, :subscription
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create
-  after_save :update_event_nb_free_places, if: Proc.new { |reservation| reservation.reservable_type == 'Event' }
+  after_save :update_event_nb_free_places, if: proc { |reservation| reservation.reservable_type == 'Event' }
   after_create :debit_user_wallet
 
   ##
@@ -37,169 +37,181 @@ class Reservation < ActiveRecord::Base
     invoice_items = []
 
     # prepare the plan
-    if user.subscribed_plan
-      plan = user.subscribed_plan
-      new_plan_being_bought = false
-    elsif plan_id
-      plan = Plan.find(plan_id)
-      new_plan_being_bought = true
-    else
-      plan = nil
-    end
+    plan = if user.subscribed_plan
+             user.subscribed_plan
+           elsif plan_id
+             Plan.find(plan_id)
+           else
+             nil
+           end
 
     # check that none of the reserved availabilities was locked
     slots.each do |slot|
-      if slot.availability.lock
-        raise LockedError
-      end
+      raise LockedError if slot.availability.lock
     end
 
 
     case reservable
 
-      # === Machine reservation ===
-      when Machine
-        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
-        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+    # === Machine reservation ===
+    when Machine
+      base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+      users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
 
-        slots.each_with_index do |slot, index|
-          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+      slots.each_with_index do |slot, index|
+        description = reservable.name +
+                      " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
 
-          ii_amount = base_amount # ii_amount default to base_amount
+        ii_amount = base_amount # ii_amount default to base_amount
 
-          if users_credits_manager.will_use_credits?
-            ii_amount = (index < users_credits_manager.free_hours_count) ? 0 : base_amount
-          end
-
-          ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
-
-          unless on_site # if it's local payment then do not create Stripe::InvoiceItem
-            ii = Stripe::InvoiceItem.create(
-                customer: user.stp_customer_id,
-                amount: ii_amount,
-                currency: Rails.application.secrets.stripe_currency,
-                description: description
-            )
-            invoice_items << ii
-          end
-          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
+        if users_credits_manager.will_use_credits?
+          ii_amount = index < users_credits_manager.free_hours_count ? 0 : base_amount
         end
 
+        ii_amount = 0 if slot.offered && on_site # if it's a local payment and slot is offered free
 
-      # === Training reservation ===
-      when Training
-        base_amount = reservable.amount_by_group(user.group_id).amount
+        unless on_site # if it's local payment then do not create Stripe::InvoiceItem
+          ii = Stripe::InvoiceItem.create(
+            customer: user.stp_customer_id,
+            amount: ii_amount,
+            currency: Rails.application.secrets.stripe_currency,
+            description: description
+          )
+          invoice_items << ii
+        end
+        invoice.invoice_items.push InvoiceItem.new(
+          amount: ii_amount,
+          stp_invoice_item_id: (ii.id if ii),
+          description: description
+        )
+      end
 
-        # be careful, variable plan can be the user's plan OR the plan user is currently purchasing
-        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
-        base_amount = 0 if users_credits_manager.will_use_credits?
 
-        slots.each do |slot|
-          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
-          ii_amount = base_amount
-          ii_amount = 0 if (slot.offered and on_site)
-          unless on_site
-            ii = Stripe::InvoiceItem.create(
-                customer: user.stp_customer_id,
-                amount: ii_amount,
-                currency: Rails.application.secrets.stripe_currency,
-                description: description
-            )
-            invoice_items << ii
-          end
-          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
+    # === Training reservation ===
+    when Training
+      base_amount = reservable.amount_by_group(user.group_id).amount
+
+      # be careful, variable plan can be the user's plan OR the plan user is currently purchasing
+      users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+      base_amount = 0 if users_credits_manager.will_use_credits?
+
+      slots.each do |slot|
+        description = reservable.name +
+                      " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+        ii_amount = base_amount
+        ii_amount = 0 if slot.offered && on_site
+        unless on_site
+          ii = Stripe::InvoiceItem.create(
+            customer: user.stp_customer_id,
+            amount: ii_amount,
+            currency: Rails.application.secrets.stripe_currency,
+            description: description
+          )
+          invoice_items << ii
+        end
+        invoice.invoice_items.push InvoiceItem.new(
+          amount: ii_amount,
+          stp_invoice_item_id: (ii.id if ii),
+          description: description
+        )
+      end
+
+    # === Event reservation ===
+    when Event
+      amount = reservable.amount * nb_reserve_places
+      tickets.each do |ticket|
+        amount += ticket.booked * ticket.event_price_category.amount
+      end
+      slots.each do |slot|
+        description = "#{reservable.name} "
+        (slot.start_at.to_date..slot.end_at.to_date).each do |d|
+          description += "\n" if slot.start_at.to_date != slot.end_at.to_date
+          description += "#{I18n.l d, format: :long} #{I18n.l slot.start_at, format: :hour_minute}" \
+                         " - #{I18n.l slot.end_at, format: :hour_minute}"
+        end
+        ii_amount = amount
+        ii_amount = 0 if slot.offered && on_site
+        unless on_site
+          ii = Stripe::InvoiceItem.create(
+            customer: user.stp_customer_id,
+            amount: ii_amount,
+            currency: Rails.application.secrets.stripe_currency,
+            description: description
+          )
+          invoice_items << ii
+        end
+        invoice.invoice_items.push InvoiceItem.new(
+          amount: ii_amount,
+          stp_invoice_item_id: (ii.id if ii),
+          description: description
+        )
+      end
+
+    # === Space reservation ===
+    when Space
+      base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
+      users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
+
+      slots.each_with_index do |slot, index|
+        description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
+
+        ii_amount = base_amount # ii_amount default to base_amount
+
+        if users_credits_manager.will_use_credits?
+          ii_amount = index < users_credits_manager.free_hours_count ? 0 : base_amount
         end
 
-      # === Event reservation ===
-      when Event
-        amount = reservable.amount * nb_reserve_places
-        tickets.each do |ticket|
-          amount += ticket.booked * ticket.event_price_category.amount
+        ii_amount = 0 if slot.offered && on_site # if it's a local payment and slot is offered free
+
+        unless on_site # if it's local payment then do not create Stripe::InvoiceItem
+          ii = Stripe::InvoiceItem.create(
+            customer: user.stp_customer_id,
+            amount: ii_amount,
+            currency: Rails.application.secrets.stripe_currency,
+            description: description
+          )
+          invoice_items << ii
         end
-        slots.each do |slot|
-          description = "#{reservable.name} "
-          (slot.start_at.to_date..slot.end_at.to_date).each do |d|
-            description += "\n" if slot.start_at.to_date != slot.end_at.to_date
-            description += "#{I18n.l d, format: :long} #{I18n.l slot.start_at, format: :hour_minute} - #{I18n.l slot.end_at, format: :hour_minute}"
-          end
-          ii_amount = amount
-          ii_amount = 0 if (slot.offered and on_site)
-          unless on_site
-            ii = Stripe::InvoiceItem.create(
-                customer: user.stp_customer_id,
-                amount: ii_amount,
-                currency: Rails.application.secrets.stripe_currency,
-                description: description
-            )
-            invoice_items << ii
-          end
-          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
-        end
+        invoice.invoice_items.push InvoiceItem.new(
+          amount: ii_amount,
+          stp_invoice_item_id: (ii.id if ii),
+          description: description
+        )
+      end
 
-      # === Space reservation ===
-      when Space
-        base_amount = reservable.prices.find_by(group_id: user.group_id, plan_id: plan.try(:id)).amount
-        users_credits_manager = UsersCredits::Manager.new(reservation: self, plan: plan)
-
-        slots.each_with_index do |slot, index|
-          description = reservable.name + " #{I18n.l slot.start_at, format: :long} - #{I18n.l slot.end_at, format: :hour_minute}"
-
-          ii_amount = base_amount # ii_amount default to base_amount
-
-          if users_credits_manager.will_use_credits?
-            ii_amount = (index < users_credits_manager.free_hours_count) ? 0 : base_amount
-          end
-
-          ii_amount = 0 if slot.offered and on_site # if it's a local payment and slot is offered free
-
-          unless on_site # if it's local payment then do not create Stripe::InvoiceItem
-            ii = Stripe::InvoiceItem.create(
-                customer: user.stp_customer_id,
-                amount: ii_amount,
-                currency: Rails.application.secrets.stripe_currency,
-                description: description
-            )
-            invoice_items << ii
-          end
-          self.invoice.invoice_items.push InvoiceItem.new(amount: ii_amount, stp_invoice_item_id: (ii.id if ii), description: description)
-        end
-
-      # === Unknown reservation type ===
-      else
-        raise NotImplementedError
+    # === Unknown reservation type ===
+    else
+      raise NotImplementedError
 
     end
 
     # === Coupon ===
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)
-      if not @coupon.nil? and @coupon.status(user.id) == 'active'
-        total = get_cart_total
+      raise InvalidCouponError if @coupon.nil? || @coupon.status(user.id) != 'active'
 
-        discount = 0
-        if @coupon.type == 'percent_off'
-          discount = (total  * @coupon.percent_off / 100).to_i
-        elsif @coupon.type == 'amount_off'
-          discount = @coupon.amount_off
-        else
-          raise InvalidCouponError
-        end
+      total = get_cart_total
 
-        unless on_site
-          invoice_items << Stripe::InvoiceItem.create(
-              customer: user.stp_customer_id,
-              amount: -discount,
-              currency: Rails.application.secrets.stripe_currency,
-              description: "coupon #{@coupon.code}"
-          )
-        end
-      else
-        raise InvalidCouponError
+      discount = if @coupon.type == 'percent_off'
+                   (total * @coupon.percent_off / 100).to_i
+                 elsif @coupon.type == 'amount_off'
+                   @coupon.amount_off
+                 else
+                   raise InvalidCouponError
+                 end
+
+      unless on_site
+        invoice_items << Stripe::InvoiceItem.create(
+          customer: user.stp_customer_id,
+          amount: -discount,
+          currency: Rails.application.secrets.stripe_currency,
+          description: "coupon #{@coupon.code}"
+        )
       end
     end
 
     @wallet_amount_debit = get_wallet_amount_debit
-    if @wallet_amount_debit != 0 and !on_site
+    if @wallet_amount_debit != 0 && !on_site
       invoice_items << Stripe::InvoiceItem.create(
         customer: user.stp_customer_id,
         amount: -@wallet_amount_debit.to_i,
@@ -217,107 +229,113 @@ class Reservation < ActiveRecord::Base
       clean_pending_strip_invoice_items
       build_invoice(user: user)
       invoice_items = generate_invoice_items(false, coupon_code)
-    rescue => e
+    rescue StandardError => e
       logger.error e
       errors[:payment] << e.message
       return false
     end
-    if valid?
-      # TODO: refactoring
-      customer = Stripe::Customer.retrieve(user.stp_customer_id)
-      if plan_id
-        self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
-        self.subscription.attributes = {plan_id: plan_id, user_id: user.id, card_token: card_token, expired_at: nil}
-        if subscription.save_with_payment(false)
-          self.stp_invoice_id = invoice_items.first.refresh.invoice
-          self.invoice.stp_invoice_id = invoice_items.first.refresh.invoice
-          self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, stp_invoice_item_id: subscription.stp_subscription_id, description: subscription.plan.name, subscription_id: subscription.id)
-          set_total_and_coupon(coupon_code)
-          save!
-          #
-          # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
-          # because subscription.create (in subscription.rb) will pay all waiting stripe invoice items
-          #
-        else
-          # error handling
-          invoice_items.each(&:delete)
-          errors[:card] << subscription.errors[:card].join
-          if subscription.errors[:payment]
-            errors[:payment] << subscription.errors[:payment].join
-          end
-          return false
-        end
 
+    return false unless valid?
+
+    # TODO: refactoring
+    customer = Stripe::Customer.retrieve(user.stp_customer_id)
+    if plan_id
+      self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
+      subscription.attributes = { plan_id: plan_id, user_id: user.id, card_token: card_token, expiration_date: nil }
+      if subscription.save_with_payment(false)
+        self.stp_invoice_id = invoice_items.first.refresh.invoice
+        invoice.stp_invoice_id = invoice_items.first.refresh.invoice
+        invoice.invoice_items.push InvoiceItem.new(
+          amount: subscription.plan.amount,
+          stp_invoice_item_id: subscription.stp_subscription_id,
+          description: subscription.plan.name,
+          subscription_id: subscription.id
+        )
+        set_total_and_coupon(coupon_code)
+        save!
+        #
+        # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
+        # because subscription.create (in subscription.rb) will pay all waiting stripe invoice items
+        #
       else
-        begin
-          if invoice_items.map(&:amount).map(&:to_i).reduce(:+) > 0
-            card = customer.sources.create(card: card_token)
-            if customer.default_source.present?
-              customer.default_source = card.id
-              customer.save
-            end
-          end
-          #
-          # IMPORTANT NOTE: here, we have to create an invoice manually and pay it to pay all waiting stripe invoice items
-          #
-          stp_invoice = Stripe::Invoice.create(
-            customer: user.stp_customer_id,
-          )
-          # cf: https://board.sleede.com/project/sleede-fab-manager/issue/77
-          # this function only check reservation total is equal strip invoice total when
-          # pay only reservation not reservation + subscription
-          #if !is_equal_reservation_total_and_stp_invoice_total(stp_invoice, coupon_code)
-            #raise InvoiceTotalDifferentError
-          #end
-          stp_invoice.pay
-          card.delete if card
-          self.stp_invoice_id = stp_invoice.id
-          self.invoice.stp_invoice_id = stp_invoice.id
-          set_total_and_coupon(coupon_code)
-          save!
-        rescue Stripe::CardError => card_error
-          clear_payment_info(card, stp_invoice)
-          logger.info card_error
-          errors[:card] << card_error.message
-          return false
-        rescue Stripe::InvalidRequestError => e
-          # Invalid parameters were supplied to Stripe's API
-          clear_payment_info(card, stp_invoice)
-          logger.error e
-          errors[:payment] << e.message
-          return false
-        rescue Stripe::AuthenticationError => e
-          # Authentication with Stripe's API failed
-          # (maybe you changed API keys recently)
-          clear_payment_info(card, stp_invoice)
-          logger.error e
-          errors[:payment] << e.message
-          return false
-        rescue Stripe::APIConnectionError => e
-          # Network communication with Stripe failed
-          clear_payment_info(card, stp_invoice)
-          logger.error e
-          errors[:payment] << e.message
-          return false
-        rescue Stripe::StripeError => e
-          # Display a very generic error to the user, and maybe send
-          # yourself an email
-          clear_payment_info(card, stp_invoice)
-          logger.error e
-          errors[:payment] << e.message
-          return false
-        rescue => e
-          # Something else happened, completely unrelated to Stripe
-          clear_payment_info(card, stp_invoice)
-          logger.error e
-          errors[:payment] << e.message
-          return false
+        # error handling
+        invoice_items.each(&:delete)
+        errors[:card] << subscription.errors[:card].join
+        if subscription.errors[:payment]
+          errors[:payment] << subscription.errors[:payment].join
         end
+        return false
       end
 
-      UsersCredits::Manager.new(reservation: self).update_credits
-      true
+    else
+      begin
+        if invoice_items.map(&:amount).map(&:to_i).reduce(:+).positive?
+          card = customer.sources.create(card: card_token)
+          if customer.default_source.present?
+            customer.default_source = card.id
+            customer.save
+          end
+        end
+        #
+        # IMPORTANT NOTE: here, we have to create an invoice manually and pay it to pay all waiting stripe invoice items
+        #
+        stp_invoice = Stripe::Invoice.create(
+          customer: user.stp_customer_id,
+        )
+        # cf: https://board.sleede.com/project/sleede-fab-manager/issue/77
+        # this function only check reservation total is equal strip invoice total when
+        # pay only reservation not reservation + subscription
+        # if !is_equal_reservation_total_and_stp_invoice_total(stp_invoice, coupon_code)
+        #   #raise InvoiceTotalDifferentError
+        # end
+        stp_invoice.pay
+        card&.delete
+        self.stp_invoice_id = stp_invoice.id
+        invoice.stp_invoice_id = stp_invoice.id
+        set_total_and_coupon(coupon_code)
+        save!
+      rescue Stripe::CardError => card_error
+        clear_payment_info(card, stp_invoice)
+        logger.info card_error
+        errors[:card] << card_error.message
+        return false
+      rescue Stripe::InvalidRequestError => e
+        # Invalid parameters were supplied to Stripe's API
+        clear_payment_info(card, stp_invoice)
+        logger.error e
+        errors[:payment] << e.message
+        return false
+      rescue Stripe::AuthenticationError => e
+        # Authentication with Stripe's API failed
+        # (maybe you changed API keys recently)
+        clear_payment_info(card, stp_invoice)
+        logger.error e
+        errors[:payment] << e.message
+        return false
+      rescue Stripe::APIConnectionError => e
+        # Network communication with Stripe failed
+        clear_payment_info(card, stp_invoice)
+        logger.error e
+        errors[:payment] << e.message
+        return false
+      rescue Stripe::StripeError => e
+        # Display a very generic error to the user, and maybe send
+        # yourself an email
+        clear_payment_info(card, stp_invoice)
+        logger.error e
+        errors[:payment] << e.message
+        return false
+      rescue StandardError => e
+        # Something else happened, completely unrelated to Stripe
+        clear_payment_info(card, stp_invoice)
+        logger.error e
+        errors[:payment] << e.message
+        return false
+      end
     end
+
+    UsersCredits::Manager.new(reservation: self).update_credits
+    true
   end
 
   # check reservation amount total and strip invoice total to pay is equal
@@ -358,7 +376,6 @@ class Reservation < ActiveRecord::Base
   def save_with_local_payment(coupon_code = nil)
     if user.invoicing_disabled?
       if valid?
-
         ### generate invoice only for calcul price, TODO refactor!!
         build_invoice(user: user)
         generate_invoice_items(true, coupon_code)
@@ -375,26 +392,30 @@ class Reservation < ActiveRecord::Base
       generate_invoice_items(true, coupon_code)
     end
 
-    if valid?
-      if plan_id
-        self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
-        self.subscription.attributes = {plan_id: plan_id, user_id: user.id, expired_at: nil}
-        if subscription.save_with_local_payment(false)
-          self.invoice.invoice_items.push InvoiceItem.new(amount: subscription.plan.amount, description: subscription.plan.name, subscription_id: subscription.id)
-          set_total_and_coupon(coupon_code)
-          save!
-        else
-          errors[:card] << subscription.errors[:card].join
-          return false
-        end
-      else
+    return false unless valid?
+
+    if plan_id
+      self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
+      subscription.attributes = { plan_id: plan_id, user_id: user.id, expiration_date: nil }
+      if subscription.save_with_local_payment(false)
+        invoice.invoice_items.push InvoiceItem.new(
+          amount: subscription.plan.amount,
+          description: subscription.plan.name,
+          subscription_id: subscription.id
+        )
         set_total_and_coupon(coupon_code)
         save!
+      else
+        errors[:card] << subscription.errors[:card].join
+        return false
       end
-
-      UsersCredits::Manager.new(reservation: self).update_credits
-      return true
+    else
+      set_total_and_coupon(coupon_code)
+      save!
     end
+
+    UsersCredits::Manager.new(reservation: self).update_credits
+    true
   end
 
   def total_booked_seats
