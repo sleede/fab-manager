@@ -42,6 +42,7 @@ module Reservations
       assert_equal subscriptions_count, Subscription.count
 
       # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
       assert_nil @user_without_subscription.subscribed_plan
 
       # reservation assertions
@@ -104,6 +105,10 @@ module Reservations
       assert_equal invoice_count, Invoice.count
       assert_equal invoice_items_count, InvoiceItem.count
       assert_equal notifications_count, Notification.count
+
+      # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
+      assert_nil @user_without_subscription.subscribed_plan
     end
 
     test 'user without subscription reserves a training with success' do
@@ -137,6 +142,10 @@ module Reservations
       assert_equal reservations_count + 1, Reservation.count
       assert_equal invoice_count + 1, Invoice.count
       assert_equal invoice_items_count + 1, InvoiceItem.count
+
+      # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
+      assert_nil @user_without_subscription.subscribed_plan
 
       # reservation assertions
       reservation = Reservation.last
@@ -203,6 +212,11 @@ module Reservations
       assert_equal invoice_count + 1, Invoice.count
       assert_equal invoice_items_count + 2, InvoiceItem.count
       assert_equal users_credit_count + 1, UsersCredit.count
+
+      # subscription assertions
+      assert_equal 1, @user_with_subscription.subscriptions.count
+      assert_not_nil @user_with_subscription.subscribed_plan
+      assert_equal plan.id, @user_with_subscription.subscribed_plan.id
 
       # reservation assertions
       reservation = Reservation.last
@@ -273,6 +287,11 @@ module Reservations
       assert_equal invoice_count + 1, Invoice.count
       assert_equal invoice_items_count + 1, InvoiceItem.count
 
+      # subscription assertions
+      assert_equal 1, @user_with_subscription.subscriptions.count
+      assert_not_nil @user_with_subscription.subscribed_plan
+      assert_equal plan.id, @user_with_subscription.subscribed_plan.id
+
       # reservation assertions
       reservation = Reservation.last
 
@@ -339,6 +358,10 @@ module Reservations
       assert_equal users_credit_count, UsersCredit.count
       assert_equal wallet_transactions_count + 1, WalletTransaction.count
 
+      # subscription assertions
+      assert_equal 0, @vlonchamp.subscriptions.count
+      assert_nil @vlonchamp.subscribed_plan
+
       # reservation assertions
       reservation = Reservation.last
 
@@ -374,7 +397,7 @@ module Reservations
       assert_equal transaction.amount, invoice.wallet_amount / 100.0
     end
 
-    test 'user reserves a training and plan by wallet with success' do
+    test 'user reserves a training and a subscription by wallet with success' do
       @vlonchamp = User.find_by(username: 'vlonchamp')
       login_as(@vlonchamp, scope: :user)
 
@@ -410,6 +433,11 @@ module Reservations
       assert_equal invoice_count + 1, Invoice.count
       assert_equal invoice_items_count + 2, InvoiceItem.count
       assert_equal wallet_transactions_count + 1, WalletTransaction.count
+
+      # subscription assertions
+      assert_equal 1, @vlonchamp.subscriptions.count
+      assert_not_nil @vlonchamp.subscribed_plan
+      assert_equal plan.id, @vlonchamp.subscribed_plan.id
 
       # reservation assertions
       reservation = Reservation.last
@@ -481,6 +509,11 @@ module Reservations
       assert_equal invoice_items_count + 2, InvoiceItem.count
       assert_equal users_credit_count, UsersCredit.count
       assert_equal subscriptions_count + 1, Subscription.count
+
+      # subscription assertions
+      assert_equal 1, @user_without_subscription.subscriptions.count
+      assert_not_nil @user_without_subscription.subscribed_plan
+      assert_equal plan.id, @user_without_subscription.subscribed_plan.id
 
       # reservation assertions
       reservation = Reservation.last
@@ -563,6 +596,10 @@ module Reservations
       assert_equal invoice_count, Invoice.count
       assert_equal invoice_items_count, InvoiceItem.count
       assert_equal notifications_count, Notification.count
+
+      # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
+      assert_nil @user_without_subscription.subscribed_plan
     end
   end
 end

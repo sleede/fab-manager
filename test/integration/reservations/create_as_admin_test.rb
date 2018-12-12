@@ -38,6 +38,7 @@ module Reservations
       assert_equal users_credit_count, UsersCredit.count
 
       # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
       assert_nil @user_without_subscription.subscribed_plan
 
       # reservation assertions
@@ -80,6 +81,7 @@ module Reservations
       assert_equal users_credit_count, UsersCredit.count
 
       # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
       assert_nil @user_without_subscription.subscribed_plan
 
       # reservation assertions
@@ -137,6 +139,7 @@ module Reservations
       assert_equal invoice_items_count + 1, InvoiceItem.count
 
       # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
       assert_nil @user_without_subscription.subscribed_plan
 
       # reservation assertions
@@ -201,6 +204,7 @@ module Reservations
       assert_equal users_credit_count + 1, UsersCredit.count
 
       # subscription assertions
+      assert_equal 1, @user_with_subscription.subscriptions.count
       assert_not_nil @user_with_subscription.subscribed_plan
       assert_equal plan.id, @user_with_subscription.subscribed_plan.id
 
@@ -270,6 +274,7 @@ module Reservations
       assert_equal users_credit_count, UsersCredit.count
 
       # subscription assertions
+      assert_equal 0, @user_without_subscription.subscriptions.count
       assert_nil @user_without_subscription.subscribed_plan
 
       # reservation assertions
@@ -343,6 +348,7 @@ module Reservations
       assert_equal wallet_transactions_count + 1, WalletTransaction.count
 
       # subscription assertions
+      assert_equal 1, @vlonchamp.subscriptions.count
       assert_not_nil @vlonchamp.subscribed_plan
       assert_equal plan.id, @vlonchamp.subscribed_plan.id
 
@@ -409,7 +415,8 @@ module Reservations
       assert_equal users_credit_count, UsersCredit.count
 
       # subscription assertions
-      assert_nil @user_without_subscription.subscribed_plan
+      assert_equal 0, @vlonchamp.subscriptions.count
+      assert_nil @vlonchamp.subscribed_plan
 
       # reservation assertions
       reservation = Reservation.last
@@ -458,6 +465,7 @@ module Reservations
       assert_equal users_credit_count + 1, UsersCredit.count
 
       # subscription assertions
+      assert_equal 1, @user_without_subscription.subscriptions.count
       assert_not_nil @user_without_subscription.subscribed_plan
       assert_equal plan.id, @user_without_subscription.subscribed_plan.id
 

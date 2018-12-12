@@ -30,6 +30,7 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
 
     # Check that the user has the correct subscription
     assert_not_nil user.subscription, "user's subscription was not found"
+    assert_not_nil user.subscribed_plan, "user's subscribed plan was not found"
     assert_not_nil user.subscription.plan, "user's subscribed plan was not found"
     assert_equal plan.id, user.subscription.plan_id, "user's plan does not match"
 
@@ -37,6 +38,9 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal (user.subscription.created_at + plan.interval_count.send(plan.interval)).iso8601,
                  subscription[:expired_at],
                  'subscription expiration date does not match'
+
+    # Check the subscription was correctly saved
+    assert_equal 2, user.subscriptions.count
 
     # Check that the training credits were set correctly
     assert_empty user.training_credits, 'training credits were not reset'
@@ -88,6 +92,9 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     assert_equal subscription.plan_id, res_subscription[:plan_id], 'subscribed plan does not match'
     assert_dates_equal new_date, res_subscription[:expired_at], 'subscription end date was not updated'
 
+    # Check the subscription was correctly saved
+    assert_equal 1, user.subscriptions.count
+
     # Check notification was sent to the user
     notification = Notification.find_by(
       notification_type_id: NotificationType.find_by_name('notify_member_subscription_extended'),
@@ -121,6 +128,9 @@ class Subscriptions::RenewAsAdminTest < ActionDispatch::IntegrationTest
     # Check that the subscribed plan is still the same
     res_subscription = json_response(response.body)
     assert_equal subscription.plan_id, res_subscription[:plan_id], 'subscribed plan does not match'
+
+    # Check the subscription was correctly saved
+    assert_equal 2, user.subscriptions.count
 
     # Check that the subscription is new
     assert_not_equal subscription.id, res_subscription[:id], 'subscription id has not changed'

@@ -30,6 +30,9 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     subscription = json_response(response.body)
     assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
 
+    # Check the subscription was correctly saved
+    assert_equal 2, @user.subscriptions.count
+
     # Check that the user has the correct subscription
     assert_not_nil @user.subscription, "user's subscription was not found"
 
@@ -93,6 +96,10 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
 
     # Check that the user's subscription has not changed
     assert_equal previous_expiration, @user.subscription.expired_at.to_i, "user's subscription has changed"
+
+    # Check the subscription was not saved
+    assert_equal 1, @user.subscriptions.count
+
   end
 
 end
