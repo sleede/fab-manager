@@ -9,7 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       if @user.id.nil? # => new user (ie. not updating existing)
         # If the username is mapped, we just check its uniqueness as it would break the postgresql
-        # unique contraint otherwise. If the name is not unique, another unique is generated
+        # unique constraint otherwise. If the name is not unique, another unique is generated
         if active_provider.sso_fields.include?('user.username')
           @user.username = generate_unique_username(@user.username)
         end
@@ -36,8 +36,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       # We BYPASS THE VALIDATION because, in case of a new user, we want to save him anyway, we'll ask him later to complete his profile (on first login).
       # In case of an existing user, we trust the SSO validation as we want the SSO to have authority on users management and policy.
-      @user.save(:validate => false)
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      @user.save(validate: false)
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
     else
       @user = User.find_by(auth_token: request.env['omniauth.params']['auth_token'])
 
@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       begin
         @user.link_with_omniauth_provider(request.env['omniauth.auth'])
-        sign_in_and_redirect @user, :event => :authentication
+        sign_in_and_redirect @user, event: :authentication
       rescue DuplicateIndexError
         redirect_to root_url, alert: t('omniauth.this_account_is_already_linked_to_an_user_of_the_platform', NAME: active_provider.name)
       end
@@ -55,19 +55,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
+
   def username_exists?(username, exclude_id = nil)
     if exclude_id.nil?
-      User.where(username: username).size > 0
+      User.where(username: username).size.positive?
     else
-      User.where(username: username).where.not(id: exclude_id).size > 0
+      User.where(username: username).where.not(id: exclude_id).size.positive?
     end
   end
 
   def email_exists?(email, exclude_id = nil)
     if exclude_id.nil?
-      User.where(email: email).size > 0
+      User.where(email: email).size.positive?
     else
-      User.where(email: email).where.not(id: exclude_id).size > 0
+      User.where(email: email).where.not(id: exclude_id).size.positive?
     end
   end
 

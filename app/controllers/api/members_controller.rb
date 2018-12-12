@@ -13,7 +13,7 @@ class API::MembersController < API::ApiController
 
     # remove unmerged profiles from list
     @members = @query.to_a
-    @members.delete_if { |u| u.need_completion? }
+    @members.delete_if(&:need_completion?)
   end
 
   def last_subscribed
@@ -21,7 +21,7 @@ class API::MembersController < API::ApiController
 
     # remove unmerged profiles from list
     @members = @query.to_a
-    @members.delete_if { |u| u.need_completion? }
+    @members.delete_if(&:need_completion?)
 
     @requested_attributes = ['profile']
     render :index
@@ -63,17 +63,17 @@ class API::MembersController < API::ApiController
 
   def update
     authorize @member
-    @flow_worker = MembersProcessor.new(@member)
+    members_service = MembersService.new(@member)
 
-    if user_params[:group_id] and @member.group_id != user_params[:group_id].to_i and @member.subscribed_plan != nil
+    if user_params[:group_id] && @member.group_id != user_params[:group_id].to_i && !@member.subscribed_plan.nil?
       # here a group change is requested but unprocessable, handle the exception
       @member.errors[:group_id] = t('members.unable_to_change_the_group_while_a_subscription_is_running')
       render json: @member.errors, status: :unprocessable_entity
     else
       # otherwise, run the user update
-      if @flow_worker.update(user_params)
+      if members_service.update(user_params)
         # Update password without logging out
-        sign_in(@member, :bypass => true) unless current_user.id != params[:id].to_i
+        sign_in(@member, bypass: true) unless current_user.id != params[:id].to_i
         render :show, status: :ok, location: member_path(@member)
       else
         render json: @member.errors, status: :unprocessable_entity
@@ -92,16 +92,18 @@ class API::MembersController < API::ApiController
   def export_subscriptions
     authorize :export
 
-    export = Export.where({category:'users', export_type: 'subscriptions'}).where('created_at > ?', Subscription.maximum('updated_at')).last
+    export = Export.where(category:'users', export_type: 'subscriptions').where('created_at > ?', Subscription.maximum('updated_at')).last
     if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new({category:'users', export_type: 'subscriptions', user: current_user})
+      @export = Export.new(category:'users', export_type: 'subscriptions', user: current_user)
       if @export.save
-        render json: {export_id: @export.id}, status: :ok
+        render json: { export_id: @export.id }, status: :ok
       else
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+      send_file File.join(Rails.root, export.file),
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                disposition: 'attachment'
     end
   end
 
@@ -109,32 +111,40 @@ class API::MembersController < API::ApiController
   def export_reservations
     authorize :export
 
-    export = Export.where({category:'users', export_type: 'reservations'}).where('created_at > ?', Reservation.maximum('updated_at')).last
+    export = Export.where(category:'users', export_type: 'reservations')
+                   .where('created_at > ?', Reservation.maximum('updated_at'))
+                   .last
     if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new({category:'users', export_type: 'reservations', user: current_user})
+      @export = Export.new(category: 'users', export_type: 'reservations', user: current_user)
       if @export.save
-        render json: {export_id: @export.id}, status: :ok
+        render json: { export_id: @export.id }, status: :ok
       else
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+      send_file File.join(Rails.root, export.file),
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                disposition: 'attachment'
     end
   end
 
   def export_members
     authorize :export
 
-    export = Export.where({category:'users', export_type: 'members'}).where('created_at > ?', User.with_role(:member).maximum('updated_at')).last
+    export = Export.where(category:'users', export_type: 'members')
+                   .where('created_at > ?', User.with_role(:member).maximum('updated_at'))
+                   .last
     if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new({category:'users', export_type: 'members', user: current_user})
+      @export = Export.new(category:'users', export_type: 'members', user: current_user)
       if @export.save
-        render json: {export_id: @export.id}, status: :ok
+        render json: { export_id: @export.id }, status: :ok
       else
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+      send_file File.join(Rails.root, export.file),
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                disposition: 'attachment'
     end
   end
 
@@ -147,21 +157,21 @@ class API::MembersController < API::ApiController
 
     @account = User.find_by(auth_token: token)
     if @account
-      @flow_worker = MembersProcessor.new(@account)
+      members_service = MembersService.new(@account)
       begin
-        if @flow_worker.merge_from_sso(@member)
+        if members_service.merge_from_sso(@member)
           @member = @account
           # finally, log on the real account
-          sign_in(@member, :bypass => true)
+          sign_in(@member, bypass: true)
           render :show, status: :ok, location: member_path(@member)
         else
           render json: @member.errors, status: :unprocessable_entity
         end
       rescue DuplicateIndexError => error
-        render json: {error: t('members.please_input_the_authentication_code_sent_to_the_address', EMAIL: error.message)}, status: :unprocessable_entity
+        render json: { error: t('members.please_input_the_authentication_code_sent_to_the_address', EMAIL: error.message) }, status: :unprocessable_entity
       end
     else
-      render json: {error: t('members.your_authentication_code_is_not_valid')}, status: :unprocessable_entity
+      render json: { error: t('members.your_authentication_code_is_not_valid') }, status: :unprocessable_entity
     end
   end
 
@@ -170,41 +180,38 @@ class API::MembersController < API::ApiController
 
     p = params.require(:query).permit(:search, :order_by, :page, :size)
 
-    unless p[:page].is_a? Integer
-      render json: {error: 'page must be an integer'}, status: :unprocessable_entity
-    end
 
-    unless p[:size].is_a? Integer
-      render json: {error: 'size must be an integer'}, status: :unprocessable_entity
-    end
+    render json: {error: 'page must be an integer'}, status: :unprocessable_entity unless p[:page].is_a? Integer
+
+    render json: {error: 'size must be an integer'}, status: :unprocessable_entity unless p[:size].is_a? Integer
 
 
     direction = (p[:order_by][0] == '-' ? 'DESC' : 'ASC')
     order_key = (p[:order_by][0] == '-' ? p[:order_by][1, p[:order_by].size] : p[:order_by])
 
-    case order_key
-      when 'last_name'
-        order_key = 'profiles.last_name'
-      when 'first_name'
-        order_key = 'profiles.first_name'
-      when 'email'
-        order_key = 'users.email'
-      when 'phone'
-        order_key = 'profiles.phone'
-      when 'group'
-        order_key = 'groups.name'
-      when 'plan'
-        order_key = 'plans.base_name'
-      else
-        order_key = 'users.id'
-    end
+    order_key = case order_key
+                when 'last_name'
+                  'profiles.last_name'
+                when 'first_name'
+                  'profiles.first_name'
+                when 'email'
+                  'users.email'
+                when 'phone'
+                  'profiles.phone'
+                when 'group'
+                  'groups.name'
+                when 'plan'
+                  'plans.base_name'
+                else
+                  'users.id'
+                end
 
     @query = User.includes(:profile, :group, :subscriptions)
-               .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
-               .where("users.is_active = 'true' AND roles.name = 'member'")
-               .order("#{order_key} #{direction}")
-               .page(p[:page])
-               .per(p[:size])
+                 .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
+                 .where("users.is_active = 'true' AND roles.name = 'member'")
+                 .order("#{order_key} #{direction}")
+                 .page(p[:page])
+                 .per(p[:size])
 
     # ILIKE => PostgreSQL case-insensitive LIKE
     @query = @query.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
@@ -215,9 +222,9 @@ class API::MembersController < API::ApiController
 
   def search
     @members = User.includes(:profile)
-               .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
-               .where("users.is_active = 'true' AND roles.name = 'member'")
-               .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
+                   .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
+                   .where("users.is_active = 'true' AND roles.name = 'member'")
+                   .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
 
     if current_user.is_member?
       # non-admin can only retrieve users with "public profiles"
@@ -241,26 +248,37 @@ class API::MembersController < API::ApiController
   end
 
   private
-    def set_member
-      @member = User.find(params[:id])
+
+  def set_member
+    @member = User.find(params[:id])
+  end
+
+  def user_params
+    if current_user.id == params[:id].to_i
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact,
+                                   :is_allow_newsletter,
+                                   profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest,
+                                                        :software_mastered, :website, :job, :facebook, :twitter,
+                                                        :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
+                                                        :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
+                                                        user_avatar_attributes: %i[id attachment destroy],
+                                                        address_attributes: %i[id address],
+                                                        organization_attributes: [:id, :name,
+                                                                                  address_attributes: %i[id address]]])
+
+    elsif current_user.is_admin?
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled,
+                                   :is_allow_contact, :is_allow_newsletter, :group_id,
+                                   training_ids: [], tag_ids: [],
+                                   profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest,
+                                                        :software_mastered, :website, :job, :facebook, :twitter,
+                                                        :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
+                                                        :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
+                                                        user_avatar_attributes: %i[id attachment destroy],
+                                                        address_attributes: %i[id address],
+                                                        organization_attributes: [:id, :name,
+                                                                                  address_attributes: %i[id address]]])
+
     end
-
-    def user_params
-      if current_user.id == params[:id].to_i
-        params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
-                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
-                                     :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                     user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address],
-                                     organization_attributes: [:id, :name, address_attributes: [:id, :address]]])
-
-      elsif current_user.is_admin?
-        params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled, :is_allow_contact, :is_allow_newsletter,
-                                      :group_id, training_ids: [], tag_ids: [],
-                                      profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest, :software_mastered, :website, :job,
-                                      :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                      user_avatar_attributes: [:id, :attachment, :_destroy], address_attributes: [:id, :address],
-                                      organization_attributes: [:id, :name, address_attributes: [:id, :address]]])
-
-      end
-    end
+  end
 end
