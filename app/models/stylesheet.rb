@@ -2,42 +2,45 @@ class Stylesheet < ActiveRecord::Base
   validates_presence_of :contents
 
   def rebuild!
-    self.update(contents: Stylesheet.css)
+    update(contents: Stylesheet.css)
   end
 
   def self.build_sheet!
-    unless Stylesheet.first
+    return unless Stylesheet.primary && Stylesheet.secondary
+
+    if Stylesheet.first
+      Stylesheet.first.rebuild!
+    else
       Stylesheet.create!(contents: Stylesheet.css)
     end
   end
 
-  private
   def self.primary
-    Setting.find_by(name: 'main_color').value
+    Setting.find_by(name: 'main_color')&.value
   end
 
   def self.secondary
-    Setting.find_by(name: 'secondary_color').value
+    Setting.find_by(name: 'secondary_color')&.value
   end
 
   def self.primary_light
-    self.primary.paint.lighten(10)
+    Stylesheet.primary.paint.lighten(10)
   end
 
   def self.primary_dark
-    self.primary.paint.darken(20)
+    Stylesheet.primary.paint.darken(20)
   end
 
   def self.secondary_light
-    self.secondary.paint.lighten(10)
+    Stylesheet.secondary.paint.lighten(10)
   end
 
   def self.secondary_dark
-    self.secondary.paint.darken(20)
+    Stylesheet.secondary.paint.darken(20)
   end
 
   def self.primary_with_alpha(alpha)
-    self.primary.paint.to_rgb.insert(3, 'a').insert(-2, ", #{alpha}")
+    Stylesheet.primary.paint.to_rgb.insert(3, 'a').insert(-2, ", #{alpha}")
   end
 
   def self.css
@@ -77,6 +80,5 @@ class Stylesheet < ActiveRecord::Base
      .social-icons > div:hover { background-color: #{Stylesheet.secondary}; }
      .profile-top { background: linear-gradient( rgba(255,255,255,0.12), rgba(255,255,255,0.13) ), linear-gradient(#{Stylesheet.primary_with_alpha(0.78)}, #{Stylesheet.primary_with_alpha(0.82)} ), url('#{CustomAsset.get_url('profile-image-file') || '/about-fablab.jpg'}') no-repeat; }
      .profile-top .social-links a:hover { background-color: #{Stylesheet.secondary} !important; border-color: #{Stylesheet.secondary} !important; }"
-
   end
 end

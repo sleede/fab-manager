@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181210105917) do
+ActiveRecord::Schema.define(version: 20181217110454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,17 @@ ActiveRecord::Schema.define(version: 20181210105917) do
   end
 
   add_index "groups", ["slug"], name: "index_groups_on_slug", unique: true, using: :btree
+
+  create_table "history_values", force: :cascade do |t|
+    t.integer  "setting_id"
+    t.integer  "user_id"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
+  add_index "history_values", ["user_id"], name: "index_history_values_on_user_id", using: :btree
 
   create_table "invoice_items", force: :cascade do |t|
     t.integer  "invoice_id"
@@ -533,7 +544,6 @@ ActiveRecord::Schema.define(version: 20181210105917) do
 
   create_table "settings", force: :cascade do |t|
     t.string   "name",       null: false
-    t.text     "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -854,6 +864,8 @@ ActiveRecord::Schema.define(version: 20181210105917) do
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
   add_foreign_key "exports", "users"
+  add_foreign_key "history_values", "settings"
+  add_foreign_key "history_values", "users"
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
