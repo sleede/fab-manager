@@ -3,6 +3,7 @@
 - Refactored subscriptions to keep track of the previous ones
 - Improved automated tests suite
 - Added Rubocop gem to the Gemfile
+- Fix a security update: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
 
