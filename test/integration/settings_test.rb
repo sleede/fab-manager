@@ -16,11 +16,9 @@ class SettingsTest < ActionDispatch::IntegrationTest
 
   test 'update setting value' do
     put '/api/settings/fablab_name',
-      {
-        setting: {
-          value: 'Test Fablab'
-        }
-      }
+          setting: {
+            value: 'Test Fablab'
+          }
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     resp = json_response(response.body)
@@ -31,11 +29,9 @@ class SettingsTest < ActionDispatch::IntegrationTest
 
   test 'update setting with wrong name' do
     put '/api/settings/does_not_exists',
-        {
             setting: {
                 value: 'ERROR EXPECTED'
             }
-        }
     assert_equal 422, response.status
     assert_match /Name is not included in the list/, response.body
   end
