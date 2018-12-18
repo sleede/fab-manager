@@ -2,6 +2,9 @@
 
 FabManager is the FabLab management solution. It is web-based, open-source and totally free.
 
+[![Coverage Status](https://coveralls.io/repos/github/LaCasemate/fab-manager/badge.svg)](https://coveralls.io/github/LaCasemate/fab-manager) 
+[![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
+[![Docker Build Status](https://img.shields.io/docker/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
 
 ##### Table of Contents
 1. [Software stack](#software-stack)
