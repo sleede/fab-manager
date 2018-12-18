@@ -1,6 +1,7 @@
 class Setting < ActiveRecord::Base
+  has_many :history_values
   validates :name, inclusion:
-                    { in: %w(about_title
+                    { in: %w[about_title
                              about_body
                              about_contacts
                              twitter_name
@@ -36,16 +37,21 @@ class Setting < ActiveRecord::Base
                              visibility_yearly
                              visibility_others
                              display_name_enable
-                             machines_sort_by )
-                    }
+                             machines_sort_by] }
 
   after_update :update_stylesheet if :value_changed?
 
   def update_stylesheet
-    if %w(main_color secondary_color).include? self.name
-      Stylesheet.first.rebuild!
-    end
+    Stylesheet.first&.rebuild! if %w[main_color secondary_color].include? name
   end
 
+  def value
+    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
+    last_value&.value
+  end
 
+  def value=(val)
+    admin = User.admins.first
+    save && history_values.create(user: admin, value: val)
+  end
 end

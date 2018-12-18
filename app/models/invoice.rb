@@ -29,7 +29,7 @@ class Invoice < ActiveRecord::Base
 
 
   def generate_reference
-    pattern = Setting.find_by({name: 'invoice_reference'}).value
+    pattern = Setting.find_by(name: 'invoice_reference').value
 
     # invoice number per day (dd..dd)
     reference = pattern.gsub(/d+(?![^\[]*\])/) do |match|
