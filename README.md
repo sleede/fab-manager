@@ -328,6 +328,7 @@ This can be achieved doing the following:
   - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
   - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
+  - `db/migrate/20181217103441_migrate_settings_value_to_history_values.rb` is using `SELECT DISTINCT ON`.
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
   This also requires your user to have the _SUPERUSER_ role.
   Please see the [known issues](#known-issues) section for more information about this.
@@ -520,14 +521,14 @@ Developers may find information on how to implement their own authentication pro
         Error:
         ...
         ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR:  insert or update on table "..." violates foreign key constraint "fk_rails_..."
-        DETAIL:  Key (group_id)=(1) is not present in table "groups".
+        DETAIL:  Key (group_id)=(1) is not present in table "...".
         : ...
             test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:11:in `block in transaction'
             test_after_commit (1.0.0) lib/test_after_commit/database_statements.rb:5:in `transaction'
 
   This is due to an ActiveRecord behavior witch disable referential integrity in PostgreSQL to load the fixtures.
   PostgreSQL will prevent any users to disable referential integrity on the fly if they doesn't have the `SUPERUSER` role.
-  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [Setup the FabManager database in PostgreSQL](#setup-fabmanager-in-postgresql) for an example).
+  To fix that, logon as the `postgres` user and run the PostgreSQL shell (see [the dedicated section](#run-postgresql-cli) for instructions).
   Then, run the following command (replace `sleede` with your test database user, as specified in your database.yml):
 
         ALTER ROLE sleede WITH SUPERUSER;

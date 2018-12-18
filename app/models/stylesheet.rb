@@ -2,6 +2,8 @@ class Stylesheet < ActiveRecord::Base
   validates_presence_of :contents
 
   def rebuild!
+    return unless Stylesheet.primary && Stylesheet.secondary
+
     update(contents: Stylesheet.css)
   end
 
