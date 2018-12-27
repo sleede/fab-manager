@@ -1,6 +1,6 @@
 class API::ProjectsController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show, :last_published, :search]
-  before_action :set_project, only: [:update, :destroy]
+  before_action :authenticate_user!, except: %i[index show last_published search]
+  before_action :set_project, only: %i[update destroy]
   respond_to :json
 
   def index
@@ -13,7 +13,7 @@ class API::ProjectsController < API::ApiController
   end
 
   def show
-     @project = Project.friendly.find(params[:id])
+    @project = Project.friendly.find(params[:id])
   end
 
   def create
@@ -62,15 +62,20 @@ class API::ProjectsController < API::ApiController
   end
 
   private
-    def set_project
-      @project = Project.find(params[:id])
-    end
 
-    def project_params
-      params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id, :author_id, :licence_id, :state,
-                                      user_ids: [], machine_ids: [], component_ids: [], theme_ids: [], project_image_attributes: [:attachment],
-                                      project_caos_attributes: [:id, :attachment, :_destroy],
-                                      project_steps_attributes: [:id, :description, :title, :_destroy, :step_nb,
-                                        :project_step_images_attributes => [:id, :attachment, :_destroy]])
-    end
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  def project_params
+    params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id,
+                                    :author_id, :licence_id, :state,
+                                    user_ids: [], machine_ids: [], component_ids: [], theme_ids: [],
+                                    project_image_attributes: [:attachment],
+                                    project_caos_attributes: %i[id attachment _destroy],
+                                    project_steps_attributes: [
+                                      :id, :description, :title, :_destroy, :step_nb,
+                                      project_step_images_attributes: %i[id attachment _destroy]
+                                    ])
+  end
 end
