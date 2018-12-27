@@ -16,9 +16,7 @@ class API::AdminsController < API::ApiController
     @admin.group = Group.find_by(slug: 'admins')
 
     # if the authentication is made through an SSO, generate a migration token
-    unless AuthProvider.active.providable_type == DatabaseProvider.name
-      @admin.generate_auth_migration_token
-    end
+    @admin.generate_auth_migration_token unless AuthProvider.active.providable_type == DatabaseProvider.name
 
     if @admin.save(validate: false)
       @admin.send_confirmation_instructions
@@ -43,8 +41,8 @@ class API::AdminsController < API::ApiController
 
   private
 
-    def admin_params
-      params.require(:admin).permit(:username, :email, profile_attributes: [:first_name, :last_name, :gender,
-      :birthday, :phone, address_attributes: [:address]])
-    end
+  def admin_params
+    params.require(:admin).permit(:username, :email, profile_attributes: [:first_name, :last_name, :gender,
+    :birthday, :phone, address_attributes: [:address]])
+  end
 end
