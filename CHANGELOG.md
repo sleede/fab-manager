@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v2.8.0 2018 December 27
+
 - Refactored subscriptions to keep track of the previous ones
 - Refactored settings to keep track of the previous values (notably VAT rate)
 - Improved automated tests suite
