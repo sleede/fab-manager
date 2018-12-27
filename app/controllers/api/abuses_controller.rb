@@ -1,10 +1,6 @@
 class API::AbusesController < API::ApiController
   before_action :authenticate_user!, except: :create
 
-  def index
-    @groups = Group.all
-  end
-
   def create
     @abuse = Abuse.new(abuse_params)
     if @abuse.save

@@ -8,7 +8,7 @@ class API::SettingsController < API::ApiController
   def update
     authorize Setting
     @setting = Setting.find_or_initialize_by(name: params[:name])
-    if @setting.update(setting_params)
+    if @setting.save && @setting.history_values.create(value: setting_params[:value], user: current_user)
       render status: :ok
     else
       render json: @setting.errors.full_messages, status: :unprocessable_entity
@@ -20,11 +20,12 @@ class API::SettingsController < API::ApiController
   end
 
   private
-    def setting_params
-      params.require(:setting).permit(:value)
-    end
 
-    def names_as_string_to_array
-      params[:names][1..-2].split(',').map(&:strip).map { |param| param[1..-2] }.map(&:strip)
-    end
+  def setting_params
+    params.require(:setting).permit(:value)
+  end
+
+  def names_as_string_to_array
+    params[:names][1..-2].split(',').map(&:strip).map { |param| param[1..-2] }.map(&:strip)
+  end
 end

@@ -5,7 +5,7 @@ class Training < ActiveRecord::Base
   has_one :training_image, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :training_image, allow_destroy: true
 
-  has_and_belongs_to_many :machines, join_table: :trainings_machines
+  has_and_belongs_to_many :machines, join_table: 'trainings_machines'
 
   has_many :trainings_availabilities
   has_many :availabilities, through: :trainings_availabilities, dependent: :destroy
@@ -32,18 +32,19 @@ class Training < ActiveRecord::Base
 
   def create_statistic_subtype
     index = StatisticIndex.where(es_type_key: 'training')
-    StatisticSubType.create!({statistic_types: index.first.statistic_types, key: self.slug, label: self.name})
+    StatisticSubType.create!(statistic_types: index.first.statistic_types, key: slug, label: name)
   end
 
   def update_statistic_subtype
     index = StatisticIndex.where(es_type_key: 'training')
-    subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type).where(key: self.slug, statistic_types: { statistic_index_id: index.first.id }).first
-    subtype.label = self.name
+    subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
+                              .where(key: slug, statistic_types: { statistic_index_id: index.first.id }).first
+    subtype.label = name
     subtype.save!
   end
 
   def remove_statistic_subtype
-    subtype = StatisticSubType.where(key: self.slug).first
+    subtype = StatisticSubType.where(key: slug).first
     subtype.destroy!
   end
 
@@ -52,9 +53,10 @@ class Training < ActiveRecord::Base
   end
 
   private
-    def create_trainings_pricings
-      Group.all.each do |group|
-        TrainingsPricing.create(training: self, group: group, amount: 0)
-      end
+
+  def create_trainings_pricings
+    Group.all.each do |group|
+      TrainingsPricing.create(training: self, group: group, amount: 0)
     end
+  end
 end

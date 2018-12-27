@@ -1,5 +1,5 @@
 
-class MembersProcessor
+class MembersService
 
   attr_accessor :member
 

@@ -1,43 +1,39 @@
 class API::ReservationsController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_reservation, only: [:show, :update]
+  before_action :set_reservation, only: %i[show update]
   respond_to :json
 
   def index
-    if params[:reservable_id] and params[:reservable_type] and params[:user_id]
-      if !current_user.is_admin?
-        params[:user_id] = current_user.id
-      end
+    if params[:reservable_id] && params[:reservable_type] && params[:user_id]
+      params[:user_id] = current_user.id unless current_user.is_admin?
+
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type, :user_id))
-    elsif params[:reservable_id] and params[:reservable_type] and current_user.is_admin?
+    elsif params[:reservable_id] && params[:reservable_type] && current_user.is_admin?
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type))
     else
       @reservations = []
     end
   end
 
-  def show
-  end
+  def show; end
 
   def create
-    begin
-      if current_user.is_admin?
-        @reservation = Reservation.new(reservation_params)
-        is_reserve = @reservation.save_with_local_payment(coupon_params[:coupon_code])
-      else
-        @reservation = Reservation.new(reservation_params.merge(user_id: current_user.id))
-        is_reserve = @reservation.save_with_payment(coupon_params[:coupon_code])
-      end
-      if is_reserve
-        SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
+    method = current_user.is_admin? ? :local : :stripe
+    user_id = current_user.is_admin? ? reservation_params[:user_id] : current_user.id
 
-        render :show, status: :created, location: @reservation
-      else
-        render json: @reservation.errors, status: :unprocessable_entity
-      end
-    rescue InvalidCouponError
-      render json: {coupon_code: 'wrong coupon code or expired'}, status:  :unprocessable_entity
+    @reservation = Reservation.new(reservation_params)
+    is_reserve = Reservations::Reserve.new(user_id)
+                                      .pay_and_save(@reservation, method, coupon_params[:coupon_code])
+
+    if is_reserve
+      SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
+
+      render :show, status: :created, location: @reservation
+    else
+      render json: @reservation.errors, status: :unprocessable_entity
     end
+  rescue InvalidCouponError
+    render json: { coupon_code: 'wrong coupon code or expired' }, status: :unprocessable_entity
   end
 
   def update
@@ -57,8 +53,8 @@ class API::ReservationsController < API::ApiController
   def reservation_params
     params.require(:reservation).permit(:user_id, :message, :reservable_id, :reservable_type, :card_token, :plan_id,
                                         :nb_reserve_places,
-                                        tickets_attributes: [:event_price_category_id, :booked],
-                                        slots_attributes: [:id, :start_at, :end_at, :availability_id, :offered])
+                                        tickets_attributes: %i[event_price_category_id booked],
+                                        slots_attributes: %i[id start_at end_at availability_id offered])
   end
 
   def coupon_params

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -34,6 +34,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'railroady'
+
+  gem 'rubocop', '~> 0.61.1', require: false
 end
 
 group :development do

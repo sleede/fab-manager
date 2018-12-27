@@ -30,6 +30,9 @@ module Subscriptions
       subscription = json_response(response.body)
       assert_equal plan.id, subscription[:plan_id], 'subscribed plan does not match'
 
+      # Check that the user has only one subscription
+      assert_equal 1, user.subscriptions.count
+
       # Check that the user has the correct subscription
       assert_not_nil user.subscription, "user's subscription was not found"
       assert_not_nil user.subscription.plan, "user's subscribed plan was not found"

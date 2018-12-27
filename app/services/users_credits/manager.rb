@@ -1,7 +1,7 @@
 require 'forwardable'
 
 module UsersCredits
-  class AlreadyUpdatedError < StandardError;end;
+  class AlreadyUpdatedError < StandardError; end
 
   class Manager
     extend Forwardable
@@ -31,7 +31,8 @@ module UsersCredits
   end
 
   module Managers
-    class User # that class is responsible for reseting users_credits of a user
+    # that class is responsible for resetting users_credits of a user
+    class User
       attr_reader :user
 
       def initialize(user)
@@ -46,7 +47,8 @@ module UsersCredits
     class Reservation
       attr_reader :reservation
 
-      def initialize(reservation, plan) # a plan can be passed to do a simulation (if user didn't have a subscription YET)
+      # a plan can be passed to do a simulation (if user didn't have a subscription YET)
+      def initialize(reservation, plan)
         @reservation = reservation
         @already_updated = false
         @plan = plan
@@ -71,8 +73,10 @@ module UsersCredits
     private_constant :Reservation
 
 
-    class Machine < Reservation # that class is responsible for knowing how to update users_credit of a given user for a given reservation
-      def will_use_credits?  # to known if a credit will be used in the context of the given reservation
+    # that class is responsible for knowing how to update users_credit of a given user for a given reservation
+    class Machine < Reservation
+      # to known if a credit will be used in the context of the given reservation
+      def will_use_credits?
         _will_use_credits?[0]
       end
 
@@ -97,28 +101,30 @@ module UsersCredits
       end
 
       private
-        def _will_use_credits?
-          return false, 0 unless plan
 
-          if machine_credit = plan.machine_credits.find_by(creditable_id: reservation.reservable_id)
-            users_credit = user.users_credits.find_by(credit_id: machine_credit.id)
-            already_used_hours = users_credit ? users_credit.hours_used : 0
+      def _will_use_credits?
+        return false, 0 unless plan
 
-            remaining_hours = machine_credit.hours - already_used_hours
+        if machine_credit = plan.machine_credits.find_by(creditable_id: reservation.reservable_id)
+          users_credit = user.users_credits.find_by(credit_id: machine_credit.id)
+          already_used_hours = users_credit ? users_credit.hours_used : 0
 
-            free_hours_count = [remaining_hours, reservation.slots.size].min
+          remaining_hours = machine_credit.hours - already_used_hours
 
-            if free_hours_count > 0
-              return true, free_hours_count, machine_credit
-            else
-              return false, free_hours_count, machine_credit
-            end
+          free_hours_count = [remaining_hours, reservation.slots.size].min
+
+          if free_hours_count.positive?
+            return true, free_hours_count, machine_credit
+          else
+            return false, free_hours_count, machine_credit
           end
-          return false, 0
         end
+        return false, 0
+      end
     end
 
-    class Training < Reservation # same as class Machine but for Training reservation
+    # same as class Machine but for Training reservation
+    class Training < Reservation
       def will_use_credits?
         _will_use_credits?[0]
       end
@@ -132,18 +138,19 @@ module UsersCredits
       end
 
       private
-        def _will_use_credits?
-          return false, nil unless plan
 
-          # if there is a training_credit defined for this plan and this training
-          if training_credit = plan.training_credits.find_by(creditable_id: reservation.reservable_id)
-            # if user has not used all the plan credits
-            if user.training_credits.where(plan: plan).count < plan.training_credit_nb
-              return true, training_credit
-            end
+      def _will_use_credits?
+        return false, nil unless plan
+
+        # if there is a training_credit defined for this plan and this training
+        if training_credit = plan.training_credits.find_by(creditable_id: reservation.reservable_id)
+          # if user has not used all the plan credits
+          if user.training_credits.where(plan: plan).count < plan.training_credit_nb
+            return true, training_credit
           end
-          return false, nil
         end
+        return false, nil
+      end
     end
 
     class Event < Reservation
@@ -151,12 +158,12 @@ module UsersCredits
         false
       end
 
-      def update_credits
-      end
+      def update_credits; end
     end
 
     class Space < Reservation
-      def will_use_credits?  # to known if a credit will be used in the context of the given reservation
+      # to known if a credit will be used in the context of the given reservation
+      def will_use_credits?
         _will_use_credits?[0]
       end
 
@@ -168,19 +175,20 @@ module UsersCredits
         super
 
         will_use_credits, free_hours_count, space_credit = _will_use_credits?
-        if will_use_credits
-          users_credit = user.users_credits.find_or_initialize_by(credit_id: space_credit.id)
+        return unless will_use_credits
 
-          if users_credit.new_record?
-            users_credit.hours_used = free_hours_count
-          else
-            users_credit.hours_used += free_hours_count
-          end
-          users_credit.save!
+        users_credit = user.users_credits.find_or_initialize_by(credit_id: space_credit.id)
+
+        if users_credit.new_record?
+          users_credit.hours_used = free_hours_count
+        else
+          users_credit.hours_used += free_hours_count
         end
+        users_credit.save!
       end
 
       private
+
       def _will_use_credits?
         return false, 0 unless plan
 
@@ -192,7 +200,7 @@ module UsersCredits
 
           free_hours_count = [remaining_hours, reservation.slots.size].min
 
-          if free_hours_count > 0
+          if free_hours_count.positive?
             return true, free_hours_count, space_credit
           else
             return false, free_hours_count, space_credit

@@ -15,23 +15,22 @@ class AdminsTest < ActionDispatch::IntegrationTest
   end
 
   test 'create an admin' do
-
     post '/api/admins',
          {
-             admin: {
-                 username: 'glepower',
-                 email: 'gerard.lepower@admins.net',
-                 profile_attributes: {
-                     first_name: 'Gérard',
-                     last_name: 'Lepower',
-                     gender: true,
-                     birthday: '1999-09-19',
-                     phone: '0547124852',
-                     address_attributes: {
-                         address: '6 Avenue Henri de Bournazel, 19000 Tulle'
-                     }
-                 }
+           admin: {
+             username: 'glepower',
+             email: 'gerard.lepower@admins.net',
+             profile_attributes: {
+               first_name: 'Gérard',
+               last_name: 'Lepower',
+               gender: true,
+               birthday: '1999-09-19',
+               phone: '0547124852',
+               address_attributes: {
+                 address: '6 Avenue Henri de Bournazel, 19000 Tulle'
+               }
              }
+           }
          }.to_json,
          default_headers
 
@@ -46,5 +45,22 @@ class AdminsTest < ActionDispatch::IntegrationTest
 
     # Check he's got the admin role
     assert user.has_role?(:admin), 'admin does not have the admin role'
+  end
+
+  test 'list all admins' do
+    get '/api/admins'
+
+
+    # Check response format & status
+    assert_equal 200, response.status, response.body
+    assert_equal Mime::JSON, response.content_type
+
+    # Check the list items are ok
+    admins = json_response(response.body)
+    assert_equal 1, admins.count, 'not all admins retrieved'
+    assert_equal @admin.id, admins[:admins][0][:id], 'admin id matches'
+    assert_equal @admin.profile.user_avatar.id,
+                 admins[:admins][0][:profile_attributes][:user_avatar][:id],
+                 'admin avatar does not match'
   end
 end

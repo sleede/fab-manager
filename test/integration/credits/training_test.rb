@@ -12,14 +12,14 @@ module Credits
 
       # First, we create a new credit
       post '/api/credits',
-        {
-          credit: {
-            creditable_id: 4,
-            creditable_type: 'Training',
-            plan_id: '1',
-          }
-        }.to_json,
-        default_headers
+           {
+             credit: {
+               creditable_id: 4,
+               creditable_type: 'Training',
+               plan_id: '1',
+             }
+           }.to_json,
+           default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
@@ -37,11 +37,11 @@ module Credits
     test 'create a existing credit' do
       post '/api/credits',
            {
-               credit: {
-                   creditable_id: 4,
-                   creditable_type: 'Training',
-                   plan_id: '2',
-               }
+             credit: {
+               creditable_id: 4,
+               creditable_type: 'Training',
+               plan_id: '2'
+             }
            }.to_json,
            default_headers
 

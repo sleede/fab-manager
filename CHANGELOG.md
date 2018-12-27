@@ -1,5 +1,16 @@
 # Changelog Fab Manager
 
+## v2.8.0 2018 December 27
+
+- Refactored subscriptions to keep track of the previous ones
+- Refactored settings to keep track of the previous values (notably VAT rate)
+- Improved automated tests suite
+- Added Rubocop gem to the Gemfile (ruby syntax checking)
+- Added badges to README
+- Fix a security update: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
+- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `bundle install`
+
 # v2.7.4 2018 December 04
 
 - Applied Rubocop rules to some ruby files
