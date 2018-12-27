@@ -187,7 +187,7 @@ user_1:
   created_at: 2001-01-01 14:11:33.852719000 Z
   updated_at: 2016-04-05 08:36:08.362215000 Z
   is_allow_contact: true
-  group_id: 1
+  group_id: 3
   stp_customer_id: cus_8CyNk3UTi8lvCc
   slug: admin
   is_active: true
