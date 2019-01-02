@@ -319,14 +319,14 @@ upgrade_compose()
     # get current data directory
     dir=$(awk 'BEGIN { FS="\n"; RS="";} { match($0, /image: elasticsearch:2\.4(\n|.)+volumes:(\n|.)+(-.*elasticsearch\/data)/, lines); FS="[ :]+"; RS="\r\n"; split(lines[3], line); print line[2] }' "$FM_PATH/docker-compose.yml")
     # set the configuration directory
-    dir=$(echo "$dir" | sed "s^\${PWD}^$FM_PATH^")
     dir=$(echo "${dir//[$'\t\r\n ']}/config")
     # insert configuration directory into docker-compose bindings
-    awk "BEGIN { FS=\"\n\"; RS=\"\";} { print gensub(/(image: elasticsearch:2\.4(\n|.)+)volumes:\n/, \"\\\\1volumes:\n      - ${dir}:/usr/share/elasticsearch/config\n\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
-    echo -e "\nCopying ElasticSearch 2.4 configuration files from GitHub to $dir..."
-    mkdir -p "$dir"
-    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/elasticsearch.yml > "$dir/elasticsearch.yml"
-    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/log4j2.properties > "$dir/log4j2.properties"
+    awk "BEGIN { FS=\"\n\"; RS=\"\";} { print gensub(/(image: elasticsearch:2\.4(\n|.)+volumes:(\n|.)+(-.*elasticsearch\/data))/, \"\\\\1\n      - ${dir}:/usr/share/elasticsearch/config\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
+    abs_dir=$(echo "$dir" | sed "s^\${PWD}^$FM_PATH^")
+    echo -e "\nCopying ElasticSearch 2.4 configuration files from GitHub to $abs_dir..."
+    mkdir -p "$abs_dir"
+    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/elasticsearch.yml > "$abs_dir/elasticsearch.yml"
+    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/log4j2.properties > "$abs_dir/log4j2.properties"
   fi
   docker-compose pull
   docker-compose up -d

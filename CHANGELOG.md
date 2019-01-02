@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## v2.8.1 2019 January 02
+
+- Fix ES upgrade: when docker-compose file is using ${PWD}, the ES config volume is attached to the wrong container
+- Fixed environment documentation references for external locales
+- Fix a bug: unable to fetch projects from OpenProjects (#126)
+
 ## v2.8.0 2018 December 27
 
 - Refactored subscriptions to keep track of the previous ones
