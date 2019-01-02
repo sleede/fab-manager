@@ -144,11 +144,20 @@ en:
 
       machine:
         # machine edition form
-        technical_specifications_are_required: "Technical specifications are required."
-        attached_files_(pdf): "Attached files (pdf)"
-        attach_a_file: "Attach a file"
-        add_an_attachment: "Add an attachment"
-        validate_your_machine: "Validate your machine"
+        machine_form:
+          name: "Name"
+          name_is_required: "Name is required."
+          illustration: "Visual"
+          add_an_illustration: "Add a visual"
+          description: "Description"
+          description_is_required: "Description is required."
+          technical_specifications: "Technical specifications"
+          technical_specifications_are_required: "Technical specifications are required."
+          attached_files_(pdf): "Attached files (pdf)"
+          attach_a_file: "Attach a file"
+          add_an_attachment: "Add an attachment"
+          disable_machine: "Disable machine"
+          validate_your_machine: "Validate your machine"
 
       plan_subscribe:
         # frame to select a plan to subscribe
