@@ -144,11 +144,20 @@ es:
 
       machine:
         # machine edition form
-        technical_specifications_are_required: "Se requieren especificaciones técnicas."
-        attached_files_(pdf): "archivos anclados (pdf)"
-        attach_a_file: "adjuntar archivo"
-        add_an_attachment: "añadir archivo adjunto"
-        validate_your_machine: "Validar su máquina"
+        machine_form:
+          name: "Nombre"
+          name_is_required: "Se requiere un nombre."
+          illustration: "Ilustración"
+          add_an_illustration: "añadir una ilustración"
+          description: "descripción"
+          description_is_required: "Se requiere una descripción."
+          technical_specifications: "Technical specifications"
+          technical_specifications_are_required: "Se requieren especificaciones técnicas."
+          attached_files_(pdf): "archivos anclados (pdf)"
+          attach_a_file: "adjuntar archivo"
+          add_an_attachment: "añadir archivo adjunto"
+          disable_machine: "Disable machine"                           #translation_missing
+          validate_your_machine: "Validar su máquina"
 
       plan_subscribe:
         # frame to select a plan to subscribe
@@ -236,12 +245,12 @@ es:
       trainings:
         # training edition form
         trainings_form:
-          name: "Name"                                                                              #translation_missing
-          name_is_required: "Name is required."                                                     #translation_missing
-          illustration: "Illustration"                                                              #translation_missing
-          add_an_illustration: "Add an illustration"                                                #translation_missing
-          description: "Description"                                                                #translation_missing
-          description_is_required: "Description is required."                                       #translation_missing
+          name: "Nombre"
+          name_is_required: "Se requiere un nombre."
+          illustration: "Ilustración"
+          add_an_illustration: "añadir una ilustración"
+          description: "descripción"
+          description_is_required: "Se requiere una descripción."
           add_a_new_training: "Añadir curso"
           validate_your_training: "Validar curso"
           associated_machines: "Máquinas asociadas"
