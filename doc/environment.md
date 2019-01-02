@@ -165,7 +165,7 @@ Please, be aware that **the configured locale will imply the CURRENCY symbol use
 
 _Eg.: configuring **es-ES** will set the currency symbol to **€** but **es-MX** will set **$** as currency symbol, so setting the `RAILS_LOCALE` to simple **es** (without country indication) will probably not do what you expect._
 
-See `config/locales/rails.*.yml` for a list of available locales. Default is **en**.
+See [config/locales/rails.*.yml](../config/locales) for a list of available locales. Default is **en**.
 
 If your locale is not present in that list or any locale doesn't have your exact expectations, please open a pull request to share your modifications with the community and obtain a rebuilt docker image.
 You can find templates of these files at https://github.com/svenfuchs/rails-i18n/tree/rails-4-x/rails/locale.
@@ -174,14 +174,14 @@ You can find templates of these files at https://github.com/svenfuchs/rails-i18n
 
 Configure the moment.js library for l10n.
 
-See `vendor/assets/components/moment/locale/*.js` for a list of available locales.
+See [github.com/moment/momentlocale/*.js](https://github.com/moment/moment/tree/2.22.2/locale) for a list of available locales.
 Default is **en** (even if it's not listed).
 
     SUMMERNOTE_LOCALE
 
 Configure the javascript summernote editor for l10n.
 
-See `vendor/assets/components/summernote/lang/summernote-*.js` for a list of available locales.
+See [github.com/summernote/summernote/lang/summernote-*.js](https://github.com/summernote/summernote/tree/v0.7.3/lang) for a list of available locales.
 Default is **en-US** (even if it's not listed).
 
     ANGULAR_LOCALE
@@ -192,24 +192,24 @@ Please, be aware that **the configured locale will imply the CURRENCY displayed 
 
 _Eg.: configuring **fr-fr** will set the currency symbol to **€** but **fr-ca** will set **$** as currency symbol, so setting the `ANGULAR_LOCALE` to simple **fr** (without country indication) will probably not do what you expect._
 
-See `vendor/assets/components/angular-i18n/angular-locale_*.js` for a list of available locales. Default is **en**.
+See [code.angularjs.org/i18n/angular-locale_*.js](https://code.angularjs.org/1.6.10/i18n/) for a list of available locales. Default is **en**.
 
     MESSAGEFORMAT_LOCALE
 
 Configure the messageformat.js library, used by angular-translate.
 
-See vendor/assets/components/messageformat/locale/*.js for a list of available locales.
+See [github.com/messageformat/messageformat/locale/*.js](https://github.com/messageformat/messageformat/tree/v0.1.8/locale) for a list of available locales.
 
     FULLCALENDAR_LOCALE
 
 Configure the fullCalendar JS agenda library.
 
-See `vendor/assets/components/fullcalendar/dist/lang/*.js` for a list of available locales. Default is **en** (even if it's not listed).
+See [github.com/fullcalendar/fullcalendar/lang/*.js](https://github.com/fullcalendar/fullcalendar/tree/v2.3.1/lang) for a list of available locales. Default is **en-us**.
 
     ELASTICSEARCH_LANGUAGE_ANALYZER
 
 This configure the language analyzer for indexing and searching in projects with ElasticSearch.
-See https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html for a list of available analyzers.
+See [ElasticSearch guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/analysis-lang-analyzer.html) for a list of available analyzers.
 
     TIME_ZONE
 
@@ -223,19 +223,19 @@ Configure the first day of the week in your locale zone (generally monday or sun
     D3_DATE_FORMAT
 
 Date format for dates displayed in statistics charts.
-See https://github.com/mbostock/d3/wiki/Time-Formatting#format for available formats.
+See [D3 Wiki](https://github.com/mbostock/d3/wiki/Time-Formatting#format) for available formats.
 
     UIB_DATE_FORMAT
 
 Date format for dates displayed and parsed in date pickers.
-See https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes for a list available formats.
+See [AngularUI documentation](https://angular-ui.github.io/bootstrap/#uibdateparser-s-format-codes) for a list available formats.
 
 **BEWARE**: years format with less than 4 digits will result in problems because the system won't be able to distinct dates with the same less significant digits, eg. 50 could mean 1950 or 2050.
 
     EXCEL_DATE_FORMAT
 
 Date format for dates shown in exported Excel files (eg. statistics)
-See https://support.microsoft.com/en-us/kb/264372 for a list a available formats.
+See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a list a available formats.
 
 <a name="open-projects-settings"></a>
 ## Open projects settings
