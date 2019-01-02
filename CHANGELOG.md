@@ -5,6 +5,7 @@
 - Fix ES upgrade: when docker-compose file is using ${PWD}, the ES config volume is attached to the wrong container
 - Fixed environment documentation references for external locales
 - Fix a bug: unable to fetch projects from OpenProjects (#126)
+- Fix a bug: unable to create or edit a plan
 
 ## v2.8.0 2018 December 27
 

@@ -35,7 +35,7 @@
             ng-disabled="method == 'PATCH'">
         <option value="all" translate>{{ 'plan_form.transversal_(all_groups)' }}</option>
         <optgroup label="Groupes">
-            <option ng-repeat="group in groups" ng-value="group.id" ng-selected="plan.group_id == group.id">{{group.name}}</option>
+            <option ng-repeat="group in groups" value="{{group.id}}" ng-selected="plan.group_id == group.id">{{group.name}}</option>
         </optgroup>
     </select>
     <span class="help-block" ng-show="planForm['plan[group_id]'].$dirty && planForm['plan[group_id]'].$error.required" translate>{{ 'plan_form.group_is_required' }}</span>
