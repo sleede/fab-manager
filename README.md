@@ -468,7 +468,7 @@ If you want to try it, you can visit [this fab-manager](https://fablab.lacasemat
 
 To start using this awesome feature, there are a few steps:
 - send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name of your fab-manager, they will give you an `OPENLAB_APP_ID` and an `OPENLAB_APP_SECRET`
-- fill in the value of the keys in your `application.yml`
+- fill in the value of the keys in your environment file
 - start your fab-manager app
 - export your projects to open-projects (if you already have projects created on your fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
 

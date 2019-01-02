@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: unable to fetch projects from OpenProjects (#126)
+
 ## v2.8.0 2018 December 27
 
 - Refactored subscriptions to keep track of the previous ones

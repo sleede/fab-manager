@@ -401,7 +401,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
     };
 
     var normalizeProjectsAttrs = function (projects) {
-      projects.map(function (project) {
+      return projects.map(function (project) {
         project.project_image = project.image_url;
         return project;
       });
