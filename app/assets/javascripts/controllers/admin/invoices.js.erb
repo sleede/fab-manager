@@ -105,7 +105,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param invoice {Object} invoice inherited from angular's $resource
      */
     $scope.generateAvoirForInvoice = function (invoice) {
-    // open modal
+      // open modal
       const modalInstance = $uibModal.open({
         templateUrl: '<%= asset_path "admin/invoices/avoirModal.html" %>',
         controller: 'AvoirModalController',
@@ -498,7 +498,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
  */
 Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'Invoice', 'growl', '_t',
   function ($scope, $uibModalInstance, invoice, Invoice, growl, _t) {
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
     $scope.invoice = invoice;
@@ -542,14 +542,14 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
     $scope.openDatePicker = function ($event) {
       $event.preventDefault();
       $event.stopPropagation();
-      return $scope.datePicker.opened = true;
+      $scope.datePicker.opened = true;
     };
 
     /**
      * Validate the refunding and generate a refund invoice
      */
     $scope.ok = function () {
-    // check that at least 1 element of the invoice is refunded
+      // check that at least 1 element of the invoice is refunded
       $scope.avoir.invoice_items_ids = [];
       for (let itemId in $scope.partial) {
         const refundItem = $scope.partial[itemId];
@@ -571,7 +571,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       }
     };
 
-    /**q
+    /**
      * Cancel the refund, dismiss the modal window
      */
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
