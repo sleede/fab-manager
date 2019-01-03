@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Fix a bug: error handling on password recovery
+- Fix a bug: error handling on machine attachment upload
+
 ## v2.8.1 2019 January 02
 
 - Fix ES upgrade: when docker-compose file is using ${PWD}, the ES config volume is attached to the wrong container

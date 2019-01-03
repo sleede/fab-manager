@@ -43,7 +43,7 @@ class MachinesController {
       if ((content.id == null)) {
         $scope.alerts = [];
         angular.forEach(content, function (v, k) {
-          angular.forEach(function (v, err) {
+          angular.forEach(v, function (err) {
             $scope.alerts.push({
               msg: k + ': ' + err,
               type: 'danger'

@@ -142,7 +142,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $scope.user.organization = orga;
               // display errors
               angular.forEach(error.data.errors, function (v, k) {
-                angular.forEach(function (v, err) {
+                angular.forEach(v, function (err) {
                   $scope.alerts.push({
                     msg: k + ': ' + err,
                     type: 'danger'
@@ -175,9 +175,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
           return $scope.changePassword = function () {
             $scope.alerts = [];
-            return $http.put('/users/password.json', { user: $scope.user }).success(function () { $uibModalInstance.close(); }).error(function (data) {
-              angular.forEach(data.errors, function (v, k) {
-                angular.forEach(function (v, err) {
+            return $http.put('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function (data) {
+              angular.forEach(data.data.errors, function (v, k) {
+                angular.forEach(v, function (err) {
                   $scope.alerts.push({
                     msg: k + ': ' + err,
                     type: 'danger'
@@ -400,7 +400,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               $scope.user = { email: '' };
               return $scope.sendReset = function () {
                 $scope.alerts = [];
-                return $http.post('/users/password.json', { user: $scope.user }).success(function () { $uibModalInstance.close(); }).error(function () {
+                return $http.post('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function () {
                   $scope.alerts.push({
                     msg: _t('your_email_address_is_unknown'),
                     type: 'danger'
