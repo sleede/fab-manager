@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h3 class="text-center red" translate>{{ 'close_accounting_period' }}</h3>
+</div>
+<div class="modal-body">
+  <form name="closePeriodForm" novalidate="novalidate">
+    <div class="form-group" ng-class="{'has-error': closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$invalid }">
+      <label translate>{{ 'close_from_date' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input type="text"
+               class="form-control"
+               name="start_date"
+               ng-model="period.start_date"
+               uib-datepicker-popup="{{datePicker.format}}"
+               datepicker-options="datePicker.options"
+               is-open="datePicker.startOpened"
+               placeholder="{{datePicker.format}}"
+               ng-click="openDatePicker($event, 'start')"
+               required/>
+      </div>
+      <span class="help-block" ng-show="closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$error.required" translate>{{ 'start_date_is_required' }}</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$invalid }">
+      <label translate>{{ 'close_until_date' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input type="text"
+               class="form-control"
+               name="end_date"
+               ng-model="period.end_date"
+               uib-datepicker-popup="{{datePicker.format}}"
+               datepicker-options="datePicker.options"
+               is-open="datePicker.endOpened"
+               placeholder="{{datePicker.format}}"
+               ng-click="openDatePicker($event, 'end')"
+               required/>
+      </div>
+      <span class="help-block" ng-show="closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$error.required" translate>{{ 'end_date_is_required' }}</span>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="closePeriodForm.$invalid" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>
