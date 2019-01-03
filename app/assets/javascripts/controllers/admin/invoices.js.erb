@@ -119,7 +119,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         $scope.invoices.unshift(res.avoir);
         return Invoice.get({ id: invoice.id }, function (data) {
           invoice.has_avoir = data.has_avoir;
-          return growl.success(_t('refund_invoice_successfully_created'));
+          return growl.success(_t('invoices.refund_invoice_successfully_created'));
         });
       });
     };
@@ -193,10 +193,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_reference' }, { value: model }, function (data) {
           $scope.invoice.reference.model = model;
-          growl.success(_t('invoice_reference_successfully_saved'));
+          growl.success(_t('invoices.invoice_reference_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_invoice_reference'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_invoice_reference'));
           console.error(error);
         });
       });
@@ -231,24 +231,24 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         Setting.update({ name: 'invoice_code-value' }, { value: result.model }, function (data) {
           $scope.invoice.code.model = result.model;
           if (result.active) {
-            return growl.success(_t('invoicing_code_succesfully_saved'));
+            return growl.success(_t('invoices.invoicing_code_succesfully_saved'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_invoicing_code'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_the_invoicing_code'));
           return console.error(error);
         });
 
         return Setting.update({ name: 'invoice_code-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
           $scope.invoice.code.active = result.active;
           if (result.active) {
-            return growl.success(_t('code_successfully_activated'));
+            return growl.success(_t('invoices.code_successfully_activated'));
           } else {
-            return growl.success(_t('code_successfully_disabled'));
+            return growl.success(_t('invoices.code_successfully_disabled'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_activating_the_invoicing_code'));
+          growl.error(_t('invoices.an_error_occurred_while_activating_the_invoicing_code'));
           return console.error(error);
         });
       });
@@ -277,10 +277,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_order-nb' }, { value: model }, function (data) {
           $scope.invoice.number.model = model;
-          return growl.success(_t('order_number_successfully_saved'));
+          return growl.success(_t('invoices.order_number_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_order_number'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_the_order_number'));
           return console.error(error);
         });
       });
@@ -316,24 +316,24 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         Setting.update({ name: 'invoice_VAT-rate' }, { value: result.rate + '' }, function (data) {
           $scope.invoice.VAT.rate = result.rate;
           if (result.active) {
-            return growl.success(_t('VAT_rate_successfully_saved'));
+            return growl.success(_t('invoices.VAT_rate_successfully_saved'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_VAT_rate'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_the_VAT_rate'));
           return console.error(error);
         });
 
         return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
           $scope.invoice.VAT.active = result.active;
           if (result.active) {
-            return growl.success(_t('VAT_successfully_activated'));
+            return growl.success(_t('invoices.VAT_successfully_activated'));
           } else {
-            return growl.success(_t('VAT_successfully_disabled'));
+            return growl.success(_t('invoices.VAT_successfully_disabled'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_activating_the_VAT'));
+          growl.error(_t('invoices.an_error_occurred_while_activating_the_VAT'));
           return console.error(error);
         });
       });
@@ -346,10 +346,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       const parsed = parseHtml($scope.invoice.text.content);
       return Setting.update({ name: 'invoice_text' }, { value: parsed }, function (data) {
         $scope.invoice.text.content = parsed;
-        return growl.success(_t('text_successfully_saved'));
+        return growl.success(_t('invoices.text_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('an_error_occurred_while_saving_the_text'));
+        growl.error(_t('invoices.an_error_occurred_while_saving_the_text'));
         return console.error(error);
       });
     };
@@ -361,10 +361,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       const parsed = parseHtml($scope.invoice.legals.content);
       return Setting.update({ name: 'invoice_legals' }, { value: parsed }, function (data) {
         $scope.invoice.legals.content = parsed;
-        return growl.success(_t('address_and_legal_information_successfully_saved'));
+        return growl.success(_t('invoices.address_and_legal_information_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('an_error_occurred_while_saving_the_address_and_the_legal_information'));
+        growl.error(_t('invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
         return console.error(error);
       });
     };
@@ -426,9 +426,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return Setting.update(
             { name: 'invoice_logo' },
             { value: $scope.invoice.logo.base64 },
-            function (data) { growl.success(_t('logo_successfully_saved')); },
+            function (data) { growl.success(_t('invoices.logo_successfully_saved')); },
             function (error) {
-              growl.error(_t('an_error_occurred_while_saving_the_logo'));
+              growl.error(_t('invoices.an_error_occurred_while_saving_the_logo'));
               return console.error(error);
             }
           );
@@ -506,7 +506,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
  */
 Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'Invoice', 'growl', '_t',
   function ($scope, $uibModalInstance, invoice, Invoice, growl, _t) {
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
     $scope.invoice = invoice;
@@ -523,11 +523,11 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
 
     // Possible refunding methods
     $scope.avoirModes = [
-      { name: _t('none'), value: 'none' },
-      { name: _t('by_cash'), value: 'cash' },
-      { name: _t('by_cheque'), value: 'cheque' },
-      { name: _t('by_transfer'), value: 'transfer' },
-      { name: _t('by_wallet'), value: 'wallet' }
+      { name: _t('invoices.none'), value: 'none' },
+      { name: _t('invoices.by_cash'), value: 'cash' },
+      { name: _t('invoices.by_cheque'), value: 'cheque' },
+      { name: _t('invoices.by_transfer'), value: 'transfer' },
+      { name: _t('invoices.by_wallet'), value: 'wallet' }
     ];
 
     // If a subscription was took with the current invoice, should it be canceled or not
@@ -557,7 +557,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
      * Validate the refunding and generate a refund invoice
      */
     $scope.ok = function () {
-    // check that at least 1 element of the invoice is refunded
+      // check that at least 1 element of the invoice is refunded
       $scope.avoir.invoice_items_ids = [];
       for (let itemId in $scope.partial) {
         const refundItem = $scope.partial[itemId];
@@ -565,7 +565,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       }
 
       if ($scope.avoir.invoice_items_ids.length === 0) {
-        return growl.error(_t('you_must_select_at_least_one_element_to_create_a_refund'));
+        return growl.error(_t('invoices.you_must_select_at_least_one_element_to_create_a_refund'));
       } else {
         return Invoice.save(
           { avoir: $scope.avoir },
@@ -573,7 +573,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
             $uibModalInstance.close({ avoir, invoice: $scope.invoice });
           },
           function (err) { // failed
-            growl.error(_t('unable_to_create_the_refund'));
+            growl.error(_t('invoices.unable_to_create_the_refund'));
           }
         );
       }
@@ -600,7 +600,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       });
 
       if (invoice.stripe) {
-        return $scope.avoirModes.push({ name: _t('online_payment'), value: 'stripe' });
+        return $scope.avoirModes.push({ name: _t('invoices.online_payment'), value: 'stripe' });
       }
     };
 
