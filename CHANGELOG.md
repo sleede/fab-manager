@@ -2,6 +2,7 @@
 
 - Fix a bug: error handling on password recovery
 - Fix a bug: error handling on machine attachment upload
+- Refactored frontend invoices translations
 
 ## v2.8.1 2019 January 02
 
