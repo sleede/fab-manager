@@ -402,6 +402,11 @@ pt:
           logo_successfully_saved: "Logo salvo com sucesso."
           an_error_occurred_while_saving_the_logo: "Um erro ocorreu ao salvar o logo."
           online_payment: "Pagamento Online"
+          close_accounting_period: "Close an accounting period"                     # translation_missing
+          close_from_date: "Close from"                                             # translation_missing
+          start_date_is_required: "Start date is required"                          # translation_missing
+          close_until_date: "Close until"                                           # translation_missing
+          end_date_is_required: "End date is required"                              # translation_missing
 
       members:
         # management of users, labels, groups, and so on

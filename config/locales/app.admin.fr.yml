@@ -402,6 +402,11 @@ fr:
           logo_successfully_saved: "Le logo bien été enregistré."
           an_error_occurred_while_saving_the_logo: "Une erreur est survenue lors de l'enregistrement du logo."
           online_payment: "Paiement en ligne"
+          close_accounting_period: "Clôturer une période comptable"
+          close_from_date: "Clôturer depuis"
+          start_date_is_required: "La date de début est requise"
+          close_until_date: "Clôturer jusqu'au"
+          end_date_is_required: "La date de fin est requise"
 
       members:
         # gestion des utilisateurs, des groupes, des étiquettes, etc.

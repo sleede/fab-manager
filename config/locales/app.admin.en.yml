@@ -402,6 +402,11 @@ en:
           logo_successfully_saved: "Logo successfully saved."
           an_error_occurred_while_saving_the_logo: "An error occurred while saving the logo."
           online_payment: "Online payment"
+          close_accounting_period: "Close an accounting period"
+          close_from_date: "Close from"
+          start_date_is_required: "Start date is required"
+          close_until_date: "Close until"
+          end_date_is_required: "End date is required"
 
       members:
         # management of users, labels, groups, and so on

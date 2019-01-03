@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="text-center red" translate>{{ 'close_accounting_period' }}</h3>
+  <h3 class="text-center red" translate>{{ 'invoices.close_accounting_period' }}</h3>
 </div>
 <div class="modal-body">
   <form name="closePeriodForm" novalidate="novalidate">
     <div class="form-group" ng-class="{'has-error': closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$invalid }">
-      <label translate>{{ 'close_from_date' }}</label>
+      <label translate>{{ 'invoices.close_from_date' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
@@ -18,10 +18,10 @@
                ng-click="openDatePicker($event, 'start')"
                required/>
       </div>
-      <span class="help-block" ng-show="closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$error.required" translate>{{ 'start_date_is_required' }}</span>
+      <span class="help-block" ng-show="closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
     </div>
     <div class="form-group" ng-class="{'has-error': closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$invalid }">
-      <label translate>{{ 'close_until_date' }}</label>
+      <label translate>{{ 'invoices.close_until_date' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
@@ -35,7 +35,7 @@
                ng-click="openDatePicker($event, 'end')"
                required/>
       </div>
-      <span class="help-block" ng-show="closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$error.required" translate>{{ 'end_date_is_required' }}</span>
+      <span class="help-block" ng-show="closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
     </div>
   </form>
 </div>
