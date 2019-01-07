@@ -14,3 +14,5 @@ Style/RegexpLiteral:
   EnforcedStyle: slashes
 Style/EmptyElse:
   EnforcedStyle: empty
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
