@@ -1,13 +1,12 @@
 class API::ThemesController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_theme, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_theme, only: %i[show update destroy]
 
   def index
     @themes = Theme.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Theme
@@ -35,11 +34,12 @@ class API::ThemesController < API::ApiController
   end
 
   private
-    def set_theme
-      @theme = Theme.find(params[:id])
-    end
 
-    def theme_params
-      params.require(:theme).permit(:name)
-    end
+  def set_theme
+    @theme = Theme.find(params[:id])
+  end
+
+  def theme_params
+    params.require(:theme).permit(:name)
+  end
 end

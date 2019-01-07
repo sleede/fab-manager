@@ -1,4 +1,3 @@
-
 class API::VersionController < API::ApiController
   before_action :authenticate_user!
 
