@@ -40,7 +40,7 @@
   </form>
   <div>
     <h4 translate>{{ 'invoices.previous_closings' }}</h4>
-    <table class="table closings-table">
+    <table class="table closings-table" ng-show="accountingPeriods.length > 0">
       <thead>
         <tr>
           <th translate>{{ 'invoices.start_date' }}</th>
@@ -58,6 +58,7 @@
         </tr>
       </tbody>
     </table>
+    <div ng-show="accountingPeriods.length === 0" translate>{{ 'invoices.no_periods'}}</div>
   </div>
 </div>
 <div class="modal-footer">

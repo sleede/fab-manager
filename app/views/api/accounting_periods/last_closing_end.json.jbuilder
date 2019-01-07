@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.extract! @last_period, :id, :end_at
+json.last_end_date @last_end

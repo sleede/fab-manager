@@ -24,7 +24,13 @@ class API::AccountingPeriodsController < API::ApiController
 
   def last_closing_end
     authorize AccountingPeriod
-    @last_period = AccountingPeriodService.find_last_period
+    last_period = AccountingPeriodService.find_last_period
+    if last_period.nil?
+      invoice = Invoice.order(:created_at).first
+      @last_end = invoice.created_at if invoice
+    else
+      @last_end = last_period.end_at
+    end
   end
 
   private

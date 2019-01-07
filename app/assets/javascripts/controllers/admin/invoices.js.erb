@@ -394,7 +394,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         controller: 'ClosePeriodModalController',
         size: 'lg',
         resolve: {
-          periods() { return AccountingPeriod.query().$promise; }
+          periods() { return AccountingPeriod.query().$promise; },
+          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; },
         }
       });
     }
@@ -617,12 +618,15 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
 /**
  * Controller used in the modal window allowing an admin to close an accounting period
  */
-Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'periods' ,'dialogs', 'growl', '_t',
-  function ($scope, $uibModalInstance, Invoice, AccountingPeriod, periods, dialogs, growl, _t) {
+Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
+  function ($scope, $uibModalInstance, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
+    const YESTERDAY = moment().subtract(1, 'day').toDate();
+    const LAST_CLOSING = moment(lastClosingEnd.last_end_date).toDate();
+
     /* PUBLIC SCOPE */
     $scope.period = {
-      start_at: null,
-      end_at: null
+      start_at: LAST_CLOSING,
+      end_at: YESTERDAY
     };
 
     $scope.accountingPeriods = periods;
