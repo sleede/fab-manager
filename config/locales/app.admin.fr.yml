@@ -412,6 +412,10 @@ fr:
           end_date: "Au"
           closed_at: "Clôturé le"
           closed_by: "Par"
+          confirmation_required: "Confirmation requise"
+          confirm_close: "Êtes-vous sur de vouloir clôturer cette période comptable ? Toute modification ultérieure sera impossible."
+          period_START_END_closed_success: "La période comptable du {{START}} au {{END}} a bien été clôturée"
+          failed_to_close_period: "Une erreur est survenue, impossible de clôturer la période comptable"
 
       members:
         # gestion des utilisateurs, des groupes, des étiquettes, etc.

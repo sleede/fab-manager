@@ -412,6 +412,7 @@ en:
           end_date: "To"
           closed_at: "Closed at"
           closed_by: "By"
+          confirmation_required: "Confirmation required"
 
       members:
         # management of users, labels, groups, and so on

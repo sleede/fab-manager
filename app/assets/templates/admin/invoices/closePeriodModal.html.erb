@@ -3,14 +3,14 @@
 </div>
 <div class="modal-body">
   <form name="closePeriodForm" novalidate="novalidate" class="row">
-    <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$invalid }">
+    <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$invalid }">
       <label translate>{{ 'invoices.close_from_date' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
                class="form-control"
-               name="start_date"
-               ng-model="period.start_date"
+               name="start_at"
+               ng-model="period.start_at"
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
                is-open="datePicker.startOpened"
@@ -18,16 +18,16 @@
                ng-click="openDatePicker($event, 'start')"
                required/>
       </div>
-      <span class="help-block" ng-show="closePeriodForm.start_date.$dirty && closePeriodForm.start_date.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
+      <span class="help-block" ng-show="closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
     </div>
-    <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$invalid }">
+    <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$invalid }">
       <label translate>{{ 'invoices.close_until_date' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
                class="form-control"
-               name="end_date"
-               ng-model="period.end_date"
+               name="end_at"
+               ng-model="period.end_at"
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
                is-open="datePicker.endOpened"
@@ -35,7 +35,7 @@
                ng-click="openDatePicker($event, 'end')"
                required/>
       </div>
-      <span class="help-block" ng-show="closePeriodForm.end_date.$dirty && closePeriodForm.end_date.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
+      <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
     </div>
   </form>
   <div>

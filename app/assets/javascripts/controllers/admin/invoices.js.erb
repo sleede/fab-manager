@@ -392,7 +392,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/invoices/closePeriodModal.html" %>',
         controller: 'ClosePeriodModalController',
-        size: 'lg'
+        size: 'lg',
+        resolve: {
+
+        }
       });
     }
 
@@ -614,12 +617,12 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
 /**
  * Controller used in the modal window allowing an admin to close an accounting period
  */
-Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'growl', '_t',
-  function ($scope, $uibModalInstance, Invoice, AccountingPeriod, growl, _t) {
+Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'dialogs', 'growl', '_t',
+  function ($scope, $uibModalInstance, Invoice, AccountingPeriod, dialogs, growl, _t) {
     /* PUBLIC SCOPE */
     $scope.period = {
-      start_date: null,
-      end_date: null
+      start_at: null,
+      end_at: null
     };
 
     // AngularUI-Bootstrap datepickers parameters to define the period to close
@@ -643,11 +646,35 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     };
 
     /**
-     * Validate the refunding and generate a refund invoice
+     * Validate the close period creation
      */
     $scope.ok = function () {
-      $uibModalInstance.close({ period: $scope.period });
-      growl.info(_t('not_implemented_yet'));
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('invoices.confirmation_required'),
+                msg: _t('invoices.confirm_close')
+              };
+            }
+          }
+        },
+        function () { // creation confirmed
+          AccountingPeriod.save({ accounting_period: $scope.period }, function (resp) {
+            growl.success(_t(
+              'invoices.period_START_END_closed_success',
+              { START: moment(resp.start_at).format('LL'), END: moment(resp.end_at).format('LL') }
+            ));
+            $uibModalInstance.close(resp);
+          }
+          , function(error) {
+            growl.error(_t('invoices.failed_to_close_period'));
+            console.error(error);
+          });
+        }
+      );
+
     };
 
     /**
