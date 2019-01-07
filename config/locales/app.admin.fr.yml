@@ -407,6 +407,11 @@ fr:
           start_date_is_required: "La date de début est requise"
           close_until_date: "Clôturer jusqu'au"
           end_date_is_required: "La date de fin est requise"
+          previous_closings: "Fermetures précédentes"
+          start_date: "Du"
+          end_date: "Au"
+          closed_at: "Clôturé le"
+          closed_by: "Par"
 
       members:
         # gestion des utilisateurs, des groupes, des étiquettes, etc.

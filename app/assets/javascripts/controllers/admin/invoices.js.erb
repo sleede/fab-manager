@@ -391,7 +391,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       // open modal
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/invoices/closePeriodModal.html" %>',
-        controller: 'ClosePeriodModalController'
+        controller: 'ClosePeriodModalController',
+        size: 'lg'
       });
     }
 

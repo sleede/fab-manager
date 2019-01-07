@@ -407,6 +407,11 @@ en:
           start_date_is_required: "Start date is required"
           close_until_date: "Close until"
           end_date_is_required: "End date is required"
+          previous_closings: "Previous closings"
+          start_date: "From"
+          end_date: "To"
+          closed_at: "Closed at"
+          closed_by: "By"
 
       members:
         # management of users, labels, groups, and so on
