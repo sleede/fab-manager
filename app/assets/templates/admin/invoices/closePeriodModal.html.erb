@@ -50,71 +50,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>01/01/1970</td>
-          <td>01/01/1971</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1971</td>
-          <td>01/01/1972</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1972</td>
-          <td>01/01/1973</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1973</td>
-          <td>01/01/1974</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1974</td>
-          <td>01/01/1975</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1975</td>
-          <td>01/01/1976</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1976</td>
-          <td>01/01/1977</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1977</td>
-          <td>01/01/1978</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1978</td>
-          <td>01/01/1979</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1979</td>
-          <td>01/01/1980</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
-        </tr>
-        <tr>
-          <td>01/01/1980</td>
-          <td>01/01/2019</td>
-          <td>04/01/2019 18:12</td>
-          <td>Roger Rabbit</td>
+        <tr ng-repeat="period in accountingPeriods">
+          <td>{{period.start_at | amDateFormat:'L'}}</td>
+          <td>{{period.end_at | amDateFormat:'L'}}</td>
+          <td>{{period.closed_at | amDateFormat:'L'}}</td>
+          <td>{{period.user_name}}</td>
         </tr>
       </tbody>
     </table>

@@ -7,14 +7,14 @@ class API::AccountingPeriodsController < API::ApiController
   before_action :set_period, only: %i[show]
 
   def index
-    @accounting_periods = AccountingPeriod.all
+    @accounting_periods = AccountingPeriodService.all_periods_with_users
   end
 
   def show; end
 
   def create
     authorize AccountingPeriod
-    @accounting_period = AccountingPeriod.new(period_params)
+    @accounting_period = AccountingPeriod.new(period_params.merge(closed_at: DateTime.now, closed_by: current_user.id))
     if @accounting_period.save
       render :show, status: :created, location: @accounting_period
     else

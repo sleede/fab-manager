@@ -412,6 +412,10 @@ pt:
           end_date: "To"                                                               # translation_missing
           closed_at: "Closed at"                                                       # translation_missing
           closed_by: "By"                                                              # translation_missing
+          confirmation_required: "Confirmation required"                               # translation_missing
+          confirm_close: "Do you really want to close this accounting period ? Any subsequent changes will be impossible."       # translation_missing
+          period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed"        # translation_missing
+          failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
 
       members:
         # management of users, labels, groups, and so on

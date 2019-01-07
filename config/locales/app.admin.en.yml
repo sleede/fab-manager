@@ -413,6 +413,9 @@ en:
           closed_at: "Closed at"
           closed_by: "By"
           confirmation_required: "Confirmation required"
+          confirm_close: "Do you really want to close this accounting period ? Any subsequent changes will be impossible."
+          period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed"
+          failed_to_close_period: "An error occurred, unable to close the accounting period"
 
       members:
         # management of users, labels, groups, and so on
