@@ -94,9 +94,9 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         minDate: null,
         maxDate: moment().toDate(),
         options: {
-          startingDay: 1
+          startingDay: Fablab.weekStartingDay
         }
-      } // France: the week starts on monday
+      }
     };
 
     // available custom filters
