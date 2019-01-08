@@ -14,6 +14,9 @@
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
                is-open="datePicker.startOpened"
+               min-date="datePicker.minDate"
+               max-date="datePicker.maxDate"
+               init-date="period.start_at"
                placeholder="{{datePicker.format}}"
                ng-click="openDatePicker($event, 'start')"
                required/>
@@ -31,6 +34,9 @@
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
                is-open="datePicker.endOpened"
+               min-date="datePicker.minDate"
+               max-date="datePicker.maxDate"
+               init-date="period.end_at"
                placeholder="{{datePicker.format}}"
                ng-click="openDatePicker($event, 'end')"
                required/>

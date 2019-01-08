@@ -637,6 +637,8 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
       // default: datePicker are not shown
       startOpened: false,
       endOpened: false,
+      minDate: LAST_CLOSING,
+      maxDate: YESTERDAY,
       options: {
         startingDay: Fablab.weekStartingDay
       }

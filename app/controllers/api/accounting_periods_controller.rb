@@ -29,7 +29,7 @@ class API::AccountingPeriodsController < API::ApiController
       invoice = Invoice.order(:created_at).first
       @last_end = invoice.created_at if invoice
     else
-      @last_end = last_period.end_at
+      @last_end = last_period.end_at + 1.day
     end
   end
 
