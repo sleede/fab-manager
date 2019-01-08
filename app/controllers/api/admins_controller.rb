@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type User with role 'admin'.
 class API::AdminsController < API::ApiController
   before_action :authenticate_user!
 
