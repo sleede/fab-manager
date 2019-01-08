@@ -1,3 +1,4 @@
+dsb:
   date:
     abbr_day_names:
     - Nj
@@ -8,7 +9,7 @@
     - Pě
     - So
     abbr_month_names:
-    - 
+    -
     - jan
     - feb
     - měr
@@ -34,7 +35,7 @@
       long: ! '%d. %B %Y'
       short: ! '%d %b'
     month_names:
-    - 
+    -
     - Januar
     - Februar
     - Měrc
