@@ -620,8 +620,8 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
  */
 Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
   function ($scope, $uibModalInstance, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
-    const YESTERDAY = moment().subtract(1, 'day').toDate();
-    const LAST_CLOSING = moment(lastClosingEnd.last_end_date).toDate();
+    const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
+    const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
 
     /* PUBLIC SCOPE */
     $scope.period = {
@@ -663,7 +663,10 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
             object () {
               return {
                 title: _t('invoices.confirmation_required'),
-                msg: _t('invoices.confirm_close')
+                msg: _t(
+                  'invoices.confirm_close_START_END',
+                  { START: moment($scope.period.start_at).format('LL'), END: moment($scope.period.end_at).format('LL') }
+                )
               };
             }
           }
