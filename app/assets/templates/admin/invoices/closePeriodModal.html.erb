@@ -22,6 +22,7 @@
                required/>
       </div>
       <span class="help-block" ng-show="closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
+      <span class="help-block error" ng-show="errors.start_at">{{ errors.start_at[0] }}</span>
     </div>
     <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$invalid }">
       <label translate>{{ 'invoices.close_until_date' }}</label>
@@ -42,6 +43,7 @@
                required/>
       </div>
       <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
+      <span class="help-block error" ng-show="errors.end_at">{{ errors.end_at[0] }}</span>
     </div>
   </form>
   <div>

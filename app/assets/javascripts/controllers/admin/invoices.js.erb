@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
-  function ($scope, $state, Invoice, AccountingPeriod, invoices, $uibModal, growl, $filter, Setting, settings, _t) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
+  function ($scope, $state, Invoice, AccountingPeriod, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -110,7 +110,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         templateUrl: '<%= asset_path "admin/invoices/avoirModal.html" %>',
         controller: 'AvoirModalController',
         resolve: {
-          invoice () { return invoice; }
+          invoice () { return invoice; },
+          closedPeriods() { return closedPeriods; }
         }
       });
 
@@ -387,6 +388,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return invoiceSearch(true);
     };
 
+    /**
+     * Open a modal allowing the user to close an accounting period and to
+     * view all periods already closed.
+     */
     $scope.closeAnAccountingPeriod = function() {
       // open modal
       $uibModal.open({
@@ -394,7 +399,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         controller: 'ClosePeriodModalController',
         size: 'lg',
         resolve: {
-          periods() { return AccountingPeriod.query().$promise; },
+          periods() { return closedPeriods; },
           lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; },
         }
       });
@@ -509,8 +514,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'Invoice', 'growl', '_t',
-  function ($scope, $uibModalInstance, invoice, Invoice, growl, _t) {
+Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'closedPeriods', 'Invoice', 'growl', '_t',
+  function ($scope, $uibModalInstance, invoice, closedPeriods, Invoice, growl, _t) {
     /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
@@ -589,6 +594,20 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
      */
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
+    /**
+     * Test if the given date is within a closed accounting period
+     * @param date {Date} date to test
+     * @returns {boolean} true if closed, false otherwise
+     */
+    $scope.isDateClosed = function(date) {
+      for (const period of closedPeriods) {
+        if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -624,11 +643,17 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
 
     /* PUBLIC SCOPE */
+
+    // date pickers values are bound to these variables
     $scope.period = {
       start_at: LAST_CLOSING,
       end_at: YESTERDAY
     };
 
+    // any form errors will come here
+    $scope.errors = {};
+
+    // existing closed periods, provided by the API
     $scope.accountingPeriods = periods;
 
     // AngularUI-Bootstrap datepickers parameters to define the period to close
@@ -681,7 +706,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
           }
           , function(error) {
             growl.error(_t('invoices.failed_to_close_period'));
-            console.error(error);
+            $scope.errors = error.data;
           });
         }
       );

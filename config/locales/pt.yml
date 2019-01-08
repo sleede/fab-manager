@@ -36,6 +36,8 @@ pt:
       cannot_be_blank_at_same_time: "Não pode ficar em branco quando %{field} estiver em branco também"
       cannot_be_in_the_past: "não pode ser no passado"
       cannot_be_before_previous_value: "não pode ser antes do valor anterior"
+      cannot_overlap: "can't overlap an existing accounting period"                        # missing translation
+      cannot_encompass: "can't encompass an existing accounting period"                    # missing translation
 
   activemodel:
     errors:
