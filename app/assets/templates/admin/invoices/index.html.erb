@@ -87,7 +87,7 @@
     		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
     		                <i class="fa fa-file-pdf-o"></i> {{ 'invoices.download_the_credit_note' | translate }}
     		              </a>
-    		              <a class="btn btn-default" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund">
+    		              <a class="btn btn-default" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
     		                <i class="fa fa-reply"></i> {{ 'invoices.credit_note' | translate }}
     		              </a>
     		            </div>

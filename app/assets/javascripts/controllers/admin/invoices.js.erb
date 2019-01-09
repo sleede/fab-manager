@@ -405,6 +405,20 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       });
     }
 
+    /**
+     * Test if the given date is within a closed accounting period
+     * @param date {Date} date to test
+     * @returns {boolean} true if closed, false otherwise
+     */
+    $scope.isDateClosed = function(date) {
+      for (const period of closedPeriods) {
+        if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     /* PRIVATE SCOPE */
 
     /**
