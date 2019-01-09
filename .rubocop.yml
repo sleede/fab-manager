@@ -16,3 +16,5 @@ Style/EmptyElse:
   EnforcedStyle: empty
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+Style/AndOr:
+  EnforcedStyle: conditionals
