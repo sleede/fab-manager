@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
+# Avoir is a special type of Invoice, which it inherits. It is used to
+# refund an user, based on a previous invoice, or to credit an user's wallet.
 class Avoir < Invoice
   belongs_to :invoice
 
-  validates :avoir_mode, inclusion: {in: %w[stripe cheque transfer none cash wallet] }
+  validates :avoir_mode, inclusion: { in: %w[stripe cheque transfer none cash wallet] }
 
   attr_accessor :invoice_items_ids
 
