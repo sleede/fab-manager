@@ -7,7 +7,7 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Max: 9
 Metrics/AbcSize:
-  Max: 42
+  Max: 45
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/RegexpLiteral:
