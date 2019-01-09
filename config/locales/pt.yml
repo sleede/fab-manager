@@ -38,6 +38,7 @@ pt:
       cannot_be_before_previous_value: "não pode ser antes do valor anterior"
       cannot_overlap: "can't overlap an existing accounting period"                        # missing translation
       cannot_encompass: "can't encompass an existing accounting period"                    # missing translation
+      in_closed_period: "can't be within a closed accounting period"                       # missing translation
 
   activemodel:
     errors:

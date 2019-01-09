@@ -17,6 +17,8 @@ class Invoice < ActiveRecord::Base
   after_create :update_reference
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
 
+  validates_with ClosedPeriodValidator
+
   def file
     dir = "invoices/#{user.id}"
 
