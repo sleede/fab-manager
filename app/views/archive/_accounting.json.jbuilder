@@ -42,4 +42,8 @@ json.array!(invoices) do |invoice|
       json.gender invoice.user.profile.gender ? 'male' : 'female'
     end
   end
+  json.invoice_items invoice.invoice_items do |item|
+    json.extract! item, :id, :stp_invoice_item_id, :created_at, :description
+    json.amount number_to_currency(item.amount / 100.0)
+  end
 end
