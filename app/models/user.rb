@@ -59,7 +59,6 @@ class User < ActiveRecord::Base
   after_create :create_a_wallet
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
-  after_update :notify_admin_invoicing_changed, if: :invoicing_disabled_changed?
   after_update :notify_group_changed, if: :group_id_changed?
 
   attr_accessor :cgu
@@ -122,7 +121,7 @@ class User < ActiveRecord::Base
   def generate_subscription_invoice
     return unless subscription
 
-    subscription.generate_and_save_invoice unless invoicing_disabled?
+    subscription.generate_and_save_invoice
   end
 
   def stripe_customer
@@ -341,12 +340,5 @@ class User < ActiveRecord::Base
                             receiver: self,
                             attached_object: self
   end
-
-  def notify_admin_invoicing_changed
-    NotificationCenter.call type: 'notify_admin_invoicing_changed',
-                            receiver: User.admins,
-                            attached_object: self
-  end
-
 
 end

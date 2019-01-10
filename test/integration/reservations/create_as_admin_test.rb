@@ -7,50 +7,6 @@ module Reservations
       login_as(@admin, scope: :user)
     end
 
-    test 'user without subscription and with invoicing disabled reserves a machine with success' do
-      @user_without_subscription.update!(invoicing_disabled: true)
-      machine = Machine.find(6)
-      availability = machine.availabilities.first
-
-      reservations_count = Reservation.count
-      invoice_count = Invoice.count
-      invoice_items_count = InvoiceItem.count
-      users_credit_count = UsersCredit.count
-
-      post reservations_path, { reservation: {
-        user_id: @user_without_subscription.id,
-        reservable_id: machine.id,
-        reservable_type: machine.class.name,
-        slots_attributes: [
-          {
-            start_at: availability.start_at.to_s(:iso8601),
-            end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-            availability_id: availability.id
-          }
-        ]
-      } }.to_json, default_headers
-
-      # general assertions
-      assert_equal 201, response.status
-      assert_equal reservations_count + 1, Reservation.count
-      assert_equal invoice_count, Invoice.count
-      assert_equal invoice_items_count, InvoiceItem.count
-      assert_equal users_credit_count, UsersCredit.count
-
-      # subscription assertions
-      assert_equal 0, @user_without_subscription.subscriptions.count
-      assert_nil @user_without_subscription.subscribed_plan
-
-      # reservation assertions
-      reservation = Reservation.last
-
-      refute reservation.invoice
-      assert reservation.stp_invoice_id.blank?
-
-      # notification
-      assert_not_empty Notification.where(attached_object: reservation)
-    end
-
     test 'user without subscription reserves a machine with success' do
       machine = Machine.find(6)
       availability = machine.availabilities.first
@@ -383,9 +339,8 @@ module Reservations
       assert_equal transaction.id, invoice.wallet_transaction_id
     end
 
-    test 'user without subscription and with invoicing disabled reserves a machine and pay wallet with success' do
+    test 'user without subscription reserves a machine and pay wallet with success' do
       @vlonchamp = User.find_by(username: 'vlonchamp')
-      @vlonchamp.update!(invoicing_disabled: true)
       machine = Machine.find(6)
       availability = machine.availabilities.first
 
@@ -421,7 +376,7 @@ module Reservations
       # reservation assertions
       reservation = Reservation.last
 
-      refute reservation.invoice
+      assert_not_nil reservation.invoice
       assert reservation.stp_invoice_id.blank?
 
       # notification

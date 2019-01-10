@@ -117,7 +117,6 @@ es:
       body:
         new_account_created: "Se ha creado un nuevo usuario en la web:"
         account_for_organization: "Esta cuenta gestiona una organización :"
-        invoicing_disabled_html: "La generación de facturación para este usuario es <strong>disabled</strong>."
 
     notify_admin_subscribed_plan:
       subject: "Se ha adquirido un plan de suscripción"
@@ -239,13 +238,6 @@ es:
         signaled_by: "marcado por:"
         signaled_on: "marcado el:"
         message: "Mensaje:"
-
-    notify_admin_invoicing_changed:
-      subject: "Se ha cambiado un parámetro de facturación."
-      body:
-        generation_status_html: "Un parámetro de facturación ha sido cambiado <strong>{STATUS, select, true{disabled} other{enabled}}</strong> por el usuario {NAME}."  # messageFormat interpolation
-        disabled: "A partir de ahora, no se emitirá factura cuando el usuario paga en la recepción."
-        enabled: "A partir de ahora, todos los pagos realizados por este usuario en la recepción llevarán a la emisión de facturación. "
 
     notify_user_wallet_is_credited:
       subject: ""                                                                                   #translation_missing

@@ -12,26 +12,6 @@
 </div>
 
 <div class="form-group">
-    <label for="user[invoicing_disabled]" class="control-label col-sm-3" translate>
-      {{ 'disable_invoices_generation' }}
-    </label>
-    <div class="col-sm-2">
-      <input bs-switch
-             ng-model="user.invoicing_disabled"
-             name="user[invoicing_disabled]"
-             type="checkbox"
-             class="form-control"
-             switch-on-text="{{ 'yes' | translate }}"
-             switch-off-text="{{ 'no' | translate }}"
-             switch-animate="true"/>
-      <input type="hidden" name="user[invoicing_disabled]" value="{{user.invoicing_disabled}}">
-    </div>
-    <div class="col-sm-7">
-      <span class="help-block"><i class="fa fa-warning"></i> {{ 'no_more_invoices_will_be_generated_for_' | translate }} <strong translate>{{ '_the_payments_carried_out_at_the_reception_' }}</strong> {{ '_regarding_this_user' | translate }}</span>
-    </div>
-</div>
-
-<div class="form-group">
   <label class="col-sm-2 control-label" translate>{{ 'trainings' }}</label>
   <div class="col-sm-10">
     <input type="hidden" name="user[training_ids][]" value="" />

@@ -264,10 +264,6 @@ pt:
         warning_incomplete_user_profile_probably_imported_from_sso: "Atenção: Esse perfil de usuário está incompleto. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Grupo"
         group_is_required: "Grupo é obrigatório"
-        disable_invoices_generation: "Desativar geração de faturas:"
-        no_more_invoices_will_be_generated_for_: "Mais nenhuma fatura será gerada para"
-        _the_payments_carried_out_at_the_reception_: "os pagamentos efetuados"
-        _regarding_this_user: "sobre este usuário."
         trainings: "Treinamentos"
 
       authentication:
@@ -468,4 +464,3 @@ pt:
           confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
           a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
           none: "Vazio"
-          

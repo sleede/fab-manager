@@ -4,7 +4,9 @@
 - Fix a bug: error handling on machine attachment upload
 - Fix a bug: first day of week is ignored in statistics custom filter
 - Fix a bug: rails DSB locale is invalid
+- Removed ability to disable invoicing for an user
 - Refactored frontend invoices translations
+- Updated RailRoady 1.4.0 to 1.5.3
 
 ## v2.8.1 2019 January 02
 

@@ -267,7 +267,7 @@ class API::MembersController < API::ApiController
                                                                                   address_attributes: %i[id address]]])
 
     elsif current_user.is_admin?
-      params.require(:user).permit(:username, :email, :password, :password_confirmation, :invoicing_disabled,
+      params.require(:user).permit(:username, :email, :password, :password_confirmation,
                                    :is_allow_contact, :is_allow_newsletter, :group_id,
                                    training_ids: [], tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest,
