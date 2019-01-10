@@ -62,4 +62,25 @@ class InvoicesTest < ActionDispatch::IntegrationTest
     assert_equal 'Lorem ipsum', avoir.description
   end
 
+  test 'admin fails generates a refund in closed period' do
+    date = '2015-10-01T13:09:55+01:00'.to_datetime
+
+    post '/api/invoices', { avoir: {
+      avoir_date: date,
+      avoir_mode: 'cash',
+      description: 'Unable to refund',
+      invoice_id: 5,
+      invoice_items_ids: [5],
+      subscription_to_expire: false
+    } }.to_json, default_headers
+
+    # Check response format & status
+    assert_equal 422, response.status, response.body
+    assert_equal Mime::JSON, response.content_type
+
+
+    # Check the error was handled
+    assert_match /#{I18n.t('errors.messages.in_closed_period')}/, response.body
+  end
+
 end
