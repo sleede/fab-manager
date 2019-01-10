@@ -3,3 +3,7 @@
 one:
   slot_id: 1
   reservation_id: 1
+
+two:
+  slot_id: 2
+  reservation_id: 2
