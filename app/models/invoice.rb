@@ -1,3 +1,5 @@
+# Invoice correspond to a single purchase made by an user. This purchase may
+# include reservation(s) and/or a subscription
 class Invoice < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
   require 'fileutils'
@@ -13,20 +15,21 @@ class Invoice < ActiveRecord::Base
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
 
   after_create :update_reference
-  after_commit :generate_and_send_invoice, on: [:create], :if => :persisted?
+  after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
+
+  validates_with ClosedPeriodValidator
 
   def file
     dir = "invoices/#{user.id}"
 
     # create directories if they doesn't exists (invoice & user_id)
-    FileUtils::mkdir_p dir
-    "#{dir}/#{self.filename}"
+    FileUtils.mkdir_p dir
+    "#{dir}/#{filename}"
   end
 
   def filename
-    "#{ENV['INVOICE_PREFIX']}-#{self.id}_#{self.created_at.strftime('%d%m%Y')}.pdf"
+    "#{ENV['INVOICE_PREFIX']}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
   end
-
 
   def generate_reference
     pattern = Setting.find_by(name: 'invoice_reference').value
@@ -62,14 +65,14 @@ class Invoice < ActiveRecord::Base
     reference.gsub!(/DD(?![^\[]*\])/, Time.now.strftime('%-d'))
 
     # information about online selling (X[text])
-    if self.stp_invoice_id
+    if stp_invoice_id
       reference.gsub!(/X\[([^\]]+)\]/, '\1')
     else
       reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
     end
 
     # information about wallet (W[text])
-    #reference.gsub!(/W\[([^\]]+)\]/, ''.to_s)
+    # reference.gsub!(/W\[([^\]]+)\]/, ''.to_s)
 
     # remove information about refunds (R[text])
     reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
@@ -83,7 +86,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def order_number
-    pattern = Setting.find_by({name: 'invoice_order-nb'}).value
+    pattern = Setting.find_by(name: 'invoice_order-nb').value
 
     # global invoice number (nn..nn)
     reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
@@ -103,34 +106,35 @@ class Invoice < ActiveRecord::Base
     end
 
     # full year (YYYY)
-    reference.gsub!(/YYYY(?![^\[]*\])/, self.created_at.strftime('%Y'))
+    reference.gsub!(/YYYY(?![^\[]*\])/, created_at.strftime('%Y'))
     # year without century (YY)
-    reference.gsub!(/YY(?![^\[]*\])/, self.created_at.strftime('%y'))
+    reference.gsub!(/YY(?![^\[]*\])/, created_at.strftime('%y'))
 
-    # abreviated month name (MMM)
-    reference.gsub!(/MMM(?![^\[]*\])/, self.created_at.strftime('%^b'))
+    # abbreviated month name (MMM)
+    reference.gsub!(/MMM(?![^\[]*\])/, created_at.strftime('%^b'))
     # month of the year, zero-padded (MM)
-    reference.gsub!(/MM(?![^\[]*\])/, self.created_at.strftime('%m'))
+    reference.gsub!(/MM(?![^\[]*\])/, created_at.strftime('%m'))
     # month of the year, non zero-padded (M)
-    reference.gsub!(/M(?![^\[]*\])/, self.created_at.strftime('%-m'))
+    reference.gsub!(/M(?![^\[]*\])/, created_at.strftime('%-m'))
 
     # day of the month, zero-padded (DD)
-    reference.gsub!(/DD(?![^\[]*\])/, self.created_at.strftime('%d'))
+    reference.gsub!(/DD(?![^\[]*\])/, created_at.strftime('%d'))
     # day of the month, non zero-padded (DD)
-    reference.gsub!(/DD(?![^\[]*\])/, self.created_at.strftime('%-d'))
+    reference.gsub!(/DD(?![^\[]*\])/, created_at.strftime('%-d'))
 
     reference
   end
 
   # for debug & used by rake task "fablab:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self).render
+    pdf = ::PDF::Invoice.new(self, nil).render
     File.binwrite(file, pdf)
   end
 
   def build_avoir(attrs = {})
-    raise Exception if has_avoir === true or prevent_refund?
-    avoir = Avoir.new(self.dup.attributes)
+    raise Exception if refunded? === true || prevent_refund?
+
+    avoir = Avoir.new(dup.attributes)
     avoir.type = 'Avoir'
     avoir.attributes = attrs
     avoir.reference = nil
@@ -142,15 +146,15 @@ class Invoice < ActiveRecord::Base
     paid_items = 0
     refund_items = 0
     invoice_items.each do |ii|
-      paid_items += 1 unless ii.amount == 0
-      if attrs[:invoice_items_ids].include? ii.id  # list of items to refund (partial refunds)
-        raise Exception if ii.invoice_item  # cannot refund an item that was already refunded
-        refund_items += 1 unless ii.amount == 0
-        avoir_ii = avoir.invoice_items.build(ii.dup.attributes)
-        avoir_ii.created_at = avoir.avoir_date
-        avoir_ii.invoice_item_id = ii.id
-        avoir.total += avoir_ii.amount
-      end
+      paid_items += 1 unless ii.amount.zero?
+      next unless attrs[:invoice_items_ids].include? ii.id # list of items to refund (partial refunds)
+      raise Exception if ii.invoice_item # cannot refund an item that was already refunded
+
+      refund_items += 1 unless ii.amount.zero?
+      avoir_ii = avoir.invoice_items.build(ii.dup.attributes)
+      avoir_ii.created_at = avoir.avoir_date
+      avoir_ii.invoice_item_id = ii.id
+      avoir.total += avoir_ii.amount
     end
     # handle coupon
     unless avoir.coupon_id.nil?
@@ -167,9 +171,9 @@ class Invoice < ActiveRecord::Base
     avoir
   end
 
-  def is_subscription_invoice?
+  def subscription_invoice?
     invoice_items.each do |ii|
-      return true if ii.subscription and !ii.subscription.expired?
+      return true if ii.subscription && !ii.subscription.expired?
     end
     false
   end
@@ -178,7 +182,7 @@ class Invoice < ActiveRecord::Base
   # Test if the current invoice has been refund, totally or partially.
   # @return {Boolean|'partial'}, true means fully refund, false means not refunded
   ##
-  def has_avoir
+  def refunded?
     if avoir
       invoice_items.each do |item|
         return 'partial' unless item.invoice_item
@@ -195,7 +199,7 @@ class Invoice < ActiveRecord::Base
   # @return {Boolean}
   ##
   def prevent_refund?
-    if invoiced_type == 'Reservation' and invoiced.reservable_type == 'Training'
+    if invoiced_type == 'Reservation' && invoiced.reservable_type == 'Training'
       user.trainings.include?(invoiced.reservable_id)
     else
       false
@@ -204,13 +208,15 @@ class Invoice < ActiveRecord::Base
 
   # get amount total paid
   def amount_paid
-    total - (wallet_amount ? wallet_amount : 0)
+    total - (wallet_amount || 0)
   end
 
   private
+
   def generate_and_send_invoice
     unless Rails.env.test?
-      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), invoiced_type(#{invoiced_type}), user_id(#{user_id})"
+      puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \
+           "invoiced_type(#{invoiced_type}), user_id(#{user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
@@ -233,21 +239,21 @@ class Invoice < ActiveRecord::Base
   ##
   def number_of_invoices(range)
     case range.to_s
-      when 'day'
-        start = DateTime.current.beginning_of_day
-        ending = DateTime.current.end_of_day
-      when 'month'
-        start = DateTime.current.beginning_of_month
-        ending = DateTime.current.end_of_month
-      when 'year'
-        start = DateTime.current.beginning_of_year
-        ending = DateTime.current.end_of_year
-      else
-        return self.id
+    when 'day'
+      start = DateTime.current.beginning_of_day
+      ending = DateTime.current.end_of_day
+    when 'month'
+      start = DateTime.current.beginning_of_month
+      ending = DateTime.current.end_of_month
+    when 'year'
+      start = DateTime.current.beginning_of_year
+      ending = DateTime.current.end_of_year
+    else
+      return id
     end
-    if defined? start and defined? ending
-      Invoice.where('created_at >= :start_date AND created_at < :end_date', {start_date: start, end_date: ending}).length
-    end
+    return Invoice.count unless defined? start && defined? ending
+
+    Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
   end
 
 end

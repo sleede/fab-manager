@@ -127,6 +127,9 @@ Rails.application.routes.draw do
     end
     resources :price_categories
     resources :spaces
+    resources :accounting_periods do
+      get 'last_closing_end', on: :collection
+    end
 
     # i18n
     # regex allows using dots in URL for 'state'

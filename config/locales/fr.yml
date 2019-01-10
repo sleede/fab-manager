@@ -36,6 +36,9 @@ fr:
       cannot_be_blank_at_same_time: "ou %{field} doit être rempli(e)"
       cannot_be_in_the_past: "ne peut pas être dans le passé"
       cannot_be_before_previous_value: "ne peut pas être antérieur(e) à la valeur précédente"
+      cannot_overlap: "ne peut pas chevaucher une période comptable existante"
+      cannot_encompass: "ne peut pas englober une période comptable existante"
+      in_closed_period: "ne peut pas être dans une période comptable fermée"
 
   activemodel:
     errors:

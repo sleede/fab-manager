@@ -1,15 +1,13 @@
-
 class API::TagsController < API::ApiController
 
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_tag, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_tag, only: %i[show update destroy]
 
   def index
     @tags = Tag.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Tag

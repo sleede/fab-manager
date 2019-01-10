@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MemebersTest < ActionDispatch::IntegrationTest
+class MembersTest < ActionDispatch::IntegrationTest
 
   # Called before every test method runs. Can be used
   # to set up fixture information.

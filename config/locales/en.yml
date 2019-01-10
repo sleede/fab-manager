@@ -36,6 +36,9 @@ en:
       cannot_be_blank_at_same_time: "cannot be blank when %{field} is blank too"
       cannot_be_in_the_past: "cannot be in the past"
       cannot_be_before_previous_value: "cannot be before the previous value"
+      cannot_overlap: "can't overlap an existing accounting period"
+      cannot_encompass: "can't encompass an existing accounting period"
+      in_closed_period: "can't be within a closed accounting period"
 
   activemodel:
     errors:

@@ -1,0 +1,75 @@
+<div class="modal-header">
+  <h3 class="text-center red" translate>{{ 'invoices.close_accounting_period' }}</h3>
+</div>
+<div class="modal-body">
+  <form name="closePeriodForm" novalidate="novalidate" class="row">
+    <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$invalid }">
+      <label translate>{{ 'invoices.close_from_date' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input type="text"
+               class="form-control"
+               name="start_at"
+               ng-model="period.start_at"
+               uib-datepicker-popup="{{datePicker.format}}"
+               datepicker-options="datePicker.options"
+               is-open="datePicker.startOpened"
+               min-date="datePicker.minDate"
+               max-date="datePicker.maxDate"
+               init-date="period.start_at"
+               placeholder="{{datePicker.format}}"
+               ng-click="openDatePicker($event, 'start')"
+               required/>
+      </div>
+      <span class="help-block" ng-show="closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
+      <span class="help-block error" ng-show="errors.start_at">{{ errors.start_at[0] }}</span>
+    </div>
+    <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$invalid }">
+      <label translate>{{ 'invoices.close_until_date' }}</label>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input type="text"
+               class="form-control"
+               name="end_at"
+               ng-model="period.end_at"
+               uib-datepicker-popup="{{datePicker.format}}"
+               datepicker-options="datePicker.options"
+               is-open="datePicker.endOpened"
+               min-date="datePicker.minDate"
+               max-date="datePicker.maxDate"
+               init-date="period.end_at"
+               placeholder="{{datePicker.format}}"
+               ng-click="openDatePicker($event, 'end')"
+               required/>
+      </div>
+      <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
+      <span class="help-block error" ng-show="errors.end_at">{{ errors.end_at[0] }}</span>
+    </div>
+  </form>
+  <div>
+    <h4 translate>{{ 'invoices.previous_closings' }}</h4>
+    <table class="table closings-table" ng-show="accountingPeriods.length > 0">
+      <thead>
+        <tr>
+          <th translate>{{ 'invoices.start_date' }}</th>
+          <th translate>{{ 'invoices.end_date' }}</th>
+          <th translate>{{ 'invoices.closed_at' }}</th>
+          <th translate>{{ 'invoices.closed_by' }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="period in accountingPeriods">
+          <td>{{period.start_at | amDateFormat:'L'}}</td>
+          <td>{{period.end_at | amDateFormat:'L'}}</td>
+          <td>{{period.closed_at | amDateFormat:'L'}}</td>
+          <td>{{period.user_name}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div ng-show="accountingPeriods.length === 0" translate>{{ 'invoices.no_periods'}}</div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="closePeriodForm.$invalid" translate>{{ 'confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+</div>

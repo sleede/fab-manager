@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Abuse.
+# Typical action is an user reporting an abuse on a project
 class API::AbusesController < API::ApiController
   before_action :authenticate_user!, except: :create
 

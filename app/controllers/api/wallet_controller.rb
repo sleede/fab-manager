@@ -29,6 +29,7 @@ class API::WalletController < API::ApiController
   end
 
   private
+
   def credit_params
     params.permit(:id, :amount, :avoir, :avoir_date, :avoir_description)
   end

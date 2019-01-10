@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'invoices', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
-  function ($scope, $state, Invoice, invoices, $uibModal, growl, $filter, Setting, settings, _t) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
+  function ($scope, $state, Invoice, AccountingPeriod, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -105,12 +105,13 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * @param invoice {Object} invoice inherited from angular's $resource
      */
     $scope.generateAvoirForInvoice = function (invoice) {
-    // open modal
+      // open modal
       const modalInstance = $uibModal.open({
         templateUrl: '<%= asset_path "admin/invoices/avoirModal.html" %>',
         controller: 'AvoirModalController',
         resolve: {
-          invoice () { return invoice; }
+          invoice () { return invoice; },
+          closedPeriods() { return AccountingPeriod.query().$promise; }
         }
       });
 
@@ -119,7 +120,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         $scope.invoices.unshift(res.avoir);
         return Invoice.get({ id: invoice.id }, function (data) {
           invoice.has_avoir = data.has_avoir;
-          return growl.success(_t('refund_invoice_successfully_created'));
+          return growl.success(_t('invoices.refund_invoice_successfully_created'));
         });
       });
     };
@@ -193,10 +194,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_reference' }, { value: model }, function (data) {
           $scope.invoice.reference.model = model;
-          growl.success(_t('invoice_reference_successfully_saved'));
+          growl.success(_t('invoices.invoice_reference_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_invoice_reference'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_invoice_reference'));
           console.error(error);
         });
       });
@@ -231,24 +232,24 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         Setting.update({ name: 'invoice_code-value' }, { value: result.model }, function (data) {
           $scope.invoice.code.model = result.model;
           if (result.active) {
-            return growl.success(_t('invoicing_code_succesfully_saved'));
+            return growl.success(_t('invoices.invoicing_code_succesfully_saved'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_invoicing_code'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_the_invoicing_code'));
           return console.error(error);
         });
 
         return Setting.update({ name: 'invoice_code-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
           $scope.invoice.code.active = result.active;
           if (result.active) {
-            return growl.success(_t('code_successfully_activated'));
+            return growl.success(_t('invoices.code_successfully_activated'));
           } else {
-            return growl.success(_t('code_successfully_disabled'));
+            return growl.success(_t('invoices.code_successfully_disabled'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_activating_the_invoicing_code'));
+          growl.error(_t('invoices.an_error_occurred_while_activating_the_invoicing_code'));
           return console.error(error);
         });
       });
@@ -277,10 +278,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return modalInstance.result.then(function (model) {
         Setting.update({ name: 'invoice_order-nb' }, { value: model }, function (data) {
           $scope.invoice.number.model = model;
-          return growl.success(_t('order_number_successfully_saved'));
+          return growl.success(_t('invoices.order_number_successfully_saved'));
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_order_number'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_the_order_number'));
           return console.error(error);
         });
       });
@@ -316,24 +317,24 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         Setting.update({ name: 'invoice_VAT-rate' }, { value: result.rate + '' }, function (data) {
           $scope.invoice.VAT.rate = result.rate;
           if (result.active) {
-            return growl.success(_t('VAT_rate_successfully_saved'));
+            return growl.success(_t('invoices.VAT_rate_successfully_saved'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_saving_the_VAT_rate'));
+          growl.error(_t('invoices.an_error_occurred_while_saving_the_VAT_rate'));
           return console.error(error);
         });
 
         return Setting.update({ name: 'invoice_VAT-active' }, { value: result.active ? 'true' : 'false' }, function (data) {
           $scope.invoice.VAT.active = result.active;
           if (result.active) {
-            return growl.success(_t('VAT_successfully_activated'));
+            return growl.success(_t('invoices.VAT_successfully_activated'));
           } else {
-            return growl.success(_t('VAT_successfully_disabled'));
+            return growl.success(_t('invoices.VAT_successfully_disabled'));
           }
         }
         , function (error) {
-          growl.error(_t('an_error_occurred_while_activating_the_VAT'));
+          growl.error(_t('invoices.an_error_occurred_while_activating_the_VAT'));
           return console.error(error);
         });
       });
@@ -346,10 +347,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       const parsed = parseHtml($scope.invoice.text.content);
       return Setting.update({ name: 'invoice_text' }, { value: parsed }, function (data) {
         $scope.invoice.text.content = parsed;
-        return growl.success(_t('text_successfully_saved'));
+        return growl.success(_t('invoices.text_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('an_error_occurred_while_saving_the_text'));
+        growl.error(_t('invoices.an_error_occurred_while_saving_the_text'));
         return console.error(error);
       });
     };
@@ -361,10 +362,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       const parsed = parseHtml($scope.invoice.legals.content);
       return Setting.update({ name: 'invoice_legals' }, { value: parsed }, function (data) {
         $scope.invoice.legals.content = parsed;
-        return growl.success(_t('address_and_legal_information_successfully_saved'));
+        return growl.success(_t('invoices.address_and_legal_information_successfully_saved'));
       }
       , function (error) {
-        growl.error(_t('an_error_occurred_while_saving_the_address_and_the_legal_information'));
+        growl.error(_t('invoices.an_error_occurred_while_saving_the_address_and_the_legal_information'));
         return console.error(error);
       });
     };
@@ -386,6 +387,37 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       $scope.page += 1;
       return invoiceSearch(true);
     };
+
+    /**
+     * Open a modal allowing the user to close an accounting period and to
+     * view all periods already closed.
+     */
+    $scope.closeAnAccountingPeriod = function() {
+      // open modal
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/invoices/closePeriodModal.html" %>',
+        controller: 'ClosePeriodModalController',
+        size: 'lg',
+        resolve: {
+          periods() { return AccountingPeriod.query().$promise; },
+          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; },
+        }
+      });
+    }
+
+    /**
+     * Test if the given date is within a closed accounting period
+     * @param date {Date} date to test
+     * @returns {boolean} true if closed, false otherwise
+     */
+    $scope.isDateClosed = function(date) {
+      for (const period of closedPeriods) {
+        if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
+          return true;
+        }
+      }
+      return false;
+    }
 
     /* PRIVATE SCOPE */
 
@@ -418,9 +450,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return Setting.update(
             { name: 'invoice_logo' },
             { value: $scope.invoice.logo.base64 },
-            function (data) { growl.success(_t('logo_successfully_saved')); },
+            function (data) { growl.success(_t('invoices.logo_successfully_saved')); },
             function (error) {
-              growl.error(_t('an_error_occurred_while_saving_the_logo'));
+              growl.error(_t('invoices.an_error_occurred_while_saving_the_logo'));
               return console.error(error);
             }
           );
@@ -496,9 +528,9 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'Invoice', 'growl', '_t',
-  function ($scope, $uibModalInstance, invoice, Invoice, growl, _t) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'closedPeriods', 'Invoice', 'growl', '_t',
+  function ($scope, $uibModalInstance, invoice, closedPeriods, Invoice, growl, _t) {
+    /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
     $scope.invoice = invoice;
@@ -515,11 +547,11 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
 
     // Possible refunding methods
     $scope.avoirModes = [
-      { name: _t('none'), value: 'none' },
-      { name: _t('by_cash'), value: 'cash' },
-      { name: _t('by_cheque'), value: 'cheque' },
-      { name: _t('by_transfer'), value: 'transfer' },
-      { name: _t('by_wallet'), value: 'wallet' }
+      { name: _t('invoices.none'), value: 'none' },
+      { name: _t('invoices.by_cash'), value: 'cash' },
+      { name: _t('invoices.by_cheque'), value: 'cheque' },
+      { name: _t('invoices.by_transfer'), value: 'transfer' },
+      { name: _t('invoices.by_wallet'), value: 'wallet' }
     ];
 
     // If a subscription was took with the current invoice, should it be canceled or not
@@ -542,14 +574,14 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
     $scope.openDatePicker = function ($event) {
       $event.preventDefault();
       $event.stopPropagation();
-      return $scope.datePicker.opened = true;
+      $scope.datePicker.opened = true;
     };
 
     /**
      * Validate the refunding and generate a refund invoice
      */
     $scope.ok = function () {
-    // check that at least 1 element of the invoice is refunded
+      // check that at least 1 element of the invoice is refunded
       $scope.avoir.invoice_items_ids = [];
       for (let itemId in $scope.partial) {
         const refundItem = $scope.partial[itemId];
@@ -557,7 +589,7 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       }
 
       if ($scope.avoir.invoice_items_ids.length === 0) {
-        return growl.error(_t('you_must_select_at_least_one_element_to_create_a_refund'));
+        return growl.error(_t('invoices.you_must_select_at_least_one_element_to_create_a_refund'));
       } else {
         return Invoice.save(
           { avoir: $scope.avoir },
@@ -565,16 +597,30 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
             $uibModalInstance.close({ avoir, invoice: $scope.invoice });
           },
           function (err) { // failed
-            growl.error(_t('unable_to_create_the_refund'));
+            growl.error(_t('invoices.unable_to_create_the_refund'));
           }
         );
       }
     };
 
-    /**q
+    /**
      * Cancel the refund, dismiss the modal window
      */
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+    /**
+     * Test if the given date is within a closed accounting period
+     * @param date {Date} date to test
+     * @returns {boolean} true if closed, false otherwise
+     */
+    $scope.isDateClosed = function(date) {
+      for (const period of closedPeriods) {
+        if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
+          return true;
+        }
+      }
+      return false;
+    }
 
     /* PRIVATE SCOPE */
 
@@ -592,11 +638,98 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       });
 
       if (invoice.stripe) {
-        return $scope.avoirModes.push({ name: _t('online_payment'), value: 'stripe' });
+        return $scope.avoirModes.push({ name: _t('invoices.online_payment'), value: 'stripe' });
       }
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
+  }
+]);
+
+
+/**
+ * Controller used in the modal window allowing an admin to close an accounting period
+ */
+Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
+  function ($scope, $uibModalInstance, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
+    const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
+    const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
+
+    /* PUBLIC SCOPE */
+
+    // date pickers values are bound to these variables
+    $scope.period = {
+      start_at: LAST_CLOSING,
+      end_at: YESTERDAY
+    };
+
+    // any form errors will come here
+    $scope.errors = {};
+
+    // existing closed periods, provided by the API
+    $scope.accountingPeriods = periods;
+
+    // AngularUI-Bootstrap datepickers parameters to define the period to close
+    $scope.datePicker = {
+      format: Fablab.uibDateFormat,
+      // default: datePicker are not shown
+      startOpened: false,
+      endOpened: false,
+      minDate: LAST_CLOSING,
+      maxDate: YESTERDAY,
+      options: {
+        startingDay: Fablab.weekStartingDay
+      }
+    };
+
+    /**
+     * Callback to open the datepicker
+     */
+    $scope.openDatePicker = function ($event, pickerId) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.datePicker[`${pickerId}Opened`] = true;
+    };
+
+    /**
+     * Validate the close period creation
+     */
+    $scope.ok = function () {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('invoices.confirmation_required'),
+                msg: _t(
+                  'invoices.confirm_close_START_END',
+                  { START: moment($scope.period.start_at).format('LL'), END: moment($scope.period.end_at).format('LL') }
+                )
+              };
+            }
+          }
+        },
+        function () { // creation confirmed
+          AccountingPeriod.save({ accounting_period: $scope.period }, function (resp) {
+            growl.success(_t(
+              'invoices.period_START_END_closed_success',
+              { START: moment(resp.start_at).format('LL'), END: moment(resp.end_at).format('LL') }
+            ));
+            $uibModalInstance.close(resp);
+          }
+          , function(error) {
+            growl.error(_t('invoices.failed_to_close_period'));
+            $scope.errors = error.data;
+          });
+        }
+      );
+
+    };
+
+    /**
+     * Cancel the refund, dismiss the modal window
+     */
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
   }
 ]);

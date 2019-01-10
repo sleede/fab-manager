@@ -885,6 +885,7 @@ angular.module('application.router', ['ui.router'])
               query: { number: '', customer: '', date: null, order_by: '-reference', page: 1, size: 20 }
             }).$promise;
           }],
+          closedPeriods: [ 'AccountingPeriod', function(AccountingPeriod) { return AccountingPeriod.query().$promise; }],
           translations: ['Translations', function (Translations) { return Translations.query('app.admin.invoices').$promise; }]
         }
       })
