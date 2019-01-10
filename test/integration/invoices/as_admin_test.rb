@@ -80,7 +80,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
 
 
     # Check the error was handled
-    assert_match /#{I18n.t('errors.messages.in_closed_period')}/, response.body
+    assert_match(/#{I18n.t('errors.messages.in_closed_period')}/, response.body)
   end
 
 end

@@ -15,8 +15,6 @@ class AccountingPeriod < ActiveRecord::Base
     false
   end
 
-  private
-
   def archive_file
     dir = 'accounting'
 
@@ -24,6 +22,8 @@ class AccountingPeriod < ActiveRecord::Base
     FileUtils.mkdir_p dir
     "#{dir}/#{start_at.iso8601}_#{end_at.iso8601}.json"
   end
+
+  private
 
   def to_json_archive(invoices)
     ApplicationController.new.view_context.render(
