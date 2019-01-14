@@ -43,7 +43,7 @@ class API::MembersController < API::ApiController
 
 
     # if the user is created by an admin and the authentication is made through an SSO, generate a migration token
-    if current_user.is_admin? and AuthProvider.active.providable_type != DatabaseProvider.name
+    if current_user.admin? and AuthProvider.active.providable_type != DatabaseProvider.name
       @member.generate_auth_migration_token
     end
 
@@ -226,7 +226,7 @@ class API::MembersController < API::ApiController
                    .where("users.is_active = 'true' AND roles.name = 'member'")
                    .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
 
-    if current_user.is_member?
+    if current_user.member?
       # non-admin can only retrieve users with "public profiles"
       @members = @members.where("users.is_allow_contact = 'true'")
     else
@@ -266,7 +266,7 @@ class API::MembersController < API::ApiController
                                                         organization_attributes: [:id, :name,
                                                                                   address_attributes: %i[id address]]])
 
-    elsif current_user.is_admin?
+    elsif current_user.admin?
       params.require(:user).permit(:username, :email, :password, :password_confirmation,
                                    :is_allow_contact, :is_allow_newsletter, :group_id,
                                    training_ids: [], tag_ids: [],

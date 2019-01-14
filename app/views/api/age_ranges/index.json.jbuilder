@@ -1,4 +1,4 @@
-user_is_admin = (current_user and current_user.is_admin?)
+user_is_admin = (current_user and current_user.admin?)
 
 json.array!(@age_ranges) do |ar|
   json.extract! ar, :id, :name

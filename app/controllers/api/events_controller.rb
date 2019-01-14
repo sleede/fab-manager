@@ -11,7 +11,7 @@ class API::EventsController < API::ApiController
     @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
     @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
 
-    if current_user and current_user.is_admin?
+    if current_user and current_user.admin?
       case params[:scope]
         when 'future'
           @events = @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at DESC')

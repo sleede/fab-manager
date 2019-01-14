@@ -1,6 +1,6 @@
 class LicencePolicy < ApplicationPolicy
   def create?
-    user.is_admin?
+    user.admin?
   end
 
   def update?

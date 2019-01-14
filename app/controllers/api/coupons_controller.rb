@@ -24,7 +24,7 @@ class API::CouponsController < API::ApiController
     if @coupon.nil?
       render json: {status: 'rejected'}, status: :not_found
     else
-      if !current_user.is_admin?
+      if !current_user.admin?
         _user_id = current_user.id
       else
         _user_id = params[:user_id]

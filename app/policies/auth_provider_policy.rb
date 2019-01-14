@@ -8,7 +8,7 @@ class AuthProviderPolicy < ApplicationPolicy
 
   %w(index? show? create? update? destroy? mapping_fields?).each do |action|
     define_method action do
-      user.is_admin?
+      user.admin?
     end
   end
 

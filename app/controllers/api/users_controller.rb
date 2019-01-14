@@ -2,7 +2,7 @@ class API::UsersController < API::ApiController
   before_action :authenticate_user!
 
   def index
-    if current_user.is_admin? && params[:role] == 'partner'
+    if current_user.admin? && params[:role] == 'partner'
       @users = User.with_role(:partner).includes(:profile)
     else
       head 403
@@ -10,7 +10,7 @@ class API::UsersController < API::ApiController
   end
 
   def create
-    if current_user.is_admin?
+    if current_user.admin?
       generated_password = Devise.friendly_token.first(8)
       @user = User.new(email: partner_params[:email],
                        username: "#{partner_params[:first_name]}#{partner_params[:last_name]}",

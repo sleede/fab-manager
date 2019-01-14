@@ -1,7 +1,7 @@
 class EventThemePolicy < ApplicationPolicy
   %w(create update destroy show).each do |action|
     define_method "#{action}?" do
-      user.is_admin?
+      user.admin?
     end
   end
 end

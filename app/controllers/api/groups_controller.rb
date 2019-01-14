@@ -2,7 +2,7 @@ class API::GroupsController < API::ApiController
   before_action :authenticate_user!, except: :index
 
   def index
-    if current_user and current_user.is_admin?
+    if current_user and current_user.admin?
       @groups = Group.all
     else
       @groups = Group.where.not(slug: 'admins')

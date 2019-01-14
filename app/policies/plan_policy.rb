@@ -1,13 +1,13 @@
 class PlanPolicy < ApplicationPolicy
   def create?
-    user.is_admin?
+    user.admin?
   end
 
   def update?
-    user.is_admin?
+    user.admin?
   end
 
   def destroy?
-    user.is_admin? and record.destroyable?
+    user.admin? and record.destroyable?
   end
 end

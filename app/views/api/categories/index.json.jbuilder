@@ -1,4 +1,4 @@
-user_is_admin = (current_user and current_user.is_admin?)
+user_is_admin = (current_user and current_user.admin?)
 
 json.array!(@categories) do |category|
   json.extract! category, :id, :name

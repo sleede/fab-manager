@@ -1,7 +1,7 @@
 class EventPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.nil? or (user and !user.is_admin?)
+      if user.nil? or (user and !user.admin?)
         scope.includes(:event_image, :event_files, :availability, :category)
              .where('availabilities.start_at >= ?', Time.now)
              .order('availabilities.start_at ASC')
@@ -14,7 +14,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def create?
-    user.is_admin?
+    user.admin?
   end
 
   def update?

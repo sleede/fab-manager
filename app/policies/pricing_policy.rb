@@ -1,5 +1,5 @@
 class PricingPolicy < ApplicationPolicy
   def update?
-    user.is_admin?
+    user.admin?
   end
 end
