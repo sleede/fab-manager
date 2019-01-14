@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2019&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2020&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
-        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.15.0-43-generic (buildd@lgw01-amd64-001) (gcc version 7.3.0 (Ubuntu
+        7.3.0-16ubuntu3)) #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -33,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 11 Dec 2018 14:04:29 GMT
+      - Mon, 14 Jan 2019 11:42:47 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '785'
+      - '784'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_3VyUgAbHTiYVrQ
+      - req_Jxf4S3XQgcvLox
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1DgBqb2sOmf47Nz9uP7G3juR",
+          "id": "tok_1DsTq72sOmf47Nz9Fvcffmpm",
           "object": "token",
           "card": {
-            "id": "card_1DgBqb2sOmf47Nz96tJjyyVu",
+            "id": "card_1DsTq72sOmf47Nz9KI65N7O8",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -80,7 +80,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2019,
+            "exp_year": 2020,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -89,14 +89,14 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "92.157.28.112",
-          "created": 1544537069,
+          "client_ip": "90.112.130.7",
+          "created": 1547466167,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Tue, 11 Dec 2018 14:04:29 GMT
+  recorded_at: Mon, 14 Jan 2019 11:42:47 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8Di1wjdVktv5kt&limit=100
@@ -118,8 +118,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
-        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.15.0-43-generic (buildd@lgw01-amd64-001) (gcc version 7.3.0 (Ubuntu
+        7.3.0-16ubuntu3)) #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -128,11 +128,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 11 Dec 2018 14:04:30 GMT
+      - Mon, 14 Jan 2019 11:42:48 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '26109'
+      - '33366'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -148,7 +148,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_Yo2BY24Szrwe7e
+      - req_aG09SEjdDrV6qi
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -159,6 +159,282 @@ http_interactions:
         {
           "object": "list",
           "data": [
+            {
+              "id": "ii_1DsTpn2sOmf47Nz9D7QIV2Vk",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1547466147,
+              "description": "Formation Imprimante 3D January 15, 2019 07:00 - 11:00 AM",
+              "discountable": true,
+              "invoice": "in_1DsTpr2sOmf47Nz9PvFIi018",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1547466147,
+                "start": 1547466147
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
+            },
+            {
+              "id": "ii_1DsTpW2sOmf47Nz9UdnFFuqb",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1547466130,
+              "description": "FORM1+ imprimante 3D January 14, 2019 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DsTpa2sOmf47Nz9zehQCFWK",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1547466130,
+                "start": 1547466130
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
+            },
+            {
+              "id": "ii_1DsTpJ2sOmf47Nz9u4MLj5yY",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1547466117,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1DsTpM2sOmf47Nz93hYuLL9r",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1547466117,
+                "start": 1547466117
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
+            },
+            {
+              "id": "ii_1DsTpI2sOmf47Nz9VJeA5IHU",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1547466116,
+              "description": "FORM1+ imprimante 3D January 14, 2019 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DsTpM2sOmf47Nz93hYuLL9r",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1547466116,
+                "start": 1547466116
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
+            },
+            {
+              "id": "ii_1DgCTw2sOmf47Nz95uABI45R",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544539508,
+              "description": "Formation Imprimante 3D December 12, 2018 07:00 - 08:00 AM",
+              "discountable": true,
+              "invoice": "in_1DluoO2sOmf47Nz9V2L8zpfE",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544539508,
+                "start": 1544539508
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
+            },
+            {
+              "id": "ii_1DgCTU2sOmf47Nz9z4nYVvzI",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544539480,
+              "description": "Formation Imprimante 3D December 12, 2018 07:00 - 11:00 AM",
+              "discountable": true,
+              "invoice": "in_1DgCTa2sOmf47Nz9OQObCBN1",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544539480,
+                "start": 1544539480
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
+            },
+            {
+              "id": "ii_1DgCTH2sOmf47Nz9zfFiQ6GS",
+              "object": "invoiceitem",
+              "amount": 3200,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544539467,
+              "description": "FORM1+ imprimante 3D December 11, 2018 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DgCTM2sOmf47Nz9xHYzEocU",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544539467,
+                "start": 1544539467
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 3200
+            },
+            {
+              "id": "ii_1DgCSt2sOmf47Nz9Daz4op8v",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544539443,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1DgCSx2sOmf47Nz9hR2EiyN2",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544539443,
+                "start": 1544539443
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
+            },
+            {
+              "id": "ii_1DgCSs2sOmf47Nz96miC4GeC",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544539442,
+              "description": "FORM1+ imprimante 3D December 11, 2018 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DgCSx2sOmf47Nz9hR2EiyN2",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544539442,
+                "start": 1544539442
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
+            },
+            {
+              "id": "ii_1DgBrQ2sOmf47Nz9KroQ2LOG",
+              "object": "invoiceitem",
+              "amount": 5100,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544537120,
+              "description": "Formation Imprimante 3D December 12, 2018 07:00 - 11:00 AM",
+              "discountable": true,
+              "invoice": "in_1DgBrV2sOmf47Nz9TlpwehNz",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544537120,
+                "start": 1544537120
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 5100
+            },
+            {
+              "id": "ii_1DgBqi2sOmf47Nz9ZJEZbjPP",
+              "object": "invoiceitem",
+              "amount": -675,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544537076,
+              "description": "coupon SUNNYFABLAB",
+              "discountable": false,
+              "invoice": "in_1DgBqm2sOmf47Nz9EQHAqXU4",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544537076,
+                "start": 1544537076
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": -675
+            },
+            {
+              "id": "ii_1DgBqh2sOmf47Nz9y4io6YMf",
+              "object": "invoiceitem",
+              "amount": 1500,
+              "currency": "usd",
+              "customer": "cus_8Di1wjdVktv5kt",
+              "date": 1544537075,
+              "description": "FORM1+ imprimante 3D December 11, 2018 13:00 - 02:00 PM",
+              "discountable": true,
+              "invoice": "in_1DgBqm2sOmf47Nz9EQHAqXU4",
+              "livemode": false,
+              "metadata": {
+              },
+              "period": {
+                "end": 1544537075,
+                "start": 1544537075
+              },
+              "plan": null,
+              "proration": false,
+              "quantity": 1,
+              "subscription": null,
+              "unit_amount": 1500
+            },
             {
               "id": "ii_1DgBqQ2sOmf47Nz98Cb2yhy4",
               "object": "invoiceitem",
@@ -1153,13 +1429,13 @@ http_interactions:
           "url": "/v1/invoiceitems"
         }
     http_version: 
-  recorded_at: Tue, 11 Dec 2018 14:04:30 GMT
+  recorded_at: Mon, 14 Jan 2019 11:42:49 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8Di1wjdVktv5kt&amount=5100&currency=usd&description=Formation+Imprimante+3D+December+12%2C+2018+07%3A00+-+08%3A00+AM
+      string: customer=cus_8Di1wjdVktv5kt&amount=5100&currency=usd&description=Formation+Imprimante+3D+January+15%2C+2019+07%3A00+-+08%3A00+AM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1175,10 +1451,10 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
-        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.15.0-43-generic (buildd@lgw01-amd64-001) (gcc version 7.3.0 (Ubuntu
+        7.3.0-16ubuntu3)) #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
-      - '129'
+      - '128'
   response:
     status:
       code: 200
@@ -1187,11 +1463,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 11 Dec 2018 14:04:31 GMT
+      - Mon, 14 Jan 2019 11:42:49 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '498'
+      - '497'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -1207,7 +1483,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_JmSDzAwcDw0qH7
+      - req_ss22o4moEGsURY
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1216,21 +1492,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1DgBqd2sOmf47Nz9wFID7G8F",
+          "id": "ii_1DsTq92sOmf47Nz9qmv54LrJ",
           "object": "invoiceitem",
           "amount": 5100,
           "currency": "usd",
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1544537071,
-          "description": "Formation Imprimante 3D December 12, 2018 07:00 - 08:00 AM",
+          "date": 1547466169,
+          "description": "Formation Imprimante 3D January 15, 2019 07:00 - 08:00 AM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {
           },
           "period": {
-            "end": 1544537071,
-            "start": 1544537071
+            "end": 1547466169,
+            "start": 1547466169
           },
           "plan": null,
           "proration": false,
@@ -1239,5 +1515,5 @@ http_interactions:
           "unit_amount": 5100
         }
     http_version: 
-  recorded_at: Tue, 11 Dec 2018 14:04:31 GMT
+  recorded_at: Mon, 14 Jan 2019 11:42:49 GMT
 recorded_with: VCR 3.0.1

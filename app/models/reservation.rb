@@ -369,18 +369,8 @@ class Reservation < ActiveRecord::Base
   end
 
   def save_with_local_payment(coupon_code = nil)
-    if valid?
-      ### generate invoice only for calcul price, TODO refactor!!
-      build_invoice(user: user)
-      generate_invoice_items(true, coupon_code)
-      @wallet_amount_debit = wallet_amount_debit
-      self.invoice = nil
-      ###
-
-      save!
-      UsersCredits::Manager.new(reservation: self).update_credits
-      return true
-    end
+    build_invoice(user: user)
+    generate_invoice_items(true, coupon_code)
 
     return false unless valid?
 
@@ -496,9 +486,6 @@ class Reservation < ActiveRecord::Base
     # wallet debit success
     raise DebitWalletError unless wallet_transaction
 
-    return unless stp_invoice_id
-
-    # payment by online
     invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
   end
 

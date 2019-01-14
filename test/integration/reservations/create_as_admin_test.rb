@@ -365,8 +365,8 @@ module Reservations
       # general assertions
       assert_equal 201, response.status
       assert_equal reservations_count + 1, Reservation.count
-      assert_equal invoice_count, Invoice.count
-      assert_equal invoice_items_count, InvoiceItem.count
+      assert_equal invoice_count + 1, Invoice.count
+      assert_equal invoice_items_count + 1, InvoiceItem.count
       assert_equal users_credit_count, UsersCredit.count
 
       # subscription assertions
