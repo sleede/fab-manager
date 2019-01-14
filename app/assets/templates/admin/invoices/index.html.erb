@@ -388,6 +388,26 @@
                     <input id="vatRate" type="number" ng-model="rate" class="form-control" min="0" max="100"/>
                 </div>
             </div>
+
+          <div class="m-t-lg">
+            <h4 translate>{{ 'invoices.VAT_history' }}</h4>
+            <table class="table">
+              <head>
+                <tr>
+                  <th translate>{{ 'invoices.VAT_rate' }}</th>
+                  <th translate>{{ 'invoices.changed_at' }}</th>
+                  <th translate>{{ 'invoices.changed_by' }}</th>
+                </tr>
+              </head>
+              <tbody>
+                <tr ng-repeat="value in history">
+                  <td>{{value.value}} %</td>
+                  <td>{{value.created_at | amDateFormat:'L LT'}}</td>
+                  <td>{{value.user.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
