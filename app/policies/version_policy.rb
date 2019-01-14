@@ -1,5 +1,5 @@
 class VersionPolicy < ApplicationPolicy
   def show?
-    user.is_admin?
+    user.admin?
   end
 end

@@ -1,9 +1,9 @@
 class SubscriptionPolicy < ApplicationPolicy
   def show?
-    user.is_admin? or record.user_id == user.id
+    user.admin? or record.user_id == user.id
   end
 
   def update?
-    user.is_admin?
+    user.admin?
   end
 end

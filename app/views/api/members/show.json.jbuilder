@@ -1,7 +1,7 @@
 requested_current = (current_user and current_user.id == @member.id)
 
 json.partial! 'api/members/member', member: @member
-json.extract! @member, :uid, :slug, :invoicing_disabled, :is_allow_contact, :is_allow_newsletter
+json.extract! @member, :uid, :slug, :is_allow_contact, :is_allow_newsletter
 
 json.training_ids @member.training_ids
 json.trainings @member.trainings do |t|

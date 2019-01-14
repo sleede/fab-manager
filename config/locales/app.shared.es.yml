@@ -264,10 +264,6 @@ es:
         warning_incomplete_user_profile_probably_imported_from_sso: "Advertencia: Este perfil de usuario está incompleto. Como el método de autenticación SSO está activo, puede que la cuenta sea importada pero no fusionada. No la modifique a no ser que sepa lo que hace."
         group: "Grupo"
         group_is_required: "Se requiere un grupo"
-        disable_invoices_generation: "Desactivar generación de facturas:"
-        no_more_invoices_will_be_generated_for_: "No se generarán más facturas para"
-        _the_payments_carried_out_at_the_reception_: "El pago se efectuará en la entrada"
-        _regarding_this_user: "con respecto a este usuario."
         trainings: "Cursos"
 
       authentication:

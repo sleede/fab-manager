@@ -142,14 +142,12 @@ class Subscription < ActiveRecord::Base
       # debit wallet
       wallet_transaction = debit_user_wallet
 
-      unless user.invoicing_disabled?
-        invoc = generate_invoice(nil, coupon_code)
-        if wallet_transaction
-          invoc.wallet_amount = @wallet_amount_debit
-          invoc.wallet_transaction_id = wallet_transaction.id
-        end
-        invoc.save
+      invoc = generate_invoice(nil, coupon_code)
+      if wallet_transaction
+        invoc.wallet_amount = @wallet_amount_debit
+        invoc.wallet_transaction_id = wallet_transaction.id
       end
+      invoc.save
     end
     true
   end

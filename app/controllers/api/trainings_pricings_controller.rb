@@ -6,7 +6,7 @@ class API::TrainingsPricingsController < API::ApiController
   end
 
   def update
-    if current_user.is_admin?
+    if current_user.admin?
       @trainings_pricing = TrainingsPricing.find(params[:id])
       _trainings_pricing_params = trainings_pricing_params
       _trainings_pricing_params[:amount] = _trainings_pricing_params[:amount] * 100

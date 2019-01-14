@@ -139,14 +139,14 @@ class API::AvailabilitiesController < API::ApiController
             else
               current_user
             end
-    @current_user_role = current_user.is_admin? ? 'admin' : 'user'
+    @current_user_role = current_user.admin? ? 'admin' : 'user'
     @machine = Machine.friendly.find(params[:machine_id])
     @slots = []
     @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @machine.class.to_s, @machine.id)
                                .includes(:slots, user: [:profile])
                                .references(:slots, :user)
                                .where('slots.start_at > ?', Time.now)
-    if @user.is_admin?
+    if @user.admin?
       @availabilities = @machine.availabilities.includes(:tags)
                             .where("end_at > ? AND available_type = 'machines'", Time.now)
                             .where(lock: false)
@@ -201,7 +201,7 @@ class API::AvailabilitiesController < API::ApiController
 
     # who made the request?
     # 1) an admin (he can see all future availabilities)
-    if current_user.is_admin?
+    if current_user.admin?
       @availabilities = @availabilities.includes(:tags, :slots, trainings: [:machines])
                             .where('availabilities.start_at > ?', Time.now)
                             .where(lock: false)
@@ -227,13 +227,13 @@ class API::AvailabilitiesController < API::ApiController
             else
               current_user
             end
-    @current_user_role = current_user.is_admin? ? 'admin' : 'user'
+    @current_user_role = current_user.admin? ? 'admin' : 'user'
     @space = Space.friendly.find(params[:space_id])
     @slots = []
     @reservations = Reservation.where('reservable_type = ? and reservable_id = ?', @space.class.to_s, @space.id)
                         .includes(:slots, user: [:profile]).references(:slots, :user)
                         .where('slots.start_at > ?', Time.now)
-    if current_user.is_admin?
+    if current_user.admin?
       @availabilities = @space.availabilities.includes(:tags)
                             .where("end_at > ? AND available_type = 'space'", Time.now)
                             .where(lock: false)

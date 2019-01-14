@@ -117,7 +117,6 @@ pt:
       body:
         new_account_created: "Uma nova conta de usuário foi criada no site:"
         account_for_organization: "Esta conta gerencia uma organização:"
-        invoicing_disabled_html: "A geração de faturamento é <strong>desativado</strong> por esse usuário."
 
     notify_admin_subscribed_plan:
       subject: "Uma assinatura foi comprada"
@@ -240,13 +239,6 @@ pt:
         signaled_by: "sinalizado por:"
         signaled_on: "sinalizado em:"
         message: "Menssagem:"
-
-    notify_admin_invoicing_changed:
-      subject: "Um parâmetro de faturamento foi alterado"
-      body:
-        generation_status_html: "A emissão de faturas foi <strong>{STATUS, select, true{desativada} other{ativado}}</strong> para o usuário {NAME}."  # messageFormat interpolation
-        disabled: "De agora em diante, nenhuma fatura será emitida quando o usuário paga na recepção."
-        enabled: "A partir de agora, todos os pagamentos efectuados por este utilizador na recepção levarão à. "
 
     notify_user_wallet_is_credited:
       subject: "Sua carteira foi creditada"

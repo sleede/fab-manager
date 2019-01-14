@@ -264,10 +264,6 @@ fr:
         warning_incomplete_user_profile_probably_imported_from_sso: "Attention : Le profil de cet utilisateur est incomplet. Comme l'authentification \"single sign-on\" (SSO) est actuellement activée, il s'agit probablement d'un compte importé mais non fusionné. N'y apportez aucune modification sauf si vous savez ce que vous faites."
         group: "Groupe"
         group_is_required: "Le groupe est requis."
-        disable_invoices_generation: "Désactiver la génération de factures :"
-        no_more_invoices_will_be_generated_for_: "Plus aucune facture ne sera générée pour"
-        _the_payments_carried_out_at_the_reception_: "les paiement effectués à l'accueil"
-        _regarding_this_user: "pour cet utilisateur."
         trainings: "Formations"
 
       authentication:

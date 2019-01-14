@@ -1,6 +1,6 @@
 class CreditPolicy < ApplicationPolicy
   def index?
-    user.is_admin?
+    user.admin?
   end
 
   def create?

@@ -1,4 +1,4 @@
-user_is_admin = (current_user and current_user.is_admin?)
+user_is_admin = (current_user and current_user.admin?)
 
 json.array!(@event_themes) do |theme|
   json.extract! theme, :id, :name

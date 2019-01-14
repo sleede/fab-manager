@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2019&card[cvc]=314
+      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2020&card[cvc]=314
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.19.8-arch1-1-ARCH (builduser@heftig-1129) (gcc version 8.2.1 20181127
-        (GCC)) #1 SMP PREEMPT Sat Dec 8 13:49:11 UTC 2018","hostname":"Sylvain-desktop"}'
+        version 4.15.0-43-generic (buildd@lgw01-amd64-001) (gcc version 7.3.0 (Ubuntu
+        7.3.0-16ubuntu3)) #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '81'
   response:
@@ -33,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 11 Dec 2018 14:03:36 GMT
+      - Mon, 14 Jan 2019 11:43:30 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '785'
+      - '784'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_IR7v65Z8yE1MXV
+      - req_2a90irDPhEzxVV
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1DgBpk2sOmf47Nz96loe84j5",
+          "id": "tok_1DsTqo2sOmf47Nz9Zz27SZ6R",
           "object": "token",
           "card": {
-            "id": "card_1DgBpk2sOmf47Nz9uyHEKYDj",
+            "id": "card_1DsTqo2sOmf47Nz9hKOB4d5U",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -80,7 +80,7 @@ http_interactions:
             "cvc_check": "unchecked",
             "dynamic_last4": null,
             "exp_month": 4,
-            "exp_year": 2019,
+            "exp_year": 2020,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
             "last4": "4242",
@@ -89,12 +89,12 @@ http_interactions:
             "name": null,
             "tokenization_method": null
           },
-          "client_ip": "92.157.28.112",
-          "created": 1544537016,
+          "client_ip": "90.112.130.7",
+          "created": 1547466210,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Tue, 11 Dec 2018 14:03:36 GMT
+  recorded_at: Mon, 14 Jan 2019 11:43:30 GMT
 recorded_with: VCR 3.0.1

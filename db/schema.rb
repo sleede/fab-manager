@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107111749) do
+ActiveRecord::Schema.define(version: 20190110150532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -804,7 +804,6 @@ ActiveRecord::Schema.define(version: 20190107111749) do
     t.string   "username",               limit: 255
     t.string   "slug",                   limit: 255
     t.boolean  "is_active",                          default: true
-    t.boolean  "invoicing_disabled",                 default: false
     t.string   "provider"
     t.string   "uid"
     t.string   "auth_token"

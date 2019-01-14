@@ -1,9 +1,9 @@
 class AdminPolicy < ApplicationPolicy
   def index?
-    user.is_admin?
+    user.admin?
   end
 
   def create?
-    user.is_admin?
+    user.admin?
   end
 end

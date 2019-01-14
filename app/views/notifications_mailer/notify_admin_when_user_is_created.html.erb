@@ -5,7 +5,3 @@
 <% if @attached_object.profile.organization %>
   <p><%= t('.body.account_for_organization') %> <%= @attached_object.profile.organization.name %></p>
 <% end %>
-
-<% if @attached_object.invoicing_disabled? %>
-  <p><%= t('.body.invoicing_disabled_html') %></p>
-<% end %>
