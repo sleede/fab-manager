@@ -17,6 +17,7 @@ class API::SettingsController < API::ApiController
 
   def show
     @setting = Setting.find_or_create_by(name: params[:name])
+    @show_history = params[:history] == 'true' && current_user.admin?
   end
 
   private

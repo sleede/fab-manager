@@ -301,11 +301,15 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           },
           active () {
             return $scope.invoice.VAT.active;
+          },
+          history () {
+            return Setting.get({ name: 'invoice_VAT-rate', history: true }).$promise;
           }
         },
-        controller: ['$scope', '$uibModalInstance', 'rate', 'active', function ($scope, $uibModalInstance, rate, active) {
+        controller: ['$scope', '$uibModalInstance', 'rate', 'active', 'history', function ($scope, $uibModalInstance, rate, active, history) {
           $scope.rate = rate;
           $scope.isSelected = active;
+          $scope.history = history.setting.history;
 
           $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }); };
           return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
