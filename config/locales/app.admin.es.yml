@@ -367,6 +367,7 @@ es:
           VAT_history: "Historial de ratios de IVA"
           changed_at: "Cambiado en"
           changed_by: "Por"
+          deleted_user: "Usario eliminado"
           refund_invoice_successfully_created: "Factura de reembolso creada correctamente."
           create_a_refund_on_this_invoice: "Crear un reembolso en esta factura"
           creation_date_for_the_refund: "Fecha de creación del reembolso"

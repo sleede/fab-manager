@@ -399,7 +399,7 @@
                 <tr ng-repeat="value in history">
                   <td>{{value.value}} %</td>
                   <td>{{value.created_at | amDateFormat:'L LT'}}</td>
-                  <td>{{value.user.name}}</td>
+                  <td>{{value.user.name}}<span class="no-user-label" ng-hide="value.user" translate>{{ 'invoices.deleted_user' }}</span></td>
                 </tr>
               </tbody>
             </table>

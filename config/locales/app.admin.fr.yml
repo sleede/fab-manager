@@ -367,6 +367,7 @@ fr:
           VAT_history: "Historique des taux de TVA"
           changed_at: "Changé le"
           changed_by: "Par"
+          deleted_user: "Utilisateur supprimé"
           refund_invoice_successfully_created: "La facture d'avoir a bien été créée."
           create_a_refund_on_this_invoice: "Générer un avoir sur cette facture"
           creation_date_for_the_refund: "Date d'émission de l'avoir"
