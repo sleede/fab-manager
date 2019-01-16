@@ -211,6 +211,7 @@ pt:
         plan_form:
           general_information: "Informação geral"
           name: "Nome"
+          name_is_required: "Nome é obrigatório."
           name_length_must_be_less_than_24_characters: "O nome deve conter no máximo 24 caracteres."
           type: "Tipo"
           type_is_required: "Tipo é obrigatório."

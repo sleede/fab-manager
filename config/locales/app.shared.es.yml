@@ -211,6 +211,7 @@ es:
         plan_form:
           general_information: "Información general"
           name: "Nombre"
+          name_is_required: "Se requiere un nombre."
           name_length_must_be_less_than_24_characters: "el nombre debe contener menos de 24 caracteres."
           type: "Tipo"
           type_is_required: "Se requiere un tipo."
