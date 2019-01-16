@@ -1,12 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Group
+# Groups are used for categorizing Users
 class API::GroupsController < API::ApiController
   before_action :authenticate_user!, except: :index
 
   def index
-    if current_user and current_user.admin?
-      @groups = Group.all
-    else
-      @groups = Group.where.not(slug: 'admins')
-    end
+    @groups = if current_user&.admin?
+                Group.all
+              else
+                Group.where.not(slug: 'admins')
+              end
 
   end
 
@@ -39,7 +43,7 @@ class API::GroupsController < API::ApiController
 
   private
 
-    def group_params
-      params.require(:group).permit(:name, :disabled)
-    end
+  def group_params
+    params.require(:group).permit(:name, :disabled)
+  end
 end

@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Component
+# Components are used in Projects
 class API::ComponentsController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_component, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_component, only: %i[show update destroy]
 
   def index
     @components = Component.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Component
@@ -35,11 +38,12 @@ class API::ComponentsController < API::ApiController
   end
 
   private
-    def set_component
-      @component = Component.find(params[:id])
-    end
 
-    def component_params
-      params.require(:component).permit(:name)
-    end
+  def set_component
+    @component = Component.find(params[:id])
+  end
+
+  def component_params
+    params.require(:component).permit(:name)
+  end
 end

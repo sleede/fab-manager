@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Subscription
 class API::SubscriptionsController < API::ApiController
   include FablabConfiguration
 
@@ -64,7 +67,7 @@ class API::SubscriptionsController < API::ApiController
     params.require(:subscription).permit(:expired_at)
   end
 
-  # TODO refactor subscriptions logic and move this in model/validator
+  # TODO, refactor subscriptions logic and move this in model/validator
   def valid_card_token?(token)
     Stripe::Token.retrieve(token)
   rescue Stripe::InvalidRequestError => e

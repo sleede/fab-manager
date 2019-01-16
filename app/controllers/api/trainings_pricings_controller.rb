@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for managing Training prices
 class API::TrainingsPricingsController < API::ApiController
   before_action :authenticate_user!
 
@@ -8,9 +11,9 @@ class API::TrainingsPricingsController < API::ApiController
   def update
     if current_user.admin?
       @trainings_pricing = TrainingsPricing.find(params[:id])
-      _trainings_pricing_params = trainings_pricing_params
-      _trainings_pricing_params[:amount] = _trainings_pricing_params[:amount] * 100
-      if @trainings_pricing.update(_trainings_pricing_params)
+      trainings_pricing_parameters = trainings_pricing_params
+      trainings_pricing_parameters[:amount] = trainings_pricing_parameters[:amount] * 100
+      if @trainings_pricing.update(trainings_pricing_parameters)
         render status: :ok
       else
         render status: :unprocessable_entity

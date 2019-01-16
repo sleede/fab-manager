@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Space
 class API::SpacesController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   respond_to :json
 
   def index
@@ -38,12 +41,14 @@ class API::SpacesController < API::ApiController
   end
 
   private
-    def get_space
-      Space.friendly.find(params[:id])
-    end
 
-    def space_params
-      params.require(:space).permit(:name, :description, :characteristics, :default_places, :disabled, space_image_attributes: [:attachment],
-                                      space_files_attributes: [:id, :attachment, :_destroy])
-    end
+  def get_space
+    Space.friendly.find(params[:id])
+  end
+
+  def space_params
+    params.require(:space).permit(:name, :description, :characteristics, :default_places, :disabled,
+                                  space_image_attributes: [:attachment],
+                                  space_files_attributes: %i[id attachment _destroy])
+  end
 end

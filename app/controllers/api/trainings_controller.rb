@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Training
 class API::TrainingsController < API::ApiController
   include ApplicationHelper
 
@@ -7,14 +10,12 @@ class API::TrainingsController < API::ApiController
   def index
     @requested_attributes = params[:requested_attributes]
     @trainings = policy_scope(Training)
-    if params[:public_page]
-      @trainings = @trainings.where(public_page: true)
-    end
+    @trainings = @trainings.where(public_page: true) if params[:public_page]
 
-    if attribute_requested?(@requested_attributes, 'availabilities')
-      @trainings = @trainings.includes(availabilities: [slots: [reservation: [user: %i[profile trainings]]]])
-                             .order('availabilities.start_at DESC')
-    end
+    return unless attribute_requested?(@requested_attributes, 'availabilities')
+
+    @trainings = @trainings.includes(availabilities: [slots: [reservation: [user: %i[profile trainings]]]])
+                           .order('availabilities.start_at DESC')
   end
 
   def show

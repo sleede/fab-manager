@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Notification
+# Notifications are scoped by user
 class API::NotificationsController < API::ApiController
   include NotifyWith::NotificationsApi
   before_action :authenticate_user!
@@ -12,8 +16,8 @@ class API::NotificationsController < API::ApiController
       break unless delete_obsoletes(@notifications)
     end
     @totals = {
-        total: current_user.notifications.count,
-        unread: current_user.notifications.where(is_read: false).count
+      total: current_user.notifications.count,
+      unread: current_user.notifications.where(is_read: false).count
     }
     render :index
   end
@@ -25,17 +29,19 @@ class API::NotificationsController < API::ApiController
       break unless delete_obsoletes(@notifications)
     end
     @totals = {
-        total: current_user.notifications.count,
-        unread: current_user.notifications.where(is_read: false).count
+      total: current_user.notifications.count,
+      unread: current_user.notifications.where(is_read: false).count
     }
     render :index
   end
 
   def polling
-    @notifications = current_user.notifications.where('is_read = false AND created_at >= :date', date: params[:last_poll]).order('created_at DESC')
+    @notifications = current_user.notifications
+                                 .where('is_read = false AND created_at >= :date', date: params[:last_poll])
+                                 .order('created_at DESC')
     @totals = {
-        total: current_user.notifications.count,
-        unread: current_user.notifications.where(is_read: false).count
+      total: current_user.notifications.count,
+      unread: current_user.notifications.where(is_read: false).count
     }
     render :index
   end
@@ -45,7 +51,7 @@ class API::NotificationsController < API::ApiController
   def delete_obsoletes(notifications)
     cleaned = false
     notifications.each do |n|
-      if !Module.const_get(n.attached_object_type) or !n.attached_object
+      if !Module.const_get(n.attached_object_type) || !n.attached_object
         n.destroy!
         cleaned = true
       end

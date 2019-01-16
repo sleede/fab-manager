@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Reservation
+# Reservations are used for Training, Machine, Space and Event
 class API::ReservationsController < API::ApiController
   before_action :authenticate_user!
   before_action :set_reservation, only: %i[show update]
@@ -46,6 +50,7 @@ class API::ReservationsController < API::ApiController
   end
 
   private
+
   def set_reservation
     @reservation = Reservation.find(params[:id])
   end

@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type PriceCategory
+# PriceCategories are used in Events
 class API::PriceCategoriesController < API::ApiController
-  before_action :authenticate_user!, only: [:update, :show, :create, :destroy]
-  before_action :set_price_category, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: %i[update show create destroy]
+  before_action :set_price_category, only: %i[show update destroy]
 
   def index
     @price_categories = PriceCategory.all
@@ -15,8 +19,7 @@ class API::PriceCategoriesController < API::ApiController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize PriceCategory
@@ -38,6 +41,7 @@ class API::PriceCategoriesController < API::ApiController
   end
 
   private
+
   def set_price_category
     @price_category = PriceCategory.find(params[:id])
   end
