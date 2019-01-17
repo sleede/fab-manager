@@ -39,7 +39,7 @@ class Availabilities::AvailabilitiesService
   def spaces(space_id, user)
     space = Space.friendly.find(space_id)
     reservations = reservations(space)
-    availabilities = availabilities(machine, 'machines', user)
+    availabilities = availabilities(space, 'space', user)
 
     slots = []
     availabilities.each do |a|
@@ -72,11 +72,11 @@ class Availabilities::AvailabilitiesService
     reservations = reservations.joins(:slots).where('slots.start_at > ?', Time.now)
 
     # visible availabilities depends on multiple parameters
-    availabilities = training_availabilities(training_id, @user)
+    availabilities = training_availabilities(training_id, user)
 
     # finally, we merge the availabilities with the reservations
     availabilities.each do |a|
-      a.merge!(@service.training_event_reserved_status(a, reservations, user))
+      a = @service.training_event_reserved_status(a, reservations, user)
     end
   end
 
@@ -117,7 +117,7 @@ class Availabilities::AvailabilitiesService
 
   def training_availabilities(training_id, user)
     availabilities = if training_id.is_number? || (training_id.length.positive? && training_id != 'all')
-                       Training.friendly.find(params[:training_id]).availabilities
+                       Training.friendly.find(training_id).availabilities
                      else
                        Availability.trainings
                      end

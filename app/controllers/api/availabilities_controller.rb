@@ -28,7 +28,7 @@ class API::AvailabilitiesController < API::ApiController
                                .where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
 
     machine_ids = params[:m] || []
-    service = PublicAvailabilitiesService.new(current_user)
+    service = Availabilities::PublicAvailabilitiesService.new(current_user)
     @availabilities = service.public_availabilities(
       start_date,
       end_date,
@@ -75,19 +75,19 @@ class API::AvailabilitiesController < API::ApiController
   def machine
     @current_user_role = current_user.admin? ? 'admin' : 'user'
 
-    service = AvailabilitiesService(current_user, other: @visi_max_other, year: @visi_max_year)
+    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
     @slots = service.machines(params[:machine_id], user)
   end
 
   def trainings
-    service = AvailabilitiesService(current_user, other: @visi_max_other, year: @visi_max_year)
-    @availabilities = service.trainings(params[:training_id], @user)
+    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
+    @availabilities = service.trainings(params[:training_id], user)
   end
 
   def spaces
     @current_user_role = current_user.admin? ? 'admin' : 'user'
 
-    service = AvailabilitiesService(current_user, other: @visi_max_other, year: @visi_max_year)
+    service = Availabilities::AvailabilitiesService.new(current_user, other: @visi_max_other, year: @visi_max_year)
     @slots = service.spaces(params[:space_id], user)
   end
 
@@ -148,16 +148,6 @@ class API::AvailabilitiesController < API::ApiController
     params.require(:lock)
   end
 
-  def reserved?(start_at, reservations)
-    is_reserved = false
-    reservations.each do |r|
-      r.slots.each do |s|
-        is_reserved = true if s.start_at == start_at
-      end
-    end
-    is_reserved
-  end
-
   def filter_availabilites(availabilities)
     availabilities_filtered = []
     availabilities.to_ary.each do |a|
@@ -191,7 +181,7 @@ class API::AvailabilitiesController < API::ApiController
   end
 
   def remove_completed?(availability)
-    params[:dispo] == 'false' && (availability.reserved? || (availability.try(:completed?) && availability.completed?))
+    params[:dispo] == 'false' && (availability.is_reserved || (availability.try(:completed?) && availability.completed?))
   end
 
   def define_max_visibility

@@ -57,7 +57,7 @@ class Availabilities::PublicAvailabilitiesService
           space: space,
           title: space.name
         )
-        slot = @service.space_reserved_status(slot, reservations, @current_user, @user_role)
+        slot = @service.space_reserved_status(slot, reservations, @current_user)
         slots << slot
       end
     end
@@ -88,7 +88,7 @@ class Availabilities::PublicAvailabilitiesService
                            .where(lock: false)
       avails.each do |a|
         if a.available_type == 'training' || a.available_type == 'event'
-          a.merge!(@service.training_event_reserved_status(a, reservations, user))
+          a = @service.training_event_reserved_status(a, reservations, @current_user)
         elsif a.available_type == 'space'
           a.is_reserved = @service.reserved_availability?(a, @current_user)
         end
