@@ -1,12 +1,13 @@
 # Changelog Fab Manager
 
+- Removed ability to disable invoicing for an user
+- Fixed a missing translation in plan form
 - Fix a bug: error handling on password recovery
 - Fix a bug: error handling on machine attachment upload
 - Fix a bug: first day of week is ignored in statistics custom filter
 - Fix a bug: rails DSB locale is invalid
 - Fix a bug: unable to delete an admin who has changed a setting
 - Fix a bug: unable to create/edit a plan of 12 months or 52 weeks
-- Removed ability to disable invoicing for an user
 - Refactored frontend invoices translations
 - Updated RailRoady 1.4.0 to 1.5.3
 
