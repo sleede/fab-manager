@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "2.8.1",
+  "version": "2.8.2-dev",
   "description": "FabManager is the FabLab management solution. It is web-based, open-source and totally free.",
   "keywords": [
     "fablab",
