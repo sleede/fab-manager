@@ -1,7 +1,5 @@
-max_members = @query.except(:offset, :limit, :order).count
-
 json.array!(@members) do |member|
-  json.maxMembers max_members
+  json.maxMembers @max_members
   json.id member.id
   json.email member.email if current_user
   json.profile do
@@ -13,7 +11,9 @@ json.array!(@members) do |member|
   json.group do
     json.name member.group.name
   end
-  json.subscribed_plan do
-    json.partial! 'api/shared/plan', plan: member.subscribed_plan
-  end if member.subscribed_plan
+  if member.subscribed_plan
+    json.subscribed_plan do
+      json.partial! 'api/shared/plan', plan: member.subscribed_plan
+    end
+  end
 end

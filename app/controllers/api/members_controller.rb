@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type User with role 'member'
 class API::MembersController < API::ApiController
   before_action :authenticate_user!, except: [:last_subscribed]
-  before_action :set_member, only: [:update, :destroy, :merge]
+  before_action :set_member, only: %i[update destroy merge]
   respond_to :json
 
   def index
     @requested_attributes = params[:requested_attributes]
     @query = policy_scope(User)
 
-    unless params[:page].nil? and params[:size].nil?
-      @query = @query.page(params[:page].to_i).per(params[:size].to_i)
-    end
+    @query = @query.page(params[:page].to_i).per(params[:size].to_i) unless params[:page].nil? && params[:size].nil?
 
     # remove unmerged profiles from list
     @members = @query.to_a
@@ -17,7 +18,11 @@ class API::MembersController < API::ApiController
   end
 
   def last_subscribed
-    @query = User.active.with_role(:member).includes(profile: [:user_avatar]).where('is_allow_contact = true AND confirmed_at IS NOT NULL').order('created_at desc').limit(params[:last])
+    @query = User.active.with_role(:member)
+                 .includes(profile: [:user_avatar])
+                 .where('is_allow_contact = true AND confirmed_at IS NOT NULL')
+                 .order('created_at desc')
+                 .limit(params[:last])
 
     # remove unmerged profiles from list
     @members = @query.to_a
@@ -34,27 +39,11 @@ class API::MembersController < API::ApiController
 
   def create
     authorize User
-    if !user_params[:password] and !user_params[:password_confirmation]
-      generated_password = Devise.friendly_token.first(8)
-      @member = User.new(user_params.merge(password: generated_password).permit!)
-    else
-      @member = User.new(user_params.permit!)
-    end
 
+    @member = User.new(user_params.permit!)
+    members_service = Members::MembersService.new(@member)
 
-    # if the user is created by an admin and the authentication is made through an SSO, generate a migration token
-    if current_user.admin? and AuthProvider.active.providable_type != DatabaseProvider.name
-      @member.generate_auth_migration_token
-    end
-
-    if @member.save
-      @member.generate_subscription_invoice
-      @member.send_confirmation_instructions
-      if !user_params[:password] and !user_params[:password_confirmation]
-        UsersMailer.delay.notify_user_account_created(@member, generated_password)
-      else
-        UsersMailer.delay.notify_user_account_created(@member, user_params[:password])
-      end
+    if members_service.create(current_user, user_params)
       render :show, status: :created, location: member_path(@member)
     else
       render json: @member.errors, status: :unprocessable_entity
@@ -63,21 +52,14 @@ class API::MembersController < API::ApiController
 
   def update
     authorize @member
-    members_service = MembersService.new(@member)
+    members_service = Members::MembersService.new(@member)
 
-    if user_params[:group_id] && @member.group_id != user_params[:group_id].to_i && !@member.subscribed_plan.nil?
-      # here a group change is requested but unprocessable, handle the exception
-      @member.errors[:group_id] = t('members.unable_to_change_the_group_while_a_subscription_is_running')
-      render json: @member.errors, status: :unprocessable_entity
+    if members_service.update(user_params)
+      # Update password without logging out
+      sign_in(@member, bypass: true) unless current_user.id != params[:id].to_i
+      render :show, status: :ok, location: member_path(@member)
     else
-      # otherwise, run the user update
-      if members_service.update(user_params)
-        # Update password without logging out
-        sign_in(@member, bypass: true) unless current_user.id != params[:id].to_i
-        render :show, status: :ok, location: member_path(@member)
-      else
-        render json: @member.errors, status: :unprocessable_entity
-      end
+      render json: @member.errors, status: :unprocessable_entity
     end
   end
 
@@ -92,9 +74,11 @@ class API::MembersController < API::ApiController
   def export_subscriptions
     authorize :export
 
-    export = Export.where(category:'users', export_type: 'subscriptions').where('created_at > ?', Subscription.maximum('updated_at')).last
+    export = Export.where(category: 'users', export_type: 'subscriptions')
+                   .where('created_at > ?', Subscription.maximum('updated_at'))
+                   .last
     if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new(category:'users', export_type: 'subscriptions', user: current_user)
+      @export = Export.new(category: 'users', export_type: 'subscriptions', user: current_user)
       if @export.save
         render json: { export_id: @export.id }, status: :ok
       else
@@ -111,7 +95,7 @@ class API::MembersController < API::ApiController
   def export_reservations
     authorize :export
 
-    export = Export.where(category:'users', export_type: 'reservations')
+    export = Export.where(category: 'users', export_type: 'reservations')
                    .where('created_at > ?', Reservation.maximum('updated_at'))
                    .last
     if export.nil? || !FileTest.exist?(export.file)
@@ -131,11 +115,11 @@ class API::MembersController < API::ApiController
   def export_members
     authorize :export
 
-    export = Export.where(category:'users', export_type: 'members')
+    export = Export.where(category: 'users', export_type: 'members')
                    .where('created_at > ?', User.with_role(:member).maximum('updated_at'))
                    .last
     if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new(category:'users', export_type: 'members', user: current_user)
+      @export = Export.new(category: 'users', export_type: 'members', user: current_user)
       if @export.save
         render json: { export_id: @export.id }, status: :ok
       else
@@ -148,16 +132,15 @@ class API::MembersController < API::ApiController
     end
   end
 
+  # the user is querying to be mapped to his already existing account
   def merge
     authorize @member
 
-    # here the user query to be mapped to his already existing account
-
-    token = params.require(:user).permit(:auth_token)[:auth_token]
+    token = token_param
 
     @account = User.find_by(auth_token: token)
     if @account
-      members_service = MembersService.new(@account)
+      members_service = Members::MembersService.new(@account)
       begin
         if members_service.merge_from_sso(@member)
           @member = @account
@@ -168,7 +151,8 @@ class API::MembersController < API::ApiController
           render json: @member.errors, status: :unprocessable_entity
         end
       rescue DuplicateIndexError => error
-        render json: { error: t('members.please_input_the_authentication_code_sent_to_the_address', EMAIL: error.message) }, status: :unprocessable_entity
+        render json: { error: t('members.please_input_the_authentication_code_sent_to_the_address', EMAIL: error.message) },
+               status: :unprocessable_entity
       end
     else
       render json: { error: t('members.your_authentication_code_is_not_valid') }, status: :unprocessable_entity
@@ -178,67 +162,17 @@ class API::MembersController < API::ApiController
   def list
     authorize User
 
-    p = params.require(:query).permit(:search, :order_by, :page, :size)
+    render json: { error: 'page must be an integer' }, status: :unprocessable_entity and return unless query_params[:page].is_a? Integer
+    render json: { error: 'size must be an integer' }, status: :unprocessable_entity and return unless query_params[:size].is_a? Integer
 
-
-    render json: {error: 'page must be an integer'}, status: :unprocessable_entity unless p[:page].is_a? Integer
-
-    render json: {error: 'size must be an integer'}, status: :unprocessable_entity unless p[:size].is_a? Integer
-
-
-    direction = (p[:order_by][0] == '-' ? 'DESC' : 'ASC')
-    order_key = (p[:order_by][0] == '-' ? p[:order_by][1, p[:order_by].size] : p[:order_by])
-
-    order_key = case order_key
-                when 'last_name'
-                  'profiles.last_name'
-                when 'first_name'
-                  'profiles.first_name'
-                when 'email'
-                  'users.email'
-                when 'phone'
-                  'profiles.phone'
-                when 'group'
-                  'groups.name'
-                when 'plan'
-                  'plans.base_name'
-                else
-                  'users.id'
-                end
-
-    @query = User.includes(:profile, :group, :subscriptions)
-                 .joins(:profile, :group, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"  LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
-                 .where("users.is_active = 'true' AND roles.name = 'member'")
-                 .order("#{order_key} #{direction}")
-                 .page(p[:page])
-                 .per(p[:size])
-
-    # ILIKE => PostgreSQL case-insensitive LIKE
-    @query = @query.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search OR profiles.phone ILIKE :search OR email ILIKE :search OR groups.name ILIKE :search OR plans.base_name ILIKE :search', search: "%#{p[:search]}%") if p[:search].size > 0
-
-    @members = @query.to_a
+    query = Members::ListService.list(query_params)
+    @max_members = query.except(:offset, :limit, :order).count
+    @members = query.to_a
 
   end
 
   def search
-    @members = User.includes(:profile)
-                   .joins(:profile, :roles, 'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id"')
-                   .where("users.is_active = 'true' AND roles.name = 'member'")
-                   .where("lower(f_unaccent(profiles.first_name)) ~ regexp_replace(:search, E'\\\\s+', '|') OR lower(f_unaccent(profiles.last_name)) ~ regexp_replace(:search, E'\\\\s+', '|')", search: params[:query].downcase)
-
-    if current_user.member?
-      # non-admin can only retrieve users with "public profiles"
-      @members = @members.where("users.is_allow_contact = 'true'")
-    else
-      # only admins have the ability to filter by subscription
-      if params[:subscription] == 'true'
-        @members = @members.where('subscriptions.id IS NOT NULL AND subscriptions.expiration_date >= :now', now: Date.today.to_s)
-      elsif params[:subscription] == 'false'
-        @members = @members.where('subscriptions.id IS NULL OR subscriptions.expiration_date < :now', now: Date.today.to_s)
-      end
-    end
-
-    @members = @members.to_a
+    @members = Members::ListService.search(current_user, params[:query], params[:subscription])
   end
 
   def mapping
@@ -280,5 +214,13 @@ class API::MembersController < API::ApiController
                                                                                   address_attributes: %i[id address]]])
 
     end
+  end
+
+  def token_param
+    params.require(:user).permit(:auth_token)[:auth_token]
+  end
+
+  def query_params
+    params.require(:query).permit(:search, :order_by, :page, :size)
   end
 end
