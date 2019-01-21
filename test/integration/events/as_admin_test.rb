@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Events
   class AsAdminTest < ActionDispatch::IntegrationTest
 
@@ -11,16 +12,16 @@ module Events
       # First, we create a new event
       post '/api/events',
            {
-               event: {
-                   title: 'OpenLab discovery day',
-                   description: 'A day to discover the Fablab and try its machines and possibilities.',
-                   start_date: 1.week.from_now.utc,
-                   start_time: 1.week.from_now.utc.change({hour: 16}),
-                   end_date: 1.week.from_now.utc,
-                   end_time: 1.week.from_now.utc.change({hour: 20}),
-                   category_id: Category.first.id,
-                   amount: 0
-               }
+             event: {
+               title: 'OpenLab discovery day',
+               description: 'A day to discover the Fablab and try its machines and possibilities.',
+               start_date: 1.week.from_now.utc,
+               start_time: 1.week.from_now.utc.change(hour: 16),
+               end_date: 1.week.from_now.utc,
+               end_time: 1.week.from_now.utc.change(hour: 20),
+               category_id: Category.first.id,
+               amount: 0
+             }
            }.to_json,
            default_headers
 
@@ -38,18 +39,16 @@ module Events
 
       # Then, modify the event to set a nb of places
       put "/api/events/#{e.id}",
-          {
-              event: {
-                  title: 'OpenLab discovery day',
-                  description: 'A day to discover the Fablab and try its machines and possibilities.',
-                  start_date: 1.week.from_now.utc,
-                  start_time: 1.week.from_now.utc.change({hour: 16}),
-                  end_date: 1.week.from_now.utc,
-                  end_time: 1.week.from_now.utc.change({hour: 20}),
-                  category_id: Category.first.id,
-                  amount: 0,
-                  nb_total_places: 10
-              }
+          event: {
+            title: 'OpenLab discovery day',
+            description: 'A day to discover the Fablab and try its machines and possibilities.',
+            start_date: 1.week.from_now.utc,
+            start_time: 1.week.from_now.utc.change(hour: 16),
+            end_date: 1.week.from_now.utc,
+            end_time: 1.week.from_now.utc.change(hour: 20),
+            category_id: Category.first.id,
+            amount: 0,
+            nb_total_places: 10
           }
 
       # Check response format & status
@@ -63,23 +62,23 @@ module Events
 
       # Now, let's make a reservation on this event
       post '/api/reservations',
-          {
-              reservation: {
-                  user_id: User.find_by(username: 'pdurand').id,
-                  reservable_id: e.id,
-                  reservable_type: 'Event',
-                  nb_reserve_places: 2,
-                  slots_attributes: [
-                      {
-                          start_at: e.availability.start_at,
-                          end_at: e.availability.end_at,
-                          availability_id: e.availability.id,
-                          offered: false
-                      }
-                  ]
-              }
-          }.to_json,
-          default_headers
+           {
+             reservation: {
+               user_id: User.find_by(username: 'pdurand').id,
+               reservable_id: e.id,
+               reservable_type: 'Event',
+               nb_reserve_places: 2,
+               slots_attributes: [
+                 {
+                   start_at: e.availability.start_at,
+                   end_at: e.availability.end_at,
+                   availability_id: e.availability.id,
+                   offered: false
+                 }
+               ]
+             }
+           }.to_json,
+           default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
@@ -91,18 +90,16 @@ module Events
 
       # Finally, modify the event to add some places
       put "/api/events/#{e.id}",
-          {
-              event: {
-                  title: 'OpenLab discovery day',
-                  description: 'A day to discover the Fablab and try its machines and possibilities.',
-                  start_date: 1.week.from_now.utc,
-                  start_time: 1.week.from_now.utc.change({hour: 16}),
-                  end_date: 1.week.from_now.utc,
-                  end_time: 1.week.from_now.utc.change({hour: 20}),
-                  category_id: Category.first.id,
-                  amount: 0,
-                  nb_total_places: 20
-              }
+          event: {
+            title: 'OpenLab discovery day',
+            description: 'A day to discover the Fablab and try its machines and possibilities.',
+            start_date: 1.week.from_now.utc,
+            start_time: 1.week.from_now.utc.change(hour: 16),
+            end_date: 1.week.from_now.utc,
+            end_time: 1.week.from_now.utc.change(hour: 20),
+            category_id: Category.first.id,
+            amount: 0,
+            nb_total_places: 20
           }
 
       # Check response format & status
@@ -122,23 +119,23 @@ module Events
       # First, we create a new event
       post '/api/events',
            {
-               event: {
-                   title: 'Electronics initiation',
-                   description: 'A workshop about electronics and the abilities to create robots.',
-                   start_date: 1.week.from_now.utc + 2.days,
-                   start_time: 1.week.from_now.utc.change({hour: 18}) + 2.days,
-                   end_date: 1.week.from_now.utc + 2.days,
-                   end_time: 1.week.from_now.utc.change({hour: 22}) + 2.days,
-                   category_id: Category.last.id,
-                   amount: 20,
-                   nb_total_places: 10,
-                   event_price_categories_attributes: [
-                       {
-                          price_category_id: price_category.id.to_s,
-                          amount: 16.to_s
-                       }
-                   ]
-               }
+             event: {
+               title: 'Electronics initiation',
+               description: 'A workshop about electronics and the abilities to create robots.',
+               start_date: 1.week.from_now.utc + 2.days,
+               start_time: 1.week.from_now.utc.change(hour: 18) + 2.days,
+               end_date: 1.week.from_now.utc + 2.days,
+               end_time: 1.week.from_now.utc.change(hour: 22) + 2.days,
+               category_id: Category.last.id,
+               amount: 20,
+               nb_total_places: 10,
+               event_price_categories_attributes: [
+                 {
+                   price_category_id: price_category.id.to_s,
+                   amount: 16.to_s
+                 }
+               ]
+             }
            }.to_json,
            default_headers
 
@@ -159,26 +156,26 @@ module Events
       # Now, let's make a reservation on this event
       post '/api/reservations',
            {
-               reservation: {
-                   user_id: User.find_by(username: 'lseguin').id,
-                   reservable_id: e.id,
-                   reservable_type: 'Event',
-                   nb_reserve_places: 4,
-                   slots_attributes: [
-                       {
-                           start_at: e.availability.start_at,
-                           end_at: e.availability.end_at,
-                           availability_id: e.availability.id,
-                           offered: false
-                       }
-                   ],
-                   tickets_attributes: [
-                       {
-                           event_price_category_id: e.event_price_categories.first.id,
-                           booked: 4
-                       }
-                   ]
-               }
+             reservation: {
+               user_id: User.find_by(username: 'lseguin').id,
+               reservable_id: e.id,
+               reservable_type: 'Event',
+               nb_reserve_places: 4,
+               slots_attributes: [
+                 {
+                   start_at: e.availability.start_at,
+                   end_at: e.availability.end_at,
+                   availability_id: e.availability.id,
+                   offered: false
+                 }
+               ],
+               tickets_attributes: [
+                 {
+                   event_price_category_id: e.event_price_categories.first.id,
+                   booked: 4
+                 }
+               ]
+             }
            }.to_json,
            default_headers
 

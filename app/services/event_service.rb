@@ -4,7 +4,7 @@
 class EventService
   def self.process_params(params)
     # handle dates & times (whole-day events or not, maybe during many days)
-    range = EventService.date_range({date: params[:start_date], time: params[:start_time] },
+    range = EventService.date_range({ date: params[:start_date], time: params[:start_time] },
                                     { date: params[:end_date], time: params[:end_time] },
                                     params[:all_day] == 'true')
     params.merge!(availability_attributes: { id: params[:availability_id],
