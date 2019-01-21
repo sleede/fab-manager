@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Setting
 class API::SettingsController < API::ApiController
   before_action :authenticate_user!, only: :update
 

@@ -51,4 +51,9 @@ class ApplicationController < ActionController::Base
   def current_user
     super
   end
+
+  # This is a placeholder for Devise's authenticate_user! method.
+  def authenticate_user!
+    super
+  end
 end

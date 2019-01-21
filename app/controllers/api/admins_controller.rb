@@ -34,7 +34,7 @@ class API::AdminsController < API::ApiController
 
   def destroy
     @admin = User.admins.find(params[:id])
-    if current_user.admin? and  @admin != current_user
+    if current_user.admin? && @admin != current_user
       @admin.destroy
       head :no_content
     else

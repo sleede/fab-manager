@@ -367,6 +367,7 @@ pt:
           VAT_history: "VAT rates history"                                       #translation_missing
           changed_at: "Changed at"                                               #translation_missing
           changed_by: "By"                                                       #translation_missing
+          deleted_user: "Deleted user"                                           #translation_missing
           refund_invoice_successfully_created: "Restituição de fatura criada com sucesso."
           create_a_refund_on_this_invoice: "Criar restituição de fatura"
           creation_date_for_the_refund: "Criação de data de restituição"

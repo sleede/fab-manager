@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type EventTheme
+# EventTheme are used to classify Events
 class API::EventThemesController < API::ApiController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_event_theme, only: [:show, :update, :destroy]
+  before_action :set_event_theme, only: %i[show update destroy]
 
   def index
     @event_themes = EventTheme.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize EventTheme
@@ -39,6 +42,7 @@ class API::EventThemesController < API::ApiController
   end
 
   private
+
   def set_event_theme
     @event_theme = EventTheme.find(params[:id])
   end

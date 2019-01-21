@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Space
 class API::StatisticsController < API::ApiController
   before_action :authenticate_user!
 
@@ -6,7 +9,7 @@ class API::StatisticsController < API::ApiController
     @statistics = StatisticIndex.all
   end
 
-  %w(account event machine project subscription training user space).each do |path|
+  %w[account event machine project subscription training user space].each do |path|
     class_eval %{
       def #{path}
         authorize :statistic, :#{path}?
@@ -27,38 +30,50 @@ class API::StatisticsController < API::ApiController
         # return result
         render json: results
       end
+    }, __FILE__, __LINE__ - 20
+  end
 
+  %w[account event machine project subscription training user space].each do |path|
+    class_eval %{
       def export_#{path}
         authorize :statistic, :export_#{path}?
 
-        export = Export.where({category:'statistics', export_type: '#{path}', query: params[:body], key: params[:type_key]}).last
+        export = Export.where(category:'statistics', export_type: '#{path}', query: params[:body], key: params[:type_key]).last
         if export.nil? || !FileTest.exist?(export.file)
-          @export = Export.new({category:'statistics', export_type: '#{path}', user: current_user, query: params[:body], key: params[:type_key]})
+          @export = Export.new(category:'statistics',
+                               export_type: '#{path}',
+                               user: current_user,
+                               query: params[:body],
+                               key: params[:type_key])
           if @export.save
             render json: {export_id: @export.id}, status: :ok
           else
             render json: @export.errors, status: :unprocessable_entity
           end
         else
-          send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+          send_file File.join(Rails.root, export.file),
+                    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    disposition: 'attachment'
         end
       end
-    }
+    }, __FILE__, __LINE__ - 22
   end
 
   def export_global
     authorize :statistic, :export_global?
 
-    export = Export.where({category:'statistics', export_type: 'global', query: params[:body]}).last
+    export = Export.where(category: 'statistics', export_type: 'global', query: params[:body]).last
     if export.nil? || !FileTest.exist?(export.file)
-      @export = Export.new({category:'statistics', export_type: 'global', user: current_user, query: params[:body]})
+      @export = Export.new(category: 'statistics', export_type: 'global', user: current_user, query: params[:body])
       if @export.save
-        render json: {export_id: @export.id}, status: :ok
+        render json: { export_id: @export.id }, status: :ok
       else
         render json: @export.errors, status: :unprocessable_entity
       end
     else
-      send_file File.join(Rails.root, export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+      send_file File.join(Rails.root, export.file),
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                disposition: 'attachment'
     end
   end
 
@@ -68,5 +83,4 @@ class API::StatisticsController < API::ApiController
     results = Elasticsearch::Model.client.scroll scroll: params[:scroll], scroll_id: params[:scrollId]
     render json: results
   end
-
 end

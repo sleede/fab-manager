@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Event
 class API::EventsController < API::ApiController
-  before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_event, only: %i[show update destroy]
 
   def index
     @events = policy_scope(Event)
@@ -11,17 +14,17 @@ class API::EventsController < API::ApiController
     @events = @events.joins(:event_themes).where('event_themes.id = :theme', theme: params[:theme_id]) if params[:theme_id]
     @events = @events.where('age_range_id = :age_range', age_range: params[:age_range_id]) if params[:age_range_id]
 
-    if current_user and current_user.admin?
-      case params[:scope]
-        when 'future'
-          @events = @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at DESC')
-        when 'future_asc'
-          @events = @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at ASC')
-        when 'passed'
-          @events = @events.where('availabilities.start_at < ?', Time.now).order('availabilities.start_at DESC')
-        else
-          @events = @events.order('availabilities.start_at DESC')
-      end
+    if current_user&.admin?
+      @events = case params[:scope]
+                when 'future'
+                  @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at DESC')
+                when 'future_asc'
+                  @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at ASC')
+                when 'passed'
+                  @events.where('availabilities.start_at < ?', Time.now).order('availabilities.start_at DESC')
+                else
+                  @events.order('availabilities.start_at DESC')
+                end
     end
 
     # paginate
@@ -38,8 +41,7 @@ class API::EventsController < API::ApiController
                    .limit(limit)
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Event
@@ -61,9 +63,10 @@ class API::EventsController < API::ApiController
       end
     rescue ActiveRecord::RecordNotDestroyed => e
       if e.record.class.name == 'EventPriceCategory'
-        render json: {error: ["#{e.record.price_category.name}: #{t('events.error_deleting_reserved_price')}"]}, status: :unprocessable_entity
+        render json: { error: ["#{e.record.price_category.name}: #{t('events.error_deleting_reserved_price')}"] },
+               status: :unprocessable_entity
       else
-        render json: {error: [t('events.other_error')]}, status: :unprocessable_entity
+        render json: { error: [t('events.other_error')] }, status: :unprocessable_entity
       end
     end
 
@@ -79,48 +82,22 @@ class API::EventsController < API::ApiController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      # handle general properties
-      event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
-                                                    :amount, :nb_total_places, :availability_id,
-                                                    :all_day, :recurrence, :recurrence_end_at, :category_id, :event_theme_ids,
-                                                    :age_range_id, event_theme_ids: [],
-                                                    event_image_attributes: [:attachment],
-                                                    event_files_attributes: [:id, :attachment, :_destroy],
-                                                    event_price_categories_attributes: [:id, :price_category_id, :amount, :_destroy]
-      )
-      # handle dates & times (whole-day events or not, maybe during many days)
-      start_date = Time.zone.parse(event_preparams[:start_date])
-      end_date = Time.zone.parse(event_preparams[:end_date])
-      start_time = Time.parse(event_preparams[:start_time]) if event_preparams[:start_time]
-      end_time = Time.parse(event_preparams[:end_time]) if event_preparams[:end_time]
-      if event_preparams[:all_day] == 'true'
-        start_at = DateTime.new(start_date.year, start_date.month, start_date.day, 0, 0, 0, start_date.zone)
-        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, end_date.zone)
-      else
-        start_at = DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min, start_time.sec, start_date.zone)
-        end_at = DateTime.new(end_date.year, end_date.month, end_date.day, end_time.hour, end_time.min, end_time.sec, end_date.zone)
-      end
-      event_preparams.merge!(availability_attributes: {id: event_preparams[:availability_id], start_at: start_at, end_at: end_at, available_type: 'event'})
-                     .except!(:start_date, :end_date, :start_time, :end_time, :all_day)
-      # convert main price to centimes
-      event_preparams.merge!(amount: (event_preparams[:amount].to_f * 100 if event_preparams[:amount].present?))
-      # delete non-complete "other" prices and convert them to centimes
-      unless event_preparams[:event_price_categories_attributes].nil?
-        event_preparams[:event_price_categories_attributes].delete_if { |price_cat| price_cat[:price_category_id].empty? or price_cat[:amount].empty? }
-        event_preparams[:event_price_categories_attributes].each do |price_cat|
-          price_cat[:amount] = price_cat[:amount].to_f * 100
-        end
-      end
-      # return the resulting params object
-      event_preparams
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    # handle general properties
+    event_preparams = params.required(:event).permit(:title, :description, :start_date, :start_time, :end_date, :end_time,
+                                                     :amount, :nb_total_places, :availability_id, :all_day, :recurrence,
+                                                     :recurrence_end_at, :category_id, :event_theme_ids, :age_range_id,
+                                                     event_theme_ids: [],
+                                                     event_image_attributes: [:attachment],
+                                                     event_files_attributes: %i[id attachment_destroy],
+                                                     event_price_categories_attributes: %i[id price_category_id amount _destroy])
+    EventService.process_params(event_preparams)
+  end
 end

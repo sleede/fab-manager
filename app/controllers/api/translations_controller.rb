@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for managing front-end translations
 class API::TranslationsController < API::ApiController
   before_action :set_locale
 

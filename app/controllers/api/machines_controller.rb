@@ -1,15 +1,18 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Machine
 class API::MachinesController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_machine, only: [:update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_machine, only: %i[update destroy]
   respond_to :json
 
   def index
     sort_by = Setting.find_by(name: 'machines_sort_by').value || 'default'
-    if sort_by === 'default'
-      @machines = Machine.includes(:machine_image, :plans)
-    else
-      @machines = Machine.includes(:machine_image, :plans).order(sort_by)
-    end
+    @machines = if sort_by == 'default'
+                  Machine.includes(:machine_image, :plans)
+                else
+                  Machine.includes(:machine_image, :plans).order(sort_by)
+                end
   end
 
   def show
@@ -42,22 +45,14 @@ class API::MachinesController < API::ApiController
   end
 
   private
-    def set_machine
-      @machine = Machine.find(params[:id])
-    end
 
-    def machine_params
-      params.require(:machine).permit(:name, :description, :spec, :disabled, :plan_ids, plan_ids: [], machine_image_attributes: [:attachment],
-                                      machine_files_attributes: [:id, :attachment, :_destroy])
-    end
+  def set_machine
+    @machine = Machine.find(params[:id])
+  end
 
-    def is_reserved(start_at, reservations)
-      is_reserved = false
-      reservations.each do |r|
-        r.slots.each do |s|
-          is_reserved = true if s.start_at == start_at
-        end
-      end
-      is_reserved
-    end
+  def machine_params
+    params.require(:machine).permit(:name, :description, :spec, :disabled, :plan_ids,
+                                    plan_ids: [], machine_image_attributes: [:attachment],
+                                    machine_files_attributes: %i[id attachment _destroy])
+  end
 end

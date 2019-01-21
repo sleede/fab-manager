@@ -367,6 +367,7 @@ en:
           VAT_history: "VAT rates history"
           changed_at: "Changed at"
           changed_by: "By"
+          deleted_user: "Deleted user"
           refund_invoice_successfully_created: "Refund invoice successfully created."
           create_a_refund_on_this_invoice: "Create a refund on this invoice"
           creation_date_for_the_refund: "Creation date for the refund"

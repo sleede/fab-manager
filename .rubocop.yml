@@ -1,5 +1,5 @@
 Metrics/LineLength:
-  Max: 125
+  Max: 130
 Metrics/MethodLength:
   Max: 30
 Metrics/CyclomaticComplexity:
@@ -8,6 +8,8 @@ Metrics/PerceivedComplexity:
   Max: 9
 Metrics/AbcSize:
   Max: 45
+Metrics/ClassLength:
+  Max: 200
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/RegexpLiteral:

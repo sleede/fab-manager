@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Wallet
 class API::WalletController < API::ApiController
   before_action :authenticate_user!
 
@@ -19,9 +22,7 @@ class API::WalletController < API::ApiController
     service = WalletService.new(user: current_user, wallet: @wallet)
     transaction = service.credit(credit_params[:amount].to_f)
     if transaction
-      if credit_params[:avoir]
-        service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description])
-      end
+      service.create_avoir(transaction, credit_params[:avoir_date], credit_params[:avoir_description]) if credit_params[:avoir]
       render :show
     else
       head 422

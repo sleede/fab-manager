@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Category
+# Categories are used to classify Events
 class API::CategoriesController < API::ApiController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_category, only: [:show, :update, :destroy]
+  before_action :set_category, only: %i[show update destroy]
 
   def index
     @categories = Category.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Category
@@ -39,11 +42,12 @@ class API::CategoriesController < API::ApiController
   end
 
   private
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    def category_params
-      params.require(:category).permit(:name)
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  def category_params
+    params.require(:category).permit(:name)
+  end
 end

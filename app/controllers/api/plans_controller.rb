@@ -1,4 +1,9 @@
-  class API::PlansController < API::ApiController
+# frozen_string_literal: true
+
+# API Controller for resources of type Plan and PartnerPlan.
+# Plan are used to define subscription's characteristics.
+# PartnerPlan is a special kind of plan which send notifications to an external user
+class API::PlansController < API::ApiController
   before_action :authenticate_user!, except: [:index]
 
   def index
@@ -13,48 +18,19 @@
 
   def create
     authorize Plan
-    begin
-      if plan_params[:type] and plan_params[:type] == 'PartnerPlan'
 
-        partner = User.find(params[:plan][:partner_id])
+    unless %w[PartnerPlan Plan].include? plan_params[:type]
+      render json: { error: 'unhandled plan type' }, status: :unprocessable_entity and return
+    end
 
-        if plan_params[:group_id] == 'all'
-          plans = PartnerPlan.create_for_all_groups(plan_params)
-          if plans
-            plans.each { |plan| partner.add_role :partner, plan }
-            render json: { plan_ids: plans.map(&:id) }, status: :created
-          else
-            render status: :unprocessable_entity
-          end
+    type = plan_params[:type]
+    partner = params[:plan][:partner_id].empty? ? nil : User.find(params[:plan][:partner_id])
 
-        else
-          @plan = PartnerPlan.new(plan_params)
-          if @plan.save
-            partner.add_role :partner, @plan
-            render :show, status: :created
-          else
-            render json: @plan.errors, status: :unprocessable_entity
-          end
-        end
-      else
-        if plan_params[:group_id] == 'all'
-          plans = Plan.create_for_all_groups(plan_params)
-          if plans
-            render json: { plan_ids: plans.map(&:id) }, status: :created
-          else
-            render status: :unprocessable_entity
-          end
-        else
-          @plan = Plan.new(plan_params)
-          if @plan.save
-            render :show, status: :created, location: @plan
-          else
-            render json: @plan.errors, status: :unprocessable_entity
-          end
-        end
-      end
-    rescue Stripe::InvalidRequestError => e
-      render json: {error: e.message}, status: :unprocessable_entity
+    res = PlansService.create(type, partner, plan_params)
+    if res[:errors]
+      render res[:errors], status: :unprocessable_entity
+    else
+      render json: res, status: :created
     end
   end
 
@@ -76,21 +52,25 @@
   end
 
   private
-    def plan_params
-      if @parameters
-        @parameters
-      else
-        @parameters = params
-        @parameters[:plan][:amount] = @parameters[:plan][:amount].to_f * 100.0 if @parameters[:plan][:amount]
+
+  def plan_params
+    # parameters caching for performance
+    if @parameters
+      @parameters
+    else
+      @parameters = params
+      @parameters[:plan][:amount] = @parameters[:plan][:amount].to_f * 100.0 if @parameters[:plan][:amount]
+      if @parameters[:plan][:prices_attributes]
         @parameters[:plan][:prices_attributes] = @parameters[:plan][:prices_attributes].map do |price|
           { amount: price[:amount].to_f * 100.0, id: price[:id] }
-        end if @parameters[:plan][:prices_attributes]
-
-        @parameters = @parameters.require(:plan).permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,
-            :training_credit_nb, :ui_weight, :disabled,
-            plan_file_attributes: [:id, :attachment, :_destroy],
-            prices_attributes: [:id, :amount]
-        )
+        end
       end
+
+      @parameters = @parameters.require(:plan)
+                               .permit(:base_name, :type, :group_id, :amount, :interval, :interval_count, :is_rolling,
+                                       :training_credit_nb, :ui_weight, :disabled,
+                                       plan_file_attributes: %i[id attachment _destroy],
+                                       prices_attributes: %i[id amount])
     end
+  end
 end

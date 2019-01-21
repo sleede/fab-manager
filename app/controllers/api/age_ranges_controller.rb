@@ -22,7 +22,6 @@ class API::AgeRangesController < API::ApiController
     end
   end
 
-
   def update
     authorize AgeRange
     if @age_range.update(age_range_params)
@@ -42,6 +41,7 @@ class API::AgeRangesController < API::ApiController
   end
 
   private
+
   def set_age_range
     @age_range = AgeRange.find(params[:id])
   end

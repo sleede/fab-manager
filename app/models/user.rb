@@ -54,6 +54,8 @@ class User < ActiveRecord::Base
 
   has_many :exports, dependent: :destroy
 
+  has_many :history_values, dependent: :nullify
+
   # fix for create admin user
   before_save do
     email&.downcase!

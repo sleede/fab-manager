@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Users with role :partner
 class API::UsersController < API::ApiController
   before_action :authenticate_user!
 

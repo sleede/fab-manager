@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Project
 class API::ProjectsController < API::ApiController
   before_action :authenticate_user!, except: %i[index show last_published search]
   before_action :set_project, only: %i[update destroy]
