@@ -1,4 +1,4 @@
-module Events
+module Prices
   class AsAdminTest < ActionDispatch::IntegrationTest
 
     setup do
@@ -13,19 +13,19 @@ module Events
 
       post '/api/prices/compute',
            {
-               reservation: {
-                   user_id: user.id,
-                   reservable_id: printer_training.id,
-                   reservable_type: printer_training.class.name,
-                   slots_attributes: [
-                       {
-                           availability_id: availability.id,
-                           end_at: availability.end_at,
-                           offered: false,
-                           start_at: availability.start_at
-                       }
-                   ]
-               }
+             reservation: {
+               user_id: user.id,
+               reservable_id: printer_training.id,
+               reservable_type: printer_training.class.name,
+               slots_attributes: [
+                 {
+                   availability_id: availability.id,
+                   end_at: availability.end_at,
+                   offered: false,
+                   start_at: availability.start_at
+                 }
+               ]
+             }
            }.to_json,
            default_headers
 
@@ -35,7 +35,9 @@ module Events
 
       # Check the price was computed correctly
       price = json_response(response.body)
-      assert_equal (printer_training.trainings_pricings.where(group_id: user.group_id).first.amount / 100.0), price[:price], 'Computed price did not match training price'
+      assert_equal (printer_training.trainings_pricings.where(group_id: user.group_id).first.amount / 100.0),
+                   price[:price],
+                   'Computed price did not match training price'
     end
 
 
@@ -47,26 +49,26 @@ module Events
 
       post '/api/prices/compute',
            {
-               reservation: {
-                   user_id: user.id,
-                   reservable_id: laser.id,
-                   reservable_type: laser.class.name,
-                   plan_id: plan.id,
-                   slots_attributes: [
-                       {
-                           availability_id: availability.id,
-                           end_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-                           offered: true,
-                           start_at: availability.start_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
-                       },
-                       {
-                           availability_id: availability.id,
-                           end_at: (availability.start_at + 2.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
-                           offered: false,
-                           start_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')
-                       }
-                   ]
-               }
+             reservation: {
+               user_id: user.id,
+               reservable_id: laser.id,
+               reservable_type: laser.class.name,
+               plan_id: plan.id,
+               slots_attributes: [
+                 {
+                   availability_id: availability.id,
+                   end_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                   offered: true,
+                   start_at: availability.start_at.strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                 },
+                 {
+                   availability_id: availability.id,
+                   end_at: (availability.start_at + 2.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z'),
+                   offered: false,
+                   start_at: (availability.start_at + 1.hour).strftime('%Y-%m-%d %H:%M:%S.%9N Z')
+                 }
+               ]
+             }
            }.to_json,
            default_headers
 
@@ -76,7 +78,9 @@ module Events
 
       # Check the event was created correctly
       price = json_response(response.body)
-      assert_equal ((laser.prices.where(group_id: user.group_id, plan_id: plan.id).first.amount + plan.amount) / 100.0), price[:price], 'Computed price did not match machine + subscription price'
+      assert_equal ((laser.prices.where(group_id: user.group_id, plan_id: plan.id).first.amount + plan.amount) / 100.0),
+                   price[:price],
+                   'Computed price did not match machine + subscription price'
     end
   end
 end

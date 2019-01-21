@@ -231,10 +231,10 @@ class API::MembersController < API::ApiController
       @members = @members.where("users.is_allow_contact = 'true'")
     else
       # only admins have the ability to filter by subscription
-      if params[:subscription] === 'true'
+      if params[:subscription] == 'true'
         @members = @members.where('subscriptions.id IS NOT NULL AND subscriptions.expiration_date >= :now', now: Date.today.to_s)
-      elsif params[:subscription] === 'false'
-        @members = @members.where('subscriptions.id IS NULL OR subscriptions.expiration_date < :now',  now: Date.today.to_s)
+      elsif params[:subscription] == 'false'
+        @members = @members.where('subscriptions.id IS NULL OR subscriptions.expiration_date < :now', now: Date.today.to_s)
       end
     end
 
