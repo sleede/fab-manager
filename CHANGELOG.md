@@ -9,6 +9,7 @@
 - Fix a bug: unable to delete an admin who has changed a setting
 - Fix a bug: unable to create/edit a plan of 12 months or 52 weeks
 - Fix a bug: Unable to search in user autocomplete fields
+- Fix a bug: Invalid translation in new partner modal
 - Improved user autocompletion when using multiple words
 - Refactored frontend invoices translations
 - Updated RailRoady 1.4.0 to 1.5.3
