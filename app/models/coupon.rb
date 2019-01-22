@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Coupon is a textual code associated with a discount rate or an amount of discount
 class Coupon < ActiveRecord::Base
   has_many :invoices
 
@@ -6,7 +9,7 @@ class Coupon < ActiveRecord::Base
 
   validates :name, presence: true
   validates :code, presence: true
-  validates :code, format: { with: /\A[A-Z0-9\-]+\z/, message: 'only caps letters, numbers, and dashes'}
+  validates :code, format: { with: /\A[A-Z0-9\-]+\z/, message: 'only caps letters, numbers, and dashes' }
   validates :code, uniqueness: true
   validates :validity_per_user, presence: true
   validates :validity_per_user, inclusion: { in: %w[once forever] }
@@ -52,9 +55,9 @@ class Coupon < ActiveRecord::Base
   end
 
   def type
-    if amount_off.nil? and !percent_off.nil?
+    if amount_off.nil? && !percent_off.nil?
       'percent_off'
-    elsif percent_off.nil? and !amount_off.nil?
+    elsif percent_off.nil? && !amount_off.nil?
       'amount_off'
     end
   end

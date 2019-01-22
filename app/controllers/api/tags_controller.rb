@@ -1,15 +1,17 @@
+# frozen_string_literal: true
 
+# API Controller for resources of type Tag
+# Tags are used to restrict access to Availabilities
 class API::TagsController < API::ApiController
 
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_tag, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_tag, only: %i[show update destroy]
 
   def index
     @tags = Tag.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Tag
@@ -37,6 +39,7 @@ class API::TagsController < API::ApiController
   end
 
   private
+
   def set_tag
     @tag = Tag.find(params[:id])
   end

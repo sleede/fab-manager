@@ -1,15 +1,20 @@
+# frozen_string_literal: true
+
+# API Controller for resources of Invoice and Avoir
 class API::InvoicesController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_invoice, only: [:show, :download]
+  before_action :set_invoice, only: %i[show download]
 
   def index
     authorize Invoice
-    @invoices = Invoice.includes(:avoir, :invoiced, invoice_items: [:subscription, :invoice_item], user: [:profile, :trainings]).all.order('reference DESC')
+    @invoices = Invoice.includes(
+      :avoir, :invoiced, invoice_items: %i[subscription invoice_item], user: %i[profile trainings]
+    ).all.order('reference DESC')
   end
 
   def download
     authorize @invoice
-    send_file File.join(Rails.root, @invoice.file), :type => 'application/pdf', :disposition => 'attachment'
+    send_file File.join(Rails.root, @invoice.file), type: 'application/pdf', disposition: 'attachment'
   end
 
   def list
@@ -17,44 +22,18 @@ class API::InvoicesController < API::ApiController
 
     p = params.require(:query).permit(:number, :customer, :date, :order_by, :page, :size)
 
-    unless p[:page].is_a? Integer
-      render json: {error: 'page must be an integer'}, status: :unprocessable_entity
-    end
+    render json: { error: 'page must be an integer' }, status: :unprocessable_entity and return unless p[:page].is_a? Integer
 
-    unless p[:size].is_a? Integer
-      render json: {error: 'size must be an integer'}, status: :unprocessable_entity
-    end
+    render json: { error: 'size must be an integer' }, status: :unprocessable_entity and return unless p[:size].is_a? Integer
 
-
-    direction = (p[:order_by][0] == '-' ? 'DESC' : 'ASC')
-    order_key = (p[:order_by][0] == '-' ? p[:order_by][1, p[:order_by].size] : p[:order_by])
-
-    case order_key
-      when 'reference'
-        order_key = 'invoices.reference'
-      when 'date'
-        order_key = 'invoices.created_at'
-      when 'total'
-        order_key = 'invoices.total'
-      when 'name'
-        order_key = 'profiles.first_name'
-      else
-        order_key = 'invoices.id'
-    end
-
-    @invoices = Invoice.includes(:avoir, :invoiced, invoice_items: [:subscription, :invoice_item], user: [:profile, :trainings])
-                .joins(:user => :profile)
-                .order("#{order_key} #{direction}")
-                .page(p[:page])
-                .per(p[:size])
-
-    # ILIKE => PostgreSQL case-insensitive LIKE
-    @invoices = @invoices.where('invoices.reference LIKE :search', search: "#{p[:number].to_s}%") if p[:number].size > 0
-    @invoices = @invoices.where('profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search', search: "%#{p[:customer]}%") if p[:customer].size > 0
-    @invoices = @invoices.where("date_trunc('day', invoices.created_at) = :search", search: "%#{DateTime.iso8601(p[:date]).to_time.to_date.to_s}%") unless p[:date].nil?
-
-    @invoices
-
+    order = InvoicesService.parse_order(p[:order_by])
+    @invoices = InvoicesService.list(
+      order[:order_key],
+      order[:direction],
+      p[:page],
+      p[:size],
+      number: p[:number], customer: p[:customer], date: p[:date]
+    )
   end
 
   # only for create refund invoices (avoir)
@@ -64,9 +43,7 @@ class API::InvoicesController < API::ApiController
     @avoir = invoice.build_avoir(avoir_params)
     if @avoir.save
       # when saved, expire the subscription if needed
-      if @avoir.subscription_to_expire
-        @avoir.expire_subscription
-      end
+      @avoir.expire_subscription if @avoir.subscription_to_expire
       # then answer the API call
       render :avoir, status: :created
     else
@@ -75,11 +52,13 @@ class API::InvoicesController < API::ApiController
   end
 
   private
-    def avoir_params
-      params.require(:avoir).permit(:invoice_id, :avoir_date, :avoir_mode, :subscription_to_expire, :description, :invoice_items_ids => [])
-    end
 
-    def set_invoice
-      @invoice = Invoice.find(params[:id])
-    end
+  def avoir_params
+    params.require(:avoir).permit(:invoice_id, :avoir_date, :avoir_mode, :subscription_to_expire, :description,
+                                  invoice_items_ids: [])
+  end
+
+  def set_invoice
+    @invoice = Invoice.find(params[:id])
+  end
 end

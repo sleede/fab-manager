@@ -7,15 +7,15 @@ class TrainingPolicy < ApplicationPolicy
 
   %w(create update).each do |action|
     define_method "#{action}?" do
-      user.is_admin?
+      user.admin?
     end
   end
 
   def destroy?
-    user.is_admin? and record.destroyable?
+    user.admin? and record.destroyable?
   end
 
   def availabilities?
-    user.is_admin?
+    user.admin?
   end
 end

@@ -160,10 +160,14 @@ This procedure is not easy to follow so if you don't need to write some code for
    - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
 
    ```bash
+   # for dev
    rake db:create
    rake db:migrate
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    rake fablab:es_build_stats
+   # for tests
+   RAILS_ENV=test rake db:create
+   RAILS_ENV=test rake db:migrate
    ```
 
 14. Create the pids folder used by Sidekiq. If you want to use a different location, you can configure it in `config/sidekiq.yml`
@@ -252,6 +256,9 @@ environment.
    rake db:migrate
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
    rake fablab:es_build_stats
+   # for tests
+   RAILS_ENV=test rake db:create
+   RAILS_ENV=test rake db:migrate
    ```
 
 11. Start the application and visit `localhost:3000` on your browser to check that it works:

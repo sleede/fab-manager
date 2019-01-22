@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Credit
+# Credits are used to give free reservations to users
 class API::CreditsController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_credit, only: [:show, :update, :destroy]
+  before_action :set_credit, only: %i[show update destroy]
 
   def index
     authorize Credit
-    if params
-      @credits = Credit.includes(:creditable).where(params.permit(:creditable_type))
-    else
-      @credits = Credit.includes(:creditable).all
-    end
+    @credits = if params
+                 Credit.includes(:creditable).where(params.permit(:creditable_type))
+               else
+                 Credit.includes(:creditable).all
+               end
   end
 
   def create
@@ -37,11 +41,12 @@ class API::CreditsController < API::ApiController
   end
 
   private
-    def set_credit
-      @credit = Credit.find(params[:id])
-    end
 
-    def credit_params
-      params.require(:credit).permit!
-    end
+  def set_credit
+    @credit = Credit.find(params[:id])
+  end
+
+  def credit_params
+    params.require(:credit).permit!
+  end
 end

@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Export
+# Export are used to download data tables in offline files
 class API::ExportsController < API::ApiController
   before_action :authenticate_user!
   before_action :set_export, only: [:download]
@@ -6,7 +10,9 @@ class API::ExportsController < API::ApiController
     authorize @export
 
     if FileTest.exist?(@export.file)
-      send_file File.join(Rails.root, @export.file), :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :disposition => 'attachment'
+      send_file File.join(Rails.root, @export.file),
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                disposition: 'attachment'
     else
       render text: I18n.t('errors.messages.export_not_found'), status: :not_found
     end
@@ -15,37 +21,38 @@ class API::ExportsController < API::ApiController
   def status
     authorize Export
 
-    export = Export.where({category: params[:category], export_type: params[:type], query: params[:query], key: params[:key]})
+    export = Export.where(category: params[:category], export_type: params[:type], query: params[:query], key: params[:key])
 
-    if params[:category] === 'users'
+    if params[:category] == 'users'
       case params[:type]
-        when 'subscriptions'
-          export = export.where('created_at > ?', Subscription.maximum('updated_at'))
-        when 'reservations'
-          export = export.where('created_at > ?', Reservation.maximum('updated_at'))
-        when 'members'
-          export = export.where('created_at > ?', User.with_role(:member).maximum('updated_at'))
-        else
-          raise ArgumentError, "Unknown export users/#{params[:type]}"
+      when 'subscriptions'
+        export = export.where('created_at > ?', Subscription.maximum('updated_at'))
+      when 'reservations'
+        export = export.where('created_at > ?', Reservation.maximum('updated_at'))
+      when 'members'
+        export = export.where('created_at > ?', User.with_role(:member).maximum('updated_at'))
+      else
+        raise ArgumentError, "Unknown export users/#{params[:type]}"
       end
-    elsif params[:category] === 'availabilities'
+    elsif params[:category] == 'availabilities'
       case params[:type]
-        when 'index'
-          export = export.where('created_at > ?', Availability.maximum('updated_at'))
-        else
-          raise ArgumentError, "Unknown type availabilities/#{params[:type]}"
+      when 'index'
+        export = export.where('created_at > ?', Availability.maximum('updated_at'))
+      else
+        raise ArgumentError, "Unknown type availabilities/#{params[:type]}"
       end
     end
     export = export.last
 
     if export.nil? || !FileTest.exist?(export.file)
-      render json: {exists: false, id: nil}, status: :ok
+      render json: { exists: false, id: nil }, status: :ok
     else
-      render json: {exists: true, id: export.id}, status: :ok
+      render json: { exists: true, id: export.id }, status: :ok
     end
   end
 
   private
+
   def set_export
     @export = Export.find(params[:id])
   end

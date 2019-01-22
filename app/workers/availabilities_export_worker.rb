@@ -4,7 +4,7 @@ class AvailabilitiesExportWorker
   def perform(export_id)
     export = Export.find(export_id)
 
-    unless export.user.is_admin?
+    unless export.user.admin?
       raise SecurityError, 'Not allowed to export'
     end
 

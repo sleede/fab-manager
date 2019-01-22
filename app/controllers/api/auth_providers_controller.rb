@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type AuthProvider
+# AuthProvider are used to connect users through single-sign on systems
 class API::AuthProvidersController < API::ApiController
 
-  before_action :set_provider, only: [:show, :update, :destroy]
+  before_action :set_provider, only: %i[show update destroy]
   def index
     @providers = policy_scope(AuthProvider)
   end
@@ -57,33 +61,33 @@ class API::AuthProvidersController < API::ApiController
         NotificationCenter.call type: 'notify_user_auth_migration',
                                 receiver: user,
                                 attached_object: user
-        render json: {status: 'processing'}, status: :ok
+        render json: { status: 'processing' }, status: :ok
       else
-        render json: {status: 'error', error: I18n.t('members.current_authentication_method_no_code')}, status: :bad_request
+        render json: { status: 'error', error: I18n.t('members.current_authentication_method_no_code') }, status: :bad_request
       end
     else
-      render json: {status: 'error', error: I18n.t('members.requested_account_does_not_exists')}, status: :bad_request
+      render json: { status: 'error', error: I18n.t('members.requested_account_does_not_exists') }, status: :bad_request
     end
   end
 
   private
 
-    def set_provider
-      @provider = AuthProvider.find(params[:id])
-    end
+  def set_provider
+    @provider = AuthProvider.find(params[:id])
+  end
 
-    def provider_params
-      if params['auth_provider']['providable_type'] == DatabaseProvider.name
-        params.require(:auth_provider).permit(:name, :providable_type)
-      elsif params['auth_provider']['providable_type'] == OAuth2Provider.name
-      params.require(:auth_provider).permit(:name, :providable_type, providable_attributes: [
-                                                     :id, :base_url, :token_endpoint, :authorization_endpoint, :logout_endpoint, :profile_url, :client_id, :client_secret,
-                                                     o_auth2_mappings_attributes: [
-                                                         :id, :local_model, :local_field, :api_field, :api_endpoint, :api_data_type, :_destroy,
-                                                         transformation: [:type, :format, :true_value, :false_value, mapping: [:from, :to]]
-                                                     ]
-                                                 ])
-      end
+  def provider_params
+    if params['auth_provider']['providable_type'] == DatabaseProvider.name
+      params.require(:auth_provider).permit(:name, :providable_type)
+    elsif params['auth_provider']['providable_type'] == OAuth2Provider.name
+    params.require(:auth_provider)
+          .permit(:name, :providable_type,
+                  providable_attributes: [:id, :base_url, :token_endpoint, :authorization_endpoint, :logout_endpoint,
+                                          :profile_url, :client_id, :client_secret,
+                                          o_auth2_mappings_attributes: [:id, :local_model, :local_field, :api_field,
+                                                                        :api_endpoint, :api_data_type, :_destroy,
+                                                                        transformation: [:type, :format, :true_value,
+                                                                                         :false_value, mapping: %i[from to]]]])
     end
-
+  end
 end

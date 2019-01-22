@@ -1,10 +1,10 @@
-class API::CustomAssetsController < API::ApiController
-  before_action :authenticate_user!, only: [:index, :update, :create, :destroy]
-  before_action :set_custom_asset, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def index
-    #TODO GET /api/custom_assets/
-  end
+# API Controller for resources of type CustomAsset
+# CustomAssets are used in settings
+class API::CustomAssetsController < API::ApiController
+  before_action :authenticate_user!, only: %i[index update create destroy]
+  before_action :set_custom_asset, only: %i[show update destroy]
 
   # PUT /api/custom_assets/1/
   def update
@@ -28,14 +28,10 @@ class API::CustomAssetsController < API::ApiController
   end
 
   # GET /api/custom_assets/1/
-  def show
-  end
-
-  def destroy
-    #TODO DELETE /api/custom_assets/1/
-  end
+  def show; end
 
   private
+
   def set_custom_asset
     @custom_asset = CustomAsset.find_by(name: params[:id])
   end

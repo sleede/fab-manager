@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Reservation
+# Reservations are used for Training, Machine, Space and Event
 class API::ReservationsController < API::ApiController
   before_action :authenticate_user!
   before_action :set_reservation, only: %i[show update]
@@ -5,10 +9,10 @@ class API::ReservationsController < API::ApiController
 
   def index
     if params[:reservable_id] && params[:reservable_type] && params[:user_id]
-      params[:user_id] = current_user.id unless current_user.is_admin?
+      params[:user_id] = current_user.id unless current_user.admin?
 
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type, :user_id))
-    elsif params[:reservable_id] && params[:reservable_type] && current_user.is_admin?
+    elsif params[:reservable_id] && params[:reservable_type] && current_user.admin?
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type))
     else
       @reservations = []
@@ -18,8 +22,8 @@ class API::ReservationsController < API::ApiController
   def show; end
 
   def create
-    method = current_user.is_admin? ? :local : :stripe
-    user_id = current_user.is_admin? ? reservation_params[:user_id] : current_user.id
+    method = current_user.admin? ? :local : :stripe
+    user_id = current_user.admin? ? reservation_params[:user_id] : current_user.id
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id)
@@ -46,6 +50,7 @@ class API::ReservationsController < API::ApiController
   end
 
   private
+
   def set_reservation
     @reservation = Reservation.find(params[:id])
   end

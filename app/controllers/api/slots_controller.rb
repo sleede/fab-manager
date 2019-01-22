@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Slot
+# Slots are used to cut Availabilities into reservable slots of ApplicationHelper::SLOT_DURATION minutes
 class API::SlotsController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_slot, only: [:update, :cancel]
+  before_action :set_slot, only: %i[update cancel]
   respond_to :json
 
   def update
@@ -15,10 +19,11 @@ class API::SlotsController < API::ApiController
 
   def cancel
     authorize @slot
-    @slot.update_attributes(:canceled_at => DateTime.now)
+    @slot.update_attributes(canceled_at: DateTime.now)
   end
 
   private
+
   def set_slot
     @slot = Slot.find(params[:id])
   end

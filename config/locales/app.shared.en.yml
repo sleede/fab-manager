@@ -211,6 +211,7 @@ en:
         plan_form:
           general_information: "General information"
           name: "Name"
+          name_is_required: "Name is required"
           name_length_must_be_less_than_24_characters: "Name length must be less than 24 characters."
           type: "Type"
           type_is_required: "Type is required."
@@ -264,10 +265,6 @@ en:
         warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
         group_is_required: "Group is required"
-        disable_invoices_generation: "Disable invoices generation:"
-        no_more_invoices_will_be_generated_for_: "No more invoices will be generated for"
-        _the_payments_carried_out_at_the_reception_: "the payments carried out at the reception"
-        _regarding_this_user: "regarding this user."
         trainings: "Trainings"
 
       authentication:

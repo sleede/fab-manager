@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type OpenAPI::Client
+# OpenAPI::Clients are used to allow access to the public API
 class API::OpenAPIClientsController < API::ApiController
   before_action :authenticate_user!
 
@@ -5,7 +9,7 @@ class API::OpenAPIClientsController < API::ApiController
     authorize OpenAPI::Client
     @clients = OpenAPI::Client.order(:created_at)
   end
- # add authorization
+
   def create
     @client = OpenAPI::Client.new(client_params)
     authorize @client
@@ -40,7 +44,8 @@ class API::OpenAPIClientsController < API::ApiController
   end
 
   private
-    def client_params
-      params.require(:open_api_client).permit(:name)
-    end
+
+  def client_params
+    params.require(:open_api_client).permit(:name)
+  end
 end

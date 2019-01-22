@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type AgeRange
+# AgeRange are used in Events
 class API::AgeRangesController < API::ApiController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_age_range, only: [:show, :update, :destroy]
+  before_action :set_age_range, only: %i[show update destroy]
 
   def index
     @age_ranges = AgeRange.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize AgeRange
@@ -18,7 +21,6 @@ class API::AgeRangesController < API::ApiController
       render json: @age_range.errors, status: :unprocessable_entity
     end
   end
-
 
   def update
     authorize AgeRange
@@ -39,6 +41,7 @@ class API::AgeRangesController < API::ApiController
   end
 
   private
+
   def set_age_range
     @age_range = AgeRange.find(params[:id])
   end

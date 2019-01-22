@@ -15,10 +15,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.is_admin? or record.author == user or record.users.include?(user)
+    user.admin? or record.author == user or record.users.include?(user)
   end
 
   def destroy?
-    user.is_admin? or record.author == user
+    user.admin? or record.author == user
   end
 end

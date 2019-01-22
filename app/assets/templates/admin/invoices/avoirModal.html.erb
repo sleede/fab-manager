@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="text-center red" translate>{{ 'create_a_refund_on_this_invoice' }}</h3>
+  <h3 class="text-center red" translate>{{ 'invoices.create_a_refund_on_this_invoice' }}</h3>
 </div>
 <div class="modal-body">
   <form name="avoirForm" novalidate="novalidate">
     <div class="form-group" ng-class="{'has-error': avoirForm.avoir_date.$dirty && avoirForm.avoir_date.$invalid }">
-      <label translate>{{ 'creation_date_for_the_refund' }}</label>
+      <label translate>{{ 'invoices.creation_date_for_the_refund' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
@@ -18,24 +18,24 @@
                ng-click="openDatePicker($event)"
                required/>
       </div>
-      <span class="help-block" ng-show="avoirForm.avoir_date.$dirty && avoirForm.avoir_date.$error.required" translate>{{ 'creation_date_is_required' }}</span>
+      <span class="help-block" ng-show="avoirForm.avoir_date.$dirty && avoirForm.avoir_date.$error.required" translate>{{ 'invoices.creation_date_is_required' }}</span>
     </div>
     <div class="form-group">
-      <label translate>{{ 'refund_mode' }}</label>
+      <label translate>{{ 'invoices.refund_mode' }}</label>
       <select class="form-control m-t-sm" name="avoir_mode" ng-model="avoir.avoir_mode" ng-options="mode.value as mode.name for mode in avoirModes" required></select>
     </div>
     <div class="form-group" ng-if="invoice.is_subscription_invoice">
-      <label translate>{{ 'do_you_want_to_disable_the_user_s_subscription' }}</label>
+      <label translate>{{ 'invoices.do_you_want_to_disable_the_user_s_subscription' }}</label>
       <select class="form-control m-t-sm" name="subscription_to_expire" ng-model="avoir.subscription_to_expire" ng-options="value as key for (key, value) in subscriptionExpireOptions" required></select>
     </div>
     <div ng-show="!invoice.is_subscription_invoice && invoice.items.length > 1" class="form-group">
-        <label translate>{{ 'elements_to_refund' }}</label>
+        <label translate>{{ 'invoices.elements_to_refund' }}</label>
         <table class="table partial-avoir-table">
             <thead>
               <tr>
                   <th class="input-col"></th>
-                  <th class="label-col" translate>{{ 'description' }}</th>
-                  <th class="amount-col" translate>{{ 'price' }}</th>
+                  <th class="label-col" translate>{{ 'invoices.description' }}</th>
+                  <th class="amount-col" translate>{{ 'invoices.price' }}</th>
               </tr>
             </thead>
             <tbody>
@@ -48,8 +48,8 @@
         </table>
     </div>
     <div>
-        <label for="description" translate>{{ 'description_(optional)' }}</label>
-        <p translate>{{ 'will_appear_on_the_refund_invoice' }}</p>
+        <label for="description" translate>{{ 'invoices.description_(optional)' }}</label>
+        <p translate>{{ 'invoices.will_appear_on_the_refund_invoice' }}</p>
         <textarea class="form-control m-t-sm" name="description" ng-model="avoir.description"></textarea>
     </div>
   </form>

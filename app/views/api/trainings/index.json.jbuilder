@@ -1,4 +1,4 @@
-role = (current_user and current_user.is_admin?) ? 'admin' : 'user'
+role = (current_user and current_user.admin?) ? 'admin' : 'user'
 
 json.array!(@trainings) do |training|
   json.extract! training, :id, :name, :description, :machine_ids, :nb_total_places, :slug, :disabled

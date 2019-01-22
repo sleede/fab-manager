@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Setting
 class API::SettingsController < API::ApiController
   before_action :authenticate_user!, only: :update
 
@@ -17,6 +20,7 @@ class API::SettingsController < API::ApiController
 
   def show
     @setting = Setting.find_or_create_by(name: params[:name])
+    @show_history = params[:history] == 'true' && current_user.admin?
   end
 
   private

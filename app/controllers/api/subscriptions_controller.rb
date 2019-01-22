@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Subscription
 class API::SubscriptionsController < API::ApiController
   include FablabConfiguration
 
@@ -12,8 +15,8 @@ class API::SubscriptionsController < API::ApiController
     if fablab_plans_deactivated?
       head 403
     else
-      method = current_user.is_admin? ? :local : :stripe
-      user_id = current_user.is_admin? ? subscription_params[:user_id] : current_user.id
+      method = current_user.admin? ? :local : :stripe
+      user_id = current_user.admin? ? subscription_params[:user_id] : current_user.id
 
       @subscription = Subscription.new(subscription_params)
       is_subscribe = Subscriptions::Subscribe.new(user_id)
@@ -64,7 +67,7 @@ class API::SubscriptionsController < API::ApiController
     params.require(:subscription).permit(:expired_at)
   end
 
-  # TODO refactor subscriptions logic and move this in model/validator
+  # TODO, refactor subscriptions logic and move this in model/validator
   def valid_card_token?(token)
     Stripe::Token.retrieve(token)
   rescue Stripe::InvalidRequestError => e

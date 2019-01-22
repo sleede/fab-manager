@@ -1,5 +1,22 @@
 # Changelog Fab Manager
 
+## v2.8.2 2019 January 22
+
+- Removed ability to disable invoicing for an user
+- Fixed a missing translation in plan form
+- Fix a bug: error handling on password recovery
+- Fix a bug: error handling on machine attachment upload
+- Fix a bug: first day of week is ignored in statistics custom filter
+- Fix a bug: rails DSB locale is invalid
+- Fix a bug: unable to delete an admin who has changed a setting
+- Fix a bug: unable to create/edit a plan of 12 months or 52 weeks
+- Fix a bug: Unable to search in user autocomplete fields
+- Fix a bug: Invalid translation in new partner modal
+- Improved user autocompletion when using multiple words
+- Refactored frontend invoices translations
+- Updated RailRoady 1.4.0 to 1.5.3
+- [TODO DEPLOY] `bundle install`
+
 ## v2.8.1 2019 January 02
 
 - Fix ES upgrade: when docker-compose file is using ${PWD}, the ES config volume is attached to the wrong container

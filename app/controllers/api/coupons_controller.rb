@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Coupon
+# Coupons are used in payments
 class API::CouponsController < API::ApiController
   before_action :authenticate_user!
-  before_action :set_coupon, only: [:show, :update, :destroy]
+  before_action :set_coupon, only: %i[show update destroy]
 
   def index
     @coupons = Coupon.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Coupon
@@ -22,18 +25,18 @@ class API::CouponsController < API::ApiController
   def validate
     @coupon = Coupon.find_by(code: params[:code])
     if @coupon.nil?
-      render json: {status: 'rejected'}, status: :not_found
+      render json: { status: 'rejected' }, status: :not_found
     else
-      if !current_user.is_admin?
-        _user_id = current_user.id
-      else
-        _user_id = params[:user_id]
-      end
+      _user_id = if !current_user.admin?
+                   current_user.id
+                 else
+                   params[:user_id]
+                 end
 
       amount = params[:amount].to_f * 100.0
       status = @coupon.status(_user_id, amount)
       if status != 'active'
-        render json: {status: status}, status: :unprocessable_entity
+        render json: { status: status }, status: :unprocessable_entity
       else
         render :validate, status: :ok, location: @coupon
       end
@@ -62,18 +65,17 @@ class API::CouponsController < API::ApiController
     authorize Coupon
 
     @coupon = Coupon.find_by(code: params[:coupon_code])
-      if @coupon.nil?
-        render json: {error: "no coupon with code #{params[:coupon_code]}"}, status: :not_found
-      else
-        if @coupon.send_to(params[:user_id])
-          render :show, status: :ok, location: @coupon
-        else
-          render json: @coupon.errors, status: :unprocessable_entity
-        end
-      end
+    if @coupon.nil?
+      render json: { error: "no coupon with code #{params[:coupon_code]}" }, status: :not_found
+    elsif @coupon.send_to(params[:user_id])
+      render :show, status: :ok, location: @coupon
+    else
+      render json: @coupon.errors, status: :unprocessable_entity
+    end
   end
 
   private
+
   def set_coupon
     @coupon = Coupon.find(params[:id])
   end
@@ -85,7 +87,8 @@ class API::CouponsController < API::ApiController
       @parameters = params
       @parameters[:coupon][:amount_off] = @parameters[:coupon][:amount_off].to_f * 100.0 if @parameters[:coupon][:amount_off]
 
-      @parameters = @parameters.require(:coupon).permit(:name, :code, :percent_off, :amount_off, :validity_per_user, :valid_until, :max_usages, :active)
+      @parameters = @parameters.require(:coupon).permit(:name, :code, :percent_off, :amount_off, :validity_per_user, :valid_until,
+                                                        :max_usages, :active)
     end
   end
 

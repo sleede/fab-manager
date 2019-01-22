@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
+# User is a physical or moral person with its authentication parameters
+# It is linked to the Profile model with hold informations about this person (like address, name, etc.)
 class User < ActiveRecord::Base
   include NotifyWith::NotificationReceiver
   include NotifyWith::NotificationAttachedObject
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :async
   rolify
@@ -50,6 +54,8 @@ class User < ActiveRecord::Base
 
   has_many :exports, dependent: :destroy
 
+  has_many :history_values, dependent: :nullify
+
   # fix for create admin user
   before_save do
     email&.downcase!
@@ -59,7 +65,6 @@ class User < ActiveRecord::Base
   after_create :create_a_wallet
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
-  after_update :notify_admin_invoicing_changed, if: :invoicing_disabled_changed?
   after_update :notify_group_changed, if: :group_id_changed?
 
   attr_accessor :cgu
@@ -74,7 +79,7 @@ class User < ActiveRecord::Base
   scope :without_subscription, -> { includes(:subscriptions).where(subscriptions: { user_id: nil }) }
   scope :with_subscription, -> { joins(:subscriptions) }
 
-  def to_json(options = {})
+  def to_json(*)
     ApplicationController.new.view_context.render(
       partial: 'api/members/member',
       locals: { member: self },
@@ -88,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   def training_machine?(machine)
-    return true if is_admin?
+    return true if admin?
 
     trainings.map(&:machines).flatten.uniq.include?(machine)
   end
@@ -107,11 +112,11 @@ class User < ActiveRecord::Base
     subscriptions.order(:created_at).last
   end
 
-  def is_admin?
+  def admin?
     has_role? :admin
   end
 
-  def is_member?
+  def member?
     has_role? :member
   end
 
@@ -122,7 +127,7 @@ class User < ActiveRecord::Base
   def generate_subscription_invoice
     return unless subscription
 
-    subscription.generate_and_save_invoice unless invoicing_disabled?
+    subscription.generate_and_save_invoice
   end
 
   def stripe_customer
@@ -286,7 +291,6 @@ class User < ActiveRecord::Base
     false
   end
 
-
   private
 
   def assign_default_role
@@ -341,12 +345,4 @@ class User < ActiveRecord::Base
                             receiver: self,
                             attached_object: self
   end
-
-  def notify_admin_invoicing_changed
-    NotificationCenter.call type: 'notify_admin_invoicing_changed',
-                            receiver: User.admins,
-                            attached_object: self
-  end
-
-
 end

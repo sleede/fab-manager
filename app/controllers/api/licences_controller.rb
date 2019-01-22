@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Licence
+# Licenses are used in Projects
 class API::LicencesController < API::ApiController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_licence, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_licence, only: %i[show update destroy]
 
   def index
     @licences = Licence.all
   end
 
-  def show
-  end
+  def show; end
 
   def create
     authorize Licence
@@ -35,11 +38,12 @@ class API::LicencesController < API::ApiController
   end
 
   private
-    def set_licence
-      @licence = Licence.find(params[:id])
-    end
 
-    def licence_params
-      params.require(:licence).permit(:name, :description)
-    end
+  def set_licence
+    @licence = Licence.find(params[:id])
+  end
+
+  def licence_params
+    params.require(:licence).permit(:name, :description)
+  end
 end

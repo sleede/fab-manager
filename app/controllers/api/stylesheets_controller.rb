@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type Stylesheet
+# Stylesheets are used to customize the appearance of fab-manager
 class API::StylesheetsController < API::ApiController
   caches_page :show # magic happens here
 
@@ -5,7 +9,7 @@ class API::StylesheetsController < API::ApiController
     @stylesheet = Stylesheet.find(params[:id])
     respond_to do |format|
       format.html # regular ERB template
-      format.css { render :text => @stylesheet.contents, :content_type => 'text/css' }
+      format.css { render text: @stylesheet.contents, content_type: 'text/css' }
     end
   end
 end

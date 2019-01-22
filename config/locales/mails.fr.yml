@@ -117,7 +117,6 @@ fr:
       body:
         new_account_created: "Un nouveau compte utilisateur vient d'être créé sur la plateforme :"
         account_for_organization: "Ce compte gère une structure :"
-        invoicing_disabled_html: "La génération de factures est <strong>désactivée</strong> pour cet utilisateur."
 
     notify_admin_subscribed_plan:
       subject: "Un abonnement a été souscrit"
@@ -240,13 +239,6 @@ fr:
         signaled_by: "Signalé par :"
         signaled_on: "Signalé le :"
         message: "Message :"
-
-    notify_admin_invoicing_changed:
-      subject: "Un paramètre de facturation a été modifié"
-      body:
-        generation_status_html: "La génération de factures vient d'être <strong>{STATUS, select, true{désactivée} other{activée}}</strong> pour l'utilisateur {NAME}."  # messageFormat interpolation
-        disabled: "Désormais, aucune facture ne sera générée pour les paiement de cet utilisateur effectués à l'accueil."
-        enabled: "Désormais, tous les paiement de cet utilisateur effectués à l'accueil, donneront lieu à la génération d'une facture."
 
     notify_user_wallet_is_credited:
       subject: "Votre porte-monnaie a bien été crédité"

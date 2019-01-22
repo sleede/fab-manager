@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# API Controller for resources of type User with role 'admin'.
 class API::AdminsController < API::ApiController
   before_action :authenticate_user!
 
@@ -31,7 +34,7 @@ class API::AdminsController < API::ApiController
 
   def destroy
     @admin = User.admins.find(params[:id])
-    if current_user.is_admin? and  @admin != current_user
+    if current_user.admin? && @admin != current_user
       @admin.destroy
       head :no_content
     else

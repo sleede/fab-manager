@@ -151,7 +151,6 @@ fr:
     validated_trainings: "Formations validées"
     tags: "Étiquettes"
     number_of_invoices: "Nombre de factures"
-    invoicing_disabled: "Facturation désactivée"
     projects: "Projets"
     facebook: "Facebook"
     twitter: "Twitter"
@@ -213,8 +212,6 @@ fr:
       # notifications internes à l'application
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abus a été signalé sur <strong>%{TYPE} %{ID} : <em>%{NAME}</em></strong>."
-      notify_admin_invoicing_changed:
-        invoices_generation_was_STATUS_for_user_NAME_html: "La génération de factures a été <strong>{STATUS, select, true{désactivée} other{activée}}</strong> pour l'utilisateur {NAME}."  # messageFormat interpolation
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Une réservation <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:

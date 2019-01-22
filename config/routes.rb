@@ -176,7 +176,7 @@ Rails.application.routes.draw do
 
   match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
 
-  authenticate :user, lambda { |u| u.is_admin? } do
+  authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
 

@@ -5,11 +5,11 @@ class SlotPolicy < ApplicationPolicy
     enabled = (Setting.find_by( name: 'booking_move_enable').value == 'true')
 
     # these condition does not apply to admins
-    user.is_admin? or
+    user.admin? or
         (record.reservation.user == user and enabled and ((record.start_at - Time.now).to_i / 3600 >= delay))
   end
 
   def cancel?
-    user.is_admin? or record.reservation.user == user
+    user.admin? or record.reservation.user == user
   end
 end
