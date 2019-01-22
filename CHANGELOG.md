@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v2.8.2 2019 January 22
+
 - Removed ability to disable invoicing for an user
 - Fixed a missing translation in plan form
 - Fix a bug: error handling on password recovery
@@ -13,6 +15,7 @@
 - Improved user autocompletion when using multiple words
 - Refactored frontend invoices translations
 - Updated RailRoady 1.4.0 to 1.5.3
+- [TODO DEPLOY] `bundle install`
 
 ## v2.8.1 2019 January 02
 
