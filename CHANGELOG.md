@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: unable to run rails console
+
 ## v2.8.2 2019 January 22
 
 - Removed ability to disable invoicing for an user
