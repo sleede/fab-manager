@@ -356,6 +356,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rb-readline (0.5.5)
     rdoc (4.3.0)
     recurrence (1.3.0)
       activesupport
@@ -562,6 +563,7 @@ DEPENDENCIES
   rails (= 4.2.11)
   rails-observers
   rails_12factor
+  rb-readline
   recurrence
   responders (~> 2.0)
   rolify
@@ -587,4 +589,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.1
+   1.17.2

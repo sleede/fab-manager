@@ -49,6 +49,7 @@ group :development do
   # Preview mail in the browser
   gem 'mailcatcher'
   gem 'puma'
+  gem 'rb-readline'
   gem 'rvm-capistrano', require: false
 end
 
