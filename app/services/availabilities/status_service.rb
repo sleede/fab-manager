@@ -17,13 +17,13 @@ class Availabilities::StatusService
 
         slot.id = s.id
         slot.is_reserved = true
-        slot.title = "#{slot.machine.name} - #{show_name ? r.user.profile.full_name : t('availabilities.not_available')}"
+        slot.title = "#{slot.machine.name} - #{show_name ? r.user.profile.full_name : I18n.t('availabilities.not_available')}"
         slot.can_modify = true if @current_user_role == 'admin'
         slot.reservations.push r
 
         next unless r.user == user
 
-        slot.title = "#{slot.machine.name} - #{t('availabilities.i_ve_reserved')}"
+        slot.title = "#{slot.machine.name} - #{I18n.t('availabilities.i_ve_reserved')}"
         slot.can_modify = true
         slot.is_reserved_by_current_user = true
       end
@@ -45,7 +45,7 @@ class Availabilities::StatusService
         next unless r.user == user
 
         slot.id = s.id
-        slot.title = t('availabilities.i_ve_reserved')
+        slot.title = I18n.t('availabilities.i_ve_reserved')
         slot.can_modify = true
         slot.is_reserved = true
       end
