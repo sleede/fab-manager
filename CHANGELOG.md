@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Fix a bug: unable to run rails console
+- Fix a bug: some reservation slots are not shown on the user calendars (#127)
 
 ## v2.8.2 2019 January 22
 
