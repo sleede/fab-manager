@@ -43,5 +43,7 @@ class NotificationType
     notify_member_about_coupon
     notify_member_reservation_reminder
   ]
-  # deprecated: notify_admin_invoicing_changed
+  # deprecated:
+  # - notify_member_subscribed_plan_is_changed
+  # - notify_admin_invoicing_changed
 end
