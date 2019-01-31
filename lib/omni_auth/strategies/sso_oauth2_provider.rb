@@ -20,9 +20,9 @@ module OmniAuth::Strategies
 
 
     option :client_options,
-           { site: active_provider.providable.base_url,
-             authorize_url: active_provider.providable.authorization_endpoint,
-             token_url: active_provider.providable.token_endpoint }
+           site: active_provider.providable.base_url,
+           authorize_url: active_provider.providable.authorization_endpoint,
+           token_url: active_provider.providable.token_endpoint
 
 
     uid { parsed_info['user.uid'.to_sym] }
