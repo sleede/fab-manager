@@ -21,38 +21,18 @@ class PluginRegistry
   end
 
   def self.register_glob(root, extension, options=nil)
-    self.asset_globs << [root, extension, options || {}]
+    asset_globs << [root, extension, options || {}]
   end
 
-  def self.register_asset(asset, opts=nil)
+  def self.register_asset(asset, _opts = nil)
     if asset =~ /\.js$|\.js\.erb$|\.js\.es6$|\.coffee$|\.coffee\.erb/
-      # if opts == :admin
-      #   self.admin_javascripts << asset
-      # else
-      #   if opts == :server_side
-      #     self.server_side_javascripts << asset
-      #   end
-      self.javascripts << asset
-      # end
+      javascripts << asset
     elsif asset =~ /\.css$|\.scss$/
-      # if opts == :mobile
-      #   self.mobile_stylesheets << asset
-      # elsif opts == :desktop
-      #   self.desktop_stylesheets << asset
-      # elsif opts == :variables
-      #   self.sass_variables << asset
-      # else
-        self.stylesheets << asset
-      # end
-
-    # elsif asset =~ /\.hbs$/
-    #   self.handlebars << asset
-    # elsif asset =~ /\.js\.handlebars$/
-    #   self.handlebars << asset
+      stylesheets << asset
     end
   end
 
   def self.insert_code(key)
-    self.code_insertions[key]&.join('\n')
+    code_insertions[key]&.join('\n')
   end
 end

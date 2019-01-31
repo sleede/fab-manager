@@ -11,7 +11,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Max: 200
 Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
+  EnforcedStyle: braces
 Style/RegexpLiteral:
   EnforcedStyle: slashes
 Style/EmptyElse:
