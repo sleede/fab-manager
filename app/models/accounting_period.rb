@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'checksum'
+require 'version'
+
 # AccountingPeriod is a period of N days (N > 0) which as been closed by an admin
 # to prevent writing new accounting lines (invoices & refunds) during this period of time.
 class AccountingPeriod < ActiveRecord::Base
@@ -26,12 +29,25 @@ class AccountingPeriod < ActiveRecord::Base
   private
 
   def to_json_archive(invoices)
+    previous_file = previous_period&.archive_file
+    code_checksum = Checksum.code
+    last_archive_checksum = Checksum.file(previous_file)
     ApplicationController.new.view_context.render(
       partial: 'archive/accounting',
-      locals: { invoices: invoices },
+      locals: {
+        invoices: invoices,
+        code_checksum: code_checksum,
+        last_archive_checksum: last_archive_checksum,
+        previous_file: previous_file,
+        software_version: Version.current
+      },
       formats: [:json],
       handlers: [:jbuilder]
     )
+  end
+
+  def previous_period
+    AccountingPeriod.order(closed_at: :desc).limit(2).last
   end
 
   def archive_closed_data
