@@ -3,6 +3,9 @@
 require 'fileutils'
 require 'plugin_registry'
 
+# fab-manager extensible functionalities
+module Plugin; end
+
 class Plugin::Instance
   attr_accessor :path
 
