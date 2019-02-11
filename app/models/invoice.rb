@@ -14,7 +14,7 @@ class Invoice < ActiveRecord::Base
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
 
-  after_create :update_reference
+  after_create :update_reference, :chain_record
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
 
   validates_with ClosedPeriodValidator
@@ -209,6 +209,17 @@ class Invoice < ActiveRecord::Base
   # get amount total paid
   def amount_paid
     total - (wallet_amount || 0)
+  end
+
+  def chain_record
+    sha256 = Digest::SHA256.new
+
+    previous = Invoice.where(created_at: Invoice.select('MAX(created_at)')).limit(1).first
+
+    self.footprint = sha256.hexdigest "#{id}#{invoice_id}#{invoiced_type}#{stp_invoice_id}#{total}#{created_at}#{updated_at}" \
+                                      "#{user_id}#{reference}#{avoir_mode}#{avoir_date}#{invoice_id}#{type}" \
+                                      "#{subscription_to_expire}#{description}#{wallet_amount}#{wallet_transaction_id}" \
+                                      "#{coupon_id}#{previous ? previous.footprint : ''}"
   end
 
   private
