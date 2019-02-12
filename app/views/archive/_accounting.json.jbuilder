@@ -1,6 +1,6 @@
 json.invoices do
   json.array!(invoices) do |invoice|
-    json.extract! invoice, :id, :stp_invoice_id, :created_at, :reference
+    json.extract! invoice, :id, :stp_invoice_id, :created_at, :reference, :footprint
     json.total number_to_currency(invoice.total / 100.0)
     json.invoiced do
       json.type invoice.invoiced_type
@@ -44,7 +44,7 @@ json.invoices do
       end
     end
     json.invoice_items invoice.invoice_items do |item|
-      json.extract! item, :id, :stp_invoice_item_id, :created_at, :description
+      json.extract! item, :id, :stp_invoice_item_id, :created_at, :description, :footprint
       json.amount number_to_currency(item.amount / 100.0)
     end
   end

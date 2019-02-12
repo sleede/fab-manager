@@ -212,14 +212,16 @@ class Invoice < ActiveRecord::Base
   end
 
   def chain_record
+    max_date = created_at || DateTime.now
+    previous = Invoice.where('created_at < ?', max_date)
+                      .order('created_at DESC')
+                      .limit(1)
+
+    columns  = Invoice.columns.map(&:name)
+                      .delete_if { |c| c == 'footprint' }
+
     sha256 = Digest::SHA256.new
-
-    previous = Invoice.where(created_at: Invoice.select('MAX(created_at)')).limit(1).first
-
-    self.footprint = sha256.hexdigest "#{id}#{invoice_id}#{invoiced_type}#{stp_invoice_id}#{total}#{created_at}#{updated_at}" \
-                                      "#{user_id}#{reference}#{avoir_mode}#{avoir_date}#{invoice_id}#{type}" \
-                                      "#{subscription_to_expire}#{description}#{wallet_amount}#{wallet_transaction_id}" \
-                                      "#{coupon_id}#{previous ? previous.footprint : ''}"
+    self.footprint = sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}"
   end
 
   private
