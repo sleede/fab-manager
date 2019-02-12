@@ -31,7 +31,7 @@ class AccountingPeriod < ActiveRecord::Base
   def to_json_archive(invoices)
     previous_file = previous_period&.archive_file
     code_checksum = Checksum.code
-    last_archive_checksum = Checksum.file(previous_file)
+    last_archive_checksum = previous_file ? Checksum.file(previous_file) : nil
     ApplicationController.new.view_context.render(
       partial: 'archive/accounting',
       locals: {
@@ -47,7 +47,7 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def previous_period
-    AccountingPeriod.order(closed_at: :desc).limit(2).last
+    AccountingPeriod.where('closed_at < ?', closed_at).order(closed_at: :desc).limit(1).last
   end
 
   def archive_closed_data
