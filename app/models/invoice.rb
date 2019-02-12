@@ -212,16 +212,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def chain_record
-    max_date = created_at || DateTime.now
-    previous = Invoice.where('created_at < ?', max_date)
-                      .order('created_at DESC')
-                      .limit(1)
+    self.footprint = compute_footprint
+  end
 
-    columns  = Invoice.columns.map(&:name)
-                      .delete_if { |c| c == 'footprint' }
-
-    sha256 = Digest::SHA256.new
-    self.footprint = sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}"
+  def check_footprint
+    invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
   end
 
   private
@@ -267,6 +262,19 @@ class Invoice < ActiveRecord::Base
     return Invoice.count unless defined? start && defined? ending
 
     Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
+  end
+
+  def compute_footprint
+    max_date = created_at || DateTime.now
+    previous = Invoice.where('created_at < ?', max_date)
+                      .order('created_at DESC')
+                      .limit(1)
+
+    columns  = Invoice.columns.map(&:name)
+                      .delete_if { |c| %w[footprint updated_at].include? c }
+
+    sha256 = Digest::SHA256.new
+    sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}"
   end
 
 end
