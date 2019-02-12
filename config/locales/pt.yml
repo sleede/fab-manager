@@ -39,6 +39,7 @@ pt:
       cannot_overlap: "can't overlap an existing accounting period"                        # missing translation
       cannot_encompass: "can't encompass an existing accounting period"                    # missing translation
       in_closed_period: "can't be within a closed accounting period"                       # missing translation
+      invalid_footprint: "invoice's checksum is invalid"                                   # missing translation
 
   activemodel:
     errors:

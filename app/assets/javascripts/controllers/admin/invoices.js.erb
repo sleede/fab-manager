@@ -671,6 +671,9 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     // any form errors will come here
     $scope.errors = {};
 
+    // will match any error about invoices
+    $scope.invoiceErrorRE = /^invoice_(.+)$/;
+
     // existing closed periods, provided by the API
     $scope.accountingPeriods = periods;
 

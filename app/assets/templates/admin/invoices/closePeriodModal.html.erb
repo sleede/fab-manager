@@ -46,6 +46,9 @@
       <span class="help-block error" ng-show="errors.end_at">{{ errors.end_at[0] }}</span>
     </div>
   </form>
+  <div ng-repeat="(key, value) in errors" ng-if="invoiceErrorRE.test(key)" class="row col-md-12">
+    <span class="help-block error">{{ $parent.invoiceErrorRE.exec(key)[1] }} : {{ value[0] }}</span>
+  </div>
   <div>
     <h4 translate>{{ 'invoices.previous_closings' }}</h4>
     <table class="table closings-table" ng-show="accountingPeriods.length > 0">
