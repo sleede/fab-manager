@@ -54,7 +54,7 @@
 # v2.7.3 2018 December 03
 
 - Updated Uglifier gem to support ES6 syntax
-- Fix rake task fablab:es_build_projects_index for ElasticSearch > 1.7
+- Fix rake task `fablab:es:build_projects_index` for ElasticSearch > 1.7
 - Fix Dockerfile: yarn was not setup correctly
 - Fix: unable to build assets
 
@@ -96,7 +96,7 @@
 
 - Ability to parametrize machines order on the booking page
 - Ability to set a neutral gender for the fablab's title (#108)
-- Fix a bug: rake task fablab:fix:categories_slugs bash interpretation error
+- Fix a bug: rake task `fablab:fix:categories_slugs` bash interpretation error
 - Fix a bug: file inputs filled with long filenames render improperly with an overflow
 - Fix a bug: title concordance radio buttons render improperly on smaller screens
 - Improved verifications in ElasticSearch upgrade script
@@ -290,7 +290,7 @@
 - Fix a bug: new plans statistics are not shown
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
-- [TODO DEPLOY] `rake fablab:es_add_spaces`
+- [TODO DEPLOY] `rake fablab:es:add_spaces`
 - [TODO DEPLOY] `rake fablab:fix:new_plans_statistics` if you have created plans from v2.4.10
 
 ## v2.4.11 2017 March 15
@@ -306,7 +306,7 @@
 - Fix a bug: navigation to about page duplicates admin's links in left menu
 - Fix a bug: changing the price of a plan lost its past statistics
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `rake fablab:set_plans_slugs`
+- [TODO DEPLOY] `rake fablab:fix:set_plans_slugs`
 
 ## v2.4.9 2017 January 4
 
@@ -321,8 +321,8 @@
 - Fix a bug: when regenerating statistics, previous values are not fully removed (only 10 firsts), resulting in wrong statistics generation (2)
 - Fix a bug: when deleting an availability just after its creation, the indexer workers crash and retries for a month
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
-- [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
-- [TODO DEPLOY] `rake fablab:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
+- [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es:build_availabilities_index` (1)
+- [TODO DEPLOY] `rake fablab:es:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
 
 ## v2.4.8 2016 December 15
 
@@ -450,8 +450,8 @@
 - Fix a bug: reordering project's steps trigger the unsaved-warning dialog
 - Fix a bug: unable to compile assets in Docker with CoffeeScript error
 - Fix a bug: do not force HTTPS for URLs in production environments
-- [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
-- [TODO DEPLOY] `rake fablab:es_add_event_filters`
+- [TODO DEPLOY] `rake fablab:es:build_availabilities_index`
+- [TODO DEPLOY] `rake fablab:es:add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
 - [TODO DEPLOY] add `EXCEL_DATE_FORMAT`, `ALLOWED_EXTENSIONS` and `ALLOWED_MIME_TYPES` environment variable in `application.yml`

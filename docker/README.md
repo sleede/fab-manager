@@ -236,7 +236,7 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bund
 
 ### prepare Elasticsearch (search engine)
 
-`docker-compose run --rm fabmanager bundle exec rake fablab:es_build_stats`
+`docker-compose run --rm fabmanager bundle exec rake fablab:es:build_stats`
 
 ### start all services
 

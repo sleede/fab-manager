@@ -10,6 +10,9 @@ Metrics/AbcSize:
   Max: 45
 Metrics/ClassLength:
   Max: 200
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/**/*.rake'
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/RegexpLiteral:
