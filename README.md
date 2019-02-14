@@ -164,7 +164,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    rake db:create
    rake db:migrate
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
-   rake fablab:es_build_stats
+   rake fablab:es:build_stats
    # for tests
    RAILS_ENV=test rake db:create
    RAILS_ENV=test rake db:migrate
@@ -255,7 +255,7 @@ environment.
    rake db:create
    rake db:migrate
    ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
-   rake fablab:es_build_stats
+   rake fablab:es:build_stats
    # for tests
    RAILS_ENV=test rake db:create
    RAILS_ENV=test rake db:migrate
@@ -393,7 +393,7 @@ If the scheduled task wasn't executed for any reason (eg. you are in a dev envir
 
 ```bash
 # Here for the 50 last days
-rake fablab:generate_stats[50]
+rake fablab:es:generate_stats[50]
 ```
 
 <a name="backup-and-restore-elasticsearch"></a>

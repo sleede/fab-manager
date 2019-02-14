@@ -526,6 +526,8 @@ es:
 
       authentication_new:
         # add a new authentication provider (SSO)
+        local_database: "Base de datos local"
+        o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"
         a_local_database_provider_already_exists_unable_to_create_another: "A proveedor de \"Base de datos local\"  ya existe. No se puede crear otro."
         local_provider_successfully_saved: "Proveedor local guardado correctamente."

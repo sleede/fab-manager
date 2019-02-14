@@ -53,7 +53,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
 
 ```bash
 # replace GitHub with the name of the provider you just created
-rake fablab:switch_auth_provider[GitHub]
+rake fablab:auth:switch_provider[GitHub]
 ```
 
 - As the command just prompted you, you have to re-compile the assets
@@ -62,5 +62,5 @@ rake fablab:switch_auth_provider[GitHub]
 - Then restart the web-server or the container.
 - Finally, to notify all existing users about the change (and send them their migration code/link), run:
 ```bash
-rake fablab:notify_auth_changed
+rake fablab:auth:notify_changed
 ```
