@@ -511,6 +511,8 @@ fr:
 
       authentication_new:
         # ajouter un nouveau fournisseur d'authentification (SSO)
+        local_database: "Base de données locale"
+        o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Ajouter un fournisseur d'authentification"
         a_local_database_provider_already_exists_unable_to_create_another: "Un fournisseur de type \"Base de données locale\" existe déjà. Impossible d'en créer un second."
         local_provider_successfully_saved: "Le fournisseur local a bien été enregistré."
