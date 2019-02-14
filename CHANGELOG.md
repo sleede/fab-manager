@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+- Refactored rake tasks to use namespaces and descriptions
+- Fix a bug: unable to create a new oAuth 2.0 provider
+- Fix a bug: application in unavailable if a SSO is active
+- Fixed missing translations in authentication providers form
+
 ## v2.8.3 2019 January 29
 
 - Added user's manual (fr)
