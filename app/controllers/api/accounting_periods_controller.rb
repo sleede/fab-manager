@@ -4,7 +4,7 @@
 class API::AccountingPeriodsController < API::ApiController
 
   before_action :authenticate_user!
-  before_action :set_period, only: %i[show]
+  before_action :set_period, only: %i[show download_archive]
 
   def index
     @accounting_periods = AccountingPeriodService.all_periods_with_users
@@ -33,10 +33,15 @@ class API::AccountingPeriodsController < API::ApiController
     end
   end
 
+  def download_archive
+    authorize AccountingPeriod
+    send_file File.join(Rails.root, @accounting_period.archive_file), type: 'application/json', disposition: 'attachment'
+  end
+
   private
 
   def set_period
-    @tag = AccountingPeriod.find(params[:id])
+    @accounting_period = AccountingPeriod.find(params[:id])
   end
 
   def period_params

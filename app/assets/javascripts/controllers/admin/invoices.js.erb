@@ -655,8 +655,8 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
 /**
  * Controller used in the modal window allowing an admin to close an accounting period
  */
-Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
-  function ($scope, $uibModalInstance, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
+Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', '$window', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
+  function ($scope, $uibModalInstance, $window, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
     const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
     const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
 
@@ -738,5 +738,12 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
      * Cancel the refund, dismiss the modal window
      */
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+    /**
+     * Trigger the API call to download the JSON archive of the closed accounting period
+     */
+    $scope.downloadArchive = function(period) {
+      $window.location.href = `/api/accounting_periods/${period.id}/archive`;
+    }
   }
 ]);

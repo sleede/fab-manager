@@ -213,6 +213,10 @@ table.closings-table {
     border-bottom: 0;
   }
 
+  thead th.download-archive {
+    display: none;
+  }
+
   tr:after {  /* clearing float */
     content: ' ';
     display: block;
@@ -229,5 +233,22 @@ table.closings-table {
   tbody td, thead th {
     width: 24%;  /* 24% is less than (100% / 4 cols) = 25% */
     float: left;
+  }
+
+  tbody td.download-archive {
+    position: absolute;
+    right: 10px;
+    width: 41px;
+    cursor: pointer;
+  }
+
+  tbody td.download-archive:hover {
+    i {
+      display: none;
+    }
+    &:after {
+      content: '\f019';
+      font-family: 'fontawesome';
+    }
   }
 }

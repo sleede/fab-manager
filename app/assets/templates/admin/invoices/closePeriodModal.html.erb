@@ -57,7 +57,7 @@
           <th translate>{{ 'invoices.start_date' }}</th>
           <th translate>{{ 'invoices.end_date' }}</th>
           <th translate>{{ 'invoices.closed_at' }}</th>
-          <th translate>{{ 'invoices.closed_by' }}</th>
+          <th class="download-archive" />
         </tr>
       </thead>
       <tbody>
@@ -66,6 +66,7 @@
           <td>{{period.end_at | amDateFormat:'L'}}</td>
           <td>{{period.closed_at | amDateFormat:'L'}}</td>
           <td>{{period.user_name}}</td>
+          <td class="download-archive" ng-click="downloadArchive(period)"><i class="fa fa-archive"></i></td>
         </tr>
       </tbody>
     </table>
