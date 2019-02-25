@@ -228,6 +228,10 @@ $btn-danger-border:              $btn-default-border !default;
 
 $btn-link-disabled-color:        $gray-light !default;
 
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius-base:         $border-radius-base;
+$btn-border-radius-large:        $border-radius-large;
+$btn-border-radius-small:        $border-radius-small;
 
 
 //== Forms
@@ -537,6 +541,7 @@ $jumbotron-color:                inherit !default;
 $jumbotron-bg:                   $gray-lighter !default;
 $jumbotron-heading-color:        inherit !default;
 $jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
+$jumbotron-heading-font-size:    ceil(($font-size-base * 4.5));
 
 
 //== Form states and alerts
@@ -926,6 +931,8 @@ $blockquote-border-color:     $gray-lighter !default;
 $page-header-border-color:    $gray-lighter !default;
 //** Width of horizontal description list titles
 $dl-horizontal-offset:        $component-offset-horizontal !default;
+//** Point at which .dl-horizontal becomes horizontal
+$dl-horizontal-breakpoint:    $grid-float-breakpoint;
 //** Horizontal line color.
 $hr-border:                   $gray-lighter !default;
 
