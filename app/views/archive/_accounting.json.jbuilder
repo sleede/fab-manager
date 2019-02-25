@@ -50,6 +50,11 @@ json.invoices do
   end
 end
 
+json.totals do
+  json.period_total period_total / 100.0
+  json.perpetual_total perpetual_total / 100.0
+end
+
 json.software do
   json.name 'Fab-Manager'
   json.version software_version
@@ -60,3 +65,5 @@ json.previous_archive do
   json.filename previous_file
   json.checksum last_archive_checksum
 end
+
+json.period_footprint period_footprint

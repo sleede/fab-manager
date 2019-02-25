@@ -8,6 +8,7 @@ require 'version'
 class AccountingPeriod < ActiveRecord::Base
   before_destroy { false }
   before_update { false }
+  before_create :compute_totals
   after_create :archive_closed_data
 
   validates :start_at, :end_at, :closed_at, :closed_by, presence: true
@@ -17,6 +18,10 @@ class AccountingPeriod < ActiveRecord::Base
 
   def delete
     false
+  end
+
+  def invoices
+    Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_at, end_date: end_at)
   end
 
   def archive_file
@@ -37,6 +42,9 @@ class AccountingPeriod < ActiveRecord::Base
       partial: 'archive/accounting',
       locals: {
         invoices: invoices,
+        period_total: period_total,
+        perpetual_total: perpetual_total,
+        period_footprint: footprint,
         code_checksum: code_checksum,
         last_archive_checksum: last_archive_checksum,
         previous_file: previous_file,
@@ -52,8 +60,21 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def archive_closed_data
-    data = Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_at, end_date: end_at)
-                  .includes(:invoice_items)
+    data = invoices.includes(:invoice_items)
     File.write(archive_file, to_json_archive(data))
+  end
+
+  def compute_totals
+    self.period_total = invoices.all.map(&:total).reduce(:+)
+    self.perpetual_total = Invoice.where('created_at < :end_date', end_date: end_at).all.map(&:total).reduce(:+)
+    self.footprint = compute_footprint
+  end
+
+  def compute_footprint
+    columns  = Invoice.columns.map(&:name)
+                      .delete_if { |c| %w[footprint updated_at].include? c }
+
+    sha256 = Digest::SHA256.new
+    sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}"
   end
 end
