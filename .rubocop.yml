@@ -13,6 +13,7 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   Exclude:
     - 'lib/tasks/**/*.rake'
+    - 'config/routes.rb'
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/RegexpLiteral:
