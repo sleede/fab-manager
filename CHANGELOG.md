@@ -3,7 +3,9 @@
 - Refactored rake tasks to use namespaces and descriptions
 - Fix a bug: unable to create a new oAuth 2.0 provider
 - Fix a bug: application in unavailable if a SSO is active
+- Fix a security issue: dependency bootstrap < 4.3.1 has an XSS vulnerability as described in [CVE-2019-8331](https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/)
 - Fixed missing translations in authentication providers form
+- [TODO DEPLOY] `bundle install`
 
 ## v2.8.3 2019 January 29
 
@@ -44,7 +46,7 @@
 - Improved automated tests suite
 - Added Rubocop gem to the Gemfile (ruby syntax checking)
 - Added badges to README
-- Fix a security update: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
+- Fix a security issue: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `bundle install`
 
