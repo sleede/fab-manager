@@ -94,7 +94,8 @@ class PDF::Invoice < Prawn::Document
             next unless item.subscription_id
 
             subscription = Subscription.find item.subscription_id
-            object = "\n- #{object}\n- #{(invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : '') + subscription_verbose(subscription, name)}"
+            cancellation = invoice.is_a?(Avoir) ? I18n.t('invoices.cancellation') + ' - ' : ''
+            object = "\n- #{object}\n- #{cancellation + subscription_verbose(subscription, name)}"
             break
           end
         when 'Subscription'
@@ -128,7 +129,11 @@ class PDF::Invoice < Prawn::Document
                               START: I18n.l(invoice.invoiced.start_at.to_date),
                               END: I18n.l(invoice.invoiced.end_at.to_date))
           else
-            subscription_end_at = subscription_expiration_date.is_a?(Time) ? subscription_expiration_date : DateTime.parse(subscription_expiration_date)
+            subscription_end_at = if subscription_expiration_date.is_a?(Time)
+                                    subscription_expiration_date
+                                  else
+                                    DateTime.parse(subscription_expiration_date)
+                                  end
             subscription_start_at = subscription_end_at - subscription.plan.duration
             details += I18n.t('invoices.subscription_NAME_from_START_to_END',
                               NAME: item.description,
@@ -151,9 +156,13 @@ class PDF::Invoice < Prawn::Document
           when 'Event'
             details += I18n.t('invoices.event_reservation_DESCRIPTION', DESCRIPTION: item.description)
             # details of the number of tickets
-            details += "\n  " + I18n.t('invoices.full_price_ticket', count: invoice.invoiced.nb_reserve_places) if invoice.invoiced.nb_reserve_places.positive?
+            if invoice.invoiced.nb_reserve_places.positive?
+              details += "\n  " + I18n.t('invoices.full_price_ticket', count: invoice.invoiced.nb_reserve_places)
+            end
             invoice.invoiced.tickets.each do |t|
-              details += "\n  " + I18n.t('invoices.other_rate_ticket', count: t.booked, NAME: t.event_price_category.price_category.name)
+              details += "\n  " + I18n.t('invoices.other_rate_ticket',
+                                         count: t.booked,
+                                         NAME: t.event_price_category.price_category.name)
             end
           ### wallet credit
           when nil
@@ -165,7 +174,7 @@ class PDF::Invoice < Prawn::Document
           end
         end
 
-        data += [ [details, number_to_currency(price)] ]
+        data += [[details, number_to_currency(price)]]
         total_calc += price
       end
 
@@ -174,7 +183,7 @@ class PDF::Invoice < Prawn::Document
         cp = invoice.coupon
         discount = 0
         if cp.type == 'percent_off'
-          discount = total_calc  * cp.percent_off / 100.0
+          discount = total_calc * cp.percent_off / 100.0
         elsif cp.type == 'amount_off'
           # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
           if invoice.is_a?(Avoir)
@@ -221,7 +230,8 @@ class PDF::Invoice < Prawn::Document
         # checking the round number
         rounded = sprintf('%.2f', vat).to_f + sprintf('%.2f', total - vat).to_f
         if rounded != sprintf('%.2f', total_calc).to_f
-          puts "ERROR: rounding the numbers cause an invoice inconsistency. Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
+          puts 'ERROR: rounding the numbers cause an invoice inconsistency. ' +
+               "Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
         end
       else
         data += [[I18n.t('invoices.total_amount'), number_to_currency(total)]]
@@ -276,8 +286,7 @@ class PDF::Invoice < Prawn::Document
         else
           puts "ERROR : specified refunding method (#{payment_verbose}) is unknown"
         end
-        payment_verbose += ' '+I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
-
+        payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
       else
         # subtract the wallet amount for this invoice from the total
         if invoice.wallet_amount
@@ -301,7 +310,8 @@ class PDF::Invoice < Prawn::Document
         end
         if invoice.wallet_amount
           if total.positive?
-            payment_verbose += ' ' + I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+            payment_verbose += ' ' + I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' +
+                               I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
           else
             payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
           end
@@ -330,20 +340,33 @@ class PDF::Invoice < Prawn::Document
 
   def reservation_dates_verbose(slot)
     if slot.start_at.to_date == slot.end_at.to_date
-      '- ' + I18n.t('invoices.on_DATE_from_START_to_END', DATE: I18n.l(slot.start_at.to_date), START: I18n.l(slot.start_at, format: :hour_minute), END: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
+      '- ' + I18n.t('invoices.on_DATE_from_START_to_END',
+                    DATE: I18n.l(slot.start_at.to_date),
+                    START: I18n.l(slot.start_at, format: :hour_minute),
+                    END: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
     else
-      '- ' + I18n.t('invoices.from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME', STARTDATE: I18n.l(slot.start_at.to_date), ENDDATE: I18n.l(slot.start_at.to_date), STARTTIME: I18n.l(slot.start_at, format: :hour_minute), ENDTIME: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
+      '- ' + I18n.t('invoices.from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME',
+                    STARTDATE: I18n.l(slot.start_at.to_date),
+                    ENDDATE: I18n.l(slot.start_at.to_date),
+                    STARTTIME: I18n.l(slot.start_at, format: :hour_minute),
+                    ENDTIME: I18n.l(slot.end_at, format: :hour_minute)) + "\n"
     end
   end
 
   def subscription_verbose(subscription, username)
     subscription_start_at = subscription.expired_at - subscription.plan.duration
     duration_verbose = I18n.t("duration.#{subscription.plan.interval}", count: subscription.plan.interval_count)
-    I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE', NAME: username, DURATION: duration_verbose, DATE: I18n.l(subscription_start_at.to_date))
+    I18n.t('invoices.subscription_of_NAME_for_DURATION_starting_from_DATE',
+           NAME: username,
+           DURATION: duration_verbose,
+           DATE: I18n.l(subscription_start_at.to_date))
   end
 
   def offer_day_verbose(offer_day, username)
-    I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE', NAME: username, STARTDATE: I18n.l(offer_day.start_at.to_date), ENDDATE: I18n.l(offer_day.end_at.to_date))
+    I18n.t('invoices.subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE',
+           NAME: username,
+           STARTDATE: I18n.l(offer_day.start_at.to_date),
+           ENDDATE: I18n.l(offer_day.end_at.to_date))
   end
 
   ##
