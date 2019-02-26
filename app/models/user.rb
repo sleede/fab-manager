@@ -336,10 +336,10 @@ class User < ActiveRecord::Base
     ex_group = Group.find(changes[:group_id].first)
     meta_data = { ex_group_name: ex_group.name }
 
-    User.admins.each do |admin|
-      notification = Notification.new(meta_data: meta_data)
-      notification.send_notification(type: :notify_admin_user_group_changed, attached_object: self).to(admin).deliver_later
-    end
+    NotificationCenter.call type: :notify_admin_user_group_changed,
+                            receiver: User.admins,
+                            attached_object: self,
+                            meta_data: meta_data
 
     NotificationCenter.call type: :notify_user_user_group_changed,
                             receiver: self,

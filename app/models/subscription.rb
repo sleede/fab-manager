@@ -257,14 +257,16 @@ class Subscription < ActiveRecord::Base
 
   def notify_subscription_extended(free_days)
     meta_data = {}
-    meta_data[:free_days] = true if free_days == true
-    notification = Notification.new(meta_data: meta_data)
-    notification.send_notification(type: :notify_member_subscription_extended, attached_object: self).to(user).deliver_later
+    meta_data[:free_days] = true if free_days
+    NotificationCenter.call type: :notify_member_subscription_extended,
+                            receiver: user,
+                            attached_object: self,
+                            meta_data: meta_data
 
-    User.admins.each do |admin|
-      notification = Notification.new(meta_data: meta_data)
-      notification.send_notification(type: :notify_admin_subscription_extended, attached_object: self).to(admin).deliver_later
-    end
+    NotificationCenter.call type: :notify_admin_subscription_extended,
+                            receiver: User.admins,
+                            attached_object: self,
+                            meta_data: meta_data
   end
 
   def set_expiration_date
