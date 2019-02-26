@@ -276,5 +276,9 @@ pt:
         enjoy_a_discount_of_AMOUNT_with_code_CODE:  "Desfrute de um desconto de %{AMOUNT} em todo o site com o código %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Esse cupom é válido {USAGE, plural, =1{uma vez} other{vérias vezes}}: para todas as suas compras {TYPE, select, amount_off{pelo menos igual ao montante do cupom} other{}}, from now {DATE, select, NO-DATE{e sem limite de tempo} other{até {DATE}}}."
 
+    notify_admin_free_disk_space:                                                                  #translation_missing
+      subject: "Low disk space"
+      body: "Warning: available disk space on the server hosting fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
+
     shared:
       hello: "Olá %{user_name}"

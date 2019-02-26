@@ -1,0 +1,4 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body', THRESHOLD: @notification.get_meta_data(:threshold), AVAILABLE: @notification.get_meta_data(:mb_available)) %></p>
+

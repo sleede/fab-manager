@@ -148,3 +148,6 @@ gem 'axlsx_rails'
 gem 'rubyzip', '>= 1.2.2'
 
 gem 'rack-protection', '1.5.5'
+
+# get free disk space
+gem 'sys-filesystem'

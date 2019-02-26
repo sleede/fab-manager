@@ -308,6 +308,8 @@ en:
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Enjoy a discount of %{PERCENT}% with code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Enjoy a discount of %{AMOUNT} with code %{CODE}"
+      notify_admin_free_disk_space:
+        warning_disk_space_under_threshold: "Warning: the server's available disk space is now %{AVAILABLE} MiB"
 
   statistics:
     # statistics tools for admins
