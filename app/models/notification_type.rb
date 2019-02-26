@@ -42,6 +42,7 @@ class NotificationType
     notify_admin_export_complete
     notify_member_about_coupon
     notify_member_reservation_reminder
+    notify_admin_free_disk_space
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed
