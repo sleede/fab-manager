@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190225102847) do
+ActiveRecord::Schema.define(version: 20190227143153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(version: 20190225102847) do
     t.integer  "wallet_transaction_id"
     t.integer  "coupon_id"
     t.string   "footprint"
+    t.string   "environment"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree

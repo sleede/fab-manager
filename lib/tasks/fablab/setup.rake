@@ -21,5 +21,13 @@ namespace :fablab do
         i.save!
       end
     end
+
+    desc 'assign environment value to all invoices'
+    task set_environment_to_invoices: :environment do
+      Invoice.all.each do |i|
+        i.environment = Rails.env
+        i.save!
+      end
+    end
   end
 end

@@ -14,6 +14,7 @@ class Invoice < ActiveRecord::Base
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
 
+  before_create :add_environment
   after_create :update_reference, :chain_record
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
 
@@ -209,6 +210,10 @@ class Invoice < ActiveRecord::Base
   # get amount total paid
   def amount_paid
     total - (wallet_amount || 0)
+  end
+
+  def add_environment
+    self.environment = Rails.env
   end
 
   def chain_record
