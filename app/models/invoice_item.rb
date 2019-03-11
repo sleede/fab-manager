@@ -8,6 +8,7 @@ class InvoiceItem < ActiveRecord::Base
 
   def chain_record
     self.footprint = compute_footprint
+    save!
   end
 
   def check_footprint
