@@ -5,6 +5,7 @@
 - Fix a bug: application in unavailable if a SSO is active
 - Fix a security issue: dependency bootstrap < 4.3.1 has an XSS vulnerability as described in [CVE-2019-8331](https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/)
 - Fixed missing translations in authentication providers form
+- Limit members search to 50 results to speed up queries
 - [TODO DEPLOY] `bundle install`
 - [TODO DEPLOY]  add `DISK_SPACE_MB_ALERT` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 
