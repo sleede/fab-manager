@@ -32,6 +32,10 @@ class AccountingPeriod < ActiveRecord::Base
     "#{dir}/#{start_at.iso8601}_#{end_at.iso8601}.json"
   end
 
+  def check_footprint
+    footprint == compute_footprint
+  end
+
   private
 
   def to_json_archive(invoices)
@@ -71,8 +75,8 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def compute_footprint
-    columns  = Invoice.columns.map(&:name)
-                      .delete_if { |c| %w[footprint updated_at].include? c }
+    columns = AccountingPeriod.columns.map(&:name)
+                              .delete_if { |c| %w[footprint updated_at].include? c }
 
     sha256 = Digest::SHA256.new
     sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}"

@@ -56,17 +56,17 @@
         <tr>
           <th translate>{{ 'invoices.start_date' }}</th>
           <th translate>{{ 'invoices.end_date' }}</th>
-          <th translate>{{ 'invoices.closed_at' }}</th>
-          <th class="download-archive" />
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="period in accountingPeriods">
           <td>{{period.start_at | amDateFormat:'L'}}</td>
           <td>{{period.end_at | amDateFormat:'L'}}</td>
-          <td>{{period.closed_at | amDateFormat:'L'}}</td>
-          <td>{{period.user_name}}</td>
-          <td class="download-archive" ng-click="downloadArchive(period)"><i class="fa fa-archive"></i></td>
+          <td class="actions">
+            <span class="show-more" uib-popover-template="'<%= asset_path 'admin/invoices/_period.html' %>'"><i class="fa fa-info-circle"></i></span>
+            <span class="download-archive" ng-click="downloadArchive(period)"><i class="fa fa-archive"></i></span>
+          </td>
         </tr>
       </tbody>
     </table>

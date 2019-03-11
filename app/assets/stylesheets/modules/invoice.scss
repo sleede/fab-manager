@@ -213,10 +213,6 @@ table.closings-table {
     border-bottom: 0;
   }
 
-  thead th.download-archive {
-    display: none;
-  }
-
   tr:after {  /* clearing float */
     content: ' ';
     display: block;
@@ -231,19 +227,29 @@ table.closings-table {
   }
 
   tbody td, thead th {
-    width: 24%;  /* 24% is less than (100% / 4 cols) = 25% */
+    width: 32%;  /* 32% is less than (100% / 3 cols) = 33.33% */
     float: left;
   }
 
-  tbody td.download-archive {
-    position: absolute;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
+  tbody .actions {
+    padding-left: 2em;
+
+    & > span {
+      margin-left: 2em;
+      cursor: pointer;
+    }
   }
 
-  tbody td.download-archive:hover {
+  tbody .show-more {
+    color: #00b3ee;
+  }
+
+  tbody .download-archive {
+    width: 32px;
+    height: 32px;
+  }
+
+  tbody .download-archive:hover {
     i {
       display: none;
     }
@@ -252,4 +258,9 @@ table.closings-table {
       font-family: 'fontawesome';
     }
   }
+}
+
+
+.period-info-title {
+  font-weight: bold;
 }

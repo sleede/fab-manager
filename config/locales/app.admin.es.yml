@@ -416,6 +416,9 @@ es:
           end_date: "To"                                                               # translation_missing
           closed_at: "Closed at"                                                       # translation_missing
           closed_by: "By"                                                              # translation_missing
+          period_total: "Period total"                                                 # translation_missing
+          perpetual_total: "Perpetual total"                                           # translation_missing
+          integrity: "Verificación de integridad"
           confirmation_required: "Confirmation required"                               # translation_missing
           confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible. This operation will take some time to complete"       # translation_missing
           period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed"        # translation_missing

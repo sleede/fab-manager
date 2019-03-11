@@ -1,0 +1,18 @@
+<ul>
+  <li><span class="period-info-title" translate>{{ 'invoices.closed_at' }}</span> : <span>{{period.closed_at | amDateFormat:'L'}}</span></li>
+  <li><span class="period-info-title" translate>{{ 'invoices.closed_by' }}</span> : <span>{{period.user_name}}</span></li>
+  <li><span class="period-info-title" translate>{{ 'invoices.period_total' }}</span> : <span>{{period.period_total | currency}}</span></li>
+  <li><span class="period-info-title" translate>{{ 'invoices.perpetual_total' }}</span> : <span>{{period.perpetual_total | currency}}</span></li>
+  <li>
+    <span class="period-info-title" translate>{{ 'invoices.integrity' }}</span> :
+    <span>
+      <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-link chained" ng-show="period.chained_footprint"></i>
+            <i class="fa fa-chain-broken broken" ng-hide="period.chained_footprint"></i>
+          </span>
+          <input type="text" class="form-control" ng-value="period.footprint" readonly="readonly" />
+      </div>
+    </span>
+  </li>
+</ul>
