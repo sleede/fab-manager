@@ -338,7 +338,7 @@ class PDF::Invoice < Prawn::Document
     # factice watermark
     return unless %w[staging test development].include?(invoice.environment)
 
-    transparent(0.3) do
+    transparent(0.1) do
       rotate(45, origin: [0, 0]) do
         image "#{Rails.root}/app/pdfs/data/watermark.png", at: [90, 150]
       end
