@@ -67,3 +67,4 @@ json.previous_archive do
 end
 
 json.period_footprint period_footprint
+json.archive_date date

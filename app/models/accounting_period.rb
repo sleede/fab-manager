@@ -52,7 +52,8 @@ class AccountingPeriod < ActiveRecord::Base
         code_checksum: code_checksum,
         last_archive_checksum: last_archive_checksum,
         previous_file: previous_file,
-        software_version: Version.current
+        software_version: Version.current,
+        date: Time.now.iso8601
       },
       formats: [:json],
       handlers: [:jbuilder]
