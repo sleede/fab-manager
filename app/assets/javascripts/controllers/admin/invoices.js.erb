@@ -659,13 +659,14 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
   function ($scope, $uibModalInstance, $window, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
     const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
     const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
+    const MAX_END = moment.utc(lastClosingEnd.last_end_date).add(1, 'year').toDate();
 
     /* PUBLIC SCOPE */
 
     // date pickers values are bound to these variables
     $scope.period = {
       start_at: LAST_CLOSING,
-      end_at: YESTERDAY
+      end_at: moment(YESTERDAY).isBefore(MAX_END) ? YESTERDAY : MAX_END,
     };
 
     // any form errors will come here
@@ -684,7 +685,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
       startOpened: false,
       endOpened: false,
       minDate: LAST_CLOSING,
-      maxDate: YESTERDAY,
+      maxDate: moment(YESTERDAY).isBefore(MAX_END) ? YESTERDAY : MAX_END,
       options: {
         startingDay: Fablab.weekStartingDay
       }
@@ -693,10 +694,10 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     /**
      * Callback to open the datepicker
      */
-    $scope.openDatePicker = function ($event, pickerId) {
+    $scope.toggleDatePicker = function ($event) {
       $event.preventDefault();
       $event.stopPropagation();
-      $scope.datePicker[`${pickerId}Opened`] = true;
+      $scope.datePicker.endOpened = !$scope.datePicker.endOpened;
     };
 
     /**

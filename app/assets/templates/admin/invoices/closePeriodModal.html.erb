@@ -15,10 +15,10 @@
                datepicker-options="datePicker.options"
                is-open="datePicker.startOpened"
                min-date="datePicker.minDate"
-               max-date="datePicker.maxDate"
+               max-date="datePicker.minDate"
                init-date="period.start_at"
                placeholder="{{datePicker.format}}"
-               ng-click="openDatePicker($event, 'start')"
+               readonly
                required/>
       </div>
       <span class="help-block" ng-show="closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
@@ -39,7 +39,7 @@
                max-date="datePicker.maxDate"
                init-date="period.end_at"
                placeholder="{{datePicker.format}}"
-               ng-click="openDatePicker($event, 'end')"
+               ng-click="toggleDatePicker($event)"
                required/>
       </div>
       <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>

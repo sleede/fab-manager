@@ -21,7 +21,7 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def invoices
-    Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start_at, end_date: end_at)
+    Invoice.where('created_at >= :start_date AND created_at <= :end_date', start_date: start_at, end_date: end_at)
   end
 
   def archive_file
@@ -70,8 +70,9 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def compute_totals
-    self.period_total = invoices.all.map(&:total).reduce(:+)
-    self.perpetual_total = Invoice.where('created_at < :end_date', end_date: end_at).all.map(&:total).reduce(:+)
+    self.period_total = invoices.all.map(&:total).reduce(:+) || 0
+    self.perpetual_total = Invoice.where('created_at <= :end_date AND type IS NULL', end_date: end_at)
+                                  .all.map(&:total).reduce(:+) || 0
     self.footprint = compute_footprint
   end
 
