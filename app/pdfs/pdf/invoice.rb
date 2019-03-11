@@ -340,7 +340,7 @@ class PDF::Invoice < Prawn::Document
 
     transparent(0.1) do
       rotate(45, origin: [0, 0]) do
-        image "#{Rails.root}/app/pdfs/data/watermark.png", at: [90, 150]
+        image "#{Rails.root}/app/pdfs/data/watermark-#{I18n.locale}.png", at: [90, 150]
       end
     end
   end
