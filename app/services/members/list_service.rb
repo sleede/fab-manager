@@ -38,6 +38,7 @@ class Members::ListService
                              'FROM "subscriptions" ' \
                              'WHERE "user_id" = "users"."id")')
                     .where("users.is_active = 'true' AND roles.name = 'member'")
+                    .limit(50)
       query.downcase.split(' ').each do |word|
         members = members.where('lower(f_unaccent(profiles.first_name)) ~ :search OR ' \
                                 'lower(f_unaccent(profiles.last_name)) ~ :search',
