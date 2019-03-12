@@ -40,6 +40,7 @@ en:
       cannot_encompass: "can't encompass an existing accounting period"
       in_closed_period: "can't be within a closed accounting period"
       invalid_footprint: "invoice's checksum is invalid"
+      end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
 
   activemodel:
     errors:

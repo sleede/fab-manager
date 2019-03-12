@@ -47,10 +47,12 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def vat_rate(date)
-    first_rate = vat_history.first
+    @vat_rates = vat_history if @vat_rates.nil?
+
+    first_rate = @vat_rates.first
     return first_rate[:rate] if date < first_rate[:date]
 
-    vat_history.each do |h|
+    @vat_rates.each do |h|
       return h[:rate] if h[:date] <= date
     end
   end
@@ -118,7 +120,7 @@ class AccountingPeriod < ActiveRecord::Base
 
   def compute_footprint
     columns = AccountingPeriod.columns.map(&:name)
-                              .delete_if { |c| %w[footprint updated_at].include? c }
+                              .delete_if { |c| %w[id footprint created_at updated_at].include? c }
 
     sha256 = Digest::SHA256.new
     sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}"

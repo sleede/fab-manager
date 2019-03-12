@@ -40,6 +40,7 @@ fr:
       cannot_encompass: "ne peut pas englober une période comptable existante"
       in_closed_period: "ne peut pas être dans une période comptable fermée"
       invalid_footprint: "la somme de contrôle de la facture est invalide"
+      end_before_start: "La date de fin ne peut pas être antérieure à la date de début. Choisissez une date après le %{START}"
 
   activemodel:
     errors:
