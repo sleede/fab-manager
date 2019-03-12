@@ -21,7 +21,17 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def invoices
-    Invoice.where('created_at >= :start_date AND created_at <= :end_date', start_date: start_at, end_date: end_at)
+    Invoice.where('created_at >= :start_date AND CAST(created_at AS DATE) <= :end_date', start_date: start_at, end_date: end_at)
+  end
+
+  def invoices_with_vat(invoices)
+    invoices.map do |i|
+      if i.type == 'Avoir'
+        { invoice: i, vat_rate: vat_rate(i.avoir_date) }
+      else
+        { invoice: i, vat_rate: vat_rate(i.created_at) }
+      end
+    end
   end
 
   def archive_file
@@ -36,7 +46,27 @@ class AccountingPeriod < ActiveRecord::Base
     footprint == compute_footprint
   end
 
+  def vat_rate(date)
+    first_rate = vat_history.first
+    return first_rate[:rate] if date < first_rate[:date]
+
+    vat_history.each do |h|
+      return h[:rate] if h[:date] <= date
+    end
+  end
+
   private
+
+  def vat_history
+    key_dates = []
+    Setting.find_by(name: 'invoice_VAT-rate').history_values.each do |rate|
+      key_dates.push(date: rate.created_at, rate: (rate.value.to_i / 100.0))
+    end
+    Setting.find_by(name: 'invoice_VAT-active').history_values.each do |v|
+      key_dates.push(date: v.created_at, rate: 0) if v.value == 'false'
+    end
+    key_dates.sort_by { |k| k[:date] }
+  end
 
   def to_json_archive(invoices)
     previous_file = previous_period&.archive_file
@@ -45,7 +75,7 @@ class AccountingPeriod < ActiveRecord::Base
     ApplicationController.new.view_context.render(
       partial: 'archive/accounting',
       locals: {
-        invoices: invoices,
+        invoices: invoices_with_vat(invoices),
         period_total: period_total,
         perpetual_total: perpetual_total,
         period_footprint: footprint,
@@ -70,9 +100,12 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def compute_totals
-    self.period_total = invoices.all.map(&:total).reduce(:+) || 0
-    self.perpetual_total = Invoice.where('created_at <= :end_date AND type IS NULL', end_date: end_at)
-                                  .all.map(&:total).reduce(:+) || 0
+    self.period_total = (invoices.where(type: nil).all.map(&:total).reduce(:+) || 0) -
+                        (invoices.where(type: 'Avoir').all.map(&:total).reduce(:+) || 0)
+    self.perpetual_total = (Invoice.where('CAST(created_at AS DATE) <= :end_date AND type IS NULL', end_date: end_at)
+                                   .all.map(&:total).reduce(:+) || 0) -
+                           (Invoice.where("CAST(created_at AS DATE) <= :end_date AND type = 'Avoir'", end_date: end_at)
+                                   .all.map(&:total).reduce(:+) || 0)
     self.footprint = compute_footprint
   end
 
