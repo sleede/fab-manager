@@ -666,7 +666,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     // date pickers values are bound to these variables
     $scope.period = {
       start_at: LAST_CLOSING,
-      end_at: moment(YESTERDAY).isBefore(MAX_END) ? YESTERDAY : MAX_END,
+      end_at: moment(YESTERDAY).isBefore(MAX_END) ? YESTERDAY : MAX_END
     };
 
     // any form errors will come here
@@ -712,17 +712,22 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
                 title: _t('invoices.confirmation_required'),
                 msg: _t(
                   'invoices.confirm_close_START_END',
-                  { START: moment($scope.period.start_at).format('LL'), END: moment($scope.period.end_at).format('LL') }
+                  { START: moment.utc($scope.period.start_at).format('LL'), END: moment.utc($scope.period.end_at).format('LL') }
                 )
               };
             }
           }
         },
         function () { // creation confirmed
-          AccountingPeriod.save({ accounting_period: $scope.period }, function (resp) {
+          AccountingPeriod.save({
+              accounting_period: {
+                start_at: moment.utc($scope.period.start_at).toDate(),
+                end_at: moment.utc($scope.period.end_at).endOf('day').toDate()
+              }
+            }, function (resp) {
             growl.success(_t(
               'invoices.period_START_END_closed_success',
-              { START: moment(resp.start_at).format('LL'), END: moment(resp.end_at).format('LL') }
+              { START: moment.utc(resp.start_at).format('LL'), END: moment.utc(resp.end_at).format('LL') }
             ));
             $uibModalInstance.close(resp);
           }

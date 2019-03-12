@@ -99,13 +99,20 @@ class AccountingPeriod < ActiveRecord::Base
     File.write(archive_file, to_json_archive(data))
   end
 
+  def price_without_taxe(invoice)
+    invoice[:invoice].total - (invoice[:invoice].total * invoice[:vat_rate])
+  end
+
   def compute_totals
-    self.period_total = (invoices.where(type: nil).all.map(&:total).reduce(:+) || 0) -
-                        (invoices.where(type: 'Avoir').all.map(&:total).reduce(:+) || 0)
-    self.perpetual_total = (Invoice.where('CAST(created_at AS DATE) <= :end_date AND type IS NULL', end_date: end_at)
-                                   .all.map(&:total).reduce(:+) || 0) -
-                           (Invoice.where("CAST(created_at AS DATE) <= :end_date AND type = 'Avoir'", end_date: end_at)
-                                   .all.map(&:total).reduce(:+) || 0)
+    period_invoices = invoices_with_vat(invoices.where(type: nil))
+    period_avoirs = invoices_with_vat(invoices.where(type: 'Avoir'))
+    self.period_total = (period_invoices.map(&method(:price_without_taxe)).reduce(:+) || 0) -
+                        (period_avoirs.map(&method(:price_without_taxe)).reduce(:+) || 0)
+
+    all_invoices = invoices_with_vat(Invoice.where('CAST(created_at AS DATE) <= :end_date AND type IS NULL', end_date: end_at))
+    all_avoirs = invoices_with_vat(Invoice.where("CAST(created_at AS DATE) <= :end_date AND type = 'Avoir'", end_date: end_at))
+    self.perpetual_total = (all_invoices.map(&method(:price_without_taxe)).reduce(:+) || 0) -
+                           (all_avoirs.map(&method(:price_without_taxe)).reduce(:+) || 0)
     self.footprint = compute_footprint
   end
 
