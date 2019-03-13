@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
 class Invoice < ActiveRecord::Base

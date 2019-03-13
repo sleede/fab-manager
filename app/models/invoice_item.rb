@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# A single line inside an invoice. Can be a subscription or a reservation
 class InvoiceItem < ActiveRecord::Base
   belongs_to :invoice
   belongs_to :subscription
