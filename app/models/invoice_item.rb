@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'checksum'
+
 # A single line inside an invoice. Can be a subscription or a reservation
 class InvoiceItem < ActiveRecord::Base
   belongs_to :invoice
@@ -29,7 +31,6 @@ class InvoiceItem < ActiveRecord::Base
     columns = InvoiceItem.columns.map(&:name)
                          .delete_if { |c| %w[footprint updated_at].include? c }
 
-    sha256 = Digest::SHA256.new
-    self.footprint = sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}"
+    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
   end
 end

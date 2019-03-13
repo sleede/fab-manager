@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'checksum'
+
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
 class Invoice < ActiveRecord::Base
@@ -281,8 +283,7 @@ class Invoice < ActiveRecord::Base
     columns  = Invoice.columns.map(&:name)
                       .delete_if { |c| %w[footprint updated_at].include? c }
 
-    sha256 = Digest::SHA256.new
-    sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}"
+    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
   end
 
 end

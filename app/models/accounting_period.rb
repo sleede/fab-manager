@@ -2,6 +2,7 @@
 
 require 'checksum'
 require 'version'
+require 'zip'
 
 # AccountingPeriod is a period of N days (N > 0) which as been closed by an admin
 # to prevent writing new accounting lines (invoices & refunds) during this period of time.
@@ -34,12 +35,20 @@ class AccountingPeriod < ActiveRecord::Base
     end
   end
 
-  def archive_file
+  def archive_folder
     dir = 'accounting'
 
     # create directory if it doesn't exists (accounting)
     FileUtils.mkdir_p dir
-    "#{dir}/#{start_at.iso8601}_#{end_at.iso8601}.json"
+    dir
+  end
+
+  def archive_file
+    "#{archive_folder}/#{start_at.iso8601}_#{end_at.iso8601}.zip"
+  end
+
+  def archive_json_file
+    "#{archive_folder}/#{start_at.iso8601}_#{end_at.iso8601}.json"
   end
 
   def check_footprint
@@ -70,10 +79,8 @@ class AccountingPeriod < ActiveRecord::Base
     key_dates.sort_by { |k| k[:date] }
   end
 
-  def to_json_archive(invoices)
-    previous_file = previous_period&.archive_file
+  def to_json_archive(invoices, previous_file, last_checksum)
     code_checksum = Checksum.code
-    last_archive_checksum = previous_file ? Checksum.file(previous_file) : nil
     ApplicationController.new.view_context.render(
       partial: 'archive/accounting',
       locals: {
@@ -82,7 +89,7 @@ class AccountingPeriod < ActiveRecord::Base
         perpetual_total: perpetual_total,
         period_footprint: footprint,
         code_checksum: code_checksum,
-        last_archive_checksum: last_archive_checksum,
+        last_archive_checksum: last_checksum,
         previous_file: previous_file,
         software_version: Version.current,
         date: Time.now.iso8601
@@ -98,7 +105,19 @@ class AccountingPeriod < ActiveRecord::Base
 
   def archive_closed_data
     data = invoices.includes(:invoice_items)
-    File.write(archive_file, to_json_archive(data))
+    previous_file = previous_period&.archive_file
+    last_archive_checksum = previous_file ? Checksum.file(previous_file) : nil
+    json_data = to_json_archive(data, previous_file, last_archive_checksum)
+    current_archive_checksum = Checksum.text(json_data)
+
+    Zip::OutputStream.open(archive_file) do |io|
+      io.put_next_entry(archive_json_file)
+      io.write(json_data)
+      io.put_next_entry('checksum.sha256')
+      io.write("#{current_archive_checksum}\t#{archive_json_file}")
+      io.put_next_entry('chained.sha256')
+      io.write(Checksum.text("#{current_archive_checksum}#{last_archive_checksum}#{DateTime.iso8601}"))
+    end
   end
 
   def price_without_taxe(invoice)
@@ -122,7 +141,6 @@ class AccountingPeriod < ActiveRecord::Base
     columns = AccountingPeriod.columns.map(&:name)
                               .delete_if { |c| %w[id footprint created_at updated_at].include? c }
 
-    sha256 = Digest::SHA256.new
-    sha256.hexdigest "#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}"
+    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous_period ? previous_period.footprint : ''}")
   end
 end

@@ -23,8 +23,7 @@ class Checksum
 
       content = files.map { |f| File.read(f) }.join
 
-      sha256 = Digest::SHA256.new
-      sha256.hexdigest content
+      Checksum.text(content)
     end
 
     def file(path)
@@ -32,8 +31,12 @@ class Checksum
 
       content = File.read(path)
 
+      Checksum.text(content)
+    end
+
+    def text(data)
       sha256 = Digest::SHA256.new
-      sha256.hexdigest content
+      sha256.hexdigest data
     end
 
     private
