@@ -23,5 +23,28 @@ namespace :fablab do
         i.save!
       end
     end
+
+    desc 'add missing VAT rate to history'
+    task :add_vat_rate, %i[rate date] => :environment do |_task, args|
+      raise 'Missing argument. Usage exemple: rake fablab:setup:add_vat_rate[20,2014-01-01]. Use 0 to disable' unless args.rate && args.date
+
+      if args.rate.zero?
+        setting = Setting.find_by(name: 'invoice_VAT-active')
+        HistoryValue.create!(
+          setting_id: setting.id,
+          user_id: User.admins.first.id,
+          value: 'false',
+          created_at: DateTime.parse(args.date)
+        )
+      else
+        setting = Setting.find_by(name: 'invoice_VAT-rate')
+        HistoryValue.create!(
+          setting_id: setting.id,
+          user_id: User.admins.first.id,
+          value: args.rate,
+          created_at: DateTime.parse(args.date)
+        )
+      end
+    end
   end
 end
