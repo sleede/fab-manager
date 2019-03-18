@@ -1,12 +1,14 @@
 # Changelog Fab Manager
 
+## v2.8.4 2019 March 18
+
+- Limit members search to 50 results to speed up queries
 - Refactored rake tasks to use namespaces and descriptions
 - Fix a bug: unable to create a new oAuth 2.0 provider
 - Fix a bug: application in unavailable if a SSO is active
 - Fix a security issue: dependency bootstrap < 4.3.1 has an XSS vulnerability as described in [CVE-2019-8331](https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/)
 - Fixed missing translations in authentication providers form
-- Limit members search to 50 results to speed up queries
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 ## v2.8.3 2019 January 29
 
@@ -30,7 +32,7 @@
 - Fix a bug: Invalid translation in new partner modal
 - Refactored frontend invoices translations
 - Updated RailRoady 1.4.0 to 1.5.3
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 ## v2.8.1 2019 January 02
 
@@ -49,7 +51,7 @@
 - Added badges to README
 - Fix a security issue: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 # v2.7.4 2018 December 04
 
@@ -127,7 +129,7 @@
 - Fixed syntax and typos in README 
 - [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 - [TODO DEPLOY] `rake db:seed`
 
 ## v2.6.4 2018 March 15
@@ -186,7 +188,7 @@
 - Updated test data to allow passing test suite
 - Upgraded rails minor version
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 ## v2.5.14 2017 September 12
 
@@ -461,7 +463,7 @@
 - [TODO DEPLOY] `rake fablab:es:build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es:add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 - [TODO DEPLOY] add `EXCEL_DATE_FORMAT`, `ALLOWED_EXTENSIONS` and `ALLOWED_MIME_TYPES` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
 
@@ -479,7 +481,7 @@
 - Fix a bug: unable to deploy 2.2.0+ when PostgreSQL 'unaccent' extension was already active
 - Fix a bug: some reservations was referencing reservables not present in database (#patch)
 - [TODO DEPLOY] `bundle exec rake fablab:fix:reservations_not_existing_reservable` to apply #patch
-- [TODO DEPLOY] `bundle install` and `rake db:migrate`
+- [TODO DEPLOY] (dev) `bundle install` then (all) `rake db:migrate`
 
 ## v2.2.2 2016 June 23
 - Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation
@@ -503,7 +505,7 @@
 - API: GET /api/trainings do not load nor send the associated availabilities until they are requested
 - List of members is now loaded 10 members by 10, to improve page load time
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
-- [TODO DEPLOY] `bundle install` and `rake db:migrate`
+- [TODO DEPLOY] (dev) `bundle install` then (all) `rake db:migrate`
 
 ## v2.1.2 2016 May 24
 - Fix a bug: Google Analytics was not loaded and did not report any stats
