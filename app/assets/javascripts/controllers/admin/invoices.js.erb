@@ -659,7 +659,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
   function ($scope, $uibModalInstance, $window, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
     const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
     const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
-    const MAX_END = moment.utc(lastClosingEnd.last_end_date).add(1, 'year').toDate();
+    const MAX_END = moment.utc(lastClosingEnd.last_end_date).add(1, 'year').subtract(1, 'day').toDate();
 
     /* PUBLIC SCOPE */
 
