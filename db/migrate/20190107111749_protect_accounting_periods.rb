@@ -2,6 +2,8 @@ class ProtectAccountingPeriods < ActiveRecord::Migration
 
   # PostgreSQL only
   def up
+    return if Rails.env.development? || Rails.env.test?
+
     execute("CREATE RULE accounting_periods_del_protect AS ON DELETE TO #{AccountingPeriod.arel_table.name} DO INSTEAD NOTHING;")
     execute("CREATE RULE accounting_periods_upd_protect AS ON UPDATE TO #{AccountingPeriod.arel_table.name} DO INSTEAD NOTHING;")
   end

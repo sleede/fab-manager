@@ -32,14 +32,39 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     # Check archive file was created
     assert FileTest.exists? accounting_period.archive_file
 
+    # Extract archive
+    require 'tmpdir'
+    require 'fileutils'
+    dest = "#{Dir.tmpdir}/#{accounting_period.archive_file[0..-5]}"
+    FileUtils.mkdir_p "#{dest}/accounting"
+    Zip::File.open(accounting_period.archive_file) do |zip_file|
+      # Handle entries one by one
+      zip_file.each do |entry|
+        # Extract to file/directory/symlink
+        entry.extract("#{dest}/#{entry.name}")
+      end
+    end
+
     # Check archive matches
-    archive = File.read(accounting_period.archive_file)
+    require 'checksum'
+    sumfile = File.read("#{dest}/checksum.sha256").split("\t")
+    assert_equal sumfile[0], Checksum.file("#{dest}/#{sumfile[1]}"), 'archive checksum does not match'
+
+    archive = File.read("#{dest}/#{sumfile[1]}")
     archive_json = JSON.parse(archive)
     invoices = Invoice.where(
       'created_at >= :start_date AND created_at <= :end_date',
       start_date: start_at.to_datetime, end_date: end_at.to_datetime
     )
-    assert_equal invoices.count, archive_json.count
+
+    assert_equal invoices.count, archive_json['invoices'].count
+    assert_equal accounting_period.footprint, archive_json['period_footprint']
+
+    require 'version'
+    assert_equal Version.current, archive_json['software']['version']
+
+    # we clean up the extraction dir before quitting
+    FileUtils.rm_rf(dest)
   end
 
 end
