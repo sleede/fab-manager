@@ -17,6 +17,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :coupon
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
+  belongs_to :operator, foreign_key: :operator_id, class_name: 'User'
 
   before_create :add_environment
   after_create :update_reference, :chain_record
@@ -229,7 +230,7 @@ class Invoice < ActiveRecord::Base
     invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
   end
 
-  private
+  # private
 
   def generate_and_send_invoice
     unless Rails.env.test?
