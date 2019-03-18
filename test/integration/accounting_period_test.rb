@@ -35,7 +35,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     # Extract archive
     require 'tmpdir'
     require 'fileutils'
-    dest = "#{Dir.tmpdir}/#{accounting_period.archive_file[0..-5]}"
+    dest = "#{Dir.tmpdir}/accounting/#{accounting_period.id}"
     FileUtils.mkdir_p "#{dest}/accounting"
     Zip::File.open(accounting_period.archive_file) do |zip_file|
       # Handle entries one by one
@@ -63,8 +63,9 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     require 'version'
     assert_equal Version.current, archive_json['software']['version']
 
-    # we clean up the extraction dir before quitting
+    # we clean up the files before quitting
     FileUtils.rm_rf(dest)
+    FileUtils.rm_rf(accounting_period.archive_folder)
   end
 
 end

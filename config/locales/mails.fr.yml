@@ -280,6 +280,11 @@ fr:
       subject: "Espace disque faible"
       body: "Attention : l'espace disque disponible sur le serveur hébergeant fab-manager est inférieur à %{THRESHOLD} MiO. Cela peut nuire à son bon fonctionnement et empêcher la sauvegarde de certaines données. Actuellement, il reste %{AVAILABLE} MiO d'espace libre sur le point de montage."
 
+    notify_admin_close_period_reminder:
+      subject: "Pensez à clôturer vos périodes comptables"
+      body:
+        warning_last_closed_period_over_1_year: "Pensez à clôturer régulièrement vos périodes comptables. Les comptes sont actuellement clôturés jusqu'au %{LAST_END}."
+        warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}."
 
     shared:
       hello: "Bonjour %{user_name}"

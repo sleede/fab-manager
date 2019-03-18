@@ -36,7 +36,7 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def archive_folder
-    dir = 'accounting'
+    dir = "accounting/#{id}"
 
     # create directory if it doesn't exists (accounting)
     FileUtils.mkdir_p dir
@@ -48,7 +48,7 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def archive_json_file
-    "#{archive_folder}/#{start_at.iso8601}_#{end_at.iso8601}.json"
+    "#{start_at.iso8601}_#{end_at.iso8601}.json"
   end
 
   def check_footprint

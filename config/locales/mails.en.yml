@@ -280,5 +280,11 @@ en:
       subject: "Low disk space"
       body: "Warning: available disk space on the server hosting fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
 
+    notify_admin_close_period_reminder:
+      subject: "Remind to close your accounting periods"
+      body:
+        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
+        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
+
     shared:
       hello: "Hello %{user_name}"
