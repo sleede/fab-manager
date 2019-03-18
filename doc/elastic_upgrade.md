@@ -145,7 +145,7 @@ Copy [elasticsearch.yml](../docker/elasticsearch.yml) and [log4j2.properties](..
 
 Finally reindex your data:
 ```bash
-rake fablab:es_build_stats
-rake fablab:generate_stats[3000]
-rake fablab:es_build_projects_index
+rake fablab:es:build_stats
+rake fablab:es:generate_stats[3000]
+rake fablab:es:build_projects_index
 ```

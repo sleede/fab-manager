@@ -85,7 +85,7 @@ gem 'kaminari'
 
 gem 'figaro'
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '>= 3.4.1'
 gem 'font-awesome-rails'
 
 # Image processing ruby wrapper for ImageMagick

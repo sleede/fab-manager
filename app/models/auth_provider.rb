@@ -19,7 +19,7 @@ class AuthProvider < ActiveRecord::Base
 
   before_create :set_initial_state
 
-  def build_providable(params)
+  def build_providable(params, _assignment_options)
     raise "Unknown providable_type: #{providable_type}" unless PROVIDABLE_TYPES.include?(providable_type)
 
     self.providable = providable_type.constantize.new(params)

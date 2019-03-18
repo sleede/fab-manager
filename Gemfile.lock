@@ -60,9 +60,8 @@ GEM
       json
     arel (6.0.4)
     ast (2.4.0)
-    autoprefixer-rails (5.1.8)
+    autoprefixer-rails (9.4.9)
       execjs
-      json
     awesome_print (1.6.1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -74,9 +73,9 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.4.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
+    bootstrap-sass (3.4.1)
+      autoprefixer-rails (>= 5.2.1)
+      sassc (>= 2.0.0)
     buftok (0.2.0)
     builder (3.2.3)
     byebug (8.2.3)
@@ -395,6 +394,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sassc (2.0.0)
+      ffi (~> 1.9.6)
+      rake
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -516,7 +518,7 @@ DEPENDENCIES
   awesome_print
   axlsx!
   axlsx_rails
-  bootstrap-sass
+  bootstrap-sass (>= 3.4.1)
   byebug
   capistrano
   capistrano-maintenance (= 0.0.5)

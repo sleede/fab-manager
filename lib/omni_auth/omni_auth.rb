@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 active_provider = AuthProvider.active
 
 if active_provider.providable_type != DatabaseProvider.name

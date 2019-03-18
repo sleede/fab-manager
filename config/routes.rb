@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
@@ -18,15 +20,15 @@ Rails.application.routes.draw do
   ## See how all your routes lay out with "rake routes".
 
 
-  constraints :user_agent => /facebookexternalhit\/[0-9]|Twitterbot|Pinterest|Google.*snippet/ do
-    root :to => 'social_bot#share', as: :bot_root
+  constraints user_agent: %r{facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet} do
+    root to: 'social_bot#share', as: :bot_root
   end
 
   ## You can have the root of your site routed with "root"
   root 'application#index'
 
   namespace :api, as: nil, defaults: { format: :json } do
-    resources :projects, only: [:index, :show, :create, :update, :destroy] do
+    resources :projects, only: %i[index show create update destroy] do
       collection do
         get :last_published
         get :search
@@ -38,10 +40,10 @@ Rails.application.routes.draw do
     resources :components
     resources :themes
     resources :licences
-    resources :admins, only: [:index, :create, :destroy]
-    resources :settings, only: [:show, :update, :index], param: :name
-    resources :users, only: [:index, :create]
-    resources :members, only: [:index, :show, :create, :update, :destroy] do
+    resources :admins, only: %i[index create destroy]
+    resources :settings, only: %i[show update index], param: :name
+    resources :users, only: %i[index create]
+    resources :members, only: %i[index show create update destroy] do
       get '/export_subscriptions', action: 'export_subscriptions', on: :collection
       get '/export_reservations', action: 'export_reservations', on: :collection
       get '/export_members', action: 'export_members', on: :collection
@@ -50,9 +52,9 @@ Rails.application.routes.draw do
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
     end
-    resources :reservations, only: [:show, :create, :index, :update]
-    resources :notifications, only: [:index, :show, :update] do
-      match :update_all, path: '/', via: [:put, :patch], on: :collection
+    resources :reservations, only: %i[show create index update]
+    resources :notifications, only: %i[index show update] do
+      match :update_all, path: '/', via: %i[put patch], on: :collection
       get 'polling', action: 'polling', on: :collection
       get 'last_unread', action: 'last_unread', on: :collection
     end
@@ -63,20 +65,20 @@ Rails.application.routes.draw do
     end
 
     # for homepage
-    get '/last_subscribed/:last' => "members#last_subscribed"
-    get '/feeds/twitter_timelines' => "feeds#twitter_timelines"
+    get '/last_subscribed/:last' => 'members#last_subscribed'
+    get '/feeds/twitter_timelines' => 'feeds#twitter_timelines'
 
     get 'pricing' => 'pricing#index'
     put 'pricing' => 'pricing#update'
 
-    resources :prices, only: [:index, :update] do
+    resources :prices, only: %i[index update] do
       post 'compute', on: :collection
     end
     resources :coupons
     post 'coupons/validate' => 'coupons#validate'
     post 'coupons/send' => 'coupons#send_to'
 
-    resources :trainings_pricings, only: [:index, :update]
+    resources :trainings_pricings, only: %i[index update]
 
     resources :availabilities do
       get 'machines/:machine_id', action: 'machine', on: :collection
@@ -88,9 +90,9 @@ Rails.application.routes.draw do
       put ':id/lock', action: 'lock', on: :collection
     end
 
-    resources :groups, only: [:index, :create, :update, :destroy]
-    resources :subscriptions, only: [:show, :create, :update]
-    resources :plans, only: [:index, :create, :update, :destroy, :show]
+    resources :groups, only: %i[index create update destroy]
+    resources :subscriptions, only: %i[show create update]
+    resources :plans, only: %i[index create update destroy show]
     resources :slots, only: [:update] do
       put 'cancel', on: :member
     end
@@ -99,7 +101,7 @@ Rails.application.routes.draw do
       get 'upcoming/:limit', action: 'upcoming', on: :collection
     end
 
-    resources :invoices, only: [:index, :show, :create] do
+    resources :invoices, only: %i[index show create] do
       get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
     end
@@ -130,7 +132,7 @@ Rails.application.routes.draw do
 
     # i18n
     # regex allows using dots in URL for 'state'
-    get 'translations/:locale/:state' => 'translations#show', :constraints => { state: /[^\/]+/ }
+    get 'translations/:locale/:state' => 'translations#show', :constraints => { state: %r{[^/]+} }
 
     # XLSX exports
     get 'exports/:id/download' => 'exports#download'
@@ -176,7 +178,7 @@ Rails.application.routes.draw do
 
   match '/project_collaborator/:valid_token', to: 'api/projects#collaborator_valid', via: :get
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
 

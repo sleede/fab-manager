@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# OpenLab Projects tasks
 namespace :fablab do
   namespace :openlab do
     desc 'bulk and export projects to openlab'

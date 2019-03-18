@@ -92,6 +92,7 @@ Application.Directives.directive('disableAnimation', ['$animate', ($animate) =>
 
 /**
  * Isolate a form's scope from its parent : no nested validation
+ * @see https://stackoverflow.com/a/37481846/1039377
  */
 Application.Directives.directive('isolateForm', [ () =>
   ({
@@ -100,30 +101,13 @@ Application.Directives.directive('isolateForm', [ () =>
     link (scope, elm, attrs, ctrl) {
       if (!ctrl) { return; }
 
-      // Do a copy of the controller
-      const ctrlCopy = {};
-      angular.copy(ctrl, ctrlCopy);
+      const parentForm = ctrl.$$parentForm; // Note this uses private API
+      if (!parentForm) {
+        return;
+      }
 
-      // Get the form's parent
-      const parent = elm.parent().controller('form');
-      // Remove parent link to the controller
-      parent.$removeControl(ctrl);
-
-      // Replace form controller with a "isolated form"
-      const isolatedFormCtrl = {
-        $setValidity (validationToken, isValid, control) {
-          ctrlCopy.$setValidity(validationToken, isValid, control);
-          return parent.$setValidity(validationToken, true, ctrl);
-        },
-
-        $setDirty () {
-          elm.removeClass('ng-pristine').addClass('ng-dirty');
-          ctrl.$dirty = true;
-          return ctrl.$pristine = false;
-        }
-      };
-
-      return angular.extend(ctrl, isolatedFormCtrl);
+      // Remove this form from parent controller
+      parentForm.$removeControl(ctrl);
     }
 
   })

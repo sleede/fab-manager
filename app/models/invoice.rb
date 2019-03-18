@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
 class Invoice < ActiveRecord::Base
@@ -123,7 +125,7 @@ class Invoice < ActiveRecord::Base
     reference
   end
 
-  # for debug & used by rake task "fablab:regenerate_invoices"
+  # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
     pdf = ::PDF::Invoice.new(self, nil).render
     File.binwrite(file, pdf)

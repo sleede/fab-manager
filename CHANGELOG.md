@@ -1,5 +1,15 @@
 # Changelog Fab Manager
 
+## v2.8.4 2019 March 18
+
+- Limit members search to 50 results to speed up queries
+- Refactored rake tasks to use namespaces and descriptions
+- Fix a bug: unable to create a new oAuth 2.0 provider
+- Fix a bug: application in unavailable if a SSO is active
+- Fix a security issue: dependency bootstrap < 4.3.1 has an XSS vulnerability as described in [CVE-2019-8331](https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/)
+- Fixed missing translations in authentication providers form
+- [TODO DEPLOY] (dev) `bundle install`
+
 ## v2.8.3 2019 January 29
 
 - Added user's manual (fr)
@@ -22,7 +32,7 @@
 - Fix a bug: Invalid translation in new partner modal
 - Refactored frontend invoices translations
 - Updated RailRoady 1.4.0 to 1.5.3
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 ## v2.8.1 2019 January 02
 
@@ -39,9 +49,9 @@
 - Improved automated tests suite
 - Added Rubocop gem to the Gemfile (ruby syntax checking)
 - Added badges to README
-- Fix a security update: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
+- Fix a security issue: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 # v2.7.4 2018 December 04
 
@@ -54,7 +64,7 @@
 # v2.7.3 2018 December 03
 
 - Updated Uglifier gem to support ES6 syntax
-- Fix rake task fablab:es_build_projects_index for ElasticSearch > 1.7
+- Fix rake task `fablab:es:build_projects_index` for ElasticSearch > 1.7
 - Fix Dockerfile: yarn was not setup correctly
 - Fix: unable to build assets
 
@@ -96,7 +106,7 @@
 
 - Ability to parametrize machines order on the booking page
 - Ability to set a neutral gender for the fablab's title (#108)
-- Fix a bug: rake task fablab:fix:categories_slugs bash interpretation error
+- Fix a bug: rake task `fablab:fix:categories_slugs` bash interpretation error
 - Fix a bug: file inputs filled with long filenames render improperly with an overflow
 - Fix a bug: title concordance radio buttons render improperly on smaller screens
 - Improved verifications in ElasticSearch upgrade script
@@ -119,7 +129,7 @@
 - Fixed syntax and typos in README 
 - [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 - [TODO DEPLOY] `rake db:seed`
 
 ## v2.6.4 2018 March 15
@@ -178,7 +188,7 @@
 - Updated test data to allow passing test suite
 - Upgraded rails minor version
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 
 ## v2.5.14 2017 September 12
 
@@ -290,7 +300,7 @@
 - Fix a bug: new plans statistics are not shown
 - [TODO DEPLOY] `rake db:migrate`, then `rake db:seed`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_SPACES` environment variable
-- [TODO DEPLOY] `rake fablab:es_add_spaces`
+- [TODO DEPLOY] `rake fablab:es:add_spaces`
 - [TODO DEPLOY] `rake fablab:fix:new_plans_statistics` if you have created plans from v2.4.10
 
 ## v2.4.11 2017 March 15
@@ -306,7 +316,7 @@
 - Fix a bug: navigation to about page duplicates admin's links in left menu
 - Fix a bug: changing the price of a plan lost its past statistics
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `rake fablab:set_plans_slugs`
+- [TODO DEPLOY] `rake fablab:fix:set_plans_slugs`
 
 ## v2.4.9 2017 January 4
 
@@ -321,8 +331,8 @@
 - Fix a bug: when regenerating statistics, previous values are not fully removed (only 10 firsts), resulting in wrong statistics generation (2)
 - Fix a bug: when deleting an availability just after its creation, the indexer workers crash and retries for a month
 - [TODO DEPLOY] remove possible value `application/` in `ALLOWED_MIME_TYPES` list, in environment variable
-- [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es_build_availabilities_index` (1)
-- [TODO DEPLOY] `rake fablab:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
+- [TODO DEPLOY] `rails runner StatisticCustomAggregation.destroy_all`, then `rake db:seed`, then `rake fablab:es:build_availabilities_index` (1)
+- [TODO DEPLOY] `rake fablab:es:generate_stats[1095]` if you already has regenerated the statistics in the past, then they are very likely corrupted. Run this task to fix (2)
 
 ## v2.4.8 2016 December 15
 
@@ -450,10 +460,10 @@
 - Fix a bug: reordering project's steps trigger the unsaved-warning dialog
 - Fix a bug: unable to compile assets in Docker with CoffeeScript error
 - Fix a bug: do not force HTTPS for URLs in production environments
-- [TODO DEPLOY] `rake fablab:es_build_availabilities_index`
-- [TODO DEPLOY] `rake fablab:es_add_event_filters`
+- [TODO DEPLOY] `rake fablab:es:build_availabilities_index`
+- [TODO DEPLOY] `rake fablab:es:add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `bundle install`
+- [TODO DEPLOY] (dev) `bundle install`
 - [TODO DEPLOY] add `EXCEL_DATE_FORMAT`, `ALLOWED_EXTENSIONS` and `ALLOWED_MIME_TYPES` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
 
@@ -471,7 +481,7 @@
 - Fix a bug: unable to deploy 2.2.0+ when PostgreSQL 'unaccent' extension was already active
 - Fix a bug: some reservations was referencing reservables not present in database (#patch)
 - [TODO DEPLOY] `bundle exec rake fablab:fix:reservations_not_existing_reservable` to apply #patch
-- [TODO DEPLOY] `bundle install` and `rake db:migrate`
+- [TODO DEPLOY] (dev) `bundle install` then (all) `rake db:migrate`
 
 ## v2.2.2 2016 June 23
 - Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation
@@ -495,7 +505,7 @@
 - API: GET /api/trainings do not load nor send the associated availabilities until they are requested
 - List of members is now loaded 10 members by 10, to improve page load time
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
-- [TODO DEPLOY] `bundle install` and `rake db:migrate`
+- [TODO DEPLOY] (dev) `bundle install` then (all) `rake db:migrate`
 
 ## v2.1.2 2016 May 24
 - Fix a bug: Google Analytics was not loaded and did not report any stats
