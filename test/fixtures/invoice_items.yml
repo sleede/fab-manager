@@ -4,54 +4,59 @@ invoice_item_1:
   invoice_id: 1
   stp_invoice_item_id: sub_8DGB4ErIc2asOv
   amount: 10000
-  created_at: 2016-04-05 08:35:52.934725000 Z
-  updated_at: 2016-04-05 08:35:52.934725000 Z
+  created_at: 2012-03-12 11:03:31.651441000 Z
+  updated_at: 2012-03-12 11:03:31.651441000 Z
   description: Sleede - standard, association - month
   subscription_id: 1
   invoice_item_id:
+  footprint: 772e9d8a55abb37b18b16385c4a46bd34c1fe0f795975c5da88316fc0fb5ffc4
 
 invoice_item_2:
   id: 2
   invoice_id: 2
   stp_invoice_item_id:
   amount: 2000
-  created_at: 2016-04-05 08:36:46.856021000 Z
-  updated_at: 2016-04-05 08:36:46.856021000 Z
+  created_at: 2012-03-12 13:40:22.342717000 Z
+  updated_at: 2012-03-12 13:40:22.342717000 Z
   description: Mensuel tarif réduit - étudiant, - de 25 ans, enseignant, demandeur
     d'emploi - month
   subscription_id: 2
   invoice_item_id:
+  footprint: 5326142307e047379b7cc2aff143bc12529ff4469fb3253171d04f16dd4ec601
 
 invoice_item_3:
   id: 3
   invoice_id: 3
   stp_invoice_item_id:
   amount: 3000
-  created_at: 2012-03-12 11:03:31.651441000 Z
-  updated_at: 2012-03-12 11:03:31.651441000 Z
+  created_at: 2015-06-10 11:20:01.341130000 Z
+  updated_at: 2015-06-10 11:20:01.341130000 Z
   description: Mensuel - standard, association - month
   subscription_id: 3
   invoice_item_id:
+  footprint: 32089152aa3cf6b6059598a570202b9b710d233602521d8167fe03cef79a05ea
 
 invoice_item_4:
   id: 4
   invoice_id: 4
   stp_invoice_item_id:
   amount: 0
-  created_at: 2012-03-12 13:40:22.342717000 Z
-  updated_at: 2012-03-12 13:40:22.342717000 Z
+  created_at: 2016-04-05 08:35:52.934725000 Z
+  updated_at: 2016-04-05 08:35:52.934725000 Z
   description: Formation Laser / Vinyle April 11, 2012 08:00 - 12:00 PM
   subscription_id:
   invoice_item_id:
+  footprint: 2762d4ec03451e1da0abfe3622dabffd1c9183c5a58f5626a36c0a5936f99e95
 
 invoice_item_5:
   id: 5
   invoice_id: 5
   stp_invoice_item_id:
   amount: 1500
-  created_at: 2015-06-10 11:20:01.341130000 Z
-  updated_at: 2015-06-10 11:20:01.341130000 Z
+  created_at: 2016-04-05 08:36:46.856021000 Z
+  updated_at: 2016-04-05 08:36:46.856021000 Z
   description: Imprimante 3D June 15, 2015 12:00 - 01:00 PM
   subscription_id:
   invoice_item_id:
+  footprint: 640e915fb30da68f30976f93486d158b5ac01b4caf8f1335c4376d6b36c12ead
 

@@ -5,8 +5,8 @@ invoice_1:
   invoiced_type: Subscription
   stp_invoice_id: in_17wpf92sOmf47Nz9itj6vmJw
   total: 10000
-  created_at: 2016-04-05 08:35:52.931187000 Z
-  updated_at: 2016-04-05 08:35:52.931187000 Z
+  created_at: 2012-03-12 11:03:31.651441000 Z
+  updated_at: 2012-03-12 11:03:31.651441000 Z
   user_id: 3
   reference: 1604001/VL
   avoir_mode:
@@ -15,6 +15,9 @@ invoice_1:
   type:
   subscription_to_expire:
   description:
+  footprint: b4bff0b6176a706f745710ef12014917ceefc557ce60e26ec638394ffaad8236
+  environment: test
+  operator_id:
 
 invoice_2:
   id: 2
@@ -22,8 +25,8 @@ invoice_2:
   invoiced_type: Subscription
   stp_invoice_id:
   total: 2000
-  created_at: 2016-04-05 08:36:46.853368000 Z
-  updated_at: 2016-04-05 08:36:46.853368000 Z
+  created_at: 2012-03-12 13:40:22.342717000 Z
+  updated_at: 2012-03-12 13:40:22.342717000 Z
   user_id: 4
   reference: '1604002'
   avoir_mode:
@@ -32,6 +35,9 @@ invoice_2:
   type:
   subscription_to_expire:
   description:
+  footprint: dfe9a91a365155d4f6b4c614071d2c132472095a5a80f6c5d87e45c199bffd27
+  environment: test
+  operator_id:
 
 invoice_3:
   id: 3
@@ -39,8 +45,8 @@ invoice_3:
   invoiced_type: Subscription
   stp_invoice_id:
   total: 3000
-  created_at: 2012-03-12 11:03:31.651441000 Z
-  updated_at: 2012-03-12 11:03:31.651441000 Z
+  created_at: 2015-06-10 11:20:01.341130000 Z
+  updated_at: 2015-06-10 11:20:01.341130000 Z
   user_id: 7
   reference: '1203001'
   avoir_mode:
@@ -49,6 +55,9 @@ invoice_3:
   type:
   subscription_to_expire:
   description:
+  footprint: 9913446ac3383d029e3742baa85ae72632f7dddd7fb7d291140775e8735795e3
+  environment: test
+  operator_id:
 
 
 invoice_4:
@@ -57,8 +66,8 @@ invoice_4:
   invoiced_type: Reservation
   stp_invoice_id:
   total: 0
-  created_at: 2012-03-12 13:40:22.342717000 Z
-  updated_at: 2012-03-12 13:40:22.342717000 Z
+  created_at: 2016-04-05 08:35:52.931187000 Z
+  updated_at: 2016-04-05 08:35:52.931187000 Z
   user_id: 7
   reference: '1203002'
   avoir_mode:
@@ -67,6 +76,9 @@ invoice_4:
   type:
   subscription_to_expire:
   description:
+  footprint: 776bb1ebd50a8cb5ed61af8c80c08185dd3d66baa77b46001245d57f421642f4
+  environment: test
+  operator_id:
 
 invoice_5:
   id: 5
@@ -74,8 +86,8 @@ invoice_5:
   invoiced_type: Reservation
   stp_invoice_id:
   total: 1500
-  created_at: 2015-06-10 11:20:01.341130000 Z
-  updated_at: 2015-06-10 11:20:01.341130000 Z
+  created_at: 2016-04-05 08:36:46.853368000 Z
+  updated_at: 2016-04-05 08:36:46.853368000 Z
   user_id: 3
   reference: '1506031'
   avoir_mode:
@@ -84,3 +96,6 @@ invoice_5:
   type:
   subscription_to_expire:
   description:
+  footprint: cb23d5e724697e39da04f73b0e3d6e5e7830fd5db10d56f9998d399d435f2b74
+  environment: test
+  operator_id:
