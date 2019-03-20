@@ -310,7 +310,7 @@ fr:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} avec le code %{CODE}"
       notify_admin_free_disk_space:
-        warning_disk_space_under_threshold: "Attention: l'espace disque disponible sur le serveur est désormais de %{AVAILABLE} MiO"
+        warning_free_disk_space: "Attention: l'espace disque disponible sur le serveur est désormais de %{AVAILABLE} MiO"
       notify_admin_close_period_reminder:
         warning_last_closed_period_over_1_year: "Pensez à clôturer régulièrement vos périodes comptables. Les comptes sont actuellement clôturés jusqu'au %{LAST_END}"
         warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}"

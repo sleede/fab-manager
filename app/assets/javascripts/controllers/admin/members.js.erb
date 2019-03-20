@@ -150,7 +150,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     // admins list
-    $scope.admins = adminsPromise.admins;
+    $scope.admins = adminsPromise.admins.filter(function(m) { return m.id != Fablab.superadminId; });
 
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;

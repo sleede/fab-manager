@@ -152,6 +152,11 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
 
 Credentials for the first admin user created when seeding the project. (not present in application.yml because they are only used once when running the database seed with the command `rake db:seed`)
 
+    SUPERADMIN_EMAIL
+
+Optional email of the administrator account in charge of the system administration. 
+If specified, it will be hidden from the administrators list and he will exclusively receive the notifications related to the system administration.
+If not specified, every admins will receive system administration notifications.  
 
 <a name="internationalization-settings"></a>
 ## Internationalization settings

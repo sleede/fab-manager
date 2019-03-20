@@ -310,7 +310,7 @@ pt:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} com o código %{CODE}"
       notify_admin_free_disk_space:
-        warning_disk_space_under_threshold: "Warning: the server's available disk space is now %{AVAILABLE} MiB"        # missing translation
+        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"        # missing translation
       notify_admin_close_period_reminder:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"        # missing translation
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"          # missing translation

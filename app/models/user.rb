@@ -93,6 +93,12 @@ class User < ActiveRecord::Base
     User.with_role(:admin)
   end
 
+  def self.superadmin
+    return unless Rails.application.secrets.superadmin_email.present?
+
+    User.find_by(email: Rails.application.secrets.superadmin_email)
+  end
+
   def training_machine?(machine)
     return true if admin?
 
