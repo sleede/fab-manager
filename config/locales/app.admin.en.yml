@@ -285,6 +285,7 @@ en:
         invoices:
           # list of all invoices & invoicing parameters
           invoices: "Invoices"
+          accounting_periods: "Accounting periods"
           invoices_list: "Invoices list"
           filter_invoices: "Filter invoices"
           invoice_#_: "Invoice #:"

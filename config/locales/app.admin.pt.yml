@@ -285,6 +285,7 @@ pt:
         invoices:
           # list of all invoices & invoicing parameters
           invoices: "Faturas"
+          accounting_periods: "Accounting periods"       # missing translation
           invoices_list: "Lista de faturas"
           filter_invoices: "Filtrar faturas"
           invoice_#_: "Fatura #:"

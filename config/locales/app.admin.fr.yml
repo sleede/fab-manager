@@ -285,6 +285,7 @@ fr:
         invoices:
           # liste de toutes les factures & paramètres de facturation
           invoices: "Factures"
+          accounting_periods: "Périodes comptables"
           invoices_list: "Liste des factures"
           filter_invoices: "Filtrer les factures"
           invoice_#_: "Facture n° :"
