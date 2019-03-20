@@ -230,7 +230,7 @@ class Invoice < ActiveRecord::Base
     invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
   end
 
-  # private
+  private
 
   def generate_and_send_invoice
     unless Rails.env.test?

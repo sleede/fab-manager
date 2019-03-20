@@ -16,6 +16,13 @@ namespace :fablab do
       InvoiceItem.order(:created_at).all.each(&:chain_record)
     end
 
+    desc 'assign all footprints to existing HistoryValue records'
+    task chain_history_values_records: :environment do
+      raise "Footprints were already generated, won't regenerate" if HistoryValue.where.not(footprint: nil).count.positive?
+
+      HistoryValue.order(:created_at).all.each(&:chain_record)
+    end
+
     desc 'assign environment value to all invoices'
     task set_environment_to_invoices: :environment do
       Invoice.all.each do |i|

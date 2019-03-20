@@ -20,7 +20,7 @@ class InvoiceItem < ActiveRecord::Base
     footprint == compute_footprint
   end
 
-  # private
+  private
 
   def compute_footprint
     max_date = created_at || Time.current
