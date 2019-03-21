@@ -151,3 +151,5 @@ gem 'rack-protection', '1.5.5'
 
 # get free disk space
 gem 'sys-filesystem'
+
+gem 'sha3'

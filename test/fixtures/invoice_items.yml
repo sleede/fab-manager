@@ -9,7 +9,7 @@ invoice_item_1:
   description: Sleede - standard, association - month
   subscription_id: 1
   invoice_item_id:
-  footprint: 772e9d8a55abb37b18b16385c4a46bd34c1fe0f795975c5da88316fc0fb5ffc4
+  footprint: 931e8b6f5579f2e7eda625bdf5962da89892957abb25480603ae985e6e108059
 
 invoice_item_2:
   id: 2
@@ -22,7 +22,7 @@ invoice_item_2:
     d'emploi - month
   subscription_id: 2
   invoice_item_id:
-  footprint: 5326142307e047379b7cc2aff143bc12529ff4469fb3253171d04f16dd4ec601
+  footprint: abbf95b8d506ed6207343edbf8ee63893cd02508de6d25347999d7dbc755c6fb
 
 invoice_item_3:
   id: 3
@@ -34,7 +34,7 @@ invoice_item_3:
   description: Mensuel - standard, association - month
   subscription_id: 3
   invoice_item_id:
-  footprint: 32089152aa3cf6b6059598a570202b9b710d233602521d8167fe03cef79a05ea
+  footprint: caf3b7e54e0191d8f262e01acc4e66f29f9d27abe52e595fb3b71724a32cfe90
 
 invoice_item_4:
   id: 4
@@ -46,7 +46,7 @@ invoice_item_4:
   description: Formation Laser / Vinyle April 11, 2012 08:00 - 12:00 PM
   subscription_id:
   invoice_item_id:
-  footprint: 2762d4ec03451e1da0abfe3622dabffd1c9183c5a58f5626a36c0a5936f99e95
+  footprint: 71d095aa4d49ebac39f7efdc5c9de2354ea8efeec7c35a6708143fb66dd66b0b
 
 invoice_item_5:
   id: 5
@@ -58,5 +58,5 @@ invoice_item_5:
   description: Imprimante 3D June 15, 2015 12:00 - 01:00 PM
   subscription_id:
   invoice_item_id:
-  footprint: 640e915fb30da68f30976f93486d158b5ac01b4caf8f1335c4376d6b36c12ead
+  footprint: d4d856ee04f27b5e35f43056b46f139df73ffdfaad1716636f569164c52c5e5b
 

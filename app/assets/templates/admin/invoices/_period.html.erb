@@ -5,14 +5,7 @@
   <li><span class="period-info-title" translate>{{ 'invoices.perpetual_total' }}</span> : <span>{{period.perpetual_total | currency}}</span></li>
   <li>
     <span class="period-info-title" translate>{{ 'invoices.integrity' }}</span> :
-    <span>
-      <div class="input-group">
-          <span class="input-group-addon">
-            <i class="fa fa-link chained" ng-show="period.chained_footprint"></i>
-            <i class="fa fa-chain-broken broken" ng-hide="period.chained_footprint"></i>
-          </span>
-          <input type="text" class="form-control" ng-value="period.footprint" readonly="readonly" />
-      </div>
-    </span>
+    <i class="fa fa-link chained" ng-show="period.chained_footprint"></i>
+    <i class="fa fa-chain-broken broken" ng-hide="period.chained_footprint"></i>
   </li>
 </ul>

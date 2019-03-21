@@ -35,8 +35,9 @@ class Checksum
     end
 
     def text(data)
-      sha256 = Digest::SHA256.new
-      sha256.hexdigest data
+      require 'sha3'
+
+      SHA3::Digest.hexdigest(:sha256, data)
     end
 
     private

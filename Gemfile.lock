@@ -403,6 +403,7 @@ GEM
     seed_dump (3.2.2)
       activerecord (~> 4)
       activesupport (~> 4)
+    sha3 (1.0.1)
     sidekiq (3.3.4)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.1.1)
@@ -577,6 +578,7 @@ DEPENDENCIES
   sass-rails (= 5.0.1)
   sdoc (~> 0.4.0)
   seed_dump
+  sha3
   sidekiq
   sidekiq-cron
   sinatra
