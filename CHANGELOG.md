@@ -2,7 +2,7 @@
 
 - Fix a security issue: updated to devise 4.6.0 to fix [CVE-2019-5421](https://github.com/plataformatec/devise/issues/4981)
 - Fix a security issue: updated Rails to 4.2.11.1 to fix [CVE-2019-5418](https://groups.google.com/forum/#!topic/rubyonrails-security/pFRKI96Sm8Q) and [CVE-2019-5419](https://groups.google.com/forum/#!topic/rubyonrails-security/GN7w9fFAQeI)
-- [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`emi
+- [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
 
 ## v2.8.4 2019 March 18
 
