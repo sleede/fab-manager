@@ -215,7 +215,7 @@ end
 
 unless Setting.find_by(name: 'twitter_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'twitter_name')
-  setting.value = 'fablabgrenoble'
+  setting.value = 'fab_manager'
   setting.save
 end
 
