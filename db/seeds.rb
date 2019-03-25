@@ -168,46 +168,48 @@ end
 #   end
 # end
 
-if Category.count == 0
-  Category.create!([
-    {name: 'Stage'},
-    {name: 'Atelier'}
-  ])
+if Category.count.zero?
+  Category.create!(
+    [
+      { name: 'Stage' },
+      { name: 'Atelier' }
+    ]
+  )
 end
 
 unless Setting.find_by(name: 'about_body').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_body')
-  setting.value = "<p>Le Fab Lab de <a href=\"http://lacasemate.fr\" target=\"_blank\">La Casemate</a> est un"+
-  ' atelier de fabrication numérique où l’on peut utiliser des machines de découpe, des imprimantes 3D,… permettant'+
-  ' de travailler sur des matériaux variés : plastique, bois, carton, vinyle, … afin de créer toute sorte d’objet grâce'+
-  ' à la conception assistée par ordinateur ou à l’électronique.  Mais le Fab Lab est aussi un lieu d’échange de'+
-  ' compétences technique. </p>'+
-  " <p>Le Fab Lab de <a href=\"http://lacasemate.fr\" target=\"_blank\">La Casemate</a> est un espace"+
-  ' permanent : ouvert à tous, il offre la possibilité de réaliser des objets soi-même, de partager ses'+
-  ' compétences et d’apprendre au contact des médiateurs du Fab Lab et des autres usagers. </p>'+
-  '<p>La formation au Fab Lab s’appuie sur des projets et le partage de connaissances : vous devez prendre'+
+  setting.value = '<p>La Fabrique du <a href=\"http://fab-manager.com\" target=\"_blank\">Fab-manager</a> est un' \
+  ' atelier de fabrication numérique où l’on peut utiliser des machines de découpe, des imprimantes 3D,… permettant' \
+  ' de travailler sur des matériaux variés : plastique, bois, carton, vinyle, … afin de créer toute sorte d’objet grâce' \
+  ' à la conception assistée par ordinateur ou à l’électronique.  Mais le Fab Lab est aussi un lieu d’échange de' \
+  ' compétences technique. </p>' \
+  ' <p>La Fabrique du <a href=\"http://fab-manager.com\" target=\"_blank\">Fab-manager</a> est un espace' \
+ ' permanent : ouvert à tous, il offre la possibilité de réaliser des objets soi-même, de partager ses' \
+  ' compétences et d’apprendre au contact des médiateurs du Fab Lab et des autres usagers. </p>' \
+  '<p>La formation au Fab Lab s’appuie sur des projets et le partage de connaissances : vous devez prendre' \
   ' part à la capitalisation des connaissances et à l’instruction des autres utilisateurs.</p>'
   setting.save
 end
 
 unless Setting.find_by(name: 'about_title').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_title')
-  setting.value = 'Imaginer, Fabriquer, <br>Partager au Fab Lab <br> de La Casemate'
+  setting.value = 'Imaginer, Fabriquer, <br>Partager à la Fabrique <br> du Fab-manager'
   setting.save
 end
 
 unless Setting.find_by(name: 'about_contacts').try(:value)
   setting = Setting.find_or_initialize_by(name: 'about_contacts')
-  setting.value = '<dl>'+
-  '<dt>Manager Fab Lab :</dt>'+
-  '<dd>jean-michel.molenaar@lacasemate.fr</dd>'+
-  '  <dt>Responsable médiation :</dt>'+
-  '  <dd>catherine.demarcq@lacasemate.fr</dd>'+
-  '    <dt>Animateur scientifique :</dt>'+
-  '    <dd>diego.scharager@lacasemate.fr</dd>'+
-  '    </dl>'+
-  '<br><br>'+
-  "<p><a href='http://lacasemate.fr'>Visitez le site de La Casemate</a></p>"
+  setting.value = '<dl>' \
+  '<dt>Manager Fab Lab :</dt>' \
+  '<dd>jean.dupont@fab-manager.com</dd>' \
+  '  <dt>Responsable médiation :</dt>' \
+  '  <dd>pierre.dupond@fab-manager.com</dd>' \
+  '    <dt>Animateur scientifique :</dt>' \
+  '    <dd>louise.durand@fab-manager.com</dd>' \
+  '    </dl>' \
+  '<br><br>' \
+  "<p><a href='http://fab-manager.com'>Visitez le site de Fab-manager</a></p>"
   setting.save
 end
 
@@ -297,11 +299,11 @@ end
 
 unless Setting.find_by(name: 'invoice_legals').try(:value)
   setting = Setting.find_or_initialize_by(name: 'invoice_legals')
-  setting.value = 'La Casemate<br/>'+
-                  '2 Place St Laurent 38000 GRENOBLE France<br/>'+
-                  'Tél. Administration : +33 4 76 44 88 80<br/>'+
-                  'Fax. : +33 4 76 42 76 66<br/>'+
-                  'SIRET : 317 270 593 00013 - APE 913 E'
+  setting.value = 'La fabrique<br/>' \
+                  '68 rue Louise Michel 38100 GRENOBLE France<br/>' \
+                  'Tél. : +33 1 23 45 67 98<br/>' \
+                  'Fax. : +33 1 23 45 67 98<br/>' \
+                  'SIRET : 237 082 474 00006 - APE 913 E'
   setting.save
 end
 
@@ -365,13 +367,13 @@ end
 
 unless Setting.find_by(name: 'fablab_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'fablab_name')
-  setting.value = 'Fab Lab de La Casemate'
+  setting.value = 'Fabrique'
   setting.save
 end
 
 unless Setting.find_by(name: 'name_genre').try(:value)
   setting = Setting.find_or_initialize_by(name: 'name_genre')
-  setting.value = 'male'
+  setting.value = 'female'
   setting.save
 end
 

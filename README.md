@@ -2,7 +2,7 @@
 
 FabManager is the FabLab management solution. It is web-based, open-source and totally free.
 
-[![Coverage Status](https://coveralls.io/repos/github/LaCasemate/fab-manager/badge.svg)](https://coveralls.io/github/LaCasemate/fab-manager) 
+[![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager) 
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
 [![Docker Build Status](https://img.shields.io/docker/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
 
@@ -102,7 +102,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 7. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/LaCasemate/fab-manager.git
+   git clone https://github.com/sleede/fab-manager.git
    ```
 
 8. Install the software dependencies.
@@ -205,7 +205,7 @@ environment.
 2. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/LaCasemate/fab-manager
+   git clone https://github.com/sleede/fab-manager
    ```
 
 3. From the project directory, run:
@@ -467,7 +467,7 @@ After modifying any values concerning the localisation, restart the application 
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects).
+You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/sleede/openlab-projects).
 It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform.
 The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
 

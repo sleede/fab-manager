@@ -13,7 +13,7 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/LaCasemate/fab-manager/issues) is the preferred channel for [bug reports](#bugs)
+The [issue tracker](https://github.com/sleede/fab-manager/issues) is the preferred channel for [bug reports](#bugs)
 and [submitting pull requests](#pull-requests), but please respect the following restrictions:
 
 * Please **do not** use the issue tracker for personal support requests (use [the forum](https://forum.fab-manager.com)).
@@ -96,7 +96,7 @@ Adhering to the following process is the best way to get your work included in t
    # Navigate to the newly cloned directory
    cd fab-manager
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/LaCasemate/fab-manager.git
+   git remote add upstream https://github.com/sleede/fab-manager.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
