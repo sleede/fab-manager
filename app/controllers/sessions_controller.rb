@@ -4,7 +4,7 @@ class SessionsController < Devise::SessionsController
   def new
     active_provider = AuthProvider.active
     if active_provider.providable_type != DatabaseProvider.name
-      redirect_to user_omniauth_authorize_path(active_provider.strategy_name.to_sym)
+      redirect_to "/users/auth/#{active_provider.strategy_name}"
     else
       super
     end

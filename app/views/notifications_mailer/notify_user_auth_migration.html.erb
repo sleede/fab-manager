@@ -15,7 +15,7 @@
 <% active_provider = AuthProvider.active %>
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 <%
-  url_path = user_omniauth_authorize_path(active_provider.strategy_name.to_sym)
+  url_path = "/users/auth/#{active_provider.strategy_name}"
   if url_path[0] == '/' and root_url[-1] == '/'
     url_path = root_url + url_path[1..-1]
   else

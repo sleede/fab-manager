@@ -4,7 +4,7 @@ json.link_to_sso_profile @provider.link_to_sso_profile
 if @provider.providable_type == DatabaseProvider.name
   json.link_to_sso_connect '/#'
 else
-  json.link_to_sso_connect user_omniauth_authorize_path(@provider.strategy_name.to_sym)
+  json.link_to_sso_connect "/users/auth/#{@provider.strategy_name}"
 end
 
 if @provider.providable_type == OAuth2Provider.name

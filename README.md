@@ -136,7 +136,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 10. Install bundler in the current RVM gemset
 
    ```bash
-   gem install bundler
+   gem install bundler --version=1.17.3
    ```
 
 11. Install the required ruby gems and javascript plugins
