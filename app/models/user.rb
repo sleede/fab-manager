@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :async
+         :confirmable
   rolify
 
   # enable OmniAuth authentication only if needed
@@ -316,6 +316,10 @@ class User < ActiveRecord::Base
 
   def create_a_wallet
     create_wallet
+  end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
   end
 
   def notify_admin_when_user_is_created

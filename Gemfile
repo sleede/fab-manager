@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11'
+gem 'rails', '4.2.11.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -73,8 +73,7 @@ gem 'seed_dump'
 
 gem 'pg'
 
-gem 'devise'
-gem 'devise-async'
+gem 'devise', ">= 4.6.0"
 
 gem 'omniauth', '~> 1.6.0'
 gem 'omniauth-oauth2'
