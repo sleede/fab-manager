@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for trainings endpoint
 class OpenAPI::V1::TrainingsDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Trainings'
@@ -7,9 +10,9 @@ class OpenAPI::V1::TrainingsDoc < OpenAPI::V1::BaseDoc
   end
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/trainings", "Trainings index"
-    description "Trainings index. Order by *created_at* ascendant."
-    example <<-EOS
+    api :GET, "/#{API_VERSION}/trainings", 'Trainings index'
+    description 'Trainings index. Order by *created_at* ascendant.'
+    example <<-TRAININGS
       # /open_api/v1/trainings
       {
         "trainings": [
@@ -75,6 +78,6 @@ class OpenAPI::V1::TrainingsDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    TRAININGS
   end
 end

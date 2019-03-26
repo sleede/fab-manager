@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for machines endpoint
 class OpenAPI::V1::MachinesDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Machines'
@@ -7,9 +10,9 @@ class OpenAPI::V1::MachinesDoc < OpenAPI::V1::BaseDoc
   end
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/machines", "Machines index"
-    description "Machines index. Order by *created_at* ascendant."
-    example <<-EOS
+    api :GET, "/#{API_VERSION}/machines", 'Machines index'
+    description 'Machines index. Order by *created_at* ascendant.'
+    example <<-MACHINES
       # /open_api/v1/machines
       {
         "machines": [
@@ -63,7 +66,7 @@ class OpenAPI::V1::MachinesDoc < OpenAPI::V1::BaseDoc
             "description": "La fraiseuse numérique Roland Modela MDX-20\r\n\r\nInformations générales :\r\nCette machine est utilisée  pour l'usinage et le scannage 3D de précision. Elle permet principalement d'usiner des circuits imprimés et des moules de petite taille. Le faible diamètre des fraises utilisées (Ø 0,3 mm à  Ø 6mm) implique que certains temps d'usinages peuvent êtres long (> 12h), c'est pourquoi cette fraiseuse peut être laissée en autonomie toute une nuit afin d'obtenir le plus précis des usinages au FabLab.\r\n\r\nMatériaux usinables :\r\nLes principaux matériaux usinables sont : bois, plâtre, résine, cire usinable, cuivre.\r\n",
             "spec": "Taille du plateau X/Y : 220 mm x 160 mm\r\nVolume maximal de travail: 203,2 mm (X), 152,4 mm (Y), 60,5 mm (Z)\r\nPrécision usinage: 0,00625 mm\r\nPrécision scannage: réglable de 0,05 à 5 mm (axes X,Y) et 0,025 mm (axe Z)\r\nVitesse d'analyse (scannage): 4-15 mm/sec\r\n \r\n \r\nLogiciel utilisé pour le fraisage: Roland Modela player 4 \r\nLogiciel utilisé pour l'usinage de circuits imprimés: Cad.py (linux)\r\nFormats acceptés: STL,PNG 3D\r\nFormat d'exportation des données scannées: DXF, VRML, STL, 3DMF, IGES, Grayscale, Point Group et BMP\r\n"
           },
-          # 
+          #
           # ....
           #
           {
@@ -78,6 +81,6 @@ class OpenAPI::V1::MachinesDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    MACHINES
   end
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for events endpoint
 class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Events'
@@ -9,12 +12,12 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
   include OpenAPI::V1::Concerns::ParamGroups
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/events", "Events index"
+    api :GET, "/#{API_VERSION}/events", 'Events index'
     param_group :pagination
-	param :id, [Integer, Array], optional: true, desc: "Scope the request to one or various events."
-	param :upcoming, [FalseClass, TrueClass], optional: true, desc: "Scope for the upcoming events."
-    description "Events index. Order by *created_at* desc."
-    example <<-EOS
+    param :id, [Integer, Array], optional: true, desc: 'Scope the request to one or various events.'
+    param :upcoming, [FalseClass, TrueClass], optional: true, desc: 'Scope for the upcoming events.'
+    description 'Events index. Order by *created_at* desc.'
+    example <<-EVENTS
       # /open_api/v1/events?page=1&per_page=2
       {
         "events": [
@@ -54,6 +57,6 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    EVENTS
   end
 end

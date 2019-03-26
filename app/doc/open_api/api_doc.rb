@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 # app/concerns/controllers/api_doc.rb
 #
 # Controller extension with common API documentation shortcuts
 #
-
 module OpenAPI::ApiDoc
   # Apipie doesn't allow to append anything to esisting
   #  description. It raises an error on double definition.

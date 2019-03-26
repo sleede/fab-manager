@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for bookable machines endpoint
 class OpenAPI::V1::BookableMachinesDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Bookable machines'
@@ -7,10 +10,10 @@ class OpenAPI::V1::BookableMachinesDoc < OpenAPI::V1::BaseDoc
   end
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/bookable_machines", "Bookable machines index"
-    description "Machines that a given user is allowed to book."
-    param :user_id, Integer, required: true, desc: "Id of the given user."
-    example <<-EOS
+    api :GET, "/#{API_VERSION}/bookable_machines", 'Bookable machines index'
+    description 'Machines that a given user is allowed to book.'
+    param :user_id, Integer, required: true, desc: 'Id of the given user.'
+    example <<-MACHINES
       # /open_api/v1/bookable_machines?user_id=522
       {
         "machines": [
@@ -67,6 +70,6 @@ class OpenAPI::V1::BookableMachinesDoc < OpenAPI::V1::BaseDoc
           # ...
         ]
       }
-    EOS
+    MACHINES
   end
 end
