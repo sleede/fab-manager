@@ -519,7 +519,7 @@
 - Fix a bug: user is not redirected after changing is duplicated e-mail on the SSO provider
 
 ## v2.1.0 2016 May 2
-- Add search feature on openlab projects : [Openlab-projects](https://github.com/LaCasemate/openlab-projects)
+- Add search feature on openlab projects : [Openlab-projects](https://github.com/sleede/openlab-projects)
 - Add integration tests for main features
 - Credits logic has been extracted into a microservice
 - Improved UI list of projects

@@ -325,8 +325,8 @@ upgrade_compose()
     abs_dir=$(echo "$dir" | sed "s^\${PWD}^$FM_PATH^")
     echo -e "\nCopying ElasticSearch 2.4 configuration files from GitHub to $abs_dir..."
     mkdir -p "$abs_dir"
-    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/elasticsearch.yml > "$abs_dir/elasticsearch.yml"
-    curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/log4j2.properties > "$abs_dir/log4j2.properties"
+    curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/docker/elasticsearch.yml > "$abs_dir/elasticsearch.yml"
+    curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/docker/log4j2.properties > "$abs_dir/log4j2.properties"
   fi
   docker-compose pull
   docker-compose up -d

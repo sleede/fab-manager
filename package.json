@@ -11,9 +11,9 @@
     "documentation"
   ],
   "homepage": "http://www.fab-manager.com/",
-  "repository": "https://github.com/LaCasemate/fab-manager.git",
+  "repository": "https://github.com/sleede/fab-manager.git",
   "bugs": {
-    "url": "https://github.com/LaCasemate/fab-manager/issues"
+    "url": "https://github.com/sleede/fab-manager/issues"
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {

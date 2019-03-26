@@ -21,7 +21,7 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
           {
             "id": 183,
             "title": "OPEN LAB",
-            "description": "Que vous soyez Fab user, visiteur, curieux ou bricoleur, l’atelier de fabrication numérique vous ouvre ses portes les mercredis soirs pour avancer vos projets ou rencontrer la «communauté» Fab Lab. \r\n\r\nCe soir, venez spécialement découvrir les machines à commandes numérique du Fab Lab de La Casemate, venez comprendre ce lieux ouvert à tous. \r\n\r\n\r\nVenez découvrir un concept, une organisation, des machines, pour stimuler votre sens de la créativité.",
+            "description": "Que vous soyez Fab user, visiteur, curieux ou bricoleur, l’atelier de fabrication numérique vous ouvre ses portes les mercredis soirs pour avancer vos projets ou rencontrer la «communauté» Fab Lab. \r\n\r\nCe soir, venez spécialement découvrir les machines à commandes numérique de la Fabrique de Fab-manager, venez comprendre ce lieux ouvert à tous. \r\n\r\n\r\nVenez découvrir un concept, une organisation, des machines, pour stimuler votre sens de la créativité.",
             "updated_at": "2016-04-25T10:49:40.055+02:00",
             "created_at": "2016-04-25T10:49:40.055+02:00",
             "nb_total_places": 18,

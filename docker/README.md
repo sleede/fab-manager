@@ -57,7 +57,7 @@ On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 
 This way, Docker and Docker-compose are preinstalled.
 Choose a datacenter and set the hostname as your domain name.
 
-With other providers, choose a [supported operating system](https://github.com/LaCasemate/fab-manager/blob/master/README.md#software-stack) and install docker on it:
+With other providers, choose a [supported operating system](https://github.com/sleede/fab-manager/blob/master/README.md#software-stack) and install docker on it:
 - [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) 
 - [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 
@@ -95,7 +95,7 @@ You can run the following script as root to easily perform all these operations:
 ### Retrieve the initial configuration files
 
 ```bash
-\curl -sSL https://raw.githubusercontent.com/LaCasemate/fab-manager/master/docker/setup.sh | bash
+\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/docker/setup.sh | bash
 ```
 
 ### Setup folders and env file
@@ -317,7 +317,7 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bund
 ### Steps
 
 When a new version is available, follow this procedure to update fab-manager app in a production environment, using docker-compose.
-You can subscribe to [this atom feed](https://github.com/LaCasemate/fab-manager/releases.atom) to get notified when a new release comes out.
+You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/releases.atom) to get notified when a new release comes out.
 
 1. go to your app folder
 
@@ -342,8 +342,8 @@ You can subscribe to [this atom feed](https://github.com/LaCasemate/fab-manager/
 6. run specific commands
 
    **Do not forget** to check if there are commands to run for your upgrade. Those commands 
-   are always specified in the [CHANGELOG](https://github.com/LaCasemate/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**. 
-   They are also present in the [releases page](https://github.com/LaCasemate/fab-manager/releases).
+   are always specified in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**. 
+   They are also present in the [releases page](https://github.com/sleede/fab-manager/releases).
  
    Those commands execute specific tasks and have to be run by hand.
 
@@ -361,5 +361,5 @@ You can check that all containers are running with `docker ps`.
 #### Is it possible to update several versions at the same time ?
 
 Yes, indeed. It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
-Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/LaCasemate/fab-manager/blob/master/CHANGELOG.md) between your actual
+Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual
 and the new version in sequential order. (Example: to update from 2.4.0 to 2.4.3, you will run the specific commands for the 2.4.1, then for the 2.4.2 and then for the 2.4.3).
