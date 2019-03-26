@@ -1,8 +1,18 @@
 # Changelog Fab Manager
 
+- (France) Compliance with Article 88 of Law No. 2015-1785 and BOI-TVA-DECLA-30-10-30-20160803 : Certification of cash systems
 - Fix a security issue: updated to devise 4.6.0 to fix [CVE-2019-5421](https://github.com/plataformatec/devise/issues/4981)
 - Fix a security issue: updated Rails to 4.2.11.1 to fix [CVE-2019-5418](https://groups.google.com/forum/#!topic/rubyonrails-security/pFRKI96Sm8Q) and [CVE-2019-5419](https://groups.google.com/forum/#!topic/rubyonrails-security/GN7w9fFAQeI)
+- Removed deprecated Capistrano deployment system
+- Rebranded product from "La Casemate"
+- Refactored some pieces of Ruby code, according to style guide
 - [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
+- [TODO DEPLOY] if applicable, add VAT history into database `rake fablab:setup:add_vat_rate[20,2017-01-01]`
+- [TODO DEPLOY] `rake fablab:setup:set_environment_to_invoices`
+- [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
+- [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
+- [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
+- [TODO DEPLOY] add `DISK_SPACE_MB_ALERT` and `SUPERADMIN_EMAIL` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
 
 ## v2.8.4 2019 March 18
 
