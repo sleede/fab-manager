@@ -17,7 +17,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc #TODO remove unused ?
+gem 'sdoc', '~> 0.4.0', group: :doc # TODO, remove unused ?
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
@@ -41,16 +41,12 @@ end
 group :development do
   gem 'active_record_query_trace'
   gem 'awesome_print'
-  gem 'capistrano'
-  gem 'capistrano-maintenance', '0.0.5', require: false
-  gem 'capistrano-sidekiq', require: false
   gem 'coveralls', require: false
   gem 'foreman'
   # Preview mail in the browser
   gem 'mailcatcher'
   gem 'puma'
   gem 'rb-readline'
-  gem 'rvm-capistrano', require: false
 end
 
 group :test do
@@ -66,7 +62,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'unicorn'
 end
 
 gem 'seed_dump'
