@@ -6,6 +6,7 @@
 - Removed deprecated Capistrano deployment system
 - Rebranded product from "La Casemate"
 - Refactored some pieces of Ruby code, according to style guide
+- Added asterisks on required fields in sign-up form
 - [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
 - [TODO DEPLOY] if applicable, add VAT history into database `rake fablab:setup:add_vat_rate[20,2017-01-01]`
 - [TODO DEPLOY] `rake fablab:setup:set_environment_to_invoices`
