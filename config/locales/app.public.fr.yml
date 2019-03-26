@@ -85,6 +85,7 @@ fr:
         i_accept_to_receive_information_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
+        field_required: "Champ requis"
 
         # fenêtre de changement de mot de passe
         change_your_password: "Modifier votre mot de passe"

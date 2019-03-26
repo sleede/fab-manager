@@ -85,6 +85,7 @@ en:
         i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the FabLab policy"
+        field_required: "Field required"
 
         # password modification modal
         change_your_password: "Change your password"
