@@ -10,7 +10,11 @@
         <h1 translate>{{ 'invoices.invoices' }}</h1>
       </section>
     </div>
-
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+      <section class="heading-actions wrapper">
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'invoices.accounting_periods' | translate }}</a>
+      </section>
+    </div>
   </div>
 </section>
 
@@ -57,6 +61,7 @@
     		      <table class="table" ng-if="invoices.length > 0">
     		        <thead>
     		        <tr>
+                  <th style="width:5%"></th>
     		          <th style="width:15%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'invoices.invoice_#' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
     		          <th style="width:20%"><a href="" ng-click="setOrderInvoice('date')">{{ 'invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
@@ -70,6 +75,10 @@
     		        </thead>
     		        <tbody>
     		        <tr ng-repeat="invoice in invoices">
+                  <td>
+                    <i class="fa fa-link chained" ng-show="invoice.chained_footprint"/>
+                    <i class="fa fa-chain-broken broken" ng-hide="invoice.chained_footprint"/>
+                  </td>
     		          <td>{{ invoice.reference }}</td>
     		          <td ng-if="!invoice.is_avoir">{{ invoice.date | amDateFormat:'L LTS' }}</td>
     		          <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
@@ -83,7 +92,7 @@
     		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
     		                <i class="fa fa-file-pdf-o"></i> {{ 'invoices.download_the_credit_note' | translate }}
     		              </a>
-    		              <a class="btn btn-default" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund">
+    		              <a class="btn btn-default" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
     		                <i class="fa fa-reply"></i> {{ 'invoices.credit_note' | translate }}
     		              </a>
     		            </div>

@@ -285,6 +285,7 @@ fr:
         invoices:
           # liste de toutes les factures & paramètres de facturation
           invoices: "Factures"
+          accounting_periods: "Périodes comptables"
           invoices_list: "Liste des factures"
           filter_invoices: "Filtrer les factures"
           invoice_#_: "Facture n° :"
@@ -406,6 +407,24 @@ fr:
           logo_successfully_saved: "Le logo bien été enregistré."
           an_error_occurred_while_saving_the_logo: "Une erreur est survenue lors de l'enregistrement du logo."
           online_payment: "Paiement en ligne"
+          close_accounting_period: "Clôturer une période comptable"
+          close_from_date: "Clôturer depuis"
+          start_date_is_required: "La date de début est requise"
+          close_until_date: "Clôturer jusqu'au"
+          end_date_is_required: "La date de fin est requise"
+          previous_closings: "Fermetures précédentes"
+          start_date: "Du"
+          end_date: "Au"
+          closed_at: "Clôturé le"
+          closed_by: "Par"
+          period_total: "Total de la période"
+          perpetual_total: "Total perpétuel"
+          integrity: "Contrôle d'intégrité"
+          confirmation_required: "Confirmation requise"
+          confirm_close_START_END: "Êtes-vous sur de vouloir clôturer la période comptable du {{START}} au {{END}} ? Toute modification ultérieure sera impossible. Cette opération va prendre un certain temps."
+          period_START_END_closed_success: "La période comptable du {{START}} au {{END}} a bien été clôturée"
+          failed_to_close_period: "Une erreur est survenue, impossible de clôturer la période comptable"
+          no_periods: "Aucune clôture pour le moment"
 
       members:
         # gestion des utilisateurs, des groupes, des étiquettes, etc.

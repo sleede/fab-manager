@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'checksum'
+
 # Invoice correspond to a single purchase made by an user. This purchase may
 # include reservation(s) and/or a subscription
 class Invoice < ActiveRecord::Base
@@ -15,9 +17,13 @@ class Invoice < ActiveRecord::Base
   belongs_to :coupon
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
+  belongs_to :operator, foreign_key: :operator_id, class_name: 'User'
 
-  after_create :update_reference
+  before_create :add_environment
+  after_create :update_reference, :chain_record
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
+
+  validates_with ClosedPeriodValidator
 
   def file
     dir = "invoices/#{user.id}"
@@ -211,6 +217,19 @@ class Invoice < ActiveRecord::Base
     total - (wallet_amount || 0)
   end
 
+  def add_environment
+    self.environment = Rails.env
+  end
+
+  def chain_record
+    self.footprint = compute_footprint
+    save!
+  end
+
+  def check_footprint
+    invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
+  end
+
   private
 
   def generate_and_send_invoice
@@ -254,6 +273,18 @@ class Invoice < ActiveRecord::Base
     return Invoice.count unless defined? start && defined? ending
 
     Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
+  end
+
+  def compute_footprint
+    max_date = created_at || DateTime.now
+    previous = Invoice.where('created_at < ?', max_date)
+                      .order('created_at DESC')
+                      .limit(1)
+
+    columns  = Invoice.columns.map(&:name)
+                      .delete_if { |c| %w[footprint updated_at].include? c }
+
+    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
   end
 
 end

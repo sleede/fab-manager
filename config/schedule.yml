@@ -24,4 +24,14 @@ reservation_reminder:
   class: "ReservationReminderWorker"
   queue: default
 
+close_period_reminder_worker:
+  cron: "0 12 * * 1" # every monday at 12pm
+  class: "ClosePeriodReminderWorker"
+  queue: default
+
+free_disk_space:
+  cron: "0 5 * * 0" # every sunday at 5am
+  class: "FreeDiskSpaceWorker"
+  queue: default
+
 <%= PluginRegistry.insert_code('yml.schedule') %>

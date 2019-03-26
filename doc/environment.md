@@ -143,10 +143,20 @@ Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
 
+    DISK_SPACE_MB_ALERT
+
+Threshold in MB of the minimum free disk space available on the current mount point.
+The check will run every weeks and if the threshold is exceeded, an alert will be sent to every administrators. 
+
     ADMIN_EMAIL, ADMIN_PASSWORD
 
 Credentials for the first admin user created when seeding the project. (not present in application.yml because they are only used once when running the database seed with the command `rake db:seed`)
 
+    SUPERADMIN_EMAIL
+
+Optional email of the administrator account in charge of the system administration. 
+If specified, it will be hidden from the administrators list and he will exclusively receive the notifications related to the system administration.
+If not specified, every admins will receive system administration notifications.  
 
 <a name="internationalization-settings"></a>
 ## Internationalization settings

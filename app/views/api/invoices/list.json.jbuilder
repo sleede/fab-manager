@@ -12,4 +12,5 @@ json.array!(@invoices) do |invoice|
   json.stripe invoice.stp_invoice_id?
   json.date invoice.is_a?(Avoir) ? invoice.avoir_date : invoice.created_at
   json.prevent_refund invoice.prevent_refund?
+  json.chained_footprint invoice.check_footprint
 end

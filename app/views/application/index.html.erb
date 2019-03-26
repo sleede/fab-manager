@@ -23,6 +23,7 @@
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
+      Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";

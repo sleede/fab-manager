@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'invoices', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
-  function ($scope, $state, Invoice, invoices, $uibModal, growl, $filter, Setting, settings, _t) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
+  function ($scope, $state, Invoice, AccountingPeriod, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -110,7 +110,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         templateUrl: '<%= asset_path "admin/invoices/avoirModal.html" %>',
         controller: 'AvoirModalController',
         resolve: {
-          invoice () { return invoice; }
+          invoice () { return invoice; },
+          closedPeriods() { return AccountingPeriod.query().$promise; }
         }
       });
 
@@ -391,6 +392,37 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       return invoiceSearch(true);
     };
 
+    /**
+     * Open a modal allowing the user to close an accounting period and to
+     * view all periods already closed.
+     */
+    $scope.closeAnAccountingPeriod = function() {
+      // open modal
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/invoices/closePeriodModal.html" %>',
+        controller: 'ClosePeriodModalController',
+        size: 'lg',
+        resolve: {
+          periods() { return AccountingPeriod.query().$promise; },
+          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; },
+        }
+      });
+    }
+
+    /**
+     * Test if the given date is within a closed accounting period
+     * @param date {Date} date to test
+     * @returns {boolean} true if closed, false otherwise
+     */
+    $scope.isDateClosed = function(date) {
+      for (const period of closedPeriods) {
+        if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -500,8 +532,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'Invoice', 'growl', '_t',
-  function ($scope, $uibModalInstance, invoice, Invoice, growl, _t) {
+Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'closedPeriods', 'Invoice', 'growl', '_t',
+  function ($scope, $uibModalInstance, invoice, closedPeriods, Invoice, growl, _t) {
     /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
@@ -580,6 +612,20 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
      */
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
+    /**
+     * Test if the given date is within a closed accounting period
+     * @param date {Date} date to test
+     * @returns {boolean} true if closed, false otherwise
+     */
+    $scope.isDateClosed = function(date) {
+      for (const period of closedPeriods) {
+        if (moment(date).isBetween(moment.utc(period.start_at).startOf('day'), moment.utc(period.end_at).endOf('day'), null, '[]')) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -602,5 +648,108 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
+  }
+]);
+
+
+/**
+ * Controller used in the modal window allowing an admin to close an accounting period
+ */
+Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$uibModalInstance', '$window', 'Invoice', 'AccountingPeriod', 'periods', 'lastClosingEnd','dialogs', 'growl', '_t',
+  function ($scope, $uibModalInstance, $window, Invoice, AccountingPeriod, periods, lastClosingEnd, dialogs, growl, _t) {
+    const YESTERDAY = moment.utc({ h: 0, m: 0, s: 0, ms: 0 }).subtract(1, 'day').toDate();
+    const LAST_CLOSING = moment.utc(lastClosingEnd.last_end_date).toDate();
+    const MAX_END = moment.utc(lastClosingEnd.last_end_date).add(1, 'year').subtract(1, 'day').toDate();
+
+    /* PUBLIC SCOPE */
+
+    // date pickers values are bound to these variables
+    $scope.period = {
+      start_at: LAST_CLOSING,
+      end_at: moment(YESTERDAY).isBefore(MAX_END) ? YESTERDAY : MAX_END
+    };
+
+    // any form errors will come here
+    $scope.errors = {};
+
+    // will match any error about invoices
+    $scope.invoiceErrorRE = /^invoice_(.+)$/;
+
+    // existing closed periods, provided by the API
+    $scope.accountingPeriods = periods;
+
+    // AngularUI-Bootstrap datepickers parameters to define the period to close
+    $scope.datePicker = {
+      format: Fablab.uibDateFormat,
+      // default: datePicker are not shown
+      startOpened: false,
+      endOpened: false,
+      minDate: LAST_CLOSING,
+      maxDate: moment(YESTERDAY).isBefore(MAX_END) ? YESTERDAY : MAX_END,
+      options: {
+        startingDay: Fablab.weekStartingDay
+      }
+    };
+
+    /**
+     * Callback to open the datepicker
+     */
+    $scope.toggleDatePicker = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.datePicker.endOpened = !$scope.datePicker.endOpened;
+    };
+
+    /**
+     * Validate the close period creation
+     */
+    $scope.ok = function () {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('invoices.confirmation_required'),
+                msg: _t(
+                  'invoices.confirm_close_START_END',
+                  { START: moment.utc($scope.period.start_at).format('LL'), END: moment.utc($scope.period.end_at).format('LL') }
+                )
+              };
+            }
+          }
+        },
+        function () { // creation confirmed
+          AccountingPeriod.save({
+              accounting_period: {
+                start_at: moment.utc($scope.period.start_at).toDate(),
+                end_at: moment.utc($scope.period.end_at).endOf('day').toDate()
+              }
+            }, function (resp) {
+            growl.success(_t(
+              'invoices.period_START_END_closed_success',
+              { START: moment.utc(resp.start_at).format('LL'), END: moment.utc(resp.end_at).format('LL') }
+            ));
+            $uibModalInstance.close(resp);
+          }
+          , function(error) {
+            growl.error(_t('invoices.failed_to_close_period'));
+            $scope.errors = error.data;
+          });
+        }
+      );
+
+    };
+
+    /**
+     * Cancel the refund, dismiss the modal window
+     */
+    $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+    /**
+     * Trigger the API call to download the JSON archive of the closed accounting period
+     */
+    $scope.downloadArchive = function(period) {
+      $window.location.href = `/api/accounting_periods/${period.id}/archive`;
+    }
   }
 ]);

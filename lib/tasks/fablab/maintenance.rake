@@ -45,5 +45,10 @@ namespace :fablab do
       end
     end
 
+    desc 'generate current code checksum'
+    task checksum: :environment do
+      require 'checksum'
+      puts Checksum.code
+    end
   end
 end

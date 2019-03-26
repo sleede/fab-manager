@@ -339,6 +339,7 @@ This can be achieved doing the following:
   - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20181217103441_migrate_settings_value_to_history_values.rb` is using `SELECT DISTINCT ON`.
+  - `db/migrate/20190107111749_protect_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`.
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
   This also requires your user to have the _SUPERUSER_ role.
   Please see the [known issues](#known-issues) section for more information about this.

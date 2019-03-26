@@ -224,10 +224,10 @@ class Reservation < ActiveRecord::Base
     invoice_items
   end
 
-  def save_with_payment(coupon_code = nil)
+  def save_with_payment(operator_id, coupon_code = nil)
     begin
       clean_pending_strip_invoice_items
-      build_invoice(user: user)
+      build_invoice(user: user, operator_id: operator_id)
       invoice_items = generate_invoice_items(false, coupon_code)
     rescue StandardError => e
       logger.error e
@@ -242,7 +242,7 @@ class Reservation < ActiveRecord::Base
     if plan_id
       self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
       subscription.attributes = { plan_id: plan_id, user_id: user.id, card_token: card_token, expiration_date: nil }
-      if subscription.save_with_payment(false)
+      if subscription.save_with_payment(operator_id, false)
         self.stp_invoice_id = invoice_items.first.refresh.invoice
         invoice.stp_invoice_id = invoice_items.first.refresh.invoice
         invoice.invoice_items.push InvoiceItem.new(
@@ -368,8 +368,8 @@ class Reservation < ActiveRecord::Base
     pending_invoice_items.each(&:delete)
   end
 
-  def save_with_local_payment(coupon_code = nil)
-    build_invoice(user: user)
+  def save_with_local_payment(operator_id, coupon_code = nil)
+    build_invoice(user: user, operator_id: operator_id)
     generate_invoice_items(true, coupon_code)
 
     return false unless valid?
@@ -377,7 +377,7 @@ class Reservation < ActiveRecord::Base
     if plan_id
       self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
       subscription.attributes = { plan_id: plan_id, user_id: user.id, expiration_date: nil }
-      if subscription.save_with_local_payment(false)
+      if subscription.save_with_local_payment(operator_id, false)
         invoice.invoice_items.push InvoiceItem.new(
           amount: subscription.plan.amount,
           description: subscription.plan.name,

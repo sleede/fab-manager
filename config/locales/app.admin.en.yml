@@ -285,6 +285,7 @@ en:
         invoices:
           # list of all invoices & invoicing parameters
           invoices: "Invoices"
+          accounting_periods: "Accounting periods"
           invoices_list: "Invoices list"
           filter_invoices: "Filter invoices"
           invoice_#_: "Invoice #:"
@@ -406,6 +407,24 @@ en:
           logo_successfully_saved: "Logo successfully saved."
           an_error_occurred_while_saving_the_logo: "An error occurred while saving the logo."
           online_payment: "Online payment"
+          close_accounting_period: "Close an accounting period"
+          close_from_date: "Close from"
+          start_date_is_required: "Start date is required"
+          close_until_date: "Close until"
+          end_date_is_required: "End date is required"
+          previous_closings: "Previous closings"
+          start_date: "From"
+          end_date: "To"
+          closed_at: "Closed at"
+          closed_by: "By"
+          period_total: "Period total"
+          perpetual_total: "Perpetual total"
+          integrity: "Integrity check"
+          confirmation_required: "Confirmation required"
+          confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible. This operation will take some time to complete"
+          period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed"
+          failed_to_close_period: "An error occurred, unable to close the accounting period"
+          no_periods: "No closings for now"
 
       members:
         # management of users, labels, groups, and so on

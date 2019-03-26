@@ -19,7 +19,7 @@ class API::SubscriptionsController < API::ApiController
       user_id = current_user.admin? ? subscription_params[:user_id] : current_user.id
 
       @subscription = Subscription.new(subscription_params)
-      is_subscribe = Subscriptions::Subscribe.new(user_id)
+      is_subscribe = Subscriptions::Subscribe.new(user_id, current_user.id)
                                              .pay_and_save(@subscription, method, coupon_params[:coupon_code], true)
 
       if is_subscribe
@@ -35,7 +35,7 @@ class API::SubscriptionsController < API::ApiController
 
     free_days = params[:subscription][:free] || false
 
-    res = Subscriptions::Subscribe.new(@subscription.user_id)
+    res = Subscriptions::Subscribe.new(@subscription.user_id, current_user.id)
                                   .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
     if res.is_a?(Subscription)
       @subscription = res

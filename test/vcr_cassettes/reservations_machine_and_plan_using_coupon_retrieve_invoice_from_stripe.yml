@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.stripe.com/v1/invoices/in_1EFM3E2sOmf47Nz9HouvTQQA
+    uri: https://api.stripe.com/v1/invoices/in_1EDuKd2sOmf47Nz9RiUzpIvn
     body:
       encoding: US-ASCII
       string: ''
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:03:01 GMT
+      - Thu, 14 Mar 2019 14:15:00 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -51,7 +51,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_DjYO6lwzHYTfMj
+      - req_pqYXhloQrLM9FF
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -60,7 +60,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1EFM3E2sOmf47Nz9HouvTQQA",
+          "id": "in_1EDuKd2sOmf47Nz9RiUzpIvn",
           "object": "invoice",
           "amount_due": 3825,
           "amount_paid": 3825,
@@ -71,40 +71,40 @@ http_interactions:
           "auto_advance": false,
           "billing": "charge_automatically",
           "billing_reason": "subscription_update",
-          "charge": "ch_1EFM3F2sOmf47Nz9ynJH55GU",
+          "charge": "ch_1EDuKe2sOmf47Nz93x2P4Z9E",
           "closed": true,
-          "created": 1552917772,
+          "created": 1552572891,
           "currency": "usd",
           "custom_fields": null,
           "customer": "cus_8Di1wjdVktv5kt",
-          "date": 1552917772,
+          "date": 1552572891,
           "default_source": null,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
-          "finalized_at": 1552917772,
+          "finalized_at": 1552572891,
           "footer": null,
           "forgiven": false,
-          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_DohlSwftj7oHqjv4Xbtv6dizV7",
-          "invoice_pdf": "https://pay.stripe.com/invoice/invst_DohlSwftj7oHqjv4Xbtv6dizV7/pdf",
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_N9nPAQU1Q7xVJxKGb0G0bXeiWX",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_N9nPAQU1Q7xVJxKGb0G0bXeiWX/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1EFM3B2sOmf47Nz9SOyhSNJi",
+                "id": "ii_1EDuKa2sOmf47Nz94Eg0abuj",
                 "object": "line_item",
                 "amount": -675,
                 "currency": "usd",
                 "description": "coupon SUNNYFABLAB",
                 "discountable": false,
-                "invoice_item": "ii_1EFM3B2sOmf47Nz9SOyhSNJi",
+                "invoice_item": "ii_1EDuKa2sOmf47Nz94Eg0abuj",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917769,
-                  "start": 1552917769
+                  "end": 1552572888,
+                  "start": 1552572888
                 },
                 "plan": null,
                 "proration": false,
@@ -113,19 +113,19 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1EFM3A2sOmf47Nz99gYXszwm",
+                "id": "ii_1EDuKa2sOmf47Nz9Y50GRcx3",
                 "object": "line_item",
                 "amount": 1500,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D March 18, 2019 13:00 - 02:00 PM",
+                "description": "FORM1+ imprimante 3D March 14, 2019 13:00 - 02:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM3A2sOmf47Nz99gYXszwm",
+                "invoice_item": "ii_1EDuKa2sOmf47Nz9Y50GRcx3",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917768,
-                  "start": 1552917768
+                  "end": 1552572888,
+                  "start": 1552572888
                 },
                 "plan": null,
                 "proration": false,
@@ -134,7 +134,7 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "sub_Eine8y820SrVIB",
+                "id": "sub_EhIwxOdVh4z1EA",
                 "object": "line_item",
                 "amount": 3000,
                 "currency": "usd",
@@ -144,8 +144,8 @@ http_interactions:
                 "metadata": {
                 },
                 "period": {
-                  "end": 1555596172,
-                  "start": 1552917772
+                  "end": 1555251291,
+                  "start": 1552572891
                 },
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -174,39 +174,39 @@ http_interactions:
                 "proration": false,
                 "quantity": 1,
                 "subscription": null,
-                "subscription_item": "si_EinerOrdmoqf4k",
+                "subscription_item": "si_EhIww86djskFvk",
                 "type": "subscription"
               }
             ],
             "has_more": false,
             "total_count": 3,
-            "url": "/v1/invoices/in_1EFM3E2sOmf47Nz9HouvTQQA/lines"
+            "url": "/v1/invoices/in_1EDuKd2sOmf47Nz9RiUzpIvn/lines"
           },
           "livemode": false,
           "metadata": {
           },
           "next_payment_attempt": null,
-          "number": "C0E661C-0058",
+          "number": "C0E661C-0055",
           "paid": true,
-          "period_end": 1552917772,
-          "period_start": 1552917772,
+          "period_end": 1552572891,
+          "period_start": 1552572891,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
           "status": "paid",
           "status_transitions": {
-            "finalized_at": 1552917772,
+            "finalized_at": 1552572891,
             "marked_uncollectible_at": null,
-            "paid_at": 1552917773,
+            "paid_at": 1552572892,
             "voided_at": null
           },
-          "subscription": "sub_Eine8y820SrVIB",
+          "subscription": "sub_EhIwxOdVh4z1EA",
           "subtotal": 3825,
           "tax": null,
           "tax_percent": null,
           "total": 3825,
-          "webhooks_delivered_at": 1552917774
+          "webhooks_delivered_at": 1552572892
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:03:01 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:00 GMT
 recorded_with: VCR 3.0.1
