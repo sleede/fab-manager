@@ -1,6 +1,12 @@
 # Changelog Fab Manager
 
 - (France) Compliance with Article 88 of Law No. 2015-1785 and BOI-TVA-DECLA-30-10-30-20160803 : Certification of cash systems
+- Ability for an admin to view and close accounting periods
+- Secured archives for close accounting periods
+- Securely chained invoices records with visual control of data integrity
+- Notify an user if the available disk space reaches a configured threshold
+- Invoices generated outside of production environment will be watermarked
+- Keep track of currently logged user on each generated invoice
 - Fix a security issue: updated to devise 4.6.0 to fix [CVE-2019-5421](https://github.com/plataformatec/devise/issues/4981)
 - Fix a security issue: updated Rails to 4.2.11.1 to fix [CVE-2019-5418](https://groups.google.com/forum/#!topic/rubyonrails-security/pFRKI96Sm8Q) and [CVE-2019-5419](https://groups.google.com/forum/#!topic/rubyonrails-security/GN7w9fFAQeI)
 - Removed deprecated Capistrano deployment system
@@ -8,7 +14,7 @@
 - Refactored some pieces of Ruby code, according to style guide
 - Added asterisks on required fields in sign-up form
 - [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
-- [TODO DEPLOY] if applicable, add VAT history into database `rake fablab:setup:add_vat_rate[20,2017-01-01]`
+- [TODO DEPLOY] if you have changed your VAT rate in the past, add its history into database. You can use a rate of "0" to disable VAT. Eg. `rake fablab:setup:add_vat_rate[20,2017-01-01]`
 - [TODO DEPLOY] `rake fablab:setup:set_environment_to_invoices`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`

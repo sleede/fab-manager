@@ -303,17 +303,34 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           active () {
             return $scope.invoice.VAT.active;
           },
-          history () {
+          rateHistory () {
             return Setting.get({ name: 'invoice_VAT-rate', history: true }).$promise;
+          },
+          activeHistory () {
+            return Setting.get({ name: 'invoice_VAT-active', history: true }).$promise;
           }
         },
-        controller: ['$scope', '$uibModalInstance', 'rate', 'active', 'history', function ($scope, $uibModalInstance, rate, active, history) {
+        controller: ['$scope', '$uibModalInstance', 'rate', 'active', 'rateHistory', 'activeHistory', function ($scope, $uibModalInstance, rate, active, rateHistory, activeHistory) {
           $scope.rate = rate;
           $scope.isSelected = active;
-          $scope.history = history.setting.history;
+          $scope.history = [];
 
           $scope.ok = function () { $uibModalInstance.close({ rate: $scope.rate, active: $scope.isSelected }); };
-          return $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+          $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+
+          const initialize = function() {
+            rateHistory.setting.history.forEach(function (rate) {
+              $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user })
+            });
+            activeHistory.setting.history.forEach(function (v) {
+              if (v.value === 'false') {
+                $scope.history.push({ date: v.created_at, rate: 0, user: v.user })
+              }
+            });
+          }
+
+          initialize();
         }]
       });
 

@@ -445,6 +445,10 @@ In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
 These comments are not required to be translated, they are intended to help the translator to have some context information about the sentence to translate.
 
+You will also need to translate the invoice watermark, located in `app/pdfs/data/`. 
+You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), which is using [Rubik Mono One](https://fonts.google.com/specimen/Rubik+Mono+One) as font. 
+Use it to generate a similar localised PNG image which keep the default image size, as PDF are not responsive.
+
 
 <a name="i18n-configuration"></a>
 ### Configuration
