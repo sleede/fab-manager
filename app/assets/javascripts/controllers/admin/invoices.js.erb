@@ -699,6 +699,9 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     // existing closed periods, provided by the API
     $scope.accountingPeriods = periods;
 
+    // closing a period may take a long time so we need to prevent the user from double-clicking the close button while processing
+    $scope.pendingCreation = false;
+
     // AngularUI-Bootstrap datepickers parameters to define the period to close
     $scope.datePicker = {
       format: Fablab.uibDateFormat,
@@ -740,22 +743,28 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
           }
         },
         function () { // creation confirmed
-          AccountingPeriod.save({
+          $scope.pendingCreation = true;
+          AccountingPeriod.save(
+            {
               accounting_period: {
                 start_at: moment.utc($scope.period.start_at).toDate(),
                 end_at: moment.utc($scope.period.end_at).endOf('day').toDate()
               }
-            }, function (resp) {
-            growl.success(_t(
-              'invoices.period_START_END_closed_success',
-              { START: moment.utc(resp.start_at).format('LL'), END: moment.utc(resp.end_at).format('LL') }
-            ));
-            $uibModalInstance.close(resp);
-          }
-          , function(error) {
-            growl.error(_t('invoices.failed_to_close_period'));
-            $scope.errors = error.data;
-          });
+            },
+            function (resp) {
+              $scope.pendingCreation = false;
+              growl.success(_t(
+                'invoices.period_START_END_closed_success',
+                { START: moment.utc(resp.start_at).format('LL'), END: moment.utc(resp.end_at).format('LL') }
+              ));
+              $uibModalInstance.close(resp);
+            },
+            function(error) {
+              $scope.pendingCreation = false;
+              growl.error(_t('invoices.failed_to_close_period'));
+              $scope.errors = error.data;
+            }
+          );
         }
       );
 
