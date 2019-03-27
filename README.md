@@ -1,6 +1,6 @@
 # FabManager
 
-FabManager is the FabLab management solution. It is web-based, open-source and totally free.
+FabManager is the Fab Lab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.
 
 [![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager) 
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
@@ -43,7 +43,6 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 
 - Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.3
-- Git 1.9.1+
 - Redis 2.8.4+
 - Sidekiq 3.3.4+
 - Elasticsearch 5.6
