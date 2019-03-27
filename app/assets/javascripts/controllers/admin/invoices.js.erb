@@ -111,7 +111,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         controller: 'AvoirModalController',
         resolve: {
           invoice () { return invoice; },
-          closedPeriods() { return AccountingPeriod.query().$promise; }
+          closedPeriods() { return AccountingPeriod.query().$promise; },
+          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; }
         }
       });
 
@@ -421,7 +422,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         size: 'lg',
         resolve: {
           periods() { return AccountingPeriod.query().$promise; },
-          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; },
+          lastClosingEnd() { return AccountingPeriod.lastClosingEnd().$promise; }
         }
       });
     }
@@ -549,8 +550,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'closedPeriods', 'Invoice', 'growl', '_t',
-  function ($scope, $uibModalInstance, invoice, closedPeriods, Invoice, growl, _t) {
+Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'invoice', 'closedPeriods', 'lastClosingEnd', 'Invoice', 'growl', '_t',
+  function ($scope, $uibModalInstance, invoice, closedPeriods, lastClosingEnd, Invoice, growl, _t) {
     /* PUBLIC SCOPE */
 
     // invoice linked to the current refund
@@ -565,6 +566,9 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       subscription_to_expire: false,
       invoice_items_ids: []
     };
+
+    // End date of last closed accounting period or date of first invoice
+    $scope.lastClosingEnd = moment.utc(lastClosingEnd.last_end_date).toDate();
 
     // Possible refunding methods
     $scope.avoirModes = [
