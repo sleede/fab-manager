@@ -4,7 +4,7 @@ MAINTAINER peng@sleede.com
 # First we need to be able to fetch from https repositories
 RUN apt-get update && \
     apt-get install -y apt-transport-https \
-      ca-certificates
+      ca-certificates apt-utils
 
 
 # Add sources for external tools to APT
