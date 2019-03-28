@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v3.0.0 2019 March 28
+
 - (France) Compliance with Article 88 of Law No. 2015-1785 and BOI-TVA-DECLA-30-10-30-20160803 : Certification of cash systems
 - Ability for an admin to view and close accounting periods
 - Secured archives for close accounting periods
