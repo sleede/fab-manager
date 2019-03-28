@@ -7,6 +7,7 @@
 - Notify an user if the available disk space reaches a configured threshold
 - Invoices generated outside of production environment will be watermarked
 - Keep track of currently logged user on each generated invoice
+- Fix a bug: unable to add a file attachment to an event
 - Fix a security issue: updated to devise 4.6.0 to fix [CVE-2019-5421](https://github.com/plataformatec/devise/issues/4981)
 - Fix a security issue: updated Rails to 4.2.11.1 to fix [CVE-2019-5418](https://groups.google.com/forum/#!topic/rubyonrails-security/pFRKI96Sm8Q) and [CVE-2019-5419](https://groups.google.com/forum/#!topic/rubyonrails-security/GN7w9fFAQeI)
 - Removed deprecated Capistrano deployment system
