@@ -1,0 +1,8 @@
+period2015:
+  start_at: 2015-01-01
+  end_at: 2015-12-31
+  closed_at: 2016-01-04 18:12:07
+  closed_by: 1
+  period_total: 1500
+  perpetual_total: 4500
+  footprint: 38afdbe83dd1289a56575e72b23045c5414cfca57d52a05912ad0668bb2e2308

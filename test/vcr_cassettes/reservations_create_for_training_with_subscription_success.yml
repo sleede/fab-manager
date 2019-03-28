@@ -33,7 +33,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:30 GMT
+      - Thu, 14 Mar 2019 14:15:01 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AuyuMZSKuWHozf
+      - req_pDtU3RoRZKiHZm
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1EFM2s2sOmf47Nz9nDXanelU",
+          "id": "tok_1EDuKm2sOmf47Nz9QU6dYWRy",
           "object": "token",
           "card": {
-            "id": "card_1EFM2s2sOmf47Nz9PJj5UReb",
+            "id": "card_1EDuKm2sOmf47Nz9IykxXatq",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -90,13 +90,13 @@ http_interactions:
             "tokenization_method": null
           },
           "client_ip": "90.112.130.7",
-          "created": 1552917750,
+          "created": 1552572900,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:30 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:01 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8CzKe50I0J1gaI&limit=100
@@ -128,11 +128,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:31 GMT
+      - Thu, 14 Mar 2019 14:15:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '29333'
+      - '26298'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -148,7 +148,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_3oNBw8mpFIFdun
+      - req_FGO4NEVTknGn2P
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -159,121 +159,6 @@ http_interactions:
         {
           "object": "list",
           "data": [
-            {
-              "id": "ii_1EFM2l2sOmf47Nz9kT5dkNnE",
-              "object": "invoiceitem",
-              "amount": 1000,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552917743,
-              "description": "FORM1+ imprimante 3D March 18, 2019 14:00 - 03:00 PM",
-              "discountable": true,
-              "invoice": "in_1EFM2o2sOmf47Nz9AYaFr2Zs",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552917743,
-                "start": 1552917743
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 1000
-            },
-            {
-              "id": "ii_1EFM2k2sOmf47Nz9IEaZDMur",
-              "object": "invoiceitem",
-              "amount": 0,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552917742,
-              "description": "FORM1+ imprimante 3D March 18, 2019 13:00 - 02:00 PM",
-              "discountable": true,
-              "invoice": "in_1EFM2o2sOmf47Nz9AYaFr2Zs",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552917742,
-                "start": 1552917742
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 0
-            },
-            {
-              "id": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
-              "object": "invoiceitem",
-              "amount": 1000,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552572910,
-              "description": "FORM1+ imprimante 3D March 14, 2019 14:00 - 03:00 PM",
-              "discountable": true,
-              "invoice": "in_1EDuKz2sOmf47Nz9uRJy8Li2",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552572910,
-                "start": 1552572910
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 1000
-            },
-            {
-              "id": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
-              "object": "invoiceitem",
-              "amount": 0,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552572909,
-              "description": "FORM1+ imprimante 3D March 14, 2019 13:00 - 02:00 PM",
-              "discountable": true,
-              "invoice": "in_1EDuKz2sOmf47Nz9uRJy8Li2",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552572909,
-                "start": 1552572909
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 0
-            },
-            {
-              "id": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
-              "object": "invoiceitem",
-              "amount": 0,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552572903,
-              "description": "Formation Imprimante 3D March 15, 2019 07:00 - 11:00 AM",
-              "discountable": true,
-              "invoice": "in_1EDuKq2sOmf47Nz91gfmqKKi",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552572903,
-                "start": 1552572903
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 0
-            },
             {
               "id": "ii_1DvQQg2sOmf47Nz9jPhO6Pvd",
               "object": "invoiceitem",
@@ -1268,13 +1153,13 @@ http_interactions:
           "url": "/v1/invoiceitems"
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:31 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:02 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8CzKe50I0J1gaI&amount=0&currency=usd&description=Formation+Imprimante+3D+March+19%2C+2019+07%3A00+-+11%3A00+AM
+      string: customer=cus_8CzKe50I0J1gaI&amount=0&currency=usd&description=Formation+Imprimante+3D+March+15%2C+2019+07%3A00+-+11%3A00+AM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1302,7 +1187,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:32 GMT
+      - Thu, 14 Mar 2019 14:15:03 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1322,7 +1207,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_xDeml88O1M1JRe
+      - req_zj8r8wsQWstlNi
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1331,21 +1216,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1EFM2u2sOmf47Nz9BRdvoAZT",
+          "id": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
           "object": "invoiceitem",
           "amount": 0,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917752,
-          "description": "Formation Imprimante 3D March 19, 2019 07:00 - 11:00 AM",
+          "date": 1552572903,
+          "description": "Formation Imprimante 3D March 15, 2019 07:00 - 11:00 AM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {
           },
           "period": {
-            "end": 1552917752,
-            "start": 1552917752
+            "end": 1552572903,
+            "start": 1552572903
           },
           "plan": null,
           "proration": false,
@@ -1354,7 +1239,7 @@ http_interactions:
           "unit_amount": 0
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:32 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:03 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI
@@ -1386,7 +1271,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:33 GMT
+      - Thu, 14 Mar 2019 14:15:03 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1406,7 +1291,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_S10G72dCcwr1N5
+      - req_cRky5gnm7DewCQ
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1456,7 +1341,7 @@ http_interactions:
           "tax_info_verification": null
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:33 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:04 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoices
@@ -1490,7 +1375,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:34 GMT
+      - Thu, 14 Mar 2019 14:15:04 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1510,7 +1395,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_pcSNLmuVV9Iauy
+      - req_5H1gcyixYexRxu
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1519,7 +1404,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1EFM2w2sOmf47Nz9TA6EwQ1C",
+          "id": "in_1EDuKq2sOmf47Nz91gfmqKKi",
           "object": "invoice",
           "amount_due": 0,
           "amount_paid": 0,
@@ -1532,11 +1417,11 @@ http_interactions:
           "billing_reason": "manual",
           "charge": null,
           "closed": false,
-          "created": 1552917754,
+          "created": 1552572904,
           "currency": "usd",
           "custom_fields": null,
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917754,
+          "date": 1552572904,
           "default_source": null,
           "description": null,
           "discount": null,
@@ -1551,19 +1436,19 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_1EFM2u2sOmf47Nz9BRdvoAZT",
+                "id": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
                 "object": "line_item",
                 "amount": 0,
                 "currency": "usd",
-                "description": "Formation Imprimante 3D March 19, 2019 07:00 - 11:00 AM",
+                "description": "Formation Imprimante 3D March 15, 2019 07:00 - 11:00 AM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM2u2sOmf47Nz9BRdvoAZT",
+                "invoice_item": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917752,
-                  "start": 1552917752
+                  "end": 1552572903,
+                  "start": 1552572903
                 },
                 "plan": null,
                 "proration": false,
@@ -1574,16 +1459,16 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/invoices/in_1EFM2w2sOmf47Nz9TA6EwQ1C/lines"
+            "url": "/v1/invoices/in_1EDuKq2sOmf47Nz91gfmqKKi/lines"
           },
           "livemode": false,
           "metadata": {
           },
-          "next_payment_attempt": 1552921354,
-          "number": "CAA9D6C-0030",
+          "next_payment_attempt": 1552576504,
+          "number": "CAA9D6C-0027",
           "paid": false,
-          "period_end": 1552917754,
-          "period_start": 1552917754,
+          "period_end": 1552572904,
+          "period_start": 1552572904,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
@@ -1602,10 +1487,10 @@ http_interactions:
           "webhooks_delivered_at": null
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:34 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:05 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/invoices/in_1EFM2w2sOmf47Nz9TA6EwQ1C/pay
+    uri: https://api.stripe.com/v1/invoices/in_1EDuKq2sOmf47Nz91gfmqKKi/pay
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -1636,7 +1521,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:35 GMT
+      - Thu, 14 Mar 2019 14:15:06 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1656,7 +1541,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_nbydvOqDRVwdho
+      - req_NAvpEr1n8kmZ6M
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1665,7 +1550,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1EFM2w2sOmf47Nz9TA6EwQ1C",
+          "id": "in_1EDuKq2sOmf47Nz91gfmqKKi",
           "object": "invoice",
           "amount_due": 0,
           "amount_paid": 0,
@@ -1678,38 +1563,38 @@ http_interactions:
           "billing_reason": "manual",
           "charge": null,
           "closed": true,
-          "created": 1552917754,
+          "created": 1552572904,
           "currency": "usd",
           "custom_fields": null,
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917754,
+          "date": 1552572904,
           "default_source": null,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
-          "finalized_at": 1552917755,
+          "finalized_at": 1552572905,
           "footer": null,
           "forgiven": false,
-          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_jCwpT45DKbnuHWKUfFKdGeQ4m6",
-          "invoice_pdf": "https://pay.stripe.com/invoice/invst_jCwpT45DKbnuHWKUfFKdGeQ4m6/pdf",
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_q0YZF8pQ16x1R2EVkCNzOxCUT3",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_q0YZF8pQ16x1R2EVkCNzOxCUT3/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1EFM2u2sOmf47Nz9BRdvoAZT",
+                "id": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
                 "object": "line_item",
                 "amount": 0,
                 "currency": "usd",
-                "description": "Formation Imprimante 3D March 19, 2019 07:00 - 11:00 AM",
+                "description": "Formation Imprimante 3D March 15, 2019 07:00 - 11:00 AM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM2u2sOmf47Nz9BRdvoAZT",
+                "invoice_item": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917752,
-                  "start": 1552917752
+                  "end": 1552572903,
+                  "start": 1552572903
                 },
                 "plan": null,
                 "proration": false,
@@ -1720,24 +1605,24 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/invoices/in_1EFM2w2sOmf47Nz9TA6EwQ1C/lines"
+            "url": "/v1/invoices/in_1EDuKq2sOmf47Nz91gfmqKKi/lines"
           },
           "livemode": false,
           "metadata": {
           },
           "next_payment_attempt": null,
-          "number": "CAA9D6C-0030",
+          "number": "CAA9D6C-0027",
           "paid": true,
-          "period_end": 1552917754,
-          "period_start": 1552917754,
+          "period_end": 1552572904,
+          "period_start": 1552572904,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
           "status": "paid",
           "status_transitions": {
-            "finalized_at": 1552917755,
+            "finalized_at": 1552572905,
             "marked_uncollectible_at": null,
-            "paid_at": 1552917755,
+            "paid_at": 1552572905,
             "voided_at": null
           },
           "subscription": null,
@@ -1745,8 +1630,8 @@ http_interactions:
           "tax": null,
           "tax_percent": null,
           "total": 0,
-          "webhooks_delivered_at": 1552917754
+          "webhooks_delivered_at": 1552572904
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:35 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:06 GMT
 recorded_with: VCR 3.0.1

@@ -31,7 +31,7 @@ class Members::MembersService
     @member.generate_auth_migration_token if current_user.admin? && AuthProvider.active.providable_type != DatabaseProvider.name
 
     if @member.save
-      @member.generate_subscription_invoice
+      @member.generate_subscription_invoice(current_user.id)
       @member.send_confirmation_instructions
       UsersMailer.delay.notify_user_account_created(@member, @member.password)
       true

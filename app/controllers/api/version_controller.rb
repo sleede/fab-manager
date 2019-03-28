@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'version'
 
 # API Controller to get the fab-manager version
 class API::VersionController < API::ApiController
@@ -6,8 +7,7 @@ class API::VersionController < API::ApiController
 
   def show
     authorize :version
-    package = File.read('package.json')
-    version = JSON.parse(package)['version']
-    render json: { version: version }, status: :ok
+
+    render json: { version: Version.current }, status: :ok
   end
 end

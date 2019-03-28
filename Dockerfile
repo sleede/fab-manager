@@ -4,7 +4,7 @@ MAINTAINER peng@sleede.com
 # First we need to be able to fetch from https repositories
 RUN apt-get update && \
     apt-get install -y apt-transport-https \
-      ca-certificates
+      ca-certificates apt-utils
 
 
 # Add sources for external tools to APT
@@ -44,6 +44,7 @@ RUN mkdir -p /usr/src/app/exports
 RUN mkdir -p /usr/src/app/log
 RUN mkdir -p /usr/src/app/public/uploads
 RUN mkdir -p /usr/src/app/public/assets
+RUN mkdir -p /usr/src/app/accounting
 RUN mkdir -p /usr/src/app/tmp/sockets
 RUN mkdir -p /usr/src/app/tmp/pids
 
@@ -64,6 +65,7 @@ VOLUME /usr/src/app/exports
 VOLUME /usr/src/app/public
 VOLUME /usr/src/app/public/uploads
 VOLUME /usr/src/app/public/assets
+VOLUME /usr/src/app/accounting
 VOLUME /var/log/supervisor
 
 # Expose port 3000 to the Docker host, so we can access it

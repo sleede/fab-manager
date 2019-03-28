@@ -21,7 +21,7 @@ Once you've understood all the points above, you can run the migration script wi
 ```bash
 cd /apps/fabmanager
 # do not run as root, elevation will be prompted if needed
-\curl https://raw.githubusercontent.com/LaCasemate/fab-manager/master/scripts/elastic-upgrade.sh | bash
+\curl https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/elastic-upgrade.sh | bash
 ```
 
 ## Manual upgrade
@@ -99,7 +99,7 @@ Then, edit your [docker-compose.yml](../docker/docker-compose.yml) and change th
 Now you can safely restart the upgrade script.
 
 ```bash
-\curl https://raw.githubusercontent.com/LaCasemate/fab-manager/master/scripts/elastic-upgrade.sh | bash
+\curl https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/elastic-upgrade.sh | bash
 ```
 
 ## Debugging the upgrade

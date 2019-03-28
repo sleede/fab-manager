@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<% if @attached_object.class.name == AccountingPeriod.name %>
+  <p><%= t('.body.warning_last_closed_period_over_1_year', LAST_END: @attached_object.end_at) %></p>
+<% else %>
+  <p><%= t('.body.warning_no_closed_periods', FIRST_DATE: @attached_object.created_at.to_date) %></p>
+<% end %>
+

@@ -1,8 +1,8 @@
 # FabManager
 
-FabManager is the FabLab management solution. It is web-based, open-source and totally free.
+FabManager is the Fab Lab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.
 
-[![Coverage Status](https://coveralls.io/repos/github/LaCasemate/fab-manager/badge.svg)](https://coveralls.io/github/LaCasemate/fab-manager) 
+[![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager) 
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
 [![Docker Build Status](https://img.shields.io/docker/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
 
@@ -43,7 +43,6 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 
 - Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.3
-- Git 1.9.1+
 - Redis 2.8.4+
 - Sidekiq 3.3.4+
 - Elasticsearch 5.6
@@ -102,7 +101,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 7. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/LaCasemate/fab-manager.git
+   git clone https://github.com/sleede/fab-manager.git
    ```
 
 8. Install the software dependencies.
@@ -136,7 +135,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 10. Install bundler in the current RVM gemset
 
    ```bash
-   gem install bundler
+   gem install bundler --version=1.17.3
    ```
 
 11. Install the required ruby gems and javascript plugins
@@ -205,7 +204,7 @@ environment.
 2. Retrieve the project from Git
 
    ```bash
-   git clone https://github.com/LaCasemate/fab-manager
+   git clone https://github.com/sleede/fab-manager
    ```
 
 3. From the project directory, run:
@@ -339,6 +338,7 @@ This can be achieved doing the following:
   - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20160915105234_add_transformation_to_o_auth2_mapping.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
   - `db/migrate/20181217103441_migrate_settings_value_to_history_values.rb` is using `SELECT DISTINCT ON`.
+  - `db/migrate/20190107111749_protect_accounting_periods.rb` is using `CREATE RULE` and `DROP RULE`.
 - If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
   This also requires your user to have the _SUPERUSER_ role.
   Please see the [known issues](#known-issues) section for more information about this.
@@ -445,6 +445,10 @@ In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
 These comments are not required to be translated, they are intended to help the translator to have some context information about the sentence to translate.
 
+You will also need to translate the invoice watermark, located in `app/pdfs/data/`. 
+You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), which is using [Rubik Mono One](https://fonts.google.com/specimen/Rubik+Mono+One) as font. 
+Use it to generate a similar localised PNG image which keep the default image size, as PDF are not responsive.
+
 
 <a name="i18n-configuration"></a>
 ### Configuration
@@ -467,7 +471,7 @@ After modifying any values concerning the localisation, restart the application 
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/LaCasemate/openlab-projects).
+You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/sleede/openlab-projects).
 It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform.
 The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
 
@@ -496,7 +500,7 @@ It enables you to write plugins which can:
 
 To install a plugin, you just have to copy the plugin folder which contains its code into the folder `plugins` of Fab-manager.
 
-You can see an example on the [repo of navinum gamification plugin](https://github.com/LaCasemate/navinum-gamification)
+You can see an example on the [repo of navinum gamification plugin](https://github.com/sleede/navinum-gamification)
 
 <a name="sso"></a>
 ## Single Sign-On

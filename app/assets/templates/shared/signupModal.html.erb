@@ -6,7 +6,7 @@
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
     <div class="well m-b-n">
-      <form role="form" name="signupForm" class="form-horizontal" novalidate autocomplete="off" ng-keydown="signupForm.$valid && $event.which == 13 && ok()">
+      <form role="form" name="signupForm" class="form-horizontal signup-form" novalidate autocomplete="off" ng-keydown="signupForm.$valid && $event.which == 13 && ok()">
         <div class="form-group" ng-class="{'has-error': signupForm.gender.$dirty && signupForm.gender.$invalid}">
           <div class="col-sm-12">
             <label class="checkbox-inline">
@@ -22,11 +22,12 @@
                      ng-model="user.profile_attributes.gender"
                      value="false"/> {{ 'woman' | translate }}
             </label>
+            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group names-row">
 
           <div class="col-sm-6" ng-class="{'has-error': signupForm.first_name.$dirty && signupForm.first_name.$invalid}">
             <input type="text"
@@ -35,6 +36,7 @@
                    class="form-control"
                    placeholder="{{ 'your_first_name' | translate }}"
                    required>
+            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>
           </div>
           <div class="m-b visible-xs"></div>
@@ -45,11 +47,12 @@
                    class="form-control"
                    placeholder="{{ 'your_surname' | translate }}"
                    required>
+            <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'surname_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.username.$dirty && signupForm.username.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.username.$dirty && signupForm.username.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -60,11 +63,12 @@
                      placeholder="{{ 'your_pseudonym' | translate }}"
                      required>
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.username.$dirty && signupForm.username.$error.required" translate>{{ 'pseudonym_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.email.$dirty && signupForm.email.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -75,11 +79,12 @@
                      placeholder="{{ 'your_email_address' | translate }}"
                      required>
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.email.$dirty && signupForm.email.$error.required" translate>{{ 'email_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.password.$dirty && signupForm.password.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.password.$dirty && signupForm.password.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -91,12 +96,13 @@
                      required
                      ng-minlength="8">
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.required" translate>{{ 'password_is_required' }}</span>
             <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.minlength" translate>{{ 'password_is_too_short_(minimum_8_characters)' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -108,6 +114,7 @@
                      required ng-minlength="8"
                      match="user.password">
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$error.required" translate>{{ 'password_confirmation_is_required' }}</span>
             <span class="help-block" ng-show="signupForm.password_confirmation.$error.match" translate>{{ 'password_does_not_match_with_confirmation' }}</span>
           </div>
@@ -124,7 +131,7 @@
           </div>
         </div>
 
-        <div class="form-group" ng-show="user.organization" ng-class="{'has-error': signupForm.organization_name.$dirty && signupForm.organization_name.$invalid}">
+        <div class="form-group required-row" ng-show="user.organization" ng-class="{'has-error': signupForm.organization_name.$dirty && signupForm.organization_name.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
@@ -135,11 +142,12 @@
                      placeholder="{{ 'name_of_your_organization' | translate }}"
                      ng-required="user.organization">
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.organization_name.$dirty && signupForm.organization_name.$error.required" translate>{{ 'organization_name_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-show="user.organization" ng-class="{'has-error': signupForm.organization_address.$dirty && signupForm.organization_address.$invalid}">
+        <div class="form-group required-row" ng-show="user.organization" ng-class="{'has-error': signupForm.organization_address.$dirty && signupForm.organization_address.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
@@ -150,22 +158,24 @@
                      placeholder="{{ 'address_of_your_organization' | translate }}"
                      ng-required="user.organization">
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.organization_address.$dirty && signupForm.organization_address.$error.required" translate>{{ 'organization_address_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.group_id.$dirty && signupForm.group_id.$invalid}">
           <div class="col-sm-12">
             <div>
               <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in groups" required>
                 <option value="" translate>{{ 'your_user_s_profile' }}</option>
               </select>
+              <span class="exponent exponent-select"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             </div>
             <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.birthday.$dirty && signupForm.birthday.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.birthday.$dirty && signupForm.birthday.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-calendar-o"></i> </span>
@@ -180,11 +190,12 @@
                      ng-click="openDatePicker($event)"
                      required/>
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.birthday.$dirty && signupForm.birthday.$error.required" translate>{{ 'birth_date_is_required' }}</span>
           </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': signupForm.phone.$dirty && signupForm.phone.$invalid}">
+        <div class="form-group required-row" ng-class="{'has-error': signupForm.phone.$dirty && signupForm.phone.$invalid}">
           <div class="col-sm-12">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
@@ -195,6 +206,7 @@
                      placeholder="{{ 'phone_number' | translate }}"
                      required>
             </div>
+            <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" translate>{{ 'phone_number_is_required' }}</span>
           </div>
         </div>
@@ -229,9 +241,16 @@
                    ng-model="user.cgu"
                    value="true"
                    ng-required="cgu != null"/>
-            <label for="cgu"><span translate>{{ 'i_ve_read_and_i_accept_' }}</span> <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a></label>
+            <label for="cgu">
+              <span translate>{{ 'i_ve_read_and_i_accept_' }}</span>
+              <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+              <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></label>
           </div>
         </div>
+        <span class="info-required">
+          <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          <span translate>{{ 'field_required' }}</span>
+        </span>
         <div ng-if="!cgu">
             <input type="hidden" name="cgu" ng-model="user.cgu" value="true">
         </div>

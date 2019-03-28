@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for reservations endpoint
 class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Reservations'
@@ -9,14 +12,14 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
   include OpenAPI::V1::Concerns::ParamGroups
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/reservations", "Reservations index"
-    description "Index of reservations made by users, with optional pagination. Order by *created_at* descendant."
+    api :GET, "/#{API_VERSION}/reservations", 'Reservations index'
+    description 'Index of reservations made by users, with optional pagination. Order by *created_at* descendant.'
     param_group :pagination
-    param :user_id, [Integer, Array], optional: true, desc: "Scope the request to one or various users."
-    param :reservable_type, ['Event', 'Machine', 'Training'], optional: true, desc: "Scope the request to a specific type of reservable."
-    param :reservable_id, [Integer, Array], optional: true, desc: "Scope the request to one or various reservables."
+    param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
+    param :reservable_type, %w[Event Machine Training], optional: true, desc: 'Scope the request to a specific type of reservable.'
+    param :reservable_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various reservables.'
 
-    example <<-EOS
+    example <<-RESERVATIONS
       # /open_api/v1/reservations?reservable_type=Event&page=1&per_page=3
       {
         "reservations": [
@@ -85,6 +88,6 @@ class OpenAPI::V1::ReservationsDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    RESERVATIONS
   end
 end

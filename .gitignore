@@ -34,7 +34,7 @@
 # XLSX exports
 /exports/*
 
-# Archives of cLosed accounting periods 
+# Archives of cLosed accounting periods
 /accounting/*
 
 .DS_Store

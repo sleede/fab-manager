@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for invoices endpoints
 class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Invoices'
@@ -9,11 +12,11 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
   include OpenAPI::V1::Concerns::ParamGroups
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/invoices", "Invoices index"
+    api :GET, "/#{API_VERSION}/invoices", 'Invoices index'
     description "Index of users' invoices, with optional pagination. Order by *created_at* descendant."
     param_group :pagination
-    param :user_id, [Integer, Array], optional: true, desc: "Scope the request to one or various users."
-    example <<-EOS
+    param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
+    example <<-INVOICES
       # /open_api/v1/invoices?user_id=211&page=1&per_page=3
       {
         "invoices": [
@@ -64,15 +67,15 @@ class OpenAPI::V1::InvoicesDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    INVOICES
   end
 
-    doc_for :download do
-      api :GET, "/#{API_VERSION}/invoices/:id/download", "Download an invoice"
-      param :id, Integer, desc: "Invoice id", required: true
+  doc_for :download do
+    api :GET, "/#{API_VERSION}/invoices/:id/download", 'Download an invoice'
+    param :id, Integer, desc: 'Invoice id', required: true
 
-      example <<-EOS
-        # /open_api/v1/invoices/2809/download
-      EOS
-    end
+    example <<-URL
+      # /open_api/v1/invoices/2809/download
+    URL
+  end
 end

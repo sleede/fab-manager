@@ -1,6 +1,14 @@
 
 // admin invoices
 
+.chained {
+  color: green;
+}
+
+.broken {
+  color: red;
+}
+
 .invoice-placeholder {
   width: 80%;
   max-width: 800px;
@@ -183,4 +191,80 @@
 .no-user-label {
   font-style: italic;
   color: #5a5a5a;
+}
+
+
+table.closings-table {
+  @extend table.scrollable-3-cols;
+
+  tbody .actions {
+    padding-left: 2em;
+
+    & > span {
+      margin-left: 2em;
+      cursor: pointer;
+    }
+  }
+
+  tbody .show-more {
+    color: #00b3ee;
+  }
+
+  tbody .download-archive {
+    width: 32px;
+    height: 32px;
+  }
+
+  tbody .download-archive:hover {
+    i {
+      display: none;
+    }
+    &:after {
+      content: '\f019';
+      font-family: 'fontawesome';
+    }
+  }
+}
+
+table.scrollable-3-cols {
+  width: 100%;
+  border-spacing: 0;
+
+  thead, tbody, tr, th, td { display: block; }
+
+  thead tr {
+    /* fallback */
+    width: 97%;
+    /* minus scroll bar width */
+    width: -webkit-calc(100% - 16px);
+    width:    -moz-calc(100% - 16px);
+    width:         calc(100% - 16px);
+  }
+
+  thead tr th {
+    border-bottom: 0;
+  }
+
+  tr:after {  /* clearing float */
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+  }
+
+  tbody {
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  tbody td, thead th {
+    width: 32%;  /* 32% is less than (100% / 3 cols) = 33.33% */
+    float: left;
+  }
+}
+
+
+.period-info-title {
+  font-weight: bold;
 }

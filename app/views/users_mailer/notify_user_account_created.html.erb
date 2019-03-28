@@ -38,7 +38,7 @@
 
   <p>
     <%= t('.body.thanks_to_') %>
-    <a href="<%= root_url+user_omniauth_authorize_path(active_provider.strategy_name.to_sym)%>?auth_token=<%= @user.auth_token %>" target="_blank">
+    <a href="<%= "#{root_url}/users/auth/#{active_provider.strategy_name}?auth_token=#{@user.auth_token}"%>" target="_blank">
       <%= t('body.logon_or_login', PROVIDER: active_provider.name )%>
     </a>
   </p>

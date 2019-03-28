@@ -48,7 +48,7 @@ pt:
           manage_the_spaces: "Gerenciar espaços"
           manage_the_projects_elements: "Gerenciar Elementos de Projeto"
           statistics: "Estatísticas"
-          customization: "Customizações"        
+          customization: "Customizações"
           open_api_clients: "OpenAPI clients"
 
           # account creation modal
@@ -85,6 +85,7 @@ pt:
           i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
           i_ve_read_and_i_accept_: "Eu li e aceito"
           _the_fablab_policy: "a política do FabLab"
+          field_required: "Field required"                                     #translation_missing
 
           # password modification modal
           change_your_password: "Mudar sua senha"
@@ -181,8 +182,8 @@ pt:
             add_a_machine: "Adicionar uma máquina"
             book: "Reservar"
             _or_the_: " ou o "
-            status_enabled: "Ativo" 
-            status_disabled: "Desabilitado" 
+            status_enabled: "Ativo"
+            status_disabled: "Desabilitado"
             status_all: "Todos"
 
         machines_show:
@@ -282,7 +283,7 @@ pt:
             add_a_space: "Adicionar espaço"
             status_enabled: "Ativo"
             status_disabled: "Desabilitado"
-            status_all: "Todos" 
+            status_all: "Todos"
             book: "Reservar"
 
         space_show:

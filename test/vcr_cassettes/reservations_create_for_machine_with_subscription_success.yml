@@ -33,7 +33,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:20 GMT
+      - Thu, 14 Mar 2019 14:15:07 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_vrMhL3PNKnwl5T
+      - req_cBwoCMLyXeG9jw
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -62,10 +62,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1EFM2i2sOmf47Nz9vgTal93y",
+          "id": "tok_1EDuKt2sOmf47Nz9lgXKqIPM",
           "object": "token",
           "card": {
-            "id": "card_1EFM2i2sOmf47Nz93Dc3bUyb",
+            "id": "card_1EDuKt2sOmf47Nz9XELCvklJ",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -90,13 +90,13 @@ http_interactions:
             "tokenization_method": null
           },
           "client_ip": "90.112.130.7",
-          "created": 1552917740,
+          "created": 1552572907,
           "livemode": false,
           "type": "card",
           "used": false
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:20 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:07 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/invoiceitems?customer=cus_8CzKe50I0J1gaI&limit=100
@@ -128,11 +128,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:21 GMT
+      - Thu, 14 Mar 2019 14:15:08 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '28119'
+      - '26905'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -148,7 +148,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_5Bjs2aPsQtODSt
+      - req_zyYldEpzS9wGDf
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -159,52 +159,6 @@ http_interactions:
         {
           "object": "list",
           "data": [
-            {
-              "id": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
-              "object": "invoiceitem",
-              "amount": 1000,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552572910,
-              "description": "FORM1+ imprimante 3D March 14, 2019 14:00 - 03:00 PM",
-              "discountable": true,
-              "invoice": "in_1EDuKz2sOmf47Nz9uRJy8Li2",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552572910,
-                "start": 1552572910
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 1000
-            },
-            {
-              "id": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
-              "object": "invoiceitem",
-              "amount": 0,
-              "currency": "usd",
-              "customer": "cus_8CzKe50I0J1gaI",
-              "date": 1552572909,
-              "description": "FORM1+ imprimante 3D March 14, 2019 13:00 - 02:00 PM",
-              "discountable": true,
-              "invoice": "in_1EDuKz2sOmf47Nz9uRJy8Li2",
-              "livemode": false,
-              "metadata": {
-              },
-              "period": {
-                "end": 1552572909,
-                "start": 1552572909
-              },
-              "plan": null,
-              "proration": false,
-              "quantity": 1,
-              "subscription": null,
-              "unit_amount": 0
-            },
             {
               "id": "ii_1EDuKp2sOmf47Nz9zHNAHoYS",
               "object": "invoiceitem",
@@ -1222,13 +1176,13 @@ http_interactions:
           "url": "/v1/invoiceitems"
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:21 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:08 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8CzKe50I0J1gaI&amount=0&currency=usd&description=FORM1%2B+imprimante+3D+March+18%2C+2019+13%3A00+-+02%3A00+PM
+      string: customer=cus_8CzKe50I0J1gaI&amount=0&currency=usd&description=FORM1%2B+imprimante+3D+March+14%2C+2019+13%3A00+-+02%3A00+PM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1256,7 +1210,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:22 GMT
+      - Thu, 14 Mar 2019 14:15:09 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1276,7 +1230,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_0j4PfsFQoTRPT0
+      - req_POc3QqBDMdIVfz
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1285,21 +1239,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1EFM2k2sOmf47Nz9IEaZDMur",
+          "id": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
           "object": "invoiceitem",
           "amount": 0,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917742,
-          "description": "FORM1+ imprimante 3D March 18, 2019 13:00 - 02:00 PM",
+          "date": 1552572909,
+          "description": "FORM1+ imprimante 3D March 14, 2019 13:00 - 02:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {
           },
           "period": {
-            "end": 1552917742,
-            "start": 1552917742
+            "end": 1552572909,
+            "start": 1552572909
           },
           "plan": null,
           "proration": false,
@@ -1308,13 +1262,13 @@ http_interactions:
           "unit_amount": 0
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:22 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:09 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoiceitems
     body:
       encoding: UTF-8
-      string: customer=cus_8CzKe50I0J1gaI&amount=1000&currency=usd&description=FORM1%2B+imprimante+3D+March+18%2C+2019+14%3A00+-+03%3A00+PM
+      string: customer=cus_8CzKe50I0J1gaI&amount=1000&currency=usd&description=FORM1%2B+imprimante+3D+March+14%2C+2019+14%3A00+-+03%3A00+PM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1342,7 +1296,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:23 GMT
+      - Thu, 14 Mar 2019 14:15:10 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1362,7 +1316,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_CNj777tWk21F8H
+      - req_DQL166VbdrbiCK
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1371,21 +1325,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ii_1EFM2l2sOmf47Nz9kT5dkNnE",
+          "id": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
           "object": "invoiceitem",
           "amount": 1000,
           "currency": "usd",
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917743,
-          "description": "FORM1+ imprimante 3D March 18, 2019 14:00 - 03:00 PM",
+          "date": 1552572910,
+          "description": "FORM1+ imprimante 3D March 14, 2019 14:00 - 03:00 PM",
           "discountable": true,
           "invoice": null,
           "livemode": false,
           "metadata": {
           },
           "period": {
-            "end": 1552917743,
-            "start": 1552917743
+            "end": 1552572910,
+            "start": 1552572910
           },
           "plan": null,
           "proration": false,
@@ -1394,7 +1348,7 @@ http_interactions:
           "unit_amount": 1000
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:23 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:10 GMT
 - request:
     method: get
     uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI
@@ -1426,7 +1380,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:24 GMT
+      - Thu, 14 Mar 2019 14:15:11 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1446,7 +1400,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_bWCjt0FK6vh8D5
+      - req_nXQjkOoCyN3n47
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1496,13 +1450,13 @@ http_interactions:
           "tax_info_verification": null
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:24 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:11 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI/sources
     body:
       encoding: UTF-8
-      string: card=tok_1EFM2i2sOmf47Nz9vgTal93y
+      string: card=tok_1EDuKt2sOmf47Nz9lgXKqIPM
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1530,7 +1484,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:25 GMT
+      - Thu, 14 Mar 2019 14:15:12 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1550,7 +1504,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_yAygYK6Hob3cVn
+      - req_QdlYXgom6U8RC2
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1559,7 +1513,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_1EFM2i2sOmf47Nz93Dc3bUyb",
+          "id": "card_1EDuKt2sOmf47Nz9XELCvklJ",
           "object": "card",
           "address_city": null,
           "address_country": null,
@@ -1585,7 +1539,7 @@ http_interactions:
           "tokenization_method": null
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:25 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:12 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/invoices
@@ -1619,7 +1573,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:26 GMT
+      - Thu, 14 Mar 2019 14:15:13 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1639,7 +1593,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_xlWb0hO13ULqb6
+      - req_Ix2LqxHyCjsVB1
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1648,7 +1602,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1EFM2o2sOmf47Nz9AYaFr2Zs",
+          "id": "in_1EDuKz2sOmf47Nz9uRJy8Li2",
           "object": "invoice",
           "amount_due": 1000,
           "amount_paid": 0,
@@ -1661,11 +1615,11 @@ http_interactions:
           "billing_reason": "manual",
           "charge": null,
           "closed": false,
-          "created": 1552917746,
+          "created": 1552572913,
           "currency": "usd",
           "custom_fields": null,
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917746,
+          "date": 1552572913,
           "default_source": null,
           "description": null,
           "discount": null,
@@ -1680,19 +1634,19 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "ii_1EFM2l2sOmf47Nz9kT5dkNnE",
+                "id": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
                 "object": "line_item",
                 "amount": 1000,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D March 18, 2019 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D March 14, 2019 14:00 - 03:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM2l2sOmf47Nz9kT5dkNnE",
+                "invoice_item": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917743,
-                  "start": 1552917743
+                  "end": 1552572910,
+                  "start": 1552572910
                 },
                 "plan": null,
                 "proration": false,
@@ -1701,19 +1655,19 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1EFM2k2sOmf47Nz9IEaZDMur",
+                "id": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
                 "object": "line_item",
                 "amount": 0,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D March 18, 2019 13:00 - 02:00 PM",
+                "description": "FORM1+ imprimante 3D March 14, 2019 13:00 - 02:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM2k2sOmf47Nz9IEaZDMur",
+                "invoice_item": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917742,
-                  "start": 1552917742
+                  "end": 1552572909,
+                  "start": 1552572909
                 },
                 "plan": null,
                 "proration": false,
@@ -1724,16 +1678,16 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 2,
-            "url": "/v1/invoices/in_1EFM2o2sOmf47Nz9AYaFr2Zs/lines"
+            "url": "/v1/invoices/in_1EDuKz2sOmf47Nz9uRJy8Li2/lines"
           },
           "livemode": false,
           "metadata": {
           },
-          "next_payment_attempt": 1552921346,
-          "number": "CAA9D6C-0029",
+          "next_payment_attempt": 1552576513,
+          "number": "CAA9D6C-0028",
           "paid": false,
-          "period_end": 1552917746,
-          "period_start": 1552917746,
+          "period_end": 1552572913,
+          "period_start": 1552572913,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
@@ -1752,10 +1706,10 @@ http_interactions:
           "webhooks_delivered_at": null
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:26 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:13 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/invoices/in_1EFM2o2sOmf47Nz9AYaFr2Zs/pay
+    uri: https://api.stripe.com/v1/invoices/in_1EDuKz2sOmf47Nz9uRJy8Li2/pay
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -1786,7 +1740,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:28 GMT
+      - Thu, 14 Mar 2019 14:15:15 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1806,7 +1760,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_kOvdFKl9ldH5aG
+      - req_ZBFGHXlmiqqDN5
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1815,7 +1769,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1EFM2o2sOmf47Nz9AYaFr2Zs",
+          "id": "in_1EDuKz2sOmf47Nz9uRJy8Li2",
           "object": "invoice",
           "amount_due": 1000,
           "amount_paid": 1000,
@@ -1826,40 +1780,40 @@ http_interactions:
           "auto_advance": false,
           "billing": "charge_automatically",
           "billing_reason": "manual",
-          "charge": "ch_1EFM2p2sOmf47Nz9UtY0F8r3",
+          "charge": "ch_1EDuL02sOmf47Nz9V40UEuJe",
           "closed": true,
-          "created": 1552917746,
+          "created": 1552572913,
           "currency": "usd",
           "custom_fields": null,
           "customer": "cus_8CzKe50I0J1gaI",
-          "date": 1552917746,
+          "date": 1552572913,
           "default_source": null,
           "description": null,
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
-          "finalized_at": 1552917747,
+          "finalized_at": 1552572914,
           "footer": null,
           "forgiven": false,
-          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_MUResCA1fCMAwxbx3SAS2NIHj0",
-          "invoice_pdf": "https://pay.stripe.com/invoice/invst_MUResCA1fCMAwxbx3SAS2NIHj0/pdf",
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_Kb5kSq6fYWL1lvE3Q50Z7n2sJz",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_Kb5kSq6fYWL1lvE3Q50Z7n2sJz/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1EFM2l2sOmf47Nz9kT5dkNnE",
+                "id": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
                 "object": "line_item",
                 "amount": 1000,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D March 18, 2019 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D March 14, 2019 14:00 - 03:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM2l2sOmf47Nz9kT5dkNnE",
+                "invoice_item": "ii_1EDuKw2sOmf47Nz9Ewlqo7Pc",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917743,
-                  "start": 1552917743
+                  "end": 1552572910,
+                  "start": 1552572910
                 },
                 "plan": null,
                 "proration": false,
@@ -1868,19 +1822,19 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1EFM2k2sOmf47Nz9IEaZDMur",
+                "id": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
                 "object": "line_item",
                 "amount": 0,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D March 18, 2019 13:00 - 02:00 PM",
+                "description": "FORM1+ imprimante 3D March 14, 2019 13:00 - 02:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1EFM2k2sOmf47Nz9IEaZDMur",
+                "invoice_item": "ii_1EDuKv2sOmf47Nz9hUHU9RlW",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1552917742,
-                  "start": 1552917742
+                  "end": 1552572909,
+                  "start": 1552572909
                 },
                 "plan": null,
                 "proration": false,
@@ -1891,24 +1845,24 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 2,
-            "url": "/v1/invoices/in_1EFM2o2sOmf47Nz9AYaFr2Zs/lines"
+            "url": "/v1/invoices/in_1EDuKz2sOmf47Nz9uRJy8Li2/lines"
           },
           "livemode": false,
           "metadata": {
           },
           "next_payment_attempt": null,
-          "number": "CAA9D6C-0029",
+          "number": "CAA9D6C-0028",
           "paid": true,
-          "period_end": 1552917746,
-          "period_start": 1552917746,
+          "period_end": 1552572913,
+          "period_start": 1552572913,
           "receipt_number": null,
           "starting_balance": 0,
           "statement_descriptor": null,
           "status": "paid",
           "status_transitions": {
-            "finalized_at": 1552917747,
+            "finalized_at": 1552572914,
             "marked_uncollectible_at": null,
-            "paid_at": 1552917748,
+            "paid_at": 1552572915,
             "voided_at": null
           },
           "subscription": null,
@@ -1916,13 +1870,13 @@ http_interactions:
           "tax": null,
           "tax_percent": null,
           "total": 1000,
-          "webhooks_delivered_at": 1552917746
+          "webhooks_delivered_at": 1552572913
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:28 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:15 GMT
 - request:
     method: delete
-    uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI/sources/card_1EFM2i2sOmf47Nz93Dc3bUyb
+    uri: https://api.stripe.com/v1/customers/cus_8CzKe50I0J1gaI/sources/card_1EDuKt2sOmf47Nz9XELCvklJ
     body:
       encoding: US-ASCII
       string: ''
@@ -1951,7 +1905,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 18 Mar 2019 14:02:29 GMT
+      - Thu, 14 Mar 2019 14:15:16 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1971,7 +1925,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_G5PfLwKHUGFSlL
+      - req_HCmJbaq6y6ogLE
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -1980,10 +1934,10 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "card_1EFM2i2sOmf47Nz93Dc3bUyb",
+          "id": "card_1EDuKt2sOmf47Nz9XELCvklJ",
           "object": "card",
           "deleted": true
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 14:02:29 GMT
+  recorded_at: Thu, 14 Mar 2019 14:15:16 GMT
 recorded_with: VCR 3.0.1

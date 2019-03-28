@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.extract! event, :id, :title, :description, :age_range_id
 json.event_image event.event_image.attachment_url if event.event_image
 json.event_files_attributes event.event_files do |f|
@@ -6,18 +8,22 @@ json.event_files_attributes event.event_files do |f|
   json.attachment_url f.attachment_url
 end
 json.category_id event.category_id
-json.category do
-  json.id event.category.id
-  json.name event.category.name
-end if event.category
+if event.category
+  json.category do
+    json.id event.category.id
+    json.name event.category.name
+  end
+end
 json.event_theme_ids event.event_theme_ids
 json.event_themes event.event_themes do |e|
   json.name e.name
 end
 json.age_range_id event.age_range_id
-json.age_range do
-  json.name event.age_range.name
-end if event.age_range
+if event.age_range
+  json.age_range do
+    json.name event.age_range.name
+  end
+end
 json.start_date event.availability.start_at
 json.start_time event.availability.start_at
 json.end_date event.availability.end_at
@@ -25,7 +31,7 @@ json.end_time event.availability.end_at
 json.month t('date.month_names')[event.availability.start_at.month]
 json.month_id event.availability.start_at.month
 json.year event.availability.start_at.year
-json.all_day event.availability.start_at.hour == 0 ? 'true' : 'false'
+json.all_day event.availability.start_at.hour.zero? ? 'true' : 'false'
 json.availability do
   json.id event.availability.id
   json.start_at event.availability.start_at

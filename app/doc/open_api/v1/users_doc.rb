@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for user endpoint
 class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Users'
@@ -9,12 +12,12 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
   include OpenAPI::V1::Concerns::ParamGroups
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/users", "Users index"
-    description "Users index, with optional pagination. Order by *created_at* descendant."
+    api :GET, "/#{API_VERSION}/users", 'Users index'
+    description 'Users index, with optional pagination. Order by *created_at* descendant.'
     param_group :pagination
-    param :email, [String, Array], optional: true, desc: "Filter users by *email* using strict matching."
-    param :user_id, [Integer, Array], optional: true, desc: "Filter users by *id* using strict matching."
-    example <<-EOS
+    param :email, [String, Array], optional: true, desc: 'Filter users by *email* using strict matching.'
+    param :user_id, [Integer, Array], optional: true, desc: 'Filter users by *id* using strict matching.'
+    example <<-USERS
       # /open_api/v1/users?page=1&per_page=4
       {
         "users": [
@@ -92,6 +95,6 @@ class OpenAPI::V1::UsersDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    USERS
   end
 end

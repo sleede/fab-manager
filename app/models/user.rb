@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :async
+         :confirmable
   rolify
 
   # enable OmniAuth authentication only if needed
@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
   has_many :invoices, dependent: :destroy
+  has_many :operated_invoices, foreign_key: :operator_id, class_name: 'Invoice', dependent: :nullify
 
   has_many :user_tags, dependent: :destroy
   has_many :tags, through: :user_tags
@@ -92,6 +93,12 @@ class User < ActiveRecord::Base
     User.with_role(:admin)
   end
 
+  def self.superadmin
+    return unless Rails.application.secrets.superadmin_email.present?
+
+    User.find_by(email: Rails.application.secrets.superadmin_email)
+  end
+
   def training_machine?(machine)
     return true if admin?
 
@@ -124,10 +131,10 @@ class User < ActiveRecord::Base
     my_projects.to_a.concat projects
   end
 
-  def generate_subscription_invoice
+  def generate_subscription_invoice(operator_id)
     return unless subscription
 
-    subscription.generate_and_save_invoice
+    subscription.generate_and_save_invoice(operator_id)
   end
 
   def stripe_customer
@@ -316,6 +323,10 @@ class User < ActiveRecord::Base
 
   def create_a_wallet
     create_wallet
+  end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
   end
 
   def notify_admin_when_user_is_created

@@ -84,6 +84,7 @@ es:
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         i_ve_read_and_i_accept_: "He leido y acepto"
         _the_fablab_policy: "la política de FabLab"
+        field_required: "Field required"                                     #translation_missing
 
         # password modification modal
         change_your_password: "Cambiar contraseña"

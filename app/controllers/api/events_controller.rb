@@ -96,7 +96,7 @@ class API::EventsController < API::ApiController
                                                      :recurrence_end_at, :category_id, :event_theme_ids, :age_range_id,
                                                      event_theme_ids: [],
                                                      event_image_attributes: [:attachment],
-                                                     event_files_attributes: %i[id attachment_destroy],
+                                                     event_files_attributes: %i[id attachment _destroy],
                                                      event_price_categories_attributes: %i[id price_category_id amount _destroy])
     EventService.process_params(event_preparams)
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190110150532) do
+ActiveRecord::Schema.define(version: 20190320091148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 20190110150532) do
   end
 
   add_index "abuses", ["signaled_type", "signaled_id"], name: "index_abuses_on_signaled_type_and_signaled_id", using: :btree
+
+  create_table "accounting_periods", force: :cascade do |t|
+    t.date     "start_at"
+    t.date     "end_at"
+    t.datetime "closed_at"
+    t.integer  "closed_by"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "period_total"
+    t.integer  "perpetual_total"
+    t.string   "footprint"
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address"
@@ -227,6 +239,7 @@ ActiveRecord::Schema.define(version: 20190110150532) do
     t.string   "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "footprint"
   end
 
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
@@ -241,6 +254,7 @@ ActiveRecord::Schema.define(version: 20190110150532) do
     t.text     "description"
     t.integer  "subscription_id"
     t.integer  "invoice_item_id"
+    t.string   "footprint"
   end
 
   add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
@@ -263,6 +277,9 @@ ActiveRecord::Schema.define(version: 20190110150532) do
     t.integer  "wallet_amount"
     t.integer  "wallet_transaction_id"
     t.integer  "coupon_id"
+    t.string   "footprint"
+    t.string   "environment"
+    t.integer  "operator_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
@@ -855,6 +872,7 @@ ActiveRecord::Schema.define(version: 20190110150532) do
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
+  add_foreign_key "accounting_periods", "users", column: "closed_by"
   add_foreign_key "availability_tags", "availabilities"
   add_foreign_key "availability_tags", "tags"
   add_foreign_key "event_price_categories", "events"
@@ -866,6 +884,7 @@ ActiveRecord::Schema.define(version: 20190110150532) do
   add_foreign_key "history_values", "settings"
   add_foreign_key "history_values", "users"
   add_foreign_key "invoices", "coupons"
+  add_foreign_key "invoices", "users", column: "operator_id"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"

@@ -285,6 +285,7 @@ es:
         invoices:
           # list of all invoices & invoicing parameters
           invoices: "Facturas"
+          accounting_periods: "Accounting periods"       # missing translation
           invoices_list: "Lista de facturas"
           filter_invoices: "Filtrar facturas"
           invoice_#_: "Factura #:"
@@ -406,6 +407,24 @@ es:
           logo_successfully_saved: "Logo guardado correctamente."
           an_error_occurred_while_saving_the_logo: "Se ha producido un error al guardar el logotipo.."
           online_payment: "Pago online"
+          close_accounting_period: "Close an accounting period"                        # translation_missing
+          close_from_date: "Close from"                                                # translation_missing
+          start_date_is_required: "Start date is required"                             # translation_missing
+          close_until_date: "Close until"                                              # translation_missing
+          end_date_is_required: "End date is required"                                 # translation_missing
+          previous_closings: "Previous closings"                                       # translation_missing
+          start_date: "From"                                                           # translation_missing
+          end_date: "To"                                                               # translation_missing
+          closed_at: "Closed at"                                                       # translation_missing
+          closed_by: "By"                                                              # translation_missing
+          period_total: "Period total"                                                 # translation_missing
+          perpetual_total: "Perpetual total"                                           # translation_missing
+          integrity: "Verificación de integridad"
+          confirmation_required: "Confirmation required"                               # translation_missing
+          confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible. This operation will take some time to complete"       # translation_missing
+          period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed"        # translation_missing
+          failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
+          no_periods: "No closings for now"                                            # translation_missing
 
       members:
         # management of users, labels, groups, and so on

@@ -9,14 +9,9 @@
 
   <title><%=Setting.find_by(name: 'fablab_name').value%></title>
 
-  <% if ENV['DEFAULT_HOST'] == 'fablab.lacasemate.fr' %>
-    <script type="text/javascript" src="//use.typekit.net/rih5zfr.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  <% else %>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
-  <% end %>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <script type="text/javascript">
       Stripe.setPublishableKey('<%= Rails.application.secrets.stripe_publishable_key %>');
@@ -28,6 +23,7 @@
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
+      Fablab.superadminId = parseInt("<%= User.superadmin&.id %>", 10);
 
       // i18n stuff
       Fablab.locale = "<%= Rails.application.secrets.app_locale %>";

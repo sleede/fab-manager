@@ -1,17 +1,18 @@
 module Subscriptions
   class Subscribe
-    attr_accessor :user_id
+    attr_accessor :user_id, :operator_id
 
-    def initialize(user_id)
+    def initialize(user_id, operator_id)
       @user_id = user_id
+      @operator_id = operator_id
     end
 
     def pay_and_save(subscription, payment_method, coupon, invoice)
       subscription.user_id = user_id
       if payment_method == :local
-        subscription.save_with_local_payment(invoice, coupon)
+        subscription.save_with_local_payment(operator_id, invoice, coupon)
       elsif payment_method == :stripe
-        subscription.save_with_payment(invoice, coupon)
+        subscription.save_with_payment(operator_id, invoice, coupon)
       end
     end
 
@@ -24,7 +25,7 @@ module Subscriptions
         expiration_date: new_expiration_date
       )
       if new_sub.save
-        new_sub.user.generate_subscription_invoice
+        new_sub.user.generate_subscription_invoice(operator_id)
         return new_sub
       end
       false

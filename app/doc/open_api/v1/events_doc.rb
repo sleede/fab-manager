@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for events endpoint
 class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'Events'
@@ -9,19 +12,19 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
   include OpenAPI::V1::Concerns::ParamGroups
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/events", "Events index"
+    api :GET, "/#{API_VERSION}/events", 'Events index'
     param_group :pagination
-	param :id, [Integer, Array], optional: true, desc: "Scope the request to one or various events."
-	param :upcoming, [FalseClass, TrueClass], optional: true, desc: "Scope for the upcoming events."
-    description "Events index. Order by *created_at* desc."
-    example <<-EOS
+    param :id, [Integer, Array], optional: true, desc: 'Scope the request to one or various events.'
+    param :upcoming, [FalseClass, TrueClass], optional: true, desc: 'Scope for the upcoming events.'
+    description 'Events index. Order by *created_at* desc.'
+    example <<-EVENTS
       # /open_api/v1/events?page=1&per_page=2
       {
         "events": [
           {
             "id": 183,
             "title": "OPEN LAB",
-            "description": "Que vous soyez Fab user, visiteur, curieux ou bricoleur, l’atelier de fabrication numérique vous ouvre ses portes les mercredis soirs pour avancer vos projets ou rencontrer la «communauté» Fab Lab. \r\n\r\nCe soir, venez spécialement découvrir les machines à commandes numérique du Fab Lab de La Casemate, venez comprendre ce lieux ouvert à tous. \r\n\r\n\r\nVenez découvrir un concept, une organisation, des machines, pour stimuler votre sens de la créativité.",
+            "description": "Que vous soyez Fab user, visiteur, curieux ou bricoleur, l’atelier de fabrication numérique vous ouvre ses portes les mercredis soirs pour avancer vos projets ou rencontrer la «communauté» Fab Lab. \r\n\r\nCe soir, venez spécialement découvrir les machines à commandes numérique de la Fabrique de Fab-manager, venez comprendre ce lieux ouvert à tous. \r\n\r\n\r\nVenez découvrir un concept, une organisation, des machines, pour stimuler votre sens de la créativité.",
             "updated_at": "2016-04-25T10:49:40.055+02:00",
             "created_at": "2016-04-25T10:49:40.055+02:00",
             "nb_total_places": 18,
@@ -54,6 +57,6 @@ class OpenAPI::V1::EventsDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    EVENTS
   end
 end

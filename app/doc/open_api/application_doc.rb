@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/docs/application_doc.rb
 #
 # A common class for defining API docs
@@ -16,7 +18,6 @@
 #     end
 #   end
 #
-
 class OpenAPI::ApplicationDoc
   extend OpenAPI::ApiDoc
 

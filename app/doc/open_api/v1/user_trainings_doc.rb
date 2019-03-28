@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# openAPI documentation for user's trainings endpoint
 class OpenAPI::V1::UserTrainingsDoc < OpenAPI::V1::BaseDoc
   resource_description do
     short 'User trainings'
@@ -9,12 +12,12 @@ class OpenAPI::V1::UserTrainingsDoc < OpenAPI::V1::BaseDoc
   include OpenAPI::V1::Concerns::ParamGroups
 
   doc_for :index do
-    api :GET, "/#{API_VERSION}/user_trainings", "User trainings index"
-    description "Index of trainings accomplished by users, with optional pagination. Order by *created_at* descendant."
+    api :GET, "/#{API_VERSION}/user_trainings", 'User trainings index'
+    description 'Index of trainings accomplished by users, with optional pagination. Order by *created_at* descendant.'
     param_group :pagination
-    param :training_id, [Integer, Array], optional: true, desc: "Scope the request to one or various trainings."
-    param :user_id, [Integer, Array], optional: true, desc: "Scope the request to one or various users."
-    example <<-EOS
+    param :training_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various trainings.'
+    param :user_id, [Integer, Array], optional: true, desc: 'Scope the request to one or various users.'
+    example <<-TRAININGS
       # /open_api/v1/user_trainings?training_id[]=3&training_id[]=4&page=1&per_page=2
       {
         "user_trainings": [
@@ -94,6 +97,6 @@ class OpenAPI::V1::UserTrainingsDoc < OpenAPI::V1::BaseDoc
           }
         ]
       }
-    EOS
+    TRAININGS
   end
 end

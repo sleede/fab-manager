@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11'
+gem 'rails', '4.2.11.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -17,7 +17,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jbuilder_cache_multi'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc #TODO remove unused ?
+gem 'sdoc', '~> 0.4.0', group: :doc # TODO, remove unused ?
 
 gem 'forgery'
 gem 'responders', '~> 2.0'
@@ -41,16 +41,12 @@ end
 group :development do
   gem 'active_record_query_trace'
   gem 'awesome_print'
-  gem 'capistrano'
-  gem 'capistrano-maintenance', '0.0.5', require: false
-  gem 'capistrano-sidekiq', require: false
   gem 'coveralls', require: false
   gem 'foreman'
   # Preview mail in the browser
   gem 'mailcatcher'
   gem 'puma'
   gem 'rb-readline'
-  gem 'rvm-capistrano', require: false
 end
 
 group :test do
@@ -66,15 +62,13 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'unicorn'
 end
 
 gem 'seed_dump'
 
 gem 'pg'
 
-gem 'devise'
-gem 'devise-async'
+gem 'devise', ">= 4.6.0"
 
 gem 'omniauth', '~> 1.6.0'
 gem 'omniauth-oauth2'
@@ -148,3 +142,8 @@ gem 'axlsx_rails'
 gem 'rubyzip', '>= 1.2.2'
 
 gem 'rack-protection', '1.5.5'
+
+# get free disk space
+gem 'sys-filesystem'
+
+gem 'sha3'
