@@ -426,7 +426,7 @@ Check the files located in `config/locales`:
 If you plan to translate the application to a new locale, please consider that the reference translation is French.
 Indeed, in some cases, the English texts/sentences can seems confuse or lack of context as they were originally translated from French.
 
-To prevent syntax mistakes while translating locale files, we **STRONGLY advise** you to use a text editor witch support syntax coloration for YML and Ruby.
+To prevent syntax mistakes while translating locale files, we **STRONGLY advise** you to use a text editor which support syntax coloration for YML and Ruby.
 
 <a name="i18n-translation-front"></a>
 #### Front-end translations

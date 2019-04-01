@@ -1,10 +1,14 @@
 # Changelog Fab Manager
+## v3.0.1 2019 April 1st
+
+- Insert archive generation datetime in chained.sha256
+- Updated documentation and diagrams
 
 ## v3.0.0 2019 March 28
 
 - (France) Compliance with Article 88 of Law No. 2015-1785 and BOI-TVA-DECLA-30-10-30-20160803 : Certification of cash systems
 - Ability for an admin to view and close accounting periods
-- Secured archives for close accounting periods
+- Secured archives for closed accounting periods
 - Securely chained invoices records with visual control of data integrity
 - Notify an user if the available disk space reaches a configured threshold
 - Invoices generated outside of production environment will be watermarked
