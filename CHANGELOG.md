@@ -1,4 +1,8 @@
 # Changelog Fab Manager
+## v3.0.1 2019 April 1st
+
+- Insert archive generation datetime in chained.sha256
+- Updated documentation and diagrams
 
 ## v3.0.0 2019 March 28
 
