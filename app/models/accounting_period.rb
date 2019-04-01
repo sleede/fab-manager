@@ -109,6 +109,8 @@ class AccountingPeriod < ActiveRecord::Base
     last_archive_checksum = previous_file ? Checksum.file(previous_file) : nil
     json_data = to_json_archive(data, previous_file, last_archive_checksum)
     current_archive_checksum = Checksum.text(json_data)
+    date = DateTime.iso8601
+    chained = Checksum.text("#{current_archive_checksum}#{last_archive_checksum}#{date}")
 
     Zip::OutputStream.open(archive_file) do |io|
       io.put_next_entry(archive_json_file)
@@ -116,7 +118,7 @@ class AccountingPeriod < ActiveRecord::Base
       io.put_next_entry('checksum.sha256')
       io.write("#{current_archive_checksum}\t#{archive_json_file}")
       io.put_next_entry('chained.sha256')
-      io.write(Checksum.text("#{current_archive_checksum}#{last_archive_checksum}#{DateTime.iso8601}"))
+      io.write("#{chained}\t#{date}")
     end
   end
 
