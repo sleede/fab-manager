@@ -1,4 +1,7 @@
 # Changelog Fab Manager
+
+- Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
+
 ## v3.0.1 2019 April 1st
 
 - Insert archive generation datetime in chained.sha256
