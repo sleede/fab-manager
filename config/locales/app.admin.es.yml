@@ -421,7 +421,9 @@ es:
           perpetual_total: "Perpetual total"                                           # translation_missing
           integrity: "Verificación de integridad"
           confirmation_required: "Confirmation required"                               # translation_missing
-          confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible. This operation will take some time to complete"       # translation_missing
+          confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible."       # translation_missing
+          period_must_match_fiscal_year: "A closing must occur at the end of a minimum annual period, or per financial year when it is not calendar-based."            # translation_missing
+          this_may_take_a_while: "This operation will take some time to complete."       # translation_missing
           period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed"        # translation_missing
           failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
           no_periods: "No closings for now"                                            # translation_missing

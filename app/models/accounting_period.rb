@@ -14,6 +14,7 @@ class AccountingPeriod < ActiveRecord::Base
 
   validates :start_at, :end_at, :closed_at, :closed_by, presence: true
   validates_with DateRangeValidator
+  validates_with DurationValidator
   validates_with PeriodOverlapValidator
   validates_with PeriodIntegrityValidator
 
