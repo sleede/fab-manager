@@ -68,7 +68,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     FileUtils.rm_rf(accounting_period.archive_folder)
   end
 
-  test 'admin tries to closes a too long period' do
+  test 'admin tries to close a too long period' do
     start_at = '2012-01-01T00:00:00.000Z'
     end_at = '2014-12-31T00:00:00.000Z'
     diff = (end_at.to_date - start_at.to_date).to_i
@@ -89,7 +89,7 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
     assert_match(/#{I18n.t('errors.messages.invalid_duration', DAYS: diff)}/, response.body)
   end
 
-  test 'admin tries to closes an overlapping period' do
+  test 'admin tries to close an overlapping period' do
     start_at = '2014-12-01T00:00:00.000Z'
     end_at = '2015-02-27T00:00:00.000Z'
 
@@ -107,5 +107,25 @@ class AccountingPeriodTest < ActionDispatch::IntegrationTest
 
     # check the error
     assert_match(/#{I18n.t('errors.messages.cannot_overlap')}/, response.body)
+  end
+
+  test 'admin tries to close today' do
+    start_at = Date.today.beginning_of_day.iso8601
+    end_at = Date.today.end_of_day.iso8601
+
+    post '/api/accounting_periods',
+         {
+           accounting_period: {
+             start_at: start_at,
+             end_at: end_at
+           }
+         }.to_json, default_headers
+
+    # Check response format & status
+    assert_equal 422, response.status, response.body
+    assert_equal Mime::JSON, response.content_type
+
+    # check the error
+    assert_match(/#{I18n.t('errors.messages.must_be_in_the_past')}/, response.body)
   end
 end

@@ -42,6 +42,7 @@ en:
       invalid_footprint: "invoice's checksum is invalid"
       end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
       invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
+      must_be_in_the_past: "The period must be strictly prior to today's date."
 
   activemodel:
     errors:
