@@ -29,7 +29,7 @@
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
-               class="form-control"
+               class="form-control as-writable"
                name="end_at"
                ng-model="period.end_at"
                uib-datepicker-popup="{{datePicker.format}}"
@@ -40,7 +40,8 @@
                init-date="period.end_at"
                placeholder="{{datePicker.format}}"
                ng-click="toggleDatePicker($event)"
-               required/>
+               required
+               readonly/>
       </div>
       <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
       <span class="help-block error" ng-show="errors.end_at">{{ errors.end_at[0] }}</span>
