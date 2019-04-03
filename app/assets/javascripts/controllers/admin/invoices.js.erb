@@ -419,6 +419,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/invoices/closePeriodModal.html" %>',
         controller: 'ClosePeriodModalController',
+        backdrop: 'static',
+        keyboard: false,
         size: 'lg',
         resolve: {
           periods() { return AccountingPeriod.query().$promise; },
