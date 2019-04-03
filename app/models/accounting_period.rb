@@ -62,8 +62,8 @@ class AccountingPeriod < ActiveRecord::Base
     first_rate = @vat_rates.first
     return first_rate[:rate] if date < first_rate[:date]
 
-    @vat_rates.each do |h|
-      return h[:rate] if h[:date] <= date
+    @vat_rates.each_index do |i|
+      return @vat_rates[i][:rate] if date >= @vat_rates[i][:date] && (@vat_rates[i + 1].nil? || date < @vat_rates[i + 1][:date])
     end
   end
 
@@ -105,7 +105,7 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def archive_closed_data
-    data = invoices.includes(:invoice_items)
+    data = invoices.includes(:invoice_items).order(id: :asc)
     previous_file = previous_period&.archive_file
     last_archive_checksum = previous_file ? Checksum.file(previous_file) : nil
     json_data = to_json_archive(data, previous_file, last_archive_checksum)

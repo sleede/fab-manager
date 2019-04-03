@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Improved end-user message when closing an accounting period
+- Improved date checks before closing an accounting period
+- Fix a bug: when VAT has changed during fab-manager's lifecycle, this may not be reflected in archives
 - Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
 
 ## v3.0.1 2019 April 1st
