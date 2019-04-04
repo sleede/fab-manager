@@ -226,6 +226,7 @@ en:
           expired: "Expired"
           sold_out: "Sold out"
           active: "Active"
+          all: "Display all"
           confirmation_required: "Confirmation required"
           do_you_really_want_to_delete_this_coupon: "Do you really want to delete this coupon?"
           coupon_was_successfully_deleted: "Coupon was successfully deleted."

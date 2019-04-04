@@ -53,7 +53,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
 
     // List of coupons
     $scope.coupons = couponsPromise;
-    $scope.couponsPage = 0;
+    $scope.couponsPage = 1;
 
     // List of spaces
     $scope.spaces = spacesPromise;
@@ -80,6 +80,20 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       'enabled',
       'disabled',
       'all'
+    ];
+
+    // Default: we do not filter coupons
+    $scope.filter = {
+      coupon: 'all',
+    };
+
+    // Available status for filtering coupons
+    $scope.couponStatus = [
+      'all',
+      'disabled',
+      'expired',
+      'sold_out',
+      'active'
     ];
 
     $scope.findTrainingsPricing = function (trainingsPricings, trainingId, groupId) {
@@ -566,12 +580,25 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       });
     };
 
+    /**
+     * Load the next 10 coupons
+     */
     $scope.loadMore = function() {
       $scope.couponsPage++;
-      Coupon.query({ page: $scope.couponsPage }, function (data) {
+      Coupon.query({ page: $scope.couponsPage, filter: $scope.filter.coupon }, function (data) {
         $scope.coupons = $scope.coupons.concat(data);
       });
     };
+
+    /**
+     * Reset the list of coupons according to the newly selected filter
+     */
+    $scope.updateCouponFilter = function() {
+      $scope.couponsPage = 1;
+      Coupon.query({ page: $scope.couponsPage, filter: $scope.filter.coupon }, function (data) {
+        $scope.coupons = data;
+      });
+    }
 
     /* PRIVATE SCOPE */
 

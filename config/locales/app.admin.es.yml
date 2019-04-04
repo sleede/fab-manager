@@ -226,6 +226,7 @@ es:
           expired: "Expirado"
           sold_out: "Agotado"
           active: "Activo"
+          all: "Display all"                                                                        # translation_missing
           confirmation_required: "Confirmación requerida"
           do_you_really_want_to_delete_this_coupon: "¿Desea realmente eliminar este cupón?"
           coupon_was_successfully_deleted: "El cupón se eliminó correctamente."

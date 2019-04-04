@@ -226,6 +226,7 @@ fr:
           expired: "Expiré"
           sold_out: "Épuisé"
           active: "Actif"
+          all: "Afficher tous"
           confirmation_required: "Confirmation requise"
           do_you_really_want_to_delete_this_coupon: "Êtes-vous sûr(e) de vouloir supprimer ce code promotionnel ?"
           coupon_was_successfully_deleted: "Le code promotionnel a bien été supprimé."

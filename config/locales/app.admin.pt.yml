@@ -226,6 +226,7 @@ pt:
           expired: "Expirado"
           sold_out: "Esgotado"
           active: "Ativo"
+          all: "Display all"                                                                        # translation_missing
           confirmation_required: "Confirmação obrigatória"
           do_you_really_want_to_delete_this_coupon: "Você realmente deseja deletar este cupom?"
           coupon_was_successfully_deleted: "O cupom foi deletado com sucesso."
