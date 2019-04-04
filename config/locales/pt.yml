@@ -316,6 +316,8 @@ pt:
       notify_admin_close_period_reminder:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"        # missing translation
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"          # missing translation
+      notify_admin_archive_complete:                                                                          # missing translation
+        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."          # missing translation
 
   statistics:
     # statistics tools for admins

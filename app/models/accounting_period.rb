@@ -10,7 +10,7 @@ class AccountingPeriod < ActiveRecord::Base
   before_destroy { false }
   before_update { false }
   before_create :compute_totals
-  after_create :archive_closed_data
+  after_commit :archive_closed_data, on: [:create]
 
   validates :start_at, :end_at, :closed_at, :closed_by, presence: true
   validates_with DateRangeValidator
