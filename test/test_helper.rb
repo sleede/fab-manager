@@ -124,6 +124,50 @@ class ActiveSupport::TestCase
     end
   end
 
+  def assert_archive(accounting_period)
+    assert_not_nil accounting_period, 'AccountingPeriod was not created'
+
+    archive_worker = ArchiveWorker.new
+    archive_worker.perform(accounting_period.id)
+
+    assert FileTest.exist?(accounting_period.archive_file), 'ZIP archive was not generated'
+
+    # Extract archive
+    require 'tmpdir'
+    require 'fileutils'
+    dest = "#{Dir.tmpdir}/accounting/#{accounting_period.id}"
+    FileUtils.mkdir_p "#{dest}/accounting"
+    Zip::File.open(accounting_period.archive_file) do |zip_file|
+      # Handle entries one by one
+      zip_file.each do |entry|
+        # Extract to file/directory/symlink
+        entry.extract("#{dest}/#{entry.name}")
+      end
+    end
+
+    # Check archive matches
+    require 'checksum'
+    sumfile = File.read("#{dest}/checksum.sha256").split("\t")
+    assert_equal sumfile[0], Checksum.file("#{dest}/#{sumfile[1]}"), 'archive checksum does not match'
+
+    archive = File.read("#{dest}/#{sumfile[1]}")
+    archive_json = JSON.parse(archive)
+    invoices = Invoice.where(
+      'created_at >= :start_date AND created_at <= :end_date',
+      start_date: accounting_period.start_at.to_datetime, end_date: accounting_period.end_at.to_datetime
+    )
+
+    assert_equal invoices.count, archive_json['invoices'].count
+    assert_equal accounting_period.footprint, archive_json['period_footprint']
+
+    require 'version'
+    assert_equal Version.current, archive_json['software']['version']
+
+    # we clean up the files before quitting
+    FileUtils.rm_rf(dest)
+    FileUtils.rm_rf(accounting_period.archive_folder)
+  end
+
   def assert_dates_equal(expected, actual, msg = nil)
     assert_not_nil actual, msg
     assert_equal expected.to_date, actual.to_date, msg
