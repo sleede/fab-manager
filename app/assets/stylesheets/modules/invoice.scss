@@ -204,6 +204,10 @@ table.closings-table {
       margin-left: 2em;
       cursor: pointer;
     }
+
+    & > span.no-pointer {
+      cursor: default;
+    }
   }
 
   tbody .show-more {

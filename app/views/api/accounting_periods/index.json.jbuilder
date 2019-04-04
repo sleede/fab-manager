@@ -6,4 +6,5 @@ json.array!(@accounting_periods) do |ap|
   json.perpetual_total ap.perpetual_total / 100.0
   json.chained_footprint ap.check_footprint
   json.user_name "#{ap.first_name} #{ap.last_name}"
+  json.archive_ready FileTest.exist?(ap.archive_file)
 end
