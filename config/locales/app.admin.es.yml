@@ -221,6 +221,7 @@ es:
           nb_of_usages: "Número de usos"
           status: "Estado"
           add_a_new_coupon: "Añadir un nuevo cupón"
+          display_more_coupons: "Display the next coupons"                                          # translation_missing
           disabled: "Desactivado"
           expired: "Expirado"
           sold_out: "Agotado"

@@ -6,8 +6,12 @@ class API::CouponsController < API::ApiController
   before_action :authenticate_user!
   before_action :set_coupon, only: %i[show update destroy]
 
+  # Number of notifications added to the page when the user clicks on 'load next notifications'
+  COUPONS_PER_PAGE = 10
+
   def index
-    @coupons = Coupon.all
+    @coupons = Coupon.page(params[:page]).per(COUPONS_PER_PAGE).order('created_at DESC')
+    @total = Coupon.count
   end
 
   def show; end

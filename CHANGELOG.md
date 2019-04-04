@@ -3,6 +3,7 @@
 - Asynchronously generate accounting archives
 - Improved end-user message when closing an accounting period
 - Improved date checks before closing an accounting period
+- Paginate list of coupons
 - Fix a bug: when VAT has changed during fab-manager's lifecycle, this may not be reflected in archives
 - Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
 

@@ -28,3 +28,7 @@
   </tr>
   </tbody>
 </table>
+
+<div class="text-center">
+  <button class="btn btn-warning" ng-click="loadMore()" ng-hide="coupons.length === 0 || coupons.length >= coupons[0].total"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'pricing.display_more_coupons' | translate }}</button>
+</div>

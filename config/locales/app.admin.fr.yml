@@ -221,6 +221,7 @@ fr:
           nb_of_usages: "Nombre d'utilisations"
           status: "Statut"
           add_a_new_coupon: "Ajouter un code promotionnel"
+          display_more_coupons: "Afficher les codes suivants"
           disabled: "Désactivé"
           expired: "Expiré"
           sold_out: "Épuisé"
