@@ -1,0 +1,12 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.archive_complete', START: @attached_object.start_at, END: @attached_object.end_at) %>
+</p>
+<p>
+  <%= t('.body.click_to_download') %>
+  <%=link_to( t('.body.here'), "#{root_url}api/accounting_periods/#{@attached_object.id}/archive", target: "_blank" )%>
+</p>
+<p>
+  <%= t('.body.save_on_secured') %>
+</p>

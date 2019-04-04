@@ -286,5 +286,13 @@ en:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
 
+    notify_admin_archive_complete:
+      subject: "Archiving completed"
+      body:
+        archive_complete: "You have closed the accounting period from %{START} to %{END}. Archiving of data is now complete."
+        click_to_download: "To download the ZIP archive, click"
+        here: "here."
+        save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
+
     shared:
       hello: "Hello %{user_name}"

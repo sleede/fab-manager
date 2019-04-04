@@ -424,7 +424,7 @@ fr:
           confirm_close_START_END: "Êtes-vous sur de vouloir clôturer la période comptable du {{START}} au {{END}} ? Toute modification ultérieure sera impossible."
           period_must_match_fiscal_year: "Une clôture doit intervenir à l'issue d'une période au minimum annuelle, ou par exercice lorsque celui-ci n'est pas calé sur l'année civile."
           this_may_take_a_while: "Cette opération va prendre un certain temps."
-          period_START_END_closed_success: "La période comptable du {{START}} au {{END}} a bien été clôturée"
+          period_START_END_closed_success: "La période comptable du {{START}} au {{END}} a bien été clôturée. La génération de l'archive est en cours, vous serez prévenu lorsque celle-ci sera terminée."
           failed_to_close_period: "Une erreur est survenue, impossible de clôturer la période comptable"
           no_periods: "Aucune clôture pour le moment"
 

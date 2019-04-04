@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Helpers methods about uploading files
 module UploadHelper
 
   def delete_empty_dirs
