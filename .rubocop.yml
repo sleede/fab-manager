@@ -24,3 +24,5 @@ Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 Style/AndOr:
   EnforcedStyle: conditionals
+Style/FormatString:
+  EnforcedStyle: sprintf

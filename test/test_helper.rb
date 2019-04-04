@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 require 'coveralls'
 Coveralls.wear!('rails')
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
 require 'vcr'
 require 'sidekiq/testing'
 require 'minitest/reporters'
 
 VCR.configure do |config|
-  config.cassette_library_dir = "test/vcr_cassettes"
+  config.cassette_library_dir = 'test/vcr_cassettes'
   config.hook_into :webmock
 end
 
 Sidekiq::Testing.fake!
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new({ color: true })]
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true)]
 
 
 
@@ -33,30 +35,35 @@ class ActiveSupport::TestCase
   end
 
   def stripe_card_token(error: nil)
-    number = "4242424242424242"
+    number = '4242424242424242'
     exp_month = 4
     exp_year = DateTime.now.next_year.year
-    cvc = "314"
+    cvc = '314'
 
     case error
     when /card_declined/
-      number = "4000000000000002"
+      number = '4000000000000002'
     when /incorrect_number/
-      number = "4242424242424241"
+      number = '4242424242424241'
     when /invalid_expiry_month/
       exp_month = 15
     when /invalid_expiry_year/
       exp_year = 1964
     when /invalid_cvc/
-      cvc = "99"
+      cvc = '99'
+    else
+      number = (rand * 100_000).floor
+      exp_year = (rand * 1000).floor
+      cvc = (rand * 100).floor
     end
 
-    Stripe::Token.create(card: {
-      number: number,
+    Stripe::Token.create(
+      card: {
+        number: number,
         exp_month: exp_month,
         exp_year: exp_year,
-        cvc:  cvc
-      },
+        cvc: cvc
+      }
     ).id
   end
 
@@ -85,13 +92,11 @@ class ActiveSupport::TestCase
       end
 
       # check that the VAT was correctly applied if it was configured
-      if line.include? I18n.t('invoices.including_total_excluding_taxes')
-        ht_amount = parse_amount_from_invoice_line(line)
-      end
+      ht_amount = parse_amount_from_invoice_line(line) if line.include? I18n.t('invoices.including_total_excluding_taxes')
     end
 
     if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
-      vat_rate = Setting.find_by({name: 'invoice_VAT-rate'}).value.to_f
+      vat_rate = Setting.find_by(name: 'invoice_VAT-rate').value.to_f
       computed_ht = sprintf('%.2f', (invoice.total / (vat_rate / 100 + 1)) / 100.0).to_f
 
       assert_equal computed_ht, ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correctly'
@@ -100,7 +105,6 @@ class ActiveSupport::TestCase
     end
     File.delete(invoice.file)
   end
-
 
   # Force the statistics export generation worker to run NOW and check the resulting file generated.
   # Delete the file afterwards.
