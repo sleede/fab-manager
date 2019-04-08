@@ -16,6 +16,20 @@ class Coupon < ActiveRecord::Base
   validates_with CouponDiscountValidator
   validates_with CouponExpirationValidator
 
+  scope :disabled, -> { where(active: false) }
+  scope :expired, -> { where('valid_until IS NOT NULL AND valid_until < ?', DateTime.now) }
+  scope :sold_out, lambda {
+    joins(:invoices).select('coupons.*, COUNT(invoices.id) as invoices_count').group('coupons.id')
+                    .where.not(max_usages: nil).having('COUNT(invoices.id) >= coupons.max_usages')
+  }
+  scope :active, lambda {
+    joins('LEFT OUTER JOIN invoices ON invoices.coupon_id = coupons.id')
+      .select('coupons.*, COUNT(invoices.id) as invoices_count')
+      .group('coupons.id')
+      .where('active = true AND (valid_until IS NULL OR valid_until >= ?)', DateTime.now)
+      .having('COUNT(invoices.id) < coupons.max_usages OR coupons.max_usages IS NULL')
+  }
+
   def safe_destroy
     if invoices.size.zero?
       destroy

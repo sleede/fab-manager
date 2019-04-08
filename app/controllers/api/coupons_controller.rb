@@ -10,13 +10,8 @@ class API::CouponsController < API::ApiController
   COUPONS_PER_PAGE = 10
 
   def index
-    if params[:filter] == 'all'
-      @coupons = Coupon.page(params[:page]).per(COUPONS_PER_PAGE).order('created_at DESC')
-      @total = Coupon.count
-    else
-      @coupons = Coupon.order('created_at DESC').all.select { |c| c.status == params[:filter] }
-      @total = @coupons.count
-    end
+    @coupons = Coupon.method(params[:filter]).call.page(params[:page]).per(COUPONS_PER_PAGE).order('created_at DESC')
+    @total = Coupon.method(params[:filter]).call.length
   end
 
   def show; end
