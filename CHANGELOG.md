@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v3.1.0 2019 April 8
+
 - Asynchronously generate accounting archives
 - Improved end-user message when closing an accounting period
 - Improved date checks before closing an accounting period
