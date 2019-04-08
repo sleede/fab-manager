@@ -1,4 +1,15 @@
 # Changelog Fab Manager
+
+## v3.1.0 2019 April 8
+
+- Asynchronously generate accounting archives
+- Improved end-user message when closing an accounting period
+- Improved date checks before closing an accounting period
+- Paginate list of coupons
+- Allow filtering coupons list
+- Fix a bug: when VAT has changed during fab-manager's lifecycle, this may not be reflected in archives
+- Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
+
 ## v3.0.1 2019 April 1st
 
 - Insert archive generation datetime in chained.sha256
@@ -20,6 +31,7 @@
 - Rebranded product from "La Casemate"
 - Refactored some pieces of Ruby code, according to style guide
 - Added asterisks on required fields in sign-up form
+- [TODO DEPLOY] /!\ Before deploying, you must check (and eventually) correct your VAT history using the rails console. Missing rates can be added later but dates and rates (including date of activation, disabling) MUST be correct. These values are very likely wrong if your installation was made prior to 2.8.0 with VAT enabled. Other cases must be checked too.
 - [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
 - [TODO DEPLOY] if you have changed your VAT rate in the past, add its history into database. You can use a rate of "0" to disable VAT. Eg. `rake fablab:setup:add_vat_rate[20,2017-01-01]`
 - [TODO DEPLOY] `rake fablab:setup:set_environment_to_invoices`
@@ -27,6 +39,7 @@
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
 - [TODO DEPLOY] add `DISK_SPACE_MB_ALERT` and `SUPERADMIN_EMAIL` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add the `accounting` volume to the fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
 
 ## v2.8.4 2019 March 18
 

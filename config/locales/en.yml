@@ -41,6 +41,8 @@ en:
       in_closed_period: "can't be within a closed accounting period"
       invalid_footprint: "invoice's checksum is invalid"
       end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
+      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
+      must_be_in_the_past: "The period must be strictly prior to today's date."
 
   activemodel:
     errors:
@@ -314,6 +316,8 @@ en:
       notify_admin_close_period_reminder:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
+      notify_admin_archive_complete:
+        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
 
   statistics:
     # statistics tools for admins

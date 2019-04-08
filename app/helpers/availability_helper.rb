@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Helpers methods about calendar availabilities
 module AvailabilityHelper
   MACHINE_COLOR = '#e4cd78'
   TRAINING_COLOR = '#bd7ae9'
@@ -9,14 +12,14 @@ module AvailabilityHelper
 
   def availability_border_color(availability)
     case availability.available_type
-      when 'machines'
-        MACHINE_COLOR
-      when 'training'
-        TRAINING_COLOR
-      when 'space'
-        SPACE_COLOR
-      else
-        EVENT_COLOR
+    when 'machines'
+      MACHINE_COLOR
+    when 'training'
+      TRAINING_COLOR
+    when 'space'
+      SPACE_COLOR
+    else
+      EVENT_COLOR
     end
   end
 
@@ -45,14 +48,14 @@ module AvailabilityHelper
       IS_COMPLETED
     else
       case availability.available_type
-        when 'training'
-          TRAINING_COLOR
-        when 'event'
-          EVENT_COLOR
-        when 'space'
-          SPACE_COLOR
-        else
-          '#000'
+      when 'training'
+        TRAINING_COLOR
+      when 'event'
+        EVENT_COLOR
+      when 'space'
+        SPACE_COLOR
+      else
+        '#000'
       end
     end
   end

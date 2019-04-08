@@ -1,6 +1,20 @@
 <h2 translate>{{ 'pricing.list_of_the_coupons' }}</h2>
 
-<button type="button" class="btn btn-warning m-t-lg m-b" ui-sref="app.admin.coupons_new" translate>{{ 'pricing.add_a_new_coupon' }}</button>
+<div class="m-t-lg m-b">
+  <button type="button" class="btn btn-warning" ui-sref="app.admin.coupons_new">
+    <i class="fa fa-plus m-r"></i>
+    <span translate>{{ 'pricing.add_a_new_coupon' }}</span>
+  </button>
+  <div class="form-group pull-right">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+      <select ng-model="filter.coupon" class="form-control" ng-change="updateCouponFilter()">
+        <option ng-repeat="status in couponStatus" value="{{status}}" translate>{{ 'pricing.'+status }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
 <table class="table">
   <thead>
   <tr>
@@ -28,3 +42,7 @@
   </tr>
   </tbody>
 </table>
+
+<div class="text-center">
+  <button class="btn btn-warning" ng-click="loadMore()" ng-hide="coupons.length === 0 || coupons.length >= coupons[0].total"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'pricing.display_more_coupons' | translate }}</button>
+</div>

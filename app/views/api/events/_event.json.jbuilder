@@ -12,6 +12,7 @@ if event.category
   json.category do
     json.id event.category.id
     json.name event.category.name
+    json.slug event.category.slug
   end
 end
 json.event_theme_ids event.event_theme_ids

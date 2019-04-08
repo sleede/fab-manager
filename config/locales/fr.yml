@@ -41,6 +41,8 @@ fr:
       in_closed_period: "ne peut pas être dans une période comptable fermée"
       invalid_footprint: "la somme de contrôle de la facture est invalide"
       end_before_start: "La date de fin ne peut pas être antérieure à la date de début. Choisissez une date après le %{START}"
+      invalid_duration: "La durée doit être comprise entre 1 jour et 1 an. Votre période dure %{DAYS} jours."
+      must_be_in_the_past: "La période doit être strictement antérieure à la date du jour."
 
   activemodel:
     errors:
@@ -314,6 +316,8 @@ fr:
       notify_admin_close_period_reminder:
         warning_last_closed_period_over_1_year: "Pensez à clôturer régulièrement vos périodes comptables. Les comptes sont actuellement clôturés jusqu'au %{LAST_END}"
         warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}"
+      notify_admin_archive_complete:
+        archive_complete: "L'archivage des données du %{START} au %{END} est terminé. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>Cliquez ici pour la télécharger</a>. Pensez à l'enregistrer sur un support externe sécurisé."
 
   statistics:
     # outil de statistiques pour les administrateurs

@@ -44,6 +44,7 @@ class NotificationType
     notify_member_reservation_reminder
     notify_admin_free_disk_space
     notify_admin_close_period_reminder
+    notify_admin_archive_complete
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

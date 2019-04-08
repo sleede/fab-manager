@@ -786,7 +786,7 @@ angular.module('application.router', ['ui.router'])
           machineCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Machine' }).$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           trainingCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Training' }).$promise; }],
-          couponsPromise: ['Coupon', function (Coupon) { return Coupon.query().$promise; }],
+          couponsPromise: ['Coupon', function (Coupon) { return Coupon.query({ page: 1, filter: 'all' }).$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
           spacesPricesPromise: ['Price', function (Price) { return Price.query({ priceable_type: 'Space', plan_id: 'null' }).$promise; }],
           spacesCreditsPromise: ['Credit', function (Credit) { return Credit.query({ creditable_type: 'Space' }).$promise; }]

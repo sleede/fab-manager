@@ -10,10 +10,12 @@ class AccountingPeriod < ActiveRecord::Base
   before_destroy { false }
   before_update { false }
   before_create :compute_totals
-  after_create :archive_closed_data
+  after_commit :archive_closed_data, on: [:create]
 
   validates :start_at, :end_at, :closed_at, :closed_by, presence: true
   validates_with DateRangeValidator
+  validates_with DurationValidator
+  validates_with PastPeriodValidator
   validates_with PeriodOverlapValidator
   validates_with PeriodIntegrityValidator
 
@@ -61,9 +63,13 @@ class AccountingPeriod < ActiveRecord::Base
     first_rate = @vat_rates.first
     return first_rate[:rate] if date < first_rate[:date]
 
-    @vat_rates.each do |h|
-      return h[:rate] if h[:date] <= date
+    @vat_rates.each_index do |i|
+      return @vat_rates[i][:rate] if date >= @vat_rates[i][:date] && (@vat_rates[i + 1].nil? || date < @vat_rates[i + 1][:date])
     end
+  end
+
+  def previous_period
+    AccountingPeriod.where('closed_at < ?', closed_at).order(closed_at: :desc).limit(1).last
   end
 
   private
@@ -79,47 +85,8 @@ class AccountingPeriod < ActiveRecord::Base
     key_dates.sort_by { |k| k[:date] }
   end
 
-  def to_json_archive(invoices, previous_file, last_checksum)
-    code_checksum = Checksum.code
-    ApplicationController.new.view_context.render(
-      partial: 'archive/accounting',
-      locals: {
-        invoices: invoices_with_vat(invoices),
-        period_total: period_total,
-        perpetual_total: perpetual_total,
-        period_footprint: footprint,
-        code_checksum: code_checksum,
-        last_archive_checksum: last_checksum,
-        previous_file: previous_file,
-        software_version: Version.current,
-        date: Time.now.iso8601
-      },
-      formats: [:json],
-      handlers: [:jbuilder]
-    )
-  end
-
-  def previous_period
-    AccountingPeriod.where('closed_at < ?', closed_at).order(closed_at: :desc).limit(1).last
-  end
-
   def archive_closed_data
-    data = invoices.includes(:invoice_items)
-    previous_file = previous_period&.archive_file
-    last_archive_checksum = previous_file ? Checksum.file(previous_file) : nil
-    json_data = to_json_archive(data, previous_file, last_archive_checksum)
-    current_archive_checksum = Checksum.text(json_data)
-    date = DateTime.iso8601
-    chained = Checksum.text("#{current_archive_checksum}#{last_archive_checksum}#{date}")
-
-    Zip::OutputStream.open(archive_file) do |io|
-      io.put_next_entry(archive_json_file)
-      io.write(json_data)
-      io.put_next_entry('checksum.sha256')
-      io.write("#{current_archive_checksum}\t#{archive_json_file}")
-      io.put_next_entry('chained.sha256')
-      io.write("#{chained}\t#{date}")
-    end
+    ArchiveWorker.perform_async(id)
   end
 
   def price_without_taxe(invoice)

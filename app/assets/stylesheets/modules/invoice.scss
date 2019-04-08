@@ -204,6 +204,10 @@ table.closings-table {
       margin-left: 2em;
       cursor: pointer;
     }
+
+    & > span.no-pointer {
+      cursor: default;
+    }
   }
 
   tbody .show-more {
@@ -267,4 +271,8 @@ table.scrollable-3-cols {
 
 .period-info-title {
   font-weight: bold;
+}
+
+input.form-control.as-writable {
+  background-color: white;
 }

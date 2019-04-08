@@ -97,7 +97,7 @@
                     <h1 class="m-b">{{event.title}}</h1>
                   </div>
                   <div class="col-xs-3">
-                    <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.name | lowercase}}'">{{event.category.name}}</span>
+                    <span class="v-middle badge text-xs" ng-class="'bg-{{event.category.slug}}'">{{event.category.name}}</span>
                   </div>
               </div>
               <p class="event-description" ng-bind-html="event.description | simpleText | humanize : 500 | breakFilter"></p>

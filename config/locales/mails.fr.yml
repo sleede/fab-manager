@@ -286,5 +286,13 @@ fr:
         warning_last_closed_period_over_1_year: "Pensez à clôturer régulièrement vos périodes comptables. Les comptes sont actuellement clôturés jusqu'au %{LAST_END}."
         warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}."
 
+    notify_admin_archive_complete:
+      subject: "Archivage terminé"
+      body:
+        archive_complete: "Vous avez clôturé la période comptable du %{START} au %{END}. L'archivage des données est maintenant terminé."
+        click_to_download: "Pour télécharger l'archive ZIP, cliquez"
+        here: "ici."
+        save_on_secured: "N'oubliez pas que vous devez obligatoirement enregistrer cette archive sur un support externe sécurisé, qui peut vous être demandé par l'administration fiscale lors d'un contrôle."
+
     shared:
       hello: "Bonjour %{user_name}"
