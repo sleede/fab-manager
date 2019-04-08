@@ -230,6 +230,15 @@ class Invoice < ActiveRecord::Base
     invoice_items.map(&:check_footprint).all? && footprint == compute_footprint
   end
 
+  def set_wallet_transaction(amount, transaction_id)
+    if check_footprint
+      update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
+      chain_record
+    else
+      raise InvalidFootprintError
+    end
+  end
+
   private
 
   def generate_and_send_invoice

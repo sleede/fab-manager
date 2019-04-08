@@ -486,7 +486,7 @@ class Reservation < ActiveRecord::Base
     # wallet debit success
     raise DebitWalletError unless wallet_transaction
 
-    invoice.update_columns(wallet_amount: @wallet_amount_debit, wallet_transaction_id: wallet_transaction.id)
+    invoice.set_wallet_transaction(@wallet_amount_debit, wallet_transaction.id)
   end
 
   # this function only use for compute total of reservation before save

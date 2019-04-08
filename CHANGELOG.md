@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## v3.1.1 2019 April 8
+
+- Fix a bug: when paying a reservation with wallet, the invoice footprint is not correctly updated
+
 ## v3.1.0 2019 April 8
 
 - Asynchronously generate accounting archives
@@ -94,7 +98,7 @@
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] (dev) `bundle install`
 
-# v2.7.4 2018 December 04
+## v2.7.4 2018 December 04
 
 - Applied Rubocop rules to some ruby files
 - Prevent running elastic-upgrade script with wrong awk version
@@ -102,20 +106,20 @@
 - Setup ElasticSearch configuration files for new installations
 - Improved ES upgrade documentation
 
-# v2.7.3 2018 December 03
+## v2.7.3 2018 December 03
 
 - Updated Uglifier gem to support ES6 syntax
 - Fix rake task `fablab:es:build_projects_index` for ElasticSearch > 1.7
 - Fix Dockerfile: yarn was not setup correctly
 - Fix: unable to build assets
 
-# v2.7.2 2018 November 29
+## v2.7.2 2018 November 29
 
 - Allow running the ElasticSearch upgrade script while being root
 - Fix an issue with ES upgrade script, preventing reindexing in some cases
 - Improved ES upgrade documentation
 
-# v2.7.1 2018 November 27
+## v2.7.1 2018 November 27
 
 - Updated angular.js to 1.6
 - Fix a security issue: dependency jQuery < 3.0.0 has a vulnerability as described in [CVE-2015-9251](https://nvd.nist.gov/vuln/detail/CVE-2015-9251)
@@ -124,7 +128,7 @@
 - Fix a security issue: dependency RubyZip < 1.1.2 has a vulnerability as described in [CVE-2018-1000544](https://nvd.nist.gov/vuln/detail/CVE-2018-1000544)
 - Fix a security issue: dependency ffi < 1.9.24 has a vulnerability as described in [CVE-2018-1000201](https://nvd.nist.gov/vuln/detail/CVE-2018-1000201)
 
-# v2.7.0 2018 November 27
+## v2.7.0 2018 November 27
 
 - Nom using standard [package.json](package.json) file to save application version number
 - Now using Yarn instead of deprecated Bower as the front-end dependencies manager
