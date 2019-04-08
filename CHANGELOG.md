@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: when paying a reservation with wallet, the invoice footprint is not correctly updated
+
 ## v3.1.0 2019 April 8
 
 - Asynchronously generate accounting archives
