@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Fix a bug: some users may not appear in the admin's general listing
+- [TODO DEPLOY] `rake fablab:fix:users_group_ids`
+
 ## v3.1.1 2019 April 8
 
 - Fix a bug: when paying a reservation with wallet, the invoice footprint is not correctly updated
