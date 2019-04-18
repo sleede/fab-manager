@@ -688,6 +688,8 @@ fr:
           about_title: "titre de la page \"À propos\""
           about_body: "corps de la page \"À propos\""
           about_contacts: "contacts sur la page \"À propos\""
+          privacy_body: "la politique de confidentialité"
+          privacy_dpo: "l'adresse du délégué à la protection des données"
           booking_window_start: "l'heure d'ouverture"
           booking_window_end: "l'heure de fermeture"
           booking_move_enable: "l'activation du déplacement de réservation"
@@ -715,6 +717,12 @@ fr:
           privacy:
             title: "Politique de confidentialité"
             input_the_dpo: "Saisir le contact du Délégué à la protection des données"
+            current_policy: "Politique courante"
+            draft_from_USER_DATE: "Brouillon, enregistré par {{USER}}, le {{DATE}}"
+            save_or_publish: "Enregistrer ou publier ?"
+            save_or_publish_body: "Voulez-vous publier une nouvelle version de la politique de confidentialité ou bien l'enregistrer comme brouillon ?"
+            publish_will_notify: "Publier une nouvelle version enverra une notification à l'ensemble des utilisateurs."
+            publish: "Publier"
 
       open_api_clients:
         add_new_client: "Créer un compte client"

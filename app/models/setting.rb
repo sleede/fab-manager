@@ -4,6 +4,7 @@ class Setting < ActiveRecord::Base
                     { in: %w[about_title
                              about_body
                              about_contacts
+                             privacy_draft
                              privacy_body
                              privacy_dpo
                              twitter_name

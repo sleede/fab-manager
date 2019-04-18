@@ -1074,6 +1074,7 @@ angular.module('application.router', ['ui.router'])
                        'display_name_enable', \
                        'machines_sort_by']` }).$promise;
           }],
+          privacyDraftsPromise: ['Setting', function (Setting) { return Setting.get({ name: 'privacy_draft', history: true }).$promise; }],
           cguFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgu-file' }).$promise; }],
           cgvFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'cgv-file' }).$promise; }],
           faviconFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'favicon-file' }).$promise; }],

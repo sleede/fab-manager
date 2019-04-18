@@ -2,7 +2,7 @@ json.setting do
   json.partial! 'api/settings/setting', setting: @setting
   if @show_history
     json.history @setting.history_values do |value|
-      json.extract! value, :value, :created_at
+      json.extract! value, :id, :value, :created_at
       unless value.user_id.nil?
         json.user do
           json.id value.user_id

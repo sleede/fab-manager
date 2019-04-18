@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('SettingsController', ['$scope', 'Setting', 'growl', 'settingsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
-  function ($scope, Setting, growl, settingsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
+Application.Controllers.controller('SettingsController', ['$scope', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
+  function ($scope, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
     /* PUBLIC SCOPE */
 
     // timepickers steps configuration
@@ -48,12 +48,16 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       cgv: false
     };
 
-    // various parametrable settings
+    // full history of privacy policy drafts
+    $scope.privacyDraftsHistory = [];
+
+    // various configurable settings
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title };
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body };
     $scope.privacyBodySetting = { name: 'privacy_body', value: settingsPromise.privacy_body };
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
+    $scope.privacyDraftSetting = { name: 'privacy_draft', value: privacyDraftsPromise.setting.value };
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };
@@ -121,6 +125,9 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
       value: (settingsPromise.display_name_enable === 'true')
     };
 
+    // binding to the privacy policy revision select
+    $scope.policyVersion = null;
+
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
      * The preview may show a placeholder or the content of the file depending on the upload state.
@@ -157,6 +164,23 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
 
       return Setting.update({ name: setting.name }, { value }, data => growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) }))
         , error => console.log(error));
+    };
+
+    $scope.savePrivacyPolicy = function () {
+      // open modal
+      const modalInstance = $uibModal.open({
+        templateUrl: '<%= asset_path "admin/settings/save_policy.html" %>',
+        controller: 'SavePolicyController'
+      });
+
+      // once done, update the invoice model and inform the admin
+      return modalInstance.result.then(function (res) {
+        $scope.invoices.unshift(res.avoir);
+        return Invoice.get({ id: invoice.id }, function (data) {
+          invoice.has_avoir = data.has_avoir;
+          return growl.success(_t('invoices.refund_invoice_successfully_created'));
+        });
+      });
     };
 
     /**
@@ -208,6 +232,13 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
      */
     $scope.addLoader = target => $scope.loader[target] = true;
 
+    /**
+     * Change the revision of the displayed privacy policy, from drafts history
+     */
+    $scope.handlePolicyRevisionChange = function () {
+      $scope.privacyDraftSetting.value = $scope.privacyDraftsHistory[$scope.policyVersion].content;
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -249,10 +280,33 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
         $scope.methods.profileImage = 'put';
         return $scope.actionUrl.profileImage += '/profile-image-file';
       }
+
+      privacyDraftsPromise.setting.history.forEach(function (draft) {
+        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user, DATE: draft.created_at }), content: draft.value });
+      });
     };
 
     // init the controller (call at the end !)
     return initialize();
   }
 
+]);
+
+
+/**
+ * Controller used in the invoice refunding modal window
+ */
+Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'growl', '_t',
+  function ($scope, $uibModalInstance, growl, _t) {
+    /* PUBLIC SCOPE */
+    $scope.save = function () {
+
+    };
+    $scope.publish = function () {
+
+    };
+    $scope.cancel = function () {
+
+    };
+  }
 ]);

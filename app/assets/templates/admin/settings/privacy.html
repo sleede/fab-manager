@@ -3,13 +3,16 @@
 
         <div class="row">
             <div class="col-md-4 col-md-offset-1">
+              <select class="form-control m-b" ng-options="d.id as d.name for d in privacyDraftsHistory" ng-model="policyVersion" ng-change="handlePolicyRevisionChange()">
+                <option value="" translate>{{ 'settings.privacy.current_policy' }}</option>
+              </select>
                 <div class="text-justify" ng-model="privacyBodySetting.value" medium-editor options='{"placeholder": "{{ "settings.input_the_main_content" | translate }}",
                   "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
                   }'>
 
                 </div>
                 <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'settings.drag_and_drop_to_insert_images' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="save(privacyBodySetting)" translate>{{ 'save' }}</button>
+                <button name="button" class="btn btn-warning" ng-click="savePrivacyPolicy()" translate>{{ 'save' }}</button>
             </div>
             <div class="col-md-4 col-md-offset-2">
                 <div ng-model="privacyDpoSetting.value" medium-editor options='{"placeholder": "{{ "settings.privacy.input_the_dpo" | translate }}",
