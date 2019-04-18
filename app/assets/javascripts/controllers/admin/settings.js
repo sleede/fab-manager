@@ -52,6 +52,8 @@ Application.Controllers.controller('SettingsController', ['$scope', 'Setting', '
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title };
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body };
+    $scope.privacyBodySetting = { name: 'privacy_body', value: settingsPromise.privacy_body };
+    $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };

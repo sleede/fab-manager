@@ -31,6 +31,11 @@
         <uib-tab heading="{{ 'settings.about' | translate }}">
           <ng-include src="'<%= asset_path 'admin/settings/about.html' %>'"></ng-include>
         </uib-tab>
+
+        <uib-tab heading="{{ 'settings.privacy.title' | translate }}">
+          <ng-include src="'<%= asset_path 'admin/settings/privacy.html' %>'"></ng-include>
+        </uib-tab>
+
         <uib-tab heading="{{ 'settings.reservations' | translate }}">
           <ng-include src="'<%= asset_path 'admin/settings/reservations.html' %>'"></ng-include>
         </uib-tab>
