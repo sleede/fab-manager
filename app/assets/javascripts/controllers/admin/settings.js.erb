@@ -162,8 +162,12 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
         ({ value } = setting);
       }
 
-      return Setting.update({ name: setting.name }, { value }, data => growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) }))
-        , error => console.log(error));
+      Setting.update(
+        { name: setting.name },
+        { value },
+        function () { growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) })); },
+        function (error) { console.log(error); }
+      );
     };
 
     $scope.savePrivacyPolicy = function () {
@@ -192,9 +196,9 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
     $scope.submited = function (content) {
       if ((content.custom_asset == null)) {
         $scope.alerts = [];
-        return angular.forEach(content, (v, k) =>
-          angular.forEach(v, err => growl.error(err))
-        );
+        return angular.forEach(content, function (v) {
+          angular.forEach(v, function(err) { growl.error(err); })
+        });
       } else {
         growl.success(_t('settings.file_successfully_updated'));
         if (content.custom_asset.name === 'cgu-file') {
@@ -230,7 +234,9 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
     /**
      * @param target {String} 'cgu' | 'cgv'
      */
-    $scope.addLoader = target => $scope.loader[target] = true;
+    $scope.addLoader = function (target) {
+      $scope.loader[target] = true;
+    }
 
     /**
      * Change the revision of the displayed privacy policy, from drafts history
