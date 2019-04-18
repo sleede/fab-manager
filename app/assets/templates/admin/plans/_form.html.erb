@@ -33,7 +33,7 @@
             ng-model="plan.group_id"
             required="required"
             ng-disabled="method == 'PATCH'">
-        <option value="all" translate>{{ 'plan_form.transversal_(all_groups)' }}</option>
+        <option value="all" translate>{{ 'plan_form.transversal_all_groups' }}</option>
         <optgroup label="Groupes">
             <option ng-repeat="group in groups" value="{{group.id}}" ng-selected="plan.group_id == group.id">{{group.name}}</option>
         </optgroup>

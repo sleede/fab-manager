@@ -1,6 +1,8 @@
 # Changelog Fab Manager
 
+- Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
+- Improved translations syntax according to YML specifications
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
 
 ## v3.1.1 2019 April 8

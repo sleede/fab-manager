@@ -66,7 +66,7 @@ fr:
         email_is_required: "L'adresse de courriel est requise."
         your_password: "Votre mot de passe"
         password_is_required: "Le mot de passe est requis."
-        password_is_too_short_(minimum_8_characters): "Le mot de passe est trop court (au moins 8 caractères)"
+        password_is_too_short: "Le mot de passe est trop court (au moins 8 caractères)"
         type_your_password_again: "Ressaisissez votre mot de passe"
         password_confirmation_is_required: "La confirmation du mot de passe est requise."
         password_does_not_match_with_confirmation: "Le mot de passe ne concorde pas avec la confirmation."
@@ -258,7 +258,7 @@ fr:
         ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Offrir cette réservation"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
-        you_booked_(DATE): "Vous avez réservé ({{DATE}}) :"  # angular interpolation
+        you_booked_DATE: "Vous avez réservé ({{DATE}}) :"  # angular interpolation
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"

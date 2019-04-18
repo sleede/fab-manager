@@ -65,7 +65,7 @@ es:
         email_is_required: "El e-mail es obligatorio."
         your_password: "Su contraseña"
         password_is_required: "La contraseña es obligatoria."
-        password_is_too_short_(minimum_8_characters): "La contraseña es demasiado corta (minimo 8 caracteres)"
+        password_is_too_short: "La contraseña es demasiado corta (minimo 8 caracteres)"
         type_your_password_again: "Escriba su contraseña otra vez"
         password_confirmation_is_required: "Confirmar su contraseña es obligatorio."
         password_does_not_match_with_confirmation: "Las contraseñas no coinciden."
@@ -255,7 +255,7 @@ es:
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
-        you_booked_(DATE): "You booked ({{DATE}}):"  # angular interpolation
+        you_booked_DATE: "You booked ({{DATE}}):"  # angular interpolation
         book: "Reservar"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"

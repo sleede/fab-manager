@@ -144,7 +144,7 @@
                  required/>
         </div>
         <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.required" translate>{{ 'password_is_required' }}</span>
-        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'password_is_too_short_(minimum_8_characters)' }}</span>
+        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'password_is_too_short' }}</span>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="password.change">
@@ -161,7 +161,7 @@
                  match="user.password"/>
         </div>
         <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.required" translate>{{ 'confirmation_of_password_is_required' }}</span>
-        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength" translate>{{ 'confirmation_of_password_is_too_short_(minimum_8_characters)' }}</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength" translate>{{ 'confirmation_of_password_is_too_short' }}</span>
         <span class="help-block" ng-show="userForm['user[password_confirmation]'].$error.match" translate>{{ 'confirmation_mismatch_with_password' }}</span>
       </div>
 

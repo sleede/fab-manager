@@ -1,5 +1,5 @@
 json.title notification.notification_type
-json.description _t('.user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html',
+json.description _t('.user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html',
                     {
                         NAME: notification.attached_object.profile.full_name,
                         GENDER: bool_to_sym(notification.attached_object.profile.gender),
