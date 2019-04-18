@@ -112,9 +112,17 @@ en:
 
       about:
         # about page
-        read_the_fablab_policy: "Read the FabLab policy"
-        read_the_fablab_s_general_terms_and_conditions: "Read the FabLab's general terms and conditions"
-        your_fablab_s_contacts: "Your FabLab's contacts"
+        about:
+          read_the_fablab_policy: "Read the FabLab policy"
+          read_the_fablab_s_general_terms_and_conditions: "Read the FabLab's general terms and conditions"
+          your_fablab_s_contacts: "Your FabLab's contacts"
+          privacy_policy: "Privacy policy"
+
+      privacy:
+        # 'privacy policy' page
+        privacy:
+          title: "Privacy policy"
+          dpo: "Data protection officer"
 
       home:
         # home page

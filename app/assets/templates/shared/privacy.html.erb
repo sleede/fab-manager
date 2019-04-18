@@ -1,0 +1,20 @@
+<div class="about-fablab scrollable">
+  <div class="row padder">
+    <header class="about-picture">
+      <div class="col-sm-offset-2 col-md-offset-3 col-sm-10 col-md-8">
+        <h1 class="about-title text-u-c" translate>{{ 'privacy.title' }}</h1>
+      </div>
+    </header>
+  </div>
+
+  <div class="row padder">
+    <div class="col-sm-offset-1 col-md-offset-3 col-sm-7 col-md-5 col-lg-4 m-b-lg">
+      <span ng-bind-html="privacyBody.value"></span>
+    </div>
+
+    <div class="col-sm-offset-0 col-md-offset-0 col-lg-offset-1 col-sm-4 col-md-4">
+      <h2 class="about-title-aside text-u-c" translate>{{ 'privacy.dpo' }}</h2>
+      <span ng-bind-html="privacyDpo.value"></span>
+    </div>
+  </div>
+</div>

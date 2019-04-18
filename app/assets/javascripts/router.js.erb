@@ -98,6 +98,18 @@ angular.module('application.router', ['ui.router'])
           translations: ['Translations', function (Translations) { return Translations.query('app.public.home').$promise; }]
         }
       })
+      .state('app.public.privacy', {
+        url: '/privacy-policy',
+        views: {
+          'content@': {
+            templateUrl: '<%= asset_path "shared/privacy.html" %>',
+            controller: 'PrivacyController'
+          }
+        },
+        resolve: {
+          translations: ['Translations', function (Translations) { return Translations.query('app.public.privacy').$promise; }]
+        }
+      })
 
       // profile completion (SSO import passage point)
       .state('app.logged.profileCompletion', {
