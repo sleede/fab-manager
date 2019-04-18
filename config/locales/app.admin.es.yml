@@ -688,6 +688,7 @@ es:
           about_title: "Título de la página \"Acerca de\""
           about_body: "Contenido de la página \"Acerca de\""
           about_contacts: "Página contactos\"Acerca de\""
+          privacy_draft: "privacy policy draft"                                                    # translation_missing
           privacy_body: "privacy policy"                                                           # translation_missing
           privacy_dpo: "data protection officer address"                                           # translation_missing
           booking_window_start: "hora de apertura"

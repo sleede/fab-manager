@@ -55,9 +55,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title };
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body };
-    $scope.privacyBodySetting = { name: 'privacy_body', value: settingsPromise.privacy_body };
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
-    $scope.privacyDraftSetting = { name: 'privacy_draft', value: privacyDraftsPromise.setting.value };
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };
@@ -125,8 +123,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
       value: (settingsPromise.display_name_enable === 'true')
     };
 
-    // binding to the privacy policy revision select
-    $scope.policyVersion = null;
+    // By default, we display the currently published privacy policy
+    $scope.privacyPolicy = {
+      version: null,
+      bodyTemp: settingsPromise.privacy_body
+    };
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -170,20 +171,33 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
       );
     };
 
+    /**
+     * The privacy policy has its own special save function because updating the policy must notify all users
+     */
     $scope.savePrivacyPolicy = function () {
       // open modal
       const modalInstance = $uibModal.open({
         templateUrl: '<%= asset_path "admin/settings/save_policy.html" %>',
-        controller: 'SavePolicyController'
+        controller: 'SavePolicyController',
+        resolve: {
+          saveCb () { return $scope.save; },
+          privacyPolicy () { return $scope.privacyPolicy; }
+        }
       });
 
-      // once done, update the invoice model and inform the admin
-      return modalInstance.result.then(function (res) {
-        $scope.invoices.unshift(res.avoir);
-        return Invoice.get({ id: invoice.id }, function (data) {
-          invoice.has_avoir = data.has_avoir;
-          return growl.success(_t('invoices.refund_invoice_successfully_created'));
-        });
+      // once done, update the client data
+      modalInstance.result.then(function (type) {
+        Setting.get({ name: 'privacy_draft', history: true }, function (data) {
+          // reset history
+          $scope.privacyDraftsHistory = [];
+          data.setting.history.forEach(function (draft) {
+            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user, DATE: draft.created_at }), content: draft.value });
+          });
+          if (type === 'privacy_draft') {
+            // FIXME
+            $scope.privacyPolicy.version = data.setting.history[data.setting.history.length - 1].id;
+          }
+        })
       });
     };
 
@@ -242,7 +256,12 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
      * Change the revision of the displayed privacy policy, from drafts history
      */
     $scope.handlePolicyRevisionChange = function () {
-      $scope.privacyDraftSetting.value = $scope.privacyDraftsHistory[$scope.policyVersion].content;
+      for (const draft of $scope.privacyDraftsHistory) {
+        if (draft.id == $scope.privacyPolicy.version) {
+          $scope.privacyPolicy.bodyTemp = draft.content;
+          break;
+        }
+      }
     };
 
     /* PRIVATE SCOPE */
@@ -288,7 +307,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
       }
 
       privacyDraftsPromise.setting.history.forEach(function (draft) {
-        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user, DATE: draft.created_at }), content: draft.value });
+        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: moment(draft.created_at).format('L LT') }), content: draft.value });
       });
     };
 
@@ -302,17 +321,30 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModalInstance', 'growl', '_t',
-  function ($scope, $uibModalInstance, growl, _t) {
+Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModalInstance', 'saveCb', 'privacyPolicy',
+  function ($scope, $uibModalInstance, saveCb, privacyPolicy) {
     /* PUBLIC SCOPE */
+
+    /**
+     * Save as draft the current text
+     */
     $scope.save = function () {
-
+      saveCb({ name: 'privacy_draft', value: privacyPolicy.bodyTemp });
+      $uibModalInstance.close('privacy_draft');
     };
+
+    /**
+     * Publish the current text as the new privacy policy
+     */
     $scope.publish = function () {
-
+      saveCb({ name: 'privacy_body', value: privacyPolicy.bodyTemp });
+      $uibModalInstance.close('privacy_body');
     };
+    /**
+     * Cancel the saving, dismiss the modal window
+     */
     $scope.cancel = function () {
-
+      $uibModalInstance.dismiss('cancel');
     };
   }
 ]);

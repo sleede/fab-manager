@@ -688,6 +688,7 @@ fr:
           about_title: "titre de la page \"À propos\""
           about_body: "corps de la page \"À propos\""
           about_contacts: "contacts sur la page \"À propos\""
+          privacy_draft: "brouillon de la politique de confidentialité"
           privacy_body: "la politique de confidentialité"
           privacy_dpo: "l'adresse du délégué à la protection des données"
           booking_window_start: "l'heure d'ouverture"

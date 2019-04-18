@@ -688,6 +688,7 @@ en:
           about_title: "\"About\" page title"
           about_body: "\"About\" page content"
           about_contacts: "\"About\" page contacts"
+          privacy_draft: "privacy policy draft"
           privacy_body: "privacy policy"
           privacy_dpo: "data protection officer address"
           booking_window_start: "opening time"
