@@ -1,8 +1,10 @@
 # Changelog Fab Manager
 
 - Fix a bug: when generating an Avoir at a previous date, the resulting checksum may be invalid
+- Fix a bug: updating a setting does not chain new values
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
+- [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
 
 ## v3.1.1 2019 April 8
 
