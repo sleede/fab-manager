@@ -53,6 +53,11 @@ class Setting < ActiveRecord::Base
     last_value&.value
   end
 
+  def last_update
+    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
+    last_value&.created_at
+  end
+
   def value=(val)
     admin = User.admins.first
     save && history_values.create(user: admin, value: val)

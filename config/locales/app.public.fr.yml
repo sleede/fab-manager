@@ -123,6 +123,7 @@ fr:
         privacy:
           title: "Politique de confidentialité"
           dpo: "Délégué à la protection des données"
+          last_update: "Dernière mise à jour,"
 
       home:
         # page d'accueil

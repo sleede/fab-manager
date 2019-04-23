@@ -123,6 +123,7 @@ en:
         privacy:
           title: "Privacy policy"
           dpo: "Data protection officer"
+          last_update: "Last update,"
 
       home:
         # home page

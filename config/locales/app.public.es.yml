@@ -122,6 +122,7 @@ es:
         privacy:
           title: "Política de privacidad"
           dpo: "Oficial de protección de datos"
+          last_update: "Última actualización,"
 
       home:
         # home page

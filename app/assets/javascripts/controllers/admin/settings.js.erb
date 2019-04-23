@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('SettingsController', ['$scope', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
-  function ($scope, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
+Application.Controllers.controller('SettingsController', ['$scope', '$filter', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
+  function ($scope, $filter, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
     /* PUBLIC SCOPE */
 
     // timepickers steps configuration
@@ -191,11 +191,16 @@ Application.Controllers.controller('SettingsController', ['$scope', '$uibModal',
           // reset history
           $scope.privacyDraftsHistory = [];
           data.setting.history.forEach(function (draft) {
-            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user, DATE: draft.created_at }), content: draft.value });
+            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: draft.created_at }), content: draft.value });
           });
           if (type === 'privacy_draft') {
-            // FIXME
-            $scope.privacyPolicy.version = data.setting.history[data.setting.history.length - 1].id;
+            const orderedHistory = $filter('orderBy')(data.setting.history, 'created_at');
+            const last = orderedHistory[orderedHistory.length - 1];
+            if (last) {
+              $scope.privacyPolicy.version = last.id;
+            }
+          } else {
+            $scope.privacyPolicy.version = null;
           }
         })
       });
