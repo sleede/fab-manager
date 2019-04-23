@@ -2,6 +2,7 @@
 
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
+- Fix a bug: updating a setting does not chain new values
 - Improved translations syntax according to YML specifications
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
 
