@@ -261,6 +261,10 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
      * Change the revision of the displayed privacy policy, from drafts history
      */
     $scope.handlePolicyRevisionChange = function () {
+      if ($scope.privacyPolicy.version === null) {
+        $scope.privacyPolicy.bodyTemp = settingsPromise.privacy_body;
+        return;
+      }
       for (const draft of $scope.privacyDraftsHistory) {
         if (draft.id == $scope.privacyPolicy.version) {
           $scope.privacyPolicy.bodyTemp = draft.content;
