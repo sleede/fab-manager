@@ -330,8 +330,8 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModalInstance', 'saveCb', 'privacyPolicy',
-  function ($scope, $uibModalInstance, saveCb, privacyPolicy) {
+Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModalInstance', '_t', 'growl', 'saveCb', 'privacyPolicy',
+  function ($scope, $uibModalInstance, _t, growl, saveCb, privacyPolicy) {
     /* PUBLIC SCOPE */
 
     /**
@@ -347,6 +347,7 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
      */
     $scope.publish = function () {
       saveCb({ name: 'privacy_body', value: privacyPolicy.bodyTemp });
+      growl.info(_t('settings.privacy.users_notified'));
       $uibModalInstance.close('privacy_body');
     };
     /**
