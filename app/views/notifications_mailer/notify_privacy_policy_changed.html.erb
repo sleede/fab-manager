@@ -1,0 +1,7 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<%= t('.body.content_html') %>
+
+<p>
+  <%=link_to( t('.body.link_to_policy'), "#{root_url}#!/privacy-policy", target: "_blank" )%>
+</p>

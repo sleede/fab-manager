@@ -308,7 +308,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       }
       if (profileImageFile.custom_asset) {
         $scope.methods.profileImage = 'put';
-        return $scope.actionUrl.profileImage += '/profile-image-file';
+        $scope.actionUrl.profileImage += '/profile-image-file';
       }
 
       privacyDraftsPromise.setting.history.forEach(function (draft) {
