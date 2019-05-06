@@ -3,6 +3,7 @@
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: updating a setting does not chain new values
+- Fix a security issue: updated to jquery 3.4.1 to fix [CVE-2019-11358](https://nvd.nist.gov/vuln/detail/CVE-2019-11358)
 - Improved translations syntax according to YML specifications
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
 
