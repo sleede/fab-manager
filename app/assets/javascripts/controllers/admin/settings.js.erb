@@ -261,6 +261,10 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
      * Change the revision of the displayed privacy policy, from drafts history
      */
     $scope.handlePolicyRevisionChange = function () {
+      if ($scope.privacyPolicy.version === null) {
+        $scope.privacyPolicy.bodyTemp = settingsPromise.privacy_body;
+        return;
+      }
       for (const draft of $scope.privacyDraftsHistory) {
         if (draft.id == $scope.privacyPolicy.version) {
           $scope.privacyPolicy.bodyTemp = draft.content;
@@ -308,7 +312,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       }
       if (profileImageFile.custom_asset) {
         $scope.methods.profileImage = 'put';
-        return $scope.actionUrl.profileImage += '/profile-image-file';
+        $scope.actionUrl.profileImage += '/profile-image-file';
       }
 
       privacyDraftsPromise.setting.history.forEach(function (draft) {
@@ -326,8 +330,8 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
 /**
  * Controller used in the invoice refunding modal window
  */
-Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModalInstance', 'saveCb', 'privacyPolicy',
-  function ($scope, $uibModalInstance, saveCb, privacyPolicy) {
+Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModalInstance', '_t', 'growl', 'saveCb', 'privacyPolicy',
+  function ($scope, $uibModalInstance, _t, growl, saveCb, privacyPolicy) {
     /* PUBLIC SCOPE */
 
     /**
@@ -343,6 +347,7 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
      */
     $scope.publish = function () {
       saveCb({ name: 'privacy_body', value: privacyPolicy.bodyTemp });
+      growl.info(_t('settings.privacy.users_notified'));
       $uibModalInstance.close('privacy_body');
     };
     /**

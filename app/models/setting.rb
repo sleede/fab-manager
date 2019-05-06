@@ -42,10 +42,18 @@ class Setting < ActiveRecord::Base
                              display_name_enable
                              machines_sort_by] }
 
-  after_update :update_stylesheet if :value_changed?
+  after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 
   def update_stylesheet
     Stylesheet.first&.rebuild! if %w[main_color secondary_color].include? name
+  end
+
+  def notify_privacy_policy_changed
+    return unless name == 'privacy_body'
+
+    NotificationCenter.call type: :notify_privacy_policy_changed,
+                            receiver: User.all,
+                            attached_object: self
   end
 
   def value

@@ -45,6 +45,7 @@ class NotificationType
     notify_admin_free_disk_space
     notify_admin_close_period_reminder
     notify_admin_archive_complete
+    notify_privacy_policy_changed
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

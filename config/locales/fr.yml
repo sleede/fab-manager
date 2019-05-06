@@ -318,6 +318,9 @@ fr:
         warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}"
       notify_admin_archive_complete:
         archive_complete: "L'archivage des données du %{START} au %{END} est terminé. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>Cliquez ici pour la télécharger</a>. Pensez à l'enregistrer sur un support externe sécurisé."
+      notify_privacy_policy_changed:
+        policy_updated: "Nouvelle mise à jour de la Politique de confidentialité."
+        click_to_show: "Cliquez ici pour la consulter"
 
   statistics:
     # outil de statistiques pour les administrateurs
