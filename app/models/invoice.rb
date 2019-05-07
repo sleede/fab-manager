@@ -255,8 +255,8 @@ class Invoice < ActiveRecord::Base
   # @param value {Integer} the integer to pad
   # @param length {Integer} the length of the resulting string.
   ##
-  def pad_and_truncate (value, length)
-    value.to_s.rjust(length, '0').gsub(/^.*(.{#{length},}?)$/m,'\1')
+  def pad_and_truncate(value, length)
+    value.to_s.rjust(length, '0').gsub(/^.*(.{#{length},}?)$/m, '\1')
   end
 
   ##
