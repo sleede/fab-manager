@@ -37,7 +37,7 @@ class API::ExportsController < API::ApiController
     elsif params[:category] == 'availabilities'
       case params[:type]
       when 'index'
-        export = export.where('created_at > ?', Availability.maximum('updated_at'))
+        export = export.where('created_at > ?', [Availability.maximum('updated_at'), Reservation.maximum('updated_at')].max)
       else
         raise ArgumentError, "Unknown type availabilities/#{params[:type]}"
       end

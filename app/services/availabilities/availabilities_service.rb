@@ -59,7 +59,7 @@ class Availabilities::AvailabilitiesService
       end
     end
     slots.each do |s|
-      s.title = I18n.t('availabilities.not_available') if s.is_complete? && !s.is_reserved
+      s.title = I18n.t('availabilities.not_available') if s.complete? && !s.is_reserved
     end
     slots
   end

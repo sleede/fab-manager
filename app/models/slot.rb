@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Time range of duration defined by ApplicationHelper::SLOT_DURATION, slicing an Availability.
+# During a slot a Reservation is possible
 class Slot < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
@@ -22,11 +26,12 @@ class Slot < ActiveRecord::Base
     super
   end
 
-  def is_complete?
+  def complete?
     reservations.length >= availability.nb_total_places
   end
 
   private
+
   def notify_member_and_admin_slot_is_modified
     NotificationCenter.call type: 'notify_member_slot_is_modified',
                             receiver: reservation.user,
@@ -47,7 +52,8 @@ class Slot < ActiveRecord::Base
 
   def can_be_modified?
     return false if (start_at - Time.now) / 1.day < 1
-    return true
+
+    true
   end
 
   def dates_were_modified?

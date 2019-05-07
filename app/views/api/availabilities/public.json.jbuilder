@@ -61,7 +61,7 @@ json.array!(@availabilities) do |availability|
     elsif availability.try(:space)
       json.space_id availability.space.id
       json.borderColor space_slot_border_color(availability)
-      json.is_completed availability.is_complete?
+      json.is_completed availability.complete?
     else
       json.title 'Unknown slot'
     end

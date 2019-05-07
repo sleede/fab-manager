@@ -1,10 +1,14 @@
 # Changelog Fab Manager
 
+- Configurable privacy policy and data protection officer
+- Alert users on privacy policy update
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: updating a setting does not chain new values
+- Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities
 - Fix a security issue: updated to jquery 3.4.1 to fix [CVE-2019-11358](https://nvd.nist.gov/vuln/detail/CVE-2019-11358)
 - Improved translations syntax according to YML specifications
+- Refactored some Ruby code to match style guide
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
 
 ## v3.1.1 2019 April 8
