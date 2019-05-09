@@ -311,6 +311,19 @@ angular.module('application.router', ['ui.router'])
           translations: ['Translations', function (Translations) { return Translations.query(['app.logged.projects_edit', 'app.shared.project']).$promise; }]
         }
       })
+      .state('app.admin.manage_abuses', {
+        url: '/abuses',
+        views: {
+          'main@': {
+            templateUrl: '<%= asset_path "abuses/index.html" %>',
+            controller: 'AbusesController'
+          }
+        },
+        resolve: {
+          abusesPromise: ['Abuse', function(Abuse) { return Abuse.query().$promise; }],
+          translations: ['Translations', function(Translations) { return Translations.query('app.admin.manage_abuses').$promise; }]
+        }
+      })
 
       // machines
       .state('app.public.machines_list', {

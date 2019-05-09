@@ -150,6 +150,7 @@ en:
         # projects gallery
         projects_list:
           the_fablab_projects: "The Fab Lab projects"
+          add_a_project: "Add a project"
           search_over_the_whole_network: "Search over the whole Fab Manager network"
           tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
           openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
@@ -160,9 +161,11 @@ en:
           my_projects: "My projects"
           projects_to_whom_i_take_part_in: "Projects to whom I take part in"
           all_machines: "All machines"
+          all_themes: "All themes"
           all_materials: "All materials"
           load_next_projects: "Load next projects"
           rough_draft: "Rough draft"
+          manage_abuses: "Manage abuses reports"
 
       projects_show:
         # details of a projet

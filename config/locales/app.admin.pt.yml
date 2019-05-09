@@ -754,3 +754,8 @@ pt:
         space_edit:
           edit_the_space_NAME: "Editar o espaço: {{NAME}}"  # angular interpolation
           validate_the_changes: "Validar mudanças"
+
+      manage_abuses:
+        # process and delete abuses reports
+        manage_abuses:
+          abuses_list: "Abuses list"                                                          # translation_missing
