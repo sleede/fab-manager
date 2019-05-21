@@ -765,3 +765,7 @@ pt:
           published_by: "published by"                                                             # translation_missing
           at_date: "on"                                                                            # translation_missing
           has_reported: "made the following report:"                                               # translation_missing
+          confirmation_required: "Confirm the processing of the report"                            # translation_missing
+          report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"  # translation_missing
+          report_removed: "The report has been deleted"                                            # translation_missing
+          failed_to_remove: "An error occurred, unable to delete the report"                       # translation_missing

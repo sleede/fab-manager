@@ -24,6 +24,9 @@
           <a ui-sref="app.admin.members_edit({id:abuse.signaled.author.id})">{{abuse.signaled.author.full_name}}</a>,
           <span translate>{{ 'manage_abuses.at_date' }}</span>
           <span>{{abuse.signaled.published_at | amDateFormat:'L' }}</span>
+          <button class="btn btn-success" ng-click="confirmProcess(abuse.id)">
+            <i class="fa fa-check"></i>
+          </button>
         </div>
         <div class="report">
           <span translate>{{ 'manage_abuses.at_date' }}</span>

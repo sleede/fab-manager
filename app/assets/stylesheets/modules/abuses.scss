@@ -3,11 +3,19 @@ li.abuse {
   list-style: none;
   border: 1px solid #ddd;
   border-radius: 2px;
+  margin-bottom: 2em;
 
   .signaled {
     background-color: #f5f5f5;
     border-bottom: 1px solid #ddd;
     padding: 1em;
+    position: relative;
+
+    button {
+      position: absolute;
+      right: 1em;
+      top: 0.5em;
+    }
   }
 
   .report {
