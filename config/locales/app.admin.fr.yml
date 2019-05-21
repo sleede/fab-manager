@@ -762,3 +762,6 @@ fr:
         manage_abuses:
           abuses_list: "Liste des signalements"
           no_reports: "Aucun signalement pour le moment"
+          published_by: "publié par"
+          at_date: "le"
+          has_reported: "a effectué le signalement suivant:"

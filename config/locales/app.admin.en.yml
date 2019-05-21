@@ -762,3 +762,6 @@ en:
         manage_abuses:
           abuses_list: "Reports list"
           no_reports: "No reports for now"
+          published_by: "published by"
+          at_date: "on"
+          has_reported: "made the following report:"

@@ -762,3 +762,6 @@ es:
         manage_abuses:
           abuses_list: "Lista de informes"
           no_reports: "No informes por ahora"
+          published_by: "published by"                                                             # translation_missing
+          at_date: "on"                                                                            # translation_missing
+          has_reported: "made the following report:"                                               # translation_missing
