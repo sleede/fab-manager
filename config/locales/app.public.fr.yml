@@ -165,7 +165,6 @@ fr:
           all_materials: "Tous les matériaux"
           load_next_projects: "Charger les projets suivants"
           rough_draft: "Brouillon"
-          manage_abuses: "Gérer les rapports d'abus"
 
       projects_show:
         # détails d'un projet

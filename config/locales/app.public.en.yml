@@ -165,7 +165,6 @@ en:
           all_materials: "All materials"
           load_next_projects: "Load next projects"
           rough_draft: "Rough draft"
-          manage_abuses: "Manage abuses reports"
 
       projects_show:
         # details of a projet

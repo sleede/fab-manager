@@ -64,11 +64,13 @@ fr:
 
       project_elements:
         # gestion des éléments constituant les projets
-        projects_elements_management: "Gestion des éléments projets"
-        add_a_material: "Ajouter un matériau"
-        add_a_new_theme: "Ajouter une nouvelle thématique"
-        licences: "Licences"
-        add_a_new_licence: "Ajouter une nouvelle licence"
+        project_elements:
+          projects_elements_management: "Gestion des éléments projets"
+          add_a_material: "Ajouter un matériau"
+          add_a_new_theme: "Ajouter une nouvelle thématique"
+          licences: "Licences"
+          add_a_new_licence: "Ajouter une nouvelle licence"
+          manage_abuses: "Gérer les signalements"
 
       trainings:
         # suivre et surveiller les formations
@@ -758,4 +760,5 @@ fr:
       manage_abuses:
         # traiter et supprimer les rapports d'abus
         manage_abuses:
-          abuses_list: "Liste des abus"
+          abuses_list: "Liste des signalements"
+          no_reports: "Aucun signalement pour le moment"

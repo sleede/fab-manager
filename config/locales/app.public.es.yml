@@ -164,7 +164,6 @@ es:
           all_materials: "Todo el material"
           load_next_projects: "Cargar más proyectos"
           rough_draft: "Borrador"
-          manage_abuses: "Manage abuses reports"                                                    #translation_missing
 
       projects_show:
         # details of a projet

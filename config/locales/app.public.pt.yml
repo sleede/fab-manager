@@ -165,7 +165,6 @@ pt:
             all_materials: "Todos os materiais"
             load_next_projects: "Carregar próximos projetos"
             rough_draft: "Rascunho"
-            manage_abuses: "Manage abuses reports"                                                  #translation_missing
 
         projects_show:
           # details of a projet

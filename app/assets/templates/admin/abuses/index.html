@@ -1,0 +1,23 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+      <section class="heading-title">
+        <h1 translate>{{ 'manage_abuses.abuses_list' }}</h1>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="m-lg">
+  <div class="row m-b-md">
+    <span ng-show="abuses.length === 0" translate>{{ 'manage_abuses.no_reports' }}</span>
+    <ul ng-show="abuses.length > 0">
+      <li ng-repeat="abuse in abuses">{{abuse.id}}</li>
+    </ul>
+  </div>
+</section>

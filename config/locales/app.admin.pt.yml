@@ -64,11 +64,13 @@ pt:
 
       project_elements:
         # management of the projects' components
-        projects_elements_management: "Gerenciar projetos e elementos"
-        add_a_material: "Adicionar um material"
-        add_a_new_theme: "Adicionar um novo tema"
-        licences: "Licenças"
-        add_a_new_licence: "Adicionar uma nova licença"
+        project_elements:
+          projects_elements_management: "Gerenciar projetos e elementos"
+          add_a_material: "Adicionar um material"
+          add_a_new_theme: "Adicionar um novo tema"
+          licences: "Licenças"
+          add_a_new_licence: "Adicionar uma nova licença"
+          manage_abuses: "Gerenciar relatórios"
 
       trainings:
         # track and monitor the trainings
@@ -758,4 +760,5 @@ pt:
       manage_abuses:
         # process and delete abuses reports
         manage_abuses:
-          abuses_list: "Abuses list"                                                          # translation_missing
+          abuses_list: "Lista de relatórios"
+          no_reports: "Não há relatos de agora"
