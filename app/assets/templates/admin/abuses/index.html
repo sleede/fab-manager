@@ -17,7 +17,7 @@
   <div class="row m-b-md">
     <span ng-show="abuses.length === 0" translate>{{ 'manage_abuses.no_reports' }}</span>
     <ul ng-show="abuses.length > 0">
-      <li ng-repeat="abuse in abuses">
+      <li class="abuse" ng-repeat="abuse in abuses">
         <div class="signaled">
           <a ui-sref="app.public.projects_show({id:abuse.signaled.slug})">{{abuse.signaled.name}}</a>,
           <span translate>{{ 'manage_abuses.published_by' }}</span>
