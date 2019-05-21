@@ -11,6 +11,7 @@
 - Improved translations syntax according to YML specifications
 - Refactored some Ruby code to match style guide
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
+- [TODO DEPLOY] (dev) `yarn install`
 
 ## v3.1.1 2019 April 8
 
