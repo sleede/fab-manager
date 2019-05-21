@@ -238,9 +238,10 @@ es:
         signaled_by: "marcado por:"
         signaled_on: "marcado el:"
         message: "Mensaje:"
+        visit_management_interface: "Refer to the Reporting Management Interface for more information."  # missing translation
 
     notify_user_wallet_is_credited:
-      subject: ""                                                                                   #translation_missing
+      subject: ""                                                                                   # translation_missing
       body:
         wallet_credit_html: "Se han ingresado %{AMOUNT} por el administrador."
 

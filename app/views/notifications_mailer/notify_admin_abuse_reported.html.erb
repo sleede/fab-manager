@@ -7,3 +7,4 @@
     <li><%= t('.body.signaled_on') %> <%= @attached_object.created_at.strftime('%e %B %Y, %H:%M') %></li>
     <li><%= t('.body.message') %><br><%= @attached_object.message %></li>
 </ul>
+<p><%= link_to t('.body.visit_management_interface'), "#{root_url}#!/admin/abuses" %></p>

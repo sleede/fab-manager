@@ -239,6 +239,7 @@ fr:
         signaled_by: "Signalé par :"
         signaled_on: "Signalé le :"
         message: "Message :"
+        visit_management_interface: "Reportez-vous à l'interface de gestion des signalements pour plus d'informations."
 
     notify_user_wallet_is_credited:
       subject: "Votre porte-monnaie a bien été crédité"

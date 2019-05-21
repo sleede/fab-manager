@@ -239,6 +239,7 @@ en:
         signaled_by: "flagged by:"
         signaled_on: "flagged on:"
         message: "Message:"
+        visit_management_interface: "Refer to the Reporting Management Interface for more information."
 
     notify_user_wallet_is_credited:
       subject: "Your wallet has been credited"
