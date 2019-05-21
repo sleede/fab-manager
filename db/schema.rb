@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190320091148) do
+ActiveRecord::Schema.define(version: 20190521124609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -286,6 +286,20 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
   add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
+
+  create_table "invoicing_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "address_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "invoicing_profiles", ["address_id"], name: "index_invoicing_profiles_on_address_id", using: :btree
+  add_index "invoicing_profiles", ["organization_id"], name: "index_invoicing_profiles_on_organization_id", using: :btree
+  add_index "invoicing_profiles", ["user_id"], name: "index_invoicing_profiles_on_user_id", using: :btree
 
   create_table "licences", force: :cascade do |t|
     t.string "name",        null: false
@@ -886,6 +900,9 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "users", column: "operator_id"
   add_foreign_key "invoices", "wallet_transactions"
+  add_foreign_key "invoicing_profiles", "addresses"
+  add_foreign_key "invoicing_profiles", "organizations"
+  add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
   add_foreign_key "organizations", "profiles"
