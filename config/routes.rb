@@ -123,7 +123,7 @@ Rails.application.routes.draw do
       get 'active', action: 'active', on: :collection
       post 'send_code', action: 'send_code', on: :collection
     end
-    resources :abuses, only: [:create]
+    resources :abuses, only: %i[index create destroy]
     resources :open_api_clients, only: %i[index create update destroy] do
       patch :reset_token, on: :member
     end

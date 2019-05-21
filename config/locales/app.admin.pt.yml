@@ -64,11 +64,13 @@ pt:
 
       project_elements:
         # management of the projects' components
-        projects_elements_management: "Gerenciar projetos e elementos"
-        add_a_material: "Adicionar um material"
-        add_a_new_theme: "Adicionar um novo tema"
-        licences: "Licenças"
-        add_a_new_licence: "Adicionar uma nova licença"
+        project_elements:
+          projects_elements_management: "Gerenciar projetos e elementos"
+          add_a_material: "Adicionar um material"
+          add_a_new_theme: "Adicionar um novo tema"
+          licences: "Licenças"
+          add_a_new_licence: "Adicionar uma nova licença"
+          manage_abuses: "Gerenciar relatórios"
 
       trainings:
         # track and monitor the trainings
@@ -754,3 +756,16 @@ pt:
         space_edit:
           edit_the_space_NAME: "Editar o espaço: {{NAME}}"  # angular interpolation
           validate_the_changes: "Validar mudanças"
+
+      manage_abuses:
+        # process and delete abuses reports
+        manage_abuses:
+          abuses_list: "Lista de relatórios"
+          no_reports: "Não há relatos de agora"
+          published_by: "published by"                                                             # translation_missing
+          at_date: "on"                                                                            # translation_missing
+          has_reported: "made the following report:"                                               # translation_missing
+          confirmation_required: "Confirm the processing of the report"                            # translation_missing
+          report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"  # translation_missing
+          report_removed: "The report has been deleted"                                            # translation_missing
+          failed_to_remove: "An error occurred, unable to delete the report"                       # translation_missing

@@ -148,19 +148,23 @@ pt:
 
         projects_list:
           # projects gallery
-          the_fablab_projects: "Projetos do Fab Lab"
-          search_over_the_whole_network: "Pesquisar em todos os FabLabs"
-          tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
-          openlab_search_not_available_at_the_moment: "A busca em toda a rede de FabLabs não está disponível no momento. Você pode procurar por projetos nesta plataforma."
-          project_search_result_is_empty: "Desculpe, nós não achamos nenhum resultado para sua pesquisa."
-          reset_all_filters: "Resetar todos os filtros"
-          search: "Procurar"
-          all_projects: "Todos os projetos"
-          my_projects: "Meus Projetos"
-          projects_to_whom_i_take_part_in: "Projetos que eu participo"
-          all_machines: "Todas as máquinas"
-          all_materials: "Todos os materiais"
-          load_next_projects: "Carregar próximos projetos"
+          projects_list:
+            the_fablab_projects: "Projetos do Fab Lab"
+            add_a_project: "Adicionar projeto"
+            search_over_the_whole_network: "Pesquisar em todos os FabLabs"
+            tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
+            openlab_search_not_available_at_the_moment: "A busca em toda a rede de FabLabs não está disponível no momento. Você pode procurar por projetos nesta plataforma."
+            project_search_result_is_empty: "Desculpe, nós não achamos nenhum resultado para sua pesquisa."
+            reset_all_filters: "Resetar todos os filtros"
+            search: "Procurar"
+            all_projects: "Todos os projetos"
+            my_projects: "Meus Projetos"
+            projects_to_whom_i_take_part_in: "Projetos que eu participo"
+            all_machines: "Todas as máquinas"
+            all_themes: "Todos temas"
+            all_materials: "Todos os materiais"
+            load_next_projects: "Carregar próximos projetos"
+            rough_draft: "Rascunho"
 
         projects_show:
           # details of a projet

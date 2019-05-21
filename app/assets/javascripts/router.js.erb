@@ -670,6 +670,19 @@ angular.module('application.router', ['ui.router'])
           translations: ['Translations', function (Translations) { return Translations.query('app.admin.project_elements').$promise; }]
         }
       })
+      .state('app.admin.manage_abuses', {
+        url: '/admin/abuses',
+        views: {
+          'main@': {
+            templateUrl: '<%= asset_path "admin/abuses/index.html" %>',
+            controller: 'AbusesController'
+          }
+        },
+        resolve: {
+          abusesPromise: ['Abuse', function(Abuse) { return Abuse.query().$promise; }],
+          translations: ['Translations', function(Translations) { return Translations.query('app.admin.manage_abuses').$promise; }]
+        }
+      })
 
       // trainings
       .state('app.admin.trainings', {

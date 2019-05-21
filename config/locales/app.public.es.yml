@@ -147,19 +147,23 @@ es:
 
       projects_list:
         # projects gallery
-        the_fablab_projects: "Los proyectos del FabLab"
-        search_over_the_whole_network: "Buscar en toda la red de FabLab"
-        tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
-        openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
-        project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
-        reset_all_filters: "Limpiar filtros"
-        search: "Buscar"
-        all_projects: "Todos los proyectos"
-        my_projects: "Mis proyectos"
-        projects_to_whom_i_take_part_in: "Proyectos de los que formo parte"
-        all_machines: "Todas las máquinas"
-        all_materials: "Todo el material"
-        load_next_projects: "Cargar más proyectos"
+        projects_list:
+          the_fablab_projects: "Los proyectos del FabLab"
+          add_a_project: "Añadir un proyecto"
+          search_over_the_whole_network: "Buscar en toda la red de FabLab"
+          tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
+          openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
+          project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
+          reset_all_filters: "Limpiar filtros"
+          search: "Buscar"
+          all_projects: "Todos los proyectos"
+          my_projects: "Mis proyectos"
+          projects_to_whom_i_take_part_in: "Proyectos de los que formo parte"
+          all_machines: "Todas las máquinas"
+          all_themes: "Todos los temas"
+          all_materials: "Todo el material"
+          load_next_projects: "Cargar más proyectos"
+          rough_draft: "Borrador"
 
       projects_show:
         # details of a projet

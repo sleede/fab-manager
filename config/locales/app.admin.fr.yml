@@ -64,11 +64,13 @@ fr:
 
       project_elements:
         # gestion des éléments constituant les projets
-        projects_elements_management: "Gestion des éléments projets"
-        add_a_material: "Ajouter un matériau"
-        add_a_new_theme: "Ajouter une nouvelle thématique"
-        licences: "Licences"
-        add_a_new_licence: "Ajouter une nouvelle licence"
+        project_elements:
+          projects_elements_management: "Gestion des éléments projets"
+          add_a_material: "Ajouter un matériau"
+          add_a_new_theme: "Ajouter une nouvelle thématique"
+          licences: "Licences"
+          add_a_new_licence: "Ajouter une nouvelle licence"
+          manage_abuses: "Gérer les signalements"
 
       trainings:
         # suivre et surveiller les formations
@@ -754,3 +756,16 @@ fr:
         space_edit:
           edit_the_space_NAME: "Modifier l'espace : {{NAME}}"  # angular interpolation
           validate_the_changes: "Valider les modifications"
+
+      manage_abuses:
+        # traiter et supprimer les rapports d'abus
+        manage_abuses:
+          abuses_list: "Liste des signalements"
+          no_reports: "Aucun signalement pour le moment"
+          published_by: "publié par"
+          at_date: "le"
+          has_reported: "a effectué le signalement suivant:"
+          confirmation_required: "Confirmez le traitement du signalement"
+          report_will_be_destroyed: "Une fois le signalement traité, le rapport sera supprimé. Cette action est irréversible, continuer ?"
+          report_removed: "Le rapport a bien été supprimé"
+          failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"

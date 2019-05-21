@@ -2,6 +2,7 @@
 
 - Configurable privacy policy and data protection officer
 - Alert users on privacy policy update
+- Abuses reports management panel
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: updating a setting does not chain new values
