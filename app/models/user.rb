@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
+  has_one :invoicing_profile, dependent: :nullify
+
   has_many :my_projects, foreign_key: :author_id, class_name: 'Project', dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users

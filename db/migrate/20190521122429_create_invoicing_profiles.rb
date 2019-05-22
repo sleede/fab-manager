@@ -9,5 +9,6 @@ class CreateInvoicingProfiles < ActiveRecord::Migration
     end
 
     add_reference :organizations, :invoicing_profile, index: true, foreign_key: true
+    add_reference :invoices, :invoicing_profile, index: true, foreign_key: true
   end
 end

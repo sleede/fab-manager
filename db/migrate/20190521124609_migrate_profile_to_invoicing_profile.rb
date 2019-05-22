@@ -1,8 +1,11 @@
 class MigrateProfileToInvoicingProfile < ActiveRecord::Migration
   def up
-    Profile.all.each do |p|
+    User.all.each do |u|
+      p = u.profile
+      puts "WARNING: User #{u.id} has no profile" and next unless p
+
       ip = InvoicingProfile.create!(
-        user: p.user,
+        user: u,
         first_name: p.first_name,
         last_name: p.last_name
       )
@@ -20,7 +23,7 @@ class MigrateProfileToInvoicingProfile < ActiveRecord::Migration
       profile = ip.user.profile
       profile.update_attributes(
         first_name: ip.first_name,
-        last_name: ip.last_name,
+        last_name: ip.last_name
       )
       ip.address&.update_attributes(
         placeable: profile
