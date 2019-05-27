@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v3.1.2 2019 May 27
+
 - Fix a bug: when generating an Avoir at a previous date, the resulting checksum may be invalid
 - Fix a bug: updating a setting does not chain new values
 - Fix a security issue: updated to jquery 3.4.1 to fix [CVE-2019-11358](https://nvd.nist.gov/vuln/detail/CVE-2019-11358)
