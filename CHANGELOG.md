@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+- Fix a bug: when generating an Avoir at a previous date, the resulting checksum may be invalid
+- [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
+- [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
+
 ## v3.1.1 2019 April 8
 
 - Fix a bug: when paying a reservation with wallet, the invoice footprint is not correctly updated
