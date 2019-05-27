@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-46-generic (buildd@lgw01-amd64-038) (gcc version 7.3.0 (Ubuntu
-        7.3.0-16ubuntu3)) #49-Ubuntu SMP Wed Feb 6 09:33:07 UTC 2019","hostname":"Sleede-SylvainPC"}'
+        version 4.15.0-50-generic (buildd@lcy01-amd64-013) (gcc version 7.3.0 (Ubuntu
+        7.3.0-16ubuntu3)) #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Mar 2019 14:15:25 GMT
+      - Mon, 27 May 2019 09:49:39 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '4729'
+      - '5223'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -51,7 +51,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_YyOcRWCosIMEZh
+      - req_vmlrWjKRkyCAPO
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -63,9 +63,10 @@ http_interactions:
           "id": "cus_8E2ys9zDZgetWX",
           "object": "customer",
           "account_balance": 0,
+          "address": null,
           "created": 1460026822,
           "currency": "usd",
-          "default_source": "card_1DvQPa2sOmf47Nz9kcy1Ashh",
+          "default_source": "card_1EFM2S2sOmf47Nz9NQ2uq5PQ",
           "delinquent": false,
           "description": "Lucile Seguin",
           "discount": null,
@@ -73,17 +74,23 @@ http_interactions:
           "invoice_prefix": "BCC32B8",
           "invoice_settings": {
             "custom_fields": null,
+            "default_payment_method": null,
             "footer": null
           },
           "livemode": false,
           "metadata": {
           },
+          "name": null,
+          "phone": null,
+          "preferred_locales": [
+
+          ],
           "shipping": null,
           "sources": {
             "object": "list",
             "data": [
               {
-                "id": "card_1DvQPa2sOmf47Nz9kcy1Ashh",
+                "id": "card_1EFM2S2sOmf47Nz9NQ2uq5PQ",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -96,7 +103,7 @@ http_interactions:
                 "brand": "Visa",
                 "country": "US",
                 "customer": "cus_8E2ys9zDZgetWX",
-                "cvc_check": "pass",
+                "cvc_check": "unchecked",
                 "dynamic_last4": null,
                 "exp_month": 4,
                 "exp_year": 2020,
@@ -126,12 +133,17 @@ http_interactions:
                 "cancel_at": null,
                 "cancel_at_period_end": false,
                 "canceled_at": null,
+                "collection_method": "charge_automatically",
                 "created": 1544447514,
-                "current_period_end": 1554901914,
-                "current_period_start": 1552223514,
+                "current_period_end": 1560172314,
+                "current_period_start": 1557493914,
                 "customer": "cus_8E2ys9zDZgetWX",
                 "days_until_due": null,
+                "default_payment_method": null,
                 "default_source": null,
+                "default_tax_rates": [
+
+                ],
                 "discount": null,
                 "ended_at": null,
                 "items": {
@@ -169,14 +181,17 @@ http_interactions:
                         "usage_type": "licensed"
                       },
                       "quantity": 1,
-                      "subscription": "sub_E84hFvNBlPia7R"
+                      "subscription": "sub_E84hFvNBlPia7R",
+                      "tax_rates": [
+
+                      ]
                     }
                   ],
                   "has_more": false,
                   "total_count": 1,
                   "url": "/v1/subscription_items?subscription=sub_E84hFvNBlPia7R"
                 },
-                "latest_invoice": "in_1ECRRa2sOmf47Nz93UHpWYGr",
+                "latest_invoice": "in_1EYYW42sOmf47Nz9J3qMq5x5",
                 "livemode": false,
                 "metadata": {
                 },
@@ -217,11 +232,21 @@ http_interactions:
             "total_count": 1,
             "url": "/v1/customers/cus_8E2ys9zDZgetWX/subscriptions"
           },
+          "tax_exempt": "none",
+          "tax_ids": {
+            "object": "list",
+            "data": [
+
+            ],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/customers/cus_8E2ys9zDZgetWX/tax_ids"
+          },
           "tax_info": null,
           "tax_info_verification": null
         }
     http_version: 
-  recorded_at: Thu, 14 Mar 2019 14:15:25 GMT
+  recorded_at: Mon, 27 May 2019 09:49:39 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/customers/cus_8E2ys9zDZgetWX/subscriptions
@@ -243,8 +268,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-46-generic (buildd@lgw01-amd64-038) (gcc version 7.3.0 (Ubuntu
-        7.3.0-16ubuntu3)) #49-Ubuntu SMP Wed Feb 6 09:33:07 UTC 2019","hostname":"Sleede-SylvainPC"}'
+        version 4.15.0-50-generic (buildd@lcy01-amd64-013) (gcc version 7.3.0 (Ubuntu
+        7.3.0-16ubuntu3)) #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019","hostname":"Sleede-SylvainPC"}'
       Content-Length:
       - '68'
   response:
@@ -255,7 +280,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 14 Mar 2019 14:15:26 GMT
+      - Mon, 27 May 2019 09:49:39 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -275,7 +300,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_88uX0h6gjQjfno
+      - req_m3XgAMuLItIDR6
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -293,5 +318,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Thu, 14 Mar 2019 14:15:26 GMT
+  recorded_at: Mon, 27 May 2019 09:49:40 GMT
 recorded_with: VCR 3.0.1

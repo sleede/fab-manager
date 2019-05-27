@@ -285,9 +285,8 @@ class Invoice < ActiveRecord::Base
   end
 
   def compute_footprint
-    max_date = created_at || DateTime.now
-    previous = Invoice.where('created_at < ?', max_date)
-                      .order('created_at DESC')
+    previous = Invoice.where('id < ?', id)
+                      .order('id DESC')
                       .limit(1)
 
     columns  = Invoice.columns.map(&:name)
