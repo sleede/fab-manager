@@ -23,9 +23,8 @@ class InvoiceItem < ActiveRecord::Base
   private
 
   def compute_footprint
-    max_date = created_at || Time.current
-    previous = InvoiceItem.where('created_at < ?', max_date)
-                          .order('created_at DESC')
+    previous = InvoiceItem.where('id < ?', id)
+                          .order('id DESC')
                           .limit(1)
 
     columns = InvoiceItem.columns.map(&:name)

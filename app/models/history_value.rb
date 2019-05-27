@@ -7,6 +7,8 @@ class HistoryValue < ActiveRecord::Base
   belongs_to :setting
   belongs_to :user
 
+  after_create :chain_record
+
   def chain_record
     self.footprint = compute_footprint
     save!

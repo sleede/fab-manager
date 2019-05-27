@@ -1,6 +1,6 @@
 {
   "name": "fab-manager",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "FabManager is the FabLab management solution. It is web-based, open-source and totally free.",
   "keywords": [
     "fablab",
@@ -60,7 +60,7 @@
     "fullcalendar": "2.3.1",
     "holderjs": "2.6",
     "jasny-bootstrap": "3.1",
-    "jquery": "3",
+    "jquery": ">=3.4.0",
     "jquery-minicolors": "^2.1.10",
     "jquery-ui": "https://github.com/devongovett/jqueryui-npm.git#1.10.4",
     "medium-editor": "4.4.0",

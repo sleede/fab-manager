@@ -51,10 +51,6 @@ class ActiveSupport::TestCase
       exp_year = 1964
     when /invalid_cvc/
       cvc = '99'
-    else
-      number = (rand * 100_000).floor
-      exp_year = (rand * 1000).floor
-      cvc = (rand * 100).floor
     end
 
     Stripe::Token.create(
