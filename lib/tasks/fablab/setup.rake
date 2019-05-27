@@ -30,8 +30,8 @@ namespace :fablab do
 
       if AccountingPeriod.count.positive?
         last_period = AccountingPeriod.order(start_at: 'DESC').first
-        InvoiceItem.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
         puts "Regenerating from #{last_period.end_at}..."
+        InvoiceItem.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
       else
         puts '(Re)generating all footprint...'
         InvoiceItem.order(:id).all.each(&:chain_record)
