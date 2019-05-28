@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190320091148) do
+ActiveRecord::Schema.define(version: 20190528140012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -266,7 +266,6 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.integer  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.string   "reference",              limit: 255
     t.string   "avoir_mode",             limit: 255
     t.datetime "avoir_date"
@@ -280,12 +279,23 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.string   "footprint"
     t.string   "environment"
     t.integer  "operator_id"
+    t.integer  "invoicing_profile_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
-  add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
+  add_index "invoices", ["invoicing_profile_id"], name: "index_invoices_on_invoicing_profile_id", using: :btree
   add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
+
+  create_table "invoicing_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invoicing_profiles", ["user_id"], name: "index_invoicing_profiles_on_user_id", using: :btree
 
   create_table "licences", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -383,11 +393,13 @@ ActiveRecord::Schema.define(version: 20190320091148) do
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "profile_id"
+    t.integer  "invoicing_profile_id"
   end
 
+  add_index "organizations", ["invoicing_profile_id"], name: "index_organizations_on_invoicing_profile_id", using: :btree
   add_index "organizations", ["profile_id"], name: "index_organizations_on_profile_id", using: :btree
 
   create_table "plans", force: :cascade do |t|
@@ -884,10 +896,13 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_foreign_key "history_values", "settings"
   add_foreign_key "history_values", "users"
   add_foreign_key "invoices", "coupons"
+  add_foreign_key "invoices", "invoicing_profiles"
   add_foreign_key "invoices", "users", column: "operator_id"
   add_foreign_key "invoices", "wallet_transactions"
+  add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
+  add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "organizations", "profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
