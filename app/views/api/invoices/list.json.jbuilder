@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 max_invoices = @invoices.except(:offset, :limit, :order).count
 
 json.array!(@invoices) do |invoice|
   json.maxInvoices max_invoices
-  json.extract! invoice, :id, :created_at, :reference, :invoiced_type, :user_id, :avoir_date
+  json.extract! invoice, :id, :created_at, :reference, :invoiced_type, :avoir_date
+  json.user_id invoice.invoicing_profile.user_id
   json.total (invoice.total / 100.00)
   json.url invoice_url(invoice, format: :json)
-  json.name invoice.user.profile.full_name
+  json.name invoice.invoicing_profile.full_name
   json.has_avoir invoice.refunded?
   json.is_avoir invoice.is_a?(Avoir)
   json.is_subscription_invoice invoice.subscription_invoice?

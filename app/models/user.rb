@@ -45,7 +45,6 @@ class User < ActiveRecord::Base
   has_many :training_credits, through: :users_credits, source: :training_credit
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
-  has_many :invoices, dependent: :destroy
   has_many :operated_invoices, foreign_key: :operator_id, class_name: 'Invoice', dependent: :nullify
 
   has_many :user_tags, dependent: :destroy
@@ -131,6 +130,10 @@ class User < ActiveRecord::Base
 
   def all_projects
     my_projects.to_a.concat projects
+  end
+
+  def invoices
+    invoicing_profile.invoices
   end
 
   def generate_subscription_invoice(operator_id)

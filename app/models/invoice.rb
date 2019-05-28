@@ -12,10 +12,13 @@ class Invoice < ActiveRecord::Base
 
   has_many :invoice_items, dependent: :destroy
   accepts_nested_attributes_for :invoice_items
-  belongs_to :user
   belongs_to :invoicing_profile
   belongs_to :wallet_transaction
   belongs_to :coupon
+
+  belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'invoiced_id'
+  belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'invoiced_id'
+  belongs_to :offer_day, foreign_type: 'OfferDay', foreign_key: 'invoiced_id'
 
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
   belongs_to :operator, foreign_key: :operator_id, class_name: 'User'
@@ -36,6 +39,10 @@ class Invoice < ActiveRecord::Base
 
   def filename
     "#{ENV['INVOICE_PREFIX']}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+  end
+
+  def user
+    invoicing_profile.user
   end
 
   def generate_reference
@@ -245,7 +252,7 @@ class Invoice < ActiveRecord::Base
   def generate_and_send_invoice
     unless Rails.env.test?
       puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \
-           "invoiced_type(#{invoiced_type}), user_id(#{user_id})"
+           "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
