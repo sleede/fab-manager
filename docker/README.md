@@ -96,6 +96,8 @@ You can run the following script as root to easily perform all these operations:
 
 ```bash
 \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/docker/setup.sh | bash
+# OR, if you don't want to install fab-manager in /apps/fabmanager, use:
+\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/docker/setup.sh | bash -s "/my/custom/path"
 ```
 
 ### Setup folders and env file
