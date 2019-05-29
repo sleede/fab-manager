@@ -12,7 +12,8 @@ class MigrateUserToInvoicingProfile < ActiveRecord::Migration
     # migrate invoices
     puts 'Migrating invoices. This may take a while...'
     Invoice.order(:id).all.each do |i|
-      i.update_column('invoicing_profile_id', i.user.invoicing_profile.id)
+      user = User.find(i.user_id)
+      i.update_column('invoicing_profile_id', user.invoicing_profile.id)
       i.update_column('user_id', nil)
     end
     # chain all records

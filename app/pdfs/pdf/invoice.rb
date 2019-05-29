@@ -52,23 +52,23 @@ class PDF::Invoice < Prawn::Document
       end
 
       # user/organization's information
-      if invoice&.user&.profile&.organization
-        name = invoice.user.profile.organization.name
-        full_name = "#{name} (#{invoice.user.profile.full_name})"
+      if invoice&.invoicing_profile&.organization
+        name = invoice.invoicing_profile.organization.name
+        full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
       else
-        name = invoice.user.profile.full_name
+        name = invoice.invoicing_profile.full_name
         full_name = name
       end
 
-      address = if invoice&.user&.profile&.organization&.address
-                  invoice.user.profile.organization.address.address
-                elsif invoice&.user&.profile&.address
-                  invoice.user.profile.address.address
+      address = if invoice&.invoicing_profile&.organization&.address
+                  invoice.invoicing_profile.organization.address.address
+                elsif invoice&.invoicing_profile&.address
+                  invoice.invoicing_profile.address.address
                 else
                   ''
                 end
 
-      text_box "<b>#{name}</b>\n#{invoice.user.email}\n#{address}",
+      text_box "<b>#{name}</b>\n#{invoice.invoicing_profile.email}\n#{address}",
                at: [bounds.width - 130, bounds.top - 49],
                width: 130,
                align: :right,

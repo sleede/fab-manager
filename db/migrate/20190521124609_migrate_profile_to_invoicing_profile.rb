@@ -7,12 +7,13 @@ class MigrateProfileToInvoicingProfile < ActiveRecord::Migration
       ip = InvoicingProfile.create!(
         user: u,
         first_name: p.first_name,
-        last_name: p.last_name
+        last_name: p.last_name,
+        email: u.email
       )
-      p.address&.update_attributes(
+      Address.find_by(placeable_id: p.id, placeable_type: 'Profile')&.update_attributes(
         placeable: ip
       )
-      p.organization&.update_attributes(
+      Organization.find_by(profile_id: p.id)&.update_attributes(
         invoicing_profile_id: ip.id
       )
     end
@@ -25,10 +26,10 @@ class MigrateProfileToInvoicingProfile < ActiveRecord::Migration
         first_name: ip.first_name,
         last_name: ip.last_name
       )
-      ip.address&.update_attributes(
+      Address.find_by(placeable_id: ip.id, placeable_type: 'InvoicingProfile')&.update_attributes(
         placeable: profile
       )
-      ip.organization&.update_attributes(
+      Organization.find_by(invoicing_profile_id: ip.id)&.update_attributes(
         profile_id: profile.id
       )
     end

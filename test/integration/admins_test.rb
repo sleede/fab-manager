@@ -26,6 +26,8 @@ class AdminsTest < ActionDispatch::IntegrationTest
                gender: true,
                birthday: '1999-09-19',
                phone: '0547124852',
+             },
+             invoicing_profile_attributes: {
                address_attributes: {
                  address: '6 Avenue Henri de Bournazel, 19000 Tulle'
                }

@@ -45,7 +45,10 @@ class API::AdminsController < API::ApiController
   private
 
   def admin_params
-    params.require(:admin).permit(:username, :email, profile_attributes: [:first_name, :last_name, :gender,
-    :birthday, :phone, address_attributes: [:address]])
+    params.require(:admin).permit(
+      :username, :email,
+      profile_attributes: %i[first_name last_name gender birthday phone],
+      invoicing_profile_attributes: [address_attributes: [:address]]
+    )
   end
 end
