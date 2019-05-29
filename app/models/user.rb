@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
+  has_one :invoicing_profile, dependent: :nullify
+
   has_many :my_projects, foreign_key: :author_id, class_name: 'Project', dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
@@ -43,7 +45,6 @@ class User < ActiveRecord::Base
   has_many :training_credits, through: :users_credits, source: :training_credit
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
-  has_many :invoices, dependent: :destroy
   has_many :operated_invoices, foreign_key: :operator_id, class_name: 'Invoice', dependent: :nullify
 
   has_many :user_tags, dependent: :destroy
@@ -129,6 +130,10 @@ class User < ActiveRecord::Base
 
   def all_projects
     my_projects.to_a.concat projects
+  end
+
+  def invoices
+    invoicing_profile.invoices
   end
 
   def generate_subscription_invoice(operator_id)

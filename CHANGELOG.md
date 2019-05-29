@@ -5,13 +5,21 @@
 - Abuses reports management panel
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
-- Fix a bug: updating a setting does not chain new values
 - Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
-- Fix a security issue: updated to jquery 3.4.1 to fix [CVE-2019-11358](https://nvd.nist.gov/vuln/detail/CVE-2019-11358)
+- Fix a bug: close period reminder is sent before the first invoice's first anniversary
 - Improved translations syntax according to YML specifications
 - Refactored some Ruby code to match style guide
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
-- [TODO DEPLOY] (dev) `yarn install`
+
+## v3.1.2 2019 May 27
+
+- Fix a bug: when generating an Avoir at a previous date, the resulting checksum may be invalid
+- Fix a bug: updating a setting does not chain new values
+- Fix a security issue: updated to jquery 3.4.1 to fix [CVE-2019-11358](https://nvd.nist.gov/vuln/detail/CVE-2019-11358)
+- [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
+- [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
+- [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
+- [TODO DEPLOY] -> (only dev) yarn install 
 
 ## v3.1.1 2019 April 8
 
@@ -49,7 +57,7 @@
 - Refactored some pieces of Ruby code, according to style guide
 - Added asterisks on required fields in sign-up form
 - [TODO DEPLOY] /!\ Before deploying, you must check (and eventually) correct your VAT history using the rails console. Missing rates can be added later but dates and rates (including date of activation, disabling) MUST be correct. These values are very likely wrong if your installation was made prior to 2.8.0 with VAT enabled. Other cases must be checked too.
-- [TODO DEPLOY] (dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
+- [TODO DEPLOY] -> (only dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
 - [TODO DEPLOY] if you have changed your VAT rate in the past, add its history into database. You can use a rate of "0" to disable VAT. Eg. `rake fablab:setup:add_vat_rate[20,2017-01-01]`
 - [TODO DEPLOY] `rake fablab:setup:set_environment_to_invoices`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
@@ -66,7 +74,7 @@
 - Fix a bug: application in unavailable if a SSO is active
 - Fix a security issue: dependency bootstrap < 4.3.1 has an XSS vulnerability as described in [CVE-2019-8331](https://blog.getbootstrap.com/2019/02/13/bootstrap-4-3-1-and-3-4-1/)
 - Fixed missing translations in authentication providers form
-- [TODO DEPLOY] (dev) `bundle install`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v2.8.3 2019 January 29
 
@@ -90,7 +98,7 @@
 - Fix a bug: Invalid translation in new partner modal
 - Refactored frontend invoices translations
 - Updated RailRoady 1.4.0 to 1.5.3
-- [TODO DEPLOY] (dev) `bundle install`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v2.8.1 2019 January 02
 
@@ -109,7 +117,7 @@
 - Added badges to README
 - Fix a security issue: dependency ActiveJob < 4.2.11 has a vulnerability as described in [CVE-2018-16476](https://nvd.nist.gov/vuln/detail/CVE-2018-16476)
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] (dev) `bundle install`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v2.7.4 2018 December 04
 
@@ -187,7 +195,7 @@
 - Fixed syntax and typos in README 
 - [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
-- [TODO DEPLOY] (dev) `bundle install`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 - [TODO DEPLOY] `rake db:seed`
 
 ## v2.6.4 2018 March 15
@@ -246,7 +254,7 @@
 - Updated test data to allow passing test suite
 - Upgraded rails minor version
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] (dev) `bundle install`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 
 ## v2.5.14 2017 September 12
 
@@ -521,7 +529,7 @@
 - [TODO DEPLOY] `rake fablab:es:build_availabilities_index`
 - [TODO DEPLOY] `rake fablab:es:add_event_filters`
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] (dev) `bundle install`
+- [TODO DEPLOY] -> (only dev) `bundle install`
 - [TODO DEPLOY] add `EXCEL_DATE_FORMAT`, `ALLOWED_EXTENSIONS` and `ALLOWED_MIME_TYPES` environment variable in `application.yml`
 - [OPTIONAL] `rake fablab:fix:assign_category_to_uncategorized_events` (will put every non-categorized events into a new category called "No Category", to ease re-categorization)
 
@@ -539,7 +547,7 @@
 - Fix a bug: unable to deploy 2.2.0+ when PostgreSQL 'unaccent' extension was already active
 - Fix a bug: some reservations was referencing reservables not present in database (#patch)
 - [TODO DEPLOY] `bundle exec rake fablab:fix:reservations_not_existing_reservable` to apply #patch
-- [TODO DEPLOY] (dev) `bundle install` then (all) `rake db:migrate`
+- [TODO DEPLOY] -> (only dev) `bundle install` then (all) `rake db:migrate`
 
 ## v2.2.2 2016 June 23
 - Fix some bugs: users with uncompleted account (sso imported) won't appear in statistics, in listings and in searches. Moreover, they won't block statistics generation
@@ -563,7 +571,7 @@
 - API: GET /api/trainings do not load nor send the associated availabilities until they are requested
 - List of members is now loaded 10 members by 10, to improve page load time
 - [TODO DEPLOY] Regenerate the theme stylesheet (easy way: Customization/General/Main colour -> "Save")
-- [TODO DEPLOY] (dev) `bundle install` then (all) `rake db:migrate`
+- [TODO DEPLOY] -> (only dev) `bundle install` then (all) `rake db:migrate`
 
 ## v2.1.2 2016 May 24
 - Fix a bug: Google Analytics was not loaded and did not report any stats

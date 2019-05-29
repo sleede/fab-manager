@@ -4,23 +4,49 @@ namespace :fablab do
   namespace :setup do
     desc 'assign all footprints to existing Invoice records'
     task chain_invoices_records: :environment do
-      raise "Footprints were already generated, won't regenerate" if Invoice.where.not(footprint: nil).count.positive?
+      if Invoice.where.not(footprint: nil).count.positive?
+        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+      end
 
-      Invoice.order(:created_at).all.each(&:chain_record)
+      if AccountingPeriod.count.positive?
+        last_period = AccountingPeriod.order(start_at: 'DESC').first
+        puts "Regenerating from #{last_period.end_at}..."
+        Invoice.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
+      else
+        puts '(Re)generating all footprint...'
+        Invoice.order(:id).all.each(&:chain_record)
+      end
     end
 
     desc 'assign all footprints to existing InvoiceItem records'
     task chain_invoices_items_records: :environment do
-      raise "Footprints were already generated, won't regenerate" if InvoiceItem.where.not(footprint: nil).count.positive?
+      if InvoiceItem.where.not(footprint: nil).count.positive?
+        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+      end
 
-      InvoiceItem.order(:created_at).all.each(&:chain_record)
+      if AccountingPeriod.count.positive?
+        last_period = AccountingPeriod.order(start_at: 'DESC').first
+        puts "Regenerating from #{last_period.end_at}..."
+        InvoiceItem.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
+      else
+        puts '(Re)generating all footprint...'
+        InvoiceItem.order(:id).all.each(&:chain_record)
+      end
     end
 
     desc 'assign all footprints to existing HistoryValue records'
     task chain_history_values_records: :environment do
-      raise "Footprints were already generated, won't regenerate" if HistoryValue.where.not(footprint: nil).count.positive?
+      if HistoryValue.where.not(footprint: nil).count.positive?
+        print 'WARNING: Footprints were already generated. Regenerate? (y/n) '
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+      end
 
-      HistoryValue.order(:created_at).all.each(&:chain_record)
+      HistoryValue.order(:id).all.each(&:chain_record)
     end
 
     desc 'assign environment value to all invoices'

@@ -4,10 +4,11 @@ class CreateInvoicingProfiles < ActiveRecord::Migration
       t.references :user, index: true, foreign_key: true
       t.string :first_name
       t.string :last_name
-      t.references :address, index: true, foreign_key: true
-      t.references :organization, index: true, foreign_key: true
 
       t.timestamps null: false
     end
+
+    add_reference :organizations, :invoicing_profile, index: true, foreign_key: true
+    add_reference :invoices, :invoicing_profile, index: true, foreign_key: true
   end
 end
