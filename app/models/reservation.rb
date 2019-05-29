@@ -227,7 +227,7 @@ class Reservation < ActiveRecord::Base
   def save_with_payment(operator_id, coupon_code = nil)
     begin
       clean_pending_strip_invoice_items
-      build_invoice(user: user, operator_id: operator_id)
+      build_invoice(invoicing_profile: user.invoicing_profile, operator_id: operator_id)
       invoice_items = generate_invoice_items(false, coupon_code)
     rescue StandardError => e
       logger.error e
@@ -369,7 +369,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def save_with_local_payment(operator_id, coupon_code = nil)
-    build_invoice(user: user, operator_id: operator_id)
+    build_invoice(invoicing_profile: user.invoicing_profile, operator_id: operator_id)
     generate_invoice_items(true, coupon_code)
 
     return false unless valid?

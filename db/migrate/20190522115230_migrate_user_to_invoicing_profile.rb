@@ -56,7 +56,7 @@ class MigrateUserToInvoicingProfile < ActiveRecord::Migration
 
   # will return an array of hash containing the removed periods data
   def backup_and_remove_periods
-    return unless AccountingPeriod.count.positive?
+    return [] unless AccountingPeriod.count.positive?
 
     puts 'Removing accounting archives...'
     # 1. remove protection for AccountingPeriods
