@@ -1,15 +1,41 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+admin:
+  id: 1
+  user_id: 1
+  first_name: admin
+  last_name: admin
 
-one:
-  user_id: 
-  first_name: MyString
-  last_name: MyString
-  address_id: 
-  organization_id: 
+jdupont:
+  id: 2
+  user_id: 2
+  first_name: Jean
+  last_name: Dupont
 
-two:
-  user_id: 
-  first_name: MyString
-  last_name: MyString
-  address_id: 
-  organization_id: 
+kdumas:
+  id: 4
+  user_id: 4
+  first_name: Kevin
+  last_name: Dumas
+
+vlonchamp:
+  id: 5
+  user_id: 5
+  first_name: Vanessa
+  last_name: Lonchamp
+
+gpartenaire:
+  id: 6
+  user_id: 6
+  first_name: Gilbert
+  last_name: Partenaire
+
+pdurand:
+  id: 3
+  user_id: 3
+  first_name: Paulette
+  last_name: Durand
+
+lseguin:
+  id: 7
+  user_id: 7
+  first_name: Lucile
+  last_name: Seguin

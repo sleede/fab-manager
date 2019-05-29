@@ -7,7 +7,7 @@ invoice_1:
   total: 10000
   created_at: 2012-03-12 11:03:31.651441000 Z
   updated_at: 2012-03-12 11:03:31.651441000 Z
-  user_id: 3
+  invoicing_profile_id: 3
   reference: 1604001/VL
   avoir_mode:
   avoir_date:
@@ -27,7 +27,7 @@ invoice_2:
   total: 2000
   created_at: 2012-03-12 13:40:22.342717000 Z
   updated_at: 2012-03-12 13:40:22.342717000 Z
-  user_id: 4
+  invoicing_profile_id: 4
   reference: '1604002'
   avoir_mode:
   avoir_date:
@@ -47,7 +47,7 @@ invoice_3:
   total: 3000
   created_at: 2015-06-10 11:20:01.341130000 Z
   updated_at: 2015-06-10 11:20:01.341130000 Z
-  user_id: 7
+  invoicing_profile_id: 7
   reference: '1203001'
   avoir_mode:
   avoir_date:
@@ -68,7 +68,7 @@ invoice_4:
   total: 0
   created_at: 2016-04-05 08:35:52.931187000 Z
   updated_at: 2016-04-05 08:35:52.931187000 Z
-  user_id: 7
+  invoicing_profile_id: 7
   reference: '1203002'
   avoir_mode:
   avoir_date:
@@ -88,7 +88,7 @@ invoice_5:
   total: 1500
   created_at: 2016-04-05 08:36:46.853368000 Z
   updated_at: 2016-04-05 08:36:46.853368000 Z
-  user_id: 3
+  invoicing_profile_id: 3
   reference: '1506031'
   avoir_mode:
   avoir_date:
