@@ -3,6 +3,7 @@
 - Configurable privacy policy and data protection officer
 - Alert users on privacy policy update
 - Abuses reports management panel
+- Refactored user's profile to keep invoicing data after an user was deleted
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
