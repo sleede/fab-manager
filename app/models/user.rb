@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   has_one :invoicing_profile, dependent: :nullify
   accepts_nested_attributes_for :invoicing_profile
 
+  has_one :statistic_profile, dependent: :nullify
+  accepts_nested_attributes_for :statistic_profile
+
   has_many :my_projects, foreign_key: :author_id, class_name: 'Project', dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
@@ -63,7 +66,8 @@ class User < ActiveRecord::Base
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_group_changed, if: :group_id_changed?
-  after_save :update_invoicing_profile
+  after_save :update_invoicing_profile, if: invoicing_data_was_modified?
+  after_save :update_statistic_profile, if: statistic_data_was_modified?
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
@@ -362,15 +366,37 @@ class User < ActiveRecord::Base
                             attached_object: self
   end
 
+  def invoicing_data_was_modified?
+    email_changed? or new_record?
+  end
+
+  def statistic_data_was_modified?
+    group_id_changed? or new_record?
+  end
+
+
   def update_invoicing_profile
     if invoicing_profile.nil?
       InvoicingProfile.create!(
-        user: user,
+        user: self,
         email: email
       )
     else
       invoicing_profile.update_attributes(
         email: email
+      )
+    end
+  end
+
+  def update_statistic_profile
+    if statistic_profile.nil?
+      StatisticProfile.create!(
+        user: self,
+        group_id: group_id
+      )
+    else
+      statistic_profile.update_attributes(
+        group_id: group_id
       )
     end
   end

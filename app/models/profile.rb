@@ -14,7 +14,8 @@ class Profile < ActiveRecord::Base
   validates :birthday, presence: true
   validates_numericality_of :phone, only_integer: true, allow_blank: false
 
-  after_save :update_invoicing_profile
+  after_save :update_invoicing_profile, if: invoicing_data_was_modified?
+  after_save :update_statistic_profile, if: statistic_data_was_modified?
 
   def full_name
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
@@ -51,6 +52,14 @@ class Profile < ActiveRecord::Base
 
   private
 
+  def invoicing_data_was_modified?
+    first_name_changed? or last_name_changed? or new_record?
+  end
+
+  def statistic_data_was_modified?
+    birthday_changed? or gender_changed? or new_record?
+  end
+
   def update_invoicing_profile
     if user.invoicing_profile.nil?
       InvoicingProfile.create!(
@@ -62,6 +71,21 @@ class Profile < ActiveRecord::Base
       user.invoicing_profile.update_attributes(
         first_name: first_name,
         last_name: last_name
+      )
+    end
+  end
+
+  def update_statistic_profile
+    if statistic_profile.nil?
+      StatisticProfile.create!(
+        user: user,
+        birthday: birthday,
+        gender: gender
+      )
+    else
+      statistic_profile.update_attributes(
+        birthday: birthday,
+        gender: gender
       )
     end
   end
