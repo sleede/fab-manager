@@ -1,4 +1,4 @@
 casemate:
   id: 1
   name: La Casemate
-  profile_id: 7
+  invoicing_profile_id: 7

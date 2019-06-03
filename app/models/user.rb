@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
+  has_one :invoicing_profile, dependent: :nullify
+  accepts_nested_attributes_for :invoicing_profile
+
   has_many :my_projects, foreign_key: :author_id, class_name: 'Project', dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
@@ -43,7 +46,6 @@ class User < ActiveRecord::Base
   has_many :training_credits, through: :users_credits, source: :training_credit
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
-  has_many :invoices, dependent: :destroy
   has_many :operated_invoices, foreign_key: :operator_id, class_name: 'Invoice', dependent: :nullify
 
   has_many :user_tags, dependent: :destroy
@@ -67,6 +69,7 @@ class User < ActiveRecord::Base
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_group_changed, if: :group_id_changed?
+  after_save :update_invoicing_profile
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
@@ -131,6 +134,10 @@ class User < ActiveRecord::Base
     my_projects.to_a.concat projects
   end
 
+  def invoices
+    invoicing_profile.invoices
+  end
+
   def generate_subscription_invoice(operator_id)
     return unless subscription
 
@@ -188,11 +195,11 @@ class User < ActiveRecord::Base
       when 'profile.avatar'
         profile.user_avatar.remote_attachment_url
       when 'profile.address'
-        profile.address.address
+        invoicing_profile.address.address
       when 'profile.organization_name'
-        profile.organization.name
+        invoicing_profile.organization.name
       when 'profile.organization_address'
-        profile.organization.address.address
+        invoicing_profile.organization.address.address
       else
         profile[parsed[2].to_sym]
       end
@@ -211,15 +218,15 @@ class User < ActiveRecord::Base
         profile.user_avatar ||= UserAvatar.new
         profile.user_avatar.remote_attachment_url = data
       when 'profile.address'
-        profile.address ||= Address.new
-        profile.address.address = data
+        invoicing_profile.address ||= Address.new
+        invoicing_profile.address.address = data
       when 'profile.organization_name'
-        profile.organization ||= Organization.new
-        profile.organization.name = data
+        invoicing_profile.organization ||= Organization.new
+        invoicing_profile.organization.name = data
       when 'profile.organization_address'
-        profile.organization ||= Organization.new
-        profile.organization.address ||= Address.new
-        profile.organization.address.address = data
+        invoicing_profile.organization ||= Organization.new
+        invoicing_profile.organization.address ||= Address.new
+        invoicing_profile.organization.address.address = data
       else
         profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
@@ -355,5 +362,18 @@ class User < ActiveRecord::Base
     NotificationCenter.call type: :notify_user_user_group_changed,
                             receiver: self,
                             attached_object: self
+  end
+
+  def update_invoicing_profile
+    if invoicing_profile.nil?
+      InvoicingProfile.create!(
+        user: user,
+        email: email
+      )
+    else
+      invoicing_profile.update_attributes(
+        email: email
+      )
+    end
   end
 end

@@ -18,8 +18,8 @@ class Subscription < ActiveRecord::Base
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
-  # @params [invoice] if true then subscription pay itself, dont pay with reservation
-  #                   if false then subscription pay with reservation
+  # @param invoice if true then subscription pay itself, dont pay with reservation
+  #                if false then subscription pay with reservation
   def save_with_payment(operator_id, invoice = true, coupon_code = nil)
     return unless valid?
 
@@ -127,8 +127,8 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  # @params [invoice] if true then only the subscription is payed, without reservation
-  #                   if false then the subscription is payed with reservation
+  # @param invoice if true then only the subscription is payed, without reservation
+  #                if false then the subscription is payed with reservation
   def save_with_local_payment(operator_id, invoice = true, coupon_code = nil)
     return false unless valid?
 
@@ -165,7 +165,7 @@ class Subscription < ActiveRecord::Base
       end
     end
 
-    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id, operator_id: operator_id)
+    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', invoicing_profile: user.invoicing_profile, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id, operator_id: operator_id)
     invoice.invoice_items.push InvoiceItem.new(amount: plan.amount, stp_invoice_item_id: stp_subscription_id, description: plan.name, subscription_id: self.id)
     invoice
   end
@@ -212,7 +212,7 @@ class Subscription < ActiveRecord::Base
     return false if expiration <= expired_at
 
     od = offer_days.create(start_at: expired_at, end_at: expiration)
-    invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
+    invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', invoicing_profile: user.invoicing_profile, total: 0)
     invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id)
     invoice.save
 
