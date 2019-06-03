@@ -20,7 +20,7 @@
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
-- [TODO DEPLOY] -> (only dev) yarn install 
+- [TODO DEPLOY] -> (only dev) yarn install
 
 ## v3.1.1 2019 April 8
 

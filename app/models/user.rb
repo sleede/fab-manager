@@ -52,9 +52,6 @@ class User < ActiveRecord::Base
   has_many :tags, through: :user_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
 
-  has_one :wallet, dependent: :destroy
-  has_many :wallet_transactions, dependent: :destroy
-
   has_many :exports, dependent: :destroy
 
   has_many :history_values, dependent: :nullify
@@ -65,7 +62,6 @@ class User < ActiveRecord::Base
   end
 
   before_create :assign_default_role
-  after_create :create_a_wallet
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_group_changed, if: :group_id_changed?
@@ -136,6 +132,14 @@ class User < ActiveRecord::Base
 
   def invoices
     invoicing_profile.invoices
+  end
+
+  def wallet
+    invoicing_profile.wallet
+  end
+
+  def wallet_transactions
+    invoicing_profile.wallet_transactions
   end
 
   def generate_subscription_invoice(operator_id)
@@ -326,10 +330,6 @@ class User < ActiveRecord::Base
 
   def create_stripe_customer
     StripeWorker.perform_async(:create_stripe_customer, id)
-  end
-
-  def create_a_wallet
-    create_wallet
   end
 
   def send_devise_notification(notification, *args)

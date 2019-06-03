@@ -19,7 +19,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     wallet = json_response(response.body)
-    assert_equal @vlonchamp.wallet.user_id, wallet[:user_id]
+    assert_equal @vlonchamp.wallet.invoicing_profile_id, wallet[:invoicing_profile_id]
     assert_equal @vlonchamp.wallet.amount, wallet[:amount]
   end
 
@@ -31,7 +31,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     wallet = json_response(response.body)
-    assert_equal @user1.wallet.user_id, wallet[:user_id]
+    assert_equal @user1.wallet.invoicing_profile_id, wallet[:invoicing_profile_id]
     assert_equal @user1.wallet.amount, wallet[:amount]
   end
 

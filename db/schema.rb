@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190529120814) do
+ActiveRecord::Schema.define(version: 20190603130038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -860,28 +860,28 @@ ActiveRecord::Schema.define(version: 20190529120814) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "wallet_transactions", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "wallet_id"
     t.integer  "transactable_id"
     t.string   "transactable_type"
     t.string   "transaction_type"
     t.integer  "amount"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "invoicing_profile_id"
   end
 
+  add_index "wallet_transactions", ["invoicing_profile_id"], name: "index_wallet_transactions_on_invoicing_profile_id", using: :btree
   add_index "wallet_transactions", ["transactable_type", "transactable_id"], name: "index_wallet_transactions_on_transactable", using: :btree
-  add_index "wallet_transactions", ["user_id"], name: "index_wallet_transactions_on_user_id", using: :btree
   add_index "wallet_transactions", ["wallet_id"], name: "index_wallet_transactions_on_wallet_id", using: :btree
 
   create_table "wallets", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "amount",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "amount",               default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "invoicing_profile_id"
   end
 
-  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
+  add_index "wallets", ["invoicing_profile_id"], name: "index_wallets_on_invoicing_profile_id", using: :btree
 
   add_foreign_key "accounting_periods", "users", column: "closed_by"
   add_foreign_key "availability_tags", "availabilities"
@@ -915,7 +915,7 @@ ActiveRecord::Schema.define(version: 20190529120814) do
   add_foreign_key "tickets", "reservations"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
-  add_foreign_key "wallet_transactions", "users"
+  add_foreign_key "wallet_transactions", "invoicing_profiles"
   add_foreign_key "wallet_transactions", "wallets"
-  add_foreign_key "wallets", "users"
+  add_foreign_key "wallets", "invoicing_profiles"
 end

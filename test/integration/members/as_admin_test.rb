@@ -25,6 +25,11 @@ class MembersTest < ActionDispatch::IntegrationTest
           first_name: 'Robert',
           birthday: '2018-02-08',
           phone: '0485232145'
+        },
+        invoicing_profile_attributes: {
+          address_attributes: {
+            address: '21 grand rue, 73110 Bourget-en-Huile'
+          }
         }
       } }.to_json, default_headers
     end

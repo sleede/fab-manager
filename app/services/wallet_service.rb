@@ -8,7 +8,7 @@ class WalletService
   def credit(amount)
     ActiveRecord::Base.transaction do
       if @wallet.credit(amount)
-        transaction = WalletTransaction.new(user: @user, wallet: @wallet, transaction_type: 'credit', amount: amount)
+        transaction = WalletTransaction.new(invoicing_profile: @user.invoicing_profile, wallet: @wallet, transaction_type: 'credit', amount: amount)
         if transaction.save
           NotificationCenter.call type: 'notify_user_wallet_is_credited',
                                   receiver: @wallet.user,
@@ -28,10 +28,15 @@ class WalletService
   def debit(amount, transactable)
     ActiveRecord::Base.transaction do
       if @wallet.debit(amount)
-        transaction = WalletTransaction.new(user: @user, wallet: @wallet, transaction_type: 'debit', amount: amount, transactable: transactable)
-        if transaction.save
-          return transaction
-        end
+        transaction = WalletTransaction.new(
+          invoicing_profile: @user&.invoicing_profile,
+          wallet: @wallet,
+          transaction_type: 'debit',
+          amount: amount,
+          transactable: transactable
+        )
+
+        return transaction if transaction.save
       end
       raise ActiveRecord::Rollback
     end
