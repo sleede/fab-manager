@@ -99,6 +99,18 @@ class ActiveSupport::TestCase
     else
       assert_equal invoice.total, ht_amount, 'VAT information was rendered in the PDF file despite that VAT was disabled'
     end
+
+    # check the recipient & the address
+    if invoice.invoicing_profile.organization
+      assert lines.first.include?(invoice.invoicing_profile.organization.name), 'On the PDF invoice, organization name is invalid'
+      assert invoice.invoicing_profile.organization.address.address.include?(lines[2].split('             ').last.strip), 'On the PDF invoice, organization address is invalid'
+    else
+      assert lines.first.include?(invoice.invoicing_profile.full_name), 'On the PDF invoice, customer name is invalid'
+      assert invoice.invoicing_profile.address.address.include?(lines[2].split('             ').last.strip), 'On the PDF invoice, customer address is invalid'
+    end
+    # check the email
+    assert lines[1].include?(invoice.invoicing_profile.email), 'On the PDF invoice, email is invalid'
+
     File.delete(invoice.file)
   end
 
