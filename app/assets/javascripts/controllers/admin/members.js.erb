@@ -314,15 +314,14 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // Form action on the above URL
     $scope.method = 'patch';
 
-    // List of tags associables with user
+    // List of tags joinable with user
     $scope.tags = tagsPromise;
 
     // The user to edit
     $scope.user = memberPromise;
 
-    // Should the passord be modified?
-    $scope.password =
-    { change: false };
+    // Should the password be modified?
+    $scope.password = { change: false };
 
     // the user subscription
     if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -576,22 +575,20 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Form action on the above URL
     $scope.method = 'post';
 
-    // Should the passord be set manually or generated?
-    $scope.password =
-    { change: false };
+    // Should the password be set manually or generated?
+    $scope.password = { change: false };
 
     // Default member's profile parameters
-    $scope.user =
-    { plan_interval: '' };
+    $scope.user = { plan_interval: '' };
 
-    // Callback when the admin check/unckeck the box telling that the new user is an organization.
+    // Callback when the admin check/uncheck the box telling that the new user is an organization.
     // Disable or enable the organization fields in the form, accordingly
     $scope.toggleOrganization = function () {
       if ($scope.user.organization) {
-        if (!$scope.user.profile) { $scope.user.profile = {}; }
-        return $scope.user.profile.organization = {};
+        if (!$scope.user.invoicing_profile) { $scope.user.invoicing_profile = {}; }
+        $scope.user.invoicing_profile.organization = {};
       } else {
-        return $scope.user.profile.organization = undefined;
+        $scope.user.invoicing_profile.organization = undefined;
       }
     };
 

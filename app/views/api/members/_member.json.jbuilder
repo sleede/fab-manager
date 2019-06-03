@@ -24,6 +24,7 @@ json.profile do
 end
 
 json.invoicing_profile do
+  json.id member.invoicing_profile.id
   if member.invoicing_profile.address
     json.address do
       json.id member.invoicing_profile.address.id

@@ -44,7 +44,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
         member.is_allow_newsletter,
         member.profile.gender ? t('export_members.man') : t('export_members.woman'),
         member.profile.age,
-        member.profile.address ? member.profile.address.address : '',
+        member.invoicing_profile.address ? member.invoicing_profile.address.address : '',
         member.profile.phone,
         member.profile.website,
         member.profile.job,
@@ -60,8 +60,8 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
         member.profile.facebook || '',
         member.profile.twitter || '',
         member.profile.echosciences || '',
-        member.profile.organization ? member.profile.organization.name : '',
-        member.profile.organization ? member.profile.organization.address.address : ''
+        member.invoicing_profile.organization ? member.invoicing_profile.organization.name : '',
+        member.invoicing_profile.organization ? member.invoicing_profile.organization.address.address : ''
     ]
     styles = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
 

@@ -211,6 +211,7 @@ class API::MembersController < API::ApiController
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
                                                         user_avatar_attributes: %i[id attachment destroy]],
                                    invoicing_profile_attributes: [
+                                     :id,
                                      address_attributes: %i[id address],
                                      organization_attributes: [:id, :name, address_attributes: %i[id address]]
                                    ])

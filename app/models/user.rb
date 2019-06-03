@@ -69,6 +69,7 @@ class User < ActiveRecord::Base
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_group_changed, if: :group_id_changed?
+  after_save :update_invoicing_profile
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
@@ -194,11 +195,11 @@ class User < ActiveRecord::Base
       when 'profile.avatar'
         profile.user_avatar.remote_attachment_url
       when 'profile.address'
-        profile.address.address
+        invoicing_profile.address.address
       when 'profile.organization_name'
-        profile.organization.name
+        invoicing_profile.organization.name
       when 'profile.organization_address'
-        profile.organization.address.address
+        invoicing_profile.organization.address.address
       else
         profile[parsed[2].to_sym]
       end
@@ -217,15 +218,15 @@ class User < ActiveRecord::Base
         profile.user_avatar ||= UserAvatar.new
         profile.user_avatar.remote_attachment_url = data
       when 'profile.address'
-        profile.address ||= Address.new
-        profile.address.address = data
+        invoicing_profile.address ||= Address.new
+        invoicing_profile.address.address = data
       when 'profile.organization_name'
-        profile.organization ||= Organization.new
-        profile.organization.name = data
+        invoicing_profile.organization ||= Organization.new
+        invoicing_profile.organization.name = data
       when 'profile.organization_address'
-        profile.organization ||= Organization.new
-        profile.organization.address ||= Address.new
-        profile.organization.address.address = data
+        invoicing_profile.organization ||= Organization.new
+        invoicing_profile.organization.address ||= Address.new
+        invoicing_profile.organization.address.address = data
       else
         profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
@@ -361,5 +362,18 @@ class User < ActiveRecord::Base
     NotificationCenter.call type: :notify_user_user_group_changed,
                             receiver: self,
                             attached_object: self
+  end
+
+  def update_invoicing_profile
+    if invoicing_profile.nil?
+      InvoicingProfile.create!(
+        user: user,
+        email: email
+      )
+    else
+      invoicing_profile.update_attributes(
+        email: email
+      )
+    end
   end
 end
