@@ -57,12 +57,14 @@ module Reservations
 
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
+      assert invoice.check_footprint
 
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
       assert invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount
+      assert invoice_item.check_footprint
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -159,11 +161,14 @@ module Reservations
 
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
+      assert invoice.check_footprint
+
       # invoice_items
       invoice_item = InvoiceItem.last
 
       assert invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, training.amount_by_group(@user_without_subscription.group_id).amount
+      assert invoice_item.check_footprint
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -230,6 +235,7 @@ module Reservations
 
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
+      assert invoice.check_footprint
 
       # invoice_items assertions
       invoice_items = InvoiceItem.last(2)
@@ -238,6 +244,7 @@ module Reservations
       assert(invoice_items.any? { |inv| inv.amount.zero? })
       assert(invoice_items.any? { |inv| inv.amount == machine_price })
       assert(invoice_items.all?(&:stp_invoice_item_id))
+      assert(invoice_items.all?(&:check_footprint))
 
       # users_credits assertions
       users_credit = UsersCredit.last
@@ -304,11 +311,14 @@ module Reservations
 
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
+      assert invoice.check_footprint
+
       # invoice_items
       invoice_item = InvoiceItem.last
 
       assert invoice_item.stp_invoice_item_id
       assert_equal 0, invoice_item.amount # amount is 0 because this training is a credited training with that plan
+      assert invoice_item.check_footprint
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -374,12 +384,14 @@ module Reservations
 
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
+      assert invoice.check_footprint
 
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
       assert invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount
+      assert invoice_item.check_footprint
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -452,6 +464,7 @@ module Reservations
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
       assert_equal invoice.total, 2000
+      assert invoice.check_footprint
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)
@@ -527,6 +540,7 @@ module Reservations
 
       refute invoice.stp_invoice_id.blank?
       refute invoice.total.blank?
+      assert invoice.check_footprint
 
       # invoice_items assertions
       ## reservation
@@ -535,6 +549,7 @@ module Reservations
       assert_not_nil reservation_item
       assert reservation_item.stp_invoice_item_id
       assert_equal reservation_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: plan.id).amount
+      assert reservation_item.check_footprint
       ## subscription
       subscription_item = invoice.invoice_items.where.not(subscription_id: nil).first
 
@@ -545,6 +560,7 @@ module Reservations
       assert subscription_item.stp_invoice_item_id
       assert_equal subscription_item.amount, plan.amount
       assert_equal subscription.plan_id, plan.id
+      assert subscription_item.check_footprint
 
       # invoice assertions
       invoice = Invoice.find_by(invoiced: reservation)

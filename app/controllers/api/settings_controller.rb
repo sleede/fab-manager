@@ -11,7 +11,7 @@ class API::SettingsController < API::ApiController
   def update
     authorize Setting
     @setting = Setting.find_or_initialize_by(name: params[:name])
-    if @setting.save && @setting.history_values.create(value: setting_params[:value], user: current_user)
+    if @setting.save && @setting.history_values.create(value: setting_params[:value], invoicing_profile: current_user.invoicing_profile)
       render status: :ok
     else
       render json: @setting.errors.full_messages, status: :unprocessable_entity

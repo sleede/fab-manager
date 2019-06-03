@@ -3,10 +3,10 @@ json.setting do
   if @show_history
     json.history @setting.history_values do |value|
       json.extract! value, :id, :value, :created_at
-      unless value.user_id.nil?
+      unless value.invoicing_profile.nil?
         json.user do
-          json.id value.user_id
-          json.name "#{value.user.first_name} #{value.user.last_name}"
+          json.id value.invoicing_profile.user_id
+          json.name value.invoicing_profile.full_name
         end
       end
     end

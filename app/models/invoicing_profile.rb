@@ -9,6 +9,8 @@ class InvoicingProfile < ActiveRecord::Base
   has_one :wallet, dependent: :destroy
   has_many :wallet_transactions, dependent: :destroy
 
+  has_many :history_values, dependent: :nullify
+
   after_create :create_a_wallet
 
 

@@ -68,6 +68,6 @@ class Setting < ActiveRecord::Base
 
   def value=(val)
     admin = User.admins.first
-    save && history_values.create(user: admin, value: val)
+    save && history_values.create(invoicing_profile: admin.invoicing_profile, value: val)
   end
 end

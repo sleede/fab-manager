@@ -5,7 +5,7 @@ require 'checksum'
 # Setting values, kept history of modifications
 class HistoryValue < ActiveRecord::Base
   belongs_to :setting
-  belongs_to :user
+  belongs_to :invoicing_profile
 
   after_create :chain_record
 
@@ -16,6 +16,10 @@ class HistoryValue < ActiveRecord::Base
 
   def check_footprint
     footprint == compute_footprint
+  end
+
+  def user
+    invoicing_profile.user
   end
 
   private
