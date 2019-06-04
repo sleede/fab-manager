@@ -6,9 +6,10 @@ class Members::ListService
     def list(params)
       @query = User.includes(:profile, :group, :subscriptions)
                    .joins(:profile,
+                          :statistic_profile,
                           :group,
                           :roles,
-                          'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id" ' \
+                          'LEFT JOIN "subscriptions" ON "subscriptions"."statistic_profile_id" = "statistic_profiles"."id" ' \
                           'LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
                    .where("users.is_active = 'true' AND roles.name = 'member'")
                    .order(list_order(params))
@@ -31,12 +32,13 @@ class Members::ListService
     def search(current_user, query, subscription)
       members = User.includes(:profile)
                     .joins(:profile,
+                           :statistic_profile,
                            :roles,
-                           'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id" AND ' \
+                           'LEFT JOIN "subscriptions" ON "subscriptions"."statistic_profile_id" = "statistic_profiles"."id" AND ' \
                            '"subscriptions"."created_at" = ( ' \
                              'SELECT max("created_at") ' \
                              'FROM "subscriptions" ' \
-                             'WHERE "user_id" = "users"."id")')
+                             'WHERE "statistic_profile_id" = "statistic_profiles"."id")')
                     .where("users.is_active = 'true' AND roles.name = 'member'")
                     .limit(50)
       query.downcase.split(' ').each do |word|

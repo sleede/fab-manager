@@ -9,6 +9,12 @@ class StatisticProfile < ActiveRecord::Base
   belongs_to :group
 
   # relations to reservations, trainings, subscriptions
+  has_many :subscriptions, dependent: :destroy
+  accepts_nested_attributes_for :subscriptions, allow_destroy: false
+
+  has_many :reservations, dependent: :destroy
+  accepts_nested_attributes_for :reservations, allow_destroy: false
+
   def str_gender
     gender ? 'male' : 'female'
   end

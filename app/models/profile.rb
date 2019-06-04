@@ -12,7 +12,7 @@ class Profile < ActiveRecord::Base
   validates :last_name, presence: true, length: { maximum: 30 }
   validates_numericality_of :phone, only_integer: true, allow_blank: false
 
-  after_save :update_invoicing_profile, if: :invoicing_data_was_modified?
+  after_commit :update_invoicing_profile, if: :invoicing_data_was_modified?, on: [:update]
 
   def full_name
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
@@ -41,18 +41,12 @@ class Profile < ActiveRecord::Base
   end
 
   def update_invoicing_profile
-    if user.invoicing_profile.nil?
-      InvoicingProfile.create!(
-        user: user,
-        first_name: first_name,
-        last_name: last_name
-      )
-    else
-      user.invoicing_profile.update_attributes(
-        first_name: first_name,
-        last_name: last_name
-      )
-    end
+    raise NoProfileError if user.invoicing_profile.nil?
+
+    user.invoicing_profile.update_attributes(
+      first_name: first_name,
+      last_name: last_name
+    )
   end
 
 end

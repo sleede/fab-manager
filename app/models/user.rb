@@ -31,17 +31,11 @@ class User < ActiveRecord::Base
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
 
-  has_many :reservations, dependent: :destroy
-  accepts_nested_attributes_for :reservations, allow_destroy: true
-
   # Trainings that were already passed
   has_many :user_trainings, dependent: :destroy
   has_many :trainings, through: :user_trainings
 
   belongs_to :group
-
-  has_many :subscriptions, dependent: :destroy
-  accepts_nested_attributes_for :subscriptions, allow_destroy: true
 
   has_many :users_credits, dependent: :destroy
   has_many :credits, through: :users_credits
@@ -65,21 +59,27 @@ class User < ActiveRecord::Base
   before_create :assign_default_role
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
+  after_create :init_dependencies
   after_update :notify_group_changed, if: :group_id_changed?
-  after_save :update_invoicing_profile, if: :invoicing_data_was_modified?
-  after_save :update_statistic_profile, if: :statistic_data_was_modified?
+  after_commit :update_invoicing_profile, if: :invoicing_data_was_modified?, on: [:update]
+  after_commit :update_statistic_profile, if: :statistic_data_was_modified?, on: [:update]
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
   delegate :last_name, to: :profile
+  delegate :subscriptions, to: :statistic_profile
+  delegate :reservations, to: :statistic_profile
+  delegate :wallet, to: :invoicing_profile
+  delegate :wallet_transactions, to: :invoicing_profile
+  delegate :invoices, to: :invoicing_profile
 
   validate :cgu_must_accept, if: :new_record?
 
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
 
   scope :active, -> { where(is_active: true) }
-  scope :without_subscription, -> { includes(:subscriptions).where(subscriptions: { user_id: nil }) }
-  scope :with_subscription, -> { joins(:subscriptions) }
+  scope :without_subscription, -> { includes(statistic_profile: [:subscriptions]).where(subscriptions: { statistic_profile_id: nil }) }
+  scope :with_subscription, -> { joins(statistic_profile: [:subscriptions]) }
 
   def to_json(*)
     ApplicationController.new.view_context.render(
@@ -130,18 +130,6 @@ class User < ActiveRecord::Base
 
   def all_projects
     my_projects.to_a.concat projects
-  end
-
-  def invoices
-    invoicing_profile.invoices
-  end
-
-  def wallet
-    invoicing_profile.wallet
-  end
-
-  def wallet_transactions
-    invoicing_profile.wallet_transactions
   end
 
   def generate_subscription_invoice(operator_id)
@@ -363,36 +351,42 @@ class User < ActiveRecord::Base
   end
 
   def invoicing_data_was_modified?
-    email_changed? or new_record?
+    email_changed?
   end
 
   def statistic_data_was_modified?
-    group_id_changed? or new_record?
+    group_id_changed?
+  end
+
+  def init_dependencies
+    ip = InvoicingProfile.create!(
+      user: self,
+      email: email,
+      first_name: first_name,
+      last_name: last_name
+    )
+    Wallet.create!(
+      invoicing_profile: ip
+    )
+    StatisticProfile.create!(
+      user: self,
+      group_id: group_id
+    )
   end
 
   def update_invoicing_profile
-    if invoicing_profile.nil?
-      InvoicingProfile.create!(
-        user: self,
-        email: email
-      )
-    else
-      invoicing_profile.update_attributes(
-        email: email
-      )
-    end
+    raise NoProfileError if user.invoicing_profile.nil?
+
+    invoicing_profile.update_attributes(
+      email: email
+    )
   end
 
   def update_statistic_profile
-    if statistic_profile.nil?
-      StatisticProfile.create!(
-        user: self,
-        group_id: group_id
-      )
-    else
-      statistic_profile.update_attributes(
-        group_id: group_id
-      )
-    end
+    raise NoProfileError if user.statistic_profile.nil?
+
+    statistic_profile.update_attributes(
+      group_id: group_id
+    )
   end
 end

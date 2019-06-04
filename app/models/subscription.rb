@@ -2,7 +2,7 @@ class Subscription < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :plan
-  belongs_to :user
+  belongs_to :statistic_profile
 
   has_many :invoices, as: :invoiced, dependent: :destroy
   has_many :offer_days, dependent: :destroy
@@ -221,6 +221,10 @@ class Subscription < ActiveRecord::Base
       return true
     end
     false
+  end
+
+  def user
+    statistic_profile.user
   end
 
   private

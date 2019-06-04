@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Subscriptions
   class CreateAsAdminTest < ActionDispatch::IntegrationTest
 
@@ -7,11 +9,11 @@ module Subscriptions
       login_as(@admin, scope: :user)
     end
 
-    test "admin successfully takes a subscription for a user" do
+    test 'admin successfully takes a subscription for a user' do
       user = User.find_by(username: 'jdupond')
       plan = Plan.find_by(group_id: user.group.id, type: 'Plan', base_name: 'Mensuel')
 
-      VCR.use_cassette("subscriptions_admin_create_success") do
+      VCR.use_cassette('subscriptions_admin_create_success') do
         post '/api/subscriptions',
              {
                subscription: {

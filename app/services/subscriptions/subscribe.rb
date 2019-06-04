@@ -4,13 +4,15 @@
 class Subscriptions::Subscribe
   attr_accessor :user_id, :operator_id
 
-  def initialize(user_id, operator_id)
+  def initialize(operator_id, user_id = nil)
     @user_id = user_id
     @operator_id = operator_id
   end
 
   def pay_and_save(subscription, payment_method, coupon, invoice)
-    subscription.user_id = user_id
+    return false if user_id.nil?
+
+    subscription.statistic_profile_id = User.find(user_id).statistic_profile.id
     if payment_method == :local
       subscription.save_with_local_payment(operator_id, invoice, coupon)
     elsif payment_method == :stripe
@@ -23,7 +25,7 @@ class Subscriptions::Subscribe
 
     new_sub = Subscription.create(
       plan_id: subscription.plan_id,
-      user_id: subscription.user_id,
+      statistic_profile_id: subscription.statistic_profile_id,
       expiration_date: new_expiration_date
     )
     if new_sub.save
