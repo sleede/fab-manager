@@ -356,8 +356,8 @@ class StatisticService
   def user_info(user)
     {
       user_id: user.id,
-      gender: user.profile.str_gender,
-      age: user.profile.age,
+      gender: user.statistic_profile.str_gender,
+      age: user.statistic_profile.age,
       group: user.group ? user.group.slug : nil,
       email: user.email
     }

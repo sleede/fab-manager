@@ -20,16 +20,18 @@ class MembersTest < ActionDispatch::IntegrationTest
         email: email,
         group_id: group_id,
         profile_attributes: {
-          gender: true,
           last_name: 'Dubois',
           first_name: 'Robert',
-          birthday: '2018-02-08',
           phone: '0485232145'
         },
         invoicing_profile_attributes: {
           address_attributes: {
             address: '21 grand rue, 73110 Bourget-en-Huile'
           }
+        },
+        statistic_profile_attributes: {
+          gender: true,
+          birthday: '2018-02-08'
         }
       } }.to_json, default_headers
     end

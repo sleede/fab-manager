@@ -536,7 +536,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate();
+      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
 
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -604,9 +604,10 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
   // default admin profile
   let getGender;
   $scope.admin = {
-    profile_attributes: {
+    statistic_profile_attributes: {
       gender: true
     },
+    profile_attributes: {},
     invoicing_profile_attributes: {}
   };
 
@@ -650,8 +651,8 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
    * @return {string} 'male' or 'female'
    */
   return getGender = function (user) {
-    if (user.profile_attributes) {
-      if (user.profile_attributes.gender) { return 'male'; } else { return 'female'; }
+    if (user.statistic_profile_attributes) {
+      if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
     } else { return 'other'; }
   };
 }

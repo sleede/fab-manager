@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
   after_update :notify_group_changed, if: :group_id_changed?
-  after_save :update_invoicing_profile, if: invoicing_data_was_modified?
-  after_save :update_statistic_profile, if: statistic_data_was_modified?
+  after_save :update_invoicing_profile, if: :invoicing_data_was_modified?
+  after_save :update_statistic_profile, if: :statistic_data_was_modified?
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
@@ -170,9 +170,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     active_provider = AuthProvider.active
-    if active_provider.strategy_name != auth.provider
-      raise SecurityError, 'The identity provider does not match the activated one'
-    end
+    raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
     where(provider: auth.provider, uid: auth.uid).first_or_create.tap do |user|
       # execute this regardless of whether record exists or not (-> User#tap)
@@ -186,8 +184,8 @@ class User < ActiveRecord::Base
   end
 
   def need_completion?
-    profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
-      email.blank? || encrypted_password.blank? || group_id.nil? || profile.birthday.blank? || profile.phone.blank?
+    statistic_profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
+      email.blank? || encrypted_password.blank? || group_id.nil? || statistic_profile.birthday.blank? || profile.phone.blank?
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
@@ -248,9 +246,7 @@ class User < ActiveRecord::Base
   ## and remove the auth_token to mark his account as "migrated"
   def link_with_omniauth_provider(auth)
     active_provider = AuthProvider.active
-    if active_provider.strategy_name != auth.provider
-      raise SecurityError, 'The identity provider does not match the activated one'
-    end
+    raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
     if User.where(provider: auth.provider, uid: auth.uid).size.positive?
       raise DuplicateIndexError, "This #{active_provider.name} account is already linked to an existing user"
@@ -373,7 +369,6 @@ class User < ActiveRecord::Base
   def statistic_data_was_modified?
     group_id_changed? or new_record?
   end
-
 
   def update_invoicing_profile
     if invoicing_profile.nil?

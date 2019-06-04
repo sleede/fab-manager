@@ -258,7 +258,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate();
+      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
 
       if ($scope.activeProvider.providable_type !== 'DatabaseProvider') {
         $scope.preventPassword = true;

@@ -86,6 +86,7 @@ en:
         i_ve_read_and_i_accept_: "I've read and I accept"
         _the_fablab_policy: "the FabLab policy"
         field_required: "Field required"
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
 
         # password modification modal
         change_your_password: "Change your password"

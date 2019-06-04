@@ -85,7 +85,8 @@ pt:
           i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
           i_ve_read_and_i_accept_: "Eu li e aceito"
           _the_fablab_policy: "a política do FabLab"
-          field_required: "Field required"                                     #translation_missing
+          field_required: "Field required"                                                   # translation missing
+          unexpected_error_occurred: "An unexpected error occurred. Please try again later." # translation missing
 
           # password modification modal
           change_your_password: "Mudar sua senha"

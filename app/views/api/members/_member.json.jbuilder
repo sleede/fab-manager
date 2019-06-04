@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.extract! member, :id, :username, :email, :group_id
 json.role member.roles.first.name
 json.name member.profile.full_name
@@ -13,8 +15,6 @@ json.profile do
   end
   json.first_name member.profile.first_name
   json.last_name member.profile.last_name
-  json.gender member.profile.gender.to_s
-  json.birthday member.profile.birthday.to_date.iso8601 if member.profile.birthday
   json.interest member.profile.interest
   json.software_mastered member.profile.software_mastered
   json.phone member.profile.phone
@@ -44,6 +44,11 @@ json.invoicing_profile do
       end
     end
   end
+end
+
+json.statistic_profile do
+  json.gender member.statistic_profile.gender.to_s
+  json.birthday member.statistic_profile&.birthday&.to_date&.iso8601
 end
 
 if member.subscribed_plan

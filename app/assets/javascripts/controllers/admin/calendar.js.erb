@@ -264,8 +264,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * @return {string} 'male' or 'female'
      */
     var getGender = function (user) {
-      if (user.profile) {
-        if (user.profile.gender === 'true') { return 'male'; } else { return 'female'; }
+      if (user.statistic_profile) {
+        if (user.statistic_profile.gender === 'true') { return 'male'; } else { return 'female'; }
       } else { return 'other'; }
     };
 

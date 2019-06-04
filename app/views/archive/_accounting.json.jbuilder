@@ -14,10 +14,14 @@ json.invoices do
       end
     end
     json.user do
-      json.extract! invoice[:invoice].user, :id, :email, :created_at
-      json.profile do
-        json.extract! invoice[:invoice].user.profile, :id, :first_name, :last_name, :birthday, :phone
-        json.gender invoice[:invoice].user.profile.gender ? 'male' : 'female'
+      json.extract! invoice[:invoice].invoicing_profile, :user_id, :email, :first_name, :last_name
+      json.address invoice[:invoice].invoicing_profile&.address&.address
+      json.invoicing_profile_id invoice[:invoice].invoicing_profile.id
+      if invoice[:invoice].invoicing_profile.organization
+        json.organization do
+          json.extract! invoice[:invoice].invoicing_profile.organization, :name, :id
+          json.address invoice[:invoice].invoicing_profile.organization&.address&.address
+        end
       end
     end
     json.invoice_items invoice[:invoice].invoice_items do |item|
