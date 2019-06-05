@@ -373,12 +373,14 @@ class User < ActiveRecord::Base
         invoicing_profile: ip
       )
     end
-    return unless statistic_profile.nil?
-
-    StatisticProfile.create!(
-      user: self,
-      group_id: group_id
-    )
+    if statistic_profile.nil?
+      StatisticProfile.create!(
+        user: self,
+        group_id: group_id
+      )
+    else
+      update_statistic_profile
+    end
   end
 
   def update_invoicing_profile
