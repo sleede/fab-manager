@@ -31,10 +31,6 @@ class User < ActiveRecord::Base
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
 
-  # Trainings that were already passed
-  has_many :user_trainings, dependent: :destroy
-  has_many :trainings, through: :user_trainings
-
   belongs_to :group
 
   has_many :users_credits, dependent: :destroy
