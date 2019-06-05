@@ -1,7 +1,7 @@
 class Reservation < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
-  belongs_to :user
+  belongs_to :statistic_profile
 
   has_many :slots_reservations, dependent: :destroy
   has_many :slots, through: :slots_reservations
@@ -240,8 +240,8 @@ class Reservation < ActiveRecord::Base
     # TODO: refactoring
     customer = Stripe::Customer.retrieve(user.stp_customer_id)
     if plan_id
-      self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
-      subscription.attributes = { plan_id: plan_id, user_id: user.id, card_token: card_token, expiration_date: nil }
+      self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
+      subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, card_token: card_token, expiration_date: nil }
       if subscription.save_with_payment(operator_id, false)
         self.stp_invoice_id = invoice_items.first.refresh.invoice
         invoice.stp_invoice_id = invoice_items.first.refresh.invoice
@@ -338,8 +338,8 @@ class Reservation < ActiveRecord::Base
   end
 
   # check reservation amount total and strip invoice total to pay is equal
-  # @params stp_invoice[Stripe::Invoice]
-  # @params coupon_code[String]
+  # @param stp_invoice[Stripe::Invoice]
+  # @param coupon_code[String]
   # return Boolean
   def is_equal_reservation_total_and_stp_invoice_total(stp_invoice, coupon_code = nil)
     compute_amount_total_to_pay(coupon_code) == stp_invoice.total
@@ -375,8 +375,8 @@ class Reservation < ActiveRecord::Base
     return false unless valid?
 
     if plan_id
-      self.subscription = Subscription.find_or_initialize_by(user_id: user.id)
-      subscription.attributes = { plan_id: plan_id, user_id: user.id, expiration_date: nil }
+      self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
+      subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil }
       if subscription.save_with_local_payment(operator_id, false)
         invoice.invoice_items.push InvoiceItem.new(
           amount: subscription.plan.amount,
@@ -403,6 +403,10 @@ class Reservation < ActiveRecord::Base
     total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
 
     total
+  end
+
+  def user
+    statistic_profile.user
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190603141109) do
+ActiveRecord::Schema.define(version: 20190604075717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -447,8 +447,6 @@ ActiveRecord::Schema.define(version: 20190603141109) do
     t.integer  "user_id"
     t.string   "first_name",        limit: 255
     t.string   "last_name",         limit: 255
-    t.boolean  "gender"
-    t.date     "birthday"
     t.string   "phone",             limit: 255
     t.text     "interest"
     t.text     "software_mastered"
@@ -545,19 +543,19 @@ ActiveRecord::Schema.define(version: 20190603141109) do
   add_index "projects_themes", ["theme_id"], name: "index_projects_themes_on_theme_id", using: :btree
 
   create_table "reservations", force: :cascade do |t|
-    t.integer  "user_id"
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "reservable_id"
-    t.string   "reservable_type",   limit: 255
-    t.string   "stp_invoice_id",    limit: 255
+    t.string   "reservable_type",      limit: 255
+    t.string   "stp_invoice_id",       limit: 255
     t.integer  "nb_reserve_places"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "reservations", ["reservable_id", "reservable_type"], name: "index_reservations_on_reservable_id_and_reservable_type", using: :btree
+  add_index "reservations", ["statistic_profile_id"], name: "index_reservations_on_statistic_profile_id", using: :btree
   add_index "reservations", ["stp_invoice_id"], name: "index_reservations_on_stp_invoice_id", using: :btree
-  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -664,6 +662,16 @@ ActiveRecord::Schema.define(version: 20190603141109) do
     t.boolean  "ca",                      default: true
   end
 
+  create_table "statistic_profiles", force: :cascade do |t|
+    t.boolean "gender"
+    t.date    "birthday"
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  add_index "statistic_profiles", ["group_id"], name: "index_statistic_profiles_on_group_id", using: :btree
+  add_index "statistic_profiles", ["user_id"], name: "index_statistic_profiles_on_user_id", using: :btree
+
   create_table "statistic_sub_types", force: :cascade do |t|
     t.string   "key",        limit: 255
     t.string   "label",      limit: 255
@@ -701,16 +709,16 @@ ActiveRecord::Schema.define(version: 20190603141109) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "plan_id"
-    t.integer  "user_id"
-    t.string   "stp_subscription_id", limit: 255
+    t.string   "stp_subscription_id",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expiration_date"
     t.datetime "canceled_at"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+  add_index "subscriptions", ["statistic_profile_id"], name: "index_subscriptions_on_statistic_profile_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -906,11 +914,15 @@ ActiveRecord::Schema.define(version: 20190603141109) do
   add_foreign_key "prices", "plans"
   add_foreign_key "projects_spaces", "projects"
   add_foreign_key "projects_spaces", "spaces"
+  add_foreign_key "reservations", "statistic_profiles"
   add_foreign_key "slots_reservations", "reservations"
   add_foreign_key "slots_reservations", "slots"
   add_foreign_key "spaces_availabilities", "availabilities"
   add_foreign_key "spaces_availabilities", "spaces"
   add_foreign_key "statistic_custom_aggregations", "statistic_types"
+  add_foreign_key "statistic_profiles", "groups"
+  add_foreign_key "statistic_profiles", "users"
+  add_foreign_key "subscriptions", "statistic_profiles"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"
   add_foreign_key "user_tags", "tags"

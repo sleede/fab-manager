@@ -23,7 +23,7 @@ class API::ReservationsController < API::ApiController
 
   def create
     method = current_user.admin? ? :local : :stripe
-    user_id = current_user.admin? ? reservation_params[:user_id] : current_user.id
+    user_id = current_user.admin? ? params[:reservation][:user_id] : current_user.id
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.id)
@@ -56,8 +56,7 @@ class API::ReservationsController < API::ApiController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:user_id, :message, :reservable_id, :reservable_type, :card_token, :plan_id,
-                                        :nb_reserve_places,
+    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :card_token, :plan_id, :nb_reserve_places,
                                         tickets_attributes: %i[event_price_category_id booked],
                                         slots_attributes: %i[id start_at end_at availability_id offered])
   end

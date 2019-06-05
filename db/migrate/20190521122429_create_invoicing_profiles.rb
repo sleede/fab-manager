@@ -11,5 +11,8 @@ class CreateInvoicingProfiles < ActiveRecord::Migration
 
     add_reference :organizations, :invoicing_profile, index: true, foreign_key: true
     add_reference :invoices, :invoicing_profile, index: true, foreign_key: true
+    add_reference :wallets, :invoicing_profile, index: true, foreign_key: true
+    add_reference :wallet_transactions, :invoicing_profile, index: true, foreign_key: true
+    add_reference :history_values, :invoicing_profile, index: true, foreign_key: true
   end
 end

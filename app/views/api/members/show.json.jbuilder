@@ -39,13 +39,15 @@ json.all_projects @member.all_projects do |project|
       json.first_name pu.user.profile.first_name
       json.last_name pu.user.profile.last_name
       json.full_name pu.user.profile.full_name
-      json.user_avatar do
-        json.id pu.user.profile.user_avatar.id
-        json.attachment_url pu.user.profile.user_avatar.attachment_url
-      end if pu.user.profile.user_avatar
+      if pu.user.profile.user_avatar
+        json.user_avatar do
+          json.id pu.user.profile.user_avatar.id
+          json.attachment_url pu.user.profile.user_avatar.attachment_url
+        end
+      end
       json.username pu.user.username
       json.is_valid pu.is_valid
-      json.valid_token pu.valid_token if !pu.is_valid and @member == pu.user
+      json.valid_token pu.valid_token if !pu.is_valid && @member == pu.user
     end
   end
 end

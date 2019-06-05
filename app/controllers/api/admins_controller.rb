@@ -11,24 +11,13 @@ class API::AdminsController < API::ApiController
 
   def create
     authorize :admin
-    generated_password = Devise.friendly_token.first(8)
-    @admin = User.new(admin_params.merge(password: generated_password))
-    @admin.send :set_slug
+    res = UserService.create_admin(admin_params)
 
-    # we associate the admin group to prevent linking any other 'normal' group (which won't be deletable afterwards)
-    @admin.group = Group.find_by(slug: 'admins')
-
-    # if the authentication is made through an SSO, generate a migration token
-    @admin.generate_auth_migration_token unless AuthProvider.active.providable_type == DatabaseProvider.name
-
-    if @admin.save(validate: false)
-      @admin.send_confirmation_instructions
-      @admin.add_role(:admin)
-      @admin.remove_role(:member)
-      UsersMailer.delay.notify_user_account_created(@admin, generated_password)
+    if res[:saved]
+      @admin = res[:user]
       render :create, status: :created
     else
-      render json: @admin.errors.full_messages, status: :unprocessable_entity
+      render json: res[:user].errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -47,8 +36,9 @@ class API::AdminsController < API::ApiController
   def admin_params
     params.require(:admin).permit(
       :username, :email,
-      profile_attributes: %i[first_name last_name gender birthday phone],
-      invoicing_profile_attributes: [address_attributes: [:address]]
+      profile_attributes: %i[first_name last_name phone],
+      invoicing_profile_attributes: [address_attributes: [:address]],
+      statistic_profile_attributes: %i[gender birthday]
     )
   end
 end

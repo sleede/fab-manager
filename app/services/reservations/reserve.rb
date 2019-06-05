@@ -10,7 +10,7 @@ class Reservations::Reserve
   end
 
   def pay_and_save(reservation, payment_method, coupon)
-    reservation.user_id = user_id
+    reservation.statistic_profile_id = User.find(user_id).statistic_profile.id
     if payment_method == :local
       reservation.save_with_local_payment(operator_id, coupon)
     elsif payment_method == :stripe

@@ -16,10 +16,10 @@ class API::SubscriptionsController < API::ApiController
       head 403
     else
       method = current_user.admin? ? :local : :stripe
-      user_id = current_user.admin? ? subscription_params[:user_id] : current_user.id
+      user_id = current_user.admin? ? params[:subscription][:user_id] : current_user.id
 
       @subscription = Subscription.new(subscription_params)
-      is_subscribe = Subscriptions::Subscribe.new(user_id, current_user.id)
+      is_subscribe = Subscriptions::Subscribe.new(current_user.id, user_id)
                                              .pay_and_save(@subscription, method, coupon_params[:coupon_code], true)
 
       if is_subscribe
@@ -35,7 +35,7 @@ class API::SubscriptionsController < API::ApiController
 
     free_days = params[:subscription][:free] || false
 
-    res = Subscriptions::Subscribe.new(@subscription.user_id, current_user.id)
+    res = Subscriptions::Subscribe.new(current_user.id)
                                   .extend_subscription(@subscription, subscription_update_params[:expired_at], free_days)
     if res.is_a?(Subscription)
       @subscription = res
@@ -56,7 +56,7 @@ class API::SubscriptionsController < API::ApiController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def subscription_params
-    params.require(:subscription).permit(:plan_id, :user_id, :card_token)
+    params.require(:subscription).permit(:plan_id, :card_token)
   end
 
   def coupon_params

@@ -8,14 +8,14 @@ class SubscriptionExtensionAfterReservationTest < ActiveSupport::TestCase
     @plan = Plan.find(3)
     @plan.update!(is_rolling: true)
 
-    @user = User.joins(:subscriptions).find_by(subscriptions: { plan: @plan })
+    @user = User.joins(statistic_profile: [:subscriptions]).find_by(subscriptions: { plan_id: @plan.id })
 
     @user.reservations.destroy_all # ensure no reservations
 
     @availability = @machine.availabilities.first
     slot = Slot.new(start_at: @availability.start_at, end_at: @availability.end_at, availability_id: @availability.id)
-    @reservation_machine = Reservation.new(user: @user, reservable: @machine, slots: [slot])
-    @reservation_training = Reservation.new(user: @user, reservable: @training, slots: [slot])
+    @reservation_machine = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @machine, slots: [slot])
+    @reservation_training = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @training, slots: [slot])
     @reservation_training.save!
   end
 

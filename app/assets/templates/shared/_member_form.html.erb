@@ -3,6 +3,7 @@
 <input name="_method" type="hidden" ng-value="method">
 <input name="user[profile_attributes][id]" type="hidden" ng-value="user.profile.id">
 <input name="user[invoicing_profile_attributes][id]" type="hidden" ng-value="user.invoicing_profile.id">
+<input name="user[statistic_profile_attributes][id]" type="hidden" ng-value="user.statistic_profile.id">
 
 <div class="row m-t">
     <div class="col-sm-3 col-sm-offset-1">
@@ -38,27 +39,27 @@
     </div>
     <div class="col-sm-offset-1 col-sm-6">
 
-      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$invalid}">
+      <div class="form-group" ng-class="{'has-error': userForm['user[statistic_profile_attributes][gender]'].$dirty && userForm['user[statistic_profile_attributes][gender]'].$invalid}">
           <label class="checkbox-inline btn btn-default">
             <input type="radio"
-                   name="user[profile_attributes][gender]"
-                   ng-model="user.profile.gender"
+                   name="user[statistic_profile_attributes][gender]"
+                   ng-model="user.statistic_profile.gender"
                    value="true"
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"
                    required/>
               <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
           </label>
           <label class="checkbox-inline btn btn-default">
             <input type="radio"
-                   name="user[profile_attributes][gender]"
-                   ng-model="user.profile.gender"
+                   name="user[statistic_profile_attributes][gender]"
+                   ng-model="user.statistic_profile.gender"
                    value="false"
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
         <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
 
-        <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[statistic_profile_attributes][gender]'].$dirty && userForm['user[statistic_profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
       </div>
 
 
@@ -200,25 +201,25 @@
         <span class="help-block" ng-show="userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$error.required" translate>{{ 'organization_address_is_required' }}</span>
       </div>
 
-      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$invalid}">
+      <div class="form-group" ng-class="{'has-error': userForm['user[statistic_profile_attributes][birthday]'].$dirty && userForm['user[statistic_profile_attributes][birthday]'].$invalid}">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-calendar-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  id="user_birthday"
                  class="form-control"
-                 ng-model="user.profile.birthday"
+                 ng-model="user.statistic_profile.birthday"
                  uib-datepicker-popup="{{datePicker.format}}"
                  datepicker-options="datePicker.options"
                  is-open="datePicker.opened"
                  placeholder="{{ 'date_of_birth' | translate }}"
                  ng-click="openDatePicker($event)"
-                 ng-disabled="preventField['profile.birthday'] && user.profile.birthday && !userForm['user[profile_attributes][birthday]'].$dirty"
+                 ng-disabled="preventField['profile.birthday'] && user.statistic_profile.birthday && !userForm['user[statistic_profile_attributes][birthday]'].$dirty"
                  required/>
           <input type="hidden"
-                 name="user[profile_attributes][birthday]"
-                 value="{{user.profile.birthday | toIsoDate}}" />
+                 name="user[statistic_profile_attributes][birthday]"
+                 value="{{user.statistic_profile.birthday | toIsoDate}}" />
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[statistic_profile_attributes][birthday]'].$dirty && userForm['user[statistic_profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
       </div>
 
       <div class="form-group">

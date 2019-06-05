@@ -7,12 +7,14 @@ Rails.application.routes.draw do
 
   if AuthProvider.active.providable_type == DatabaseProvider.name
     # with local authentification we do not use omniAuth so we must differentiate the config
-    devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions',
-                                     confirmations: 'confirmations', passwords: 'passwords'}
+    devise_for :users, controllers: {
+      registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords'
+    }
   else
-    devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions',
-                                     confirmations: 'confirmations', passwords: 'passwords',
-                                     :omniauth_callbacks => 'users/omniauth_callbacks'}
+    devise_for :users, controllers: {
+      registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords',
+      omniauth_callbacks: 'users/omniauth_callbacks'
+    }
   end
 
 

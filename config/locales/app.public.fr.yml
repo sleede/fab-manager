@@ -86,6 +86,7 @@ fr:
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
         field_required: "Champ requis"
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
 
         # fenêtre de changement de mot de passe
         change_your_password: "Modifier votre mot de passe"

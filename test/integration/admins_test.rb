@@ -23,14 +23,16 @@ class AdminsTest < ActionDispatch::IntegrationTest
              profile_attributes: {
                first_name: 'Gérard',
                last_name: 'Lepower',
-               gender: true,
-               birthday: '1999-09-19',
-               phone: '0547124852',
+               phone: '0547124852'
              },
              invoicing_profile_attributes: {
                address_attributes: {
                  address: '6 Avenue Henri de Bournazel, 19000 Tulle'
                }
+             },
+             statistic_profile_attributes: {
+               gender: true,
+               birthday: '1999-09-19'
              }
            }
          }.to_json,

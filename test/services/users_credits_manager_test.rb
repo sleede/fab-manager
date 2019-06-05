@@ -5,11 +5,11 @@ class UsersCreditsManagerTest < ActiveSupport::TestCase
     @machine = Machine.find(6)
     @training = Training.find(2)
     @plan = Plan.find(3)
-    @user = User.joins(:subscriptions).find_by(subscriptions: { plan: @plan })
+    @user = User.joins(statistic_profile: [:subscriptions]).find_by(subscriptions: { plan_id: @plan.id })
     @user.users_credits.destroy_all
     @availability = @machine.availabilities.first
-    @reservation_machine = Reservation.new(user: @user, reservable: @machine)
-    @reservation_training = Reservation.new(user: @user, reservable: @training)
+    @reservation_machine = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @machine)
+    @reservation_training = Reservation.new(statistic_profile: @user.statistic_profile, reservable: @training)
   end
 
   ## context machine reservation
