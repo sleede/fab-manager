@@ -225,8 +225,11 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      * Callback when the search field content changes: reload the search results
      */
     $scope.updateTextSearch = function () {
-      resetSearchMember();
-      return memberSearch();
+      if (searchTimeout) clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(function() {
+        resetSearchMember();
+        memberSearch();
+      }, 500);
     };
 
     /**
@@ -253,6 +256,11 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     /**
+     * Will temporize the search query to prevent overloading the API
+     */
+    var searchTimeout = null;
+
+    /**
      * Iterate through the provided array and return the index of the requested admin
      * @param admins {Array} full list of users with role 'admin'
      * @param id {Number} user id of the admin to retrieve in the list
@@ -267,13 +275,13 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      */
     var resetSearchMember = function () {
       $scope.member.noMore = false;
-      return $scope.member.page = 1;
+      $scope.member.page = 1;
     };
 
     /**
      * Run a search query with the current parameters set ($scope.member[searchText,order,page])
      * and affect or append the result in $scope.members, depending on the concat parameter
-     * @param concat {boolean} if true, the result will be append to $scope.members instead of being affected
+     * @param [concat] {boolean} if true, the result will be append to $scope.members instead of being affected
      */
     var memberSearch = function (concat) {
       Member.list({
