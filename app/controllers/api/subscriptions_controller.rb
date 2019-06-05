@@ -16,7 +16,7 @@ class API::SubscriptionsController < API::ApiController
       head 403
     else
       method = current_user.admin? ? :local : :stripe
-      user_id = current_user.admin? ? params[:user_id] : current_user.id
+      user_id = current_user.admin? ? params[:subscription][:user_id] : current_user.id
 
       @subscription = Subscription.new(subscription_params)
       is_subscribe = Subscriptions::Subscribe.new(current_user.id, user_id)
