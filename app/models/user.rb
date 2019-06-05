@@ -61,8 +61,8 @@ class User < ActiveRecord::Base
   after_commit :notify_admin_when_user_is_created, on: :create
   after_create :init_dependencies
   after_update :notify_group_changed, if: :group_id_changed?
-  after_commit :update_invoicing_profile, if: :invoicing_data_was_modified?, on: [:update]
-  after_commit :update_statistic_profile, if: :statistic_data_was_modified?, on: [:update]
+  after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
+  after_update :update_statistic_profile, if: :statistic_data_was_modified?
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
@@ -359,15 +359,22 @@ class User < ActiveRecord::Base
   end
 
   def init_dependencies
-    ip = InvoicingProfile.create!(
-      user: self,
-      email: email,
-      first_name: first_name,
-      last_name: last_name
-    )
-    Wallet.create!(
-      invoicing_profile: ip
-    )
+    if invoicing_profile.nil?
+      ip = InvoicingProfile.create!(
+        user: self,
+        email: email,
+        first_name: first_name,
+        last_name: last_name
+      )
+    end
+    if wallet.nil?
+      ip ||= invoicing_profile
+      Wallet.create!(
+        invoicing_profile: ip
+      )
+    end
+    return unless statistic_profile.nil?
+
     StatisticProfile.create!(
       user: self,
       group_id: group_id
@@ -375,7 +382,7 @@ class User < ActiveRecord::Base
   end
 
   def update_invoicing_profile
-    raise NoProfileError if user.invoicing_profile.nil?
+    raise NoProfileError if invoicing_profile.nil?
 
     invoicing_profile.update_attributes(
       email: email
@@ -383,7 +390,7 @@ class User < ActiveRecord::Base
   end
 
   def update_statistic_profile
-    raise NoProfileError if user.statistic_profile.nil?
+    raise NoProfileError if statistic_profile.nil?
 
     statistic_profile.update_attributes(
       group_id: group_id

@@ -3,6 +3,7 @@
 <input name="_method" type="hidden" ng-value="method">
 <input name="user[profile_attributes][id]" type="hidden" ng-value="user.profile.id">
 <input name="user[invoicing_profile_attributes][id]" type="hidden" ng-value="user.invoicing_profile.id">
+<input name="user[statistic_profile_attributes][id]" type="hidden" ng-value="user.statistic_profile.id">
 
 <div class="row m-t">
     <div class="col-sm-3 col-sm-offset-1">
@@ -44,7 +45,7 @@
                    name="user[statistic_profile_attributes][gender]"
                    ng-model="user.statistic_profile.gender"
                    value="true"
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"
                    required/>
               <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
           </label>
@@ -53,7 +54,7 @@
                    name="user[statistic_profile_attributes][gender]"
                    ng-model="user.statistic_profile.gender"
                    value="false"
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"/>
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
         <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>

@@ -579,7 +579,11 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     $scope.password = { change: false };
 
     // Default member's profile parameters
-    $scope.user = { plan_interval: '' };
+    $scope.user = {
+      plan_interval: '',
+      invoicing_profile: {},
+      statistic_profile: {}
+    };
 
     // Callback when the admin check/uncheck the box telling that the new user is an organization.
     // Disable or enable the organization fields in the form, accordingly

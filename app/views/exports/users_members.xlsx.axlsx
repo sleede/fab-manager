@@ -42,7 +42,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
         member.profile.first_name,
         member.email,
         member.is_allow_newsletter,
-        member.profile.gender ? t('export_members.man') : t('export_members.woman'),
+        member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman'),
         member.profile.age,
         member.invoicing_profile.address ? member.invoicing_profile.address.address : '',
         member.profile.phone,

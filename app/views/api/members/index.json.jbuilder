@@ -25,11 +25,11 @@ json.array!(@members) do |member|
       end
       json.first_name member.profile.first_name
       json.last_name member.profile.last_name
-      json.gender member.statistic_profile.gender.to_s
+      json.phone member.profile.phone
     end
     if user_is_admin
       json.statistic_profile do
-        json.phone member.statistic_profile.phone
+        json.gender member.statistic_profile.gender.to_s
         json.birthday member.statistic_profile&.birthday&.iso8601
       end
     end

@@ -47,6 +47,7 @@ json.invoicing_profile do
 end
 
 json.statistic_profile do
+  json.id member.statistic_profile.id
   json.gender member.statistic_profile.gender.to_s
   json.birthday member.statistic_profile&.birthday&.to_date&.iso8601
 end

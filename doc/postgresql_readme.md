@@ -42,8 +42,8 @@ This can be achieved doing the following:
 ## Using another DBMS
 Some users may want to use another DBMS than PostgreSQL.
 This is currently not supported, because of some PostgreSQL specific instructions that cannot be efficiently handled with the ActiveRecord ORM:
- - `app/controllers/api/members_controllers.rb@list` is using `ILIKE`
- - `app/controllers/api/invoices_controllers.rb@list` is using `ILIKE` and `date_trunc()`
+ - `app/services/members/list_service.rb@list` is using `ILIKE`, `now()::date` and `OFFSET`.
+ - `app/services/invoices_service.rb@list` is using `ILIKE` and `date_trunc()`
  - `db/migrate/20160613093842_create_unaccent_function.rb` is using [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html) modules and defines a PL/pgSQL function (`f_unaccent()`)
  - `app/controllers/api/members_controllers.rb@search` is using `f_unaccent()` (see above) and `regexp_replace()`
  - `db/migrate/20150604131525_add_meta_data_to_notifications.rb` is using [jsonb](https://www.postgresql.org/docs/9.4/static/datatype-json.html), a PostgreSQL 9.4+ datatype.
