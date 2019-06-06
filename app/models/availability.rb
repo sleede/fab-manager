@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# Availability stores time slots that are available to reservation for an associated reservable
+# Eg. a 3D printer will be reservable on thursday from 9 to 11 pm
+# Availabilities may be subdivided into Slots (of 1h), for some types of reservables (eg. Machine)
 class Availability < ActiveRecord::Base
 
   # elastic initialisations
@@ -87,9 +92,7 @@ class Availability < ActiveRecord::Base
   def title(filter = {})
     case available_type
     when 'machines'
-      if filter[:machine_ids]
-        return machines.to_ary.delete_if { |m| !filter[:machine_ids].include?(m.id) }.map(&:name).join(' - ')
-      end
+      return machines.to_ary.delete_if { |m| !filter[:machine_ids].include?(m.id) }.map(&:name).join(' - ') if filter[:machine_ids]
 
       machines.map(&:name).join(' - ')
     when 'event'
@@ -134,13 +137,13 @@ class Availability < ActiveRecord::Base
     json['hours_duration'] = (end_at - start_at) / (60 * 60)
     json['subType'] = case available_type
                       when 'machines'
-                        machines_availabilities.map{ |ma| ma.machine.friendly_id }
+                        machines_availabilities.map { |ma| ma.machine.friendly_id }
                       when 'training'
-                        trainings_availabilities.map{ |ta| ta.training.friendly_id }
+                        trainings_availabilities.map { |ta| ta.training.friendly_id }
                       when 'event'
                         [event.category.friendly_id]
                       when 'space'
-                        spaces_availabilities.map{ |sa| sa.space.friendly_id }
+                        spaces_availabilities.map { |sa| sa.space.friendly_id }
                       else
                         []
                       end
@@ -156,7 +159,9 @@ class Availability < ActiveRecord::Base
   end
 
   def should_be_associated
-    errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine')) if available_type == 'machines' && machine_ids.count == 0
+    return unless available_type == 'machines' && machine_ids.count.zero?
+
+    errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine'))
   end
 
 end

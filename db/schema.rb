@@ -496,16 +496,16 @@ ActiveRecord::Schema.define(version: 20190606074801) do
   add_index "project_users", ["user_id"], name: "index_project_users_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",         limit: 255
+    t.string   "name",                        limit: 255
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "author_id"
     t.text     "tags"
     t.integer  "licence_id"
-    t.string   "state",        limit: 255
-    t.string   "slug",         limit: 255
+    t.string   "state",                       limit: 255
+    t.string   "slug",                        limit: 255
     t.datetime "published_at"
+    t.integer  "author_statistic_profile_id"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
@@ -914,6 +914,7 @@ ActiveRecord::Schema.define(version: 20190606074801) do
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "projects", "statistic_profiles", column: "author_statistic_profile_id"
   add_foreign_key "projects_spaces", "projects"
   add_foreign_key "projects_spaces", "spaces"
   add_foreign_key "reservations", "statistic_profiles"

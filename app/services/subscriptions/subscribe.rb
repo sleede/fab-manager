@@ -12,7 +12,7 @@ class Subscriptions::Subscribe
   def pay_and_save(subscription, payment_method, coupon, invoice)
     return false if user_id.nil?
 
-    subscription.statistic_profile_id = User.find(user_id).statistic_profile.id
+    subscription.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
     if payment_method == :local
       subscription.save_with_local_payment(operator_id, invoice, coupon)
     elsif payment_method == :stripe

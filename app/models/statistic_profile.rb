@@ -21,6 +21,9 @@ class StatisticProfile < ActiveRecord::Base
   has_many :statistic_profile_trainings, dependent: :destroy
   has_many :trainings, through: :statistic_profile_trainings
 
+  # Projects that the current user is the author
+  has_many :my_projects, foreign_key: :author_statistic_profile_id, class_name: 'Project', dependent: :destroy
+
   def str_gender
     gender ? 'male' : 'female'
   end

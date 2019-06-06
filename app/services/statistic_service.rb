@@ -305,7 +305,7 @@ class StatisticService
   def projects_list(options = default_options)
     result = []
     Project.where('projects.published_at >= :start_date AND projects.published_at <= :end_date', options)
-           .eager_load(:licence, :themes, :components, :machines, :project_users, author: %i[profile group])
+           .eager_load(:licence, :themes, :components, :machines, :project_users, author: %i[group])
            .each do |p|
       result.push OpenStruct.new({
         date: options[:start_date].to_date

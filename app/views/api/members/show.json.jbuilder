@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 requested_current = (current_user and current_user.id == @member.id)
 
 json.partial! 'api/members/member', member: @member
@@ -19,7 +21,8 @@ end
 
 json.all_projects @member.all_projects do |project|
   if requested_current || project.state == 'published'
-    json.extract! project, :id, :name, :description, :author_id, :licence_id, :slug, :state
+    json.extract! project, :id, :name, :description, :licence_id, :slug, :state
+    json.author_id project.author.user_id
     json.url project_url(project, format: :json)
     json.project_image project.project_image.attachment.large.url if project.project_image
     json.machine_ids project.machine_ids
@@ -27,7 +30,6 @@ json.all_projects @member.all_projects do |project|
       json.id m.id
       json.name m.name
     end
-    json.author_id project.author_id
     json.user_ids project.user_ids
     json.component_ids project.component_ids
     json.components project.components do |c|
@@ -69,7 +71,7 @@ json.invoices @member.invoices.order('reference DESC') do |i|
   json.reference i.reference
   json.type i.invoiced_type
   json.invoiced_id i.invoiced_id
-  json.total (i.total / 100.00)
+  json.total i.total / 100.00
   json.is_avoir i.is_a?(Avoir)
   json.date i.is_a?(Avoir) ? i.avoir_date : i.created_at
 end

@@ -1,17 +1,22 @@
-json.extract! @project, :id, :name, :description, :tags, :created_at, :updated_at, :author_id, :licence_id, :slug
+# frozen_string_literal: true
+
+json.extract! @project, :id, :name, :description, :tags, :created_at, :updated_at, :licence_id, :slug
+json.author_id @project.author.user_id
 json.project_image @project.project_image.attachment.large.url if @project.project_image
 json.project_full_image @project.project_image.attachment.url if @project.project_image
 json.author do
-  json.id @project.author_id
-  json.first_name @project.author.profile.first_name
-  json.last_name @project.author.profile.last_name
-  json.full_name @project.author.profile.full_name
-  json.user_avatar do
-    json.id @project.author.profile.user_avatar.id
-    json.attachment_url @project.author.profile.user_avatar.attachment_url
-  end if @project.author.profile.user_avatar
-  json.username @project.author.username
-  json.slug @project.author.slug
+  json.id @project.author.user_id
+  json.first_name @project.author&.user&.profile&.first_name
+  json.last_name @project.author&.user&.profile&.last_name
+  json.full_name @project.author&.user&.profile&.full_name
+  if @project.author&.user&.profile&.user_avatar
+    json.user_avatar do
+      json.id @project.author&.user&.profile&.user_avatar&.id
+      json.attachment_url @project.author&.user&.profile&.user_avatar&.attachment_url
+    end
+  end
+  json.username @project.author&.user&.username
+  json.slug @project.author&.user&.slug
 end
 json.project_caos_attributes @project.project_caos do |f|
   json.id f.id
@@ -39,10 +44,12 @@ json.project_users @project.project_users do |pu|
   json.first_name pu.user.profile.first_name
   json.last_name pu.user.profile.last_name
   json.full_name pu.user.profile.full_name
-  json.user_avatar do
-    json.id pu.user.profile.user_avatar.id
-    json.attachment_url pu.user.profile.user_avatar.attachment_url
-  end if pu.user.profile.user_avatar
+  if pu.user.profile.user_avatar
+    json.user_avatar do
+      json.id pu.user.profile.user_avatar.id
+      json.attachment_url pu.user.profile.user_avatar.attachment_url
+    end
+  end
   json.username pu.user.username
   json.slug pu.user.slug
   json.is_valid pu.is_valid
@@ -60,9 +67,8 @@ json.project_steps_attributes @project.project_steps.order('project_steps.step_n
   json.step_nb s.step_nb
 end
 json.state @project.state
-json.licence do
-  json.name @project.licence.name
-end if @project.licence.present?
-#json.project_steps_attributes @project.project_steps do |s|
-  #json.set! s.id, {id: s.id, description: s.description}
-#end
+if @project.licence.present?
+  json.licence do
+    json.name @project.licence.name
+  end
+end

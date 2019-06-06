@@ -9,7 +9,7 @@ class Availabilities::StatusService
 
   # check that the provided machine slot is reserved or not and modify it accordingly
   def machine_reserved_status(slot, reservations, user)
-    statistic_profile_id = user.statistic_profile.id
+    statistic_profile_id = user&.statistic_profile&.id
     reservations.each do |r|
       r.slots.each do |s|
         next unless slot.machine.id == r.reservable_id
@@ -34,7 +34,7 @@ class Availabilities::StatusService
 
   # check that the provided space slot is reserved or not and modify it accordingly
   def space_reserved_status(slot, reservations, user)
-    statistic_profile_id = user.statistic_profile.id
+    statistic_profile_id = user&.statistic_profile&.id
     reservations.each do |r|
       r.slots.each do |s|
         next unless slot.space.id == r.reservable_id
@@ -57,7 +57,7 @@ class Availabilities::StatusService
 
   # check that the provided availability (training or event) is reserved or not and modify it accordingly
   def training_event_reserved_status(availability, reservations, user)
-    statistic_profile_id = user.statistic_profile.id
+    statistic_profile_id = user&.statistic_profile&.id
     reservations.each do |r|
       r.slots.each do |s|
         next unless (
