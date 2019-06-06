@@ -65,6 +65,7 @@ class User < ActiveRecord::Base
   delegate :last_name, to: :profile
   delegate :subscriptions, to: :statistic_profile
   delegate :reservations, to: :statistic_profile
+  delegate :trainings, to: :statistic_profile
   delegate :wallet, to: :invoicing_profile
   delegate :wallet_transactions, to: :invoicing_profile
   delegate :invoices, to: :invoicing_profile

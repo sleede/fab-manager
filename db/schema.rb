@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190604075717) do
+ActiveRecord::Schema.define(version: 20190606074801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -662,6 +662,16 @@ ActiveRecord::Schema.define(version: 20190604075717) do
     t.boolean  "ca",                      default: true
   end
 
+  create_table "statistic_profile_trainings", force: :cascade do |t|
+    t.integer  "statistic_profile_id"
+    t.integer  "training_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "statistic_profile_trainings", ["statistic_profile_id"], name: "index_statistic_profile_trainings_on_statistic_profile_id", using: :btree
+  add_index "statistic_profile_trainings", ["training_id"], name: "index_statistic_profile_trainings_on_training_id", using: :btree
+
   create_table "statistic_profiles", force: :cascade do |t|
     t.boolean "gender"
     t.date    "birthday"
@@ -795,16 +805,6 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
 
-  create_table "user_trainings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "training_id"
-  end
-
-  add_index "user_trainings", ["training_id"], name: "index_user_trainings_on_training_id", using: :btree
-  add_index "user_trainings", ["user_id"], name: "index_user_trainings_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
     t.string   "encrypted_password",     limit: 255, default: "",   null: false
@@ -920,6 +920,8 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_foreign_key "spaces_availabilities", "availabilities"
   add_foreign_key "spaces_availabilities", "spaces"
   add_foreign_key "statistic_custom_aggregations", "statistic_types"
+  add_foreign_key "statistic_profile_trainings", "statistic_profiles"
+  add_foreign_key "statistic_profile_trainings", "trainings"
   add_foreign_key "statistic_profiles", "groups"
   add_foreign_key "statistic_profiles", "users"
   add_foreign_key "subscriptions", "statistic_profiles"
