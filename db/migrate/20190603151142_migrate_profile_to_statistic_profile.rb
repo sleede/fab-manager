@@ -7,6 +7,7 @@ class MigrateProfileToStatisticProfile < ActiveRecord::Migration
       StatisticProfile.create!(
         user: u,
         group: u.group,
+        role: u.roles.first,
         gender: p.gender,
         birthday: p.birthday
       )

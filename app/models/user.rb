@@ -373,7 +373,8 @@ class User < ActiveRecord::Base
     if statistic_profile.nil?
       StatisticProfile.create!(
         user: self,
-        group_id: group_id
+        group_id: group_id,
+        role_id: roles.first.id
       )
     else
       update_statistic_profile
@@ -388,6 +389,7 @@ class User < ActiveRecord::Base
     )
   end
 
+  # will update the statistic_profile after a group switch. Updating the role is not supported
   def update_statistic_profile
     raise NoProfileError if statistic_profile.nil?
 

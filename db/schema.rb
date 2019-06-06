@@ -677,9 +677,11 @@ ActiveRecord::Schema.define(version: 20190606074801) do
     t.date    "birthday"
     t.integer "group_id"
     t.integer "user_id"
+    t.integer "role_id"
   end
 
   add_index "statistic_profiles", ["group_id"], name: "index_statistic_profiles_on_group_id", using: :btree
+  add_index "statistic_profiles", ["role_id"], name: "index_statistic_profiles_on_role_id", using: :btree
   add_index "statistic_profiles", ["user_id"], name: "index_statistic_profiles_on_user_id", using: :btree
 
   create_table "statistic_sub_types", force: :cascade do |t|
@@ -923,6 +925,7 @@ ActiveRecord::Schema.define(version: 20190606074801) do
   add_foreign_key "statistic_profile_trainings", "statistic_profiles"
   add_foreign_key "statistic_profile_trainings", "trainings"
   add_foreign_key "statistic_profiles", "groups"
+  add_foreign_key "statistic_profiles", "roles"
   add_foreign_key "statistic_profiles", "users"
   add_foreign_key "subscriptions", "statistic_profiles"
   add_foreign_key "tickets", "event_price_categories"

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+AVG_DAYS_PER_YEAR = 365.2425
+
 # This table will save the user's profile data needed for statistical purposes.
 # GDPR requires that an user can delete his account at any time but we need to keep the statistics original data to being able to
 # rebuild them at any time.
@@ -7,6 +9,7 @@
 class StatisticProfile < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
+  belongs_to :role
 
   has_many :subscriptions, dependent: :destroy
   accepts_nested_attributes_for :subscriptions, allow_destroy: false
@@ -25,7 +28,7 @@ class StatisticProfile < ActiveRecord::Base
   def age
     if birthday.present?
       now = Time.now.utc.to_date
-      (now - birthday).to_f / 365.2425
+      (now - birthday).to_f / AVG_DAYS_PER_YEAR
     else
       ''
     end

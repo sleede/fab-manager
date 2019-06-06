@@ -5,6 +5,7 @@ class CreateStatisticProfile < ActiveRecord::Migration
       t.date :birthday
       t.belongs_to :group, index: true, foreign_key: true
       t.belongs_to :user, index: true, foreign_key: true
+      t.belongs_to :role, index: true, foreign_key: true
     end
 
     add_reference :reservations, :statistic_profile, index: true, foreign_key: true

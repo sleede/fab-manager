@@ -127,7 +127,7 @@ class StatisticService
   def subscriptions_list(options = default_options)
     result = []
     InvoiceItem.where('invoice_items.created_at >= :start_date AND invoice_items.created_at <= :end_date', options)
-               .eager_load(invoice: [:coupon], subscription: [:plan, user: %i[profile group]]).each do |i|
+               .eager_load(invoice: [:coupon], subscription: [:plan, statistic_profile: [:group]]).each do |i|
       next if i.invoice.is_a?(Avoir)
 
       sub = i.subscription
@@ -135,7 +135,7 @@ class StatisticService
 
       ca = i.amount.to_i / 100.0
       ca = CouponService.new.ventilate(get_invoice_total_no_coupon(i.invoice), ca, i.invoice.coupon) unless i.invoice.coupon_id.nil?
-      u = sub.user
+      profile = sub.statistic_profile
       p = sub.plan
       result.push OpenStruct.new({
         date: options[:start_date].to_date,
@@ -149,7 +149,7 @@ class StatisticService
         subscription_id: sub.id,
         invoice_item_id: i.id,
         ca: ca
-      }.merge(user_info(u)))
+      }.merge(user_info(profile)))
     end
     result
   end
@@ -158,11 +158,11 @@ class StatisticService
     result = []
     Reservation
       .where("reservable_type = 'Machine' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
-      .eager_load(:slots, user: %i[profile group], invoice: [:invoice_items])
+      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
 
-      u = r.user
+      profile = r.statistic_profile
       result.push OpenStruct.new({
         date: options[:start_date].to_date,
         reservation_id: r.id,
@@ -171,7 +171,7 @@ class StatisticService
         machine_name: r.reservable.name,
         nb_hours: r.slots.size,
         ca: calcul_ca(r.invoice)
-      }.merge(user_info(u)))
+      }.merge(user_info(profile)))
     end
     result
   end
@@ -180,11 +180,11 @@ class StatisticService
     result = []
     Reservation
       .where("reservable_type = 'Space' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
-      .eager_load(:slots, user: %i[profile group], invoice: [:invoice_items])
+      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
 
-      u = r.user
+      profile = r.statistic_profile
       result.push OpenStruct.new({
         date: options[:start_date].to_date,
         reservation_id: r.id,
@@ -193,7 +193,7 @@ class StatisticService
         space_type: r.reservable.slug,
         nb_hours: r.slots.size,
         ca: calcul_ca(r.invoice)
-      }.merge(user_info(u)))
+      }.merge(user_info(profile)))
     end
     result
   end
@@ -202,11 +202,11 @@ class StatisticService
     result = []
     Reservation
       .where("reservable_type = 'Training' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
-      .eager_load(:slots, user: %i[profile group], invoice: [:invoice_items])
+      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
 
-      u = r.user
+      profile = r.statistic_profile
       slot = r.slots.first
       result.push OpenStruct.new({
         date: options[:start_date].to_date,
@@ -217,7 +217,7 @@ class StatisticService
         training_date: slot.start_at.to_date,
         nb_hours: difference_in_hours(slot.start_at, slot.end_at),
         ca: calcul_ca(r.invoice)
-      }.merge(user_info(u)))
+      }.merge(user_info(profile)))
     end
     result
   end
@@ -226,11 +226,11 @@ class StatisticService
     result = []
     Reservation
       .where("reservable_type = 'Event' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
-      .eager_load(:slots, user: %i[profile group], invoice: [:invoice_items])
+      .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
 
-      u = r.user
+      profile = r.statistic_profile
       slot = r.slots.first
       result.push OpenStruct.new({
         date: options[:start_date].to_date,
@@ -244,7 +244,7 @@ class StatisticService
         nb_places: r.total_booked_seats,
         nb_hours: difference_in_hours(slot.start_at, slot.end_at),
         ca: calcul_ca(r.invoice)
-      }.merge(user_info(u)))
+      }.merge(user_info(profile)))
     end
     result
   end
@@ -254,21 +254,27 @@ class StatisticService
     reservations_ca_list = []
     avoirs_ca_list = []
     result = []
-    Reservation .where('reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
-                .eager_load(:slots, user: %i[profile group], invoice: [:invoice_items])
-                .each do |r|
+    Reservation.where('reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
+               .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
+               .each do |r|
       next unless r.reservable
 
-      reservations_ca_list.push OpenStruct.new({ date: options[:start_date].to_date, ca: calcul_ca(r.invoice) }.merge(user_info(r.user)))
+      reservations_ca_list.push OpenStruct.new({
+        date: options[:start_date].to_date,
+        ca: calcul_ca(r.invoice)
+      }.merge(user_info(r.statistic_profile)))
     end
     Avoir.where('invoices.created_at >= :start_date AND invoices.created_at <= :end_date', options)
-         .eager_load(:invoice_items, user: %i[profile group])
+         .eager_load(:invoice_items, statistic_profile: [:group])
          .each do |i|
-      avoirs_ca_list.push OpenStruct.new({ date: options[:start_date].to_date, ca: calcul_avoir_ca(i) }.merge(user_info(i.user)))
+      avoirs_ca_list.push OpenStruct.new({
+        date: options[:start_date].to_date,
+        ca: calcul_avoir_ca(i)
+      }.merge(user_info(i.statistic_profile)))
     end
     reservations_ca_list.concat(subscriptions_ca_list).concat(avoirs_ca_list).each do |e|
-      user = User.find(e.user_id)
-      u = find_or_create_user_info_info_list(user, result)
+      profile = StatisticProfile.find(e.statistic_profile_id)
+      u = find_or_create_user_info_info_list(profile, result)
       u.date = options[:start_date].to_date
       e.ca = 0 unless e.ca
       if u.ca
@@ -284,10 +290,9 @@ class StatisticService
 
   def members_list(options = default_options)
     result = []
-    User.with_role(:member)
-        .includes(:profile)
-        .where('users.created_at >= :start_date AND users.created_at <= :end_date', options)
-        .each do |u|
+    member = Role.find_by(name: 'member')
+    StatisticProfile.where('role_id = :member, users.created_at >= :start_date AND users.created_at <= :end_date', options.merge(member: member.id))
+                    .each do |u|
       next if u.need_completion?
 
       result.push OpenStruct.new({
@@ -353,13 +358,13 @@ class StatisticService
     end
   end
 
-  def user_info(user)
+  def user_info(statistic_profile)
     {
-      user_id: user.id,
-      gender: user.statistic_profile.str_gender,
-      age: user.statistic_profile.age,
-      group: user.group ? user.group.slug : nil,
-      email: user.email
+      statistic_profile_id: statistic_profile.id,
+      user_id: statistic_profile.user_id,
+      gender: statistic_profile.str_gender,
+      age: statistic_profile.age,
+      group: statistic_profile.group ? statistic_profile.group.slug : nil
     }
   end
 
@@ -484,10 +489,10 @@ class StatisticService
     total / 100.0
   end
 
-  def find_or_create_user_info_info_list(user, list)
+  def find_or_create_user_info_info_list(profile, list)
     found = list.select do |l|
-      l.user_id == user.id
+      l.statistic_profile_id == profile.id
     end.first
-    found || OpenStruct.new(user_info(user))
+    found || OpenStruct.new(user_info(profile))
   end
 end

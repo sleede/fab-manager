@@ -4,11 +4,9 @@ class MigrateUserTrainingsToStatisticProfileTrainings < ActiveRecord::Migration
 
     user_trainings.each do |ut|
       user = User.find(ut['user_id'])
-      StatisticProfileTraining.create!(
-        statistic_profile_id: user.statistic_profile.id,
-        training_id: ut['training_id'],
-        created_at: ut['created_at']
-      )
+      # here we use raw sql to prevent the notify_user callback the email the whole DB
+      execute("INSERT INTO statistic_profile_trainings (statistic_profile_id, training_id, created_at, updated_at)
+                   VALUES (#{user.statistic_profile.id}, #{ut['training_id']}, '#{ut['created_at'].utc}', '#{DateTime.now.utc}')")
     end
   end
 
