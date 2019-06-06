@@ -291,7 +291,7 @@ class StatisticService
   def members_list(options = default_options)
     result = []
     member = Role.find_by(name: 'member')
-    StatisticProfile.where('role_id = :member, users.created_at >= :start_date AND users.created_at <= :end_date', options.merge(member: member.id))
+    StatisticProfile.where('role_id = :member AND created_at >= :start_date AND created_at <= :end_date', options.merge(member: member.id))
                     .each do |u|
       next if u.need_completion?
 
@@ -305,7 +305,7 @@ class StatisticService
   def projects_list(options = default_options)
     result = []
     Project.where('projects.published_at >= :start_date AND projects.published_at <= :end_date', options)
-           .eager_load(:licence, :themes, :components, :machines, :project_users, author: %i[group])
+           .eager_load(:licence, :themes, :components, :machines, :project_users, author: [:group])
            .each do |p|
       result.push OpenStruct.new({
         date: options[:start_date].to_date
@@ -315,18 +315,18 @@ class StatisticService
   end
 
   # return always yesterday's sum of comment of each project
-  def projects_comment_nb_list
-    result = []
-    Project.where(state: 'published')
-           .eager_load(:licence, :themes, :components, :machines, :project_users, author: %i[profile group])
-           .each do |p|
-      result.push OpenStruct.new({
-        date: 1.day.ago.to_date,
-        project_comments: get_project_comment_nb(p)
-      }.merge(user_info(p.author)).merge(project_info(p)))
-    end
-    result
-  end
+  # def projects_comment_nb_list
+  #   result = []
+  #   Project.where(state: 'published')
+  #          .eager_load(:licence, :themes, :components, :machines, :project_users, author: %i[profile group])
+  #          .each do |p|
+  #     result.push OpenStruct.new({
+  #       date: 1.day.ago.to_date,
+  #       project_comments: get_project_comment_nb(p)
+  #     }.merge(user_info(p.author)).merge(project_info(p)))
+  #   end
+  #   result
+  # end
 
   def clean_stat(options = default_options)
     client = Elasticsearch::Model.client
@@ -444,12 +444,12 @@ class StatisticService
     sum
   end
 
-  def get_project_comment_nb(project)
-    project_comment_info = @projects_comment_info.select do |p|
-      p['identifiers'].first == "project_#{project.id}"
-    end.first
-    project_comment_info ? project_comment_info['posts'] : 0
-  end
+  # def get_project_comment_nb(project)
+  #   project_comment_info = @projects_comment_info.select do |p|
+  #     p['identifiers'].first == "project_#{project.id}"
+  #   end.first
+  #   project_comment_info ? project_comment_info['posts'] : 0
+  # end
 
   def project_info(project)
     {
@@ -477,12 +477,12 @@ class StatisticService
     }
   end
 
-  def get_user_subscription_ca(user, subscriptions_ca_list)
-    user_subscription_ca = subscriptions_ca_list.select do |ca|
-      ca.user_id == user.id
-    end
-    user_subscription_ca.inject {|sum,x| sum.ca + x.ca } || 0
-  end
+  # def get_user_subscription_ca(user, subscriptions_ca_list)
+  #   user_subscription_ca = subscriptions_ca_list.select do |ca|
+  #     ca.user_id == user.id
+  #   end
+  #   user_subscription_ca.inject {|sum,x| sum.ca + x.ca } || 0
+  # end
 
   def get_invoice_total_no_coupon(invoice)
     total = (invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)

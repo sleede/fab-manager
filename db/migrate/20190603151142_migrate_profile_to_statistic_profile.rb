@@ -9,7 +9,8 @@ class MigrateProfileToStatisticProfile < ActiveRecord::Migration
         group: u.group,
         role: u.roles.first,
         gender: p.gender,
-        birthday: p.birthday
+        birthday: p.birthday,
+        created_at: u.created_at
       )
     end
   end

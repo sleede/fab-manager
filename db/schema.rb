@@ -673,11 +673,13 @@ ActiveRecord::Schema.define(version: 20190606074801) do
   add_index "statistic_profile_trainings", ["training_id"], name: "index_statistic_profile_trainings_on_training_id", using: :btree
 
   create_table "statistic_profiles", force: :cascade do |t|
-    t.boolean "gender"
-    t.date    "birthday"
-    t.integer "group_id"
-    t.integer "user_id"
-    t.integer "role_id"
+    t.boolean  "gender"
+    t.date     "birthday"
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "statistic_profiles", ["group_id"], name: "index_statistic_profiles_on_group_id", using: :btree
