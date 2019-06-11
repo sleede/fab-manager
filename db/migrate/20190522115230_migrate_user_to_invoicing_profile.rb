@@ -14,6 +14,7 @@ class MigrateUserToInvoicingProfile < ActiveRecord::Migration
     Invoice.order(:id).all.each do |i|
       user = User.find(i.user_id)
       i.update_column('invoicing_profile_id', user.invoicing_profile.id)
+      i.update_column('statistic_profile_id', user.statistic_profile.id)
       i.update_column('user_id', nil)
     end
     # chain all records
@@ -32,6 +33,7 @@ class MigrateUserToInvoicingProfile < ActiveRecord::Migration
     Invoice.order(:created_at).all.each do |i|
       i.update_column('user_id', i.invoicing_profile.user_id)
       i.update_column('invoicing_profile_id', nil)
+      i.update_column('statistic_profile_id', nil)
     end
     # chain all records
     InvoiceItem.order(:id).all.each(&:chain_record)

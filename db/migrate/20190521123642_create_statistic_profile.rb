@@ -12,6 +12,7 @@ class CreateStatisticProfile < ActiveRecord::Migration
 
     add_reference :reservations, :statistic_profile, index: true, foreign_key: true
     add_reference :subscriptions, :statistic_profile, index: true, foreign_key: true
+    add_reference :invoices, :statistic_profile, index: true, foreign_key: true
 
     add_column :projects, :author_statistic_profile_id, :integer, index: true
     add_foreign_key :projects, :statistic_profiles, column: :author_statistic_profile_id

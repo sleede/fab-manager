@@ -280,11 +280,13 @@ ActiveRecord::Schema.define(version: 20190606074801) do
     t.string   "environment"
     t.integer  "operator_id"
     t.integer  "invoicing_profile_id"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["invoicing_profile_id"], name: "index_invoices_on_invoicing_profile_id", using: :btree
+  add_index "invoices", ["statistic_profile_id"], name: "index_invoices_on_statistic_profile_id", using: :btree
   add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
 
   create_table "invoicing_profiles", force: :cascade do |t|
@@ -908,6 +910,7 @@ ActiveRecord::Schema.define(version: 20190606074801) do
   add_foreign_key "history_values", "settings"
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "invoicing_profiles"
+  add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "users", column: "operator_id"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"

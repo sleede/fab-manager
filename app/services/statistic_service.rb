@@ -292,12 +292,12 @@ class StatisticService
     result = []
     member = Role.find_by(name: 'member')
     StatisticProfile.where('role_id = :member AND created_at >= :start_date AND created_at <= :end_date', options.merge(member: member.id))
-                    .each do |u|
-      next if u.need_completion?
+                    .each do |sp|
+      next if sp.user&.need_completion?
 
       result.push OpenStruct.new({
         date: options[:start_date].to_date
-      }.merge(user_info(u)))
+      }.merge(user_info(sp)))
     end
     result
   end
