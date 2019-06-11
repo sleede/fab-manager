@@ -203,7 +203,7 @@ class API::MembersController < API::ApiController
 
     elsif current_user.admin?
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
-                                   training_ids: [], tag_ids: [],
+                                   tag_ids: [],
                                    profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
                                                         :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
@@ -213,7 +213,7 @@ class API::MembersController < API::ApiController
                                      address_attributes: %i[id address],
                                      organization_attributes: [:id, :name, address_attributes: %i[id address]]
                                    ],
-                                   statistic_profile_attributes: %i[id gender birthday])
+                                   statistic_profile_attributes: [:id, :gender, :birthday, training_ids: []])
 
     end
   end

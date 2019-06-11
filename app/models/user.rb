@@ -27,13 +27,8 @@ class User < ActiveRecord::Base
   has_one :statistic_profile, dependent: :nullify
   accepts_nested_attributes_for :statistic_profile
 
-  has_many :my_projects, foreign_key: :author_id, class_name: 'Project', dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
-
-  # Trainings that were already passed
-  has_many :user_trainings, dependent: :destroy
-  has_many :trainings, through: :user_trainings
 
   belongs_to :group
 
@@ -69,6 +64,8 @@ class User < ActiveRecord::Base
   delegate :last_name, to: :profile
   delegate :subscriptions, to: :statistic_profile
   delegate :reservations, to: :statistic_profile
+  delegate :trainings, to: :statistic_profile
+  delegate :my_projects, to: :statistic_profile
   delegate :wallet, to: :invoicing_profile
   delegate :wallet_transactions, to: :invoicing_profile
   delegate :invoices, to: :invoicing_profile
@@ -376,7 +373,8 @@ class User < ActiveRecord::Base
     if statistic_profile.nil?
       StatisticProfile.create!(
         user: self,
-        group_id: group_id
+        group_id: group_id,
+        role_id: roles.first.id
       )
     else
       update_statistic_profile
@@ -391,6 +389,7 @@ class User < ActiveRecord::Base
     )
   end
 
+  # will update the statistic_profile after a group switch. Updating the role is not supported
   def update_statistic_profile
     raise NoProfileError if statistic_profile.nil?
 

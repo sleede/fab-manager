@@ -23,8 +23,8 @@ class API::AvailabilitiesController < API::ApiController
   def public
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
-    @reservations = Reservation.includes(:slots, user: [:profile])
-                               .references(:slots, :user)
+    @reservations = Reservation.includes(:slots, :statistic_profile)
+                               .references(:slots)
                                .where('slots.start_at >= ? AND slots.end_at <= ?', start_date, end_date)
 
     machine_ids = params[:m] || []
@@ -93,7 +93,7 @@ class API::AvailabilitiesController < API::ApiController
 
   def reservations
     authorize Availability
-    @reservation_slots = @availability.slots.includes(reservations: [user: [:profile]]).order('slots.start_at ASC')
+    @reservation_slots = @availability.slots.includes(reservations: [statistic_profile: [user: [:profile]]]).order('slots.start_at ASC')
   end
 
   def export_availabilities

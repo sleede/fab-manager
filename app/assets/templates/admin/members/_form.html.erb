@@ -14,11 +14,11 @@
 <div class="form-group">
   <label class="col-sm-2 control-label" translate>{{ 'trainings' }}</label>
   <div class="col-sm-10">
-    <input type="hidden" name="user[training_ids][]" value="" />
+    <input type="hidden" name="user[statistic_profile_attributes][training_ids][]" value="" />
     <ui-select multiple ng-model="user.training_ids" class="form-control">
         <ui-select-match>
             <span ng-bind="$item.name"></span>
-            <input type="hidden" name="user[training_ids][]" value="{{$item.id}}" />
+            <input type="hidden" name="user[statistic_profile_attributes][training_ids][]" value="{{$item.id}}" />
         </ui-select-match>
         <ui-select-choices ui-disable-choice="t.disabled" repeat="t.id as t in (trainings | filter: $select.search)">
             <span ng-bind-html="t.name | highlight: $select.search"></span>

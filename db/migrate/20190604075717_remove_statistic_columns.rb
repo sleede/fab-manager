@@ -4,5 +4,6 @@ class RemoveStatisticColumns < ActiveRecord::Migration
     remove_column :profiles, :birthday, :date
     remove_column :reservations, :user_id
     remove_column :subscriptions, :user_id
+    remove_column :projects, :author_id
   end
 end

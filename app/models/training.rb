@@ -12,9 +12,9 @@ class Training < ActiveRecord::Base
 
   has_many :reservations, as: :reservable, dependent: :destroy
 
-  # members who DID the training
-  has_many :user_trainings, dependent: :destroy
-  has_many :users, through: :user_trainings
+  # members who has validated the trainings
+  has_many :statistic_profile_trainings, dependent: :destroy
+  has_many :statistic_profiles, through: :statistic_profile_trainings
 
   has_many :trainings_pricings, dependent: :destroy
 

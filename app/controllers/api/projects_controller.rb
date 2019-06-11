@@ -20,7 +20,7 @@ class API::ProjectsController < API::ApiController
   end
 
   def create
-    @project = Project.new(project_params.merge(author_id: current_user.id))
+    @project = Project.new(project_params.merge(author_statistic_profile_id: current_user.statistic_profile.id))
     if @project.save
       render :show, status: :created, location: @project
     else
@@ -71,8 +71,7 @@ class API::ProjectsController < API::ApiController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id,
-                                    :author_id, :licence_id, :state,
+    params.require(:project).permit(:name, :description, :tags, :machine_ids, :component_ids, :theme_ids, :licence_id, :licence_id, :state,
                                     user_ids: [], machine_ids: [], component_ids: [], theme_ids: [],
                                     project_image_attributes: [:attachment],
                                     project_caos_attributes: %i[id attachment _destroy],

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190604075717) do
+ActiveRecord::Schema.define(version: 20190606074801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,11 +280,13 @@ ActiveRecord::Schema.define(version: 20190604075717) do
     t.string   "environment"
     t.integer  "operator_id"
     t.integer  "invoicing_profile_id"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
   add_index "invoices", ["invoicing_profile_id"], name: "index_invoices_on_invoicing_profile_id", using: :btree
+  add_index "invoices", ["statistic_profile_id"], name: "index_invoices_on_statistic_profile_id", using: :btree
   add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
 
   create_table "invoicing_profiles", force: :cascade do |t|
@@ -496,16 +498,16 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_index "project_users", ["user_id"], name: "index_project_users_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",         limit: 255
+    t.string   "name",                        limit: 255
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "author_id"
     t.text     "tags"
     t.integer  "licence_id"
-    t.string   "state",        limit: 255
-    t.string   "slug",         limit: 255
+    t.string   "state",                       limit: 255
+    t.string   "slug",                        limit: 255
     t.datetime "published_at"
+    t.integer  "author_statistic_profile_id"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
@@ -662,14 +664,28 @@ ActiveRecord::Schema.define(version: 20190604075717) do
     t.boolean  "ca",                      default: true
   end
 
+  create_table "statistic_profile_trainings", force: :cascade do |t|
+    t.integer  "statistic_profile_id"
+    t.integer  "training_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "statistic_profile_trainings", ["statistic_profile_id"], name: "index_statistic_profile_trainings_on_statistic_profile_id", using: :btree
+  add_index "statistic_profile_trainings", ["training_id"], name: "index_statistic_profile_trainings_on_training_id", using: :btree
+
   create_table "statistic_profiles", force: :cascade do |t|
-    t.boolean "gender"
-    t.date    "birthday"
-    t.integer "group_id"
-    t.integer "user_id"
+    t.boolean  "gender"
+    t.date     "birthday"
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "statistic_profiles", ["group_id"], name: "index_statistic_profiles_on_group_id", using: :btree
+  add_index "statistic_profiles", ["role_id"], name: "index_statistic_profiles_on_role_id", using: :btree
   add_index "statistic_profiles", ["user_id"], name: "index_statistic_profiles_on_user_id", using: :btree
 
   create_table "statistic_sub_types", force: :cascade do |t|
@@ -795,16 +811,6 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
 
-  create_table "user_trainings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "training_id"
-  end
-
-  add_index "user_trainings", ["training_id"], name: "index_user_trainings_on_training_id", using: :btree
-  add_index "user_trainings", ["user_id"], name: "index_user_trainings_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",   null: false
     t.string   "encrypted_password",     limit: 255, default: "",   null: false
@@ -904,6 +910,7 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_foreign_key "history_values", "settings"
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "invoicing_profiles"
+  add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "users", column: "operator_id"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
@@ -912,6 +919,7 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "projects", "statistic_profiles", column: "author_statistic_profile_id"
   add_foreign_key "projects_spaces", "projects"
   add_foreign_key "projects_spaces", "spaces"
   add_foreign_key "reservations", "statistic_profiles"
@@ -920,7 +928,10 @@ ActiveRecord::Schema.define(version: 20190604075717) do
   add_foreign_key "spaces_availabilities", "availabilities"
   add_foreign_key "spaces_availabilities", "spaces"
   add_foreign_key "statistic_custom_aggregations", "statistic_types"
+  add_foreign_key "statistic_profile_trainings", "statistic_profiles"
+  add_foreign_key "statistic_profile_trainings", "trainings"
   add_foreign_key "statistic_profiles", "groups"
+  add_foreign_key "statistic_profiles", "roles"
   add_foreign_key "statistic_profiles", "users"
   add_foreign_key "subscriptions", "statistic_profiles"
   add_foreign_key "tickets", "event_price_categories"

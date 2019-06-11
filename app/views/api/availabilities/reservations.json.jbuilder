@@ -7,8 +7,8 @@ json.array!(@reservation_slots) do |slot|
   json.reservable_id slot.reservation.reservable_id
   json.reservable_type slot.reservation.reservable_type
   json.user do
-    json.id slot.reservation.user.id
-    json.name slot.reservation.user.profile.full_name
+    json.id slot.reservation.statistic_profile&.user_id
+    json.name slot.reservation.statistic_profile&.user&.profile&.full_name
   end
   json.canceled_at slot.canceled_at
 end

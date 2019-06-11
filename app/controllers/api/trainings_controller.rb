@@ -58,7 +58,7 @@ class API::TrainingsController < API::ApiController
     authorize Training
     @training = Training.find(params[:id])
     @availabilities = @training.availabilities
-                               .includes(slots: { reservations: { user: %i[profile trainings] } })
+                               .includes(slots: { reservations: { statistic_profile: [:trainings, user: [:profile]] } })
                                .order('start_at DESC')
   end
 

@@ -13,6 +13,7 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_items, dependent: :destroy
   accepts_nested_attributes_for :invoice_items
   belongs_to :invoicing_profile
+  belongs_to :statistic_profile
   belongs_to :wallet_transaction
   belongs_to :coupon
 

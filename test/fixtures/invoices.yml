@@ -8,6 +8,7 @@ invoice_1:
   created_at: 2012-03-12 11:03:31.651441000 Z
   updated_at: 2012-03-12 11:03:31.651441000 Z
   invoicing_profile_id: 3
+  statistic_profile_id: 3
   reference: 1604001/VL
   avoir_mode:
   avoir_date:
@@ -15,7 +16,7 @@ invoice_1:
   type:
   subscription_to_expire:
   description:
-  footprint: d477d23a473c565e2c379263d4c86c9cc80cdd88adc9a3ff7246afccec0e2a18
+  footprint: e7fffd325cacbb76218626ea2a35a7a9f052c208c41aac13f70c31eae9f81bc7
   environment: test
   operator_id:
 
@@ -28,6 +29,7 @@ invoice_2:
   created_at: 2012-03-12 13:40:22.342717000 Z
   updated_at: 2012-03-12 13:40:22.342717000 Z
   invoicing_profile_id: 4
+  statistic_profile_id: 4
   reference: '1604002'
   avoir_mode:
   avoir_date:
@@ -35,7 +37,7 @@ invoice_2:
   type:
   subscription_to_expire:
   description:
-  footprint: 4cef4ec78543075af4d782ef919ca95ccbdfbd3bad91f2dfe01fe9b5113eb4d4
+  footprint: bd0b739c211b40abed7ddb07bc054281513acab4a0adde6c416dc1715dd9f005
   environment: test
   operator_id:
 
@@ -48,6 +50,7 @@ invoice_3:
   created_at: 2015-06-10 11:20:01.341130000 Z
   updated_at: 2015-06-10 11:20:01.341130000 Z
   invoicing_profile_id: 7
+  statistic_profile_id: 7
   reference: '1203001'
   avoir_mode:
   avoir_date:
@@ -55,7 +58,7 @@ invoice_3:
   type:
   subscription_to_expire:
   description:
-  footprint: 295f687cfc1df1c9dfe6759f0c3a4d7e92bc8959ee909d944537dffa6b8a0a5e
+  footprint: ab00a9318314b75d29ec220e00c96e738d608d64423b1c5abb25786551f12f8b
   environment: test
   operator_id:
 
@@ -69,6 +72,7 @@ invoice_4:
   created_at: 2016-04-05 08:35:52.931187000 Z
   updated_at: 2016-04-05 08:35:52.931187000 Z
   invoicing_profile_id: 7
+  statistic_profile_id: 7
   reference: '1203002'
   avoir_mode:
   avoir_date:
@@ -76,7 +80,7 @@ invoice_4:
   type:
   subscription_to_expire:
   description:
-  footprint: 18a80a204730011d5c5b753bf9ff86bda49acf7acbdcf31cf37d67df9ae6e53e
+  footprint: 6c70f2bbbb3fd02a1ad7437ccd14456d1281d5a1f8666cce2e9d0b64701a837d
   environment: test
   operator_id:
 
@@ -89,6 +93,7 @@ invoice_5:
   created_at: 2016-04-05 08:36:46.853368000 Z
   updated_at: 2016-04-05 08:36:46.853368000 Z
   invoicing_profile_id: 3
+  statistic_profile_id: 3
   reference: '1506031'
   avoir_mode:
   avoir_date:
@@ -96,6 +101,6 @@ invoice_5:
   type:
   subscription_to_expire:
   description:
-  footprint: c94afc0e5054da75522d438e8f33e6fcadc94c960ce7bdcf4cb4d83e7ca2a8e9
+  footprint: cccd4f290d900cb7004baa63896191a6938305e75589d137655cb91a0e7dede2
   environment: test
   operator_id:
