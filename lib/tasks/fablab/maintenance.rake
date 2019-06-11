@@ -9,8 +9,8 @@ namespace :fablab do
       month = args.month || Time.now.month
       start_date = Time.new(year.to_i, month.to_i, 1)
       end_date = start_date.next_month
-      puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} in " \
-         " #{I18n.l end_date - 1.minute, format: :long}"
+      puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} and " \
+         "#{I18n.l end_date - 1.minute, format: :long}"
       invoices = Invoice.only_invoice
                         .where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
                         .order(created_at: :asc)

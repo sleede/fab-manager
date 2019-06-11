@@ -30,6 +30,13 @@ class Members::MembersService
     # if the user is created by an admin and the authentication is made through an SSO, generate a migration token
     @member.generate_auth_migration_token if current_user.admin? && AuthProvider.active.providable_type != DatabaseProvider.name
 
+    # setup the attached profiles (invoicing & statistics)
+    @member.invoicing_profile.email = params[:email]
+    @member.invoicing_profile.first_name = params[:profile_attributes][:first_name]
+    @member.invoicing_profile.last_name = params[:profile_attributes][:last_name]
+    @member.statistic_profile.group_id = params[:group_id]
+    @member.statistic_profile.role_id = Role.find_by(name: 'member').id
+
     if @member.save
       @member.generate_subscription_invoice(current_user.id)
       @member.send_confirmation_instructions

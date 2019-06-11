@@ -65,7 +65,7 @@ class API::MembersController < API::ApiController
 
   def destroy
     authorize @member
-    @member.soft_destroy
+    @member.destroy
     sign_out(@member)
     head :no_content
   end

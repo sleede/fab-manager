@@ -165,8 +165,22 @@ class Subscription < ActiveRecord::Base
       end
     end
 
-    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', invoicing_profile: user.invoicing_profile, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id, operator_id: operator_id)
-    invoice.invoice_items.push InvoiceItem.new(amount: plan.amount, stp_invoice_item_id: stp_subscription_id, description: plan.name, subscription_id: self.id)
+    invoice = Invoice.new(
+      invoiced_id: id,
+      invoiced_type: 'Subscription',
+      invoicing_profile: user.invoicing_profile,
+      statistic_profile: user.statistic_profile,
+      total: total,
+      stp_invoice_id: stp_invoice_id,
+      coupon_id: coupon_id,
+      operator_id: operator_id
+    )
+    invoice.invoice_items.push InvoiceItem.new(
+      amount: plan.amount,
+      stp_invoice_item_id: stp_subscription_id,
+      description: plan.name,
+      subscription_id: id
+    )
     invoice
   end
 
@@ -208,11 +222,18 @@ class Subscription < ActiveRecord::Base
     expiration_date
   end
 
-  def free_extend(expiration)
+  def free_extend(expiration, operator_id)
     return false if expiration <= expired_at
 
     od = offer_days.create(start_at: expired_at, end_at: expiration)
-    invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', invoicing_profile: user.invoicing_profile, total: 0)
+    invoice = Invoice.new(
+      invoiced_id: od.id,
+      invoiced_type: 'OfferDay',
+      invoicing_profile: user.invoicing_profile,
+      statistic_profile: user.statistic_profile,
+      operator_id: operator_id,
+      total: 0
+    )
     invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id)
     invoice.save
 

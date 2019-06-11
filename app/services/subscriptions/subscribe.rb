@@ -21,7 +21,7 @@ class Subscriptions::Subscribe
   end
 
   def extend_subscription(subscription, new_expiration_date, free_days)
-    return subscription.free_extend(new_expiration_date) if free_days
+    return subscription.free_extend(new_expiration_date, @operator_id) if free_days
 
     new_sub = Subscription.create(
       plan_id: subscription.plan_id,

@@ -79,5 +79,22 @@ namespace :fablab do
         )
       end
     end
+
+    desc 'migrate invoices PDF to folders by invoicing_profile'
+    task migrate_invoices_pdf_folders: :environment do
+      require 'fileutils'
+      Invoice.all.each do |i|
+        invoicing_profile = i.invoicing_profile
+        user_id = invoicing_profile.user_id
+
+        src = "invoices/#{user_id}/#{i.filename}"
+        dest = "tmp/invoices/#{invoicing_profile.id}"
+
+        FileUtils.mkdir_p dest
+        FileUtils.mv src, "dest/#{i.filename}", force: true if FileTest.exist?(src)
+      end
+      FileUtils.rm_rf 'invoices'
+      FileUtils.mv 'tmp/invoices', 'invoices'
+    end
   end
 end

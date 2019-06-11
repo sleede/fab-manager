@@ -31,9 +31,9 @@ class Invoice < ActiveRecord::Base
   validates_with ClosedPeriodValidator
 
   def file
-    dir = "invoices/#{user.id}"
+    dir = "invoices/#{invoicing_profile.id}"
 
-    # create directories if they doesn't exists (invoice & user_id)
+    # create directories if they doesn't exists (invoice & invoicing_profile_id)
     FileUtils.mkdir_p dir
     "#{dir}/#{filename}"
   end
@@ -142,7 +142,7 @@ class Invoice < ActiveRecord::Base
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self, nil).render
+    pdf = ::PDF::Invoice.new(self, subscription&.expiration_date).render
     File.binwrite(file, pdf)
   end
 
@@ -211,9 +211,12 @@ class Invoice < ActiveRecord::Base
   ##
   # Check if the current invoice is about a training that was previously validated for the concerned user.
   # In that case refunding the invoice shouldn't be allowed.
+  # Moreover, an invoice cannot be refunded if the users' account was deleted
   # @return {Boolean}
   ##
   def prevent_refund?
+    return true if user.nil?
+
     if invoiced_type == 'Reservation' && invoiced.reservable_type == 'Training'
       user.trainings.include?(invoiced.reservable_id)
     else

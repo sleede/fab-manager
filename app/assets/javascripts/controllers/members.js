@@ -72,8 +72,8 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 /**
  * Controller used when editing the current user's profile
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
-  function ($scope, $rootScope, $state, $window, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
+  function ($scope, $rootScope, $state, $window, $sce, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -194,7 +194,13 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
           object () {
             return {
               title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_your_account') + ' ' + _t('all_data_relative_to_your_projects_will_be_lost')
+              msg: $sce.trustAsHtml(
+                _t('confirm_delete_your_account') + '<br/>' +
+                '<strong>' + _t('all_data_will_be_lost') + '</strong><br/><br/>' +
+                _t('invoicing_data_kept') + '<br/>' +
+                _t('statistic_data_anonymized') + '<br/>' +
+                _t('no_further_access_to_projects')
+              )
             };
           }
         }
