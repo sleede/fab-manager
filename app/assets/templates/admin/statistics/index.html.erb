@@ -263,9 +263,15 @@
             <tbody>
               <tr ng-repeat="datum in data">
                 <td>{{formatDate(datum._source.date)}}</td>
-                <td><a href="" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a></td>
+                <td>
+                  <a ng-show="datum._source.userId" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a>
+                  <span class="text-gray text-italic" ng-hide="datum._source.userId" translate>{{ 'deleted_user' }}</span>
+                </td>
                 <td>{{formatSex(datum._source.gender)}}</td>
-                <td><span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span><span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span></td>
+                <td>
+                  <span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span>
+                  <span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span>
+                </td>
                 <td>{{formatSubtype(datum._source.subType)}}</td>
                 <td ng-if="!type.active.simple">{{datum._source.stat}}</td>
                 <td ng-repeat="field in selectedIndex.additional_fields">

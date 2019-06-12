@@ -588,6 +588,7 @@ fr:
         export_all_statistics: "Exporter toutes les statistiques"
         export_the_current_search_results: "Exporter les résultats de la recherche courante"
         export: "Exporter"
+        deleted_user: "Utilisateur supprimé"
 
       stats_graphs:
         # graphiques de statistiques
