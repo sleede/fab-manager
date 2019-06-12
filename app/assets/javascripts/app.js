@@ -23,7 +23,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock'])
   .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider',
     function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
-    // Google analytics
+      // Google analytics
       AnalyticsProvider.setAccount(Fablab.gaId);
       // track all routes (or not)
       AnalyticsProvider.trackPages(true);
@@ -122,15 +122,15 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       Analytics.pageView();
 
       /**
-       * This helper method builds and return an array contaning every integers between
+       * This helper method builds and return an array containing every integers between
        * the provided start and end.
        * @param start {number}
        * @param end {number}
        * @return {Array} [start .. end]
        */
       $rootScope.intArray = function (start, end) {
-        var arr = [];
-        for (var i = start; i < end; i++) { arr.push(i); }
+        const arr = [];
+        for (let i = start; i < end; i++) { arr.push(i); }
         return arr;
       };
     }]).constant('angularMomentConfig', {
