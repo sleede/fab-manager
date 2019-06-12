@@ -50,5 +50,19 @@ namespace :fablab do
       require 'checksum'
       puts Checksum.code
     end
+
+    desc 'delete users with accounts marked with is_active=false'
+    task delete_inactive_users: :environment do
+      count = User.where(is_active: false).count
+      if count.positive?
+        print "WARNING: You are about to delete #{count} users. Are you sure? (y/n) "
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+
+        User.where(is_active: false).map(&:destroy!)
+      else
+        puts 'No inactive users to delete'
+      end
+    end
   end
 end

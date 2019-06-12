@@ -12,8 +12,9 @@
 - Refactored some Ruby code to match style guide
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] `rake fablab:setup:migrate_pdf_invoices_folders`
 - [TODO DEPLOY] `rake db:seed`
+- [TODO DEPLOY] `rake fablab:setup:migrate_pdf_invoices_folders`
+- [TODO DEPLOY] `rake fablab:maintenance:delete_inactive_users` (will prompt for confirmation)
 
 ## v3.1.2 2019 May 27
 
