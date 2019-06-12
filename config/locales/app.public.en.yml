@@ -87,6 +87,11 @@ en:
         _the_fablab_policy: "the FabLab policy"
         field_required: "Field required"
         unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        used_for_statistics: "This data will be used for statistical purposes"
+        used_for_invoicing: "This data will be used for billing purposes"
+        used_for_reservation: "This data will be used in case of change on one of your bookings"
+        used_for_profile: "This data will only be displayed on your profile"
+        public_profile: "You will have a public profile and other users will be able to associate you in their projects"
 
         # password modification modal
         change_your_password: "Change your password"

@@ -55,6 +55,11 @@ fr:
           no_further_access_to_projects: "Vos projets publiés seront anonymisés et vous n'aurez plus de possibilité de les modifier."
           your_user_account_has_been_successfully_deleted_goodbye: "Votre compte utilisateur a bien été supprimé. Au revoir."
           an_error_occured_preventing_your_account_from_being_deleted: "Une erreur est survenue qui a empêché la suppression de votre compte."
+          used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
+          used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
+          used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
+          used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
+          public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
         projects:
           # tableau de bord : mes projets
           you_dont_have_any_projects: "Vous n'avez aucun projet."

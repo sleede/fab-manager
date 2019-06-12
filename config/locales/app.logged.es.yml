@@ -55,6 +55,11 @@ es:
           no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."   # missing translation
           your_user_account_has_been_successfully_deleted_goodbye: "Su cuenta ha sido eliminada con éxito. Adiós"
           an_error_occured_preventing_your_account_from_being_deleted: "Un error inesperado impidió que su cuenta fuese eliminada."
+          used_for_statistics: "This data will be used for statistical purposes"                   # translation missing
+          used_for_invoicing: "This data will be used for billing purposes"                        # translation missing
+          used_for_reservation: "This data will be used in case of change on one of your bookings" # translation missing
+          used_for_profile: "This data will only be displayed on your profile"                     # translation missing
+          public_profile: "You will have a public profile and other users will be able to associate you in their projects"  # translation missing
         projects:
           # dashboard: my projects
           you_dont_have_any_projects: "Aún no tiene proyectos."
