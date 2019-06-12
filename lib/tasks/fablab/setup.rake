@@ -80,8 +80,8 @@ namespace :fablab do
       end
     end
 
-    desc 'migrate invoices PDF to folders by invoicing_profile'
-    task migrate_invoices_pdf_folders: :environment do
+    desc 'migrate PDF invoices to folders numbered by invoicing_profile'
+    task migrate_pdf_invoices_folders: :environment do
       require 'fileutils'
       Invoice.all.each do |i|
         invoicing_profile = i.invoicing_profile
@@ -90,8 +90,10 @@ namespace :fablab do
         src = "invoices/#{user_id}/#{i.filename}"
         dest = "tmp/invoices/#{invoicing_profile.id}"
 
-        FileUtils.mkdir_p dest
-        FileUtils.mv src, "dest/#{i.filename}", force: true if FileTest.exist?(src)
+        if FileTest.exist?(src)
+          FileUtils.mkdir_p dest
+          FileUtils.mv src, "#{dest}/#{i.filename}", force: true
+        end
       end
       FileUtils.rm_rf 'invoices'
       FileUtils.mv 'tmp/invoices', 'invoices'

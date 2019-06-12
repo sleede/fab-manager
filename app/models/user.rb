@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   after_update :notify_group_changed, if: :group_id_changed?
   after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
   after_update :update_statistic_profile, if: :statistic_data_was_modified?
+  before_destroy :remove_orphan_drafts
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
@@ -127,10 +128,10 @@ class User < ActiveRecord::Base
     my_projects.to_a.concat projects
   end
 
-  def generate_subscription_invoice(operator_id)
+  def generate_subscription_invoice(operator_profile_id)
     return unless subscription
 
-    subscription.generate_and_save_invoice(operator_id)
+    subscription.generate_and_save_invoice(operator_profile_id)
   end
 
   def stripe_customer
@@ -275,6 +276,15 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  # remove projets drafts that are not linked to another user
+  def remove_orphan_drafts
+    orphans = my_projects
+              .joins('LEFT JOIN project_users ON projects.id = project_users.project_id')
+              .where('project_users.project_id IS NULL')
+              .where(state: 'draft')
+    orphans.map(&:destroy!)
+  end
 
   def confirmation_required?
     false

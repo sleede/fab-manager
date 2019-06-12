@@ -171,6 +171,7 @@ fr:
         # détails d'un projet
         project_description: "Description du projet"
         by_name: "Par {{NAME}}"  # angular interpolation
+        deleted_user: "Utilisateur supprimé"
         posted_on_: "posté le"
         CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"  # messageFormat interpolation
         licence: "Licence"

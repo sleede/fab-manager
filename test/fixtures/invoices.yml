@@ -16,9 +16,9 @@ invoice_1:
   type:
   subscription_to_expire:
   description:
-  footprint: e7fffd325cacbb76218626ea2a35a7a9f052c208c41aac13f70c31eae9f81bc7
+  footprint: d5fc7141c282279134320a4b1db74c540a82f105a0b1f4eeff6602730ed3e745
   environment: test
-  operator_id:
+  operator_profile_id: 3
 
 invoice_2:
   id: 2
@@ -37,9 +37,9 @@ invoice_2:
   type:
   subscription_to_expire:
   description:
-  footprint: bd0b739c211b40abed7ddb07bc054281513acab4a0adde6c416dc1715dd9f005
+  footprint: 1c156831c7cd1fcc1c6be8b83d60fbb9b89f84285638e87131582eb54b8a377d
   environment: test
-  operator_id:
+  operator_profile_id: 1
 
 invoice_3:
   id: 3
@@ -58,9 +58,9 @@ invoice_3:
   type:
   subscription_to_expire:
   description:
-  footprint: ab00a9318314b75d29ec220e00c96e738d608d64423b1c5abb25786551f12f8b
+  footprint: 5fa3ac2e2684f6df1440c63969b78ac24daa9207682b359f61c655d41d4c4f03
   environment: test
-  operator_id:
+  operator_profile_id: 1
 
 
 invoice_4:
@@ -80,9 +80,9 @@ invoice_4:
   type:
   subscription_to_expire:
   description:
-  footprint: 6c70f2bbbb3fd02a1ad7437ccd14456d1281d5a1f8666cce2e9d0b64701a837d
+  footprint: 6de8d985d82f2146aaa60e79882237b3bc8812521643b14498e4d498aec78613
   environment: test
-  operator_id:
+  operator_profile_id: 1
 
 invoice_5:
   id: 5
@@ -101,6 +101,6 @@ invoice_5:
   type:
   subscription_to_expire:
   description:
-  footprint: cccd4f290d900cb7004baa63896191a6938305e75589d137655cb91a0e7dede2
+  footprint: a78aa3f991718f023f1c6b85b6f30aeda3f3d6b20f2d64504d29a23141db9edb
   environment: test
-  operator_id:
+  operator_profile_id: 1

@@ -85,6 +85,7 @@ en:
         training_validation: "Training validation"
         training_of_the_ : "Training of the "  # context: date. eg. "training of the september 1st 2012"
         you_can_validate_the_training_of_the_following_members: "You can validate the training of the following members:"
+        deleted_user: "Deleted user"
         no_reservation: "No reservation"
         validate_the_trainings: "Validate the trainings"
         edition_of_the_description_tooltip: "Edition of the description tooltip"

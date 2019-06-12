@@ -18,7 +18,7 @@ class Availabilities::StatusService
 
         slot.id = s.id
         slot.is_reserved = true
-        slot.title = "#{slot.machine.name} - #{@show_name ? r.user.profile.full_name : I18n.t('availabilities.not_available')}"
+        slot.title = "#{slot.machine.name} - #{@show_name ? r.user&.profile&.full_name : I18n.t('availabilities.not_available')}"
         slot.can_modify = true if @current_user_role == 'admin'
         slot.reservations.push r
 

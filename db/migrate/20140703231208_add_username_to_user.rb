@@ -3,9 +3,7 @@ class AddUsernameToUser < ActiveRecord::Migration
     add_column :users, :username, :string, after: :id
 
     User.includes(:profile).each do |u|
-      if u.respond_to? :username and !u.username?
-        u.update_columns(username: u.profile.username)
-      end
+      u.update_columns(username: u.profile.username) if u.respond_to?(:username) && !u.username?
     end
 
   end

@@ -171,6 +171,7 @@ pt:
           # details of a projet
           project_description: "Descrição do projeto"
           by_name: "Por {{NAME}}"  # angular interpolation
+          deleted_user: "Deleted user"                                                                #translation_missing
           posted_on_: "Criado em"
           CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"  # messageFormat interpolation
           licence: "Licença"

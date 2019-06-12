@@ -397,8 +397,11 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      * Full reload the results list
      */
     $scope.handleFilterChange = function () {
-      resetSearchInvoice();
-      return invoiceSearch();
+      if (searchTimeout) clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(function() {
+        resetSearchInvoice();
+        invoiceSearch();
+      }, 300);
     };
 
     /**
@@ -407,7 +410,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
      */
     $scope.showNextInvoices = function () {
       $scope.page += 1;
-      return invoiceSearch(true);
+      invoiceSearch(true);
     };
 
     /**
@@ -485,6 +488,11 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
+     * Will temporize the search query to prevent overloading the API
+     */
+    var searchTimeout = null;
+
+    /**
      * Output the given integer with leading zeros. If the given value is longer than the given
      * length, it will be truncated.
      * @param value {number} the integer to pad
@@ -519,7 +527,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     /**
      * Run a search query with the current parameters set concerning invoices, then affect or concat the results
      * to $scope.invoices
-     * @param concat {boolean} if true, the result will be append to $scope.invoices instead of being affected
+     * @param [concat] {boolean} if true, the result will be append to $scope.invoices instead of being affected
      */
     var invoiceSearch = function (concat) {
       Invoice.list({

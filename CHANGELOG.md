@@ -11,6 +11,8 @@
 - Improved translations syntax according to YML specifications
 - Refactored some Ruby code to match style guide
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`
+- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `rake fablab:setup:migrate_pdf_invoices_folders`
 
 ## v3.1.2 2019 May 27
 

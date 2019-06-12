@@ -85,6 +85,7 @@ fr:
         training_validation: "Validation formation"
         training_of_the_ : "Formation du "  # context: date. eg. "training of the september 1st 2012"
         you_can_validate_the_training_of_the_following_members: "Vous pouvez valider la formation des membres suivants :"
+        deleted_user: "Utilisateur supprimé"
         no_reservation: "Aucune réservation"
         validate_the_trainings: "Valider les formations"
         edition_of_the_description_tooltip: "Édition de l'infobulle de description"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # migrate the invoices from being attached to a user to invoicing_profiles which are GDPR compliant
-class MigrateUserToInvoicingProfile < ActiveRecord::Migration
+class MigrateInvoiceToInvoicingProfile < ActiveRecord::Migration
   def up
     # first, check the footprints
     check_footprints
@@ -13,9 +13,12 @@ class MigrateUserToInvoicingProfile < ActiveRecord::Migration
     puts 'Migrating invoices. This may take a while...'
     Invoice.order(:id).all.each do |i|
       user = User.find(i.user_id)
+      operator = User.find_by(id: i.operator_id)
       i.update_column('invoicing_profile_id', user.invoicing_profile.id)
       i.update_column('statistic_profile_id', user.statistic_profile.id)
+      i.update_column('operator_profile_id', operator&.invoicing_profile&.id)
       i.update_column('user_id', nil)
+      i.update_column('operator_id', nil)
     end
     # chain all records
     InvoiceItem.order(:id).all.each(&:chain_record)
@@ -32,8 +35,10 @@ class MigrateUserToInvoicingProfile < ActiveRecord::Migration
     # reset invoices
     Invoice.order(:created_at).all.each do |i|
       i.update_column('user_id', i.invoicing_profile.user_id)
+      i.update_column('operator_id', i.operator_profile.user_id)
       i.update_column('invoicing_profile_id', nil)
       i.update_column('statistic_profile_id', nil)
+      i.update_column('operator_profile_id', nil)
     end
     # chain all records
     InvoiceItem.order(:id).all.each(&:chain_record)

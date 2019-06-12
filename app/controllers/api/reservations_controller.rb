@@ -26,7 +26,7 @@ class API::ReservationsController < API::ApiController
     user_id = current_user.admin? ? params[:reservation][:user_id] : current_user.id
 
     @reservation = Reservation.new(reservation_params)
-    is_reserve = Reservations::Reserve.new(user_id, current_user.id)
+    is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
                                       .pay_and_save(@reservation, method, coupon_params[:coupon_code])
 
     if is_reserve

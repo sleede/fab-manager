@@ -85,6 +85,7 @@ pt:
         training_validation: "Validação de treinamentos"
         training_of_the_ : "Treinamento de "  # context: date. eg. "training of the september 1st 2012"
         you_can_validate_the_training_of_the_following_members: "Você pode validar um treinamento dos seguintes membros:"
+        deleted_user: "Deleted user"                                                               # translation_missing
         no_reservation: "Sem reservas"
         validate_the_trainings: "Validação de treinamentos"
         edition_of_the_description_tooltip: "Edição da descrição tooltip"

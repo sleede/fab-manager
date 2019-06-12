@@ -16,6 +16,8 @@ class InvoicingProfile < ActiveRecord::Base
 
   has_many :history_values, dependent: :nullify
 
+  has_many :operated_invoices, foreign_key: :operator_profile_id, class_name: 'Invoice', dependent: :nullify
+
   def full_name
     # if first_name or last_name is nil, the empty string will be used as a temporary replacement
     (first_name || '').humanize.titleize + ' ' + (last_name || '').humanize.titleize

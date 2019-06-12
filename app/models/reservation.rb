@@ -224,10 +224,10 @@ class Reservation < ActiveRecord::Base
     invoice_items
   end
 
-  def save_with_payment(operator_id, coupon_code = nil)
+  def save_with_payment(operator_profile_id, coupon_code = nil)
     begin
       clean_pending_strip_invoice_items
-      build_invoice(invoicing_profile: user.invoicing_profile, statistic_profile: user.statistic_profile, operator_id: operator_id)
+      build_invoice(invoicing_profile: user.invoicing_profile, statistic_profile: user.statistic_profile, operator_profile_id: operator_profile_id)
       invoice_items = generate_invoice_items(false, coupon_code)
     rescue StandardError => e
       logger.error e
@@ -242,7 +242,7 @@ class Reservation < ActiveRecord::Base
     if plan_id
       self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
       subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, card_token: card_token, expiration_date: nil }
-      if subscription.save_with_payment(operator_id, false)
+      if subscription.save_with_payment(operator_profile_id, false)
         self.stp_invoice_id = invoice_items.first.refresh.invoice
         invoice.stp_invoice_id = invoice_items.first.refresh.invoice
         invoice.invoice_items.push InvoiceItem.new(
@@ -368,8 +368,12 @@ class Reservation < ActiveRecord::Base
     pending_invoice_items.each(&:delete)
   end
 
-  def save_with_local_payment(operator_id, coupon_code = nil)
-    build_invoice(invoicing_profile: user.invoicing_profile, statistic_profile: user.statistic_profile, operator_id: operator_id)
+  def save_with_local_payment(operator_profile_id, coupon_code = nil)
+    build_invoice(
+      invoicing_profile: user.invoicing_profile,
+      statistic_profile: user.statistic_profile,
+      operator_profile_id: operator_profile_id
+    )
     generate_invoice_items(true, coupon_code)
 
     return false unless valid?
@@ -377,7 +381,7 @@ class Reservation < ActiveRecord::Base
     if plan_id
       self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
       subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil }
-      if subscription.save_with_local_payment(operator_id, false)
+      if subscription.save_with_local_payment(operator_profile_id, false)
         invoice.invoice_items.push InvoiceItem.new(
           amount: subscription.plan.amount,
           description: subscription.plan.name,

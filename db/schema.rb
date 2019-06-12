@@ -278,8 +278,8 @@ ActiveRecord::Schema.define(version: 20190606074801) do
     t.integer  "coupon_id"
     t.string   "footprint"
     t.string   "environment"
-    t.integer  "operator_id"
     t.integer  "invoicing_profile_id"
+    t.integer  "operator_profile_id"
     t.integer  "statistic_profile_id"
   end
 
@@ -910,8 +910,8 @@ ActiveRecord::Schema.define(version: 20190606074801) do
   add_foreign_key "history_values", "settings"
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "invoicing_profiles"
+  add_foreign_key "invoices", "invoicing_profiles", column: "operator_profile_id"
   add_foreign_key "invoices", "statistic_profiles"
-  add_foreign_key "invoices", "users", column: "operator_id"
   add_foreign_key "invoices", "wallet_transactions"
   add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
