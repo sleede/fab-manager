@@ -58,4 +58,14 @@
             <a href="<%= "/users/auth/#{active_provider.strategy_name}"%>" class="font-sbold  label text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
         </li>
     <% end %>
+    <section id="cookies-consent">
+      <p class="cookies-infos">
+        <span translate>{{ 'cookies.about_cookies' }}</span>
+        <a ui-sref="app.public.privacy" translate>{{ 'cookies.learn_more' }}</a>
+      </p>
+      <div class="cookies-actions">
+        <button class="decline" translate>{{ 'cookies.decline' }}</button>
+        <button class="accept" translate>{{ 'cookies.accept' }}</button>
+      </div>
+    </section>
   </ul>

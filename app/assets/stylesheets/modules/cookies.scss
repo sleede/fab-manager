@@ -1,0 +1,27 @@
+#cookies-consent {
+  display: flex;
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 40rem;
+  height: 20rem;
+  background-color: blue;
+  color: white;
+  padding: 4rem;
+  flex-direction: column;
+
+  .cookies-actions {
+    button {
+      width: 50%;
+
+    }
+    button.decline {
+      background-color: transparent;
+      border: 0;
+    }
+    button.accept {
+      background-color: red;
+      border: 0;
+    }
+  }
+}
