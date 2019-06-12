@@ -190,3 +190,33 @@ setting_33:
   name: machines_sort_by
   created_at: 2018-09-18 15:09:48.176240000 Z
   updated_at: 2018-09-18 15:09:48.176240000 Z
+
+setting_34:
+  id: 34
+  name: about_link_text
+  created_at: 2019-06-12 13:21:12.156100000 Z
+  updated_at: 2019-06-12 13:21:12.156100000 Z
+
+setting_35:
+  id: 35
+  name: event_reduced_amount_alert
+  created_at: 2019-06-12 13:22:06.516570000 Z
+  updated_at: 2019-06-12 13:22:06.516570000 Z
+
+setting_36:
+  id: 36
+  name: reminder_enable
+  created_at: 2019-06-12 13:23:34.641680000 Z
+  updated_at: 2019-06-12 13:23:34.641680000 Z
+
+setting_37:
+  id: 37
+  name: reminder_delay
+  created_at: 2019-06-12 13:24:01.065150000 Z
+  updated_at: 2019-06-12 13:24:01.065150000 Z
+
+setting_38:
+  id: 38
+  name: privacy_draft
+  created_at: 2019-06-12 13:25:08.125640000 Z
+  updated_at: 2019-06-12 13:25:08.125640000 Z
