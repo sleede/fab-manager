@@ -217,6 +217,7 @@ pt:
   api:
     notifications:
       # internal app notifications
+      deleted_user: "Usuário deletado"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Um abuso foi relatado em <strong> %{TYPE} %{ID}: <em> %{NAME} </em> </strong>."
       notify_admin_member_create_reservation:
