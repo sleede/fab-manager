@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 wb = xlsx_package.workbook
 
-header = wb.styles.add_style :b => true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
-date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_format
+header = wb.styles.add_style b: true, bg_color: Stylesheet.primary.upcase.gsub('#', 'FF'), fg_color: 'FFFFFFFF'
+date = wb.styles.add_style format_code: Rails.application.secrets.excel_date_format
 
 wb.add_worksheet(name: t('export_members.members')) do |sheet|
 
@@ -32,42 +34,43 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
              t('export_members.echo_sciences'),
              t('export_members.organization'),
              t('export_members.organization_address')]
-  sheet.add_row columns, :style => header
+  sheet.add_row columns, style: header
 
   # data rows
   @members.each do |member|
     data = [
-        member.id,
-        member.profile.last_name,
-        member.profile.first_name,
-        member.email,
-        member.is_allow_newsletter,
-        member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman'),
-        member.profile.age,
-        member.invoicing_profile.address ? member.invoicing_profile.address.address : '',
-        member.profile.phone,
-        member.profile.website,
-        member.profile.job,
-        member.profile.interest,
-        member.profile.software_mastered,
-        member.group.name,
-        (member.subscription and member.subscription.expired_at > Time.now) ? member.subscription.plan.name : t('export_members.without_subscriptions'),
-        (member.subscription and member.subscription.expired_at > Time.now) ? member.subscription.expired_at.to_date : nil,
-        member.trainings.map(&:name).join("\n"),
-        member.tags.map(&:name).join("\n"),
-        member.invoices.size,
-        member.projects.map(&:name).join("\n"),
-        member.profile.facebook || '',
-        member.profile.twitter || '',
-        member.profile.echosciences || '',
-        member.invoicing_profile.organization ? member.invoicing_profile.organization.name : '',
-        member.invoicing_profile.organization ? member.invoicing_profile.organization.address.address : ''
+      member.id,
+      member.profile.last_name,
+      member.profile.first_name,
+      member.email,
+      member.is_allow_newsletter,
+      member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman'),
+      member.profile.age,
+      member.invoicing_profile&.address&.address || '',
+      member.profile.phone,
+      member.profile.website,
+      member.profile.job,
+      member.profile.interest,
+      member.profile.software_mastered,
+      member.group&.name,
+      member.subscription && member.subscription.expired_at > Time.now ? member.subscription.plan.name : t('export_members.without_subscriptions'),
+      member.subscription && member.subscription.expired_at > Time.now ? member.subscription.expired_at.to_date : nil,
+      member.trainings.map(&:name).join("\n"),
+      member.tags.map(&:name).join("\n"),
+      member.invoices.size,
+      member.projects.map(&:name).join("\n"),
+      member.profile.facebook || '',
+      member.profile.twitter || '',
+      member.profile.echosciences || '',
+      member.invoicing_profile&.organization.name || '',
+      member.invoicing_profile&.organization&.address&.address || ''
     ]
-    styles = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+    styles = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,
+              nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
 
-    types = [:integer, :string, :string, :string, :boolean, :string, :integer, :string, :string, :string, :string, :string,
-             :string, :string, :string, :date, :string, :string, :integer, :boolean, :string, :string, :string, :string, :string, :string]
+    types = %i[integer string string string boolean string integer string string string string string
+               string string string date string string integer boolean string string string string string string]
 
-    sheet.add_row data, :style =>  styles, :types => types
+    sheet.add_row data, style: styles, types: types
   end
 end
