@@ -1,7 +1,7 @@
 <div class="cookies-consent" ng-hide="cookiesState">
   <p class="cookies-infos">
     <span translate>{{ 'cookies.about_cookies' }}</span>
-    <a ng-href="{{learnMoreUrl}}" translate>{{ 'cookies.learn_more' }}</a>
+    <a ng-href="{{learnMoreUrl}}" target="{{ learnMoreUrl.startsWith('http') ? '_blank' : '_self' }}" translate>{{ 'cookies.learn_more' }}</a>
   </p>
   <div class="cookies-actions">
     <button class="decline" ng-click="declineCookies()" translate>{{ 'cookies.decline' }}</button>

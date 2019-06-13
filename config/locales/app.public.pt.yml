@@ -6,6 +6,13 @@ pt:
           about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"  # messageFormat interpolation
           return: "Voltar"
 
+          # cookies
+          cookies:
+            about_cookies: "Este site usa cookies para fins de medição de audiência."
+            learn_more: "Saber mais"
+            accept: "Aceitar cookies"
+            decline: "Recusar"
+
           # dashboard sections
           dashboard: "Dashboard"
           my_profile: "Meu Perfil"

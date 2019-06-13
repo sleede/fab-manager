@@ -32,34 +32,52 @@ pt:
         profile:
           empty: ''
         settings:
-          # dashboard: edit my profile
-          last_activity_on_: "Última atividade em"
-          i_want_to_change_group: "Eu quero trocar de grupo!"
-          your_subscription_expires_on_: "Sua inscrição expira em"
-          no_subscriptions: "Sem inscrições"
-          i_want_to_subscribe: "Eu quero me inscrever!"
-          to_come: "futuros"
-          approved: "aprovado"
-          projects: "Projetos"
-          no_projects: "Sem projetos"
-          labels: "Etiquetas"
-          no_labels: "Sem etiquetas"
-          delete_my_account: "Deletar minha conta"
-          edit_my_profile: "Editar meu perfil"
-          your_group_has_been_successfully_changed: "Seu grupo foi modificado com sucesso."
-          an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
-          confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
-          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."                                                # missing translation
-          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."           # missing translation
-          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."          # missing translation
-          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."   # missing translation
-          your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
-          an_error_occured_preventing_your_account_from_being_deleted: "Ocorreu um erro, impedindo que sua conta fosse excluída."
-          used_for_statistics: "This data will be used for statistical purposes"                                                            # translation missing
-          used_for_invoicing: "This data will be used for billing purposes"                                                                 # translation missing
-          used_for_reservation: "This data will be used in case of change on one of your bookings"                                          # translation missing
-          used_for_profile: "This data will only be displayed on your profile"                                                              # translation missing
-          public_profile: "You will have a public profile and other users will be able to associate you in their projects"                  # translation missing
+          edit_profile:
+            # dashboard: edit my profile
+            last_activity_on_: "Última atividade em"
+            i_want_to_change_group: "Eu quero trocar de grupo!"
+            your_subscription_expires_on_: "Sua inscrição expira em"
+            no_subscriptions: "Sem inscrições"
+            i_want_to_subscribe: "Eu quero me inscrever!"
+            to_come: "futuros"
+            approved: "aprovado"
+            projects: "Projetos"
+            no_projects: "Sem projetos"
+            labels: "Etiquetas"
+            no_labels: "Sem etiquetas"
+            cookies: "Cookies"
+            cookies_accepted: "Você aceitou cookies"
+            cookies_declined: "Você recusou cookies"
+            cookies_unset: "Você ainda não escolheu"
+            reset_cookies: "Mude minha escolha"
+            delete_my_account: "Deletar minha conta"
+            edit_my_profile: "Editar meu perfil"
+            your_group_has_been_successfully_changed: "Seu grupo foi modificado com sucesso."
+            an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
+            confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
+            all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."                                                # missing translation
+            invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."           # missing translation
+            statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."          # missing translation
+            no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."   # missing translation
+            your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
+            an_error_occured_preventing_your_account_from_being_deleted: "Ocorreu um erro, impedindo que sua conta fosse excluída."
+            used_for_statistics: "This data will be used for statistical purposes"                                                            # translation missing
+            used_for_invoicing: "This data will be used for billing purposes"                                                                 # translation missing
+            used_for_reservation: "This data will be used in case of change on one of your bookings"                                          # translation missing
+            used_for_profile: "This data will only be displayed on your profile"                                                              # translation missing
+            public_profile: "You will have a public profile and other users will be able to associate you in their projects"                  # translation missing
+            trainings: "Treinamentos"
+            no_trainings: "Sem treinamentos"
+            subscription: "Assinatura"
+            group: "Grupo"
+            or: "ou"
+            confirm_changes: "Confirmar mudanças"
+            change_my_data: "Alterar meus dados"
+            sync_my_profile: "Sincronizar meu perfil"
+            once_your_data_are_up_to_date_: "Uma vez que seus dados estão atualizados,"
+            _click_on_the_synchronization_button_opposite_: "clique no botão de sincronização"
+            _disconnect_then_reconnect_: "disconecte e se conecte novamente"
+            _for_your_changes_to_take_effect: "para que suas alterações tenham efeitos."
         projects:
           # dashboard: my projects
           you_dont_have_any_projects: "Você não tem nenhum projeto."

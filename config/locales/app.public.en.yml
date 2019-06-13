@@ -6,6 +6,13 @@ en:
         about_the_fablab: "About {GENDER, select, neutral{} other{the}} {NAME}"  # messageFormat interpolation
         return: "Return"
 
+        # cookies
+        cookies:
+          about_cookies: "This website uses cookies for audience measurement purposes."
+          learn_more: "Learn more"
+          accept: "Accept cookies"
+          decline: "Refuse"
+
         # dashboard sections
         dashboard: "Dashboard"
         my_profile: "My Profile"

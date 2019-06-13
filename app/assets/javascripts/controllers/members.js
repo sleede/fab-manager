@@ -70,10 +70,10 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 ]);
 
 /**
- * Controller used when editing the current user's profile
+ * Controller used when editing the current user's profile (in dashboard)
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
-  function ($scope, $rootScope, $state, $window, $sce, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
+  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -101,12 +101,14 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     // allow the user to change his password except if he connect from an SSO
     $scope.preventPassword = false;
 
+    // get the status of cookies acceptance
+    $scope.cookiesStatus = $cookies.get('fab-manager-cookies-consent');
+
     // mapping of fields to disable
     $scope.preventField = {};
 
     // Should the passord be modified?
-    $scope.password =
-    { change: false };
+    $scope.password = { change: false };
 
     // Angular-Bootstrap datepicker configuration for birthday
     $scope.datePicker = {
@@ -254,6 +256,15 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         };
         return $window.location.href = $scope.activeProvider.link_to_sso_connect;
       });
+
+    /**
+     * Destroy the cookie used to save the user's preference, this will trigger the choice popup again
+     */
+    $scope.resetCookies = function () {
+      $cookies.remove('fab-manager-cookies-consent');
+      $scope.cookiesStatus = undefined;
+      $injector.get('$state').reload();
+    };
 
     /* PRIVATE SCOPE */
 
