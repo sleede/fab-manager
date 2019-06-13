@@ -157,7 +157,8 @@ class StatisticService
   def reservations_machine_list(options = default_options)
     result = []
     Reservation
-      .where("reservable_type = 'Machine' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
+      .where("reservable_type = 'Machine' AND slots.canceled_at IS NULL AND " \
+             'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
       .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
@@ -179,7 +180,8 @@ class StatisticService
   def reservations_space_list(options = default_options)
     result = []
     Reservation
-      .where("reservable_type = 'Space' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
+      .where("reservable_type = 'Space' AND slots.canceled_at IS NULL AND " \
+             'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
       .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
@@ -201,7 +203,8 @@ class StatisticService
   def reservations_training_list(options = default_options)
     result = []
     Reservation
-      .where("reservable_type = 'Training' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
+      .where("reservable_type = 'Training' AND slots.canceled_at IS NULL AND " \
+             'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
       .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable
@@ -225,7 +228,8 @@ class StatisticService
   def reservations_event_list(options = default_options)
     result = []
     Reservation
-      .where("reservable_type = 'Event' AND reservations.created_at >= :start_date AND reservations.created_at <= :end_date", options)
+      .where("reservable_type = 'Event' AND slots.canceled_at IS NULL AND " \
+             'reservations.created_at >= :start_date AND reservations.created_at <= :end_date', options)
       .eager_load(:slots, statistic_profile: [:group], invoice: [:invoice_items])
       .each do |r|
       next unless r.reservable

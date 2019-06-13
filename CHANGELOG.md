@@ -11,6 +11,7 @@
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
 - Fix a bug: close period reminder is sent before the first invoice's first anniversary
+- Fix a bug: Canceled reservations are not removed from statistics (#133)
 - Improved translations syntax according to YML specifications
 - Refactored some Ruby code to match style guide
 - [TODO DEPLOY] `rake fablab:fix:users_group_ids`

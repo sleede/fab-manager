@@ -40,8 +40,8 @@ class Availability < ActiveRecord::Base
   validate :should_be_associated
 
   ## elastic callbacks
-  after_save { AvailabilityIndexerWorker.perform_async(:index, self.id) }
-  after_destroy { AvailabilityIndexerWorker.perform_async(:delete, self.id) }
+  after_save { AvailabilityIndexerWorker.perform_async(:index, id) }
+  after_destroy { AvailabilityIndexerWorker.perform_async(:delete, id) }
 
   # elastic mapping
   settings index: { number_of_replicas: 0 } do
@@ -113,7 +113,7 @@ class Availability < ActiveRecord::Base
     return false if nb_total_places.blank?
 
     if available_type == 'training' || available_type == 'space'
-      nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
+      nb_total_places <= slots.to_a.select { |s| s.canceled_at.nil? }.size
     elsif available_type == 'event'
       event.nb_free_places.zero?
     end
@@ -132,6 +132,7 @@ class Availability < ActiveRecord::Base
     end
   end
 
+  # the resulting JSON will be indexed in ElasticSearch, as /fablab/availabilities
   def as_indexed_json
     json = JSON.parse(to_json)
     json['hours_duration'] = (end_at - start_at) / (60 * 60)

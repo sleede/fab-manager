@@ -75,6 +75,7 @@ class Project < ActiveRecord::Base
     end
   end
 
+  # the resulting JSON will be indexed in ElasticSearch, as /fablab/projects
   def as_indexed_json
     ApplicationController.new.view_context.render(
       partial: 'api/projects/indexed',

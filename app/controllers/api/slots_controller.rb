@@ -19,7 +19,7 @@ class API::SlotsController < API::ApiController
 
   def cancel
     authorize @slot
-    @slot.update_attributes(canceled_at: DateTime.now)
+    SlotService.new.cancel(@slot)
   end
 
   private
