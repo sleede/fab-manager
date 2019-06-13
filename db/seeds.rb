@@ -594,7 +594,7 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
   cookies de mesure d’audience (Google Analytics).</p><p>Les cookies de mesure d’audience établissent des statistiques concernant la
   fréquentation et l’utilisation de divers éléments du site web (comme les contenus/pages que vous avez visité).
   Ces données participent à l’amélioration de l’ergonomie du site web de _________. Un outil de mesure d’audience est utilisé sur le
-  présent site internet :</p><p><b>o Google Tag Manager</b> (Google Analytics) pour gérer les statistiques de visites dont la politique de
+  présent site internet :</p><p><b>o Google Analytics</b> pour gérer les statistiques de visites dont la politique de
   confidentialité est disponible (uniquement en anglais) à partir du <a href=\"https://policies.google.com/privacy?hl=fr&amp;gl=ZZ\">lien
   </a> suivant. </p><h4>c. Vous disposez de divers outils de paramétrage des cookies</h4><p>La plupart
   des navigateurs Internet sont configurés par défaut de façon à ce que le dépôt de cookies soit autorisé. Votre navigateur vous offre
