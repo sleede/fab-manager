@@ -1,0 +1,10 @@
+<div class="cookies-consent" ng-hide="cookiesState">
+  <p class="cookies-infos">
+    <span translate>{{ 'cookies.about_cookies' }}</span>
+    <a ng-href="{{learnMoreUrl}}" translate>{{ 'cookies.learn_more' }}</a>
+  </p>
+  <div class="cookies-actions">
+    <button class="decline" ng-click="declineCookies()" translate>{{ 'cookies.decline' }}</button>
+    <button class="accept" ng-click="acceptCookies()" translate>{{ 'cookies.accept' }}</button>
+  </div>
+</div>

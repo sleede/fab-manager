@@ -6,7 +6,8 @@
   "globals": {
     "Application": true,
     "angular": true,
-    "Fablab": true
+    "Fablab": true,
+    "moment": true,
   }
 }
 

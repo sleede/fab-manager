@@ -15,6 +15,7 @@
 - [TODO DEPLOY] `rake db:seed`
 - [TODO DEPLOY] `rake fablab:setup:migrate_pdf_invoices_folders`
 - [TODO DEPLOY] `rake fablab:maintenance:delete_inactive_users` (will prompt for confirmation)
+- [TODO DEPLOY] `rake fablab:maintenance:rebuild_stylesheet`
 
 ## v3.1.2 2019 May 27
 

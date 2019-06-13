@@ -24,12 +24,20 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider',
     function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
       // Google analytics
-      AnalyticsProvider.setAccount(Fablab.gaId);
-      // track all routes (or not)
-      AnalyticsProvider.trackPages(true);
-      AnalyticsProvider.setDomainName(Fablab.defaultHost);
-      AnalyticsProvider.useAnalytics(true);
-      AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+      // first we check the user acceptance
+      const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
+      if (cookiesConsent === 'accept') {
+        AnalyticsProvider.setAccount(Fablab.gaId);
+        // track all routes (or not)
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.setDomainName(Fablab.defaultHost);
+        AnalyticsProvider.useAnalytics(true);
+        AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+      } else {
+        // if the cookies were not explicitly accepted, delete them
+        document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = '_gid=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      }
 
       // Custom messages for the date-picker widget
       uibDatepickerPopupConfig.closeText = Fablab.translations.app.shared.buttons.close;

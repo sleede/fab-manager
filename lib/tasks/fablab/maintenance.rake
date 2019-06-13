@@ -64,5 +64,10 @@ namespace :fablab do
         puts 'No inactive users to delete'
       end
     end
+
+    desc '(re)build customization stylesheet'
+    task rebuild_stylesheet: :environment do
+      Stylesheet.build_sheet!
+    end
   end
 end

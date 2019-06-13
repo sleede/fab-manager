@@ -27,6 +27,10 @@ angular.module('application.router', ['ui.router'])
             templateUrl: '<%= asset_path "shared/leftnav.html" %>',
             controller: 'MainNavController'
           },
+          'cookies': {
+            templateUrl: '<%= asset_path "shared/cookies.html" %>',
+            controller: 'CookiesController'
+          },
           'main': {}
         },
         resolve: {
