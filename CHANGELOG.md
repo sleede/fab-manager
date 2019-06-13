@@ -4,6 +4,9 @@
 - Alert users on privacy policy update
 - Abuses reports management panel
 - Refactored user's profile to keep invoicing data after an user was deleted
+- Refactored user's profile to keep statistical data after an user was deleted
+- Ability to delete an user (fixes #129 and #120)
+- Ask user acceptance before deposing analytics cookies 
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
