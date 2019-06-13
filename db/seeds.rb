@@ -580,9 +580,7 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
   le site web de _________, leur nom, leur finalité ainsi que leur durée de conservation.</p><h4>2. Configuration de vos préférences sur les
   cookies</h4><p>Vous pouvez accepter ou refuser le dépôt de cookies à tout moment.</p><p>Lors de votre première connexion sur le site web
   de _________, une bannière présentant brièvement des informations relatives au dépôt de cookies et de technologies similaires apparaît en
-  bas de votre écran. Cette bannière vous avertit qu’en poursuivant votre navigation sur le site web de _________ (en chargeant une nouvelle
-  page ou en cliquant sur divers éléments du site par exemple), vous acceptez le dépôt de cookies sur votre terminal. Vous êtes également
-  réputé avoir donné votre accord au dépôt de cookies en cliquant sur l’icône « X » à droite de la bannière figurant en bas de votre écran.
+  bas de votre écran. Cette bannière vous demande de choisir explicitement d'acceptez ou non le dépôt de cookies sur votre terminal.
   </p><p>Selon le type de cookie en cause, le recueil de votre consentement au dépôt et à la lecture de cookies sur votre terminal peut être
   impératif.</p><h4>a. Les cookies exemptés de consentement</h4><p>Conformément aux recommandations de la Commission Nationale de
   l’Informatique et des Libertés (CNIL), certains cookies sont dispensés du recueil préalable de votre consentement dans la mesure où ils
@@ -597,8 +595,8 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
   fréquentation et l’utilisation de divers éléments du site web (comme les contenus/pages que vous avez visité).
   Ces données participent à l’amélioration de l’ergonomie du site web de _________. Un outil de mesure d’audience est utilisé sur le
   présent site internet :</p><p><b>o Google Tag Manager</b> (Google Analytics) pour gérer les statistiques de visites dont la politique de
-  confidentialité est disponible (uniquement en anglais) à partir du lien suivant :
-  https://policies.google.com/privacy?hl=fr&amp;gl=ZZ</p><h4>c. Vous disposez de divers outils de paramétrage des cookies</h4><p>La plupart
+  confidentialité est disponible (uniquement en anglais) à partir du <a href=\"https://policies.google.com/privacy?hl=fr&amp;gl=ZZ\">lien
+  </a> suivant. </p><h4>c. Vous disposez de divers outils de paramétrage des cookies</h4><p>La plupart
   des navigateurs Internet sont configurés par défaut de façon à ce que le dépôt de cookies soit autorisé. Votre navigateur vous offre
   l’opportunité de modifier ces paramètres standards de manière à ce que l’ensemble des cookies soit rejeté systématiquement ou bien à ce
   qu’une partie seulement des cookies soit acceptée ou refusée en fonction de leur émetteur.</p><p><b>ATTENTION</b> : Nous attirons votre
@@ -614,13 +612,16 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
   <h4>d. Le paramétrage de votre navigateur Internet</h4><p>Chaque navigateur Internet propose ses propres paramètres de gestion des
   cookies. Pour savoir de quelle manière modifier vos préférences en matière de cookies, vous trouverez ci-dessous les liens vers l’aide
   nécessaire pour accéder au menu de votre navigateur prévu à cet effet :</p>
-  <p>Chrome : https://support.google.com/chrome/answer/95647?hl=fr</p>
-  <p>Firefox : https://support.mozilla.org/fr/kb/activer-desactiver-cookies</p>
-  <p>Internet Explorer : https://support.microsoft.com/fr-fr/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11</p>
-  <p>Opera : http://help.opera.com/Windows/10.20/fr/cookies.html</p>
-  <p>Safari : https://support.apple.com/kb/PH21411?viewlocale=fr_FR&amp;locale=fr_FR</p>
-  <p>Pour de plus amples informations concernant les outils de maîtrise des cookies, vous pouvez consulter le site internet de la CNIL :
-  https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser.</p>"
+  <ul>
+    <li><a href=\"https://support.google.com/chrome/answer/95647?hl=fr\">Chrome</a></li>
+    <li><a href=\"https://support.mozilla.org/fr/kb/activer-desactiver-cookies\">Firefox</a></li>
+    <li><a href=\"https://support.microsoft.com/fr-fr/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11\">Internet
+    Explorer</a></li>
+    <li><a href=\"http://help.opera.com/Windows/10.20/fr/cookies.html\">Opera</a></li>
+    <li><a href=\"https://support.apple.com/kb/PH21411?viewlocale=fr_FR&amp;locale=fr_FR\">Safari</a></li>
+  </ul>
+  <p>Pour de plus amples informations concernant les outils de maîtrise des cookies, vous pouvez consulter le
+  <a href=\"https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser\">site internet</a> de la CNIL.</p>"
   setting.save
 end
 
