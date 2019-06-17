@@ -581,13 +581,18 @@ unless Setting.find_by(name: 'privacy_draft').try(:value)
   cookies</h4><p>Vous pouvez accepter ou refuser le dépôt de cookies à tout moment.</p><p>Lors de votre première connexion sur le site web
   de _________, une bannière présentant brièvement des informations relatives au dépôt de cookies et de technologies similaires apparaît en
   bas de votre écran. Cette bannière vous demande de choisir explicitement d'acceptez ou non le dépôt de cookies sur votre terminal.
-  </p><p>Selon le type de cookie en cause, le recueil de votre consentement au dépôt et à la lecture de cookies sur votre terminal peut être
+  </p><p>Après avoir fait votre choix, vous pouvez le modifier ultérieurement&nbsp; en vous connectant à votre compte utilisateur puis en
+  naviguant dans la section intitulée « mes paramètres&nbsp;», accessible via un clic sur votre nom, en haut à droite de l'écran.</p>
+  <p>Selon le type de cookie en cause, le recueil de votre consentement au dépôt et à la lecture de cookies sur votre terminal peut être
   impératif.</p><h4>a. Les cookies exemptés de consentement</h4><p>Conformément aux recommandations de la Commission Nationale de
   l’Informatique et des Libertés (CNIL), certains cookies sont dispensés du recueil préalable de votre consentement dans la mesure où ils
   sont strictement nécessaires au fonctionnement du site internet ou ont pour finalité exclusive de permettre ou faciliter la communication
-  par voie électronique. Il s’agit notamment des cookies d’identifiant de session, d’authentification, de session d’équilibrage de charge
-  ainsi que des cookies de personnalisation de votre interface. Ces cookies sont intégralement soumis à la présente politique dans la mesure
-  où ils sont émis et gérés par _________.</p><h4>b. Les cookies nécessitant le recueil préalable de votre consentement</h4><p>Cette
+  par voie électronique.  Il s’agit des cookies suivants :</p><p><b>o Identifiant de session</b> et&nbsp;<b>authentification</b> sur l'API.
+  Ces cookies sont intégralement soumis à la présente politique dans la mesure où ils sont émis et gérés par _________.</p><p>
+  <b>o Stripe</b>, permettant de gérer les paiements par carte bancaire et dont la politique de confidentialité est accessible sur ce
+  <a href=\"https://stripe.com/fr/privacy\">lien</a>.</p><p><b>o Disqus</b>, permettant de poster des commentaires sur les fiches projet et
+  dont la politique de confidentialité est accessible sur ce <a href=\"https://help.disqus.com/articles/1717103-disqus-privacy-policy\">lien
+  </a>.</p><h4>b. Les cookies nécessitant le recueil préalable de votre consentement</h4><p>Cette
   exigence concerne les cookies émis par des tiers et qui sont qualifiés de « persistants » dans la mesure où ils demeurent dans votre
   terminal jusqu’à leur effacement ou leur date d’expiration.</p><p>De tels cookies étant émis par des tiers, leur utilisation et leur dépôt
   sont soumis à leurs propres politiques de confidentialité dont vous trouverez un lien ci-dessous. Cette famille de cookie comprend les
