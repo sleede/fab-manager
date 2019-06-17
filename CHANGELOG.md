@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v4.0.0 2019 June 17
+
 - Configurable privacy policy and data protection officer
 - Alert users on privacy policy update
 - Abuses reports management panel
