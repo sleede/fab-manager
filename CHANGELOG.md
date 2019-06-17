@@ -2,6 +2,7 @@
 
 - Fix a bug: cookie consent modal is not shown
 - Fix a bug: prevent task migrate_pdf_invoices_folders from raising an error when run with no invoices
+- Documentation about dumping the database
 
 ## v4.0.0 2019 June 17
 
