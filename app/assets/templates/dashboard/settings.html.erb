@@ -84,7 +84,7 @@
           <div ng-hide="cookiesStatus" translate>{{ 'edit_profile.cookies_unset' }}</div>
           <button ng-click="resetCookies()" ng-show="cookiesStatus" class="btn text-black btn-warning-full btn-sm m-t-xs" translate>{{ 'edit_profile.reset_cookies' }}</button>
         </div>
-        <div class="widget-content no-bg text-center auto wrapper">
+        <div class="widget-content no-bg text-center auto wrapper" ng-hide="isSuperAdmin">
           <button class="btn text-white btn-danger btn-sm" ng-click="deleteUser(user)"><i class="fa fa-warning m-r-xs"></i> {{ 'edit_profile.delete_my_account' | translate }}</button>
         </div>
       </div>
