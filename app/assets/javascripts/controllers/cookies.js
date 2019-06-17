@@ -51,7 +51,7 @@ Application.Controllers.controller('CookiesController', ['$scope', '$cookies', '
         }
       });
       // if the GA_ID environment variable was not set, only functional cookies will be set, so user consent is not required
-      $scope.cookiesState = 'ignore';
+      if (!Fablab.gaId) $scope.cookiesState = 'ignore';
     };
 
     const readCookie = function () {

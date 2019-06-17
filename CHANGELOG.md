@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug : cookie consent modal is not shown
+
 ## v4.0.0 2019 June 17
 
 - Configurable privacy policy and data protection officer
