@@ -82,6 +82,8 @@ namespace :fablab do
 
     desc 'migrate PDF invoices to folders numbered by invoicing_profile'
     task migrate_pdf_invoices_folders: :environment do
+      puts 'No invoices, exiting...' and return if Invoice.count.zero?
+
       require 'fileutils'
       Invoice.all.each do |i|
         invoicing_profile = i.invoicing_profile
