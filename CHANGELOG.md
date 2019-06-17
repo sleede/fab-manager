@@ -1,5 +1,12 @@
 # Changelog Fab Manager
 
+## v4.0.1 2019 June 17
+
+- Fix a bug: migration 20190523140823 may not run if an admin was deleted
+- Fix a bug: cookie consent modal is not shown
+- Fix a bug: prevent task migrate_pdf_invoices_folders from raising an error when run with no invoices
+- Documentation about dumping the database
+
 ## v4.0.0 2019 June 17
 
 - Configurable privacy policy and data protection officer

@@ -17,6 +17,33 @@ This can be achieved doing the following:
    su postgres
    psql
    ```
+   
+## Dumping the database
+
+Use the following commands to dump the PostgreSQL database to an archive file
+```bash
+cd /apps/fabmanager/
+docker-compose exec postgres bash
+cd /var/lib/postgresql/data/
+pg_dump -U postgres fabmanager_production > fabmanager_production_$(date -I).sql
+tar cvzf fabmanager_production_$(date -I).tar.gz fabmanager_production_$(date -I).sql
+```
+
+If you're connected to your server thought SSH, you can download the resulting dump file using the following:
+```bash
+scp root@remote.server.fab:/apps/fabmanager/postgresql/dump/fabmanager_production_$(date -I).tar.gz .
+```
+
+Restore the dump with the following:
+```bash
+tar xvf fabmanager_production_$(date -I).tar.gz
+sudo cp fabmanager_production_$(date -I).sql .docker/postgresql/
+rake db:drop
+rake db:create
+docker exec -it fabmanager-postgres bash
+cd /var/lib/postgresql/data/
+psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sql
+```
 
 <a name="postgresql-limitations"></a>
 ## PostgreSQL Limitations
