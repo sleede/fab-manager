@@ -2,7 +2,7 @@ class Subscription < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
   belongs_to :plan
-  belongs_to :user
+  belongs_to :statistic_profile
 
   has_many :invoices, as: :invoiced, dependent: :destroy
   has_many :offer_days, dependent: :destroy
@@ -18,9 +18,9 @@ class Subscription < ActiveRecord::Base
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
   # Stripe subscription payment
-  # @params [invoice] if true then subscription pay itself, dont pay with reservation
-  #                   if false then subscription pay with reservation
-  def save_with_payment(operator_id, invoice = true, coupon_code = nil)
+  # @param invoice if true then subscription pay itself, dont pay with reservation
+  #                if false then subscription pay with reservation
+  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil)
     return unless valid?
 
     begin
@@ -75,7 +75,7 @@ class Subscription < ActiveRecord::Base
       # generate invoice
       stp_invoice = Stripe::Invoice.all(customer: user.stp_customer_id, limit: 1).data.first
       if invoice
-        db_invoice = generate_invoice(operator_id, stp_invoice.id, coupon_code)
+        db_invoice = generate_invoice(operator_profile_id, stp_invoice.id, coupon_code)
         # debit wallet
         wallet_transaction = debit_user_wallet
         if wallet_transaction
@@ -127,9 +127,9 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  # @params [invoice] if true then only the subscription is payed, without reservation
-  #                   if false then the subscription is payed with reservation
-  def save_with_local_payment(operator_id, invoice = true, coupon_code = nil)
+  # @param invoice if true then only the subscription is payed, without reservation
+  #                if false then the subscription is payed with reservation
+  def save_with_local_payment(operator_profile_id, invoice = true, coupon_code = nil)
     return false unless valid?
 
     set_expiration_date
@@ -142,7 +142,7 @@ class Subscription < ActiveRecord::Base
       # debit wallet
       wallet_transaction = debit_user_wallet
 
-      invoc = generate_invoice(operator_id, nil, coupon_code)
+      invoc = generate_invoice(operator_profile_id, nil, coupon_code)
       if wallet_transaction
         invoc.wallet_amount = @wallet_amount_debit
         invoc.wallet_transaction_id = wallet_transaction.id
@@ -152,7 +152,7 @@ class Subscription < ActiveRecord::Base
     true
   end
 
-  def generate_invoice(operator_id, stp_invoice_id = nil, coupon_code = nil)
+  def generate_invoice(operator_profile_id, stp_invoice_id = nil, coupon_code = nil)
     coupon_id = nil
     total = plan.amount
 
@@ -165,13 +165,27 @@ class Subscription < ActiveRecord::Base
       end
     end
 
-    invoice = Invoice.new(invoiced_id: id, invoiced_type: 'Subscription', user: user, total: total, stp_invoice_id: stp_invoice_id, coupon_id: coupon_id, operator_id: operator_id)
-    invoice.invoice_items.push InvoiceItem.new(amount: plan.amount, stp_invoice_item_id: stp_subscription_id, description: plan.name, subscription_id: self.id)
+    invoice = Invoice.new(
+      invoiced_id: id,
+      invoiced_type: 'Subscription',
+      invoicing_profile: user.invoicing_profile,
+      statistic_profile: user.statistic_profile,
+      total: total,
+      stp_invoice_id: stp_invoice_id,
+      coupon_id: coupon_id,
+      operator_profile_id: operator_profile_id
+    )
+    invoice.invoice_items.push InvoiceItem.new(
+      amount: plan.amount,
+      stp_invoice_item_id: stp_subscription_id,
+      description: plan.name,
+      subscription_id: id
+    )
     invoice
   end
 
-  def generate_and_save_invoice(operator_id, stp_invoice_id = nil)
-    generate_invoice(operator_id, stp_invoice_id).save
+  def generate_and_save_invoice(operator_profile_id, stp_invoice_id = nil)
+    generate_invoice(operator_profile_id, stp_invoice_id).save
   end
 
   def cancel
@@ -208,11 +222,18 @@ class Subscription < ActiveRecord::Base
     expiration_date
   end
 
-  def free_extend(expiration)
+  def free_extend(expiration, operator_profile_id)
     return false if expiration <= expired_at
 
     od = offer_days.create(start_at: expired_at, end_at: expiration)
-    invoice = Invoice.new(invoiced_id: od.id, invoiced_type: 'OfferDay', user: user, total: 0)
+    invoice = Invoice.new(
+      invoiced_id: od.id,
+      invoiced_type: 'OfferDay',
+      invoicing_profile: user.invoicing_profile,
+      statistic_profile: user.statistic_profile,
+      operator_profile_id: operator_profile_id,
+      total: 0
+    )
     invoice.invoice_items.push InvoiceItem.new(amount: 0, description: plan.name, subscription_id: id)
     invoice.save
 
@@ -221,6 +242,10 @@ class Subscription < ActiveRecord::Base
       return true
     end
     false
+  end
+
+  def user
+    statistic_profile.user
   end
 
   private

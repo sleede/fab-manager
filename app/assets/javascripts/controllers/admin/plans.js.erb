@@ -145,7 +145,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
       if ((content.id == null) && (content.plan_ids == null)) {
         return growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'));
       } else {
-        growl.success(_t('new_plan.successfully_created_subscription(s)_dont_forget_to_redefine_prices'));
+        growl.success(_t('new_plan.successfully_created_subscriptions_dont_forget_to_redefine_prices'));
         if (content.plan_ids != null) {
           return $state.go('app.admin.pricing');
         } else {

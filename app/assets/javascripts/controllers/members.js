@@ -70,10 +70,10 @@ Application.Controllers.controller('MembersController', ['$scope', 'Member', 'me
 ]);
 
 /**
- * Controller used when editing the current user's profile
+ * Controller used when editing the current user's profile (in dashboard)
  */
-Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
-  function ($scope, $rootScope, $state, $window, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
+Application.Controllers.controller('EditProfileController', ['$scope', '$rootScope', '$state', '$window', '$sce', '$cookies', '$injector', 'Member', 'Auth', 'Session', 'activeProviderPromise', 'growl', 'dialogs', 'CSRF', 'memberPromise', 'groups', '_t',
+  function ($scope, $rootScope, $state, $window, $sce, $cookies, $injector, Member, Auth, Session, activeProviderPromise, growl, dialogs, CSRF, memberPromise, groups, _t) {
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -101,12 +101,14 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
     // allow the user to change his password except if he connect from an SSO
     $scope.preventPassword = false;
 
+    // get the status of cookies acceptance
+    $scope.cookiesStatus = $cookies.get('fab-manager-cookies-consent');
+
     // mapping of fields to disable
     $scope.preventField = {};
 
     // Should the passord be modified?
-    $scope.password =
-    { change: false };
+    $scope.password = { change: false };
 
     // Angular-Bootstrap datepicker configuration for birthday
     $scope.datePicker = {
@@ -116,6 +118,9 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         startingDay: Fablab.weekStartingDay
       }
     };
+
+    // This boolean value will tell if the current user is the super-admin
+    $scope.isSuperAdmin = memberPromise.id === Fablab.superadminId;
 
     /**
      * Return the group object, identified by the ID set in $scope.userGroup
@@ -137,10 +142,10 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         $rootScope.currentUser = user;
         Auth._currentUser.group_id = user.group_id;
         $scope.group.change = false;
-        return growl.success(_t('your_group_has_been_successfully_changed'));
+        return growl.success(_t('edit_profile.your_group_has_been_successfully_changed'));
       }
       , function (err) {
-        growl.error(_t('an_unexpected_error_prevented_your_group_from_being_changed'));
+        growl.error(_t('edit_profile.an_unexpected_error_prevented_your_group_from_being_changed'));
         return console.error(err);
       });
 
@@ -194,7 +199,13 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
           object () {
             return {
               title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_your_account') + ' ' + _t('all_data_relative_to_your_projects_will_be_lost')
+              msg: $sce.trustAsHtml(
+                _t('edit_profile.confirm_delete_your_account') + '<br/>' +
+                '<strong>' + _t('edit_profile.all_data_will_be_lost') + '</strong><br/><br/>' +
+                _t('edit_profile.invoicing_data_kept') + '<br/>' +
+                _t('edit_profile.statistic_data_anonymized') + '<br/>' +
+                _t('edit_profile.no_further_access_to_projects')
+              )
             };
           }
         }
@@ -203,12 +214,12 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         Member.remove({ id: user.id }, () =>
           Auth.logout().then(function () {
             $state.go('app.public.home');
-            return growl.success(_t('your_user_account_has_been_successfully_deleted_goodbye'));
+            return growl.success(_t('edit_profile.your_user_account_has_been_successfully_deleted_goodbye'));
           })
 
         , function (error) {
           console.log(error);
-          return growl.error(_t('an_error_occured_preventing_your_account_from_being_deleted'));
+          return growl.error(_t('edit_profile.an_error_occured_preventing_your_account_from_being_deleted'));
         })
       );
 
@@ -249,6 +260,15 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         return $window.location.href = $scope.activeProvider.link_to_sso_connect;
       });
 
+    /**
+     * Destroy the cookie used to save the user's preference, this will trigger the choice popup again
+     */
+    $scope.resetCookies = function () {
+      $cookies.remove('fab-manager-cookies-consent');
+      $scope.cookiesStatus = undefined;
+      $injector.get('$state').reload();
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -258,7 +278,7 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate();
+      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
 
       if ($scope.activeProvider.providable_type !== 'DatabaseProvider') {
         $scope.preventPassword = true;

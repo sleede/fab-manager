@@ -3,10 +3,10 @@
 
 <% if provider.name == AuthProvider::SimpleAuthProvider.new.name %>
   <p><%= t('.body.account_completed') %>
-    <%= "#{@attached_object.profile.full_name}" %> &lt;<%= @attached_object.email%>&gt;.</p>
+    <%= "#{@attached_object&.profile&.full_name || t('api.notifications.deleted_user')}" %> &lt;<%= @attached_object.email%>&gt;.</p>
 <% else %>
   <p><%= t('.body.imported_account_completed', PROVIDER: provider.name) %>
-      <%= "#{@attached_object.profile.full_name}" %> &lt;<%= @attached_object.email%>&gt;.</p>
+      <%= "#{@attached_object&.profile&.full_name || t('api.notifications.deleted_user')}" %> &lt;<%= @attached_object.email%>&gt;.</p>
 <% end %>
 
 <% if @attached_object.uid %>

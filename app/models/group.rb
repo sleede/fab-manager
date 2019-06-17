@@ -1,6 +1,7 @@
 class Group < ActiveRecord::Base
   has_many :plans
   has_many :users
+  has_many :statistic_profiles
   has_many :trainings_pricings, dependent: :destroy
   has_many :machines_prices, -> { where(priceable_type: 'Machine') }, class_name: 'Price', dependent: :destroy
   has_many :spaces_prices, -> { where(priceable_type: 'Space') }, class_name: 'Price', dependent: :destroy

@@ -60,6 +60,9 @@ class InvoicesTest < ActionDispatch::IntegrationTest
     assert_equal 4, refund[:items][0][:invoice_item_id]
     assert_match %r{^[0-9]+/A$}, refund[:reference]
     assert_equal 'Lorem ipsum', avoir.description
+
+    # Check footprint
+    assert avoir.check_footprint
   end
 
   test 'admin fails generates a refund in closed period' do

@@ -6,8 +6,9 @@
     {{ 'you_can_validate_the_training_of_the_following_members' | translate }}</p>
   <ul class="list-unstyled" ng-if="availability.reservation_users.length > 0">
     <li ng-repeat="user in availability.reservation_users">
-      {{user.full_name}}
-      <input type="checkbox" ng-checked="user.is_valid" ng-disabled="user.is_valid" ng-click="toggleSelection(user)" />
+      <label for="{{user.id}}" ng-show="user.id">{{user.full_name}}</label>
+      <span class="text-gray text-italic" ng-hide="user.id" translate>{{ 'deleted_user' }}</span>
+      <input type="checkbox" ng-checked="user.is_valid" ng-disabled="user.is_valid || !user.id" ng-click="toggleSelection(user)" id="{{user.id}}" />
     </li>
   </ul>
   <p ng-if="availability.reservation_users.length == 0" translate>{{ 'no_reservation' }}</p>

@@ -23,13 +23,21 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock'])
   .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider',
     function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
-    // Google analytics
-      AnalyticsProvider.setAccount(Fablab.gaId);
-      // track all routes (or not)
-      AnalyticsProvider.trackPages(true);
-      AnalyticsProvider.setDomainName(Fablab.defaultHost);
-      AnalyticsProvider.useAnalytics(true);
-      AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+      // Google analytics
+      // first we check the user acceptance
+      const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
+      if (cookiesConsent === 'accept') {
+        AnalyticsProvider.setAccount(Fablab.gaId);
+        // track all routes (or not)
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.setDomainName(Fablab.defaultHost);
+        AnalyticsProvider.useAnalytics(true);
+        AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+      } else {
+        // if the cookies were not explicitly accepted, delete them
+        document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = '_gid=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      }
 
       // Custom messages for the date-picker widget
       uibDatepickerPopupConfig.closeText = Fablab.translations.app.shared.buttons.close;
@@ -122,15 +130,15 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       Analytics.pageView();
 
       /**
-       * This helper method builds and return an array contaning every integers between
+       * This helper method builds and return an array containing every integers between
        * the provided start and end.
        * @param start {number}
        * @param end {number}
        * @return {Array} [start .. end]
        */
       $rootScope.intArray = function (start, end) {
-        var arr = [];
-        for (var i = start; i < end; i++) { arr.push(i); }
+        const arr = [];
+        for (let i = start; i < end; i++) { arr.push(i); }
         return arr;
       };
     }]).constant('angularMomentConfig', {

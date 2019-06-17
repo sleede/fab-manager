@@ -152,7 +152,7 @@
             {{ 'you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a>
           </div>
           <div class="well well-warning m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
-            <div class="font-sbold text-u-c text-sm">{{ 'you_booked_(DATE)' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
+            <div class="font-sbold text-u-c text-sm">{{ 'you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
             <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'ticket' | translate:{NUMBER:reservation.nb_reserve_places}:"messageformat" }}</div>
             <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
               {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'ticket' | translate:{NUMBER:ticket.booked}:"messageformat" }}

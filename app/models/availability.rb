@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# Availability stores time slots that are available to reservation for an associated reservable
+# Eg. a 3D printer will be reservable on thursday from 9 to 11 pm
+# Availabilities may be subdivided into Slots (of 1h), for some types of reservables (eg. Machine)
 class Availability < ActiveRecord::Base
 
   # elastic initialisations
@@ -35,8 +40,8 @@ class Availability < ActiveRecord::Base
   validate :should_be_associated
 
   ## elastic callbacks
-  after_save { AvailabilityIndexerWorker.perform_async(:index, self.id) }
-  after_destroy { AvailabilityIndexerWorker.perform_async(:delete, self.id) }
+  after_save { AvailabilityIndexerWorker.perform_async(:index, id) }
+  after_destroy { AvailabilityIndexerWorker.perform_async(:delete, id) }
 
   # elastic mapping
   settings index: { number_of_replicas: 0 } do
@@ -87,9 +92,7 @@ class Availability < ActiveRecord::Base
   def title(filter = {})
     case available_type
     when 'machines'
-      if filter[:machine_ids]
-        return machines.to_ary.delete_if { |m| !filter[:machine_ids].include?(m.id) }.map(&:name).join(' - ')
-      end
+      return machines.to_ary.delete_if { |m| !filter[:machine_ids].include?(m.id) }.map(&:name).join(' - ') if filter[:machine_ids]
 
       machines.map(&:name).join(' - ')
     when 'event'
@@ -110,7 +113,7 @@ class Availability < ActiveRecord::Base
     return false if nb_total_places.blank?
 
     if available_type == 'training' || available_type == 'space'
-      nb_total_places <= slots.to_a.select {|s| s.canceled_at == nil }.size
+      nb_total_places <= slots.to_a.select { |s| s.canceled_at.nil? }.size
     elsif available_type == 'event'
       event.nb_free_places.zero?
     end
@@ -129,18 +132,19 @@ class Availability < ActiveRecord::Base
     end
   end
 
+  # the resulting JSON will be indexed in ElasticSearch, as /fablab/availabilities
   def as_indexed_json
     json = JSON.parse(to_json)
     json['hours_duration'] = (end_at - start_at) / (60 * 60)
     json['subType'] = case available_type
                       when 'machines'
-                        machines_availabilities.map{ |ma| ma.machine.friendly_id }
+                        machines_availabilities.map { |ma| ma.machine.friendly_id }
                       when 'training'
-                        trainings_availabilities.map{ |ta| ta.training.friendly_id }
+                        trainings_availabilities.map { |ta| ta.training.friendly_id }
                       when 'event'
                         [event.category.friendly_id]
                       when 'space'
-                        spaces_availabilities.map{ |sa| sa.space.friendly_id }
+                        spaces_availabilities.map { |sa| sa.space.friendly_id }
                       else
                         []
                       end
@@ -156,7 +160,9 @@ class Availability < ActiveRecord::Base
   end
 
   def should_be_associated
-    errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine')) if available_type == 'machines' && machine_ids.count == 0
+    return unless available_type == 'machines' && machine_ids.count.zero?
+
+    errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine'))
   end
 
 end

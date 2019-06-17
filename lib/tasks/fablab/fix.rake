@@ -125,5 +125,23 @@ namespace :fablab do
         p.save
       end
     end
+
+    desc '[release 3.1.2] fix users with invalid group_id'
+    task users_group_ids: :environment do
+      User.where.not(group_id: Group.all.map(&:id)).each do |u|
+        u.update_columns(group_id: Group.first.id, updated_at: DateTime.now)
+
+        meta_data = { ex_group_name: 'invalid group' }
+
+        NotificationCenter.call type: :notify_admin_user_group_changed,
+                                receiver: User.admins,
+                                attached_object: u,
+                                meta_data: meta_data
+
+        NotificationCenter.call type: :notify_user_user_group_changed,
+                                receiver: u,
+                                attached_object: u
+      end
+    end
   end
 end

@@ -29,7 +29,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon" translate>{{ 'invoices.invoice_#_' }}</span>
+                  <span class="input-group-addon" translate>{{ 'invoices.invoice_num_' }}</span>
                   <input type="text" ng-model="searchInvoice.reference" class="form-control" placeholder="" ng-change="handleFilterChange()">
                 </div>
               </div>
@@ -62,7 +62,7 @@
     		        <thead>
     		        <tr>
                   <th style="width:5%"></th>
-    		          <th style="width:15%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'invoices.invoice_#' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+    		          <th style="width:15%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'invoices.invoice_num' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
     		          <th style="width:20%"><a href="" ng-click="setOrderInvoice('date')">{{ 'invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
@@ -83,7 +83,9 @@
     		          <td ng-if="!invoice.is_avoir">{{ invoice.date | amDateFormat:'L LTS' }}</td>
     		          <td ng-if="invoice.is_avoir">{{ invoice.date | amDateFormat:'L' }}</td>
     		          <td>{{ invoice.total | currency}}</td>
-    		          <td><a href="" ui-sref="app.admin.members_edit({id: invoice.user_id})">{{ invoice.name }} </a>
+    		          <td>
+                    <a href="" ui-sref="app.admin.members_edit({id: invoice.user_id})" ng-show="invoice.user_id">{{ invoice.name }}</a>
+                    <span ng-hide="invoice.user_id">{{ invoice.name }}</span>
     		          <td>
     		            <div class="buttons">
     		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
@@ -128,12 +130,12 @@
 				</div>
         <div class="invoice-buyer-infos">
             <strong translate>{{ 'invoices.john_smith' }}</strong>
-            <div translate>{{ 'invoices.john_smith@example_com' }}</div>
+            <div translate>{{ 'invoices.john_smith_at_example_com' }}</div>
         </div>
 				<div class="invoice-reference invoice-editable" ng-click="openEditReference()">{{ 'invoices.invoice_reference_' | translate }} {{mkReference()}}</div>
 			  <div class="invoice-code invoice-editable" ng-show="invoice.code.active" ng-click="openEditCode()">{{ 'invoices.code_' | translate }} {{invoice.code.model}}</div>
         <div class="invoice-code invoice-activable" ng-show="!invoice.code.active" ng-click="openEditCode()" translate>{{ 'invoices.code_disabled' }}</div>
-				<div class="invoice-order invoice-editable" ng-click="openEditInvoiceNb()"> {{ 'invoices.order_#' | translate }} {{mkNumber()}}</div>
+				<div class="invoice-order invoice-editable" ng-click="openEditInvoiceNb()"> {{ 'invoices.order_num' | translate }} {{mkNumber()}}</div>
 				<div class="invoice-date">{{ 'invoices.invoice_issued_on_DATE_at_TIME' | translate:{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT')} }}</div>
 				<div class="invoice-object">
 					{{ 'invoices.object_reservation_of_john_smith_on_DATE_at_TIME' | translate:{DATE:(inOneWeek | amDateFormat:'L'), TIME:(inOneWeek | amDateFormat:'LT')} }}
@@ -217,7 +219,7 @@
                   <li ng-click="invoice.reference.help = 'addYear.html'">{{ 'invoices.year' | translate }}</li>
                   <li ng-click="invoice.reference.help = 'addMonth.html'">{{ 'invoices.month' | translate }}</li>
                   <li ng-click="invoice.reference.help = 'addDay.html'">{{ 'invoices.day' | translate }}</li>
-                  <li ng-click="invoice.reference.help = 'addInvoiceNumber.html'">{{ 'invoices.#_of_invoice' | translate }}</li>
+                  <li ng-click="invoice.reference.help = 'addInvoiceNumber.html'">{{ 'invoices.num_of_invoice' | translate }}</li>
                   <li ng-click="invoice.reference.help = 'addOnlineInfo.html'">{{ 'invoices.online_sales' | translate }}</li>
                   <%# <li ng-click="invoice.reference.help = 'addWalletInfo.html'">{{ 'invoices.wallet' | translate }}</li> %>
                   <li ng-click="invoice.reference.help = 'addRefundInfo.html'">{{ 'invoices.refund' | translate }}</li>
@@ -244,60 +246,60 @@
 
 <script type="text/ng-template" id="addYear.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>YY</strong></td><td translate>{{ 'invoices.2_digits_year_(eg_70)' }}</td></tr>
-        <tr><td><strong>YYYY</strong></td><td translate>{{ 'invoices.4_digits_year_(eg_1970)' }}</td></tr>
+        <tr><td><strong>YY</strong></td><td translate>{{ 'invoices.2_digits_year' }}</td></tr>
+        <tr><td><strong>YYYY</strong></td><td translate>{{ 'invoices.4_digits_year' }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addMonth.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>M</strong></td><td translate>{{ 'invoices.month_number_(eg_1)' }}</td></tr>
-        <tr><td><strong>MM</strong></td><td translate>{{ 'invoices.2_digits_month_number_(eg_01)' }}</td></tr>
-        <tr><td><strong>MMM</strong></td><td translate>{{ 'invoices.3_characters_month_name_(eg_JAN)' }}</td></tr>
+        <tr><td><strong>M</strong></td><td translate>{{ 'invoices.month_number' }}</td></tr>
+        <tr><td><strong>MM</strong></td><td translate>{{ 'invoices.2_digits_month_number' }}</td></tr>
+        <tr><td><strong>MMM</strong></td><td translate>{{ 'invoices.3_characters_month_name' }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addDay.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>D</strong></td><td translate>{{ 'invoices.day_in_the_month_(eg_1)' }}</td></tr>
-        <tr><td><strong>DD</strong></td><td translate>{{ 'invoices.2_digits_day_in_the_month_(eg_01)' }}</td></tr>
+        <tr><td><strong>D</strong></td><td translate>{{ 'invoices.day_in_the_month' }}</td></tr>
+        <tr><td><strong>DD</strong></td><td translate>{{ 'invoices.2_digits_day_in_the_month' }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addInvoiceNumber.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'invoices.(n)_digits_daily_count_of_invoices_(eg_ddd_002_2nd_invoice_of_the_day)' }}</td></tr>
-        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'invoices.(n)_digits_monthly_count_of_invoices_(eg_mmmm_0012_12th_invoice_of_this_month)' }}</td></tr>
-        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'invoices.(n)_digits_annual_amount_of_invoices_(eg_yyyyyy_000008_8th_invoice_of_this_year)' }}</td></tr>
+        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'invoices.n_digits_daily_count_of_invoices' }}</td></tr>
+        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'invoices.n_digits_monthly_count_of_invoices' }}</td></tr>
+        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'invoices.n_digits_annual_amount_of_invoices' }}</td></tr>
     </table>
     <span class="bottom-notes" translate>{{ 'invoices.beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left' }}</span>
 </script>
 
 <script type="text/ng-template" id="addOrderNumber.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>nn...nn</strong></td><td translate>{{ 'invoices.(n)_digits_count_of_orders_(eg_nnnn_0327_327th_order)' }}</td></tr>
-        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'invoices.(n)_digits_daily_count_of_orders_(eg_ddd_002_2nd_order_of_the_day)' }}</td></tr>
-        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'invoices.(n)_digits_monthly_count_of_orders_(eg_mmmm_0012_12th_order_of_this_month)' }}</td></tr>
-        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'invoices.(n)_digits_annual_amount_of_orders_(eg_yyyyyy_000008_8th_order_of_this_year)' }}</td></tr>
+        <tr><td><strong>nn...nn</strong></td><td translate>{{ 'invoices.n_digits_count_of_orders' }}</td></tr>
+        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'invoices.n_digits_daily_count_of_orders' }}</td></tr>
+        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'invoices.n_digits_monthly_count_of_orders' }}</td></tr>
+        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'invoices.n_digits_annual_amount_of_orders' }}</td></tr>
     </table>
     <span class="bottom-notes" translate>{{ 'invoices.beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left' }}</span>
 </script>
 
 <script type="text/ng-template" id="addOnlineInfo.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>X[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'invoices.(eg_X[/VL]_will_add_/VL_to_the_invoices_settled_with_stripe)' | translate }}</td></tr>
+        <tr><td><strong>X[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'invoices.eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe' | translate }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addWalletInfo.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>W[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'invoices.(eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet)' | translate }}</td></tr>
+        <tr><td><strong>W[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'invoices.eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet' | translate }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addRefundInfo.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>R[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned' | translate }}<mark translate>{{ 'invoices.this_will_never_be_added_when_an_online_sales_notice_is_present' }}</mark> {{ 'invoices.(eg_R[/A]_will_add_/A_to_the_refund_invoices)' | translate }}</td></tr>
+        <tr><td><strong>R[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned' | translate }}<mark translate>{{ 'invoices.this_will_never_be_added_when_an_online_sales_notice_is_present' }}</mark> {{ 'invoices.eg_RA_will_add_A_to_the_refund_invoices' | translate }}</td></tr>
     </table>
 </script>
 
@@ -345,7 +347,7 @@
                     <li ng-click="invoice.number.help = 'addYear.html'">{{ 'invoices.year' | translate }}</li>
                     <li ng-click="invoice.number.help = 'addMonth.html'">{{ 'invoices.month' | translate }}</li>
                     <li ng-click="invoice.number.help = 'addDay.html'">{{ 'invoices.day' | translate }}</li>
-                    <li ng-click="invoice.number.help = 'addOrderNumber.html'">{{ 'invoices.order_#' | translate }}</li>
+                    <li ng-click="invoice.number.help = 'addOrderNumber.html'">{{ 'invoices.order_num' | translate }}</li>
                 </ul>
             </div>
             <div class="col-md-8">

@@ -30,8 +30,8 @@ namespace :fablab do
 
       if AccountingPeriod.count.positive?
         last_period = AccountingPeriod.order(start_at: 'DESC').first
-        InvoiceItem.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
         puts "Regenerating from #{last_period.end_at}..."
+        InvoiceItem.where('created_at > ?', last_period.end_at).order(:id).each(&:chain_record)
       else
         puts '(Re)generating all footprint...'
         InvoiceItem.order(:id).all.each(&:chain_record)
@@ -78,6 +78,25 @@ namespace :fablab do
           created_at: DateTime.parse(args.date)
         )
       end
+    end
+
+    desc 'migrate PDF invoices to folders numbered by invoicing_profile'
+    task migrate_pdf_invoices_folders: :environment do
+      require 'fileutils'
+      Invoice.all.each do |i|
+        invoicing_profile = i.invoicing_profile
+        user_id = invoicing_profile.user_id
+
+        src = "invoices/#{user_id}/#{i.filename}"
+        dest = "tmp/invoices/#{invoicing_profile.id}"
+
+        if FileTest.exist?(src)
+          FileUtils.mkdir_p dest
+          FileUtils.mv src, "#{dest}/#{i.filename}", force: true
+        end
+      end
+      FileUtils.rm_rf 'invoices'
+      FileUtils.mv 'tmp/invoices', 'invoices'
     end
   end
 end

@@ -21,21 +21,16 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
-  has_many :my_projects, foreign_key: :author_id, class_name: 'Project', dependent: :destroy
+  has_one :invoicing_profile, dependent: :nullify
+  accepts_nested_attributes_for :invoicing_profile
+
+  has_one :statistic_profile, dependent: :nullify
+  accepts_nested_attributes_for :statistic_profile
+
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
 
-  has_many :reservations, dependent: :destroy
-  accepts_nested_attributes_for :reservations, allow_destroy: true
-
-  # Trainings that were already passed
-  has_many :user_trainings, dependent: :destroy
-  has_many :trainings, through: :user_trainings
-
   belongs_to :group
-
-  has_many :subscriptions, dependent: :destroy
-  accepts_nested_attributes_for :subscriptions, allow_destroy: true
 
   has_many :users_credits, dependent: :destroy
   has_many :credits, through: :users_credits
@@ -43,19 +38,11 @@ class User < ActiveRecord::Base
   has_many :training_credits, through: :users_credits, source: :training_credit
   has_many :machine_credits, through: :users_credits, source: :machine_credit
 
-  has_many :invoices, dependent: :destroy
-  has_many :operated_invoices, foreign_key: :operator_id, class_name: 'Invoice', dependent: :nullify
-
   has_many :user_tags, dependent: :destroy
   has_many :tags, through: :user_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
 
-  has_one :wallet, dependent: :destroy
-  has_many :wallet_transactions, dependent: :destroy
-
   has_many :exports, dependent: :destroy
-
-  has_many :history_values, dependent: :nullify
 
   # fix for create admin user
   before_save do
@@ -63,22 +50,32 @@ class User < ActiveRecord::Base
   end
 
   before_create :assign_default_role
-  after_create :create_a_wallet
   after_commit :create_stripe_customer, on: [:create]
   after_commit :notify_admin_when_user_is_created, on: :create
+  after_create :init_dependencies
   after_update :notify_group_changed, if: :group_id_changed?
+  after_update :update_invoicing_profile, if: :invoicing_data_was_modified?
+  after_update :update_statistic_profile, if: :statistic_data_was_modified?
+  before_destroy :remove_orphan_drafts
 
   attr_accessor :cgu
   delegate :first_name, to: :profile
   delegate :last_name, to: :profile
+  delegate :subscriptions, to: :statistic_profile
+  delegate :reservations, to: :statistic_profile
+  delegate :trainings, to: :statistic_profile
+  delegate :my_projects, to: :statistic_profile
+  delegate :wallet, to: :invoicing_profile
+  delegate :wallet_transactions, to: :invoicing_profile
+  delegate :invoices, to: :invoicing_profile
 
   validate :cgu_must_accept, if: :new_record?
 
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
 
   scope :active, -> { where(is_active: true) }
-  scope :without_subscription, -> { includes(:subscriptions).where(subscriptions: { user_id: nil }) }
-  scope :with_subscription, -> { joins(:subscriptions) }
+  scope :without_subscription, -> { includes(statistic_profile: [:subscriptions]).where(subscriptions: { statistic_profile_id: nil }) }
+  scope :with_subscription, -> { joins(statistic_profile: [:subscriptions]) }
 
   def to_json(*)
     ApplicationController.new.view_context.render(
@@ -131,24 +128,14 @@ class User < ActiveRecord::Base
     my_projects.to_a.concat projects
   end
 
-  def generate_subscription_invoice(operator_id)
+  def generate_subscription_invoice(operator_profile_id)
     return unless subscription
 
-    subscription.generate_and_save_invoice(operator_id)
+    subscription.generate_and_save_invoice(operator_profile_id)
   end
 
   def stripe_customer
     Stripe::Customer.retrieve stp_customer_id
-  end
-
-  def soft_destroy
-    update_attribute(:is_active, false)
-    uninvolve_from_projects
-  end
-
-  def uninvolve_from_projects
-    my_projects.destroy_all
-    project_users.destroy_all
   end
 
   def active_for_authentication?
@@ -157,9 +144,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     active_provider = AuthProvider.active
-    if active_provider.strategy_name != auth.provider
-      raise SecurityError, 'The identity provider does not match the activated one'
-    end
+    raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
     where(provider: auth.provider, uid: auth.uid).first_or_create.tap do |user|
       # execute this regardless of whether record exists or not (-> User#tap)
@@ -173,8 +158,8 @@ class User < ActiveRecord::Base
   end
 
   def need_completion?
-    profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
-      email.blank? || encrypted_password.blank? || group_id.nil? || profile.birthday.blank? || profile.phone.blank?
+    statistic_profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
+      email.blank? || encrypted_password.blank? || group_id.nil? || statistic_profile.birthday.blank? || profile.phone.blank?
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
@@ -188,11 +173,11 @@ class User < ActiveRecord::Base
       when 'profile.avatar'
         profile.user_avatar.remote_attachment_url
       when 'profile.address'
-        profile.address.address
+        invoicing_profile.address.address
       when 'profile.organization_name'
-        profile.organization.name
+        invoicing_profile.organization.name
       when 'profile.organization_address'
-        profile.organization.address.address
+        invoicing_profile.organization.address.address
       else
         profile[parsed[2].to_sym]
       end
@@ -211,15 +196,15 @@ class User < ActiveRecord::Base
         profile.user_avatar ||= UserAvatar.new
         profile.user_avatar.remote_attachment_url = data
       when 'profile.address'
-        profile.address ||= Address.new
-        profile.address.address = data
+        invoicing_profile.address ||= Address.new
+        invoicing_profile.address.address = data
       when 'profile.organization_name'
-        profile.organization ||= Organization.new
-        profile.organization.name = data
+        invoicing_profile.organization ||= Organization.new
+        invoicing_profile.organization.name = data
       when 'profile.organization_address'
-        profile.organization ||= Organization.new
-        profile.organization.address ||= Address.new
-        profile.organization.address.address = data
+        invoicing_profile.organization ||= Organization.new
+        invoicing_profile.organization.address ||= Address.new
+        invoicing_profile.organization.address.address = data
       else
         profile[sso_mapping[8..-1].to_sym] = data unless data.nil?
       end
@@ -235,9 +220,7 @@ class User < ActiveRecord::Base
   ## and remove the auth_token to mark his account as "migrated"
   def link_with_omniauth_provider(auth)
     active_provider = AuthProvider.active
-    if active_provider.strategy_name != auth.provider
-      raise SecurityError, 'The identity provider does not match the activated one'
-    end
+    raise SecurityError, 'The identity provider does not match the activated one' if active_provider.strategy_name != auth.provider
 
     if User.where(provider: auth.provider, uid: auth.uid).size.positive?
       raise DuplicateIndexError, "This #{active_provider.name} account is already linked to an existing user"
@@ -294,6 +277,15 @@ class User < ActiveRecord::Base
 
   protected
 
+  # remove projets drafts that are not linked to another user
+  def remove_orphan_drafts
+    orphans = my_projects
+              .joins('LEFT JOIN project_users ON projects.id = project_users.project_id')
+              .where('project_users.project_id IS NULL')
+              .where(state: 'draft')
+    orphans.map(&:destroy!)
+  end
+
   def confirmation_required?
     false
   end
@@ -319,10 +311,6 @@ class User < ActiveRecord::Base
 
   def create_stripe_customer
     StripeWorker.perform_async(:create_stripe_customer, id)
-  end
-
-  def create_a_wallet
-    create_wallet
   end
 
   def send_devise_notification(notification, *args)
@@ -355,5 +343,56 @@ class User < ActiveRecord::Base
     NotificationCenter.call type: :notify_user_user_group_changed,
                             receiver: self,
                             attached_object: self
+  end
+
+  def invoicing_data_was_modified?
+    email_changed?
+  end
+
+  def statistic_data_was_modified?
+    group_id_changed?
+  end
+
+  def init_dependencies
+    if invoicing_profile.nil?
+      ip = InvoicingProfile.create!(
+        user: self,
+        email: email,
+        first_name: first_name,
+        last_name: last_name
+      )
+    end
+    if wallet.nil?
+      ip ||= invoicing_profile
+      Wallet.create!(
+        invoicing_profile: ip
+      )
+    end
+    if statistic_profile.nil?
+      StatisticProfile.create!(
+        user: self,
+        group_id: group_id,
+        role_id: roles.first.id
+      )
+    else
+      update_statistic_profile
+    end
+  end
+
+  def update_invoicing_profile
+    raise NoProfileError if invoicing_profile.nil?
+
+    invoicing_profile.update_attributes(
+      email: email
+    )
+  end
+
+  # will update the statistic_profile after a group switch. Updating the role is not supported
+  def update_statistic_profile
+    raise NoProfileError if statistic_profile.nil?
+
+    statistic_profile.update_attributes(
+      group_id: group_id
+    )
   end
 end

@@ -1,7 +1,7 @@
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 
-<p><%= t('.body.new_account_created') %> "<%= @attached_object.profile.full_name %> &lt;<%= @attached_object.email%>&gt;"</p>
+<p><%= t('.body.new_account_created') %> "<%= @attached_object&.profile&.full_name || t('api.notifications.deleted_user') %> &lt;<%= @attached_object.email%>&gt;"</p>
 
-<% if @attached_object.profile.organization %>
-  <p><%= t('.body.account_for_organization') %> <%= @attached_object.profile.organization.name %></p>
+<% if @attached_object.invoicing_profile.organization %>
+  <p><%= t('.body.account_for_organization') %> <%= @attached_object.invoicing_profile.organization.name %></p>
 <% end %>

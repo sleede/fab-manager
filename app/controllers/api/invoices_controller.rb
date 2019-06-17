@@ -8,7 +8,7 @@ class API::InvoicesController < API::ApiController
   def index
     authorize Invoice
     @invoices = Invoice.includes(
-      :avoir, :invoiced, invoice_items: %i[subscription invoice_item], user: %i[profile trainings]
+      :avoir, :invoiced, :invoicing_profile, invoice_items: %i[subscription invoice_item]
     ).all.order('reference DESC')
   end
 

@@ -225,8 +225,11 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      * Callback when the search field content changes: reload the search results
      */
     $scope.updateTextSearch = function () {
-      resetSearchMember();
-      return memberSearch();
+      if (searchTimeout) clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(function() {
+        resetSearchMember();
+        memberSearch();
+      }, 300);
     };
 
     /**
@@ -253,6 +256,11 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     /**
+     * Will temporize the search query to prevent overloading the API
+     */
+    var searchTimeout = null;
+
+    /**
      * Iterate through the provided array and return the index of the requested admin
      * @param admins {Array} full list of users with role 'admin'
      * @param id {Number} user id of the admin to retrieve in the list
@@ -267,13 +275,13 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
      */
     var resetSearchMember = function () {
       $scope.member.noMore = false;
-      return $scope.member.page = 1;
+      $scope.member.page = 1;
     };
 
     /**
      * Run a search query with the current parameters set ($scope.member[searchText,order,page])
      * and affect or append the result in $scope.members, depending on the concat parameter
-     * @param concat {boolean} if true, the result will be append to $scope.members instead of being affected
+     * @param [concat] {boolean} if true, the result will be append to $scope.members instead of being affected
      */
     var memberSearch = function (concat) {
       Member.list({
@@ -314,15 +322,14 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
     // Form action on the above URL
     $scope.method = 'patch';
 
-    // List of tags associables with user
+    // List of tags joinable with user
     $scope.tags = tagsPromise;
 
     // The user to edit
     $scope.user = memberPromise;
 
-    // Should the passord be modified?
-    $scope.password =
-    { change: false };
+    // Should the password be modified?
+    $scope.password = { change: false };
 
     // the user subscription
     if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -537,7 +544,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
       CSRF.setMetaTags();
 
       // init the birth date to JS object
-      $scope.user.profile.birthday = moment($scope.user.profile.birthday).toDate();
+      $scope.user.statistic_profile.birthday = moment($scope.user.statistic_profile.birthday).toDate();
 
       // the user subscription
       if (($scope.user.subscribed_plan != null) && ($scope.user.subscription != null)) {
@@ -576,22 +583,24 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
     // Form action on the above URL
     $scope.method = 'post';
 
-    // Should the passord be set manually or generated?
-    $scope.password =
-    { change: false };
+    // Should the password be set manually or generated?
+    $scope.password = { change: false };
 
     // Default member's profile parameters
-    $scope.user =
-    { plan_interval: '' };
+    $scope.user = {
+      plan_interval: '',
+      invoicing_profile: {},
+      statistic_profile: {}
+    };
 
-    // Callback when the admin check/unckeck the box telling that the new user is an organization.
+    // Callback when the admin check/uncheck the box telling that the new user is an organization.
     // Disable or enable the organization fields in the form, accordingly
     $scope.toggleOrganization = function () {
       if ($scope.user.organization) {
-        if (!$scope.user.profile) { $scope.user.profile = {}; }
-        return $scope.user.profile.organization = {};
+        if (!$scope.user.invoicing_profile) { $scope.user.invoicing_profile = {}; }
+        $scope.user.invoicing_profile.organization = {};
       } else {
-        return $scope.user.profile.organization = undefined;
+        $scope.user.invoicing_profile.organization = undefined;
       }
     };
 
@@ -607,9 +616,11 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
   // default admin profile
   let getGender;
   $scope.admin = {
-    profile_attributes: {
+    statistic_profile_attributes: {
       gender: true
-    }
+    },
+    profile_attributes: {},
+    invoicing_profile_attributes: {}
   };
 
   // Default parameters for AngularUI-Bootstrap datepicker
@@ -652,8 +663,8 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
    * @return {string} 'male' or 'female'
    */
   return getGender = function (user) {
-    if (user.profile_attributes) {
-      if (user.profile_attributes.gender) { return 'male'; } else { return 'female'; }
+    if (user.statistic_profile_attributes) {
+      if (user.statistic_profile_attributes.gender) { return 'male'; } else { return 'female'; }
     } else { return 'other'; }
   };
 }

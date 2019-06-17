@@ -52,23 +52,23 @@ class PDF::Invoice < Prawn::Document
       end
 
       # user/organization's information
-      if invoice&.user&.profile&.organization
-        name = invoice.user.profile.organization.name
-        full_name = "#{name} (#{invoice.user.profile.full_name})"
+      if invoice&.invoicing_profile&.organization
+        name = invoice.invoicing_profile.organization.name
+        full_name = "#{name} (#{invoice.invoicing_profile.full_name})"
       else
-        name = invoice.user.profile.full_name
+        name = invoice.invoicing_profile.full_name
         full_name = name
       end
 
-      address = if invoice&.user&.profile&.organization&.address
-                  invoice.user.profile.organization.address.address
-                elsif invoice&.user&.profile&.address
-                  invoice.user.profile.address.address
+      address = if invoice&.invoicing_profile&.organization&.address
+                  invoice.invoicing_profile.organization.address.address
+                elsif invoice&.invoicing_profile&.address
+                  invoice.invoicing_profile.address.address
                 else
                   ''
                 end
 
-      text_box "<b>#{name}</b>\n#{invoice.user.email}\n#{address}",
+      text_box "<b>#{name}</b>\n#{invoice.invoicing_profile.email}\n#{address}",
                at: [bounds.width - 130, bounds.top - 49],
                width: 130,
                align: :right,
@@ -131,14 +131,16 @@ class PDF::Invoice < Prawn::Document
           else
             subscription_end_at = if subscription_expiration_date.is_a?(Time)
                                     subscription_expiration_date
-                                  else
+                                  elsif subscription_expiration_date.is_a?(String)
                                     DateTime.parse(subscription_expiration_date)
+                                  else
+                                    subscription.expiration_date
                                   end
             subscription_start_at = subscription_end_at - subscription.plan.duration
             details += I18n.t('invoices.subscription_NAME_from_START_to_END',
                               NAME: item.description,
                               START: I18n.l(subscription_start_at.to_date),
-                              END: I18n.l(subscription_expiration_date.to_date))
+                              END: I18n.l(subscription_end_at.to_date))
           end
 
 

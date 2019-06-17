@@ -2,6 +2,8 @@
 
 <input name="_method" type="hidden" ng-value="method">
 <input name="user[profile_attributes][id]" type="hidden" ng-value="user.profile.id">
+<input name="user[invoicing_profile_attributes][id]" type="hidden" ng-value="user.invoicing_profile.id">
+<input name="user[statistic_profile_attributes][id]" type="hidden" ng-value="user.statistic_profile.id">
 
 <div class="row m-t">
     <div class="col-sm-3 col-sm-offset-1">
@@ -37,33 +39,33 @@
     </div>
     <div class="col-sm-offset-1 col-sm-6">
 
-      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$invalid}">
+      <div class="form-group" ng-class="{'has-error': userForm['user[statistic_profile_attributes][gender]'].$dirty && userForm['user[statistic_profile_attributes][gender]'].$invalid}">
           <label class="checkbox-inline btn btn-default">
             <input type="radio"
-                   name="user[profile_attributes][gender]"
-                   ng-model="user.profile.gender"
+                   name="user[statistic_profile_attributes][gender]"
+                   ng-model="user.statistic_profile.gender"
                    value="true"
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"
                    required/>
               <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
           </label>
           <label class="checkbox-inline btn btn-default">
             <input type="radio"
-                   name="user[profile_attributes][gender]"
-                   ng-model="user.profile.gender"
+                   name="user[statistic_profile_attributes][gender]"
+                   ng-model="user.statistic_profile.gender"
                    value="false"
-                   ng-disabled="preventField['profile.gender'] && user.profile.gender && !userForm['user[profile_attributes][gender]'].$dirty"/>
+                   ng-disabled="preventField['profile.gender'] && user.statistic_profile.gender && !userForm['user[statistic_profile_attributes][gender]'].$dirty"/>
               <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
           </label>
-        <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+        <span class="exponent m-l-xs help-cursor" title="{{ 'used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
 
-        <span class="help-block" ng-show="userForm['user[profile_attributes][gender]'].$dirty && userForm['user[profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[statistic_profile_attributes][gender]'].$dirty && userForm['user[statistic_profile_attributes][gender]'].$error.required" translate>{{ 'gender_is_required' }}</span>
       </div>
 
 
       <div class="form-group" ng-class="{'has-error': userForm['user[username]'].$dirty && userForm['user[username]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
           </span>
           <input type="text"
                  name="user[username]"
@@ -81,7 +83,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][last_name]'].$dirty && userForm['user[profile_attributes][last_name]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  name="user[profile_attributes][last_name]"
                  ng-model="user.profile.last_name"
@@ -96,7 +98,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][first_name]'].$dirty && userForm['user[profile_attributes][first_name]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  name="user[profile_attributes][first_name]"
                  ng-model="user.profile.first_name"
@@ -111,7 +113,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[email]'].$dirty && userForm['user[email]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="email"
                  name="user[email]"
                  ng-model="user.email"
@@ -144,7 +146,7 @@
                  required/>
         </div>
         <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.required" translate>{{ 'password_is_required' }}</span>
-        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'password_is_too_short_(minimum_8_characters)' }}</span>
+        <span class="help-block" ng-show="userForm['user[password]'].$dirty && userForm['user[password]'].$error.minlength" translate>{{ 'password_is_too_short' }}</span>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$invalid}" ng-if="password.change">
@@ -161,84 +163,84 @@
                  match="user.password"/>
         </div>
         <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.required" translate>{{ 'confirmation_of_password_is_required' }}</span>
-        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength" translate>{{ 'confirmation_of_password_is_too_short_(minimum_8_characters)' }}</span>
+        <span class="help-block" ng-show="userForm['user[password_confirmation]'].$dirty && userForm['user[password_confirmation]'].$error.minlength" translate>{{ 'confirmation_of_password_is_too_short' }}</span>
         <span class="help-block" ng-show="userForm['user[password_confirmation]'].$error.match" translate>{{ 'confirmation_mismatch_with_password' }}</span>
       </div>
 
-      <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$invalid}">
+      <div class="form-group" ng-if="user.invoicing_profile.organization" ng-class="{'has-error': userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-building-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-building-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="hidden"
-                 name="user[profile_attributes][organization_attributes][id]"
-                 ng-value="user.profile.organization.id" />
+                 name="user[invoicing_profile_attributes][organization_attributes][id]"
+                 ng-value="user.invoicing_profile.organization.id" />
           <input type="text"
-                 name="user[profile_attributes][organization_attributes][name]"
-                 ng-model="user.profile.organization.name"
+                 name="user[invoicing_profile_attributes][organization_attributes][name]"
+                 ng-model="user.invoicing_profile.organization.name"
                  class="form-control"
                  placeholder="{{ 'organization_name' | translate }}"
-                 ng-required="user.profile.organization"
-                 ng-disabled="preventField['profile.organization_name'] && user.profile.organization.name && !userForm['user[profile_attributes][organization_attributes][name]'].$dirty">
+                 ng-required="user.invoicing_profile.organization"
+                 ng-disabled="preventField['profile.organization_name'] && user.invoicing_profile.organization.name && !userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$dirty">
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][organization_attributes][name]'].$dirty && userForm['user[profile_attributes][organization_attributes][name]'].$error.required" translate>{{ 'organization_name_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[invoicing_][organization_attributes][name]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][name]'].$error.required" translate>{{ 'organization_name_is_required' }}</span>
       </div>
 
-      <div class="form-group" ng-if="user.profile.organization" ng-class="{'has-error': userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
+      <div class="form-group" ng-if="user.invoicing_profile.organization" ng-class="{'has-error': userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-map-marker"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-map-marker"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="hidden"
-                 name="user[profile_attributes][organization_attributes][address_attributes][id]"
-                 ng-value="user.profile.organization.address.id" />
+                 name="user[invoicing_profile_attributes][organization_attributes][address_attributes][id]"
+                 ng-value="user.invoicing_profile.organization.address.id" />
           <input type="text"
-                 name="user[profile_attributes][organization_attributes][address_attributes][address]"
-                 ng-model="user.profile.organization.address.address"
+                 name="user[invoicing_profile_attributes][organization_attributes][address_attributes][address]"
+                 ng-model="user.invoicing_profile.organization.address.address"
                  class="form-control"
                  placeholder="{{ 'organization_address' | translate }}"
-                 ng-required="user.profile.organization"
-                 ng-disabled="preventField['profile.organization_address'] && user.profile.organization.address.address && !userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty">
+                 ng-required="user.invoicing_profile.organization"
+                 ng-disabled="preventField['profile.organization_address'] && user.invoicing_profile.organization.address.address && !userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty">
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[profile_attributes][organization_attributes][address_attributes][address]'].$error.required" translate>{{ 'organization_address_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$dirty && userForm['user[invoicing_profile_attributes][organization_attributes][address_attributes][address]'].$error.required" translate>{{ 'organization_address_is_required' }}</span>
       </div>
 
-      <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$invalid}">
+      <div class="form-group" ng-class="{'has-error': userForm['user[statistic_profile_attributes][birthday]'].$dirty && userForm['user[statistic_profile_attributes][birthday]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-calendar-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_statistics' | translate }}"><i class="fa fa-calendar-o"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  id="user_birthday"
                  class="form-control"
-                 ng-model="user.profile.birthday"
+                 ng-model="user.statistic_profile.birthday"
                  uib-datepicker-popup="{{datePicker.format}}"
                  datepicker-options="datePicker.options"
                  is-open="datePicker.opened"
                  placeholder="{{ 'date_of_birth' | translate }}"
                  ng-click="openDatePicker($event)"
-                 ng-disabled="preventField['profile.birthday'] && user.profile.birthday && !userForm['user[profile_attributes][birthday]'].$dirty"
+                 ng-disabled="preventField['profile.birthday'] && user.statistic_profile.birthday && !userForm['user[statistic_profile_attributes][birthday]'].$dirty"
                  required/>
           <input type="hidden"
-                 name="user[profile_attributes][birthday]"
-                 value="{{user.profile.birthday | toIsoDate}}" />
+                 name="user[statistic_profile_attributes][birthday]"
+                 value="{{user.statistic_profile.birthday | toIsoDate}}" />
         </div>
-        <span class="help-block" ng-show="userForm['user[profile_attributes][birthday]'].$dirty && userForm['user[profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
+        <span class="help-block" ng-show="userForm['user[statistic_profile_attributes][birthday]'].$dirty && userForm['user[statistic_profile_attributes][birthday]'].$error.required" translate>{{ 'date_of_birth_is_required' }}</span>
       </div>
 
       <div class="form-group">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-map-marker"></i> </span>
           <input type="hidden"
-                 name="user[profile_attributes][address_attributes][id]"
-                 ng-value="user.profile.address.id" />
+                 name="user[invoicing_profile_attributes][address_attributes][id]"
+                 ng-value="user.invoicing_profile.address.id" />
           <input type="text"
-                 name="user[profile_attributes][address_attributes][address]"
-                 ng-model="user.profile.address.address"
+                 name="user[invoicing_profile_attributes][address_attributes][address]"
+                 ng-model="user.invoicing_profile.address.address"
                  class="form-control"
                  id="user_address"
-                 ng-disabled="preventField['profile.address'] && user.profile.address.address && !userForm['user[profile_attributes][address_attributes][address]'].$dirty"
+                 ng-disabled="preventField['profile.address'] && user.invoicing_profile.address.address && !userForm['user[invoicing_profile_attributes][address_attributes][address]'].$dirty"
                  placeholder="{{ 'address' | translate }}"/>
         </div>
       </div>
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][phone]'].$dirty && userForm['user[profile_attributes][phone]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-phone"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_reservation' | translate }}"><i class="fa fa-phone"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
           <input type="text"
                  name="user[profile_attributes][phone]"
                  ng-model="user.profile.phone"
@@ -253,7 +255,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][website]'].$dirty && userForm['user[profile_attributes][website]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-globe"></i> </span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-globe"></i> </span>
           <input type="url"
                  name="user[profile_attributes][website]"
                  ng-model="user.profile.website"
@@ -267,7 +269,7 @@
 
       <div class="form-group" ng-class="{'has-error': userForm['user[profile_attributes][job]'].$dirty && userForm['user[profile_attributes][job]'].$invalid}">
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-briefcase"></i> </span>
+          <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-briefcase"></i> </span>
           <input type="text"
                  name="user[profile_attributes][job]"
                  ng-model="user.profile.job"
@@ -279,7 +281,7 @@
       </div>
 
       <div class="form-group">
-        <label for="user_interest" translate>{{ 'interests' }}</label>
+        <label for="user_interest" class="help-cursor" title="{{ 'used_for_profile' | translate }}" translate>{{ 'interests' }}</label>
         <textarea name="user[profile_attributes][interest]"
                   ng-model="user.profile.interest"
                   rows="5"
@@ -290,7 +292,7 @@
       </div>
 
       <div class="form-group">
-        <label for="user_software_mastered" translate>{{ 'CAD_softwares_mastered' }}</label>
+        <label for="user_software_mastered" class="help-cursor" title="{{ 'used_for_profile' | translate }}" translate>{{ 'CAD_softwares_mastered' }}</label>
         <textarea name="user[profile_attributes][software_mastered]"
                   ng-model="user.profile.software_mastered"
                   rows="5"
@@ -302,7 +304,7 @@
 
       <!-- allow contact-->
       <div class="form-group">
-        <label for="allowContact" translate>{{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+        <label for="allowContact" class="help-cursor" title="{{ 'public_profile' | translate }}" translate>{{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
         <input bs-switch
                ng-model="user.is_allow_contact"
                id="allowContact"
@@ -331,7 +333,7 @@
       <div id="social" ng-init="social={}">
         <div class="form-group" ng-show="social.facebook || user.profile.facebook" ng-class="{'has-error': userForm['user[profile_attributes][facebook]'].$dirty && userForm['user[profile_attributes][facebook]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-facebook"></i></span>
             <input type="text"
                    name="user[profile_attributes][facebook]"
                    ng-model="user.profile.facebook"
@@ -346,7 +348,7 @@
 
         <div class="form-group" ng-show="social.twitter || user.profile.twitter" ng-class="{'has-error': userForm['user[profile_attributes][twitter]'].$dirty && userForm['user[profile_attributes][twitter]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-twitter"></i></span>
             <input type="text"
                    name="user[profile_attributes][twitter]"
                    ng-model="user.profile.twitter"
@@ -361,7 +363,7 @@
 
         <div class="form-group" ng-show="social.google_plus || user.profile.google_plus" ng-class="{'has-error': userForm['user[profile_attributes][google_plus]'].$dirty && userForm['user[profile_attributes][google_plus]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-google-plus"></i></span>
             <input type="text"
                    name="user[profile_attributes][google_plus]"
                    ng-model="user.profile.google_plus"
@@ -376,7 +378,7 @@
 
         <div class="form-group" ng-show="social.viadeo || user.profile.viadeo" ng-class="{'has-error': userForm['user[profile_attributes][viadeo]'].$dirty && userForm['user[profile_attributes][viadeo]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-viadeo"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-viadeo"></i></span>
             <input type="text"
                    name="user[profile_attributes][viadeo]"
                    ng-model="user.profile.viadeo"
@@ -391,7 +393,7 @@
 
         <div class="form-group" ng-show="social.linkedin || user.profile.linkedin" ng-class="{'has-error': userForm['user[profile_attributes][linkedin]'].$dirty && userForm['user[profile_attributes][linkedin]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-linkedin"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-linkedin"></i></span>
             <input type="text"
                    name="user[profile_attributes][linkedin]"
                    ng-model="user.profile.linkedin"
@@ -406,7 +408,7 @@
 
         <div class="form-group" ng-show="social.instagram || user.profile.instragram" ng-class="{'has-error': userForm['user[profile_attributes][instagram]'].$dirty && userForm['user[profile_attributes][instagram]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-instagram"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-instagram"></i></span>
             <input type="text"
                    name="user[profile_attributes][instagram]"
                    ng-model="user.profile.instagram"
@@ -421,7 +423,7 @@
 
         <div class="form-group" ng-show="social.youtube || user.profile.youtube" ng-class="{'has-error': userForm['user[profile_attributes][youtube]'].$dirty && userForm['user[profile_attributes][youtube]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-youtube"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-youtube"></i></span>
             <input type="text"
                    name="user[profile_attributes][youtube]"
                    ng-model="user.profile.youtube"
@@ -436,7 +438,7 @@
 
         <div class="form-group" ng-show="social.vimeo || user.profile.vimeo" ng-class="{'has-error': userForm['user[profile_attributes][vimeo]'].$dirty && userForm['user[profile_attributes][vimeo]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-vimeo"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-vimeo"></i></span>
             <input type="text"
                    name="user[profile_attributes][vimeo]"
                    ng-model="user.profile.vimeo"
@@ -451,7 +453,7 @@
 
         <div class="form-group" ng-show="social.dailymotion || user.profile.dailymotion" ng-class="{'has-error': userForm['user[profile_attributes][dailymotion]'].$dirty && userForm['user[profile_attributes][dailymotion]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img"/></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><img src="<%= asset_path('social/dailymotion.png') %>" alt="d" class="fa-img"/></span>
             <input type="text"
                    name="user[profile_attributes][dailymotion]"
                    ng-model="user.profile.dailymotion"
@@ -467,7 +469,7 @@
 
         <div class="form-group" ng-show="social.github || user.profile.github" ng-class="{'has-error': userForm['user[profile_attributes][github]'].$dirty && userForm['user[profile_attributes][github]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-github"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-github"></i></span>
             <input type="text"
                    name="user[profile_attributes][github]"
                    ng-model="user.profile.github"
@@ -482,7 +484,7 @@
 
         <div class="form-group" ng-show="social.echosciences || user.profile.echosciences" ng-class="{'has-error': userForm['user[profile_attributes][echosciences]'].$dirty && userForm['user[profile_attributes][echosciences]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img"/></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><img src="<%= asset_path('social/echosciences.png') %>" alt="d" class="fa-img"/></span>
             <input type="text"
                    name="user[profile_attributes][echosciences]"
                    ng-model="user.profile.echosciences"
@@ -497,7 +499,7 @@
 
         <div class="form-group" ng-show="social.pinterest || user.profile.pinterest" ng-class="{'has-error': userForm['user[profile_attributes][pinterest]'].$dirty && userForm['user[profile_attributes][pinterest]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-pinterest"></i></span>
             <input type="text"
                    name="user[profile_attributes][pinterest]"
                    ng-model="user.profile.pinterest"
@@ -512,7 +514,7 @@
 
         <div class="form-group" ng-show="social.lastfm || user.profile.lastfm" ng-class="{'has-error': userForm['user[profile_attributes][lastfm]'].$dirty && userForm['user[profile_attributes][lastfm]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-lastfm"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-lastfm"></i></span>
             <input type="text"
                    name="user[profile_attributes][lastfm]"
                    ng-model="user.profile.lastfm"
@@ -527,7 +529,7 @@
 
         <div class="form-group" ng-show="social.flickr || user.profile.flickr" ng-class="{'has-error': userForm['user[profile_attributes][flickr]'].$dirty && userForm['user[profile_attributes][flickr]'].$invalid}">
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-flickr"></i></span>
+            <span class="input-group-addon help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-flickr"></i></span>
             <input type="text"
                    name="user[profile_attributes][flickr]"
                    ng-model="user.profile.flickr"

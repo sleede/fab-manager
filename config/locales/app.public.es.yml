@@ -6,6 +6,13 @@ es:
         about_the_fablab: "Sobre {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"  # messageFormat interpolation
         return: "Volver"
 
+        # cookies
+        cookies:
+          about_cookies: "Este sitio web utiliza cookies para medir la audiencia."
+          learn_more: "Aprende más"
+          accept: "Aceptar cookies"
+          decline: "Rehusar"
+
         # dashboard sections
         dashboard: "Panel"
         my_profile: "My Perfil"
@@ -65,7 +72,7 @@ es:
         email_is_required: "El e-mail es obligatorio."
         your_password: "Su contraseña"
         password_is_required: "La contraseña es obligatoria."
-        password_is_too_short_(minimum_8_characters): "La contraseña es demasiado corta (minimo 8 caracteres)"
+        password_is_too_short: "La contraseña es demasiado corta (minimo 8 caracteres)"
         type_your_password_again: "Escriba su contraseña otra vez"
         password_confirmation_is_required: "Confirmar su contraseña es obligatorio."
         password_does_not_match_with_confirmation: "Las contraseñas no coinciden."
@@ -84,7 +91,13 @@ es:
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         i_ve_read_and_i_accept_: "He leido y acepto"
         _the_fablab_policy: "la política de FabLab"
-        field_required: "Field required"                                     #translation_missing
+        field_required: "Field required"                                                         # translation missing
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."       # translation missing
+        used_for_statistics: "This data will be used for statistical purposes"                   # translation missing
+        used_for_invoicing: "This data will be used for billing purposes"                        # translation missing
+        used_for_reservation: "This data will be used in case of change on one of your bookings" # translation missing
+        used_for_profile: "This data will only be displayed on your profile"                     # translation missing
+        public_profile: "You will have a public profile and other users will be able to associate you in their projects"  # translation missing
 
         # password modification modal
         change_your_password: "Cambiar contraseña"
@@ -111,9 +124,18 @@ es:
 
       about:
         # about page
-        read_the_fablab_policy: "Leer la politica del FabLab"
-        read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
-        your_fablab_s_contacts: "Sus contactos del FabLab"
+        about:
+          read_the_fablab_policy: "Leer la politica del FabLab"
+          read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
+          your_fablab_s_contacts: "Sus contactos del FabLab"
+          privacy_policy: "Política de privacidad"
+
+      privacy:
+        # 'privacy policy' page
+        privacy:
+          title: "Política de privacidad"
+          dpo: "Oficial de protección de datos"
+          last_update: "Última actualización,"
 
       home:
         # home page
@@ -138,24 +160,29 @@ es:
 
       projects_list:
         # projects gallery
-        the_fablab_projects: "Los proyectos del FabLab"
-        search_over_the_whole_network: "Buscar en toda la red de FabLab"
-        tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
-        openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
-        project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
-        reset_all_filters: "Limpiar filtros"
-        search: "Buscar"
-        all_projects: "Todos los proyectos"
-        my_projects: "Mis proyectos"
-        projects_to_whom_i_take_part_in: "Proyectos de los que formo parte"
-        all_machines: "Todas las máquinas"
-        all_materials: "Todo el material"
-        load_next_projects: "Cargar más proyectos"
+        projects_list:
+          the_fablab_projects: "Los proyectos del FabLab"
+          add_a_project: "Añadir un proyecto"
+          search_over_the_whole_network: "Buscar en toda la red de FabLab"
+          tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
+          openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
+          project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
+          reset_all_filters: "Limpiar filtros"
+          search: "Buscar"
+          all_projects: "Todos los proyectos"
+          my_projects: "Mis proyectos"
+          projects_to_whom_i_take_part_in: "Proyectos de los que formo parte"
+          all_machines: "Todas las máquinas"
+          all_themes: "Todos los temas"
+          all_materials: "Todo el material"
+          load_next_projects: "Cargar más proyectos"
+          rough_draft: "Borrador"
 
       projects_show:
         # details of a projet
         project_description: "Descripción de proyecto"
         by_name: "Por {{NAME}}"  # angular interpolation
+        deleted_user: "Deleted user"                                                                #translation_missing
         posted_on_: "Subido el"
         CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"  # messageFormat interpolation
         licence: "Licencia"
@@ -255,7 +282,7 @@ es:
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
-        you_booked_(DATE): "You booked ({{DATE}}):"  # angular interpolation
+        you_booked_DATE: "You booked ({{DATE}}):"  # angular interpolation
         book: "Reservar"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"

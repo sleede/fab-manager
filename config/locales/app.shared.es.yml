@@ -18,7 +18,6 @@ es:
         "yes": "Sí"
         "no": "No"
         apply: "Aplicar"
-        confirm_(payment_on_site): "Confirmar (Pago)"
 
       elements:
         # various translations used many times in the application
@@ -114,7 +113,7 @@ es:
         new_password: "Nueva contraseña"
         confirmation_of_new_password: "Confirmar nueva contraseña"
         confirmation_of_password_is_required: "Se requiere confirmar la contraseña."
-        confirmation_of_password_is_too_short_(minimum_8_characters): "la contraseña es demasiado corta (minimo 8 caracteres)."
+        confirmation_of_password_is_too_short: "la contraseña es demasiado corta (minimo 8 caracteres)."
         confirmation_mismatch_with_password: "Las contraseñas no coinciden."
         organization_name: "Nombre de la organización"
         organization_address: "Dirección de la organización"
@@ -153,7 +152,7 @@ es:
           description_is_required: "Se requiere una descripción."
           technical_specifications: "Technical specifications"
           technical_specifications_are_required: "Se requieren especificaciones técnicas."
-          attached_files_(pdf): "archivos anclados (pdf)"
+          attached_files_pdf: "archivos anclados (pdf)"
           attach_a_file: "adjuntar archivo"
           add_an_attachment: "añadir archivo adjunto"
           disable_machine: "Disable machine"                           #translation_missing
@@ -201,7 +200,7 @@ es:
         _and_ends_on: "termina el"
         prices_and_availabilities: "Precios y disponibilidad"
         standard_rate: "Puntuación estándar"
-        0_=_free: "0 = Gratis"
+        0_equal_free: "0 = Gratis"
         tickets_available: "Entradas disponibles"
         event_theme: "Tema del evento"
         age_range: "Rango de edades"
@@ -216,7 +215,7 @@ es:
           type: "Tipo"
           type_is_required: "Se requiere un tipo."
           group: "Grupo"
-          transversal_(all_groups): "Transversal (todos los grupos)"
+          transversal_all_groups: "Transversal (todos los grupos)"
           group_is_required: "Se requiere un tipo."
           number_of_periods: "Numero de periodos"
           number_of_periods_is_required: "El numero de periodos es obligatorio."
@@ -350,7 +349,7 @@ es:
         generate_a_refund_invoice: "Generar informe de devolución"
         creation_date_for_the_refund: "Fecha de creación del informe de devolución"
         creation_date_is_required: "Se requiere fecha de creación."
-        description_(optional): "Descripción (opcional):"
+        description_optional: "Descripción (opcional):"
         will_appear_on_the_refund_invoice: "Aparecerá en el informe de devolución."
         to_credit: 'Credito'
         wallet_credit_successfully: "La cartera del usuario ha sido acreditada con éxito."
@@ -416,7 +415,7 @@ es:
           description_is_required: "Se requiere una descripción."
           characteristics: "Características"
           characteristics_are_required: "Las características son obligatorias."
-          attached_files_(pdf): "Archivos adjuntos (pdf)"
+          attached_files_pdf: "Archivos adjuntos (pdf)"
           attach_a_file: "Adjuntar archvo"
           add_an_attachment: "Añadir adjunto"
           default_places: "Máximo de entradas predeterminado"

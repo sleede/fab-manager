@@ -217,12 +217,13 @@ fr:
   api:
     notifications:
       # notifications internes à l'application
+      deleted_user: "Utilisateur supprimé"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abus a été signalé sur <strong>%{TYPE} %{ID} : <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Une réservation <strong><em>%{RESERVABLE}</em></strong> a été effectuée par <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_(UID)_has_completed_its_informations_html: "Le compte importé depuis <strong><em>%{PROVIDER} </strong> (%{UID})</em> a complété ses informations."
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Le compte importé depuis <strong><em>%{PROVIDER} </strong> (%{UID})</em> a complété ses informations."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "La réservation de <strong><em>%{USER}</em></strong>, le %{DATE}, a été annulée. Pensez a générer un avoir le cas échéant."
       notify_admin_slot_is_modified:
@@ -240,13 +241,13 @@ fr:
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "L'utilisateur <strong><em>{NAME}</strong></em> a changé de groupe."  # messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html: "L'utilisateur <strong><em>{NAME}</strong></em> a fusionné son compte avec le compte importé depuis <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "L'utilisateur <strong><em>{NAME}</strong></em> a fusionné son compte avec le compte importé depuis <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Le projet <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> vient d'être publié."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Un nouveau compte utilisateur vient d'être créé : <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_when_user_is_imported:
-        a_new_user_account_has_been_imported_from_PROVIDER_(UID)_html: "Un nouveau compte utilisateur vient d'être importé depuis : <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Un nouveau compte utilisateur vient d'être importé depuis : <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Votre réservation <strong><em>%{RESERVABLE}</em></strong> a bien été enregistrée."
       notify_member_reservation_reminder:
@@ -318,6 +319,9 @@ fr:
         warning_no_closed_periods: "Pensez à clôturer régulièrement vos périodes comptables. Vous devez clôturer des périodes depuis le %{FIRST_DATE}"
       notify_admin_archive_complete:
         archive_complete: "L'archivage des données du %{START} au %{END} est terminé. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>Cliquez ici pour la télécharger</a>. Pensez à l'enregistrer sur un support externe sécurisé."
+      notify_privacy_policy_changed:
+        policy_updated: "Nouvelle mise à jour de la Politique de confidentialité."
+        click_to_show: "Cliquez ici pour la consulter"
 
   statistics:
     # outil de statistiques pour les administrateurs
@@ -360,7 +364,6 @@ fr:
     gender: "Genre"
     age: "Âge"
     type: "Type"
-    revenue: "Chiffre d'affaires"
     male: "Homme"
     female: "Femme"
 

@@ -151,14 +151,19 @@ namespace :fablab do
     end
 
 
-    desc '(re)generate statistics in ElasticSearch for the past period'
+    desc '(re)generate statistics in ElasticSearch for the past period. Use 0 to generate for today'
     task :generate_stats, [:period] => :environment do |_task, args|
       raise 'FATAL ERROR: You must pass a number of days (=> past period) to generate statistics on' unless args.period
 
       days = args.period.to_i
-      days.times.each do |i|
-        StatisticService.new.generate_statistic(start_date: i.day.ago.beginning_of_day, end_date: i.day.ago.end_of_day)
+      if days.zero?
+        StatisticService.new.generate_statistic(start_date: DateTime.now.beginning_of_day, end_date: DateTime.now.end_of_day)
+      else
+        days.times.each do |i|
+          StatisticService.new.generate_statistic(start_date: i.day.ago.beginning_of_day, end_date: i.day.ago.end_of_day)
+        end
       end
+
     end
 
   end

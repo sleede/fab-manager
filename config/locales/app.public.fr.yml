@@ -6,6 +6,13 @@ fr:
         about_the_fablab: "A propos {GENDER, select, male{du} female{de la} neutral{} other{des}} {NAME}"  # messageFormat interpolation
         return: "Retour"
 
+        # cookies
+        cookies:
+          about_cookies: "Ce site web utilise des cookies à des fins de mesure d'audience."
+          learn_more: "En savoir plus"
+          accept: "Accepter les cookies"
+          decline: "Refuser"
+
         # sections du tableau de bord
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
@@ -66,7 +73,7 @@ fr:
         email_is_required: "L'adresse de courriel est requise."
         your_password: "Votre mot de passe"
         password_is_required: "Le mot de passe est requis."
-        password_is_too_short_(minimum_8_characters): "Le mot de passe est trop court (au moins 8 caractères)"
+        password_is_too_short: "Le mot de passe est trop court (au moins 8 caractères)"
         type_your_password_again: "Ressaisissez votre mot de passe"
         password_confirmation_is_required: "La confirmation du mot de passe est requise."
         password_does_not_match_with_confirmation: "Le mot de passe ne concorde pas avec la confirmation."
@@ -86,6 +93,12 @@ fr:
         i_ve_read_and_i_accept_: "J'ai lu et j'accepte"
         _the_fablab_policy: "la charte d'utilisation du Fab Lab"
         field_required: "Champ requis"
+        unexpected_error_occurred: "Une erreur inattendue s'est produite. Veuillez réessayer ultérieurement."
+        used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
+        used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
+        used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
+        used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
+        public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
 
         # fenêtre de changement de mot de passe
         change_your_password: "Modifier votre mot de passe"
@@ -112,9 +125,18 @@ fr:
 
       about:
         # page à propos
-        read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
-        read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
-        your_fablab_s_contacts: "Vos contacts au Fab Lab"
+        about:
+          read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
+          read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
+          your_fablab_s_contacts: "Vos contacts au Fab Lab"
+          privacy_policy: "Politique de confidentialité"
+
+      privacy:
+        # page 'politique de confidentialité'
+        privacy:
+          title: "Politique de confidentialité"
+          dpo: "Délégué à la protection des données"
+          last_update: "Dernière mise à jour,"
 
       home:
         # page d'accueil
@@ -139,24 +161,29 @@ fr:
 
       projects_list:
         # galerie des projets
-        the_fablab_projects: "Les projets du FabLab"
-        search_over_the_whole_network: "Chercher sur tout le réseau Fab Manager"
-        tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmis les projets de tous les Fab-managers utilisant cette fonctionnalité !"
-        openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmis les projets de cette plateforme."
-        project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
-        reset_all_filters: "Réinitialiser tous les filtres"
-        search: "Rechercher"
-        all_projects: "Tous les projets"
-        my_projects: "Mes projets"
-        projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
-        all_machines: "Toutes les machines"
-        all_materials: "Tous les matériaux"
-        load_next_projects: "Charger les projets suivants"
+        projects_list:
+          the_fablab_projects: "Les projets du FabLab"
+          add_a_project: "Ajouter un projet"
+          search_over_the_whole_network: "Chercher sur tout le réseau Fab Manager"
+          tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmis les projets de tous les Fab-managers utilisant cette fonctionnalité !"
+          openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmis les projets de cette plateforme."
+          project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
+          reset_all_filters: "Réinitialiser tous les filtres"
+          search: "Rechercher"
+          all_projects: "Tous les projets"
+          my_projects: "Mes projets"
+          projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
+          all_machines: "Toutes les machines"
+          all_themes: "Toutes les thématiques"
+          all_materials: "Tous les matériaux"
+          load_next_projects: "Charger les projets suivants"
+          rough_draft: "Brouillon"
 
       projects_show:
         # détails d'un projet
         project_description: "Description du projet"
         by_name: "Par {{NAME}}"  # angular interpolation
+        deleted_user: "Utilisateur supprimé"
         posted_on_: "posté le"
         CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"  # messageFormat interpolation
         licence: "Licence"
@@ -258,7 +285,7 @@ fr:
         ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"  # messageFormat interpolation
         make_a_gift_of_this_reservation: "Offrir cette réservation"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
-        you_booked_(DATE): "Vous avez réservé ({{DATE}}) :"  # angular interpolation
+        you_booked_DATE: "Vous avez réservé ({{DATE}}) :"  # angular interpolation
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"

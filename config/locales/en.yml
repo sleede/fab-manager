@@ -217,12 +217,13 @@ en:
   api:
     notifications:
       # internal app notifications
+      deleted_user: "Deleted user"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "An abuse was reported on <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation was made by <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_(UID)_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER} </strong> (%{UID})</em> has completed its information."
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER} </strong> (%{UID})</em> has completed its information."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "<strong><em>%{USER}</em></strong>'s reservation, on the %{DATE}, was cancelled. Remember to generate a refund invoice if applicable."
       notify_admin_slot_is_modified:
@@ -240,13 +241,13 @@ en:
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed {GENDER, select, true{his} other{her}} group."  # messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_(UID)_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "A new user account has been created: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_when_user_is_imported:
-        a_new_user_account_has_been_imported_from_PROVIDER_(UID)_html: "A new user account has been imported from: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "A new user account has been imported from: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Your reservation <strong><em>%{RESERVABLE}</em></strong> was successfully saved."
       notify_member_reservation_reminder:
@@ -318,7 +319,9 @@ en:
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
       notify_admin_archive_complete:
         archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
-
+      notify_privacy_policy_changed:
+        policy_updated: "Privacy policy updated."
+        click_to_show: "Click here to consult"
   statistics:
     # statistics tools for admins
     subscriptions: "Subscriptions"
@@ -360,7 +363,6 @@ en:
     gender: "Gender"
     age: "Age"
     type: "Type"
-    revenue: "Revenue"
     male: "Man"
     female: "Woman"
 

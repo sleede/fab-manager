@@ -1,20 +1,24 @@
+# frozen_string_literal: true
+
 require 'json'
 
+# Custom aggregations provides a way to aggregate data in a non-standard way to enhance statistics.
+# These aggregations will run in ElasticSearch so they must belongs to its syntax.
 class CustomAggregationService
 
   ##
   # Run any additional custom aggregations related to the given statistic type, if any
   ##
   def call(statistic_index, statistic_type, start_date, end_date, custom_query, results)
-    if statistic_type and start_date and end_date
+    if statistic_type && start_date && end_date
       stat_index = StatisticIndex.find_by(es_type_key: statistic_index)
       stat_type = StatisticType.find_by(statistic_index_id: stat_index.id, key: statistic_type)
       client = Elasticsearch::Model.client
       stat_type.statistic_custom_aggregations.each do |custom|
 
-        query = sprintf(custom.query, {aggs_name: custom.field, start_date: start_date, end_date: end_date})
+        query = sprintf(custom.query, aggs_name: custom.field, start_date: start_date, end_date: end_date)
 
-        if custom_query and !custom_query.empty?
+        if custom_query && !custom_query.empty?
           # Here, a custom query was provided with the original request (eg: filter by subtype)
           # so we try to apply this custom filter to the current custom aggregation.
           #

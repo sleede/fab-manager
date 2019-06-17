@@ -239,6 +239,7 @@ pt:
         signaled_by: "sinalizado por:"
         signaled_on: "sinalizado em:"
         message: "Menssagem:"
+        visit_management_interface: "Refer to the Reporting Management Interface for more information."  # missing translation
 
     notify_user_wallet_is_credited:
       subject: "Sua carteira foi creditada"
@@ -293,6 +294,12 @@ pt:
         click_to_download: "To download the ZIP archive, click"
         here: "here."
         save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
+
+    notify_privacy_policy_changed:                                                               #translation_missing
+      subject: "Privacy policy updated"
+      body:
+        content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
+        link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
 
     shared:
       hello: "Olá %{user_name}"

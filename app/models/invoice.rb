@@ -12,12 +12,17 @@ class Invoice < ActiveRecord::Base
 
   has_many :invoice_items, dependent: :destroy
   accepts_nested_attributes_for :invoice_items
-  belongs_to :user
+  belongs_to :invoicing_profile
+  belongs_to :statistic_profile
   belongs_to :wallet_transaction
   belongs_to :coupon
 
+  belongs_to :subscription, foreign_type: 'Subscription', foreign_key: 'invoiced_id'
+  belongs_to :reservation, foreign_type: 'Reservation', foreign_key: 'invoiced_id'
+  belongs_to :offer_day, foreign_type: 'OfferDay', foreign_key: 'invoiced_id'
+
   has_one :avoir, class_name: 'Invoice', foreign_key: :invoice_id, dependent: :destroy
-  belongs_to :operator, foreign_key: :operator_id, class_name: 'User'
+  belongs_to :operator_profile, foreign_key: :operator_profile_id, class_name: 'InvoicingProfile'
 
   before_create :add_environment
   after_create :update_reference, :chain_record
@@ -26,15 +31,19 @@ class Invoice < ActiveRecord::Base
   validates_with ClosedPeriodValidator
 
   def file
-    dir = "invoices/#{user.id}"
+    dir = "invoices/#{invoicing_profile.id}"
 
-    # create directories if they doesn't exists (invoice & user_id)
+    # create directories if they doesn't exists (invoice & invoicing_profile_id)
     FileUtils.mkdir_p dir
     "#{dir}/#{filename}"
   end
 
   def filename
     "#{ENV['INVOICE_PREFIX']}-#{id}_#{created_at.strftime('%d%m%Y')}.pdf"
+  end
+
+  def user
+    invoicing_profile.user
   end
 
   def generate_reference
@@ -133,7 +142,7 @@ class Invoice < ActiveRecord::Base
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
   def regenerate_invoice_pdf
-    pdf = ::PDF::Invoice.new(self, nil).render
+    pdf = ::PDF::Invoice.new(self, subscription&.expiration_date).render
     File.binwrite(file, pdf)
   end
 
@@ -202,9 +211,12 @@ class Invoice < ActiveRecord::Base
   ##
   # Check if the current invoice is about a training that was previously validated for the concerned user.
   # In that case refunding the invoice shouldn't be allowed.
+  # Moreover, an invoice cannot be refunded if the users' account was deleted
   # @return {Boolean}
   ##
   def prevent_refund?
+    return true if user.nil?
+
     if invoiced_type == 'Reservation' && invoiced.reservable_type == 'Training'
       user.trainings.include?(invoiced.reservable_id)
     else
@@ -244,7 +256,7 @@ class Invoice < ActiveRecord::Base
   def generate_and_send_invoice
     unless Rails.env.test?
       puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \
-           "invoiced_type(#{invoiced_type}), user_id(#{user_id})"
+           "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
   end
@@ -255,8 +267,8 @@ class Invoice < ActiveRecord::Base
   # @param value {Integer} the integer to pad
   # @param length {Integer} the length of the resulting string.
   ##
-  def pad_and_truncate (value, length)
-    value.to_s.rjust(length, '0').gsub(/^.*(.{#{length},}?)$/m,'\1')
+  def pad_and_truncate(value, length)
+    value.to_s.rjust(length, '0').gsub(/^.*(.{#{length},}?)$/m, '\1')
   end
 
   ##

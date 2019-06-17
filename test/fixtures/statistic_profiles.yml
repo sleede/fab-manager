@@ -1,0 +1,48 @@
+admin:
+  id: 1
+  user_id: 1
+  gender: true
+  birthday: 2016-04-04
+  group_id: 3
+
+jdupont:
+  id: 2
+  user_id: 2
+  gender: true
+  birthday: 1975-06-07
+  group_id: 1
+
+kdumas:
+  id: 4
+  user_id: 4
+  gender: true
+  birthday: 1998-06-05
+  group_id: 2
+
+vlonchamp:
+  id: 5
+  user_id: 5
+  gender: false
+  birthday: 1994-05-03
+  group_id: 2
+
+gpartenaire:
+  id: 6
+  user_id: 6
+  gender: true
+  birthday: 2016-04-04
+  group_id: 1
+
+pdurand:
+  id: 3
+  user_id: 3
+  gender: false
+  birthday: 1949-06-18
+  group_id: 1
+
+lseguin:
+  id: 7
+  user_id: 7
+  gender: false
+  birthday: 1969-02-03
+  group_id: 1

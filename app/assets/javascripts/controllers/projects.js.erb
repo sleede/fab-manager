@@ -257,6 +257,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
   /* PRIVATE STATIC CONSTANTS */
 
     // Number of projects added to the page when the user clicks on 'load more projects'
+    // -- dependency in app/models/project.rb
     const PROJECTS_PER_PAGE = 16;
 
     /* PUBLIC SCOPE */
@@ -323,7 +324,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback);
         return OpenlabProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
           if (projectsPromise.errors != null) {
-            growl.error(_t('openlab_search_not_available_at_the_moment'));
+            growl.error(_t('projects_list.openlab_search_not_available_at_the_moment'));
             $scope.openlab.searchOverWholeNetwork = false;
             return $scope.triggerSearch();
           } else {

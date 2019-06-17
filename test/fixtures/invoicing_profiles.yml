@@ -1,0 +1,48 @@
+admin:
+  id: 1
+  user_id: 1
+  first_name: admin
+  last_name: admin
+  email: admin@fab-manager.com
+
+jdupont:
+  id: 2
+  user_id: 2
+  first_name: Jean
+  last_name: Dupont
+  email: jean.dupond@gmail.com
+
+kdumas:
+  id: 4
+  user_id: 4
+  first_name: Kevin
+  last_name: Dumas
+  email: kevin.dumas@orange.fr
+
+vlonchamp:
+  id: 5
+  user_id: 5
+  first_name: Vanessa
+  last_name: Lonchamp
+  email: vanessa.lonchamp@sfr.fr
+
+gpartenaire:
+  id: 6
+  user_id: 6
+  first_name: Gilbert
+  last_name: Partenaire
+  email: gilbert.partenaire@nicolas.com
+
+pdurand:
+  id: 3
+  user_id: 3
+  first_name: Paulette
+  last_name: Durand
+  email: paulette.durand@hotmail.fr
+
+lseguin:
+  id: 7
+  user_id: 7
+  first_name: Lucile
+  last_name: Seguin
+  email: lucile.seguin@live.fr

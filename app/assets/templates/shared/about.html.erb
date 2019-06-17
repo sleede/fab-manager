@@ -11,15 +11,18 @@
     <div class="col-sm-offset-1 col-md-offset-3 col-sm-7 col-md-5 col-lg-4 m-b-lg">
       <span ng-bind-html="aboutBody.value"></span>
       <p ng-show="cgu">
-        <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'read_the_fablab_policy' }}</a>
+        <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'about.read_the_fablab_policy' }}</a>
       </p>
       <p ng-show="cgv">
-        <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'read_the_fablab_s_general_terms_and_conditions' }}</a>
+        <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'about.read_the_fablab_s_general_terms_and_conditions' }}</a>
+      </p>
+      <p ng-show="privacyPolicy.value">
+        <a ui-sref="app.public.privacy" translate>{{ 'about.privacy_policy' }}</a>
       </p>
     </div>
 
     <div class="col-sm-offset-0 col-md-offset-0 col-lg-offset-1 col-sm-4 col-md-4">
-      <h2 class="about-title-aside text-u-c" translate translate>{{ 'your_fablab_s_contacts' }}</h2>
+      <h2 class="about-title-aside text-u-c" translate>{{ 'about.your_fablab_s_contacts' }}</h2>
       <span ng-bind-html="aboutContacts.value"></span>
     </div>
   </div>

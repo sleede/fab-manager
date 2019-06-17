@@ -2,7 +2,7 @@ class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
-        scope.includes(:group, :training_credits, :machine_credits, subscriptions: [plan: [:credits]], profile: [:user_avatar])
+        scope.includes(:group, :training_credits, :machine_credits, statistic_profile: [subscriptions: [plan: [:credits]]], profile: [:user_avatar])
              .joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'").order('users.created_at desc')
       else
         scope.includes(profile: [:user_avatar]).joins(:roles).where("users.is_active = 'true' AND roles.name = 'member'")

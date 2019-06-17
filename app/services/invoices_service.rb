@@ -9,8 +9,8 @@ class InvoicesService
   # @param size {number} number of items per page
   # @param filters {Hash} allowed filters: number, customer, date.
   def self.list(order_key, direction, page, size, filters = {})
-    invoices = Invoice.includes(:avoir, :invoiced, invoice_items: %i[subscription invoice_item], user: %i[profile trainings])
-                      .joins(user: :profile)
+    invoices = Invoice.includes(:avoir, :invoicing_profile, invoice_items: %i[subscription invoice_item])
+                      .joins(:invoicing_profile)
                       .order("#{order_key} #{direction}")
                       .page(page)
                       .per(size)
@@ -25,7 +25,7 @@ class InvoicesService
     if filters[:customer].size.positive?
       # ILIKE => PostgreSQL case-insensitive LIKE
       invoices = invoices.where(
-        'profiles.first_name ILIKE :search OR profiles.last_name ILIKE :search',
+        'invoicing_profiles.first_name ILIKE :search OR invoicing_profiles.last_name ILIKE :search',
         search: "%#{filters[:customer]}%"
       )
     end

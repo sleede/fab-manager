@@ -118,7 +118,7 @@
             <form class="col-md-6" method="post" action="{{actionUrl.cgv}}" novalidate name="cgvForm" ng-upload="submited(content)" ng-submit="addLoader('cgv')" upload-options-enable-rails-csrf="true" unsaved-warning-form>
                 <input type="hidden" name="custom_asset[name]" value="cgv-file">
                 <input name="_method" type="hidden" ng-value="methods.cgv">
-                <label for="tnc_file" class="control-label m-r" translate>{{ 'settings.general_terms_and_conditions_(T&C)' }}</label>
+                <label for="tnc_file" class="control-label m-r" translate>{{ 'settings.general_terms_and_conditions' }}</label>
                 <div class="form-group">
                     <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(cgvFile.custom_asset_file_attributes.attachment)">
                         <div class="form-control" data-trigger="fileinput">
@@ -142,7 +142,7 @@
             <form class="col-md-6" method="post" action="{{actionUrl.cgu}}" novalidate name="cguForm" ng-upload="submited(content)" ng-submit="addLoader('cgu')" upload-options-enable-rails-csrf="true" unsaved-warning-form>
                 <input type="hidden" name="custom_asset[name]" value="cgu-file">
                 <input name="_method" type="hidden" ng-value="methods.cgu">
-                <label for="tos_file" class="control-label m-r" translate>{{ 'settings.terms_of_service_(TOS)' }}</label>
+                <label for="tos_file" class="control-label m-r" translate>{{ 'settings.terms_of_service' }}</label>
                 <div class="form-group">
                     <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(cguFile.custom_asset_file_attributes.attachment)">
                         <div class="form-control" data-trigger="fileinput">
@@ -181,7 +181,7 @@
                 <form class="custom-logo-container" method="post" action="{{actionUrl.logo}}" novalidate name="logoForm" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
                     <input type="hidden" name="custom_asset[name]" value="logo-file">
                     <input name="_method" type="hidden" ng-value="methods.logo">
-                    <h3 class="m-l" translate>{{ 'settings.logo_(white_background)' }}</h3>
+                    <h3 class="m-l" translate>{{ 'settings.logo_white_background' }}</h3>
                     <div class="custom-logo" style="background-image: url({{customLogo}});">
                         <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon-xs" bs-holder ng-show="!customLogo" class="img-responsive">
                         <img base-sixty-four-image="customLogo" ng-show="customLogo && customLogo.base64">
@@ -207,7 +207,7 @@
                 <form class="custom-logo-container" method="post" action="{{actionUrl.logoBlack}}" novalidate name="logoBlackForm" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" unsaved-warning-form>
                     <input type="hidden" name="custom_asset[name]" value="logo-black-file">
                     <input name="_method" type="hidden" ng-value="methods.logoBlack">
-                    <h3 class="m-l" translate>{{ 'settings.logo_(black_background)' }}</h3>
+                    <h3 class="m-l" translate>{{ 'settings.logo_black_background' }}</h3>
                     <div class="custom-logo bg-dark" style="background-image: url({{customLogoBlack}});">
                         <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon-black-xs" bs-holder ng-show="!customLogoBlack" class="img-responsive">
                         <img base-sixty-four-image="customLogoBlack" ng-show="customLogoBlack && customLogoBlack.base64">

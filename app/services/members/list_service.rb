@@ -4,16 +4,25 @@
 class Members::ListService
   class << self
     def list(params)
-      @query = User.includes(:profile, :group, :subscriptions)
+      @query = User.includes(:profile, :group, :statistic_profile)
                    .joins(:profile,
+                          :statistic_profile,
                           :group,
                           :roles,
-                          'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id" ' \
+                          'LEFT JOIN (
+                              SELECT *
+                              FROM "subscriptions" AS s1
+                              INNER JOIN (
+                                  SELECT MAX("created_at") AS "s2_created_at", "statistic_profile_id" AS "s2_statistic_profile_id"
+                                  FROM "subscriptions"
+                                  GROUP BY "statistic_profile_id"
+                              ) As s2
+                              ON "s1"."statistic_profile_id" =  "s2"."s2_statistic_profile_id"
+                              WHERE "s1"."expiration_date" > now()::date
+                          ) AS "subscriptions" ON "subscriptions"."statistic_profile_id" = "statistic_profiles"."id" ' \
                           'LEFT JOIN "plans" ON "plans"."id" = "subscriptions"."plan_id"')
                    .where("users.is_active = 'true' AND roles.name = 'member'")
                    .order(list_order(params))
-                   .page(params[:page])
-                   .per(params[:size])
 
       # ILIKE => PostgreSQL case-insensitive LIKE
       if params[:search].size.positive?
@@ -31,12 +40,13 @@ class Members::ListService
     def search(current_user, query, subscription)
       members = User.includes(:profile)
                     .joins(:profile,
+                           :statistic_profile,
                            :roles,
-                           'LEFT JOIN "subscriptions" ON "subscriptions"."user_id" = "users"."id" AND ' \
+                           'LEFT JOIN "subscriptions" ON "subscriptions"."statistic_profile_id" = "statistic_profiles"."id" AND ' \
                            '"subscriptions"."created_at" = ( ' \
                              'SELECT max("created_at") ' \
                              'FROM "subscriptions" ' \
-                             'WHERE "user_id" = "users"."id")')
+                             'WHERE "statistic_profile_id" = "statistic_profiles"."id")')
                     .where("users.is_active = 'true' AND roles.name = 'member'")
                     .limit(50)
       query.downcase.split(' ').each do |word|
@@ -64,6 +74,8 @@ class Members::ListService
     def list_order(params)
       direction = (params[:order_by][0] == '-' ? 'DESC' : 'ASC')
       order_key = (params[:order_by][0] == '-' ? params[:order_by][1, params[:order_by].size] : params[:order_by])
+      limit = params[:size]
+      offset = (params[:page]&.to_i || 1) - 1
 
       order_key = case order_key
                   when 'last_name'
@@ -82,7 +94,7 @@ class Members::ListService
                     'users.id'
                   end
 
-      "#{order_key} #{direction}"
+      "#{order_key} #{direction} LIMIT #{limit} OFFSET #{offset}"
     end
   end
 end

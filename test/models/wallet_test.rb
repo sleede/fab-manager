@@ -1,14 +1,14 @@
 require 'test_helper'
 
 class WalletTest < ActiveSupport::TestCase
-  test "default amount must be zero" do
+  test 'default amount must be zero' do
     w = Wallet.new
-    assert w.amount == 0
+    assert w.amount.zero?
   end
 
-  test 'should user present' do
+  test 'should invoicing_profile present' do
     w = Wallet.create
-    assert w.errors[:user].present?
+    assert w.errors[:invoicing_profile].present?
   end
 
   test 'can credit amount' do

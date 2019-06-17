@@ -4,6 +4,9 @@ class Setting < ActiveRecord::Base
                     { in: %w[about_title
                              about_body
                              about_contacts
+                             privacy_draft
+                             privacy_body
+                             privacy_dpo
                              twitter_name
                              home_blogpost
                              machine_explications_alert
@@ -39,10 +42,16 @@ class Setting < ActiveRecord::Base
                              display_name_enable
                              machines_sort_by] }
 
-  after_update :update_stylesheet if :value_changed?
+  after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 
   def update_stylesheet
     Stylesheet.first&.rebuild! if %w[main_color secondary_color].include? name
+  end
+
+  def notify_privacy_policy_changed
+    return unless name == 'privacy_body'
+
+    NotifyPrivacyUpdateWorker.perform_async(id)
   end
 
   def value
@@ -50,8 +59,13 @@ class Setting < ActiveRecord::Base
     last_value&.value
   end
 
+  def last_update
+    last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
+    last_value&.created_at
+  end
+
   def value=(val)
     admin = User.admins.first
-    save && history_values.create(user: admin, value: val)
+    save && history_values.create(invoicing_profile: admin.invoicing_profile, value: val)
   end
 end

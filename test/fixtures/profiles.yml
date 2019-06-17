@@ -4,8 +4,6 @@ profile_1:
   user_id: 1
   first_name: admin
   last_name: admin
-  gender: true
-  birthday: 2016-04-04
   phone: 0123456789
   interest:
   software_mastered:
@@ -17,8 +15,6 @@ profile_2:
   user_id: 2
   first_name: Jean
   last_name: Dupont
-  gender: true
-  birthday: 1975-06-07
   phone: '0214321420'
   interest: 3D printers
   software_mastered: autocad
@@ -30,8 +26,6 @@ profile_4:
   user_id: 4
   first_name: Kevin
   last_name: Dumas
-  gender: true
-  birthday: 1998-06-05
   phone: 0446124793
   interest: ''
   software_mastered: solidworks
@@ -43,8 +37,6 @@ profile_5:
   user_id: 5
   first_name: Vanessa
   last_name: Lonchamp
-  gender: false
-  birthday: 1994-05-03
   phone: 0233412482
   interest: vélo, natation
   software_mastered: ''
@@ -56,8 +48,6 @@ profile_6:
   user_id: 6
   first_name: Gilbert
   last_name: Partenaire
-  gender: true
-  birthday: 2016-04-04
   phone: '0000000000'
   interest:
   software_mastered:
@@ -69,8 +59,6 @@ profile_3:
   user_id: 3
   first_name: Paulette
   last_name: Durand
-  gender: false
-  birthday: 1949-06-18
   phone: '0474264261'
   interest: ''
   software_mastered: ''
@@ -82,8 +70,6 @@ profile_7:
   user_id: 7
   first_name: Lucile
   last_name: Seguin
-  gender: false
-  birthday: 1969-02-03
   phone: '0241853679'
   interest:
   software_mastered:

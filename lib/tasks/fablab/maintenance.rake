@@ -9,8 +9,8 @@ namespace :fablab do
       month = args.month || Time.now.month
       start_date = Time.new(year.to_i, month.to_i, 1)
       end_date = start_date.next_month
-      puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} in " \
-         " #{I18n.l end_date - 1.minute, format: :long}"
+      puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} and " \
+         "#{I18n.l end_date - 1.minute, format: :long}"
       invoices = Invoice.only_invoice
                         .where('created_at >= :start_date AND created_at < :end_date', start_date: start_date, end_date: end_date)
                         .order(created_at: :asc)
@@ -49,6 +49,25 @@ namespace :fablab do
     task checksum: :environment do
       require 'checksum'
       puts Checksum.code
+    end
+
+    desc 'delete users with accounts marked with is_active=false'
+    task delete_inactive_users: :environment do
+      count = User.where(is_active: false).count
+      if count.positive?
+        print "WARNING: You are about to delete #{count} users. Are you sure? (y/n) "
+        confirm = STDIN.gets.chomp
+        next unless confirm == 'y'
+
+        User.where(is_active: false).map(&:destroy!)
+      else
+        puts 'No inactive users to delete'
+      end
+    end
+
+    desc '(re)build customization stylesheet'
+    task rebuild_stylesheet: :environment do
+      Stylesheet.build_sheet!
     end
   end
 end

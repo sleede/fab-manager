@@ -239,6 +239,7 @@ fr:
         signaled_by: "Signalé par :"
         signaled_on: "Signalé le :"
         message: "Message :"
+        visit_management_interface: "Reportez-vous à l'interface de gestion des signalements pour plus d'informations."
 
     notify_user_wallet_is_credited:
       subject: "Votre porte-monnaie a bien été crédité"
@@ -293,6 +294,12 @@ fr:
         click_to_download: "Pour télécharger l'archive ZIP, cliquez"
         here: "ici."
         save_on_secured: "N'oubliez pas que vous devez obligatoirement enregistrer cette archive sur un support externe sécurisé, qui peut vous être demandé par l'administration fiscale lors d'un contrôle."
+
+    notify_privacy_policy_changed:
+      subject: "Mise à jour de la Politique de confidentialité"
+      body:
+        content_html: "<p>Nous souhaitons vous signaler que nous venons de mettre à jour notre politique de confidentialité.</p><p>Nous pouvons apporter régulièrement des modifications à notre politique de confidentialité. Conformément à la réglementation, une notification vous sera envoyée à chaque mise à jour.</p><p>En accédant ou en utilisant nos services après la mise à jour de la Politique de confidentialité, nous considérerons que vous acceptez les termes de celle-ci, mises à jour comprises.</p>"
+        link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
 
     shared:
       hello: "Bonjour %{user_name}"

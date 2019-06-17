@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190320091148) do
+ActiveRecord::Schema.define(version: 20190606074801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,15 +235,15 @@ ActiveRecord::Schema.define(version: 20190320091148) do
 
   create_table "history_values", force: :cascade do |t|
     t.integer  "setting_id"
-    t.integer  "user_id"
     t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "footprint"
+    t.integer  "invoicing_profile_id"
   end
 
+  add_index "history_values", ["invoicing_profile_id"], name: "index_history_values_on_invoicing_profile_id", using: :btree
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
-  add_index "history_values", ["user_id"], name: "index_history_values_on_user_id", using: :btree
 
   create_table "invoice_items", force: :cascade do |t|
     t.integer  "invoice_id"
@@ -266,7 +266,6 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.integer  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.string   "reference"
     t.string   "avoir_mode"
     t.datetime "avoir_date"
@@ -279,13 +278,27 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.integer  "coupon_id"
     t.string   "footprint"
     t.string   "environment"
-    t.integer  "operator_id"
+    t.integer  "invoicing_profile_id"
+    t.integer  "operator_profile_id"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
   add_index "invoices", ["invoice_id"], name: "index_invoices_on_invoice_id", using: :btree
-  add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
+  add_index "invoices", ["invoicing_profile_id"], name: "index_invoices_on_invoicing_profile_id", using: :btree
+  add_index "invoices", ["statistic_profile_id"], name: "index_invoices_on_statistic_profile_id", using: :btree
   add_index "invoices", ["wallet_transaction_id"], name: "index_invoices_on_wallet_transaction_id", using: :btree
+
+  create_table "invoicing_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invoicing_profiles", ["user_id"], name: "index_invoicing_profiles_on_user_id", using: :btree
 
   create_table "licences", force: :cascade do |t|
     t.string "name",        null: false
@@ -383,12 +396,12 @@ ActiveRecord::Schema.define(version: 20190320091148) do
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "profile_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "invoicing_profile_id"
   end
 
-  add_index "organizations", ["profile_id"], name: "index_organizations_on_profile_id", using: :btree
+  add_index "organizations", ["invoicing_profile_id"], name: "index_organizations_on_invoicing_profile_id", using: :btree
 
   create_table "plans", force: :cascade do |t|
     t.string   "name"
@@ -436,8 +449,6 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.integer  "user_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "gender"
-    t.date     "birthday"
     t.string   "phone"
     t.text     "interest"
     t.text     "software_mastered"
@@ -491,12 +502,12 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "author_id"
     t.text     "tags"
     t.integer  "licence_id"
     t.string   "state"
     t.string   "slug"
     t.datetime "published_at"
+    t.integer  "author_statistic_profile_id"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
@@ -534,7 +545,6 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_index "projects_themes", ["theme_id"], name: "index_projects_themes_on_theme_id", using: :btree
 
   create_table "reservations", force: :cascade do |t|
-    t.integer  "user_id"
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -542,11 +552,12 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.string   "reservable_type"
     t.string   "stp_invoice_id"
     t.integer  "nb_reserve_places"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "reservations", ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id", using: :btree
+  add_index "reservations", ["statistic_profile_id"], name: "index_reservations_on_statistic_profile_id", using: :btree
   add_index "reservations", ["stp_invoice_id"], name: "index_reservations_on_stp_invoice_id", using: :btree
-  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -653,6 +664,30 @@ ActiveRecord::Schema.define(version: 20190320091148) do
     t.boolean  "ca",          default: true
   end
 
+  create_table "statistic_profile_trainings", force: :cascade do |t|
+    t.integer  "statistic_profile_id"
+    t.integer  "training_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "statistic_profile_trainings", ["statistic_profile_id"], name: "index_statistic_profile_trainings_on_statistic_profile_id", using: :btree
+  add_index "statistic_profile_trainings", ["training_id"], name: "index_statistic_profile_trainings_on_training_id", using: :btree
+
+  create_table "statistic_profiles", force: :cascade do |t|
+    t.boolean  "gender"
+    t.date     "birthday"
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statistic_profiles", ["group_id"], name: "index_statistic_profiles_on_group_id", using: :btree
+  add_index "statistic_profiles", ["role_id"], name: "index_statistic_profiles_on_role_id", using: :btree
+  add_index "statistic_profiles", ["user_id"], name: "index_statistic_profiles_on_user_id", using: :btree
+
   create_table "statistic_sub_types", force: :cascade do |t|
     t.string   "key"
     t.string   "label"
@@ -690,16 +725,16 @@ ActiveRecord::Schema.define(version: 20190320091148) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "plan_id"
-    t.integer  "user_id"
     t.string   "stp_subscription_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expiration_date"
     t.datetime "canceled_at"
+    t.integer  "statistic_profile_id"
   end
 
   add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+  add_index "subscriptions", ["statistic_profile_id"], name: "index_subscriptions_on_statistic_profile_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -776,16 +811,6 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
 
-  create_table "user_trainings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "training_id"
-  end
-
-  add_index "user_trainings", ["training_id"], name: "index_user_trainings_on_training_id", using: :btree
-  add_index "user_trainings", ["user_id"], name: "index_user_trainings_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",   null: false
     t.string   "encrypted_password",     default: "",   null: false
@@ -849,28 +874,28 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "wallet_transactions", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "wallet_id"
     t.integer  "transactable_id"
     t.string   "transactable_type"
     t.string   "transaction_type"
     t.integer  "amount"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "invoicing_profile_id"
   end
 
+  add_index "wallet_transactions", ["invoicing_profile_id"], name: "index_wallet_transactions_on_invoicing_profile_id", using: :btree
   add_index "wallet_transactions", ["transactable_type", "transactable_id"], name: "index_wallet_transactions_on_transactable", using: :btree
-  add_index "wallet_transactions", ["user_id"], name: "index_wallet_transactions_on_user_id", using: :btree
   add_index "wallet_transactions", ["wallet_id"], name: "index_wallet_transactions_on_wallet_id", using: :btree
 
   create_table "wallets", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "amount",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "amount",               default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "invoicing_profile_id"
   end
 
-  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
+  add_index "wallets", ["invoicing_profile_id"], name: "index_wallets_on_invoicing_profile_id", using: :btree
 
   add_foreign_key "accounting_periods", "users", column: "closed_by"
   add_foreign_key "availability_tags", "availabilities"
@@ -881,28 +906,39 @@ ActiveRecord::Schema.define(version: 20190320091148) do
   add_foreign_key "events_event_themes", "event_themes"
   add_foreign_key "events_event_themes", "events"
   add_foreign_key "exports", "users"
+  add_foreign_key "history_values", "invoicing_profiles"
   add_foreign_key "history_values", "settings"
-  add_foreign_key "history_values", "users"
   add_foreign_key "invoices", "coupons"
-  add_foreign_key "invoices", "users", column: "operator_id"
+  add_foreign_key "invoices", "invoicing_profiles"
+  add_foreign_key "invoices", "invoicing_profiles", column: "operator_profile_id"
+  add_foreign_key "invoices", "statistic_profiles"
   add_foreign_key "invoices", "wallet_transactions"
+  add_foreign_key "invoicing_profiles", "users"
   add_foreign_key "o_auth2_mappings", "o_auth2_providers"
   add_foreign_key "open_api_calls_count_tracings", "open_api_clients"
-  add_foreign_key "organizations", "profiles"
+  add_foreign_key "organizations", "invoicing_profiles"
   add_foreign_key "prices", "groups"
   add_foreign_key "prices", "plans"
+  add_foreign_key "projects", "statistic_profiles", column: "author_statistic_profile_id"
   add_foreign_key "projects_spaces", "projects"
   add_foreign_key "projects_spaces", "spaces"
+  add_foreign_key "reservations", "statistic_profiles"
   add_foreign_key "slots_reservations", "reservations"
   add_foreign_key "slots_reservations", "slots"
   add_foreign_key "spaces_availabilities", "availabilities"
   add_foreign_key "spaces_availabilities", "spaces"
   add_foreign_key "statistic_custom_aggregations", "statistic_types"
+  add_foreign_key "statistic_profile_trainings", "statistic_profiles"
+  add_foreign_key "statistic_profile_trainings", "trainings"
+  add_foreign_key "statistic_profiles", "groups"
+  add_foreign_key "statistic_profiles", "roles"
+  add_foreign_key "statistic_profiles", "users"
+  add_foreign_key "subscriptions", "statistic_profiles"
   add_foreign_key "tickets", "event_price_categories"
   add_foreign_key "tickets", "reservations"
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
-  add_foreign_key "wallet_transactions", "users"
+  add_foreign_key "wallet_transactions", "invoicing_profiles"
   add_foreign_key "wallet_transactions", "wallets"
-  add_foreign_key "wallets", "users"
+  add_foreign_key "wallets", "invoicing_profiles"
 end

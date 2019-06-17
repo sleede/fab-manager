@@ -52,7 +52,7 @@ es:
     api_documentation: "Documentación API"
 
   omniauth:
-    # error messages when importing an account Desde a SSO
+    # error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\"ya está vinculado a otra cuenta, ingrese su código de autenticación."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Su nombre de usuario (%{USERNAME}) ."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) ya está vinculado a otra cuenta, no se puede actualizar."
@@ -89,8 +89,8 @@ es:
     order_summary: "Resumen de pedido:"
     details: "Detalles"
     amount: "Cantidad"
-    subscription_extended_for_free_Desde_START_to_END: "Suscripción extendida gratis - desde %{START} to %{END}"
-    subscription_NAME_Desde_START_to_END: "Suscripción %{NAME} - desde %{START} hasta %{END}"
+    subscription_extended_for_free_from_START_to_END: "Suscripción extendida gratis - desde %{START} to %{END}"
+    subscription_NAME_from_START_to_END: "Suscripción %{NAME} - desde %{START} hasta %{END}"
     machine_reservation_DESCRIPTION: "Reserva de máquina - %{DESCRIPTION}"
     space_reservation_DESCRIPTION: "Reserva de espacio - %{DESCRIPTION}"
     training_reservation_DESCRIPTION: "Reserva de curso - %{DESCRIPTION}"
@@ -120,10 +120,10 @@ es:
     settlement_by_wallet: "Efectuado con cartera"
     on_DATE_at_TIME: "el %{DATE} a las %{TIME},"
     for_an_amount_of_AMOUNT: "Por una cantidad de %{AMOUNT}"
-    on_DATE_Desde_START_to_END: "El %{DATE} desde %{START} hasta %{END}" # eg: on feb. 7 Desde 7AM hasta 9AM
-    Desde_STARTDATE_to_ENDDATE_Desde_STARTTIME_to_ENDTIME: "Desde %{STARTDATE} hasta %{ENDDATE}, desde %{STARTTIME} hasta %{ENDTIME}" # eg: Desde feb. 7 hasta feb. 10, Desde 6PM hasta 10PM
-    subscription_of_NAME_for_DURATION_starting_Desde_DATE: "Suscripción %{NAME} por %{DURATION} empezando Desde %{DATE}"
-    subscription_of_NAME_extended_starting_Desde_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
+    on_DATE_from_START_to_END: "El %{DATE} desde %{START} hasta %{END}" # eg: on feb. 7 Desde 7AM hasta 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Desde %{STARTDATE} hasta %{ENDDATE}, desde %{STARTTIME} hasta %{ENDTIME}" # eg: Desde feb. 7 hasta feb. 10, Desde 6PM hasta 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando Desde %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
 
   trainings:
@@ -217,12 +217,13 @@ es:
   api:
     notifications:
       # internal app notifications
+      deleted_user: "Usuario eliminado"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abuso ha sido reportado <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "una <strong><em>%{RESERVABLE}</em></strong> reserva fue hecha por <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_Desde_PROVIDER_(UID)_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER} </strong> (%{UID})</em> ha completado su información."
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER} </strong> (%{UID})</em> ha completado su información."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "La reserva de <strong><em>%{USER}</em></strong>, hecha el %{DATE} ha sido cancelada. Recuerda reclamar una devolución si está disponible."
       notify_admin_slot_is_modified:
@@ -240,13 +241,13 @@ es:
       notify_admin_user_group_changed:
         user_NAME_changed_his_group_html: "El usuario <strong><em>{NAME}</strong></em> ha cambiado {GENDER, select, true{his} other{her}} el grupo."  # messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_Desde_PROVIDER_(UID)_html: "El usuario <strong><em>{NAME}</strong></em> se ha fusionado {GENDER, select, true{his} other{her}} con la cuenta importada desde <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "El usuario <strong><em>{NAME}</strong></em> se ha fusionado {GENDER, select, true{his} other{her}} con la cuenta importada desde <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Se ha creado una nueva cuenta: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_when_user_is_imported:
-        a_new_user_account_has_been_imported_Desde_PROVIDER_(UID)_html: "Se ha importado una nueva cuenta: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "Se ha importado una nueva cuenta: <strong><em>%{PROVIDER}</strong> (%{UID})</em>."
       notify_member_create_reservation:
         your_reservation_RESERVABLE_was_successfully_saved_html: "Su reserva <strong><em>%{RESERVABLE}</em></strong> se ha guardado correctamente."
       notify_member_reservation_reminder:
@@ -318,7 +319,9 @@ es:
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"          # missing translation
       notify_admin_archive_complete:                                                                          # missing translation
         archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."          # missing translation
-
+      notify_privacy_policy_changed:
+        policy_updated: "Privacy policy updated."        # missing translation
+        click_to_show: "Click here to consult"        # missing translation
   statistics:
     # statistics tools for admins
     subscriptions: "Suscripciones"
@@ -360,7 +363,6 @@ es:
     gender: "Genero"
     age: "Edad"
     type: "Tipo"
-    revenue: "Ingreso"
     male: "Hombre"
     female: "Mujer"
 

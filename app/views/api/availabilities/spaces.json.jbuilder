@@ -5,7 +5,7 @@ json.array!(@slots) do |slot|
   json.start slot.start_at.iso8601
   json.end slot.end_at.iso8601
   json.is_reserved slot.is_reserved
-  json.is_completed slot.is_complete?
+  json.is_completed slot.complete?
   json.backgroundColor 'white'
   json.borderColor space_slot_border_color(slot)
 

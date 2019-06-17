@@ -1,0 +1,30 @@
+.cookies-consent {
+  display: flex;
+  position: fixed;
+  bottom: 3rem;
+  left: 3rem;
+  width: 40rem;
+  background-color: #f5f5f5;
+  padding: 3rem;
+  flex-direction: column;
+  z-index: 100;
+  -webkit-box-shadow: 0 4px 10px 2px rgba(224,224,224,0.43);
+  -moz-box-shadow: 0 4px 10px 2px rgba(224,224,224,0.43);
+  box-shadow: 0 4px 10px 2px rgba(224,224,224,0.43);
+
+  .cookies-actions {
+    display: flex;
+    button {
+      flex-basis: 50%;
+    }
+    button.decline {
+      background-color: transparent;
+      border: 0;
+    }
+    button.accept {
+      background-color: red;
+      border: 0;
+      font-size: 17px;
+    }
+  }
+}

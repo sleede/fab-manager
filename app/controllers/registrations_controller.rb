@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Handling a new user registration through the sign-up modal
 class RegistrationsController < Devise::RegistrationsController
-  # POST /resource
+  # POST /users.json
   def create
     build_resource(sign_up_params)
 
@@ -24,5 +27,4 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-
 end

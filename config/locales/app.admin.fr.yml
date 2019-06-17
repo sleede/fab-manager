@@ -43,7 +43,7 @@ fr:
           number_of_tickets: "Nombre de places : "
           adjust_the_opening_hours: "Ajuster l'horaire"
           to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
-          restrict_this_slot_with_labels_(optional): "Restreindre ce créneau avec des étiquettes (optionnel)"
+          restrict_this_slot_with_labels_optional: "Restreindre ce créneau avec des étiquettes (optionnel)"
           the_slot_START-END_has_been_successfully_deleted: "Le créneau {{START}} - {{END}} a bien été supprimé"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Le créneau {{START}} - {{END}} n'a pu être supprimé car il est déjà réservé par un membre"  # angular interpolation
           you_should_select_at_least_a_machine: "Vous devriez sélectionner au moins une machine pour ce créneau."
@@ -64,11 +64,13 @@ fr:
 
       project_elements:
         # gestion des éléments constituant les projets
-        projects_elements_management: "Gestion des éléments projets"
-        add_a_material: "Ajouter un matériau"
-        add_a_new_theme: "Ajouter une nouvelle thématique"
-        licences: "Licences"
-        add_a_new_licence: "Ajouter une nouvelle licence"
+        project_elements:
+          projects_elements_management: "Gestion des éléments projets"
+          add_a_material: "Ajouter un matériau"
+          add_a_new_theme: "Ajouter une nouvelle thématique"
+          licences: "Licences"
+          add_a_new_licence: "Ajouter une nouvelle licence"
+          manage_abuses: "Gérer les signalements"
 
       trainings:
         # suivre et surveiller les formations
@@ -83,6 +85,7 @@ fr:
         training_validation: "Validation formation"
         training_of_the_ : "Formation du "  # context: date. eg. "training of the september 1st 2012"
         you_can_validate_the_training_of_the_following_members: "Vous pouvez valider la formation des membres suivants :"
+        deleted_user: "Utilisateur supprimé"
         no_reservation: "Aucune réservation"
         validate_the_trainings: "Valider les formations"
         edition_of_the_description_tooltip: "Édition de l'infobulle de description"
@@ -267,7 +270,7 @@ fr:
           new_plan:
             add_a_subscription_plan: "Ajouter une formule d'abonnement"
             unable_to_create_the_subscription_please_try_again: "L'abonnement n'a pas pu être créé. Veuillez réessayer."
-            successfully_created_subscription(s)_dont_forget_to_redefine_prices: "Création du/des abonnement(s) réussie. N'oubliez pas de redéfinir les tarifs."
+            successfully_created_subscriptions_dont_forget_to_redefine_prices: "Création du/des abonnement(s) réussie. N'oubliez pas de redéfinir les tarifs."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossible d'enregistrer cet utilisateur. Vérifiez qu'il n'existe pas déjà un utilisateur du même nom."
         edit:
           # modifier une formule d'abonnement / les prix des heures machines
@@ -290,10 +293,10 @@ fr:
           accounting_periods: "Périodes comptables"
           invoices_list: "Liste des factures"
           filter_invoices: "Filtrer les factures"
-          invoice_#_: "Facture n° :"
+          invoice_num_: "Facture n° :"
           customer_: "Client :"
           date_: "Date :"
-          invoice_#: "Facture n°"
+          invoice_num: "Facture n°"
           date: "Date"
           price: "Prix"
           customer: "Client"
@@ -305,11 +308,11 @@ fr:
           invoicing_settings: "Paramètres de facturation"
           change_logo: "Changer le logo"
           john_smith: "Jean Dupont"
-          john_smith@example_com: "jean.dupont@example.com"
+          john_smith_at_example_com: "jean.dupont@example.com"
           invoice_reference_: "Référence facture :"
           code_: "Code :"
           code_disabled: "Code désactivé"
-          order_#: "N° Commande :"
+          order_num: "N° Commande :"
           invoice_issued_on_DATE_at_TIME: "Facture éditée le {{DATE}} à {{TIME}}"  # angular interpolation
           object_reservation_of_john_smith_on_DATE_at_TIME: "Objet : Réservation de Jean Dupont le {{DATE}} à {{TIME}}"  # angular interpolation
           order_summary: "Récapitulatif de la commande :"
@@ -329,35 +332,35 @@ fr:
           year: "Année"
           month: "Mois"
           day: "Jour"
-          "#_of_invoice": "N° de facture"
+          num_of_invoice: "N° de facture"
           online_sales: "Vente en ligne"
           wallet: "Porte-monnaie"
           refund: "Remboursement"
           model: "Modèle"
           documentation: "Documentation"
-          2_digits_year_(eg_70): "Année sur 2 chiffres (ex. 70)"
-          4_digits_year_(eg_1970): "Année sur 4 chiffres (ex. 1970)"
-          month_number_(eg_1): "Numéro du mois (ex. 1)"
-          2_digits_month_number_(eg_01): "Numéro du mois sur 2 chiffres (ex. 01)"
-          3_characters_month_name_(eg_JAN): "Nom du mois sur 3 lettres (ex. JAN)"
-          day_in_the_month_(eg_1): "Jour dans le mois (ex. 1)"
-          2_digits_day_in_the_month_(eg_01): "Jour dans le mois sur 2 chiffres (ex. 01)"
-          (n)_digits_daily_count_of_invoices_(eg_ddd_002_2nd_invoice_of_the_day): "Nombre de facture dans le jour, sur (n) chiffres (ex. ddd => 002 : 2ème facture du jour)"
-          (n)_digits_monthly_count_of_invoices_(eg_mmmm_0012_12th_invoice_of_this_month): "Nombre de facture dans le mois, sur (n) chiffres (ex. mmmm => 0012 : 12ème facture ce mois)"
-          (n)_digits_annual_amount_of_invoices_(eg_yyyyyy_000008_8th_invoice_of_this_year): "Nombre de facture dans l'année, sur (n) chiffres (ex. yyyyyy => 000008 : 8ème facture cette année)"
+          2_digits_year: "Année sur 2 chiffres (ex. 70)"
+          4_digits_year: "Année sur 4 chiffres (ex. 1970)"
+          month_number: "Numéro du mois (ex. 1)"
+          2_digits_month_number: "Numéro du mois sur 2 chiffres (ex. 01)"
+          3_characters_month_name: "Nom du mois sur 3 lettres (ex. JAN)"
+          day_in_the_month: "Jour dans le mois (ex. 1)"
+          2_digits_day_in_the_month: "Jour dans le mois sur 2 chiffres (ex. 01)"
+          n_digits_daily_count_of_invoices: "Nombre de facture dans le jour, sur (n) chiffres (ex. ddd => 002 : 2ème facture du jour)"
+          n_digits_monthly_count_of_invoices: "Nombre de facture dans le mois, sur (n) chiffres (ex. mmmm => 0012 : 12ème facture ce mois)"
+          n_digits_annual_amount_of_invoices: "Nombre de facture dans l'année, sur (n) chiffres (ex. yyyyyy => 000008 : 8ème facture cette année)"
           beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left: "Attention : si le nombre dépasse la longueur demandée, il sera tronqué par la gauche."
-          (n)_digits_count_of_orders_(eg_nnnn_0327_327th_order): "Nombre de commandes, sur (n) chiffres (ex. nnnn => 0327 : 327ème commande)"
-          (n)_digits_daily_count_of_orders_(eg_ddd_002_2nd_order_of_the_day): "Nombre de commandes dans le jour, sur (n) chiffres (ex. ddd => 002 : 2ème commande du jour)"
-          (n)_digits_monthly_count_of_orders_(eg_mmmm_0012_12th_order_of_this_month): "Nombre de commandes dans le mois, sur (n) chiffres (ex. mmmm => 0012 : 12ème commande ce mois)"
-          (n)_digits_annual_amount_of_orders_(eg_yyyyyy_000008_8th_order_of_this_year): "Nombre de commandes dans l'année, sur (n) chiffres (ex. yyyyyy => 000008 : 8ème commande cette année)"
+          n_digits_count_of_orders: "Nombre de commandes, sur (n) chiffres (ex. nnnn => 0327 : 327ème commande)"
+          n_digits_daily_count_of_orders: "Nombre de commandes dans le jour, sur (n) chiffres (ex. ddd => 002 : 2ème commande du jour)"
+          n_digits_monthly_count_of_orders: "Nombre de commandes dans le mois, sur (n) chiffres (ex. mmmm => 0012 : 12ème commande ce mois)"
+          n_digits_annual_amount_of_orders: "Nombre de commandes dans l'année, sur (n) chiffres (ex. yyyyyy => 000008 : 8ème commande cette année)"
           add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Ajoute une information relative à la vente en ligne, uniquement si cela concerne la facture."
           this_will_never_be_added_when_a_refund_notice_is_present: "Ceci ne sera jamais cumulé avec une information de remboursement."
-          (eg_X[/VL]_will_add_/VL_to_the_invoices_settled_with_stripe): '(ex. X[/VL] ajoutera "/VL" aux factures réglées avec stripe)'
+          eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(ex. X[/VL] ajoutera "/VL" aux factures réglées avec stripe)'
           add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture. "
           this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
-          (eg_R[/A]_will_add_/A_to_the_refund_invoices): '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
+          eg_RA_will_add_A_to_the_refund_invoices: '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
           add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Ajoute une information relative au paiement par le porte-monnaie, uniquement si cela concerne la facture."
-          (eg_W[/PM]_will_add_/PM_to_the_invoices_settled_with_wallet): '(ex. W[/PM] ajoutera "/PM" aux factures réglées avec porte-monnaie)'
+          eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet: '(ex. W[/PM] ajoutera "/PM" aux factures réglées avec porte-monnaie)'
           code: "Code"
           enable_the_code: "Activer le code"
           enabled: "Activé"
@@ -379,7 +382,7 @@ fr:
           do_you_want_to_disable_the_user_s_subscription: "Souhaitez-vous désactiver l'abonnement de l'utilisateur :"
           elements_to_refund: "Éléments à rembourser"
           description: "Description"
-          description_(optional): "Description (optionnelle) :"
+          description_optional: "Description (optionnelle) :"
           will_appear_on_the_refund_invoice: "Apparaîtra sur la facture de remboursement."
           none: "Aucun"  # grammar note: concordance with "payment mean"
           by_cash: "En espèces"
@@ -514,12 +517,12 @@ fr:
         NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 place {NAME} réservée} other{{NUMBER} places {NAME} réservées}}"  # messageFormat interpolation
         passed_events: "Les évènements passés"
         invoices: "Factures"
-        invoice_#: "Facture n°"
+        invoice_num: "Facture n°"
         download_the_refund_invoice: "Télécharger l'avoir"
         expiration_date: "Date d'expiration"
         you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days: "Vous décidez délibérément d'étendre l'abonnement de l'utilisateur en lui offrant des jours gratuits."
         you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Vous décidez délibérément d'étendre l'abonnement de l'utilisateur en lui faisant repayer le prix de l'abonnement qu'il possède actuellement."
-        until_(expiration_date): "Jusqu'à (date d'expiration) :"
+        until_expiration_date: "Jusqu'à (date d'expiration) :"
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Vous avez bien modifié la date d'expiration de l'abonnement de l'utilisateur"
         a_problem_occurred_while_saving_the_date: "Il y a eu un problème lors de l'enregistrement de la date."
         new_subscription: "Nouvelle souscription"
@@ -585,6 +588,7 @@ fr:
         export_all_statistics: "Exporter toutes les statistiques"
         export_the_current_search_results: "Exporter les résultats de la recherche courante"
         export: "Exporter"
+        deleted_user: "Utilisateur supprimé"
 
       stats_graphs:
         # graphiques de statistiques
@@ -627,15 +631,15 @@ fr:
           message_of_the_spaces_page: "Message sur la page des espaces :"
           legal_documents: "Documents légaux"
           if_these_documents_are_not_filled_no_consent_about_them_will_be_asked_to_the_user: "Si ces documents ne sont pas renseignés, aucun consentement à leur sujet ne sera demandé à l'utilisateur."
-          general_terms_and_conditions_(T&C): "Conditions générales de vente (CGV)"
-          terms_of_service_(TOS): "Conditions générales d'utilisation (CGU)"
+          general_terms_and_conditions: "Conditions générales de vente (CGV)"
+          terms_of_service: "Conditions générales d'utilisation (CGU)"
           customize_the_graphics: "Personnaliser la charte graphique"
           for_an_optimal_rendering_the_logo_image_must_be_at_the_PNG_format_with_a_transparent_background_and_with_an_aspect_ratio_3.5_times_wider_than_the_height: "Pour un rendu optimal, l'image du logo doit être au format PNG avec un fond transparent et d'un aspect environ 3,5 fois plus long que haut."
           concerning_the_favicon_it_must_be_at_ICO_format_with_a_size_of_16x16_pixels: "La favicon devrait quant à elle être au format ICO et d'une taille de 16x16 pixels."
           remember_to_refresh_the_page_for_the_changes_to_take_effect: "Pensez à rafraîchir la page pour que les modifications prennent effet."
-          logo_(white_background): "Logo (fond blanc)"
+          logo_white_background: "Logo (fond blanc)"
           change_the_logo: "Changer le logo"
-          logo_(black_background): "Logo (font noir)"
+          logo_black_background: "Logo (font noir)"
           favicon: "Favicon"
           change_the_favicon: "Changer la  favicon"
           main_colour: "Couleur principale :"
@@ -665,7 +669,7 @@ fr:
           visibility_for_other_members: "Pour tous les autres membres"
           ability_for_the_users_to_move_their_reservations: "Possibilité pour l'utilisateur de déplacer ses réservations"
           reservations_shifting: "Déplacement des réservations"
-          prior_period_(hours): "Délai préalable (en heures)"
+          prior_period_hours: "Délai préalable (en heures)"
           enabled: "Activé"
           disabled: "Désactivé"
           ability_for_the_users_to_cancel_their_reservations: "Possibilité pour l'utilisateur d'annuler ses réservations"
@@ -688,6 +692,9 @@ fr:
           about_title: "titre de la page \"À propos\""
           about_body: "corps de la page \"À propos\""
           about_contacts: "contacts sur la page \"À propos\""
+          privacy_draft: "brouillon de la politique de confidentialité"
+          privacy_body: "la politique de confidentialité"
+          privacy_dpo: "l'adresse du délégué à la protection des données"
           booking_window_start: "l'heure d'ouverture"
           booking_window_end: "l'heure de fermeture"
           booking_move_enable: "l'activation du déplacement de réservation"
@@ -712,6 +719,16 @@ fr:
             name: "Nom"
             created_at: "Date de création"
             updated_at: "Date de mise à jour"
+          privacy:
+            title: "Politique de confidentialité"
+            input_the_dpo: "Saisir le contact du Délégué à la protection des données"
+            current_policy: "Politique courante"
+            draft_from_USER_DATE: "Brouillon, enregistré par {{USER}}, le {{DATE}}"
+            save_or_publish: "Enregistrer ou publier ?"
+            save_or_publish_body: "Voulez-vous publier une nouvelle version de la politique de confidentialité ou bien l'enregistrer comme brouillon ?"
+            publish_will_notify: "Publier une nouvelle version enverra une notification à l'ensemble des utilisateurs."
+            publish: "Publier"
+            users_notified: "Les utilisateurs de la plateforme seront notifiés de la mise à jour."
 
       open_api_clients:
         add_new_client: "Créer un compte client"
@@ -741,3 +758,16 @@ fr:
         space_edit:
           edit_the_space_NAME: "Modifier l'espace : {{NAME}}"  # angular interpolation
           validate_the_changes: "Valider les modifications"
+
+      manage_abuses:
+        # traiter et supprimer les rapports d'abus
+        manage_abuses:
+          abuses_list: "Liste des signalements"
+          no_reports: "Aucun signalement pour le moment"
+          published_by: "publié par"
+          at_date: "le"
+          has_reported: "a effectué le signalement suivant:"
+          confirmation_required: "Confirmez le traitement du signalement"
+          report_will_be_destroyed: "Une fois le signalement traité, le rapport sera supprimé. Cette action est irréversible, continuer ?"
+          report_removed: "Le rapport a bien été supprimé"
+          failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"

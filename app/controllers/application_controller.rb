@@ -32,12 +32,13 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: [
-                                        { profile_attributes: [
-                                          :phone, :last_name, :first_name, :gender, :birthday,
-                                          :interest, :software_mastered, organization_attributes: [
-                                            :name, address_attributes: [:address]
-                                          ]
-                                        ] },
+                                        {
+                                          profile_attributes: %i[phone last_name first_name interest software_mastered],
+                                          invoicing_profile_attributes: [
+                                            organization_attributes: [:name, address_attributes: [:address]]
+                                          ],
+                                          statistic_profile_attributes: %i[gender birthday]
+                                        },
                                         :username, :is_allow_contact, :is_allow_newsletter, :cgu, :group_id
                                       ])
   end

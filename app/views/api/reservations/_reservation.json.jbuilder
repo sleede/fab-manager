@@ -1,5 +1,5 @@
 json.id reservation.id
-json.user_id reservation.user_id
+json.user_id reservation.statistic_profile.user_id
 json.user_full_name reservation.user.profile.full_name
 json.message reservation.message
 json.slots reservation.slots do |s|

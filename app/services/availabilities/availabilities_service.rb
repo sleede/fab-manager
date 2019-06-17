@@ -59,7 +59,7 @@ class Availabilities::AvailabilitiesService
       end
     end
     slots.each do |s|
-      s.title = I18n.t('availabilities.not_available') if s.is_complete? && !s.is_reserved
+      s.title = I18n.t('availabilities.not_available') if s.complete? && !s.is_reserved
     end
     slots
   end
@@ -93,7 +93,7 @@ class Availabilities::AvailabilitiesService
 
   def reservations(reservable)
     Reservation.where('reservable_type = ? and reservable_id = ?', reservable.class.name, reservable.id)
-               .includes(:slots, user: [:profile])
+               .includes(:slots, statistic_profile: [user: [:profile]])
                .references(:slots, :user)
                .where('slots.start_at > ?', Time.now)
   end

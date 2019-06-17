@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'abstract_controller'
 require 'action_controller'
 require 'action_view'
@@ -6,6 +8,7 @@ require 'active_record'
 # require any helpers
 require './app/helpers/application_helper'
 
+# Retrieve all availabilities and their related objects and write the result as a table in an excel file
 class AvailabilitiesExportService
 
   # export all availabilities
@@ -14,7 +17,7 @@ class AvailabilitiesExportService
 
     ActionController::Base.prepend_view_path './app/views/'
     # place data in view_assigns
-    view_assigns = {availabilities: @availabilities}
+    view_assigns = { availabilities: @availabilities }
     av = ActionView::Base.new(ActionController::Base.view_paths, view_assigns)
     av.class_eval do
       # include any needed helpers (for the view)
@@ -23,7 +26,7 @@ class AvailabilitiesExportService
 
     content = av.render template: 'exports/availabilities_index.xlsx.axlsx'
     # write content to file
-    File.open(export.file,"w+b") {|f| f.puts content }
+    File.open(export.file, 'w+b') { |f| f.puts content }
   end
 
 end

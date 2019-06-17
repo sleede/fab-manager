@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ValueHistoryTest < ActiveSupport::TestCase
+class InvoicingProfileTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

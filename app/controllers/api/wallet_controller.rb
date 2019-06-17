@@ -5,7 +5,8 @@ class API::WalletController < API::ApiController
   before_action :authenticate_user!
 
   def by_user
-    @wallet = Wallet.find_by(user_id: params[:user_id])
+    invoicing_profile = InvoicingProfile.find_by(user_id: params[:user_id])
+    @wallet = Wallet.find_by(invoicing_profile_id: invoicing_profile.id)
     authorize @wallet
     render :show
   end
@@ -13,7 +14,7 @@ class API::WalletController < API::ApiController
   def transactions
     @wallet = Wallet.find(params[:id])
     authorize @wallet
-    @wallet_transactions = @wallet.wallet_transactions.includes(:invoice, user: [:profile]).order(created_at: :desc)
+    @wallet_transactions = @wallet.wallet_transactions.includes(:invoice, :invoicing_profile).order(created_at: :desc)
   end
 
   def credit

@@ -7,10 +7,14 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'projects_elements_management' }}</h1>
+        <h1 translate>{{ 'project_elements.projects_elements_management' }}</h1>
       </section>
     </div>
-
+    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+      <section class="heading-actions wrapper">
+        <a class="btn btn-ng btn-warning b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.manage_abuses" role="button" translate>{{ 'project_elements.manage_abuses' }}</a>
+      </section>
+    </div>
   </div>
 </section>
 
@@ -26,7 +30,7 @@
         <uib-tab heading="{{ 'themes' | translate }}">
           <ng-include src="'<%= asset_path 'admin/project_elements/themes.html' %>'"></ng-include>
         </uib-tab>
-        <uib-tab heading="{{ 'licences' | translate }}">
+        <uib-tab heading="{{ 'project_elements.licences' | translate }}">
           <ng-include src="'<%= asset_path 'admin/project_elements/licences.html' %>'"></ng-include>
         </uib-tab>
       </uib-tabset>

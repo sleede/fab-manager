@@ -63,7 +63,7 @@
   <% end %>
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
   <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.events_list.the_fablab_s_events') %>" href="<%= rss_events_path %>.xml">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -90,11 +90,12 @@
 
         <section id="content">
           <section class="vbox">
+            <section id="cookies-modal" ui-view="cookies">
+            </section>
             <section id="content-main" class="scrollable" ui-view="main">
             </section>
           </section>
         </section>
-
 
       </section> <!-- /.hbox -->
     </section>

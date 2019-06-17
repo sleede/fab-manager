@@ -1,5 +1,28 @@
 # Changelog Fab Manager
 
+## v4.0.0 2019 June 17
+
+- Configurable privacy policy and data protection officer
+- Alert users on privacy policy update
+- Abuses reports management panel
+- Refactored user's profile to keep invoicing data after an user was deleted
+- Refactored user's profile to keep statistical data after an user was deleted
+- Ability to delete an user (fixes #129 and #120)
+- Ask user acceptance before deposing analytics cookies 
+- Fix a bug: (spanish) some translations are not loaded correctly
+- Fix a bug: some users may not appear in the admin's general listing
+- Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
+- Fix a bug: close period reminder is sent before the first invoice's first anniversary
+- Fix a bug: Canceled reservations are not removed from statistics (#133)
+- Improved translations syntax according to YML specifications
+- Refactored some Ruby code to match style guide
+- [TODO DEPLOY] `rake fablab:fix:users_group_ids`
+- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `rake db:seed`
+- [TODO DEPLOY] `rake fablab:setup:migrate_pdf_invoices_folders`
+- [TODO DEPLOY] `rake fablab:maintenance:delete_inactive_users` (will prompt for confirmation)
+- [TODO DEPLOY] `rake fablab:maintenance:rebuild_stylesheet`
+
 ## v3.1.2 2019 May 27
 
 - Fix a bug: when generating an Avoir at a previous date, the resulting checksum may be invalid
@@ -8,7 +31,7 @@
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
-- [TODO DEPLOY] -> (only dev) yarn install 
+- [TODO DEPLOY] -> (only dev) yarn install
 
 ## v3.1.1 2019 April 8
 
@@ -48,6 +71,7 @@
 - [TODO DEPLOY] /!\ Before deploying, you must check (and eventually) correct your VAT history using the rails console. Missing rates can be added later but dates and rates (including date of activation, disabling) MUST be correct. These values are very likely wrong if your installation was made prior to 2.8.0 with VAT enabled. Other cases must be checked too.
 - [TODO DEPLOY] -> (only dev) if applicable, you must first downgrade bundler to v1 `gem uninstall bundler --version=2.0.1 && gem install bundler --version=1.7.3 && bundle install`
 - [TODO DEPLOY] if you have changed your VAT rate in the past, add its history into database. You can use a rate of "0" to disable VAT. Eg. `rake fablab:setup:add_vat_rate[20,2017-01-01]`
+- [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] `rake fablab:setup:set_environment_to_invoices`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_items_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`

@@ -3,7 +3,7 @@
 
 <p><%= t('.body.imported_account_merged',
          PROVIDER: provider.name,
-         NAME:  @attached_object.profile.full_name) %>
+         NAME:  @attached_object&.profile&.full_name || t('api.notifications.deleted_user')) %>
   &lt;<%= @attached_object.email%>&gt;.
 </p>
 

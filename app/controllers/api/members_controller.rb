@@ -65,7 +65,7 @@ class API::MembersController < API::ApiController
 
   def destroy
     authorize @member
-    @member.soft_destroy
+    @member.destroy
     sign_out(@member)
     head :no_content
   end
@@ -189,29 +189,31 @@ class API::MembersController < API::ApiController
 
   def user_params
     if current_user.id == params[:id].to_i
-      params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact,
-                                   :is_allow_newsletter,
-                                   profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest,
-                                                        :software_mastered, :website, :job, :facebook, :twitter,
-                                                        :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :group_id, :is_allow_contact, :is_allow_newsletter,
+                                   profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
+                                                        :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                                        user_avatar_attributes: %i[id attachment destroy],
-                                                        address_attributes: %i[id address],
-                                                        organization_attributes: [:id, :name,
-                                                                                  address_attributes: %i[id address]]])
+                                                        user_avatar_attributes: %i[id attachment destroy]],
+                                   invoicing_profile_attributes: [
+                                     :id,
+                                     address_attributes: %i[id address],
+                                     organization_attributes: [:id, :name, address_attributes: %i[id address]]
+                                   ],
+                                   statistic_profile_attributes: %i[id gender birthday])
 
     elsif current_user.admin?
-      params.require(:user).permit(:username, :email, :password, :password_confirmation,
-                                   :is_allow_contact, :is_allow_newsletter, :group_id,
-                                   training_ids: [], tag_ids: [],
-                                   profile_attributes: [:id, :first_name, :last_name, :gender, :birthday, :phone, :interest,
-                                                        :software_mastered, :website, :job, :facebook, :twitter,
-                                                        :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :is_allow_contact, :is_allow_newsletter, :group_id,
+                                   tag_ids: [],
+                                   profile_attributes: [:id, :first_name, :last_name, :phone, :interest, :software_mastered, :website, :job,
+                                                        :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo,
                                                         :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr,
-                                                        user_avatar_attributes: %i[id attachment destroy],
-                                                        address_attributes: %i[id address],
-                                                        organization_attributes: [:id, :name,
-                                                                                  address_attributes: %i[id address]]])
+                                                        user_avatar_attributes: %i[id attachment destroy]],
+                                   invoicing_profile_attributes: [
+                                     :id,
+                                     address_attributes: %i[id address],
+                                     organization_attributes: [:id, :name, address_attributes: %i[id address]]
+                                   ],
+                                   statistic_profile_attributes: [:id, :gender, :birthday, training_ids: []])
 
     end
   end
