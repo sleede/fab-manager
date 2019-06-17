@@ -51,9 +51,7 @@ class Setting < ActiveRecord::Base
   def notify_privacy_policy_changed
     return unless name == 'privacy_body'
 
-    NotificationCenter.call type: :notify_privacy_policy_changed,
-                            receiver: User.all,
-                            attached_object: self
+    NotifyPrivacyUpdateWorker.perform_async(id)
   end
 
   def value
