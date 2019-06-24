@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: projects RSS feed fails to render
+
 ## v4.0.1 2019 June 17
 
 - Fix a bug: migration 20190523140823 may not run if an admin was deleted
