@@ -2,6 +2,8 @@
 
 - Fix a bug: projects RSS feed fails to render
 - Fix a bug: abuses reports are not notified to admins
+- Updated user's manual for v4 (fr)
+- Optimized Dockerfile to speed up build time
 
 ## v4.0.1 2019 June 17
 
