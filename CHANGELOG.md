@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Fix a bug: projects RSS feed fails to render
+- Fix a bug: abuses reports are not notified to admins
 
 ## v4.0.1 2019 June 17
 

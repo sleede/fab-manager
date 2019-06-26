@@ -55,7 +55,7 @@
     <% else %>
         <li ng-if="!isAuthenticated()"><a href="<%= "/users/auth/#{active_provider.strategy_name}"%>" class="font-sbold label text-md"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
         <li ng-if="!isAuthenticated()">
-            <a href="<%= "/users/auth/#{active_provider.strategy_name}"%>" class="font-sbold  label text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+          <a href="<%= "/users/auth/#{active_provider.strategy_name}"%>" class="font-sbold  label text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
         </li>
     <% end %>
   </ul>

@@ -7,7 +7,7 @@ json.abuses do
         json.extract! abuse.signaled, :name, :slug, :published_at
         json.author do
           json.id abuse.signaled.author.id
-          json.full_name abuse.signaled.author.profile.full_name
+          json.full_name abuse.signaled.author&.user&.profile&.full_name
         end
       end
     else
