@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.stripe.com/v1/invoices/in_1EefT62sOmf47Nz9Xhpr2u9O
+    uri: https://api.stripe.com/v1/invoices/in_1Euc8Q2sOmf47Nz9IbKxs4aR
     body:
       encoding: US-ASCII
       string: ''
@@ -21,8 +21,8 @@ http_interactions:
       - '2015-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-50-generic (buildd@lcy01-amd64-013) (gcc version 7.3.0 (Ubuntu
-        7.3.0-16ubuntu3)) #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019","hostname":"Sleede-SylvainPC"}'
+        version 4.15.0-54-generic (buildd@lgw01-amd64-014) (gcc version 7.4.0 (Ubuntu
+        7.4.0-1ubuntu1~18.04.1)) #58-Ubuntu SMP Mon Jun 24 10:55:24 UTC 2019","hostname":"Sleede-SylvainPC"}'
   response:
     status:
       code: 200
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 27 May 2019 09:50:21 GMT
+      - Wed, 10 Jul 2019 09:30:50 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '4841'
+      - '4842'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -51,7 +51,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_5IccMPLR6rD8Ff
+      - req_LBwMSSol5EbYav
       Stripe-Version:
       - '2015-10-16'
       Strict-Transport-Security:
@@ -60,7 +60,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "in_1EefT62sOmf47Nz9Xhpr2u9O",
+          "id": "in_1Euc8Q2sOmf47Nz9IbKxs4aR",
           "object": "invoice",
           "account_country": "FR",
           "account_name": "Sleede",
@@ -73,10 +73,10 @@ http_interactions:
           "auto_advance": false,
           "billing": "charge_automatically",
           "billing_reason": "subscription_update",
-          "charge": "ch_1EefT72sOmf47Nz9RbDqVNMh",
+          "charge": "ch_1Euc8Q2sOmf47Nz98JJXfjXR",
           "closed": true,
           "collection_method": "charge_automatically",
-          "created": 1558950612,
+          "created": 1562751045,
           "currency": "usd",
           "custom_fields": null,
           "customer": "cus_8Di1wjdVktv5kt",
@@ -89,7 +89,7 @@ http_interactions:
           "customer_tax_ids": [
 
           ],
-          "date": 1558950612,
+          "date": 1562751045,
           "default_payment_method": null,
           "default_source": null,
           "default_tax_rates": [
@@ -99,28 +99,28 @@ http_interactions:
           "discount": null,
           "due_date": null,
           "ending_balance": 0,
-          "finalized_at": 1558950612,
+          "finalized_at": 1562751046,
           "footer": null,
           "forgiven": false,
-          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_tRlH8WS57zgywyjyWhebhNr909",
-          "invoice_pdf": "https://pay.stripe.com/invoice/invst_tRlH8WS57zgywyjyWhebhNr909/pdf",
+          "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_qyHPJlSTs3bWCtQCr9RVwepBla",
+          "invoice_pdf": "https://pay.stripe.com/invoice/invst_qyHPJlSTs3bWCtQCr9RVwepBla/pdf",
           "lines": {
             "object": "list",
             "data": [
               {
-                "id": "ii_1EefT32sOmf47Nz9FaCNtArw",
+                "id": "ii_1Euc8O2sOmf47Nz9A8zRAVmD",
                 "object": "line_item",
                 "amount": -675,
                 "currency": "usd",
                 "description": "coupon SUNNYFABLAB",
                 "discountable": false,
-                "invoice_item": "ii_1EefT32sOmf47Nz9FaCNtArw",
+                "invoice_item": "ii_1Euc8O2sOmf47Nz9A8zRAVmD",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1558950609,
-                  "start": 1558950609
+                  "end": 1562751044,
+                  "start": 1562751044
                 },
                 "plan": null,
                 "proration": false,
@@ -135,19 +135,19 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "ii_1EefT22sOmf47Nz9zcpt69Dh",
+                "id": "ii_1Euc8O2sOmf47Nz9ElmVmSxS",
                 "object": "line_item",
                 "amount": 1500,
                 "currency": "usd",
-                "description": "FORM1+ imprimante 3D May 27, 2019 14:00 - 03:00 PM",
+                "description": "FORM1+ imprimante 3D July 10, 2019 14:00 - 03:00 PM",
                 "discountable": true,
-                "invoice_item": "ii_1EefT22sOmf47Nz9zcpt69Dh",
+                "invoice_item": "ii_1Euc8O2sOmf47Nz9ElmVmSxS",
                 "livemode": false,
                 "metadata": {
                 },
                 "period": {
-                  "end": 1558950608,
-                  "start": 1558950608
+                  "end": 1562751044,
+                  "start": 1562751044
                 },
                 "plan": null,
                 "proration": false,
@@ -162,7 +162,7 @@ http_interactions:
                 "type": "invoiceitem"
               },
               {
-                "id": "sub_F8xNkdzsupfY1C",
+                "id": "sub_FPR0YHKaG12WCB",
                 "object": "line_item",
                 "amount": 3000,
                 "currency": "usd",
@@ -172,8 +172,8 @@ http_interactions:
                 "metadata": {
                 },
                 "period": {
-                  "end": 1561629012,
-                  "start": 1558950612
+                  "end": 1565429445,
+                  "start": 1562751045
                 },
                 "plan": {
                   "id": "mensuel-standard-month-20160404171519",
@@ -202,7 +202,7 @@ http_interactions:
                 "proration": false,
                 "quantity": 1,
                 "subscription": null,
-                "subscription_item": "si_F8xNStN1HHsdPQ",
+                "subscription_item": "si_FPR0J33kDLYILM",
                 "tax_amounts": [
 
                 ],
@@ -210,22 +210,22 @@ http_interactions:
 
                 ],
                 "type": "subscription",
-                "unique_line_item_id": "sli_52e793865f8303"
+                "unique_line_item_id": "sli_6b95761a5e9968"
               }
             ],
             "has_more": false,
             "total_count": 3,
-            "url": "/v1/invoices/in_1EefT62sOmf47Nz9Xhpr2u9O/lines"
+            "url": "/v1/invoices/in_1Euc8Q2sOmf47Nz9IbKxs4aR/lines"
           },
           "livemode": false,
           "metadata": {
           },
           "next_payment_attempt": null,
-          "number": "C0E661C-0065",
+          "number": "C0E661C-0069",
           "paid": true,
-          "payment_intent": "pi_1EefT62sOmf47Nz95pGzoiSw",
-          "period_end": 1558950612,
-          "period_start": 1558950612,
+          "payment_intent": "pi_1Euc8Q2sOmf47Nz9hY7pxZNX",
+          "period_end": 1562751045,
+          "period_start": 1562751045,
           "post_payment_credit_notes_amount": 0,
           "pre_payment_credit_notes_amount": 0,
           "receipt_number": null,
@@ -233,12 +233,12 @@ http_interactions:
           "statement_descriptor": null,
           "status": "paid",
           "status_transitions": {
-            "finalized_at": 1558950612,
+            "finalized_at": 1562751046,
             "marked_uncollectible_at": null,
-            "paid_at": 1558950613,
+            "paid_at": 1562751046,
             "voided_at": null
           },
-          "subscription": "sub_F8xNkdzsupfY1C",
+          "subscription": "sub_FPR0YHKaG12WCB",
           "subtotal": 3825,
           "tax": null,
           "tax_percent": null,
@@ -246,8 +246,8 @@ http_interactions:
           "total_tax_amounts": [
 
           ],
-          "webhooks_delivered_at": 1558950614
+          "webhooks_delivered_at": 1562751047
         }
     http_version: 
-  recorded_at: Mon, 27 May 2019 09:50:21 GMT
+  recorded_at: Wed, 10 Jul 2019 09:30:50 GMT
 recorded_with: VCR 3.0.1
