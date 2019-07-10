@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v4.0.2 2019 July 10
+
 - Fix a bug: unable to export members list
 - Fix a bug: unable to export reservations or subscriptions to excel
 - Fix a bug: projects RSS feed fails to render
