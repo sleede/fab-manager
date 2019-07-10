@@ -1,5 +1,17 @@
 # Changelog Fab Manager
 
+## v4.0.2 2019 July 10
+
+- Fix a bug: unable to export members list
+- Fix a bug: unable to export reservations or subscriptions to excel
+- Fix a bug: projects RSS feed fails to render
+- Fix a bug: abuses reports are not notified to admins
+- Fix a bug: SubscriptionExpireWorker cannot run due to wrong expiration column in SQL query
+- Fix a bug: OpenlabWorker is crashing with message undefined method `profile' for StatisticProfile
+- Prevent invalid invoice logo from crashing the InvoiceWorker
+- Updated user's manual for v4 (fr)
+- Optimized Dockerfile to speed up build time
+
 ## v4.0.1 2019 June 17
 
 - Fix a bug: migration 20190523140823 may not run if an admin was deleted

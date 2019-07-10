@@ -8,11 +8,11 @@ RUN apt-get update && \
 
 
 # Add sources for external tools to APT
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
-RUN echo "deb https://deb.nodesource.com/node_10.x jessie main" > /etc/apt/sources.list.d/nodesource.list
-RUN echo "deb-src https://deb.nodesource.com/node_10.x jessie main" >> /etc/apt/sources.list.d/nodesource.list
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    echo "deb https://deb.nodesource.com/node_10.x jessie main" > /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb-src https://deb.nodesource.com/node_10.x jessie main" >> /etc/apt/sources.list.d/nodesource.list
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
@@ -37,16 +37,16 @@ RUN bundle install --binstubs
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Web app
-RUN mkdir -p /usr/src/app
-RUN mkdir -p /usr/src/app/config
-RUN mkdir -p /usr/src/app/invoices
-RUN mkdir -p /usr/src/app/exports
-RUN mkdir -p /usr/src/app/log
-RUN mkdir -p /usr/src/app/public/uploads
-RUN mkdir -p /usr/src/app/public/assets
-RUN mkdir -p /usr/src/app/accounting
-RUN mkdir -p /usr/src/app/tmp/sockets
-RUN mkdir -p /usr/src/app/tmp/pids
+RUN mkdir -p /usr/src/app && \
+    mkdir -p /usr/src/app/config && \
+    mkdir -p /usr/src/app/invoices && \
+    mkdir -p /usr/src/app/exports && \
+    mkdir -p /usr/src/app/log && \
+    mkdir -p /usr/src/app/public/uploads && \
+    mkdir -p /usr/src/app/public/assets && \
+    mkdir -p /usr/src/app/accounting && \
+    mkdir -p /usr/src/app/tmp/sockets && \
+    mkdir -p /usr/src/app/tmp/pids
 
 WORKDIR /usr/src/app
 

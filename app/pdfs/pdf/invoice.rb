@@ -26,7 +26,11 @@ class PDF::Invoice < Prawn::Document
 
     # logo
     img_b64 = Setting.find_by(name: 'invoice_logo')
-    image StringIO.new(Base64.decode64(img_b64.value)), fit: [415, 40]
+    begin
+      image StringIO.new(Base64.decode64(img_b64.value)), fit: [415, 40]
+    rescue StandardError => e
+      puts "Unable to decode invoice logo from base64: #{e}"
+    end
     move_down 20
     font('Open-Sans', size: 10) do
       # general information

@@ -32,7 +32,7 @@ module Project::OpenlabSync
         machines: machines.map(&:name),
         components: components.map(&:name),
         themes: themes.map(&:name),
-        author: author&.profile&.full_name,
+        author: author&.user&.profile&.full_name,
         collaborators: users.map { |u| u&.profile&.full_name },
         steps_body: steps_body,
         image_path: project_image&.attachment&.medium&.url,

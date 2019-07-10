@@ -31,7 +31,7 @@ tar cvzf fabmanager_production_$(date -I).tar.gz fabmanager_production_$(date -I
 
 If you're connected to your server thought SSH, you can download the resulting dump file using the following:
 ```bash
-scp root@remote.server.fab:/apps/fabmanager/postgresql/dump/fabmanager_production_$(date -I).tar.gz .
+scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_production_$(date -I).tar.gz .
 ```
 
 Restore the dump with the following:
