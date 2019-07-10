@@ -13,7 +13,7 @@ class UsersExportService
 
   # export subscriptions
   def export_subscriptions(export)
-    @subscriptions = Subscription.all.includes(:plan, user: [:profile])
+    @subscriptions = Subscription.all.includes(:plan, statistic_profile: [user: [:profile]])
 
     ActionController::Base.prepend_view_path './app/views/'
     # place data in view_assigns
@@ -31,7 +31,7 @@ class UsersExportService
 
   # export reservations
   def export_reservations(export)
-    @reservations = Reservation.all.includes(:slots, :reservable, user: [:profile])
+    @reservations = Reservation.all.includes(:slots, :reservable, statistic_profile: [user: [:profile]])
 
     ActionController::Base.prepend_view_path './app/views/'
     # place data in view_assigns
