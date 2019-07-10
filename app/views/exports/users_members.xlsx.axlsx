@@ -38,6 +38,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
 
   # data rows
   @members.each do |member|
+    expiration = member&.subscription&.expired_at
     data = [
       member.id,
       member.profile.last_name,
@@ -45,7 +46,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
       member.email,
       member.is_allow_newsletter,
       member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman'),
-      member.profile.age,
+      member.statistic_profile.age,
       member.invoicing_profile&.address&.address || '',
       member.profile.phone,
       member.profile.website,
@@ -53,8 +54,8 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
       member.profile.interest,
       member.profile.software_mastered,
       member.group&.name,
-      member.subscription && member.subscription.expired_at > Time.now ? member.subscription.plan.name : t('export_members.without_subscriptions'),
-      member.subscription && member.subscription.expired_at > Time.now ? member.subscription.expired_at.to_date : nil,
+      expiration && Time.now < expiration ? member.subscription.plan.name : t('export_members.without_subscriptions'),
+      expiration && Time.now < expiration ? member.subscription.expired_at.to_date : nil,
       member.trainings.map(&:name).join("\n"),
       member.tags.map(&:name).join("\n"),
       member.invoices.size,
@@ -62,14 +63,14 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
       member.profile.facebook || '',
       member.profile.twitter || '',
       member.profile.echosciences || '',
-      member.invoicing_profile&.organization.name || '',
+      member.invoicing_profile&.organization&.name || '',
       member.invoicing_profile&.organization&.address&.address || ''
     ]
     styles = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,
               nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
 
     types = %i[integer string string string boolean string integer string string string string string
-               string string string date string string integer boolean string string string string string string]
+               string string string date string string integer string string string string string string string]
 
     sheet.add_row data, style: styles, types: types
   end

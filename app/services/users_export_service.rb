@@ -50,8 +50,9 @@ class UsersExportService
   # export members
   def export_members(export)
     @members = User.with_role(:member)
-                   .includes(:group, :trainings, :tags, :invoices, :projects,
-                             subscriptions: [:plan], profile: [:address, organization: [:address]])
+                   .includes(:group, :tags, :projects, :profile,
+                             invoicing_profile: [:invoices, :address, organization: [:address]],
+                             statistic_profile: [:trainings, subscriptions: [:plan]])
 
     ActionController::Base.prepend_view_path './app/views/'
     # place data in view_assigns
