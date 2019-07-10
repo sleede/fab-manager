@@ -2,7 +2,7 @@ class SubscriptionExpireWorker
   include Sidekiq::Worker
 
   def perform(expire_in)
-    Subscription.where('expired_at >= ?', Time.now.at_beginning_of_day).each do |s|
+    Subscription.where('expiration_date >= ?', Time.now.at_beginning_of_day).each do |s|
       if (s.expired_at - expire_in.days).to_date == Time.now.to_date
         if expire_in != 0
           NotificationCenter.call type: 'notify_member_subscription_will_expire_in_7_days',
