@@ -3,6 +3,7 @@
 - Fix a bug: projects RSS feed fails to render
 - Fix a bug: abuses reports are not notified to admins
 - Fix a bug: SubscriptionExpireWorker cannot run due to wrong expiration column in SQL query
+- Prevent invalid invoice logo from crashing the InvoiceWorker
 - Updated user's manual for v4 (fr)
 - Optimized Dockerfile to speed up build time
 
