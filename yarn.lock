@@ -180,15 +180,12 @@ angular-unsavedchanges@0.2:
   resolved "https://registry.yarnpkg.com/angular-unsavedchanges/-/angular-unsavedchanges-0.2.5.tgz#34be961d547051f2c6d536c60a5b42f565c8858b"
   integrity sha1-NL6WHVRwUfLG1TbGCltC9WXIhYs=
 
-angular-xeditable@0.1:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/angular-xeditable/-/angular-xeditable-0.1.12.tgz#482c377cce1db49876f8ae220cce4db8d79e63c5"
-  integrity sha1-SCw3fM4dtJh2+K4iDM5NuNeeY8U=
+angular-xeditable@0.10:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/angular-xeditable/-/angular-xeditable-0.10.0.tgz#81f0e477d0bc046bf85d9972dd8af341cf18828a"
+  integrity sha512-XZcy29EQtq5/ZrLABbhUr3MLT+lfAHfFpkbHFxY/J8PAaiqa+3b7/U6rg+TUV0oIQ5QfeeXCjHwg3gIyU0uDdA==
   dependencies:
     angular "~1.x"
-    bootstrap "^3.1.1"
-    jquery "^1.11.1"
-    moment "^2.5.0"
 
 angular@1.6:
   version "1.6.10"
@@ -240,11 +237,6 @@ bootstrap-switch@3.3.2:
   integrity sha1-ed20n63DCPtzHiV/lZV69ImW7qc=
   dependencies:
     jquery ">=1.9.0"
-
-bootstrap@^3.1.1:
-  version "3.3.7"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
-  integrity sha1-WjiTlFSfIzMIdaOxUGVldPip63E=
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -880,20 +872,10 @@ jquery-minicolors@^2.1.10:
   version "1.10.4"
   resolved "https://github.com/devongovett/jqueryui-npm.git#51bc3549dd6530a18f43be45c3e8ae520805b9e4"
 
-"jquery@>= 1.7.x", jquery@>=1.7.1, jquery@>=1.9.0:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
-  integrity sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==
-
-jquery@>=3.4.0:
+"jquery@>= 1.7.x", jquery@>=1.7.1, jquery@>=1.9.0, jquery@>=3.4.0:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
-
-jquery@^1.11.1:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
-  integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -1015,7 +997,7 @@ moment-timezone@0.5:
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.22, "moment@>= 2.9.0", moment@>=2.5.0, "moment@>=2.8.0 <3.0.0", moment@^2.5.0:
+moment@2.22, "moment@>= 2.9.0", moment@>=2.5.0, "moment@>=2.8.0 <3.0.0":
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
