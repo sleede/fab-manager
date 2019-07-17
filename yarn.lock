@@ -868,10 +868,6 @@ jquery-minicolors@^2.1.10:
   dependencies:
     jquery ">= 1.7.x"
 
-"jquery-ui@https://github.com/devongovett/jqueryui-npm.git#1.10.4":
-  version "1.10.4"
-  resolved "https://github.com/devongovett/jqueryui-npm.git#51bc3549dd6530a18f43be45c3e8ae520805b9e4"
-
 "jquery@>= 1.7.x", jquery@>=1.7.1, jquery@>=1.9.0, jquery@>=3.4.0:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"

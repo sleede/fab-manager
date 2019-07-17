@@ -62,7 +62,6 @@
     "jasny-bootstrap": "3.1",
     "jquery": ">=3.4.0",
     "jquery-minicolors": "^2.1.10",
-    "jquery-ui": "https://github.com/devongovett/jqueryui-npm.git#1.10.4",
     "medium-editor": "4.4.0",
     "messageformat": "0.1.8",
     "moment": "2.22",
