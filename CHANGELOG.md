@@ -1,5 +1,10 @@
 # Changelog Fab Manager
 
+- Fix a bug: no user can be created after the last member was deleted
+- Fix a security issue: updated to lodash 4.17.14 to fix [CVE-2019-10744](https://github.com/lodash/lodash/pull/4336)
+- Removed dependency to jQuery UI
+- Updated angular-xeditable
+
 ## v4.0.2 2019 July 10
 
 - Fix a bug: unable to export members list
