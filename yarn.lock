@@ -186,6 +186,9 @@ angular-xeditable@0.10:
   integrity sha512-XZcy29EQtq5/ZrLABbhUr3MLT+lfAHfFpkbHFxY/J8PAaiqa+3b7/U6rg+TUV0oIQ5QfeeXCjHwg3gIyU0uDdA==
   dependencies:
     angular "~1.x"
+    bootstrap "^3.1.1"
+    jquery "^1.11.1"
+    moment "^2.5.0"
 
 angular@1.6:
   version "1.6.10"
@@ -237,6 +240,11 @@ bootstrap-switch@3.3.2:
   integrity sha1-ed20n63DCPtzHiV/lZV69ImW7qc=
   dependencies:
     jquery ">=1.9.0"
+
+bootstrap@^3.1.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.4.1.tgz#c3a347d419e289ad11f4033e3c4132b87c081d72"
+  integrity sha512-yN5oZVmRCwe5aKwzRj6736nSmKDX7pLYwsXiCj/EYmo16hODaBiT4En5btW/jhBF/seV+XMx3aYwukYC3A49DA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
