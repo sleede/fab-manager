@@ -97,7 +97,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'aasm'
 
 # Background job processing
-gem 'sidekiq'
+gem 'sidekiq', '>= 3.4.2'
+gem 'redis-namespace'
 gem 'sinatra', require: false
 # Recurring jobs for Sidekiq
 gem 'sidekiq-cron'
