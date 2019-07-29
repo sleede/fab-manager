@@ -126,6 +126,9 @@ fr:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
 
+  accounting_export:
+    VAT: 'TVA'
+
   trainings:
     # disponibilités formations
     i_ve_reserved: "J'ai réservé"
