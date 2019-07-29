@@ -6,7 +6,7 @@ json.array!(@invoices) do |invoice|
   json.maxInvoices max_invoices
   json.extract! invoice, :id, :created_at, :reference, :invoiced_type, :avoir_date
   json.user_id invoice.invoicing_profile.user_id
-  json.total (invoice.total / 100.00)
+  json.total invoice.total / 100.00
   json.url invoice_url(invoice, format: :json)
   json.name invoice.invoicing_profile.full_name
   json.has_avoir invoice.refunded?

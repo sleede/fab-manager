@@ -1,5 +1,6 @@
-class AuthProvider < ActiveRecord::Base
+# frozen_string_literal: true
 
+class AuthProvider < ActiveRecord::Base
   # this is a simple stub used for database creation & configuration
   class SimpleAuthProvider < Object
     def providable_type
