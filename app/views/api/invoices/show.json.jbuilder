@@ -1,4 +1,7 @@
-json.extract! @invoice, :id, :created_at, :reference, :invoiced_type, :user_id, :avoir_date, :description
+# frozen_string_literal: true
+
+json.extract! @invoice, :id, :created_at, :reference, :invoiced_type, :avoir_date, :description
+json.user_id @invoice.invoicing_profile&.user_id
 json.total (@invoice.total / 100.00)
 json.name @invoice.user.profile.full_name
 json.has_avoir @invoice.refunded?

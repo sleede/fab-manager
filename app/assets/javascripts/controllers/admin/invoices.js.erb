@@ -619,8 +619,12 @@ Application.Controllers.controller('AvoirModalController', ['$scope', '$uibModal
       // check that at least 1 element of the invoice is refunded
       $scope.avoir.invoice_items_ids = [];
       for (let itemId in $scope.partial) {
-        const refundItem = $scope.partial[itemId];
-        if (refundItem) { $scope.avoir.invoice_items_ids.push(parseInt(itemId)); }
+        if (Object.prototype.hasOwnProperty.call($scope.partial, itemId)) {
+          const refundItem = $scope.partial[itemId];
+          if (refundItem) {
+            $scope.avoir.invoice_items_ids.push(parseInt(itemId));
+          }
+        }
       }
 
       if ($scope.avoir.invoice_items_ids.length === 0) {
