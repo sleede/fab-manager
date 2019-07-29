@@ -2,6 +2,7 @@
 
 - Fix a bug: no user can be created after the last member was deleted
 - Fix a bug: unable to generate a refund (Avoir)
+- Fix a bug: a newly generated refund is displayed as broken (unchained record) even if it is correctly chained
 - Fix a security issue: updated lodash to 4.17.14 to fix [CVE-2019-10744](https://github.com/lodash/lodash/pull/4336)
 - Fix a security issue: updated mini_magick to 4.9.4 to fix [CVE-2019-13574](https://nvd.nist.gov/vuln/detail/CVE-2019-13574)
 - Fix some security issues: updated bootstrap to 3.4.1 to fix [CVE-2019-8331](https://nvd.nist.gov/vuln/detail/CVE-2019-8331), [CVE-2019-14041](https://nvd.nist.gov/vuln/detail/CVE-2018-14041), and 3 other low severity CVE
