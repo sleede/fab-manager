@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Ability to configure and export the accounting data to the ACD accounting software
 - Fix a bug: no user can be created after the last member was deleted
 - Fix a bug: unable to generate a refund (Avoir)
 - Fix a bug: a newly generated refund is displayed as broken (unchained record) even if it is correctly chained
@@ -9,6 +10,7 @@
 - Fix some security issues: updated sidekiq to 5.2.7 to fix XSS and CRSF issues
 - Removed dependency to jQuery UI
 - Updated angular-xeditable, to remove dependency to jquery 1.11.1
+- [TODO DEPLOY] `rake db:migrate`
 
 ## v4.0.2 2019 July 10
 
