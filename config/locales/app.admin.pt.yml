@@ -432,6 +432,47 @@ pt:
           period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed. Archive generation is running, you'll be notified when it's done."        # translation_missing
           failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
           no_periods: "No closings for now"                                            # translation_missing
+          accounting_codes: "Accounting codes"                                         # translation_missing
+          accounting_journal_code: "Journal code"                                      # translation_missing
+          general_journal_code: "Journal code"                                         # translation_missing
+          accounting_client_code: "Customers code"                                     # translation_missing
+          general_client_code: "Accounting code for all customers"                     # translation_missing
+          accounting_client_label: "Customers label"                                   # translation_missing
+          general_client_label: "Account label for all customers"                      # translation_missing
+          accounting_wallet_code: "Wallet code"                                        # translation_missing
+          general_wallet_code: "Accounting code for wallet credit"                     # translation_missing
+          accounting_wallet_label: "Wallet label"                                      # translation_missing
+          general_wallet_label: "Account label for wallet credit"                      # translation_missing
+          accounting_vat_code: "VAT code"                                              # translation_missing
+          general_vat_code: "Accounting code for VAT"                                  # translation_missing
+          accounting_vat_label: "VAT label"                                            # translation_missing
+          general_vat_label: "VAT account label"                                       # translation_missing
+          accounting_subscription_code: "Subscriptions code"                           # translation_missing
+          general_subscription_code: "Accounting code for all subscriptions"           # translation_missing
+          accounting_subscription_label: "Subscriptions label"                         # translation_missing
+          general_subscription_label: "Account label for all subscriptions"            # translation_missing
+          accounting_machine_code: "Machines code"                                     # translation_missing
+          general_machine_code: "Accounting code for all machines"                     # translation_missing
+          accounting_machine_label: "Machine label"                                    # translation_missing
+          general_machine_label: "Account label for all machines"                      # translation_missing
+          accounting_training_code: "Trainings code"                                   # translation_missing
+          general_training_code: "Accounting code for all trainings"                   # translation_missing
+          accounting_training_label: "Trainings label"                                 # translation_missing
+          general_training_label: "Account label for all trainings"                    # translation_missing
+          accounting_event_code: "Events code"                                         # translation_missing
+          general_event_code: "Accounting code for all events"                         # translation_missing
+          accounting_event_label: "Events label"                                       # translation_missing
+          general_event_label: "Account label for all events"                          # translation_missing
+          accounting_space_code: "Space code"                                          # translation_missing
+          general_space_code: "Accounting code for all spaces"                         # translation_missing
+          accounting_space_label: "Spaces label"                                       # translation_missing
+          general_space_label: "Account label for all spaces"                          # translation_missing
+          accounting_coupon_code: "Coupons code"                                       # translation_missing
+          general_coupon_code: "Accounting code for all coupons"                       # translation_missing
+          accounting_coupon_label: "Coupons label"                                     # translation_missing
+          general_coupon_label: "Account label for all coupons"                        # translation_missing
+          customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation                                   # translation_missing
+          export_accounting_data: "Export accounting data"                             # translation_missing
 
       members:
         # management of users, labels, groups, and so on

@@ -40,7 +40,26 @@ class Setting < ActiveRecord::Base
                              visibility_yearly
                              visibility_others
                              display_name_enable
-                             machines_sort_by] }
+                             machines_sort_by
+                             accounting_journal_code
+                             accounting_client_code
+                             accounting_client_label
+                             accounting_wallet_code
+                             accounting_wallet_label
+                             accounting_VAT_code
+                             accounting_VAT_label
+                             accounting_subscription_code
+                             accounting_subscription_label
+                             accounting_Machine_code
+                             accounting_Machine_label
+                             accounting_Training_code
+                             accounting_Training_label
+                             accounting_Event_code
+                             accounting_Event_label
+                             accounting_Space_code
+                             accounting_Space_label
+                             accounting_coupon_code
+                             accounting_coupon_label] }
 
   after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 

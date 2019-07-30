@@ -10,9 +10,9 @@ class AccountingExportWorker
     raise SecurityError, 'Not allowed to export' unless export.user.admin?
 
     data = JSON.parse(export.query)
-    service = AccountingExportService.new(export.file, data['columns'], data['encoding'], export.extension, export.key)
+    service = AccountingExportService.new(data['columns'], data['encoding'], export.extension, export.key, data['date_format'])
 
-    service.export(data['start_date'], data['end_date'])
+    service.export(data['start_date'], data['end_date'], export.file)
 
     NotificationCenter.call type: :notify_admin_export_complete,
                             receiver: export.user,

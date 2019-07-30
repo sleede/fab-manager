@@ -899,15 +899,12 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           settings: ['Setting', function (Setting) {
             return Setting.query({
-              names: `['invoice_legals', \
-                       'invoice_text', \
-                       'invoice_VAT-rate', \
-                       'invoice_VAT-active', \
-                       'invoice_order-nb', \
-                       'invoice_code-value', \
-                       'invoice_code-active', \
-                       'invoice_reference', \
-                       'invoice_logo']` }).$promise;
+              names: `['invoice_legals', 'invoice_text', 'invoice_VAT-rate', 'invoice_VAT-active', 'invoice_order-nb', 'invoice_code-value', \
+                       'invoice_code-active', 'invoice_reference', 'invoice_logo', 'accounting_journal_code', 'accounting_client_code' \
+                       'accounting_client_label', 'accounting_wallet_code', 'accounting_wallet_label', 'accounting_VAT_code', 'accounting_VAT_label', \
+                       'accounting_subscription_code', 'accounting_subscription_label', 'accounting_Machine_code', 'accounting_Machine_label' \
+                       'accounting_Training_code', 'accounting_Training_label', 'accounting_Event_code', 'accounting_Event_label' \
+                       'accounting_Space_code', 'accounting_Space_label', 'accounting_coupon_code', 'accounting_coupon_label']` }).$promise;
           }],
           invoices: [ 'Invoice', function (Invoice) {
             return Invoice.list({

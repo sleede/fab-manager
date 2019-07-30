@@ -2,19 +2,18 @@
 
 # Provides the routine to export the accounting data to an external accounting software
 class AccountingExportService
-  attr_reader :file, :encoding, :format, :separator, :log_code, :date_format
+  attr_reader :encoding, :format, :separator, :journal_code, :date_format
 
-  def initialize(file, columns, encoding = 'UTF-8', format = 'CSV', separator = ';')
-    @file = file
+  def initialize(columns, encoding = 'UTF-8', format = 'CSV', separator = ';', date_format = '%d/%m/%Y')
     @encoding = encoding
     @format = format
     @separator = separator
-    @log_code = Setting.find_by(name: 'accounting-export_log-code').value
-    @date_format = Setting.find_by(name: 'accounting-export_date-format').value
+    @journal_code = Setting.find_by(name: 'accounting-export_journal-code').value
+    @date_format = date_format
     @columns = columns
   end
 
-  def export(start_date, end_date)
+  def export(start_date, end_date, file)
     # build CVS content
     content = ''
     invoices = Invoice.where('created_at >= ? AND created_at <= ?', start_date, end_date).order('created_at ASC')
@@ -47,8 +46,8 @@ class AccountingExportService
     row = ''
     columns.each do |column|
       case column
-      when :log_code
-        row << log_code
+      when :journal_code
+        row << journal_code
       when :date
         row << invoice.created_at.strftime(date_format)
       when :account_code
@@ -81,8 +80,8 @@ class AccountingExportService
     row = ''
     columns.each do |column|
       case column
-      when :log_code
-        row << log_code
+      when :journal_code
+        row << journal_code
       when :date
         row << invoice.created_at.strftime(date_format)
       when :account_code
@@ -116,8 +115,8 @@ class AccountingExportService
     row = ''
     columns.each do |column|
       case column
-      when :log_code
-        row << log_code
+      when :journal_code
+        row << journal_code
       when :date
         row << invoice.created_at.strftime(date_format)
       when :account_code
@@ -152,8 +151,8 @@ class AccountingExportService
     row = ''
     columns.each do |column|
       case column
-      when :log_code
-        row << log_code
+      when :journal_code
+        row << journal_code
       when :date
         row << invoice.created_at.strftime(date_format)
       when :account_code
@@ -183,17 +182,17 @@ class AccountingExportService
   def account(invoice, account, type = :code)
     case account
     when :client
-      Setting.find_by(name: "accounting-export_client-account-#{type}").value
+      Setting.find_by(name: "accounting_client_#{type}").value
     when :vat
-      Setting.find_by(name: "accounting-export_VAT-account-#{type}").value
+      Setting.find_by(name: "accounting_VAT_#{type}").value
     when :subscription
       return if invoice.invoiced_type != 'Subscription'
 
-      Setting.find_by(name: "accounting-export_subscription-account-#{type}").value
+      Setting.find_by(name: "accounting_subscription_#{type}").value
     when :reservation
       return if invoice.invoiced_type != 'Reservation'
 
-      Setting.find_by(name: "accounting-export_#{invoice.invoiced.reservable_type}-account-#{type}").value
+      Setting.find_by(name: "accounting_#{invoice.invoiced.reservable_type}_#{type}").value
     else
       puts "Unsupported account #{account}"
     end
