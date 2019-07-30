@@ -1,7 +1,7 @@
 Metrics/LineLength:
   Max: 140
 Metrics/MethodLength:
-  Max: 30
+  Max: 35
 Metrics/CyclomaticComplexity:
   Max: 12
 Metrics/PerceivedComplexity:

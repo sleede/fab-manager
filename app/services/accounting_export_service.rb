@@ -60,13 +60,13 @@ class AccountingExportService
       when :line_label
         row << invoice.invoicing_profile.full_name
       when :debit_origin
-        row << invoice.total / 100.0
+        row << debit_client(invoice, invoice.total / 100.0)
       when :credit_origin
-        row << 0
+        row << credit_client(invoice, invoice.total / 100.0)
       when :debit_euro
-        row << invoice.total / 100.0
+        row << debit_client(invoice, invoice.total / 100.0)
       when :credit_euro
-        row << 0
+        row << credit_client(invoice, invoice.total / 100.0)
       else
         puts "Unsupported column: #{column}"
       end
@@ -94,13 +94,13 @@ class AccountingExportService
       when :line_label
         row << item.description
       when :debit_origin
-        row << 0
+        row << debit(invoice, wo_taxes)
       when :credit_origin
-        row << wo_taxes
+        row << credit(invoice, wo_taxes)
       when :debit_euro
-        row << 0
+        row << debit(invoice, wo_taxes)
       when :credit_euro
-        row << wo_taxes
+        row << credit(invoice, wo_taxes)
       else
         puts "Unsupported column: #{column}"
       end
@@ -129,19 +129,20 @@ class AccountingExportService
       when :line_label
         row << subscription_item.description
       when :debit_origin
-        row << 0
+        row << debit(invoice, wo_taxes)
       when :credit_origin
-        row << wo_taxes
+        row << credit(invoice, wo_taxes)
       when :debit_euro
-        row << 0
+        row << debit(invoice, wo_taxes)
       when :credit_euro
-        row << wo_taxes
+        row << credit(invoice, wo_taxes)
       else
         puts "Unsupported column: #{column}"
       end
       row << separator
     end
   end
+
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
   def vat_row(invoice)
     # first compute the VAT amount
@@ -164,13 +165,13 @@ class AccountingExportService
       when :line_label
         row << I18n.t('accounting_export.VAT')
       when :debit_origin
-        row << vat
+        row << debit(invoice, vat)
       when :credit_origin
-        row << 0
+        row << credit(invoice, vat)
       when :debit_euro
-        row << vat
+        row << debit(invoice, vat)
       when :credit_euro
-        row << 0
+        row << credit(invoice, vat)
       else
         puts "Unsupported column: #{column}"
       end
@@ -182,19 +183,41 @@ class AccountingExportService
   def account(invoice, account, type = :code)
     case account
     when :client
-      Setting.find_by(name: "accounting-export_client-account-#{type.to_s}").value
+      Setting.find_by(name: "accounting-export_client-account-#{type}").value
     when :vat
-      Setting.find_by(name: "accounting-export_VAT-account-#{type.to_s}").value
+      Setting.find_by(name: "accounting-export_VAT-account-#{type}").value
     when :subscription
       return if invoice.invoiced_type != 'Subscription'
 
-      Setting.find_by(name: "accounting-export_subscription-account-#{type.to_s}").value
+      Setting.find_by(name: "accounting-export_subscription-account-#{type}").value
     when :reservation
       return if invoice.invoiced_type != 'Reservation'
 
-      Setting.find_by(name: "accounting-export_#{invoice.invoiced.reservable_type}-account-#{type.to_s}").value
+      Setting.find_by(name: "accounting-export_#{invoice.invoiced.reservable_type}-account-#{type}").value
     else
       puts "Unsupported account #{account}"
     end
+  end
+
+  # Fill the value of the "debit" column: if the invoice is a refund, returns the given amount, returns 0 otherwise
+  def debit(invoice, amount)
+    avoir = invoice.is_a? Avoir
+    avoir ? amount : 0
+  end
+
+  # Fill the value of the "credit" column: if the invoice is a refund, returns 0, otherwise, returns the given amount
+  def credit(invoice, amount)
+    avoir = invoice.is_a? Avoir
+    avoir ? 0 : amount
+  end
+
+  # Fill the value of the "debit" column for the client row: if the invoice is a refund, returns 0, otherwise, returns the given amount
+  def debit_client(invoice, amount)
+    credit(invoice, amount)
+  end
+
+  # Fill the value of the "credit" column, for the client row: if the invoice is a refund, returns the given amount, returns 0 otherwise
+  def credit_client(invoice, amount)
+    debit(invoice, amount)
   end
 end
