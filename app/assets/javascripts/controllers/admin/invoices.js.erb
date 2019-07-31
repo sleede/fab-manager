@@ -516,7 +516,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/invoices/accountingExportModal.html" %>',
         controller: 'AccountingExportModalController',
-        size: 'lg'
+        size: 'xl'
       });
     }
 
@@ -907,12 +907,60 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
 
 Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
+  const SETTINGS = {
+    acd: {
+      format: 'CSV',
+      encoding: 'ISO-8859-1',
+      separator: ';',
+      dateFormat: '%d/%m/%Y',
+      columns: ['journal_code', 'date', 'account_code', 'account_label', 'piece', 'line_label', 'debit_origin', 'credit_origin', 'debit_euro', 'credit_euro', 'lettering']
+    }
+  };
+
+  // binding to radio button "export to"
+  $scope.exportTarget = {
+    software: null,
+    startDate: null,
+    endDate: null,
+    settings: null
+  };
+
+  // AngularUI-Bootstrap datepicker parameters to define export dates range
+  $scope.datePicker = {
+    format: Fablab.uibDateFormat,
+    opened: { // default: datePickers are not shown
+      start: false,
+      end: false
+    },
+    options: {
+      startingDay: Fablab.weekStartingDay
+    }
+  };
+
   /**
    * Validate the close period creation
    */
   $scope.ok = function () {
     console.log('ok');
   };
+
+  /**
+   * Callback to open/close one of the datepickers
+   * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+   * @param picker {string} start | end
+   */
+  $scope.toggleDatePicker = function(event, picker) {
+    event.preventDefault();
+    $scope.datePicker.opened[picker] = !$scope.datePicker.opened[picker];
+  };
+
+  /**
+   * Will fill the export settings, accordint to the selected software
+   */
+  $scope.fillSettings = function() {
+    $scope.exportTarget.settings = SETTINGS[$scope.exportTarget.software];
+  };
+
   /**
    * Just dismiss the modal window
    */

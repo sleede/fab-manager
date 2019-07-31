@@ -284,3 +284,27 @@ input.form-control.as-writable {
     margin-top: 1em;
   }
 }
+
+.modal-xl {
+  width: 900px;
+}
+
+table.export-table-template {
+  margin-top: 10px;
+
+  thead td {
+    width: 20px;
+    background-color: #227447;
+    color: white;
+    border-bottom: 2px solid black;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 5px;
+    line-height: 12px;
+  }
+
+  tbody td {
+    border-right: 1px solid #d4d4d4;
+    height: 30px;
+  }
+}
