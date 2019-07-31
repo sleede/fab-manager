@@ -13,6 +13,7 @@
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
         <a class="btn btn-default rounded m-t-sm" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
+        <iframe name="export-frame" height="0" width="0" class="none" id="accounting-export-frame"></iframe>
         <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'invoices.accounting_periods' | translate }}</a>
       </section>
     </div>
@@ -117,7 +118,7 @@
 
 	    <uib-tab heading="{{ 'invoices.invoicing_settings' | translate }}">
 			<form class="invoice-placeholder">
-				<div class="invoice-logo" style="background-image: url({{invoice.logo}});">
+				<div class="invoice-logo">
 				    <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!invoice.logo" class="img-responsive">
             <img base-sixty-four-image="invoice.logo" ng-if="invoice.logo && invoice.logo.base64">
 				    <div class="tools-box">

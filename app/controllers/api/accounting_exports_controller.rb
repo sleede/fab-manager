@@ -16,13 +16,9 @@ class API::AccountingExportsController < API::ApiController
         category: 'accounting',
         export_type: 'accounting-software',
         user: current_user,
-        extension: params[:settings][:format],
-        query: {
-          columns: params[:settings][:columns],
-          encoding: params[:settings][:encoding],
-          date_format: params[:settings][:dateFormat]
-        }.to_json,
-        key: params[:settings][:separator]
+        extension: params[:extension],
+        query: params[:query],
+        key: params[:key]
       )
       if @export.save
         render json: { export_id: @export.id }, status: :ok

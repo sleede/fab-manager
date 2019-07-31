@@ -28,7 +28,13 @@ class API::ExportsController < API::ApiController
   def status
     authorize Export
 
-    exports = Export.where(category: params[:category], export_type: params[:type], query: params[:query], key: params[:key])
+    exports = Export.where(
+      category: params[:category],
+      export_type: params[:type],
+      query: params[:query],
+      key: params[:key],
+      extension: params[:extension]
+    )
     export = retrieve_last_export(exports, params[:category], params[:type])
 
     if export.nil? || !FileTest.exist?(export.file)

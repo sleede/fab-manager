@@ -905,8 +905,10 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
   }
 ]);
 
-Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingExport', 'growl', '_t',
-  function ($scope, $uibModalInstance, Invoice, AccountingExport, growl, _t) {
+Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'Export', 'CSRF', 'growl', '_t',
+  function ($scope, $uibModalInstance, Invoice, Export, CSRF, growl, _t) {
+  // Retrieve Anti-CSRF tokens from cookies
+  CSRF.setMetaTags();
 
   const SETTINGS = {
     acd: {
@@ -919,6 +921,18 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
   };
 
   /* PUBLIC SCOPE */
+
+  // API URL where the form will be posted
+  $scope.actionUrl = '/api/accounting/export';
+
+  // Form action on the above URL
+  $scope.method = 'post';
+
+  // Anti-CSRF token to inject into the download form
+  $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content;
+
+  // API request body to generate the export
+  $scope.query = null;
 
   // binding to radio button "export to"
   $scope.exportTarget = {
@@ -947,8 +961,13 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
    * Validate the close period creation
    */
   $scope.ok = function () {
-    AccountingExport.export($scope.exportTarget, function(res) {
-      growl.info(_t('invoices.export_is_running'))
+    const statusQry = mkQuery();
+    $scope.query = statusQry;
+
+    Export.status(statusQry).then(function (res) {
+      if (!res.data.exists) {
+        growl.success(_t('invoices.export_is_running'));
+      }
       $uibModalInstance.close(res);
     });
   };
@@ -964,7 +983,7 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
   };
 
   /**
-   * Will fill the export settings, accordint to the selected software
+   * Will fill the export settings, according to the selected software
    */
   $scope.fillSettings = function() {
     $scope.exportTarget.settings = SETTINGS[$scope.exportTarget.software];
@@ -986,6 +1005,24 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
       $scope.firstInvoice = data.date;
     });
   };
+
+  /**
+   * Prepare the query for the export API
+   * @returns {{extension: *, query: *, category: string, type: string, key: *}}
+   */
+  const mkQuery = function() {
+    return {
+      category: 'accounting',
+      type: 'accounting-software',
+      extension: $scope.exportTarget.settings.format,
+      key: $scope.exportTarget.settings.separator,
+      query: JSON.stringify({
+        columns: $scope.exportTarget.settings.columns,
+        encoding: $scope.exportTarget.settings.encoding,
+        date_format: $scope.exportTarget.settings.dateFormat
+      })
+    };
+  }
 
   // !!! MUST BE CALLED AT THE END of the controller
   return initialize();

@@ -78,6 +78,13 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-warning" ng-click="ok()" ng-disabled="!exportForm.$valid" translate>{{ 'confirm' }}</button>
+  <form role="form" ng-submit="ok()" name="exportFormParams" method="post" action="{{ actionUrl }}" class="inline">
+    <input name="authenticity_token" type="hidden" ng-value="csrfToken"/>
+    <input name="_method" type="hidden" ng-value="method"/>
+    <input name="extension" type="hidden" ng-value="query.extension"/>
+    <input name="key" type="hidden" ng-value="query.key"/>
+    <input name="query" type="hidden" ng-value="query.query"/>
+    <input type="submit" class="btn btn-warning" value="{{ 'confirm' | translate }}" formtarget="export-frame"/>
+  </form>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>
