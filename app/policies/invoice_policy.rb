@@ -14,4 +14,8 @@ class InvoicePolicy < ApplicationPolicy
   def list?
     user.admin?
   end
+
+  def first?
+    user.admin?
+  end
 end

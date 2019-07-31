@@ -473,6 +473,27 @@ fr:
           general_coupon_label: "Libellé du compte pour tous les codes promo"
           customization_of_SETTING_successfully_saved: "La personnalisation de {{SETTING}} a bien été enregistrée."  # angular interpolation
           export_accounting_data: "Exporter les données comptables"
+          export_to: "Exporter vers le logiciel comptable"
+          acd: "ACD"
+          export_form_date: "Exporter depuis le"
+          export_to_date: "Exporter jusqu'au"
+          format: "Format de fichier"
+          encoding: "Encodage"
+          separator: "Séparateur"
+          dateFormat: "Format de date"
+          columns: "Colonnes"
+          exportColumns:
+            journal_code: "Code journal"
+            date: "Date écriture"
+            account_code: "Code compte"
+            account_label: "Intitulé compte"
+            piece: "Pièce"
+            line_label: "Libellé écriture"
+            debit_origin: "Débit origine"
+            credit_origin: "Crédit origine"
+            debit_euro: "Débit euro"
+            credit_euro: "Crédit euro"
+            lettering: "Lettrage"
 
       members:
         # gestion des utilisateurs, des groupes, des étiquettes, etc.

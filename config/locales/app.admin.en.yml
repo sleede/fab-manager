@@ -473,6 +473,27 @@ en:
           general_coupon_label: "Account label for all coupons"
           customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation
           export_accounting_data: "Export accounting data"
+          export_to: "Export to the accounting software"
+          acd: "ACD"
+          export_form_date: "Export from"
+          export_to_date: "Export until"
+          format: "File format"
+          encoding: "Encoding"
+          separator: "Separator"
+          dateFormat: "Date format"
+          columns: "Columns"
+          exportColumns:
+            journal_code: "Journal code"
+            date: "Entry date"
+            account_code: "Account code"
+            account_label: "Account label"
+            piece: "Document"
+            line_label: "Entry label"
+            debit_origin: "Origin debit"
+            credit_origin: "Origin credit"
+            debit_euro: "Euro debit"
+            credit_euro: "Euro credit"
+            lettering: "Lettering"
 
       members:
         # management of users, labels, groups, and so on

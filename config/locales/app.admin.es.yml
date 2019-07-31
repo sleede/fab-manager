@@ -473,6 +473,27 @@ es:
           general_coupon_label: "Account label for all coupons"                        # translation_missing
           customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation                                   # translation_missing
           export_accounting_data: "Export accounting data"                             # translation_missing
+          export_to: "Export to the accounting software"                               # translation_missing
+          acd: "ACD"                                                                   # translation_missing
+          export_form_date: "Export from"                                              # translation_missing
+          export_to_date: "Export until"                                               # translation_missing
+          format: "File format"                                                        # translation_missing
+          encoding: "Encoding"                                                         # translation_missing
+          separator: "Separator"                                                       # translation_missing
+          dateFormat: "Date format"                                                    # translation_missing
+          columns: "Columns"                                                           # translation_missing
+          exportColumns:                                                               # translation_missing
+            journal_code: "Journal code"                                               # translation_missing
+            date: "Entry date"                                                         # translation_missing
+            account_code: "Account code"                                               # translation_missing
+            account_label: "Account label"                                             # translation_missing
+            piece: "Document"                                                          # translation_missing
+            line_label: "Entry label"                                                  # translation_missing
+            debit_origin: "Origin debit"                                               # translation_missing
+            credit_origin: "Origin credit"                                             # translation_missing
+            debit_euro: "Euro debit"                                                   # translation_missing
+            credit_euro: "Euro credit"                                                 # translation_missing
+            lettering: "Lettering"                                                     # translation_missing
 
       members:
         # management of users, labels, groups, and so on

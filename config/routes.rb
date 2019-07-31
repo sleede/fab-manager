@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create] do
       get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
+      get 'first', action: 'first', on: :collection
     end
 
     # for admin

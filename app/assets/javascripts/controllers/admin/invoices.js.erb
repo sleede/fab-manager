@@ -905,7 +905,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
   }
 ]);
 
-Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingExport', function ($scope, $uibModalInstance, Invoice, AccountingExport) {
 
   const SETTINGS = {
     acd: {
@@ -916,6 +916,8 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
       columns: ['journal_code', 'date', 'account_code', 'account_label', 'piece', 'line_label', 'debit_origin', 'credit_origin', 'debit_euro', 'credit_euro', 'lettering']
     }
   };
+
+  /* PUBLIC SCOPE */
 
   // binding to radio button "export to"
   $scope.exportTarget = {
@@ -937,11 +939,16 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
     }
   };
 
+  // Date of the first invoice
+  $scope.firstInvoice = null;
+
   /**
    * Validate the close period creation
    */
   $scope.ok = function () {
-    console.log('ok');
+    AccountingExport.export($scope.exportTarget, function(res) {
+      $uibModalInstance.close(res);
+    });
   };
 
   /**
@@ -965,4 +972,19 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
    * Just dismiss the modal window
    */
   $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+  /* PRIVATE SCOPE */
+
+  /**
+   * Kind of constructor: these actions will be realized first when the controller is loaded
+   */
+  const initialize = function () {
+    // if the invoice was payed with stripe, allow to refund through stripe
+    Invoice.first(function (data) {
+      $scope.firstInvoice = data.date;
+    });
+  };
+
+  // !!! MUST BE CALLED AT THE END of the controller
+  return initialize();
 }]);

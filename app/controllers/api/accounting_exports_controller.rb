@@ -6,7 +6,7 @@ class API::AccountingExportsController < API::ApiController
   before_action :authenticate_user!
 
   def export
-    authorize :export
+    authorize :accounting_export
 
     export = Export.where(category: 'accounting', export_type: 'accounting-software')
                    .where('created_at > ?', Invoice.maximum('updated_at'))
