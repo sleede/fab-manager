@@ -126,6 +126,9 @@ pt:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Assinatura de %{NAME} estendida (dias livres) a partir de% STARTDATE até %{ENDDATE}"
     and: 'e'
 
+  accounting_export:
+    VAT: 'IVA'
+
   trainings:
     # training availabilities
     i_ve_reserved: "Eu reservei"
@@ -307,6 +310,7 @@ pt:
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
         availabilities_index: "de reservas disponíveis"
+        accounting_accounting-software: "de dados contábeis"
         is_over: "está finalizado."
         download_here: "Baixe aqui"
       notify_member_about_coupon:

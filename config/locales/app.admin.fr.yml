@@ -474,6 +474,7 @@ fr:
           customization_of_SETTING_successfully_saved: "La personnalisation de {{SETTING}} a bien été enregistrée."  # angular interpolation
           export_accounting_data: "Exporter les données comptables"
           export_to: "Exporter vers le logiciel comptable"
+          export_is_running: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
           acd: "ACD"
           export_form_date: "Exporter depuis le"
           export_to_date: "Exporter jusqu'au"

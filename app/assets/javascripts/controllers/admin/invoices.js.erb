@@ -905,11 +905,12 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
   }
 ]);
 
-Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingExport', function ($scope, $uibModalInstance, Invoice, AccountingExport) {
+Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'AccountingExport', 'growl', '_t',
+  function ($scope, $uibModalInstance, Invoice, AccountingExport, growl, _t) {
 
   const SETTINGS = {
     acd: {
-      format: 'CSV',
+      format: 'csv',
       encoding: 'ISO-8859-1',
       separator: ';',
       dateFormat: '%d/%m/%Y',
@@ -947,6 +948,7 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
    */
   $scope.ok = function () {
     AccountingExport.export($scope.exportTarget, function(res) {
+      growl.info(_t('invoices.export_is_running'))
       $uibModalInstance.close(res);
     });
   };

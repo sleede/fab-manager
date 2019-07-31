@@ -474,6 +474,7 @@ es:
           customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation                                   # translation_missing
           export_accounting_data: "Export accounting data"                             # translation_missing
           export_to: "Export to the accounting software"                               # translation_missing
+          export_is_running: "Exportando, será notificado cuando esté listo."
           acd: "ACD"                                                                   # translation_missing
           export_form_date: "Export from"                                              # translation_missing
           export_to_date: "Export until"                                               # translation_missing

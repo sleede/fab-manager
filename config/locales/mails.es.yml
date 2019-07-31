@@ -266,8 +266,12 @@ es:
         users_subscriptions: "de la lista de suscripciones"
         users_reservations: "de la lista de reservas"
         availabilities_index: "de las reservas disponibles"
+        accounting_accounting-software: "de los datos contables"
         click_to_download: " archivo Excel generado correctamente. Para descargarlo, haga clic "
         here: "aquí"
+        file_type:
+          xlsx: "Excel"
+          csv: "CSV"
 
     notify_member_about_coupon:
       subject: "Cupón"
