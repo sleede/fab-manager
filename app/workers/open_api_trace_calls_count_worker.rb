@@ -1,4 +1,4 @@
-class OpenAPITraceCallsCountWorker < ActiveJob::Base
+class OpenAPITraceCallsCountWorker < Sidekiq::Workers
   include Sidekiq::Worker
   sidekiq_options queue: 'default', retry: true
 
