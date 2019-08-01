@@ -2,7 +2,7 @@
 
 # Provides the routine to export the accounting data to an external accounting software
 class AccountingExportService
-  attr_reader :encoding, :format, :separator, :journal_code, :date_format, :columns, :vat_rate
+  attr_reader :encoding, :format, :separator, :journal_code, :date_format, :columns, :vat_service
 
   def initialize(columns, encoding = 'UTF-8', format = 'CSV', separator = ';', date_format = '%d/%m/%Y')
     @encoding = encoding
@@ -11,7 +11,7 @@ class AccountingExportService
     @journal_code = Setting.find_by(name: 'accounting_journal_code')&.value || ''
     @date_format = date_format
     @columns = columns
-    @vat_rate = Setting.find_by(name: 'invoice_VAT-rate')&.value&.to_f || 0
+    @vat_service = VatHistoryService.new
   end
 
   def export(start_date, end_date, file)
@@ -91,7 +91,7 @@ class AccountingExportService
 
   # Generate the "reservation" row, which contains the credit to the reservation account, all taxes excluded
   def reservation_row(invoice, item)
-    wo_taxes = (item.amount / (vat_rate / 100 + 1)) / 100.0
+    wo_taxes = (item.amount / (vat_service.invoice_vat(invoice) / 100 + 1)) / 100.0
     row = ''
     columns.each do |column|
       case column
@@ -128,7 +128,7 @@ class AccountingExportService
   # Generate the "subscription" row, which contains the credit to the subscription account, all taxes excluded
   def subscription_row(invoice)
     subscription_item = invoice.invoice_items.select(&:subscription).first
-    wo_taxes = (subscription_item.amount / (vat_rate / 100 + 1)) / 100.0
+    wo_taxes = (subscription_item.amount / (vat_service.invoice_vat(invoice) / 100 + 1)) / 100.0
     row = ''
     columns.each do |column|
       case column
@@ -164,7 +164,7 @@ class AccountingExportService
 
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
   def vat_row(invoice)
-    vat = (invoice.total - (invoice.total / (vat_rate / 100 + 1))) / 100.0
+    vat = (invoice.total - (invoice.total / (vat_service.invoice_vat(invoice) / 100 + 1))) / 100.0
     row = ''
     columns.each do |column|
       case column

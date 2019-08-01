@@ -32,6 +32,8 @@ class PDF::Invoice < Prawn::Document
       puts "Unable to decode invoice logo from base64: #{e}"
     end
     move_down 20
+    # the following line is a special comment to workaround RubyMine inspection problem
+    # noinspection RubyScope
     font('Open-Sans', size: 10) do
       # general information
       if invoice.is_a?(Avoir)
@@ -227,7 +229,8 @@ class PDF::Invoice < Prawn::Document
       if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
 
-        vat_rate = Setting.find_by(name: 'invoice_VAT-rate').value.to_f
+        vat_service = VatHistoryService.new
+        vat_rate = vat_service.invoice_vat(invoice)
         vat = total / (vat_rate / 100 + 1)
         data += [[I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(total - vat)]]
         data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(vat)]]
@@ -298,6 +301,8 @@ class PDF::Invoice < Prawn::Document
         if invoice.wallet_amount
           wallet_amount = invoice.wallet_amount / 100.0
           total -= wallet_amount
+        else
+          wallet_amount = nil
         end
 
         # payment method
@@ -315,12 +320,12 @@ class PDF::Invoice < Prawn::Document
           payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(total))
         end
         if invoice.wallet_amount
-          if total.positive?
-            payment_verbose += ' ' + I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' +
-                               I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
-          else
-            payment_verbose += ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
-          end
+          payment_verbose += if total.positive?
+                               ' ' + I18n.t('invoices.and') + ' ' + I18n.t('invoices.by_wallet') + ' ' +
+                                 I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+                             else
+                               ' ' + I18n.t('invoices.for_an_amount_of_AMOUNT', AMOUNT: number_to_currency(wallet_amount))
+                             end
         end
       end
       text payment_verbose

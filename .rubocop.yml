@@ -11,9 +11,11 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Max: 200
 Metrics/BlockLength:
+  Max: 30
   Exclude:
     - 'lib/tasks/**/*.rake'
     - 'config/routes.rb'
+    - 'app/pdfs/pdf/*.rb'
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/RegexpLiteral:
