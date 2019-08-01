@@ -267,8 +267,12 @@ fr:
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
         availabilities_index: "des disponibilités de réservations"
-        click_to_download: "La génération est terminée. Pour télécharger le fichier Excel, cliquez"
+        accounting_accounting-software: "des données comptables"
+        click_to_download: "La génération est terminée. Pour télécharger le fichier %{TYPE}, cliquez"
         here: "ici"
+        file_type:
+          xlsx: "Excel"
+          csv: "CSV"
 
     notify_member_about_coupon:
       subject: "Code promo"

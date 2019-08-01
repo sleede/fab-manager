@@ -113,8 +113,8 @@ en:
     by_cheque: "by cheque"
     by_transfer: "by transfer"
     by_cash: "by cash"
-    no_refund: "No refund"
     by_wallet: "by wallet"
+    no_refund: "No refund"
     settlement_by_debit_card: "Settlement by debit card"
     settlement_done_at_the_reception: "Settlement done at the reception"
     settlement_by_wallet: "Settlement by wallet"
@@ -125,6 +125,20 @@ en:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
     and: 'and'
+
+  accounting_export:
+    journal_code: "Journal code"
+    date: "Entry date"
+    account_code: "Account code"
+    account_label: "Account label"
+    piece: "Document"
+    line_label: "Entry label"
+    debit_origin: "Origin debit"
+    credit_origin: "Origin credit"
+    debit_euro: "Euro debit"
+    credit_euro: "Euro credit"
+    lettering: "Lettering"
+    VAT: 'VAT'
 
   trainings:
     # training availabilities
@@ -307,6 +321,7 @@ en:
         users_subscriptions: "of the subscriptions' list"
         users_reservations: "of the reservations' list"
         availabilities_index: "of the reservations availabilities"
+        accounting_accounting-software: "of the accounting data"
         is_over: "is over."
         download_here: "Download here"
       notify_member_about_coupon:

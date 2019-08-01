@@ -267,8 +267,12 @@ pt:
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
         availabilities_index: "as reservas disponíveis"
+        accounting_accounting-software: "de dados contábeis"
         click_to_download: "Arquivo do Excel gerado com êxito. Para fazer o download, clique"
         here: "aqui"
+        file_type:
+          xlsx: "Excel"
+          csv: "CSV"
 
     notify_member_about_coupon:
       subject: "Cupom"

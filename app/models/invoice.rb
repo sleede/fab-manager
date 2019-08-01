@@ -188,7 +188,7 @@ class Invoice < ActiveRecord::Base
 
   def subscription_invoice?
     invoice_items.each do |ii|
-      return true if ii.subscription && !ii.subscription.expired?
+      return true if ii.subscription
     end
     false
   end

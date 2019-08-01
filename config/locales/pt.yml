@@ -126,6 +126,20 @@ pt:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Assinatura de %{NAME} estendida (dias livres) a partir de% STARTDATE até %{ENDDATE}"
     and: 'e'
 
+  accounting_export:
+    journal_code: "Journal code"                                               # translation_missing
+    date: "Entry date"                                                         # translation_missing
+    account_code: "Account code"                                               # translation_missing
+    account_label: "Account label"                                             # translation_missing
+    piece: "Document"                                                          # translation_missing
+    line_label: "Entry label"                                                  # translation_missing
+    debit_origin: "Origin debit"                                               # translation_missing
+    credit_origin: "Origin credit"                                             # translation_missing
+    debit_euro: "Euro debit"                                                   # translation_missing
+    credit_euro: "Euro credit"                                                 # translation_missing
+    lettering: "Lettering"                                                     # translation_missing
+    VAT: 'IVA'
+
   trainings:
     # training availabilities
     i_ve_reserved: "Eu reservei"
@@ -307,6 +321,7 @@ pt:
         users_subscriptions: "da lista de assinaturas"
         users_reservations: "da lista de reservas"
         availabilities_index: "de reservas disponíveis"
+        accounting_accounting-software: "de dados contábeis"
         is_over: "está finalizado."
         download_here: "Baixe aqui"
       notify_member_about_coupon:

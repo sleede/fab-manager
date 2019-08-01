@@ -76,6 +76,86 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       }
     };
 
+    // Accounting codes
+    $scope.settings = {
+      journalCode: {
+        name: 'accounting_journal_code',
+        value: settings['accounting_journal_code']
+      },
+      clientCode: {
+        name: 'accounting_client_code',
+        value: settings['accounting_client_code']
+      },
+      clientLabel: {
+        name: 'accounting_client_label',
+        value: settings['accounting_client_label']
+      },
+      walletCode: {
+        name: 'accounting_wallet_code',
+        value: settings['accounting_wallet_code']
+      },
+      walletLabel: {
+        name: 'accounting_wallet_label',
+        value: settings['accounting_wallet_label']
+      },
+      vatCode: {
+        name: 'accounting_VAT_code',
+        value: settings['accounting_VAT_code']
+      },
+      vatLabel: {
+        name: 'accounting_VAT_label',
+        value: settings['accounting_VAT_label']
+      },
+      subscriptionCode: {
+        name: 'accounting_subscription_code',
+        value: settings['accounting_subscription_code']
+      },
+      subscriptionLabel: {
+        name: 'accounting_subscription_label',
+        value: settings['accounting_subscription_label']
+      },
+      machineCode: {
+        name: 'accounting_Machine_code',
+        value: settings['accounting_Machine_code']
+      },
+      machineLabel: {
+        name: 'accounting_Machine_label',
+        value: settings['accounting_Machine_label']
+      },
+      trainingCode: {
+        name: 'accounting_Training_code',
+        value: settings['accounting_Training_code']
+      },
+      trainingLabel: {
+        name: 'accounting_Training_label',
+        value: settings['accounting_Training_label']
+      },
+      eventCode: {
+        name: 'accounting_Event_code',
+        value: settings['accounting_Event_code']
+      },
+      eventLabel: {
+        name: 'accounting_Event_label',
+        value: settings['accounting_Event_label']
+      },
+      spaceCode: {
+        name: 'accounting_Space_code',
+        value: settings['accounting_Space_code']
+      },
+      spaceLabel: {
+        name: 'accounting_Space_label',
+        value: settings['accounting_Space_label']
+      },
+      couponCode: {
+        name: 'accounting_coupon_code',
+        value: settings['accounting_coupon_code']
+      },
+      couponLabel: {
+        name: 'accounting_coupon_label',
+        value: settings['accounting_coupon_label']
+      }
+    };
+
     // Placeholding date for the invoice creation
     $scope.today = moment();
 
@@ -432,6 +512,14 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       });
     }
 
+    $scope.toggleExportModal = function() {
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/invoices/accountingExportModal.html" %>',
+        controller: 'AccountingExportModalController',
+        size: 'xl'
+      });
+    }
+
     /**
      * Test if the given date is within a closed accounting period
      * @param date {Date} date to test
@@ -444,6 +532,19 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         }
       }
       return false;
+    }
+
+    /**
+     * Callback to save the setting value to the database
+     * @param setting {{value:*, name:string}} note that the value will be stringified
+     */
+    $scope.save = function(setting) {
+      Setting.update(
+        { name: setting.name },
+        { value: setting.value },
+        function () { growl.success(_t('invoices.customization_of_SETTING_successfully_saved', { SETTING: _t(`invoices.${setting.name}`) })); },
+        function (error) { console.log(error); }
+      );
     }
 
     /* PRIVATE SCOPE */
@@ -791,7 +892,7 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     };
 
     /**
-     * Cancel the refund, dismiss the modal window
+     * Just dismiss the modal window
      */
     $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
 
@@ -803,3 +904,130 @@ Application.Controllers.controller('ClosePeriodModalController', ['$scope', '$ui
     }
   }
 ]);
+
+Application.Controllers.controller('AccountingExportModalController', ['$scope', '$uibModalInstance', 'Invoice', 'Export', 'CSRF', 'growl', '_t',
+  function ($scope, $uibModalInstance, Invoice, Export, CSRF, growl, _t) {
+  // Retrieve Anti-CSRF tokens from cookies
+  CSRF.setMetaTags();
+
+  const SETTINGS = {
+    acd: {
+      format: 'csv',
+      encoding: 'ISO-8859-1',
+      separator: ';',
+      dateFormat: '%d/%m/%Y',
+      columns: ['journal_code', 'date', 'account_code', 'account_label', 'piece', 'line_label', 'debit_origin', 'credit_origin', 'debit_euro', 'credit_euro', 'lettering']
+    }
+  };
+
+  /* PUBLIC SCOPE */
+
+  // API URL where the form will be posted
+  $scope.actionUrl = '/api/accounting/export';
+
+  // Form action on the above URL
+  $scope.method = 'post';
+
+  // Anti-CSRF token to inject into the download form
+  $scope.csrfToken = angular.element('meta[name="csrf-token"]')[0].content;
+
+  // API request body to generate the export
+  $scope.query = null;
+
+  // binding to radio button "export to"
+  $scope.exportTarget = {
+    software: null,
+    startDate: null,
+    endDate: null,
+    settings: null
+  };
+
+  // AngularUI-Bootstrap datepicker parameters to define export dates range
+  $scope.datePicker = {
+    format: Fablab.uibDateFormat,
+    opened: { // default: datePickers are not shown
+      start: false,
+      end: false
+    },
+    options: {
+      startingDay: Fablab.weekStartingDay
+    }
+  };
+
+  // Date of the first invoice
+  $scope.firstInvoice = null;
+
+  /**
+   * Validate the close period creation
+   */
+  $scope.ok = function () {
+    const statusQry = mkQuery();
+    $scope.query = statusQry;
+
+    Export.status(statusQry).then(function (res) {
+      if (!res.data.exists) {
+        growl.success(_t('invoices.export_is_running'));
+      }
+      $uibModalInstance.close(res);
+    });
+  };
+
+  /**
+   * Callback to open/close one of the datepickers
+   * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+   * @param picker {string} start | end
+   */
+  $scope.toggleDatePicker = function(event, picker) {
+    event.preventDefault();
+    $scope.datePicker.opened[picker] = !$scope.datePicker.opened[picker];
+  };
+
+  /**
+   * Will fill the export settings, according to the selected software
+   */
+  $scope.fillSettings = function() {
+    $scope.exportTarget.settings = SETTINGS[$scope.exportTarget.software];
+  };
+
+  /**
+   * Just dismiss the modal window
+   */
+  $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
+
+  /* PRIVATE SCOPE */
+
+  /**
+   * Kind of constructor: these actions will be realized first when the controller is loaded
+   */
+  const initialize = function () {
+    // if the invoice was payed with stripe, allow to refund through stripe
+    Invoice.first(function (data) {
+      $scope.firstInvoice = data.date;
+      $scope.exportTarget.startDate = data.date;
+      $scope.exportTarget.endDate = moment().toISOString();
+    });
+  };
+
+  /**
+   * Prepare the query for the export API
+   * @returns {{extension: *, query: *, category: string, type: string, key: *}}
+   */
+  const mkQuery = function() {
+    return {
+      category: 'accounting',
+      type: 'accounting-software',
+      extension: $scope.exportTarget.settings.format,
+      key: $scope.exportTarget.settings.separator,
+      query: JSON.stringify({
+        columns: $scope.exportTarget.settings.columns,
+        encoding: $scope.exportTarget.settings.encoding,
+        date_format: $scope.exportTarget.settings.dateFormat,
+        start_date: $scope.exportTarget.startDate,
+        end_date: $scope.exportTarget.endDate
+      })
+    };
+  }
+
+  // !!! MUST BE CALLED AT THE END of the controller
+  return initialize();
+}]);

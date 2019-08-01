@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Ability to configure and export the accounting data to the ACD accounting software
+- [TODO DEPLOY] `rake db:migrate`
+
 ## v4.0.3 2019 August 01
 
 - Fix a bug: no user can be created after the last member was deleted
