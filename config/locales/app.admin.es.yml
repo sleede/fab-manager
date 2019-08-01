@@ -451,21 +451,21 @@ es:
           general_subscription_code: "Accounting code for all subscriptions"           # translation_missing
           accounting_subscription_label: "Subscriptions label"                         # translation_missing
           general_subscription_label: "Account label for all subscriptions"            # translation_missing
-          accounting_machine_code: "Machines code"                                     # translation_missing
+          accounting_Machine_code: "Machines code"                                     # translation_missing
           general_machine_code: "Accounting code for all machines"                     # translation_missing
-          accounting_machine_label: "Machine label"                                    # translation_missing
+          accounting_Machine_label: "Machine label"                                    # translation_missing
           general_machine_label: "Account label for all machines"                      # translation_missing
-          accounting_training_code: "Trainings code"                                   # translation_missing
+          accounting_Training_code: "Trainings code"                                   # translation_missing
           general_training_code: "Accounting code for all trainings"                   # translation_missing
-          accounting_training_label: "Trainings label"                                 # translation_missing
+          accounting_Training_label: "Trainings label"                                 # translation_missing
           general_training_label: "Account label for all trainings"                    # translation_missing
-          accounting_event_code: "Events code"                                         # translation_missing
+          accounting_Event_code: "Events code"                                         # translation_missing
           general_event_code: "Accounting code for all events"                         # translation_missing
-          accounting_event_label: "Events label"                                       # translation_missing
+          accounting_Event_label: "Events label"                                       # translation_missing
           general_event_label: "Account label for all events"                          # translation_missing
-          accounting_space_code: "Space code"                                          # translation_missing
+          accounting_Space_code: "Space code"                                          # translation_missing
           general_space_code: "Accounting code for all spaces"                         # translation_missing
-          accounting_space_label: "Spaces label"                                       # translation_missing
+          accounting_Space_label: "Spaces label"                                       # translation_missing
           general_space_label: "Account label for all spaces"                          # translation_missing
           accounting_coupon_code: "Coupons code"                                       # translation_missing
           general_coupon_code: "Accounting code for all coupons"                       # translation_missing

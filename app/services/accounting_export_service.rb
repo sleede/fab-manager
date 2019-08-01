@@ -8,7 +8,7 @@ class AccountingExportService
     @encoding = encoding
     @format = format
     @separator = separator
-    @journal_code = Setting.find_by(name: 'accounting-export_journal-code')&.value || ''
+    @journal_code = Setting.find_by(name: 'accounting_journal_code')&.value || ''
     @date_format = date_format
     @columns = columns
     @vat_rate = Setting.find_by(name: 'invoice_VAT-rate')&.value&.to_f || 0
@@ -33,12 +33,12 @@ class AccountingExportService
     columns.each do |column|
       row << I18n.t("accounting_export.#{column}") << separator
     end
-    row
+    "#{row}\n"
   end
 
   def generate_rows(invoice)
     "#{client_row(invoice)}\n" \
-      "#{items_rows(invoice)}\n" \
+      "#{items_rows(invoice)}" \
       "#{vat_row(invoice)}\n"
   end
 
