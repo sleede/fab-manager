@@ -127,6 +127,17 @@ pt:
     and: 'e'
 
   accounting_export:
+    journal_code: "Journal code"                                               # translation_missing
+    date: "Entry date"                                                         # translation_missing
+    account_code: "Account code"                                               # translation_missing
+    account_label: "Account label"                                             # translation_missing
+    piece: "Document"                                                          # translation_missing
+    line_label: "Entry label"                                                  # translation_missing
+    debit_origin: "Origin debit"                                               # translation_missing
+    credit_origin: "Origin credit"                                             # translation_missing
+    debit_euro: "Euro debit"                                                   # translation_missing
+    credit_euro: "Euro credit"                                                 # translation_missing
+    lettering: "Lettering"                                                     # translation_missing
     VAT: 'IVA'
 
   trainings:

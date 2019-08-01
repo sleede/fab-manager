@@ -10,6 +10,7 @@
 - Fix some security issues: updated sidekiq to 5.2.7 to fix XSS and CRSF issues
 - Removed dependency to jQuery UI
 - Updated angular-xeditable, to remove dependency to jquery 1.11.1
+- [TODO DEPLOY] -> (only dev) `bundle install`
 - [TODO DEPLOY] `rake db:migrate`
 
 ## v4.0.2 2019 July 10

@@ -127,6 +127,17 @@ fr:
     and: 'et'
 
   accounting_export:
+    journal_code: "Code journal"
+    date: "Date écriture"
+    account_code: "Code compte"
+    account_label: "Intitulé compte"
+    piece: "Pièce"
+    line_label: "Libellé écriture"
+    debit_origin: "Débit origine"
+    credit_origin: "Crédit origine"
+    debit_euro: "Débit euro"
+    credit_euro: "Crédit euro"
+    lettering: "Lettrage"
     VAT: 'TVA'
 
   trainings:

@@ -127,6 +127,17 @@ en:
     and: 'and'
 
   accounting_export:
+    journal_code: "Journal code"
+    date: "Entry date"
+    account_code: "Account code"
+    account_label: "Account label"
+    piece: "Document"
+    line_label: "Entry label"
+    debit_origin: "Origin debit"
+    credit_origin: "Origin credit"
+    debit_euro: "Euro debit"
+    credit_euro: "Euro credit"
+    lettering: "Lettering"
     VAT: 'VAT'
 
   trainings:
