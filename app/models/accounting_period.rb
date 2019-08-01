@@ -28,12 +28,9 @@ class AccountingPeriod < ActiveRecord::Base
   end
 
   def invoices_with_vat(invoices)
+    vat_service = VatHistoryService.new
     invoices.map do |i|
-      if i.type == 'Avoir'
-        { invoice: i, vat_rate: vat_rate(i.avoir_date) }
-      else
-        { invoice: i, vat_rate: vat_rate(i.created_at) }
-      end
+      { invoice: i, vat_rate: vat_service.invoice_vat(i) }
     end
   end
 
@@ -57,33 +54,11 @@ class AccountingPeriod < ActiveRecord::Base
     footprint == compute_footprint
   end
 
-  def vat_rate(date)
-    @vat_rates = vat_history if @vat_rates.nil?
-
-    first_rate = @vat_rates.first
-    return first_rate[:rate] if date < first_rate[:date]
-
-    @vat_rates.each_index do |i|
-      return @vat_rates[i][:rate] if date >= @vat_rates[i][:date] && (@vat_rates[i + 1].nil? || date < @vat_rates[i + 1][:date])
-    end
-  end
-
   def previous_period
     AccountingPeriod.where('closed_at < ?', closed_at).order(closed_at: :desc).limit(1).last
   end
 
   private
-
-  def vat_history
-    key_dates = []
-    Setting.find_by(name: 'invoice_VAT-rate').history_values.each do |rate|
-      key_dates.push(date: rate.created_at, rate: (rate.value.to_i / 100.0))
-    end
-    Setting.find_by(name: 'invoice_VAT-active').history_values.each do |v|
-      key_dates.push(date: v.created_at, rate: 0) if v.value == 'false'
-    end
-    key_dates.sort_by { |k| k[:date] }
-  end
 
   def archive_closed_data
     ArchiveWorker.perform_async(id)
