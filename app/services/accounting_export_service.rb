@@ -70,7 +70,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << invoice.invoicing_profile.full_name
+        row << label(invoice.invoicing_profile.full_name)
       when 'debit_origin'
         row << debit_client(invoice, total)
       when 'credit_origin'
@@ -106,7 +106,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << item.description
+        row << label(item.description)
       when 'debit_origin'
         row << debit(invoice, wo_taxes)
       when 'credit_origin'
@@ -143,7 +143,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << subscription_item.description
+        row << label(subscription_item.description)
       when 'debit_origin'
         row << debit(invoice, wo_taxes)
       when 'credit_origin'
@@ -243,5 +243,11 @@ class AccountingExportService
   # Fill the value of the "credit" column, for the client row: if the invoice is a refund, returns the given amount, returns 0 otherwise
   def credit_client(invoice, amount)
     debit(invoice, amount)
+  end
+
+  # Format the given text to match the accounting software rules for the labels
+  def label(text)
+    res = text.tr separator, ''
+    res.truncate(50)
   end
 end
