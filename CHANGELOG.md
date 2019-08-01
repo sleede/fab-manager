@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v4.0.3 2019 August 01
+
 - Fix a bug: no user can be created after the last member was deleted
 - Fix a bug: unable to generate a refund (Avoir)
 - Fix a bug: a newly generated refund is displayed as broken (unchained record) even if it is correctly chained
