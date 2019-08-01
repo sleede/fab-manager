@@ -92,7 +92,8 @@ class ActiveSupport::TestCase
     end
 
     if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
-      vat_rate = Setting.find_by(name: 'invoice_VAT-rate').value.to_f
+      vat_service = VatHistoryService.new
+      vat_rate = vat_service.invoice_vat(invoice)
       computed_ht = sprintf('%.2f', (invoice.total / (vat_rate / 100 + 1)) / 100.0).to_f
 
       assert_equal computed_ht, ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correctly'
