@@ -5,9 +5,9 @@ namespace :fablab do
   namespace :maintenance do
     desc 'Regenerate the invoices (invoices & avoirs) PDF'
     task :regenerate_invoices, %i[year month] => :environment do |_task, args|
-      year = args.year || Time.now.year
-      month = args.month || Time.now.month
-      start_date = Time.new(year.to_i, month.to_i, 1)
+      year = args.year || Time.current.year
+      month = args.month || Time.current.month
+      start_date = Time.zone.local(year.to_i, month.to_i, 1)
       end_date = start_date.next_month
       puts "-> Start regenerate the invoices PDF between #{I18n.l start_date, format: :long} and " \
          "#{I18n.l end_date - 1.minute, format: :long}"
