@@ -22,7 +22,7 @@ wb.add_worksheet(name: t('export_subscriptions.subscriptions')) do |sheet|
         t("duration.#{sub.plan.interval}", count: sub.plan.interval_count),
         sub.created_at.to_date,
         sub.expired_at.to_date,
-        number_to_currency(sub.plan.amount / 100),
+        number_to_currency(sub.plan.amount / 100.00),
         (sub.stp_subscription_id.nil?)? t('export_subscriptions.local_payment') : t('export_subscriptions.online_payment')
     ]
     styles = [nil, nil, nil, nil, nil, date, date, nil, nil]

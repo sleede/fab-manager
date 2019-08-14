@@ -191,14 +191,14 @@ class PDF::Invoice < Prawn::Document
         cp = invoice.coupon
         discount = 0
         if cp.type == 'percent_off'
-          discount = total_calc * cp.percent_off / 100.0
+          discount = total_calc * cp.percent_off / 100.00
         elsif cp.type == 'amount_off'
           # refunds of invoices with cash coupons: we need to ventilate coupons on paid items
           if invoice.is_a?(Avoir)
             paid_items = invoice.invoice.invoice_items.select{ |ii| ii.amount.positive? }.length
             refund_items = invoice.invoice_items.select{ |ii| ii.amount.positive? }.length
 
-            discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.0
+            discount = ((invoice.coupon.amount_off / paid_items) * refund_items) / 100.00
           else
             discount = cp.amount_off / 100.00
           end
@@ -222,7 +222,7 @@ class PDF::Invoice < Prawn::Document
       end
 
       # total verification
-      total = invoice.total / 100.0
+      total = invoice.total / 100.00
       puts "ERROR: totals are NOT equals => expected: #{total}, computed: #{total_calc}" if total_calc != total
 
       # TVA
@@ -231,7 +231,7 @@ class PDF::Invoice < Prawn::Document
 
         vat_service = VatHistoryService.new
         vat_rate = vat_service.invoice_vat(invoice)
-        vat = total / (vat_rate / 100 + 1)
+        vat = total / (vat_rate / 100.00 + 1)
         data += [[I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(total - vat)]]
         data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(vat)]]
         data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
@@ -299,7 +299,7 @@ class PDF::Invoice < Prawn::Document
       else
         # subtract the wallet amount for this invoice from the total
         if invoice.wallet_amount
-          wallet_amount = invoice.wallet_amount / 100.0
+          wallet_amount = invoice.wallet_amount / 100.00
           total -= wallet_amount
         else
           wallet_amount = nil

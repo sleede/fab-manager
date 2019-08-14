@@ -43,7 +43,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     # Check that the user benefit from prices of his plan
     printer = Machine.find_by(slug: 'imprimante-3d')
     assert_equal 15,
-                 (printer.prices.find_by(group_id: @user.group_id, plan_id: @user.subscription.plan_id).amount / 100),
+                 (printer.prices.find_by(group_id: @user.group_id, plan_id: @user.subscription.plan_id).amount / 100.00),
                  'machine hourly price does not match'
 
     # Check notifications were sent for every admins
@@ -133,7 +133,7 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal 10,
                  (printer.prices.find_by(
                    group_id: @vlonchamp.group_id,
-                   plan_id: @vlonchamp.subscription.plan_id).amount / 100
+                   plan_id: @vlonchamp.subscription.plan_id).amount / 100.00
                  ),
                  'machine hourly price does not match'
 

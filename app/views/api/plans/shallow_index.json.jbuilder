@@ -3,7 +3,7 @@ json.array!(@plans) do |plan|
   json.ui_weight plan.ui_weight
   json.group_id plan.group_id
   json.base_name plan.base_name
-  json.amount plan.amount / 100.0
+  json.amount plan.amount / 100.00
   json.interval plan.interval
   json.interval_count plan.interval_count
   json.type plan.type
