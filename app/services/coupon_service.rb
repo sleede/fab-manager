@@ -22,7 +22,7 @@ class CouponService
     unless _coupon.nil?
       if _coupon.status(user_id, total) == 'active'
         if _coupon.type == 'percent_off'
-          price = price - (price * _coupon.percent_off / 100.0)
+          price -= price * _coupon.percent_off / 100.00
         elsif _coupon.type == 'amount_off'
           # do not apply cash coupon unless it has a lower amount that the total price
           if _coupon.amount_off <= price
@@ -35,7 +35,6 @@ class CouponService
     price
   end
 
-
   ##
   # Ventilate the discount of the provided coupon over the given amount proportionately to the invoice's total
   # @param total {Number} total amount of the invoice expressed in monetary units
@@ -44,11 +43,11 @@ class CouponService
   ##
   def ventilate(total, amount, coupon)
     price = amount
-    if !coupon.nil? and total != 0
+    if !coupon.nil? && total != 0
       if coupon.type == 'percent_off'
-        price = amount - ( amount * coupon.percent_off / 100.0 )
+        price = amount - (amount * coupon.percent_off / 100.00)
       elsif coupon.type == 'amount_off'
-        ratio = (coupon.amount_off / 100.0) / total
+        ratio = (coupon.amount_off / 100.00) / total
         discount = amount * ratio.abs
         price = amount - discount
       else
