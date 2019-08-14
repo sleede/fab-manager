@@ -28,7 +28,7 @@ class VatHistoryService
   def vat_history
     key_dates = []
     Setting.find_by(name: 'invoice_VAT-rate').history_values.each do |rate|
-      key_dates.push(date: rate.created_at, rate: (rate.value.to_i / 100.0))
+      key_dates.push(date: rate.created_at, rate: rate.value.to_i)
     end
     Setting.find_by(name: 'invoice_VAT-active').history_values.each do |v|
       key_dates.push(date: v.created_at, rate: 0) if v.value == 'false'

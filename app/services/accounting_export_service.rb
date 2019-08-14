@@ -55,7 +55,7 @@ class AccountingExportService
 
   # Generate the "client" row, which contains the debit to the client account, all taxes included
   def client_row(invoice)
-    total = invoice.total / 100.0
+    total = invoice.total / 100.00
     row = ''
     columns.each do |column|
       case column
@@ -91,7 +91,7 @@ class AccountingExportService
 
   # Generate the "reservation" row, which contains the credit to the reservation account, all taxes excluded
   def reservation_row(invoice, item)
-    wo_taxes = (item.amount / (vat_service.invoice_vat(invoice) / 100 + 1)) / 100.0
+    wo_taxes = (item.amount / (vat_service.invoice_vat(invoice) / 100.00 + 1)) / 100.00
     row = ''
     columns.each do |column|
       case column
@@ -128,7 +128,7 @@ class AccountingExportService
   # Generate the "subscription" row, which contains the credit to the subscription account, all taxes excluded
   def subscription_row(invoice)
     subscription_item = invoice.invoice_items.select(&:subscription).first
-    wo_taxes = (subscription_item.amount / (vat_service.invoice_vat(invoice) / 100 + 1)) / 100.0
+    wo_taxes = (subscription_item.amount / (vat_service.invoice_vat(invoice) / 100.00 + 1)) / 100.00
     row = ''
     columns.each do |column|
       case column
@@ -164,7 +164,7 @@ class AccountingExportService
 
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
   def vat_row(invoice)
-    vat = (invoice.total - (invoice.total / (vat_service.invoice_vat(invoice) / 100 + 1))) / 100.0
+    vat = (invoice.total - (invoice.total / (vat_service.invoice_vat(invoice) / 100.00 + 1))) / 100.00
     row = ''
     columns.each do |column|
       case column
