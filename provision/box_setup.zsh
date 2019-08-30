@@ -14,6 +14,10 @@ set_user_config() {
   echo 'export LC_ALL=en_US.UTF-8' >> ~/.profile
   echo 'export LANG=en_US.UTF-8' >> ~/.profile
   echo -e 'export LANGUAGE=en_US.UTF-8\n' >> ~/.profile
+
+  # Switch to project path after login
+  echo -e '\n# Navigate to /vagrant after login' >> ~/.profile
+  echo -e 'cd /vagrant\n' >> ~/.profile
 }
 
 ###

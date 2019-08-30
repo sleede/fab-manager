@@ -227,7 +227,6 @@ environment.
    dependencies:
 
    ```bash
-   cd /vagrant
    bundle install
    yarn install
    ```
