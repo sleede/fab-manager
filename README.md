@@ -197,6 +197,9 @@ of software and services directly on the host computer.
 they are inside the same virtual environment but said configuration is not optimized for a production
 environment.
 
+**Note 2:** The perfomance of the application under the virtual machine depends on the resources that
+the host can provide but will usually be much more slower than a production environment.
+
 1. Install [Vagrant][vagrant] and [Virtual Box][virtualbox] (with the extension package).
 
 2. Retrieve the project from Git
