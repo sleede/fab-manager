@@ -254,7 +254,8 @@ the host can provide but will usually be much more slower than a production envi
    ```bash
    rake db:create
    rake db:migrate
-   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
+   # Be sure not to use the default values below in production
+   ADMIN_EMAIL='admin@email' ADMIN_PASSWORD='adminpass' rake db:seed
    rake fablab:es:build_stats
    # for tests
    RAILS_ENV=test rake db:create
