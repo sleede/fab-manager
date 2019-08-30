@@ -2,7 +2,7 @@
 
 FabManager is the Fab Lab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.
 
-[![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager) 
+[![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager)
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
 [![Docker Build Status](https://img.shields.io/docker/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
 
@@ -69,13 +69,13 @@ This procedure is not easy to follow so if you don't need to write some code for
 1. Install RVM, with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
    If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
-   
+
 2. Install NVM, with the node.js version specified in the [.nvmrc file](.nvmrc).
    For instructions about installing NVM, please refer to [the NVM readme](https://github.com/creationix/nvm#installation).
-   
+
 3. Install Yarn, the front-end package manager.
    Depending on your system, the installation process may differ, please read the [official Yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable).
-   
+
 4. Install docker.
    Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
    Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
@@ -94,7 +94,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    You may have to change the network address if it is already in use.
    ```bash
    docker network create --subnet=172.18.0.0/16 fabmanager
-   ``` 
+   ```
 
 7. Retrieve the project from Git
 
@@ -154,7 +154,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 13. Build the databases.
    - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
-   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
+   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb)
 
    ```bash
    # for dev
@@ -229,6 +229,7 @@ environment.
    ```bash
    cd /vagrant
    bundle install
+   yarn install
    ```
 
 7. Set a directory for Sidekick pids:
@@ -310,7 +311,7 @@ In FabManager, it is used for the admin's statistics module and to perform searc
    mkdir -p .docker/elasticsearch/plugins
    mkdir -p .docker/elasticsearch/backups
    ```
-   
+
 2. Copy the default configuration files
    ```bash
    cp docker/elasticsearch.yml .docker/elasticsearch/config
@@ -396,8 +397,8 @@ In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
 These comments are not required to be translated, they are intended to help the translator to have some context information about the sentence to translate.
 
-You will also need to translate the invoice watermark, located in `app/pdfs/data/`. 
-You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), which is using [Rubik Mono One](https://fonts.google.com/specimen/Rubik+Mono+One) as font. 
+You will also need to translate the invoice watermark, located in `app/pdfs/data/`.
+You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), which is using [Rubik Mono One](https://fonts.google.com/specimen/Rubik+Mono+One) as font.
 Use it to generate a similar localised PNG image which keep the default image size, as PDF are not responsive.
 
 
