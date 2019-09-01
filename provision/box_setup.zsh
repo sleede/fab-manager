@@ -164,10 +164,15 @@ system_tuning()
 {
   echo "Tunning up the system"
 
+  # Create pids directory for Sidekick
+  sudo mkdir -p /vagrant/tmp/pids
+
+  # Enable overcomit memmory for Redis
   sudo echo -e "\n## Redis tune-up" >> /etc/sysctl.conf
   sudo echo '# Allow background save on low memory conditions' >> /etc/sysctl.conf
   sudo echo -e "vm.overcommit_memory = 1\n" >> /etc/sysctl.conf
 
+  # Enagle huge pages for Redis
   sudo touch /etc/rc.local
   sudo echo '## Redis tune-up' >> /etc/rc.local
   sudo echo '# Reduce latency and memory usage' >> /etc/rc.local
@@ -176,6 +181,7 @@ system_tuning()
   sudo echo -e "exit 0\n" >> /etc/rc.local
   sudo chmod +x /etc/rc.local
 
+  # Increase virtual memory areas for ElasticSearch
   sudo echo -e "\n## ElasticSearch tune-up" >> /etc/sysctl.conf
   sudo echo '# Increase max virtual memory areas' >> /etc/sysctl.conf
   sudo echo -e "vm.max_map_count = 262144\n" >> /etc/sysctl.conf
@@ -200,7 +206,7 @@ setup() {
   install_yarn
   install_rvm
   install_ruby
-  system_tunning
+  system_tuning
   clean_up
 }
 
