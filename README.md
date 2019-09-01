@@ -234,14 +234,7 @@ the host can provide but will usually be much more slower than a production envi
    yarn install
    ```
 
-7. Copy the default configuration files:
-
-   ```bash
-   cp config/database.yml.virtual config/database.yml
-   cp config/application.yml.default config/application.yml
-   ```
-
-8. Set up the databases. (Note that you should provide the desired admin credentials and that these
+7. Set up the databases. (Note that you should provide the desired admin credentials and that these
     specific set of commands must be used to set up the database as some raw SQL instructions are
     included in the migrations. Password minimal length is 8 characters):
 
@@ -256,7 +249,7 @@ the host can provide but will usually be much more slower than a production envi
    RAILS_ENV=test rake db:migrate
    ```
 
-9. Start the application and visit `localhost:3000` on your browser to check that it works:
+8. Start the application and visit `localhost:3000` on your browser to check that it works:
 
    ```bash
    foreman s -p 3000

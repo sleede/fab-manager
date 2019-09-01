@@ -29,15 +29,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # configuration below for file syncronization
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
+  # Copy default configuration files for the database conenction and the Rails application
+  config.vm.provision "file", source: "./config/database.yml.virtual", destination: "/vagrant/config/database.yml"
+  config.vm.provision "file", source: "./config/application.yml.default", destination: "/vagrant/config/application.yml"
+
   ## Provision software dependencies
   config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/zsh_setup.sh"
 
-  config.vm.provision "shell", privileged: true, run: "once",
+  config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/box_setup.zsh",
     env: {
       "LC_ALL"   => "en_US.UTF-8",
       "LANG"     => "en_US.UTF-8",
       "LANGUAGE" => "en_US.UTF-8",
     }
+
+  config.vm.provision "shell", privileged: true, run: "once",
+    path: "provision/box_tuning.zsh"
 end
