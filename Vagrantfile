@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Copy default configuration files for the database conenction and the Rails application
-  config.vm.provision "file", source: "./config/database.yml.virtual", destination: "/vagrant/config/database.yml"
+  config.vm.provision "file", source: "./config/database.yml.default",    destination: "/vagrant/config/database.yml"
   config.vm.provision "file", source: "./config/application.yml.default", destination: "/vagrant/config/application.yml"
 
   ## Provision software dependencies

@@ -27,7 +27,7 @@ install_postgres() {
   sudo apt-get update
   sudo apt-get install -y postgresql postgresql-contrib
 
-  # Set up ubuntu user
+  # Set up ubuntu user for Postgres
   sudo -u postgres bash -c "psql -c \"CREATE USER ubuntu WITH PASSWORD 'ubuntu';\""
   sudo -u postgres bash -c "psql -c \"ALTER USER ubuntu WITH SUPERUSER;\""
 
@@ -37,6 +37,10 @@ install_postgres() {
 
   # Start service
   sudo service postgresql start
+
+  # Replace default database user in the app database configuration
+  sed -i 's@username: postgres@username: ubuntu@g' /vagrant/config/database.yml
+  sed -i 's@password: postgres@password: ubuntu@g' /vagrant/config/database.yml
 }
 
 ###
@@ -69,6 +73,9 @@ install_elasticsearch() {
 
   sudo /bin/systemctl daemon-reload
   sudo /bin/systemctl enable elasticsearch.service
+
+  # Create pids directory for Sidekick
+  sudo mkdir -p /vagrant/tmp/pids
 }
 
 ###
@@ -159,35 +166,6 @@ install_ruby() {
 }
 
 ###
-# Tune-up the system settings
-system_tuning()
-{
-  echo "Tunning up the system"
-
-  # Create pids directory for Sidekick
-  sudo mkdir -p /vagrant/tmp/pids
-
-  # Enable overcomit memmory for Redis
-  sudo echo -e "\n## Redis tune-up" >> /etc/sysctl.conf
-  sudo echo '# Allow background save on low memory conditions' >> /etc/sysctl.conf
-  sudo echo -e "vm.overcommit_memory = 1\n" >> /etc/sysctl.conf
-
-  # Enagle huge pages for Redis
-  sudo touch /etc/rc.local
-  sudo echo '## Redis tune-up' >> /etc/rc.local
-  sudo echo '# Reduce latency and memory usage' >> /etc/rc.local
-  sudo echo 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' >> /etc/rc.local
-  sudo echo -e "\n\n"
-  sudo echo -e "exit 0\n" >> /etc/rc.local
-  sudo chmod +x /etc/rc.local
-
-  # Increase virtual memory areas for ElasticSearch
-  sudo echo -e "\n## ElasticSearch tune-up" >> /etc/sysctl.conf
-  sudo echo '# Increase max virtual memory areas' >> /etc/sysctl.conf
-  sudo echo -e "vm.max_map_count = 262144\n" >> /etc/sysctl.conf
-}
-
-###
 # Remove unused software
 clean_up() {
   echo "Removing unused software"
@@ -206,7 +184,6 @@ setup() {
   install_yarn
   install_rvm
   install_ruby
-  system_tuning
   clean_up
 }
 
