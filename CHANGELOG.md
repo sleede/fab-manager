@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Ability to configure and export the accounting data to the ACD accounting software
+- [TODO DEPLOY] `rake db:migrate`
+
 ## v4.0.4 2019 August 14
 - Fix a bug: #140 VAT rate is erronous in invoices.
   Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3)  to regenerate the invoices since August 1st (if 

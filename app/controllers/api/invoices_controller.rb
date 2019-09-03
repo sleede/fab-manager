@@ -51,6 +51,12 @@ class API::InvoicesController < API::ApiController
     end
   end
 
+  def first
+    authorize Invoice
+    invoice = Invoice.order(:created_at).first
+    @first = invoice&.created_at
+  end
+
   private
 
   def avoir_params

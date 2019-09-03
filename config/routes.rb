@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create] do
       get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
+      get 'first', action: 'first', on: :collection
     end
 
     # for admin
@@ -135,6 +136,8 @@ Rails.application.routes.draw do
       get 'last_closing_end', on: :collection
       get 'archive', action: 'download_archive', on: :member
     end
+    # export accounting data to csv or equivalent
+    post 'accounting/export' => 'accounting_exports#export'
 
     # i18n
     # regex allows using dots in URL for 'state'

@@ -126,6 +126,20 @@ es:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
 
+  accounting_export:
+    journal_code: "Journal code"                                               # translation_missing
+    date: "Entry date"                                                         # translation_missing
+    account_code: "Account code"                                               # translation_missing
+    account_label: "Account label"                                             # translation_missing
+    piece: "Document"                                                          # translation_missing
+    line_label: "Entry label"                                                  # translation_missing
+    debit_origin: "Origin debit"                                               # translation_missing
+    credit_origin: "Origin credit"                                             # translation_missing
+    debit_euro: "Euro debit"                                                   # translation_missing
+    credit_euro: "Euro credit"                                                 # translation_missing
+    lettering: "Lettering"                                                     # translation_missing
+    VAT: 'IVA'
+
   trainings:
     # training availabilities
     i_ve_reserved: "he reservado"
@@ -307,6 +321,7 @@ es:
         users_subscriptions: "de la lista de suscripciones"
         users_reservations: "de la lista de reservas"
         availabilities_index: "de las reservas disponibles"
+        accounting_accounting-software: "de los datos contables"
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
       notify_member_about_coupon:

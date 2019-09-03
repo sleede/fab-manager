@@ -21,7 +21,7 @@ class Export < ActiveRecord::Base
   end
 
   def filename
-    "#{export_type}-#{id}_#{created_at.strftime('%d%m%Y')}.xlsx"
+    "#{export_type}-#{id}_#{created_at.strftime('%d%m%Y')}.#{extension}"
   end
 
   private
@@ -34,6 +34,8 @@ class Export < ActiveRecord::Base
       UsersExportWorker.perform_async(id)
     when 'availabilities'
       AvailabilitiesExportWorker.perform_async(id)
+    when 'accounting'
+      AccountingExportWorker.perform_async(id)
     else
       raise NoMethodError, "Unknown export service for #{category}/#{export_type}"
     end

@@ -126,6 +126,20 @@ fr:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
 
+  accounting_export:
+    journal_code: "Code journal"
+    date: "Date écriture"
+    account_code: "Code compte"
+    account_label: "Intitulé compte"
+    piece: "Pièce"
+    line_label: "Libellé écriture"
+    debit_origin: "Débit origine"
+    credit_origin: "Crédit origine"
+    debit_euro: "Débit euro"
+    credit_euro: "Crédit euro"
+    lettering: "Lettrage"
+    VAT: 'TVA'
+
   trainings:
     # disponibilités formations
     i_ve_reserved: "J'ai réservé"
@@ -307,6 +321,7 @@ fr:
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
         availabilities_index: "des disponibilités de réservations"
+        accounting_accounting-software: "des données comptables"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
       notify_member_about_coupon:

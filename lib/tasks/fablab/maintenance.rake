@@ -3,7 +3,7 @@
 # Maintenance tasks
 namespace :fablab do
   namespace :maintenance do
-    desc 'Regenerate the invoices PDF'
+    desc 'Regenerate the invoices (invoices & avoirs) PDF'
     task :regenerate_invoices, %i[year month] => :environment do |_task, args|
       year = args.year || Time.current.year
       month = args.month || Time.current.month

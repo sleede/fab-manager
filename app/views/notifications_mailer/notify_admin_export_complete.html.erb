@@ -5,6 +5,6 @@
   <%= t(".body.#{@attached_object.category}_#{@attached_object.export_type}") %>.
 </p>
 <p>
-  <%= t('.body.click_to_download') %>
+  <%= t('.body.click_to_download', TYPE: t(".body.file_type.#{@attached_object.extension}")) %>
   <%=link_to( t('.body.here'), "#{root_url}api/exports/#{@attached_object.id}/download", target: "_blank" )%>
 </p>
