@@ -12,7 +12,6 @@ FabManager is the Fab Lab management solution. It provides a comprehensive, web-
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
-4.2. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4](#setup-postgresql)
 6. [ElasticSearch](#elasticsearch)<br/>
@@ -61,7 +60,10 @@ The procedure to follow is described in the [docker-compose readme](docker/READM
 ## Setup a development environment
 
 In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up with the following procedure.
+
 This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker-compose installation method](docker/README.md).
+
+Optionally, you can use a virtual development environment that relies on Vagrant and Virtual Box by following the [virtual machine instructions](doc/virtual-machine.md).
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -186,74 +188,6 @@ This procedure is not easy to follow so if you don't need to write some code for
 18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
-<a name="virtual-machine-instructions"></a>
-### Virtual Machine Instructions
-
-These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
-machine, with most of the software dependencies installed automatically and avoiding to install a lot
-of software and services directly on the host computer.
-
-**Note:** The provision scripts configure the sofware dependencies to play nice with each other while
-they are inside the same virtual environment but said configuration is not optimized for a production
-environment.
-
-**Note 2:** The perfomance of the application under the virtual machine depends on the resources that
-the host can provide but will usually be much more slower than a production environment.
-
-1. Install [Vagrant][vagrant] and [Virtual Box][virtualbox] (with the extension package).
-
-2. Retrieve the project from Git
-
-   ```bash
-   git clone https://github.com/sleede/fab-manager
-   ```
-
-3. From the project directory, run:
-
-   ```bash
-   vagrant up
-   ```
-
-4. Once the virtual machine finished building, reload it with:
-
-   ```bash
-   vagrant reload
-   ```
-
-5. Log into the virtual machine with:
-
-   ```bash
-   vagrant ssh
-   ```
-
-6. While logged in, navigate to the project folder and install the Gemfile
-   dependencies:
-
-   ```bash
-   bundle install
-   yarn install
-   ```
-
-7. Set up the databases. (Note that you should provide the desired admin credentials and that these
-    specific set of commands must be used to set up the database as some raw SQL instructions are
-    included in the migrations. Password minimal length is 8 characters):
-
-   ```bash
-   rake db:create
-   rake db:migrate
-   # Be sure not to use the default values below in production
-   ADMIN_EMAIL='admin@email' ADMIN_PASSWORD='adminpass' rake db:seed
-   rake fablab:es:build_stats
-   # for tests
-   RAILS_ENV=test rake db:create
-   RAILS_ENV=test rake db:migrate
-   ```
-
-8. Start the application and visit `localhost:3000` on your browser to check that it works:
-
-   ```bash
-   foreman s -p 3000
-   ```
 
 <a name="postgresql"></a>
 ## PostgreSQL
@@ -507,8 +441,3 @@ Developers may find information on how to implement their own authentication pro
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)
-
-
----
-[vagrant]: https://www.vagrantup.com/downloads.html
-[virtualbox]: https://www.virtualbox.org/wiki/Downloads
