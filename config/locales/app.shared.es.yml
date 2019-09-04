@@ -173,7 +173,6 @@ es:
         # stripe payment modal
         i_have_read_and_accept_: "He leido y acepto"
         _the_general_terms_and_conditions: "Los términos y condiciones."
-        enter_your_card_number: "Introduce el número de tu tarjeta"
         credit_amount_for_pay_reservation: "{{amount}} {{currency}} falta por pagar para efectuar su reserva"
         client_credit_amount_for_pay_reservation: "{{amount}} {{currency}} falta por pagar para efectuar la reserva del cliente"
 

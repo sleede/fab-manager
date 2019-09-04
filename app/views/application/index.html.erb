@@ -12,10 +12,8 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
   <script type="text/javascript">
-      Stripe.setPublishableKey('<%= Rails.application.secrets.stripe_publishable_key %>');
-
       var Fablab = Fablab || {};
 
       Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');

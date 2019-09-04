@@ -173,7 +173,6 @@ en:
         # stripe payment modal
         i_have_read_and_accept_: "I have read, and accept"
         _the_general_terms_and_conditions: "the general terms and conditions."
-        enter_your_card_number: "Enter your card number"
         credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm your reservation"
         client_credit_amount_for_pay_reservation: "{{amount}} {{currency}} remains to be paid to confirm reservation of client"
 
