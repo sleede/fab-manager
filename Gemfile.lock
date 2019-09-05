@@ -246,7 +246,6 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.1.0)
-    netrc (0.10.3)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     notify_with (0.0.2)
@@ -345,10 +344,6 @@ GEM
     ref (2.0.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rest-client (1.8.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
     rolify (4.0.0)
     rubocop (0.61.1)
       jaro_winkler (~> 1.5.1)
@@ -411,9 +406,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.13)
-    stripe (1.30.2)
-      json (~> 1.8.1)
-      rest-client (~> 1.4)
+    stripe (5.1.1)
     sys-filesystem (1.2.0)
       ffi
     term-ansicolor (1.3.2)
@@ -546,7 +539,7 @@ DEPENDENCIES
   sidekiq-cron
   sinatra
   spring
-  stripe (= 1.30.2)
+  stripe (= 5.1.1)
   sys-filesystem
   test_after_commit
   therubyracer (= 0.12.0)
