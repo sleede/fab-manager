@@ -10,6 +10,8 @@ class API::PaymentsController < API::ApiController
     begin
       if data['payment_method_id']
         # Create the PaymentIntent
+        # TODO the client has to provide the reservation details. Then, we use Price.compute - user.walletAmount to get the amount
+        # currency is set in Rails.secrets
         intent = Stripe::PaymentIntent.create(
           payment_method: data['payment_method_id'],
           amount: 1099,
@@ -22,7 +24,7 @@ class API::PaymentsController < API::ApiController
       end
     rescue Stripe::CardError => e
       # Display error on client
-      return [200, { error: e.message }.to_json]
+      render status: 200, json: { error: e.message }
     end
 
     render generate_payment_response(intent)

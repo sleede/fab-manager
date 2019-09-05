@@ -1,7 +1,7 @@
 /* global Stripe */
 
-Application.Directives.directive('stripeForm', ['Payment',
-  function (Payment) {
+Application.Directives.directive('stripeForm', ['Payment', 'growl',
+  function (Payment, growl) {
     return ({
       restrict: 'A',
       link: function($scope, element, attributes) {
@@ -47,18 +47,46 @@ Application.Directives.directive('stripeForm', ['Payment',
           // TODO https://stripe.com/docs/payments/payment-intents/web-manual
           stripe.createPaymentMethod('card', card).then(function({ paymentMethod, error }) {
             if (error) {
-              // Show error in payment form
+              growl.error(error);
             } else {
               // Send paymentMethod.id to your server (see Step 2)
-              Payment.confirm({ payment_method_id: paymentMethod.id }).then(function (response) {
+              Payment.confirm({ payment_method_id: paymentMethod.id }, function (response) {
                 // Handle server response (see Step 3)
-                $scope.$apply(function () {
-                  $scope[form].apply($scope, response);
-                });
+                handleServerResponse(response);
               });
             }
           });
         });
+
+        function handleServerResponse(response) {
+          if (response.error) {
+            growl.error(error);
+          } else if (response.requires_action) {
+            // Use Stripe.js to handle required card action
+            stripe.handleCardAction(
+              response.payment_intent_client_secret
+            ).then(function(result) {
+              if (result.error) {
+                growl.error(error);
+              } else {
+                // The card action has been handled
+                // The PaymentIntent can be confirmed again on the server
+                Payment.confirm({ payment_intent_id: result.paymentIntent.id }, function(confirmResult) {
+                  paymentSuccess(confirmResult);
+                }).then(handleServerResponse);
+              }
+            });
+          } else {
+            paymentSuccess(response);
+          }
+        }
+
+        function paymentSuccess(response) {
+          // TODO Show success message
+          $scope.$apply(function () {
+            $scope[form].apply($scope, response);
+          });
+        }
       }
     });
   }]);
