@@ -4,7 +4,6 @@
 class API::PaymentsController < API::ApiController
   before_action :authenticate_user!
 
-  # TODO https://stripe.com/docs/payments/payment-intents/web-manual
   def confirm_payment
     data = JSON.parse(request.body.read.to_s)
 
@@ -26,6 +25,28 @@ class API::PaymentsController < API::ApiController
       return [200, { error: e.message }.to_json]
     end
 
-    return generate_payment_response(intent)
+    render generate_payment_response(intent)
+  end
+
+  private
+
+  def generate_payment_response(intent)
+    if intent.status == 'requires_action' && intent.next_action.type == 'use_stripe_sdk'
+      # Tell the client to handle the action
+      {
+        status: 200,
+        json: {
+          requires_action: true,
+          payment_intent_client_secret: intent.client_secret
+        }
+      }
+    elsif intent.status == 'succeeded'
+      # The payment didn’t need any additional actions and is completed!
+      # Handle post-payment fulfillment
+      { status: 200, json: { success: true } }
+    else
+      # Invalid status
+      { status: 500, json: { error: 'Invalid PaymentIntent status' } }
+    end
   end
 end

@@ -1,10 +1,10 @@
 /* global Stripe */
 
-Application.Directives.directive('stripeForm', ['$window',
-  function ($window) {
+Application.Directives.directive('stripeForm', ['Payment',
+  function (Payment) {
     return ({
       restrict: 'A',
-      link: ($scope, element, attributes) => {
+      link: function($scope, element, attributes) {
         const stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
         const elements = stripe.elements();
 
@@ -40,29 +40,24 @@ Application.Directives.directive('stripeForm', ['$window',
         const cardElement = form.find('#card-element');
         card.mount(cardElement[0]);
 
-        form.bind('submit', async () => {
+        form.bind('submit', function() {
           const button = form.find('button');
           button.prop('disabled', true);
 
           // TODO https://stripe.com/docs/payments/payment-intents/web-manual
-          const { paymentMethod, error } = await stripe.createPaymentMethod('card', cardElement);
-          if (error) {
-            // Show error in payment form
-          } else {
-            // Send paymentMethod.id to your server (see Step 2)
-            const response = await fetch('/ajax/confirm_payment', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ payment_method_id: paymentMethod.id })
-            });
-
-            const json = await response.json();
-
-            // Handle server response (see Step 3)
-            $scope.$apply(function () {
-              $scope[form].apply($scope, json);
-            });
-          }
+          stripe.createPaymentMethod('card', card).then(function({ paymentMethod, error }) {
+            if (error) {
+              // Show error in payment form
+            } else {
+              // Send paymentMethod.id to your server (see Step 2)
+              Payment.confirm({ payment_method_id: paymentMethod.id }).then(function (response) {
+                // Handle server response (see Step 3)
+                $scope.$apply(function () {
+                  $scope[form].apply($scope, response);
+                });
+              });
+            }
+          });
         });
       }
     });
