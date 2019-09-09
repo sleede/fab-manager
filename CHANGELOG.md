@@ -5,6 +5,7 @@
 - Upgrade dev environments from ruby 2.3.6 to 2.3.8 (#143)
 - Fix a bug: Users with role 'member' cannot download their invoices
 - Fix a bug: Wallet credit inputs does not allow to put zeros at the end of the decimal part of the amount
+- Fix a bug: unable to create the first user because role member was missing
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_ONLINE_PAYMENT` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] -> (only dev) `rvm install ruby-2.3.8 && rvm use && bundle install`
