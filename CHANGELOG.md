@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Fix a bug: unable to create the first user because role member was missing 
 - Ability to configure and export the accounting data to the ACD accounting software
 - [TODO DEPLOY] `rake db:migrate`
 
