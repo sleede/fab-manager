@@ -23,8 +23,8 @@ class API::ReservationsController < API::ApiController
 
   def create
     authorize Reservation
-    
-    user_id = params[:reservation][:user_id] 
+
+    user_id = params[:reservation][:user_id]
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)

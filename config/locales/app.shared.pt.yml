@@ -461,5 +461,5 @@ pt:
           reservation_was_cancelled_successfully: "Reserva a foi cancelada com sucesso."
           cancellation_failed: "Cancelamento falhou."
           confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
-          a_problem_occured_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
+          a_problem_occurred_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
           none: "Vazio"

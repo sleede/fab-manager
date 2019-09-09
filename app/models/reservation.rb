@@ -203,7 +203,7 @@ class Reservation < ActiveRecord::Base
         #
       else
         # error handling
-        
+
         # errors[:card] << subscription.errors[:card].join
 
         # errors[:payment] << subscription.errors[:payment].join if subscription.errors[:payment]

@@ -350,11 +350,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           if ($scope.isAdmin()) { return true; }
           const slotStart = moment(slot.start);
           const now = moment();
-          if (slot.can_modify && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay)) {
-            return true;
-          } else {
-            return false;
-          }
+          return (slot.can_modify && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay));
         };
 
         /**
@@ -365,11 +361,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           if ($scope.isAdmin()) { return true; }
           const slotStart = moment(slot.start);
           const now = moment();
-          if (slot.can_modify && $scope.enableBookingCancel && (slotStart.diff(now, 'hours') >= $scope.cancelBookingDelay)) {
-            return true;
-          } else {
-            return false;
-          }
+          return (slot.can_modify && $scope.enableBookingCancel && (slotStart.diff(now, 'hours') >= $scope.cancelBookingDelay));
         };
 
         /**
@@ -448,7 +440,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             slots_attributes: [],
             plan_id: ((plan ? plan.id : undefined))
           };
-          angular.forEach(slots, function (slot, key) {
+          angular.forEach(slots, function (slot) {
             reservation.slots_attributes.push({
               start_at: slot.start,
               end_at: slot.end,
@@ -608,7 +600,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   }
                   , function (response) {
                     $scope.alerts = [];
-                    $scope.alerts.push({ msg: _t('cart.a_problem_occured_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                    $scope.alerts.push({ msg: _t('cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
                     return $scope.attempting = false;
                   });
                 };
@@ -618,7 +610,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }).result['finally'](null).then(function (reservation) { afterPayment(reservation); });
         };
         /**
-         * Actions to run after the payment was successfull
+         * Actions to run after the payment was successful
          */
         var afterPayment = function (reservation) {
           // we set the cart content as 'paid' to display a summary of the transaction
