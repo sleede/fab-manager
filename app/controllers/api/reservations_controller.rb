@@ -22,12 +22,13 @@ class API::ReservationsController < API::ApiController
   def show; end
 
   def create
-    method = current_user.admin? ? :local : :stripe
-    user_id = current_user.admin? ? params[:reservation][:user_id] : current_user.id
+    authorize Reservation
+    
+    user_id = params[:reservation][:user_id] 
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, method, coupon_params[:coupon_code])
+                                      .pay_and_save(@reservation, :local, coupon_params[:coupon_code])
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible

@@ -4,6 +4,9 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl',
   function (Payment, growl) {
     return ({
       restrict: 'A',
+      scope: {
+        cartItems: '='
+      },
       link: function($scope, element, attributes) {
         const stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
         const elements = stripe.elements();
@@ -50,7 +53,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl',
               growl.error(error);
             } else {
               // Send paymentMethod.id to your server (see Step 2)
-              Payment.confirm({ payment_method_id: paymentMethod.id }, function (response) {
+              Payment.confirm({ payment_method_id: paymentMethod.id, cart_items: $scope.cartItems }, function (response) {
                 // Handle server response (see Step 3)
                 handleServerResponse(response);
               });
@@ -71,7 +74,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl',
               } else {
                 // The card action has been handled
                 // The PaymentIntent can be confirmed again on the server
-                Payment.confirm({ payment_intent_id: result.paymentIntent.id }, function(confirmResult) {
+                Payment.confirm({ payment_intent_id: result.paymentIntent.id, cart_items: $scope.cartItems }, function(confirmResult) {
                   paymentSuccess(confirmResult);
                 }).then(handleServerResponse);
               }
