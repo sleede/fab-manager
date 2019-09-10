@@ -13,8 +13,6 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :plan_id
   validates_with SubscriptionGroupValidator
 
-  attr_accessor :card_token
-
   # creation
   after_save :notify_member_subscribed_plan
   after_save :notify_admin_subscribed_plan
@@ -22,7 +20,7 @@ class Subscription < ActiveRecord::Base
 
   # @param invoice if true then only the subscription is payed, without reservation
   #                if false then the subscription is payed with reservation
-  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil)
+  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil, payment_intent_id = nil)
     return false unless valid?
 
     set_expiration_date
@@ -35,7 +33,7 @@ class Subscription < ActiveRecord::Base
       # debit wallet
       wallet_transaction = debit_user_wallet
 
-      invoc = generate_invoice(operator_profile_id, coupon_code)
+      invoc = generate_invoice(operator_profile_id, coupon_code, payment_intent_id)
       if wallet_transaction
         invoc.wallet_amount = @wallet_amount_debit
         invoc.wallet_transaction_id = wallet_transaction.id
@@ -45,7 +43,7 @@ class Subscription < ActiveRecord::Base
     true
   end
 
-  def generate_invoice(operator_profile_id, coupon_code = nil)
+  def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
     coupon_id = nil
     total = plan.amount
 
@@ -65,7 +63,8 @@ class Subscription < ActiveRecord::Base
       statistic_profile: user.statistic_profile,
       total: total,
       coupon_id: coupon_id,
-      operator_profile_id: operator_profile_id
+      operator_profile_id: operator_profile_id,
+      stp_payment_intent_id: payment_intent_id
     )
     invoice.invoice_items.push InvoiceItem.new(
       amount: plan.amount,
@@ -194,7 +193,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def debit_user_wallet
-    return unless @wallet_amount_debit.present? || @wallet_amount_debit.zero?
+    return if !@wallet_amount_debit.present? || @wallet_amount_debit.zero?
 
     amount = @wallet_amount_debit / 100.0
     WalletService.new(user: user, wallet: user.wallet).debit(amount, self)

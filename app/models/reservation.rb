@@ -18,7 +18,7 @@ class Reservation < ActiveRecord::Base
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
 
-  attr_accessor :card_token, :plan_id, :subscription
+  attr_accessor :plan_id, :subscription
 
   after_commit :notify_member_create_reservation, on: :create
   after_commit :notify_admin_member_create_reservation, on: :create

@@ -57,7 +57,7 @@ class API::ReservationsController < API::ApiController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :card_token, :plan_id, :nb_reserve_places,
+    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :plan_id, :nb_reserve_places,
                                         tickets_attributes: %i[event_price_category_id booked],
                                         slots_attributes: %i[id start_at end_at availability_id offered])
   end

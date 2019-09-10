@@ -16,7 +16,7 @@ class API::SubscriptionsController < API::ApiController
 
     @subscription = Subscription.new(subscription_params)
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                           .pay_and_save(@subscription, coupon_params[:coupon_code], true)
+                                           .pay_and_save(@subscription, coupon: coupon_params[:coupon_code], invoice: true)
 
     if is_subscribe
       render :show, status: :created, location: @subscription
@@ -51,7 +51,7 @@ class API::SubscriptionsController < API::ApiController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def subscription_params
-    params.require(:subscription).permit(:plan_id, :card_token)
+    params.require(:subscription).permit(:plan_id)
   end
 
   def coupon_params
@@ -60,13 +60,5 @@ class API::SubscriptionsController < API::ApiController
 
   def subscription_update_params
     params.require(:subscription).permit(:expired_at)
-  end
-
-  # TODO, refactor subscriptions logic and move this in model/validator
-  def valid_card_token?(token)
-    Stripe::Token.retrieve(token)
-  rescue Stripe::InvalidRequestError => e
-    @subscription.errors[:card_token] << e.message
-    false
   end
 end
