@@ -1,5 +1,11 @@
 /* global Stripe */
 
+/**
+ * This directive allows to extend a form with the Stripe payment input and error handling area.
+ * Strong-customer authentication is supported.
+ * --
+ * https://stripe.com/docs/payments/payment-intents/web-manual
+ */
 Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
   function (Payment, growl, _t) {
     return ({
@@ -48,7 +54,6 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
           const button = form.find('button');
           button.prop('disabled', true);
 
-          // TODO https://stripe.com/docs/payments/payment-intents/web-manual
           stripe.createPaymentMethod('card', card).then(function({ paymentMethod, error }) {
             if (error) {
               growl.error(error.message);
@@ -58,14 +63,18 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
               Payment.confirm({ payment_method_id: paymentMethod.id, cart_items: $scope.cartItems }, function (response) {
                 // Handle server response (see Step 3)
                 handleServerResponse(response, button);
-              });
+              }, function(error) { handleServerResponse({ error }) });
             }
           });
         });
 
         function handleServerResponse(response, confirmButton) {
           if (response.error) {
-            growl.error(`${_t('payment_card_error')} ${response.error}`);
+            if (response.error.statusText) {
+              growl.error(response.error.statusText);
+            } else {
+              growl.error(`${_t('payment_card_error')} ${response.error}`);
+            }
             confirmButton.prop('disabled', false);
           } else if (response.requires_action) {
             // Use Stripe.js to handle required card action
@@ -80,7 +89,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
                 // The PaymentIntent can be confirmed again on the server
                 Payment.confirm({ payment_intent_id: result.paymentIntent.id, cart_items: $scope.cartItems }, function(confirmResult) {
                   handleServerResponse(confirmResult, confirmButton);
-                });
+                }, function(error) { handleServerResponse({ error }) });
               }
             });
           } else {

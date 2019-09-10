@@ -39,7 +39,8 @@ class API::PaymentsController < API::ApiController
           amount: total - wallet_debit,
           currency: Rails.application.secrets.stripe_currency,
           confirmation_method: 'manual',
-          confirm: true
+          confirm: true,
+          customer: current_user.stp_customer_id,
         )
       elsif params[:payment_intent_id].present?
         intent = Stripe::PaymentIntent.confirm(params[:payment_intent_id])
@@ -49,19 +50,23 @@ class API::PaymentsController < API::ApiController
       render(status: 200, json: { error: e.message }) and return
     end
 
-    render(on_payment_success) and return if intent.status == 'succeeded'
+    render(on_payment_success(intent)) and return if intent.status == 'succeeded'
     render generate_payment_response(intent)
   end
 
   private
 
-  def on_payment_success
+  def on_payment_success(intent)
     # TODO create subscription is needed
     user_id = params[:cart_items][:reservation][:user_id]
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, coupon_params[:coupon_code])
+                                      .pay_and_save(@reservation, coupon: coupon_params[:coupon_code], payment_intent_id: intent.id)
+    Stripe::PaymentIntent.update(
+      intent.id,
+      description: "Invoice reference: #{@reservation.invoice.reference}"
+    )
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible

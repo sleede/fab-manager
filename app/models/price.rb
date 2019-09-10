@@ -134,7 +134,7 @@ class Price < ActiveRecord::Base
       total_amount = CouponService.new.apply(total_amount, coupon_code)
 
       # return result
-      { elements: all_elements, total: total_amount, before_coupon: _amount_no_coupon }
+      { elements: all_elements, total: total_amount.to_i, before_coupon: _amount_no_coupon.to_i }
     end
 
 

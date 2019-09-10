@@ -28,7 +28,7 @@ class API::ReservationsController < API::ApiController
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, coupon_params[:coupon_code])
+                                      .pay_and_save(@reservation, coupon: coupon_params[:coupon_code])
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible

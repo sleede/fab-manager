@@ -617,15 +617,21 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           },
           coupon () {
             return $scope.coupon.applied;
+          },
+          cartItems () {
+            return mkRequestParams(reservation, $scope.coupon.applied);
           }
         },
-        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$filter', 'coupon',
-          function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $filter, coupon) {
+        controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'growl', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
+          function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, growl, wallet, helpers, $filter, coupon, cartItems) {
             // User's wallet amount
             $scope.walletAmount = wallet.amount;
 
             // Price
             $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
+
+            // Cart items
+            $scope.cartItems = cartItems;
 
             // CGV
             $scope.cgv = cgv.custom_asset;
@@ -636,23 +642,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
             // Used in wallet info template to interpolate some translations
             $scope.numberFilter = $filter('number');
 
-            // Callback for the stripe payment authorization
-            return $scope.payment = function (status, response) {
-              if (response.error) {
-                return growl.error(response.error.message);
-              } else {
-                $scope.attempting = true;
-                $scope.reservation.card_token = response.id;
-                Reservation.save(mkRequestParams($scope.reservation, coupon), function (reservation) { $uibModalInstance.close(reservation); }
-                  , function (response) {
-                    $scope.alerts = [];
-                    $scope.alerts.push({
-                      msg: response.data.card[0],
-                      type: 'danger'
-                    });
-                    return $scope.attempting = false;
-                  });
-              }
+            // Callback to handle the post-payment and reservation
+            return $scope.onPaymentSuccess = function (reservation) {
+              $uibModalInstance.close(reservation);
             };
           }
         ]

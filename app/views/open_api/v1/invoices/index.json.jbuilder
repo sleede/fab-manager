@@ -1,5 +1,5 @@
 json.invoices @invoices do |invoice|
-  json.extract! invoice, :id, :invoiced_id, :user_id, :invoiced_type, :stp_invoice_id, :reference, :total, :type, :description
+  json.extract! invoice, :id, :invoiced_id, :user_id, :invoiced_type, :stp_invoice_id, :stp_payment_intent_id, :reference, :total, :type, :description
 
   json.invoice_url download_open_api_v1_invoice_path(invoice)
   json.invoiced do

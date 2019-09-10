@@ -201,11 +201,12 @@ class Reservation < ActiveRecord::Base
     pending_invoice_items.each(&:delete)
   end
 
-  def save_with_payment(operator_profile_id, coupon_code = nil)
+  def save_with_payment(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
     build_invoice(
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
-      operator_profile_id: operator_profile_id
+      operator_profile_id: operator_profile_id,
+      stp_payment_intent_id: payment_intent_id
     )
     generate_invoice_items(true, coupon_code)
 

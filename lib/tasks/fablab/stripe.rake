@@ -15,6 +15,7 @@ namespace :fablab do
 
     desc 'find any invoices with incoherent total between stripe and DB'
     task :find_incoherent_invoices, [:start_date] => :environment do |_task, args|
+      puts 'DEPRECATION WARNING: Will not work for invoices created from version 4.1.0 and above'
       date = Date.parse('2017-05-01')
       if args.start_date
         begin

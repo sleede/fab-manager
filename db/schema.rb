@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190606074801) do
+ActiveRecord::Schema.define(version: 20190910141336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -202,10 +202,11 @@ ActiveRecord::Schema.define(version: 20190606074801) do
     t.string   "category"
     t.string   "export_type"
     t.string   "query"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
     t.string   "key"
+    t.string   "extension",   default: "xlsx"
   end
 
   add_index "exports", ["user_id"], name: "index_exports_on_user_id", using: :btree
@@ -281,6 +282,7 @@ ActiveRecord::Schema.define(version: 20190606074801) do
     t.integer  "invoicing_profile_id"
     t.integer  "operator_profile_id"
     t.integer  "statistic_profile_id"
+    t.string   "stp_payment_intent_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
@@ -550,14 +552,12 @@ ActiveRecord::Schema.define(version: 20190606074801) do
     t.datetime "updated_at"
     t.integer  "reservable_id"
     t.string   "reservable_type"
-    t.string   "stp_invoice_id"
     t.integer  "nb_reserve_places"
     t.integer  "statistic_profile_id"
   end
 
   add_index "reservations", ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id", using: :btree
   add_index "reservations", ["statistic_profile_id"], name: "index_reservations_on_statistic_profile_id", using: :btree
-  add_index "reservations", ["stp_invoice_id"], name: "index_reservations_on_stp_invoice_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

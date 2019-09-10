@@ -44,19 +44,17 @@ module Reservations
       reservation = Reservation.last
 
       assert reservation.invoice
-      assert reservation.stp_invoice_id.blank?
       assert_equal 1, reservation.invoice.invoice_items.count
 
       # invoice assertions
       invoice = reservation.invoice
 
-      assert invoice.stp_invoice_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
 
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
-      refute invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, machine.prices.find_by(group_id: @user_without_subscription.group_id, plan_id: nil).amount
 
       # invoice assertions
@@ -102,18 +100,16 @@ module Reservations
       reservation = Reservation.last
 
       assert reservation.invoice
-      assert reservation.stp_invoice_id.blank?
       assert_equal 1, reservation.invoice.invoice_items.count
 
       # invoice assertions
       invoice = reservation.invoice
 
-      assert invoice.stp_invoice_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
       # invoice_items
       invoice_item = InvoiceItem.last
 
-      refute invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, training.amount_by_group(@user_without_subscription.group_id).amount
 
       # invoice assertions
@@ -168,13 +164,12 @@ module Reservations
       reservation = Reservation.last
 
       assert reservation.invoice
-      assert reservation.stp_invoice_id.blank?
       assert_equal 2, reservation.invoice.invoice_items.count
 
       # invoice assertions
       invoice = reservation.invoice
 
-      assert invoice.stp_invoice_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
 
       # invoice_items assertions
@@ -183,7 +178,6 @@ module Reservations
 
       assert(invoice_items.any? { |ii| ii.amount.zero? })
       assert(invoice_items.any? { |ii| ii.amount == machine_price })
-      assert(invoice_items.all? { |ii| ii.stp_invoice_item_id.blank? })
 
       # users_credits assertions
       users_credit = UsersCredit.last
@@ -237,19 +231,17 @@ module Reservations
       reservation = Reservation.last
 
       assert reservation.invoice
-      assert reservation.stp_invoice_id.blank?
       assert_equal 1, reservation.invoice.invoice_items.count
 
       # invoice assertions
       invoice = reservation.invoice
 
-      assert invoice.stp_invoice_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
 
       # invoice_items assertions
       invoice_item = InvoiceItem.last
 
-      refute invoice_item.stp_invoice_item_id
       assert_equal invoice_item.amount, machine.prices.find_by(group_id: @vlonchamp.group_id, plan_id: nil).amount
 
       # invoice assertions
@@ -312,13 +304,12 @@ module Reservations
       reservation = Reservation.last
 
       assert reservation.invoice
-      assert reservation.stp_invoice_id.blank?
       assert_equal 2, reservation.invoice.invoice_items.count
 
       # invoice assertions
       invoice = reservation.invoice
 
-      assert invoice.stp_invoice_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
       assert_equal invoice.total, 2000
 
@@ -377,7 +368,6 @@ module Reservations
       reservation = Reservation.last
 
       assert_not_nil reservation.invoice
-      assert reservation.stp_invoice_id.blank?
 
       # notification
       assert_not_empty Notification.where(attached_object: reservation)
@@ -428,7 +418,6 @@ module Reservations
       reservation = Reservation.find(result[:id])
 
       assert reservation.invoice
-      assert reservation.stp_invoice_id.blank?
       assert_equal 2, reservation.invoice.invoice_items.count
 
       # credits assertions
@@ -439,14 +428,13 @@ module Reservations
       # invoice assertions
       invoice = reservation.invoice
 
-      assert invoice.stp_invoice_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
       assert_equal plan.amount, invoice.total
 
       # invoice_items
       invoice_items = InvoiceItem.last(2)
 
-      assert(invoice_items.all? { |ii| ii.stp_invoice_item_id.blank? })
       assert(invoice_items.any? { |ii| ii.amount == plan.amount && !ii.subscription_id.nil? })
       assert(invoice_items.any? { |ii| ii.amount.zero? })
 

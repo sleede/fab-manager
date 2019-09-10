@@ -68,13 +68,12 @@ module Events
       reservation = Reservation.last
 
       assert reservation.invoice
-      refute reservation.stp_invoice_id.blank?
       assert_equal 1, reservation.invoice.invoice_items.count
 
       # invoice assertions
       invoice = reservation.invoice
 
-      refute invoice.stp_invoice_id.blank?
+      refute invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
       assert_equal 43350, invoice.total # total minus coupon
 
@@ -91,8 +90,8 @@ module Events
       assert_invoice_pdf invoice
 
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means_retrieve_invoice_from_stripe') do
-        stp_invoice = Stripe::Invoice.retrieve(invoice.stp_invoice_id)
-        assert_equal stp_invoice.total, (invoice.total - invoice.wallet_amount) # total minus coupon minus wallet = amount really payed by the user
+        stp_intent = Stripe::PaymentIntent.retrieve(invoice.stp_payment_intent_id)
+        assert_equal stp_intent.amount, (invoice.total - invoice.wallet_amount) # total minus coupon minus wallet = amount really payed by the user
       end
 
       # wallet assertions

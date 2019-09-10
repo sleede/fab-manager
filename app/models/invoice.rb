@@ -80,7 +80,7 @@ class Invoice < ActiveRecord::Base
     reference.gsub!(/DD(?![^\[]*\])/, Time.now.strftime('%-d'))
 
     # information about online selling (X[text])
-    if stp_invoice_id
+    if paid_with_stripe?
       reference.gsub!(/X\[([^\]]+)\]/, '\1')
     else
       reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
@@ -249,6 +249,10 @@ class Invoice < ActiveRecord::Base
     else
       raise InvalidFootprintError
     end
+  end
+
+  def paid_with_stripe?
+    stp_payment_intent_id? || stp_invoice_id?
   end
 
   private
