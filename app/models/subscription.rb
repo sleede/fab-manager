@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Subscription is an active or archived subscription of an User to a Plan
 class Subscription < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
@@ -17,57 +20,9 @@ class Subscription < ActiveRecord::Base
   after_save :notify_admin_subscribed_plan
   after_save :notify_partner_subscribed_plan, if: :of_partner_plan?
 
-  # Stripe subscription payment
-  # @param invoice if true then subscription pay itself, dont pay with reservation
-  #                if false then subscription pay with reservation
-  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil)
-    return unless valid?
-
-    begin
-      invoice_items = []
-
-      unless coupon_code.nil?
-        @coupon = Coupon.find_by(code: coupon_code)
-        raise InvalidCouponError if @coupon.nil? || @coupon.status(user.id) != 'active'
-
-        total = plan.amount
-      end
-
-      # only add a wallet invoice item if pay subscription
-      # dont add if pay subscription + reservation
-      @wallet_amount_debit = get_wallet_amount_debit
-
-      self.canceled_at = nil
-      set_expiration_date
-      save!
-
-      UsersCredits::Manager.new(user: user).reset_credits
-
-      # generate invoice
-      if invoice
-        db_invoice = generate_invoice(operator_profile_id, coupon_code)
-        # debit wallet
-        wallet_transaction = debit_user_wallet
-        if wallet_transaction
-          db_invoice.wallet_amount = @wallet_amount_debit
-          db_invoice.wallet_transaction_id = wallet_transaction.id
-        end
-        db_invoice.save
-      end
-      # cancel subscription after create
-      cancel
-      return true
-    rescue StandardError => e
-      # Something else happened, completely unrelated to Stripe
-      logger.error e
-      errors[:payment] << e.message
-      return false
-    end
-  end
-
   # @param invoice if true then only the subscription is payed, without reservation
   #                if false then the subscription is payed with reservation
-  def save_with_local_payment(operator_profile_id, invoice = true, coupon_code = nil)
+  def save_with_payment(operator_profile_id, invoice = true, coupon_code = nil)
     return false unless valid?
 
     set_expiration_date

@@ -2,8 +2,6 @@
 
 # API Controller for resources of type Subscription
 class API::SubscriptionsController < API::ApiController
-  include FablabConfiguration
-
   before_action :set_subscription, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
@@ -12,21 +10,18 @@ class API::SubscriptionsController < API::ApiController
   end
 
   def create
-    if fablab_plans_deactivated?
-      head 403
+    authorize Subscription
+
+    user_id = params[:subscription][:user_id]
+
+    @subscription = Subscription.new(subscription_params)
+    is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
+                                           .pay_and_save(@subscription, coupon_params[:coupon_code], true)
+
+    if is_subscribe
+      render :show, status: :created, location: @subscription
     else
-      method = current_user.admin? ? :local : :stripe
-      user_id = current_user.admin? ? params[:subscription][:user_id] : current_user.id
-
-      @subscription = Subscription.new(subscription_params)
-      is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
-                                             .pay_and_save(@subscription, method, coupon_params[:coupon_code], true)
-
-      if is_subscribe
-        render :show, status: :created, location: @subscription
-      else
-        render json: @subscription.errors, status: :unprocessable_entity
-      end
+      render json: @subscription.errors, status: :unprocessable_entity
     end
   end
 

@@ -170,95 +170,6 @@ class Reservation < ActiveRecord::Base
     true
   end
 
-  def save_with_payment(operator_profile_id, coupon_code = nil)
-    begin
-      build_invoice(invoicing_profile: user.invoicing_profile, statistic_profile: user.statistic_profile, operator_profile_id: operator_profile_id)
-      generate_invoice_items(false, coupon_code)
-    rescue StandardError => e
-      logger.error e
-      errors[:payment] << e.message
-      return false
-    end
-
-    return false unless valid?
-
-    # TODO: refactoring
-    customer = Stripe::Customer.retrieve(user.stp_customer_id)
-    if plan_id
-      self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
-      subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil }
-      if subscription.save_with_payment(operator_profile_id, false)
-        # self.stp_invoice_id = invoice_items.first.refresh.invoice # save payment_intent_id instead of stp_invoice_id
-        # invoice.stp_invoice_id = invoice_items.first.refresh.invoice
-        invoice.invoice_items.push InvoiceItem.new(
-          amount: subscription.plan.amount,
-          description: subscription.plan.name,
-          subscription_id: subscription.id
-        )
-        set_total_and_coupon(coupon_code)
-        save!
-        #
-        # IMPORTANT NOTE: here, we don't have to create a stripe::invoice and pay it
-        # because subscription.create (in subscription.rb) will pay all waiting stripe invoice items
-        #
-      else
-        # error handling
-
-        # errors[:card] << subscription.errors[:card].join
-
-        # errors[:payment] << subscription.errors[:payment].join if subscription.errors[:payment]
-        return false
-      end
-
-    else
-      begin
-
-        set_total_and_coupon(coupon_code)
-        save!
-      rescue Stripe::CardError => card_error
-        clear_payment_info(card, stp_invoice)
-        logger.info card_error
-        errors[:card] << card_error.message
-        return false
-      rescue Stripe::InvalidRequestError => e
-        # Invalid parameters were supplied to Stripe's API
-        clear_payment_info(card, stp_invoice)
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue Stripe::AuthenticationError => e
-        # Authentication with Stripe's API failed
-        # (maybe you changed API keys recently)
-        clear_payment_info(card, stp_invoice)
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue Stripe::APIConnectionError => e
-        # Network communication with Stripe failed
-        clear_payment_info(card, stp_invoice)
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue Stripe::StripeError => e
-        # Display a very generic error to the user, and maybe send
-        # yourself an email
-        clear_payment_info(card, stp_invoice)
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      rescue StandardError => e
-        # Something else happened, completely unrelated to Stripe
-        clear_payment_info(card, stp_invoice)
-        logger.error e
-        errors[:payment] << e.message
-        return false
-      end
-    end
-
-    UsersCredits::Manager.new(reservation: self).update_credits
-    true
-  end
-
   # check reservation amount total and strip invoice total to pay is equal
   # @param stp_invoice[Stripe::Invoice]
   # @param coupon_code[String]
@@ -290,7 +201,7 @@ class Reservation < ActiveRecord::Base
     pending_invoice_items.each(&:delete)
   end
 
-  def save_with_local_payment(operator_profile_id, coupon_code = nil)
+  def save_with_payment(operator_profile_id, coupon_code = nil)
     build_invoice(
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
@@ -303,7 +214,7 @@ class Reservation < ActiveRecord::Base
     if plan_id
       self.subscription = Subscription.find_or_initialize_by(statistic_profile_id: statistic_profile_id)
       subscription.attributes = { plan_id: plan_id, statistic_profile_id: statistic_profile_id, expiration_date: nil }
-      if subscription.save_with_local_payment(operator_profile_id, false)
+      if subscription.save_with_payment(operator_profile_id, false)
         invoice.invoice_items.push InvoiceItem.new(
           amount: subscription.plan.amount,
           description: subscription.plan.name,
