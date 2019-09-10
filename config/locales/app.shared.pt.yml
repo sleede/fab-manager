@@ -99,6 +99,7 @@ pt:
         share_on_twitter: "Compartilhar no Twitter"
         incomplete_profile: "Perfil incompleto"
         unlimited: "Ilimitado"
+        payment_card_error: "A problem occurred with your payment card:"  # translation_missing
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Você irá perder todas as modificações não salvas se sair desta página"

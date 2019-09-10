@@ -1,11 +1,12 @@
 /* global Stripe */
 
-Application.Directives.directive('stripeForm', ['Payment', 'growl',
-  function (Payment, growl) {
+Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
+  function (Payment, growl, _t) {
     return ({
       restrict: 'A',
       scope: {
-        cartItems: '='
+        cartItems: '=',
+        onPaymentSuccess: '='
       },
       link: function($scope, element, attributes) {
         const stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
@@ -50,45 +51,41 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl',
           // TODO https://stripe.com/docs/payments/payment-intents/web-manual
           stripe.createPaymentMethod('card', card).then(function({ paymentMethod, error }) {
             if (error) {
-              growl.error(error);
+              growl.error(error.message);
+              button.prop('disabled', false);
             } else {
               // Send paymentMethod.id to your server (see Step 2)
               Payment.confirm({ payment_method_id: paymentMethod.id, cart_items: $scope.cartItems }, function (response) {
                 // Handle server response (see Step 3)
-                handleServerResponse(response);
+                handleServerResponse(response, button);
               });
             }
           });
         });
 
-        function handleServerResponse(response) {
+        function handleServerResponse(response, confirmButton) {
           if (response.error) {
-            growl.error(error);
+            growl.error(`${_t('payment_card_error')} ${response.error}`);
+            confirmButton.prop('disabled', false);
           } else if (response.requires_action) {
             // Use Stripe.js to handle required card action
             stripe.handleCardAction(
               response.payment_intent_client_secret
             ).then(function(result) {
               if (result.error) {
-                growl.error(error);
+                growl.error(result.error.message);
+                confirmButton.prop('disabled', false);
               } else {
                 // The card action has been handled
                 // The PaymentIntent can be confirmed again on the server
                 Payment.confirm({ payment_intent_id: result.paymentIntent.id, cart_items: $scope.cartItems }, function(confirmResult) {
-                  paymentSuccess(confirmResult);
-                }).then(handleServerResponse);
+                  handleServerResponse(confirmResult, confirmButton);
+                });
               }
             });
           } else {
-            paymentSuccess(response);
+            $scope.onPaymentSuccess(response);
           }
-        }
-
-        function paymentSuccess(response) {
-          // TODO Show success message
-          $scope.$apply(function () {
-            $scope[form].apply($scope, response);
-          });
         }
       }
     });

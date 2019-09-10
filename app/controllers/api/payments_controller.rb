@@ -46,7 +46,7 @@ class API::PaymentsController < API::ApiController
       end
     rescue Stripe::CardError => e
       # Display error on client
-      render status: 200, json: { error: e.message }
+      render(status: 200, json: { error: e.message }) and return
     end
 
     render(on_payment_success) and return if intent.status == 'succeeded'

@@ -99,6 +99,7 @@ es:
         share_on_twitter: "Compartir en Twitter"
         incomplete_profile: "Perfil completo"
         unlimited: "Ilimitado"
+        payment_card_error: "Hubo un problema con su tarjeta:"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Si cierra la página se perderán todas las modificaciones que no se hayan guardado"

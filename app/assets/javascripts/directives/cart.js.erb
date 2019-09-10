@@ -502,39 +502,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 /**
                  * Callback to process the payment with Stripe, triggered on button click
                  */
-                $scope.payment = function (status, response) {
-                  if (response.error) {
-                    growl.error(response.error.message);
-                  } else {
-                    $scope.attempting = true;
-                    $scope.reservation.card_token = response.id;
-                    Reservation.save(
-                      mkRequestParams($scope.reservation, coupon),
-                      function (reservation) { $uibModalInstance.close(reservation); },
-                      function (response) {
-                        $scope.alerts = [];
-                        if (response.status === 500) {
-                          $scope.alerts.push({
-                            msg: response.statusText,
-                            type: 'danger'
-                          });
-                        } else {
-                          if (response.data.card && (response.data.card.join('').length > 0)) {
-                            $scope.alerts.push({
-                              msg: response.data.card.join('. '),
-                              type: 'danger'
-                            });
-                          } else if (response.data.payment && (response.data.payment.join('').length > 0)) {
-                            $scope.alerts.push({
-                              msg: response.data.payment.join('. '),
-                              type: 'danger'
-                            });
-                          }
-                        }
-                        return $scope.attempting = false;
-                      }
-                    );
-                  }
+                $scope.onPaymentSuccess = function (response) {
+                  $uibModalInstance.close(response);
                 };
               }
             ]

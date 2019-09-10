@@ -99,6 +99,7 @@ fr:
         share_on_twitter: "Partager sur Twitter"
         incomplete_profile: "Profil incomplet"
         unlimited: "Illimité"
+        payment_card_error: "Un problème est survenu avec votre carte bancaire :"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
