@@ -100,6 +100,7 @@ pt:
         incomplete_profile: "Perfil incompleto"
         unlimited: "Ilimitado"
         payment_card_error: "A problem occurred with your payment card:"  # translation_missing
+        online_payment_disabled: "El pago en línea no está disponible. Póngase en contacto directamente con la recepción de Fablab."
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Você irá perder todas as modificações não salvas se sair desta página"
@@ -464,3 +465,4 @@ pt:
           confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
           a_problem_occurred_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
           none: "Vazio"
+          online_payment_disabled: "O pagamento online não está disponível. Entre em contato diretamente com a recepção do Fablab."

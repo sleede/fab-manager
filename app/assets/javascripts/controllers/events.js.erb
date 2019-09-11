@@ -126,8 +126,8 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
-  function ($scope, $state, $stateParams, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
+  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
   /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
@@ -278,7 +278,11 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         return Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
           if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
-            return payByStripe(reservation);
+            if ($rootScope.fablabWithoutOnlinePayment) {
+              growl.error(_t('online_payment_disabled'));
+            } else {
+              return payByStripe(reservation);
+            }
           } else {
             if (($scope.currentUser.role === 'admin') || (amountToPay === 0)) {
               return payOnSite(reservation);

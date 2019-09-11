@@ -82,6 +82,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutPlans = Fablab.withoutPlans;
       // Global config: it true, the whole 'Spaces' features will be disabled in the application
       $rootScope.fablabWithoutSpaces = Fablab.withoutSpaces;
+      // Global config: if true, all payments will be disabled in the application for the members (only admins will be able to proceed reservations)
+      $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

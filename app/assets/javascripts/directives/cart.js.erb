@@ -129,7 +129,11 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
               const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
               if (!$scope.isAdmin() && (amountToPay > 0)) {
-                return payByStripe(reservation);
+                if ($rootScope.fablabWithoutOnlinePayment) {
+                  growl.error(_t('cart.online_payment_disabled'));
+                } else {
+                  return payByStripe(reservation);
+                }
               } else {
                 if ($scope.isAdmin() || (amountToPay === 0)) {
                   return payOnSite(reservation);

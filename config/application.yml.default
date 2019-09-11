@@ -13,6 +13,7 @@ STRIPE_CURRENCY: 'eur'
 INVOICE_PREFIX: Demo-FabLab-facture
 FABLAB_WITHOUT_PLANS: 'false'
 FABLAB_WITHOUT_SPACES: 'true'
+FABLAB_WITHOUT_ONLINE_PAYMENT: 'false'
 
 DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
 

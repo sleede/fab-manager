@@ -10,6 +10,8 @@ class API::PaymentsController < API::ApiController
   # was successfully made. After the payment was made, the reservation/subscription will be created
   ##
   def confirm_payment
+    render(json: { error: 'Online payment is disabled' }, status: :unauthorized) and return if Rails.application.secrets.fablab_without_online_payments
+
     begin
       if params[:payment_method_id].present?
         check_coupon

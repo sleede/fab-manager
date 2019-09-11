@@ -98,7 +98,11 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
         const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount);
         if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
-          return payByStripe();
+          if ($rootScope.fablabWithoutOnlinePayment) {
+            growl.error(_t('online_payment_disabled'));
+          } else {
+            return payByStripe();
+          }
         } else {
           if (($scope.currentUser.role === 'admin') || (amountToPay === 0)) {
             return payOnSite();

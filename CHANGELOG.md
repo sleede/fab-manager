@@ -1,10 +1,12 @@
 # Changelog Fab Manager
 
+- Ability to disable online payments though an environment variable
 - Log changes in Invoices or InvoiceItems records for better handling of accounting certification issues
 - Upgrade dev environments from ruby 2.3.6 to 2.3.8 (#143)
 - Fix a bug: Users with role 'member' cannot download their invoices
 - Fix a bug: Wallet credit inputs does not allow to put zeros at the end of the decimal part of the amount
 - [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_ONLINE_PAYMENT` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] -> (only dev) `rvm install ruby-2.3.8 && rvm use && bundle install`
 
 ## v4.0.4 2019 August 14
