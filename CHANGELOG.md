@@ -1,7 +1,9 @@
 # Changelog Fab Manager
 
+- Upgrade dev environments from ruby 2.3.6 to 2.3.8 (#143)
 - Fix a bug: Users with role 'member' cannot download their invoices
 - [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] -> (only dev) `rvm install ruby-2.3.8 && rvm use && bundle install`
 
 ## v4.0.4 2019 August 14
 - Fix a bug: #140 VAT rate is erronous in invoices.
