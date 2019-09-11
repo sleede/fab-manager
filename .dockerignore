@@ -5,29 +5,41 @@ vendor/cache
 config/database.yml
 config/application.yml
 
-# Ignore the default SQLite database.
+# Ignore database files.
 db/*.sqlite3
 db/*.sqlite3-journal
+postgresql
+elasticsearch
+redis
 
-# Ignore all logfiles and tempfiles.
-log
-tmp
-
+# Ignore public assets
 public/uploads
 public/assets
 
+# Ignore all logfiles and tempfiles.
+log
+*.log
+tmp
+
+# Ignore platform dependent files
 *.DS_Store
 .idea
 
 # PDF invoices
 invoices
 
-.DS_Store
-
+# Development files
 .vagrant
 Vagrantfile
-
+provision
 .git*
-
 Dockerfile
 docker-compose*
+test
+
+# Docs
+*.md
+doc
+
+# Modules
+node_modules
