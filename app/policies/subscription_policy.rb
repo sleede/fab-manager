@@ -4,7 +4,7 @@
 class SubscriptionPolicy < ApplicationPolicy
   include FablabConfiguration
   def create?
-    !fablab_plans_deactivated? && user.admin?
+    !fablab_plans_deactivated? && (user.admin? || record.price.zero?)
   end
 
   def show?

@@ -24,9 +24,10 @@ class API::ReservationsController < API::ApiController
   # Admins can create any reservations. Members can directly create reservations if total = 0,
   # otherwise, they must use payments_controller#confirm_payment
   def create
-    authorize Reservation
+    user_id = current_user.admin? ? params[:reservation][:user_id] : current_user.id
+    amount = transaction_amount(current_user.admin?, user_id)
 
-    user_id = params[:reservation][:user_id]
+    authorize ReservationContext.new(Reservation, amount)
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
@@ -53,6 +54,28 @@ class API::ReservationsController < API::ApiController
   end
 
   private
+
+  def transaction_amount(is_admin, user_id)
+    user = User.find(user_id)
+    price_details = Price.compute(is_admin,
+                                  user,
+                                  reservation_params[:reservable_type].constantize.find(reservation_params[:reservable_id]),
+                                  reservation_params[:slots_attributes] || [],
+                                  reservation_params[:plan_id],
+                                  reservation_params[:nb_reserve_places],
+                                  reservation_params[:tickets_attributes],
+                                  coupon_params[:coupon_code])
+
+    # Subtract wallet amount from total
+    total = price_details[:total]
+    wallet_debit = get_wallet_debit(user, total)
+    total - wallet_debit
+  end
+
+  def get_wallet_debit(user, total_amount)
+    wallet_amount = (user.wallet.amount * 100).to_i
+    wallet_amount >= total_amount ? total_amount : wallet_amount
+  end
 
   def set_reservation
     @reservation = Reservation.find(params[:id])

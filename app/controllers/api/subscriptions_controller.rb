@@ -9,10 +9,13 @@ class API::SubscriptionsController < API::ApiController
     authorize @subscription
   end
 
+  # Admins can create any subscriptions. Members can directly create subscriptions if total = 0,
+  # otherwise, they must use payments_controller#confirm_payment
   def create
-    authorize Subscription
+    user_id = current_user.admin? ? params[:subscription][:user_id] : current_user.id
+    amount = transaction_amount(current_user.admin?, user_id)
 
-    user_id = params[:subscription][:user_id]
+    authorize SubscriptionContext.new(Subscription, amount)
 
     @subscription = Subscription.new(subscription_params)
     is_subscribe = Subscriptions::Subscribe.new(current_user.invoicing_profile.id, user_id)
@@ -43,6 +46,28 @@ class API::SubscriptionsController < API::ApiController
   end
 
   private
+
+  def transaction_amount(is_admin, user_id)
+    user = User.find(user_id)
+    price_details = Price.compute(is_admin,
+                                  user,
+                                  nil,
+                                  [],
+                                  subscription_params[:plan_id],
+                                  nil,
+                                  nil,
+                                  coupon_params[:coupon_code])
+
+    # Subtract wallet amount from total
+    total = price_details[:total]
+    wallet_debit = get_wallet_debit(user, total)
+    total - wallet_debit
+  end
+
+  def get_wallet_debit(user, total_amount)
+    wallet_amount = (user.wallet.amount * 100).to_i
+    wallet_amount >= total_amount ? total_amount : wallet_amount
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_subscription

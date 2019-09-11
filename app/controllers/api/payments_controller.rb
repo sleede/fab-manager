@@ -111,7 +111,7 @@ class API::PaymentsController < API::ApiController
   def card_amount
     if params[:cart_items][:reservation]
       reservable = cart_items_params[:reservable_type].constantize.find(cart_items_params[:reservable_id])
-      subscription = cart_items_params[:plan_id]
+      plan_id = cart_items_params[:plan_id]
       slots = cart_items_params[:slots_attributes] || []
       nb_places = cart_items_params[:nb_reserve_places]
       tickets = cart_items_params[:tickets_attributes]
@@ -119,7 +119,7 @@ class API::PaymentsController < API::ApiController
       raise NotImplementedError unless params[:cart_items][:subscription]
 
       reservable = nil
-      subscription = subscription_params[:plan_id]
+      plan_id = subscription_params[:plan_id]
       slots = []
       nb_places = nil
       tickets = nil
@@ -129,7 +129,7 @@ class API::PaymentsController < API::ApiController
                                   current_user,
                                   reservable,
                                   slots,
-                                  subscription,
+                                  plan_id,
                                   nb_places,
                                   tickets,
                                   coupon_params[:coupon_code])
