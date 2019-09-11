@@ -12,35 +12,12 @@ class API::PaymentsController < API::ApiController
   def confirm_payment
     begin
       if params[:payment_method_id].present?
-        # Check the coupon
-        unless coupon_params[:coupon_code].nil?
-          coupon = Coupon.find_by(code: coupon_params[:coupon_code])
-          raise InvalidCouponError if coupon.nil? || coupon.status(current_user.id) != 'active'
-        end
+        check_coupon
 
-        # Compute the price
-        if params[:cart_items][:reservation]
-          reservable = cart_items_params[:reservable_type].constantize.find(cart_items_params[:reservable_id])
-          price_details = Price.compute(false,
-                                        current_user,
-                                        reservable,
-                                        cart_items_params[:slots_attributes] || [],
-                                        cart_items_params[:plan_id],
-                                        cart_items_params[:nb_reserve_places],
-                                        cart_items_params[:tickets_attributes],
-                                        coupon_params[:coupon_code])
-
-          # Subtract wallet amount from total
-          total = price_details[:total]
-          wallet_debit = get_wallet_debit(current_user, total)
-          amount = total - wallet_debit
-        elsif params[:cart_items][:subscription]
-          amount = 2000 # TODO
-        end
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
           payment_method: params[:payment_method_id],
-          amount: amount,
+          amount: card_amount,
           currency: Rails.application.secrets.stripe_currency,
           confirmation_method: 'manual',
           confirm: true,
@@ -51,20 +28,20 @@ class API::PaymentsController < API::ApiController
       end
     rescue Stripe::CardError => e
       # Display error on client
-      render(status: 200, json: { error: e.message }) and return
+      res = { status: 200, json: { error: e.message } }
     rescue InvalidCouponError
-      render(json: { coupon_code: 'wrong coupon code or expired' }, status: :unprocessable_entity) and return
+      res = { json: { coupon_code: 'wrong coupon code or expired' }, status: :unprocessable_entity }
     end
 
-    if intent.status == 'succeeded'
+    if intent&.status == 'succeeded'
       if params[:cart_items][:reservation]
-        render(on_reservation_success(intent)) and return
+        res = on_reservation_success(intent)
       elsif params[:cart_items][:subscription]
-        render(on_subscription_success(intent)) and return
+        res = on_subscription_success(intent)
       end
     end
 
-    render generate_payment_response(intent)
+    render generate_payment_response(intent, res)
   end
 
   private
@@ -104,7 +81,9 @@ class API::PaymentsController < API::ApiController
     end
   end
 
-  def generate_payment_response(intent)
+  def generate_payment_response(intent, res = nil)
+    return res unless res.nil?
+
     if intent.status == 'requires_action' && intent.next_action.type == 'use_stripe_sdk'
       # Tell the client to handle the action
       {
@@ -127,6 +106,45 @@ class API::PaymentsController < API::ApiController
   def get_wallet_debit(user, total_amount)
     wallet_amount = (user.wallet.amount * 100).to_i
     wallet_amount >= total_amount ? total_amount : wallet_amount
+  end
+
+  def card_amount
+    if params[:cart_items][:reservation]
+      reservable = cart_items_params[:reservable_type].constantize.find(cart_items_params[:reservable_id])
+      subscription = cart_items_params[:plan_id]
+      slots = cart_items_params[:slots_attributes] || []
+      nb_places = cart_items_params[:nb_reserve_places]
+      tickets = cart_items_params[:tickets_attributes]
+    else
+      raise NotImplementedError unless params[:cart_items][:subscription]
+
+      reservable = nil
+      subscription = subscription_params[:plan_id]
+      slots = []
+      nb_places = nil
+      tickets = nil
+    end
+
+    price_details = Price.compute(false,
+                                  current_user,
+                                  reservable,
+                                  slots,
+                                  subscription,
+                                  nb_places,
+                                  tickets,
+                                  coupon_params[:coupon_code])
+
+    # Subtract wallet amount from total
+    total = price_details[:total]
+    wallet_debit = get_wallet_debit(current_user, total)
+    total - wallet_debit
+  end
+
+  def check_coupon
+    return if coupon_params[:coupon_code].nil?
+
+    coupon = Coupon.find_by(code: coupon_params[:coupon_code])
+    raise InvalidCouponError if coupon.nil? || coupon.status(current_user.id) != 'active'
   end
 
   def reservation_params

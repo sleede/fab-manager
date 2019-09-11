@@ -21,6 +21,8 @@ class API::ReservationsController < API::ApiController
 
   def show; end
 
+  # Admins can create any reservations. Members can directly create reservations if total = 0,
+  # otherwise, they must use payments_controller#confirm_payment
   def create
     authorize Reservation
 

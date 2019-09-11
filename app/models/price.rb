@@ -118,6 +118,10 @@ class Price < ActiveRecord::Base
           end
         end
 
+      # No reservation (only subscription)
+      when nil
+        total_amount = 0
+
       # Unknown reservation type
       else
         raise NotImplementedError
