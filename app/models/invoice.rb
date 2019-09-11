@@ -313,6 +313,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def log_changes
+    return if Rails.env.test?
     return unless changed?
 
     puts "WARNING: Invoice update triggered [ id: #{id}, reference: #{reference} ]"

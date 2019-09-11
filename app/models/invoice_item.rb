@@ -35,6 +35,7 @@ class InvoiceItem < ActiveRecord::Base
   end
 
   def log_changes
+    return if Rails.env.test?
     return unless changed?
 
     puts "WARNING: InvoiceItem update triggered [ id: #{id}, invoice reference: #{invoice.reference} ]"

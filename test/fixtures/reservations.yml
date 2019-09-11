@@ -7,7 +7,6 @@ reservation_1:
   updated_at: 2012-03-12 11:03:31.651441000 Z
   reservable_id: 2
   reservable_type: Training
-  stp_invoice_id:
   nb_reserve_places:
 
 reservation_2:
@@ -18,5 +17,4 @@ reservation_2:
   updated_at: 2015-06-10 11:20:01.341130000 Z
   reservable_id: 4
   reservable_type: Machine
-  stp_invoice_id:
   nb_reserve_places:
