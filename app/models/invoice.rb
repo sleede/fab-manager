@@ -27,6 +27,7 @@ class Invoice < ActiveRecord::Base
   before_create :add_environment
   after_create :update_reference, :chain_record
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
+  after_update :log_changes
 
   validates_with ClosedPeriodValidator
 
@@ -309,6 +310,15 @@ class Invoice < ActiveRecord::Base
                       .delete_if { |c| %w[footprint updated_at].include? c }
 
     Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
+  end
+
+  def log_changes
+    return unless changed?
+
+    puts "WARNING: Invoice update triggered [ id: #{id}, reference: #{reference} ]"
+    puts '----------   changes   ----------'
+    puts changes
+    puts '---------------------------------'
   end
 
 end

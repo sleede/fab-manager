@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Log changes in Invoices or InvoiceItems records for better handling of accounting certification issues
 - Upgrade dev environments from ruby 2.3.6 to 2.3.8 (#143)
 - Fix a bug: Users with role 'member' cannot download their invoices
 - [TODO DEPLOY] `rake db:migrate`
