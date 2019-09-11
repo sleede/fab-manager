@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20190910141336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
   enable_extension "unaccent"
+  enable_extension "pg_trgm"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -202,11 +202,10 @@ ActiveRecord::Schema.define(version: 20190910141336) do
     t.string   "category"
     t.string   "export_type"
     t.string   "query"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.string   "key"
-    t.string   "extension",   default: "xlsx"
   end
 
   add_index "exports", ["user_id"], name: "index_exports_on_user_id", using: :btree

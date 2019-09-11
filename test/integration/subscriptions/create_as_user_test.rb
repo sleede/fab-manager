@@ -10,12 +10,13 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: @user.group.id, type: 'Plan', base_name: 'Mensuel')
 
     VCR.use_cassette('subscriptions_user_create_success') do
-      post '/api/subscriptions',
+      post '/api/payments/confirm_payment',
            {
-             subscription: {
-               plan_id: plan.id,
-               user_id: @user.id,
-               card_token: stripe_card_token
+             payment_method_id: stripe_payment_method,
+             cart_items: {
+               subscription: {
+                 plan_id: plan.id
+               }
              }
            }.to_json, default_headers
     end
@@ -71,12 +72,13 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     plan = Plan.where.not(group_id: @user.group.id).first
 
     VCR.use_cassette('subscriptions_user_create_failed') do
-      post '/api/subscriptions',
+      post '/api/payments/confirm_payment',
            {
-             subscription: {
-               plan_id: plan.id,
-               user_id: @user.id,
-               card_token: stripe_card_token
+             payment_method_id: stripe_payment_method,
+             cart_items: {
+               subscription: {
+                 plan_id: plan.id
+               }
              }
            }.to_json, default_headers
     end
@@ -99,15 +101,18 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     plan = Plan.find_by(group_id: @vlonchamp.group.id, type: 'Plan', base_name: 'Mensuel tarif réduit')
 
     VCR.use_cassette('subscriptions_user_create_success_with_wallet') do
-      post '/api/subscriptions',
+      post '/api/payments/confirm_payment',
            {
-             subscription: {
-               plan_id: plan.id,
-               user_id: @vlonchamp.id,
-               card_token: stripe_card_token
+             payment_method_id: stripe_payment_method,
+             cart_items: {
+               subscription: {
+                 plan_id: plan.id
+               }
              }
            }.to_json, default_headers
     end
+
+    @vlonchamp.wallet.reload
 
     # Check response format & status
     assert_equal 201, response.status, response.body
@@ -155,12 +160,12 @@ class Subscriptions::CreateAsUserTest < ActionDispatch::IntegrationTest
     assert_equal plan.amount, invoice.total, 'Invoice total price does not match the bought subscription'
 
     # wallet
-    assert_equal @vlonchamp.wallet.amount, 0
-    assert_equal @vlonchamp.wallet.wallet_transactions.count, 2
+    assert_equal 0, @vlonchamp.wallet.amount
+    assert_equal 2, @vlonchamp.wallet.wallet_transactions.count
     transaction = @vlonchamp.wallet.wallet_transactions.last
-    assert_equal transaction.transaction_type, 'debit'
-    assert_equal transaction.amount, 10
-    assert_equal transaction.amount, invoice.wallet_amount / 100.0
-    assert_equal transaction.id, invoice.wallet_transaction_id
+    assert_equal 'debit', transaction.transaction_type
+    assert_equal 10, transaction.amount
+    assert_equal invoice.wallet_amount / 100.0, transaction.amount
+    assert_equal invoice.wallet_transaction_id, transaction.id
   end
 end

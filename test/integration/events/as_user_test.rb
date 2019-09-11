@@ -26,35 +26,40 @@ module Events
 
       # Reserve the 'radio' event
       VCR.use_cassette('reserve_event_with_many_prices_and_payment_means') do
-        post reservations_path, {
-            reservation: {
-                user_id: User.find_by(username: 'vlonchamp').id,
-                reservable_id: radio.id,
-                reservable_type: 'Event',
-                nb_reserve_places: 2,
-                card_token: stripe_card_token,
-                slots_attributes: [
-                    {
-                        start_at: availability.start_at,
-                        end_at: availability.end_at,
-                        availability_id: availability.id,
-                        offered: false
-                    }
-                ],
-                tickets_attributes: [
-                    {
-                        event_price_category_id: radio.event_price_categories[0].id,
-                        booked: 2
-                    },
-                    {
-                        event_price_category_id: radio.event_price_categories[1].id,
-                        booked: 2
-                    }
-                ]
-            },
-            coupon_code: 'SUNNYFABLAB'
-        }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   user_id: User.find_by(username: 'vlonchamp').id,
+                   reservable_id: radio.id,
+                   reservable_type: 'Event',
+                   nb_reserve_places: 2,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at,
+                       end_at: availability.end_at,
+                       availability_id: availability.id,
+                       offered: false
+                     }
+                   ],
+                   tickets_attributes: [
+                     {
+                       event_price_category_id: radio.event_price_categories[0].id,
+                       booked: 2
+                     },
+                     {
+                       event_price_category_id: radio.event_price_categories[1].id,
+                       booked: 2
+                     }
+                   ]
+                 },
+                 coupon_code: 'SUNNYFABLAB'
+               }
+             }.to_json, default_headers
       end
+
+      vlonchamp.wallet.reload
 
       # general assertions
       assert_equal 201, response.status
@@ -82,7 +87,6 @@ module Events
       reservation_item = invoice.invoice_items.first
 
       assert_not_nil reservation_item
-      assert reservation_item.stp_invoice_item_id
       assert_equal 51000, reservation_item.amount # full total
 
       # invoice assertions

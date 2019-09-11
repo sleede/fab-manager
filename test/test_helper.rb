@@ -34,7 +34,7 @@ class ActiveSupport::TestCase
     { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
   end
 
-  def stripe_card_token(error: nil)
+  def stripe_payment_method(error: nil)
     number = '4242424242424242'
     exp_month = 4
     exp_year = DateTime.now.next_year.year
@@ -53,7 +53,8 @@ class ActiveSupport::TestCase
       cvc = '99'
     end
 
-    Stripe::Token.create(
+    Stripe::PaymentMethod.create(
+      type: 'card',
       card: {
         number: number,
         exp_month: exp_month,

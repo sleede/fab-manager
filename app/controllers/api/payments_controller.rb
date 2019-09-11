@@ -13,6 +13,7 @@ class API::PaymentsController < API::ApiController
     begin
       if params[:payment_method_id].present?
         check_coupon
+        check_plan
 
         # Create the PaymentIntent
         intent = Stripe::PaymentIntent.create(
@@ -31,6 +32,8 @@ class API::PaymentsController < API::ApiController
       res = { status: 200, json: { error: e.message } }
     rescue InvalidCouponError
       res = { json: { coupon_code: 'wrong coupon code or expired' }, status: :unprocessable_entity }
+    rescue InvalidGroupError
+      res = { json: { plan_id: 'this plan is not compatible with your current group' }, status: :unprocessable_entity }
     end
 
     if intent&.status == 'succeeded'
@@ -145,6 +148,19 @@ class API::PaymentsController < API::ApiController
 
     coupon = Coupon.find_by(code: coupon_params[:coupon_code])
     raise InvalidCouponError if coupon.nil? || coupon.status(current_user.id) != 'active'
+  end
+
+  def check_plan
+    plan_id = if params[:cart_items][:subscription]
+                subscription_params[:plan_id]
+              elsif params[:cart_items][:reservation]
+                reservation_params[:plan_id]
+              end
+
+    return unless plan_id
+
+    plan = Plan.find(plan_id)
+    raise InvalidGroupError if plan.group_id != current_user.group_id
   end
 
   def reservation_params

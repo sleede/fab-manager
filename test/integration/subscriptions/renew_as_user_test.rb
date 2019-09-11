@@ -11,15 +11,15 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     stripe_subscription = nil
 
     VCR.use_cassette('subscriptions_user_renew_success', erb: true) do
-      post '/api/subscriptions',
+      post '/api/payments/confirm_payment',
            {
-             subscription: {
-               plan_id: plan.id,
-               user_id: @user.id,
-               card_token: stripe_card_token
+             payment_method_id: stripe_payment_method,
+             cart_items: {
+               subscription: {
+                 plan_id: plan.id
+               }
              }
            }.to_json, default_headers
-      stripe_subscription = Stripe::Customer.retrieve(@user.stp_customer_id).subscriptions.retrieve(@user.subscription.stp_subscription_id)
     end
 
     # Check response format & status
@@ -37,10 +37,10 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     assert_not_nil @user.subscription, "user's subscription was not found"
 
     # Check the expiration date
-    assert (@user.subscription.expired_at > DateTime.now),
+    assert @user.subscription.expired_at > DateTime.now,
            "user's subscription expiration was not updated ... VCR cassettes may be outdated, please check the gitlab wiki"
     assert_equal @user.subscription.expired_at.iso8601,
-                 Time.at(stripe_subscription.current_period_end).iso8601,
+                 (@user.subscription.created_at + plan.duration).iso8601,
                  'subscription expiration date does not match'
 
     assert_in_delta 5,
@@ -77,22 +77,23 @@ class Subscriptions::RenewAsUserTest < ActionDispatch::IntegrationTest
     previous_expiration = @user.subscription.expired_at.to_i
 
     VCR.use_cassette('subscriptions_user_renew_failed') do
-      post '/api/subscriptions',
+      post '/api/payments/confirm_payment',
            {
-             subscription: {
-               plan_id: plan.id,
-               user_id: @user.id,
-               card_token: 'invalid_card_token'
+             payment_method_id: stripe_payment_method(error: :card_declined),
+             cart_items: {
+               subscription: {
+                 plan_id: plan.id
+               }
              }
            }.to_json, default_headers
     end
 
     # Check response format & status
-    assert_equal 422, response.status, "API does not return the expected status. #{response.body}"
+    assert_equal 200, response.status, "API does not return the expected status. #{response.body}"
     assert_equal Mime::JSON, response.content_type
 
     # Check the error was handled
-    assert_match /No such token/, response.body
+    assert_match /Your card was declined/, response.body
 
     # Check that the user's subscription has not changed
     assert_equal previous_expiration, @user.subscription.expired_at.to_i, "user's subscription has changed"

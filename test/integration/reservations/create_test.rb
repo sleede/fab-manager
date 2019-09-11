@@ -18,19 +18,23 @@ module Reservations
       subscriptions_count = Subscription.count
 
       VCR.use_cassette('reservations_create_for_machine_without_subscription_success') do
-        post reservations_path, { reservation: {
-          user_id: @user_without_subscription.id,
-          reservable_id: machine.id,
-          reservable_type: machine.class.name,
-          card_token: stripe_card_token,
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   reservable_id: machine.id,
+                   reservable_type: machine.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
+                 }
+               }
+             }.to_json, default_headers
       end
 
       # general assertions
@@ -84,23 +88,33 @@ module Reservations
       notifications_count = Notification.count
 
       VCR.use_cassette('reservations_create_for_machine_without_subscription_error') do
-        post reservations_path, { reservation: {
-          user_id: @user_without_subscription.id,
-          reservable_id: machine.id,
-          reservable_type: machine.class.name,
-          card_token: stripe_card_token(error: :card_declined),
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method(error: :card_declined),
+               cart_items: {
+                 reservation: {
+                   reservable_id: machine.id,
+                   reservable_type: machine.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
+                 }
+               }
+             }.to_json, default_headers
       end
 
-      # general assertions
-      assert_equal 422, response.status
+      # Check response format & status
+      assert_equal 200, response.status, "API does not return the expected status. #{response.body}"
+      assert_equal Mime::JSON, response.content_type
+
+      # Check the error was handled
+      assert_match /Your card was declined/, response.body
+
+      # Check the subscription wasn't taken
       assert_equal reservations_count, Reservation.count
       assert_equal invoice_count, Invoice.count
       assert_equal invoice_items_count, InvoiceItem.count
@@ -122,19 +136,23 @@ module Reservations
       invoice_items_count = InvoiceItem.count
 
       VCR.use_cassette('reservations_create_for_training_without_subscription_success') do
-        post reservations_path, { reservation: {
-          user_id: @user_without_subscription.id,
-          reservable_id: training.id,
-          reservable_type: training.class.name,
-          card_token: stripe_card_token,
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: availability.end_at.to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   reservable_id: training.id,
+                   reservable_type: training.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: availability.end_at.to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
+                 }
+               }
+             }.to_json, default_headers
       end
 
       # general assertions
@@ -187,24 +205,28 @@ module Reservations
       users_credit_count = UsersCredit.count
 
       VCR.use_cassette('reservations_create_for_machine_with_subscription_success') do
-        post reservations_path, { reservation: {
-          user_id: @user_with_subscription.id,
-          reservable_id: machine.id,
-          reservable_type: machine.class.name,
-          card_token: stripe_card_token,
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-              availability_id: availability.id
-            },
-            {
-              start_at: (availability.start_at + 1.hour).to_s(:iso8601),
-              end_at: (availability.start_at + 2.hours).to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   reservable_id: machine.id,
+                   reservable_type: machine.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       availability_id: availability.id
+                     },
+                     {
+                       start_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       end_at: (availability.start_at + 2.hours).to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
+                 }
+               }
+             }.to_json, default_headers
       end
 
       # general assertions
@@ -267,19 +289,20 @@ module Reservations
       invoice_items_count = InvoiceItem.count
 
       VCR.use_cassette('reservations_create_for_training_with_subscription_success') do
-        post reservations_path, { reservation: {
-          user_id: @user_with_subscription.id,
-          reservable_id: training.id,
-          reservable_type: training.class.name,
-          card_token: stripe_card_token,
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: availability.end_at.to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/reservations',
+             {
+               reservation: {
+                 reservable_id: training.id,
+                 reservable_type: training.class.name,
+                 slots_attributes: [
+                   {
+                     start_at: availability.start_at.to_s(:iso8601),
+                     end_at: availability.end_at.to_s(:iso8601),
+                     availability_id: availability.id
+                   }
+                 ]
+               }
+             }.to_json, default_headers
       end
 
       # general assertions
@@ -302,7 +325,7 @@ module Reservations
       # invoice assertions
       invoice = reservation.invoice
 
-      refute invoice.stp_payment_intent_id.blank?
+      assert invoice.stp_payment_intent_id.blank?
       refute invoice.total.blank?
       assert invoice.check_footprint
 
@@ -337,20 +360,28 @@ module Reservations
       wallet_transactions_count = WalletTransaction.count
 
       VCR.use_cassette('reservations_create_for_machine_and_pay_wallet_success') do
-        post reservations_path, { reservation: {
-          user_id: @vlonchamp.id,
-          reservable_id: machine.id,
-          reservable_type: machine.class.name,
-          card_token: stripe_card_token,
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   user_id: @vlonchamp.id,
+                   reservable_id: machine.id,
+                   reservable_type: machine.class.name,
+                   card_token: stripe_payment_method,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
+                 }
+               }
+             }.to_json, default_headers
       end
+
+      @vlonchamp.wallet.reload
 
       # general assertions
       assert_equal 201, response.status
@@ -391,12 +422,12 @@ module Reservations
       assert_not_empty Notification.where(attached_object: reservation)
 
       # wallet
-      assert_equal @vlonchamp.wallet.amount, 0
-      assert_equal @vlonchamp.wallet.wallet_transactions.count, 2
+      assert_equal 0, @vlonchamp.wallet.amount
+      assert_equal 2, @vlonchamp.wallet.wallet_transactions.count
       transaction = @vlonchamp.wallet.wallet_transactions.last
-      assert_equal transaction.transaction_type, 'debit'
-      assert_equal transaction.amount, 10
-      assert_equal transaction.amount, invoice.wallet_amount / 100.0
+      assert_equal 'debit', transaction.transaction_type
+      assert_equal 10, transaction.amount
+      assert_equal invoice.wallet_amount / 100.0, transaction.amount
     end
 
     test 'user reserves a training and a subscription by wallet with success' do
@@ -413,21 +444,27 @@ module Reservations
       wallet_transactions_count = WalletTransaction.count
 
       VCR.use_cassette('reservations_create_for_training_and_plan_by_pay_wallet_success') do
-        post reservations_path, { reservation: {
-          user_id: @user_without_subscription.id,
-          reservable_id: training.id,
-          reservable_type: training.class.name,
-          card_token: stripe_card_token,
-          plan_id: plan.id,
-          slots_attributes: [
-            {
-              start_at: availability.start_at.to_s(:iso8601),
-              end_at: availability.end_at.to_s(:iso8601),
-              availability_id: availability.id
-            }
-          ]
-        } }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   reservable_id: training.id,
+                   reservable_type: training.class.name,
+                   plan_id: plan.id,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: availability.end_at.to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ]
+                 }
+               }
+             }.to_json, default_headers
       end
+
+      @vlonchamp.wallet.reload
 
       # general assertions
       assert_equal 201, response.status
@@ -463,12 +500,12 @@ module Reservations
       assert_not_empty Notification.where(attached_object: reservation)
 
       # wallet
-      assert_equal @vlonchamp.wallet.amount, 0
-      assert_equal @vlonchamp.wallet.wallet_transactions.count, 2
+      assert_equal 0, @vlonchamp.wallet.amount
+      assert_equal 2, @vlonchamp.wallet.wallet_transactions.count
       transaction = @vlonchamp.wallet.wallet_transactions.last
-      assert_equal transaction.transaction_type, 'debit'
-      assert_equal transaction.amount, 10
-      assert_equal transaction.amount, invoice.wallet_amount / 100.0
+      assert_equal 'debit', transaction.transaction_type
+      assert_equal 10, transaction.amount
+      assert_equal invoice.wallet_amount / 100.0, transaction.amount
     end
 
     test 'user reserves a machine and a subscription using a coupon with success' do
@@ -485,23 +522,25 @@ module Reservations
       users_credit_count = UsersCredit.count
 
       VCR.use_cassette('reservations_machine_and_plan_using_coupon_success') do
-        post reservations_path, {
-          reservation: {
-            user_id: @user_without_subscription.id,
-            reservable_id: machine.id,
-            reservable_type: machine.class.name,
-            card_token: stripe_card_token,
-            slots_attributes: [
-              {
-                start_at: availability.start_at.to_s(:iso8601),
-                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                availability_id: availability.id
-              }
-            ],
-            plan_id: plan.id
-          },
-          coupon_code: 'SUNNYFABLAB'
-        }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   reservable_id: machine.id,
+                   reservable_type: machine.class.name,
+                   slots_attributes: [
+                     {
+                       start_at: availability.start_at.to_s(:iso8601),
+                       end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                       availability_id: availability.id
+                     }
+                   ],
+                   plan_id: plan.id
+                 },
+                 coupon_code: 'SUNNYFABLAB'
+               }
+             }.to_json, default_headers
       end
 
       # general assertions
@@ -574,22 +613,26 @@ module Reservations
       notifications_count = Notification.count
 
       VCR.use_cassette('reservations_training_with_expired_coupon_error') do
-        post reservations_path, {
-          reservation: {
-            user_id: @user_without_subscription.id,
-            reservable_id: training.id,
-            reservable_type: training.class.name,
-            card_token: stripe_card_token,
-            slots_attributes: [
-              {
-                start_at: availability.start_at.to_s(:iso8601),
-                end_at: (availability.start_at + 1.hour).to_s(:iso8601),
-                availability_id: availability.id
-              }
-            ]
-          },
-          coupon_code: 'XMAS10'
-        }.to_json, default_headers
+        post '/api/payments/confirm_payment',
+             {
+               payment_method_id: stripe_payment_method,
+               cart_items: {
+                 reservation: {
+                   user_id: @user_without_subscription.id,
+                   reservable_id: training.id,
+                   reservable_type: training.class.name,
+                   card_token: stripe_payment_method,
+                   slots_attributes: [
+                     {
+                        start_at: availability.start_at.to_s(:iso8601),
+                        end_at: (availability.start_at + 1.hour).to_s(:iso8601),
+                        availability_id: availability.id
+                      }
+                   ]
+                 },
+                 coupon_code: 'XMAS10'
+               }
+             }.to_json, default_headers
       end
 
       # general assertions
