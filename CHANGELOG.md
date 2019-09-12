@@ -11,6 +11,7 @@
 - Fix a bug: unable to create the first user because role member was missing
 - Fix a bug: disabled groups still appears as available in sign-up modal
 - Fix a bug: extend a current subscription for a member, does not reset his credits
+- Fix a bug: once a reservation was made, the reminder of the paid price is always 0 if a coupon was used
 - Fix a security issue: updated nokogiri to 1.10.4 to fix [CVE-2019-5477](https://nvd.nist.gov/vuln/detail/CVE-2019-5477)
 - Fix a security issue: updated eslint-utils to 1.4.2 to fix [GHSA-3gx7-xhv7-5mx3](https://github.com/mysticatea/eslint-utils/security/advisories/GHSA-3gx7-xhv7-5mx3)
 - Fix a security issue: updated devise to 4.7.1 to fix [CVE-2019-16109](https://nvd.nist.gov/vuln/detail/CVE-2019-16109)

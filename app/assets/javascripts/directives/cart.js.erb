@@ -48,6 +48,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         // total amount of the elements in the cart, without considering any coupon
         $scope.totalNoCoupon = 0;
 
+        // once the cart was paid, retain the total amount paid by the customer
+        $scope.amountPaid = 0;
+
         // Discount coupon to apply to the basket, if any
         $scope.coupon = { applied: null };
 
@@ -240,8 +243,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             }
           });
           // watch when a coupon is applied to re-compute the total price
-          return $scope.$watch('coupon.applied', function (newValue, oldValue) {
-            if ((newValue !== null) || (oldValue !== null)) {
+          $scope.$watch('coupon.applied', function (newValue, oldValue) {
+            if (newValue !== oldValue) {
               return updateCartPrice();
             }
           });
@@ -588,6 +591,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         var afterPayment = function (reservation) {
           // we set the cart content as 'paid' to display a summary of the transaction
           $scope.events.paid = $scope.events.reserved;
+          $scope.amountPaid = $scope.amountTotal;
           // we call the external callback if present
           if (typeof $scope.afterPayment === 'function') { $scope.afterPayment(reservation); }
           // we reset the coupon and the cart content and we unselect the slot
