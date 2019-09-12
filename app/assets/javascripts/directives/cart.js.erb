@@ -129,7 +129,11 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
               const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
               if (!$scope.isAdmin() && (amountToPay > 0)) {
-                return payByStripe(reservation);
+                if ($rootScope.fablabWithoutOnlinePayment) {
+                  growl.error(_t('cart.online_payment_disabled'));
+                } else {
+                  return payByStripe(reservation);
+                }
               } else {
                 if ($scope.isAdmin() || (amountToPay === 0)) {
                   return payOnSite(reservation);
@@ -350,11 +354,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           if ($scope.isAdmin()) { return true; }
           const slotStart = moment(slot.start);
           const now = moment();
-          if (slot.can_modify && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay)) {
-            return true;
-          } else {
-            return false;
-          }
+          return (slot.can_modify && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay));
         };
 
         /**
@@ -365,11 +365,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           if ($scope.isAdmin()) { return true; }
           const slotStart = moment(slot.start);
           const now = moment();
-          if (slot.can_modify && $scope.enableBookingCancel && (slotStart.diff(now, 'hours') >= $scope.cancelBookingDelay)) {
-            return true;
-          } else {
-            return false;
-          }
+          return (slot.can_modify && $scope.enableBookingCancel && (slotStart.diff(now, 'hours') >= $scope.cancelBookingDelay));
         };
 
         /**
@@ -448,7 +444,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             slots_attributes: [],
             plan_id: ((plan ? plan.id : undefined))
           };
-          angular.forEach(slots, function (slot, key) {
+          angular.forEach(slots, function (slot) {
             reservation.slots_attributes.push({
               start_at: slot.start,
               end_at: slot.end,
@@ -482,15 +478,21 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               },
               coupon () {
                 return $scope.coupon.applied;
+              },
+              cartItems () {
+                return mkRequestParams(reservation, $scope.coupon.applied);
               }
             },
-            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon',
-              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon) {
+            controller: ['$scope', '$uibModalInstance', '$state', 'reservation', 'price', 'cgv', 'Auth', 'Reservation', 'wallet', 'helpers', '$filter', 'coupon', 'cartItems',
+              function ($scope, $uibModalInstance, $state, reservation, price, cgv, Auth, Reservation, wallet, helpers, $filter, coupon, cartItems) {
                 // user wallet amount
                 $scope.walletAmount = wallet.amount;
 
                 // Price
                 $scope.amount = helpers.getAmountToPay(price.price, wallet.amount);
+
+                // Cart items
+                $scope.cartItems = cartItems;
 
                 // CGV
                 $scope.cgv = cgv.custom_asset;
@@ -502,41 +504,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 $scope.numberFilter = $filter('number');
 
                 /**
-                 * Callback to process the payment with Stripe, triggered on button click
+                 * Callback to handle the post-payment and reservation
                  */
-                $scope.payment = function (status, response) {
-                  if (response.error) {
-                    growl.error(response.error.message);
-                  } else {
-                    $scope.attempting = true;
-                    $scope.reservation.card_token = response.id;
-                    Reservation.save(
-                      mkRequestParams($scope.reservation, coupon),
-                      function (reservation) { $uibModalInstance.close(reservation); },
-                      function (response) {
-                        $scope.alerts = [];
-                        if (response.status === 500) {
-                          $scope.alerts.push({
-                            msg: response.statusText,
-                            type: 'danger'
-                          });
-                        } else {
-                          if (response.data.card && (response.data.card.join('').length > 0)) {
-                            $scope.alerts.push({
-                              msg: response.data.card.join('. '),
-                              type: 'danger'
-                            });
-                          } else if (response.data.payment && (response.data.payment.join('').length > 0)) {
-                            $scope.alerts.push({
-                              msg: response.data.payment.join('. '),
-                              type: 'danger'
-                            });
-                          }
-                        }
-                        return $scope.attempting = false;
-                      }
-                    );
-                  }
+                $scope.onPaymentSuccess = function (response) {
+                  $uibModalInstance.close(response);
                 };
               }
             ]
@@ -602,7 +573,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   }
                   , function (response) {
                     $scope.alerts = [];
-                    $scope.alerts.push({ msg: _t('cart.a_problem_occured_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                    $scope.alerts.push({ msg: _t('cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
                     return $scope.attempting = false;
                   });
                 };
@@ -612,7 +583,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           }).result['finally'](null).then(function (reservation) { afterPayment(reservation); });
         };
         /**
-         * Actions to run after the payment was successfull
+         * Actions to run after the payment was successful
          */
         var afterPayment = function (reservation) {
           // we set the cart content as 'paid' to display a summary of the transaction

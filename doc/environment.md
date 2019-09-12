@@ -77,6 +77,11 @@ It is not recommended to disable plans if at least one subscription was took on 
 If set to 'false', enable the spaces management and reservation in the application.
 It is not recommended to disable spaces if at least one space reservation was made on the system.
 
+    FABLAB_WITHOUT_ONLINE_PAYMENT
+
+If set to 'true', the online payment won't be available and the you'll be only able to process reservations when logged as admin.
+Valid stripe API keys are still required, even if you don't require online payments. 
+
     DEFAULT_MAIL_FROM
 
 When sending notification mails, the platform will use this address to identify the sender.

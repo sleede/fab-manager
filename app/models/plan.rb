@@ -16,14 +16,10 @@ class Plan < ActiveRecord::Base
   accepts_nested_attributes_for :prices
   accepts_nested_attributes_for :plan_file, allow_destroy: true, reject_if: :all_blank
 
-  after_update :update_stripe_plan, if: :amount_changed?
-  after_create :create_stripe_plan, unless: :skip_create_stripe_plan
   after_create :create_machines_prices
   after_create :create_spaces_prices
   after_create :create_statistic_type
-  after_destroy :delete_stripe_plan
 
-  attr_accessor :skip_create_stripe_plan
 
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
@@ -101,19 +97,6 @@ class Plan < ActiveRecord::Base
 
   private
 
-  def create_stripe_plan
-    stripe_plan = Stripe::Plan.create(
-      amount: amount,
-      interval: interval,
-      interval_count: interval_count,
-      name: "#{base_name} - #{group.name} - #{interval}",
-      currency: Rails.application.secrets.stripe_currency,
-      id: "#{base_name.parameterize}-#{group.slug}-#{interval}-#{DateTime.now.to_s(:number)}"
-    )
-    update_columns(stp_plan_id: stripe_plan.id, name: stripe_plan.name)
-    stripe_plan
-  end
-
   def create_statistic_subtype
     StatisticSubType.create!(key: slug, label: name)
   end
@@ -125,15 +108,5 @@ class Plan < ActiveRecord::Base
       puts 'ERROR: Unable to create the statistics association for the new plan. '+
            'Possible causes: the type or the subtype were not created successfully.'
     end
-  end
-
-  def update_stripe_plan
-    old_stripe_plan = Stripe::Plan.retrieve(stp_plan_id)
-    old_stripe_plan.delete
-    create_stripe_plan
-  end
-
-  def delete_stripe_plan
-    Stripe::Plan.retrieve(stp_plan_id).delete
   end
 end

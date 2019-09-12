@@ -83,7 +83,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 5. Add your current user to the docker group, to allow using docker without `sudo`.
    ```bash
    # add the docker group if it doesn't already exist
-   sudo groupadd doker
+   sudo groupadd docker
    # add the current user to the docker group
    sudo usermod -aG docker $(whoami)
    # restart to validate changes

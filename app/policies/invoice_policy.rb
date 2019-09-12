@@ -4,7 +4,7 @@ class InvoicePolicy < ApplicationPolicy
   end
 
   def download?
-    user.admin? or (record.user_id == user.id)
+    user.admin? or (record.invoicing_profile.user_id == user.id)
   end
 
   def create?

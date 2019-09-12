@@ -98,7 +98,11 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
       Wallet.getWalletByUser({ user_id: $scope.ctrl.member.id }, function (wallet) {
         const amountToPay = helpers.getAmountToPay($scope.cart.total, wallet.amount);
         if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
-          return payByStripe();
+          if ($rootScope.fablabWithoutOnlinePayment) {
+            growl.error(_t('online_payment_disabled'));
+          } else {
+            return payByStripe();
+          }
         } else {
           if (($scope.currentUser.role === 'admin') || (amountToPay === 0)) {
             return payOnSite();
@@ -246,6 +250,14 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
             // Used in wallet info template to interpolate some translations
             $scope.numberFilter = $filter('number');
 
+            // Cart items
+            $scope.cartItems = {
+              coupon_code: ((coupon ? coupon.code : undefined)),
+              subscription: {
+                plan_id: selectedPlan.id
+              }
+            };
+
             // retrieve the CGV
             CustomAsset.get({ name: 'cgv-file' }, function (cgv) { $scope.cgv = cgv.custom_asset; });
 
@@ -254,29 +266,8 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
              * Handle the stripe's card tokenization process response and save the subscription to the API with the
              * card token just created.
              */
-            $scope.payment = function (status, response) {
-              if (response.error) {
-                growl.error(response.error.message);
-              } else {
-                $scope.attempting = true;
-                Subscription.save({
-                  coupon_code: ((coupon ? coupon.code : undefined)),
-                  subscription: {
-                    plan_id: selectedPlan.id,
-                    user_id: member.id,
-                    card_token: response.id
-                  }
-                }
-                , function (data) { // success
-                  $uibModalInstance.close(data);
-                }
-                , function (data, status) { // failed
-                  $scope.alerts = [];
-                  $scope.alerts.push({ msg: _t('an_error_occured_during_the_payment_process_please_try_again_later'), type: 'danger' });
-                  $scope.attempting = false;
-                }
-                );
-              }
+            $scope.onPaymentSuccess = function (response) {
+              $uibModalInstance.close(response);
             };
           }
         ]
@@ -367,7 +358,7 @@ Application.Controllers.controller('PlansIndexController', ['$scope', '$rootScop
             $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
           }
         ]
-      }).result['finally'](null).then(function (reservation) {
+      }).result['finally'](null).then(function (subscription) {
         $scope.ctrl.member.subscribed_plan = angular.copy($scope.selectedPlan);
         Auth._currentUser.subscribed_plan = angular.copy($scope.selectedPlan);
         $scope.ctrl.member = null;

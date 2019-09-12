@@ -9,15 +9,11 @@ class Subscriptions::Subscribe
     @operator_profile_id = operator_profile_id
   end
 
-  def pay_and_save(subscription, payment_method, coupon, invoice)
+  def pay_and_save(subscription, coupon: nil, invoice: nil, payment_intent_id: nil)
     return false if user_id.nil?
 
     subscription.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
-    if payment_method == :local
-      subscription.save_with_local_payment(operator_profile_id, invoice, coupon)
-    elsif payment_method == :stripe
-      subscription.save_with_payment(operator_profile_id, invoice, coupon)
-    end
+    subscription.save_with_payment(operator_profile_id, invoice, coupon, payment_intent_id)
   end
 
   def extend_subscription(subscription, new_expiration_date, free_days)

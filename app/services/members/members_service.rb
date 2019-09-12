@@ -35,7 +35,7 @@ class Members::MembersService
     @member.invoicing_profile.first_name = params[:profile_attributes][:first_name]
     @member.invoicing_profile.last_name = params[:profile_attributes][:last_name]
     @member.statistic_profile.group_id = params[:group_id]
-    @member.statistic_profile.role_id = Role.find_by(name: 'member').id
+    @member.statistic_profile.role_id = Role.find_or_create_by!(name: 'member').id
 
     if @member.save
       @member.generate_subscription_invoice(current_user.id)

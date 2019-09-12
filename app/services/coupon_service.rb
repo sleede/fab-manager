@@ -12,22 +12,20 @@ class CouponService
   def apply(total, coupon, user_id = nil)
     price = total
 
-    _coupon = nil
+    coupon_object = nil
     if coupon.instance_of? Coupon
-      _coupon = coupon
+      coupon_object = coupon
     elsif coupon.instance_of? String
-      _coupon = Coupon.find_by(code: coupon)
+      coupon_object = Coupon.find_by(code: coupon)
     end
 
-    unless _coupon.nil?
-      if _coupon.status(user_id, total) == 'active'
-        if _coupon.type == 'percent_off'
-          price -= price * _coupon.percent_off / 100.00
-        elsif _coupon.type == 'amount_off'
+    unless coupon_object.nil?
+      if coupon_object.status(user_id, total) == 'active'
+        if coupon_object.type == 'percent_off'
+          price -= price * coupon_object.percent_off / 100.00
+        elsif coupon_object.type == 'amount_off'
           # do not apply cash coupon unless it has a lower amount that the total price
-          if _coupon.amount_off <= price
-            price -= _coupon.amount_off
-          end
+          price -= coupon_object.amount_off if coupon_object.amount_off <= price
         end
       end
     end
