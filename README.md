@@ -2,7 +2,7 @@
 
 FabManager is the Fab Lab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.
 
-[![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager) 
+[![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager)
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
 [![Docker Build Status](https://img.shields.io/docker/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
 
@@ -12,7 +12,6 @@ FabManager is the Fab Lab management solution. It provides a comprehensive, web-
 3. [Setup a production environment](#setup-a-production-environment)
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
-4.2. [Virtual Machine Instructions](#virtual-machine-instructions)
 5. [PostgreSQL](#postgresql)<br/>
 5.1. [Install PostgreSQL 9.4](#setup-postgresql)
 6. [ElasticSearch](#elasticsearch)<br/>
@@ -61,7 +60,10 @@ The procedure to follow is described in the [docker-compose readme](docker/READM
 ## Setup a development environment
 
 In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up with the following procedure.
+
 This procedure is not easy to follow so if you don't need to write some code for Fab-manager, please prefer the [docker-compose installation method](docker/README.md).
+
+Optionally, you can use a virtual development environment that relies on Vagrant and Virtual Box by following the [virtual machine instructions](doc/virtual-machine.md).
 
 <a name="general-guidelines"></a>
 ### General Guidelines
@@ -69,13 +71,13 @@ This procedure is not easy to follow so if you don't need to write some code for
 1. Install RVM, with the ruby version specified in the [.ruby-version file](.ruby-version).
    For more details about the process, please read the [official RVM documentation](http://rvm.io/rvm/install).
    If you're using ArchLinux, you may have to [read this](doc/archlinux_readme.md) before.
-   
+
 2. Install NVM, with the node.js version specified in the [.nvmrc file](.nvmrc).
    For instructions about installing NVM, please refer to [the NVM readme](https://github.com/creationix/nvm#installation).
-   
+
 3. Install Yarn, the front-end package manager.
    Depending on your system, the installation process may differ, please read the [official Yarn documentation](https://yarnpkg.com/en/docs/install#debian-stable).
-   
+
 4. Install docker.
    Your system may provide a pre-packaged version of docker in its repositories, but this version may be outdated.
    Please refer to [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [debian](https://docs.docker.com/install/linux/docker-ce/debian/) or [MacOS](https://docs.docker.com/docker-for-mac/install/) documentation to setup a recent version of docker.
@@ -94,7 +96,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    You may have to change the network address if it is already in use.
    ```bash
    docker network create --subnet=172.18.0.0/16 fabmanager
-   ``` 
+   ```
 
 7. Retrieve the project from Git
 
@@ -154,7 +156,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 13. Build the databases.
    - **Warning**: **DO NOT** run `rake db:setup` instead of these commands, as this will not run some required raw SQL instructions.
-   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb) 
+   - **Please note**: Your password length must be between 8 and 128 characters, otherwise db:seed will be rejected. This is configured in [config/initializers/devise.rb](config/initializers/devise.rb)
 
    ```bash
    # for dev
@@ -186,83 +188,6 @@ This procedure is not easy to follow so if you don't need to write some code for
 18. Email notifications will be caught by MailCatcher.
     To see the emails sent by the platform, open your web browser at `http://localhost:1080` to access the MailCatcher interface.
 
-<a name="virtual-machine-instructions"></a>
-### Virtual Machine Instructions
-
-These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
-machine, with most of the software dependencies installed automatically and avoiding to install a lot
-of software and services directly on the host computer.
-
-**Note:** The provision scripts configure the sofware dependencies to play nice with each other while
-they are inside the same virtual environment but said configuration is not optimized for a production
-environment.
-
-1. Install [Vagrant][vagrant] and [Virtual Box][virtualbox] (with the extension package).
-
-2. Retrieve the project from Git
-
-   ```bash
-   git clone https://github.com/sleede/fab-manager
-   ```
-
-3. From the project directory, run:
-
-   ```bash
-   vagrant up
-   ```
-
-4. Once the virtual machine finished building, reload it with:
-
-   ```bash
-   vagrant reload
-   ```
-
-5. Log into the virtual machine with:
-
-   ```bash
-   vagrant ssh
-   ```
-
-6. While logged in, navigate to the project folder and install the Gemfile
-   dependencies:
-
-   ```bash
-   cd /vagrant
-   bundle install
-   ```
-
-7. Set a directory for Sidekick pids:
-
-   ```bash
-   mkdir -p tmp/pids
-   ```
-
-8. Copy the default configuration files:
-
-   ```bash
-   cp config/database.yml.virtual config/database.yml
-   cp config/application.yml.default config/application.yml
-   ```
-
-10. Set up the databases. (Note that you should provide the desired admin credentials and that these
-    specific set of commands must be used to set up the database as some raw SQL instructions are
-    included in the migrations. Password minimal length is 8 characters):
-
-   ```bash
-   rake db:create
-   rake db:migrate
-   ADMIN_EMAIL='youradminemail' ADMIN_PASSWORD='youradminpassword' rake db:seed
-   rake fablab:es:build_stats
-   # for tests
-   RAILS_ENV=test rake db:create
-   RAILS_ENV=test rake db:migrate
-   ```
-
-11. Start the application and visit `localhost:3000` on your browser to check that it works:
-
-   ```bash
-   foreman s -p 3000
-   ```
 
 <a name="postgresql"></a>
 ## PostgreSQL
@@ -310,7 +235,7 @@ In FabManager, it is used for the admin's statistics module and to perform searc
    mkdir -p .docker/elasticsearch/plugins
    mkdir -p .docker/elasticsearch/backups
    ```
-   
+
 2. Copy the default configuration files
    ```bash
    cp docker/elasticsearch.yml .docker/elasticsearch/config
@@ -396,8 +321,8 @@ In each cases, some inline comments are included in the localisation files.
 They can be recognized as they start with the sharp character (#).
 These comments are not required to be translated, they are intended to help the translator to have some context information about the sentence to translate.
 
-You will also need to translate the invoice watermark, located in `app/pdfs/data/`. 
-You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), which is using [Rubik Mono One](https://fonts.google.com/specimen/Rubik+Mono+One) as font. 
+You will also need to translate the invoice watermark, located in `app/pdfs/data/`.
+You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), which is using [Rubik Mono One](https://fonts.google.com/specimen/Rubik+Mono+One) as font.
 Use it to generate a similar localised PNG image which keep the default image size, as PDF are not responsive.
 
 
@@ -516,8 +441,3 @@ Developers may find information on how to implement their own authentication pro
 - [AngularJS](https://docs.angularjs.org/api)
 - [Angular-Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [ElasticSearch 5.6](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/index.html)
-
-
----
-[vagrant]: https://www.vagrantup.com/downloads.html
-[virtualbox]: https://www.virtualbox.org/wiki/Downloads
