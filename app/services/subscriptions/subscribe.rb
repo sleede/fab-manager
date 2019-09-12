@@ -26,6 +26,7 @@ class Subscriptions::Subscribe
     )
     if new_sub.save
       new_sub.user.generate_subscription_invoice(operator_profile_id)
+      UsersCredits::Manager.new(user: new_sub.user).reset_credits
       return new_sub
     end
     false
