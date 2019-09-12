@@ -106,6 +106,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           // retrieve the groups (standard, student ...)
           Group.query(function (groups) {
             $scope.groups = groups;
+            $scope.enabledGroups = groups.filter(function (g) { return (g.slug !== 'admins') && !g.disabled; });
           });
 
           // retrieve the CGU

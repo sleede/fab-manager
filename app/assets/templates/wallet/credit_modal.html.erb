@@ -33,10 +33,10 @@
              required
              min="1"
              step="any"
-             ng-pattern="amount.toString()">
+             match="amount">
       <span class="afterAmount">{{currencySymbol}}</span>
       <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.required" translate>{{'amount_confirm_is_required'}}</span>
-      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.pattern">{{ 'amount_confirm_does_not_match' | translate }}</span>
+      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.match">{{ 'amount_confirm_does_not_match' | translate }}</span>
     </div>
 
     <hr/>

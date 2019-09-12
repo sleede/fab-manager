@@ -10,6 +10,7 @@ class InvoiceItem < ActiveRecord::Base
   has_one :invoice_item # to associated invoice_items of an invoice to invoice_items of an avoir
 
   after_create :chain_record
+  after_update :log_changes
 
   def chain_record
     self.footprint = compute_footprint
@@ -31,5 +32,15 @@ class InvoiceItem < ActiveRecord::Base
                          .delete_if { |c| %w[footprint updated_at].include? c }
 
     Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
+  end
+
+  def log_changes
+    return if Rails.env.test?
+    return unless changed?
+
+    puts "WARNING: InvoiceItem update triggered [ id: #{id}, invoice reference: #{invoice.reference} ]"
+    puts '----------   changes   ----------'
+    puts changes
+    puts '---------------------------------'
   end
 end

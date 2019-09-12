@@ -16,7 +16,8 @@ class PlansService
           partner&.add_role :partner, plan
           plan
         else
-          { errors: @plan.errors }
+          puts plan.errors
+          { errors: plan.errors }
         end
       end
     rescue Stripe::InvalidRequestError => e

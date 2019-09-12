@@ -103,7 +103,7 @@ gem 'sinatra', require: false
 # Recurring jobs for Sidekiq
 gem 'sidekiq-cron'
 
-gem 'stripe', '1.30.2'
+gem 'stripe', '5.1.1'
 
 gem 'recurrence'
 

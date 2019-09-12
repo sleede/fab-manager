@@ -5,10 +5,11 @@
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = 'ubuntu/xenial64'
+  config.vm.box = 'ubuntu/bionic64'
   config.vm.define 'fabmanager-devbox'
 
-  # Port forwarding
+  # Forward ports so services running in the virtual machine can be accessed by
+  # the host
   [
     3000, # rails/puma
     9200, # elasticsearch
@@ -19,23 +20,31 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network "forwarded_port", guest: port, host: port
   end
 
-  # Provider-specific configuration
+  # Configuration to allocate resources fro the virtual machine
   config.vm.provider 'virtualbox' do |vb|
     vb.customize ['modifyvm', :id, '--memory', '2048']
   end
 
-  # If you are using Windows o Linux with an encrypted volume
+  # If you are using Windows o Linux with an encrypted volume stick with the
+  # configuration below for file syncronization
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
-  # Provisioning
-  config.vm.provision "shell", privileged: true, run: "once" do |s|
-    s.inline = "export LC_ALL=en_US.UTF-8\n" \
-               "export LANG=en_US.UTF-8\n" \
-               "export LANGUAGE=en_US.UTF-8"
-  end
+  # Copy default configuration files for the database conenction and the Rails application
+  config.vm.provision "file", source: "./config/database.yml.default",    destination: "/vagrant/config/database.yml"
+  config.vm.provision "file", source: "./config/application.yml.default", destination: "/vagrant/config/application.yml"
 
+  ## Provision software dependencies
   config.vm.provision "shell", privileged: false, run: "once",
     path: "provision/zsh_setup.sh"
+
   config.vm.provision "shell", privileged: false, run: "once",
-    path: "provision/box_setup.zsh"
+    path: "provision/box_setup.zsh",
+    env: {
+      "LC_ALL"   => "en_US.UTF-8",
+      "LANG"     => "en_US.UTF-8",
+      "LANGUAGE" => "en_US.UTF-8",
+    }
+
+  config.vm.provision "shell", privileged: true, run: "once",
+    path: "provision/box_tuning.zsh"
 end
