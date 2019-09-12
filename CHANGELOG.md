@@ -3,6 +3,7 @@
 - Handling the Strong-Customer Authentication (SCA) for online payments
 - Ability to disable online payments though an environment variable
 - Log changes in Invoices or InvoiceItems records for better handling of accounting certification issues
+- Updated virtual development environment (#142)
 - Upgrade dev environments from ruby 2.3.6 to 2.3.8 (#143)
 - Upgraded the stripe API from 2015-10-16 to 2019-08-14
 - Upgraded stripe-js from v2 to v3
@@ -10,7 +11,7 @@
 - Fix a bug: Wallet credit inputs does not allow to put zeros at the end of the decimal part of the amount
 - Fix a bug: unable to create the first user because role member was missing
 - Fix a bug: disabled groups still appears as available in sign-up modal
-- Fix a bug: extend a current subscription for a member, does not reset his credits
+- Fix a bug: extend a current subscription for a member, does not reset his credits (#145)
 - Fix a bug: once a reservation was made, the reminder of the paid price is always 0 if a coupon was used
 - Fix a security issue: updated nokogiri to 1.10.4 to fix [CVE-2019-5477](https://nvd.nist.gov/vuln/detail/CVE-2019-5477)
 - Fix a security issue: updated eslint-utils to 1.4.2 to fix [GHSA-3gx7-xhv7-5mx3](https://github.com/mysticatea/eslint-utils/security/advisories/GHSA-3gx7-xhv7-5mx3)
