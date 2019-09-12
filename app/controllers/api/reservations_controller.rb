@@ -21,13 +21,17 @@ class API::ReservationsController < API::ApiController
 
   def show; end
 
+  # Admins can create any reservations. Members can directly create reservations if total = 0,
+  # otherwise, they must use payments_controller#confirm_payment
   def create
-    method = current_user.admin? ? :local : :stripe
     user_id = current_user.admin? ? params[:reservation][:user_id] : current_user.id
+    amount = transaction_amount(current_user.admin?, user_id)
+
+    authorize ReservationContext.new(Reservation, amount)
 
     @reservation = Reservation.new(reservation_params)
     is_reserve = Reservations::Reserve.new(user_id, current_user.invoicing_profile.id)
-                                      .pay_and_save(@reservation, method, coupon_params[:coupon_code])
+                                      .pay_and_save(@reservation, coupon: coupon_params[:coupon_code])
 
     if is_reserve
       SubscriptionExtensionAfterReservation.new(@reservation).extend_subscription_if_eligible
@@ -51,12 +55,34 @@ class API::ReservationsController < API::ApiController
 
   private
 
+  def transaction_amount(is_admin, user_id)
+    user = User.find(user_id)
+    price_details = Price.compute(is_admin,
+                                  user,
+                                  reservation_params[:reservable_type].constantize.find(reservation_params[:reservable_id]),
+                                  reservation_params[:slots_attributes] || [],
+                                  reservation_params[:plan_id],
+                                  reservation_params[:nb_reserve_places],
+                                  reservation_params[:tickets_attributes],
+                                  coupon_params[:coupon_code])
+
+    # Subtract wallet amount from total
+    total = price_details[:total]
+    wallet_debit = get_wallet_debit(user, total)
+    total - wallet_debit
+  end
+
+  def get_wallet_debit(user, total_amount)
+    wallet_amount = (user.wallet.amount * 100).to_i
+    wallet_amount >= total_amount ? total_amount : wallet_amount
+  end
+
   def set_reservation
     @reservation = Reservation.find(params[:id])
   end
 
   def reservation_params
-    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :card_token, :plan_id, :nb_reserve_places,
+    params.require(:reservation).permit(:message, :reservable_id, :reservable_type, :plan_id, :nb_reserve_places,
                                         tickets_attributes: %i[event_price_category_id booked],
                                         slots_attributes: %i[id start_at end_at availability_id offered])
   end

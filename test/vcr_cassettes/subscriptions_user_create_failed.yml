@@ -2,29 +2,29 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/tokens
+    uri: https://api.stripe.com/v1/payment_methods
     body:
       encoding: UTF-8
-      string: card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2020&card[cvc]=314
+      string: type=card&card[number]=4242424242424242&card[exp_month]=4&card[exp_year]=2020&card[cvc]=314
     headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Stripe/v1 RubyBindings/1.30.2
+      - Stripe/v1 RubyBindings/5.1.1
       Authorization:
-      - Bearer sk_test_testfaketestfaketestfake
+      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
       Content-Type:
       - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_h6p1Z4uIchcuNH","request_duration_ms":409}}'
       Stripe-Version:
-      - '2015-10-16'
+      - '2019-08-14'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.30.2","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-54-generic (buildd@lgw01-amd64-014) (gcc version 7.4.0 (Ubuntu
-        7.4.0-1ubuntu1~18.04.1)) #58-Ubuntu SMP Mon Jun 24 10:55:24 UTC 2019","hostname":"Sleede-SylvainPC"}'
-      Content-Length:
-      - '81'
+      - '{"bindings_version":"5.1.1","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 4.15.0-62-generic (buildd@lcy01-amd64-024) (gcc version 7.4.0 (Ubuntu
+        7.4.0-1ubuntu1~18.04.1)) #69-Ubuntu SMP Wed Sep 4 20:55:53 UTC 2019","hostname":"Sleede-SylvainPC"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
   response:
     status:
       code: 200
@@ -33,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 10 Jul 2019 09:31:34 GMT
+      - Wed, 11 Sep 2019 13:31:30 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '783'
+      - '840'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -53,48 +53,56 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_X4wgyx4zoq84iL
+      - req_yJbCiyFMrrLeji
       Stripe-Version:
-      - '2015-10-16'
+      - '2019-08-14'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_1Euc9C2sOmf47Nz9iljP5Tid",
-          "object": "token",
+          "id": "pm_1FHVuv2sOmf47Nz9qI60kcA1",
+          "object": "payment_method",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
           "card": {
-            "id": "card_1Euc9B2sOmf47Nz95kk2d662",
-            "object": "card",
-            "address_city": null,
-            "address_country": null,
-            "address_line1": null,
-            "address_line1_check": null,
-            "address_line2": null,
-            "address_state": null,
-            "address_zip": null,
-            "address_zip_check": null,
-            "brand": "Visa",
+            "brand": "visa",
+            "checks": {
+              "address_line1_check": null,
+              "address_postal_code_check": null,
+              "cvc_check": "unchecked"
+            },
             "country": "US",
-            "cvc_check": "unchecked",
-            "dynamic_last4": null,
             "exp_month": 4,
             "exp_year": 2020,
             "fingerprint": "o52jybR7bnmNn6AT",
             "funding": "credit",
+            "generated_from": null,
             "last4": "4242",
-            "metadata": {
+            "three_d_secure_usage": {
+              "supported": true
             },
-            "name": null,
-            "tokenization_method": null
+            "wallet": null
           },
-          "client_ip": "2.7.197.170",
-          "created": 1562751094,
+          "created": 1568208690,
+          "customer": null,
           "livemode": false,
-          "type": "card",
-          "used": false
+          "metadata": {
+          },
+          "type": "card"
         }
     http_version: 
-  recorded_at: Wed, 10 Jul 2019 09:31:34 GMT
+  recorded_at: Wed, 11 Sep 2019 13:31:30 GMT
 recorded_with: VCR 3.0.1

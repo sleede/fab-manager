@@ -28,7 +28,7 @@ class API::PlansController < API::ApiController
 
     res = PlansService.create(type, partner, plan_params)
     if res[:errors]
-      render res[:errors], status: :unprocessable_entity
+      render json: res[:errors], status: :unprocessable_entity
     else
       render json: res, status: :created
     end

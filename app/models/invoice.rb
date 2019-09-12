@@ -27,6 +27,7 @@ class Invoice < ActiveRecord::Base
   before_create :add_environment
   after_create :update_reference, :chain_record
   after_commit :generate_and_send_invoice, on: [:create], if: :persisted?
+  after_update :log_changes
 
   validates_with ClosedPeriodValidator
 
@@ -80,7 +81,7 @@ class Invoice < ActiveRecord::Base
     reference.gsub!(/DD(?![^\[]*\])/, Time.now.strftime('%-d'))
 
     # information about online selling (X[text])
-    if stp_invoice_id
+    if paid_with_stripe?
       reference.gsub!(/X\[([^\]]+)\]/, '\1')
     else
       reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
@@ -251,6 +252,10 @@ class Invoice < ActiveRecord::Base
     end
   end
 
+  def paid_with_stripe?
+    stp_payment_intent_id? || stp_invoice_id?
+  end
+
   private
 
   def generate_and_send_invoice
@@ -305,6 +310,16 @@ class Invoice < ActiveRecord::Base
                       .delete_if { |c| %w[footprint updated_at].include? c }
 
     Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
+  end
+
+  def log_changes
+    return if Rails.env.test?
+    return unless changed?
+
+    puts "WARNING: Invoice update triggered [ id: #{id}, reference: #{reference} ]"
+    puts '----------   changes   ----------'
+    puts changes
+    puts '---------------------------------'
   end
 
 end

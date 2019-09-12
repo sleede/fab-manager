@@ -1,10 +1,33 @@
 # Changelog Fab Manager
 
-- Fix a bug: unable to create the first user because role member was missing 
 - Ability to configure and export the accounting data to the ACD accounting software
 - [TODO DEPLOY] `rake db:migrate`
 
+## v4.1.0 2019 September 12
+
+- Handling the Strong-Customer Authentication (SCA) for online payments
+- Ability to disable online payments though an environment variable
+- Log changes in Invoices or InvoiceItems records for better handling of accounting certification issues
+- Updated virtual development environment (#142)
+- Upgrade dev environments from ruby 2.3.6 to 2.3.8 (#143)
+- Upgraded the stripe API from 2015-10-16 to 2019-08-14
+- Upgraded stripe-js from v2 to v3
+- Fix a bug: Users with role 'member' cannot download their invoices
+- Fix a bug: Wallet credit inputs does not allow to put zeros at the end of the decimal part of the amount
+- Fix a bug: unable to create the first user because role member was missing
+- Fix a bug: disabled groups still appears as available in sign-up modal
+- Fix a bug: extend a current subscription for a member, does not reset his credits (#145)
+- Fix a bug: once a reservation was made, the reminder of the paid price is always 0 if a coupon was used
+- Fix a security issue: updated nokogiri to 1.10.4 to fix [CVE-2019-5477](https://nvd.nist.gov/vuln/detail/CVE-2019-5477)
+- Fix a security issue: updated eslint-utils to 1.4.2 to fix [GHSA-3gx7-xhv7-5mx3](https://github.com/mysticatea/eslint-utils/security/advisories/GHSA-3gx7-xhv7-5mx3)
+- Fix a security issue: updated devise to 4.7.1 to fix [CVE-2019-16109](https://nvd.nist.gov/vuln/detail/CVE-2019-16109)
+- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_ONLINE_PAYMENT` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] -> (only dev) `rvm install ruby-2.3.8 && rvm use && bundle install`
+
 ## v4.0.4 2019 August 14
+- Fix a bug: #140 VAT rate is erroneous in invoices.
+
 - Fix a bug: #140 VAT rate is erroneous in invoices.
   Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3)  to regenerate the invoices since August 1st (if 
 - [TODO DEPLOY] `rake fablab:maintenance:regenerate_invoices[2019,8]`

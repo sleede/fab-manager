@@ -9,12 +9,8 @@ class Reservations::Reserve
     @operator_profile_id = operator_profile_id
   end
 
-  def pay_and_save(reservation, payment_method, coupon)
+  def pay_and_save(reservation, coupon: nil, payment_intent_id: nil)
     reservation.statistic_profile_id = StatisticProfile.find_by(user_id: user_id).id
-    if payment_method == :local
-      reservation.save_with_local_payment(operator_profile_id, coupon)
-    elsif payment_method == :stripe
-      reservation.save_with_payment(operator_profile_id, coupon)
-    end
+    reservation.save_with_payment(operator_profile_id, coupon, payment_intent_id)
   end
 end

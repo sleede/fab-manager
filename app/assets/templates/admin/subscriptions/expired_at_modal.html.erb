@@ -3,12 +3,14 @@
 </div>
 <div class="modal-body m-lg">
     <div class="alert alert-danger">
-      <p ng-show="free" translate>
-        {{ 'you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days' }}
-      </p>
-      <p ng-hide="free" translate>
-        {{ 'you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription' }}
-      </p>
+      <div ng-show="free">
+        <p translate>{{ 'you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days' }}</p>
+        <p translate>{{ 'credits_will_remain_unchanged' }}</p>
+      </div>
+      <div ng-hide="free">
+        <p translate>{{ 'you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription' }}</p>
+        <p translate>{{ 'credits_will_be_reset' }}</p>
+      </div>
     </div>
     <form role="form" name="subscriptionForm" novalidate>
       <div class="form-group">

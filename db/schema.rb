@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190730085826) do
+ActiveRecord::Schema.define(version: 20190910141336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 20190730085826) do
     t.integer  "invoicing_profile_id"
     t.integer  "operator_profile_id"
     t.integer  "statistic_profile_id"
+    t.string   "stp_payment_intent_id"
   end
 
   add_index "invoices", ["coupon_id"], name: "index_invoices_on_coupon_id", using: :btree
@@ -550,15 +551,13 @@ ActiveRecord::Schema.define(version: 20190730085826) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "reservable_id"
-    t.string   "reservable_type",      limit: 255
-    t.string   "stp_invoice_id",       limit: 255
+    t.string   "reservable_type"
     t.integer  "nb_reserve_places"
     t.integer  "statistic_profile_id"
   end
 
   add_index "reservations", ["reservable_id", "reservable_type"], name: "index_reservations_on_reservable_id_and_reservable_type", using: :btree
   add_index "reservations", ["statistic_profile_id"], name: "index_reservations_on_statistic_profile_id", using: :btree
-  add_index "reservations", ["stp_invoice_id"], name: "index_reservations_on_stp_invoice_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

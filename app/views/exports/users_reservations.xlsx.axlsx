@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 
-header = wb.styles.add_style :b => true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
+header = wb.styles.add_style b: true, :bg_color => Stylesheet.primary.upcase.gsub('#', 'FF'), :fg_color => 'FFFFFFFF'
 date = wb.styles.add_style :format_code => Rails.application.secrets.excel_date_format
 
 wb.add_worksheet(name: t('export_reservations.reservations')) do |sheet|
@@ -10,7 +10,7 @@ wb.add_worksheet(name: t('export_reservations.reservations')) do |sheet|
   columns = [t('export_reservations.customer_id'), t('export_reservations.customer'), t('export_reservations.email'),
              t('export_reservations.reservation_date'), t('export_reservations.reservation_type'), t('export_reservations.reservation_object'),
              t('export_reservations.slots_number_hours_tickets'), t('export_reservations.payment_method')]
-  sheet.add_row columns, :style => header
+  sheet.add_row columns, style: header
 
   # data rows
   @reservations.each do |resrv|
@@ -22,11 +22,11 @@ wb.add_worksheet(name: t('export_reservations.reservations')) do |sheet|
         resrv.reservable_type,
         (resrv.reservable.nil? ? '' : resrv.reservable.name),
         (resrv.reservable_type == 'Event') ? resrv.total_booked_seats: resrv.slots.count,
-        (resrv.stp_invoice_id.nil?)? t('export_reservations.local_payment') : t('export_reservations.online_payment')
+        (resrv.invoice.paid_with_stripe?) ? t('export_reservations.local_payment') : t('export_reservations.online_payment')
     ]
     styles = [nil, nil, nil, date, nil, nil, nil, nil]
     types = [:integer, :string, :string, :date, :string, :string, :integer, :string]
 
-    sheet.add_row data, :style =>  styles, :types => types
+    sheet.add_row data, style: styles, types: types
   end
 end

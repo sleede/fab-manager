@@ -1,4 +1,4 @@
-<div>
+<div xmlns:stripe="http://www.w3.org/1999/xhtml">
   <div class="modal-header">
     <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
     <h1 translate>{{ 'online_payment' }}</h1>
@@ -7,29 +7,14 @@
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
     <div class="panel panel-default bg-light m-n">
-      <form name="stripeForm" stripe:form="payment" class="form-horizontal">
+      <form name="stripeForm" stripe:form cart-items="cartItems" on-payment-success="onPaymentSuccess" class="form-horizontal">
         <div class="panel-body">
 
           <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
           <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
 
-          <div class="form-group" ng-class="{'has-error': stripeForm.number.$dirty && stripeForm.number.$invalid}">
-            <div class="col-sm-12">
-              <input autocomplete="off" class="form-control card-number" placeholder="{{ 'enter_your_card_number' | translate }}" type="text" data-stripe="number" name="number" ng-model="cardNumero" required ng-minlength="14" ng-maxlength="16" ng-pattern="/^\d+$/">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-4" ng-class="{'has-error': stripeForm.expMonth.$dirty && stripeForm.expMonth.$invalid}">
-              <input class="form-control card-expiry-month" placeholder="MM" type="text" data-stripe="exp-month" name="expMonth" ng-model="expMonth" required ng-minlength="1" ng-maxlength="2" ng-pattern="/^\d+$/">
-            </div>
-            <div class="col-sm-4" ng-class="{'has-error': stripeForm.expYear.$dirty && stripeForm.expYear.$invalid}">
-              <input class="form-control card-expiry-year" placeholder="YYYY" type="text" data-stripe="exp-year" name="expYear" ng-model="expYear" required ng-minlength="4" ng-maxlength="4" ng-pattern="/^\d+$/">
-            </div>
-            <div class="col-sm-4" ng-class="{'has-error': stripeForm.cvc.$dirty && stripeForm.cvc.$invalid}">
-              <input autocomplete="off" class="form-control card-cvc" placeholder="CVC" type="text" data-stripe="cvc" name="cvc" ng-model="cvc" required ng-minlength="3" ng-maxlength="4" ng-pattern="/^\d+$/">
-            </div>
-          </div>
+          <div id="card-element"></div>
+          <div id="card-errors" role="alert"></div>
 
           <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
             <div class="col-sm-12 text-sm checkbox-group">

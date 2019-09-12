@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <div class="m-t-md font-sbold">{{ 'cart.total_' | translate }} {{amountTotal | currency}}</div>
+    <div class="m-t-md font-sbold">{{ 'cart.total_' | translate }} {{amountPaid | currency}}</div>
 
     <div class="alert alert-success" ng-if="user.subscribed_plan">{{ 'cart.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
       {{ 'cart.your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'cart.dashboard' }}</a>
