@@ -10,7 +10,10 @@ class AccountingExportWorker
     raise SecurityError, 'Not allowed to export' unless export.user.admin?
 
     data = JSON.parse(export.query)
-    service = AccountingExportService.new(data['columns'], data['encoding'], export.extension, export.key, data['date_format'])
+    service = AccountingExportService.new(
+      data['columns'],
+      encoding: data['encoding'], format: export.extension, separator: export.key, date_format: data['date_format']
+    )
 
     service.export(data['start_date'], data['end_date'], export.file)
 

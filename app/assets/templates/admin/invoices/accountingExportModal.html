@@ -61,6 +61,12 @@
       <div class="col-md-8">
         <a href="https://apidock.com/ruby/DateTime/strftime" class="help-cursor" target="_blank">{{ exportTarget.settings.dateFormat }}</a>
       </div>
+      <div class="col-md-4 font-bold" translate>{{ 'invoices.labelMaxLength' }}</div>
+      <div class="col-md-8">{{ exportTarget.settings.labelMaxLength }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'invoices.decimalSeparator' }}</div>
+      <div class="col-md-8">{{ exportTarget.settings.decimalSeparator }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'invoices.exportInvoicesAtZero' }}</div>
+      <div class="col-md-8" translate>{{ exportTarget.settings.exportInvoicesAtZero ? 'yes' : 'no' }}</div>
       <div class="col-md-4 font-bold" translate>{{ 'invoices.columns' }}</div>
       <table class="col-md-12 export-table-template">
         <thead>

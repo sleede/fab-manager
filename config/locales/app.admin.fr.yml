@@ -482,6 +482,9 @@ fr:
           encoding: "Encodage"
           separator: "Séparateur"
           dateFormat: "Format de date"
+          labelMaxLength: "Étiquette (max)"
+          decimalSeparator: "Séparateur décimal"
+          exportInvoicesAtZero: "Exporter les factures à 0"
           columns: "Colonnes"
           exportColumns:
             journal_code: "Code journal"

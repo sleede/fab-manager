@@ -482,6 +482,9 @@ es:
           encoding: "Encoding"                                                         # translation_missing
           separator: "Separator"                                                       # translation_missing
           dateFormat: "Date format"                                                    # translation_missing
+          labelMaxLength: "Label maximum length"                                       # translation_missing
+          decimalSeparator: "Decimal separator"                                        # translation_missing
+          exportInvoicesAtZero: "Export invoices equal to 0"                           # translation_missing
           columns: "Columns"                                                           # translation_missing
           exportColumns:                                                               # translation_missing
             journal_code: "Journal code"                                               # translation_missing

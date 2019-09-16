@@ -4,7 +4,7 @@
 class AccountingExportService
   attr_reader :encoding, :format, :separator, :journal_code, :date_format, :columns, :vat_service
 
-  def initialize(columns, encoding = 'UTF-8', format = 'CSV', separator = ';', date_format = '%d/%m/%Y')
+  def initialize(columns, encoding: 'UTF-8', format: 'CSV', separator: ';', date_format: '%d/%m/%Y')
     @encoding = encoding
     @format = format
     @separator = separator

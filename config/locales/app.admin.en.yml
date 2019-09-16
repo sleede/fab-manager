@@ -482,6 +482,9 @@ en:
           encoding: "Encoding"
           separator: "Separator"
           dateFormat: "Date format"
+          labelMaxLength: "Label (max)"
+          decimalSeparator: "Decimal separator"
+          exportInvoicesAtZero: "Export invoices equal to 0"
           columns: "Columns"
           exportColumns:
             journal_code: "Journal code"
