@@ -82,13 +82,21 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         name: 'accounting_journal_code',
         value: settings['accounting_journal_code']
       },
-      clientCode: {
-        name: 'accounting_client_code',
-        value: settings['accounting_client_code']
+      cardClientCode: {
+        name: 'accounting_card_client_code',
+        value: settings['accounting_card_client_code']
       },
-      clientLabel: {
-        name: 'accounting_client_label',
-        value: settings['accounting_client_label']
+      cardClientLabel: {
+        name: 'accounting_card_client_label',
+        value: settings['accounting_card_client_label']
+      },
+      siteClientCode: {
+        name: 'accounting_site_client_code',
+        value: settings['accounting_site_client_code']
+      },
+      siteClientLabel: {
+        name: 'accounting_site_client_label',
+        value: settings['accounting_site_client_label']
       },
       walletCode: {
         name: 'accounting_wallet_code',
@@ -535,14 +543,12 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     }
 
     /**
-     * Callback to save the setting value to the database
-     * @param setting {{value:*, name:string}} note that the value will be stringified
+     * Callback to bulk save all settings in the page to the database with their values
      */
-    $scope.save = function(setting) {
-      Setting.update(
-        { name: setting.name },
-        { value: setting.value },
-        function () { growl.success(_t('invoices.customization_of_SETTING_successfully_saved', { SETTING: _t(`invoices.${setting.name}`) })); },
+    $scope.save = function() {
+      Setting.bulkUpdate(
+        { settings: Object.values($scope.settings) },
+        function () { growl.success(_t('invoices.codes_customization_success')); },
         function (error) { console.log(error); }
       );
     }
@@ -1010,12 +1016,12 @@ Application.Controllers.controller('AccountingExportModalController', ['$scope',
 
   /**
    * Prepare the query for the export API
-   * @returns {{extension: *, query: *, category: string, type: string, key: *}}
+   * @returns {{extension: *, query: *, category: string, type: *, key: *}}
    */
   const mkQuery = function() {
     return {
       category: 'accounting',
-      type: 'accounting-software',
+      type: $scope.exportTarget.software,
       extension: $scope.exportTarget.settings.format,
       key: $scope.exportTarget.settings.separator,
       query: JSON.stringify({

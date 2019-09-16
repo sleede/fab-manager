@@ -214,117 +214,99 @@
               <div class="col-md-6">
                 <label for="journalCode" translate>{{ 'invoices.accounting_journal_code' }}</label>
                 <input type="text" id="journalCode" ng-model="settings.journalCode.value" class="form-control" placeholder="{{ 'invoices.general_journal_code' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.journalCode)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
-                <label for="clientCode" translate>{{ 'invoices.accounting_client_code' }}</label>
-                <input type="text" id="clientCode" ng-model="settings.clientCode.value" class="form-control" placeholder="{{ 'invoices.general_client_code' | translate }}" />
-                <button name="button" class="btn btn-warning" ng-click="save(settings.clientCode)" translate>{{ 'save' }}</button>
+              <div class="col-md-6">
+                <label for="cardClientCode" translate>{{ 'invoices.accounting_card_client_code' }}</label>
+                <input type="text" id="cardClientCode" ng-model="settings.cardClientCode.value" class="form-control" placeholder="{{ 'invoices.card_client_code' | translate }}" />
               </div>
-              <div class="col-md-4">
-                <label for="clientLabel" translate>{{ 'invoices.accounting_client_label' }}</label>
-                <input type="text" id="clientLabel" ng-model="settings.clientLabel.value" class="form-control" placeholder="{{ 'invoices.general_client_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.clientLabel)" translate>{{ 'save' }}</button>
+              <div class="col-md-6">
+                <label for="cardClientLabel" translate>{{ 'invoices.accounting_card_client_label' }}</label>
+                <input type="text" id="cardClientLabel" ng-model="settings.cardClientLabel.value" class="form-control" placeholder="{{ 'invoices.card_client_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
+                <label for="siteClientCode" translate>{{ 'invoices.accounting_site_client_code' }}</label>
+                <input type="text" id="siteClientCode" ng-model="settings.siteClientCode.value" class="form-control" placeholder="{{ 'invoices.site_client_code' | translate }}" />
+              </div>
+              <div class="col-md-6">
+                <label for="siteClientLabel" translate>{{ 'invoices.accounting_site_client_label' }}</label>
+                <input type="text" id="siteClientLabel" ng-model="settings.siteClientLabel.value" class="form-control" placeholder="{{ 'invoices.site_client_label' | translate }}"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
                 <label for="walletCode" translate>{{ 'invoices.accounting_wallet_code' }}</label>
                 <input type="text" id="walletCode" ng-model="settings.walletCode.value" class="form-control" placeholder="{{ 'invoices.general_wallet_code' | translate }}" />
-                <button name="button" class="btn btn-warning" ng-click="save(settings.walletCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="walletLabel" translate>{{ 'invoices.accounting_wallet_label' }}</label>
                 <input type="text" id="walletLabel" ng-model="settings.walletLabel.value" class="form-control" placeholder="{{ 'invoices.general_wallet_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.walletLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="vatCode" translate>{{ 'invoices.accounting_vat_code' }}</label>
                 <input type="text" id="vatCode" ng-model="settings.vatCode.value" class="form-control" placeholder="{{ 'invoices.general_vat_code' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.vatCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="vatLabel" translate>{{ 'invoices.accounting_vat_label' }}</label>
                 <input type="text" id="vatLabel" ng-model="settings.vatLabel.value" class="form-control" placeholder="{{ 'invoices.general_vat_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.vatLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="subscriptionCode" translate>{{ 'invoices.accounting_subscription_code' }}</label>
                 <input type="text" id="subscriptionCode" ng-model="settings.subscriptionCode.value" class="form-control" placeholder="{{ 'invoices.general_subscription_code' | translate }}" />
-                <button name="button" class="btn btn-warning" ng-click="save(settings.subscriptionCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="subscriptionLabel" translate>{{ 'invoices.accounting_subscription_label' }}</label>
                 <input type="text" id="subscriptionLabel" ng-model="settings.subscriptionLabel.value" class="form-control" placeholder="{{ 'invoices.general_subscription_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.subscriptionLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="machineCode" translate>{{ 'invoices.accounting_Machine_code' }}</label>
                 <input type="text" id="machineCode" ng-model="settings.machineCode.value" class="form-control" placeholder="{{ 'invoices.general_machine_code' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.machineCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="machineLabel" translate>{{ 'invoices.accounting_Machine_label' }}</label>
                 <input type="text" id="machineLabel" ng-model="settings.machineLabel.value" class="form-control" placeholder="{{ 'invoices.general_machine_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.machineLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="trainingCode" translate>{{ 'invoices.accounting_Training_code' }}</label>
                 <input type="text" id="trainingCode" ng-model="settings.trainingCode.value" class="form-control" placeholder="{{ 'invoices.general_training_code' | translate }}" />
-                <button name="button" class="btn btn-warning" ng-click="save(settings.trainingCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="trainingLabel" translate>{{ 'invoices.accounting_Training_label' }}</label>
                 <input type="text" id="trainingLabel" ng-model="settings.trainingLabel.value" class="form-control" placeholder="{{ 'invoices.general_training_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.trainingLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="eventCode" translate>{{ 'invoices.accounting_Event_code' }}</label>
                 <input type="text" id="eventCode" ng-model="settings.eventCode.value" class="form-control" placeholder="{{ 'invoices.general_event_code' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.eventCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="eventLabel" translate>{{ 'invoices.accounting_Event_label' }}</label>
                 <input type="text" id="eventLabel" ng-model="settings.eventLabel.value" class="form-control" placeholder="{{ 'invoices.general_event_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.eventLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="spaceCode" translate>{{ 'invoices.accounting_Space_code' }}</label>
                 <input type="text" id="spaceCode" ng-model="settings.spaceCode.value" class="form-control" placeholder="{{ 'invoices.general_space_code' | translate }}" />
-                <button name="button" class="btn btn-warning" ng-click="save(settings.spaceCode)" translate>{{ 'save' }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="spaceLabel" translate>{{ 'invoices.accounting_Space_label' }}</label>
                 <input type="text" id="spaceLabel" ng-model="settings.spaceLabel.value" class="form-control" placeholder="{{ 'invoices.general_space_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.spaceLabel)" translate>{{ 'save' }}</button>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-4">
-                <label for="couponCode" translate>{{ 'invoices.accounting_coupon_code' }}</label>
-                <input type="text" id="couponCode" ng-model="settings.couponCode.value" class="form-control" placeholder="{{ 'invoices.general_coupon_code' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.couponCode)" translate>{{ 'save' }}</button>
-              </div>
-              <div class="col-md-4">
-                <label for="couponLabel" translate>{{ 'invoices.accounting_coupon_label' }}</label>
-                <input type="text" id="couponLabel" ng-model="settings.couponLabel.value" class="form-control" placeholder="{{ 'invoices.general_coupon_label' | translate }}"/>
-                <button name="button" class="btn btn-warning" ng-click="save(settings.couponLabel)" translate>{{ 'save' }}</button>
-              </div>
-            </div>
+            <button name="button" class="btn btn-warning m-t-lg" ng-click="save()" translate>{{ 'save' }}</button>
           </div>
         </div>
       </uib-tab>

@@ -68,7 +68,7 @@ class API::ExportsController < API::ApiController
       end
     when 'accounting'
       case type
-      when 'accounting-software'
+      when 'acd'
         export = export.where('created_at > ?', Invoice.maximum('updated_at'))
       else
         raise ArgumentError, "Unknown type accounting/#{type}"

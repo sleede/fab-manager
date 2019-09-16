@@ -70,7 +70,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << label(invoice.invoicing_profile.full_name)
+        row << label(invoice.invoicing_profile&.full_name)
       when 'debit_origin'
         row << debit_client(invoice, total)
       when 'credit_origin'

@@ -435,10 +435,14 @@ es:
           accounting_codes: "Accounting codes"                                         # translation_missing
           accounting_journal_code: "Journal code"                                      # translation_missing
           general_journal_code: "Journal code"                                         # translation_missing
-          accounting_client_code: "Customers code"                                     # translation_missing
-          general_client_code: "Accounting code for all customers"                     # translation_missing
-          accounting_client_label: "Customers label"                                   # translation_missing
-          general_client_label: "Account label for all customers"                      # translation_missing
+          accounting_card_client_code: "Card clients code"                             # translation_missing
+          card_client_code: "Accounting code for clients who paid by card"             # translation_missing
+          accounting_card_client_label: "Card clients label"                           # translation_missing
+          card_client_label: "Account label for clients who paid by card"              # translation_missing
+          accounting_site_client_code: "On site client code"                           # translation_missing
+          site_client_code: "Accounting code for clients who paid on site"             # translation_missing
+          accounting_site_client_label: "On site client label"                         # translation_missing
+          site_client_label: "Accounting label for clients who paid on site"           # translation_missing
           accounting_wallet_code: "Wallet code"                                        # translation_missing
           general_wallet_code: "Accounting code for wallet credit"                     # translation_missing
           accounting_wallet_label: "Wallet label"                                      # translation_missing
@@ -467,11 +471,7 @@ es:
           general_space_code: "Accounting code for all spaces"                         # translation_missing
           accounting_Space_label: "Spaces label"                                       # translation_missing
           general_space_label: "Account label for all spaces"                          # translation_missing
-          accounting_coupon_code: "Coupons code"                                       # translation_missing
-          general_coupon_code: "Accounting code for all coupons"                       # translation_missing
-          accounting_coupon_label: "Coupons label"                                     # translation_missing
-          general_coupon_label: "Account label for all coupons"                        # translation_missing
-          customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation                                   # translation_missing
+          codes_customization_success: "Customization of accounting codes successfully saved."  # angular interpolation                                   # translation_missing
           export_accounting_data: "Export accounting data"                             # translation_missing
           export_to: "Export to the accounting software"                               # translation_missing
           export_is_running: "Exportando, será notificado cuando esté listo."

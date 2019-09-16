@@ -15,7 +15,7 @@ class API::AccountingExportsController < API::ApiController
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(
         category: 'accounting',
-        export_type: 'accounting-software',
+        export_type: params[:type],
         user: current_user,
         extension: params[:extension],
         query: params[:query],
