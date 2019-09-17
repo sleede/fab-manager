@@ -2,22 +2,37 @@
 
 # Provides the routine to export the accounting data to an external accounting software
 class AccountingExportService
-  attr_reader :encoding, :format, :separator, :journal_code, :date_format, :columns, :vat_service
+  include ActionView::Helpers::NumberHelper
 
-  def initialize(columns, encoding: 'UTF-8', format: 'CSV', separator: ';', date_format: '%d/%m/%Y')
+  attr_reader :encoding, :format, :separator, :journal_code, :date_format, :columns, :vat_service, :decimal_separator, :label_max_length,
+              :export_zeros
+
+  def initialize(columns, encoding: 'UTF-8', format: 'CSV', separator: ';')
     @encoding = encoding
     @format = format
     @separator = separator
+    @decimal_separator = ','
+    @date_format = '%d/%m/%Y'
+    @label_max_length = 50
+    @export_zeros = false
     @journal_code = Setting.find_by(name: 'accounting_journal_code')&.value || ''
     @date_format = date_format
     @columns = columns
     @vat_service = VatHistoryService.new
   end
 
+  def set_options(decimal_separator: ',', date_format: '%d/%m/%Y', label_max_length: 50, export_zeros: false)
+    @decimal_separator = decimal_separator
+    @date_format = date_format
+    @label_max_length = label_max_length
+    @export_zeros = export_zeros
+  end
+
   def export(start_date, end_date, file)
     # build CVS content
     content = header_row
     invoices = Invoice.where('created_at >= ? AND created_at <= ?', start_date, end_date).order('created_at ASC')
+    invoices = invoices.where('total > 0') unless export_zeros
     invoices.each do |i|
       content << generate_rows(i)
     end
@@ -70,7 +85,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << label(invoice.invoicing_profile&.full_name)
+        row << label(invoice)
       when 'debit_origin'
         row << debit_client(invoice, total)
       when 'credit_origin'
@@ -106,7 +121,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << label(item.description)
+        row << ''
       when 'debit_origin'
         row << debit(invoice, wo_taxes)
       when 'credit_origin'
@@ -143,7 +158,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << label(subscription_item.description)
+        row << ''
       when 'debit_origin'
         row << debit(invoice, wo_taxes)
       when 'credit_origin'
@@ -179,7 +194,7 @@ class AccountingExportService
       when 'piece'
         row << invoice.reference
       when 'line_label'
-        row << I18n.t('accounting_export.VAT')
+        row << ''
       when 'debit_origin'
         row << debit(invoice, vat)
       when 'credit_origin'
@@ -202,7 +217,8 @@ class AccountingExportService
   def account(invoice, account, type = :code)
     res = case account
           when :client
-            Setting.find_by(name: "accounting_client_#{type}")&.value
+            means = invoice.paid_with_stripe? ? 'card' : 'site'
+            Setting.find_by(name: "accounting_#{means}_client_#{type}")&.value
           when :vat
             Setting.find_by(name: "accounting_VAT_#{type}")&.value
           when :subscription
@@ -226,13 +242,13 @@ class AccountingExportService
   # Fill the value of the "debit" column: if the invoice is a refund, returns the given amount, returns 0 otherwise
   def debit(invoice, amount)
     avoir = invoice.is_a? Avoir
-    avoir ? amount.to_s : '0'
+    avoir ? format_number(amount) : '0'
   end
 
   # Fill the value of the "credit" column: if the invoice is a refund, returns 0, otherwise, returns the given amount
   def credit(invoice, amount)
     avoir = invoice.is_a? Avoir
-    avoir ? '0' : amount.to_s
+    avoir ? '0' : format_number(amount)
   end
 
   # Fill the value of the "debit" column for the client row: if the invoice is a refund, returns 0, otherwise, returns the given amount
@@ -245,9 +261,19 @@ class AccountingExportService
     debit(invoice, amount)
   end
 
-  # Format the given text to match the accounting software rules for the labels
-  def label(text)
-    res = text.tr separator, ''
-    res.truncate(50)
+  # Format the given number as a string, using the configured separator
+  def format_number(num)
+    number_to_currency(num, unit: '', separator: decimal_separator, delimiter: '', precision: 2)
+  end
+
+  # Create a text from the given invoice, matching the accounting software rules for the labels
+  def label(invoice)
+    name = "#{invoice.invoicing_profile.last_name} #{invoice.invoicing_profile.first_name}".tr separator, ''
+    reference = invoice.reference
+    items = invoice.subscription_invoice? ? [I18n.t('accounting_export.subscription')] : []
+    items.push I18n.t("accounting_export.#{invoice.reservation.reservable_type}_reservation") if invoice.invoiced_type == 'Reservation'
+    summary = items.join(' + ')
+    res = "#{reference}, #{summary}"
+    "#{name.truncate(label_max_length - res.length)}, #{res}"
   end
 end

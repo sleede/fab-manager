@@ -42,8 +42,10 @@ class Setting < ActiveRecord::Base
                              display_name_enable
                              machines_sort_by
                              accounting_journal_code
-                             accounting_client_code
-                             accounting_client_label
+                             accounting_card_client_code
+                             accounting_card_client_label
+                             accounting_site_client_code
+                             accounting_site_client_label
                              accounting_wallet_code
                              accounting_wallet_label
                              accounting_VAT_code
@@ -57,9 +59,7 @@ class Setting < ActiveRecord::Base
                              accounting_Event_code
                              accounting_Event_label
                              accounting_Space_code
-                             accounting_Space_label
-                             accounting_coupon_code
-                             accounting_coupon_label] }
+                             accounting_Space_label] }
 
   after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 

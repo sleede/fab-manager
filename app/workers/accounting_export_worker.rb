@@ -12,8 +12,10 @@ class AccountingExportWorker
     data = JSON.parse(export.query)
     service = AccountingExportService.new(
       data['columns'],
-      encoding: data['encoding'], format: export.extension, separator: export.key, date_format: data['date_format']
+      encoding: data['encoding'], format: export.extension, separator: export.key
     )
+    service.set_options(date_format: data['date_format'], decimal_separator: data['decimal_separator'],
+                        label_max_length: data['label_max_length'], export_zeros: data['export_invoices_at_zero'])
 
     service.export(data['start_date'], data['end_date'], export.file)
 

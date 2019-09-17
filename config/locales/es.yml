@@ -139,6 +139,11 @@ es:
     credit_euro: "Euro credit"                                                 # translation_missing
     lettering: "Lettering"                                                     # translation_missing
     VAT: 'IVA'
+    subscription: "subscr."                                                    # translation_missing
+    Machine_reservation: "machine reserv."                                     # translation_missing
+    Training_reservation: "training reserv."                                   # translation_missing
+    Event_reservation: "event reserv."                                         # translation_missing
+    Space_reservation: "space reserv."                                         # translation_missing
 
   trainings:
     # training availabilities
@@ -321,7 +326,7 @@ es:
         users_subscriptions: "de la lista de suscripciones"
         users_reservations: "de la lista de reservas"
         availabilities_index: "de las reservas disponibles"
-        accounting_accounting-software: "de los datos contables"
+        accounting_acd: "de los datos contables para ACD"
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
       notify_member_about_coupon:

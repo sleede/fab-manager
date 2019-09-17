@@ -139,6 +139,11 @@ en:
     credit_euro: "Euro credit"
     lettering: "Lettering"
     VAT: 'VAT'
+    subscription: "subscr."
+    Machine_reservation: "machine reserv."
+    Training_reservation: "training reserv."
+    Event_reservation: "event reserv."
+    Space_reservation: "space reserv."
 
   trainings:
     # training availabilities
@@ -321,7 +326,7 @@ en:
         users_subscriptions: "of the subscriptions' list"
         users_reservations: "of the reservations' list"
         availabilities_index: "of the reservations availabilities"
-        accounting_accounting-software: "of the accounting data"
+        accounting_acd: "of the accounting data to ACD"
         is_over: "is over."
         download_here: "Download here"
       notify_member_about_coupon:
