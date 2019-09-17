@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-@settings.each do |setting|
+json.settings @settings.each do |setting|
   if setting[:errors]
     json.error setting.errors.full_messages
     json.id setting.id

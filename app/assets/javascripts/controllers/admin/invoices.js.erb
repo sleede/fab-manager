@@ -549,7 +549,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       Setting.bulkUpdate(
         { settings: Object.values($scope.settings) },
         function () { growl.success(_t('invoices.codes_customization_success')); },
-        function (error) { console.log(error); }
+        function (error) {
+          growl.error('unexpected_error_occurred');
+          console.error(error);
+        }
       );
     }
 

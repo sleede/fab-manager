@@ -101,6 +101,7 @@ pt:
         unlimited: "Ilimitado"
         payment_card_error: "A problem occurred with your payment card:"  # translation_missing
         online_payment_disabled: "El pago en línea no está disponible. Póngase en contacto directamente con la recepción de Fablab."
+        unexpected_error_occurred: "Um erro inesperado ocorreu"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Você irá perder todas as modificações não salvas se sair desta página"
