@@ -253,7 +253,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def paid_with_stripe?
-    stp_payment_intent_id? || stp_invoice_id?
+    stp_payment_intent_id? || stp_invoice_id? || payment_method == 'stripe'
   end
 
   private

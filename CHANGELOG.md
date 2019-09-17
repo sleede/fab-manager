@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Ability to configure and export the accounting data to the ACD accounting software
+- Fix a bug: invoices with total = 0, are marked as paid on site even if paid by card
 - [TODO DEPLOY] `rake db:migrate`
 
 ## v4.1.0 2019 September 12

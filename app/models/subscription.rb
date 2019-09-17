@@ -46,6 +46,7 @@ class Subscription < ActiveRecord::Base
   def generate_invoice(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
     coupon_id = nil
     total = plan.amount
+    method = InvoicingProfile.find(operator_profile_id)&.user&.admin? ? nil : 'stripe'
 
     unless coupon_code.nil?
       @coupon = Coupon.find_by(code: coupon_code)
@@ -64,7 +65,8 @@ class Subscription < ActiveRecord::Base
       total: total,
       coupon_id: coupon_id,
       operator_profile_id: operator_profile_id,
-      stp_payment_intent_id: payment_intent_id
+      stp_payment_intent_id: payment_intent_id,
+      payment_method: method
     )
     invoice.invoice_items.push InvoiceItem.new(
       amount: plan.amount,
