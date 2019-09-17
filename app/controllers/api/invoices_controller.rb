@@ -60,7 +60,7 @@ class API::InvoicesController < API::ApiController
   private
 
   def avoir_params
-    params.require(:avoir).permit(:invoice_id, :avoir_date, :avoir_mode, :subscription_to_expire, :description,
+    params.require(:avoir).permit(:invoice_id, :avoir_date, :payment_method, :subscription_to_expire, :description,
                                   invoice_items_ids: [])
   end
 

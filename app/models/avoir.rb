@@ -5,7 +5,7 @@
 class Avoir < Invoice
   belongs_to :invoice
 
-  validates :avoir_mode, inclusion: { in: %w[stripe cheque transfer none cash wallet] }
+  validates :payment_method, inclusion: { in: %w[stripe cheque transfer none cash wallet] }
 
   attr_accessor :invoice_items_ids
 
