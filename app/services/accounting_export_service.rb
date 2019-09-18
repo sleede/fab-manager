@@ -107,8 +107,7 @@ class AccountingExportService
 
   # Generate the "reservation" row, which contains the credit to the reservation account, all taxes excluded
   def reservation_row(invoice, item)
-    wo_taxes = (item.amount / (vat_service.invoice_vat(invoice) / 100.00 + 1)) / 100.00
-    wo_taxes_coupon = amount_after_coupon(invoice, wo_taxes)
+    wo_taxes_coupon = item.net_amount / 100.00
     row = ''
     columns.each do |column|
       case column
@@ -145,8 +144,7 @@ class AccountingExportService
   # Generate the "subscription" row, which contains the credit to the subscription account, all taxes excluded
   def subscription_row(invoice)
     subscription_item = invoice.invoice_items.select(&:subscription).first
-    wo_taxes = (subscription_item.amount / (vat_service.invoice_vat(invoice) / 100.00 + 1)) / 100.00
-    wo_taxes_coupon = amount_after_coupon(invoice, wo_taxes)
+    wo_taxes_coupon = subscription_item.net_amount / 100.00
     row = ''
     columns.each do |column|
       case column
@@ -186,8 +184,7 @@ class AccountingExportService
     # we do not render the VAT row if it was disabled for this invoice
     return nil if rate.zero?
 
-    # FIXME, +/-0.01
-    vat = (invoice.total - (invoice.total / (rate / 100.00 + 1))) / 100.00
+    vat = invoice.invoice_items.map(&:vat).map(&:to_i).reduce(:+) / 100.00
     row = ''
     columns.each do |column|
       case column
@@ -267,12 +264,6 @@ class AccountingExportService
   # Fill the value of the "credit" column, for the client row: if the invoice is a refund, returns the given amount, returns 0 otherwise
   def credit_client(invoice, amount)
     debit(invoice, amount)
-  end
-
-  # Return the given amount, after the coupon attached to the given invoice was applied, if any
-  def amount_after_coupon(invoice, amount)
-    cs = CouponService.new
-    invoice.coupon_id.nil? ? amount : cs.ventilate(cs.invoice_total_no_coupon(invoice), amount, invoice.coupon)
   end
 
   # Format the given number as a string, using the configured separator
