@@ -322,6 +322,7 @@ fr:
           total_amount: "Montant total"
           total_including_all_taxes: "Total TTC"
           VAT_disabled: "TVA désactivée"
+          VAT_enabled: "TVA activée"
           including_VAT: "Dont TVA"
           including_total_excluding_taxes: "Dont total HT"
           including_amount_payed_on_ordering: "Dont montant payé à la commande"

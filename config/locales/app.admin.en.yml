@@ -322,6 +322,7 @@ en:
           total_amount: "Total amount"
           total_including_all_taxes: "Total incl. all taxes"
           VAT_disabled: "VAT disabled"
+          VAT_enabled: "VAT enabled"
           including_VAT: "Including VAT"
           including_total_excluding_taxes: "Including Total excl. taxes"
           including_amount_payed_on_ordering: "Including Amount payed on ordering"

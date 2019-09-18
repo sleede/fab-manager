@@ -518,8 +518,9 @@
               <tbody>
                 <tr ng-repeat="value in history | orderBy:'-date'">
                   <td>
-                    <span class="no-user-label" ng-show="value.rate === 0" translate>{{'invoices.VAT_disabled'}}</span>
-                    <span ng-hide="value.rate === 0">{{value.rate}}</span>
+                    <span class="no-user-label" ng-show="value.enabled === false" translate>{{'invoices.VAT_disabled'}}</span>
+                    <span class="no-user-label" ng-show="value.enabled === true" translate>{{'invoices.VAT_enabled'}}</span>
+                    <span ng-show="value.rate">{{value.rate}}</span>
                   </td>
                   <td>{{value.date | amDateFormat:'L LT'}}</td>
                   <td>{{value.user.name}}<span class="no-user-label" ng-hide="value.user" translate>{{ 'invoices.deleted_user' }}</span></td>

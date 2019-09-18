@@ -413,9 +413,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
               $scope.history.push({ date: rate.created_at, rate: rate.value, user: rate.user })
             });
             activeHistory.setting.history.forEach(function (v) {
-              if (v.value === 'false') {
-                $scope.history.push({ date: v.created_at, rate: 0, user: v.user })
-              }
+              $scope.history.push({ date: v.created_at, enabled: v.value === 'true', user: v.user })
             });
           }
 

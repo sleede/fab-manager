@@ -52,9 +52,10 @@ class AccountingExportService
   end
 
   def generate_rows(invoice)
+    vat = vat_row(invoice)
     "#{client_row(invoice)}\n" \
       "#{items_rows(invoice)}" \
-      "#{vat_row(invoice)}\n"
+      "#{vat.nil? ? '' : "#{vat}\n"}"
   end
 
   # Generate the "subscription" and "reservation" rows associated with the provided invoice
@@ -181,9 +182,12 @@ class AccountingExportService
 
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
   def vat_row(invoice)
-    # FIXME, if VAT wasn't enabled, it's calculated anyway
+    rate = vat_service.invoice_vat(invoice)
+    # we do not render the VAT row if it was disabled for this invoice
+    return nil if rate.zero?
+
     # FIXME, round at +/-0.01 if total > sum(items)
-    vat = (invoice.total - (invoice.total / (vat_service.invoice_vat(invoice) / 100.00 + 1))) / 100.00
+    vat = (invoice.total - (invoice.total / (rate / 100.00 + 1))) / 100.00
     row = ''
     columns.each do |column|
       case column
