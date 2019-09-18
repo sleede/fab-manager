@@ -121,6 +121,8 @@ class PDF::Invoice < Prawn::Document
       data = [[I18n.t('invoices.details'), I18n.t('invoices.amount')]]
 
       total_calc = 0
+      total_ht = 0
+      total_vat = 0
       # going through invoice_items
       invoice.invoice_items.each do |item|
 
@@ -184,6 +186,8 @@ class PDF::Invoice < Prawn::Document
 
         data += [[details, number_to_currency(price)]]
         total_calc += price
+        total_ht += item.net_amount
+        total_vat += item.vat
       end
 
       ## subtract the coupon, if any
@@ -210,15 +214,13 @@ class PDF::Invoice < Prawn::Document
 
         # discount textual description
         literal_discount = cp.percent_off
-        if cp.type == 'amount_off'
-          literal_discount = number_to_currency(cp.amount_off / 100.00)
-        end
+        literal_discount = number_to_currency(cp.amount_off / 100.00) if cp.type == 'amount_off'
 
         # add a row for the coupon
         data += [[_t('invoices.coupon_CODE_discount_of_DISCOUNT',
                      CODE: cp.code,
                      DISCOUNT: literal_discount,
-                     TYPE: cp.type), number_to_currency(-discount)] ]
+                     TYPE: cp.type), number_to_currency(-discount)]]
       end
 
       # total verification
@@ -226,20 +228,18 @@ class PDF::Invoice < Prawn::Document
       puts "ERROR: totals are NOT equals => expected: #{total}, computed: #{total_calc}" if total_calc != total
 
       # TVA
-      if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
+      vat_service = VatHistoryService.new
+      vat_rate = vat_service.invoice_vat(invoice)
+      if vat_rate != 0
         data += [[I18n.t('invoices.total_including_all_taxes'), number_to_currency(total)]]
-
-        vat_service = VatHistoryService.new
-        vat_rate = vat_service.invoice_vat(invoice)
-        vat = total / (vat_rate / 100.00 + 1)
-        data += [[I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(total - vat)]]
-        data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(vat)]]
+        data += [[I18n.t('invoices.including_VAT_RATE', RATE: vat_rate), number_to_currency(total_vat / 100.00)]]
+        data += [[I18n.t('invoices.including_total_excluding_taxes'), number_to_currency(total_ht / 100.00)]]
         data += [[I18n.t('invoices.including_amount_payed_on_ordering'), number_to_currency(total)]]
 
         # checking the round number
-        rounded = sprintf('%.2f', vat).to_f + sprintf('%.2f', total - vat).to_f
+        rounded = sprintf('%.2f', total_vat / 100.00).to_f + sprintf('%.2f', total_ht / 100.00).to_f
         if rounded != sprintf('%.2f', total_calc).to_f
-          puts 'ERROR: rounding the numbers cause an invoice inconsistency. ' +
+          puts 'ERROR: rounding the numbers cause an invoice inconsistency. ' \
                "Total expected: #{sprintf('%.2f', total_calc)}, total computed: #{rounded}"
         end
       else

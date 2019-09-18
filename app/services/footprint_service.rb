@@ -7,7 +7,7 @@ class FootprintService
   # @param item an instance of the provided class
   # @param sort the items in database by the provided criterion, to find the previous one
   def self.compute_footprint(klass, item, sort_on = 'id')
-    raise TypeError unless item.class.name == klass.name
+    raise TypeError unless item.is_a? klass
 
     previous = klass.where("#{sort_on} < ?", item[sort_on])
                     .order("#{sort_on} DESC")

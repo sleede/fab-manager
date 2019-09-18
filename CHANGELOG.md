@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Ability to configure and export the accounting data to the ACD accounting software
+- Compute the VAT per item in each invoices, instead of globally
 - Fix a bug: invoices with total = 0, are marked as paid on site even if paid by card
 - [TODO DEPLOY] `rake db:migrate`
 

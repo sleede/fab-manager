@@ -21,6 +21,25 @@ class InvoiceItem < ActiveRecord::Base
     footprint == compute_footprint
   end
 
+  def amount_after_coupon
+    # deduct coupon discount
+    coupon_service = CouponService.new
+    coupon_service.ventilate(invoice.total, amount, invoice.coupon)
+  end
+
+  # return the item amount, coupon discount deducted, if any, and VAT excluded, if applicable
+  def net_amount
+    # deduct VAT
+    vat_service = VatHistoryService.new
+    vat_rate = vat_service.invoice_vat(invoice)
+    Rational(amount_after_coupon / (vat_rate / 100.00 + 1)).round.to_f
+  end
+
+  # return the VAT amount for this item
+  def vat
+    amount_after_coupon - net_amount
+  end
+
   private
 
   def compute_footprint
