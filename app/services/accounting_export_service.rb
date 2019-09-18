@@ -186,7 +186,7 @@ class AccountingExportService
     # we do not render the VAT row if it was disabled for this invoice
     return nil if rate.zero?
 
-    # FIXME, round at +/-0.01 if total > sum(items)
+    # FIXME, +/-0.01
     vat = (invoice.total - (invoice.total / (rate / 100.00 + 1))) / 100.00
     row = ''
     columns.each do |column|
@@ -237,7 +237,7 @@ class AccountingExportService
             end
           when :reservation
             if invoice.invoiced_type == 'Reservation'
-            Setting.find_by(name: "accounting_#{invoice.invoiced.reservable_type}_#{type}")&.value
+              Setting.find_by(name: "accounting_#{invoice.invoiced.reservable_type}_#{type}")&.value
             else
               puts "WARN: Invoice #{invoice.id} has no reservation"
             end

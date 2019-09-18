@@ -302,14 +302,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def compute_footprint
-    previous = Invoice.where('id < ?', id)
-                      .order('id DESC')
-                      .limit(1)
-
-    columns  = Invoice.columns.map(&:name)
-                      .delete_if { |c| %w[footprint updated_at].include? c }
-
-    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
+    FootprintService.compute_footprint(Invoice, self)
   end
 
   def log_changes
