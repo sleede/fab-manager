@@ -48,52 +48,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def generate_reference
-    pattern = Setting.find_by(name: 'invoice_reference').value
-
-    # invoice number per day (dd..dd)
-    reference = pattern.gsub(/d+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('day'), match.to_s.length)
-    end
-    # invoice number per month (mm..mm)
-    reference.gsub!(/m+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('month'), match.to_s.length)
-    end
-    # invoice number per year (yy..yy)
-    reference.gsub!(/y+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('year'), match.to_s.length)
-    end
-
-    # full year (YYYY)
-    reference.gsub!(/YYYY(?![^\[]*\])/, Time.now.strftime('%Y'))
-    # year without century (YY)
-    reference.gsub!(/YY(?![^\[]*\])/, Time.now.strftime('%y'))
-
-    # abreviated month name (MMM)
-    reference.gsub!(/MMM(?![^\[]*\])/, Time.now.strftime('%^b'))
-    # month of the year, zero-padded (MM)
-    reference.gsub!(/MM(?![^\[]*\])/, Time.now.strftime('%m'))
-    # month of the year, non zero-padded (M)
-    reference.gsub!(/M(?![^\[]*\])/, Time.now.strftime('%-m'))
-
-    # day of the month, zero-padded (DD)
-    reference.gsub!(/DD(?![^\[]*\])/, Time.now.strftime('%d'))
-    # day of the month, non zero-padded (DD)
-    reference.gsub!(/DD(?![^\[]*\])/, Time.now.strftime('%-d'))
-
-    # information about online selling (X[text])
-    if paid_with_stripe?
-      reference.gsub!(/X\[([^\]]+)\]/, '\1')
-    else
-      reference.gsub!(/X\[([^\]]+)\]/, ''.to_s)
-    end
-
-    # information about wallet (W[text])
-    # reference.gsub!(/W\[([^\]]+)\]/, ''.to_s)
-
-    # remove information about refunds (R[text])
-    reference.gsub!(/R\[([^\]]+)\]/, ''.to_s)
-
-    self.reference = reference
+    self.reference = InvoiceReferenceService.generate_reference(self)
   end
 
   def update_reference
@@ -102,43 +57,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def order_number
-    pattern = Setting.find_by(name: 'invoice_order-nb').value
-
-    # global invoice number (nn..nn)
-    reference = pattern.gsub(/n+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('global'), match.to_s.length)
-    end
-    # invoice number per year (yy..yy)
-    reference.gsub!(/y+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('year'), match.to_s.length)
-    end
-    # invoice number per month (mm..mm)
-    reference.gsub!(/m+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('month'), match.to_s.length)
-    end
-    # invoice number per day (dd..dd)
-    reference.gsub!(/d+(?![^\[]*\])/) do |match|
-      pad_and_truncate(number_of_invoices('day'), match.to_s.length)
-    end
-
-    # full year (YYYY)
-    reference.gsub!(/YYYY(?![^\[]*\])/, created_at.strftime('%Y'))
-    # year without century (YY)
-    reference.gsub!(/YY(?![^\[]*\])/, created_at.strftime('%y'))
-
-    # abbreviated month name (MMM)
-    reference.gsub!(/MMM(?![^\[]*\])/, created_at.strftime('%^b'))
-    # month of the year, zero-padded (MM)
-    reference.gsub!(/MM(?![^\[]*\])/, created_at.strftime('%m'))
-    # month of the year, non zero-padded (M)
-    reference.gsub!(/M(?![^\[]*\])/, created_at.strftime('%-m'))
-
-    # day of the month, zero-padded (DD)
-    reference.gsub!(/DD(?![^\[]*\])/, created_at.strftime('%d'))
-    # day of the month, non zero-padded (DD)
-    reference.gsub!(/DD(?![^\[]*\])/, created_at.strftime('%-d'))
-
-    reference
+    InvoiceReferenceService.generate_order_number(self)
   end
 
   # for debug & used by rake task "fablab:maintenance:regenerate_invoices"
@@ -148,7 +67,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def build_avoir(attrs = {})
-    raise Exception if refunded? === true || prevent_refund?
+    raise Exception if refunded? == true || prevent_refund?
 
     avoir = Avoir.new(dup.attributes)
     avoir.type = 'Avoir'
@@ -256,12 +175,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_wallet_transaction(amount, transaction_id)
-    if check_footprint
-      update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
-      chain_record
-    else
-      raise InvalidFootprintError
-    end
+    raise InvalidFootprintError unless check_footprint
+
+    update_columns(wallet_amount: amount, wallet_transaction_id: transaction_id)
+    chain_record
   end
 
   def paid_with_stripe?
@@ -276,41 +193,6 @@ class Invoice < ActiveRecord::Base
            "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
     end
     InvoiceWorker.perform_async(id, user&.subscription&.expired_at)
-  end
-
-  ##
-  # Output the given integer with leading zeros. If the given value is longer than the given
-  # length, it will be truncated.
-  # @param value {Integer} the integer to pad
-  # @param length {Integer} the length of the resulting string.
-  ##
-  def pad_and_truncate(value, length)
-    value.to_s.rjust(length, '0').gsub(/^.*(.{#{length},}?)$/m, '\1')
-  end
-
-  ##
-  # Returns the number of current invoices in the given range around the current date.
-  # If range is invalid or not specified, the total number of invoices is returned.
-  # @param range {String} 'day', 'month', 'year'
-  # @return {Integer}
-  ##
-  def number_of_invoices(range)
-    case range.to_s
-    when 'day'
-      start = DateTime.current.beginning_of_day
-      ending = DateTime.current.end_of_day
-    when 'month'
-      start = DateTime.current.beginning_of_month
-      ending = DateTime.current.end_of_month
-    when 'year'
-      start = DateTime.current.beginning_of_year
-      ending = DateTime.current.end_of_year
-    else
-      return id
-    end
-    return Invoice.count unless defined? start && defined? ending
-
-    Invoice.where('created_at >= :start_date AND created_at < :end_date', start_date: start, end_date: ending).length
   end
 
   def compute_footprint
