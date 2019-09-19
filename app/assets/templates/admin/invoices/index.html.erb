@@ -228,12 +228,22 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="siteClientCode" translate>{{ 'invoices.accounting_site_client_code' }}</label>
-                <input type="text" id="siteClientCode" ng-model="settings.siteClientCode.value" class="form-control" placeholder="{{ 'invoices.site_client_code' | translate }}" />
+                <label for="walletClientCode" translate>{{ 'invoices.accounting_wallet_client_code' }}</label>
+                <input type="text" id="walletClientCode" ng-model="settings.walletClientCode.value" class="form-control" placeholder="{{ 'invoices.wallet_client_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="siteClientLabel" translate>{{ 'invoices.accounting_site_client_label' }}</label>
-                <input type="text" id="siteClientLabel" ng-model="settings.siteClientLabel.value" class="form-control" placeholder="{{ 'invoices.site_client_label' | translate }}"/>
+                <label for="walletClientLabel" translate>{{ 'invoices.accounting_wallet_client_label' }}</label>
+                <input type="text" id="walletClientLabel" ng-model="settings.walletClientLabel.value" class="form-control" placeholder="{{ 'invoices.wallet_client_label' | translate }}"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="otherClientCode" translate>{{ 'invoices.accounting_other_client_code' }}</label>
+                <input type="text" id="otherClientCode" ng-model="settings.otherClientCode.value" class="form-control" placeholder="{{ 'invoices.other_client_code' | translate }}" />
+              </div>
+              <div class="col-md-6">
+                <label for="otherClientLabel" translate>{{ 'invoices.accounting_other_client_label' }}</label>
+                <input type="text" id="otherClientLabel" ng-model="settings.otherClientLabel.value" class="form-control" placeholder="{{ 'invoices.other_client_label' | translate }}"/>
               </div>
             </div>
             <div class="row">

@@ -44,8 +44,10 @@ class Setting < ActiveRecord::Base
                              accounting_journal_code
                              accounting_card_client_code
                              accounting_card_client_label
-                             accounting_site_client_code
-                             accounting_site_client_label
+                             accounting_wallet_client_code
+                             accounting_wallet_client_label
+                             accounting_other_client_code
+                             accounting_other_client_label
                              accounting_wallet_code
                              accounting_wallet_label
                              accounting_VAT_code

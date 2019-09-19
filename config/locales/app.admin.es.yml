@@ -440,10 +440,14 @@ es:
           card_client_code: "Accounting code for clients who paid by card"             # translation_missing
           accounting_card_client_label: "Card clients label"                           # translation_missing
           card_client_label: "Account label for clients who paid by card"              # translation_missing
-          accounting_site_client_code: "On site client code"                           # translation_missing
-          site_client_code: "Accounting code for clients who paid on site"             # translation_missing
-          accounting_site_client_label: "On site client label"                         # translation_missing
-          site_client_label: "Accounting label for clients who paid on site"           # translation_missing
+          accounting_wallet_client_code: "Wallet clients code"                         # translation_missing
+          wallet_client_code: "Accounting code for clients who paid by virtual wallet" # translation_missing
+          accounting_wallet_client_label: "Wallet clients label"                       # translation_missing
+          wallet_client_label: "Account label for clients who paid by virtual wallet"  # translation_missing
+          accounting_other_client_code: "Other means client code"                      # translation_missing
+          other_client_code: "Accounting code for clients who paid using another payment means" # translation_missing
+          accounting_other_client_label: "Other means client label"                    # translation_missing
+          other_client_label: "Accounting label for clients who paid using another payment means" # translation_missing
           accounting_wallet_code: "Wallet code"                                        # translation_missing
           general_wallet_code: "Accounting code for wallet credit"                     # translation_missing
           accounting_wallet_label: "Wallet label"                                      # translation_missing

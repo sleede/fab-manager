@@ -90,13 +90,21 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         name: 'accounting_card_client_label',
         value: settings['accounting_card_client_label']
       },
-      siteClientCode: {
-        name: 'accounting_site_client_code',
-        value: settings['accounting_site_client_code']
+      walletClientCode: {
+        name: 'accounting_wallet_client_code',
+        value: settings['accounting_wallet_client_code']
       },
-      siteClientLabel: {
-        name: 'accounting_site_client_label',
-        value: settings['accounting_site_client_label']
+      walletClientLabel: {
+        name: 'accounting_wallet_client_label',
+        value: settings['accounting_wallet_client_label']
+      },
+      otherClientCode: {
+        name: 'accounting_other_client_code',
+        value: settings['accounting_other_client_code']
+      },
+      otherClientLabel: {
+        name: 'accounting_other_client_label',
+        value: settings['accounting_other_client_label']
       },
       walletCode: {
         name: 'accounting_wallet_code',
@@ -153,14 +161,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       spaceLabel: {
         name: 'accounting_Space_label',
         value: settings['accounting_Space_label']
-      },
-      couponCode: {
-        name: 'accounting_coupon_code',
-        value: settings['accounting_coupon_code']
-      },
-      couponLabel: {
-        name: 'accounting_coupon_label',
-        value: settings['accounting_coupon_label']
       }
     };
 
