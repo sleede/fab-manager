@@ -144,6 +144,7 @@ fr:
     Training_reservation: "réserv. formation"
     Event_reservation: "réserv. évènement"
     Space_reservation: "réserv. espace"
+    wallet: "porte-monnaie"
 
   trainings:
     # disponibilités formations

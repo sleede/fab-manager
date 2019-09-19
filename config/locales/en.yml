@@ -144,6 +144,7 @@ en:
     Training_reservation: "training reserv."
     Event_reservation: "event reserv."
     Space_reservation: "space reserv."
+    wallet: "wallet"
 
   trainings:
     # training availabilities

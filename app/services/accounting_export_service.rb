@@ -320,8 +320,11 @@ class AccountingExportService
   def label(invoice)
     name = "#{invoice.invoicing_profile.last_name} #{invoice.invoicing_profile.first_name}".tr separator, ''
     reference = invoice.reference
+
     items = invoice.subscription_invoice? ? [I18n.t('accounting_export.subscription')] : []
     items.push I18n.t("accounting_export.#{invoice.reservation.reservable_type}_reservation") if invoice.invoiced_type == 'Reservation'
+    items.push I18n.t('accounting_export.wallet') if invoice.invoiced_type == 'WalletTransaction'
+
     summary = items.join(' + ')
     res = "#{reference}, #{summary}"
     "#{name.truncate(label_max_length - res.length)}, #{res}"

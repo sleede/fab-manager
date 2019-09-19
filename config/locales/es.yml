@@ -144,6 +144,7 @@ es:
     Training_reservation: "training reserv."                                   # translation_missing
     Event_reservation: "event reserv."                                         # translation_missing
     Space_reservation: "space reserv."                                         # translation_missing
+    wallet: "wallet"                                                           # translation_missing
 
   trainings:
     # training availabilities
