@@ -3,6 +3,7 @@
 - Ability to configure and export the accounting data to the ACD accounting software
 - Compute the VAT per item in each invoices, instead of globally
 - Fix a bug: invoices with total = 0, are marked as paid on site even if paid by card
+- Fix a bug: after disabling a group, its associated plans are hidden from the interface
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
 - [TODO DEPLOY] `rake db:migrate`
 

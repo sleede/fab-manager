@@ -36,8 +36,7 @@
   <tbody>
   <tr ng-repeat="plan in plans | filterDisabled:planFiltering | orderBy:orderPlans"
       ng-class="{'disabled-line' : plan.disabled && planFiltering === 'all'}"
-      ng-init="group = getGroupFromId(groups, plan.group_id)"
-      ng-hide="group.disabled">
+      ng-init="group = getGroupFromId(groups, plan.group_id)">
     <td>{{getPlanType(plan.type)}}</td>
     <td>{{plan.base_name}}</td>
     <td>{{ plan.interval | planIntervalFilter:plan.interval_count }}</td>
