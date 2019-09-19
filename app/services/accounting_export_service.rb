@@ -65,6 +65,8 @@ class AccountingExportService
       invoice.invoice_items.each do |item|
         rows << "#{reservation_row(invoice, item)}\n"
       end
+    elsif invoice.invoiced_type == 'WalletTransaction'
+      rows << "#{wallet_row(invoice)}\n"
     end
     rows
   end
@@ -178,6 +180,43 @@ class AccountingExportService
     row
   end
 
+  # Generate the "wallet" row, which contains the credit to the wallet account, all taxes excluded
+  # This applies to wallet crediting, when an Avoir is generated at this time
+  def wallet_row(invoice)
+    row = ''
+    price = invoice.invoice_items.first.net_amount / 100.00
+    columns.each do |column|
+      case column
+      when 'journal_code'
+        row << journal_code
+      when 'date'
+        row << invoice.created_at&.strftime(date_format)
+      when 'account_code'
+        row << account(invoice, :wallet)
+      when 'account_label'
+        row << account(invoice, :wallet, :label)
+      when 'piece'
+        row << invoice.reference
+      when 'line_label'
+        row << ''
+      when 'debit_origin'
+        row << debit(invoice, price)
+      when 'credit_origin'
+        row << credit(invoice, price)
+      when 'debit_euro'
+        row << debit(invoice, price)
+      when 'credit_euro'
+        row << credit(invoice, price)
+      when 'lettering'
+        row << ''
+      else
+        puts "Unsupported column: #{column}"
+      end
+      row << separator
+    end
+    row
+  end
+
   # Generate the "VAT" row, which contains the credit to the VAT account, with VAT amount only
   def vat_row(invoice)
     rate = vat_service.invoice_vat(invoice)
@@ -237,6 +276,12 @@ class AccountingExportService
               Setting.find_by(name: "accounting_#{invoice.invoiced.reservable_type}_#{type}")&.value
             else
               puts "WARN: Invoice #{invoice.id} has no reservation"
+            end
+          when :wallet
+            if invoice.invoiced_type == 'WalletTransaction'
+              Setting.find_by(name: "accounting_wallet_#{type}")&.value
+            else
+              puts "WARN: Invoice #{invoice.id} is not a wallet credit"
             end
           else
             puts "Unsupported account #{account}"
