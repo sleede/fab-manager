@@ -230,6 +230,18 @@ class Invoice < ActiveRecord::Base
     total - (wallet_amount || 0)
   end
 
+  # return a summary of the payment means used
+  def payment_means
+    res = []
+    res.push(means: :wallet, amount: wallet_amount) if wallet_transaction && wallet_amount.positive?
+    if paid_with_stripe?
+      res.push(means: :card, amount: amount_paid)
+    else
+      res.push(means: :other, amount: amount_paid)
+    end
+    res
+  end
+
   def add_environment
     self.environment = Rails.env
   end
