@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## v4.1.1 2019 september 20
+
+- fix a bug: api/reservations#index was using user_id instead of statistic_profile_id
+- fix a bug: event_service#date_range method, test on all_day was never truthy
+- fix a bug: sidekiq 5 does not have delay_for method anymore, uses perform_in instead
+
 ## v4.1.0 2019 September 12
 
 - Handling the Strong-Customer Authentication (SCA) for online payments
