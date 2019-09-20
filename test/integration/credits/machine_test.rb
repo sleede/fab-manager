@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Credits
   class TrainingTest < ActionDispatch::IntegrationTest
 
@@ -12,15 +14,15 @@ module Credits
 
       # First, we create a new credit
       post '/api/credits',
-        {
-          credit: {
-            creditable_id: 5,
-            creditable_type: 'Machine',
-            hours: 1,
-            plan_id: 1,
-          }
-        }.to_json,
-        default_headers
+           {
+             credit: {
+               creditable_id: 5,
+               creditable_type: 'Machine',
+               hours: 1,
+               plan_id: 1
+             }
+           }.to_json,
+           default_headers
 
       # Check response format & status
       assert_equal 201, response.status, response.body
@@ -37,15 +39,15 @@ module Credits
 
     test 'update a credit' do
       put '/api/credits/13',
-           {
-               credit: {
-                   creditable_id: 4,
-                   creditable_type: 'Machine',
-                   hours: 5,
-                   plan_id: 3,
-               }
-           }.to_json,
-           default_headers
+          {
+            credit: {
+              creditable_id: 4,
+              creditable_type: 'Machine',
+              hours: 5,
+              plan_id: 3
+            }
+          }.to_json,
+          default_headers
 
       # Check response format & status
       assert_equal 200, response.status, response.body
