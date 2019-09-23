@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Optional reCaptcha checkbox in sign-up form
 - Ability to configure and export the accounting data to the ACD accounting software
 - Compute the VAT per item in each invoices, instead of globally
 - Use Alpine Linux to build the Docker image (#147)
@@ -7,6 +8,7 @@
 - Fix a bug: after disabling a group, its associated plans are hidden from the interface
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
 - [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] add `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
 
 ## v4.1.0 2019 September 12
 

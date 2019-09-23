@@ -101,6 +101,11 @@ DEFAULT_HOST is also used to configure Google Analytics.
 
 Identifier of your Google Analytics account.
 
+    RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
+
+Configuration keys of Google ReCaptcha V2 (Checkbox).
+This is optional, the captcha will be displayed on the sign-up form, only if these keys are filled.  
+
     DISQUS_SHORTNAME
 
 Unique identifier of your [Disqus](http://www.disqus.com) forum.

@@ -20,7 +20,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
-  'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock'])
+  'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha'])
   .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider',
     function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
       // Google analytics

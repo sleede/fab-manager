@@ -44,8 +44,9 @@
       Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
       <% if Rails.application.secrets.openlab_app_id.present? %>
       Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
-      <% else %>
-      Fablab.openlabAppId = null;
+      <% end %>
+      <% if RecaptchaService.recaptcha_enabled? %>
+      Fablab.recaptchaSiteKey = "<%= RecaptchaService.site_key %>";
       <% end %>
   </script>
 

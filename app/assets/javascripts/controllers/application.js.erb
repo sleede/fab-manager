@@ -96,6 +96,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             }
           };
 
+          // reCaptcha v2 site key (or undefined)
+          $scope.recaptchaSiteKey = Fablab.recaptchaSiteKey;
+
           // callback to open the date picker (account creation modal)
           $scope.openDatePicker = function ($event) {
             $event.preventDefault();
@@ -117,7 +120,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           // default user's parameters
           $scope.user = {
             is_allow_contact: true,
-            is_allow_newsletter: false
+            is_allow_newsletter: false,
+            // reCaptcha response, received from Google (through AJAX) and sent to server for validation
+            recaptcha: undefined
           };
 
           // Errors display
