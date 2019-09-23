@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.11.1'
+# User Puma as web server
+gem 'puma', '3.10.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -45,7 +47,6 @@ group :development do
   gem 'foreman'
   # Preview mail in the browser
   gem 'mailcatcher'
-  gem 'puma'
   gem 'rb-readline'
 end
 

@@ -517,7 +517,7 @@ DEPENDENCIES
   prawn
   prawn-table
   protected_attributes
-  puma
+  puma (= 3.10.0)
   pundit
   rack-protection (= 1.5.5)
   railroady
