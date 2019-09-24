@@ -19,6 +19,7 @@ class Plan < ActiveRecord::Base
   after_create :create_machines_prices
   after_create :create_spaces_prices
   after_create :create_statistic_type
+  after_create :set_name
 
 
   validates :amount, :group, :base_name, presence: true
@@ -108,5 +109,9 @@ class Plan < ActiveRecord::Base
       puts 'ERROR: Unable to create the statistics association for the new plan. '+
            'Possible causes: the type or the subtype were not created successfully.'
     end
+  end
+
+  def set_name
+    update_columns(name: human_readable_name)
   end
 end
