@@ -8,6 +8,12 @@
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
 - [TODO DEPLOY] `rake db:migrate`
 
+## v4.1.1 2019 september 20
+
+- Fix a bug: api/reservations#index was using user_id instead of statistic_profile_id
+- Fix a bug: event_service#date_range method, test on all_day was never truthy
+- Fix a bug: sidekiq 5 does not have delay_for method anymore, uses perform_in instead
+
 ## v4.1.0 2019 September 12
 
 - Handling the Strong-Customer Authentication (SCA) for online payments

@@ -32,7 +32,7 @@ class EventService
     end_date = Time.zone.parse(ending[:date])
     start_time = Time.parse(starting[:time]) if starting[:time]
     end_time = Time.parse(ending[:time]) if ending[:time]
-    if all_day == 'true'
+    if all_day
       start_at = DateTime.new(start_date.year, start_date.month, start_date.day, 0, 0, 0, start_date.zone)
       end_at = DateTime.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, end_date.zone)
     else

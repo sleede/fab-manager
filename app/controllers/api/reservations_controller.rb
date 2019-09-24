@@ -11,7 +11,10 @@ class API::ReservationsController < API::ApiController
     if params[:reservable_id] && params[:reservable_type] && params[:user_id]
       params[:user_id] = current_user.id unless current_user.admin?
 
-      @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type, :user_id))
+      where_clause = params.permit(:reservable_id, :reservable_type).to_h
+      where_clause[:statistic_profile_id] = StatisticProfile.find_by!(user_id: params[:user_id])
+
+      @reservations = Reservation.where(where_clause)
     elsif params[:reservable_id] && params[:reservable_type] && current_user.admin?
       @reservations = Reservation.where(params.permit(:reservable_id, :reservable_type))
     else

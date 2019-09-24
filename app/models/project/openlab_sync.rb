@@ -9,7 +9,7 @@ module Project::OpenlabSync
     after_destroy :openlab_destroy, if: :openlab_sync_active?
 
     def openlab_create
-      OpenlabWorker.delay_for(2.seconds).perform_async(:create, self.id) if self.published?
+      OpenlabWorker.perform_in(2.seconds, :create, self.id) if self.published?
     end
 
     def openlab_update
