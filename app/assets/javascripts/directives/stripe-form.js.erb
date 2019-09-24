@@ -63,7 +63,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
               Payment.confirm({ payment_method_id: paymentMethod.id, cart_items: $scope.cartItems }, function (response) {
                 // Handle server response (see Step 3)
                 handleServerResponse(response, button);
-              }, function(error) { handleServerResponse({ error }) });
+              }, function(error) { handleServerResponse({ error }, button) });
             }
           });
         });
@@ -89,7 +89,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
                 // The PaymentIntent can be confirmed again on the server
                 Payment.confirm({ payment_intent_id: result.paymentIntent.id, cart_items: $scope.cartItems }, function(confirmResult) {
                   handleServerResponse(confirmResult, confirmButton);
-                }, function(error) { handleServerResponse({ error }) });
+                }, function(error) { handleServerResponse({ error }, confirmButton) });
               }
             });
           } else {

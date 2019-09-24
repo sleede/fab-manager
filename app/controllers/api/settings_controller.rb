@@ -18,6 +18,19 @@ class API::SettingsController < API::ApiController
     end
   end
 
+  def bulk_update
+    authorize Setting
+
+    @settings = []
+    params[:settings].each do |setting|
+      next if !setting[:name] || !setting[:value]
+
+      db_setting = Setting.find_or_initialize_by(name: setting[:name])
+      db_setting.save && db_setting.history_values.create(value: setting[:value], invoicing_profile: current_user.invoicing_profile)
+      @settings.push db_setting
+    end
+  end
+
   def show
     @setting = Setting.find_or_create_by(name: params[:name])
     @show_history = params[:history] == 'true' && current_user.admin?

@@ -202,11 +202,14 @@ class Reservation < ActiveRecord::Base
   end
 
   def save_with_payment(operator_profile_id, coupon_code = nil, payment_intent_id = nil)
+    method = InvoicingProfile.find(operator_profile_id)&.user&.admin? ? nil : 'stripe'
+
     build_invoice(
       invoicing_profile: user.invoicing_profile,
       statistic_profile: user.statistic_profile,
       operator_profile_id: operator_profile_id,
-      stp_payment_intent_id: payment_intent_id
+      stp_payment_intent_id: payment_intent_id,
+      payment_method: method
     )
     generate_invoice_items(true, coupon_code)
 

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# This class provides helper methods to deal with coupons
 class CouponService
   ##
   # Apply the provided coupon, if active, to the given price. Usability tests will be run depending on the
@@ -53,5 +56,15 @@ class CouponService
       end
     end
     price
+  end
+
+  ##
+  # Compute the total amount of the given invoice, without the applied coupon
+  # Invoice.total stores the amount payed by the customer, coupon deducted
+  # @param invoice {Invoice} invoice object, its total before discount will be computed
+  ##
+  def invoice_total_no_coupon(invoice)
+    total = (invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
+    total / 100.0
   end
 end

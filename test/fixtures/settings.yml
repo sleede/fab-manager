@@ -220,3 +220,129 @@ setting_38:
   name: privacy_draft
   created_at: 2019-06-12 13:25:08.125640000 Z
   updated_at: 2019-06-12 13:25:08.125640000 Z
+
+setting_39:
+  id: 39
+  name: accounting_journal_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_40:
+  id: 40
+  name: accounting_card_client_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_41:
+  id: 41
+  name: accounting_card_client_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_42:
+  id: 42
+  name: accounting_wallet_client_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_43:
+  id: 43
+  name: accounting_wallet_client_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_44:
+  id: 44
+  name: accounting_other_client_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_45:
+  id: 45
+  name: accounting_other_client_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_46:
+  id: 46
+  name: accounting_wallet_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_47:
+  id: 47
+  name: accounting_wallet_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_48:
+  id: 48
+  name: accounting_VAT_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_49:
+  id: 49
+  name: accounting_VAT_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_50:
+  id: 50
+  name: accounting_subscription_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_51:
+  id: 51
+  name: accounting_subscription_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_52:
+  id: 52
+  name: accounting_Machine_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_53:
+  id: 53
+  name: accounting_Training_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_54:
+  id: 54
+  name: accounting_Training_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_55:
+  id: 55
+  name: accounting_Event_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_56:
+  id: 56
+  name: accounting_Event_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_57:
+  id: 57
+  name: accounting_Space_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_58:
+  id: 58
+  name: accounting_Machine_code
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+
+setting_59:
+  id: 59
+  name: accounting_Space_label
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z

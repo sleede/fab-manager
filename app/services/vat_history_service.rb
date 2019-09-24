@@ -26,13 +26,21 @@ class VatHistoryService
   private
 
   def vat_history
-    key_dates = []
-    Setting.find_by(name: 'invoice_VAT-rate').history_values.each do |rate|
-      key_dates.push(date: rate.created_at, rate: rate.value.to_i)
+    chronology = []
+    end_date = DateTime.now
+    Setting.find_by(name: 'invoice_VAT-active').history_values.order(created_at: 'DESC').each do |v|
+      chronology.push(start: v.created_at, end: end_date, enabled: v.value == 'true')
+      end_date = v.created_at
     end
-    Setting.find_by(name: 'invoice_VAT-active').history_values.each do |v|
-      key_dates.push(date: v.created_at, rate: 0) if v.value == 'false'
+    date_rates = []
+    Setting.find_by(name: 'invoice_VAT-rate').history_values.order(created_at: 'ASC').each do |rate|
+      range = chronology.select { |p| rate.created_at.between?(p[:start], p[:end]) }.first
+      date = range[:enabled] ? rate.created_at : range[:end]
+      date_rates.push(date: date, rate: rate.value.to_i)
     end
-    key_dates.sort_by { |k| k[:date] }
+    chronology.reverse_each do |period|
+      date_rates.push(date: period[:start], rate: 0) unless period[:enabled]
+    end
+    date_rates.sort_by { |k| k[:date] }
   end
 end

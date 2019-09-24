@@ -9,6 +9,10 @@ Application.Services.factory('Setting', ['$resource', function ($resource) {
           return angular.toJson({ setting: data });
         }
       },
+      bulkUpdate: {
+        url: '/api/settings/bulk_update',
+        method: 'PATCH'
+      },
       query: {
         isArray: false
       }

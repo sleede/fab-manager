@@ -10,6 +10,10 @@ Application.Services.factory('Invoice', ['$resource', function ($resource) {
         url: '/api/invoices/list',
         method: 'POST',
         isArray: true
+      },
+      first: {
+        url: '/api/invoices/first',
+        method: 'GET'
       }
     }
   );

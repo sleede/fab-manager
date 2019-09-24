@@ -53,13 +53,13 @@ class Plan < ActiveRecord::Base
 
   def create_machines_prices
     Machine.all.each do |machine|
-      Price.create(priceable: machine, plan: self, group_id: self.group_id, amount: 0)
+      Price.create(priceable: machine, plan: self, group_id: group_id, amount: 0)
     end
   end
 
   def create_spaces_prices
     Space.all.each do |space|
-      Price.create(priceable: space, plan: self, group_id: self.group_id, amount: 0)
+      Price.create(priceable: space, plan: self, group_id: group_id, amount: 0)
     end
   end
 

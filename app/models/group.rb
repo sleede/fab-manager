@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Group is way to bind users with prices. Different prices can be defined for each plan/reservable, for each group
 class Group < ActiveRecord::Base
   has_many :plans
   has_many :users
@@ -12,13 +15,19 @@ class Group < ActiveRecord::Base
   friendly_id :name, use: :slugged
 
   validates :name, :slug, presence: true
+  validates :disabled, inclusion: { in: [false] }, if: :group_has_users?
 
   after_create :create_prices
   after_create :create_statistic_subtype
   after_update :update_statistic_subtype, if: :name_changed?
+  after_update :disable_plans, if: :disabled_changed?
 
   def destroyable?
     users.empty? and plans.empty?
+  end
+
+  def group_has_users?
+    users.count.positive?
   end
 
   private
@@ -59,5 +68,11 @@ class Group < ActiveRecord::Base
                               .first
     subtype.label = name
     subtype.save!
+  end
+
+  def disable_plans
+    plans.each do |plan|
+      plan.update_attributes(disabled: disabled)
+    end
   end
 end

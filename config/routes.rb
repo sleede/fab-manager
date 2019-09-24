@@ -43,7 +43,9 @@ Rails.application.routes.draw do
     resources :themes
     resources :licences
     resources :admins, only: %i[index create destroy]
-    resources :settings, only: %i[show update index], param: :name
+    resources :settings, only: %i[show update index], param: :name do
+      patch '/bulk_update', action: 'bulk_update', on: :collection
+    end
     resources :users, only: %i[index create]
     resources :members, only: %i[index show create update destroy] do
       get '/export_subscriptions', action: 'export_subscriptions', on: :collection
@@ -106,6 +108,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create] do
       get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
+      get 'first', action: 'first', on: :collection
     end
 
     # for admin
@@ -135,6 +138,8 @@ Rails.application.routes.draw do
       get 'last_closing_end', on: :collection
       get 'archive', action: 'download_archive', on: :member
     end
+    # export accounting data to csv or equivalent
+    post 'accounting/export' => 'accounting_exports#export'
 
     # i18n
     # regex allows using dots in URL for 'state'

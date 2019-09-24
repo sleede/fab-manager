@@ -12,6 +12,7 @@ postgresql
 elasticsearch
 redis
 
+
 # Ignore public assets
 public/uploads
 public/assets

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190910141336) do
+ActiveRecord::Schema.define(version: 20190917123631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,10 +202,11 @@ ActiveRecord::Schema.define(version: 20190910141336) do
     t.string   "category"
     t.string   "export_type"
     t.string   "query"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
     t.string   "key"
+    t.string   "extension",   default: "xlsx"
   end
 
   add_index "exports", ["user_id"], name: "index_exports_on_user_id", using: :btree
@@ -267,7 +268,7 @@ ActiveRecord::Schema.define(version: 20190910141336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "reference"
-    t.string   "avoir_mode"
+    t.string   "payment_method"
     t.datetime "avoir_date"
     t.integer  "invoice_id"
     t.string   "type"

@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
       <label translate>{{ 'invoices.refund_mode' }}</label>
-      <select class="form-control m-t-sm" name="avoir_mode" ng-model="avoir.avoir_mode" ng-options="mode.value as mode.name for mode in avoirModes" required></select>
+      <select class="form-control m-t-sm" name="payment_method" ng-model="avoir.payment_method" ng-options="mode.value as mode.name for mode in avoirModes" required></select>
     </div>
     <div class="form-group" ng-if="invoice.is_subscription_invoice">
       <label translate>{{ 'invoices.do_you_want_to_disable_the_user_s_subscription' }}</label>
