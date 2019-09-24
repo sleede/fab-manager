@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       post 'list', action: 'list', on: :collection
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
+      post 'import', action: 'import', on: :collection
     end
     resources :reservations, only: %i[show create index update]
     resources :notifications, only: %i[index show update] do

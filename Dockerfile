@@ -53,6 +53,7 @@ RUN mkdir -p /usr/src/app && \
     mkdir -p /usr/src/app/config && \
     mkdir -p /usr/src/app/invoices && \
     mkdir -p /usr/src/app/exports && \
+    mkdir -p /usr/src/app/imports && \
     mkdir -p /usr/src/app/log && \
     mkdir -p /usr/src/app/public/uploads && \
     mkdir -p /usr/src/app/public/assets && \
@@ -66,6 +67,7 @@ COPY . /usr/src/app
 # Volumes
 VOLUME /usr/src/app/invoices
 VOLUME /usr/src/app/exports
+VOLUME /usr/src/app/imports
 VOLUME /usr/src/app/public
 VOLUME /usr/src/app/public/uploads
 VOLUME /usr/src/app/public/assets

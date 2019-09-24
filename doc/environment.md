@@ -158,6 +158,12 @@ If this parameter is not specified the maximum size allowed will be 2MB.
 Maximum size (in bytes) allowed for CAO files uploaded on the platform, as project attachments.
 If this parameter is not specified, the maximum size allowed will be 5MB.
 
+    MAX_IMPORT_SIZE
+
+Maximum size (in bytes) allowed for import files uploaded on the platform.
+Currently, this is only used to import users from a CSV file. 
+If this parameter is not specified, the maximum size allowed will be 5MB.
+
     DISK_SPACE_MB_ALERT
 
 Threshold in MB of the minimum free disk space available on the current mount point.

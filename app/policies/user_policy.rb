@@ -27,7 +27,7 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id
   end
 
-  %w[list create mapping].each do |action|
+  %w[list create mapping import].each do |action|
     define_method "#{action}?" do
       user.admin?
     end

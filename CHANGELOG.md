@@ -13,6 +13,8 @@
 - [TODO DEPLOY] -> (only dev) yarn install
 - [TODO DEPLOY] add `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add `MAX_CAO_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add `- ${PWD}/imports:/usr/src/app/imports` in the volumes list of your fabmanager service in [docker-compose.yml](docker/docker-compose.yml)
 
 ## v4.1.0 2019 September 12
 

@@ -26,6 +26,12 @@ public/assets
 # PDF invoices
 invoices
 
+# Excel exports
+exports
+
+# CSV imports
+imports
+
 .DS_Store
 
 # Development files

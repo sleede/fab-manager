@@ -1,0 +1,8 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  author_id: 1
+  attachment: 'users.csv'
+  created_at: 2019-09-24 15:06:22.151882000 Z
+  updated_at: 2019-09-24 15:06:22.151882000 Z
+
