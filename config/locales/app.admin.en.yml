@@ -574,7 +574,8 @@ en:
         members_import:
           import_members: "Import members"
           info: "you can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, trainings, suscription and tags of the members."
-          required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group."
+          required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."
+          about_example: "Please refer to the provided example file to generate a correct CSV file. Be careful to use Unicode UTF-8 encoding."
           groups: "Groups"
           group_name: "Group name"
           group_identifier: "Identifier to use"
@@ -589,6 +590,7 @@ en:
           tag_identifier: "Identifier to use"
           download_example: "Download the exemple file"
           select_file: "Choose a file"
+          import: "Import"
 
       members_edit:
         # edit a member

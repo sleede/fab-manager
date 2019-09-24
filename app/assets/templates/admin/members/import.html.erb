@@ -31,9 +31,6 @@
     <p class="alert alert-info" translate>
       {{ 'members_import.info' }}
     </p>
-    <p class="alert alert-warning" translate>
-      {{ 'members_import.required_fields' }}
-    </p>
   </div>
 </div>
 
@@ -86,7 +83,7 @@
 </div>
 
 
-  <div class="row m-h-sm">
+  <div class="row m-h-sm" ng-hide="Fablab.withoutPlans || plans.length == 0">
 
     <div class="col-md-6 p-h-s">
       <h3 translate>{{ 'members_import.plans' }}</h3>
@@ -110,7 +107,7 @@
       </table>
     </div>
 
-    <div class="col-md-6 p-h-s">
+    <div class="col-md-6 p-h-s" ng-hide="tags.length == 0">
       <h3 translate>{{ 'members_import.tags' }}</h3>
       <table class="table">
         <thead>
@@ -142,18 +139,31 @@
 
           <div class="panel-body m-r">
             <div class="row m-t">
-              <div class="col-sm-6 col-sm-offset-5">
-                <div class="form-group">
-                  <span>Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
-                </div>
+              <p class="alert alert-warning m-h" translate>
+                {{ 'members_import.required_fields' }}
+              </p>
+              <p class="alert alert-warning m-h" translate>
+                {{ 'members_import.about_example' }}
+              </p>
+            </div>
+
+            <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass()">
+              <div class="form-control" data-trigger="fileinput">
+                <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
               </div>
+              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'members_import.select_file' }}</span>
+              <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                <input type="file"
+                       name="import-members"
+                       accept="text/csv"></span>
+              <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
 
           </div>   <!-- ./panel-body  -->
 
 
           <div class="panel-footer no-padder">
-            <input type="submit" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="importForm.$invalid"/>
+            <input type="submit" value="{{ 'members_import.import' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="importForm.$invalid"/>
           </div>
 
         </section>
