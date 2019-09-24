@@ -153,6 +153,11 @@ Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
 
+    MAX_CAO_SIZE
+
+Maximum size (in bytes) allowed for CAO files uploaded on the platform, as project attachments.
+If this parameter is not specified, the maximum size allowed will be 5MB.
+
     DISK_SPACE_MB_ALERT
 
 Threshold in MB of the minimum free disk space available on the current mount point.

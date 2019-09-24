@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Validates uploaded images to check that it matches the env parameters
+# You must `include ImageValidatorConcern` in your class to use it
 module ImageValidatorConcern
   extend ActiveSupport::Concern
 
