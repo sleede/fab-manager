@@ -4,7 +4,9 @@ MAINTAINER peng@sleede.com
 # Install upgrade system packages
 RUN apk update && apk upgrade && \
 # Install runtime apk dependencies
-    apk add --update curl \
+    apk add --update \
+      bash \
+      curl \
       nodejs \
       yarn \
       imagemagick \
@@ -19,7 +21,8 @@ RUN apk update && apk upgrade && \
       libxslt-dev \
       libidn-dev && \
 # Install buildtime apk dependencies
-    apk add --update --no-cache --virtual .build-deps alpine-sdk \
+    apk add --update --no-cache --virtual .build-deps \
+      alpine-sdk \
       build-base \
       linux-headers \
       git \
