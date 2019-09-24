@@ -569,6 +569,27 @@ pt:
           add_a_member: "Adicionar membro"
           user_is_an_organization: "Usuário é uma organização"
 
+      members_import:
+        # members bulk import
+        members_import:
+          import_members: "Import members"                                                        # translation_missing
+          info: "you can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, trainings, suscription and tags  of the members."   # translation_missing
+          required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group."   # translation_missing
+          groups: "Groups"                                                                        # translation_missing
+          group_name: "Group name"                                                                # translation_missing
+          group_identifier: "Identifier to use"                                                   # translation_missing
+          trainings: "Trainings"                                                                  # translation_missing
+          training_name: "Training name"                                                          # translation_missing
+          training_identifier: "Identifier to use"                                                # translation_missing
+          plans: "Plans"                                                                          # translation_missing
+          plan_name: "Plan name"                                                                  # translation_missing
+          plan_identifier: "Identifier to use"                                                    # translation_missing
+          tags: "Tags"                                                                            # translation_missing
+          tag_name: "Tag name"                                                                    # translation_missing
+          tag_identifier: "Identifier to use"                                                     # translation_missing
+          download_example: "Download the exemple file"                                           # translation_missing
+          select_file: "Choose a file"                                                            # translation_missing
+
       members_edit:
         # edit a member
         duration: "Duração:"

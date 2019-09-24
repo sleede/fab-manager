@@ -1,0 +1,165 @@
+<div>
+
+  <section class="heading b-b">
+    <div class="row no-gutter">
+
+      <div class="col-md-1 hidden-xs">
+        <section class="heading-btn">
+          <a ng-click="cancel()"><i class="fa fa-long-arrow-left"></i></a>
+        </section>
+      </div>
+
+      <div class="col-md-8 b-l b-r">
+        <section class="heading-title">
+          <h1 translate>{{ 'members_import.import_members' }}</h1>
+        </section>
+      </div>
+
+      <div class="col-md-3">
+        <section class="heading-actions wrapper">
+         <a class="btn btn-lg btn-block btn-default m-t-xs" target="_blank" href="example.csv" translate>
+           {{ 'members_import.download_example' }}
+         </a>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+<div class="row p-sm">
+  <div class="col-md-12">
+    <p class="alert alert-info" translate>
+      {{ 'members_import.info' }}
+    </p>
+    <p class="alert alert-warning" translate>
+      {{ 'members_import.required_fields' }}
+    </p>
+  </div>
+</div>
+
+<div class="row m-h-sm">
+
+  <div class="col-md-6 p-h-s">
+    <h3 translate>{{ 'members_import.groups' }}</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th translate>{{ 'members_import.group_name' }}</th>
+        <th translate>{{ 'members_import.group_identifier' }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="group in groups">
+        <td>
+          {{ group.name }}
+        </td>
+        <td>
+          {{ group.slug }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6 p-h-s">
+    <h3 translate>{{ 'members_import.trainings' }}</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th translate>{{ 'members_import.training_name' }}</th>
+        <th translate>{{ 'members_import.training_identifier' }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="training in trainings | filterDisabled">
+        <td>
+          {{ training.name }}
+        </td>
+        <td>
+          {{ training.id }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+  <div class="row m-h-sm">
+
+    <div class="col-md-6 p-h-s">
+      <h3 translate>{{ 'members_import.plans' }}</h3>
+      <table class="table">
+        <thead>
+        <tr>
+          <th translate>{{ 'members_import.plan_name' }}</th>
+          <th translate>{{ 'members_import.plan_identifier' }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="plan in plans">
+          <td>
+            {{ plan.name }}
+          </td>
+          <td>
+            {{ plan.slug }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6 p-h-s">
+      <h3 translate>{{ 'members_import.tags' }}</h3>
+      <table class="table">
+        <thead>
+        <tr>
+          <th translate>{{ 'members_import.tag_name' }}</th>
+          <th translate>{{ 'members_import.tag_identifier' }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tag in tags">
+          <td>
+            {{ tag.name }}
+          </td>
+          <td>
+            {{ tag.id }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row no-gutter">
+    <div class="col-sm-12 col-md-12 b-r nopadding">
+
+      <form role="form" name="importForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+        <section class="panel panel-default bg-light m-lg">
+
+          <div class="panel-body m-r">
+            <div class="row m-t">
+              <div class="col-sm-6 col-sm-offset-5">
+                <div class="form-group">
+                  <span>Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
+                </div>
+              </div>
+            </div>
+
+          </div>   <!-- ./panel-body  -->
+
+
+          <div class="panel-footer no-padder">
+            <input type="submit" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="importForm.$invalid"/>
+          </div>
+
+        </section>
+      </form>
+
+    </div>
+  </div>
+
+</div>

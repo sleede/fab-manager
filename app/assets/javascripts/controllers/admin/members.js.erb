@@ -610,6 +610,32 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
 ]);
 
 /**
+ * Controller used in the member's import page: import from CSV (admin view)
+ */
+Application.Controllers.controller('ImportMembersController', ['$scope', '$state', 'Group', 'Training', 'CSRF', 'plans', 'tags',
+  function($scope, $state, Group, Training, CSRF, plans, tags) {
+    CSRF.setMetaTags();
+
+    /* PUBLIC SCOPE */
+
+    // API URL where the form will be posted
+    $scope.actionUrl = '/api/members/import';
+
+    // Form action on the above URL
+    $scope.method = 'post';
+
+    // List of all plans
+    $scope.plans = plans;
+
+    // List of all tags
+    $scope.tags = tags
+
+    // Using the MembersController
+    return new MembersController($scope, $state, Group, Training);
+  }
+]);
+
+/**
  * Controller used in the admin's creation page (admin view)
  */
 Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', function ($state, $scope, Admin, growl, _t) {

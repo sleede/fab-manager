@@ -569,6 +569,27 @@ fr:
           add_a_member: "Ajouter un membre"
           user_is_an_organization: "L'utilisateur est une structure"
 
+      members_import:
+        # import massif de members
+        members_import:
+          import_members: "Importer des membres"
+          info: "Vous pouvez téléverser un fichier CVS afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier les groupe, formations, abonnement et étiquettes des membres."
+          required_fields: "Votre fichier doit obligatoirement comporter, au minimum, les informations suivantes pour chaque utilisateur à créer : courriel, nom, prénom et groupe."
+          groups: "Groupes"
+          group_name: "Nom du groupe"
+          group_identifier: "Identifiant à utiliser"
+          trainings: "Formations"
+          training_name: "Nom de la formation"
+          training_identifier: "Identifiant à utiliser"
+          plans: "Abonnements"
+          plan_name: "Nom de l'abonnement"
+          plan_identifier: "Identifiant à utiliser"
+          tags: "Étiquettes"
+          tag_name: "Nom de l'étiquette"
+          tag_identifier: "Identifiant à utiliser"
+          download_example: "Télécharger le fichier d'exemple"
+          select_file: "Choisissez un fichier"
+
       members_edit:
         # modifier un membre
         duration: "Durée :"

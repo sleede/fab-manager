@@ -569,6 +569,27 @@ en:
           add_a_member: "Add a member"
           user_is_an_organization: "User is an organization"
 
+      members_import:
+        # members bulk import
+        members_import:
+          import_members: "Import members"
+          info: "you can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, trainings, suscription and tags of the members."
+          required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group."
+          groups: "Groups"
+          group_name: "Group name"
+          group_identifier: "Identifier to use"
+          trainings: "Trainings"
+          training_name: "Training name"
+          training_identifier: "Identifier to use"
+          plans: "Plans"
+          plan_name: "Plan name"
+          plan_identifier: "Identifier to use"
+          tags: "Tags"
+          tag_name: "Tag name"
+          tag_identifier: "Identifier to use"
+          download_example: "Download the exemple file"
+          select_file: "Choose a file"
+
       members_edit:
         # edit a member
         duration: "Duration:"
