@@ -20,6 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network "forwarded_port", guest: port, host: port
   end
 
+  # nginx server
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
   # Configuration to allocate resources fro the virtual machine
   config.vm.provider 'virtualbox' do |vb|
     vb.customize ['modifyvm', :id, '--memory', '2048']
@@ -30,8 +33,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   # Copy default configuration files for the database conenction and the Rails application
-  config.vm.provision "file", source: "./config/database.yml.default",    destination: "/vagrant/config/database.yml"
+  config.vm.provision "file", source: "./config/database.yml.default", destination: "/vagrant/config/database.yml"
   config.vm.provision "file", source: "./config/application.yml.default", destination: "/vagrant/config/application.yml"
+
+  # Copy default configuration files to allow reviewing the Docker Compose integration
+  config.vm.provision "file", source: "./docker/docker-compose.yml", destination: "/home/vagrant/docker-compose.yml"
+  config.vm.provision "file", source: "./docker/env.example", destination: "/home/vagrant/config/env"
+  config.vm.provision "file", source: "./docker/nginx.conf.example", destination: "/home/vagrant/config/nginx/fabmanager.conf"
+  config.vm.provision "file", source: "./docker/elasticsearch.yml", destination: "/home/vagrant/elasticsearch/config/elasticsearch.yml"
+  config.vm.provision "file", source: "./docker/log4j2.properties", destination: "/home/vagrant/elasticsearch/config/log4j2.properties"
 
   ## Provision software dependencies
   config.vm.provision "shell", privileged: false, run: "once",

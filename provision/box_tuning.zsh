@@ -31,3 +31,5 @@ setup() {
 }
 
 setup "$@"
+
+echo 'Virtual Environment is ready. Plase run `vagrant reload`.'
