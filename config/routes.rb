@@ -55,7 +55,6 @@ Rails.application.routes.draw do
       post 'list', action: 'list', on: :collection
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
-      post 'import', action: 'import', on: :collection
     end
     resources :reservations, only: %i[show create index update]
     resources :notifications, only: %i[index show update] do
@@ -149,6 +148,11 @@ Rails.application.routes.draw do
     # XLSX exports
     get 'exports/:id/download' => 'exports#download'
     post 'exports/status' => 'exports#status'
+
+    # Members CSV import
+    resources :imports, only: [:show] do
+      post 'members', action: 'members', on: :collection
+    end
 
     # Fab-manager's version
     get 'version' => 'version#show'

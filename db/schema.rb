@@ -247,10 +247,13 @@ ActiveRecord::Schema.define(version: 20190924140726) do
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
 
   create_table "imports", force: :cascade do |t|
-    t.integer  "author_id"
+    t.integer  "user_id"
     t.string   "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "update_field"
+    t.string   "category"
+    t.text     "results"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "invoice_items", force: :cascade do |t|

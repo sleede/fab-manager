@@ -181,18 +181,6 @@ class API::MembersController < API::ApiController
     @members = User.includes(:profile)
   end
 
-  def import
-    authorize User
-
-    @import = Import.new(attachment: import_params, author: current_user)
-    if @import.save
-      Members::ImportService.import(@import)
-      render json: @import, status: :created
-    else
-      render json: @import.errors, status: :unprocessable_entity
-    end
-  end
-
   private
 
   def set_member
@@ -236,9 +224,5 @@ class API::MembersController < API::ApiController
 
   def query_params
     params.require(:query).permit(:search, :order_by, :page, :size)
-  end
-
-  def import_params
-    params.require(:import_members)
   end
 end

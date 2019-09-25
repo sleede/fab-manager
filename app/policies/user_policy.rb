@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
+# Check the access policies for API::MembersController and API::UsersController
 class UserPolicy < ApplicationPolicy
+  # Defines the scope of the users index, depending on the role of the current user
   class Scope < Scope
     def resolve
       if user.admin?
@@ -27,7 +31,7 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id
   end
 
-  %w[list create mapping import].each do |action|
+  %w[list create mapping].each do |action|
     define_method "#{action}?" do
       user.admin?
     end

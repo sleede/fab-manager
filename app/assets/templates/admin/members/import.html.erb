@@ -26,86 +26,64 @@
     </div>
   </section>
 
-<div class="row p-sm">
-  <div class="col-md-12">
-    <p class="alert alert-info" translate>
-      {{ 'members_import.info' }}
-    </p>
-  </div>
-</div>
-
-<div class="row m-h-sm">
-
-  <div class="col-md-6 p-h-s">
-    <h3 translate>{{ 'members_import.groups' }}</h3>
-    <table class="table">
-      <thead>
-      <tr>
-        <th translate>{{ 'members_import.group_name' }}</th>
-        <th translate>{{ 'members_import.group_identifier' }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="group in groups">
-        <td>
-          {{ group.name }}
-        </td>
-        <td>
-          {{ group.slug }}
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="row p-sm">
+    <div class="col-md-12">
+      <p class="alert alert-info" translate>
+        {{ 'members_import.info' }}
+      </p>
+    </div>
   </div>
 
-  <div class="col-md-6 p-h-s">
-    <h3 translate>{{ 'members_import.trainings' }}</h3>
-    <table class="table">
-      <thead>
-      <tr>
-        <th translate>{{ 'members_import.training_name' }}</th>
-        <th translate>{{ 'members_import.training_identifier' }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="training in trainings | filterDisabled">
-        <td>
-          {{ training.name }}
-        </td>
-        <td>
-          {{ training.id }}
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-</div>
-
-
-  <div class="row m-h-sm" ng-hide="Fablab.withoutPlans || plans.length == 0">
+  <div class="row m-h-sm">
 
     <div class="col-md-6 p-h-s">
-      <h3 translate>{{ 'members_import.plans' }}</h3>
+      <h3 translate>{{ 'members_import.groups' }}</h3>
       <table class="table">
         <thead>
         <tr>
-          <th translate>{{ 'members_import.plan_name' }}</th>
-          <th translate>{{ 'members_import.plan_identifier' }}</th>
+          <th translate>{{ 'members_import.group_name' }}</th>
+          <th translate>{{ 'members_import.group_identifier' }}</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="plan in plans">
+        <tr ng-repeat="group in groups">
           <td>
-            {{ plan.name }}
+            {{ group.name }}
           </td>
           <td>
-            {{ plan.slug }}
+            {{ group.slug }}
           </td>
         </tr>
         </tbody>
       </table>
     </div>
+
+    <div class="col-md-6 p-h-s">
+      <h3 translate>{{ 'members_import.trainings' }}</h3>
+      <table class="table">
+        <thead>
+        <tr>
+          <th translate>{{ 'members_import.training_name' }}</th>
+          <th translate>{{ 'members_import.training_identifier' }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="training in trainings | filterDisabled">
+          <td>
+            {{ training.name }}
+          </td>
+          <td>
+            {{ training.id }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <div class="row m-h-sm">
 
     <div class="col-md-6 p-h-s" ng-hide="tags.length == 0">
       <h3 translate>{{ 'members_import.tags' }}</h3>
@@ -134,11 +112,12 @@
   <div class="row no-gutter">
     <div class="col-sm-12 col-md-12 b-r nopadding">
 
-      <form role="form" name="importForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+      <form role="form" name="importForm" class="form-horizontal" novalidate  action="{{ actionUrl }}" ng-upload="onImportResult(content)" upload-options-enable-rails-csrf="true">
         <section class="panel panel-default bg-light m-lg">
 
           <div class="panel-body m-r">
-            <div class="row m-t">
+
+            <div class="m-t">
               <p class="alert alert-warning m-h" translate>
                 {{ 'members_import.required_fields' }}
               </p>
@@ -155,8 +134,31 @@
               <span class="fileinput-exists" translate>{{ 'change' }}</span>
                 <input type="file"
                        name="import_members"
-                       accept="text/csv"></span>
+                       accept="text/csv"
+                       required></span>
               <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
+            </div>
+
+            <div class="m-h">
+              <span translate>{{ 'members_import.update_field' }}</span>
+              <div class="radio m-l-md">
+                <label class="control-label">
+                  <input type="radio" id="update_field" name="update_field" value="id" checked>
+                  <span translate>{{ 'members_import.update_on_id' }}</span>
+                </label>
+              </div>
+              <div class="radio m-l-md">
+                <label class="control-label">
+                  <input type="radio" id="update_field" name="update_field" value="username">
+                  <span translate>{{ 'members_import.update_on_username' }}</span>
+                </label>
+              </div>
+              <div class="radio m-l-md">
+                <label class="control-label">
+                  <input type="radio" id="update_field" name="update_field" value="email">
+                  <span translate>{{ 'members_import.update_on_email' }}</span>
+                </label>
+              </div>
             </div>
 
           </div>   <!-- ./panel-body  -->

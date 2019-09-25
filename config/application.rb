@@ -1,15 +1,9 @@
+# frozen_string_literal: true
+
 require File.expand_path('../boot', __FILE__)
 
-# Pick the frameworks you want:
-#require "active_model/railtie"
-#require "active_record/railtie"
-#require "action_controller/railtie"
-#require "action_mailer/railtie"
-#require "action_view/railtie"
-#require "sprockets/railtie"
-#require "rails/test_unit/railtie"
 require 'csv'
-require "rails/all"
+require 'rails/all'
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
 
@@ -43,7 +37,7 @@ module Fablab
     config.active_record.raise_in_transactional_callbacks = true
 
     config.to_prepare do
-      Devise::Mailer.layout "notifications_mailer"
+      Devise::Mailer.layout 'notifications_mailer'
     end
 
     # allow use rails helpers in angular templates
@@ -60,8 +54,8 @@ module Fablab
 
     if Rails.env.development?
       config.web_console.whitelisted_ips << '192.168.0.0/16'
-      config.web_console.whitelisted_ips << '192.168.99.0/16' #docker
-      config.web_console.whitelisted_ips << '10.0.2.2' #vagrant
+      config.web_console.whitelisted_ips << '192.168.99.0/16' # docker
+      config.web_console.whitelisted_ips << '10.0.2.2' # vagrant
     end
 
     # load locales for subdirectories
@@ -78,9 +72,8 @@ module Fablab
     FabManager.activate_plugins!
 
     config.after_initialize do
-      if plugins = FabManager.plugins
-        plugins.each { |plugin| plugin.notify_after_initialize }
-      end
+      plugins = FabManager.plugins
+      plugins&.each(&:notify_after_initialize)
     end
   end
 end

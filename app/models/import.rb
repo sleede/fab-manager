@@ -7,8 +7,21 @@ require 'file_size_validator'
 class Import < ActiveRecord::Base
   mount_uploader :attachment, ImportUploader
 
-  belongs_to :author, foreign_key: :author_id, class_name: 'User'
+  belongs_to :user
 
   validates :attachment, file_size: { maximum: Rails.application.secrets.max_import_size&.to_i || 5.megabytes.to_i }
   validates :attachment, file_mime_type: { content_type: ['text/csv'] }
+
+  after_commit :proceed_import, on: [:create]
+
+  private
+
+  def proceed_import
+    case category
+    when 'members'
+      MembersImportWorker.perform_async(id)
+    else
+      raise NoMethodError, "Unknown import service for #{category}"
+    end
+  end
 end

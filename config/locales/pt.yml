@@ -330,6 +330,10 @@ pt:
         accounting_acd: "de dados contábeis para ACD"
         is_over: "está finalizado."
         download_here: "Baixe aqui"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} import is over. "                    # missing translation
+        members: "Members"                                             # missing translation
+        view_results: "View results."                                  # missing translation
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} com o código %{CODE}"

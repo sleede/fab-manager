@@ -969,8 +969,20 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           translations: ['Translations', function (Translations) { return Translations.query(['app.admin.members_import', 'app.shared.user', 'app.shared.user_admin']).$promise; }],
-          plans: ['Plan', function(Plan) { return Plan.query().$promise }],
           tags: ['Tag', function(Tag) { return Tag.query().$promise }]
+        }
+      })
+      .state('app.admin.members_import_result', {
+        url: '/admin/members/import/:id/results',
+        views: {
+          'main@': {
+            templateUrl: '<%= asset_path "admin/members/import_result.html" %>',
+            controller: 'ImportMembersResultController'
+          }
+        },
+        resolve: {
+          translations: ['Translations', function (Translations) { return Translations.query(['app.admin.members_import_result', 'app.shared.user', 'app.shared.user_admin']).$promise; }],
+          importItem: ['Import', '$stateParams', function(Import, $stateParams) { return Import.get({ id: $stateParams.id }).$promise }]
         }
       })
       .state('app.admin.members_edit', {

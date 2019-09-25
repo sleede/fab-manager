@@ -612,26 +612,52 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
 /**
  * Controller used in the member's import page: import from CSV (admin view)
  */
-Application.Controllers.controller('ImportMembersController', ['$scope', '$state', 'Group', 'Training', 'CSRF', 'plans', 'tags',
-  function($scope, $state, Group, Training, CSRF, plans, tags) {
+Application.Controllers.controller('ImportMembersController', ['$scope', '$state', 'Group', 'Training', 'CSRF', 'tags', 'growl',
+  function($scope, $state, Group, Training, CSRF, tags, growl) {
     CSRF.setMetaTags();
 
     /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
-    $scope.actionUrl = '/api/members/import';
+    $scope.actionUrl = '/api/imports/members';
 
     // Form action on the above URL
     $scope.method = 'post';
 
-    // List of all plans
-    $scope.plans = plans;
-
     // List of all tags
     $scope.tags = tags
 
+    /*
+     * Callback run after the form was submitted
+     * @param content {*} The result provided by the server, may be an Import object or an error message
+     */
+    $scope.onImportResult = function(content) {
+      if (content.id) {
+        $state.go('app.admin.members_import_result', { id: content.id });
+      } else {
+        growl.error(content);
+      }
+    }
+
     // Using the MembersController
     return new MembersController($scope, $state, Group, Training);
+  }
+]);
+
+/**
+ * Controller used in the member's import results page (admin view)
+ */
+Application.Controllers.controller('ImportMembersResultController', ['$scope', '$state', 'importItem',
+  function ($scope, $state, importItem) {
+    /* PUBLIC SCOPE */
+
+    // Current import as saved in database
+    $scope.import = importItem;
+
+    /**
+     * Changes the admin's view to the members import page
+     */
+    $scope.cancel = function () { $state.go('app.admin.members_import'); };
   }
 ]);
 

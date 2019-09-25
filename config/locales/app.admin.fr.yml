@@ -573,7 +573,7 @@ fr:
         # import massif de members
         members_import:
           import_members: "Importer des membres"
-          info: "Vous pouvez téléverser un fichier CVS afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier les groupe, formations, abonnement et étiquettes des membres."
+          info: "Vous pouvez téléverser un fichier CVS afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier le groupe, les formations et les étiquettes des membres."
           required_fields: "Votre fichier doit obligatoirement comporter, au minimum, les informations suivantes pour chaque utilisateur à créer : courriel, nom, prénom et groupe. Si le mot passe n'est pas rempli, il sera généré automatiquement. Lors d'une mise à jour, les champs non remplis seront gardés tel quels."
           about_example: "Merci de vous référer au fichier d'exemple fourni pour générer un fichier CSV au bon format. Attention à l'utiliser l'encodage Unicode UTF-8"
           groups: "Groupes"
@@ -591,6 +591,15 @@ fr:
           download_example: "Télécharger le fichier d'exemple"
           select_file: "Choisissez un fichier"
           import: "Importer"
+          update_field: "Champ de référence pour les utilisateurs à mettre à jour"
+          update_on_id: "ID"
+          update_on_username: "Pseudonyme"
+          update_on_email: "Adresse de courriel"
+
+      members_import_result:
+        # résultats de l'import
+        members_import_result:
+          import_results: "Résultats de l'import"
 
       members_edit:
         # modifier un membre
