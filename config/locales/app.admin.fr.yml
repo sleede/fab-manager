@@ -600,6 +600,12 @@ fr:
         # résultats de l'import
         members_import_result:
           import_results: "Résultats de l'import"
+          import_details: "Import n°{{ID}}, du {{DATE}}, initié par {{USER}}"  # angular interpolation
+          results: "Résultats"
+          pending: "En cours..."
+          status_create: "Création d'un nouvel utilisateur"
+          status_update: "Mise à jour de l'utilisateur {{ID}}"  # angular interpolation
+          error_details: "Détails de l'erreur :"
 
       members_edit:
         # modifier un membre

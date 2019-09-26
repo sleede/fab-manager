@@ -11,7 +11,10 @@ class MembersImportWorker
     raise SecurityError, 'Not allowed to import' unless import.user.admin?
     raise KeyError, 'Wrong worker called' unless import.category == 'members'
 
-    Members::ImportService.import(import)
+    res = Members::ImportService.import(import)
+
+    import.results = res.to_yaml
+    import.save!
 
     NotificationCenter.call type: :notify_admin_import_complete,
                             receiver: import.user,

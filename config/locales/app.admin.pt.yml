@@ -600,6 +600,12 @@ pt:
         # import results
         members_import_result:
           import_results: "Import results"                                                        # translation_missing
+          import_details: "Import #{{ID}}, of {{DATE}}, initiated by {{USER}}"  # angular interpolation   # translation_missing
+          results: "Results"                                                                      # translation_missing
+          pending: "Pending..."                                                                   # translation_missing
+          status_create: "Creating a new user"                                                    # translation_missing
+          status_update: "Updating user {{ID}}"  # angular interpolation                          # translation_missing
+          error_details: "Error's details:"                                                       # translation_missing
 
       members_edit:
         # edit a member

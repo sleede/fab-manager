@@ -10,9 +10,13 @@ class Import < ActiveRecord::Base
   belongs_to :user
 
   validates :attachment, file_size: { maximum: Rails.application.secrets.max_import_size&.to_i || 5.megabytes.to_i }
-  validates :attachment, file_mime_type: { content_type: ['text/csv'] }
+  validates :attachment, file_mime_type: { content_type: %w[text/csv text/comma-separated-values application/vnd.ms-excel] }
 
   after_commit :proceed_import, on: [:create]
+
+  def results_hash
+    YAML.safe_load(results, [Symbol]) if results
+  end
 
   private
 

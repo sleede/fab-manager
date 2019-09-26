@@ -635,7 +635,7 @@ Application.Controllers.controller('ImportMembersController', ['$scope', '$state
       if (content.id) {
         $state.go('app.admin.members_import_result', { id: content.id });
       } else {
-        growl.error(content);
+        growl.error(JSON.stringify(content));
       }
     }
 
@@ -647,17 +647,40 @@ Application.Controllers.controller('ImportMembersController', ['$scope', '$state
 /**
  * Controller used in the member's import results page (admin view)
  */
-Application.Controllers.controller('ImportMembersResultController', ['$scope', '$state', 'importItem',
-  function ($scope, $state, importItem) {
+Application.Controllers.controller('ImportMembersResultController', ['$scope', '$state', 'Import', 'importItem',
+  function ($scope, $state, Import, importItem) {
     /* PUBLIC SCOPE */
 
     // Current import as saved in database
     $scope.import = importItem;
 
+    // Current import results
+    $scope.results = null;
+
     /**
      * Changes the admin's view to the members import page
      */
     $scope.cancel = function () { $state.go('app.admin.members_import'); };
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      $scope.results = JSON.parse($scope.import.results);
+      if (!$scope.results) {
+        setTimeout(function() {
+          Import.get({ id: $scope.import.id }, function(data) {
+            $scope.import = data;
+            initialize();
+          });
+        }, 5000);
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    initialize();
   }
 ]);
 
