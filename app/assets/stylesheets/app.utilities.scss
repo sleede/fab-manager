@@ -319,6 +319,17 @@ p, .widget p {
   width: auto;
   vertical-align: sub;
 }
+
+// the two classes above are used in import results page for "import failed"
+.fa-stack-inside {
+  font-size: 0.8em !important;
+}
+
+.fa-stack-outside {
+  font-size: 1.3em !important;
+  line-height: 1.7em !important;
+}
+
 .contrast-250 { -webkit-filter: contrast(250%); filter: contrast(250%); }
 .clear{display:block;overflow: hidden;}
 

@@ -42,10 +42,16 @@
           <div ng-if="resultRow.status">
             <i class="fa fa-arrow-right m-l-lg m-r"></i>
             <span class="m-r-md">{{ 'members_import_result.status_' + resultRow.status | translate:{ID:resultRow.user} }}</span>
-            <span ng-show="resultRow.result"><i class="fa fa-check-square-o green v-middle text-lg"></i></span>
-            <span ng-hide="resultRow.result" class="fa-stack red v-middle">
-              <i class="fa fa-square-o fa-stack-2x"></i>
-              <i class="fa fa-times fa-stack-1x"></i>
+            <span ng-show="resultRow.result" class="green font-bold">
+              <i class="fa fa-check-square-o fa-stack-outside"></i>
+              <span class="m-l" translate>{{ 'members_import_result.success' }}</span>
+            </span>
+            <span ng-hide="resultRow.result" class="red font-bold">
+              <span class="fa-stack v-bottom">
+                <i class="fa fa-square-o fa-stack-1x fa-stack-outside"></i>
+                <i class="fa fa-times fa-stack-1x fa-stack-inside"></i>
+              </span>
+              <span class="m-l" translate>{{ 'members_import_result.failed' }}</span>
             </span>
           </div>
           <div class="m-l-lg red" ng-if="!resultRow.row && !resultRow.status">

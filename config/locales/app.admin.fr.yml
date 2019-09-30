@@ -605,6 +605,8 @@ fr:
           pending: "En cours..."
           status_create: "Création d'un nouvel utilisateur"
           status_update: "Mise à jour de l'utilisateur {{ID}}"  # angular interpolation
+          success: "Succès"
+          failed: "Échec"
           error_details: "Détails de l'erreur :"
 
       members_edit:

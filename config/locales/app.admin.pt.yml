@@ -605,6 +605,8 @@ pt:
           pending: "Pending..."                                                                   # translation_missing
           status_create: "Creating a new user"                                                    # translation_missing
           status_update: "Updating user {{ID}}"  # angular interpolation                          # translation_missing
+          success: "Success"                                                                      # translation_missing
+          failed: "Failed"                                                                        # translation_missing
           error_details: "Error's details:"                                                       # translation_missing
 
       members_edit:
