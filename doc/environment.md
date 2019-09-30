@@ -24,20 +24,24 @@ If you run the application in production with docker, the settings are localized
 
 DNS name or IP address of the server hosting the PostgreSQL database of the application (see [PostgreSQL](../README.md#postgresql)).
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
+When using docker-compose, you should provide the name of the service in your [docker-compose.yml](../docker/docker-compose.yml) file (`postgres` by default).
 
     POSTGRES_PASSWORD
 
-Password for the PostgreSQL user, as specified in `database.yml`.
+Password for the PostgreSQL user, as specified in `database.yml` (default: `postgres`).
 Please see [Setup the FabManager database in PostgreSQL](../README.md#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
+When using docker-compose, the default configuration (with `postgres` user) does not uses any password as it is confined in the docker container.
 
     REDIS_HOST
 
 DNS name or IP address of the server hosting the redis database.
+When using docker-compose, you should provide the name of the service in your [docker-compose.yml](../docker/docker-compose.yml) file (`redis` by default).
 
     ELASTICSEARCH_HOST
 
 DNS name or IP address of the server hosting the elasticSearch database.
+When using docker-compose, you should provide the name of the service in your [docker-compose.yml](../docker/docker-compose.yml) file (`elasticsearch` by default).
 
     SECRET_KEY_BASE
 
@@ -110,7 +114,7 @@ Identifier of your Google Analytics account.
     RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
 
 Configuration keys of Google ReCaptcha V2 (Checkbox).
-This is optional, the captcha will be displayed on the sign-up form, only if these keys are filled.  
+This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided.  
 
     DISQUS_SHORTNAME
 
@@ -177,12 +181,13 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
 
     ADMIN_EMAIL, ADMIN_PASSWORD
 
-Credentials for the first admin user created when seeding the project. (not present in application.yml because they are only used once when running the database seed with the command `rake db:seed`)
+Credentials for the first admin user created when seeding the project. 
+By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed`
 
     SUPERADMIN_EMAIL
 
 Optional email of the administrator account in charge of the system administration. 
-If specified, it will be hidden from the administrators list and he will exclusively receive the notifications related to the system administration.
+If specified, it will be hidden from the administrators list and it will exclusively receive the notifications related to the system administration.
 If not specified, every admins will receive system administration notifications.  
 
 <a name="internationalization-settings"></a>
