@@ -84,6 +84,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutSpaces = Fablab.withoutSpaces;
       // Global config: if true, all payments will be disabled in the application for the members (only admins will be able to proceed reservations)
       $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
+      // Global config: if true, no invoices will be generated
+      $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

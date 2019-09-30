@@ -188,6 +188,8 @@ class Invoice < ActiveRecord::Base
   private
 
   def generate_and_send_invoice
+    return if Rails.application.secrets.fablab_without_invoices == 'true'
+
     unless Rails.env.test?
       puts "Creating an InvoiceWorker job to generate the following invoice: id(#{id}), invoiced_id(#{invoiced_id}), " \
            "invoiced_type(#{invoiced_type}), user_id(#{invoicing_profile.user_id})"
