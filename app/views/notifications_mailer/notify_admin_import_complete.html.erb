@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p>
+  <%= t('.body.you_made_an_import', CATEGORY: t(".body.category_#{@attached_object.category}")) %>.
+</p>
+<p>
+  <%=link_to( t('.body.click_to_view_results'), "#{root_url}#!/admin/members/import/#{@attached_object.id}/results", target: "_blank" )%>
+</p>

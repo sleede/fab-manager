@@ -1,12 +1,23 @@
 # Changelog Fab Manager
 
+- Optional reCaptcha checkbox in sign-up form
 - Ability to configure and export the accounting data to the ACD accounting software
 - Compute the VAT per item in each invoices, instead of globally
 - Use Alpine Linux to build the Docker image (#147)
+- Ability to set project's CAO attachement maximum upload size
+- Ability to bulk-import members from a CSV file
+- Ability to disable invoices generation and interfaces
 - Fix a bug: invoices with total = 0, are marked as paid on site even if paid by card
 - Fix a bug: after disabling a group, its associated plans are hidden from the interface
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
+- Fix a bug: create a plan does not set its name
 - [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] -> (only dev) yarn install
+- [TODO DEPLOY] add `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add `MAX_CAO_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add `- ${PWD}/imports:/usr/src/app/imports` in the volumes list of your fabmanager service in [docker-compose.yml](docker/docker-compose.yml)
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 
 ## v4.1.1 2019 september 20
 

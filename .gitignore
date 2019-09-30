@@ -34,6 +34,9 @@
 # XLSX exports
 /exports/*
 
+# CSV imports
+/imports/*
+
 # Archives of cLosed accounting periods
 /accounting/*
 

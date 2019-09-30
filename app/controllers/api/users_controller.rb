@@ -13,17 +13,14 @@ class API::UsersController < API::ApiController
   end
 
   def create
-    if current_user.admin?
-      res = UserService.create_partner(partner_params)
+    authorize User
+    res = UserService.create_partner(partner_params)
 
-      if res[:saved]
-        @user = res[:user]
-        render status: :created
-      else
-        render json: res[:user].errors.full_messages, status: :unprocessable_entity
-      end
+    if res[:saved]
+      @user = res[:user]
+      render status: :created
     else
-      head 403
+      render json: res[:user].errors.full_messages, status: :unprocessable_entity
     end
   end
 

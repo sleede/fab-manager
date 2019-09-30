@@ -149,6 +149,11 @@ Rails.application.routes.draw do
     get 'exports/:id/download' => 'exports#download'
     post 'exports/status' => 'exports#status'
 
+    # Members CSV import
+    resources :imports, only: [:show] do
+      post 'members', action: 'members', on: :collection
+    end
+
     # Fab-manager's version
     get 'version' => 'version#show'
 

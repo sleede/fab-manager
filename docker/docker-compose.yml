@@ -12,6 +12,7 @@ services:
       - ${PWD}/public/uploads:/usr/src/app/public/uploads
       - ${PWD}/invoices:/usr/src/app/invoices
       - ${PWD}/exports:/usr/src/app/exports
+      - ${PWD}/imports:/usr/src/app/imports
       - ${PWD}/log:/var/log/supervisor
       - ${PWD}/plugins:/usr/src/app/plugins
       - ${PWD}/accounting:/usr/src/app/accounting

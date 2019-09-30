@@ -82,6 +82,12 @@ It is not recommended to disable spaces if at least one space reservation was ma
 If set to 'true', the online payment won't be available and the you'll be only able to process reservations when logged as admin.
 Valid stripe API keys are still required, even if you don't require online payments. 
 
+    FABLAB_WITHOUT_INVOICES
+
+If set to 'true', the invoices will be disabled. 
+This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
+**Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
+
     DEFAULT_MAIL_FROM
 
 When sending notification mails, the platform will use this address to identify the sender.
@@ -100,6 +106,11 @@ DEFAULT_HOST is also used to configure Google Analytics.
     GA_ID
 
 Identifier of your Google Analytics account.
+
+    RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
+
+Configuration keys of Google ReCaptcha V2 (Checkbox).
+This is optional, the captcha will be displayed on the sign-up form, only if these keys are filled.  
 
     DISQUS_SHORTNAME
 
@@ -147,6 +158,17 @@ Please consider that allowing file archives (eg. application/zip) or binary exec
 Maximum size (in bytes) allowed for image uploaded on the platform.
 This parameter concerns events, plans, user's avatars, projects and steps of projects.
 If this parameter is not specified the maximum size allowed will be 2MB.
+
+    MAX_CAO_SIZE
+
+Maximum size (in bytes) allowed for CAO files uploaded on the platform, as project attachments.
+If this parameter is not specified, the maximum size allowed will be 5MB.
+
+    MAX_IMPORT_SIZE
+
+Maximum size (in bytes) allowed for import files uploaded on the platform.
+Currently, this is only used to import users from a CSV file. 
+If this parameter is not specified, the maximum size allowed will be 5MB.
 
     DISK_SPACE_MB_ALERT
 

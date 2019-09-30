@@ -330,6 +330,10 @@ es:
         accounting_acd: "de los datos contables para ACD"
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} import is over. "                    # missing translation
+        members: "Members"                                             # missing translation
+        view_results: "View results."                                  # missing translation
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento de %{PERCENT}% con el código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Disfruta de un descuento de %{AMOUNT} con el código %{CODE}"
@@ -341,8 +345,8 @@ es:
       notify_admin_archive_complete:                                                                          # missing translation
         archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."          # missing translation
       notify_privacy_policy_changed:
-        policy_updated: "Privacy policy updated."        # missing translation
-        click_to_show: "Click here to consult"        # missing translation
+        policy_updated: "Privacy policy updated."                      # missing translation
+        click_to_show: "Click here to consult"                         # missing translation
   statistics:
     # statistics tools for admins
     subscriptions: "Suscripciones"

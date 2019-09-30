@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190917123631) do
+ActiveRecord::Schema.define(version: 20190924140726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -245,6 +245,16 @@ ActiveRecord::Schema.define(version: 20190917123631) do
 
   add_index "history_values", ["invoicing_profile_id"], name: "index_history_values_on_invoicing_profile_id", using: :btree
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
+
+  create_table "imports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "attachment"
+    t.string   "update_field"
+    t.string   "category"
+    t.text     "results"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "invoice_items", force: :cascade do |t|
     t.integer  "invoice_id"

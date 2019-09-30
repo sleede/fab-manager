@@ -36,5 +36,4 @@ class StatisticProfile < ActiveRecord::Base
       ''
     end
   end
-
 end

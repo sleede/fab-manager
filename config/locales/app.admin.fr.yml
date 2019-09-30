@@ -306,6 +306,7 @@ fr:
           display_more_invoices: "Afficher plus de factures ..."
           no_invoices_for_now: "Aucune facture pour le moment."
           invoicing_settings: "Paramètres de facturation"
+          warning_invoices_disabled: "Attention : les factures ne sont pas activées. Aucune facture ne sera générée par Fab-manager. Vous devez néanmoins remplir correctement les informations ci-dessous, particulièrement la TVA."
           change_logo: "Changer le logo"
           john_smith: "Jean Dupont"
           john_smith_at_example_com: "jean.dupont@example.com"
@@ -568,6 +569,46 @@ fr:
         members_new:
           add_a_member: "Ajouter un membre"
           user_is_an_organization: "L'utilisateur est une structure"
+
+      members_import:
+        # import massif de members
+        members_import:
+          import_members: "Importer des membres"
+          info: "Vous pouvez téléverser un fichier CVS afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier le groupe, les formations et les étiquettes des membres."
+          required_fields: "Votre fichier doit obligatoirement comporter, au minimum, les informations suivantes pour chaque utilisateur à créer : courriel, nom, prénom et groupe. Si le mot passe n'est pas rempli, il sera généré automatiquement. Lors d'une mise à jour, les champs non remplis seront gardés tel quels."
+          about_example: "Merci de vous référer au fichier d'exemple fourni pour générer un fichier CSV au bon format. Attention à l'utiliser l'encodage Unicode UTF-8"
+          groups: "Groupes"
+          group_name: "Nom du groupe"
+          group_identifier: "Identifiant à utiliser"
+          trainings: "Formations"
+          training_name: "Nom de la formation"
+          training_identifier: "Identifiant à utiliser"
+          plans: "Abonnements"
+          plan_name: "Nom de l'abonnement"
+          plan_identifier: "Identifiant à utiliser"
+          tags: "Étiquettes"
+          tag_name: "Nom de l'étiquette"
+          tag_identifier: "Identifiant à utiliser"
+          download_example: "Télécharger le fichier d'exemple"
+          select_file: "Choisissez un fichier"
+          import: "Importer"
+          update_field: "Champ de référence pour les utilisateurs à mettre à jour"
+          update_on_id: "ID"
+          update_on_username: "Pseudonyme"
+          update_on_email: "Adresse de courriel"
+
+      members_import_result:
+        # résultats de l'import
+        members_import_result:
+          import_results: "Résultats de l'import"
+          import_details: "Import n°{{ID}}, du {{DATE}}, initié par {{USER}}"  # angular interpolation
+          results: "Résultats"
+          pending: "En cours..."
+          status_create: "Création d'un nouvel utilisateur"
+          status_update: "Mise à jour de l'utilisateur {{ID}}"  # angular interpolation
+          success: "Succès"
+          failed: "Échec"
+          error_details: "Détails de l'erreur :"
 
       members_edit:
         # modifier un membre

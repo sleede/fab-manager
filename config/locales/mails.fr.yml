@@ -274,6 +274,13 @@ fr:
           xlsx: "Excel"
           csv: "CSV"
 
+    notify_admin_import_complete:
+      subject: "Import terminé"
+      body:
+        you_made_an_import: "Vous avez initié un import %{CATEGORY}"
+        category_members: "des membres"
+        click_to_view_results: "Cliquez ici pour voir les résultats"
+
     notify_member_about_coupon:
       subject: "Code promo"
       body:

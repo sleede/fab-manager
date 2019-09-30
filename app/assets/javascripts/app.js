@@ -20,7 +20,7 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
-  'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock'])
+  'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha'])
   .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider',
     function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
       // Google analytics
@@ -84,6 +84,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutSpaces = Fablab.withoutSpaces;
       // Global config: if true, all payments will be disabled in the application for the members (only admins will be able to proceed reservations)
       $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
+      // Global config: if true, no invoices will be generated
+      $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

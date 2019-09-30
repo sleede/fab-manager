@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :tags, allow_destroy: true
 
   has_many :exports, dependent: :destroy
+  has_many :imports, dependent: :nullify
 
   # fix for create admin user
   before_save do

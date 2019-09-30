@@ -1,0 +1,66 @@
+<div>
+
+  <section class="heading b-b">
+    <div class="row no-gutter">
+
+      <div class="col-md-1 hidden-xs">
+        <section class="heading-btn">
+          <a ng-click="cancel()"><i class="fa fa-long-arrow-left"></i></a>
+        </section>
+      </div>
+
+      <div class="col-md-8 b-l">
+        <section class="heading-title">
+          <h1 translate>{{ 'members_import_result.import_results' }}</h1>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="row no-gutter">
+    <div class="col-sm-12 col-md-12">
+
+      <h2 class="m-l-lg">{{ 'members_import_result.import_details' | translate:{DATE:(import.created_at | amDateFormat:'L'), USER:import.user.full_name, ID:import.id} }}</h2>
+
+      <h3 class="m-l-lg" ng-hide="results"><i class="fa fa-spinner fa-pulse"></i> <span translate>{{ 'members_import_result.pending' }}</span></h3>
+      <div ng-show="results">
+        <h3 class="m-l-lg" translate>{{ 'members_import_result.results' }}</h3>
+
+        <div class="row p-h-lg" ng-repeat="resultRow in results track by $index">
+          <div class="scroll-x">
+            <table class="table table-bordered font-thin text-xs m-t-lg" ng-if="resultRow.row">
+              <tr>
+                <th ng-repeat="(key, value) in resultRow.row">{{key}}</th>
+              </tr>
+              <tr class="text-nowrap">
+                <td ng-repeat="(key, value) in resultRow.row">{{value}}</td>
+              </tr>
+            </table>
+          </div>
+          <div ng-if="resultRow.status">
+            <i class="fa fa-arrow-right m-l-lg m-r"></i>
+            <span class="m-r-md">{{ 'members_import_result.status_' + resultRow.status | translate:{ID:resultRow.user} }}</span>
+            <span ng-show="resultRow.result" class="green font-bold">
+              <i class="fa fa-check-square-o fa-stack-outside"></i>
+              <span class="m-l" translate>{{ 'members_import_result.success' }}</span>
+            </span>
+            <span ng-hide="resultRow.result" class="red font-bold">
+              <span class="fa-stack v-bottom">
+                <i class="fa fa-square-o fa-stack-1x fa-stack-outside"></i>
+                <i class="fa fa-times fa-stack-1x fa-stack-inside"></i>
+              </span>
+              <span class="m-l" translate>{{ 'members_import_result.failed' }}</span>
+            </span>
+          </div>
+          <div class="m-l-lg red" ng-if="!resultRow.row && !resultRow.status">
+            <span class="m-r" translate>{{ 'members_import_result.error_details' }}</span>{{resultRow}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

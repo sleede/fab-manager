@@ -19,6 +19,7 @@
       Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');
       Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' != 'false');
       Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' == 'true');
+      Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' == 'true');
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
@@ -44,8 +45,9 @@
       Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
       <% if Rails.application.secrets.openlab_app_id.present? %>
       Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
-      <% else %>
-      Fablab.openlabAppId = null;
+      <% end %>
+      <% if RecaptchaService.recaptcha_enabled? %>
+      Fablab.recaptchaSiteKey = "<%= RecaptchaService.site_key %>";
       <% end %>
   </script>
 

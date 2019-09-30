@@ -569,6 +569,46 @@ es:
           add_a_member: "Agregar un miembro"
           user_is_an_organization: "El usuario es una organización"
 
+      members_import:
+        # members bulk import
+        members_import:
+          import_members: "Import members"                                                        # translation_missing
+          info: "You can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, the trainings and the tags of the members."   # translation_missing
+          required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."   # translation_missing
+          about_example: "Please refer to the provided example file to generate a correct CSV file. Be careful to use Unicode UTF-8 encoding."   # translation_missing
+          groups: "Groups"                                                                        # translation_missing
+          group_name: "Group name"                                                                # translation_missing
+          group_identifier: "Identifier to use"                                                   # translation_missing
+          trainings: "Trainings"                                                                  # translation_missing
+          training_name: "Training name"                                                          # translation_missing
+          training_identifier: "Identifier to use"                                                # translation_missing
+          plans: "Plans"                                                                          # translation_missing
+          plan_name: "Plan name"                                                                  # translation_missing
+          plan_identifier: "Identifier to use"                                                    # translation_missing
+          tags: "Tags"                                                                            # translation_missing
+          tag_name: "Tag name"                                                                    # translation_missing
+          tag_identifier: "Identifier to use"                                                     # translation_missing
+          download_example: "Download the exemple file"                                           # translation_missing
+          select_file: "Choose a file"                                                            # translation_missing
+          import: "Import"                                                                        # translation_missing
+          update_field: "Reference field for users to update"                                     # translation_missing
+          update_on_id: "ID"                                                                      # translation_missing
+          update_on_username: "Username"                                                          # translation_missing
+          update_on_email: "Email address"                                                        # translation_missing
+
+      members_import_result:
+        # import results
+        members_import_result:
+          import_results: "Import results"                                                        # translation_missing
+          import_details: "Import #{{ID}}, of {{DATE}}, initiated by {{USER}}"  # angular interpolation   # translation_missing
+          results: "Results"                                                                      # translation_missing
+          pending: "Pending..."                                                                   # translation_missing
+          status_create: "Creating a new user"                                                    # translation_missing
+          status_update: "Updating user {{ID}}"  # angular interpolation                          # translation_missing
+          success: "Success"                                                                      # translation_missing
+          failed: "Failed"                                                                        # translation_missing
+          error_details: "Error's details:"                                                       # translation_missing
+
       members_edit:
         # edit a member
         duration: "Duración:"
