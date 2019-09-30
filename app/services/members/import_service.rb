@@ -8,11 +8,12 @@ class Members::ImportService
       log = []
       CSV.foreach(import.attachment.url, headers: true, col_sep: ';') do |row|
         begin
+          password = hide_password(row)
           log << { row: row.to_hash }
 
           # try to find member based on import.update_field
           user = User.find_by(import.update_field.to_sym => row[import.update_field])
-          params = row_to_params(row, user)
+          params = row_to_params(row, user, password)
           if user
             service = Members::MembersService.new(user)
             res = service.update(params)
@@ -35,18 +36,24 @@ class Members::ImportService
 
     private
 
-    def row_to_params(row, user)
-      res = {
-        id: row['id'],
-        username: row['username'],
-        email: row['email'],
-        password: row['password'],
-        password_confirmation: row['password'],
-        is_allow_contact: row['allow_contact'] == 'yes',
-        is_allow_newsletter: row['allow_newsletter'] == 'yes',
-        group_id: group_id(row),
-        tag_ids: tag_ids(row)
-      }
+    def hashify(row, property, value: row[property], key: property.to_sym)
+      res = {}
+      res[key] = value if row[property]
+      res
+    end
+
+    def row_to_params(row, user, password)
+      res = {}
+
+      res.merge! hashify(row, 'id')
+      res.merge! hashify(row, 'username')
+      res.merge! hashify(row, 'email')
+      res.merge! hashify(row, 'password', value: password)
+      res.merge! hashify(row, 'password', key: :password_confirmation, value: password)
+      res.merge! hashify(row, 'allow_contact', value: row['allow_contact'] == 'yes', key: :is_allow_contact)
+      res.merge! hashify(row, 'allow_newsletter', value: row['allow_newsletter'] == 'yes', key: :is_allow_newsletter)
+      res.merge! hashify(row, 'group', value: group_id(row), key: :group_id)
+      res.merge! hashify(row, 'tags', value: tag_ids(row), key: :tag_ids)
 
       profile_attributes = profile(row, user)
       res[:profile_attributes] = profile_attributes if profile_attributes
@@ -73,29 +80,29 @@ class Members::ImportService
     end
 
     def profile(row, user)
-      res = {
-        first_name: row['first_name'],
-        last_name: row['last_name'],
-        phone: row['phone'],
-        interest: row['interests'],
-        software_mastered: row['softwares'],
-        website: row['website'],
-        job: row['job'],
-        facebook: row['facebook'],
-        twitter: row['twitter'],
-        google_plus: row['googleplus'],
-        viadeo: row['viadeo'],
-        linkedin: row['linkedin'],
-        instagram: row['instagram'],
-        youtube: row['youtube'],
-        vimeo: row['vimeo'],
-        dailymotion: row['dailymotion'],
-        github: row['github'],
-        echosciences: row['echosciences'],
-        pinterest: row['pinterest'],
-        lastfm: row['lastfm'],
-        flickr: row['flickr']
-      }
+      res = {}
+
+      res.merge! hashify(row, 'first_name')
+      res.merge! hashify(row, 'last_name')
+      res.merge! hashify(row, 'phone')
+      res.merge! hashify(row, 'interests', key: :interest)
+      res.merge! hashify(row, 'softwares', key: :software_mastered)
+      res.merge! hashify(row, 'website')
+      res.merge! hashify(row, 'job')
+      res.merge! hashify(row, 'facebook')
+      res.merge! hashify(row, 'twitter')
+      res.merge! hashify(row, 'googleplus', key: :google_plus)
+      res.merge! hashify(row, 'viadeo')
+      res.merge! hashify(row, 'linkedin')
+      res.merge! hashify(row, 'instagram')
+      res.merge! hashify(row, 'youtube')
+      res.merge! hashify(row, 'vimeo')
+      res.merge! hashify(row, 'dailymotion')
+      res.merge! hashify(row, 'github')
+      res.merge! hashify(row, 'echosciences')
+      res.merge! hashify(row, 'pinterest')
+      res.merge! hashify(row, 'lastfm')
+      res.merge! hashify(row, 'flickr')
 
       res[:id] = user.profile.id if user&.profile
 
@@ -117,10 +124,10 @@ class Members::ImportService
     end
 
     def statistic_profile(row, user)
-      res = {
-        gender: row['gender'] == 'male',
-        birthday: row['birthdate']
-      }
+      res = {}
+
+      res.merge! hashify(row, 'gender', value: row['gender'] == 'male')
+      res.merge! hashify(row, 'birthdate', key: :birthday)
 
       res[:id] = user.statistic_profile.id if user&.statistic_profile
 
@@ -143,9 +150,7 @@ class Members::ImportService
     def organization(row, user)
       return unless row['organization_name']
 
-      res = {
-        name: row['organization_name']
-      }
+      res = { name: row['organization_name'] }
 
       res[:id] = user.invoicing_profile.organization.id if user&.invoicing_profile&.organization
 
@@ -169,6 +174,12 @@ class Members::ImportService
       return unless row['trainings']
 
       Training.where(id: row['trainings'].split(',')).map(&:id)
+    end
+
+    def hide_password(row)
+      password = row['password']
+      row['password'] = '********' if row['password']
+      password
     end
   end
 end

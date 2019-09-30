@@ -203,7 +203,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         return Auth.login().then(function (user) {
           $scope.setCurrentUser(user);
         }, function (error) {
-          console.error(`Authentication failed: ${error}`);
+          console.error(`Authentication failed: ${JSON.stringify(error)}`);
         }
         );
       });
@@ -367,7 +367,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               }
             }
             , function (error) {
-              console.error(`Authentication failed: ${error}`);
+              console.error(`Authentication failed: ${JSON.stringify(error)}`);
               $scope.alerts = [];
               return $scope.alerts.push({
                 msg: _t('wrong_email_or_password'),
