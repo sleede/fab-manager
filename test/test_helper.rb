@@ -10,6 +10,8 @@ require 'vcr'
 require 'sidekiq/testing'
 require 'minitest/reporters'
 
+include ActionDispatch::TestProcess
+
 VCR.configure do |config|
   config.cassette_library_dir = 'test/vcr_cassettes'
   config.hook_into :webmock
@@ -92,9 +94,9 @@ class ActiveSupport::TestCase
       ht_amount = parse_amount_from_invoice_line(line) if line.include? I18n.t('invoices.including_total_excluding_taxes')
     end
 
-    if Setting.find_by(name: 'invoice_VAT-active').value == 'true'
-      vat_service = VatHistoryService.new
-      vat_rate = vat_service.invoice_vat(invoice)
+    vat_service = VatHistoryService.new
+    vat_rate = vat_service.invoice_vat(invoice)
+    if vat_rate.positive?
       computed_ht = sprintf('%.2f', (invoice.total / (vat_rate / 100.00 + 1)) / 100.00).to_f
 
       assert_equal computed_ht, ht_amount, 'Total excluding taxes rendered in the PDF file is not computed correctly'

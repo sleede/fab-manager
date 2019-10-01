@@ -46,7 +46,7 @@
               <i class="fa fa-check-square-o fa-stack-outside"></i>
               <span class="m-l" translate>{{ 'members_import_result.success' }}</span>
             </span>
-            <span ng-hide="resultRow.result" class="red font-bold">
+            <span ng-hide="resultRow.result" class="text-red-only font-bold">
               <span class="fa-stack v-bottom">
                 <i class="fa fa-square-o fa-stack-1x fa-stack-outside"></i>
                 <i class="fa fa-times fa-stack-1x fa-stack-inside"></i>
@@ -54,7 +54,7 @@
               <span class="m-l" translate>{{ 'members_import_result.failed' }}</span>
             </span>
           </div>
-          <div class="m-l-lg red" ng-if="!resultRow.row && !resultRow.status">
+          <div class="m-l-lg text-red-only" ng-if="!resultRow.row && !resultRow.status">
             <span class="m-r" translate>{{ 'members_import_result.error_details' }}</span>{{resultRow}}
           </div>
         </div>

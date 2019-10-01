@@ -22,7 +22,7 @@ class Members::ImportService
             user = User.new(params)
             service = Members::MembersService.new(user)
             res = service.create(import.user, params)
-            log << { user: nil, status: 'create', result: res }
+            log << { user: user.id, status: 'create', result: res }
           end
           log << user.errors.to_hash unless user.errors.to_hash.empty?
         rescue StandardError => e

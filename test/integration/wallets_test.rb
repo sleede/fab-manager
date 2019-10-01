@@ -64,9 +64,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     amount = 10.5
     expected_amount = w.amount + amount
     put "/api/wallet/#{w.id}/credit",
-      {
         amount: amount
-      }
 
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
@@ -88,12 +86,10 @@ class WalletsTest < ActionDispatch::IntegrationTest
     avoir_date = Time.now.end_of_day
     expected_amount = w.amount + amount
     put "/api/wallet/#{w.id}/credit",
-        {
-            amount: amount,
-            avoir: true,
-            avoir_date: avoir_date,
-            avoir_description: 'Some text'
-        }
+        amount: amount,
+        avoir: true,
+        avoir_date: avoir_date,
+        avoir_description: 'Some text'
 
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
