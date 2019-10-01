@@ -1,9 +1,102 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  author_id: 1
+  user_id: 1
   attachment: 'users.csv'
   update_field: 'id'
+  category: 'members'
+  results: |
+    ---
+    - :row:
+        id:
+        gender: male
+        first_name: jean
+        last_name: dupont
+        username: jdupont
+        email: jean.dupont@gmail.com
+        password:
+        birthdate: '1970-01-01'
+        address: 12 bvd Libération - 75000 Paris
+        phone: '0123456789'
+        group: standard
+        tags: '1,2'
+        trainings: '1'
+        website: http://www.example.com
+        job: Charpentier
+        interests: Ping-pong
+        softwares: AutoCAD
+        allow_contact: 'yes'
+        allow_newsletter: 'no'
+        organization_name:
+        organization_address:
+        facebook: http://www.facebook.com/jdupont
+        twitter:
+        googleplus:
+        viadeo:
+        linkedin:
+        instagram:
+        youtube:
+        vimeo:
+        dailymotion:
+        github: http://github.com/example
+        echosciences:
+        pinterest:
+        lastfm:
+        flickr:
+    - :user:
+      :status: create
+      :result: false
+    - :username:
+        - n'est pas disponible
+    - :row:
+        id: '43'
+        gender:
+        first_name:
+        last_name:
+        username:
+        email:
+        password: "********"
+        birthdate:
+        address:
+        phone:
+        group:
+        tags:
+        trainings:
+        website:
+        job:
+        interests:
+        softwares:
+        allow_contact:
+        allow_newsletter:
+        organization_name:
+        organization_address:
+        facebook:
+        twitter:
+        googleplus:
+        viadeo:
+        linkedin:
+        instagram:
+        youtube:
+        vimeo:
+        dailymotion:
+        github:
+        echosciences:
+        pinterest:
+        lastfm:
+        flickr:
+    - :user:
+      :status: create
+      :result: false
+    - :email:
+        - doit être rempli(e)
+      :profile.first_name:
+        - doit être rempli(e)
+      :profile.last_name:
+        - doit être rempli(e)
+      :profile.phone:
+        - n'est pas un nombre
+      :username:
+        - doit être rempli(e)
   created_at: 2019-09-24 15:06:22.151882000 Z
   updated_at: 2019-09-24 15:06:22.151882000 Z
 
