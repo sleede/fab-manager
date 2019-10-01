@@ -351,6 +351,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     var openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
+
       $window.location.href = '<%="/users/auth/#{active_provider.strategy_name}"%>';
       <% else %>
       return $uibModal.open({

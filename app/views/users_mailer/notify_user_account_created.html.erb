@@ -38,9 +38,9 @@
 
   <p>
     <%= t('.body.thanks_to_') %>
-    <a href="<%= "#{root_url}/users/auth/#{active_provider.strategy_name}?auth_token=#{@user.auth_token}"%>" target="_blank">
-      <%= t('body.logon_or_login', PROVIDER: active_provider.name )%>
-    </a>
+    <%= link_to(t('.body.logon_or_login', PROVIDER: active_provider.name ),
+                "#{root_url}/users/auth/#{active_provider.strategy_name}?auth_token=#{@user.auth_token}",
+                { method: :post, target: '_blank' }) %>
   </p>
 
   <p><%= t('.body.token_if_link_problem') %></p>
