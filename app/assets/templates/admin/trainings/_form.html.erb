@@ -76,6 +76,9 @@
           <ui-select-choices ui-disable-choice="m.disabled" repeat="m.id as m in (machines | filter: $select.search)">
             <span ng-bind-html="m.name | highlight: $select.search"></span>
           </ui-select-choices>
+          <ui-select-no-choice>
+            <input type="hidden" name="training[machine_ids][]" value="" />
+          </ui-select-no-choice>
         </ui-select>
       </div>
     </div>

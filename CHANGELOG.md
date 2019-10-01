@@ -11,8 +11,9 @@
 - Fix a bug: after disabling a group, its associated plans are hidden from the interface
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
 - Fix a bug: create a plan does not set its name
+- Fix a bug: unable to dissociate the last machine from a formation
 - [TODO DEPLOY] `rake db:migrate`
-- [TODO DEPLOY] -> (only dev) yarn install
+- [TODO DEPLOY] -> (only dev) `yarn install` and `bundle install`
 - [TODO DEPLOY] add the `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add the `MAX_CAO_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
