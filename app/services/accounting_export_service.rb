@@ -75,13 +75,13 @@ class AccountingExportService
   # Generate the "client" rows, which contains the debit to the client account, all taxes included
   def client_rows(invoice)
     rows = ''
-    invoice.payment_means.each_with_index do |details, index|
+    invoice.payment_means.each do |details|
       rows << row(
         invoice,
         account(invoice, :client, means: details[:means]),
         account(invoice, :client, means: details[:means], type: :label),
         details[:amount] / 100.00,
-        line_label: index.zero? ? label(invoice) : '',
+        line_label: label(invoice),
         debit_method: :debit_client,
         credit_method: :credit_client
       )
