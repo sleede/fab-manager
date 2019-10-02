@@ -24,6 +24,10 @@ module OmniAuth::Strategies
            authorize_url: active_provider.providable.authorization_endpoint,
            token_url: active_provider.providable.token_endpoint
 
+    def callback_url
+      url = Rails.application.config.action_controller.default_url_options
+      "#{url[:protocol]}://#{url[:host]}#{script_name}#{callback_path}"
+    end
 
     uid { parsed_info['user.uid'.to_sym] }
 
