@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, follow">
+  <title>Redirect to SSO</title>
+</head>
+<body>
+  <% param = @authorization_token ? "?auth_token=#{@authorization_token}" : '' %>
+  <% url_path = File.join(root_url, "users/auth/#{@active_provider.strategy_name}#{param}") %>
+  <form id="redirect-form" action="<%=url_path%>" method="post" target="_self">
+    <%= hidden_field_tag :authenticity_token, @authentication_token %>
+    <noscript>
+      <input type="submit" value="⇒ Click here to continue"/>
+    </noscript>
+  </form>
+  <script type="text/javascript">
+    document.forms['redirect-form'].submit();
+  </script>
+</body>
+

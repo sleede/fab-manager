@@ -82,6 +82,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      */
     $scope.signup = function (e) {
       if (e) { e.preventDefault(); }
+      <% active_provider = AuthProvider.active %>
+      <% if active_provider.providable_type != DatabaseProvider.name %>
+      $window.location.href = '/sso-redirect';
+      <% else %>
 
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/signupModal.html" %>',
@@ -167,6 +171,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         // when the account was created successfully, set the session to the newly created account
         $scope.setCurrentUser(user);
       });
+      <% end %>
     };
 
     /**
@@ -351,8 +356,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     var openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
-
-      $window.location.href = '<%="/users/auth/#{active_provider.strategy_name}"%>';
+      $window.location.href = '/sso-redirect';
       <% else %>
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/deviseModal.html" %>',

@@ -99,8 +99,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'aasm'
 
 # Background job processing
-gem 'sidekiq', '>= 3.4.2'
 gem 'redis-namespace'
+gem 'sidekiq', '>= 3.4.2'
 gem 'sinatra', require: false
 # Recurring jobs for Sidekiq
 gem 'sidekiq-cron'
@@ -150,3 +150,5 @@ gem 'rack-protection', '1.5.5'
 gem 'sys-filesystem'
 
 gem 'sha3'
+
+gem 'repost'

@@ -4,9 +4,7 @@ json.link_to_sso_profile @provider.link_to_sso_profile
 if @provider.providable_type == DatabaseProvider.name
   json.link_to_sso_connect '/#'
 else
-  json.link_to_sso_connect "/users/auth/#{@provider.strategy_name}"
+  json.link_to_sso_connect '/sso-redirect'
 end
 
-if @provider.providable_type == OAuth2Provider.name
-  json.domain @provider.providable.domain
-end
+json.domain @provider.providable.domain if @provider.providable_type == OAuth2Provider.name

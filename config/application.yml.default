@@ -19,8 +19,8 @@ FABLAB_WITHOUT_INVOICES: 'false'
 DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
 
 # For prod & staging env only
-DEFAULT_HOST: fab-manager.com
-DEFAULT_PROTOCOL: https
+DEFAULT_HOST: 'localhost:5000'
+DEFAULT_PROTOCOL: http
 DELIVERY_METHOD: smtp
 SMTP_ADDRESS:
 SMTP_PORT: '587'

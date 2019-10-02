@@ -345,6 +345,7 @@ GEM
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
     ref (2.0.0)
+    repost (0.2.9)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rolify (4.0.0)
@@ -531,6 +532,7 @@ DEPENDENCIES
   rb-readline
   recurrence
   redis-namespace
+  repost
   responders (~> 2.0)
   rolify
   rubocop (~> 0.61.1)
