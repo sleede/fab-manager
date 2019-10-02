@@ -38,7 +38,9 @@ angular.module('application.router', ['ui.router'])
           logoBlackFile: ['CustomAsset', function (CustomAsset) { return CustomAsset.get({ name: 'logo-black-file' }).$promise; }],
           commonTranslations: ['Translations', function (Translations) { return Translations.query(['app.public.common', 'app.shared.buttons', 'app.shared.elements']).$promise; }]
         },
-        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', function ($rootScope, logoFile, logoBlackFile) {
+        onEnter: ['$rootScope', 'logoFile', 'logoBlackFile', 'CSRF', function ($rootScope, logoFile, logoBlackFile, CSRF) {
+          // Retrieve Anti-CSRF tokens from cookies
+          CSRF.setMetaTags();
           // Application logo
           $rootScope.logo = logoFile.custom_asset;
           return $rootScope.logoBlack = logoBlackFile.custom_asset;

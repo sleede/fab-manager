@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords',
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
+    get '/sso-redirect', to: 'application#sso_redirect', as: :sso_redirect
   end
 
 

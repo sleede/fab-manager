@@ -15,12 +15,7 @@
 <% active_provider = AuthProvider.active %>
 <%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
 <%
-  url_path = "/users/auth/#{active_provider.strategy_name}"
-  if url_path[0] == '/' and root_url[-1] == '/'
-    url_path = root_url + url_path[1..-1]
-  else
-    url_path = root_url + url_path
-  end
+  url_path = File.join(root_url, 'sso-redirect')
 %>
 
 <p><%= t(".body.the_platform") %> <%= Setting.find_by(name: 'fablab_name').value %> <%= t(".body.is_changing_its_auth_system_and_will_now_use") %> <%= active_provider.name %> <%= t(".body.instead_of") %> <%= AuthProvider.find_by(status: 'previous').name %>.</p>

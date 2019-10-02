@@ -17,8 +17,8 @@ es:
         password: "Contraseña:"
         temporary_password: "Esta es una contraseña temporal, puede modificarla en la pantalla <<Mi cuenta>>."
         keep_advantages: "Con esta cuenta, guarda todas las ventajas relacionadas con su perfil de usuario de Fab Lab (cursos, planes de suscripción)."
-        thanks_to_: "Para usar el sitio web, por favor"
-        logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí"
+        to_use_platform: "Para usar el sitio web, por favor"
+        logon_or_login: "crea una nueva cuenta o inicia sesión haciendo clic aquí."
         token_if_link_problem: "Si experimenta problemas con el enlace, puede introducir el siguiente código en el primer intento de conexión:"
 
   notifications_mailer:

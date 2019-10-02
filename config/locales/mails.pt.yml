@@ -17,8 +17,8 @@ pt:
         password: "Senha:"
         temporary_password: "Essa é uma senha temporária, você pode modificar isso na página «Minha conta»."
         keep_advantages: "Com esta conta, você mantém todas as vantagens associadas ao seu perfil de usuário Fab Lab (treinamentos, planos de assinaturas)."
-        thanks_to_: "Para usar o site, por favor"
-        logon_or_login: "Criar uma nova conta ou fazer login clicando aqui"
+        to_use_platform: "Para usar o site, por favor"
+        logon_or_login: "criar uma nova conta ou fazer login clicando aqui."
         token_if_link_problem: "Se você tiver problemas com o link, você poderá inserir o código a seguir na primeira tentativa de conexão:"
 
   notifications_mailer:

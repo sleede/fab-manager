@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
 
   def index; end
 
+  def sso_redirect
+    @authorization_token = request.query_parameters[:auth_token]
+    @authentication_token = form_authenticity_token
+    @active_provider = AuthProvider.active
+  end
+
   protected
 
   def set_csrf_cookie

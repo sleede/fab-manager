@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -12,6 +14,11 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
+
+  config.action_controller.default_url_options = {
+    host: Rails.application.secrets.default_host,
+    protocol: Rails.application.secrets.default_protocol
+  }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -41,9 +48,12 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
+  config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025 }
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'localhost:5000' }
+  config.action_mailer.default_url_options = {
+    host: Rails.application.secrets.default_host,
+    protocol: Rails.application.secrets.default_protocol
+  }
 
   config.log_level = Rails.application.secrets.log_level || :debug
 end

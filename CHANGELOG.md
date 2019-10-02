@@ -4,6 +4,7 @@
 - Ability to configure and export the accounting data to the ACD accounting software
 - Compute the VAT per item in each invoices, instead of globally
 - Use Alpine Linux to build the Docker image (#147)
+- Updated omniauth & omniauth-oauth2 gems
 - Ability to set project's CAO attachement maximum upload size
 - Ability to bulk-import members from a CSV file
 - Ability to disable invoices generation and interfaces
@@ -12,6 +13,7 @@
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
 - Fix a bug: create a plan does not set its name
 - Fix a bug: unable to dissociate the last machine from a formation
+- Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] -> (only dev) `yarn install` and `bundle install`
 - [TODO DEPLOY] add the `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
