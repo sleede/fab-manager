@@ -16,6 +16,7 @@
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] -> (only dev) `yarn install` and `bundle install`
+- [TODO DEPLOY] -> (only dev) configure `DEFAULT_HOST: 'localhost:5000'` and `DEFAULT_PROTOCOL: http` in [application.yml](config/application.yml.default)
 - [TODO DEPLOY] add the `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add the `MAX_CAO_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
