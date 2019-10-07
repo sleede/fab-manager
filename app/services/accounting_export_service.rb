@@ -63,7 +63,8 @@ class AccountingExportService
   def items_rows(invoice)
     rows = invoice.subscription_invoice? ? "#{subscription_row(invoice)}\n" : ''
     if invoice.invoiced_type == 'Reservation'
-      invoice.invoice_items.each do |item|
+      items = invoice.invoice_items.select { |ii| ii.subscription.nil? }
+      items.each do |item|
         rows << "#{reservation_row(invoice, item)}\n"
       end
     elsif invoice.invoiced_type == 'WalletTransaction'

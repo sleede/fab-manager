@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Plan is a generic description of a subscription plan, which can be subscribed by a member to benefit from advantageous prices.
+# Subscribers can also get some Credits for some reservable items
 class Plan < ActiveRecord::Base
   belongs_to :group
 
@@ -106,7 +110,7 @@ class Plan < ActiveRecord::Base
     if !stat_type.nil? && !stat_subtype.nil?
       StatisticTypeSubType.create!(statistic_type: stat_type, statistic_sub_type: stat_subtype)
     else
-      puts 'ERROR: Unable to create the statistics association for the new plan. '+
+      puts 'ERROR: Unable to create the statistics association for the new plan. ' \
            'Possible causes: the type or the subtype were not created successfully.'
     end
   end
