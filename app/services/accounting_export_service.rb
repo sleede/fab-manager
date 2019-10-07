@@ -28,7 +28,7 @@ class AccountingExportService
   end
 
   def export(start_date, end_date, file)
-    # build CVS content
+    # build CSV content
     content = header_row
     invoices = Invoice.where('created_at >= ? AND created_at <= ?', start_date, end_date).order('created_at ASC')
     invoices = invoices.where('total > 0') unless export_zeros
