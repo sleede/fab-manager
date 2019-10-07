@@ -97,7 +97,8 @@ class AccountingExportService
       invoice,
       account(invoice, :reservation),
       account(invoice, :reservation, type: :label),
-      item.net_amount / 100.00
+      item.net_amount / 100.00,
+      line_label: label(invoice)
     )
   end
 
@@ -108,7 +109,8 @@ class AccountingExportService
       invoice,
       account(invoice, :subscription),
       account(invoice, :subscription, type: :label),
-      subscription_item.net_amount / 100.00
+      subscription_item.net_amount / 100.00,
+      line_label: label(invoice)
     )
   end
 
@@ -119,7 +121,8 @@ class AccountingExportService
       invoice,
       account(invoice, :wallet),
       account(invoice, :wallet, type: :label),
-      invoice.invoice_items.first.net_amount / 100.00
+      invoice.invoice_items.first.net_amount / 100.00,
+      line_label: label(invoice)
     )
   end
 
@@ -133,7 +136,8 @@ class AccountingExportService
       invoice,
       account(invoice, :vat),
       account(invoice, :vat, type: :label),
-      invoice.invoice_items.map(&:vat).map(&:to_i).reduce(:+) / 100.00
+      invoice.invoice_items.map(&:vat).map(&:to_i).reduce(:+) / 100.00,
+      line_label: label(invoice)
     )
   end
 
