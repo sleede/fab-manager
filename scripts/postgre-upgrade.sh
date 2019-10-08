@@ -67,6 +67,8 @@ test_docker_compose()
 read_path()
 {
     PG_PATH=$(awk "BEGIN { FS=\"\n\"; RS=\"\"; } { match(\$0, /image: postgres:$OLD(\n|.)+volumes:(\n|.)+(-.*postgresql\/data)/, lines); FS=\"[ :]+\"; RS=\"\r\n\"; split(lines[3], line); print line[2] }" "$FM_PATH/docker-compose.yml")
+    PG_PATH="${PG_PATH/\$\{PWD\}/$(pwd)}"
+    PG_PATH="${PG_PATH/[[:space:]]/}"
 }
 
 prepare_path()
