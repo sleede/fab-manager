@@ -5,7 +5,7 @@ config()
   if [ "$(whoami)" = "root" ]
   then
     echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
-    read -rp "Continue anyway? (y/n) " confirm </dev/tty
+    read -rp "Continue anyway? (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
   fi
   if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
@@ -16,7 +16,7 @@ config()
   fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
-  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
+  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
     # checking disk space (minimum required = 1168323KB)
@@ -103,16 +103,26 @@ upgrade_compose()
   sed -i.bak "s/image: postgres:$OLD/image: postgres:$NEW/g" "$FM_PATH/docker-compose.yml"
 
   # insert configuration directory into docker-compose bindings
-  awk "BEGIN { FS=\"\n\"; RS=\"\"; } { print gensub(/(image: postgres:$NEW(\n|.)+volumes:(\n|.)+(-.*postgresql\/data))/, \"\\\\1\n      - ${NEW_PATH}:/var/lib/postgresql/data\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
+  awk "BEGIN { FS=\"\n\"; RS=\"\"; } { print gensub(/(image: postgres:$NEW(\n|.)+volumes:)/, \"\\\\1\n      - ${NEW_PATH}:/var/lib/postgresql/data\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
 
   docker-compose pull
   docker-compose up -d
 }
 
-upgrade_elastic()
+clean()
+{
+  read -rp "Remove the previous PostgreSQL data folder? (y/N) " confirm </dev/tty
+  if [[ "$confirm" = "y" ]]
+  then
+    echo "Deleting $PG_PATH..."
+    rm -rf "$PG_PATH"
+  fi
+}
+
+upgrade_postgres()
 {
   config
-  read -rp "Continue with upgrading? (y/n) " confirm </dev/tty
+  read -rp "Continue with upgrading? (y/N) " confirm </dev/tty
   if [[ "$confirm" = "y" ]]
   then
     OLD='9.4'
@@ -121,7 +131,8 @@ upgrade_elastic()
     prepare_path
     pg_upgrade
     upgrade_compose
+    clean
   fi
 }
 
-upgrade_elastic "$@"
+upgrade_postgres "$@"
