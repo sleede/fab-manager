@@ -10,7 +10,7 @@ We've wrote a script to automate the process while keeping your data integrity, 
   Usually, `apt update && apt install curl jq sudo gawk`, ran as root, will do the trick but this may change, depending upon your system.
 - You'll need at least 4GB of RAM for the data migration to complete successfully.
   The script will try to add 4GB of swap memory if this requirement is detected as missing but this will consume you hard disk space (see below).
-- 1,17GB of free disk space are also required to perform the data migration.
+- 1,2GB of free disk space are also required to perform the data migration.
   Please ensure that you'll have enough space, considering the point above. The script won't run otherwise.
 - This script will run on any Linux or Macintoch systems if you installed ElasticSearch using docker or docker-compose.
   Otherwise, only Debian compatible OS (like Ubuntu) and MacOS X are supported for classical installations. On any other cases you'll need to perform the upgrade yourself manually.

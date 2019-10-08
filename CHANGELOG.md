@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Upgraded PostgreSQL from 9.4 to 11
 - Optional reCaptcha checkbox in sign-up form
 - Ability to configure and export the accounting data to the ACD accounting software
 - Compute the VAT per item in each invoices, instead of globally
@@ -14,6 +15,7 @@
 - Fix a bug: create a plan does not set its name
 - Fix a bug: unable to dissociate the last machine from a formation
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
+- [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL. 
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] -> (only dev) `yarn install` and `bundle install`
 - [TODO DEPLOY] -> (only dev) configure `DEFAULT_HOST: 'localhost:5000'` and `DEFAULT_PROTOCOL: http` in [application.yml](config/application.yml.default)

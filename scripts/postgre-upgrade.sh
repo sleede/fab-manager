@@ -19,14 +19,6 @@ config()
   read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
-    # checking disk space (minimum required = 1168323KB)
-    space=$(df $FM_PATH | awk '/[0-9]%/{print $(NF-2)}')
-    if [ "$space" -lt 1258291 ]
-    then
-      echo "Not enough free disk space to perform upgrade. Please free at least 1,2GB of disk space and try again"
-      df -h $FM_PATH
-      exit 7
-    fi
     if [ -f "$FM_PATH/config/application.yml" ]
     then
       PG_HOST=$(cat "$FM_PATH/config/application.yml" | grep POSTGRES_HOST | awk '{print $2}')
@@ -47,6 +39,19 @@ config()
   else
     echo "Please run this script from the fab-manager's installation folder"
     exit 1
+  fi
+}
+
+test_free_space()
+{
+  # checking disk space (minimum required = 1.2GB)
+  required=$(du -d 0 "$PG_PATH" | awk '{ print $1 }')
+  space=$(df $FM_PATH | awk '/[0-9]%/{print $(NF-2)}')
+  if [ "$space" -lt "$required" ]
+  then
+    echo "Not enough free disk space to perform upgrade. Please free at least $required bytes of disk space and try again"
+    df -h $FM_PATH
+    exit 7
   fi
 }
 
@@ -126,6 +131,7 @@ upgrade_postgres()
     OLD='9.4'
     NEW='11'
     read_path
+    test_free_space
     prepare_path
     pg_upgrade
     upgrade_compose
