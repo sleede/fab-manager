@@ -8,7 +8,12 @@ config()
     read -rp "Continue anyway? (y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
   fi
-
+  if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
+  then
+    echo "Please install GNU Awk before running this script."
+    echo "gawk was not found, exiting..."
+    exit 1
+  fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
   read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
