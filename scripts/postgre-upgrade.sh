@@ -100,7 +100,7 @@ upgrade_compose()
   docker-compose stop postgres
   docker-compose rm -f postgres
   local image="postgres:$NEW"
-  sed -i.bak "s/image: postgres:$OLD/image: $NEW/g" "$FM_PATH/docker-compose.yml"
+  sed -i.bak "s/image: postgres:$OLD/image: postgres:$NEW/g" "$FM_PATH/docker-compose.yml"
 
   # insert configuration directory into docker-compose bindings
   awk "BEGIN { FS=\"\n\"; RS=\"\"; } { print gensub(/(image: postgres:$NEW(\n|.)+volumes:(\n|.)+(-.*postgresql\/data))/, \"\\\\1\n      - ${NEW_PATH}:/var/lib/postgresql/data\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
