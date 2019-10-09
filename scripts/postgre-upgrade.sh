@@ -117,7 +117,7 @@ pg_upgrade()
   docker run --rm \
     -v "$PG_PATH:/var/lib/postgresql/$OLD/data" \
     -v "$NEW_PATH:/var/lib/postgresql/$NEW/data" \
-    "tianon/postgres-upgrade:$OLD-to-$NEW" --link
+    "tianon/postgres-upgrade:$OLD-to-$NEW"
 }
 
 
