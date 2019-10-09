@@ -14,6 +14,8 @@
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
 - Fix a bug: create a plan does not set its name
 - Fix a bug: unable to dissociate the last machine from a formation
+- Fix a bug: in profile_complete form, the user's group is not selected by default
+- Fix a bug: missing asterisks on some required fields in profile_complete form 
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
 - [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL. 
 - [TODO DEPLOY] `rake db:migrate`

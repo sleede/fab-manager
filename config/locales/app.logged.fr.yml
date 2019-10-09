@@ -65,6 +65,7 @@ fr:
             used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
             used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
             used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
+            used_for_pricing_stats: "Cette donné sera utilisée pour déterminer les prix auxquels vous avez droit, ainsi qu'a des fins statistiques"
             public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
             trainings: "Formations"
             no_trainings: "Aucune formation"
