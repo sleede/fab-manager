@@ -107,28 +107,26 @@ prepare_path()
   fi
 }
 
+docker_down()
+{
+  docker-compose down
+}
+
 pg_upgrade()
 {
   docker run --rm \
     -v "$PG_PATH:/var/lib/postgresql/$OLD/data" \
     -v "$NEW_PATH:/var/lib/postgresql/$NEW/data" \
     "tianon/postgres-upgrade:$OLD-to-$NEW" --link
-
 }
 
 
 upgrade_compose()
 {
   echo -e "\nUpgrading docker-compose installation from $OLD to $NEW..."
-  docker-compose stop postgres
-  docker-compose rm -f postgres
 
   # update image tag and data directory into docker-compose file
   awk "BEGIN { FS=\"\n\"; RS=\"\"; } { print gensub(/(image: postgres:$OLD(\n|.)+volumes:(\n|.)+(-.*postgresql\/data))/, \"image: postgres:$NEW\n    volumes:\n      - ${NEW_PATH}:/var/lib/postgresql/data\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
-
-  docker-compose pull
-  trust_pg_hba_conf
-  docker-compose up -d
 }
 
 trust_pg_hba_conf()
@@ -139,6 +137,12 @@ trust_pg_hba_conf()
     echo
     echo "host all all all trust"
   } | "$COMMAND" -a "$NEW_PATH/pg_hba.conf" > /dev/null
+}
+
+docker_up()
+{
+  docker-compose pull
+  docker-compose up -d
 }
 
 clean()
@@ -162,8 +166,11 @@ upgrade_postgres()
     read_path
     test_free_space
     prepare_path
+    docker_down
     pg_upgrade
     upgrade_compose
+    trust_pg_hba_conf
+    docker_up
     clean
   fi
 }

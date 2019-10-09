@@ -20,7 +20,7 @@ Once you've understood all the points above, you can run the migration script wi
 ```bash
 cd /apps/fabmanager
 # do not run as root, elevation will be prompted if needed
-\curl \sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/postgre-upgrade.sh | bash
+\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/scripts/postgre-upgrade.sh | bash
 ```
 
 ## Manual upgrade
