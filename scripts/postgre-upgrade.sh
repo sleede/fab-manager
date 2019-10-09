@@ -7,6 +7,18 @@ config()
     echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
     read -rp "Continue anyway? (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
+  else
+    if ! command -v sudo
+    then
+      echo "Please install and configure sudo before running this script."
+      echo "sudo was not found, exiting..."
+      exit 1
+    elif ! groups | grep sudo; then
+      echo "Please add your current user to the sudoers."
+      echo 'You can run the following as root: "usermod -aG sudo myuser"'
+      echo "sudo was not configured, exiting..."
+      exit 1
+    fi
   fi
   if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]
   then
@@ -109,7 +121,18 @@ upgrade_compose()
   awk "BEGIN { FS=\"\n\"; RS=\"\"; } { print gensub(/(image: postgres:$OLD(\n|.)+volumes:(\n|.)+(-.*postgresql\/data))/, \"image: postgres:$NEW\n    volumes:\n      - ${NEW_PATH}:/var/lib/postgresql/data\", \"g\") }" "$FM_PATH/docker-compose.yml" > "$FM_PATH/.awktmpfile" && mv "$FM_PATH/.awktmpfile" "$FM_PATH/docker-compose.yml"
 
   docker-compose pull
+  trust_pg_hba_conf
   docker-compose up -d
+}
+
+trust_pg_hba_conf()
+{
+  if [ "$(whoami)" = "root" ]; then COMMAND="tee"
+  else COMMAND="sudo tee"; fi
+  {
+    echo
+    echo "host all all all trust"
+  } | "$COMMAND" -a "$NEW_PATH/pg_hba.conf" > /dev/null
 }
 
 clean()
