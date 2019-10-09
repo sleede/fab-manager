@@ -23,7 +23,7 @@ services:
     restart: always
 
   postgres:
-    image: postgres:9.4
+    image: postgres:9.6
     volumes:
       - ${PWD}/postgresql:/var/lib/postgresql/data
     restart: always

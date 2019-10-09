@@ -93,7 +93,7 @@ pg_upgrade()
 {
   docker run --rm \
     -v "$PG_PATH:/var/lib/postgresql/$OLD/data" \
-    -v "$PG_PATH-$NEW:/var/lib/postgresql/$NEW/data" \
+    -v "$NEW_PATH:/var/lib/postgresql/$NEW/data" \
     "tianon/postgres-upgrade:$OLD-to-$NEW" --link
 
 }
@@ -129,7 +129,7 @@ upgrade_postgres()
   if [[ "$confirm" = "y" ]]
   then
     OLD='9.4'
-    NEW='11'
+    NEW='9.6'
     read_path
     test_free_space
     prepare_path

@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-- Upgraded PostgreSQL from 9.4 to 11
+- Upgraded PostgreSQL from 9.4 to 9.6
 - Optional reCaptcha checkbox in sign-up form
 - Ability to configure and export the accounting data to the ACD accounting software
 - Compute the VAT per item in each invoices, instead of globally

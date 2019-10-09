@@ -2,7 +2,7 @@
 
 ## Automatic upgrade
 
-Fab-manager release 4.2.0 has upgraded its dependency to PostgreSQL from version 9.4 to version 11 as the previous won't be maintained from from february 2020.
+Fab-manager release 4.2.0 has upgraded its dependency to PostgreSQL from version 9.4 to version 9.6 as the previous won't be maintained from from february 2020.
 To keep using fab-manager you need to upgrade your installation with the new version.
 We've wrote a script to automate the process while keeping your data integrity, but there's some requirements to understand before running it.
 
@@ -25,4 +25,4 @@ cd /apps/fabmanager
 
 For instructions regarding a manual upgrade, please refer to the official documentation:
 
-- https://www.postgresql.org/docs/11/upgrading.html
+- https://www.postgresql.org/docs/9.6/upgrading.html

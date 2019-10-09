@@ -13,7 +13,7 @@ FabManager is the Fab Lab management solution. It provides a comprehensive, web-
 4. [Setup a development environment](#setup-a-development-environment)<br/>
 4.1. [General Guidelines](#general-guidelines)<br/>
 5. [PostgreSQL](#postgresql)<br/>
-5.1. [Install PostgreSQL 9.4](#setup-postgresql)
+5.1. [Install PostgreSQL 9.6](#setup-postgresql)
 6. [ElasticSearch](#elasticsearch)<br/>
 6.1. [Install ElasticSearch](#setup-elasticsearch)<br/>
 6.2. [Rebuild statistics](#rebuild-stats)<br/>
@@ -43,7 +43,7 @@ FabManager is a Ruby on Rails / AngularJS web application that runs on the follo
 - Redis 2.8.4+
 - Sidekiq 3.3.4+
 - Elasticsearch 5.6
-- PostgreSQL 9.4
+- PostgreSQL 9.6
 
 <a name="contributing"></a>
 ## Contributing
@@ -193,7 +193,7 @@ Optionally, you can use a virtual development environment that relies on Vagrant
 ## PostgreSQL
 
 <a name="setup-postgresql"></a>
-### Install PostgreSQL 9.4
+### Install PostgreSQL 9.6
 
 We will use docker to easily install the required version of PostgreSQL.
 
@@ -208,7 +208,7 @@ We will use docker to easily install the required version of PostgreSQL.
    -v $(pwd)/.docker/postgresql:/var/lib/postgresql/data \
    --network fabmanager --ip 172.18.0.2 \
    -p 5432:5432 \
-   postgres:9.4
+   postgres:9.6
    ```
 
 3. Configure fab-manager to use it.
