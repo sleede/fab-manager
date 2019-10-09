@@ -15,6 +15,24 @@ config()
     echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
     read -rp "Continue anyway? (y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
+  else
+    if ! command -v sudo
+    then
+      echo "Please install and configure sudo before running this script."
+      echo "sudo was not found, exiting..."
+      exit 1
+    elif ! groups | grep sudo; then
+      echo "Please add your current user to the sudoers."
+      echo "You can run the following as root: \"usermod -aG sudo $(whoami)\", then logout and login again"
+      echo "sudo was not configured, exiting..."
+      exit 1
+    fi
+    if ! groups | grep docker; then
+      echo "Please add your current user to the docker group."
+      echo "You can run the following as root: \"usermod -aG docker $(whoami)\", then logout and login again"
+      echo "current user is not allowed to use docker, exiting..."
+      exit 1
+    fi
   fi
   echo "detecting curl..."
   if ! command -v curl
@@ -28,12 +46,6 @@ config()
   then
     echo "Please install jq before running this script."
     echo "jq was not found, exiting..."
-    exit 1
-  fi
-  if ! command -v sudo
-  then
-    echo "Please install and configure sudo before running this script."
-    echo "sudo was not found, exiting..."
     exit 1
   fi
   if ! command -v awk || ! [[ $(awk -W version) =~ ^GNU ]]

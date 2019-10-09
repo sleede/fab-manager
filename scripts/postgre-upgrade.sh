@@ -15,8 +15,14 @@ config()
       exit 1
     elif ! groups | grep sudo; then
       echo "Please add your current user to the sudoers."
-      echo 'You can run the following as root: "usermod -aG sudo myuser"'
+      echo "You can run the following as root: \"usermod -aG sudo $(whoami)\", then logout and login again"
       echo "sudo was not configured, exiting..."
+      exit 1
+    fi
+    if ! groups | grep docker; then
+      echo "Please add your current user to the docker group."
+      echo "You can run the following as root: \"usermod -aG docker $(whoami)\", then logout and login again"
+      echo "current user is not allowed to use docker, exiting..."
       exit 1
     fi
   fi

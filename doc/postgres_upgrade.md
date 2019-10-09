@@ -8,6 +8,8 @@ We've wrote a script to automate the process while keeping your data integrity, 
 
 - You need to install *curl*, *GNU awk* and *sudo* on your system before running the script. 
   Usually, `apt update && apt install curl gawk sudo`, ran as root, will do the trick but this may change, depending upon your system.
+- Your current user must be part of the *docker* and *sudo* groups. 
+  Using the root user is a possible alternative, but not recommended.
 - A bit of free disk space is also required to perform the data migration. 
   The amount needed depends on your current database size, the script will check it and tell you if there's not enough available space.
 - This script should run on any Linux or MacOS systems if you installed ElasticSearch using docker-compose.
