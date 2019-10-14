@@ -12,7 +12,7 @@ We've wrote a script to automate the process while keeping your data integrity, 
   Using the root user is a possible alternative, but not recommended.
 - A bit of free disk space is also required to perform the data migration. 
   The amount needed depends on your current database size, the script will check it and tell you if there's not enough available space.
-- This script should run on any Linux or MacOS systems if you installed ElasticSearch using docker-compose.
+- This script should run on any Linux or MacOS systems if you installed PostgreSQL using docker-compose.
   Otherwise, you must perform the upgrade yourself manually.
 
 Once you've understood all the points above, you can run the migration script with the following:
