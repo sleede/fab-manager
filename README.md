@@ -432,6 +432,9 @@ Developers may find information on how to implement their own authentication pro
   ```bash
   sudo systemctl restart elasticsearch.service
   ```
+- In some cases, the invoices won't be generated. This can be due to the image included in the invoice header not being supported.
+  To fix this issue, change the image in the administrator interface (manage the invoices / invoices settings).
+  See [this thread](https://forum.fab-manager.com/t/resolu-erreur-generation-facture/428) for more info.
 
 <a name="related-documentation"></a>
 ## Related Documentation
