@@ -82,7 +82,7 @@ class Availabilities::StatusService
       availability.slots.each do |s|
         reserved_slots << s if s.canceled_at.nil?
       end
-      reserved_slots.map(&:reservations).flatten.map(&:user_id).include? user.id
+      reserved_slots.map(&:reservations).flatten.map(&:statistic_profile_id).include? user.statistic_profile&.id
     else
       false
     end

@@ -16,6 +16,7 @@
 - Fix a bug: unable to dissociate the last machine from a formation
 - Fix a bug: in profile_complete form, the user's group is not selected by default
 - Fix a bug: missing asterisks on some required fields in profile_complete form 
+- Fix a bug: public calendar won't show anything if the current date range include a reserved space availability (#151)
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
 - [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL. 
 - [TODO DEPLOY] `rake db:migrate`
