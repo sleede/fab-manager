@@ -159,7 +159,7 @@ GEM
     execjs (2.7.0)
     faker (1.4.3)
       i18n (~> 0.5)
-    faraday (0.16.2)
+    faraday (0.17)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.24)
     figaro (1.1.0)

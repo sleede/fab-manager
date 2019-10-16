@@ -19,6 +19,7 @@
 - Fix a bug: missing asterisks on some required fields in profile_complete form 
 - Fix a bug: public calendar won't show anything if the current date range include a reserved space availability (#151)
 - Fix a bug: invoices list is not shown by default in "manage invoices" section
+- Fix a bug: unable to run rake fablab:es:* tasks due to an issue with gem faraday 0.16.x (was updated to 0.17)
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
 - [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL. 
 - [TODO DEPLOY] `rake db:migrate`

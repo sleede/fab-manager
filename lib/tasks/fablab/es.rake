@@ -163,7 +163,6 @@ namespace :fablab do
           StatisticService.new.generate_statistic(start_date: i.day.ago.beginning_of_day, end_date: i.day.ago.end_of_day)
         end
       end
-
     end
 
   end
