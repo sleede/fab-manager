@@ -155,6 +155,9 @@ fr:
     # messages d'erreur lors de la mise à jour d'un évènement
     error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
     other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
+    # durée d'un évènement
+    from_STARTDATE_to_ENDDATE: "Du %{STARTDATE} au %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "de %{STARTTIME} à %{ENDTIME}"
 
   export_members:
     # export de la liste des members au format EXCEL

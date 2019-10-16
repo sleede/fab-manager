@@ -22,6 +22,7 @@
 - Fix a bug: invoices list is not shown by default in "manage invoices" section
 - Fix a bug: unable to run rake fablab:es:* tasks due to an issue with gem faraday 0.16.x (was updated to 0.17)
 - Fix a bug: unauthorized user can see the edit project form
+- Fix a bug: do not display each days in invoices for multiple days event reservation 
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
 - [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL. 
 - [TODO DEPLOY] `rake db:migrate`

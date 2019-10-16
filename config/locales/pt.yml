@@ -155,6 +155,9 @@ pt:
     # error messages when updating an event
     error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
     other_error: "Um erro inesperado ocorreu enquanto o evento era atualizado"
+    # event duration
+    from_STARTDATE_to_ENDDATE: "De %{STARTDATE} a %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "das %{STARTTIME} às %{ENDTIME}"
 
   export_members:
     # members list export to EXCEL format
