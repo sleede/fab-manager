@@ -11,6 +11,6 @@ class AddSlugToTrainings < ActiveRecord::Migration
 
   def down
     remove_column :trainings, :slug, :string
-    remove_index :trainings, :slug, unique: true
+    remove_index :trainings, :slug
   end
 end

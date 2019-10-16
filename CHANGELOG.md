@@ -10,6 +10,7 @@
 - Ability to bulk-import members from a CSV file
 - Ability to disable invoices generation and interfaces
 - Added a known issue to the README (#152)
+- Ability to fully rebuild the projets index in ElasticSearch with rake fablab:es:build_projects_index
 - Fix a bug: invoices with total = 0, are marked as paid on site even if paid by card
 - Fix a bug: after disabling a group, its associated plans are hidden from the interface
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
