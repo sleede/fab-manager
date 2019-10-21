@@ -37,7 +37,7 @@
 - [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add `- ${PWD}/imports:/usr/src/app/imports` in the volumes list of your fabmanager service in [docker-compose.yml](docker/docker-compose.yml)
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the following environment variables: `SMTP_TLS`
+- [TODO DEPLOY] add the following `SMTP_TLS` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
 
 ## v4.1.1 2019 September 20
 
