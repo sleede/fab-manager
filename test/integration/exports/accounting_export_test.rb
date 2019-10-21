@@ -103,7 +103,9 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal first_invoice.reference, data[1][I18n.t('accounting_export.piece')], 'Piece (invoice reference) is wrong'
-    assert_nil data[1][I18n.t('accounting_export.line_label')], 'Line label should be empty for non client lines'
+    assert_match I18n.t('accounting_export.subscription'),
+                 data[1][I18n.t('accounting_export.line_label')],
+                 'Line label should be empty for non client lines'
 
     item = first_invoice.invoice_items.first
     assert_equal item.amount / 100.00, data[1][I18n.t('accounting_export.credit_origin')].to_f, 'Origin credit amount does not match'
