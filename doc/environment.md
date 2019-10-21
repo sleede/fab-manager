@@ -19,6 +19,7 @@ If you run the application in production with docker, the settings are localized
 <a name="general-settings"></a>
 ## General settings
 
+<a name="POSTGRES_HOST"></a>
 
     POSTGRES_HOST
 
