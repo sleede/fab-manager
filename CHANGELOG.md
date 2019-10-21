@@ -1,7 +1,9 @@
 # Changelog Fab Manager
 
+## v4.2.1 2019 October 21
+
 - Updated axlsx gem to caxlsx 3.0
-- Updated axlsx_rails to 0.6.0 
+- Updated axlsx_rails to 0.6.0
 - Fix a security issue: updated rubyzip to 1.3.0 to fix [CVE-2019-16892](https://nvd.nist.gov/vuln/detail/CVE-2019-16892)
 
 ## v4.2.0 2019 October 21
@@ -25,14 +27,14 @@
 - Fix a bug: create a plan does not set its name
 - Fix a bug: unable to dissociate the last machine from a formation
 - Fix a bug: in profile_complete form, the user's group is not selected by default
-- Fix a bug: missing asterisks on some required fields in profile_complete form 
+- Fix a bug: missing asterisks on some required fields in profile_complete form
 - Fix a bug: public calendar won't show anything if the current date range include a reserved space availability (#151)
 - Fix a bug: invoices list is not shown by default in "manage invoices" section
 - Fix a bug: unable to run rake `fablab:es:*` tasks due to an issue with gem faraday 0.16.x (was updated to 0.17)
 - Fix a bug: unauthorized user can see the edit project form
-- Fix a bug: do not display each days in invoices for multiple days event reservation 
+- Fix a bug: do not display each days in invoices for multiple days event reservation
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
-- [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL. 
+- [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL.
 - [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] -> (only dev) `yarn install` and `bundle install`
 - [TODO DEPLOY] -> (only dev) configure `DEFAULT_HOST: 'localhost:5000'` and `DEFAULT_PROTOCOL: http` in [application.yml](config/application.yml.default)
