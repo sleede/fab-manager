@@ -76,7 +76,7 @@ class StatisticsExportService
 
         content = av.render template: 'exports/statistics_current.xlsx.axlsx'
         # write content to file
-        File.open(export.file,"w+b") {|f| f.puts content }
+        File.open(export.file,"w+b") { |f| f.write content }
       end
     }, __FILE__, __LINE__ - 35
   end
