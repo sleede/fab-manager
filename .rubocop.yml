@@ -1,9 +1,9 @@
 Metrics/LineLength:
   Max: 140
 Metrics/MethodLength:
-  Max: 30
+  Max: 35
 Metrics/CyclomaticComplexity:
-  Max: 9
+  Max: 13
 Metrics/PerceivedComplexity:
   Max: 9
 Metrics/AbcSize:
@@ -16,6 +16,8 @@ Metrics/BlockLength:
     - 'lib/tasks/**/*.rake'
     - 'config/routes.rb'
     - 'app/pdfs/pdf/*.rb'
+Metrics/ParameterLists:
+  CountKeywordArgs: false
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/RegexpLiteral:

@@ -39,23 +39,15 @@
         <li><a href="#" ui-sref="app.logged.dashboard.projects" translate>{{ 'my_projects' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.trainings" translate>{{ 'my_trainings' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.events" translate>{{ 'my_events' }}</a></li>
-        <li><a href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'my_invoices' }}</a></li>
+        <li><a href="#" ui-sref="app.logged.dashboard.invoices" ng-hide="fablabWithoutInvoices" translate>{{ 'my_invoices' }}</a></li>
         <li><a href="#" ui-sref="app.logged.dashboard.wallet" translate>{{ 'my_wallet' }}</a></li>
 
         <li class="divider"></li>
         <li><a href="#" class="text-black" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'sign_out' | translate }}</a></li>
       </ul>
     </li>
-    <% active_provider = AuthProvider.active %>
-    <% if active_provider.providable_type == DatabaseProvider.name %>
-      <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
-      <li ng-if="!isAuthenticated()">
-          <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
-      </li>
-    <% else %>
-        <li ng-if="!isAuthenticated()"><a href="<%= "/users/auth/#{active_provider.strategy_name}"%>" class="font-sbold label text-md"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
-        <li ng-if="!isAuthenticated()">
-          <a href="<%= "/users/auth/#{active_provider.strategy_name}"%>" class="font-sbold  label text-md"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
-        </li>
-    <% end %>
+    <li ng-if="!isAuthenticated()"><a href="#" class="font-sbold label text-md" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
+    <li ng-if="!isAuthenticated()">
+        <a href="#" class="font-sbold  label text-md" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+    </li>
   </ul>

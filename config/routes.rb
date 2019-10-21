@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       registrations: 'registrations', sessions: 'sessions', confirmations: 'confirmations', passwords: 'passwords',
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
+    get '/sso-redirect', to: 'application#sso_redirect', as: :sso_redirect
   end
 
 
@@ -43,7 +44,9 @@ Rails.application.routes.draw do
     resources :themes
     resources :licences
     resources :admins, only: %i[index create destroy]
-    resources :settings, only: %i[show update index], param: :name
+    resources :settings, only: %i[show update index], param: :name do
+      patch '/bulk_update', action: 'bulk_update', on: :collection
+    end
     resources :users, only: %i[index create]
     resources :members, only: %i[index show create update destroy] do
       get '/export_subscriptions', action: 'export_subscriptions', on: :collection
@@ -106,6 +109,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create] do
       get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
+      get 'first', action: 'first', on: :collection
     end
 
     # for admin
@@ -135,6 +139,8 @@ Rails.application.routes.draw do
       get 'last_closing_end', on: :collection
       get 'archive', action: 'download_archive', on: :member
     end
+    # export accounting data to csv or equivalent
+    post 'accounting/export' => 'accounting_exports#export'
 
     # i18n
     # regex allows using dots in URL for 'state'
@@ -143,6 +149,11 @@ Rails.application.routes.draw do
     # XLSX exports
     get 'exports/:id/download' => 'exports#download'
     post 'exports/status' => 'exports#status'
+
+    # Members CSV import
+    resources :imports, only: [:show] do
+      post 'members', action: 'members', on: :collection
+    end
 
     # Fab-manager's version
     get 'version' => 'version#show'

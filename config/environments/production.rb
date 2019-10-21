@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -13,6 +15,11 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  config.action_controller.default_url_options = {
+    host: Rails.application.secrets.default_host,
+    protocol: Rails.application.secrets.default_protocol
+  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -81,19 +88,23 @@ Rails.application.configure do
 
   # config.serve_static_assets = true
 
-  config.action_mailer.default_url_options = { :host => Rails.application.secrets.default_host, :protocol => Rails.application.secrets.default_protocol }
+  config.action_mailer.default_url_options = {
+    host: Rails.application.secrets.default_host,
+    protocol: Rails.application.secrets.default_protocol
+  }
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = false
   # config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    :address   => Rails.application.secrets.smtp_address,
-    :port      => Rails.application.secrets.smtp_port,
-    :user_name => Rails.application.secrets.smtp_user_name,
-    :password  => Rails.application.secrets.smtp_password,
-    :authentication       => Rails.application.secrets.smtp_authentication,
-    :enable_starttls_auto => Rails.application.secrets.smtp_enable_starttls_auto,
-    :openssl_verify_mode  => Rails.application.secrets.smtp_openssl_verify_mode,
+    address: Rails.application.secrets.smtp_address,
+    port: Rails.application.secrets.smtp_port,
+    user_name: Rails.application.secrets.smtp_user_name,
+    password: Rails.application.secrets.smtp_password,
+    authentication: Rails.application.secrets.smtp_authentication,
+    enable_starttls_auto: Rails.application.secrets.smtp_enable_starttls_auto,
+    openssl_verify_mode: Rails.application.secrets.smtp_openssl_verify_mode,
+    tls: Rails.application.secrets.smtp_tls
   }
 
   # use :smtp for switch prod

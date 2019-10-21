@@ -369,3 +369,192 @@ value_history_38:
   created_at: 2018-12-31 10:22:25.116369000 Z
   updated_at: 2019-06-12 09:21:38.606818000 Z
   footprint: 085164a7288540c9beb0a6243856016fc36aae54bfb7d5d41af354650277d1ea
+
+value_history_39:
+  id: 39
+  setting_id: 39
+  invoicing_profile_id: 1
+  value: '530'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_40:
+  id: 40
+  setting_id: 40
+  invoicing_profile_id: 1
+  value: '5801'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_41:
+  id: 41
+  setting_id: 41
+  invoicing_profile_id: 1
+  value: 'Client card'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_42:
+  id: 42
+  setting_id: 42
+  invoicing_profile_id: 1
+  value: '5802'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_43:
+  id: 43
+  setting_id: 43
+  invoicing_profile_id: 1
+  value: 'Client wallet'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_44:
+  id: 44
+  setting_id: 44
+  invoicing_profile_id: 1
+  value: '5803'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_45:
+  id: 45
+  setting_id: 45
+  invoicing_profile_id: 1
+  value: 'Client other'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_46:
+  id: 46
+  setting_id: 46
+  invoicing_profile_id: 1
+  value: '4091'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_47:
+  id: 47
+  setting_id: 47
+  invoicing_profile_id: 1
+  value: 'Wallet credit'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_48:
+  id: 48
+  setting_id: 48
+  invoicing_profile_id: 1
+  value: '445'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_49:
+  id: 49
+  setting_id: 49
+  invoicing_profile_id: 1
+  value: 'VAT'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_50:
+  id: 50
+  setting_id: 50
+  invoicing_profile_id: 1
+  value: '7061'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_51:
+  id: 51
+  setting_id: 51
+  invoicing_profile_id: 1
+  value: 'Subscription'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_52:
+  id: 52
+  setting_id: 52
+  invoicing_profile_id: 1
+  value: '7062'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_53:
+  id: 53
+  setting_id: 53
+  invoicing_profile_id: 1
+  value: 'Machine reservation'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_54:
+  id: 54
+  setting_id: 54
+  invoicing_profile_id: 1
+  value: '7063'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_55:
+  id: 55
+  setting_id: 55
+  invoicing_profile_id: 1
+  value: 'Training reservation'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_56:
+  id: 56
+  setting_id: 56
+  invoicing_profile_id: 1
+  value: '7064'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_57:
+  id: 57
+  setting_id: 57
+  invoicing_profile_id: 1
+  value: 'Event reservation'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_58:
+  id: 58
+  setting_id: 58
+  invoicing_profile_id: 1
+  value: '7065'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:
+
+value_history_59:
+  id: 59
+  setting_id: 59
+  invoicing_profile_id: 1
+  value: 'Space reservation'
+  created_at: 2019-09-20 11:02:32.125400000 Z
+  updated_at: 2019-09-20 11:02:32.125400000 Z
+  footprint:

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Machine is an hardware equipment hosted in the fablab that is available for reservation to the members
 class Machine < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -7,12 +10,12 @@ class Machine < ActiveRecord::Base
   has_many :machine_files, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :machine_files, allow_destroy: true, reject_if: :all_blank
 
-  has_and_belongs_to_many :projects, join_table: :projects_machines
+  has_and_belongs_to_many :projects, join_table: 'projects_machines'
 
   has_many :machines_availabilities, dependent: :destroy
   has_many :availabilities, through: :machines_availabilities
 
-  has_and_belongs_to_many :trainings, join_table: :trainings_machines
+  has_and_belongs_to_many :trainings, join_table: 'trainings_machines'
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true
@@ -39,18 +42,20 @@ class Machine < ActiveRecord::Base
 
   def create_statistic_subtype
     index = StatisticIndex.where(es_type_key: 'machine')
-    StatisticSubType.create!({statistic_types: index.first.statistic_types, key: self.slug, label: self.name})
+    StatisticSubType.create!(statistic_types: index.first.statistic_types, key: slug, label: name)
   end
 
   def update_statistic_subtype
     index = StatisticIndex.where(es_type_key: 'machine')
-    subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type).where(key: self.slug, statistic_types: { statistic_index_id: index.first.id }).first
-    subtype.label = self.name
+    subtype = StatisticSubType.joins(statistic_type_sub_types: :statistic_type)
+                              .where(key: slug, statistic_types: { statistic_index_id: index.first.id })
+                              .first
+    subtype.label = name
     subtype.save!
   end
 
   def remove_statistic_subtype
-    subtype = StatisticSubType.where(key: self.slug).first
+    subtype = StatisticSubType.where(key: slug).first
     subtype.destroy!
   end
 

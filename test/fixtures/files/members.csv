@@ -1,0 +1,6 @@
+id;gender;first_name;last_name;username;email;password;birthdate;address;phone;group;tags;trainings;website;job;interests;softwares;allow_contact;allow_newsletter;organization_name;organization_address;facebook;twitter;googleplus;viadeo;linkedin;instagram;youtube;vimeo;dailymotion;github;echosciences;pinterest;lastfm;flickr
+;male;victor;hugo;vhugo;victor.hugo@wanadoo.fr;;1802-02-26;140 Grande Rue - 25000 Besançon;0381614214;standard;1;1,2,5;http://www.victor-hugo.info;Poète;Hacking, DIY;SolidWorks, Inkspace;yes;yes;;;http://www.facebook.com/victor-hugo;;;;;;;;;http://github.com/vhugo;;;;
+;female;louise;michel;lmichel;louise.michel@gresille.org;;1830-03-29;8 rue de l'église - 52240 Vroncourt-la-Côte;0324491826;standard;2;5;https://rebellyon.info;Institutrice;militantisme;AutoCAD, LibreCAD;yes;yes;;;;;;;;;;;;http://github.com/louisemichel;https://www.echosciences-grenoble.fr/membres/louise-michel;;;
+;male;ambroise;croizat;acroizat;acroizat@msn.com;;1801-01-28;cité des Maisonnettes - 73260 Notre-Dame-de-Briançon;0473147852;standard;;5;;Ouvrier;métallurgie;;no;no;;;;;;;;;https://www.youtube.com/user/croizat;;;;;;;
+;female;rirette;maîtrejean;;;;1887-08-14;19330 Saint-Mexant;0555124789;standard;;;;;;;;yes;no
+2;;;;;jean.dupond@yahoo.fr

@@ -321,8 +321,9 @@ es:
           machine_booking-3D_printer: "Reserva de la máquina- Impresora 3D"
           total_amount: "Cantidad total"
           total_including_all_taxes: "Total incl. todos los impuestos"
-          VAT_disabled: "VAT disabled"
-          including_VAT: "IVA desactivado"
+          VAT_disabled: "IVA desactivado"
+          VAT_enabled: "IVA activado"
+          including_VAT: "Incluido IVA"
           including_total_excluding_taxes: "Incluido Total excl. impuestos"
           including_amount_payed_on_ordering: "Incluido el monto pagado en el pedido"
           settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Liquidación por tarjeta de débito el {{DATE}} a las {{TIME}}, por una cantidad de {{AMOUNT}}"
@@ -432,6 +433,76 @@ es:
           period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed. Archive generation is running, you'll be notified when it's done."        # translation_missing
           failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
           no_periods: "No closings for now"                                            # translation_missing
+          accounting_codes: "Accounting codes"                                         # translation_missing
+          accounting_journal_code: "Journal code"                                      # translation_missing
+          general_journal_code: "Journal code"                                         # translation_missing
+          accounting_card_client_code: "Card clients code"                             # translation_missing
+          card_client_code: "Accounting code for clients who paid by card"             # translation_missing
+          accounting_card_client_label: "Card clients label"                           # translation_missing
+          card_client_label: "Account label for clients who paid by card"              # translation_missing
+          accounting_wallet_client_code: "Wallet clients code"                         # translation_missing
+          wallet_client_code: "Accounting code for clients who paid by virtual wallet" # translation_missing
+          accounting_wallet_client_label: "Wallet clients label"                       # translation_missing
+          wallet_client_label: "Account label for clients who paid by virtual wallet"  # translation_missing
+          accounting_other_client_code: "Other means client code"                      # translation_missing
+          other_client_code: "Accounting code for clients who paid using another payment means" # translation_missing
+          accounting_other_client_label: "Other means client label"                    # translation_missing
+          other_client_label: "Accounting label for clients who paid using another payment means" # translation_missing
+          accounting_wallet_code: "Wallet code"                                        # translation_missing
+          general_wallet_code: "Accounting code for wallet credit"                     # translation_missing
+          accounting_wallet_label: "Wallet label"                                      # translation_missing
+          general_wallet_label: "Account label for wallet credit"                      # translation_missing
+          accounting_vat_code: "VAT code"                                              # translation_missing
+          general_vat_code: "Accounting code for VAT"                                  # translation_missing
+          accounting_vat_label: "VAT label"                                            # translation_missing
+          general_vat_label: "VAT account label"                                       # translation_missing
+          accounting_subscription_code: "Subscriptions code"                           # translation_missing
+          general_subscription_code: "Accounting code for all subscriptions"           # translation_missing
+          accounting_subscription_label: "Subscriptions label"                         # translation_missing
+          general_subscription_label: "Account label for all subscriptions"            # translation_missing
+          accounting_Machine_code: "Machines code"                                     # translation_missing
+          general_machine_code: "Accounting code for all machines"                     # translation_missing
+          accounting_Machine_label: "Machine label"                                    # translation_missing
+          general_machine_label: "Account label for all machines"                      # translation_missing
+          accounting_Training_code: "Trainings code"                                   # translation_missing
+          general_training_code: "Accounting code for all trainings"                   # translation_missing
+          accounting_Training_label: "Trainings label"                                 # translation_missing
+          general_training_label: "Account label for all trainings"                    # translation_missing
+          accounting_Event_code: "Events code"                                         # translation_missing
+          general_event_code: "Accounting code for all events"                         # translation_missing
+          accounting_Event_label: "Events label"                                       # translation_missing
+          general_event_label: "Account label for all events"                          # translation_missing
+          accounting_Space_code: "Space code"                                          # translation_missing
+          general_space_code: "Accounting code for all spaces"                         # translation_missing
+          accounting_Space_label: "Spaces label"                                       # translation_missing
+          general_space_label: "Account label for all spaces"                          # translation_missing
+          codes_customization_success: "Customization of accounting codes successfully saved."  # angular interpolation                                   # translation_missing
+          export_accounting_data: "Export accounting data"                             # translation_missing
+          export_to: "Export to the accounting software"                               # translation_missing
+          export_is_running: "Exportando, será notificado cuando esté listo."
+          acd: "ACD"                                                                   # translation_missing
+          export_form_date: "Export from"                                              # translation_missing
+          export_to_date: "Export until"                                               # translation_missing
+          format: "File format"                                                        # translation_missing
+          encoding: "Encoding"                                                         # translation_missing
+          separator: "Separator"                                                       # translation_missing
+          dateFormat: "Date format"                                                    # translation_missing
+          labelMaxLength: "Label maximum length"                                       # translation_missing
+          decimalSeparator: "Decimal separator"                                        # translation_missing
+          exportInvoicesAtZero: "Export invoices equal to 0"                           # translation_missing
+          columns: "Columns"                                                           # translation_missing
+          exportColumns:                                                               # translation_missing
+            journal_code: "Journal code"                                               # translation_missing
+            date: "Entry date"                                                         # translation_missing
+            account_code: "Account code"                                               # translation_missing
+            account_label: "Account label"                                             # translation_missing
+            piece: "Document"                                                          # translation_missing
+            line_label: "Entry label"                                                  # translation_missing
+            debit_origin: "Origin debit"                                               # translation_missing
+            credit_origin: "Origin credit"                                             # translation_missing
+            debit_euro: "Euro debit"                                                   # translation_missing
+            credit_euro: "Euro credit"                                                 # translation_missing
+            lettering: "Lettering"                                                     # translation_missing
 
       members:
         # management of users, labels, groups, and so on
@@ -497,6 +568,46 @@ es:
         members_new:
           add_a_member: "Agregar un miembro"
           user_is_an_organization: "El usuario es una organización"
+
+      members_import:
+        # members bulk import
+        members_import:
+          import_members: "Import members"                                                        # translation_missing
+          info: "You can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, the trainings and the tags of the members."   # translation_missing
+          required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."   # translation_missing
+          about_example: "Please refer to the provided example file to generate a correct CSV file. Be careful to use Unicode UTF-8 encoding."   # translation_missing
+          groups: "Groups"                                                                        # translation_missing
+          group_name: "Group name"                                                                # translation_missing
+          group_identifier: "Identifier to use"                                                   # translation_missing
+          trainings: "Trainings"                                                                  # translation_missing
+          training_name: "Training name"                                                          # translation_missing
+          training_identifier: "Identifier to use"                                                # translation_missing
+          plans: "Plans"                                                                          # translation_missing
+          plan_name: "Plan name"                                                                  # translation_missing
+          plan_identifier: "Identifier to use"                                                    # translation_missing
+          tags: "Tags"                                                                            # translation_missing
+          tag_name: "Tag name"                                                                    # translation_missing
+          tag_identifier: "Identifier to use"                                                     # translation_missing
+          download_example: "Download the exemple file"                                           # translation_missing
+          select_file: "Choose a file"                                                            # translation_missing
+          import: "Import"                                                                        # translation_missing
+          update_field: "Reference field for users to update"                                     # translation_missing
+          update_on_id: "ID"                                                                      # translation_missing
+          update_on_username: "Username"                                                          # translation_missing
+          update_on_email: "Email address"                                                        # translation_missing
+
+      members_import_result:
+        # import results
+        members_import_result:
+          import_results: "Import results"                                                        # translation_missing
+          import_details: "Import #{{ID}}, of {{DATE}}, initiated by {{USER}}"  # angular interpolation   # translation_missing
+          results: "Results"                                                                      # translation_missing
+          pending: "Pending..."                                                                   # translation_missing
+          status_create: "Creating a new user"                                                    # translation_missing
+          status_update: "Updating user {{ID}}"  # angular interpolation                          # translation_missing
+          success: "Success"                                                                      # translation_missing
+          failed: "Failed"                                                                        # translation_missing
+          error_details: "Error's details:"                                                       # translation_missing
 
       members_edit:
         # edit a member

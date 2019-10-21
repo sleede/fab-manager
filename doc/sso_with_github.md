@@ -13,7 +13,8 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
     - **example.com** is your own fab-manager's address
     - **oauth2-github** match the provider's "strategy name" in the fab-manager.
       It is composed of: **SSO's protocol**, _dash_, **slug of the provider's name**.
-      If you have a doubt about what it will be, start by creating the authentication provider in your fab-manager (see below), then the strategy's name will be shown in the providers list.
+      If you have a doubt about what it will be, set any value, create the authentication provider in your fab-manager (see below), then the strategy's name will be shown in the providers list. 
+      Afterwards, edit your app on GitHub to set the correct name. 
 
 - You'll be redirected to a page displaying two important information: your **Client ID** and your **Client Secret**.
 

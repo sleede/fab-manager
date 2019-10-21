@@ -34,7 +34,7 @@
                     </section>
                 </div>
             </div>
-            <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs">
+            <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs" ng-hide="user.merged_at">
               <p class="font-felt fleche-left text-lg upper text-center">
                 <%= image_tag("fleche-left.png", class: 'fleche-left visible-lg visible-md fleche-left-from-top') %>
                 <span class="or" translate>{{ 'or' }}</span>
@@ -71,10 +71,15 @@
                                                 <!-- group -->
                                                 <div class="form-group" ng-class="{'has-error': userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$invalid}">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                                        <span class="input-group-addon">
+                                                          <i class="fa fa-users"></i>
+                                                          <span class="exponent m-l-xs help-cursor" title="{{ 'used_for_statistics' | translate }}">
+                                                            <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                                          </span>
+                                                        </span>
                                                         <select ng-model="user.group_id" class="form-control" name="user[group_id]" required>
                                                             <option value=null translate>{{ 'your_user_s_profile' }}</option>
-                                                            <option ng-repeat="group in groups" value="{{group.id}}" ng-selected="group.id == user.group_id">{{group.name}}</option>
+                                                            <option ng-repeat="group in groups" ng-value="group.id" ng-selected="group.id == user.group_id">{{group.name}}</option>
                                                         </select>
                                                     </div>
                                                     <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
@@ -86,7 +91,9 @@
                                                            name="cgu"
                                                            ng-model="user.cgu"
                                                            value="true"
-                                                           ng-required="cgu != null"/> {{ 'i_ve_read_and_i_accept_' | translate }} <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+                                                           ng-required="cgu != null"/> {{ 'i_ve_read_and_i_accept_' | translate }}
+                                                  <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+                                                  <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
                                         </div>

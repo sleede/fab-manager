@@ -180,6 +180,11 @@ p, .widget p {
 .p-lg { padding: 30px; }
 .p-l { padding: 16px; }
 
+.p-h-xs { padding-left: 5px; padding-right: 5px; }
+.p-h-s { padding-left: 10px; padding-right: 10px; }
+.p-h-l { padding-left: 16px; padding-right: 16px; }
+.p-h-lg { padding-left: 30px; padding-right: 30px; }
+
 .m-xxs{margin: 2px 4px}
 .m-xs{margin: 5px;}
 .m-sm{margin: 10px;}
@@ -256,6 +261,14 @@ p, .widget p {
 .m-b-n-lg{margin-bottom: -30px}
 .m-b-n-xl{margin-bottom: -40px}
 
+.m-h-none{margin-left: 0; margin-right: 0;}
+.m-h-xs{margin-left: 5px; margin-right: 5px;}
+.m-h-sm{margin-left: 10px; margin-right: 10px;}
+.m-h{margin-left: 15px; margin-right: 15px;}
+.m-h-md{margin-left: 20px; margin-right: 20px;}
+.m-h-lg{margin-left: 30px; margin-right: 30px;}
+.m-h-xl{margin-left: 40px; margin-right: 40px;}
+
 .media-xs{min-width: 50px}
 .media-sm{min-width: 80px}
 .media-md{min-width: 90px}
@@ -306,6 +319,17 @@ p, .widget p {
   width: auto;
   vertical-align: sub;
 }
+
+// the two classes above are used in import results page for "import failed"
+.fa-stack-inside {
+  font-size: 0.8em !important;
+}
+
+.fa-stack-outside {
+  font-size: 1.3em !important;
+  line-height: 1.7em !important;
+}
+
 .contrast-250 { -webkit-filter: contrast(250%); filter: contrast(250%); }
 .clear{display:block;overflow: hidden;}
 
@@ -348,6 +372,11 @@ p, .widget p {
 
 .help-cursor {
   cursor: help;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (min-width: $screen-lg-min) {

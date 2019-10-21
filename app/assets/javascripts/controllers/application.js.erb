@@ -82,6 +82,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      */
     $scope.signup = function (e) {
       if (e) { e.preventDefault(); }
+      <% active_provider = AuthProvider.active %>
+      <% if active_provider.providable_type != DatabaseProvider.name %>
+      $window.location.href = '/sso-redirect';
+      <% else %>
 
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/signupModal.html" %>',
@@ -95,6 +99,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               startingDay: Fablab.weekStartingDay
             }
           };
+
+          // reCaptcha v2 site key (or undefined)
+          $scope.recaptchaSiteKey = Fablab.recaptchaSiteKey;
 
           // callback to open the date picker (account creation modal)
           $scope.openDatePicker = function ($event) {
@@ -117,7 +124,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           // default user's parameters
           $scope.user = {
             is_allow_contact: true,
-            is_allow_newsletter: false
+            is_allow_newsletter: false,
+            // reCaptcha response, received from Google (through AJAX) and sent to server for validation
+            recaptcha: undefined
           };
 
           // Errors display
@@ -162,6 +171,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         // when the account was created successfully, set the session to the newly created account
         $scope.setCurrentUser(user);
       });
+      <% end %>
     };
 
     /**
@@ -198,7 +208,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         return Auth.login().then(function (user) {
           $scope.setCurrentUser(user);
         }, function (error) {
-          console.error(`Authentication failed: ${error}`);
+          console.error(`Authentication failed: ${JSON.stringify(error)}`);
         }
         );
       });
@@ -346,7 +356,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     var openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
-      $window.location.href = '<%="/users/auth/#{active_provider.strategy_name}"%>';
+      $window.location.href = '/sso-redirect';
       <% else %>
       return $uibModal.open({
         templateUrl: '<%= asset_path "shared/deviseModal.html" %>',
@@ -362,7 +372,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               }
             }
             , function (error) {
-              console.error(`Authentication failed: ${error}`);
+              console.error(`Authentication failed: ${JSON.stringify(error)}`);
               $scope.alerts = [];
               return $scope.alerts.push({
                 msg: _t('wrong_email_or_password'),

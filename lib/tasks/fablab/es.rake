@@ -104,6 +104,19 @@ namespace :fablab do
     desc 'sync all/one project in ElasticSearch index'
     task :build_projects_index, [:id] => :environment do |_task, args|
       client = Project.__elasticsearch__.client
+
+      # ask if we delete the index
+      print 'Delete all projects in ElasticSearch index? (y/n) '
+      confirm = STDIN.gets.chomp
+      if confirm == 'y'
+        client.delete_by_query(
+          index: Project.index_name,
+          type: Project.document_type,
+          conflicts: 'proceed',
+          body: { query: { match_all: {} } }
+        )
+      end
+
       # create index if not exists
       Project.__elasticsearch__.create_index! force: true unless client.indices.exists? index: Project.index_name
 
@@ -163,7 +176,6 @@ namespace :fablab do
           StatisticService.new.generate_statistic(start_date: i.day.ago.beginning_of_day, end_date: i.day.ago.end_of_day)
         end
       end
-
     end
 
   end

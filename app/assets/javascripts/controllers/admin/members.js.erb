@@ -610,6 +610,81 @@ Application.Controllers.controller('NewMemberController', ['$scope', '$state', '
 ]);
 
 /**
+ * Controller used in the member's import page: import from CSV (admin view)
+ */
+Application.Controllers.controller('ImportMembersController', ['$scope', '$state', 'Group', 'Training', 'CSRF', 'tags', 'growl',
+  function($scope, $state, Group, Training, CSRF, tags, growl) {
+    CSRF.setMetaTags();
+
+    /* PUBLIC SCOPE */
+
+    // API URL where the form will be posted
+    $scope.actionUrl = '/api/imports/members';
+
+    // Form action on the above URL
+    $scope.method = 'post';
+
+    // List of all tags
+    $scope.tags = tags
+
+    /*
+     * Callback run after the form was submitted
+     * @param content {*} The result provided by the server, may be an Import object or an error message
+     */
+    $scope.onImportResult = function(content) {
+      if (content.id) {
+        $state.go('app.admin.members_import_result', { id: content.id });
+      } else {
+        growl.error(JSON.stringify(content));
+      }
+    }
+
+    // Using the MembersController
+    return new MembersController($scope, $state, Group, Training);
+  }
+]);
+
+/**
+ * Controller used in the member's import results page (admin view)
+ */
+Application.Controllers.controller('ImportMembersResultController', ['$scope', '$state', 'Import', 'importItem',
+  function ($scope, $state, Import, importItem) {
+    /* PUBLIC SCOPE */
+
+    // Current import as saved in database
+    $scope.import = importItem;
+
+    // Current import results
+    $scope.results = null;
+
+    /**
+     * Changes the admin's view to the members import page
+     */
+    $scope.cancel = function () { $state.go('app.admin.members_import'); };
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      $scope.results = JSON.parse($scope.import.results);
+      if (!$scope.results) {
+        setTimeout(function() {
+          Import.get({ id: $scope.import.id }, function(data) {
+            $scope.import = data;
+            initialize();
+          });
+        }, 5000);
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    initialize();
+  }
+]);
+
+/**
  * Controller used in the admin's creation page (admin view)
  */
 Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'Admin', 'growl', '_t', function ($state, $scope, Admin, growl, _t) {

@@ -17,7 +17,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         # unique random string, because:
         # - if it is the same user, his email will be filled from the SSO when he merge his accounts
         # - if it is not the same user, this will prevent the raise of PG::UniqueViolation
-        if active_provider.sso_fields.include?('user.email') and email_exists?(@user.email)
+        if active_provider.sso_fields.include?('user.email') && email_exists?(@user.email)
           old_mail = @user.email
           @user.email = "<#{old_mail}>#{Devise.friendly_token}-duplicate"
           flash[:alert] = t('omniauth.email_already_linked_to_another_account_please_input_your_authentication_code', OLD_MAIL: old_mail)

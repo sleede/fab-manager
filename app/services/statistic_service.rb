@@ -131,10 +131,12 @@ class StatisticService
       next if i.invoice.is_a?(Avoir)
 
       sub = i.subscription
+
       next unless sub
 
       ca = i.amount.to_i / 100.0
-      ca = CouponService.new.ventilate(get_invoice_total_no_coupon(i.invoice), ca, i.invoice.coupon) unless i.invoice.coupon_id.nil?
+      cs = CouponService.new
+      ca = cs.ventilate(cs.invoice_total_no_coupon(i.invoice), ca, i.invoice.coupon) unless i.invoice.coupon_id.nil?
       profile = sub.statistic_profile
       p = sub.plan
       result.push OpenStruct.new({
@@ -396,7 +398,8 @@ class StatisticService
            end
     end
     # subtract coupon discount from invoices and refunds
-    ca = CouponService.new.ventilate(get_invoice_total_no_coupon(invoice), ca, invoice.coupon) unless invoice.coupon_id.nil?
+    cs = CouponService.new
+    ca = cs.ventilate(cs.invoice_total_no_coupon(invoice), ca, invoice.coupon) unless invoice.coupon_id.nil?
     # divide the result by 100 to convert from centimes to monetary unit
     ca.zero? ? ca : ca / 100.0
   end
@@ -407,7 +410,8 @@ class StatisticService
       ca -= ii.amount.to_i
     end
     # subtract coupon discount from the refund
-    ca = CouponService.new.ventilate(get_invoice_total_no_coupon(invoice), ca, invoice.coupon) unless invoice.coupon_id.nil?
+    cs = CouponService.new
+    ca = cs.ventilate(cs.invoice_total_no_coupon(invoice), ca, invoice.coupon) unless invoice.coupon_id.nil?
     ca.zero? ? ca : ca / 100.0
   end
 
@@ -487,11 +491,6 @@ class StatisticService
   #   end
   #   user_subscription_ca.inject {|sum,x| sum.ca + x.ca } || 0
   # end
-
-  def get_invoice_total_no_coupon(invoice)
-    total = (invoice.invoice_items.map(&:amount).map(&:to_i).reduce(:+) or 0)
-    total / 100.0
-  end
 
   def find_or_create_user_info_info_list(profile, list)
     found = list.select do |l|

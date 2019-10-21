@@ -126,6 +126,26 @@ es:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
 
+  accounting_export:
+    journal_code: "Journal code"                                               # translation_missing
+    date: "Entry date"                                                         # translation_missing
+    account_code: "Account code"                                               # translation_missing
+    account_label: "Account label"                                             # translation_missing
+    piece: "Document"                                                          # translation_missing
+    line_label: "Entry label"                                                  # translation_missing
+    debit_origin: "Origin debit"                                               # translation_missing
+    credit_origin: "Origin credit"                                             # translation_missing
+    debit_euro: "Euro debit"                                                   # translation_missing
+    credit_euro: "Euro credit"                                                 # translation_missing
+    lettering: "Lettering"                                                     # translation_missing
+    VAT: 'IVA'
+    subscription: "subscr."                                                    # translation_missing
+    Machine_reservation: "machine reserv."                                     # translation_missing
+    Training_reservation: "training reserv."                                   # translation_missing
+    Event_reservation: "event reserv."                                         # translation_missing
+    Space_reservation: "space reserv."                                         # translation_missing
+    wallet: "wallet"                                                           # translation_missing
+
   trainings:
     # training availabilities
     i_ve_reserved: "he reservado"
@@ -135,6 +155,9 @@ es:
     # error messages when updating an event
     error_deleting_reserved_price: "No se puede eliminar el precio solicitado porque está asociado con algunas reservas."
     other_error: "Se ha producido un error inesperado al actualizar el evento."
+    # event duration
+    from_STARTDATE_to_ENDDATE: "Del %{STARTDATE} al %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "de %{STARTTIME} a %{ENDTIME}"
 
   export_members:
     # members list export to EXCEL format
@@ -307,8 +330,13 @@ es:
         users_subscriptions: "de la lista de suscripciones"
         users_reservations: "de la lista de reservas"
         availabilities_index: "de las reservas disponibles"
+        accounting_acd: "de los datos contables para ACD"
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
+      notify_admin_import_complete:
+        import_over: "%{CATEGORY} import is over. "                    # missing translation
+        members: "Members"                                             # missing translation
+        view_results: "View results."                                  # missing translation
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento de %{PERCENT}% con el código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Disfruta de un descuento de %{AMOUNT} con el código %{CODE}"
@@ -320,8 +348,8 @@ es:
       notify_admin_archive_complete:                                                                          # missing translation
         archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."          # missing translation
       notify_privacy_policy_changed:
-        policy_updated: "Privacy policy updated."        # missing translation
-        click_to_show: "Click here to consult"        # missing translation
+        policy_updated: "Privacy policy updated."                      # missing translation
+        click_to_show: "Click here to consult"                         # missing translation
   statistics:
     # statistics tools for admins
     subscriptions: "Suscripciones"

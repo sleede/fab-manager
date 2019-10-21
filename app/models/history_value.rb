@@ -25,14 +25,6 @@ class HistoryValue < ActiveRecord::Base
   private
 
   def compute_footprint
-    max_date = created_at || Time.current
-    previous = HistoryValue.where('created_at < ?', max_date)
-                           .order('created_at DESC')
-                           .limit(1)
-
-    columns = HistoryValue.columns.map(&:name)
-                          .delete_if { |c| %w[footprint updated_at].include? c }
-
-    Checksum.text("#{columns.map { |c| self[c] }.join}#{previous.first ? previous.first.footprint : ''}")
+    FootprintService.compute_footprint(HistoryValue, self, 'created_at')
   end
 end

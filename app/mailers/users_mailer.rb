@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Handle emails related to users accounts, at Devise level
 class UsersMailer < BaseMailer
   def notify_user_account_created(user, generated_password)
     @user = user

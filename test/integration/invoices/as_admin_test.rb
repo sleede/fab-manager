@@ -37,7 +37,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
 
     post '/api/invoices', { avoir: {
       avoir_date: date,
-      avoir_mode: 'cash',
+      payment_method: 'cash',
       description: 'Lorem ipsum',
       invoice_id: 4,
       invoice_items_ids: [4],
@@ -54,7 +54,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
 
     assert_dates_equal date, refund[:avoir_date]
     assert_dates_equal date, refund[:date]
-    assert_equal 'cash', refund[:avoir_mode]
+    assert_equal 'cash', refund[:payment_method]
     assert_equal false, refund[:has_avoir]
     assert_equal 4, refund[:invoice_id]
     assert_equal 4, refund[:items][0][:invoice_item_id]
@@ -70,7 +70,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
 
     post '/api/invoices', { avoir: {
       avoir_date: date,
-      avoir_mode: 'cash',
+      payment_method: 'cash',
       description: 'Unable to refund',
       invoice_id: 5,
       invoice_items_ids: [5],

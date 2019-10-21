@@ -17,8 +17,8 @@ en:
         password: "Password:"
         temporary_password: "This is a temporary password, you can modify it in your «My account» screen."
         keep_advantages: "With this account, you keep all the advantages linked to your Fab Lab user profile (trainings, subscriptions plans)."
-        thanks_to_: "To use the website, please"
-        logon_or_login: "create a new account or log in by clicking here"
+        to_use_platform: "To use the website, please"
+        logon_or_login: "create a new account or log in by clicking here."
         token_if_link_problem: "If you experience issues with the link, you can enter the following code at your first connection attempt:"
 
   notifications_mailer:
@@ -267,8 +267,19 @@ en:
         users_subscriptions: "of the subscriptions' list"
         users_reservations: "of the reservations' list"
         availabilities_index: "of the reservations availabilities"
+        accounting_accounting-software: "of the accounting data"
         click_to_download: "Excel file generated successfully. To download it, click"
         here: "here"
+        file_type:
+          xlsx: "Excel"
+          csv: "CSV"
+
+    notify_admin_import_complete:
+      subject: "Import completed"
+      body:
+        you_made_an_import: "You have initiated an import %{CATEGORY}"
+        category_members: "of the members"
+        click_to_view_results: "Click here to view results"
 
     notify_member_about_coupon:
       subject: "Coupon"

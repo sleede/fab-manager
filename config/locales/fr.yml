@@ -126,6 +126,26 @@ fr:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Prolongement Abonnement (Jours gratuits) de %{NAME} à compter du %{STARTDATE} jusqu'au %{ENDDATE}"
     and: 'et'
 
+  accounting_export:
+    journal_code: "Code journal"
+    date: "Date écriture"
+    account_code: "Code compte"
+    account_label: "Intitulé compte"
+    piece: "Pièce"
+    line_label: "Libellé écriture"
+    debit_origin: "Débit origine"
+    credit_origin: "Crédit origine"
+    debit_euro: "Débit euro"
+    credit_euro: "Crédit euro"
+    lettering: "Lettrage"
+    VAT: 'TVA'
+    subscription: "abo."
+    Machine_reservation: "réserv. machine"
+    Training_reservation: "réserv. formation"
+    Event_reservation: "réserv. évènement"
+    Space_reservation: "réserv. espace"
+    wallet: "porte-monnaie"
+
   trainings:
     # disponibilités formations
     i_ve_reserved: "J'ai réservé"
@@ -135,6 +155,9 @@ fr:
     # messages d'erreur lors de la mise à jour d'un évènement
     error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
     other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
+    # durée d'un évènement
+    from_STARTDATE_to_ENDDATE: "Du %{STARTDATE} au %{ENDDATE},"
+    from_STARTTIME_to_ENDTIME: "de %{STARTTIME} à %{ENDTIME}"
 
   export_members:
     # export de la liste des members au format EXCEL
@@ -307,8 +330,13 @@ fr:
         users_subscriptions: "de la liste des abonnements"
         users_reservations: "de la liste des réservations"
         availabilities_index: "des disponibilités de réservations"
+        accounting_acd: "des données comptables pour ACD"
         is_over: "est terminé."
         download_here: "Téléchargez ici"
+      notify_admin_import_complete:
+        import_over: "L'import %{CATEGORY} est terminé. "
+        members: "des membres"
+        view_results: "Voir les résultats."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Bénéficiez d'une remise de %{PERCENT} % avec le code %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Bénéficiez d'une remise de %{AMOUNT} avec le code %{CODE}"

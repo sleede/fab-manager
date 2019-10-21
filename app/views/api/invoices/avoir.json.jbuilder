@@ -1,4 +1,4 @@
-json.extract! @avoir, :id, :created_at, :reference, :invoiced_type, :avoir_date, :avoir_mode, :invoice_id
+json.extract! @avoir, :id, :created_at, :reference, :invoiced_type, :avoir_date, :payment_method, :invoice_id
 json.user_id @avoir.invoicing_profile.user_id
 json.total @avoir.total / 100.00
 json.name @avoir.user.profile.full_name

@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.11.1'
+# Use Puma as web server
+gem 'puma', '3.10.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -45,7 +47,6 @@ group :development do
   gem 'foreman'
   # Preview mail in the browser
   gem 'mailcatcher'
-  gem 'puma'
   gem 'rb-readline'
 end
 
@@ -68,10 +69,11 @@ gem 'seed_dump'
 
 gem 'pg'
 
-gem 'devise', ">= 4.6.0"
+gem 'devise', '>= 4.6.0'
 
-gem 'omniauth', '~> 1.6.0'
+gem 'omniauth', '~> 1.9.0'
 gem 'omniauth-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem 'rolify'
 
@@ -97,8 +99,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'aasm'
 
 # Background job processing
-gem 'sidekiq', '>= 3.4.2'
 gem 'redis-namespace'
+gem 'sidekiq', '>= 3.4.2'
 gem 'sinatra', require: false
 # Recurring jobs for Sidekiq
 gem 'sidekiq-cron'
@@ -148,3 +150,5 @@ gem 'rack-protection', '1.5.5'
 gem 'sys-filesystem'
 
 gem 'sha3'
+
+gem 'repost'

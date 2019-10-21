@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
+# Check the access policies for API::EventsController
 class EventPolicy < ApplicationPolicy
+  # Defines the scope of the events index, depending on the role of the current user
   class Scope < Scope
     def resolve
-      if user.nil? or (user and !user.admin?)
+      if user.nil? || (user && !user.admin?)
         scope.includes(:event_image, :event_files, :availability, :category)
              .where('availabilities.start_at >= ?', Time.now)
              .order('availabilities.start_at ASC')

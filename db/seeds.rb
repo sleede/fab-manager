@@ -444,13 +444,13 @@ unless Setting.find_by(name: 'name_genre').try(:value)
 end
 
 
-unless DatabaseProvider.count > 0
+unless DatabaseProvider.count.positive?
   db_provider = DatabaseProvider.new
   db_provider.save
 
   unless AuthProvider.find_by(providable_type: DatabaseProvider.name)
     provider = AuthProvider.new
-    provider.name = 'Fablab'
+    provider.name = 'FabManager'
     provider.providable = db_provider
     provider.status = 'active'
     provider.save

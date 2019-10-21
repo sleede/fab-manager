@@ -4,6 +4,11 @@
 class RegistrationsController < Devise::RegistrationsController
   # POST /users.json
   def create
+    # first check the recaptcha
+    check = RecaptchaService.verify(params[:user][:recaptcha])
+    render json: check['error-codes'], status: :unprocessable_entity and return unless check['success']
+
+    # then create the user
     build_resource(sign_up_params)
 
     resource_saved = resource.save

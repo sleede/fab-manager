@@ -442,9 +442,9 @@ Application.Controllers.controller('NewProjectController', ['$scope', '$state', 
 /**
  * Controller used in the project edition page
  */
-Application.Controllers.controller('EditProjectController', ['$scope', '$state', '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
-  function ($scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
-    CSRF.setMetaTags();
+Application.Controllers.controller('EditProjectController', ['$rootScope', '$scope', '$state', '$stateParams', 'Project', 'Machine', 'Member', 'Component', 'Theme', 'Licence', '$document', 'CSRF', 'projectPromise', 'Diacritics', 'dialogs', 'allowedExtensions', '_t',
+  function ($rootScope, $scope, $state, $stateParams, Project, Machine, Member, Component, Theme, Licence, $document, CSRF, projectPromise, Diacritics, dialogs, allowedExtensions, _t) {
+    /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
     $scope.actionUrl = `/api/projects/${$stateParams.id}`;
@@ -462,8 +462,25 @@ Application.Controllers.controller('EditProjectController', ['$scope', '$state',
       });
     });
 
-    // Using the ProjectsController
-    return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      CSRF.setMetaTags();
+
+      if ($scope.project.author_id !== $rootScope.currentUser.id && $scope.project.user_ids.indexOf($rootScope.currentUser.id) === -1) {
+        $state.go('app.public.projects_show', { id: $scope.project.slug });
+        console.error('[EditProjectController::initialize] user is not allowed')
+      }
+
+      // Using the ProjectsController
+      return new ProjectsController($scope, $state, Project, Machine, Member, Component, Theme, Licence, $document, Diacritics, dialogs, allowedExtensions, _t);
+    }
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
   }
 ]);
 

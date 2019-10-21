@@ -101,6 +101,7 @@ en:
         unlimited: "Unlimited"
         payment_card_error: "A problem occurred with your payment card:"
         online_payment_disabled: "Online payment is not available. Please contact the Fablab reception directly."
+        unexpected_error_occurred: "An unexpected error occurred"
 
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "You will lose any unsaved modification if you quit this page"

@@ -15,7 +15,7 @@
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.projects" translate>{{ 'my_projects' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.trainings" translate>{{ 'my_trainings' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.events" translate>{{ 'my_events' }}</a></li>
-          <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'my_invoices' }}</a></li>
+          <li ui-sref-active="active" ng-hide="fablabWithoutInvoices"><a class="text-black" href="#" ui-sref="app.logged.dashboard.invoices" translate>{{ 'my_invoices' }}</a></li>
           <li ui-sref-active="active"><a class="text-black" href="#" ui-sref="app.logged.dashboard.wallet" translate>{{ 'my_wallet' }}</a></li>
         </ul>
       </section>

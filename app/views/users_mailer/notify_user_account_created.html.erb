@@ -36,10 +36,12 @@
 
 <% else %>
 
+  <% url_path = File.join(root_url, 'sso-redirect') %>
+
   <p>
-    <%= t('.body.thanks_to_') %>
-    <a href="<%= "#{root_url}/users/auth/#{active_provider.strategy_name}?auth_token=#{@user.auth_token}"%>" target="_blank">
-      <%= t('body.logon_or_login', PROVIDER: active_provider.name )%>
+    <%= t('.body.to_use_platform') %>
+    <a href="<%= "#{url_path}?auth_token=#{@user.auth_token}"%>" target="_blank">
+      <%= t('.body.logon_or_login', PROVIDER: active_provider.name )%>
     </a>
   </p>
 
