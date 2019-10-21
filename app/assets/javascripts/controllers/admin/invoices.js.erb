@@ -26,6 +26,12 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     /* PUBLIC SCOPE */
 
+    // default active tab
+    $scope.tabs = {
+      listing: { active: !Fablab.withoutInvoices },
+      settings: { active: Fablab.withoutInvoices }
+    };
+
     // List of all users invoices
     $scope.invoices = invoices;
 
