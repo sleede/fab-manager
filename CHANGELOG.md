@@ -11,6 +11,7 @@
 - Ability to disable invoices generation and interfaces
 - Added a known issue to the README (#152)
 - Ability to fully rebuild the projets index in ElasticSearch with rake fablab:es:build_projects_index
+- Ability to configure SMTP connection to use SMTP/TLS
 - Fix a bug: invoices with total = 0, are marked as paid on site even if paid by card
 - Fix a bug: after disabling a group, its associated plans are hidden from the interface
 - Fix a bug: in case of unexpected server error during stripe payment process, the confirm button is not unlocked
@@ -33,6 +34,7 @@
 - [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add `- ${PWD}/imports:/usr/src/app/imports` in the volumes list of your fabmanager service in [docker-compose.yml](docker/docker-compose.yml)
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add the following environment variables: `SMTP_TLS`
 
 ## v4.1.1 2019 september 20
 

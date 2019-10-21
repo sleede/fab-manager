@@ -104,6 +104,7 @@ Rails.application.configure do
     authentication: Rails.application.secrets.smtp_authentication,
     enable_starttls_auto: Rails.application.secrets.smtp_enable_starttls_auto,
     openssl_verify_mode: Rails.application.secrets.smtp_openssl_verify_mode,
+    tls: Rails.application.secrets.smtp_tls
   }
 
   # use :smtp for switch prod
