@@ -1,7 +1,7 @@
 {
   "name": "fab-manager",
-  "version": "4.2.0-dev",
-  "description": "FabManager is the FabLab management solution. It is web-based, open-source and totally free.",
+  "version": "4.2.0",
+  "description": "FabManager is the FabLab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.",
   "keywords": [
     "fablab",
     "reservations",

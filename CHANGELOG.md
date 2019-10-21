@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+## v4.2.0 2019 October 21
+
 - Upgraded PostgreSQL from 9.4 to 9.6
 - Optional reCaptcha checkbox in sign-up form
 - Ability to configure and export the accounting data to the ACD accounting software
@@ -37,7 +39,7 @@
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
 - [TODO DEPLOY] add the following environment variables: `SMTP_TLS`
 
-## v4.1.1 2019 september 20
+## v4.1.1 2019 September 20
 
 - Fix a bug: api/reservations#index was using user_id instead of statistic_profile_id
 - Fix a bug: event_service#date_range method, test on all_day was never truthy
