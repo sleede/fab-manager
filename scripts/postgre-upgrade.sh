@@ -76,7 +76,7 @@ test_docker_compose()
 read_path()
 {
     PG_PATH=$(awk "BEGIN { FS=\"\n\"; RS=\"\"; } { match(\$0, /image: postgres:$OLD(\n|.)+volumes:(\n|.)+(-.*postgresql\/data)/, lines); FS=\"[ :]+\"; RS=\"\r\n\"; split(lines[3], line); print line[2] }" "$FM_PATH/docker-compose.yml")
-    PG_PATH="${PG_PATH/\$\{PWD\}/$(pwd)}"
+    PG_PATH="${PG_PATH/@(\$\{PWD\}|\.)/$(pwd)}"
     PG_PATH="${PG_PATH/[[:space:]]/}"
 }
 
@@ -155,10 +155,12 @@ docker_up()
 clean()
 {
   read -rp "Remove the previous PostgreSQL data folder? (y/N) " confirm </dev/tty
-  if [[ "$confirm" = "y" ]]
-  then
-    echo "Deleting $PG_PATH..."
-    rm -rf "$PG_PATH"
+  if [[ "$confirm" = "y" ]]; then
+    read -rp "WARNING: This cannot be undone! If something went wrong during the upgrade, you'll lost all your data. Are you really sure? (y/N) " confirm </dev/tty
+    if [[ "$confirm" = "y" ]]; then
+      echo "Deleting $PG_PATH..."
+      rm -rf "$PG_PATH"
+    fi
   fi
 }
 
