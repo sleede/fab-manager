@@ -121,6 +121,7 @@ ensure_pg_down()
 
 pg_upgrade()
 {
+  echo "docker run --rm  -v $PG_PATH:/var/lib/postgresql/$OLD/data -v $NEW_PATH:/var/lib/postgresql/$NEW/data tianon/postgres-upgrade:$OLD-to-$NEW"
   docker run --rm \
     -v "$PG_PATH:/var/lib/postgresql/$OLD/data" \
     -v "$NEW_PATH:/var/lib/postgresql/$NEW/data" \
