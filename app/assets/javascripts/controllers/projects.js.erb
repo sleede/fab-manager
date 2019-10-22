@@ -376,7 +376,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
       if ($location.$$search.whole_network === 'f') {
         $scope.openlab.searchOverWholeNetwork = false;
       } else {
-        $scope.openlab.searchOverWholeNetwork = $scope.openlab.projectsActive || false;
+        $scope.openlab.searchOverWholeNetwork = ($scope.openlab.projectsActive && Fablab.openlabDefault) || false;
       }
       return $scope.triggerSearch();
     };
@@ -452,7 +452,7 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
     // Form action on the above URL
     $scope.method = 'put';
 
-    // Retrieve the project's details, if an error occured, redirect the user to the projects list page
+    // Retrieve the project's details, if an error occurred, redirect the user to the projects list page
     $scope.project = projectPromise;
 
     $scope.matchingMembers = $scope.project.project_users.map(function (u) {

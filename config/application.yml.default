@@ -75,9 +75,10 @@ D3_DATE_FORMAT: '%d/%m/%y'
 UIB_DATE_FORMAT: 'dd/MM/yyyy'
 EXCEL_DATE_FORMAT: 'dd/mm/yyyy'
 
-# OpenProjects
+# OpenLab Projects
 OPENLAB_APP_SECRET:
 OPENLAB_APP_ID:
+OPENLAB_DEFAULT: 'true'
 # do not change this URL
 OPENLAB_BASE_URI: 'https://openprojects.fab-manager.com'
 
