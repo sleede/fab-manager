@@ -65,7 +65,7 @@ test_docker_compose()
 {
   if [[ -f "$FM_PATH/docker-compose.yml" ]]
   then
-    if docker-compose ps | grep postgres
+    if docker-compose ps | grep postgres 2>/dev/null
     then
       TYPE="DOCKER-COMPOSE"
     fi
@@ -102,7 +102,7 @@ ensure_pg_down()
 {
   if [ -f "$PG_PATH/postmaster.pid" ]; then
     echo 'ERROR: lock file "postmaster.pid" exists'
-    if ! docker-compose ps | grep postgres; then
+    if ! docker-compose ps | grep postgres 2>/dev/null; then
       read -rp 'docker-compose container is not running. Confirm delete the lock file? (y/N) ' confirm </dev/tty
       if [ "$confirm" = "y" ]; then
         if [ "$(whoami)" = "root" ]; then COMMAND="rm"
