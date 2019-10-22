@@ -35,19 +35,7 @@ config()
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
   read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
-  if [ "$confirm" = "y" ]
-  then
-    if [ -f "$FM_PATH/config/application.yml" ]
-    then
-      PG_HOST=$(grep POSTGRES_HOST "$FM_PATH/config/application.yml" | awk '{print $2}')
-    elif [ -f "$FM_PATH/config/env" ]
-    then
-      PG_HOST=$(grep POSTGRES_HOST "$FM_PATH/config/env" | awk '{split($0,a,"="); print a[2]}')
-    else
-      echo "Fab-manager's environment file not found, please run this script from the installation folder"
-      exit 1
-    fi
-    PG_IP=$(getent ahostsv4 "$PG_HOST" | awk '{ print $1 }' | uniq)
+  if [ "$confirm" = "y" ]; then
     test_docker_compose
     if [[ "$TYPE" = "NOT-FOUND" ]]
     then
@@ -80,14 +68,6 @@ test_docker_compose()
     if docker-compose ps | grep postgres
     then
       TYPE="DOCKER-COMPOSE"
-      local container_id
-      container_id=$(docker-compose ps | grep postgre | awk '{print $1}')
-      local ip
-      ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container_id")
-      if [ "$PG_IP" != "$ip" ]; then
-        echo "IP address is not matching ($PG_IP != $ip), exiting..."
-        exit 8
-      fi
     fi
   fi
 }
