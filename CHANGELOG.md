@@ -1,5 +1,11 @@
 # Changelog Fab Manager
 
+## v4.2.3 2019 October 22
+
+- Ability to set the default view in project gallery: openLab or local
+- Fix a bug: admins can't edit members projects
+- [TODO DEPLOY] add the `OPENLAB_DEFAULT` environment variable (see [doc/environment.md](doc/environment.md#OPENLAB_DEFAULT) for configuration details)
+
 ## v4.2.2 2019 October 22
 
 - Fix a bug: PostgreSQL upgrade script won't run on some systems

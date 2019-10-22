@@ -331,6 +331,12 @@ It allows you to display a shared projects gallery and to share your projects wi
     OPENLAB_APP_ID, OPENLAB_APP_SECRET
 
 Send an email to **contact@fab-manager.com** to get your OpenLab client's credentials.
+<a name="OPENLAB_DEFAULT"></a>
+
+    OPENLAB_DEFAULT
+
+When set to false, the default display will be the local projects when browsing the projects gallery.
+If not set or set to true, the projects from the OpenLab repository will be shown first.
 <a name="OPENLAB_BASE_URI"></a>
 
     OPENLAB_BASE_URI

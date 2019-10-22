@@ -16,10 +16,10 @@
   <script type="text/javascript">
       var Fablab = Fablab || {};
 
-      Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' == 'true');
-      Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' != 'false');
-      Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' == 'true');
-      Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' == 'true');
+      Fablab.withoutPlans = ('<%= Rails.application.secrets.fablab_without_plans %>' === 'true');
+      Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' !== 'false');
+      Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
+      Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
@@ -43,6 +43,7 @@
       Fablab.d3DateFormat = "<%= Rails.application.secrets.d3_date_format %>";
       Fablab.uibDateFormat = "<%= Rails.application.secrets.uib_date_format %>";
       Fablab.openlabProjectsActive = <%= Rails.application.secrets.openlab_app_secret.present? %>;
+      Fablab.openlabDefault = ('<%= Rails.application.secrets.openlab_default %>' !== 'false');
       <% if Rails.application.secrets.openlab_app_id.present? %>
       Fablab.openlabAppId = "<%= Rails.application.secrets.openlab_app_id %>";
       <% end %>
