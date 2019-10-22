@@ -1,5 +1,7 @@
 # Changelog Fab Manager
 
+- Fix a bug: admins can't edit members projects
+
 ## v4.2.2 2019 October 22
 
 - Fix a bug: PostgreSQL upgrade script won't run on some systems

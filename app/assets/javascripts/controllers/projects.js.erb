@@ -470,7 +470,7 @@ Application.Controllers.controller('EditProjectController', ['$rootScope', '$sco
     const initialize = function () {
       CSRF.setMetaTags();
 
-      if ($scope.project.author_id !== $rootScope.currentUser.id && $scope.project.user_ids.indexOf($rootScope.currentUser.id) === -1) {
+      if ($scope.project.author_id !== $rootScope.currentUser.id && $scope.project.user_ids.indexOf($rootScope.currentUser.id) === -1 && $scope.currentUser.role !== 'admin') {
         $state.go('app.public.projects_show', { id: $scope.project.slug });
         console.error('[EditProjectController::initialize] user is not allowed')
       }
