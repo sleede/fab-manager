@@ -166,12 +166,18 @@ clean()
   fi
 }
 
+function trap_ctrlc()
+{
+  echo "Ctrl^C, exiting..."
+  exit 2
+}
+
 upgrade_postgres()
 {
   config
   read -rp "Continue with upgrading? (y/N) " confirm </dev/tty
-  if [[ "$confirm" = "y" ]]
-  then
+  if [[ "$confirm" = "y" ]]; then
+    trap "trap_ctrlc" 2 # SIGINT
     OLD='9.4'
     NEW='9.6'
     read_path

@@ -629,13 +629,19 @@ start_upgrade()
   esac
 }
 
+function trap_ctrlc()
+{
+  echo "Ctrl^C, exiting..."
+  exit 2
+}
+
 upgrade_elastic()
 {
   config
   detect_installation
   read -rp "Continue with upgrading? (y/n) " confirm </dev/tty
-  if [[ "$confirm" = "y" ]]
-  then
+  if [[ "$confirm" = "y" ]]; then
+    trap "trap_ctrlc" 2 # SIGINT
     ensure_initial_status_green
     start_upgrade '1.7' '2.4'
     reindex_indices '24'
