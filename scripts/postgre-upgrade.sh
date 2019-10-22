@@ -39,10 +39,10 @@ config()
   then
     if [ -f "$FM_PATH/config/application.yml" ]
     then
-      PG_HOST=$(cat "$FM_PATH/config/application.yml" | grep POSTGRES_HOST | awk '{print $2}')
+      PG_HOST=$(grep POSTGRES_HOST "$FM_PATH/config/application.yml" | awk '{print $2}')
     elif [ -f "$FM_PATH/config/env" ]
     then
-      PG_HOST=$(cat "$FM_PATH/config/env" | grep POSTGRES_HOST | awk '{split($0,a,"="); print a[2]}')
+      PG_HOST=$(grep POSTGRES_HOST "$FM_PATH/config/env" | awk '{split($0,a,"="); print a[2]}')
     else
       echo "Fab-manager's environment file not found, please run this script from the installation folder"
       exit 1
@@ -64,11 +64,11 @@ test_free_space()
 {
   # checking disk space (minimum required = 1.2GB)
   required=$(du -d 0 "$PG_PATH" | awk '{ print $1 }')
-  space=$(df $FM_PATH | awk '/[0-9]%/{print $(NF-2)}')
+  space=$(df "$FM_PATH" | awk '/[0-9]%/{print $(NF-2)}')
   if [ "$space" -lt "$required" ]
   then
     echo "Not enough free disk space to perform upgrade. Please free at least $required bytes of disk space and try again"
-    df -h $FM_PATH
+    df -h "$FM_PATH"
     exit 7
   fi
 }
@@ -77,12 +77,16 @@ test_docker_compose()
 {
   if [[ -f "$FM_PATH/docker-compose.yml" ]]
   then
-    docker-compose ps | grep postgres
-    if [[ $? = 0 ]]
+    if [[ $(docker-compose ps | grep postgres) = 0 ]]
     then
       TYPE="DOCKER-COMPOSE"
-      local container_id=$(docker-compose ps | grep postgre | awk '{print $1}')
-      PG_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container_id")
+      local container_id, ip
+      container_id=$(docker-compose ps | grep postgre | awk '{print $1}')
+      ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container_id")
+      if [ "$PG_IP" != "$ip" ]; then
+        puts "IP address is not matching, exiting..."
+        exit 8
+      fi
     fi
   fi
 }
@@ -110,6 +114,26 @@ prepare_path()
 docker_down()
 {
   docker-compose down
+  ensure_pg_down
+}
+
+ensure_pg_down()
+{
+  if [ -f "$PG_PATH/postmaster.pid" ]; then
+    echo 'ERROR: lock file "postmaster.pid" exists'
+    if [[ $(docker-compose ps | grep postgres) = 1 ]]; then
+      read -rp 'docker-compose container is not running. Confirm delete the lock file? (y/N) ' confirm </dev/tty
+      if [ "$confirm" = "y" ]; then
+        if [ "$(whoami)" = "root" ]; then COMMAND="rm"
+        else COMMAND="sudo rm"; fi
+        "$COMMAND" -f "$PG_PATH/postmaster.pid"
+      fi
+    else
+      echo 'docker-compose container is still running, retrying to stop...'
+      sleep 2
+      docker_down
+    fi
+  fi
 }
 
 pg_upgrade()
