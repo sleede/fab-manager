@@ -80,11 +80,12 @@ test_docker_compose()
     if docker-compose ps | grep postgres
     then
       TYPE="DOCKER-COMPOSE"
-      local container_id, ip
+      local container_id
       container_id=$(docker-compose ps | grep postgre | awk '{print $1}')
+      local ip
       ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$container_id")
       if [ "$PG_IP" != "$ip" ]; then
-        puts "IP address is not matching, exiting..."
+        echo "IP address is not matching ($PG_IP != $ip), exiting..."
         exit 8
       fi
     fi
