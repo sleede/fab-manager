@@ -1,5 +1,9 @@
 # Changelog Fab Manager
 
+## v4.2.2 2019 October 22
+
+- Fix a bug: PostgreSQL upgrade script won't run on some systems
+
 ## v4.2.1 2019 October 21
 
 - Updated axlsx gem to caxlsx 3.0
@@ -34,16 +38,16 @@
 - Fix a bug: unauthorized user can see the edit project form
 - Fix a bug: do not display each days in invoices for multiple days event reservation
 - Fix a security issue: fixed [CVE-2015-9284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9284)
-- [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL.
-- [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] -> (only dev) `yarn install` and `bundle install`
 - [TODO DEPLOY] -> (only dev) configure `DEFAULT_HOST: 'localhost:5000'` and `DEFAULT_PROTOCOL: http` in [application.yml](config/application.yml.default)
-- [TODO DEPLOY] add the `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the `MAX_CAO_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] `rake db:migrate`
 - [TODO DEPLOY] add `- ${PWD}/imports:/usr/src/app/imports` in the volumes list of your fabmanager service in [docker-compose.yml](docker/docker-compose.yml)
-- [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the following `SMTP_TLS` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
+- [TODO DEPLOY] add the `RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` environment variables (see [doc/environment.md](doc/environment.md#RECAPTCHA_SITE_KEY) for configuration details)
+- [TODO DEPLOY] add the `MAX_CAO_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_CAO_SIZE) for configuration details)
+- [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_IMPORT_SIZE) for configuration details)
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md#FABLAB_WITHOUT_INVOICES) for configuration details)
+- [TODO DEPLOY] add the `SMTP_TLS` environment variable (see [doc/environment.md](doc/environment.md#SMTP_TLS) for configuration details)
+- [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL.
 
 ## v4.1.1 2019 September 20
 
