@@ -1,5 +1,8 @@
 # Changelog Fab Manager
 
+- Handle Ctrl^C in upgrade scripts
+- Updated moment-timezone
+
 ## v4.2.3 2019 October 22
 
 - Ability to set the default view in project gallery: openLab or local
