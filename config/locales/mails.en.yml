@@ -80,7 +80,8 @@ en:
       subject: "Your subscription has been successfully purchased"
       body:
         plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Your subscription plan will end on %{DATE}"
+        rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
+        subscription_stops_on: "Your subscription will end on %{DATE}."
 
     notify_member_create_reservation:
       subject: "Your reservation has been successfully saved"

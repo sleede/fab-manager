@@ -80,7 +80,8 @@ pt:
       subject: "Sua assinatura foi adquirida com êxito"
       body:
         plan_subscribed_html: "Você assinou o plano: <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Seu plano de assinatura termina em %{DATE}"
+        rolling_subscription_stops_on: "Sua assinatura encerrará %{DURATION} após seu primeiro treinamento. Caso contrário, ele será interrompido em %{DATE}."
+        subscription_stops_on: "Sua assinatura será encerrada em %{DATE}."
 
     notify_member_create_reservation:
       subject: "Sua reserva foi salva com sucesso"

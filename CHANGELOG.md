@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- Improved notification email to the member when a rolling subscription is taken
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 
