@@ -61,6 +61,7 @@ pt:
           unlockable_because_reservations: "Não é possível bloquear a reserva neste slot porque existem algumas reservas não cancelados nele."
           delete_slot: "Exclua o slot"
           do_you_really_want_to_delete_this_slot: "Você realmente quer excluir esse slot?"
+          event_in_the_past: "Unable to create a slot in the past."                                # translation_missing
 
       project_elements:
         # management of the projects' components

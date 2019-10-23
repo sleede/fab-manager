@@ -61,6 +61,7 @@ en:
           unlockable_because_reservations: "Unable to block booking on this slot because some uncancelled reservations exist on it."
           delete_slot: "Delete this slot"
           do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
+          event_in_the_past: "Unable to create a slot in the past."
 
       project_elements:
         # management of the projects' components
