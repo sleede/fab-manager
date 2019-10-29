@@ -115,8 +115,16 @@ class API::MembersController < API::ApiController
   def export_members
     authorize :export
 
+    last_update = [
+      User.with_role(:member).maximum('updated_at'),
+      Profile.where(user_id: User.with_role(:member)).maximum('updated_at'),
+      InvoicingProfile.where(user_id: User.with_role(:member)).maximum('updated_at'),
+      StatisticProfile.where(user_id: User.with_role(:member)).maximum('updated_at'),
+      Subscription.maximum('updated_at')
+    ].max
+
     export = Export.where(category: 'users', export_type: 'members')
-                   .where('created_at > ?', User.with_role(:member).maximum('updated_at'))
+                   .where('created_at > ?', last_update)
                    .last
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(category: 'users', export_type: 'members', user: current_user)

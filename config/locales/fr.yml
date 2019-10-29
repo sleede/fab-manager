@@ -167,6 +167,7 @@ fr:
     first_name: "Prénom"
     email: "Courriel"
     newsletter: "Lettre d'informations"
+    last_login: "Dernière connexion"
     gender: "Genre"
     age: "Âge"
     address: "Adresse"

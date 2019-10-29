@@ -167,6 +167,7 @@ es:
     first_name: "Nombre"
     email: "E-mail"
     newsletter: "Hoja informativa"
+    last_login: "Último acceso"
     gender: "Genero"
     age: "Edad"
     address: "Dirección"

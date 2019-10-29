@@ -167,6 +167,7 @@ en:
     first_name: "First name"
     email: "E-mail"
     newsletter: "Newsletter"
+    last_login: "Last login"
     gender: "Gender"
     age: "Age"
     address: "Address"

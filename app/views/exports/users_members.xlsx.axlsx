@@ -14,6 +14,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
              t('export_members.first_name'),
              t('export_members.email'),
              t('export_members.newsletter'),
+             t('export_members.last_login'),
              t('export_members.gender'),
              t('export_members.age'),
              t('export_members.address'),
@@ -45,6 +46,7 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
       member.profile.first_name,
       member.email,
       member.is_allow_newsletter,
+      member.last_sign_in_at&.to_date,
       member.statistic_profile.gender ? t('export_members.man') : t('export_members.woman'),
       member.statistic_profile.age,
       member.invoicing_profile&.address&.address || '',
@@ -66,10 +68,10 @@ wb.add_worksheet(name: t('export_members.members')) do |sheet|
       member.invoicing_profile&.organization&.name || '',
       member.invoicing_profile&.organization&.address&.address || ''
     ]
-    styles = [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,
+    styles = [nil, nil, nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil,
               nil, nil, nil, date, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
 
-    types = %i[integer string string string boolean string integer string string string string string
+    types = %i[integer string string string boolean date string integer string string string string string
                string string string date string string integer string string string string string string string]
 
     sheet.add_row data, style: styles, types: types

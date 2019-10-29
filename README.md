@@ -435,6 +435,8 @@ Developers may find information on how to implement their own authentication pro
 - In some cases, the invoices won't be generated. This can be due to the image included in the invoice header not being supported.
   To fix this issue, change the image in the administrator interface (manage the invoices / invoices settings).
   See [this thread](https://forum.fab-manager.com/t/resolu-erreur-generation-facture/428) for more info.
+  
+- In the excel exports, if the cells expected to contain dates are showing strange numbers, check that you have correctly configured the [EXCEL_DATE_FORMAT](doc/environment.md#EXCEL_DATE_FORMAT) variable.
 
 <a name="related-documentation"></a>
 ## Related Documentation
