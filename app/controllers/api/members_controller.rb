@@ -66,7 +66,7 @@ class API::MembersController < API::ApiController
   def destroy
     authorize @member
     @member.destroy
-    sign_out(@member)
+    sign_out(@member) if @member.id == current_user.id
     head :no_content
   end
 

@@ -1,5 +1,6 @@
 # Changelog Fab Manager
 
+- An administrator can delete a member
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
 - Handle Ctrl^C in upgrade scripts

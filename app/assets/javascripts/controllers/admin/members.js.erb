@@ -183,6 +183,35 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     /**
+     * Ask for confirmation then delete the specified user
+     * @param memberId {number} identifier of the user to delete
+     */
+    $scope.deleteMember = function(memberId) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('confirmation_required'),
+                msg: $sce.trustAsHtml(_t('confirm_delete_member') + '<br/><br/>' + _t('this_may_take_a_while_please_wait'))
+              };
+            }
+          }
+        },
+        function () { // cancel confirmed
+          Member.delete(
+            { id: memberId },
+            function () {
+              $scope.members.splice(findItemIdxById($scope.members, memberId), 1);
+              return growl.success(_t('member_successfully_deleted'));
+            },
+            function (error) { growl.error(_t('unable_to_delete_the_member')); }
+          );
+        }
+      );
+    }
+
+    /**
      * Ask for confirmation then delete the specified administrator
      * @param admins {Array} full list of administrators
      * @param admin {Object} administrator to delete
@@ -203,7 +232,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           Admin.delete(
             { id: admin.id },
             function () {
-              admins.splice(findAdminIdxById(admins, admin.id), 1);
+              admins.splice(findItemIdxById(admins, admin.id), 1);
               return growl.success(_t('administrator_successfully_deleted'));
             },
             function (error) { growl.error(_t('unable_to_delete_the_administrator')); }
@@ -261,13 +290,13 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     var searchTimeout = null;
 
     /**
-     * Iterate through the provided array and return the index of the requested admin
-     * @param admins {Array} full list of users with role 'admin'
-     * @param id {Number} user id of the admin to retrieve in the list
-     * @returns {Number} index of the requested admin, in the provided array
+     * Iterate through the provided array and return the index of the requested item
+     * @param items {Array} full list of users with role 'admin'
+     * @param id {Number} id of the item to retrieve in the list
+     * @returns {Number} index of the requested item, in the provided array
      */
-    var findAdminIdxById = function (admins, id) {
-      return (admins.map(function (admin) { return admin.id; })).indexOf(id);
+    var findItemIdxById = function (items, id) {
+      return (items.map(function (item) { return item.id; })).indexOf(id);
     };
 
     /**

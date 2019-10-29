@@ -45,7 +45,10 @@
       <td>
         <div class="buttons">
           <button class="btn btn-default" ui-sref="app.admin.members_edit({id: m.id})">
-            <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-danger" ng-click="deleteMember(m.id)">
+            <i class="fa fa-trash"></i>
           </button>
           <span class="label label-danger text-white" ng-show="m.need_completion" translate>{{ 'incomplete_profile' }}</span>
         </div>
