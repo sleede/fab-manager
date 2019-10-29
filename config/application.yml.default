@@ -21,6 +21,8 @@ FABLAB_WITHOUT_SPACES: 'true'
 FABLAB_WITHOUT_ONLINE_PAYMENT: 'false'
 FABLAB_WITHOUT_INVOICES: 'false'
 
+SLOT_DURATION: '60'
+
 DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
 
 # Configure carefully!

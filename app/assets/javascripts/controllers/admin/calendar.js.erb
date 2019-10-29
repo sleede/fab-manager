@@ -30,7 +30,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     const BOOKING_SNAP = '00:30:00';
 
     // We do not allow the creation of slots that are not a multiple of 60 minutes
-    const SLOT_MULTIPLE = 60;
+    const SLOT_MULTIPLE = Fablab.slotDuration;
 
     /* PUBLIC SCOPE */
 
