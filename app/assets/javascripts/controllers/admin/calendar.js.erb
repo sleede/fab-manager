@@ -30,7 +30,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     const BOOKING_SNAP = '00:30:00';
 
     // We do not allow the creation of slots that are not a multiple of 60 minutes
-    const SLOT_MULTIPLE = 60;
+    const SLOT_MULTIPLE = Fablab.slotDuration;
 
     /* PUBLIC SCOPE */
 
@@ -283,12 +283,12 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         return uiCalendarConfig.calendars.calendar.fullCalendar('unselect');
       }
 
-      // check that the selected slot is an N-hours multiple (ie. not decimal)
+      // check that the selected slot is an multiple of SLOT_MULTIPLE (ie. not decimal)
       const slots = Math.trunc((end.valueOf() - start.valueOf()) / (60 * 1000)) / SLOT_MULTIPLE;
       if (!Number.isInteger(slots)) {
-        // otherwise, round it to nearest decimal
-        const nearest = Math.round(slots) * SLOT_MULTIPLE;
-        end = moment(start).add(nearest, 'minutes');
+        // otherwise, round it to upper decimal
+        const upper = Math.ceil(slots) * SLOT_MULTIPLE;
+        end = moment(start).add(upper, 'minutes');
       }
 
       // then we open a modal window to let the admin specify the slot type
@@ -507,21 +507,25 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
       Tag.query().$promise.then(function (data) { $scope.tags = data; });
 
-      // When we configure a machine availability, do not let the user change the end time, as the total
-      // time must be dividable by 60 minutes (base slot duration). For training availabilities, the user
+      // When we configure a machine/space availability, do not let the user change the end time, as the total
+      // time must be dividable by Fablab.slotDuration minutes (base slot duration). For training availabilities, the user
       // can configure any duration as it does not matters.
       $scope.$watch('availability.available_type', function (newValue, oldValue, scope) {
         if ((newValue === 'machines') || (newValue === 'space')) {
           $scope.endDateReadOnly = true;
-          const diff = moment($scope.end).diff($scope.start, 'hours'); // the result is rounded down by moment.js
-          $scope.end = moment($scope.start).add(diff, 'hours').toDate();
+          const slots = Math.trunc(($scope.end.valueOf() - $scope.start.valueOf()) / (60 * 1000)) / Fablab.slotDuration;
+          if (!Number.isInteger(slots)) {
+            // otherwise, round it to upper decimal
+            const upper = Math.ceil(slots) * Fablab.slotDuration;
+            $scope.end = moment($scope.start).add(upper, 'minutes').toDate();
+          }
           return $scope.availability.end_at = $scope.end;
         } else {
           return $scope.endDateReadOnly = false;
         }
       });
 
-      // When the start date is changed, if we are configuring a machine availability,
+      // When the start date is changed, if we are configuring a machine/space availability,
       // maintain the relative length of the slot (ie. change the end time accordingly)
       $scope.$watch('start', function (newValue, oldValue, scope) {
       // for machine or space availabilities, adjust the end time
@@ -542,7 +546,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       // Maintain consistency between the end time and the date object in the availability object
       return $scope.$watch('end', function (newValue, oldValue, scope) {
       // we prevent the admin from setting the end of the availability before its begining
-        if (moment($scope.start).add(1, 'hour').isAfter(newValue)) {
+        if (moment($scope.start).add(Fablab.slotDuration, 'minutes').isAfter(newValue)) {
           $scope.end = oldValue;
         }
         // update availability object

@@ -102,6 +102,15 @@ Valid stripe API keys are still required, even if you don't require online payme
 If set to 'true', the invoices will be disabled. 
 This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
 **Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
+<a name="SLOT_DURATION"></a>
+
+    SLOT_DURATION
+
+Machine and space availabilities are divided in multiple slots of the duration set by this variable.
+Default value is 60 minutes (1 hour).
+
+⚠ Changing this value during the application life may cause serious issues. 
+Please ensure there's no machine/space availabilities opened to reservation or already reserved **in the future** when you change this value.
 <a name="DEFAULT_MAIL_FROM"></a>
 
     DEFAULT_MAIL_FROM
