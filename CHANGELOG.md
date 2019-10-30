@@ -1,10 +1,12 @@
 # Changelog Fab Manager
 
 - An administrator can delete a member
+- Ability to configure the duration of a reservation slot. Previously, only 60 minutes slots were allowed
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
+- [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
 
 ## v4.2.3 2019 October 22
 
