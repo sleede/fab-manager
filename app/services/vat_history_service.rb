@@ -32,9 +32,10 @@ class VatHistoryService
       chronology.push(start: v.created_at, end: end_date, enabled: v.value == 'true')
       end_date = v.created_at
     end
+    chronology.push(start: DateTime.new(0), end: end_date, enabled: false)
     date_rates = []
     Setting.find_by(name: 'invoice_VAT-rate').history_values.order(created_at: 'ASC').each do |rate|
-      range = chronology.select { |p| rate.created_at.between?(p[:start], p[:end]) }.first
+      range = chronology.select { |p| rate.created_at.to_i.between?(p[:start].to_i, p[:end].to_i) }.first
       date = range[:enabled] ? rate.created_at : range[:end]
       date_rates.push(date: date, rate: rate.value.to_i)
     end
