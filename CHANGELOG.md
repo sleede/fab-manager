@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Fix a bug: in some cases, the invoices were not generated after deploying v4.2.0+. This can occurs if VAT was changed/enabled during the application life (#156)
+- [TODO DEPLOY] `rake fablab:maintenance:regenerate_invoices[2019,10]` only if you had download issues with your last invoices
 
 ## v4.2.3 2019 October 22
 
