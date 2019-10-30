@@ -108,6 +108,8 @@ This is useful if you have your own invoicing system and you want to prevent Fab
 
 Machine and space availabilities are divided in multiple slots of the duration set by this variable.
 Default value is 60 minutes (1 hour).
+
+⚠ You should not change this value during the application lifecycle!
 <a name="DEFAULT_MAIL_FROM"></a>
 
     DEFAULT_MAIL_FROM
