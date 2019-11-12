@@ -468,6 +468,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
      */
     $scope.next = function () {
       if ($scope.step === 1) { $scope.setNbTotalPlaces(); }
+      if ($scope.step === 2) { return validateSelection(); }
+      if ($scope.step === 4) { return validateRecurrence(); }
       return $scope.step++;
     };
 
@@ -534,8 +536,8 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
           end.add(moment(newValue).diff(oldValue), 'milliseconds');
           $scope.end = end.toDate();
         } else { // for training availabilities
-        // prevent the admin from setting the begining after the and
-          if (moment(newValue).add(1, 'hour').isAfter($scope.end)) {
+        // prevent the admin from setting the beginning after the end
+          if (moment(newValue).add(Fablab.slotDuration, 'minutes').isAfter($scope.end)) {
             $scope.start = oldValue;
           }
         }
@@ -545,13 +547,43 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
       // Maintain consistency between the end time and the date object in the availability object
       return $scope.$watch('end', function (newValue, oldValue, scope) {
-      // we prevent the admin from setting the end of the availability before its begining
+      // we prevent the admin from setting the end of the availability before its beginning
         if (moment($scope.start).add(Fablab.slotDuration, 'minutes').isAfter(newValue)) {
           $scope.end = oldValue;
         }
         // update availability object
         return $scope.availability.end_at = $scope.end;
       });
+    };
+
+    /**
+     * Validates that a machine or more was/were selected before continuing to step 3 (adjust time + tags)
+     */
+    const validateSelection = function () {
+      if ($scope.availability.available_type === 'machines') {
+        if ($scope.selectedMachines.length === 0) {
+          return growl.error(_t('admin_calendar.you_should_select_at_least_a_machine'));
+        }
+      }
+      $scope.step++;
+    };
+
+    /**
+     * Validates that the recurrence parameters were correctly set before continuing to step 5 (summary)
+     */
+    const validateRecurrence = function () {
+      if ($scope.availability.is_recurrent) {
+        if (!$scope.availability.period) {
+          return growl.error(_t('admin_calendar.select_period'));
+        }
+        if (!$scope.availability.nb_periods) {
+          return growl.error(_t('admin_calendar.select_nb_period'));
+        }
+        if (!$scope.availability.end_date) {
+          return growl.error(_t('admin_calendar.select_end_date'));
+        }
+      }
+      $scope.step++;
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

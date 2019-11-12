@@ -44,6 +44,17 @@ pt:
           adjust_the_opening_hours: "Ajustar o horário de funcionamento"
           to_time: "ás"  # context: time. eg. "from 18:00 to 21:00"
           restrict_this_slot_with_labels_optional: "Restrinja este slot com etiquetas (opcional)"
+          recurrence: "Recurrence"                                                                 # translation_missing
+          enabled: "Enabled"                                                                       # translation_missing
+          period: "Period"                                                                         # translation_missing
+          week: "Week"                                                                             # translation_missing
+          month: "Month"                                                                           # translation_missing
+          number_of_periods: "Number of periods"                                                   # translation_missing
+          end_date: "End date"                                                                     # translation_missing
+          summary: "Summary"                                                                       # translation_missing
+          select_period: "Please select a period for the recurrence"                               # translation_missing
+          select_nb_period: "Please select a number of periods for the recurrence"                 # translation_missing
+          select_end_date: "Please select the date of the last occurrence"                         # translation_missing
           the_slot_START-END_has_been_successfully_deleted: "O slot {{START}} - {{END}} foi deletado com sucesso"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Não é possível deletar o slot {{START}} - {{END}} porque já foi reservado por um membro"  # angular interpolation
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
