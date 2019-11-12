@@ -79,6 +79,7 @@ pt:
         to_date: "até" # context: date. eg: "from 01/01 to 01/05"
         to_time: "até"  # context: time. eg. "from 18:00 to 21:00"
         or: "ou"
+        and: "e"
         change_my_data: "Alterar meus dados"
         sync_my_profile: "Sincronizar meu perfil"
         once_your_data_are_up_to_date_: "Uma vez que seus dados estão atualizados,"

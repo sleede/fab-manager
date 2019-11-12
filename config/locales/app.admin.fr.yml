@@ -55,6 +55,10 @@ fr:
           select_period: "Veuillez choisir une période pour la récurrence"
           select_nb_period: "Veuillez choisir un nombre de périodes pour la récurrence"
           select_end_date: "Veuillez choisir la date de dernière occurrence"
+          about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} {NAME} suivant :"  # messageFormat interpolation
+          reservable: "Réservable(s) :"
+          labels: "Étiquette(s) :"
+          none: "Aucune"
           the_slot_START-END_has_been_successfully_deleted: "Le créneau {{START}} - {{END}} a bien été supprimé"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Le créneau {{START}} - {{END}} n'a pu être supprimé car il est déjà réservé par un membre"  # angular interpolation
           you_should_select_at_least_a_machine: "Vous devriez sélectionner au moins une machine pour ce créneau."

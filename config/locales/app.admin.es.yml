@@ -55,6 +55,10 @@ es:
           select_period: "Please select a period for the recurrence"                               # translation_missing
           select_nb_period: "Please select a number of periods for the recurrence"                 # translation_missing
           select_end_date: "Please select the date of the last occurrence"                         # translation_missing
+          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}, {NAME}:"  # messageFormat interpolation  # translation_missing
+          reservable: "Reservable(s):"                                                            # translation_missing
+          labels: "Etiqueta(s):"
+          none: "Ninguna"
           the_slot_START-END_has_been_successfully_deleted: "La ranura {{START}} - {{END}} se ha eliminado correctamente"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "No se puede eliminar la ranura {{START}} - {{END}} porque ya está reservada por un miembror"  # angular interpolation
           you_should_select_at_least_a_machine: "Debe seleccionar al menos una máquina en esta ranura."
