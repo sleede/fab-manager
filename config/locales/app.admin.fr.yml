@@ -55,7 +55,7 @@ fr:
           select_period: "Veuillez choisir une période pour la récurrence"
           select_nb_period: "Veuillez choisir un nombre de périodes pour la récurrence"
           select_end_date: "Veuillez choisir la date de dernière occurrence"
-          about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} {NAME} suivant :"  # messageFormat interpolation
+          about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} suivant :"  # messageFormat interpolation
           reservable: "Réservable(s) :"
           labels: "Étiquette(s) :"
           none: "Aucune"

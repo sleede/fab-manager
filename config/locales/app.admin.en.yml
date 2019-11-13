@@ -55,7 +55,7 @@ en:
           select_period: "Please select a period for the recurrence"
           select_nb_period: "Please select a number of periods for the recurrence"
           select_end_date: "Please select the date of the last occurrence"
-          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}, {NAME}:"  # messageFormat interpolation
+          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"  # messageFormat interpolation
           reservable: "Reservable(s):"
           labels: "Label(s):"
           none: "None"

@@ -300,7 +300,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           end () { return end; },
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
-          spacesPromise: ['Space', function (Space) { return Space.query().$promise; }]
+          spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
+          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }]
         } });
       // when the modal is closed, we send the slot to the server for saving
       modalInstance.result.then(
@@ -378,8 +379,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 /**
  * Controller used in the slot creation modal window
  */
-Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'Tag', 'growl', '_t',
-  function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, Tag, growl, _t) {
+Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, growl, _t) {
   // $uibModal parameter
     $scope.start = start;
 
@@ -394,6 +395,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // spaces list
     $scope.spaces = spacesPromise.filter(function (s) { return !s.disabled; });
+
+    // all tags list
+    $scope.tags = tagsPromise;
 
     // machines associated with the created slot
     $scope.selectedMachines = [];
@@ -427,6 +431,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       start_at: start,
       end_at: end,
       available_type: 'machines', // default
+      tag_ids: [],
       is_recurrent: false,
       period: 'week',
       nb_periods: 1,
@@ -438,6 +443,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // localized name(s) of the reservable item(s)
     $scope.reservableName = '';
+
+    // localized name(s) of the selected tag(s)
+    $scope.tagsName = '';
 
     /**
      * Adds or removes the provided machine from the current slot
@@ -517,8 +525,6 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         $scope.selectedSpace = $scope.spaces[0];
       }
 
-      Tag.query().$promise.then(function (data) { $scope.tags = data; });
-
       // When we configure a machine/space availability, do not let the user change the end time, as the total
       // time must be dividable by Fablab.slotDuration minutes (base slot duration). For training availabilities, the user
       // can configure any duration as it does not matters.
@@ -595,7 +601,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
       // settings are ok
       computeOccurrences();
-      computeName();
+      computeNames();
       $scope.step++;
     };
 
@@ -625,22 +631,34 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
     };
 
-    const computeName = function () {
+    const computeNames = function () {
       $scope.reservableName = '';
       switch ($scope.availability.available_type) {
         case 'machines':
-          const reservableNames = $scope.selectedMachines.map(function (m) { return $sce.trustAsHtml(`<strong>${m.name}</strong>`); });
-          $scope.reservableName = reservableNames.slice(0, -1).join(', ') + ` ${_t('and')} ` + reservableNames[reservableNames.length - 1];
+          $scope.reservableName = localizedList($scope.selectedMachines)
           break;
         case 'training':
-          $scope.reservableName = $scope.selectedTraining.name;
+          $scope.reservableName = `<strong>${$scope.selectedTraining.name}</strong>`;
           break;
         case 'space':
-          $scope.reservableName = $scope.selectedSpace.name;
+          $scope.reservableName = `<strong>${$scope.selectedSpace.name}</strong>`;
           break;
         default:
-          $scope.reservableName = '';
+          $scope.reservableName = `<span class="warning">${_t("admin_calendar.none")}</span>`;
       }
+      const tags = $scope.tags.filter(function (t) {
+        return $scope.availability.tag_ids.indexOf(t.id) > -1;
+      })
+      $scope.tagsName = localizedList(tags);
+    }
+
+    const localizedList = function (items) {
+      if (items.length === 0) return `<span class="text-gray text-italic">${_t("admin_calendar.none")}</span>`;
+
+      const names = items.map(function (i) { return $sce.trustAsHtml(`<strong>${i.name}</strong>`); });
+      if (items.length > 1) return names.slice(0, -1).join(', ') + ` ${_t('and')} ` + names[names.length - 1];
+
+      return names[0];
     }
 
     // !!! MUST BE CALLED AT THE END of the controller

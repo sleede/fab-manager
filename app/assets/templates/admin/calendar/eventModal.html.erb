@@ -159,12 +159,12 @@
         <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
       </ul>
       <div>
-        <span translate>{{ 'admin_calendar.reservable' }}</span>
+        <span class="underline" translate>{{ 'admin_calendar.reservable' }}</span>
         <span ng-bind-html="reservableName"></span>
       </div>
       <div class="m-t">
-        <span translate>{{ 'admin_calendar.labels' }}</span>
-        <span>{{availability.tag_ids.join(', ') || ('admin_calendar.none' | translate)}}</span><!-- TODO change tag_ids with a localized list of names -->
+        <span class="underline"  translate>{{ 'admin_calendar.labels' }}</span>
+        <span ng-bind-html="tagsName"></span>
       </div>
     </div>
   </div>
