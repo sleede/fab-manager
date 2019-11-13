@@ -476,9 +476,13 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       } else if ($scope.availability.available_type === 'space') {
         $scope.availability.space_ids = [$scope.selectedSpace.id];
       }
+      if ($scope.availability.is_recurrent) {
+        $scope.availability.occurrences = $scope.occurrences;
+      }
       return Availability.save(
-        { availability: $scope.availability }
-        , function (availability) { $uibModalInstance.close(availability); });
+        { availability: $scope.availability },
+        function (availability) { $uibModalInstance.close(availability); }
+      );
     };
 
     /**

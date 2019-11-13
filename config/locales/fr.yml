@@ -62,7 +62,7 @@ fr:
     # créneaux de disponibilité dans le calendrier
     not_available: "Non disponible"
     i_ve_reserved: "J'ai réservé"
-    must_be_at_least_1_hour_after_the_start_date: "doit être au moins 1 heure après la date de début"
+    length_must_be_slot_multiple: "doit être au moins %{MIN} minutes après la date de début"
     must_be_associated_with_at_least_1_machine: "doit être associé avec au moins 1 machine"
 
   members:

@@ -9,6 +9,7 @@
 - Fix a security issue: fixed [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install`
+- [TODO DEPLOY] `rake db:migrate`
 
 ## v4.2.4 2019 October 30
 
