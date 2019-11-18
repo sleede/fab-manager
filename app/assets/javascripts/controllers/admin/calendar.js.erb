@@ -228,32 +228,24 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      */
     $scope.removeSlot = function () {
       // open a confirmation dialog
-      dialogs.confirm(
-        {
-          resolve: {
-            object () {
-              return {
-                title: _t('admin_calendar.confirmation_required'),
-                msg: _t('admin_calendar.do_you_really_want_to_delete_this_slot')
-              };
-            }
-          }
-        },
-        function () {
-          // the admin has confirmed, delete the slot
-          Availability.delete(
-            { id: $scope.availability.id },
-            function () {
-              uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents', $scope.availability.id);
-
-              growl.success(_t('admin_calendar.the_slot_START-END_has_been_successfully_deleted', { START: moment(event.start).format('LL LT'), END: moment(event.end).format('LT') }));
-              $scope.availability = null;
-            },
-            function () {
-              growl.error(_t('admin_calendar.unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member', { START: moment(event.start).format('LL LT'), END: moment(event.end).format('LT') }));
-            });
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "admin/calendar/deleteRecurrent.html" %>',
+        size: 'md',
+        controller: 'DeleteRecurrentAvailabilityController',
+        resolve: {
+          availabilityPromise: ['Availability', function (Availability) { return Availability.get({ id: $scope.availability.id }).$promise; }]
         }
-      );
+      });
+      // once the dialog was closed, do things depending on the result
+      modalInstance.result.then(function (res) {
+        if (res.status == 'success') {
+          $scope.availability = null;
+        }
+        for (const availability of res.availabilities) {
+          uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents', availability);
+        }
+      });
     };
 
     /* PRIVATE SCOPE */
@@ -667,5 +659,75 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
+  }
+]);
+
+/**
+ * Controller used in the slot deletion modal window
+ */
+Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$scope', '$uibModalInstance', 'Availability', 'availabilityPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, Availability, availabilityPromise, growl, _t) {
+
+    // is the current slot (to be deleted) recurrent?
+    $scope.isRecurrent = availabilityPromise.is_recurrent;
+
+    // with recurrent slots: how many slots should we delete?
+    $scope.deleteMode = 'single';
+
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      const { id, start_at, end_at } = availabilityPromise;
+      // the admin has confirmed, delete the slot
+      Availability.delete(
+        { id, mode: $scope.deleteMode },
+        function (res) {
+          // delete success
+          if (res.deleted > 1) {
+            growl.success(_t(
+              'admin_calendar.slots_deleted',
+              {START: moment(start_at).format('LL LT'), COUNT: res.deleted - 1},
+              'messageformat'
+            ));
+          } else {
+            growl.success(_t(
+              'admin_calendar.slot_successfully_deleted',
+              {START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT')}
+            ));
+          }
+          $uibModalInstance.close({
+            status: 'success',
+            availabilities: res.details.map(function (d) { return d.availability.id })
+          });
+        },
+        function (res) {
+          // not everything was deleted
+          const { data } = res;
+          if (data.total > 1) {
+            growl.warning(_t(
+              'admin_calendar.slots_not_deleted',
+              {TOTAL: data.total, COUNT: data.total - data.deleted},
+              'messageformat'
+            ));
+          } else {
+            growl.error(_t(
+              'admin_calendar.unable_to_delete_the_slot',
+              {START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT')}
+            ));
+          }
+          $uibModalInstance.close({
+            status: 'failed',
+            availabilities: data.details.filter(function (d) { return d.status }).map(function (d) { return d.availability.id })
+          });
+        });
+    }
+
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
 ]);

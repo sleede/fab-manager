@@ -59,8 +59,10 @@ fr:
           reservable: "Réservable(s) :"
           labels: "Étiquette(s) :"
           none: "Aucune"
-          the_slot_START-END_has_been_successfully_deleted: "Le créneau {{START}} - {{END}} a bien été supprimé"  # angular interpolation
-          unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Le créneau {{START}} - {{END}} n'a pu être supprimé car il est déjà réservé par un membre"  # angular interpolation
+          slot_successfully_deleted: "Le créneau {{START}} - {{END}} a bien été supprimé"  # angular interpolation
+          slots_deleted: "Le créneau du {{START}}, ainsi {COUNT, plural, =1{qu'un autre créneau} other{que {COUNT} autres créneaux}}}, ont été supprimés" # messageFormat interpolation
+          unable_to_delete_the_slot: "Le créneau {{START}} - {{END}} n'a pu être supprimé, probablement car il est déjà réservé par un membre"  # angular interpolation
+          slots_not_deleted: "Sur {TOTAL} créneaux, {COUNT, plural, =1{un n'a pas pu être supprimé} other{{COUNT} n'ont pas pu être supprimés}}. Il est possible que des réservations existent sur {COUNT, plural, =1{celui-ci} other{ceux-ci}}." # messageFormat interpolation
           you_should_select_at_least_a_machine: "Vous devriez sélectionner au moins une machine pour ce créneau."
           export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
           actions: "Actions"
@@ -76,6 +78,10 @@ fr:
           unlockable_because_reservations: "Impossible de bloquer les réservations sur ce créneau car il existe des réservations non annulées sur celui-ci."
           delete_slot: "Supprimer le créneau"
           do_you_really_want_to_delete_this_slot: "Êtes vous sur de vouloir supprimer ce créneau ?"
+          delete_recurring_slot: "Vous êtes sur le point de supprimer un créneau périodique. Que voulez-vous supprimer ?"
+          delete_this_slot: "Uniquement ce créneau"
+          delete_this_and_next: "Ce créneau et tous les suivants"
+          delete_all: "Tous les créneaux"
           event_in_the_past: "Impossible de créer un créneau dans le passé."
 
       project_elements:

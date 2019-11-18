@@ -56,11 +56,13 @@ es:
           select_nb_period: "Please select a number of periods for the recurrence"                 # translation_missing
           select_end_date: "Please select the date of the last occurrence"                         # translation_missing
           about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"  # messageFormat interpolation  # translation_missing
-          reservable: "Reservable(s):"                                                            # translation_missing
+          reservable: "Reservable(s):"                                                             # translation_missing
           labels: "Etiqueta(s):"
           none: "Ninguna"
-          the_slot_START-END_has_been_successfully_deleted: "La ranura {{START}} - {{END}} se ha eliminado correctamente"  # angular interpolation
-          unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "No se puede eliminar la ranura {{START}} - {{END}} porque ya está reservada por un miembror"  # angular interpolation
+          slot_successfully_deleted: "La ranura {{START}} - {{END}} se ha eliminado correctamente"  # angular interpolation
+          slots_deleted: "The slot of {{START}}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted" # messageFormat interpolation # translation_missing
+          unable_to_delete_the_slot: "No se puede eliminar la ranura {{START}} - {{END}}, probablemente porque ya está reservada por un miembror"  # angular interpolation
+          slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}." # messageFormat interpolation  # translation_missing
           you_should_select_at_least_a_machine: "Debe seleccionar al menos una máquina en esta ranura."
           export_is_running_you_ll_be_notified_when_its_ready: "La exportación se está ejecutando. Se le notificará cuando esté listo."
           actions: "Acciones"
@@ -75,7 +77,8 @@ es:
           reservations_locked: "La reserva está bloqueada"
           unlockable_because_reservations: "No se puede bloquear la reserva en esta ranura porque existen algunas reservas no canceladas."
           delete_slot: "Delete this slot"                                                          # translation_missing
-          do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"
+          do_you_really_want_to_delete_this_slot: "Do you really want to delete this slot?"        # translation_missing
+          delete_recurring_slot: "You're about to delete a recurring slot. What do you want to do?"# translation_missing
           event_in_the_past: "Unable to create a slot in the past."                                # translation_missing
 
       project_elements:

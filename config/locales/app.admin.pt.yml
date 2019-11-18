@@ -59,8 +59,10 @@ pt:
           reservable: "Reservable(s) :"                                                            # translation_missing
           labels: "Etiqueta(s):"
           none: "Nenhuma"
-          the_slot_START-END_has_been_successfully_deleted: "O slot {{START}} - {{END}} foi deletado com sucesso"  # angular interpolation
-          unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Não é possível deletar o slot {{START}} - {{END}} porque já foi reservado por um membro"  # angular interpolation
+          slot_successfully_deleted: "O slot {{START}} - {{END}} foi deletado com sucesso"  # angular interpolation
+          slots_deleted: "The slot of {{START}}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted" # messageFormat interpolation # translation_missing
+          unable_to_delete_the_slot: "Não é possível deletar o slot {{START}} - {{END}}, provavelmente porque já foi reservado por um membro"  # angular interpolation
+          slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}." # messageFormat interpolation  # translation_missing
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
           export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
           actions: "Ações"
@@ -76,6 +78,7 @@ pt:
           unlockable_because_reservations: "Não é possível bloquear a reserva neste slot porque existem algumas reservas não cancelados nele."
           delete_slot: "Exclua o slot"
           do_you_really_want_to_delete_this_slot: "Você realmente quer excluir esse slot?"
+          delete_recurring_slot: "You're about to delete a recurring slot. What do you want to do?"# translation_missing
           event_in_the_past: "Unable to create a slot in the past."                                # translation_missing
 
       project_elements:

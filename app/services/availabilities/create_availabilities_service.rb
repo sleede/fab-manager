@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Provides helper methods toi create an Availability with multiple occurrences
+# Provides helper methods to create an Availability with multiple occurrences
 class Availabilities::CreateAvailabilitiesService
   def create(availability, occurrences = [])
     availability.update_attributes(occurrence_id: availability.id)

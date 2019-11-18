@@ -5,7 +5,7 @@ class API::AvailabilitiesController < API::ApiController
   include FablabConfiguration
 
   before_action :authenticate_user!, except: [:public]
-  before_action :set_availability, only: %i[show update destroy reservations lock]
+  before_action :set_availability, only: %i[show update reservations lock]
   before_action :define_max_visibility, only: %i[machine trainings spaces]
   respond_to :json
 
@@ -69,10 +69,12 @@ class API::AvailabilitiesController < API::ApiController
 
   def destroy
     authorize Availability
-    if @availability.safe_destroy
-      head :no_content
+    service = Availabilities::DeleteAvailabilitiesService.new
+    res = service.delete(params[:id], params[:mode])
+    if res.all? { |r| r[:status] }
+      render json: { deleted: res.length, details: res }, status: :ok
     else
-      head :unprocessable_entity
+      render json: { total: res.length, deleted: res.select { |r| r[:status] }.length, details: res }, status: :unprocessable_entity
     end
   end
 
