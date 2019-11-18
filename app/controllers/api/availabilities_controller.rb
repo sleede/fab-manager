@@ -47,9 +47,11 @@ class API::AvailabilitiesController < API::ApiController
   def create
     authorize Availability
     @availability = Availability.new(availability_params)
-    service = Availabilities::CreateAvailabilitiesService.new
-    service.create(@availability, params[:availability][:occurrences])
     if @availability.save
+      if params[:availability][:occurrences]
+        service = Availabilities::CreateAvailabilitiesService.new
+        service.create(@availability, params[:availability][:occurrences])
+      end
       render :show, status: :created, location: @availability
     else
       render json: @availability.errors, status: :unprocessable_entity

@@ -2,10 +2,12 @@
 
 # Provides helper methods toi create an Availability with multiple occurrences
 class Availabilities::CreateAvailabilitiesService
-  def create(availability, occurrences)
+  def create(availability, occurrences = [])
     availability.update_attributes(occurrence_id: availability.id)
 
     occurrences.each do |o|
+      next if availability.start_at == o[:start_at] && availability.end_at == o[:end_at]
+
       Availability.new(
         start_at: o[:start_at],
         end_at: o[:end_at],

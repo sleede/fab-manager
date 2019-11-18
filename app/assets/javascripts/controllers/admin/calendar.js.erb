@@ -617,7 +617,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
       if ($scope.availability.is_recurrent) {
         const date = moment($scope.availability.start_at);
-        const diff = moment($scope.availability.start_at).diff($scope.availability.end_at);
+        const diff = moment($scope.availability.end_at).diff($scope.availability.start_at);
         const end = moment($scope.availability.end_date).endOf('day');
         while (date.isBefore(end)) {
           const occur_end = moment(date).add(diff, 'ms');
