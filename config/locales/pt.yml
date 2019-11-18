@@ -62,7 +62,7 @@ pt:
     # availability slots in the calendar
     not_available: "Não disponível "
     i_ve_reserved: "Eu reservei"
-    must_be_at_least_1_hour_after_the_start_date: "deve ser pelo menos 1 hora após a data de início"
+    length_must_be_slot_multiple: "deve ser pelo menos %{MIN} minutos após a data de início"
     must_be_associated_with_at_least_1_machine: "deve estar associada a pelo menos uma máquina"
 
   members:

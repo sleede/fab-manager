@@ -93,12 +93,88 @@
       </div>
   </div>
 </div>
-<div class="modal-footer" ng-show="step < 3">
+<div class="modal-body m-h" ng-show="step === 4">
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'admin_calendar.recurrence' }}</p>
+    <div class="row">
+      <div class="form-group">
+        <label for="is_recurrent" translate>{{ 'admin_calendar.enabled' }}</label>
+        <input bs-switch
+               ng-model="availability.is_recurrent"
+               id="is_recurrent"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'yes' | translate }}"
+               switch-off-text="{{ 'no' | translate }}"
+               switch-animate="true"/>
+        <input type="hidden" name="availability[is_recurrent]" value="{{availability.is_recurrent}}"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="period">{{ 'admin_calendar.period' | translate }}</label>
+      <select id="period"
+              name="period"
+              class="form-control"
+              ng-model="availability.period"
+              ng-required="availability.is_recurrent"
+              ng-disabled="!availability.is_recurrent">
+        <option value="week" ng-selected="availability.period == 'week'" translate>{{ 'admin_calendar.week' }}</option>
+        <option value="month" ng-selected="availability.period == 'month'" translate>{{ 'admin_calendar.month' }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="nb_periods">{{ 'admin_calendar.number_of_periods' | translate }}</label>
+      <input id="nb_periods"
+             name="nb_periods"
+             class="form-control"
+             ng-model="availability.nb_periods"
+             type="number"
+             ng-required="availability.is_recurrent"
+             ng-disabled="!availability.is_recurrent" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="end_date">{{ 'admin_calendar.end_date' | translate }}</label>
+      <input id="end_date"
+             name="end_date"
+             class="form-control"
+             ng-model="availability.end_date"
+             type="date"
+             ng-required="availability.is_recurrent"
+             ng-disabled="!availability.is_recurrent" />
+    </div>
+  </div>
+</div>
+<div class="modal-body m-h" ng-show="step === 5">
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'admin_calendar.summary' }}</p>
+    <div class="row">
+      <span>{{ 'admin_calendar.about_to_create' | translate:{NUMBER:occurrences.length,TYPE:availability.available_type}:'messageformat'}}</span>
+      <ul>
+        <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
+      </ul>
+      <div>
+        <span class="underline" translate>{{ 'admin_calendar.reservable' }}</span>
+        <span ng-bind-html="reservableName"></span>
+      </div>
+      <div class="m-t">
+        <span class="underline"  translate>{{ 'admin_calendar.labels' }}</span>
+        <span ng-bind-html="tagsName"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer" ng-show="step < 5">
   <button class="btn btn-info" ng-click="previous()" ng-disabled="step === 1" translate>{{ 'admin_calendar.previous' }}</button>
   <button class="btn btn-info" ng-click="next()" translate>{{ 'admin_calendar.next' }}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
 </div>
-<div class="modal-footer" ng-show="step === 3">
+<div class="modal-footer" ng-show="step === 5">
   <button class="btn btn-info" ng-click="previous()" translate>{{ 'admin_calendar.previous' }}</button>
   <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>

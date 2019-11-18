@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190924140726) do
+ActiveRecord::Schema.define(version: 20191113103352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -92,6 +92,11 @@ ActiveRecord::Schema.define(version: 20190924140726) do
     t.integer  "nb_total_places"
     t.boolean  "destroying",      default: false
     t.boolean  "lock",            default: false
+    t.boolean  "is_recurrent"
+    t.integer  "occurrence_id"
+    t.string   "period"
+    t.integer  "nb_periods"
+    t.datetime "end_date"
   end
 
   create_table "availability_tags", force: :cascade do |t|

@@ -79,6 +79,7 @@ fr:
         to_date: "au" # context: date. eg: "from 01/01 to 01/05"
         to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
         or: "ou"
+        and: "et"
         change_my_data: "Modifier mes données"
         sync_my_profile: "Synchroniser mon profil"
         once_your_data_are_up_to_date_: "Une fois vos données à jour,"

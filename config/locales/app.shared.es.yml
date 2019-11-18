@@ -79,6 +79,7 @@ es:
         to_date: "Hasta" # context: date. eg: "Hasta 01/01 to 01/05"
         to_time: "Hasta"  # context: time. eg. "Hasta 18:00 to 21:00"
         or: "ó"
+        and: "y"
         change_my_data: "Cambiar mis datos"
         sync_my_profile: "Sincronizar mi perfil"
         once_your_data_are_up_to_date_: "Una vez sus datos hayan sido actualizados,"

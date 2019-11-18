@@ -44,6 +44,21 @@ en:
           adjust_the_opening_hours: "Adjust the opening hours"
           to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
           restrict_this_slot_with_labels_optional: "Restrict this slot with labels (optional)"
+          recurrence: "Recurrence"
+          enabled: "Enabled"
+          period: "Period"
+          week: "Week"
+          month: "Month"
+          number_of_periods: "Number of periods"
+          end_date: "End date"
+          summary: "Summary"
+          select_period: "Please select a period for the recurrence"
+          select_nb_period: "Please select a number of periods for the recurrence"
+          select_end_date: "Please select the date of the last occurrence"
+          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"  # messageFormat interpolation
+          reservable: "Reservable(s):"
+          labels: "Label(s):"
+          none: "None"
           the_slot_START-END_has_been_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
           unable_to_delete_the_slot_START-END_because_it_s_already_reserved_by_a_member: "Unable to delete the slot {{START}} - {{END}} because it's already reserved by a member"  # angular interpolation
           you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
