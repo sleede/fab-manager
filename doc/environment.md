@@ -102,6 +102,11 @@ Valid stripe API keys are still required, even if you don't require online payme
 If set to 'true', the invoices will be disabled. 
 This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
 **Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
+<a name="PHONE_REQUIRED"></a>
+
+    PHONE_REQUIRED
+
+If set to 'false' the phone number won't be required to register a new user on the software.
 <a name="SLOT_DURATION"></a>
 
     SLOT_DURATION

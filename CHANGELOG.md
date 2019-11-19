@@ -1,13 +1,17 @@
 # Changelog Fab Manager
 
+- Ability to create and delete periodic calendar availabilities (recurrence)
 - An administrator can delete a member
 - Ability to configure the duration of a reservation slot. Previously, only 60 minutes slots were allowed
+- Display indications on required fields in new administrator form
+- Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Fix a security issue: fixed [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
+- [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install`
 - [TODO DEPLOY] `rake db:migrate`
 

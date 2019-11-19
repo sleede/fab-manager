@@ -1,26 +1,27 @@
 <div class="row m-t">
   <div class="col-sm-offset-3 col-sm-6">
     <div class="form-group" ng-class="{'has-error': adminForm['admin[statistic_profile_attributes][gender]'].$dirty && adminForm['admin[statistic_profile_attributes][gender]'].$invalid}">
-        <label class="checkbox-inline btn btn-default">
-          <input type="radio"
-                 name="admin[statistic_profile_attributes][gender]"
-                 ng-model="admin.statistic_profile_attributes.gender"
-                 ng-value="true"
-                 required/>
-            <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
-        </label>
-        <label class="checkbox-inline btn btn-default">
-          <input type="radio"
-                 name="admin[statistic_profile_attributes][gender]"
-                 ng-model="admin.statistic_profile_attributes.gender"
-                 ng-value="false"/>
-            <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
-        </label>
+      <label class="checkbox-inline btn btn-default">
+        <input type="radio"
+               name="admin[statistic_profile_attributes][gender]"
+               ng-model="admin.statistic_profile_attributes.gender"
+               ng-value="true"
+               required/>
+          <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
+      </label>
+      <label class="checkbox-inline btn btn-default">
+        <input type="radio"
+               name="admin[statistic_profile_attributes][gender]"
+               ng-model="admin.statistic_profile_attributes.gender"
+               ng-value="false"/>
+          <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
+      </label>
+      <span class="exponent m-l-xs help-cursor"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.username"
                type="text" name="admin[username]"
                class="form-control"
@@ -33,7 +34,7 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][last_name]'].$dirty && adminForm['admin[profile_attributes][last_name]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.profile_attributes.last_name"
                type="text"
                name="admin[profile_attributes][last_name]"
@@ -47,7 +48,7 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][first_name]'].$dirty && adminForm['admin[profile_attributes][first_name]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class="fa fa-user"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.profile_attributes.first_name"
                type="text"
                name="admin[profile_attributes][first_name]"
@@ -61,7 +62,7 @@
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[email]'].$dirty && adminForm['admin[email]'].$invalid}">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-envelope"></i> </span>
+        <span class="input-group-addon"><i class="fa fa-envelope"></i> <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></span>
         <input ng-model="admin.email"
                type="email"
                name="admin[email]"

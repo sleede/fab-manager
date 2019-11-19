@@ -204,9 +204,11 @@
                      name="phone"
                      class="form-control"
                      placeholder="{{ 'phone_number' | translate }}"
-                     required>
+                     ng-required="phoneRequired">
             </div>
-            <span class="exponent help-cursor" title="{{ 'used_for_reservation' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span ng-show="phoneRequired" class="exponent help-cursor" title="{{ 'used_for_reservation' | translate }}">
+              <i class="fa fa-asterisk" aria-hidden="true"></i>
+            </span>
             <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" translate>{{ 'phone_number_is_required' }}</span>
           </div>
         </div>

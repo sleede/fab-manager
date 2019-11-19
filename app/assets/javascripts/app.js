@@ -86,6 +86,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutOnlinePayment = Fablab.withoutOnlinePayment;
       // Global config: if true, no invoices will be generated
       $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
+      // Global config: if true, the phone number is required to create an account
+      $rootScope.phoneRequired = Fablab.phoneRequired;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page
