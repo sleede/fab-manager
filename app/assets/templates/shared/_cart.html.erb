@@ -33,7 +33,7 @@
         <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'cart.confirm_this_slot' }}</button>
       </div>
 
-      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm" href="#" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'cart.remove_this_slot' }}</a></div>
+      <div class="clear"><a class="pull-right m-b-sm text-u-l ng-scope m-r-sm pointer" ng-click="removeSlot(slot, $index, $event)" ng-if="slot.isValid" translate>{{ 'cart.remove_this_slot' }}</a></div>
     </div>
 
     <coupon show="isSlotsValid() && (!modePlans || selectedPlan)" coupon="coupon.applied" total="totalNoCoupon" user-id="{{user.id}}"></coupon>

@@ -9,6 +9,7 @@
 - Improved notification email to the member when a rolling subscription is taken
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
+- Fix a bug: unable to remove the picture from a training
 - Fix a security issue: fixed [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
 - [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)

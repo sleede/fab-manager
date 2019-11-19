@@ -8,18 +8,18 @@
           <ul class="nav nav-main m-t-xs" data-ride="collapse">
             <!-- Disconnected user menu for small devices -->
             <li class="hidden-sm hidden-md hidden-lg" ng-if-start="!isAuthenticated()">
-              <a href="#" class="auto" ng-click="signup($event)">
+              <a class="auto pointer" ng-click="signup($event)">
                   <i class="fa fa-rocket"></i> <span translate>{{ 'sign_up' }}</span>
               </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" ng-if-end>
-              <a href="#" class="auto" ng-click="login($event)">
+              <a class="auto pointer" ng-click="login($event)">
                   <i class="fa fa-sign-in"></i> <span translate>{{ 'sign_in' }}</span>
               </a>
             </li>
             <!-- Connected user menu for small devices -->
             <li class="notification-open hidden-sm hidden-md hidden-lg" ng-if-start="isAuthenticated()">
-                <a href="#" ui-sref="app.logged.notifications">
+                <a ui-sref="app.logged.notifications">
                     <i>
                         <i class="fa fa-bell fa-2x black"></i> <span class="menu-badge badge" ng-class="{'bg-red': notifications.length > 0}">{{notifications.length}}</span>
                     </i>
@@ -27,37 +27,37 @@
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ng-click="logout($event)">
+                <a class="pointer" ng-click="logout($event)">
                     <i class="fa fa-power-off"></i> <span translate>{{ 'sign_out' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" >
-              <a href="#" ui-sref="app.logged.dashboard.profile">
+              <a ui-sref="app.logged.dashboard.profile">
                 <i class="fa fa-user"></i> <span translate>{{ 'my_profile' }}</span>
               </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" >
-                <a href="#" ui-sref="app.logged.dashboard.settings">
+                <a ui-sref="app.logged.dashboard.settings">
                     <i class="fa fa-user"></i> <span translate>{{ 'my_settings' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ui-sref="app.logged.dashboard.projects">
+                <a ui-sref="app.logged.dashboard.projects">
                     <i class="fa fa-puzzle-piece"></i> <span translate>{{ 'my_projects' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ui-sref="app.logged.dashboard.trainings">
+                <a ui-sref="app.logged.dashboard.trainings">
                     <i class="fa fa-graduation-cap"></i> <span translate>{{ 'my_trainings' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ui-sref="app.logged.dashboard.events">
+                <a ui-sref="app.logged.dashboard.events">
                     <i class="fa fa-calendar-o"></i> <span translate>{{ 'my_events' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" ng-hide="fablabWithoutInvoices" ng-if-end>
-                <a href="#" ui-sref="app.logged.dashboard.invoices">
+                <a ui-sref="app.logged.dashboard.invoices">
                     <i class="fa fa-file-pdf-o"></i> <span translate>{{ 'my_invoices' }}</span>
                 </a>
             </li>
