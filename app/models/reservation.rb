@@ -244,7 +244,8 @@ class Reservation < ActiveRecord::Base
   end
 
   def total_booked_seats
-    total = nb_reserve_places
+    total = 0
+    total = nb_reserve_places if slots.first.canceled_at
     total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
 
     total

@@ -291,6 +291,9 @@ en:
         do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"
         event_successfully_deleted: "Event successfully deleted"
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."
+        cancel_the_reservation: "Cancel the reservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
+        cancellation_failed: "Cancellation failed."
 
       calendar:
         # public calendar

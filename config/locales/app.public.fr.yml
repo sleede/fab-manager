@@ -293,6 +293,9 @@ fr:
         do_you_really_want_to_delete_this_event:  "Voulez-vous vraiment supprimer cet évènement ?"
         event_successfully_deleted: "L'évènement a bien été supprimé."
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Impossible de supprimer l'évènement, il est peut-être déjà réservé par certains utilisateurs."
+        cancel_the_reservation: "Annuler la réservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
+        cancellation_failed: "L'annulation a échoué."
 
       calendar:
         # calendrier publique

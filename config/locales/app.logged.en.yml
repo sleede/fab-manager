@@ -130,6 +130,10 @@ en:
         i_reserve: "I reserve"
         i_shift: "I shift"
         i_change: "I change"
+        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
+        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
+        cancellation_failed: "Cancellation failed."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
 
       trainings_reserve:
         # book a training
