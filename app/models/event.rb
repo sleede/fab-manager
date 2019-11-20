@@ -72,6 +72,15 @@ class Event < ActiveRecord::Base
   #   Reservation.where(reservable: self)
   # end
 
+  def update_nb_free_places
+    if nb_total_places.nil?
+      self.nb_free_places = nil
+    else
+      reserved_places = reservations.joins(:slots).where('slots.canceled_at': nil).map(&:total_booked_seats).inject(0) { |sum, t| sum + t }
+      self.nb_free_places = (nb_total_places - reserved_places)
+    end
+  end
+
   private
 
   def event_recurrence
@@ -140,14 +149,5 @@ class Event < ActiveRecord::Base
       event.save
     end
     update_columns(recurrence_id: id)
-  end
-
-  def update_nb_free_places
-    if nb_total_places.nil?
-      self.nb_free_places = nil
-    else
-      reserved_places = reservations.map(&:total_booked_seats).inject(0){ |sum, t| sum + t }
-      self.nb_free_places = (nb_total_places - reserved_places)
-    end
   end
 end

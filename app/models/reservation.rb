@@ -255,6 +255,13 @@ class Reservation < ActiveRecord::Base
     statistic_profile.user
   end
 
+  def update_event_nb_free_places
+    return unless reservable_type == 'Event'
+
+    reservable.update_nb_free_places
+    reservable.save!
+  end
+
   private
 
   def machine_not_already_reserved
@@ -280,8 +287,6 @@ class Reservation < ActiveRecord::Base
     errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).completed?
   end
 
-  private
-
   def notify_member_create_reservation
     NotificationCenter.call type: 'notify_member_create_reservation',
                             receiver: user,
@@ -292,22 +297,6 @@ class Reservation < ActiveRecord::Base
     NotificationCenter.call type: 'notify_admin_member_create_reservation',
                             receiver: User.admins,
                             attached_object: self
-  end
-
-  def update_event_nb_free_places
-    if reservable_id_was.blank?
-      # simple reservation creation, we subtract the number of booked seats from the previous number
-      nb_free_places = reservable.nb_free_places - total_booked_seats
-    else
-      # reservation moved from another date (for recurring events)
-      seats = total_booked_seats
-
-      reservable_was = Event.find(reservable_id_was)
-      nb_free_places = reservable_was.nb_free_places + seats
-      reservable_was.update_columns(nb_free_places: nb_free_places)
-      nb_free_places = reservable.nb_free_places - seats
-    end
-    reservable.update_columns(nb_free_places: nb_free_places)
   end
 
   def cart_total

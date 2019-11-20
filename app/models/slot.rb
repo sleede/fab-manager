@@ -15,6 +15,7 @@ class Slot < ActiveRecord::Base
   after_update :notify_member_and_admin_slot_is_modified, if: :dates_were_modified?
 
   after_update :notify_member_and_admin_slot_is_canceled, if: :canceled?
+  after_update :update_event_nb_free_places, if: :canceled?
 
   # for backward compatibility
   def reservation
@@ -66,5 +67,12 @@ class Slot < ActiveRecord::Base
 
   def set_ex_start_end_dates_attrs
     update_columns(ex_start_at: start_at_was, ex_end_at: end_at_was)
+  end
+
+  def update_event_nb_free_places
+    return unless reservation.reservable_type == 'Event'
+    raise NotImplementedError if reservations.count > 1
+
+    reservation.update_event_nb_free_places
   end
 end
