@@ -272,7 +272,7 @@ en:
         # details and booking of an event
         event_description: "Event description"
         downloadable_documents: "Downloadable documents"
-        informations_and_booking: "Informations and booking"
+        information_and_booking: "Information and booking"
         beginning: "Beginning:"
         ending: "Ending:"
         opening_hours: "Opening hours:"
@@ -284,6 +284,7 @@ en:
         make_a_gift_of_this_reservation: "Make a gift of this reservation"
         you_can_find_your_reservation_s_details_on_your_: "You can find your reservation's details on your"
         you_booked_DATE: "You booked ({{DATE}}):"  # angular interpolation
+        canceled_reservation_SEATS: "Reservation canceled ({{SEATS}} seats)" # angular interpolation
         book: "Book"
         change_the_reservation: "Change the reservation"
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"

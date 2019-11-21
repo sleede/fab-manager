@@ -151,17 +151,22 @@
           <div ng-if="reserveSuccess" class="alert alert-success">{{ 'thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
             {{ 'you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a>
           </div>
-          <div class="well well-warning m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
-            <div class="font-sbold text-u-c text-sm">{{ 'you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
-            <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'ticket' | translate:{NUMBER:reservation.nb_reserve_places}:"messageformat" }}</div>
-            <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
-              {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'ticket' | translate:{NUMBER:ticket.booked}:"messageformat" }}
+          <div class="m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
+            <div ng-hide="isCancelled(reservation)" class="well well-warning">
+              <div class="font-sbold text-u-c text-sm">{{ 'you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
+              <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'ticket' | translate:{NUMBER:reservation.nb_reserve_places}:"messageformat" }}</div>
+              <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
+                {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'ticket' | translate:{NUMBER:ticket.booked}:"messageformat" }}
+              </div>
+              <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
+                <a class="pull-right m-t-xs text-u-l pointer" ng-click="modifyReservation(reservation, $event)" translate>{{ 'change' }}</a>
+              </div>
+              <div class="clear" ng-if="reservationCanCancel(reservation)">
+                <a class="pull-right m-t-xs text-u-l pointer" ng-click="cancelReservation(reservation, $event)" translate>{{ 'cancel' }}</a>
+              </div>
             </div>
-            <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
-              <a class="pull-right m-t-xs text-u-l pointer" ng-click="modifyReservation(reservation, $event)" translate>{{ 'change' }}</a>
-            </div>
-            <div class="clear" ng-if="reservationCanCancel(reservation)">
-              <a class="pull-right m-t-xs text-u-l pointer" ng-click="cancelReservation(reservation, $event)" translate>{{ 'cancel' }}</a>
+            <div ng-show="isCancelled(reservation)" class="well well-disabled">
+              <div class="text-italic text-sm">{{ 'canceled_reservation_SEATS' | translate:{SEATS:reservation.nb_reserve_places} }}</div>
             </div>
           </div>
 

@@ -27,7 +27,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="reservation in reservations">
+          <tr ng-repeat="reservation in reservations" ng-class="{'disabled': isCancelled(reservation)}">
             <td class="text-c">
               <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
             </td>
@@ -35,6 +35,7 @@
             <td>
               <span ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span>
               <span ng-repeat="ticket in reservation.tickets">{{ticket.event_price_category.price_category.name}} : {{ticket.booked}}</span>
+              <div ng-show="isCancelled(reservation)" class="canceled-marker" translate>{{ 'canceled' }}</div>
             </td>
             <td>
               <div class="buttons">

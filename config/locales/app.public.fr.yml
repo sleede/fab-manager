@@ -223,7 +223,6 @@ fr:
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
-
       trainings_list:
         # liste des formations
         the_trainings: "Les formations"
@@ -234,7 +233,6 @@ fr:
         do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
         unauthorized_operation: "Opération non autorisée"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
-
 
       plans:
         # page récapitulative des abonnements
@@ -286,6 +284,7 @@ fr:
         make_a_gift_of_this_reservation: "Offrir cette réservation"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
         you_booked_DATE: "Vous avez réservé ({{DATE}}) :"  # angular interpolation
+        canceled_reservation_SEATS: "Réservation annulée ({{SEATS}} places)" # angular interpolation
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"

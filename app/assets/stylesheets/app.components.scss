@@ -290,6 +290,11 @@
     @include border-radius(3px);
     padding: 5px 10px;
   }
+  &.well-disabled {
+    border-color: $gray-lighter;
+    background-color: $gray-lighter;
+    color: $gray-light;
+  }
 }
 
 .read {
@@ -628,4 +633,21 @@ padding: 10px;
 
 .help-block.error {
   color: #ff565d;
+}
+
+.disabled {
+  background-color: $gray-lighter;
+  color: $gray-light;
+
+  & a {
+    color: $gray;
+  }
+
+  .canceled-marker {
+    float: right;
+    top: -13px;
+    position: relative;
+    color: red;
+    text-transform: uppercase;
+  }
 }

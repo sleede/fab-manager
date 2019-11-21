@@ -431,7 +431,16 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
   $scope.event = eventPromise;
 
   // list of reservations for the current event
-  return $scope.reservations = reservationsPromise;
+  $scope.reservations = reservationsPromise;
+
+  /**
+   * Test if the provided reservation has been cancelled
+   * @param reservation {Reservation}
+   * @returns {boolean}
+   */
+  $scope.isCancelled = function(reservation) {
+    return !!(reservation.slots[0].canceled_at);
+  }
 }]);
 
 /**

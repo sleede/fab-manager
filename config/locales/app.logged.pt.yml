@@ -130,6 +130,10 @@ pt:
         i_reserve: "Eu reservo"
         i_shift: "Eu mudo"
         i_change: "Eu altero"
+        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"                                          # translation missing
+        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."                                                        # translation missing
+        cancellation_failed: "Cancellation failed."                                                                                              # translation missing
+        a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."  # translation missing
 
       trainings_reserve:
         # book a training

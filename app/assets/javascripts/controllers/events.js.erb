@@ -128,7 +128,7 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
 
 Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
   function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
     $scope.reservations = [];
@@ -352,7 +352,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
      */
     $scope.cancelReservation = function(reservation) {
-      return dialogs.confirm({
+      dialogs.confirm({
         resolve: {
           object: function() {
             return {
@@ -362,19 +362,28 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           }
         }
       }, function() { // cancel confirmed
-        return Slot.cancel({
+        Slot.cancel({
           id: reservation.slots[0].id
         }, function() { // successfully canceled
-          var index;
+          let index;
           growl.success(_t('reservation_was_successfully_cancelled'));
           index = $scope.reservations.indexOf(reservation);
           $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats;
-          return $scope.reservations.splice(index, 1);
+          $scope.reservations[index].slots[0].canceled_at = new Date();
         }, function(error) {
-          return growl.warning(_t('cancellation_failed'));
+          growl.warning(_t('cancellation_failed'));
         });
       });
     };
+
+    /**
+     * Test if the provided reservation has been cancelled
+     * @param reservation {Reservation}
+     * @returns {boolean}
+     */
+    $scope.isCancelled = function(reservation) {
+      return !!(reservation.slots[0].canceled_at);
+    }
 
     /**
      * Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
@@ -777,7 +786,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * What to do after the payment was successful
-     * @param resveration {Object} booked reservation
+     * @param reservation {Object} booked reservation
      */
     var afterPayment = function (reservation) {
       $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats;

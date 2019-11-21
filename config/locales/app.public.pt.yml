@@ -284,6 +284,7 @@ pt:
           make_a_gift_of_this_reservation: "Doe esta reserva"
           you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
           you_booked_DATE: "Sua reserva ({{DATE}}):"  # angular interpolation
+          canceled_reservation_SEATS: "Reservation canceled ({{SEATS}} seats)" # angular interpolation #translation_missing
           book: "Reservar"
           change_the_reservation: "Alterar reserva"
           you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
@@ -291,6 +292,9 @@ pt:
           do_you_really_want_to_delete_this_event:  "Vocêrealmente deseja remover este evento?"
           event_successfully_deleted: "Evento excluído com sucesso"
           unable_to_delete_the_event_because_some_users_alredy_booked_it: "Não foi possível excluir este evento, já pode ter sido reservado por alguns usuários."
+          cancel_the_reservation: "Cancel the reservation"                                            #translation_missing
+          do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."        #translation_missing
+          cancellation_failed: "Cancellation failed."                                                 #translation_missin
 
         calendar:
           # public calendar

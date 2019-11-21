@@ -74,11 +74,11 @@ fr:
             or: "ou"
             confirm_changes: "Valider les modifications"
             change_my_data: "Modifier mes données"
+            sync_my_profile: "Synchroniser mon profil"
             once_your_data_are_up_to_date_: "Une fois vos données à jour,"
             _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
             _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
             _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-            sync_my_profile: "Synchroniser mon profil"
         projects:
           # tableau de bord : mes projets
           you_dont_have_any_projects: "Vous n'avez aucun projet."
@@ -130,6 +130,10 @@ fr:
         i_reserve: "Je réserve"
         i_shift: "Je déplace"
         i_change: "Je change"
+        do_you_really_want_to_cancel_this_reservation: "Voulez-vous vraiment annuler cette réservation ?"
+        reservation_was_cancelled_successfully: "La réservation a bien été annulée."
+        cancellation_failed: "Échec de l'annulation."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "Un problème est survenu pendant le processus de paiement. Merci de réessayer ultérieurement."
 
       trainings_reserve:
         # réserver une formation

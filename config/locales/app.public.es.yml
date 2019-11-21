@@ -27,6 +27,7 @@ es:
         sign_out: "Salir"
         sign_up: "Registrarse"
         sign_in: "Entrar"
+
         # left menu
         notifications: "Notificaciones"
         admin: "Administrador"
@@ -271,7 +272,7 @@ es:
         # details and booking of an event
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
-        informations_and_booking: "Información y reservas"
+        information_and_booking: "Información y reservas"
         beginning: "Empieza:"
         ending: "Termina:"
         opening_hours: "Hora de apertura:"
@@ -283,6 +284,7 @@ es:
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
         you_booked_DATE: "You booked ({{DATE}}):"  # angular interpolation
+        canceled_reservation_SEATS: "Reservation canceled ({{SEATS}} seats)" # angular interpolation #translation_missing
         book: "Reservar"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
@@ -290,6 +292,9 @@ es:
         do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"        #translation_missing
         event_successfully_deleted: "Event successfully deleted"                                    #translation_missing
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."             #translation_missing
+        cancel_the_reservation: "Cancel the reservation"                                            #translation_missing
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."        #translation_missing
+        cancellation_failed: "Cancellation failed."                                                 #translation_missing
 
       calendar:
         # public calendar
