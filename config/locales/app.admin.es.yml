@@ -195,7 +195,7 @@ es:
         show_the_event: "Mostrar el evento"
         no_reservations_for_now: "No hay reservas por ahora."
         back_to_monitoring: "Volver a monitorizar"
-        canceled: "cancelado"
+        canceled: "cancelada"
 
       pricing:
         # subscriptions, prices, credits and coupons management

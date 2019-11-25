@@ -195,7 +195,7 @@ fr:
         show_the_event: "Afficher l'évènement"
         no_reservations_for_now: "Aucune réservation pour le moment."
         back_to_monitoring: "Retour au suivi"
-        canceled: "Annulé"
+        canceled: "Annulée"
 
       pricing:
         # gestion des abonnements, des tarifs, des crédits et des codes promo
