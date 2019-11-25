@@ -107,6 +107,11 @@ This is useful if you have your own invoicing system and you want to prevent Fab
     PHONE_REQUIRED
 
 If set to 'false' the phone number won't be required to register a new user on the software.
+<a name="EVENTS_IN_CALENDAR"></a>
+
+    EVENTS_IN_CALENDAR
+
+If set to 'true', the admin calendar will display the scheduled events in the current view, as read-only items.
 <a name="SLOT_DURATION"></a>
 
     SLOT_DURATION

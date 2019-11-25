@@ -18,6 +18,7 @@ en:
           trainings: "Trainings"
           machines: "Machines"
           spaces: "Spaces"
+          events: "Eventos"
           availabilities: "Availabilities"
           availabilities_notice: "Export to an Excel workbook every slots available for reservation, and their occupancy rate."
           ongoing_reservations: "Ongoing reservations"
@@ -83,6 +84,8 @@ en:
           delete_this_and_next: "This slot and the following"
           delete_all: "All slots"
           event_in_the_past: "Unable to create a slot in the past."
+          edit_event: "Edit the event"
+          view_reservations: "View reservations"
 
       project_elements:
         # management of the projects' components

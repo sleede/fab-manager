@@ -4,6 +4,7 @@
 - An administrator can delete a member
 - An event can be cancelled, if reservation cancellation is enabled
 - Ability to configure the duration of a reservation slot. Previously, only 60 minutes slots were allowed
+- Ability to show the scheduled events in the admin calendar
 - Display indications on required fields in new administrator form
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
@@ -16,6 +17,7 @@
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://github.com/advisories/GHSA-89mq-4x47-5v83)
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
 - [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)
+- [TODO DEPLOY] add the `EVENTS_IN_CALENDAR` environment variable (see [doc/environment.md](doc/environment.md#EVENTS_IN_CALENDAR) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
 - [TODO DEPLOY] `rake db:migrate`
 

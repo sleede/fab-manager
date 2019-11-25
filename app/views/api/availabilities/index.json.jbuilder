@@ -6,6 +6,7 @@ json.array!(@availabilities) do |availability|
   json.available_type availability.available_type
   json.machine_ids availability.machine_ids
   json.training_ids availability.training_ids
+  json.event_id availability.event&.id
   json.backgroundColor !availability.lock ? 'white' : '#f5f5f5'
   json.borderColor availability_border_color(availability)
   json.tag_ids availability.tag_ids

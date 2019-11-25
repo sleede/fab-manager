@@ -343,7 +343,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
      */
     var eventRenderCb = function (event, element) {
-      element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>');
+      if (event.available_type !== 'event') {
+        element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>');
+      }
       if (event.tags.length > 0) {
         let html = '';
         for (let tag of Array.from(event.tags)) {

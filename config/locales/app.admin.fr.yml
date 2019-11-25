@@ -18,6 +18,7 @@ fr:
           trainings: "Formations"
           machines: "Machines"
           spaces: "Espaces"
+          events: "Évènements"
           availabilities: "Disponibilités"
           availabilities_notice: "Exporter dans un classeur Excel tous les créneaux ouverts à la réservation et leurs taux d'occupation."
           ongoing_reservations: "Réservations en cours"
@@ -83,6 +84,8 @@ fr:
           delete_this_and_next: "Ce créneau et tous les suivants"
           delete_all: "Tous les créneaux"
           event_in_the_past: "Impossible de créer un créneau dans le passé."
+          edit_event: "Modifier l'évènement"
+          view_reservations: "Voir les réservations"
 
       project_elements:
         # gestion des éléments constituant les projets

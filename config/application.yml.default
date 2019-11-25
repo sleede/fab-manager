@@ -22,6 +22,7 @@ FABLAB_WITHOUT_ONLINE_PAYMENT: 'false'
 FABLAB_WITHOUT_INVOICES: 'false'
 PHONE_REQUIRED: 'true'
 
+EVENTS_IN_CALENDAR: 'false'
 SLOT_DURATION: '60'
 
 DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
