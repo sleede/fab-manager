@@ -98,7 +98,7 @@ class Event < ActiveRecord::Base
          else
            nil
          end
-    r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at+1.day, until: recurrence_end_at)
+    r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at + 1.day, until: recurrence_end_at)
     r.events.each do |date|
       days_diff = availability.end_at.day - availability.start_at.day
       start_at = DateTime.new(
@@ -110,7 +110,7 @@ class Event < ActiveRecord::Base
         availability.start_at.sec,
         availability.start_at.zone
       )
-      start_at = dst_correction(availability.start_at,start_at)
+      start_at = dst_correction(availability.start_at, start_at)
       end_date = date + days_diff.days
       end_at = DateTime.new(
         end_date.year,
@@ -121,7 +121,7 @@ class Event < ActiveRecord::Base
         availability.end_at.sec,
         availability.end_at.zone
       )
-      end_at = dst_correction(availability.start_at,end_at)
+      end_at = dst_correction(availability.start_at, end_at)
       ei = EventImage.new(attachment: event_image.attachment) if event_image
       efs = event_files.map do |f|
         EventFile.new(attachment: f.attachment)

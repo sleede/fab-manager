@@ -244,8 +244,11 @@ class Reservation < ActiveRecord::Base
   end
 
   def total_booked_seats
-    total = 0
-    total = nb_reserve_places if slots.first.canceled_at
+    # cases:
+    # - machine/training/space reservation => 1 slot = 1 seat (currently not covered by this function)
+    # - event reservation => seats = nb_reserve_place (normal price) + tickets.booked (other prices)
+    total = nb_reserve_places
+    total = 0 if slots.first.canceled_at
     total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
 
     total
