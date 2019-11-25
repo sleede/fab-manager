@@ -2,6 +2,7 @@
 
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - An administrator can delete a member
+- An event can be cancelled, if reservation cancellation is enabled
 - Ability to configure the duration of a reservation slot. Previously, only 60 minutes slots were allowed
 - Display indications on required fields in new administrator form
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
