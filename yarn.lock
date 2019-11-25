@@ -62,10 +62,10 @@ ambi@^2.2.0:
     editions "^1.1.1"
     typechecker "^4.3.0"
 
-angular-animate@1.6:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.6.10.tgz#c520f6d341370e34e0a62060c99bcf47b7d7db8c"
-  integrity sha512-RU9ZJbTspq0W0x675H5k1DeSgKbAFfp2aiYoNGdlD+wQNKvwwMR5ho+EkDKkx9zE02a5goe8Z6EhhYPQSff9dA==
+angular-animate@1.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.7.9.tgz#a397f82434c1e7ed5b7a298fa70fc3de989a6785"
+  integrity sha512-fV+AISy/HTzurQH2ngsJg+lLIvfu0ahc1h4AYKauaXVw97rZc2k4iUA1bMstiEyClsdayQX568kjQc1NK+oYhw==
 
 angular-aside@1.3:
   version "1.3.2"
@@ -82,10 +82,10 @@ angular-bootstrap-switch@0.4.0:
   resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.4.0.tgz#8f4d45a0de5ff1227bd6ae2c5348e4c821d9303a"
   integrity sha1-j01FoN5f8SJ71q4sU0jkyCHZMDo=
 
-angular-cookies@1.6:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.10.tgz#20a014d501242e2edacd21397c0e5480e08dee00"
-  integrity sha512-ADfbqXLhwcaecAiWIaxpl8XWFJgWsrDl/ksSEkYm5dSoXHYlj3HKlAhPbjBv/foYS7pdI0apmSGHWrBPqdjF/g==
+angular-cookies@1.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.7.9.tgz#0f0cd2a9d1c81e5b8d6c6711d41f0909f9d0b8e0"
+  integrity sha512-3eRq/aPrtCZKDWQnc3nW3sFoMbLiHkCkyDF2O9u7VXnqvVsUPaipk5R1ZqahgcSQHQrN/F5IU4T4nrz52qAZmA==
 
 angular-google-analytics@1.1:
   version "1.1.8"
@@ -96,10 +96,10 @@ angular-google-analytics@1.1:
   version "0.7.9"
   resolved "https://github.com/JanStevens/angular-growl-2.git#2a3a40e01419af879f80f582baaeceef3408e295"
 
-angular-i18n@1.6:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.6.10.tgz#16d9d6e6f9501a2cb80bce30c5cd1c76ddb5a545"
-  integrity sha512-/57YZVxgyGmdCDttNe9fuAepI/c3lA9KgER9IY4U75f6K8eM8Y7GVhqBy3x2QQ9uTiubfvlcmoOJKCC621pPFw==
+angular-i18n@1.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.7.9.tgz#3ecdfd6ef1cb1c5eec4658d64a2fdb402e1d2578"
+  integrity sha512-5woHq1BC0r9KOAoEoCeYt6IKfpLXhxzOwkI/wvukuDHuGGyPU0tapZSdUXihFmQz1nHeiNpspVbkYWsM586p0Q==
 
 angular-loading-bar@^0.9.0:
   version "0.9.0"
@@ -126,15 +126,15 @@ angular-recaptcha@^4.2.0:
   resolved "https://registry.yarnpkg.com/angular-recaptcha/-/angular-recaptcha-4.2.0.tgz#3533802ae0d43ac9fedd5f6104e9dbf3c10588a7"
   integrity sha512-PZ4VsUiNKNqaGqCpTAEwyAWUNF0w7xFulMf3ajJVym7bidxPEi5py1jQdxj4LFIWUxoA7XPan4sJMK4UeB8Srg==
 
-angular-resource@1.6:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.6.10.tgz#28c1834e9fa623467d2f9894716a4e6c7e077459"
-  integrity sha512-jrYXUGPtpv/lTBlYZ6HZefIV6Lb+6e1HUavBPg9TSzW7s4zYRBWzMj6vMg8gZzVjWdH/nYBWfilV0qfnmZSI+A==
+angular-resource@1.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.7.9.tgz#fa53623fae2c60debe2410d692447dcb0ba02396"
+  integrity sha512-rXXhCE2qT31Pn4Sl+2XL+ntv4zxnA2OzY+clCl8/pOp/s/gIzxpQlEtXipo3QK8Qur3glbIkeF/bJw+gjVAdUw==
 
-angular-sanitize@1.6:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.6.10.tgz#635a362afb2dd040179f17d3a5455962b2c1918f"
-  integrity sha512-01i1Xoq9ykUrsoYQMSB6dWZmPp9Df5hfCqMAGGzJBWZ7L2WY0OtUphdI0YvR8ZF9lAsWtGNtsEFilObjq5nTgQ==
+angular-sanitize@1.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.7.9.tgz#6b4d5e826abdabd352b13a7c65c8c74daf6a7b15"
+  integrity sha512-nB/xe7JQWF9nLvhHommAICQ3eWrfRETo0EVGFESi952CDzDa+GAJ/2BFBNw44QqQPxj1Xua/uYKrbLsOGWZdbQ==
 
 angular-scroll@0.6:
   version "0.6.5"
@@ -146,30 +146,32 @@ angular-summernote@0.7.1:
   resolved "https://registry.yarnpkg.com/angular-summernote/-/angular-summernote-0.7.1.tgz#c4bfa83020c4e32f96955b9974c43e5eaeea342e"
   integrity sha1-xL+oMCDE4y+WlVuZdMQ+Xq7qNC4=
 
-angular-touch@1.6:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.6.10.tgz#bd51fa48bd2c2c477fea776817535601e6340c2f"
-  integrity sha512-ZblW46aN5s7OOihpXDa0qzrJXdaVGE44jc+a8e1NpOjhCKZDQze+nBHh3xw3toAF1BIfDJIkRstadk4h2R/uLg==
+angular-touch@1.7:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.7.9.tgz#a85375407f9f2fb20442cb3ded48937c558d9267"
+  integrity sha512-qNKWUnecfah4mZxG7GM96AemhXyOVcE03kg3SrWExfmyO/hQNPE50Qqyszb+1UE8GO7WiWOYn1Y5wn9CtOInqA==
 
-angular-translate-interpolation-messageformat@2.8:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/angular-translate-interpolation-messageformat/-/angular-translate-interpolation-messageformat-2.8.1.tgz#1b7df5a4e5c5d1c15822b59fbfad48cea440ecd0"
-  integrity sha1-G331pOXF0cFYIrWfv61IzqRA7NA=
+angular-translate-interpolation-messageformat@2.18:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/angular-translate-interpolation-messageformat/-/angular-translate-interpolation-messageformat-2.18.1.tgz#16c52ae0c61c240f0f24164a0521943cf8ba408e"
+  integrity sha512-SlmyxLB/UUy7FWoGx5QJHrhq8fUu/xzCR0h/ngexOtXZopQjs1vm+TrFZ69d4c/LI7C91sfP4mq4ES29o1xCxA==
   dependencies:
-    angular-translate "~2.8.1"
-    messageformat "~0.1.6"
+    angular-translate "~2.18.1"
+    messageformat "~1.0.2"
 
-angular-translate-loader-partial@2.8:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/angular-translate-loader-partial/-/angular-translate-loader-partial-2.8.1.tgz#5c2cc754fdd8ae36bcdc0c9fbee117b38d734694"
-  integrity sha1-XCzHVP3Yrja83AyfvuEXs41zRpQ=
+angular-translate-loader-partial@2.18:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/angular-translate-loader-partial/-/angular-translate-loader-partial-2.18.1.tgz#1f4ec31c32c3d7b4371e39682444f6a6b84f1f88"
+  integrity sha512-+bPzY3+F2I1tb+X5bscvZq0OGoVEVkHwPGZvaY4nhbktpshArYpvIEV+RQFUa/QNj8vQc3iQ/pruJDb8w3zIdw==
   dependencies:
-    angular-translate "~2.8.1"
+    angular-translate "~2.18.1"
 
-angular-translate@2.8, angular-translate@~2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/angular-translate/-/angular-translate-2.8.1.tgz#ba997c3557bc850c101a946b5938307c96971234"
-  integrity sha1-upl8NVe8hQwQGpRrWTgwfJaXEjQ=
+angular-translate@2.18, angular-translate@~2.18.1:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/angular-translate/-/angular-translate-2.18.1.tgz#b29ed0d2f9bac44075e7aad3284166c59e150791"
+  integrity sha512-Mw0kFBqsv5j8ItL9IhRZunIlVmIRW6iFsiTmRs9wGr2QTt8z4rehYlWyHos8qnXc/kyOYJiW50iH50CSNHGB9A==
+  dependencies:
+    angular ">=1.2.26 <=1.7"
 
 angular-ui-bootstrap@0.14.3:
   version "0.14.3"
@@ -192,7 +194,7 @@ angular-xeditable@0.10:
   dependencies:
     angular "~1.x"
 
-angular@1.7, angular@^1.0.8, angular@~1.x:
+angular@1.7, "angular@>=1.2.26 <=1.7", angular@^1.0.8, angular@~1.x:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
   integrity sha512-5se7ZpcOtu0MBFlzGv5dsM1quQDoDeUTwZrWjGtTNA7O88cD8TEk5IEKCTDa3uECV9XnvKREVUr7du1ACiWGFQ==
@@ -722,6 +724,18 @@ glob@~3.2.8:
     inherits "2"
     minimatch "0.3"
 
+glob@~7.0.6:
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.0.6.tgz#211bafaf49e525b8cd93260d14ab136152b3f57a"
+  integrity sha1-IRuvr0nlJbjNkyYNFKsTYVKz9Xo=
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.2"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
 globals@^11.7.0:
   version "11.9.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.9.0.tgz#bde236808e987f290768a93d065060d78e6ab249"
@@ -934,12 +948,24 @@ lru-cache@2:
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
   integrity sha1-bUUk6LlV+V1PW1iFHOId1y+06VI=
 
+make-plural@~3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/make-plural/-/make-plural-3.0.6.tgz#2033a03bac290b8f3bb91258f65b9df7e8b01ca7"
+  integrity sha1-IDOgO6wpC487uRJY9lud9+iwHKc=
+  optionalDependencies:
+    minimist "^1.2.0"
+
 medium-editor@4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/medium-editor/-/medium-editor-4.4.0.tgz#ef188cc9cc5cba87177da8cb657a885dfbbe5760"
   integrity sha1-7xiMycxcuocXfajLZXqIXfu+V2A=
 
-messageformat@0.1.8, messageformat@~0.1.6:
+messageformat-parser@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/messageformat-parser/-/messageformat-parser-1.1.0.tgz#13ba2250a76bbde8e0fca0dbb3475f95c594a90a"
+  integrity sha512-Hwem6G3MsKDLS1FtBRGIs8T50P1Q00r3srS6QJePCFbad9fq0nYxwf3rnU2BreApRGhmpKMV7oZI06Sy1c9TPA==
+
+messageformat@0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/messageformat/-/messageformat-0.1.8.tgz#d3c9e9481d008ccc28f63a13fbdac526385a0828"
   integrity sha1-08npSB0AjMwo9joT+9rFJjhaCCg=
@@ -950,6 +976,17 @@ messageformat@0.1.8, messageformat@~0.1.6:
     nopt "~2.1.2"
     underscore "~1.5.2"
     watchr "~2.4.9"
+
+messageformat@~1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/messageformat/-/messageformat-1.0.2.tgz#908f4691f29ff28dae35c45436a24cff93402388"
+  integrity sha1-kI9GkfKf8o2uNcRUNqJM/5NAI4g=
+  dependencies:
+    glob "~7.0.6"
+    make-plural "~3.0.6"
+    messageformat-parser "^1.0.0"
+    nopt "~3.0.6"
+    reserved-words "^0.1.1"
 
 mimic-fn@^1.0.0:
   version "1.2.0"
@@ -964,7 +1001,7 @@ minimatch@0.3:
     lru-cache "2"
     sigmund "~1.0.0"
 
-minimatch@^3.0.3, minimatch@^3.0.4:
+minimatch@^3.0.2, minimatch@^3.0.3, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -975,6 +1012,11 @@ minimist@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
   integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
+
+minimist@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
+  integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
 mkdirp@^0.5.1:
   version "0.5.1"
@@ -1047,6 +1089,13 @@ nopt@~2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-2.1.2.tgz#6cccd977b80132a07731d6e8ce58c2c8303cf9af"
   integrity sha1-bMzZd7gBMqB3MdbozljCyDA8+a8=
+  dependencies:
+    abbrev "1"
+
+nopt@~3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
+  integrity sha1-xkZdvwirzU2zWTF/eaxopkayj/k=
   dependencies:
     abbrev "1"
 
@@ -1239,6 +1288,11 @@ require-uncached@^1.0.3:
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
+
+reserved-words@^0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/reserved-words/-/reserved-words-0.1.2.tgz#00a0940f98cd501aeaaac316411d9adc52b31ab1"
+  integrity sha1-AKCUD5jNUBrqqsMWQR2a3FKzGrE=
 
 resolve-from@^1.0.0:
   version "1.0.1"
