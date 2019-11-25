@@ -166,7 +166,7 @@
               </div>
             </div>
             <div ng-show="isCancelled(reservation)" class="well well-disabled">
-              <div class="text-italic text-sm">{{ 'canceled_reservation_SEATS' | translate:{SEATS:reservation.nb_reserve_places} }}</div>
+              <div class="text-italic text-sm">{{ 'canceled_reservation_SEATS' | translate:{SEATS:reservation.total_booked_seats} }}</div>
             </div>
           </div>
 
