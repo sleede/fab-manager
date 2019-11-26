@@ -638,6 +638,7 @@ angular.module('application.router', ['ui.router'])
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
+          externalsPromise: ['Ical', function (Ical) { return Ical.get().$promise; }],
           translations: ['Translations', function (Translations) { return Translations.query(['app.public.calendar']).$promise; }]
         }
       })

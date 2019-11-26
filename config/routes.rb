@@ -112,6 +112,8 @@ Rails.application.routes.draw do
       get 'first', action: 'first', on: :collection
     end
 
+    get 'ical/externals' => 'ical#externals'
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member

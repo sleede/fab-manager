@@ -152,3 +152,5 @@ gem 'sys-filesystem'
 gem 'sha3'
 
 gem 'repost'
+
+gem 'icalendar'
