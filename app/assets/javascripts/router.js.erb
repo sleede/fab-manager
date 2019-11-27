@@ -659,6 +659,18 @@ angular.module('application.router', ['ui.router'])
           translations: ['Translations', function (Translations) { return Translations.query('app.admin.calendar').$promise; }]
         }
       })
+      .state('app.admin.calendar.icalendar', {
+        url: '/admin/calendar/icalendar',
+        views: {
+          'main@': {
+            templateUrl: '<%= asset_path "admin/calendar/icalendar.html" %>',
+            controller: 'AdminICalendarController'
+          }
+        },
+        resolve: {
+          translations: ['Translations', function (Translations) { return Translations.query('app.admin.icalendar').$promise; }]
+        }
+      })
 
       // project's elements
       .state('app.admin.project_elements', {

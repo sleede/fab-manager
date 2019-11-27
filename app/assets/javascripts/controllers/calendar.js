@@ -170,7 +170,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     };
 
     const eventRenderCb = function (event, element) {
-      if (event.tags.length > 0) {
+      if (event.tags && event.tags.length > 0) {
         let html = '';
         for (let tag of Array.from(event.tags)) {
           html += `<span class='label label-success text-white'>${tag.name}</span> `;

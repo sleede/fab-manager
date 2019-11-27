@@ -755,3 +755,57 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
     }
   }
 ]);
+
+
+
+/**
+ * Controller used in the iCalendar (ICS) imports management page
+ */
+
+Application.Controllers.controller('AdminICalendarController', ['$scope',
+  function ($scope) {
+    // list of ICS sources
+    $scope.calendars = [];
+
+    // configuration of a new ICS source
+    $scope.newCalendar = {
+      color: undefined,
+      textColor: undefined,
+      url: undefined,
+      textHidden: false
+    };
+
+    /**
+     * Save the new iCalendar in database
+     */
+    $scope.save = function () {
+      $scope.calendars.push(Object.assign({}, $scope.newCalendar));
+      $scope.newCalendar.url = undefined;
+      $scope.newCalendar.color = null;
+      $scope.newCalendar.textColor = null;
+      $scope.newCalendar.textHidden = false;
+    }
+
+    /**
+     * Return a CSS-like style of the given calendar configuration
+     * @param calendar
+     */
+    $scope.calendarStyle = function (calendar) {
+      return {
+        'border-color': calendar.color,
+        'color': calendar.textColor,
+        'width': calendar.textHidden ? '50px' : 'auto',
+        'height': calendar.textHidden ? '21px' : 'auto'
+      };
+    }
+
+    /**
+     * Delete the given calendar from the database
+     * @param calendar
+     */
+    $scope.delete = function (calendar) {
+      const idx = $scope.calendars.indexOf(calendar);
+      $scope.calendars.splice(idx, 1);
+    }
+  }
+]);

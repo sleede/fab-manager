@@ -1,0 +1,87 @@
+<section class="heading b-b">
+  <div class="row no-gutter">
+    <div class="col-xs-2 col-sm-2 col-md-1">
+      <section class="heading-btn">
+        <a role="button" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
+      </section>
+    </div>
+    <div class="col-md-8 b-l b-r-md">
+      <section class="heading-title">
+        <h1 translate>{{ 'icalendar.icalendar_import' }}</h1>
+      </section>
+    </div>
+
+    <div class="col-md-3">
+      <section class="heading-actions wrapper">
+
+      </section>
+    </div>
+
+  </div>
+</section>
+
+<section class="row no-gutter">
+
+  <div class="col-sm-12 col-md-12 col-lg-9">
+    <div class="alert alert-info m-lg" translate>
+      {{ 'icalendar.intro' }}
+    </div>
+    <div class="wrapper-lg">
+      <table class="table" ng-show="calendars.length > 0">
+        <thead>
+        <tr>
+          <th style="width: 75%;" translate>{{ 'icalendar.url' }}</th>
+          <th translate>{{ 'icalendar.display' }}</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="calendar in calendars">
+          <td class="calendar-url">{{calendar.url}}</td>
+          <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.textHidden ? '' : 'icalendar.example' }}</span>
+          <td class="calendar-actions">
+            <button class="btn btn-danger" ng-click="delete(calendar)"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form class="calendar-form" name="newImportForm">
+        <h4 translate>{{ 'icalendar.new_import' }}</h4>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-link"></i>
+          </div>
+          <input type="url" ng-model="newCalendar.url" class="form-control" placeholder="{{ 'icalendar.url' | translate }}" required>
+        </div>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-paint-brush"></i>
+          </div>
+          <input type="text" minicolors ng-model="newCalendar.color" class="form-control" placeholder="{{ 'icalendar.color' | translate}}" required/>
+        </div>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-paint-brush"></i>
+          </div>
+          <input type="text" minicolors ng-model="newCalendar.textColor" class="form-control" placeholder="{{ 'icalendar.text_color' | translate}}" required/>
+        </div>
+        <div class="input-group">
+          <label for="hideText" class="control-label m-r" translate>{{ 'icalendar.hide_text' }}</label>
+          <input bs-switch
+                 ng-model="newCalendar.textHidden"
+                 id="hideText"
+                 type="checkbox"
+                 class="form-control"
+                 switch-on-text="{{ 'icalendar.hidden' | translate }}"
+                 switch-off-text="{{ 'icalendar.shown' | translate }}"
+                 switch-animate="true"/>
+        </div>
+        <div class="m-t text-right">
+          <button role="button" class="btn btn-warning" ng-click="save()" ng-disabled="newImportForm.$invalid" translate>
+            {{ 'confirm' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
