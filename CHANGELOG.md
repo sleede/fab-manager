@@ -9,7 +9,7 @@
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
-- Calendar management: improved legend style
+- Calendar management: improved legend display and visual behavior
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Added freeCAD files as default allowed extensions

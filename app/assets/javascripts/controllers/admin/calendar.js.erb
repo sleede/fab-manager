@@ -23,7 +23,6 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
   /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
-    let loadingCb;
     const BASE_SLOT = '00:30:00';
 
     // The bookings can be positioned every half hours
@@ -39,6 +38,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 
     // currently selected availability
     $scope.availability = null;
+
+    // corresponding fullCalendar item in the DOM
+    $scope.availabilityDom = null;
 
     // bind the availabilities slots with full-Calendar events
     $scope.eventSources = [];
@@ -62,7 +64,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         return calendarEventClickCb(event, jsEvent, view);
       },
       eventRender (event, element, view) {
-        return eventRenderCb(event, element);
+        return eventRenderCb(event, element, view);
+      },
+      viewRender(view, element) {
+        return viewRenderCb(view, element);
       },
       loading (isLoading, view) {
         return loadingCb(isLoading, view);
@@ -328,6 +333,12 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     var calendarEventClickCb = function (event, jsEvent, view) {
       $scope.availability = event;
 
+      if ($scope.availabilityDom) {
+        $scope.availabilityDom.classList.remove("fc-selected")
+      }
+      $scope.availabilityDom = jsEvent.target.closest('.fc-event');
+      $scope.availabilityDom.classList.add("fc-selected")
+
       // if the user has clicked on the delete event button, delete the event
       if ($(jsEvent.target).hasClass('remove-event')) {
         return $scope.removeSlot();
@@ -360,11 +371,22 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Triggered when resource fetching starts/stops.
      * @see https://fullcalendar.io/docs/resource_data/loading/
      */
-    return loadingCb = function (isLoading, view) {
+    const loadingCb = function (isLoading, view) {
       if (isLoading) {
-      // we remove existing events when fetching starts to prevent duplicates
-        return uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+        // we remove existing events when fetching starts to prevent duplicates
+        uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+
       }
+    };
+
+    /**
+     * Triggered when the view is changed
+     * @see https://fullcalendar.io/docs/v3/viewRender#v2
+     */
+    const viewRenderCb = function(view, element) {
+      // we unselect the current event to keep consistency
+      $scope.availability = null;
+      $scope.availabilityDom = null;
     };
   }
 
