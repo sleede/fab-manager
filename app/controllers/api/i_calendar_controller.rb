@@ -38,7 +38,7 @@ class API::ICalendarController < API::ApiController
       cals = Icalendar::Calendar.parse(ics)
 
       cals.first.events.each do |evt|
-        @events.push(evt)
+        @events.push(calendar: i_cal, event: evt)
       end
     end
   end
