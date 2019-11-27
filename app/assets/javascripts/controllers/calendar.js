@@ -41,7 +41,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     // add availabilities source to event sources
     $scope.eventSources = [];
     $scope.eventSources.push({
-      url: '/api/ical/externals',
+      url: '/api/i_calendar/events',
       textColor: 'black'
     });
 

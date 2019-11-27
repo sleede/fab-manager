@@ -112,7 +112,9 @@ Rails.application.routes.draw do
       get 'first', action: 'first', on: :collection
     end
 
-    get 'ical/externals' => 'ical#externals'
+    resources :i_calendar, only: %i[index create destroy] do
+      get 'events', on: :collection
+    end
 
     # for admin
     resources :trainings do

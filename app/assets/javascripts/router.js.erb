@@ -668,6 +668,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
+          iCalendars: ['ICalendar', function (ICalendar) { return ICalendar.query().$promise; }],
           translations: ['Translations', function (Translations) { return Translations.query('app.admin.icalendar').$promise; }]
         }
       })

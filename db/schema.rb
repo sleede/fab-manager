@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191113103352) do
+ActiveRecord::Schema.define(version: 20191127153729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,15 @@ ActiveRecord::Schema.define(version: 20191113103352) do
 
   add_index "history_values", ["invoicing_profile_id"], name: "index_history_values_on_invoicing_profile_id", using: :btree
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
+
+  create_table "i_calendars", force: :cascade do |t|
+    t.string   "url"
+    t.string   "color"
+    t.string   "text_color"
+    t.boolean  "text_hidden"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "imports", force: :cascade do |t|
     t.integer  "user_id"

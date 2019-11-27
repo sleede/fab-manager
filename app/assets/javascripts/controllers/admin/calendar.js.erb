@@ -762,10 +762,10 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
  * Controller used in the iCalendar (ICS) imports management page
  */
 
-Application.Controllers.controller('AdminICalendarController', ['$scope',
-  function ($scope) {
+Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCalendars',
+  function ($scope, iCalendars) {
     // list of ICS sources
-    $scope.calendars = [];
+    $scope.calendars = iCalendars;
 
     // configuration of a new ICS source
     $scope.newCalendar = {
