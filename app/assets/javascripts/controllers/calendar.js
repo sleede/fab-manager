@@ -16,8 +16,8 @@
  * Controller used in the public calendar global
  */
 
-Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'externalsPromise',
-  function ($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, externalsPromise) {
+Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise',
+  function ($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise) {
   /* PRIVATE STATIC CONSTANTS */
     let currentMachineEvent = null;
     machinesPromise.forEach(m => m.checked = true);
@@ -38,11 +38,12 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     // List of spaces
     $scope.spaces = spacesPromise.filter(t => !t.disabled);
 
-    // External ICS calendars
-    $scope.externals = externalsPromise;
-
     // add availabilities source to event sources
     $scope.eventSources = [];
+    $scope.eventSources.push({
+      url: '/api/ical/externals',
+      textColor: 'black'
+    });
 
     // filter availabilities if have change
     $scope.filterAvailabilities = function (filter, scope) {
