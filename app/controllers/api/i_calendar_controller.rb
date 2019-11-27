@@ -38,7 +38,7 @@ class API::ICalendarController < API::ApiController
       cals = Icalendar::Calendar.parse(ics)
 
       cals.first.events.each do |evt|
-        @events.push(evt.merge!(color: i_cal.color))
+        @events.push(evt)
       end
     end
   end

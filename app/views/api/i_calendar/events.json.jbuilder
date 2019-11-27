@@ -6,5 +6,4 @@ json.array!(@events) do |event|
   json.start event.dtstart.iso8601
   json.end event.dtend.iso8601
   json.backgroundColor 'white'
-  json.borderColor event.color
 end
