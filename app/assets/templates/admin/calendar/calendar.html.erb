@@ -12,15 +12,8 @@
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper display-h" ng-class="{'p-s': !fablabWithoutSpaces}">
-        <div class="display-v">
-          <span class="calendar-legend text-sm border-formation" ng-class="{'m-t-sm': fablabWithoutSpaces}" translate>{{ 'admin_calendar.trainings' }}</span><br>
-          <span class="calendar-legend text-sm border-machine" translate>{{ 'admin_calendar.machines' }}</span><br>
-        </div>
-        <div class="display-v">
-          <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.spaces' }}</span>
-          <span class="calendar-legend text-sm border-event" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.events' }}</span>
-        </div>
+      <section class="heading-actions wrapper" ng-class="{'p-s': !fablabWithoutSpaces}">
+
       </section>
     </div>
 
@@ -32,6 +25,15 @@
 
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg"></div>
+    <div class="calendar-legend-block">
+      <h4 translate>{{ 'admin_calendar.legend' }}</h4>
+      <div class="legends">
+        <span class="calendar-legend text-sm border-formation" ng-class="{'m-t-sm': fablabWithoutSpaces}" translate>{{ 'admin_calendar.trainings' }}</span><br>
+        <span class="calendar-legend text-sm border-machine" translate>{{ 'admin_calendar.machines' }}</span><br>
+        <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.spaces' }}</span>
+        <span class="calendar-legend text-sm border-event" ng-show="eventsInCalendar" translate>{{ 'admin_calendar.events' }}</span>
+      </div>
+    </div>
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-3">

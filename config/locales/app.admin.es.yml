@@ -86,6 +86,7 @@ es:
           event_in_the_past: "Unable to create a slot in the past."                                # translation_missing
           edit_event: "Edit the event"                                                             # translation_missing
           view_reservations: "Ver reservas"                                                        # translation_missing
+          legend: "leyenda"
 
       project_elements:
         # management of the projects' components

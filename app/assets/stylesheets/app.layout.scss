@@ -101,22 +101,6 @@
 	}
 }
 
-.display-h {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 0;
-}
-
-.display-v {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-self: baseline;
-  height: inherit;
-}
-
-
 body.container{
 	padding: 0;
 }

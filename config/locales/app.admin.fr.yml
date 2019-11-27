@@ -86,6 +86,7 @@ fr:
           event_in_the_past: "Impossible de créer un créneau dans le passé."
           edit_event: "Modifier l'évènement"
           view_reservations: "Voir les réservations"
+          legend: "Légende"
 
       project_elements:
         # gestion des éléments constituant les projets
