@@ -30,14 +30,16 @@
       <table class="table" ng-show="calendars.length > 0">
         <thead>
         <tr>
-          <th style="width: 75%;" translate>{{ 'icalendar.url' }}</th>
+          <th style="width: 35%;" translate>{{ 'icalendar.name' }}</th>
+          <th style="width: 35%;" translate>{{ 'icalendar.url' }}</th>
           <th translate>{{ 'icalendar.display' }}</th>
           <th></th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="calendar in calendars">
-          <td class="calendar-url">{{calendar.url}}</td>
+          <td class="calendar-name">{{calendar.name}}</td>
+          <td class="calendar-url"><a href="{{calendar.url}}" target="_blank">{{calendar.url}}</a></td>
           <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.textHidden ? '' : 'icalendar.example' }}</span>
           <td class="calendar-actions">
             <button class="btn btn-danger" ng-click="delete(calendar)"><i class="fa fa-trash"></i></button>
@@ -47,6 +49,12 @@
       </table>
       <form class="calendar-form" name="newImportForm">
         <h4 translate>{{ 'icalendar.new_import' }}</h4>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-font"></i>
+          </div>
+          <input type="text" ng-model="newCalendar.name" class="form-control" placeholder="{{ 'icalendar.name' | translate }}" required>
+        </div>
         <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-link"></i>

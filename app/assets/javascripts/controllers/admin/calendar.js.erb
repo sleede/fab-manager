@@ -762,8 +762,8 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
  * Controller used in the iCalendar (ICS) imports management page
  */
 
-Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCalendars',
-  function ($scope, iCalendars) {
+Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCalendars', 'ICalendar', 'growl', '_t',
+  function ($scope, iCalendars, ICalendar, growl, _t) {
     // list of ICS sources
     $scope.calendars = iCalendars;
 
@@ -772,6 +772,7 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
       color: undefined,
       textColor: undefined,
       url: undefined,
+      name: undefined,
       textHidden: false
     };
 
@@ -779,11 +780,19 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
      * Save the new iCalendar in database
      */
     $scope.save = function () {
-      $scope.calendars.push(Object.assign({}, $scope.newCalendar));
-      $scope.newCalendar.url = undefined;
-      $scope.newCalendar.color = null;
-      $scope.newCalendar.textColor = null;
-      $scope.newCalendar.textHidden = false;
+      ICalendar.save({}, { i_calendar: $scope.newCalendar }, function (data) {
+        // success
+        $scope.calendars.push(data);
+        $scope.newCalendar.url = undefined;
+        $scope.newCalendar.name = undefined;
+        $scope.newCalendar.color = null;
+        $scope.newCalendar.textColor = null;
+        $scope.newCalendar.textHidden = false;
+      }, function (error) {
+        // failed
+        growl.error(_t('icalendar.create_error'));
+        console.error(error);
+      })
     }
 
     /**

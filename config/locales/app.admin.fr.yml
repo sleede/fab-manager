@@ -96,11 +96,13 @@ fr:
           color: "Couleur"
           text_color: "Couleur du texte"
           url: "URL"
+          name: "Nom"
           example: "Exemple"
           display: "Affichage"
           hide_text: "Cacher le texte"
           hidden: "Caché"
           shown: "Affiché"
+          create_error: "Impossible de créer l'import iCalendar. Veuillez réessayer ultérieurement"
 
       project_elements:
         # gestion des éléments constituant les projets

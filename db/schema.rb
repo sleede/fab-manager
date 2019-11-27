@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(version: 20191127153729) do
 
   create_table "i_calendars", force: :cascade do |t|
     t.string   "url"
+    t.string   "name"
     t.string   "color"
     t.string   "text_color"
     t.boolean  "text_hidden"

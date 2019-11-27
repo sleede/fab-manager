@@ -6,6 +6,7 @@ class CreateICalendars < ActiveRecord::Migration
   def change
     create_table :i_calendars do |t|
       t.string :url
+      t.string :name
       t.string :color
       t.string :text_color
       t.boolean :text_hidden
