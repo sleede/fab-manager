@@ -51,12 +51,6 @@ class Slot < ActiveRecord::Base
                             attached_object: self
   end
 
-  def can_be_modified?
-    return false if (start_at - Time.now) / 1.day < 1
-
-    true
-  end
-
   def dates_were_modified?
     start_at_changed? or end_at_changed?
   end
