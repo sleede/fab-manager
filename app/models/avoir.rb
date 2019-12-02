@@ -14,6 +14,6 @@ class Avoir < Invoice
   end
 
   def expire_subscription
-    user.subscription.expire(Time.now)
+    user.subscription.expire(DateTime.current)
   end
 end

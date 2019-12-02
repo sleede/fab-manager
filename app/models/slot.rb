@@ -52,7 +52,7 @@ class Slot < ActiveRecord::Base
   end
 
   def can_be_modified?
-    return false if (start_at - Time.now) / 1.day < 1
+    return false if (start_at - DateTime.current) / 1.day < 1
 
     true
   end

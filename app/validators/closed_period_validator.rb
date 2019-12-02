@@ -6,7 +6,7 @@ class ClosedPeriodValidator < ActiveModel::Validator
     date = if record.is_a?(Avoir)
              record.avoir_date
            else
-             DateTime.now
+             DateTime.current
            end
 
 

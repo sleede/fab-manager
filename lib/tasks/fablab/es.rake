@@ -170,7 +170,7 @@ namespace :fablab do
 
       days = args.period.to_i
       if days.zero?
-        StatisticService.new.generate_statistic(start_date: DateTime.now.beginning_of_day, end_date: DateTime.now.end_of_day)
+        StatisticService.new.generate_statistic(start_date: DateTime.current.beginning_of_day, end_date: DateTime.current.end_of_day)
       else
         days.times.each do |i|
           StatisticService.new.generate_statistic(start_date: i.day.ago.beginning_of_day, end_date: i.day.ago.end_of_day)

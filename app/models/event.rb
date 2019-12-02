@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
 
   def recurrence_events
     Event.includes(:availability)
-         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, Time.now)
+         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, DateTime.current)
          .references(:availabilities)
   end
 
