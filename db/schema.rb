@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191127153729) do
+ActiveRecord::Schema.define(version: 20191202135507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,20 @@ ActiveRecord::Schema.define(version: 20191127153729) do
 
   add_index "history_values", ["invoicing_profile_id"], name: "index_history_values_on_invoicing_profile_id", using: :btree
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
+
+  create_table "i_calendar_events", force: :cascade do |t|
+    t.string   "uid"
+    t.datetime "dtstart"
+    t.datetime "dtend"
+    t.string   "summary"
+    t.string   "description"
+    t.string   "attendee"
+    t.integer  "i_calendar_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "i_calendar_events", ["i_calendar_id"], name: "index_i_calendar_events_on_i_calendar_id", using: :btree
 
   create_table "i_calendars", force: :cascade do |t|
     t.string   "url"
@@ -933,6 +947,7 @@ ActiveRecord::Schema.define(version: 20191127153729) do
   add_foreign_key "exports", "users"
   add_foreign_key "history_values", "invoicing_profiles"
   add_foreign_key "history_values", "settings"
+  add_foreign_key "i_calendar_events", "i_calendars"
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "invoicing_profiles"
   add_foreign_key "invoices", "invoicing_profiles", column: "operator_profile_id"

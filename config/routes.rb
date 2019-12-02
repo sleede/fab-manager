@@ -113,7 +113,7 @@ Rails.application.routes.draw do
     end
 
     resources :i_calendar, only: %i[index create destroy] do
-      get 'events', on: :collection
+      get 'events', on: :member
       post 'sync', on: :member
     end
 

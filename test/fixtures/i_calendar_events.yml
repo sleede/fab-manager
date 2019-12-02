@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: MyString
+  dtstart: 2019-12-02 14:55:07
+  dtend: 2019-12-02 14:55:07
+  summary: MyString
+  description: MyString
+  attendee: MyString
+  i_calendar_id: 
+
+two:
+  uid: MyString
+  dtstart: 2019-12-02 14:55:07
+  dtend: 2019-12-02 14:55:07
+  summary: MyString
+  description: MyString
+  attendee: MyString
+  i_calendar_id: 

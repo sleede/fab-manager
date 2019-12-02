@@ -27,25 +27,13 @@ class API::ICalendarController < API::ApiController
   end
 
   def events
-    require 'net/http'
-    require 'uri'
-    require 'icalendar'
-
-    @events = []
-
-    @i_cals = ICalendar.all.each do |i_cal|
-      ics = Net::HTTP.get(URI.parse(i_cal.url))
-      cals = Icalendar::Calendar.parse(ics)
-
-      cals.first.events.each do |evt|
-        @events.push(calendar: i_cal, event: evt)
-      end
-    end
+    @events = ICalendarEvent.where(i_calendar_id: params[:id]).joins(:i_calendar)
   end
 
   def sync
-    puts '[TODO] run worker'
-    render json: { processing: true }, status: :created
+    worker = ICalendarImportWorker.new
+    worker.perform([params[:id]])
+    render json: { processing: [params[:id]] }, status: :created
   end
 
   private

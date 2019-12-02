@@ -15,6 +15,11 @@ generate_statistic:
   class: "StatisticWorker"
   queue: default
 
+i_calendar_import:
+  cron: "0 2 * * *"
+  class: "ICalendarImportWorker"
+  queue: default
+
 open_api_trace_calls_count:
   cron: "0 4 * * 0" # every sunday at 4am
   class: "OpenAPITraceCallsCountWorker"

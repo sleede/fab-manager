@@ -5,7 +5,7 @@ Application.Services.factory('ICalendar', ['$resource', function ($resource) {
     { id: '@id' }, {
       events: {
         method: 'GET',
-        url: '/api/i_calendar/events'
+        url: '/api/i_calendar/:id/events'
       },
       sync: {
         method: 'POST',
