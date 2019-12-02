@@ -678,6 +678,7 @@ en:
         # add a new administrator to the platform
         add_an_administrator: "Add an administrator"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."  # messageFormat interpolation
+        failed_to_create_admin: "Unable to create the administrator:"
 
       authentication_new:
         # add a new authentication provider (SSO)
