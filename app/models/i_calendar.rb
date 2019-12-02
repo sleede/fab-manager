@@ -4,7 +4,7 @@
 class ICalendar < ActiveRecord::Base
   has_many :i_calendar_events
 
-  after_create sync_events
+  after_create :sync_events
 
   private
 

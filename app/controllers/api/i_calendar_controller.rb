@@ -27,7 +27,12 @@ class API::ICalendarController < API::ApiController
   end
 
   def events
-    @events = ICalendarEvent.where(i_calendar_id: params[:id]).joins(:i_calendar)
+    start_date = ActiveSupport::TimeZone[params[:timezone]]&.parse(params[:start])
+    end_date = ActiveSupport::TimeZone[params[:timezone]]&.parse(params[:end])&.end_of_day
+
+    @events = ICalendarEvent.where(i_calendar_id: params[:id])
+                            .where('dtstart >= ? AND dtend <= ?', start_date, end_date)
+                            .joins(:i_calendar)
   end
 
   def sync

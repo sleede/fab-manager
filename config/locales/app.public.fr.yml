@@ -306,6 +306,7 @@ fr:
           machines: "Machines"
           spaces: "Espaces"
           events: "Évènements"
+          externals: "Autres calendriers"
 
       spaces_list:
         # liste des espaces
