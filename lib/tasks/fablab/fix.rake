@@ -129,7 +129,7 @@ namespace :fablab do
     desc '[release 3.1.2] fix users with invalid group_id'
     task users_group_ids: :environment do
       User.where.not(group_id: Group.all.map(&:id)).each do |u|
-        u.update_columns(group_id: Group.first.id, updated_at: DateTime.now)
+        u.update_columns(group_id: Group.first.id, updated_at: DateTime.current)
 
         meta_data = { ex_group_name: 'invalid group' }
 

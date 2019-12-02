@@ -57,7 +57,7 @@ module Credits
       credit = json_response(response.body)
       assert_equal 13, credit[:id]
       c = Credit.find(credit[:id])
-      assert Time.now - c.updated_at < 1.minute
+      assert c.updated_at > 1.minute.ago
 
       assert_equal 5, c.hours
     end
