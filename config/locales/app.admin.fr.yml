@@ -103,6 +103,9 @@ fr:
           hidden: "Caché"
           shown: "Affiché"
           create_error: "Impossible de créer l'import iCalendar. Veuillez réessayer ultérieurement"
+          delete_failed: "Impossible de supprimer l'import iCalendar. Veuillez réessayer ultérieurement"
+          refresh: "Mise à jour en cours..."
+          sync_failed: "Impossible de synchroniser l'URL. Veuillez réessayer ultérieurement"
 
       project_elements:
         # gestion des éléments constituant les projets

@@ -813,8 +813,35 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
      * @param calendar
      */
     $scope.delete = function (calendar) {
-      const idx = $scope.calendars.indexOf(calendar);
-      $scope.calendars.splice(idx, 1);
+      ICalendar.delete(
+        { id: calendar.id },
+        function () {
+          // success
+          const idx = $scope.calendars.indexOf(calendar);
+          $scope.calendars.splice(idx, 1);
+        }, function (error) {
+          // failed
+          growl.error(_t('icalendar.delete_failed'));
+          console.error(error);
+        });
+    }
+
+    /**
+     * Asynchronously re-fetches the events from the given calendar
+     * @param calendar
+     */
+    $scope.sync = function (calendar) {
+      ICalendar.sync(
+        { id: calendar.id },
+        function () {
+          // success
+          growl.info(_t('icalendar.refresh'));
+        }, function (error) {
+          // failed
+          growl.error(_t('icalendar.sync_failed'));
+          console.error(error);
+        }
+      )
     }
   }
 ]);

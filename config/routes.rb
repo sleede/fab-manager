@@ -114,6 +114,7 @@ Rails.application.routes.draw do
 
     resources :i_calendar, only: %i[index create destroy] do
       get 'events', on: :collection
+      post 'sync', on: :member
     end
 
     # for admin

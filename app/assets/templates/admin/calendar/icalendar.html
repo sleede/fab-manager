@@ -33,7 +33,7 @@
           <th style="width: 35%;" translate>{{ 'icalendar.name' }}</th>
           <th style="width: 35%;" translate>{{ 'icalendar.url' }}</th>
           <th translate>{{ 'icalendar.display' }}</th>
-          <th></th>
+          <th style="width: 10%;"></th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +42,7 @@
           <td class="calendar-url"><a href="{{calendar.url}}" target="_blank">{{calendar.url}}</a></td>
           <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.textHidden ? '' : 'icalendar.example' }}</span>
           <td class="calendar-actions">
+            <button class="btn btn-info" ng-click="sync(calendar)"><i class="fa fa-refresh"></i></button>
             <button class="btn btn-danger" ng-click="delete(calendar)"><i class="fa fa-trash"></i></button>
           </td>
         </tr>

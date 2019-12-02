@@ -43,6 +43,11 @@ class API::ICalendarController < API::ApiController
     end
   end
 
+  def sync
+    puts '[TODO] run worker'
+    render json: { processing: true }, status: :created
+  end
+
   private
 
   def set_i_cal
