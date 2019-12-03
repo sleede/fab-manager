@@ -3,8 +3,9 @@
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - An administrator can delete a member
 - An event can be cancelled, if reservation cancellation is enabled
-- Ability to configure the duration of a reservation slot. Previously, only 60 minutes slots were allowed
-- Ability to show the scheduled events in the admin calendar
+- Ability to import iCalendar agendas in the public calendar, through URLs to ICS files (RFC 5545)
+- Ability to configure the duration of a reservation slot, using `SLOT_DURATION`. Previously, only 60 minutes slots were allowed
+- Display the scheduled events in the admin calendar, depending on `EVENTS_IN_CALENDAR` configuration.
 - Display indications on required fields in new administrator form
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
@@ -14,7 +15,7 @@
 - Updated moment-timezone
 - Added freeCAD files as default allowed extensions
 - Fix a bug: unable to remove the picture from a training
-- Fix a bug: report errors on admin creation
+- Fix a bug: no alerts on errors during admin creation
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://github.com/advisories/GHSA-89mq-4x47-5v83)
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
