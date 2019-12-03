@@ -651,11 +651,25 @@ padding: 10px;
     text-transform: uppercase;
   }
 }
+.calendar-legend-block {
+  text-align: right;
+  padding-right: 2em;
 
-.calendar-legend {
-  border: 1px solid;
-  border-left: 3px solid;
-  border-radius: 3px;
-  font-size: 10px;
-  padding: 2px;
+  h4 {
+    font-size: 12px;
+    font-style: italic;
+  }
+  .legends {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .calendar-legend {
+    border: 1px solid;
+    border-left: 3px solid;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 2px;
+    margin-left: 10px;
+    display: inline-block;
+  }
 }

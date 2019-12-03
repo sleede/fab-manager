@@ -754,7 +754,8 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
         return $state.go('app.admin.members');
       }
       , function (error) {
-        console.log(error);
+        growl.error(_t('failed_to_create_admin') + JSON.stringify(error.data ? error.data : error));
+        console.error(error);
       }
     );
   };

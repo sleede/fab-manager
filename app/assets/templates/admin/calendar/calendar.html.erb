@@ -5,22 +5,17 @@
         <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
+    <div class="col-xs-10 b-l b-r-md">
       <section class="heading-title">
         <h1 translate>{{ 'admin_calendar.calendar_management' }}</h1>
       </section>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
-      <section class="heading-actions wrapper display-h" ng-class="{'p-s': !fablabWithoutSpaces}">
-        <div class="display-v">
-          <span class="calendar-legend text-sm border-formation" ng-class="{'m-t-sm': fablabWithoutSpaces}" translate>{{ 'admin_calendar.trainings' }}</span><br>
-          <span class="calendar-legend text-sm border-machine" translate>{{ 'admin_calendar.machines' }}</span><br>
-        </div>
-        <div class="display-v">
-          <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.spaces' }}</span>
-          <span class="calendar-legend text-sm border-event" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.events' }}</span>
-        </div>
+    <div class="col-xs-1">
+      <section class="heading-actions wrapper">
+        <a role="button" ui-sref="app.admin.calendar.icalendar" class="btn btn-default b-2x rounded pointer m-t-sm">
+          <i class="fa fa-exchange" aria-hidden="true"></i>
+        </a>
       </section>
     </div>
 
@@ -32,6 +27,15 @@
 
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg"></div>
+    <div class="calendar-legend-block">
+      <h4 translate>{{ 'admin_calendar.legend' }}</h4>
+      <div class="legends">
+        <span class="calendar-legend text-sm border-formation" translate>{{ 'admin_calendar.trainings' }}</span><br>
+        <span class="calendar-legend text-sm border-machine" translate>{{ 'admin_calendar.machines' }}</span><br>
+        <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.spaces' }}</span>
+        <span class="calendar-legend text-sm border-event" ng-show="eventsInCalendar" translate>{{ 'admin_calendar.events' }}</span>
+      </div>
+    </div>
   </div>
 
   <div class="col-sm-12 col-md-12 col-lg-3">
@@ -103,7 +107,7 @@
         </button>
       </div>
       <div class="widget-content no-bg auto wrapper" ng-show="availability.available_type == 'event'">
-        <a class="btn btn-default m-t pointer" ui-sref="app.admin.events_edit({id: availability.event_id})">
+        <a class="btn btn-default pointer" ui-sref="app.admin.events_edit({id: availability.event_id})">
           <span>
             <i class="fa fa-edit"></i>
             <span class="m-l-xs" translate>{{ 'admin_calendar.edit_event' }}</span>

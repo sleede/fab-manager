@@ -88,6 +88,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.fablabWithoutInvoices = Fablab.withoutInvoices;
       // Global config: if true, the phone number is required to create an account
       $rootScope.phoneRequired = Fablab.phoneRequired;
+      // Global config: if true, the events are shown in the admin calendar
+      $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

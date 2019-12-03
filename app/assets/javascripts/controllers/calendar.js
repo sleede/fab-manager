@@ -16,8 +16,8 @@
  * Controller used in the public calendar global
  */
 
-Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'externalsPromise',
-  function ($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, externalsPromise) {
+Application.Controllers.controller('CalendarController', ['$scope', '$state', '$aside', 'moment', 'Availability', 'Slot', 'Setting', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', '_t', 'uiCalendarConfig', 'CalendarConfig', 'trainingsPromise', 'machinesPromise', 'spacesPromise', 'iCalendarPromise',
+  function ($scope, $state, $aside, moment, Availability, Slot, Setting, growl, dialogs, bookingWindowStart, bookingWindowEnd, _t, uiCalendarConfig, CalendarConfig, trainingsPromise, machinesPromise, spacesPromise, iCalendarPromise) {
   /* PRIVATE STATIC CONSTANTS */
     let currentMachineEvent = null;
     machinesPromise.forEach(m => m.checked = true);
@@ -38,8 +38,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     // List of spaces
     $scope.spaces = spacesPromise.filter(t => !t.disabled);
 
-    // External ICS calendars
-    $scope.externals = externalsPromise;
+    // List of external iCalendar sources
+    $scope.externals = iCalendarPromise;
 
     // add availabilities source to event sources
     $scope.eventSources = [];
@@ -51,10 +51,19 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         trainings: isSelectAll('trainings', scope),
         machines: isSelectAll('machines', scope),
         spaces: isSelectAll('spaces', scope),
+        externals: isSelectAll('externals', scope),
         evt: filter.evt,
         dispo: filter.dispo
       });
-      return $scope.calendarConfig.events = availabilitySourceUrl();
+      $scope.calendarConfig.events = availabilitySourceUrl();
+      $scope.externals.filter(e => e.checked).forEach(e => {
+        $scope.eventSources.push({
+          url: `/api/i_calendar/${e.id}/events`,
+          textColor: e.textColor,
+          color: e.color
+        });
+      });
+      return uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
     };
 
     // a variable for formation/machine/event/dispo checkbox is or not checked
@@ -62,6 +71,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       trainings: isSelectAll('trainings', $scope),
       machines: isSelectAll('machines', $scope),
       spaces: isSelectAll('spaces', $scope),
+      externals: isSelectAll('externals', $scope),
       evt: true,
       dispo: true
     };
@@ -88,6 +98,9 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
           spaces () {
             return $scope.spaces;
           },
+          externals () {
+            return $scope.externals;
+          },
           filter () {
             return $scope.filter;
           },
@@ -98,10 +111,11 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
             return $scope.filterAvailabilities;
           }
         },
-        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'spaces', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, spaces, filter, toggleFilter, filterAvailabilities) {
+        controller: ['$scope', '$uibModalInstance', 'trainings', 'machines', 'spaces', 'externals', 'filter', 'toggleFilter', 'filterAvailabilities', function ($scope, $uibModalInstance, trainings, machines, spaces, externals, filter, toggleFilter, filterAvailabilities) {
           $scope.trainings = trainings;
           $scope.machines = machines;
           $scope.spaces = spaces;
+          $scope.externals = externals;
           $scope.filter = filter;
 
           $scope.toggleFilter = (type, filter) => toggleFilter(type, filter);
@@ -123,19 +137,19 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       if (event.available_type === 'machines') {
         currentMachineEvent = event;
         calendar.fullCalendar('changeView', 'agendaDay');
-        return calendar.fullCalendar('gotoDate', event.start);
+        calendar.fullCalendar('gotoDate', event.start);
       } else if (event.available_type === 'space') {
         calendar.fullCalendar('changeView', 'agendaDay');
-        return calendar.fullCalendar('gotoDate', event.start);
+        calendar.fullCalendar('gotoDate', event.start);
       } else if (event.available_type === 'event') {
-        return $state.go('app.public.events_show', { id: event.event_id });
+        $state.go('app.public.events_show', { id: event.event_id });
       } else if (event.available_type === 'training') {
-        return $state.go('app.public.training_show', { id: event.training_id });
+        $state.go('app.public.training_show', { id: event.training_id });
       } else {
         if (event.machine_id) {
-          return $state.go('app.public.machines_show', { id: event.machine_id });
+          $state.go('app.public.machines_show', { id: event.machine_id });
         } else if (event.space_id) {
-          return $state.go('app.public.space_show', { id: event.space_id });
+          $state.go('app.public.space_show', { id: event.space_id });
         }
       }
     };
@@ -169,7 +183,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     };
 
     const eventRenderCb = function (event, element) {
-      if (event.tags.length > 0) {
+      if (event.tags && event.tags.length > 0) {
         let html = '';
         for (let tag of Array.from(event.tags)) {
           html += `<span class='label label-success text-white'>${tag.name}</span> `;
