@@ -88,6 +88,28 @@ fr:
           view_reservations: "Voir les réservations"
           legend: "Légende"
 
+      icalendar:
+        icalendar:
+          icalendar_import: "Import iCalendar"
+          intro: "Fab-manager vous permet d'importer automatiquement des évènements de calendrier, au format iCalendar RFC 5545, depuis des URL externes. Ces URL seront synchronisée toutes les nuits et les évènements seront affichés dans le calendrier publique."
+          new_import: "Nouvel import ICS"
+          color: "Couleur"
+          text_color: "Couleur du texte"
+          url: "URL"
+          name: "Nom"
+          example: "Exemple"
+          display: "Affichage"
+          hide_text: "Cacher le texte"
+          hidden: "Caché"
+          shown: "Affiché"
+          create_error: "Impossible de créer l'import iCalendar. Veuillez réessayer ultérieurement"
+          delete_failed: "Impossible de supprimer l'import iCalendar. Veuillez réessayer ultérieurement"
+          refresh: "Mise à jour en cours..."
+          sync_failed: "Impossible de synchroniser l'URL. Veuillez réessayer ultérieurement"
+          confirmation_required: "Confirmation requise"
+          confirm_delete_import: "Êtes-vous sur de vouloir supprimer cet import iCalendar ?"
+          delete_success: "L'import iCalendar a bien été supprimé"
+
       project_elements:
         # gestion des éléments constituant les projets
         project_elements:
@@ -678,6 +700,7 @@ fr:
         # ajouter un nouvel administrateur à la plate-forme
         add_an_administrator: "Ajouter un administrateur"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "L'administrateur a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par email."  # messageFormat interpolation
+        failed_to_create_admin: "Impossible de créer l'administrateur :"
 
       authentication_new:
         # ajouter un nouveau fournisseur d'authentification (SSO)

@@ -88,6 +88,28 @@ en:
           view_reservations: "View reservations"
           legend: "legend"
 
+      icalendar:
+        icalendar:
+          icalendar_import: "iCalendar import"
+          intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every nights and the events are shown in the public calendar."
+          new_import: "New ICS import"
+          color: "Colour"
+          text_color: "Text colour"
+          url: "URL"
+          name: "Name"
+          example: "Example"
+          display: "Display"
+          hide_text: "Hide the text"
+          hidden: "Hidden"
+          shown: "Shown"
+          create_error: "Unable to create iCalendar import. Please try again later"
+          delete_failed: "Unable to delete the iCalendar import. Please try again later"
+          refresh: "Updating..."
+          sync_failed: "Unable to synchronize the URL. Please try again later"
+          confirmation_required: "Confirmation required"
+          confirm_delete_import: "Do you really want to delete this iCalendar import?"
+          delete_success: "iCalendar import successfully deleted"
+
       project_elements:
         # management of the projects' components
         project_elements:
@@ -678,6 +700,7 @@ en:
         # add a new administrator to the platform
         add_an_administrator: "Add an administrator"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."  # messageFormat interpolation
+        failed_to_create_admin: "Unable to create the administrator:"
 
       authentication_new:
         # add a new authentication provider (SSO)

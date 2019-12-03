@@ -755,3 +755,109 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
     }
   }
 ]);
+
+
+
+/**
+ * Controller used in the iCalendar (ICS) imports management page
+ */
+
+Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCalendars', 'ICalendar', 'dialogs', 'growl', '_t',
+  function ($scope, iCalendars, ICalendar, dialogs, growl, _t) {
+    // list of ICS sources
+    $scope.calendars = iCalendars;
+
+    // configuration of a new ICS source
+    $scope.newCalendar = {
+      color: undefined,
+      text_color: undefined,
+      url: undefined,
+      name: undefined,
+      text_hidden: false
+    };
+
+    /**
+     * Save the new iCalendar in database
+     */
+    $scope.save = function () {
+      ICalendar.save({}, { i_calendar: $scope.newCalendar }, function (data) {
+        // success
+        $scope.calendars.push(data);
+        $scope.newCalendar.url = undefined;
+        $scope.newCalendar.name = undefined;
+        $scope.newCalendar.color = null;
+        $scope.newCalendar.text_color = null;
+        $scope.newCalendar.text_hidden = false;
+      }, function (error) {
+        // failed
+        growl.error(_t('icalendar.create_error'));
+        console.error(error);
+      })
+    }
+
+    /**
+     * Return a CSS-like style of the given calendar configuration
+     * @param calendar
+     */
+    $scope.calendarStyle = function (calendar) {
+      return {
+        'border-color': calendar.color,
+        'color': calendar.text_color,
+        'width': calendar.text_hidden ? '50px' : 'auto',
+        'height': calendar.text_hidden ? '21px' : 'auto'
+      };
+    }
+
+    /**
+     * Delete the given calendar from the database
+     * @param calendar
+     */
+    $scope.delete = function (calendar) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('icalendar.confirmation_required'),
+                msg: _t('icalendar.confirm_delete_import')
+              };
+            }
+          }
+        },
+        function () {
+          ICalendar.delete(
+            { id: calendar.id },
+            function () {
+              // success
+              const idx = $scope.calendars.indexOf(calendar);
+              $scope.calendars.splice(idx, 1);
+              growl.info(_t('icalendar.delete_success'));
+            }, function (error) {
+              // failed
+              growl.error(_t('icalendar.delete_failed'));
+              console.error(error);
+            }
+          );
+        }
+      )
+    }
+
+    /**
+     * Asynchronously re-fetches the events from the given calendar
+     * @param calendar
+     */
+    $scope.sync = function (calendar) {
+      ICalendar.sync(
+        { id: calendar.id },
+        function () {
+          // success
+          growl.info(_t('icalendar.refresh'));
+        }, function (error) {
+          // failed
+          growl.error(_t('icalendar.sync_failed'));
+          console.error(error);
+        }
+      )
+    }
+  }
+]);
