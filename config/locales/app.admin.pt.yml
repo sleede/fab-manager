@@ -88,6 +88,28 @@ pt:
           view_reservations: "Ver reservas"                                                        # translation_missing
           legend: "legenda"
 
+      icalendar:
+        icalendar:
+          icalendar_import: "iCalendar import"                                                     # translation_missing
+          intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every nights and the events are shown in the public calendar."   # translation_missing
+          new_import: "New ICS import"                                                             # translation_missing
+          color: "Colour"                                                                          # translation_missing
+          text_color: "Text colour"                                                                # translation_missing
+          url: "URL"                                                                               # translation_missing
+          name: "Name"                                                                             # translation_missing
+          example: "Example"                                                                       # translation_missing
+          display: "Display"                                                                       # translation_missing
+          hide_text: "Hide the text"                                                               # translation_missing
+          hidden: "Hidden"                                                                         # translation_missing
+          shown: "Shown"                                                                           # translation_missing
+          create_error: "Unable to create iCalendar import. Please try again later"                # translation_missing
+          delete_failed: "Unable to delete the iCalendar import. Please try again later"           # translation_missing
+          refresh: "Updating..."                                                                   # translation_missing
+          sync_failed: "Unable to synchronize the URL. Please try again later"                     # translation_missing
+          confirmation_required: "Confirmation required"                                           # translation_missing
+          confirm_delete_import: "Do you really want to delete this iCalendar import?"             # translation_missing
+          delete_success: "iCalendar import successfully deleted"                                  # translation_missing
+
       project_elements:
         # management of the projects' components
         project_elements:

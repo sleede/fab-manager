@@ -106,6 +106,9 @@ fr:
           delete_failed: "Impossible de supprimer l'import iCalendar. Veuillez réessayer ultérieurement"
           refresh: "Mise à jour en cours..."
           sync_failed: "Impossible de synchroniser l'URL. Veuillez réessayer ultérieurement"
+          confirmation_required: "Confirmation requise"
+          confirm_delete_import: "Êtes-vous sur de vouloir supprimer cet import iCalendar ?"
+          delete_success: "L'import iCalendar a bien été supprimé"
 
       project_elements:
         # gestion des éléments constituant les projets

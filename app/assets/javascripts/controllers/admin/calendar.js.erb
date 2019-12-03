@@ -762,8 +762,8 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
  * Controller used in the iCalendar (ICS) imports management page
  */
 
-Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCalendars', 'ICalendar', 'growl', '_t',
-  function ($scope, iCalendars, ICalendar, growl, _t) {
+Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCalendars', 'ICalendar', 'dialogs', 'growl', '_t',
+  function ($scope, iCalendars, ICalendar, dialogs, growl, _t) {
     // list of ICS sources
     $scope.calendars = iCalendars;
 
@@ -813,17 +813,33 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
      * @param calendar
      */
     $scope.delete = function (calendar) {
-      ICalendar.delete(
-        { id: calendar.id },
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('icalendar.confirmation_required'),
+                msg: _t('icalendar.confirm_delete_import')
+              };
+            }
+          }
+        },
         function () {
-          // success
-          const idx = $scope.calendars.indexOf(calendar);
-          $scope.calendars.splice(idx, 1);
-        }, function (error) {
-          // failed
-          growl.error(_t('icalendar.delete_failed'));
-          console.error(error);
-        });
+          ICalendar.delete(
+            { id: calendar.id },
+            function () {
+              // success
+              const idx = $scope.calendars.indexOf(calendar);
+              $scope.calendars.splice(idx, 1);
+              growl.info(_t('icalendar.delete_success'));
+            }, function (error) {
+              // failed
+              growl.error(_t('icalendar.delete_failed'));
+              console.error(error);
+            }
+          );
+        }
+      )
     }
 
     /**

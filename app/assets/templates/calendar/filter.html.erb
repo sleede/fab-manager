@@ -36,7 +36,7 @@
   <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'calendar.show_unavailables' }}</h3>
   <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.dispo" ng-change="filterAvailabilities(filter)">
 </div>
-<div class="m-t">
+<div class="m-t" ng-hide="externals.length == 0">
   <div class="row">
     <h3 class="col-md-11 col-sm-11 col-xs-11 text-black" translate>{{ 'calendar.externals' }}</h3>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="filter.externals" ng-change="toggleFilter('externals', filter)">

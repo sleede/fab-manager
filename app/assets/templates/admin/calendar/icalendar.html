@@ -40,7 +40,7 @@
         <tr ng-repeat="calendar in calendars">
           <td class="calendar-name">{{calendar.name}}</td>
           <td class="calendar-url"><a href="{{calendar.url}}" target="_blank">{{calendar.url}}</a></td>
-          <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.textHidden ? '' : 'icalendar.example' }}</span>
+          <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.text_hidden ? '' : 'icalendar.example' }}</span>
           <td class="calendar-actions">
             <button class="btn btn-info" ng-click="sync(calendar)"><i class="fa fa-refresh"></i></button>
             <button class="btn btn-danger" ng-click="delete(calendar)"><i class="fa fa-trash"></i></button>
@@ -72,7 +72,7 @@
           <div class="input-group-addon">
             <i class="fa fa-paint-brush"></i>
           </div>
-          <input type="text" minicolors ng-model="newCalendar.text_color" class="form-control" placeholder="{{ 'icalendar.text_color' | translate}}" required/>
+          <input type="text" minicolors ng-model="newCalendar.text_color" class="form-control" placeholder="{{ 'icalendar.text_color' | translate}}" ng-required="!newCalendar.text_hidden"/>
         </div>
         <div class="input-group">
           <label for="hideText" class="control-label m-r" translate>{{ 'icalendar.hide_text' }}</label>
