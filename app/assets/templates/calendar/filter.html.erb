@@ -43,7 +43,7 @@
   </div>
 
   <div class="row" ng-repeat="e in externals">
-    <span class="col-md-11 col-sm-11 col-xs-11">{{::e.name}}</span>
+    <span ng-style="calendarStyle(e)" class="col-md-11 col-sm-11 col-xs-11 external-calendar-legend">{{::e.name}}</span>
     <input class="col-md-1 col-sm-1 col-xs-1" type="checkbox" ng-model="e.checked" ng-change="filterAvailabilities(filter)">
   </div>
 </div>

@@ -66,6 +66,17 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       return uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
     };
 
+    /**
+     * Return a CSS-like style of the given calendar configuration
+     * @param calendar
+     */
+    $scope.calendarStyle = function (calendar) {
+      return {
+        'border-color': calendar.color,
+        'color': calendar.text_color,
+      };
+    };
+
     // a variable for formation/machine/event/dispo checkbox is or not checked
     $scope.filter = {
       trainings: isSelectAll('trainings', $scope),
