@@ -14,6 +14,7 @@
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Added freeCAD files as default allowed extensions
+- Rake task to sync local users with Stripe
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]

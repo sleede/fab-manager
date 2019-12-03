@@ -45,5 +45,17 @@ namespace :fablab do
         File.write(cassette_file, cassette)
       end
     end
+
+    desc 'sync users to the stripe database'
+    task sync_members: :environment do
+      User.with_role(:member).each do |member|
+        begin
+          stp_customer = Stripe::Customer.retrieve member.stp_customer_id
+          StripeWorker.perform_async(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
+        rescue Stripe::InvalidRequestError
+          StripeWorker.perform_async(:create_stripe_customer, member.id)
+        end
+      end
+    end
   end
 end

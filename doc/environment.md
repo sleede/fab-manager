@@ -61,6 +61,7 @@ Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
 **MANDATORY**: Even if you don't want to charge your customers, you must fill this settings. 
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
+If you change these keys during the application lifecycle, you must run `rake fablab:stripe:sync_members`, otherwise your users won't be able to do card payments. 
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
@@ -229,7 +230,7 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
     ADMIN_EMAIL, ADMIN_PASSWORD
 
 Credentials for the first admin user created when seeding the project. 
-By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed.
+By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL
