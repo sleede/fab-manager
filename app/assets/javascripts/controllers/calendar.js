@@ -39,7 +39,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     $scope.spaces = spacesPromise.filter(t => !t.disabled);
 
     // List of external iCalendar sources
-    $scope.externals = iCalendarPromise;
+    $scope.externals = iCalendarPromise.map(e => Object.assign(e, { checked: true }));
 
     // add availabilities source to event sources
     $scope.eventSources = [];
@@ -56,14 +56,25 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
         dispo: filter.dispo
       });
       $scope.calendarConfig.events = availabilitySourceUrl();
-      $scope.externals.filter(e => e.checked).forEach(e => {
-        $scope.eventSources.push({
-          url: `/api/i_calendar/${e.id}/events`,
-          textColor: e.text_color,
-          color: e.color
-        });
+      // external iCalendar events sources
+      $scope.externals.forEach(e => {
+        if (e.checked) {
+          if (!$scope.eventSources.some(evt => evt.id === e.id)) {
+            $scope.eventSources.push({
+              id: e.id,
+              url: `/api/i_calendar/${e.id}/events`,
+              textColor: e.text_color || '#000',
+              color: e.color
+            });
+          }
+        } else {
+          if ($scope.eventSources.some(evt => evt.id === e.id)) {
+            const idx = $scope.eventSources.findIndex(evt => evt.id === e.id);
+            $scope.eventSources.splice(idx, 1);
+          }
+        }
       });
-      return uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
+      uiCalendarConfig.calendars.calendar.fullCalendar('refetchEventSources');
     };
 
     /**
@@ -73,7 +84,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     $scope.calendarStyle = function (calendar) {
       return {
         'border-color': calendar.color,
-        'color': calendar.text_color,
+        'color': calendar.text_color
       };
     };
 
@@ -142,8 +153,49 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
 
     /* PRIVATE SCOPE */
 
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = () => {
+      // fullCalendar (v2) configuration
+      $scope.calendarConfig = CalendarConfig({
+        events: availabilitySourceUrl(),
+        slotEventOverlap: true,
+        header: {
+          left: 'month agendaWeek agendaDay',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss')),
+        maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss')),
+        defaultView: window.innerWidth <= 480 ? 'agendaDay' : 'agendaWeek',
+        eventClick (event, jsEvent, view) {
+          return calendarEventClickCb(event, jsEvent, view);
+        },
+        viewRender (view, element) {
+          return viewRenderCb(view, element);
+        },
+        eventRender (event, element, view) {
+          return eventRenderCb(event, element);
+        }
+      });
+      $scope.externals.forEach(e => {
+        if (e.checked) {
+          $scope.eventSources.push({
+            id: e.id,
+            url: `/api/i_calendar/${e.id}/events`,
+            textColor: e.text_color || '#000',
+            color: e.color
+          });
+        }
+      });
+    };
+
+    /**
+     * Callback triggered when an event object is clicked in the fullCalendar view
+     */
     const calendarEventClickCb = function (event, jsEvent, view) {
-    // current calendar object
+      // current calendar object
       const { calendar } = uiCalendarConfig.calendars;
       if (event.available_type === 'machines') {
         currentMachineEvent = event;
@@ -168,8 +220,8 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     // agendaDay view: disable slotEventOverlap
     // agendaWeek view: enable slotEventOverlap
     const toggleSlotEventOverlap = function (view) {
-    // set defaultView, because when we change slotEventOverlap
-    // ui-calendar will trigger rerender calendar
+      // set defaultView, because when we change slotEventOverlap
+      // ui-calendar will trigger rerender calendar
       $scope.calendarConfig.defaultView = view.type;
       const today = currentMachineEvent ? currentMachineEvent.start : moment().utc().startOf('day');
       if ((today > view.intervalStart) && (today < view.intervalEnd) && (today !== view.intervalStart)) {
@@ -184,15 +236,22 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       }
     };
 
-    // function is called when calendar view is rendered or changed
+    /**
+     * This function is called when calendar view is rendered or changed
+     * @see https://fullcalendar.io/docs/v3/viewRender#v2
+     */
     const viewRenderCb = function (view, element) {
       toggleSlotEventOverlap(view);
       if (view.type === 'agendaDay') {
-      // get availabilties by 1 day for show machine slots
+        // get availabilties by 1 day for show machine slots
         return uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
       }
     };
 
+    /**
+     * Callback triggered by fullCalendar when it is about to render an event.
+     * @see https://fullcalendar.io/docs/v3/eventRender#v2
+     */
     const eventRenderCb = function (event, element) {
       if (event.tags && event.tags.length > 0) {
         let html = '';
@@ -211,30 +270,6 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
     };
 
     var availabilitySourceUrl = () => `/api/availabilities/public?${$.param(getFilter())}`;
-
-    const initialize = () =>
-    // fullCalendar (v2) configuration
-      $scope.calendarConfig = CalendarConfig({
-        events: availabilitySourceUrl(),
-        slotEventOverlap: true,
-        header: {
-          left: 'month agendaWeek agendaDay',
-          center: 'title',
-          right: 'today prev,next'
-        },
-        minTime: moment.duration(moment(bookingWindowStart.setting.value).format('HH:mm:ss')),
-        maxTime: moment.duration(moment(bookingWindowEnd.setting.value).format('HH:mm:ss')),
-        defaultView: window.innerWidth <= 480 ? 'agendaDay' : 'agendaWeek',
-        eventClick (event, jsEvent, view) {
-          return calendarEventClickCb(event, jsEvent, view);
-        },
-        viewRender (view, element) {
-          return viewRenderCb(view, element);
-        },
-        eventRender (event, element, view) {
-          return eventRenderCb(event, element);
-        }
-      });
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

@@ -306,6 +306,7 @@ pt:
             machines: "Máquinas"
             spaces: "Espaços"
             events: "Eventos"
+            externals: "Outras agendas"
 
         spaces_list:
           # list of spaces
