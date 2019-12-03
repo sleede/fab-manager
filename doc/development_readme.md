@@ -44,7 +44,7 @@ This procedure is not easy to follow so if you don't need to write some code for
 
 6. Create a docker network for fab-manager.
    You may have to change the network address if it is already in use.
-   >  If you're using MacOS, this is not required.
+   > 🍏 If you're using MacOS, this is not required.
    ```bash
    docker network create --subnet=172.18.0.0/16 fabmanager
    ```
@@ -96,7 +96,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    yarn install
    ```
 
-12. Create the default configuration files **and configure them!** (see the [environment configuration documentation](doc/environment.md))
+12. Create the default configuration files **and configure them!** (see the [environment configuration documentation](environment.md))
 
    ```bash
    cp config/database.yml.default config/database.yml
@@ -154,7 +154,7 @@ We will use docker to easily install the required version of PostgreSQL.
    ```
 
 2. Start the PostgreSQL container.
-   >  If you're using MacOS, remove the --network and --ip parameters, and add -p 5432:5432.
+   > 🍏 If you're using MacOS, remove the --network and --ip parameters, and add -p 5432:5432.
    ```bash
    docker run --restart=always -d --name fabmanager-postgres \
    -v $(pwd)/.docker/postgresql:/var/lib/postgresql/data \
@@ -165,10 +165,10 @@ We will use docker to easily install the required version of PostgreSQL.
 3. Configure fab-manager to use it.
    On linux systems, PostgreSQL will be available at 172.18.0.2.
    On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
-   See [environment.md](doc/environment.md) for more details.
+   See [environment.md](environment.md) for more details.
 
 4 . Finally, you may want to have a look at detailed informations about PostgreSQL usage in fab-manager.
-    Some information about that is available in the [PostgreSQL Readme](doc/postgresql_readme.md).
+    Some information about that is available in the [PostgreSQL Readme](postgresql_readme.md).
 
 <a name="elasticsearch"></a>
 ## ElasticSearch
@@ -194,7 +194,7 @@ In FabManager, it is used for the admin's statistics module and to perform searc
    ```
 
 3. Start the ElasticSearch container.
-   >  If you're using MacOS, remove the --network and --ip parameters, and add -p 9200:9200.
+   > 🍏 If you're using MacOS, remove the --network and --ip parameters, and add -p 9200:9200.
    ```bash
    docker run --restart=always -d --name fabmanager-elastic \
    -v $(pwd)/.docker/elasticsearch/config:/usr/share/elasticsearch/config \
@@ -208,7 +208,7 @@ In FabManager, it is used for the admin's statistics module and to perform searc
 4. Configure fab-manager to use it.
    On linux systems, ElasticSearch will be available at 172.18.0.3.
    On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
-   See [environment.md](doc/environment.md) for more details.
+   See [environment.md](environment.md) for more details.
 
 <a name="rebuild-stats"></a>
 ### Rebuild statistics

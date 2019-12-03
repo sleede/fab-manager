@@ -61,13 +61,14 @@ Use it to generate a similar localised PNG image which keep the default image si
 <a name="i18n-configuration"></a>
 ## Configuration
 
-Locales configurations are made in `config/application.yml`.
+In development, locales configurations are made in [config/application.yml](../config/application.yml.default).
+In production, locales configuration are made in the [config/env](../docker/env.example) file.
 If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
 
 <a name="i18n-settings"></a>
 ### Settings
 
-Please refer to the [environment configuration documentation](doc/environment.md#internationalization-settings)
+Please refer to the [environment configuration documentation](environment.md#internationalization-settings)
 
 <a name="i18n-apply"></a>
 ### Applying changes

@@ -1,9 +1,9 @@
-# Install Fabmanager app in production with Docker
+# Install Fab-Manager in production with docker-compose
 
-This README tries to describe all the steps to put a fabmanager app into production on a server, based on a solution using Docker and Docker-compose.
+This document will guide you through all the steps needed to set up your Fab-Manager app on a production server, based on a solution using Docker and Docker-compose.
 We recommend DigitalOcean, but these steps will work on any Docker-compatible cloud provider or local server.
 
-In order to make it work, please use the same directories structure as described in this guide in your fabmanager app folder.
+In order to make it work, please use the same directories structure as described in this guide in your Fab-Manager app folder.
 You will need to be root through the rest of the setup.
 
 ##### Table of contents
@@ -57,7 +57,7 @@ On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 
 This way, Docker and Docker-compose are preinstalled.
 Choose a datacenter and set the hostname as your domain name.
 
-With other providers, choose a [supported operating system](https://github.com/sleede/fab-manager/blob/master/README.md#software-stack) and install docker on it:
+With other providers, choose a [supported operating system](../README.md#software-stack) and install docker on it:
 - [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) 
 - [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 
@@ -68,9 +68,9 @@ Then install [Docker Compose](https://docs.docker.com/compose/install/)
 There are many domain name registrars on the internet, you may choose one that fit your needs.
 You can find an exhaustive list [on the ICANN website](https://www.icann.org/registrar-reports/accredited-list.html)
 
-1. Once done, buy a domain name on it 
+1. Once done, buy a domain name on it
 2. Replace the IP address of the domain with the IP address of your VPS (This is a DNS record type A)
-3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient. 
+3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient.
 
 ### Connect through SSH
 
@@ -111,7 +111,7 @@ vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
 ```
 You need to carefully configure each variable before starting fab-manager.
-Please refer to the [environment configuration documentation](../doc/environment.md) for explanations about those variables.
+Please refer to the [environment configuration documentation](environment.md) for explanations about those variables.
 
 
 ### Setup nginx configuration
