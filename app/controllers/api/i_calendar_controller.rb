@@ -36,8 +36,7 @@ class API::ICalendarController < API::ApiController
   end
 
   def sync
-    worker = ICalendarImportWorker.new
-    worker.perform([params[:id]])
+    ICalendarImportWorker.perform_async([params[:id]])
     render json: { processing: [params[:id]] }, status: :created
   end
 

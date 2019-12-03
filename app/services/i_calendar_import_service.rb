@@ -7,25 +7,29 @@ class ICalendarImportService
     require 'uri'
     require 'icalendar'
 
-    events = []
+    uids = []
 
     i_cal = ICalendar.find(i_calendar_id)
     ics = Net::HTTP.get(URI.parse(i_cal.url))
     cals = Icalendar::Calendar.parse(ics)
 
+    # create new events and update existings
     cals.each do |cal|
       cal.events.each do |evt|
-        events.push(
-          uid: evt.uid,
-          dtstart: evt.dtstart,
-          dtend: evt.dtend,
-          summary: evt.summary,
-          description: evt.description,
-          i_calendar_id: i_calendar_id
+        uids.push(evt.uid.to_s)
+        ICalendarEvent.update_or_create_by(
+          { uid: evt.uid.to_s },
+          {
+            dtstart: evt.dtstart,
+            dtend: evt.dtend,
+            summary: evt.summary,
+            description: evt.description,
+            i_calendar_id: i_calendar_id
+          }
         )
       end
     end
-
-    ICalendarEvent.create!(events)
+    # remove deleted events
+    ICalendarEvent.where(i_calendar_id: i_calendar_id).where.not(uid: uids).destroy_all
   end
 end
