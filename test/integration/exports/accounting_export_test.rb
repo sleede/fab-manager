@@ -19,7 +19,7 @@ class Exports::AccountingExportTest < ActionDispatch::IntegrationTest
              encoding: 'ISO-8859-1',
              date_format: '%d/%m/%Y',
              start_date: '2012-03-12T00:00:00.000Z',
-             end_date: DateTime.now.utc.iso8601,
+             end_date: DateTime.current.utc.iso8601,
              label_max_length: 50,
              decimal_separator: ',',
              export_invoices_at_zero: false

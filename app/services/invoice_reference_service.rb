@@ -3,7 +3,7 @@
 # Provides methods to generate invoice references
 class InvoiceReferenceService
   class << self
-    def generate_reference(invoice, date: Time.now, avoir: false)
+    def generate_reference(invoice, date: DateTime.current, avoir: false)
       pattern = Setting.find_by(name: 'invoice_reference').value
 
       reference = replace_invoice_number_pattern(pattern, invoice)

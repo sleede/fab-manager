@@ -19,7 +19,7 @@ class UserService
     )
     user.build_statistic_profile(
       gender: true,
-      birthday: Time.now
+      birthday: DateTime.current
     )
 
     saved = user.save

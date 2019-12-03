@@ -7,7 +7,7 @@ class CouponExpirationValidator < ActiveModel::Validator
     current = record.valid_until
 
     unless current.blank?
-      if current.end_of_day < Time.now
+      if current.end_of_day < DateTime.current
         record.errors[:valid_until] << I18n.t('errors.messages.cannot_be_in_the_past')
       end
 

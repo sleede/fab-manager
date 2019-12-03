@@ -18,7 +18,7 @@ class Availabilities::AvailabilitiesService
     slots = []
     availabilities.each do |a|
       ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
+        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current
 
         slot = Slot.new(
           start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
@@ -44,7 +44,7 @@ class Availabilities::AvailabilitiesService
     slots = []
     availabilities.each do |a|
       ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
+        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current
 
         slot = Slot.new(
           start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
@@ -69,7 +69,7 @@ class Availabilities::AvailabilitiesService
     # first, we get the already-made reservations
     reservations = user.reservations.where("reservable_type = 'Training'")
     reservations = reservations.where('reservable_id = :id', id: training_id.to_i) if training_id.is_number?
-    reservations = reservations.joins(:slots).where('slots.start_at > ?', Time.now)
+    reservations = reservations.joins(:slots).where('slots.start_at > ?', DateTime.current)
 
     # visible availabilities depends on multiple parameters
     availabilities = training_availabilities(training_id, user)
@@ -83,7 +83,7 @@ class Availabilities::AvailabilitiesService
   private
 
   def subscription_year?(user)
-    user.subscription && user.subscription.plan.interval == 'year' && user.subscription.expired_at >= Time.now
+    user.subscription && user.subscription.plan.interval == 'year' && user.subscription.expired_at >= DateTime.current
   end
 
   # member must have validated at least 1 training and must have a valid yearly subscription.
@@ -95,21 +95,21 @@ class Availabilities::AvailabilitiesService
     Reservation.where('reservable_type = ? and reservable_id = ?', reservable.class.name, reservable.id)
                .includes(:slots, statistic_profile: [user: [:profile]])
                .references(:slots, :user)
-               .where('slots.start_at > ?', Time.now)
+               .where('slots.start_at > ?', DateTime.current)
   end
 
   def availabilities(reservable, type, user)
     if user.admin?
       reservable.availabilities
                 .includes(:tags)
-                .where('end_at > ? AND available_type = ?', Time.now, type)
+                .where('end_at > ? AND available_type = ?', DateTime.current, type)
                 .where(lock: false)
     else
       end_at = @maximum_visibility[:other]
       end_at = @maximum_visibility[:year] if subscription_year?(user)
       reservable.availabilities
                 .includes(:tags)
-                .where('end_at > ? AND end_at < ? AND available_type = ?', Time.now, end_at, type)
+                .where('end_at > ? AND end_at < ? AND available_type = ?', DateTime.current, end_at, type)
                 .where('availability_tags.tag_id' => user.tag_ids.concat([nil]))
                 .where(lock: false)
     end
@@ -126,14 +126,14 @@ class Availabilities::AvailabilitiesService
     # 1) an admin (he can see all future availabilities)
     if @current_user.admin?
       availabilities.includes(:tags, :slots, trainings: [:machines])
-                    .where('availabilities.start_at > ?', Time.now)
+                    .where('availabilities.start_at > ?', DateTime.current)
                     .where(lock: false)
     # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
       end_at = @maximum_visibility[:other]
       end_at = @maximum_visibility[:year] if show_extended_slots?(user)
       availabilities.includes(:tags, :slots, :availability_tags, trainings: [:machines])
-                    .where('availabilities.start_at > ? AND availabilities.start_at < ?', Time.now, end_at)
+                    .where('availabilities.start_at > ? AND availabilities.start_at < ?', DateTime.current, end_at)
                     .where('availability_tags.tag_id' => user.tag_ids.concat([nil]))
                     .where(lock: false)
     end

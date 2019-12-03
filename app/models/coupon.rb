@@ -17,7 +17,7 @@ class Coupon < ActiveRecord::Base
   validates_with CouponExpirationValidator
 
   scope :disabled, -> { where(active: false) }
-  scope :expired, -> { where('valid_until IS NOT NULL AND valid_until < ?', DateTime.now) }
+  scope :expired, -> { where('valid_until IS NOT NULL AND valid_until < ?', DateTime.current) }
   scope :sold_out, lambda {
     joins(:invoices).select('coupons.*, COUNT(invoices.id) as invoices_count').group('coupons.id')
                     .where.not(max_usages: nil).having('COUNT(invoices.id) >= coupons.max_usages')
@@ -26,7 +26,7 @@ class Coupon < ActiveRecord::Base
     joins('LEFT OUTER JOIN invoices ON invoices.coupon_id = coupons.id')
       .select('coupons.*, COUNT(invoices.id) as invoices_count')
       .group('coupons.id')
-      .where('active = true AND (valid_until IS NULL OR valid_until >= ?)', DateTime.now)
+      .where('active = true AND (valid_until IS NULL OR valid_until >= ?)', DateTime.current)
       .having('COUNT(invoices.id) < coupons.max_usages OR coupons.max_usages IS NULL')
   }
 
@@ -55,7 +55,7 @@ class Coupon < ActiveRecord::Base
   def status(user_id = nil, amount = nil)
     if !active?
       'disabled'
-    elsif !valid_until.nil? && valid_until.at_end_of_day < DateTime.now
+    elsif !valid_until.nil? && valid_until.at_end_of_day < DateTime.current
       'expired'
     elsif !max_usages.nil? && invoices.count >= max_usages
       'sold_out'

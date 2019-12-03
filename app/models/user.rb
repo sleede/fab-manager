@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_plan
-    return nil if subscription.nil? || subscription.expired_at < Time.now
+    return nil if subscription.nil? || subscription.expired_at < DateTime.current
 
     subscription.plan
   end
@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
 
     # remove the token
     self.auth_token = nil
-    self.merged_at = DateTime.now
+    self.merged_at = DateTime.current
 
     # check that the email duplication was resolved
     if sso_user.email.end_with? '-duplicate'

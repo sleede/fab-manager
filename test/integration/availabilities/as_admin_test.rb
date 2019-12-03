@@ -37,7 +37,7 @@ module Availabilities
 
       # Check that we din't get availabilities from the past
       availabilities.each do |a|
-        assert_not a[:start] < DateTime.now, 'retrieved a slot in the past'
+        assert_not a[:start] < DateTime.current, 'retrieved a slot in the past'
       end
     end
 
@@ -46,7 +46,7 @@ module Availabilities
       Rails.application.secrets.fablab_without_spaces = true
 
       # this simulates a fullCalendar (v2) call
-      start_date = DateTime.now.utc.strftime('%Y-%m-%d')
+      start_date = DateTime.current.utc.strftime('%Y-%m-%d')
       end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
       tz = Time.zone.tzinfo.name
       get "/api/availabilities?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1487169767960"
@@ -68,7 +68,7 @@ module Availabilities
 
     test 'get calendar availabilities with spaces' do
       # this simulates a fullCalendar (v2) call
-      start_date = DateTime.now.utc.strftime('%Y-%m-%d')
+      start_date = DateTime.current.utc.strftime('%Y-%m-%d')
       end_date = 7.days.from_now.utc.strftime('%Y-%m-%d')
       tz = Time.zone.tzinfo.name
       get "/api/availabilities?start=#{start_date}&end=#{end_date}&timezone=#{tz}&_=1487169767960"
