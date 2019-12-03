@@ -33,7 +33,7 @@
           <th style="width: 35%;" translate>{{ 'icalendar.name' }}</th>
           <th style="width: 35%;" translate>{{ 'icalendar.url' }}</th>
           <th translate>{{ 'icalendar.display' }}</th>
-          <th style="width: 10%;"></th>
+          <th style="width: 20%;"></th>
         </tr>
         </thead>
         <tbody>
@@ -72,12 +72,12 @@
           <div class="input-group-addon">
             <i class="fa fa-paint-brush"></i>
           </div>
-          <input type="text" minicolors ng-model="newCalendar.textColor" class="form-control" placeholder="{{ 'icalendar.text_color' | translate}}" required/>
+          <input type="text" minicolors ng-model="newCalendar.text_color" class="form-control" placeholder="{{ 'icalendar.text_color' | translate}}" required/>
         </div>
         <div class="input-group">
           <label for="hideText" class="control-label m-r" translate>{{ 'icalendar.hide_text' }}</label>
           <input bs-switch
-                 ng-model="newCalendar.textHidden"
+                 ng-model="newCalendar.text_hidden"
                  id="hideText"
                  type="checkbox"
                  class="form-control"

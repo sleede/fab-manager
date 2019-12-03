@@ -2,7 +2,7 @@
 
 # iCalendar (RFC 5545) files, stored by URL and kept with their display configuration
 class ICalendar < ActiveRecord::Base
-  has_many :i_calendar_events
+  has_many :i_calendar_events, dependent: :destroy
 
   after_create :sync_events
 

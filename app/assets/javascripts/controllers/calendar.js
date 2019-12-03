@@ -59,7 +59,7 @@ Application.Controllers.controller('CalendarController', ['$scope', '$state', '$
       $scope.externals.filter(e => e.checked).forEach(e => {
         $scope.eventSources.push({
           url: `/api/i_calendar/${e.id}/events`,
-          textColor: e.textColor,
+          textColor: e.text_color,
           color: e.color
         });
       });
