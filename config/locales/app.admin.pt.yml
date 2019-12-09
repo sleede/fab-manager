@@ -242,8 +242,8 @@ pt:
           group: "Grupo"
           prominence: "Relevância"
           price: "Preço"
-          machine_hours: "Horas máquina"
-          these_prices_match_machine_hours_rates_: "Estes preços correspondem às horas de trabalho"
+          machine_hours: "Machine slots"                                                             # translation_missing
+          these_prices_match_machine_hours_rates_: "Estes preços correspondem às {{DURATION}} minutos de trabalho"
           _without_subscriptions: "sem assinaturas"
           machines: "Máquinas"
           credits: "Créditos"
@@ -251,7 +251,7 @@ pt:
           related_trainings: "Treinamentos relacionados"
           add_a_machine_credit: "Adicionar crédito de máquina"
           machine: "Máquina"
-          hours: "Horas"
+          hours: "Slots of {{DURATION}} minutes"                                                     # translation_missing
           related_subscriptions: "Assinaturas relacionadas"
           please_specify_a_number: "Por favor especifique um número."
           none: "Vazio"  # grammar note: concordance with "training".
@@ -296,7 +296,7 @@ pt:
           forever: "Cada uso"
           valid_until: "Válido até (incluindo)"
           spaces: "Espaços"
-          these_prices_match_space_hours_rates_: "Estes preços correspondem às taxas de horários de espaço"
+          these_prices_match_space_hours_rates_: "Estes preços correspondem às {{DURATION}} minutos de espaço"
           add_a_space_credit: "Adicionar espaço de crédito"
           space: "Espaço"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Erro: um crédito que vincula esse espaço com essa assinatura já existe."
@@ -322,14 +322,14 @@ pt:
             successfully_created_subscriptions_dont_forget_to_redefine_prices: "Assinaturas criadas com sucesso. Não se esqueça de redefinir os preços."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossível salvar este usuário. Certifique-se que ele não possui o mesmo nome de outro usuário."
         edit:
-          # edit a subscription plan / machine hours prices
+          # edit a subscription plan / machine slot prices
           edit_plan:
             subscription_plan: "Plano de assinatura:"
             prices: "Preços"
             copy_prices_from: "Copiar preços de"
             machines: "Máquinas"
             machine: "Máquina"
-            hourly_rate: "Taxa horária"
+            hourly_rate: "Price by slot"                                                            # translation_missing
             spaces: "Espaços"
             space: "Espaço"
             unable_to_save_subscription_changes_please_try_again: "Impossível salvar mudanças da assinatura. Por favor tente novamente."
@@ -339,7 +339,7 @@ pt:
         invoices:
           # list of all invoices & invoicing parameters
           invoices: "Faturas"
-          accounting_periods: "Accounting periods"       # missing translation
+          accounting_periods: "Accounting periods"                                                    # missing translation
           invoices_list: "Lista de faturas"
           filter_invoices: "Filtrar faturas"
           invoice_num_: "Fatura #:"

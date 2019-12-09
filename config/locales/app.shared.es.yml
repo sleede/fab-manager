@@ -443,7 +443,7 @@ es:
           _subscription: "suscripción"
           cost_of_the_subscription: "Coste de la suscripción"
           confirm_and_pay: "Confirmar y pagar"
-          you_have_settled_the_following_TYPE: "Acaba de seleccionar {TYPE, select, Machine{machine hours} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_the_following_TYPE: "Acaba de seleccionar {TYPE, select, Machine{machine slots} Training{training} other{elements}}:"  # messageFormat interpolation           #translation_missing
           you_have_settled_a_: "Ha establecido una"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Gracias. Su pago se ha registrado con éxito."

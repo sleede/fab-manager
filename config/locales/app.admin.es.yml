@@ -242,8 +242,8 @@ es:
           group: "Grupo"
           prominence: "Prominencia"
           price: "Precio"
-          machine_hours: "Horas de la máquina"
-          these_prices_match_machine_hours_rates_: "Estos precios se ajustan a la tarifas de máquina por horas"
+          machine_hours: "Machine slots"                                                          # translation_missing
+          these_prices_match_machine_hours_rates_: "Estos precios se ajustan a la tarifas de máquina por {{DURATION}} minutas"
           _without_subscriptions: "Sin suscripciones"
           machines: "Máquinas"
           credits: "Créditos"
@@ -251,7 +251,7 @@ es:
           related_trainings: "Formación relacionada"
           add_a_machine_credit: "Agregar un crédito de máquina"
           machine: "Máquina"
-          hours: "Horas"
+          hours: "Slots of {{DURATION}} minutes"                                                   # translation_missing
           related_subscriptions: "Suscripciónes relacionada"
           please_specify_a_number: "Por favor, especifique un número."
           none: "Nada"  # nota gramatical: concordancia con "formación".
@@ -296,7 +296,7 @@ es:
           forever: "Cada uso"
           valid_until: "Válido hasta (incluido)"
           spaces: "Espacios"
-          these_prices_match_space_hours_rates_: "Estos precios coinciden con las tarifas de espacio por horas"
+          these_prices_match_space_hours_rates_: "Estos precios coinciden con las tarifas de espacio por {{DURATION}} minutas"
           add_a_space_credit: "Añadir un crédito de espacio"
           space: "Espacio"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error: un crédito que vincula este espacio con esa suscripción ya existe."
@@ -322,14 +322,14 @@ es:
             successfully_created_subscriptions_dont_forget_to_redefine_prices: "Suscripción(es) creada correctamente. No olvide redefinir los precios."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "No se puede guardar este usuario. Compruebe que no hay un usuario ya definido con el mismo nombre."
         edit:
-          # edit a subscription plan / machine hours prices
+          # edit a subscription plan / machine slot prices
           edit_plan:
             subscription_plan: "Plan de suscripción:"
             prices: "Precios"
             copy_prices_from: "Copia los precios desde"
             machines: "Máquinas"
             machine: "Máquina"
-            hourly_rate: "Tarifa por hora"
+            hourly_rate: "Tarifa por slot"                                                            # translation_missing
             spaces: "Espacios"
             space: "Espacio"
             unable_to_save_subscription_changes_please_try_again: "No se pueden guardar los cambios de suscripción. Por favor, inténtelo de nuevo."

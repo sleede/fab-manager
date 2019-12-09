@@ -322,7 +322,7 @@ fr:
         statistics_global: "de toutes les statistiques"
         statistics_account: "des statistiques d'inscriptions"
         statistics_event: "des statistiques sur les évènements"
-        statistics_machine: "des statistiques d'heures machines"
+        statistics_machine: "des statistiques de créneaux machines"
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
@@ -355,7 +355,7 @@ fr:
   statistics:
     # outil de statistiques pour les administrateurs
     subscriptions: "Abonnements"
-    machines_hours: "Heures machines"
+    machines_hours: "Créneaux machines"
     spaces: "Espaces"
     trainings: "Formations"
     events: "Évènements"

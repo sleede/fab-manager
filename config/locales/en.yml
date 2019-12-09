@@ -322,7 +322,7 @@ en:
         statistics_global: "of all the statistics"
         statistics_account: "of the registration statistics"
         statistics_event: "of statistics about events"
-        statistics_machine: "of statistics about machine hours"
+        statistics_machine: "of statistics about machine slots"
         statistics_project: "of statistics about projects"
         statistics_subscription: "of subscription statistics"
         statistics_training: "of statistics about trainings"
@@ -354,7 +354,7 @@ en:
   statistics:
     # statistics tools for admins
     subscriptions: "Subscriptions"
-    machines_hours: "Machines hours"
+    machines_hours: "Machines slots"
     spaces: "Spaces"
     trainings: "Trainings"
     events: "Events"

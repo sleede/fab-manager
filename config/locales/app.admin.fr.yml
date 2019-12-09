@@ -242,8 +242,8 @@ fr:
           group: "Groupe"
           prominence: "Importance"
           price: "Prix"
-          machine_hours: "Heures machines"
-          these_prices_match_machine_hours_rates_: "Ces tarifs correspondent au prix d'une heure machine"
+          machine_hours: "Créneaux machines"
+          these_prices_match_machine_hours_rates_: "Ces tarifs correspondent au prix de {{DURATION}} minutes d'utilisation d'une machine, "  # angular interpolation
           _without_subscriptions: "sans abonnement"
           machines: "Machines"
           credits: "Crédits"
@@ -251,7 +251,7 @@ fr:
           related_trainings: "Formations associées"
           add_a_machine_credit: "Ajouter un crédit Machine"
           machine: "Machine"
-          hours: "Heures"
+          hours: "Créneaux de {{DURATION}} minutes"
           related_subscriptions: "Abonnements associés"
           please_specify_a_number: "Veuillez spécifier un nombre."
           none: "Aucune"  # grammar note: concordance with "training".
@@ -296,7 +296,7 @@ fr:
           forever: "À chaque utilisation"
           valid_until: "Valable jusqu'au (inclus)"
           spaces: "Espaces"
-          these_prices_match_space_hours_rates_: "Ces tarifs correspondent au prix d'une heure espace"
+          these_prices_match_space_hours_rates_: "Ces tarifs correspondent au prix de {{DURATION}} minutes d'utilisation d'un espace, "
           add_a_space_credit: "Ajouter un crédit Espace"
           space: "Espace"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Erreur : un crédit associant cet espace et cet abonnement existe déjà."
@@ -322,14 +322,14 @@ fr:
             successfully_created_subscriptions_dont_forget_to_redefine_prices: "Création du/des abonnement(s) réussie. N'oubliez pas de redéfinir les tarifs."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossible d'enregistrer cet utilisateur. Vérifiez qu'il n'existe pas déjà un utilisateur du même nom."
         edit:
-          # modifier une formule d'abonnement / les prix des heures machines
+          # modifier une formule d'abonnement / les prix des créneaux machines
           edit_plan:
             subscription_plan: "Formule d'abonnement :"
             prices: "Tarifs"
             copy_prices_from: "Copier les prix depuis"
             machines: "Machines"
             machine: "Machine"
-            hourly_rate: "Tarif horaire"
+            hourly_rate: "Tarif par créneau"
             spaces: "Espaces"
             space: "Espace"
             unable_to_save_subscription_changes_please_try_again: "Les modifications de l'abonnement n'ont pas pu être enregistrées. Veuillez réessayer."

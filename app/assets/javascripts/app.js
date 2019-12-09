@@ -90,6 +90,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.phoneRequired = Fablab.phoneRequired;
       // Global config: if true, the events are shown in the admin calendar
       $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
+      // Global config: machine/space slot duration
+      $rootScope.slotDuration = Fablab.slotDuration;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

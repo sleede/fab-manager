@@ -242,8 +242,8 @@ en:
           group: "Group"
           prominence: "Prominence"
           price: "Price"
-          machine_hours: "Machine hours"
-          these_prices_match_machine_hours_rates_: "These prices match machine hours rates"
+          machine_hours: "Machine slots"
+          these_prices_match_machine_hours_rates_: "These prices match {{DURATION}} minutes of machine usage, "
           _without_subscriptions: "without subscriptions"
           machines: "Machines"
           credits: "Credits"
@@ -251,7 +251,7 @@ en:
           related_trainings: "Related trainings"
           add_a_machine_credit: "Add a machine credit"
           machine: "Machine"
-          hours: "Hours"
+          hours: "Slots of {{DURATION}} minutes"
           related_subscriptions: "Related subscriptions"
           please_specify_a_number: "Please specify a number."
           none: "None"  # grammar note: concordance with "training".
@@ -296,7 +296,7 @@ en:
           forever: "Each use"
           valid_until: "Valid until (included)"
           spaces: "Spaces"
-          these_prices_match_space_hours_rates_: "These prices match space hours rates"
+          these_prices_match_space_hours_rates_: "These prices match {{DURATION}} minutes of space usage, "
           add_a_space_credit: "Add a Space credit"
           space: "Espace"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error : a credit linking this space with that subscription already exists."
@@ -322,14 +322,14 @@ en:
             successfully_created_subscriptions_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
             unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
         edit:
-          # edit a subscription plan / machine hours prices
+          # edit a subscription plan / machine slots prices
           edit_plan:
             subscription_plan: "Subscription plan:"
             prices: "Prices"
             copy_prices_from: "Copy prices from"
             machines: "Machines"
             machine: "Machine"
-            hourly_rate: "Hourly rate"
+            hourly_rate: "Price by slot"
             spaces: "Spaces"
             space: "Space"
             unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."

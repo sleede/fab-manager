@@ -322,7 +322,7 @@ pt:
         statistics_global: "de todas as estatísticas"
         statistics_account: "das estatísticas de registro"
         statistics_event: "de estatísticas sobre eventos"
-        statistics_machine: "de estatísticas sobre horas de máquina"
+        statistics_machine: "de estatísticas sobre slots de máquina"   # missing translation
         statistics_project: "de estatísticas sobre projetos"
         statistics_subscription: "de estatísticas de assinatura"
         statistics_training: "de estatísticas sobre treinamentos"
@@ -351,10 +351,11 @@ pt:
       notify_privacy_policy_changed:
         policy_updated: "Privacy policy updated."        # missing translation
         click_to_show: "Click here to consult"        # missing translation
+
   statistics:
     # statistics tools for admins
     subscriptions: "Assinaturas"
-    machines_hours: "Horas de máquina"
+    machines_hours: "Slots de máquina"                                # missing translation
     spaces: "Espaços"
     trainings: "Treinamentos"
     events: "Eventos"

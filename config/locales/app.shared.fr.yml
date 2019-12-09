@@ -443,7 +443,7 @@ fr:
           _subscription: "abonnement"
           cost_of_the_subscription: "Coût de l'abonnement"
           confirm_and_pay: "Valider et payer"
-          you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les heures machines suivantes} Training{la formation suivante} other{les éléments suivants}} :"  # messageFormat interpolation
+          you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les créneaux machines suivants} Training{la formation suivante} other{les éléments suivants}} :"  # messageFormat interpolation
           you_have_settled_a_: "Vous avez réglé un"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"

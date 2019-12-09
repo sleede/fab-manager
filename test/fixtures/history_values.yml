@@ -250,7 +250,7 @@ value_history_26:
   invoicing_profile_id: 1
   value: Avant de réserver une formation, nous vous conseillons de consulter nos offres
     d'abonnement qui proposent des conditions avantageuses sur le prix des formations
-    et les heures machines.
+    et les créneaux machines.
   created_at: 2018-12-17 11:23:01.569316000 Z
   updated_at: 2018-12-17 11:23:01.717053000 Z
   footprint: 4413b595bfbb0ec9ac2637997b1731eb06e516dea606e6a2f1acc4b9bf323f98

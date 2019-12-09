@@ -259,7 +259,7 @@ pt:
         statistics_global: "de todas as estatísticas"
         statistics_account: "das estatísticas de registro"
         statistics_event: "das estatísticas sobre eventos"
-        statistics_machine: "das estatísticas de hora máquina"
+        statistics_machine: "das estatísticas de slot máquina"                                     #translation_missing
         statistics_project: "das estatísticas de projetos"
         statistics_subscription: "das estatísticas de assinaturas"
         statistics_training: "das estatísticas de treinamento"
