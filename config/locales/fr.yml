@@ -351,6 +351,8 @@ fr:
       notify_privacy_policy_changed:
         policy_updated: "Nouvelle mise à jour de la Politique de confidentialité."
         click_to_show: "Cliquez ici pour la consulter"
+      notify_admin_refund_created:
+        refund_created: "Un avoir de %{AMOUNT} a été généré pour l'utilisateur %{USER}"
 
   statistics:
     # outil de statistiques pour les administrateurs

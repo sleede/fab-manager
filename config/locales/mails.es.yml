@@ -299,7 +299,7 @@ es:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
 
-    notify_admin_archive_complete:                                                                #translation_missing
+    notify_admin_archive_complete:                                                                 #translation_missing
       subject: "Archiving completed"
       body:
         archive_complete: "You have closed the accounting period from %{START} to %{END}. Archiving of data is now complete."
@@ -307,11 +307,17 @@ es:
         here: "here."
         save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
 
-    notify_privacy_policy_changed:                                                               #translation_missing
+    notify_privacy_policy_changed:                                                                 #translation_missing
       subject: "Privacy policy updated"
       body:
         content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+
+    notify_admin_refund_created:                                                                   #translation_missing
+      subject: "A refund has been generated"
+      body:
+        refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
+        download: "Click here to download this refund invoice"
 
     shared:
       hello: "¡Hola %{user_name}!"

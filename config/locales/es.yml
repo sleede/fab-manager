@@ -351,6 +351,9 @@ es:
       notify_privacy_policy_changed:
         policy_updated: "Privacy policy updated."                      # missing translation
         click_to_show: "Click here to consult"                         # missing translation
+      notify_admin_refund_created:
+        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"                             # missing translation
+
   statistics:
     # statistics tools for admins
     subscriptions: "Suscripciones"

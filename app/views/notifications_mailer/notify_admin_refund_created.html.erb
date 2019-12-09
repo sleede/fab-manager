@@ -1,0 +1,8 @@
+<%= render 'notifications_mailer/shared/hello', recipient: @recipient %>
+
+<p><%= t('.body.refund_created',
+         AMOUNT: number_to_currency(@attached_object.total / 100.00),
+         INVOICE: @attached_object.invoice.reference,
+         USER: @attached_object.invoicing_profile&.full_name) %>
+</p>
+<p><a href="<%= "#{root_url}api/invoices/#{@attached_object.id}/download" %>" target="_blank"><%= t('.body.download') %></a></p>
