@@ -171,7 +171,12 @@
           </div>
 
 
-          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve">{{ 'book' | translate }}</button>
+          <div ng-show="now.isSameOrAfter(event.end_date)" class="alert alert-info">
+            <span translate>{{ 'event_is_over' }}</span>
+            <span ng-show="reservations.length > 0" translate>{{ 'thanks_for_coming' }}</span>
+            <a ui-sref="app.public.events_list" translate>{{ 'view_event_list' }}</a>
+          </div>
+          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve && now.isBefore(event.end_date)">{{ 'book' | translate }}</button>
 
           <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" total="reserve.totalNoCoupon" user-id="{{ctrl.member.id}}"></coupon>
         </div>

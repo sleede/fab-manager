@@ -295,6 +295,9 @@ fr:
         cancel_the_reservation: "Annuler la réservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
         cancellation_failed: "L'annulation a échoué."
+        event_is_over: "L'évènement est terminé."
+        thanks_for_coming: "Merci d'avoir participé !"
+        view_event_list: "Voir les évènements à venir"
 
       calendar:
         # calendrier publique

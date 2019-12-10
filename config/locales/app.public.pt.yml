@@ -295,6 +295,9 @@ pt:
           cancel_the_reservation: "Cancel the reservation"                                            #translation_missing
           do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."        #translation_missing
           cancellation_failed: "Cancellation failed."                                                 #translation_missin
+          event_is_over: "The event is over"                                                          #translation_missing
+          thanks_for_coming: "Thanks for coming!"                                                     #translation_missing
+          view_event_list: "View events to come"                                                      #translation_missing
 
         calendar:
           # public calendar

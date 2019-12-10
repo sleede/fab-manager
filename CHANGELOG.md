@@ -12,6 +12,7 @@
 - Improved notification email to the member when a rolling subscription is taken
 - Notify all admins on the creation of a refund invoice
 - Calendar management: improved legend display and visual behavior
+- Prevent event reservation in the past [Taiga#127]
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Added freeCAD files as default allowed extensions

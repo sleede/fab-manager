@@ -133,6 +133,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     // reservations for the currently shown event
     $scope.reservations = [];
 
+    // current date & time
+    $scope.now = moment();
+
     // user to deal with
     $scope.ctrl =
       { member: {} };
