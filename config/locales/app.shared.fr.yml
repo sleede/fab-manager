@@ -2,7 +2,7 @@ fr:
   app:
     shared:
       buttons:
-        # traductions de boutons communs
+        #translations of common buttons
         confirm_changes: "Valider les modifications"
         consult: "Consulter"
         edit: "Éditer"
@@ -18,9 +18,8 @@ fr:
         "yes": "Oui"
         "no": "Non"
         apply: "Appliquer"
-
       elements:
-        # traductions variées utilisées à plusieurs reprises dans l'application
+        #various translations used many times in the application
         group: "Groupe"
         subscription: "Abonnement"
         trainings: "Formations"
@@ -47,7 +46,7 @@ fr:
         machines_and_materials: "Machines et matériaux"
         collaborators: "Les collaborateurs"
         summary: "Résumé"
-        you_ve_just_selected_a_: "Vous venez de sélectionner un"  # you_ve_just_selected_a_ + _subscription
+        you_ve_just_selected_a_: "Vous venez de sélectionner un" #you_ve_just_selected_a_ + _subscription
         _subscription: "abonnement"
         confirm_and_pay: "Valider et payer"
         your_invoice_will_be_available_soon_from_your_: "Votre facture sera bientôt disponible depuis votre"
@@ -62,7 +61,7 @@ fr:
         interests: "Centres d'intérêts"
         CAD_softwares_mastered: "Logiciels de conception maîtrisés"
         name: "Nom"
-        step_N: "Étape {{INDEX}}"  # angular interpolation
+        step_N: "Étape {{INDEX}}" #angular interpolation
         themes: "Thématiques"
         tags: "Étiquettes"
         technical_specifications: "Caractéristiques techniques"
@@ -74,10 +73,10 @@ fr:
         month: "Mois"
         subscription_price: "Coût de l'abonnement"
         model: "Modèle"
-        from_date: "Du" # context: date. eg: "from 01/01 to 01/05"
-        from_time: "De" # context: time. eg. "from 18:00 to 21:00"
-        to_date: "au" # context: date. eg: "from 01/01 to 01/05"
-        to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
+        from_date: "Du\" # context: date. eg: \"from 01/01 to 01/05"
+        from_time: "De\" # context: time. eg. \"from 18:00 to 21:00"
+        to_date: "au\" # context: date. eg: \"from 01/01 to 01/05"
+        to_time: "à\"  # context: time. eg. \"from 18:00 to 21:00"
         or: "ou"
         and: "et"
         change_my_data: "Modifier mes données"
@@ -94,7 +93,7 @@ fr:
         name_is_required: "Le nom est requis."
         all_themes: "Toutes les thématiques"
         filter: 'Filtre'
-        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # messageFormat interpolation (contexte : valider mon paiement de 20,00 €)
+        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}" #messageFormat interpolation (context: confirm my payment of $20.00)
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
@@ -103,13 +102,11 @@ fr:
         payment_card_error: "Un problème est survenu avec votre carte bancaire :"
         online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
         unexpected_error_occurred: "Une erreur inattendue est survenue"
-
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Vous perdrez les modifications non enregistrées si vous rechargez cette page"
-
       user:
-        # formulaire d'édition du profil utilisateur
+        #user edition form
         add_an_avatar: "Ajouter un avatar"
         pseudonym: "Pseudonyme"
         email_address_is_required: "L'adresse de courriel est requise."
@@ -125,9 +122,8 @@ fr:
         date_of_birth_is_required: "La date de naissance est requise."
         website: "Site web"
         job: "Profession"
-
       project:
-        # formulaire d'étition d'un projet
+        #project edition form
         illustration: "Illustration"
         add_an_illustration: "Ajouter un visuel"
         CAD_file: "Fichier CAO"
@@ -144,9 +140,8 @@ fr:
         employed_materials: "Matériaux utilisés"
         employed_machines: "Machines utilisées"
         creative_commons_licences: "Licences Creative Commons"
-
       machine:
-        # formulaire d'édition d'une machine
+        #machine edition form
         machine_form:
           name: "Nom"
           name_is_required: "Le nom est requis."
@@ -161,32 +156,27 @@ fr:
           add_an_attachment: "Ajouter une pièce jointe"
           disable_machine: "Désactiver la machine"
           validate_your_machine: "Valider votre machine"
-
       plan_subscribe:
-        # cadre de souscription à un abonnement
+        #frame to select a plan to subscribe
         subscribe_online: "je m'abonne en ligne"
         do_not_subscribe: "je ne souhaite pas m'abonner"
-
       member_select:
-        # admin : choisir un membre avec lequel interagir
+        #admin: choose a member to interact with
         select_a_member: "Sélectionnez un membre"
         start_typing: "Commencez à taper ..."
         please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
-
       stripe:
-        # fenêtre de paiement stripe
+        #stripe payment modal
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
         _the_general_terms_and_conditions: "les conditions générales de vente."
         credit_amount_for_pay_reservation: "Il vous reste {{amount}} {{currency}} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {{amount}} {{currency}} à payer pour valider la réservation"
-
       valid_reservation_modal:
-        # fenêtre de paiement sur place d'une réservation
+        #dialog of on site payment for reservations
         booking_confirmation: "Validation réservation"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Voici le récapitulatif des créneaux à réserver pour l'utilisateur courant :"
-
       event:
-        # formulaire d'édition d'un événement
+        #event edition form
         title_is_required: "Le titre est requis."
         matching_visual: "Visuel associé"
         choose_a_picture: "Choisir une image"
@@ -207,9 +197,8 @@ fr:
         tickets_available: "Places disponibles"
         event_theme: "Thème de l'évènement"
         age_range: "Tranche d'âge"
-
       plan:
-        # formulaire d'édition d'une formule d'abonnement
+        #subscription plan edition form
         plan_form:
           general_information: "Informations générales"
           name: "Nom"
@@ -244,9 +233,8 @@ fr:
           email_address_is_required: "L'adresse e-mail est requise."
           disabled: "Désactiver l'abonnement"
           disable_plan_will_not_unsubscribe_users: "Attention : désactiver l'abonnement ne désabonnera pas les utilisateurs ayant actuellement cet abonnement actif."
-
       trainings:
-        # formulaire d'édition d'une formation
+        #training edition form
         trainings_form:
           name: "Nom"
           name_is_required: "Le nom est requis."
@@ -260,17 +248,15 @@ fr:
           number_of_tickets: "Nombre de places"
           public_page: "Afficher dans la liste de formation"
           disable_training: "Désactiver la formation"
-
       user_admin:
-        # formulaire partiel d'édition/création utilisateur (vue admin)
+        #partial form to edit/create an user (admin view)
         user_profile: "Profil utilisateur"
         warning_incomplete_user_profile_probably_imported_from_sso: "Attention : Le profil de cet utilisateur est incomplet. Comme l'authentification \"single sign-on\" (SSO) est actuellement activée, il s'agit probablement d'un compte importé mais non fusionné. N'y apportez aucune modification sauf si vous savez ce que vous faites."
         group: "Groupe"
         group_is_required: "Le groupe est requis."
         trainings: "Formations"
-
       authentication:
-        # formulaire partiel d'édition/création d'un fournisseur d'authentification (SSO)
+        #partial form to edit/create an authentication provider (SSO)
         provider_name_is_required: "Le nom du fournisseur est requis."
         authentication_type: "Type d'authentification"
         authentication_type_is_required: "Le type d'authentification est requis."
@@ -278,9 +264,8 @@ fr:
         expected_data_type: "Type de données attendues"
         input_format: "Format d'entrée"
         mappings: "Correspondances"
-
       oauth2:
-        # formulaire d'édition/création d'un fournisseur d'authentification de type OAuth2
+        #edition/creation form of an OAuth2 authentication provider
         common_url: "URL commune"
         common_url_is_required: "L'URL commune est requise."
         provided_url_is_not_a_valid_url: "L'URL fournie n'est pas une URL valide."
@@ -302,29 +287,25 @@ fr:
         api_endpoint_url: "Terminaison/URL de l'API"
         api_type: "Type d'API"
         api_fields: "Champ de l'API"
-
       confirm_modify_slot_modal:
-        # fenêtre de modification d'un créneau de réservation machine/formation
+        #machine/training slot modification modal
         change_the_slot: "Modifier le créneau"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Souhaitez-vous changer votre créneau de réservation initialement prévu au :"
-        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Souhaitez-vous changer le créneau de réservation de {{NAME}}, initialement prévu au :"  # angular interpolation
+        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Souhaitez-vous changer le créneau de réservation de {{NAME}}, initialement prévu au :" #angular interpolation
         cancel_this_reservation: "Annuler cette réservation"
         i_want_to_change_date: "Je veux changer de date"
-
       request_training_modal:
-        # fenêtre présentant l'obligation de participer à une formation avant de réserver une machine
-        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Pour réserver la machine \"{{MACHINE}}\" vous devez avoir suivi la {{TRAINING}}."  # angular interpolation
+        #modal introducing that a training is requested before booking a machine
+        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Pour réserver la machine \"{{MACHINE}}\" vous devez avoir suivi la {{TRAINING}}." #angular interpolation
         register_for_the_training: "S'inscrire à la formation"
         i_dont_want_to_register_now: "Je ne souhaite pas m'inscrire pour l'instant"
-
       training_reservation_modal:
-        # fenêtre présentant l'obligation d'attendre la validation de la formation pour réserver une machine
+        #modal introducing that a user must wait for his training being validated before booking a machine
         machine_reservation: "Réservation machine"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Il faut attendre que votre formation soit validée par l'équipe du Fab Lab pour réserver cette machine."
         your_training_will_occur_: "Votre formation aura lieu le"
-
       public_profile:
-        # profil publique d'un utilisateur
+        #user public profile
         last_activity_: "Dernière activité"
         _on_: "le"
         to_come: "à venir"
@@ -334,9 +315,8 @@ fr:
         author: "Auteur"
         collaborator: "Collaborateur"
         private_profile: "Profil privé"
-
       wallet:
-        # porte-monnaie
+        #wallet
         wallet: 'Porte-monnaie'
         your_wallet_amount: 'Votre montant disponible'
         wallet_amount: 'Montant disponible'
@@ -370,9 +350,8 @@ fr:
         debit_reservation_machine: "Payer un reservation de machine"
         debit_reservation_event: "Payer un reservation d'évenement"
         warning_uneditable_credit: "Attention : une fois validé, le montant crédité ne sera plus modifiable."
-
       coupon:
-        # code promotionnel (formulaire de création/édition)
+        #promotional coupon (creation/edition form)
         code: "Code"
         code_is_required: "Le code est requis."
         code_must_be_composed_of_capital_letters_digits_and_or_dashes: "Le code doit être composé de lettres majuscules, de chiffres et/ou de tirets."
@@ -392,13 +371,12 @@ fr:
         max_usages: "Nombre maximum d'utilisations autorisées"
         max_usages_must_be_equal_or_greater_than_0: "Le nombre d'utilisations maximum doit être supérieur ou égal à 0."
         enabled: "Activé"
-
       coupon_input:
-        # code promotionnel (zone de saisie pour les utilisateurs)
+        #coupon (input zone for users)
         i_have_a_coupon: "J'ai un code promo !"
         code_: "Code :"
-        the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{PERCENT}} %."  # angular interpolation
-        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{PERCENT}} %." #angular interpolation
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Le code promo a bien été appliqué. Vous bénéficiez d'une remise de {{AMOUNT}} {{CURRENCY}}." #angular interpolation
         unable_to_apply_the_coupon_because_disabled: "Impossible d'appliquer la réduction : ce code promo a été désactivé."
         unable_to_apply_the_coupon_because_expired: "Impossible d'appliquer la réduction : ce code promo a expiré."
         unable_to_apply_the_coupon_because_sold_out: "Impossible d'appliquer la réduction : ce code promo a atteint son quota."
@@ -406,9 +384,8 @@ fr:
         unable_to_apply_the_coupon_because_amount_exceeded: "Impossible d'appliquer la réduction : la réduction dépasse le total de cet achat."
         unable_to_apply_the_coupon_because_undefined: "Impossible d'appliquer la réduction : une erreur inattendue s'est produite, veuillez contacter le gestionnaire du Fablab."
         unable_to_apply_the_coupon_because_rejected: "Ce code promo n'existe pas."
-
       space:
-        # formulaire de création/modification d'un espace
+        #form to create/edit a space
         space:
           name: "Nom"
           name_is_required: "Le nom est requis."
@@ -424,15 +401,14 @@ fr:
           default_places: "Maximum de places par défaut"
           default_places_is_required: "Le nombre de places maximum par défaut est requis."
           disable_space: "Désactiver l'espace"
-
       cart:
-        # module de panier d'achat de réservations
+        #module de panier d'achat de réservations
         cart:
           summary: "Résumé"
-          select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier"  # messageFormat interpolation
+          select_one_or_more_slots_in_the_calendar: "Sélectionnez un {SINGLE, select, true{créneau} other{ou plusieurs créneaux}} dans le calendrier" #messageFormat interpolation
           you_ve_just_selected_the_slot: "Vous venez de sélectionner le créneau :"
-          datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-          cost_of_TYPE: "Coût de {TYPE, select, Machine{l'heure machine} Training{la formation} other{l'élément}}"  # messageFormat interpolation
+          datetime_to_time: "{{START_DATETIME}} à {{END_TIME}}" #angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+          cost_of_TYPE: "Coût de {TYPE, select, Machine{l'heure machine} Training{la formation} other{l'élément}}" #messageFormat interpolation
           offer_this_slot: "Offrir ce créneau"
           confirm_this_slot: "Valider ce créneau"
           remove_this_slot: "Supprimer ce créneau"
@@ -443,7 +419,7 @@ fr:
           _subscription: "abonnement"
           cost_of_the_subscription: "Coût de l'abonnement"
           confirm_and_pay: "Valider et payer"
-          you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les heures machines suivantes} Training{la formation suivante} other{les éléments suivants}} :"  # messageFormat interpolation
+          you_have_settled_the_following_TYPE: "Vous avez réglé {TYPE, select, Machine{les heures machines suivantes} Training{la formation suivante} other{les éléments suivants}} :" #messageFormat interpolation
           you_have_settled_a_: "Vous avez réglé un"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
@@ -457,14 +433,14 @@ fr:
           tags_of_the_destination_slot: "Étiquettes du créneau de destination :"
           confirm_my_modification: "Valider ma modification"
           your_booking_slot_was_successfully_moved_from_: "Votre créneau de réservation a bien été déplacé du"
-          to_date: "au" # context: date. eg: "from 01/01 to 01/05"
+          to_date: "au\" # context: date. eg: \"from 01/01 to 01/05"
           please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
           unable_to_change_the_reservation: "Impossible de modifier la réservation"
           confirmation_required: "Confirmation requise"
           do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"
           reservation_was_cancelled_successfully: "La réservation a bien été annulée."
           cancellation_failed: "L'annulation a échouée."
-          confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # messageFormat interpolation (contexte : valider mon paiement de 20,00 €)
+          confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}" #messageFormat interpolation (context: confirm my payment of $20.00)
           a_problem_occurred_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
           none: "Aucune"
           online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
