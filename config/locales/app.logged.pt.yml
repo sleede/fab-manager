@@ -2,19 +2,19 @@ pt:
   app:
     logged:
       profileCompletion:
-        # user's profile completion page when logging from an SSO provider
+        #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirme sua nova conta"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"  # messageFormat interpolation
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}" #messageFormat interpolation
         we_need_some_more_details: "Para finalizar a configuração da plataforma, precisamos de mais detalhes"
         your_email_is_already_used_by_another_account_on_the_platform: "Parece que seu endereço de e-mail já é usado por outro usuário. Verifique seu endereço de e-mail e insira abaixo o código enviado para você."
         please_fill_the_following_form: "Preencha o seguinte formulário"
-        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Alguns dados podem já ter sido fornecidos por {{NAME}} e não podem ser modificados"  # angular interpolation
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Alguns dados podem já ter sido fornecidos por {{NAME}} e não podem ser modificados" #angular interpolation
         then_click_on_: "Em seguida, clique em"
         _to_start_using_the_application: "Para começar a usar o aplicativo"
         new_on_this_platform: "Novo nessa plataforma?"
         your_email_: "Seu email"
         _is_currently_associated_with_another_account_on_this_platform: "Está atualmente associado a outra conta nesta plataforma."
-        please_click_to_change_email_associated_with_your_PROVIDER_account: "Se não for seu, clique no botão a seguir para alterar o e-mail associado à sua conta do {{PROVIDER}}."  # angular interpolation
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "Se não for seu, clique no botão a seguir para alterar o e-mail associado à sua conta do {{PROVIDER}}." #angular interpolation
         do_you_already_have_an_account: "Do you already have an account?"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Não preencha o formulário ao lado, mas especifique aqui o código que recebeu por e-mail, para recuperar o seu acesso."
         just_specify_code_here_to_recover_access: "Basta especificar aqui o código que recebeu por e-mail para recuperar o seu acesso."
@@ -26,14 +26,13 @@ pt:
         email_address_associated_with_your_account: "Email associado com sua conta"
         email_format_is_incorrect: "Formato de email incorreto"
         code_successfully_sent_again: "Código enviado novamente com sucesso"
-
       dashboard:
-        # dashboard: public profile
+        #dashboard: public profile
         profile:
           empty: ''
         settings:
           edit_profile:
-            # dashboard: edit my profile
+            #dashboard: edit my profile
             last_activity_on_: "Última atividade em"
             i_want_to_change_group: "Eu quero trocar de grupo!"
             your_subscription_expires_on_: "Sua inscrição expira em"
@@ -55,18 +54,18 @@ pt:
             your_group_has_been_successfully_changed: "Seu grupo foi modificado com sucesso."
             an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
             confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
-            all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."                                                # missing translation
-            invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."           # missing translation
-            statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."          # missing translation
-            no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."   # missing translation
+            all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
+            invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
+            statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
+            no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
             your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
             an_error_occured_preventing_your_account_from_being_deleted: "Ocorreu um erro, impedindo que sua conta fosse excluída."
-            used_for_statistics: "This data will be used for statistical purposes"                                                            # translation missing
-            used_for_invoicing: "This data will be used for billing purposes"                                                                 # translation missing
-            used_for_reservation: "This data will be used in case of change on one of your bookings"                                          # translation missing
-            used_for_profile: "This data will only be displayed on your profile"                                                              # translation missing
-            used_for_pricing_stats: "This data will be used to determine the prices to which you are entitled, and for statistical purposes"  # translation missing
-            public_profile: "You will have a public profile and other users will be able to associate you in their projects"                  # translation missing
+            used_for_statistics: "This data will be used for statistical purposes"
+            used_for_invoicing: "This data will be used for billing purposes"
+            used_for_reservation: "This data will be used in case of change on one of your bookings"
+            used_for_profile: "This data will only be displayed on your profile"
+            used_for_pricing_stats: "This data will be used to determine the prices to which you are entitled, and for statistical purposes"
+            public_profile: "You will have a public profile and other users will be able to associate you in their projects"
             trainings: "Treinamentos"
             no_trainings: "Sem treinamentos"
             subscription: "Assinatura"
@@ -80,77 +79,69 @@ pt:
             _disconnect_then_reconnect_: "disconecte e se conecte novamente"
             _for_your_changes_to_take_effect: "para que suas alterações tenham efeitos."
         projects:
-          # dashboard: my projects
+          #dashboard: my projects
           you_dont_have_any_projects: "Você não tem nenhum projeto."
           author: "Autor"
           collaborator: "Colaborador"
         trainings:
-          # dashboard: my trainings
+          #dashboard: my trainings
           your_next_trainings: "Seus próximos treinamentos"
           your_previous_trainings: "Seus treinamentos anteriores"
           your_approved_trainings: "Seus treinamentos aprovados"
         events:
-          # dashboard: my events
+          #dashboard: my events
           your_next_events: "Seus próximos eventos"
           no_events_to_come: "Sem eventos futuros"
           your_previous_events: "Seus eventos anteriores"
-          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}"  # messageFormat interpolation
-          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}"  # messageFormat interpolation
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}" #messageFormat interpolation
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}" #messageFormat interpolation
         invoices:
-          # dashboard: my invoices
+          #dashboard: my invoices
           reference_number: "Número de referência"
-
       members_show:
-        # public profil of a member
+        #public profil of a member
         members_list: "Lista de membros"
-
       members:
-        # list of members accepting to be contacted
+        #list of members accepting to be contacted
         the_fablab_members: "Membros do FabLab"
         display_more_members: "Mostrar mais membros..."
         no_members_for_now: "Sem membros"
         avatar: "Avatar"
-
       projects_new:
-        # add a new project
+        #add a new project
         add_a_new_project: "Adicionar novo projeto"
-        save_button_value: "Salvar como rascunho"  # "save as draft"
-
+        save_button_value: "Salvar como rascunho\"  # \"save as draft"
       projects_edit:
-        # modify an existing project
-        save_button_value: "Salvar"  # "save"
+        #modify an existing project
+        save_button_value: "Salvar\"  # \"save"
         edit_the_project: "Editar projeto"
         publish: "Publicar"
-
       machines_reserve:
-        # book a machine
+        #book a machine
         machine_planning: "Planejamento de máquinas"
         i_ve_reserved: "Eu tenho reserva"
         not_available: "Não disponível"
         i_reserve: "Eu reservo"
         i_shift: "Eu mudo"
         i_change: "Eu altero"
-        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"                                          # translation missing
-        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."                                                        # translation missing
-        cancellation_failed: "Cancellation failed."                                                                                              # translation missing
-        a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."  # translation missing
-
+        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
+        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
+        cancellation_failed: "Cancellation failed."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
       trainings_reserve:
-        # book a training
+        #book a training
         trainings_planning: "Planos de treinamento"
-        planning_of: "Planejamento de"   # followed by the training name (eg. "Planning of 3d printer training")
+        planning_of: "\"Planejamento de\""
         all_trainings: "Todos treinamentos"
         cancel_my_selection: "Cancelar minha seleção"
         i_ve_reserved: "Eu reservei"
-
       space_reserve:
-        # book a space
+        #book a space
         space_reserve:
-          planning_of_space_NAME: "Plano de {{NAME}} espaço"  # angular interpolation
+          planning_of_space_NAME: "Plano de {{NAME}} espaço" #angular interpolation
           i_ve_reserved: "Eu reservei"
           i_shift: "Eu troco"
           i_change: "Eu altero"
-
       notifications:
         notifications_center: "Centro de notificações"
         mark_all_as_read: "Marcar todas como lidas"
