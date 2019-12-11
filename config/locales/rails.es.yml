@@ -1,57 +1,57 @@
 es:
   date:
     abbr_day_names:
-    - dom
-    - lun
-    - mar
-    - mié
-    - jue
-    - vie
-    - sáb
+      - dom
+      - lun
+      - mar
+      - mié
+      - jue
+      - vie
+      - sáb
     abbr_month_names:
-    - 
-    - ene
-    - feb
-    - mar
-    - abr
-    - may
-    - jun
-    - jul
-    - ago
-    - sep
-    - oct
-    - nov
-    - dic
+      -
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
     day_names:
-    - domingo
-    - lunes
-    - martes
-    - miércoles
-    - jueves
-    - viernes
-    - sábado
+      - domingo
+      - lunes
+      - martes
+      - miércoles
+      - jueves
+      - viernes
+      - sábado
     formats:
       default: "%-d/%-m/%Y"
       long: "%-d de %B de %Y"
       short: "%-d de %b"
     month_names:
-    - 
-    - enero
-    - febrero
-    - marzo
-    - abril
-    - mayo
-    - junio
-    - julio
-    - agosto
-    - septiembre
-    - octubre
-    - noviembre
-    - diciembre
+      -
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
     order:
-    - :day
-    - :month
-    - :year
+      - :day
+      - :month
+      - :year
   datetime:
     distance_in_words:
       about_x_hours:
@@ -121,20 +121,21 @@ es:
         many: No se puede eliminar el registro porque existen %{record} dependientes
       taken: ya está en uso
       too_long:
-        one: "es demasiado largo (1 carácter máximo)"
-        other: "es demasiado largo (%{count} caracteres máximo)"
+        one: es demasiado largo (1 carácter máximo)
+        other: es demasiado largo (%{count} caracteres máximo)
       too_short:
-        one: "es demasiado corto (1 carácter mínimo)"
-        other: "es demasiado corto (%{count} caracteres mínimo)"
+        one: es demasiado corto (1 carácter mínimo)
+        other: es demasiado corto (%{count} caracteres mínimo)
       wrong_length:
-        one: "no tiene la longitud correcta (1 carácter exactos)"
-        other: "no tiene la longitud correcta (%{count} caracteres exactos)"
+        one: no tiene la longitud correcta (1 carácter exactos)
+        other: no tiene la longitud correcta (%{count} caracteres exactos)
       other_than: debe ser distinto de %{count}
+      wrong_content_type: "content type is not allowed"
     template:
       body: 'Se encontraron problemas con los siguientes campos:'
       header:
         one: No se pudo guardar este/a %{model} porque se encontró 1 error
-        other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+        other: "No se pudo guardar este/a %{model} porque se encontraron %{count} errores"
   helpers:
     select:
       prompt: Por favor seleccione
@@ -186,6 +187,7 @@ es:
     percentage:
       format:
         delimiter: ''
+        format: "%n%"
     precision:
       format:
         delimiter: ''
