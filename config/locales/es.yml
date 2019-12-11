@@ -1,7 +1,6 @@
 es:
-
   duration:
-    # subscription plan duration
+    #subscription plan duration
     year:
       one: 'un año'
       other: '%{count} años'
@@ -11,15 +10,13 @@ es:
     week:
       one: 'una semana'
       other: '%{count} semanas'
-
   time:
     formats:
-      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
+      #See http://apidock.com/ruby/DateTime/strftime for a list of available directives
       hour_minute: "%I:%M %p"
-
-  errors: &errors
-    messages: &errors_messages
-      # CarrierWave
+  errors:
+    messages:
+      #CarrierWave
       carrierwave_processing_error: "fallo al procesar"
       carrierwave_integrity_error: "es un tipo de archivo no permitido"
       carrierwave_download_error: "no pudo ser descargado"
@@ -36,45 +33,62 @@ es:
       cannot_be_blank_at_same_time: "no puede estar vacío cuando %{field} también está vacío"
       cannot_be_in_the_past: "no puede estar en el pasado"
       cannot_be_before_previous_value: "No puede estar antes del valor anterior."
-      cannot_overlap: "can't overlap an existing accounting period"                               # missing translation
-      cannot_encompass: "can't encompass an existing accounting period"                           # missing translation
-      in_closed_period: "can't be within a closed accounting period"                              # missing translation
-      invalid_footprint: "invoice's checksum is invalid"                                          # missing translation
-      end_before_start: "The end date can't be before the start date. Pick a date after %{START}" # missing translation
-      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."                   # missing translation
-      must_be_in_the_past: "The period must be strictly prior to today's date."                   # missing translation
-
+      cannot_overlap: "can't overlap an existing accounting period"
+      cannot_encompass: "can't encompass an existing accounting period"
+      in_closed_period: "can't be within a closed accounting period"
+      invalid_footprint: "invoice's checksum is invalid"
+      end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
+      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
+      must_be_in_the_past: "The period must be strictly prior to today's date."
   activemodel:
     errors:
-      <<: *errors
-
+      messages:
+        carrierwave_processing_error: fallo al procesar
+        carrierwave_integrity_error: es un tipo de archivo no permitido
+        carrierwave_download_error: no pudo ser descargado
+        extension_white_list_error: 'no le está permitido subir archivos de extensión %{extension} , tipos permitidos: %{allowed_types}'
+        extension_black_list_error: 'no le está permitido subir archivos de extensión %{extension} , tipos prohibidos: %{prohibited_types}'
+        rmagick_processing_error: 'error al manipular con rmagick, ¿Está seguro de que el archivo es una imagen? Error original: %{e}'
+        mime_types_processing_error: 'error al procesar archivo MIME::Types, puede ser que el contenido no sea válido. Error original: %{e}'
+        mini_magick_processing_error: 'Error al editar con MiniMagick, ¿Está seguro de que el archivo es una imagen?  Error original: %{e}'
+        wrong_size: Tamaño erroneo (should be %{file_size})
+        size_too_small: es demasiado pequeño (should be at least %{file_size})
+        size_too_big: es demasiado grande (should be at most %{file_size})
+        export_not_found: La exportación solicitada no se encontró. Probablemente se eliminó, por favor, genere una nueva exportación.
+        percentage_out_of_range: El porcentaje debe estar incluido entre 0 y 100
+        cannot_be_blank_at_same_time: no puede estar vacío cuando %{field} también está vacío
+        cannot_be_in_the_past: no puede estar en el pasado
+        cannot_be_before_previous_value: No puede estar antes del valor anterior.
+        cannot_overlap: can't overlap an existing accounting period
+        cannot_encompass: can't encompass an existing accounting period
+        in_closed_period: can't be within a closed accounting period
+        invalid_footprint: invoice's checksum is invalid
+        end_before_start: The end date can't be before the start date. Pick a date after %{START}
+        invalid_duration: The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long.
+        must_be_in_the_past: The period must be strictly prior to today's date.
   apipie:
     api_documentation: "Documentación API"
-
   omniauth:
-    # error messages when importing an account from a SSO
+    #error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\"ya está vinculado a otra cuenta, ingrese su código de autenticación."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Su nombre de usuario (%{USERNAME}) ."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) ya está vinculado a otra cuenta, no se puede actualizar."
     this_account_is_already_linked_to_an_user_of_the_platform: "Esta %{NAME} cuenta ya está vinculada a un usuario de la plataforma ."
-
   availabilities:
-    # availability slots in the calendar
+    #availability slots in the calendar
     not_available: "No disponible"
     i_ve_reserved: "He reservado"
     length_must_be_slot_multiple: "Debe ser al menos %{MIN} minutos después de la fecha de inicio"
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
-
   members:
-    # members management
+    #members management
     unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar el grupo mientras se está ejecutando una suscripción."
     please_input_the_authentication_code_sent_to_the_address: "Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
     your_authentication_code_is_not_valid: "Su código de autenticación no es válido."
     current_authentication_method_no_code: "El método de autenticación actual no requiere ningún código de migración"
     requested_account_does_not_exists: "La cuenta solicitada no existe"
-
   invoices:
-    # PDF invoices generation
+    #PDF invoices generation
     refund_invoice_reference: "Referencia de devolución de factura: %{REF}"
     invoice_reference: "Referencia de factura: %{REF}"
     code: "Código: %{CODE}"
@@ -102,7 +116,7 @@ es:
       one: "un %{NAME} entrada"
       other: "%{count} %{NAME} entradas"
     reservation_other: "Reserva (other)"
-    coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
+    coupon_CODE_discount_of_DISCOUNT: "Cupón {CODE}: descuento de {DISCOUNT}{TYPE, select, percent_off{%} other{}}" #messageFormat interpolation
     total_including_all_taxes: "total impuestos incluidos"
     including_VAT_RATE: "Incluyendo IVA %{RATE}%"
     including_total_excluding_taxes: "Excluyendo IVA"
@@ -113,54 +127,50 @@ es:
     by_cheque: "por cheque"
     by_transfer: "por transferencia"
     by_cash: "en efectivo"
-    no_refund: "sin devolución"
     by_wallet: "por cartera"
+    no_refund: "sin devolución"
     settlement_by_debit_card: "Efectuado con tarjeta de débito"
     settlement_done_at_the_reception: "Efectuado en recepción"
     settlement_by_wallet: "Efectuado con cartera"
     on_DATE_at_TIME: "el %{DATE} a las %{TIME},"
     for_an_amount_of_AMOUNT: "Por una cantidad de %{AMOUNT}"
-    on_DATE_from_START_to_END: "El %{DATE} desde %{START} hasta %{END}" # eg: on feb. 7 Desde 7AM hasta 9AM
-    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Desde %{STARTDATE} hasta %{ENDDATE}, desde %{STARTTIME} hasta %{ENDTIME}" # eg: Desde feb. 7 hasta feb. 10, Desde 6PM hasta 10PM
+    on_DATE_from_START_to_END: "El %{DATE} desde %{START} hasta %{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Desde %{STARTDATE} hasta %{ENDDATE}, desde %{STARTTIME} hasta %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando Desde %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
-
   accounting_export:
-    journal_code: "Journal code"                                               # translation_missing
-    date: "Entry date"                                                         # translation_missing
-    account_code: "Account code"                                               # translation_missing
-    account_label: "Account label"                                             # translation_missing
-    piece: "Document"                                                          # translation_missing
-    line_label: "Entry label"                                                  # translation_missing
-    debit_origin: "Origin debit"                                               # translation_missing
-    credit_origin: "Origin credit"                                             # translation_missing
-    debit_euro: "Euro debit"                                                   # translation_missing
-    credit_euro: "Euro credit"                                                 # translation_missing
-    lettering: "Lettering"                                                     # translation_missing
+    journal_code: "Journal code"
+    date: "Entry date"
+    account_code: "Account code"
+    account_label: "Account label"
+    piece: "Document"
+    line_label: "Entry label"
+    debit_origin: "Origin debit"
+    credit_origin: "Origin credit"
+    debit_euro: "Euro debit"
+    credit_euro: "Euro credit"
+    lettering: "Lettering"
     VAT: 'IVA'
-    subscription: "subscr."                                                    # translation_missing
-    Machine_reservation: "machine reserv."                                     # translation_missing
-    Training_reservation: "training reserv."                                   # translation_missing
-    Event_reservation: "event reserv."                                         # translation_missing
-    Space_reservation: "space reserv."                                         # translation_missing
-    wallet: "wallet"                                                           # translation_missing
-
+    subscription: "subscr."
+    Machine_reservation: "machine reserv."
+    Training_reservation: "training reserv."
+    Event_reservation: "event reserv."
+    Space_reservation: "space reserv."
+    wallet: "wallet"
   trainings:
-    # training availabilities
+    #training availabilities
     i_ve_reserved: "he reservado"
     completed: "Lleno"
-
   events:
-    # error messages when updating an event
+    #error messages when updating an event
     error_deleting_reserved_price: "No se puede eliminar el precio solicitado porque está asociado con algunas reservas."
     other_error: "Se ha producido un error inesperado al actualizar el evento."
-    # event duration
+    #event duration
     from_STARTDATE_to_ENDDATE: "Del %{STARTDATE} al %{ENDDATE},"
     from_STARTTIME_to_ENDTIME: "de %{STARTTIME} a %{ENDTIME}"
-
   export_members:
-    # members list export to EXCEL format
+    #members list export to EXCEL format
     members: "Miembros"
     id: "ID"
     surname: "Apellidos"
@@ -191,9 +201,8 @@ es:
     man: "hombre"
     woman: "mujer"
     without_subscriptions: "Sin suscripciones"
-
   export_reservations:
-    # machines/trainings/events reservations list to EXCEL format
+    #machines/trainings/events reservations list to EXCEL format
     reservations: "Reservas"
     customer_id: "Identificación del cliente"
     customer: "Cliente"
@@ -205,9 +214,8 @@ es:
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago online"
-
   export_subscriptions:
-    # subscriptions list export to EXCEL format
+    #subscriptions list export to EXCEL format
     subscriptions: "Suscripciones"
     id: "ID"
     customer: "Cliente"
@@ -220,9 +228,8 @@ es:
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago online"
-
   export_availabilities:
-    # reservation slots export, by type, to EXCEL format
+    #reservation slots export, by type, to EXCEL format
     machines: "Máquinas"
     trainings: "Cursos"
     spaces: "Espacios"
@@ -236,11 +243,9 @@ es:
     event: "Evento"
     reservations: "Reservas"
     available_seats: "Asientos disponibles"
-
-
   api:
     notifications:
-      # internal app notifications
+      #internal app notifications
       deleted_user: "Usuario eliminado"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abuso ha sido reportado <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
@@ -257,15 +262,15 @@ es:
       notify_admin_subscription_canceled:
         USER_s_subscription_has_been_cancelled: "La suscripción de %{USER}ha sido cancelada."
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "La suscripción <strong><em>{PLAN}</em></strong> de <strong><em>{USER}</strong></em> se ha extendido {FREE, select, true{for free} other{}} hasta {DATE}."  # messageFormat interpolation
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "La suscripción <strong><em>{PLAN}</em></strong> de <strong><em>{USER}</strong></em> se ha extendido {FREE, select, true{for free} other{}} hasta {DATE}." #messageFormat interpolation
       notify_admin_subscription_is_expired:
         USER_s_subscription_has_expired: "%La suscripción de {USER} ha expirado."
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "La suscripción de %{USER} expirará en 7 días."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "El usuario <strong><em>{NAME}</strong></em> ha cambiado {GENDER, select, true{his} other{her}} el grupo."  # messageFormat interpolation
+        user_NAME_changed_his_group_html: "El usuario <strong><em>{NAME}</strong></em> ha cambiado {GENDER, select, true{his} other{her}} el grupo." #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "El usuario <strong><em>{NAME}</strong></em> se ha fusionado {GENDER, select, true{his} other{her}} con la cuenta importada desde <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "El usuario <strong><em>{NAME}</strong></em> se ha fusionado {GENDER, select, true{his} other{her}} con la cuenta importada desde <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
       notify_admin_when_user_is_created:
@@ -287,7 +292,7 @@ es:
       notify_member_subscription_canceled:
         your_subscription_PLAN_was_successfully_cancelled_html: "Su suscripción <strong><em>%{PLAN}</em></strong> se ha cancelado exitosamente."
       notify_member_subscription_extended:
-        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Su suscripción <strong><em>{PLAN}</em></strong> se ha extendido {FREE, select, true{for free} other{}} hasta {DATE}."  # messageFormat interpolation
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Su suscripción <strong><em>{PLAN}</em></strong> se ha extendido {FREE, select, true{for free} other{}} hasta {DATE}." #messageFormat interpolation
       notify_member_subscription_is_expired:
         your_subscription_has_expired: "Su suscripción ha expirado."
       notify_member_subscription_will_expire_in_7_days:
@@ -335,24 +340,24 @@ es:
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
       notify_admin_import_complete:
-        import_over: "%{CATEGORY} import is over. "                    # missing translation
-        members: "Members"                                             # missing translation
-        view_results: "View results."                                  # missing translation
+        import_over: "%{CATEGORY} import is over. "
+        members: "Members"
+        view_results: "View results."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento de %{PERCENT}% con el código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Disfruta de un descuento de %{AMOUNT} con el código %{CODE}"
       notify_admin_free_disk_space:
-        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"        # missing translation
+        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"
       notify_admin_close_period_reminder:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"        # missing translation
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"          # missing translation
-      notify_admin_archive_complete:                                                                          # missing translation
-        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."          # missing translation
+        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"
+        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
+      notify_admin_archive_complete:
+        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
       notify_privacy_policy_changed:
-        policy_updated: "Privacy policy updated."                      # missing translation
-        click_to_show: "Click here to consult"                         # missing translation
+        policy_updated: "Privacy policy updated."
+        click_to_show: "Click here to consult"
   statistics:
-    # statistics tools for admins
+    #statistics tools for admins
     subscriptions: "Suscripciones"
     machines_hours: "Horario de máquinas"
     spaces: "Espacios"
@@ -378,9 +383,8 @@ es:
     revenue: "Ingresos"
     account_creation: "Creación de cuenta"
     project_publication: "Publicación de proyectos"
-
   export:
-    # statistics exports to the excel file format
+    #statistics exports to the excel file format
     entries: "Entradas"
     revenue: "Ingresos"
     average_age: "Edad media"
@@ -394,12 +398,10 @@ es:
     type: "Tipo"
     male: "Hombre"
     female: "Mujer"
-
   price_category:
-    # initial price's category for events, created to replace the old "reduced amount" property
+    #initial price's category for events, created to replace the old "reduced amount" property
     reduced_fare: "Tarifa reducida"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarifa reducida si tienes menos de 25 años, eres estudiante o estás desempleado."
-
   group:
-    # name of the user's group for administrators
+    #name of the user's group for administrators
     admins: 'Administradores'
