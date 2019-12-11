@@ -2,18 +2,16 @@ fr:
   app:
     public:
       common:
-        # en-tête et page "à propos"
-        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} neutral{} other{des}} {NAME}"  # messageFormat interpolation
+        #header and "about" page
+        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} neutral{} other{des}} {NAME}" #messageFormat interpolation
         return: "Retour"
-
-        # cookies
+        #cookies
         cookies:
           about_cookies: "Ce site web utilise des cookies à des fins de mesure d'audience."
           learn_more: "En savoir plus"
           accept: "Accepter les cookies"
           decline: "Refuser"
-
-        # sections du tableau de bord
+        #dashboard sections
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
         my_settings: "Mes paramètres"
@@ -22,18 +20,15 @@ fr:
         my_events: "Mes évènements"
         my_invoices: "Mes factures"
         my_wallet: "Mon porte-monnaie"
-
-        # connexion / déconnexion
+        #login/logout
         sign_out: "Se déconnecter"
         sign_up: "S'inscrire"
         sign_in: "Se connecter"
-
-        # menu de gauche
+        #left menu
         notifications: "Notifications"
         admin: "Admin"
         reduce_panel: "Réduire le volet"
-
-        # menu de gauche (partie publique)
+        #left menu (public)
         home: "Accueil"
         reserve_a_machine: "Réserver une machine"
         trainings_registrations: "Inscriptions formations"
@@ -42,8 +37,7 @@ fr:
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Calendrier"
-
-        # menu de gauche (partie admin)
+        #left menu (admin)
         trainings_monitoring: "Suivi formations"
         select_a_training: "Sélectionnez une formation"
         manage_the_calendar: "Gérer le calendrier"
@@ -57,8 +51,7 @@ fr:
         statistics: "Statistiques"
         customization: "Personnalisation"
         open_api_clients: "Clients OpenAPI"
-
-        # fenêtre de création de compte
+        #account creation modal
         create_your_account: "Créer votre compte"
         man: "Homme"
         woman: "Femme"
@@ -99,68 +92,58 @@ fr:
         used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
         used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
         public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
-
-        # fenêtre de changement de mot de passe
+        #password modification modal
         change_your_password: "Modifier votre mot de passe"
         your_new_password: "Votre nouveau mot de passe"
         your_password_was_successfully_changed: "Votre mot de passe a bien été modifié."
-
-        # fenêtre de connexion
+        #connection modal
         connection: "Connexion"
         password_forgotten: "Mot de passe oublié ?"
         not_registered_to_the_fablab: "Vous n'êtes pas inscrit au FAB LAB ?"
         create_an_account: "Créer un compte"
         wrong_email_or_password: "Adresse courriel ou mot de passe incorrect."
         caps_lock_is_on: "La touche de verrouillage des majuscules est activée."
-
-        # mot de passe oublié
+        #forgotten password modal
         your_email_address_is_unknown: "Votre adresse de courriel est inconnue."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Vous allez recevoir sous quelques minutes un courriel vous indiquant comment réinitialiser votre mot de passe."
-
-        # Fab-manager's version
+        #Fab-manager's version
         version: "Version :"
-
-        # Notifications
-        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}} ..."  # messageFormat interpolation
-
+        #Notifications
+        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}} ..." #messageFormat interpolation
       about:
-        # page à propos
+        #about page
         about:
           read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
           read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
           your_fablab_s_contacts: "Vos contacts au Fab Lab"
           privacy_policy: "Politique de confidentialité"
-
       privacy:
-        # page 'politique de confidentialité'
+        #'privacy policy' page
         privacy:
           title: "Politique de confidentialité"
           dpo: "Délégué à la protection des données"
           last_update: "Dernière mise à jour,"
-
       home:
-        # page d'accueil
+        #home page
         latest_documented_projects: "Les derniers projets documentés"
         follow_us: "Suivez-nous"
         latest_tweets: "Les derniers tweets"
         latest_registered_members: "Derniers membres inscrits"
         create_an_account: "Créer un compte"
         discover_members: "Découvrir les membres"
-
-        # résumé des prochains évènements sur la page d'acceuil
+        #next events summary on the home page
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
-        from_date_to_date: "du {{START}} au {{END}}"  # angular interpolation
-        on_the_date: "le {{DATE}}"                    # angular interpolation
-        from_time_to_time: "de {{START}} à {{END}}"   # angular interpolation
+        from_date_to_date: "du {{START}} au {{END}}" #angular interpolation
+        on_the_date: "le {{DATE}}" #angular interpolation
+        from_time_to_time: "de {{START}} à {{END}}" #angular interpolation
         free_entry: "Accès libre"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
         event_full: "Événement complet"
         still_available: "Place(s) disponible(s) :"
-
       projects_list:
-        # galerie des projets
+        #projects gallery
         projects_list:
           the_fablab_projects: "Les projets du FabLab"
           add_a_project: "Ajouter un projet"
@@ -178,14 +161,13 @@ fr:
           all_materials: "Tous les matériaux"
           load_next_projects: "Charger les projets suivants"
           rough_draft: "Brouillon"
-
       projects_show:
-        # détails d'un projet
+        #details of a projet
         project_description: "Description du projet"
-        by_name: "Par {{NAME}}"  # angular interpolation
+        by_name: "Par {{NAME}}" #angular interpolation
         deleted_user: "Utilisateur supprimé"
         posted_on_: "posté le"
-        CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"  # messageFormat interpolation
+        CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}" #messageFormat interpolation
         licence: "Licence"
         report_an_abuse: "Signaler un abus"
         unauthorized_operation: "Opération non autorisée"
@@ -201,9 +183,8 @@ fr:
         message_is_required: "Le message est requis."
         report: "Signaler"
         do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
-
       machines_list:
-        # liste des machines
+        #list of machines
         machines_list:
           the_fablab_s_machines: "Les machines du FabLab"
           add_a_machine: "Ajouter une machine"
@@ -212,9 +193,8 @@ fr:
           status_enabled: "Actives"
           status_disabled: "Désactivées"
           status_all: "Toutes"
-
       machines_show:
-        # détail d'une machine
+        #details of a machine
         book_this_machine: "Réserver cette machine"
         files_to_download: "Fichiers à télécharger"
         projects_using_the_machine: "Projets utilisant la machine"
@@ -222,31 +202,28 @@ fr:
         do_you_really_want_to_delete_this_machine: "Êtes-vous sur de vouloir supprimer cette machine ?"
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
-
       trainings_list:
-        # liste des formations
+        #list of trainings
         the_trainings: "Les formations"
-
       training_show:
-        # détails d'une formation
+        #details of a training
         book_this_training: "Réserver cette formation"
         do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
         unauthorized_operation: "Opération non autorisée"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
-
       plans:
-        # page récapitulative des abonnements
+        #summary of the subscriptions
         subcriptions: "Les abonnements"
         i_choose_that_plan: "Je choisis cette formule"
         i_subscribe_online: "Je m'abonne en ligne"
         i_already_subscribed: "Je suis déjà abonné"
         more_information: "Plus d'infos"
-        your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}"  # angular interpolation
+        your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}" #angular interpolation
         my_group: "Mon groupe"
-        his_group: "Son groupe"  # messageFormat interpolation
-        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
-        change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"  # messageFormat interpolation
-        your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {{DATE}}"  # angular interpolation
+        his_group: "Son groupe" #messageFormat interpolation
+        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe" #messageFormat interpolation
+        change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe" #messageFormat interpolation
+        your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {{DATE}}" #angular interpolation
         you_ve_just_payed_the_: "Vous venez de régler l'"
         thank_you_your_subscription_is_successful: "Merci. Votre abonnement a bien été pris en compte !"
         your_group_was_successfully_changed: "Votre groupe a bien été changé."
@@ -255,10 +232,9 @@ fr:
         an_error_prevented_to_change_the_user_s_group: "Une erreur a empêché le changement de groupe de l'utilisateur."
         an_error_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         subscription_confirmation: "Validation de l'abonnement"
-        here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {{NAME}} :"  # angular interpolation
-
+        here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {{NAME}} :" #angular interpolation
       events_list:
-        # liste des évènements du fablab
+        #Fablab's events list
         the_fablab_s_events: "Les évènements du Fab Lab"
         all_categories: "Toutes les catégories"
         for_all: "Tout public"
@@ -267,9 +243,8 @@ fr:
         free_admission: "Gratuit"
         still_available: "place(s) disponible(s)"
         free_entry: "Accès libre"
-
       events_show:
-        # détails d'un événement et réservation
+        #details and booking of an event
         event_description: "Description de l'évènement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
@@ -280,24 +255,23 @@ fr:
         sold_out: "Événement complet"
         free_entry: "Accès libre"
         cancelled: "Annulé"
-        ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"  # messageFormat interpolation
+        ticket: "{NUMBER, plural, =0{place} one{place} other{places}}" #messageFormat interpolation
         make_a_gift_of_this_reservation: "Offrir cette réservation"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
-        you_booked_DATE: "Vous avez réservé ({{DATE}}) :"  # angular interpolation
-        canceled_reservation_SEATS: "Réservation annulée ({{SEATS}} places)" # angular interpolation
+        you_booked_DATE: "Vous avez réservé ({{DATE}}) :" #angular interpolation
+        canceled_reservation_SEATS: "Réservation annulée ({{SEATS}} places)" #angular interpolation
         book: "Réserver"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
         confirmation_required: "Confirmation requise"
-        do_you_really_want_to_delete_this_event:  "Voulez-vous vraiment supprimer cet évènement ?"
+        do_you_really_want_to_delete_this_event: "Voulez-vous vraiment supprimer cet évènement ?"
         event_successfully_deleted: "L'évènement a bien été supprimé."
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Impossible de supprimer l'évènement, il est peut-être déjà réservé par certains utilisateurs."
         cancel_the_reservation: "Annuler la réservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
         cancellation_failed: "L'annulation a échoué."
-
       calendar:
-        # calendrier publique
+        #public calendar
         calendar:
           calendar: "Calendrier"
           show_unavailables: "Afficher les créneaux non disponibles"
@@ -307,9 +281,8 @@ fr:
           spaces: "Espaces"
           events: "Évènements"
           externals: "Autres calendriers"
-
       spaces_list:
-        # liste des espaces
+        #list of spaces
         spaces_list:
           the_spaces: "Les espaces"
           add_a_space: "Ajouter un espace"
@@ -317,9 +290,8 @@ fr:
           status_disabled: "Désactivés"
           status_all: "Tous"
           book: "Réserver"
-
       space_show:
-        # affichage des détails d'un espace
+        #display the details of a space
         space_show:
           book_this_space: "Réserver cet espace"
           unauthorized_operation: "Opération non autorisée"
