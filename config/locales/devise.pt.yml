@@ -1,5 +1,4 @@
-# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
-
+#Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 pt:
   devise:
     confirmations:
@@ -18,14 +17,14 @@ pt:
       unconfirmed: "Você precisa confirmar sua conta, antes de continuar."
     mailer:
       confirmation_instructions:
-      action:
+        action:
         instruction:
-        subject: "Instruções de confirmação"
+        subject: "Confirmation instructions"
       reset_password_instructions:
-      action:
+        action:
         instruction:
         ignore_otherwise:
-        subject: "Instruções para redefinir sua senha"
+        subject: "Reset password instructions"
       unlock_instructions:
         subject: "Instruções para desbloquear sua conta"
     omniauth_callbacks:
