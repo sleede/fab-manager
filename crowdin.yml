@@ -1,0 +1,17 @@
+files:
+  - source: /config/locales/app.admin.en.yml
+    translation: /config/locales/app.admin.%two_letters_code%.yml
+  - source: /config/locales/app.logged.en.yml
+    translation: /config/locales/app.logged.%two_letters_code%.yml
+  - source: /config/locales/app.public.en.yml
+    translation: /config/locales/app.public.%two_letters_code%.yml
+  - source: /config/locales/app.shared.en.yml
+    translation: /config/locales/app.shared.%two_letters_code%.yml
+  - source: /config/locales/en.yml
+    translation: /config/locales/%two_letters_code%.yml
+  - source: /config/locales/devise.en.yml
+    translation: /config/locales/devise.%two_letters_code%.yml
+  - source: /config/locales/mails.en.yml
+    translation: /config/locales/mails.%two_letters_code%.yml
+  - source: /config/locales/rails.en.yml
+    translation: /config/locales/rails.%two_letters_code%.yml
