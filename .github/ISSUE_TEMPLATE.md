@@ -2,7 +2,7 @@ This issue tracker is **reserved** for bug reports.
 
 The place to ask a question or call for help is at [Fab-manager forums](https://forum.fab-manager.com)
 
-The place to request or vote for new feature is on the [roadmap website](https://roadmap.fab-manager.com)
+The place to request or vote for new feature is on the [feedback website](https://feedback.fab-manager.com)
 
 To report a bug, please describe:
 - Expected behavior and actual behavior.
