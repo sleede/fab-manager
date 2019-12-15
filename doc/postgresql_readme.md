@@ -25,8 +25,8 @@ Use the following commands to dump the PostgreSQL database to an archive file
 cd /apps/fabmanager/
 docker-compose exec postgres bash
 cd /var/lib/postgresql/data/
-pg_dump -U postgres fabmanager_production > fabmanager_production_$(date -I).sql
-tar cvzf fabmanager_production_$(date -I).tar.gz fabmanager_production_$(date -I).sql
+pg_dump -U postgres fablab_production > fablab_production_$(date -I).sql
+tar cvzf fablab_production_$(date -I).tar.gz fablab_production_$(date -I).sql
 ```
 
 If you're connected to your server thought SSH, you can download the resulting dump file using the following:
@@ -36,8 +36,8 @@ scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_production_$(d
 
 Restore the dump with the following:
 ```bash
-tar xvf fabmanager_production_$(date -I).tar.gz
-sudo cp fabmanager_production_$(date -I).sql .docker/postgresql/
+tar xvf fablab_production_$(date -I).tar.gz
+sudo cp fablab_production_$(date -I).sql .docker/postgresql/
 rake db:drop
 rake db:create
 docker exec -it fabmanager-postgres bash
