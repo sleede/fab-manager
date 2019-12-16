@@ -325,7 +325,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             angular.forEach(notifications.notifications, function (n) { toDisplay.push(n); });
 
             if (toDisplay.length < notifications.totals.unread) {
-              toDisplay.push({ message: { description: _t('and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }) } });
+              toDisplay.push({ message: { description: _t('app.public.common.and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }) } });
             }
 
             angular.forEach(toDisplay, function (notification) { growl.info(notification.message.description); });

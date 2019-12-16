@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'admin_calendar.calendar_management' }}</h1>
+        <h1 translate>{{ 'app.admin.calendar.calendar_management' }}</h1>
       </section>
     </div>
 
@@ -28,12 +28,12 @@
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg"></div>
     <div class="calendar-legend-block">
-      <h4 translate>{{ 'admin_calendar.legend' }}</h4>
+      <h4 translate>{{ 'app.admin.calendar.legend' }}</h4>
       <div class="legends">
-        <span class="calendar-legend text-sm border-formation" translate>{{ 'admin_calendar.trainings' }}</span><br>
-        <span class="calendar-legend text-sm border-machine" translate>{{ 'admin_calendar.machines' }}</span><br>
-        <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'admin_calendar.spaces' }}</span>
-        <span class="calendar-legend text-sm border-event" ng-show="eventsInCalendar" translate>{{ 'admin_calendar.events' }}</span>
+        <span class="calendar-legend text-sm border-formation" translate>{{ 'app.admin.calendar.trainings' }}</span><br>
+        <span class="calendar-legend text-sm border-machine" translate>{{ 'app.admin.calendar.machines' }}</span><br>
+        <span class="calendar-legend text-sm border-space" ng-hide="fablabWithoutSpaces" translate>{{ 'app.admin.calendar.spaces' }}</span>
+        <span class="calendar-legend text-sm border-event" ng-show="eventsInCalendar" translate>{{ 'app.admin.calendar.events' }}</span>
       </div>
     </div>
   </div>
@@ -44,17 +44,17 @@
          ng-href="api/availabilities/export_index.xlsx"
          target="export-frame"
          ng-click="alertExport('index')"
-         uib-popover="{{ 'admin_calendar.availabilities_notice' | translate}}"
+         uib-popover="{{ 'app.admin.calendar.availabilities_notice' | translate}}"
          popover-trigger="mouseenter"
          popover-placement="bottom">
-        <i class="fa fa-file-excel-o"></i> {{ 'admin_calendar.availabilities' | translate }}
+        <i class="fa fa-file-excel-o"></i> {{ 'app.admin.calendar.availabilities' | translate }}
       </a>
       <iframe name="export-frame" height="0" width="0" class="none"></iframe>
     </div>
 
     <div class="widget panel b-a m m-t-lg" ng-if="availability" ng-hide="availability.available_type == 'event'">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'admin_calendar.ongoing_reservations' }}</h3>
+        <h3 translate>{{ 'app.admin.calendar.ongoing_reservations' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper" ng-class="{'reservations-locked': availability.lock}">
         <ul class="list-unstyled" ng-if="reservations.length > 0">
@@ -65,14 +65,14 @@
               <span class="btn btn-warning btn-xs" ng-click="cancelBooking(r)" ng-if="!r.canceled_at"><i class="fa fa-times red"></i></span>
           </li>
         </ul>
-        <div ng-show="reservations.length == 0" translate>{{ 'admin_calendar.no_reservations' }}</div>
-        <div class="m-t" ng-show="availability.lock"><i class="fa fa-ban"></i> <span class="m-l-xs" translate>{{ 'admin_calendar.reservations_locked' }}</span></div>
+        <div ng-show="reservations.length == 0" translate>{{ 'app.admin.calendar.no_reservations' }}</div>
+        <div class="m-t" ng-show="availability.lock"><i class="fa fa-ban"></i> <span class="m-l-xs" translate>{{ 'app.admin.calendar.reservations_locked' }}</span></div>
       </div>
     </div>
 
     <div class="widget panel b-a m m-t-lg" ng-if="availability.machine_ids.length > 0">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'admin_calendar.machines' }}</h3>
+        <h3 translate>{{ 'app.admin.calendar.machines' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
         <ul class="list-unstyled">
@@ -86,23 +86,23 @@
 
     <div class="widget panel b-a m m-t-lg" ng-if="availability" >
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'admin_calendar.actions' }}</h3>
+        <h3 translate>{{ 'app.admin.calendar.actions' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper" ng-hide="availability.available_type == 'event'">
         <button class="btn btn-default" ng-click="toggleLockReservations()">
           <span ng-hide="availability.lock">
             <i class="fa fa-stop"></i>
-            <span class="m-l-xs" translate>{{ 'admin_calendar.block_reservations' }}</span>
+            <span class="m-l-xs" translate>{{ 'app.admin.calendar.block_reservations' }}</span>
           </span>
           <span ng-show="availability.lock">
             <i class="fa fa-play"></i>
-            <span class="m-l-xs" translate>{{ 'admin_calendar.allow_reservations' }}</span>
+            <span class="m-l-xs" translate>{{ 'app.admin.calendar.allow_reservations' }}</span>
           </span>
         </button>
         <button class="btn btn-default m-t" ng-click="removeSlot()">
           <span>
             <i class="fa fa-trash"></i>
-            <span class="m-l-xs" translate>{{ 'admin_calendar.delete_slot' }}</span>
+            <span class="m-l-xs" translate>{{ 'app.admin.calendar.delete_slot' }}</span>
           </span>
         </button>
       </div>
@@ -110,13 +110,13 @@
         <a class="btn btn-default pointer" ui-sref="app.admin.events_edit({id: availability.event_id})">
           <span>
             <i class="fa fa-edit"></i>
-            <span class="m-l-xs" translate>{{ 'admin_calendar.edit_event' }}</span>
+            <span class="m-l-xs" translate>{{ 'app.admin.calendar.edit_event' }}</span>
           </span>
         </a>
         <a class="btn btn-default m-t pointer" ui-sref="app.admin.event_reservations({id: availability.event_id})">
           <span>
             <i class="fa fa-bookmark"></i>
-            <span class="m-l-xs" translate>{{ 'admin_calendar.view_reservations' }}</span>
+            <span class="m-l-xs" translate>{{ 'app.admin.calendar.view_reservations' }}</span>
           </span>
         </a>
       </div>

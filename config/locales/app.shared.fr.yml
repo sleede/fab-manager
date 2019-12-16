@@ -22,19 +22,8 @@ fr:
       elements:
         # traductions variées utilisées à plusieurs reprises dans l'application
         group: "Groupe"
-        subscription: "Abonnement"
-        trainings: "Formations"
-        no_trainings: "Aucune formation"
         confirmation_required: "Confirmation requise"
-        description: "Description"
-        machines: "Machines"
         events: "Évènements"
-        materials: "Matériaux"
-        date: "Date"
-        price: "Prix"
-        download_the_invoice: "Télécharger la facture"
-        download_the_credit_note: "Télécharger l'avoir"
-        no_invoices_for_now: "Aucune facture pour le moment."
         email_address: "Adresse de courriel"
         user: "Utilisateur"
         pseudonym: "Pseudonyme"
@@ -42,41 +31,20 @@ fr:
         reservation_was_successfully_cancelled: "La réservation a bien été annulée."
         title: "Titre"
         total_: "TOTAL :"
-        full_price_: "Plein tarif :"
-        rough_draft: "Brouillon"
-        machines_and_materials: "Machines et matériaux"
-        collaborators: "Les collaborateurs"
-        summary: "Résumé"
-        you_ve_just_selected_a_: "Vous venez de sélectionner un"  # you_ve_just_selected_a_ + _subscription
-        _subscription: "abonnement"
-        confirm_and_pay: "Valider et payer"
-        your_invoice_will_be_available_soon_from_your_: "Votre facture sera bientôt disponible depuis votre"
-        add_an_event: "Ajouter un évènement"
-        load_the_next_events: "Charger les évènements suivants ..."
-        no_passed_events: "Aucun évènement passé"
         dates: "Dates"
         thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
-        surname: "Nom"
-        first_name: "Prénom"
-        address: "Adresse"
-        interests: "Centres d'intérêts"
-        CAD_softwares_mastered: "Logiciels de conception maîtrisés"
         name: "Nom"
         step_N: "Étape {INDEX}"
         themes: "Thématiques"
-        tags: "Étiquettes"
-        technical_specifications: "Caractéristiques techniques"
         online_payment: "Paiement en ligne"
         type: "Type"
         partner: "Partenaire"
         standard: "Standard"
         year: "Année"
         month: "Mois"
-        subscription_price: "Coût de l'abonnement"
         model: "Modèle"
         from_date: "Du" # context: date. eg: "from 01/01 to 01/05"
         from_time: "De" # context: time. eg. "from 18:00 to 21:00"
-        to_date: "au" # context: date. eg: "from 01/01 to 01/05"
         to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
         or: "ou"
         and: "et"
@@ -86,15 +54,12 @@ fr:
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-        add_a_project: "Ajouter un projet"
         illustration: "Visuel"
         add_an_illustration: "Ajouter un visuel"
-        book: "Réserver"
         description_is_required: "La description est requise."
         name_is_required: "Le nom est requis."
         all_themes: "Toutes les thématiques"
         filter: 'Filtre'
-        confirm_payment_of_html: "{ROLE, select, admin{Paiement sur place} other{Payer}} : {AMOUNT}"  # (contexte : valider mon paiement de 20,00 €)
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
@@ -110,11 +75,21 @@ fr:
 
       user:
         # formulaire d'édition du profil utilisateur
+        man: "Homme"
+        woman: "Femme"
         add_an_avatar: "Ajouter un avatar"
         pseudonym: "Pseudonyme"
+        pseudonym_is_required: "Le pseudonyme est requis."
+        first_name: "Votre prénom"
+        first_name_is_required: "Le prénom est requis."
+        surname: "Votre nom"
+        surname_is_required: "Le nom est requis."
+        email_address: "Votre adresse de courriel"
         email_address_is_required: "L'adresse de courriel est requise."
         change_password: "Changer de mot de passe"
         new_password: "Nouveau mot de passe"
+        password_is_required: "Le mot de passe est requis."
+        password_is_too_short: "Le mot de passe est trop court (au moins 8 caractères)"
         confirmation_of_new_password: "Confirmation du nouveau mot de passe"
         confirmation_of_password_is_required: "La confirmation du mot de passe est requise."
         confirmation_of_password_is_too_short: "La confirmation du mot de passe est trop courte (au moins 8 caractères)."
@@ -125,6 +100,19 @@ fr:
         date_of_birth_is_required: "La date de naissance est requise."
         website: "Site web"
         job: "Profession"
+        interests: "Centres d'intérêts"
+        CAD_softwares_mastered: "Logiciels de conception maîtrisés"
+        birthday: "Date de naissance"
+        birthday_is_required: "La date de naissance est requise."
+        address: "Adresse"
+        phone_number: "Numéro de téléphone"
+        phone_number_is_required: "Le numéro de téléphone est requis."
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "J'autorise les utilisateurs du Fab Lab inscrits sur le site à me contacter"
+        i_accept_to_receive_information_from_the_fablab: "J'accepte de recevoir des informations du Fab Lab"
+        used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
+        used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
+        used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
+        used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
 
       project:
         # formulaire d'étition d'un projet
@@ -170,8 +158,7 @@ fr:
       member_select:
         # admin : choisir un membre avec lequel interagir
         select_a_member: "Sélectionnez un membre"
-        start_typing: "Commencez à taper ..."
-        please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
+        start_typing: "Commencez à écrire ..."
 
       stripe:
         # fenêtre de paiement stripe
@@ -247,19 +234,18 @@ fr:
 
       trainings:
         # formulaire d'édition d'une formation
-        trainings_form:
-          name: "Nom"
-          name_is_required: "Le nom est requis."
-          illustration: "Visuel"
-          add_an_illustration: "Ajouter un visuel"
-          description: "Description"
-          description_is_required: "La description est requise."
-          add_a_new_training: "Ajouter une nouvelle formation"
-          validate_your_training: "Valider votre formation"
-          associated_machines: "Machines associées"
-          number_of_tickets: "Nombre de places"
-          public_page: "Afficher dans la liste de formation"
-          disable_training: "Désactiver la formation"
+        name: "Nom"
+        name_is_required: "Le nom est requis."
+        illustration: "Visuel"
+        add_an_illustration: "Ajouter un visuel"
+        description: "Description"
+        description_is_required: "La description est requise."
+        add_a_new_training: "Ajouter une nouvelle formation"
+        validate_your_training: "Valider votre formation"
+        associated_machines: "Machines associées"
+        number_of_tickets: "Nombre de places"
+        public_page: "Afficher dans la liste de formation"
+        disable_training: "Désactiver la formation"
 
       user_admin:
         # formulaire partiel d'édition/création utilisateur (vue admin)
@@ -325,8 +311,7 @@ fr:
 
       public_profile:
         # profil publique d'un utilisateur
-        last_activity_: "Dernière activité"
-        _on_: "le"
+        last_activity_html: "Dernière activité <br><strong>le {DATE}</strong>"
         to_come: "à venir"
         approved: "validée"
         projects: "Projets"
@@ -334,6 +319,11 @@ fr:
         author: "Auteur"
         collaborator: "Collaborateur"
         private_profile: "Profil privé"
+        interests: "Centres d'intérêts"
+        CAD_softwares_mastered: "Logiciels de conception maîtrisés"
+        email_address: "Adresse électronique"
+        trainings: "Formations"
+        no_trainings: "Aucune formation"
 
       wallet:
         # porte-monnaie
@@ -341,6 +331,7 @@ fr:
         your_wallet_amount: 'Votre montant disponible'
         wallet_amount: 'Montant disponible'
         no_transactions_for_now: 'Aucune transaction pour le moment'
+        date: "Date"
         operation: 'Opération'
         operator: 'Opérateur'
         amount: 'Montant'

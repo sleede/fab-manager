@@ -196,7 +196,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
           return selected.push(m.name);
         }
       });
-      if (selected.length) { return selected.join(', '); } else { return _t('none'); }
+      if (selected.length) { return selected.join(', '); } else { return _t('app.admin.trainings.none'); }
     };
 
     /**

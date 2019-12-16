@@ -10,12 +10,11 @@
     <li>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.about" ng-show="!goabout">
         <span class="label label-theme rounded text-lg text-white m-r-sm font-ebold">?</span>
-          {{ 'about_the_fablab' | translate:{ GENDER: nameGenre, NAME: fablabName } }}
+          {{ 'app.public.common.about_the_fablab' | translate:{ GENDER: nameGenre, NAME: fablabName } }}
       </a>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.home" ng-show="goabout">
         <span class="label label-theme label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>
-          {{ 'return' | translate }}
-      </div>
+          {{ 'app.public.common.return' | translate }}
       </a>
     </li>
   </ul>
@@ -34,20 +33,20 @@
         </span>
       </a>
       <ul class="uib-dropdown-menu animated fadeInRight">
-        <li><a ui-sref="app.logged.dashboard.profile" translate>{{ 'my_profile' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.settings" translate>{{ 'my_settings' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.projects" translate>{{ 'my_projects' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.trainings" translate>{{ 'my_trainings' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.events" translate>{{ 'my_events' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.invoices" ng-hide="fablabWithoutInvoices" translate>{{ 'my_invoices' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'my_wallet' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.profile" translate>{{ 'app.public.common.my_profile' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.settings" translate>{{ 'app.public.common.my_settings' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.projects" translate>{{ 'app.public.common.my_projects' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.trainings" translate>{{ 'app.public.common.my_trainings' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.invoices" ng-hide="fablabWithoutInvoices" translate>{{ 'app.public.common.my_invoices' }}</a></li>
+        <li><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
 
         <li class="divider"></li>
-        <li><a class="text-black pointer" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'sign_out' | translate }}</a></li>
+        <li><a class="text-black pointer" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'app.public.common.sign_out' | translate }}</a></li>
       </ul>
     </li>
-    <li ng-if="!isAuthenticated()"><a class="font-sbold label text-md pointer" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'sign_up' | translate }}</a></li>
+    <li ng-if="!isAuthenticated()"><a class="font-sbold label text-md pointer" ng-click="signup($event)"><i class="fa fa-rocket"></i> {{ 'app.public.common.sign_up' | translate }}</a></li>
     <li ng-if="!isAuthenticated()">
-        <a class="font-sbold label text-md pointer" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'sign_in' | translate }}</a>
+        <a class="font-sbold label text-md pointer" ng-click="login($event)"><i class="fa fa-sign-in"></i> {{ 'app.public.common.sign_in' | translate }}</a>
     </li>
   </ul>
