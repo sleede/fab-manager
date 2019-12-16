@@ -221,7 +221,7 @@ fr:
         statistics_global: "de toutes les statistiques"
         statistics_account: "des statistiques d'inscriptions"
         statistics_event: "des statistiques sur les évènements"
-        statistics_machine: "des statistiques d'heures machines"
+        statistics_machine: "of statistics about machine slots"
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
@@ -268,5 +268,10 @@ fr:
       body:
         content_html: "<p>Nous souhaitons vous signaler que nous venons de mettre à jour notre politique de confidentialité.</p><p>Nous pouvons apporter régulièrement des modifications à notre politique de confidentialité. Conformément à la réglementation, une notification vous sera envoyée à chaque mise à jour.</p><p>En accédant ou en utilisant nos services après la mise à jour de la Politique de confidentialité, nous considérerons que vous acceptez les termes de celle-ci, mises à jour comprises.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+    notify_admin_refund_created:
+      subject: "A refund has been generated"
+      body:
+        refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
+        download: "Click here to download this refund invoice"
     shared:
       hello: "Bonjour %{user_name}"
