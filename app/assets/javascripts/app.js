@@ -59,8 +59,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.useLoaderCache(true);
       // Secure i18n module against XSS attacks by escaping the output
       $translateProvider.useSanitizeValueStrategy('escapeParameters');
-      // Enable the MessageFormat interpolation (used for pluralization)
-      $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
+      // Use the MessageFormat interpolation by default (used for pluralization)
+      $translateProvider.useMessageFormatInterpolation();
       // Set the langage of the instance (from ruby configuration)
       $translateProvider.preferredLanguage(Fablab.locale);
     }]).run(['$rootScope', '$log', 'AuthService', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',

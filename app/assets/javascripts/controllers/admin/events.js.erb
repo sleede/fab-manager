@@ -232,7 +232,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         return false;
       }
       if (getModel(model)[1][index].related_to > 0) {
-        growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', { ELEMENT: model, NUMBER: getModel(model)[1][index].related_to }, 'messageformat'));
+        growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', { ELEMENT: model, NUMBER: getModel(model)[1][index].related_to }));
         return false;
       }
       return dialogs.confirm({
@@ -240,7 +240,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
           object () {
             return {
               title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_ELEMENT', { ELEMENT: model }, 'messageformat')
+              msg: _t('do_you_really_want_to_delete_this_ELEMENT', { ELEMENT: model })
             };
           }
         }

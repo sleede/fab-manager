@@ -93,7 +93,7 @@
                                       <uib-accordion-group ng-repeat="(day, availabilities) in days" heading="{{formatDay(day, days.$key, months.$key)}}" is-open="accordions[training_name][months.$key][days.$key][day].isOpenFirst" class="light-accordion">
                                           <ul class="list-unstyled">
                                               <li ng-repeat="a in availabilities">
-                                                  <a ng-click="showReservations(years.training, a)" class="btn btn-default">{{ a.start_at | amDateFormat:'LLL' }} - {{ a.end_at | amDateFormat:'LT' }}</a> <span class="label label-success" translate translate-values="{NUMBER:a.reservation_users.length}" translate-interpolation="messageformat"> {{ 'NUMBER_reservation' }}</span>
+                                                  <a ng-click="showReservations(years.training, a)" class="btn btn-default">{{ a.start_at | amDateFormat:'LLL' }} - {{ a.end_at | amDateFormat:'LT' }}</a> <span class="label label-success" translate translate-values="{NUMBER:a.reservation_users.length}"> {{ 'NUMBER_reservation' }}</span>
                                               </li>
                                           </ul>
                                       </uib-accordion-group>

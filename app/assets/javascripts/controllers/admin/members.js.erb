@@ -750,7 +750,7 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
       {},
       { admin: $scope.admin },
       function () {
-        growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }, 'messageformat'));
+        growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }));
         return $state.go('app.admin.members');
       }
       , function (error) {

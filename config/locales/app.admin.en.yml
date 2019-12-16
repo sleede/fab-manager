@@ -24,16 +24,16 @@ en:
           ongoing_reservations: "Ongoing reservations"
           no_reservations: "No reservations"
           confirmation_required: "Confirmation required"
-          do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"  # messageFormat interpolation
+          do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Do you really want to cancel the {USER}'s reservation, the {DATE} at {TIME}, concerning {RESERVATION}?"
           reservation_was_successfully_cancelled: "Reservation was successfully cancelled."
           reservation_cancellation_failed: "Reservation cancellation failed."
           unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Unable to remove the last machine of the slot. Delete the slot rather."
-          do_you_really_want_to_remove_MACHINE_from_this_slot: "Do you really want to remove \"{MACHINE}\" from this slot?"  # messageFormat interpolation
+          do_you_really_want_to_remove_MACHINE_from_this_slot: "Do you really want to remove \"{MACHINE}\" from this slot?"
           this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "This will prevent any new reservation on this slot but won't cancel those existing."
           beware_this_cannot_be_reverted: "Beware: this cannot be reverted."
           the_machine_was_successfully_removed_from_the_slot: "The machine was successfully removed from the slot."
           deletion_failed: "Deletion failed."
-          DATE_slot: "{{DATE}} slot:"  # angular interpolation
+          DATE_slot: "{DATE} slot:"
           what_kind_of_slot_do_you_want_to_create: "What kind of slot do you want to create?"
           training: "Training"
           machine: "Machine"
@@ -56,14 +56,14 @@ en:
           select_period: "Please select a period for the recurrence"
           select_nb_period: "Please select a number of periods for the recurrence"
           select_end_date: "Please select the date of the last occurrence"
-          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"  # messageFormat interpolation
+          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"
           reservable: "Reservable(s):"
           labels: "Label(s):"
           none: "None"
-          slot_successfully_deleted: "The slot {{START}} - {{END}} has been successfully deleted"  # angular interpolation
-          slots_deleted: "The slot of {{START}}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted" # messageFormat interpolation
-          unable_to_delete_the_slot: "Unable to delete the slot {{START}} - {{END}}, probably because it's already reserved by a member"  # angular interpolation
-          slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}." # messageFormat interpolation
+          slot_successfully_deleted: "The slot {START} - {END} has been successfully deleted"
+          slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted"
+          unable_to_delete_the_slot: "Unable to delete the slot {START} - {END}, probably because it's already reserved by a member"
+          slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}."
           you_should_select_at_least_a_machine: "You should select at least one machine on this slot."
           export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
           actions: "Actions"
@@ -126,9 +126,9 @@ en:
         add_a_new_training: "Add a new training"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
-        year_NUMBER: "Year {{NUMBER}}"  # angular interpolation
-        month_of_NAME: "Month of {{NAME}}"  # angular interpolation
-        NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"  # messageFormat interpolation
+        year_NUMBER: "Year {NUMBER}"
+        month_of_NAME: "Month of {NAME}"
+        NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"
         none: "None"
         training_validation: "Training validation"
         training_of_the_ : "Training of the "  # context: date. eg. "training of the september 1st 2012"
@@ -163,9 +163,9 @@ en:
         passed_events: "Passed events"
         events_to_come: "Events to come"
         events_to_come_asc: "Events to come | chronological order"
-        on_DATE: "on {{DATE}}"  	# angular interpolation
-        from_DATE: "from {{DATE}}"  # angular interpolation
-        from_TIME: "from {{TIME}}"  # angular interpolation
+        on_DATE: "on {DATE}"
+        from_DATE: "from {DATE}"
+        from_TIME: "from {TIME}"
         booking: "Booking"
         sold_out: "Sold out"
         cancelled: "Cancelled"
@@ -177,8 +177,8 @@ en:
         add_a_theme: "Add a theme"
         age_ranges: "Age ranges"
         add_a_range: "Add a range"
-        do_you_really_want_to_delete_this_ELEMENT: "Do you really want to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}?"  # messageFormat interpolation
-        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Unable to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}} because it is already associated with {NUMBER, plural, =0{no events} one{one event} other{{NUMBER} events}}."  # messageFormat interpolation
+        do_you_really_want_to_delete_this_ELEMENT: "Do you really want to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}}?"
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Unable to delete this {ELEMENT, select, category{category} theme{theme} age_range{age range} other{element}} because it is already associated with {NUMBER, plural, =0{no events} one{one event} other{{NUMBER} events}}."
         at_least_one_category_is_required: "At least one category is required."
         unable_to_delete_the_last_one: "Unable to delete the last one."
         unable_to_delete_an_error_occured: "Unable to delete: an error occurred."
@@ -243,7 +243,7 @@ en:
           prominence: "Prominence"
           price: "Price"
           machine_hours: "Machine slots"
-          these_prices_match_machine_hours_rates_: "These prices match {{DURATION}} minutes of machine usage, "
+          these_prices_match_machine_hours_rates_: "These prices match {DURATION} minutes of machine usage, "
           _without_subscriptions: "without subscriptions"
           machines: "Machines"
           credits: "Credits"
@@ -251,14 +251,14 @@ en:
           related_trainings: "Related trainings"
           add_a_machine_credit: "Add a machine credit"
           machine: "Machine"
-          hours: "Slots of {{DURATION}} minutes"
+          hours: "Slots of {DURATION} minutes"
           related_subscriptions: "Related subscriptions"
           please_specify_a_number: "Please specify a number."
           none: "None"  # grammar note: concordance with "training".
           an_error_occurred_while_saving_the_number_of_credits: "An error occurred while saving the number of credits."
-          an_error_occurred_while_deleting_credit_with_the_TRAINING: "An error occurred while deleting credit with the {{TRAINING}}."  # angular interpolation
+          an_error_occurred_while_deleting_credit_with_the_TRAINING: "An error occurred while deleting credit with the {TRAINING}."
           an_error_occurred_unable_to_find_the_credit_to_revoke: "An error occurred : unable to find the credit to revoke."
-          an_error_occurred_while_creating_credit_with_the_TRAINING: "An error occurred while creating credit with the {{TRAINING}}."  # angular interpolation
+          an_error_occurred_while_creating_credit_with_the_TRAINING: "An error occurred while creating credit with the {TRAINING}."
           not_set: "Not set"
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Error : a credit linking this machine with that subscription already exists."
           changes_have_been_successfully_saved: "Changes have been successfully saved."
@@ -287,7 +287,7 @@ en:
           send_a_coupon: "Send a coupon"
           coupon: "Coupon"
           usages: "Usages"
-          coupon_successfully_sent_to_USER: "Coupon successfully sent to {{USER}}"  # angular interpolation
+          coupon_successfully_sent_to_USER: "Coupon successfully sent to {USER}"
           an_error_occurred_unable_to_send_the_coupon: "An unexpected error prevent from sending the coupon."
           code: "Code"
           enabled: "Enabled"
@@ -296,7 +296,7 @@ en:
           forever: "Each use"
           valid_until: "Valid until (included)"
           spaces: "Spaces"
-          these_prices_match_space_hours_rates_: "These prices match {{DURATION}} minutes of space usage, "
+          these_prices_match_space_hours_rates_: "These prices match {DURATION} minutes of space usage, "
           add_a_space_credit: "Add a Space credit"
           space: "Espace"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error : a credit linking this space with that subscription already exists."
@@ -363,8 +363,8 @@ en:
           code_: "Code:"
           code_disabled: "Code disabled"
           order_num: "Order #:"
-          invoice_issued_on_DATE_at_TIME: "Invoice issued on {{DATE}} at {{TIME}}"  # angular interpolation
-          object_reservation_of_john_smith_on_DATE_at_TIME: "Object: Reservation of John Smith on {{DATE}} at {{TIME}}"  # angular interpolation
+          invoice_issued_on_DATE_at_TIME: "Invoice issued on {DATE} at {TIME}"
+          object_reservation_of_john_smith_on_DATE_at_TIME: "Object: Reservation of John Smith on {DATE} at {TIME}"
           order_summary: "Order summary:"
           details: "Details"
           amount: "Amount"
@@ -376,7 +376,7 @@ en:
           including_VAT: "Including VAT"
           including_total_excluding_taxes: "Including Total excl. taxes"
           including_amount_payed_on_ordering: "Including Amount payed on ordering"
-          settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Settlement by debit card on {{DATE}} at {{TIME}}, for an amount of {{AMOUNT}}"
+          settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Settlement by debit card on {DATE} at {TIME}, for an amount of {AMOUNT}"
           important_notes: "Important notes"
           address_and_legal_information: "Address and legal information"
           invoice_reference: "Invoice reference"
@@ -477,10 +477,10 @@ en:
           perpetual_total: "Perpetual total"
           integrity: "Integrity check"
           confirmation_required: "Confirmation required"
-          confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible."
+          confirm_close_START_END: "Do you really want to close the accounting period between {START} and {END}? Any subsequent changes will be impossible."
           period_must_match_fiscal_year: "A closing must occur at the end of a minimum annual period, or per financial year when it is not calendar-based."
           this_may_take_a_while: "This operation will take some time to complete."
-          period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed. Archive generation is running, you'll be notified when it's done."
+          period_START_END_closed_success: "The accounting period from {START} to {END} has been successfully closed. Archive generation is running, you'll be notified when it's done."
           failed_to_close_period: "An error occurred, unable to close the accounting period"
           no_periods: "No closings for now"
           accounting_codes: "Accounting codes"
@@ -593,7 +593,7 @@ en:
         active: "Active"
         pending: "Pending"
         previous_provider: "Previous provider"
-        do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Do you really want to delete the {{TYPE}} authentication provider: {{NAME}}?"  # angular interpolation
+        do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Do you really want to delete the {TYPE} authentication provider: {NAME}?"
         authentication_provider_successfully_deleted: "Authentication provider successfully deleted."
         an_error_occurred_unable_to_delete_the_specified_provider: "An error occurred: unable to delete the specified provider."
         local_database: "Local database"
@@ -609,9 +609,9 @@ en:
           an_error_occurred_when_saving_the_new_group: "An error occurred when saving the new group."
           group_successfully_deleted: "Group successfully deleted."
           unable_to_delete_group_because_some_users_and_or_groups_are_still_linked_to_it: "Unable to delete group because some users and/or groups are still linked to it."
-          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."  # messageFormat interpolation
-          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."  # messageFormat interpolation
-          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."  # messageFormat interpolation
+          group_successfully_enabled_disabled: "Group successfully {STATUS, select, true{disabled} other{enabled}}."
+          unable_to_enable_disable_group: "Unable to {STATUS, select, true{disable} other{enable}} group."
+          unable_to_disable_group_with_users: "Unable to disable group because it still contains {USERS} active {USERS, plural, =1{user} other{users}}."
           status_enabled: "Enabled"
           status_disabled: "Disabled"
           status_all: "All"
@@ -653,11 +653,11 @@ en:
         # import results
         members_import_result:
           import_results: "Import results"
-          import_details: "Import #{{ID}}, of {{DATE}}, initiated by {{USER}}"  # angular interpolation
+          import_details: "Import #{ID}, of {DATE}, initiated by {USER}"
           results: "Results"
           pending: "Pending..."
           status_create: "Creating a new user"
-          status_update: "Updating user {{ID}}"  # angular interpolation
+          status_update: "Updating user {ID}"
           success: "Success"
           failed: "Failed"
           error_details: "Error's details:"
@@ -677,8 +677,8 @@ en:
         events: "Events"
         next_events: "Next events"
         no_upcoming_events: "No upcoming events"
-        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"  # messageFormat interpolation
-        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"  # messageFormat interpolation
+        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"
         passed_events: "Passed events"
         invoices: "Invoices"
         invoice_num: "Invoice #"
@@ -692,14 +692,14 @@ en:
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "You successfully changed the expiration date of the user's subscription"
         a_problem_occurred_while_saving_the_date: "A problem occurred while saving the date."
         new_subscription: "New subscription"
-        you_are_about_to_purchase_a_subscription_to_NAME: "You are about to purchase a subscription to {{NAME}}."  # angular interpolation
+        you_are_about_to_purchase_a_subscription_to_NAME: "You are about to purchase a subscription to {NAME}."
         subscription_successfully_purchased: "Subscription successfully purchased."
         a_problem_occurred_while_taking_the_subscription: "A problem occurred while taking the subscription"
 
       admins_new:
         # add a new administrator to the platform
         add_an_administrator: "Add an administrator"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."  # messageFormat interpolation
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."
         failed_to_create_admin: "Unable to create the administrator:"
 
       authentication_new:
@@ -768,7 +768,7 @@ en:
         top_list_of: "Top list of"
         number: "Number"
         week_short: "Week"
-        week_of_START_to_END: "Week of {{START}} to {{END}}"  # angular interpolation
+        week_of_START_to_END: "Week of {START} to {END}"
         no_data_for_this_period: "No data for this period"
 
       settings:
@@ -843,7 +843,7 @@ en:
           reservations_cancelling: "Reservations cancelling"
           reservations_reminders: "Reservations reminders"
           notification_sending_before_the_reservation_occurs: "Notification sending before the reservation occurs"
-          customization_of_SETTING_successfully_saved: "Customization of the {{SETTING}} successfully saved."  # angular interpolation
+          customization_of_SETTING_successfully_saved: "Customization of the {SETTING} successfully saved."
           file_successfully_updated: "File successfully updated."
           name_genre: "title concordance"
           machine_explications_alert: "explanation message on the machine reservation page"
@@ -890,7 +890,7 @@ en:
             title: "Privacy policy"
             input_the_dpo: "Input the contact of the Data Protection Officer"
             current_policy: "Current policy"
-            draft_from_USER_DATE: "Draft, saved by {{USER}}, on {{DATE}}"
+            draft_from_USER_DATE: "Draft, saved by {USER}, on {DATE}"
             save_or_publish: "Save or publish?"
             save_or_publish_body: "Do you want to publish a new version of the privacy policy or save it as a draft?"
             publish_will_notify: "Publish a new version will send a notification to every users."
@@ -923,7 +923,7 @@ en:
       space_edit:
         # modify an exiting space
         space_edit:
-          edit_the_space_NAME: "Edit the space: {{NAME}}"  # angular interpolation
+          edit_the_space_NAME: "Edit the space: {NAME}"
           validate_the_changes: "Validate the changes"
 
       manage_abuses:

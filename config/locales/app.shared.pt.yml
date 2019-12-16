@@ -62,7 +62,7 @@ pt:
         interests: "Interesses"
         CAD_softwares_mastered: "CAD Softwares mastered"
         name: "Nome"
-        step_N: "Passo {{INDEX}}"  # angular interpolation
+        step_N: "Passo {INDEX}"
         themes: "Temas"
         tags: "Tags"
         technical_specifications: "Especificações técnicas"
@@ -94,7 +94,7 @@ pt:
         name_is_required: "Nome é obrigatório."
         all_themes: "Todos temas"
         filter: 'Filtro'
-        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
+        confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagamento}}: {AMOUNT}"  # (context: confirm my payment of $20.00)
         export_is_running_you_ll_be_notified_when_its_ready: "Exportação em andamento. Você será notificado quando terminar."
         share_on_facebook: "Compartilhar no Facebook"
         share_on_twitter: "Compartilhar no Twitter"
@@ -177,8 +177,8 @@ pt:
         # stripe payment modal
         i_have_read_and_accept_: "Eu li e aceito"
         _the_general_terms_and_conditions: "os termos e condições."
-        credit_amount_for_pay_reservation: "{{amount}} {{currency}} a ser pago para confirmar sua inscrição"
-        client_credit_amount_for_pay_reservation: "{{amount}} {{currency}}  a ser pago para confirmar a inscrição do cliente"
+        credit_amount_for_pay_reservation: "{amount} {currency} a ser pago para confirmar sua inscrição"
+        client_credit_amount_for_pay_reservation: "{amount} {currency}  a ser pago para confirmar a inscrição do cliente"
 
       valid_reservation_modal:
         # dialog of on site payment for reservations
@@ -307,13 +307,13 @@ pt:
         # machine/training slot modification modal
         change_the_slot: "Alterar o slot"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Você deseja alterar seu agendamento, inicialmente marcado para:"
-        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Você deseja alterar o agendamento do usuário {{NAME}}, inicialmente marcado para:"  # angular interpolation
+        do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Você deseja alterar o agendamento do usuário {NAME}, inicialmente marcado para:"
         cancel_this_reservation: "Cancelar essa reserva"
         i_want_to_change_date: "Eu quero alterar a data"
 
       request_training_modal:
         # modal introducing that a training is requested before booking a machine
-        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Para agendar \"{{MACHINE}}\" você deve completar o treinamento {{TRAINING}}."  # angular interpolation
+        to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Para agendar \"{MACHINE}\" você deve completar o treinamento {TRAINING}."
         register_for_the_training: "Inscrever-se no treinamento"
         i_dont_want_to_register_now: "Não desejo me inscrever agora"
 
@@ -361,8 +361,8 @@ pt:
         amount_minimum_1: "A quantia mínima é 1"
         amount_confirm_is_required: "A confirmação da quantia é obrigatório"
         amount_confirm_does_not_match: "A confirmação da quantia não é a mesma da quantia"
-        you_have_amount_in_wallet: "Você tem {{amount}} {{currency}} em sua carteira"
-        client_have_amount_in_wallet: "O cliente possui {{amount}} {{currency}} em sua carteira"
+        you_have_amount_in_wallet: "Você tem {amount} {currency} em sua carteira"
+        client_have_amount_in_wallet: "O cliente possui {amount} {currency} em sua carteira"
         wallet_pay_reservation: "Você pode pagar diretamente sua reserva"
         client_wallet_pay_reservation: "O cliente pode pagar diretamente a reserva"
         debit_subscription: "Débito por inscrição"
@@ -397,8 +397,8 @@ pt:
         # coupon (input zone for users)
         i_have_a_coupon: "Eu tenho um cupom!"
         code_: "Código:"
-        the_coupon_has_been_applied_you_get_PERCENT_discount: "O cupom foi aplicado. Você recebeu {{PERCENT}}% de desconto."  # angular interpolation
-        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "O cupom foi aplicado. Você recebeu um desconto de {{AMOUNT}} {{CURRENCY}}."  # angular interpolation
+        the_coupon_has_been_applied_you_get_PERCENT_discount: "O cupom foi aplicado. Você recebeu {PERCENT}% de desconto."
+        the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "O cupom foi aplicado. Você recebeu um desconto de {AMOUNT} {CURRENCY}."
         unable_to_apply_the_coupon_because_disabled: "Não é possível aplicar o cupom: este código foi desabilitado."
         unable_to_apply_the_coupon_because_expired: "Não é possível aplicar o cupom: este código expirou."
         unable_to_apply_the_coupon_because_sold_out: "Não é possível aplicar o cupom: este código atingiu sua quota."
@@ -429,10 +429,10 @@ pt:
         # module de panier d'achat de réservations
         cart:
           summary: "Sumário"
-          select_one_or_more_slots_in_the_calendar: "Selecionar um {SINGLE, select, true{slot} other{ou mais slots}} no calendário"  # messageFormat interpolation
+          select_one_or_more_slots_in_the_calendar: "Selecionar um {SINGLE, select, true{slot} other{ou mais slots}} no calendário"
           you_ve_just_selected_the_slot: "Você selecionou apenas o slot:"
-          datetime_to_time: "{{START_DATETIME}} até {{END_TIME}}"  # angular interpolation, eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
-          cost_of_TYPE: "Custo de {TYPE, select, Machine{máquina hora} Training{o treinamento} other{o elemento}}"  # messageFormat interpolation
+          datetime_to_time: "{START_DATETIME} até {END_TIME}"  # eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+          cost_of_TYPE: "Custo de {TYPE, select, Machine{máquina hora} Training{o treinamento} other{o elemento}}"
           offer_this_slot: "Oferecer este slot"
           confirm_this_slot: "Confirmar este slot"
           remove_this_slot: "Remover este slot"
@@ -443,7 +443,7 @@ pt:
           _subscription: "inscrição"
           cost_of_the_subscription: "Custo da inscrição"
           confirm_and_pay: "Confirmar e pagar"
-          you_have_settled_the_following_TYPE: "Você liquidou o seguinte {TYPE, select, Machine{slots de máquina} Training{training} other{elements}}:"  # messageFormat interpolation
+          you_have_settled_the_following_TYPE: "Você liquidou o seguinte {TYPE, select, Machine{slots de máquina} Training{training} other{elements}}:"
           you_have_settled_a_: "Você tem liquidado:"
           total_: "TOTAL :"
           thank_you_your_payment_has_been_successfully_registered: "Obrigado. Seu pagamento foi registrado com sucesso !"
@@ -464,7 +464,7 @@ pt:
           do_you_really_want_to_cancel_this_reservation: "Você realmente quer cancelar essa reserva?"
           reservation_was_cancelled_successfully: "Reserva a foi cancelada com sucesso."
           cancellation_failed: "Cancelamento falhou."
-          confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # messageFormat interpolation (context: confirm my payment of $20.00)
+          confirm_payment_of_html: "{ROLE, select, admin{Pagamento pelo site} other{Pagar}}: {AMOUNT}"  # (context: confirm my payment of $20.00)
           a_problem_occurred_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
           none: "Vazio"
           online_payment_disabled: "O pagamento online não está disponível. Entre em contato diretamente com a recepção do Fablab."

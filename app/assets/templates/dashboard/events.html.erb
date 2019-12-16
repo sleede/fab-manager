@@ -23,15 +23,13 @@
               <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
               <br/>
               <span translate
-                    translate-values="{NUMBER: r.nb_reserve_places}"
-                    translate-interpolation="messageformat">
+                    translate-values="{NUMBER: r.nb_reserve_places}">
                 {{ 'NUMBER_normal_places_reserved' }}
               </span>
               <span ng-repeat="ticket in r.tickets">
                 <br/>
                 <span translate
-                      translate-values="{NUMBER: ticket.booked, NAME: ticket.price_category.name}"
-                      translate-interpolation="messageformat">
+                      translate-values="{NUMBER: ticket.booked, NAME: ticket.price_category.name}">
                   {{ 'NUMBER_of_NAME_places_reserved' }}
                 </span>
               </span>

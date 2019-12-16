@@ -556,10 +556,10 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 
                 // Button label
                 if ($scope.amount > 0) {
-                  $scope.validButtonName = _t('cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) }, 'messageformat');
+                  $scope.validButtonName = _t('cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
                 } else {
                   if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                    $scope.validButtonName = _t('cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')(price.price) }, 'messageformat');
+                    $scope.validButtonName = _t('cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
                   } else {
                     $scope.validButtonName = _t('confirm');
                   }

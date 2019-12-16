@@ -5,7 +5,7 @@
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.reserved.length == 0 && (!events.paid || events.paid.length == 0)">
     <p class="font-felt fleche-left text-lg"><%= image_tag('fleche-left.png', class: 'fleche-left visible-lg') %>
-      {{ 'cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot}:"messageformat" }}</p>
+      {{ 'cart.select_one_or_more_slots_in_the_calendar' | translate:{SINGLE:limitToOneSlot} }}</p>
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-if="events.reserved.length > 0">
@@ -15,7 +15,7 @@
     <div class="panel panel-default bg-light" ng-repeat="slot in events.reserved">
       <div class="panel-body">
         <div class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(slot.start | amDateFormat:'LLLL'), END_TIME:(slot.end | amDateFormat:'LT') } }}</div>
-        <div class="text-base">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
+        <div class="text-base">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType} }} <span ng-class="{'text-blue': !slot.promo, 'red': slot.promo}">{{slot.price | currency}}</span></div>
         <div ng-show="isAdmin()" class="m-t">
           <label for="offerSlot" class="control-label m-r" translate>{{ 'cart.offer_this_slot' }}</label>
           <input bs-switch
@@ -63,11 +63,11 @@
   </div>
 
   <div class="widget-content no-bg auto wrapper" ng-show="events.paid && events.paid.length > 0">
-    {{ 'cart.you_have_settled_the_following_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} <strong>{{reservableName}}</strong>:
+    {{ 'cart.you_have_settled_the_following_TYPE' | translate:{TYPE:reservableType} }} <strong>{{reservableName}}</strong>:
 
     <div class="well well-warning m-t-sm" ng-repeat="paidSlot in events.paid">
       <i class="font-sbold text-u-c">{{ 'cart.datetime_to_time' | translate:{START_DATETIME:(paidSlot.start | amDateFormat:'LLLL'), END_TIME:(paidSlot.end | amDateFormat:'LT') } }}</i>
-      <div class="font-sbold">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType}:"messageformat" }} {{paidSlot.price | currency}}</div>
+      <div class="font-sbold">{{ 'cart.cost_of_TYPE' | translate:{TYPE:reservableType} }} {{paidSlot.price | currency}}</div>
     </div>
 
     <div ng-if="selectedPlan">

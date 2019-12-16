@@ -24,16 +24,16 @@ pt:
           ongoing_reservations: "Reservas em curso"
           no_reservations: "Sem reservas"
           confirmation_required: "Confirmação Obrigatória"
-          do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Você realmente deseja cancelar a reserva do usuário {USER}, em {DATE} ás {TIME}, sobre {RESERVATION}?"  # messageFormat interpolation
+          do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION: "Você realmente deseja cancelar a reserva do usuário {USER}, em {DATE} ás {TIME}, sobre {RESERVATION}?"
           reservation_was_successfully_cancelled: "A reserva foi cancelada com sucesso"
           reservation_cancellation_failed: "Reservation cancellation failed."
           unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather: "Não é possível remover a última máquina do slot. Delete o slot primeiramente."
-          do_you_really_want_to_remove_MACHINE_from_this_slot: "Você realmente deseja remover \"{MACHINE}\" desse slot?"  # messageFormat interpolation
+          do_you_really_want_to_remove_MACHINE_from_this_slot: "Você realmente deseja remover \"{MACHINE}\" desse slot?"
           this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing: "Isso impedirá qualquer nova reserva neste slot, mas não cancelará os existentes."
           beware_this_cannot_be_reverted: "Cuidado: isso não pode ser revertido."
           the_machine_was_successfully_removed_from_the_slot: "A máquina foi removida com sucesso desse slot."
           deletion_failed: "Falha ao deletar."
-          DATE_slot: "{{DATE}} slot:"  # angular interpolation
+          DATE_slot: "{DATE} slot:"
           what_kind_of_slot_do_you_want_to_create: "Qual tipo de slot você deseja criar?"
           training: "Treinamento"
           machine: "Máquina"
@@ -56,14 +56,14 @@ pt:
           select_period: "Please select a period for the recurrence"                               # translation_missing
           select_nb_period: "Please select a number of periods for the recurrence"                 # translation_missing
           select_end_date: "Please select the date of the last occurrence"                         # translation_missing
-          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"  # messageFormat interpolation  # translation_missing
+          about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"    # translation_missing
           reservable: "Reservable(s) :"                                                            # translation_missing
           labels: "Etiqueta(s):"
           none: "Nenhuma"
-          slot_successfully_deleted: "O slot {{START}} - {{END}} foi deletado com sucesso"  # angular interpolation
-          slots_deleted: "The slot of {{START}}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted" # messageFormat interpolation # translation_missing
-          unable_to_delete_the_slot: "Não é possível deletar o slot {{START}} - {{END}}, provavelmente porque já foi reservado por um membro"  # angular interpolation
-          slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}." # messageFormat interpolation  # translation_missing
+          slot_successfully_deleted: "O slot {START} - {END} foi deletado com sucesso"
+          slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted"  # translation_missing
+          unable_to_delete_the_slot: "Não é possível deletar o slot {START} - {END}, provavelmente porque já foi reservado por um membro"
+          slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}."   # translation_missing
           you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
           export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
           actions: "Ações"
@@ -126,9 +126,9 @@ pt:
         add_a_new_training: "Adicionar um novo treinamento"
         associated_machines: "Máquinas associadas"
         number_of_tickets: "Número de vagas"
-        year_NUMBER: "Ano {{NUMBER}}"  # angular interpolation
-        month_of_NAME: "Mês de {{NAME}}"  # angular interpolation
-        NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reserva} other{reservas}}"  # messageFormat interpolation
+        year_NUMBER: "Ano {NUMBER}"
+        month_of_NAME: "Mês de {NAME}"
+        NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reserva} other{reservas}}"
         none: "Vazio"
         training_validation: "Validação de treinamentos"
         training_of_the_ : "Treinamento de "  # context: date. eg. "training of the september 1st 2012"
@@ -163,9 +163,9 @@ pt:
         passed_events: "Eventos anteriores"
         events_to_come: "Eventos futuros"
         events_to_come_asc: "Eventos futuros | ordem cronológica"
-        on_DATE: "No {{DATE}}"	  # angular interpolation
-        from_DATE: "Em {{DATE}}"  # angular interpolation
-        from_TIME: "Ás {{TIME}}"  # angular interpolation
+        on_DATE: "No {DATE}"
+        from_DATE: "Em {DATE}"
+        from_TIME: "Ás {TIME}"
         booking: "Reserva"
         sold_out: "Esgotado"
         cancelled: "Cancelado"
@@ -177,8 +177,8 @@ pt:
         add_a_theme: "Adicionar tema"
         age_ranges: "Faixa etária"
         add_a_range: "Adicionar faixa etária"
-        do_you_really_want_to_delete_this_ELEMENT: "Você realmente deseja deletar esse {ELEMENT, select, category{categoria} theme{tema} age_range{faixa etária} other{elemento}}?"  # messageFormat interpolation
-        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Não é possível deletar esse {ELEMENT, select, category{categoria} theme{tema} age_range{faixa etária} other{elemento}} porque já existem associados {NUMBER, plural, =0{sem eventos} one{um evento} other{{NUMBER} eventos}}."  # messageFormat interpolation
+        do_you_really_want_to_delete_this_ELEMENT: "Você realmente deseja deletar esse {ELEMENT, select, category{categoria} theme{tema} age_range{faixa etária} other{elemento}}?"
+        unable_to_delete_ELEMENT_already_in_use_NUMBER_times: "Não é possível deletar esse {ELEMENT, select, category{categoria} theme{tema} age_range{faixa etária} other{elemento}} porque já existem associados {NUMBER, plural, =0{sem eventos} one{um evento} other{{NUMBER} eventos}}."
         at_least_one_category_is_required: "Pelo menos uma categoria é desejada."
         unable_to_delete_the_last_one: "Não é possível excluir o último."
         unable_to_delete_an_error_occured: "Impossível deletar: um erro ocorreu."
@@ -243,7 +243,7 @@ pt:
           prominence: "Relevância"
           price: "Preço"
           machine_hours: "Machine slots"                                                             # translation_missing
-          these_prices_match_machine_hours_rates_: "Estes preços correspondem às {{DURATION}} minutos de trabalho"
+          these_prices_match_machine_hours_rates_: "Estes preços correspondem às {DURATION} minutos de trabalho"
           _without_subscriptions: "sem assinaturas"
           machines: "Máquinas"
           credits: "Créditos"
@@ -251,14 +251,14 @@ pt:
           related_trainings: "Treinamentos relacionados"
           add_a_machine_credit: "Adicionar crédito de máquina"
           machine: "Máquina"
-          hours: "Slots of {{DURATION}} minutes"                                                     # translation_missing
+          hours: "Slots of {DURATION} minutes"                                                     # translation_missing
           related_subscriptions: "Assinaturas relacionadas"
           please_specify_a_number: "Por favor especifique um número."
           none: "Vazio"  # grammar note: concordance with "training".
           an_error_occurred_while_saving_the_number_of_credits: "Um erro ocorreu enquanto era salvo o número de créditos."
-          an_error_occurred_while_deleting_credit_with_the_TRAINING: "Um erro ocorreu enquanto o crédito era deletado do {{TRAINING}}."  # angular interpolation
+          an_error_occurred_while_deleting_credit_with_the_TRAINING: "Um erro ocorreu enquanto o crédito era deletado do {TRAINING}."
           an_error_occurred_unable_to_find_the_credit_to_revoke: "Um erro ocorreu : incapaz de encontrar o crédito para revogar."
-          an_error_occurred_while_creating_credit_with_the_TRAINING: "Ocorreu um erro ao criar o crédito com o {{TRAINING}}."  # angular interpolation
+          an_error_occurred_while_creating_credit_with_the_TRAINING: "Ocorreu um erro ao criar o crédito com o {TRAINING}."
           not_set: "Not set"
           error_a_credit_linking_this_machine_with_that_subscription_already_exists: "Erro : um link de crédito entre esta máquina e esta assinatura já existe."
           changes_have_been_successfully_saved: "As modificações foram salvas com sucesso."
@@ -287,7 +287,7 @@ pt:
           send_a_coupon: "Enviar cupom"
           coupon: "Cupom"
           usages: "Usos"
-          coupon_successfully_sent_to_USER: "Cupon enviado com sucesso para {{USER}}"  # angular interpolation
+          coupon_successfully_sent_to_USER: "Cupon enviado com sucesso para {USER}"
           an_error_occurred_unable_to_send_the_coupon: "Um erro inesperado impede o envio do cupom."
           code: "Código"
           enabled: "Ativo"
@@ -296,7 +296,7 @@ pt:
           forever: "Cada uso"
           valid_until: "Válido até (incluindo)"
           spaces: "Espaços"
-          these_prices_match_space_hours_rates_: "Estes preços correspondem às {{DURATION}} minutos de espaço"
+          these_prices_match_space_hours_rates_: "Estes preços correspondem às {DURATION} minutos de espaço"
           add_a_space_credit: "Adicionar espaço de crédito"
           space: "Espaço"
           error_a_credit_linking_this_space_with_that_subscription_already_exists: "Erro: um crédito que vincula esse espaço com essa assinatura já existe."
@@ -363,8 +363,8 @@ pt:
           code_: "Código:"
           code_disabled: "Código desabilitado"
           order_num: "Ordem #:"
-          invoice_issued_on_DATE_at_TIME: "Fatura emitida em {{DATE}} ás {{TIME}}"  # angular interpolation
-          object_reservation_of_john_smith_on_DATE_at_TIME: "Objeto: Reserva do John Smith em {{DATE}} ás {{TIME}}"  # angular interpolation
+          invoice_issued_on_DATE_at_TIME: "Fatura emitida em {DATE} ás {TIME}"
+          object_reservation_of_john_smith_on_DATE_at_TIME: "Objeto: Reserva do John Smith em {DATE} ás {TIME}"
           order_summary: "Sumário de ordem:"
           details: "Detalhes"
           amount: "Montante"
@@ -376,7 +376,7 @@ pt:
           including_VAT: "Incluindo IVA"
           including_total_excluding_taxes: "Incluindo o total de taxas excluidas"
           including_amount_payed_on_ordering: "Incluindo o valor pago na compra"
-          settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Pagamento por cartão de débito em {{DATE}} ás {{TIME}}, no valor de {{AMOUNT}}"
+          settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Pagamento por cartão de débito em {DATE} ás {TIME}, no valor de {AMOUNT}"
           important_notes: "Notas importantes"
           address_and_legal_information: "Endereço e informações legais"
           invoice_reference: "Referencia de fatura"
@@ -477,10 +477,10 @@ pt:
           perpetual_total: "Perpetual total"                                           # translation_missing
           integrity: "Verificação de integridade"
           confirmation_required: "Confirmation required"                               # translation_missing
-          confirm_close_START_END: "Do you really want to close the accounting period between {{START}} and {{END}}? Any subsequent changes will be impossible"       # translation_missing
+          confirm_close_START_END: "Do you really want to close the accounting period between {START} and {END}? Any subsequent changes will be impossible"       # translation_missing
           period_must_match_fiscal_year: "A closing must occur at the end of a minimum annual period, or per financial year when it is not calendar-based."           # translation_missing
           this_may_take_a_while: "This operation will take some time to complete."       # translation_missing
-          period_START_END_closed_success: "The accounting period from {{START}} to {{END}} has been successfully closed. Archive generation is running, you'll be notified when it's done."        # translation_missing
+          period_START_END_closed_success: "The accounting period from {START} to {END} has been successfully closed. Archive generation is running, you'll be notified when it's done."        # translation_missing
           failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
           no_periods: "No closings for now"                                            # translation_missing
           accounting_codes: "Accounting codes"                                         # translation_missing
@@ -526,7 +526,7 @@ pt:
           general_space_code: "Accounting code for all spaces"                         # translation_missing
           accounting_Space_label: "Spaces label"                                       # translation_missing
           general_space_label: "Account label for all spaces"                          # translation_missing
-          codes_customization_success: "Customization of accounting codes successfully saved."  # angular interpolation                                   # translation_missing
+          codes_customization_success: "Customization of accounting codes successfully saved."                                     # translation_missing
           export_accounting_data: "Export accounting data"                             # translation_missing
           export_to: "Export to the accounting software"                               # translation_missing
           export_is_running: "A Exportação está em andamento. Você será notificado quando terminar."
@@ -593,7 +593,7 @@ pt:
         active: "Ativo"
         pending: "Pendente"
         previous_provider: "Fornecedor anterior"
-        do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Deseja realmente excluir o provedor de autenticação {{TYPE}}: {{NAME}}?"  # angular interpolation
+        do_you_really_want_to_delete_the_TYPE_authentication_provider_NAME: "Deseja realmente excluir o provedor de autenticação {TYPE}: {NAME}?"
         authentication_provider_successfully_deleted: "Provedor de autenticação excluido com sucesso."
         an_error_occurred_unable_to_delete_the_specified_provider: "Ocorreu um erro: não é possível excluir o provedor especificado."
         local_database: "Database local"
@@ -653,11 +653,11 @@ pt:
         # import results
         members_import_result:
           import_results: "Import results"                                                        # translation_missing
-          import_details: "Import #{{ID}}, of {{DATE}}, initiated by {{USER}}"  # angular interpolation   # translation_missing
+          import_details: "Import #{ID}, of {DATE}, initiated by {USER}"     # translation_missing
           results: "Results"                                                                      # translation_missing
           pending: "Pending..."                                                                   # translation_missing
           status_create: "Creating a new user"                                                    # translation_missing
-          status_update: "Updating user {{ID}}"  # angular interpolation                          # translation_missing
+          status_update: "Updating user {ID}"                            # translation_missing
           success: "Success"                                                                      # translation_missing
           failed: "Failed"                                                                        # translation_missing
           error_details: "Error's details:"                                                       # translation_missing
@@ -677,8 +677,8 @@ pt:
         events: "Eventos"
         next_events: "Próximos eventos"
         no_upcoming_events: "Não há eventos programados"
-        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 ticket com preço total reservado} other{{NUMBER} tickets com preço total reservados}}"  # messageFormat interpolation
-        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reservado} other{{NUMBER} {NAME} tickets reservados}}"  # messageFormat interpolation
+        NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 ticket com preço total reservado} other{{NUMBER} tickets com preço total reservados}}"
+        NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reservado} other{{NUMBER} {NAME} tickets reservados}}"
         passed_events: "Eventos anteriores"
         invoices: "Faturas"
         invoice_num: "Faturas #"
@@ -692,14 +692,14 @@ pt:
         you_successfully_changed_the_expiration_date_of_the_user_s_subscription: "Você alterou com êxito a data de expiração da assinatura do usuário"
         a_problem_occurred_while_saving_the_date: "Um erro ocorreu ao salvar a data."
         new_subscription: "Nova inscrição"
-        you_are_about_to_purchase_a_subscription_to_NAME: "Você está prestes a comprar uma assinatura para {{NAME}}."  # angular interpolation
+        you_are_about_to_purchase_a_subscription_to_NAME: "Você está prestes a comprar uma assinatura para {NAME}."
         subscription_successfully_purchased: "Assinatura adquirida com êxito."
         a_problem_occurred_while_taking_the_subscription: "Ocorreu um problema ao fazer a assinatura"
 
       admins_new:
         # add a new administrator to the platform
         add_an_administrator: "Adicionar administrador"
-        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator criado com sucesso. {GENDER, select, female{Ela} other{Ele}} receberá {GENDER, select, female{sua} other{seu}} diretivas de conexão por e-mail."  # messageFormat interpolation
+        administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator criado com sucesso. {GENDER, select, female{Ela} other{Ele}} receberá {GENDER, select, female{sua} other{seu}} diretivas de conexão por e-mail."
         failed_to_create_admin: "Não é possível criar administrador:"
 
       authentication_new:
@@ -768,7 +768,7 @@ pt:
         top_list_of: "Topo da lista de"
         number: "Número"
         week_short: "Semana"
-        week_of_START_to_END: "Semana de {{START}} á {{END}}"  # angular interpolation
+        week_of_START_to_END: "Semana de {START} á {END}"
         no_data_for_this_period: "Nenhum dado para este período"
 
       settings:
@@ -843,7 +843,7 @@ pt:
           reservations_cancelling: "Cancelamento de reservas"
           reservations_reminders: "Lembretes de reservas"
           notification_sending_before_the_reservation_occurs: "Notificação de lembrete da reserva"
-          customization_of_SETTING_successfully_saved: "Personalização do {{SETTING}} salvo com êxito."  # angular interpolation
+          customization_of_SETTING_successfully_saved: "Personalização do {SETTING} salvo com êxito."
           file_successfully_updated: "Arquivo modificado com sucesso."
           name_genre: "Título de concordância"
           machine_explications_alert: "Mensagem explicativa na página de reserva da máquina"
@@ -890,7 +890,7 @@ pt:
             title: "Política de privacidade"
             input_the_dpo: "Input the contact of the Data Protection Officer"                  # translation_missing
             current_policy: "Current policy"                                                   # translation_missing
-            draft_from_USER_DATE: "Draft, saved by {{USER}}, on {{DATE}}"                      # translation_missing
+            draft_from_USER_DATE: "Draft, saved by {USER}, on {DATE}"                      # translation_missing
             save_or_publish: "Save or publish?"                                                # translation_missing
             save_or_publish_body: "Do you want to publish a new version of the privacy policy or save it as a draft?"  # translation_missing
             publish_will_notify: "Publish a new version will send a notification to every users."   # translation_missing
@@ -923,7 +923,7 @@ pt:
       space_edit:
         # modify an exiting space
         space_edit:
-          edit_the_space_NAME: "Editar o espaço: {{NAME}}"  # angular interpolation
+          edit_the_space_NAME: "Editar o espaço: {NAME}"
           validate_the_changes: "Validar mudanças"
 
       manage_abuses:

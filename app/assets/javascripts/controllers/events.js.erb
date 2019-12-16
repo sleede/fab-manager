@@ -750,10 +750,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
             // Button label
             if ($scope.amount > 0) {
-              $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) }, 'messageformat');
+              $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
             } else {
               if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) }, 'messageformat');
+                $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
               } else {
                 $scope.validButtonName = _t('confirm');
               }

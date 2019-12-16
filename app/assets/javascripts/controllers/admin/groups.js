@@ -86,13 +86,13 @@ Application.Controllers.controller('GroupsController', ['$scope', 'groupsPromise
   return $scope.toggleDisableGroup = function (index) {
     const group = $scope.groups[index];
     if (!group.disabled && (group.users > 0)) {
-      return growl.error(_t('group_form.unable_to_disable_group_with_users', { USERS: group.users }, 'messageformat'));
+      return growl.error(_t('group_form.unable_to_disable_group_with_users', { USERS: group.users }));
     } else {
       return Group.update({ id: group.id }, { group: { disabled: !group.disabled } }, function (response) {
         $scope.groups[index] = response;
-        return growl.success(_t('group_form.group_successfully_enabled_disabled', { STATUS: response.disabled }, 'messageformat'));
+        return growl.success(_t('group_form.group_successfully_enabled_disabled', { STATUS: response.disabled }));
       }
-      , error => growl.error(_t('group_form.unable_to_enable_disable_group', { STATUS: !group.disabled }, 'messageformat')));
+      , error => growl.error(_t('group_form.unable_to_enable_disable_group', { STATUS: !group.disabled })));
     }
   };
 }

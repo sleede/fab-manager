@@ -25,7 +25,7 @@
                 <div class="col-md-offset-2 col-md-8 m-t-md">
                     <section class="panel panel-default bg-light m-lg">
                         <div class="panel-body m-r">
-                            {{ 'you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName }:"messageformat" }}<br/>
+                            {{ 'you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName } }}<br/>
                             <img class="m-l v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
                             <strong class="v-middle">{{activeProvider.name}} <span ng-if="ssoEmail()">({{ssoEmail()}})</span></strong><br/>
                             <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'we_need_some_more_details' }}.</p>
