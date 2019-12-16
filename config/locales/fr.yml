@@ -327,7 +327,7 @@ fr:
         statistics_global: "de toutes les statistiques"
         statistics_account: "des statistiques d'inscriptions"
         statistics_event: "des statistiques sur les évènements"
-        statistics_machine: "des statistiques d'heures machines"
+        statistics_machine: "of statistics about machine slots"
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
@@ -356,10 +356,12 @@ fr:
       notify_privacy_policy_changed:
         policy_updated: "Nouvelle mise à jour de la Politique de confidentialité."
         click_to_show: "Cliquez ici pour la consulter"
+      notify_admin_refund_created:
+        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
   statistics:
     #statistics tools for admins
     subscriptions: "Abonnements"
-    machines_hours: "Heures machines"
+    machines_hours: "Machines slots"
     spaces: "Espaces"
     trainings: "Formations"
     events: "Évènements"
