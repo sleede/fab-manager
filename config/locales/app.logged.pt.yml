@@ -4,17 +4,17 @@ pt:
       profileCompletion:
         #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirme sua nova conta"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}" #messageFormat interpolation
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Você acabou de criar uma nova conta como {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
         we_need_some_more_details: "Para finalizar a configuração da plataforma, precisamos de mais detalhes"
         your_email_is_already_used_by_another_account_on_the_platform: "Parece que seu endereço de e-mail já é usado por outro usuário. Verifique seu endereço de e-mail e insira abaixo o código enviado para você."
         please_fill_the_following_form: "Preencha o seguinte formulário"
-        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Alguns dados podem já ter sido fornecidos por {{NAME}} e não podem ser modificados" #angular interpolation
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Some data may have already been provided by {NAME} and cannot be modified"
         then_click_on_: "Em seguida, clique em"
         _to_start_using_the_application: "Para começar a usar o aplicativo"
         new_on_this_platform: "Novo nessa plataforma?"
         your_email_: "Seu email"
         _is_currently_associated_with_another_account_on_this_platform: "Está atualmente associado a outra conta nesta plataforma."
-        please_click_to_change_email_associated_with_your_PROVIDER_account: "Se não for seu, clique no botão a seguir para alterar o e-mail associado à sua conta do {{PROVIDER}}." #angular interpolation
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "If it is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
         do_you_already_have_an_account: "Do you already have an account?"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Não preencha o formulário ao lado, mas especifique aqui o código que recebeu por e-mail, para recuperar o seu acesso."
         just_specify_code_here_to_recover_access: "Basta especificar aqui o código que recebeu por e-mail para recuperar o seu acesso."
@@ -93,8 +93,8 @@ pt:
           your_next_events: "Seus próximos eventos"
           no_events_to_come: "Sem eventos futuros"
           your_previous_events: "Seus eventos anteriores"
-          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}" #messageFormat interpolation
-          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}" #messageFormat interpolation
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{lugar normal reservado} other{lugares normais reservados}}"
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{{NAME} lugar reservado} other{{NAME} lugares reservados}}"
         invoices:
           #dashboard: my invoices
           reference_number: "Número de referência"
@@ -138,7 +138,7 @@ pt:
       space_reserve:
         #book a space
         space_reserve:
-          planning_of_space_NAME: "Plano de {{NAME}} espaço" #angular interpolation
+          planning_of_space_NAME: "Planning of the {NAME} space"
           i_ve_reserved: "Eu reservei"
           i_shift: "Eu troco"
           i_change: "Eu altero"
