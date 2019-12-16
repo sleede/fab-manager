@@ -3,7 +3,7 @@ es:
     public:
       common:
         #header and "about" page
-        about_the_fablab: "Sobre {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}" #messageFormat interpolation
+        about_the_fablab: "Sobre {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
         return: "Volver"
         #cookies
         cookies:
@@ -109,7 +109,7 @@ es:
         #Fab-manager's version
         version: "Version:"
         #Notifications
-        and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..." #messageFormat interpolation
+        and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
       about:
         #about page
         about:
@@ -134,9 +134,9 @@ es:
         #next events summary on the home page
         fablab_s_next_events: "Próximos eventos del FabLab"
         every_events: "Todos los eventos"
-        from_date_to_date: "Desde {{START}} hasta {{END}}" #angular interpolation
-        on_the_date: "El {{DATE}}" #angular interpolation
-        from_time_to_time: "Desde {{START}} hasta {{END}}" #angular interpolation
+        from_date_to_date: "From {START} to {END}"
+        on_the_date: "On the {DATE}"
+        from_time_to_time: "From {START} to {END}"
         free_entry: "Entrada gratuita"
         free_admission: "Admisión gratuita"
         full_price: "Precio final"
@@ -164,10 +164,10 @@ es:
       projects_show:
         #details of a projet
         project_description: "Descripción de proyecto"
-        by_name: "Por {{NAME}}" #angular interpolation
+        by_name: "By {NAME}"
         deleted_user: "Deleted user"
         posted_on_: "Subido el"
-        CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}" #messageFormat interpolation
+        CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
         licence: "Licencia"
         report_an_abuse: "Reportar una infracción"
         unauthorized_operation: "Operación no autorizada"
@@ -218,12 +218,12 @@ es:
         i_subscribe_online: "Suscribirme online"
         i_already_subscribed: "Ya me he suscrito"
         more_information: "Más información"
-        your_subscription_expires_on_the_DATE: "Su suscripción termina {{DATE}}" #angular interpolation
+        your_subscription_expires_on_the_DATE: "Your subscription expires on the {DATE}"
         my_group: "My grupo"
-        his_group: "{GENDER, select, male{His} female{Her} other{Its}} group" #messageFormat interpolation
-        he_wants_to_change_group: "{ROLE, select, admin{The user wants} other{I want}} cambiar el grupo" #messageFormat interpolation
-        change_my_group: "Cambiar {ROLE, select, admin{{GENDER, select, male{his} female{her} other{its}}} other{my}} grupo" #messageFormat interpolation
-        your_subscription_has_expired_on_the_DATE: "Sus suscripcion expiró el {{DATE}}" #angular interpolation
+        his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"
+        he_wants_to_change_group: "{ROLE, select, admin{The user wants} other{I want}} cambiar el grupo"
+        change_my_group: "Cambiar {ROLE, select, admin{{GENDER, select, male{his} female{her} other{its}}} other{my}} grupo"
+        your_subscription_has_expired_on_the_DATE: "Your subscription has expired on the {DATE}"
         you_ve_just_payed_the_: "acaba de pagar"
         thank_you_your_subscription_is_successful: "Gracias. Su suscripción ha tenido éxito"
         your_group_was_successfully_changed: "Su grupo ha sido cambiado correctamente."
@@ -232,7 +232,7 @@ es:
         an_error_prevented_to_change_the_user_s_group: "Un error impidió cambiar los componentes del grupo."
         an_error_occured_during_the_payment_process_please_try_again_later: "Ha ocurrido un error mientras se procesaba el pago. Intentelo en unos minutos."
         subscription_confirmation: "Confirmar suscripción"
-        here_is_the_NAME_subscription_summary: "Resumen de la suscrpición de{{NAME}}:" #angular interpolation
+        here_is_the_NAME_subscription_summary: "Here is the {NAME}'s subscription summary:"
       events_list:
         #Fablab's events list
         the_fablab_s_events: "Los eventos del FabLab"
@@ -255,11 +255,11 @@ es:
         sold_out: "Entradas vendidas."
         free_entry: "Entrada gratuita"
         cancelled: "Cancelled"
-        ticket: "{NUMBER, plural, one{ticket} other{tickets}}" #messageFormat interpolation
+        ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
-        you_booked_DATE: "You booked ({{DATE}}):" #angular interpolation
-        canceled_reservation_SEATS: "Reservation canceled ({{SEATS}} seats)" #angular interpolation
+        you_booked_DATE: "You booked ({DATE}):"
+        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Reservar"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
@@ -270,6 +270,9 @@ es:
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         cancellation_failed: "Cancellation failed."
+        event_is_over: "The event is over"
+        thanks_for_coming: "Thanks for coming!"
+        view_event_list: "View events to come"
       calendar:
         #public calendar
         calendar:
