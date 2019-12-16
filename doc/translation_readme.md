@@ -4,15 +4,29 @@ This document will explain you what you need to know to contribute to the transl
 
 ##### Table of contents
 
-1. [Translation](#i18n-translation)<br/>
-1.1. [Front-end translations](#i18n-translation-front)<br/>
-1.2. [Back-end translations](#i18n-translation-back)
-2. [Configuration](#i18n-configuration)<br/>
-2.1. [Settings](#i18n-settings)<br/>
-2.2. [Applying changes](#i18n-apply)
+1. [Translation](#translation)<br/>
+1.1. [Using a TMS](#using-a-tms)<br/>
+1.2. [From the files](#from-the-files)<br/>
+1.2.1 [Front-end translations](#i18n-translation-front)<br/>
+1.2.2 [Back-end translations](#i18n-translation-back)
+2. [Configuration](#configuration)<br/>
+2.1. [Settings](#settings)<br/>
+2.2. [Applying changes](#applying-changes)
 
-<a name="i18n-translation"></a>
+<a name="translation"></a>
 ## Translation
+
+<a name="using-a-tms"></a>
+### Using a TMS
+We use [Crowdin](https://www.crowdin.com), a translation management system (TMS) to simplify translator's job in fab-manager.
+You can access it at [translate.fab-manager.com](https://translate.fab-manager.com) and start translating to one of the already configured languages.
+If you want to translate Fab-Manager to a new language, just send us an email to [contact@fab-manager.com](mailto:contact@fab-manager.com) and we'll add this new language to the TMS.
+
+<a name="from-the-files"></a>
+### From the files
+If you don't wan't want to use the TMS, you can write translations with in the source files. 
+This is more complicated and you must know what you're doing. 
+Please prefer the [TMS method](#using-a-tms) if your're not familiar with software development.
 
 First, consider that it can be a good idea to setup a development environment to contribute to the software translation.
 This is not mandatory, but this will allow you to test your changes in context and see if anything went wrong, especially with the special syntaxes.
@@ -37,14 +51,15 @@ To prevent syntax mistakes while translating locale files, we **STRONGLY advise*
 As an example, [Visual Studio Code](https://code.visualstudio.com/), with the [Ruby extension](https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby) and the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) will do the job.
 
 <a name="i18n-translation-front"></a>
-### Front-end translations
+#### Front-end translations
 
-Front-end translations uses [angular-translate](http://angular-translate.github.io) with some interpolations interpreted by angular.js and other interpreted by [MessageFormat](https://github.com/SlexAxton/messageformat.js/).
-**These two kinds of interpolation use a near but different syntax witch SHOULD NOT be confused.**
-Please refer to the official [angular-translate documentation](http://angular-translate.github.io/docs/#/guide/14_pluralization) before translating.
+Front-end translations uses [angular-translate](http://angular-translate.github.io) with interpolations interpreted by [MessageFormat](https://github.com/SlexAxton/messageformat.js/).
+**Please read the documentation about the [ICU MessageFormat syntax](http://userguide.icu-project.org/formatparse/messages#TOC-MessageFormat) before translating.**
+
+Anyway, it is strongly recommended to use our [translation management system](https://translate.fab-manager.com/).
 
 <a name="i18n-translation-back"></a>
-### Back-end translations
+#### Back-end translations
 
 Back-end translations uses the [Ruby on Rails syntax](http://guides.rubyonrails.org/i18n.html) but some complex interpolations are interpreted by [MessageFormat](https://github.com/format-message/message-format-rb) and are marked as it in comments.
 **DO NOT confuse the syntaxes.**
@@ -58,19 +73,19 @@ You'll find there the [GIMP source of the image](app/pdfs/data/watermark.xcf), w
 Use it to generate a similar localised PNG image which keep the default image size, as PDF are not responsive.
 
 
-<a name="i18n-configuration"></a>
+<a name="configuration"></a>
 ## Configuration
 
 In development, locales configurations are made in [config/application.yml](../config/application.yml.default).
 In production, locales configuration are made in the [config/env](../docker/env.example) file.
 If you are in a development environment, your can keep the default values, otherwise, in production, values must be configured carefully.
 
-<a name="i18n-settings"></a>
+<a name="settings"></a>
 ### Settings
 
 Please refer to the [environment configuration documentation](environment.md#internationalization-settings)
 
-<a name="i18n-apply"></a>
+<a name="applying-changes"></a>
 ### Applying changes
 
 After modifying any values concerning the localisation, restart the application (ie. web server) to apply these changes in the i18n configuration.
