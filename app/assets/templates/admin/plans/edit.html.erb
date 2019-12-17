@@ -7,13 +7,13 @@
         </div>
         <div class="col-xs-10 col-sm-10 col-md-8 b-l">
             <section class="heading-title">
-                <h1>{{ 'edit_plan.subscription_plan' | translate }} {{ plan.base_name }}</h1>
+                <h1>{{ 'app.admin.plans.edit.subscription_plan' | translate }} {{ plan.base_name }}</h1>
             </section>
         </div>
 
         <div class="col-md-3">
             <section class="heading-actions wrapper">
-                <a class="btn btn-lg btn-block btn-default m-t-xs" ui-sref="app.admin.pricing" translate>{{ 'cancel' }}</a>
+                <a class="btn btn-lg btn-block btn-default m-t-xs" ui-sref="app.admin.pricing" translate>{{ 'app.shared.buttons.cancel' }}</a>
             </section>
 
         </div>
@@ -28,7 +28,7 @@
         <div id="planForm">
             <form name="planForm" novalidate="novalidate" class="col-lg-7 col-lg-offset-2 m-t-lg form-group" action="{{ actionUrl }}" ng-upload="afterSubmit(content)" upload-options-enable-rails-csrf="true">
 
-              <ng-include src="'<%= asset_path 'admin/plans/_form.html' %>'"></ng-include>
+              <ng-include src="'<%= asset_path "admin/plans/_form.html" %>'"></ng-include>
 
               <div class="input-group m-t-md">
                 <label for="plan[disabled]" class="control-label m-r-md">{{ 'plan_form.disabled' | translate }}</label>
@@ -37,8 +37,8 @@
                        id="plan[disabled]"
                        type="checkbox"
                        class="form-control"
-                       switch-on-text="{{ 'yes' | translate }}"
-                       switch-off-text="{{ 'no' | translate }}"
+                       switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+                       switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
                        switch-animate="true"
                        ng-true-value="'true'"
                        ng-false-value="'false'"/>
@@ -46,19 +46,19 @@
                 <span class="help-block" translate>{{ 'plan_form.disable_plan_will_not_unsubscribe_users' }}</span>
               </div>
 
-              <h2 class="m-t-xl" translate>{{ 'edit_plan.prices' }}</h2>
+              <h2 class="m-t-xl" translate>{{ 'app.admin.plans.edit.prices' }}</h2>
               <div class="form-group col-md-6 col-lg-offset-6">
                   <input type="hidden" ng-model="plan.parent" name="plan[parent_id]" ng-value="plan.parent"/>
-                  <label for="parentPlan" translate>{{ 'edit_plan.copy_prices_from' }}</label>
+                  <label for="parentPlan" translate>{{ 'app.admin.plans.edit.copy_prices_from' }}</label>
                   <select id="parentPlan" ng-options="plan.id as humanReadablePlanName(plan, groups) for plan in plans" ng-model="plan.parent" ng-change="copyPricesFromPlan()" class="form-control">
                       <option value=""></option>
                   </select>
               </div>
-              <h3 translate>{{ 'edit_plan.machines' }}</h3>
+              <h3 translate>{{ 'app.admin.plans.edit.machines' }}</h3>
               <table class="table">
                   <thead>
-                      <th translate>{{ 'edit_plan.machine' }}</th>
-                      <th translate>{{ 'edit_plan.hourly_rate' }}</th>
+                      <th translate>{{ 'app.admin.plans.edit.machine' }}</th>
+                      <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
                   </thead>
                   <tbody>
 
@@ -75,11 +75,11 @@
                   </tbody>
               </table>
 
-              <h3 ng-hide="fablabWithoutSpaces" translate>{{ 'edit_plan.spaces' }}</h3>
+              <h3 ng-hide="fablabWithoutSpaces" translate>{{ 'app.admin.plans.edit.spaces' }}</h3>
               <table class="table" ng-hide="fablabWithoutSpaces">
                 <thead>
-                  <th translate>{{ 'edit_plan.space' }}</th>
-                  <th translate>{{ 'edit_plan.hourly_rate' }}</th>
+                  <th translate>{{ 'app.admin.plans.edit.space' }}</th>
+                  <th translate>{{ 'app.admin.plans.edit.hourly_rate' }}</th>
                 </thead>
                 <tbody>
 
@@ -97,7 +97,7 @@
               </table>
 
               <div class="panel-footer no-padder">
-                  <input type="submit" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid"/>
+                  <input type="submit" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="planForm.$invalid"/>
               </div>
             </form>
         </div>

@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'add_a_coupon' }}</h1>
+        <h1 translate>{{ 'app.admin.coupons_new.add_a_coupon' }}</h1>
       </section>
     </div>
 
@@ -23,7 +23,7 @@
         <ng-include src="'<%= asset_path "admin/coupons/_form.html" %>'"></ng-include>
 
         <div class="panel-footer no-padder">
-          <input type="button" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="couponForm.$invalid" ng-click="saveCoupon()"/>
+          <input type="button" value="{{ 'app.shared.buttons.save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="couponForm.$invalid" ng-click="saveCoupon()"/>
         </div>
 
       </form>
