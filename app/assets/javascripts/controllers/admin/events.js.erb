@@ -228,26 +228,26 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.removeElement = function (model, index) {
       if ((model === 'category') && (getModel(model)[1].length === 1)) {
-        growl.error(_t('at_least_one_category_is_required') + ' ' + _t('unable_to_delete_the_last_one'));
+        growl.error(_t('app.admin.events.at_least_one_category_is_required') + ' ' + _t('app.admin.events.unable_to_delete_the_last_one'));
         return false;
       }
       if (getModel(model)[1][index].related_to > 0) {
-        growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', { ELEMENT: model, NUMBER: getModel(model)[1][index].related_to }));
+        growl.error(_t('app.admin.events.unable_to_delete_ELEMENT_already_in_use_NUMBER_times', { ELEMENT: model, NUMBER: getModel(model)[1][index].related_to }));
         return false;
       }
       return dialogs.confirm({
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_ELEMENT', { ELEMENT: model })
+              title: _t('app.admin.events.confirmation_required'),
+              msg: _t('app.admin.events.do_you_really_want_to_delete_this_ELEMENT', { ELEMENT: model })
             };
           }
         }
       }
       , function () { // delete confirmed
         getModel(model)[0].delete(getModel(model)[1][index], null, function () { getModel(model)[1].splice(index, 1); }
-          , function () { growl.error(_t('unable_to_delete_an_error_occured')); });
+          , function () { growl.error(_t('app.admin.events.unable_to_delete_an_error_occured')); });
       });
     };
 
@@ -292,10 +292,10 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         // save the price category to the API
         PriceCategory.save(p_cat, function (cat) {
           $scope.priceCategories.push(cat);
-          return growl.success(_t('price_category_successfully_created'));
+          return growl.success(_t('app.admin.events.price_category_successfully_created'));
         }
         , function (err) {
-          growl.error(_t('unable_to_add_the_price_category_check_name_already_used'));
+          growl.error(_t('app.admin.events.unable_to_add_the_price_category_check_name_already_used'));
           return console.error(err);
         });
       });
@@ -308,7 +308,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.editPriceCategory = function (id, index) {
       if ($scope.priceCategories[index].id !== id) {
-        return growl.error(_t('unexpected_error_occurred_please_refresh'));
+        return growl.error(_t('app.admin.events.unexpected_error_occurred_please_refresh'));
       } else {
         return $uibModal.open({
           templateUrl: '<%= asset_path "admin/events/price_form.html" %>',
@@ -320,10 +320,10 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
           // update the price category to the API
           PriceCategory.update({ id }, { price_category: p_cat }, function (cat) {
             $scope.priceCategories[index] = cat;
-            return growl.success(_t('price_category_successfully_updated'));
+            return growl.success(_t('app.admin.events.price_category_successfully_updated'));
           }
           , function (err) {
-            growl.error(_t('unable_to_update_the_price_category'));
+            growl.error(_t('app.admin.events.unable_to_update_the_price_category'));
             return console.error(err);
           });
         });
@@ -337,17 +337,17 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.removePriceCategory = function (id, index) {
       if ($scope.priceCategories[index].id !== id) {
-        return growl.error(_t('unexpected_error_occurred_please_refresh'));
+        return growl.error(_t('app.admin.events.unexpected_error_occurred_please_refresh'));
       } else if ($scope.priceCategories[index].events > 0) {
-        return growl.error(_t('unable_to_delete_this_price_category_because_it_is_already_used'));
+        return growl.error(_t('app.admin.events.unable_to_delete_this_price_category_because_it_is_already_used'));
       } else {
         return dialogs.confirm(
           {
             resolve: {
               object () {
                 return {
-                  title: _t('confirmation_required'),
-                  msg: _t('do_you_really_want_to_delete_this_price_category')
+                  title: _t('app.admin.events.confirmation_required'),
+                  msg: _t('app.admin.events.do_you_really_want_to_delete_this_price_category')
                 };
               }
             }
@@ -356,10 +356,10 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
             PriceCategory.remove(
               { id },
               function () { // successfully deleted
-                growl.success(_t('price_category_successfully_deleted'));
+                growl.success(_t('app.admin.events.price_category_successfully_deleted'));
                 $scope.priceCategories.splice(index, 1);
               },
-              function () { growl.error(_t('price_category_deletion_failed')); }
+              function () { growl.error(_t('app.admin.events.price_category_deletion_failed')); }
             );
           }
         );
@@ -483,11 +483,11 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 
     // Possible types of recurrences for an event
     $scope.recurrenceTypes = [
-      { label: _t('none'), value: 'none' },
-      { label: _t('every_days'), value: 'day' },
-      { label: _t('every_week'), value: 'week' },
-      { label: _t('every_month'), value: 'month' },
-      { label: _t('every_year'), value: 'year' }
+      { label: _t('app.admin.events_new.none'), value: 'none' },
+      { label: _t('app.admin.events_new.every_days'), value: 'day' },
+      { label: _t('app.admin.events_new.every_week'), value: 'week' },
+      { label: _t('app.admin.events_new.every_month'), value: 'month' },
+      { label: _t('app.admin.events_new.every_year'), value: 'year' }
     ];
 
     // Using the EventsController

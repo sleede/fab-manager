@@ -187,8 +187,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_event')
+              title: _t('app.public.events_show.confirmation_required'),
+              msg: _t('app.public.events_show.do_you_really_want_to_delete_this_event')
             };
           }
         }
@@ -196,10 +196,10 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         // the admin has confirmed, delete
         event.$delete(function () {
           $state.go('app.public.events_list');
-          return growl.info(_t('event_successfully_deleted'));
+          return growl.info(_t('app.public.events_show.event_successfully_deleted'));
         }, function (error) {
           console.error(error);
-          growl.error(_t('unable_to_delete_the_event_because_some_users_alredy_booked_it'));
+          growl.error(_t('app.public.events_show.unable_to_delete_the_event_because_some_users_alredy_booked_it'));
         });
       }
       );
@@ -288,7 +288,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
           if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
             if ($rootScope.fablabWithoutOnlinePayment) {
-              growl.error(_t('online_payment_disabled'));
+              growl.error(_t('app.public.events_show.online_payment_disabled'));
             } else {
               return payByStripe(reservation);
             }
@@ -300,7 +300,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         });
       } else {
       // otherwise we alert, this error musn't occur when the current user is not admin
-        return growl.error(_t('please_select_a_member_first'));
+        return growl.error(_t('app.public.events_show.please_select_a_member_first'));
       }
     };
 
@@ -359,8 +359,8 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         resolve: {
           object: function() {
             return {
-              title: _t('cancel_the_reservation'),
-              msg: _t('do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets')
+              title: _t('app.public.events_show.cancel_the_reservation'),
+              msg: _t('app.public.events_show.do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets')
             };
           }
         }
@@ -369,12 +369,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           id: reservation.slots[0].id
         }, function() { // successfully canceled
           let index;
-          growl.success(_t('reservation_was_successfully_cancelled'));
+          growl.success(_t('app.public.events_show.reservation_was_successfully_cancelled'));
           index = $scope.reservations.indexOf(reservation);
           $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats;
           $scope.reservations[index].slots[0].canceled_at = new Date();
         }, function(error) {
-          growl.warning(_t('cancellation_failed'));
+          growl.warning(_t('app.public.events_show.cancellation_failed'));
         });
       });
     };
@@ -750,12 +750,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
             // Button label
             if ($scope.amount > 0) {
-              $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
+              $scope.validButtonName = _t('app.public.events_show.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
             } else {
               if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
+                $scope.validButtonName = _t('app.public.events_show.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
               } else {
-                $scope.validButtonName = _t('confirm');
+                $scope.validButtonName = _t('app.shared.buttons.confirm');
               }
             }
 

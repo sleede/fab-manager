@@ -333,7 +333,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
      */
     $scope.markSlotAsModifying = function () {
       $scope.selectedEvent.backgroundColor = '#eee';
-      $scope.selectedEvent.title = _t('space_reserve.i_change');
+      $scope.selectedEvent.title = _t('app.logged.space_reserve.i_change');
       return updateCalendar();
     };
 
@@ -347,7 +347,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
       }
       if (!$scope.events.placable || ($scope.events.placable._id !== $scope.selectedEvent._id)) {
         $scope.selectedEvent.backgroundColor = '#bbb';
-        $scope.selectedEvent.title = _t('space_reserve.i_shift');
+        $scope.selectedEvent.title = _t('app.logged.space_reserve.i_shift');
       }
       return updateCalendar();
     };
@@ -356,7 +356,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyTrainingSlot = function () {
-      $scope.events.placable.title = _t('space_reserve.i_ve_reserved');
+      $scope.events.placable.title = _t('app.logged.space_reserve.i_ve_reserved');
       $scope.events.placable.backgroundColor = 'white';
       $scope.events.placable.borderColor = $scope.events.modifiable.borderColor;
       $scope.events.placable.id = $scope.events.modifiable.id;
@@ -382,7 +382,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
         $scope.events.placable.backgroundColor = 'white';
         $scope.events.placable.title = '';
       }
-      $scope.events.modifiable.title = _t('space_reserve.i_ve_reserved');
+      $scope.events.modifiable.title = _t('app.logged.space_reserve.i_ve_reserved');
       $scope.events.modifiable.backgroundColor = 'white';
 
       return updateCalendar();
@@ -451,7 +451,7 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
       angular.forEach($scope.events.paid, function (spaceSlot, key) {
         spaceSlot.is_reserved = true;
         spaceSlot.can_modify = true;
-        spaceSlot.title = _t('space_reserve.i_ve_reserved');
+        spaceSlot.title = _t('app.logged.space_reserve.i_ve_reserved');
         spaceSlot.backgroundColor = 'white';
         spaceSlot.borderColor = RESERVED_SLOT_BORDER_COLOR;
         return updateSpaceSlotId(spaceSlot, reservation);

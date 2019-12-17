@@ -1,30 +1,30 @@
 <div class="panel panel-default m-t-lg">
     <div class="panel-heading">
-        <span class="font-sbold" translate>{{ 'settings.reservations_parameters' }}</span>
+        <span class="font-sbold" translate>{{ 'app.admin.settings.reservations_parameters' }}</span>
     </div>
     <div class="panel-body">
         <div>
             <div class="row">
-                <h3 class="m-l" translate>{{ 'settings.confine_the_booking_agenda' }}</h3>
+                <h3 class="m-l" translate>{{ 'app.admin.settings.confine_the_booking_agenda' }}</h3>
                 <div class="col-md-2">
-                    <h4 translate>{{ 'settings.opening_time' }}</h4>
+                    <h4 translate>{{ 'app.admin.settings.opening_time' }}</h4>
                     <uib-timepicker ng-model="windowStart.value" hour-step="timepicker.hstep" minute-step="timepicker.mstep" show-meridian="false"></uib-timepicker>
                 </div>
                 <div class="col-md-4 m-t">
-                    <button name="button" class="btn btn-warning m-l" ng-click="save(windowStart)" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning m-l" ng-click="save(windowStart)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </div>
                 <div class="col-md-2">
-                    <h4 translate>{{ 'settings.closing_time' }}</h4>
+                    <h4 translate>{{ 'app.admin.settings.closing_time' }}</h4>
                     <uib-timepicker ng-model="windowEnd.value" hour-step="timepicker.hstep" minute-step="timepicker.mstep" show-meridian="false"></uib-timepicker>
                 </div>
                 <div class="col-md-4 m-t">
-                    <button name="button" class="btn btn-warning m-l" ng-click="save(windowEnd)" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning m-l" ng-click="save(windowEnd)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </div>
             </div>
             <div class="row">
-                <h3 class="m-l m-t-lg" translate>{{ 'settings.max_visibility' }}</h3>
+                <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.max_visibility' }}</h3>
                 <form class="col-md-4" name="visibilityYearlyForm">
-                    <label for="yearlySubscribers" class="control-label m-r" translate>{{ 'settings.visibility_for_yearly_members' }}</label>
+                    <label for="yearlySubscribers" class="control-label m-r" translate>{{ 'app.admin.settings.visibility_for_yearly_members' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -33,10 +33,10 @@
                             <input type="number" class="form-control" id="yearlySubscribers" ng-model="visibilityYearly.value" min="1" required>
                         </div>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(visibilityYearly)" ng-disabled="visibilityYearlyForm.$invalid" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning" ng-click="save(visibilityYearly)" ng-disabled="visibilityYearlyForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
                 <form class="col-md-4 col-md-offset-2" name="visibilityOthersForm">
-                    <label for="others" class="control-label m-r" translate>{{ 'settings.visibility_for_other_members' }}</label>
+                    <label for="others" class="control-label m-r" translate>{{ 'app.admin.settings.visibility_for_other_members' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -45,27 +45,27 @@
                             <input type="number" class="form-control" id="others" ng-model="visibilityOthers.value" min="1" required>
                         </div>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(visibilityOthers)" ng-disabled="visibilityOthersForm.$invalid" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning" ng-click="save(visibilityOthers)" ng-disabled="visibilityOthersForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
             <div class="row">
-                <h3 class="m-l m-t-lg" translate>{{ 'settings.ability_for_the_users_to_move_their_reservations' }}</h3>
+                <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_move_their_reservations' }}</h3>
                 <div class="form-group m-l">
-                    <label for="enableMove" class="control-label m-r" translate>{{ 'settings.reservations_shifting' }}</label>
+                    <label for="enableMove" class="control-label m-r" translate>{{ 'app.admin.settings.reservations_shifting' }}</label>
                     <input bs-switch
                            ng-model="enableMove.value"
                            id="enableMove"
                            type="checkbox"
                            class="form-control"
-                           switch-on-text="{{ 'settings.enabled' | translate }}"
-                           switch-off-text="{{ 'settings.disabled' | translate }}"
+                           switch-on-text="{{ 'app.admin.settings.enabled' | translate }}"
+                           switch-off-text="{{ 'app.admin.settings.disabled' | translate }}"
                            switch-animate="true"/>
-                    <button name="button" class="btn btn-warning m-l" ng-click="save(enableMove)" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning m-l" ng-click="save(enableMove)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </div>
             </div>
             <div class="row" ng-show="enableMove.value">
                 <form class="col-md-4" name="moveDelayForm">
-                    <label for="moveDelay" class="control-label m-r" translate>{{ 'settings.prior_period_hours' }}</label>
+                    <label for="moveDelay" class="control-label m-r" translate>{{ 'app.admin.settings.prior_period_hours' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -74,27 +74,27 @@
                             <input type="number" class="form-control" id="moveDelay" ng-model="moveDelay.value" min="0" ng-required="enableMove.value">
                         </div>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(moveDelay)" ng-disabled="moveDelayForm.$invalid" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning" ng-click="save(moveDelay)" ng-disabled="moveDelayForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
             <div class="row">
-                <h3 class="m-l m-t-lg" translate>{{ 'settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
+                <h3 class="m-l m-t-lg" translate>{{ 'app.admin.settings.ability_for_the_users_to_cancel_their_reservations' }}</h3>
                 <div class="form-group m-l">
-                    <label for="enableCancel" class="control-label m-r" translate>{{ 'settings.reservations_cancelling' }}</label>
+                    <label for="enableCancel" class="control-label m-r" translate>{{ 'app.admin.settings.reservations_cancelling' }}</label>
                     <input bs-switch
                            ng-model="enableCancel.value"
                            id="enableCancel"
                            type="checkbox"
                            class="form-control"
-                           switch-on-text="{{ 'settings.enabled' | translate }}"
-                           switch-off-text="{{ 'settings.disabled' | translate }}"
+                           switch-on-text="{{ 'app.admin.settings.enabled' | translate }}"
+                           switch-off-text="{{ 'app.admin.settings.disabled' | translate }}"
                            switch-animate="true"/>
-                    <button name="button" class="btn btn-warning m-l" ng-click="save(enableCancel)" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning m-l" ng-click="save(enableCancel)" translate>{{ 'app.shared.buttons.save' }}</button>
                 </div>
             </div>
             <div class="row" ng-show="enableCancel.value">
                 <form class="col-md-4" name="cancelDelayForm">
-                    <label for="cancelDelay" class="control-label m-r" translate>{{ 'settings.prior_period_hours' }}</label>
+                    <label for="cancelDelay" class="control-label m-r" translate>{{ 'app.admin.settings.prior_period_hours' }}</label>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -103,7 +103,7 @@
                             <input type="number" class="form-control" id="cancelDelay" ng-model="cancelDelay.value" min="0" ng-required="enableCancel.value">
                         </div>
                     </div>
-                    <button name="button" class="btn btn-warning" ng-click="save(cancelDelay)" ng-disabled="cancelDelayForm.$invalid" translate>{{ 'save' }}</button>
+                    <button name="button" class="btn btn-warning" ng-click="save(cancelDelay)" ng-disabled="cancelDelayForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
                 </form>
             </div>
         </div>
@@ -112,27 +112,27 @@
 
 <div class="panel panel-default m-t-lg">
     <div class="panel-heading">
-        <span class="font-sbold" translate>{{ 'settings.reservations_reminders' }}</span>
+        <span class="font-sbold" translate>{{ 'app.admin.settings.reservations_reminders' }}</span>
     </div>
     <div class="panel-body">
         <div class="row">
-            <h3 class="m-l" translate>{{ 'settings.notification_sending_before_the_reservation_occurs' }}</h3>
+            <h3 class="m-l" translate>{{ 'app.admin.settings.notification_sending_before_the_reservation_occurs' }}</h3>
             <div class="form-group m-l">
-                <label for="enableReminder" class="control-label m-r" translate>{{ 'settings.reservations_reminders' }}</label>
+                <label for="enableReminder" class="control-label m-r" translate>{{ 'app.admin.settings.reservations_reminders' }}</label>
                 <input bs-switch
                        ng-model="enableReminder.value"
                        id="enableReminder"
                        type="checkbox"
                        class="form-control"
-                       switch-on-text="{{ 'settings.enabled' | translate }}"
-                       switch-off-text="{{ 'settings.disabled' | translate }}"
+                       switch-on-text="{{ 'app.admin.settings.enabled' | translate }}"
+                       switch-off-text="{{ 'app.admin.settings.disabled' | translate }}"
                        switch-animate="true"/>
-                <button name="button" class="btn btn-warning m-l" ng-click="save(enableReminder)" translate>{{ 'save' }}</button>
+                <button name="button" class="btn btn-warning m-l" ng-click="save(enableReminder)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
         </div>
         <div class="row" ng-show="enableReminder.value">
             <form class="col-md-4" name="reminderDelayForm">
-                <label for="reminderDelay" class="control-label m-r" translate>{{ 'settings.prior_period_hours' }}</label>
+                <label for="reminderDelay" class="control-label m-r" translate>{{ 'app.admin.settings.prior_period_hours' }}</label>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
@@ -141,10 +141,10 @@
                         <input type="number" class="form-control" id="reminderDelay" ng-model="reminderDelay.value" min="0">
                     </div>
                     <span class="help-block text-info text-xs">
-                        <i class="fa fa-lightbulb-o"></i> {{ 'settings.default_value_is_24_hours' | translate }}
+                        <i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.default_value_is_24_hours' | translate }}
                     </span>
                 </div>
-                <button name="button" class="btn btn-warning" ng-click="save(reminderDelay)" ng-disabled="reminderDelayForm.$invalid" translate>{{ 'save' }}</button>
+                <button name="button" class="btn btn-warning" ng-click="save(reminderDelay)" ng-disabled="reminderDelayForm.$invalid" translate>{{ 'app.shared.buttons.save' }}</button>
             </form>
         </div>
     </div>
@@ -153,22 +153,22 @@
 
 <div class="panel panel-default m-t-lg">
     <div class="panel-heading">
-        <span class="font-sbold" translate>{{ 'settings.confidentiality' }}</span>
+        <span class="font-sbold" translate>{{ 'app.admin.settings.confidentiality' }}</span>
     </div>
     <div class="panel-body">
         <div class="row">
-            <h3 class="m-l" translate>{{ 'settings.display_machine_reservation_user_name' }}</h3>
+            <h3 class="m-l" translate>{{ 'app.admin.settings.display_machine_reservation_user_name' }}</h3>
             <div class="form-group m-l">
-                <label for="displayNameEnable" class="control-label m-r" translate>{{ 'settings.display_name' }}</label>
+                <label for="displayNameEnable" class="control-label m-r" translate>{{ 'app.admin.settings.display_name' }}</label>
                 <input bs-switch
                        ng-model="displayNameEnable.value"
                        id="displayNameEnable"
                        type="checkbox"
                        class="form-control"
-                       switch-on-text="{{ 'settings.enabled' | translate }}"
-                       switch-off-text="{{ 'settings.disabled' | translate }}"
+                       switch-on-text="{{ 'app.admin.settings.enabled' | translate }}"
+                       switch-off-text="{{ 'app.admin.settings.disabled' | translate }}"
                        switch-animate="true"/>
-                <button name="button" class="btn btn-warning m-l" ng-click="save(displayNameEnable)" translate>{{ 'save' }}</button>
+                <button name="button" class="btn btn-warning m-l" ng-click="save(displayNameEnable)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
         </div>
     </div>

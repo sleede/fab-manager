@@ -128,7 +128,7 @@
         <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment || plan.plan_file_attributes.attachment_identifier}}</span>
     </div>
     <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.plan.attach_an_information_sheet' }}</span>
-    <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file"
+    <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file"
                                                                            name="plan[plan_file_attributes][attachment]"
                                                                            accept="image/*, application/pdf"></span>
     <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file || plan.plan_file_attributes)"><i class="fa fa-trash-o"></i></a>

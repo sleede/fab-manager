@@ -9,7 +9,7 @@
       </div>
       <div class="col-xs-10 col-sm-10 col-md-8 b-l ">
         <section class="heading-title">
-          <h1 translate>{{ 'add_an_event' }}</h1>
+          <h1 translate>{{ 'app.admin.events_new.add_an_event' }}</h1>
         </section>
       </div>
     </div>
@@ -18,7 +18,7 @@
 
   <form role="form" name="eventForm" class="form-horizontal" novalidate action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
 
-    <ng-include src="'<%= asset_path 'events/_form.html' %>'"></ng-include>
+    <ng-include src="'<%= asset_path "events/_form.html" %>'"></ng-include>
 
   </form>
 

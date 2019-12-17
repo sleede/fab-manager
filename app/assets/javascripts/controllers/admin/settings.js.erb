@@ -166,7 +166,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       Setting.update(
         { name: setting.name },
         { value },
-        function () { growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) })); },
+        function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) })); },
         function (error) { console.log(error); }
       );
     };
@@ -191,7 +191,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
           // reset history
           $scope.privacyDraftsHistory = [];
           data.setting.history.forEach(function (draft) {
-            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: draft.created_at }), content: draft.value });
+            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('app.admin.settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: draft.created_at }), content: draft.value });
           });
           if (type === 'privacy_draft') {
             const orderedHistory = $filter('orderBy')(data.setting.history, 'created_at');
@@ -219,7 +219,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
           angular.forEach(v, function(err) { growl.error(err); })
         });
       } else {
-        growl.success(_t('settings.file_successfully_updated'));
+        growl.success(_t('app.admin.settings.file_successfully_updated'));
         if (content.custom_asset.name === 'cgu-file') {
           $scope.cguFile = content.custom_asset;
           $scope.methods.cgu = 'put';
@@ -316,7 +316,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       }
 
       privacyDraftsPromise.setting.history.forEach(function (draft) {
-        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: moment(draft.created_at).format('L LT') }), content: draft.value });
+        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('app.admin.settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: moment(draft.created_at).format('L LT') }), content: draft.value });
       });
     };
 
@@ -347,7 +347,7 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
      */
     $scope.publish = function () {
       saveCb({ name: 'privacy_body', value: privacyPolicy.bodyTemp });
-      growl.info(_t('settings.privacy.users_notified'));
+      growl.info(_t('app.admin.settings.privacy.users_notified'));
       $uibModalInstance.close('privacy_body');
     };
     /**

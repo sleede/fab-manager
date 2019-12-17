@@ -161,11 +161,10 @@ fr:
 
       space_reserve:
         # réserver un espace
-        space_reserve:
-          planning_of_space_NAME: "Planning de l'espace {NAME}"
-          i_ve_reserved: "J'ai réservé"
-          i_shift: "Je déplace"
-          i_change: "Je change"
+        planning_of_space_NAME: "Planning de l'espace {NAME}"
+        i_ve_reserved: "J'ai réservé"
+        i_shift: "Je déplace"
+        i_change: "Je change"
 
       notifications:
         notifications_center: "Centre de notifications"
