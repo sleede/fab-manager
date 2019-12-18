@@ -50,7 +50,7 @@
         </div>
       </form>
     </div>
-    <span ng-if="!openlab.searchOverWholeNetwork">
+    <div class="inline" ng-if="!openlab.searchOverWholeNetwork">
       <div class="col-md-3 m-b" ng-show="isAuthenticated()">
         <select ng-model="search.from" ng-change="setUrlQueryParams(search) && triggerSearch()" class="form-control">
           <option value="" translate>{{ 'app.public.projects_list.all_projects' }}</option>
@@ -76,7 +76,7 @@
           <option value="" translate>{{ 'app.public.projects_list.all_materials' }}</option>
         </select>
       </div>
-    </span>
+    </div>
   </div>
 
 
@@ -105,7 +105,7 @@
         <div class="card-overlay">
           <div class="btn-group">
             <div class="btn btn-default" ng-click="showProject(project)">
-              <i ng-class="{'fa fa-external-link' : (openlab.searchOverWholeNetwork && project.app_id != openlabAppId) }"></i> {{ 'consult' | translate }}
+              <i ng-class="{'fa fa-external-link' : (openlab.searchOverWholeNetwork && project.app_id != openlabAppId) }"></i> {{ 'app.shared.buttons.consult' | translate }}
             </div>
             <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin') && !openlab.searchOverWholeNetwork">
               <i class="fa fa-edit"></i>

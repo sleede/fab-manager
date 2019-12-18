@@ -43,9 +43,6 @@ fr:
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-        illustration: "Visuel"
-        add_an_illustration: "Ajouter un visuel"
-        name_is_required: "Le nom est requis."
         all_themes: "Toutes les thématiques"
         filter: 'Filtre'
         payment_card_error: "Un problème est survenu avec votre carte bancaire :"
@@ -98,22 +95,33 @@ fr:
 
       project:
         # formulaire d'étition d'un projet
+        name: "Nom"
+        name_is_required: "Le nom est requis."
         illustration: "Illustration"
         add_an_illustration: "Ajouter un visuel"
         CAD_file: "Fichier CAO"
         allowed_extensions: "Extensions autorisées :"
         add_a_new_file: "Ajouter un nouveau fichier"
+        description: "Description"
+        description_is_required: "La description est requise."
         steps: "Étapes"
+        step_N: "Étape {INDEX}"
         step_title: "Titre de l'étape"
         add_a_picture: "Ajouter une image"
         change_the_picture: "Modifier l'image"
         delete_the_step: "Supprimer l'étape"
+        confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_step: "Êtes-vous sur de vouloir supprimer cette étape ?"
         add_a_new_step: "Ajouter une nouvelle étape"
         publish_your_project: "Publier votre projet"
+        or: "ou"
         employed_materials: "Matériaux utilisés"
         employed_machines: "Machines utilisées"
+        collaborators: "Les collaborateurs"
         creative_commons_licences: "Licences Creative Commons"
+        themes: "Thématiques"
+        tags: "Étiquettes"
+        save_as_draft: "Enregistrer comme brouillon"
 
       machine:
         # formulaire d'édition d'une machine

@@ -179,12 +179,19 @@ fr:
 
       projects_show:
         # détails d'un projet
+        rough_draft: "Brouillon"
         project_description: "Description du projet"
         by_name: "Par {NAME}"
+        step_N: "Étape {INDEX}"
+        share_on_facebook: "Partager sur Facebook"
+        share_on_twitter: "Partager sur Twitter"
         deleted_user: "Utilisateur supprimé"
         posted_on_: "posté le"
         CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"
+        machines_and_materials: "Machines et matériaux"
+        collaborators: "Les collaborateurs"
         licence: "Licence"
+        confirmation_required: "Confirmation requise"
         report_an_abuse: "Signaler un abus"
         unauthorized_operation: "Opération non autorisée"
         your_report_was_successful_thanks: "Votre signalement a bien été pris en compte, merci."

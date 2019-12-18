@@ -130,12 +130,11 @@ fr:
       projects_new:
         # ajouter un nouveau projet
         add_a_new_project: "Ajouter un nouveau projet"
-        save_button_value: "Enregistrer comme brouillon"  # "save as draft"
 
       projects_edit:
         # modifier un projet existant
-        save_button_value: "Enregistrer"  # "save"
         edit_the_project: "Éditer le projet"
+        rough_draft: "Brouillon"
         publish: "Publier"
 
       machines_reserve:
