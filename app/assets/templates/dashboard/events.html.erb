@@ -2,7 +2,7 @@
 
   <section class="heading">
     <div class="row no-gutter">
-      <ng-include src="'<%= asset_path 'dashboard/nav.html' %>'"></ng-include>
+      <ng-include src="'<%= asset_path "dashboard/nav.html" %>'"></ng-include>
     </div>
 
   </section>
@@ -13,7 +13,7 @@
     <div class="col-md-6">
       <div class="widget panel b-a m m-t-lg">
         <div class="panel-heading b-b">
-          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_next_events' | translate }}</h4>
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.logged.dashboard.events.your_next_events' | translate }}</h4>
         </div>
         <div class="widget-content bg-light wrapper r-b">
           <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
@@ -24,25 +24,25 @@
               <br/>
               <span translate
                     translate-values="{NUMBER: r.nb_reserve_places}">
-                {{ 'NUMBER_normal_places_reserved' }}
+                {{ 'app.logged.dashboard.events.NUMBER_normal_places_reserved' }}
               </span>
               <span ng-repeat="ticket in r.tickets">
                 <br/>
                 <span translate
                       translate-values="{NUMBER: ticket.booked, NAME: ticket.price_category.name}">
-                  {{ 'NUMBER_of_NAME_places_reserved' }}
+                  {{ 'app.logged.dashboard.events.NUMBER_of_NAME_places_reserved' }}
                 </span>
               </span>
             </li>
           </ul>
-          <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'no_events_to_come' }}</div>
+          <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'app.logged.dashboard.events.no_events_to_come' }}</div>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="widget panel b-a m m-t-lg">
         <div class="panel-heading b-b">
-          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'your_previous_events' | translate }}</h4>
+          <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.logged.dashboard.events.your_previous_events' | translate }}</h4>
         </div>
         <div class="widget-content bg-light auto wrapper r-b">
           <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
@@ -50,7 +50,7 @@
               <span class="font-sbold">{{r.reservable.title}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
             </li>
           </ul>
-          <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'no_passed_events' }}</div>
+          <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'app.logged.dashboard.events.no_passed_events' }}</div>
         </div>
       </div>
     </div>

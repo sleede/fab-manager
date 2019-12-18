@@ -7,14 +7,14 @@
                ng-model="admin.statistic_profile_attributes.gender"
                ng-value="true"
                required/>
-          <i class="fa fa-male m-l-sm"></i> {{ 'man' | translate }}
+          <i class="fa fa-male m-l-sm"></i> {{ 'app.admin.admins_new.man' | translate }}
       </label>
       <label class="checkbox-inline btn btn-default">
         <input type="radio"
                name="admin[statistic_profile_attributes][gender]"
                ng-model="admin.statistic_profile_attributes.gender"
                ng-value="false"/>
-          <i class="fa fa-female m-l-sm"></i> {{ 'woman' | translate }}
+          <i class="fa fa-female m-l-sm"></i> {{ 'app.admin.admins_new.woman' | translate }}
       </label>
       <span class="exponent m-l-xs help-cursor"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
     </div>
@@ -26,10 +26,10 @@
                type="text" name="admin[username]"
                class="form-control"
                id="user_username"
-               placeholder="{{ 'pseudonym' | translate }}"
+               placeholder="{{ 'app.admin.admins_new.pseudonym' | translate }}"
                required>
       </div>
-      <span class="help-block" ng-show="adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$error.required" translate>{{ 'pseudonym_is_required' }}</span>
+      <span class="help-block" ng-show="adminForm['admin[username]'].$dirty && adminForm['admin[username]'].$error.required" translate>{{ 'app.admin.admins_new.pseudonym_is_required' }}</span>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][last_name]'].$dirty && adminForm['admin[profile_attributes][last_name]'].$invalid}">
@@ -40,10 +40,10 @@
                name="admin[profile_attributes][last_name]"
                class="form-control"
                id="user_last_name"
-               placeholder="{{ 'surname' | translate }}"
+               placeholder="{{ 'app.admin.admins_new.surname' | translate }}"
                required>
       </div>
-      <span class="help-block" ng-show="adminForm['admin[profile_attributes][last_name]'].$dirty && adminForm['admin[profile_attributes][last_name]'].$error.required" translate>{{ 'surname_is_required' }}</span>
+      <span class="help-block" ng-show="adminForm['admin[profile_attributes][last_name]'].$dirty && adminForm['admin[profile_attributes][last_name]'].$error.required" translate>{{ 'app.admin.admins_new.surname_is_required' }}</span>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[profile_attributes][first_name]'].$dirty && adminForm['admin[profile_attributes][first_name]'].$invalid}">
@@ -54,10 +54,10 @@
                name="admin[profile_attributes][first_name]"
                class="form-control"
                id="user_first_name"
-               placeholder="{{ 'first_name' | translate }}"
+               placeholder="{{ 'app.admin.admins_new.first_name' | translate }}"
                required>
       </div>
-      <span class="help-block" ng-show="adminForm['admin[profile_attributes][first_name]'].$dirty && adminForm['admin[profile_attributes][first_name]'].$error.required" translate>{{ 'first_name_is_required' }}</span>
+      <span class="help-block" ng-show="adminForm['admin[profile_attributes][first_name]'].$dirty && adminForm['admin[profile_attributes][first_name]'].$error.required" translate>{{ 'app.admin.admins_new.first_name_is_required' }}</span>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[email]'].$dirty && adminForm['admin[email]'].$invalid}">
@@ -68,10 +68,10 @@
                name="admin[email]"
                class="form-control"
                id="user_email"
-               placeholder="{{ 'email_address' | translate }}"
+               placeholder="{{ 'app.admin.admins_new.email_address' | translate }}"
                required>
       </div>
-      <span class="help-block" ng-show="adminForm['admin[email]'].$dirty && adminForm['admin[email]'].$error.required" translate>{{ 'email_is_required' }}</span>
+      <span class="help-block" ng-show="adminForm['admin[email]'].$dirty && adminForm['admin[email]'].$error.required" translate>{{ 'app.admin.admins_new.email_is_required' }}</span>
     </div>
 
     <div class="form-group" ng-class="{'has-error': adminForm['admin[statistic_profile_attributes][birthday]'].$dirty && adminForm['admin[statistic_profile_attributes][birthday]'].$invalid}">
@@ -84,7 +84,7 @@
                uib-datepicker-popup="{{datePicker.format}}"
                datepicker-options="datePicker.options"
                is-open="datePicker.opened"
-               placeholder="{{ 'birth_date' | translate }}"
+               placeholder="{{ 'app.admin.admins_new.birth_date' | translate }}"
                ng-click="openDatePicker($event)"
                />
         <input type="hidden"
@@ -104,7 +104,7 @@
                name="admin[invoicing_profile_attributes][address_attributes][address]"
                class="form-control"
                id="user_address"
-               placeholder="{{ 'address' | translate }}">
+               placeholder="{{ 'app.admin.admins_new.address' | translate }}">
       </div>
     </div>
 
@@ -115,7 +115,7 @@
                type="text"
                name="admin[profile_attributes][phone]"
                class="form-control" id="user_phone"
-               placeholder="{{ 'phone_number' | translate }}">
+               placeholder="{{ 'app.admin.admins_new.phone_number' | translate }}">
       </div>
     </div>
   </div>

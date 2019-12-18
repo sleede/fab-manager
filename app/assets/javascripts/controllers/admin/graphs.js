@@ -25,10 +25,10 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
     const CHART_HEIGHT = 500;
 
     // Label of the charts' horizontal axes
-    const X_AXIS_LABEL = _t('date');
+    const X_AXIS_LABEL = _t('app.admin.stats_graphs.date');
 
     // Label of the charts' vertical axes
-    const Y_AXIS_LABEL = _t('number');
+    const Y_AXIS_LABEL = _t('app.admin.stats_graphs.number');
 
     // Colors for the line charts. Each new line uses the next color in this array
     const CHART_COLORS = ['#b35a94', '#1c5794', '#00b49e', '#6fac48', '#ebcf4a', '#fd7e33', '#ca3436', '#a26e3a'];
@@ -193,9 +193,9 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
         }
       } else if ($scope.display.interval === 'week') {
         if ((typeof x === 'number') || d instanceof Date) {
-          return d3.time.format(_t('week_short') + ' %U')(moment(d).toDate());
+          return d3.time.format(_t('app.admin.stats_graphs.week_short') + ' %U')(moment(d).toDate());
         } else if (typeof d === 'number') {
-          return _t('week_of_START_to_END', { START: moment(d).format('L'), END: moment(d).add(6, 'days').format('L') });
+          return _t('app.admin.stats_graphs.week_of_START_to_END', { START: moment(d).format('L'), END: moment(d).add(6, 'days').format('L') });
         } else { // typeof d == 'string'
           return d;
         }
@@ -653,7 +653,7 @@ Application.Controllers.controller('GraphsController', ['$scope', '$state', '$ro
 
         // common for each charts
         chart.margin({ left: 100, right: 100 });
-        chart.noData(_t('no_data_for_this_period'));
+        chart.noData(_t('app.admin.stats_graphs.no_data_for_this_period'));
         chart.height(CHART_HEIGHT);
 
         // add new chart to the page

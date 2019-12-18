@@ -9,14 +9,14 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1>{{ project.name }} <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span></h1>
+        <h1>{{ project.name }} <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.public.projects_show.rough_draft' }}</span></h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
 
-          <a ui-sref="app.logged.projects_edit({id: project.id})" ng-if="projectEditableBy(currentUser) || isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'edit' | translate }}</a>
+          <a ui-sref="app.logged.projects_edit({id: project.id})" ng-if="projectEditableBy(currentUser) || isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
           <a ng-click="deleteProject(event)" ng-if="projectDeletableBy(currentUser) || isAuthorized('admin')" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
 
       </section>
@@ -34,13 +34,13 @@
         <a href="{{project.project_full_image}}" target="_blank"><img ng-src="{{project.project_image}}" alt="{{project.name}}"></a>
       </div>
 
-      <h3 translate>{{ 'project_description' }}</h3>
+      <h3 translate>{{ 'app.public.projects_show.project_description' }}</h3>
       <p ng-bind-html="project.description | toTrusted"></p>
 
       <div class="article-steps">
         <div class="row article-step m-b-lg" ng-repeat="step in project.project_steps_attributes">
           <div class="col-md-12 m-b-xs">
-             <h3 class="well well-simple step-title">{{ 'step_N' | translate:{INDEX:step.step_nb} }} : {{step.title}}</h3>
+             <h3 class="well well-simple step-title">{{ 'app.public.projects_show.step_N' | translate:{INDEX:step.step_nb} }} : {{step.title}}</h3>
           </div>
           <div ng-repeat-start="image in step.project_step_images_attributes" class="clearfix" ng-if="$index % 3 == 0"></div>
           <div class="col-md-4" ng-repeat-end>
@@ -58,8 +58,8 @@
     </div>
 
     <div class="text-center" id="social-share">
-      <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'share_on_facebook' | translate }}</a>
-      <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'share_on_twitter' | translate }}</a>
+      <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'app.public.projects_show.share_on_facebook' | translate }}</a>
+      <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'app.public.projects_show.share_on_twitter' | translate }}</a>
     </div>
 
     <div class="wrapper-lg">
@@ -78,11 +78,11 @@
       </div>
       <div>
         <a ng-show="project.author_id" class="text-sm font-sbold" ui-sref="app.logged.members_show({id: project.author.slug})">
-          <i> {{ 'by_name' | translate:{NAME:project.author.first_name} }}</i>
+          <i> {{ 'app.public.projects_show.by_name' | translate:{NAME:project.author.first_name} }}</i>
         </a>
-        <span ng-hide="project.author_id" class="text-sm font-sbold text-gray" translate>{{ 'deleted_user' }}</span>
+        <span ng-hide="project.author_id" class="text-sm font-sbold text-gray" translate>{{ 'app.public.projects_show.deleted_user' }}</span>
       </div>
-      <small class="text-xs m-b"><i>{{ 'posted_on_' | translate }} {{project.created_at | amDateFormat: 'LL'}}</i></small>
+      <small class="text-xs m-b"><i>{{ 'app.public.projects_show.posted_on_' | translate }} {{project.created_at | amDateFormat: 'LL'}}</i></small>
 
 
     </div>
@@ -90,7 +90,7 @@
     <section class="widget panel b-a m" ng-if="project.project_caos_attributes">
       <div class="panel-heading b-b">
         <span class="badge bg-warning pull-right">{{project.project_caos_attributes.length}}</span>
-        <h3 translate translate-values="{COUNT:project.project_caos_attributes.length}">{{ 'CAD_file_to_download' }}</h3>
+        <h3 translate translate-values="{COUNT:project.project_caos_attributes.length}">{{ 'app.public.projects_show.CAD_file_to_download' }}</h3>
       </div>
 
         <ul class="widget-content list-group list-group-lg no-bg auto">
@@ -103,7 +103,7 @@
     <section class="widget panel b-a m" ng-if="project.machines">
       <div class="panel-heading b-b">
         <span class="badge bg-warning pull-right">{{project.machines.length}}</span>
-        <h3 translate>{{ 'machines_and_materials' }}</h3>
+        <h3 translate>{{ 'app.public.projects_show.machines_and_materials' }}</h3>
       </div>
 
         <ul class="widget-content list-group list-group-lg no-bg auto">
@@ -122,7 +122,7 @@
     <section class="widget panel b-a m" ng-if="project.project_users.length > 0">
       <div class="panel-heading b-b">
         <span class="badge bg-warning pull-right">{{project.project_users.length}}</span>
-        <h3 translate>{{ 'collaborators' }}</h3>
+        <h3 translate>{{ 'app.public.projects_show.collaborators' }}</h3>
       </div>
 
         <ul class="widget-content list-group list-group-lg no-bg auto">
@@ -143,7 +143,7 @@
 
     <section class="widget panel b-a m" ng-if="project.licence">
       <div class="panel-heading b-b">
-        <h3 translate>{{ 'licence' }}</h3>
+        <h3 translate>{{ 'app.public.projects_show.licence' }}</h3>
       </div>
       <div class="panel-body">
         {{ project.licence.name }}
@@ -153,7 +153,7 @@
       <section class="widget b-t">
 
           <div class="widget-content text-center m-t">
-              <a href="#" ng-click="signalAbuse($event)"><i class="fa fa-warning"></i> {{ 'report_an_abuse' | translate }}</a>
+              <a href="#" ng-click="signalAbuse($event)"><i class="fa fa-warning"></i> {{ 'app.public.projects_show.report_an_abuse' | translate }}</a>
           </div>
       </section>
   </div>

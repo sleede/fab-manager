@@ -1,14 +1,14 @@
 <div class="modal-header">
   <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-  <h1 translate>{{ 'change_the_reservation' }}</h1>
+  <h1 translate>{{ 'app.public.events_show.change_the_reservation' }}</h1>
 </div>
 <div class="modal-body">
-  <p translate>{{ 'you_can_shift_this_reservation_on_the_following_slots' }}</p>
+  <p translate>{{ 'app.public.events_show.you_can_shift_this_reservation_on_the_following_slots' }}</p>
   <select ng-model="reservation.reservable_id" class="form-control">
     <option value="{{e.id}}" ng-repeat="e in event.recurrence_events" ng-if="e.nb_free_places >= reservation.total_booked_seats">{{e.start_date | amDateFormat:'L'}}</option>
   </select>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" translate>{{ 'confirm' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="attempting" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

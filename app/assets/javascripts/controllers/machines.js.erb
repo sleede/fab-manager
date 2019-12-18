@@ -146,7 +146,7 @@ const _reserveMachine = function (machine, e) {
                   let text = '';
                   angular.forEach($scope.machine.trainings, function (training) {
                     if (text.length > 0) {
-                      text += _this._t('machines_list._or_the_');
+                      text += _this._t('app.public.machines_list._or_the_');
                     }
                     return text += training.name.substr(0, 1).toLowerCase() + training.name.substr(1);
                   });
@@ -281,14 +281,14 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
     $scope.delete = function (machine) {
     // check the permissions
       if ($scope.currentUser.role !== 'admin') {
-        console.error(_t('unauthorized_operation'));
+        console.error(_t('app.public.machines_show.unauthorized_operation'));
       } else {
         dialogs.confirm({
           resolve: {
             object () {
               return {
-                title: _t('confirmation_required'),
-                msg: _t('do_you_really_want_to_delete_this_machine')
+                title: _t('app.public.machines_show.confirmation_required'),
+                msg: _t('app.public.machines_show.do_you_really_want_to_delete_this_machine')
               };
             }
           }
@@ -297,7 +297,7 @@ Application.Controllers.controller('ShowMachineController', ['$scope', '$state',
         // delete the machine then redirect to the machines listing
           machine.$delete(
             function () { $state.go('app.public.machines_list'); },
-            function (error) { growl.warning(_t('the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users')); console.error(error); }
+            function (error) { growl.warning(_t('app.public.machines_show.the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users')); console.error(error); }
           );
         });
       }
@@ -402,16 +402,16 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     $scope.machineExplicationsAlert = settingsPromise.machine_explications_alert;
 
     /**
-     * Change the last selected slot's appearence to looks like 'added to cart'
+     * Change the last selected slot's appearance to looks like 'added to cart'
      */
     $scope.markSlotAsAdded = function () {
       $scope.selectedEvent.backgroundColor = FREE_SLOT_BORDER_COLOR;
-      $scope.selectedEvent.title = _t('i_reserve');
+      $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_reserve');
       return updateCalendar();
     };
 
     /**
-     * Change the last selected slot's appearence to looks like 'never added to cart'
+     * Change the last selected slot's appearance to looks like 'never added to cart'
      */
     $scope.markSlotAsRemoved = function (slot) {
       slot.backgroundColor = 'white';
@@ -431,16 +431,16 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     $scope.slotCancelled = function () { $scope.markSlotAsRemoved($scope.selectedEvent); };
 
     /**
-     * Change the last selected slot's appearence to looks like 'currently looking for a new destination to exchange'
+     * Change the last selected slot's appearance to looks like 'currently looking for a new destination to exchange'
      */
     $scope.markSlotAsModifying = function () {
       $scope.selectedEvent.backgroundColor = '#eee';
-      $scope.selectedEvent.title = _t('i_change');
+      $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_change');
       return updateCalendar();
     };
 
     /**
-     * Change the last selected slot's appearence to looks like 'the slot being exchanged will take this place'
+     * Change the last selected slot's appearance to looks like 'the slot being exchanged will take this place'
      */
     $scope.changeModifyMachineSlot = function () {
       if ($scope.events.placable) {
@@ -449,7 +449,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
       }
       if (!$scope.events.placable || ($scope.events.placable._id !== $scope.selectedEvent._id)) {
         $scope.selectedEvent.backgroundColor = '#bbb';
-        $scope.selectedEvent.title = _t('i_shift');
+        $scope.selectedEvent.title = _t('app.logged.machines_reserve.i_shift');
       }
       return updateCalendar();
     };
@@ -458,7 +458,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
      * When modifying an already booked reservation, callback when the modification was successfully done.
      */
     $scope.modifyMachineSlot = function () {
-      $scope.events.placable.title = $scope.currentUser.role !== 'admin' ? _t('i_ve_reserved') : _t('not_available');
+      $scope.events.placable.title = $scope.currentUser.role !== 'admin' ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.placable.backgroundColor = 'white';
       $scope.events.placable.borderColor = $scope.events.modifiable.borderColor;
       $scope.events.placable.id = $scope.events.modifiable.id;
@@ -476,14 +476,14 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     };
 
     /**
-     * Cancel the current booking modification, reseting the whole process
+     * Cancel the current booking modification, resetting the whole process
      */
     $scope.cancelModifyMachineSlot = function () {
       if ($scope.events.placable) {
         $scope.events.placable.backgroundColor = 'white';
         $scope.events.placable.title = '';
       }
-      $scope.events.modifiable.title = $scope.currentUser.role !== 'admin' ? _t('i_ve_reserved') : _t('not_available');
+      $scope.events.modifiable.title = $scope.currentUser.role !== 'admin' ? _t('app.logged.machines_reserve.i_ve_reserved') : _t('app.logged.machines_reserve.not_available');
       $scope.events.modifiable.backgroundColor = 'white';
 
       return updateCalendar();
@@ -500,7 +500,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     };
 
     /**
-     * Changes the user current view from the plan subsription screen to the machine reservation agenda
+     * Changes the user current view from the plan subscription screen to the machine reservation agenda
      * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
      */
     $scope.doNotSubscribePlan = function (e) {
@@ -539,11 +539,11 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
         machineSlot.is_reserved = true;
         machineSlot.can_modify = true;
         if ($scope.currentUser.role !== 'admin') {
-          machineSlot.title = _t('i_ve_reserved');
+          machineSlot.title = _t('app.logged.machines_reserve.i_ve_reserved');
           machineSlot.borderColor = BOOKED_SLOT_BORDER_COLOR;
           updateMachineSlot(machineSlot, reservation, $scope.currentUser);
         } else {
-          machineSlot.title = _t('not_available');
+          machineSlot.title = _t('app.logged.machines_reserve.not_available');
           machineSlot.borderColor = UNAVAILABLE_SLOT_BORDER_COLOR;
           updateMachineSlot(machineSlot, reservation, $scope.ctrl.member);
         }
@@ -595,7 +595,7 @@ Application.Controllers.controller('ReserveMachineController', ['$scope', '$stat
     };
 
     /**
-     * Triggered when fullCalendar tries to graphicaly render an event block.
+     * Triggered when fullCalendar tries to graphically render an event block.
      * Append the event tag into the block, just after the event title.
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
      */

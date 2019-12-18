@@ -1,7 +1,7 @@
 <div xmlns:stripe="http://www.w3.org/1999/xhtml">
   <div class="modal-header">
     <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-    <h1 translate>{{ 'online_payment' }}</h1>
+    <h1 translate>{{ 'app.shared.stripe.online_payment' }}</h1>
   </div>
   <div class="modal-body">
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
@@ -10,8 +10,8 @@
       <form name="stripeForm" stripe:form cart-items="cartItems" on-payment-success="onPaymentSuccess" class="form-horizontal">
         <div class="panel-body">
 
-          <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
-          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
+          <h3 class="m-t-xs" ng-if="walletAmount" ng-bind-html="'app.shared.wallet.you_have_amount_in_wallet' | translate:{ amount: numberFilter(walletAmount, 2), currency: currencySymbol }"></h3>
+          <p ng-if="walletAmount > 0 && amount !== 0" class="text-italic" ng-bind-html="'app.shared.stripe.credit_amount_for_pay_reservation' | translate:{ amount: numberFilter(amount, 2), currency: currencySymbol }"></p>
 
           <div id="card-element"></div>
           <div id="card-errors" role="alert"></div>
@@ -19,7 +19,9 @@
           <div class="form-group" ng-class="{'has-error': stripeForm.acceptCondition.$dirty && stripeForm.acceptCondition.$invalid}" ng-show="cgv">
             <div class="col-sm-12 text-sm checkbox-group">
               <input type="checkbox" name="acceptCondition" id="acceptCondition" ng-model="acceptCondition" value="true" ng-required="cgv != null"/>
-              <label for="acceptCondition">{{ 'i_have_read_and_accept_' | translate }} <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_general_terms_and_conditions' }}</a></label>
+              <label for="acceptCondition">{{ 'app.shared.stripe.i_have_read_and_accept_' | translate }}
+                <a href="{{cgv.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.shared.stripe._the_general_terms_and_conditions' }}</a>
+              </label>
             </div>
               <div ng-if="!cgv">
                   <input type="hidden" name="acceptCondition" ng-model="acceptCondition" value="true">
@@ -28,7 +30,7 @@
 
         </div>
         <div class="panel-footer no-padder">
-           <button type="submit" class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-disabled="stripeForm.$invalid || attempting" translate translate-values="{AMOUNT:(amount | currency)}">{{ 'confirm_payment_of_html'}}</button>
+           <button type="submit" class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-disabled="stripeForm.$invalid || attempting" translate translate-values="{AMOUNT:(amount | currency)}">{{ 'app.shared.stripe.confirm_payment_of_'}}</button>
         </div>
       </form>
 

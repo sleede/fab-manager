@@ -7,13 +7,13 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'spaces_list.the_spaces' }}</h1>
+        <h1 translate>{{ 'app.public.spaces_list.the_spaces' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
       <section class="heading-actions wrapper">
-       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.space_new" role="button" translate>{{ 'spaces_list.add_a_space' }}</a>
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs" ui-sref="app.admin.space_new" role="button" translate>{{ 'app.public.spaces_list.add_a_space' }}</a>
       </section>
     </div>
   </div>
@@ -26,7 +26,7 @@
     <div class="input-group col-md-3 m-l-lg m-b">
       <span class="input-group-addon"><i class="fa fa-filter"></i></span>
       <select ng-model="spaceFiltering" class="form-control">
-        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'spaces_list.status_'+status }}</option>
+        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'app.public.spaces_list.status_'+status }}</option>
       </select>
     </div>
   </div>
@@ -49,13 +49,13 @@
           <div class="col-sm-6 b-r no-padder">
             <div class="btn btn-default btn-block no-b padder-v red" ng-click="reserveSpace(space, $event)" ng-hide="space.disabled">
               <i class="fa fa-bookmark m-r-xs"></i>
-              <span class="hidden-sm" translate>{{ 'spaces_list.book' }}</span>
+              <span class="hidden-sm" translate>{{ 'app.public.spaces_list.book' }}</span>
             </div>
           </div>
           <div class="no-padder" ng-class="{'col-sm-6': !space.disabled}">
             <div class="btn btn-default btn-block padder-v no-b red" ng-click="showSpace(space)">
               <i class="fa fa-eye m-r-xs"></i>
-              <span class="hidden-sm" translate>{{ 'consult' }}</span>
+              <span class="hidden-sm" translate>{{ 'app.shared.buttons.consult' }}</span>
             </div>
           </div>
         </div>
