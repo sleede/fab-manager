@@ -325,7 +325,7 @@ Configure the first day of the week in your locale zone (generally monday or sun
     D3_DATE_FORMAT
 
 Date format for dates displayed in statistics charts.
-See [D3 Wiki](https://github.com/mbostock/d3/wiki/Time-Formatting#format) for available formats.
+See [D3 Wiki](https://github.com/d3/d3-time-format/blob/v2.2.2/README.md#locale_format) for available formats.
 <a name="UIB_DATE_FORMAT"></a>
 
     UIB_DATE_FORMAT
