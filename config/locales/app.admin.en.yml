@@ -127,7 +127,7 @@ en:
         trainings_monitoring: "Trainings monitoring"
         trainings: "Trainings"
         add_a_new_training: "Add a new training"
-        name: "Nom"
+        name: "Name"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
         select_a_training: "Select a training"
