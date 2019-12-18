@@ -107,10 +107,14 @@ pt:
         # connection modal
         connection: "Login"
         password_forgotten: "Esqueceu sua senha?"
+        confirm_my_account: "Confirmar sua conta"
         not_registered_to_the_fablab: "Ainda não registrado no Fablab?"
         create_an_account: "Criar conta"
         wrong_email_or_password: "E-mail ou senha incorretos."
         caps_lock_is_on: "A tecla Caps Lock está ativada."
+
+        # confirmation modal
+        you_will_receive_confirmation_instructions_by_email: Você receberá instruções de confirmação por e-mail.
 
         # forgotten password modal
         your_email_address_is_unknown: "Seu e-mail não está cadastrado."

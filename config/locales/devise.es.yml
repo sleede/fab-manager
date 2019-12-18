@@ -54,10 +54,10 @@ es:
       unlocked: "Tu cuenta se ha desbloqueado con éxito. Por favor inicie sesión para continuar."
   errors:
     messages:
-      already_confirmed: "Ya se confirmó, intente iniciar sesión"
+      already_confirmed: "Ya se confirmó, intente iniciar sesión."
       confirmation_period_expired: "Necesita ser confirmado dentro de %{period}, por favor, solicite uno nuevo"
       expired: "ha expirado, por favor, solicite uno nuevo"
-      not_found: "no encontrado"
+      not_found: "Este correo no esta associado con ninguna cuenta."
       not_locked: "no estaba bloqueado"
       not_saved:
         one: "un error prohibió que %{resource} fuese guardado:"

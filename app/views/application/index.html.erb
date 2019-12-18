@@ -53,6 +53,7 @@
       <% if RecaptchaService.recaptcha_enabled? %>
       Fablab.recaptchaSiteKey = "<%= RecaptchaService.site_key %>";
       <% end %>
+      Fablab.userConfirmationNeededToSignIn = <%= Rails.application.secrets.user_confirmation_needed_to_sign_in.present? %>;
   </script>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>

@@ -375,7 +375,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               console.error(`Authentication failed: ${JSON.stringify(error)}`);
               $scope.alerts = [];
               return $scope.alerts.push({
-                msg: _t('app.public.common.wrong_email_or_password'),
+                msg: error.data.error,
                 type: 'danger'
               });
             });
@@ -386,6 +386,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           $scope.openSignup = function (e) {
             e.preventDefault();
             return $uibModalInstance.dismiss('signup');
+          };
+
+          $scope.openConfirmationNewModal = function(e) {
+            e.preventDefault();
+            return $uibModalInstance.dismiss('confirmationNew');
           };
 
           return $scope.openResetPassword = function (e) {
@@ -425,6 +430,24 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               };
             }]
           }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
+        } else if (reason === 'confirmationNew') {
+          // open the 'reset password' modal
+          return $uibModal.open({
+            templateUrl: '<%= asset_path "shared/ConfirmationNewModal.html" %>',
+            size: 'sm',
+            controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
+              $scope.user = { email: '' };
+              return $scope.submitConfirmationNewForm = function () {
+                $scope.alerts = [];
+                return $http.post('/users/confirmation.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function (res) {
+                  $scope.alerts.push({
+                    msg: res.data.errors.email[0],
+                    type: 'danger'
+                  });
+                });
+              };
+            }]
+          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_the_confirmation_link')); });
         }
       });
       // otherwise the user just closed the modal

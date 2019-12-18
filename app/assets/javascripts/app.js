@@ -92,6 +92,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
       // Global config: machine/space slot duration
       $rootScope.slotDuration = Fablab.slotDuration;
+      // Global config: if true, user must confirm his email to sign in
+      $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

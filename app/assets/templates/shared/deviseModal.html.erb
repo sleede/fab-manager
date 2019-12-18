@@ -42,6 +42,9 @@
                          ng-minlength="8"/>
                 </div>
                 <a href="#" ng-click="openResetPassword($event)" class="text-xs">{{ 'app.public.common.password_forgotten' | translate }}</a>
+                <span ng-if="userConfirmationNeededToSignIn">
+                  <br><a href="#" ng-click="openConfirmationNewModal($event)" class="text-xs">{{ 'app.public.common.confirm_my_account' | translate }}</a>
+                </span>
                 <div class="alert alert-warning m-t-sm m-b-none text-xs p-sm" ng-show='isCapsLockOn' role="alert">
                   <i class="fa fa-warning"></i>
                   {{ 'app.public.common.caps_lock_is_on' | translate }}

@@ -107,10 +107,14 @@ fr:
         # fenêtre de connexion
         connection: "Connexion"
         password_forgotten: "Mot de passe oublié ?"
+        confirm_my_account: "Confirmer mon adresse de courriel"
         not_registered_to_the_fablab: "Vous n'êtes pas inscrit au FAB LAB ?"
         create_an_account: "Créer un compte"
         wrong_email_or_password: "Adresse courriel ou mot de passe incorrect."
         caps_lock_is_on: "La touche de verrouillage des majuscules est activée."
+
+        # fenêtre d'envoi des instructions de confirmation
+        you_will_receive_confirmation_instructions_by_email: Vous recevrez les instructions de confirmation par email.
 
         # mot de passe oublié
         your_email_address_is_unknown: "Votre adresse de courriel est inconnue."
