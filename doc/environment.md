@@ -346,7 +346,7 @@ See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a lis
 
 If set to `true`, and the application in started into a staging environment, this will enable the Crowdin In-context translation layer for the front-end application.
 See [Crowdin documentation](https://support.crowdin.com/in-context-localization/) for more details about this.
-Accordingly, `RAILS_LOCALE` must be configured to `ach`.
+Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
 
