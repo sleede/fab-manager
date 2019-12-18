@@ -20,8 +20,8 @@
             ng-model="plan.type"
             required="required"
             ng-disabled="method == 'PATCH'">
-        <option value="Plan" ng-selected="plan.type == 'Plan'" translate>{{ 'standard' }}</option>
-        <option value="PartnerPlan" ng-selected="plan.type == 'PartnerPlan'" translate>{{ 'partner' }}</option>
+        <option value="Plan" ng-selected="plan.type == 'Plan'" translate>{{ 'app.shared.plan.standard' }}</option>
+        <option value="PartnerPlan" ng-selected="plan.type == 'PartnerPlan'" translate>{{ 'app.shared.plan.partner' }}</option>
     </select>
     <span class="help-block error" ng-show="planForm['plan[type]'].$dirty && planForm['plan[type]'].$error.required" translate>{{ 'app.shared.plan.type_is_required' }}</span>
 </div>

@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_machine_booking_page' }}</h4>
-                <div ng-model="machineExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
+                <div ng-model="machineExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]
                       }'>
 
@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.warning_message_of_the_training_booking_page'}}</h4>
-                <div ng-model="trainingExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
+                <div ng-model="trainingExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]
                       }'>
 
@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.information_message_of_the_training_reservation_page'}}</h4>
-                <div ng-model="trainingInformationMessage.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
+                <div ng-model="trainingInformationMessage.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                         "buttons": ["bold", "italic", "unorderedlist", "header2" ]
                       }'>
 
@@ -80,7 +80,7 @@
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_subscriptions_page' }}</h4>
-                <div ng-model="subscriptionExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
+                <div ng-model="subscriptionExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]
                       }'>
                 </div>
@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-3">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_events_page' }}</h4>
-                <div ng-model="eventExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
+                <div ng-model="eventExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]
                       }'>
                 </div>
@@ -96,7 +96,7 @@
             </div>
             <div class="col-md-3" ng-hide="fablabWithoutSpaces">
                 <h4 translate>{{ 'app.admin.settings.message_of_the_spaces_page' }}</h4>
-                <div ng-model="spaceExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "settings.type_the_message_content" | translate }}",
+                <div ng-model="spaceExplicationsAlert.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.type_the_message_content" | translate }}",
                       "buttons": ["bold", "italic", "unorderedlist", "header2" ]
                       }'>
                 </div>
@@ -125,8 +125,8 @@
                             <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{cgvFile.custom_asset_file_attributes.attachment}}</span>
                         </div>
                                       <span class="input-group-addon btn btn-default btn-file">
-                                          <span class="fileinput-new" translate>{{ 'browse' }}</span>
-                                          <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                                          <span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
+                                          <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                                           <input type="file"
                                                  id="tnc_file"
                                                  name="custom_asset[custom_asset_file_attributes][attachment]"
@@ -149,8 +149,8 @@
                             <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{cguFile.custom_asset_file_attributes.attachment}}</span>
                         </div>
                                       <span class="input-group-addon btn btn-default btn-file">
-                                          <span class="fileinput-new" translate>{{ 'browse' }}</span>
-                                          <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                                          <span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
+                                          <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                                           <input type="file"
                                                  id="tos_file"
                                                  name="custom_asset[custom_asset_file_attributes][attachment]"

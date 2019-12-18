@@ -123,7 +123,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
         if (err.data.error) {
           growl.error(err.data.error);
         } else {
-          growl.error(_t('an_unexpected_error_occurred_check_your_authentication_code'));
+          growl.error(_t('app.logged.profile_completion.an_unexpected_error_occurred_check_your_authentication_code'));
           console.error(err);
         }
       });
@@ -174,7 +174,7 @@ Application.Controllers.controller('CompleteProfileController', ['$scope', '$roo
         function (email) {
           // Request the server to send an auth-migration email to the current user
           AuthProvider.send_code({ email },
-            function (res) { growl.info(_t('code_successfully_sent_again')); },
+            function (res) { growl.info(_t('app.logged.profile_completion.code_successfully_sent_again')); },
             function (err) { growl.error(err.data.error); }
           );
         }

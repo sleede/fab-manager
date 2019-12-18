@@ -49,7 +49,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon">{{ "invoices.date_" | translate }}</span>
+                  <span class="input-group-addon">{{ "app.admin.invoices.date_" | translate }}</span>
                   <input type="date" ng-model="searchInvoice.date" class="form-control" ng-change="handleFilterChange()">
                 </div>
               </div>
@@ -193,14 +193,14 @@
 				</div>
 				<div medium-editor class="invoice-text invoice-editable" ng-model="invoice.text.content"
              options='{
-                  "placeholder": "{{ "invoices.important_notes" | translate }}",
+                  "placeholder": "{{ "app.admin.invoices.important_notes" | translate }}",
                   "buttons": ["underline"]
              }'
              ng-blur="textEditEnd($event)">
 				</div>
 				<div medium-editor class="invoice-legals invoice-editable" ng-model="invoice.legals.content"
              options='{
-                  "placeholder": "{{ "invoices.address_and_legal_information" | translate }}",
+                  "placeholder": "{{ "app.admin.invoices.address_and_legal_information" | translate }}",
                   "buttons": ["bold", "underline"]
              }'
              ng-blur="legalsEditEnd($event)">

@@ -31,7 +31,7 @@
               <ng-include src="'<%= asset_path "admin/plans/_form.html" %>'"></ng-include>
 
               <div class="input-group m-t-md">
-                <label for="plan[disabled]" class="control-label m-r-md">{{ 'plan_form.disabled' | translate }}</label>
+                <label for="plan[disabled]" class="control-label m-r-md">{{ 'app.shared.plans.disabled' | translate }}</label>
                 <input bs-switch
                        ng-model="plan.disabled"
                        id="plan[disabled]"
@@ -43,7 +43,7 @@
                        ng-true-value="'true'"
                        ng-false-value="'false'"/>
                 <input type="hidden" name="plan[disabled]" value="{{plan.disabled}}"/>
-                <span class="help-block" translate>{{ 'plan_form.disable_plan_will_not_unsubscribe_users' }}</span>
+                <span class="help-block" translate>{{ 'app.shared.plans.disable_plan_will_not_unsubscribe_users' }}</span>
               </div>
 
               <h2 class="m-t-xl" translate>{{ 'app.admin.plans.edit.prices' }}</h2>

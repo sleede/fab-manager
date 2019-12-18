@@ -86,6 +86,7 @@ fr:
         edit_event: "Modifier l'évènement"
         view_reservations: "Voir les réservations"
         legend: "Légende"
+        and: "et"
 
       icalendar:
         icalendar_import: "Import iCalendar"
@@ -147,7 +148,8 @@ fr:
         description_is_limited_to_255_characters: "La description est limitée à 255 caractères."
         description_was_successfully_saved: "La description a bien été enregistrée."
         training_successfully_deleted: "La formation a bien été supprimée."
-        unable_to_delete_the_training_because_some_users_alredy_booked_it: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+        unable_to_delete_the_training_because_some_users_already_booked_it: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+        confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
         status_enabled: "Actifs"
         status_disabled: "Désactivés"
@@ -155,10 +157,9 @@ fr:
 
       trainings_new:
         # créer une nouvelle formation
-        trainings_new:
-          add_a_new_training: "Ajouter une nouvelle formation"
-          beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
-          dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
+        add_a_new_training: "Ajouter une nouvelle formation"
+        beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
+        dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
 
       events:
         # gestion et suivi des évènements
@@ -590,6 +591,7 @@ fr:
         groups: "Groupes"
         tags: "Étiquettes"
         authentication: "Authentification"
+        confirmation_required: "Confirmation requise"
         confirm_delete_member: "Êtes-vous sûr de vouloir supprimer ce membre ? Cette opération est irréversible."
         member_successfully_deleted: "Le membre a bien été supprimé."
         unable_to_delete_the_member: "Le membre n'a pas pu être supprimé."
@@ -599,6 +601,7 @@ fr:
         unable_to_delete_the_administrator: "L'administrateur n'a pas pu être supprimé."
         changes_successfully_saved: "Les modifications ont bien été enregistrées."
         an_error_occurred_while_saving_changes: "Une erreur est survenue lors de l'enregistrement des modifications."
+        export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
         tag_form:
           tags: "Étiquettes"
           add_a_tag: "Ajouter une étiquette"
@@ -736,6 +739,19 @@ fr:
         add_an_administrator: "Ajouter un administrateur"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "L'administrateur a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par email."
         failed_to_create_admin: "Impossible de créer l'administrateur :"
+        man: "Homme"
+        woman: "Femme"
+        pseudonym: "Pseudonyme"
+        pseudonym_is_required: "Le pseudonyme est requis."
+        first_name: "Votre prénom"
+        first_name_is_required: "Le prénom est requis."
+        surname: "Votre nom"
+        surname_is_required: "Le nom est requis."
+        email_address: "Votre adresse de courriel"
+        email_is_required: "L'adresse de courriel est requise."
+        birth_date: "Date de naissance"
+        address: "Adresse"
+        phone_number: "Numéro de téléphone"
 
       authentication_new:
         # ajouter un nouveau fournisseur d'authentification (SSO)

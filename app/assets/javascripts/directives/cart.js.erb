@@ -117,7 +117,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             return $scope.modePlans = true;
           } else {
           // otherwise we alert, this error musn't occur when the current user hasn't the admin role
-            return growl.error(_t('cart.please_select_a_member_first'));
+            return growl.error(_t('app.shared.cart.please_select_a_member_first'));
           }
         };
 
@@ -133,7 +133,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
               if (!$scope.isAdmin() && (amountToPay > 0)) {
                 if ($rootScope.fablabWithoutOnlinePayment) {
-                  growl.error(_t('cart.online_payment_disabled'));
+                  growl.error(_t('app.shared.cart.online_payment_disabled'));
                 } else {
                   return payByStripe(reservation);
                 }
@@ -145,7 +145,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             });
           } else {
           // otherwise we alert, this error musn't occur when the current user is not admin
-            return growl.error(_t('cart.please_select_a_member_first'));
+            return growl.error(_t('app.shared.cart.please_select_a_member_first'));
           }
         };
 
@@ -173,7 +173,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             return $scope.events.modifiable = null;
           }
           , function (err) { // failure
-            growl.error(_t('cart.unable_to_change_the_reservation'));
+            growl.error(_t('app.shared.cart.unable_to_change_the_reservation'));
             return console.error(err);
           });
         };
@@ -315,19 +315,19 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                       resolve: {
                         object () {
                           return {
-                            title: _t('cart.confirmation_required'),
-                            msg: _t('cart.do_you_really_want_to_cancel_this_reservation')
+                            title: _t('app.shared.cart.confirmation_required'),
+                            msg: _t('app.shared.cart.do_you_really_want_to_cancel_this_reservation')
                           };
                         }
                       }
                     },
                     function () { // cancel confirmed
                       Slot.cancel({ id: $scope.slot.id }, function () { // successfully canceled
-                        growl.success(_t('cart.reservation_was_cancelled_successfully'));
+                        growl.success(_t('app.shared.cart.reservation_was_cancelled_successfully'));
                         if (typeof $scope.onSlotCancelSuccess === 'function') { return $scope.onSlotCancelSuccess(); }
                       }
                       , function () { // error while canceling
-                        growl.error(_t('cart.cancellation_failed'));
+                        growl.error(_t('app.shared.cart.cancellation_failed'));
                       });
                     }
                   );
@@ -403,7 +403,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             });
           } else {
             // otherwise we alert, this error musn't occur when the current user is not admin
-            growl.warning(_t('cart.please_select_a_member_first'));
+            growl.warning(_t('app.shared.cart.please_select_a_member_first'));
             return $scope.amountTotal = null;
           }
         };
@@ -556,12 +556,12 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
 
                 // Button label
                 if ($scope.amount > 0) {
-                  $scope.validButtonName = _t('cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
+                  $scope.validButtonName = _t('app.shared.cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
                 } else {
                   if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                    $scope.validButtonName = _t('cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
+                    $scope.validButtonName = _t('app.shared.cart.confirm_payment_of_html', { ROLE: $rootScope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
                   } else {
-                    $scope.validButtonName = _t('confirm');
+                    $scope.validButtonName = _t('app.shared.buttons.confirm');
                   }
                 }
 
@@ -576,7 +576,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                   }
                   , function (response) {
                     $scope.alerts = [];
-                    $scope.alerts.push({ msg: _t('cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
+                    $scope.alerts.push({ msg: _t('app.shared.cart.a_problem_occurred_during_the_payment_process_please_try_again_later'), type: 'danger' });
                     return $scope.attempting = false;
                   });
                 };

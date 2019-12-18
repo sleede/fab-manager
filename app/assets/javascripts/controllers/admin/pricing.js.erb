@@ -528,7 +528,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         , function () {
         // the admin has confirmed, delete the coupon
           Coupon.delete({ id }, function (res) {
-            growl.success(_t('coupon_was_successfully_deleted'));
+            growl.success(_t('app.admin.pricing.coupon_was_successfully_deleted'));
             return $scope.coupons.splice(findItemIdxById(coupons, id), 1);
           }
 

@@ -166,7 +166,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       Setting.update(
         { name: setting.name },
         { value },
-        function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) })); },
+        function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.${setting.name}`) })); },
         function (error) { console.log(error); }
       );
     };

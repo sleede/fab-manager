@@ -185,7 +185,7 @@ Application.Controllers.controller('ShowSpaceController', ['$scope', '$state', '
       event.preventDefault();
       // check the permissions
       if ($scope.currentUser.role !== 'admin') {
-        return console.error(_t('space_show.unauthorized_operation'));
+        return console.error(_t('app.public.space_show.unauthorized_operation'));
       } else {
         return dialogs.confirm({
           resolve: {

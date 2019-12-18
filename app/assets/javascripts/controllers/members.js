@@ -142,10 +142,10 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         $rootScope.currentUser = user;
         Auth._currentUser.group_id = user.group_id;
         $scope.group.change = false;
-        return growl.success(_t('edit_profile.your_group_has_been_successfully_changed'));
+        return growl.success(_t('app.logged.dashboard.settings.your_group_has_been_successfully_changed'));
       }
       , function (err) {
-        growl.error(_t('edit_profile.an_unexpected_error_prevented_your_group_from_being_changed'));
+        growl.error(_t('app.logged.dashboard.settings.an_unexpected_error_prevented_your_group_from_being_changed'));
         return console.error(err);
       });
 
@@ -198,13 +198,13 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
+              title: _t('app.logged.dashboard.settings.confirmation_required'),
               msg: $sce.trustAsHtml(
-                _t('edit_profile.confirm_delete_your_account') + '<br/>' +
-                '<strong>' + _t('edit_profile.all_data_will_be_lost') + '</strong><br/><br/>' +
-                _t('edit_profile.invoicing_data_kept') + '<br/>' +
-                _t('edit_profile.statistic_data_anonymized') + '<br/>' +
-                _t('edit_profile.no_further_access_to_projects')
+                _t('app.logged.dashboard.settings.confirm_delete_your_account') + '<br/>' +
+                '<strong>' + _t('app.logged.dashboard.settings.all_data_will_be_lost') + '</strong><br/><br/>' +
+                _t('app.logged.dashboard.settings.invoicing_data_kept') + '<br/>' +
+                _t('app.logged.dashboard.settings.statistic_data_anonymized') + '<br/>' +
+                _t('app.logged.dashboard.settings.no_further_access_to_projects')
               )
             };
           }
@@ -214,12 +214,12 @@ Application.Controllers.controller('EditProfileController', ['$scope', '$rootSco
         Member.remove({ id: user.id }, () =>
           Auth.logout().then(function () {
             $state.go('app.public.home');
-            return growl.success(_t('edit_profile.your_user_account_has_been_successfully_deleted_goodbye'));
+            return growl.success(_t('app.logged.dashboard.settings.your_user_account_has_been_successfully_deleted_goodbye'));
           })
 
         , function (error) {
           console.log(error);
-          return growl.error(_t('edit_profile.an_error_occured_preventing_your_account_from_being_deleted'));
+          return growl.error(_t('app.logged.dashboard.settings.an_error_occured_preventing_your_account_from_being_deleted'));
         })
       );
 

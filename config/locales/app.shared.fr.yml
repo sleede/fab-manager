@@ -19,38 +19,10 @@ fr:
         "no": "Non"
         apply: "Appliquer"
 
-      elements:
-        # traductions variées utilisées à plusieurs reprises dans l'application
-        group: "Groupe"
-        confirmation_required: "Confirmation requise"
-        events: "Évènements"
-        email_address: "Adresse de courriel"
-        pseudonym: "Pseudonyme"
-        all_day: "Toute la journée"
-        total_: "TOTAL :"
-        name: "Nom"
-        step_N: "Étape {INDEX}"
-        online_payment: "Paiement en ligne"
-        type: "Type"
-        partner: "Partenaire"
-        standard: "Standard"
-        year: "Année"
-        or: "ou"
-        and: "et"
-        change_my_data: "Modifier mes données"
-        sync_my_profile: "Synchroniser mon profil"
-        once_your_data_are_up_to_date_: "Une fois vos données à jour,"
-        _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
-        _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
-        _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-        all_themes: "Toutes les thématiques"
-        filter: 'Filtre'
-        payment_card_error: "Un problème est survenu avec votre carte bancaire :"
-        unexpected_error_occurred: "Une erreur inattendue est survenue"
-
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Vous perdrez les modifications non enregistrées si vous quittez cette page"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Vous perdrez les modifications non enregistrées si vous rechargez cette page"
+        payment_card_error: "Un problème est survenu avec votre carte bancaire :"
 
       user:
         # formulaire d'édition du profil utilisateur
@@ -151,10 +123,12 @@ fr:
 
       stripe:
         # fenêtre de paiement stripe
+        online_payment: "Paiement en ligne"
         i_have_read_and_accept_: "J'ai bien pris connaissance, et accepte"
         _the_general_terms_and_conditions: "les conditions générales de vente."
         credit_amount_for_pay_reservation: "Il vous reste {amount} {currency} à payer pour valider votre réservation"
         client_credit_amount_for_pay_reservation: "Il reste {amount} {currency} à payer pour valider la réservation"
+        confirm_payment_of_: "Payer : {AMOUNT}"
 
       valid_reservation_modal:
         # fenêtre de paiement sur place d'une réservation
@@ -194,6 +168,8 @@ fr:
         name_is_required: "Le nom est requis"
         name_length_must_be_less_than_24_characters: "Le nom doit faire moins de 24 caractères."
         type: "Type"
+        partner: "Partenaire"
+        standard: "Standard"
         type_is_required: "Le type est requis."
         group: "Groupe"
         transversal_all_groups: "Transversal (tout les groupes)"
@@ -219,6 +195,11 @@ fr:
         new_user: "Nouvel utilisateur ..."
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
         new_partner: "Nouveau partenaire"
+        first_name: "Prénom"
+        first_name_is_required: "Le prénom est requis"
+        surname: "Nom"
+        surname_is_required: "le nom est requis"
+        email_address: "Adresse de courriel"
         email_address_is_required: "L'adresse e-mail est requise."
         disabled: "Désactiver l'abonnement"
         disable_plan_will_not_unsubscribe_users: "Attention : désactiver l'abonnement ne désabonnera pas les utilisateurs ayant actuellement cet abonnement actif."
