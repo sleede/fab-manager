@@ -3,7 +3,7 @@ es:
     public:
       common:
         #header and "about" page
-        about_the_fablab: "Sobre {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
+        about_the_fablab: "About {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME}"
         return: "Volver"
         #cookies
         cookies:
@@ -39,7 +39,6 @@ es:
         public_calendar: "Calendario"
         #left menu (admin)
         trainings_monitoring: "Monitorización de cursos"
-        select_a_training: "Selecionar un curso"
         manage_the_calendar: "Gestionar calendario"
         manage_the_users: "Gestionar usuarios"
         manage_the_invoices: "Gestionar facturas"
@@ -112,17 +111,15 @@ es:
         and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
       about:
         #about page
-        about:
-          read_the_fablab_policy: "Leer la politica del FabLab"
-          read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
-          your_fablab_s_contacts: "Sus contactos del FabLab"
-          privacy_policy: "Política de privacidad"
+        read_the_fablab_policy: "Read the FabLab policy"
+        read_the_fablab_s_general_terms_and_conditions: "Read the FabLab's general terms and conditions"
+        your_fablab_s_contacts: "Your FabLab's contacts"
+        privacy_policy: "Privacy policy"
       privacy:
         #'privacy policy' page
-        privacy:
-          title: "Política de privacidad"
-          dpo: "Oficial de protección de datos"
-          last_update: "Última actualización,"
+        title: "Privacy policy"
+        dpo: "Data protection officer"
+        last_update: "Last update,"
       home:
         #home page
         latest_documented_projects: "Los últimos proyectos documentados"
@@ -144,31 +141,37 @@ es:
         still_available: "Available place(s)"
       projects_list:
         #projects gallery
-        projects_list:
-          the_fablab_projects: "Los proyectos del FabLab"
-          add_a_project: "Añadir un proyecto"
-          search_over_the_whole_network: "Buscar en toda la red de FabLab"
-          tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
-          openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
-          project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
-          reset_all_filters: "Limpiar filtros"
-          search: "Buscar"
-          all_projects: "Todos los proyectos"
-          my_projects: "Mis proyectos"
-          projects_to_whom_i_take_part_in: "Proyectos de los que formo parte"
-          all_machines: "Todas las máquinas"
-          all_themes: "Todos los temas"
-          all_materials: "Todo el material"
-          load_next_projects: "Cargar más proyectos"
-          rough_draft: "Borrador"
+        the_fablab_projects: "The Fab Lab projects"
+        add_a_project: "Add a project"
+        search_over_the_whole_network: "Search over the whole Fab Manager network"
+        tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
+        openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
+        project_search_result_is_empty: "Sorry, we found no results matching your search criteria."
+        reset_all_filters: "Reset all filters"
+        search: "Search"
+        all_projects: "All projects"
+        my_projects: "My projects"
+        projects_to_whom_i_take_part_in: "Projects to whom I take part in"
+        all_machines: "All machines"
+        all_themes: "All themes"
+        all_materials: "All materials"
+        load_next_projects: "Load next projects"
+        rough_draft: "Rough draft"
       projects_show:
         #details of a projet
+        rough_draft: "Draft"
         project_description: "Descripción de proyecto"
         by_name: "By {NAME}"
+        step_N: "Step {INDEX}"
+        share_on_facebook: "Share on Facebook"
+        share_on_twitter: "Share on Twitter"
         deleted_user: "Deleted user"
         posted_on_: "Subido el"
         CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
+        machines_and_materials: "Machines and materials"
+        collaborators: "Collaborators"
         licence: "Licencia"
+        confirmation_required: "Confirmation required"
         report_an_abuse: "Reportar una infracción"
         unauthorized_operation: "Operación no autorizada"
         your_report_was_successful_thanks: "Su informe se ha enviado con éxito. Gracias."
@@ -185,31 +188,34 @@ es:
         do_you_really_want_to_delete_this_project: "¿Está seguro de querer eliminar este proyecto?"
       machines_list:
         #list of machines
-        machines_list:
-          the_fablab_s_machines: "Las máquinas del FabLab"
-          add_a_machine: "Añadir una máquina"
-          book: "Book"
-          _or_the_: " o el "
-          status_enabled: "Enabled"
-          status_disabled: "Disabled"
-          status_all: "All"
+        the_fablab_s_machines: "The FabLab's machines"
+        add_a_machine: "Add a machine"
+        book: "Book"
+        _or_the_: " or the "
+        status_enabled: "Enabled"
+        status_disabled: "Disabled"
+        status_all: "All"
       machines_show:
         #details of a machine
         book_this_machine: "Alquilar máquina"
+        technical_specifications: "Technical specifications"
         files_to_download: "Archivos a descargar"
         projects_using_the_machine: "Proyectos que utilizan esta máquina"
         _or_the_: " o el "
+        confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_machine: "¿Está seguro de querer eliminar esta máquina?"
         unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La máquina no puede borrarse porque está siendo usada o ha sido reservada por algún usuario."
       trainings_list:
         #list of trainings
+        book: "Book"
         the_trainings: "Lista de cursos"
       training_show:
         #details of a training
         book_this_training: "reservar plaza en este curso"
         do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
         unauthorized_operation: "Operación no autorizada"
+        confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
       plans:
         #summary of the subscriptions
@@ -223,9 +229,14 @@ es:
         his_group: "{GENDER, select, male{His} female{Her} other{Its}} group"
         he_wants_to_change_group: "{ROLE, select, admin{The user wants} other{I want}} cambiar el grupo"
         change_my_group: "Cambiar {ROLE, select, admin{{GENDER, select, male{his} female{her} other{its}}} other{my}} grupo"
+        summary: "Summary"
         your_subscription_has_expired_on_the_DATE: "Your subscription has expired on the {DATE}"
-        you_ve_just_payed_the_: "acaba de pagar"
+        subscription_price: "Subscription price"
+        you_ve_just_selected_a_subscription_html: "You've just selected a <strong>subscription</strong>:"
+        confirm_and_pay: "Valider et payer"
+        you_ve_just_payed_the_subscription_html: "You've just paid the <strong>subscription</strong>:"
         thank_you_your_subscription_is_successful: "Gracias. Su suscripción ha tenido éxito"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Your invoice will be available soon from your dashboard"
         your_group_was_successfully_changed: "Su grupo ha sido cambiado correctamente."
         the_user_s_group_was_successfully_changed: "Los usuarios del grupo han cambiado correctamente."
         an_error_prevented_your_group_from_being_changed: "Un error impidió que su grupo fuese cambiado."
@@ -233,6 +244,8 @@ es:
         an_error_occured_during_the_payment_process_please_try_again_later: "Ha ocurrido un error mientras se procesaba el pago. Intentelo en unos minutos."
         subscription_confirmation: "Confirmar suscripción"
         here_is_the_NAME_subscription_summary: "Here is the {NAME}'s subscription summary:"
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
       events_list:
         #Fablab's events list
         the_fablab_s_events: "Los eventos del FabLab"
@@ -243,24 +256,39 @@ es:
         free_admission: "Free admission"
         still_available: "available place(s)"
         free_entry: "Free entry"
+        add_an_event: "Add an event"
+        load_the_next_events: "Load the next events..."
+        full_price_: "Full price:"
+        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
       events_show:
         #details and booking of an event
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
+        dates: "Dates"
         beginning: "Empieza:"
         ending: "Termina:"
         opening_hours: "Hora de apertura:"
+        all_day: "All day"
+        from_time: "From\" # context: time. eg. \"from 18:00 to 21:00"
+        to_time: "to\"  # context: time. eg. \"from 18:00 to 21:00"
+        full_price_: "Full price:"
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
         free_entry: "Entrada gratuita"
         cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
+        thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
+        dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Reservar"
+        confirm_and_pay: "Confirm and pay"
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
+        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+        please_select_a_member_first: "Please select a member first"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
         confirmation_required: "Confirmation required"
@@ -269,38 +297,38 @@ es:
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
+        reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
         cancellation_failed: "Cancellation failed."
         event_is_over: "The event is over"
         thanks_for_coming: "Thanks for coming!"
         view_event_list: "View events to come"
+        share_on_facebook: "Share on Facebook"
+        share_on_twitter: "Share on Twitter"
       calendar:
         #public calendar
-        calendar:
-          calendar: "Calendario"
-          show_unavailables: "Mostrar campos inválidos"
-          filter_calendar: "Filtrar calendario"
-          trainings: "Cursos"
-          machines: "Máquinas"
-          spaces: "Espacios"
-          events: "Eventos"
-          externals: "Otros calendarios"
+        calendar: "Calendar"
+        show_unavailables: "Show unavailable slots"
+        filter_calendar: "Filter calendar"
+        trainings: "Trainings"
+        machines: "Machines"
+        spaces: "Spaces"
+        events: "Events"
+        externals: "Other calendars"
       spaces_list:
         #list of spaces
-        spaces_list:
-          the_spaces: "Espacios"
-          add_a_space: "Añadir espacios"
-          status_enabled: "Enabled"
-          status_disabled: "Disabled"
-          status_all: "All"
-          book: "Book"
+        the_spaces: "The spaces"
+        add_a_space: "Add a space"
+        status_enabled: "Enabled"
+        status_disabled: "Disabled"
+        status_all: "All"
+        book: "Book"
       space_show:
         #display the details of a space
-        space_show:
-          book_this_space: "Reservar este espacio"
-          unauthorized_operation: "Operación no autorizada"
-          confirmation_required: "Confirmación requerida"
-          do_you_really_want_to_delete_this_space: "¿Está seguro de que quiere borrar este espacio?"
-          the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "No puede borrarse este espacio porque está siendo usado por otros usuarios."
-          characteristics: "Características"
-          files_to_download: "Archivos para descargar"
-          projects_using_the_space: "Proyectos que usan el espacio"
+        book_this_space: "Book this space"
+        unauthorized_operation: "Unauthorized operation"
+        confirmation_required: "Confirmation required"
+        do_you_really_want_to_delete_this_space: "Do you really want to delete this space?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Unable to delete this space, because it is already reserved by some users."
+        characteristics: "Characteristics"
+        files_to_download: "Files to download"
+        projects_using_the_space: "Projects using the space"
