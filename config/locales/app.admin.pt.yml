@@ -44,25 +44,25 @@ pt:
         adjust_the_opening_hours: "Ajustar o horário de funcionamento"
         to_time: "ás"  # context: time. eg. "from 18:00 to 21:00"
         restrict_this_slot_with_labels_optional: "Restrinja este slot com etiquetas (opcional)"
-        recurrence: "Recurrence"                                                                 # translation_missing
-        enabled: "Enabled"                                                                       # translation_missing
-        period: "Period"                                                                         # translation_missing
-        week: "Week"                                                                             # translation_missing
-        month: "Month"                                                                           # translation_missing
-        number_of_periods: "Number of periods"                                                   # translation_missing
-        end_date: "End date"                                                                     # translation_missing
-        summary: "Summary"                                                                       # translation_missing
-        select_period: "Please select a period for the recurrence"                               # translation_missing
-        select_nb_period: "Please select a number of periods for the recurrence"                 # translation_missing
-        select_end_date: "Please select the date of the last occurrence"                         # translation_missing
-        about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"    # translation_missing
-        reservable: "Reservable(s) :"                                                            # translation_missing
+        recurrence: "Recurrence"
+        enabled: "Enabled"
+        period: "Period"
+        week: "Week"
+        month: "Month"
+        number_of_periods: "Number of periods"
+        end_date: "End date"
+        summary: "Summary"
+        select_period: "Please select a period for the recurrence"
+        select_nb_period: "Please select a number of periods for the recurrence"
+        select_end_date: "Please select the date of the last occurrence"
+        about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"
+        reservable: "Reservable(s) :"
         labels: "Etiqueta(s):"
         none: "Nenhuma"
         slot_successfully_deleted: "O slot {START} - {END} foi deletado com sucesso"
-        slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted"  # translation_missing
+        slots_deleted: "The slot of {START}, and {COUNT, plural, =1{one other} other{{COUNT} others}}}, have been deleted"
         unable_to_delete_the_slot: "Não é possível deletar o slot {START} - {END}, provavelmente porque já foi reservado por um membro"
-        slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}."   # translation_missing
+        slots_not_deleted: "On {TOTAL} slots, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exist on {COUNT, plural, =1{it} other{them}}."
         you_should_select_at_least_a_machine: "Você deveria selecionar a última máquina neste slot."
         export_is_running_you_ll_be_notified_when_its_ready: "A Exportação está em andamento. Você será notificado quando terminar."
         actions: "Ações"
@@ -78,36 +78,36 @@ pt:
         unlockable_because_reservations: "Não é possível bloquear a reserva neste slot porque existem algumas reservas não cancelados nele."
         delete_slot: "Exclua o slot"
         do_you_really_want_to_delete_this_slot: "Você realmente quer excluir esse slot?"
-        delete_recurring_slot: "You're about to delete a recurring slot. What do you want to do?"# translation_missing
-        delete_this_slot: "Only this slot"                                                       # translation_missing
-        delete_this_and_next: "This slot and the following"                                      # translation_missing
-        delete_all: "All slots"                                                                  # translation_missing
-        event_in_the_past: "Unable to create a slot in the past."                                # translation_missing
-        edit_event: "Edit the event"                                                             # translation_missing
-        view_reservations: "Ver reservas"                                                        # translation_missing
+        delete_recurring_slot: "You're about to delete a recurring slot. What do you want to do?"
+        delete_this_slot: "Only this slot"
+        delete_this_and_next: "This slot and the following"
+        delete_all: "All slots"
+        event_in_the_past: "Unable to create a slot in the past."
+        edit_event: "Edit the event"
+        view_reservations: "Ver reservas"
         legend: "legenda"
         and: "and"
 
       icalendar:
-        icalendar_import: "iCalendar import"                                                     # translation_missing
-        intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every nights and the events are shown in the public calendar."   # translation_missing
-        new_import: "New ICS import"                                                             # translation_missing
-        color: "Colour"                                                                          # translation_missing
-        text_color: "Text colour"                                                                # translation_missing
-        url: "URL"                                                                               # translation_missing
-        name: "Name"                                                                             # translation_missing
-        example: "Example"                                                                       # translation_missing
-        display: "Display"                                                                       # translation_missing
-        hide_text: "Hide the text"                                                               # translation_missing
-        hidden: "Hidden"                                                                         # translation_missing
-        shown: "Shown"                                                                           # translation_missing
-        create_error: "Unable to create iCalendar import. Please try again later"                # translation_missing
-        delete_failed: "Unable to delete the iCalendar import. Please try again later"           # translation_missing
-        refresh: "Updating..."                                                                   # translation_missing
-        sync_failed: "Unable to synchronize the URL. Please try again later"                     # translation_missing
-        confirmation_required: "Confirmation required"                                           # translation_missing
-        confirm_delete_import: "Do you really want to delete this iCalendar import?"             # translation_missing
-        delete_success: "iCalendar import successfully deleted"                                  # translation_missing
+        icalendar_import: "iCalendar import"
+        intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every nights and the events are shown in the public calendar."
+        new_import: "New ICS import"
+        color: "Colour"
+        text_color: "Text colour"
+        url: "URL"
+        name: "Name"
+        example: "Example"
+        display: "Display"
+        hide_text: "Hide the text"
+        hidden: "Hidden"
+        shown: "Shown"
+        create_error: "Unable to create iCalendar import. Please try again later"
+        delete_failed: "Unable to delete the iCalendar import. Please try again later"
+        refresh: "Updating..."
+        sync_failed: "Unable to synchronize the URL. Please try again later"
+        confirmation_required: "Confirmation required"
+        confirm_delete_import: "Do you really want to delete this iCalendar import?"
+        delete_success: "iCalendar import successfully deleted"
 
       project_elements:
         # management of the projects' components
@@ -140,7 +140,7 @@ pt:
         training_validation: "Validação de treinamentos"
         training_of_the_DATE_TIME_html : "Training of the <strong>{DATE} - {TIME}</strong>"
         you_can_validate_the_training_of_the_following_members: "Você pode validar um treinamento dos seguintes membros:"
-        deleted_user: "Deleted user"                                                               # translation_missing
+        deleted_user: "Deleted user"
         no_reservation: "Sem reservas"
         validate_the_trainings: "Validação de treinamentos"
         edition_of_the_description_tooltip: "Edição da descrição tooltip"
@@ -259,7 +259,7 @@ pt:
         group: "Grupo"
         prominence: "Relevância"
         price: "Preço"
-        machine_hours: "Machine slots"                                                             # translation_missing
+        machine_hours: "Machine slots"
         these_prices_match_machine_hours_rates_: "Estes preços correspondem às {DURATION} minutos de trabalho"
         _without_subscriptions: "sem assinaturas"
         machines: "Máquinas"
@@ -268,7 +268,7 @@ pt:
         related_trainings: "Treinamentos relacionados"
         add_a_machine_credit: "Adicionar crédito de máquina"
         machine: "Máquina"
-        hours: "Slots of {DURATION} minutes"                                                     # translation_missing
+        hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Assinaturas relacionadas"
         please_specify_a_number: "Por favor especifique um número."
         none: "Vazio"  # grammar note: concordance with "training".
@@ -290,12 +290,12 @@ pt:
         nb_of_usages: "Número de usos"
         status: "Status"
         add_a_new_coupon: "Adicionar novo cupom"
-        display_more_coupons: "Display the next coupons"                                          # translation_missing
+        display_more_coupons: "Display the next coupons"
         disabled: "Desabilitado"
         expired: "Expirado"
         sold_out: "Esgotado"
         active: "Ativo"
-        all: "Display all"                                                                        # translation_missing
+        all: "Display all"
         confirmation_required: "Confirmação obrigatória"
         do_you_really_want_to_delete_this_coupon: "Você realmente deseja deletar este cupom?"
         coupon_was_successfully_deleted: "O cupom foi deletado com sucesso."
@@ -346,7 +346,7 @@ pt:
           copy_prices_from: "Copiar preços de"
           machines: "Máquinas"
           machine: "Máquina"
-          hourly_rate: "Price by slot"                                                            # translation_missing
+          hourly_rate: "Price by slot"
           spaces: "Espaços"
           space: "Espaço"
           unable_to_save_subscription_changes_please_try_again: "Impossível salvar mudanças da assinatura. Por favor tente novamente."
@@ -437,10 +437,10 @@ pt:
         VAT: "VAT"
         enable_VAT: "Ativar VAT"
         VAT_rate: "VAT taxa"
-        VAT_history: "VAT rates history"                                       #translation_missing
-        changed_at: "Changed at"                                               #translation_missing
-        changed_by: "By"                                                       #translation_missing
-        deleted_user: "Deleted user"                                           #translation_missing
+        VAT_history: "VAT rates history"
+        changed_at: "Changed at"
+        changed_by: "By"
+        deleted_user: "Deleted user"
         refund_invoice_successfully_created: "Restituição de fatura criada com sucesso."
         create_a_refund_on_this_invoice: "Criar restituição de fatura"
         creation_date_for_the_refund: "Criação de data de restituição"
@@ -479,96 +479,96 @@ pt:
         logo_successfully_saved: "Logo salvo com sucesso."
         an_error_occurred_while_saving_the_logo: "Um erro ocorreu ao salvar o logo."
         online_payment: "Pagamento Online"
-        close_accounting_period: "Close an accounting period"                        # translation_missing
-        close_from_date: "Close from"                                                # translation_missing
-        start_date_is_required: "Start date is required"                             # translation_missing
-        close_until_date: "Close until"                                              # translation_missing
-        end_date_is_required: "End date is required"                                 # translation_missing
-        previous_closings: "Previous closings"                                       # translation_missing
-        start_date: "From"                                                           # translation_missing
-        end_date: "To"                                                               # translation_missing
-        closed_at: "Closed at"                                                       # translation_missing
-        closed_by: "By"                                                              # translation_missing
-        period_total: "Period total"                                                 # translation_missing
-        perpetual_total: "Perpetual total"                                           # translation_missing
+        close_accounting_period: "Close an accounting period"
+        close_from_date: "Close from"
+        start_date_is_required: "Start date is required"
+        close_until_date: "Close until"
+        end_date_is_required: "End date is required"
+        previous_closings: "Previous closings"
+        start_date: "From"
+        end_date: "To"
+        closed_at: "Closed at"
+        closed_by: "By"
+        period_total: "Period total"
+        perpetual_total: "Perpetual total"
         integrity: "Verificação de integridade"
-        confirmation_required: "Confirmation required"                               # translation_missing
-        confirm_close_START_END: "Do you really want to close the accounting period between {START} and {END}? Any subsequent changes will be impossible"       # translation_missing
-        period_must_match_fiscal_year: "A closing must occur at the end of a minimum annual period, or per financial year when it is not calendar-based."           # translation_missing
-        this_may_take_a_while: "This operation will take some time to complete."       # translation_missing
-        period_START_END_closed_success: "The accounting period from {START} to {END} has been successfully closed. Archive generation is running, you'll be notified when it's done."        # translation_missing
-        failed_to_close_period: "An error occurred, unable to close the accounting period"                                     # translation_missing
-        no_periods: "No closings for now"                                            # translation_missing
-        accounting_codes: "Accounting codes"                                         # translation_missing
-        accounting_journal_code: "Journal code"                                      # translation_missing
-        general_journal_code: "Journal code"                                         # translation_missing
-        accounting_card_client_code: "Card clients code"                             # translation_missing
-        card_client_code: "Accounting code for clients who paid by card"             # translation_missing
-        accounting_card_client_label: "Card clients label"                           # translation_missing
-        card_client_label: "Account label for clients who paid by card"              # translation_missing
-        accounting_wallet_client_code: "Wallet clients code"                         # translation_missing
-        wallet_client_code: "Accounting code for clients who paid by virtual wallet" # translation_missing
-        accounting_wallet_client_label: "Wallet clients label"                       # translation_missing
-        wallet_client_label: "Account label for clients who paid by virtual wallet"  # translation_missing
-        accounting_other_client_code: "Other payment client code"                    # translation_missing
-        other_client_code: "Accounting code for clients who paid using another payment means" # translation_missing
-        accounting_other_client_label: "Other payment client label"                  # translation_missing
-        other_client_label: "Accounting label for clients who paid using another payment means" # translation_missing
-        accounting_wallet_code: "Wallet code"                                        # translation_missing
-        general_wallet_code: "Accounting code for wallet credit"                     # translation_missing
-        accounting_wallet_label: "Wallet label"                                      # translation_missing
-        general_wallet_label: "Account label for wallet credit"                      # translation_missing
-        accounting_vat_code: "VAT code"                                              # translation_missing
-        general_vat_code: "Accounting code for VAT"                                  # translation_missing
-        accounting_vat_label: "VAT label"                                            # translation_missing
-        general_vat_label: "VAT account label"                                       # translation_missing
-        accounting_subscription_code: "Subscriptions code"                           # translation_missing
-        general_subscription_code: "Accounting code for all subscriptions"           # translation_missing
-        accounting_subscription_label: "Subscriptions label"                         # translation_missing
-        general_subscription_label: "Account label for all subscriptions"            # translation_missing
-        accounting_Machine_code: "Machines code"                                     # translation_missing
-        general_machine_code: "Accounting code for all machines"                     # translation_missing
-        accounting_Machine_label: "Machine label"                                    # translation_missing
-        general_machine_label: "Account label for all machines"                      # translation_missing
-        accounting_Training_code: "Trainings code"                                   # translation_missing
-        general_training_code: "Accounting code for all trainings"                   # translation_missing
-        accounting_Training_label: "Trainings label"                                 # translation_missing
-        general_training_label: "Account label for all trainings"                    # translation_missing
-        accounting_Event_code: "Events code"                                         # translation_missing
-        general_event_code: "Accounting code for all events"                         # translation_missing
-        accounting_Event_label: "Events label"                                       # translation_missing
-        general_event_label: "Account label for all events"                          # translation_missing
-        accounting_Space_code: "Space code"                                          # translation_missing
-        general_space_code: "Accounting code for all spaces"                         # translation_missing
-        accounting_Space_label: "Spaces label"                                       # translation_missing
-        general_space_label: "Account label for all spaces"                          # translation_missing
-        codes_customization_success: "Customization of accounting codes successfully saved."                                     # translation_missing
-        export_accounting_data: "Export accounting data"                             # translation_missing
-        export_to: "Export to the accounting software"                               # translation_missing
+        confirmation_required: "Confirmation required"
+        confirm_close_START_END: "Do you really want to close the accounting period between {START} and {END}? Any subsequent changes will be impossible"
+        period_must_match_fiscal_year: "A closing must occur at the end of a minimum annual period, or per financial year when it is not calendar-based."
+        this_may_take_a_while: "This operation will take some time to complete."
+        period_START_END_closed_success: "The accounting period from {START} to {END} has been successfully closed. Archive generation is running, you'll be notified when it's done."
+        failed_to_close_period: "An error occurred, unable to close the accounting period"
+        no_periods: "No closings for now"
+        accounting_codes: "Accounting codes"
+        accounting_journal_code: "Journal code"
+        general_journal_code: "Journal code"
+        accounting_card_client_code: "Card clients code"
+        card_client_code: "Accounting code for clients who paid by card"
+        accounting_card_client_label: "Card clients label"
+        card_client_label: "Account label for clients who paid by card"
+        accounting_wallet_client_code: "Wallet clients code"
+        wallet_client_code: "Accounting code for clients who paid by virtual wallet"
+        accounting_wallet_client_label: "Wallet clients label"
+        wallet_client_label: "Account label for clients who paid by virtual wallet"
+        accounting_other_client_code: "Other payment client code"
+        other_client_code: "Accounting code for clients who paid using another payment means"
+        accounting_other_client_label: "Other payment client label"
+        other_client_label: "Accounting label for clients who paid using another payment means"
+        accounting_wallet_code: "Wallet code"
+        general_wallet_code: "Accounting code for wallet credit"
+        accounting_wallet_label: "Wallet label"
+        general_wallet_label: "Account label for wallet credit"
+        accounting_vat_code: "VAT code"
+        general_vat_code: "Accounting code for VAT"
+        accounting_vat_label: "VAT label"
+        general_vat_label: "VAT account label"
+        accounting_subscription_code: "Subscriptions code"
+        general_subscription_code: "Accounting code for all subscriptions"
+        accounting_subscription_label: "Subscriptions label"
+        general_subscription_label: "Account label for all subscriptions"
+        accounting_Machine_code: "Machines code"
+        general_machine_code: "Accounting code for all machines"
+        accounting_Machine_label: "Machine label"
+        general_machine_label: "Account label for all machines"
+        accounting_Training_code: "Trainings code"
+        general_training_code: "Accounting code for all trainings"
+        accounting_Training_label: "Trainings label"
+        general_training_label: "Account label for all trainings"
+        accounting_Event_code: "Events code"
+        general_event_code: "Accounting code for all events"
+        accounting_Event_label: "Events label"
+        general_event_label: "Account label for all events"
+        accounting_Space_code: "Space code"
+        general_space_code: "Accounting code for all spaces"
+        accounting_Space_label: "Spaces label"
+        general_space_label: "Account label for all spaces"
+        codes_customization_success: "Customization of accounting codes successfully saved."
+        export_accounting_data: "Export accounting data"
+        export_to: "Export to the accounting software"
         export_is_running: "A Exportação está em andamento. Você será notificado quando terminar."
-        acd: "ACD"                                                                   # translation_missing
-        export_form_date: "Export from"                                              # translation_missing
-        export_to_date: "Export until"                                               # translation_missing
-        format: "File format"                                                        # translation_missing
-        encoding: "Encoding"                                                         # translation_missing
-        separator: "Separator"                                                       # translation_missing
-        dateFormat: "Date format"                                                    # translation_missing
-        labelMaxLength: "Label maximum length"                                       # translation_missing
-        decimalSeparator: "Decimal separator"                                        # translation_missing
-        exportInvoicesAtZero: "Export invoices equal to 0"                           # translation_missing
-        columns: "Columns"                                                           # translation_missing
-        exportColumns:                                                               # translation_missing
-          journal_code: "Journal code"                                               # translation_missing
-          date: "Entry date"                                                         # translation_missing
-          account_code: "Account code"                                               # translation_missing
-          account_label: "Account label"                                             # translation_missing
-          piece: "Document"                                                          # translation_missing
-          line_label: "Entry label"                                                  # translation_missing
-          debit_origin: "Origin debit"                                               # translation_missing
-          credit_origin: "Origin credit"                                             # translation_missing
-          debit_euro: "Euro debit"                                                   # translation_missing
-          credit_euro: "Euro credit"                                                 # translation_missing
-          lettering: "Lettering"                                                     # translation_missing
+        acd: "ACD"
+        export_form_date: "Export from"
+        export_to_date: "Export until"
+        format: "File format"
+        encoding: "Encoding"
+        separator: "Separator"
+        dateFormat: "Date format"
+        labelMaxLength: "Label maximum length"
+        decimalSeparator: "Decimal separator"
+        exportInvoicesAtZero: "Export invoices equal to 0"
+        columns: "Columns"
+        exportColumns:
+          journal_code: "Journal code"
+          date: "Entry date"
+          account_code: "Account code"
+          account_label: "Account label"
+          piece: "Document"
+          line_label: "Entry label"
+          debit_origin: "Origin debit"
+          credit_origin: "Origin credit"
+          debit_euro: "Euro debit"
+          credit_euro: "Euro credit"
+          lettering: "Lettering"
 
       members:
         # management of users, labels, groups, and so on
@@ -654,41 +654,41 @@ pt:
 
       members_import:
         # members bulk import
-        import_members: "Import members"                                                        # translation_missing
-        info: "You can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, the trainings and the tags of the members."   # translation_missing
-        required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."   # translation_missing
-        about_example: "Please refer to the provided example file to generate a correct CSV file. Be careful to use Unicode UTF-8 encoding."   # translation_missing
-        groups: "Groups"                                                                        # translation_missing
-        group_name: "Group name"                                                                # translation_missing
-        group_identifier: "Identifier to use"                                                   # translation_missing
-        trainings: "Trainings"                                                                  # translation_missing
-        training_name: "Training name"                                                          # translation_missing
-        training_identifier: "Identifier to use"                                                # translation_missing
-        plans: "Plans"                                                                          # translation_missing
-        plan_name: "Plan name"                                                                  # translation_missing
-        plan_identifier: "Identifier to use"                                                    # translation_missing
-        tags: "Tags"                                                                            # translation_missing
-        tag_name: "Tag name"                                                                    # translation_missing
-        tag_identifier: "Identifier to use"                                                     # translation_missing
-        download_example: "Download the exemple file"                                           # translation_missing
-        select_file: "Choose a file"                                                            # translation_missing
-        import: "Import"                                                                        # translation_missing
-        update_field: "Reference field for users to update"                                     # translation_missing
-        update_on_id: "ID"                                                                      # translation_missing
-        update_on_username: "Username"                                                          # translation_missing
-        update_on_email: "Email address"                                                        # translation_missing
+        import_members: "Import members"
+        info: "You can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, the trainings and the tags of the members."
+        required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."
+        about_example: "Please refer to the provided example file to generate a correct CSV file. Be careful to use Unicode UTF-8 encoding."
+        groups: "Groups"
+        group_name: "Group name"
+        group_identifier: "Identifier to use"
+        trainings: "Trainings"
+        training_name: "Training name"
+        training_identifier: "Identifier to use"
+        plans: "Plans"
+        plan_name: "Plan name"
+        plan_identifier: "Identifier to use"
+        tags: "Tags"
+        tag_name: "Tag name"
+        tag_identifier: "Identifier to use"
+        download_example: "Download the exemple file"
+        select_file: "Choose a file"
+        import: "Import"
+        update_field: "Reference field for users to update"
+        update_on_id: "ID"
+        update_on_username: "Username"
+        update_on_email: "Email address"
 
       members_import_result:
         # import results
-        import_results: "Import results"                                                        # translation_missing
-        import_details: "Import #{ID}, of {DATE}, initiated by {USER}"     # translation_missing
-        results: "Results"                                                                      # translation_missing
-        pending: "Pending..."                                                                   # translation_missing
-        status_create: "Creating a new user"                                                    # translation_missing
-        status_update: "Updating user {ID}"                            # translation_missing
-        success: "Success"                                                                      # translation_missing
-        failed: "Failed"                                                                        # translation_missing
-        error_details: "Error's details:"                                                       # translation_missing
+        import_results: "Import results"
+        import_details: "Import #{ID}, of {DATE}, initiated by {USER}"
+        results: "Results"
+        pending: "Pending..."
+        status_create: "Creating a new user"
+        status_update: "Updating user {ID}"
+        success: "Success"
+        failed: "Failed"
+        error_details: "Error's details:"
 
       members_edit:
         # edit a member
@@ -812,7 +812,7 @@ pt:
         export_all_statistics: "Exportar todas estatísticas"
         export_the_current_search_results: "Exportar resultados encontrados"
         export: "Exportar"
-        deleted_user: "Deleted user"                                                              # translation_missing
+        deleted_user: "Deleted user"
         man: "Man"
         woman: "Woman"
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
@@ -924,9 +924,9 @@ pt:
         about_title: "\"Sobre\" título da página"
         about_body: "\"Sobre\" conteúdo da página"
         about_contacts: "\"Sobre\" página de contatos"
-        privacy_draft: "privacy policy draft"                                                    # translation_missing
-        privacy_body: "privacy policy"                                                           # translation_missing
-        privacy_dpo: "data protection officer address"                                           # translation_missing
+        privacy_draft: "privacy policy draft"
+        privacy_body: "privacy policy"
+        privacy_dpo: "data protection officer address"
         booking_window_start: "Horário de abertura"
         booking_window_end: "Horário de fechamento"
         booking_move_enable: "Mover reserva habilitado"
@@ -953,14 +953,14 @@ pt:
           updated_at: "TODO"
         privacy:
           title: "Política de privacidade"
-          input_the_dpo: "Input the contact of the Data Protection Officer"                  # translation_missing
-          current_policy: "Current policy"                                                   # translation_missing
-          draft_from_USER_DATE: "Draft, saved by {USER}, on {DATE}"                      # translation_missing
-          save_or_publish: "Save or publish?"                                                # translation_missing
-          save_or_publish_body: "Do you want to publish a new version of the privacy policy or save it as a draft?"  # translation_missing
-          publish_will_notify: "Publish a new version will send a notification to every users."   # translation_missing
-          publish: "Publish"                                                                 # translation_missing
-          users_notified: "Platform users will be notified of the update."                   # translation_missing
+          input_the_dpo: "Input the contact of the Data Protection Officer"
+          current_policy: "Current policy"
+          draft_from_USER_DATE: "Draft, saved by {USER}, on {DATE}"
+          save_or_publish: "Save or publish?"
+          save_or_publish_body: "Do you want to publish a new version of the privacy policy or save it as a draft?"
+          publish_will_notify: "Publish a new version will send a notification to every users."
+          publish: "Publish"
+          users_notified: "Platform users will be notified of the update."
 
       open_api_clients:
         add_new_client: "Criar novo cliente de API"
@@ -996,10 +996,10 @@ pt:
         # process and delete abuses reports
         abuses_list: "Lista de relatórios"
         no_reports: "Não há relatos de agora"
-        published_by: "published by"                                                             # translation_missing
-        at_date: "on"                                                                            # translation_missing
-        has_reported: "made the following report:"                                               # translation_missing
-        confirmation_required: "Confirm the processing of the report"                            # translation_missing
-        report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"  # translation_missing
-        report_removed: "The report has been deleted"                                            # translation_missing
-        failed_to_remove: "An error occurred, unable to delete the report"                       # translation_missing
+        published_by: "published by"
+        at_date: "on"
+        has_reported: "made the following report:"
+        confirmation_required: "Confirm the processing of the report"
+        report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"
+        report_removed: "The report has been deleted"
+        failed_to_remove: "An error occurred, unable to delete the report"

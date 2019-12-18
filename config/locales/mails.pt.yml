@@ -259,7 +259,7 @@ pt:
         statistics_global: "de todas as estatísticas"
         statistics_account: "das estatísticas de registro"
         statistics_event: "das estatísticas sobre eventos"
-        statistics_machine: "das estatísticas de slot máquina"                                     #translation_missing
+        statistics_machine: "das estatísticas de slot máquina"
         statistics_project: "das estatísticas de projetos"
         statistics_subscription: "das estatísticas de assinaturas"
         statistics_training: "das estatísticas de treinamento"
@@ -275,7 +275,7 @@ pt:
           xlsx: "Excel"
           csv: "CSV"
 
-    notify_admin_import_complete:                                                                  #translation_missing
+    notify_admin_import_complete:
       subject: "Import completed"
       body:
         you_made_an_import: "You have initiated an import %{CATEGORY}"
@@ -289,17 +289,17 @@ pt:
         enjoy_a_discount_of_AMOUNT_with_code_CODE:  "Desfrute de um desconto de %{AMOUNT} em todo o site com o código %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Esse cupom é válido {USAGE, plural, =1{uma vez} other{vérias vezes}}: para todas as suas compras {TYPE, select, amount_off{pelo menos igual ao montante do cupom} other{}}, from now {DATE, select, NO-DATE{e sem limite de tempo} other{até {DATE}}}."
 
-    notify_admin_free_disk_space:                                                                  #translation_missing
+    notify_admin_free_disk_space:
       subject: "Low disk space"
       body: "Warning: available disk space on the server hosting fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
 
-    notify_admin_close_period_reminder:                                                            #translation_missing
+    notify_admin_close_period_reminder:
       subject: "Remind to close your accounting periods"
       body:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
 
-    notify_admin_archive_complete:                                                                 #translation_missing
+    notify_admin_archive_complete:
       subject: "Archiving completed"
       body:
         archive_complete: "You have closed the accounting period from %{START} to %{END}. Archiving of data is now complete."
@@ -307,13 +307,13 @@ pt:
         here: "here."
         save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
 
-    notify_privacy_policy_changed:                                                                 #translation_missing
+    notify_privacy_policy_changed:
       subject: "Privacy policy updated"
       body:
         content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
 
-    notify_admin_refund_created:                                                                   #translation_missing
+    notify_admin_refund_created:
       subject: "A refund has been generated"
       body:
         refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"

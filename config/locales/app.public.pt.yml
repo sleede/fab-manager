@@ -91,13 +91,13 @@ pt:
         i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
         i_ve_read_and_i_accept_: "Eu li e aceito"
         _the_fablab_policy: "a política do FabLab"
-        field_required: "Field required"                                                         # translation missing
-        unexpected_error_occurred: "An unexpected error occurred. Please try again later."       # translation missing
-        used_for_statistics: "This data will be used for statistical purposes"                   # translation missing
-        used_for_invoicing: "This data will be used for billing purposes"                        # translation missing
-        used_for_reservation: "This data will be used in case of change on one of your bookings" # translation missing
-        used_for_profile: "This data will only be displayed on your profile"                     # translation missing
-        public_profile: "You will have a public profile and other users will be able to associate you in their projects"  # translation missing
+        field_required: "Field required"
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        used_for_statistics: "This data will be used for statistical purposes"
+        used_for_invoicing: "This data will be used for billing purposes"
+        used_for_reservation: "This data will be used in case of change on one of your bookings"
+        used_for_profile: "This data will only be displayed on your profile"
+        public_profile: "You will have a public profile and other users will be able to associate you in their projects"
 
         # password modification modal
         change_your_password: "Mudar sua senha"
@@ -183,7 +183,7 @@ pt:
         step_N: "Step {INDEX}"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
-        deleted_user: "Deleted user"                                                                #translation_missing
+        deleted_user: "Deleted user"
         posted_on_: "Criado em"
         CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
         machines_and_materials: "Machines and materials"
@@ -308,7 +308,7 @@ pt:
         you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
         dashboard: "dashboard"
         you_booked_DATE: "Sua reserva ({DATE}):"
-        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"                         #translation_missing
+        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Reservar"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" # (contexte : validate a payment of $20,00)
@@ -320,13 +320,13 @@ pt:
         do_you_really_want_to_delete_this_event:  "Vocêrealmente deseja remover este evento?"
         event_successfully_deleted: "Evento excluído com sucesso"
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Não foi possível excluir este evento, já pode ter sido reservado por alguns usuários."
-        cancel_the_reservation: "Cancel the reservation"                                            #translation_missing
-        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."        #translation_missing
+        cancel_the_reservation: "Cancel the reservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
         cancellation_failed: "Cancellation failed."                                                 #translation_missin
-        event_is_over: "The event is over"                                                          #translation_missing
-        thanks_for_coming: "Thanks for coming!"                                                     #translation_missing
-        view_event_list: "View events to come"                                                      #translation_missing
+        event_is_over: "The event is over"
+        thanks_for_coming: "Thanks for coming!"
+        view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
 

@@ -108,7 +108,7 @@ es:
         attached_files_pdf: "archivos anclados (pdf)"
         attach_a_file: "adjuntar archivo"
         add_an_attachment: "añadir archivo adjunto"
-        disable_machine: "Disable machine"                           #translation_missing
+        disable_machine: "Disable machine"
         validate_your_machine: "Validar su máquina"
 
       plan_subscribe:
@@ -201,8 +201,8 @@ es:
         surname_is_required: "Last name is required."
         email_address: "Email address"
         email_address_is_required: "Se requiere un mail."
-        disabled: "Disable subscription"                                                          #translation_missing
-        disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."            #translation_missing
+        disabled: "Disable subscription"
+        disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
 
       trainings:
         # training edition form
@@ -217,7 +217,7 @@ es:
         associated_machines: "Máquinas asociadas"
         number_of_tickets: "Número de entradas"
         public_page: "Hacer curso público"
-        disable_training: "Disable the training"                                                  #translation_missing
+        disable_training: "Disable the training"
 
       user_admin:
         # partial form to edit/create an user (admin view)
@@ -367,8 +367,8 @@ es:
 
       coupon_input:
         # coupon (input zone for users)
-        i_have_a_coupon: "I have a coupon!"                                                         #translation_missing
-        code_: "Code:"                                                                              #translation_missing
+        i_have_a_coupon: "I have a coupon!"
+        code_: "Code:"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "Se ha aplicado el cupón {PERCENT}% de descuento."
         the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Se ha aplicado el cupón. Recibirá un descuento de {AMOUNT} {CURRENCY}."
         unable_to_apply_the_coupon_because_disabled: "No se ha podido canjear el cupón: código inhabilitado."
@@ -394,7 +394,7 @@ es:
         add_an_attachment: "Añadir adjunto"
         default_places: "Máximo de entradas predeterminado"
         default_places_is_required: "Se requiere un máximo de entradas predeterminado."
-        disable_space: "Disable space"                                                            #translation_missing
+        disable_space: "Disable space"
 
       cart:
         # module de panier d'achat de réservations
@@ -413,7 +413,7 @@ es:
         _subscription: "suscripción"
         cost_of_the_subscription: "Coste de la suscripción"
         confirm_and_pay: "Confirmar y pagar"
-        you_have_settled_the_following_TYPE: "Acaba de seleccionar {TYPE, select, Machine{machine slots} Training{training} other{elements}}:"             #translation_missing
+        you_have_settled_the_following_TYPE: "Acaba de seleccionar {TYPE, select, Machine{machine slots} Training{training} other{elements}}:"
         you_have_settled_a_: "Ha establecido una"
         total_: "TOTAL :"
         thank_you_your_payment_has_been_successfully_registered: "Gracias. Su pago se ha registrado con éxito."

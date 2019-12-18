@@ -91,13 +91,13 @@ es:
         i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
         i_ve_read_and_i_accept_: "He leido y acepto"
         _the_fablab_policy: "la política de FabLab"
-        field_required: "Field required"                                                         # translation missing
-        unexpected_error_occurred: "An unexpected error occurred. Please try again later."       # translation missing
-        used_for_statistics: "This data will be used for statistical purposes"                   # translation missing
-        used_for_invoicing: "This data will be used for billing purposes"                        # translation missing
-        used_for_reservation: "This data will be used in case of change on one of your bookings" # translation missing
-        used_for_profile: "This data will only be displayed on your profile"                     # translation missing
-        public_profile: "You will have a public profile and other users will be able to associate you in their projects"  # translation missing
+        field_required: "Field required"
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        used_for_statistics: "This data will be used for statistical purposes"
+        used_for_invoicing: "This data will be used for billing purposes"
+        used_for_reservation: "This data will be used in case of change on one of your bookings"
+        used_for_profile: "This data will only be displayed on your profile"
+        public_profile: "You will have a public profile and other users will be able to associate you in their projects"
 
         # password modification modal
         change_your_password: "Cambiar contraseña"
@@ -154,7 +154,7 @@ es:
         free_admission: "Admisión gratuita"
         full_price: "Precio final"
         event_full: "Evento lleno"
-        still_available: "Available place(s)"                                                       #translation_missing
+        still_available: "Available place(s)"
 
       projects_list:
         # projects gallery
@@ -183,7 +183,7 @@ es:
         step_N: "Step {INDEX}"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
-        deleted_user: "Deleted user"                                                                #translation_missing
+        deleted_user: "Deleted user"
         posted_on_: "Subido el"
         CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
         machines_and_materials: "Machines and materials"
@@ -209,11 +209,11 @@ es:
         # list of machines
         the_fablab_s_machines: "Las máquinas del FabLab"
         add_a_machine: "Añadir una máquina"
-        book: "Book"                                                                              #translation_missing
+        book: "Book"
         _or_the_: " o el "
-        status_enabled: "Enabled"                                                                 #translation_missing
-        status_disabled: "Disabled"                                                               #translation_missing
-        status_all: "All"                                                                         #translation_missing
+        status_enabled: "Enabled"
+        status_disabled: "Disabled"
+        status_all: "All"
 
       machines_show:
         # details of a machine
@@ -275,15 +275,15 @@ es:
         the_fablab_s_events: "Los eventos del FabLab"
         all_categories: "Todas las categorías"
         for_all: "Para todo"
-        sold_out: "Sold Out"                                                                        #translation_missing
-        cancelled: "Cancelled"                                                                      #translation_missing
-        free_admission: "Free admission"                                                            #translation_missing
-        still_available: "available place(s)"                                                       #translation_missing
+        sold_out: "Sold Out"
+        cancelled: "Cancelled"
+        free_admission: "Free admission"
+        still_available: "available place(s)"
         free_entry: "Free entry"
         add_an_event: "Add an event"
         load_the_next_events: "Load the next events..."
         full_price_: "Full price:"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"                                                               #translation_missing
+        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
 
       events_show:
         # details and booking of an event
@@ -301,14 +301,14 @@ es:
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
         free_entry: "Entrada gratuita"
-        cancelled: "Cancelled"                                                                      #translation_missing
+        cancelled: "Cancelled"
         ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
         make_a_gift_of_this_reservation: "Regalar esta reserva"
         thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
         you_can_find_your_reservation_s_details_on_your_: "Puede encontrar los detalles de su reserva en"
         dashboard: "dashboard"
         you_booked_DATE: "You booked ({DATE}):"
-        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"  #translation_missing
+        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Reservar"
         confirm_and_pay: "Confirm and pay"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" # (contexte : validate a payment of $20,00)
@@ -316,17 +316,17 @@ es:
         please_select_a_member_first: "Please select a member first"
         change_the_reservation: "Cambiar la reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
-        confirmation_required: "Confirmation required"                                              #translation_missing
-        do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"        #translation_missing
-        event_successfully_deleted: "Event successfully deleted"                                    #translation_missing
-        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."             #translation_missing
-        cancel_the_reservation: "Cancel the reservation"                                            #translation_missing
-        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."        #translation_missing
+        confirmation_required: "Confirmation required"
+        do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"
+        event_successfully_deleted: "Event successfully deleted"
+        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."
+        cancel_the_reservation: "Cancel the reservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
-        cancellation_failed: "Cancellation failed."                                                 #translation_missing
-        event_is_over: "The event is over"                                                          #translation_missing
-        thanks_for_coming: "Thanks for coming!"                                                     #translation_missing
-        view_event_list: "View events to come"                                                      #translation_missing
+        cancellation_failed: "Cancellation failed."
+        event_is_over: "The event is over"
+        thanks_for_coming: "Thanks for coming!"
+        view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
 
@@ -345,10 +345,10 @@ es:
         # list of spaces
         the_spaces: "Espacios"
         add_a_space: "Añadir espacios"
-        status_enabled: "Enabled"                                                                 #translation_missing
-        status_disabled: "Disabled"                                                               #translation_missing
-        status_all: "All"                                                                         #translation_missing
-        book: "Book"                                                                              #translation_missing
+        status_enabled: "Enabled"
+        status_disabled: "Disabled"
+        status_all: "All"
+        book: "Book"
 
       space_show:
         # display the details of a space
