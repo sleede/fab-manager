@@ -195,7 +195,7 @@ es:
       subject: "Una cuenta importada ha completado su perfil"
       body:
         account_completed: "Una cuenta de usuario importada previamente %{PROVIDER} ha completado su perfil:"
-        imported_account_completed: "An user account, previously imported through %{PROVIDER}, has completed its profile:"
+        imported_account_completed: "An user account previously imported through %{PROVIDER} has just completed his/her profile data:"
         provider_id: "su ID de proveedor es:"
     notify_admin_abuse_reported:
       subject: "Se ha informado un contenido abusivo"
@@ -221,7 +221,7 @@ es:
         statistics_global: "de todas las estadísticas"
         statistics_account: "de las estadísticas de registro"
         statistics_event: "de estadísticas sobre eventos"
-        statistics_machine: "of statistics about machine slots"
+        statistics_machine: "de estadísticas sobre slots de máquina"
         statistics_project: "de estadísticas sobre proyectos"
         statistics_subscription: "de estadísticas de suscripción"
         statistics_training: "de estadísticas sobre entrenamientos"
