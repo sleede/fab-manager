@@ -134,7 +134,7 @@ fr:
       members:
         #  liste des membres qui acceptent d'être contactés
         the_fablab_members: "Les membres du Fab Lab"
-        display_more_members: "Afficher plus de membres ..."
+        display_more_members: "Afficher plus de membres..."
         no_members_for_now: "Pas de membres pour le moment"
         avatar: "Avatar"
         user: "Utilisateur"

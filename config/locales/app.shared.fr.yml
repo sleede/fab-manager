@@ -119,7 +119,7 @@ fr:
       member_select:
         # admin : choisir un membre avec lequel interagir
         select_a_member: "Sélectionnez un membre"
-        start_typing: "Commencez à écrire ..."
+        start_typing: "Commencez à écrire..."
 
       stripe:
         # fenêtre de paiement stripe
@@ -192,7 +192,7 @@ fr:
         information_sheet: "Fiche descriptive"
         attach_an_information_sheet: "Joindre une fiche descriptive"
         notified_partner: "Partenaire notifié"
-        new_user: "Nouvel utilisateur ..."
+        new_user: "Nouvel utilisateur..."
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Dans le cadre d'un abonnement partenaire, certaines notifications pourront être adressées à cet utilisateur."
         new_partner: "Nouveau partenaire"
         first_name: "Prénom"

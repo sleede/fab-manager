@@ -120,7 +120,7 @@ fr:
         version: "Version :"
 
         # Notifications
-        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}} ..."
+        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}}..."
 
       about:
         # page à propos
@@ -268,7 +268,7 @@ fr:
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {NAME} :"
         confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" # (contexte : valider un paiement de 20,00 €)
-        online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
+        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
 
       events_list:
         # liste des évènements du fablab
@@ -281,7 +281,7 @@ fr:
         still_available: "place(s) disponible(s)"
         free_entry: "Accès libre"
         add_an_event: "Ajouter un évènement"
-        load_the_next_events: "Charger les évènements suivants ..."
+        load_the_next_events: "Charger les évènements suivants..."
         full_price_: "Plein tarif :"
         to_date: "au" # context: date. eg: "from 01/01 to 01/05"
 
