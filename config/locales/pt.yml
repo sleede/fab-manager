@@ -327,7 +327,7 @@ pt:
         statistics_global: "de todas as estatísticas"
         statistics_account: "das estatísticas de registro"
         statistics_event: "de estatísticas sobre eventos"
-        statistics_machine: "of statistics about machine slots"
+        statistics_machine: "de estatísticas sobre slots de máquina"
         statistics_project: "de estatísticas sobre projetos"
         statistics_subscription: "de estatísticas de assinatura"
         statistics_training: "de estatísticas sobre treinamentos"
@@ -341,7 +341,7 @@ pt:
         download_here: "Baixe aqui"
       notify_admin_import_complete:
         import_over: "%{CATEGORY} import is over. "
-        members: "Members"
+        members: "Membros"
         view_results: "View results."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% com o código %{CODE}"
@@ -361,7 +361,7 @@ pt:
   statistics:
     #statistics tools for admins
     subscriptions: "Assinaturas"
-    machines_hours: "Machines slots"
+    machines_hours: "Slots de máquina"
     spaces: "Espaços"
     trainings: "Treinamentos"
     events: "Eventos"
