@@ -1,8 +1,19 @@
 <div class="col-md-5 m-t-lg">
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-      <input type="text" ng-model="member.searchText" class="form-control" placeholder="{{ 'app.admin.members.search_for_an_user' | translate }}" ng-change="updateTextSearch()">
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+          <input type="text" ng-model="member.searchText" class="form-control" placeholder="{{ 'app.admin.members.search_for_an_user' | translate }}" ng-change="updateTextSearch()">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="form-group">
+        <select ng-model="member.memberFilter" ng-change="updateMemberFilter()" class="form-control">
+          <option ng-repeat="filter in member.memberFilters" value="{{filter}}" translate>{{ 'app.admin.members.group_form.member_filter_'+filter }}</option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
@@ -20,7 +31,6 @@
     </a>
     <iframe name="export-frame" height="0" width="0" class="none"></iframe>
   </div>
-
 
   <table class="table">
     <thead>

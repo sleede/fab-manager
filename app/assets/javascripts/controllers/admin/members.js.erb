@@ -146,7 +146,15 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       // currently displayed page of members
       page: 1,
       // true when all members where loaded
-      noMore: false
+      noMore: false,
+      // default filter for members
+      memberFilter: 'all',
+      // options for members filtering
+      memberFilters: [
+        'all',
+        'not_confirmed',
+        'inactive_for_3_years'
+      ]
     };
 
     // admins list
@@ -262,6 +270,14 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     /**
+     * Callback when the member filter changes: reload the search results
+     */
+    $scope.updateMemberFilter = function () {
+      resetSearchMember();
+      memberSearch();
+    };
+
+    /**
      * Callback to alert the admin that the export request was acknowledged and is
      * processing right now.
      */
@@ -317,6 +333,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         query: {
           search: $scope.member.searchText,
           order_by: $scope.member.order,
+          filter: $scope.member.memberFilter,
           page: $scope.member.page,
           size: USERS_PER_PAGE
         }
