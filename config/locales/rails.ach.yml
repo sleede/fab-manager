@@ -31,9 +31,9 @@ ach:
       - crwdns4265:0crwdne4265:0
       - crwdns4267:0crwdne4267:0
     formats:
-      default: "crwdns4269:0%Y-%m-%dcrwdne4269:0"
-      long: "crwdns4271:0%Bcrwdnd4271:0%dcrwdnd4271:0%Ycrwdne4271:0"
-      short: "crwdns4273:0%bcrwdnd4273:0%dcrwdne4273:0"
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
     month_names:
       -
       - crwdns4275:0crwdne4275:0
@@ -49,9 +49,9 @@ ach:
       - crwdns4295:0crwdne4295:0
       - crwdns4297:0crwdne4297:0
     order:
-      - crwdns4299:0crwdne4299:0
-      - crwdns4301:0crwdne4301:0
-      - crwdns4303:0crwdne4303:0
+    - :year
+    - :month
+    - :day
   datetime:
     distance_in_words:
       about_x_hours:
