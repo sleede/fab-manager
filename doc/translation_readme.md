@@ -6,9 +6,10 @@ This document will explain you what you need to know to contribute to the transl
 
 1. [Translation](#translation)<br/>
 1.1. [Using a TMS](#using-a-tms)<br/>
-1.2. [From the files](#from-the-files)<br/>
-1.2.1 [Front-end translations](#i18n-translation-front)<br/>
-1.2.2 [Back-end translations](#i18n-translation-back)
+1.2. [Using In-Context translation](#using-in-context-translation)<br/>
+1.3. [From the files](#from-the-files)<br/>
+1.3.1 [Front-end translations](#i18n-translation-front)<br/>
+1.3.2 [Back-end translations](#i18n-translation-back)
 2. [Configuration](#configuration)<br/>
 2.1. [Settings](#settings)<br/>
 2.2. [Applying changes](#applying-changes)
@@ -22,6 +23,7 @@ We use [Crowdin](https://www.crowdin.com), a translation management system (TMS)
 You can access it at [translate.fab-manager.com](https://translate.fab-manager.com) and start translating to one of the already configured languages.
 If you want to translate Fab-Manager to a new language, just send us an email to [contact@fab-manager.com](mailto:contact@fab-manager.com) and we'll add this new language to the TMS.
 
+<a name="using-in-context-translation"></a>
 ### Using In-Context translation
 To translate the front-end application (angularJS client), and the notifications, you can use [Crowdin In-Context](https://crowdin.com/page/in-context-localization).
 This allows you to use Fab-Manager as normally, but with the addition of small "edit" icons on the top-left corner of each text blocs.
