@@ -22,6 +22,12 @@ We use [Crowdin](https://www.crowdin.com), a translation management system (TMS)
 You can access it at [translate.fab-manager.com](https://translate.fab-manager.com) and start translating to one of the already configured languages.
 If you want to translate Fab-Manager to a new language, just send us an email to [contact@fab-manager.com](mailto:contact@fab-manager.com) and we'll add this new language to the TMS.
 
+### Using In-Context translation
+To translate the front-end application (angularJS client), and the notifications, you can use [Crowdin In-Context](https://crowdin.com/page/in-context-localization).
+This allows you to use Fab-Manager as normally, but with the addition of small "edit" icons on the top-left corner of each text blocs.
+Clicking on this "edit" icon will open the Crowdin translation interface and you'll be able to translate or modify existing translations directly.
+You can access it at [in-context.translate.fab-manager.com](https://in-context.translate.fab-manager.com/).
+
 <a name="from-the-files"></a>
 ### From the files
 If you don't wan't want to use the TMS, you can write translations with in the source files. 
