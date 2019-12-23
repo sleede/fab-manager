@@ -1,19 +1,21 @@
 <div class="modal-header">
-  <h1 translate>{{ 'training_validation' }}</h1>
+  <h1 translate>{{ 'app.admin.trainings.training_validation' }}</h1>
 </div>
 <div class="modal-body">
-  <p>{{ 'training_of_the_' | translate }}<span class="font-sbold">{{ availability.start_at | amDateFormat:'LLL' }} - {{ availability.end_at | amDateFormat:'LT' }}</span> <br>
-    {{ 'you_can_validate_the_training_of_the_following_members' | translate }}</p>
+  <p>
+    <span translate translate-values="{DATE:(availability.start_at | amDateFormat:'LLL'), TIME:(availability.end_at | amDateFormat:'LT')}">{{ 'app.admin.trainings.training_of_the_DATE_TIME_html' }}</span>
+    <br>
+    <span translate>{{ 'app.admin.trainings.you_can_validate_the_training_of_the_following_members' }}</span></p>
   <ul class="list-unstyled" ng-if="availability.reservation_users.length > 0">
     <li ng-repeat="user in availability.reservation_users">
       <label for="{{user.id}}" ng-show="user.id">{{user.full_name}}</label>
-      <span class="text-gray text-italic" ng-hide="user.id" translate>{{ 'deleted_user' }}</span>
+      <span class="text-gray text-italic" ng-hide="user.id" translate>{{ 'app.admin.trainings.deleted_user' }}</span>
       <input type="checkbox" ng-checked="user.is_valid" ng-disabled="user.is_valid || !user.id" ng-click="toggleSelection(user)" id="{{user.id}}" />
     </li>
   </ul>
-  <p ng-if="availability.reservation_users.length == 0" translate>{{ 'no_reservation' }}</p>
+  <p ng-if="availability.reservation_users.length == 0" translate>{{ 'app.admin.trainings.no_reservation' }}</p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-warning" ng-click="ok()" ng-disabled="usersToValid.length == 0" translate>{{ 'validate_the_trainings' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="usersToValid.length == 0" translate>{{ 'app.admin.trainings.validate_the_trainings' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

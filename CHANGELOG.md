@@ -10,12 +10,16 @@
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
+- Notify all admins on the creation of a refund invoice
 - Calendar management: improved legend display and visual behavior
+- Prevent event reservation in the past [Taiga#127]
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Added freeCAD files as default allowed extensions
 - Rake task to sync local users with Stripe
-- Updated and refactored README
+- Unified translations syntax to use ICU MessageFormat
+- Refactored front-end translations keys with unified paths
+- Updated and refactored README and documentations
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]

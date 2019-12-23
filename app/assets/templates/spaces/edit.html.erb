@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8 b-l b-r">
       <section class="heading-title">
-        <h1 translate translate-values="{NAME: space.name}">{{ 'space_edit.edit_the_space_NAME' }}</h1>
+        <h1 translate translate-values="{NAME: space.name}">{{ 'app.admin.space_edit.edit_the_space_NAME' }}</h1>
       </section>
 
     </div>
@@ -33,12 +33,12 @@
 
       <section class="panel panel-default bg-light m-lg">
         <div class="panel-body m-r">
-          <ng-include src="'<%= asset_path 'spaces/_form.html' %>'"></ng-include>
+          <ng-include src="'<%= asset_path "spaces/_form.html" %>'"></ng-include>
         </div>
 
         <div class="panel-footer no-padder">
           <input type="submit"
-                 value="{{ 'space_edit.validate_the_changes' | translate }}"
+                 value="{{ 'app.admin.space_edit.validate_the_changes' | translate }}"
                  class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
                  ng-disabled="spaceForm.$invalid"/>
         </div>

@@ -85,10 +85,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           resolve: {
             object () {
               return {
-                title: _t('admin_calendar.confirmation_required'),
-                msg: _t('admin_calendar.do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION'
-                  , { GENDER: getGender($scope.currentUser), USER: slot.user.name, DATE: moment(slot.start_at).format('L'), TIME: moment(slot.start_at).format('LT'), RESERVATION: slot.reservable.name }
-                  , 'messageformat')
+                title: _t('app.admin.calendar.confirmation_required'),
+                msg: _t('app.admin.calendar.do_you_really_want_to_cancel_the_USER_s_reservation_the_DATE_at_TIME_concerning_RESERVATION'
+                  , { GENDER: getGender($scope.currentUser), USER: slot.user.name, DATE: moment(slot.start_at).format('L'), TIME: moment(slot.start_at).format('LT'), RESERVATION: slot.reservable.name })
               };
             }
           }
@@ -106,10 +105,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
                 }
               }
               // notify the admin
-              return growl.success(_t('admin_calendar.reservation_was_successfully_cancelled'));
+              return growl.success(_t('app.admin.calendar.reservation_was_successfully_cancelled'));
             },
             function (data, status) { // failed
-              growl.error(_t('admin_calendar.reservation_cancellation_failed'));
+              growl.error(_t('app.admin.calendar.reservation_cancellation_failed'));
             }
           );
         }
@@ -123,17 +122,17 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      */
     $scope.removeMachine = function (machine) {
       if ($scope.availability.machine_ids.length === 1) {
-        return growl.error(_t('admin_calendar.unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather'));
+        return growl.error(_t('app.admin.calendar.unable_to_remove_the_last_machine_of_the_slot_delete_the_slot_rather'));
       } else {
       // open a confirmation dialog
         return dialogs.confirm({
           resolve: {
             object () {
               return {
-                title: _t('admin_calendar.confirmation_required'),
-                msg: _t('admin_calendar.do_you_really_want_to_remove_MACHINE_from_this_slot', { GENDER: getGender($scope.currentUser), MACHINE: machine.name }, 'messageformat') + ' ' +
-               _t('admin_calendar.this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + ' ' +
-               _t('admin_calendar.beware_this_cannot_be_reverted')
+                title: _t('app.admin.calendar.confirmation_required'),
+                msg: _t('app.admin.calendar.do_you_really_want_to_remove_MACHINE_from_this_slot', { GENDER: getGender($scope.currentUser), MACHINE: machine.name }) + ' ' +
+               _t('app.admin.calendar.this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + '<br><strong>' +
+               _t('app.admin.calendar.beware_this_cannot_be_reverted') + '</strong>'
               };
             }
           }
@@ -155,10 +154,10 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               $scope.availability.title = data.title;
               uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
               // notify the admin
-              return growl.success(_t('admin_calendar.the_machine_was_successfully_removed_from_the_slot'));
+              return growl.success(_t('app.admin.calendar.the_machine_was_successfully_removed_from_the_slot'));
             }
             , function (data, status) { // failed
-              growl.error(_t('admin_calendar.deletion_failed'));
+              growl.error(_t('app.admin.calendar.deletion_failed'));
             }
           );
         });
@@ -172,7 +171,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     $scope.alertExport = function (type) {
       Export.status({ category: 'availabilities', type }).then(function (res) {
         if (!res.data.exists) {
-          return growl.success(_t('admin_calendar.export_is_running_you_ll_be_notified_when_its_ready'));
+          return growl.success(_t('app.admin.calendar.export_is_running_you_ll_be_notified_when_its_ready'));
         }
       });
     };
@@ -200,8 +199,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
             resolve: {
               object () {
                 return {
-                  title: _t('admin_calendar.confirmation_required'),
-                  msg: locked ? _t('admin_calendar.do_you_really_want_to_allow_reservations') : _t('admin_calendar.do_you_really_want_to_block_this_slot')
+                  title: _t('app.admin.calendar.confirmation_required'),
+                  msg: locked ? _t('app.admin.calendar.do_you_really_want_to_allow_reservations') : _t('app.admin.calendar.do_you_really_want_to_block_this_slot')
                 };
               }
             }
@@ -213,18 +212,18 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               { lock: !locked },
               function (data) { // success
                 $scope.availability = data;
-                growl.success(locked ? _t('admin_calendar.unlocking_success') : _t('admin_calendar.locking_success'));
+                growl.success(locked ? _t('app.admin.calendar.unlocking_success') : _t('app.admin.calendar.locking_success'));
                 uiCalendarConfig.calendars.calendar.fullCalendar('refetchEvents');
               },
               function (error) { // failed
-                growl.error(locked ? _t('admin_calendar.unlocking_failed') : _t('admin_calendar.locking_failed'));
+                growl.error(locked ? _t('app.admin.calendar.unlocking_failed') : _t('app.admin.calendar.locking_failed'));
                 console.error(error);
               }
             );
           }
         );
       } else {
-        return growl.error(_t('admin_calendar.unlockable_because_reservations'));
+        return growl.error(_t('app.admin.calendar.unlockable_because_reservations'));
       }
     };
 
@@ -276,7 +275,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       // check if slot is not in the past
       const today = new Date();
       if (Math.trunc((start.valueOf() - today) / (60 * 1000)) < 0) {
-        growl.warning(_t('admin_calendar.event_in_the_past'));
+        growl.warning(_t('app.admin.calendar.event_in_the_past'));
         return uiCalendarConfig.calendars.calendar.fullCalendar('unselect');
       }
 
@@ -484,7 +483,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         if ($scope.selectedMachines.length > 0) {
           $scope.availability.machine_ids = $scope.selectedMachines.map(function (m) { return m.id; });
         } else {
-          growl.error(_t('admin_calendar.you_should_select_at_least_a_machine'));
+          growl.error(_t('app.admin.calendar.you_should_select_at_least_a_machine'));
           return;
         }
       } else if ($scope.availability.available_type === 'training') {
@@ -598,7 +597,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     const validateSelection = function () {
       if ($scope.availability.available_type === 'machines') {
         if ($scope.selectedMachines.length === 0) {
-          return growl.error(_t('admin_calendar.you_should_select_at_least_a_machine'));
+          return growl.error(_t('app.admin.calendar.you_should_select_at_least_a_machine'));
         }
       }
       $scope.step++;
@@ -610,13 +609,13 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     const validateRecurrence = function () {
       if ($scope.availability.is_recurrent) {
         if (!$scope.availability.period) {
-          return growl.error(_t('admin_calendar.select_period'));
+          return growl.error(_t('app.admin.calendar.select_period'));
         }
         if (!$scope.availability.nb_periods) {
-          return growl.error(_t('admin_calendar.select_nb_period'));
+          return growl.error(_t('app.admin.calendar.select_nb_period'));
         }
         if (!$scope.availability.end_date) {
-          return growl.error(_t('admin_calendar.select_end_date'));
+          return growl.error(_t('app.admin.calendar.select_end_date'));
         }
       }
       // settings are ok
@@ -664,7 +663,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
           $scope.reservableName = `<strong>${$scope.selectedSpace.name}</strong>`;
           break;
         default:
-          $scope.reservableName = `<span class="warning">${_t("admin_calendar.none")}</span>`;
+          $scope.reservableName = `<span class="warning">${_t("app.admin.calendar.none")}</span>`;
       }
       const tags = $scope.tags.filter(function (t) {
         return $scope.availability.tag_ids.indexOf(t.id) > -1;
@@ -673,10 +672,10 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     }
 
     const localizedList = function (items) {
-      if (items.length === 0) return `<span class="text-gray text-italic">${_t("admin_calendar.none")}</span>`;
+      if (items.length === 0) return `<span class="text-gray text-italic">${_t("app.admin.calendar.none")}</span>`;
 
       const names = items.map(function (i) { return $sce.trustAsHtml(`<strong>${i.name}</strong>`); });
-      if (items.length > 1) return names.slice(0, -1).join(', ') + ` ${_t('and')} ` + names[names.length - 1];
+      if (items.length > 1) return names.slice(0, -1).join(', ') + ` ${_t('app.admin.calendar.and')} ` + names[names.length - 1];
 
       return names[0];
     }
@@ -710,13 +709,12 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
           // delete success
           if (res.deleted > 1) {
             growl.success(_t(
-              'admin_calendar.slots_deleted',
-              {START: moment(start_at).format('LL LT'), COUNT: res.deleted - 1},
-              'messageformat'
+              'app.admin.calendar.slots_deleted',
+              {START: moment(start_at).format('LL LT'), COUNT: res.deleted - 1}
             ));
           } else {
             growl.success(_t(
-              'admin_calendar.slot_successfully_deleted',
+              'app.admin.calendar.slot_successfully_deleted',
               {START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT')}
             ));
           }
@@ -730,13 +728,12 @@ Application.Controllers.controller('DeleteRecurrentAvailabilityController', ['$s
           const { data } = res;
           if (data.total > 1) {
             growl.warning(_t(
-              'admin_calendar.slots_not_deleted',
-              {TOTAL: data.total, COUNT: data.total - data.deleted},
-              'messageformat'
+              'app.admin.calendar.slots_not_deleted',
+              {TOTAL: data.total, COUNT: data.total - data.deleted}
             ));
           } else {
             growl.error(_t(
-              'admin_calendar.unable_to_delete_the_slot',
+              'app.admin.calendar.unable_to_delete_the_slot',
               {START: moment(start_at).format('LL LT'), END: moment(end_at).format('LT')}
             ));
           }
@@ -790,7 +787,7 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
         $scope.newCalendar.text_hidden = false;
       }, function (error) {
         // failed
-        growl.error(_t('icalendar.create_error'));
+        growl.error(_t('app.admin.icalendar.create_error'));
         console.error(error);
       })
     }
@@ -818,8 +815,8 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
           resolve: {
             object () {
               return {
-                title: _t('icalendar.confirmation_required'),
-                msg: _t('icalendar.confirm_delete_import')
+                title: _t('app.admin.icalendar.confirmation_required'),
+                msg: _t('app.admin.icalendar.confirm_delete_import')
               };
             }
           }
@@ -831,10 +828,10 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
               // success
               const idx = $scope.calendars.indexOf(calendar);
               $scope.calendars.splice(idx, 1);
-              growl.info(_t('icalendar.delete_success'));
+              growl.info(_t('app.admin.icalendar.delete_success'));
             }, function (error) {
               // failed
-              growl.error(_t('icalendar.delete_failed'));
+              growl.error(_t('app.admin.icalendar.delete_failed'));
               console.error(error);
             }
           );
@@ -851,10 +848,10 @@ Application.Controllers.controller('AdminICalendarController', ['$scope', 'iCale
         { id: calendar.id },
         function () {
           // success
-          growl.info(_t('icalendar.refresh'));
+          growl.info(_t('app.admin.icalendar.refresh'));
         }, function (error) {
           // failed
-          growl.error(_t('icalendar.sync_failed'));
+          growl.error(_t('app.admin.icalendar.sync_failed'));
           console.error(error);
         }
       )

@@ -47,6 +47,7 @@ class NotificationType
     notify_admin_archive_complete
     notify_privacy_policy_changed
     notify_admin_import_complete
+    notify_admin_refund_created
   ]
   # deprecated:
   # - notify_member_subscribed_plan_is_changed

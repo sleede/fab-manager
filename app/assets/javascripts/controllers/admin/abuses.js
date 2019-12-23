@@ -17,21 +17,21 @@ Application.Controllers.controller('AbusesController', ['$scope', '$state', 'Abu
           resolve: {
             object () {
               return {
-                title: _t('manage_abuses.confirmation_required'),
-                msg: _t('manage_abuses.report_will_be_destroyed')
+                title: _t('app.admin.manage_abuses.confirmation_required'),
+                msg: _t('app.admin.manage_abuses.report_will_be_destroyed')
               };
             }
           }
         },
         function () { // cancel confirmed
           Abuse.remove({ id: abuseId }, function () { // successfully canceled
-            growl.success(_t('manage_abuses.report_removed'));
+            growl.success(_t('app.admin.manage_abuses.report_removed'));
             Abuse.query({}, function (abuses) {
               $scope.abuses = abuses.abuses.filter(a => a.signaled_type === 'Project');
             });
           }
           , function () { // error while canceling
-            growl.error(_t('manage_abuses.failed_to_remove'));
+            growl.error(_t('app.admin.manage_abuses.failed_to_remove'));
           });
         }
       );

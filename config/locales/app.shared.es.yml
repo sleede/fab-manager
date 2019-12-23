@@ -2,7 +2,7 @@ es:
   app:
     shared:
       buttons:
-        #translations of common buttons
+        # translations of common buttons
         confirm_changes: "Confirmar cambios"
         consult: "Consultar"
         edit: "Editar"
@@ -18,26 +18,28 @@ es:
         "yes": "Sí"
         "no": "No"
         apply: "Aplicar"
+
       messages:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "Si cierra la página se perderán todas las modificaciones que no se hayan guardado"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "Si recarga la página se perderán todas las modificaciones que no se hayan guardado"
         payment_card_error: "A problem has occurred with your credit card:"
+
       user:
-        #user edition form
-        man: "hombre"
-        woman: "mujer"
+        # user edition form
+        man: "Man"
+        woman: "Woman"
         add_an_avatar: "Añadir un avatar"
-        pseudonym: "Pseudonym"
+        pseudonym: "Seudónimo"
         pseudonym_is_required: "Pseudonym is required."
-        first_name: "Su nombre"
+        first_name: "Your first name"
         first_name_is_required: "First name is required."
         surname: "Your last name"
         surname_is_required: "Last name is required."
         email_address: "Email address"
-        email_address_is_required: "El e-mail es obligatorio."
+        email_address_is_required: "Se requiere un email."
         change_password: "Cambiar contraseña"
         new_password: "Nueva contraseña"
-        password_is_required: "La contraseña es obligatoria."
+        password_is_required: "Password is required."
         password_is_too_short: "Password is too short (at least 8 characters)"
         confirmation_of_new_password: "Confirmar nueva contraseña"
         confirmation_of_password_is_required: "Se requiere confirmar la contraseña."
@@ -45,25 +47,26 @@ es:
         confirmation_mismatch_with_password: "Las contraseñas no coinciden."
         organization_name: "Nombre de la organización"
         organization_address: "Dirección de la organización"
-        date_of_birth: "Date of birth"
+        date_of_birth: "Fecha de nacimiento"
         date_of_birth_is_required: "Se requiere una fecha de nacimiento."
-        website: "Web"
+        website: "Página web"
         job: "Ocupación"
-        interests: "Intereses"
-        CAD_softwares_mastered: "Softwares dominados"
+        interests: "Interests"
+        CAD_softwares_mastered: "CAD Softwares mastered"
         birthday: "Date of birth"
-        birthday_is_required: "Se requiere una fecha de nacimiento."
-        address: "Dirección"
+        birthday_is_required: "Date of birth is required."
+        address: "Address"
         phone_number: "Phone number"
-        phone_number_is_required: "El número de telefono es obligatorio."
-        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Autorizo a los usuarios registrados en este FabLab a contactarme"
-        i_accept_to_receive_information_from_the_fablab: "Acepto recibir información del FabLab"
+        phone_number_is_required: "Phone number is required."
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "I authorize FabLab users, registered on the site, to contact me"
+        i_accept_to_receive_information_from_the_fablab: "I accept to receive information from the FabLab"
         used_for_statistics: "This data will be used for statistical purposes"
         used_for_invoicing: "This data will be used for billing purposes"
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
+
       project:
-        #project edition form
+        # project edition form
         name: "Name"
         name_is_required: "Name is required."
         illustration: "Ilustración"
@@ -79,7 +82,7 @@ es:
         add_a_picture: "Añadir imagen"
         change_the_picture: "Cambiar imagen"
         delete_the_step: "Eliminar el paso"
-        confirmation_required: "Confirmación requerida"
+        confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_step: "Está seguro de querer borrar el paso?"
         add_a_new_step: "añadir un nuevo paso"
         publish_your_project: "Publicar proyecto"
@@ -88,17 +91,18 @@ es:
         employed_machines: "Máquinas empleadas"
         collaborators: "Collaborators"
         creative_commons_licences: "Licencias Creative Commons"
-        themes: "Temas"
-        tags: "Etiquetas"
+        themes: "Themes"
+        tags: "Tags"
         save_as_draft: "Save as draft"
+
       machine:
-        #machine edition form
-        name: "Name"
-        name_is_required: "Name is required."
+        # machine edition form
+        name: "Nombre"
+        name_is_required: "Se requiere un nombre."
         illustration: "Ilustración"
         add_an_illustration: "añadir una ilustración"
-        description: "Description"
-        description_is_required: "Description is required."
+        description: "descripción"
+        description_is_required: "Se requiere una descripción."
         technical_specifications: "Technical specifications"
         technical_specifications_are_required: "Se requieren especificaciones técnicas."
         attached_files_pdf: "archivos anclados (pdf)"
@@ -106,28 +110,33 @@ es:
         add_an_attachment: "añadir archivo adjunto"
         disable_machine: "Disable machine"
         validate_your_machine: "Validar su máquina"
+
       plan_subscribe:
-        #frame to select a plan to subscribe
+        # frame to select a plan to subscribe
         subscribe_online: "suscribirse online"
         do_not_subscribe: "no suscribe"
+
       member_select:
-        #admin: choose a member to interact with
+        # admin: choose a member to interact with
         select_a_member: "Selecciona un miembro"
         start_typing: "Empezar a escribir..."
+
       stripe:
-        #stripe payment modal
-        online_payment: "Pago online"
+        # stripe payment modal
+        online_payment: "Online payment"
         i_have_read_and_accept_: "He leido y acepto"
         _the_general_terms_and_conditions: "Los términos y condiciones."
         credit_amount_for_pay_reservation: "{amount} {currency} falta por pagar para efectuar su reserva"
         client_credit_amount_for_pay_reservation: "{amount} {currency} falta por pagar para efectuar la reserva del cliente"
         confirm_payment_of_: "Pay: {AMOUNT}"
+
       valid_reservation_modal:
-        #dialog of on site payment for reservations
+        # dialog of on site payment for reservations
         booking_confirmation: "Confirmar reserva"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "Resumen de los espacios reservados por el usuario actual:"
+
       event:
-        #event edition form
+        # event edition form
         title: "Title"
         title_is_required: "Se requiere un título."
         matching_visual: "Coincidencia visual"
@@ -135,15 +144,15 @@ es:
         description: "Description"
         description_is_required: "Description is required."
         attachments: "Adjuntos"
-        add_a_new_file: "Añadir un nuevo archivo"
+        add_a_new_file: "añadir un archivo"
         event_type: "Tipo de evento"
         dates_and_opening_hours: "Fechas y horas de apertura"
-        all_day: "All day"
-        start_date: "Fecha de comienzo"
-        end_date: "End date"
+        all_day: "Todo el día"
+        start_date: "Fecha de inicio"
+        end_date: "Fecha de fin"
         start_time: "Hora de inicio"
         end_time: "Hora de fin"
-        recurrence: "Recurrence"
+        recurrence: "Repeticiones"
         _and_ends_on: "termina el"
         prices_and_availabilities: "Precios y disponibilidad"
         standard_rate: "Puntuación estándar"
@@ -151,27 +160,28 @@ es:
         tickets_available: "Entradas disponibles"
         event_theme: "Tema del evento"
         age_range: "Rango de edades"
+
       plan:
-        #subscription plan edition form
+        # subscription plan edition form
         general_information: "Información general"
-        name: "Name"
+        name: "Nombre"
         name_is_required: "Se requiere un nombre."
         name_length_must_be_less_than_24_characters: "el nombre debe contener menos de 24 caracteres."
         type: "Tipo"
-        partner: "Socio"
-        standard: "Estándar"
+        partner: "Partner"
+        standard: "Standard"
         type_is_required: "Se requiere un tipo."
         group: "Grupo"
         transversal_all_groups: "Transversal (todos los grupos)"
         group_is_required: "Se requiere un tipo."
-        number_of_periods: "Number of periods"
+        number_of_periods: "Numero de periodos"
         number_of_periods_is_required: "El numero de periodos es obligatorio."
         period: "Periodo"
         year: "Año"
         month: "Mes"
-        week: "Week"
+        week: "Semana"
         period_is_required: "Se requiere un periodo."
-        subscription_price: "Subscription price"
+        subscription_price: "Precio de la suscripción"
         price_is_required: "Se requiere un precio."
         visual_prominence_of_the_subscription: "Relevancia visual de la suscripción"
         on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list: "Las suscripciónes se ordenaran por orden de relevancia en la página de suscripciónes"
@@ -185,52 +195,56 @@ es:
         new_user: "Nuevo usuario ..."
         as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user: "Como parte de la suscripción, algunas notificaciones podrían ser enviadas a este usuario."
         new_partner: "Nuevo compañero"
-        first_name: "Nombre"
+        first_name: "First name"
         first_name_is_required: "First name is required."
         surname: "Last name"
         surname_is_required: "Last name is required."
         email_address: "Email address"
-        email_address_is_required: "Email address is required."
+        email_address_is_required: "Se requiere un mail."
         disabled: "Disable subscription"
         disable_plan_will_not_unsubscribe_users: "Beware: disabling this plan won't unsubscribe users having active subscriptions with it."
+
       trainings:
-        #training edition form
-        name: "Name"
-        name_is_required: "Name is required."
+        # training edition form
+        name: "Nombre"
+        name_is_required: "Se requiere un nombre."
         illustration: "Ilustración"
-        add_an_illustration: "Añadir una ilustración"
-        description: "Description"
-        description_is_required: "Description is required."
-        add_a_new_training: "Add a new training"
+        add_an_illustration: "añadir una ilustración"
+        description: "descripción"
+        description_is_required: "Se requiere una descripción."
+        add_a_new_training: "Añadir curso"
         validate_your_training: "Validar curso"
-        associated_machines: "Associated machines"
-        number_of_tickets: "Number of tickets"
+        associated_machines: "Máquinas asociadas"
+        number_of_tickets: "Número de entradas"
         public_page: "Hacer curso público"
         disable_training: "Disable the training"
+
       user_admin:
-        #partial form to edit/create an user (admin view)
-        user: "Usuario"
+        # partial form to edit/create an user (admin view)
+        user: "User"
         incomplete_profile: "Incomplete profile"
         user_profile: "Profil utilisateur"
         warning_incomplete_user_profile_probably_imported_from_sso: "Advertencia: Este perfil de usuario está incompleto. Como el método de autenticación SSO está activo, puede que la cuenta sea importada pero no fusionada. No la modifique a no ser que sepa lo que hace."
         group: "Grupo"
         group_is_required: "Se requiere un grupo"
         trainings: "Cursos"
-        tags: "Etiquetas"
+        tags: "Tags"
+
       authentication:
-        #partial form to edit/create an authentication provider (SSO)
-        name: "Name"
+        # partial form to edit/create an authentication provider (SSO)
+        name: "Nombre"
         provider_name_is_required: "Se requiere el nombre del proveedor."
         authentication_type: "Tipo de autenticación"
-        local_database: "Base de datos local"
+        local_database: "Local database"
         o_auth2: "OAuth 2.0"
         authentication_type_is_required: "Se requiere el tipo de autenticación."
         data_mapping: "Mapeo de datos"
         expected_data_type: "Tipo de datos esperado"
         input_format: "Formato de entrada"
         mappings: "Mapeos"
+
       oauth2:
-        #edition/creation form of an OAuth2 authentication provider
+        # edition/creation form of an OAuth2 authentication provider
         common_url: "URL común"
         common_url_is_required: "se requiere una URL común."
         provided_url_is_not_a_valid_url: "La URL cedida no es válida."
@@ -248,64 +262,69 @@ es:
         oauth2_client_secret_is_required: "Se requiere el secreto de cliente OAuth 2.0."
         define_the_fields_mapping: "Definir el mapeo de campos"
         add_a_match: "agregar coincidencia"
-        model: "Modelo"
+        model: "Model"
         field: "Campos"
         api_endpoint_url: "API final de URL"
         api_type: "Tipo de API"
         api_fields: "Campos de API"
+
       confirm_modify_slot_modal:
-        #machine/training slot modification modal
+        # machine/training slot modification modal
         change_the_slot: "Cambiar la ranura"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "Desea cambiar su reserva efectuada inicialmente el:"
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "Desea cambiar la reserva de {NAME} , efectuada inicialmente el:"
         cancel_this_reservation: "Cancelar reserva"
         i_want_to_change_date: "Quiero cambiar la fecha"
+
       request_training_modal:
-        #modal introducing that a training is requested before booking a machine
+        # modal introducing that a training is requested before booking a machine
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "Para reservar \"{MACHINE}\" debes haber completado el curso: {TRAINING}."
         register_for_the_training: "Apuntarse al curso"
         i_dont_want_to_register_now: "No quiero apuntarme aún"
+
       training_reservation_modal:
-        #modal introducing that a user must wait for his training being validated before booking a machine
+        # modal introducing that a user must wait for his training being validated before booking a machine
         machine_reservation: "Reserva de máquina"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "Debes esperar a que el Fablab valide tu curso para reservar la máquina."
         your_training_will_occur_: "Tu curso será realizado"
+
       public_profile:
-        #user public profile
+        # user public profile
         last_activity_html: "Last activity <br><strong>on {DATE}</strong>"
-        to_come: "por venir"
-        approved: "aprobado"
+        to_come: "por llegar"
+        approved: "aprobada"
         projects: "Proyectos"
-        no_projects: "Sin projectos"
+        no_projects: "Sin proyectos"
         author: "Autor"
         collaborator: "Colaborador"
         private_profile: "Perfil privado"
-        interests: "Intereses"
+        interests: "Interests"
         CAD_softwares_mastered: "CAD softwares mastered"
         email_address: "Email address"
-        trainings: "Cursos"
+        trainings: "Trainings"
         no_trainings: "No trainings"
+
       wallet:
-        #wallet
+        # wallet
         wallet: 'Cartera'
         your_wallet_amount: 'Su dinero disponible'
         wallet_amount: 'Cantidad disponible'
         no_transactions_for_now: 'Sin transacciones aún'
-        date: "Fecha"
+        date: "Date"
         operation: 'Operación'
         operator: 'Operador'
         amount: 'Cantidad'
-        credit: 'Credit'
+        credit: 'Crédito'
         debit: 'Débito'
         credit_title: 'Crédito de la cartera'
         credit_label: 'Selecciona la cantidad a creditar'
         confirm_credit_label: 'Confirma la cantidad a creditar'
         generate_a_refund_invoice: "Generar informe de devolución"
-        creation_date_for_the_refund: "Fecha de creación del reembolso"
-        creation_date_is_required: "Se requiere la fecha de creación."
+        creation_date_for_the_refund: "Fecha de creación del informe de devolución"
+        creation_date_is_required: "Se requiere fecha de creación."
         description_optional: "Descripción (opcional):"
-        will_appear_on_the_refund_invoice: "Aparecerá en la factura de reembolso."
-        to_credit: 'Credit'
+        will_appear_on_the_refund_invoice: "Aparecerá en el informe de devolución."
+        to_credit: 'Credito'
         wallet_credit_successfully: "La cartera del usuario ha sido acreditada con éxito."
         a_problem_occurred_for_wallet_credit: "Ocurrió un problema mientras se acreditaba la cartera"
         amount_is_required: "Se requiere la cantidad"
@@ -321,9 +340,10 @@ es:
         debit_reservation_machine: "Débito por reserva de máquina"
         debit_reservation_event: "Débito por reserva de evento"
         warning_uneditable_credit: "ADVERTENCIA: una vez validada la reserva no podrá modificarse el pago."
+
       coupon:
-        #promotional coupon (creation/edition form)
-        name: "Name"
+        # promotional coupon (creation/edition form)
+        name: "Nombre"
         name_is_required: "Name is required."
         code: "Código"
         code_is_required: "Se requiere un código."
@@ -336,18 +356,19 @@ es:
         percent_off_is_required: "El porcentaje descontado es obligatorio."
         percentage_must_be_between_0_and_100: "El porcentaje descontado debe ser un número entre 0 y 100."
         validity_per_user: "Validez por usuario"
-        once: "Sólo una vez"
-        forever: "Cada uso"
+        once: "Validez única"
+        forever: "Cada usuario"
         validity_per_user_is_required: "Se requiere validez por usuario."
         valid_until: "Válido hasta (incluido)"
         leave_empty_for_no_limit: "Dejar en blanco si no se desea especificar un límite."
         max_usages: "Usos máximos permitidos"
         max_usages_must_be_equal_or_greater_than_0: "El número de usos máximos permitidos debe ser mayor que 0."
         enabled: "Activo"
+
       coupon_input:
-        #coupon (input zone for users)
+        # coupon (input zone for users)
         i_have_a_coupon: "I have a coupon!"
-        code_: "Código:"
+        code_: "Code:"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "Se ha aplicado el cupón {PERCENT}% de descuento."
         the_coupon_has_been_applied_you_get_AMOUNT_CURRENCY: "Se ha aplicado el cupón. Recibirá un descuento de {AMOUNT} {CURRENCY}."
         unable_to_apply_the_coupon_because_disabled: "No se ha podido canjear el cupón: código inhabilitado."
@@ -357,39 +378,41 @@ es:
         unable_to_apply_the_coupon_because_amount_exceeded: "No se puede aplicar el cupón: el descuento excede el monto total de esta compra."
         unable_to_apply_the_coupon_because_undefined: "No se puede aplicar el cupón: se ha producido un error inesperado, póngase en contacto con el gerente del Fablab."
         unable_to_apply_the_coupon_because_rejected: "Este código no existe."
+
       space:
-        #form to create/edit a space
-        name: "Name"
-        name_is_required: "Name is required."
+        # form to create/edit a space
+        name: "Nombre"
+        name_is_required: "Se requiere un nombre."
         illustration: "Ilustración"
-        add_an_illustration: "Añadir una ilustración"
-        description: "Description"
-        description_is_required: "Description is required."
+        add_an_illustration: "añadir una ilustración"
+        description: "descripción"
+        description_is_required: "Se requiere una descripción."
         characteristics: "Características"
         characteristics_are_required: "Las características son obligatorias."
-        attached_files_pdf: "archivos anclados (pdf)"
-        attach_a_file: "adjuntar archivo"
-        add_an_attachment: "añadir archivo adjunto"
+        attached_files_pdf: "Archivos adjuntos (pdf)"
+        attach_a_file: "Adjuntar archvo"
+        add_an_attachment: "Añadir adjunto"
         default_places: "Máximo de entradas predeterminado"
         default_places_is_required: "Se requiere un máximo de entradas predeterminado."
         disable_space: "Disable space"
+
       cart:
-        #module de panier d'achat de réservations
-        summary: "Summary"
+        # module de panier d'achat de réservations
+        summary: "Resumen"
         select_one_or_more_slots_in_the_calendar: "Selecciona uno {SINGLE, select, true{slot} other{or more slots}} en el calendario"
         you_ve_just_selected_the_slot: "Acaba de seleccionar el espacio :"
-        datetime_to_time: "{START_DATETIME} hasta {END_TIME}" #eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
+        datetime_to_time: "{START_DATETIME} hasta {END_TIME}"  # eg: Thursday, September 4 1986 8:30 PM to 10:00 PM
         cost_of_TYPE: "Coste de {TYPE, select, Machine{a machine hour} Training{the training} other{the element}}"
         offer_this_slot: "Ofertar este espacio"
         confirm_this_slot: "Confirmar este espacio"
         remove_this_slot: "Eliminar este espacio"
         to_benefit_from_attractive_prices: "Para beneficiarse de precios"
         view_our_subscriptions: "Ver nuestras suscripciónes"
-        or: "or"
+        or: "ó"
         you_ve_just_selected_a_: "Acaba de seleccionar"
         _subscription: "suscripción"
         cost_of_the_subscription: "Coste de la suscripción"
-        confirm_and_pay: "Confirm and pay"
+        confirm_and_pay: "Confirmar y pagar"
         you_have_settled_the_following_TYPE: "Acaba de seleccionar {TYPE, select, Machine{machine slots} Training{training} other{elements}}:"
         you_have_settled_a_: "Ha establecido una"
         total_: "TOTAL :"
@@ -404,14 +427,14 @@ es:
         tags_of_the_destination_slot: "Etiquetas del espacio final:"
         confirm_my_modification: "Confirmar modificación"
         your_booking_slot_was_successfully_moved_from_: "Tu reserva de espacio ha sido reemplazada con éxito"
-        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
-        please_select_a_member_first: "Please select a member first"
+        to_date: "a" # context: date. eg: "from 01/01 to 01/05"
+        please_select_a_member_first: "Por favor, selecciona un miembro de la lista"
         unable_to_change_the_reservation: "Imposible cambiar reserva"
         confirmation_required: "Confirmación requerida"
-        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
-        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
-        cancellation_failed: "Cancellation failed."
-        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}" #(context: confirm my payment of $20.00)
+        do_you_really_want_to_cancel_this_reservation: "¿Está seguro de querer cancelar la reserva?"
+        reservation_was_cancelled_successfully: "La reserva se ha cancelado con éxito."
+        cancellation_failed: "Cancelación fallida."
+        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # (context: confirm my payment of $20.00)
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
-        none: "Ninguna"
+        none: "Ninguno"
         online_payment_disabled: "El pago en línea no está disponible. Póngase en contacto directamente con la recepción de Fablab."

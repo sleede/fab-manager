@@ -5,6 +5,7 @@ FabManager is the Fab Lab management solution. It provides a comprehensive, web-
 [![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager)
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
 [![Docker Build Status](https://img.shields.io/docker/build/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/builds)
+[![Crowdin](https://badges.crowdin.net/fab-manager/localized.svg)](https://crowdin.com/project/fab-manager)
 
 ##### Table of Contents
 1. [Software stack](#software-stack)

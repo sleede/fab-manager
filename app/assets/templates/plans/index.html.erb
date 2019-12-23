@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l ">
       <section class="heading-title">
-        <h1 translate>{{ 'subcriptions' }}</h1>
+        <h1 translate>{{ 'app.public.plans.subcriptions' }}</h1>
       </section>
     </div>
   </div>
@@ -44,24 +44,24 @@
               <div class="cta-button" ng-if="!currentUser || currentUser.role == 'member'">
                 <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-if="currentUser.subscribed_plan.id != plan.id" ng-disabled="currentUser.subscribed_plan" ng-class="{ 'bg-yellow': selectedPlan==plan }">
 
-                <span ng-if="currentUser" translate>{{ 'i_choose_that_plan' }}</span>
+                <span ng-if="currentUser" translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
 
-                <span ng-if="!currentUser" translate>{{ 'i_subscribe_online' }}</span>
+                <span ng-if="!currentUser" translate>{{ 'app.public.plans.i_subscribe_online' }}</span>
 
                 </button>
 
-                <button class="btn btn-warning bg-yellow rounded" ng-if="currentUser.subscribed_plan.id == plan.id" ng-disabled="currentUser.subscribed_plan.id == plan.id" translate>{{ 'i_already_subscribed' }}</button>
+                <button class="btn btn-warning bg-yellow rounded" ng-if="currentUser.subscribed_plan.id == plan.id" ng-disabled="currentUser.subscribed_plan.id == plan.id" translate>{{ 'app.public.plans.i_already_subscribed' }}</button>
 
               </div>
 
               <div class="cta-button" ng-if="currentUser.role == 'admin'">
                 <button class="btn btn-default rounded" ng-click="selectPlan(plan)" ng-class="{ 'bg-yellow': selectedPlan==plan }" ng-disabled="!ctrl.member">
-                  <span translate>{{ 'i_choose_that_plan' }}</span>
+                  <span translate>{{ 'app.public.plans.i_choose_that_plan' }}</span>
                 </button>
               </div>
 
               <br ng-show="!plan.plan_file_url">  <!-- TODO Refacto with CSS -->
-              <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'more_information' }}</a>
+              <a ng-href="{{ plan.plan_file_url }}" ng-show="plan.plan_file_url" target="_blank" translate>{{ 'app.public.plans.more_information' }}</a>
           </div>
 
         </div>
@@ -69,7 +69,7 @@
 
         <div class="col-xs-12 col-md-12 col-lg-10 col-centered no-gutter" ng-if="currentUser.subscription && isInPast(currentUser.subscription.expired_at)">
           <uib-alert type="info">
-            {{ 'your_subscription_expires_on_the_DATE' | translate:{DATE:(currentUser.subscription.expired_at | amDateFormat:'L' )} }}
+            {{ 'app.public.plans.your_subscription_expires_on_the_DATE' | translate:{DATE:(currentUser.subscription.expired_at | amDateFormat:'L' )} }}
           </uib-alert>
         </div>
 
@@ -87,8 +87,8 @@
 
     <section class="widget panel b-a m m-t-lg" ng-show="ctrl.member">
       <div class="panel-heading b-b">
-          <h3 ng-show="currentUser.role != 'admin'" translate>{{ 'my_group' }}</h3>
-          <h3 ng-show="currentUser.role === 'admin'" translate translate-values="{GENDER:getGender(currentUser)}" translate-interpolation="messageformat">{{ 'his_group' }}</h3>
+          <h3 ng-show="currentUser.role != 'admin'" translate>{{ 'app.public.plans.my_group' }}</h3>
+          <h3 ng-show="currentUser.role === 'admin'" translate translate-values="{GENDER:getGender(currentUser)}">{{ 'app.public.plans.his_group' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper">
           <div ng-show="!group.change">
@@ -99,72 +99,70 @@
                       ng-click="group.change = !group.change"
                       ng-show="(!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription) || (!paid.plan)"
                       translate
-                      translate-values="{ROLE:currentUser.role}"
-                      translate-interpolation="messageformat">{{ 'he_wants_to_change_group' }}</button>
+                      translate-values="{ROLE:currentUser.role}">{{ 'app.public.plans.he_wants_to_change_group' }}</button>
           </div>
           <div ng-show="group.change">
               <select class="form-control" ng-options="g.id as g.name for g in groups" ng-model="group.id"></select>
               <button class="btn btn-success m-t"
                       ng-click="selectGroup()"
                       translate
-                      translate-values="{ROLE:currentUser.role, GENDER:getGender(currentUser)}"
-                      translate-interpolation="messageformat">{{ 'change_my_group' }}</button>
+                      translate-values="{ROLE:currentUser.role, GENDER:getGender(currentUser)}">{{ 'app.public.plans.change_my_group' }}</button>
           </div>
       </div>
     </section>
 
     <section class="widget panel b-a m m-t-lg" ng-if="!selectedPlan && ctrl.member && !ctrl.member.subscribed_plan && ctrl.member.subscription">
       <div class="panel-heading b-b">
-        <h3 translate>{{ 'summary' }}</h3>
+        <h3 translate>{{ 'app.public.plans.summary' }}</h3>
       </div>
 
       <div class="widget-content no-bg auto wrapper">
-        <strong>{{ 'your_subscription_has_expired_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'LL')} }}</strong>
+        <strong>{{ 'app.public.plans.your_subscription_has_expired_on_the_DATE' | translate:{DATE:(ctrl.member.subscription.expired_at | amDateFormat:'LL')} }}</strong>
 
         <div class="well well-warning m-t-sm">
           <i class="font-sbold">{{ctrl.member.subscription.plan | humanReadablePlanName }}</i>
-          <div class="font-sbold">{{ 'subscription_price' | translate }} {{ctrl.member.subscription.plan.amount | currency}}</div>
+          <div class="font-sbold">{{ 'app.public.plans.subscription_price' | translate }} {{ctrl.member.subscription.plan.amount | currency}}</div>
         </div>
       </div>
     </section>
 
     <section class="widget panel b-a m m-t-lg" ng-if="selectedPlan && ctrl.member">
       <div class="panel-heading b-b">
-        <h3 translate>{{ 'summary' }}</h3>
+        <h3 translate>{{ 'app.public.plans.summary' }}</h3>
       </div>
 
       <div class="widget-content no-bg auto wrapper">
-        {{ 'you_ve_just_selected_a_' | translate }} <strong translate>{{ '_subscription' }}</strong> :
+        <span translate>{{ 'app.public.plans.you_ve_just_selected_a_subscription_html' }}</span>
 
         <div class="well well-warning m-t-sm">
           <i class="font-sbold">{{ selectedPlan | humanReadablePlanName }}</i>
-          <div class="font-sbold">{{ 'subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
+          <div class="font-sbold">{{ 'app.public.plans.subscription_price' | translate }} {{selectedPlan.amount | currency}}</div>
         </div>
 
         <coupon show="!ctrl.member.subscribed_plan" coupon="coupon.applied" total="selectedPlan.amount" user-id="{{ctrl.member.id}}"></coupon>
       </div>
 
       <div class="widget-footer">
-        <button class="btn btn-valid btn-info btn-block p-l text-u-c r-b" ng-click="openSubscribePlanModal()" ng-if="!ctrl.member.subscribed_plan">{{ 'confirm_and_pay' | translate }} {{cart.total | currency}}</button>
+        <button class="btn btn-valid btn-info btn-block p-l text-u-c r-b" ng-click="openSubscribePlanModal()" ng-if="!ctrl.member.subscribed_plan">{{ 'app.public.plans.confirm_and_pay' | translate }} {{cart.total | currency}}</button>
       </div>
     </section>
 
 
     <section class="widget panel b-a m m-t-lg" ng-if="paid.plan">
       <div class="panel-heading b-b">
-        <h3 translate>{{ 'summary' }}</h3>
+        <h3 translate>{{ 'app.public.plans.summary' }}</h3>
       </div>
 
       <div class="widget-content no-bg auto wrapper">
-       {{ 'you_ve_just_payed_the_' | translate }} <strong translate>{{ '_subscription' }}</strong> :
+       <span translate>{{ 'app.public.plans.you_ve_just_payed_the_subscription_html' }}</span>
 
         <div class="well well-warning m-t-sm">
           <i class="font-sbold">{{ paid.plan | humanReadablePlanName }}</i>
-          <div class="font-sbold">{{ 'subscription_price' | translate }} {{paid.plan.amount | currency}}</div>
+          <div class="font-sbold">{{ 'app.public.plans.subscription_price' | translate }} {{paid.plan.amount | currency}}</div>
         </div>
 
-        <div class="alert alert-success">{{ 'thank_you_your_subscription_is_successful' | translate }}<br>
-        {{ 'your_invoice_will_be_available_soon_from_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a></div>
+        <div class="alert alert-success">{{ 'app.public.plans.thank_you_your_subscription_is_successful' | translate }}<br>
+        <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.plans.your_invoice_will_be_available_soon_from_your_dashboard' }}</a></div>
 
       </div>
     </section>

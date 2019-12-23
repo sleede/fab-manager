@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="text-center red" translate>{{ 'invoices.close_accounting_period' }}</h3>
+  <h3 class="text-center red" translate>{{ 'app.admin.invoices.close_accounting_period' }}</h3>
 </div>
 <div class="modal-body">
   <form name="closePeriodForm" novalidate="novalidate" class="row">
     <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$invalid }">
-      <label translate>{{ 'invoices.close_from_date' }}</label>
+      <label translate>{{ 'app.admin.invoices.close_from_date' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
@@ -21,11 +21,11 @@
                readonly
                required/>
       </div>
-      <span class="help-block" ng-show="closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$error.required" translate>{{ 'invoices.start_date_is_required' }}</span>
+      <span class="help-block" ng-show="closePeriodForm.start_at.$dirty && closePeriodForm.start_at.$error.required" translate>{{ 'app.admin.invoices.start_date_is_required' }}</span>
       <span class="help-block error" ng-show="errors.start_at">{{ errors.start_at[0] }}</span>
     </div>
     <div class="form-group col-md-6" ng-class="{'has-error': closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$invalid }">
-      <label translate>{{ 'invoices.close_until_date' }}</label>
+      <label translate>{{ 'app.admin.invoices.close_until_date' }}</label>
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         <input type="text"
@@ -43,7 +43,7 @@
                required
                readonly/>
       </div>
-      <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'invoices.end_date_is_required' }}</span>
+      <span class="help-block" ng-show="closePeriodForm.end_at.$dirty && closePeriodForm.end_at.$error.required" translate>{{ 'app.admin.invoices.end_date_is_required' }}</span>
       <span class="help-block error" ng-show="errors.end_at">{{ errors.end_at[0] }}</span>
     </div>
   </form>
@@ -51,12 +51,12 @@
     <span class="help-block error">{{ $parent.invoiceErrorRE.exec(key)[1] }} : {{ value[0] }}</span>
   </div>
   <div>
-    <h4 translate>{{ 'invoices.previous_closings' }}</h4>
+    <h4 translate>{{ 'app.admin.invoices.previous_closings' }}</h4>
     <table class="table closings-table" ng-show="accountingPeriods.length > 0">
       <thead>
         <tr>
-          <th translate>{{ 'invoices.start_date' }}</th>
-          <th translate>{{ 'invoices.end_date' }}</th>
+          <th translate>{{ 'app.admin.invoices.start_date' }}</th>
+          <th translate>{{ 'app.admin.invoices.end_date' }}</th>
           <th></th>
         </tr>
       </thead>
@@ -72,10 +72,10 @@
         </tr>
       </tbody>
     </table>
-    <div ng-show="accountingPeriods.length === 0" translate>{{ 'invoices.no_periods'}}</div>
+    <div ng-show="accountingPeriods.length === 0" translate>{{ 'app.admin.invoices.no_periods'}}</div>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-warning" ng-click="ok()" ng-disabled="closePeriodForm.$invalid || pendingCreation" translate>{{ 'confirm' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" ng-disabled="pendingCreation" translate>{{ 'cancel' }}</button>
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="closePeriodForm.$invalid || pendingCreation" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" ng-disabled="pendingCreation" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

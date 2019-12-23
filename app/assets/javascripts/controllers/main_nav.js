@@ -18,33 +18,33 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   $scope.navLinks = [
     {
       state: 'app.public.home',
-      linkText: 'home',
+      linkText: 'app.public.common.home',
       linkIcon: 'home'
     },
 
     {
       state: 'app.public.machines_list',
-      linkText: 'reserve_a_machine',
+      linkText: 'app.public.common.reserve_a_machine',
       linkIcon: 'cogs'
     },
     {
       state: 'app.public.trainings_list',
-      linkText: 'trainings_registrations',
+      linkText: 'app.public.common.trainings_registrations',
       linkIcon: 'graduation-cap'
     },
     {
       state: 'app.public.events_list',
-      linkText: 'events_registrations',
+      linkText: 'app.public.common.events_registrations',
       linkIcon: 'tags'
     },
     {
       state: 'app.public.calendar',
-      linkText: 'public_calendar',
+      linkText: 'app.public.common.public_calendar',
       linkIcon: 'calendar'
     },
     {
       state: 'app.public.projects_list',
-      linkText: 'projects_gallery',
+      linkText: 'app.public.common.projects_gallery',
       linkIcon: 'th'
     }
 
@@ -53,7 +53,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   if (!Fablab.withoutPlans) {
     $scope.navLinks.push({
       state: 'app.public.plans',
-      linkText: 'subscriptions',
+      linkText: 'app.public.common.subscriptions',
       linkIcon: 'credit-card'
     });
   }
@@ -61,7 +61,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   if (!Fablab.withoutSpaces) {
     $scope.navLinks.splice(3, 0, {
       state: 'app.public.spaces_list',
-      linkText: 'reserve_a_space',
+      linkText: 'app.public.common.reserve_a_space',
       linkIcon: 'rocket'
     });
   }
@@ -70,57 +70,57 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   const adminNavLinks = [
     {
       state: 'app.admin.trainings',
-      linkText: 'trainings_monitoring',
+      linkText: 'app.public.common.trainings_monitoring',
       linkIcon: 'graduation-cap'
     },
     {
       state: 'app.admin.calendar',
-      linkText: 'manage_the_calendar',
+      linkText: 'app.public.common.manage_the_calendar',
       linkIcon: 'calendar'
     },
     {
       state: 'app.admin.members',
-      linkText: 'manage_the_users',
+      linkText: 'app.public.common.manage_the_users',
       linkIcon: 'users'
     },
     {
       state: 'app.admin.invoices',
-      linkText: 'manage_the_invoices',
+      linkText: 'app.public.common.manage_the_invoices',
       linkIcon: 'file-pdf-o'
     },
     {
       state: 'app.admin.pricing',
-      linkText: 'subscriptions_and_prices',
+      linkText: 'app.public.common.subscriptions_and_prices',
       linkIcon: 'money'
     },
     {
       state: 'app.admin.events',
-      linkText: 'manage_the_events',
+      linkText: 'app.public.common.manage_the_events',
       linkIcon: 'tags'
     },
     {
       state: 'app.public.machines_list',
-      linkText: 'manage_the_machines',
+      linkText: 'app.public.common.manage_the_machines',
       linkIcon: 'cogs'
     },
     {
       state: 'app.admin.project_elements',
-      linkText: 'manage_the_projects_elements',
+      linkText: 'app.public.common.manage_the_projects_elements',
       linkIcon: 'tasks'
     },
     {
       state: 'app.admin.statistics',
-      linkText: 'statistics',
+      linkText: 'app.public.common.statistics',
       linkIcon: 'bar-chart-o'
     },
     {
       state: 'app.admin.settings',
-      linkText: 'customization',
+      linkText: 'app.public.common.customization',
       linkIcon: 'gear'
     },
     {
       state: 'app.admin.open_api_clients',
-      linkText: 'open_api_clients',
+      linkText: 'app.public.common.open_api_clients',
       linkIcon: 'cloud'
     }
   ].concat(Fablab.adminNavLinks);
@@ -130,7 +130,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   if (!Fablab.withoutSpaces) {
     return $scope.adminNavLinks.splice(7, 0, {
       state: 'app.public.spaces_list',
-      linkText: 'manage_the_spaces',
+      linkText: 'app.public.common.manage_the_spaces',
       linkIcon: 'rocket'
     });
   }

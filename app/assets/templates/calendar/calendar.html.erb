@@ -7,14 +7,14 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md hide-b-r-lg">
       <section class="heading-title">
-        <h1 translate>{{ 'calendar.calendar' }}</h1>
+        <h1 translate>{{ 'app.public.calendar.calendar' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md hidden-lg">
       <div class="heading-actions wrapper">
         <button type="button" class="btn btn-default m-t m-b" ng-click="openFilterAside()">
-          <span class="fa fa-filter"></span> {{ 'calendar.filter_calendar' | translate }}
+          <span class="fa fa-filter"></span> {{ 'app.public.calendar.filter_calendar' | translate }}
         </button>
       </div>
     </div>
@@ -38,7 +38,7 @@
   <div class="col-lg-3 hidden-md hidden-sm hidden-xs">
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'calendar.filter_calendar' }}</h3>
+        <h3 translate>{{ 'app.public.calendar.filter_calendar' }}</h3>
       </div>
       <div class="widget-content no-bg auto wrapper calendar-filter">
         <ng-include src="'<%= asset_path "calendar/filter.html" %>'"></ng-include>
@@ -53,7 +53,7 @@
   <div class="widget">
     <div class="modal-header">
       <button type="button" class="close" ng-click="close($event)"><span>&times;</span></button>
-      <h1 class="modal-title" translate>{{ 'calendar.filter_calendar' }}</h1>
+      <h1 class="modal-title" translate>{{ 'app.public.calendar.filter_calendar' }}</h1>
     </div>
     <div class="modal-body widget-content calendar-filter calendar-filter-aside">
       <ng-include src="'<%= asset_path "calendar/filter.html" %>'"></ng-include>

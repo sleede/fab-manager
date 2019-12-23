@@ -11,14 +11,14 @@
 
       <div class="col-md-8 b-l b-r">
         <section class="heading-title">
-          <h1 translate>{{ 'members_import.import_members' }}</h1>
+          <h1 translate>{{ 'app.admin.members_import.import_members' }}</h1>
         </section>
       </div>
 
       <div class="col-md-3">
         <section class="heading-actions wrapper">
          <a class="btn btn-lg btn-block btn-default m-t-xs" target="_blank" href="example.csv" translate>
-           {{ 'members_import.download_example' }}
+           {{ 'app.admin.members_import.download_example' }}
          </a>
         </section>
       </div>
@@ -29,7 +29,7 @@
   <div class="row p-sm">
     <div class="col-md-12">
       <p class="alert alert-info" translate>
-        {{ 'members_import.info' }}
+        {{ 'app.admin.members_import.info' }}
       </p>
     </div>
   </div>
@@ -37,12 +37,12 @@
   <div class="row m-h-sm">
 
     <div class="col-md-6 p-h-s">
-      <h3 translate>{{ 'members_import.groups' }}</h3>
+      <h3 translate>{{ 'app.admin.members_import.groups' }}</h3>
       <table class="table">
         <thead>
         <tr>
-          <th translate>{{ 'members_import.group_name' }}</th>
-          <th translate>{{ 'members_import.group_identifier' }}</th>
+          <th translate>{{ 'app.admin.members_import.group_name' }}</th>
+          <th translate>{{ 'app.admin.members_import.group_identifier' }}</th>
         </tr>
         </thead>
         <tbody>
@@ -59,12 +59,12 @@
     </div>
 
     <div class="col-md-6 p-h-s">
-      <h3 translate>{{ 'members_import.trainings' }}</h3>
+      <h3 translate>{{ 'app.admin.members_import.trainings' }}</h3>
       <table class="table">
         <thead>
         <tr>
-          <th translate>{{ 'members_import.training_name' }}</th>
-          <th translate>{{ 'members_import.training_identifier' }}</th>
+          <th translate>{{ 'app.admin.members_import.training_name' }}</th>
+          <th translate>{{ 'app.admin.members_import.training_identifier' }}</th>
         </tr>
         </thead>
         <tbody>
@@ -86,12 +86,12 @@
   <div class="row m-h-sm">
 
     <div class="col-md-6 p-h-s" ng-hide="tags.length == 0">
-      <h3 translate>{{ 'members_import.tags' }}</h3>
+      <h3 translate>{{ 'app.admin.members_import.tags' }}</h3>
       <table class="table">
         <thead>
         <tr>
-          <th translate>{{ 'members_import.tag_name' }}</th>
-          <th translate>{{ 'members_import.tag_identifier' }}</th>
+          <th translate>{{ 'app.admin.members_import.tag_name' }}</th>
+          <th translate>{{ 'app.admin.members_import.tag_identifier' }}</th>
         </tr>
         </thead>
         <tbody>
@@ -119,10 +119,10 @@
 
             <div class="m-t">
               <p class="alert alert-warning m-h" translate>
-                {{ 'members_import.required_fields' }}
+                {{ 'app.admin.members_import.required_fields' }}
               </p>
               <p class="alert alert-warning m-h" translate>
-                {{ 'members_import.about_example' }}
+                {{ 'app.admin.members_import.about_example' }}
               </p>
             </div>
 
@@ -130,8 +130,8 @@
               <div class="form-control" data-trigger="fileinput">
                 <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
               </div>
-              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'members_import.select_file' }}</span>
-              <span class="fileinput-exists" translate>{{ 'change' }}</span>
+              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.admin.members_import.select_file' }}</span>
+              <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                 <input type="file"
                        name="import_members"
                        accept="text/csv"
@@ -140,23 +140,23 @@
             </div>
 
             <div class="m-h">
-              <span translate>{{ 'members_import.update_field' }}</span>
+              <span translate>{{ 'app.admin.members_import.update_field' }}</span>
               <div class="radio m-l-md">
                 <label class="control-label">
                   <input type="radio" id="update_field" name="update_field" value="id" checked>
-                  <span translate>{{ 'members_import.update_on_id' }}</span>
+                  <span translate>{{ 'app.admin.members_import.update_on_id' }}</span>
                 </label>
               </div>
               <div class="radio m-l-md">
                 <label class="control-label">
                   <input type="radio" id="update_field" name="update_field" value="username">
-                  <span translate>{{ 'members_import.update_on_username' }}</span>
+                  <span translate>{{ 'app.admin.members_import.update_on_username' }}</span>
                 </label>
               </div>
               <div class="radio m-l-md">
                 <label class="control-label">
                   <input type="radio" id="update_field" name="update_field" value="email">
-                  <span translate>{{ 'members_import.update_on_email' }}</span>
+                  <span translate>{{ 'app.admin.members_import.update_on_email' }}</span>
                 </label>
               </div>
             </div>
@@ -165,7 +165,7 @@
 
 
           <div class="panel-footer no-padder">
-            <input type="submit" value="{{ 'members_import.import' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="importForm.$invalid"/>
+            <input type="submit" value="{{ 'app.admin.members_import.import' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="importForm.$invalid"/>
           </div>
 
         </section>

@@ -7,13 +7,13 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'the_fablab_s_events' }}</h1>
+        <h1 translate>{{ 'app.public.events_list.the_fablab_s_events' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin'])">
       <section class="heading-actions wrapper">
-       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button" translate>{{ 'add_an_event' }}</a>
+       <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button" translate>{{ 'app.public.events_list.add_an_event' }}</a>
       </section>
     </div>
   </div>
@@ -23,19 +23,19 @@
     <div class="row m-b-md">
       <div class="col-md-3 m-b" ng-show="categories.length > 0">
         <select ng-model="filters.category_id" ng-change="filterEvents()" class="form-control" ng-options="c.id as c.name for c in categories">
-          <option value="" translate>{{ 'all_categories' }}</option>
+          <option value="" translate>{{ 'app.public.events_list.all_categories' }}</option>
         </select>
       </div>
 
       <div class="col-md-3 m-b" ng-show="themes.length > 0">
         <select ng-model="filters.theme_id" ng-change="filterEvents()" class="form-control" ng-options="t.id as t.name for t in themes">
-          <option value="" translate>{{ 'all_themes' }}</option>
+          <option value="" translate>{{ 'app.public.events_list.all_themes' }}</option>
         </select>
       </div>
 
       <div class="col-md-3 m-b" ng-show="ageRanges.length > 0">
         <select ng-model="filters.age_range_id" ng-change="filterEvents()" class="form-control" ng-options="a.id as a.name for a in ageRanges">
-          <option value="" translate>{{ 'for_all' }}</option>
+          <option value="" translate>{{ 'app.public.events_list.for_all' }}</option>
         </select>
       </div>
     </div>
@@ -53,10 +53,10 @@
               <h5 class="text-xs">{{event.category.name}}</h5>
               <h4 class="m-n text-sm clear l-n">{{event.title}}</h4>
               <h3 class="m-n" ng-show="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}}</h3>
-              <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
+              <h3 class="m-n" ng-hide="onSingleDay(event)">{{event.start_date | amDateFormat:'L'}} <span class="text-sm font-thin" translate> {{ 'app.public.events_list.to_date' }} </span> {{event.end_date | amDateFormat:'L'}}</h3>
 
-              <h6 class="m-n" ng-if="!event.amount" translate>{{ 'free_admission' }}</h6>
-              <h6 class="m-n" ng-if="event.amount">{{ 'full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
+              <h6 class="m-n" ng-if="!event.amount" translate>{{ 'app.public.events_list.free_admission' }}</h6>
+              <h6 class="m-n" ng-if="event.amount">{{ 'app.public.events_list.full_price_' | translate }} {{event.amount | currency}} <span ng-repeat="price in event.prices">/ {{ price.category.name }} {{price.amount | currency}}</span></h6>
 
               <div>
                 <span class="text-black-light text-xs" ng-if="event.event_themes[0]"><i class="fa fa-tags" aria-hidden="true"></i> {{event.event_themes[0].name}}</span>
@@ -64,10 +64,10 @@
               </div>
 
               <div>
-                <span class="text-black-light text-xs" ng-if="event.nb_free_places > 0">{{event.nb_free_places}} {{ 'still_available' | translate }}</span>
-                <span class="text-black-light text-xs" ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'sold_out' }}</span>
-                <span class="text-black-light text-xs" ng-if="event.nb_total_places == -1" translate>{{ 'cancelled' }}</span>
-                <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'free_entry' }}</span>
+                <span class="text-black-light text-xs" ng-if="event.nb_free_places > 0">{{event.nb_free_places}} {{ 'app.public.events_list.still_available' | translate }}</span>
+                <span class="text-black-light text-xs" ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0" translate>{{ 'app.public.events_list.sold_out' }}</span>
+                <span class="text-black-light text-xs" ng-if="event.nb_total_places == -1" translate>{{ 'app.public.events_list.cancelled' }}</span>
+                <span class="text-black-light text-xs" ng-if="!event.nb_total_places" translate>{{ 'app.public.events_list.free_entry' }}</span>
               </div>
             </div>
 
@@ -86,7 +86,7 @@
     <div class="row">
 
       <div class="col-lg-12 text-center m-t-md">
-        <a class="btn btn-warning" ng-click="loadMoreEvents()" ng-hide="noMoreResults" translate>{{ 'load_the_next_events' }}</a>
+        <a class="btn btn-warning" ng-click="loadMoreEvents()" ng-hide="noMoreResults" translate>{{ 'app.public.events_list.load_the_next_events' }}</a>
       </div>
     </div>
 

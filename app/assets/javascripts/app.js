@@ -59,8 +59,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.useLoaderCache(true);
       // Secure i18n module against XSS attacks by escaping the output
       $translateProvider.useSanitizeValueStrategy('escapeParameters');
-      // Enable the MessageFormat interpolation (used for pluralization)
-      $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
+      // Use the MessageFormat interpolation by default (used for pluralization)
+      $translateProvider.useMessageFormatInterpolation();
       // Set the langage of the instance (from ruby configuration)
       $translateProvider.preferredLanguage(Fablab.locale);
     }]).run(['$rootScope', '$log', 'AuthService', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
@@ -90,6 +90,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.phoneRequired = Fablab.phoneRequired;
       // Global config: if true, the events are shown in the admin calendar
       $rootScope.eventsInCalendar = Fablab.eventsInCalendar;
+      // Global config: machine/space slot duration
+      $rootScope.slotDuration = Fablab.slotDuration;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page

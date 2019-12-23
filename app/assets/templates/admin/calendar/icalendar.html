@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'icalendar.icalendar_import' }}</h1>
+        <h1 translate>{{ 'app.admin.icalendar.icalendar_import' }}</h1>
       </section>
     </div>
 
@@ -24,15 +24,15 @@
 
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div class="alert alert-info m-lg" translate>
-      {{ 'icalendar.intro' }}
+      {{ 'app.admin.icalendar.intro' }}
     </div>
     <div class="wrapper-lg">
       <table class="table" ng-show="calendars.length > 0">
         <thead>
         <tr>
-          <th style="width: 35%;" translate>{{ 'icalendar.name' }}</th>
-          <th style="width: 35%;" translate>{{ 'icalendar.url' }}</th>
-          <th translate>{{ 'icalendar.display' }}</th>
+          <th style="width: 35%;" translate>{{ 'app.admin.icalendar.name' }}</th>
+          <th style="width: 35%;" translate>{{ 'app.admin.icalendar.url' }}</th>
+          <th translate>{{ 'app.admin.icalendar.display' }}</th>
           <th style="width: 20%;"></th>
         </tr>
         </thead>
@@ -40,7 +40,7 @@
         <tr ng-repeat="calendar in calendars">
           <td class="calendar-name">{{calendar.name}}</td>
           <td class="calendar-url"><a href="{{calendar.url}}" target="_blank">{{calendar.url}}</a></td>
-          <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.text_hidden ? '' : 'icalendar.example' }}</span>
+          <td class="calendar-legend-block text-left"><span class="calendar-legend" ng-style="calendarStyle(calendar)" translate> {{ calendar.text_hidden ? '' : 'app.admin.icalendar.example' }}</span>
           <td class="calendar-actions">
             <button class="btn btn-info" ng-click="sync(calendar)"><i class="fa fa-refresh"></i></button>
             <button class="btn btn-danger" ng-click="delete(calendar)"><i class="fa fa-trash"></i></button>
@@ -49,45 +49,45 @@
         </tbody>
       </table>
       <form class="calendar-form" name="newImportForm">
-        <h4 translate>{{ 'icalendar.new_import' }}</h4>
+        <h4 translate>{{ 'app.admin.icalendar.new_import' }}</h4>
         <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-font"></i>
           </div>
-          <input type="text" ng-model="newCalendar.name" class="form-control" placeholder="{{ 'icalendar.name' | translate }}" required>
+          <input type="text" ng-model="newCalendar.name" class="form-control" placeholder="{{ 'app.admin.icalendar.name' | translate }}" required>
         </div>
         <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-link"></i>
           </div>
-          <input type="url" ng-model="newCalendar.url" class="form-control" placeholder="{{ 'icalendar.url' | translate }}" required>
+          <input type="url" ng-model="newCalendar.url" class="form-control" placeholder="{{ 'app.admin.icalendar.url' | translate }}" required>
         </div>
         <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-paint-brush"></i>
           </div>
-          <input type="text" minicolors ng-model="newCalendar.color" class="form-control" placeholder="{{ 'icalendar.color' | translate}}" required/>
+          <input type="text" minicolors ng-model="newCalendar.color" class="form-control" placeholder="{{ 'app.admin.icalendar.color' | translate}}" required/>
         </div>
         <div class="input-group">
           <div class="input-group-addon">
             <i class="fa fa-paint-brush"></i>
           </div>
-          <input type="text" minicolors ng-model="newCalendar.text_color" class="form-control" placeholder="{{ 'icalendar.text_color' | translate}}" ng-required="!newCalendar.text_hidden"/>
+          <input type="text" minicolors ng-model="newCalendar.text_color" class="form-control" placeholder="{{ 'app.admin.icalendar.text_color' | translate}}" ng-required="!newCalendar.text_hidden"/>
         </div>
         <div class="input-group">
-          <label for="hideText" class="control-label m-r" translate>{{ 'icalendar.hide_text' }}</label>
+          <label for="hideText" class="control-label m-r" translate>{{ 'app.admin.icalendar.hide_text' }}</label>
           <input bs-switch
                  ng-model="newCalendar.text_hidden"
                  id="hideText"
                  type="checkbox"
                  class="form-control"
-                 switch-on-text="{{ 'icalendar.hidden' | translate }}"
-                 switch-off-text="{{ 'icalendar.shown' | translate }}"
+                 switch-on-text="{{ 'app.admin.icalendar.hidden' | translate }}"
+                 switch-off-text="{{ 'app.admin.icalendar.shown' | translate }}"
                  switch-animate="true"/>
         </div>
         <div class="m-t text-right">
           <button role="button" class="btn btn-warning" ng-click="save()" ng-disabled="newImportForm.$invalid" translate>
-            {{ 'confirm' }}
+            {{ 'app.shared.buttons.confirm' }}
           </button>
         </div>
       </form>

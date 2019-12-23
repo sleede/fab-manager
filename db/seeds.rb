@@ -425,8 +425,8 @@ Stylesheet.build_sheet!
 
 unless Setting.find_by(name: 'training_information_message').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_information_message')
-  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui"+
-                  ' proposent des conditions avantageuses sur le prix des formations et les heures machines.'
+  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui" \
+                  ' proposent des conditions avantageuses sur le prix des formations et les créneaux machines.'
   setting.save
 end
 

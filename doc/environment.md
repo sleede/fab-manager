@@ -325,7 +325,7 @@ Configure the first day of the week in your locale zone (generally monday or sun
     D3_DATE_FORMAT
 
 Date format for dates displayed in statistics charts.
-See [D3 Wiki](https://github.com/mbostock/d3/wiki/Time-Formatting#format) for available formats.
+See [D3 Wiki](https://github.com/d3/d3-time-format/blob/v2.2.2/README.md#locale_format) for available formats.
 <a name="UIB_DATE_FORMAT"></a>
 
     UIB_DATE_FORMAT
@@ -340,7 +340,13 @@ See [AngularUI documentation](https://angular-ui.github.io/bootstrap/#uibdatepar
 
 Date format for dates shown in exported Excel files (eg. statistics)
 See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a list a available formats.
+<a name="ENABLE_IN_CONTEXT_TRANSLATION"></a>
 
+    ENABLE_IN_CONTEXT_TRANSLATION
+
+If set to `true`, and the application in started into a staging environment, this will enable the Crowdin In-context translation layer for the front-end application.
+See [Crowdin documentation](https://support.crowdin.com/in-context-localization/) for more details about this.
+Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
 

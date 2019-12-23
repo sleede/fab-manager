@@ -149,7 +149,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                 $uibModalInstance.close(user);
               } else {
                 // the user was not saved in database, something wrong occurred
-                growl.error(_t('unexpected_error_occurred'));
+                growl.error(_t('app.public.common.unexpected_error_occurred'));
               }
             }, function (error) {
               // creation failed...
@@ -204,7 +204,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           };
         }]
       }).result['finally'](null).then(function () {
-        growl.success(_t('your_password_was_successfully_changed'));
+        growl.success(_t('app.public.common.your_password_was_successfully_changed'));
         return Auth.login().then(function (user) {
           $scope.setCurrentUser(user);
         }, function (error) {
@@ -325,7 +325,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             angular.forEach(notifications.notifications, function (n) { toDisplay.push(n); });
 
             if (toDisplay.length < notifications.totals.unread) {
-              toDisplay.push({ message: { description: _t('and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }, 'messageformat') } });
+              toDisplay.push({ message: { description: _t('app.public.common.and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }) } });
             }
 
             angular.forEach(toDisplay, function (notification) { growl.info(notification.message.description); });
@@ -375,7 +375,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               console.error(`Authentication failed: ${JSON.stringify(error)}`);
               $scope.alerts = [];
               return $scope.alerts.push({
-                msg: _t('wrong_email_or_password'),
+                msg: _t('app.public.common.wrong_email_or_password'),
                 type: 'danger'
               });
             });
@@ -418,13 +418,13 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                 $scope.alerts = [];
                 return $http.post('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function () {
                   $scope.alerts.push({
-                    msg: _t('your_email_address_is_unknown'),
+                    msg: _t('app.public.common.your_email_address_is_unknown'),
                     type: 'danger'
                   });
                 });
               };
             }]
-          }).result['finally'](null).then(function () { growl.info(_t('you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
+          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
         }
       });
       // otherwise the user just closed the modal

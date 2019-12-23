@@ -1,63 +1,63 @@
-<h2 translate>{{ 'plan_form.general_information' }}</h2>
+<h2 translate>{{ 'app.shared.plan.general_information' }}</h2>
 <input type="hidden" name="_method" value="{{method}}">
 
 <div class="form-group" ng-class="{'has-error': planForm['plan[base_name]'].$dirty && planForm['plan[base_name]'].$invalid}">
-    <label for="plan[base_name]">{{ 'plan_form.name' | translate }} *</label>
+    <label for="plan[base_name]">{{ 'app.shared.plan.name' | translate }} *</label>
     <input type="text" id="plan[base_name]"
            name="plan[base_name]"
            class="form-control"
            ng-maxlength="24"
            ng-model="plan.base_name"
            required="required"/>
-    <span class="help-block error" ng-show="planForm['plan[base_name]'].$dirty && planForm['plan[base_name]'].$error.required" translate>{{ 'plan_form.name_is_required' }}</span>
-    <span class="help-block error" ng-show="planForm['plan[base_name]'].$dirty && planForm['plan[base_name]'].$error.maxlength" translate>{{ 'plan_form.name_length_must_be_less_than_24_characters' }}</span>
+    <span class="help-block error" ng-show="planForm['plan[base_name]'].$dirty && planForm['plan[base_name]'].$error.required" translate>{{ 'app.shared.plan.name_is_required' }}</span>
+    <span class="help-block error" ng-show="planForm['plan[base_name]'].$dirty && planForm['plan[base_name]'].$error.maxlength" translate>{{ 'app.shared.plan.name_length_must_be_less_than_24_characters' }}</span>
 </div>
 <div class="form-group" ng-class="{'has-error': planForm['plan[type]'].$dirty && planForm['plan[type]'].$invalid}">
-    <label for="plan[type]">{{ 'plan_form.type' | translate }} *</label>
+    <label for="plan[type]">{{ 'app.shared.plan.type' | translate }} *</label>
     <select id="plan[type]"
             name="plan[type]"
             class="form-control"
             ng-model="plan.type"
             required="required"
             ng-disabled="method == 'PATCH'">
-        <option value="Plan" ng-selected="plan.type == 'Plan'" translate>{{ 'standard' }}</option>
-        <option value="PartnerPlan" ng-selected="plan.type == 'PartnerPlan'" translate>{{ 'partner' }}</option>
+        <option value="Plan" ng-selected="plan.type == 'Plan'" translate>{{ 'app.shared.plan.standard' }}</option>
+        <option value="PartnerPlan" ng-selected="plan.type == 'PartnerPlan'" translate>{{ 'app.shared.plan.partner' }}</option>
     </select>
-    <span class="help-block error" ng-show="planForm['plan[type]'].$dirty && planForm['plan[type]'].$error.required" translate>{{ 'plan_form.type_is_required' }}</span>
+    <span class="help-block error" ng-show="planForm['plan[type]'].$dirty && planForm['plan[type]'].$error.required" translate>{{ 'app.shared.plan.type_is_required' }}</span>
 </div>
 <div class="form-group" ng-class="{'has-error': planForm['plan[group_id]'].$dirty && planForm['plan[group_id]'].$invalid}">
-    <label for="plan[group_id]">{{ 'plan_form.group' | translate }} *</label>
+    <label for="plan[group_id]">{{ 'app.shared.plan.group' | translate }} *</label>
     <select id="plan[group_id]"
             name="plan[group_id]"
             class="form-control"
             ng-model="plan.group_id"
             required="required"
             ng-disabled="method == 'PATCH'">
-        <option value="all" translate>{{ 'plan_form.transversal_all_groups' }}</option>
+        <option value="all" translate>{{ 'app.shared.plan.transversal_all_groups' }}</option>
         <optgroup label="Groupes">
             <option ng-repeat="group in groups" value="{{group.id}}" ng-selected="plan.group_id == group.id">{{group.name}}</option>
         </optgroup>
     </select>
-    <span class="help-block" ng-show="planForm['plan[group_id]'].$dirty && planForm['plan[group_id]'].$error.required" translate>{{ 'plan_form.group_is_required' }}</span>
+    <span class="help-block" ng-show="planForm['plan[group_id]'].$dirty && planForm['plan[group_id]'].$error.required" translate>{{ 'app.shared.plan.group_is_required' }}</span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': planForm['plan[interval]'].$dirty && planForm['plan[interval]'].$invalid}">
-    <label for="plan[interval]">{{ 'plan_form.period' | translate }} *</label>
+    <label for="plan[interval]">{{ 'app.shared.plan.period' | translate }} *</label>
     <select id="plan[interval]"
             name="plan[interval]"
             class="form-control"
             ng-model="plan.interval"
             ng-disabled="method == 'PATCH'"
             required="required">
-        <option value="week" ng-selected="plan.interval == 'week'" translate>{{ 'plan_form.week' }}</option>
-        <option value="month" ng-selected="plan.interval == 'month'" translate>{{ 'plan_form.month' }}</option>
-        <option value="year" ng-selected="plan.interval == 'year'" translate>{{ 'plan_form.year' }}</option>
+        <option value="week" ng-selected="plan.interval == 'week'" translate>{{ 'app.shared.plan.week' }}</option>
+        <option value="month" ng-selected="plan.interval == 'month'" translate>{{ 'app.shared.plan.month' }}</option>
+        <option value="year" ng-selected="plan.interval == 'year'" translate>{{ 'app.shared.plan.year' }}</option>
     </select>
-    <span class="help-block" ng-show="planForm['plan[interval]'].$dirty && planForm['plan[interval]'].$error.required" translate>{{ 'plan_form.period_is_required' }}</span>
+    <span class="help-block" ng-show="planForm['plan[interval]'].$dirty && planForm['plan[interval]'].$error.required" translate>{{ 'app.shared.plan.period_is_required' }}</span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': planForm['plan[interval_count]'].$dirty && planForm['plan[interval_count]'].$invalid}">
-  <label for="plan[interval]">{{ 'plan_form.number_of_periods' | translate }} *</label>
+  <label for="plan[interval]">{{ 'app.shared.plan.number_of_periods' | translate }} *</label>
   <input id="plan[interval_count]"
          name="plan[interval_count]"
          class="form-control"
@@ -66,12 +66,12 @@
          ng-disabled="method == 'PATCH'"
          required="required"
          min="1"/>
-  <span class="help-block" ng-show="planForm['plan[interval_count]'].$dirty && planForm['plan[interval_count]'].$error.required" translate>{{ 'plan_form.number_of_periods_is_required' }}</span>
+  <span class="help-block" ng-show="planForm['plan[interval_count]'].$dirty && planForm['plan[interval_count]'].$error.required" translate>{{ 'app.shared.plan.number_of_periods_is_required' }}</span>
 </div>
 
 <div class="form-group">
   <div class="input-group" ng-class="{'has-error': planForm['plan[amount]'].$dirty && planForm['plan[amount]'].$invalid}">
-      <label for="plan[amount]">{{ 'plan_form.subscription_price' | translate }} *</label>
+      <label for="plan[amount]">{{ 'app.shared.plan.subscription_price' | translate }} *</label>
       <div class="input-group">
           <span class="input-group-addon">{{currencySymbol}}</span>
           <input id="plan[amount]"
@@ -81,40 +81,40 @@
                  ng-required="true"
                  ng-model="plan.amount"/>
       </div>
-      <span class="help-block" ng-show="planForm['plan[amount]'].$dirty && planForm['plan[amount]'].$error.required" translate>{{ 'plan_form.price_is_required' }}</span>
+      <span class="help-block" ng-show="planForm['plan[amount]'].$dirty && planForm['plan[amount]'].$error.required" translate>{{ 'app.shared.plan.price_is_required' }}</span>
   </div>
 </div>
 
 <div class="form-group">
-  <label translate>{{ 'plan_form.visual_prominence_of_the_subscription' }}</label>
+  <label translate>{{ 'app.shared.plan.visual_prominence_of_the_subscription' }}</label>
     <input ng-model="plan.ui_weight"
            type="number"
            name="plan[ui_weight]"
            class="form-control">
     <span class="help-block">
-      {{ 'plan_form.on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list' | translate }}
-      {{ 'plan_form.an_evelated_number_means_a_higher_prominence' | translate }}
+      {{ 'app.shared.plan.on_the_subscriptions_page_the_most_prominent_subscriptions_will_be_placed_at_the_top_of_the_list' | translate }}
+      {{ 'app.shared.plan.an_evelated_number_means_a_higher_prominence' | translate }}
     </span>
 </div>
 
 <div class="input-group m-t-md">
-    <label for="plan[is_rolling]" class="control-label m-r-md">{{ 'plan_form.rolling_subscription' | translate }} *</label>
+    <label for="plan[is_rolling]" class="control-label m-r-md">{{ 'app.shared.plan.rolling_subscription' | translate }} *</label>
     <input bs-switch
            ng-model="plan.is_rolling"
            id="plan[is_rolling]"
            ng-if="method != 'PATCH'"
            type="checkbox"
            class="form-control"
-           switch-on-text="{{ 'yes' | translate }}"
-           switch-off-text="{{ 'no' | translate }}"
+           switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+           switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
            switch-animate="true"
            ng-true-value="'true'"
            ng-false-value="'false'"/>
     <span ng-if="method == 'PATCH'">{{ (plan.is_rolling ? 'yes' : 'no') | translate }}</span>
     <input type="hidden" name="plan[is_rolling]" value="{{plan.is_rolling}}"/>
     <span class="help-block">
-      {{ 'plan_form.a_rolling_subscription_will_begin_the_day_of_the_first_training' | translate }}
-      {{ 'plan_form.otherwise_it_will_begin_as_soon_as_it_is_bought' | translate }}
+      {{ 'app.shared.plan.a_rolling_subscription_will_begin_the_day_of_the_first_training' | translate }}
+      {{ 'app.shared.plan.otherwise_it_will_begin_as_soon_as_it_is_bought' | translate }}
     </span>
 </div>
 
@@ -122,13 +122,13 @@
 <!-- PDF description attachement -->
 <input type="hidden" ng-model="plan.plan_file_attributes.id" name="plan[plan_file_attributes][id]" ng-value="plan.plan_file_attributes.id" />
 <input type="hidden" ng-model="plan.plan_file_attributes._destroy" name="plan[plan_file_attributes][_destroy]" ng-value="plan.plan_file_attributes._destroy"/>
-<label class="m-t-md" translate>{{ 'plan_form.information_sheet' }}</label>
+<label class="m-t-md" translate>{{ 'app.shared.plan.information_sheet' }}</label>
 <div class="fileinput input-group" data-provides="fileinput" ng-class="fileinputClass(plan.plan_file_attributes)">
     <div class="form-control" data-trigger="fileinput">
         <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment || plan.plan_file_attributes.attachment_identifier}}</span>
     </div>
-    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'plan_form.attach_an_information_sheet' }}</span>
-    <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file"
+    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.plan.attach_an_information_sheet' }}</span>
+    <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file"
                                                                            name="plan[plan_file_attributes][attachment]"
                                                                            accept="image/*, application/pdf"></span>
     <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file || plan.plan_file_attributes)"><i class="fa fa-trash-o"></i></a>
@@ -136,7 +136,7 @@
 
 <div class="form-group m-t-md" ng-show="plan.type == 'PartnerPlan' && method != 'PATCH'">
     <input type="hidden" ng-model="plan.partnerId" name="plan[partner_id]" ng-value="plan.partnerId" />
-    <label for="plan[partner_id]">{{ 'plan_form.notified_partner' | translate }} *</label>
+    <label for="plan[partner_id]">{{ 'app.shared.plan.notified_partner' | translate }} *</label>
     <div class="input-group">
         <select class="form-control"
                 ng-model="plan.partnerId"
@@ -145,10 +145,10 @@
             <option value=""></option>
         </select>
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="openPartnerNewModal()"><i class="fa fa-user-plus"></i> {{ 'plan_form.new_user' | translate }}</button>
+          <button class="btn btn-default" type="button" ng-click="openPartnerNewModal()"><i class="fa fa-user-plus"></i> {{ 'app.shared.plan.new_user' | translate }}</button>
         </span>
     </div>
-    <span class="help-block" translate>{{ 'plan_form.as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user' }}</span>
+    <span class="help-block" translate>{{ 'app.shared.plan.as_part_of_a_partner_subscription_some_notifications_may_be_sent_to_this_user' }}</span>
 </div>
 
 <div class="form-group" ng-show="plan.partners">

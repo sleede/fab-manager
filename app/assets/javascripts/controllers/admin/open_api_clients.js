@@ -37,12 +37,12 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       if (client.id != null) {
         OpenAPIClient.update({ id: client.id }, { open_api_client: client }, function (clientResp) {
           client = clientResp;
-          return growl.success(_t('client_successfully_updated'));
+          return growl.success(_t('app.admin.open_api_clients.client_successfully_updated'));
         });
       } else {
         OpenAPIClient.save({ open_api_client: client }, function (client) {
           $scope.clients.push(client);
-          return growl.success(_t('client_successfully_created'));
+          return growl.success(_t('app.admin.open_api_clients.client_successfully_created'));
         });
       }
 
@@ -61,8 +61,8 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_open_api_client')
+              title: _t('app.admin.open_api_clients.confirmation_required'),
+              msg: _t('app.admin.open_api_clients.do_you_really_want_to_delete_this_open_api_client')
             };
           }
         }
@@ -70,7 +70,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       , () =>
         OpenAPIClient.delete({ id: $scope.clients[index].id }, function () {
           $scope.clients.splice(index, 1);
-          return growl.success(_t('client_successfully_deleted'));
+          return growl.success(_t('app.admin.open_api_clients.client_successfully_deleted'));
         })
       );
 
@@ -79,8 +79,8 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_revoke_this_open_api_access')
+              title: _t('app.admin.open_api_clients.confirmation_required'),
+              msg: _t('app.admin.open_api_clients.do_you_really_want_to_revoke_this_open_api_access')
             };
           }
         }
@@ -88,7 +88,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       , () =>
         OpenAPIClient.resetToken({ id: client.id }, {}, function (clientResp) {
           client.token = clientResp.token;
-          return growl.success(_t('access_successfully_revoked'));
+          return growl.success(_t('app.admin.open_api_clients.access_successfully_revoked'));
         })
       );
   }
