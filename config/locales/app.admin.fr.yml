@@ -825,7 +825,7 @@ fr:
         eg: "ex :"
         about: "A propos"
         male_preposition: "du"
-        female_preposition: "the"
+        female_preposition: "de la"
         neutral_preposition: ""
         customize_information_messages: "Personnaliser les messages d'informations"
         message_of_the_machine_booking_page: "Message sur la page de réservation d'une machine :"
