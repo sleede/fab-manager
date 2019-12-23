@@ -146,36 +146,36 @@ ach:
   number:
     currency:
       format:
-        delimiter: "crwdns4407:0crwdne4407:0"
-        format: "crwdns4409:0%ucrwdnd4409:0%ncrwdne4409:0"
-        precision: 0
-        separator: "crwdns4413:0crwdne4413:0"
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
         significant: false
         strip_insignificant_zeros: false
-        unit: "crwdns4415:0crwdne4415:0"
+        unit: "$"
     format:
-      delimiter: "crwdns4417:0crwdne4417:0"
-      precision: 0
-      separator: "crwdns4421:0crwdne4421:0"
+      delimiter: ","
+      precision: 3
+      separator: "."
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: "crwdns4423:0%ncrwdnd4423:0%ucrwdne4423:0"
+        format: "%n %u"
         units:
           billion: crwdns4425:0crwdne4425:0
           million: crwdns4427:0crwdne4427:0
           quadrillion: crwdns4429:0crwdne4429:0
           thousand: crwdns4431:0crwdne4431:0
           trillion: crwdns4433:0crwdne4433:0
-          unit: 'crwdns4435:0crwdne4435:0'
+          unit: ''
       format:
-        delimiter: 'crwdns4437:0crwdne4437:0'
-        precision: 0
+        delimiter: ''
+        precision: 3
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "crwdns4441:0%ncrwdnd4441:0%ucrwdne4441:0"
+        format: "%n %u"
         units:
           byte:
             one: crwdns4443:1crwdne4443:1
@@ -186,20 +186,20 @@ ach:
           tb: crwdns4451:0crwdne4451:0
     percentage:
       format:
-        delimiter: 'crwdns4453:0crwdne4453:0'
-        format: "crwdns4455:0%ncrwdne4455:0"
+        delimiter: ''
+        format: "%n%"
     precision:
       format:
-        delimiter: 'crwdns4457:0crwdne4457:0'
+        delimiter: ''
   support:
     array:
       last_word_connector: "crwdns4459:0crwdne4459:0"
       two_words_connector: "crwdns4461:0crwdne4461:0"
       words_connector: "crwdns4463:0crwdne4463:0"
   time:
-    am: crwdns4465:0crwdne4465:0
+    am: am
     formats:
-      default: "crwdns4467:0%acrwdnd4467:0%dcrwdnd4467:0%bcrwdnd4467:0%Ycrwdnd4467:0%H:%M:%Scrwdnd4467:0%zcrwdne4467:0"
-      long: "crwdns4469:0%Bcrwdnd4469:0%dcrwdnd4469:0%Ycrwdnd4469:0%H:%Mcrwdne4469:0"
-      short: "crwdns4471:0%dcrwdnd4471:0%bcrwdnd4471:0%H:%Mcrwdne4471:0"
-    pm: crwdns4473:0crwdne4473:0
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm
