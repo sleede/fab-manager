@@ -2,21 +2,19 @@ es:
   app:
     admin:
       machines_new:
-        # add a new machine
+        #add a new machine
         declare_a_new_machine: "Declara una nueva máquina"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Cuidado al crear una nueva máquina, los precios están inicializados a 0 para todas las subscripciones."
         consider_changing_them_before_creating_any_reservation_slot: "Considera cambiarlos antes de crear cualquier ranura de reserva."
-
       machines_edit:
-        # machine edition
+        #machine edition
         machine_edit: "Editar una máquina"
-
       calendar:
-        # manage the trainings & machines slots
+        #manage the trainings & machines slots
         calendar_management: "Administración de calendario"
-        trainings: "Formación"
-        machines: "Máquinas"
-        spaces: "Espacios"
+        trainings: "Trainings"
+        machines: "Machines"
+        spaces: "Spaces"
         events: "Eventos"
         availabilities: "Disponibilidades"
         availabilities_notice: "Exportar a un libro de trabajo de Excel cada ranura disponible para reserva, y su ratio de ocupación."
@@ -34,15 +32,15 @@ es:
         deletion_failed: "Fallo al borrar."
         DATE_slot: "{DATE} espacio:"
         what_kind_of_slot_do_you_want_to_create: "¿Qué tipo de ranura desea crear??"
-        training: "Formación"
-        machine: "Máquina"
-        space: "Espacio"
+        training: "Training"
+        machine: "Machine"
+        space: "Space"
         next: "Siguiente >"
         previous: "< Anterior"
         select_some_machines: "Seleccione algunas máquinas"
         number_of_tickets: "Número de tickets: "
         adjust_the_opening_hours: "Ajustar el horario de apertura"
-        to_time: "to"  # context: hora. ej. "de 18:00 a 21:00"
+        to_time: "to\"  # context: hora. ej. \"de 18:00 a 21:00"
         restrict_this_slot_with_labels_optional: "Restringir esta ranura con etiquetas (opcional)"
         recurrence: "Recurrence"
         enabled: "Enabled"
@@ -86,8 +84,7 @@ es:
         edit_event: "Edit the event"
         view_reservations: "Ver reservas"
         legend: "leyenda"
-        and: "y"
-
+        and: "and"
       icalendar:
         icalendar_import: "iCalendar import"
         intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every nights and the events are shown in the public calendar."
@@ -108,9 +105,8 @@ es:
         confirmation_required: "Confirmation required"
         confirm_delete_import: "Do you really want to delete this iCalendar import?"
         delete_success: "iCalendar import successfully deleted"
-
       project_elements:
-        # management of the projects' components
+        #management of the projects' components
         name: "Name"
         projects_elements_management: "Gestión de elementos de proyectos"
         materials: "Materials"
@@ -121,13 +117,12 @@ es:
         description: "Description"
         add_a_new_licence: "Agregar una nueva licencia"
         manage_abuses: "Administrar informes"
-
       trainings:
-        # track and monitor the trainings
+        #track and monitor the trainings
         trainings_monitoring: "Trainings monitoring"
         trainings: "Trainings"
         add_a_new_training: "Add a new training"
-        name: "Nombre"
+        name: "Name"
         associated_machines: "Associated machines"
         number_of_tickets: "Number of tickets"
         select_a_training: "Select a training"
@@ -136,11 +131,11 @@ es:
         year_NUMBER: "Año {NUMBER}"
         month_of_NAME: "Mes of {NAME}"
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reservation} other{reservations}}"
-        none: "Nada"
+        none: "None"
         training_validation: "Validación de la formación"
-        training_of_the_DATE_TIME_html : "Training of the <strong>{DATE} - {TIME}</strong>"
+        training_of_the_DATE_TIME_html: "Training of the <strong>{DATE} - {TIME}</strong>"
         you_can_validate_the_training_of_the_following_members: "Puede validar la formación de los siguientes miembros:"
-        deleted_user: "Usario eliminado"
+        deleted_user: "Deleted user"
         no_reservation: "Sin reserva"
         validate_the_trainings: "Validar los entrenamientos"
         edition_of_the_description_tooltip: "Edición de la descripción tooltip"
@@ -154,15 +149,13 @@ es:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-
       trainings_new:
-        # create a new training
+        #create a new training
         add_a_new_training: "Add a new training"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Tenga cuidado, al crear una formación, sus precios de reserva se inicializan en cero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "No olvides cambiarlos antes de crear espacios para esta formación."
-
       events:
-        # events tracking and management
+        #events tracking and management
         events_monitoring: "Monitoreo de eventos"
         manage_filters: "Administrar filtros"
         fablab_events: "Eventos de Fablab"
@@ -174,8 +167,8 @@ es:
         on_DATE: "on {DATE}"
         from_DATE: "Desde {DATE}"
         from_TIME: "Desde {TIME}"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
-        to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
+        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
+        to_time: "to\"  # context: time. eg. \"from 18:00 to 21:00"
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -183,7 +176,7 @@ es:
         cancelled: "Cancelled"
         free_entry: "Free entry"
         free_admission: "Free admission"
-        view_reservations: "Ver reservas"
+        view_reservations: "View reservations"
         load_the_next_events: "Load the next events..."
         categories: "Categorías"
         add_a_category: "Añadir una categoría"
@@ -215,22 +208,19 @@ es:
         do_you_really_want_to_delete_this_price_category: "¿Desea realmente eliminar esta categoría de precios?"
         price_category_successfully_deleted: "Categoría de precio eliminada correctamente."
         price_category_deletion_failed: "Error al eliminar la categoría de precio."
-
       events_new:
-        # add a new event
+        #add a new event
         add_an_event: "Add an event"
-        none: "Nada"
+        none: "None"
         every_days: "Todos los dias"
         every_week: "Cada semana"
         every_month: "Cada mes"
         every_year: "Cada año"
-
       events_edit:
-        # edit an existing event
-        edit_the_event: "Editar el evento"
-
+        #edit an existing event
+        edit_the_event: "Edit the event"
       event_reservations:
-        # event reservations list
+        #event reservations list
         the_reservations: "Reservas :"
         user: "User"
         payment_date: "Fecha de pago"
@@ -240,38 +230,37 @@ es:
         no_reservations_for_now: "No hay reservas por ahora."
         back_to_monitoring: "Volver a monitorizar"
         canceled: "cancelada"
-
       pricing:
-        # subscriptions, prices, credits and coupons management
+        #subscriptions, prices, credits and coupons management
         pricing_management: "Gestión de precios"
-        subscriptions: "Suscripciones"
-        trainings: "Formaciones"
+        subscriptions: "Subscriptions"
+        trainings: "Trainings"
         list_of_the_subscription_plans: "Lista de los planes de suscripción"
         beware_the_subscriptions_are_disabled_on_this_application: "Atención, las suscripciones están inhabilitadas en esta aplicación."
         you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager: "Puede crear algunos, pero no estarán disponibles hasta que el proyecto sea reasignado por el administrador del servidor."
         for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later: "Por razones de seguridad, no cree suscripciones si no tiene la intención de usarlas más tarde."
         add_a_new_subscription_plan: "Agregar un nuevo plan de suscripción"
-        type: "Tipo"
+        type: "Type"
         partner: "Socio"
         standard: "Estándar"
-        name: "Nombre"
+        name: "Name"
         duration: "Duración"
-        group: "Grupo"
+        group: "Group"
         prominence: "Prominencia"
         price: "Precio"
         machine_hours: "Machine slots"
         these_prices_match_machine_hours_rates_: "Estos precios se ajustan a la tarifas de máquina por {DURATION} minutas"
         _without_subscriptions: "Sin suscripciones"
-        machines: "Máquinas"
+        machines: "Machines"
         credits: "Créditos"
-        subscription: "Suscripción"
+        subscription: "Subscription"
         related_trainings: "Formación relacionada"
         add_a_machine_credit: "Agregar un crédito de máquina"
-        machine: "Máquina"
+        machine: "Machine"
         hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Suscripciónes relacionada"
         please_specify_a_number: "Por favor, especifique un número."
-        none: "Nada"  # nota gramatical: concordancia con "formación".
+        none: '"Nada"'
         an_error_occurred_while_saving_the_number_of_credits: "Se ha producido un error al guardar el número de créditos."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "Se ha producido un error al eliminar el crédito con la {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "Se ha producido un error: no se puede encontrar el crédito a revocar."
@@ -291,87 +280,83 @@ es:
         status: "Estado"
         add_a_new_coupon: "Añadir un nuevo cupón"
         display_more_coupons: "Display the next coupons"
-        disabled: "Desactivado"
+        disabled: "Disabled"
         expired: "Expirado"
-        sold_out: "Agotado"
+        sold_out: "Sold out"
         active: "Activo"
         all: "Display all"
-        confirmation_required: "Confirmación requerida"
+        confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_coupon: "¿Desea realmente eliminar este cupón?"
         coupon_was_successfully_deleted: "El cupón se eliminó correctamente."
         unable_to_delete_the_specified_coupon_already_in_use: "No se puede eliminar el cupón especificado: ya se utiliza con algunas facturas."
         unable_to_delete_the_specified_coupon_an_unexpected_error_occurred: "No se pudo eliminar el cupón especificado: se produjo un error inesperado."
         send_a_coupon: "Enviar un cupón"
-        coupon: "Cupón"
+        coupon: "Coupon"
         usages: "Usos"
         unlimited: "Unlimited"
         coupon_successfully_sent_to_USER: "Cupón enviado correctamente a {USER}"
         an_error_occurred_unable_to_send_the_coupon: "Un error inesperado impidió el envío del cupón.."
         code: "Código"
-        enabled: "Habilitado"
+        enabled: "Enabled"
         validity_per_user: "Validez por usuario"
         once: "Sólo una vez"
         forever: "Cada uso"
         valid_until: "Válido hasta (incluido)"
-        spaces: "Espacios"
+        spaces: "Spaces"
         these_prices_match_space_hours_rates_: "Estos precios coinciden con las tarifas de espacio por {DURATION} minutas"
         add_a_space_credit: "Añadir un crédito de espacio"
-        space: "Espacio"
+        space: "Space"
         error_a_credit_linking_this_space_with_that_subscription_already_exists: "Error: un crédito que vincula este espacio con esa suscripción ya existe."
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-
       coupons_new:
-        # ajouter un code promotionnel
+        #ajouter un code promotionnel
         add_a_coupon: "Añadir un cupón"
         unable_to_create_the_coupon_check_code_already_used: "No se puede crear el cupón. Compruebe que el código no esté ya utilizado"
-
       coupons_edit:
-        # mettre à jour un code promotionnel
+        #mettre à jour un code promotionnel
         coupon: "Coupon:"
         unable_to_update_the_coupon_an_error_occurred: "No se puede actualizar el cupón: se ha producido un error."
-
       plans:
         new:
-          # add a subscription plan on the platform
+          #add a subscription plan on the platform
           add_a_subscription_plan: "Agregar un plan de suscripción"
           unable_to_create_the_subscription_please_try_again: "No se puede crear el plan de suscripción. Por favor, inténtelo de nuevo."
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "Suscripción(es) creada correctamente. No olvide redefinir los precios."
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "No se puede guardar este usuario. Compruebe que no hay un usuario ya definido con el mismo nombre."
         edit:
-          # edit a subscription plan / machine slot prices
+          #edit a subscription plan / machine slots prices
           subscription_plan: "Plan de suscripción:"
           prices: "Precios"
           copy_prices_from: "Copia los precios desde"
-          machines: "Máquinas"
-          machine: "Máquina"
+          machines: "Machines"
+          machine: "Machine"
           hourly_rate: "Tarifa por slot"
-          spaces: "Espacios"
-          space: "Espacio"
+          spaces: "Spaces"
+          space: "Space"
           unable_to_save_subscription_changes_please_try_again: "No se pueden guardar los cambios de suscripción. Por favor, inténtelo de nuevo."
           subscription_successfully_changed: "Suscripción cambiada correctamente."
-
       invoices:
-        # list of all invoices & invoicing parameters
+        #list of all invoices & invoicing parameters
         invoices: "Facturas"
-        accounting_periods: "Accounting periods"       # missing translation
+        accounting_periods: "Accounting periods"
         invoices_list: "Lista de facturas"
         filter_invoices: "Filtrar facturas"
         invoice_num_: "Factura #:"
         customer_: "Cliente:"
         date_: "Fecha:"
         invoice_num: "Factura #"
-        date: "Día"
-        price: "Precio"
-        customer: "Cliente"
+        date: "Date"
+        price: "Price"
+        customer: "Customer"
         download_the_invoice: "Descargar factura"
         download_the_credit_note: "Descargar nota de crédito"
         credit_note: "Nota de crédito"
         display_more_invoices: "Mostrar más facturas..."
         no_invoices_for_now: "Sin facturas por ahora."
         invoicing_settings: "Configuración de facturación"
-        warning_invoices_disabled: "Warning : invoices are not enabled. No invoices will be generated by Fab-manager. Nevertheless, you must correctly fill the information below, especially VAT."       # missing translation
+        warning_invoices_disabled: "Warning : invoices are not enabled. No invoices will be generated by Fab-manager. Nevertheless, you must correctly fill the information below, especially VAT."
         change_logo: "Cambio de logotipo"
         john_smith: "John Smith"
         john_smith_at_example_com: "jean.smith@example.com"
@@ -381,24 +366,24 @@ es:
         order_num: "Orden #:"
         invoice_issued_on_DATE_at_TIME: "Factura emitida el {DATE} a las {TIME}"
         object_reservation_of_john_smith_on_DATE_at_TIME: "Objeto: Reserva de John Smith el {DATE} a las {TIME}"
-        order_summary: "Resumen del pedido:"
-        details: "Detalles"
-        amount: "Cantidad"
+        order_summary: "Order summary:"
+        details: "Details"
+        amount: "Amount"
         machine_booking-3D_printer: "Reserva de la máquina- Impresora 3D"
-        total_amount: "Cantidad total"
-        total_including_all_taxes: "Total incl. todos los impuestos"
+        total_amount: "Total amount"
+        total_including_all_taxes: "Total incl. all taxes"
         VAT_disabled: "IVA desactivado"
         VAT_enabled: "IVA activado"
         including_VAT: "Incluido IVA"
-        including_total_excluding_taxes: "Incluido Total excl. impuestos"
+        including_total_excluding_taxes: "Including Total excl. taxes"
         including_amount_payed_on_ordering: "Incluido el monto pagado en el pedido"
         settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT: "Liquidación por tarjeta de débito el {DATE} a las {TIME}, por una cantidad de {AMOUNT}"
         important_notes: "Notas importantes"
         address_and_legal_information: "Dirección e información legal"
         invoice_reference: "Referencia de factura"
-        year: "Año"
-        month: "Mes"
-        day: "Día"
+        year: "Year"
+        month: "Month"
+        day: "Day"
         num_of_invoice: "# de factura"
         online_sales: "Ventas en línea"
         wallet: "Cartera"
@@ -428,19 +413,19 @@ es:
         eg_RA_will_add_A_to_the_refund_invoices: '(ed. R[/A] añadirá "/A" a las facturas de reembolso)'
         add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Añadir un aviso con respecto a la cartera, sólo si la factura es de interés."
         eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet: '(eg. W[/PM] añadirá "/PM" a las facturas liquidadas con cartera)'
-        code: "Código"
+        code: "Code"
         enable_the_code: "Habilitar el código"
-        enabled: "Habilitado"
-        disabled: "Desactivado"
+        enabled: "Enabled"
+        disabled: "Disabled"
         order_number: "Número de orden"
         elements: "Elementos"
-        VAT: "IVA"
+        VAT: "VAT"
         enable_VAT: "Habilitar IVA"
         VAT_rate: "Ratio IVA"
         VAT_history: "Historial de ratios de IVA"
         changed_at: "Cambiado en"
         changed_by: "Por"
-        deleted_user: "Usario eliminado"
+        deleted_user: "Deleted user"
         refund_invoice_successfully_created: "Factura de reembolso creada correctamente."
         create_a_refund_on_this_invoice: "Crear un reembolso en esta factura"
         creation_date_for_the_refund: "Fecha de creación del reembolso"
@@ -448,10 +433,10 @@ es:
         refund_mode: "Modo de reembolso:"
         do_you_want_to_disable_the_user_s_subscription: "¿Quieres inhabilitar la suscripción del usuario?:"
         elements_to_refund: "Elementos a reembolsar"
-        description: "Descripción"
+        description: "Description"
         description_optional: "Descripción (opcional):"
         will_appear_on_the_refund_invoice: "Aparecerá en la factura de reembolso."
-        none: "Nada"  # grammar note: concordancia con "medio de pago""
+        none: "Nada\"  # grammar note: concordancia con \"medio de pago\""
         by_cash: "En efectivo"
         by_cheque: "Mediante cheque"
         by_transfer: "Por transferencia"
@@ -478,7 +463,7 @@ es:
         an_error_occurred_while_saving_the_address_and_the_legal_information: "Se ha producido un error al guardar la dirección y la información legal."
         logo_successfully_saved: "Logo guardado correctamente."
         an_error_occurred_while_saving_the_logo: "Se ha producido un error al guardar el logotipo.."
-        online_payment: "Pago online"
+        online_payment: "Online payment"
         close_accounting_period: "Close an accounting period"
         close_from_date: "Close from"
         start_date_is_required: "Start date is required"
@@ -545,7 +530,7 @@ es:
         codes_customization_success: "Customization of accounting codes successfully saved."
         export_accounting_data: "Export accounting data"
         export_to: "Export to the accounting software"
-        export_is_running: "Exportando, será notificado cuando esté listo."
+        export_is_running: "Export is running. You'll be notified when it's ready."
         acd: "ACD"
         export_form_date: "Export from"
         export_to_date: "Export until"
@@ -569,28 +554,28 @@ es:
           debit_euro: "Euro debit"
           credit_euro: "Euro credit"
           lettering: "Lettering"
-
       members:
-        # management of users, labels, groups, and so on
+        #management of users, labels, groups, and so on
         users_management: "Gestión de usuarios"
-        members: "Miembros"
+        members: "Members"
         subscriptions: "Subscriptions"
         search_for_an_user: "Buscar un usuario"
         add_a_new_member: "Añadir un nuevo miembro"
-        reservations: "Reservas"
+        reservations: "Reservations"
         surname: "Last name"
         first_name: "First name"
         email: "Email"
-        phone: "Teléfono"
+        phone: "Phone"
         user_type: "Tipo de usuario"
         subscription: "Subscription"
         display_more_users: "Mostrar más usuarios...."
-        administrators: "Administradores"
+        administrators: "Administrators"
         search_for_an_administrator: "Buscar un administrador"
         add_a_new_administrator: "Agregar un nuevo administrador"
         groups: "Grupos"
         tags: "Tags"
         authentication: "Autenticación"
+        confirmation_required: "Confirmation required"
         confirm_delete_member: "¿Desea realmente eliminar este usario? Esto no se puede deshacer."
         member_successfully_deleted: "Usario eliminado correctamente."
         unable_to_delete_the_member: "No se puede eliminar el usario."
@@ -619,7 +604,7 @@ es:
           type: "Type"
           state: "Estado"
           unknown: "Desconocido: "
-          active: "Activo"
+          active: "Active"
           pending: "Pendiente"
           previous_provider: "Proveedor anteriorr"
           confirmation_required: "Delete the provider?"
@@ -645,14 +630,12 @@ es:
           status_enabled: "Enabled"
           status_disabled: "Disabled"
           status_all: "All"
-
       members_new:
-        # add a member
+        #add a member
         add_a_member: "Agregar un miembro"
         user_is_an_organization: "El usuario es una organización"
-
       members_import:
-        # members bulk import
+        #members bulk import
         import_members: "Import members"
         info: "You can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, the trainings and the tags of the members."
         required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."
@@ -676,9 +659,8 @@ es:
         update_on_id: "ID"
         update_on_username: "Username"
         update_on_email: "Email address"
-
       members_import_result:
-        # import results
+        #import results
         import_results: "Import results"
         import_details: "Import #{ID}, of {DATE}, initiated by {USER}"
         results: "Results"
@@ -688,9 +670,8 @@ es:
         success: "Success"
         failed: "Failed"
         error_details: "Error's details:"
-
       members_edit:
-        # edit a member
+        #edit a member
         subscription: "Subscription"
         duration: "Duración:"
         expires_at: "Caduca en:"
@@ -703,22 +684,22 @@ es:
         no_trainings: "No trainings"
         next_trainings: "Próxima formación"
         passed_trainings: "Formación completada"
-        validated_trainings: "Formación validada"
-        events: "Eventos"
+        validated_trainings: "Validated trainings"
+        events: "Events"
         next_events: "Próximos eventos"
         no_upcoming_events: "No hay próximos eventos"
         NUMBER_full_price_tickets_reserved: "{NUMBER, plural, =0{} one{1 full price ticket reserved} other{{NUMBER} full price tickets reserved}}"
         NUMBER_NAME_tickets_reserved: "{NUMBER, plural, =0{} one{1 {NAME} ticket reserved} other{{NUMBER} {NAME} tickets reserved}}"
-        passed_events: "Eventos pasados"
+        passed_events: "Passed events"
         no_passed_events: "No passed events"
-        invoices: "Facturas"
-        invoice_num: "Factura #"
+        invoices: "Invoices"
+        invoice_num: "Invoice #"
         date: "Date"
         price: "Price"
         download_the_invoice: "Download the invoice"
         download_the_refund_invoice: "Descargar la factura de reembolso"
         no_invoices_for_now: "No invoices for now."
-        expiration_date: "Fecha de caducidad"
+        expiration_date: "Expiration date"
         you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days: "Usted intencionalmente decide extender la suscripción del usuario ofreciéndole días libres."
         credits_will_remain_unchanged: "El saldo de créditos gratuitos (entrenamiento / máquinas / espacios) del usuario permanecerá sin cambios."
         you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription: "Usted intencionalmente decide extender la suscripción del usuario al cobrarle de nuevo por su suscripción actual."
@@ -732,9 +713,8 @@ es:
         a_problem_occurred_while_taking_the_subscription: "Se ha producido un problema al realizar la suscripción."
         wallet: "Wallet"
         to_credit: 'Credit'
-
       admins_new:
-        # add a new administrator to the platform
+        #add a new administrator to the platform
         add_an_administrator: "Agregar un administrador"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "administrador creado correctamente. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} directivas de conexión por e-mail."
         failed_to_create_admin: "No se puede crear el administrador :"
@@ -751,12 +731,11 @@ es:
         birth_date: "Date of birth"
         address: "Address"
         phone_number: "Phone number"
-
       authentication_new:
-        # add a new authentication provider (SSO)
+        #add a new authentication provider (SSO)
         local_database: "Base de datos local"
         o_auth2: "OAuth 2.0"
-        add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"
+        add_a_new_authentication_provider: "Add a new authentication provider"
         a_local_database_provider_already_exists_unable_to_create_another: "A proveedor de \"Base de datos local\"  ya existe. No se puede crear otro."
         local_provider_successfully_saved: "Proveedor local guardado correctamente."
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor"
@@ -766,21 +745,19 @@ es:
         do_you_really_want_to_continue: "¿De verdad quieres continuar?"
         unsecured_oauth2_provider_successfully_added: "Proveedor de OAuth 2.0 no seguro, se ha agregado correctamente."
         oauth2_provider_successfully_added: "OAuth 2.0 proveedor agregado correctamente."
-
       authentication_edit:
-        # edit an authentication provider (SSO)
+        #edit an authentication provider (SSO)
         provider: "Proveedor :"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider"
         provider_successfully_updated: "Proveedor actualizado correctamente"
         an_error_occurred_unable_to_update_the_provider: "Se ha producido un error: no se puede actualizar el proveedor."
-
       statistics:
-        # statistics tables
+        #statistics tables
         statistics: "Statistics"
         evolution: "Evolución"
         age_filter: "Filtro de edad"
-        from_age: "Desde"  # contexto: edad. por ejemplo: de 8 a 40 años
-        to_age: "a"  # contexto: edad. por ejemplo: de 8 a 40 años
+        from_age: "From" #context: age. eg: from 8 to 40 years old
+        to_age: "a" #context: age. eg: from 8 to 40 years old
         _years_old: "años"
         start: "Principio:"
         end: "Final:"
@@ -789,8 +766,8 @@ es:
         criterion: "Criterio:"
         value: "Valor:"
         exclude: "Excluir"
-        from_date: "From" # context: date. eg: "from 01/01 to 01/05"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
+        from_date: "From\" # context: date. eg: \"from 01/01 to 01/05"
+        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
         entries: "Entradas:"
         revenue_: "Ingresos:"
         average_age: "Edad media:"
@@ -800,45 +777,43 @@ es:
         available_tickets: "Tickets disponibles para reservar:"
         date: "Date"
         user: "User"
-        gender: "Genero"
-        age: "Edad"
+        gender: "Gender"
+        age: "Age"
         type: "Type"
-        revenue: "Ingresos"
+        revenue: "Revenue"
         unknown: "Desconocido"
-        user_id: "ID de usuario"
+        user_id: "User ID"
         display_more_results: "Mostrar más resultados"
         export_statistics_to_excel: "Exportar estadísticas a Excel"
         export_all_statistics: "Exportar todas las estadísticas"
         export_the_current_search_results: "Exportar los resultados de búsqueda actuales"
         export: "Exportar"
-        deleted_user: "Usario eliminado"
+        deleted_user: "Deleted user"
         man: "Man"
         woman: "Woman"
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
-
       stats_graphs:
-        # statistics graphs
+        #statistics graphs
         statistics: "Statistics"
         data: "Datos"
-        day: "Dia"
-        week: "Semana"
-        from_date: "From" # context: date. eg: "from 01/01 to 01/05"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
+        day: "Day"
+        week: "Week"
+        from_date: "From\" # context: date. eg: \"from 01/01 to 01/05"
+        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
         month: "Month"
-        start: "Inicio:"
-        end: "Final:"
+        start: "Start:"
+        end: "End:"
         type: "Type"
-        revenue: "Ingresos"
+        revenue: "Revenue"
         top_list_of: "Lista top de"
         number: "Número"
-        week_short: "Semana"
+        week_short: "Week"
         week_of_START_to_END: "Semana del {START} a {END}"
         no_data_for_this_period: "No hay datos para este periodo"
         date: "Date"
-
       settings:
-        # global application parameters and customization
-        title: "Título"
+        #global application parameters and customization
+        title: "Title"
         customize_the_application: "Personalizar la aplicación"
         general: "General"
         fablab_title: "Título del FabLab"
@@ -850,7 +825,7 @@ es:
         eg: "ej:"
         about: "Sobre"
         male_preposition: "el"
-        female_preposition: "la"
+        female_preposition: "the"
         neutral_preposition: ""
         customize_information_messages: "Personalizar mensajes de información"
         message_of_the_machine_booking_page: "Mensaje de la página de reserva de la máquina:"
@@ -890,7 +865,7 @@ es:
         input_the_main_content: "Introduzca el contenido principal"
         drag_and_drop_to_insert_images: "Arrastrar y soltar para insertar imágenes"
         input_the_fablab_contacts: "Ingrese los contactos de FabLab"
-        reservations: "Reservas"
+        reservations: "Reservations"
         reservations_parameters: "Parámetros de reservas"
         confine_the_booking_agenda: "Confine la agenda de reserva"
         opening_time: "Hora de apertura"
@@ -901,8 +876,8 @@ es:
         ability_for_the_users_to_move_their_reservations: "Capacidad para que los usuarios muevan sus reservas"
         reservations_shifting: "Cambio de reservas"
         prior_period_hours: "Período anterior (horas)"
-        enabled: "Habilitado"
-        disabled: "Deshabilitado"
+        enabled: "Enabled"
+        disabled: "Disabled"
         ability_for_the_users_to_cancel_their_reservations: "Capacidad para que los usuarios cancelen sus reservas"
         reservations_cancelling: "Cancelaciones de reservas"
         reservations_reminders: "Recordatorios de reservas"
@@ -947,7 +922,7 @@ es:
         display_machines_sorted_by: "Ver máquinas ordenadas por"
         sort_by:
           default: "Defecto"
-          name: "Nombre"
+          name: "Name"
           created_at: "Fecha de creación"
           updated_at: "Fecha de actualización"
         privacy:
@@ -960,7 +935,6 @@ es:
           publish_will_notify: "Publish a new version will send a notification to every users."
           publish: "Publish"
           users_notified: "Platform users will be notified of the update."
-
       open_api_clients:
         add_new_client: "Crear un nuevo cliente de API"
         api_documentation: "Documentation API"
@@ -968,7 +942,7 @@ es:
         name: "Name"
         calls_count: "Número de llamadas"
         token: "Token"
-        created_at: "Fecha de creación"
+        created_at: "Creation date"
         reset_token: "revocar el acceso"
         client_name: "Nombre del cliente"
         confirmation_required: "Confirmation required"
@@ -978,21 +952,18 @@ es:
         client_successfully_updated: "Cliente actualizado correctamente."
         client_successfully_deleted: "Cliente borrado correctamente."
         access_successfully_revoked: "Acceso revocado correctamente."
-
       space_new:
-        # create a new space
+        #create a new space
         add_a_new_space: "Añadir un espacio nuevo"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "¡Cuidado! Al crear un nuevo espacio, sus precios se inicializan en 0 para todas las suscripciones."
         consider_changing_its_prices_before_creating_any_reservation_slot: "Considere cambiar sus precios antes de crear cualquier espacio de reserva."
         add_this_space: "Añadir este espacio"
-
       space_edit:
-        # modify an exiting space
+        #modify an exiting space
         edit_the_space_NAME: "Edit the space: {NAME}"
         validate_the_changes: "Validar los cambios"
-
       manage_abuses:
-        # process and delete abuses reports
+        #process and delete abuses reports
         abuses_list: "Lista de informes"
         no_reports: "No informes por ahora"
         published_by: "published by"
