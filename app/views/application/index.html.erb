@@ -14,7 +14,6 @@
   <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
   <% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation == 'true' %>
     <script type="text/javascript">
-      MessageFormat.locale.ach=function(n){return n===0||n===1?"one":"other"};
       var _jipt = [];
       _jipt.push(['project', 'fab-manager']);
     </script>
@@ -127,7 +126,9 @@
 <!-- i18n of external libraries -->
 <script type="text/javascript" src="<%= asset_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>
 <script type="text/javascript" src="<%= asset_path "messageformat/locale/#{Rails.application.secrets.messageformat_locale}.js" %>"></script>
-
+<% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation == 'true' %>
+  <script type="text/javascript">MessageFormat.locale.ach=function(n){return n===0||n===1?"one":"other"};</script>
+<% end %>
 <!-- if required locale does not exist, use the default "en" -->
 <% if Rails.application.assets.find_asset "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>
   <script type="text/javascript" src="<%= asset_path "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>"></script>
