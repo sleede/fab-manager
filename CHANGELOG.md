@@ -20,6 +20,7 @@
 - Unified translations syntax to use ICU MessageFormat
 - Refactored front-end translations keys with unified paths
 - Updated and refactored README and documentations
+- Updated setup script and instructions
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]
