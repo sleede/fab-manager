@@ -259,7 +259,7 @@ pt:
         add_an_event: "Add an event"
         load_the_next_events: "Load the next events..."
         full_price_: "Full price:"
-        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
+        to_date: '"to"'
       events_show:
         #details and booking of an event
         event_description: "Descrição do evento"
@@ -270,8 +270,8 @@ pt:
         ending: "Término:"
         opening_hours: "Abre ás:"
         all_day: "All day"
-        from_time: "From\" # context: time. eg. \"from 18:00 to 21:00"
-        to_time: "to\"  # context: time. eg. \"from 18:00 to 21:00"
+        from_time: '"From"'
+        to_time: '"to"'
         full_price_: "Full price:"
         tickets_still_availables: "Tickets ainda disponíveis:"
         sold_out: "Esgotado."
