@@ -404,8 +404,8 @@ es:
         tags_of_the_destination_slot: "Etiquetas del espacio final:"
         confirm_my_modification: "Confirmar modificación"
         your_booking_slot_was_successfully_moved_from_: "Tu reserva de espacio ha sido reemplazada con éxito"
-        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
-        please_select_a_member_first: "Please select a member first"
+        to_date: '"to"'
+        please_select_a_member_first: 'Please select a member first'
         unable_to_change_the_reservation: "Imposible cambiar reserva"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
