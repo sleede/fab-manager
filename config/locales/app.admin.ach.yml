@@ -40,7 +40,7 @@ ach:
         select_some_machines: "crwdns6759:0crwdne6759:0"
         number_of_tickets: "crwdns6761:0crwdne6761:0"
         adjust_the_opening_hours: "crwdns6763:0crwdne6763:0"
-        to_time: "crwdns6765:0crwdne6765:0"
+        to_time: crwdns10109:0crwdne10109:0
         restrict_this_slot_with_labels_optional: "crwdns6767:0crwdne6767:0"
         recurrence: "crwdns6769:0crwdne6769:0"
         enabled: "crwdns6771:0crwdne6771:0"
@@ -167,8 +167,8 @@ ach:
         on_DATE: "crwdns6995:0{DATE}crwdne6995:0"
         from_DATE: "crwdns6997:0{DATE}crwdne6997:0"
         from_TIME: "crwdns6999:0{TIME}crwdne6999:0"
-        to_date: "crwdns7001:0crwdne7001:0"
-        to_time: "crwdns7003:0crwdne7003:0"
+        to_date: crwdns10111:0crwdne10111:0
+        to_time: crwdns10113:0crwdne10113:0
         title: "crwdns7005:0crwdne7005:0"
         dates: "crwdns7007:0crwdne7007:0"
         booking: "crwdns7009:0crwdne7009:0"
@@ -766,8 +766,8 @@ ach:
         criterion: "crwdns8111:0crwdne8111:0"
         value: "crwdns8113:0crwdne8113:0"
         exclude: "crwdns8115:0crwdne8115:0"
-        from_date: "crwdns8117:0crwdne8117:0"
-        to_date: "crwdns8119:0crwdne8119:0"
+        from_date: crwdns10115:0crwdne10115:0
+        to_date: crwdns10117:0crwdne10117:0
         entries: "crwdns8121:0crwdne8121:0"
         revenue_: "crwdns8123:0crwdne8123:0"
         average_age: "crwdns8125:0crwdne8125:0"
@@ -798,8 +798,8 @@ ach:
         data: "crwdns8171:0crwdne8171:0"
         day: "crwdns8173:0crwdne8173:0"
         week: "crwdns8175:0crwdne8175:0"
-        from_date: "crwdns8177:0crwdne8177:0"
-        to_date: "crwdns8179:0crwdne8179:0"
+        from_date: crwdns10119:0crwdne10119:0
+        to_date: crwdns10121:0crwdne10121:0
         month: "crwdns8181:0crwdne8181:0"
         start: "crwdns8183:0crwdne8183:0"
         end: "crwdns8185:0crwdne8185:0"
