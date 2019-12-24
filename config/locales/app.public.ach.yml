@@ -259,7 +259,7 @@ ach:
         add_an_event: "crwdns9239:0crwdne9239:0"
         load_the_next_events: "crwdns9241:0crwdne9241:0"
         full_price_: "crwdns9243:0crwdne9243:0"
-        to_date: "crwdns9245:0crwdne9245:0"
+        to_date: crwdns10123:0crwdne10123:0
       events_show:
         #details and booking of an event
         event_description: "crwdns9247:0crwdne9247:0"
@@ -270,8 +270,8 @@ ach:
         ending: "crwdns9257:0crwdne9257:0"
         opening_hours: "crwdns9259:0crwdne9259:0"
         all_day: "crwdns9261:0crwdne9261:0"
-        from_time: "crwdns9263:0crwdne9263:0"
-        to_time: "crwdns9265:0crwdne9265:0"
+        from_time: crwdns10125:0crwdne10125:0
+        to_time: crwdns10127:0crwdne10127:0
         full_price_: "crwdns9267:0crwdne9267:0"
         tickets_still_availables: "crwdns9269:0crwdne9269:0"
         sold_out: "crwdns9271:0crwdne9271:0"
