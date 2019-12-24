@@ -427,7 +427,7 @@ es:
         tags_of_the_destination_slot: "Etiquetas del espacio final:"
         confirm_my_modification: "Confirmar modificación"
         your_booking_slot_was_successfully_moved_from_: "Tu reserva de espacio ha sido reemplazada con éxito"
-        to_date: "a" # context: date. eg: "from 01/01 to 01/05"
+        to_date: "a" # context: date. eg: 'from 01/01 to 01/05'
         please_select_a_member_first: "Por favor, selecciona un miembro de la lista"
         unable_to_change_the_reservation: "Imposible cambiar reserva"
         confirmation_required: "Confirmación requerida"

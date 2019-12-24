@@ -427,8 +427,8 @@ en:
         tags_of_the_destination_slot: "Tags of the destination slot:"
         confirm_my_modification: "Confirm my modification"
         your_booking_slot_was_successfully_moved_from_: "Your booking slot was successfully moved from"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
-        please_select_a_member_first: "Please select a member first"
+        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
+        please_select_a_member_first: 'Please select a member first'
         unable_to_change_the_reservation: "Unable to change the reservation"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"

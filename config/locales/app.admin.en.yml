@@ -42,7 +42,7 @@ en:
         select_some_machines: "Select some machines"
         number_of_tickets: "Number of tickets: "
         adjust_the_opening_hours: "Adjust the opening hours"
-        to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
+        to_time: "to"  # context: time. eg. 'from 18:00 to 21:00'
         restrict_this_slot_with_labels_optional: "Restrict this slot with labels (optional)"
         recurrence: "Recurrence"
         enabled: "Enabled"
@@ -174,8 +174,8 @@ en:
         on_DATE: "on {DATE}"
         from_DATE: "from {DATE}"
         from_TIME: "from {TIME}"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
-        to_time: "to"  # context: time. eg. "from 18:00 to 21:00"
+        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
+        to_time: "to"  # context: time. eg. 'from 18:00 to 21:00'
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -790,8 +790,8 @@ en:
         criterion: "Criterion:"
         value: "Value:"
         exclude: "Exclude"
-        from_date: "From" # context: date. eg: "from 01/01 to 01/05"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
+        from_date: "From" # context: date. eg: 'from 01/01 to 01/05'
+        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
         entries: "Entries:"
         revenue_: "Revenue:"
         average_age: "Average age:"
@@ -823,8 +823,8 @@ en:
         data: "Data"
         day: "Day"
         week: "Week"
-        from_date: "From" # context: date. eg: "from 01/01 to 01/05"
-        to_date: "to" # context: date. eg: "from 01/01 to 01/05"
+        from_date: "From" # context: date. eg: 'from 01/01 to 01/05'
+        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
         month: "Month"
         start: "Start:"
         end: "End:"

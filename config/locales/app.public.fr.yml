@@ -283,7 +283,7 @@ fr:
         add_an_event: "Ajouter un évènement"
         load_the_next_events: "Charger les évènements suivants..."
         full_price_: "Plein tarif :"
-        to_date: "au" # context: date. eg: "from 01/01 to 01/05"
+        to_date: "au" # context: date. eg: 'from 01/01 to 01/05'
 
       events_show:
         # détails d'un événement et réservation
@@ -295,8 +295,8 @@ fr:
         ending: "Fin :"
         opening_hours: "Horaires :"
         all_day: "Toute la journée"
-        from_time: "De" # context: time. eg. "from 18:00 to 21:00"
-        to_time: "à"  # context: time. eg. "from 18:00 to 21:00"
+        from_time: "De" # context: time. eg. 'from 18:00 to 21:00'
+        to_time: "à"  # context: time. eg. 'from 18:00 to 21:00'
         full_price_: "Plein tarif :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet"
