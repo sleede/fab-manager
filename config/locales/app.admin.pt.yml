@@ -40,7 +40,7 @@ pt:
         select_some_machines: "Selecionar algumas máquinas"
         number_of_tickets: "Número de vagas: "
         adjust_the_opening_hours: "Ajustar o horário de funcionamento"
-        to_time: "ás\"  # context: time. eg. \"from 18:00 to 21:00"
+        to_time: '"to"'
         restrict_this_slot_with_labels_optional: "Restrinja este slot com etiquetas (opcional)"
         recurrence: "Recurrence"
         enabled: "Enabled"
@@ -167,8 +167,8 @@ pt:
         on_DATE: "No {DATE}"
         from_DATE: "Em {DATE}"
         from_TIME: "Ás {TIME}"
-        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
-        to_time: "to\"  # context: time. eg. \"from 18:00 to 21:00"
+        to_date: '"to"'
+        to_time: '"to"'
         title: "Title"
         dates: "Dates"
         booking: "Reserva"
@@ -766,8 +766,8 @@ pt:
         criterion: "Critério:"
         value: "Valor:"
         exclude: "Excluir"
-        from_date: "From\" # context: date. eg: \"from 01/01 to 01/05"
-        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
+        from_date: '"From"'
+        to_date: '"to"'
         entries: "Entradas:"
         revenue_: "Receita:"
         average_age: "Idade média:"
@@ -798,8 +798,8 @@ pt:
         data: "Dado"
         day: "Day"
         week: "Week"
-        from_date: "From\" # context: date. eg: \"from 01/01 to 01/05"
-        to_date: "to\" # context: date. eg: \"from 01/01 to 01/05"
+        from_date: '"From"'
+        to_date: '"to"'
         month: "Month"
         start: "Start:"
         end: "End:"
