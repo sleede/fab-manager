@@ -404,8 +404,8 @@ ach:
         tags_of_the_destination_slot: "crwdns10081:0crwdne10081:0"
         confirm_my_modification: "crwdns10083:0crwdne10083:0"
         your_booking_slot_was_successfully_moved_from_: "crwdns10085:0crwdne10085:0"
-        to_date: "crwdns10087:0crwdne10087:0"
-        please_select_a_member_first: "crwdns10089:0crwdne10089:0"
+        to_date: crwdns10129:0crwdne10129:0
+        please_select_a_member_first: 'crwdns10089:0crwdne10089:0'
         unable_to_change_the_reservation: "crwdns10091:0crwdne10091:0"
         confirmation_required: "crwdns10093:0crwdne10093:0"
         do_you_really_want_to_cancel_this_reservation: "crwdns10095:0crwdne10095:0"
