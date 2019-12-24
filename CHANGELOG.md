@@ -23,6 +23,7 @@
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]
+- Fix a bug: logs are not printed in staging environment
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://github.com/advisories/GHSA-89mq-4x47-5v83)
 - Fix a security issue: updated puma to 3.12.2 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994)
