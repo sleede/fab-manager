@@ -100,13 +100,11 @@ You can run the following script as root to easily perform all these operations:
 \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/docker/setup.sh | bash -s "/my/custom/path"
 ```
 
-### Setup folders and env file
+### Setup env file
 
-Create the config folder, copy the environnement variables configuration file and edit it:
+Configure the environnement variables file:
 ```bash
-mkdir -p /apps/fabmanager/config
 cd /apps/fabmanager
-cp example/env.example config/env
 vi config/env
 # or use your favorite text editor instead of vi (nano, ne...)
 ```
@@ -116,14 +114,8 @@ Please refer to the [environment configuration documentation](environment.md) fo
 
 ### Setup nginx configuration
 
-Create the nginx folder, copy the example configuration file and edit it:
+Edit the nginx configuration file:
 ```bash
-mkdir -p /apps/fabmanager/config/nginx
-# whether you want you fab-manager to use SSL encryption or not, you should copy one of the following file
-### with SSL ### 
-cp example/nginx_with_ssl.conf.example config/nginx/fabmanager.conf
-### OR without SSL ###
-cp example/nginx.conf.example config/nginx/fabmanager.conf
 
 vi config/nginx/fabmanager.conf
 # or use your favorite text editor instead of vi (nano, ne...)
@@ -131,16 +123,14 @@ vi config/nginx/fabmanager.conf
 
 Customize the following values:
 * Replace **MAIN_DOMAIN** (example: fab-manager.com).
-* Replace **URL_WITH_PROTOCOL_HTTPS** (example: https://www.fab-manager.com).
-* Replace **ANOTHER_URL_1**, **ANOTHER_URL_2** (example: .fab-manager.fr)
 
 ### SSL certificate with LetsEncrypt
 
 **FOLLOW THOSE INSTRUCTIONS ONLY IF YOU WANT TO USE SSL**.
 
-If you have chosen the SSL configuration at the previous point, you must follow these instructions to make it work.
+If you want to host you Fab-manager instance through SSL (which is highly recommended), you must follow the following instructions.
 
-Let's Encrypt is a new Certificate Authority that is free, automated, and open.
+Let's Encrypt is a Certificate Authority that is free, automated, and open.
 Let’s Encrypt certificates expire after 90 days, so automation of renewing your certificates is important.
 Here is the setup for a systemd timer and service to renew the certificates and reboot the app Docker container:
 
@@ -151,13 +141,8 @@ cd /apps/fabmanager/config/nginx/ssl
 openssl dhparam -out dhparam.pem 4096
 ```
 
-Copy the initial configuration file and customize it
+Customize the let's encrypt configuration file
 ```bash
-cd /apps/fabmanager/
-mkdir -p letsencrypt/config/
-mkdir -p letsencrypt/etc/webrootauth
-
-cp example/webroot.ini.example /apps/fabmanager/letsencrypt/config/webroot.ini
 vi letsencrypt/config/webroot.ini
 # or use your favorite text editor instead of vi (nano, ne...)
 ```
@@ -173,8 +158,8 @@ Requires=docker.service
 
 [Service]
 Type=oneshot  
-ExecStart=/usr/bin/docker run --rm --name letsencrypt -v "/apps/fabmanager/log:/var/log/letsencrypt" -v "/apps/fabmanager/letsencrypt/etc:/etc/letsencrypt" -v "/apps/fabmanager/letsencrypt/config:/letsencrypt-config" quay.io/letsencrypt/letsencrypt:latest -c "/letsencrypt-config/webroot.ini" certonly
-ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1  
+ExecStart=/usr/bin/docker run --rm --name certbot_fabmanager -v "/apps/fabmanager/letsencrypt:/etc/letsencrypt" certbot/certbot:latest -c "/etc/letsencrypt/config/webroot.ini" certonly
+ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1
 ```
 
 Create file (with sudo) /etc/systemd/system/letsencrypt.timer and paste the following configuration into it:
@@ -245,7 +230,7 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bund
 `docker-compose up -d`
 
 <a name="generate-ssl-cert-letsencrypt"></a>
-### Generate SSL certificate by Let's encrypt 
+### Generate SSL certificate by Let's encrypt
 
 **Important: app must be run on http before starting letsencrypt**
 
@@ -254,8 +239,19 @@ Start letsencrypt service :
 sudo systemctl start letsencrypt.service
 ```
 
-If the certificate was successfully generated then update the nginx configuration file and activate the ssl port and certificate
+If the certificate was successfully generated, you must update the nginx configuration to activate the ssl port and certificate.
 editing the file `/apps/fabmanager/config/nginx/fabmanager.conf`.
+```bash
+mv /apps/fabmanager/config/nginx/fabmanager.conf /apps/fabmanager/config/nginx/fabmanager.conf.nossl
+cp /apps/fabmanager/config/nginx/fabmanager.conf.ssl /apps/fabmanager/config/nginx/fabmanager.conf
+vi /apps/fabmanager/config/nginx/fabmanager.conf
+# or use your favorite text editor instead of vi (nano, ne...)
+```
+
+Customize the following values:
+* Replace **MAIN_DOMAIN** (example: fab-manager.com).
+* Replace **URL_WITH_PROTOCOL_HTTPS** (example: https://www.fab-manager.com).
+* Replace **ANOTHER_URL_1**, **ANOTHER_URL_2** (example: .fab-manager.fr)
 
 Remove your app container and run your app to apply the changes running the following commands:
 ```bash
@@ -263,7 +259,7 @@ docker-compose down
 docker-compose up -d
 ```
 
-Finally, if everything is ok, start letsencrypt timer to update the certificate every 1st of the month :
+Finally, if everything is ok, start let's encrypt timer to update the certificate every 1st of the month :
 
 ```bash
 sudo systemctl enable letsencrypt.timer
@@ -274,6 +270,7 @@ sudo systemctl list-timers
 
 <a name="docker-utils"></a>
 ## Docker utils with docker-compose
+Below, you'll find a collection of useful commands to control your instance with docker-compose 
 
 ### Restart app
 
