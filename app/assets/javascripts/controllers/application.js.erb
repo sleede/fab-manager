@@ -169,7 +169,12 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         }]
       }).result['finally'](null).then(function (user) {
         // when the account was created successfully, set the session to the newly created account
-        $scope.setCurrentUser(user);
+        if(Fablab.userConfirmationNeededToSignIn) {
+          Auth._currentUser = null;
+          growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
+        } else {
+          $scope.setCurrentUser(user);
+        }
       });
       <% end %>
     };
@@ -447,7 +452,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                 });
               };
             }]
-          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_the_confirmation_link')); });
+          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed')); });
         }
       });
       // otherwise the user just closed the modal

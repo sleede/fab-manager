@@ -98,6 +98,7 @@ fr:
         used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
         used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
         public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
+        you_will_receive_confirmation_instructions_by_email_detailed: "Vous allez recevoir dans quelques minutes un email comportant des instructions pour confirmer votre compte."
 
         # fenêtre de changement de mot de passe
         change_your_password: "Modifier votre mot de passe"

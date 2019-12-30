@@ -15,7 +15,7 @@ fr:
       not_found_in_database: "E-mail ou mot de passe incorrect."
       timeout: "Votre session est périmée, veuillez vous reconnecter pour continuer."
       unauthenticated: "Vous devez vous connecter ou vous enregistrer pour continuer."
-      unconfirmed: "Vous devez confirmer votre adresse de courriel pour pouvoir vous connecter."
+      unconfirmed: "Vous devez confirmer votre adresse de courriel pour pouvoir vous connecter. Veuillez cliquer sur le lien en dessous du formulaire."
     mailer:
       confirmation_instructions:
         action: "Confirmer mon e-mail !"

@@ -15,7 +15,7 @@ es:
       not_found_in_database: "mail o contraseña inválidos."
       timeout: "Su sesión ha expirado. Por favor, inicie sesión de nuevo."
       unauthenticated: "Necesita iniciar sesión o registrarse antes de contiunar."
-      unconfirmed: "Debe confirmar su cuenta antes de continuar."
+      unconfirmed: "Debe confirmar su cuenta antes de continuar. Por favor haga clic en el enlace abajo del formulario."
     mailer:
       confirmation_instructions:
         action:
