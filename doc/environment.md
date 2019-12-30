@@ -30,7 +30,6 @@ When using docker-compose, you should provide the name of the service in your [d
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml` (default: `postgres`).
-Please see [Setup the FabManager database in PostgreSQL](../README.md#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, the default configuration (with `postgres` user) does not uses any password as it is confined in the docker container.
 <a name="REDIS_HOST"></a>

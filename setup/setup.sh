@@ -1,23 +1,95 @@
 #!/bin/bash
 
-prepare_config()
+DOMAINS=()
+
+system_requirements()
+{
+  if [ "$(whoami)" = "root" ]; then
+    echo "It is not recommended to run this script as root. As a normal user, elevation will be prompted if needed."
+    read -rp "Continue anyway? (Y/n) " confirm </dev/tty
+    if [[ "$confirm" = "n" ]]; then exit 1; fi
+  else
+    if ! command -v sudo; then
+      echo "Please install and configure sudo before running this script."
+      echo "sudo was not found, exiting..." &&  exit 1
+    fi
+    local _groups=("sudo" "docker")
+    for _group in "${_groups[@]}"; do
+      if ! groups | grep "$_group"; then
+        echo "Please add your current user to the $_group group."
+        echo "You can run the following as root: \"usermod -aG $_group $(whoami)\", then logout and login again"
+        echo "current user is misconfigured, exiting..." && exit 1
+      fi
+    done
+  fi
+  local _commands=("curl" "sed" "openssl" "docker" "docker-compose")
+  for _command in "${_commands[@]}"; do
+    echo "detecting $_command..."
+    if ! command -v "$_command"
+    then
+      echo "Please install $_command before running this script."
+      echo "$_command was not found, exiting..." && exit 1
+    fi
+  done
+}
+
+config()
+{
+  echo 'We recommand nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for fab-manager.'
+  read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
+  if [ "$NGINX" != "n" ]; then
+    # if the user doesn't want nginx, let him use its own solution for HTTPS
+    echo "We recommand let's encrypt to secure the applicaion with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for fab-manager."
+    read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
+    if [ "$LETSENCRYPT" != "n" ]; then
+      read -rp "Let's encrypt requires an email address to receive notifications about certificate expiration. Please input a valid email address > " EMAIL </dev/tty
+    fi
+    # if the user doesn't want nginx, let him configure his own solution
+    echo "What's the domain name where the instance will be active (eg. fab-manager.com)?"
+    read_domain
+    MAIN_DOMAIN=("${DOMAINS[0]}")
+    OTHER_DOMAINS=${DOMAINS[*]/$MAIN_DOMAIN}
+  fi
+}
+
+read_domain()
+{
+  read -rp 'Please input the domain name > ' domain </dev/tty
+  DOMAINS+=("$domain")
+  read -rp 'Do you have any other domain (eg. www.fab-manager.com)? (y/N)' confirm </dev/tty
+  if [ "$confirm" == "y" ]; then
+    read_domain
+  fi
+}
+
+prepare_files()
 {
   FABMANAGER_PATH=${1:-/apps/fabmanager}
 
-  mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
-  mkdir -p "$FABMANAGER_PATH/letsencrypt/config"
-  mkdir -p "$FABMANAGER_PATH/letsencrypt/etc/webrootauth"
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
 
   # fab-manager environment variables
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/env.example > "$FABMANAGER_PATH/config/env"
 
   # nginx configuration
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/nginx_with_ssl.conf.example > "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/nginx.conf.example > "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
+  if [ "$NGINX" = "y" ]; then
+    mkdir -p "$FABMANAGER_PATH/config/nginx"
+
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/nginx_with_ssl.conf.example > "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/nginx.conf.example > "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
+  fi
 
   # let's encrypt configuration
-  \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/webroot.ini.example > "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+  if [ "$LETSENCRYPT" = "y" ]; then
+    mkdir -p "$FABMANAGER_PATH/letsencrypt/config"
+    mkdir -p "$FABMANAGER_PATH/letsencrypt/systemd"
+    mkdir -p "$FABMANAGER_PATH/letsencrypt/etc/webrootauth"
+
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/webroot.ini.example > "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    # temp systemd files
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/letsencrypt.service > "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/letsencrypt.timer > "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer"
+  fi
 
   # ElasticSearch configuration files
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/elasticsearch.yml > "$FABMANAGER_PATH/elasticsearch/config/elasticsearch.yml"
@@ -27,11 +99,136 @@ prepare_config()
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/docker-compose.yml > "$FABMANAGER_PATH/docker-compose.yml"
 }
 
+prepare_nginx()
+{
+  if [ "$NGINX" != "n" ]; then
+    sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
+    sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
+    sed -i.bak "s/ANOTHER_DOMAIN_1/$OTHER_DOMAINS/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
+    sed -i.bak "s/URL_WITH_PROTOCOL_HTTPS/https://${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
+  fi
+}
+
+prepare_letsencrypt()
+{
+    mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
+    echo "Now, we will generate a Diffie-Hellman (DH) 4096 bits encryption key, to encrypt connections. This will take a moment, please wait..."
+    openssl dhparam -out "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" 4096
+    sed -i.bak "s/REPLACE_WITH_YOUR@EMAIL.COM/$EMAIL/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    sed -i.bak "s/ANOTHER_DOMAIN_1/$OTHER_DOMAINS/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    docker pull certbot/certbot:latest
+    sed -i.bak "s:/apps/fabmanager:$FABMANAGER_PATH:g" "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
+    sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service" /etc/systemd/system/letsencrypt.service
+    sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer" /etc/systemd/system/letsencrypt.timer
+}
+
+prepare_docker()
+{
+  cd "$FABMANAGER_PATH" && docker-compose pull
+}
+
+get_md_anchor()
+{
+  local md_file="$1"
+  local anchor="$2"
+
+  local section
+  section=$(echo "$md_file" | sed -n "/<a name=\"$anchor/,/<a name=/p" | tail -n +2)
+  if [[ $(echo section | tail -n -1) == *"<a name="* ]]; then
+    section=$(echo section | head -n -1)
+  fi
+  echo "$section"
+}
+
+configure_env_file()
+{
+  echo "We will now configure the environment variables."
+  echo "This allows you to customize Fab-Manager's appearance and behavior."
+  read -rp "Proceed? (Y/n)" confirm </dev/tty
+  if [ "$confirm" = "n" ]; then return; fi
+
+  local doc, variables, secret
+  doc=$(\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/doc/environment.md)
+  variables=(STRIPE_API_KEY STRIPE_PUBLISHABLE_KEY STRIPE_CURRENCY INVOICE_PREFIX FABLAB_WITHOUT_PLANS FABLAB_WITHOUT_SPACES FABLAB_WITHOUT_ONLINE_PAYMENT FABLAB_WITHOUT_INVOICES \
+   PHONE_REQUIRED EVENTS_IN_CALENDAR SLOT_DURATION DEFAULT_MAIL_FROM DELIVERY_METHOD DEFAULT_HOST DEFAULT_PROTOCOL SMTP_ADDRESS SMTP_PORT SMTP_USER_NAME SMTP_PASSWORD SMTP_AUTHENTICATION \
+   SMTP_ENABLE_STARTTLS_AUTO SMTP_OPENSSL_VERIFY_MODE SMTP_TLS GA_ID RECAPTCHA_SITE_KEY RECAPTCHA_SECRET_KEY DISQUS_SHORTNAME TWITTER_NAME TWITTER_CONSUMER_KEY TWITTER_CONSUMER_SECRET \
+   TWITTER_ACCESS_TOKEN TWITTER_ACCESS_TOKEN_SECRET FACEBOOK_APP_ID LOG_LEVEL ALLOWED_EXTENSIONS ALLOWED_MIME_TYPES MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE DISK_SPACE_MB_ALERT \
+   ADMIN_EMAIL ADMIN_PASSWORD SUPERADMIN_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE MESSAGEFORMAT_LOCALE FULLCALENDAR_LOCALE ELASTICSEARCH_LANGUAGE_ANALYZER \
+   TIME_ZONE WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT OPENLAB_APP_ID OPENLAB_APP_SECRET OPENLAB_DEFAULT)
+  for variable in "${variables[@]}"; do
+    local var_doc, current
+    var_doc=$(get_md_anchor "$doc" "$variable")
+    current=$(grep "$variable" "$FABMANAGER_PATH/config/env")
+    echo "$var_doc"
+    echo "Current value: $current"
+    read -rp "New value? (leave empty to keep current value)\n > " value </dev/tty
+    if [ "$value" != "" ]; then
+      sed -i.bak "s/$current/$variable=$value/g" "$FABMANAGER_PATH/config/env"
+    fi
+  done
+  # we automatically generate the SECRET_KEY_BASE
+  secret=$(cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake secret)
+  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
+}
+
+read_password()
+{
+  local password, confirmation
+  read -rsp "Please input a password for this administrator's account\n > " password </dev/tty
+  read -rsp "Confirm the password\n > " confirmation </dev/tty
+  if [ "$password" != "$confirmation" ]; then
+    echo "Error: passwords mismatch"
+    password=$(read_password)
+  fi
+  echo "$password"
+}
+
+setup_assets_and_databases()
+{
+  echo "We will now setup the database."
+  read -rp "Continue? (Y/n)" confirm </dev/tty
+  if [ "$confirm" = "n" ]; then return; fi
+
+  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:create # create the database
+  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
+  # prompt default admin email/password
+  read -rp "We will create the default administrator of Fab-Manager. Please input a valid email address\n > " EMAIL </dev/tty
+  PASSWORD=$(read_password)
+  cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" fabmanager bundle exec rake db:seed # seed the database
+
+  # now build the assets
+  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake assets:precompile
+
+  # and prepare elasticsearch
+  cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake fablab:es:build_stats
+}
+
+start()
+{
+  cd "$FABMANAGER_PATH" && docker-compose up -d
+}
+
 function trap_ctrlc()
 {
   echo "Ctrl^C, exiting..."
   exit 2
 }
 
-trap "trap_ctrlc" 2 # SIGINT
-prepare_config "$@"
+setup()
+{
+  trap "trap_ctrlc" 2 # SIGINT
+  system_requirements
+  config
+  prepare_files "$@"
+  prepare_nginx
+  prepare_letsencrypt
+  prepare_docker
+  configure_env_file
+  setup_assets_and_databases
+  start
+  # TODO generate certificate, reconfigure nginx and restart
+}
+
+setup "$@"
+
