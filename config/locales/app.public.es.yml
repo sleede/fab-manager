@@ -23,7 +23,7 @@ es:
         #login/logout
         sign_out: "Salir"
         sign_up: "Registrarse"
-        sign_in: "Entrar"
+        sign_in: "Ingresar"
         #left menu
         notifications: "Notificaciones"
         admin: "Administrador"
@@ -98,7 +98,7 @@ es:
         #connection modal
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
-        not_registered_to_the_fablab: "¿No está registrado en el fatlab aún?"
+        not_registered_to_the_fablab: "¿No está registrado en el fablab todavía?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
