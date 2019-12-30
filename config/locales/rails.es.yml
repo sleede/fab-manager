@@ -117,8 +117,8 @@ es:
       odd: debe ser impar
       record_invalid: 'La validación falló: %{errors}'
       restrict_dependent_destroy:
-        one: No se puede eliminar el registro porque existe un %{record} dependiente
-        many: No se puede eliminar el registro porque existen %{record} dependientes
+        one: No se puede borrar el registro porque existe un %{record} dependiente
+        many: No se puede borrar el registro porque existen %{record} dependientes
       taken: ya está en uso
       too_long:
         one: es demasiado largo (1 carácter máximo)
@@ -127,7 +127,7 @@ es:
         one: es demasiado corto (1 carácter mínimo)
         other: es demasiado corto (%{count} caracteres mínimo)
       wrong_length:
-        one: no tiene la longitud correcta (1 carácter exactos)
+        one: no tiene la longitud correcta (1 carácter)
         other: no tiene la longitud correcta (%{count} caracteres exactos)
       other_than: debe ser distinto de %{count}
       wrong_content_type: "este tipo de archivo adjunto no está permitido"
