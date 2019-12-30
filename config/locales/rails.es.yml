@@ -99,9 +99,9 @@ es:
     format: "%{attribute} %{message}"
     messages:
       accepted: debe ser aceptado
-      blank: no puede estar en blanco
-      present: debe estar en blanco
-      confirmation: no coincide
+      blank: no puede ser vacío
+      present: debe ser vacío
+      confirmation: no coincide con %{attribute}
       empty: no puede estar vacío
       equal_to: debe ser igual a %{count}
       even: debe ser par
@@ -128,11 +128,11 @@ es:
         other: es demasiado corto (%{count} caracteres mínimo)
       wrong_length:
         one: no tiene la longitud correcta (1 carácter)
-        other: no tiene la longitud correcta (%{count} caracteres exactos)
+        other: no tiene la longitud correcta (%{count} caracteres)
       other_than: debe ser distinto de %{count}
       wrong_content_type: "este tipo de archivo adjunto no está permitido"
     template:
-      body: 'Se encontraron problemas con los siguientes campos:'
+      body: 'Se encontraron errores con los siguientes campos:'
       header:
         one: No se pudo guardar este/a %{model} porque se encontró 1 error
         other: "No se pudo guardar este/a %{model} porque se encontraron %{count} errores"
