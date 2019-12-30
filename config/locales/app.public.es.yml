@@ -3,7 +3,7 @@ es:
     public:
       common:
         #header and "about" page
-        about_the_fablab: "Sobre {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
+        about_the_fablab: "Acerca de {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
         return: "Volver"
         #cookies
         cookies:
