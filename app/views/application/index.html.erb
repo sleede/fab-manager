@@ -12,6 +12,13 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation == 'true' %>
+    <script type="text/javascript">
+      var _jipt = [];
+      _jipt.push(['project', 'fab-manager']);
+    </script>
+    <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+  <% end %>
   <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
   <script type="text/javascript">
       var Fablab = Fablab || {};
@@ -69,7 +76,7 @@
   <% end %>
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
   <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.events_list.the_fablab_s_events') %>" href="<%= rss_events_path %>.xml">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

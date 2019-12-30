@@ -18,7 +18,8 @@
 - Added freeCAD files as default allowed extensions
 - Rake task to sync local users with Stripe
 - Unified translations syntax to use ICU MessageFormat
-- Updated and refactored README
+- Refactored front-end translations keys with unified paths
+- Updated and refactored README and documentations
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]

@@ -1,0 +1,277 @@
+ach:
+  layouts:
+    notifications_mailer:
+      see_you_later: "crwdns3861:0GENDER={GENDER}crwdne3861:0" #messageFormat interpolation
+      sincerely: "crwdns3863:0crwdne3863:0"
+      signature: "crwdns3865:0crwdne3865:0"
+      do_not_reply: "crwdns3867:0crwdne3867:0"
+  users_mailer:
+    notify_user_account_created:
+      subject: "crwdns3869:0crwdne3869:0"
+      body:
+        hello: "crwdns3871:0%{NAME}crwdne3871:0"
+        intro: "crwdns3873:0GENDER={GENDER}crwdnd3873:0FABLAB={FABLAB}crwdne3873:0" #messageFormat interpolation
+        connection_parameters: "crwdns3875:0crwdne3875:0"
+        account_name: "crwdns3877:0crwdne3877:0"
+        password: "crwdns3879:0crwdne3879:0"
+        temporary_password: "crwdns3881:0crwdne3881:0"
+        keep_advantages: "crwdns3883:0crwdne3883:0"
+        to_use_platform: "crwdns3885:0crwdne3885:0"
+        logon_or_login: "crwdns3887:0crwdne3887:0"
+        token_if_link_problem: "crwdns3889:0crwdne3889:0"
+  notifications_mailer:
+    notify_user_user_group_changed:
+      subject: "crwdns3891:0crwdne3891:0"
+      body:
+        warning: "crwdns3893:0crwdne3893:0"
+    notify_admin_user_group_changed:
+      subject: "crwdns3895:0crwdne3895:0"
+      body:
+        user_changed_group_html: "crwdns3897:0%{NAME}crwdne3897:0"
+        previous_group: "crwdns3899:0crwdne3899:0"
+        new_group: "crwdns3901:0crwdne3901:0"
+    notify_admin_subscription_extended:
+      subject: "crwdns3903:0crwdne3903:0"
+      body:
+        subscription_extended_html: "crwdns3905:0PLAN={PLAN}crwdnd3905:0NAME={NAME}crwdnd3905:0FREE={FREE}crwdnd3905:0DATE={DATE}crwdne3905:0" #messageFormat interpolation
+    notify_member_subscription_extended:
+      subject: "crwdns3907:0crwdne3907:0"
+      body:
+        your_plan: "crwdns3909:0crwdne3909:0"
+        has_been_extended: "crwdns3911:0crwdne3911:0"
+        free: "crwdns3913:0crwdne3913:0"
+        until: "crwdns3915:0crwdne3915:0"
+    notify_partner_subscribed_plan:
+      subject: "crwdns3917:0crwdne3917:0"
+      body:
+        a_plan: "crwdns3919:0crwdne3919:0"
+        was_purchased_by_member: "crwdns3921:0crwdne3921:0"
+    notify_admin_when_project_published:
+      subject: "crwdns3923:0crwdne3923:0"
+      body:
+        new_project_published: "crwdns3925:0crwdne3925:0"
+    notify_project_collaborator_to_valid:
+      subject: "crwdns3927:0crwdne3927:0"
+      body:
+        your_are_invited_to_take_part_in_a_project: "crwdns3929:0crwdne3929:0"
+        to_accept_the_invitation_click_on_following_link: "crwdns3931:0crwdne3931:0"
+    notify_project_author_when_collaborator_valid:
+      subject: "crwdns3933:0crwdne3933:0"
+      body:
+        the_member: "crwdns3935:0crwdne3935:0"
+        accepted_your_invitation_to_take_part_in_the_project: "crwdns3937:0crwdne3937:0"
+    notify_user_training_valid:
+      subject: "crwdns3939:0crwdne3939:0"
+      body:
+        your_training: "crwdns3941:0crwdne3941:0"
+        has_been_validated: "crwdns3943:0crwdne3943:0"
+    notify_member_subscribed_plan:
+      subject: "crwdns3945:0crwdne3945:0"
+      body:
+        plan_subscribed_html: "crwdns3947:0%{PLAN}crwdne3947:0"
+        rolling_subscription_stops_on: "crwdns3949:0%{DURATION}crwdnd3949:0%{DATE}crwdne3949:0"
+        subscription_stops_on: "crwdns3951:0%{DATE}crwdne3951:0"
+    notify_member_create_reservation:
+      subject: "crwdns3953:0crwdne3953:0"
+      body:
+        reservation_saved_html: "crwdns3955:0%{RESERVATION}crwdne3955:0"
+        your_reserved_slots: "crwdns3957:0crwdne3957:0"
+    notify_member_subscribed_plan_is_changed:
+      subject: "crwdns3959:0crwdne3959:0"
+      body:
+        new_plan_html: "crwdns3961:0%{PLAN}crwdne3961:0"
+    notify_admin_member_create_reservation:
+      subject: "crwdns3963:0crwdne3963:0"
+      body:
+        member_reserved_html: "crwdns3965:0%{NAME}crwdnd3965:0%{RESERVABLE}crwdne3965:0"
+        reserved_slots: "crwdns3967:0crwdne3967:0"
+    notify_member_slot_is_modified:
+      subject: "crwdns3969:0crwdne3969:0"
+      body:
+        reservation_changed_to: "crwdns3971:0crwdne3971:0"
+        previous_date: "crwdns3973:0crwdne3973:0"
+    notify_admin_slot_is_modified:
+      subject: "crwdns3975:0crwdne3975:0"
+      body:
+        slot_modified: "crwdns3977:0%{NAME}crwdne3977:0"
+        new_date: "crwdns3979:0crwdne3979:0"
+        old_date: "crwdns3981:0crwdne3981:0"
+    notify_admin_when_user_is_created:
+      subject: "crwdns3983:0crwdne3983:0"
+      body:
+        new_account_created: "crwdns3985:0crwdne3985:0"
+        account_for_organization: "crwdns3987:0crwdne3987:0"
+    notify_admin_subscribed_plan:
+      subject: "crwdns3989:0crwdne3989:0"
+      body:
+        plan_subscribed_html: "crwdns3991:0%{PLAN}crwdnd3991:0%{NAME}crwdne3991:0"
+    notify_member_invoice_ready:
+      subject: "crwdns3993:0crwdne3993:0"
+      body:
+        please_find_attached_html: "crwdns3995:0DATE={DATE}crwdnd3995:0AMOUNT={AMOUNT}crwdnd3995:0TYPE={TYPE}crwdne3995:0" #messageFormat interpolation
+        invoice_in_your_dashboard_html: "crwdns3997:0%{DASHBOARD}crwdne3997:0"
+        your_dashboard: "crwdns3999:0crwdne3999:0"
+    notify_member_reservation_reminder:
+      subject: "crwdns4001:0crwdne4001:0"
+      body:
+        this_is_a_reminder_about_your_reservation_RESERVABLE_to_be_held_on_DATE_html: "crwdns4003:0%{RESERVABLE}crwdnd4003:0%{DATE}crwdne4003:0"
+        this_reservation_concerns_the_following_slots: "crwdns4005:0crwdne4005:0"
+    notify_member_avoir_ready:
+      subject: "crwdns4007:0crwdne4007:0"
+      body:
+        please_find_attached_html: "crwdns4009:0DATE={DATE}crwdnd4009:0AMOUNT={AMOUNT}crwdnd4009:0TYPE={TYPE}crwdne4009:0" #messageFormat interpolation
+        invoice_in_your_dashboard_html: "crwdns4011:0%{DASHBOARD}crwdne4011:0"
+        your_dashboard: "crwdns4013:0crwdne4013:0"
+    notify_member_subscription_will_expire_in_7_days:
+      subject: "crwdns4015:0crwdne4015:0"
+      body:
+        your_plan: "crwdns4017:0crwdne4017:0"
+        expires_in_7_days: "crwdns4019:0crwdne4019:0"
+        to_renew_your_plan_follow_the_link: "crwdns4021:0crwdne4021:0"
+    notify_member_subscription_is_expired:
+      subject: "crwdns4023:0crwdne4023:0"
+      body:
+        your_plan: "crwdns4025:0crwdne4025:0"
+        has_expired: "crwdns4027:0crwdne4027:0"
+        you_can_go_to: "crwdns4029:0crwdne4029:0"
+        to_renew_your_plan: "crwdns4031:0crwdne4031:0"
+    notify_admin_subscription_will_expire_in_7_days:
+      subject: "crwdns4033:0crwdne4033:0"
+      body:
+        subscription_will_expire_html: "crwdns4035:0%{NAME}crwdnd4035:0%{PLAN}crwdne4035:0"
+    notify_admin_subscription_is_expired:
+      subject: "crwdns4037:0crwdne4037:0"
+      body:
+        subscription_expired_html: "crwdns4039:0%{NAME}crwdnd4039:0%{PLAN}crwdne4039:0"
+    notify_admin_subscription_canceled:
+      subject: "crwdns4041:0crwdne4041:0"
+      body:
+        subscription_canceled_html: "crwdns4043:0%{PLAN}crwdnd4043:0%{NAME}crwdne4043:0"
+    notify_member_subscription_canceled:
+      subject: "crwdns4045:0crwdne4045:0"
+      body:
+        your_plan_was_canceled: "crwdns4047:0crwdne4047:0"
+        your_plan: "crwdns4049:0crwdne4049:0"
+        end_at: "crwdns4051:0crwdne4051:0"
+    notify_member_slot_is_canceled:
+      subject: "crwdns4053:0crwdne4053:0"
+      body:
+        reservation_canceled: "crwdns4055:0%{RESERVABLE}crwdne4055:0"
+    notify_admin_slot_is_canceled:
+      subject: "crwdns4057:0crwdne4057:0"
+      body:
+        member_cancelled: "crwdns4059:0%{NAME}crwdne4059:0"
+        item_details: "crwdns4061:0%{START}crwdnd4061:0%{END}crwdnd4061:0%{RESERVABLE}crwdne4061:0"
+        generate_refund: "crwdns4063:0crwdne4063:0"
+    notify_admin_when_user_is_imported:
+      subject: "crwdns4065:0crwdne4065:0"
+      body:
+        new_account_imported: "crwdns4067:0%{ID}crwdnd4067:0%{PROVIDER}crwdne4067:0"
+        provider_uid: "crwdns4069:0crwdne4069:0"
+        known_information: "crwdns4071:0crwdne4071:0"
+        address_already_used: "crwdns4073:0crwdne4073:0"
+        no_more_info_available: "crwdns4075:0crwdne4075:0"
+    notify_user_profile_complete:
+      subject: "crwdns4077:0crwdne4077:0"
+      body:
+        message: "crwdns4079:0crwdne4079:0"
+    notify_user_auth_migration:
+      subject: "crwdns4081:0crwdne4081:0"
+      body:
+        the_platform: "crwdns4083:0crwdne4083:0"
+        is_changing_its_auth_system_and_will_now_use: "crwdns4085:0crwdne4085:0"
+        instead_of: "crwdns4087:0crwdne4087:0"
+        consequence_of_the_modification: "crwdns4089:0crwdne4089:0"
+        to_use_the_platform_thanks_for: "crwdns4091:0crwdne4091:0"
+        create_an_account_on: "crwdns4093:0crwdne4093:0"
+        or_use_an_existing_account_clicking_here: "crwdns4095:0crwdne4095:0"
+        in_case_of_problem_enter_the_following_code: "crwdns4097:0crwdne4097:0"
+    notify_admin_user_merged:
+      subject: "crwdns4099:0crwdne4099:0"
+      body:
+        imported_account_merged: "crwdns4101:0%{NAME}crwdne4101:0"
+        provider_uid: "crwdns4103:0crwdne4103:0"
+    notify_admin_profile_complete:
+      subject: "crwdns4105:0crwdne4105:0"
+      body:
+        account_completed: "crwdns4107:0crwdne4107:0"
+        imported_account_completed: "crwdns4109:0%{PROVIDER}crwdne4109:0"
+        provider_id: "crwdns4111:0crwdne4111:0"
+    notify_admin_abuse_reported:
+      subject: "crwdns4113:0crwdne4113:0"
+      body:
+        intro: "crwdns4115:0crwdne4115:0"
+        signaled_content: "crwdns4117:0crwdne4117:0"
+        signaled_by: "crwdns4119:0crwdne4119:0"
+        signaled_on: "crwdns4121:0crwdne4121:0"
+        message: "crwdns4123:0crwdne4123:0"
+        visit_management_interface: "crwdns4125:0crwdne4125:0"
+    notify_user_wallet_is_credited:
+      subject: "crwdns4127:0crwdne4127:0"
+      body:
+        wallet_credit_html: "crwdns4129:0%{AMOUNT}crwdne4129:0"
+    notify_admin_user_wallet_is_credited:
+      subject: "crwdns4131:0crwdne4131:0"
+      body:
+        wallet_credit_html: "crwdns4133:0%{USER}crwdnd4133:0%{AMOUNT}crwdnd4133:0%{ADMIN}crwdne4133:0"
+    notify_admin_export_complete:
+      subject: "crwdns4135:0crwdne4135:0"
+      body:
+        you_asked_for_an_export: "crwdns4137:0crwdne4137:0"
+        statistics_global: "crwdns4139:0crwdne4139:0"
+        statistics_account: "crwdns4141:0crwdne4141:0"
+        statistics_event: "crwdns4143:0crwdne4143:0"
+        statistics_machine: "crwdns4563:0crwdne4563:0"
+        statistics_project: "crwdns4147:0crwdne4147:0"
+        statistics_subscription: "crwdns4149:0crwdne4149:0"
+        statistics_training: "crwdns4151:0crwdne4151:0"
+        statistics_space: "crwdns4153:0crwdne4153:0"
+        users_members: "crwdns4155:0crwdne4155:0"
+        users_subscriptions: "crwdns4157:0crwdne4157:0"
+        users_reservations: "crwdns4159:0crwdne4159:0"
+        availabilities_index: "crwdns4161:0crwdne4161:0"
+        accounting_accounting-software: "crwdns4163:0crwdne4163:0"
+        click_to_download: "crwdns4165:0crwdne4165:0"
+        here: "crwdns4167:0crwdne4167:0"
+        file_type:
+          xlsx: "crwdns4169:0crwdne4169:0"
+          csv: "crwdns4171:0crwdne4171:0"
+    notify_admin_import_complete:
+      subject: "crwdns4173:0crwdne4173:0"
+      body:
+        you_made_an_import: "crwdns4175:0%{CATEGORY}crwdne4175:0"
+        category_members: "crwdns4177:0crwdne4177:0"
+        click_to_view_results: "crwdns4179:0crwdne4179:0"
+    notify_member_about_coupon:
+      subject: "crwdns4181:0crwdne4181:0"
+      body:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "crwdns4183:0%{PERCENT}crwdnd4183:0%{CODE}crwdne4183:0"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "crwdns4185:0%{AMOUNT}crwdnd4185:0%{CODE}crwdne4185:0"
+        this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "crwdns4187:0USAGE={USAGE}crwdnd4187:0TYPE={TYPE}crwdnd4187:0DATE={DATE}crwdnd4187:0DATE={DATE}crwdne4187:0"
+    notify_admin_free_disk_space:
+      subject: "crwdns4189:0crwdne4189:0"
+      body: "crwdns4191:0%{THRESHOLD}crwdnd4191:0%{AVAILABLE}crwdne4191:0"
+    notify_admin_close_period_reminder:
+      subject: "crwdns4193:0crwdne4193:0"
+      body:
+        warning_last_closed_period_over_1_year: "crwdns4195:0%{LAST_END}crwdne4195:0"
+        warning_no_closed_periods: "crwdns4197:0%{FIRST_DATE}crwdne4197:0"
+    notify_admin_archive_complete:
+      subject: "crwdns4199:0crwdne4199:0"
+      body:
+        archive_complete: "crwdns4201:0%{START}crwdnd4201:0%{END}crwdne4201:0"
+        click_to_download: "crwdns4203:0crwdne4203:0"
+        here: "crwdns4205:0crwdne4205:0"
+        save_on_secured: "crwdns4207:0crwdne4207:0"
+    notify_privacy_policy_changed:
+      subject: "crwdns4209:0crwdne4209:0"
+      body:
+        content_html: "crwdns4211:0crwdne4211:0"
+        link_to_policy: "crwdns4213:0crwdne4213:0"
+    notify_admin_refund_created:
+      subject: "crwdns4565:0crwdne4565:0"
+      body:
+        refund_created: "crwdns4567:0%{AMOUNT}crwdnd4567:0%{INVOICE}crwdnd4567:0%{USER}crwdne4567:0"
+        download: "crwdns4569:0crwdne4569:0"
+    shared:
+      hello: "crwdns4215:0%{user_name}crwdne4215:0"
