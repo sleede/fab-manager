@@ -10,7 +10,7 @@ es:
           about_cookies: "Este sitio web utiliza cookies para medir la audiencia."
           learn_more: "Aprende más"
           accept: "Aceptar cookies"
-          decline: "Rehusar"
+          decline: "Rechazar"
         #dashboard sections
         dashboard: "Panel"
         my_profile: "My Perfil"
