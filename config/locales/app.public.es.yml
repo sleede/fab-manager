@@ -8,7 +8,7 @@ es:
         #cookies
         cookies:
           about_cookies: "Este sitio web utiliza cookies para medir la audiencia."
-          learn_more: "Aprende más"
+          learn_more: "Saber más"
           accept: "Aceptar cookies"
           decline: "Rechazar"
         #dashboard sections
@@ -190,11 +190,11 @@ es:
         #list of machines
         the_fablab_s_machines: "Las máquinas del FabLab"
         add_a_machine: "Añadir una máquina"
-        book: "Book"
+        book: "Reservar"
         _or_the_: " o el "
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
+        status_enabled: "Activas"
+        status_disabled: "No activas"
+        status_all: "Todas"
       machines_show:
         #details of a machine
         book_this_machine: "Alquilar máquina"
@@ -208,7 +208,7 @@ es:
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La máquina no puede borrarse porque está siendo usada o ha sido reservada por algún usuario."
       trainings_list:
         #list of trainings
-        book: "Book"
+        book: "Reservar"
         the_trainings: "Lista de cursos"
       training_show:
         #details of a training
@@ -257,7 +257,7 @@ es:
         still_available: "available place(s)"
         free_entry: "Free entry"
         add_an_event: "Add an event"
-        load_the_next_events: "Load the next events..."
+        load_the_next_events: "Cargar los próximos eventos..."
         full_price_: "Full price:"
         to_date: '"to"'
       events_show:
@@ -318,10 +318,10 @@ es:
         #list of spaces
         the_spaces: "Espacios"
         add_a_space: "Añadir espacios"
-        status_enabled: "Enabled"
-        status_disabled: "Disabled"
-        status_all: "All"
-        book: "Book"
+        status_enabled: "Activos"
+        status_disabled: "No activos"
+        status_all: "Todos"
+        book: "Reservar"
       space_show:
         #display the details of a space
         book_this_space: "Reservar este espacio"
