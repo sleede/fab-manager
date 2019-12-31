@@ -13,18 +13,12 @@ You will need to be root through the rest of the setup.
 1.2. [Setup the domain name](#setup-the-domain-name)<br/>
 1.3. [Connect through SSH](#connect-through-ssh)<br/>
 1.4. [Prepare the server](#prepare-the-server)<br/>
-2. [Install Fab-manager](#install-fabmanager)<br/>
-2.1. Add docker-compose.yml file<br/>
-2.2. pull images<br/>
-2.3. setup database<br/>
-2.4. build assets<br/>
-2.5. prepare Elasticsearch (search engine)<br/>
-2.6. start all services<br/>
-2.7. Generate SSL certificate by Let's encrypt
-4. [Docker utils](#docker-utils)
-5. [Update Fab-manager](#update-fabmanager)<br/>
-5.1. Steps<br/>
-5.2. Good to know
+2. [Install Fab-manager](#install-fab-manager)<br/>
+3. [Docker utils](#docker-utils)
+4. [Update Fab-manager](#update-fabmanager)<br/>
+4.1. [Steps](#steps)<br/>
+4.2. [Upgrade to the last version](#upgrade-to-the-last-version)<br/>
+4.3. [Upgrade to a specific version](#upgrade-to-a-specific-version)
 
 <a name="preliminary-steps"></a>
 ## Preliminary steps
@@ -89,13 +83,11 @@ You can run the following script as root to easily perform all these operations:
 \curl -sSL prepare-vps.sleede.com | bash
 ```
 
-<a name="install-fabmanager"></a>
-## Install Fabmanager
+<a name="install-fab-manager"></a>
+## Install Fab-Manager
 
-### Setup script
-
-Run the following command to retrieve the initial configuration files.
-This script will also guide you through the installation process by checking the requirements and asking you some configuration elements.
+Run the following command to install Fab-Manager.
+This script will guide you through the installation process by checking the requirements and asking you the configuration elements.
 
 ```bash
 \curl -sSL setup.fab-manager.com | bash
@@ -106,82 +98,55 @@ This script will also guide you through the installation process by checking the
 \curl -sSL setup.fab-manager.com | bash -s "/my/custom/path"
 ```
 
-<a name="generate-ssl-cert-letsencrypt"></a>
-### Generate SSL certificate by Let's encrypt
+<a name="docker-utils"></a>
+## Docker utils
+Below, you'll find a collection of useful commands to control your instance with docker-compose.
+Before using any of these commands, you must first `cd` into the app directory.
 
-**Important: app must be run on http before starting letsencrypt**
-
-Start letsencrypt service :
+- Restart app
 ```bash
-sudo systemctl start letsencrypt.service
+docker-compose restart fabmanager
 ```
-
-If the certificate was successfully generated, you must update the nginx configuration to activate the ssl port and certificate.
+- Remove app
 ```bash
-mv /apps/fabmanager/config/nginx/fabmanager.conf /apps/fabmanager/config/nginx/fabmanager.conf.nossl
-mv /apps/fabmanager/config/nginx/fabmanager.conf.ssl /apps/fabmanager/config/nginx/fabmanager.conf
+docker-compose down fabmanager
 ```
-
-Remove your app container and run your app again to apply the changes running the following commands:
+- Restart all containers
+```bash
+docker-compose restart
+```
+- Remove all containers
 ```bash
 docker-compose down
+```
+- Start all containers
+```bash
 docker-compose up -d
 ```
-
-Finally, if everything is ok, start let's encrypt timer to update the certificate every 1st of the month :
-
+- Open a bash in the app context
 ```bash
-sudo systemctl enable letsencrypt.timer
-sudo systemctl start letsencrypt.timer
-# check status with
-sudo systemctl list-timers
+docker-compose run --rm fabmanager bash
 ```
-
-<a name="docker-utils"></a>
-## Docker utils with docker-compose
-Below, you'll find a collection of useful commands to control your instance with docker-compose 
-
-### Restart app
-
-`docker-compose restart fabmanager`
-
-### Remove app
-
-`docker-compose down fabmanager`
-
-### Restart all containers
-
-`docker-compose restart`
-
-### Remove all containers
-
-`docker-compose down`
-
-### Start all containers
-
-`docker-compose up -d`
-
-### Open a bash in the app context
-
-`docker-compose run --rm fabmanager bash`
-
-### Show services status
-
-`docker-compose ps`
-
-### Restart nginx container
-
-`docker-compose restart nginx`
- 
-### Example of command passing env variables
-
+- Show services status
+```bash
+docker-compose ps
+```
+- Restart nginx container
+```bash
+docker-compose restart nginx
+ ```
+- Example of command passing env variables
+```bash
 docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
-
+```
 <a name="update-fabmanager"></a>
 ## Update Fab-manager
 
-*This procedure updates fabmanager to the most recent version by default.*
+*This procedure updates Fab-Manager to the most recent version by default.*
 
+> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2 and finally to the last version
+
+<a name="steps"></a>
 ### Steps
 
 When a new version is available, follow this procedure to update fab-manager app in a production environment, using docker-compose.
@@ -226,10 +191,22 @@ You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/rele
 
 You can check that all containers are running with `docker ps`.
 
-### Good to know
+<a name="upgrade-to-the-last-version"></a>
+### Upgrade to the last version
 
-#### Is it possible to update several versions at the same time ?
-
-Yes, indeed. It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
+It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
 Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual
 and the new version in sequential order. (Example: to update from 2.4.0 to 2.4.3, you will run the specific commands for the 2.4.1, then for the 2.4.2 and then for the 2.4.3).
+
+<a name="upgrade-to-a-specific-version"></a>
+### Upgrade to a specific version
+
+Edit your [/apps/fabmanager/docker-compose.yml](../setup/docker-compose.yml#L4) file and change the following line:
+```yaml
+image: sleede/fab-manager
+```
+For example, here we want to use the v3.1.2:
+```yaml
+image: sleede/fab-manager:release-v3.1.2
+```
+Then run the normal upgrade procedure. 

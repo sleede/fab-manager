@@ -2,6 +2,22 @@
 
 DOMAINS=()
 
+welcome_message()
+{
+  echo "============================================"
+  echo -e "\e[31m            Fab-Manager's setup\e[0m"
+  echo "============================================"
+  echo "Thank you for installing Fab-Manager."
+  printf "This script will guide you through the installation process of Fab-Manager\n"
+  echo -e "Please report any \e[1mfeedback or improvement request\e[21m on https://feedback.fab-manager.com/"
+  echo -e "For \e[1mbug reports\e[21m, please open a new issue on https://github.com/sleede/fab-manager/issues"
+  echo -e "You can call for \e[1mcommunity assistance\e[21m on https://forum.fab-manager.com/"
+  printf "\nYou can interrupt this installation at any time by pressing Ctrl+C\n"
+  echo -e "If you do not feel confortable with this installation, you can \e[4msubscribe to our hosting plan\e[24m: contact@fab-manager.com"
+  read -rp "\n\nContinue? (Y/n) " confirm </dev/tty
+  if [[ "$confirm" = "n" ]]; then exit 1; fi
+}
+
 system_requirements()
 {
   if [ "$(whoami)" = "root" ]; then
@@ -22,7 +38,7 @@ system_requirements()
       fi
     done
   fi
-  local _commands=("curl" "sed" "openssl" "docker" "docker-compose")
+  local _commands=("curl" "sed" "openssl" "docker" "docker-compose" "systemctl")
   for _command in "${_commands[@]}"; do
     echo "detecting $_command..."
     if ! command -v "$_command"
@@ -111,16 +127,20 @@ prepare_nginx()
 
 prepare_letsencrypt()
 {
+  if [ "$LETSENCRYPT" = "y" ]; then
     mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
     echo "Now, we will generate a Diffie-Hellman (DH) 4096 bits encryption key, to encrypt connections. This will take a moment, please wait..."
     openssl dhparam -out "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" 4096
     sed -i.bak "s/REPLACE_WITH_YOUR@EMAIL.COM/$EMAIL/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
     sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
     sed -i.bak "s/ANOTHER_DOMAIN_1/$OTHER_DOMAINS/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    echo "Now downloading and configuring the certificate signing bot..."
     docker pull certbot/certbot:latest
     sed -i.bak "s:/apps/fabmanager:$FABMANAGER_PATH:g" "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
     sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service" /etc/systemd/system/letsencrypt.service
     sudo cp "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer" /etc/systemd/system/letsencrypt.timer
+    sudo systemctl daemon-reload
+  fi
 }
 
 prepare_docker()
@@ -204,9 +224,38 @@ setup_assets_and_databases()
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake fablab:es:build_stats
 }
 
+stop()
+{
+  cd "$FABMANAGER_PATH" && docker-compose down
+}
+
 start()
 {
   cd "$FABMANAGER_PATH" && docker-compose up -d
+}
+
+enable_ssl()
+{
+  if [ "$LETSENCRYPT" = "y" ]; then
+    # generate certificate
+    sudo systemctl start letsencrypt.service
+    # serve http content over ssl
+    mv "$FABMANAGER_PATH/config/nginx/fabmanager.conf" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.nossl"
+    mv "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl" "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
+    stop
+    start
+    sudo systemctl enable letsencrypt.timer
+    sudo systemctl start letsencrypt.timer
+  fi
+}
+
+final_message()
+{
+  echo -e "\e[5mCongratulations!\e[25m"
+  echo "Installation process in now complete."
+  echo -e "Please \e[1mkeep track of the logs\e[21m produced by this script and check that everything is running correctly."
+  echo "You can call for the community assistance on https://forum.fab-manager.com"
+  echo -e "We wish you a pleasant use of \e[31mFab-Manager\e[0m"
 }
 
 function trap_ctrlc()
@@ -218,6 +267,7 @@ function trap_ctrlc()
 setup()
 {
   trap "trap_ctrlc" 2 # SIGINT
+  welcome_message
   system_requirements
   config
   prepare_files "$@"
@@ -227,7 +277,8 @@ setup()
   configure_env_file
   setup_assets_and_databases
   start
-  # TODO generate certificate, reconfigure nginx and restart
+  enable_ssl
+  final_message
 }
 
 setup "$@"
