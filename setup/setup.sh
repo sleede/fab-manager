@@ -96,7 +96,7 @@ prepare_files()
 {
   FABMANAGER_PATH=${1:-/apps/fabmanager}
 
-  sudo mkdir -p "$FABMANAGER_PATH"
+  sudo mkdir -p "$FABMANAGER_PATH/config"
   sudo chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
@@ -105,7 +105,7 @@ prepare_files()
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/env.example > "$FABMANAGER_PATH/config/env"
 
   # nginx configuration
-  if [ "$NGINX" = "y" ]; then
+  if [ "$NGINX" != "n" ]; then
     mkdir -p "$FABMANAGER_PATH/config/nginx"
 
     \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/nginx_with_ssl.conf.example > "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
@@ -113,7 +113,7 @@ prepare_files()
   fi
 
   # let's encrypt configuration
-  if [ "$LETSENCRYPT" = "y" ]; then
+  if [ "$LETSENCRYPT" != "n" ]; then
     mkdir -p "$FABMANAGER_PATH/letsencrypt/config"
     mkdir -p "$FABMANAGER_PATH/letsencrypt/systemd"
     mkdir -p "$FABMANAGER_PATH/letsencrypt/etc/webrootauth"
@@ -142,15 +142,16 @@ prepare_nginx()
   fi
 }
 
+function join_by { local IFS="$1"; shift; echo "$*"; }
+
 prepare_letsencrypt()
 {
-  if [ "$LETSENCRYPT" = "y" ]; then
+  if [ "$LETSENCRYPT" != "n" ]; then
     mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
     echo "Now, we will generate a Diffie-Hellman (DH) 4096 bits encryption key, to encrypt connections. This will take a moment, please wait..."
     openssl dhparam -out "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" 4096
     sed -i.bak "s/REPLACE_WITH_YOUR@EMAIL.COM/$EMAIL/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
-    sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
-    sed -i.bak "s/ANOTHER_DOMAIN_1/$OTHER_DOMAINS/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    sed -i.bak "s/MAIN_DOMAIN, ANOTHER_DOMAIN_1/$(join_by , "${DOMAINS[@]}")/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
     echo "Now downloading and configuring the certificate signing bot..."
     docker pull certbot/certbot:latest
     sed -i.bak "s:/apps/fabmanager:$FABMANAGER_PATH:g" "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
@@ -210,18 +211,18 @@ configure_env_file()
   done
   # we automatically generate the SECRET_KEY_BASE
   secret=$(cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake secret)
-  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=${secret:-2}/g" "$FABMANAGER_PATH/config/env"
+  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
 }
 
 read_password()
 {
   local password confirmation
-  echo "Please input a password for this administrator's account"
+  >&2 echo "Please input a password for this administrator's account"
   read -rsp " > " password </dev/tty
-  echo "Confirm the password"
+  >&2 printf "\nConfirm the password\n"
   read -rsp " > " confirmation </dev/tty
   if [ "$password" != "$confirmation" ]; then
-    echo "Error: passwords mismatch"
+    >&2 printf "\nError: passwords mismatch\n"
     password=$(read_password)
   fi
   echo "$password"
@@ -230,7 +231,7 @@ read_password()
 setup_assets_and_databases()
 {
   echo "We will now setup the database."
-  read -rp "Continue? (Y/n)" confirm </dev/tty
+  read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:create # create the database
@@ -260,7 +261,7 @@ start()
 
 enable_ssl()
 {
-  if [ "$LETSENCRYPT" = "y" ]; then
+  if [ "$LETSENCRYPT" != "n" ]; then
     # generate certificate
     sudo systemctl start letsencrypt.service
     # serve http content over ssl
