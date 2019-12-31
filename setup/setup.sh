@@ -25,10 +25,6 @@ system_requirements()
     read -rp "Continue anyway? (Y/n) " confirm </dev/tty
     if [[ "$confirm" = "n" ]]; then exit 1; fi
   else
-    if ! command -v sudo; then
-      echo "Please install and configure sudo before running this script."
-      echo "sudo was not found, exiting..." &&  exit 1
-    fi
     local _groups=("sudo" "docker")
     for _group in "${_groups[@]}"; do
       if ! groups | grep "$_group"; then
@@ -38,7 +34,7 @@ system_requirements()
       fi
     done
   fi
-  local _commands=("curl" "sed" "openssl" "docker" "docker-compose" "systemctl")
+  local _commands=("sudo" "curl" "sed" "openssl" "docker" "docker-compose" "systemctl")
   for _command in "${_commands[@]}"; do
     echo "detecting $_command..."
     if ! command -v "$_command"
