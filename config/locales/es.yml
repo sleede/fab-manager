@@ -153,11 +153,11 @@ es:
     lettering: "Punteo"
     VAT: 'IVA'
     subscription: "suscr."
-    Machine_reservation: "machine reserv."
-    Training_reservation: "training reserv."
-    Event_reservation: "event reserv."
-    Space_reservation: "space reserv."
-    wallet: "wallet"
+    Machine_reservation: "reserv. máquina"
+    Training_reservation: "reserv. formación"
+    Event_reservation: "reserv. evento"
+    Space_reservation: "reserv. espacio"
+    wallet: "cartera"
   trainings:
     #training availabilities
     i_ve_reserved: "he reservado"
@@ -175,7 +175,7 @@ es:
     id: "ID"
     surname: "Apellidos"
     first_name: "Nombre"
-    email: "E-mail"
+    email: "Correo electrónico"
     newsletter: "Hoja informativa"
     last_login: "Último acceso"
     gender: "Genero"
@@ -206,7 +206,7 @@ es:
     reservations: "Reservas"
     customer_id: "Identificación del cliente"
     customer: "Cliente"
-    email: "E-mail"
+    email: "Correo electrónico"
     reservation_date: "fecha de reserva"
     reservation_type: "tipo de reserva"
     reservation_object: "objetivo de reserva"
@@ -219,7 +219,7 @@ es:
     subscriptions: "Suscripciones"
     id: "ID"
     customer: "Cliente"
-    email: "E-mail"
+    email: "Correo electrónico"
     subscription: "Suscripción"
     period: "Periodo"
     start_date: "Fecha de comienzo"
@@ -272,7 +272,7 @@ es:
       notify_admin_user_merged:
         user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "El usuario <strong><em>{NAME}</strong></em> se ha fusionado {GENDER, select, true{his} other{her}} con la cuenta importada desde <strong><em>{PROVIDER} </strong> ({UID})</em>." #messageFormat interpolation
       notify_admin_when_project_published:
-        project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
+        project_NAME_has_been_published_html: "Proyecto <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> ha sido publicado."
       notify_admin_when_user_is_created:
         a_new_user_account_has_been_created_NAME_EMAIL_html: "Se ha creado una nueva cuenta: <strong><em>%{NAME} &lt;%{EMAIL}&gt;</strong></em>."
       notify_admin_when_user_is_imported:
