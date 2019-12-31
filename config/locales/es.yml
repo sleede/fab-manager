@@ -349,15 +349,15 @@ es:
       notify_admin_free_disk_space:
         warning_free_disk_space: "Aviso: el espacio disponible en el disco es ahora de %{AVAILABLE} MiB"
       notify_admin_close_period_reminder:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
+        warning_last_closed_period_over_1_year: "Por favor, recuerda cerrar periódicamente tus periodos de contabilidad. El último período cerrado terminó el %{LAST_END}"
+        warning_no_closed_periods: "Por favor, recuerde cerrar periódicamente sus períodos contables. Tiene que cerrar los periodos del %{FIRST_DATE}"
       notify_admin_archive_complete:
-        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
+        archive_complete: "El archivado de datos de %{START} a %{END} se ha realizado. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>haga clic aquí para descargar</a>. Recuerda guardarlo en un medio externo seguro."
       notify_privacy_policy_changed:
-        policy_updated: "Privacy policy updated."
-        click_to_show: "Click here to consult"
+        policy_updated: "Política de privacidad actualizada."
+        click_to_show: "Haga clic aquí para consultar"
       notify_admin_refund_created:
-        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
+        refund_created: "Se ha creado un reembolso de %{AMOUNT} para el usuario %{USER}"
   statistics:
     #statistics tools for admins
     subscriptions: "Suscripciones"
