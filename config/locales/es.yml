@@ -59,13 +59,13 @@ es:
         cannot_be_blank_at_same_time: no puede estar vacío cuando %{field} también está vacío
         cannot_be_in_the_past: no puede estar en el pasado
         cannot_be_before_previous_value: No puede estar antes del valor anterior.
-        cannot_overlap: can't overlap an existing accounting period
-        cannot_encompass: can't encompass an existing accounting period
-        in_closed_period: can't be within a closed accounting period
-        invalid_footprint: invoice's checksum is invalid
-        end_before_start: The end date can't be before the start date. Pick a date after %{START}
-        invalid_duration: The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long.
-        must_be_in_the_past: The period must be strictly prior to today's date.
+        cannot_overlap: no se puede solapar con un período contable existente
+        cannot_encompass: no puede abarcar un período contable existente
+        in_closed_period: no puede estar dentro de un período de contabilidad cerrado
+        invalid_footprint: la suma de comprobación de factura no es válida
+        end_before_start: La fecha de fin no puede ser anterior a la fecha de inicio. Elija una fecha posterior a %{START}
+        invalid_duration: La duración permitida es de 1 día a 1 año. Su período es %{DAYS} días de largo.
+        must_be_in_the_past: El período debe ser estrictamente anterior a la fecha de hoy.
   apipie:
     api_documentation: "Documentación API"
   omniauth:
@@ -140,19 +140,19 @@ es:
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
   accounting_export:
-    journal_code: "Journal code"
-    date: "Entry date"
-    account_code: "Account code"
-    account_label: "Account label"
-    piece: "Document"
-    line_label: "Entry label"
-    debit_origin: "Origin debit"
-    credit_origin: "Origin credit"
-    debit_euro: "Euro debit"
-    credit_euro: "Euro credit"
-    lettering: "Lettering"
+    journal_code: "Código de registro"
+    date: "Fecha contable"
+    account_code: "Código de cuenta"
+    account_label: "Título de cuenta"
+    piece: "Documento"
+    line_label: "Título contable"
+    debit_origin: "Débito origen"
+    credit_origin: "Crédito origen"
+    debit_euro: "Débito euro"
+    credit_euro: "Crédito euro"
+    lettering: "Punteo"
     VAT: 'IVA'
-    subscription: "subscr."
+    subscription: "suscr."
     Machine_reservation: "machine reserv."
     Training_reservation: "training reserv."
     Event_reservation: "event reserv."
