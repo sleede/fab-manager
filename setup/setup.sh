@@ -8,13 +8,13 @@ welcome_message()
   echo -e "\e[31m            Fab-Manager's setup\e[0m"
   echo "============================================"
   echo "Thank you for installing Fab-Manager."
-  printf "This script will guide you through the installation process of Fab-Manager\n"
+  printf "This script will guide you through the installation process of Fab-Manager\n\n"
   echo -e "Please report any \e[1mfeedback or improvement request\e[21m on https://feedback.fab-manager.com/"
   echo -e "For \e[1mbug reports\e[21m, please open a new issue on https://github.com/sleede/fab-manager/issues"
   echo -e "You can call for \e[1mcommunity assistance\e[21m on https://forum.fab-manager.com/"
   printf "\nYou can interrupt this installation at any time by pressing Ctrl+C\n"
-  echo -e "If you do not feel confortable with this installation, you can \e[4msubscribe to our hosting plan\e[24m: contact@fab-manager.com"
-  read -rp "\n\nContinue? (Y/n) " confirm </dev/tty
+  printf "If you do not feel confortable with this installation, you can \e[4msubscribe to our hosting plan\e[24m: contact@fab-manager.com\n\n"
+  read -rp "Continue? (Y/n) " confirm </dev/tty
   if [[ "$confirm" = "n" ]]; then exit 1; fi
 }
 
@@ -51,14 +51,15 @@ system_requirements()
 
 config()
 {
-  echo 'We recommand nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for fab-manager.'
+  echo 'We recommand nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-Manager.'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
-    echo "We recommand let's encrypt to secure the applicaion with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for fab-manager."
+    echo "We recommand let's encrypt to secure the applicaion with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-Manager."
     read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
     if [ "$LETSENCRYPT" != "n" ]; then
-      read -rp "Let's encrypt requires an email address to receive notifications about certificate expiration. Please input a valid email address > " EMAIL </dev/tty
+      echo "Let's encrypt requires an email address to receive notifications about certificate expiration."
+      read -rp "Please input a valid email address > " EMAIL </dev/tty
     fi
     # if the user doesn't want nginx, let him configure his own solution
     echo "What's the domain name where the instance will be active (eg. fab-manager.com)?"
@@ -72,7 +73,7 @@ read_domain()
 {
   read -rp 'Please input the domain name > ' domain </dev/tty
   DOMAINS+=("$domain")
-  read -rp 'Do you have any other domain (eg. www.fab-manager.com)? (y/N)' confirm </dev/tty
+  read -rp 'Do you have any other domain (eg. www.fab-manager.com)? (y/N) ' confirm </dev/tty
   if [ "$confirm" == "y" ]; then
     read_domain
   fi
@@ -81,6 +82,9 @@ read_domain()
 prepare_files()
 {
   FABMANAGER_PATH=${1:-/apps/fabmanager}
+
+  sudo mkdir -p "$FABMANAGER_PATH"
+  sudo chown -R "$(whoami)" "$FABMANAGER_PATH"
 
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
 
@@ -121,7 +125,7 @@ prepare_nginx()
     sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf"
     sed -i.bak "s/MAIN_DOMAIN/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
     sed -i.bak "s/ANOTHER_DOMAIN_1/$OTHER_DOMAINS/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
-    sed -i.bak "s/URL_WITH_PROTOCOL_HTTPS/https://${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
+    sed -i.bak "s/URL_WITH_PROTOCOL_HTTPS/https:\/\/${MAIN_DOMAIN[0]}/g" "$FABMANAGER_PATH/config/nginx/fabmanager.conf.ssl"
   fi
 }
 
@@ -168,7 +172,7 @@ configure_env_file()
   read -rp "Proceed? (Y/n)" confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
-  local doc, variables, secret
+  local doc variables secret
   doc=$(\curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/doc/environment.md)
   variables=(STRIPE_API_KEY STRIPE_PUBLISHABLE_KEY STRIPE_CURRENCY INVOICE_PREFIX FABLAB_WITHOUT_PLANS FABLAB_WITHOUT_SPACES FABLAB_WITHOUT_ONLINE_PAYMENT FABLAB_WITHOUT_INVOICES \
    PHONE_REQUIRED EVENTS_IN_CALENDAR SLOT_DURATION DEFAULT_MAIL_FROM DELIVERY_METHOD DEFAULT_HOST DEFAULT_PROTOCOL SMTP_ADDRESS SMTP_PORT SMTP_USER_NAME SMTP_PASSWORD SMTP_AUTHENTICATION \
@@ -177,10 +181,13 @@ configure_env_file()
    ADMIN_EMAIL ADMIN_PASSWORD SUPERADMIN_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE MESSAGEFORMAT_LOCALE FULLCALENDAR_LOCALE ELASTICSEARCH_LANGUAGE_ANALYZER \
    TIME_ZONE WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT OPENLAB_APP_ID OPENLAB_APP_SECRET OPENLAB_DEFAULT)
   for variable in "${variables[@]}"; do
-    local var_doc, current
+    local var_doc current
     var_doc=$(get_md_anchor "$doc" "$variable")
     current=$(grep "$variable" "$FABMANAGER_PATH/config/env")
+    printf "==== \e[4m%s\e[24m ===\n\n" "$variable"
+    printf "\e[1mDocumentation:\e[21m\n\n"
     echo "$var_doc"
+    printf "======================\n\n"
     echo "Current value: $current"
     read -rp "New value? (leave empty to keep current value)\n > " value </dev/tty
     if [ "$value" != "" ]; then
@@ -194,7 +201,7 @@ configure_env_file()
 
 read_password()
 {
-  local password, confirmation
+  local password confirmation
   read -rsp "Please input a password for this administrator's account\n > " password </dev/tty
   read -rsp "Confirm the password\n > " confirmation </dev/tty
   if [ "$password" != "$confirmation" ]; then

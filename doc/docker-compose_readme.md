@@ -47,7 +47,7 @@ This way, Docker and Docker-compose are pre-installed.
 Choose a datacenter and set your domain name as the hostname.
 
 With other providers, choose a [supported operating system](../README.md#software-stack) and install docker on it:
-- [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) 
+- [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
 - [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 
 Then install [Docker Compose](https://docs.docker.com/compose/install/)
