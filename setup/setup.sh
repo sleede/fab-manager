@@ -49,17 +49,28 @@ system_requirements()
   done
 }
 
+read_email()
+{
+  local email
+  read -rp "Please input a valid email address > " email </dev/tty
+  if [[ "$email" == *"@"*"."* ]]; then
+    EMAIL="$email"
+  else
+    read_email
+  fi
+}
+
 config()
 {
   echo 'We recommand nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-Manager.'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
-    echo "We recommand let's encrypt to secure the applicaion with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-Manager."
+    echo "We recommand let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-Manager."
     read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
     if [ "$LETSENCRYPT" != "n" ]; then
       echo "Let's encrypt requires an email address to receive notifications about certificate expiration."
-      read -rp "Please input a valid email address > " EMAIL </dev/tty
+      read_email
     fi
     # if the user doesn't want nginx, let him configure his own solution
     echo "What's the domain name where the instance will be active (eg. fab-manager.com)?"
@@ -72,7 +83,13 @@ config()
 read_domain()
 {
   read -rp 'Please input the domain name > ' domain </dev/tty
-  DOMAINS+=("$domain")
+  if [[ "$domain" == *"."* ]]; then
+    DOMAINS+=("$domain")
+  else
+    echo "The domain name entered is invalid"
+    read_domain
+    return
+  fi
   read -rp 'Do you have any other domain (eg. www.fab-manager.com)? (y/N) ' confirm </dev/tty
   if [ "$confirm" == "y" ]; then
     read_domain
@@ -157,10 +174,11 @@ get_md_anchor()
   local md_file="$1"
   local anchor="$2"
 
-  local section
+  local section lastline
   section=$(echo "$md_file" | sed -n "/<a name=\"$anchor/,/<a name=/p" | tail -n +2)
-  if [[ $(echo section | tail -n -1) == *"<a name="* ]]; then
-    section=$(echo section | head -n -1)
+  lastline=$(echo "$section" | tail -n -1)
+  if [[ "$lastline" == *"<a name="* ]]; then
+    section=$(echo "$section" | head -n -1)
   fi
   echo "$section"
 }
@@ -169,7 +187,7 @@ configure_env_file()
 {
   echo "We will now configure the environment variables."
   echo "This allows you to customize Fab-Manager's appearance and behavior."
-  read -rp "Proceed? (Y/n)" confirm </dev/tty
+  read -rp "Proceed? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
   local doc variables secret
@@ -178,32 +196,34 @@ configure_env_file()
    PHONE_REQUIRED EVENTS_IN_CALENDAR SLOT_DURATION DEFAULT_MAIL_FROM DELIVERY_METHOD DEFAULT_HOST DEFAULT_PROTOCOL SMTP_ADDRESS SMTP_PORT SMTP_USER_NAME SMTP_PASSWORD SMTP_AUTHENTICATION \
    SMTP_ENABLE_STARTTLS_AUTO SMTP_OPENSSL_VERIFY_MODE SMTP_TLS GA_ID RECAPTCHA_SITE_KEY RECAPTCHA_SECRET_KEY DISQUS_SHORTNAME TWITTER_NAME TWITTER_CONSUMER_KEY TWITTER_CONSUMER_SECRET \
    TWITTER_ACCESS_TOKEN TWITTER_ACCESS_TOKEN_SECRET FACEBOOK_APP_ID LOG_LEVEL ALLOWED_EXTENSIONS ALLOWED_MIME_TYPES MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE DISK_SPACE_MB_ALERT \
-   ADMIN_EMAIL ADMIN_PASSWORD SUPERADMIN_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE MESSAGEFORMAT_LOCALE FULLCALENDAR_LOCALE ELASTICSEARCH_LANGUAGE_ANALYZER \
-   TIME_ZONE WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT OPENLAB_APP_ID OPENLAB_APP_SECRET OPENLAB_DEFAULT)
+   SUPERADMIN_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE MESSAGEFORMAT_LOCALE FULLCALENDAR_LOCALE ELASTICSEARCH_LANGUAGE_ANALYZER TIME_ZONE \
+   WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT OPENLAB_APP_ID OPENLAB_APP_SECRET OPENLAB_DEFAULT OPENLAB_BASE_URI)
   for variable in "${variables[@]}"; do
     local var_doc current
     var_doc=$(get_md_anchor "$doc" "$variable")
     current=$(grep "$variable" "$FABMANAGER_PATH/config/env")
-    printf "==== \e[4m%s\e[24m ===\n\n" "$variable"
-    printf "\e[1mDocumentation:\e[21m\n\n"
+    printf "\n\n\n==== \e[4m%s\e[24m ====\n" "$variable"
+    printf "**** \e[1mDocumentation:\e[21m ****\n"
     echo "$var_doc"
-    printf "======================\n\n"
-    echo "Current value: $current"
-    read -rp "New value? (leave empty to keep current value)\n > " value </dev/tty
+    printf "=======================\n- \e[1mCurrent value: %s\e[21m\n- New value? (leave empty to keep current value)\n" "$current"
+    read -rp "  > " value </dev/tty
+    echo "======================="
     if [ "$value" != "" ]; then
       sed -i.bak "s/$current/$variable=$value/g" "$FABMANAGER_PATH/config/env"
     fi
   done
   # we automatically generate the SECRET_KEY_BASE
   secret=$(cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake secret)
-  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=$secret/g" "$FABMANAGER_PATH/config/env"
+  sed -i.bak "s/SECRET_KEY_BASE=/SECRET_KEY_BASE=${secret:-2}/g" "$FABMANAGER_PATH/config/env"
 }
 
 read_password()
 {
   local password confirmation
-  read -rsp "Please input a password for this administrator's account\n > " password </dev/tty
-  read -rsp "Confirm the password\n > " confirmation </dev/tty
+  echo "Please input a password for this administrator's account"
+  read -rsp " > " password </dev/tty
+  echo "Confirm the password"
+  read -rsp " > " confirmation </dev/tty
   if [ "$password" != "$confirmation" ]; then
     echo "Error: passwords mismatch"
     password=$(read_password)
@@ -220,7 +240,8 @@ setup_assets_and_databases()
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:create # create the database
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
   # prompt default admin email/password
-  read -rp "We will create the default administrator of Fab-Manager. Please input a valid email address\n > " EMAIL </dev/tty
+  echo "We will create the default administrator of Fab-Manager."
+  read_email
   PASSWORD=$(read_password)
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" fabmanager bundle exec rake db:seed # seed the database
 

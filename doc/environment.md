@@ -348,13 +348,12 @@ See [Crowdin documentation](https://support.crowdin.com/in-context-localization/
 Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
-
-This configuration is optional and can only work in production mode. 
-It allows you to display a shared projects gallery and to share your projects with other fablabs.
 <a name="OPENLAB_APP_ID"></a><a name="OPENLAB_APP_SECRET"></a>
 
     OPENLAB_APP_ID, OPENLAB_APP_SECRET
 
+This configuration is optional and can only work in production mode. 
+It allows you to display a shared projects gallery and to share your projects with other fablabs.
 Send an email to **contact@fab-manager.com** to get your OpenLab client's credentials.
 <a name="OPENLAB_DEFAULT"></a>
 
