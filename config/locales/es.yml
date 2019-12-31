@@ -70,10 +70,10 @@ es:
     api_documentation: "Documentación API"
   omniauth:
     #error messages when importing an account from a SSO
-    email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail \"%{OLD_MAIL}\"ya está vinculado a otra cuenta, ingrese su código de autenticación."
-    your_username_is_already_linked_to_another_account_unable_to_update_it: "Su nombre de usuario (%{USERNAME}) ."
-    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) ya está vinculado a otra cuenta, no se puede actualizar."
-    this_account_is_already_linked_to_an_user_of_the_platform: "Esta %{NAME} cuenta ya está vinculada a un usuario de la plataforma ."
+    email_already_linked_to_another_account_please_input_your_authentication_code: "El correo electrónico \"%{OLD_MAIL}\" ya está ligado a otra cuenta, ingrese su código de autenticación."
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "Su nombre de usuario (%{USERNAME}) ya está ligado a otra cuenta, no se puede actualizar."
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) ya está ligado a otra cuenta, no se puede actualizar."
+    this_account_is_already_linked_to_an_user_of_the_platform: "Esta cuenta %{NAME} ya está ligada a un usuario de la plataforma."
   availabilities:
     #availability slots in the calendar
     not_available: "No disponible"
@@ -82,14 +82,14 @@ es:
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
   members:
     #members management
-    unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar el grupo mientras se está ejecutando una suscripción."
-    please_input_the_authentication_code_sent_to_the_address: "Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
+    unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar de grupo mientras haya una suscripción en curso"
+    please_input_the_authentication_code_sent_to_the_address: "Por favor Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
     your_authentication_code_is_not_valid: "Su código de autenticación no es válido."
     current_authentication_method_no_code: "El método de autenticación actual no requiere ningún código de migración"
     requested_account_does_not_exists: "La cuenta solicitada no existe"
   invoices:
     #PDF invoices generation
-    refund_invoice_reference: "Referencia de devolución de factura: %{REF}"
+    refund_invoice_reference: "Referencia de la factura de reembolso: %{REF}"
     invoice_reference: "Referencia de factura: %{REF}"
     code: "Código: %{CODE}"
     order_number: "Pedido #: %{NUMBER}"
