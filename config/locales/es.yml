@@ -173,11 +173,11 @@ es:
     #members list export to EXCEL format
     members: "Miembros"
     id: "ID"
-    surname: "Apellidos"
+    surname: "Apellido"
     first_name: "Nombre"
     email: "Correo electrónico"
-    newsletter: "Hoja informativa"
-    last_login: "Último acceso"
+    newsletter: "Boletín informativo"
+    last_login: "Última conexión"
     gender: "Genero"
     age: "Edad"
     address: "Dirección"
@@ -227,18 +227,18 @@ es:
     amount: "Cantidad"
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
-    online_payment: "Pago online"
+    online_payment: "Pago en línea"
   export_availabilities:
     #reservation slots export, by type, to EXCEL format
     machines: "Máquinas"
-    trainings: "Cursos"
+    trainings: "Formaciones"
     spaces: "Espacios"
     events: "Eventos"
     day_of_week: "Día de la semana"
     date: "Fecha"
-    slot: "Espacio"
+    slot: "Horario"
     machine: "Máquina"
-    training: "Curso"
+    training: "Formación"
     space: "Espacio"
     event: "Evento"
     reservations: "Reservas"
@@ -250,7 +250,7 @@ es:
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abuso ha sido reportado <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
       notify_admin_member_create_reservation:
-        a_RESERVABLE_reservation_was_made_by_USER_html: "una <strong><em>%{RESERVABLE}</em></strong> reserva fue hecha por <strong><em>%{USER}</em></strong>."
+        a_RESERVABLE_reservation_was_made_by_USER_html: "Una reserva de <strong><em>%{RESERVABLE}</em></strong> fue hecha por <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
         account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER} </strong> (%{UID})</em> ha completado su información."
       notify_admin_slot_is_canceled:
