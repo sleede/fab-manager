@@ -17,10 +17,10 @@ es:
   errors:
     messages:
       #CarrierWave
-      carrierwave_processing_error: "fallo al procesar"
+      carrierwave_processing_error: "no se pudo procesar"
       carrierwave_integrity_error: "es un tipo de archivo no permitido"
       carrierwave_download_error: "no pudo ser descargado"
-      extension_white_list_error: "no le está permitido subir archivos de extensión %{extension} , tipos permitidos: %{allowed_types}"
+      extension_white_list_error: "No puede subir archivos con extensión %{extension}, tipos permitidos: %{allowed_types}"
       extension_black_list_error: "no le está permitido subir archivos de extensión %{extension} , tipos prohibidos: %{prohibited_types}"
       rmagick_processing_error: "error al manipular con rmagick, ¿Está seguro de que el archivo es una imagen? Error original: %{e}"
       mime_types_processing_error: "error al procesar archivo MIME::Types, puede ser que el contenido no sea válido. Error original: %{e}"
@@ -393,7 +393,7 @@ es:
     total: "hasta tal punto"
     date: "Fecha"
     user: "Usuario"
-    email: "Email"
+    email: "Correo electrónico"
     phone: "Teléfono"
     gender: "Genero"
     age: "Edad"
