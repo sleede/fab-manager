@@ -40,9 +40,9 @@ tar xvf fablab_production_$(date -I).tar.gz
 sudo cp fablab_production_$(date -I).sql .docker/postgresql/
 rake db:drop
 rake db:create
-docker exec -it fabmanager-postgres bash
+docker-compose exec postgres bash
 cd /var/lib/postgresql/data/
-psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sql
+psql -U postgres -d fablab_production -f fablab_production_$(date -I).sql
 ```
 
 <a name="postgresql-limitations"></a>
