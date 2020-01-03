@@ -123,21 +123,21 @@ es:
     including_amount_payed_on_ordering: "Incluyendo cantidad pagada en el pedido"
     total_amount: "Precio total"
     refund_on_DATE: "Reembolso en %{DATE}"
-    by_stripe_online_payment: "por pago online"
+    by_stripe_online_payment: "por Stripe (pago online)"
     by_cheque: "por cheque"
     by_transfer: "por transferencia"
     by_cash: "en efectivo"
     by_wallet: "por cartera"
-    no_refund: "sin devolución"
-    settlement_by_debit_card: "Efectuado con tarjeta de débito"
-    settlement_done_at_the_reception: "Efectuado en recepción"
-    settlement_by_wallet: "Efectuado con cartera"
+    no_refund: "Sin devolución"
+    settlement_by_debit_card: "Liquidación por tarjeta de débito"
+    settlement_done_at_the_reception: "Liquidación realizada en la recepción"
+    settlement_by_wallet: "Liquidación con cartera"
     on_DATE_at_TIME: "el %{DATE} a las %{TIME},"
-    for_an_amount_of_AMOUNT: "Por una cantidad de %{AMOUNT}"
+    for_an_amount_of_AMOUNT: "por una cantidad de %{AMOUNT}"
     on_DATE_from_START_to_END: "El %{DATE} desde %{START} hasta %{END}" #eg: on feb. 7 from 7AM to 9AM
     from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "Desde %{STARTDATE} hasta %{ENDDATE}, desde %{STARTTIME} hasta %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
-    subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando Desde %{DATE}"
-    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (Free days) empezando desde %{STARTDATE} hasta %{ENDDATE}"
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando desde %{DATE}"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (días gratuitos) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
   accounting_export:
     journal_code: "Código de registro"
@@ -160,7 +160,7 @@ es:
     wallet: "cartera"
   trainings:
     #training availabilities
-    i_ve_reserved: "he reservado"
+    i_ve_reserved: "Reservé"
     completed: "Lleno"
   events:
     #error messages when updating an event
