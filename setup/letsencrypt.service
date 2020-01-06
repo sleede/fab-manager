@@ -4,5 +4,5 @@ Requires=docker.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/docker run --rm --name certbot_fabmanager -v "/apps/fabmanager/letsencrypt:/etc/letsencrypt" certbot/certbot:latest -c "/etc/letsencrypt/config/webroot.ini" certonly
+ExecStart=/usr/bin/docker run --rm --name certbot_fabmanager -v "/apps/fabmanager/letsencrypt/etc:/etc/letsencrypt" certbot/certbot:latest -c "/etc/letsencrypt/config/webroot.ini" certonly
 ExecStartPost=-/usr/bin/docker restart fabmanager_nginx_1

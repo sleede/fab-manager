@@ -4,9 +4,15 @@ DOMAINS=()
 
 welcome_message()
 {
-  echo "============================================"
-  echo -e "\e[31m            Fab-Manager's setup\e[0m"
-  echo "============================================"
+  clear
+  echo "#======================================================================#"
+  echo -e "#\e[31m    ____  __   ____       _  _   __   __ _   __    ___  ____  ____    \e[0m#"
+  echo -e "#\e[31m   (  __)/ _\ (  _ \ ___ ( \/ ) / _\ (  ( \ / _\  / __)(  __)(  _ \\   \e[0m#"
+  echo -e "#\e[31m    ) _)/    \ ) _ ((___)/ \/ \/    \/    //    \( (_ \ ) _)  )   /   \e[0m#"
+  echo -e "#\e[31m   (__) \_/\_/(____/     \_)(_/\_/\_/\_)__)\_/\_/ \___/(____)(__\_)   \e[0m#"
+  echo "#                                                                      #"
+  echo "#======================================================================#"
+  printf "\n                 Welcome to Fab-Manager's setup assistant\n\n\n"
   echo "Thank you for installing Fab-Manager."
   printf "This script will guide you through the installation process of Fab-Manager\n\n"
   echo -e "Please report any \e[1mfeedback or improvement request\e[21m on https://feedback.fab-manager.com/"
@@ -27,10 +33,11 @@ system_requirements()
   else
     local _groups=("sudo" "docker")
     for _group in "${_groups[@]}"; do
+      echo -e "detecting group $_group for current user..."
       if ! groups | grep "$_group"; then
         echo "Please add your current user to the $_group group."
         echo "You can run the following as root: \"usermod -aG $_group $(whoami)\", then logout and login again"
-        echo "current user is misconfigured, exiting..." && exit 1
+        echo -e "\e[91m[ ❌ ] current user is misconfigured, exiting...\e[39m" && exit 1
       fi
     done
   fi
@@ -40,9 +47,10 @@ system_requirements()
     if ! command -v "$_command"
     then
       echo "Please install $_command before running this script."
-      echo "$_command was not found, exiting..." && exit 1
+      echo -e "\e[91m[ ❌ ] $_command was not found, exiting...\e[39m" && exit 1
     fi
   done
+  printf "\e[92m[ ✔ ] All requirements successfully checked.\e[39m \n\n"
 }
 
 read_email()
@@ -58,18 +66,18 @@ read_email()
 
 config()
 {
-  echo 'We recommand nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-Manager.'
+  echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-Manager.'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
-    echo "We recommand let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-Manager."
+    printf "\n\nWe recommend let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-Manager.\n"
     read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
     if [ "$LETSENCRYPT" != "n" ]; then
-      echo "Let's encrypt requires an email address to receive notifications about certificate expiration."
+      printf "\n\nLet's encrypt requires an email address to receive notifications about certificate expiration.\n"
       read_email
     fi
     # if the user doesn't want nginx, let him configure his own solution
-    echo "What's the domain name where the instance will be active (eg. fab-manager.com)?"
+    printf "\n\nWhat's the domain name where the instance will be active (eg. fab-manager.com)?\n"
     read_domain
     MAIN_DOMAIN=("${DOMAINS[0]}")
     OTHER_DOMAINS=${DOMAINS[*]/$MAIN_DOMAIN}
@@ -114,11 +122,11 @@ prepare_files()
 
   # let's encrypt configuration
   if [ "$LETSENCRYPT" != "n" ]; then
-    mkdir -p "$FABMANAGER_PATH/letsencrypt/config"
+    mkdir -p "$FABMANAGER_PATH/letsencrypt/etc/config"
     mkdir -p "$FABMANAGER_PATH/letsencrypt/systemd"
     mkdir -p "$FABMANAGER_PATH/letsencrypt/etc/webrootauth"
 
-    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/webroot.ini.example > "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/webroot.ini.example > "$FABMANAGER_PATH/letsencrypt/etc/config/webroot.ini"
     # temp systemd files
     \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/letsencrypt.service > "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
     \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/letsencrypt.timer > "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.timer"
@@ -147,11 +155,13 @@ function join_by { local IFS="$1"; shift; echo "$*"; }
 prepare_letsencrypt()
 {
   if [ "$LETSENCRYPT" != "n" ]; then
-    mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
-    echo "Now, we will generate a Diffie-Hellman (DH) 4096 bits encryption key, to encrypt connections. This will take a moment, please wait..."
-    openssl dhparam -out "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" 4096
-    sed -i.bak "s/REPLACE_WITH_YOUR@EMAIL.COM/$EMAIL/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
-    sed -i.bak "s/MAIN_DOMAIN, ANOTHER_DOMAIN_1/$(join_by , "${DOMAINS[@]}")/g" "$FABMANAGER_PATH/letsencrypt/config/webroot.ini"
+    if ! openssl dhparam -in "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem"; then
+      mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
+      printf "\n\nNow, we will generate a Diffie-Hellman (DH) 4096 bits encryption key, to encrypt connections. This will take a moment, please wait...\n"
+      openssl dhparam -out "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" 4096
+    fi
+    sed -i.bak "s/REPLACE_WITH_YOUR@EMAIL.COM/$EMAIL/g" "$FABMANAGER_PATH/letsencrypt/etc/config/webroot.ini"
+    sed -i.bak "s/MAIN_DOMAIN, ANOTHER_DOMAIN_1/$(join_by , "${DOMAINS[@]}")/g" "$FABMANAGER_PATH/letsencrypt/etc/config/webroot.ini"
     echo "Now downloading and configuring the certificate signing bot..."
     docker pull certbot/certbot:latest
     sed -i.bak "s:/apps/fabmanager:$FABMANAGER_PATH:g" "$FABMANAGER_PATH/letsencrypt/systemd/letsencrypt.service"
@@ -163,6 +173,17 @@ prepare_letsencrypt()
 
 prepare_docker()
 {
+  if [ "$(docker ps | wc -l)" -gt 1 ]; then
+    printf "\n\nIf you have previously interrupted the installer, it is recommended to stop any existing docker container before continuing.\n"
+    echo "Here's a list of all existing containers:"
+    docker ps -a
+    read -rp "Force remove all containers? (y/N) " confirm </dev/tty
+    if [ "$confirm" = "y" ]; then
+      # shellcheck disable=SC2046
+      docker rm -f $(docker ps -q)
+    fi
+  fi
+
   cd "$FABMANAGER_PATH" && docker-compose pull
 }
 
@@ -182,7 +203,7 @@ get_md_anchor()
 
 configure_env_file()
 {
-  echo "We will now configure the environment variables."
+  printf "\n\nWe will now configure the environment variables.\n"
   echo "This allows you to customize Fab-Manager's appearance and behavior."
   read -rp "Proceed? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
@@ -198,7 +219,7 @@ configure_env_file()
   for variable in "${variables[@]}"; do
     local var_doc current
     var_doc=$(get_md_anchor "$doc" "$variable")
-    current=$(grep "$variable" "$FABMANAGER_PATH/config/env")
+    current=$(grep "$variable=" "$FABMANAGER_PATH/config/env")
     printf "\n\n\n==== \e[4m%s\e[24m ====\n" "$variable"
     printf "**** \e[1mDocumentation:\e[21m ****\n"
     echo "$var_doc"
@@ -230,14 +251,14 @@ read_password()
 
 setup_assets_and_databases()
 {
-  echo "We will now setup the database."
+  printf "\n\nWe will now setup the database.\n"
   read -rp "Continue? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:create # create the database
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
   # prompt default admin email/password
-  echo "We will create the default administrator of Fab-Manager."
+  printf "\n\nWe will now create the default administrator of Fab-Manager.\n"
   read_email
   PASSWORD=$(read_password)
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" fabmanager bundle exec rake db:seed # seed the database
@@ -276,8 +297,11 @@ enable_ssl()
 
 final_message()
 {
-  echo -e "\e[5mCongratulations!\e[25m"
-  echo "Installation process in now complete."
+  printf "\n\e[92m[ ✔ ] Installation process in now complete.\e[39m \n\n"
+  echo "#========================#"
+  echo -e "#\e[5m  🥳 Congratulations! 🎉  \e[25m#"
+  echo "#========================#"
+  printf "\n\n"
   echo -e "Please \e[1mkeep track of the logs\e[21m produced by this script and check that everything is running correctly."
   echo "You can call for the community assistance on https://forum.fab-manager.com"
   echo -e "We wish you a pleasant use of \e[31mFab-Manager\e[0m"
