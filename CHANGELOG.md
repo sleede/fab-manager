@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Ability to create and delete periodic calendar availabilities (recurrence)
+- Automated setup assistant
 - An administrator can delete a member
 - An event can be cancelled, if reservation cancellation is enabled
 - Ability to import iCalendar agendas in the public calendar, through URLs to ICS files (RFC 5545)
@@ -15,6 +16,7 @@
 - Prevent event reservation in the past [Taiga#127]
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
+- Integration of Crowdin "in-context" translation management system
 - Added freeCAD files as default allowed extensions
 - Rake task to sync local users with Stripe
 - Unified translations syntax to use ICU MessageFormat
