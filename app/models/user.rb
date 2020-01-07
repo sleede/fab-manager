@@ -77,6 +77,8 @@ class User < ActiveRecord::Base
   scope :active, -> { where(is_active: true) }
   scope :without_subscription, -> { includes(statistic_profile: [:subscriptions]).where(subscriptions: { statistic_profile_id: nil }) }
   scope :with_subscription, -> { joins(statistic_profile: [:subscriptions]) }
+  scope :not_confirmed, -> { where(confirmed_at: nil) }
+  scope :inactive_for_3_years, -> { where('users.last_sign_in_at < ?', 3.years.ago) }
 
   def to_json(*)
     ApplicationController.new.view_context.render(

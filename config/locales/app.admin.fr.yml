@@ -646,6 +646,9 @@ fr:
           status_enabled: "Activés"
           status_disabled: "Désactivés"
           status_all: "Tous"
+          member_filter_all: "Tous"
+          member_filter_not_confirmed: "Non confirmés"
+          member_filter_inactive_for_3_years: "Inactifs depuis 3 ans"
 
       members_new:
         # ajouter un membre

@@ -231,6 +231,6 @@ class API::MembersController < API::ApiController
   end
 
   def query_params
-    params.require(:query).permit(:search, :order_by, :page, :size)
+    params.require(:query).permit(:search, :filter, :order_by, :page, :size)
   end
 end

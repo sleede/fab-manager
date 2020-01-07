@@ -646,6 +646,9 @@ en:
           status_enabled: "Enabled"
           status_disabled: "Disabled"
           status_all: "All"
+          member_filter_all: "All"
+          member_filter_not_confirmed: "Unconfirmed"
+          member_filter_inactive_for_3_years: "Inactive for 3 years"
 
       members_new:
         # add a member

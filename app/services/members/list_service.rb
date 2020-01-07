@@ -34,6 +34,9 @@ class Members::ListService
                               'plans.base_name ILIKE :search', search: "%#{params[:search]}%")
       end
 
+      filter = params[:filter].presence_in(%w[inactive_for_3_years not_confirmed]) || nil
+      @query = @query.send(filter) if filter
+
       @query
     end
 
