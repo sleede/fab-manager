@@ -74,10 +74,11 @@ class API::EventsController < API::ApiController
 
   def destroy
     authorize Event
-    if @event.safe_destroy
-      head :no_content
+    res = EventService.delete(params[:id], params[:mode])
+    if res.all? { |r| r[:status] }
+      render json: { deleted: res.length, details: res }, status: :ok
     else
-      head :unprocessable_entity
+      render json: { total: res.length, deleted: res.select { |r| r[:status] }.length, details: res }, status: :unprocessable_entity
     end
   end
 

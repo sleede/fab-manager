@@ -183,26 +183,22 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param event {$resource} angular's Event $resource
      */
     $scope.deleteEvent = function (event) {
-      dialogs.confirm({
+      // open a confirmation dialog
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "events/deleteRecurrent.html" %>',
+        size: 'md',
+        controller: 'DeleteRecurrentEventController',
         resolve: {
-          object () {
-            return {
-              title: _t('app.public.events_show.confirmation_required'),
-              msg: _t('app.public.events_show.do_you_really_want_to_delete_this_event')
-            };
-          }
+          eventPromise: ['Event', function (Event) { return Event.get({ id: $scope.event.id }).$promise; }]
         }
-      }, function () {
-        // the admin has confirmed, delete
-        event.$delete(function () {
+      });
+      // once the dialog was closed, do things depending on the result
+      modalInstance.result.then(function (res) {
+        if (res.status == 'success') {
           $state.go('app.public.events_list');
-          return growl.info(_t('app.public.events_show.event_successfully_deleted'));
-        }, function (error) {
-          console.error(error);
-          growl.error(_t('app.public.events_show.unable_to_delete_the_event_because_some_users_alredy_booked_it'));
-        });
-      }
-      );
+        }
+      });
     };
 
     /**
@@ -816,3 +812,71 @@ function __range__ (left, right, inclusive) {
   }
   return range;
 }
+
+
+/**
+ * Controller used in the event deletion modal window
+ */
+Application.Controllers.controller('DeleteRecurrentEventController', ['$scope', '$uibModalInstance', 'Event', 'eventPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, Event, eventPromise, growl, _t) {
+
+    // is the current event (to be deleted) recurrent?
+    $scope.isRecurrent = eventPromise.recurrence_events.length > 0;
+
+    // with recurrent slots: how many slots should we delete?
+    $scope.deleteMode = 'single';
+
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      const { id, start_at, end_at } = eventPromise;
+      // the admin has confirmed, delete the slot
+      Event.delete(
+        { id, mode: $scope.deleteMode },
+        function (res) {
+          // delete success
+          if (res.deleted > 1) {
+            growl.success(_t(
+              'app.public.events_show.events_deleted',
+              {COUNT: res.deleted - 1}
+            ));
+          } else {
+            growl.success(_t(
+              'app.public.events_show.event_successfully_deleted'
+            ));
+          }
+          $uibModalInstance.close({
+            status: 'success',
+            events: res.details.map(function (d) { return d.event.id })
+          });
+        },
+        function (res) {
+          // not everything was deleted
+          const { data } = res;
+          if (data.total > 1) {
+            growl.warning(_t(
+              'app.public.events_show.events_not_deleted',
+              {TOTAL: data.total, COUNT: data.total - data.deleted}
+            ));
+          } else {
+            growl.error(_t(
+              'app.public.events_show.unable_to_delete_the_event'
+            ));
+          }
+          $uibModalInstance.close({
+            status: 'failed',
+            availabilities: data.details.filter(function (d) { return d.status }).map(function (d) { return d.event.id })
+          });
+        });
+    }
+
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
+  }
+]);
+

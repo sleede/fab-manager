@@ -41,4 +41,35 @@ class EventService
     end
     { start_at: start_at, end_at: end_at }
   end
+
+  # delete one or more events (if periodic)
+  def self.delete(event_id, mode = 'single')
+    results = []
+    event = Event.find(event_id)
+    events = case mode
+             when 'single'
+               [event]
+             when 'next'
+               Event.includes(:availability)
+                    .where(
+                      'availabilities.start_at >= ? AND events.recurrence_id = ?',
+                      event.availability.start_at,
+                      event.recurrence_id
+                    )
+                    .references(:availabilities, :events)
+             when 'all'
+               Event.where(
+                 'recurrence_id = ?',
+                 event.recurrence_id
+               )
+             else
+               []
+             end
+
+    events.each do |e|
+      # here we use double negation because safe_destroy can return either a boolean (false) or an Availability (in case of delete success)
+      results.push status: !!e.safe_destroy, event: e # rubocop:disable Style/DoubleNegation
+    end
+    results
+  end
 end

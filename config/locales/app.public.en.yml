@@ -117,7 +117,6 @@ en:
         # confirmation modal
         you_will_receive_confirmation_instructions_by_email: You will receive confirmation instructions by email.
 
-
         # forgotten password modal
         your_email_address_is_unknown: "Your e-mail address is unknown."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive in a moment, an e-mail with instructions to reset your password."
@@ -324,8 +323,14 @@ en:
         you_can_shift_this_reservation_on_the_following_slots: "You can shift this reservation on the following slots:"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_event:  "Do you really want to delete this event?"
+        delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
+        delete_this_event: "Only this event"
+        delete_this_and_next: "This event and the following"
+        delete_all: "All events"
         event_successfully_deleted: "Event successfully deleted"
-        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."
+        events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
+        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
+        events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
