@@ -108,12 +108,12 @@ This is useful if you have your own invoicing system and you want to prevent Fab
     PHONE_REQUIRED
 
 If set to 'false' the phone number won't be required to register a new user on the software.
-
 <a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
 
     USER_CONFIRMATION_NEEDED_TO_SIGN_IN
 
-If set to 'true' (or any non empty string) the users will need to confirm their email address to be able to sign in. Keep this variable empty if you don't want this behaviour.
+If set to 'true' the users will need to confirm their email address to be able to sign in.
+Set to 'false' if you don't want this behaviour.
 <a name="EVENTS_IN_CALENDAR"></a>
 
     EVENTS_IN_CALENDAR
