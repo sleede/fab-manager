@@ -6,6 +6,7 @@
 - An event can be cancelled, if reservation cancellation is enabled
 - Ability to import iCalendar agendas in the public calendar, through URLs to ICS files (RFC 5545)
 - Ability to configure the duration of a reservation slot, using `SLOT_DURATION`. Previously, only 60 minutes slots were allowed
+- Ability to force the email validation when a new user registers. This is optionally configured with `USER_CONFIRMATION_NEEDED_TO_SIGN_IN`
 - Display the scheduled events in the admin calendar, depending on `EVENTS_IN_CALENDAR` configuration.
 - Display indications on required fields in new administrator form
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
@@ -32,6 +33,7 @@
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
 - [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)
 - [TODO DEPLOY] add the `EVENTS_IN_CALENDAR` environment variable (see [doc/environment.md](doc/environment.md#EVENTS_IN_CALENDAR) for configuration details)
+- [TODO DEPLOY] add the `USER_CONFIRMATION_NEEDED_TO_SIGN_IN` environment variable (see [doc/environment.md](doc/environment.md#USER_CONFIRMATION_NEEDED_TO_SIGN_IN) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
 - [TODO DEPLOY] `rake db:migrate`
 

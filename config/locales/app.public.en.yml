@@ -98,6 +98,7 @@ en:
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+        you_will_receive_confirmation_instructions_by_email_detailed: "You will receive an email with instructions about how to confirm your account in a few minutes."
 
         # password modification modal
         change_your_password: "Change your password"
@@ -107,10 +108,15 @@ en:
         # connection modal
         connection: "Connection"
         password_forgotten: "Forgotten password?"
+        confirm_my_account: "Confirm my e-mail"
         not_registered_to_the_fablab: "Not registered to the Fablab?"
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."
         caps_lock_is_on: "Caps lock key is on."
+
+        # confirmation modal
+        you_will_receive_confirmation_instructions_by_email: You will receive confirmation instructions by email.
+
 
         # forgotten password modal
         your_email_address_is_unknown: "Your e-mail address is unknown."

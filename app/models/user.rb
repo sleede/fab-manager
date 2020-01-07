@@ -289,7 +289,7 @@ class User < ActiveRecord::Base
   end
 
   def confirmation_required?
-    false
+    Rails.application.secrets.user_confirmation_needed_to_sign_in ? super : false
   end
 
   private

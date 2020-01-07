@@ -1,17 +1,18 @@
 'use strict';
 
 Application.Services.factory('AuthService', ['Session', 'CSRF', function (Session, CSRF) {
-  return {
-    isAuthenticated () {
-      return (Session.currentUser != null) && (Session.currentUser.id != null);
-    },
+  let service = {};
 
-    isAuthorized (authorizedRoles) {
-      if (!angular.isArray(authorizedRoles)) {
-        authorizedRoles = [authorizedRoles];
-      }
-
-      return this.isAuthenticated() && (authorizedRoles.indexOf(Session.currentUser.role) !== -1);
-    }
+  service.isAuthenticated = function() {
+    return (Session.currentUser != null) && (Session.currentUser.id != null);
   };
+
+  service.isAuthorized = function(authorizedRoles) {
+    if (!angular.isArray(authorizedRoles)) {
+      authorizedRoles = [authorizedRoles];
+    }
+    return service.isAuthenticated() && (authorizedRoles.indexOf(Session.currentUser.role) !== -1);
+  };
+
+  return service;
 }]);

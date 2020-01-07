@@ -98,6 +98,7 @@ es:
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+        you_will_receive_confirmation_instructions_by_email_detailed: "Recibirá un correo electrónico con instrucciones sobre cómo confirmar su cuenta en unos minutos."
 
         # password modification modal
         change_your_password: "Cambiar contraseña"
@@ -107,10 +108,14 @@ es:
         # connection modal
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
+        confirm_my_account: "Confirmar mi E-mail"
         not_registered_to_the_fablab: "¿No está registrado en el fatlab aún?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
+
+        # confirmation modal
+        you_will_receive_confirmation_instructions_by_email: Recibirá las instrucciones de confirmación por email.
 
         # forgotten password modal
         your_email_address_is_unknown: "Se desconoce su email."
