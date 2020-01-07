@@ -7,7 +7,7 @@ welcome_message()
   clear
   echo "#======================================================================#"
   echo -e "#\e[31m    ____  __   ____       _  _   __   __ _   __    ___  ____  ____    \e[0m#"
-  echo -e "#\e[31m   (  __)/ _\ (  _ \ ___ ( \/ ) / _\ (  ( \ / _\  / __)(  __)(  _ \\   \e[0m#"
+  echo -e "#\e[31m   (  __)/ _\ (  _ \ ___ ( \/ ) / _\ (  ( \ / _\  / __)(  __)(  _ \   \e[0m#"
   echo -e "#\e[31m    ) _)/    \ ) _ ((___)/ \/ \/    \/    //    \( (_ \ ) _)  )   /   \e[0m#"
   echo -e "#\e[31m   (__) \_/\_/(____/     \_)(_/\_/\_/\_)__)\_/\_/ \___/(____)(__\_)   \e[0m#"
   echo "#                                                                      #"
@@ -155,7 +155,7 @@ function join_by { local IFS="$1"; shift; echo "$*"; }
 prepare_letsencrypt()
 {
   if [ "$LETSENCRYPT" != "n" ]; then
-    if ! openssl dhparam -in "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem"; then
+    if ! openssl dhparam -in "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" -check; then
       mkdir -p "$FABMANAGER_PATH/config/nginx/ssl"
       printf "\n\nNow, we will generate a Diffie-Hellman (DH) 4096 bits encryption key, to encrypt connections. This will take a moment, please wait...\n"
       openssl dhparam -out "$FABMANAGER_PATH/config/nginx/ssl/dhparam.pem" 4096
