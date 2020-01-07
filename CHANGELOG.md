@@ -3,7 +3,7 @@
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - Automated setup assistant
 - An administrator can delete a member
-- An event can be cancelled, if reservation cancellation is enabled
+- An event reservation can be cancelled, if reservation cancellation is enabled
 - Ability to import iCalendar agendas in the public calendar, through URLs to ICS files (RFC 5545)
 - Ability to configure the duration of a reservation slot, using `SLOT_DURATION`. Previously, only 60 minutes slots were allowed
 - Ability to force the email validation when a new user registers. This is optionally configured with `USER_CONFIRMATION_NEEDED_TO_SIGN_IN`
