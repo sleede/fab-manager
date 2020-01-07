@@ -9,6 +9,7 @@
 - Ability to force the email validation when a new user registers. This is optionally configured with `USER_CONFIRMATION_NEEDED_TO_SIGN_IN`
 - Display the scheduled events in the admin calendar, depending on `EVENTS_IN_CALENDAR` configuration.
 - Display indications on required fields in new administrator form
+- Filter members by non-validated emails or by inactive for 3 years
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
