@@ -646,6 +646,9 @@ pt:
           status_enabled: "Ativos"
           status_disabled: "Desabilitados"
           status_all: "Todos"
+          member_filter_all: "All"
+          member_filter_not_confirmed: "Unconfirmed"
+          member_filter_inactive_for_3_years: "Inactive for 3 years"
 
       members_new:
         # add a member
