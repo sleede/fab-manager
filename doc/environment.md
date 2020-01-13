@@ -10,7 +10,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences. 
+The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences.
 If you are in a development environment, your can keep most of the default values, otherwise, in production, values must be configured carefully.
 
 The settings in [config/application.yml](../config/application.yml.default) configure the environment variables when the application run in development mode.
@@ -58,9 +58,9 @@ You can generate such a random key by running `rake secret`.
 Key and secret used to identify you Stripe account through the API.
 Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
-**MANDATORY**: Even if you don't want to charge your customers, you must fill this settings. 
+**MANDATORY**: Even if you don't want to charge your customers, you must fill this settings.
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
-If you change these keys during the application lifecycle, you must run `rake fablab:stripe:sync_members`, otherwise your users won't be able to do card payments. 
+If you change these keys during the application lifecycle, you must run `rake fablab:stripe:sync_members`, otherwise your users won't be able to do card payments.
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
@@ -125,7 +125,7 @@ If set to 'true', the admin calendar will display the scheduled events in the cu
 Machine and space availabilities are divided in multiple slots of the duration set by this variable.
 Default value is 60 minutes (1 hour).
 
-⚠ Changing this value during the application life may cause serious issues. 
+⚠ Changing this value during the application life may cause serious issues.
 Please ensure there's no machine/space availabilities opened to reservation or already reserved **in the future** when you change this value.
 <a name="DEFAULT_MAIL_FROM"></a>
 
@@ -155,7 +155,7 @@ Identifier of your Google Analytics account.
     RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
 
 Configuration keys of Google ReCaptcha V2 (Checkbox).
-This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided. .
+This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided.
 <a name="DISQUS_SHORTNAME"></a>
 
     DISQUS_SHORTNAME
@@ -222,7 +222,7 @@ If this parameter is not specified, the maximum size allowed will be 5MB.
     MAX_IMPORT_SIZE
 
 Maximum size (in bytes) allowed for import files uploaded on the platform.
-Currently, this is only used to import users from a CSV file. 
+Currently, this is only used to import users from a CSV file.
 If this parameter is not specified, the maximum size allowed will be 5MB.
 <a name="DISK_SPACE_MB_ALERT"></a>
 
@@ -234,15 +234,15 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
 
     ADMIN_EMAIL, ADMIN_PASSWORD
 
-Credentials for the first admin user created when seeding the project. 
+Credentials for the first admin user created when seeding the project.
 By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL
 
-Optional email of the administrator account in charge of the system administration. 
+Optional email of the administrator account in charge of the system administration.
 If specified, it will be hidden from the administrators list and it will exclusively receive the notifications related to the system administration.
-If not specified, every admins will receive system administration notifications.  
+If not specified, every admins will receive system administration notifications.
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# From this migration, we are able to store events from an external calendar (using the iCalendar standard format)
 class CreateICalendarEvents < ActiveRecord::Migration
   def change
     create_table :i_calendar_events do |t|

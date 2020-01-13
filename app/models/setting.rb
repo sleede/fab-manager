@@ -61,7 +61,9 @@ class Setting < ActiveRecord::Base
                              accounting_Event_code
                              accounting_Event_label
                              accounting_Space_code
-                             accounting_Space_label] }
+                             accounting_Space_label
+                             hub_last_version
+                             hub_public_key] }
 
   after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 

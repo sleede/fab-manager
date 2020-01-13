@@ -19,6 +19,7 @@
 - Prevent event reservation in the past [Taiga#127]
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
+- Added the a "cron" tab in Sidekiq web-ui to watch scheduled tasks
 - Integration of Crowdin "in-context" translation management system
 - Added freeCAD files as default allowed extensions
 - Rake task to sync local users with Stripe

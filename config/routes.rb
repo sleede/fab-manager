@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   post 'webhooks' => 'webhooks#create'
@@ -206,6 +207,8 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
+
+  get 'health' => 'health#status'
 
   apipie
 end
