@@ -116,7 +116,7 @@
   </section> <!-- /.vbox -->
 
   <div class="app-generator">
-    <span class="app-version" uib-tooltip="{{'app.public.common.version' | translate}} {{version.version}}" ng-if="currentUser && currentUser.role == 'admin'" ng-click="versionModal()">
+    <span class="app-version" uib-tooltip="{{'app.public.common.version' | translate}} {{version.current}}" ng-if="currentUser && currentUser.role == 'admin'" ng-click="versionModal()">
       <i class="fa fa-question-circle" aria-label="Version ?" ng-show="version.up_to_date"></i>
       <i class="fa fa-refresh pointer" aria-label="Upgrade required" ng-show="!version.up_to_date && !version.security"></i>
       <i class="fa fa-warning pointer" aria-label="Security upgrade required" ng-show="!version.up_to_date && version.security"></i>
