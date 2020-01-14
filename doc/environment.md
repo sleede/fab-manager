@@ -243,6 +243,11 @@ By default, theses variables are not present in application.yml because they are
 Optional email of the administrator account in charge of the system administration.
 If specified, it will be hidden from the administrators list and it will exclusively receive the notifications related to the system administration.
 If not specified, every admins will receive system administration notifications.
+<a name="FORCE_VERSION_CHECK"></a>
+
+    FORCE_VERSION_CHECK
+
+In test and development environments, the version won't be check automatically, unless this variable is set to "true".
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
