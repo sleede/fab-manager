@@ -48,7 +48,7 @@ namespace :fablab do
 
     desc 'sync users to the stripe database'
     task sync_members: :environment do
-      User.with_role(:member).each do |member|
+      User.members.each do |member|
         begin
           stp_customer = Stripe::Customer.retrieve member.stp_customer_id
           StripeWorker.perform_async(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]

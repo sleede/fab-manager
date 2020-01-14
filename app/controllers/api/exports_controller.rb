@@ -55,7 +55,7 @@ class API::ExportsController < API::ApiController
       when 'reservations'
         export = export.where('created_at > ?', Reservation.maximum('updated_at'))
       when 'members'
-        export = export.where('created_at > ?', User.with_role(:member).maximum('updated_at'))
+        export = export.where('created_at > ?', User.members.maximum('updated_at'))
       else
         raise ArgumentError, "Unknown export users/#{type}"
       end

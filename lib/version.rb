@@ -6,4 +6,21 @@ class Version
     package = File.read('package.json')
     JSON.parse(package)['version']
   end
+
+  def self.up_to_date?
+    hub_version = Setting.find_by(name: 'hub_last_version')&.value
+    return unless hub_version
+
+    json = JSON.parse(hub_version)
+    json['status']
+  end
+
+  def self.check_and_schedule
+    VersionCheckWorker.perform_async
+    # every sunday at 1:15am
+    m = DateTime.current.minute
+    h = DateTime.current.hour
+    d = DateTime.current.cwday
+    Sidekiq::Cron::Job.create(name: 'Automatic version check', cron: "#{m} #{h} * * #{d}", class: 'VersionCheckWorker')
+  end
 end

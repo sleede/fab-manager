@@ -22,15 +22,15 @@ class FabHub
     uri = URI.join(hub_base_url, rel_url)
     uri.query = URI.encode_www_form(payload)
 
-    res = Net::HTTP.get_response(uri, read_timeout: 20)
+    res = Net::HTTP.get_response(uri)
     JSON.parse(res.body) if res.is_a?(Net::HTTPSuccess)
   end
 
   def self.hub_base_url
     if Rails.env.production?
-      ENV['HUB_BASE_URL'] || 'https://hub.fab-manager.com/api'
+      ENV['HUB_BASE_URL'] || 'https://hub.fab-manager.com'
     else
-      ENV['HUB_BASE_URL'] || 'http://localhost:3000/api'
+      ENV['HUB_BASE_URL'] || 'http://localhost:3000'
     end
   end
 end

@@ -116,10 +116,10 @@ class API::MembersController < API::ApiController
     authorize :export
 
     last_update = [
-      User.with_role(:member).maximum('updated_at'),
-      Profile.where(user_id: User.with_role(:member)).maximum('updated_at'),
-      InvoicingProfile.where(user_id: User.with_role(:member)).maximum('updated_at'),
-      StatisticProfile.where(user_id: User.with_role(:member)).maximum('updated_at'),
+      User.members.maximum('updated_at'),
+      Profile.where(user_id: User.members).maximum('updated_at'),
+      InvoicingProfile.where(user_id: User.members).maximum('updated_at'),
+      StatisticProfile.where(user_id: User.members).maximum('updated_at'),
       Subscription.maximum('updated_at')
     ].max
 

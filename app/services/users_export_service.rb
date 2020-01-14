@@ -49,7 +49,7 @@ class UsersExportService
 
   # export members
   def export_members(export)
-    @members = User.with_role(:member)
+    @members = User.members
                    .includes(:group, :tags, :projects, :profile,
                              invoicing_profile: [:invoices, :address, organization: [:address]],
                              statistic_profile: [:trainings, subscriptions: [:plan]])

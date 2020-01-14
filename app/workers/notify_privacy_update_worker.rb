@@ -9,7 +9,7 @@ class NotifyPrivacyUpdateWorker
 
     # notify all users
     NotificationCenter.call type: :notify_privacy_policy_changed,
-                            receiver: User.with_role(:member).all,
+                            receiver: User.members.all,
                             attached_object: setting
   end
 

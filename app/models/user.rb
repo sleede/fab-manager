@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
     User.with_role(:admin)
   end
 
+  def self.members
+    User.with_role(:member)
+  end
+
   def self.superadmin
     return unless Rails.application.secrets.superadmin_email.present?
 

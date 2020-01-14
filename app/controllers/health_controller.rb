@@ -5,6 +5,8 @@ class HealthController < ActionController::Base
   respond_to :json
 
   def status
+    require 'version'
+
     render json: {
       name: 'Fab-Manager',
       status: 'running',
@@ -13,7 +15,12 @@ class HealthController < ActionController::Base
         redis: HealthService.redis?,
         elasticsearch: HealthService.elasticsearch?
       },
-      stats: HealthService.stats
+      up_to_date: {
+        migrations: HealthService.migrations?,
+        version: Version.up_to_date?
+      },
+      stats: HealthService.stats,
+      tagline: 'Manage the DIY'
     }
   end
 end

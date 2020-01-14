@@ -74,6 +74,9 @@ module Fablab
     config.after_initialize do
       plugins = FabManager.plugins
       plugins&.each(&:notify_after_initialize)
+
+      require 'version'
+      Version.check_and_schedule
     end
   end
 end
