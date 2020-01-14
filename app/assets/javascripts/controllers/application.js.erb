@@ -23,7 +23,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
     // Fab-manager's version
     $scope.version =
-      { version: '' };
+      { current: '' };
 
     // currency symbol for the current locale (cf. angular-i18n)
     $rootScope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
@@ -41,7 +41,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         if (user.role === 'admin') {
           return $scope.version = Version.get();
         } else {
-          return $scope.version = { version: '' };
+          return $scope.version = { current: '' };
         }
       }
     };
@@ -266,6 +266,16 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
       toggler.toggleClass('active');
     };
+
+    $scope.versionModal = function() {
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/versions/upgradeModal.html" %>',
+        controller: 'VersionModalController',
+        resolve: {
+          version() { return $scope.version; }
+        }
+      });
+    }
 
     /* PRIVATE SCOPE */
     /**
@@ -513,3 +523,14 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     return initialize();
   }
 ]);
+
+
+Application.Controllers.controller('VersionModalController', ['$scope', '$uibModalInstance', 'version', function ($scope, $uibModalInstance, version) {
+  // version infos (current version + upgrade infos from hub)
+  $scope.version = version;
+
+  // callback to close the modal
+  $scope.close = function () {
+    $uibModalInstance.dismiss();
+  }
+}]);

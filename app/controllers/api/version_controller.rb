@@ -7,7 +7,10 @@ class API::VersionController < API::ApiController
 
   def show
     authorize :version
+    update_status = Setting.find_by(name: 'hub_last_version')&.value || '{}'
 
-    render json: { version: Version.current }, status: :ok
+    json = JSON.parse(update_status)
+    json['current'] = Version.current
+    render json: json, status: :ok
   end
 end

@@ -12,7 +12,7 @@ class Version
     return unless hub_version
 
     json = JSON.parse(hub_version)
-    json['status']
+    json['up_to_date']
   end
 
   def self.check_and_schedule

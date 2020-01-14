@@ -123,6 +123,12 @@ fr:
 
         # Fab-manager's version
         version: "Version :"
+        upgrade_fabmanager: "Mettez à jour Fab-Manager"
+        current_version: "Vous utilisez actuellement la version {VERSION} de Fab-Manager."
+        upgrade_to: "Une nouvelle version est disponible. Vous pouvez mettre à jour vers la version {VERSION}."
+        read_more: "Voir les détails de cette version"
+        security_version_html: "<strong>Votre version actuelle est vulnérable !</strong><br> Une version ultérieure, actuellement disponible, inclut des correctifs de sécurité. Mettez à jour dès que possible !"
+        how_to: "Comment mettre à jour ?"
 
         # Notifications
         and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}}..."
