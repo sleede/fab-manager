@@ -54,12 +54,8 @@ RECAPTCHA_SECRET_KEY: ''
 # Projects comments
 DISQUS_SHORTNAME:
 
-# Twitter sharing & last tweet on home page
+# Twitter sharing
 TWITTER_NAME: 'FablabGrenoble'
-TWITTER_CONSUMER_KEY: ''
-TWITTER_CONSUMER_SECRET: ''
-TWITTER_ACCESS_TOKEN: ''
-TWITTER_ACCESS_TOKEN_SECRET: ''
 
 # Facebook sharing
 FACEBOOK_APP_ID: ''
@@ -102,4 +98,3 @@ MAX_IMPORT_SIZE: '5242880'
 MAX_IMAGE_SIZE: '10485760'
 # 20971520 = 20 megabytes
 MAX_CAO_SIZE: '20971520'
-
