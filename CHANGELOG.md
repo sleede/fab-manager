@@ -41,7 +41,7 @@
 - [TODO DEPLOY] add the `EVENTS_IN_CALENDAR` environment variable (see [doc/environment.md](doc/environment.md#EVENTS_IN_CALENDAR) for configuration details)
 - [TODO DEPLOY] add the `USER_CONFIRMATION_NEEDED_TO_SIGN_IN` environment variable (see [doc/environment.md](doc/environment.md#USER_CONFIRMATION_NEEDED_TO_SIGN_IN) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
-- [TODO DEPLOY] `rake db:migrate`
+- [TODO DEPLOY] `rake db:migrate && rake db:seed`
 
 ## v4.2.4 2019 October 30
 
