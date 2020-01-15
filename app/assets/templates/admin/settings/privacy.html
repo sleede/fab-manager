@@ -39,7 +39,7 @@
                  switch-animate="true"/>
           <p>
             <span translate>{{ 'app.admin.settings.privacy.about_analytics' }}</span>
-            <a href="https://hub.fab-manager.com/privacy" target="_blank" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
+            <a ng-click="analyticsModal()" class="pointer" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
           </p>
           <button name="button" class="btn btn-warning" ng-click="save(fabAnalytics)" translate>{{ 'app.shared.buttons.save' }}</button>
         </div>

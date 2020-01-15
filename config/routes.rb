@@ -166,6 +166,9 @@ Rails.application.routes.draw do
 
     # payments handling
     post 'payments/confirm_payment' => 'payments/confirm_payment'
+
+    # FabAnalytics
+    get 'analytics/data' => 'analytics#data'
   end
 
   # rss

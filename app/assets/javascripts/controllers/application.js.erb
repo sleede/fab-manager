@@ -526,7 +526,9 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
   }
 ]);
 
-
+/**
+ * Controller used in the modal showing details about the version and the upgrades
+ */
 Application.Controllers.controller('VersionModalController', ['$scope', '$uibModalInstance', 'version', function ($scope, $uibModalInstance, version) {
   // version infos (current version + upgrade infos from hub)
   $scope.version = version;

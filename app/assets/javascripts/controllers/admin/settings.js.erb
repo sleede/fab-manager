@@ -278,6 +278,20 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       }
     };
 
+    /**
+     * Open a modal showing a sample of the collected data if FabAnalytics is enabled
+     */
+    $scope.analyticsModal = function() {
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/settings/analyticsModal.html" %>',
+        controller: 'AnalyticsModalController',
+        size: 'lg',
+        resolve: {
+          analyticsData: ['FabAnalytics', function (FabAnalytics) { return FabAnalytics.data().$promise; }]
+        }
+      });
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -363,3 +377,18 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
     };
   }
 ]);
+
+/**
+ * Controller used in the "what do we collect?" modal, about FabAnalytics
+ */
+Application.Controllers.controller('AnalyticsModalController', ['$scope', '$uibModalInstance', 'analyticsData',
+  function ($scope,$uibModalInstance, analyticsData) {
+    // analytics data sample
+    $scope.data = analyticsData;
+
+    // callback to close the modal
+    $scope.close = function () {
+      $uibModalInstance.dismiss();
+    }
+  }
+])

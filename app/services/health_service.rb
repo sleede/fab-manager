@@ -31,15 +31,9 @@ class HealthService
     !ActiveRecord::Migrator.needs_migration?
   end
 
-  def self.stats
-    enable = Setting.find_by(name: 'fab_analytics')&.value
-    return false if enable == 'false'
-
+  def self.row_stats
     require 'version'
-    require 'openssl'
-    require 'base64'
-
-    stats = {
+    {
       version: Version.current,
       members: User.members.count,
       admins: User.admins.count,
@@ -50,7 +44,17 @@ class HealthService
       online_payment: !Rails.application.secrets.fablab_without_online_payments,
       invoices: !Rails.application.secrets.fablab_without_invoices,
       openlab: Rails.application.secrets.openlab_app_secret.present?
-    }.to_json.to_s
+    }
+  end
+
+  def self.stats
+    enable = Setting.find_by(name: 'fab_analytics')&.value
+    return false if enable == 'false'
+
+    require 'openssl'
+    require 'base64'
+
+    row_stats.to_json.to_s
 
     key = Setting.find_by(name: 'hub_public_key')&.value
     return false unless key

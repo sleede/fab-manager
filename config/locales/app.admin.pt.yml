@@ -964,6 +964,18 @@ pt:
           publish_will_notify: "Publish a new version will send a notification to every users."
           publish: "Publish"
           users_notified: "Platform users will be notified of the update."
+          analytics:
+            intro_analytics_html: "You'll find below a detailed view of all the data, Fab-Manager will collect <strong>if permission is granted.</strong>"
+            version: "Application version"
+            members: "Number of members"
+            admins: "Number of administrators"
+            availabilities: "Number of availabilities of the last 7 days"
+            reservations: "Number of reservations during the last 7 days"
+            plans: "Is the subscription module active?"
+            spaces: "Is the space management module active?"
+            online_payment: "Is the online payment module active?"
+            invoices: "Is the invoicing module active?"
+            openlab: "Is the project sharing module (OpenLab) active?"
 
       open_api_clients:
         add_new_client: "Criar novo cliente de API"
