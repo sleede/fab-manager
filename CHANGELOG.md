@@ -12,7 +12,7 @@
 - Display indications on required fields in new administrator form
 - Filter members by non-validated emails or by inactive for 3 years
 - Automatic version check with security alerts
-- Endpoint to check the system health
+- Public endpoint to check the system health
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
@@ -21,6 +21,7 @@
 - Prevent event reservation in the past [Taiga#127]
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
+- Option to disable developers analytics
 - Added the a "cron" tab in Sidekiq web-ui to watch scheduled tasks
 - Integration of Crowdin "in-context" translation management system
 - Added freeCAD files as default allowed extensions
