@@ -32,6 +32,9 @@ class HealthService
   end
 
   def self.stats
+    enable = Setting.find_by(name: 'fab_analytics')&.value
+    return false if enable == 'false'
+
     require 'version'
     require 'openssl'
     require 'base64'
@@ -50,7 +53,7 @@ class HealthService
     }.to_json.to_s
 
     key = Setting.find_by(name: 'hub_public_key')&.value
-    return 'disabled' unless key
+    return false unless key
 
     public_key = OpenSSL::PKey::RSA.new(key)
     Base64.encode64(public_key.public_encrypt(stats))

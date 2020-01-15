@@ -26,5 +26,24 @@
 
         </div>
 
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 m-t-lg">
+          <label for="is_recurrent" translate>{{ 'app.admin.settings.fab_analytics' }}</label>
+          <input bs-switch
+                 ng-model="fabAnalytics.value"
+                 id="is_recurrent"
+                 type="checkbox"
+                 class="form-control"
+                 switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+                 switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+                 switch-animate="true"/>
+          <p>
+            <span translate>{{ 'app.admin.settings.privacy.about_analytics' }}</span>
+            <a href="https://hub.fab-manager.com/privacy" target="_blank" translate>{{ 'app.admin.settings.privacy.read_more' }}</a>
+          </p>
+          <button name="button" class="btn btn-warning" ng-click="save(fabAnalytics)" translate>{{ 'app.shared.buttons.save' }}</button>
+        </div>
+      </div>
+
     </div>
 </div>

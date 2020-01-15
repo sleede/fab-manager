@@ -946,6 +946,7 @@ fr:
         display_name: "Afficher le nom"
         display_name_enable: "l'affichage du nom"
         machines_sort_by: "l'odre d'affichage des machines"
+        fab_analytics: "Fab Analytics"
         elements_ordering: "Ordre d'affichage des éléments"
         machines_order: "Ordre des machines"
         display_machines_sorted_by: "Afficher les machines triées par"
@@ -964,6 +965,8 @@ fr:
           publish_will_notify: "Publier une nouvelle version enverra une notification à l'ensemble des utilisateurs."
           publish: "Publier"
           users_notified: "Les utilisateurs de la plateforme seront notifiés de la mise à jour."
+          about_analytics: "J'accepte de partager des données anonymes avec l'équipe de développement pour aider à améliorer Fab-Manager."
+          read_more: "Quelles informations collectons-nous ?"
 
       open_api_clients:
         add_new_client: "Créer un compte client"

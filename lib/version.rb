@@ -16,7 +16,7 @@ class Version
   end
 
   def self.check_and_schedule
-    return if Rails.env.development? && !ENV['FORCE_VERSION_CHECK']
+    return if (Rails.env.development? || Rails.env.test?) && ENV['FORCE_VERSION_CHECK'] != 'true'
 
     VersionCheckWorker.perform_async
     # every sunday at 1:15am

@@ -123,6 +123,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       value: (settingsPromise.display_name_enable === 'true')
     };
 
+    $scope.fabAnalytics = {
+      name: 'fab_analytics',
+      value: (settingsPromise.fab_analytics === 'true')
+    };
+
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {
       version: null,
