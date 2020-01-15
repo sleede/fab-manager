@@ -19,6 +19,7 @@
 - Notify all admins on the creation of a refund invoice
 - Calendar management: improved legend display and visual behavior
 - Prevent event reservation in the past [Taiga#127]
+- Removed the need of twitter API keys to display the last tweet on the home page
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Option to disable developers analytics
