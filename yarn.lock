@@ -1498,6 +1498,11 @@ tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
+twitter-fetcher@^18.0.2:
+  version "18.0.2"
+  resolved "https://registry.yarnpkg.com/twitter-fetcher/-/twitter-fetcher-18.0.2.tgz#47aeff8f3ccbec54443d7f5a5e845ed5279c0b5f"
+  integrity sha1-R67/jzzL7FREPX9aXoRe1SecC18=
+
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"

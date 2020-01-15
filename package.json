@@ -72,6 +72,7 @@
     "ngUpload": "0.5",
     "nvd3": "1.8",
     "summernote": "0.7.3",
+    "twitter-fetcher": "^18.0.2",
     "ui-select": "0.19",
     "underscore": "1.7"
   }

@@ -419,3 +419,19 @@
 .slider-nav__item--current {
   background: #ccc;
 }
+
+
+// Twitter
+#twitter {
+  ul {
+    margin: 0px 15px;
+    padding-left: 0;
+    li {
+      display: block;
+    }
+  }
+
+  .timePosted {
+    margin-top: 0;
+  }
+}
