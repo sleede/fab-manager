@@ -10,15 +10,12 @@
  */
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'Twitter', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise',
-  function ($scope, $stateParams, Twitter, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise',
+  function ($scope, $stateParams, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise) {
   /* PUBLIC SCOPE */
 
     // The last registered members who confirmed their addresses
     $scope.lastMembers = lastMembersPromise;
-
-    // The last tweets from the Fablab official twitter account
-    $scope.lastTweets = [];
 
     // The last projects published/documented on the plateform
     $scope.lastProjects = lastProjectsPromise;
@@ -45,10 +42,6 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
    * Kind of constructor: these actions will be realized first when the controller is loaded
    */
     const initialize = function () {
-    // we retrieve tweets from here instead of ui-router's promise because, if adblock stop the API request,
-    // this prevent the whole home page to be blocked
-      $scope.lastTweets = Twitter.query({ limit: 1 });
-
       // if we recieve a token to reset the password as GET parameter, trigger the
       // changePassword modal from the parent controller
       if ($stateParams.reset_password_token) {

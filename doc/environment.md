@@ -99,7 +99,7 @@ Valid stripe API keys are still required, even if you don't require online payme
 
     FABLAB_WITHOUT_INVOICES
 
-If set to 'true', the invoices will be disabled. 
+If set to 'true', the invoices will be disabled.
 This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
 **Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
 <a name="PHONE_REQUIRED"></a>
@@ -167,15 +167,8 @@ See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- 
 
     TWITTER_NAME
 
-Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
-This value can be graphically overridden during the application's lifecycle in Admin/Customization/Home page/Twitter Feed.
+Identifier of the Twitter account for Twitter share project, event or training
 It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
-<a name="TWITTER_CONSUMER_KEY"></a><a name="TWITTER_CONSUMER_SECRET"></a><a name="TWITTER_ACCESS_TOKEN"></a><a name="TWITTER_ACCESS_TOKEN_SECRET"></a>
-
-    TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
-
-Keys and secrets to access the twitter API.
-Retrieve them from https://apps.twitter.co.
 <a name="FACEBOOK_APP_ID"></a>
 
     FACEBOOK_APP_ID
@@ -363,7 +356,7 @@ Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
 
     OPENLAB_APP_ID, OPENLAB_APP_SECRET
 
-This configuration is optional and can only work in production mode. 
+This configuration is optional and can only work in production mode.
 It allows you to display a shared projects gallery and to share your projects with other fablabs.
 Send an email to **contact@fab-manager.com** to get your OpenLab client's credentials.
 <a name="OPENLAB_DEFAULT"></a>

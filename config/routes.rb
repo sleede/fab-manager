@@ -72,7 +72,6 @@ Rails.application.routes.draw do
 
     # for homepage
     get '/last_subscribed/:last' => 'members#last_subscribed'
-    get '/feeds/twitter_timelines' => 'feeds#twitter_timelines'
 
     get 'pricing' => 'pricing#index'
     put 'pricing' => 'pricing#update'
