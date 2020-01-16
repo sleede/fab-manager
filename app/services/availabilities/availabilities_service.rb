@@ -12,13 +12,13 @@ class Availabilities::AvailabilitiesService
   # list all slots for the given machine, with reservations info, relatives to the given user
   def machines(machine_id, user)
     machine = Machine.friendly.find(machine_id)
-    reservations = reservations(machine)
+    reservations = reservations(machine, user)
     availabilities = availabilities(machine, 'machines', user)
 
     slots = []
     availabilities.each do |a|
       ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current
+        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current || user.admin?
 
         slot = Slot.new(
           start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
@@ -38,13 +38,13 @@ class Availabilities::AvailabilitiesService
   # list all slots for the given space, with reservations info, relatives to the given user
   def spaces(space_id, user)
     space = Space.friendly.find(space_id)
-    reservations = reservations(space)
+    reservations = reservations(space, user)
     availabilities = availabilities(space, 'space', user)
 
     slots = []
     availabilities.each do |a|
       ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current
+        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current || user.admin?
 
         slot = Slot.new(
           start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,
@@ -91,18 +91,18 @@ class Availabilities::AvailabilitiesService
     user.trainings.size.positive? && subscription_year?(user)
   end
 
-  def reservations(reservable)
+  def reservations(reservable, user)
     Reservation.where('reservable_type = ? and reservable_id = ?', reservable.class.name, reservable.id)
                .includes(:slots, statistic_profile: [user: [:profile]])
                .references(:slots, :user)
-               .where('slots.start_at > ?', DateTime.current)
+               .where('slots.start_at > ?', user.admin? ? 1.month.ago : DateTime.current)
   end
 
   def availabilities(reservable, type, user)
     if user.admin?
       reservable.availabilities
                 .includes(:tags)
-                .where('end_at > ? AND available_type = ?', DateTime.current, type)
+                .where('end_at > ? AND available_type = ?', 1.month.ago, type)
                 .where(lock: false)
     else
       end_at = @maximum_visibility[:other]
