@@ -89,9 +89,6 @@ gem 'mini_magick'
 # upload files
 gem 'carrierwave'
 
-gem 'twitter'
-gem 'twitter-text'
-
 # slug url
 gem 'friendly_id', '~> 5.1.0'
 
