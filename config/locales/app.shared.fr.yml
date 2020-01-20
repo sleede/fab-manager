@@ -429,6 +429,7 @@ fr:
         your_booking_slot_was_successfully_moved_from_: "Votre créneau de réservation a bien été déplacé du"
         to_date: "au" # context: date. eg: 'from 01/01 to 01/05'
         please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
+        unable_to_select_plant_if_slots_in_the_past: "Impossible de selectionner un abonnement s'il y a des créneaux passés"
         unable_to_change_the_reservation: "Impossible de modifier la réservation"
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_cancel_this_reservation: "Êtes-vous sur de vouloir annuler cette réservation ?"

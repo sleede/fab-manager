@@ -112,12 +112,19 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * Switch the user's view from the reservation agenda to the plan subscription
          */
         $scope.showPlans = function () {
-        // first, we ensure that a user was selected (admin) or logged (member)
-          if (Object.keys($scope.user).length > 0) {
+          // first, we ensure that a user was selected (admin) or logged (member)
+          const isSelectedUser = Object.keys($scope.user).length > 0;
+          // all slots are in future
+          const areFutureSlots = _.every($scope.events.reserved, function(s) {
+            return s.start.isAfter();
+          });
+          if (isSelectedUser && areFutureSlots) {
             return $scope.modePlans = true;
-          } else {
+          } else if (!isSelectedUser){
           // otherwise we alert, this error musn't occur when the current user hasn't the admin role
             return growl.error(_t('app.shared.cart.please_select_a_member_first'));
+          } else if (!areFutureSlots){
+            return growl.error(_t('app.shared.cart.unable_to_select_plant_if_slots_in_the_past'));
           }
         };
 

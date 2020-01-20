@@ -69,7 +69,7 @@ class Availabilities::AvailabilitiesService
     # first, we get the already-made reservations
     reservations = user.reservations.where("reservable_type = 'Training'")
     reservations = reservations.where('reservable_id = :id', id: training_id.to_i) if training_id.is_number?
-    reservations = reservations.joins(:slots).where('slots.start_at > ?', DateTime.current)
+    reservations = reservations.joins(:slots).where('slots.start_at > ?', @current_user.admin? ? 1.month.ago : DateTime.current)
 
     # visible availabilities depends on multiple parameters
     availabilities = training_availabilities(training_id, user)
@@ -123,10 +123,10 @@ class Availabilities::AvailabilitiesService
                      end
 
     # who made the request?
-    # 1) an admin (he can see all future availabilities)
+    # 1) an admin (he can see all avaialbilities of 1 month ago and future)
     if @current_user.admin?
       availabilities.includes(:tags, :slots, trainings: [:machines])
-                    .where('availabilities.start_at > ?', DateTime.current)
+                    .where('availabilities.start_at > ?', 1.month.ago)
                     .where(lock: false)
     # 2) an user (he cannot see availabilities further than 1 (or 3) months)
     else
