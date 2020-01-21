@@ -123,7 +123,7 @@ class Availabilities::AvailabilitiesService
                      end
 
     # who made the request?
-    # 1) an admin (he can see all avaialbilities of 1 month ago and future)
+    # 1) an admin (he can see all availabilities of 1 month ago and future)
     if @current_user.admin?
       availabilities.includes(:tags, :slots, trainings: [:machines])
                     .where('availabilities.start_at > ?', 1.month.ago)
