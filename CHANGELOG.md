@@ -10,6 +10,7 @@
 - Ability to force the email validation when a new user registers. This is optionally configured with `USER_CONFIRMATION_NEEDED_TO_SIGN_IN`
 - Display the scheduled events in the admin calendar, depending on `EVENTS_IN_CALENDAR` configuration.
 - Display indications on required fields in new administrator form
+- Administrators can to book machine/space/training slots, until 1 month in the past
 - Filter members by non-validated emails or by inactive for 3 years
 - Automatic version check with security alerts
 - Public endpoint to check the system health
