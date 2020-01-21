@@ -40,6 +40,8 @@ fr:
         next: "Suivant >"
         previous: "< Précédent"
         select_some_machines: "Sélectionnez des machines"
+        select_all: "Toutes"
+        select_none: "Aucune"
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
         to_time: "à"  # context: time. eg. 'from 18:00 to 21:00'

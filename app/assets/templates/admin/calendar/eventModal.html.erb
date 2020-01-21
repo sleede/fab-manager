@@ -32,8 +32,9 @@
     <p class="text-center font-sbold m-t-sm">{{ 'app.admin.calendar.select_some_machines' | translate }}</p>
 
     <div class="form-group m-l-xl">
+      <button class="btn btn-default pull-right m-t-n-xl" ng-click="toggleAll()" translate>{{ selectedMachines.length == 0 ? 'app.admin.calendar.select_all' : 'app.admin.calendar.select_none' }}</button>
       <label class="checkbox" ng-repeat="machine in machines">
-        <input type="checkbox" ng-click="toggleSelection(machine)"> {{machine.name}} <span class="text-xs">(id {{machine.id}})</span>
+        <input type="checkbox" ng-click="toggleSelection(machine)" ng-model="selectedMachinesBinding[machine.id]"> {{machine.name}} <span class="text-xs">(id {{machine.id}})</span>
       </label>
     </div>
   </div>

@@ -40,6 +40,8 @@ pt:
         next: "Próximo >"
         previous: "< Voltar"
         select_some_machines: "Selecionar algumas máquinas"
+        select_all: "Tudo"
+        select_none: "Não"
         number_of_tickets: "Número de vagas: "
         adjust_the_opening_hours: "Ajustar o horário de funcionamento"
         to_time: "ás"  # context: time. eg. 'from 18:00 to 21:00'

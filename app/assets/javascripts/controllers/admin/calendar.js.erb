@@ -416,6 +416,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // machines associated with the created slot
     $scope.selectedMachines = [];
+    $scope.selectedMachinesBinding = {};
 
     // training associated with the created slot
     $scope.selectedTraining = null;
@@ -474,6 +475,21 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         return $scope.selectedMachines.push(machine);
       }
     };
+
+    /**
+     * Select/unselect all the machines
+     */
+    $scope.toggleAll = function() {
+      const count = $scope.selectedMachines.length;
+      $scope.selectedMachines = [];
+      $scope.selectedMachinesBinding = {};
+      if (count == 0) {
+        $scope.machines.forEach(function (machine) {
+          $scope.selectedMachines.push(machine);
+          $scope.selectedMachinesBinding[machine.id] = true;
+        })
+      }
+    }
 
     /**
      * Callback for the modal window validation: save the slot and closes the modal
