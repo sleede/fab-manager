@@ -2,8 +2,6 @@
 
 # Various helpers methods
 module ApplicationHelper
-
-  include Twitter::Autolink
   require 'message_format'
 
   ## machine/spaces availabilities are divided in multiple slots of 60 minutes
