@@ -64,7 +64,8 @@ class Setting < ActiveRecord::Base
                              accounting_Space_label
                              hub_last_version
                              hub_public_key
-                             fab_analytics] }
+                             fab_analytics
+                             link_name] }
 
   after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 

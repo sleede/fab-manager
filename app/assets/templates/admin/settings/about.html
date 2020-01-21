@@ -1,4 +1,27 @@
 <div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.link' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-4">
+      <form role="form" novalidate>
+        <label for="linkName" class="control-label m-r" translate>{{ 'app.admin.settings.link_to_about' }}</label>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-link"></i></div>
+            <input type="text" id="linkName" ng-model="linkName.value" class="form-control" placeholder="{{ 'app.admin.settings.link_to_about' | translate }}"/>
+          </div>
+        </div>
+        <button name="button" class="btn btn-warning" ng-click="save(linkName)" translate>{{ 'app.shared.buttons.save' }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-md">
+    <div class="panel-heading">
+      <span class="font-sbold" translate>{{ 'app.admin.settings.content' }}</span>
+    </div>
     <div class="panel-body">
 
         <div class="row m-t-lg m-b-lg">

@@ -12,6 +12,7 @@
 - Display indications on required fields in new administrator form
 - Administrators can to book machine/space/training slots, until 1 month in the past
 - Filter members by non-validated emails or by inactive for 3 years
+- Ability to customize the title of the link to the about page
 - Automatic version check with security alerts
 - Public endpoint to check the system health
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration

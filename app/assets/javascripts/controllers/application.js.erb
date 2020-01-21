@@ -316,8 +316,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       // we stop polling notifications when the page is not in foreground
       onPageVisible(function (state) { $rootScope.toCheckNotifications = (state === 'visible'); });
 
-      Setting.get({ name: 'fablab_name' }, function (data) { $scope.fablabName = data.setting.value; });
-      Setting.get({ name: 'name_genre' }, function (data) { $scope.nameGenre = data.setting.value; });
+      Setting.query({ names: "['fablab_name', 'name_genre', 'link_name']" }, function (settings) {
+        $scope.fablabName = settings.fablab_name;
+        $scope.nameGenre = settings.name_genre;
+        $scope.linkName = settings.link_name;
+      });
 
       // shorthands
       $scope.isAuthenticated = Auth.isAuthenticated;

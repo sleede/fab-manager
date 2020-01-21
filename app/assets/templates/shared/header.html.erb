@@ -10,7 +10,7 @@
     <li>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.about" ng-show="!goabout">
         <span class="label label-theme rounded text-lg text-white m-r-sm font-ebold">?</span>
-          {{ 'app.public.common.about_the_fablab' | translate:{ GENDER: nameGenre, NAME: fablabName } }}
+          {{ linkName }}
       </a>
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.home" ng-show="goabout">
         <span class="label label-theme label-icon rounded text-lg text-white m-r-sm font-ebold"><i class="fa fa-caret-up" ng-show="goabout"></i></span>

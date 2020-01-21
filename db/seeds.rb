@@ -636,6 +636,14 @@ unless Setting.find_by(name: 'fab_analytics').try(:value)
   setting.save
 end
 
+unless Setting.find_by(name: 'link_name').try(:value)
+  name = Setting.find_by(name: 'fablab_name')
+  gender = Setting.find_by(name: 'name_genre')
+  setting = Setting.find_or_initialize_by(name: 'link_name')
+  setting.value = _t('app.public.common.about_the_fablab', NAME: name, GENDER: gender)
+  setting.save
+end
+
 if StatisticCustomAggregation.count.zero?
   # available reservations hours for machines
   machine_hours = StatisticType.find_by(key: 'hour', statistic_index_id: 2)

@@ -240,7 +240,7 @@ pt:
         signaled_by: "sinalizado por:"
         signaled_on: "sinalizado em:"
         message: "Menssagem:"
-        visit_management_interface: "Refer to the Reporting Management Interface for more information."  # missing translation
+        visit_management_interface: "Refer to the Reporting Management Interface for more information."
 
     notify_user_wallet_is_credited:
       subject: "Sua carteira foi creditada"

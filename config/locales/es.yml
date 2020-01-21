@@ -36,13 +36,13 @@ es:
       cannot_be_blank_at_same_time: "no puede estar vacío cuando %{field} también está vacío"
       cannot_be_in_the_past: "no puede estar en el pasado"
       cannot_be_before_previous_value: "No puede estar antes del valor anterior."
-      cannot_overlap: "can't overlap an existing accounting period"                               # missing translation
-      cannot_encompass: "can't encompass an existing accounting period"                           # missing translation
-      in_closed_period: "can't be within a closed accounting period"                              # missing translation
-      invalid_footprint: "invoice's checksum is invalid"                                          # missing translation
-      end_before_start: "The end date can't be before the start date. Pick a date after %{START}" # missing translation
-      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."                   # missing translation
-      must_be_in_the_past: "The period must be strictly prior to today's date."                   # missing translation
+      cannot_overlap: "can't overlap an existing accounting period"
+      cannot_encompass: "can't encompass an existing accounting period"
+      in_closed_period: "can't be within a closed accounting period"
+      invalid_footprint: "invoice's checksum is invalid"
+      end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
+      invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
+      must_be_in_the_past: "The period must be strictly prior to today's date."
 
   activemodel:
     errors:
@@ -322,7 +322,7 @@ es:
         statistics_global: "de todas las estadísticas"
         statistics_account: "de las estadísticas de registro"
         statistics_event: "de estadísticas sobre eventos"
-        statistics_machine: "de estadísticas sobre slots de máquina"   # missing translation
+        statistics_machine: "de estadísticas sobre slots de máquina"
         statistics_project: "de estadísticas sobre proyectos"
         statistics_subscription: "de estadísticas de suscripción"
         statistics_training: "de estadísticas de cursos"
@@ -335,29 +335,29 @@ es:
         is_over: "se ha acabado."
         download_here: "Descargar aquí"
       notify_admin_import_complete:
-        import_over: "%{CATEGORY} import is over. "                    # missing translation
-        members: "Members"                                             # missing translation
-        view_results: "View results."                                  # missing translation
+        import_over: "%{CATEGORY} import is over. "
+        members: "Members"
+        view_results: "View results."
       notify_member_about_coupon:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Disfruta de un descuento de %{PERCENT}% con el código %{CODE}"
         enjoy_a_discount_of_AMOUNT_with_code_CODE: "Disfruta de un descuento de %{AMOUNT} con el código %{CODE}"
       notify_admin_free_disk_space:
-        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"        # missing translation
+        warning_free_disk_space: "Warning: the server's available disk space is now %{AVAILABLE} MiB"
       notify_admin_close_period_reminder:
-        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"        # missing translation
-        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"          # missing translation
-      notify_admin_archive_complete:                                                                          # missing translation
-        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."          # missing translation
+        warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}"
+        warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}"
+      notify_admin_archive_complete:
+        archive_complete: "Data archiving from %{START} to %{END} is done. <a href='api/accounting_periods/%{ID}/archive' target='_blank'>click here to download</a>. Remember to save it on an external secured media."
       notify_privacy_policy_changed:
-        policy_updated: "Privacy policy updated."                      # missing translation
-        click_to_show: "Click here to consult"                         # missing translation
+        policy_updated: "Privacy policy updated."
+        click_to_show: "Click here to consult"
       notify_admin_refund_created:
-        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"                             # missing translation
+        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
 
   statistics:
     # statistics tools for admins
     subscriptions: "Suscripciones"
-    machines_hours: "Machine slots"                                    # missing translation
+    machines_hours: "Machine slots"
     spaces: "Espacios"
     trainings: "Cursos"
     events: "Eventos"

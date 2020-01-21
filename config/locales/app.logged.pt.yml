@@ -68,10 +68,10 @@ pt:
           an_unexpected_error_prevented_your_group_from_being_changed: "Um erro inesperado impediu o seu grupo de ser alterado."
           confirmation_required: "Confirmation required"
           confirm_delete_your_account: "Você realmente deseja deletar sua conta?"
-          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."                                                # missing translation
-          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."           # missing translation
-          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."          # missing translation
-          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."   # missing translation
+          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
+          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
+          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
+          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
           your_user_account_has_been_successfully_deleted_goodbye: "Sua conta de usuário foi excluída com êxito. Até mais."
           an_error_occured_preventing_your_account_from_being_deleted: "Ocorreu um erro, impedindo que sua conta fosse excluída."
           used_for_statistics: "This data will be used for statistical purposes"

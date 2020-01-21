@@ -53,6 +53,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
 
     // various configurable settings
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
+    $scope.linkName = { name: 'link_name', value: settingsPromise.link_name };
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title };
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body };
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
