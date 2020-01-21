@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('SettingsController', ['$scope', '$filter', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
-  function ($scope, $filter, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
+Application.Controllers.controller('SettingsController', ['$scope', '$rootScope', '$filter', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
+  function ($scope, $rootScope, $filter, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
     /* PUBLIC SCOPE */
 
     // timepickers steps configuration
@@ -59,6 +59,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
+    $scope.homeContent = { name: 'home_content', value: settingsPromise.home_content };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };
     $scope.trainingExplicationsAlert = { name: 'training_explications_alert', value: settingsPromise.training_explications_alert };
     $scope.trainingInformationMessage = { name: 'training_information_message', value: settingsPromise.training_information_message };
@@ -134,6 +135,17 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       version: null,
       bodyTemp: settingsPromise.privacy_body
     };
+
+    // Extend the options for summernote editor, with special tools for home page
+    $scope.summernoteOptsHomePage = Object.assign({}, $rootScope.summernoteOpts);
+    $scope.summernoteOptsHomePage.toolbar[5][1].push('nugget'); // toolbar -> insert -> nugget
+    $scope.summernoteOptsHomePage.nugget = {
+      label: "🧱",
+      tooltip: "blabla",
+      list: [
+        '[[lorem ipsum]]'
+      ]
+    }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
