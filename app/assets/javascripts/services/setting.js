@@ -15,6 +15,11 @@ Application.Services.factory('Setting', ['$resource', function ($resource) {
       },
       query: {
         isArray: false
+      },
+      reset: {
+        url: '/api/settings/reset/:name',
+        params: { name: '@name' },
+        method: 'PUT'
       }
     }
   );

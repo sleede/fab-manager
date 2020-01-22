@@ -2,7 +2,7 @@
 
 # API Controller for resources of type Setting
 class API::SettingsController < API::ApiController
-  before_action :authenticate_user!, only: :update
+  before_action :authenticate_user!, only: %i[update bulk_update reset]
 
   def index
     @settings = Setting.where(name: names_as_string_to_array)
@@ -34,6 +34,19 @@ class API::SettingsController < API::ApiController
   def show
     @setting = Setting.find_or_create_by(name: params[:name])
     @show_history = params[:history] == 'true' && current_user.admin?
+  end
+
+  def reset
+    authorize Setting
+
+    setting = Setting.find_or_create_by(name: params[:name])
+    first_val = setting.history_values.order(created_at: :asc).limit(1).first
+    new_val = HistoryValue.create!(
+      setting_id: setting.id,
+      value: first_val.value,
+      invoicing_profile_id: current_user.invoicing_profile.id
+    )
+    render json: new_val, status: :ok
   end
 
   private

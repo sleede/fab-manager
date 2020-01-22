@@ -1,8 +1,9 @@
-<div class="panel panel-default m-t-md">
+<div class="panel panel-default m-t-md home-page-settings">
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 home-page-content">
               <h4 translate>{{ 'app.admin.settings.customize_home_page' }}</h4>
+              <button class="btn btn-default pull-right m-t-n-xl" ng-click="resetHomePage()" title="{{ 'app.admin.settings.reset_home_page' | translate }}"><i class="fa fa-undo"></i></button>
               <summernote ng-model="homeContent.value"
                           id="home_content"
                           config="summernoteOptsHomePage">

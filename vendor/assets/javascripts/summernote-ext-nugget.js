@@ -1,33 +1,5 @@
-// Credits to: https://github.com/pHAlkaline/summernote-plugins/tree/master/plugins/nugget
-/*
- summernote-nugget
+// Inspired by: https://github.com/pHAlkaline/summernote-plugins/tree/master/plugins/nugget
 
- Allow users to insert custom nuggets into the WYSIWYG.
-
- Installation
-
- 1) Copy the plugin
-
- You must copy the plugin/nugget folder into your local summernote plugin folder.
-
- 2) Configure the plugin
-
- After that, to initialize the template plugin, you have to set these options :
-
- $('#summernote').summernote({
-   toolbar: [
-     ['insert', ['nugget']]
-   ],
-   nugget: {
-     list: [
-       '[[Condo.name]]',
-       '[[Condo.title]]'
-     ]
-   },
- });
-
- *
- **/
 (function (factory) {
   /* global define */
   if (typeof define === 'function' && define.amd) {
@@ -91,17 +63,17 @@
     'nugget': function (context) {
       // ui has renders to build ui elements.
       //  - you can create a button with `ui.button`
-      var ui = $.summernote.ui;
-      var options = context.options.nugget;
-      var context_options = context.options;
-      var lang = context_options.langInfo;
-      var defaultOptions = {
+      const ui = $.summernote.ui;
+      const options = context.options.nugget;
+      const context_options = context.options;
+      const lang = context_options.langInfo;
+      const defaultOptions = {
         label: lang.nugget.Nugget,
         tooltip: lang.nugget.Insert_nugget
       };
 
       // Assign default values if not supplied
-      for (var propertyName in defaultOptions) {
+      for (const propertyName in defaultOptions) {
         if (options.hasOwnProperty(propertyName) === false) {
           options[propertyName] = defaultOptions[propertyName];
         }
@@ -111,7 +83,7 @@
       context.memo('button.nugget', function () {
         // create button
 
-        var button = ui.buttonGroup([
+        const button = ui.buttonGroup([
           ui.button({
             className: 'dropdown-toggle',
             contents: '<span class="nugget">' + options.label + ' </span><span class="note-icon-caret"></span>',
@@ -122,15 +94,22 @@
           }),
           ui.dropdown({
             className: 'dropdown-nugget',
-            items: options.list,
+            contents: options.list.map((i) => {
+              const li = document.createElement('li');
+              const a = document.createElement('a');
+              a.innerHTML = i.trim();
+              a.setAttribute('href', '#');
+              li.appendChild(a);
+              return li.outerHTML;
+            }),
             click: function (event) {
               event.preventDefault();
 
-              var $button = $(event.target);
-              var value = $button.data('value');
-              var node = document.createElement('span');
-              node.innerHTML = value;
-              context.invoke('editor.insertText', value);
+              const $button = $(event.target);
+              const value = $button[0].outerHTML;
+              const node = document.createElement('div');
+              node.innerHTML = value.trim();
+              context.invoke('editor.insertNode', node.firstChild);
 
             }
           })

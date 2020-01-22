@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# Setting is a configuration element of the platform. Only administrators are allowed to modify Settings
+# For some settings, changing them will involve some callback actions (like rebuilding the stylesheets if the theme color Setting is changed).
+# A full history of the previous values is kept in database with the date and the author of the change
 class Setting < ActiveRecord::Base
   has_many :history_values
   validates :name, inclusion:
@@ -65,7 +70,8 @@ class Setting < ActiveRecord::Base
                              hub_last_version
                              hub_public_key
                              fab_analytics
-                             link_name] }
+                             link_name
+                             home_content] }
 
   after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
 

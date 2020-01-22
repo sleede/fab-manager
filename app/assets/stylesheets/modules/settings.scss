@@ -1,0 +1,44 @@
+.admin-settings {
+  .home-page-settings {
+    .home-page-content {
+      .note-editor {
+        .note-toolbar .note-btn-group .note-btn .nugget {
+          font-family: "FontAwesome";
+        }
+        .note-editing-area .note-editable {
+          #news {
+            width: 100%;
+            background-color: #b1b1b1;
+            color: white;
+            border: 1px dashed #8f9091;
+            border-radius: 5px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 10rem;
+            font-size: 2em;
+          }
+
+          #projects {
+            @extend #news;
+            line-height: 523px;
+          }
+
+          #twitter {
+            @extend #news;
+            line-height: 162px;
+          }
+
+          #members {
+            @extend #news;
+            line-height: 320px;
+          }
+
+          #events {
+            @extend #news;
+            line-height: 621px;
+          }
+        }
+      }
+    }
+  }
+}
