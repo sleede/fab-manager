@@ -7,11 +7,7 @@ Application.Directives.directive('projects', [ 'Project',
         // The last projects published/documented on the plateform
         $scope.lastProjects = null;
 
-        /* PRIVATE SCOPE */
-
-        /**
-         * Kind of constructor: these actions will be realized first when the directive is loaded
-         */
+        // constructor
         const initialize = function () {
           Project.lastPublished(function (data) {
             $scope.lastProjects = data;

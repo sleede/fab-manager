@@ -8,42 +8,9 @@
 
 
 	<div class="col-lg-4 m-t-lg">
-    <twitter profile="{{twitterName}}" ng-show="twitterName"/>
+    <twitter></twitter>
 
-		<section class="widget panel b-a" >
-		  <div class="panel-heading small b-b">
-		    <h2 translate>{{ 'app.public.home.latest_registered_members' }}</h2>
-		  </div>
-
-			<div class="row m-n">
-        <div class="col-md-6 b-b b-r block-link"  ng-repeat="member in lastMembers" ui-sref="app.logged.members_show({id:member.slug})">
-
-
-          <div class="padder-v">
-            <span class="avatar avatar-block text-center">
-              <fab-user-avatar ng-model="member.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>
-              <!-- <i class="on b-white bottom"></i> -->
-              <a ><span class="user-name m-l-sm text-black m-t-xs">{{member.name}}</span></a>
-            </span>
-          </div>
-
-        </div>
-                <!-- TODO EVEN <div class="col-md-6 b-b"> -->
-
-      </div>
-			<div class="m-t-sm m-b-sm text-center" ng-if="!isAuthenticated()">
-				<button href="#" ng-click="signup($event)" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'app.public.home.create_an_account' }}</button>
-			</div>
-
-			<div class="m-t-sm m-b-sm text-center" ng-if="isAuthenticated()">
-				<button href="#" ui-sref="app.logged.members" class="btn btn-warning-full width-70 font-sbold rounded text-sm" translate>{{ 'app.public.home.discover_members' }}</button>
-			</div>
-
-
-
-		</section>
-
-
+		<members></members>
 
 	</div>
 

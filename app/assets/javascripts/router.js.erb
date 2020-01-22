@@ -98,9 +98,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          lastMembersPromise: ['Member', function (Member) { return Member.lastSubscribed({ limit: 4 }).$promise; }],
-          upcomingEventsPromise: ['Event', function (Event) { return Event.upcoming({ limit: 3 }).$promise; }],
-          twitterNamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'twitter_name' }).$promise; }]
+          upcomingEventsPromise: ['Event', function (Event) { return Event.upcoming({ limit: 3 }).$promise; }]
         }
       })
       .state('app.public.privacy', {

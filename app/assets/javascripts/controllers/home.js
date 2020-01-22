@@ -1,27 +1,11 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'lastMembersPromise', 'upcomingEventsPromise', 'twitterNamePromise',
-  function ($scope, $stateParams, lastMembersPromise, upcomingEventsPromise, twitterNamePromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'upcomingEventsPromise',
+  function ($scope, $stateParams, upcomingEventsPromise) {
   /* PUBLIC SCOPE */
-
-    // The last registered members who confirmed their addresses
-    $scope.lastMembers = lastMembersPromise;
 
     // The closest upcoming events
     $scope.upcomingEvents = upcomingEventsPromise;
-
-    // Twitter username
-    $scope.twitterName = twitterNamePromise.setting.value;
 
     /**
    * Test if the provided event run on a single day or not
