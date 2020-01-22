@@ -1,0 +1,22 @@
+Application.Directives.directive('projects', [ 'Project',
+  function (Project) {
+    return ({
+      restrict: 'E',
+      templateUrl: '<%= asset_path "home/projects.html" %>',
+      link ($scope, element, attributes) {
+        // The last projects published/documented on the plateform
+        $scope.lastProjects = null;
+
+        // constructor
+        const initialize = function () {
+          Project.lastPublished(function (data) {
+            $scope.lastProjects = data;
+          })
+        };
+
+        // !!! MUST BE CALLED AT THE END of the directive
+        return initialize();
+      }
+    });
+  }
+]);

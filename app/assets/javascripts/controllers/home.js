@@ -1,40 +1,11 @@
-/* eslint-disable
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise',
-  function ($scope, $stateParams, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise',
+  function ($scope, $stateParams, homeContentPromise) {
   /* PUBLIC SCOPE */
 
-    // The last registered members who confirmed their addresses
-    $scope.lastMembers = lastMembersPromise;
-
-    // The last projects published/documented on the plateform
-    $scope.lastProjects = lastProjectsPromise;
-
-    // The closest upcoming events
-    $scope.upcomingEvents = upcomingEventsPromise;
-
-    // The admin blogpost
-    $scope.homeBlogpost = homeBlogpostPromise.setting.value;
-
-    // Twitter username
-    $scope.twitterName = twitterNamePromise.setting.value;
-
-    /**
-   * Test if the provided event run on a single day or not
-   * @param event {Object} single event from the $scope.upcomingEvents array
-   * @returns {boolean} false if the event runs on more that 1 day
-   */
-    $scope.isOneDayEvent = event => moment(event.start_date).isSame(event.end_date, 'day');
+    // Home page HTML content
+    $scope.homeContent = null;
 
     /* PRIVATE SCOPE */
 
@@ -47,6 +18,46 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       if ($stateParams.reset_password_token) {
         return $scope.$parent.editPassword($stateParams.reset_password_token);
       }
+
+      // We set the home page content, with the directives replacing the placeholders
+      $scope.homeContent = insertDirectives(homeContentPromise.setting.value);
+    };
+
+    const insertDirectives = function (html) {
+      const node = document.createElement('div');
+      node.innerHTML = html.trim();
+
+      const newsNode = node.querySelector('div#news');
+      if (newsNode) {
+        const news = document.createElement('news');
+        newsNode.parentNode.replaceChild(news, newsNode);
+      }
+
+      const projectsNode = node.querySelector('div#projects');
+      if (projectsNode) {
+        const projects = document.createElement('projects');
+        projectsNode.parentNode.replaceChild(projects, projectsNode);
+      }
+
+      const twitterNode = node.querySelector('div#twitter');
+      if (twitterNode) {
+        const twitter = document.createElement('twitter');
+        twitterNode.parentNode.replaceChild(twitter, twitterNode);
+      }
+
+      const membersNode = node.querySelector('div#members');
+      if (membersNode) {
+        const members = document.createElement('members');
+        membersNode.parentNode.replaceChild(members, membersNode);
+      }
+
+      const eventsNode = node.querySelector('div#events');
+      if (eventsNode) {
+        const events = document.createElement('events');
+        eventsNode.parentNode.replaceChild(events, eventsNode);
+      }
+
+      return node.outerHTML;
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

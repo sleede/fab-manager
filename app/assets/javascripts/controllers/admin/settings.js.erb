@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('SettingsController', ['$scope', '$filter', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
-  function ($scope, $filter, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
+Application.Controllers.controller('SettingsController', ['$scope', '$rootScope', '$filter', '$uibModal', 'dialogs', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
+  function ($scope, $rootScope, $filter, $uibModal, dialogs, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
     /* PUBLIC SCOPE */
 
     // timepickers steps configuration
@@ -59,6 +59,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
+    $scope.homeContent = { name: 'home_content', value: settingsPromise.home_content };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };
     $scope.trainingExplicationsAlert = { name: 'training_explications_alert', value: settingsPromise.training_explications_alert };
     $scope.trainingInformationMessage = { name: 'training_information_message', value: settingsPromise.training_information_message };
@@ -134,6 +135,21 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       version: null,
       bodyTemp: settingsPromise.privacy_body
     };
+
+    // Extend the options for summernote editor, with special tools for home page
+    $scope.summernoteOptsHomePage = Object.assign({}, $rootScope.summernoteOpts);
+    $scope.summernoteOptsHomePage.toolbar[5][1].push('nugget'); // toolbar -> insert -> nugget
+    $scope.summernoteOptsHomePage.nugget = {
+      label: '\uF12E',
+      tooltip: _t('app.admin.settings.home_items'),
+      list: [
+        `<div id="news">${_t('app.admin.settings.item_news')}</div>`,
+        `<div id="projects">${_t('app.admin.settings.item_projects')}</div>`,
+        `<div id="twitter">${_t('app.admin.settings.item_twitter')}</div>`,
+        `<div id="members">${_t('app.admin.settings.item_members')}</div>`,
+        `<div id="events">${_t('app.admin.settings.item_events')}</div>`
+      ]
+    }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -291,6 +307,29 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
           analyticsData: ['FabAnalytics', function (FabAnalytics) { return FabAnalytics.data().$promise; }]
         }
       });
+    }
+
+    /**
+     * Reset the home page to its initial state (factory value)
+     */
+    $scope.resetHomePage = function () {
+      dialogs.confirm({
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.settings.confirmation_required'),
+                msg: _t('app.admin.settings.confirm_reset_home_page')
+              };
+            }
+          }
+        }
+        , function () { // confirmed
+          Setting.reset({ name: 'home_content' }, function (data) {
+            $scope.homeContent.value = data.value;
+            growl.success(_t('app.admin.settings.home_content_reset'));
+          })
+        }
+      )
     }
 
     /* PRIVATE SCOPE */
