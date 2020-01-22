@@ -654,21 +654,23 @@ end
 unless Setting.find_by(name: 'home_content').try(:value)
   setting = Setting.find_or_initialize_by(name: 'home_content')
   setting.value = <<~HTML
-    <div class="m-sm">
-      <div id="news">#{I18n.t('app.admin.settings.item_news')}</div>
-    </div>
-    <div class="row wrapper">
-      <div class="col-lg-8">
-        <div id="projects">#{I18n.t('app.admin.settings.item_projects')}</div>
+    <div>
+      <div class="m-sm">
+        <div id="news">#{I18n.t('app.admin.settings.item_news')}</div>
       </div>
-      <div class="col-lg-4 m-t-lg">
-        <div id="twitter">#{I18n.t('app.admin.settings.item_twitter')}</div>
-        <div id="members">#{I18n.t('app.admin.settings.item_members')}</div>
+      <div class="row wrapper">
+        <div class="col-lg-8">
+          <div id="projects">#{I18n.t('app.admin.settings.item_projects')}</div>
+        </div>
+        <div class="col-lg-4 m-t-lg">
+          <div id="twitter">#{I18n.t('app.admin.settings.item_twitter')}</div>
+          <div id="members">#{I18n.t('app.admin.settings.item_members')}</div>
+        </div>
       </div>
-    </div>
-    <div class="row wrapper m-t-sm">
-      <div class="col-lg-12">
-        <div id="events">#{I18n.t('app.admin.settings.item_events')}</div>
+      <div class="row wrapper m-t-sm">
+        <div class="col-lg-12">
+          <div id="events">#{I18n.t('app.admin.settings.item_events')}</div>
+        </div>
       </div>
     </div>
   HTML
