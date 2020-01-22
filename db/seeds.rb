@@ -667,7 +667,9 @@ unless Setting.find_by(name: 'home_content').try(:value)
       </div>
     </div>
     <div class="row wrapper m-t-sm">
-      <div id="events">#{I18n.t('app.admin.settings.item_events')}</div>
+      <div class="col-lg-12">
+        <div id="events">#{I18n.t('app.admin.settings.item_events')}</div>
+      </div>
     </div>
   HTML
   setting.save

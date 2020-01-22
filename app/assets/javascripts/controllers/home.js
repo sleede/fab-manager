@@ -1,18 +1,11 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'upcomingEventsPromise',
-  function ($scope, $stateParams, upcomingEventsPromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise',
+  function ($scope, $stateParams, homeContentPromise) {
   /* PUBLIC SCOPE */
 
-    // The closest upcoming events
-    $scope.upcomingEvents = upcomingEventsPromise;
-
-    /**
-   * Test if the provided event run on a single day or not
-   * @param event {Object} single event from the $scope.upcomingEvents array
-   * @returns {boolean} false if the event runs on more that 1 day
-   */
-    $scope.isOneDayEvent = event => moment(event.start_date).isSame(event.end_date, 'day');
+    // Home page HTML content
+    $scope.homeContent = homeContentPromise;
 
     /* PRIVATE SCOPE */
 
