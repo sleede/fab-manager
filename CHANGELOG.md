@@ -1,6 +1,7 @@
 # Changelog Fab Manager
 
 - Ability to create and delete periodic calendar availabilities (recurrence)
+- Ability to fully customize the home page
 - Automated setup assistant
 - An administrator can delete a member
 - An event reservation can be cancelled, if reservation cancellation is enabled
