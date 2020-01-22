@@ -1,22 +1,10 @@
-
-<div class="alert alert-warning m-sm text-center" ng-if="(homeBlogpost != null) && (homeBlogpost != '') && (homeBlogpost != undefined)">
-	<span ng-bind-html="homeBlogpost"></span>
+<div class="m-sm">
+  <news></news>
 </div>
-
 <div class="row wrapper">
 	<div class="col-lg-8">
-		<h4 class="text-sm m-t-sm" translate>{{ 'app.public.home.latest_documented_projects' }}</h4>
-
-		<uib-carousel interval="5000" disable-animation="true">
-			<uib-slide class="h480 cover r" ng-repeat="p in lastProjects" active="p.active" style="background-image:url({{p.project_image}});">
-			  <!-- <img ng-src="{{p.project_image}}" style="margin:auto;"> -->
-			  <div class="carousel-caption">
-			    <h1 class="title"><a ui-sref="app.public.projects_show({id:p.slug})">{{p.name}}</a></h1>
-			    <!-- <p class="description hidden-xs">{{p.description | humanize : 120}}</p> -->
-			  </div>
-			</uib-slide>
-		</uib-carousel>
-    </div>
+		<projects></projects>
+  </div>
 
 
 	<div class="col-lg-4 m-t-lg">
@@ -24,7 +12,6 @@
 
 		<section class="widget panel b-a" >
 		  <div class="panel-heading small b-b">
-		    <!-- <span class="badge inverse pull-right">110</span> -->
 		    <h2 translate>{{ 'app.public.home.latest_registered_members' }}</h2>
 		  </div>
 

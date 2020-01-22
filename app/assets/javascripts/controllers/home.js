@@ -10,21 +10,15 @@
  */
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'lastMembersPromise', 'lastProjectsPromise', 'upcomingEventsPromise', 'homeBlogpostPromise', 'twitterNamePromise',
-  function ($scope, $stateParams, lastMembersPromise, lastProjectsPromise, upcomingEventsPromise, homeBlogpostPromise, twitterNamePromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'lastMembersPromise', 'upcomingEventsPromise', 'twitterNamePromise',
+  function ($scope, $stateParams, lastMembersPromise, upcomingEventsPromise, twitterNamePromise) {
   /* PUBLIC SCOPE */
 
     // The last registered members who confirmed their addresses
     $scope.lastMembers = lastMembersPromise;
 
-    // The last projects published/documented on the plateform
-    $scope.lastProjects = lastProjectsPromise;
-
     // The closest upcoming events
     $scope.upcomingEvents = upcomingEventsPromise;
-
-    // The admin blogpost
-    $scope.homeBlogpost = homeBlogpostPromise.setting.value;
 
     // Twitter username
     $scope.twitterName = twitterNamePromise.setting.value;

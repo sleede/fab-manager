@@ -99,10 +99,8 @@ angular.module('application.router', ['ui.router'])
         },
         resolve: {
           lastMembersPromise: ['Member', function (Member) { return Member.lastSubscribed({ limit: 4 }).$promise; }],
-          lastProjectsPromise: ['Project', function (Project) { return Project.lastPublished().$promise; }],
           upcomingEventsPromise: ['Event', function (Event) { return Event.upcoming({ limit: 3 }).$promise; }],
-          homeBlogpostPromise: ['Setting', function (Setting) { return Setting.get({ name: 'home_blogpost' }).$promise; }],
-          twitterNamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'twitter_name' }).$promise; }],
+          twitterNamePromise: ['Setting', function (Setting) { return Setting.get({ name: 'twitter_name' }).$promise; }]
         }
       })
       .state('app.public.privacy', {

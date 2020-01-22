@@ -10,9 +10,9 @@ Application.Directives.directive('twitter', [ function () {
     scope: {
       profile: '@'
     },
-    templateUrl: '<%= asset_path "shared/_twitter.html" %>',
+    templateUrl: '<%= asset_path "home/_twitter.html" %>',
     link ($scope, element, attributes) {
-      var configProfile = {
+      const configProfile = {
         'profile': { 'screenName': $scope.profile },
         'domId': 'twitter',
         'maxTweets': 1,
