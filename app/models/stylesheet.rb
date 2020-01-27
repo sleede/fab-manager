@@ -6,19 +6,23 @@
 class Stylesheet < ActiveRecord::Base
   validates_presence_of :contents
 
-  def rebuild!
-    return unless Stylesheet.primary && Stylesheet.secondary
+  ## ===== THEME =====
 
-    update(contents: Stylesheet.css)
+  def rebuild!
+    if Stylesheet.primary && Stylesheet.secondary && name == 'theme'
+      update(contents: Stylesheet.css)
+    elsif name == 'home_page'
+      update(contents: Stylesheet.home_page_css)
+    end
   end
 
   def self.build_sheet!
     return unless Stylesheet.primary && Stylesheet.secondary
 
-    if Stylesheet.first
-      Stylesheet.first.rebuild!
+    if Stylesheet.theme
+      Stylesheet.theme.rebuild!
     else
-      Stylesheet.create!(contents: Stylesheet.css)
+      Stylesheet.create!(contents: Stylesheet.css, name: 'theme')
     end
   end
 
@@ -48,6 +52,10 @@ class Stylesheet < ActiveRecord::Base
 
   def self.primary_with_alpha(alpha)
     Stylesheet.primary.paint.to_rgb.insert(3, 'a').insert(-2, ", #{alpha}")
+  end
+
+  def self.theme
+    Stylesheet.find_by(name: 'theme')
   end
 
   def self.css # rubocop:disable Metrics/AbcSize
@@ -90,5 +98,29 @@ class Stylesheet < ActiveRecord::Base
       .profile-top .social-links a:hover { background-color: #{Stylesheet.secondary} !important; border-color: #{Stylesheet.secondary} !important; }
       section#cookies-modal div.cookies-consent .cookies-actions button.accept { background-color: #{Stylesheet.secondary}; }
     CSS
+  end
+
+  ## ===== HOME PAGE =====
+
+  def self.home_style
+    style = Setting.find_by(name: 'home_css')&.value
+    ".home-page { #{style} }"
+  end
+
+  def self.build_home!
+    if Stylesheet.home_page
+      Stylesheet.home_page.rebuild!
+    else
+      Stylesheet.create!(contents: Stylesheet.home_page_css, name: 'home_page')
+    end
+  end
+
+  def self.home_page
+    Stylesheet.find_by(name: 'home_page')
+  end
+
+  def self.home_page_css
+    engine = Sass::Engine.new(home_style, syntax: :scss)
+    engine.render.presence || '.home-page {}'
   end
 end

@@ -36,5 +36,27 @@
                 </form>
             </div>
         </div>
+        <div class="row m-t-lg home-page-style">
+          <uib-accordion>
+            <uib-accordion-group is-open="advancedSettings.open">
+              <uib-accordion-heading>
+                <span translate>{{ 'app.admin.settings.advanced' }}</span> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': advancedSettings.open, 'glyphicon-chevron-right': !advancedSettings.open}"></i>
+              </uib-accordion-heading>
+              <div class="col-md-12 ">
+                <h4 translate>{{ 'app.admin.settings.customize_home_page_css' }}</h4>
+                <div ui-codemirror="{ onLoad: codemirrorLoaded }" ng-model="homeCss.value"
+                     ui-codemirror-opts="codemirrorOpts">
+                </div>
+                <uib-alert type="info m">
+                  <p class="text-sm font-bold">
+                    <i class="fa fa-lightbulb-o"></i>
+                    <span translate>{{ 'app.admin.settings.home_css_notice' }}</span>
+                  </p>
+                </uib-alert>
+                <button name="button" class="btn btn-warning" ng-click="save(homeCss)" translate>{{ 'app.shared.buttons.save' }}</button>
+              </div>
+            </uib-accordion-group>
+          </uib-accordion>
+        </div>
     </div>
 </div>

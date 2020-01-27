@@ -427,6 +427,7 @@ unless Setting.find_by(name: 'secondary_color').try(:value)
 end
 
 Stylesheet.build_sheet!
+Stylesheet.build_home!
 
 unless Setting.find_by(name: 'training_information_message').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_information_message')

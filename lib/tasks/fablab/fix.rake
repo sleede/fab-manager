@@ -143,5 +143,12 @@ namespace :fablab do
                                 attached_object: u
       end
     end
+
+    desc '[release 4.3.0] add name to theme stylesheet'
+    task name_stylesheet: :environment do
+      Stylesheet.order(:created_at).first.update_attributes(
+        name: 'theme'
+      )
+    end
   end
 end

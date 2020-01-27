@@ -3,6 +3,7 @@
 # Setting is a configuration element of the platform. Only administrators are allowed to modify Settings
 # For some settings, changing them will involve some callback actions (like rebuilding the stylesheets if the theme color Setting is changed).
 # A full history of the previous values is kept in database with the date and the author of the change
+# after_update callback is handled by SettingService
 class Setting < ActiveRecord::Base
   has_many :history_values
   validates :name, inclusion:
@@ -71,20 +72,8 @@ class Setting < ActiveRecord::Base
                              hub_public_key
                              fab_analytics
                              link_name
-                             home_content] }
-
-  after_update :update_stylesheet, :notify_privacy_policy_changed if :value_changed?
-
-  def update_stylesheet
-    Stylesheet.first&.rebuild! if %w[main_color secondary_color].include? name
-  end
-
-  def notify_privacy_policy_changed
-    return unless name == 'privacy_body'
-
-    NotifyPrivacyUpdateWorker.perform_async(id)
-  end
-
+                             home_content
+                             home_css] }
   def value
     last_value = history_values.order(HistoryValue.arel_table['created_at'].desc).first
     last_value&.value

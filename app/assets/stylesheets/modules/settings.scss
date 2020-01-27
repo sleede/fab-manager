@@ -40,5 +40,24 @@
         }
       }
     }
+    .home-page-style {
+      .panel {
+        border: 0;
+        .panel-heading {
+          background: none;
+
+          .panel-title {
+            font-size: 12px;
+            font-style: italic;
+          }
+        }
+
+        .CodeMirror {
+          border: 1px solid #ddd;
+          font-size: 12px;
+          height: 400px;
+        }
+      }
+    }
   }
 }

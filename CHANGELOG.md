@@ -47,6 +47,7 @@
 - [TODO DEPLOY] add the `USER_CONFIRMATION_NEEDED_TO_SIGN_IN` environment variable (see [doc/environment.md](doc/environment.md#USER_CONFIRMATION_NEEDED_TO_SIGN_IN) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
 - [TODO DEPLOY] `rake db:migrate && rake db:seed`
+- [TODO DEPLOY] `rake fablab:fix:name_stylesheet`
 
 ## v4.2.4 2019 October 30
 

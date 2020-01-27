@@ -1,3 +1,6 @@
+# For staging & production environments, copy this file to database.yml
+# For development & test environments, you can use this file OR config/database.yml.default
+
 default: &default
   adapter: postgresql
   encoding: unicode

@@ -60,6 +60,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
     $scope.homeContent = { name: 'home_content', value: settingsPromise.home_content };
+    $scope.homeCss = { name: 'home_css', value: settingsPromise.home_css };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };
     $scope.trainingExplicationsAlert = { name: 'training_explications_alert', value: settingsPromise.training_explications_alert };
     $scope.trainingInformationMessage = { name: 'training_information_message', value: settingsPromise.training_information_message };
@@ -149,6 +150,21 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
         `<div id="members">${_t('app.admin.settings.item_members')}</div>`,
         `<div id="events">${_t('app.admin.settings.item_events')}</div>`
       ]
+    }
+
+    // codemirror editor
+    $scope.codeMirrorEditor = null;
+
+    // Options for codemirror editor, used for custom css
+    $scope.codemirrorOpts = {
+      matchBrackets : true,
+      lineNumbers: true,
+      mode: 'sass'
+    }
+
+    // Show or hide advanced settings
+    $scope.advancedSettings = {
+      open: false
     }
 
     /**
@@ -332,6 +348,14 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       )
     }
 
+    /**
+     * Callback triggered when the codemirror editor is loaded into the DOM
+     * @param editor codemirror instance
+     */
+    $scope.codemirrorLoaded = function (editor) {
+      $scope.codeMirrorEditor = editor;
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -377,6 +401,11 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       privacyDraftsPromise.setting.history.forEach(function (draft) {
         $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('app.admin.settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: moment(draft.created_at).format('L LT') }), content: draft.value });
       });
+
+      // refresh codemirror to display the fetched setting
+      $scope.$watch('advancedSettings.open', function (newValue) {
+        if (newValue) $scope.codeMirrorEditor.refresh();
+      })
     };
 
     // init the controller (call at the end !)

@@ -182,6 +182,11 @@ angular-ui-bootstrap@0.14.3:
   version "1.0.1"
   resolved "https://github.com/angular-ui/ui-calendar.git#f0ab8e186da6b946eafa12ab4154578c1fdf1e1d"
 
+angular-ui-codemirror@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/angular-ui-codemirror/-/angular-ui-codemirror-0.3.0.tgz#e4286fc50f393f2a6e697c1bf3170424e12cbb60"
+  integrity sha1-5ChvxQ85PypuaXwb8xcEJOEsu2A=
+
 angular-unsavedchanges@0.2:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/angular-unsavedchanges/-/angular-unsavedchanges-0.2.5.tgz#34be961d547051f2c6d536c60a5b42f565c8858b"
@@ -300,6 +305,11 @@ cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
+
+codemirror@^4.8.0:
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-4.13.0.tgz#209772d38a7bb99647c37b500db121110dd9af6f"
+  integrity sha1-IJdy04p7uZZHw3tQDbEhEQ3Zr28=
 
 coffee-script@~1.7.0:
   version "1.7.1"

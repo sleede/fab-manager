@@ -940,6 +940,7 @@ fr:
         item_events: "Prochains événements"
         home_content: "la page d'accueil"
         home_content_reset: "La page d'accueil a bien été restaurée dans sa configuration initiale."
+        home_css: "la feuille de style de la page d'accueil"
         home_blogpost: "la brève de la page d'accueil"
         twitter_name: "nom du flux Twitter"
         link_name: "l'intitulé du lien vers la page \"À propos\""
@@ -969,6 +970,9 @@ fr:
         elements_ordering: "Ordre d'affichage des éléments"
         machines_order: "Ordre des machines"
         display_machines_sorted_by: "Afficher les machines triées par"
+        advanced: "Paramètres avancés"
+        customize_home_page_css: "Personnaliser la feuille de style de la page d'accueil"
+        home_css_notice: "Vous pouvez utiliser la syntaxe SASS. Pas de garantie que ça va pas péter avec les updates"
         sort_by:
           default: "Défaut"
           name: "Nom"
