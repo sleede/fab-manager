@@ -498,8 +498,8 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 /**
  * Controller used in the events edition page
  */
-Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise',
-  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise) {
+Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal',
+  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -523,6 +523,35 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     // List of age ranges
     $scope.ageRanges = ageRangesPromise;
 
+    // Default edit mode for periodic event
+    $scope.editMode = 'single';
+
+    // show edit mode modal if event is recurrence
+    $scope.isShowEditModeModal = $scope.event.recurrence_events.length > 0;
+
+    $scope.editRecurrent = async function (e) {
+      if ($scope.isShowEditModeModal && $scope.event.recurrence_events.length > 0) {
+        e.preventDefault();
+
+        // open a choice edit mode dialog
+        const modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '<%= asset_path "events/editRecurrent.html" %>',
+          size: 'md',
+          controller: 'EditRecurrentEventController',
+          resolve: {
+            editMode: function () { return $scope.editMode; }
+          }
+        });
+        // submit form event by edit mode
+        modalInstance.result.then(function(res) {
+          $scope.isShowEditModeModal = false;
+          $scope.editMode = res.editMode;
+          e.target.click();
+        });
+      }
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -541,5 +570,31 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
+  }
+]);
+
+/**
+ * Controller used in the event edit mode modal window
+ */
+Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$uibModalInstance', 'editMode', 'growl', '_t',
+  function ($scope, $uibModalInstance, editMode, growl, _t) {
+    // with recurrent slots: how many slots should we update?
+    $scope.editMode = editMode;
+
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      $uibModalInstance.close({
+        editMode: $scope.editMode,
+      });
+    }
+
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
 ]);

@@ -72,4 +72,39 @@ class EventService
     end
     results
   end
+
+  # update one or more events (if periodic)
+  def self.update(event, event_params, mode = 'single')
+    results = []
+    events = case mode
+             when 'single'
+               [event]
+             when 'next'
+               Event.includes(:availability)
+                    .where(
+                      'availabilities.start_at >= ? AND events.recurrence_id = ?',
+                      event.availability.start_at,
+                      event.recurrence_id
+                    )
+                    .references(:availabilities, :events)
+             when 'all'
+               Event.where(
+                 'recurrence_id = ?',
+                 event.recurrence_id
+               )
+             else
+               []
+             end
+
+    events.each do |e|
+      if e.id == event.id
+        results.push status: !!e.update(event_params), event: e # rubocop:disable Style/DoubleNegation
+      else
+        puts '------------'
+        puts e.id
+        puts event_params
+      end
+    end
+    results
+  end
 end

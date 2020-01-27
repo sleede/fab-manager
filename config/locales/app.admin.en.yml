@@ -217,6 +217,11 @@ en:
         do_you_really_want_to_delete_this_price_category: "Do you really want to delete this price category?"
         price_category_successfully_deleted: "Price category successfully deleted."
         price_category_deletion_failed: "Price category deletion failed."
+        confirmation_required: "Confirmation required"
+        edit_recurring_event: "What do you want to update this periodic event ?"
+        edit_this_event: "Only this event"
+        edit_this_and_next: "This event and the following"
+        edit_all: "All events"
 
       events_new:
         # add a new event

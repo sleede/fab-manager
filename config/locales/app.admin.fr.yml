@@ -217,6 +217,11 @@ fr:
         do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
+        confirmation_required: "Confirmation requise"
+        edit_recurring_event: "Que voulez-vous modifier cet évènement périodique ?"
+        edit_this_event: "Uniquement cet évènement"
+        edit_this_and_next: "Cet évènement et tous les suivants"
+        edit_all: "Tous les évènements"
 
       events_new:
         # ajouter un nouvel évènement

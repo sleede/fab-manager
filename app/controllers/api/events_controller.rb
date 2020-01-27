@@ -56,10 +56,11 @@ class API::EventsController < API::ApiController
   def update
     authorize Event
     begin
-      if @event.update(event_params.permit!)
+      res = EventService.update(@event, event_params.permit!, params[:edit_mode])
+      if res.all? { |r| r[:status] }
         render :show, status: :ok, location: @event
       else
-        render json: @event.errors, status: :unprocessable_entity
+        render json: { total: res.length, updated: res.select { |r| r[:status] }.length, details: res }, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordNotDestroyed => e
       if e.record.class.name == 'EventPriceCategory'
