@@ -138,7 +138,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
     };
 
     // Extend the options for summernote editor, with special tools for home page
-    $scope.summernoteOptsHomePage = Object.assign({}, $rootScope.summernoteOpts);
+    $scope.summernoteOptsHomePage = angular.copy($rootScope.summernoteOpts);
     $scope.summernoteOptsHomePage.toolbar[5][1].push('nugget'); // toolbar -> insert -> nugget
     $scope.summernoteOptsHomePage.nugget = {
       label: '\uF12E',
