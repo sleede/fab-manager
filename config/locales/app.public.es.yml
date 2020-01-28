@@ -91,6 +91,7 @@ es:
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+        you_will_receive_confirmation_instructions_by_email_detailed: "You will receive an email with instructions about how to confirm your account in a few minutes."
         #password modification modal
         change_your_password: "Cambiar contraseña"
         your_new_password: "Nueva contraseña"
@@ -98,15 +99,24 @@ es:
         #connection modal
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
+        confirm_my_account: "Confirm my e-mail"
         not_registered_to_the_fablab: "¿No está registrado en el fablab todavía?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: You will receive confirmation instructions by email.
         #forgotten password modal
         your_email_address_is_unknown: "Se desconoce su email."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "En un momento recibirá las instrucciones para restablecer su contraseña en su mail."
         #Fab-manager's version
         version: "Version:"
+        upgrade_fabmanager: "Upgrade Fab-Manager"
+        current_version: "You are currently using version {VERSION} of Fab-Manager."
+        upgrade_to: "A new release is available. You can upgrade up to version {VERSION}."
+        read_more: "View the details of this release"
+        security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"
+        how_to: "How to upgrade?"
         #Notifications
         and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
       about:
@@ -293,8 +303,14 @@ es:
         you_can_shift_this_reservation_on_the_following_slots: "Puede cambiar la reserva en los siguientes campos:"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_event: "Do you really want to delete this event?"
+        delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
+        delete_this_event: "Only this event"
+        delete_this_and_next: "This event and the following"
+        delete_all: "All events"
         event_successfully_deleted: "Event successfully deleted"
-        unable_to_delete_the_event_because_some_users_alredy_booked_it: "Unable to delete this event, it may have been already reserved by some users."
+        events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
+        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
+        events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
