@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise',
-  function ($scope, $stateParams, homeContentPromise) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise', 'uiTourService',
+  function ($scope, $stateParams, homeContentPromise, uiTourService) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -21,6 +21,10 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
 
       // We set the home page content, with the directives replacing the placeholders
       $scope.homeContent = insertDirectives(homeContentPromise.setting.value);
+
+      // setup the tour
+      const uitour = uiTourService.getTour();
+      uitour.start();
     };
 
     const insertDirectives = function (html) {

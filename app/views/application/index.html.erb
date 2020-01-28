@@ -89,7 +89,7 @@
   <![endif]-->
 </head>
 
-<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_json : 'null' %>)" ng-cloak>
+<body ng-controller="ApplicationController" ng-init="setCurrentUser(<%= current_user ? current_user.to_json : 'null' %>)" ng-cloak ui-tour>
   <div growl></div>
 
   <%= flash_messages %>

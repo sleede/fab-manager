@@ -52,6 +52,7 @@
     "angular-ui-bootstrap": "0.14.3",
     "angular-ui-calendar": "https://github.com/angular-ui/ui-calendar.git#1.0.1",
     "angular-ui-codemirror": "^0.3.0",
+    "angular-ui-tour": "^0.9.4",
     "angular-unsavedchanges": "0.2",
     "angular-xeditable": "0.10",
     "bootstrap-switch": "3.3.2",
