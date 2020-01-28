@@ -406,6 +406,7 @@ es:
         your_booking_slot_was_successfully_moved_from_: "Tu reserva de espacio ha sido reemplazada con éxito"
         to_date: '"a"'
         please_select_a_member_first: 'Por favor, selecciona un miembro de la lista'
+        unable_to_select_plan_if_slots_in_the_past: 'Unable to select a plan if any of the selected slots is in the past'
         unable_to_change_the_reservation: "Imposible cambiar reserva"
         confirmation_required: "Confirmación requerida"
         do_you_really_want_to_cancel_this_reservation: "¿Está seguro de querer cancelar la reserva?"
