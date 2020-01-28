@@ -972,7 +972,7 @@ fr:
         display_machines_sorted_by: "Afficher les machines triées par"
         advanced: "Paramètres avancés"
         customize_home_page_css: "Personnaliser la feuille de style de la page d'accueil"
-        home_css_notice: "Vous pouvez utiliser la syntaxe SASS. Pas de garantie que ça va pas péter avec les updates"
+        home_css_notice_html: "Vous pouvez personnaliser la feuille de style qui s'appliquera à la page d'accueil en utilisant la syntaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a>. Ces styles seront automatiquement subordonnées au sélecteur <code>.home-page</code> pour prévenir tout risque de casse de l'application. Attention toutefois, les modifications de la page d'accueil dans l'éditeur en haut de page peuvent rendre caduque vos styles, référez vous toujours au code HTML."
         sort_by:
           default: "Défaut"
           name: "Nom"
