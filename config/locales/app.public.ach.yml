@@ -91,6 +91,7 @@ ach:
         used_for_reservation: "crwdns8959:0crwdne8959:0"
         used_for_profile: "crwdns8961:0crwdne8961:0"
         public_profile: "crwdns8963:0crwdne8963:0"
+        you_will_receive_confirmation_instructions_by_email_detailed: "crwdns19539:0crwdne19539:0"
         #password modification modal
         change_your_password: "crwdns8965:0crwdne8965:0"
         your_new_password: "crwdns8967:0crwdne8967:0"
@@ -98,15 +99,24 @@ ach:
         #connection modal
         connection: "crwdns8971:0crwdne8971:0"
         password_forgotten: "crwdns8973:0crwdne8973:0"
+        confirm_my_account: "crwdns19541:0crwdne19541:0"
         not_registered_to_the_fablab: "crwdns8975:0crwdne8975:0"
         create_an_account: "crwdns8977:0crwdne8977:0"
         wrong_email_or_password: "crwdns8979:0crwdne8979:0"
         caps_lock_is_on: "crwdns8981:0crwdne8981:0"
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: crwdns19543:0crwdne19543:0
         #forgotten password modal
         your_email_address_is_unknown: "crwdns8983:0crwdne8983:0"
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "crwdns8985:0crwdne8985:0"
         #Fab-manager's version
         version: "crwdns8987:0crwdne8987:0"
+        upgrade_fabmanager: "crwdns19545:0crwdne19545:0"
+        current_version: "crwdns19547:0{VERSION}crwdne19547:0"
+        upgrade_to: "crwdns19549:0{VERSION}crwdne19549:0"
+        read_more: "crwdns19551:0crwdne19551:0"
+        security_version_html: "crwdns19553:0crwdne19553:0"
+        how_to: "crwdns19555:0crwdne19555:0"
         #Notifications
         and_NUMBER_other_notifications: "crwdns8989:0NUMBER={NUMBER}crwdnd8989:0NUMBER={NUMBER}crwdne8989:0"
       about:
@@ -293,8 +303,14 @@ ach:
         you_can_shift_this_reservation_on_the_following_slots: "crwdns9303:0crwdne9303:0"
         confirmation_required: "crwdns9305:0crwdne9305:0"
         do_you_really_want_to_delete_this_event: "crwdns9307:0crwdne9307:0"
+        delete_recurring_event: "crwdns19557:0crwdne19557:0"
+        delete_this_event: "crwdns19559:0crwdne19559:0"
+        delete_this_and_next: "crwdns19561:0crwdne19561:0"
+        delete_all: "crwdns19563:0crwdne19563:0"
         event_successfully_deleted: "crwdns9309:0crwdne9309:0"
-        unable_to_delete_the_event_because_some_users_alredy_booked_it: "crwdns9311:0crwdne9311:0"
+        events_deleted: "crwdns19565:0COUNT={COUNT}crwdnd19565:0COUNT={COUNT}crwdne19565:0"
+        unable_to_delete_the_event: "crwdns19567:0crwdne19567:0"
+        events_not_deleted: "crwdns19569:0TOTAL={TOTAL}crwdnd19569:0COUNT={COUNT}crwdnd19569:0COUNT={COUNT}crwdnd19569:0COUNT={COUNT}crwdne19569:0"
         cancel_the_reservation: "crwdns9313:0crwdne9313:0"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "crwdns9315:0crwdne9315:0"
         reservation_was_successfully_cancelled: "crwdns9317:0crwdne9317:0"
