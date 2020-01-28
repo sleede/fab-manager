@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise', 'uiTourService',
-  function ($scope, $stateParams, homeContentPromise, uiTourService) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise', 'uiTourService', '_t',
+  function ($scope, $stateParams, homeContentPromise, uiTourService, _t) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -24,6 +24,30 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
 
       // setup the tour
       const uitour = uiTourService.getTour();
+      uitour.createStep({
+        selector: 'head',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.public.tour.welcome.title'),
+        content: _t('app.public.tour.welcome.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.home-link',
+        stepId: 'home',
+        order: 1,
+        title: _t('app.public.tour.home.title'),
+        content: _t('app.public.tour.home.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.reserve-machine-link',
+        stepId: 'machines',
+        order: 2,
+        title: _t('app.public.tour.machines.title'),
+        content: _t('app.public.tour.machines.content'),
+        placement: 'right'
+      });
       uitour.start();
     };
 

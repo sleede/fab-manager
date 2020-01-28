@@ -377,3 +377,19 @@ fr:
         characteristics: "Caractéristiques"
         files_to_download: "Fichiers à télécharger"
         projects_using_the_space: "Projets utilisant l'espace"
+
+      tour:
+        previous: "Précédent"
+        next: "Suivant"
+        pause: "Pause"
+        end: "Terminer la visite"
+        welcome:
+          title: "Bienvenue dans Fab-Manager"
+          content: "Afin de vous aider à bien prendre en main l'application, nous allons procéder à une rapide visite guidée des fonctionnalités."
+        home:
+          title: "Page d'accueil"
+          content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
+        machines:
+          title: "Les machines"
+          content: "Ici vous pourrez consulter la liste de toutes les machines du Fablab et décider un créneau pour l'une d'entre elle."
+

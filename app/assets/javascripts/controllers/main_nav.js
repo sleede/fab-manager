@@ -19,33 +19,39 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     {
       state: 'app.public.home',
       linkText: 'app.public.common.home',
-      linkIcon: 'home'
+      linkIcon: 'home',
+      class: 'home-link'
     },
 
     {
       state: 'app.public.machines_list',
       linkText: 'app.public.common.reserve_a_machine',
-      linkIcon: 'cogs'
+      linkIcon: 'cogs',
+      class: 'reserve-machine-link'
     },
     {
       state: 'app.public.trainings_list',
       linkText: 'app.public.common.trainings_registrations',
-      linkIcon: 'graduation-cap'
+      linkIcon: 'graduation-cap',
+      class: 'reserve-training-link'
     },
     {
       state: 'app.public.events_list',
       linkText: 'app.public.common.events_registrations',
-      linkIcon: 'tags'
+      linkIcon: 'tags',
+      class: 'reserve-event-link'
     },
     {
       state: 'app.public.calendar',
       linkText: 'app.public.common.public_calendar',
-      linkIcon: 'calendar'
+      linkIcon: 'calendar',
+      class: 'public-calendar-link'
     },
     {
       state: 'app.public.projects_list',
       linkText: 'app.public.common.projects_gallery',
-      linkIcon: 'th'
+      linkIcon: 'th',
+      class: 'projects-gallery-link'
     }
 
   ];
@@ -54,7 +60,8 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     $scope.navLinks.push({
       state: 'app.public.plans',
       linkText: 'app.public.common.subscriptions',
-      linkIcon: 'credit-card'
+      linkIcon: 'credit-card',
+      class: 'plans-link'
     });
   }
 
@@ -62,7 +69,8 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
     $scope.navLinks.splice(3, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.reserve_a_space',
-      linkIcon: 'rocket'
+      linkIcon: 'rocket',
+      class: 'reserve-space-link'
     });
   }
 

@@ -62,7 +62,7 @@
                 </a>
             </li>
             <!-- Common menu entries -->
-            <li class="" ng-repeat="navLink in navLinks" >
+            <li class="{{navLink.class}}" ng-repeat="navLink in navLinks">
               <a ng-click="toggleNavSize($event)" ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav">
                 <i class="fa fa-{{navLink.linkIcon}} fa-lg"></i>
                 <span>{{navLink.linkText | translate}}</span>
