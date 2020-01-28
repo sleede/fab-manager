@@ -80,7 +80,7 @@ class EventService
              when 'single'
                [event]
              when 'next'
-               Event.includes(:availability)
+               Event.includes(:availability, :event_price_categories, :event_files)
                     .where(
                       'availabilities.start_at >= ? AND events.recurrence_id = ?',
                       event.availability.start_at,
@@ -88,23 +88,77 @@ class EventService
                     )
                     .references(:availabilities, :events)
              when 'all'
-               Event.where(
-                 'recurrence_id = ?',
-                 event.recurrence_id
-               )
+               Event.includes(:availability, :event_price_categories, :event_files)
+                 .where(
+                   'recurrence_id = ?',
+                   event.recurrence_id
+                 )
              else
                []
              end
 
     events.each do |e|
-      if e.id == event.id
-        results.push status: !!e.update(event_params), event: e # rubocop:disable Style/DoubleNegation
-      else
-        puts '------------'
-        puts e.id
-        puts event_params
+      if e.id != event.id
+        start_at = event_params['availability_attributes']['start_at']
+        end_at = event_params['availability_attributes']['end_at']
+        event_price_categories_attributes = event_params['event_price_categories_attributes']
+        event_files_attributes = event_params['event_files_attributes']
+        e_params = event_params.merge(
+          availability_id: e.availability_id,
+          availability_attributes: {
+            id: e.availability_id,
+            start_at: e.availability.start_at.change(hour: start_at.hour, min: start_at.min),
+            end_at: e.availability.end_at.change(hour: end_at.hour, min: end_at.min),
+            available_type: e.availability.available_type
+          }
+        )
+        epc_attributes = []
+        if event_price_categories_attributes
+          event_price_categories_attributes.each do |epca|
+            epc = e.event_price_categories.find_by(price_category_id: epca['price_category_id'])
+            if epc
+              epc_attributes.push(
+                id: epc.id,
+                price_category_id: epc.price_category_id,
+                amount: epca['amount'],
+                _destroy: epca['_destroy']
+              )
+            end
+          end
+        end
+        unless epc_attributes.empty?
+          e_params = e_params.merge(
+            event_price_categories_attributes: epc_attributes
+          )
+        end
+
+        ef_attributes = []
+        if event_files_attributes
+          event_files_attributes.each do |efa|
+            if efa['id'].present?
+              event_file = event.event_files.find(efa['id'])
+              ef = e.event_files.find_by(attachment: event_file.attachment.file.filename)
+              if ef
+                ef_attributes.push(
+                  id: ef.id,
+                  attachment: efa['attachment'],
+                  _destroy: efa['_destroy']
+                )
+              end
+            else
+              ef_attributes.push(efa)
+            end
+          end
+        end
+        unless ef_attributes.empty?
+          e_params = e_params.merge(
+            event_files_attributes: ef_attributes
+          )
+        end
+        results.push status: !!e.update(e_params.permit!), event: e # rubocop:disable Style/DoubleNegation
       end
     end
+    results.push status: !!event.update(event_params), event: event # rubocop:disable Style/DoubleNegation
     results
   end
 end
