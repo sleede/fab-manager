@@ -14,7 +14,7 @@ ach:
       not_found_in_database: "crwdns3787:0crwdne3787:0"
       timeout: "crwdns3789:0crwdne3789:0"
       unauthenticated: "crwdns3791:0crwdne3791:0"
-      unconfirmed: "crwdns3793:0crwdne3793:0"
+      unconfirmed: "crwdns19573:0crwdne19573:0"
     mailer:
       confirmation_instructions:
         action: crwdns3795:0crwdne3795:0
@@ -53,10 +53,10 @@ ach:
       unlocked: "crwdns3847:0crwdne3847:0"
   errors:
     messages:
-      already_confirmed: "crwdns3849:0crwdne3849:0"
+      already_confirmed: "crwdns19575:0crwdne19575:0"
       confirmation_period_expired: "crwdns3851:0%{period}crwdne3851:0"
       expired: "crwdns3853:0crwdne3853:0"
-      not_found: "crwdns3855:0crwdne3855:0"
+      not_found: "crwdns19577:0crwdne19577:0"
       not_locked: "crwdns3857:0crwdne3857:0"
       not_saved:
         one: "crwdns3859:1%{resource}crwdne3859:1"
