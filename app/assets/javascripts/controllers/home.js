@@ -27,35 +27,30 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       const node = document.createElement('div');
       node.innerHTML = html.trim();
 
-      const newsNode = node.querySelector('div#news');
-      if (newsNode) {
+      node.querySelectorAll('div#news').forEach((newsNode) => {
         const news = document.createElement('news');
         newsNode.parentNode.replaceChild(news, newsNode);
-      }
+      });
 
-      const projectsNode = node.querySelector('div#projects');
-      if (projectsNode) {
+      node.querySelectorAll('div#projects').forEach((projectsNode) => {
         const projects = document.createElement('projects');
         projectsNode.parentNode.replaceChild(projects, projectsNode);
-      }
+      });
 
-      const twitterNode = node.querySelector('div#twitter');
-      if (twitterNode) {
+      node.querySelectorAll('div#twitter').forEach((twitterNode) => {
         const twitter = document.createElement('twitter');
         twitterNode.parentNode.replaceChild(twitter, twitterNode);
-      }
+      });
 
-      const membersNode = node.querySelector('div#members');
-      if (membersNode) {
+      node.querySelectorAll('div#members').forEach((membersNode) => {
         const members = document.createElement('members');
         membersNode.parentNode.replaceChild(members, membersNode);
-      }
+      });
 
-      const eventsNode = node.querySelector('div#events');
-      if (eventsNode) {
+      node.querySelectorAll('div#events').forEach((eventsNode) => {
         const events = document.createElement('events');
         eventsNode.parentNode.replaceChild(events, eventsNode);
-      }
+      });
 
       return node.outerHTML;
     };
