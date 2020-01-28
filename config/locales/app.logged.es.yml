@@ -2,7 +2,7 @@ es:
   app:
     logged:
       profile_completion:
-        # user's profile completion page when logging from an SSO provider
+        #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirme su nueva cuenta"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Acaba de crear una nueva cuenta en {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}, al iniciar sesión desde"
         we_need_some_more_details: "Para finalizar la configuración de la plataforma, necesitamos algunos detalles más."
@@ -39,13 +39,12 @@ es:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
-
       dashboard:
-        # dashboard: public profile
+        #dashboard: public profile
         profile:
           empty: ''
         settings:
-          # dashboard: edit my profile
+          #dashboard: edit my profile
           last_activity_on_: "Última vez activo"
           i_want_to_change_group: "Quiero cambiar de grupo"
           your_subscription_expires_on_: "su suscripción acaba el"
@@ -53,7 +52,7 @@ es:
           i_want_to_subscribe: "Quiero suscribirme"
           to_come: "por venir"
           approved: "aprobado"
-          projects: "Projectos"
+          projects: "Projects"
           no_projects: "Sin projectos"
           labels: "Etiquetas"
           no_labels: "Sin etiquetas"
@@ -68,10 +67,10 @@ es:
           an_unexpected_error_prevented_your_group_from_being_changed: "Un error inesperado impidió que su grupo fuese cambiado."
           confirmation_required: "Confirmation required"
           confirm_delete_your_account: "¿Está seguro de querer eliminar su cuenta?"
-          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."                                                # missing translation
-          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."           # missing translation
-          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."          # missing translation
-          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."   # missing translation
+          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
+          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
+          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
+          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
           your_user_account_has_been_successfully_deleted_goodbye: "Su cuenta ha sido eliminada con éxito. Adiós"
           an_error_occured_preventing_your_account_from_being_deleted: "Un error inesperado impidió que su cuenta fuese eliminada."
           used_for_statistics: "This data will be used for statistical purposes"
@@ -80,20 +79,20 @@ es:
           used_for_profile: "This data will only be displayed on your profile"
           used_for_pricing_stats: "This data will be used to determine the prices to which you are entitled, and for statistical purposes"
           public_profile: "You will have a public profile and other users will be able to associate you in their projects"
-          trainings: "Cursos"
-          no_trainings: "Sin cursos"
-          subscription: "Suscripción"
-          group: "Grupo"
-          or: "ó"
+          trainings: "Trainings"
+          no_trainings: "No trainings"
+          subscription: "Subscription"
+          group: "Group"
+          or: "or"
           confirm_changes: "Confirmar cambios"
-          change_my_data: "Cambiar mis datos"
-          sync_my_profile: "Sincronizar mi perfil"
-          once_your_data_are_up_to_date_: "Una vez sus datos hayan sido actualizados,"
-          _click_on_the_synchronization_button_opposite_: "haz clic en el botón de sincronización"
-          _disconnect_then_reconnect_: "reconectarse"
-          _for_your_changes_to_take_effect: "para que sus cambios sean aplicados."
+          change_my_data: "Change my data"
+          sync_my_profile: "Sync my profile"
+          once_your_data_are_up_to_date_: "Once your data are up to date,"
+          _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
+          _disconnect_then_reconnect_: "disconnect then reconnect"
+          _for_your_changes_to_take_effect: "for your changes to take effect."
         projects:
-          # dashboard: my projects
+          #dashboard: my projects
           you_dont_have_any_projects: "Aún no tiene proyectos."
           add_a_project: "Add a project"
           author: "Autor"
@@ -105,13 +104,13 @@ es:
           materials: "Materials"
           collaborators: "Collaborators"
         trainings:
-          # dashboard: my trainings
+          #dashboard: my trainings
           your_next_trainings: "Sus próximos cursos"
           your_previous_trainings: "Sus cursos anteriores"
           your_approved_trainings: "Sus cursos aprobados"
           no_trainings: "No trainings"
         events:
-          # dashboard: my events
+          #dashboard: my events
           your_next_events: "Sus próximos eventos"
           no_events_to_come: "No hay próximos eventos"
           your_previous_events: "Sus eventos anteriores"
@@ -119,20 +118,18 @@ es:
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
         invoices:
-          # dashboard: my invoices
+          #dashboard: my invoices
           reference_number: "Numero de referencia"
           date: "Date"
           price: "Price"
           download_the_invoice: "Download the invoice"
           download_the_credit_note: "Download the refund invoice"
           no_invoices_for_now: "No invoices for now."
-
       members_show:
-        # public profil of a member
+        #public profil of a member
         members_list: "Lista de miembros"
-
       members:
-        # list of members accepting to be contacted
+        #list of members accepting to be contacted
         the_fablab_members: "Los miembros del fablab"
         display_more_members: "Ver más miembros"
         no_members_for_now: "Aún no hay miembros"
@@ -140,22 +137,19 @@ es:
         user: "User"
         pseudonym: "Pseudonym"
         email_address: "Email address"
-
       projects_new:
-        # add a new project
+        #add a new project
         add_a_new_project: "Añadir nuevo proyecto"
-
       projects_edit:
-        # modify an existing project
+        #modify an existing project
         edit_the_project: "Editar proyecto"
         rough_draft: "Draft"
-        publish: "Publicar"
-
+        publish: "Publish"
       machines_reserve:
-        # book a machine
+        #book a machine
         machine_planning: "Planning de la máquina"
-        i_ve_reserved: "He reservado"
-        not_available: "No disponible"
+        i_ve_reserved: "I've reserved"
+        not_available: "Not available"
         i_reserve: "reservo"
         i_shift: "reemplazo"
         i_change: "cambio"
@@ -163,29 +157,26 @@ es:
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
-
       trainings_reserve:
-        # book a training
+        #book a training
         trainings_planning: "Plan de curso"
-        planning_of: "Plan de "   # followed by the training name (eg. "Planning of 3d printer training")
+        planning_of: "\"Plan de \""
         all_trainings: "Todos los cursos"
         cancel_my_selection: "Cancelar mi selección"
         i_change: "I change"
         i_shift: "I shift"
-        i_ve_reserved: "He reservado"
-
+        i_ve_reserved: "I've reserved"
       space_reserve:
-        # book a space
+        #book a space
         planning_of_space_NAME: "Planes de {NAME} "
-        i_ve_reserved: "he reservado"
-        i_shift: "reemplazo"
-        i_change: "cambio"
-
+        i_ve_reserved: "I've reserved"
+        i_shift: "I shift"
+        i_change: "I change"
       notifications:
         notifications_center: "Centro de notificaciones"
         mark_all_as_read: "Marcar como leido"
         date: "Date"
-        notif_title: "Titulo"
+        notif_title: "Title"
         no_new_notifications: "No hay notificaciones nuevas."
         archives: "Archivos"
         no_archived_notifications: "No hay notificaciones archivadas."
