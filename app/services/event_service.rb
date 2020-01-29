@@ -89,10 +89,10 @@ class EventService
                     .references(:availabilities, :events)
              when 'all'
                Event.includes(:availability, :event_price_categories, :event_files)
-                 .where(
-                   'recurrence_id = ?',
-                   event.recurrence_id
-                 )
+                    .where(
+                      'recurrence_id = ?',
+                      event.recurrence_id
+                    )
              else
                []
              end
