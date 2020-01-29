@@ -13,7 +13,7 @@ ach:
   time:
     formats:
       #See http://apidock.com/ruby/DateTime/strftime for a list of available directives
-      hour_minute: "crwdns3163:0%I:%Mcrwdnd3163:0%pcrwdne3163:0"
+      hour_minute: "%I:%M %p"
   errors:
     messages:
       #CarrierWave
