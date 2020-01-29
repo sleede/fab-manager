@@ -231,7 +231,7 @@ pt:
         # edit an existing event
         edit_the_event: "Editar evento"
         confirmation_required: "Confirmation required"
-        edit_recurring_event: "What do you want to update this periodic event ?"
+        edit_recurring_event: "You're about to update a periodic event. What do you want to update ?"
         edit_this_event: "Only this event"
         edit_this_and_next: "This event and the following"
         edit_all: "All events"

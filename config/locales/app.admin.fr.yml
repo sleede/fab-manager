@@ -231,7 +231,7 @@ fr:
         # modifier un évènement existant
         edit_the_event: "Éditer l'évènement"
         confirmation_required: "Confirmation requise"
-        edit_recurring_event: "Que voulez-vous modifier cet évènement périodique ?"
+        edit_recurring_event: "Vous êtes sur le point de modifier un évènement périodique. Que voulez-vous modifier ?"
         edit_this_event: "Uniquement cet évènement"
         edit_this_and_next: "Cet évènement et tous les suivants"
         edit_all: "Tous les évènements"

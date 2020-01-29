@@ -483,6 +483,7 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
       { label: _t('app.admin.events_new.every_year'), value: 'year' }
     ];
 
+    // triggered when the new event form was submitted to the API and have received an answer
     $scope.onSubmited = function(content) {
       if ((content.id == null)) {
         $scope.alerts = [];
@@ -527,17 +528,17 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     // List of age ranges
     $scope.ageRanges = ageRangesPromise;
 
-    // Default edit mode for periodic event
+    // Default edit-mode for periodic event
     $scope.editMode = 'single';
 
-    // show edit mode modal if event is recurrence
+    // show edit-mode modal if event is recurrent
     $scope.isShowEditModeModal = $scope.event.recurrence_events.length > 0;
 
     $scope.editRecurrent = function (e) {
       if ($scope.isShowEditModeModal && $scope.event.recurrence_events.length > 0) {
         e.preventDefault();
 
-        // open a choice edit mode dialog
+        // open a choice edit-mode dialog
         const modalInstance = $uibModal.open({
           animation: true,
           templateUrl: '<%= asset_path "events/editRecurrent.html" %>',
@@ -547,7 +548,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
             editMode: function () { return $scope.editMode; }
           }
         });
-        // submit form event by edit mode
+        // submit form event by edit-mode
         modalInstance.result.then(function(res) {
           $scope.isShowEditModeModal = false;
           $scope.editMode = res.editMode;
@@ -556,6 +557,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
       }
     };
 
+    // triggered when the edit event form was submitted to the API and have received an answer
     $scope.onSubmited = function(data) {
       if (data.total === data.updated) {
         if (data.updated > 1) {
@@ -623,7 +625,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
 ]);
 
 /**
- * Controller used in the event edit mode modal window
+ * Controller used in the event edit-mode modal window
  */
 Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$uibModalInstance', 'editMode', 'growl', '_t',
   function ($scope, $uibModalInstance, editMode, growl, _t) {
