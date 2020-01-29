@@ -44,7 +44,7 @@ en:
         select_none: "None"
         number_of_tickets: "Number of tickets: "
         adjust_the_opening_hours: "Adjust the opening hours"
-        to_time: "to"  # context: time. eg. 'from 18:00 to 21:00'
+        to_time: "to"  # eg. from 18:00 to 21:00
         restrict_this_slot_with_labels_optional: "Restrict this slot with labels (optional)"
         recurrence: "Recurrence"
         enabled: "Enabled"
@@ -176,8 +176,8 @@ en:
         on_DATE: "on {DATE}"
         from_DATE: "from {DATE}"
         from_TIME: "from {TIME}"
-        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
-        to_time: "to"  # context: time. eg. 'from 18:00 to 21:00'
+        to_date: "to" # eg: from 01/01 to 01/05
+        to_time: "to"  # eg. from 18:00 to 21:00
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -285,7 +285,7 @@ en:
         hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Related subscriptions"
         please_specify_a_number: "Please specify a number."
-        none: "None"  # grammar note: concordance with "training".
+        none: "None"  # grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "An error occurred while saving the number of credits."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "An error occurred while deleting credit with the {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "An error occurred : unable to find the credit to revoke."
@@ -465,7 +465,7 @@ en:
         description: "Description"
         description_optional: "Description (optional):"
         will_appear_on_the_refund_invoice: "Will appear on the refund invoice."
-        none: "None"  # grammar note: concordance with "payment mean"
+        none: "None"  # grammar concordance with payment mean
         by_cash: "By cash"
         by_cheque: "By cheque"
         by_transfer: "By transfer"
@@ -807,8 +807,8 @@ en:
         criterion: "Criterion:"
         value: "Value:"
         exclude: "Exclude"
-        from_date: "From" # context: date. eg: 'from 01/01 to 01/05'
-        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
+        from_date: "From" # eg: from 01/01 to 01/05
+        to_date: "to" # eg: from 01/01 to 01/05
         entries: "Entries:"
         revenue_: "Revenue:"
         average_age: "Average age:"
@@ -840,8 +840,8 @@ en:
         data: "Data"
         day: "Day"
         week: "Week"
-        from_date: "From" # context: date. eg: 'from 01/01 to 01/05'
-        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
+        from_date: "From" # eg: from 01/01 to 01/05
+        to_date: "to" # eg: from 01/01 to 01/05
         month: "Month"
         start: "Start:"
         end: "End:"
