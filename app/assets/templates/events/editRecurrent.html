@@ -1,21 +1,21 @@
 <div class="modal-header">
   <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-  <h1 translate>{{ 'app.admin.events.confirmation_required' }}</h1>
+  <h1 translate>{{ 'app.admin.events_edit.confirmation_required' }}</h1>
 </div>
 <div class="modal-body">
-  <p translate>{{ 'app.admin.events.edit_recurring_event' }}</p>
+  <p translate>{{ 'app.admin.events_edit.edit_recurring_event' }}</p>
   <div class="form-group">
     <label class="checkbox">
       <input type="radio" name="edit_mode" ng-model="editMode" value="single" required/>
-      <span translate>{{ 'app.admin.events.edit_this_event' }}</span>
+      <span translate>{{ 'app.admin.events_edit.edit_this_event' }}</span>
     </label>
     <label class="checkbox">
       <input type="radio" name="edit_mode" ng-model="editMode" value="next" required/>
-      <span translate>{{ 'app.admin.events.edit_this_and_next' }}</span>
+      <span translate>{{ 'app.admin.events_edit.edit_this_and_next' }}</span>
     </label>
     <label class="checkbox">
       <input type="radio" name="edit_mode" ng-model="editMode" value="all" required/>
-      <span translate>{{ 'app.admin.events.edit_all' }}</span>
+      <span translate>{{ 'app.admin.events_edit.edit_all' }}</span>
     </label>
   </div>
 </div>

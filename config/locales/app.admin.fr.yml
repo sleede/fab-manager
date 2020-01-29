@@ -217,11 +217,6 @@ fr:
         do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
-        confirmation_required: "Confirmation requise"
-        edit_recurring_event: "Que voulez-vous modifier cet évènement périodique ?"
-        edit_this_event: "Uniquement cet évènement"
-        edit_this_and_next: "Cet évènement et tous les suivants"
-        edit_all: "Tous les évènements"
 
       events_new:
         # ajouter un nouvel évènement
@@ -235,6 +230,17 @@ fr:
       events_edit:
         # modifier un évènement existant
         edit_the_event: "Éditer l'évènement"
+        confirmation_required: "Confirmation requise"
+        edit_recurring_event: "Que voulez-vous modifier cet évènement périodique ?"
+        edit_this_event: "Uniquement cet évènement"
+        edit_this_and_next: "Cet évènement et tous les suivants"
+        edit_all: "Tous les évènements"
+        event_successfully_updated: "L'évènement a bien été modifié."
+        events_updated: "L'évènement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été modifiés"
+        unable_to_update_the_event: "L'évènement n'a pu être modifié"
+        events_not_updated: "Sur {TOTAL} évènements, {COUNT, plural, =1{un n'a pas pu être modifié} other{{COUNT} n'ont pas pu être modifiés}}."
+        error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
+        other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
 
       event_reservations:
         # liste des réservations sur un évènement

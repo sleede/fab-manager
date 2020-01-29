@@ -123,6 +123,13 @@ class EventService
                 amount: epca['amount'],
                 _destroy: epca['_destroy']
               )
+            else
+              event_price = event.event_price_categories.find(epca['id'])
+              epc_attributes.push(
+                price_category_id: epca['price_category_id'],
+                amount: event_price.amount,
+                _destroy: ''
+              )
             end
           end
         end

@@ -217,11 +217,6 @@ pt:
         do_you_really_want_to_delete_this_price_category: "Você realmente quer deletar este preço de categoria?"
         price_category_successfully_deleted: "Preço de categoria deletado com sucesso."
         price_category_deletion_failed: "Falha ao deletar preço de categoria."
-        confirmation_required: "Confirmation required"
-        edit_recurring_event: "What do you want to update this periodic event ?"
-        edit_this_event: "Only this event"
-        edit_this_and_next: "This event and the following"
-        edit_all: "All events"
 
       events_new:
         # add a new event
@@ -235,6 +230,17 @@ pt:
       events_edit:
         # edit an existing event
         edit_the_event: "Editar evento"
+        confirmation_required: "Confirmation required"
+        edit_recurring_event: "What do you want to update this periodic event ?"
+        edit_this_event: "Only this event"
+        edit_this_and_next: "This event and the following"
+        edit_all: "All events"
+        event_successfully_updated: "Event successfully updated"
+        events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
+        unable_to_update_the_event: "Unable to update the event"
+        events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
+        error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
+        other_error: "Um erro inesperado ocorreu enquanto o evento era atualizado"
 
       event_reservations:
         # event reservations list

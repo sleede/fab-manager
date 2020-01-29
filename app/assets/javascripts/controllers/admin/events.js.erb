@@ -56,14 +56,7 @@ class EventsController {
      * @param content {Object} JSON - The upload's result
      */
     $scope.submited = function (content) {
-      if ((content.id == null)) {
-        $scope.alerts = [];
-        angular.forEach(content, function (v, k) {
-          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
-        });
-      } else {
-        $state.go('app.public.events_list');
-      }
+      $scope.onSubmited(content);
     };
 
     /**
@@ -490,6 +483,17 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
       { label: _t('app.admin.events_new.every_year'), value: 'year' }
     ];
 
+    $scope.onSubmited = function(content) {
+      if ((content.id == null)) {
+        $scope.alerts = [];
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
+        });
+      } else {
+        $state.go('app.public.events_list');
+      }
+    };
+
     // Using the EventsController
     return new EventsController($scope, $state);
   }
@@ -498,8 +502,8 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 /**
  * Controller used in the events edition page
  */
-Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal',
-  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal) {
+Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
+  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
   /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
@@ -529,7 +533,7 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     // show edit mode modal if event is recurrence
     $scope.isShowEditModeModal = $scope.event.recurrence_events.length > 0;
 
-    $scope.editRecurrent = async function (e) {
+    $scope.editRecurrent = function (e) {
       if ($scope.isShowEditModeModal && $scope.event.recurrence_events.length > 0) {
         e.preventDefault();
 
@@ -550,6 +554,51 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
           e.target.click();
         });
       }
+    };
+
+    $scope.onSubmited = function(data) {
+      if (data.total === data.updated) {
+        if (data.updated > 1) {
+          growl.success(_t(
+            'app.admin.events_edit.events_updated',
+            {COUNT: data.updated - 1}
+          ));
+        } else {
+          growl.success(_t(
+            'app.admin.events_edit.event_successfully_updated'
+          ));
+        }
+      } else {
+        if (data.total > 1) {
+          growl.warning(_t(
+            'app.admin.events_edit.events_not_updated',
+            {TOTAL: data.total, COUNT: data.total - data.updated}
+          ));
+          if (_.find(data.details, { error: 'EventPriceCategory' })) {
+            growl.error(_t(
+              'app.admin.events_edit.error_deleting_reserved_price'
+            ));
+          } else {
+            growl.error(_t(
+              'app.admin.events_edit.other_error'
+            ));
+          }
+        } else {
+          growl.error(_t(
+            'app.admin.events_edit.unable_to_update_the_event'
+          ));
+          if (data.details[0].error === 'EventPriceCategory') {
+            growl.error(_t(
+              'app.admin.events_edit.error_deleting_reserved_price'
+            ));
+          } else {
+            growl.error(_t(
+              'app.admin.events_edit.other_error'
+            ));
+          }
+        }
+      }
+      $state.go('app.public.events_list');
     };
 
     /* PRIVATE SCOPE */
