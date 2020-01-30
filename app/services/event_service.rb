@@ -123,7 +123,7 @@ class EventService
             amount: epca['amount'],
             _destroy: epca['_destroy']
           )
-        else
+        elsif epca['id'].present?
           event_price = event.event_price_categories.find(epca['id'])
           epc_attributes.push(
             price_category_id: epca['price_category_id'],
@@ -154,14 +154,20 @@ class EventService
           ef_attributes.push(efa)
         end
       end
-      unless ef_attributes.empty?
-        e_params = e_params.merge(
-          event_files_attributes: ef_attributes
-        )
+      e_params = e_params.merge(
+        event_files_attributes: ef_attributes
+      )
+      begin
+        results.push status: !!e.update(e_params.permit!), event: e # rubocop:disable Style/DoubleNegation
+      rescue => err
+        results.push status: false, event: e, error: err.try(:record).try(:class).try(:name), message: err.message # rubocop:disable Style/DoubleNegation
       end
-      results.push status: !!e.update(e_params.permit!), event: e # rubocop:disable Style/DoubleNegation
     end
-    results.push status: !!event.update(event_params), event: event # rubocop:disable Style/DoubleNegation
+    begin
+      results.push status: !!event.update(event_params), event: event # rubocop:disable Style/DoubleNegation
+    rescue => err
+      results.push status: false, event: event, error: err.try(:record).try(:class).try(:name), message: err.message # rubocop:disable Style/DoubleNegation
+    end
     results
   end
 end
