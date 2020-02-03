@@ -159,14 +159,14 @@ class EventService
       )
       begin
         results.push status: !!e.update(e_params.permit!), event: e # rubocop:disable Style/DoubleNegation
-      rescue => err
-        results.push status: false, event: e, error: err.try(:record).try(:class).try(:name), message: err.message # rubocop:disable Style/DoubleNegation
+      rescue StandardError => err
+        results.push status: false, event: e, error: err.try(:record).try(:class).try(:name), message: err.message
       end
     end
     begin
       results.push status: !!event.update(event_params), event: event # rubocop:disable Style/DoubleNegation
-    rescue => err
-      results.push status: false, event: event, error: err.try(:record).try(:class).try(:name), message: err.message # rubocop:disable Style/DoubleNegation
+    rescue StandardError => err
+      results.push status: false, event: event, error: err.try(:record).try(:class).try(:name), message: err.message
     end
     results
   end
