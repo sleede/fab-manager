@@ -31,7 +31,7 @@ if StatisticField.count.zero?
                          ])
 end
 
-unless StatisticField.find_by(key:'groupName').try(:label)
+unless StatisticField.find_by(key: 'groupName').try(:label)
   field = StatisticField.find_or_initialize_by(key: 'groupName')
   field.label = 'Groupe'
   field.statistic_index_id = 1
@@ -58,7 +58,7 @@ if StatisticSubType.count.zero?
   StatisticSubType.create!([
                              { key: 'created', label: I18n.t('statistics.account_creation'),
                                statistic_types: StatisticIndex.find_by(es_type_key: 'account').statistic_types },
-                             { key: 'published', label:I18n.t('statistics.project_publication'),
+                             { key: 'published', label: I18n.t('statistics.project_publication'),
                                statistic_types: StatisticIndex.find_by(es_type_key: 'project').statistic_types }
                            ])
 end
@@ -221,7 +221,6 @@ if Machine.count.zero?
     p.update_columns(amount: (rand * 50 + 5).floor * 100)
   end
 end
-
 
 if Category.count.zero?
   Category.create!(
@@ -436,7 +435,6 @@ unless Setting.find_by(name: 'training_information_message').try(:value)
   setting.save
 end
 
-
 unless Setting.find_by(name: 'fablab_name').try(:value)
   setting = Setting.find_or_initialize_by(name: 'fablab_name')
   setting.value = 'Fabrique'
@@ -448,7 +446,6 @@ unless Setting.find_by(name: 'name_genre').try(:value)
   setting.value = 'female'
   setting.save
 end
-
 
 unless DatabaseProvider.count.positive?
   db_provider = DatabaseProvider.new
@@ -648,7 +645,7 @@ unless Setting.find_by(name: 'link_name').try(:value)
   name = Setting.find_by(name: 'fablab_name')
   gender = Setting.find_by(name: 'name_genre')
   setting = Setting.find_or_initialize_by(name: 'link_name')
-  setting.value = _t('app.public.common.about_the_fablab', NAME: name, GENDER: gender)
+  setting.value = I18n.t('app.public.common.about_the_fablab', NAME: name, GENDER: gender)
   setting.save
 end
 
