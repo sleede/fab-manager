@@ -107,6 +107,11 @@ This is useful if you have your own invoicing system and you want to prevent Fab
     PHONE_REQUIRED
 
 If set to 'false' the phone number won't be required to register a new user on the software.
+<a name="BOOK_SLOT_AT_SAME_TIME"></a>
+
+    BOOK_SLOT_AT_SAME_TIME
+
+If set to 'false' user won't book a machine/formation/event slot if he already have a reservation the same day at the same time.
 <a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
 
     USER_CONFIRMATION_NEEDED_TO_SIGN_IN

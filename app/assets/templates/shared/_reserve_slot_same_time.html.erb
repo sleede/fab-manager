@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'app.shared.cart.slot_at_same_time' }}</h1>
+</div>
+<div class="modal-body">
+  <p ng-if="bookSlotAtSameTime" translate>{{ 'app.shared.cart.do_you_really_want_to_book_slot_at_same_time' }}</p>
+  <p ng-if="!bookSlotAtSameTime" translate>{{ 'app.shared.cart.unable_to_book_slot_because_really_have_reservation_at_same_time' }}</p>
+  <ul>
+    <li ng-repeat="r in sameTimeReservations">
+      <span>{{::r.reservable.name}}{{::r.reservable.title}}</span>
+      <div class="font-sbold text-u-c">{{ 'app.shared.cart.datetime_to_time' | translate:{START_DATETIME:(r.start_at | amDateFormat:'LLLL'), END_TIME:(r.end_at | amDateFormat:'LT') } }}</div>
+    </li>
+  </div>
+</div>
+<div ng-if="bookSlotAtSameTime" class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+</div>

@@ -439,3 +439,6 @@ fr:
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         none: "Aucune"
         online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
+        slot_at_same_time: "Réserver un créneau avec autres réservations en même temps"
+        do_you_really_want_to_book_slot_at_same_time: "Êtes-vous sûr de réserver ce créneau avec autres réservations en même temps ?"
+        unable_to_book_slot_because_really_have_reservation_at_same_time: "Impossible de réserver ce créneau parce qu'il y a déjà des réservations ci-desous en même temps."

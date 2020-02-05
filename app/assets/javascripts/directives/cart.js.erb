@@ -10,8 +10,8 @@
  * DS102: Remove unnecessary code created because of implicit returns
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'helpers', '_t',
-  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, helpers, _t) {
+Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs', 'growl', 'Auth', 'Price', 'Wallet', 'CustomAsset', 'Slot', 'helpers', '_t', '$uibModal',
+  function ($rootScope, $uibModal, dialogs, growl, Auth, Price, Wallet, CustomAsset, Slot, helpers, _t, $uibModal) {
     return ({
       restrict: 'E',
       scope: {
@@ -72,8 +72,38 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          * @param slot {Object} fullCalendar event object
          */
         $scope.validateSlot = function (slot) {
-          slot.isValid = true;
-          return updateCartPrice();
+          let sameTimeReservations = [
+            'training_reservations',
+            'machine_reservations',
+            'space_reservations',
+            'events_reservations'
+          ].map(k => {
+            return _.filter($scope.user[k], r => {
+              return slot.start.isSame(r.start_at) ||
+                (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
+                (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
+                (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
+            });
+          });
+          sameTimeReservations = _.union(...sameTimeReservations);
+          if (sameTimeReservations.length > 0) {
+            const modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: '<%= asset_path "shared/_reserve_slot_same_time.html" %>',
+              size: 'md',
+              controller: 'ReserveSlotSameTimeController',
+              resolve: {
+                sameTimeReservations: function() { return sameTimeReservations; },
+              }
+            });
+            modalInstance.result.then(function(res) {
+              slot.isValid = true;
+              return updateCartPrice();
+            });
+          } else {
+            slot.isValid = true;
+            return updateCartPrice();
+          }
         };
 
         /**
@@ -612,5 +642,27 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         return initialize();
       }
     });
+  }
+]);
+
+/**
+ * Controller of modal for show reservations the same date at the same time
+ */
+Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '$uibModalInstance', 'sameTimeReservations', 'growl', '_t',
+  function ($scope, $uibModalInstance, sameTimeReservations, growl, _t) {
+    $scope.sameTimeReservations = sameTimeReservations;
+    $scope.bookSlotAtSameTime = Fablab.bookSlotAtSameTime;
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      $uibModalInstance.close({});
+    }
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
 ]);
