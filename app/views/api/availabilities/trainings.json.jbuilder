@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array!(@availabilities) do |a|
   json.id a.slot_id if a.slot_id
   if a.is_reserved
@@ -31,4 +33,5 @@ json.array!(@availabilities) do |a|
     json.id t.id
     json.name t.name
   end
+  json.plan_ids slot.availability.plan_ids
 end

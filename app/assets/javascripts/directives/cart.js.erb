@@ -23,6 +23,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         plan: '=',
         planSelectionTime: '=',
         settings: '=',
+        plans: '=',
+        groups: '=',
         onSlotAddedToCart: '=',
         onSlotRemovedFromCart: '=',
         onSlotStartToModify: '=',
@@ -134,6 +136,27 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.payCart = function () {
         // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
+
+            // check user was selected a plan if slot is restricted for subcriptions
+            const slotHasPlan = [];
+            $scope.events.reserved.forEach(slot => {
+              if (slot.plan_ids.length > 0) {
+                if (
+                  ($scope.selectedPlan && _.include(slot.plan_ids, $scope.selectedPlan.id)) ||
+                  ($scope.user.subscribed_plan && _.include(slot.plan_ids, $scope.user.subscribed_plan.id))
+                ) {
+                  slotHasPlan.push(true);
+                } else {
+                  slotHasPlan.push(false);
+                }
+              }
+            });
+            const hasPlanForSlot = slotHasPlan.every(a => a);
+            if (!hasPlanForSlot) {
+              return growl.error(_t('app.shared.cart.slot_restrict_subcriptions_must_select_plan'));
+            }
+
+
             const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
 
             return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
@@ -262,6 +285,21 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          */
         var slotSelectionChanged = function () {
           if ($scope.slot) {
+            // build a list of plans if this slot is restricted for subcriptions
+            if ($scope.slot.plan_ids.length > 0) {
+              const _plans = _.filter($scope.plans, p => _.include($scope.slot.plan_ids, p.id));
+              $scope.slot.plansGrouped = [];
+              for (let group of Array.from($scope.groups)) {
+                const groupObj = { id: group.id, name: group.name, plans: [] };
+                for (let plan of Array.from(_plans)) {
+                  if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+                }
+                if (groupObj.plans.length > 0) {
+                  $scope.slot.plansGrouped.push(groupObj);
+                }
+              }
+            }
+
             if (!$scope.slot.is_reserved && !$scope.events.modifiable && !$scope.slot.is_completed) {
               // slot is not reserved and we are not currently modifying a slot
               // -> can be added to cart or removed if already present

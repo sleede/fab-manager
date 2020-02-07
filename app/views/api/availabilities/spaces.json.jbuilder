@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array!(@slots) do |slot|
   json.id slot.id if slot.id
   json.can_modify slot.can_modify
@@ -15,13 +17,16 @@ json.array!(@slots) do |slot|
     json.name slot.space.name
   end
   # the user who booked the slot ...
-  json.user do
-    json.id slot.reservation.user.id
-    json.name slot.reservation.user.profile.full_name
-  end if @current_user_role == 'admin' and slot.reservation # ... if the slot was reserved
+  if (@current_user_role == 'admin') && slot.reservation
+    json.user do
+      json.id slot.reservation.user.id
+      json.name slot.reservation.user.profile.full_name
+    end
+  end # ... if the slot was reserved
   json.tag_ids slot.availability.tag_ids
   json.tags slot.availability.tags do |t|
     json.id t.id
     json.name t.name
   end
+  json.plan_ids slot.availability.plan_ids
 end

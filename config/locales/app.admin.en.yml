@@ -46,6 +46,9 @@ en:
         adjust_the_opening_hours: "Adjust the opening hours"
         to_time: "to"  # context: time. eg. 'from 18:00 to 21:00'
         restrict_this_slot_with_labels_optional: "Restrict this slot with labels (optional)"
+        restrict_this_slot_for_subcriptions_optional: "Restrict this slot for subscription users (optional)"
+        select_some_plans: "Select some plans"
+        plans: "Plan(s):"
         recurrence: "Recurrence"
         enabled: "Enabled"
         period: "Period"

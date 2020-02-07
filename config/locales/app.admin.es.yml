@@ -44,6 +44,9 @@ es:
         adjust_the_opening_hours: "Ajustar el horario de apertura"
         to_time: a
         restrict_this_slot_with_labels_optional: "Restringir este horario con etiquetas (opcional)"
+        restrict_this_slot_for_subcriptions_optional: "Restrict this slot for subscription users (optional)"
+        select_some_plans: "Select some plans"
+        plans: "Plan(s):"
         recurrence: "Recurrencia"
         enabled: "Activa"
         period: "Período"

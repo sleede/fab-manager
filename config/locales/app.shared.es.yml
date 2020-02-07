@@ -416,3 +416,5 @@ es:
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
         none: "Ninguno"
         online_payment_disabled: "El pago en línea no está disponible. Póngase en contacto directamente con la recepción de Fablab."
+        slot_restrict_plans: "This slot is restricted for the plans below:"
+        slot_restrict_subcriptions_must_select_plan: "The slot is restricted for subscriptions, please select a plan first."

@@ -28,6 +28,15 @@
                  switch-animate="true"
                  switch-readonly="{{slot.isValid}}"/>
         </div>
+        <div class="alert alert-warning m-t-sm m-b-none" ng-show="slot.plansGrouped.length">
+          <div class="font-sbold text-u-c" translate>{{ 'app.shared.cart.slot_restrict_plans' }}</div>
+          <div ng-repeat="group in slot.plansGrouped">
+            <div class="font-sbold">{{::group.name}}</div>
+            <ul class="m-n" ng-repeat="plan in group.plans">
+              <li>{{::plan.name}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div>
         <button class="btn btn-valid btn-warning btn-block text-u-c r-b" ng-click="validateSlot(slot)" ng-if="!slot.isValid" translate>{{ 'app.shared.cart.confirm_this_slot' }}</button>

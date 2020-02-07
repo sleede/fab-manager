@@ -439,3 +439,5 @@ pt:
         a_problem_occurred_during_the_payment_process_please_try_again_later: "Um problema ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
         none: "Vazio"
         online_payment_disabled: "O pagamento online não está disponível. Entre em contato diretamente com a recepção do Fablab."
+        slot_restrict_plans: "This slot is restricted for the plans below:"
+        slot_restrict_subcriptions_must_select_plan: "The slot is restricted for subscriptions, please select a plan first."

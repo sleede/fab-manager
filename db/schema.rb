@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200127111404) do
+ActiveRecord::Schema.define(version: 20200206132857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
   enable_extension "unaccent"
+  enable_extension "pg_trgm"
 
   create_table "abuses", force: :cascade do |t|
     t.integer  "signaled_id"
@@ -464,6 +464,14 @@ ActiveRecord::Schema.define(version: 20200127111404) do
   end
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
+
+  create_table "plans_availabilities", force: :cascade do |t|
+    t.integer "plan_id"
+    t.integer "availability_id"
+  end
+
+  add_index "plans_availabilities", ["availability_id"], name: "index_plans_availabilities_on_availability_id", using: :btree
+  add_index "plans_availabilities", ["plan_id"], name: "index_plans_availabilities_on_plan_id", using: :btree
 
   create_table "price_categories", force: :cascade do |t|
     t.string   "name"

@@ -46,6 +46,9 @@ fr:
         adjust_the_opening_hours: "Ajuster l'horaire"
         to_time: "à"  # context: time. eg. 'from 18:00 to 21:00'
         restrict_this_slot_with_labels_optional: "Restreindre ce créneau avec des étiquettes (optionnel)"
+        restrict_this_slot_for_subcriptions_optional: "Restreindre ce créneau pour les abonnements (optionnel)"
+        select_some_plans: "Sélectionnez des formules d'abonnement"
+        plans: "Abonnement(s):"
         recurrence: "Récurrence"
         enabled: "Activée"
         period: "Période"
