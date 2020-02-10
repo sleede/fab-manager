@@ -518,9 +518,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.toggleSelectPlan = function (plan) {
       const index = $scope.selectedPlans.indexOf(plan);
       if (index > -1) {
-        return $scope.selectedMachines.splice(index, 1);
+        return $scope.selectedPlans.splice(index, 1);
       } else {
-        return $scope.selectedMachines.push(machine);
+        return $scope.selectedPlans.push(plan);
       }
     };
 
@@ -750,6 +750,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     }
 
     const localizedList = function (items) {
+      console.log(items)
       if (items.length === 0) return `<span class="text-gray text-italic">${_t("app.admin.calendar.none")}</span>`;
 
       const names = items.map(function (i) { return $sce.trustAsHtml(`<strong>${i.name}</strong>`); });
