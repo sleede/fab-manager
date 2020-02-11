@@ -229,7 +229,7 @@ es:
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
       plans:
         #summary of the subscriptions
-        subcriptions: "Suscripciones"
+        subscriptions: "Suscripciones"
         i_choose_that_plan: "Elijo este plan"
         i_subscribe_online: "Suscribirme online"
         i_already_subscribed: "Ya me he suscrito"

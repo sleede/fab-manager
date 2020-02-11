@@ -253,7 +253,7 @@ fr:
 
       plans:
         # page récapitulative des abonnements
-        subcriptions: "Les abonnements"
+        subscriptions: "Les abonnements"
         i_choose_that_plan: "Je choisis cette formule"
         i_subscribe_online: "Je m'abonne en ligne"
         i_already_subscribed: "Je suis déjà abonné"

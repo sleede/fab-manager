@@ -440,4 +440,4 @@ pt:
         none: "Vazio"
         online_payment_disabled: "O pagamento online não está disponível. Entre em contato diretamente com a recepção do Fablab."
         slot_restrict_plans: "This slot is restricted for the plans below:"
-        slot_restrict_subcriptions_must_select_plan: "The slot is restricted for subscriptions, please select a plan first."
+        slot_restrict_subscriptions_must_select_plan: "The slot is restricted for the subscribers. Please select a plan first."
