@@ -33,5 +33,5 @@ json.array!(@availabilities) do |a|
     json.id t.id
     json.name t.name
   end
-  json.plan_ids slot.availability.plan_ids
+  json.plan_ids a.plan_ids
 end
