@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-- Ability to configure allowing or preventing member book a machine/formation/event slot if he already have a reservation the same day at the same time
+- Ability to configure the policy (allow or prevent) for members booking a machine/formation/event slot, if they already have a reservation the same day at the same time
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - Ability to fully customize the home page
 - Automated setup assistant
@@ -142,7 +142,7 @@
 ## v4.0.4 2019 August 14
 
 - Fix a bug: #140 VAT rate is erroneous in invoices.
-  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3)  to regenerate the invoices since August 1st (if
+  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3) to regenerate the invoices since August 1st
 - [TODO DEPLOY] `rake fablab:maintenance:regenerate_invoices[2019,8]`
 
 ## v4.0.3 2019 August 01

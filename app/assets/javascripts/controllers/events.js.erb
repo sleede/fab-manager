@@ -820,8 +820,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     };
 
     /**
-     * find user reservations the same date at the same time with event
-     *
+     * Find user's reservations, the same date at the same time, with event
      */
     var findReservationsAtSameTime = function () {
       let sameTimeReservations = [
@@ -829,18 +828,18 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         'machine_reservations',
         'space_reservations',
         'events_reservations'
-      ].map(k => {
-        return _.filter($scope.ctrl.member[k], r => {
+      ].map(function(k) {
+        return _.filter($scope.ctrl.member[k], function(r) {
           if (r.reservable_type === 'Event' && r.reservable.id === $scope.event.id) {
             return false;
-          };
+          }
           return moment($scope.event.start_time).isSame(r.start_at) ||
             (moment($scope.event.end_time).isAfter(r.start_at) && moment($scope.event.end_time).isBefore(r.end_at)) ||
             (moment($scope.event.start_time).isAfter(r.start_at) && moment($scope.event.start_time).isBefore(r.end_at)) ||
             (moment($scope.event.start_time).isBefore(r.start_at) && moment($scope.event.end_time).isAfter(r.end_at));
         });
       });
-      return _.union(...sameTimeReservations);
+      return _.union.apply(null, sameTimeReservations);
     };
 
     /**

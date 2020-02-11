@@ -77,15 +77,15 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
             'machine_reservations',
             'space_reservations',
             'events_reservations'
-          ].map(k => {
-            return _.filter($scope.user[k], r => {
+          ].map(function (k) {
+            return _.filter($scope.user[k], function(r) {
               return slot.start.isSame(r.start_at) ||
                 (slot.end.isAfter(r.start_at) && slot.end.isBefore(r.end_at)) ||
                 (slot.start.isAfter(r.start_at) && slot.start.isBefore(r.end_at)) ||
                 (slot.start.isBefore(r.start_at) && slot.end.isAfter(r.end_at));
-            });
+            })
           });
-          sameTimeReservations = _.union(...sameTimeReservations);
+          sameTimeReservations = _.union.apply(null, sameTimeReservations);
           if (sameTimeReservations.length > 0) {
             const modalInstance = $uibModal.open({
               animation: true,
@@ -93,7 +93,7 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
               size: 'md',
               controller: 'ReserveSlotSameTimeController',
               resolve: {
-                sameTimeReservations: function() { return sameTimeReservations; },
+                sameTimeReservations: function() { return sameTimeReservations; }
               }
             });
             modalInstance.result.then(function(res) {
