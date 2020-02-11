@@ -56,14 +56,7 @@ class EventsController {
      * @param content {Object} JSON - The upload's result
      */
     $scope.submited = function (content) {
-      if ((content.id == null)) {
-        $scope.alerts = [];
-        angular.forEach(content, function (v, k) {
-          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
-        });
-      } else {
-        $state.go('app.public.events_list');
-      }
+      $scope.onSubmited(content);
     };
 
     /**
@@ -490,6 +483,18 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
       { label: _t('app.admin.events_new.every_year'), value: 'year' }
     ];
 
+    // triggered when the new event form was submitted to the API and have received an answer
+    $scope.onSubmited = function(content) {
+      if ((content.id == null)) {
+        $scope.alerts = [];
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
+        });
+      } else {
+        $state.go('app.public.events_list');
+      }
+    };
+
     // Using the EventsController
     return new EventsController($scope, $state);
   }
@@ -498,9 +503,9 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 /**
  * Controller used in the events edition page
  */
-Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise',
-  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
+  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
+    /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
     $scope.actionUrl = `/api/events/${$stateParams.id}`;
@@ -510,6 +515,9 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
 
     // Retrieve the event details, in case of error the user is redirected to the events listing
     $scope.event = eventPromise;
+
+    // We'll keep track of the initial dates here, for later comparison
+    $scope.initialDates = {};
 
     // List of categories for the events
     $scope.categories = categoriesPromise;
@@ -523,6 +531,83 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     // List of age ranges
     $scope.ageRanges = ageRangesPromise;
 
+    // Default edit-mode for periodic event
+    $scope.editMode = 'single';
+
+    // show edit-mode modal if event is recurrent
+    $scope.isShowEditModeModal = $scope.event.recurrence_events.length > 0;
+
+    $scope.editRecurrent = function (e) {
+      if ($scope.isShowEditModeModal && $scope.event.recurrence_events.length > 0) {
+        e.preventDefault();
+
+        // open a choice edit-mode dialog
+        const modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '<%= asset_path "events/editRecurrent.html" %>',
+          size: 'md',
+          controller: 'EditRecurrentEventController',
+          resolve: {
+            editMode: function () { return $scope.editMode; },
+            initialDates: function () { return $scope.initialDates; },
+            currentEvent: function () { return $scope.event; }
+          }
+        });
+        // submit form event by edit-mode
+        modalInstance.result.then(function(res) {
+          $scope.isShowEditModeModal = false;
+          $scope.editMode = res.editMode;
+          e.target.click();
+        });
+      }
+    };
+
+    // triggered when the edit event form was submitted to the API and have received an answer
+    $scope.onSubmited = function(data) {
+      if (data.total === data.updated) {
+        if (data.updated > 1) {
+          growl.success(_t(
+            'app.admin.events_edit.events_updated',
+            {COUNT: data.updated - 1}
+          ));
+        } else {
+          growl.success(_t(
+            'app.admin.events_edit.event_successfully_updated'
+          ));
+        }
+      } else {
+        if (data.total > 1) {
+          growl.warning(_t(
+            'app.admin.events_edit.events_not_updated',
+            {TOTAL: data.total, COUNT: data.total - data.updated}
+          ));
+          if (_.find(data.details, { error: 'EventPriceCategory' })) {
+            growl.error(_t(
+              'app.admin.events_edit.error_deleting_reserved_price'
+            ));
+          } else {
+            growl.error(_t(
+              'app.admin.events_edit.other_error'
+            ));
+          }
+        } else {
+          growl.error(_t(
+            'app.admin.events_edit.unable_to_update_the_event'
+          ));
+          if (data.details[0].error === 'EventPriceCategory') {
+            growl.error(_t(
+              'app.admin.events_edit.error_deleting_reserved_price'
+            ));
+          } else {
+            growl.error(_t(
+              'app.admin.events_edit.other_error'
+            ));
+          }
+        }
+      }
+      $state.go('app.public.events_list');
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -535,11 +620,49 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
       $scope.event.start_date = moment($scope.event.start_date).toDate();
       $scope.event.end_date = moment($scope.event.end_date).toDate();
 
+      $scope.initialDates = {
+        start: new Date($scope.event.start_date.valueOf()),
+        end: new Date($scope.event.end_date.valueOf())
+      };
+
       // Using the EventsController
       return new EventsController($scope, $state);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
+  }
+]);
+
+/**
+ * Controller used in the event edit-mode modal window
+ */
+Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$uibModalInstance', 'editMode', 'growl', 'initialDates', 'currentEvent', '_t',
+  function ($scope, $uibModalInstance, editMode, growl, initialDates, currentEvent, _t) {
+    // with recurrent slots: how many slots should we update?
+    $scope.editMode = editMode;
+
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      $uibModalInstance.close({
+        editMode: $scope.editMode
+      });
+    }
+
+    /**
+     * Test if any of the dates of the event has changed
+     */
+    $scope.hasDateChanged = function() {
+      return (!moment(initialDates.start).isSame(currentEvent.start_date, 'day') || !moment(initialDates.end).isSame(currentEvent.end_date, 'day'));
+    }
+
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
 ]);

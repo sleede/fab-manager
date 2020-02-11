@@ -55,21 +55,8 @@ class API::EventsController < API::ApiController
 
   def update
     authorize Event
-    begin
-      if @event.update(event_params.permit!)
-        render :show, status: :ok, location: @event
-      else
-        render json: @event.errors, status: :unprocessable_entity
-      end
-    rescue ActiveRecord::RecordNotDestroyed => e
-      if e.record.class.name == 'EventPriceCategory'
-        render json: { error: ["#{e.record.price_category.name}: #{t('events.error_deleting_reserved_price')}"] },
-               status: :unprocessable_entity
-      else
-        render json: { error: [t('events.other_error')] }, status: :unprocessable_entity
-      end
-    end
-
+    res = EventService.update(@event, event_params.permit!, params[:edit_mode])
+    render json: { action: 'update', total: res.length, updated: res.select { |r| r[:status] }.length, details: res }, status: :ok, location: @event
   end
 
   def destroy

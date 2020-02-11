@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 translate>{{ 'app.admin.events_edit.confirmation_required' }}</h1>
+</div>
+<div class="modal-body">
+  <p translate>{{ 'app.admin.events_edit.edit_recurring_event' }}</p>
+  <div class="form-group">
+    <label class="checkbox">
+      <input type="radio" name="edit_mode" ng-model="editMode" value="single" required/>
+      <span translate>{{ 'app.admin.events_edit.edit_this_event' }}</span>
+    </label>
+    <label class="checkbox">
+      <input type="radio" name="edit_mode" ng-model="editMode" value="next" required/>
+      <span translate>{{ 'app.admin.events_edit.edit_this_and_next' }}</span>
+    </label>
+    <label class="checkbox">
+      <input type="radio" name="edit_mode" ng-model="editMode" value="all" required/>
+      <span translate>{{ 'app.admin.events_edit.edit_all' }}</span>
+    </label>
+  </div>
+  <p class="alert alert-warning" ng-show="hasDateChanged() && editMode !== 'single'" translate>{{ 'app.admin.events_edit.date_wont_change' }}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.apply' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+</div>

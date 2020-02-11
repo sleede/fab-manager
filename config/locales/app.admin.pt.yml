@@ -230,6 +230,18 @@ pt:
       events_edit:
         # edit an existing event
         edit_the_event: "Editar evento"
+        confirmation_required: "Confirmation required"
+        edit_recurring_event: "You're about to update a periodic event. What do you want to update ?"
+        edit_this_event: "Only this event"
+        edit_this_and_next: "This event and the following"
+        edit_all: "All events"
+        date_wont_change: "Warning: you have changed the event date. This modification won't be propagated to other occurrences of the periodic event."
+        event_successfully_updated: "Event successfully updated"
+        events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
+        unable_to_update_the_event: "Unable to update the event"
+        events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
+        error_deleting_reserved_price: "Não permitido deletar o preço requisitado, pois está associado a algumas reservas"
+        other_error: "Um erro inesperado ocorreu enquanto o evento era atualizado"
 
       event_reservations:
         # event reservations list

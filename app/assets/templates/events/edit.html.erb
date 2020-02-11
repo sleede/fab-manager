@@ -16,7 +16,7 @@
   </section>
 
 
-  <form role="form" name="eventForm" class="form-horizontal" novalidate action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true">
+  <form role="form" name="eventForm" class="form-horizontal" novalidate action="{{ actionUrl }}" ng-upload="submited(content)" upload-options-enable-rails-csrf="true" upload-options-convert-hidden="true">
 
     <ng-include src="'<%= asset_path "events/_form.html" %>'"></ng-include>
 
