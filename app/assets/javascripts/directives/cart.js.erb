@@ -137,9 +137,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
 
-            // check user was selected a plan if slot is restricted for subcriptions
+            // check user was selected a plan if slot is restricted for subscriptions
             const slotHasPlan = [];
-            $scope.events.reserved.forEach(slot => {
+            $scope.events.reserved.forEach(function (slot) {
               if (slot.plan_ids.length > 0) {
                 if (
                   ($scope.selectedPlan && _.include(slot.plan_ids, $scope.selectedPlan.id)) ||
@@ -151,9 +151,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
                 }
               }
             });
-            const hasPlanForSlot = slotHasPlan.every(a => a);
+            const hasPlanForSlot = slotHasPlan.every(function (a) { return a });
             if (!hasPlanForSlot) {
-              return growl.error(_t('app.shared.cart.slot_restrict_subcriptions_must_select_plan'));
+              return growl.error(_t('app.shared.cart.slot_restrict_subscriptions_must_select_plan'));
             }
 
 
@@ -285,9 +285,9 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          */
         var slotSelectionChanged = function () {
           if ($scope.slot) {
-            // build a list of plans if this slot is restricted for subcriptions
+            // build a list of plans if this slot is restricted for subscriptions
             if ($scope.slot.plan_ids.length > 0) {
-              const _plans = _.filter($scope.plans, p => _.include($scope.slot.plan_ids, p.id));
+              const _plans = _.filter($scope.plans, function (p) { return _.include($scope.slot.plan_ids, p.id) });
               $scope.slot.plansGrouped = [];
               for (let group of Array.from($scope.groups)) {
                 const groupObj = { id: group.id, name: group.name, plans: [] };

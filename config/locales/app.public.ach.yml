@@ -229,7 +229,7 @@ ach:
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "crwdns9167:0crwdne9167:0"
       plans:
         #summary of the subscriptions
-        subcriptions: "crwdns9169:0crwdne9169:0"
+        subscriptions: "crwdns9169:0crwdne9169:0"
         i_choose_that_plan: "crwdns9171:0crwdne9171:0"
         i_subscribe_online: "crwdns9173:0crwdne9173:0"
         i_already_subscribed: "crwdns9175:0crwdne9175:0"

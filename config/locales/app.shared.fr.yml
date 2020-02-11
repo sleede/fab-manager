@@ -440,4 +440,4 @@ fr:
         none: "Aucune"
         online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
         slot_restrict_plans: "Ce créneau est restreint pour les formules d'abonnement ci-desous:"
-        slot_restrict_subcriptions_must_select_plan: "Le créneau est restreint pour les abonnements, Veuillez tout d'abord sélectionner un formule d'abonnement"
+        slot_restrict_subscriptions_must_select_plan: "Le créneau est restreint pour les abonnés. Veuillez tout d'abord sélectionner une formule d'abonnement"

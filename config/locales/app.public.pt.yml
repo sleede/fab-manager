@@ -253,7 +253,7 @@ pt:
 
       plans:
         # summary of the subscriptions
-        subcriptions: "Assinaturas"
+        subscriptions: "Assinaturas"
         i_choose_that_plan: "Eu escolho esse plano"
         i_subscribe_online: "Me inscrever online"
         i_already_subscribed: "Eu já estou inscrito"

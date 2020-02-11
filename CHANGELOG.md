@@ -1,6 +1,6 @@
 # Changelog Fab Manager
 
-- Ability to configure reservation slot restrict for plans
+- Ability to configure reservation slot restricted for plan subscribers
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - Ability to fully customize the home page
 - Automated setup assistant
