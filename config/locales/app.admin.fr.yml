@@ -235,6 +235,7 @@ fr:
         edit_this_event: "Uniquement cet évènement"
         edit_this_and_next: "Cet évènement et tous les suivants"
         edit_all: "Tous les évènements"
+        date_wont_change: "Attention : vous avez modifié la date de l'évènement. Cette modification ne sera pas être répercutée sur les autres occurrences de l'évènement périodique."
         event_successfully_updated: "L'évènement a bien été modifié."
         events_updated: "L'évènement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été modifiés"
         unable_to_update_the_event: "L'évènement n'a pu être modifié"

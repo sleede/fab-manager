@@ -18,6 +18,7 @@
       <span translate>{{ 'app.admin.events_edit.edit_all' }}</span>
     </label>
   </div>
+  <p class="alert alert-warning" ng-show="hasDateChanged() && editMode !== 'single'" translate>{{ 'app.admin.events_edit.date_wont_change' }}</p>
 </div>
 <div class="modal-footer">
   <button class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.apply' }}</button>

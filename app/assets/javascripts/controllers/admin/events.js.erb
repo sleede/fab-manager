@@ -505,7 +505,7 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
  */
 Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
   function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
-  /* PUBLIC SCOPE */
+    /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
     $scope.actionUrl = `/api/events/${$stateParams.id}`;
@@ -515,6 +515,9 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
 
     // Retrieve the event details, in case of error the user is redirected to the events listing
     $scope.event = eventPromise;
+
+    // We'll keep track of the initial dates here, for later comparison
+    $scope.initialDates = {};
 
     // List of categories for the events
     $scope.categories = categoriesPromise;
@@ -545,7 +548,9 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
           size: 'md',
           controller: 'EditRecurrentEventController',
           resolve: {
-            editMode: function () { return $scope.editMode; }
+            editMode: function () { return $scope.editMode; },
+            initialDates: function () { return $scope.initialDates; },
+            currentEvent: function () { return $scope.event; }
           }
         });
         // submit form event by edit-mode
@@ -615,6 +620,11 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
       $scope.event.start_date = moment($scope.event.start_date).toDate();
       $scope.event.end_date = moment($scope.event.end_date).toDate();
 
+      $scope.initialDates = {
+        start: new Date($scope.event.start_date.valueOf()),
+        end: new Date($scope.event.end_date.valueOf())
+      };
+
       // Using the EventsController
       return new EventsController($scope, $state);
     };
@@ -627,8 +637,8 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
 /**
  * Controller used in the event edit-mode modal window
  */
-Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$uibModalInstance', 'editMode', 'growl', '_t',
-  function ($scope, $uibModalInstance, editMode, growl, _t) {
+Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$uibModalInstance', 'editMode', 'growl', 'initialDates', 'currentEvent', '_t',
+  function ($scope, $uibModalInstance, editMode, growl, initialDates, currentEvent, _t) {
     // with recurrent slots: how many slots should we update?
     $scope.editMode = editMode;
 
@@ -637,8 +647,15 @@ Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$
      */
     $scope.ok = function () {
       $uibModalInstance.close({
-        editMode: $scope.editMode,
+        editMode: $scope.editMode
       });
+    }
+
+    /**
+     * Test if any of the dates of the event has changed
+     */
+    $scope.hasDateChanged = function() {
+      return (!moment(initialDates.start).isSame(currentEvent.start_date, 'day') || !moment(initialDates.end).isSame(currentEvent.end_date, 'day'));
     }
 
     /**

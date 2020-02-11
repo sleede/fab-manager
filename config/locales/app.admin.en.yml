@@ -235,6 +235,7 @@ en:
         edit_this_event: "Only this event"
         edit_this_and_next: "This event and the following"
         edit_all: "All events"
+        date_wont_change: "Warning: you have changed the event date. This modification won't be propagated to other occurrences of the periodic event."
         event_successfully_updated: "Event successfully updated"
         events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
         unable_to_update_the_event: "Unable to update the event"
