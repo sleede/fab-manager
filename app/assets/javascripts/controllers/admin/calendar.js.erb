@@ -18,8 +18,8 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig',
-  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) {
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig',
+  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, _t, uiCalendarConfig, CalendarConfig) {
   /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
@@ -165,6 +165,44 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     };
 
     /**
+     * Open a confirmation modal to remove a plan for the currently selected availability,
+     * @param plan {Object} must contain the machine ID and name
+     */
+    $scope.removePlan = function (plan) {
+      // open a confirmation dialog
+      return dialogs.confirm({
+        resolve: {
+          object () {
+            return {
+              title: _t('app.admin.calendar.confirmation_required'),
+              msg: _t('app.admin.calendar.do_you_really_want_to_remove_PLAN_from_this_slot', { GENDER: getGender($scope.currentUser), PLAN: plan.name }) + ' ' +
+             _t('app.admin.calendar.this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + '<br><strong>' +
+             _t('app.admin.calendar.beware_this_cannot_be_reverted') + '</strong>'
+            };
+          }
+        }
+      }
+      , function () {
+      // the admin has confirmed, remove the plan
+        const plans = _.drop($scope.availability.plan_ids, plan.id);
+
+        return Availability.update({ id: $scope.availability.id }, { availability: { plans_attributes: [{ id: plan.id, _destroy: true }] } }
+          , function (data, status) { // success
+            // update the plan_ids attribute
+            $scope.availability.plan_ids = data.plan_ids;
+            $scope.availability.plans = availabilityPlans();
+            uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+            // notify the admin
+            return growl.success(_t('app.admin.calendar.the_plan_was_successfully_removed_from_the_slot'));
+          }
+          , function (data, status) { // failed
+            growl.error(_t('app.admin.calendar.deletion_failed'));
+          }
+        );
+      });
+    };
+
+    /**
      * Callback to alert the admin that the export request was acknowledged and is
      * processing right now.
      */
@@ -265,6 +303,26 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       } else { return 'other'; }
     };
 
+    /**
+     * Return a list of plans classified by group
+     *
+     * @returns {array}
+     */
+    var availabilityPlans = function() {
+      const plansClassifiedByGroup = [];
+      const _plans = _.filter(plansPromise, function (p) { return _.include($scope.availability.plan_ids, p.id) });
+      for (let group of Array.from(groupsPromise)) {
+        const groupObj = { id: group.id, name: group.name, plans: [] };
+        for (let plan of Array.from(_plans)) {
+          if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+        }
+        if (groupObj.plans.length > 0) {
+          plansClassifiedByGroup.push(groupObj);
+        }
+      }
+      return plansClassifiedByGroup;
+    };
+
     // Triggered when the admin drag on the agenda to create a new reservable slot.
     // @see http://fullcalendar.io/docs/selection/select_callback/
     //
@@ -316,7 +374,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               borderColor: availability.borderColor,
               tag_ids: availability.tag_ids,
               tags: availability.tags,
-              machine_ids: availability.machine_ids
+              machine_ids: availability.machine_ids,
+              plan_ids: availability.plan_ids
             },
             true
           );
@@ -333,6 +392,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      */
     var calendarEventClickCb = function (event, jsEvent, view) {
       $scope.availability = event;
+      $scope.availability.plans = availabilityPlans();
 
       if ($scope.availabilityDom) {
         $scope.availabilityDom.classList.remove("fc-selected")

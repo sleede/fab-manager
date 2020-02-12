@@ -32,6 +32,8 @@ fr:
         beware_this_cannot_be_reverted: "Attention : ceci n'est pas réversible."
         the_machine_was_successfully_removed_from_the_slot: "La machine a bien été supprimée du créneau."
         deletion_failed: "La suppression a échouée."
+        do_you_really_want_to_remove_PLAN_from_this_slot: "Êtes-vous {GENDER, select, female{sûre} other{sûr}} de vouloir retirer \"{PLAN}\" de ce créneau ?"
+        the_plan_was_successfully_removed_from_the_slot: "Le formule d'abonnement a bien été supprimée du créneau."
         DATE_slot: "Créneau du {DATE} :"
         what_kind_of_slot_do_you_want_to_create: "Quel type de créneau voulez-vous créer ?"
         training: "Formation"

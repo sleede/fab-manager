@@ -84,6 +84,25 @@
       </div>
     </div>
 
+    <div class="widget panel b-a m m-t-lg" ng-if="availability.plan_ids.length > 0">
+      <div class="panel-heading b-b small">
+        <h3 translate>{{ 'app.admin.calendar.plans' }}</h3>
+      </div>
+      <div class="widget-content no-bg auto wrapper">
+        <ul class="list-unstyled">
+          <li ng-repeat="g in availability.plans" class="m-b-xs">
+            <div class="font-sbold">{{::g.name}}</div>
+            <ul class="m-n" ng-repeat="plan in g.plans">
+              <li>
+                {{::plan.name}}
+                <span class="btn btn-warning btn-xs" ng-click="removePlan(plan)" ><i class="fa fa-times red"></i></span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <div class="widget panel b-a m m-t-lg" ng-if="availability" >
       <div class="panel-heading b-b small">
         <h3 translate>{{ 'app.admin.calendar.actions' }}</h3>

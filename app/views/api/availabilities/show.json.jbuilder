@@ -5,6 +5,7 @@ json.start_at @availability.start_at.iso8601
 json.end_at @availability.end_at.iso8601
 json.available_type @availability.available_type
 json.machine_ids @availability.machine_ids
+json.plan_ids @availability.plan_ids
 json.backgroundColor 'white'
 json.borderColor availability_border_color(@availability)
 json.tag_ids @availability.tag_ids

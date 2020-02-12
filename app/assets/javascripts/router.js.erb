@@ -584,7 +584,9 @@ angular.module('application.router', ['ui.router'])
         resolve: {
           bookingWindowStart: ['Setting', function (Setting) { return Setting.get({ name: 'booking_window_start' }).$promise; }],
           bookingWindowEnd: ['Setting', function (Setting) { return Setting.get({ name: 'booking_window_end' }).$promise; }],
-          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }]
+          machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
+          plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }]
         }
       })
       .state('app.admin.calendar.icalendar', {

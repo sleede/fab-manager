@@ -30,6 +30,8 @@ es:
         beware_this_cannot_be_reverted: "Beware: esto no puede ser revertido."
         the_machine_was_successfully_removed_from_the_slot: "La máquina se eliminó correctamente de la ranura."
         deletion_failed: "Fallo al borrar."
+        do_you_really_want_to_remove_PLAN_from_this_slot: "Do you really want to remove \"{PLAN}\" from this slot?"
+        the_plan_was_successfully_removed_from_the_slot: "The plan was successfully removed from the slot."
         DATE_slot: "{DATE} espacio:"
         what_kind_of_slot_do_you_want_to_create: "¿Qué tipo de horario desea crear?"
         training: "Formación"

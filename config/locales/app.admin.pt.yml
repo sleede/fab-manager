@@ -32,6 +32,8 @@ pt:
         beware_this_cannot_be_reverted: "Cuidado: isso não pode ser revertido."
         the_machine_was_successfully_removed_from_the_slot: "A máquina foi removida com sucesso desse slot."
         deletion_failed: "Falha ao deletar."
+        do_you_really_want_to_remove_PLAN_from_this_slot: "Do you really want to remove \"{PLAN}\" from this slot?"
+        the_plan_was_successfully_removed_from_the_slot: "The plan was successfully removed from the slot."
         DATE_slot: "{DATE} slot:"
         what_kind_of_slot_do_you_want_to_create: "Qual tipo de slot você deseja criar?"
         training: "Treinamento"
