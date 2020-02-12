@@ -39,7 +39,7 @@
         <li><a ui-sref="app.logged.dashboard.trainings" translate>{{ 'app.public.common.my_trainings' }}</a></li>
         <li><a ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>
         <li><a ui-sref="app.logged.dashboard.invoices" ng-hide="fablabWithoutInvoices" translate>{{ 'app.public.common.my_invoices' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
+        <li ng-hide="fablabWithoutWallet"><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
 
         <li class="divider"></li>
         <li><a class="text-black pointer" ng-click="logout($event)"><i class="fa fa-power-off"></i> {{ 'app.public.common.sign_out' | translate }}</a></li>

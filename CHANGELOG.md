@@ -108,6 +108,7 @@
 - [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_IMPORT_SIZE) for configuration details)
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md#FABLAB_WITHOUT_INVOICES) for configuration details)
 - [TODO DEPLOY] add the `SMTP_TLS` environment variable (see [doc/environment.md](doc/environment.md#SMTP_TLS) for configuration details)
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_WALLET` environment variable (see [doc/environment.md](doc/environment.md#FABLAB_WITHOUT_WALLET) for configuration details)
 - [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL.
 
 ## v4.1.1 2019 September 20
@@ -141,7 +142,7 @@
 ## v4.0.4 2019 August 14
 
 - Fix a bug: #140 VAT rate is erroneous in invoices.
-  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3)  to regenerate the invoices since August 1st (if 
+  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3)  to regenerate the invoices since August 1st (if
 - [TODO DEPLOY] `rake fablab:maintenance:regenerate_invoices[2019,8]`
 
 ## v4.0.3 2019 August 01
@@ -185,7 +186,7 @@
 - Refactored user's profile to keep invoicing data after an user was deleted
 - Refactored user's profile to keep statistical data after an user was deleted
 - Ability to delete an user (fixes #129 and #120)
-- Ask user acceptance before deposing analytics cookies 
+- Ask user acceptance before deposing analytics cookies
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
@@ -382,8 +383,8 @@
 - Fix a security issue: sprockets < 2.12.5 has a security vulnerability as described in [CVE-2018-3760](https://nvd.nist.gov/vuln/detail/CVE-2018-3760)
 - Ensure elasticSearch indices are started with green status on new installations
 - Refactored User.to_json to remove code duplication
-- Fixed syntax and typos in README 
-- [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
+- Fixed syntax and typos in README
+- [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch.
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
 - [TODO DEPLOY] -> (only dev) `bundle install`
 - [TODO DEPLOY] `rake db:seed`
@@ -396,7 +397,7 @@
 - Set Stripe API version, all fab-managers has to use this version because codebase relies on it
 - Fix a security issue: OmniAuth < 1.3.2  has a security vulnerability described in [CVE-2017-18076](https://nvd.nist.gov/vuln/detail/CVE-2017-18076)
 - Fix a security issue: rack-protection < 1.5.5 has a security vulnerability described in [CVE-2018-1000119](https://nvd.nist.gov/vuln/detail/CVE-2018-1000119)
-- Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency 
+- Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency
 
 ## v2.6.3 2018 January 2
 
@@ -452,12 +453,12 @@
 
 ## v2.5.13 2017 September 11
 
-- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with recursive events which the initial event was deleted 
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with recursive events which the initial event was deleted
 
 ## v2.5.12 2017 September 11
 
 - Fix a bug: Long words overflow from homepage's events blocks
-- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with non-recursive events 
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with non-recursive events
 
 ## v2.5.11 2017 September 7
 

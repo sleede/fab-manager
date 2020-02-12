@@ -28,6 +28,7 @@
       Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
       Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
       Fablab.phoneRequired = ('<%= Rails.application.secrets.phone_required %>' === 'true');
+      Fablab.fablabWithoutWallet = ('<%= Rails.application.secrets.fablab_without_wallet %>' === 'true');
       Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');
       Fablab.slotDuration = parseInt("<%= ApplicationHelper::SLOT_DURATION %>", 10);
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
