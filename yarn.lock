@@ -77,9 +77,9 @@ angular-base64-upload@^0.0.9:
   resolved "https://registry.yarnpkg.com/angular-base64-upload/-/angular-base64-upload-0.0.9.tgz#d8ed8bac5e8c104e7311e353f9800345bed9da96"
   integrity sha1-2O2LrF6MEE5zEeNT+YADRb7Z2pY=
 
-"angular-bind-html-compile@git+https://github.com/incuna/angular-bind-html-compile.git#1.4.1":
+"angular-bind-html-compile@https://github.com/incuna/angular-bind-html-compile.git#1.4.1":
   version "1.4.1"
-  resolved "git+https://github.com/incuna/angular-bind-html-compile.git#7626140a0eb7c724dc5c1eb3f7715bf06adf4c2a"
+  resolved "https://github.com/incuna/angular-bind-html-compile.git#7626140a0eb7c724dc5c1eb3f7715bf06adf4c2a"
 
 angular-bootstrap-switch@0.4.0:
   version "0.4.0"
@@ -201,10 +201,9 @@ angular-ui-codemirror@^0.3.0:
   resolved "https://registry.yarnpkg.com/angular-ui-codemirror/-/angular-ui-codemirror-0.3.0.tgz#e4286fc50f393f2a6e697c1bf3170424e12cbb60"
   integrity sha1-5ChvxQ85PypuaXwb8xcEJOEsu2A=
 
-angular-ui-tour@^0.9.4:
+"angular-ui-tour@https://github.com/Ross-Byrne/angular-ui-tour.git#master":
   version "0.9.4"
-  resolved "https://registry.yarnpkg.com/angular-ui-tour/-/angular-ui-tour-0.9.4.tgz#332aac5026da55e0a43bdf1936c8be29ece37d55"
-  integrity sha512-W4VIDnunjcpQilI4u4b5cI/XFDG9hZnnNHpXZPBOqKoIwHoSwXSa2UNrxSTl26ITMm1k4QdxnMnZpHH5NsamOQ==
+  resolved "https://github.com/Ross-Byrne/angular-ui-tour.git#d1ffbcbe8b8e6f4058274c01ba76b4cf86251137"
   dependencies:
     angular ">=1.5"
     angular-bind-html-compile "https://github.com/incuna/angular-bind-html-compile.git#1.4.1"

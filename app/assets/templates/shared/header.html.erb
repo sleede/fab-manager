@@ -7,7 +7,7 @@
   </div>
 
   <ul class="nav navbar-nav hidden-xs">
-    <li>
+    <li class="about-page-link">
       <a href class="about-link font-sbold text-sm" ng-click="goabout = !goabout" ui-sref="app.public.about" ng-show="!goabout">
         <span class="label label-theme rounded text-lg text-white m-r-sm font-ebold">?</span>
           {{ linkName }}
@@ -21,10 +21,10 @@
 
   <!-- Top Nav -->
   <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
-    <li class="notification-open" ng-if="isAuthenticated()">
+    <li class="notification-open notification-center-link" ng-if="isAuthenticated()">
       <a ui-sref="app.logged.notifications"><i class="fa fa-bell fa-2x black"></i> <span class="badge" ng-class="{'bg-red': notifications.unread > 0}">{{notifications.unread}}</span></a>
     </li>
-    <li class="dropdown user-profile-nav" ng-if="isAuthenticated()" uib-dropdown>
+    <li class="dropdown user-profile-nav user-menu-dropdown" ng-if="isAuthenticated()" uib-dropdown>
       <a class="dropdown-toggle pointer" uib-dropdown-toggle>
         <span class="avatar text-center">
           <fab-user-avatar ng-model="currentUser.profile.user_avatar" avatar-class="thumb-50"></fab-user-avatar>

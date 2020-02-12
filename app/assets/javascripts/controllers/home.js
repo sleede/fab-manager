@@ -25,12 +25,13 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // setup the tour
       const uitour = uiTourService.getTour();
       uitour.createStep({
-        selector: 'head',
+        selector: 'body',
         stepId: 'welcome',
         order: 0,
         title: _t('app.public.tour.welcome.title'),
         content: _t('app.public.tour.welcome.content'),
-        placement: 'bottom'
+        placement: 'bottom',
+        orphan: true
       });
       uitour.createStep({
         selector: '.nav-primary li.home-link',
@@ -47,6 +48,78 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         title: _t('app.public.tour.machines.title'),
         content: _t('app.public.tour.machines.content'),
         placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.reserve-training-link',
+        stepId: 'trainings',
+        order: 3,
+        title: _t('app.public.tour.trainings.title'),
+        content: _t('app.public.tour.trainings.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.reserve-space-link',
+        stepId: 'spaces',
+        order: 4,
+        title: _t('app.public.tour.spaces.title'),
+        content: _t('app.public.tour.spaces.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.reserve-event-link',
+        stepId: 'events',
+        order: 5,
+        title: _t('app.public.tour.events.title'),
+        content: _t('app.public.tour.events.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.public-calendar-link',
+        stepId: 'calendar',
+        order: 6,
+        title: _t('app.public.tour.calendar.title'),
+        content: _t('app.public.tour.calendar.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.projects-gallery-link',
+        stepId: 'projects',
+        order: 7,
+        title: _t('app.public.tour.projects.title'),
+        content: _t('app.public.tour.projects.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.nav-primary li.plans-link',
+        stepId: 'plans',
+        order: 8,
+        title: _t('app.public.tour.plans.title'),
+        content: _t('app.public.tour.plans.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.navbar.header li.about-page-link',
+        stepId: 'about',
+        order: 9,
+        title: _t('app.public.tour.about.title'),
+        content: _t('app.public.tour.about.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.navbar.header li.notification-center-link',
+        stepId: 'notifications',
+        order: 10,
+        title: _t('app.public.tour.notifications.title'),
+        content: _t('app.public.tour.notifications.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.navbar.header li.user-menu-dropdown',
+        stepId: 'profile',
+        order: 11,
+        title: _t('app.public.tour.profile.title'),
+        content: _t('app.public.tour.profile.content'),
+        placement: 'bottom'
       });
       uitour.start();
     };

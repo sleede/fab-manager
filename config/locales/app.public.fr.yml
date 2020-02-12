@@ -391,5 +391,32 @@ fr:
           content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
         machines:
           title: "Les machines"
-          content: "Ici vous pourrez consulter la liste de toutes les machines du Fablab et réserver un créneau pour l'une d'entre elle."
+          content: "Ici, vous pourrez consulter la liste de toutes les machines et réserver un créneau pour l'une d'entre elle."
+        trainings:
+          title: "Les formations"
+          content: "Cette page vous permettra d'inscrire un membre à une formation. Certaines formations peuvent être un préalable à la réservation de certaines machines."
+        spaces:
+          title: "Les espaces"
+          content: "Consultez et réservez les espaces disponibles. Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps. Ce peut-être, par exemple, un atelier bois ou une salle de réunion."
+        events:
+          title: "Les évènements"
+          content: "Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !"
+        calendar:
+          title: "Le calendrier publique"
+          content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines"
+        projects:
+          title: "Les projets"
+          content: "Documentez et partagez avec la communauté toutes vos réalisations"
+        plans:
+          title: "Les abonnements"
+          content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers"
+        about:
+          title: "À propos"
+          content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité"
+        notifications:
+          title: "Centre de notifications"
+          content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici"
+        profile:
+          title: "Menu utilisateur"
+          content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-Manager"
 
