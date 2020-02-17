@@ -642,10 +642,12 @@ unless Setting.find_by(name: 'fab_analytics').try(:value)
 end
 
 unless Setting.find_by(name: 'link_name').try(:value)
-  name = Setting.find_by(name: 'fablab_name')
-  gender = Setting.find_by(name: 'name_genre')
+  include ApplicationHelper # rubocop:disable Style/MixinUsage
+
+  name = Setting.find_by(name: 'fablab_name').value
+  gender = Setting.find_by(name: 'name_genre').value
   setting = Setting.find_or_initialize_by(name: 'link_name')
-  setting.value = I18n.t('app.public.common.about_the_fablab', NAME: name, GENDER: gender)
+  setting.value = _t('app.public.common.about_the_fablab', NAME: name, GENDER: gender)
   setting.save
 end
 
