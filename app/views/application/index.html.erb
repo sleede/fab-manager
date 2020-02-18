@@ -92,7 +92,7 @@
 <body ng-controller="ApplicationController"
       ng-init="setCurrentUser(<%= current_user ? current_user.to_json : 'null' %>)"
       ng-cloak
-      ui-tour
+      ui-tour="welcome"
       ui-tour-backdrop="true"
       ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
       ui-tour-use-hotkeys="true"

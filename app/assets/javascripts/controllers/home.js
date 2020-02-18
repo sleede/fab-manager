@@ -62,7 +62,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
 
     const setupWelcomeTour = function () {
       // get the tour defined by the ui-tour directive
-      const uitour = uiTourService.getTour();
+      const uitour = uiTourService.getTourByName('welcome');
       // add the steps
       uitour.createStep({
         selector: 'body',
