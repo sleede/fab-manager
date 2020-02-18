@@ -10,8 +10,8 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
     /* PRIVATE SCOPE */
 
     /**
-   * Kind of constructor: these actions will be realized first when the controller is loaded
-   */
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
     const initialize = function () {
       // if we recieve a token to reset the password as GET parameter, trigger the
       // changePassword modal from the parent controller
@@ -28,6 +28,12 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       }
     };
 
+    /**
+     * Parse the provided html and replace the elements with special IDs (#news, #projects, #twitter, #members, #events)
+     * by their respective angular directives
+     * @param html {String} a valid html string, as defined by the summernote editor in admin/settings/home_page
+     * @returns {string} a valid html string containing angular directives for the specified plugins
+     */
     const insertDirectives = function (html) {
       const node = document.createElement('div');
       node.innerHTML = html.trim();
@@ -60,6 +66,10 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       return node.outerHTML;
     };
 
+    /**
+     * Setup the feature-tour for the home page that will present an overview of the whole app.
+     * This is intended as a contextual help.
+     */
     const setupWelcomeTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('welcome');

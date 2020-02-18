@@ -150,12 +150,11 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
 /**
  * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
  */
-Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs',
-  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs) {
+Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService) {
   /* PUBLIC SCOPE */
 
     // list of trainings
-    let groupAvailabilities;
     $scope.trainings = trainingsPromise;
 
     // simplified list of machines
@@ -338,11 +337,18 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
     /* PRIVATE SCOPE */
 
     /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      setupTrainingsTour();
+    }
+
+    /**
      * Group the trainings availabilities by trainings and by dates and return the resulting tree
      * @param trainings {Array} $scope.trainings is expected here
      * @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
      */
-    return groupAvailabilities = function (trainings) {
+    const groupAvailabilities = function (trainings) {
       const tree = {};
       for (let training of Array.from(trainings)) {
         tree[training.name] = {};
@@ -367,6 +373,47 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       }
       return tree;
     };
+
+    /**
+     * Setup the feature-tour for the admin/trainings page.
+     * This is intended as a contextual help
+     */
+    const setupTrainingsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('trainings'); // FIXME undefined
+      // TODO add the steps
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.public.tour.welcome.title'),
+        content: _t('app.public.tour.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'trainings' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if ($scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'F1') {
+          e.preventDefault();
+          uitour.start();
+        }
+      });
+    }
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
   }
 
 ]);
