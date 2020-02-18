@@ -110,7 +110,7 @@
            switch-animate="true"
            ng-true-value="'true'"
            ng-false-value="'false'"/>
-    <span ng-if="method == 'PATCH'">{{ (plan.is_rolling ? 'yes' : 'no') | translate }}</span>
+    <span ng-if="method == 'PATCH'">{{ (plan.is_rolling ? 'app.shared.buttons.yes' : 'app.shared.buttons.no') | translate }}</span>
     <input type="hidden" name="plan[is_rolling]" value="{{plan.is_rolling}}"/>
     <span class="help-block">
       {{ 'app.shared.plan.a_rolling_subscription_will_begin_the_day_of_the_first_training' | translate }}
