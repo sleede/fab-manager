@@ -329,10 +329,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     };
 
     /**
-     * Retreive once the notifications from the server and display a message popup for each new one.
+     * Retrieve once the notifications from the server and display a message popup for each new one.
      * Then, periodically check for new notifications.
      */
-    var getNotifications = function () {
+    const getNotifications = function () {
       $rootScope.toCheckNotifications = true;
       if (!$rootScope.checkNotificationsIsInit && !!$rootScope.currentUser) {
         setTimeout(function () {
@@ -373,7 +373,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     /**
      * Open the modal window allowing the user to log in.
      */
-    var openLoginModal = function (toState, toParams, callback) {
+    const openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
       $window.location.href = '/sso-redirect';
@@ -480,7 +480,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * When the status changes, the callback is triggered with the new status as parameter
      * Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
      */
-    var onPageVisible = function (callback) {
+    const onPageVisible = function (callback) {
       let hidden = 'hidden';
 
       const onchange = function (evt) {

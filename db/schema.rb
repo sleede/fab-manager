@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200127111404) do
+ActiveRecord::Schema.define(version: 20200218092221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -465,6 +465,14 @@ ActiveRecord::Schema.define(version: 20200127111404) do
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
 
+  create_table "plans_availabilities", force: :cascade do |t|
+    t.integer "plan_id"
+    t.integer "availability_id"
+  end
+
+  add_index "plans_availabilities", ["availability_id"], name: "index_plans_availabilities_on_availability_id", using: :btree
+  add_index "plans_availabilities", ["plan_id"], name: "index_plans_availabilities_on_plan_id", using: :btree
+
   create_table "price_categories", force: :cascade do |t|
     t.string   "name"
     t.text     "conditions"
@@ -511,6 +519,7 @@ ActiveRecord::Schema.define(version: 20200127111404) do
     t.string   "lastfm"
     t.string   "flickr"
     t.string   "job"
+    t.string   "tours"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree

@@ -381,7 +381,6 @@ fr:
       tour:
         previous: "Précédent"
         next: "Suivant"
-        pause: "Pause"
         end: "Terminer la visite"
         welcome:
           title: "Bienvenue dans Fab-Manager"
@@ -403,20 +402,29 @@ fr:
           content: "Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !"
         calendar:
           title: "Le calendrier publique"
-          content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines"
+          content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines."
         projects:
           title: "Les projets"
-          content: "Documentez et partagez avec la communauté toutes vos réalisations"
+          content: "Documentez et partagez avec la communauté toutes vos réalisations."
         plans:
           title: "Les abonnements"
-          content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers"
+          content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
+        admin:
+          title: "Section administrateur"
+          content: "L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-Manager. À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus."
         about:
           title: "À propos"
-          content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité"
+          content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité."
         notifications:
           title: "Centre de notifications"
-          content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici"
+          content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici."
         profile:
           title: "Menu utilisateur"
-          content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-Manager"
+          content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-Manager."
+        version:
+          title: "Version de l'application"
+          content: "Passez votre curseur sur cette icône pour connaître la version de Fab-Manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
+        conclusion:
+          title: "Merci de votre attention"
+          content: "Affichez de l'aide en appuyant sur <strong>F1</strong> à n'importe quel moment.<br> Bonne continuation avec Fab-Manager."
 

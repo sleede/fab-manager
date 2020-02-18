@@ -21,6 +21,7 @@ json.profile do
   json.website member.profile.website
   json.job member.profile.job
   json.extract! member.profile, :facebook, :twitter, :google_plus, :viadeo, :linkedin, :instagram, :youtube, :vimeo, :dailymotion, :github, :echosciences, :pinterest, :lastfm, :flickr
+  json.tours member.profile.tours&.split || []
 end
 
 json.invoicing_profile do

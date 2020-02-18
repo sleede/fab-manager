@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise', 'uiTourService', '_t',
-  function ($scope, $stateParams, homeContentPromise, uiTourService, _t) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise', 'Member', 'uiTourService', '_t',
+  function ($scope, $stateParams, homeContentPromise, Member, uiTourService, _t) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -22,8 +22,48 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // We set the home page content, with the directives replacing the placeholders
       $scope.homeContent = insertDirectives(homeContentPromise.setting.value);
 
-      // setup the tour
+      // setup the tour for admins
+      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+        setupWelcomeTour();
+      }
+    };
+
+    const insertDirectives = function (html) {
+      const node = document.createElement('div');
+      node.innerHTML = html.trim();
+
+      node.querySelectorAll('div#news').forEach((newsNode) => {
+        const news = document.createElement('news');
+        newsNode.parentNode.replaceChild(news, newsNode);
+      });
+
+      node.querySelectorAll('div#projects').forEach((projectsNode) => {
+        const projects = document.createElement('projects');
+        projectsNode.parentNode.replaceChild(projects, projectsNode);
+      });
+
+      node.querySelectorAll('div#twitter').forEach((twitterNode) => {
+        const twitter = document.createElement('twitter');
+        twitterNode.parentNode.replaceChild(twitter, twitterNode);
+      });
+
+      node.querySelectorAll('div#members').forEach((membersNode) => {
+        const members = document.createElement('members');
+        membersNode.parentNode.replaceChild(members, membersNode);
+      });
+
+      node.querySelectorAll('div#events').forEach((eventsNode) => {
+        const events = document.createElement('events');
+        eventsNode.parentNode.replaceChild(events, eventsNode);
+      });
+
+      return node.outerHTML;
+    };
+
+    const setupWelcomeTour = function () {
+      // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTour();
+      // add the steps
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',
@@ -98,9 +138,17 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         placement: 'right'
       });
       uitour.createStep({
+        selector: '.nav-primary .admin-section',
+        stepId: 'admin',
+        order: 9,
+        title: _t('app.public.tour.admin.title'),
+        content: _t('app.public.tour.admin.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
         selector: '.navbar.header li.about-page-link',
         stepId: 'about',
-        order: 9,
+        order: 10,
         title: _t('app.public.tour.about.title'),
         content: _t('app.public.tour.about.content'),
         placement: 'bottom'
@@ -108,7 +156,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       uitour.createStep({
         selector: '.navbar.header li.notification-center-link',
         stepId: 'notifications',
-        order: 10,
+        order: 11,
         title: _t('app.public.tour.notifications.title'),
         content: _t('app.public.tour.notifications.content'),
         placement: 'bottom'
@@ -116,44 +164,47 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       uitour.createStep({
         selector: '.navbar.header li.user-menu-dropdown',
         stepId: 'profile',
-        order: 11,
+        order: 12,
         title: _t('app.public.tour.profile.title'),
         content: _t('app.public.tour.profile.content'),
         placement: 'bottom'
       });
-      uitour.start();
-    };
-
-    const insertDirectives = function (html) {
-      const node = document.createElement('div');
-      node.innerHTML = html.trim();
-
-      node.querySelectorAll('div#news').forEach((newsNode) => {
-        const news = document.createElement('news');
-        newsNode.parentNode.replaceChild(news, newsNode);
+      uitour.createStep({
+        selector: '.app-generator .app-version',
+        stepId: 'version',
+        order: 13,
+        title: _t('app.public.tour.version.title'),
+        content: _t('app.public.tour.version.content'),
+        placement: 'top'
       });
-
-      node.querySelectorAll('div#projects').forEach((projectsNode) => {
-        const projects = document.createElement('projects');
-        projectsNode.parentNode.replaceChild(projects, projectsNode);
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 14,
+        title: _t('app.public.tour.conclusion.title'),
+        content: _t('app.public.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
       });
-
-      node.querySelectorAll('div#twitter').forEach((twitterNode) => {
-        const twitter = document.createElement('twitter');
-        twitterNode.parentNode.replaceChild(twitter, twitterNode);
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('welcome') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'welcome' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
       });
-
-      node.querySelectorAll('div#members').forEach((membersNode) => {
-        const members = document.createElement('members');
-        membersNode.parentNode.replaceChild(members, membersNode);
+      // if the user has never seen the tour, show him now
+      if ($scope.currentUser.profile.tours.indexOf('welcome') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'F1') {
+          e.preventDefault();
+          uitour.start();
+        }
       });
-
-      node.querySelectorAll('div#events').forEach((eventsNode) => {
-        const events = document.createElement('events');
-        eventsNode.parentNode.replaceChild(events, eventsNode);
-      });
-
-      return node.outerHTML;
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

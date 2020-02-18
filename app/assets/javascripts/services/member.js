@@ -30,6 +30,11 @@ Application.Services.factory('Member', ['$resource', function ($resource) {
       mapping: {
         method: 'GET',
         url: '/api/members/mapping'
+      },
+      completeTour: {
+        method: 'PATCH',
+        url: '/api/members/:id/complete_tour',
+        params: { id: '@id' }
       }
     }
   );

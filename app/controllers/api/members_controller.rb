@@ -3,7 +3,7 @@
 # API Controller for resources of type User with role 'member'
 class API::MembersController < API::ApiController
   before_action :authenticate_user!, except: [:last_subscribed]
-  before_action :set_member, only: %i[update destroy merge]
+  before_action :set_member, only: %i[update destroy merge complete_tour]
   respond_to :json
 
   def index
@@ -187,6 +187,15 @@ class API::MembersController < API::ApiController
     authorize User
 
     @members = User.includes(:profile)
+  end
+
+  def complete_tour
+    authorize @member
+
+    tours = "#{@member.profile.tours} #{params[:tour]}"
+    @member.profile.update_attributes(tours: tours.strip)
+
+    render json: { tours: @member.profile.tours }
   end
 
   private
