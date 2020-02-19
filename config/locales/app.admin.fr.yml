@@ -1089,12 +1089,9 @@ fr:
           filter:
             title: "Filtrer la liste"
             content: "Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.<br>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans."
-          edit:
-            title: "Modifier le membre"
-            content: "Un clic ici vous permettra d'afficher et de modifier l'ensemble des paramètres du membre, tel que les détails du profil, l'abonnement, les formations, le porte-monnaie, les factures, etc."
-          delete:
-            title: "Supprimer le membre"
-            content: "Supprime le membre de manière irréversible. Les informations liées aux facturations seront néanmoins conservées de manière indépendante pendant 10 ans. Les informations à visée statistique seront également conservées de manière anonyme."
+          actions:
+            title: "Actions sur le membre"
+            content: "<p>Les boutons dans cette colonne vous permettent d'afficher et de modifier l'ensemble des paramètres du membre, ou alors de le supprimer de manière irréversible.</p><p>En cas de suppression, les informations de facturation seront néanmoins conservées pendant 10 ans et des données statistiques seront également conservées de manière anonyme.</p>"
           exports:
             title: "Exporter"
             content: "Chacun de ces boutons lance la génération d'un fichier Excel listant l'ensemble des membres, abonnements ou réservations, actuelles et passées."
