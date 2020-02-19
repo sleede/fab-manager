@@ -160,11 +160,10 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
     // simplified list of machines
     $scope.machines = machinesPromise;
 
-    // Training to monitor, binded with drop-down selection
-    $scope.monitoring =
-    { training: null };
+    // Training to monitor, bound with drop-down selection
+    $scope.monitoring = { training: null };
 
-    // list of training availabilies, grouped by date
+    // list of training availabilities, grouped by date
     $scope.groupedAvailabilities = {};
 
     // default: accordions are not open
@@ -182,6 +181,11 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       'disabled',
       'all'
     ];
+
+    // default tab: trainings list
+    $scope.tabs = {
+      active: 0
+    };
 
     /**
      * In the trainings listing tab, return the stringified list of machines associated with the provided training
@@ -392,6 +396,12 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
         orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'filter' || nextStep.stepId === 'machines') {
+          $scope.tabs.active = 0;
+        }
       });
       // on tour end, save the status in database
       uitour.on('ended', function () {

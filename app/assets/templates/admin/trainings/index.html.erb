@@ -24,8 +24,8 @@
   <div class="row">
 
     <div class="col-md-12">
-      <uib-tabset justified="true">
-        <uib-tab heading="{{ 'app.admin.trainings.trainings' | translate }}">
+      <uib-tabset justified="true" active="tabs.active">
+        <uib-tab heading="{{ 'app.admin.trainings.trainings' | translate }}" index="0">
           <div class="m-t m-b">
             <button type="button" class="btn btn-warning" ui-sref="app.admin.trainings_new">
               <i class="fa fa-plus m-r"></i>
@@ -70,7 +70,7 @@
           </table>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking">
+        <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking" index="1">
           <div class="m-lg">
             <label for="training_select" translate>{{ 'app.admin.trainings.select_a_training' }}</label>
             <select ng-options="training as training.name for training in trainings" ng-model="monitoring.training" class="form-control" ng-change="selectTrainingToMonitor()" name="training_select">
