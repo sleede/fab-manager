@@ -1,8 +1,8 @@
 <div>
   <h4 class="text-sm m-t-sm" translate>{{ 'app.public.home.latest_documented_projects' }}</h4>
 
-  <uib-carousel interval="5000" disable-animation="true">
-    <uib-slide class="h480 cover r" ng-repeat="p in lastProjects" active="p.active" style="background-image:url({{p.project_image}});">
+  <uib-carousel interval="5000" disable-animation="true" active="activeSlide">
+    <uib-slide class="h480 cover r" ng-repeat="p in lastProjects track by $index" index="$index" style="background-image:url({{p.project_image}});">
       <div class="carousel-caption">
         <h1 class="title"><a ui-sref="app.public.projects_show({id:p.slug})">{{p.name}}</a></h1>
       </div>

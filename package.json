@@ -49,7 +49,7 @@
     "angular-translate": "2.18",
     "angular-translate-interpolation-messageformat": "2.18",
     "angular-translate-loader-partial": "2.18",
-    "angular-ui-bootstrap": "1.1.2",
+    "angular-ui-bootstrap": "1.2.5",
     "angular-ui-calendar": "https://github.com/angular-ui/ui-calendar.git#1.0.1",
     "angular-ui-codemirror": "^0.3.0",
     "angular-ui-tour": "https://github.com/Ross-Byrne/angular-ui-tour.git#master",

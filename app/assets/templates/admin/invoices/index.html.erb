@@ -23,8 +23,8 @@
 <section class="m-lg">
   <div class="row">
     <div class="col-md-12">
-      <uib-tabset justified="true">
-        <uib-tab heading="{{ 'app.admin.invoices.invoices_list' | translate }}" ng-hide="fablabWithoutInvoices" active="tabs.listing.active">
+      <uib-tabset justified="true" active="tabs.active">
+        <uib-tab heading="{{ 'app.admin.invoices.invoices_list' | translate }}" ng-hide="fablabWithoutInvoices" index="0">
           <h3 class="m-t-xs"><i class="fa fa-filter"></i> {{ 'app.admin.invoices.filter_invoices' | translate }}</h3>
 
           <div class="row">
@@ -116,102 +116,102 @@
 
 
 
-	    <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" active="tabs.settings.active">
-      <div class="alert alert-warning p-md m-t" role="alert" ng-show="fablabWithoutInvoices">
-        <i class="fa fa-warning m-r"></i>
-        <span translate>{{ 'app.admin.invoices.warning_invoices_disabled' }}</span>
-      </div>
-			<form class="invoice-placeholder">
-				<div class="invoice-logo">
-				    <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!invoice.logo" class="img-responsive">
-            <img base-sixty-four-image="invoice.logo" ng-if="invoice.logo && invoice.logo.base64">
-				    <div class="tools-box">
-				        <div class="btn-group">
-				            <div class="btn btn-default btn-file">
-				                <i class="fa fa-edit"></i> {{ 'app.admin.invoices.change_logo' | translate }}
-				                <input type="file" accept="image/png,image/jpeg,image/x-png,image/pjpeg" name="invoice[logo][attachment]" ng-model="invoice.logo" base-sixty-four-input>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-        <div class="invoice-buyer-infos">
-            <strong translate>{{ 'app.admin.invoices.john_smith' }}</strong>
-            <div translate>{{ 'app.admin.invoices.john_smith_at_example_com' }}</div>
+	    <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1">
+        <div class="alert alert-warning p-md m-t" role="alert" ng-show="fablabWithoutInvoices">
+          <i class="fa fa-warning m-r"></i>
+          <span translate>{{ 'app.admin.invoices.warning_invoices_disabled' }}</span>
         </div>
-				<div class="invoice-reference invoice-editable" ng-click="openEditReference()">{{ 'app.admin.invoices.invoice_reference_' | translate }} {{mkReference()}}</div>
-			  <div class="invoice-code invoice-editable" ng-show="invoice.code.active" ng-click="openEditCode()">{{ 'app.admin.invoices.code_' | translate }} {{invoice.code.model}}</div>
-        <div class="invoice-code invoice-activable" ng-show="!invoice.code.active" ng-click="openEditCode()" translate>{{ 'app.admin.invoices.code_disabled' }}</div>
-				<div class="invoice-order invoice-editable" ng-click="openEditInvoiceNb()"> {{ 'app.admin.invoices.order_num' | translate }} {{mkNumber()}}</div>
-				<div class="invoice-date">{{ 'app.admin.invoices.invoice_issued_on_DATE_at_TIME' | translate:{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT')} }}</div>
-				<div class="invoice-object">
-					{{ 'app.admin.invoices.object_reservation_of_john_smith_on_DATE_at_TIME' | translate:{DATE:(inOneWeek | amDateFormat:'L'), TIME:(inOneWeek | amDateFormat:'LT')} }}
-				</div>
-				<div class="invoice-data">
-					{{ 'app.admin.invoices.order_summary' | translate }}
-					<table>
-						<thead>
-							<tr>
-								<th translate>{{ 'app.admin.invoices.details' }}</th>
-								<th class="right" translate>{{ 'app.admin.invoices.amount' }}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{ 'app.admin.invoices.machine_booking-3D_printer' | translate }} {{inOneWeek | amDateFormat:'LLL'}} - {{inOneWeekAndOneHour | amDateFormat:'LT'}}</td>
-								<td class="right">{{30.0 | currency}}</td>
-							</tr>
+        <form class="invoice-placeholder">
+          <div class="invoice-logo">
+              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!invoice.logo" class="img-responsive">
+              <img base-sixty-four-image="invoice.logo" ng-if="invoice.logo && invoice.logo.base64">
+              <div class="tools-box">
+                  <div class="btn-group">
+                      <div class="btn btn-default btn-file">
+                          <i class="fa fa-edit"></i> {{ 'app.admin.invoices.change_logo' | translate }}
+                          <input type="file" accept="image/png,image/jpeg,image/x-png,image/pjpeg" name="invoice[logo][attachment]" ng-model="invoice.logo" base-sixty-four-input>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="invoice-buyer-infos">
+              <strong translate>{{ 'app.admin.invoices.john_smith' }}</strong>
+              <div translate>{{ 'app.admin.invoices.john_smith_at_example_com' }}</div>
+          </div>
+          <div class="invoice-reference invoice-editable" ng-click="openEditReference()">{{ 'app.admin.invoices.invoice_reference_' | translate }} {{mkReference()}}</div>
+          <div class="invoice-code invoice-editable" ng-show="invoice.code.active" ng-click="openEditCode()">{{ 'app.admin.invoices.code_' | translate }} {{invoice.code.model}}</div>
+          <div class="invoice-code invoice-activable" ng-show="!invoice.code.active" ng-click="openEditCode()" translate>{{ 'app.admin.invoices.code_disabled' }}</div>
+          <div class="invoice-order invoice-editable" ng-click="openEditInvoiceNb()"> {{ 'app.admin.invoices.order_num' | translate }} {{mkNumber()}}</div>
+          <div class="invoice-date">{{ 'app.admin.invoices.invoice_issued_on_DATE_at_TIME' | translate:{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT')} }}</div>
+          <div class="invoice-object">
+            {{ 'app.admin.invoices.object_reservation_of_john_smith_on_DATE_at_TIME' | translate:{DATE:(inOneWeek | amDateFormat:'L'), TIME:(inOneWeek | amDateFormat:'LT')} }}
+          </div>
+          <div class="invoice-data">
+            {{ 'app.admin.invoices.order_summary' | translate }}
+            <table>
+              <thead>
+                <tr>
+                  <th translate>{{ 'app.admin.invoices.details' }}</th>
+                  <th class="right" translate>{{ 'app.admin.invoices.amount' }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ 'app.admin.invoices.machine_booking-3D_printer' | translate }} {{inOneWeek | amDateFormat:'LLL'}} - {{inOneWeekAndOneHour | amDateFormat:'LT'}}</td>
+                  <td class="right">{{30.0 | currency}}</td>
+                </tr>
 
-              <tr class="invoice-total" ng-class="{'bold vat-line':invoice.VAT.active}">
-								<td ng-show="!invoice.VAT.active" translate>{{ 'app.admin.invoices.total_amount' }}</td>
-                <td ng-show="invoice.VAT.active" translate>{{ 'app.admin.invoices.total_including_all_taxes' }}</td>
-								<td class="right">{{30.0 | currency}}</td>
-							</tr>
+                <tr class="invoice-total" ng-class="{'bold vat-line':invoice.VAT.active}">
+                  <td ng-show="!invoice.VAT.active" translate>{{ 'app.admin.invoices.total_amount' }}</td>
+                  <td ng-show="invoice.VAT.active" translate>{{ 'app.admin.invoices.total_including_all_taxes' }}</td>
+                  <td class="right">{{30.0 | currency}}</td>
+                </tr>
 
-              <tr class="invoice-vat invoice-activable" ng-click="openEditVAT()" ng-show="!invoice.VAT.active">
-                  <td translate>{{ 'app.admin.invoices.VAT_disabled' }}</td>
-                  <td></td>
-              </tr>
+                <tr class="invoice-vat invoice-activable" ng-click="openEditVAT()" ng-show="!invoice.VAT.active">
+                    <td translate>{{ 'app.admin.invoices.VAT_disabled' }}</td>
+                    <td></td>
+                </tr>
 
-              <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
-                  <td>{{ 'app.admin.invoices.including_VAT' | translate }} {{invoice.VAT.rate}} %</td>
-                  <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
-              </tr>
-              <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
-                  <td translate>{{ 'app.admin.invoices.including_total_excluding_taxes' }}</td>
-                  <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
-              </tr>
-              <tr class="invoice-payed vat-line bold" ng-show="invoice.VAT.active">
-                  <td translate>{{ 'app.admin.invoices.including_amount_payed_on_ordering' }}</td>
-                  <td>{{30.0 | currency}}</td>
-              </tr>
+                <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
+                    <td>{{ 'app.admin.invoices.including_VAT' | translate }} {{invoice.VAT.rate}} %</td>
+                    <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
+                </tr>
+                <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
+                    <td translate>{{ 'app.admin.invoices.including_total_excluding_taxes' }}</td>
+                    <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
+                </tr>
+                <tr class="invoice-payed vat-line bold" ng-show="invoice.VAT.active">
+                    <td translate>{{ 'app.admin.invoices.including_amount_payed_on_ordering' }}</td>
+                    <td>{{30.0 | currency}}</td>
+                </tr>
 
-						</tbody>
-					</table>
-					<p class="invoice-payment" translate translate-values="{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT'), AMOUNT:(30.0 | currency)}">
-						{{ 'app.admin.invoices.settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT' }}
-					</p>
-				</div>
-				<div medium-editor class="invoice-text invoice-editable" ng-model="invoice.text.content"
-             options='{
-                  "placeholder": "{{ "app.admin.invoices.important_notes" | translate }}",
-                  "buttons": ["underline"]
-             }'
-             ng-blur="textEditEnd($event)">
-				</div>
-				<div medium-editor class="invoice-legals invoice-editable" ng-model="invoice.legals.content"
-             options='{
-                  "placeholder": "{{ "app.admin.invoices.address_and_legal_information" | translate }}",
-                  "buttons": ["bold", "underline"]
-             }'
-             ng-blur="legalsEditEnd($event)">
-				</div>
-			</form>
+              </tbody>
+            </table>
+            <p class="invoice-payment" translate translate-values="{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT'), AMOUNT:(30.0 | currency)}">
+              {{ 'app.admin.invoices.settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT' }}
+            </p>
+          </div>
+          <div medium-editor class="invoice-text invoice-editable" ng-model="invoice.text.content"
+               options='{
+                    "placeholder": "{{ "app.admin.invoices.important_notes" | translate }}",
+                    "buttons": ["underline"]
+               }'
+               ng-blur="textEditEnd($event)">
+          </div>
+          <div medium-editor class="invoice-legals invoice-editable" ng-model="invoice.legals.content"
+               options='{
+                    "placeholder": "{{ "app.admin.invoices.address_and_legal_information" | translate }}",
+                    "buttons": ["bold", "underline"]
+               }'
+               ng-blur="legalsEditEnd($event)">
+          </div>
+        </form>
 	    </uib-tab>
 
 
 
 
-      <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}">
+      <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2">
         <div class="panel panel-default m-t-md accounting-codes">
           <div class="panel-body">
             <div class="row">

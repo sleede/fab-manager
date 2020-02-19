@@ -27,7 +27,7 @@
 - Removed the need of twitter API keys to display the last tweet on the home page
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
-- Updated angular-ui-bootstrap from v0.14 to v1.1
+- Updated angular-ui-bootstrap from v0.14 to v1.2
 - Option to disable developers analytics
 - Added the a "cron" tab in Sidekiq web-ui to watch scheduled tasks
 - Integration of Crowdin "in-context" translation management system
