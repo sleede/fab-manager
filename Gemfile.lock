@@ -56,9 +56,6 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    axlsx_rails (0.6.0)
-      actionpack (>= 3.1)
-      caxlsx (>= 3.0)
     bcrypt (3.1.13)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
@@ -73,11 +70,14 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    caxlsx (3.0.0)
+    caxlsx (3.0.1)
       htmlentities (~> 4.3, >= 4.3.4)
       mimemagic (~> 0.3)
-      nokogiri (~> 1.8, >= 1.8.2)
-      rubyzip (~> 1.2, >= 1.2.1)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (>= 1.3.0, < 3)
+    caxlsx_rails (0.6.2)
+      actionpack (>= 3.1)
+      caxlsx (>= 3.0)
     chroma (0.0.1)
     chunky_png (1.3.4)
     cldr-plurals-runtime-rb (1.0.1)
@@ -215,7 +215,7 @@ GEM
     message_format (0.0.3)
       twitter_cldr (~> 3.1)
     mime-types (2.99.3)
-    mimemagic (0.3.3)
+    mimemagic (0.3.4)
     mini_magick (4.9.4)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -228,7 +228,7 @@ GEM
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    nokogiri (1.10.5)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     notify_with (0.0.2)
       jbuilder (~> 2.0)
@@ -448,11 +448,11 @@ DEPENDENCIES
   api-pagination
   apipie-rails
   awesome_print
-  axlsx_rails
   bootstrap-sass (>= 3.4.1)
   byebug
   carrierwave
   caxlsx
+  caxlsx_rails
   chroma
   compass-rails (= 2.0.4)
   coveralls

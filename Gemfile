@@ -137,8 +137,8 @@ gem 'apipie-rails'
 gem 'has_secure_token'
 
 # XLS files generation
-gem 'axlsx_rails'
 gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'rubyzip', '>= 1.3.0'
 
 gem 'rack-protection', '1.5.5'
