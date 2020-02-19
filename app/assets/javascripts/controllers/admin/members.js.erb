@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export',
-  function ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export', 'uiTourService',
+  function ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -162,6 +162,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
+
+    // default tab: members list
+    $scope.tabs = { active: 0 };
 
     /**
      * Change the members ordering criterion to the one provided
@@ -288,6 +291,92 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         }
       });
     };
+
+
+    /**
+     * Setup the feature-tour for the admin/members page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupMembersTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('members');
+      // TODO add the steps
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.members.welcome.title'),
+        content: _t('app.admin.tour.members.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.members-management .members-list',
+        stepId: 'list',
+        order: 1,
+        title: _t('app.admin.tour.members.list.title'),
+        content: _t('app.admin.tour.members.list.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.members-management .search-members',
+        stepId: 'search',
+        order: 2,
+        title: _t('app.admin.tour.members.search.title'),
+        content: _t('app.admin.tour.members.search.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.members-management .filter-members',
+        stepId: 'filter',
+        order: 3,
+        title: _t('app.admin.tour.members.filter.title'),
+        content: _t('app.admin.tour.members.filter.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.members-management .show-more',
+        stepId: 'more',
+        order: 4,
+        title: _t('app.admin.tour.members.more.title'),
+        content: _t('app.admin.tour.members.more.content', { MAX: USERS_PER_PAGE }),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 4,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'list') {
+          $scope.tabs.active = 0;
+        }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'members' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if ($scope.currentUser.profile.tours.indexOf('members') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'F1') {
+          e.preventDefault();
+          uitour.start();
+        }
+      });
+    }
 
     /* PRIVATE SCOPE */
 

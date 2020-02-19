@@ -1076,3 +1076,19 @@ fr:
           tracking:
             title: "Suivi formations"
             content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées."
+        members:
+          welcome:
+            title: "Gestion des utilisateurs"
+            content: "Ici vous pourrez créer, modifier et supprimer des membres et des administrateurs. Vous pourrez également réaliser des imports et des exports avec des fichiers de tableur, ou connecter un logiciel de SSO."
+          list:
+            title: "Liste des membres"
+            content: "Par défaut, ce tableau liste l'ensemble des membres de votre Fab-Manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+          search:
+            title: "Rechercher un utilisateur"
+            content: "Ce champ de saisie vous permet de faire une recherche en texte libre sur l'ensemble des colonnes du tableau ci-dessous."
+          filter:
+            title: "Filtrer la liste"
+            content: "Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.<br>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans."
+          more:
+            title: "Afficher plus d'utilisateurs"
+            content: "Par défaut, seuls les {MAX} premiers membres correspondant à la recherche courante sont affichés. Cliquez ici pour afficher les résultats suivants."

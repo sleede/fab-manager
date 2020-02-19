@@ -21,28 +21,33 @@
   </div>
 </section>
 
-<section class="m-lg">
+<section class="m-lg members-management"
+         ui-tour="members"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         post-render="setupMembersTour">
   <div class="row">
     <div class="col-md-12">
-      <uib-tabset justified="true">
+      <uib-tabset justified="true" active="tabs.active">
 
-        <uib-tab heading="{{ 'app.admin.members.members' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.members' | translate }}" index="0">
           <ng-include src="'<%= asset_path "admin/members/members.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.administrators' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.administrators' | translate }}" index="1">
           <ng-include src="'<%= asset_path "admin/members/administrators.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.groups' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.groups' | translate }}" index="2">
           <div ui-view="groups"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.tags' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.tags' | translate }}" index="3">
           <div ui-view="tags"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.members.authentication' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.authentication' | translate }}" index="4">
           <div ui-view="authentification"></div>
         </uib-tab>
       </uib-tabset>

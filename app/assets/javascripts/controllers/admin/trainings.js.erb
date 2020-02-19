@@ -183,9 +183,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
     ];
 
     // default tab: trainings list
-    $scope.tabs = {
-      active: 0
-    };
+    $scope.tabs = { active: 0 };
 
     /**
      * In the trainings listing tab, return the stringified list of machines associated with the provided training
@@ -341,7 +339,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
 
     /**
      * Setup the feature-tour for the admin/trainings page.
-     * This is intended as a contextual help
+     * This is intended as a contextual help (when pressing F1)
      */
     $scope.setupTrainingsTour = function () {
       // get the tour defined by the ui-tour directive
