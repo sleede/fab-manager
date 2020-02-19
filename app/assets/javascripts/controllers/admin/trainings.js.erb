@@ -334,14 +334,88 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       });
     };
 
-    /* PRIVATE SCOPE */
 
     /**
-     * Kind of constructor: these actions will be realized first when the controller is loaded
+     * Setup the feature-tour for the admin/trainings page.
+     * This is intended as a contextual help
      */
-    const initialize = function () {
-      setupTrainingsTour();
+    $scope.setupTrainingsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('trainings');
+      // TODO add the steps
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.trainings.welcome.title'),
+        content: _t('app.admin.tour.trainings.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .trainings-list tr>th:nth-child(2)',
+        stepId: 'machines',
+        order: 1,
+        title: _t('app.admin.tour.trainings.machines.title'),
+        content: _t('app.admin.tour.trainings.machines.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .trainings-list tr>th:nth-child(3)',
+        stepId: 'tickets',
+        order: 2,
+        title: _t('app.admin.tour.trainings.tickets.title'),
+        content: _t('app.admin.tour.trainings.tickets.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .filter-trainings',
+        stepId: 'filter',
+        order: 3,
+        title: _t('app.admin.tour.trainings.filter.title'),
+        content: _t('app.admin.tour.trainings.filter.content'),
+        placement: 'left'
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .post-tracking',
+        stepId: 'tracking',
+        order: 4,
+        title: _t('app.admin.tour.trainings.tracking.title'),
+        content: _t('app.admin.tour.trainings.tracking.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 5,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'trainings' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if ($scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'F1') {
+          e.preventDefault();
+          uitour.start();
+        }
+      });
     }
+
+
+    /* PRIVATE SCOPE */
 
     /**
      * Group the trainings availabilities by trainings and by dates and return the resulting tree
@@ -374,46 +448,6 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       return tree;
     };
 
-    /**
-     * Setup the feature-tour for the admin/trainings page.
-     * This is intended as a contextual help
-     */
-    const setupTrainingsTour = function () {
-      // get the tour defined by the ui-tour directive
-      const uitour = uiTourService.getTourByName('trainings'); // FIXME undefined
-      // TODO add the steps
-      uitour.createStep({
-        selector: 'body',
-        stepId: 'welcome',
-        order: 0,
-        title: _t('app.public.tour.welcome.title'),
-        content: _t('app.public.tour.welcome.content'),
-        placement: 'bottom',
-        orphan: true
-      });
-      // on tour end, save the status in database
-      uitour.on('ended', function () {
-        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
-          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'trainings' }, function (res) {
-            $scope.currentUser.profile.tours = res.tours;
-          });
-        }
-      });
-      // if the user has never seen the tour, show him now
-      if ($scope.currentUser.profile.tours.indexOf('trainings') < 0) {
-        uitour.start();
-      }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', function (e) {
-        if (e.key === 'F1') {
-          e.preventDefault();
-          uitour.start();
-        }
-      });
-    }
-
-    // !!! MUST BE CALLED AT THE END of the controller
-    return initialize();
   }
 
 ]);

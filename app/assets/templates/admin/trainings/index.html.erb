@@ -15,11 +15,12 @@
 </section>
 
 
-<section class="m-lg"
+<section class="m-lg trainings-monitoring"
          ui-tour="trainings"
          ui-tour-backdrop="true"
          ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
-         ui-tour-use-hotkeys="true">
+         ui-tour-use-hotkeys="true"
+         post-render="setupTrainingsTour">
   <div class="row">
 
     <div class="col-md-12">
@@ -30,7 +31,7 @@
               <i class="fa fa-plus m-r"></i>
               <span translate>{{ 'app.admin.trainings.add_a_new_training' }}</span>
             </button>
-            <div class="form-group pull-right">
+            <div class="form-group pull-right filter-trainings">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-filter"></i></span>
                 <select ng-model="trainingFiltering" class="form-control">
@@ -40,7 +41,7 @@
             </div>
           </div>
 
-          <table class="table">
+          <table class="table trainings-list">
             <thead>
             <tr>
               <th style="width:20%" translate>{{ 'app.admin.trainings.name' }}</th>
@@ -69,7 +70,7 @@
           </table>
         </uib-tab>
 
-        <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}">
+        <uib-tab heading="{{ 'app.admin.trainings.trainings_monitoring' | translate }}" class="post-tracking">
           <div class="m-lg">
             <label for="training_select" translate>{{ 'app.admin.trainings.select_a_training' }}</label>
             <select ng-options="training as training.name for training in trainings" ng-model="monitoring.training" class="form-control" ng-change="selectTrainingToMonitor()" name="training_select">

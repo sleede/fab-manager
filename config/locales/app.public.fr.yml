@@ -379,9 +379,6 @@ fr:
         projects_using_the_space: "Projets utilisant l'espace"
 
       tour:
-        previous: "Précédent"
-        next: "Suivant"
-        end: "Terminer la visite"
         welcome:
           title: "Bienvenue dans Fab-Manager"
           content: "Afin de vous aider à bien prendre en main l'application, nous allons procéder à une rapide visite guidée des fonctionnalités."
