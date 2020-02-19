@@ -1089,6 +1089,27 @@ fr:
           filter:
             title: "Filtrer la liste"
             content: "Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.<br>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans."
-          more:
-            title: "Afficher plus d'utilisateurs"
-            content: "Par défaut, seuls les {MAX} premiers membres correspondant à la recherche courante sont affichés. Cliquez ici pour afficher les résultats suivants."
+          edit:
+            title: "Modifier le membre"
+            content: "Un clic ici vous permettra d'afficher et de modifier l'ensemble des paramètres du membre, tel que les détails du profil, l'abonnement, les formations, le porte-monnaie, les factures, etc."
+          delete:
+            title: "Supprimer le membre"
+            content: "Supprime le membre de manière irréversible. Les informations liées aux facturations seront néanmoins conservées de manière indépendante pendant 10 ans. Les informations à visée statistique seront également conservées de manière anonyme."
+          exports:
+            title: "Exporter"
+            content: "Chacun de ces boutons lance la génération d'un fichier Excel listant l'ensemble des membres, abonnements ou réservations, actuelles et passées."
+          import:
+            title: "Importer des membres"
+            content: "Permet d'importer une liste de membres à créer dans Fab-Manager, à partir d'un fichier CSV."
+          admins:
+            title: "Gérer les administrateurs"
+            content: "De la même manière que les membres, gérez ici les administrateurs de votre Fab-Manager.<br>Les administrateurs peuvent prendre des réservations pour n'importe quel membre ainsi que modifier l'ensemble des paramètres du logiciel."
+          groups:
+            title: "Gérer les groupes"
+            content: "Les groupes vous permettent de segmenter finement votre offre tarifaire."
+          labels:
+            title: "Gérer les étiquettes"
+            content: "Les étiquettes vous permettent de réserver certains créneaux, aux utilisateurs associés à ces mêmes étiquettes."
+          sso:
+            title: "Authentification unique"
+            content: "Ici vous pourrez mettre en place et gérer un système d'authentification unique (ou Single Sign-On - SSO)."
