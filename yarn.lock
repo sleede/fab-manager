@@ -187,10 +187,10 @@ angular-translate@2.18, angular-translate@~2.18.1:
   dependencies:
     angular ">=1.2.26 <=1.7"
 
-angular-ui-bootstrap@0.14.3:
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-0.14.3.tgz#d96ce604c84bbd706ba34aabca1d5a7376e18ba6"
-  integrity sha1-2WzmBMhLvXBro0qryh1ac3bhi6Y=
+angular-ui-bootstrap@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-1.1.2.tgz#5362d66b8b2e73526a312e398e6ac4e5fab3086f"
+  integrity sha1-U2LWa4suc1JqMS45jmrE5fqzCG8=
 
 "angular-ui-calendar@https://github.com/angular-ui/ui-calendar.git#1.0.1":
   version "1.0.1"
