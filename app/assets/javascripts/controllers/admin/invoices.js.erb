@@ -797,7 +797,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     const handleF1 = function (e) {
       if (e.key === 'F1') {
         e.preventDefault();
-        const tour = uiTourService.getTourByName('trainings');
+        const tour = uiTourService.getTourByName('invoices');
         if (tour) { tour.start(); }
       }
     };
