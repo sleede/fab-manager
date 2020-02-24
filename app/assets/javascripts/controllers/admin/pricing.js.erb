@@ -18,9 +18,10 @@
 /**
  * Controller used in the prices edition page
  */
-Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t',
-  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, _t) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, _t, Member, uiTourService) {
+    /* PUBLIC SCOPE */
+
     // List of machines prices (not considering any plan)
     $scope.machinesPrices = machinesPricesPromise;
 
@@ -84,7 +85,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
 
     // Default: we do not filter coupons
     $scope.filter = {
-      coupon: 'all',
+      coupon: 'all'
     };
 
     // Available status for filtering coupons
@@ -96,6 +97,16 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       'active'
     ];
 
+    // default tab: plans list
+    $scope.tabs = { active: 0 };
+
+    /**
+     * Retrieve a training price from all the trainings prices
+     * @param trainingsPricings {Array<Object>} all trainings prices
+     * @param trainingId {number}
+     * @param groupId {number}
+     * @returns {float}
+     */
     $scope.findTrainingsPricing = function (trainingsPricings, trainingId, groupId) {
       for (let trainingsPricing of Array.from(trainingsPricings)) {
         if ((trainingsPricing.training_id === trainingId) && (trainingsPricing.group_id === groupId)) {
@@ -104,6 +115,12 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     };
 
+    /**
+     * Update the price of a training for the given parameters
+     * @param data {float} the new price
+     * @param trainingsPricing {Object} the training pricing to update
+     * @returns {Promise|string}
+     */
     $scope.updateTrainingsPricing = function (data, trainingsPricing) {
       if (data != null) {
         return TrainingsPricing.update({ id: trainingsPricing.id }, { trainings_pricing: { amount: data } }).$promise;
@@ -600,6 +617,105 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       });
     }
 
+    /**
+     * Setup the feature-tour for the admin/pricing page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupPricingTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('pricing');
+      // TODO add the steps
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.pricing.welcome.title'),
+        content: _t('app.admin.tour.pricing.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .new-plan-button',
+        stepId: 'new_plan',
+        order: 1,
+        title: _t('app.admin.tour.pricing.new_plan.title'),
+        content: _t('app.admin.tour.pricing.new_plan.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .trainings-tab',
+        stepId: 'trainings',
+        order: 2,
+        title: _t('app.admin.tour.pricing.trainings.title'),
+        content: _t('app.admin.tour.pricing.trainings.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .machines-tab',
+        stepId: 'machines',
+        order: 3,
+        title: _t('app.admin.tour.pricing.machines.title'),
+        content: _t('app.admin.tour.pricing.machines.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .spaces-tab',
+        stepId: 'spaces',
+        order: 4,
+        title: _t('app.admin.tour.pricing.spaces.title'),
+        content: _t('app.admin.tour.pricing.spaces.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .credits-tab',
+        stepId: 'credits',
+        order: 5,
+        title: _t('app.admin.tour.pricing.credits.title'),
+        content: _t('app.admin.tour.pricing.credits.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .coupons-tab',
+        stepId: 'coupons',
+        order: 6,
+        title: _t('app.admin.tour.pricing.coupons.title'),
+        content: _t('app.admin.tour.pricing.coupons.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 7,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'new_plan') { $scope.tabs.active = 0; }
+        if (nextStep.stepId === 'trainings') { $scope.tabs.active = 1; }
+        if (nextStep.stepId === 'machines') { $scope.tabs.active = 2; }
+        if (nextStep.stepId === 'spaces') { $scope.tabs.active = 3; }
+        if (nextStep.stepId === 'credits') { $scope.tabs.active = 4; }
+        if (nextStep.stepId === 'coupons') { $scope.tabs.active = 5; }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'pricing' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if ($scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -607,6 +723,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     const initialize = function () {
       $scope.trainingCreditsGroups = groupCreditsByPlan($scope.trainingCredits);
+
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
 
       // adds empty array for plan which hasn't any credits yet
       return (function () {
@@ -620,6 +741,18 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         }
         return result;
       })();
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('pricing');
+        if (tour) { tour.start(); }
+      }
     };
 
     /**

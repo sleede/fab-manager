@@ -1151,4 +1151,26 @@ fr:
           periods:
             title: "Clôturer les périodes comptables"
             content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la certification anti-fraude TVA, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, si vous récupérez la TVA pour le compte de l'état et que certains de vos clients sont des particuliers, vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel à la certification anti-fraude.</p>"
+        pricing:
+          welcome:
+            title: "Abonnements & Tarifs"
+            content: "Gérez les formules d'abonnement et les prix des différents services que vous proposez à vos membres"
+          new_plan:
+            title: "Nouvelle formule d'abonnement"
+            content: "Créez des formules d'abonnement pour proposer des prix préférentiels sur les machines et les espaces, aux utilisateurs réguliers."
+          trainings:
+            title: "Formations"
+            content: "Définissez ici les prix des formations, par groupe d'utilisateurs."
+          machines:
+            title: "Machines"
+            content: "Définissez ici les prix des créneaux machine, par groupe d'utilisateurs. Ces prix seront appliqués aux utilisateurs qui n'ont pas d'abonnement."
+          spaces:
+            title: "Espaces"
+            content: "De la même manière, définissez ici les prix des créneaux espace pour les utilisateurs sans abonnement."
+          credits:
+            title: "Crédits"
+            content: "<p>Les crédits vous permettent d'offir certains services aux utilisateurs qui souscrivent à un abonnement.</p><p>Vous pouvez, par exemple, offrir 2h d'imprimante 3D pour tous les abonnements annuels ; ou une formation au choix pour les abonnés étudiants, etc.</p>"
+          coupons:
+            title: "Codes promotionnels"
+            content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
 

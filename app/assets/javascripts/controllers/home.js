@@ -111,14 +111,16 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         content: _t('app.public.tour.trainings.content'),
         placement: 'right'
       });
-      uitour.createStep({
-        selector: '.nav-primary li.reserve-space-link',
-        stepId: 'spaces',
-        order: 4,
-        title: _t('app.public.tour.spaces.title'),
-        content: _t('app.public.tour.spaces.content'),
-        placement: 'right'
-      });
+      if (!Fablab.withoutSpaces) {
+        uitour.createStep({
+          selector: '.nav-primary li.reserve-space-link',
+          stepId: 'spaces',
+          order: 4,
+          title: _t('app.public.tour.spaces.title'),
+          content: _t('app.public.tour.spaces.content'),
+          placement: 'right'
+        });
+      }
       uitour.createStep({
         selector: '.nav-primary li.reserve-event-link',
         stepId: 'events',
