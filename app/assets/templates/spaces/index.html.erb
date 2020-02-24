@@ -20,7 +20,12 @@
 </section>
 
 
-<section class="m-lg">
+<section class="m-lg spaces-list"
+         ui-tour="spaces"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         post-render="setupSpacesTour">
 
   <div class="form-group row">
     <div class="input-group col-md-3 m-l-lg m-b">
@@ -53,7 +58,7 @@
             </div>
           </div>
           <div class="no-padder" ng-class="{'col-sm-6': !space.disabled}">
-            <div class="btn btn-default btn-block padder-v no-b red" ng-click="showSpace(space)">
+            <div class="btn btn-default btn-block padder-v no-b red show-button" ng-click="showSpace(space)">
               <i class="fa fa-eye m-r-xs"></i>
               <span class="hidden-sm" translate>{{ 'app.shared.buttons.consult' }}</span>
             </div>

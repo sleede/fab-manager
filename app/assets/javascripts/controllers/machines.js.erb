@@ -182,6 +182,8 @@ const _reserveMachine = function (machine, e) {
  */
 Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'Machine', '$uibModal', 'machinesPromise', 'Member', 'uiTourService',
   function ($scope, $state, _t, Machine, $uibModal, machinesPromise, Member, uiTourService) {
+    /* PUBLIC SCOPE */
+
     // Retrieve the list of machines
     $scope.machines = machinesPromise;
 
@@ -233,7 +235,7 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
         if ($scope.machines.length > 0) {
           uitour.createStep({
             selector: '.machines-list .show-button',
-            stepId: 'machines',
+            stepId: 'view',
             order: 1,
             title: _t('app.public.tour.machines.view.title'),
             content: _t('app.public.tour.machines.view.content'),

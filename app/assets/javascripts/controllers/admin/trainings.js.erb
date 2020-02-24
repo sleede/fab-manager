@@ -152,7 +152,6 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
  */
 Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService',
   function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService) {
-  /* PUBLIC SCOPE */
 
     // list of trainings
     $scope.trainings = trainingsPromise;

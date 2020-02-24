@@ -98,30 +98,116 @@ class SpacesController {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of spaces
  */
-Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spacesPromise', function ($scope, $state, spacesPromise) {
-  // Retrieve the list of spaces
-  $scope.spaces = spacesPromise;
+Application.Controllers.controller('SpacesController', ['$scope', '$state', 'spacesPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, spacesPromise, _t, Member, uiTourService) {
+    /* PUBLIC SCOPE */
 
-  /**
-   * Redirect the user to the space details page
-   */
-  $scope.showSpace = function (space) { $state.go('app.public.space_show', { id: space.slug }); };
+    // Retrieve the list of spaces
+    $scope.spaces = spacesPromise;
 
-  /**
-   * Callback to book a reservation for the current space
-   */
-  $scope.reserveSpace = function (space) { $state.go('app.logged.space_reserve', { id: space.slug }); };
+    /**
+     * Redirect the user to the space details page
+     */
+    $scope.showSpace = function (space) { $state.go('app.public.space_show', { id: space.slug }); };
 
-  // Default: we show only enabled spaces
-  $scope.spaceFiltering = 'enabled';
+    /**
+     * Callback to book a reservation for the current space
+     */
+    $scope.reserveSpace = function (space) { $state.go('app.logged.space_reserve', { id: space.slug }); };
 
-  // Available options for filtering spaces by status
-  $scope.filterDisabled = [
-    'enabled',
-    'disabled',
-    'all'
-  ];
-}]);
+    // Default: we show only enabled spaces
+    $scope.spaceFiltering = 'enabled';
+
+    // Available options for filtering spaces by status
+    $scope.filterDisabled = [
+      'enabled',
+      'disabled',
+      'all'
+    ];
+
+    /**
+     * Setup the feature-tour for the spaces page. (admins only)
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupSpacesTour = function () {
+      // setup the tour for admins only
+      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+        // get the tour defined by the ui-tour directive
+        const uitour = uiTourService.getTourByName('spaces');
+        // TODO add the steps
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'welcome',
+          order: 0,
+          title: _t('app.public.tour.spaces.welcome.title'),
+          content: _t('app.public.tour.spaces.welcome.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+        if ($scope.spaces.length > 0) {
+          uitour.createStep({
+            selector: '.spaces-list .show-button',
+            stepId: 'view',
+            order: 1,
+            title: _t('app.public.tour.spaces.view.title'),
+            content: _t('app.public.tour.spaces.view.content'),
+            placement: 'top'
+          });
+        }
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'conclusion',
+          order: 2,
+          title: _t('app.public.tour.conclusion.title'),
+          content: _t('app.public.tour.conclusion.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+        // on tour end, save the status in database
+        uitour.on('ended', function () {
+          if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('spaces') < 0) {
+            Member.completeTour({ id: $scope.currentUser.id }, { tour: 'spaces' }, function (res) {
+              $scope.currentUser.profile.tours = res.tours;
+            });
+          }
+        });
+        // if the user has never seen the tour, show him now
+        if ($scope.currentUser.profile.tours.indexOf('spaces') < 0) {
+          uitour.start();
+        }
+        // start this tour when an user press F1 - this is contextual help
+        window.addEventListener('keydown', handleF1);
+      }
+    }
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    }
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('spaces');
+        if (tour) { tour.start(); }
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
+  }
+]);
 
 /**
  * Controller used in the space creation page (admin)
