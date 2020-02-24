@@ -13,7 +13,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
     const initialize = function () {
-      // if we recieve a token to reset the password as GET parameter, trigger the
+      // if we receive a token to reset the password as GET parameter, trigger the
       // changePassword modal from the parent controller
       if ($stateParams.reset_password_token) {
         return $scope.$parent.editPassword($stateParams.reset_password_token);
@@ -25,6 +25,10 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // setup the tour for admins
       if ($scope.currentUser && $scope.currentUser.role === 'admin') {
         setupWelcomeTour();
+        // listen the $destroy event of the controller to remove the F1 key binding
+        $scope.$on('$destroy', function () {
+          window.removeEventListener('keydown', handleF1);
+        });
       }
     };
 
@@ -209,12 +213,19 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         uitour.start();
       }
       // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', function (e) {
-        if (e.key === 'F1') {
-          e.preventDefault();
-          uitour.start();
-        }
-      });
+      window.addEventListener('keydown', handleF1);
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('welcome');
+        if (tour) { tour.start(); }
+      }
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

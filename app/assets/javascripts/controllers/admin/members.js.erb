@@ -430,12 +430,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         uitour.start();
       }
       // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', function (e) {
-        if (e.key === 'F1') {
-          e.preventDefault();
-          uitour.start();
-        }
-      });
+      window.addEventListener('keydown', handleF1);
     }
 
     /* PRIVATE SCOPE */
@@ -447,6 +442,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       if (!membersPromise[0] || (membersPromise[0].maxMembers <= $scope.members.length)) {
         return $scope.member.noMore = true;
       }
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
     };
 
     /**
@@ -497,6 +495,18 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           return $scope.member.noMore = true;
         }
       });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('members');
+        if (tour) { tour.start(); }
+      }
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
