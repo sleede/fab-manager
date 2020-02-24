@@ -20,7 +20,12 @@
 </section>
 
 
-<section class="m-lg">
+<section class="m-lg machines-list"
+         ui-tour="machines"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         post-render="setupMachinesTour">
 
     <div class="form-group row">
       <div class="input-group col-md-3 m-l-lg m-b">
@@ -52,7 +57,7 @@
                </div>
             </div>
             <div class="no-padder" ng-class="{'col-sm-6': !machine.disabled}">
-                <div class="btn btn-default btn-block padder-v no-b red" ng-click="showMachine(machine)">
+                <div class="btn btn-default btn-block padder-v no-b red show-button" ng-click="showMachine(machine)">
                   <i class="fa fa-eye m-r-xs"></i>
                   <span class="hidden-sm" translate>{{ 'app.shared.buttons.consult' }}</span>
                 </div>

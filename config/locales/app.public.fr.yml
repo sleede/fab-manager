@@ -380,49 +380,65 @@ fr:
         projects_using_the_space: "Projets utilisant l'espace"
 
       tour:
-        welcome:
-          title: "Bienvenue dans Fab-Manager"
-          content: "Afin de vous aider à bien prendre en main l'application, nous allons procéder à une rapide visite guidée des fonctionnalités."
-        home:
-          title: "Page d'accueil"
-          content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
-        machines:
-          title: "Les machines"
-          content: "Ici, vous pourrez consulter la liste de toutes les machines et réserver un créneau pour l'une d'entre elle."
-        trainings:
-          title: "Les formations"
-          content: "Cette page vous permettra d'inscrire un membre à une formation. Certaines formations peuvent être un préalable à la réservation de certaines machines."
-        spaces:
-          title: "Les espaces"
-          content: "Consultez et réservez les espaces disponibles. Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps. Ce peut-être, par exemple, un atelier bois ou une salle de réunion."
-        events:
-          title: "Les évènements"
-          content: "Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !"
-        calendar:
-          title: "Le calendrier publique"
-          content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines."
-        projects:
-          title: "Les projets"
-          content: "Documentez et partagez avec la communauté toutes vos réalisations."
-        plans:
-          title: "Les abonnements"
-          content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
-        admin:
-          title: "Section administrateur"
-          content: "L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-Manager. À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus."
-        about:
-          title: "À propos"
-          content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité."
-        notifications:
-          title: "Centre de notifications"
-          content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici."
-        profile:
-          title: "Menu utilisateur"
-          content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-Manager."
-        version:
-          title: "Version de l'application"
-          content: "Passez votre curseur sur cette icône pour connaître la version de Fab-Manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
         conclusion:
           title: "Merci de votre attention"
           content: "Affichez de l'aide en appuyant sur <strong>F1</strong> à n'importe quel moment.<br> Bonne continuation avec Fab-Manager."
+        welcome:
+          welcome:
+            title: "Bienvenue dans Fab-Manager"
+            content: "Afin de vous aider à bien prendre en main l'application, nous allons procéder à une rapide visite guidée des fonctionnalités."
+          home:
+            title: "Page d'accueil"
+            content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
+          machines:
+            title: "Les machines"
+            content: "Ici, vous pourrez consulter la liste de toutes les machines et réserver un créneau pour l'une d'entre elle."
+          trainings:
+            title: "Les formations"
+            content: "Cette page vous permettra d'inscrire un membre à une formation. Certaines formations peuvent être un préalable à la réservation de certaines machines."
+          spaces:
+            title: "Les espaces"
+            content: "Consultez et réservez les espaces disponibles. Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps. Ce peut-être, par exemple, un atelier bois ou une salle de réunion."
+          events:
+            title: "Les évènements"
+            content: "Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !"
+          calendar:
+            title: "Le calendrier publique"
+            content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines."
+          projects:
+            title: "Les projets"
+            content: "Documentez et partagez avec la communauté toutes vos réalisations."
+          plans:
+            title: "Les abonnements"
+            content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
+          admin:
+            title: "Section administrateur"
+            content: "L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-Manager. À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus."
+          about:
+            title: "À propos"
+            content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité."
+          notifications:
+            title: "Centre de notifications"
+            content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici."
+          profile:
+            title: "Menu utilisateur"
+            content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-Manager."
+          version:
+            title: "Version de l'application"
+            content: "Passez votre curseur sur cette icône pour connaître la version de Fab-Manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
+        machines:
+          welcome:
+            title: "Gérer les machines"
+            content: "<p>Les machines sont les outils que vous mettez à disposition de vos utilisateurs. Vous devez créer ici les machines qui pourront ensuite être réservées par les membres.</p><p>Vous pouvez également créer des entrées pour des machines non réservables ou en libre accès, il vous suffira ensuite de ne pas associer de créneaux de disponibilités à celles-ci.</p>"
+          view:
+            title: "Consulter"
+            content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez par supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
+          spaces:
+            welcome:
+              title: "Gérer les espaces"
+              content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
+            view:
+              title: "Consulter"
+              content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez par supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
+
 
