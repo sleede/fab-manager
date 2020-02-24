@@ -13,7 +13,7 @@
 
     <div class="col-xs-1">
       <section class="heading-actions wrapper">
-        <a role="button" ui-sref="app.admin.calendar.icalendar" class="btn btn-default b-2x rounded pointer m-t-sm">
+        <a role="button" ui-sref="app.admin.calendar.icalendar" class="btn btn-default b-2x rounded pointer m-t-sm import-ics-button">
           <i class="fa fa-exchange" aria-hidden="true"></i>
         </a>
       </section>
@@ -23,7 +23,12 @@
 </section>
 
 
-<section class="row no-gutter">
+<section class="row no-gutter admin-calendar"
+         ui-tour="calendar"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         post-render="setupCalendarTour">
 
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg"></div>
@@ -40,7 +45,7 @@
 
   <div class="col-sm-12 col-md-12 col-lg-3">
     <div class="m text-center">
-      <a class="btn btn-default"
+      <a class="btn btn-default export-xls-button"
          ng-href="api/availabilities/export_index.xlsx"
          target="export-frame"
          ng-click="alertExport('index')"

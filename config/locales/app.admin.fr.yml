@@ -1076,6 +1076,19 @@ fr:
           tracking:
             title: "Suivi formations"
             content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées."
+        calendar:
+          welcome:
+            title: "Gestion du calendrier"
+            content: "À partir de cet écran, vous pourrez planifier de sessions de formation ou des créneaux, durant lesquels les machines / espaces seront reservable par les membres."
+          agenda:
+            title: "L'agenda"
+            content: "Cliquez dans l'agenda pour commencer la création d'une nouvelle plage de disponibilité. En maintenant votre clic, vous pouvez sélectionner directement toute la plage horaire souhaitée."
+          export:
+            title: "Exporter"
+            content: "Lancez la génération d'un fichier Excel, listant l'ensemble des créneaux de disponibilité créés dans l'agenda."
+          import:
+            title: "Importer des agendas externes"
+            content: "Permet d'importer des agendas depuis une source externe au format iCal."
         members:
           welcome:
             title: "Gestion des utilisateurs"
