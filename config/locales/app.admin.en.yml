@@ -797,8 +797,8 @@ en:
         statistics: "Statistics"
         evolution: "Evolution"
         age_filter: "Age filter"
-        from_age: "From"  # context: age. eg: from 8 to 40 years old
-        to_age: "to"  # context: age. eg: from 8 to 40 years old
+        from_age: "From"  # eg. from 8 to 40 years old
+        to_age: "to"  # eg. from 8 to 40 years old
         _years_old: "years old"
         start: "Start:"
         end: "End:"
