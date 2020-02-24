@@ -1195,5 +1195,21 @@ fr:
           prices:
             title: "Catégories tarifaires"
             content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
-
+        projects:
+          welcome:
+            title: "Gérer les éléments projet"
+            content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
+          abuses:
+            title: "Gérer les signalements"
+            content: "<p>Accédez par ici à la gestion des signalements.</p><p>Des visiteurs peuvent effectuer des signalements sur les projets, par exemple pour une atteinte au droit d'auteur ou pour un texte incitant à la haine.</p><p>La RGPD vous impose de supprimer ces données de signalement une fois que les actions requises ont été effectuées.</p>"
+        statistics:
+          welcome:
+            title: "Statistiques"
+            content: "À partir d'ici, vous pourrez accéder à un ensemble de statistiques sur vos membres et leurs usages au sein de votre Fab Lab. Conformément à la RGPD, les utilisateurs ayant supprimé leur compte continent d'être rapportés dans les statistiques, mais de manière anonyme."
+          export:
+            title: "Exporter les données"
+            content: "Vous pouvez choisir d'exporter tout ou partie des données statistiques vers un fichier Excel."
+          trending:
+            title: "Évolution"
+            content: "Visualisez l'évolution dans le temps des principaux usages de votre Fab Lab, grâce à des graphiques et des courbes."
 
