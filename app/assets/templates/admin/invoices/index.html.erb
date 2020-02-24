@@ -12,15 +12,20 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
-        <a class="btn btn-default rounded m-t-sm" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
+        <a class="btn btn-default rounded m-t-sm export-accounting-button" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
         <iframe name="export-frame" height="0" width="0" class="none" id="accounting-export-frame"></iframe>
-        <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'app.admin.invoices.accounting_periods' | translate }}</a>
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm close-accounting-periods-button" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'app.admin.invoices.accounting_periods' | translate }}</a>
       </section>
     </div>
   </div>
 </section>
 
-<section class="m-lg">
+<section class="m-lg invoices-management"
+         ui-tour="invoices"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         post-render="setupInvoicesTour">
   <div class="row">
     <div class="col-md-12">
       <uib-tabset justified="true" active="tabs.active">
@@ -60,7 +65,7 @@
           <div class="row">
     		    <div class="col-md-12">
 
-    		      <table class="table" ng-if="invoices.length > 0">
+    		      <table class="table invoices-list" ng-if="invoices.length > 0">
     		        <thead>
     		        <tr>
                   <th style="width:5%"></th>
@@ -77,7 +82,7 @@
     		        </thead>
     		        <tbody>
     		        <tr ng-repeat="invoice in invoices">
-                  <td>
+                  <td class="chained-indicator">
                     <i class="fa fa-link chained" ng-show="invoice.chained_footprint"/>
                     <i class="fa fa-chain-broken broken" ng-hide="invoice.chained_footprint"/>
                   </td>
@@ -90,13 +95,13 @@
                     <span ng-hide="invoice.user_id">{{ invoice.name }}</span>
     		          <td>
     		            <div class="buttons">
-    		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
+    		              <a class="btn btn-default download-button" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
     		                <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.invoices.download_the_invoice' | translate }}
     		              </a>
     		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
     		                <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.invoices.download_the_credit_note' | translate }}
     		              </a>
-    		              <a class="btn btn-default" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
+    		              <a class="btn btn-default refund-button" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
     		                <i class="fa fa-reply"></i> {{ 'app.admin.invoices.credit_note' | translate }}
     		              </a>
     		            </div>
@@ -116,7 +121,7 @@
 
 
 
-	    <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1">
+	    <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1" class="invoices-settings">
         <div class="alert alert-warning p-md m-t" role="alert" ng-show="fablabWithoutInvoices">
           <i class="fa fa-warning m-r"></i>
           <span translate>{{ 'app.admin.invoices.warning_invoices_disabled' }}</span>
@@ -211,7 +216,7 @@
 
 
 
-      <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2">
+      <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2" class="accounting-codes-tab">
         <div class="panel panel-default m-t-md accounting-codes">
           <div class="panel-body">
             <div class="row">

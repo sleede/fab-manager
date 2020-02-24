@@ -1123,3 +1123,32 @@ fr:
           sso:
             title: "Authentification unique"
             content: "Ici vous pourrez mettre en place et gérer un système d'authentification unique (ou Single Sign-On - SSO)."
+        invoices:
+          welcome:
+            title: "Gérer les factures"
+            content: "Ici, vous pourrez télécharger des factures émises et gérer tout ce qui a trait à la comptabilité et à la facturation."
+          list:
+            title: "Liste des factures"
+            content: "Par défaut, ce tableau liste l'ensemble des factures émises via Fab-Manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+          chained:
+            title: "Indicateur de chaînage"
+            content: "Cette icône assure l'inaltérablité des données comptables liées à la facture sur cette ligne. Si une icône rouge apparaît au lieu de cette-ci, merci de contactez immédiatement le support technique."
+          download:
+            title: "Télécharger"
+            content: "Cliquez ici pour télécharger la facture au format PDF."
+          refund:
+            title: "Avoir"
+            content: "Permet de générer un avoir sur la facture de cette ligne ou certains de ses sous-éléments. <strong>Attention :</strong> Cela générera uniquement le document comptable, le remboursement effectif de l'utilisateur restera toujours à votre charge."
+          settings:
+            title: "Paramètres"
+            content: "Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition."
+          codes:
+            title: "Codes comptables"
+            content: "Paramétrez ici les codes comptables pour tous les types d'écritures générés par le logiciel. Ce paramétrage n'est requis que si vous utilisez la fonctionnalité d'export comptable."
+          export:
+            title: "Export comptable"
+            content: "Une fois les codes configurés, cliquez ici pour accéder à l'interface vous permettant d'exporter les écritures vers un logiciel comptable tiers."
+          periods:
+            title: "Clôturer les périodes comptables"
+            content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la certification anti-fraude TVA, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, si vous récupérez la TVA pour le compte de l'état et que certains de vos clients sont des particuliers, vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel à la certification anti-fraude.</p>"
+
