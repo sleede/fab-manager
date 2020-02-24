@@ -153,8 +153,8 @@ class EventsController {
 /**
  * Controller used in the events listing page (admin view)
  */
-Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t',
-  function ($scope, $state, dialogs, $uibModal, growl, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) {
+Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, dialogs, $uibModal, growl, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService) {
   /* PUBLIC SCOPE */
 
     // By default, the pagination mode is activated to limit the page size
@@ -188,6 +188,9 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
     // Default: we display all events (no restriction)
     $scope.eventsScope =
       { selected: '' };
+
+    // default tab: events list
+    $scope.tabs = { active: 0 };
 
     /**
      * Adds a bucket of events to the bottom of the page, grouped by month
@@ -371,12 +374,128 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
       return $scope.page = 1;
     };
 
+
+    /**
+     * Setup the feature-tour for the admin/events page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupEventsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('events');
+      // TODO add the steps
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.events.welcome.title'),
+        content: _t('app.admin.tour.events.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.events-management .events-list',
+        stepId: 'list',
+        order: 1,
+        title: _t('app.admin.tour.events.list.title'),
+        content: _t('app.admin.tour.events.list.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-list-filter',
+        stepId: 'filter',
+        order: 2,
+        title: _t('app.admin.tour.events.filter.title'),
+        content: _t('app.admin.tour.events.filter.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-categories',
+        stepId: 'categories',
+        order: 3,
+        title: _t('app.admin.tour.events.categories.title'),
+        content: _t('app.admin.tour.events.categories.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-themes',
+        stepId: 'themes',
+        order: 4,
+        title: _t('app.admin.tour.events.themes.title'),
+        content: _t('app.admin.tour.events.themes.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-age-ranges',
+        stepId: 'ages',
+        order: 5,
+        title: _t('app.admin.tour.events.ages.title'),
+        content: _t('app.admin.tour.events.ages.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.events-management .prices-tab',
+        stepId: 'prices',
+        order: 6,
+        title: _t('app.admin.tour.events.prices.title'),
+        content: _t('app.admin.tour.events.prices.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 7,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'list' || nextStep.stepId === 'filter') { $scope.tabs.active = 0; }
+        if (nextStep.stepId === 'categories' || nextStep.stepId === 'ages') { $scope.tabs.active = 1; }
+        if (nextStep.stepId === 'prices') { $scope.tabs.active = 2; }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('events') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'events' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if ($scope.currentUser.profile.tours.indexOf('events') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function () { paginationCheck(eventsPromise, $scope.events); };
+    const initialize = function () {
+      paginationCheck(eventsPromise, $scope.events);
+
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('events');
+        if (tour) { tour.start(); }
+      }
+    };
 
     /**
      * Check if all events are already displayed OR if the button 'load more events'
@@ -384,7 +503,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      * @param lastEvents {Array} last events loaded onto the diplay (ie. last "page")
      * @param events {Array} full list of events displayed on the page (not only the last retrieved)
      */
-    var paginationCheck = function (lastEvents, events) {
+    const paginationCheck = function (lastEvents, events) {
       if (lastEvents.length > 0) {
         if (events.length >= lastEvents[0].nb_total_events) {
           return $scope.paginateActive = false;
@@ -401,7 +520,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      * @param name {string} 'category', 'theme' or 'age_range'
      * @return {[Object, Array]} model and datastore
      */
-    var getModel = function (name) {
+    const getModel = function (name) {
       switch (name) {
         case 'category': return [Category, $scope.categories];
         case 'theme': return [EventTheme, $scope.themes];

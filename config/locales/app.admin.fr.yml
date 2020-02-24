@@ -1173,4 +1173,27 @@ fr:
           coupons:
             title: "Codes promotionnels"
             content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
+        events:
+          welcome:
+            title: "Gérer les évènements"
+            content: "Créez des évènements, suivez leurs réservations et organisez les depuis cette page."
+          list:
+            title: "Les évènements"
+            content: "Cette liste affiche l'ensemble des évènements passés ou à venir, ainsi que le nombre de réservations pour chacun d'eux."
+          filter:
+            title: "Filtrez les évènements"
+            content: "N'affichez que les évènements à venir dans la liste ci-dessous ; ou au contraire, uniquement ceux déjà passés."
+          categories:
+            title: "Les catégories"
+            content: "Les catégories aident vos utilisateurs à savoir de quelle façon l'évènement va se dérouler. Une catégorie est requise pour chaque nouvel évènement créé."
+          themes:
+            title: "Les thématique"
+            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos évènements. Elles peuvent de regrouper différents évènements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la catégorie « menuiserie ».</p>"
+          ages:
+            title: "Les tranches d'âge"
+            content: "Cet autre filtre optionnel, aidera vos utilisateurs à trouver des évènements adaptés à leur profil."
+          prices:
+            title: "Catégories tarifaires"
+            content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
+
 
