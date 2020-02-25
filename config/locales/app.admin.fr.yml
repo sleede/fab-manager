@@ -1195,7 +1195,7 @@ fr:
           prices:
             title: "Catégories tarifaires"
             content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
-        projects:
+        projectElements:
           welcome:
             title: "Gérer les éléments projet"
             content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
@@ -1212,4 +1212,39 @@ fr:
           trending:
             title: "Évolution"
             content: "Visualisez l'évolution dans le temps des principaux usages de votre Fab Lab, grâce à des graphiques et des courbes."
+        settings:
+          welcome:
+            title: "Personnalisation de l'application"
+            content: "D'ici, vous pourrez configurer les réglages généraux de Fab-Manager ainsi que personnaliser différents éléments de l'interface."
+          home:
+            title: "Personnaliser la page d'accueil"
+            content: "<p>Cet éditeur WYSIWYG vous permet de personnaliser l'apparence de la page d'accueil tout en utilisant différents composants (dernier tweet, brève, etc.).</p><p><strong>Attention :</strong> Gardez à l'esprit que toute modification non maîtrisée peut casser l'apparence de la page d'accueil.</p>"
+          components:
+            title: "Insérer un composant"
+            content: "Cliquez ici pour insérer un composant pré-existant dans la page d'accueil."
+          codeview:
+            title: "Afficher le code HTML"
+            content: "Ce bouton vous permet d'afficher et de modifier directement le code de la page d'accueil. C'est la méthode recommandée, mais elle nécessite une connaissance préalable du HTML."
+          reset:
+            title: "Revenir en arrière"
+            content: "À tout moment, vous pouvez restaurer la page d'accueil initiale en cliquant ici."
+          css:
+            title: "Personnaliser la feuille de style"
+            content: "Pour les utilisateurs avancés, il est possible de définir une feuille de style personnalisée pour la page d'accueil."
+          about:
+            title: "À propos"
+            content: "Personnalisez entièrement cette page pour présenter votre activité."
+          privacy:
+            title: "Politique de confidentialité"
+            content: "<p>Expliquez ici la façon dont vous utilisez les données que vous recueillez sur vos membres.</p><p>La RGPD impose qu'une politique de confidentialité soit définie, ainsi qu'un délégué à la protection des données.</p>"
+          draft:
+            title: "Brouillon"
+            content: "Cliquez ici pour afficher un brouillon à trous d'une politique de confidentialité, qu'il ne vous reste plus qu'à relire et à compléter."
+          open_api:
+            welcome:
+              title: "OpenAPI"
+              content: "Fab-Manager propose une API ouverte permettant à des logiciels tiers de s'interfacer simplement avec ses données. Cet écran vous permet d'accorder des accès à cette API."
+            doc:
+              title: "Documentation"
+              content: "Cliquez ici pour accéder à la documentation en ligne de l'API"
 

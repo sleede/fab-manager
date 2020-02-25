@@ -259,7 +259,6 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     $scope.setupCalendarTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('calendar');
-      // TODO add the steps
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',

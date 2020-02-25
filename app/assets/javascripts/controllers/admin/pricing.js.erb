@@ -624,7 +624,6 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     $scope.setupPricingTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('pricing');
-      // TODO add the steps
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',

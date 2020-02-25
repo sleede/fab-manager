@@ -566,7 +566,6 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     $scope.setupInvoicesTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('invoices');
-      // TODO add the steps
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',

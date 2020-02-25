@@ -222,7 +222,6 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
       if ($scope.currentUser && $scope.currentUser.role === 'admin') {
         // get the tour defined by the ui-tour directive
         const uitour = uiTourService.getTourByName('machines');
-        // TODO add the steps
         uitour.createStep({
           selector: 'body',
           stepId: 'welcome',

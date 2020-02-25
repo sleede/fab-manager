@@ -342,7 +342,6 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
     $scope.setupTrainingsTour = function () {
       // get the tour defined by the ui-tour directive
       const uitour = uiTourService.getTourByName('trainings');
-      // TODO add the steps
       uitour.createStep({
         selector: 'body',
         stepId: 'welcome',
