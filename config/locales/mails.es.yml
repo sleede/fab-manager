@@ -80,7 +80,8 @@ es:
       subject: "Su suscripción ha sido correctamente comprada"
       body:
         plan_subscribed_html: "Se ha suscrito al plan: <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Su suscripción terminará el %{DATE}"
+        rolling_subscription_stops_on: "Su suscripción terminará %{DURATION} después de su primer entrenamiento. De lo contrario, se detendrá el %{DATE}."
+        subscription_stops_on: "Su suscripción terminará el %{DATE}."
 
     notify_member_create_reservation:
       subject: "Su reserva se ha registrado correctamente"
@@ -228,6 +229,7 @@ es:
       subject: "Una cuenta importada ha completado su perfil"
       body:
         account_completed: "Una cuenta de usuario importada previamente %{PROVIDER} ha completado su perfil:"
+        imported_account_completed: "An user account previously imported through %{PROVIDER} has just completed his/her profile data:"
         provider_id: "su ID de proveedor es:"
 
     notify_admin_abuse_reported:
@@ -238,10 +240,10 @@ es:
         signaled_by: "marcado por:"
         signaled_on: "marcado el:"
         message: "Mensaje:"
-        visit_management_interface: "Refer to the Reporting Management Interface for more information."  # missing translation
+        visit_management_interface: "Refer to the Reporting Management Interface for more information."                                     # missing translation
 
     notify_user_wallet_is_credited:
-      subject: ""                                                                                   # translation_missing
+      subject: "Your wallet has been credited"
       body:
         wallet_credit_html: "Se han ingresado %{AMOUNT} por el administrador."
 
@@ -257,7 +259,7 @@ es:
         statistics_global: "de todas las estadísticas"
         statistics_account: "de las estadísticas de registro"
         statistics_event: "de estadísticas sobre eventos"
-        statistics_machine: "de estadísticas sobre horas de máquina"
+        statistics_machine: "de estadísticas sobre slots de máquina"
         statistics_project: "de estadísticas sobre proyectos"
         statistics_subscription: "de estadísticas de suscripción"
         statistics_training: "de estadísticas sobre entrenamientos"
@@ -273,7 +275,7 @@ es:
           xlsx: "Excel"
           csv: "CSV"
 
-    notify_admin_import_complete:                                                                  #translation_missing
+    notify_admin_import_complete:
       subject: "Import completed"
       body:
         you_made_an_import: "You have initiated an import %{CATEGORY}"
@@ -287,17 +289,17 @@ es:
         enjoy_a_discount_of_AMOUNT_with_code_CODE:  "Disfruta de un descuento de %{AMOUNT} en toda la web con el código %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Este cupón es válido {USAGE, plural, =1{just once} other{many times}}: para todas tus compras {TYPE, select, amount_off{at least equal to the amount of the coupon} other{}}, desde ahora {DATE, select, NO-DATE{and without time limit} other{and until {DATE}}}."
 
-    notify_admin_free_disk_space:                                                                  #translation_missing
+    notify_admin_free_disk_space:
       subject: "Low disk space"
       body: "Warning: available disk space on the server hosting fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
 
-    notify_admin_close_period_reminder:                                                            #translation_missing
+    notify_admin_close_period_reminder:
       subject: "Remind to close your accounting periods"
       body:
         warning_last_closed_period_over_1_year: "Please remind to periodically close your accounting periods. Last closed period ended at %{LAST_END}."
         warning_no_closed_periods: "Please remind to periodically close your accounting periods. You have to close periods from %{FIRST_DATE}."
 
-    notify_admin_archive_complete:                                                                #translation_missing
+    notify_admin_archive_complete:
       subject: "Archiving completed"
       body:
         archive_complete: "You have closed the accounting period from %{START} to %{END}. Archiving of data is now complete."
@@ -305,11 +307,17 @@ es:
         here: "here."
         save_on_secured: "Remember that you must save this archive on a secured external support, which may be requested by the tax authorities during a check."
 
-    notify_privacy_policy_changed:                                                               #translation_missing
+    notify_privacy_policy_changed:
       subject: "Privacy policy updated"
       body:
         content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+
+    notify_admin_refund_created:
+      subject: "A refund has been generated"
+      body:
+        refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
+        download: "Click here to download this refund invoice"
 
     shared:
       hello: "¡Hola %{user_name}!"

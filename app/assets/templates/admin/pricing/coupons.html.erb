@@ -1,15 +1,15 @@
-<h2 translate>{{ 'pricing.list_of_the_coupons' }}</h2>
+<h2 translate>{{ 'app.admin.pricing.list_of_the_coupons' }}</h2>
 
 <div class="m-t-lg m-b">
   <button type="button" class="btn btn-warning" ui-sref="app.admin.coupons_new">
     <i class="fa fa-plus m-r"></i>
-    <span translate>{{ 'pricing.add_a_new_coupon' }}</span>
+    <span translate>{{ 'app.admin.pricing.add_a_new_coupon' }}</span>
   </button>
   <div class="form-group pull-right">
     <div class="input-group">
       <span class="input-group-addon"><i class="fa fa-filter"></i></span>
       <select ng-model="filter.coupon" class="form-control" ng-change="updateCouponFilter()">
-        <option ng-repeat="status in couponStatus" value="{{status}}" translate>{{ 'pricing.'+status }}</option>
+        <option ng-repeat="status in couponStatus" value="{{status}}" translate>{{ 'app.admin.pricing.'+status }}</option>
       </select>
     </div>
   </div>
@@ -18,10 +18,10 @@
 <table class="table">
   <thead>
   <tr>
-    <th translate>{{ 'pricing.name' }}</th>
-    <th translate>{{ 'pricing.discount' }}</th>
-    <th translate>{{ 'pricing.nb_of_usages' }}</th>
-    <th translate>{{ 'pricing.status' }}</th>
+    <th translate>{{ 'app.admin.pricing.name' }}</th>
+    <th translate>{{ 'app.admin.pricing.discount' }}</th>
+    <th translate>{{ 'app.admin.pricing.nb_of_usages' }}</th>
+    <th translate>{{ 'app.admin.pricing.status' }}</th>
     <th></th>
   </tr>
   </thead>
@@ -33,7 +33,7 @@
       <span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span>
     </td>
     <td>{{coupon.usages}}</td>
-    <td translate>{{'pricing.'+coupon.status}}</td>
+    <td translate>{{'app.admin.pricing.'+coupon.status}}</td>
     <td>
       <button type="button" class="btn btn-default" ng-click="sendCouponToUser(coupon)"><i class="fa fa-send-o"></i> </button>
       <button type="button" class="btn btn-default" ui-sref="app.admin.coupons_edit({id:coupon.id})"><i class="fa fa-pencil-square-o"></i></button>
@@ -44,5 +44,5 @@
 </table>
 
 <div class="text-center">
-  <button class="btn btn-warning" ng-click="loadMore()" ng-hide="coupons.length === 0 || coupons.length >= coupons[0].total"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'pricing.display_more_coupons' | translate }}</button>
+  <button class="btn btn-warning" ng-click="loadMore()" ng-hide="coupons.length === 0 || coupons.length >= coupons[0].total"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.pricing.display_more_coupons' | translate }}</button>
 </div>

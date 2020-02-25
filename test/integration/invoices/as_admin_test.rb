@@ -33,7 +33,7 @@ class InvoicesTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin generates a refund' do
-    date = DateTime.now.iso8601
+    date = DateTime.current.iso8601
 
     post '/api/invoices', { avoir: {
       avoir_date: date,

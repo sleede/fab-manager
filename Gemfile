@@ -4,7 +4,7 @@ gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.11.1'
 # Use Puma as web server
-gem 'puma', '3.10.0'
+gem 'puma', '3.12.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -61,7 +61,7 @@ group :test do
   gem 'webmock'
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
 end
 
@@ -152,3 +152,5 @@ gem 'sys-filesystem'
 gem 'sha3'
 
 gem 'repost'
+
+gem 'icalendar'

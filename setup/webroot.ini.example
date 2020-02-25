@@ -1,0 +1,8 @@
+rsa-key-size = 4096
+email = REPLACE_WITH_YOUR@EMAIL.COM
+agree-tos = True
+renew-by-default = True
+authenticator = webroot
+webroot-path = /etc/letsencrypt/webrootauth
+domains = MAIN_DOMAIN, ANOTHER_DOMAIN_1
+non-interactive = True

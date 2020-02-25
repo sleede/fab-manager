@@ -1,0 +1,212 @@
+# Install Fab-Manager in production with docker-compose
+
+This document will guide you through all the steps needed to set up your Fab-Manager app on a production server, based on a solution using Docker and Docker-compose.
+We recommend DigitalOcean, but these steps will work on any Docker-compatible cloud provider or local server.
+
+In order to make it work, please use the same directories structure as described in this guide in your Fab-Manager app folder.
+You will need to be root through the rest of the setup.
+
+##### Table of contents
+
+1. [Preliminary steps](#preliminary-steps)<br/>
+1.1. [Setup the server](#setup-the-server)<br/>
+1.2. [Setup the domain name](#setup-the-domain-name)<br/>
+1.3. [Connect through SSH](#connect-through-ssh)<br/>
+1.4. [Prepare the server](#prepare-the-server)<br/>
+2. [Install Fab-manager](#install-fab-manager)<br/>
+3. [Docker utils](#docker-utils)
+4. [Update Fab-manager](#update-fabmanager)<br/>
+4.1. [Steps](#steps)<br/>
+4.2. [Upgrade to the last version](#upgrade-to-the-last-version)<br/>
+4.3. [Upgrade to a specific version](#upgrade-to-a-specific-version)
+
+<a name="preliminary-steps"></a>
+## Preliminary steps
+
+<a name="setup-the-server"></a>
+### Setup the server
+
+There are many hosting providers on the internet, providing affordable virtual private serveurs (VPS).
+Here's a non exhaustive list:
+- [DigitalOcean](https://www.digitalocean.com/pricing/#droplet)
+- [OVH](https://www.ovh.com/fr/vps/) 
+- [Amazon](https://aws.amazon.com/fr/ec2/)
+- [Gandi](https://v4.gandi.net/hebergement/serveur/prix)
+- [Ikoula](https://express.ikoula.com/fr/serveur-virtuel)
+- [1&1](https://www.1and1.fr/serveurs-virtuels)
+- [GoDaddy](https://fr.godaddy.com/hosting/vps-hosting)
+- [and many others...](https://www.google.fr/search?q=vps+hosting)
+
+Choose one, depending on your budget, on the server's location, on the uptime guarantee, etc.
+
+You will need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
+We recommend 4 GB RAM for larger communities.
+
+On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"**.
+This way, Docker and Docker-compose are pre-installed.
+Choose a datacenter and set your domain name as the hostname.
+
+With other providers, choose a [supported operating system](../README.md#software-stack) and install docker on it:
+- [Debian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
+- [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+
+Then install [Docker Compose](https://docs.docker.com/compose/install/)
+
+<a name="setup-the-domain-name"></a>
+### Setup the domain name
+
+There are many domain name registrars on the internet, you may choose one that fit your needs.
+You can find an exhaustive list [on the ICANN website](https://www.icann.org/registrar-reports/accredited-list.html)
+
+1. Once done, buy a domain name on it
+2. Replace the IP address of the domain with the IP address of your VPS (This is a DNS record type A)
+3. **Do not** try to access your domain name right away, DNS are not aware of the change yet so **WAIT** and be patient.
+
+<a name="connect-through-ssh"></a>
+### Connect through SSH
+
+You can already connect to the server with this command: `ssh root@server-ip`. When DNS propagation will be done, you will be able to
+connect to the server with `ssh root@your-domain-name`.
+
+<a name="prepare-the-server"></a>
+### Prepare the server
+
+Before installing fab-manager, we recommend you to:
+- Upgrade your system
+- Setup the server timezone
+- Add at least 2GB of swap memory
+- Protect your SSH connection by forcing it through a RSA key
+
+You can run the following script as root to easily perform all these operations:
+
+```bash
+\curl -sSL prepare-vps.sleede.com | bash
+```
+
+<a name="install-fab-manager"></a>
+## Install Fab-Manager
+
+Run the following command to install Fab-Manager.
+This script will guide you through the installation process by checking the requirements and asking you the configuration elements.
+
+```bash
+\curl -sSL setup.fab-manager.com | bash
+```
+
+**OR**, if you don't want to install fab-manager in `/apps/fabmanager`, use the following instead:
+```bash
+\curl -sSL setup.fab-manager.com | bash -s "/my/custom/path"
+```
+
+<a name="docker-utils"></a>
+## Docker utils
+Below, you'll find a collection of useful commands to control your instance with docker-compose.
+Before using any of these commands, you must first `cd` into the app directory.
+
+- Restart app
+```bash
+docker-compose restart fabmanager
+```
+- Remove app
+```bash
+docker-compose down fabmanager
+```
+- Restart all containers
+```bash
+docker-compose restart
+```
+- Remove all containers
+```bash
+docker-compose down
+```
+- Start all containers
+```bash
+docker-compose up -d
+```
+- Open a bash in the app context
+```bash
+docker-compose run --rm fabmanager bash
+```
+- Show services status
+```bash
+docker-compose ps
+```
+- Restart nginx container
+```bash
+docker-compose restart nginx
+ ```
+- Example of command passing env variables
+```bash
+docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bundle exec rake db:seed
+```
+<a name="update-fabmanager"></a>
+## Update Fab-manager
+
+*This procedure updates Fab-Manager to the most recent version by default.*
+
+> ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2 and finally to the last version
+
+<a name="steps"></a>
+### Steps
+
+When a new version is available, follow this procedure to update fab-manager app in a production environment, using docker-compose.
+You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/releases.atom) to get notified when a new release comes out.
+
+1. go to your app folder
+
+   `cd /apps/fabmanager`
+
+2. pull last docker images 
+
+   `docker-compose pull`
+
+3. stop the app
+
+   `docker-compose stop fabmanager`
+
+4. remove old assets
+
+   `rm -Rf public/assets/`
+
+5. compile new assets
+
+   `docker-compose run --rm fabmanager bundle exec rake assets:precompile`
+
+6. run specific commands
+
+   **Do not forget** to check if there are commands to run for your upgrade. Those commands 
+   are always specified in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) and prefixed by **[TODO DEPLOY]**. 
+   They are also present in the [releases page](https://github.com/sleede/fab-manager/releases).
+ 
+   Those commands execute specific tasks and have to be run by hand.
+   Using docker, you must prefix these commands with `docker-compose run --rm fabmanager bundle exec`. 
+   You can also ignore commands only applicable to development environnement, which are prefixed by `(dev)` in the CHANGELOG.
+
+7. restart all containers
+
+   ```bash
+     docker-compose down
+     docker-compose up -d
+   ```
+
+You can check that all containers are running with `docker ps`.
+
+<a name="upgrade-to-the-last-version"></a>
+### Upgrade to the last version
+
+It's the default behaviour as `docker-compose pull` command will fetch the latest versions of the docker images. 
+Be sure to run all the specific commands listed in the [CHANGELOG](https://github.com/sleede/fab-manager/blob/master/CHANGELOG.md) between your actual
+and the new version in sequential order. (Example: to update from 2.4.0 to 2.4.3, you will run the specific commands for the 2.4.1, then for the 2.4.2 and then for the 2.4.3).
+
+<a name="upgrade-to-a-specific-version"></a>
+### Upgrade to a specific version
+
+Edit your [/apps/fabmanager/docker-compose.yml](../setup/docker-compose.yml#L4) file and change the following line:
+```yaml
+image: sleede/fab-manager
+```
+For example, here we want to use the v3.1.2:
+```yaml
+image: sleede/fab-manager:release-v3.1.2
+```
+Then run the normal upgrade procedure. 

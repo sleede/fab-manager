@@ -30,7 +30,6 @@ When using docker-compose, you should provide the name of the service in your [d
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml` (default: `postgres`).
-Please see [Setup the FabManager database in PostgreSQL](../README.md#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, the default configuration (with `postgres` user) does not uses any password as it is confined in the docker container.
 <a name="REDIS_HOST"></a>
@@ -61,6 +60,7 @@ Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
 **MANDATORY**: Even if you don't want to charge your customers, you must fill this settings. 
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
+If you change these keys during the application lifecycle, you must run `rake fablab:stripe:sync_members`, otherwise your users won't be able to do card payments. 
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
@@ -102,6 +102,25 @@ Valid stripe API keys are still required, even if you don't require online payme
 If set to 'true', the invoices will be disabled. 
 This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
 **Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
+<a name="PHONE_REQUIRED"></a>
+
+    PHONE_REQUIRED
+
+If set to 'false' the phone number won't be required to register a new user on the software.
+<a name="EVENTS_IN_CALENDAR"></a>
+
+    EVENTS_IN_CALENDAR
+
+If set to 'true', the admin calendar will display the scheduled events in the current view, as read-only items.
+<a name="SLOT_DURATION"></a>
+
+    SLOT_DURATION
+
+Machine and space availabilities are divided in multiple slots of the duration set by this variable.
+Default value is 60 minutes (1 hour).
+
+⚠ Changing this value during the application life may cause serious issues. 
+Please ensure there's no machine/space availabilities opened to reservation or already reserved **in the future** when you change this value.
 <a name="DEFAULT_MAIL_FROM"></a>
 
     DEFAULT_MAIL_FROM
@@ -210,7 +229,7 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
     ADMIN_EMAIL, ADMIN_PASSWORD
 
 Credentials for the first admin user created when seeding the project. 
-By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed.
+By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL
@@ -305,7 +324,7 @@ Configure the first day of the week in your locale zone (generally monday or sun
     D3_DATE_FORMAT
 
 Date format for dates displayed in statistics charts.
-See [D3 Wiki](https://github.com/mbostock/d3/wiki/Time-Formatting#format) for available formats.
+See [D3 Wiki](https://github.com/d3/d3-time-format/blob/v2.2.2/README.md#locale_format) for available formats.
 <a name="UIB_DATE_FORMAT"></a>
 
     UIB_DATE_FORMAT
@@ -320,16 +339,21 @@ See [AngularUI documentation](https://angular-ui.github.io/bootstrap/#uibdatepar
 
 Date format for dates shown in exported Excel files (eg. statistics)
 See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a list a available formats.
+<a name="ENABLE_IN_CONTEXT_TRANSLATION"></a>
 
+    ENABLE_IN_CONTEXT_TRANSLATION
+
+If set to `true`, and the application in started into a staging environment, this will enable the Crowdin In-context translation layer for the front-end application.
+See [Crowdin documentation](https://support.crowdin.com/in-context-localization/) for more details about this.
+Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
-
-This configuration is optional and can only work in production mode. 
-It allows you to display a shared projects gallery and to share your projects with other fablabs.
 <a name="OPENLAB_APP_ID"></a><a name="OPENLAB_APP_SECRET"></a>
 
     OPENLAB_APP_ID, OPENLAB_APP_SECRET
 
+This configuration is optional and can only work in production mode. 
+It allows you to display a shared projects gallery and to share your projects with other fablabs.
 Send an email to **contact@fab-manager.com** to get your OpenLab client's credentials.
 <a name="OPENLAB_DEFAULT"></a>
 

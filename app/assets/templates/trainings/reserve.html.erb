@@ -7,8 +7,8 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 ng-show="mode == 'all'" translate>{{ 'trainings_planning' }}</h1>
-        <h1 ng-hide="mode == 'all'"><span translate>{{ 'planning_of' }}</span> {{training.name}}</h1>
+        <h1 ng-show="mode == 'all'" translate>{{ 'app.logged.trainings_reserve.trainings_planning' }}</h1>
+        <h1 ng-hide="mode == 'all'"><span translate>{{ 'app.logged.trainings_reserve.planning_of' }}</span> {{training.name}}</h1>
       </section>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
@@ -17,7 +17,7 @@
            ui-sref="app.logged.trainings_reserve({id:'all'})"
            ng-hide="mode == 'all'"
            role="button"
-           translate>{{ 'all_trainings' }}</a>
+           translate>{{ 'app.logged.trainings_reserve.all_trainings' }}</a>
       </section>
     </div>
   </div>
@@ -27,7 +27,7 @@
 <div class="row no-gutter training-reserve">
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg" ng-show="!plansAreShown"></div>
-    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path 'plans/_plan.html' %>'"></ng-include>
+    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path "plans/_plan.html" %>'"></ng-include>
   </div>
 
 

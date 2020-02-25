@@ -1,13 +1,13 @@
 <div class="m-t-lg m-b">
   <button type="button" class="btn btn-warning" ng-click="addGroup()">
     <i class="fa fa-plus m-r"></i>
-    <span translate>{{ 'group_form.add_a_group' }}</span>
+    <span translate>{{ 'app.admin.members.group_form.add_a_group' }}</span>
   </button>
   <div class="form-group pull-right">
     <div class="input-group">
       <span class="input-group-addon"><i class="fa fa-filter"></i></span>
       <select ng-model="groupFiltering" class="form-control">
-        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'group_form.status_'+status }}</option>
+        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'app.admin.members.group_form.status_'+status }}</option>
       </select>
     </div>
   </div>
@@ -16,7 +16,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th style="width: 75%;" translate>{{ 'group_form.group_name' }}</th>
+        <th style="width: 75%;" translate>{{ 'app.admin.members.group_form.group_name' }}</th>
         <th style="width: 25%"></th>
     </tr>
     </thead>
@@ -39,11 +39,11 @@
             </form>
             <div class="buttons" ng-hide="rowform.$visible || group.slug === 'admins'">
                 <button class="btn btn-default" ng-click="rowform.$show()">
-                    <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+                    <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
                 </button>
                 <button class="btn btn-default" ng-click="toggleDisableGroup($index)">
-                    <span ng-hide="group.disabled"><i class="fa fa-eye-slash"></i> <span translate>{{ 'group_form.disable' }}</span></span>
-                    <span ng-show="group.disabled"><i class="fa fa-eye"></i> <span translate>{{ 'group_form.enable' }}</span></span>
+                    <span ng-hide="group.disabled"><i class="fa fa-eye-slash"></i> <span translate>{{ 'app.admin.members.group_form.disable' }}</span></span>
+                    <span ng-show="group.disabled"><i class="fa fa-eye"></i> <span translate>{{ 'app.admin.members.group_form.enable' }}</span></span>
                 </button>
                 <button class="btn btn-danger" ng-click="removeGroup($index)">
                     <i class="fa fa-trash-o"></i>

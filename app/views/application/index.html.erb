@@ -12,6 +12,13 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,800,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
+  <% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation %>
+    <script type="text/javascript">
+      var _jipt = [];
+      _jipt.push(['project', 'fab-manager']);
+    </script>
+    <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+  <% end %>
   <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
   <script type="text/javascript">
       var Fablab = Fablab || {};
@@ -20,6 +27,9 @@
       Fablab.withoutSpaces = ('<%= Rails.application.secrets.fablab_without_spaces %>' !== 'false');
       Fablab.withoutOnlinePayment = ('<%= Rails.application.secrets.fablab_without_online_payments %>' === 'true');
       Fablab.withoutInvoices = ('<%= Rails.application.secrets.fablab_without_invoices %>' === 'true');
+      Fablab.phoneRequired = ('<%= Rails.application.secrets.phone_required %>' === 'true');
+      Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');
+      Fablab.slotDuration = parseInt("<%= ApplicationHelper::SLOT_DURATION %>", 10);
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
@@ -65,7 +75,7 @@
   <% end %>
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.projects_list.the_fablab_projects') %>" href="<%= rss_projects_path %>.xml">
   <link rel="alternate" type="application/rss+xml" title="RSS: <%= t('app.public.events_list.the_fablab_s_events') %>" href="<%= rss_events_path %>.xml">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -116,7 +126,9 @@
 <!-- i18n of external libraries -->
 <script type="text/javascript" src="<%= asset_path "angular-i18n/angular-locale_#{Rails.application.secrets.angular_locale}.js" %>"></script>
 <script type="text/javascript" src="<%= asset_path "messageformat/locale/#{Rails.application.secrets.messageformat_locale}.js" %>"></script>
-
+<% if Rails.env.staging? && Rails.application.secrets.enable_in_context_translation %>
+  <script type="text/javascript">MessageFormat.locale.ach=function(n){return n===0||n===1?"one":"other"};</script>
+<% end %>
 <!-- if required locale does not exist, use the default "en" -->
 <% if Rails.application.assets.find_asset "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>
   <script type="text/javascript" src="<%= asset_path "moment/locale/#{Rails.application.secrets.moment_locale}.js" %>"></script>

@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-8 b-l b-r">
                 <section class="heading-title">
-                    <h1 translate>{{ 'add_a_new_authentication_provider' }}</h1>
+                    <h1 translate>{{ 'app.admin.authentication_new.add_a_new_authentication_provider' }}</h1>
                 </section>
 
             </div>
@@ -17,7 +17,7 @@
             <div class="col-md-3">
                 <section class="heading-actions wrapper">
                     <div class="btn btn-lg btn-block btn-default m-t-xs" ng-click="cancel()" translate>
-                        {{ 'cancel' }}
+                        {{ 'app.shared.buttons.cancel' }}
                     </div>
                 </section>
 
@@ -36,13 +36,13 @@
                 <section class="panel panel-default bg-light m-lg">
                     <div class="panel-body m-r">
 
-                        <ng-include src="'<%= asset_path 'admin/authentications/_form.html' %>'"></ng-include>
-                        <ng-include src="'<%= asset_path 'admin/authentications/_oauth2.html'%>'" ng-if="provider.providable_type == 'OAuth2Provider'"></ng-include>
+                        <ng-include src="'<%= asset_path "admin/authentications/_form.html" %>'"></ng-include>
+                        <ng-include src="'<%= asset_path "admin/authentications/_oauth2.html" %>'" ng-if="provider.providable_type == 'OAuth2Provider'"></ng-include>
                     </div>   <!-- ./panel-body  -->
 
 
                     <div class="panel-footer no-padder">
-                        <input type="button" value="{{ 'save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="providerForm.$invalid" ng-click="registerProvider()"/>
+                        <input type="button" value="{{ 'app.shared.buttons.save' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="providerForm.$invalid" ng-click="registerProvider()"/>
                     </div>
                 </section>
             </form>

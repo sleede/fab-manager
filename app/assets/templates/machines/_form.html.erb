@@ -15,21 +15,21 @@
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$invalid}">
-      <label for="name" class="col-sm-2 control-label">{{ 'machine_form.name' | translate }} *</label>
+      <label for="name" class="col-sm-2 control-label">{{ 'app.shared.machine.name' | translate }} *</label>
       <div class="col-sm-4">
         <input ng-model="machine.name"
                type="text"
                name="machine[name]"
                class="form-control"
                id="machine_name"
-               placeholder="{{'machine_form.name' | translate}}"
+               placeholder="{{'app.shared.machine.name' | translate}}"
                required>
-        <span class="help-block" ng-show="machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$error.required" translate>{{ 'machine_form.name_is_required' }}</span>
+        <span class="help-block" ng-show="machineForm['machine[name]'].$dirty && machineForm['machine[name]'].$error.required" translate>{{ 'app.shared.machine.name_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-lg">
-      <label for="machine_image" class="col-sm-2 control-label">{{ 'machine_form.illustration' | translate }} *</label>
+      <label for="machine_image" class="col-sm-2 control-label">{{ 'app.shared.machine.illustration' | translate }} *</label>
       <div class="col-sm-10">
         <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(machine.machine_image)">
             <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
@@ -40,8 +40,8 @@
             </div>
             <div>
                 <span class="btn btn-default btn-file">
-                  <span class="fileinput-new">{{ 'machine_form.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
-                  <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                  <span class="fileinput-new">{{ 'app.shared.machine.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
+                  <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                   <input type="file"
                          ng-model="machine.machine_image"
                          name="machine[machine_image_attributes][attachment]"
@@ -49,15 +49,14 @@
                          required
                          bs-jasny-fileinput>
                 </span>
-                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'delete' }}</a>
+                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'app.shared.buttons.delete' }}</a>
             </div>
         </div>
       </div>
     </div>
 
-
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$invalid}">
-      <label for="description" class="col-sm-2 control-label">{{ 'machine_form.description' | translate }} *</label>
+      <label for="description" class="col-sm-2 control-label">{{ 'app.shared.machine.description' | translate }} *</label>
       <div class="col-sm-10">
         <input type="hidden"
                name="machine[description]"
@@ -69,12 +68,12 @@
                     name="machine[description]"
                     required>
         </summernote>
-        <span class="help-block" ng-show="machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$error.required" translate>{{ 'machine_form.description_is_required' }}</span>
+        <span class="help-block" ng-show="machineForm['machine[description]'].$dirty && machineForm['machine[description]'].$error.required" translate>{{ 'app.shared.machine.description_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-xl" ng-class="{'has-error': machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$invalid}">
-      <label for="spec" class="col-sm-2 control-label">{{ 'machine_form.technical_specifications' | translate }} *</label>
+      <label for="spec" class="col-sm-2 control-label">{{ 'app.shared.machine.technical_specifications' | translate }} *</label>
       <div class="col-sm-10">
         <input type="hidden"
                name="machine[spec]"
@@ -86,12 +85,12 @@
                     name="machine[spec]"
                     required>
         </summernote>
-        <span class="help-block" ng-show="machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$error.required" translate>{{ 'machine_form.technical_specifications_are_required' }}</span>
+        <span class="help-block" ng-show="machineForm['machine[spec]'].$dirty && machineForm['machine[spec]'].$error.required" translate>{{ 'app.shared.machine.technical_specifications_are_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-xl">
-      <label class="col-sm-2 control-label" translate>{{ 'machine_form.attached_files_pdf' }}</label>
+      <label class="col-sm-2 control-label" translate>{{ 'app.shared.machine.attached_files_pdf' }}</label>
       <div class="col-sm-10">
         <div ng-repeat="file in machine.machine_files_attributes" ng-show="!file._destroy">
           <input type="hidden" ng-model="file.id" name="machine[machine_files_attributes][][id]" ng-value="file.id" />
@@ -101,19 +100,19 @@
             <div class="form-control" data-trigger="fileinput">
               <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
             </div>
-            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'machine_form.attach_a_file' }}</span>
-              <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="machine[machine_files_attributes][][attachment]" accept=".pdf"></span>
+            <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.machine.attach_a_file' }}</span>
+              <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file" name="machine[machine_files_attributes][][attachment]" accept=".pdf"></span>
             <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
           </div>
 
         </div>
-        <a class="btn btn-default" ng-click="addFile()" role="button"> {{ 'machine_form.add_an_attachment' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+        <a class="btn btn-default" ng-click="addFile()" role="button"> {{ 'app.shared.machine.add_an_attachment' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
       </div>
     </div>
 
     <div class="form-group">
       <label for="machine[disabled]" class="control-label col-sm-2" translate>
-        {{ 'machine_form.disable_machine' }}
+        {{ 'app.shared.machine.disable_machine' }}
       </label>
       <div class="col-sm-10">
         <input bs-switch
@@ -121,8 +120,8 @@
                name="machine[disabled]"
                type="checkbox"
                class="form-control"
-               switch-on-text="{{ 'yes' | translate }}"
-               switch-off-text="{{ 'no' | translate }}"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
                switch-animate="true"/>
         <input type="hidden" name="machine[disabled]" value="{{machine.disabled}}">
       </div>
@@ -132,7 +131,7 @@
 
   <div class="panel-footer no-padder">
     <input type="submit"
-           value="{{ 'machine_form.validate_your_machine' | translate }}"
+           value="{{ 'app.shared.machine.validate_your_machine' | translate }}"
            class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
            ng-disabled="machineForm.$invalid"/>
   </div>

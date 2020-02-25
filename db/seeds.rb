@@ -90,7 +90,7 @@ if Role.where(name: 'admin').joins(:users).count.zero?
   admin = User.new(username: 'admin', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'],
                    password_confirmation: Rails.application.secrets.admin_password, group_id: Group.find_by(slug: 'admins').id,
                    profile_attributes: { first_name: 'admin', last_name: 'admin', phone: '0123456789' },
-                   statistic_profile_attributes: { gender: true, birthday: Time.now })
+                   statistic_profile_attributes: { gender: true, birthday: DateTime.current })
   admin.add_role 'admin'
   admin.save!
 end
@@ -425,8 +425,8 @@ Stylesheet.build_sheet!
 
 unless Setting.find_by(name: 'training_information_message').try(:value)
   setting = Setting.find_or_initialize_by(name: 'training_information_message')
-  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui"+
-                  ' proposent des conditions avantageuses sur le prix des formations et les heures machines.'
+  setting.value = "Avant de réserver une formation, nous vous conseillons de consulter nos offres d'abonnement qui" \
+                  ' proposent des conditions avantageuses sur le prix des formations et les créneaux machines.'
   setting.save
 end
 

@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-8 col-sm-8 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'users_management' }}</h1>
+        <h1 translate>{{ 'app.admin.members.users_management' }}</h1>
       </section>
     </div>
     <div class="col-xs-1 col-xs-offset-1 col-md-offset-2 b-l">
@@ -26,23 +26,23 @@
     <div class="col-md-12">
       <uib-tabset justified="true">
 
-        <uib-tab heading="{{ 'members' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/members/members.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.members.members' | translate }}">
+          <ng-include src="'<%= asset_path "admin/members/members.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'administrators' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/members/administrators.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.members.administrators' | translate }}">
+          <ng-include src="'<%= asset_path "admin/members/administrators.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'groups' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.groups' | translate }}">
           <div ui-view="groups"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'tags' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.tags' | translate }}">
           <div ui-view="tags"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'authentication' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.authentication' | translate }}">
           <div ui-view="authentification"></div>
         </uib-tab>
       </uib-tabset>

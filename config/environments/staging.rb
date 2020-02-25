@@ -29,9 +29,7 @@ Rails.application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_files = false
 
-  # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  # if you want disable variable name mangling and enable ES6 support
+  # Compress JavaScripts and CSS. We disable variable name mangling and enable ES6 support
   config.assets.js_compressor = Uglifier.new(mangle: false, harmony: true)
 
   # config.assets.css_compressor = :sass

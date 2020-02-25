@@ -7,7 +7,7 @@ class EventPolicy < ApplicationPolicy
     def resolve
       if user.nil? || (user && !user.admin?)
         scope.includes(:event_image, :event_files, :availability, :category)
-             .where('availabilities.start_at >= ?', Time.now)
+             .where('availabilities.start_at >= ?', DateTime.current)
              .order('availabilities.start_at ASC')
              .references(:availabilities)
       else

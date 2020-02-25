@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-8 col-sm-10 b-l">
                 <section class="heading-title">
-                    <h1 translate>{{ 'confirm_your_new_account' }}</h1>
+                    <h1 translate>{{ 'app.logged.profile_completion.confirm_your_new_account' }}</h1>
                 </section>
 
             </div>
@@ -25,11 +25,11 @@
                 <div class="col-md-offset-2 col-md-8 m-t-md">
                     <section class="panel panel-default bg-light m-lg">
                         <div class="panel-body m-r">
-                            {{ 'you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName }:"messageformat" }}<br/>
+                            {{ 'app.logged.profile_completion.you_ve_just_created_a_new_account_on_the_fablab_by_logging_from' | translate:{ GENDER: nameGenre, NAME: fablabName } }}<br/>
                             <img class="m-l v-middle" height="16" width="16" src='https://www.google.com/s2/favicons?domain={{activeProvider.domain}}' />
                             <strong class="v-middle">{{activeProvider.name}} <span ng-if="ssoEmail()">({{ssoEmail()}})</span></strong><br/>
-                            <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'we_need_some_more_details' }}.</p>
-                            <p class="m-t-md" ng-show="hasDuplicate()" translate>{{ 'your_email_is_already_used_by_another_account_on_the_platform' }}</p>
+                            <p class="m-t-md" ng-hide="hasDuplicate()" translate>{{ 'app.logged.profile_completion.we_need_some_more_details' }}.</p>
+                            <p class="m-t-md" ng-show="hasDuplicate()" translate>{{ 'app.logged.profile_completion.your_email_is_already_used_by_another_account_on_the_platform' }}</p>
                         </div>
                     </section>
                 </div>
@@ -37,7 +37,7 @@
             <div class="row col-md-2 col-md-offset-5 hidden-sm hidden-xs" ng-hide="user.merged_at">
               <p class="font-felt fleche-left text-lg upper text-center">
                 <%= image_tag("fleche-left.png", class: 'fleche-left visible-lg visible-md fleche-left-from-top') %>
-                <span class="or" translate>{{ 'or' }}</span>
+                <span class="or" translate>{{ 'app.logged.profile_completion.or' }}</span>
                 <%= image_tag("fleche-left.png", class: 'fleche-right visible-lg visible-md fleche-right-from-top') %>
               </p>
             </div>
@@ -46,10 +46,10 @@
                     <div class="m-lg panel panel-default bg-light pos-rlt" ng-hide="hasDuplicate()">
                         <div ng-class="{'disabling-overlay' : !!user.auth_token}">
                             <div class="panel-body">
-                              <h3 translate>{{ 'new_on_this_platform' }}</h3>
-                              <p translate>{{ 'please_fill_the_following_form'}}.</p>
-                              <p class="text-italic">{{ 'some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified' | translate:{NAME:activeProvider.name} }}.<br/>
-                                {{ 'then_click_on_' | translate }} <strong translate>{{ 'confirm_changes' }}</strong> {{ '_to_start_using_the_application' | translate }}.</p>
+                              <h3 translate>{{ 'app.logged.profile_completion.new_on_this_platform' }}</h3>
+                              <p translate>{{ 'app.logged.profile_completion.please_fill_the_following_form'}}.</p>
+                              <p class="text-italic">{{ 'app.logged.profile_completion.some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified' | translate:{NAME:activeProvider.name} }}.<br/>
+                                {{ 'app.logged.profile_completion.then_click_on_' | translate }} <strong translate>{{ 'app.shared.buttons.confirm_changes' }}</strong> {{ 'app.logged.profile_completion._to_start_using_the_application' | translate }}.</p>
                             </div>
                             <form role="form"
                                   name="userForm"
@@ -63,7 +63,7 @@
 
                                     <div class="panel-body m-r">
                                         <!-- common fields -->
-                                        <ng-include src="'<%= asset_path 'shared/_member_form.html' %>'"></ng-include>
+                                        <ng-include src="'<%= asset_path "shared/_member_form.html" %>'"></ng-include>
 
                                         <div class="row">
                                             <div class="col-sm-3 col-sm-offset-1"></div>
@@ -73,16 +73,16 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                           <i class="fa fa-users"></i>
-                                                          <span class="exponent m-l-xs help-cursor" title="{{ 'used_for_statistics' | translate }}">
+                                                          <span class="exponent m-l-xs help-cursor" title="{{ 'app.logged.profile_completion.used_for_statistics' | translate }}">
                                                             <i class="fa fa-asterisk" aria-hidden="true"></i>
                                                           </span>
                                                         </span>
                                                         <select ng-model="user.group_id" class="form-control" name="user[group_id]" required>
-                                                            <option value=null translate>{{ 'your_user_s_profile' }}</option>
+                                                            <option value=null translate>{{ 'app.logged.profile_completion.your_user_s_profile' }}</option>
                                                             <option ng-repeat="group in groups" ng-value="group.id" ng-selected="group.id == user.group_id">{{group.name}}</option>
                                                         </select>
                                                     </div>
-                                                    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
+                                                    <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'app.logged.profile_completion.user_s_profile_is_required' }}</span>
                                                 </div>
 
                                                 <!-- accept cgu -->
@@ -91,8 +91,8 @@
                                                            name="cgu"
                                                            ng-model="user.cgu"
                                                            value="true"
-                                                           ng-required="cgu != null"/> {{ 'i_ve_read_and_i_accept_' | translate }}
-                                                  <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+                                                           ng-required="cgu != null"/> {{ 'app.logged.profile_completion.i_ve_read_and_i_accept_' | translate }}
+                                                  <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.logged.profile_completion._the_fablab_policy' }}</a>
                                                   <span class="exponent m-l-xs"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
 
                                     <div class="panel-footer no-padder">
                                         <input type="submit"
-                                               value="{{ 'confirm_changes' | translate }}"
+                                               value="{{ 'app.shared.buttons.confirm_changes' | translate }}"
                                                class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
                                                ng-disabled="userForm.$invalid"/>
                                     </div>
@@ -114,21 +114,29 @@
                     <section class="m-lg panel panel-default bg-light pos-rlt" ng-show="hasDuplicate()">
                         <div ng-class="{'disabling-overlay' : !!user.auth_token}">
                             <div class="panel-body">
-                                <h3 translate>{{ 'new_on_this_platform' }}</h3>
+                                <h3 translate>{{ 'app.logged.profile_completion.new_on_this_platform' }}</h3>
                                 <p class="text-italic">
-                                  {{ 'your_email_' | translate }} <strong>({{ssoEmail()}})</strong> {{ '_is_currently_associated_with_another_account_on_this_platform' | translate }}
-                                  {{ 'please_click_to_change_email_associated_with_your_PROVIDER_account' | translate:{PROVDER: activeProvider.name} }}
+                                  {{ 'app.logged.profile_completion.your_email_' | translate }}
+                                  <strong>({{ssoEmail()}})</strong>
+                                  {{ 'app.logged.profile_completion._is_currently_associated_with_another_account_on_this_platform' | translate }}
+                                  {{ 'app.logged.profile_completion.please_click_to_change_email_associated_with_your_PROVIDER_account' | translate:{PROVDER: activeProvider.name} }}
                                 </p>
                                 <div class="row">
                                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <a class="btn btn-default" ng-href="{{activeProvider.link_to_sso_profile}}" target="_blank">
-                                      <i class="fa fa-edit"></i> {{ 'change_my_data' | translate }}
+                                      <i class="fa fa-edit"></i> {{ 'app.logged.profile_completion.change_my_data' | translate }}
                                     </a>
-                                    <p class="text-italic">{{ 'once_your_data_are_up_to_date_' | translate }} <strong translate>{{ '_click_on_the_synchronization_button_opposite_' }}</strong>  {{ 'or' | translate}} <strong translate>{{ '_disconnect_then_reconnect_' }}</strong> {{ '_for_your_changes_to_take_effect' | translate }}</p>
+                                    <p class="text-italic">
+                                      {{ 'app.logged.profile_completion.once_your_data_are_up_to_date_' | translate }}
+                                      <strong translate>{{ 'app.logged.profile_completion._click_on_the_synchronization_button_opposite_' }}</strong>
+                                      {{ 'app.logged.profile_completion.or' | translate}}
+                                      <strong translate>{{ 'app.logged.profile_completion._disconnect_then_reconnect_' }}</strong>
+                                      {{ 'app.logged.profile_completion._for_your_changes_to_take_effect' | translate }}
+                                    </p>
                                   </div>
                                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <a class="btn btn-default" ng-click="syncProfile()">
-                                      <i class="fa fa-refresh"></i> {{ 'sync_my_profile' | translate }}
+                                      <i class="fa fa-refresh"></i> {{ 'app.logged.profile_completion.sync_my_profile' | translate }}
                                     </a>
                                   </div>
                                 </div>
@@ -138,11 +146,11 @@
                 </div>
               <div class="row col-xs-2 col-xs-offset-5 hidden-md hidden-lg">
                 <p class="font-felt fleche-left text-lg upper text-center">
-                  <span class="or" translate>{{ 'or' }}</span>
+                  <span class="or" translate>{{ 'app.logged.profile_completion.or' }}</span>
                 </p>
               </div>
                 <div class="col-md-6 m-t-3xl-on-md" ng-hide="user.merged_at">
-                    <ng-include src="'<%= asset_path 'profile/_token.html' %>'"></ng-include>
+                    <ng-include src="'<%= asset_path "profile/_token.html" %>'"></ng-include>
                 </div>
             </div>
         </div>

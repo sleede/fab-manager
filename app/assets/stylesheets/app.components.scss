@@ -290,6 +290,11 @@
     @include border-radius(3px);
     padding: 5px 10px;
   }
+  &.well-disabled {
+    border-color: $gray-lighter;
+    background-color: $gray-lighter;
+    color: $gray-light;
+  }
 }
 
 .read {
@@ -628,4 +633,43 @@ padding: 10px;
 
 .help-block.error {
   color: #ff565d;
+}
+
+.disabled {
+  background-color: $gray-lighter;
+  color: $gray-light;
+
+  & a {
+    color: $gray;
+  }
+
+  .canceled-marker {
+    float: right;
+    top: -13px;
+    position: relative;
+    color: red;
+    text-transform: uppercase;
+  }
+}
+.calendar-legend-block {
+  text-align: right;
+  padding-right: 2em;
+
+  h4 {
+    font-size: 12px;
+    font-style: italic;
+  }
+  .legends {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .calendar-legend {
+    border: 1px solid;
+    border-left: 3px solid;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 2px;
+    margin-left: 10px;
+    display: inline-block;
+  }
 }

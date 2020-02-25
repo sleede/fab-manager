@@ -1,8 +1,8 @@
-<button type="button" class="btn btn-warning m-b m-t-lg" ng-click="addTag()" translate>{{ 'add_a_tag'}}</button>
+<button type="button" class="btn btn-warning m-b m-t-lg" ng-click="addTag()" translate>{{ 'app.admin.members.tag_form.add_a_tag'}}</button>
 <table class="table">
     <thead>
     <tr>
-        <th style="width: 80%;" translate>{{ 'tag_name' }}</th>
+        <th style="width: 80%;" translate>{{ 'app.admin.members.tag_form.tag_name' }}</th>
         <th style="width: 20%"></th>
     </tr>
     </thead>
@@ -25,7 +25,7 @@
             </form>
             <div class="buttons" ng-show="!rowform.$visible">
                 <button class="btn btn-default" ng-click="rowform.$show()">
-                    <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'edit' }}</span>
+                    <i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm" translate>{{ 'app.shared.buttons.edit' }}</span>
                 </button>
                 <button class="btn btn-danger" ng-click="removeTag($index)">
                     <i class="fa fa-trash-o"></i>

@@ -45,7 +45,7 @@ class ArchiveWorker
         last_archive_checksum: last_checksum,
         previous_file: previous_file,
         software_version: Version.current,
-        date: Time.now.iso8601
+        date: DateTime.current.iso8601
       },
       formats: [:json],
       handlers: [:jbuilder]

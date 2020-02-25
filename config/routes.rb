@@ -112,6 +112,11 @@ Rails.application.routes.draw do
       get 'first', action: 'first', on: :collection
     end
 
+    resources :i_calendar, only: %i[index create destroy] do
+      get 'events', on: :member
+      post 'sync', on: :member
+    end
+
     # for admin
     resources :trainings do
       get :availabilities, on: :member

@@ -320,20 +320,10 @@ Application.Filters.filter('toIsoDate', [function () {
 
 Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
   return function (boolean) {
-    if (boolean || (boolean === 'true')) {
-      return _t('yes');
-    } else {
-      return _t('no');
-    }
-  };
-}]);
-
-Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
-  return function (boolean) {
     if (((typeof boolean === 'boolean') && boolean) || ((typeof boolean === 'string') && (boolean === 'true'))) {
-      return _t('yes');
+      return _t('app.shared.buttons.yes');
     } else {
-      return _t('no');
+      return _t('app.shared.buttons.no');
     }
   };
 }]);
@@ -341,7 +331,7 @@ Application.Filters.filter('booleanFormat', [ '_t', function (_t) {
 Application.Filters.filter('maxCount', [ '_t', function (_t) {
   return function (max) {
     if ((typeof max === 'undefined') || (max === null) || ((typeof max === 'number') && (max === 0))) {
-      return _t('unlimited');
+      return _t('app.admin.pricing.unlimited');
     } else {
       return max;
     }
