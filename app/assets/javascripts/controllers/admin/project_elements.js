@@ -168,8 +168,8 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         selector: 'body',
         stepId: 'welcome',
         order: 0,
-        title: _t('app.admin.tour.projectElements.welcome.title'),
-        content: _t('app.admin.tour.projectElements.welcome.content'),
+        title: _t('app.admin.tour.project_elements.welcome.title'),
+        content: _t('app.admin.tour.project_elements.welcome.content'),
         placement: 'bottom',
         orphan: true
       });
@@ -177,8 +177,8 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         selector: '.heading .abuses-button',
         stepId: 'abuses',
         order: 1,
-        title: _t('app.admin.tour.projectElements.abuses.title'),
-        content: _t('app.admin.tour.projectElements.abuses.content'),
+        title: _t('app.admin.tour.project_elements.abuses.title'),
+        content: _t('app.admin.tour.project_elements.abuses.content'),
         placement: 'bottom'
       });
       uitour.createStep({

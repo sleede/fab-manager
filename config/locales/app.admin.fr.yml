@@ -1195,7 +1195,7 @@ fr:
           prices:
             title: "Catégories tarifaires"
             content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
-        projectElements:
+        project_elements:
           welcome:
             title: "Gérer les éléments projet"
             content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
