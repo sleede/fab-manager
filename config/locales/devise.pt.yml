@@ -1,5 +1,4 @@
-# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
-
+#Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 pt:
   devise:
     confirmations:
@@ -15,17 +14,17 @@ pt:
       not_found_in_database: "Email ou senha inválidos."
       timeout: "Sua sessão expirou, faça login novamente para continuar."
       unauthenticated: "Você precisa fazer login ou se registrar, antes de continuar."
-      unconfirmed: "Você precisa confirmar sua conta, antes de continuar."
+      unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
     mailer:
       confirmation_instructions:
-      action:
+        action:
         instruction:
-        subject: "Instruções de confirmação"
+        subject: "Confirmation instructions"
       reset_password_instructions:
-      action:
+        action:
         instruction:
         ignore_otherwise:
-        subject: "Instruções para redefinir sua senha"
+        subject: "Reset password instructions"
       unlock_instructions:
         subject: "Instruções para desbloquear sua conta"
     omniauth_callbacks:
@@ -54,10 +53,10 @@ pt:
       unlocked: "Sua conta foi desbloqueada com sucesso. Faça login para continuar."
   errors:
     messages:
-      already_confirmed: "já foi confirmado, por favor, efetue login"
+      already_confirmed: "This email was already confirmed, please try signing in."
       confirmation_period_expired: "deve ser confirmada dentro de %{period}, por favor solicite uma nova"
       expired: "expirado, por favor solicite uma nova"
-      not_found: "não encontrado"
+      not_found: "This email was not found"
       not_locked: "não encontra-se bloqueada"
       not_saved:
         one: "1 erro impediu a gravação de %{resource} :"
