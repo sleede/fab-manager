@@ -184,7 +184,7 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 5,
+        order: 2,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',

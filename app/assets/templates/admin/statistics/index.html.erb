@@ -12,16 +12,22 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
-        <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="exportToExcel()"><i class="fa fa-file-excel-o"></i></a>
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm export-button" ng-click="exportToExcel()"><i class="fa fa-file-excel-o"></i></a>
         <iframe name="export-frame" height="0" width="0" class="none" id="stats-export-frame"></iframe>
-        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.stats_graphs" role="button"><i class="fa fa-line-chart"></i> {{ 'app.admin.statistics.evolution' | translate }}</a>
+        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm charts-button" ui-sref="app.admin.stats_graphs" role="button"><i class="fa fa-line-chart"></i> {{ 'app.admin.statistics.evolution' | translate }}</a>
       </section>
     </div>
   </div>
 </section>
 
 
-<section class="m-lg">
+<section class="m-lg statistics"
+         ui-tour="statistics"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupStatisticsTour">
   <div class="row">
 
     <div class="col-md-12">

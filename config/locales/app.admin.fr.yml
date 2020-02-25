@@ -1205,7 +1205,7 @@ fr:
         statistics:
           welcome:
             title: "Statistiques"
-            content: "À partir d'ici, vous pourrez accéder à un ensemble de statistiques sur vos membres et leurs usages au sein de votre Fab Lab. Conformément à la RGPD, les utilisateurs ayant supprimé leur compte continent d'être rapportés dans les statistiques, mais de manière anonyme."
+            content: "<p>À partir d'ici, vous pourrez accéder à un ensemble de statistiques sur vos membres et leurs usages au sein de votre Fab Lab.</p><p>Conformément à la RGPD, les utilisateurs ayant supprimé leur compte continuent d'être rapportés dans les statistiques, mais de manière anonyme.</p>"
           export:
             title: "Exporter les données"
             content: "Vous pouvez choisir d'exporter tout ou partie des données statistiques vers un fichier Excel."
