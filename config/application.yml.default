@@ -26,6 +26,7 @@ USER_CONFIRMATION_NEEDED_TO_SIGN_IN: 'false'
 
 EVENTS_IN_CALENDAR: 'false'
 SLOT_DURATION: '60'
+FEATURE_TOUR_DISPLAY: 'once'
 
 DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
 

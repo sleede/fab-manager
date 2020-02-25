@@ -133,8 +133,8 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
           });
         }
       });
-      // if the user has never seen the tour, show him now
-      if ($scope.currentUser.profile.tours.indexOf('open-api') < 0) {
+      // if the user has never seen the tour, and if the display behavior is not configured to manual triggering only, show the tour now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('open-api') < 0) {
         uitour.start();
       }
       // start this tour when an user press F1 - this is contextual help

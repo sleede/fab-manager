@@ -30,6 +30,7 @@
       Fablab.phoneRequired = ('<%= Rails.application.secrets.phone_required %>' === 'true');
       Fablab.eventsInCalendar = ('<%= Rails.application.secrets.events_in_calendar %>' === 'true');
       Fablab.slotDuration = parseInt("<%= ApplicationHelper::SLOT_DURATION %>", 10);
+      Fablab.featureTourDisplay =  "<%= Rails.application.secrets.feature_tour_display %>";
       Fablab.disqusShortname = "<%= Rails.application.secrets.disqus_shortname %>";
       Fablab.defaultHost = "<%= Rails.application.secrets.default_host %>";
       Fablab.gaId = "<%= Rails.application.secrets.google_analytics_id %>";
