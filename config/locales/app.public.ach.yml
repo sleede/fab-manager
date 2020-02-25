@@ -294,7 +294,7 @@ ach:
         confirmation_required: "crwdns9305:0crwdne9305:0"
         do_you_really_want_to_delete_this_event: "crwdns9307:0crwdne9307:0"
         event_successfully_deleted: "crwdns9309:0crwdne9309:0"
-        unable_to_delete_the_event_because_some_users_alredy_booked_it: "crwdns9311:0crwdne9311:0"
+        unable_to_delete_the_event_because_some_users_alredy_booked_it: "crwdns19578:0crwdne19578:0"
         cancel_the_reservation: "crwdns9313:0crwdne9313:0"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "crwdns9315:0crwdne9315:0"
         reservation_was_successfully_cancelled: "crwdns9317:0crwdne9317:0"
