@@ -1154,7 +1154,7 @@ fr:
         pricing:
           welcome:
             title: "Abonnements & Tarifs"
-            content: "Gérez les formules d'abonnement et les prix des différents services que vous proposez à vos membres"
+            content: "Gérez les formules d'abonnement et les prix des différents services que vous proposez à vos membres."
           new_plan:
             title: "Nouvelle formule d'abonnement"
             content: "Créez des formules d'abonnement pour proposer des prix préférentiels sur les machines et les espaces, aux utilisateurs réguliers."
