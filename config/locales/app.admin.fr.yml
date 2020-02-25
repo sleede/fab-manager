@@ -1240,11 +1240,11 @@ fr:
           draft:
             title: "Brouillon"
             content: "Cliquez ici pour afficher un brouillon à trous d'une politique de confidentialité, qu'il ne vous reste plus qu'à relire et à compléter."
-          open_api:
-            welcome:
-              title: "OpenAPI"
-              content: "Fab-Manager propose une API ouverte permettant à des logiciels tiers de s'interfacer simplement avec ses données. Cet écran vous permet d'accorder des accès à cette API."
-            doc:
-              title: "Documentation"
-              content: "Cliquez ici pour accéder à la documentation en ligne de l'API"
+        open_api:
+          welcome:
+            title: "OpenAPI"
+            content: "Fab-Manager propose une API ouverte permettant à des logiciels tiers de s'interfacer simplement avec ses données. Cet écran vous permet d'accorder des accès à cette API."
+          doc:
+            title: "Documentation"
+            content: "Cliquez ici pour accéder à la documentation en ligne de l'API"
 

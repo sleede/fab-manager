@@ -3,7 +3,7 @@
 
         <div class="row">
             <div class="col-md-4 col-md-offset-1">
-              <select class="form-control m-b" ng-options="d.id as d.name for d in privacyDraftsHistory" ng-model="privacyPolicy.version" ng-change="handlePolicyRevisionChange()">
+              <select class="form-control m-b history-select" ng-options="d.id as d.name for d in privacyDraftsHistory" ng-model="privacyPolicy.version" ng-change="handlePolicyRevisionChange()">
                 <option value="" translate>{{ 'app.admin.settings.privacy.current_policy' }}</option>
               </select>
                 <div class="text-justify" ng-model="privacyPolicy.bodyTemp" medium-editor options='{"placeholder": "{{ "app.admin.settings.input_the_main_content" | translate }}",
