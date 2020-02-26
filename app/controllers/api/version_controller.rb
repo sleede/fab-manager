@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'version'
 
-# API Controller to get the fab-manager version
+# API Controller to get the Fab-manager version
 class API::VersionController < API::ApiController
   before_action :authenticate_user!
 

@@ -1,6 +1,6 @@
-# Contributing to FabManager
+# Contributing to Fab-manager
 
-♥ [FabManager](http://www.fab-manager.com) and want to get involved?
+♥ [Fab-manager](http://www.fab-manager.com) and want to get involved?
 Thanks! There are plenty of ways you can help!
 
 Please take a moment to review this document in order to make the contribution process easy and effective for everyone 

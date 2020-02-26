@@ -1000,10 +1000,10 @@ en:
           publish_will_notify: "Publish a new version will send a notification to every users."
           publish: "Publish"
           users_notified: "Platform users will be notified of the update."
-          about_analytics: "I agree to share anonymous data with the development team to help improve Fab-Manager."
+          about_analytics: "I agree to share anonymous data with the development team to help improve Fab-manager."
           read_more: "Which data do we collect?"
           analytics:
-            intro_analytics_html: "You'll find below a detailed view of all the data, Fab-Manager will collect <strong>if permission is granted.</strong>"
+            intro_analytics_html: "You'll find below a detailed view of all the data, Fab-manager will collect <strong>if permission is granted.</strong>"
             version: "Application version"
             members: "Number of members"
             admins: "Number of administrators"

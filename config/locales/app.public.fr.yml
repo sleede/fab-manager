@@ -123,8 +123,8 @@ fr:
 
         # Fab-manager's version
         version: "Version :"
-        upgrade_fabmanager: "Mettez à jour Fab-Manager"
-        current_version: "Vous utilisez actuellement la version {VERSION} de Fab-Manager."
+        upgrade_fabmanager: "Mettez à jour Fab-manager"
+        current_version: "Vous utilisez actuellement la version {VERSION} de Fab-manager."
         upgrade_to: "Une nouvelle version est disponible. Vous pouvez mettre à jour vers la version {VERSION}."
         read_more: "Voir les détails de cette version"
         security_version_html: "<strong>Votre version actuelle est vulnérable !</strong><br> Une version ultérieure, actuellement disponible, inclut des correctifs de sécurité. Mettez à jour dès que possible !"
@@ -382,10 +382,10 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "Affichez de l'aide en appuyant sur <strong>F1</strong> à n'importe quel moment.<br> Bonne continuation avec Fab-Manager."
+          content: "Affichez de l'aide en appuyant sur <strong>F1</strong> à n'importe quel moment.<br> Bonne continuation avec Fab-manager."
         welcome:
           welcome:
-            title: "Bienvenue dans Fab-Manager"
+            title: "Bienvenue dans Fab-manager"
             content: "Afin de vous aider à bien prendre en main l'application, nous allons procéder à une rapide visite guidée des fonctionnalités."
           home:
             title: "Page d'accueil"
@@ -413,7 +413,7 @@ fr:
             content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
           admin:
             title: "Section administrateur"
-            content: "L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-Manager. À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus."
+            content: "L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-manager. À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus."
           about:
             title: "À propos"
             content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité."
@@ -422,10 +422,10 @@ fr:
             content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici."
           profile:
             title: "Menu utilisateur"
-            content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-Manager."
+            content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager."
           version:
             title: "Version de l'application"
-            content: "Passez votre curseur sur cette icône pour connaître la version de Fab-Manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
+            content: "Passez votre curseur sur cette icône pour connaître la version de Fab-manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
         machines:
           welcome:
             title: "Gérer les machines"

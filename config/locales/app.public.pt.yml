@@ -123,8 +123,8 @@ pt:
 
         # Fab-manager's version
         version: "Versão:"
-        upgrade_fabmanager: "Upgrade Fab-Manager"
-        current_version: "You are currently using version {VERSION} of Fab-Manager."
+        upgrade_fabmanager: "Upgrade Fab-manager"
+        current_version: "You are currently using version {VERSION} of Fab-manager."
         upgrade_to: "A new release is available. You can upgrade up to version {VERSION}."
         read_more: "View the details of this release"
         security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"

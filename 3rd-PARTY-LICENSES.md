@@ -1,5 +1,5 @@
 
-Fab-Manager uses some external components, which are licenced under the
+Fab-manager uses some external components, which are licenced under the
 terms of the following licences:
 
 - [Apache 2 license](http://www.apache.org/licenses/LICENSE-2.0):

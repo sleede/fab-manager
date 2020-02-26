@@ -8,7 +8,7 @@ class HealthController < ActionController::Base
     require 'version'
 
     render json: {
-      name: 'Fab-Manager',
+      name: 'Fab-manager',
       status: 'running',
       dependencies: {
         postgresql: HealthService.database?,

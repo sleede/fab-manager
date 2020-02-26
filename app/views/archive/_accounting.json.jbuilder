@@ -37,7 +37,7 @@ json.totals do
 end
 
 json.software do
-  json.name 'Fab-Manager'
+  json.name 'Fab-manager'
   json.version software_version
   json.code_checksum code_checksum
 end

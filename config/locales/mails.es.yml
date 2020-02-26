@@ -291,7 +291,7 @@ es:
 
     notify_admin_free_disk_space:
       subject: "Low disk space"
-      body: "Warning: available disk space on the server hosting fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
+      body: "Warning: available disk space on the server hosting Fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
 
     notify_admin_close_period_reminder:
       subject: "Remind to close your accounting periods"

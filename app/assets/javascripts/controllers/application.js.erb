@@ -37,7 +37,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         $rootScope.currentUser = user;
         Session.create(user);
         getNotifications();
-        // fab-manager's app-version
+        // Fab-manager's app-version
         if (user.role === 'admin') {
           return $scope.version = Version.get();
         } else {

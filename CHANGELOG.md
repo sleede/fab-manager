@@ -223,7 +223,7 @@
 - Improved date checks before closing an accounting period
 - Paginate list of coupons
 - Allow filtering coupons list
-- Fix a bug: when VAT has changed during fab-manager's lifecycle, this may not be reflected in archives
+- Fix a bug: when VAT has changed during Fab-manager's lifecycle, this may not be reflected in archives
 - Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
 
 ## v3.0.1 2019 April 1st
@@ -256,7 +256,7 @@
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
 - [TODO DEPLOY] add `DISK_SPACE_MB_ALERT` and `SUPERADMIN_EMAIL` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the `accounting` volume to the fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
+- [TODO DEPLOY] add the `accounting` volume to the Fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
 
 ## v2.8.4 2019 March 18
 
@@ -395,7 +395,7 @@
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
-- Set Stripe API version, all fab-managers has to use this version because codebase relies on it
+- Set Stripe API version, all Fab-managers has to use this version because codebase relies on it
 - Fix a security issue: OmniAuth < 1.3.2  has a security vulnerability described in [CVE-2017-18076](https://nvd.nist.gov/vuln/detail/CVE-2017-18076)
 - Fix a security issue: rack-protection < 1.5.5 has a security vulnerability described in [CVE-2018-1000119](https://nvd.nist.gov/vuln/detail/CVE-2018-1000119)
 - Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency 
@@ -666,7 +666,7 @@
 - Project images will show in full-size on a click
 - Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
 - Share project with Facebook/Twitter
-- Display fab-manager's version in "Powered by" label, when logged as admin
+- Display Fab-manager's version in "Powered by" label, when logged as admin
 - Load translation locales from subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events
