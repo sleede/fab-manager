@@ -1073,7 +1073,7 @@ fr:
             content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
           trainings:
             title: "Gérer les formations"
-            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet [Gérer le calendrier].</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
+            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur [Agenda].</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
           filter:
             title: "Filtre"
             content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."

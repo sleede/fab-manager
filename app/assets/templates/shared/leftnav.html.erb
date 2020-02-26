@@ -63,7 +63,7 @@
             </li>
             <!-- Common menu entries -->
             <li class="{{navLink.class}}" ng-repeat="navLink in navLinks">
-              <a ng-click="toggleNavSize($event)" ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav">
+              <a ng-click="toggleNavSize($event)" ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav" ng-if="navLink.state">
                 <i class="fa fa-{{navLink.linkIcon}} fa-lg"></i>
                 <span>{{navLink.linkText | translate}}</span>
               </a>
@@ -74,8 +74,8 @@
           <div class="line-s bg-red-dark dk " ng-if="isAuthorized('admin')"></div>
           <div class="text-xs font-bold text-bordeau hidden-nav-xs padder m-t-lg m-b-sm admin-section" ng-if="isAuthorized('admin')" translate>{{ 'app.public.common.admin' }}</div>
           <ul class="nav" ng-if="isAuthorized('admin')">
-            <li class="" ng-repeat="navLink in adminNavLinks">
-              <a ng-click="toggleNavSize($event)" ga ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav">
+            <li class="{{navLink.class}}" ng-repeat="navLink in adminNavLinks">
+              <a ng-click="toggleNavSize($event)" ga ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav" ng-if="navLink.state">
                 <i class="fa fa-{{navLink.linkIcon}} fa-lg"></i>
                 <span>{{navLink.linkText | translate}}</span>
               </a>

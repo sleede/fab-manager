@@ -22,7 +22,13 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       linkIcon: 'home',
       class: 'home-link'
     },
-
+    { class: 'menu-spacer' },
+    {
+      state: 'app.public.calendar',
+      linkText: 'app.public.common.public_calendar',
+      linkIcon: 'calendar',
+      class: 'public-calendar-link'
+    },
     {
       state: 'app.public.machines_list',
       linkText: 'app.public.common.reserve_a_machine',
@@ -41,18 +47,14 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       linkIcon: 'tags',
       class: 'reserve-event-link'
     },
-    {
-      state: 'app.public.calendar',
-      linkText: 'app.public.common.public_calendar',
-      linkIcon: 'calendar',
-      class: 'public-calendar-link'
-    },
+    { class: 'menu-spacer' },
     {
       state: 'app.public.projects_list',
       linkText: 'app.public.common.projects_gallery',
       linkIcon: 'th',
       class: 'projects-gallery-link'
-    }
+    },
+    { class: 'menu-spacer' }
 
   ];
 
@@ -66,7 +68,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   }
 
   if (!Fablab.withoutSpaces) {
-    $scope.navLinks.splice(3, 0, {
+    $scope.navLinks.splice(4, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.reserve_a_space',
       linkIcon: 'rocket',
@@ -77,34 +79,9 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   Fablab.adminNavLinks = Fablab.adminNavLinks || [];
   const adminNavLinks = [
     {
-      state: 'app.admin.trainings',
-      linkText: 'app.public.common.trainings_monitoring',
-      linkIcon: 'graduation-cap'
-    },
-    {
       state: 'app.admin.calendar',
       linkText: 'app.public.common.manage_the_calendar',
       linkIcon: 'calendar'
-    },
-    {
-      state: 'app.admin.members',
-      linkText: 'app.public.common.manage_the_users',
-      linkIcon: 'users'
-    },
-    {
-      state: 'app.admin.invoices',
-      linkText: 'app.public.common.manage_the_invoices',
-      linkIcon: 'file-pdf-o'
-    },
-    {
-      state: 'app.admin.pricing',
-      linkText: 'app.public.common.subscriptions_and_prices',
-      linkIcon: 'money'
-    },
-    {
-      state: 'app.admin.events',
-      linkText: 'app.public.common.manage_the_events',
-      linkIcon: 'tags'
     },
     {
       state: 'app.public.machines_list',
@@ -112,19 +89,46 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
       linkIcon: 'cogs'
     },
     {
-      state: 'app.admin.project_elements',
-      linkText: 'app.public.common.manage_the_projects_elements',
-      linkIcon: 'tasks'
+      state: 'app.admin.trainings',
+      linkText: 'app.public.common.trainings_monitoring',
+      linkIcon: 'graduation-cap'
+    },
+    {
+      state: 'app.admin.events',
+      linkText: 'app.public.common.manage_the_events',
+      linkIcon: 'tags'
+    },
+    { class: 'menu-spacer' },
+    {
+      state: 'app.admin.members',
+      linkText: 'app.public.common.manage_the_users',
+      linkIcon: 'users'
+    },
+    {
+      state: 'app.admin.pricing',
+      linkText: 'app.public.common.subscriptions_and_prices',
+      linkIcon: 'money'
+    },
+    {
+      state: 'app.admin.invoices',
+      linkText: 'app.public.common.manage_the_invoices',
+      linkIcon: 'file-pdf-o'
     },
     {
       state: 'app.admin.statistics',
       linkText: 'app.public.common.statistics',
       linkIcon: 'bar-chart-o'
     },
+    { class: 'menu-spacer' },
     {
       state: 'app.admin.settings',
       linkText: 'app.public.common.customization',
       linkIcon: 'gear'
+    },
+    {
+      state: 'app.admin.project_elements',
+      linkText: 'app.public.common.manage_the_projects_elements',
+      linkIcon: 'tasks'
     },
     {
       state: 'app.admin.open_api_clients',
@@ -136,7 +140,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   $scope.adminNavLinks = adminNavLinks;
 
   if (!Fablab.withoutSpaces) {
-    return $scope.adminNavLinks.splice(7, 0, {
+    return $scope.adminNavLinks.splice(4, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.manage_the_spaces',
       linkIcon: 'rocket'

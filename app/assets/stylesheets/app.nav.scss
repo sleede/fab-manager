@@ -89,6 +89,10 @@
 				}
 			}
 		}
+        > li.menu-spacer {
+          margin: 6px 80% 6px 5px;
+          border-bottom: 1px solid white;
+        }
 		ul{
 			display: none;
 		}
