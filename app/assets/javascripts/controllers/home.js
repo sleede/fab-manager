@@ -1,11 +1,20 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'homeContentPromise', 'Member', 'uiTourService', '_t',
-  function ($scope, $stateParams, homeContentPromise, Member, uiTourService, _t) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'settingsPromise', 'Member', 'uiTourService', '_t',
+  function ($scope, $stateParams, settingsPromise, Member, uiTourService, _t) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
     $scope.homeContent = null;
+
+    // Status of the components in the home page (exists or not?)
+    $scope.status = {
+      news: false,
+      projects: false,
+      twitter: false,
+      members: false,
+      events: false
+    };
 
     /* PRIVATE SCOPE */
 
@@ -20,7 +29,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       }
 
       // We set the home page content, with the directives replacing the placeholders
-      $scope.homeContent = insertDirectives(homeContentPromise.setting.value);
+      $scope.homeContent = insertDirectives(settingsPromise.home_content);
 
       // setup the tour for admins
       if ($scope.currentUser && $scope.currentUser.role === 'admin') {
@@ -45,26 +54,31 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       node.querySelectorAll('div#news').forEach((newsNode) => {
         const news = document.createElement('news');
         newsNode.parentNode.replaceChild(news, newsNode);
+        $scope.status.news = true;
       });
 
       node.querySelectorAll('div#projects').forEach((projectsNode) => {
         const projects = document.createElement('projects');
         projectsNode.parentNode.replaceChild(projects, projectsNode);
+        $scope.status.projects = true;
       });
 
       node.querySelectorAll('div#twitter').forEach((twitterNode) => {
         const twitter = document.createElement('twitter');
         twitterNode.parentNode.replaceChild(twitter, twitterNode);
+        $scope.status.twitter = true;
       });
 
       node.querySelectorAll('div#members').forEach((membersNode) => {
         const members = document.createElement('members');
         membersNode.parentNode.replaceChild(members, membersNode);
+        $scope.status.members = true;
       });
 
       node.querySelectorAll('div#events').forEach((eventsNode) => {
         const events = document.createElement('events');
         eventsNode.parentNode.replaceChild(events, eventsNode);
+        $scope.status.events = true;
       });
 
       return node.outerHTML;
@@ -185,10 +199,69 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         content: _t('app.public.tour.welcome.profile.content'),
         placement: 'bottom'
       });
+      if ($scope.status.news && settingsPromise.home_blogpost) {
+        uitour.createStep({
+          selector: 'news',
+          stepId: 'news',
+          order: 13,
+          title: _t('app.public.tour.welcome.news.title'),
+          content: _t('app.public.tour.welcome.news.content'),
+          placement: 'bottom'
+        });
+      }
+      if ($scope.status.projects) {
+        uitour.createStep({
+          selector: 'projects',
+          stepId: 'last_projects',
+          order: 14,
+          title: _t('app.public.tour.welcome.last_projects.title'),
+          content: _t('app.public.tour.welcome.last_projects.content'),
+          placement: 'top'
+        });
+      }
+      if ($scope.status.twitter) {
+        uitour.createStep({
+          selector: 'twitter',
+          stepId: 'last_tweet',
+          order: 15,
+          title: _t('app.public.tour.welcome.last_tweet.title'),
+          content: _t('app.public.tour.welcome.last_tweet.content'),
+          placement: 'left'
+        });
+      }
+      if ($scope.status.members) {
+        uitour.createStep({
+          selector: 'members',
+          stepId: 'last_members',
+          order: 16,
+          title: _t('app.public.tour.welcome.last_members.title'),
+          content: _t('app.public.tour.welcome.last_members.content'),
+          placement: 'left'
+        });
+      }
+      if ($scope.status.events) {
+        uitour.createStep({
+          selector: 'events',
+          stepId: 'next_events',
+          order: 17,
+          title: _t('app.public.tour.welcome.next_events.title'),
+          content: _t('app.public.tour.welcome.next_events.content'),
+          placement: 'top'
+        });
+      }
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'customize',
+        order: 18,
+        title: _t('app.public.tour.welcome.customize.title'),
+        content: _t('app.public.tour.welcome.customize.content'),
+        placement: 'bottom',
+        orphan: 'true'
+      });
       uitour.createStep({
         selector: '.app-generator .app-version',
         stepId: 'version',
-        order: 13,
+        order: 19,
         title: _t('app.public.tour.welcome.version.title'),
         content: _t('app.public.tour.welcome.version.content'),
         placement: 'top'
@@ -196,7 +269,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 14,
+        order: 20,
         title: _t('app.public.tour.conclusion.title'),
         content: _t('app.public.tour.conclusion.content'),
         placement: 'bottom',

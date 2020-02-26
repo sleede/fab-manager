@@ -12,8 +12,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
-  function ($rootScope, $scope, $window, $locale, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
+Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
+  function ($rootScope, $scope, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
@@ -267,8 +267,12 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       toggler.toggleClass('active');
     };
 
+    /**
+     * Open the modal dialog showing that an upgrade is available
+     */
     $scope.versionModal = function() {
       if ($scope.version.up_to_date) return;
+      if ($rootScope.currentUser.role !== 'admin') return;
 
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/versions/upgradeModal.html" %>',
@@ -276,6 +280,20 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         resolve: {
           version() { return $scope.version; }
         }
+      });
+    }
+
+    /**
+     * Trigger the contextual help "feature tour".
+     * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
+    $scope.help = function (event) {
+      event.preventDefault();
+
+      // we wrap the event triggering into a $timeout to prevent conflicting with current $apply
+      $timeout(function () {
+        var evt = new KeyboardEvent('keydown', { key: 'F1' });
+        window.dispatchEvent(evt);
       });
     }
 

@@ -23,6 +23,9 @@ fr:
         my_invoices: "Mes factures"
         my_wallet: "Mon porte-monnaie"
 
+        # aide contextuelle
+        help: "Aide"
+
         # connexion / déconnexion
         sign_out: "Se déconnecter"
         sign_up: "S'inscrire"
@@ -382,7 +385,7 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "Affichez de l'aide en appuyant sur <strong>F1</strong> à n'importe quel moment.<br> Bonne continuation avec Fab-manager."
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         welcome:
           welcome:
             title: "Bienvenue dans Fab-manager"
@@ -423,6 +426,24 @@ fr:
           profile:
             title: "Menu utilisateur"
             content: "<p>Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager.</p><p>Cet espace est également disponible pour tous vos membres.</p>"
+          news:
+            title: "Les brèves"
+            content: "<p>Cet espace vous permet d'afficher les dernières actualités de votre structure.</p><p>Vous pouvez facilement changer son contenu depuis [Personnalisation] > [Page d'accueil].</p>"
+          last_projects:
+            title: "les derniers projets"
+            content: "<p>Ce carousel fait défiler les derniers projets documentés par vos membres.</p>"
+          last_tweet:
+            title: "Dernier tweet"
+            content: "<p>La dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configurez-le depuis [Personnalisation] > [Page d'accueil].</p>"
+          last_members:
+            title: "Derniers membres"
+            content: "Les derniers members inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
+          next_events:
+            title: "Prochains évènements"
+            content: "Les trois prochains évènements programmés sont affichés dans cette espace."
+          customize:
+            title: "Personnalisez la page d'accueil"
+            content: "<p>Cette page peut être entièrement personnalisée.</p><p>Vous pouvez <a href='mailto:contact@fab-manager.com'>nous contactez</a> pour réaliser une personnalisation sur mesure de la page d'accueil.</p>"
           version:
             title: "Version de l'application"
             content: "Passez votre curseur sur cette icône pour connaître la version de Fab-manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
