@@ -333,14 +333,16 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         content: _t('app.admin.tour.members.filter.content'),
         placement: 'bottom'
       });
-      uitour.createStep({
-        selector: '.members-management .members-list .buttons-col',
-        stepId: 'actions',
-        order: 4,
-        title: _t('app.admin.tour.members.actions.title'),
-        content: _t('app.admin.tour.members.actions.content'),
-        placement: 'left'
-      });
+      if ($scope.members.length > 0) {
+        uitour.createStep({
+          selector: '.members-management .members-list .buttons',
+          stepId: 'actions',
+          order: 4,
+          title: _t('app.admin.tour.members.actions.title'),
+          content: _t('app.admin.tour.members.actions.content'),
+          placement: 'left'
+        });
+      }
       uitour.createStep({
         selector: '.members-management .exports-buttons',
         stepId: 'exports',

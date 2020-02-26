@@ -453,13 +453,13 @@ fr:
             content: "<p>Les machines sont les outils que vous mettez à disposition de vos utilisateurs. Vous devez créer ici les machines qui pourront ensuite être réservées par les membres.</p><p>Vous pouvez également créer des entrées pour des machines non réservables ou en libre accès, il vous suffira ensuite de ne pas associer de créneaux de disponibilités à celles-ci.</p>"
           view:
             title: "Consulter"
-            content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez par supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
+            content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez pas supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
         spaces:
           welcome:
             title: "Gérer les espaces"
             content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
           view:
             title: "Consulter"
-            content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez par supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
+            content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez pas supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
 
 

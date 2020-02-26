@@ -1092,7 +1092,7 @@ fr:
         members:
           welcome:
             title: "Gestion des utilisateurs"
-            content: "Ici vous pourrez créer, modifier et supprimer des membres et des administrateurs. Vous pourrez également réaliser des imports et des exports avec des fichiers de tableur, ou connecter un logiciel de SSO."
+            content: "Ici vous pourrez créer, modifier et supprimer des membres et des administrateurs. Vous pourrez également gérer les groupes, les étiquettes, réaliser des imports / exports avec des fichiers de tableur et connecter un logiciel de SSO."
           list:
             title: "Liste des membres"
             content: "Par défaut, ce tableau liste l'ensemble des membres de votre Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
@@ -1101,7 +1101,7 @@ fr:
             content: "Ce champ de saisie vous permet de faire une recherche en texte libre sur l'ensemble des colonnes du tableau ci-dessous."
           filter:
             title: "Filtrer la liste"
-            content: "Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.<br>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans."
+            content: "<p>Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.</p><p>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans.</p>"
           actions:
             title: "Actions sur le membre"
             content: "<p>Les boutons dans cette colonne vous permettent d'afficher et de modifier l'ensemble des paramètres du membre, ou alors de le supprimer de manière irréversible.</p><p>En cas de suppression, les informations de facturation seront néanmoins conservées pendant 10 ans et des données statistiques seront également conservées de manière anonyme.</p>"
@@ -1116,23 +1116,23 @@ fr:
             content: "De la même manière que les membres, gérez ici les administrateurs de votre Fab-manager.<br>Les administrateurs peuvent prendre des réservations pour n'importe quel membre ainsi que modifier l'ensemble des paramètres du logiciel."
           groups:
             title: "Gérer les groupes"
-            content: "Les groupes vous permettent de segmenter finement votre offre tarifaire."
+            content: "Les groupes vous permettent de mieux segmenter votre offre tarifaire."
           labels:
             title: "Gérer les étiquettes"
-            content: "Les étiquettes vous permettent de réserver certains créneaux, aux utilisateurs associés à ces mêmes étiquettes."
+            content: "Les étiquettes vous permettent de réserver certains créneaux aux utilisateurs associés à ces mêmes étiquettes."
           sso:
             title: "Authentification unique"
             content: "Ici vous pourrez mettre en place et gérer un système d'authentification unique (ou Single Sign-On - SSO)."
         invoices:
           welcome:
             title: "Gérer les factures"
-            content: "Ici, vous pourrez télécharger des factures émises et gérer tout ce qui a trait à la comptabilité et à la facturation."
+            content: "<p>Ici, vous pourrez télécharger les factures et les avoirs émis, ainsi que gérer tout ce qui a trait à la comptabilité et à la facturation.</p><p>Si vous utilisez un logiciel tiers pour gérer vos factures, il est possible de désactiver le module de facturation. Pour cela, contactez votre administrateur système.</p>"
           list:
             title: "Liste des factures"
-            content: "Par défaut, ce tableau liste l'ensemble des factures émises via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+            content: "Par défaut, ce tableau liste l'ensemble des factures et avoirs émis via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
           chained:
             title: "Indicateur de chaînage"
-            content: "Cette icône assure l'inaltérablité des données comptables liées à la facture sur cette ligne. Si une icône rouge apparaît au lieu de cette-ci, merci de contactez immédiatement le support technique."
+            content: "<p>Cette icône assure l'inaltérablité des données comptables de la facture sur cette ligne, conformément à la loi de finances française de 2018 contre la fraude à la TVA.</p><p>Si une icône rouge apparaît au lieu de celle-ci, merci de contactez immédiatement le support technique.</p>"
           download:
             title: "Télécharger"
             content: "Cliquez ici pour télécharger la facture au format PDF."
@@ -1141,7 +1141,7 @@ fr:
             content: "Permet de générer un avoir sur la facture de cette ligne ou certains de ses sous-éléments. <strong>Attention :</strong> Cela générera uniquement le document comptable, le remboursement effectif de l'utilisateur restera toujours à votre charge."
           settings:
             title: "Paramètres"
-            content: "Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition."
+            content: "<p>Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition.</p><p>C'est notamment ici que vous pourrez définir si vous êtes assujettis à la TVA et à quel taux.</p>"
           codes:
             title: "Codes comptables"
             content: "Paramétrez ici les codes comptables pour tous les types d'écritures générés par le logiciel. Ce paramétrage n'est requis que si vous utilisez la fonctionnalité d'export comptable."
@@ -1150,7 +1150,7 @@ fr:
             content: "Une fois les codes configurés, cliquez ici pour accéder à l'interface vous permettant d'exporter les écritures vers un logiciel comptable tiers."
           periods:
             title: "Clôturer les périodes comptables"
-            content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la certification anti-fraude TVA, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, si vous récupérez la TVA pour le compte de l'état et que certains de vos clients sont des particuliers, vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel à la certification anti-fraude.</p>"
+            content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la loi anti-fraude TVA <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, en cas d'obligation d'utilisation d'un logiciel certifié (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>faites le test ici</a>), vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel. <a href='mailto:contact@fab-manager.com'>Contactez-nous<a/> pour l'obtenir.</p>"
         pricing:
           welcome:
             title: "Abonnements & Tarifs"
@@ -1166,17 +1166,17 @@ fr:
             content: "Définissez ici les prix des créneaux machine, par groupe d'utilisateurs. Ces prix seront appliqués aux utilisateurs qui n'ont pas d'abonnement."
           spaces:
             title: "Espaces"
-            content: "De la même manière, définissez ici les prix des créneaux espace pour les utilisateurs sans abonnement."
+            content: "De la même manière, définissez ici les prix des créneaux des espaces, pour les utilisateurs sans abonnement."
           credits:
             title: "Crédits"
-            content: "<p>Les crédits vous permettent d'offir certains services aux utilisateurs qui souscrivent à un abonnement.</p><p>Vous pouvez, par exemple, offrir 2h d'imprimante 3D pour tous les abonnements annuels ; ou une formation au choix pour les abonnés étudiants, etc.</p>"
+            content: "<p>Les crédits vous permettent d'offrir certains services aux utilisateurs qui souscrivent à un abonnement.</p><p>Vous pouvez, par exemple, offrir 2h d'imprimante 3D pour tous les abonnements annuels ; ou une formation au choix pour les abonnés étudiants, etc.</p>"
           coupons:
             title: "Codes promotionnels"
             content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
         events:
           welcome:
             title: "Gérer les évènements"
-            content: "Créez des évènements, suivez leurs réservations et organisez les depuis cette page."
+            content: "Créez des évènements, suivez leurs réservations et organisez-les depuis cette page."
           list:
             title: "Les évènements"
             content: "Cette liste affiche l'ensemble des évènements passés ou à venir, ainsi que le nombre de réservations pour chacun d'eux."
@@ -1185,13 +1185,13 @@ fr:
             content: "N'affichez que les évènements à venir dans la liste ci-dessous ; ou au contraire, uniquement ceux déjà passés."
           categories:
             title: "Les catégories"
-            content: "Les catégories aident vos utilisateurs à savoir de quelle façon l'évènement va se dérouler. Une catégorie est requise pour chaque nouvel évènement créé."
+            content: "Les catégories aident vos utilisateurs à savoir de quel type d'évènement il s'agit. Une catégorie est requise pour chacun des évènements nouvellement créé."
           themes:
             title: "Les thématique"
-            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos évènements. Elles peuvent de regrouper différents évènements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la catégorie « menuiserie ».</p>"
+            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos évènements. Elles peuvent regrouper différents évènements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la thématique « menuiserie ».</p>"
           ages:
             title: "Les tranches d'âge"
-            content: "Cet autre filtre optionnel, aidera vos utilisateurs à trouver des évènements adaptés à leur profil."
+            content: "Cet autre filtre optionnel aidera vos utilisateurs à trouver des évènements adaptés à leur profil."
           prices:
             title: "Catégories tarifaires"
             content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
@@ -1230,7 +1230,7 @@ fr:
             content: "À tout moment, vous pouvez restaurer la page d'accueil initiale en cliquant ici."
           css:
             title: "Personnaliser la feuille de style"
-            content: "Pour les utilisateurs avancés, il est possible de définir une feuille de style personnalisée pour la page d'accueil."
+            content: "Pour les utilisateurs avancés, il est possible de définir une feuille de style (CSS) personnalisée pour la page d'accueil."
           about:
             title: "À propos"
             content: "Personnalisez entièrement cette page pour présenter votre activité."
