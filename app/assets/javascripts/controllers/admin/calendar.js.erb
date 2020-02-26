@@ -486,7 +486,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
  */
 Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'growl', '_t',
   function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, growl, _t) {
-  // $uibModal parameter
+    // $uibModal parameter
     $scope.start = start;
 
     // $uibModal parameter
@@ -552,6 +552,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // localized name(s) of the selected tag(s)
     $scope.tagsName = '';
+
+    // make the duration available for display
+    $scope.slotDuration = Fablab.slotDuration;
 
     /**
      * Adds or removes the provided machine from the current slot

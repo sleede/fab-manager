@@ -159,6 +159,7 @@
       <ul>
         <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
       </ul>
+      <div class="alert alert-warning" translate translate-values="{DURATION: slotDuration}"> {{ 'app.admin.calendar.divided_in_slots' }} </div>
       <div>
         <span class="underline" translate>{{ 'app.admin.calendar.reservable' }}</span>
         <span ng-bind-html="reservableName"></span>
