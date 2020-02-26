@@ -28,12 +28,19 @@
          ui-tour-scroll-parent-id="content-main"
          post-render="setupSpacesTour">
 
-  <div class="form-group row">
-    <div class="input-group col-md-3 m-l-lg m-b">
-      <span class="input-group-addon"><i class="fa fa-filter"></i></span>
-      <select ng-model="spaceFiltering" class="form-control">
-        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'app.public.spaces_list.status_'+status }}</option>
-      </select>
+  <div class="row">
+    <div class="col-md-3 form-group">
+      <div class="input-group m-l-lg m-b">
+        <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+        <select ng-model="spaceFiltering" class="form-control">
+          <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'app.public.spaces_list.status_'+status }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3 col-md-offset-6 m-t-n row-centered" ng-if="isAuthorized('admin')">
+      <a role="button" ui-sref="app.admin.calendar" class="btn btn-lg btn-default rounded m-t-sm text-sm">
+        <i class="fa fa-calendar-check-o m-r" aria-hidden="true"></i><span translate>{{ 'app.public.spaces_list.new_availability' }}</span>
+      </a>
     </div>
   </div>
 

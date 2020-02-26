@@ -223,6 +223,7 @@ fr:
         # liste des machines
         the_fablab_s_machines: "Les machines du FabLab"
         add_a_machine: "Ajouter une machine"
+        new_availability: "Ouvrir des réservations"
         book: "Réserver"
         _or_the_: " ou la "
         status_enabled: "Actives"
@@ -365,6 +366,7 @@ fr:
       spaces_list:
         # liste des espaces
         the_spaces: "Les espaces"
+        new_availability: "Ouvrir des réservations"
         add_a_space: "Ajouter un espace"
         status_enabled: "Activés"
         status_disabled: "Désactivés"

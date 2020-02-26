@@ -42,6 +42,9 @@ fr:
         select_some_machines: "Sélectionnez des machines"
         select_all: "Toutes"
         select_none: "Aucune"
+        manage_machines: "Cliquez-ici pour ajouter ou supprimer des machines."
+        manage_spaces: "Cliquez-ici pour ajouter ou supprimer des espaces."
+        manage_trainings: "Cliquez-ici pour ajouter ou supprimer des formations."
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
         to_time: "à"  # eg. from 18:00 to 21:00
@@ -129,6 +132,7 @@ fr:
       trainings:
         # suivre et surveiller les formations
         trainings_monitoring: "Suivi formations"
+        plan_session: "Planifier une nouvelle session"
         trainings: "Formations"
         add_a_new_training: "Ajouter une nouvelle formation"
         name: "Nom"
