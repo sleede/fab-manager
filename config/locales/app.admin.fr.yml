@@ -1003,6 +1003,7 @@ fr:
           about_analytics: "J'accepte de partager des données anonymes avec l'équipe de développement pour aider à améliorer Fab-manager."
           read_more: "Quelles informations collectons-nous ?"
           analytics:
+            title: "Amélioration de l'application"
             intro_analytics_html: "Vous trouverez ci-dessous une vue détaillée de toutes les données de Fab-manager collectera <strong>si l'autorisation lui est accordée.</strong>"
             version: "Version de l'application"
             members: "Nombre de membres"

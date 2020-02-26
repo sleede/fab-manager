@@ -1,4 +1,7 @@
 <div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.privacy.title' }}</span>
+  </div>
     <div class="panel-body">
 
         <div class="row">
@@ -25,9 +28,16 @@
             </div>
 
         </div>
+    </div>
+</div>
 
+<div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.privacy.analytics.title' }}</span>
+  </div>
+    <div class="panel-body">
       <div class="row">
-        <div class="col-md-10 col-md-offset-1 m-t-lg">
+        <div class="col-md-10 col-md-offset-1">
           <label for="is_recurrent" translate>{{ 'app.admin.settings.fab_analytics' }}</label>
           <input bs-switch
                  ng-model="fabAnalytics.value"
