@@ -89,6 +89,7 @@ fr:
         view_reservations: "Voir les réservations"
         legend: "Légende"
         and: "et"
+        external_sync: "Synchronisation d'agendas"
 
       icalendar:
         icalendar_import: "Import iCalendar"
@@ -1064,26 +1065,23 @@ fr:
         trainings:
           welcome:
             title: "Suivi formations"
-            content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez validez les formations des membres."
-          machines:
-            title: "Machines associées"
-            content: "Pour pouvoir réserver une des machines listée ici, un membre devra préalablement avoir suivi l'une des formation associée."
-          tickets:
-            title: "Nombre de places"
-            content: "Nombre de places par défaut pour la formation. Vous pourrez surcharger ce nombre de place chaque fois que vous planifierez une session de formation."
+            content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
+          trainings:
+            title: "Gérer les formations"
+            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet [Gérer le calendrier].</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
           filter:
             title: "Filtre"
             content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."
           tracking:
             title: "Suivi formations"
-            content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées."
+            content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées, le cas échéant."
         calendar:
           welcome:
             title: "Gestion du calendrier"
-            content: "À partir de cet écran, vous pourrez planifier de sessions de formation ou des créneaux, durant lesquels les machines / espaces seront reservable par les membres."
+            content: "À partir de cet écran, vous pourrez planifier les créneaux durant lesquels les formations, machines et espaces seront réservables par les membres."
           agenda:
             title: "L'agenda"
-            content: "Cliquez dans l'agenda pour commencer la création d'une nouvelle plage de disponibilité. En maintenant votre clic, vous pouvez sélectionner directement toute la plage horaire souhaitée."
+            content: "Cliquez dans l'agenda pour commencer la création d'une nouvelle plage de disponibilité. Vous pouvez sélectionner directement toute la plage horaire souhaitée en maintenant votre clic."
           export:
             title: "Exporter"
             content: "Lancez la génération d'un fichier Excel, listant l'ensemble des créneaux de disponibilité créés dans l'agenda."

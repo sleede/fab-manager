@@ -5,16 +5,16 @@
         <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 b-l b-r-md">
+    <div class="col-md-8 b-l b-r-md">
       <section class="heading-title">
         <h1 translate>{{ 'app.admin.calendar.calendar_management' }}</h1>
       </section>
     </div>
 
-    <div class="col-xs-1">
+    <div class="col-md-3">
       <section class="heading-actions wrapper">
-        <a role="button" ui-sref="app.admin.calendar.icalendar" class="btn btn-default b-2x rounded pointer m-t-sm import-ics-button">
-          <i class="fa fa-exchange" aria-hidden="true"></i>
+        <a role="button" ui-sref="app.admin.calendar.icalendar" class="btn btn-lg btn-default rounded m-t-sm text-sm import-ics-button">
+          <i class="fa fa-exchange m-r" aria-hidden="true"></i><span translate>{{ 'app.admin.calendar.external_sync' }}</span>
         </a>
       </section>
     </div>

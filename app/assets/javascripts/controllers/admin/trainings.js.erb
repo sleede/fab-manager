@@ -352,25 +352,17 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
         orphan: true
       });
       uitour.createStep({
-        selector: '.trainings-monitoring .trainings-list tr>th:nth-child(2)',
-        stepId: 'machines',
+        selector: '.trainings-monitoring .manage-trainings',
+        stepId: 'trainings',
         order: 1,
-        title: _t('app.admin.tour.trainings.machines.title'),
-        content: _t('app.admin.tour.trainings.machines.content'),
-        placement: 'top'
-      });
-      uitour.createStep({
-        selector: '.trainings-monitoring .trainings-list tr>th:nth-child(3)',
-        stepId: 'tickets',
-        order: 2,
-        title: _t('app.admin.tour.trainings.tickets.title'),
-        content: _t('app.admin.tour.trainings.tickets.content'),
-        placement: 'top'
+        title: _t('app.admin.tour.trainings.trainings.title'),
+        content: _t('app.admin.tour.trainings.trainings.content'),
+        placement: 'bottom'
       });
       uitour.createStep({
         selector: '.trainings-monitoring .filter-trainings',
         stepId: 'filter',
-        order: 3,
+        order: 2,
         title: _t('app.admin.tour.trainings.filter.title'),
         content: _t('app.admin.tour.trainings.filter.content'),
         placement: 'left'
@@ -378,7 +370,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       uitour.createStep({
         selector: '.trainings-monitoring .post-tracking',
         stepId: 'tracking',
-        order: 4,
+        order: 3,
         title: _t('app.admin.tour.trainings.tracking.title'),
         content: _t('app.admin.tour.trainings.tracking.content'),
         placement: 'bottom'
@@ -386,7 +378,7 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       uitour.createStep({
         selector: 'body',
         stepId: 'conclusion',
-        order: 5,
+        order: 4,
         title: _t('app.admin.tour.conclusion.title'),
         content: _t('app.admin.tour.conclusion.content'),
         placement: 'bottom',
