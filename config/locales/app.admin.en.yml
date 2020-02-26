@@ -92,7 +92,7 @@ en:
 
       icalendar:
         icalendar_import: "iCalendar import"
-        intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every nights and the events are shown in the public calendar."
+        intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every hours and the events are shown in the public calendar. You can trigger a synchronisation too, by clicking on the corresponding button, in front of each import."
         new_import: "New ICS import"
         color: "Colour"
         text_color: "Text colour"
