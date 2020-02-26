@@ -392,37 +392,37 @@ fr:
             content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
           machines:
             title: "Les machines"
-            content: "Ici, vous pourrez consulter la liste de toutes les machines et réserver un créneau pour l'une d'entre elle."
+            content: "<p>Cette page vous permettra de consulter la liste de toutes les machines et réserver un créneau pour le compte d'un membre.</p><p>Une machine peut-être, par exemple, une imprimante 3D.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une machine.</p>"
           trainings:
             title: "Les formations"
-            content: "Cette page vous permettra d'inscrire un membre à une formation. Certaines formations peuvent être un préalable à la réservation de certaines machines."
+            content: "<p>Cette page vous permettra de consulter la liste de toutes les formations et d'inscrire un membre à une session de formation.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, s'inscrire eux-même une session de formation.</p>"
           spaces:
             title: "Les espaces"
-            content: "Consultez et réservez les espaces disponibles. Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps. Ce peut-être, par exemple, un atelier bois ou une salle de réunion."
+            content: "<p>Cette page vous permettra de consulter la liste de tous les espaces disponibles et de réserver une place sur un créneau, pour le compte d'un membre.</p><p>Un espace peut-être, par exemple, un atelier bois ou une salle de réunion.</p><p>Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une place.</p>"
           events:
             title: "Les évènements"
-            content: "Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !"
+            content: "<p>Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !</p><p>Les évènements peuvent être gratuits ou payants (avec plusieurs tarifs), avec ou sans réservation.</p><p>Ici encore, les membres peuvent accéder à cette page et réserver eux-mêmes des places pour des évènements gratuits, ou payants si le paiement par carte bancaire est activé.</p>"
           calendar:
             title: "Le calendrier publique"
-            content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines."
+            content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines (évènements, formations, machines disponibles, etc.)."
           projects:
             title: "Les projets"
-            content: "Documentez et partagez avec la communauté toutes vos réalisations."
+            content: "<p>Documentez et partagez toutes vos réalisations avec la communauté.</p><p>Si vous utilisez OpenLab, vous pourrez également consulter les projets de l'ensemble du réseau Fab-Manager. <a href='mailto:contact@fab-manager.com'>Contactez-nous</a> pour obtenir votre accès, c'est gratuit !</p>"
           plans:
             title: "Les abonnements"
             content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
           admin:
             title: "Section administrateur"
-            content: "L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-manager. À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus."
+            content: "<p>L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-manager.</p><p>À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus.</p>"
           about:
             title: "À propos"
-            content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité."
+            content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité et votre structure."
           notifications:
             title: "Centre de notifications"
-            content: "Chaque fois qu'il se passe quelque chose d'important, vous serez notifié ici."
+            content: "<p>Chaque fois qu'il se passe quelque chose d'important (réservations, création de comptes, activité de vos membres, etc.), vous serez notifié ici.</p><p>Vos membres reçoivent également des notifications à cet endroit.</p>"
           profile:
             title: "Menu utilisateur"
-            content: "Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager."
+            content: "<p>Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager.</p><p>Cet espace est également disponible pour tous vos membres.</p>"
           version:
             title: "Version de l'application"
             content: "Passez votre curseur sur cette icône pour connaître la version de Fab-manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
