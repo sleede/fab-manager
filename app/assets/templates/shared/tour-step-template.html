@@ -2,9 +2,11 @@
   <div class="popover-content tour-step-content" bind-html-compile="tourStep.trustedContent || tourStep.content"></div>
   <div class="popover-navigation tour-step-navigation">
     <div class="btn-group">
-      <button type="button" class="btn btn-sm btn-default" ng-if="tourStep.isPrev()" ng-click="tour.prev()" translate>{{ 'app.shared.tour.previous' }}</button>
-      <button type="button" class="btn btn-sm btn-default" ng-if="tourStep.isNext()" ng-click="tour.next()" translate>{{ 'app.shared.tour.next' }}</button>
+      <button type="button" class="btn btn-sm btn-default" ng-if="tourStep.isPrev()" ng-click="tour.prev()" translate>⮜ {{ 'app.shared.tour.previous' }}</button>
+      <div class="button-placekeeper" ng-if="!tourStep.isPrev()"></div>
+      <button type="button" class="btn btn-sm btn-default" ng-click="tour.end()" translate>{{ 'app.shared.tour.end' }}</button>
+      <button type="button" class="btn btn-sm btn-default" ng-if="tourStep.isNext()" ng-click="tour.next()" translate>{{ 'app.shared.tour.next' }} ⮞</button>
+      <div class="button-placekeeper" ng-if="!tourStep.isNext()"></div>
     </div>
-    <button type="button" class="btn btn-sm btn-default" ng-click="tour.end()" translate>{{ 'app.shared.tour.end' }}</button>
   </div>
 </div>
