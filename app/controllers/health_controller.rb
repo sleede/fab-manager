@@ -20,7 +20,7 @@ class HealthController < ActionController::Base
         version: Version.up_to_date?
       },
       stats: HealthService.stats,
-      tagline: 'Manage the DIY'
+      tagline: 'The platform to manage your fablab or your coworking space.'
     }
   end
 end
