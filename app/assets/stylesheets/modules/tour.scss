@@ -1,0 +1,24 @@
+.ui-tour-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  fill: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+}
+
+
+.ui-tour-popup.popover {
+  max-width: 414px;
+}
+
+.tour-step-navigation.popover-navigation .btn-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 14px;
+
+  .button-placekeeper {
+    width: 90px;
+    height: 30px;
+    background-color: transparent;
+  }
+}
+

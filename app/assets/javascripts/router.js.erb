@@ -98,7 +98,7 @@ angular.module('application.router', ['ui.router'])
           }
         },
         resolve: {
-          homeContentPromise: ['Setting', function (Setting) { return Setting.get({ name: 'home_content' }).$promise; }]
+          settingsPromise: ['Setting', function (Setting) { return Setting.query({ names: "['home_content', 'home_blogpost']" }).$promise; }]
         }
       })
       .state('app.public.privacy', {

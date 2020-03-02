@@ -3,7 +3,7 @@
 ## Automatic upgrade
 
 Fab-manager release 4.2.0 has upgraded its dependency to PostgreSQL from version 9.4 to version 9.6 as the previous won't be maintained from february 2020.
-To keep using fab-manager you need to upgrade your installation with the new version.
+To keep using Fab-manager you need to upgrade your installation with the new version.
 We've wrote a script to automate the process while keeping your data integrity, but there's some requirements to understand before running it.
 
 - You need to install *curl*, *GNU awk* and *sudo* on your system before running the script. 

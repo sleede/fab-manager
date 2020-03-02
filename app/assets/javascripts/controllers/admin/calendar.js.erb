@@ -18,9 +18,9 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig',
-  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig) {
-  /* PRIVATE STATIC CONSTANTS */
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
+    /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
     const BASE_SLOT = '00:30:00';
@@ -252,14 +252,89 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       });
     };
 
+    /**
+     * Setup the feature-tour for the admin/calendar page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupCalendarTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('calendar');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.calendar.welcome.title'),
+        content: _t('app.admin.tour.calendar.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.admin-calendar .fc-view-container',
+        stepId: 'agenda',
+        order: 1,
+        title: _t('app.admin.tour.calendar.agenda.title'),
+        content: _t('app.admin.tour.calendar.agenda.content'),
+        placement: 'right'
+      });
+      uitour.createStep({
+        selector: '.admin-calendar .export-xls-button',
+        stepId: 'export',
+        order: 2,
+        title: _t('app.admin.tour.calendar.export.title'),
+        content: _t('app.admin.tour.calendar.export.content'),
+        placement: 'left'
+      });
+      uitour.createStep({
+        selector: '.heading .import-ics-button',
+        stepId: 'import',
+        order: 3,
+        title: _t('app.admin.tour.calendar.import.title'),
+        content: _t('app.admin.tour.calendar.import.content'),
+        placement: 'left'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 4,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'calendar' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('calendar') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    };
 
     /**
      * Return an enumerable meaninful string for the gender of the provider user
      * @param user {Object} Database user record
      * @return {string} 'male' or 'female'
      */
-    var getGender = function (user) {
+    const getGender = function (user) {
       if (user.statistic_profile) {
         if (user.statistic_profile.gender === 'true') { return 'male'; } else { return 'female'; }
       } else { return 'other'; }
@@ -268,7 +343,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
     // Triggered when the admin drag on the agenda to create a new reservable slot.
     // @see http://fullcalendar.io/docs/selection/select_callback/
     //
-    var calendarSelectCb = function (start, end, jsEvent, view) {
+    const calendarSelectCb = function (start, end, jsEvent, view) {
       start = moment.tz(start.toISOString(), Fablab.timezone);
       end = moment.tz(end.toISOString(), Fablab.timezone);
 
@@ -329,7 +404,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Triggered when the admin clicks on a availability slot in the agenda.
      * @see http://fullcalendar.io/docs/mouse/eventClick/
      */
-    var calendarEventClickCb = function (event, jsEvent, view) {
+    const calendarEventClickCb = function (event, jsEvent, view) {
       $scope.availability = event;
 
       if ($scope.availabilityDom) {
@@ -352,7 +427,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      * Append the event tag into the block, just after the event title.
      * @see http://fullcalendar.io/docs/event_rendering/eventRender/
      */
-    var eventRenderCb = function (event, element) {
+    const eventRenderCb = function (event, element) {
       if (event.available_type !== 'event') {
         element.find('.fc-content').prepend('<span class="remove-event">x&nbsp;</span>');
       }
@@ -387,6 +462,21 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       $scope.availability = null;
       $scope.availabilityDom = null;
     };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('calendar');
+        if (tour) { tour.start(); }
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
   }
 
 ]);
@@ -396,7 +486,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
  */
 Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'growl', '_t',
   function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, growl, _t) {
-  // $uibModal parameter
+    // $uibModal parameter
     $scope.start = start;
 
     // $uibModal parameter
@@ -462,6 +552,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // localized name(s) of the selected tag(s)
     $scope.tagsName = '';
+
+    // make the duration available for display
+    $scope.slotDuration = Fablab.slotDuration;
 
     /**
      * Adds or removes the provided machine from the current slot

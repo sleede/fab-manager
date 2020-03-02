@@ -31,6 +31,10 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id
   end
 
+  def complete_tour?
+    user.id == record.id
+  end
+
   %w[list create mapping].each do |action|
     define_method "#{action}?" do
       user.admin?

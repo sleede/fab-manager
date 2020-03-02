@@ -427,7 +427,7 @@ en:
         tags_of_the_destination_slot: "Tags of the destination slot:"
         confirm_my_modification: "Confirm my modification"
         your_booking_slot_was_successfully_moved_from_: "Your booking slot was successfully moved from"
-        to_date: "to" # context: date. eg: 'from 01/01 to 01/05'
+        to_date: "to" # eg. from 01/01 to 01/05
         please_select_a_member_first: 'Please select a member first'
         unable_to_select_plan_if_slots_in_the_past: 'Unable to select a plan if any of the selected slots is in the past'
         unable_to_change_the_reservation: "Unable to change the reservation"
@@ -435,7 +435,7 @@ en:
         do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
-        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # (context: confirm my payment of $20.00)
+        confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  # eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
         none: "None"
         online_payment_disabled: "Online payment is not available. Please contact the Fablab reception directly."

@@ -1,4 +1,4 @@
-# Detailed informations about PostgreSQL usage in fab-manager
+# Detailed informations about PostgreSQL usage in Fab-manager
 
 <a name="run-postgresql-cli"></a>
 ## Run the PostgreSQL command line interface
@@ -51,7 +51,7 @@ psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sq
 - While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
   This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
   So here's your choices, mainly depending on your security requirements:
-  - Use the default PostgreSQL super-user (postgres) as the database user. This is the default behavior in fab-manager.
+  - Use the default PostgreSQL super-user (postgres) as the database user. This is the default behavior in Fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `username` with you user name):
 
     ```sql

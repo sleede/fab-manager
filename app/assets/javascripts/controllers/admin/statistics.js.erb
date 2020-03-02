@@ -15,8 +15,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise',
-  function ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise) {
+Application.Controllers.controller('StatisticsController', ['$scope', '$state', '$rootScope', '$uibModal', 'es', 'Member', '_t', 'membersPromise', 'statisticsPromise', 'uiTourService',
+  function ($scope, $state, $rootScope, $uibModal, es, Member, _t, membersPromise, statisticsPromise, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // search window size
@@ -181,11 +181,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
       if (tab.table) {
         if ((tab.es_type_key === 'subscription') && $rootScope.fablabWithoutPlans) {
           return true;
-        } else if ((tab.es_type_key === 'space') && $rootScope.fablabWithoutSpaces) {
-          return true;
-        } else {
-          return false;
-        }
+        } else return (tab.es_type_key === 'space') && $rootScope.fablabWithoutSpaces;
       } else {
         return true;
       }
@@ -342,6 +338,63 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         .result['finally'](null).then(function (info) { console.log(info); });
     };
 
+    /**
+     * Setup the feature-tour for the admin/statistics page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupStatisticsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('statistics');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.statistics.welcome.title'),
+        content: _t('app.admin.tour.statistics.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.heading .export-button',
+        stepId: 'export',
+        order: 1,
+        title: _t('app.admin.tour.statistics.export.title'),
+        content: _t('app.admin.tour.statistics.export.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.heading .charts-button',
+        stepId: 'trending',
+        order: 2,
+        title: _t('app.admin.tour.statistics.trending.title'),
+        content: _t('app.admin.tour.statistics.trending.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 3,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('statistics') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'statistics' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('statistics') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -355,6 +408,22 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
           return $scope.preventRefresh = true;
         }
       });
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('statistics');
+        if (tour) { tour.start(); }
+      }
     };
 
     /**
@@ -362,7 +431,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * @param $event {Object} jQuery event object
      * @param datePicker {Object} settings object of the concerned datepicker. Must have an 'opened' property
      */
-    var toggleDatePicker = function ($event, datePicker) {
+    const toggleDatePicker = function ($event, datePicker) {
       $event.preventDefault();
       $event.stopPropagation();
       return datePicker.opened = !datePicker.opened;
@@ -371,7 +440,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     /**
      * Force update the statistics table, querying elasticSearch according to the current config values
      */
-    var refreshStats = function () {
+    const refreshStats = function () {
       if ($scope.selectedIndex && !$scope.preventRefresh) {
         $scope.data = [];
         $scope.sumCA = 0;
@@ -411,7 +480,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * @param callback {function} function be to run after results were retrieved, it will receive
      *   two parameters : results {Object}, error {String} (if any)
      */
-    var queryElasticStats = function (index, type, custom, callback) {
+    const queryElasticStats = function (index, type, custom, callback) {
     // handle invalid callback
       if (typeof (callback) !== 'function') {
         console.error('[statisticsController::queryElasticStats] Error: invalid callback provided');
@@ -450,7 +519,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * @param intervalEnd {moment} statitics interval ending (moment.js type)
      * @param sortings {Array|null} elasticSearch criteria for sorting the results
      */
-    var buildElasticDataQuery = function (type, custom, ageMin, ageMax, intervalBegin, intervalEnd, sortings) {
+    const buildElasticDataQuery = function (type, custom, ageMin, ageMax, intervalBegin, intervalEnd, sortings) {
       const q = {
         'query': {
           'bool': {
@@ -525,7 +594,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * @param custom {Object} if custom is empty or undefined, an empty string will be returned
      * @returns {{match:*}|string}
      */
-    var buildElasticCustomCriterion = function (custom) {
+    const buildElasticCustomCriterion = function (custom) {
       if (custom) {
         const criterion = {
           'match': {}
@@ -546,7 +615,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Parse the provided criteria array and return the corresponding elasticSearch syntax
      * @param criteria {Array} array of {key_to_sort:order}
      */
-    var buildElasticSortCriteria = function (criteria) {
+    const buildElasticSortCriteria = function (criteria) {
       const crits = [];
       angular.forEach(criteria, function (value, key) {
         if ((typeof value !== 'undefined') && (value !== null) && (value !== 'none')) {
@@ -562,7 +631,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Fulfill the list of available options in the custom filter panel. The list will be based on common
      * properties and on index-specific properties (additional_fields)
      */
-    var buildCustomFiltersList = function () {
+    const buildCustomFiltersList = function () {
       $scope.filters = [
         { key: 'date', label: _t('app.admin.statistics.date'), values: ['input_date'] },
         { key: 'userId', label: _t('app.admin.statistics.user_id'), values: ['input_number'] },
@@ -595,7 +664,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Build and return an object according to the custom filter set by the user, used to request elasticsearch
      * @return {Object|null}
      */
-    var buildCustomFilterQuery = function () {
+    const buildCustomFilterQuery = function () {
       let custom = null;
       if (!angular.isUndefinedOrNull($scope.customFilter.criterion) &&
         !angular.isUndefinedOrNull($scope.customFilter.criterion.key) &&

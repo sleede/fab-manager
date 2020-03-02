@@ -12,8 +12,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
-  function ($rootScope, $scope, $window, $locale, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
+Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
+  function ($rootScope, $scope, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
@@ -37,7 +37,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         $rootScope.currentUser = user;
         Session.create(user);
         getNotifications();
-        // fab-manager's app-version
+        // Fab-manager's app-version
         if (user.role === 'admin') {
           return $scope.version = Version.get();
         } else {
@@ -267,8 +267,12 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       toggler.toggleClass('active');
     };
 
+    /**
+     * Open the modal dialog showing that an upgrade is available
+     */
     $scope.versionModal = function() {
       if ($scope.version.up_to_date) return;
+      if ($rootScope.currentUser.role !== 'admin') return;
 
       $uibModal.open({
         templateUrl: '<%= asset_path "admin/versions/upgradeModal.html" %>',
@@ -276,6 +280,20 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         resolve: {
           version() { return $scope.version; }
         }
+      });
+    }
+
+    /**
+     * Trigger the contextual help "feature tour".
+     * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
+    $scope.help = function (event) {
+      event.preventDefault();
+
+      // we wrap the event triggering into a $timeout to prevent conflicting with current $apply
+      $timeout(function () {
+        var evt = new KeyboardEvent('keydown', { key: 'F1' });
+        window.dispatchEvent(evt);
       });
     }
 
@@ -329,10 +347,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     };
 
     /**
-     * Retreive once the notifications from the server and display a message popup for each new one.
+     * Retrieve once the notifications from the server and display a message popup for each new one.
      * Then, periodically check for new notifications.
      */
-    var getNotifications = function () {
+    const getNotifications = function () {
       $rootScope.toCheckNotifications = true;
       if (!$rootScope.checkNotificationsIsInit && !!$rootScope.currentUser) {
         setTimeout(function () {
@@ -373,7 +391,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     /**
      * Open the modal window allowing the user to log in.
      */
-    var openLoginModal = function (toState, toParams, callback) {
+    const openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
       $window.location.href = '/sso-redirect';
@@ -480,7 +498,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * When the status changes, the callback is triggered with the new status as parameter
      * Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
      */
-    var onPageVisible = function (callback) {
+    const onPageVisible = function (callback) {
       let hidden = 'hidden';
 
       const onchange = function (evt) {

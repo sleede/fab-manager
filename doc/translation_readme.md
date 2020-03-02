@@ -1,6 +1,6 @@
-# Fab-Manager translation documentation
+# Fab-manager translation documentation
 
-This document will explain you what you need to know to contribute to the translation process of Fab-Manager.
+This document will explain you what you need to know to contribute to the translation process of Fab-manager.
 
 ##### Table of contents
 
@@ -19,14 +19,14 @@ This document will explain you what you need to know to contribute to the transl
 
 <a name="using-a-tms"></a>
 ### Using a TMS
-We use [Crowdin](https://www.crowdin.com), a translation management system (TMS) to simplify translator's job in fab-manager.
+We use [Crowdin](https://www.crowdin.com), a translation management system (TMS) to simplify translator's job in Fab-manager.
 You can access it at [translate.fab-manager.com](https://translate.fab-manager.com) and start translating to one of the already configured languages.
-If you want to translate Fab-Manager to a new language, just send us an email to [contact@fab-manager.com](mailto:contact@fab-manager.com) and we'll add this new language to the TMS.
+If you want to translate Fab-manager to a new language, just send us an email to [contact@fab-manager.com](mailto:contact@fab-manager.com) and we'll add this new language to the TMS.
 
 <a name="using-in-context-translation"></a>
 ### Using In-Context translation
 To translate the front-end application (angularJS client), and the notifications, you can use [Crowdin In-Context](https://crowdin.com/page/in-context-localization).
-This allows you to use Fab-Manager as normally, but with the addition of small "edit" icons on the top-left corner of each text blocs.
+This allows you to use Fab-manager as normally, but with the addition of small "edit" icons on the top-left corner of each text blocs.
 Clicking on this "edit" icon will open the Crowdin translation interface and you'll be able to translate or modify existing translations directly.
 You can access it at [in-context.translate.fab-manager.com](https://in-context.translate.fab-manager.com/).
 

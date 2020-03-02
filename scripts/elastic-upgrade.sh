@@ -77,7 +77,7 @@ config()
   fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
-  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
+  read -rp "Is Fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
     # checking disk space (minimum required = 1168323KB)
@@ -100,7 +100,7 @@ config()
     fi
     ES_IP=$(getent ahostsv4 "$ES_HOST" | awk '{ print $1 }' | uniq)
   else
-    echo "Please run this script from the fab-manager's installation folder"
+    echo "Please run this script from the Fab-manager's installation folder"
     exit 1
   fi
 }

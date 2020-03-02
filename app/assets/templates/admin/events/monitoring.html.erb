@@ -1,5 +1,5 @@
 <div class="col-md-6 m-b m-t">
-  <select ng-model="eventsScope.selected" class="form-control" ng-change="changeScope()">
+  <select ng-model="eventsScope.selected" class="form-control events-list-filter" ng-change="changeScope()">
     <option value="" translate>{{ 'app.admin.events.all_events' }}</option>
     <option value="passed" translate>{{ 'app.admin.events.passed_events' }}</option>
     <option value="future" translate>{{ 'app.admin.events.events_to_come' }}</option>
@@ -7,7 +7,7 @@
   </select>
 </div>
 
-<table class="table">
+<table class="table events-list">
   <thead>
   <tr>
     <th style="width:30%" translate>{{ 'app.admin.events.title' }}</th>

@@ -34,7 +34,7 @@ config()
   fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
-  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
+  read -rp "Is Fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
   if [ "$confirm" = "y" ]; then
     test_docker_compose
     if [[ "$TYPE" = "NOT-FOUND" ]]
@@ -43,7 +43,7 @@ config()
       exit 2
     fi
   else
-    echo "Please run this script from the fab-manager's installation folder"
+    echo "Please run this script from the Fab-manager's installation folder"
     exit 1
   fi
 }

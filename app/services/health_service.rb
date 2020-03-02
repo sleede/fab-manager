@@ -60,7 +60,7 @@ class HealthService
     return false unless key
 
     public_key = OpenSSL::PKey::RSA.new(key)
-    Base64.encode64(public_key.public_encrypt(stats))
+    Base64.encode64(public_key.public_encrypt(row_stats.to_json.to_s))
   end
 
   # availabilities for the last week

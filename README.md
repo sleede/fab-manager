@@ -1,6 +1,6 @@
-# FabManager
+# Fab-manager
 
-FabManager is the Fab Lab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.
+Fab-manager is the Fab Lab management solution. It provides a comprehensive, web-based, open-source tool to simplify your administrative tasks and your marker's projects.
 
 [![Coverage Status](https://coveralls.io/repos/github/sleede/fab-manager/badge.svg)](https://coveralls.io/github/sleede/fab-manager)
 [![Docker pulls](https://img.shields.io/docker/pulls/sleede/fab-manager.svg)](https://hub.docker.com/r/sleede/fab-manager/)
@@ -24,7 +24,7 @@ FabManager is the Fab Lab management solution. It provides a comprehensive, web-
 <a name="software-stack"></a>
 ## Software stack
 
-FabManager is a Ruby on Rails / AngularJS web application that runs on the following software:
+Fab-manager is a Ruby on Rails / AngularJS web application that runs on the following software:
 
 - Ubuntu LTS 14.04+ / Debian 8+
 - Ruby 2.3
@@ -41,13 +41,13 @@ Contributions are welcome. Please read [the contribution guidelines](CONTRIBUTIN
 <a name="setup-a-production-environment"></a>
 ## Setup a production environment
 
-To run fab-manager as a production application, this is highly recommended to use [Docker-compose](https://docs.docker.com/compose/overview/).
+To run Fab-manager as a production application, this is highly recommended to use [Docker-compose](https://docs.docker.com/compose/overview/).
 The procedure to follow is described in the [docker-compose readme](doc/docker-compose_readme.md).
 
 <a name="setup-a-development-environment"></a>
 ## Setup a development environment
 
-In you intend to run fab-manager on your local machine to contribute to the project development, you can set it up by following the [development readme](doc/development_readme.md). 
+In you intend to run Fab-manager on your local machine to contribute to the project development, you can set it up by following the [development readme](doc/development_readme.md). 
 This procedure relies on docker to set-up the dependencies.
 
 Optionally, you can use a virtual development environment that relies on Vagrant and Virtual Box by following the [virtual machine instructions](virtual-machine.md).
@@ -55,7 +55,7 @@ Optionally, you can use a virtual development environment that relies on Vagrant
 <a name="i18n"></a>
 ## Internationalization (i18n)
 
-The FabManager application can only run in a single language but this language can easily be changed.
+The Fab-manager application can only run in a single language but this language can easily be changed.
 
 Please refer to the [translation readme](doc/translation_readme.md) for instructions about configuring the language or to contribute to the translation.
 
@@ -64,17 +64,17 @@ Please refer to the [translation readme](doc/translation_readme.md) for instruct
 
 **This configuration is optional.**
 
-You can configure your fab-manager to synchronize every project with the [Open Projects platform](https://github.com/sleede/openlab-projects).
-It's very simple and straightforward and in return, your users will be able to search over projects from all fab-manager instances from within your platform.
+You can configure your Fab-manager to synchronize every project with the [Open Projects platform](https://github.com/sleede/openlab-projects).
+It's very simple and straightforward and in return, your users will be able to search over projects from all Fab-manager instances from within your platform.
 The deal is fair, you share your projects and as reward you benefits from projects of the whole community.
 
-If you want to try it, you can visit [this fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different fab-managers.
+If you want to try it, you can visit [this Fab-manager](https://fablab.lacasemate.fr/#!/projects) and see projects from different Fab-managers.
 
 To start using this awesome feature, there are a few steps:
-- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name of your fab-manager, they will give you an `OPENLAB_APP_ID` and an `OPENLAB_APP_SECRET`
+- send a mail to **contact@fab-manager.com** asking for your Open Projects client's credentials and giving them the name of your Fab-manager, they will give you an `OPENLAB_APP_ID` and an `OPENLAB_APP_SECRET`
 - fill in the value of the keys in your environment file
-- start your fab-manager app
-- export your projects to open-projects (if you already have projects created on your fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
+- start your Fab-manager app
+- export your projects to open-projects (if you already have projects created on your Fab-manager, unless you can skip that part) executing this command: `bundle exec rake fablab:openlab:bulk_export`
 
 **IMPORTANT: please run your server in production mode.**
 

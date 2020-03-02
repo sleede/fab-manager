@@ -17,8 +17,8 @@
 /**
  * Controller used in the admin invoices listing page
  */
-Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t',
-  function ($scope, $state, Invoice, AccountingPeriod, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t) {
+Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'Invoice', 'AccountingPeriod', 'invoices', 'closedPeriods', '$uibModal', 'growl', '$filter', 'Setting', 'settings', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, Invoice, AccountingPeriod, invoices, closedPeriods, $uibModal, growl, $filter, Setting, settings, _t, Member, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of invoices loaded each time we click on 'load more...'
@@ -28,11 +28,10 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
 
     // default active tab
     $scope.tabs = {
-      listing: { active: !Fablab.withoutInvoices },
-      settings: { active: Fablab.withoutInvoices }
+      active: Fablab.withoutInvoices ? 1 : 0
     };
 
-    // List of all users invoices
+    // List of all invoices
     $scope.invoices = invoices;
 
     // Invoices filters
@@ -246,7 +245,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
     };
 
     /**
-     * Generate an order nmuber sample from the parametrized model
+     * Generate an order number sample from the parametrized model
      * @returns {string} invoice reference sample
      */
     $scope.mkNumber = function () {
@@ -560,6 +559,127 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       );
     }
 
+    /**
+     * Setup the feature-tour for the admin/invoices page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupInvoicesTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('invoices');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.invoices.welcome.title'),
+        content: _t('app.admin.tour.invoices.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      if (!Fablab.withoutInvoices) {
+        uitour.createStep({
+          selector: '.invoices-management .invoices-list',
+          stepId: 'list',
+          order: 1,
+          title: _t('app.admin.tour.invoices.list.title'),
+          content: _t('app.admin.tour.invoices.list.content'),
+          placement: 'top'
+        });
+        if ($scope.invoices.length > 0) {
+          uitour.createStep({
+            selector: '.invoices-management .invoices-list .chained-indicator',
+            stepId: 'chained',
+            order: 2,
+            title: _t('app.admin.tour.invoices.chained.title'),
+            content: _t('app.admin.tour.invoices.chained.content'),
+            placement: 'right'
+          });
+          uitour.createStep({
+            selector: '.invoices-management .invoices-list .download-button',
+            stepId: 'download',
+            order: 3,
+            title: _t('app.admin.tour.invoices.download.title'),
+            content: _t('app.admin.tour.invoices.download.content'),
+            placement: 'left'
+          });
+          uitour.createStep({
+            selector: '.invoices-management .invoices-list .refund-button',
+            stepId: 'refund',
+            order: 4,
+            title: _t('app.admin.tour.invoices.refund.title'),
+            content: _t('app.admin.tour.invoices.refund.content'),
+            placement: 'left'
+          });
+        }
+      }
+      uitour.createStep({
+        selector: '.invoices-management .invoices-settings',
+        stepId: 'settings',
+        order: 5,
+        title: _t('app.admin.tour.invoices.settings.title'),
+        content: _t('app.admin.tour.invoices.settings.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.invoices-management .accounting-codes-tab',
+        stepId: 'codes',
+        order: 6,
+        title: _t('app.admin.tour.invoices.codes.title'),
+        content: _t('app.admin.tour.invoices.codes.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.heading .export-accounting-button',
+        stepId: 'export',
+        order: 7,
+        title: _t('app.admin.tour.invoices.export.title'),
+        content: _t('app.admin.tour.invoices.export.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.heading .close-accounting-periods-button',
+        stepId: 'periods',
+        order: 8,
+        title: _t('app.admin.tour.invoices.periods.title'),
+        content: _t('app.admin.tour.invoices.periods.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 9,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'list' || nextStep.stepId === 'settings') {
+          $scope.tabs.active = 0;
+        }
+        if (nextStep.stepId === 'settings') {
+          $scope.tabs.active = 1;
+        }
+        if (nextStep.stepId === 'codes' || nextStep.stepId === 'export') {
+          $scope.tabs.active = 2;
+        }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'invoices' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('invoices') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -586,7 +706,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
       };
 
       // Watch the logo, when a change occurs, save it
-      return $scope.$watch('invoice.logo', function () {
+      $scope.$watch('invoice.logo', function () {
         if ($scope.invoice.logo && $scope.invoice.logo.filesize) {
           return Setting.update(
             { name: 'invoice_logo' },
@@ -598,6 +718,11 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
             }
           );
         }
+      });
+
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
       });
     };
 
@@ -664,6 +789,18 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           return $scope.noMoreResults = true;
         }
       });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('invoices');
+        if (tour) { tour.start(); }
+      }
     };
 
     // !!! MUST BE CALLED AT THE END of the controller

@@ -37,6 +37,9 @@
         <input type="checkbox" ng-click="toggleSelection(machine)" ng-model="selectedMachinesBinding[machine.id]"> {{machine.name}} <span class="text-xs">(id {{machine.id}})</span>
       </label>
     </div>
+    <div class="alert alert-info m-b-none text-xs wrapper-sm">
+      <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i> <a ui-sref="app.public.machines_list" ng-click="cancel()" translate> {{ 'app.admin.calendar.manage_machines' }}</a>
+    </div>
   </div>
 
   <div ng-show="availability.available_type == 'training'">
@@ -50,6 +53,9 @@
         </div>
       </div>
     </div>
+    <div class="alert alert-info m-b-none text-xs wrapper-sm m-t">
+      <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i> <a ui-sref="app.public.trainings_list" ng-click="cancel()" translate> {{ 'app.admin.calendar.manage_trainings' }}</a>
+    </div>
   </div>
 
   <div ng-show="availability.available_type == 'space'">
@@ -62,6 +68,9 @@
           <input type="number" id="nb_places_space" class="form-control" ng-model="availability.nb_total_places">
         </div>
       </div>
+    </div>
+    <div class="alert alert-info m-b-none text-xs wrapper-sm m-t">
+      <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i> <a ui-sref="app.public.spaces_list" ng-click="cancel()" translate> {{ 'app.admin.calendar.manage_spaces' }}</a>
     </div>
   </div>
 </div>
@@ -159,6 +168,7 @@
       <ul>
         <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
       </ul>
+      <div class="alert alert-warning" translate translate-values="{DURATION: slotDuration}"> {{ 'app.admin.calendar.divided_in_slots' }} </div>
       <div>
         <span class="underline" translate>{{ 'app.admin.calendar.reservable' }}</span>
         <span ng-bind-html="reservableName"></span>

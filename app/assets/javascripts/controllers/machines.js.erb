@@ -180,8 +180,10 @@ const _reserveMachine = function (machine, e) {
 /**
  * Controller used in the public listing page, allowing everyone to see the list of machines
  */
-Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'Machine', '$uibModal', 'machinesPromise',
-  function ($scope, $state, _t, Machine, $uibModal, machinesPromise) {
+Application.Controllers.controller('MachinesController', ['$scope', '$state', '_t', 'Machine', '$uibModal', 'machinesPromise', 'Member', 'uiTourService',
+  function ($scope, $state, _t, Machine, $uibModal, machinesPromise, Member, uiTourService) {
+    /* PUBLIC SCOPE */
+
     // Retrieve the list of machines
     $scope.machines = machinesPromise;
 
@@ -205,11 +207,92 @@ Application.Controllers.controller('MachinesController', ['$scope', '$state', '_
     $scope.machineFiltering = 'enabled';
 
     // Available options for filtering machines by status
-    return $scope.filterDisabled = [
+    $scope.filterDisabled = [
       'enabled',
       'disabled',
       'all'
     ];
+
+    /**
+     * Setup the feature-tour for the machines page. (admins only)
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupMachinesTour = function () {
+      // setup the tour for admins only
+      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+        // get the tour defined by the ui-tour directive
+        const uitour = uiTourService.getTourByName('machines');
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'welcome',
+          order: 0,
+          title: _t('app.public.tour.machines.welcome.title'),
+          content: _t('app.public.tour.machines.welcome.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+        if ($scope.machines.length > 0) {
+          uitour.createStep({
+            selector: '.machines-list .show-button',
+            stepId: 'view',
+            order: 1,
+            title: _t('app.public.tour.machines.view.title'),
+            content: _t('app.public.tour.machines.view.content'),
+            placement: 'top'
+          });
+        }
+        uitour.createStep({
+          selector: 'body',
+          stepId: 'conclusion',
+          order: 2,
+          title: _t('app.public.tour.conclusion.title'),
+          content: _t('app.public.tour.conclusion.content'),
+          placement: 'bottom',
+          orphan: true
+        });
+        // on tour end, save the status in database
+        uitour.on('ended', function () {
+          if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('machines') < 0) {
+            Member.completeTour({ id: $scope.currentUser.id }, { tour: 'machines' }, function (res) {
+              $scope.currentUser.profile.tours = res.tours;
+            });
+          }
+        });
+        // if the user has never seen the tour, show him now
+        if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('machines') < 0) {
+          uitour.start();
+        }
+        // start this tour when an user press F1 - this is contextual help
+        window.addEventListener('keydown', handleF1);
+      }
+    }
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    }
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('machines');
+        if (tour) { tour.start(); }
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
   }
 ]);
 

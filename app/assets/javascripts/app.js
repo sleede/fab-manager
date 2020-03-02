@@ -20,9 +20,10 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
   'ui.select', 'ui.calendar', 'angularMoment', 'Devise', 'DeviseModal', 'angular-growl', 'xeditable',
   'checklist-model', 'unsavedChanges', 'angular-loading-bar', 'ngTouch', 'angular-google-analytics',
   'angularUtils.directives.dirDisqus', 'summernote', 'elasticsearch', 'angular-medium-editor', 'naif.base64',
-  'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror'])
-  .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider',
-    function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider) {
+  'minicolors', 'pascalprecht.translate', 'ngFitText', 'ngAside', 'ngCapsLock', 'vcRecaptcha', 'ui.codemirror',
+  'bm.uiTour'])
+  .config(['$httpProvider', 'AuthProvider', 'growlProvider', 'unsavedWarningsConfigProvider', 'AnalyticsProvider', 'uibDatepickerPopupConfig', '$provide', '$translateProvider', 'TourConfigProvider',
+    function ($httpProvider, AuthProvider, growlProvider, unsavedWarningsConfigProvider, AnalyticsProvider, uibDatepickerPopupConfig, $provide, $translateProvider, TourConfigProvider) {
       // Google analytics
       // first we check the user acceptance
       const cookiesConsent = document.cookie.replace(/(?:(?:^|.*;\s*)fab-manager-cookies-consent\s*=\s*([^;]*).*$)|^.*$/, '$1');
@@ -63,6 +64,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $translateProvider.useMessageFormatInterpolation();
       // Set the langage of the instance (from ruby configuration)
       $translateProvider.preferredLanguage(Fablab.locale);
+      // End the tour when the user clicks the forward or back buttons of the browser
+      TourConfigProvider.enableNavigationInterceptors();
     }]).run(['$rootScope', '$log', 'AuthService', 'Auth', 'amMoment', '$state', 'editableOptions', 'Analytics',
     function ($rootScope, $log, AuthService, Auth, amMoment, $state, editableOptions, Analytics) {
       // Angular-moment (date-time manipulations library)

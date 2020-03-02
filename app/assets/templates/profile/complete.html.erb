@@ -77,10 +77,11 @@
                                                             <i class="fa fa-asterisk" aria-hidden="true"></i>
                                                           </span>
                                                         </span>
-                                                        <select ng-model="user.group_id" class="form-control" name="user[group_id]" required>
+                                                        <select ng-model="user.group_id" class="form-control" required>
                                                             <option value=null translate>{{ 'app.logged.profile_completion.your_user_s_profile' }}</option>
                                                             <option ng-repeat="group in groups" ng-value="group.id" ng-selected="group.id == user.group_id">{{group.name}}</option>
                                                         </select>
+                                                        <input type="hidden" name="user[group_id]" ng-value="user.group_id">
                                                     </div>
                                                     <span class="help-block" ng-show="userForm['user[group_id]'].$dirty && userForm['user[group_id]'].$error.required" translate>{{ 'app.logged.profile_completion.user_s_profile_is_required' }}</span>
                                                 </div>

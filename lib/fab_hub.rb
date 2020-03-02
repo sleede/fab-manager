@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Fab-Manager central hub (remote host)
+# Fab-manager central hub (remote host)
 class FabHub
   def self.version_check_payload
     {

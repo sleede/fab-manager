@@ -77,6 +77,10 @@ angular-base64-upload@^0.0.9:
   resolved "https://registry.yarnpkg.com/angular-base64-upload/-/angular-base64-upload-0.0.9.tgz#d8ed8bac5e8c104e7311e353f9800345bed9da96"
   integrity sha1-2O2LrF6MEE5zEeNT+YADRb7Z2pY=
 
+"angular-bind-html-compile@https://github.com/incuna/angular-bind-html-compile.git#1.4.1":
+  version "1.4.1"
+  resolved "https://github.com/incuna/angular-bind-html-compile.git#7626140a0eb7c724dc5c1eb3f7715bf06adf4c2a"
+
 angular-bootstrap-switch@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/angular-bootstrap-switch/-/angular-bootstrap-switch-0.4.0.tgz#8f4d45a0de5ff1227bd6ae2c5348e4c821d9303a"
@@ -95,6 +99,11 @@ angular-google-analytics@1.1:
 "angular-growl-v2@https://github.com/JanStevens/angular-growl-2.git#0.7.9":
   version "0.7.9"
   resolved "https://github.com/JanStevens/angular-growl-2.git#2a3a40e01419af879f80f582baaeceef3408e295"
+
+angular-hotkeys@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/angular-hotkeys/-/angular-hotkeys-1.7.0.tgz#052e6b6f44dfcd824427798b7f10e1917e8700a1"
+  integrity sha1-BS5rb0TfzYJEJ3mLfxDhkX6HAKE=
 
 angular-i18n@1.7:
   version "1.7.9"
@@ -131,7 +140,7 @@ angular-resource@1.7:
   resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.7.9.tgz#fa53623fae2c60debe2410d692447dcb0ba02396"
   integrity sha512-rXXhCE2qT31Pn4Sl+2XL+ntv4zxnA2OzY+clCl8/pOp/s/gIzxpQlEtXipo3QK8Qur3glbIkeF/bJw+gjVAdUw==
 
-angular-sanitize@1.7:
+angular-sanitize@1.7, angular-sanitize@>=1.5:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.7.9.tgz#6b4d5e826abdabd352b13a7c65c8c74daf6a7b15"
   integrity sha512-nB/xe7JQWF9nLvhHommAICQ3eWrfRETo0EVGFESi952CDzDa+GAJ/2BFBNw44QqQPxj1Xua/uYKrbLsOGWZdbQ==
@@ -140,6 +149,11 @@ angular-scroll@0.6:
   version "0.6.5"
   resolved "https://registry.yarnpkg.com/angular-scroll/-/angular-scroll-0.6.5.tgz#2c5bbd9e4f72315b0f73146f857fd559252f941d"
   integrity sha1-LFu9nk9yMVsPcxRvhX/VWSUvlB0=
+
+angular-scroll@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/angular-scroll/-/angular-scroll-1.0.2.tgz#2768ff35dbe1ce40e0c3fbedd4534888299c3e2d"
+  integrity sha1-J2j/NdvhzkDgw/vt1FNIiCmcPi0=
 
 angular-summernote@0.7.1:
   version "0.7.1"
@@ -173,10 +187,10 @@ angular-translate@2.18, angular-translate@~2.18.1:
   dependencies:
     angular ">=1.2.26 <=1.7"
 
-angular-ui-bootstrap@0.14.3:
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-0.14.3.tgz#d96ce604c84bbd706ba34aabca1d5a7376e18ba6"
-  integrity sha1-2WzmBMhLvXBro0qryh1ac3bhi6Y=
+angular-ui-bootstrap@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-1.2.5.tgz#b0c1eff0bf3b7a65668984a1b81820a90dc60995"
+  integrity sha1-sMHv8L87emVmiYShuBggqQ3GCZU=
 
 "angular-ui-calendar@https://github.com/angular-ui/ui-calendar.git#1.0.1":
   version "1.0.1"
@@ -186,6 +200,18 @@ angular-ui-codemirror@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/angular-ui-codemirror/-/angular-ui-codemirror-0.3.0.tgz#e4286fc50f393f2a6e697c1bf3170424e12cbb60"
   integrity sha1-5ChvxQ85PypuaXwb8xcEJOEsu2A=
+
+"angular-ui-tour@https://github.com/Ross-Byrne/angular-ui-tour.git#master":
+  version "0.9.4"
+  resolved "https://github.com/Ross-Byrne/angular-ui-tour.git#d1ffbcbe8b8e6f4058274c01ba76b4cf86251137"
+  dependencies:
+    angular ">=1.5"
+    angular-bind-html-compile "https://github.com/incuna/angular-bind-html-compile.git#1.4.1"
+    angular-hotkeys "1.7.0"
+    angular-sanitize ">=1.5"
+    angular-scroll "1.0.2"
+    hone "1.1.0"
+    tether "1.4.0"
 
 angular-unsavedchanges@0.2:
   version "0.2.5"
@@ -199,7 +225,7 @@ angular-xeditable@0.10:
   dependencies:
     angular "~1.x"
 
-angular@1.7, "angular@>=1.2.26 <=1.7", angular@^1.0.8, angular@~1.x:
+angular@1.7, "angular@>=1.2.26 <=1.7", angular@>=1.5, angular@^1.0.8, angular@~1.x:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
   integrity sha512-5se7ZpcOtu0MBFlzGv5dsM1quQDoDeUTwZrWjGtTNA7O88cD8TEk5IEKCTDa3uECV9XnvKREVUr7du1ACiWGFQ==
@@ -772,6 +798,11 @@ holderjs@2.6:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/holderjs/-/holderjs-2.6.0.tgz#e2ab6e02d4177684c0fe1414ecea013bc4b1505e"
   integrity sha1-4qtuAtQXdoTA/hQU7OoBO8SxUF4=
+
+hone@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hone/-/hone-1.1.0.tgz#b6ce8d0716ee78c424e1ff83f2bb497493a88639"
+  integrity sha512-OT6AXfa+pMwM0jJbpyZk6/pgQ4m9vMkiUSKMfRbYv+Tnca/IRLsfBbmJy/FcsrqujW54Yvn6g+ApBwUnD8MQZg==
 
 hosted-git-info@^2.1.4:
   version "2.7.1"
@@ -1485,6 +1516,11 @@ taskgroup@^4.0.5, taskgroup@^4.2.0:
   dependencies:
     ambi "^2.2.0"
     csextends "^1.0.3"
+
+tether@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.0.tgz#0f9fa171f75bf58485d8149e94799d7ae74d1c1a"
+  integrity sha1-D5+hcfdb9YSF2BSelHmdeudNHBo=
 
 text-table@^0.2.0:
   version "0.2.0"

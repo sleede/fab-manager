@@ -16,7 +16,7 @@ generate_statistic:
   queue: default
 
 i_calendar_import:
-  cron: "0 2 * * *"
+  cron: "0 * * * *"
   class: "ICalendarImportWorker"
   queue: default
 

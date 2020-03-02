@@ -42,6 +42,9 @@ fr:
         select_some_machines: "Sélectionnez des machines"
         select_all: "Toutes"
         select_none: "Aucune"
+        manage_machines: "Cliquez-ici pour ajouter ou supprimer des machines."
+        manage_spaces: "Cliquez-ici pour ajouter ou supprimer des espaces."
+        manage_trainings: "Cliquez-ici pour ajouter ou supprimer des formations."
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
         to_time: "à"  # eg. from 18:00 to 21:00
@@ -58,6 +61,7 @@ fr:
         select_nb_period: "Veuillez choisir un nombre de périodes pour la récurrence"
         select_end_date: "Veuillez choisir la date de dernière occurrence"
         about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} suivant :"
+        divided_in_slots: "Ce créneau sera proposé à la réservation par tranches de {DURATION} minutes. Contactez votre administrateur système pour modifier ce paramètre."
         reservable: "Réservable(s) :"
         labels: "Étiquette(s) :"
         none: "Aucune"
@@ -89,10 +93,11 @@ fr:
         view_reservations: "Voir les réservations"
         legend: "Légende"
         and: "et"
+        external_sync: "Synchronisation d'agendas"
 
       icalendar:
         icalendar_import: "Import iCalendar"
-        intro: "Fab-manager vous permet d'importer automatiquement des évènements de calendrier, au format iCalendar RFC 5545, depuis des URL externes. Ces URL seront synchronisée toutes les nuits et les évènements seront affichés dans le calendrier publique."
+        intro: "Fab-manager vous permet d'importer automatiquement des évènements de calendrier, au format iCalendar RFC 5545, depuis des URL externes. Ces URL seront synchronisée toutes les heures et les évènements seront affichés dans le calendrier publique. Vous pouvez aussi déclencher une synchronisation en cliquant sur le bouton correspondant, en face de chaque import."
         new_import: "Nouvel import ICS"
         color: "Couleur"
         text_color: "Couleur du texte"
@@ -127,6 +132,7 @@ fr:
       trainings:
         # suivre et surveiller les formations
         trainings_monitoring: "Suivi formations"
+        plan_session: "Planifier une nouvelle session"
         trainings: "Formations"
         add_a_new_training: "Ajouter une nouvelle formation"
         name: "Nom"
@@ -1000,10 +1006,11 @@ fr:
           publish_will_notify: "Publier une nouvelle version enverra une notification à l'ensemble des utilisateurs."
           publish: "Publier"
           users_notified: "Les utilisateurs de la plateforme seront notifiés de la mise à jour."
-          about_analytics: "J'accepte de partager des données anonymes avec l'équipe de développement pour aider à améliorer Fab-Manager."
+          about_analytics: "J'accepte de partager des données anonymes avec l'équipe de développement pour aider à améliorer Fab-manager."
           read_more: "Quelles informations collectons-nous ?"
           analytics:
-            intro_analytics_html: "Vous trouverez ci-dessous une vue détaillée de toutes les données de Fab-Manager collectera <strong>si l'autorisation lui est accordée.</strong>"
+            title: "Amélioration de l'application"
+            intro_analytics_html: "Vous trouverez ci-dessous une vue détaillée de toutes les données de Fab-manager collectera <strong>si l'autorisation lui est accordée.</strong>"
             version: "Version de l'application"
             members: "Nombre de membres"
             admins: "Nombre d'administrateurs"
@@ -1056,3 +1063,191 @@ fr:
         report_will_be_destroyed: "Une fois le signalement traité, le rapport sera supprimé. Cette action est irréversible, continuer ?"
         report_removed: "Le rapport a bien été supprimé"
         failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"
+      tour:
+        conclusion:
+          title: "Merci de votre attention"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+        trainings:
+          welcome:
+            title: "Formations"
+            content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
+          trainings:
+            title: "Gérer les formations"
+            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur [Agenda].</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
+          filter:
+            title: "Filtre"
+            content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."
+          tracking:
+            title: "Suivi formations"
+            content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées, le cas échéant."
+        calendar:
+          welcome:
+            title: "Agenda"
+            content: "À partir de cet écran, vous pourrez planifier les créneaux durant lesquels les formations, machines et espaces seront réservables par les membres."
+          agenda:
+            title: "L'agenda"
+            content: "Cliquez dans l'agenda pour commencer la création d'une nouvelle plage de disponibilité. Vous pouvez sélectionner directement toute la plage horaire souhaitée en maintenant votre clic."
+          export:
+            title: "Exporter"
+            content: "Lancez la génération d'un fichier Excel, listant l'ensemble des créneaux de disponibilité créés dans l'agenda."
+          import:
+            title: "Importer des agendas externes"
+            content: "Permet d'importer des agendas depuis une source externe au format iCal."
+        members:
+          welcome:
+            title: "Utilisateurs"
+            content: "Ici vous pourrez créer, modifier et supprimer des membres et des administrateurs. Vous pourrez également gérer les groupes, les étiquettes, réaliser des imports / exports avec des fichiers de tableur et connecter un logiciel de SSO."
+          list:
+            title: "Liste des membres"
+            content: "Par défaut, ce tableau liste l'ensemble des membres de votre Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+          search:
+            title: "Rechercher un utilisateur"
+            content: "Ce champ de saisie vous permet de faire une recherche en texte libre sur l'ensemble des colonnes du tableau ci-dessous."
+          filter:
+            title: "Filtrer la liste"
+            content: "<p>Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.</p><p>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans.</p>"
+          actions:
+            title: "Actions sur le membre"
+            content: "<p>Les boutons dans cette colonne vous permettent d'afficher et de modifier l'ensemble des paramètres du membre, ou alors de le supprimer de manière irréversible.</p><p>En cas de suppression, les informations de facturation seront néanmoins conservées pendant 10 ans et des données statistiques seront également conservées de manière anonyme.</p>"
+          exports:
+            title: "Exporter"
+            content: "Chacun de ces boutons lance la génération d'un fichier Excel listant l'ensemble des membres, abonnements ou réservations, actuelles et passées."
+          import:
+            title: "Importer des membres"
+            content: "Permet d'importer une liste de membres à créer dans Fab-manager, à partir d'un fichier CSV."
+          admins:
+            title: "Gérer les administrateurs"
+            content: "De la même manière que les membres, gérez ici les administrateurs de votre Fab-manager.<br>Les administrateurs peuvent prendre des réservations pour n'importe quel membre ainsi que modifier l'ensemble des paramètres du logiciel."
+          groups:
+            title: "Gérer les groupes"
+            content: "Les groupes vous permettent de mieux segmenter votre offre tarifaire."
+          labels:
+            title: "Gérer les étiquettes"
+            content: "Les étiquettes vous permettent de réserver certains créneaux aux utilisateurs associés à ces mêmes étiquettes."
+          sso:
+            title: "Authentification unique"
+            content: "Ici vous pourrez mettre en place et gérer un système d'authentification unique (ou Single Sign-On - SSO)."
+        invoices:
+          welcome:
+            title: "Factures"
+            content: "<p>Ici, vous pourrez télécharger les factures et les avoirs émis, ainsi que gérer tout ce qui a trait à la comptabilité et à la facturation.</p><p>Si vous utilisez un logiciel tiers pour gérer vos factures, il est possible de désactiver le module de facturation. Pour cela, contactez votre administrateur système.</p>"
+          list:
+            title: "Liste des factures"
+            content: "Par défaut, ce tableau liste l'ensemble des factures et avoirs émis via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+          chained:
+            title: "Indicateur de chaînage"
+            content: "<p>Cette icône assure l'inaltérablité des données comptables de la facture sur cette ligne, conformément à la loi de finances française de 2018 contre la fraude à la TVA.</p><p>Si une icône rouge apparaît au lieu de celle-ci, merci de contactez immédiatement le support technique.</p>"
+          download:
+            title: "Télécharger"
+            content: "Cliquez ici pour télécharger la facture au format PDF."
+          refund:
+            title: "Avoir"
+            content: "Permet de générer un avoir sur la facture de cette ligne ou certains de ses sous-éléments. <strong>Attention :</strong> Cela générera uniquement le document comptable, le remboursement effectif de l'utilisateur restera toujours à votre charge."
+          settings:
+            title: "Paramètres"
+            content: "<p>Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition.</p><p>C'est notamment ici que vous pourrez définir si vous êtes assujettis à la TVA et à quel taux.</p>"
+          codes:
+            title: "Codes comptables"
+            content: "Paramétrez ici les codes comptables pour tous les types d'écritures générés par le logiciel. Ce paramétrage n'est requis que si vous utilisez la fonctionnalité d'export comptable."
+          export:
+            title: "Export comptable"
+            content: "Une fois les codes configurés, cliquez ici pour accéder à l'interface vous permettant d'exporter les écritures vers un logiciel comptable tiers."
+          periods:
+            title: "Clôturer les périodes comptables"
+            content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la loi anti-fraude TVA <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, en cas d'obligation d'utilisation d'un logiciel certifié (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>faites le test ici</a>), vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel. <a href='mailto:contact@fab-manager.com'>Contactez-nous<a/> pour l'obtenir.</p>"
+        pricing:
+          welcome:
+            title: "Abonnements & Tarifs"
+            content: "Gérez les formules d'abonnement et les prix des différents services que vous proposez à vos membres."
+          new_plan:
+            title: "Nouvelle formule d'abonnement"
+            content: "Créez des formules d'abonnement pour proposer des prix préférentiels sur les machines et les espaces, aux utilisateurs réguliers."
+          trainings:
+            title: "Formations"
+            content: "Définissez ici les prix des formations, par groupe d'utilisateurs."
+          machines:
+            title: "Machines"
+            content: "Définissez ici les prix des créneaux machine, par groupe d'utilisateurs. Ces prix seront appliqués aux utilisateurs qui n'ont pas d'abonnement."
+          spaces:
+            title: "Espaces"
+            content: "De la même manière, définissez ici les prix des créneaux des espaces, pour les utilisateurs sans abonnement."
+          credits:
+            title: "Crédits"
+            content: "<p>Les crédits vous permettent d'offrir certains services aux utilisateurs qui souscrivent à un abonnement.</p><p>Vous pouvez, par exemple, offrir 2h d'imprimante 3D pour tous les abonnements annuels ; ou une formation au choix pour les abonnés étudiants, etc.</p>"
+          coupons:
+            title: "Codes promotionnels"
+            content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
+        events:
+          welcome:
+            title: "Évènements"
+            content: "Créez des évènements, suivez leurs réservations et organisez-les depuis cette page."
+          list:
+            title: "Les évènements"
+            content: "Cette liste affiche l'ensemble des évènements passés ou à venir, ainsi que le nombre de réservations pour chacun d'eux."
+          filter:
+            title: "Filtrez les évènements"
+            content: "N'affichez que les évènements à venir dans la liste ci-dessous ; ou au contraire, uniquement ceux déjà passés."
+          categories:
+            title: "Les catégories"
+            content: "Les catégories aident vos utilisateurs à savoir de quel type d'évènement il s'agit. Une catégorie est requise pour chacun des évènements nouvellement créé."
+          themes:
+            title: "Les thématique"
+            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos évènements. Elles peuvent regrouper différents évènements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la thématique « menuiserie ».</p>"
+          ages:
+            title: "Les tranches d'âge"
+            content: "Cet autre filtre optionnel aidera vos utilisateurs à trouver des évènements adaptés à leur profil."
+          prices:
+            title: "Catégories tarifaires"
+            content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
+        project_elements:
+          welcome:
+            title: "Projets"
+            content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
+          abuses:
+            title: "Gérer les signalements"
+            content: "<p>Accédez par ici à la gestion des signalements.</p><p>Des visiteurs peuvent effectuer des signalements sur les projets, par exemple pour une atteinte au droit d'auteur ou pour un texte incitant à la haine.</p><p>La RGPD vous impose de supprimer ces données de signalement une fois que les actions requises ont été effectuées.</p>"
+        statistics:
+          welcome:
+            title: "Statistiques"
+            content: "<p>À partir d'ici, vous pourrez accéder à un ensemble de statistiques sur vos membres et leurs usages au sein de votre Fab Lab.</p><p>Conformément à la RGPD, les utilisateurs ayant supprimé leur compte continuent d'être rapportés dans les statistiques, mais de manière anonyme.</p>"
+          export:
+            title: "Exporter les données"
+            content: "Vous pouvez choisir d'exporter tout ou partie des données statistiques vers un fichier Excel."
+          trending:
+            title: "Évolution"
+            content: "Visualisez l'évolution dans le temps des principaux usages de votre Fab Lab, grâce à des graphiques et des courbes."
+        settings:
+          welcome:
+            title: "Personnalisation de l'application"
+            content: "D'ici, vous pourrez configurer les réglages généraux de Fab-manager ainsi que personnaliser différents éléments de l'interface."
+          home:
+            title: "Personnaliser la page d'accueil"
+            content: "<p>Cet éditeur WYSIWYG vous permet de personnaliser l'apparence de la page d'accueil tout en utilisant différents composants (dernier tweet, brève, etc.).</p><p><strong>Attention :</strong> Gardez à l'esprit que toute modification non maîtrisée peut casser l'apparence de la page d'accueil.</p>"
+          components:
+            title: "Insérer un composant"
+            content: "Cliquez ici pour insérer un composant pré-existant dans la page d'accueil."
+          codeview:
+            title: "Afficher le code HTML"
+            content: "Ce bouton vous permet d'afficher et de modifier directement le code de la page d'accueil. C'est la méthode recommandée, mais elle nécessite une connaissance préalable du HTML."
+          reset:
+            title: "Revenir en arrière"
+            content: "À tout moment, vous pouvez restaurer la page d'accueil initiale en cliquant ici."
+          css:
+            title: "Personnaliser la feuille de style"
+            content: "Pour les utilisateurs avancés, il est possible de définir une feuille de style (CSS) personnalisée pour la page d'accueil."
+          about:
+            title: "À propos"
+            content: "Personnalisez entièrement cette page pour présenter votre activité."
+          privacy:
+            title: "Politique de confidentialité"
+            content: "<p>Expliquez ici la façon dont vous utilisez les données que vous recueillez sur vos membres.</p><p>La RGPD impose qu'une politique de confidentialité soit définie, ainsi qu'un délégué à la protection des données.</p>"
+          draft:
+            title: "Brouillon"
+            content: "Cliquez ici pour afficher un brouillon à trous d'une politique de confidentialité, qu'il ne vous reste plus qu'à relire et à compléter."
+        open_api:
+          welcome:
+            title: "OpenAPI"
+            content: "Fab-manager propose une API ouverte permettant à des logiciels tiers de s'interfacer simplement avec ses données. Cet écran vous permet d'accorder des accès à cette API."
+          doc:
+            title: "Documentation"
+            content: "Cliquez ici pour accéder à la documentation en ligne de l'API."

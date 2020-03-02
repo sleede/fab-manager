@@ -1,4 +1,4 @@
-# Changelog Fab Manager
+# Changelog Fab-manager
 
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - Ability to fully customize the home page
@@ -21,12 +21,16 @@
 - Improved user experience in defining slots in the calendar management
 - Improved notification email to the member when a rolling subscription is taken
 - Notify all admins on the creation of a refund invoice
+- Helper links between admin sections of the scheduling process
 - Calendar management: improved legend display and visual behavior
+- Reorganized left menu
 - Create machine availabilities: select all/none in a click
 - Prevent event reservation in the past [Taiga#127]
 - Removed the need of twitter API keys to display the last tweet on the home page
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
+- Updated angular-ui-bootstrap from v0.14 to v1.2
+- Updated caxlsx to 3.0.1 and rails_axlsx to rails_caxlsx
 - Option to disable developers analytics
 - Added the a "cron" tab in Sidekiq web-ui to watch scheduled tasks
 - Integration of Crowdin "in-context" translation management system
@@ -35,10 +39,16 @@
 - Unified translations syntax to use ICU MessageFormat
 - Refactored front-end translations keys with unified paths
 - Updated and refactored README and documentations
+- Harmonized Fab-manager typography and case
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]
 - Fix a bug: logs are not printed in staging environment
+- Fix a bug: theme colors must be selected twice before the changes became effective
+- Fix a bug: datepicker does not work in profile completion screen
+- Fix a bug: unable to select a group in profile completion screen
+- Fix a bug: in some cases, bogus admin notification on profile completed
+- Fix a bug: with Firefox browser, the texts in date inputs are shifted to the bottom
 - Fix a bug: sometimes when browsing the invoices section, the translations are missing
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://nvd.nist.gov/vuln/detail/CVE-2019-15587)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://nvd.nist.gov/vuln/detail/CVE-2019-10768)
@@ -224,7 +234,7 @@
 - Improved date checks before closing an accounting period
 - Paginate list of coupons
 - Allow filtering coupons list
-- Fix a bug: when VAT has changed during fab-manager's lifecycle, this may not be reflected in archives
+- Fix a bug: when VAT has changed during Fab-manager's lifecycle, this may not be reflected in archives
 - Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
 
 ## v3.0.1 2019 April 1st
@@ -257,7 +267,7 @@
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
 - [TODO DEPLOY] add `DISK_SPACE_MB_ALERT` and `SUPERADMIN_EMAIL` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the `accounting` volume to the fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
+- [TODO DEPLOY] add the `accounting` volume to the Fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
 
 ## v2.8.4 2019 March 18
 
@@ -396,7 +406,7 @@
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
-- Set Stripe API version, all fab-managers has to use this version because codebase relies on it
+- Set Stripe API version, all Fab-managers has to use this version because codebase relies on it
 - Fix a security issue: OmniAuth < 1.3.2  has a security vulnerability described in [CVE-2017-18076](https://nvd.nist.gov/vuln/detail/CVE-2017-18076)
 - Fix a security issue: rack-protection < 1.5.5 has a security vulnerability described in [CVE-2018-1000119](https://nvd.nist.gov/vuln/detail/CVE-2018-1000119)
 - Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency 
@@ -667,7 +677,7 @@
 - Project images will show in full-size on a click
 - Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
 - Share project with Facebook/Twitter
-- Display fab-manager's version in "Powered by" label, when logged as admin
+- Display Fab-manager's version in "Powered by" label, when logged as admin
 - Load translation locales from subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events

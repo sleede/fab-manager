@@ -1,6 +1,6 @@
-# Install Fab-Manager in a development environment with Docker
+# Install Fab-manager in a development environment with Docker
 
-This document will guide you through all the steps needed to set up a development environment for Fab-Manager.
+This document will guide you through all the steps needed to set up a development environment for Fab-manager.
 
 ##### Table of contents
 
@@ -42,7 +42,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    sudo reboot
    ```
 
-6. Create a docker network for fab-manager.
+6. Create a docker network for Fab-manager.
    You may have to change the network address if it is already in use.
    > 🍏 If you're using MacOS, this is not required.
    ```bash
@@ -132,7 +132,7 @@ This procedure is not easy to follow so if you don't need to write some code for
    foreman s -p 3000
    ```
 
-16. You should now be able to access your local development FabManager instance by accessing `http://localhost:3000` in your web browser.
+16. You should now be able to access your local development Fab-manager instance by accessing `http://localhost:3000` in your web browser.
 
 17. You can login as the default administrator using the credentials defined previously.
 
@@ -162,12 +162,12 @@ We will use docker to easily install the required version of PostgreSQL.
    postgres:9.6
    ```
 
-3. Configure fab-manager to use it.
+3. Configure Fab-manager to use it.
    On linux systems, PostgreSQL will be available at 172.18.0.2.
    On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
    See [environment.md](environment.md) for more details.
 
-4 . Finally, you may want to have a look at detailed informations about PostgreSQL usage in fab-manager.
+4 . Finally, you may want to have a look at detailed informations about PostgreSQL usage in Fab-manager.
     Some information about that is available in the [PostgreSQL Readme](postgresql_readme.md).
 
 <a name="elasticsearch"></a>
@@ -175,7 +175,7 @@ We will use docker to easily install the required version of PostgreSQL.
 
 ElasticSearch is a powerful search engine based on Apache Lucene combined with a NoSQL database used as a cache to index data and quickly process complex requests on it.
 
-In FabManager, it is used for the admin's statistics module and to perform searches in projects.
+In Fab-manager, it is used for the admin's statistics module and to perform searches in projects.
 
 <a name="setup-elasticsearch"></a>
 ### Install ElasticSearch
@@ -205,7 +205,7 @@ In FabManager, it is used for the admin's statistics module and to perform searc
    elasticsearch:5.6
    ```
 
-4. Configure fab-manager to use it.
+4. Configure Fab-manager to use it.
    On linux systems, ElasticSearch will be available at 172.18.0.3.
    On MacOS, you'll have to set the host to 127.0.0.1 (or localhost).
    See [environment.md](environment.md) for more details.

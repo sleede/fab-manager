@@ -150,22 +150,19 @@ Application.Controllers.controller('EditTrainingController', [ '$scope', '$state
 /**
  * Controller used in the trainings management page, allowing admins users to see and manage the list of trainings and reservations.
  */
-Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs',
-  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('TrainingsAdminController', ['$scope', '$state', '$uibModal', 'Training', 'trainingsPromise', 'machinesPromise', '_t', 'growl', 'dialogs', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, Training, trainingsPromise, machinesPromise, _t, growl, dialogs, Member, uiTourService) {
 
     // list of trainings
-    let groupAvailabilities;
     $scope.trainings = trainingsPromise;
 
     // simplified list of machines
     $scope.machines = machinesPromise;
 
-    // Training to monitor, binded with drop-down selection
-    $scope.monitoring =
-    { training: null };
+    // Training to monitor, bound with drop-down selection
+    $scope.monitoring = { training: null };
 
-    // list of training availabilies, grouped by date
+    // list of training availabilities, grouped by date
     $scope.groupedAvailabilities = {};
 
     // default: accordions are not open
@@ -183,6 +180,9 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       'disabled',
       'all'
     ];
+
+    // default tab: trainings list
+    $scope.tabs = { active: 0 };
 
     /**
      * In the trainings listing tab, return the stringified list of machines associated with the provided training
@@ -335,14 +335,107 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       });
     };
 
+    /**
+     * Setup the feature-tour for the admin/trainings page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupTrainingsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('trainings');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.trainings.welcome.title'),
+        content: _t('app.admin.tour.trainings.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .manage-trainings',
+        stepId: 'trainings',
+        order: 1,
+        title: _t('app.admin.tour.trainings.trainings.title'),
+        content: _t('app.admin.tour.trainings.trainings.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .filter-trainings',
+        stepId: 'filter',
+        order: 2,
+        title: _t('app.admin.tour.trainings.filter.title'),
+        content: _t('app.admin.tour.trainings.filter.content'),
+        placement: 'left'
+      });
+      uitour.createStep({
+        selector: '.trainings-monitoring .post-tracking',
+        stepId: 'tracking',
+        order: 3,
+        title: _t('app.admin.tour.trainings.tracking.title'),
+        content: _t('app.admin.tour.trainings.tracking.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 4,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'filter' || nextStep.stepId === 'machines') { $scope.tabs.active = 0; }
+        if (nextStep.stepId === 'tracking') { $scope.tabs.active = 1; }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'trainings' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('trainings') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
+
     /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('trainings');
+        if (tour) { tour.start(); }
+      }
+    };
 
     /**
      * Group the trainings availabilities by trainings and by dates and return the resulting tree
      * @param trainings {Array} $scope.trainings is expected here
      * @returns {Object} Tree constructed as /training_name/year/month/day/[availabilities]
      */
-    return groupAvailabilities = function (trainings) {
+    const groupAvailabilities = function (trainings) {
       const tree = {};
       for (let training of Array.from(trainings)) {
         tree[training.name] = {};
@@ -367,6 +460,9 @@ Application.Controllers.controller('TrainingsAdminController', ['$scope', '$stat
       }
       return tree;
     };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
   }
 
 ]);

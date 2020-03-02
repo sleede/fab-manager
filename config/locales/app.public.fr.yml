@@ -23,6 +23,9 @@ fr:
         my_invoices: "Mes factures"
         my_wallet: "Mon porte-monnaie"
 
+        # aide contextuelle
+        help: "Aide"
+
         # connexion / déconnexion
         sign_out: "Se déconnecter"
         sign_up: "S'inscrire"
@@ -41,18 +44,18 @@ fr:
         reserve_a_space: "Réserver un espace"
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
-        public_calendar: "Calendrier"
+        public_calendar: "Agenda"
 
         # menu de gauche (partie admin)
-        trainings_monitoring: "Suivi formations"
-        manage_the_calendar: "Gérer le calendrier"
-        manage_the_users: "Gérer les utilisateurs"
-        manage_the_invoices: "Gérer les factures"
+        trainings_monitoring: "Formations"
+        manage_the_calendar: "Agenda"
+        manage_the_users: "Utilisateurs"
+        manage_the_invoices: "Factures"
         subscriptions_and_prices: "Abonnements & Tarifs"
-        manage_the_events: "Gérer les évènements"
-        manage_the_machines: "Gérer les machines"
-        manage_the_spaces: "Gérer les espaces"
-        manage_the_projects_elements: "Gérer les éléments projets"
+        manage_the_events: "Évènements"
+        manage_the_machines: "Machines"
+        manage_the_spaces: "Espaces"
+        manage_the_projects_elements: "Projets"
         statistics: "Statistiques"
         customization: "Personnalisation"
         open_api_clients: "Clients OpenAPI"
@@ -123,8 +126,8 @@ fr:
 
         # Fab-manager's version
         version: "Version :"
-        upgrade_fabmanager: "Mettez à jour Fab-Manager"
-        current_version: "Vous utilisez actuellement la version {VERSION} de Fab-Manager."
+        upgrade_fabmanager: "Mettez à jour Fab-manager"
+        current_version: "Vous utilisez actuellement la version {VERSION} de Fab-manager."
         upgrade_to: "Une nouvelle version est disponible. Vous pouvez mettre à jour vers la version {VERSION}."
         read_more: "Voir les détails de cette version"
         security_version_html: "<strong>Votre version actuelle est vulnérable !</strong><br> Une version ultérieure, actuellement disponible, inclut des correctifs de sécurité. Mettez à jour dès que possible !"
@@ -171,7 +174,7 @@ fr:
         # galerie des projets
         the_fablab_projects: "Les projets du FabLab"
         add_a_project: "Ajouter un projet"
-        search_over_the_whole_network: "Chercher sur tout le réseau Fab Manager"
+        search_over_the_whole_network: "Chercher sur tout le réseau Fab-manager"
         tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmis les projets de tous les Fab-managers utilisant cette fonctionnalité !"
         openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmis les projets de cette plateforme."
         project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
@@ -220,6 +223,7 @@ fr:
         # liste des machines
         the_fablab_s_machines: "Les machines du FabLab"
         add_a_machine: "Ajouter une machine"
+        new_availability: "Ouvrir des réservations"
         book: "Réserver"
         _or_the_: " ou la "
         status_enabled: "Actives"
@@ -294,7 +298,8 @@ fr:
         add_an_event: "Ajouter un évènement"
         load_the_next_events: "Charger les évènements suivants..."
         full_price_: "Plein tarif :"
-        to_date: "au" # context: date. eg: 'from 01/01 to 01/05'
+        to_date: "au" # eg. from 01/01 to 01/05
+        all_themes: "Toutes les thématiques"
 
       events_show:
         # détails d'un événement et réservation
@@ -306,8 +311,8 @@ fr:
         ending: "Fin :"
         opening_hours: "Horaires :"
         all_day: "Toute la journée"
-        from_time: "De" # context: time. eg. 'from 18:00 to 21:00'
-        to_time: "à"  # context: time. eg. 'from 18:00 to 21:00'
+        from_time: "De" # eg. from 18:00 to 21:00
+        to_time: "à"  # eg. from 18:00 to 21:00
         full_price_: "Plein tarif :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet"
@@ -361,6 +366,7 @@ fr:
       spaces_list:
         # liste des espaces
         the_spaces: "Les espaces"
+        new_availability: "Ouvrir des réservations"
         add_a_space: "Ajouter un espace"
         status_enabled: "Activés"
         status_disabled: "Désactivés"
@@ -377,3 +383,83 @@ fr:
         characteristics: "Caractéristiques"
         files_to_download: "Fichiers à télécharger"
         projects_using_the_space: "Projets utilisant l'espace"
+
+      tour:
+        conclusion:
+          title: "Merci de votre attention"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+        welcome:
+          welcome:
+            title: "Bienvenue dans Fab-manager"
+            content: "Afin de vous aider à bien prendre en main l'application, nous allons procéder à une rapide visite guidée des fonctionnalités."
+          home:
+            title: "Page d'accueil"
+            content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
+          machines:
+            title: "Machines"
+            content: "<p>Cette page vous permettra de consulter la liste de toutes les machines et réserver un créneau pour le compte d'un membre.</p><p>Une machine peut-être, par exemple, une imprimante 3D.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une machine.</p>"
+          trainings:
+            title: "Formations"
+            content: "<p>Cette page vous permettra de consulter la liste de toutes les formations et d'inscrire un membre à une session de formation.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, s'inscrire eux-même une session de formation.</p>"
+          spaces:
+            title: "Espaces"
+            content: "<p>Cette page vous permettra de consulter la liste de tous les espaces disponibles et de réserver une place sur un créneau, pour le compte d'un membre.</p><p>Un espace peut-être, par exemple, un atelier bois ou une salle de réunion.</p><p>Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une place.</p>"
+          events:
+            title: "Évènements"
+            content: "<p>Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !</p><p>Les évènements peuvent être gratuits ou payants (avec plusieurs tarifs), avec ou sans réservation.</p><p>Ici encore, les membres peuvent accéder à cette page et réserver eux-mêmes des places pour des évènements gratuits, ou payants si le paiement par carte bancaire est activé.</p>"
+          calendar:
+            title: "Agenda"
+            content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines (évènements, formations, machines disponibles, etc.)."
+          projects:
+            title: "Projets"
+            content: "<p>Documentez et partagez toutes vos réalisations avec la communauté.</p><p>Si vous utilisez OpenLab, vous pourrez également consulter les projets de l'ensemble du réseau Fab-Manager. <a href='mailto:contact@fab-manager.com'>Contactez-nous</a> pour obtenir votre accès, c'est gratuit !</p>"
+          plans:
+            title: "Abonnements"
+            content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
+          admin:
+            title: "Section administrateur"
+            content: "<p>L'ensemble des éléments ci-dessous ne sont accessibles qu'aux administrateurs. Ils permettent de gérer et de configurer Fab-manager.</p><p>À la fin de cette visite, cliquez sur l'un d'entre eux pour en savoir plus.</p>"
+          about:
+            title: "À propos"
+            content: "Une page que vous pouvez entièrement personnaliser, pour y présenter votre activité et votre structure."
+          notifications:
+            title: "Centre de notifications"
+            content: "<p>Chaque fois qu'il se passe quelque chose d'important (réservations, création de comptes, activité de vos membres, etc.), vous serez notifié ici.</p><p>Vos membres reçoivent également des notifications à cet endroit.</p>"
+          profile:
+            title: "Menu utilisateur"
+            content: "<p>Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager.</p><p>Cet espace est également disponible pour tous vos membres.</p>"
+          news:
+            title: "Les brèves"
+            content: "<p>Cet espace vous permet d'afficher les dernières actualités de votre structure.</p><p>Vous pouvez facilement changer son contenu depuis [Personnalisation] > [Page d'accueil].</p>"
+          last_projects:
+            title: "les derniers projets"
+            content: "<p>Ce carousel fait défiler les derniers projets documentés par vos membres.</p>"
+          last_tweet:
+            title: "Dernier tweet"
+            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configurez-le depuis [Personnalisation] > [Page d'accueil].</p>"
+          last_members:
+            title: "Derniers membres"
+            content: "Les derniers membres inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
+          next_events:
+            title: "Prochains évènements"
+            content: "Les trois prochains évènements programmés sont affichés dans cette espace."
+          customize:
+            title: "Personnalisez la page d'accueil"
+            content: "<p>Cette page peut être entièrement personnalisée.</p><p>Vous pouvez <a href='mailto:contact@fab-manager.com'>nous contactez</a> pour réaliser une personnalisation sur mesure de la page d'accueil.</p>"
+          version:
+            title: "Version de l'application"
+            content: "Passez votre curseur sur cette icône pour connaître la version de Fab-manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
+        machines:
+          welcome:
+            title: "Machines"
+            content: "<p>Les machines sont les outils que vous mettez à disposition de vos utilisateurs. Vous devez créer ici les machines qui pourront ensuite être réservées par les membres.</p><p>Vous pouvez également créer des entrées pour des machines non réservables ou en libre accès, il vous suffira ensuite de ne pas associer de créneaux de disponibilités à celles-ci.</p>"
+          view:
+            title: "Consulter"
+            content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez pas supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
+        spaces:
+          welcome:
+            title: "Espaces"
+            content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
+          view:
+            title: "Consulter"
+            content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez pas supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."

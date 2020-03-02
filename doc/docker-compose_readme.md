@@ -1,9 +1,9 @@
-# Install Fab-Manager in production with docker-compose
+# Install Fab-manager in production with docker-compose
 
-This document will guide you through all the steps needed to set up your Fab-Manager app on a production server, based on a solution using Docker and Docker-compose.
+This document will guide you through all the steps needed to set up your Fab-manager app on a production server, based on a solution using Docker and Docker-compose.
 We recommend DigitalOcean, but these steps will work on any Docker-compatible cloud provider or local server.
 
-In order to make it work, please use the same directories structure as described in this guide in your Fab-Manager app folder.
+In order to make it work, please use the same directories structure as described in this guide in your Fab-manager app folder.
 You will need to be root through the rest of the setup.
 
 ##### Table of contents
@@ -39,7 +39,7 @@ Here's a non exhaustive list:
 
 Choose one, depending on your budget, on the server's location, on the uptime guarantee, etc.
 
-You will need at least 2GB of addressable memory (RAM + swap) to install and use FabManager.
+You will need at least 2GB of addressable memory (RAM + swap) to install and use Fab-manager.
 We recommend 4 GB RAM for larger communities.
 
 On DigitalOcean, create a Droplet with One-click apps **"Docker on Ubuntu 16.04 LTS"**.
@@ -71,7 +71,7 @@ connect to the server with `ssh root@your-domain-name`.
 <a name="prepare-the-server"></a>
 ### Prepare the server
 
-Before installing fab-manager, we recommend you to:
+Before installing Fab-manager, we recommend you to:
 - Upgrade your system
 - Setup the server timezone
 - Add at least 2GB of swap memory
@@ -84,16 +84,16 @@ You can run the following script as root to easily perform all these operations:
 ```
 
 <a name="install-fab-manager"></a>
-## Install Fab-Manager
+## Install Fab-manager
 
-Run the following command to install Fab-Manager.
+Run the following command to install Fab-manager.
 This script will guide you through the installation process by checking the requirements and asking you the configuration elements.
 
 ```bash
 \curl -sSL setup.fab-manager.com | bash
 ```
 
-**OR**, if you don't want to install fab-manager in `/apps/fabmanager`, use the following instead:
+**OR**, if you don't want to install Fab-manager in `/apps/fabmanager`, use the following instead:
 ```bash
 \curl -sSL setup.fab-manager.com | bash -s "/my/custom/path"
 ```
@@ -142,14 +142,14 @@ docker-compose run --rm -e ADMIN_EMAIL=xxx -e ADMIN_PASSWORD=xxx fabmanager bund
 <a name="update-fabmanager"></a>
 ## Update Fab-manager
 
-*This procedure updates Fab-Manager to the most recent version by default.*
+*This procedure updates Fab-manager to the most recent version by default.*
 
 > ⚠ If you are upgrading from a very outdated version, you must first upgrade to v2.8.3, then to v3.1.2 and finally to the last version
 
 <a name="steps"></a>
 ### Steps
 
-When a new version is available, follow this procedure to update fab-manager app in a production environment, using docker-compose.
+When a new version is available, follow this procedure to update Fab-manager app in a production environment, using docker-compose.
 You can subscribe to [this atom feed](https://github.com/sleede/fab-manager/releases.atom) to get notified when a new release comes out.
 
 1. go to your app folder

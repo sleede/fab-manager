@@ -12,9 +12,9 @@ welcome_message()
   echo -e "#\e[31m   (__) \_/\_/(____/     \_)(_/\_/\_/\_)__)\_/\_/ \___/(____)(__\_)   \e[0m#"
   echo "#                                                                      #"
   echo "#======================================================================#"
-  printf "\n                 Welcome to Fab-Manager's setup assistant\n\n\n"
-  echo "Thank you for installing Fab-Manager."
-  printf "This script will guide you through the installation process of Fab-Manager\n\n"
+  printf "\n                 Welcome to Fab-manager's setup assistant\n\n\n"
+  echo "Thank you for installing Fab-manager."
+  printf "This script will guide you through the installation process of Fab-manager\n\n"
   echo -e "Please report any \e[1mfeedback or improvement request\e[21m on https://feedback.fab-manager.com/"
   echo -e "For \e[1mbug reports\e[21m, please open a new issue on https://github.com/sleede/fab-manager/issues"
   echo -e "You can call for \e[1mcommunity assistance\e[21m on https://forum.fab-manager.com/"
@@ -66,11 +66,11 @@ read_email()
 
 config()
 {
-  echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-Manager.'
+  echo 'We recommend nginx to serve the application over the network (internet). You can use your own solution or let this script install and configure nginx for Fab-manager.'
   read -rp 'Do you want install nginx? (Y/n) ' NGINX </dev/tty
   if [ "$NGINX" != "n" ]; then
     # if the user doesn't want nginx, let him use its own solution for HTTPS
-    printf "\n\nWe recommend let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-Manager.\n"
+    printf "\n\nWe recommend let's encrypt to secure the application with HTTPS. You can use your own certificate or let this script install and configure let's encrypt for Fab-manager.\n"
     read -rp "Do you want install let's encrypt? (Y/n) " LETSENCRYPT </dev/tty
     if [ "$LETSENCRYPT" != "n" ]; then
       printf "\n\nLet's encrypt requires an email address to receive notifications about certificate expiration.\n"
@@ -109,7 +109,7 @@ prepare_files()
 
   mkdir -p "$FABMANAGER_PATH/elasticsearch/config"
 
-  # fab-manager environment variables
+  # Fab-manager environment variables
   \curl -sSL https://raw.githubusercontent.com/sleede/fab-manager/master/setup/env.example > "$FABMANAGER_PATH/config/env"
 
   # nginx configuration
@@ -204,7 +204,7 @@ get_md_anchor()
 configure_env_file()
 {
   printf "\n\nWe will now configure the environment variables.\n"
-  echo "This allows you to customize Fab-Manager's appearance and behavior."
+  echo "This allows you to customize Fab-manager's appearance and behavior."
   read -rp "Proceed? (Y/n) " confirm </dev/tty
   if [ "$confirm" = "n" ]; then return; fi
 
@@ -213,7 +213,7 @@ configure_env_file()
   variables=(STRIPE_API_KEY STRIPE_PUBLISHABLE_KEY STRIPE_CURRENCY INVOICE_PREFIX FABLAB_WITHOUT_PLANS FABLAB_WITHOUT_SPACES FABLAB_WITHOUT_ONLINE_PAYMENT FABLAB_WITHOUT_INVOICES \
    PHONE_REQUIRED USER_CONFIRMATION_NEEDED_TO_SIGN_IN EVENTS_IN_CALENDAR SLOT_DURATION DEFAULT_MAIL_FROM DELIVERY_METHOD DEFAULT_HOST DEFAULT_PROTOCOL SMTP_ADDRESS SMTP_PORT SMTP_USER_NAME SMTP_PASSWORD SMTP_AUTHENTICATION \
    SMTP_ENABLE_STARTTLS_AUTO SMTP_OPENSSL_VERIFY_MODE SMTP_TLS GA_ID RECAPTCHA_SITE_KEY RECAPTCHA_SECRET_KEY DISQUS_SHORTNAME TWITTER_NAME \
-   FACEBOOK_APP_ID LOG_LEVEL ALLOWED_EXTENSIONS ALLOWED_MIME_TYPES MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE DISK_SPACE_MB_ALERT \
+   FACEBOOK_APP_ID LOG_LEVEL ALLOWED_EXTENSIONS ALLOWED_MIME_TYPES MAX_IMAGE_SIZE MAX_CAO_SIZE MAX_IMPORT_SIZE DISK_SPACE_MB_ALERT FEATURE_TOUR_BEHAVIOR \
    SUPERADMIN_EMAIL APP_LOCALE RAILS_LOCALE MOMENT_LOCALE SUMMERNOTE_LOCALE ANGULAR_LOCALE MESSAGEFORMAT_LOCALE FULLCALENDAR_LOCALE ELASTICSEARCH_LANGUAGE_ANALYZER TIME_ZONE \
    WEEK_STARTING_DAY D3_DATE_FORMAT UIB_DATE_FORMAT EXCEL_DATE_FORMAT OPENLAB_APP_ID OPENLAB_APP_SECRET OPENLAB_DEFAULT)
   for variable in "${variables[@]}"; do
@@ -258,7 +258,7 @@ setup_assets_and_databases()
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:create # create the database
   cd "$FABMANAGER_PATH" && docker-compose run --rm fabmanager bundle exec rake db:migrate # run all the migrations
   # prompt default admin email/password
-  printf "\n\nWe will now create the default administrator of Fab-Manager.\n"
+  printf "\n\nWe will now create the default administrator of Fab-manager.\n"
   read_email
   PASSWORD=$(read_password)
   cd "$FABMANAGER_PATH" && docker-compose run --rm -e ADMIN_EMAIL="$EMAIL" -e ADMIN_PASSWORD="$PASSWORD" fabmanager bundle exec rake db:seed # seed the database
@@ -304,7 +304,7 @@ final_message()
   printf "\n\n"
   echo -e "Please \e[1mkeep track of the logs\e[21m produced by this script and check that everything is running correctly."
   echo "You can call for the community assistance on https://forum.fab-manager.com"
-  echo -e "We wish you a pleasant use of \e[31mFab-Manager\e[0m"
+  echo -e "We wish you a pleasant use of \e[31mFab-manager\e[0m"
 }
 
 function trap_ctrlc()
