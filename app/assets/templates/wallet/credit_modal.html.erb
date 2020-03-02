@@ -1,17 +1,17 @@
 <div class="modal-header">
   <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-  <h1 translate>{{ 'credit_title' }}</h1>
+  <h1 translate>{{ 'app.shared.wallet.credit_title' }}</h1>
 </div>
 <div class="modal-body">
 
   <div class="alert alert-warning m-b-md m-b-sm">
     <i class="fa fa-warning m-sm inline" aria-hidden="true"></i>
-    <div class="inline pull-right width-90 m-t-n-xs" translate>{{ 'warning_uneditable_credit' }}</div>
+    <div class="inline pull-right width-90 m-t-n-xs" translate>{{ 'app.shared.wallet.warning_uneditable_credit' }}</div>
   </div>
 
   <form name="walletForm" ng-class="{'has-error': walletForm.amount.$dirty && walletForm.amount.$invalid}">
     <div class="text-right amountGroup m-r-md">
-      <label for="amount" class="beforeAmount" translate>{{ 'credit_label' }}</label>
+      <label for="amount" class="beforeAmount" translate>{{ 'app.shared.wallet.credit_label' }}</label>
       <input class="form-control m-l"
              type="number"
              id="amount"
@@ -20,11 +20,11 @@
              required min="1"
              step="any">
       <span class="afterAmount">{{currencySymbol}}</span>
-      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.required" translate>{{'amount_is_required'}}</span>
-      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'amount_minimum_1' | translate }} {{currencySymbol}}.</span>
+      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.required" translate>{{'app.shared.wallet.amount_is_required'}}</span>
+      <span class="help-block" ng-show="walletForm.amount.$dirty && walletForm.amount.$error.min">{{ 'app.shared.wallet.amount_minimum_1' | translate }} {{currencySymbol}}.</span>
     </div>
     <div class="text-right amountGroup m-t m-r-md" ng-class="{'has-error': walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$invalid }">
-      <label for="amount_confirm" class="beforeAmount" translate>{{ 'confirm_credit_label' }}</label>
+      <label for="amount_confirm" class="beforeAmount" translate>{{ 'app.shared.wallet.confirm_credit_label' }}</label>
       <input class="form-control m-l"
              type="number"
              id="amount_confirm"
@@ -35,28 +35,28 @@
              step="any"
              match="amount">
       <span class="afterAmount">{{currencySymbol}}</span>
-      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.required" translate>{{'amount_confirm_is_required'}}</span>
-      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.match">{{ 'amount_confirm_does_not_match' | translate }}</span>
+      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.required" translate>{{'app.shared.wallet.amount_confirm_is_required'}}</span>
+      <span class="help-block" ng-show="walletForm.amount_confirm.$dirty && walletForm.amount_confirm.$error.match">{{ 'app.shared.wallet.amount_confirm_does_not_match' | translate }}</span>
     </div>
 
     <hr/>
     <div class="text-right m-t" ng-hide="fablabWithoutInvoices">
-      <label for="generate_avoir" translate>{{ 'generate_a_refund_invoice' }}</label>
+      <label for="generate_avoir" translate>{{ 'app.shared.wallet.generate_a_refund_invoice' }}</label>
       <div class="inline m-l">
         <input bs-switch
                ng-model="generate_avoir"
                id="generate_avoir"
                name="generate_avoir"
                type="checkbox"
-               switch-on-text="{{ 'yes' | translate }}"
-               switch-off-text="{{ 'no' | translate }}"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
                switch-animate="true"/>
       </div>
     </div>
 
     <div ng-show="generate_avoir">
       <div class="m-t" ng-class="{'has-error': walletForm.avoir_date.$dirty && walletForm.avoir_date.$invalid }">
-        <label  for="avoir_date" translate>{{ 'creation_date_for_the_refund' }}</label>
+        <label  for="avoir_date" translate>{{ 'app.shared.wallet.creation_date_for_the_refund' }}</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             <input type="text"
@@ -71,12 +71,12 @@
                    ng-click="toggleDatePicker($event)"
                    ng-required="generate_avoir"/>
           </div>
-        <span class="help-block" ng-show="walletForm.avoir_date.$dirty && walletForm.avoir_date.$error.required" translate>{{ 'creation_date_is_required' }}</span>
+        <span class="help-block" ng-show="walletForm.avoir_date.$dirty && walletForm.avoir_date.$error.required" translate>{{ 'app.shared.wallet.creation_date_is_required' }}</span>
       </div>
 
       <div class="m-t">
-        <label for="description" translate>{{ 'description_optional' }}</label>
-        <p translate>{{ 'will_appear_on_the_refund_invoice' }}</p>
+        <label for="description" translate>{{ 'app.shared.wallet.description_optional' }}</label>
+        <p translate>{{ 'app.shared.wallet.will_appear_on_the_refund_invoice' }}</p>
         <textarea class="form-control m-t-sm"
                   id="description"
                   name="description"
@@ -88,6 +88,6 @@
 
 </div>
 <div class="modal-footer">
-  <button class="btn btn-info" ng-click="ok()" ng-disabled="walletForm.$invalid || attempting" translate>{{ 'confirm' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  <button class="btn btn-info" ng-click="ok()" ng-disabled="walletForm.$invalid || attempting" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

@@ -1,15 +1,15 @@
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[name]'].$dirty && couponForm['coupon[name]'].$invalid}">
-  <label for="coupon[name]">{{ 'name' | translate }} *</label>
+  <label for="coupon[name]">{{ 'app.shared.coupon.name' | translate }} *</label>
   <input type="text" id="coupon[name]"
          name="coupon[name]"
          class="form-control"
          ng-model="coupon.name"
          required="required"/>
-  <span class="help-block error" ng-show="couponForm['coupon[name]'].$dirty && couponForm['coupon[name]'].$error.required" translate>{{ 'name_is_required' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[name]'].$dirty && couponForm['coupon[name]'].$error.required" translate>{{ 'app.shared.coupon.name_is_required' }}</span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$invalid}">
-  <label for="coupon[code]">{{ 'code' | translate }} *</label>
+  <label for="coupon[code]">{{ 'app.shared.coupon.code' | translate }} *</label>
   <input type="text" id="coupon[code]"
          name="coupon[code]"
          class="form-control"
@@ -17,25 +17,25 @@
          ng-pattern="/^[A-Z0-9\-]+$/"
          ng-disabled="mode == 'EDIT'"
          required="required"/>
-  <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.required" translate>{{ 'code_is_required' }}</span>
-  <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.pattern" translate>{{ 'code_must_be_composed_of_capital_letters_digits_and_or_dashes' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.required" translate>{{ 'app.shared.coupon.code_is_required' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[code]'].$dirty && couponForm['coupon[code]'].$error.pattern" translate>{{ 'app.shared.coupon.code_must_be_composed_of_capital_letters_digits_and_or_dashes' }}</span>
 </div>
 
 <div class="form-group">
-  <label for="coupon[type]">{{ 'kind_of_coupon' | translate }} *</label>
+  <label for="coupon[type]">{{ 'app.shared.coupon.kind_of_coupon' | translate }} *</label>
   <select id="coupon[type]"
           name="coupon[type]"
           class="form-control"
           ng-model="coupon.type"
           ng-disabled="mode == 'EDIT'"
           required="required">
-    <option value="percent_off" translate>{{ 'percentage' }}</option>
-    <option value="amount_off" translate>{{ 'amount' }}</option>
+    <option value="percent_off" translate>{{ 'app.shared.coupon.percentage' }}</option>
+    <option value="amount_off" translate>{{ 'app.shared.coupon.amount' }}</option>
   </select>
 </div>
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$invalid}" ng-show="coupon.type == 'percent_off'">
-  <label for="coupon[percent_off]">{{ 'percent_off' | translate }} *</label>
+  <label for="coupon[percent_off]">{{ 'app.shared.coupon.percent_off' | translate }} *</label>
   <div class="input-group">
     <input type="number" id="coupon[percent_off]"
            name="coupon[percent_off]"
@@ -47,13 +47,13 @@
            ng-required="coupon.type == 'percent_off'"/>
     <span class="input-group-addon"><i class="fa fa-percent"></i></span>
   </div>
-  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$error.required" translate>{{ 'percent_off_is_required' }}</span>
-  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'percentage_must_be_between_0_and_100' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$error.required" translate>{{ 'app.shared.coupon.percent_off_is_required' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'app.shared.coupon.percentage_must_be_between_0_and_100' }}</span>
 </div>
 
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[amount_off]'].$dirty && couponForm['coupon[amount_off]'].$invalid}" ng-show="coupon.type == 'amount_off'">
-  <label for="coupon[amount_off]">{{ 'amount_off' | translate }} *</label>
+  <label for="coupon[amount_off]">{{ 'app.shared.coupon.amount_off' | translate }} *</label>
   <div class="input-group">
     <span class="input-group-addon">{{currencySymbol}}</span>
     <input type="number" id="coupon[amount_off]"
@@ -64,25 +64,25 @@
            ng-disabled="mode == 'EDIT'"
            ng-required="coupon.type == 'amount_off'"/>
   </div>
-  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$error.required" translate>{{ 'percent_off_is_required' }}</span>
-  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'percentage_must_be_between_0_and_100' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && couponForm['coupon[percent_off]'].$error.required" translate>{{ 'app.shared.coupon.percent_off_is_required' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[percent_off]'].$dirty && (couponForm['coupon[percent_off]'].$error.min || couponForm['coupon[percent_off]'].$error.max)" translate>{{ 'app.shared.coupon.percentage_must_be_between_0_and_100' }}</span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$invalid}">
-  <label for="coupon[validity_per_user]">{{ 'validity_per_user' | translate }} *</label>
+  <label for="coupon[validity_per_user]">{{ 'app.shared.coupon.validity_per_user' | translate }} *</label>
   <select id="coupon[validity_per_user]"
           name="coupon[validity_per_user]"
           class="form-control"
           ng-model="coupon.validity_per_user"
           required="required"
           ng-disabled="mode == 'EDIT'"
-          ng-options="( validity | translate ) for validity in validities">
+          ng-options="validityName(validity) for validity in validities">
   </select>
-  <span class="help-block error" ng-show="couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$error.required" translate>{{ 'validity_per_user_is_required' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[validity_per_user]'].$dirty && couponForm['coupon[validity_per_user]'].$error.required" translate>{{ 'app.shared.coupon.validity_per_user_is_required' }}</span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': errors['valid_until']}">
-  <label for="coupon[valid_until]" translate>{{ 'valid_until' }}</label>
+  <label for="coupon[valid_until]" translate>{{ 'app.shared.coupon.valid_until' }}</label>
   <div class="input-group">
     <input type="text" id="coupon[valid_until]"
            name="coupon[valid_until]"
@@ -100,34 +100,34 @@
   <span class="help-block error" ng-show="errors['valid_until']">{{ errors['valid_until'].join(' ; ') }}</span>
 
   <span class="text-info text-xs">
-    <i class="fa fa-lightbulb-o"></i> {{ 'leave_empty_for_no_limit' | translate }}
+    <i class="fa fa-lightbulb-o"></i> {{ 'app.shared.coupon.leave_empty_for_no_limit' | translate }}
   </span>
 </div>
 
 <div class="form-group" ng-class="{'has-error': couponForm['coupon[max_usages]'].$dirty && couponForm['coupon[max_usages]'].$invalid}">
-  <label for="coupon[max_usages]">{{ 'max_usages' | translate }}</label>
+  <label for="coupon[max_usages]">{{ 'app.shared.coupon.max_usages' | translate }}</label>
   <input type="number" id="coupon[max_usages]"
          name="coupon[max_usages]"
          class="form-control"
          ng-model="coupon.max_usages"
          ng-disabled="mode == 'EDIT'"
          min="0"/>
-  <span class="help-block error" ng-show="couponForm['coupon[max_usages]'].$dirty && couponForm['coupon[max_usages]'].$error.min" translate>{{ 'max_usages_must_be_equal_or_greater_than_0' }}</span>
+  <span class="help-block error" ng-show="couponForm['coupon[max_usages]'].$dirty && couponForm['coupon[max_usages]'].$error.min" translate>{{ 'app.shared.coupon.max_usages_must_be_equal_or_greater_than_0' }}</span>
 
   <span class="text-info text-xs">
-    <i class="fa fa-lightbulb-o"></i> {{ 'leave_empty_for_no_limit' | translate }}
+    <i class="fa fa-lightbulb-o"></i> {{ 'app.shared.coupon.leave_empty_for_no_limit' | translate }}
   </span>
 </div>
 
 <div class="form-group">
-  <label for="coupon[active]" translate>{{ 'enabled' }}</label>
+  <label for="coupon[active]" translate>{{ 'app.shared.coupon.enabled' }}</label>
   <input bs-switch
          ng-model="coupon.active"
          id="coupon[active]"
          type="checkbox"
          class="form-control"
-         switch-on-text="{{ 'yes' | translate }}"
-         switch-off-text="{{ 'no' | translate }}"
+         switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+         switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
          switch-animate="true" />
   <input type="hidden" name="coupon[active]" value="{{coupon.active}}"/>
 </div>

@@ -1,20 +1,20 @@
 <div class="modal-header">
-    <h3 class="modal-title" translate>{{ 'expiration_date' }}</h3>
+    <h3 class="modal-title" translate>{{ 'app.admin.members_edit.expiration_date' }}</h3>
 </div>
 <div class="modal-body m-lg">
     <div class="alert alert-danger">
       <div ng-show="free">
-        <p translate>{{ 'you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days' }}</p>
-        <p translate>{{ 'credits_will_remain_unchanged' }}</p>
+        <p translate>{{ 'app.admin.members_edit.you_intentionally_decide_to_extend_the_user_s_subscription_by_offering_him_free_days' }}</p>
+        <p translate>{{ 'app.admin.members_edit.credits_will_remain_unchanged' }}</p>
       </div>
       <div ng-hide="free">
-        <p translate>{{ 'you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription' }}</p>
-        <p translate>{{ 'credits_will_be_reset' }}</p>
+        <p translate>{{ 'app.admin.members_edit.you_intentionally_decide_to_extend_the_user_s_subscription_by_charging_him_again_for_his_current_subscription' }}</p>
+        <p translate>{{ 'app.admin.members_edit.credits_will_be_reset' }}</p>
       </div>
     </div>
     <form role="form" name="subscriptionForm" novalidate>
       <div class="form-group">
-        <label translate>{{ 'until_expiration_date' }}</label>
+        <label translate>{{ 'app.admin.members_edit.until_expiration_date' }}</label>
         <input type="text"
                class="form-control"
                name="subscription[expired_at]"
@@ -30,6 +30,6 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-warning" ng-click="ok()" ng-disabled="subscriptionForm.$invalid" translate>{{ 'confirm' }}</button>
-    <button class="btn btn-primary" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+    <button class="btn btn-warning" ng-click="ok()" ng-disabled="subscriptionForm.$invalid" translate>{{ 'app.shared.buttons.confirm' }}</button>
+    <button class="btn btn-primary" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

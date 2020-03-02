@@ -1,9 +1,9 @@
 <section class="panel panel-default bg-token m-lg">
     <div class="panel-body m-r">
-        <h3 translate>{{ 'do_you_already_have_an_account' }}</h3>
-        <p ng-hide="hasDuplicate()" translate>{{ 'do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access' }}</p>
-        <p ng-show="hasDuplicate()" translate>{{ 'just_specify_code_here_to_recover_access' }}</p>
-        <p class="pull-right"><a href="#" ng-click="resendCode($event)" translate>{{ 'i_did_not_receive_the_code' }}</a></p>
+        <h3 translate>{{ 'app.logged.profile_completion.do_you_already_have_an_account' }}</h3>
+        <p ng-hide="hasDuplicate()" translate>{{ 'app.logged.profile_completion.do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access' }}</p>
+        <p ng-show="hasDuplicate()" translate>{{ 'app.logged.profile_completion.just_specify_code_here_to_recover_access' }}</p>
+        <p class="pull-right"><a href="#" ng-click="resendCode($event)" translate>{{ 'app.logged.profile_completion.i_did_not_receive_the_code' }}</a></p>
         <div class="row">
             <div class="col-lg-3 col-lg-offset-1 hidden-md col-sm-3 col-sm-offset-1"></div>
             <div class="col-lg-offset-1 col-lg-6 col-md-12 col-sm-offset-1 col-sm-6">
@@ -14,7 +14,7 @@
                                ng-model="user.auth_token"
                                class="form-control"
                                name="user[auth_token]"
-                               placeholder="{{ 'authentification_code'  | translate }}"/>
+                               placeholder="{{ 'app.logged.profile_completion.authentification_code'  | translate }}"/>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="panel-footer no-padder">
         <input type="button"
-               value="{{ 'confirm_my_code' | translate }}"
+               value="{{ 'app.logged.profile_completion.confirm_my_code' | translate }}"
                class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
                ng-hide="!user.auth_token"
                ng-click="registerAuthToken()"/>

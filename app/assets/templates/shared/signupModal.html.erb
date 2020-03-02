@@ -1,6 +1,6 @@
   <div class="modal-header">
     <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
-    <h1 translate>{{ 'create_your_account' }}</h1>
+    <h1 translate>{{ 'app.public.common.create_your_account' }}</h1>
   </div>
   <div class="">
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
@@ -14,16 +14,16 @@
                      name="gender"
                      ng-model="user.statistic_profile_attributes.gender"
                      value="true"
-                     required/> {{ 'man' | translate }}
+                     required/> {{ 'app.public.common.man' | translate }}
             </label>
             <label class="checkbox-inline">
               <input type="radio"
                      name="gender"
                      ng-model="user.statistic_profile_attributes.gender"
-                     value="false"/> {{ 'woman' | translate }}
+                     value="false"/> {{ 'app.public.common.woman' | translate }}
             </label>
-            <span class="exponent m-l-xs help-cursor" title="{{ 'used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'gender_is_required'}}</span>
+            <span class="exponent m-l-xs help-cursor" title="{{ 'app.public.common.used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="help-block" ng-show="signupForm.gender.$dirty && signupForm.gender.$error.required" translate>{{ 'app.public.common.gender_is_required'}}</span>
           </div>
         </div>
 
@@ -34,10 +34,10 @@
                    name="first_name"
                    ng-model="user.profile_attributes.first_name"
                    class="form-control"
-                   placeholder="{{ 'your_first_name' | translate }}"
+                   placeholder="{{ 'app.public.common.your_first_name' | translate }}"
                    required>
             <span class="exponent m-l-xs help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'first_name_is_required' }}</span>
+            <span class="help-block" ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" translate>{{ 'app.public.common.first_name_is_required' }}</span>
           </div>
           <div class="m-b visible-xs"></div>
           <div class="col-sm-6" ng-class="{'has-error': signupForm.last_name.$dirty && signupForm.last_name.$invalid}">
@@ -45,10 +45,10 @@
                    name="last_name"
                    ng-model="user.profile_attributes.last_name"
                    class="form-control"
-                   placeholder="{{ 'your_surname' | translate }}"
+                   placeholder="{{ 'app.public.common.your_surname' | translate }}"
                    required>
             <span class="exponent m-l-xs help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'surname_is_required' }}</span>
+            <span class="help-block" ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" translate>{{ 'app.public.common.surname_is_required' }}</span>
           </div>
         </div>
 
@@ -60,11 +60,11 @@
                      name="username"
                      ng-model="user.username"
                      class="form-control"
-                     placeholder="{{ 'your_pseudonym' | translate }}"
+                     placeholder="{{ 'app.public.common.your_pseudonym' | translate }}"
                      required>
             </div>
             <span class="exponent help-cursor" title="{{ 'used_for_profile' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.username.$dirty && signupForm.username.$error.required" translate>{{ 'pseudonym_is_required' }}</span>
+            <span class="help-block" ng-show="signupForm.username.$dirty && signupForm.username.$error.required" translate>{{ 'app.public.common.pseudonym_is_required' }}</span>
           </div>
         </div>
 
@@ -76,11 +76,11 @@
                      name="email"
                      ng-model="user.email"
                      class="form-control"
-                     placeholder="{{ 'your_email_address' | translate }}"
+                     placeholder="{{ 'app.public.common.your_email_address' | translate }}"
                      required>
             </div>
-            <span class="exponent help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.email.$dirty && signupForm.email.$error.required" translate>{{ 'email_is_required' }}</span>
+            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="help-block" ng-show="signupForm.email.$dirty && signupForm.email.$error.required" translate>{{ 'app.public.common.email_is_required' }}</span>
           </div>
         </div>
 
@@ -92,13 +92,13 @@
                      name="password"
                      ng-model="user.password"
                      class="form-control"
-                     placeholder="{{ 'your_password' | translate }}"
+                     placeholder="{{ 'app.public.common.your_password' | translate }}"
                      required
                      ng-minlength="8">
             </div>
             <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.required" translate>{{ 'password_is_required' }}</span>
-            <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.minlength" translate>{{ 'password_is_too_short' }}</span>
+            <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.required" translate>{{ 'app.public.common.password_is_required' }}</span>
+            <span class="help-block" ng-show="signupForm.password.$dirty && signupForm.password.$error.minlength" translate>{{ 'app.public.common.password_is_too_short' }}</span>
           </div>
         </div>
 
@@ -110,13 +110,13 @@
                      name="password_confirmation"
                      ng-model="user.password_confirmation"
                      class="form-control"
-                     placeholder="{{ 'type_your_password_again' | translate }}"
+                     placeholder="{{ 'app.public.common.type_your_password_again' | translate }}"
                      required ng-minlength="8"
                      match="user.password">
             </div>
             <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$error.required" translate>{{ 'password_confirmation_is_required' }}</span>
-            <span class="help-block" ng-show="signupForm.password_confirmation.$error.match" translate>{{ 'password_does_not_match_with_confirmation' }}</span>
+            <span class="help-block" ng-show="signupForm.password_confirmation.$dirty && signupForm.password_confirmation.$error.required" translate>{{ 'app.public.common.password_confirmation_is_required' }}</span>
+            <span class="help-block" ng-show="signupForm.password_confirmation.$error.match" translate>{{ 'app.public.common.password_does_not_match_with_confirmation' }}</span>
           </div>
         </div>
 
@@ -127,7 +127,7 @@
                    id="organization"
                    ng-model="user.organization"
                    value="false"/>
-            <label for="organization" translate>{{ 'i_am_an_organization' }}</label>
+            <label for="organization" translate>{{ 'app.public.common.i_am_an_organization' }}</label>
           </div>
         </div>
 
@@ -139,11 +139,11 @@
                      name="organization_name"
                      ng-model="user.profile_attributes.organization_attributes.name"
                      class="form-control"
-                     placeholder="{{ 'name_of_your_organization' | translate }}"
+                     placeholder="{{ 'app.public.common.name_of_your_organization' | translate }}"
                      ng-required="user.organization">
             </div>
-            <span class="exponent help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.organization_name.$dirty && signupForm.organization_name.$error.required" translate>{{ 'organization_name_is_required' }}</span>
+            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="help-block" ng-show="signupForm.organization_name.$dirty && signupForm.organization_name.$error.required" translate>{{ 'app.public.common.organization_name_is_required' }}</span>
           </div>
         </div>
 
@@ -155,11 +155,11 @@
                      name="organization_address"
                      ng-model="user.profile_attributes.organization_attributes.address_attributes.address"
                      class="form-control"
-                     placeholder="{{ 'address_of_your_organization' | translate }}"
+                     placeholder="{{ 'app.public.common.address_of_your_organization' | translate }}"
                      ng-required="user.organization">
             </div>
-            <span class="exponent help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.organization_address.$dirty && signupForm.organization_address.$error.required" translate>{{ 'organization_address_is_required' }}</span>
+            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="help-block" ng-show="signupForm.organization_address.$dirty && signupForm.organization_address.$error.required" translate>{{ 'app.public.common.organization_address_is_required' }}</span>
           </div>
         </div>
 
@@ -167,11 +167,11 @@
           <div class="col-sm-12">
             <div>
               <select ng-model="user.group_id" class="form-control" name="group_id" ng-options="g.id as g.name for g in enabledGroups" required>
-                <option value="" translate>{{ 'your_user_s_profile' }}</option>
+                <option value="" translate>{{ 'app.public.common.your_user_s_profile' }}</option>
               </select>
-              <span class="exponent exponent-select help-cursor" title="{{ 'used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+              <span class="exponent exponent-select help-cursor" title="{{ 'app.public.common.used_for_invoicing' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
             </div>
-            <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'user_s_profile_is_required' }}</span>
+            <span class="help-block" ng-show="signupForm.group_id.$dirty && signupForm.group_id.$error.required" translate>{{ 'app.public.common.user_s_profile_is_required' }}</span>
           </div>
         </div>
 
@@ -186,12 +186,12 @@
                      uib-datepicker-popup="{{datePicker.format}}"
                      datepicker-options="datePicker.options"
                      is-open="datePicker.opened"
-                     placeholder="{{ 'birth_date' | translate }}"
+                     placeholder="{{ 'app.public.common.birth_date' | translate }}"
                      ng-click="openDatePicker($event)"
                      required/>
             </div>
-            <span class="exponent help-cursor" title="{{ 'used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.birthday.$dirty && signupForm.birthday.$error.required" translate>{{ 'birth_date_is_required' }}</span>
+            <span class="exponent help-cursor" title="{{ 'app.public.common.used_for_statistics' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+            <span class="help-block" ng-show="signupForm.birthday.$dirty && signupForm.birthday.$error.required" translate>{{ 'app.public.common.birth_date_is_required' }}</span>
           </div>
         </div>
 
@@ -203,11 +203,13 @@
                      type="text"
                      name="phone"
                      class="form-control"
-                     placeholder="{{ 'phone_number' | translate }}"
-                     required>
+                     placeholder="{{ 'app.public.common.phone_number' | translate }}"
+                     ng-required="phoneRequired">
             </div>
-            <span class="exponent help-cursor" title="{{ 'used_for_reservation' | translate }}"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-            <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" translate>{{ 'phone_number_is_required' }}</span>
+            <span ng-show="phoneRequired" class="exponent help-cursor" title="{{ 'app.public.common.used_for_reservation' | translate }}">
+              <i class="fa fa-asterisk" aria-hidden="true"></i>
+            </span>
+            <span class="help-block" ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" translate>{{ 'app.public.common.phone_number_is_required' }}</span>
           </div>
         </div>
 
@@ -218,7 +220,7 @@
                    id="is_allow_contact"
                    ng-model="user.is_allow_contact"
                    value="true"/>
-            <label for="is_allow_contact" class="help-cursor" title="{{ 'public_profile' | translate }}" translate>{{ 'i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
+            <label for="is_allow_contact" class="help-cursor" title="{{ 'app.public.common.public_profile' | translate }}" translate>{{ 'app.public.common.i_authorize_Fablab_users_registered_on_the_site_to_contact_me' }}</label>
           </div>
         </div>
 
@@ -229,7 +231,7 @@
                    id="is_allow_newsletter"
                    ng-model="user.is_allow_newsletter"
                    value="true"/>
-            <label for="is_allow_newsletter" translate>{{ 'i_accept_to_receive_information_from_the_fablab' }}</label>
+            <label for="is_allow_newsletter" translate>{{ 'app.public.common.i_accept_to_receive_information_from_the_fablab' }}</label>
           </div>
         </div>
 
@@ -242,8 +244,8 @@
                    value="true"
                    ng-required="cgu != null"/>
             <label for="cgu">
-              <span translate>{{ 'i_ve_read_and_i_accept_' }}</span>
-              <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ '_the_fablab_policy' }}</a>
+              <span translate>{{ 'app.public.common.i_ve_read_and_i_accept_' }}</span>
+              <a href="{{cgu.custom_asset_file_attributes.attachment_url}}" target="_blank" translate>{{ 'app.public.common._the_fablab_policy' }}</a>
               <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span></label>
           </div>
         </div>
@@ -255,7 +257,7 @@
         </div>
         <span class="info-required">
           <span class="exponent"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
-          <span translate>{{ 'field_required' }}</span>
+          <span translate>{{ 'app.public.common.field_required' }}</span>
         </span>
         <div ng-if="!cgu">
             <input type="hidden" name="cgu" ng-model="user.cgu" value="true">
@@ -264,5 +266,5 @@
     </div>
   </div>
   <div class="modal-footer no-padder">
-    <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" ng-disabled="signupForm.$invalid" translate>{{ 'confirm' }}</button>
+    <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="ok()" ng-disabled="signupForm.$invalid" translate>{{ 'app.shared.buttons.confirm' }}</button>
   </div>

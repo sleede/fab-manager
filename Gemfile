@@ -61,7 +61,7 @@ group :test do
   gem 'webmock'
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
 end
 
@@ -152,3 +152,5 @@ gem 'sys-filesystem'
 gem 'sha3'
 
 gem 'repost'
+
+gem 'icalendar'

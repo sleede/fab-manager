@@ -191,6 +191,9 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    icalendar (2.5.3)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.3)
     ice_nine (0.11.2)
     jaro_winkler (1.5.1)
     jbuilder (2.5.0)
@@ -208,7 +211,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     libv8 (3.16.14.19)
-    loofah (2.3.0)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -240,7 +243,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     naught (1.1.0)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     notify_with (0.0.2)
       jbuilder (~> 2.0)
@@ -288,7 +291,7 @@ GEM
     pundit (1.0.0)
       activesupport (>= 3.0.0)
     raabro (1.1.6)
-    rack (1.6.11)
+    rack (1.6.12)
     rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
@@ -497,6 +500,7 @@ DEPENDENCIES
   forgery
   friendly_id (~> 5.1.0)
   has_secure_token
+  icalendar
   jbuilder (~> 2.5)
   jbuilder_cache_multi
   jquery-rails

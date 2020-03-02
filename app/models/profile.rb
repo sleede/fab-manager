@@ -10,7 +10,7 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, presence: true, length: { maximum: 30 }
   validates :last_name, presence: true, length: { maximum: 30 }
-  validates_numericality_of :phone, only_integer: true, allow_blank: false
+  validates_numericality_of :phone, only_integer: true, allow_blank: false, if: -> { Rails.application.secrets.phone_required }
 
   after_commit :update_invoicing_profile, if: :invoicing_data_was_modified?, on: [:update]
 

@@ -28,11 +28,12 @@
       <div class="col-lg-7 profile-top-infos">
         <div class="text-xl font-ebold upper">{{user.username}}</div>
         <small class="font-bold">{{user.name}}</small>
-        <small class="text-xs upper font-thin private-profile" ng-show="!user.is_allow_contact"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'private_profile' | translate }}</small>
+        <small class="text-xs upper font-thin private-profile" ng-show="!user.is_allow_contact"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'app.shared.public_profile.private_profile' | translate }}</small>
         <div class="m-t">
-          <small translate>{{ 'last_activity_' }}</small>
-          <div class="text-lt font-bold" ng-if="user.last_sign_in_at">{{ '_on_' | translate }} {{user.last_sign_in_at | amDateFormat: 'LL'}}</div>
-          <small translate>{{ 'email_address' }}</small>
+          <div ng-show="user.last_sign_in_at">
+            <small translate translate-values="{DATE:(user.last_sign_in_at | amDateFormat: 'LL')}">{{ 'app.shared.public_profile.last_activity_html' }}</small>
+          </div>
+          <small translate>{{ 'app.shared.public_profile.email_address' }}</small>
           <div class="text-lt font-bold break-word">{{user.email}}</div>
         </div>
       </div>
@@ -52,11 +53,11 @@
           <div class="wrapper m-t-xl m-b">
             <div class="row m-b">
               <div class="col-xs-5 text-right">
-                <span class="font-bold bio-title" translate>{{ 'interests' }}</span>
+                <span class="font-bold bio-title" translate>{{ 'app.shared.public_profile.interests' }}</span>
                 <div class="m-b m-t-sm">{{user.profile.interest}}</div>
               </div>
               <div class="col-xs-offset-2 col-xs-5">
-                <span class="font-bold bio-title" translate>{{ 'CAD_softwares_mastered' }}</span>
+                <span class="font-bold bio-title" translate>{{ 'app.shared.public_profile.CAD_softwares_mastered' }}</span>
                 <div class="m-t-sm">{{user.profile.software_mastered}}</div>
               </div>
             </div>
@@ -70,23 +71,23 @@
   <div class="col-sm-12 col-md-12 col-lg-6">
     <div class="widget panel b-a m ">
       <div class="panel-heading b-b">
-        <h1 class="red text-u-c" translate>{{ 'trainings' }}</h1>
+        <h1 class="red text-u-c" translate>{{ 'app.shared.public_profile.trainings' }}</h1>
         <!-- <h3 class="text-u-c">Formations</h3> -->
         <ul class="list-unstyled" ng-if="user.training_reservations.length > 0 || user.trainings.length > 0">
           <li ng-repeat="r in user.training_reservations | trainingReservationsFilter:'future'">
-            {{r.reservable.name}} - <span class="label label-info text-white" translate>{{ 'to_come' }}</span>
+            {{r.reservable.name}} - <span class="label label-info text-white" translate>{{ 'app.shared.public_profile.to_come' }}</span>
           </li>
           <li ng-repeat="t in user.trainings">
-            {{t.name}} - <span class="label label-success text-white" translate>{{ 'approved' }}</span>
+            {{t.name}} - <span class="label label-success text-white" translate>{{ 'app.shared.public_profile.approved' }}</span>
           </li>
         </ul>
-        <div ng-if="user.training_reservations.length == 0 && user.trainings.length == 0" translate>{{ 'no_trainings' }}</div>
+        <div ng-if="user.training_reservations.length == 0 && user.trainings.length == 0" translate>{{ 'app.shared.public_profile.no_trainings' }}</div>
       </div>
     </div>
 
     <div class="widget panel b-a m ">
       <div class="panel-heading b-b">
-        <h1 class="red text-u-c m-b" translate>{{ 'projects' }}</h1>
+        <h1 class="red text-u-c m-b" translate>{{ 'app.shared.public_profile.projects' }}</h1>
         <div ng-if="user.all_projects.length > 0" class="row m-t">
           <a class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="project in user.all_projects" ui-sref="app.public.projects_show({id:project.slug})" style="display: block;">
             <div class="card card-project">
@@ -103,14 +104,14 @@
               </div>
 
               <div class="text-center">
-                <span class="m-l-sm label label-success text-white">{{project.author_id == user.id ? 'author' : 'collaborator' | translate}}</span>
-                <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span>
+                <span class="m-l-sm label label-success text-white">{{project.author_id == user.id ? 'author' : 'app.shared.public_profile.collaborator' | translate}}</span>
+                <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.shared.public_profile.rough_draft' }}</span>
               </div>
 
               <div class="card-overlay">
                 <div class="btn-group">
                   <div class="btn btn-default" ng-click="showProject(project)">
-                    {{ 'consult' | translate }}
+                    {{ 'app.shared.buttons.consult' | translate }}
                   </div>
                   <div class="btn btn-default" ui-sref="app.logged.projects_edit({id:project.id})" ng-if="isAuthorized('admin')">
                     <i class="fa fa-edit"></i>
@@ -122,7 +123,7 @@
           </a>
 
         </div>
-        <div ng-if="user.all_projects.length == 0" translate>{{ 'no_projects' }}</div>
+        <div ng-if="user.all_projects.length == 0" translate>{{ 'app.shared.public_profile.no_projects' }}</div>
       </div>
     </div>
 

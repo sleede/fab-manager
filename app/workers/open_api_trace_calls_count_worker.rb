@@ -4,7 +4,7 @@ class OpenAPITraceCallsCountWorker < Sidekiq::Workers
 
   def perform
     OpenAPI::Client.find_each do |client|
-      OpenAPI::CallsCountTracing.create!(client: client, calls_count: client.calls_count, at: DateTime.now)
+      OpenAPI::CallsCountTracing.create!(client: client, calls_count: client.calls_count, at: DateTime.current)
     end
   end
 end

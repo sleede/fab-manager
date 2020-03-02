@@ -1,0 +1,11 @@
+[Unit]
+Description=letsencrypt oneshot timer
+Requires=docker.service
+
+[Timer]
+OnCalendar=*-*-1 06:00:00
+Persistent=true
+Unit=letsencrypt.service
+
+[Install]
+WantedBy=timers.target

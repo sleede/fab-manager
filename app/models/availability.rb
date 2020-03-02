@@ -36,7 +36,7 @@ class Availability < ActiveRecord::Base
   attr_accessor :is_reserved, :slot_id, :can_modify
 
   validates :start_at, :end_at, presence: true
-  validate :length_must_be_1h_minimum, unless: proc { end_at.blank? or start_at.blank? }
+  validate :length_must_be_slot_multiple, unless: proc { end_at.blank? or start_at.blank? }
   validate :should_be_associated
 
   ## elastic callbacks
@@ -155,8 +155,10 @@ class Availability < ActiveRecord::Base
 
   private
 
-  def length_must_be_1h_minimum
-    errors.add(:end_at, I18n.t('availabilities.must_be_at_least_1_hour_after_the_start_date')) if end_at < (start_at + 1.hour)
+  def length_must_be_slot_multiple
+    if end_at < (start_at + Rails.application.secrets.slot_duration.minutes)
+      errors.add(:end_at, I18n.t('availabilities.length_must_be_slot_multiple', MIN: Rails.application.secrets.slot_duration))
+    end
   end
 
   def should_be_associated

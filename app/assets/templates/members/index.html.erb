@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'the_fablab_members' }}</h1>
+        <h1 translate>{{ 'app.logged.members.the_fablab_members' }}</h1>
       </section>
     </div>
 
@@ -21,10 +21,10 @@
       <table class="table">
         <thead>
           <tr>
-            <th style="width:15%" translate>{{ 'avatar' }}</th>
-            <th style="width:15%" translate>{{ 'user' }}</th>
-            <th style="width:15%" translate>{{ 'pseudonym' }}</th>
-            <th style="width:15%" translate>{{ 'email_address' }}</th>
+            <th style="width:15%" translate>{{ 'app.logged.members.avatar' }}</th>
+            <th style="width:15%" translate>{{ 'app.logged.members.user' }}</th>
+            <th style="width:15%" translate>{{ 'app.logged.members.pseudonym' }}</th>
+            <th style="width:15%" translate>{{ 'app.logged.members.email_address' }}</th>
             <th style="width:10%"></th>
           </tr>
         </thead>
@@ -41,7 +41,7 @@
             <td>
               <div class="buttons">
                 <button class="btn btn-default" ui-sref="app.logged.members_show({id: member.slug})">
-                  <i class="fa fa-eye"></i> {{ 'consult' | translate }}
+                  <i class="fa fa-eye"></i> {{ 'app.shared.buttons.consult' | translate }}
                 </button>
               </div>
             </td>
@@ -49,9 +49,9 @@
         </tbody>
       </table>
       <div class="text-center">
-        <button class="btn btn-warning" ng-click="showNextMembers()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_members' | translate }}</button>
+        <button class="btn btn-warning" ng-click="showNextMembers()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.logged.members.display_more_members' | translate }}</button>
       </div>
-      <p ng-if="members.length == 0" translate>{{ 'no_members_for_now' }}</p>
+      <p ng-if="members.length == 0" translate>{{ 'app.logged.members.no_members_for_now' }}</p>
     </div>
   </div>
 </section>

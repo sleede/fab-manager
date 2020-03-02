@@ -243,7 +243,13 @@ class Reservation < ActiveRecord::Base
     true
   end
 
-  def total_booked_seats
+  # @param canceled    if true, count the number of seats for this reservation, including canceled seats
+  def total_booked_seats(canceled: false)
+    # cases:
+    # - machine/training/space reservation => 1 slot = 1 seat (currently not covered by this function)
+    # - event reservation => seats = nb_reserve_place (normal price) + tickets.booked (other prices)
+    return 0 if slots.first.canceled_at && !canceled
+
     total = nb_reserve_places
     total += tickets.map(&:booked).map(&:to_i).reduce(:+) if tickets.count.positive?
 
@@ -252,6 +258,13 @@ class Reservation < ActiveRecord::Base
 
   def user
     statistic_profile.user
+  end
+
+  def update_event_nb_free_places
+    return unless reservable_type == 'Event'
+
+    reservable.update_nb_free_places
+    reservable.save!
   end
 
   private
@@ -279,8 +292,6 @@ class Reservation < ActiveRecord::Base
     errors.add(:training, 'already fully reserved') if Availability.find(slot.availability_id).completed?
   end
 
-  private
-
   def notify_member_create_reservation
     NotificationCenter.call type: 'notify_member_create_reservation',
                             receiver: user,
@@ -291,22 +302,6 @@ class Reservation < ActiveRecord::Base
     NotificationCenter.call type: 'notify_admin_member_create_reservation',
                             receiver: User.admins,
                             attached_object: self
-  end
-
-  def update_event_nb_free_places
-    if reservable_id_was.blank?
-      # simple reservation creation, we subtract the number of booked seats from the previous number
-      nb_free_places = reservable.nb_free_places - total_booked_seats
-    else
-      # reservation moved from another date (for recurring events)
-      seats = total_booked_seats
-
-      reservable_was = Event.find(reservable_id_was)
-      nb_free_places = reservable_was.nb_free_places + seats
-      reservable_was.update_columns(nb_free_places: nb_free_places)
-      nb_free_places = reservable.nb_free_places - seats
-    end
-    reservable.update_columns(nb_free_places: nb_free_places)
   end
 
   def cart_total

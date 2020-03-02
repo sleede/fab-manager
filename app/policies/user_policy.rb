@@ -16,15 +16,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? or (record.is_allow_contact and record.member?) or (user.id == record.id)
+    user.admin? || (record.is_allow_contact && record.member?) || (user.id == record.id)
   end
 
   def update?
-    user.admin? or (user.id == record.id)
+    user.admin? || (user.id == record.id)
   end
 
   def destroy?
-    user.id == record.id
+    user.admin? || (user.id == record.id)
   end
 
   def merge?

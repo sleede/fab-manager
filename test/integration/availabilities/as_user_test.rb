@@ -22,7 +22,7 @@ class Availabilities::AsUserTest < ActionDispatch::IntegrationTest
 
     # Check that we din't get availabilities from the past
     availabilities.each do |a|
-      assert_not a[:start] < DateTime.now, 'retrieved a slot in the past'
+      assert_not a[:start] < DateTime.current, 'retrieved a slot in the past'
     end
 
     # Check that we don't get availabilities in more than a month

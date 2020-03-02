@@ -27,7 +27,7 @@ class VatHistoryService
 
   def vat_history
     chronology = []
-    end_date = DateTime.now
+    end_date = DateTime.current
     Setting.find_by(name: 'invoice_VAT-active').history_values.order(created_at: 'DESC').each do |v|
       chronology.push(start: v.created_at, end: end_date, enabled: v.value == 'true')
       end_date = v.created_at

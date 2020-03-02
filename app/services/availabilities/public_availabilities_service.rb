@@ -47,7 +47,7 @@ class Availabilities::PublicAvailabilitiesService
     availabilities.each do |a|
       space = a.spaces.first
       ((a.end_at - a.start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i.times do |i|
-        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > Time.now
+        next unless (a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes) > DateTime.current
 
         slot = Slot.new(
           start_at: a.start_at + (i * ApplicationHelper::SLOT_DURATION).minutes,

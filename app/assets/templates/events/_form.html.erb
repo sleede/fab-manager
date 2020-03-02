@@ -10,16 +10,16 @@
       <input name="_method" type="hidden" ng-value="method">
 
       <div class="form-group" ng-class="{'has-error': eventForm['event[title]'].$dirty && eventForm['event[title]'].$invalid}">
-        <label for="event_title" class="col-sm-3 control-label">{{ 'title' | translate }} *</label>
+        <label for="event_title" class="col-sm-3 control-label">{{ 'app.shared.event.title' | translate }} *</label>
         <div class="col-sm-9">
           <input ng-model="event.title" type="text" name="event[title]" class="form-control" id="event_title" placeholder="" required>
-          <span class="help-block" ng-show="eventForm['event[title]'].$dirty && eventForm['event[title]'].$error.required" translate>{{ 'title_is_required' }}</span>
+          <span class="help-block" ng-show="eventForm['event[title]'].$dirty && eventForm['event[title]'].$error.required" translate>{{ 'app.shared.event.title_is_required' }}</span>
         </div>
       </div>
 
 
       <div class="form-group">
-        <label for="event_image" class="col-sm-3 control-label" translate>{{ 'matching_visual' }}</label>
+        <label for="event_image" class="col-sm-3 control-label" translate>{{ 'app.shared.event.matching_visual' }}</label>
         <div class="col-sm-9">
           <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(event.event_image)">
             <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
@@ -29,7 +29,7 @@
               <img ng-src="{{ event.event_image }}" alt="" />
             </div>
             <div>
-              <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'choose_a_picture' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'change' }}</span>
+              <span class="btn btn-default btn-file"><span class="fileinput-new">{{ 'app.shared.event.choose_a_picture' | translate }} <i class="fa fa-upload fa-fw"></i></span><span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                 <input type="file" name="event[event_image_attributes][attachment]"></span>
               <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-trash-o"></i></a>
             </div>
@@ -38,7 +38,7 @@
       </div>
 
       <div class="form-group" ng-class="{'has-error': eventForm['event[description]'].$dirty && eventForm['event[description]'].$invalid}">
-        <label for="description" class="col-sm-3 control-label">{{ 'description' | translate }} *</label>
+        <label for="description" class="col-sm-3 control-label">{{ 'app.shared.event.description' | translate }} *</label>
         <div class="col-sm-9">
           <input type="hidden"
                  name="event[description]"
@@ -50,12 +50,12 @@
                       name="event[description]"
                       required>
           </summernote>
-          <span class="help-block" ng-show="eventForm['event[description]'].$dirty && eventForm['event[description]'].$error.required" translate>{{ 'description_is_required' }}</span>
+          <span class="help-block" ng-show="eventForm['event[description]'].$dirty && eventForm['event[description]'].$error.required" translate>{{ 'app.shared.event.description_is_required' }}</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" translate>{{ 'attachments' }}</label>
+        <label class="col-sm-3 control-label" translate>{{ 'app.shared.event.attachments' }}</label>
         <div class="col-sm-9">
           <div ng-repeat="file in event.event_files_attributes" ng-show="!file._destroy">
             <input type="hidden" name="event[event_files_attributes][][id]" ng-value="file.id" />
@@ -65,13 +65,13 @@
               <div class="form-control" data-trigger="fileinput">
                 <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename">{{file.attachment}}</span>
               </div>
-              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'browse' }}</span>
-                <span class="fileinput-exists" translate>{{ 'change' }}</span><input type="file" name="event[event_files_attributes][][attachment]"></span>
+              <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new" translate>{{ 'app.shared.buttons.browse' }}</span>
+                <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span><input type="file" name="event[event_files_attributes][][attachment]"></span>
               <a class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput" ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i></a>
             </div>
 
           </div>
-          <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
+          <a class="btn btn-default" ng-click="addFile()" role="button">{{ 'app.shared.event.add_a_new_file' | translate }} <i class="fa fa-file-o fa-fw"></i></a>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'event_type' }} *</h3>
+        <h3 translate>{{ 'app.shared.event.event_type' }} *</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <ui-select ng-model="event.category_id" name="event[category_id][]">
@@ -109,7 +109,7 @@
 
     <div class="widget panel b-a m m-t-lg" ng-show="themes.length > 0">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'event_theme' }}</h3>
+        <h3 translate>{{ 'app.shared.event.event_theme' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <input type="hidden" name="event[event_theme_ids][]" value="" />
@@ -127,7 +127,7 @@
 
     <div class="widget panel b-a m m-t-lg" ng-show="ageRanges.length > 0">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'age_range' }}</h3>
+        <h3 translate>{{ 'app.shared.event.age_range' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <ui-select ng-model="event.age_range_id" name="event[age_range_id][]">
@@ -143,23 +143,23 @@
     </div>
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'dates_and_opening_hours' }}</h3>
+        <h3 translate>{{ 'app.shared.event.dates_and_opening_hours' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <div class="m-b">
-          <label class="v-bottom" translate>{{ 'all_day' }}</label>
+          <label class="v-bottom" translate>{{ 'app.shared.event.all_day' }}</label>
           <div class="inline v-top">
             <label class="checkbox-inline">
-              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="true" required/> {{ 'yes' | translate }}
+              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="true" required/> {{ 'app.shared.buttons.yes' | translate }}
             </label>
             <label class="checkbox-inline">
-              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="false"/> {{ 'no' | translate }}
+              <input type="radio" name="event[all_day]" ng-model="event.all_day" value="false"/> {{ 'app.shared.buttons.no' | translate }}
             </label>
           </div>
         </div>
         <input type="hidden" name="event[availability_id]" ng-value="event.availability_id" ng-if="event.availability_id">
         <div class="m-b">
-          <label translate>{{ 'start_date' }}</label>
+          <label translate>{{ 'app.shared.event.start_date' }}</label>
           <div class="input-group">
             <input type="hidden" name="event[start_date]" ng-value="event.start_date">
             <input type="text"
@@ -176,7 +176,7 @@
           </div>
         </div>
         <div class="m-b">
-          <label translate>{{ 'end_date' }}</label>
+          <label translate>{{ 'app.shared.event.end_date' }}</label>
           <div class="input-group">
             <input type="hidden" name="event[end_date]" ng-value="event.end_date">
             <input type="text"
@@ -194,14 +194,14 @@
         </div>
         <div class="m-b row" ng-if="event.all_day =='false'">
           <div class="col-xs-6">
-              <label translate>{{ 'start_time' }}</label>
+              <label translate>{{ 'app.shared.event.start_time' }}</label>
               <div>
                 <input type="hidden" name="event[start_time]" ng-value="event.start_time">
                 <uib-timepicker ng-model="event.start_time" mousewheel="false" hour-step="1" minute-step="1" show-meridian="ismeridian"></uib-timepicker>
               </div>
           </div>
           <div class="col-xs-6">
-            <label translate>{{ 'end_time' }}</label>
+            <label translate>{{ 'app.shared.event.end_time' }}</label>
             <div>
               <input type="hidden" name="event[end_time]" ng-value="event.end_time">
               <uib-timepicker ng-model="event.end_time" mousewheel="false" hour-step="1" minute-step="1" show-meridian="ismeridian"></uib-timepicker>
@@ -210,12 +210,12 @@
         </div>
 
         <div ng-if="method == 'post'" class="m-b">
-          <label translate>{{ 'recurrence' }}</label>
+          <label translate>{{ 'app.shared.event.recurrence' }}</label>
           <select ng-model="event.recurrence" class="form-control" name="event[recurrence]">
             <option value="{{t.value}}" ng-repeat="t in recurrenceTypes">{{t.label}}</option>
           </select>
           <div ng-if="event.recurrence != 'none'">
-            {{ '_and_ends_on' | translate }}
+            {{ 'app.shared.event._and_ends_on' | translate }}
             <div class="input-group">
               <input type="hidden" name="event[recurrence_end_at]" ng-value="event.recurrence_end_at">
               <input type="text"
@@ -236,17 +236,17 @@
 
     <div class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'prices_and_availabilities' }}</h3>
+        <h3 translate>{{ 'app.shared.event.prices_and_availabilities' }}</h3>
       </div>
       <div class="widget-content no-bg wrapper">
         <div class="form-group">
-          <label for="event_amount" class="col-sm-5 control-label" translate>{{ 'standard_rate' }}</label>
+          <label for="event_amount" class="col-sm-5 control-label" translate>{{ 'app.shared.event.standard_rate' }}</label>
           <div class="col-sm-5">
             <div class="input-group">
               <input ng-model="event.amount" type="number" name="event[amount]" class="form-control" id="event_amount" required>
               <div class="input-group-addon">{{currencySymbol}}</div>
             </div>
-             <span class="help-block" translate>{{ '0_equal_free' }}</span>
+             <span class="help-block" translate>{{ 'app.shared.event.0_equal_free' }}</span>
           </div>
         </div>
         <div class="form-group" ng-repeat="price in event.prices" ng-show="!price._destroy">
@@ -278,7 +278,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="event_nb_total_places" class="col-sm-5 control-label" translate>{{ 'tickets_available' }}</label>
+          <label for="event_nb_total_places" class="col-sm-5 control-label" translate>{{ 'app.shared.event.tickets_available' }}</label>
           <div class="col-sm-6">
             <div class="input-group">
               <input ng-model="event.nb_total_places" type="number" name="event[nb_total_places]" class="form-control" id="event_nb_total_places">

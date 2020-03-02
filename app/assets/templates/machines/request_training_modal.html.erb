@@ -10,9 +10,9 @@
 
 </div>
 <div class="modal-body">
-  <p class="text-center font-sbold" translate translate-values="{MACHINE:machine.name, TRAINING: humanizeTrainings()}">{{ 'to_book_the_MACHINE_you_must_have_completed_the_TRAINING' }}</p>
-  <p class="text-center"><button ng-click="ok()" class="btn btn-warning-full rounded width-70" translate>{{ 'register_for_the_training' }}</button></p>
+  <p class="text-center font-sbold" translate translate-values="{MACHINE:machine.name, TRAINING: humanizeTrainings()}">{{ 'app.shared.request_training_modal.to_book_the_MACHINE_you_must_have_completed_the_TRAINING' }}</p>
+  <p class="text-center"><button ng-click="ok()" class="btn btn-warning-full rounded width-70" translate>{{ 'app.shared.request_training_modal.register_for_the_training' }}</button></p>
 </div>
 <div class="modal-footer">
-  <p class="text-center">{{ 'i_dont_want_to_register_now' | translate }} <br> <a class="text-u-l" href="#" ng-click="cancel($event)" translate>{{ 'close' }}</a></p>
+  <p class="text-center">{{ 'app.shared.request_training_modal.i_dont_want_to_register_now' | translate }} <br> <a class="text-u-l" href="#" ng-click="cancel($event)" translate>{{ 'app.shared.buttons.close' }}</a></p>
 </div>

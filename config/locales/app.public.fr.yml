@@ -3,7 +3,7 @@ fr:
     public:
       common:
         # en-tête et page "à propos"
-        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} neutral{} other{des}} {NAME}"  # messageFormat interpolation
+        about_the_fablab: "A propos {GENDER, select, male{du} female{de la} neutral{} other{des}} {NAME}"
         return: "Retour"
 
         # cookies
@@ -45,7 +45,6 @@ fr:
 
         # menu de gauche (partie admin)
         trainings_monitoring: "Suivi formations"
-        select_a_training: "Sélectionnez une formation"
         manage_the_calendar: "Gérer le calendrier"
         manage_the_users: "Gérer les utilisateurs"
         manage_the_invoices: "Gérer les factures"
@@ -121,22 +120,20 @@ fr:
         version: "Version :"
 
         # Notifications
-        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}} ..."  # messageFormat interpolation
+        and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}}..."
 
       about:
         # page à propos
-        about:
-          read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
-          read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
-          your_fablab_s_contacts: "Vos contacts au Fab Lab"
-          privacy_policy: "Politique de confidentialité"
+        read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
+        read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
+        your_fablab_s_contacts: "Vos contacts au Fab Lab"
+        privacy_policy: "Politique de confidentialité"
 
       privacy:
         # page 'politique de confidentialité'
-        privacy:
-          title: "Politique de confidentialité"
-          dpo: "Délégué à la protection des données"
-          last_update: "Dernière mise à jour,"
+        title: "Politique de confidentialité"
+        dpo: "Délégué à la protection des données"
+        last_update: "Dernière mise à jour,"
 
       home:
         # page d'accueil
@@ -150,9 +147,9 @@ fr:
         # résumé des prochains évènements sur la page d'acceuil
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
-        from_date_to_date: "du {{START}} au {{END}}"  # angular interpolation
-        on_the_date: "le {{DATE}}"                    # angular interpolation
-        from_time_to_time: "de {{START}} à {{END}}"   # angular interpolation
+        from_date_to_date: "du {START} au {END}"
+        on_the_date: "le {DATE}"
+        from_time_to_time: "de {START} à {END}"
         free_entry: "Accès libre"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
@@ -161,32 +158,38 @@ fr:
 
       projects_list:
         # galerie des projets
-        projects_list:
-          the_fablab_projects: "Les projets du FabLab"
-          add_a_project: "Ajouter un projet"
-          search_over_the_whole_network: "Chercher sur tout le réseau Fab Manager"
-          tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmis les projets de tous les Fab-managers utilisant cette fonctionnalité !"
-          openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmis les projets de cette plateforme."
-          project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
-          reset_all_filters: "Réinitialiser tous les filtres"
-          search: "Rechercher"
-          all_projects: "Tous les projets"
-          my_projects: "Mes projets"
-          projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
-          all_machines: "Toutes les machines"
-          all_themes: "Toutes les thématiques"
-          all_materials: "Tous les matériaux"
-          load_next_projects: "Charger les projets suivants"
-          rough_draft: "Brouillon"
+        the_fablab_projects: "Les projets du FabLab"
+        add_a_project: "Ajouter un projet"
+        search_over_the_whole_network: "Chercher sur tout le réseau Fab Manager"
+        tooltip_openlab_projects_switch: "La recherche sur tout le réseau vous permet de rechercher parmis les projets de tous les Fab-managers utilisant cette fonctionnalité !"
+        openlab_search_not_available_at_the_moment: "La recherche sur tout le réseau n'est pas disponible pour le moment. Vous pouvez cependant effectuer une recherche parmis les projets de cette plateforme."
+        project_search_result_is_empty: "Il n'y a pas de projets correspondant à vos critères de recherche."
+        reset_all_filters: "Réinitialiser tous les filtres"
+        search: "Rechercher"
+        all_projects: "Tous les projets"
+        my_projects: "Mes projets"
+        projects_to_whom_i_take_part_in: "Les projets auxquels je collabore"
+        all_machines: "Toutes les machines"
+        all_themes: "Toutes les thématiques"
+        all_materials: "Tous les matériaux"
+        load_next_projects: "Charger les projets suivants"
+        rough_draft: "Brouillon"
 
       projects_show:
         # détails d'un projet
+        rough_draft: "Brouillon"
         project_description: "Description du projet"
-        by_name: "Par {{NAME}}"  # angular interpolation
+        by_name: "Par {NAME}"
+        step_N: "Étape {INDEX}"
+        share_on_facebook: "Partager sur Facebook"
+        share_on_twitter: "Partager sur Twitter"
         deleted_user: "Utilisateur supprimé"
         posted_on_: "posté le"
-        CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"  # messageFormat interpolation
+        CAD_file_to_download: "{COUNT, plural, =0{Aucun fichier CAO} =1{Fichier CAO à télécharger} other{Fichiers CAO à télécharger}}"
+        machines_and_materials: "Machines et matériaux"
+        collaborators: "Les collaborateurs"
         licence: "Licence"
+        confirmation_required: "Confirmation requise"
         report_an_abuse: "Signaler un abus"
         unauthorized_operation: "Opération non autorisée"
         your_report_was_successful_thanks: "Votre signalement a bien été pris en compte, merci."
@@ -204,28 +207,29 @@ fr:
 
       machines_list:
         # liste des machines
-        machines_list:
-          the_fablab_s_machines: "Les machines du FabLab"
-          add_a_machine: "Ajouter une machine"
-          book: "Réserver"
-          _or_the_: " ou la "
-          status_enabled: "Actives"
-          status_disabled: "Désactivées"
-          status_all: "Toutes"
+        the_fablab_s_machines: "Les machines du FabLab"
+        add_a_machine: "Ajouter une machine"
+        book: "Réserver"
+        _or_the_: " ou la "
+        status_enabled: "Actives"
+        status_disabled: "Désactivées"
+        status_all: "Toutes"
 
       machines_show:
         # détail d'une machine
         book_this_machine: "Réserver cette machine"
+        technical_specifications: "Caractéristiques techniques"
         files_to_download: "Fichiers à télécharger"
         projects_using_the_machine: "Projets utilisant la machine"
         _or_the_: " ou la "
+        confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_machine: "Êtes-vous sur de vouloir supprimer cette machine ?"
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
 
-
       trainings_list:
         # liste des formations
+        book: "Réserver"
         the_trainings: "Les formations"
 
       training_show:
@@ -233,8 +237,8 @@ fr:
         book_this_training: "Réserver cette formation"
         do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
         unauthorized_operation: "Opération non autorisée"
+        confirmation_required: "Confirmation requise"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
-
 
       plans:
         # page récapitulative des abonnements
@@ -243,21 +247,28 @@ fr:
         i_subscribe_online: "Je m'abonne en ligne"
         i_already_subscribed: "Je suis déjà abonné"
         more_information: "Plus d'infos"
-        your_subscription_expires_on_the_DATE: "Votre abonnement expire au {{DATE}}"  # angular interpolation
+        your_subscription_expires_on_the_DATE: "Votre abonnement expire au {DATE}"
         my_group: "Mon groupe"
-        his_group: "Son groupe"  # messageFormat interpolation
-        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe"  # messageFormat interpolation
-        change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"  # messageFormat interpolation
-        your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {{DATE}}"  # angular interpolation
-        you_ve_just_payed_the_: "Vous venez de régler l'"
+        his_group: "Son groupe"
+        he_wants_to_change_group: "{ROLE, select, admin{L'utilisateur veut} other{Je veux}} changer de groupe"
+        change_my_group: "Changer {ROLE, select, admin{son} other{mon}} groupe"
+        summary: "Résumé"
+        your_subscription_has_expired_on_the_DATE: "Votre abonnement a expiré au {DATE}"
+        subscription_price: "Coût de l'abonnement"
+        you_ve_just_selected_a_subscription_html: "Vous venez de sélectionner un <strong>abonnement</strong> :"
+        confirm_and_pay: "Valider et payer"
+        you_ve_just_payed_the_subscription_html: "Vous venez de régler <strong>l'abonnement</strong> :"
         thank_you_your_subscription_is_successful: "Merci. Votre abonnement a bien été pris en compte !"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Votre facture sera bientôt disponible depuis votre tableau de bord"
         your_group_was_successfully_changed: "Votre groupe a bien été changé."
         the_user_s_group_was_successfully_changed: "Le groupe de l'utilisateur a bien été changé."
         an_error_prevented_your_group_from_being_changed: "Une erreur a empêché votre changement de groupe."
         an_error_prevented_to_change_the_user_s_group: "Une erreur a empêché le changement de groupe de l'utilisateur."
         an_error_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         subscription_confirmation: "Validation de l'abonnement"
-        here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {{NAME}} :"  # angular interpolation
+        here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {NAME} :"
+        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" # (contexte : valider un paiement de 20,00 €)
+        online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
 
       events_list:
         # liste des évènements du fablab
@@ -269,60 +280,83 @@ fr:
         free_admission: "Gratuit"
         still_available: "place(s) disponible(s)"
         free_entry: "Accès libre"
+        add_an_event: "Ajouter un évènement"
+        load_the_next_events: "Charger les évènements suivants..."
+        full_price_: "Plein tarif :"
+        to_date: "au" # context: date. eg: 'from 01/01 to 01/05'
 
       events_show:
         # détails d'un événement et réservation
         event_description: "Description de l'évènement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
+        dates: "Dates"
         beginning: "Début :"
         ending: "Fin :"
         opening_hours: "Horaires :"
+        all_day: "Toute la journée"
+        from_time: "De" # context: time. eg. 'from 18:00 to 21:00'
+        to_time: "à"  # context: time. eg. 'from 18:00 to 21:00'
+        full_price_: "Plein tarif :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet"
         free_entry: "Accès libre"
         cancelled: "Annulé"
-        ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"  # messageFormat interpolation
+        ticket: "{NUMBER, plural, =0{place} one{place} other{places}}"
         make_a_gift_of_this_reservation: "Offrir cette réservation"
+        thank_you_your_payment_has_been_successfully_registered: "Merci. Votre paiement a bien été pris en compte !"
         you_can_find_your_reservation_s_details_on_your_: "Vous pouvez retrouver le détail de votre réservation sur votre"
-        you_booked_DATE: "Vous avez réservé ({{DATE}}) :"  # angular interpolation
+        dashboard: "tableau de bord"
+        you_booked_DATE: "Vous avez réservé ({DATE}) :"
+        canceled_reservation_SEATS: "Réservation annulée ({SEATS} places)"
         book: "Réserver"
+        confirm_and_pay: "Valider et payer"
+        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" # (contexte : valider un paiement de 20,00 €)
+        online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
+        please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_event:  "Voulez-vous vraiment supprimer cet évènement ?"
         event_successfully_deleted: "L'évènement a bien été supprimé."
         unable_to_delete_the_event_because_some_users_alredy_booked_it: "Impossible de supprimer l'évènement, il est peut-être déjà réservé par certains utilisateurs."
+        cancel_the_reservation: "Annuler la réservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Êtes vous sur de vouloir annuler cette réservation? Ceci s'applique à TOUTES les places réservées."
+        reservation_was_successfully_cancelled: "La réservation a bien été annulée."
+        cancellation_failed: "L'annulation a échoué."
+        event_is_over: "L'évènement est terminé."
+        thanks_for_coming: "Merci d'avoir participé !"
+        view_event_list: "Voir les évènements à venir"
+        share_on_facebook: "Partager sur Facebook"
+        share_on_twitter: "Partager sur Twitter"
 
       calendar:
         # calendrier publique
-        calendar:
-          calendar: "Calendrier"
-          show_unavailables: "Afficher les créneaux non disponibles"
-          filter_calendar: "Filtrer le calendrier"
-          trainings: "Formations"
-          machines: "Machines"
-          spaces: "Espaces"
-          events: "Évènements"
+        calendar: "Calendrier"
+        show_unavailables: "Afficher les créneaux non disponibles"
+        filter_calendar: "Filtrer le calendrier"
+        trainings: "Formations"
+        machines: "Machines"
+        spaces: "Espaces"
+        events: "Évènements"
+        externals: "Autres calendriers"
 
       spaces_list:
         # liste des espaces
-        spaces_list:
-          the_spaces: "Les espaces"
-          add_a_space: "Ajouter un espace"
-          status_enabled: "Activés"
-          status_disabled: "Désactivés"
-          status_all: "Tous"
-          book: "Réserver"
+        the_spaces: "Les espaces"
+        add_a_space: "Ajouter un espace"
+        status_enabled: "Activés"
+        status_disabled: "Désactivés"
+        status_all: "Tous"
+        book: "Réserver"
 
       space_show:
         # affichage des détails d'un espace
-        space_show:
-          book_this_space: "Réserver cet espace"
-          unauthorized_operation: "Opération non autorisée"
-          confirmation_required: "Confirmation requise"
-          do_you_really_want_to_delete_this_space: "Voulez-vous vraiment supprimer cet espace ?"
-          the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "L'espace ne peut pas être supprimé car il a déjà été réservé par des utilisateurs."
-          characteristics: "Caractéristiques"
-          files_to_download: "Fichiers à télécharger"
-          projects_using_the_space: "Projets utilisant l'espace"
+        book_this_space: "Réserver cet espace"
+        unauthorized_operation: "Opération non autorisée"
+        confirmation_required: "Confirmation requise"
+        do_you_really_want_to_delete_this_space: "Voulez-vous vraiment supprimer cet espace ?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "L'espace ne peut pas être supprimé car il a déjà été réservé par des utilisateurs."
+        characteristics: "Caractéristiques"
+        files_to_download: "Fichiers à télécharger"
+        projects_using_the_space: "Projets utilisant l'espace"

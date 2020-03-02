@@ -1,5 +1,39 @@
 # Changelog Fab Manager
 
+- Ability to create and delete periodic calendar availabilities (recurrence)
+- An administrator can delete a member
+- An event can be cancelled, if reservation cancellation is enabled
+- Ability to import iCalendar agendas in the public calendar, through URLs to ICS files (RFC 5545)
+- Ability to configure the duration of a reservation slot, using `SLOT_DURATION`. Previously, only 60 minutes slots were allowed
+- Display the scheduled events in the admin calendar, depending on `EVENTS_IN_CALENDAR` configuration.
+- Display indications on required fields in new administrator form
+- Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
+- Improved user experience in defining slots in the calendar management
+- Improved notification email to the member when a rolling subscription is taken
+- Notify all admins on the creation of a refund invoice
+- Calendar management: improved legend display and visual behavior
+- Prevent event reservation in the past [Taiga#127]
+- Handle Ctrl^C in upgrade scripts
+- Updated moment-timezone
+- Added freeCAD files as default allowed extensions
+- Rake task to sync local users with Stripe
+- Unified translations syntax to use ICU MessageFormat
+- Refactored front-end translations keys with unified paths
+- Updated and refactored README and documentations
+- Updated setup script and instructions
+- Fix a bug: unable to remove the picture from a training
+- Fix a bug: no alerts on errors during admin creation
+- Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]
+- Fix a bug: logs are not printed in staging environment
+- Fix a security issue: updated loofah to fix [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
+- Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://github.com/advisories/GHSA-89mq-4x47-5v83)
+- Fix a security issue: updated puma to 3.12.2 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994)
+- [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
+- [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)
+- [TODO DEPLOY] add the `EVENTS_IN_CALENDAR` environment variable (see [doc/environment.md](doc/environment.md#EVENTS_IN_CALENDAR) for configuration details)
+- [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
+- [TODO DEPLOY] `rake db:migrate`
+
 ## v4.2.4 2019 October 30
 
 - Fix a bug: in some cases, the invoices were not generated after deploying v4.2.0+. This can occurs if VAT was changed/enabled during the application life (#156)

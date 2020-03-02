@@ -81,7 +81,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def cancel
-    update_columns(canceled_at: Time.now)
+    update_columns(canceled_at: DateTime.current)
   end
 
   def expire(time)
@@ -96,7 +96,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def expired?
-    expired_at <= Time.now
+    expired_at <= DateTime.current
   end
 
   def expired_at
@@ -179,7 +179,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def set_expiration_date
-    start_at = Time.now
+    start_at = DateTime.current
     self.expiration_date = start_at + plan.duration
   end
 

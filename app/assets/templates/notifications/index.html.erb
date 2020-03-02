@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'notifications_center' }}</h1>
+        <h1 translate>{{ 'app.logged.notifications.notifications_center' }}</h1>
       </section>
     </div>
 
@@ -19,14 +19,14 @@
   <div class="row">
 
     <div class="col-md-12">
-      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="totalUnread == 0">{{ 'mark_all_as_read' | translate }} ({{totalUnread}})</button>
+      <button type="button" class="btn btn-warning m-t-sm m-b" ng-click="markAllAsRead()" ng-disabled="totalUnread == 0">{{ 'app.logged.notifications.mark_all_as_read' | translate }} ({{totalUnread}})</button>
 
       <table class="table">
         <thead>
           <tr>
             <th style="width:10%"></th>
-            <th style="width:20%" translate>{{ 'date' }}</th>
-            <th style="width:70%" translate>{{ 'notif_title' }}</th>
+            <th style="width:20%" translate>{{ 'app.logged.notifications.date' }}</th>
+            <th style="width:70%" translate>{{ 'app.logged.notifications.notif_title' }}</th>
 
           </tr>
         </thead>
@@ -42,13 +42,13 @@
 
           </tr>
           <tr ng-if="notificationsUnread.length == 0">
-            <td colspan="3" translate>{{ 'no_new_notifications' }}</td>
+            <td colspan="3" translate>{{ 'app.logged.notifications.no_new_notifications' }}</td>
           </tr>
         </tbody>
       </table>
 
       <div ng-hide="notificationsRead.length == 0 && notificationsUnread.length < total">
-        <h5 translate>{{ 'archives' }}</h5>
+        <h5 translate>{{ 'app.logged.notifications.archives' }}</h5>
 
         <table class="table">
           <thead>
@@ -73,7 +73,7 @@
 
 
             <tr ng-if="notificationsRead.length == 0">
-              <td colspan="3" translate>{{ 'no_archived_notifications' }}</td>
+              <td colspan="3" translate>{{ 'app.logged.notifications.no_archived_notifications' }}</td>
             </tr>
 
 
@@ -81,7 +81,7 @@
         </table>
       </div>
 
-      <a class="btn btn-default" ng-click="addMoreNotifications()" ng-if="paginateActive" translate>{{ 'load_the_next_notifications' }}</a>
+      <a class="btn btn-default" ng-click="addMoreNotifications()" ng-if="paginateActive" translate>{{ 'app.logged.notifications.load_the_next_notifications' }}</a>
 
     </div>
 

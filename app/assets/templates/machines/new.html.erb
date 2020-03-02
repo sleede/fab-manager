@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8 b-l b-r">
       <section class="heading-title">
-        <h1 translate>{{ 'declare_a_new_machine' }}</h1>
+        <h1 translate>{{ 'app.admin.machines_new.declare_a_new_machine' }}</h1>
       </section>
 
     </div>
@@ -22,14 +22,10 @@
   <div class="col-md-9 b-r nopadding">
 
     <div class="m-lg alert alert-warning" role="alert">
-      {{ 'watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions' | translate}}
-      {{ 'consider_changing_them_before_creating_any_reservation_slot' | translate }}
+      {{ 'app.admin.machines_new.watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions' | translate}}
+      {{ 'app.admin.machines_new.consider_changing_them_before_creating_any_reservation_slot' | translate }}
     </div>
 
-    <ng-include src="'<%= asset_path 'machines/_form.html' %>'"></ng-include>
-  </div>
-
-  <div class="col-md-3">
-      <!-- <button class="btn">TEST</button> -->
+    <ng-include src="'<%= asset_path "machines/_form.html" %>'"></ng-include>
   </div>
 </div>

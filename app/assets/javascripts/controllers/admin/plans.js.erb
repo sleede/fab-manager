@@ -121,7 +121,7 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
                 $uibModalInstance.close($scope.partner);
               },
               function (error) {
-                growl.error(_t('new_plan.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'));
+                growl.error(_t('app.admin.plans.new.unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name'));
                 console.error(error);
               }
             );
@@ -143,9 +143,9 @@ Application.Controllers.controller('NewPlanController', ['$scope', '$uibModal', 
      */
     $scope.afterSubmit = function (content) {
       if ((content.id == null) && (content.plan_ids == null)) {
-        return growl.error(_t('new_plan.unable_to_create_the_subscription_please_try_again'));
+        return growl.error(_t('app.admin.plans.new.unable_to_create_the_subscription_please_try_again'));
       } else {
-        growl.success(_t('new_plan.successfully_created_subscriptions_dont_forget_to_redefine_prices'));
+        growl.success(_t('app.admin.plans.new.successfully_created_subscriptions_dont_forget_to_redefine_prices'));
         if (content.plan_ids != null) {
           return $state.go('app.admin.pricing');
         } else {
@@ -237,9 +237,9 @@ Application.Controllers.controller('EditPlanController', ['$scope', 'groups', 'p
      */
     $scope.afterSubmit = function (content) {
       if ((content.id == null) && (content.plan_ids == null)) {
-        return growl.error(_t('edit_plan.unable_to_save_subscription_changes_please_try_again'));
+        return growl.error(_t('app.admin.plans.edit.unable_to_save_subscription_changes_please_try_again'));
       } else {
-        growl.success(_t('edit_plan.subscription_successfully_changed'));
+        growl.success(_t('app.admin.plans.edit.subscription_successfully_changed'));
         return $state.go('app.admin.pricing');
       }
     };

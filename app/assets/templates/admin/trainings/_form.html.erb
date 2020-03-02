@@ -15,21 +15,21 @@
     <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$invalid}">
-      <label for="name" class="col-sm-2 control-label">{{ 'trainings_form.name' | translate }} *</label>
+      <label for="name" class="col-sm-2 control-label">{{ 'app.shared.trainings.name' | translate }} *</label>
       <div class="col-sm-4">
         <input name="training[name]"
                ng-model="training.name"
                type="text"
                class="form-control"
                id="training_name"
-               placeholder="{{'trainings_form.name' | translate}}"
+               placeholder="{{'app.shared.trainings.name' | translate}}"
                required/>
-        <span class="help-block" ng-show="trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$error.required" translate>{{ 'trainings_form.name_is_required' }}</span>
+        <span class="help-block" ng-show="trainingForm['training[name]'].$dirty && trainingForm['training[name]'].$error.required" translate>{{ 'app.shared.trainings.name_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-lg">
-      <label for="training_image" class="col-sm-2 control-label">{{ 'trainings_form.illustration' | translate }} *</label>
+      <label for="training_image" class="col-sm-2 control-label">{{ 'app.shared.trainings.illustration' | translate }} *</label>
       <div class="col-sm-10">
         <div class="fileinput" data-provides="fileinput" ng-class="fileinputClass(training.training_image)">
             <div class="fileinput-new thumbnail" style="width: 334px; height: 250px;">
@@ -40,8 +40,8 @@
             </div>
             <div>
                 <span class="btn btn-default btn-file">
-                  <span class="fileinput-new">{{ 'trainings_form.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
-                  <span class="fileinput-exists" translate>{{ 'change' }}</span>
+                  <span class="fileinput-new">{{ 'app.shared.trainings.add_an_illustration' | translate }} <i class="fa fa-upload fa-fw"></i></span>
+                  <span class="fileinput-exists" translate>{{ 'app.shared.buttons.change' }}</span>
                   <input type="file"
                          ng-model="training.training_image"
                          name="training[training_image_attributes][attachment]"
@@ -49,7 +49,7 @@
                          required
                          bs-jasny-fileinput>
                 </span>
-                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'delete' }}</a>
+                <a class="btn btn-danger fileinput-exists" data-dismiss="fileinput" translate>{{ 'app.shared.buttons.delete' }}</a>
             </div>
         </div>
       </div>
@@ -57,16 +57,16 @@
 
 
     <div class="form-group m-b-xl" ng-class="{'has-error': trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$invalid}">
-      <label for="training_description" class="col-sm-2 control-label">{{ 'trainings_form.description' | translate }} *</label>
+      <label for="training_description" class="col-sm-2 control-label">{{ 'app.shared.trainings.description' | translate }} *</label>
       <div class="col-sm-10">
         <input type="hidden" name="training[description]" ng-value="training.description" />
         <summernote ng-model="training.description" id="training_description" placeholder="" config="summernoteOpts" name="training[description]" required></summernote>
-        <span class="help-block" ng-show="trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$error.required" translate>{{ 'trainings_form.description_is_required' }}</span>
+        <span class="help-block" ng-show="trainingForm['training[description]'].$dirty && trainingForm['training[description]'].$error.required" translate>{{ 'app.shared.trainings.description_is_required' }}</span>
       </div>
     </div>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[machine_ids]'].$dirty && trainingForm['training[machine_ids]'].$invalid}">
-      <label for="training_machines" class="col-sm-2 control-label">{{ 'trainings_form.associated_machines' | translate }}</label>
+      <label for="training_machines" class="col-sm-2 control-label">{{ 'app.shared.trainings.associated_machines' | translate }}</label>
       <div class="col-sm-4">
         <ui-select multiple ng-model="training.machine_ids" class="form-control" id="training_machines">
           <ui-select-match>
@@ -84,7 +84,7 @@
     </div>
 
     <div class="form-group m-b-lg" ng-class="{'has-error': trainingForm['training[nb_total_places]'].$dirty && trainingForm['training[nb_total_places]'].$invalid}">
-      <label for="training_nb_total_places" class="col-sm-2 control-label">{{ 'trainings_form.number_of_tickets' | translate }}</label>
+      <label for="training_nb_total_places" class="col-sm-2 control-label">{{ 'app.shared.trainings.number_of_tickets' | translate }}</label>
       <div class="col-sm-4">
         <input ng-model="training.nb_total_places"
                type="number"
@@ -98,7 +98,7 @@
 
     <div class="form-group">
       <label for="training[public_page]" class="control-label col-sm-2" translate>
-        {{ 'trainings_form.public_page' }}
+        {{ 'app.shared.trainings.public_page' }}
       </label>
       <div class="col-sm-10">
         <input bs-switch
@@ -106,8 +106,8 @@
            name="training[public_page]"
            type="checkbox"
            class="form-control"
-           switch-on-text="{{ 'yes' | translate }}"
-           switch-off-text="{{ 'no' | translate }}"
+           switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+           switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
            switch-active="{{!training.disabled}}"
            switch-animate="true"/>
         <input type="hidden" name="training[public_page]" value="{{training.public_page}}">
@@ -116,7 +116,7 @@
 
     <div class="form-group">
       <label for="training[disabled]" class="control-label col-sm-2" translate>
-        {{ 'trainings_form.disable_training' }}
+        {{ 'app.shared.trainings.disable_training' }}
       </label>
       <div class="col-sm-10">
         <input bs-switch
@@ -124,8 +124,8 @@
                name="training[disabled]"
                type="checkbox"
                class="form-control"
-               switch-on-text="{{ 'yes' | translate }}"
-               switch-off-text="{{ 'no' | translate }}"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
                ng-change="onDisableToggled()"
                switch-animate="true"/>
         <input type="hidden" name="training[disabled]" value="{{training.disabled}}">
@@ -136,7 +136,7 @@
 
   <div class="panel-footer no-padder">
     <input type="submit"
-           value="{{ 'trainings_form.validate_your_training' | translate }}"
+           value="{{ 'app.shared.trainings.validate_your_training' | translate }}"
            class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c"
            ng-disabled="trainingForm.$invalid"/>
   </div>

@@ -131,6 +131,13 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     };
 
     /**
+     * Return a localized name for the given field
+     */
+    $scope.customFieldName = function (field) {
+      return _t(`app.admin.statistics.${field}`);
+    }
+
+    /**
      * Callback to open the datepicker (interval start)
      * @param $event {Object} jQuery event object
      */
@@ -215,10 +222,10 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      */
     $scope.formatSex = function (sex) {
       if (sex === 'male') {
-        return _t('man');
+        return _t('app.admin.statistics.man');
       }
       if (sex === 'female') {
-        return _t('woman');
+        return _t('app.admin.statistics.woman');
       }
     };
 
@@ -397,7 +404,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     };
 
     /**
-     * Run the elasticSearch query to retreive the /stats/type aggregations
+     * Run the elasticSearch query to retrieve the /stats/type aggregations
      * @param index {String} elasticSearch document type (account|event|machine|project|subscription|training)
      * @param type {String} statistics type (month|year|booking|hour|user|project)
      * @param custom {{key:{string}, value:{string}}|null} custom filter property or null to disable this filter
@@ -552,17 +559,17 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
     };
 
     /**
-     * Fullfil the list of available options in the custom filter panel. The list will be based on common
+     * Fulfill the list of available options in the custom filter panel. The list will be based on common
      * properties and on index-specific properties (additional_fields)
      */
     var buildCustomFiltersList = function () {
       $scope.filters = [
-        { key: 'date', label: _t('date'), values: ['input_date'] },
-        { key: 'userId', label: _t('user_id'), values: ['input_number'] },
-        { key: 'gender', label: _t('gender'), values: [{ key: 'male', label: _t('man') }, { key: 'female', label: _t('woman') }] },
-        { key: 'age', label: _t('age'), values: ['input_number'] },
-        { key: 'subType', label: _t('type'), values: $scope.type.active.subtypes },
-        { key: 'ca', label: _t('revenue'), values: ['input_number'] }
+        { key: 'date', label: _t('app.admin.statistics.date'), values: ['input_date'] },
+        { key: 'userId', label: _t('app.admin.statistics.user_id'), values: ['input_number'] },
+        { key: 'gender', label: _t('app.admin.statistics.gender'), values: [{ key: 'male', label: _t('app.admin.statistics.man') }, { key: 'female', label: _t('app.admin.statistics.woman') }] },
+        { key: 'age', label: _t('app.admin.statistics.age'), values: ['input_number'] },
+        { key: 'subType', label: _t('app.admin.statistics.type'), values: $scope.type.active.subtypes },
+        { key: 'ca', label: _t('app.admin.statistics.revenue'), values: ['input_number'] }
       ];
 
       if (!$scope.type.active.simple) {
@@ -709,7 +716,7 @@ Application.Controllers.controller('ExportStatisticsController', [ '$scope', '$u
 
       Export.status(statusQry).then(function (res) {
         if (!res.data.exists) {
-          return growl.success(_t('export_is_running_you_ll_be_notified_when_its_ready'));
+          return growl.success(_t('app.admin.statistics.export_is_running_you_ll_be_notified_when_its_ready'));
         }
       });
 

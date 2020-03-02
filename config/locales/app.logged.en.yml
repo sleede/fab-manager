@@ -1,20 +1,21 @@
 en:
   app:
     logged:
-      profileCompletion:
+      profile_completion:
         # user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirm your new account"
-        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"  # messageFormat interpolation
+        you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"
         we_need_some_more_details: "To finalize the platform setup, we need some more details"
         your_email_is_already_used_by_another_account_on_the_platform: "It looks like your email address is already used by another user. Check your email address and please input below the code sent to you."
+        or: "or"
         please_fill_the_following_form: "Please fill the following form"
-        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Some data may have already been provided by {{NAME}} and cannot be modified"  # angular interpolation
+        some_data_may_have_already_been_provided_by_provider_and_cannot_be_modified: "Some data may have already been provided by {NAME} and cannot be modified"
         then_click_on_: "Then click on"
         _to_start_using_the_application: "to start using the application"
         new_on_this_platform: "New on this platform?"
         your_email_: "Your email"
         _is_currently_associated_with_another_account_on_this_platform: "is currently associated with another account on this platform."
-        please_click_to_change_email_associated_with_your_PROVIDER_account: "If it is not yours, please click on the following button to change the email associated with your {{PROVIDER}} account."  # angular interpolation
+        please_click_to_change_email_associated_with_your_PROVIDER_account: "If it is not yours, please click on the following button to change the email associated with your {PROVIDER} account."
         do_you_already_have_an_account: "Do you already have an account?"
         do_not_fill_the_form_beside_but_specify_here_the_code_you_ve_received_by_email_to_recover_your_access: "Do not fill the form beside but specify here the code you've received by email, to recover your access."
         just_specify_code_here_to_recover_access: "Just specify here the code you've received by email to recover your access."
@@ -24,81 +25,107 @@ en:
         an_unexpected_error_occurred_check_your_authentication_code: "An unexpected error occurred, please check your authentication code."
         send_code_again: "Send the code again"
         email_address_associated_with_your_account: "Email address associated with your account"
+        email_is_required: "Email address is required"
         email_format_is_incorrect: "Email format is incorrect"
         code_successfully_sent_again: "Code successfully sent again"
+        used_for_statistics: "This data will be used for statistical purposes"
+        your_user_s_profile: "Your user's profile"
+        user_s_profile_is_required: "User's profile is required."
+        i_ve_read_and_i_accept_: "I've read and I accept"
+        _the_fablab_policy: "the FabLab policy"
+        change_my_data: "Change my data"
+        sync_my_profile: "Sync my profile"
+        once_your_data_are_up_to_date_: "Once your data are up to date,"
+        _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
+        _disconnect_then_reconnect_: "disconnect then reconnect"
+        _for_your_changes_to_take_effect: "for your changes to take effect."
 
       dashboard:
         # dashboard: public profile
         profile:
           empty: ''
         settings:
-          edit_profile:
-            # dashboard: edit my profile
-            last_activity_on_: "Last activity on"
-            i_want_to_change_group: "I want to change group!"
-            your_subscription_expires_on_: "Your subscription expires on"
-            no_subscriptions: "No subscriptions"
-            i_want_to_subscribe: "I want to subscribe!"
-            to_come: "to come"
-            approved: "approved"
-            projects: "Projects"
-            no_projects: "No projects"
-            labels: "Labels"
-            no_labels: "No labels"
-            cookies: "Cookies"
-            cookies_accepted: "You have accepted cookies"
-            cookies_declined: "You have refused cookies"
-            cookies_unset: "You have not chosen yet"
-            reset_cookies: "Change my choice"
-            delete_my_account: "Delete my account"
-            edit_my_profile: "Edit my profile"
-            your_group_has_been_successfully_changed: "Your group has been successfully changed."
-            an_unexpected_error_prevented_your_group_from_being_changed: "An unexpected error prevented your group from being changed."
-            confirm_delete_your_account: "Do you really want to delete your account?"
-            all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
-            invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
-            statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
-            no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
-            your_user_account_has_been_successfully_deleted_goodbye: "Your user account has been successfully deleted. Goodbye."
-            an_error_occured_preventing_your_account_from_being_deleted: "An error occurred, preventing your account from being deleted."
-            used_for_statistics: "This data will be used for statistical purposes"
-            used_for_invoicing: "This data will be used for billing purposes"
-            used_for_reservation: "This data will be used in case of change on one of your bookings"
-            used_for_profile: "This data will only be displayed on your profile"
-            used_for_pricing_stats: "This data will be used to determine the prices to which you are entitled, and for statistical purposes"
-            public_profile: "You will have a public profile and other users will be able to associate you in their projects"
-            trainings: "Trainings"
-            no_trainings: "No trainings"
-            subscription: "Subscription"
-            group: "Group"
-            or: "or"
-            confirm_changes: "Confirm changes"
-            change_my_data: "Change my data"
-            sync_my_profile: "Sync my profile"
-            once_your_data_are_up_to_date_: "Once your data are up to date,"
-            _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
-            _disconnect_then_reconnect_: "disconnect then reconnect"
-            _for_your_changes_to_take_effect: "for your changes to take effect."
+          # dashboard: edit my profile
+          last_activity_on_: "Last activity on"
+          i_want_to_change_group: "I want to change group!"
+          your_subscription_expires_on_: "Your subscription expires on"
+          no_subscriptions: "No subscriptions"
+          i_want_to_subscribe: "I want to subscribe!"
+          to_come: "to come"
+          approved: "approved"
+          projects: "Projects"
+          no_projects: "No projects"
+          labels: "Labels"
+          no_labels: "No labels"
+          cookies: "Cookies"
+          cookies_accepted: "You have accepted cookies"
+          cookies_declined: "You have refused cookies"
+          cookies_unset: "You have not chosen yet"
+          reset_cookies: "Change my choice"
+          delete_my_account: "Delete my account"
+          edit_my_profile: "Edit my profile"
+          your_group_has_been_successfully_changed: "Your group has been successfully changed."
+          an_unexpected_error_prevented_your_group_from_being_changed: "An unexpected error prevented your group from being changed."
+          confirmation_required: "Confirmation required"
+          confirm_delete_your_account: "Do you really want to delete your account?"
+          all_data_will_be_lost: "All your data will be destroyed and won't be recoverable."
+          invoicing_data_kept: "According to regulation, all data related to your invoices will be kept separately for 10 years."
+          statistic_data_anonymized: "Some data (sex, date of birth, group) will be anonymized and kept for statistical purposes."
+          no_further_access_to_projects: "Your published projects will be anonymized and you won't get any further ability to edit them."
+          your_user_account_has_been_successfully_deleted_goodbye: "Your user account has been successfully deleted. Goodbye."
+          an_error_occured_preventing_your_account_from_being_deleted: "An error occurred, preventing your account from being deleted."
+          used_for_statistics: "This data will be used for statistical purposes"
+          used_for_invoicing: "This data will be used for billing purposes"
+          used_for_reservation: "This data will be used in case of change on one of your bookings"
+          used_for_profile: "This data will only be displayed on your profile"
+          used_for_pricing_stats: "This data will be used to determine the prices to which you are entitled, and for statistical purposes"
+          public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+          trainings: "Trainings"
+          no_trainings: "No trainings"
+          subscription: "Subscription"
+          group: "Group"
+          or: "or"
+          confirm_changes: "Confirm changes"
+          change_my_data: "Change my data"
+          sync_my_profile: "Sync my profile"
+          once_your_data_are_up_to_date_: "Once your data are up to date,"
+          _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
+          _disconnect_then_reconnect_: "disconnect then reconnect"
+          _for_your_changes_to_take_effect: "for your changes to take effect."
         projects:
           # dashboard: my projects
           you_dont_have_any_projects: "You don't have any projects."
+          add_a_project: "Add a project"
           author: "Author"
           collaborator: "Collaborator"
+          rough_draft: "Draft"
+          description: "Description"
+          machines_and_materials: "Machines and materials"
+          machines: "Machines"
+          materials: "Materials"
+          collaborators: "Collaborators"
         trainings:
           # dashboard: my trainings
           your_next_trainings: "Your next trainings"
           your_previous_trainings: "Your previous trainings"
           your_approved_trainings: "Your approved trainings"
+          no_trainings: "No trainings"
         events:
           # dashboard: my events
           your_next_events: "Your next events"
           no_events_to_come: "No events to come"
           your_previous_events: "Your previous events"
-          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"  # messageFormat interpolation
-          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"  # messageFormat interpolation
+          no_passed_events: "No passed events"
+          NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
+          NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
         invoices:
           # dashboard: my invoices
           reference_number: "Reference number"
+          date: "Date"
+          price: "Price"
+          download_the_invoice: "Download the invoice"
+          download_the_credit_note: "Download the refund invoice"
+          no_invoices_for_now: "No invoices for now."
 
       members_show:
         # public profil of a member
@@ -110,16 +137,18 @@ en:
         display_more_members: "Display more members..."
         no_members_for_now: "No members for now"
         avatar: "Avatar"
+        user: "User"
+        pseudonym: "Pseudonym"
+        email_address: "Email address"
 
       projects_new:
         # add a new project
         add_a_new_project: "Add a new project"
-        save_button_value: "Save as draft"  # "save as draft"
 
       projects_edit:
         # modify an existing project
-        save_button_value: "Save"  # "save"
         edit_the_project: "Edit the project"
+        rough_draft: "Draft"
         publish: "Publish"
 
       machines_reserve:
@@ -130,6 +159,10 @@ en:
         i_reserve: "I reserve"
         i_shift: "I shift"
         i_change: "I change"
+        do_you_really_want_to_cancel_this_reservation: "Do you really want to cancel this reservation?"
+        reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
+        cancellation_failed: "Cancellation failed."
+        a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
 
       trainings_reserve:
         # book a training
@@ -137,19 +170,21 @@ en:
         planning_of: "Planning of"   # followed by the training name (eg. "Planning of 3d printer training")
         all_trainings: "All trainings"
         cancel_my_selection: "Cancel my selection"
+        i_change: "I change"
+        i_shift: "I shift"
         i_ve_reserved: "I've reserved"
 
       space_reserve:
         # book a space
-        space_reserve:
-          planning_of_space_NAME: "Planning of the {{NAME}} space"  # angular interpolation
-          i_ve_reserved: "I've reserved"
-          i_shift: "I shift"
-          i_change: "I change"
+        planning_of_space_NAME: "Planning of the {NAME} space"
+        i_ve_reserved: "I've reserved"
+        i_shift: "I shift"
+        i_change: "I change"
 
       notifications:
         notifications_center: "Notifications center"
         mark_all_as_read: "Mark all as read"
+        date: "Date"
         notif_title: "Title"
         no_new_notifications: "No new notifications."
         archives: "Archives"

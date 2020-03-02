@@ -19,7 +19,7 @@ class UserService
     )
     user.build_statistic_profile(
       gender: true,
-      birthday: Time.now
+      birthday: DateTime.current
     )
 
     saved = user.save
@@ -41,7 +41,7 @@ class UserService
     # if the authentication is made through an SSO, generate a migration token
     admin.generate_auth_migration_token unless AuthProvider.active.providable_type == DatabaseProvider.name
 
-    saved = admin.save(validate: false)
+    saved = admin.save
     if saved
       admin.send_confirmation_instructions
       admin.add_role(:admin)
