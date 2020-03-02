@@ -2,17 +2,15 @@ fr:
   app:
     admin:
       machines_new:
-        # ajout d'une nouvelle machine
+        #add a new machine
         declare_a_new_machine: "Déclarer une nouvelle machine"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'une machine, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
         consider_changing_them_before_creating_any_reservation_slot: "Pensez à les modifier avant de créer des créneaux pour cette machine."
-
       machines_edit:
-        # edition d'une machine
+        #machine edition
         machine_edit: "Modifier une machine"
-
       calendar:
-        # gestion des créneaux machines et formations
+        #manage the trainings & machines slots
         calendar_management: "Gestion du calendrier"
         trainings: "Formations"
         machines: "Machines"
@@ -32,8 +30,8 @@ fr:
         beware_this_cannot_be_reverted: "Attention : ceci n'est pas réversible."
         the_machine_was_successfully_removed_from_the_slot: "La machine a bien été supprimée du créneau."
         deletion_failed: "La suppression a échouée."
-        do_you_really_want_to_remove_PLAN_from_this_slot: "Êtes-vous {GENDER, select, female{sûre} other{sûr}} de vouloir retirer \"{PLAN}\" de ce créneau ?"
-        the_plan_was_successfully_removed_from_the_slot: "Le formule d'abonnement a bien été supprimée du créneau."
+        do_you_really_want_to_remove_PLAN_from_this_slot: "Do you really want to remove \"{PLAN}\" from this slot?"
+        the_plan_was_successfully_removed_from_the_slot: "The plan was successfully removed from the slot."
         DATE_slot: "Créneau du {DATE} :"
         what_kind_of_slot_do_you_want_to_create: "Quel type de créneau voulez-vous créer ?"
         training: "Formation"
@@ -42,19 +40,19 @@ fr:
         next: "Suivant >"
         previous: "< Précédent"
         select_some_machines: "Sélectionnez des machines"
-        select_all: "Toutes"
-        select_none: "Aucune"
-        manage_machines: "Cliquez-ici pour ajouter ou supprimer des machines."
-        manage_spaces: "Cliquez-ici pour ajouter ou supprimer des espaces."
-        manage_trainings: "Cliquez-ici pour ajouter ou supprimer des formations."
+        select_all: "All"
+        select_none: "None"
+        manage_machines: "Click here to add or remove machines."
+        manage_spaces: "Click here to add or remove spaces."
+        manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
-        to_time: "à"  # eg. from 18:00 to 21:00
-        restrict_options: "Options de restriction"
-        restrict_with_labels: "Restreindre ce créneau avec des étiquettes"
-        restrict_for_subscriptions: "Restreindre ce créneau pour les abonnements"
-        select_some_plans: "Sélectionnez des formules d'abonnement"
-        plans: "Abonnement(s):"
+        to_time: "to" #eg. from 18:00 to 21:00
+        restrict_options: "Restriction options"
+        restrict_with_labels: "Restrict this slot with labels"
+        restrict_for_subscriptions: "Restrict this slot for subscription users"
+        select_some_plans: "Select some plans"
+        plans: "Plan(s):"
         recurrence: "Récurrence"
         enabled: "Activée"
         period: "Période"
@@ -67,7 +65,7 @@ fr:
         select_nb_period: "Veuillez choisir un nombre de périodes pour la récurrence"
         select_end_date: "Veuillez choisir la date de dernière occurrence"
         about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} suivant :"
-        divided_in_slots: "Ce créneau sera proposé à la réservation par tranches de {DURATION} minutes. Contactez votre administrateur système pour modifier ce paramètre."
+        divided_in_slots: "This slot will be open for booking in {DURATION}-minutes increments. Contact your system administrator to change this setting."
         reservable: "Réservable(s) :"
         labels: "Étiquette(s) :"
         none: "Aucune"
@@ -99,11 +97,10 @@ fr:
         view_reservations: "Voir les réservations"
         legend: "Légende"
         and: "et"
-        external_sync: "Synchronisation d'agendas"
-
+        external_sync: "Calendar synchronization"
       icalendar:
         icalendar_import: "Import iCalendar"
-        intro: "Fab-manager vous permet d'importer automatiquement des évènements de calendrier, au format iCalendar RFC 5545, depuis des URL externes. Ces URL seront synchronisée toutes les heures et les évènements seront affichés dans le calendrier publique. Vous pouvez aussi déclencher une synchronisation en cliquant sur le bouton correspondant, en face de chaque import."
+        intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every hours and the events are shown in the public calendar. You can trigger a synchronisation too, by clicking on the corresponding button, in front of each import."
         new_import: "Nouvel import ICS"
         color: "Couleur"
         text_color: "Couleur du texte"
@@ -121,9 +118,8 @@ fr:
         confirmation_required: "Confirmation requise"
         confirm_delete_import: "Êtes-vous sur de vouloir supprimer cet import iCalendar ?"
         delete_success: "L'import iCalendar a bien été supprimé"
-
       project_elements:
-        # gestion des éléments constituant les projets
+        #management of the projects' components
         name: "Nom"
         projects_elements_management: "Gestion des éléments projets"
         materials: "Matériaux"
@@ -134,11 +130,10 @@ fr:
         description: "Description"
         add_a_new_licence: "Ajouter une nouvelle licence"
         manage_abuses: "Gérer les signalements"
-
       trainings:
-        # suivre et surveiller les formations
+        #track and monitor the trainings
         trainings_monitoring: "Suivi formations"
-        plan_session: "Planifier une nouvelle session"
+        plan_session: "Schedule a new session"
         trainings: "Formations"
         add_a_new_training: "Ajouter une nouvelle formation"
         name: "Nom"
@@ -152,7 +147,7 @@ fr:
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, =0{réservation} one{réservation} other{réservations}}"
         none: "Aucune"
         training_validation: "Validation formation"
-        training_of_the_DATE_TIME_html : "Formation du <strong>{DATE} - {TIME}</strong>"
+        training_of_the_DATE_TIME_html: "Formation du <strong>{DATE} - {TIME}</strong>"
         you_can_validate_the_training_of_the_following_members: "Vous pouvez valider la formation des membres suivants :"
         deleted_user: "Utilisateur supprimé"
         no_reservation: "Aucune réservation"
@@ -168,15 +163,13 @@ fr:
         status_enabled: "Actifs"
         status_disabled: "Désactivés"
         status_all: "Tous"
-
       trainings_new:
-        # créer une nouvelle formation
+        #create a new training
         add_a_new_training: "Ajouter une nouvelle formation"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
-
       events:
-        # gestion et suivi des évènements
+        #events tracking and management
         events_monitoring: "Suivi des évènements"
         manage_filters: "Gérer les filtres"
         fablab_events: "Les évènements du Fab Lab"
@@ -188,8 +181,8 @@ fr:
         on_DATE: "le {DATE}"
         from_DATE: "du {DATE}"
         from_TIME: "de {TIME}"
-        to_date: "au" # eg: from 01/01 to 01/05
-        to_time: "à"  # eg. from 18:00 to 21:00
+        to_date: "to" #eg: from 01/01 to 01/05
+        to_time: "to" #eg. from 18:00 to 21:00
         title: "Titre"
         dates: "Dates"
         booking: "Réservations"
@@ -229,34 +222,31 @@ fr:
         do_you_really_want_to_delete_this_price_category: "Êtes vous sur de vouloir supprimer cette catégorie tarifaire ?"
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
-
       events_new:
-        # ajouter un nouvel évènement
+        #add a new event
         add_an_event: "Ajouter un évènement"
         none: "Aucune"
         every_days: "Tous les jours"
         every_week: "Chaque semaine"
         every_month: "Chaque mois"
         every_year: "Chaque année"
-
       events_edit:
-        # modifier un évènement existant
+        #edit an existing event
         edit_the_event: "Éditer l'évènement"
-        confirmation_required: "Confirmation requise"
-        edit_recurring_event: "Vous êtes sur le point de modifier un évènement périodique. Que voulez-vous modifier ?"
-        edit_this_event: "Uniquement cet évènement"
-        edit_this_and_next: "Cet évènement et tous les suivants"
-        edit_all: "Tous les évènements"
-        date_wont_change: "Attention : vous avez modifié la date de l'évènement. Cette modification ne sera pas être répercutée sur les autres occurrences de l'évènement périodique."
-        event_successfully_updated: "L'évènement a bien été modifié."
-        events_updated: "L'évènement, ainsi {COUNT, plural, =1{qu'un autre} other{que {COUNT} autres}}, ont été modifiés"
-        unable_to_update_the_event: "L'évènement n'a pu être modifié"
-        events_not_updated: "Sur {TOTAL} évènements, {COUNT, plural, =1{un n'a pas pu être modifié} other{{COUNT} n'ont pas pu être modifiés}}."
-        error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
-        other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
-
+        confirmation_required: "Confirmation required"
+        edit_recurring_event: "You're about to update a periodic event. What do you want to update ?"
+        edit_this_event: "Only this event"
+        edit_this_and_next: "This event and the following"
+        edit_all: "All events"
+        date_wont_change: "Warning: you have changed the event date. This modification won't be propagated to other occurrences of the periodic event."
+        event_successfully_updated: "Event successfully updated"
+        events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
+        unable_to_update_the_event: "Unable to update the event"
+        events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
+        error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
+        other_error: "An unexpected error occurred while updating the event"
       event_reservations:
-        # liste des réservations sur un évènement
+        #event reservations list
         the_reservations: "Les réservations :"
         user: "Utilisateur"
         payment_date: "Date de paiement"
@@ -266,9 +256,8 @@ fr:
         no_reservations_for_now: "Aucune réservation pour le moment."
         back_to_monitoring: "Retour au suivi"
         canceled: "Annulée"
-
       pricing:
-        # gestion des abonnements, des tarifs, des crédits et des codes promo
+        #subscriptions, prices, credits and coupons management
         pricing_management: "Gestion de la tarification"
         subscriptions: "Abonnements"
         trainings: "Formations"
@@ -297,7 +286,7 @@ fr:
         hours: "Créneaux de {DURATION} minutes"
         related_subscriptions: "Abonnements associés"
         please_specify_a_number: "Veuillez spécifier un nombre."
-        none: "Aucune"  # grammar concordance with training.
+        none: "None" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "Une erreur est survenue lors de l'enregistrement du nombre de crédits."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "Une erreur est survenue lors de la suppression du crédit avec la {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "Une erreur est survenue : impossible de retrouver le crédit à enlever."
@@ -347,26 +336,23 @@ fr:
         status_enabled: "Actifs"
         status_disabled: "Désactivés"
         status_all: "Tous"
-
       coupons_new:
-        # ajouter un code promotionnel
+        #ajouter un code promotionnel
         add_a_coupon: "Ajouter un code promotionnel"
         unable_to_create_the_coupon_check_code_already_used: "Impossible de créer le code promotionnel. Vérifiez que le code n'est pas utilisé."
-
       coupons_edit:
-        # mettre à jour un code promotionnel
+        #mettre à jour un code promotionnel
         coupon: "Code promo :"
         unable_to_update_the_coupon_an_error_occurred: "Impossible de mettre à jour le code promotionnel : une erreur est survenue."
-
       plans:
         new:
-          # ajouter une formule d'abonnement sur la plate-forme
+          #add a subscription plan on the platform
           add_a_subscription_plan: "Ajouter une formule d'abonnement"
           unable_to_create_the_subscription_please_try_again: "L'abonnement n'a pas pu être créé. Veuillez réessayer."
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "Création du/des abonnement(s) réussie. N'oubliez pas de redéfinir les tarifs."
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossible d'enregistrer cet utilisateur. Vérifiez qu'il n'existe pas déjà un utilisateur du même nom."
         edit:
-          # modifier une formule d'abonnement / les prix des créneaux machines
+          #edit a subscription plan / machine slots prices
           subscription_plan: "Formule d'abonnement :"
           prices: "Tarifs"
           copy_prices_from: "Copier les prix depuis"
@@ -377,9 +363,8 @@ fr:
           space: "Espace"
           unable_to_save_subscription_changes_please_try_again: "Les modifications de l'abonnement n'ont pas pu être enregistrées. Veuillez réessayer."
           subscription_successfully_changed: "Modification de l'abonnement réussie."
-
       invoices:
-        # liste de toutes les factures & paramètres de facturation
+        #list of all invoices & invoicing parameters
         invoices: "Factures"
         accounting_periods: "Périodes comptables"
         invoices_list: "Liste des factures"
@@ -477,7 +462,7 @@ fr:
         description: "Description"
         description_optional: "Description (optionnelle) :"
         will_appear_on_the_refund_invoice: "Apparaîtra sur la facture de remboursement."
-        none: "Aucun"  # grammar concordance with payment mean
+        none: "None" #grammar concordance with payment mean
         by_cash: "En espèces"
         by_cheque: "Par chèque"
         by_transfer: "Par virement"
@@ -595,9 +580,8 @@ fr:
           debit_euro: "Débit euro"
           credit_euro: "Crédit euro"
           lettering: "Lettrage"
-
       members:
-        # gestion des utilisateurs, des groupes, des étiquettes, etc.
+        #management of users, labels, groups, and so on
         users_management: "Gestion des utilisateurs"
         members: "Membres"
         subscriptions: "Abonnements"
@@ -672,17 +656,15 @@ fr:
           status_enabled: "Activés"
           status_disabled: "Désactivés"
           status_all: "Tous"
-          member_filter_all: "Tous"
-          member_filter_not_confirmed: "Non confirmés"
-          member_filter_inactive_for_3_years: "Inactifs depuis 3 ans"
-
+          member_filter_all: "All"
+          member_filter_not_confirmed: "Unconfirmed"
+          member_filter_inactive_for_3_years: "Inactive for 3 years"
       members_new:
-        # ajouter un membre
+        #add a member
         add_a_member: "Ajouter un membre"
         user_is_an_organization: "L'utilisateur est une structure"
-
       members_import:
-        # import massif de members
+        #members bulk import
         import_members: "Importer des membres"
         info: "Vous pouvez téléverser un fichier CSV afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier le groupe, les formations et les étiquettes des membres."
         required_fields: "Votre fichier doit obligatoirement comporter, au minimum, les informations suivantes pour chaque utilisateur à créer : courriel, nom, prénom et groupe. Si le mot passe n'est pas rempli, il sera généré automatiquement. Lors d'une mise à jour, les champs non remplis seront gardés tel quels."
@@ -706,9 +688,8 @@ fr:
         update_on_id: "ID"
         update_on_username: "Pseudonyme"
         update_on_email: "Adresse de courriel"
-
       members_import_result:
-        # résultats de l'import
+        #import results
         import_results: "Résultats de l'import"
         import_details: "Import n°{ID}, du {DATE}, initié par {USER}"
         results: "Résultats"
@@ -718,9 +699,8 @@ fr:
         success: "Succès"
         failed: "Échec"
         error_details: "Détails de l'erreur :"
-
       members_edit:
-        # modifier un membre
+        #edit a member
         subscription: "Abonnement"
         duration: "Durée :"
         expires_at: "Expire le :"
@@ -762,9 +742,8 @@ fr:
         a_problem_occurred_while_taking_the_subscription: "Il y a eu un problème lors de la souscription à l'abonnement"
         wallet: "Porte-monnaie"
         to_credit: 'Créditer'
-
       admins_new:
-        # ajouter un nouvel administrateur à la plate-forme
+        #add a new administrator to the platform
         add_an_administrator: "Ajouter un administrateur"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "L'administrateur a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par email."
         failed_to_create_admin: "Impossible de créer l'administrateur :"
@@ -781,9 +760,8 @@ fr:
         birth_date: "Date de naissance"
         address: "Adresse"
         phone_number: "Numéro de téléphone"
-
       authentication_new:
-        # ajouter un nouveau fournisseur d'authentification (SSO)
+        #add a new authentication provider (SSO)
         local_database: "Base de données locale"
         o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Ajouter un fournisseur d'authentification"
@@ -796,21 +774,19 @@ fr:
         do_you_really_want_to_continue: "Êtes vous sur de vouloir continuer ?"
         unsecured_oauth2_provider_successfully_added: "Le fournisseur OAuth 2.0 (non sécurisé) a bien été enregistré."
         oauth2_provider_successfully_added: "Le fournisseur OAuth 2.0 a bien été enregistré."
-
       authentication_edit:
-        # modifier un fournisseur d'authentification (SSO)
+        #edit an authentication provider (SSO)
         provider: "Fournisseur :"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Il est obligatoire d'établir la correspondance entre User.uid et l'API pour pouvoir ajouter ce fournisseur."
         provider_successfully_updated: "Le fournisseur a bien été mis à jour."
         an_error_occurred_unable_to_update_the_provider: "Une error est survenue : impossible de mettre à jour le fournisseur."
-
       statistics:
-        # tableau de statistiques
+        #statistics tables
         statistics: "Statistiques"
         evolution: "évolution"
         age_filter: "Filtre d'âge"
-        from_age: "De"  # eg: from 8 to 40 years old
-        to_age: "à"  # eg: from 8 to 40 years old
+        from_age: "De" #eg. from 8 to 40 years old
+        to_age: "à" #eg. from 8 to 40 years old
         _years_old: "ans"
         start: "Début :"
         end: "Fin :"
@@ -819,8 +795,8 @@ fr:
         criterion: "Critère :"
         value: "Valeur :"
         exclude: "Exclure"
-        from_date: "Du" # eg: from 01/01 to 01/05
-        to_date: "au" # eg: from 01/01 to 01/05
+        from_date: "From" #eg: from 01/01 to 01/05
+        to_date: "to" #eg: from 01/01 to 01/05
         entries: "Entrées :"
         revenue_: "Chiffre d'affaires :"
         average_age: "Âge moyen :"
@@ -845,15 +821,14 @@ fr:
         man: "Homme"
         woman: "Femme"
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
-
       stats_graphs:
-        # graphiques de statistiques
+        #statistics graphs
         statistics: "Statistiques"
         data: "Données"
         day: "Jour"
         week: "Semaine"
-        from_date: "Du" # eg: from 01/01 to 01/05
-        to_date: "au" # eg: from 01/01 to 01/05
+        from_date: "From" #eg: from 01/01 to 01/05
+        to_date: "to" #eg: from 01/01 to 01/05
         month: "Mois"
         start: "Début :"
         end: "Fin :"
@@ -865,9 +840,8 @@ fr:
         week_of_START_to_END: "Semaine du {START} au {END}"
         no_data_for_this_period: "Pas de données pour cette période"
         date: "Date"
-
       settings:
-        # paramètres globaux de l'application et personnalisation
+        #global application parameters and customization
         title: "Titre"
         customize_the_application: "Personnalisation de l'application"
         general: "Général"
@@ -879,7 +853,7 @@ fr:
         neutral: "Neutre."
         eg: "ex :"
         about: "A propos"
-        the_team: "L'équipe"
+        the_team: "The team of"
         male_preposition: "du"
         female_preposition: "de la"
         neutral_preposition: ""
@@ -916,9 +890,9 @@ fr:
         leave_it_empty_to_not_bring_up_any_news_on_the_home_page: "Laisser vide pour ne pas faire apparaître de brève sur la page d'accueil"
         twitter_stream: "Flux Twitter :"
         name_of_the_twitter_account: "Nom du compte Twitter"
-        link: "Lien"
-        link_to_about: 'Titre du lien vers la page "À propos"'
-        content: "Contenu"
+        link: "Link"
+        link_to_about: 'Link title to the "About" page'
+        content: "Content"
         title_of_the_about_page: "Titre page A propos"
         shift_enter_to_force_carriage_return: "MAJ. + ENTRÉE pour forcer le retour à la ligne"
         input_the_main_content: "Saisir le contenu principal"
@@ -952,22 +926,22 @@ fr:
         space_explications_alert: "l'explication sur la page de réservation d'un espace"
         main_color: "la couleur principale"
         secondary_color: "la couleur secondaire"
-        customize_home_page: "Personnaliser la page d'accueil"
-        reset_home_page: "Remettre la page d'accueil dans son état initial"
-        confirmation_required: "Confirmation requise"
-        confirm_reset_home_page: "Voulez-vous vraiment remettre la page d'accueil à sa valeur d'usine ?"
-        home_items: "Éléments de la page d'accueil"
-        item_news: "Brève"
-        item_projects: "Derniers projets"
-        item_twitter: "Dernier tweet"
-        item_members: "Derniers membres"
-        item_events: "Prochains événements"
-        home_content: "la page d'accueil"
-        home_content_reset: "La page d'accueil a bien été restaurée dans sa configuration initiale."
-        home_css: "la feuille de style de la page d'accueil"
+        customize_home_page: "Customize home page"
+        reset_home_page: "Reset the home page to its initial state"
+        confirmation_required: "Confirmation required"
+        confirm_reset_home_page: "Do you really want to reset the home page to its factory value?"
+        home_items: "Home page items"
+        item_news: "News"
+        item_projects: "Last projects"
+        item_twitter: "Last tweet"
+        item_members: "Last members"
+        item_events: "Next events"
+        home_content: "the home page"
+        home_content_reset: "Home page was successfully reset to its initial configuration."
+        home_css: "the stylesheet of the home page"
         home_blogpost: "la brève de la page d'accueil"
         twitter_name: "nom du flux Twitter"
-        link_name: "l'intitulé du lien vers la page \"À propos\""
+        link_name: "link title to the \"About\" page"
         about_title: "titre de la page \"À propos\""
         about_body: "corps de la page \"À propos\""
         about_contacts: "contacts sur la page \"À propos\""
@@ -994,9 +968,9 @@ fr:
         elements_ordering: "Ordre d'affichage des éléments"
         machines_order: "Ordre des machines"
         display_machines_sorted_by: "Afficher les machines triées par"
-        advanced: "Paramètres avancés"
-        customize_home_page_css: "Personnaliser la feuille de style de la page d'accueil"
-        home_css_notice_html: "Vous pouvez personnaliser la feuille de style qui s'appliquera à la page d'accueil en utilisant la syntaxe <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a>. Ces styles seront automatiquement subordonnées au sélecteur <code>.home-page</code> pour prévenir tout risque de casse de l'application. Attention toutefois, les modifications de la page d'accueil dans l'éditeur en haut de page peuvent rendre caduque vos styles, référez vous toujours au code HTML."
+        advanced: "Advanced settings"
+        customize_home_page_css: "Customise the stylesheet og the home page"
+        home_css_notice_html: "You can customize the stylesheet which will apply to the home page, using the <a href=\"https://sass-lang.com/documentation\" target=\"_blank\">SASS</a> syntax. These styles will be automatically subordinated to the <code>.home-page</code> selector to prevent any risk of breaking the application. Meanwhile please be careful, any changes in the home page editor at the top of the page may broke your styles, always refer to the HTML code."
         sort_by:
           default: "Défaut"
           name: "Nom"
@@ -1012,22 +986,21 @@ fr:
           publish_will_notify: "Publier une nouvelle version enverra une notification à l'ensemble des utilisateurs."
           publish: "Publier"
           users_notified: "Les utilisateurs de la plateforme seront notifiés de la mise à jour."
-          about_analytics: "J'accepte de partager des données anonymes avec l'équipe de développement pour aider à améliorer Fab-manager."
-          read_more: "Quelles informations collectons-nous ?"
+          about_analytics: "I agree to share anonymous data with the development team to help improve Fab-manager."
+          read_more: "Which data do we collect?"
           analytics:
-            title: "Amélioration de l'application"
-            intro_analytics_html: "Vous trouverez ci-dessous une vue détaillée de toutes les données de Fab-manager collectera <strong>si l'autorisation lui est accordée.</strong>"
-            version: "Version de l'application"
-            members: "Nombre de membres"
-            admins: "Nombre d'administrateurs"
-            availabilities: "Nombre de disponibilités les 7 dernier jours"
-            reservations: "Nombre de réservations durant 7 dernier jours"
-            plans: "Le module d'abonnements est-il actif ?"
-            spaces: "Le module d'espaces est-il actif ?"
-            online_payment: "Le module de paiement par carte bancaire est-il actif ?"
-            invoices: "Le module est facturation est-il actif ?"
-            openlab: "Le module de partage de projets (OpenLab) est-il actif ?"
-
+            title: "Application improvement"
+            intro_analytics_html: "You'll find below a detailed view of all the data, Fab-manager will collect <strong>if permission is granted.</strong>"
+            version: "Application version"
+            members: "Number of members"
+            admins: "Number of administrators"
+            availabilities: "Number of availabilities of the last 7 days"
+            reservations: "Number of reservations during the last 7 days"
+            plans: "Is the subscription module active?"
+            spaces: "Is the space management module active?"
+            online_payment: "Is the online payment module active?"
+            invoices: "Is the invoicing module active?"
+            openlab: "Is the project sharing module (OpenLab) active?"
       open_api_clients:
         add_new_client: "Créer un compte client"
         api_documentation: "Documentation de l'API"
@@ -1045,21 +1018,18 @@ fr:
         client_successfully_updated: "Les modifications ont été enregistrées."
         client_successfully_deleted: "Le compte client a bien été supprimé."
         access_successfully_revoked: "L'accès a bien été revoqué."
-
       space_new:
-        # créer un nouvel espace
+        #create a new space
         add_a_new_space: "Ajouter un nouvel espace"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'un espace, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
         consider_changing_its_prices_before_creating_any_reservation_slot: "Pensez à modifier ces prix avant de créer des créneaux pour cet espace."
         add_this_space: "Ajouter cet espace"
-
       space_edit:
-        # modifier un espace existant
+        #modify an exiting space
         edit_the_space_NAME: "Modifier l'espace : {NAME}"
         validate_the_changes: "Valider les modifications"
-
       manage_abuses:
-        # traiter et supprimer les rapports d'abus
+        #process and delete abuses reports
         abuses_list: "Liste des signalements"
         no_reports: "Aucun signalement pour le moment"
         published_by: "publié par"
@@ -1071,189 +1041,189 @@ fr:
         failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"
       tour:
         conclusion:
-          title: "Merci de votre attention"
-          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+          title: "Thank you for your attention"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
         trainings:
           welcome:
-            title: "Formations"
-            content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
+            title: "Trainings"
+            content: "Here you can create, modify and delete trainings. It is also the place where you can validate the training courses followed by your members."
           trainings:
-            title: "Gérer les formations"
-            content: "<p>Lors de la création d'une formation, vous pouvez définir un nombre de places par défaut. Néanmoins, le nombre de places effectives pourra être modifié pour chaque session.</p><p>La programmation des sessions de formation se fait depuis l'onglet administrateur [Agenda].</p><p>D'autre part, il est possible d'associer une ou plusieurs machines à une formation. Cela permet d'en faire un pré-requis pour la réservation de ces machines.</p>"
+            title: "Manage trainings"
+            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab [Calendar].</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
           filter:
-            title: "Filtre"
-            content: "Par défaut, seules les formations actives sont affichées ici. Affichez les autres en choisissant un autre filtre ici."
+            title: "Filter"
+            content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
           tracking:
-            title: "Suivi formations"
-            content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées, le cas échéant."
+            title: "Trainings monitoring"
+            content: "Once a training session is finished, you can validate the training for the members present from this screen. This validation is essential to allow them to use the associated machines, if applicable."
         calendar:
           welcome:
-            title: "Agenda"
-            content: "À partir de cet écran, vous pourrez planifier les créneaux durant lesquels les formations, machines et espaces seront réservables par les membres."
+            title: "Calendar"
+            content: "From this screen, you can plan the slots during which training, machines and spaces will be bookable by members."
           agenda:
-            title: "L'agenda"
-            content: "Cliquez dans l'agenda pour commencer la création d'une nouvelle plage de disponibilité. Vous pouvez sélectionner directement toute la plage horaire souhaitée en maintenant votre clic."
+            title: "The calendar"
+            content: "Click in the calendar to start creating a new availability range. You can directly select the entire time range desired by maintaining your click."
           export:
-            title: "Exporter"
-            content: "Lancez la génération d'un fichier Excel, listant l'ensemble des créneaux de disponibilité créés dans l'agenda."
+            title: "Export"
+            content: "Start generating an Excel file, listing all the availability slots created in the calendar."
           import:
-            title: "Importer des agendas externes"
-            content: "Permet d'importer des agendas depuis une source externe au format iCal."
+            title: "Import external calendars"
+            content: "Allows you to import calendars from an external source in iCal format."
         members:
           welcome:
-            title: "Utilisateurs"
-            content: "Ici vous pourrez créer, modifier et supprimer des membres et des administrateurs. Vous pourrez également gérer les groupes, les étiquettes, réaliser des imports / exports avec des fichiers de tableur et connecter un logiciel de SSO."
+            title: "Users"
+            content: "Here you can create, modify and delete members and administrators. You can also manage groups, labels, import / export with spreadsheet files and connect SSO software."
           list:
-            title: "Liste des membres"
-            content: "Par défaut, ce tableau liste l'ensemble des membres de votre Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+            title: "Members list"
+            content: "By default, this table lists all the members of your Fab-manager. You can sort the list in a different order by clicking on the header of each column."
           search:
-            title: "Rechercher un utilisateur"
-            content: "Ce champ de saisie vous permet de faire une recherche en texte libre sur l'ensemble des colonnes du tableau ci-dessous."
+            title: "Find a user"
+            content: "This input field allows you to search for any text on all of the columns in the table below."
           filter:
-            title: "Filtrer la liste"
-            content: "<p>Filtrez la liste ci-dessous pour afficher uniquement les utilisateurs n'ayant pas confirmé leur adresse mail ou les comptes inactifs depuis plus de 3 ans.</p><p>Pour information, la RGPD impose de supprimer les comptes inactifs depuis plus de 3 ans.</p>"
+            title: "Filter the list"
+            content: "<p>Filter the list below to display only users who have not confirmed their email address or inactive accounts for more than 3 years.</p><p>Please notice that the GDPR requires that you delete any accounts inactive for more than 3 years.</p>"
           actions:
-            title: "Actions sur le membre"
-            content: "<p>Les boutons dans cette colonne vous permettent d'afficher et de modifier l'ensemble des paramètres du membre, ou alors de le supprimer de manière irréversible.</p><p>En cas de suppression, les informations de facturation seront néanmoins conservées pendant 10 ans et des données statistiques seront également conservées de manière anonyme.</p>"
+            title: "Members actions"
+            content: "<p>The buttons in this column allow you to display and modify all of the member's parameters, or to delete them irreversibly.</p><p>In the event of a deletion, the billing information will be kept for 10 years and statistical data will also be kept anonymously.</p>"
           exports:
-            title: "Exporter"
-            content: "Chacun de ces boutons lance la génération d'un fichier Excel listant l'ensemble des membres, abonnements ou réservations, actuelles et passées."
+            title: "Export"
+            content: "Each of these buttons starts the generation of an Excel file listing all the members, subscriptions or reservations, current and past."
           import:
-            title: "Importer des membres"
-            content: "Permet d'importer une liste de membres à créer dans Fab-manager, à partir d'un fichier CSV."
+            title: "Import members"
+            content: "Allows you to import a list of members to create in Fab-manager, from a CSV file."
           admins:
-            title: "Gérer les administrateurs"
-            content: "De la même manière que les membres, gérez ici les administrateurs de votre Fab-manager.<br>Les administrateurs peuvent prendre des réservations pour n'importe quel membre ainsi que modifier l'ensemble des paramètres du logiciel."
+            title: "Manage administrators"
+            content: "In the same way as the members, manage the administrators of your Fab-manager here.<br>The administrators can take reservations for any member as well as modify all the parameters of the software."
           groups:
-            title: "Gérer les groupes"
-            content: "Les groupes vous permettent de mieux segmenter votre offre tarifaire."
+            title: "Manage groups"
+            content: "Groups allow you to better segment your price list."
           labels:
-            title: "Gérer les étiquettes"
-            content: "Les étiquettes vous permettent de réserver certains créneaux aux utilisateurs associés à ces mêmes étiquettes."
+            title: "Manage tags"
+            content: "The labels allow you to reserve certain slots for users associated with these same labels."
           sso:
-            title: "Authentification unique"
-            content: "Ici vous pourrez mettre en place et gérer un système d'authentification unique (ou Single Sign-On - SSO)."
+            title: "Single Sign-On"
+            content: "Here you can set up and manage a single authentication system (SSO)."
         invoices:
           welcome:
-            title: "Factures"
-            content: "<p>Ici, vous pourrez télécharger les factures et les avoirs émis, ainsi que gérer tout ce qui a trait à la comptabilité et à la facturation.</p><p>Si vous utilisez un logiciel tiers pour gérer vos factures, il est possible de désactiver le module de facturation. Pour cela, contactez votre administrateur système.</p>"
+            title: "Invoices"
+            content: "<p>Here you will be able to download invoices and credit notes issued, as well as manage everything related to accounting and invoicing.</p><p>If you use third-party software to manage your invoices, it is possible to deactivate the billing module. For this, contact your system administrator.</p>"
           list:
-            title: "Liste des factures"
-            content: "Par défaut, ce tableau liste l'ensemble des factures et avoirs émis via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
+            title: "Invoices list"
+            content: "By default, this table lists all the invoices and credit notes issued by Fab-manager. You can sort the list in a different order by clicking on the header of each column."
           chained:
-            title: "Indicateur de chaînage"
-            content: "<p>Cette icône assure l'inaltérablité des données comptables de la facture sur cette ligne, conformément à la loi de finances française de 2018 contre la fraude à la TVA.</p><p>Si une icône rouge apparaît au lieu de celle-ci, merci de contactez immédiatement le support technique.</p>"
+            title: "Chaining indicator"
+            content: "<p>This icon ensures the inalterability of the accounting data of the invoice on this line, in accordance with the French finance law of 2018 against VAT fraud.</p><p>If a red icon appears instead of this one , please contact technical support immediately.</p>"
           download:
-            title: "Télécharger"
-            content: "Cliquez ici pour télécharger la facture au format PDF."
+            title: "Download"
+            content: "Click here to download the invoice in PDF format."
           refund:
-            title: "Avoir"
-            content: "Permet de générer un avoir sur la facture de cette ligne ou certains de ses sous-éléments. <strong>Attention :</strong> Cela générera uniquement le document comptable, le remboursement effectif de l'utilisateur restera toujours à votre charge."
+            title: "Credit note"
+            content: "Allows you to generate a credit note for the invoice on this line or some of its sub-elements. <strong>Warning:</strong> This will only generate the accounting document, the actual refund of the user will always be your responsibility."
           settings:
-            title: "Paramètres"
-            content: "<p>Ici vous pourrez modifier les paramètres de génération des factures. Cliquez sur l'élément qui vous intéresse pour commencer l'édition.</p><p>C'est notamment ici que vous pourrez définir si vous êtes assujettis à la TVA et à quel taux.</p>"
+            title: "Settings"
+            content: "<p>Here you can modify the parameters for invoices generation. Click on the item you are interested in to start editing.</p><p>In particular, this is where you can set if you are subject to VAT and the applicable rate.</p>"
           codes:
-            title: "Codes comptables"
-            content: "Paramétrez ici les codes comptables pour tous les types d'écritures générés par le logiciel. Ce paramétrage n'est requis que si vous utilisez la fonctionnalité d'export comptable."
+            title: "Accounting codes"
+            content: "Set the accounting codes here for all kinds of entries generated by the software. This setting is only required if you use the accounting export functionality."
           export:
-            title: "Export comptable"
-            content: "Une fois les codes configurés, cliquez ici pour accéder à l'interface vous permettant d'exporter les écritures vers un logiciel comptable tiers."
+            title: "Accounting export"
+            content: "Once the codes have been configured, click here to access the interface allowing you to export the entries to a third-party accounting software."
           periods:
-            title: "Clôturer les périodes comptables"
-            content: "<p>La réglementation de votre pays peut vous imposer de clôturer régulièrement vos comptes. L'interface accessible depuis ce bouton permet de le faire.</p> <p><strong>En France,</strong> si vous êtes soumis à la loi anti-fraude TVA <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, cette clôture est obligatoire au moins une fois par an.</p><p>Pour rappel, en cas d'obligation d'utilisation d'un logiciel certifié (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>faites le test ici</a>), vous êtes dans l'obligation légale de fournir une attestation de conformité du logiciel. <a href='mailto:contact@fab-manager.com'>Contactez-nous<a/> pour l'obtenir.</p>"
+            title: "Close accounting periods"
+            content: "<p>The regulations of your country may require you to close your accounts regularly. The interface accessible from this button allows you to do this.</p> <p><strong>In France,</strong> if you are subject to VAT anti-fraud law <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, this closing is mandatory at least once a year.</p><p>As a reminder,  if you have to use a certified software (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>take the test here</a>), you are under the legal obligation to provide a certificate of compliance of the software. <a href='mailto:contact@fab-manager.com'>Contact-us<a/> to get it.</p>"
         pricing:
           welcome:
-            title: "Abonnements & Tarifs"
-            content: "Gérez les formules d'abonnement et les prix des différents services que vous proposez à vos membres."
+            title: "Subscriptions & Prices"
+            content: "Manage subscription plans and prices for the various services you offer to your members."
           new_plan:
-            title: "Nouvelle formule d'abonnement"
-            content: "Créez des formules d'abonnement pour proposer des prix préférentiels sur les machines et les espaces, aux utilisateurs réguliers."
+            title: "New subscription plan"
+            content: "Create subscription plans to offer preferential prices on machines and spaces to regular users."
           trainings:
-            title: "Formations"
-            content: "Définissez ici les prix des formations, par groupe d'utilisateurs."
+            title: "Trainings"
+            content: "Define training prices here, by user group."
           machines:
             title: "Machines"
-            content: "Définissez ici les prix des créneaux machine, par groupe d'utilisateurs. Ces prix seront appliqués aux utilisateurs qui n'ont pas d'abonnement."
+            content: "Define here the prices of the machine slots, by user group. These prices will be applied to users who do not have subscriptions."
           spaces:
             title: "Espaces"
-            content: "De la même manière, définissez ici les prix des créneaux des espaces, pour les utilisateurs sans abonnement."
+            content: "In the same way, define here the prices of the spaces slots, for the users without subscriptions."
           credits:
-            title: "Crédits"
-            content: "<p>Les crédits vous permettent d'offrir certains services aux utilisateurs qui souscrivent à un abonnement.</p><p>Vous pouvez, par exemple, offrir 2h d'imprimante 3D pour tous les abonnements annuels ; ou une formation au choix pour les abonnés étudiants, etc.</p>"
+            title: "Credits"
+            content: "<p>Credits allow you to give certain services for free to users who subscribe to a plan.</p><p>You can, for example, offer 2 hours of 3D printer for all annual subscriptions; or training of your choice for student subscribers, etc.</p>"
           coupons:
-            title: "Codes promotionnels"
-            content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
+            title: "Coupons"
+            content: "Create and manage promotional coupons allowing to offer punctual discounts to their holders."
         events:
           welcome:
-            title: "Évènements"
-            content: "Créez des évènements, suivez leurs réservations et organisez-les depuis cette page."
+            title: "Events"
+            content: "Create events, track their reservations and organize them from this page."
           list:
-            title: "Les évènements"
-            content: "Cette liste affiche l'ensemble des évènements passés ou à venir, ainsi que le nombre de réservations pour chacun d'eux."
+            title: "The events"
+            content: "This list displays all past or future events, as well as the number of reservations for each of them."
           filter:
-            title: "Filtrez les évènements"
-            content: "N'affichez que les évènements à venir dans la liste ci-dessous ; ou au contraire, uniquement ceux déjà passés."
+            title: "Filter events"
+            content: "Only display upcoming events in the list below; or on the contrary, only those already passed."
           categories:
-            title: "Les catégories"
-            content: "Les catégories aident vos utilisateurs à savoir de quel type d'évènement il s'agit. Une catégorie est requise pour chacun des évènements nouvellement créé."
+            title: "Categories"
+            content: "Categories help your users know what type of event it is. A category is required for each of the newly created events."
           themes:
-            title: "Les thématique"
-            content: "<p>Les thématiques constituent une catégorisation supplémentaire (et optionnelle) de vos évènements. Elles peuvent regrouper différents évènements de formes très différentes.</p><p>Par exemple, un stage de deux jours sur la marqueterie et un atelier d'une soirée sur la prise en main du rabot à bois, peuvent se retrouver dans la thématique « menuiserie ».</p>"
+            title: "Themes"
+            content: "<p>Themes are an additional (and optional) categorization of your events. They can group together different events of very different forms.</p><p>For example, a two-day course about marquetry and an evening workshop about the handling of the wood planer, can be found in the theme « carpentry ».</p>"
           ages:
-            title: "Les tranches d'âge"
-            content: "Cet autre filtre optionnel aidera vos utilisateurs à trouver des évènements adaptés à leur profil."
+            title: "Age groups"
+            content: "This other optional filter will help your users find events suited to their profile."
           prices:
-            title: "Catégories tarifaires"
-            content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
+            title: "Pricing categories"
+            content: "The price of events does not depend on groups or subscriptions, but on the categories you define on this page."
         project_elements:
           welcome:
-            title: "Projets"
-            content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
+            title: "Projects"
+            content: "Here you can define all the elements that will be available for members to document the projects they carry out."
           abuses:
-            title: "Gérer les signalements"
-            content: "<p>Accédez par ici à la gestion des signalements.</p><p>Des visiteurs peuvent effectuer des signalements sur les projets, par exemple pour une atteinte au droit d'auteur ou pour un texte incitant à la haine.</p><p>La RGPD vous impose de supprimer ces données de signalement une fois que les actions requises ont été effectuées.</p>"
+            title: "Manage reports"
+            content: "<p>Access here the management of reports.</p><p>Visitors can signal projects, for example for copyright infringement or for hate speech.</p><p>GDPR requires you to delete this reporting data once the required actions have been taken.</p>"
         statistics:
           welcome:
-            title: "Statistiques"
-            content: "<p>À partir d'ici, vous pourrez accéder à un ensemble de statistiques sur vos membres et leurs usages au sein de votre Fab Lab.</p><p>Conformément à la RGPD, les utilisateurs ayant supprimé leur compte continuent d'être rapportés dans les statistiques, mais de manière anonyme.</p>"
+            title: "Statistics"
+            content: "<p>From here, you will be able to access many statistics on your members and their uses within your Fab Lab.</p><p>In accordance with GDPR, users who have deleted their account continue to be reported in the statistics, but anonymously.</p>"
           export:
-            title: "Exporter les données"
-            content: "Vous pouvez choisir d'exporter tout ou partie des données statistiques vers un fichier Excel."
+            title: "Export data"
+            content: "You can choose to export all or part of the statistical data to an Excel file."
           trending:
-            title: "Évolution"
-            content: "Visualisez l'évolution dans le temps des principaux usages de votre Fab Lab, grâce à des graphiques et des courbes."
+            title: "Evolution"
+            content: "Visualize the evolution over time of the main uses of your Fab Lab, thanks to graphs and curves."
         settings:
           welcome:
-            title: "Personnalisation de l'application"
-            content: "D'ici, vous pourrez configurer les réglages généraux de Fab-manager ainsi que personnaliser différents éléments de l'interface."
+            title: "Application customization"
+            content: "From here, you can configure the general settings of Fab-manager as well as customize various elements of the interface."
           home:
-            title: "Personnaliser la page d'accueil"
-            content: "<p>Cet éditeur WYSIWYG vous permet de personnaliser l'apparence de la page d'accueil tout en utilisant différents composants (dernier tweet, brève, etc.).</p><p><strong>Attention :</strong> Gardez à l'esprit que toute modification non maîtrisée peut casser l'apparence de la page d'accueil.</p>"
+            title: "Customize home page"
+            content: "<p>This WYSIWYG editor allows you to customize the appearance of the home page while using different components (last tweet, brief, etc.).</p><p><strong>Warning:</strong> Keep in mind that any uncontrolled changes can break the appearance of the home page.</p>"
           components:
-            title: "Insérer un composant"
-            content: "Cliquez ici pour insérer un composant pré-existant dans la page d'accueil."
+            title: "Insert a component"
+            content: "Click here to insert a pre-existing component into the home page."
           codeview:
-            title: "Afficher le code HTML"
-            content: "Ce bouton vous permet d'afficher et de modifier directement le code de la page d'accueil. C'est la méthode recommandée, mais elle nécessite une connaissance préalable du HTML."
+            title: "Display HTML code"
+            content: "This button allows you to directly view and modify the code of the home page. This is the recommended way to proceed, but it requires prior knowledge of HTML."
           reset:
-            title: "Revenir en arrière"
-            content: "À tout moment, vous pouvez restaurer la page d'accueil initiale en cliquant ici."
+            title: "Go back"
+            content: "At any time, you can restore the original home page by clicking here."
           css:
-            title: "Personnaliser la feuille de style"
-            content: "Pour les utilisateurs avancés, il est possible de définir une feuille de style (CSS) personnalisée pour la page d'accueil."
+            title: "Customize the style sheet"
+            content: "For advanced users, it is possible to define a custom style sheet (CSS) for the home page."
           about:
-            title: "À propos"
-            content: "Personnalisez entièrement cette page pour présenter votre activité."
+            title: "About"
+            content: "Fully personalize this page to present your activity."
           privacy:
-            title: "Politique de confidentialité"
-            content: "<p>Expliquez ici la façon dont vous utilisez les données que vous recueillez sur vos membres.</p><p>La RGPD impose qu'une politique de confidentialité soit définie, ainsi qu'un délégué à la protection des données.</p>"
+            title: "Privacy policy"
+            content: "<p>EExplain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
           draft:
-            title: "Brouillon"
-            content: "Cliquez ici pour afficher un brouillon à trous d'une politique de confidentialité, qu'il ne vous reste plus qu'à relire et à compléter."
+            title: "Draft"
+            content: "Click here to view a privacy policy draft with holes, which you just need to read and complete."
         open_api:
           welcome:
             title: "OpenAPI"
-            content: "Fab-manager propose une API ouverte permettant à des logiciels tiers de s'interfacer simplement avec ses données. Cet écran vous permet d'accorder des accès à cette API."
+            content: "Fab-manager offers an open API allowing third-party software to deal simply with its data. This screen allows you to grant accesses to this API."
           doc:
             title: "Documentation"
-            content: "Cliquez ici pour accéder à la documentation en ligne de l'API."
+            content: "Click here to access the API online documentation."
