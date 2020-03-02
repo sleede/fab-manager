@@ -18,8 +18,8 @@
  * Controller used in the calendar management page
  */
 
-Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
-  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
+Application.Controllers.controller('AdminCalendarController', ['$scope', '$state', '$uibModal', 'moment', 'Availability', 'Slot', 'Setting', 'Export', 'growl', 'dialogs', 'bookingWindowStart', 'bookingWindowEnd', 'machinesPromise', 'plansPromise', 'groupsPromise', '_t', 'uiCalendarConfig', 'CalendarConfig', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, moment, Availability, Slot, Setting, Export, growl, dialogs, bookingWindowStart, bookingWindowEnd, machinesPromise, plansPromise, groupsPromise, _t, uiCalendarConfig, CalendarConfig, Member, uiTourService) {
     /* PRIVATE STATIC CONSTANTS */
 
     // The calendar is divided in slots of 30 minutes
@@ -162,6 +162,44 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           );
         });
       }
+    };
+
+    /**
+     * Open a confirmation modal to remove a plan for the currently selected availability,
+     * @param plan {Object} must contain the machine ID and name
+     */
+    $scope.removePlan = function (plan) {
+      // open a confirmation dialog
+      return dialogs.confirm({
+        resolve: {
+          object () {
+            return {
+              title: _t('app.admin.calendar.confirmation_required'),
+              msg: _t('app.admin.calendar.do_you_really_want_to_remove_PLAN_from_this_slot', { GENDER: getGender($scope.currentUser), PLAN: plan.name }) + ' ' +
+             _t('app.admin.calendar.this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + '<br><strong>' +
+             _t('app.admin.calendar.beware_this_cannot_be_reverted') + '</strong>'
+            };
+          }
+        }
+      }
+      , function () {
+      // the admin has confirmed, remove the plan
+        const plans = _.drop($scope.availability.plan_ids, plan.id);
+
+        return Availability.update({ id: $scope.availability.id }, { availability: { plans_attributes: [{ id: plan.id, _destroy: true }] } }
+          , function (data, status) { // success
+            // update the plan_ids attribute
+            $scope.availability.plan_ids = data.plan_ids;
+            $scope.availability.plans = availabilityPlans();
+            uiCalendarConfig.calendars.calendar.fullCalendar('rerenderEvents');
+            // notify the admin
+            return growl.success(_t('app.admin.calendar.the_plan_was_successfully_removed_from_the_slot'));
+          }
+          , function (data, status) { // failed
+            growl.error(_t('app.admin.calendar.deletion_failed'));
+          }
+        );
+      });
     };
 
     /**
@@ -340,6 +378,26 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
       } else { return 'other'; }
     };
 
+    /**
+     * Return a list of plans classified by group
+     *
+     * @returns {array}
+     */
+    var availabilityPlans = function() {
+      const plansClassifiedByGroup = [];
+      const _plans = _.filter(plansPromise, function (p) { return _.include($scope.availability.plan_ids, p.id) });
+      for (let group of Array.from(groupsPromise)) {
+        const groupObj = { id: group.id, name: group.name, plans: [] };
+        for (let plan of Array.from(_plans)) {
+          if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+        }
+        if (groupObj.plans.length > 0) {
+          plansClassifiedByGroup.push(groupObj);
+        }
+      }
+      return plansClassifiedByGroup;
+    };
+
     // Triggered when the admin drag on the agenda to create a new reservable slot.
     // @see http://fullcalendar.io/docs/selection/select_callback/
     //
@@ -372,7 +430,9 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           machinesPromise: ['Machine', function (Machine) { return Machine.query().$promise; }],
           trainingsPromise: ['Training', function (Training) { return Training.query().$promise; }],
           spacesPromise: ['Space', function (Space) { return Space.query().$promise; }],
-          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }]
+          tagsPromise: ['Tag', function (Tag) { return Tag.query().$promise; }],
+          plansPromise: ['Plan', function (Plan) { return Plan.query().$promise; }],
+          groupsPromise: ['Group', function (Group) { return Group.query().$promise; }]
         } });
       // when the modal is closed, we send the slot to the server for saving
       modalInstance.result.then(
@@ -389,7 +449,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
               borderColor: availability.borderColor,
               tag_ids: availability.tag_ids,
               tags: availability.tags,
-              machine_ids: availability.machine_ids
+              machine_ids: availability.machine_ids,
+              plan_ids: availability.plan_ids
             },
             true
           );
@@ -406,6 +467,7 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
      */
     const calendarEventClickCb = function (event, jsEvent, view) {
       $scope.availability = event;
+      $scope.availability.plans = availabilityPlans();
 
       if ($scope.availabilityDom) {
         $scope.availabilityDom.classList.remove("fc-selected")
@@ -484,8 +546,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
 /**
  * Controller used in the slot creation modal window
  */
-Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'growl', '_t',
-  function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, growl, _t) {
+Application.Controllers.controller('CreateEventModalController', ['$scope', '$uibModalInstance', '$sce', 'moment', 'start', 'end', 'machinesPromise', 'Availability', 'trainingsPromise', 'spacesPromise', 'tagsPromise', 'plansPromise', 'groupsPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, $sce, moment, start, end, machinesPromise, Availability, trainingsPromise, spacesPromise, tagsPromise, plansPromise, groupsPromise, growl, _t) {
     // $uibModal parameter
     $scope.start = start;
 
@@ -503,6 +565,21 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
 
     // all tags list
     $scope.tags = tagsPromise;
+
+    $scope.isOnlySubscriptions = false;
+    $scope.selectedPlans = [];
+    $scope.selectedPlansBinding = {};
+    // list of plans, classified by group
+    $scope.plansClassifiedByGroup = [];
+    for (let group of Array.from(groupsPromise)) {
+      const groupObj = { id: group.id, name: group.name, plans: [] };
+      for (let plan of Array.from(plansPromise)) {
+        if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+      }
+      if (groupObj.plans.length > 0) {
+        $scope.plansClassifiedByGroup.push(groupObj);
+      }
+    }
 
     // machines associated with the created slot
     $scope.selectedMachines = [];
@@ -553,6 +630,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     // localized name(s) of the selected tag(s)
     $scope.tagsName = '';
 
+    // localized name(s) of the selected plan(s)
+    $scope.plansName = '';
+
     // make the duration available for display
     $scope.slotDuration = Fablab.slotDuration;
 
@@ -585,6 +665,34 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     }
 
     /**
+     * Adds or removes the provided plan from the current slot
+     * @param plan {Object}
+     */
+    $scope.toggleSelectPlan = function (plan) {
+      const index = $scope.selectedPlans.indexOf(plan);
+      if (index > -1) {
+        return $scope.selectedPlans.splice(index, 1);
+      } else {
+        return $scope.selectedPlans.push(plan);
+      }
+    };
+
+    /**
+     * Select/unselect all the plans
+     */
+    $scope.toggleAllPlans = function() {
+      const count = $scope.selectedPlans.length;
+      $scope.selectedPlans = [];
+      $scope.selectedPlansBinding = {};
+      if (count == 0) {
+        plansPromise.forEach(function (plan) {
+          $scope.selectedPlans.push(plan);
+          $scope.selectedPlansBinding[plan.id] = true;
+        })
+      }
+    };
+
+    /**
      * Callback for the modal window validation: save the slot and closes the modal
      */
     $scope.ok = function () {
@@ -602,6 +710,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       }
       if ($scope.availability.is_recurrent) {
         $scope.availability.occurrences = $scope.occurrences;
+      }
+      if ($scope.isOnlySubscriptions && $scope.selectedPlans.length > 0) {
+        $scope.availability.plan_ids = $scope.selectedPlans.map(function (p) { return p.id; });
       }
       return Availability.save(
         { availability: $scope.availability },
@@ -652,6 +763,14 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
       if ($scope.spaces.length > 0) {
         $scope.selectedSpace = $scope.spaces[0];
       }
+
+      // when disable is only subscriptions option, reset all selected plans
+      $scope.$watch('isOnlySubscriptions', function(value) {
+        if (!value) {
+          $scope.selectedPlans = [];
+          $scope.selectedPlansBinding = {};
+        }
+      });
 
       // When we configure a machine/space availability, do not let the user change the end time, as the total
       // time must be dividable by Fablab.slotDuration minutes (base slot duration). For training availabilities, the user
@@ -778,6 +897,9 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         return $scope.availability.tag_ids.indexOf(t.id) > -1;
       })
       $scope.tagsName = localizedList(tags);
+      if ($scope.isOnlySubscriptions && $scope.selectedPlans.length > 0) {
+        $scope.plansName = localizedList($scope.selectedPlans);
+      }
     }
 
     const localizedList = function (items) {

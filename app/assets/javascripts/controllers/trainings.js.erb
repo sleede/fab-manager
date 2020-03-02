@@ -111,6 +111,8 @@ Application.Controllers.controller('ReserveTrainingController', ['$scope', '$sta
     { member: {} };
 
     // list of plans, classified by group
+    $scope.groups = groupsPromise;
+    $scope.plans = plansPromise;
     $scope.plansClassifiedByGroup = [];
     for (let group of Array.from(groupsPromise)) {
       const groupObj = { id: group.id, name: group.name, plans: [] };

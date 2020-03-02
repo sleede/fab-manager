@@ -23,6 +23,8 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         plan: '=',
         planSelectionTime: '=',
         settings: '=',
+        plans: '=',
+        groups: '=',
         onSlotAddedToCart: '=',
         onSlotRemovedFromCart: '=',
         onSlotStartToModify: '=',
@@ -164,22 +166,55 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
         $scope.payCart = function () {
         // first, we check that a user was selected
           if (Object.keys($scope.user).length > 0) {
-            const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
 
-            return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
-              const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
-              if (!$scope.isAdmin() && (amountToPay > 0)) {
-                if ($rootScope.fablabWithoutOnlinePayment) {
-                  growl.error(_t('app.shared.cart.online_payment_disabled'));
+            // check user was selected a plan if slot is restricted for subscriptions
+            const slotValidations = [];
+            let slotNotValid;
+            let slotNotValidError;
+            $scope.events.reserved.forEach(function (slot) {
+              if (slot.plan_ids.length > 0) {
+                if (
+                  ($scope.selectedPlan && _.include(slot.plan_ids, $scope.selectedPlan.id)) ||
+                  ($scope.user.subscribed_plan && _.include(slot.plan_ids, $scope.user.subscribed_plan.id))
+                ) {
+                  slotValidations.push(true);
                 } else {
-                  return payByStripe(reservation);
-                }
-              } else {
-                if ($scope.isAdmin() || (amountToPay === 0)) {
-                  return payOnSite(reservation);
+                  slotNotValid = slot;
+                  if ($scope.selectedPlan && !_.include(slot.plan_ids, $scope.selectedPlan.id)) {
+                    slotNotValidError = 'selectedPlanError';
+                  }
+                  if ($scope.user.subscribed_plan && !_.include(slot.plan_ids, $scope.user.subscribed_plan.id)) {
+                    slotNotValidError = 'userPlanError';
+                  }
+                  if (!$scope.selectedPlan || !$scope.user.subscribed_plan) {
+                    slotNotValidError = 'noPlanError';
+                  }
+                  slotValidations.push(false);
                 }
               }
             });
+            const hasPlanForSlot = slotValidations.every(function (a) { return a; });
+            if (!hasPlanForSlot) {
+              if (!$scope.isAdmin()) {
+                return growl.error(_t('app.shared.cart.slot_restrict_subscriptions_must_select_plan'));
+              } else {
+                const modalInstance = $uibModal.open({
+                  animation: true,
+                  templateUrl: '<%= asset_path "shared/_reserve_slot_without_plan.html" %>',
+                  size: 'md',
+                  controller: 'ReserveSlotWithoutPlanController',
+                  resolve: {
+                    slot: function() { return slotNotValid; },
+                    slotNotValidError: function() { return slotNotValidError; },
+                  }
+                });
+                modalInstance.result.then(function(res) {
+                  return paySlots();
+                });
+              }
+            } else {
+              return paySlots();
+            }
           } else {
           // otherwise we alert, this error musn't occur when the current user is not admin
             return growl.error(_t('app.shared.cart.please_select_a_member_first'));
@@ -292,6 +327,27 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
          */
         var slotSelectionChanged = function () {
           if ($scope.slot) {
+            // build a list of plans if this slot is restricted for subscriptions
+            if ($scope.slot.plan_ids.length > 0) {
+              const _plans = _.filter($scope.plans, function (p) { return _.include($scope.slot.plan_ids, p.id) });
+              $scope.slot.plansGrouped = [];
+              $scope.slot.group_ids = [];
+              for (let group of Array.from($scope.groups)) {
+                const groupObj = { id: group.id, name: group.name, plans: [] };
+                for (let plan of Array.from(_plans)) {
+                  if (plan.group_id === group.id) { groupObj.plans.push(plan); }
+                }
+                if (groupObj.plans.length > 0) {
+                  if ($scope.isAdmin()) {
+                    $scope.slot.plansGrouped.push(groupObj);
+                  } else if ($scope.user.group_id === groupObj.id) {
+                    $scope.slot.plansGrouped.push(groupObj);
+                  }
+                }
+              }
+              $scope.slot.group_ids = $scope.slot.plansGrouped.map(function(g) { return g.id; });
+            }
+
             if (!$scope.slot.is_reserved && !$scope.events.modifiable && !$scope.slot.is_completed) {
               // slot is not reserved and we are not currently modifying a slot
               // -> can be added to cart or removed if already present
@@ -638,6 +694,28 @@ Application.Directives.directive('cart', [ '$rootScope', '$uibModal', 'dialogs',
           return $scope.selectedPlan = null;
         };
 
+        /**
+         * Actions to pay slots
+         */
+        var paySlots = function() {
+          const reservation = mkReservation($scope.user, $scope.events.reserved, $scope.selectedPlan);
+
+          return Wallet.getWalletByUser({ user_id: $scope.user.id }, function (wallet) {
+            const amountToPay = helpers.getAmountToPay($scope.amountTotal, wallet.amount);
+            if (!$scope.isAdmin() && (amountToPay > 0)) {
+              if ($rootScope.fablabWithoutOnlinePayment) {
+                growl.error(_t('app.shared.cart.online_payment_disabled'));
+              } else {
+                return payByStripe(reservation);
+              }
+            } else {
+              if ($scope.isAdmin() || (amountToPay === 0)) {
+                return payOnSite(reservation);
+              }
+            }
+          });
+        };
+
         // !!! MUST BE CALLED AT THE END of the directive
         return initialize();
       }
@@ -652,6 +730,28 @@ Application.Controllers.controller('ReserveSlotSameTimeController', ['$scope', '
   function ($scope, $uibModalInstance, sameTimeReservations, growl, _t) {
     $scope.sameTimeReservations = sameTimeReservations;
     $scope.bookSlotAtSameTime = Fablab.bookSlotAtSameTime;
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      $uibModalInstance.close({});
+    }
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
+  }
+]);
+
+/**
+ * Controller used to alert admin reserve slot without plan
+ */
+Application.Controllers.controller('ReserveSlotWithoutPlanController', ['$scope', '$uibModalInstance', 'slot', 'slotNotValidError', 'growl', '_t',
+  function ($scope, $uibModalInstance, slot, slotNotValidError, growl, _t) {
+    $scope.slot = slot;
+    $scope.slotNotValidError = slotNotValidError;
     /**
      * Confirmation callback
      */

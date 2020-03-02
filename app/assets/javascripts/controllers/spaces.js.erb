@@ -328,6 +328,8 @@ Application.Controllers.controller('ReserveSpaceController', ['$scope', '$stateP
 
     // list of plans, classified by group
     $scope.plansClassifiedByGroup = [];
+    $scope.groups = groupsPromise;
+    $scope.plans = plansPromise;
     for (let group of Array.from(groupsPromise)) {
       const groupObj = { id: group.id, name: group.name, plans: [] };
       for (let plan of Array.from(plansPromise)) {

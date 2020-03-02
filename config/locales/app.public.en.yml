@@ -257,7 +257,7 @@ en:
 
       plans:
         # summary of the subscriptions
-        subcriptions: "Subscriptions"
+        subscriptions: "Subscriptions"
         i_choose_that_plan: "I choose that plan"
         i_subscribe_online: "I subscribe online"
         i_already_subscribed: "I already subscribed"

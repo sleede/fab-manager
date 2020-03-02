@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reservation < ActiveRecord::Base
   include NotifyWith::NotificationAttachedObject
 
@@ -17,6 +19,7 @@ class Reservation < ActiveRecord::Base
   validates_presence_of :reservable_id, :reservable_type
   validate :machine_not_already_reserved, if: -> { reservable.is_a?(Machine) }
   validate :training_not_fully_reserved, if: -> { reservable.is_a?(Training) }
+  validates_with ReservationSlotSubscriptionValidator
 
   attr_accessor :plan_id, :subscription
 

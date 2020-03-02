@@ -4,7 +4,6 @@
 # Eg. a 3D printer will be reservable on thursday from 9 to 11 pm
 # Availabilities may be subdivided into Slots (of 1h), for some types of reservables (eg. Machine)
 class Availability < ActiveRecord::Base
-
   # elastic initialisations
   include Elasticsearch::Model
   index_name 'fablab'
@@ -28,6 +27,10 @@ class Availability < ActiveRecord::Base
   has_many :availability_tags, dependent: :destroy
   has_many :tags, through: :availability_tags
   accepts_nested_attributes_for :tags, allow_destroy: true
+
+  has_many :plans_availabilities, dependent: :destroy
+  has_many :plans, through: :plans_availabilities
+  accepts_nested_attributes_for :plans, allow_destroy: true
 
   scope :machines, -> { where(available_type: 'machines') }
   scope :trainings, -> { includes(:trainings).where(available_type: 'training') }
@@ -86,7 +89,7 @@ class Availability < ActiveRecord::Base
   def available_space_places
     return unless available_type == 'space'
 
-    ((end_at - start_at)/ApplicationHelper::SLOT_DURATION.minutes).to_i * nb_total_places
+    ((end_at - start_at) / ApplicationHelper::SLOT_DURATION.minutes).to_i * nb_total_places
   end
 
   def title(filter = {})
@@ -166,5 +169,4 @@ class Availability < ActiveRecord::Base
 
     errors.add(:machine_ids, I18n.t('availabilities.must_be_associated_with_at_least_1_machine'))
   end
-
 end

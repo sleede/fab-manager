@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array!(@availabilities) do |availability|
   json.id availability.id
   json.title availability.title
@@ -15,4 +17,5 @@ json.array!(@availabilities) do |availability|
     json.name t.name
   end
   json.lock availability.lock
+  json.plan_ids availability.plan_ids
 end

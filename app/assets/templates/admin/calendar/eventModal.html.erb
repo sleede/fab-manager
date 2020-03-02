@@ -102,12 +102,41 @@
           </div>
       </div>
   </div>
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_this_slot_for_subscriptions_optional' }}</p>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="is_only_subscriptions" translate>{{ 'app.admin.calendar.enabled' }}</label>
+        <input bs-switch
+               ng-model="isOnlySubscriptions"
+               id="is_only_subscriptions"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+               switch-animate="true"/>
+      </div>
+      <div class="col-md-12" ng-show="isOnlySubscriptions">
+        <p class="font-sbold m-t-sm">{{ 'app.admin.calendar.select_some_plans' | translate }}</p>
+
+        <div class="form-group">
+          <button class="btn btn-default pull-right m-t-n-xl" ng-click="toggleAllPlans()" translate>{{ selectedPlans.length == 0 ? 'app.admin.calendar.select_all' : 'app.admin.calendar.select_none' }}</button>
+          <div ng-repeat="group in plansClassifiedByGroup">
+            <div class="text-center font-sbold">{{::group.name}}</div>
+            <label class="checkbox m-l-md" ng-repeat="plan in group.plans">
+              <input type="checkbox" ng-click="toggleSelectPlan(plan)" ng-model="selectedPlansBinding[plan.id]"> {{::plan.name}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-body m-h" ng-show="step === 4">
   <div class="m-t-sm">
     <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.recurrence' }}</p>
     <div class="row">
-      <div class="form-group">
+      <div class="form-group col-md-12">
         <label for="is_recurrent" translate>{{ 'app.admin.calendar.enabled' }}</label>
         <input bs-switch
                ng-model="availability.is_recurrent"
@@ -176,6 +205,10 @@
       <div class="m-t">
         <span class="underline"  translate>{{ 'app.admin.calendar.labels' }}</span>
         <span ng-bind-html="tagsName"></span>
+      </div>
+      <div class="m-t" ng-show="isOnlySubscriptions">
+        <span class="underline"  translate>{{ 'app.admin.calendar.plans' }}</span>
+        <span ng-bind-html="plansName"></span>
       </div>
     </div>
   </div>
