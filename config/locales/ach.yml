@@ -12,8 +12,8 @@ ach:
       other: 'crwdns3161:5%{count}crwdne3161:5'
   time:
     formats:
-      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
-      hour_minute: "%I:%M %p"
+      #See http://apidock.com/ruby/DateTime/strftime for a list of available directives
+      hour_minute: "crwdns3163:0%I:%Mcrwdnd3163:0%pcrwdne3163:0"
   errors:
     messages:
       #CarrierWave
@@ -252,7 +252,7 @@ ach:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "crwdns3561:0%{RESERVABLE}crwdnd3561:0%{USER}crwdne3561:0"
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "crwdns3563:0%{PROVIDER}crwdnd3563:0%{UID}crwdne3563:0"
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "crwdns20158:0%{PROVIDER}crwdnd20158:0%{UID}crwdne20158:0"
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "crwdns3565:0%{USER}crwdnd3565:0%{DATE}crwdne3565:0"
       notify_admin_slot_is_modified:
