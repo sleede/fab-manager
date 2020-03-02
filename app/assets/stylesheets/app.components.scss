@@ -673,3 +673,7 @@ padding: 10px;
     display: inline-block;
   }
 }
+
+input[type=date].form-control {
+  line-height: 25px;
+}
