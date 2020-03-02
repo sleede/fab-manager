@@ -97,6 +97,8 @@ angular.module('application', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.rout
       $rootScope.slotDuration = Fablab.slotDuration;
       // Global config: if true, user must confirm his email to sign in
       $rootScope.userConfirmationNeededToSignIn = Fablab.userConfirmationNeededToSignIn;
+      // Global config: if true, wallet will be disable
+      $rootScope.fablabWithoutWallet = Fablab.fablabWithoutWallet;
 
       // Global function to allow the user to navigate to the previous screen (ie. $state).
       // If no previous $state were recorded, navigate to the home page
