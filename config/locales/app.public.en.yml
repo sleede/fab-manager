@@ -171,7 +171,7 @@ en:
         # projects gallery
         the_fablab_projects: "The Fab Lab projects"
         add_a_project: "Add a project"
-        search_over_the_whole_network: "Search over the whole Fab Manager network"
+        search_over_the_whole_network: "Search over the whole Fab-manager network"
         tooltip_openlab_projects_switch: "The search over the whole network lets you search over the projects of every Fab-manager using this feature !"
         openlab_search_not_available_at_the_moment: "Search over the whole network is not available at the moment. You still can search over the projects of this platform."
         project_search_result_is_empty: "Sorry, we found no results matching your search criteria."

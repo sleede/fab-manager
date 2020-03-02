@@ -28,7 +28,7 @@ EVENTS_IN_CALENDAR: 'false'
 SLOT_DURATION: '60'
 FEATURE_TOUR_DISPLAY: 'once'
 
-DEFAULT_MAIL_FROM: Fab Manager Demo <noreply@fab-manager.com>
+DEFAULT_MAIL_FROM: Fab-manager Demo <noreply@fab-manager.com>
 
 # Configure carefully!
 DEFAULT_HOST: 'localhost:5000'

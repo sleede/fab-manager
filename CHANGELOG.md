@@ -1,4 +1,4 @@
-# Changelog Fab Manager
+# Changelog Fab-manager
 
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - Ability to fully customize the home page
@@ -37,6 +37,7 @@
 - Unified translations syntax to use ICU MessageFormat
 - Refactored front-end translations keys with unified paths
 - Updated and refactored README and documentations
+- Harmonized Fab-manager typography and case
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]

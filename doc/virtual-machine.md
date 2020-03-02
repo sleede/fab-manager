@@ -1,6 +1,6 @@
 # Virtual Machine Instructions
 
-These instructions allow to deploy a testing or development instance of Fab Manager inside a virtual
+These instructions allow to deploy a testing or development instance of Fab-manager inside a virtual
 machine, with most of the software dependencies installed automatically and avoiding to install a lot
 of software and services directly on the host computer.
 
