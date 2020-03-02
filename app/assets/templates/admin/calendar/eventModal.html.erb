@@ -87,8 +87,13 @@
           </fieldset>
       </div>
   </div>
+</div>
+<div class="modal-body" ng-show="step === 4">
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_options' }}</p>
+  </div>
   <div id="tagAssociate" class="m-t-lg">
-      <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_this_slot_with_labels_optional' }}</p>
+      <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_with_labels' }}</p>
       <div class="row">
           <div class="col-sm-12">
               <ui-select multiple ng-model="availability.tag_ids" class="form-control">
@@ -103,7 +108,7 @@
       </div>
   </div>
   <div class="m-t-sm">
-    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_this_slot_for_subscriptions_optional' }}</p>
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_for_subscriptions' }}</p>
     <div class="row">
       <div class="form-group col-md-12">
         <label for="is_only_subscriptions" translate>{{ 'app.admin.calendar.enabled' }}</label>
@@ -132,7 +137,7 @@
     </div>
   </div>
 </div>
-<div class="modal-body m-h" ng-show="step === 4">
+<div class="modal-body m-h" ng-show="step === 5">
   <div class="m-t-sm">
     <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.recurrence' }}</p>
     <div class="row">
@@ -189,7 +194,7 @@
     </div>
   </div>
 </div>
-<div class="modal-body m-h" ng-show="step === 5">
+<div class="modal-body m-h" ng-show="step === 6">
   <div class="m-t-sm">
     <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.summary' }}</p>
     <div class="row">
@@ -213,12 +218,12 @@
     </div>
   </div>
 </div>
-<div class="modal-footer" ng-show="step < 5">
+<div class="modal-footer" ng-show="step < 6">
   <button class="btn btn-info" ng-click="previous()" ng-disabled="step === 1" translate>{{ 'app.admin.calendar.previous' }}</button>
   <button class="btn btn-info" ng-click="next()" translate>{{ 'app.admin.calendar.next' }}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>
-<div class="modal-footer" ng-show="step === 5">
+<div class="modal-footer" ng-show="step === 6">
   <button class="btn btn-info" ng-click="previous()" translate>{{ 'app.admin.calendar.previous' }}</button>
   <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
   <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>

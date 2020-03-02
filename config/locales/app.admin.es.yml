@@ -49,9 +49,10 @@ es:
         manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Número de tickets: "
         adjust_the_opening_hours: "Ajustar el horario de apertura"
-        to_time: a
-        restrict_this_slot_with_labels_optional: "Restringir este horario con etiquetas (opcional)"
-        restrict_this_slot_for_subscriptions_optional: "Restrict this slot for subscription users (optional)"
+        to_time: "a" # eg. from 18:00 to 21:00
+        restrict_options: "Restriction options"
+        restrict_with_labels: "Restringir este horario con etiquetas"
+        restrict_for_subscriptions: "Restrict this slot for subscription users"
         select_some_plans: "Select some plans"
         plans: "Plan(s):"
         recurrence: "Recurrencia"

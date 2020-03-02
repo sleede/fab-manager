@@ -43,7 +43,7 @@ ach:
         number_of_tickets: "crwdns6761:0crwdne6761:0"
         adjust_the_opening_hours: "crwdns6763:0crwdne6763:0"
         to_time: crwdns10109:0crwdne10109:0
-        restrict_this_slot_with_labels_optional: "crwdns6767:0crwdne6767:0"
+        restrict_with_labels: "crwdns6767:0crwdne6767:0"
         recurrence: "crwdns6769:0crwdne6769:0"
         enabled: "crwdns6771:0crwdne6771:0"
         period: "crwdns6773:0crwdne6773:0"

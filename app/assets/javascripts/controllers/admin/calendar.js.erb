@@ -726,7 +726,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
     $scope.next = function () {
       if ($scope.step === 1) { $scope.setNbTotalPlaces(); }
       if ($scope.step === 2) { return validateSelection(); }
-      if ($scope.step === 4) { return validateRecurrence(); }
+      if ($scope.step === 5) { return validateRecurrence(); }
       return $scope.step++;
     };
 
@@ -839,7 +839,7 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
         if (!$scope.availability.period) {
           return growl.error(_t('app.admin.calendar.select_period'));
         }
-        if (!$scope.availability.nb_periods) {
+        if (!$scope.availability.nb_periods || $scope.availability.nb_periods < 1) {
           return growl.error(_t('app.admin.calendar.select_nb_period'));
         }
         if (!$scope.availability.end_date) {

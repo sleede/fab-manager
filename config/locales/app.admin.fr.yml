@@ -50,8 +50,9 @@ fr:
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
         to_time: "à"  # eg. from 18:00 to 21:00
-        restrict_this_slot_with_labels_optional: "Restreindre ce créneau avec des étiquettes (optionnel)"
-        restrict_this_slot_for_subscriptions_optional: "Restreindre ce créneau pour les abonnements (optionnel)"
+        restrict_options: "Options de restriction"
+        restrict_with_labels: "Restreindre ce créneau avec des étiquettes"
+        restrict_for_subscriptions: "Restreindre ce créneau pour les abonnements"
         select_some_plans: "Sélectionnez des formules d'abonnement"
         plans: "Abonnement(s):"
         recurrence: "Récurrence"

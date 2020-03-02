@@ -50,8 +50,9 @@ en:
         number_of_tickets: "Number of tickets: "
         adjust_the_opening_hours: "Adjust the opening hours"
         to_time: "to"  # eg. from 18:00 to 21:00
-        restrict_this_slot_with_labels_optional: "Restrict this slot with labels (optional)"
-        restrict_this_slot_for_subscriptions_optional: "Restrict this slot for subscription users (optional)"
+        restrict_options: "Restriction options"
+        restrict_with_labels: "Restrict this slot with labels"
+        restrict_for_subscriptions: "Restrict this slot for subscription users"
         select_some_plans: "Select some plans"
         plans: "Plan(s):"
         recurrence: "Recurrence"

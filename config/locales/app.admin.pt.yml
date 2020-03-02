@@ -50,8 +50,9 @@ pt:
         number_of_tickets: "Número de vagas: "
         adjust_the_opening_hours: "Ajustar o horário de funcionamento"
         to_time: "ás"  # eg. from 18:00 to 21:00
-        restrict_this_slot_with_labels_optional: "Restrinja este slot com etiquetas (opcional)"
-        restrict_this_slot_for_subscriptions_optional: "Restrict this slot for subscription users (optional)"
+        restrict_options: "Restriction options"
+        restrict_with_labels: "Restrinja este slot com etiquetas"
+        restrict_for_subscriptions: "Restrict this slot for subscription users"
         select_some_plans: "Select some plans"
         plans: "Plan(s):"
         recurrence: "Recurrence"
