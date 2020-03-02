@@ -686,17 +686,17 @@ Application.Controllers.controller('CreateEventModalController', ['$scope', '$ui
           }
         }
         // update availability object
-        return $scope.availability.start_at = $scope.start;
+        $scope.availability.start_at = $scope.start;
       });
 
       // Maintain consistency between the end time and the date object in the availability object
-      return $scope.$watch('end', function (newValue, oldValue, scope) {
+      $scope.$watch('end', function (newValue, oldValue, scope) {
       // we prevent the admin from setting the end of the availability before its beginning
         if (moment($scope.start).add(Fablab.slotDuration, 'minutes').isAfter(newValue)) {
           $scope.end = oldValue;
         }
         // update availability object
-        return $scope.availability.end_at = $scope.end;
+        $scope.availability.end_at = $scope.end;
       });
     };
 
