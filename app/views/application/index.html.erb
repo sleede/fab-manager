@@ -62,6 +62,9 @@
       Fablab.recaptchaSiteKey = "<%= RecaptchaService.site_key %>";
       <% end %>
       Fablab.userConfirmationNeededToSignIn = ('<%= Rails.application.secrets.user_confirmation_needed_to_sign_in %>' === 'true');
+
+      // feature tour (used when feature_tour_display = session)
+      Fablab.sessionTours = [];
   </script>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>

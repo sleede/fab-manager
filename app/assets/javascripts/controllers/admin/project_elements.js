@@ -199,7 +199,7 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         }
       });
       // if the user has never seen the tour, show him now
-      if ($scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
         uitour.start();
       }
       // start this tour when an user press F1 - this is contextual help

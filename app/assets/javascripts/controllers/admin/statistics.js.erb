@@ -388,7 +388,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         }
       });
       // if the user has never seen the tour, show him now
-      if ($scope.currentUser.profile.tours.indexOf('statistics') < 0) {
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('statistics') < 0) {
         uitour.start();
       }
       // start this tour when an user press F1 - this is contextual help

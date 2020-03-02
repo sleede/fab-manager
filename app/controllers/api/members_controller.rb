@@ -192,10 +192,14 @@ class API::MembersController < API::ApiController
   def complete_tour
     authorize @member
 
-    tours = "#{@member.profile.tours} #{params[:tour]}"
-    @member.profile.update_attributes(tours: tours.strip)
+    if Rails.application.secrets.feature_tour_display == 'session'
+      render json: { tours: [params[:tour]] }
+    else
+      tours = "#{@member.profile.tours} #{params[:tour]}"
+      @member.profile.update_attributes(tours: tours.strip)
 
-    render json: { tours: @member.profile.tours }
+      render json: { tours: @member.profile.tours.split }
+    end
   end
 
   private
