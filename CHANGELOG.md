@@ -52,6 +52,7 @@
 - Fix a bug: in some cases, bogus admin notification on profile completed
 - Fix a bug: with Firefox browser, the texts in date inputs are shifted to the bottom
 - Fix a bug: sometimes when browsing the invoices section, the translations are missing
+- Fix a bug: first day of week is ignored in agendas (#169)
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://nvd.nist.gov/vuln/detail/CVE-2019-15587)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://nvd.nist.gov/vuln/detail/CVE-2019-10768)
 - Fix a security issue: updated puma to 3.12.3 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994) and [CVE-2020-5247](https://nvd.nist.gov/vuln/detail/CVE-2020-5247)
