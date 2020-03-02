@@ -2,7 +2,7 @@ fr:
   app:
     logged:
       profile_completion:
-        # page de complétion du profil utilisateur, à la première connexion depuis un SSO
+        #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirmez votre nouveau compte"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Vous venez de créer un nouveau compte sur {GENDER, select, male{le} female{la} neutral{} other{les}} {NAME}, en vous connectant depuis"
         we_need_some_more_details: "Afin de finaliser le paramétrage de la plate-forme, nous avons besoin de quelques renseignements supplémentaires"
@@ -39,13 +39,12 @@ fr:
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-
       dashboard:
-        # tableau de bord: profile publique
+        #dashboard: public profile
         profile:
           empty: ''
         settings:
-          # tableau de bord : éditer mon profil
+          #dashboard: edit my profile
           last_activity_on_: "Dernière activité le {DATE}"
           i_want_to_change_group: "Je veux changer de groupe !"
           your_subscription_expires_on_: "Votre abonnement expire le"
@@ -53,7 +52,7 @@ fr:
           i_want_to_subscribe: "Je veux m'abonner !"
           to_come: "à venir"
           approved: "validée"
-          projects: "Projets"
+          projects: "Projects"
           no_projects: "Aucun projet"
           labels: "Étiquettes"
           no_labels: "Aucune étiquette"
@@ -66,7 +65,7 @@ fr:
           edit_my_profile: "Éditer votre profil"
           your_group_has_been_successfully_changed: "Votre groupe a bien été changé."
           an_unexpected_error_prevented_your_group_from_being_changed: "Une erreur inattendue a empêché votre changement de groupe."
-          confirmation_required: "Confirmation requise"
+          confirmation_required: "Confirmation required"
           confirm_delete_your_account: "Êtes-vous sûr de vouloir supprimer votre compte ?"
           all_data_will_be_lost: "Toutes vos données seront détruites et ne pourront pas être récupérées."
           invoicing_data_kept: "Conformément à la réglementation, les données relatives à vos facturations seront conservées de manière séparée pendant 10 ans."
@@ -74,26 +73,26 @@ fr:
           no_further_access_to_projects: "Vos projets publiés seront anonymisés et vous n'aurez plus de possibilité de les modifier."
           your_user_account_has_been_successfully_deleted_goodbye: "Votre compte utilisateur a bien été supprimé. Au revoir."
           an_error_occured_preventing_your_account_from_being_deleted: "Une erreur est survenue qui a empêché la suppression de votre compte."
-          used_for_statistics: "Cette donnée sera utilisée à des fins statistiques"
+          used_for_statistics: "This data will be used for statistical purposes"
           used_for_invoicing: "Cette donnée sera utilisée à des fins de facturation"
           used_for_reservation: "Cette donnée sera utilisée en cas de changement sur une de vos réservations"
           used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
           used_for_pricing_stats: "Cette donné sera utilisée pour déterminer les prix auxquels vous avez droit, ainsi qu'a des fins statistiques"
           public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
-          trainings: "Formations"
-          no_trainings: "Aucune formation"
-          subscription: "Abonnement"
-          group: "Groupe"
-          or: "ou"
+          trainings: "Trainings"
+          no_trainings: "No trainings"
+          subscription: "Subscription"
+          group: "Group"
+          or: "or"
           confirm_changes: "Valider les modifications"
-          change_my_data: "Modifier mes données"
-          sync_my_profile: "Synchroniser mon profil"
-          once_your_data_are_up_to_date_: "Une fois vos données à jour,"
-          _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
-          _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
-          _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
+          change_my_data: "Change my data"
+          sync_my_profile: "Sync my profile"
+          once_your_data_are_up_to_date_: "Once your data are up to date,"
+          _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
+          _disconnect_then_reconnect_: "disconnect then reconnect"
+          _for_your_changes_to_take_effect: "for your changes to take effect."
         projects:
-          # tableau de bord : mes projets
+          #dashboard: my projects
           you_dont_have_any_projects: "Vous n'avez aucun projet."
           add_a_project: "Ajouter un projet"
           author: "Auteur"
@@ -102,60 +101,55 @@ fr:
           description: "Description"
           machines_and_materials: "Machines et matériaux"
           machines: "Machines"
-          materials: "Matériaux"
+          materials: "Materials"
           collaborators: "Les collaborateurs"
         trainings:
-          # tableau de bord : mes formations
+          #dashboard: my trainings
           your_next_trainings: "Vos prochaines formations"
           your_previous_trainings: "Vos formations passées"
           your_approved_trainings: "Vos formations validées"
-          no_trainings: "Aucune formation"
+          no_trainings: "No trainings"
         events:
-          # tableau de bord : mes évènements
+          #dashboard: my events
           your_next_events: "Vos prochains évènements"
           no_events_to_come: "Aucun évènement à venir"
           your_previous_events: "Vos évènements passés"
-          no_passed_events: "Aucun évènement passé"
+          no_passed_events: "No passed events"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place {NAME} réservée} other{places {NAME} réservées}}"
         invoices:
-          # tableau de bord : mes factures
+          #dashboard: my invoices
           reference_number: "Référence"
           date: "Date"
-          price: "Prix"
-          download_the_invoice: "Télécharger la facture"
-          download_the_credit_note: "Télécharger l'avoir"
-          no_invoices_for_now: "Aucune facture pour le moment."
-
+          price: "Price"
+          download_the_invoice: "Download the invoice"
+          download_the_credit_note: "Download the refund invoice"
+          no_invoices_for_now: "No invoices for now."
       members_show:
-        # profil public d'un membre
+        #public profil of a member
         members_list: "Liste des membres"
-
       members:
-        #  liste des membres qui acceptent d'être contactés
+        #list of members accepting to be contacted
         the_fablab_members: "Les membres du Fab Lab"
         display_more_members: "Afficher plus de membres..."
         no_members_for_now: "Pas de membres pour le moment"
         avatar: "Avatar"
-        user: "Utilisateur"
-        pseudonym: "Pseudonyme"
-        email_address: "Adresse électronique"
-
+        user: "User"
+        pseudonym: "Pseudonym"
+        email_address: "Email address"
       projects_new:
-        # ajouter un nouveau projet
+        #add a new project
         add_a_new_project: "Ajouter un nouveau projet"
-
       projects_edit:
-        # modifier un projet existant
+        #modify an existing project
         edit_the_project: "Éditer le projet"
-        rough_draft: "Brouillon"
-        publish: "Publier"
-
+        rough_draft: "Draft"
+        publish: "Publish"
       machines_reserve:
-        # réserver une machine
+        #book a machine
         machine_planning: "Planning machine"
-        i_ve_reserved: "J'ai réservé"
-        not_available: "Non disponible"
+        i_ve_reserved: "I've reserved"
+        not_available: "Not available"
         i_reserve: "Je réserve"
         i_shift: "Je déplace"
         i_change: "Je change"
@@ -163,29 +157,26 @@ fr:
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "Échec de l'annulation."
         a_problem_occured_during_the_payment_process_please_try_again_later: "Un problème est survenu pendant le processus de paiement. Merci de réessayer ultérieurement."
-
       trainings_reserve:
-        # réserver une formation
+        #book a training
         trainings_planning: "Planning formations"
-        planning_of: "Planning de la"   # suivi du nom de la formation (eg. "Planning de la formation imprimante 3d")
+        planning_of: "\"Planning de la\""
         all_trainings: "Toutes les formations"
         cancel_my_selection: "Annuler ma sélection"
-        i_change: "Je change"
-        i_shift: "Je déplace"
-        i_ve_reserved: "J'ai réservé"
-
+        i_change: "I change"
+        i_shift: "I shift"
+        i_ve_reserved: "I've reserved"
       space_reserve:
-        # réserver un espace
+        #book a space
         planning_of_space_NAME: "Planning de l'espace {NAME}"
-        i_ve_reserved: "J'ai réservé"
-        i_shift: "Je déplace"
-        i_change: "Je change"
-
+        i_ve_reserved: "I've reserved"
+        i_shift: "I shift"
+        i_change: "I change"
       notifications:
         notifications_center: "Centre de notifications"
         mark_all_as_read: "Tout marquer comme lu"
         date: "Date"
-        notif_title: "Intitulé"
+        notif_title: "Title"
         no_new_notifications: "Aucune nouvelle notification."
         archives: "Archives"
         no_archived_notifications: "Aucune notification archivée."
