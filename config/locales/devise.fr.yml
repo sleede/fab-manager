@@ -1,5 +1,4 @@
-# Autres traductions disponibles sur https://github.com/plataformatec/devise/wiki/I18n
-
+#Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 fr:
   devise:
     confirmations:
@@ -9,22 +8,22 @@ fr:
     failure:
       already_authenticated: "Vous êtes déjà connecté(e)."
       inactive: "Votre compte n’est pas encore activé."
-      invalid: "Adresse courriel ou mot de passe incorrect."
-      invalid_token: "Jeton d'authentification incorrect."
+      invalid: "E-mail ou mot de passe incorrect."
       locked: "Votre compte est verrouillé."
+      last_attempt: "You have one more attempt before your account will be locked."
       not_found_in_database: "E-mail ou mot de passe incorrect."
       timeout: "Votre session est périmée, veuillez vous reconnecter pour continuer."
       unauthenticated: "Vous devez vous connecter ou vous enregistrer pour continuer."
-      unconfirmed: "Vous devez confirmer votre adresse de courriel pour pouvoir vous connecter. Veuillez cliquer sur le lien en dessous du formulaire."
+      unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
     mailer:
       confirmation_instructions:
-        action: "Confirmer mon e-mail !"
-        instruction: "Vous pouvez finaliser votre inscription en confirmant votre adresse mail, en cliquant sur le lien suivant :"
+        action:
+        instruction:
         subject: "Confirmation d'inscription"
       reset_password_instructions:
-        action: "Changer mon mot de passe"
-        instruction: "Quelqu'un a demandé un lien pour changer votre mot de passe. Vous pouvez le faire via le lien ci-dessous."
-        ignore_otherwise: "Si vous n'êtes pas à l'origine de cette demande, merci d'ignorer ce message."
+        action:
+        instruction:
+        ignore_otherwise:
         subject: "Instructions pour changer le mot de passe"
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"
@@ -54,10 +53,10 @@ fr:
       unlocked: "Votre compte a été débloqué avec succès. Veuillez vous connecter."
   errors:
     messages:
-      already_confirmed: "Cette adresse de courriel a déjà été confirmée."
+      already_confirmed: "This email was already confirmed, please try signing in."
       confirmation_period_expired: "doit être confirmé(e) en %{period}, veuillez en demander un(e) autre"
       expired: "est périmé, veuillez en demander un autre"
-      not_found: "Cette adresse de courriel n'est associée à aucun compte."
+      not_found: "This email was not found"
       not_locked: "n’était pas verrouillé(e)"
       not_saved:
         one: "une erreur a empêché ce (ou cette) %{resource} d’être enregistré(e) :"
