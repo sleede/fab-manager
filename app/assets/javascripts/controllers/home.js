@@ -116,19 +116,19 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         placement: 'right'
       });
       uitour.createStep({
-        selector: '.nav-primary li.reserve-machine-link',
-        stepId: 'machines',
+        selector: '.nav-primary li.public-calendar-link',
+        stepId: 'calendar',
         order: 2,
-        title: _t('app.public.tour.welcome.machines.title'),
-        content: _t('app.public.tour.welcome.machines.content'),
+        title: _t('app.public.tour.welcome.calendar.title'),
+        content: _t('app.public.tour.welcome.calendar.content'),
         placement: 'right'
       });
       uitour.createStep({
-        selector: '.nav-primary li.reserve-training-link',
-        stepId: 'trainings',
+        selector: '.nav-primary li.reserve-machine-link',
+        stepId: 'machines',
         order: 3,
-        title: _t('app.public.tour.welcome.trainings.title'),
-        content: _t('app.public.tour.welcome.trainings.content'),
+        title: _t('app.public.tour.welcome.machines.title'),
+        content: _t('app.public.tour.welcome.machines.content'),
         placement: 'right'
       });
       if (!Fablab.withoutSpaces) {
@@ -142,19 +142,19 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         });
       }
       uitour.createStep({
-        selector: '.nav-primary li.reserve-event-link',
-        stepId: 'events',
+        selector: '.nav-primary li.reserve-training-link',
+        stepId: 'trainings',
         order: 5,
-        title: _t('app.public.tour.welcome.events.title'),
-        content: _t('app.public.tour.welcome.events.content'),
+        title: _t('app.public.tour.welcome.trainings.title'),
+        content: _t('app.public.tour.welcome.trainings.content'),
         placement: 'right'
       });
       uitour.createStep({
-        selector: '.nav-primary li.public-calendar-link',
-        stepId: 'calendar',
+        selector: '.nav-primary li.reserve-event-link',
+        stepId: 'events',
         order: 6,
-        title: _t('app.public.tour.welcome.calendar.title'),
-        content: _t('app.public.tour.welcome.calendar.content'),
+        title: _t('app.public.tour.welcome.events.title'),
+        content: _t('app.public.tour.welcome.events.content'),
         placement: 'right'
       });
       uitour.createStep({
