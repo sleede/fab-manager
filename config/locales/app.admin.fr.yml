@@ -1069,7 +1069,7 @@ fr:
           content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         trainings:
           welcome:
-            title: "Suivi formations"
+            title: "Formations"
             content: "Ici vous pourrez créer, modifier et supprimer des formations. C'est également l'endroit où vous pourrez valider les formations suivies par vos membres."
           trainings:
             title: "Gérer les formations"
@@ -1082,7 +1082,7 @@ fr:
             content: "Une fois qu'une session de formation est terminée, vous pourrez valider la formation pour les membres présents depuis cet écran. Cette validation est indispensable pour leur permettre d'utiliser les machines associées, le cas échéant."
         calendar:
           welcome:
-            title: "Gestion du calendrier"
+            title: "Agenda"
             content: "À partir de cet écran, vous pourrez planifier les créneaux durant lesquels les formations, machines et espaces seront réservables par les membres."
           agenda:
             title: "L'agenda"
@@ -1095,7 +1095,7 @@ fr:
             content: "Permet d'importer des agendas depuis une source externe au format iCal."
         members:
           welcome:
-            title: "Gestion des utilisateurs"
+            title: "Utilisateurs"
             content: "Ici vous pourrez créer, modifier et supprimer des membres et des administrateurs. Vous pourrez également gérer les groupes, les étiquettes, réaliser des imports / exports avec des fichiers de tableur et connecter un logiciel de SSO."
           list:
             title: "Liste des membres"
@@ -1129,7 +1129,7 @@ fr:
             content: "Ici vous pourrez mettre en place et gérer un système d'authentification unique (ou Single Sign-On - SSO)."
         invoices:
           welcome:
-            title: "Gérer les factures"
+            title: "Factures"
             content: "<p>Ici, vous pourrez télécharger les factures et les avoirs émis, ainsi que gérer tout ce qui a trait à la comptabilité et à la facturation.</p><p>Si vous utilisez un logiciel tiers pour gérer vos factures, il est possible de désactiver le module de facturation. Pour cela, contactez votre administrateur système.</p>"
           list:
             title: "Liste des factures"
@@ -1179,7 +1179,7 @@ fr:
             content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
         events:
           welcome:
-            title: "Gérer les évènements"
+            title: "Évènements"
             content: "Créez des évènements, suivez leurs réservations et organisez-les depuis cette page."
           list:
             title: "Les évènements"
@@ -1201,7 +1201,7 @@ fr:
             content: "Le prix des évènements ne dépend pas des groupes ou des abonnements, mais des catégories que vous définissez sur cette page."
         project_elements:
           welcome:
-            title: "Gérer les éléments projet"
+            title: "Projets"
             content: "Vous pouvez définir ici l'ensemble des éléments qui seront disponibles pour que les membres documentent les projets qu'ils réalisent."
           abuses:
             title: "Gérer les signalements"
@@ -1250,5 +1250,4 @@ fr:
             content: "Fab-manager propose une API ouverte permettant à des logiciels tiers de s'interfacer simplement avec ses données. Cet écran vous permet d'accorder des accès à cette API."
           doc:
             title: "Documentation"
-            content: "Cliquez ici pour accéder à la documentation en ligne de l'API"
-
+            content: "Cliquez ici pour accéder à la documentation en ligne de l'API."

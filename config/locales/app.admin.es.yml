@@ -6,9 +6,11 @@ es:
         declare_a_new_machine: "Declara una nueva máquina"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Cuidado al crear una nueva máquina, los precios están inicializados a 0 para todas las subscripciones."
         consider_changing_them_before_creating_any_reservation_slot: "Considera cambiarlos antes de crear cualquier ranura de reserva."
+
       machines_edit:
         #machine edition
         machine_edit: "Editar una máquina"
+
       calendar:
         #manage the trainings & machines slots
         calendar_management: "Administración de calendario"
@@ -40,6 +42,9 @@ es:
         select_some_machines: "Seleccione algunas máquinas"
         select_all: "Todas"
         select_none: "No"
+        manage_machines: "Click here to add or remove machines."
+        manage_spaces: "Click here to add or remove spaces."
+        manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Número de tickets: "
         adjust_the_opening_hours: "Ajustar el horario de apertura"
         to_time: a
@@ -56,6 +61,7 @@ es:
         select_nb_period: "Please select a number of periods for the recurrence"
         select_end_date: "Please select the date of the last occurrence"
         about_to_create: "Está a punto de crear los horarios siguientes: {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"
+        divided_in_slots: "This slot will be open for booking in {DURATION}-minutes increments. Contact your system administrator to change this setting."
         reservable: "Reservable(s):"
         labels: "Etiqueta(s):"
         none: "Ninguna"
@@ -87,6 +93,8 @@ es:
         view_reservations: "Ver reservas"
         legend: "leyenda"
         and: "y"
+        external_sync: "Calendar synchronization"
+
       icalendar:
         icalendar_import: "iCalendar import"
         intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every hours and the events are shown in the public calendar. You can trigger a synchronisation too, by clicking on the corresponding button, in front of each import."
@@ -107,6 +115,7 @@ es:
         confirmation_required: "Confirmation required"
         confirm_delete_import: "Do you really want to delete this iCalendar import?"
         delete_success: "iCalendar import successfully deleted"
+
       project_elements:
         #management of the projects' components
         name: "Name"
@@ -119,9 +128,11 @@ es:
         description: "Description"
         add_a_new_licence: "Agregar una nueva licencia"
         manage_abuses: "Administrar informes"
+
       trainings:
         #track and monitor the trainings
         trainings_monitoring: "Trainings monitoring"
+        plan_session: "Schedule a new session"
         trainings: "Trainings"
         add_a_new_training: "Add a new training"
         name: "Nombre"
@@ -151,11 +162,13 @@ es:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
+
       trainings_new:
         #create a new training
         add_a_new_training: "Add a new training"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Tenga cuidado, al crear una formación, sus precios de reserva se inicializan en cero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "No olvides cambiarlos antes de crear espacios para esta formación."
+
       events:
         #events tracking and management
         events_monitoring: "Monitoreo de eventos"
@@ -210,6 +223,7 @@ es:
         do_you_really_want_to_delete_this_price_category: "¿Desea realmente eliminar esta categoría de precios?"
         price_category_successfully_deleted: "Categoría de precio eliminada correctamente."
         price_category_deletion_failed: "Error al eliminar la categoría de precio."
+
       events_new:
         #add a new event
         add_an_event: "Add an event"
@@ -218,6 +232,7 @@ es:
         every_week: "Cada semana"
         every_month: "Cada mes"
         every_year: "Cada año"
+
       events_edit:
         #edit an existing event
         edit_the_event: "Editar el evento"
@@ -245,6 +260,7 @@ es:
         no_reservations_for_now: "No hay reservas por ahora."
         back_to_monitoring: "Volver a monitorizar"
         canceled: "cancelada"
+
       pricing:
         #subscriptions, prices, credits and coupons management
         pricing_management: "Gestión de precios"
@@ -325,14 +341,17 @@ es:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
+
       coupons_new:
         #ajouter un code promotionnel
         add_a_coupon: "Añadir un cupón"
         unable_to_create_the_coupon_check_code_already_used: "No se puede crear el cupón. Compruebe que el código no esté ya utilizado"
+
       coupons_edit:
         #mettre à jour un code promotionnel
         coupon: "Coupon:"
         unable_to_update_the_coupon_an_error_occurred: "No se puede actualizar el cupón: se ha producido un error."
+
       plans:
         new:
           #add a subscription plan on the platform
@@ -352,6 +371,7 @@ es:
           space: "Espacio"
           unable_to_save_subscription_changes_please_try_again: "No se pueden guardar los cambios de suscripción. Por favor, inténtelo de nuevo."
           subscription_successfully_changed: "Suscripción cambiada correctamente."
+
       invoices:
         #list of all invoices & invoicing parameters
         invoices: "Facturas"
@@ -542,7 +562,7 @@ es:
         general_space_code: "Accounting code for all spaces"
         accounting_Space_label: "Spaces label"
         general_space_label: "Account label for all spaces"
-        codes_customization_success: "Customization of accounting codes successfully saved."
+        codes_customization_success: "Customization of the accounting codes successfully saved."
         export_accounting_data: "Export accounting data"
         export_to: "Export to the accounting software"
         export_is_running: "Exportando, será notificado cuando esté listo."
@@ -553,7 +573,7 @@ es:
         encoding: "Encoding"
         separator: "Separator"
         dateFormat: "Date format"
-        labelMaxLength: "Label maximum length"
+        labelMaxLength: "Label (max)"
         decimalSeparator: "Decimal separator"
         exportInvoicesAtZero: "Export invoices equal to 0"
         columns: "Columns"
@@ -569,6 +589,7 @@ es:
           debit_euro: "Euro debit"
           credit_euro: "Euro credit"
           lettering: "Lettering"
+
       members:
         #management of users, labels, groups, and so on
         users_management: "Gestión de usuarios"
@@ -653,6 +674,7 @@ es:
         #add a member
         add_a_member: "Agregar un miembro"
         user_is_an_organization: "El usuario es una organización"
+
       members_import:
         #members bulk import
         import_members: "Import members"
@@ -678,6 +700,7 @@ es:
         update_on_id: "ID"
         update_on_username: "Username"
         update_on_email: "Email address"
+
       members_import_result:
         #import results
         import_results: "Import results"
@@ -689,6 +712,7 @@ es:
         success: "Success"
         failed: "Failed"
         error_details: "Error's details:"
+
       members_edit:
         #edit a member
         subscription: "Subscription"
@@ -732,6 +756,7 @@ es:
         a_problem_occurred_while_taking_the_subscription: "Se ha producido un problema al realizar la suscripción."
         wallet: "Wallet"
         to_credit: 'Credit'
+
       admins_new:
         #add a new administrator to the platform
         add_an_administrator: "Agregar un administrador"
@@ -750,8 +775,9 @@ es:
         birth_date: "Date of birth"
         address: "Address"
         phone_number: "Phone number"
+
       authentication_new:
-        #add a new authentication provider (SSO)
+        # add a new authentication provider (SSO)
         local_database: "Base de datos local"
         o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"
@@ -764,12 +790,14 @@ es:
         do_you_really_want_to_continue: "¿De verdad quieres continuar?"
         unsecured_oauth2_provider_successfully_added: "Proveedor de OAuth 2.0 no seguro, se ha agregado correctamente."
         oauth2_provider_successfully_added: "OAuth 2.0 proveedor agregado correctamente."
+
       authentication_edit:
         #edit an authentication provider (SSO)
         provider: "Proveedor :"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor"
         provider_successfully_updated: "Proveedor actualizado correctamente"
         an_error_occurred_unable_to_update_the_provider: "Se ha producido un error: no se puede actualizar el proveedor."
+
       statistics:
         #statistics tables
         statistics: "Statistics"
@@ -811,6 +839,7 @@ es:
         man: "Man"
         woman: "Woman"
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
+
       stats_graphs:
         #statistics graphs
         statistics: "Statistics"
@@ -830,8 +859,9 @@ es:
         week_of_START_to_END: "Semana del {START} a {END}"
         no_data_for_this_period: "No hay datos para este periodo"
         date: "Date"
+
       settings:
-        #global application parameters and customization
+        # global application parameters and customization
         title: "Título"
         customize_the_application: "Personalizar la aplicación"
         general: "General"
@@ -979,6 +1009,7 @@ es:
           about_analytics: "I agree to share anonymous data with the development team to help improve Fab-manager."
           read_more: "Which data do we collect?"
           analytics:
+            title: "Application improvement"
             intro_analytics_html: "You'll find below a detailed view of all the data, Fab-manager will collect <strong>if permission is granted.</strong>"
             version: "Application version"
             members: "Number of members"
@@ -1008,18 +1039,21 @@ es:
         client_successfully_updated: "Cliente actualizado correctamente."
         client_successfully_deleted: "Cliente borrado correctamente."
         access_successfully_revoked: "Acceso revocado correctamente."
+
       space_new:
-        #create a new space
+        # create a new space
         add_a_new_space: "Añadir un espacio nuevo"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "¡Cuidado! Al crear un nuevo espacio, sus precios se inicializan en 0 para todas las suscripciones."
         consider_changing_its_prices_before_creating_any_reservation_slot: "Considere cambiar sus precios antes de crear cualquier espacio de reserva."
         add_this_space: "Añadir este espacio"
+
       space_edit:
-        #modify an exiting space
+        # modify an exiting space
         edit_the_space_NAME: "Edit the space: {NAME}"
         validate_the_changes: "Validar los cambios"
+
       manage_abuses:
-        #process and delete abuses reports
+        # process and delete abuses reports
         abuses_list: "Lista de informes"
         no_reports: "No informes por ahora"
         published_by: "published by"
@@ -1029,3 +1063,192 @@ es:
         report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"
         report_removed: "The report has been deleted"
         failed_to_remove: "An error occurred, unable to delete the report"
+
+      tour:
+        conclusion:
+          title: "Thank you for your attention"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+        trainings:
+          welcome:
+            title: "Trainings"
+            content: "Here you can create, modify and delete trainings. It is also the place where you can validate the training courses followed by your members."
+          trainings:
+            title: "Manage trainings"
+            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab [Calendar].</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
+          filter:
+            title: "Filter"
+            content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
+          tracking:
+            title: "Trainings monitoring"
+            content: "Once a training session is finished, you can validate the training for the members present from this screen. This validation is essential to allow them to use the associated machines, if applicable."
+        calendar:
+          welcome:
+            title: "Calendar"
+            content: "From this screen, you can plan the slots during which training, machines and spaces will be bookable by members."
+          agenda:
+            title: "The calendar"
+            content: "Click in the calendar to start creating a new availability range. You can directly select the entire time range desired by maintaining your click."
+          export:
+            title: "Export"
+            content: "Start generating an Excel file, listing all the availability slots created in the calendar."
+          import:
+            title: "Import external calendars"
+            content: "Allows you to import calendars from an external source in iCal format."
+        members:
+          welcome:
+            title: "Users"
+            content: "Here you can create, modify and delete members and administrators. You can also manage groups, labels, import / export with spreadsheet files and connect SSO software."
+          list:
+            title: "Members list"
+            content: "By default, this table lists all the members of your Fab-manager. You can sort the list in a different order by clicking on the header of each column."
+          search:
+            title: "Find a user"
+            content: "This input field allows you to search for any text on all of the columns in the table below."
+          filter:
+            title: "Filter the list"
+            content: "<p>Filter the list below to display only users who have not confirmed their email address or inactive accounts for more than 3 years.</p><p>Please notice that the GDPR requires that you delete any accounts inactive for more than 3 years.</p>"
+          actions:
+            title: "Members actions"
+            content: "<p>The buttons in this column allow you to display and modify all of the member's parameters, or to delete them irreversibly.</p><p>In the event of a deletion, the billing information will be kept for 10 years and statistical data will also be kept anonymously.</p>"
+          exports:
+            title: "Export"
+            content: "Each of these buttons starts the generation of an Excel file listing all the members, subscriptions or reservations, current and past."
+          import:
+            title: "Import members"
+            content: "Allows you to import a list of members to create in Fab-manager, from a CSV file."
+          admins:
+            title: "Manage administrators"
+            content: "In the same way as the members, manage the administrators of your Fab-manager here.<br>The administrators can take reservations for any member as well as modify all the parameters of the software."
+          groups:
+            title: "Manage groups"
+            content: "Groups allow you to better segment your price list."
+          labels:
+            title: "Manage tags"
+            content: "The labels allow you to reserve certain slots for users associated with these same labels."
+          sso:
+            title: "Single Sign-On"
+            content: "Here you can set up and manage a single authentication system (SSO)."
+        invoices:
+          welcome:
+            title: "Invoices"
+            content: "<p>Here you will be able to download invoices and credit notes issued, as well as manage everything related to accounting and invoicing.</p><p>If you use third-party software to manage your invoices, it is possible to deactivate the billing module. For this, contact your system administrator.</p>"
+          list:
+            title: "Invoices list"
+            content: "By default, this table lists all the invoices and credit notes issued by Fab-manager. You can sort the list in a different order by clicking on the header of each column."
+          chained:
+            title: "Chaining indicator"
+            content: "<p>This icon ensures the inalterability of the accounting data of the invoice on this line, in accordance with the French finance law of 2018 against VAT fraud.</p><p>If a red icon appears instead of this one , please contact technical support immediately.</p>"
+          download:
+            title: "Download"
+            content: "Click here to download the invoice in PDF format."
+          refund:
+            title: "Credit note"
+            content: "Allows you to generate a credit note for the invoice on this line or some of its sub-elements. <strong>Warning:</strong> This will only generate the accounting document, the actual refund of the user will always be your responsibility."
+          settings:
+            title: "Settings"
+            content: "<p>Here you can modify the parameters for invoices generation. Click on the item you are interested in to start editing.</p><p>In particular, this is where you can set if you are subject to VAT and the applicable rate.</p>"
+          codes:
+            title: "Accounting codes"
+            content: "Set the accounting codes here for all kinds of entries generated by the software. This setting is only required if you use the accounting export functionality."
+          export:
+            title: "Accounting export"
+            content: "Once the codes have been configured, click here to access the interface allowing you to export the entries to a third-party accounting software."
+          periods:
+            title: "Close accounting periods"
+            content: "<p>The regulations of your country may require you to close your accounts regularly. The interface accessible from this button allows you to do this.</p> <p><strong>In France,</strong> if you are subject to VAT anti-fraud law <a href='https://bofip.impots.gouv.fr/bofip/10691-PGP.html' target='_blank'>BOI-TVA-DECLA-30-10-30-20160803</a>, this closing is mandatory at least once a year.</p><p>As a reminder,  if you have to use a certified software (<a href='https://www.impots.gouv.fr/portail/suis-je-oblige-davoir-un-logiciel-de-caisse-securise' target='_blank'>take the test here</a>), you are under the legal obligation to provide a certificate of compliance of the software. <a href='mailto:contact@fab-manager.com'>Contact-us<a/> to get it.</p>"
+        pricing:
+          welcome:
+            title: "Subscriptions & Prices"
+            content: "Manage subscription plans and prices for the various services you offer to your members."
+          new_plan:
+            title: "New subscription plan"
+            content: "Create subscription plans to offer preferential prices on machines and spaces to regular users."
+          trainings:
+            title: "Trainings"
+            content: "Define training prices here, by user group."
+          machines:
+            title: "Machines"
+            content: "Define here the prices of the machine slots, by user group. These prices will be applied to users who do not have subscriptions."
+          spaces:
+            title: "Espaces"
+            content: "In the same way, define here the prices of the spaces slots, for the users without subscriptions."
+          credits:
+            title: "Credits"
+            content: "<p>Credits allow you to give certain services for free to users who subscribe to a plan.</p><p>You can, for example, offer 2 hours of 3D printer for all annual subscriptions; or training of your choice for student subscribers, etc.</p>"
+          coupons:
+            title: "Coupons"
+            content: "Create and manage promotional coupons allowing to offer punctual discounts to their holders."
+        events:
+          welcome:
+            title: "Events"
+            content: "Create events, track their reservations and organize them from this page."
+          list:
+            title: "The events"
+            content: "This list displays all past or future events, as well as the number of reservations for each of them."
+          filter:
+            title: "Filter events"
+            content: "Only display upcoming events in the list below; or on the contrary, only those already passed."
+          categories:
+            title: "Categories"
+            content: "Categories help your users know what type of event it is. A category is required for each of the newly created events."
+          themes:
+            title: "Themes"
+            content: "<p>Themes are an additional (and optional) categorization of your events. They can group together different events of very different forms.</p><p>For example, a two-day course about marquetry and an evening workshop about the handling of the wood planer, can be found in the theme « carpentry ».</p>"
+          ages:
+            title: "Age groups"
+            content: "This other optional filter will help your users find events suited to their profile."
+          prices:
+            title: "Pricing categories"
+            content: "The price of events does not depend on groups or subscriptions, but on the categories you define on this page."
+        project_elements:
+          welcome:
+            title: "Projects"
+            content: "Here you can define all the elements that will be available for members to document the projects they carry out."
+          abuses:
+            title: "Manage reports"
+            content: "<p>Access here the management of reports.</p><p>Visitors can signal projects, for example for copyright infringement or for hate speech.</p><p>GDPR requires you to delete this reporting data once the required actions have been taken.</p>"
+        statistics:
+          welcome:
+            title: "Statistics"
+            content: "<p>From here, you will be able to access many statistics on your members and their uses within your Fab Lab.</p><p>In accordance with GDPR, users who have deleted their account continue to be reported in the statistics, but anonymously.</p>"
+          export:
+            title: "Export data"
+            content: "You can choose to export all or part of the statistical data to an Excel file."
+          trending:
+            title: "Evolution"
+            content: "Visualize the evolution over time of the main uses of your Fab Lab, thanks to graphs and curves."
+        settings:
+          welcome:
+            title: "Application customization"
+            content: "From here, you can configure the general settings of Fab-manager as well as customize various elements of the interface."
+          home:
+            title: "Customize home page"
+            content: "<p>This WYSIWYG editor allows you to customize the appearance of the home page while using different components (last tweet, brief, etc.).</p><p><strong>Warning:</strong> Keep in mind that any uncontrolled changes can break the appearance of the home page.</p>"
+          components:
+            title: "Insert a component"
+            content: "Click here to insert a pre-existing component into the home page."
+          codeview:
+            title: "Display HTML code"
+            content: "This button allows you to directly view and modify the code of the home page. This is the recommended way to proceed, but it requires prior knowledge of HTML."
+          reset:
+            title: "Go back"
+            content: "At any time, you can restore the original home page by clicking here."
+          css:
+            title: "Customize the style sheet"
+            content: "For advanced users, it is possible to define a custom style sheet (CSS) for the home page."
+          about:
+            title: "About"
+            content: "Fully personalize this page to present your activity."
+          privacy:
+            title: "Privacy policy"
+            content: "<p>EExplain here how you use the data you collect about your members.</p><p>GDPR requires that a confidentiality policy is defined, as well as a data protection officer.</p>"
+          draft:
+            title: "Draft"
+            content: "Click here to view a privacy policy draft with holes, which you just need to read and complete."
+        open_api:
+          welcome:
+            title: "OpenAPI"
+            content: "Fab-manager offers an open API allowing third-party software to deal simply with its data. This screen allows you to grant accesses to this API."
+          doc:
+            title: "Documentation"
+            content: "Click here to access the API online documentation."

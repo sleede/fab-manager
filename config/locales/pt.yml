@@ -1,5 +1,4 @@
 pt:
-
   duration:
     # subscription plan duration
     year:
@@ -236,7 +235,6 @@ pt:
     event: "Evento"
     reservations: "Reservas"
     available_seats: "Assentos disponíveis"
-
 
   api:
     notifications:

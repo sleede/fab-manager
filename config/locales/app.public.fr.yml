@@ -396,25 +396,25 @@ fr:
             title: "Page d'accueil"
             content: "Un clic ici vous ramènera vers la page d'accueil où vous vous situez actuellement."
           machines:
-            title: "Les machines"
+            title: "Machines"
             content: "<p>Cette page vous permettra de consulter la liste de toutes les machines et réserver un créneau pour le compte d'un membre.</p><p>Une machine peut-être, par exemple, une imprimante 3D.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une machine.</p>"
           trainings:
-            title: "Les formations"
+            title: "Formations"
             content: "<p>Cette page vous permettra de consulter la liste de toutes les formations et d'inscrire un membre à une session de formation.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, s'inscrire eux-même une session de formation.</p>"
           spaces:
-            title: "Les espaces"
+            title: "Espaces"
             content: "<p>Cette page vous permettra de consulter la liste de tous les espaces disponibles et de réserver une place sur un créneau, pour le compte d'un membre.</p><p>Un espace peut-être, par exemple, un atelier bois ou une salle de réunion.</p><p>Leur particularité est qu'ils peuvent être réservés par plusieurs personnes en même temps.</p><p>Les membres peuvent également accéder à cette page et, si le paiement par carte bancaire est activé, ou que certains prix sont à 0, réserver eux-même une place.</p>"
           events:
-            title: "Les évènements"
+            title: "Évènements"
             content: "<p>Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !</p><p>Les évènements peuvent être gratuits ou payants (avec plusieurs tarifs), avec ou sans réservation.</p><p>Ici encore, les membres peuvent accéder à cette page et réserver eux-mêmes des places pour des évènements gratuits, ou payants si le paiement par carte bancaire est activé.</p>"
           calendar:
-            title: "Le calendrier publique"
+            title: "Agenda"
             content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines (évènements, formations, machines disponibles, etc.)."
           projects:
-            title: "Les projets"
+            title: "Projets"
             content: "<p>Documentez et partagez toutes vos réalisations avec la communauté.</p><p>Si vous utilisez OpenLab, vous pourrez également consulter les projets de l'ensemble du réseau Fab-Manager. <a href='mailto:contact@fab-manager.com'>Contactez-nous</a> pour obtenir votre accès, c'est gratuit !</p>"
           plans:
-            title: "Les abonnements"
+            title: "Abonnements"
             content: "Les abonnements offrent un moyen de segmenter vos tarifs et d'accorder des avantages aux utilisateurs réguliers."
           admin:
             title: "Section administrateur"
@@ -439,7 +439,7 @@ fr:
             content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configurez-le depuis [Personnalisation] > [Page d'accueil].</p>"
           last_members:
             title: "Derniers membres"
-            content: "Les derniers members inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
+            content: "Les derniers membres inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
           next_events:
             title: "Prochains évènements"
             content: "Les trois prochains évènements programmés sont affichés dans cette espace."
@@ -451,17 +451,15 @@ fr:
             content: "Passez votre curseur sur cette icône pour connaître la version de Fab-manager. Si vous n'êtes pas à jour, cela vous sera signalé ici et vous pourrez alors obtenir des détails en cliquant dessus."
         machines:
           welcome:
-            title: "Gérer les machines"
+            title: "Machines"
             content: "<p>Les machines sont les outils que vous mettez à disposition de vos utilisateurs. Vous devez créer ici les machines qui pourront ensuite être réservées par les membres.</p><p>Vous pouvez également créer des entrées pour des machines non réservables ou en libre accès, il vous suffira ensuite de ne pas associer de créneaux de disponibilités à celles-ci.</p>"
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer une machine, cliquez tout d'abord ici. Vous ne pourrez pas supprimer une machine qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez la désactiver."
         spaces:
           welcome:
-            title: "Gérer les espaces"
+            title: "Espaces"
             content: "<p>Les espaces sont des lieux que vous mettez à disposition de vos utilisateurs. Par exemple, une salle de réunion ou un atelier bois. Vous devez créer ici les espaces qui pourront ensuite être réservées par les membres.</p><p>La spécificité des espaces est qu'ils peuvent être réservés par plusieurs utilisateurs en même temps.</p>"
           view:
             title: "Consulter"
             content: "Pour modifier ou supprimer un espace, cliquez tout d'abord ici. Vous ne pourrez pas supprimer un espace qui a déjà été associée à des créneaux de disponibilité, mais vous pourrez le désactiver."
-
-

@@ -1,5 +1,4 @@
 fr:
-
   duration:
     # durée d'une formule d'abonnement
     year:
@@ -236,7 +235,6 @@ fr:
     event: "Évènement"
     reservations: "Réservations"
     available_seats: "Places disponibles"
-
 
   api:
     notifications:

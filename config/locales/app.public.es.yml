@@ -2,16 +2,18 @@ es:
   app:
     public:
       common:
-        #header and "about" page
+        # header and "about" page
         about_the_fablab: "Acerca de {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
         return: "Volver"
-        #cookies
+
+        # cookies
         cookies:
           about_cookies: "Este sitio web utiliza cookies para medir la audiencia."
           learn_more: "Saber más"
           accept: "Aceptar cookies"
           decline: "Rechazar"
-        #dashboard sections
+
+        # dashboard sections
         dashboard: "Panel"
         my_profile: "My Perfil"
         my_settings: "Mis ajustes"
@@ -20,15 +22,21 @@ es:
         my_events: "Mis eventos"
         my_invoices: "Mis facturas"
         my_wallet: "Mi cartera"
-        #login/logout
+
+        # contextual help
+        help: "Help"
+
+        # login/logout
         sign_out: "Salir"
         sign_up: "Registrarse"
         sign_in: "Ingresar"
-        #left menu
+
+        # left menu
         notifications: "Notificaciones"
         admin: "Administrador"
         reduce_panel: "Reducir panel"
-        #left menu (public)
+
+        # left menu (public)
         home: "Menú principal"
         reserve_a_machine: "Reservar una máquina"
         trainings_registrations: "Registro de cursos"
@@ -37,7 +45,8 @@ es:
         projects_gallery: "Galería de proyectos"
         subscriptions: "Suscripciones"
         public_calendar: "Agenda"
-        #left menu (admin)
+
+        # left menu (admin)
         trainings_monitoring: "Cursos"
         manage_the_calendar: "Agenda"
         manage_the_users: "Usuarios"
@@ -50,7 +59,8 @@ es:
         statistics: "Estadísticas"
         customization: "Customización"
         open_api_clients: "Clientes OpenAPI"
-        #account creation modal
+
+        # account creation modal
         create_your_account: "Crear su cuenta"
         man: "Hombre"
         woman: "Mujer"
@@ -92,11 +102,13 @@ es:
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
         you_will_receive_confirmation_instructions_by_email_detailed: "Recibirá un correo electrónico con instrucciones sobre cómo confirmar su cuenta en unos minutos."
+
         # password modification modal
         change_your_password: "Cambiar contraseña"
         your_new_password: "Nueva contraseña"
         your_password_was_successfully_changed: "Su contraseña ha sido cambiada con éxito."
-        #connection modal
+
+        # connection modal
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
         confirm_my_account: "Confirmar mi E-mail"
@@ -104,12 +116,15 @@ es:
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
+
         # confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Recibirá las instrucciones de confirmación por email."
+
         # forgotten password modal
         your_email_address_is_unknown: "Se desconoce su email."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "En un momento recibirá las instrucciones para restablecer su contraseña en su mail."
-        #Fab-manager's version
+
+        # Fab-manager's version
         version: "Version:"
         upgrade_fabmanager: "Upgrade Fab-manager"
         current_version: "You are currently using version {VERSION} of Fab-manager."
@@ -117,28 +132,33 @@ es:
         read_more: "View the details of this release"
         security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"
         how_to: "How to upgrade?"
+
         # Notifications
         and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
+
       about:
         #about page
         read_the_fablab_policy: "Leer la politica del FabLab"
         read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
         your_fablab_s_contacts: "Sus contactos del FabLab"
         privacy_policy: "Política de privacidad"
+
       privacy:
         #'privacy policy' page
         title: "Política de privacidad"
         dpo: "Oficial de protección de datos"
         last_update: "Última actualización,"
+
       home:
-        #home page
+        # home page
         latest_documented_projects: "Los últimos proyectos documentados"
         follow_us: "Siguenos"
         latest_tweets: "Los últimos tweets"
         latest_registered_members: "Miembros más recientes"
         create_an_account: "Crear una cuenta"
         discover_members: "Descubrir miembros"
-        #next events summary on the home page
+
+        # next events summary on the home page
         fablab_s_next_events: "Próximos eventos del FabLab"
         every_events: "Todos los eventos"
         from_date_to_date: "Desde {START} hasta {END}"
@@ -149,8 +169,9 @@ es:
         full_price: "Precio final"
         event_full: "Evento lleno"
         still_available: "Available place(s)"
+
       projects_list:
-        #projects gallery
+        # projects gallery
         the_fablab_projects: "Los proyectos del FabLab"
         add_a_project: "Añadir un proyecto"
         search_over_the_whole_network: "Buscar en toda la red de FabLab"
@@ -167,8 +188,9 @@ es:
         all_materials: "Todo el material"
         load_next_projects: "Cargar más proyectos"
         rough_draft: "Borrador"
+
       projects_show:
-        #details of a projet
+        # details of a projet
         rough_draft: "Draft"
         project_description: "Descripción de proyecto"
         by_name: "Por {NAME}"
@@ -196,17 +218,20 @@ es:
         message_is_required: "El mensaje es obligatorio."
         report: "Reportar"
         do_you_really_want_to_delete_this_project: "¿Está seguro de querer eliminar este proyecto?"
+
       machines_list:
-        #list of machines
+        # list of machines
         the_fablab_s_machines: "Las máquinas del FabLab"
         add_a_machine: "Añadir una máquina"
+        new_availability: "Open reservations"
         book: "Reservar"
         _or_the_: " o el "
         status_enabled: "Activas"
         status_disabled: "No activas"
         status_all: "Todas"
+
       machines_show:
-        #details of a machine
+        # details of a machine
         book_this_machine: "Alquilar máquina"
         technical_specifications: "Technical specifications"
         files_to_download: "Archivos a descargar"
@@ -216,19 +241,22 @@ es:
         do_you_really_want_to_delete_this_machine: "¿Está seguro de querer eliminar esta máquina?"
         unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La máquina no puede borrarse porque está siendo usada o ha sido reservada por algún usuario."
+
       trainings_list:
-        #list of trainings
+        # list of trainings
         book: "Reservar"
         the_trainings: "Lista de cursos"
+
       training_show:
-        #details of a training
+        # details of a training
         book_this_training: "reservar plaza en este curso"
         do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
+
       plans:
-        #summary of the subscriptions
+        # summary of the subscriptions
         subcriptions: "Suscripciones"
         i_choose_that_plan: "Elijo este plan"
         i_subscribe_online: "Suscribirme online"
@@ -256,8 +284,9 @@ es:
         here_is_the_NAME_subscription_summary: "Resumen de la suscrpición de {NAME}:"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+
       events_list:
-        #Fablab's events list
+        # Fablab's events list
         the_fablab_s_events: "Los eventos del FabLab"
         all_categories: "Todas las categorías"
         for_all: "Para todo"
@@ -269,9 +298,11 @@ es:
         add_an_event: "Add an event"
         load_the_next_events: "Cargar los próximos eventos..."
         full_price_: "Full price:"
-        to_date: '"to"'
+        to_date: "to" # eg. from 01/01 to 01/05
+        all_themes: "All themes"
+
       events_show:
-        #details and booking of an event
+        # details and booking of an event
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
@@ -280,8 +311,8 @@ es:
         ending: "Termina:"
         opening_hours: "Hora de apertura:"
         all_day: "All day"
-        from_time: '"From"'
-        to_time: '"to"'
+        from_time: "From" # eg. from 18:00 to 21:00
+        to_time: "to"  # eg. from 18:00 to 21:00
         full_price_: "Full price:"
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
@@ -320,8 +351,9 @@ es:
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
+
       calendar:
-        #public calendar
+        # public calendar
         calendar: "Calendario"
         show_unavailables: "Mostrar campos inválidos"
         filter_calendar: "Filtrar calendario"
@@ -330,16 +362,19 @@ es:
         spaces: "Espacios"
         events: "Eventos"
         externals: "Otros calendarios"
+
       spaces_list:
-        #list of spaces
+        # list of spaces
         the_spaces: "Espacios"
+        new_availability: "Open reservations"
         add_a_space: "Añadir espacios"
         status_enabled: "Activos"
         status_disabled: "No activos"
         status_all: "Todos"
         book: "Reservar"
+
       space_show:
-        #display the details of a space
+        # display the details of a space
         book_this_space: "Reservar este espacio"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmación requerida"
@@ -348,3 +383,83 @@ es:
         characteristics: "Características"
         files_to_download: "Archivos para descargar"
         projects_using_the_space: "Proyectos que usan el espacio"
+
+      tour:
+        conclusion:
+          title: "Thank you for your attention"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+        welcome:
+          welcome:
+            title: "Welcome to Fab-manager"
+            content: "To help you get started with the application, we are going to take a quick tour of the features."
+          home:
+            title: "Home page"
+            content: "Clicking here will take you back to the home page where you are currently."
+          machines:
+            title: "Machines"
+            content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          trainings:
+            title: "Trainings"
+            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          spaces:
+            title: "Spaces"
+            content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          events:
+            title: "Events"
+            content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
+          calendar:
+            title: "Agenda"
+            content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
+          projects:
+            title: "Projects"
+            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-Manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+          plans:
+            title: "Subscriptions"
+            content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
+          admin:
+            title: "Administrator section"
+            content: "<p>All of the elements below are only accessible to administrators. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+          about:
+            title: "About"
+            content: "A page that you can fully customize, to present your activity and your structure."
+          notifications:
+            title: "Notifications center"
+            content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
+          profile:
+            title: "User's menu"
+            content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
+          news:
+            title: "News"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from [Customization]> [Home page].</p>"
+          last_projects:
+            title: "Last projects"
+            content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
+          last_tweet:
+            title: "Last tweet"
+            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from [Customization]> [Home page].</p>"
+          last_members:
+            title: "Last members"
+            content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
+          next_events:
+            title: "Upcoming events"
+            content: "The next three scheduled events are displayed in this space."
+          customize:
+            title: "Customize the home page"
+            content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
+          version:
+            title: "Application version"
+            content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
+        machines:
+          welcome:
+            title: "Machines"
+            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          view:
+            title: "View"
+            content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+        spaces:
+          welcome:
+            title: "Spaces"
+            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          view:
+            title: "View"
+            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."

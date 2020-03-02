@@ -23,6 +23,9 @@ en:
         my_invoices: "My Invoices"
         my_wallet: "My Wallet"
 
+        # contextual help
+        help: "Help"
+
         # login/logout
         sign_out: "Sign Out"
         sign_up: "Sign Up"
@@ -220,6 +223,7 @@ en:
         # list of machines
         the_fablab_s_machines: "The FabLab's machines"
         add_a_machine: "Add a machine"
+        new_availability: "Open reservations"
         book: "Book"
         _or_the_: " or the "
         status_enabled: "Enabled"
@@ -295,6 +299,7 @@ en:
         load_the_next_events: "Load the next events..."
         full_price_: "Full price:"
         to_date: "to" # eg. from 01/01 to 01/05
+        all_themes: "All themes"
 
       events_show:
         # details and booking of an event
@@ -361,6 +366,7 @@ en:
       spaces_list:
         # list of spaces
         the_spaces: "The spaces"
+        new_availability: "Open reservations"
         add_a_space: "Add a space"
         status_enabled: "Enabled"
         status_disabled: "Disabled"
@@ -377,3 +383,83 @@ en:
         characteristics: "Characteristics"
         files_to_download: "Files to download"
         projects_using_the_space: "Projects using the space"
+
+      tour:
+        conclusion:
+          title: "Thank you for your attention"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+        welcome:
+          welcome:
+            title: "Welcome to Fab-manager"
+            content: "To help you get started with the application, we are going to take a quick tour of the features."
+          home:
+            title: "Home page"
+            content: "Clicking here will take you back to the home page where you are currently."
+          machines:
+            title: "Machines"
+            content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          trainings:
+            title: "Trainings"
+            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          spaces:
+            title: "Spaces"
+            content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          events:
+            title: "Events"
+            content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
+          calendar:
+            title: "Agenda"
+            content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
+          projects:
+            title: "Projects"
+            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-Manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+          plans:
+            title: "Subscriptions"
+            content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
+          admin:
+            title: "Administrator section"
+            content: "<p>All of the elements below are only accessible to administrators. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+          about:
+            title: "About"
+            content: "A page that you can fully customize, to present your activity and your structure."
+          notifications:
+            title: "Notifications center"
+            content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
+          profile:
+            title: "User's menu"
+            content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
+          news:
+            title: "News"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from [Customization]> [Home page].</p>"
+          last_projects:
+            title: "Last projects"
+            content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
+          last_tweet:
+            title: "Last tweet"
+            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from [Customization]> [Home page].</p>"
+          last_members:
+            title: "Last members"
+            content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
+          next_events:
+            title: "Upcoming events"
+            content: "The next three scheduled events are displayed in this space."
+          customize:
+            title: "Customize the home page"
+            content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
+          version:
+            title: "Application version"
+            content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
+        machines:
+          welcome:
+            title: "Machines"
+            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          view:
+            title: "View"
+            content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+        spaces:
+          welcome:
+            title: "Spaces"
+            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          view:
+            title: "View"
+            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."

@@ -1,5 +1,4 @@
 en:
-
   duration:
     # subscription plan duration
     year:
@@ -236,7 +235,6 @@ en:
     event: "Event"
     reservations: "Reservations"
     available_seats: "Available seats"
-
 
   api:
     notifications:
