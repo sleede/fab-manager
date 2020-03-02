@@ -246,13 +246,34 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         $scope.reserveSuccess = false;
         if (!$scope.isAuthenticated()) {
           return $scope.login(null, function (user) {
-            $scope.reserve.toReserve = !$scope.reserve.toReserve;
             if (user.role !== 'admin') {
               return $scope.ctrl.member = user;
             }
+            const sameTimeReservations = findReservationsAtSameTime();
+            if (sameTimeReservations.length > 0) {
+              showReserveSlotSameTimeModal(sameTimeReservations, function(res) {
+                return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+              });
+            } else {
+              return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+            }
           });
         } else {
-          return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+          if ($scope.currentUser.role === 'admin') {
+            return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+          } else {
+            Member.get({ id: $scope.currentUser.id }, function (member) {
+              $scope.ctrl.member = member;
+              const sameTimeReservations = findReservationsAtSameTime();
+              if (sameTimeReservations.length > 0) {
+                showReserveSlotSameTimeModal(sameTimeReservations, function(res) {
+                  return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+                });
+              } else {
+                return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+              }
+            });
+          }
         }
       }
     };
@@ -798,6 +819,48 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       }
     };
 
+    /**
+     * Find user's reservations, the same date at the same time, with event
+     */
+    var findReservationsAtSameTime = function () {
+      let sameTimeReservations = [
+        'training_reservations',
+        'machine_reservations',
+        'space_reservations',
+        'events_reservations'
+      ].map(function(k) {
+        return _.filter($scope.ctrl.member[k], function(r) {
+          if (r.reservable_type === 'Event' && r.reservable.id === $scope.event.id) {
+            return false;
+          }
+          return moment($scope.event.start_time).isSame(r.start_at) ||
+            (moment($scope.event.end_time).isAfter(r.start_at) && moment($scope.event.end_time).isBefore(r.end_at)) ||
+            (moment($scope.event.start_time).isAfter(r.start_at) && moment($scope.event.start_time).isBefore(r.end_at)) ||
+            (moment($scope.event.start_time).isBefore(r.start_at) && moment($scope.event.end_time).isAfter(r.end_at));
+        });
+      });
+      return _.union.apply(null, sameTimeReservations);
+    };
+
+    /**
+     * A modal for show reservations the same date at the same time
+     *
+     * @param sameTimeReservations {Array} reservations the same date at the same time
+     * @param callback {function} callback will invoke when user confirm
+     */
+    var showReserveSlotSameTimeModal = function(sameTimeReservations, callback) {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "shared/_reserve_slot_same_time.html" %>',
+        size: 'md',
+        controller: 'ReserveSlotSameTimeController',
+        resolve: {
+          sameTimeReservations: function() { return sameTimeReservations; },
+        }
+      });
+      modalInstance.result.then(callback);
+    };
+
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
   }
@@ -879,4 +942,3 @@ Application.Controllers.controller('DeleteRecurrentEventController', ['$scope', 
     }
   }
 ]);
-

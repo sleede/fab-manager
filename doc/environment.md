@@ -113,6 +113,11 @@ This is useful if you won't use wallet system.
     PHONE_REQUIRED
 
 If set to 'false' the phone number won't be required to register a new user on the software.
+<a name="BOOK_SLOT_AT_SAME_TIME"></a>
+
+    BOOK_SLOT_AT_SAME_TIME
+
+If set to 'false', users won't be able to book a machine/formation/event slot if they already have a reservation the same day at the same time.
 <a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
 
     USER_CONFIRMATION_NEEDED_TO_SIGN_IN

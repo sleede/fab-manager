@@ -439,3 +439,6 @@ en:
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
         none: "None"
         online_payment_disabled: "Online payment is not available. Please contact the Fablab reception directly."
+        slot_at_same_time: "Conflict with others reservations"
+        do_you_really_want_to_book_slot_at_same_time: "Do you really want to book this slot? Other bookings take place at the same time"
+        unable_to_book_slot_because_really_have_reservation_at_same_time: "Unable to book this slot because the following reservation occurs at the same time."

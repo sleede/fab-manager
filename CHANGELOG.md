@@ -1,5 +1,6 @@
 # Changelog Fab-manager
 
+- Ability to configure the policy (allow or prevent) for members booking a machine/formation/event slot, if they already have a reservation the same day at the same time
 - Ability to create and delete periodic calendar availabilities (recurrence)
 - Ability to fully customize the home page
 - Automated setup assistant
@@ -59,6 +60,7 @@
 - [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)
 - [TODO DEPLOY] add the `EVENTS_IN_CALENDAR` environment variable (see [doc/environment.md](doc/environment.md#EVENTS_IN_CALENDAR) for configuration details)
 - [TODO DEPLOY] add the `USER_CONFIRMATION_NEEDED_TO_SIGN_IN` environment variable (see [doc/environment.md](doc/environment.md#USER_CONFIRMATION_NEEDED_TO_SIGN_IN) for configuration details)
+- [TODO DEPLOY] add the `BOOK_SLOT_AT_SAME_TIME` environment variable (see [doc/environment.md](doc/environment.md#BOOK_SLOT_AT_SAME_TIME) for configuration details)
 - [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
 - [TODO DEPLOY] `rake db:migrate && rake db:seed`
 - [TODO DEPLOY] `rake fablab:fix:name_stylesheet`
