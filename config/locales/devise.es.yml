@@ -1,5 +1,4 @@
-# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
-
+#Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 es:
   devise:
     confirmations:
@@ -15,7 +14,7 @@ es:
       not_found_in_database: "mail o contraseña inválidos."
       timeout: "Su sesión ha expirado. Por favor, inicie sesión de nuevo."
       unauthenticated: "Necesita iniciar sesión o registrarse antes de contiunar."
-      unconfirmed: "Debe confirmar su cuenta antes de continuar. Por favor haga clic en el enlace abajo del formulario."
+      unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
     mailer:
       confirmation_instructions:
         action:
@@ -54,10 +53,10 @@ es:
       unlocked: "Tu cuenta se ha desbloqueado con éxito. Por favor inicie sesión para continuar."
   errors:
     messages:
-      already_confirmed: "Ya se confirmó, intente iniciar sesión."
+      already_confirmed: "This email was already confirmed, please try signing in."
       confirmation_period_expired: "Necesita ser confirmado dentro de %{period}, por favor, solicite uno nuevo"
       expired: "ha expirado, por favor, solicite uno nuevo"
-      not_found: "Este correo no esta associado con ninguna cuenta."
+      not_found: "This email was not found"
       not_locked: "no estaba bloqueado"
       not_saved:
         one: "un error prohibió que %{resource} fuese guardado:"
