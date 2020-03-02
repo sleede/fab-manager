@@ -404,15 +404,24 @@ ach:
         tags_of_the_destination_slot: "crwdns10081:0crwdne10081:0"
         confirm_my_modification: "crwdns10083:0crwdne10083:0"
         your_booking_slot_was_successfully_moved_from_: "crwdns10085:0crwdne10085:0"
-        to_date: crwdns10129:0crwdne10129:0
+        to_date: "crwdns20134:0crwdne20134:0" #eg. from 01/01 to 01/05
         please_select_a_member_first: 'crwdns10089:0crwdne10089:0'
-        unable_to_select_plan_if_slots_in_the_past: 'crwdns19571:0crwdne19571:0'
+        unable_to_select_plan_if_slots_in_the_past: 'crwdns20136:0crwdne20136:0'
         unable_to_change_the_reservation: "crwdns10091:0crwdne10091:0"
         confirmation_required: "crwdns10093:0crwdne10093:0"
         do_you_really_want_to_cancel_this_reservation: "crwdns10095:0crwdne10095:0"
         reservation_was_cancelled_successfully: "crwdns10097:0crwdne10097:0"
         cancellation_failed: "crwdns10099:0crwdne10099:0"
-        confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #(context: confirm my payment of $20.00)
+        confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "crwdns10103:0crwdne10103:0"
         none: "crwdns10105:0crwdne10105:0"
         online_payment_disabled: "crwdns10107:0crwdne10107:0"
+        slot_restrict_plans: "crwdns20138:0crwdne20138:0"
+        slot_restrict_subscriptions_must_select_plan: "crwdns20140:0crwdne20140:0"
+        slot_restrict_plans_of_others_groups: "crwdns20142:0crwdne20142:0"
+        selected_plan_dont_match_slot: "crwdns20144:0crwdne20144:0"
+        user_plan_dont_match_slot: "crwdns20146:0crwdne20146:0"
+        no_plan_match_slot: "crwdns20148:0crwdne20148:0"
+        slot_at_same_time: "crwdns20150:0crwdne20150:0"
+        do_you_really_want_to_book_slot_at_same_time: "crwdns20152:0crwdne20152:0"
+        unable_to_book_slot_because_really_have_reservation_at_same_time: "crwdns20154:0crwdne20154:0"
