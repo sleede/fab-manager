@@ -252,7 +252,7 @@ es:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "Una reserva de <strong><em>%{RESERVABLE}</em></strong> fue hecha por <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER} </strong> (%{UID})</em> ha completado su información."
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Cuenta importada desde <strong><em>%{PROVIDER}</strong> (%{UID})</em> ha completado su información."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "La reserva de <strong><em>%{USER}</em></strong>, hecha el %{DATE} ha sido cancelada. Recuerda reclamar una devolución si está disponible."
       notify_admin_slot_is_modified:

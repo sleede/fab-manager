@@ -39,6 +39,12 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
           window.removeEventListener('keydown', handleF1);
         });
       }
+
+      $scope.$watch('currentUser', function (newValue, oldValue) {
+        if (!oldValue && newValue && newValue.role === 'admin') {
+          setupWelcomeTour();
+        }
+      });
     };
 
     /**

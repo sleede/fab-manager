@@ -47,6 +47,7 @@
 - Fix a bug: theme colors must be selected twice before the changes became effective
 - Fix a bug: datepicker does not work in profile completion screen
 - Fix a bug: unable to select a group in profile completion screen
+- Fix a bug: in some cases, bogus admin notification on profile completed 
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://github.com/advisories/GHSA-c3gv-9cxf-6f57)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://github.com/advisories/GHSA-89mq-4x47-5v83)
 - Fix a security issue: updated puma to 3.12.2 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994)
