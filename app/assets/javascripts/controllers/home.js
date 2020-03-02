@@ -16,6 +16,16 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       events: false
     };
 
+    /**
+     * Setup the feature-tour for the home page. (admins only)
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupHomeTour = function () {
+      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
+        setupWelcomeTour();
+      }
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -31,18 +41,18 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // We set the home page content, with the directives replacing the placeholders
       $scope.homeContent = insertDirectives(settingsPromise.home_content);
 
-      // setup the tour for admins
-      if ($scope.currentUser && $scope.currentUser.role === 'admin') {
-        setupWelcomeTour();
-        // listen the $destroy event of the controller to remove the F1 key binding
-        $scope.$on('$destroy', function () {
-          window.removeEventListener('keydown', handleF1);
-        });
-      }
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
 
+      // for admins, setup the tour on login
       $scope.$watch('currentUser', function (newValue, oldValue) {
         if (!oldValue && newValue && newValue.role === 'admin') {
-          setupWelcomeTour();
+          const uitour = uiTourService.getTourByName('welcome');
+          if (!uitour.hasStep()) {
+            setupWelcomeTour();
+          }
         }
       });
     };
