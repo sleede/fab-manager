@@ -175,15 +175,13 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
           object () {
             return {
               title: _t('app.admin.calendar.confirmation_required'),
-              msg: _t('app.admin.calendar.do_you_really_want_to_remove_PLAN_from_this_slot', { GENDER: getGender($scope.currentUser), PLAN: plan.name }) + ' ' +
-             _t('app.admin.calendar.this_will_prevent_any_new_reservation_on_this_slot_but_wont_cancel_those_existing') + '<br><strong>' +
-             _t('app.admin.calendar.beware_this_cannot_be_reverted') + '</strong>'
+              msg: _t('app.admin.calendar.do_you_really_want_to_remove_PLAN_from_this_slot', { GENDER: getGender($scope.currentUser), PLAN: plan.name })
             };
           }
         }
-      }
-      , function () {
-      // the admin has confirmed, remove the plan
+      },
+      function () {
+        // the admin has confirmed, remove the plan
         const plans = _.drop($scope.availability.plan_ids, plan.id);
 
         return Availability.update({ id: $scope.availability.id }, { availability: { plans_attributes: [{ id: plan.id, _destroy: true }] } }
