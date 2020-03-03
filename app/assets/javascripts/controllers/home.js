@@ -197,7 +197,8 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         order: 10,
         title: _t('app.public.tour.welcome.about.title'),
         content: _t('app.public.tour.welcome.about.content'),
-        placement: 'bottom'
+        placement: 'bottom',
+        popupClass: 'shift-right-40'
       });
       uitour.createStep({
         selector: '.navbar.header li.notification-center-link',
@@ -213,7 +214,8 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
         order: 12,
         title: _t('app.public.tour.welcome.profile.title'),
         content: _t('app.public.tour.welcome.profile.content'),
-        placement: 'bottom'
+        placement: 'bottom',
+        popupClass: 'shift-left-80'
       });
       if ($scope.status.news && settingsPromise.home_blogpost) {
         uitour.createStep({
@@ -232,7 +234,7 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
           order: 14,
           title: _t('app.public.tour.welcome.last_projects.title'),
           content: _t('app.public.tour.welcome.last_projects.content'),
-          placement: 'top'
+          placement: 'right'
         });
       }
       if ($scope.status.twitter) {

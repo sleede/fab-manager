@@ -575,7 +575,7 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         placement: 'bottom',
         orphan: true
       });
-      if (!Fablab.withoutInvoices) {
+      if (!Fablab.withoutInvoices && $scope.invoices.length > 0) {
         uitour.createStep({
           selector: '.invoices-management .invoices-list',
           stepId: 'list',
@@ -584,32 +584,30 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
           content: _t('app.admin.tour.invoices.list.content'),
           placement: 'top'
         });
-        if ($scope.invoices.length > 0) {
-          uitour.createStep({
-            selector: '.invoices-management .invoices-list .chained-indicator',
-            stepId: 'chained',
-            order: 2,
-            title: _t('app.admin.tour.invoices.chained.title'),
-            content: _t('app.admin.tour.invoices.chained.content'),
-            placement: 'right'
-          });
-          uitour.createStep({
-            selector: '.invoices-management .invoices-list .download-button',
-            stepId: 'download',
-            order: 3,
-            title: _t('app.admin.tour.invoices.download.title'),
-            content: _t('app.admin.tour.invoices.download.content'),
-            placement: 'left'
-          });
-          uitour.createStep({
-            selector: '.invoices-management .invoices-list .refund-button',
-            stepId: 'refund',
-            order: 4,
-            title: _t('app.admin.tour.invoices.refund.title'),
-            content: _t('app.admin.tour.invoices.refund.content'),
-            placement: 'left'
-          });
-        }
+        uitour.createStep({
+          selector: '.invoices-management .invoices-list .chained-indicator',
+          stepId: 'chained',
+          order: 2,
+          title: _t('app.admin.tour.invoices.chained.title'),
+          content: _t('app.admin.tour.invoices.chained.content'),
+          placement: 'right'
+        });
+        uitour.createStep({
+          selector: '.invoices-management .invoices-list .download-button',
+          stepId: 'download',
+          order: 3,
+          title: _t('app.admin.tour.invoices.download.title'),
+          content: _t('app.admin.tour.invoices.download.content'),
+          placement: 'left'
+        });
+        uitour.createStep({
+          selector: '.invoices-management .invoices-list .refund-button',
+          stepId: 'refund',
+          order: 4,
+          title: _t('app.admin.tour.invoices.refund.title'),
+          content: _t('app.admin.tour.invoices.refund.content'),
+          placement: 'left'
+        });
       }
       uitour.createStep({
         selector: '.invoices-management .invoices-settings',
@@ -641,7 +639,8 @@ Application.Controllers.controller('InvoicesController', ['$scope', '$state', 'I
         order: 8,
         title: _t('app.admin.tour.invoices.periods.title'),
         content: _t('app.admin.tour.invoices.periods.content'),
-        placement: 'bottom'
+        placement: 'bottom',
+        popupClass: 'shift-left-50'
       });
       uitour.createStep({
         selector: 'body',

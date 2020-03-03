@@ -41,7 +41,7 @@ Application.Services.factory('Member', ['$resource', '$q', function ($resource, 
               Fablab.sessionTours.push(response.data.tours[0]);
               return { tours: Fablab.sessionTours };
             }
-            return response;
+            return response.data;
           }
         }
       }

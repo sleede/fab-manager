@@ -368,7 +368,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         order: 2,
         title: _t('app.admin.tour.statistics.trending.title'),
         content: _t('app.admin.tour.statistics.trending.content'),
-        placement: 'bottom'
+        placement: 'left'
       });
       uitour.createStep({
         selector: 'body',
@@ -441,7 +441,7 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
      * Force update the statistics table, querying elasticSearch according to the current config values
      */
     const refreshStats = function () {
-      if ($scope.selectedIndex && !$scope.preventRefresh) {
+      if ($scope.selectedIndex && !$scope.preventRefresh && $scope.type.active) {
         $scope.data = [];
         $scope.sumCA = 0;
         $scope.averageAge = 0;
@@ -637,13 +637,18 @@ Application.Controllers.controller('StatisticsController', ['$scope', '$state', 
         { key: 'userId', label: _t('app.admin.statistics.user_id'), values: ['input_number'] },
         { key: 'gender', label: _t('app.admin.statistics.gender'), values: [{ key: 'male', label: _t('app.admin.statistics.man') }, { key: 'female', label: _t('app.admin.statistics.woman') }] },
         { key: 'age', label: _t('app.admin.statistics.age'), values: ['input_number'] },
-        { key: 'subType', label: _t('app.admin.statistics.type'), values: $scope.type.active.subtypes },
         { key: 'ca', label: _t('app.admin.statistics.revenue'), values: ['input_number'] }
       ];
 
-      if (!$scope.type.active.simple) {
-        const f = { key: 'stat', label: $scope.type.active.label, values: ['input_number'] };
-        $scope.filters.push(f);
+      // if no plans were created, there's no types for statisticIndex=subscriptions
+      if ($scope.type.active) {
+        $scope.filters.splice(4, 0, { key: 'subType', label: _t('app.admin.statistics.type'), values: $scope.type.active.subtypes })
+
+
+        if (!$scope.type.active.simple) {
+          const f = { key: 'stat', label: $scope.type.active.label, values: ['input_number'] };
+          $scope.filters.push(f);
+        }
       }
 
       return angular.forEach($scope.selectedIndex.additional_fields, function (field) {

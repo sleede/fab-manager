@@ -179,7 +179,8 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
         order: 1,
         title: _t('app.admin.tour.project_elements.abuses.title'),
         content: _t('app.admin.tour.project_elements.abuses.content'),
-        placement: 'bottom'
+        placement: 'bottom',
+        popupClass: 'shift-left-40'
       });
       uitour.createStep({
         selector: 'body',

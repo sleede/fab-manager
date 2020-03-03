@@ -845,6 +845,8 @@ fr:
         man: "Homme"
         woman: "Femme"
         export_is_running_you_ll_be_notified_when_its_ready: "L'export est en cours. Vous serez notifié lorsqu'il sera prêt."
+        create_plans_to_start: "Pour commencer, créez de nouvelles formules d'abonnement."
+        click_here: "Cliquez ici pour créer votre première formule."
 
       stats_graphs:
         # graphiques de statistiques

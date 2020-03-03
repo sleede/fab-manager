@@ -310,7 +310,8 @@ Application.Controllers.controller('AdminCalendarController', ['$scope', '$state
         order: 1,
         title: _t('app.admin.tour.calendar.agenda.title'),
         content: _t('app.admin.tour.calendar.agenda.content'),
-        placement: 'right'
+        placement: 'right',
+        popupClass: 'width-350'
       });
       uitour.createStep({
         selector: '.admin-calendar .export-xls-button',
