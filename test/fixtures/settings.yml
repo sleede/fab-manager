@@ -193,7 +193,7 @@ setting_33:
 
 setting_34:
   id: 34
-  name: about_link_text
+  name: link_name
   created_at: 2019-06-12 13:21:12.156100000 Z
   updated_at: 2019-06-12 13:21:12.156100000 Z
 

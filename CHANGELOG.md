@@ -29,6 +29,7 @@
 - Create machine availabilities: select all/none in a click
 - Prevent event reservation in the past [Taiga#127]
 - Removed the need of twitter API keys to display the last tweet on the home page
+- Various helper links to help newcomers creating their first items
 - Handle Ctrl^C in upgrade scripts
 - Updated moment-timezone
 - Updated angular-ui-bootstrap from v0.14 to v1.2
@@ -42,6 +43,7 @@
 - Refactored front-end translations keys with unified paths
 - Updated and refactored README and documentations
 - Harmonized Fab-manager typography and case
+- Updated seeds file
 - Fix a bug: unable to remove the picture from a training
 - Fix a bug: no alerts on errors during admin creation
 - Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]
@@ -53,6 +55,8 @@
 - Fix a bug: with Firefox browser, the texts in date inputs are shifted to the bottom
 - Fix a bug: sometimes when browsing the invoices section, the translations are missing
 - Fix a bug: first day of week is ignored in agendas (#169)
+- Fix a bug: statistics page is bogus before the creation of the first plan
+- Fix a bug: default invoice logo is broken and prevent invoice generation
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://nvd.nist.gov/vuln/detail/CVE-2019-15587)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://nvd.nist.gov/vuln/detail/CVE-2019-10768)
 - Fix a security issue: updated puma to 3.12.3 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994) and [CVE-2020-5247](https://nvd.nist.gov/vuln/detail/CVE-2020-5247)
