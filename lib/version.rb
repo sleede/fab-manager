@@ -19,7 +19,10 @@ class Version
     return if (Rails.env.development? || Rails.env.test?) && ENV['FORCE_VERSION_CHECK'] != 'true'
 
     VersionCheckWorker.perform_async
-    # every sunday at 1:15am
+    return if Sidekiq::Cron::Job.find name: 'Automatic version check'
+
+    # schedule version check every day at the current time
+    # this will prevent that all the instances to query the hub simultaneously
     m = DateTime.current.minute
     h = DateTime.current.hour
     d = DateTime.current.cwday
