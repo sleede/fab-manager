@@ -821,6 +821,8 @@ es:
         man: "Man"
         woman: "Woman"
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
+        create_plans_to_start: "Start by creating new subscription plans."
+        click_here: "Click here to create your first one."
       stats_graphs:
         #statistics graphs
         statistics: "Statistics"
@@ -1096,7 +1098,7 @@ es:
             content: "In the same way as the members, manage the administrators of your Fab-manager here.<br>The administrators can take reservations for any member as well as modify all the parameters of the software."
           groups:
             title: "Manage groups"
-            content: "Groups allow you to better segment your price list."
+            content: "<p>Groups allow you to better segment your price list.</p><p>When you set up Fab-manager for the first time, it is recommended to start by defining the groups.</p>"
           labels:
             title: "Manage tags"
             content: "The labels allow you to reserve certain slots for users associated with these same labels."
