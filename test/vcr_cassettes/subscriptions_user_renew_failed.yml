@@ -5,22 +5,22 @@ http_interactions:
     uri: https://api.stripe.com/v1/payment_methods
     body:
       encoding: UTF-8
-      string: type=card&card[number]=4000000000000002&card[exp_month]=4&card[exp_year]=2020&card[cvc]=314
+      string: type=card&card[number]=4000000000000002&card[exp_month]=4&card[exp_year]=2021&card[cvc]=314
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.1.1
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_yJbCiyFMrrLeji","request_duration_ms":507}}'
+      - '{"last_request_metrics":{"request_id":"req_NNCoWza9ondAIx","request_duration_ms":599}}'
       Stripe-Version:
       - '2019-08-14'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.1.1","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-62-generic (buildd@lcy01-amd64-024) (gcc version 7.4.0 (Ubuntu
-        7.4.0-1ubuntu1~18.04.1)) #69-Ubuntu SMP Wed Sep 4 20:55:53 UTC 2019","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"5.1.1","lang":"ruby","lang_version":"2.3.8 p459 (2018-10-18)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.5.5-arch1-1 (linux@archlinux) (gcc version 9.2.1 20200130 (Arch
+        Linux 9.2.1+20200130-2)) #1 SMP PREEMPT Thu, 20 Feb 2020 18:23:09 +0000","hostname":"Sylvain-desktop"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -33,7 +33,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 11 Sep 2019 13:31:31 GMT
+      - Tue, 03 Mar 2020 14:55:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -53,7 +53,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_nIIa4tzsTuL8pO
+      - req_omWmVa1SbgnhXT
       Stripe-Version:
       - '2019-08-14'
       Strict-Transport-Security:
@@ -62,7 +62,7 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "pm_1FHVux2sOmf47Nz9Zg4MqPHw",
+          "id": "pm_1GIc9Y2sOmf47Nz9aaIwjK7V",
           "object": "payment_method",
           "billing_details": {
             "address": {
@@ -86,7 +86,7 @@ http_interactions:
             },
             "country": "US",
             "exp_month": 4,
-            "exp_year": 2020,
+            "exp_year": 2021,
             "fingerprint": "xsVM9Mfv9kfwhRSL",
             "funding": "credit",
             "generated_from": null,
@@ -96,7 +96,7 @@ http_interactions:
             },
             "wallet": null
           },
-          "created": 1568208691,
+          "created": 1583247325,
           "customer": null,
           "livemode": false,
           "metadata": {
@@ -104,28 +104,28 @@ http_interactions:
           "type": "card"
         }
     http_version: 
-  recorded_at: Wed, 11 Sep 2019 13:31:31 GMT
+  recorded_at: Tue, 03 Mar 2020 14:55:25 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/payment_intents
     body:
       encoding: UTF-8
-      string: payment_method=pm_1FHVux2sOmf47Nz9Zg4MqPHw&amount=3000&currency=usd&confirmation_method=manual&confirm=true&customer=cus_8E2ys9zDZgetWX
+      string: payment_method=pm_1GIc9Y2sOmf47Nz9aaIwjK7V&amount=3000&currency=usd&confirmation_method=manual&confirm=true&customer=cus_8E2ys9zDZgetWX
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.1.1
       Authorization:
-      - Bearer sk_test_mGokO9TGtrVxMOyK4yZiktBE
+      - Bearer sk_test_testfaketestfaketestfake
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_nIIa4tzsTuL8pO","request_duration_ms":589}}'
+      - '{"last_request_metrics":{"request_id":"req_omWmVa1SbgnhXT","request_duration_ms":527}}'
       Stripe-Version:
       - '2019-08-14'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.1.1","lang":"ruby","lang_version":"2.3.6 p384 (2017-12-14)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 4.15.0-62-generic (buildd@lcy01-amd64-024) (gcc version 7.4.0 (Ubuntu
-        7.4.0-1ubuntu1~18.04.1)) #69-Ubuntu SMP Wed Sep 4 20:55:53 UTC 2019","hostname":"Sleede-SylvainPC"}'
+      - '{"bindings_version":"5.1.1","lang":"ruby","lang_version":"2.3.8 p459 (2018-10-18)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.5.5-arch1-1 (linux@archlinux) (gcc version 9.2.1 20200130 (Arch
+        Linux 9.2.1+20200130-2)) #1 SMP PREEMPT Thu, 20 Feb 2020 18:23:09 +0000","hostname":"Sylvain-desktop"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -138,11 +138,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 11 Sep 2019 13:31:33 GMT
+      - Tue, 03 Mar 2020 14:55:27 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '7433'
+      - '7569'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -158,7 +158,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_wzQsR7xnkIbZ2x
+      - req_M2H98iru3Xt31z
       Stripe-Version:
       - '2019-08-14'
       Strict-Transport-Security:
@@ -168,13 +168,13 @@ http_interactions:
       string: |
         {
           "error": {
-            "charge": "ch_1FHVuy2sOmf47Nz9fKgXiEwt",
+            "charge": "ch_1GIc9Z2sOmf47Nz9xoFaFgIA",
             "code": "card_declined",
             "decline_code": "generic_decline",
             "doc_url": "https://stripe.com/docs/error-codes/card-declined",
             "message": "Your card was declined.",
             "payment_intent": {
-              "id": "pi_1FHVuy2sOmf47Nz9utdUTYA2",
+              "id": "pi_1GIc9Z2sOmf47Nz91xCkee6I",
               "object": "payment_intent",
               "amount": 3000,
               "amount_capturable": 0,
@@ -188,7 +188,7 @@ http_interactions:
                 "object": "list",
                 "data": [
                   {
-                    "id": "ch_1FHVuy2sOmf47Nz9fKgXiEwt",
+                    "id": "ch_1GIc9Z2sOmf47Nz9xoFaFgIA",
                     "object": "charge",
                     "amount": 3000,
                     "amount_refunded": 0,
@@ -210,12 +210,13 @@ http_interactions:
                       "phone": null
                     },
                     "captured": false,
-                    "created": 1568208692,
+                    "created": 1583247325,
                     "currency": "usd",
                     "customer": "cus_8E2ys9zDZgetWX",
                     "description": null,
                     "destination": null,
                     "dispute": null,
+                    "disputed": false,
                     "failure_code": "card_declined",
                     "failure_message": "Your card was declined.",
                     "fraud_details": {
@@ -230,13 +231,13 @@ http_interactions:
                       "network_status": "declined_by_network",
                       "reason": "generic_decline",
                       "risk_level": "normal",
-                      "risk_score": 30,
+                      "risk_score": 64,
                       "seller_message": "The bank did not return any further details with this decline.",
                       "type": "issuer_declined"
                     },
                     "paid": false,
-                    "payment_intent": "pi_1FHVuy2sOmf47Nz9utdUTYA2",
-                    "payment_method": "pm_1FHVux2sOmf47Nz9Zg4MqPHw",
+                    "payment_intent": "pi_1GIc9Z2sOmf47Nz91xCkee6I",
+                    "payment_method": "pm_1GIc9Y2sOmf47Nz9aaIwjK7V",
                     "payment_method_details": {
                       "card": {
                         "brand": "visa",
@@ -247,10 +248,12 @@ http_interactions:
                         },
                         "country": "US",
                         "exp_month": 4,
-                        "exp_year": 2020,
+                        "exp_year": 2021,
                         "fingerprint": "xsVM9Mfv9kfwhRSL",
                         "funding": "credit",
+                        "installments": null,
                         "last4": "0002",
+                        "network": "visa",
                         "three_d_secure": null,
                         "wallet": null
                       },
@@ -258,7 +261,7 @@ http_interactions:
                     },
                     "receipt_email": null,
                     "receipt_number": null,
-                    "receipt_url": "https://pay.stripe.com/receipts/acct_103rE62sOmf47Nz9/ch_1FHVuy2sOmf47Nz9fKgXiEwt/rcpt_Fn67scvM2L2uxrCO42FtaMRX4P7RJQg",
+                    "receipt_url": "https://pay.stripe.com/receipts/acct_103rE62sOmf47Nz9/ch_1GIc9Z2sOmf47Nz9xoFaFgIA/rcpt_GqIlCsRVxrOuz8AE4BdqbdKWItWjNBV",
                     "refunded": false,
                     "refunds": {
                       "object": "list",
@@ -267,7 +270,7 @@ http_interactions:
                       ],
                       "has_more": false,
                       "total_count": 0,
-                      "url": "/v1/charges/ch_1FHVuy2sOmf47Nz9fKgXiEwt/refunds"
+                      "url": "/v1/charges/ch_1GIc9Z2sOmf47Nz9xoFaFgIA/refunds"
                     },
                     "review": null,
                     "shipping": null,
@@ -282,23 +285,23 @@ http_interactions:
                 ],
                 "has_more": false,
                 "total_count": 1,
-                "url": "/v1/charges?payment_intent=pi_1FHVuy2sOmf47Nz9utdUTYA2"
+                "url": "/v1/charges?payment_intent=pi_1GIc9Z2sOmf47Nz91xCkee6I"
               },
-              "client_secret": "pi_1FHVuy2sOmf47Nz9utdUTYA2_secret_Qb3BdfLX8cTgumUQqo3TOvpDV",
+              "client_secret": "pi_1GIc9Z2sOmf47Nz91xCkee6I_secret_OJQYRP55NZ5iVKUWcxwIG4vpt",
               "confirmation_method": "manual",
-              "created": 1568208692,
+              "created": 1583247325,
               "currency": "usd",
               "customer": "cus_8E2ys9zDZgetWX",
               "description": null,
               "invoice": null,
               "last_payment_error": {
-                "charge": "ch_1FHVuy2sOmf47Nz9fKgXiEwt",
+                "charge": "ch_1GIc9Z2sOmf47Nz9xoFaFgIA",
                 "code": "card_declined",
                 "decline_code": "generic_decline",
                 "doc_url": "https://stripe.com/docs/error-codes/card-declined",
                 "message": "Your card was declined.",
                 "payment_method": {
-                  "id": "pm_1FHVux2sOmf47Nz9Zg4MqPHw",
+                  "id": "pm_1GIc9Y2sOmf47Nz9aaIwjK7V",
                   "object": "payment_method",
                   "billing_details": {
                     "address": {
@@ -322,7 +325,7 @@ http_interactions:
                     },
                     "country": "US",
                     "exp_month": 4,
-                    "exp_year": 2020,
+                    "exp_year": 2021,
                     "fingerprint": "xsVM9Mfv9kfwhRSL",
                     "funding": "credit",
                     "generated_from": null,
@@ -332,7 +335,7 @@ http_interactions:
                     },
                     "wallet": null
                   },
-                  "created": 1568208691,
+                  "created": 1583247325,
                   "customer": null,
                   "livemode": false,
                   "metadata": {
@@ -349,6 +352,7 @@ http_interactions:
               "payment_method": null,
               "payment_method_options": {
                 "card": {
+                  "installments": null,
                   "request_three_d_secure": "automatic"
                 }
               },
@@ -367,7 +371,7 @@ http_interactions:
               "transfer_group": null
             },
             "payment_method": {
-              "id": "pm_1FHVux2sOmf47Nz9Zg4MqPHw",
+              "id": "pm_1GIc9Y2sOmf47Nz9aaIwjK7V",
               "object": "payment_method",
               "billing_details": {
                 "address": {
@@ -391,7 +395,7 @@ http_interactions:
                 },
                 "country": "US",
                 "exp_month": 4,
-                "exp_year": 2020,
+                "exp_year": 2021,
                 "fingerprint": "xsVM9Mfv9kfwhRSL",
                 "funding": "credit",
                 "generated_from": null,
@@ -401,7 +405,7 @@ http_interactions:
                 },
                 "wallet": null
               },
-              "created": 1568208691,
+              "created": 1583247325,
               "customer": null,
               "livemode": false,
               "metadata": {
@@ -412,5 +416,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Wed, 11 Sep 2019 13:31:33 GMT
+  recorded_at: Tue, 03 Mar 2020 14:55:27 GMT
 recorded_with: VCR 3.0.1
