@@ -821,6 +821,8 @@ ach:
         man: "crwdns8163:0crwdne8163:0"
         woman: "crwdns8165:0crwdne8165:0"
         export_is_running_you_ll_be_notified_when_its_ready: "crwdns8167:0crwdne8167:0"
+        create_plans_to_start: "crwdns20160:0crwdne20160:0"
+        click_here: "crwdns20162:0crwdne20162:0"
       stats_graphs:
         #statistics graphs
         statistics: "crwdns8169:0crwdne8169:0"
@@ -1096,7 +1098,7 @@ ach:
             content: "crwdns19964:0crwdne19964:0"
           groups:
             title: "crwdns19966:0crwdne19966:0"
-            content: "crwdns19968:0crwdne19968:0"
+            content: "crwdns20164:0crwdne20164:0"
           labels:
             title: "crwdns19970:0crwdne19970:0"
             content: "crwdns19972:0crwdne19972:0"
