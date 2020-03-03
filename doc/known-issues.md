@@ -22,7 +22,7 @@ This document is listing common known issues.
   To solve this issue copy `config/application.yml.default` to `config/application.yml`.
   This is required before the first start.
 
-- When running the tests suite with `rake test`, all tests may fail with errors similar to the following:
+- When running the tests suite with `scripts/run-tests.sh`, all tests may fail with errors similar to the following:
 
         Error:
         ...

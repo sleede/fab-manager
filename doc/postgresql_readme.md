@@ -60,7 +60,7 @@ psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sq
 
   - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
-- If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
+- If you intend to contribute to the project code, you will need to run the test suite with `scripts/run-tests.sh`.
   This also requires your user to have the _SUPERUSER_ role.
   Please see the [known issues](../README.md#known-issues) section for more information about this.
 
