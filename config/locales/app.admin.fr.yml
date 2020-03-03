@@ -1128,7 +1128,7 @@ fr:
             content: "De la même manière que les membres, gérez ici les administrateurs de votre Fab-manager.<br>Les administrateurs peuvent prendre des réservations pour n'importe quel membre ainsi que modifier l'ensemble des paramètres du logiciel."
           groups:
             title: "Gérer les groupes"
-            content: "Les groupes vous permettent de mieux segmenter votre offre tarifaire."
+            content: "<p>Les groupes vous permettent de mieux segmenter votre offre tarifaire.</p><p>Lorsque vous paramétrez Fab-manager pour la première fois, il est recommandé de commencer par définir les groupes.</p>"
           labels:
             title: "Gérer les étiquettes"
             content: "Les étiquettes vous permettent de réserver certains créneaux aux utilisateurs associés à ces mêmes étiquettes."

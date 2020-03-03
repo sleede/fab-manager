@@ -77,7 +77,7 @@
                                                             <i class="fa fa-asterisk" aria-hidden="true"></i>
                                                           </span>
                                                         </span>
-                                                        <select ng-model="user.group_id" class="form-control" required>
+                                                        <select ng-model="user.group_id" class="form-control" ng-disabled="user.role === 'admin'" required>
                                                             <option value=null translate>{{ 'app.logged.profile_completion.your_user_s_profile' }}</option>
                                                             <option ng-repeat="group in groups" ng-value="group.id" ng-selected="group.id == user.group_id">{{group.name}}</option>
                                                         </select>
