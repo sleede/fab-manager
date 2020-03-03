@@ -425,3 +425,7 @@ ach:
         slot_at_same_time: "crwdns20150:0crwdne20150:0"
         do_you_really_want_to_book_slot_at_same_time: "crwdns20152:0crwdne20152:0"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "crwdns20154:0crwdne20154:0"
+      tour:
+        previous: "crwdns20166:0crwdne20166:0"
+        next: "crwdns20168:0crwdne20168:0"
+        end: "crwdns20170:0crwdne20170:0"
