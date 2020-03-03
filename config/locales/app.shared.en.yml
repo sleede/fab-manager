@@ -448,3 +448,8 @@ en:
         slot_at_same_time: "Conflict with others reservations"
         do_you_really_want_to_book_slot_at_same_time: "Do you really want to book this slot? Other bookings take place at the same time"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Unable to book this slot because the following reservation occurs at the same time."
+
+      tour:
+        previous: "Previous"
+        next: "Next"
+        end: "End the tour"
