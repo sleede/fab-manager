@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+- Fix a bug: in feature tours, next and previous arrows may be broken on some systems
+
 ## v4.3.0 2020 March 04
 
 - Ability to configure reservation slot restricted for plan subscribers
@@ -19,6 +21,7 @@
 - Administrators can to book machine/space/training slots, until 1 month in the past
 - Filter members by non-validated emails or by inactive for 3 years
 - Ability to customize the title of the link to the about page
+- Feature tours for administrators that provides contextual help
 - Automatic version check with security alerts
 - Public endpoint to check the system health
 - Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
