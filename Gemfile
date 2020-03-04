@@ -4,7 +4,7 @@ gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.11.1'
 # Use Puma as web server
-gem 'puma', '3.10.0'
+gem 'puma', '3.12.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
