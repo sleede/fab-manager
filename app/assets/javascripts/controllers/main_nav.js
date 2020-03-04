@@ -140,7 +140,7 @@ Application.Controllers.controller('MainNavController', ['$scope', function ($sc
   $scope.adminNavLinks = adminNavLinks;
 
   if (!Fablab.withoutSpaces) {
-    return $scope.adminNavLinks.splice(4, 0, {
+    return $scope.adminNavLinks.splice(3, 0, {
       state: 'app.public.spaces_list',
       linkText: 'app.public.common.manage_the_spaces',
       linkIcon: 'rocket'

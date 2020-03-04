@@ -3,6 +3,7 @@
 - Change style and pluralize the text of the slot division alert in new availability assistant
 - Fix a bug: in feature tours, next and previous arrows may be broken on some systems
 - Fix a bug: in the user's menu, two links to the personal wallet
+- Fix a bug: spaces item is not at the correct position in the admin navigation menu
 
 ## v4.3.0 2020 March 04
 
