@@ -60,7 +60,7 @@
 - Fix a bug: default invoice logo is broken and prevent invoice generation
 - Fix a security issue: updated loofah to fix [CVE-2019-15587](https://nvd.nist.gov/vuln/detail/CVE-2019-15587)
 - Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://nvd.nist.gov/vuln/detail/CVE-2019-10768)
-- Fix a security issue: updated puma to 3.12.3 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994) and [CVE-2020-5247](https://nvd.nist.gov/vuln/detail/CVE-2020-5247)
+- Fix a security issue: updated puma to 3.12.4 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994), [CVE-2020-5247](https://nvd.nist.gov/vuln/detail/CVE-2020-5247) and [CVE-2019-16254](https://nvd.nist.gov/vuln/detail/CVE-2020-5247)
 - Fix a security issue: updated nokogiri to 1.10.8 to fix [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595)
 - Fix a security issue: updated rack to 1.6.12 to fix [CVE-2019-16782](https://nvd.nist.gov/vuln/detail/CVE-2019-16782)
 - [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
