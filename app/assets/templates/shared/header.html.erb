@@ -40,7 +40,6 @@
         <li><a ui-sref="app.logged.dashboard.events" translate>{{ 'app.public.common.my_events' }}</a></li>
         <li><a ui-sref="app.logged.dashboard.invoices" ng-hide="fablabWithoutInvoices" translate>{{ 'app.public.common.my_invoices' }}</a></li>
         <li ng-hide="fablabWithoutWallet"><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
-        <li><a ui-sref="app.logged.dashboard.wallet" translate>{{ 'app.public.common.my_wallet' }}</a></li>
         <li class="divider" ng-if="currentUser.role === 'admin'"></li>
         <li><a class="text-black pointer" ng-click="help($event)" ng-if="currentUser.role === 'admin'"><i class="fa fa-question-circle"></i> <span translate>{{ 'app.public.common.help' }}</span> </a></li>
         <li class="divider"></li>

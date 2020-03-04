@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Fix a bug: in feature tours, next and previous arrows may be broken on some systems
+- Fix a bug: in the user's menu, two links to the personal wallet
 
 ## v4.3.0 2020 March 04
 
