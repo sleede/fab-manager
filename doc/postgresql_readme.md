@@ -37,12 +37,13 @@ scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_production_$(d
 Restore the dump with the following:
 ```bash
 tar xvf fabmanager_production_$(date -I).tar.gz
-sudo cp fabmanager_production_$(date -I).sql .docker/postgresql/
-rake db:drop
-rake db:create
-docker exec -it fabmanager-postgres bash
-cd /var/lib/postgresql/data/
-psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sql
+sudo cp fabmanager_production_$(date -I).sql /apps/fabmanager/postgresql/
+cd /apps/fabmanager/
+docker-compose down
+docker-compose up -d postgres
+docker-compose exec postgres dropdb -U postgres fabmanager_production
+docker-compose exec postgres createdb -U postgres fabmanager_production
+docker-compose exec postgres pg_restore -U postgres -d fablab_production /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
 ```
 
 <a name="postgresql-limitations"></a>
