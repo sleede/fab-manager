@@ -34,6 +34,7 @@
 - Updated moment-timezone
 - Updated angular-ui-bootstrap from v0.14 to v1.2
 - Updated caxlsx to 3.0.1 and rails_axlsx to rails_caxlsx
+- Updated sidekiq to 5.2.8
 - Option to disable developers analytics
 - Added the a "cron" tab in Sidekiq web-ui to watch scheduled tasks
 - Integration of Crowdin "in-context" translation management system
