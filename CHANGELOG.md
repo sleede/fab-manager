@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Updated user's manual for v4.3 (fr)
+- Display user's manual when help is asked, if no tour is available
 - Change style and pluralize the text of the slot division alert in new availability assistant
 - Fix a bug: in feature tours, next and previous arrows may be broken on some systems
 - Fix a bug: in the user's menu, two links to the personal wallet
