@@ -67,7 +67,7 @@ en:
         select_nb_period: "Please select a number of periods for the recurrence"
         select_end_date: "Please select the date of the last occurrence"
         about_to_create: "You are about to create the following {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"
-        divided_in_slots: "This slot will be open for booking in {DURATION}-minutes increments. Contact your system administrator to change this setting."
+        divided_in_slots: "{COUNT, plural, =1{This slot} other{These slots}} will be open for booking in {DURATION}-minutes increments. Contact your system administrator to change this setting."
         reservable: "Reservable(s):"
         labels: "Label(s):"
         none: "None"

@@ -67,7 +67,7 @@ fr:
         select_nb_period: "Veuillez choisir un nombre de périodes pour la récurrence"
         select_end_date: "Veuillez choisir la date de dernière occurrence"
         about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} suivant :"
-        divided_in_slots: "Ce créneau sera proposé à la réservation par tranches de {DURATION} minutes. Contactez votre administrateur système pour modifier ce paramètre."
+        divided_in_slots: "{COUNT, plural, =1{Ce créneau sera proposé} other{Ces créneaux seront proposés}} à la réservation par tranches de {DURATION} minutes. Contactez votre administrateur système pour modifier ce paramètre."
         reservable: "Réservable(s) :"
         labels: "Étiquette(s) :"
         none: "Aucune"
