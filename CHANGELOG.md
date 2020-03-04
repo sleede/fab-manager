@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.3.1 2020 March 04
+
 - Updated user's manual for v4.3 (fr)
 - Display user's manual when help is asked, if no tour is available
 - Change style and pluralize the text of the slot division alert in new availability assistant
