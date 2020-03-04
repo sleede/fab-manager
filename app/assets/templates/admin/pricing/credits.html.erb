@@ -1,10 +1,10 @@
-<h2 class="m-t-lg" translate>{{ 'pricing.trainings' }}</h2>
+<h2 class="m-t-lg" translate>{{ 'app.admin.pricing.trainings' }}</h2>
 <table class="table">
   <thead>
   <tr>
-    <th style="width:20%" translate>{{ 'pricing.subscription' }}</th>
-    <th style="width:10%" translate>{{ 'pricing.credits' }}</th>
-    <th style="width:50%" translate>{{ 'pricing.related_trainings' }}</th>
+    <th style="width:20%" translate>{{ 'app.admin.pricing.subscription' }}</th>
+    <th style="width:10%" translate>{{ 'app.admin.pricing.credits' }}</th>
+    <th style="width:50%" translate>{{ 'app.admin.pricing.related_trainings' }}</th>
     <th style="width:20%"></th>
   </tr>
   </thead>
@@ -35,7 +35,7 @@
       </form>
       <div class="buttons" ng-show="!rowform.$visible">
         <button class="btn btn-default" ng-click="rowform.$show()">
-          <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+          <i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}
         </button>
       </div>
     </td>
@@ -43,17 +43,17 @@
   </tbody>
 </table>
 
-<h2 class="m-t-lg" translate>{{ 'pricing.machines' }}</h2>
+<h2 class="m-t-lg" translate>{{ 'app.admin.pricing.machines' }}</h2>
 <div class="btn-group m-t-md m-b-md">
-  <button type="button" class="btn btn-warning" ng-click="addMachineCredit($event)" translate>{{ 'pricing.add_a_machine_credit' }}</button>
+  <button type="button" class="btn btn-warning" ng-click="addMachineCredit($event)" translate>{{ 'app.admin.pricing.add_a_machine_credit' }}</button>
 </div>
 
 <table class="table">
   <thead>
   <tr>
-    <th style="width:20%" translate>{{ 'pricing.machine' }}</th>
-    <th style="width:10%" translate>{{ 'pricing.hours' }}</th>
-    <th style="width:50%" translate>{{ 'pricing.related_subscriptions' }}</th>
+    <th style="width:20%" translate>{{ 'app.admin.pricing.machine' }}</th>
+    <th style="width:10%">{{ 'app.admin.pricing.hours' | translate:{DURATION:slotDuration} }}</th>
+    <th style="width:50%" translate>{{ 'app.admin.pricing.related_subscriptions' }}</th>
     <th style="width:20%"></th>
   </tr>
   </thead>
@@ -85,10 +85,10 @@
       </form>
       <div class="buttons" ng-show="!rowform.$visible">
         <button class="btn btn-default" ng-click="rowform.$show()">
-          <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+          <i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}
         </button>
         <button class="btn btn-danger" ng-click="removeMachineCredit($index)">
-          <i class="fa fa-trash-o"></i> {{ 'delete' | translate }} (!)
+          <i class="fa fa-trash-o"></i> {{ 'app.shared.buttons.delete' | translate }}
         </button>
       </div>
     </td>
@@ -96,16 +96,16 @@
   </tbody>
 </table>
 
-<h2 ng-hide="fablabWithoutSpaces" class="m-t-lg" translate>{{ 'pricing.spaces' }}</h2>
+<h2 ng-hide="fablabWithoutSpaces" class="m-t-lg" translate>{{ 'app.admin.pricing.spaces' }}</h2>
 <div ng-hide="fablabWithoutSpaces" class="btn-group m-t-md m-b-md">
-  <button type="button" class="btn btn-warning" ng-click="addSpaceCredit($event)" translate>{{ 'pricing.add_a_space_credit' }}</button>
+  <button type="button" class="btn btn-warning" ng-click="addSpaceCredit($event)" translate>{{ 'app.admin.pricing.add_a_space_credit' }}</button>
 </div>
 <table ng-hide="fablabWithoutSpaces" class="table">
   <thead>
   <tr>
-    <th style="width:20%" translate>{{ 'pricing.space' }}</th>
-    <th style="width:10%" translate>{{ 'pricing.hours' }}</th>
-    <th style="width:50%" translate>{{ 'pricing.related_subscriptions' }}</th>
+    <th style="width:20%" translate>{{ 'app.admin.pricing.space' }}</th>
+    <th style="width:10%">{{ 'app.admin.pricing.hours' | translate:{DURATION:slotDuration} }}</th>
+    <th style="width:50%" translate>{{ 'app.admin.pricing.related_subscriptions' }}</th>
     <th style="width:20%"></th>
   </tr>
   </thead>
@@ -137,10 +137,10 @@
       </form>
       <div class="buttons" ng-show="!rowform.$visible">
         <button class="btn btn-default" ng-click="rowform.$show()">
-          <i class="fa fa-edit"></i> {{ 'edit' | translate }}
+          <i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}
         </button>
         <button class="btn btn-danger" ng-click="removeSpaceCredit($index)">
-          <i class="fa fa-trash-o"></i> {{ 'delete' | translate }} (!)
+          <i class="fa fa-trash-o"></i> {{ 'app.shared.buttons.delete' | translate }}
         </button>
       </div>
     </td>

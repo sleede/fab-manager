@@ -1,6 +1,6 @@
 'use strict';
 
-Application.Services.factory('Member', ['$resource', function ($resource) {
+Application.Services.factory('Member', ['$resource', '$q', function ($resource, $q) {
   return $resource('/api/members/:id',
     { id: '@id' }, {
       update: {
@@ -30,6 +30,20 @@ Application.Services.factory('Member', ['$resource', function ($resource) {
       mapping: {
         method: 'GET',
         url: '/api/members/mapping'
+      },
+      completeTour: {
+        method: 'PATCH',
+        url: '/api/members/:id/complete_tour',
+        params: { id: '@id' },
+        interceptor: {
+          response: function (response) {
+            if (Fablab.featureTourDisplay === 'session') {
+              Fablab.sessionTours.push(response.data.tours[0]);
+              return { tours: Fablab.sessionTours };
+            }
+            return response.data;
+          }
+        }
       }
     }
   );

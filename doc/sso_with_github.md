@@ -1,24 +1,24 @@
 # How to configure Fab-manager to use a Single Sign-On authentication?
 
-For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as an example authentication provider, because it uses OAuth 2.0 which is currently implemented in fab-manager, it has a standard implementation of the protocol and it is free to use for everyone.
+For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as an example authentication provider, because it uses OAuth 2.0 which is currently implemented in Fab-manager, it has a standard implementation of the protocol and it is free to use for everyone.
 
 - First, you must have a GitHub account. This is free, so create one if you don't have any.
   Visit https://github.com/join?source=login to create an account.
 
-- Secondly, you will need to register your fab-manager instance as an application in GitHub.
+- Secondly, you will need to register your Fab-manager instance as an application in GitHub.
   Visit https://github.com/settings/applications/new to register your instance.
-  - In `Application name`, we advise you to set the same name as your fab-manager's instance title.
-  - In `Homepage URL`, put the public URL where your fab-manager's instance is located (eg. https://example.com).
+  - In `Application name`, we advise you to set the same name as your Fab-manager's instance title.
+  - In `Homepage URL`, put the public URL where your Fab-manager's instance is located (eg. https://example.com).
   - In `Authorization callback URL`, you must specify an URL that will match this scheme: https://example.com/users/auth/oauth2-github/callback
-    - **example.com** is your own fab-manager's address
-    - **oauth2-github** match the provider's "strategy name" in the fab-manager.
+    - **example.com** is your own Fab-manager's address
+    - **oauth2-github** match the provider's "strategy name" in the Fab-manager.
       It is composed of: **SSO's protocol**, _dash_, **slug of the provider's name**.
-      If you have a doubt about what it will be, set any value, create the authentication provider in your fab-manager (see below), then the strategy's name will be shown in the providers list. 
+      If you have a doubt about what it will be, set any value, create the authentication provider in your Fab-manager (see below), then the strategy's name will be shown in the providers list. 
       Afterwards, edit your app on GitHub to set the correct name. 
 
 - You'll be redirected to a page displaying two important information: your **Client ID** and your **Client Secret**.
 
-- Now go to your fab-manager's instance, login as an administrator, go to `Users management` and `Authentication`.
+- Now go to your Fab-manager's instance, login as an administrator, go to `Users management` and `Authentication`.
   Click `Add a new authentication provider`, and select _OAuth 2.0_ in the `Authentication type` drop-down list.
   In `name`, you can set whatever you want, but you must be aware that:
   1. You will need to type this name in a terminal to activate the provider, so prefer avoiding chars that must be escaped.
@@ -33,7 +33,7 @@ For this guide, we will use [GitHub](https://developer.github.com/v3/oauth/) as 
   - **Client identifier**: Your Client ID, collected just before.
   - **Client secret**: Your Client Secret, collected just before.
 
-- Then you will need to define the matching of the fields between the fab-manager and what the external SSO can provide.
+- Then you will need to define the matching of the fields between the Fab-manager and what the external SSO can provide.
   Please note that the only mandatory field is `User.uid`.
   To continue with our GitHub example, you will need to look at [this documentation page](https://developer.github.com/v3/users/#get-the-authenticated-user) to know witch field can be mapped and how, and [this one](https://developer.github.com/v3/) to know the root URL of the API.
   - **Model**: `User`

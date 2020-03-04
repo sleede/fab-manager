@@ -6,7 +6,7 @@ class OpenAPI::V1::EventsController < OpenAPI::V1::BaseController
     
 	if upcoming
       @events = Event.includes(:event_image, :event_files, :availability, :category)
-				.where('availabilities.end_at >= ?', Time.now)
+				.where('availabilities.end_at >= ?', DateTime.current)
                 .order('availabilities.start_at ASC').references(:availabilities)
     else
 	  @events = Event.includes(:event_image, :event_files, :availability, :category).order(created_at: :desc)

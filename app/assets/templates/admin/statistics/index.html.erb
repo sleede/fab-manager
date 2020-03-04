@@ -7,21 +7,27 @@
     </div>
     <div class="col-xs-8 col-sm-11 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'statistics' }}</h1>
+        <h1 translate>{{ 'app.admin.statistics.statistics' }}</h1>
       </section>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
       <section class="heading-actions wrapper">
-        <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="exportToExcel()"><i class="fa fa-file-excel-o"></i></a>
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm export-button" ng-click="exportToExcel()"><i class="fa fa-file-excel-o"></i></a>
         <iframe name="export-frame" height="0" width="0" class="none" id="stats-export-frame"></iframe>
-        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.stats_graphs" role="button"><i class="fa fa-line-chart"></i> {{ 'evolution' | translate }}</a>
+        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm charts-button" ui-sref="app.admin.stats_graphs" role="button"><i class="fa fa-line-chart"></i> {{ 'app.admin.statistics.evolution' | translate }}</a>
       </section>
     </div>
   </div>
 </section>
 
 
-<section class="m-lg">
+<section class="m-lg statistics"
+         ui-tour="statistics"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupStatisticsTour">
   <div class="row">
 
     <div class="col-md-12">
@@ -34,27 +40,27 @@
                 <span ng-show="agePicker.start || agePicker.end">
                     <i class="fa fa-arrows-h"></i>
                     <i class="fa fa-birthday-cake"></i>
-                    <span translate>{{ 'from_age' }}</span>
+                    <span translate>{{ 'app.admin.statistics.from_age' }}</span>
                     <b class="text-info" id="agepicker-from-info">{{agePicker.start}}</b>
-                    <span translate>{{ 'to_age' }}</span>
+                    <span translate>{{ 'app.admin.statistics.to_age' }}</span>
                     <b class="text-info" id="agepicker-to-info">{{agePicker.end}}</b>
-                    <span translate>{{ '_years_old' }}</span>
+                    <span translate>{{ 'app.admin.statistics._years_old' }}</span>
                 </span>
                 <span class="text-gray" ng-show="!agePicker.start && !agePicker.end" translate>
-                    {{ 'age_filter' }}
+                    {{ 'app.admin.statistics.age_filter' }}
                 </span>
                 <i class="fa fa-caret-down" ng-show="!agePicker.show"></i>
                 <i class="fa fa-caret-up" ng-show="agePicker.show"></i>
               </button>
               <div class="datepicker-dropdown" ng-show="agePicker.show">
                 <ul class="list-unstyled">
-                  <li><span translate>{{ 'start' }}</span>
+                  <li><span translate>{{ 'app.admin.statistics.start' }}</span>
                     <div class="input-group black">
                       <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                       <input type="number" class="form-control"  ng-model="agePicker.start" name="ageStart" required="required"/>
                     </div>
                   </li>
-                  <li><span translate>{{ 'end' }}</span>
+                  <li><span translate>{{ 'app.admin.statistics.end' }}</span>
                     <div class="input-group black">
                       <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                       <input type="number" class="form-control"  ng-model="agePicker.end" name="ageEnd" required="required"/>
@@ -72,9 +78,9 @@
             <div id="customFilterPane" class="form-group datepicker-container m-l-md" style="z-index:101;">
               <button id="customFilterExpand" class="btn btn-default customMenuButton" type="button" ng-click="customFilter.show = !customFilter.show">
                 <i class="fa fa-filter"></i>
-                <span ng-show="!customFilter.criterion.key" class="text-gray" translate>{{ 'custom_filter' }}</span>
+                <span ng-show="!customFilter.criterion.key" class="text-gray" translate>{{ 'app.admin.statistics.custom_filter' }}</span>
                 <span ng-show="customFilter.criterion.key">{{customFilter.criterion.label}} :</span>
-                <span ng-show="customFilter.exclude" translate>{{ 'NO_' }}</span>
+                <span ng-show="customFilter.exclude" translate>{{ 'app.admin.statistics.NO_' }}</span>
                 <ng-switch on="getCustomValueInputType(customFilter.criterion)">
                     <span ng-switch-when="input_date">{{formatDate(customFilter.value)}}</span>
                     <span ng-switch-when="input_select">{{customFilter.value.label}}</span>
@@ -85,7 +91,7 @@
               </button>
               <div id="custom-filter-dropdown" class="datepicker-dropdown" ng-show="customFilter.show">
                 <ul class="list-unstyled">
-                  <li><span translate>{{ 'criterion' }}</span>
+                  <li><span translate>{{ 'app.admin.statistics.criterion' }}</span>
                     <div class="input-group black customMenuInput">
                       <span class="input-group-addon"><i class="fa fa-filter"></i></span>
                       <select ng-model="customFilter.criterion"
@@ -98,7 +104,7 @@
                       </select>
                     </div>
                   </li>
-                  <li><span translate>{{ 'value' }}</span>
+                  <li><span translate>{{ 'app.admin.statistics.value' }}</span>
                     <div class="input-group black customMenuInput">
                       <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
                       <ng-switch on="getCustomValueInputType(customFilter.criterion)">
@@ -145,7 +151,7 @@
                   <li>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" ng-model="customFilter.exclude"> {{ 'exclude' | translate }}
+                        <input type="checkbox" ng-model="customFilter.exclude"> {{ 'app.admin.statistics.exclude' | translate }}
                       </label>
                     </div>
                   </li>
@@ -155,7 +161,7 @@
 
             <div class="input-group m-l-md">
                 <button class="btn btn-default text-primary pull-right" ng-click="validateFilterChange()">
-                  <i class="fa fa-check green"></i> <span class="hidden-xs">{{ 'apply' | translate }}</span>
+                  <i class="fa fa-check green"></i> <span class="hidden-xs">{{ 'app.shared.buttons.apply' | translate }}</span>
                 </button>
             </div>
 
@@ -164,9 +170,9 @@
                 <i class="fa fa-calendar"></i>
                 <i class="fa fa-arrows-h"></i>
                 <i class="fa fa-calendar"></i>
-                <span translate>{{ 'from_date' }}</span>
+                <span translate>{{ 'app.admin.statistics.from_date' }}</span>
                 <b class="text-info" id="datepicker-from-info">{{datePickerStart.selected | amDateFormat:'L'}}</b>
-                <span translate>{{ 'to_date' }}</span>
+                <span translate>{{ 'app.admin.statistics.to_date' }}</span>
                 <b class="text-info" id="datepicker-to-info">{{datePickerEnd.selected | amDateFormat:'L'}}</b>
                 <i class="fa fa-caret-down" ng-show="!datePicker.show"></i>
                 <i class="fa fa-caret-up" ng-show="datePicker.show"></i>
@@ -174,7 +180,7 @@
               <div class="datepicker-dropdown" ng-show="datePicker.show">
                 <ul class="list-unstyled p-xs">
                   <li class="row">
-                    <span class="col-md-4" translate>{{ 'start' }}</span>
+                    <span class="col-md-4" translate>{{ 'app.admin.statistics.start' }}</span>
                     <div class="input-group black col-md-7 m-r" id="date_pick_start">
                       <input type="text"
                              class="form-control"
@@ -186,7 +192,7 @@
                              max-date="datePickerStart.maxDate"
                              datepicker-options="datePickerStart.options"
                              show-button-bar="false"
-                             placeholder="{{ 'start' | translate }}"
+                             placeholder="{{ 'app.admin.statistics.start' | translate }}"
                              ng-click="toggleStartDatePicker($event)"
                              required="required"/>
                           <span class="input-group-btn">
@@ -197,7 +203,7 @@
                     </div>
                   </li>
                   <li class="row">
-                    <span class="col-md-4" translate>{{ 'end' }}</span>
+                    <span class="col-md-4" translate>{{ 'app.admin.statistics.end' }}</span>
                     <div class="input-group black col-md-7 m-r" id="date_pick_end">
                       <input type="text"
                              class="form-control"
@@ -209,7 +215,7 @@
                              max-date="datePickerEnd.maxDate"
                              datepicker-options="datePickerEnd.options"
                              show-button-bar="false"
-                             placeholder="{{ 'end' | translate }}"
+                             placeholder="{{ 'app.admin.statistics.end' | translate }}"
                              ng-click="toggleEndDatePicker($event)"
                              required="required"/>
                           <span class="input-group-btn">
@@ -221,7 +227,7 @@
                   </li>
                   <li>
                     <button class="btn btn-default text-primary pull-right" ng-click="validateDateChange()">
-                      <i class="fa fa-check green"></i> <span class="hidden-xs" translate>{{ 'apply' }}</span>
+                      <i class="fa fa-check green"></i> <span class="hidden-xs" translate>{{ 'app.shared.buttons.apply' }}</span>
                     </button>
                   </li>
                 </ul>
@@ -231,25 +237,31 @@
 
           <div id="totaux">
             <ul>
-              <li>{{ 'entries' | translate }} {{totalHits}}</li>
-              <li ng-show="selectedIndex.ca">{{ 'revenue_' | translate }} {{sumCA | currency}}</li>
-              <li>{{ 'average_age' | translate }} {{averageAge}} {{ 'years_old' | translate }}</li>
-              <li ng-if="!type.active.simple">{{ 'total' | translate }} {{type.active.label}} : {{sumStat}}</li>
-              <li ng-repeat="custom in type.active.custom_aggregations">{{ custom.field | translate }} {{customAggs[custom.field]}}</li>
+              <li>{{ 'app.admin.statistics.entries' | translate }} {{totalHits}}</li>
+              <li ng-show="selectedIndex.ca">{{ 'app.admin.statistics.revenue_' | translate }} {{sumCA | currency}}</li>
+              <li>{{ 'app.admin.statistics.average_age' | translate }} {{averageAge}} {{ 'app.admin.statistics.years_old' | translate }}</li>
+              <li ng-if="!type.active.simple">{{ 'app.admin.statistics.total' | translate }} {{type.active.label}} : {{sumStat}}</li>
+              <li ng-repeat="custom in type.active.custom_aggregations">{{ customFieldName(custom.field) }} {{customAggs[custom.field]}}</li>
             </ul>
+          </div>
+
+          <div class="alert alert-info" ng-show="selectedIndex.es_type_key === 'subscription' && selectedIndex.types.length === 0">
+            <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i>
+            <span translate>{{ 'app.admin.statistics.create_plans_to_start' }}</span>
+            <a ui-sref="app.admin.plans.new" translate>{{ 'app.admin.statistics.click_here' }}</a>
           </div>
 
           <table class="table">
             <thead>
               <tr>
-                <th translate>{{ 'date' }}</th>
-                <th translate>{{ 'user' }}</th>
-                <th translate>{{ 'gender' }}</th>
-                <th translate>{{ 'age' }}</th>
-                <th translate>{{ 'type' }}</th>
+                <th translate>{{ 'app.admin.statistics.date' }}</th>
+                <th translate>{{ 'app.admin.statistics.user' }}</th>
+                <th translate>{{ 'app.admin.statistics.gender' }}</th>
+                <th translate>{{ 'app.admin.statistics.age' }}</th>
+                <th translate>{{ 'app.admin.statistics.type' }}</th>
                 <th ng-if="!type.active.simple">{{type.active.label}}</th>
                 <th ng-repeat="field in selectedIndex.additional_fields">{{field.label}}</th>
-                <th ng-if="selectedIndex.ca">{{ 'revenue' | translate }}
+                <th ng-if="selectedIndex.ca">{{ 'app.admin.statistics.revenue' | translate }}
                   <span class="small" ng-click="toggleSorting('ca')">
                     <ng-switch on="sorting.ca">
                       <i class="fa fa-sort-numeric-desc" ng-switch-when="desc"></i>
@@ -265,12 +277,12 @@
                 <td>{{formatDate(datum._source.date)}}</td>
                 <td>
                   <a ng-show="datum._source.userId" ui-sref="app.admin.members_edit({id:datum._source.userId})">{{getUserNameFromId(datum._source.userId)}}</a>
-                  <span class="text-gray text-italic" ng-hide="datum._source.userId" translate>{{ 'deleted_user' }}</span>
+                  <span class="text-gray text-italic" ng-hide="datum._source.userId" translate>{{ 'app.admin.statistics.deleted_user' }}</span>
                 </td>
                 <td>{{formatSex(datum._source.gender)}}</td>
                 <td>
-                  <span ng-if="datum._source.age">{{datum._source.age}} {{ 'years_old' | translate }}</span>
-                  <span ng-if="!datum._source.age" translate>{{ 'unknown' }}</span>
+                  <span ng-if="datum._source.age">{{datum._source.age}} {{ 'app.admin.statistics.years_old' | translate }}</span>
+                  <span ng-if="!datum._source.age" translate>{{ 'app.admin.statistics.unknown' }}</span>
                 </td>
                 <td>{{formatSubtype(datum._source.subType)}}</td>
                 <td ng-if="!type.active.simple">{{datum._source.stat}}</td>
@@ -283,12 +295,12 @@
                     <span ng-switch-default>{{datum._source[field.key]}}</span>
                   </ng-switch>
                 </td>
-                <td ng-if="selectedIndex.ca"><span ng-if="datum._source.ca !== null">{{datum._source.ca | currency}}</span><span ng-if="datum._source.ca === null" translate>{{ 'unknown' }}</span></td>
+                <td ng-if="selectedIndex.ca"><span ng-if="datum._source.ca !== null">{{datum._source.ca | currency}}</span><span ng-if="datum._source.ca === null" translate>{{ 'app.admin.statistics.unknown' }}</span></td>
               </tr>
             </tbody>
           </table>
           <div class="text-center">
-            <button class="btn btn-warning" ng-click="showMoreResults()" ng-hide="data && data.length >= totalHits"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'display_more_results' | translate }}</button>
+            <button class="btn btn-warning" ng-click="showMoreResults()" ng-hide="data && data.length >= totalHits"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.statistics.display_more_results' | translate }}</button>
           </div>
         </uib-tab>
       </uib-tabset>

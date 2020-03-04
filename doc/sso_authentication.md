@@ -1,6 +1,6 @@
-# How to add an authentication method to the Fab-Manager ?
+# How to add an authentication method to the Fab-manager ?
 
-First, take a look at the [OmniAuth list of strategies](https://github.com/intridea/omniauth/wiki/List-of-Strategies) for the Strategy or Developer Strategy you want to add to the Fab-Manager.
+First, take a look at the [OmniAuth list of strategies](https://github.com/intridea/omniauth/wiki/List-of-Strategies) for the Strategy or Developer Strategy you want to add to the Fab-manager.
  
 For this guide, we will consider you want to add a generic *developer strategy*, like LDAP.
 
@@ -36,7 +36,7 @@ class LdapProvider < ActiveRecord::Base
   has_many :ldap_mappings, dependent: :destroy
   accepts_nested_attributes_for :ldap_mappings, allow_destroy: true
 
-  # return the fields you want to protect from being directly managed by the Fab-Manager, typically mapped fields
+  # return the fields you want to protect from being directly managed by the Fab-manager, typically mapped fields
   def protected_fields
     fields = []
     ldap_mappings.each do |mapping|

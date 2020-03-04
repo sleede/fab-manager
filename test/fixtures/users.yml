@@ -77,8 +77,8 @@ user_6:
   current_sign_in_ip:
   last_sign_in_ip:
   confirmation_token:
-  confirmed_at:
-  confirmation_sent_at:
+  confirmed_at: 2016-04-04 15:18:14.124111000 Z
+  confirmation_sent_at: 2016-04-04 15:17:12.522028000 Z
   unconfirmed_email:
   failed_attempts: 0
   unlock_token:
@@ -109,7 +109,7 @@ user_5:
   current_sign_in_ip: 37.64.230.6
   last_sign_in_ip: 37.67.211.2
   confirmation_token: 59cfd407491c4e1d95a9f91f81e710a62a83a6fd7171ad22823b4c4395312c4d
-  confirmed_at:
+  confirmed_at: 2016-04-04 15:18:12.122101000 Z
   confirmation_sent_at: 2016-04-04 15:14:08.599603000 Z
   unconfirmed_email:
   failed_attempts: 0
@@ -173,8 +173,8 @@ user_1:
   current_sign_in_ip: 127.0.0.1
   last_sign_in_ip: 127.0.0.1
   confirmation_token:
-  confirmed_at:
-  confirmation_sent_at:
+  confirmed_at: 2016-04-05 08:40:21.514533000 Z
+  confirmation_sent_at: 2001-01-01 14:11:33.852719000 Z
   unconfirmed_email:
   failed_attempts: 0
   unlock_token:

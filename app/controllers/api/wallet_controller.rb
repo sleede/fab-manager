@@ -18,6 +18,8 @@ class API::WalletController < API::ApiController
   end
 
   def credit
+    return head 422 if Rails.application.secrets.fablab_without_wallet == 'true'
+
     @wallet = Wallet.find(credit_params[:id])
     authorize @wallet
     service = WalletService.new(user: current_user, wallet: @wallet)

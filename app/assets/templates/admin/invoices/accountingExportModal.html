@@ -1,11 +1,11 @@
 <div class="modal-header">
-  <h3 class="text-center red" translate>{{ 'invoices.export_accounting_data' }}</h3>
+  <h3 class="text-center red" translate>{{ 'app.admin.invoices.export_accounting_data' }}</h3>
 </div>
 <div class="modal-body">
   <form role="form" name="exportForm">
     <div class="row">
       <div class="form-group col-md-6">
-        <label for="start_date" translate>{{ 'invoices.export_form_date' }}</label>
+        <label for="start_date" translate>{{ 'app.admin.invoices.export_form_date' }}</label>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
           <input type="text"
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="end_date" translate>{{ 'invoices.export_to_date' }}</label>
+        <label for="end_date" translate>{{ 'app.admin.invoices.export_to_date' }}</label>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
           <input type="text"
@@ -42,36 +42,36 @@
       </div>
     </div>
     <div class="row">
-      <h4 class="control-label m-l" translate>{{ 'invoices.export_to' }}</h4>
+      <h4 class="control-label m-l" translate>{{ 'app.admin.invoices.export_to' }}</h4>
       <div class="form-group m-l-lg">
         <label for="acd">
           <input type="radio" name="acd" id="acd" ng-model="exportTarget.software" ng-value="'acd'" ng-click="fillSettings()" required/>
-          {{ 'invoices.acd' | translate }}
+          {{ 'app.admin.invoices.acd' | translate }}
         </label>
       </div>
     </div>
     <div class="row" ng-show="exportTarget.settings">
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.format' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.format' }}</div>
       <div class="col-md-8">{{ exportTarget.settings.format }}</div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.encoding' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.encoding' }}</div>
       <div class="col-md-8">{{ exportTarget.settings.encoding }}</div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.separator' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.separator' }}</div>
       <div class="col-md-8">{{ exportTarget.settings.separator }}</div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.dateFormat' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.dateFormat' }}</div>
       <div class="col-md-8">
         <a href="https://apidock.com/ruby/DateTime/strftime" class="help-cursor" target="_blank">{{ exportTarget.settings.dateFormat }}</a>
       </div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.labelMaxLength' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.labelMaxLength' }}</div>
       <div class="col-md-8">{{ exportTarget.settings.labelMaxLength }}</div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.decimalSeparator' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.decimalSeparator' }}</div>
       <div class="col-md-8">{{ exportTarget.settings.decimalSeparator }}</div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.exportInvoicesAtZero' }}</div>
-      <div class="col-md-8" translate>{{ exportTarget.settings.exportInvoicesAtZero ? 'yes' : 'no' }}</div>
-      <div class="col-md-4 font-bold" translate>{{ 'invoices.columns' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.exportInvoicesAtZero' }}</div>
+      <div class="col-md-8" translate>{{ exportTarget.settings.exportInvoicesAtZero ? 'app.shared.buttons.yes' : 'app.shared.buttons.no' }}</div>
+      <div class="col-md-4 font-bold" translate>{{ 'app.admin.invoices.columns' }}</div>
       <table class="col-md-12 export-table-template">
         <thead>
           <tr>
-            <td ng-repeat="column in exportTarget.settings.columns" translate>{{ 'invoices.exportColumns.' + column }}</td>
+            <td ng-repeat="column in exportTarget.settings.columns" translate>{{ 'app.admin.invoices.exportColumns.' + column }}</td>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +91,7 @@
     <input name="type" type="hidden" ng-value="exportTarget.software"/>
     <input name="key" type="hidden" ng-value="query.key"/>
     <input name="query" type="hidden" ng-value="query.query"/>
-    <input type="submit" class="btn btn-warning" value="{{ 'confirm' | translate }}" formtarget="export-frame"/>
+    <input type="submit" class="btn btn-warning" value="{{ 'app.shared.buttons.confirm' | translate }}" formtarget="export-frame"/>
   </form>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

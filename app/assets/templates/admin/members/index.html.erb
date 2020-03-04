@@ -7,12 +7,12 @@
     </div>
     <div class="col-xs-8 col-sm-8 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'users_management' }}</h1>
+        <h1 translate>{{ 'app.admin.members.users_management' }}</h1>
       </section>
     </div>
     <div class="col-xs-1 col-xs-offset-1 col-md-offset-2 b-l">
       <section class="heading-actions wrapper">
-        <a role="button" class="btn btn-default b-2x rounded m-t-sm" ui-sref="app.admin.members_import">
+        <a role="button" class="btn btn-default b-2x rounded m-t-sm import-members" ui-sref="app.admin.members_import">
           <i class="fa fa-cloud-upload"></i>
         </a>
       </section>
@@ -21,28 +21,34 @@
   </div>
 </section>
 
-<section class="m-lg">
+<section class="m-lg members-management"
+         ui-tour="members"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupMembersTour">
   <div class="row">
     <div class="col-md-12">
-      <uib-tabset justified="true">
+      <uib-tabset justified="true" active="tabs.active">
 
-        <uib-tab heading="{{ 'members' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/members/members.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.members.members' | translate }}" index="0">
+          <ng-include src="'<%= asset_path "admin/members/members.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'administrators' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/members/administrators.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.members.administrators' | translate }}" class="admins-tab" index="1">
+          <ng-include src="'<%= asset_path "admin/members/administrators.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'groups' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.groups' | translate }}" class="groups-tab" index="2">
           <div ui-view="groups"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'tags' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.tags' | translate }}" class="labels-tab" index="3">
           <div ui-view="tags"></div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'authentication' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members.authentication' | translate }}" class="sso-tab" index="4">
           <div ui-view="authentification"></div>
         </uib-tab>
       </uib-tabset>

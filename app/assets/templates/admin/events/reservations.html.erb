@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1>{{ 'the_reservations' | translate }} {{event.title}}</h1>
+        <h1>{{ 'app.admin.event_reservations.the_reservations' | translate }} {{event.title}}</h1>
       </section>
     </div>
   </div>
@@ -20,35 +20,36 @@
         <table class="table" ng-if="reservations.length > 0">
           <thead>
           <tr>
-            <th style="width:25%" translate>{{ 'user' }}</th>
-            <th style="width:25%" translate>{{ 'payment_date' }}</th>
-            <th style="width:25%" translate>{{ 'reserved_tickets' }}</th>
+            <th style="width:25%" translate>{{ 'app.admin.event_reservations.user' }}</th>
+            <th style="width:25%" translate>{{ 'app.admin.event_reservations.payment_date' }}</th>
+            <th style="width:25%" translate>{{ 'app.admin.event_reservations.reserved_tickets' }}</th>
             <th style="width:25%"></th>
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="reservation in reservations">
+          <tr ng-repeat="reservation in reservations" ng-class="{'disabled': isCancelled(reservation)}">
             <td class="text-c">
               <a ui-sref="app.logged.members_show({id: reservation.user_id})">{{ reservation.user_full_name }} </a>
             </td>
             <td>{{ reservation.created_at | amDateFormat:'LL LTS' }}</td>
             <td>
-              <span ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span>
+              <span ng-if="reservation.nb_reserve_places > 0">{{ 'app.admin.event_reservations.full_price_' | translate }} {{reservation.nb_reserve_places}}<br/></span>
               <span ng-repeat="ticket in reservation.tickets">{{ticket.event_price_category.price_category.name}} : {{ticket.booked}}</span>
+              <div ng-show="isCancelled(reservation)" class="canceled-marker" translate>{{ 'app.admin.event_reservations.canceled' }}</div>
             </td>
             <td>
               <div class="buttons">
                 <button class="btn btn-default" ui-sref="app.public.events_show({id: event.id})">
-                  <i class="fa fa-tag"></i> {{ 'show_the_event' | translate }}
+                  <i class="fa fa-tag"></i> {{ 'app.admin.event_reservations.show_the_event' | translate }}
                 </button>
               </div>
             </td>
           </tr>
           </tbody>
         </table>
-        <p ng-if="reservations.length == 0" translate>{{ 'no_reservations_for_now' }}</p>
+        <p ng-if="reservations.length == 0" translate>{{ 'app.admin.event_reservations.no_reservations_for_now' }}</p>
 
-        <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.events" translate>{{ 'back_to_monitoring' }}</button>
+        <button type="button" class="btn btn-warning m-t m-b" ui-sref="app.admin.events" translate>{{ 'app.admin.event_reservations.back_to_monitoring' }}</button>
       </div>
     </div>
   </section>

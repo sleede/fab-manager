@@ -56,14 +56,7 @@ class EventsController {
      * @param content {Object} JSON - The upload's result
      */
     $scope.submited = function (content) {
-      if ((content.id == null)) {
-        $scope.alerts = [];
-        angular.forEach(content, function (v, k) {
-          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
-        });
-      } else {
-        $state.go('app.public.events_list');
-      }
+      $scope.onSubmited(content);
     };
 
     /**
@@ -160,8 +153,8 @@ class EventsController {
 /**
  * Controller used in the events listing page (admin view)
  */
-Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t',
-  function ($scope, $state, dialogs, $uibModal, growl, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t) {
+Application.Controllers.controller('AdminEventsController', ['$scope', '$state', 'dialogs', '$uibModal', 'growl', 'Event', 'Category', 'EventTheme', 'AgeRange', 'PriceCategory', 'eventsPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, dialogs, $uibModal, growl, Event, Category, EventTheme, AgeRange, PriceCategory, eventsPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, _t, Member, uiTourService) {
   /* PUBLIC SCOPE */
 
     // By default, the pagination mode is activated to limit the page size
@@ -196,6 +189,9 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
     $scope.eventsScope =
       { selected: '' };
 
+    // default tab: events list
+    $scope.tabs = { active: 0 };
+
     /**
      * Adds a bucket of events to the bottom of the page, grouped by month
      */
@@ -228,26 +224,26 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.removeElement = function (model, index) {
       if ((model === 'category') && (getModel(model)[1].length === 1)) {
-        growl.error(_t('at_least_one_category_is_required') + ' ' + _t('unable_to_delete_the_last_one'));
+        growl.error(_t('app.admin.events.at_least_one_category_is_required') + ' ' + _t('app.admin.events.unable_to_delete_the_last_one'));
         return false;
       }
       if (getModel(model)[1][index].related_to > 0) {
-        growl.error(_t('unable_to_delete_ELEMENT_already_in_use_NUMBER_times', { ELEMENT: model, NUMBER: getModel(model)[1][index].related_to }, 'messageformat'));
+        growl.error(_t('app.admin.events.unable_to_delete_ELEMENT_already_in_use_NUMBER_times', { ELEMENT: model, NUMBER: getModel(model)[1][index].related_to }));
         return false;
       }
       return dialogs.confirm({
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_ELEMENT', { ELEMENT: model }, 'messageformat')
+              title: _t('app.admin.events.confirmation_required'),
+              msg: _t('app.admin.events.do_you_really_want_to_delete_this_ELEMENT', { ELEMENT: model })
             };
           }
         }
       }
       , function () { // delete confirmed
         getModel(model)[0].delete(getModel(model)[1][index], null, function () { getModel(model)[1].splice(index, 1); }
-          , function () { growl.error(_t('unable_to_delete_an_error_occured')); });
+          , function () { growl.error(_t('app.admin.events.unable_to_delete_an_error_occured')); });
       });
     };
 
@@ -292,10 +288,10 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
         // save the price category to the API
         PriceCategory.save(p_cat, function (cat) {
           $scope.priceCategories.push(cat);
-          return growl.success(_t('price_category_successfully_created'));
+          return growl.success(_t('app.admin.events.price_category_successfully_created'));
         }
         , function (err) {
-          growl.error(_t('unable_to_add_the_price_category_check_name_already_used'));
+          growl.error(_t('app.admin.events.unable_to_add_the_price_category_check_name_already_used'));
           return console.error(err);
         });
       });
@@ -308,7 +304,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.editPriceCategory = function (id, index) {
       if ($scope.priceCategories[index].id !== id) {
-        return growl.error(_t('unexpected_error_occurred_please_refresh'));
+        return growl.error(_t('app.admin.events.unexpected_error_occurred_please_refresh'));
       } else {
         return $uibModal.open({
           templateUrl: '<%= asset_path "admin/events/price_form.html" %>',
@@ -320,10 +316,10 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
           // update the price category to the API
           PriceCategory.update({ id }, { price_category: p_cat }, function (cat) {
             $scope.priceCategories[index] = cat;
-            return growl.success(_t('price_category_successfully_updated'));
+            return growl.success(_t('app.admin.events.price_category_successfully_updated'));
           }
           , function (err) {
-            growl.error(_t('unable_to_update_the_price_category'));
+            growl.error(_t('app.admin.events.unable_to_update_the_price_category'));
             return console.error(err);
           });
         });
@@ -337,17 +333,17 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      */
     $scope.removePriceCategory = function (id, index) {
       if ($scope.priceCategories[index].id !== id) {
-        return growl.error(_t('unexpected_error_occurred_please_refresh'));
+        return growl.error(_t('app.admin.events.unexpected_error_occurred_please_refresh'));
       } else if ($scope.priceCategories[index].events > 0) {
-        return growl.error(_t('unable_to_delete_this_price_category_because_it_is_already_used'));
+        return growl.error(_t('app.admin.events.unable_to_delete_this_price_category_because_it_is_already_used'));
       } else {
         return dialogs.confirm(
           {
             resolve: {
               object () {
                 return {
-                  title: _t('confirmation_required'),
-                  msg: _t('do_you_really_want_to_delete_this_price_category')
+                  title: _t('app.admin.events.confirmation_required'),
+                  msg: _t('app.admin.events.do_you_really_want_to_delete_this_price_category')
                 };
               }
             }
@@ -356,10 +352,10 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
             PriceCategory.remove(
               { id },
               function () { // successfully deleted
-                growl.success(_t('price_category_successfully_deleted'));
+                growl.success(_t('app.admin.events.price_category_successfully_deleted'));
                 $scope.priceCategories.splice(index, 1);
               },
-              function () { growl.error(_t('price_category_deletion_failed')); }
+              function () { growl.error(_t('app.admin.events.price_category_deletion_failed')); }
             );
           }
         );
@@ -378,12 +374,127 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
       return $scope.page = 1;
     };
 
+
+    /**
+     * Setup the feature-tour for the admin/events page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupEventsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('events');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.events.welcome.title'),
+        content: _t('app.admin.tour.events.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.events-management .events-list',
+        stepId: 'list',
+        order: 1,
+        title: _t('app.admin.tour.events.list.title'),
+        content: _t('app.admin.tour.events.list.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-list-filter',
+        stepId: 'filter',
+        order: 2,
+        title: _t('app.admin.tour.events.filter.title'),
+        content: _t('app.admin.tour.events.filter.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-categories',
+        stepId: 'categories',
+        order: 3,
+        title: _t('app.admin.tour.events.categories.title'),
+        content: _t('app.admin.tour.events.categories.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-themes',
+        stepId: 'themes',
+        order: 4,
+        title: _t('app.admin.tour.events.themes.title'),
+        content: _t('app.admin.tour.events.themes.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.events-management .events-age-ranges',
+        stepId: 'ages',
+        order: 5,
+        title: _t('app.admin.tour.events.ages.title'),
+        content: _t('app.admin.tour.events.ages.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.events-management .prices-tab',
+        stepId: 'prices',
+        order: 6,
+        title: _t('app.admin.tour.events.prices.title'),
+        content: _t('app.admin.tour.events.prices.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 7,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'list' || nextStep.stepId === 'filter') { $scope.tabs.active = 0; }
+        if (nextStep.stepId === 'categories' || nextStep.stepId === 'ages') { $scope.tabs.active = 1; }
+        if (nextStep.stepId === 'prices') { $scope.tabs.active = 2; }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('events') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'events' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('events') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function () { paginationCheck(eventsPromise, $scope.events); };
+    const initialize = function () {
+      paginationCheck(eventsPromise, $scope.events);
+
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('events');
+        if (tour) { tour.start(); }
+      }
+    };
 
     /**
      * Check if all events are already displayed OR if the button 'load more events'
@@ -391,7 +502,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      * @param lastEvents {Array} last events loaded onto the diplay (ie. last "page")
      * @param events {Array} full list of events displayed on the page (not only the last retrieved)
      */
-    var paginationCheck = function (lastEvents, events) {
+    const paginationCheck = function (lastEvents, events) {
       if (lastEvents.length > 0) {
         if (events.length >= lastEvents[0].nb_total_events) {
           return $scope.paginateActive = false;
@@ -408,7 +519,7 @@ Application.Controllers.controller('AdminEventsController', ['$scope', '$state',
      * @param name {string} 'category', 'theme' or 'age_range'
      * @return {[Object, Array]} model and datastore
      */
-    var getModel = function (name) {
+    const getModel = function (name) {
       switch (name) {
         case 'category': return [Category, $scope.categories];
         case 'theme': return [EventTheme, $scope.themes];
@@ -431,7 +542,16 @@ Application.Controllers.controller('ShowEventReservationsController', ['$scope',
   $scope.event = eventPromise;
 
   // list of reservations for the current event
-  return $scope.reservations = reservationsPromise;
+  $scope.reservations = reservationsPromise;
+
+  /**
+   * Test if the provided reservation has been cancelled
+   * @param reservation {Reservation}
+   * @returns {boolean}
+   */
+  $scope.isCancelled = function(reservation) {
+    return !!(reservation.slots[0].canceled_at);
+  }
 }]);
 
 /**
@@ -474,12 +594,24 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 
     // Possible types of recurrences for an event
     $scope.recurrenceTypes = [
-      { label: _t('none'), value: 'none' },
-      { label: _t('every_days'), value: 'day' },
-      { label: _t('every_week'), value: 'week' },
-      { label: _t('every_month'), value: 'month' },
-      { label: _t('every_year'), value: 'year' }
+      { label: _t('app.admin.events_new.none'), value: 'none' },
+      { label: _t('app.admin.events_new.every_days'), value: 'day' },
+      { label: _t('app.admin.events_new.every_week'), value: 'week' },
+      { label: _t('app.admin.events_new.every_month'), value: 'month' },
+      { label: _t('app.admin.events_new.every_year'), value: 'year' }
     ];
+
+    // triggered when the new event form was submitted to the API and have received an answer
+    $scope.onSubmited = function(content) {
+      if ((content.id == null)) {
+        $scope.alerts = [];
+        angular.forEach(content, function (v, k) {
+          angular.forEach(v, function (err) { $scope.alerts.push({ msg: k + ': ' + err, type: 'danger' }); });
+        });
+      } else {
+        $state.go('app.public.events_list');
+      }
+    };
 
     // Using the EventsController
     return new EventsController($scope, $state);
@@ -489,9 +621,9 @@ Application.Controllers.controller('NewEventController', ['$scope', '$state', 'C
 /**
  * Controller used in the events edition page
  */
-Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise',
-  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('EditEventController', ['$scope', '$state', '$stateParams', 'CSRF', 'eventPromise', 'categoriesPromise', 'themesPromise', 'ageRangesPromise', 'priceCategoriesPromise', '$uibModal', 'growl', '_t',
+  function ($scope, $state, $stateParams, CSRF, eventPromise, categoriesPromise, themesPromise, ageRangesPromise, priceCategoriesPromise, $uibModal, growl, _t) {
+    /* PUBLIC SCOPE */
 
     // API URL where the form will be posted
     $scope.actionUrl = `/api/events/${$stateParams.id}`;
@@ -501,6 +633,9 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
 
     // Retrieve the event details, in case of error the user is redirected to the events listing
     $scope.event = eventPromise;
+
+    // We'll keep track of the initial dates here, for later comparison
+    $scope.initialDates = {};
 
     // List of categories for the events
     $scope.categories = categoriesPromise;
@@ -514,6 +649,83 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
     // List of age ranges
     $scope.ageRanges = ageRangesPromise;
 
+    // Default edit-mode for periodic event
+    $scope.editMode = 'single';
+
+    // show edit-mode modal if event is recurrent
+    $scope.isShowEditModeModal = $scope.event.recurrence_events.length > 0;
+
+    $scope.editRecurrent = function (e) {
+      if ($scope.isShowEditModeModal && $scope.event.recurrence_events.length > 0) {
+        e.preventDefault();
+
+        // open a choice edit-mode dialog
+        const modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '<%= asset_path "events/editRecurrent.html" %>',
+          size: 'md',
+          controller: 'EditRecurrentEventController',
+          resolve: {
+            editMode: function () { return $scope.editMode; },
+            initialDates: function () { return $scope.initialDates; },
+            currentEvent: function () { return $scope.event; }
+          }
+        });
+        // submit form event by edit-mode
+        modalInstance.result.then(function(res) {
+          $scope.isShowEditModeModal = false;
+          $scope.editMode = res.editMode;
+          e.target.click();
+        });
+      }
+    };
+
+    // triggered when the edit event form was submitted to the API and have received an answer
+    $scope.onSubmited = function(data) {
+      if (data.total === data.updated) {
+        if (data.updated > 1) {
+          growl.success(_t(
+            'app.admin.events_edit.events_updated',
+            {COUNT: data.updated - 1}
+          ));
+        } else {
+          growl.success(_t(
+            'app.admin.events_edit.event_successfully_updated'
+          ));
+        }
+      } else {
+        if (data.total > 1) {
+          growl.warning(_t(
+            'app.admin.events_edit.events_not_updated',
+            {TOTAL: data.total, COUNT: data.total - data.updated}
+          ));
+          if (_.find(data.details, { error: 'EventPriceCategory' })) {
+            growl.error(_t(
+              'app.admin.events_edit.error_deleting_reserved_price'
+            ));
+          } else {
+            growl.error(_t(
+              'app.admin.events_edit.other_error'
+            ));
+          }
+        } else {
+          growl.error(_t(
+            'app.admin.events_edit.unable_to_update_the_event'
+          ));
+          if (data.details[0].error === 'EventPriceCategory') {
+            growl.error(_t(
+              'app.admin.events_edit.error_deleting_reserved_price'
+            ));
+          } else {
+            growl.error(_t(
+              'app.admin.events_edit.other_error'
+            ));
+          }
+        }
+      }
+      $state.go('app.public.events_list');
+    };
+
     /* PRIVATE SCOPE */
 
     /**
@@ -526,11 +738,49 @@ Application.Controllers.controller('EditEventController', ['$scope', '$state', '
       $scope.event.start_date = moment($scope.event.start_date).toDate();
       $scope.event.end_date = moment($scope.event.end_date).toDate();
 
+      $scope.initialDates = {
+        start: new Date($scope.event.start_date.valueOf()),
+        end: new Date($scope.event.end_date.valueOf())
+      };
+
       // Using the EventsController
       return new EventsController($scope, $state);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();
+  }
+]);
+
+/**
+ * Controller used in the event edit-mode modal window
+ */
+Application.Controllers.controller('EditRecurrentEventController', ['$scope', '$uibModalInstance', 'editMode', 'growl', 'initialDates', 'currentEvent', '_t',
+  function ($scope, $uibModalInstance, editMode, growl, initialDates, currentEvent, _t) {
+    // with recurrent slots: how many slots should we update?
+    $scope.editMode = editMode;
+
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      $uibModalInstance.close({
+        editMode: $scope.editMode
+      });
+    }
+
+    /**
+     * Test if any of the dates of the event has changed
+     */
+    $scope.hasDateChanged = function() {
+      return (!moment(initialDates.start).isSame(currentEvent.start_date, 'day') || !moment(initialDates.end).isSame(currentEvent.end_date, 'day'));
+    }
+
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
   }
 ]);

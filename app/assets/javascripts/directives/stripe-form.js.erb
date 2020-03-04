@@ -73,7 +73,7 @@ Application.Directives.directive('stripeForm', ['Payment', 'growl', '_t',
             if (response.error.statusText) {
               growl.error(response.error.statusText);
             } else {
-              growl.error(`${_t('payment_card_error')} ${response.error}`);
+              growl.error(`${_t('app.shared.messages.payment_card_error')} ${response.error}`);
             }
             confirmButton.prop('disabled', false);
           } else if (response.requires_action) {

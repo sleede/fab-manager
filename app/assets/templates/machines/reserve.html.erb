@@ -9,7 +9,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1>{{ 'machine_planning' | translate }} : {{machine.name}}</h1>
+        <h1>{{ 'app.logged.machines_reserve.machine_planning' | translate }} : {{machine.name}}</h1>
       </section>
     </div>
   </div>
@@ -19,7 +19,7 @@
 <div class="row no-gutter machine-reserve">
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg" ng-show="!plansAreShown"></div>
-    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path 'plans/_plan.html' %>'"></ng-include>
+    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path "plans/_plan.html" %>'"></ng-include>
   </div>
 
 
@@ -37,6 +37,8 @@
           plan="selectedPlan"
           plan-selection-time="planSelectionTime"
           settings="settings"
+          plans="plans"
+          groups="groups"
           on-slot-added-to-cart="markSlotAsAdded"
           on-slot-removed-from-cart="markSlotAsRemoved"
           on-slot-start-to-modify="markSlotAsModifying"

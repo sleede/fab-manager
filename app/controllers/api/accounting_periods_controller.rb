@@ -14,7 +14,7 @@ class API::AccountingPeriodsController < API::ApiController
 
   def create
     authorize AccountingPeriod
-    @accounting_period = AccountingPeriod.new(period_params.merge(closed_at: DateTime.now, closed_by: current_user.id))
+    @accounting_period = AccountingPeriod.new(period_params.merge(closed_at: DateTime.current, closed_by: current_user.id))
     if @accounting_period.save
       render :show, status: :created, location: @accounting_period
     else

@@ -12,16 +12,16 @@
       </div>
       <div class="col-xs-10 col-sm-10 col-md-7 b-l b-r-md">
         <section class="heading-title">
-          <h1>{{ 'edit_the_project' | translate }} <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'rough_draft' }}</span></h1>
+          <h1>{{ 'app.logged.projects_edit.edit_the_project' | translate }} <span class="badge" ng-if="project.state == 'draft'" translate>{{ 'app.logged.projects_edit.rough_draft' }}</span></h1>
         </section>
       </div>
 
       <div class="col-xs-12 col-sm-12 col-md-4 b-t hide-b-md">
         <section class="heading-actions wrapper">
-         <input type="submit" ng-value="'save_button_value' | translate" class="btn btn-lg btn-warning m-t-xs text-u-c"
+         <input type="submit" ng-value="saveButtonValue()" class="btn btn-lg btn-warning m-t-xs text-u-c"
                 ng-disabled="projectForm.$invalid"/>
-         <div class="btn btn-lg btn-valid btn-success m-t-xs text-u-c" publish-project ng-if="project.state == 'draft'" ng-disabled="projectForm.$invalid" translate>{{ 'publish' }}</div>
-         
+         <div class="btn btn-lg btn-valid btn-success m-t-xs text-u-c" publish-project ng-if="project.state == 'draft'" ng-disabled="projectForm.$invalid" translate>{{ 'app.logged.projects_edit.publish' }}</div>
+
         </section>
       </div>
     </div>
@@ -29,7 +29,7 @@
 
 
 
-    <ng-include src="'<%= asset_path 'projects/_form.html' %>'"></ng-include>
+    <ng-include src="'<%= asset_path "projects/_form.html" %>'"></ng-include>
   </form>
 
 

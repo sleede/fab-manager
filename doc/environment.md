@@ -10,7 +10,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences. 
+The following environment variables configure the addresses of the databases, some credentials, some application behaviours and the localization preferences.
 If you are in a development environment, your can keep most of the default values, otherwise, in production, values must be configured carefully.
 
 The settings in [config/application.yml](../config/application.yml.default) configure the environment variables when the application run in development mode.
@@ -30,7 +30,6 @@ When using docker-compose, you should provide the name of the service in your [d
     POSTGRES_PASSWORD
 
 Password for the PostgreSQL user, as specified in `database.yml` (default: `postgres`).
-Please see [Setup the FabManager database in PostgreSQL](../README.md#setup-fabmanager-in-postgresql) for information on how to create a user and set his password.
 This value is only used when deploying in production, otherwise this is configured in [config/database.yml](../config/database.yml.default).
 When using docker-compose, the default configuration (with `postgres` user) does not uses any password as it is confined in the docker container.
 <a name="REDIS_HOST"></a>
@@ -59,8 +58,9 @@ You can generate such a random key by running `rake secret`.
 Key and secret used to identify you Stripe account through the API.
 Retrieve them from https://dashboard.stripe.com/account/apikeys.
 
-**MANDATORY**: Even if you don't want to charge your customers, you must fill this settings. 
+**MANDATORY**: Even if you don't want to charge your customers, you must fill this settings.
 For this purpose, you can use a stripe account in test mode, which will provide you test keys.
+If you change these keys during the application lifecycle, you must run `rake fablab:stripe:sync_members`, otherwise your users won't be able to do card payments.
 <a name="STRIPE_CURRENCY"></a>
 
     STRIPE_CURRENCY
@@ -99,9 +99,45 @@ Valid stripe API keys are still required, even if you don't require online payme
 
     FABLAB_WITHOUT_INVOICES
 
-If set to 'true', the invoices will be disabled. 
+If set to 'true', the invoices will be disabled.
 This is useful if you have your own invoicing system and you want to prevent Fab-manager from generating and sending invoices to members.
 **Very important**: if you disable invoices, you still have to configure VAT in the interface to prevent errors in accounting and prices.
+<a name="FABLAB_WITHOUT_WALLET"></a>
+
+    FABLAB_WITHOUT_WALLET
+
+If set to 'true', the wallet will be disabled.
+This is useful if you won't use wallet system.
+<a name="PHONE_REQUIRED"></a>
+
+    PHONE_REQUIRED
+
+If set to 'false' the phone number won't be required to register a new user on the software.
+<a name="BOOK_SLOT_AT_SAME_TIME"></a>
+
+    BOOK_SLOT_AT_SAME_TIME
+
+If set to 'false', users won't be able to book a machine/formation/event slot if they already have a reservation the same day at the same time.
+<a name="USER_CONFIRMATION_NEEDED_TO_SIGN_IN"></a>
+
+    USER_CONFIRMATION_NEEDED_TO_SIGN_IN
+
+If set to 'true' the users will need to confirm their email address to be able to sign in.
+Set to 'false' if you don't want this behaviour.
+<a name="EVENTS_IN_CALENDAR"></a>
+
+    EVENTS_IN_CALENDAR
+
+If set to 'true', the admin calendar will display the scheduled events in the current view, as read-only items.
+<a name="SLOT_DURATION"></a>
+
+    SLOT_DURATION
+
+Machine and space availabilities are divided in multiple slots of the duration set by this variable.
+Default value is 60 minutes (1 hour).
+
+⚠ Changing this value during the application life may cause serious issues.
+Please ensure there's no machine/space availabilities opened to reservation or already reserved **in the future** when you change this value.
 <a name="DEFAULT_MAIL_FROM"></a>
 
     DEFAULT_MAIL_FROM
@@ -130,7 +166,7 @@ Identifier of your Google Analytics account.
     RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
 
 Configuration keys of Google ReCaptcha V2 (Checkbox).
-This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided. .
+This is optional, the captcha will be displayed on the sign-up form, only if these keys are provided.
 <a name="DISQUS_SHORTNAME"></a>
 
     DISQUS_SHORTNAME
@@ -142,15 +178,8 @@ See https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname- 
 
     TWITTER_NAME
 
-Identifier of the Twitter account, from witch the last tweet will be fetched and displayed on the home page.
-This value can be graphically overridden during the application's lifecycle in Admin/Customization/Home page/Twitter Feed.
+Identifier of the Twitter account for Twitter share project, event or training
 It will also be used for [Twitter Card analytics](https://dev.twitter.com/cards/analytics).
-<a name="TWITTER_CONSUMER_KEY"></a><a name="TWITTER_CONSUMER_SECRET"></a><a name="TWITTER_ACCESS_TOKEN"></a><a name="TWITTER_ACCESS_TOKEN_SECRET"></a>
-
-    TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN & TWITTER_ACCESS_TOKEN_SECRET
-
-Keys and secrets to access the twitter API.
-Retrieve them from https://apps.twitter.co.
 <a name="FACEBOOK_APP_ID"></a>
 
     FACEBOOK_APP_ID
@@ -197,7 +226,7 @@ If this parameter is not specified, the maximum size allowed will be 5MB.
     MAX_IMPORT_SIZE
 
 Maximum size (in bytes) allowed for import files uploaded on the platform.
-Currently, this is only used to import users from a CSV file. 
+Currently, this is only used to import users from a CSV file.
 If this parameter is not specified, the maximum size allowed will be 5MB.
 <a name="DISK_SPACE_MB_ALERT"></a>
 
@@ -209,15 +238,29 @@ The check will run every weeks and if the threshold is exceeded, an alert will b
 
     ADMIN_EMAIL, ADMIN_PASSWORD
 
-Credentials for the first admin user created when seeding the project. 
-By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed.
+Credentials for the first admin user created when seeding the project.
+By default, theses variables are not present in application.yml because they are only used once, when running the database seed with the command `rake db:seed`.
 <a name="SUPERADMIN_EMAIL"></a>
 
     SUPERADMIN_EMAIL
 
-Optional email of the administrator account in charge of the system administration. 
+Optional email of the administrator account in charge of the system administration.
 If specified, it will be hidden from the administrators list and it will exclusively receive the notifications related to the system administration.
-If not specified, every admins will receive system administration notifications.  
+If not specified, every admins will receive system administration notifications.
+<a name="FORCE_VERSION_CHECK"></a>
+
+    FORCE_VERSION_CHECK
+
+In test and development environments, the version won't be check automatically, unless this variable is set to "true".
+<a name="FEATURE_TOUR_DISPLAY"></a>
+
+    FEATURE_TOUR_DISPLAY
+
+When logged-in as an administrator, a feature tour will be triggered the first time you visit each section of the application.
+You can change this behavior by setting this variable to one of the following values:
+- "once" to keep the default behavior.
+- "session" to display the tours each time you reopen the application.
+- "manual" to prevent displaying the tours automatically; you'll still be able to trigger them by pressing the F1 key.
 
 <a name="internationalization-settings"></a>
 ## Internationalization setting.
@@ -305,7 +348,7 @@ Configure the first day of the week in your locale zone (generally monday or sun
     D3_DATE_FORMAT
 
 Date format for dates displayed in statistics charts.
-See [D3 Wiki](https://github.com/mbostock/d3/wiki/Time-Formatting#format) for available formats.
+See [D3 Wiki](https://github.com/d3/d3-time-format/blob/v2.2.2/README.md#locale_format) for available formats.
 <a name="UIB_DATE_FORMAT"></a>
 
     UIB_DATE_FORMAT
@@ -320,16 +363,21 @@ See [AngularUI documentation](https://angular-ui.github.io/bootstrap/#uibdatepar
 
 Date format for dates shown in exported Excel files (eg. statistics)
 See [Microsoft support](https://support.microsoft.com/en-us/kb/264372) for a list a available formats.
+<a name="ENABLE_IN_CONTEXT_TRANSLATION"></a>
 
+    ENABLE_IN_CONTEXT_TRANSLATION
+
+If set to `true`, and the application in started into a staging environment, this will enable the Crowdin In-context translation layer for the front-end application.
+See [Crowdin documentation](https://support.crowdin.com/in-context-localization/) for more details about this.
+Accordingly, `RAILS_LOCALE` and `APP_LOCALE` must be configured to `ach`.
 <a name="open-projects-settings"></a>
 ## OpenLab settings
-
-This configuration is optional and can only work in production mode. 
-It allows you to display a shared projects gallery and to share your projects with other fablabs.
 <a name="OPENLAB_APP_ID"></a><a name="OPENLAB_APP_SECRET"></a>
 
     OPENLAB_APP_ID, OPENLAB_APP_SECRET
 
+This configuration is optional and can only work in production mode.
+It allows you to display a shared projects gallery and to share your projects with other fablabs.
 Send an email to **contact@fab-manager.com** to get your OpenLab client's credentials.
 <a name="OPENLAB_DEFAULT"></a>
 

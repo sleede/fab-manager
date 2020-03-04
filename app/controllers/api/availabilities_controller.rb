@@ -5,7 +5,7 @@ class API::AvailabilitiesController < API::ApiController
   include FablabConfiguration
 
   before_action :authenticate_user!, except: [:public]
-  before_action :set_availability, only: %i[show update destroy reservations lock]
+  before_action :set_availability, only: %i[show update reservations lock]
   before_action :define_max_visibility, only: %i[machine trainings spaces]
   respond_to :json
 
@@ -14,8 +14,9 @@ class API::AvailabilitiesController < API::ApiController
     start_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:start])
     end_date = ActiveSupport::TimeZone[params[:timezone]].parse(params[:end]).end_of_day
     @availabilities = Availability.includes(:machines, :tags, :trainings, :spaces)
-                                  .where.not(available_type: 'event')
                                   .where('start_at >= ? AND end_at <= ?', start_date, end_date)
+
+    @availabilities = @availabilities.where.not(available_type: 'event') unless Rails.application.secrets.events_in_calendar
 
     @availabilities = @availabilities.where.not(available_type: 'space') if fablab_spaces_deactivated?
   end
@@ -48,6 +49,10 @@ class API::AvailabilitiesController < API::ApiController
     authorize Availability
     @availability = Availability.new(availability_params)
     if @availability.save
+      if params[:availability][:occurrences]
+        service = Availabilities::CreateAvailabilitiesService.new
+        service.create(@availability, params[:availability][:occurrences])
+      end
       render :show, status: :created, location: @availability
     else
       render json: @availability.errors, status: :unprocessable_entity
@@ -65,10 +70,12 @@ class API::AvailabilitiesController < API::ApiController
 
   def destroy
     authorize Availability
-    if @availability.safe_destroy
-      head :no_content
+    service = Availabilities::DeleteAvailabilitiesService.new
+    res = service.delete(params[:id], params[:mode])
+    if res.all? { |r| r[:status] }
+      render json: { deleted: res.length, details: res }, status: :ok
     else
-      head :unprocessable_entity
+      render json: { total: res.length, deleted: res.select { |r| r[:status] }.length, details: res }, status: :unprocessable_entity
     end
   end
 
@@ -140,8 +147,9 @@ class API::AvailabilitiesController < API::ApiController
 
   def availability_params
     params.require(:availability).permit(:start_at, :end_at, :available_type, :machine_ids, :training_ids, :nb_total_places,
-                                         machine_ids: [], training_ids: [], space_ids: [], tag_ids: [],
-                                         machines_attributes: %i[id _destroy])
+                                         :is_recurrent, :period, :nb_periods, :end_date,
+                                         machine_ids: [], training_ids: [], space_ids: [], tag_ids: [], plan_ids: [],
+                                         machines_attributes: %i[id _destroy], plans_attributes: %i[id _destroy])
   end
 
   def lock_params

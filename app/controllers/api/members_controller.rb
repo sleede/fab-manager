@@ -3,7 +3,7 @@
 # API Controller for resources of type User with role 'member'
 class API::MembersController < API::ApiController
   before_action :authenticate_user!, except: [:last_subscribed]
-  before_action :set_member, only: %i[update destroy merge]
+  before_action :set_member, only: %i[update destroy merge complete_tour]
   respond_to :json
 
   def index
@@ -66,7 +66,7 @@ class API::MembersController < API::ApiController
   def destroy
     authorize @member
     @member.destroy
-    sign_out(@member)
+    sign_out(@member) if @member.id == current_user.id
     head :no_content
   end
 
@@ -115,8 +115,16 @@ class API::MembersController < API::ApiController
   def export_members
     authorize :export
 
+    last_update = [
+      User.members.maximum('updated_at'),
+      Profile.where(user_id: User.members).maximum('updated_at'),
+      InvoicingProfile.where(user_id: User.members).maximum('updated_at'),
+      StatisticProfile.where(user_id: User.members).maximum('updated_at'),
+      Subscription.maximum('updated_at')
+    ].max
+
     export = Export.where(category: 'users', export_type: 'members')
-                   .where('created_at > ?', User.with_role(:member).maximum('updated_at'))
+                   .where('created_at > ?', last_update)
                    .last
     if export.nil? || !FileTest.exist?(export.file)
       @export = Export.new(category: 'users', export_type: 'members', user: current_user)
@@ -181,6 +189,19 @@ class API::MembersController < API::ApiController
     @members = User.includes(:profile)
   end
 
+  def complete_tour
+    authorize @member
+
+    if Rails.application.secrets.feature_tour_display == 'session'
+      render json: { tours: [params[:tour]] }
+    else
+      tours = "#{@member.profile.tours} #{params[:tour]}"
+      @member.profile.update_attributes(tours: tours.strip)
+
+      render json: { tours: @member.profile.tours.split }
+    end
+  end
+
   private
 
   def set_member
@@ -223,6 +244,6 @@ class API::MembersController < API::ApiController
   end
 
   def query_params
-    params.require(:query).permit(:search, :order_by, :page, :size)
+    params.require(:query).permit(:search, :filter, :order_by, :page, :size)
   end
 end

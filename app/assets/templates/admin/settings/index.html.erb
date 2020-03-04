@@ -7,37 +7,43 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'settings.customize_the_application' }}</h1>
+        <h1 translate>{{ 'app.admin.settings.customize_the_application' }}</h1>
       </section>
     </div>
 
   </div>
 </section>
 
-<section class="m-lg">
+<section class="m-lg admin-settings"
+         ui-tour="settings"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupSettingsTour">
   <div class="row">
 
     <div class="col-md-12">
-      <uib-tabset justified="true">
+      <uib-tabset justified="true" active="tabs.active">
 
-        <uib-tab heading="{{ 'settings.general' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/settings/general.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.settings.general' | translate }}" index="0">
+          <ng-include src="'<%= asset_path "admin/settings/general.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'settings.home_page' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/settings/home_page.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.settings.home_page' | translate }}" index="1">
+          <ng-include src="'<%= asset_path "admin/settings/home_page.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'settings.about' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/settings/about.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.settings.about' | translate }}" index="2" class="about-page-tab">
+          <ng-include src="'<%= asset_path "admin/settings/about.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'settings.privacy.title' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/settings/privacy.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.settings.privacy.title' | translate }}" index="3" class="privacy-page-tab">
+          <ng-include src="'<%= asset_path "admin/settings/privacy.html" %>'"></ng-include>
         </uib-tab>
 
-        <uib-tab heading="{{ 'settings.reservations' | translate }}">
-          <ng-include src="'<%= asset_path 'admin/settings/reservations.html' %>'"></ng-include>
+        <uib-tab heading="{{ 'app.admin.settings.reservations' | translate }}" index="4">
+          <ng-include src="'<%= asset_path "admin/settings/reservations.html" %>'"></ng-include>
         </uib-tab>
       </uib-tabset>
     </div>

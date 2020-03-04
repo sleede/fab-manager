@@ -77,6 +77,8 @@ class User < ActiveRecord::Base
   scope :active, -> { where(is_active: true) }
   scope :without_subscription, -> { includes(statistic_profile: [:subscriptions]).where(subscriptions: { statistic_profile_id: nil }) }
   scope :with_subscription, -> { joins(statistic_profile: [:subscriptions]) }
+  scope :not_confirmed, -> { where(confirmed_at: nil) }
+  scope :inactive_for_3_years, -> { where('users.last_sign_in_at < ?', 3.years.ago) }
 
   def to_json(*)
     ApplicationController.new.view_context.render(
@@ -89,6 +91,10 @@ class User < ActiveRecord::Base
 
   def self.admins
     User.with_role(:admin)
+  end
+
+  def self.members
+    User.with_role(:member)
   end
 
   def self.superadmin
@@ -108,7 +114,7 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_plan
-    return nil if subscription.nil? || subscription.expired_at < Time.now
+    return nil if subscription.nil? || subscription.expired_at < DateTime.current
 
     subscription.plan
   end
@@ -160,7 +166,8 @@ class User < ActiveRecord::Base
 
   def need_completion?
     statistic_profile.gender.nil? || profile.first_name.blank? || profile.last_name.blank? || username.blank? ||
-      email.blank? || encrypted_password.blank? || group_id.nil? || statistic_profile.birthday.blank? || profile.phone.blank?
+      email.blank? || encrypted_password.blank? || group_id.nil? || statistic_profile.birthday.blank? ||
+      (Rails.application.secrets.phone_required && profile.phone.blank?)
   end
 
   ## Retrieve the requested data in the User and user's Profile tables
@@ -239,7 +246,7 @@ class User < ActiveRecord::Base
 
     # remove the token
     self.auth_token = nil
-    self.merged_at = DateTime.now
+    self.merged_at = DateTime.current
 
     # check that the email duplication was resolved
     if sso_user.email.end_with? '-duplicate'
@@ -288,7 +295,7 @@ class User < ActiveRecord::Base
   end
 
   def confirmation_required?
-    false
+    Rails.application.secrets.user_confirmation_needed_to_sign_in ? super : false
   end
 
   private

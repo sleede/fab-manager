@@ -12,8 +12,8 @@
  */
 'use strict';
 
-Application.Controllers.controller('SettingsController', ['$scope', '$filter', '$uibModal', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t',
-  function ($scope, $filter, $uibModal, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t) {
+Application.Controllers.controller('SettingsController', ['$scope', '$rootScope', '$filter', '$uibModal', 'dialogs', 'Setting', 'growl', 'settingsPromise', 'privacyDraftsPromise', 'cgvFile', 'cguFile', 'logoFile', 'logoBlackFile', 'faviconFile', 'profileImageFile', 'CSRF', '_t', 'Member', 'uiTourService',
+  function ($scope, $rootScope, $filter, $uibModal, dialogs, Setting, growl, settingsPromise, privacyDraftsPromise, cgvFile, cguFile, logoFile, logoBlackFile, faviconFile, profileImageFile, CSRF, _t, Member, uiTourService) {
     /* PUBLIC SCOPE */
 
     // timepickers steps configuration
@@ -48,16 +48,22 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       cgv: false
     };
 
+    // default tab: general
+    $scope.tabs = { active: 0 };
+
     // full history of privacy policy drafts
     $scope.privacyDraftsHistory = [];
 
     // various configurable settings
     $scope.twitterSetting = { name: 'twitter_name', value: settingsPromise.twitter_name };
+    $scope.linkName = { name: 'link_name', value: settingsPromise.link_name };
     $scope.aboutTitleSetting = { name: 'about_title', value: settingsPromise.about_title };
     $scope.aboutBodySetting = { name: 'about_body', value: settingsPromise.about_body };
     $scope.privacyDpoSetting = { name: 'privacy_dpo', value: settingsPromise.privacy_dpo };
     $scope.aboutContactsSetting = { name: 'about_contacts', value: settingsPromise.about_contacts };
     $scope.homeBlogpostSetting = { name: 'home_blogpost', value: settingsPromise.home_blogpost };
+    $scope.homeContent = { name: 'home_content', value: settingsPromise.home_content };
+    $scope.homeCss = { name: 'home_css', value: settingsPromise.home_css };
     $scope.machineExplicationsAlert = { name: 'machine_explications_alert', value: settingsPromise.machine_explications_alert };
     $scope.trainingExplicationsAlert = { name: 'training_explications_alert', value: settingsPromise.training_explications_alert };
     $scope.trainingInformationMessage = { name: 'training_information_message', value: settingsPromise.training_information_message };
@@ -123,11 +129,47 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       value: (settingsPromise.display_name_enable === 'true')
     };
 
+    $scope.fabAnalytics = {
+      name: 'fab_analytics',
+      value: (settingsPromise.fab_analytics === 'true')
+    };
+
     // By default, we display the currently published privacy policy
     $scope.privacyPolicy = {
       version: null,
       bodyTemp: settingsPromise.privacy_body
     };
+
+    // Extend the options for summernote editor, with special tools for home page
+    $scope.summernoteOptsHomePage = angular.copy($rootScope.summernoteOpts);
+    $scope.summernoteOptsHomePage.toolbar[5][1].push('nugget'); // toolbar -> insert -> nugget
+    $scope.summernoteOptsHomePage.nugget = {
+      label: '\uF12E',
+      tooltip: _t('app.admin.settings.home_items'),
+      list: [
+        `<div id="news">${_t('app.admin.settings.item_news')}</div>`,
+        `<div id="projects">${_t('app.admin.settings.item_projects')}</div>`,
+        `<div id="twitter">${_t('app.admin.settings.item_twitter')}</div>`,
+        `<div id="members">${_t('app.admin.settings.item_members')}</div>`,
+        `<div id="events">${_t('app.admin.settings.item_events')}</div>`
+      ]
+    }
+    $scope.summernoteOptsHomePage.height = 400;
+
+    // codemirror editor
+    $scope.codeMirrorEditor = null;
+
+    // Options for codemirror editor, used for custom css
+    $scope.codemirrorOpts = {
+      matchBrackets : true,
+      lineNumbers: true,
+      mode: 'sass'
+    }
+
+    // Show or hide advanced settings
+    $scope.advancedSettings = {
+      open: false
+    }
 
     /**
      * For use with 'ng-class', returns the CSS class name for the uploads previews.
@@ -166,7 +208,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       Setting.update(
         { name: setting.name },
         { value },
-        function () { growl.success(_t('settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`settings.${setting.name}`) })); },
+        function () { growl.success(_t('app.admin.settings.customization_of_SETTING_successfully_saved', { SETTING: _t(`app.admin.settings.${setting.name}`) })); },
         function (error) { console.log(error); }
       );
     };
@@ -191,7 +233,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
           // reset history
           $scope.privacyDraftsHistory = [];
           data.setting.history.forEach(function (draft) {
-            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: draft.created_at }), content: draft.value });
+            $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('app.admin.settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: draft.created_at }), content: draft.value });
           });
           if (type === 'privacy_draft') {
             const orderedHistory = $filter('orderBy')(data.setting.history, 'created_at');
@@ -219,7 +261,7 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
           angular.forEach(v, function(err) { growl.error(err); })
         });
       } else {
-        growl.success(_t('settings.file_successfully_updated'));
+        growl.success(_t('app.admin.settings.file_successfully_updated'));
         if (content.custom_asset.name === 'cgu-file') {
           $scope.cguFile = content.custom_asset;
           $scope.methods.cgu = 'put';
@@ -273,6 +315,162 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       }
     };
 
+    /**
+     * Open a modal showing a sample of the collected data if FabAnalytics is enabled
+     */
+    $scope.analyticsModal = function() {
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/settings/analyticsModal.html" %>',
+        controller: 'AnalyticsModalController',
+        size: 'lg',
+        resolve: {
+          analyticsData: ['FabAnalytics', function (FabAnalytics) { return FabAnalytics.data().$promise; }]
+        }
+      });
+    }
+
+    /**
+     * Reset the home page to its initial state (factory value)
+     */
+    $scope.resetHomePage = function () {
+      dialogs.confirm({
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.settings.confirmation_required'),
+                msg: _t('app.admin.settings.confirm_reset_home_page')
+              };
+            }
+          }
+        }
+        , function () { // confirmed
+          Setting.reset({ name: 'home_content' }, function (data) {
+            $scope.homeContent.value = data.value;
+            growl.success(_t('app.admin.settings.home_content_reset'));
+          })
+        }
+      )
+    }
+
+    /**
+     * Callback triggered when the codemirror editor is loaded into the DOM
+     * @param editor codemirror instance
+     */
+    $scope.codemirrorLoaded = function (editor) {
+      $scope.codeMirrorEditor = editor;
+    }
+
+    /**
+     * Setup the feature-tour for the admin/settings page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupSettingsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('settings');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.settings.welcome.title'),
+        content: _t('app.admin.tour.settings.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.admin-settings .home-page-content h4',
+        stepId: 'home',
+        order: 1,
+        title: _t('app.admin.tour.settings.home.title'),
+        content: _t('app.admin.tour.settings.home.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .home-page-content .note-toolbar .note-insert div',
+        stepId: 'components',
+        order: 2,
+        title: _t('app.admin.tour.settings.components.title'),
+        content: _t('app.admin.tour.settings.components.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .home-page-content .note-toolbar .btn-codeview',
+        stepId: 'codeview',
+        order: 3,
+        title: _t('app.admin.tour.settings.codeview.title'),
+        content: _t('app.admin.tour.settings.codeview.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .reset-button',
+        stepId: 'reset',
+        order: 4,
+        title: _t('app.admin.tour.settings.reset.title'),
+        content: _t('app.admin.tour.settings.reset.content'),
+        placement: 'left'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .home-page-style',
+        stepId: 'css',
+        order: 5,
+        title: _t('app.admin.tour.settings.css.title'),
+        content: _t('app.admin.tour.settings.css.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .about-page-tab',
+        stepId: 'about',
+        order: 6,
+        title: _t('app.admin.tour.settings.about.title'),
+        content: _t('app.admin.tour.settings.about.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .privacy-page-tab',
+        stepId: 'privacy',
+        order: 7,
+        title: _t('app.admin.tour.settings.privacy.title'),
+        content: _t('app.admin.tour.settings.privacy.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.admin-settings .history-select',
+        stepId: 'draft',
+        order: 8,
+        title: _t('app.admin.tour.settings.draft.title'),
+        content: _t('app.admin.tour.settings.draft.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 9,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'home' || nextStep.stepId === 'css') { $scope.tabs.active = 1; }
+        if (nextStep.stepId === 'about') { $scope.tabs.active = 2; }
+        if (nextStep.stepId === 'privacy' || nextStep.stepId === 'draft') { $scope.tabs.active = 3; }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'settings' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -316,10 +514,30 @@ Application.Controllers.controller('SettingsController', ['$scope', '$filter', '
       }
 
       privacyDraftsPromise.setting.history.forEach(function (draft) {
-        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: moment(draft.created_at).format('L LT') }), content: draft.value });
+        $scope.privacyDraftsHistory.push({ id: draft.id, name: _t('app.admin.settings.privacy.draft_from_USER_DATE', { USER: draft.user.name, DATE: moment(draft.created_at).format('L LT') }), content: draft.value });
+      });
+
+      // refresh codemirror to display the fetched setting
+      $scope.$watch('advancedSettings.open', function (newValue) {
+        if (newValue) $scope.codeMirrorEditor.refresh();
+      })
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
       });
     };
 
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('settings');
+        if (tour) { tour.start(); }
+      }
+    };
     // init the controller (call at the end !)
     return initialize();
   }
@@ -347,7 +565,7 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
      */
     $scope.publish = function () {
       saveCb({ name: 'privacy_body', value: privacyPolicy.bodyTemp });
-      growl.info(_t('settings.privacy.users_notified'));
+      growl.info(_t('app.admin.settings.privacy.users_notified'));
       $uibModalInstance.close('privacy_body');
     };
     /**
@@ -358,3 +576,18 @@ Application.Controllers.controller('SavePolicyController', ['$scope', '$uibModal
     };
   }
 ]);
+
+/**
+ * Controller used in the "what do we collect?" modal, about FabAnalytics
+ */
+Application.Controllers.controller('AnalyticsModalController', ['$scope', '$uibModalInstance', 'analyticsData',
+  function ($scope,$uibModalInstance, analyticsData) {
+    // analytics data sample
+    $scope.data = analyticsData;
+
+    // callback to close the modal
+    $scope.close = function () {
+      $uibModalInstance.dismiss();
+    }
+  }
+])

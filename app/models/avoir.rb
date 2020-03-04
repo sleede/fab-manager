@@ -5,6 +5,8 @@
 class Avoir < Invoice
   belongs_to :invoice
 
+  after_create :notify_admins_refund_created
+
   validates :payment_method, inclusion: { in: %w[stripe cheque transfer none cash wallet] }
 
   attr_accessor :invoice_items_ids
@@ -14,6 +16,14 @@ class Avoir < Invoice
   end
 
   def expire_subscription
-    user.subscription.expire(Time.now)
+    user.subscription.expire(DateTime.current)
+  end
+
+  private
+
+  def notify_admins_refund_created
+    NotificationCenter.call type: 'notify_admin_refund_created',
+                            receiver: User.admins,
+                            attached_object: self
   end
 end

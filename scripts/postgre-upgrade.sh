@@ -34,7 +34,7 @@ config()
   fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
-  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
+  read -rp "Is Fab-manager installed at \"$FM_PATH\"? (y/N) " confirm </dev/tty
   if [ "$confirm" = "y" ]; then
     test_docker_compose
     if [[ "$TYPE" = "NOT-FOUND" ]]
@@ -43,7 +43,7 @@ config()
       exit 2
     fi
   else
-    echo "Please run this script from the fab-manager's installation folder"
+    echo "Please run this script from the Fab-manager's installation folder"
     exit 1
   fi
 }
@@ -166,12 +166,18 @@ clean()
   fi
 }
 
+function trap_ctrlc()
+{
+  echo "Ctrl^C, exiting..."
+  exit 2
+}
+
 upgrade_postgres()
 {
   config
   read -rp "Continue with upgrading? (y/N) " confirm </dev/tty
-  if [[ "$confirm" = "y" ]]
-  then
+  if [[ "$confirm" = "y" ]]; then
+    trap "trap_ctrlc" 2 # SIGINT
     OLD='9.4'
     NEW='9.6'
     read_path

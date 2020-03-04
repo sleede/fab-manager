@@ -6,6 +6,7 @@ json.slots reservation.slots do |s|
   json.id s.id
   json.start_at s.start_at.iso8601
   json.end_at s.end_at.iso8601
+  json.canceled_at s.canceled_at&.iso8601
 end
 json.nb_reserve_places reservation.nb_reserve_places
 json.tickets reservation.tickets do |t|
@@ -17,7 +18,7 @@ json.tickets reservation.tickets do |t|
     end
   end
 end
-json.total_booked_seats reservation.total_booked_seats
+json.total_booked_seats reservation.total_booked_seats(canceled: true)
 json.created_at reservation.created_at.iso8601
 json.reservable_id reservation.reservable_id
 json.reservable_type reservation.reservable_type

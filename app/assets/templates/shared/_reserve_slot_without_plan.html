@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1 ng-show="slotNotValidError === 'selectedPlanError'" translate>{{ 'app.shared.cart.selected_plan_dont_match_slot' }}</h1>
+  <h1 ng-show="slotNotValidError === 'userPlanError'" translate>{{ 'app.shared.cart.user_plan_dont_match_slot' }}</h1>
+  <h1 ng-show="slotNotValidError === 'noPlanError'" translate>{{ 'app.shared.cart.no_plan_match_slot' }}</h1>
+</div>
+<div class="modal-body">
+  <div class="font-sbold text-u-c">{{ 'app.shared.cart.datetime_to_time' | translate:{START_DATETIME:(slot.start | amDateFormat:'LLLL'), END_TIME:(slot.end | amDateFormat:'LT') } }}</div>
+  <div class="alert alert-warning m-t-sm m-b-none" ng-show="slot.plan_ids.length > 0">
+    <div class="font-sbold text-u-c" translate>{{ 'app.shared.cart.slot_restrict_plans' }}</div>
+    <div ng-repeat="group in slot.plansGrouped">
+      <div class="font-sbold">{{::group.name}}</div>
+      <ul class="m-n" ng-repeat="plan in group.plans">
+        <li>{{::plan.name}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-info" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+</div>

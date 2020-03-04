@@ -12,8 +12,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
-  function ($rootScope, $scope, $window, $locale, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
+Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
+  function ($rootScope, $scope, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
@@ -23,7 +23,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
 
     // Fab-manager's version
     $scope.version =
-      { version: '' };
+      { current: '' };
 
     // currency symbol for the current locale (cf. angular-i18n)
     $rootScope.currencySymbol = $locale.NUMBER_FORMATS.CURRENCY_SYM;
@@ -37,11 +37,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         $rootScope.currentUser = user;
         Session.create(user);
         getNotifications();
-        // fab-manager's app-version
+        // Fab-manager's app-version
         if (user.role === 'admin') {
           return $scope.version = Version.get();
         } else {
-          return $scope.version = { version: '' };
+          return $scope.version = { current: '' };
         }
       }
     };
@@ -149,7 +149,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                 $uibModalInstance.close(user);
               } else {
                 // the user was not saved in database, something wrong occurred
-                growl.error(_t('unexpected_error_occurred'));
+                growl.error(_t('app.public.common.unexpected_error_occurred'));
               }
             }, function (error) {
               // creation failed...
@@ -169,7 +169,12 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
         }]
       }).result['finally'](null).then(function (user) {
         // when the account was created successfully, set the session to the newly created account
-        $scope.setCurrentUser(user);
+        if(Fablab.userConfirmationNeededToSignIn) {
+          Auth._currentUser = null;
+          growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed'));
+        } else {
+          $scope.setCurrentUser(user);
+        }
       });
       <% end %>
     };
@@ -204,7 +209,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           };
         }]
       }).result['finally'](null).then(function () {
-        growl.success(_t('your_password_was_successfully_changed'));
+        growl.success(_t('app.public.common.your_password_was_successfully_changed'));
         return Auth.login().then(function (user) {
           $scope.setCurrentUser(user);
         }, function (error) {
@@ -262,6 +267,36 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       toggler.toggleClass('active');
     };
 
+    /**
+     * Open the modal dialog showing that an upgrade is available
+     */
+    $scope.versionModal = function() {
+      if ($scope.version.up_to_date) return;
+      if ($rootScope.currentUser.role !== 'admin') return;
+
+      $uibModal.open({
+        templateUrl: '<%= asset_path "admin/versions/upgradeModal.html" %>',
+        controller: 'VersionModalController',
+        resolve: {
+          version() { return $scope.version; }
+        }
+      });
+    }
+
+    /**
+     * Trigger the contextual help "feature tour".
+     * @param event {Object} see https://docs.angularjs.org/guide/expression#-event-
+     */
+    $scope.help = function (event) {
+      event.preventDefault();
+
+      // we wrap the event triggering into a $timeout to prevent conflicting with current $apply
+      $timeout(function () {
+        var evt = new KeyboardEvent('keydown', { key: 'F1' });
+        window.dispatchEvent(evt);
+      });
+    }
+
     /* PRIVATE SCOPE */
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
@@ -299,8 +334,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       // we stop polling notifications when the page is not in foreground
       onPageVisible(function (state) { $rootScope.toCheckNotifications = (state === 'visible'); });
 
-      Setting.get({ name: 'fablab_name' }, function (data) { $scope.fablabName = data.setting.value; });
-      Setting.get({ name: 'name_genre' }, function (data) { $scope.nameGenre = data.setting.value; });
+      Setting.query({ names: "['fablab_name', 'name_genre', 'link_name']" }, function (settings) {
+        $scope.fablabName = settings.fablab_name;
+        $scope.nameGenre = settings.name_genre;
+        $scope.linkName = settings.link_name;
+      });
 
       // shorthands
       $scope.isAuthenticated = Auth.isAuthenticated;
@@ -309,10 +347,10 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     };
 
     /**
-     * Retreive once the notifications from the server and display a message popup for each new one.
+     * Retrieve once the notifications from the server and display a message popup for each new one.
      * Then, periodically check for new notifications.
      */
-    var getNotifications = function () {
+    const getNotifications = function () {
       $rootScope.toCheckNotifications = true;
       if (!$rootScope.checkNotificationsIsInit && !!$rootScope.currentUser) {
         setTimeout(function () {
@@ -325,7 +363,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
             angular.forEach(notifications.notifications, function (n) { toDisplay.push(n); });
 
             if (toDisplay.length < notifications.totals.unread) {
-              toDisplay.push({ message: { description: _t('and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }, 'messageformat') } });
+              toDisplay.push({ message: { description: _t('app.public.common.and_NUMBER_other_notifications', { NUMBER: notifications.totals.unread - toDisplay.length }) } });
             }
 
             angular.forEach(toDisplay, function (notification) { growl.info(notification.message.description); });
@@ -353,7 +391,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     /**
      * Open the modal window allowing the user to log in.
      */
-    var openLoginModal = function (toState, toParams, callback) {
+    const openLoginModal = function (toState, toParams, callback) {
       <% active_provider = AuthProvider.active %>
       <% if active_provider.providable_type != DatabaseProvider.name %>
       $window.location.href = '/sso-redirect';
@@ -375,7 +413,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
               console.error(`Authentication failed: ${JSON.stringify(error)}`);
               $scope.alerts = [];
               return $scope.alerts.push({
-                msg: _t('wrong_email_or_password'),
+                msg: error.data.error,
                 type: 'danger'
               });
             });
@@ -386,6 +424,11 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
           $scope.openSignup = function (e) {
             e.preventDefault();
             return $uibModalInstance.dismiss('signup');
+          };
+
+          $scope.openConfirmationNewModal = function(e) {
+            e.preventDefault();
+            return $uibModalInstance.dismiss('confirmationNew');
           };
 
           return $scope.openResetPassword = function (e) {
@@ -418,13 +461,31 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
                 $scope.alerts = [];
                 return $http.post('/users/password.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function () {
                   $scope.alerts.push({
-                    msg: _t('your_email_address_is_unknown'),
+                    msg: _t('app.public.common.your_email_address_is_unknown'),
                     type: 'danger'
                   });
                 });
               };
             }]
-          }).result['finally'](null).then(function () { growl.info(_t('you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
+          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password')); });
+        } else if (reason === 'confirmationNew') {
+          // open the 'reset password' modal
+          return $uibModal.open({
+            templateUrl: '<%= asset_path "shared/ConfirmationNewModal.html" %>',
+            size: 'sm',
+            controller: ['$scope', '$uibModalInstance', '$http', function ($scope, $uibModalInstance, $http) {
+              $scope.user = { email: '' };
+              return $scope.submitConfirmationNewForm = function () {
+                $scope.alerts = [];
+                return $http.post('/users/confirmation.json', { user: $scope.user }).then(function () { $uibModalInstance.close(); }).catch(function (res) {
+                  $scope.alerts.push({
+                    msg: res.data.errors.email[0],
+                    type: 'danger'
+                  });
+                });
+              };
+            }]
+          }).result['finally'](null).then(function () { growl.info(_t('app.public.common.you_will_receive_confirmation_instructions_by_email_detailed')); });
         }
       });
       // otherwise the user just closed the modal
@@ -437,7 +498,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
      * When the status changes, the callback is triggered with the new status as parameter
      * Inspired by http://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active#answer-1060034
      */
-    var onPageVisible = function (callback) {
+    const onPageVisible = function (callback) {
       let hidden = 'hidden';
 
       const onchange = function (evt) {
@@ -485,3 +546,16 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
     return initialize();
   }
 ]);
+
+/**
+ * Controller used in the modal showing details about the version and the upgrades
+ */
+Application.Controllers.controller('VersionModalController', ['$scope', '$uibModalInstance', 'version', function ($scope, $uibModalInstance, version) {
+  // version infos (current version + upgrade infos from hub)
+  $scope.version = version;
+
+  // callback to close the modal
+  $scope.close = function () {
+    $uibModalInstance.dismiss();
+  }
+}]);

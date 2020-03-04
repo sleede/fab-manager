@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   post 'webhooks' => 'webhooks#create'
@@ -46,6 +47,7 @@ Rails.application.routes.draw do
     resources :admins, only: %i[index create destroy]
     resources :settings, only: %i[show update index], param: :name do
       patch '/bulk_update', action: 'bulk_update', on: :collection
+      put '/reset/:name', action: 'reset', on: :collection
     end
     resources :users, only: %i[index create]
     resources :members, only: %i[index show create update destroy] do
@@ -56,6 +58,7 @@ Rails.application.routes.draw do
       post 'list', action: 'list', on: :collection
       get 'search/:query', action: 'search', on: :collection
       get 'mapping', action: 'mapping', on: :collection
+      patch ':id/complete_tour', action: 'complete_tour', on: :collection
     end
     resources :reservations, only: %i[show create index update]
     resources :notifications, only: %i[index show update] do
@@ -71,7 +74,6 @@ Rails.application.routes.draw do
 
     # for homepage
     get '/last_subscribed/:last' => 'members#last_subscribed'
-    get '/feeds/twitter_timelines' => 'feeds#twitter_timelines'
 
     get 'pricing' => 'pricing#index'
     put 'pricing' => 'pricing#update'
@@ -110,6 +112,11 @@ Rails.application.routes.draw do
       get 'download', action: 'download', on: :member
       post 'list', action: 'list', on: :collection
       get 'first', action: 'first', on: :collection
+    end
+
+    resources :i_calendar, only: %i[index create destroy] do
+      get 'events', on: :member
+      post 'sync', on: :member
     end
 
     # for admin
@@ -160,6 +167,9 @@ Rails.application.routes.draw do
 
     # payments handling
     post 'payments/confirm_payment' => 'payments/confirm_payment'
+
+    # FabAnalytics
+    get 'analytics/data' => 'analytics#data'
   end
 
   # rss
@@ -201,6 +211,8 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
+
+  get 'health' => 'health#status'
 
   apipie
 end

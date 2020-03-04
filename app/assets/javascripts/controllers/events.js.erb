@@ -126,12 +126,15 @@ Application.Controllers.controller('EventsController', ['$scope', '$state', 'Eve
   }
 ]);
 
-Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
-  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('ShowEventController', ['$scope', '$state', '$stateParams', '$rootScope', 'Event', '$uibModal', 'Member', 'Reservation', 'Price', 'CustomAsset', 'Slot', 'eventPromise', 'growl', '_t', 'Wallet', 'helpers', 'dialogs', 'priceCategoriesPromise', 'settingsPromise',
+  function ($scope, $state, $stateParams, $rootScope, Event, $uibModal, Member, Reservation, Price, CustomAsset, Slot, eventPromise, growl, _t, Wallet, helpers, dialogs, priceCategoriesPromise, settingsPromise) {
+    /* PUBLIC SCOPE */
 
     // reservations for the currently shown event
     $scope.reservations = [];
+
+    // current date & time
+    $scope.now = moment();
 
     // user to deal with
     $scope.ctrl =
@@ -166,6 +169,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     // Global config: delay in hours before a booking while changing the booking slot is forbidden
     $scope.moveBookingDelay = parseInt(settingsPromise.booking_move_delay);
 
+    // Global config: is the user authorized to cancel his booking slots?
+    $scope.enableBookingCancel = settingsPromise.booking_cancel_enable === 'true';
+
+    // Global config: delay in hours from now when restrictions occurs about cancelling reservations
+    $scope.cancelBookingDelay = parseInt(settingsPromise.booking_cancel_delay);
+
     // Message displayed to the end user about rules that applies to events reservations
     $scope.eventExplicationsAlert = settingsPromise.event_explications_alert;
 
@@ -174,26 +183,22 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
      * @param event {$resource} angular's Event $resource
      */
     $scope.deleteEvent = function (event) {
-      dialogs.confirm({
+      // open a confirmation dialog
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "events/deleteRecurrent.html" %>',
+        size: 'md',
+        controller: 'DeleteRecurrentEventController',
         resolve: {
-          object () {
-            return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_event')
-            };
-          }
+          eventPromise: ['Event', function (Event) { return Event.get({ id: $scope.event.id }).$promise; }]
         }
-      }, function () {
-        // the admin has confirmed, delete
-        event.$delete(function () {
+      });
+      // once the dialog was closed, do things depending on the result
+      modalInstance.result.then(function (res) {
+        if (res.status == 'success') {
           $state.go('app.public.events_list');
-          return growl.info(_t('event_successfully_deleted'));
-        }, function (error) {
-          console.error(error);
-          growl.error(_t('unable_to_delete_the_event_because_some_users_alredy_booked_it'));
-        });
-      }
-      );
+        }
+      });
     };
 
     /**
@@ -241,13 +246,34 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         $scope.reserveSuccess = false;
         if (!$scope.isAuthenticated()) {
           return $scope.login(null, function (user) {
-            $scope.reserve.toReserve = !$scope.reserve.toReserve;
             if (user.role !== 'admin') {
               return $scope.ctrl.member = user;
             }
+            const sameTimeReservations = findReservationsAtSameTime();
+            if (sameTimeReservations.length > 0) {
+              showReserveSlotSameTimeModal(sameTimeReservations, function(res) {
+                return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+              });
+            } else {
+              return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+            }
           });
         } else {
-          return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+          if ($scope.currentUser.role === 'admin') {
+            return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+          } else {
+            Member.get({ id: $scope.currentUser.id }, function (member) {
+              $scope.ctrl.member = member;
+              const sameTimeReservations = findReservationsAtSameTime();
+              if (sameTimeReservations.length > 0) {
+                showReserveSlotSameTimeModal(sameTimeReservations, function(res) {
+                  return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+                });
+              } else {
+                return $scope.reserve.toReserve = !$scope.reserve.toReserve;
+              }
+            });
+          }
         }
       }
     };
@@ -279,7 +305,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           const amountToPay = helpers.getAmountToPay($scope.reserve.amountTotal, wallet.amount);
           if (($scope.currentUser.role !== 'admin') && (amountToPay > 0)) {
             if ($rootScope.fablabWithoutOnlinePayment) {
-              growl.error(_t('online_payment_disabled'));
+              growl.error(_t('app.public.events_show.online_payment_disabled'));
             } else {
               return payByStripe(reservation);
             }
@@ -291,7 +317,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         });
       } else {
       // otherwise we alert, this error musn't occur when the current user is not admin
-        return growl.error(_t('please_select_a_member_first'));
+        return growl.error(_t('app.public.events_show.please_select_a_member_first'));
       }
     };
 
@@ -342,15 +368,49 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     };
 
     /**
+     * Callback to cancel a reservation
+     * @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
+     */
+    $scope.cancelReservation = function(reservation) {
+      dialogs.confirm({
+        resolve: {
+          object: function() {
+            return {
+              title: _t('app.public.events_show.cancel_the_reservation'),
+              msg: _t('app.public.events_show.do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets')
+            };
+          }
+        }
+      }, function() { // cancel confirmed
+        Slot.cancel({
+          id: reservation.slots[0].id
+        }, function() { // successfully canceled
+          let index;
+          growl.success(_t('app.public.events_show.reservation_was_successfully_cancelled'));
+          index = $scope.reservations.indexOf(reservation);
+          $scope.event.nb_free_places = $scope.event.nb_free_places + reservation.total_booked_seats;
+          $scope.reservations[index].slots[0].canceled_at = new Date();
+        }, function(error) {
+          growl.warning(_t('app.public.events_show.cancellation_failed'));
+        });
+      });
+    };
+
+    /**
+     * Test if the provided reservation has been cancelled
+     * @param reservation {Reservation}
+     * @returns {boolean}
+     */
+    $scope.isCancelled = function(reservation) {
+      return !!(reservation.slots[0].canceled_at);
+    }
+
+    /**
      * Callback to alter an already booked reservation date. A modal window will be opened to allow the user to choose
      * a new date for his reservation (if any available)
      * @param reservation {{id:number, reservable_id:number, nb_reserve_places:number}}
-     * @param e {Object} see https://docs.angularjs.org/guide/expression#-event-
      */
-    $scope.modifyReservation = function (reservation, e) {
-      e.preventDefault();
-      e.stopPropagation();
-
+    $scope.modifyReservation = function (reservation) {
       const index = $scope.reservations.indexOf(reservation);
       return $uibModal.open({
         templateUrl: '<%= asset_path "events/modify_event_reservation_modal.html" %>',
@@ -364,9 +424,9 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
           $scope.reservation = angular.copy(reservation);
 
           // set the reservable_id to the first available event
-          for (e of Array.from(event.recurrence_events)) {
-            if (e.nb_free_places > reservation.total_booked_seats) {
-              $scope.reservation.reservable_id = e.id;
+          for (evt of Array.from(event.recurrence_events)) {
+            if (evt.nb_free_places > reservation.total_booked_seats) {
+              $scope.reservation.reservable_id = evt.id;
               break;
             }
           }
@@ -419,7 +479,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * Checks if the provided reservation is able to be moved (date change)
-     * @param reservation {{total_booked_seats:number}}
+     * @param reservation {{slots:[], total_booked_seats:number}}
      */
     $scope.reservationCanModify = function (reservation) {
       const slotStart = moment(reservation.slots[0].start_at);
@@ -430,6 +490,17 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
         if (e.nb_free_places >= reservation.total_booked_seats) { return isAble = true; }
       });
       return (isAble && $scope.enableBookingMove && (slotStart.diff(now, 'hours') >= $scope.moveBookingDelay));
+    };
+
+    /**
+     * Checks if the provided reservation is able to be cancelled
+     * @param reservation {{slots:[]}}
+     */
+    $scope.reservationCanCancel = function(reservation) {
+      var now, slotStart;
+      slotStart = moment(reservation.slots[0].start_at);
+      now = moment();
+      return $scope.enableBookingCancel && slotStart.diff(now, "hours") >= $scope.cancelBookingDelay;
     };
 
     /**
@@ -567,7 +638,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
     };
 
     /**
-     * Set the current reservation to the default values. This implies to reservation form to be hidden.
+     * Set the current reservation to the default values. This implies the reservation form to be hidden.
      */
     var resetEventReserve = function () {
       if ($scope.event) {
@@ -696,12 +767,12 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
             // Button label
             if ($scope.amount > 0) {
-              $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) }, 'messageformat');
+              $scope.validButtonName = _t('app.public.events_show.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')($scope.amount) });
             } else {
               if ((price.price > 0) && ($scope.walletAmount === 0)) {
-                $scope.validButtonName = _t('confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) }, 'messageformat');
+                $scope.validButtonName = _t('app.public.events_show.confirm_payment_of_html', { ROLE: $scope.currentUser.role, AMOUNT: $filter('currency')(price.price) });
               } else {
-                $scope.validButtonName = _t('confirm');
+                $scope.validButtonName = _t('app.shared.buttons.confirm');
               }
             }
 
@@ -735,7 +806,7 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
 
     /**
      * What to do after the payment was successful
-     * @param resveration {Object} booked reservation
+     * @param reservation {Object} booked reservation
      */
     var afterPayment = function (reservation) {
       $scope.event.nb_free_places = $scope.event.nb_free_places - reservation.total_booked_seats;
@@ -746,6 +817,48 @@ Application.Controllers.controller('ShowEventController', ['$scope', '$state', '
       if ($scope.currentUser.role === 'admin') {
         return $scope.ctrl.member = null;
       }
+    };
+
+    /**
+     * Find user's reservations, the same date at the same time, with event
+     */
+    var findReservationsAtSameTime = function () {
+      let sameTimeReservations = [
+        'training_reservations',
+        'machine_reservations',
+        'space_reservations',
+        'events_reservations'
+      ].map(function(k) {
+        return _.filter($scope.ctrl.member[k], function(r) {
+          if (r.reservable_type === 'Event' && r.reservable.id === $scope.event.id) {
+            return false;
+          }
+          return moment($scope.event.start_time).isSame(r.start_at) ||
+            (moment($scope.event.end_time).isAfter(r.start_at) && moment($scope.event.end_time).isBefore(r.end_at)) ||
+            (moment($scope.event.start_time).isAfter(r.start_at) && moment($scope.event.start_time).isBefore(r.end_at)) ||
+            (moment($scope.event.start_time).isBefore(r.start_at) && moment($scope.event.end_time).isAfter(r.end_at));
+        });
+      });
+      return _.union.apply(null, sameTimeReservations);
+    };
+
+    /**
+     * A modal for show reservations the same date at the same time
+     *
+     * @param sameTimeReservations {Array} reservations the same date at the same time
+     * @param callback {function} callback will invoke when user confirm
+     */
+    var showReserveSlotSameTimeModal = function(sameTimeReservations, callback) {
+      const modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: '<%= asset_path "shared/_reserve_slot_same_time.html" %>',
+        size: 'md',
+        controller: 'ReserveSlotSameTimeController',
+        resolve: {
+          sameTimeReservations: function() { return sameTimeReservations; },
+        }
+      });
+      modalInstance.result.then(callback);
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
@@ -762,3 +875,70 @@ function __range__ (left, right, inclusive) {
   }
   return range;
 }
+
+
+/**
+ * Controller used in the event deletion modal window
+ */
+Application.Controllers.controller('DeleteRecurrentEventController', ['$scope', '$uibModalInstance', 'Event', 'eventPromise', 'growl', '_t',
+  function ($scope, $uibModalInstance, Event, eventPromise, growl, _t) {
+
+    // is the current event (to be deleted) recurrent?
+    $scope.isRecurrent = eventPromise.recurrence_events.length > 0;
+
+    // with recurrent slots: how many slots should we delete?
+    $scope.deleteMode = 'single';
+
+    /**
+     * Confirmation callback
+     */
+    $scope.ok = function () {
+      const { id, start_at, end_at } = eventPromise;
+      // the admin has confirmed, delete the slot
+      Event.delete(
+        { id, mode: $scope.deleteMode },
+        function (res) {
+          // delete success
+          if (res.deleted > 1) {
+            growl.success(_t(
+              'app.public.events_show.events_deleted',
+              {COUNT: res.deleted - 1}
+            ));
+          } else {
+            growl.success(_t(
+              'app.public.events_show.event_successfully_deleted'
+            ));
+          }
+          $uibModalInstance.close({
+            status: 'success',
+            events: res.details.map(function (d) { return d.event.id })
+          });
+        },
+        function (res) {
+          // not everything was deleted
+          const { data } = res;
+          if (data.total > 1) {
+            growl.warning(_t(
+              'app.public.events_show.events_not_deleted',
+              {TOTAL: data.total, COUNT: data.total - data.deleted}
+            ));
+          } else {
+            growl.error(_t(
+              'app.public.events_show.unable_to_delete_the_event'
+            ));
+          }
+          $uibModalInstance.close({
+            status: 'failed',
+            availabilities: data.details.filter(function (d) { return d.status }).map(function (d) { return d.event.id })
+          });
+        });
+    }
+
+    /**
+     * Cancellation callback
+     */
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    }
+  }
+]);

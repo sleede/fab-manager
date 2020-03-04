@@ -77,7 +77,7 @@ config()
   fi
   FM_PATH=$(pwd)
   TYPE="NOT-FOUND"
-  read -rp "Is fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
+  read -rp "Is Fab-manager installed at \"$FM_PATH\"? (y/n) " confirm </dev/tty
   if [ "$confirm" = "y" ]
   then
     # checking disk space (minimum required = 1168323KB)
@@ -100,7 +100,7 @@ config()
     fi
     ES_IP=$(getent ahostsv4 "$ES_HOST" | awk '{ print $1 }' | uniq)
   else
-    echo "Please run this script from the fab-manager's installation folder"
+    echo "Please run this script from the Fab-manager's installation folder"
     exit 1
   fi
 }
@@ -629,13 +629,19 @@ start_upgrade()
   esac
 }
 
+function trap_ctrlc()
+{
+  echo "Ctrl^C, exiting..."
+  exit 2
+}
+
 upgrade_elastic()
 {
   config
   detect_installation
   read -rp "Continue with upgrading? (y/n) " confirm </dev/tty
-  if [[ "$confirm" = "y" ]]
-  then
+  if [[ "$confirm" = "y" ]]; then
+    trap "trap_ctrlc" 2 # SIGINT
     ensure_initial_status_green
     start_upgrade '1.7' '2.4'
     reindex_indices '24'

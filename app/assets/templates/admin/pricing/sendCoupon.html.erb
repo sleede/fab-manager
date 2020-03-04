@@ -1,11 +1,11 @@
 <div class="modal-header">
-  <h3 class="text-center red" translate>{{ 'pricing.send_a_coupon' }}</h3>
+  <h3 class="text-center red" translate>{{ 'app.admin.pricing.send_a_coupon' }}</h3>
 </div>
 <div class="modal-body">
   <select-member></select-member>
   <div class="widget panel b-a m">
     <div class="panel-heading b-b small">
-      <h3 class="panel-title" translate>{{ 'pricing.coupon' }}</h3>
+      <h3 class="panel-title" translate>{{ 'app.admin.pricing.coupon' }}</h3>
     </div>
     <div class="widget-content no-bg auto wrapper">
       <table>
@@ -13,18 +13,18 @@
         <tr><th style="width:60%"></th></tr>
         </thead>
         <tbody>
-        <tr><td translate>{{'pricing.code'}}</td>               <td>{{coupon.code}}</td></tr>
-        <tr><td translate>{{'pricing.discount'}}</td>           <td><span ng-show="coupon.type == 'percent_off'">{{coupon.percent_off}} %</span><span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span></td></tr>
-        <tr><td translate>{{'pricing.validity_per_user'}}</td>  <td translate>{{'pricing.'+coupon.validity_per_user}}</td></tr>
-        <tr><td translate>{{'pricing.valid_until'}}</td>        <td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
-        <tr><td translate>{{'pricing.usages'}}</td>             <td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
-        <tr><td translate>{{'pricing.enabled'}}</td>            <td>{{coupon.active | booleanFormat}}</td></tr>
+        <tr><td translate>{{'app.admin.pricing.code'}}</td>               <td>{{coupon.code}}</td></tr>
+        <tr><td translate>{{'app.admin.pricing.discount'}}</td>           <td><span ng-show="coupon.type == 'percent_off'">{{coupon.percent_off}} %</span><span ng-show="coupon.type == 'amount_off'">{{coupon.amount_off}} {{currencySymbol}}</span></td></tr>
+        <tr><td translate>{{'app.admin.pricing.validity_per_user'}}</td>  <td translate>{{'app.admin.pricing.'+coupon.validity_per_user}}</td></tr>
+        <tr><td translate>{{'app.admin.pricing.valid_until'}}</td>        <td>{{coupon.valid_until | amDateFormat:'L'}}</td></tr>
+        <tr><td translate>{{'app.admin.pricing.usages'}}</td>             <td>{{coupon.usages}} / {{coupon.max_usages | maxCount}}</td></tr>
+        <tr><td translate>{{'app.admin.pricing.enabled'}}</td>            <td>{{coupon.active | booleanFormat}}</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-warning" ng-click="ok()" ng-disabled="ctrl.member == null" translate>{{ 'confirm' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+  <button class="btn btn-warning" ng-click="ok()" ng-disabled="ctrl.member == null" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

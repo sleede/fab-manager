@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l">
       <section class="heading-title">
-        <h1 translate>{{ 'manage_abuses.abuses_list' }}</h1>
+        <h1 translate>{{ 'app.admin.manage_abuses.abuses_list' }}</h1>
       </section>
     </div>
   </div>
@@ -15,24 +15,24 @@
 
 <section class="m-lg">
   <div class="row m-b-md">
-    <span ng-show="abuses.length === 0" translate>{{ 'manage_abuses.no_reports' }}</span>
+    <span ng-show="abuses.length === 0" translate>{{ 'app.admin.manage_abuses.no_reports' }}</span>
     <ul ng-show="abuses.length > 0">
       <li class="abuse" ng-repeat="abuse in abuses">
         <div class="signaled">
           <a ui-sref="app.public.projects_show({id:abuse.signaled.slug})">{{abuse.signaled.name}}</a>,
-          <span translate>{{ 'manage_abuses.published_by' }}</span>
+          <span translate>{{ 'app.admin.manage_abuses.published_by' }}</span>
           <a ui-sref="app.admin.members_edit({id:abuse.signaled.author.id})">{{abuse.signaled.author.full_name}}</a>,
-          <span translate>{{ 'manage_abuses.at_date' }}</span>
+          <span translate>{{ 'app.admin.manage_abuses.at_date' }}</span>
           <span>{{abuse.signaled.published_at | amDateFormat:'L' }}</span>
           <button class="btn btn-success" ng-click="confirmProcess(abuse.id)">
             <i class="fa fa-check"></i>
           </button>
         </div>
         <div class="report">
-          <span translate>{{ 'manage_abuses.at_date' }}</span>
+          <span translate>{{ 'app.admin.manage_abuses.at_date' }}</span>
           <span>{{abuse.created_at | amDateFormat:'L' }}</span>,
           <a href="mailto:{{abuse.email}}">{{abuse.first_name}} {{abuse.last_name}}</a>
-          <span translate>{{ 'manage_abuses.has_reported' }}</span>
+          <span translate>{{ 'app.admin.manage_abuses.has_reported' }}</span>
           <cite>{{ abuse.message }}</cite>
         </div>
       </li>

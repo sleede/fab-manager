@@ -126,8 +126,8 @@ class MembersController {
 /**
  * Controller used in the members/groups management page
  */
-Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export',
-  function ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export) {
+Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 'membersPromise', 'adminsPromise', 'growl', 'Admin', 'dialogs', '_t', 'Member', 'Export', 'uiTourService',
+  function ($scope, $sce, membersPromise, adminsPromise, growl, Admin, dialogs, _t, Member, Export, uiTourService) {
   /* PRIVATE STATIC CONSTANTS */
 
     // number of users loaded each time we click on 'load more...'
@@ -146,7 +146,15 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       // currently displayed page of members
       page: 1,
       // true when all members where loaded
-      noMore: false
+      noMore: false,
+      // default filter for members
+      memberFilter: 'all',
+      // options for members filtering
+      memberFilters: [
+        'all',
+        'not_confirmed',
+        'inactive_for_3_years'
+      ]
     };
 
     // admins list
@@ -154,6 +162,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
 
     // Admins ordering/sorting. Default: not sorted
     $scope.orderAdmin = null;
+
+    // default tab: members list
+    $scope.tabs = { active: 0 };
 
     /**
      * Change the members ordering criterion to the one provided
@@ -183,6 +194,35 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     /**
+     * Ask for confirmation then delete the specified user
+     * @param memberId {number} identifier of the user to delete
+     */
+    $scope.deleteMember = function(memberId) {
+      dialogs.confirm(
+        {
+          resolve: {
+            object () {
+              return {
+                title: _t('app.admin.members.confirmation_required'),
+                msg: $sce.trustAsHtml(_t('app.admin.members.confirm_delete_member') + '<br/><br/>' + _t('app.admin.members.this_may_take_a_while_please_wait'))
+              };
+            }
+          }
+        },
+        function () { // cancel confirmed
+          Member.delete(
+            { id: memberId },
+            function () {
+              $scope.members.splice(findItemIdxById($scope.members, memberId), 1);
+              return growl.success(_t('app.admin.members.member_successfully_deleted'));
+            },
+            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_member')); }
+          );
+        }
+      );
+    }
+
+    /**
      * Ask for confirmation then delete the specified administrator
      * @param admins {Array} full list of administrators
      * @param admin {Object} administrator to delete
@@ -193,8 +233,8 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           resolve: {
             object () {
               return {
-                title: _t('confirmation_required'),
-                msg: $sce.trustAsHtml(_t('do_you_really_want_to_delete_this_administrator_this_cannot_be_undone') + '<br/><br/>' + _t('this_may_take_a_while_please_wait'))
+                title: _t('app.admin.members.confirmation_required'),
+                msg: $sce.trustAsHtml(_t('app.admin.members.do_you_really_want_to_delete_this_administrator_this_cannot_be_undone') + '<br/><br/>' + _t('app.admin.members.this_may_take_a_while_please_wait'))
               };
             }
           }
@@ -203,10 +243,10 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           Admin.delete(
             { id: admin.id },
             function () {
-              admins.splice(findAdminIdxById(admins, admin.id), 1);
-              return growl.success(_t('administrator_successfully_deleted'));
+              admins.splice(findItemIdxById(admins, admin.id), 1);
+              return growl.success(_t('app.admin.members.administrator_successfully_deleted'));
             },
-            function (error) { growl.error(_t('unable_to_delete_the_administrator')); }
+            function (error) { growl.error(_t('app.admin.members.unable_to_delete_the_administrator')); }
           );
         }
       );
@@ -233,16 +273,167 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     };
 
     /**
+     * Callback when the member filter changes: reload the search results
+     */
+    $scope.updateMemberFilter = function () {
+      resetSearchMember();
+      memberSearch();
+    };
+
+    /**
      * Callback to alert the admin that the export request was acknowledged and is
      * processing right now.
      */
     $scope.alertExport = function (type) {
       Export.status({ category: 'users', type }).then(function (res) {
         if (!res.data.exists) {
-          return growl.success(_t('export_is_running_you_ll_be_notified_when_its_ready'));
+          return growl.success(_t('app.admin.members.export_is_running_you_ll_be_notified_when_its_ready'));
         }
       });
     };
+
+
+    /**
+     * Setup the feature-tour for the admin/members page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupMembersTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('members');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.members.welcome.title'),
+        content: _t('app.admin.tour.members.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.members-management .members-list',
+        stepId: 'list',
+        order: 1,
+        title: _t('app.admin.tour.members.list.title'),
+        content: _t('app.admin.tour.members.list.content'),
+        placement: 'top'
+      });
+      uitour.createStep({
+        selector: '.members-management .search-members',
+        stepId: 'search',
+        order: 2,
+        title: _t('app.admin.tour.members.search.title'),
+        content: _t('app.admin.tour.members.search.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.members-management .filter-members',
+        stepId: 'filter',
+        order: 3,
+        title: _t('app.admin.tour.members.filter.title'),
+        content: _t('app.admin.tour.members.filter.content'),
+        placement: 'bottom'
+      });
+      if ($scope.members.length > 0) {
+        uitour.createStep({
+          selector: '.members-management .members-list .buttons',
+          stepId: 'actions',
+          order: 4,
+          title: _t('app.admin.tour.members.actions.title'),
+          content: _t('app.admin.tour.members.actions.content'),
+          placement: 'left'
+        });
+      }
+      uitour.createStep({
+        selector: '.members-management .exports-buttons',
+        stepId: 'exports',
+        order: 5,
+        title: _t('app.admin.tour.members.exports.title'),
+        content: _t('app.admin.tour.members.exports.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.heading .import-members',
+        stepId: 'import',
+        order: 6,
+        title: _t('app.admin.tour.members.import.title'),
+        content: _t('app.admin.tour.members.import.content'),
+        placement: 'left'
+      });
+      uitour.createStep({
+        selector: '.members-management .admins-tab',
+        stepId: 'admins',
+        order: 7,
+        title: _t('app.admin.tour.members.admins.title'),
+        content: _t('app.admin.tour.members.admins.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.members-management .groups-tab',
+        stepId: 'groups',
+        order: 8,
+        title: _t('app.admin.tour.members.groups.title'),
+        content: _t('app.admin.tour.members.groups.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.members-management .labels-tab',
+        stepId: 'labels',
+        order: 9,
+        title: _t('app.admin.tour.members.labels.title'),
+        content: _t('app.admin.tour.members.labels.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.members-management .sso-tab',
+        stepId: 'sso',
+        order: 10,
+        title: _t('app.admin.tour.members.sso.title'),
+        content: _t('app.admin.tour.members.sso.content'),
+        placement: 'bottom',
+        popupClass: 'shift-left-50'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 11,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'list' || nextStep.stepId === 'import') {
+          $scope.tabs.active = 0;
+        }
+        if (nextStep.stepId === 'admins') {
+          $scope.tabs.active = 1;
+        }
+        if (nextStep.stepId === 'groups') {
+          $scope.tabs.active = 2;
+        }
+        if (nextStep.stepId === 'labels') {
+          $scope.tabs.active = 3;
+        }
+        if (nextStep.stepId === 'sso') {
+          $scope.tabs.active = 4;
+        }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'members' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('members') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
 
     /* PRIVATE SCOPE */
 
@@ -253,6 +444,9 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
       if (!membersPromise[0] || (membersPromise[0].maxMembers <= $scope.members.length)) {
         return $scope.member.noMore = true;
       }
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
     };
 
     /**
@@ -261,13 +455,13 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
     var searchTimeout = null;
 
     /**
-     * Iterate through the provided array and return the index of the requested admin
-     * @param admins {Array} full list of users with role 'admin'
-     * @param id {Number} user id of the admin to retrieve in the list
-     * @returns {Number} index of the requested admin, in the provided array
+     * Iterate through the provided array and return the index of the requested item
+     * @param items {Array} full list of users with role 'admin'
+     * @param id {Number} id of the item to retrieve in the list
+     * @returns {Number} index of the requested item, in the provided array
      */
-    var findAdminIdxById = function (admins, id) {
-      return (admins.map(function (admin) { return admin.id; })).indexOf(id);
+    var findItemIdxById = function (items, id) {
+      return (items.map(function (item) { return item.id; })).indexOf(id);
     };
 
     /**
@@ -288,6 +482,7 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
         query: {
           search: $scope.member.searchText,
           order_by: $scope.member.order,
+          filter: $scope.member.memberFilter,
           page: $scope.member.page,
           size: USERS_PER_PAGE
         }
@@ -302,6 +497,18 @@ Application.Controllers.controller('AdminMembersController', ['$scope', '$sce', 
           return $scope.member.noMore = true;
         }
       });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('members');
+        if (tour) { tour.start(); }
+      }
     };
 
     // !!! MUST BE CALLED AT THE END of the controller
@@ -395,10 +602,10 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
               { id: subscription.id },
               { subscription: { expired_at: $scope.new_expired_at, free } },
               function (_subscription) {
-                growl.success(_t('you_successfully_changed_the_expiration_date_of_the_user_s_subscription'));
+                growl.success(_t('app.admin.members_edit.you_successfully_changed_the_expiration_date_of_the_user_s_subscription'));
                 return $uibModalInstance.close(_subscription);
               },
-              function (error) { growl.error(_t('a_problem_occurred_while_saving_the_date')); }
+              function (error) { growl.error(_t('app.admin.members_edit.a_problem_occurred_while_saving_the_date')); }
             );
           };
 
@@ -442,12 +649,12 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           $scope.ok = function () {
             $scope.subscription.user_id = user.id;
             return Subscription.save({ }, { subscription: $scope.subscription }, function (_subscription) {
-              growl.success(_t('subscription_successfully_purchased'));
+              growl.success(_t('app.admin.members_edit.subscription_successfully_purchased'));
               $uibModalInstance.close(_subscription);
               return $state.reload();
             }
             , function (error) {
-              growl.error(_t('a_problem_occurred_while_taking_the_subscription'));
+              growl.error(_t('app.admin.members_edit.a_problem_occurred_while_taking_the_subscription'));
               console.error(error);
             });
           };
@@ -458,7 +665,7 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
           $scope.cancel = function () { $uibModalInstance.dismiss('cancel'); };
         }]
       });
-      // once the form was validated succesfully ...
+      // once the form was validated successfully ...
       return modalInstance.result.then(function (subscription) { $scope.subscription = subscription; });
     };
 
@@ -507,11 +714,11 @@ Application.Controllers.controller('EditMemberController', ['$scope', '$state', 
                 avoir_description: $scope.description
               },
               function (_wallet) {
-                growl.success(_t('wallet_credit_successfully'));
+                growl.success(_t('app.shared.wallet.wallet_credit_successfully'));
                 return $uibModalInstance.close(_wallet);
               },
               function (error) {
-                growl.error(_t('a_problem_occurred_for_wallet_credit'));
+                growl.error(_t('app.shared.wallet.a_problem_occurred_for_wallet_credit'));
                 console.error(error);
               }
             );
@@ -721,11 +928,12 @@ Application.Controllers.controller('NewAdminController', ['$state', '$scope', 'A
       {},
       { admin: $scope.admin },
       function () {
-        growl.success(_t('administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }, 'messageformat'));
+        growl.success(_t('app.admin.admins_new.administrator_successfully_created_he_will_receive_his_connection_directives_by_email', { GENDER: getGender($scope.admin) }));
         return $state.go('app.admin.members');
       }
       , function (error) {
-        console.log(error);
+        growl.error(_t('app.admin.admins_new.failed_to_create_admin') + JSON.stringify(error.data ? error.data : error));
+        console.error(error);
       }
     );
   };

@@ -1,4 +1,4 @@
-# Detailed informations about PostgreSQL usage in fab-manager
+# Detailed informations about PostgreSQL usage in Fab-manager
 
 <a name="run-postgresql-cli"></a>
 ## Run the PostgreSQL command line interface
@@ -37,12 +37,13 @@ scp root@remote.server.fab:/apps/fabmanager/postgresql/fabmanager_production_$(d
 Restore the dump with the following:
 ```bash
 tar xvf fabmanager_production_$(date -I).tar.gz
-sudo cp fabmanager_production_$(date -I).sql .docker/postgresql/
-rake db:drop
-rake db:create
-docker exec -it fabmanager-postgres bash
-cd /var/lib/postgresql/data/
-psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sql
+sudo cp fabmanager_production_$(date -I).sql /apps/fabmanager/postgresql/
+cd /apps/fabmanager/
+docker-compose down
+docker-compose up -d postgres
+docker-compose exec postgres dropdb -U postgres fabmanager_production
+docker-compose exec postgres createdb -U postgres fabmanager_production
+docker-compose exec postgres pg_restore -U postgres -d fablab_production /var/lib/postgresql/data/fabmanager_production_$(date -I).sql
 ```
 
 <a name="postgresql-limitations"></a>
@@ -51,7 +52,7 @@ psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sq
 - While setting up the database, we'll need to activate two PostgreSQL extensions: [unaccent](https://www.postgresql.org/docs/current/static/unaccent.html) and [trigram](https://www.postgresql.org/docs/current/static/pgtrgm.html).
   This can only be achieved if the user, configured in `config/database.yml`, was granted the _SUPERUSER_ role **OR** if these extensions were white-listed.
   So here's your choices, mainly depending on your security requirements:
-  - Use the default PostgreSQL super-user (postgres) as the database user. This is the default behavior in fab-manager.
+  - Use the default PostgreSQL super-user (postgres) as the database user. This is the default behavior in Fab-manager.
   - Set your user as _SUPERUSER_; run the following command in `psql` (after replacing `username` with you user name):
 
     ```sql
@@ -60,7 +61,7 @@ psql -U postgres -d fabmanager_production -f fabmanager_production_$(date -I).sq
 
   - Install and configure the PostgreSQL extension [pgextwlist](https://github.com/dimitri/pgextwlist).
     Please follow the instructions detailed on the extension website to whitelist `unaccent` and `trigram` for the user configured in `config/database.yml`.
-- If you intend to contribute to the project code, you will need to run the test suite with `rake test`.
+- If you intend to contribute to the project code, you will need to run the test suite with `scripts/run-tests.sh`.
   This also requires your user to have the _SUPERUSER_ role.
   Please see the [known issues](../README.md#known-issues) section for more information about this.
 

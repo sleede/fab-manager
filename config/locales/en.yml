@@ -1,5 +1,4 @@
 en:
-
   duration:
     # subscription plan duration
     year:
@@ -62,7 +61,7 @@ en:
     # availability slots in the calendar
     not_available: "Not available"
     i_ve_reserved: "I've reserved"
-    must_be_at_least_1_hour_after_the_start_date: "must be at least 1 hour after the start date"
+    length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
 
   members:
@@ -167,6 +166,7 @@ en:
     first_name: "First name"
     email: "E-mail"
     newsletter: "Newsletter"
+    last_login: "Last login"
     gender: "Gender"
     age: "Age"
     address: "Address"
@@ -236,7 +236,6 @@ en:
     reservations: "Reservations"
     available_seats: "Available seats"
 
-
   api:
     notifications:
       # internal app notifications
@@ -246,7 +245,7 @@ en:
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "A <strong><em>%{RESERVABLE}</em></strong> reservation was made by <strong><em>%{USER}</em></strong>."
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER} </strong> (%{UID})</em> has completed its information."
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "Account imported from <strong><em>%{PROVIDER}</strong> (%{UID})</em> has completed its information."
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "<strong><em>%{USER}</em></strong>'s reservation, on the %{DATE}, was cancelled. Remember to generate a refund invoice if applicable."
       notify_admin_slot_is_modified:
@@ -321,7 +320,7 @@ en:
         statistics_global: "of all the statistics"
         statistics_account: "of the registration statistics"
         statistics_event: "of statistics about events"
-        statistics_machine: "of statistics about machine hours"
+        statistics_machine: "of statistics about machine slots"
         statistics_project: "of statistics about projects"
         statistics_subscription: "of subscription statistics"
         statistics_training: "of statistics about trainings"
@@ -350,10 +349,13 @@ en:
       notify_privacy_policy_changed:
         policy_updated: "Privacy policy updated."
         click_to_show: "Click here to consult"
+      notify_admin_refund_created:
+        refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
+
   statistics:
     # statistics tools for admins
     subscriptions: "Subscriptions"
-    machines_hours: "Machines hours"
+    machines_hours: "Machines slots"
     spaces: "Spaces"
     trainings: "Trainings"
     events: "Events"

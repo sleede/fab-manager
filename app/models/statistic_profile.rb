@@ -30,7 +30,7 @@ class StatisticProfile < ActiveRecord::Base
 
   def age
     if birthday.present?
-      now = Time.now.utc.to_date
+      now = DateTime.current.utc.to_date
       (now - birthday).to_f / AVG_DAYS_PER_YEAR
     else
       ''

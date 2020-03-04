@@ -17,11 +17,11 @@ class API::EventsController < API::ApiController
     if current_user&.admin?
       @events = case params[:scope]
                 when 'future'
-                  @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at DESC')
+                  @events.where('availabilities.start_at >= ?', DateTime.current).order('availabilities.start_at DESC')
                 when 'future_asc'
-                  @events.where('availabilities.start_at >= ?', Time.now).order('availabilities.start_at ASC')
+                  @events.where('availabilities.start_at >= ?', DateTime.current).order('availabilities.start_at ASC')
                 when 'passed'
-                  @events.where('availabilities.start_at < ?', Time.now).order('availabilities.start_at DESC')
+                  @events.where('availabilities.start_at < ?', DateTime.current).order('availabilities.start_at DESC')
                 else
                   @events.order('availabilities.start_at DESC')
                 end
@@ -36,7 +36,7 @@ class API::EventsController < API::ApiController
     limit = params[:limit]
     @events = Event.includes(:event_image, :event_files, :availability, :category)
                    .where('events.nb_total_places != -1 OR events.nb_total_places IS NULL')
-                   .where('availabilities.start_at >= ?', Time.now)
+                   .where('availabilities.start_at >= ?', DateTime.current)
                    .order('availabilities.start_at ASC').references(:availabilities)
                    .limit(limit)
   end
@@ -55,29 +55,17 @@ class API::EventsController < API::ApiController
 
   def update
     authorize Event
-    begin
-      if @event.update(event_params.permit!)
-        render :show, status: :ok, location: @event
-      else
-        render json: @event.errors, status: :unprocessable_entity
-      end
-    rescue ActiveRecord::RecordNotDestroyed => e
-      if e.record.class.name == 'EventPriceCategory'
-        render json: { error: ["#{e.record.price_category.name}: #{t('events.error_deleting_reserved_price')}"] },
-               status: :unprocessable_entity
-      else
-        render json: { error: [t('events.other_error')] }, status: :unprocessable_entity
-      end
-    end
-
+    res = EventService.update(@event, event_params.permit!, params[:edit_mode])
+    render json: { action: 'update', total: res.length, updated: res.select { |r| r[:status] }.length, details: res }, status: :ok, location: @event
   end
 
   def destroy
     authorize Event
-    if @event.safe_destroy
-      head :no_content
+    res = EventService.delete(params[:id], params[:mode])
+    if res.all? { |r| r[:status] }
+      render json: { deleted: res.length, details: res }, status: :ok
     else
-      head :unprocessable_entity
+      render json: { total: res.length, deleted: res.select { |r| r[:status] }.length, details: res }, status: :unprocessable_entity
     end
   end
 

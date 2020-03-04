@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190924140726) do
+ActiveRecord::Schema.define(version: 20200218092221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,11 @@ ActiveRecord::Schema.define(version: 20190924140726) do
     t.integer  "nb_total_places"
     t.boolean  "destroying",      default: false
     t.boolean  "lock",            default: false
+    t.boolean  "is_recurrent"
+    t.integer  "occurrence_id"
+    t.string   "period"
+    t.integer  "nb_periods"
+    t.datetime "end_date"
   end
 
   create_table "availability_tags", force: :cascade do |t|
@@ -245,6 +250,30 @@ ActiveRecord::Schema.define(version: 20190924140726) do
 
   add_index "history_values", ["invoicing_profile_id"], name: "index_history_values_on_invoicing_profile_id", using: :btree
   add_index "history_values", ["setting_id"], name: "index_history_values_on_setting_id", using: :btree
+
+  create_table "i_calendar_events", force: :cascade do |t|
+    t.string   "uid"
+    t.datetime "dtstart"
+    t.datetime "dtend"
+    t.string   "summary"
+    t.string   "description"
+    t.string   "attendee"
+    t.integer  "i_calendar_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "i_calendar_events", ["i_calendar_id"], name: "index_i_calendar_events_on_i_calendar_id", using: :btree
+
+  create_table "i_calendars", force: :cascade do |t|
+    t.string   "url"
+    t.string   "name"
+    t.string   "color"
+    t.string   "text_color"
+    t.boolean  "text_hidden"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "imports", force: :cascade do |t|
     t.integer  "user_id"
@@ -436,6 +465,14 @@ ActiveRecord::Schema.define(version: 20190924140726) do
 
   add_index "plans", ["group_id"], name: "index_plans_on_group_id", using: :btree
 
+  create_table "plans_availabilities", force: :cascade do |t|
+    t.integer "plan_id"
+    t.integer "availability_id"
+  end
+
+  add_index "plans_availabilities", ["availability_id"], name: "index_plans_availabilities_on_availability_id", using: :btree
+  add_index "plans_availabilities", ["plan_id"], name: "index_plans_availabilities_on_plan_id", using: :btree
+
   create_table "price_categories", force: :cascade do |t|
     t.string   "name"
     t.text     "conditions"
@@ -482,6 +519,7 @@ ActiveRecord::Schema.define(version: 20190924140726) do
     t.string   "lastfm"
     t.string   "flickr"
     t.string   "job"
+    t.string   "tours"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -731,6 +769,7 @@ ActiveRecord::Schema.define(version: 20190924140726) do
     t.text     "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -918,6 +957,7 @@ ActiveRecord::Schema.define(version: 20190924140726) do
   add_foreign_key "exports", "users"
   add_foreign_key "history_values", "invoicing_profiles"
   add_foreign_key "history_values", "settings"
+  add_foreign_key "i_calendar_events", "i_calendars"
   add_foreign_key "invoices", "coupons"
   add_foreign_key "invoices", "invoicing_profiles"
   add_foreign_key "invoices", "invoicing_profiles", column: "operator_profile_id"

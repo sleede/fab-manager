@@ -83,7 +83,7 @@ class WalletsTest < ActionDispatch::IntegrationTest
     login_as(admin, scope: :user)
     w = @vlonchamp.wallet
     amount = 10
-    avoir_date = Time.now.end_of_day
+    avoir_date = DateTime.current.end_of_day
     expected_amount = w.amount + amount
     put "/api/wallet/#{w.id}/credit",
         amount: amount,

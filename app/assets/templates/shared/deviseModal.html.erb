@@ -2,7 +2,7 @@
     <div class="modal-header">
       <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
       <h1 translate>
-        {{ 'connection' }}
+        {{ 'app.public.common.connection' }}
       </h1>
     </div>
     <div class="modal-body">
@@ -24,7 +24,7 @@
                          required="required"
                          ng-blur="emailError = !!loginForm.email.$error.email"
                          ng-focus="emailError = false"
-                         placeholder="{{ 'your_email_address' | translate }}" />
+                         placeholder="{{ 'app.public.common.your_email_address' | translate }}" />
                 </div>
               </div>
             </div>
@@ -38,13 +38,16 @@
                          class="form-control"
                          ng-model="user.password"
                          required="required"
-                         placeholder="{{ 'your_password' | translate }}"
+                         placeholder="{{ 'app.public.common.your_password' | translate }}"
                          ng-minlength="8"/>
                 </div>
-                <a href="#" ng-click="openResetPassword($event)" class="text-xs">{{ 'password_forgotten' | translate }}</a>
+                <a href="#" ng-click="openResetPassword($event)" class="text-xs">{{ 'app.public.common.password_forgotten' | translate }}</a>
+                <span ng-if="userConfirmationNeededToSignIn">
+                  <br><a href="#" ng-click="openConfirmationNewModal($event)" class="text-xs">{{ 'app.public.common.confirm_my_account' | translate }}</a>
+                </span>
                 <div class="alert alert-warning m-t-sm m-b-none text-xs p-sm" ng-show='isCapsLockOn' role="alert">
                   <i class="fa fa-warning"></i>
-                  {{ 'caps_lock_is_on' | translate }}
+                  {{ 'app.public.common.caps_lock_is_on' | translate }}
                 </div>
               </div>
             </div>
@@ -53,13 +56,13 @@
 
         </div>
         <div class="panel-footer no-padder">
-          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate>{{ 'confirm' }}</button>
+          <button class="btn btn-valid btn-warning btn-block p-l btn-lg text-u-c r-b" ng-click="login()" ng-disabled="loginForm.$invalid" translate>{{ 'app.shared.buttons.confirm' }}</button>
         </div>
       </div>
       <p class="text-center font-sbold">
-        <span translate>{{ 'not_registered_to_the_fablab' }}</span>
+        <span translate>{{ 'app.public.common.not_registered_to_the_fablab' }}</span>
         <br/>
-        <a href="#" ng-click="openSignup($event)" class="text-u-l" translate>{{ 'create_an_account' }}</a></br>
+        <a href="#" ng-click="openSignup($event)" class="text-u-l" translate>{{ 'app.public.common.create_an_account' }}</a></br>
       </p>
     </div>
 

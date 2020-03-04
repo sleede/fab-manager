@@ -17,7 +17,7 @@
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized('admin')">
       <section class="heading-actions wrapper">
 
-          <a ui-sref="app.admin.events_edit({id: event.id})" ng-if="isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'edit' | translate }}</a>
+          <a ui-sref="app.admin.events_edit({id: event.id})" ng-if="isAuthorized('admin')" class="btn btn-lg btn-warning bg-white b-2x rounded m-t-xs text-u-c text-sm"><i class="fa fa-edit"></i> {{ 'app.shared.buttons.edit' | translate }}</a>
           <a ng-click="deleteEvent(event)" ng-if="isAuthorized('admin')" class="btn btn-lg btn-danger b-2x rounded no-b m-t-xs"><i class="fa fa-trash-o"></i></a>
 
       </section>
@@ -35,14 +35,14 @@
         <img ng-src="{{event.event_image}}" alt="{{event.title}}" class="img-responsive">
       </div>
 
-      <h3 translate>{{ 'event_description' }}</h3>
+      <h3 translate>{{ 'app.public.events_show.event_description' }}</h3>
       <p ng-bind-html="event.description | toTrusted"></p>
     </div>
 
 
     <div class="text-center" id="social-share">
-      <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'share_on_facebook' | translate }}</a>
-      <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'share_on_twitter' | translate }}</a>
+      <a ng-href="{{shareOnFacebook()}}" target="_blank" class="btn btn-facebook btn-lg m-t"><i class="fa fa-facebook m-r"></i> {{ 'app.public.events_show.share_on_facebook' | translate }}</a>
+      <a ng-href="{{shareOnTwitter()}}" target="_blank" class="btn btn-twitter btn-lg m-t"><i class="fa fa-twitter m-r"></i> {{ 'app.public.events_show.share_on_twitter' | translate }}</a>
     </div>
 
   </div>
@@ -52,7 +52,7 @@
     <section class="widget panel b-a m" ng-if="event.event_files_attributes">
       <div class="panel-heading b-b">
         <span class="badge bg-warning pull-right">{{event.event_files_attributes.length}}</span>
-        <h3 translate>{{ 'downloadable_documents' }}</h3>
+        <h3 translate>{{ 'app.public.events_show.downloadable_documents' }}</h3>
       </div>
 
         <ul class="widget-content list-group list-group-lg no-bg auto">
@@ -68,7 +68,7 @@
 
     <section class="widget panel b-a m m-t-lg">
       <div class="panel-heading b-b small">
-        <h3 translate>{{ 'information_and_booking' }}</h3>
+        <h3 translate>{{ 'app.public.events_show.information_and_booking' }}</h3>
       </div>
 
       <div class="panel-content wrapper">
@@ -79,15 +79,15 @@
           <dt ng-if="event.age_range"><i class="fa fa-users" aria-hidden="true"></i> {{event.age_range.name}}</dt>
         </dl>
         <dl class="text-sm">
-          <dt><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'dates' | translate }}</dt>
-          <dd>{{ 'beginning' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'L'}}</span><br>{{ 'ending' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'L'}}</span></dd>
-          <dt><i class="fa fa-clock-o"></i> {{ 'opening_hours' | translate }}</dt>
-          <dd ng-if="event.all_day == 'true'"><span translate>{{ 'all_day' }}</span></dd>
-          <dd ng-if="event.all_day == 'false'">{{ 'from_time' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'LT'}}</span> {{ 'to_time' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'LT'}}</span></dd>
+          <dt><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'app.public.events_show.dates' | translate }}</dt>
+          <dd>{{ 'app.public.events_show.beginning' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'L'}}</span><br>{{ 'app.public.events_show.ending' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'L'}}</span></dd>
+          <dt><i class="fa fa-clock-o"></i> {{ 'app.public.events_show.opening_hours' | translate }}</dt>
+          <dd ng-if="event.all_day == 'true'"><span translate>{{ 'app.public.events_show.all_day' }}</span></dd>
+          <dd ng-if="event.all_day == 'false'">{{ 'app.public.events_show.from_time' | translate }} <span class="text-u-l">{{event.start_date | amDateFormat:'LT'}}</span> {{ 'app.public.events_show.to_time' | translate }} <span class="text-u-l">{{event.end_date | amDateFormat:'LT'}}</span></dd>
         </dl>
 
         <div class="text-sm" ng-if="event.amount">
-          <div>{{ 'full_price_' | translate }} <span>{{ event.amount | currency}}</span></div>
+          <div>{{ 'app.public.events_show.full_price_' | translate }} <span>{{ event.amount | currency}}</span></div>
           <div ng-repeat="price in event.prices" class="description-hover">
             <span uib-popover="{{getPriceCategoryConditions(price.category.id)}}" popover-trigger="mouseenter">
               {{price.category.name}} :
@@ -97,12 +97,12 @@
         </div>
 
         <div class="text-sm m-b" ng-if="event.nb_total_places">
-          <div ng-if="event.nb_free_places > 0">{{ 'tickets_still_availables' | translate }} <span  class="font-sbold">{{event.nb_free_places}}</span></div>
-          <div ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0"><span class="badge font-sbold" translate>{{ 'sold_out' }}</span></div>
-          <div ng-if="event.nb_total_places == -1"><span class="badge font-sbold" translate>{{ 'cancelled' }}</span></div>
+          <div ng-if="event.nb_free_places > 0">{{ 'app.public.events_show.tickets_still_availables' | translate }} <span  class="font-sbold">{{event.nb_free_places}}</span></div>
+          <div ng-if="event.nb_total_places > 0 && event.nb_free_places <= 0"><span class="badge font-sbold" translate>{{ 'app.public.events_show.sold_out' }}</span></div>
+          <div ng-if="event.nb_total_places == -1"><span class="badge font-sbold" translate>{{ 'app.public.events_show.cancelled' }}</span></div>
         </div>
         <div class="text-sm m-b" ng-if="!event.nb_total_places">
-          <div><span class="badge font-sbold" translate>{{ 'free_entry' }}</span></div>
+          <div><span class="badge font-sbold" translate>{{ 'app.public.events_show.free_entry' }}</span></div>
         </div>
 
 
@@ -112,29 +112,29 @@
             <div class="panel panel-default bg-light m-n text-sm">
               <div class="panel-body">
                 <div class="row">
-                  <label class="col-sm-6 control-label">{{ 'full_price_' | translate }} <span class="text-blue">{{event.amount | currency}}</span></label>
+                  <label class="col-sm-6 control-label">{{ 'app.public.events_show.full_price_' | translate }} <span class="text-blue">{{event.amount | currency}}</span></label>
                   <div class="col-sm-6">
                     <select ng-model="reserve.nbReservePlaces" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces.normal">
-                    </select> {{ 'ticket' | translate:{NUMBER:reserve.nbReservePlaces}:"messageformat" }}
+                    </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.nbReservePlaces} }}
                   </div>
                 </div>
                 <div class="row" ng-repeat="price in event.prices">
                   <label class="col-sm-6 control-label">{{price.category.name}} : <span class="text-blue">{{price.amount | currency}}</span></label>
                   <div class="col-sm-6">
                     <select ng-model="reserve.tickets[price.id]" ng-change="changeNbPlaces()" ng-options="i for i in reserve.nbPlaces[price.id]">
-                    </select> {{ 'ticket' | translate:{NUMBER:reserve.tickets[price.id]}:"messageformat" }}
+                    </select> {{ 'app.public.events_show.ticket' | translate:{NUMBER:reserve.tickets[price.id]} }}
                   </div>
                 </div>
 
                 <div ng-show="currentUser.role == 'admin'" class="m-t">
-                    <label for="offerSlot" class="control-label m-r" translate>{{ 'make_a_gift_of_this_reservation' }}</label>
+                    <label for="offerSlot" class="control-label m-r" translate>{{ 'app.public.events_show.make_a_gift_of_this_reservation' }}</label>
                     <input bs-switch
                            ng-model="event.offered"
                            id="offerSlot"
                            type="checkbox"
                            class="form-control"
-                           switch-on-text="{{ 'yes' | translate }}"
-                           switch-off-text="{{ 'no' | translate }}"
+                           switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+                           switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
                            switch-animate="true"
                            switch-readonly="{{trainingIsValid}}"
                            ng-change="computeEventAmount()"/>
@@ -145,36 +145,49 @@
           </div>
 
           <div class="clear">
-            <a class="pull-right m-t-xs text-u-l ng-scope" href="#" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'cancel' }}</a>
+            <a class="pull-right m-t-xs text-u-l ng-scope" href="#" ng-click="cancelReserve($event)" ng-show="reserve.toReserve" translate>{{ 'app.shared.buttons.cancel' }}</a>
           </div>
 
-          <div ng-if="reserveSuccess" class="alert alert-success">{{ 'thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
-            {{ 'you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'dashboard' }}</a>
+          <div ng-if="reserveSuccess" class="alert alert-success">{{ 'app.public.events_show.thank_you_your_payment_has_been_successfully_registered' | translate }}<br>
+            {{ 'app.public.events_show.you_can_find_your_reservation_s_details_on_your_' | translate }} <a ui-sref="app.logged.dashboard.invoices" translate>{{ 'app.public.events_show.dashboard' }}</a>
           </div>
-          <div class="well well-warning m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
-            <div class="font-sbold text-u-c text-sm">{{ 'you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
-            <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'ticket' | translate:{NUMBER:reservation.nb_reserve_places}:"messageformat" }}</div>
-            <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
-              {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'ticket' | translate:{NUMBER:ticket.booked}:"messageformat" }}
+          <div class="m-t-sm" ng-if="reservations && !reserve.toReserve" ng-repeat="reservation in reservations">
+            <div ng-hide="isCancelled(reservation)" class="well well-warning">
+              <div class="font-sbold text-u-c text-sm">{{ 'app.public.events_show.you_booked_DATE' | translate:{DATE:(reservation.created_at | amDateFormat:'L LT')} }}</div>
+              <div class="font-sbold text-sm" ng-if="reservation.nb_reserve_places > 0">{{ 'app.public.events_show.full_price_' | translate }} {{reservation.nb_reserve_places}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:reservation.nb_reserve_places} }}</div>
+              <div class="font-sbold text-sm" ng-repeat="ticket in reservation.tickets">
+                {{ticket.event_price_category.price_category.name}} : {{ticket.booked}} {{ 'app.public.events_show.ticket' | translate:{NUMBER:ticket.booked} }}
+              </div>
+              <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
+                <a class="pull-right m-t-xs text-u-l pointer" ng-click="modifyReservation(reservation, $event)" translate>{{ 'app.shared.buttons.change' }}</a>
+              </div>
+              <div class="clear" ng-if="reservationCanCancel(reservation)">
+                <a class="pull-right m-t-xs text-u-l pointer" ng-click="cancelReservation(reservation, $event)" translate>{{ 'app.shared.buttons.cancel' }}</a>
+              </div>
             </div>
-            <div class="clear" ng-if="event.recurrence_events.length > 0 && reservationCanModify(reservation)">
-              <a class="pull-right m-t-xs text-u-l" href="#" ng-click="modifyReservation(reservation, $event)" translate>{{ 'change' }}</a>
+            <div ng-show="isCancelled(reservation)" class="well well-disabled">
+              <div class="text-italic text-sm">{{ 'app.public.events_show.canceled_reservation_SEATS' | translate:{SEATS:reservation.total_booked_seats} }}</div>
             </div>
           </div>
 
 
-          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve">{{ 'book' | translate }}</button>
+          <div ng-show="now.isSameOrAfter(event.end_date)" class="alert alert-info">
+            <span translate>{{ 'app.public.events_show.event_is_over' }}</span>
+            <span ng-show="reservations.length > 0" translate>{{ 'app.public.events_show.thanks_for_coming' }}</span>
+            <a ui-sref="app.public.events_list" translate>{{ 'app.public.events_show.view_event_list' }}</a>
+          </div>
+          <button class="btn btn-warning-full rounded btn-block text-sm" ng-click="reserveEvent()" ng-show="event.nb_free_places > 0 && !reserve.toReserve && now.isBefore(event.end_date)">{{ 'app.public.events_show.book' | translate }}</button>
 
           <coupon show="reserve.totalSeats > 0 && ctrl.member" coupon="coupon.applied" total="reserve.totalNoCoupon" user-id="{{ctrl.member.id}}"></coupon>
         </div>
       </div>
 
       <div class="panel-footer no-padder ng-scope" ng-if="event.amount">
-        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
+        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="payEvent()" ng-if="reserve.totalSeats > 0">{{ 'app.public.events_show.confirm_and_pay' | translate }} {{reserve.amountTotal | currency}}</button>
       </div>
 
       <div class="panel-footer no-padder ng-scope" ng-if="event.amount == 0">
-        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'confirm' | translate }}</button>
+        <button class="btn btn-valid btn-info btn-block p-l btn-lg text-u-c r-b text-base" ng-click="validReserveEvent()" ng-if="reserve.totalSeats > 0" ng-disabled="attempting">{{ 'app.shared.buttons.confirm' | translate }}</button>
       </div>
 
     </section>

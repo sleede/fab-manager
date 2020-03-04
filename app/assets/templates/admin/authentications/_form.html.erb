@@ -1,5 +1,5 @@
 <div class="form-group" ng-class="{'has-error': providerForm['auth_provider[name]'].$dirty && providerForm['auth_provider[name]'].$invalid}">
-    <label for="provider_name" class="col-sm-3 control-label" translate>{{ 'name' }}</label>
+    <label for="provider_name" class="col-sm-3 control-label" translate>{{ 'app.shared.authentication.name' }}</label>
     <div class="col-sm-9">
         <input type="text"
                ng-model="provider.name"
@@ -8,23 +8,23 @@
                id="provider_name"
                ng-disabled="mode == 'edition'"
                required />
-        <span class="help-block" ng-show="providerForm['auth_provider[name]'].$dirty && providerForm['auth_provider[name]'].$error.required" translate>{{ 'provider_name_is_required' }}</span>
+        <span class="help-block" ng-show="providerForm['auth_provider[name]'].$dirty && providerForm['auth_provider[name]'].$error.required" translate>{{ 'app.shared.authentication.provider_name_is_required' }}</span>
     </div>
 </div>
 
 <div class="form-group" ng-class="{'has-error': providerForm['auth_provider[providable_type]'].$dirty && providerForm['auth_provider[providable_type]'].$invalid}">
-    <label for="provider_type" class="col-sm-3 control-label" translate>{{ 'authentication_type' }}</label>
+    <label for="provider_type" class="col-sm-3 control-label" translate>{{ 'app.shared.authentication.authentication_type' }}</label>
     <div class="col-sm-9">
         <select ng-model="provider.providable_type"
                 ng-change="updateProvidable()"
                 class="form-control"
                 name="auth_provider[providable_type]"
                 id="provider_type"
-                ng-options="key as (value | translate) for (key, value) in authMethods"
+                ng-options="key as methodName(key) for (key, value) in authMethods"
                 ng-disabled="mode == 'edition'"
                 required>
         </select>
         <input type="hidden" name="auth_provider[type]" ng-value="provider.type" />
-        <span class="help-block" ng-show="providerForm['auth_provider[providable_type]'].$dirty && providerForm['auth_provider[providable_type]'].$error.required" translate>{{ 'authentication_type_is_required' }}</span>
+        <span class="help-block" ng-show="providerForm['auth_provider[providable_type]'].$dirty && providerForm['auth_provider[providable_type]'].$error.required" translate>{{ 'app.shared.authentication.authentication_type_is_required' }}</span>
     </div>
 </div>

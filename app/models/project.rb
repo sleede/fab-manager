@@ -151,7 +151,7 @@ class Project < ActiveRecord::Base
   def after_save_and_publish
     return unless state_changed? && published?
 
-    update_columns(published_at: Time.now)
+    update_columns(published_at: DateTime.current)
     notify_admin_when_project_published
   end
 end

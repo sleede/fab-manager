@@ -1,0 +1,409 @@
+ach:
+  duration:
+    #subscription plan duration
+    year:
+      one: 'crwdns3157:1crwdne3157:1'
+      other: 'crwdns3157:5%{count}crwdne3157:5'
+    month:
+      one: 'crwdns3159:1crwdne3159:1'
+      other: 'crwdns3159:5%{count}crwdne3159:5'
+    week:
+      one: 'crwdns3161:1crwdne3161:1'
+      other: 'crwdns3161:5%{count}crwdne3161:5'
+  time:
+    formats:
+      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
+      hour_minute: "%I:%M %p"
+  errors:
+    messages:
+      #CarrierWave
+      carrierwave_processing_error: "crwdns3165:0crwdne3165:0"
+      carrierwave_integrity_error: "crwdns3167:0crwdne3167:0"
+      carrierwave_download_error: "crwdns3169:0crwdne3169:0"
+      extension_white_list_error: "crwdns3171:0%{extension}crwdnd3171:0%{allowed_types}crwdne3171:0"
+      extension_black_list_error: "crwdns3173:0%{extension}crwdnd3173:0%{prohibited_types}crwdne3173:0"
+      rmagick_processing_error: "crwdns3175:0%{e}crwdne3175:0"
+      mime_types_processing_error: "crwdns3177:0%{e}crwdne3177:0"
+      mini_magick_processing_error: "crwdns3179:0%{e}crwdne3179:0"
+      wrong_size: "crwdns3181:0%{file_size}crwdne3181:0"
+      size_too_small: "crwdns3183:0%{file_size}crwdne3183:0"
+      size_too_big: "crwdns3185:0%{file_size}crwdne3185:0"
+      export_not_found: "crwdns3187:0crwdne3187:0"
+      percentage_out_of_range: "crwdns3189:0crwdne3189:0"
+      cannot_be_blank_at_same_time: "crwdns3191:0%{field}crwdne3191:0"
+      cannot_be_in_the_past: "crwdns3193:0crwdne3193:0"
+      cannot_be_before_previous_value: "crwdns3195:0crwdne3195:0"
+      cannot_overlap: "crwdns3197:0crwdne3197:0"
+      cannot_encompass: "crwdns3199:0crwdne3199:0"
+      in_closed_period: "crwdns3201:0crwdne3201:0"
+      invalid_footprint: "crwdns3203:0crwdne3203:0"
+      end_before_start: "crwdns3205:0%{START}crwdne3205:0"
+      invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
+      must_be_in_the_past: "crwdns3209:0crwdne3209:0"
+  activemodel:
+    errors:
+      messages:
+        carrierwave_processing_error: crwdns3211:0crwdne3211:0
+        carrierwave_integrity_error: crwdns3213:0crwdne3213:0
+        carrierwave_download_error: crwdns3215:0crwdne3215:0
+        extension_white_list_error: crwdns3217:0%{extension}crwdnd3217:0%{allowed_types}crwdne3217:0
+        extension_black_list_error: crwdns3219:0%{extension}crwdnd3219:0%{prohibited_types}crwdne3219:0
+        rmagick_processing_error: crwdns3221:0%{e}crwdne3221:0
+        mime_types_processing_error: crwdns3223:0%{e}crwdne3223:0
+        mini_magick_processing_error: crwdns3225:0%{e}crwdne3225:0
+        wrong_size: crwdns3227:0%{file_size}crwdne3227:0
+        size_too_small: crwdns3229:0%{file_size}crwdne3229:0
+        size_too_big: crwdns3231:0%{file_size}crwdne3231:0
+        export_not_found: crwdns3233:0crwdne3233:0
+        percentage_out_of_range: crwdns3235:0crwdne3235:0
+        cannot_be_blank_at_same_time: crwdns3237:0%{field}crwdne3237:0
+        cannot_be_in_the_past: crwdns3239:0crwdne3239:0
+        cannot_be_before_previous_value: crwdns3241:0crwdne3241:0
+        cannot_overlap: crwdns3243:0crwdne3243:0
+        cannot_encompass: crwdns3245:0crwdne3245:0
+        in_closed_period: crwdns3247:0crwdne3247:0
+        invalid_footprint: crwdns3249:0crwdne3249:0
+        end_before_start: crwdns3251:0%{START}crwdne3251:0
+        invalid_duration: crwdns3253:0%{DAYS}crwdne3253:0
+        must_be_in_the_past: crwdns3255:0crwdne3255:0
+  apipie:
+    api_documentation: "crwdns3257:0crwdne3257:0"
+  omniauth:
+    #error messages when importing an account from a SSO
+    email_already_linked_to_another_account_please_input_your_authentication_code: "crwdns3259:0%{OLD_MAIL}crwdne3259:0"
+    your_username_is_already_linked_to_another_account_unable_to_update_it: "crwdns3261:0%{USERNAME}crwdne3261:0"
+    your_email_address_is_already_linked_to_another_account_unable_to_update_it: "crwdns3263:0%{EMAIL}crwdne3263:0"
+    this_account_is_already_linked_to_an_user_of_the_platform: "crwdns3265:0%{NAME}crwdne3265:0"
+  availabilities:
+    #availability slots in the calendar
+    not_available: "crwdns3267:0crwdne3267:0"
+    i_ve_reserved: "crwdns3269:0crwdne3269:0"
+    length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
+    must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
+  members:
+    #members management
+    unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
+    please_input_the_authentication_code_sent_to_the_address: "crwdns3277:0%{EMAIL}crwdne3277:0"
+    your_authentication_code_is_not_valid: "crwdns3279:0crwdne3279:0"
+    current_authentication_method_no_code: "crwdns3281:0crwdne3281:0"
+    requested_account_does_not_exists: "crwdns3283:0crwdne3283:0"
+  invoices:
+    #PDF invoices generation
+    refund_invoice_reference: "crwdns3285:0%{REF}crwdne3285:0"
+    invoice_reference: "crwdns3287:0%{REF}crwdne3287:0"
+    code: "crwdns3289:0%{CODE}crwdne3289:0"
+    order_number: "crwdns3291:0%{NUMBER}crwdne3291:0"
+    invoice_issued_on_DATE: "crwdns3293:0%{DATE}crwdne3293:0"
+    refund_invoice_issued_on_DATE: "crwdns3295:0%{DATE}crwdne3295:0"
+    wallet_credit: "crwdns3297:0crwdne3297:0"
+    cancellation_of_invoice_REF: "crwdns3299:0%{REF}crwdne3299:0"
+    reservation_of_USER_on_DATE_at_TIME: "crwdns3301:0%{USER}crwdnd3301:0%{DATE}crwdnd3301:0%{TIME}crwdne3301:0"
+    cancellation: "crwdns3303:0crwdne3303:0"
+    object: "crwdns3305:0crwdne3305:0"
+    order_summary: "crwdns3307:0crwdne3307:0"
+    details: "crwdns3309:0crwdne3309:0"
+    amount: "crwdns3311:0crwdne3311:0"
+    subscription_extended_for_free_from_START_to_END: "crwdns3313:0%{START}crwdnd3313:0%{END}crwdne3313:0"
+    subscription_NAME_from_START_to_END: "crwdns3315:0%{NAME}crwdnd3315:0%{START}crwdnd3315:0%{END}crwdne3315:0"
+    machine_reservation_DESCRIPTION: "crwdns3317:0%{DESCRIPTION}crwdne3317:0"
+    space_reservation_DESCRIPTION: "crwdns3319:0%{DESCRIPTION}crwdne3319:0"
+    training_reservation_DESCRIPTION: "crwdns3321:0%{DESCRIPTION}crwdne3321:0"
+    event_reservation_DESCRIPTION: "crwdns3323:0%{DESCRIPTION}crwdne3323:0"
+    full_price_ticket:
+      one: "crwdns3325:1crwdne3325:1"
+      other: "crwdns3325:5%{count}crwdne3325:5"
+    other_rate_ticket:
+      one: "crwdns3327:1%{NAME}crwdne3327:1"
+      other: "crwdns3327:5%{count}crwdnd3327:5%{NAME}crwdne3327:5"
+    reservation_other: "crwdns3329:0crwdne3329:0"
+    coupon_CODE_discount_of_DISCOUNT: "crwdns3331:0CODE={CODE}crwdnd3331:0DISCOUNT={DISCOUNT}crwdnd3331:0TYPE={TYPE}crwdne3331:0" #messageFormat interpolation
+    total_including_all_taxes: "crwdns3333:0crwdne3333:0"
+    including_VAT_RATE: "crwdns3335:0%{RATE}crwdne3335:0"
+    including_total_excluding_taxes: "crwdns3337:0crwdne3337:0"
+    including_amount_payed_on_ordering: "crwdns3339:0crwdne3339:0"
+    total_amount: "crwdns3341:0crwdne3341:0"
+    refund_on_DATE: "crwdns3343:0%{DATE}crwdne3343:0"
+    by_stripe_online_payment: "crwdns3345:0crwdne3345:0"
+    by_cheque: "crwdns3347:0crwdne3347:0"
+    by_transfer: "crwdns3349:0crwdne3349:0"
+    by_cash: "crwdns3351:0crwdne3351:0"
+    by_wallet: "crwdns3353:0crwdne3353:0"
+    no_refund: "crwdns3355:0crwdne3355:0"
+    settlement_by_debit_card: "crwdns3357:0crwdne3357:0"
+    settlement_done_at_the_reception: "crwdns3359:0crwdne3359:0"
+    settlement_by_wallet: "crwdns3361:0crwdne3361:0"
+    on_DATE_at_TIME: "crwdns3363:0%{DATE}crwdnd3363:0%{TIME}crwdne3363:0"
+    for_an_amount_of_AMOUNT: "crwdns3365:0%{AMOUNT}crwdne3365:0"
+    on_DATE_from_START_to_END: "crwdns3367:0%{DATE}crwdnd3367:0%{START}crwdnd3367:0%{END}crwdne3367:0" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "crwdns3369:0%{STARTDATE}crwdnd3369:0%{ENDDATE}crwdnd3369:0%{STARTTIME}crwdnd3369:0%{ENDTIME}crwdne3369:0" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    subscription_of_NAME_for_DURATION_starting_from_DATE: "crwdns3371:0%{NAME}crwdnd3371:0%{DURATION}crwdnd3371:0%{DATE}crwdne3371:0"
+    subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "crwdns3373:0%{NAME}crwdnd3373:0%{STARTDATE}crwdnd3373:0%{ENDDATE}crwdne3373:0"
+    and: 'crwdns3375:0crwdne3375:0'
+  accounting_export:
+    journal_code: "crwdns3377:0crwdne3377:0"
+    date: "crwdns3379:0crwdne3379:0"
+    account_code: "crwdns3381:0crwdne3381:0"
+    account_label: "crwdns3383:0crwdne3383:0"
+    piece: "crwdns3385:0crwdne3385:0"
+    line_label: "crwdns3387:0crwdne3387:0"
+    debit_origin: "crwdns3389:0crwdne3389:0"
+    credit_origin: "crwdns3391:0crwdne3391:0"
+    debit_euro: "crwdns3393:0crwdne3393:0"
+    credit_euro: "crwdns3395:0crwdne3395:0"
+    lettering: "crwdns3397:0crwdne3397:0"
+    VAT: 'crwdns3399:0crwdne3399:0'
+    subscription: "crwdns3401:0crwdne3401:0"
+    Machine_reservation: "crwdns3403:0crwdne3403:0"
+    Training_reservation: "crwdns3405:0crwdne3405:0"
+    Event_reservation: "crwdns3407:0crwdne3407:0"
+    Space_reservation: "crwdns3409:0crwdne3409:0"
+    wallet: "crwdns3411:0crwdne3411:0"
+  trainings:
+    #training availabilities
+    i_ve_reserved: "crwdns3413:0crwdne3413:0"
+    completed: "crwdns3415:0crwdne3415:0"
+  events:
+    #error messages when updating an event
+    error_deleting_reserved_price: "crwdns3417:0crwdne3417:0"
+    other_error: "crwdns3419:0crwdne3419:0"
+    #event duration
+    from_STARTDATE_to_ENDDATE: "crwdns3421:0%{STARTDATE}crwdnd3421:0%{ENDDATE}crwdne3421:0"
+    from_STARTTIME_to_ENDTIME: "crwdns3423:0%{STARTTIME}crwdnd3423:0%{ENDTIME}crwdne3423:0"
+  export_members:
+    #members list export to EXCEL format
+    members: "crwdns3425:0crwdne3425:0"
+    id: "crwdns3427:0crwdne3427:0"
+    surname: "crwdns3429:0crwdne3429:0"
+    first_name: "crwdns3431:0crwdne3431:0"
+    email: "crwdns3433:0crwdne3433:0"
+    newsletter: "crwdns3435:0crwdne3435:0"
+    last_login: "crwdns3437:0crwdne3437:0"
+    gender: "crwdns3439:0crwdne3439:0"
+    age: "crwdns3441:0crwdne3441:0"
+    address: "crwdns3443:0crwdne3443:0"
+    phone: "crwdns3445:0crwdne3445:0"
+    website: "crwdns3447:0crwdne3447:0"
+    job: "crwdns3449:0crwdne3449:0"
+    interests: "crwdns3451:0crwdne3451:0"
+    cad_software_mastered: "crwdns3453:0crwdne3453:0"
+    group: "crwdns3455:0crwdne3455:0"
+    subscription: "crwdns3457:0crwdne3457:0"
+    subscription_end_date: "crwdns3459:0crwdne3459:0"
+    validated_trainings: "crwdns3461:0crwdne3461:0"
+    tags: "crwdns3463:0crwdne3463:0"
+    number_of_invoices: "crwdns3465:0crwdne3465:0"
+    projects: "crwdns3467:0crwdne3467:0"
+    facebook: "crwdns3469:0crwdne3469:0"
+    twitter: "crwdns3471:0crwdne3471:0"
+    echo_sciences: "crwdns3473:0crwdne3473:0"
+    organization: "crwdns3475:0crwdne3475:0"
+    organization_address: "crwdns3477:0crwdne3477:0"
+    man: "crwdns3479:0crwdne3479:0"
+    woman: "crwdns3481:0crwdne3481:0"
+    without_subscriptions: "crwdns3483:0crwdne3483:0"
+  export_reservations:
+    #machines/trainings/events reservations list to EXCEL format
+    reservations: "crwdns3485:0crwdne3485:0"
+    customer_id: "crwdns3487:0crwdne3487:0"
+    customer: "crwdns3489:0crwdne3489:0"
+    email: "crwdns3491:0crwdne3491:0"
+    reservation_date: "crwdns3493:0crwdne3493:0"
+    reservation_type: "crwdns3495:0crwdne3495:0"
+    reservation_object: "crwdns3497:0crwdne3497:0"
+    slots_number_hours_tickets: "crwdns3499:0crwdne3499:0"
+    payment_method: "crwdns3501:0crwdne3501:0"
+    local_payment: "crwdns3503:0crwdne3503:0"
+    online_payment: "crwdns3505:0crwdne3505:0"
+  export_subscriptions:
+    #subscriptions list export to EXCEL format
+    subscriptions: "crwdns3507:0crwdne3507:0"
+    id: "crwdns3509:0crwdne3509:0"
+    customer: "crwdns3511:0crwdne3511:0"
+    email: "crwdns3513:0crwdne3513:0"
+    subscription: "crwdns3515:0crwdne3515:0"
+    period: "crwdns3517:0crwdne3517:0"
+    start_date: "crwdns3519:0crwdne3519:0"
+    expiration_date: "crwdns3521:0crwdne3521:0"
+    amount: "crwdns3523:0crwdne3523:0"
+    payment_method: "crwdns3525:0crwdne3525:0"
+    local_payment: "crwdns3527:0crwdne3527:0"
+    online_payment: "crwdns3529:0crwdne3529:0"
+  export_availabilities:
+    #reservation slots export, by type, to EXCEL format
+    machines: "crwdns3531:0crwdne3531:0"
+    trainings: "crwdns3533:0crwdne3533:0"
+    spaces: "crwdns3535:0crwdne3535:0"
+    events: "crwdns3537:0crwdne3537:0"
+    day_of_week: "crwdns3539:0crwdne3539:0"
+    date: "crwdns3541:0crwdne3541:0"
+    slot: "crwdns3543:0crwdne3543:0"
+    machine: "crwdns3545:0crwdne3545:0"
+    training: "crwdns3547:0crwdne3547:0"
+    space: "crwdns3549:0crwdne3549:0"
+    event: "crwdns3551:0crwdne3551:0"
+    reservations: "crwdns3553:0crwdne3553:0"
+    available_seats: "crwdns3555:0crwdne3555:0"
+  api:
+    notifications:
+      #internal app notifications
+      deleted_user: "crwdns3557:0crwdne3557:0"
+      notify_admin_abuse_reported:
+        an_abuse_was_reported_on_TYPE_ID_NAME_html: "crwdns3559:0%{TYPE}crwdnd3559:0%{ID}crwdnd3559:0%{NAME}crwdne3559:0"
+      notify_admin_member_create_reservation:
+        a_RESERVABLE_reservation_was_made_by_USER_html: "crwdns3561:0%{RESERVABLE}crwdnd3561:0%{USER}crwdne3561:0"
+      notify_admin_profile_complete:
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "crwdns3563:0%{PROVIDER}crwdnd3563:0%{UID}crwdne3563:0"
+      notify_admin_slot_is_canceled:
+        USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "crwdns3565:0%{USER}crwdnd3565:0%{DATE}crwdne3565:0"
+      notify_admin_slot_is_modified:
+        a_booking_slot_was_modified: "crwdns3567:0crwdne3567:0"
+      notify_admin_subscribed_plan:
+        subscription_PLAN_has_been_subscribed_by_USER_html: "crwdns3569:0%{PLAN}crwdnd3569:0%{USER}crwdne3569:0"
+      notify_admin_subscription_canceled:
+        USER_s_subscription_has_been_cancelled: "crwdns3571:0%{USER}crwdne3571:0"
+      notify_admin_subscription_extended:
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "crwdns3573:0PLAN={PLAN}crwdnd3573:0USER={USER}crwdnd3573:0FREE={FREE}crwdnd3573:0DATE={DATE}crwdne3573:0" #messageFormat interpolation
+      notify_admin_subscription_is_expired:
+        USER_s_subscription_has_expired: "crwdns3575:0%{USER}crwdne3575:0"
+      notify_admin_subscription_will_expire_in_7_days:
+        USER_s_subscription_will_expire_in_7_days: "crwdns3577:0%{USER}crwdne3577:0"
+      notify_admin_user_group_changed:
+        user_NAME_changed_his_group_html: "crwdns3579:0NAME={NAME}crwdnd3579:0GENDER={GENDER}crwdne3579:0" #messageFormat interpolation
+      notify_admin_user_merged:
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "crwdns3581:0NAME={NAME}crwdnd3581:0GENDER={GENDER}crwdnd3581:0PROVIDER={PROVIDER}crwdnd3581:0UID={UID}crwdne3581:0" #messageFormat interpolation
+      notify_admin_when_project_published:
+        project_NAME_has_been_published_html: "crwdns3583:0%{ID}crwdnd3583:0%{NAME}crwdne3583:0"
+      notify_admin_when_user_is_created:
+        a_new_user_account_has_been_created_NAME_EMAIL_html: "crwdns3585:0%{NAME}crwdnd3585:0%{EMAIL}crwdne3585:0"
+      notify_admin_when_user_is_imported:
+        a_new_user_account_has_been_imported_from_PROVIDER_UID_html: "crwdns3587:0%{PROVIDER}crwdnd3587:0%{UID}crwdne3587:0"
+      notify_member_create_reservation:
+        your_reservation_RESERVABLE_was_successfully_saved_html: "crwdns3589:0%{RESERVABLE}crwdne3589:0"
+      notify_member_reservation_reminder:
+        reminder_you_have_a_reservation_RESERVABLE_to_be_held_on_DATE_html: "crwdns3591:0%{RESERVABLE}crwdnd3591:0%{DATE}crwdne3591:0"
+      notify_member_slot_is_canceled:
+        your_reservation_RESERVABLE_of_DATE_was_successfully_cancelled: "crwdns3593:0%{RESERVABLE}crwdnd3593:0%{DATE}crwdne3593:0"
+      notify_member_slot_is_modified:
+        your_reservation_slot_was_successfully_changed: "crwdns3595:0crwdne3595:0"
+      notify_member_subscribed_plan:
+        you_have_subscribed_to_PLAN_html: "crwdns3597:0%{PLAN}crwdne3597:0"
+      notify_member_subscribed_plan_is_changed:
+        you_have_changed_your_subscription_to_PLAN_html: "crwdns3599:0%{PLAN}crwdne3599:0"
+      notify_member_subscription_canceled:
+        your_subscription_PLAN_was_successfully_cancelled_html: "crwdns3601:0%{PLAN}crwdne3601:0"
+      notify_member_subscription_extended:
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "crwdns3603:0PLAN={PLAN}crwdnd3603:0FREE={FREE}crwdnd3603:0DATE={DATE}crwdne3603:0" #messageFormat interpolation
+      notify_member_subscription_is_expired:
+        your_subscription_has_expired: "crwdns3605:0crwdne3605:0"
+      notify_member_subscription_will_expire_in_7_days:
+        your_subscription_will_expire_in_7_days: "crwdns3607:0crwdne3607:0"
+      notify_partner_subscribed_plan:
+        subscription_partner_PLAN_has_been_subscribed_by_USER_html: "crwdns3609:0%{PLAN}crwdnd3609:0%{USER}crwdne3609:0"
+      notify_project_author_when_collaborator_valid:
+        USER_became_collaborator_of_your_project: "crwdns3611:0%{USER}crwdne3611:0"
+      notify_project_collaborator_to_valid:
+        you_are_invited_to_collaborate_on_the_project: "crwdns3613:0crwdne3613:0"
+      notify_user_auth_migration:
+        your_account_was_migrated: "crwdns3615:0crwdne3615:0"
+      notify_user_profile_complete:
+        your_profile_was_completed: "crwdns3617:0crwdne3617:0"
+      notify_user_training_valid:
+        your_TRAINING_was_validated_html: "crwdns3619:0%{TRAINING}crwdne3619:0"
+      notify_user_user_group_changed:
+        your_group_has_changed: "crwdns3621:0crwdne3621:0"
+      notify_user_when_avoir_ready:
+        your_avoir_is_ready_html: "crwdns3623:0%{REFERENCE}crwdnd3623:0%{AMOUNT}crwdnd3623:0%{INVOICE_ID}crwdne3623:0"
+      notify_user_when_invoice_ready:
+        your_invoice_is_ready_html: "crwdns3625:0%{REFERENCE}crwdnd3625:0%{AMOUNT}crwdnd3625:0%{INVOICE_ID}crwdne3625:0"
+      undefined_notification:
+        unknown_notification: "crwdns3627:0crwdne3627:0"
+        notification_ID_wrong_type_TYPE_unknown: "crwdns3629:0%{ID}crwdnd3629:0%{TYPE}crwdne3629:0"
+      notify_user_wallet_is_credited:
+        your_wallet_is_credited: "crwdns3631:0crwdne3631:0"
+      notify_admin_user_wallet_is_credited:
+        wallet_is_credited: "crwdns3633:0%{USER}crwdnd3633:0%{AMOUNT}crwdne3633:0"
+      notify_admin_export_complete:
+        export: "crwdns3635:0crwdne3635:0"
+        statistics_global: "crwdns3637:0crwdne3637:0"
+        statistics_account: "crwdns3639:0crwdne3639:0"
+        statistics_event: "crwdns3641:0crwdne3641:0"
+        statistics_machine: "crwdns4557:0crwdne4557:0"
+        statistics_project: "crwdns3645:0crwdne3645:0"
+        statistics_subscription: "crwdns3647:0crwdne3647:0"
+        statistics_training: "crwdns3649:0crwdne3649:0"
+        statistics_space: "crwdns3651:0crwdne3651:0"
+        users_members: "crwdns3653:0crwdne3653:0"
+        users_subscriptions: "crwdns3655:0crwdne3655:0"
+        users_reservations: "crwdns3657:0crwdne3657:0"
+        availabilities_index: "crwdns3659:0crwdne3659:0"
+        accounting_acd: "crwdns3661:0crwdne3661:0"
+        is_over: "crwdns3663:0crwdne3663:0"
+        download_here: "crwdns3665:0crwdne3665:0"
+      notify_admin_import_complete:
+        import_over: "crwdns3667:0%{CATEGORY}crwdne3667:0"
+        members: "crwdns3669:0crwdne3669:0"
+        view_results: "crwdns3671:0crwdne3671:0"
+      notify_member_about_coupon:
+        enjoy_a_discount_of_PERCENT_with_code_CODE: "crwdns3673:0%{PERCENT}crwdnd3673:0%{CODE}crwdne3673:0"
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "crwdns3675:0%{AMOUNT}crwdnd3675:0%{CODE}crwdne3675:0"
+      notify_admin_free_disk_space:
+        warning_free_disk_space: "crwdns3677:0%{AVAILABLE}crwdne3677:0"
+      notify_admin_close_period_reminder:
+        warning_last_closed_period_over_1_year: "crwdns3679:0%{LAST_END}crwdne3679:0"
+        warning_no_closed_periods: "crwdns3681:0%{FIRST_DATE}crwdne3681:0"
+      notify_admin_archive_complete:
+        archive_complete: "crwdns3683:0%{START}crwdnd3683:0%{END}crwdnd3683:0%{ID}crwdne3683:0"
+      notify_privacy_policy_changed:
+        policy_updated: "crwdns3685:0crwdne3685:0"
+        click_to_show: "crwdns3687:0crwdne3687:0"
+      notify_admin_refund_created:
+        refund_created: "crwdns4559:0%{AMOUNT}crwdnd4559:0%{USER}crwdne4559:0"
+  statistics:
+    #statistics tools for admins
+    subscriptions: "crwdns3689:0crwdne3689:0"
+    machines_hours: "crwdns4561:0crwdne4561:0"
+    spaces: "crwdns3693:0crwdne3693:0"
+    trainings: "crwdns3695:0crwdne3695:0"
+    events: "crwdns3697:0crwdne3697:0"
+    registrations: "crwdns3699:0crwdne3699:0"
+    projects: "crwdns3701:0crwdne3701:0"
+    users: "crwdns3703:0crwdne3703:0"
+    training_id: "crwdns3705:0crwdne3705:0"
+    training_date: "crwdns3707:0crwdne3707:0"
+    event_id: "crwdns3709:0crwdne3709:0"
+    event_date: "crwdns3711:0crwdne3711:0"
+    event_name: "crwdns3713:0crwdne3713:0"
+    event_theme: "crwdns3715:0crwdne3715:0"
+    age_range: "crwdns3717:0crwdne3717:0"
+    themes: "crwdns3719:0crwdne3719:0"
+    components: "crwdns3721:0crwdne3721:0"
+    machines: "crwdns3723:0crwdne3723:0"
+    user_id: "crwdns3725:0crwdne3725:0"
+    bookings: "crwdns3727:0crwdne3727:0"
+    hours_number: "crwdns3729:0crwdne3729:0"
+    tickets_number: "crwdns3731:0crwdne3731:0"
+    revenue: "crwdns3733:0crwdne3733:0"
+    account_creation: "crwdns3735:0crwdne3735:0"
+    project_publication: "crwdns3737:0crwdne3737:0"
+  export:
+    #statistics exports to the excel file format
+    entries: "crwdns3739:0crwdne3739:0"
+    revenue: "crwdns3741:0crwdne3741:0"
+    average_age: "crwdns3743:0crwdne3743:0"
+    total: "crwdns3745:0crwdne3745:0"
+    date: "crwdns3747:0crwdne3747:0"
+    user: "crwdns3749:0crwdne3749:0"
+    email: "crwdns3751:0crwdne3751:0"
+    phone: "crwdns3753:0crwdne3753:0"
+    gender: "crwdns3755:0crwdne3755:0"
+    age: "crwdns3757:0crwdne3757:0"
+    type: "crwdns3759:0crwdne3759:0"
+    male: "crwdns3761:0crwdne3761:0"
+    female: "crwdns3763:0crwdne3763:0"
+  price_category:
+    #initial price's category for events, created to replace the old "reduced amount" property
+    reduced_fare: "crwdns3765:0crwdne3765:0"
+    reduced_fare_if_you_are_under_25_student_or_unemployed: "crwdns3767:0crwdne3767:0"
+  group:
+    #name of the user's group for administrators
+    admins: 'crwdns3769:0crwdne3769:0'

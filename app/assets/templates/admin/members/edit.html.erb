@@ -9,8 +9,8 @@
       </div>
       <div class="col-md-8 b-l b-r">
         <section class="heading-title">
-          <h1 class="inline">{{ 'user' | translate }} {{ user.name }}</h1>
-          <span class="label label-danger text-white" ng-show="user.need_completion" translate>{{ 'incomplete_profile' }}</span>
+          <h1 class="inline">{{ 'app.shared.user_admin.user' | translate }} {{ user.name }}</h1>
+          <span class="label label-danger text-white" ng-show="user.need_completion" translate>{{ 'app.shared.user_admin.incomplete_profile' }}</span>
         </section>
 
       </div>
@@ -18,7 +18,7 @@
       <div class="col-md-3">
         <section class="heading-actions wrapper">
          <div class="btn btn-lg btn-block btn-default m-t-xs" ng-click="cancel()" translate>
-           {{ 'cancel' }}
+           {{ 'app.shared.buttons.cancel' }}
          </div>
         </section>
 
@@ -34,11 +34,11 @@
 
       <uib-tabset justified="true" class="m-t">
 
-        <uib-tab heading="{{ 'user_profile' | translate }}">
+        <uib-tab heading="{{ 'app.shared.user_admin.user_profile' | translate }}">
 
           <section class="panel panel-danger m-lg" ng-show="user.need_completion && activeProvider.providable_type !== 'DatabaseProvider'">
             <div class="panel-body m-r" translate>
-              {{ 'warning_incomplete_user_profile_probably_imported_from_sso' }}
+              {{ 'app.shared.user_admin.warning_incomplete_user_profile_probably_imported_from_sso' }}
             </div>
           </section>
 
@@ -46,21 +46,21 @@
 
             <section class="panel panel-default bg-light m-lg">
               <div class="panel-body m-r">
-                <ng-include src="'<%= asset_path 'shared/_member_form.html' %>'"></ng-include>
+                <ng-include src="'<%= asset_path "shared/_member_form.html" %>'"></ng-include>
 
-                <ng-include src="'<%= asset_path 'admin/members/_form.html' %>'"></ng-include>
+                <ng-include src="'<%= asset_path "admin/members/_form.html" %>'"></ng-include>
 
               </div>   <!-- ./panel-body  -->
 
 
               <div class="panel-footer no-padder">
-                <input type="submit" value="{{ 'confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
+                <input type="submit" value="{{ 'app.shared.buttons.confirm_changes' | translate }}" class="r-b btn-valid btn btn-warning btn-block p-lg btn-lg text-u-c" ng-disabled="userForm.$invalid"/>
               </div>
             </section>
           </form>
         </uib-tab>
 
-        <uib-tab heading="{{ 'subscription' | translate }}" ng-if="!fablabWithoutPlans">
+        <uib-tab heading="{{ 'app.admin.members_edit.subscription' | translate }}" ng-if="!fablabWithoutPlans">
 
 
             <section class="panel panel-default bg-light m-lg">
@@ -68,24 +68,24 @@
                 <div class="" ng-show="subscription">
                   <h3>{{ subscription.plan | humanReadablePlanName }}</h3>
                   <p>
-                    {{ 'duration' | translate }} {{ subscription.plan.interval | planIntervalFilter: subscription.plan.interval_count }}
+                    {{ 'app.admin.members_edit.duration' | translate }} {{ subscription.plan.interval | planIntervalFilter: subscription.plan.interval_count }}
                   </p>
                   <p>
-                    {{ 'expires_at' | translate }} {{ subscription.expired_at | amDateFormat: 'L' }}
+                    {{ 'app.admin.members_edit.expires_at' | translate }} {{ subscription.expired_at | amDateFormat: 'L' }}
                   </p>
                   <p>
-                    {{ 'price_' | translate }} {{ subscription.plan.amount | currency}}
+                    {{ 'app.admin.members_edit.price_' | translate }} {{ subscription.plan.amount | currency}}
                   </p>
-                  <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, true)" translate>{{ 'offer_free_days' }}</button>
-                  <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, false)" translate>{{ 'extend_subscription' }}</button>
+                  <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, true)" translate>{{ 'app.admin.members_edit.offer_free_days' }}</button>
+                  <button class="btn btn-default" ng-click="updateSubscriptionModal(subscription, false)" translate>{{ 'app.admin.members_edit.extend_subscription' }}</button>
                 </div>
 
 
                 <div class="" ng-hide="subscription">
                   <p translate>
-                    {{ 'user_has_no_current_subscription' }}
+                    {{ 'app.admin.members_edit.user_has_no_current_subscription' }}
                   </p>
-                  <button class="btn btn-default" ng-click="createSubscriptionModal(user, plans.filter(filterDisabledPlans))" translate>{{ 'subscribe_to_a_plan' }}</button>
+                  <button class="btn btn-default" ng-click="createSubscriptionModal(user, plans.filter(filterDisabledPlans))" translate>{{ 'app.admin.members_edit.subscribe_to_a_plan' }}</button>
                 </div>
 
               </div>
@@ -93,11 +93,11 @@
             </section>
         </uib-tab>
 
-        <uib-tab heading="{{ 'trainings' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members_edit.trainings' | translate }}">
           <div class="col-md-4">
             <div class="widget panel b-a m-t-lg">
               <div class="panel-heading b-b ">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'next_trainings' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.next_trainings' | translate }}</h4>
               </div>
               <div class="widget-content bg-light wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
@@ -105,14 +105,14 @@
                     <span class="font-sbold">{{r.reservable.name}}</span> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
                   </li>
                 </ul>
-                <div ng-if="user.training_reservations.length == 0" translate>{{ 'no_trainings' }}</div>
+                <div ng-if="user.training_reservations.length == 0" translate>{{ 'app.admin.members_edit.no_trainings' }}</div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="widget panel b-a m-t-lg">
               <div class="panel-heading b-b">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'passed_trainings' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.passed_trainings' | translate }}</h4>
               </div>
               <div class="widget-content bg-light wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.training_reservations.length > 0">
@@ -125,14 +125,14 @@
                     </div> -->
                   </li>
                 </ul>
-                <div ng-if="user.training_reservations.length == 0" translate>{{ 'no_trainings' }}</div>
+                <div ng-if="user.training_reservations.length == 0" translate>{{ 'app.admin.members_edit.no_trainings' }}</div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="widget panel b-a m-t-lg">
               <div class="panel-heading b-b">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'validated_trainings' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.validated_trainings' | translate }}</h4>
               </div>
               <div class="widget-content bg-light wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.trainings.length > 0">
@@ -140,17 +140,17 @@
                     <span class="font-sbold">{{t.name}}</span>
                   </li>
                 </ul>
-                <div ng-if="user.trainings.length == 0" translate>{{ 'no_trainings' }}</div>
+                <div ng-if="user.trainings.length == 0" translate>{{ 'app.admin.members_edit.no_trainings' }}</div>
               </div>
             </div>
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'events' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members_edit.events' | translate }}">
           <div class="col-md-6">
             <div class="widget panel b-a m m-t-lg">
               <div class="panel-heading b-b">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'next_events' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.next_events' | translate }}</h4>
               </div>
               <div class="widget-content bg-light wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
@@ -158,22 +158,22 @@
                     <a class="font-sbold" ui-sref="app.public.events_show({id: r.reservable.id})">{{r.reservable.title}}</a> - <span class="label label-warning wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
                     <span ng-if="r.nb_reserve_places > 0">
                       <br/>
-                      <span translate translate-values="{ NUMBER: r.nb_reserve_places}" translate-interpolation="messageformat">{{ 'NUMBER_full_price_tickets_reserved' }}</span>
+                      <span translate translate-values="{ NUMBER: r.nb_reserve_places }">{{ 'app.admin.members_edit.NUMBER_full_price_tickets_reserved' }}</span>
                     </span>
                     <span ng-repeat="ticket in r.tickets">
                       <br/>
-                      <span translate translate-values="{ NUMBER: ticket.booked, NAME: ticket.price_category.name }" translate-interpolation="messageformat">{{ 'NUMBER_NAME_tickets_reserved' }}</span>
+                      <span translate translate-values="{ NUMBER: ticket.booked, NAME: ticket.price_category.name }">{{ 'app.admin.members_edit.NUMBER_NAME_tickets_reserved' }}</span>
                     </span>
                   </li>
                 </ul>
-                <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'no_upcoming_events' }}</div>
+                <div ng-if="(user.events_reservations | eventsReservationsFilter:'future').length == 0" translate>{{ 'app.admin.members_edit.no_upcoming_events' }}</div>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="widget panel b-a m m-t-lg">
               <div class="panel-heading b-b">
-                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'passed_events' | translate }}</h4>
+                <h4 class="text-u-c"><i class="fa fa-tag m-r-xs"></i> {{ 'app.admin.members_edit.passed_events' | translate }}</h4>
               </div>
               <div class="widget-content bg-light auto wrapper r-b">
                 <ul class="list-unstyled" ng-if="user.events_reservations.length > 0">
@@ -181,22 +181,22 @@
                     <span class="font-sbold">{{r.reservable.title}}</span> - <span class="label label-info text-white wrapper-sm">{{ r.start_at | amDateFormat:'LLL' }} - {{ r.end_at | amDateFormat:'LT' }}</span>
                   </li>
                 </ul>
-                <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'no_passed_events' }}</div>
+                <div ng-if="(user.events_reservations | eventsReservationsFilter:'passed').length == 0" translate>{{ 'app.admin.members_edit.no_passed_events' }}</div>
               </div>
             </div>
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'invoices' | translate }}" ng-hide="fablabWithoutInvoices">
+        <uib-tab heading="{{ 'app.admin.members_edit.invoices' | translate }}" ng-hide="fablabWithoutInvoices">
           <div class="col-md-12 m m-t-lg">
 
 
             <table class="table" ng-if="user.invoices.length > 0">
               <thead>
               <tr>
-                <th style="width:25%" translate>{{ 'invoice_num' }}</th>
-                <th style="width:25%" translate>{{ 'date' }}</th>
-                <th style="width:25%" translate>{{ 'price' }}</th>
+                <th style="width:25%" translate>{{ 'app.admin.members_edit.invoice_num' }}</th>
+                <th style="width:25%" translate>{{ 'app.admin.members_edit.date' }}</th>
+                <th style="width:25%" translate>{{ 'app.admin.members_edit.price' }}</th>
                 <th style="width:25%"></th>
               </tr>
               </thead>
@@ -209,34 +209,34 @@
                 <td>
                   <div class="buttons">
                     <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
-                      <i class="fa fa-file-pdf-o"></i> {{ 'download_the_invoice' | translate }}
+                      <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.members_edit.download_the_invoice' | translate }}
                     </a>
                     <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
-                      <i class="fa fa-file-pdf-o"></i> {{ 'download_the_refund_invoice' | translate }}
+                      <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.members_edit.download_the_refund_invoice' | translate }}
                     </a>
                   </div>
                 </td>
               </tr>
               </tbody>
             </table>
-            <p ng-if="user.invoices.length == 0" translate>{{ 'no_invoices_for_now' }}</p>
+            <p ng-if="user.invoices.length == 0" translate>{{ 'app.admin.members_edit.no_invoices_for_now' }}</p>
 
           </div>
         </uib-tab>
 
-        <uib-tab heading="{{ 'wallet' | translate }}">
+        <uib-tab heading="{{ 'app.admin.members_edit.wallet' | translate }}" ng-hide="fablabWithoutWallet">
           <div class="col-md-12 m m-t-lg">
-            <ng-include src="'<%= asset_path 'wallet/show.html' %>'"></ng-include>
+            <ng-include src="'<%= asset_path "wallet/show.html" %>'"></ng-include>
 
             <div class="clearfix"></div>
             <div class="col-sm-4 text-center">
-              <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'to_credit' }}</button>
+              <button type="button" class="btn btn-warning m-t m-b" ng-click="createWalletCreditModal(user, wallet)" translate>{{ 'app.admin.members_edit.to_credit' }}</button>
             </div>
 
           </div>
 
           <div class="col-md-12 m m-t-lg">
-            <ng-include src="'<%= asset_path 'wallet/transactions.html' %>'"></ng-include>
+            <ng-include src="'<%= asset_path "wallet/transactions.html" %>'"></ng-include>
           </div>
         </uib-tab>
       </uib-tabset>

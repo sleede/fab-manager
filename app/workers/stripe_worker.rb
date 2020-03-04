@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# This worker perform various requests to the Stripe API (payment service)
 class StripeWorker
   include Sidekiq::Worker
-  sidekiq_options :queue => :stripe
+  sidekiq_options queue: :stripe
 
   def perform(action, *params)
     send(action, *params)
@@ -18,8 +21,8 @@ class StripeWorker
   def create_stripe_coupon(coupon_id)
     coupon = Coupon.find(coupon_id)
     stp_coupon = {
-        id: coupon.code,
-        duration: coupon.validity_per_user,
+      id: coupon.code,
+      duration: coupon.validity_per_user
     }
     if coupon.type == 'percent_off'
       stp_coupon[:percent_off] = coupon.percent_off
@@ -28,13 +31,8 @@ class StripeWorker
       stp_coupon[:currency] = Rails.application.secrets.stripe_currency
     end
 
-    unless coupon.valid_until.nil?
-      stp_coupon[:redeem_by] = coupon.valid_until.to_i
-    end
-      stp_coupon
-    unless coupon.max_usages.nil?
-      stp_coupon[:max_redemptions] = coupon.max_usages
-    end
+    stp_coupon[:redeem_by] = coupon.valid_until.to_i unless coupon.valid_until.nil?
+    stp_coupon[:max_redemptions] = coupon.max_usages unless coupon.max_usages.nil?
 
     Stripe::Coupon.create(stp_coupon)
   end

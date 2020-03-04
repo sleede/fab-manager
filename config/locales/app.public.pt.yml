@@ -1,326 +1,465 @@
 pt:
-    app:
-      public:
-        common:
-          # header and "about" page
-          about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"  # messageFormat interpolation
-          return: "Voltar"
+  app:
+    public:
+      common:
+        # header and "about" page
+        about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
+        return: "Voltar"
 
-          # cookies
-          cookies:
-            about_cookies: "Este site usa cookies para fins de medição de audiência."
-            learn_more: "Saber mais"
-            accept: "Aceitar cookies"
-            decline: "Recusar"
+        # cookies
+        cookies:
+          about_cookies: "Este site usa cookies para fins de medição de audiência."
+          learn_more: "Saber mais"
+          accept: "Aceitar cookies"
+          decline: "Recusar"
 
-          # dashboard sections
-          dashboard: "Dashboard"
-          my_profile: "Meu Perfil"
-          my_settings: "Minhas Configurações"
-          my_projects: "Meus Projetos"
-          my_trainings: "Meus Treinamentos"
-          my_events: "Meus Eventos"
-          my_invoices: "Minhas Contas"
-          my_wallet: "Minha Carteira"
+        # dashboard sections
+        dashboard: "Dashboard"
+        my_profile: "Meu Perfil"
+        my_settings: "Minhas Configurações"
+        my_projects: "Meus Projetos"
+        my_trainings: "Meus Treinamentos"
+        my_events: "Meus Eventos"
+        my_invoices: "Minhas Contas"
+        my_wallet: "Minha Carteira"
 
-          # login/logout
-          sign_out: "Sair"
-          sign_up: "Cadastrar"
-          sign_in: "Entrar"
+        # contextual help
+        help: "Help"
 
-          # left menu
-          notifications: "Nofificações"
-          admin: "Admin"
-          reduce_panel: "Reduzir painel"
+        # login/logout
+        sign_out: "Sair"
+        sign_up: "Cadastrar"
+        sign_in: "Entrar"
 
-          # left menu (public)
-          home: "Início"
-          reserve_a_machine: "Reservar Máquina"
-          trainings_registrations: "Registro de treinamentos"
-          events_registrations: "Registro de Eventos"
-          reserve_a_space: "Reserva de espaço"
-          projects_gallery: "Galeria de Projetos"
-          subscriptions: "Assinaturas"
-          public_calendar: "Calendário"
+        # left menu
+        notifications: "Nofificações"
+        admin: "Admin"
+        reduce_panel: "Reduzir painel"
 
-          # left menu (admin)
-          trainings_monitoring: "Treinamentos"
-          select_a_training: "Selecionar treinamento"
-          manage_the_calendar: "Gerenciar calendário"
-          manage_the_users: "Gerenciar usuários"
-          manage_the_invoices: "Gerenciar contas"
-          subscriptions_and_prices: "Assinaturas e Preços"
-          manage_the_events: "Gerenciar eventos"
-          manage_the_machines: "Gerenciar Máquinas"
-          manage_the_spaces: "Gerenciar espaços"
-          manage_the_projects_elements: "Gerenciar Elementos de Projeto"
-          statistics: "Estatísticas"
-          customization: "Customizações"
-          open_api_clients: "OpenAPI clients"
+        # left menu (public)
+        home: "Início"
+        reserve_a_machine: "Reservar Máquina"
+        trainings_registrations: "Registro de treinamentos"
+        events_registrations: "Registro de Eventos"
+        reserve_a_space: "Reserva de espaço"
+        projects_gallery: "Galeria de Projetos"
+        subscriptions: "Assinaturas"
+        public_calendar: "Agenda"
 
-          # account creation modal
-          create_your_account: "Criar sua conta"
-          man: "Masculino"
-          woman: "Feminino"
-          gender_is_required: "Gênero é obrigatório."
-          your_first_name: "Seu primeiro nome"
-          first_name_is_required: "Primeiro nome é obrigatório."
-          your_surname: "Seu sobrenome"
-          surname_is_required: "Sobrenome é obrigatório."
-          your_pseudonym: "Seu apelido"
-          pseudonym_is_required: "Apelido é obrigatório."
-          your_email_address: "Seu e-mail"
-          email_is_required: "E-mail é obrigatório."
-          your_password: "Sua senha"
-          password_is_required: "Senha é obrigatório."
-          password_is_too_short: "Senha muito curta (mínimo 8 caracteres)"
-          type_your_password_again: "Digite sua senha novamente"
-          password_confirmation_is_required: "Confirmação de senha é obrigatório."
-          password_does_not_match_with_confirmation: "A senha não é igual ao da confirmação."
-          i_am_an_organization: "Eu sou uma organização"
-          name_of_your_organization: "Nome da sua organização"
-          organization_name_is_required: "Nome da organização é obrigatório."
-          address_of_your_organization: "Endereço da sua organização"
-          organization_address_is_required: "Endereço da organização é obrigatório."
-          your_user_s_profile: "Seu perfil de usuário"
-          user_s_profile_is_required: "Seu perfil de usuário é obrigatório."
-          birth_date: "Data de nascimento"
-          birth_date_is_required: "Data de nascimento é obrigatório."
-          phone_number: "Número de telefone"
-          phone_number_is_required: "Número de telefone é obrigatório."
-          i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Eu autorizo usuários do FabLab, registrados no site, a entrarem em contato comigo"
-          i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
-          i_ve_read_and_i_accept_: "Eu li e aceito"
-          _the_fablab_policy: "a política do FabLab"
-          field_required: "Field required"                                                         # translation missing
-          unexpected_error_occurred: "An unexpected error occurred. Please try again later."       # translation missing
-          used_for_statistics: "This data will be used for statistical purposes"                   # translation missing
-          used_for_invoicing: "This data will be used for billing purposes"                        # translation missing
-          used_for_reservation: "This data will be used in case of change on one of your bookings" # translation missing
-          used_for_profile: "This data will only be displayed on your profile"                     # translation missing
-          public_profile: "You will have a public profile and other users will be able to associate you in their projects"  # translation missing
+        # left menu (admin)
+        trainings_monitoring: "Treinamentos"
+        manage_the_calendar: "Agenda"
+        manage_the_users: "Uusuários"
+        manage_the_invoices: "Contas"
+        subscriptions_and_prices: "Assinaturas e Preços"
+        manage_the_events: "Eventos"
+        manage_the_machines: "Máquinas"
+        manage_the_spaces: "Espaços"
+        manage_the_projects_elements: "Projeto"
+        statistics: "Estatísticas"
+        customization: "Customizações"
+        open_api_clients: "OpenAPI clients"
 
-          # password modification modal
-          change_your_password: "Mudar sua senha"
-          your_new_password: "Sua nova senha"
-          your_password_was_successfully_changed: "Sua senha foi mudada com sucesso."
+        # account creation modal
+        create_your_account: "Criar sua conta"
+        man: "Masculino"
+        woman: "Feminino"
+        gender_is_required: "Gênero é obrigatório."
+        your_first_name: "Seu primeiro nome"
+        first_name_is_required: "Primeiro nome é obrigatório."
+        your_surname: "Seu sobrenome"
+        surname_is_required: "Sobrenome é obrigatório."
+        your_pseudonym: "Seu apelido"
+        pseudonym_is_required: "Apelido é obrigatório."
+        your_email_address: "Seu e-mail"
+        email_is_required: "E-mail é obrigatório."
+        your_password: "Sua senha"
+        password_is_required: "Senha é obrigatório."
+        password_is_too_short: "Senha muito curta (mínimo 8 caracteres)"
+        type_your_password_again: "Digite sua senha novamente"
+        password_confirmation_is_required: "Confirmação de senha é obrigatório."
+        password_does_not_match_with_confirmation: "A senha não é igual ao da confirmação."
+        i_am_an_organization: "Eu sou uma organização"
+        name_of_your_organization: "Nome da sua organização"
+        organization_name_is_required: "Nome da organização é obrigatório."
+        address_of_your_organization: "Endereço da sua organização"
+        organization_address_is_required: "Endereço da organização é obrigatório."
+        your_user_s_profile: "Seu perfil de usuário"
+        user_s_profile_is_required: "Seu perfil de usuário é obrigatório."
+        birth_date: "Data de nascimento"
+        birth_date_is_required: "Data de nascimento é obrigatório."
+        phone_number: "Número de telefone"
+        phone_number_is_required: "Número de telefone é obrigatório."
+        i_authorize_Fablab_users_registered_on_the_site_to_contact_me: "Eu autorizo usuários do FabLab, registrados no site, a entrarem em contato comigo"
+        i_accept_to_receive_information_from_the_fablab: "Eu aceito receber informações do FabLab"
+        i_ve_read_and_i_accept_: "Eu li e aceito"
+        _the_fablab_policy: "a política do FabLab"
+        field_required: "Field required"
+        unexpected_error_occurred: "An unexpected error occurred. Please try again later."
+        used_for_statistics: "This data will be used for statistical purposes"
+        used_for_invoicing: "This data will be used for billing purposes"
+        used_for_reservation: "This data will be used in case of change on one of your bookings"
+        used_for_profile: "This data will only be displayed on your profile"
+        public_profile: "You will have a public profile and other users will be able to associate you in their projects"
+        you_will_receive_confirmation_instructions_by_email_detailed: "Você receberá um email com instruções sobre como confirmar sua conta em alguns minutos."
 
-          # connection modal
-          connection: "Login"
-          password_forgotten: "Esqueceu sua senha?"
-          not_registered_to_the_fablab: "Ainda não registrado no Fablab?"
-          create_an_account: "Criar conta"
-          wrong_email_or_password: "E-mail ou senha incorretos."
-          caps_lock_is_on: "A tecla Caps Lock está ativada."
+        # password modification modal
+        change_your_password: "Mudar sua senha"
+        your_new_password: "Sua nova senha"
+        your_password_was_successfully_changed: "Sua senha foi mudada com sucesso."
 
-          # forgotten password modal
-          your_email_address_is_unknown: "Seu e-mail não está cadastrado."
-          you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Você irá receber um e-mail com as instruções para resetar sua senha."
+        # connection modal
+        connection: "Login"
+        password_forgotten: "Esqueceu sua senha?"
+        confirm_my_account: "Confirmar sua conta"
+        not_registered_to_the_fablab: "Ainda não registrado no Fablab?"
+        create_an_account: "Criar conta"
+        wrong_email_or_password: "E-mail ou senha incorretos."
+        caps_lock_is_on: "A tecla Caps Lock está ativada."
 
-          # Fab-manager's version
-          version: "Versão:"
+        # confirmation modal
+        you_will_receive_confirmation_instructions_by_email: Você receberá instruções de confirmação por e-mail.
 
-          # Notifications
-          and_NUMBER_other_notifications: "and {NUMBER, plural, =0{no other notifications} =1{one other notification} other{{NUMBER} other notifications}}..."  # messageFormat interpolation
+        # forgotten password modal
+        your_email_address_is_unknown: "Seu e-mail não está cadastrado."
+        you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Você irá receber um e-mail com as instruções para resetar sua senha."
 
-        about:
-          # about page
-          about:
-            read_the_fablab_policy: "Ler a política do FabLab"
-            read_the_fablab_s_general_terms_and_conditions: "Ler os termos e condições do FabLab"
-            your_fablab_s_contacts: "Nossos contatos"
-            privacy_policy: "Política de privacidade"
+        # Fab-manager's version
+        version: "Versão:"
+        upgrade_fabmanager: "Upgrade Fab-manager"
+        current_version: "You are currently using version {VERSION} of Fab-manager."
+        upgrade_to: "A new release is available. You can upgrade up to version {VERSION}."
+        read_more: "View the details of this release"
+        security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"
+        how_to: "How to upgrade?"
 
-        privacy:
-          # 'privacy policy' page
-          privacy:
-            title: "Política de privacidade"
-            dpo: "Oficial de proteção de dados"
-            last_update: "Última atualização,"
+        # Notifications
+        and_NUMBER_other_notifications: "and {NUMBER, plural, =0{no other notifications} =1{one other notification} other{{NUMBER} other notifications}}..."
 
-        home:
-          # home page
-          latest_documented_projects: "Últimos projetos documentados"
-          follow_us: "Siga nos"
-          latest_tweets: "Os últimos tweets"
-          latest_registered_members: "Últimos membros registrados"
-          create_an_account: "Criar uma conta"
-          discover_members: "Ver membros"
+      about:
+        # about page
+        read_the_fablab_policy: "Ler a política do FabLab"
+        read_the_fablab_s_general_terms_and_conditions: "Ler os termos e condições do FabLab"
+        your_fablab_s_contacts: "Nossos contatos"
+        privacy_policy: "Política de privacidade"
 
-          # next events summary on the home page
-          fablab_s_next_events: "Próximos eventos do FabLab"
-          every_events: "Todos Eventos"
-          from_date_to_date: "De {{START}} até {{END}}"   # angular interpolation
-          on_the_date: "Em {{DATE}}"                      # angular interpolation
-          from_time_to_time: "Das {{START}} até {{END}}"  # angular interpolation
-          free_entry: "Entrada franca"
-          free_admission: "Admissão grátis"
-          full_price: "Valor inteira"
-          event_full: "Evento lotado"
-          still_available: "Locais disponíveis"
+      privacy:
+        # 'privacy policy' page
+        title: "Política de privacidade"
+        dpo: "Oficial de proteção de dados"
+        last_update: "Última atualização,"
 
-        projects_list:
-          # projects gallery
-          projects_list:
-            the_fablab_projects: "Projetos do Fab Lab"
-            add_a_project: "Adicionar projeto"
-            search_over_the_whole_network: "Pesquisar em todos os FabLabs"
-            tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
-            openlab_search_not_available_at_the_moment: "A busca em toda a rede de FabLabs não está disponível no momento. Você pode procurar por projetos nesta plataforma."
-            project_search_result_is_empty: "Desculpe, nós não achamos nenhum resultado para sua pesquisa."
-            reset_all_filters: "Resetar todos os filtros"
-            search: "Procurar"
-            all_projects: "Todos os projetos"
-            my_projects: "Meus Projetos"
-            projects_to_whom_i_take_part_in: "Projetos que eu participo"
-            all_machines: "Todas as máquinas"
-            all_themes: "Todos temas"
-            all_materials: "Todos os materiais"
-            load_next_projects: "Carregar próximos projetos"
-            rough_draft: "Rascunho"
+      home:
+        # home page
+        latest_documented_projects: "Últimos projetos documentados"
+        follow_us: "Siga nos"
+        latest_tweets: "Os últimos tweets"
+        latest_registered_members: "Últimos membros registrados"
+        create_an_account: "Criar uma conta"
+        discover_members: "Ver membros"
 
-        projects_show:
-          # details of a projet
-          project_description: "Descrição do projeto"
-          by_name: "Por {{NAME}}"  # angular interpolation
-          deleted_user: "Deleted user"                                                                #translation_missing
-          posted_on_: "Criado em"
-          CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"  # messageFormat interpolation
-          licence: "Licença"
-          report_an_abuse: "Denunciar"
-          unauthorized_operation: "Operação não autorizada"
-          your_report_was_successful_thanks: "Sua denúncia foi enviada com sucesso. Obrigado."
-          an_error_occured_while_sending_your_report: "Um erro ocorreu ao enviar sua denúncia."
-          your_first_name: "Seu primeiro nome"
-          your_first_name_is_required: "Seu primeiro nome é requerido."
-          your_surname: "Seu sobrenome"
-          your_surname_is_required: "Seu sobrenome é obrigatório."
-          your_email_address: "Seu e-mail"
-          your_email_address_is_required: "Seu e-mail é obrigatório."
-          tell_us_why_this_looks_abusive: "Nos diga porque esse projeto é abusivo"
-          message_is_required: "Menssagem é obrigatório."
-          report: "Enviar"
-          do_you_really_want_to_delete_this_project: "Você quer realmente deletar esse projeto?"
+        # next events summary on the home page
+        fablab_s_next_events: "Próximos eventos do FabLab"
+        every_events: "Todos Eventos"
+        from_date_to_date: "De {START} até {END}"
+        on_the_date: "Em {DATE}"
+        from_time_to_time: "Das {START} até {END}"
+        free_entry: "Entrada franca"
+        free_admission: "Admissão grátis"
+        full_price: "Valor inteira"
+        event_full: "Evento lotado"
+        still_available: "Locais disponíveis"
 
-        machines_list:
-          # list of machines
-          machines_list:
-            the_fablab_s_machines: "Lista de máquinas no FabLab"
-            add_a_machine: "Adicionar uma máquina"
-            book: "Reservar"
-            _or_the_: " ou o "
-            status_enabled: "Ativo"
-            status_disabled: "Desabilitado"
-            status_all: "Todos"
+      projects_list:
+        # projects gallery
+        the_fablab_projects: "Projetos do Fab Lab"
+        add_a_project: "Adicionar projeto"
+        search_over_the_whole_network: "Pesquisar em todos os FabLabs"
+        tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
+        openlab_search_not_available_at_the_moment: "A busca em toda a rede de FabLabs não está disponível no momento. Você pode procurar por projetos nesta plataforma."
+        project_search_result_is_empty: "Desculpe, nós não achamos nenhum resultado para sua pesquisa."
+        reset_all_filters: "Resetar todos os filtros"
+        search: "Procurar"
+        all_projects: "Todos os projetos"
+        my_projects: "Meus Projetos"
+        projects_to_whom_i_take_part_in: "Projetos que eu participo"
+        all_machines: "Todas as máquinas"
+        all_themes: "Todos temas"
+        all_materials: "Todos os materiais"
+        load_next_projects: "Carregar próximos projetos"
+        rough_draft: "Rascunho"
 
-        machines_show:
-          # details of a machine
-          book_this_machine: "Reservar essa máquina"
-          files_to_download: "Arquivos para download"
-          projects_using_the_machine: "Projetos usando esta máquina"
-          _or_the_: " ou o "
-          do_you_really_want_to_delete_this_machine: "Você realmente quer deletar essa máquina?"
-          unauthorized_operation: "Operação não autorizada"
-          the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Esta máquina não pode ser deletada, pois já está em reservada por alguns usuários."
+      projects_show:
+        # details of a projet
+        rough_draft: "Draft"
+        project_description: "Descrição do projeto"
+        by_name: "Por {NAME}"
+        step_N: "Step {INDEX}"
+        share_on_facebook: "Share on Facebook"
+        share_on_twitter: "Share on Twitter"
+        deleted_user: "Deleted user"
+        posted_on_: "Criado em"
+        CAD_file_to_download: "{COUNT, plural, =0{No CAD files} =1{CAD file to download} other{CAD files to download}}"
+        machines_and_materials: "Machines and materials"
+        collaborators: "Collaborators"
+        licence: "Licença"
+        confirmation_required: "Confirmation required"
+        report_an_abuse: "Denunciar"
+        unauthorized_operation: "Operação não autorizada"
+        your_report_was_successful_thanks: "Sua denúncia foi enviada com sucesso. Obrigado."
+        an_error_occured_while_sending_your_report: "Um erro ocorreu ao enviar sua denúncia."
+        your_first_name: "Seu primeiro nome"
+        your_first_name_is_required: "Seu primeiro nome é requerido."
+        your_surname: "Seu sobrenome"
+        your_surname_is_required: "Seu sobrenome é obrigatório."
+        your_email_address: "Seu e-mail"
+        your_email_address_is_required: "Seu e-mail é obrigatório."
+        tell_us_why_this_looks_abusive: "Nos diga porque esse projeto é abusivo"
+        message_is_required: "Menssagem é obrigatório."
+        report: "Enviar"
+        do_you_really_want_to_delete_this_project: "Você quer realmente deletar esse projeto?"
 
-        trainings_list:
-          # list of trainings
-          the_trainings: "Os treinamentos"
+      machines_list:
+        # list of machines
+        the_fablab_s_machines: "Lista de máquinas no FabLab"
+        add_a_machine: "Adicionar uma máquina"
+        new_availability: "Open reservations"
+        book: "Reservar"
+        _or_the_: " ou o "
+        status_enabled: "Ativo"
+        status_disabled: "Desabilitado"
+        status_all: "Todos"
 
-        training_show:
-          # details of a training
-          book_this_training: "Reservar este treinamento"
-          do_you_really_want_to_delete_this_training: "Você realmente quer deletar esse treinamento?"
-          unauthorized_operation: "Operação não autorizada"
-          the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "O treinamento não pode ser deletado pois já foi reservado por alguns usuários."
+      machines_show:
+        # details of a machine
+        book_this_machine: "Reservar essa máquina"
+        technical_specifications: "Technical specifications"
+        files_to_download: "Arquivos para download"
+        projects_using_the_machine: "Projetos usando esta máquina"
+        _or_the_: " ou o "
+        confirmation_required: "Confirmation required"
+        do_you_really_want_to_delete_this_machine: "Você realmente quer deletar essa máquina?"
+        unauthorized_operation: "Operação não autorizada"
+        the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Esta máquina não pode ser deletada, pois já está em reservada por alguns usuários."
 
-        plans:
-          # summary of the subscriptions
-          subcriptions: "Assinaturas"
-          i_choose_that_plan: "Eu escolho esse plano"
-          i_subscribe_online: "Me inscrever online"
-          i_already_subscribed: "Eu já estou inscrito"
-          more_information: "Mais informação"
-          your_subscription_expires_on_the_DATE: "Sua inscrição expira em {{DATE}}"  # angular interpolation
-          my_group: "Meu grupo"
-          his_group: "{GENDER, select, male{Ele} female{Ela} other{Esses}} grupo"  # messageFormat interpolation
-          he_wants_to_change_group: "{ROLE, select, admin{O usuário quer} other{Eu quero}} trocar de grupo"  # messageFormat interpolation
-          change_my_group: "Mudar {ROLE, select, admin{{GENDER, select, male{dele} female{dela} other{esses}}} other{meu}} grupo"  # messageFormat interpolation
-          your_subscription_has_expired_on_the_DATE: "Sua inscrição expirou em {{DATE}}"  # angular interpolation
-          you_ve_just_payed_the_: "Você acabou de pagar o"
-          thank_you_your_subscription_is_successful: "Obrigado. Sua inscrição foi feita com sucesso!"
-          your_group_was_successfully_changed: "Seu grupo foi alterado com sucesso."
-          the_user_s_group_was_successfully_changed: "O grupo de usuários foi alterado com sucesso."
-          an_error_prevented_your_group_from_being_changed: "Um erro impediu que seu grupo fosse alterado."
-          an_error_prevented_to_change_the_user_s_group: "Um erro impediu que o grupo de usuários fosse alterado com sucesso."
-          an_error_occured_during_the_payment_process_please_try_again_later: "Um erro ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
-          subscription_confirmation: "Inscrição confirmada"
-          here_is_the_NAME_subscription_summary: "Aqui é o sumário de inscrição do {{NAME}}:"  # angular interpolation
+      trainings_list:
+        # list of trainings
+        book: "Book"
+        the_trainings: "Os treinamentos"
 
-        events_list:
-          # Fablab's events list
-          the_fablab_s_events: "Eventos do Fablab"
-          all_categories: "Todas categorias"
-          for_all: "Para todos"
-          sold_out: "Esgotado."
-          cancelled: "Cancelado"
-          free_admission: "Admissão grátis"
-          still_available: "lugares disponíveis"
-          free_entry: "Entrada franca"
+      training_show:
+        # details of a training
+        book_this_training: "Reservar este treinamento"
+        do_you_really_want_to_delete_this_training: "Você realmente quer deletar esse treinamento?"
+        unauthorized_operation: "Operação não autorizada"
+        confirmation_required: "Confirmation required"
+        the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "O treinamento não pode ser deletado pois já foi reservado por alguns usuários."
 
-        events_show:
-          # details and booking of an event
-          event_description: "Descrição do evento"
-          downloadable_documents: "Documentos para download"
-          information_and_booking: "Informações e reservas"
-          beginning: "Início:"
-          ending: "Término:"
-          opening_hours: "Abre ás:"
-          tickets_still_availables: "Tickets ainda disponíveis:"
-          sold_out: "Esgotado."
-          free_entry: "Entrada franca"
-          cancelled: "Cancelado"
-          ticket: "{NUMBER, plural, one{ticket} other{tickets}}"  # messageFormat interpolation
-          make_a_gift_of_this_reservation: "Doe esta reserva"
-          you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
-          you_booked_DATE: "Sua reserva ({{DATE}}):"  # angular interpolation
-          book: "Reservar"
-          change_the_reservation: "Alterar reserva"
-          you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
-          confirmation_required: "Confirmação obrigatória"
-          do_you_really_want_to_delete_this_event:  "Vocêrealmente deseja remover este evento?"
-          event_successfully_deleted: "Evento excluído com sucesso"
-          unable_to_delete_the_event_because_some_users_alredy_booked_it: "Não foi possível excluir este evento, já pode ter sido reservado por alguns usuários."
+      plans:
+        # summary of the subscriptions
+        subscriptions: "Assinaturas"
+        i_choose_that_plan: "Eu escolho esse plano"
+        i_subscribe_online: "Me inscrever online"
+        i_already_subscribed: "Eu já estou inscrito"
+        more_information: "Mais informação"
+        your_subscription_expires_on_the_DATE: "Sua inscrição expira em {DATE}"
+        my_group: "Meu grupo"
+        his_group: "{GENDER, select, male{Ele} female{Ela} other{Esses}} grupo"
+        he_wants_to_change_group: "{ROLE, select, admin{O usuário quer} other{Eu quero}} trocar de grupo"
+        change_my_group: "Mudar {ROLE, select, admin{{GENDER, select, male{dele} female{dela} other{esses}}} other{meu}} grupo"
+        summary: "Summary"
+        your_subscription_has_expired_on_the_DATE: "Sua inscrição expirou em {DATE}"
+        subscription_price: "Subscription price"
+        you_ve_just_selected_a_subscription_html: "You've just selected a <strong>subscription</strong>:"
+        confirm_and_pay: "Valider et payer"
+        you_ve_just_payed_the_subscription_html: "Você acabou de pagar o <strong>inscrição</strong>:"
+        thank_you_your_subscription_is_successful: "Obrigado. Sua inscrição foi feita com sucesso!"
+        your_invoice_will_be_available_soon_from_your_dashboard: "Your invoice will be available soon from your dashboard"
+        your_group_was_successfully_changed: "Seu grupo foi alterado com sucesso."
+        the_user_s_group_was_successfully_changed: "O grupo de usuários foi alterado com sucesso."
+        an_error_prevented_your_group_from_being_changed: "Um erro impediu que seu grupo fosse alterado."
+        an_error_prevented_to_change_the_user_s_group: "Um erro impediu que o grupo de usuários fosse alterado com sucesso."
+        an_error_occured_during_the_payment_process_please_try_again_later: "Um erro ocorreu durante o processo de pagamento. Por favor tente novamente mais tarde."
+        subscription_confirmation: "Inscrição confirmada"
+        here_is_the_NAME_subscription_summary: "Aqui é o sumário de inscrição do {NAME}:"
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" # (contexte : validate a payment of $20,00)
+        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
 
-        calendar:
-          # public calendar
+      events_list:
+        # Fablab's events list
+        the_fablab_s_events: "Eventos do Fablab"
+        all_categories: "Todas categorias"
+        for_all: "Para todos"
+        sold_out: "Esgotado."
+        cancelled: "Cancelado"
+        free_admission: "Admissão grátis"
+        still_available: "lugares disponíveis"
+        free_entry: "Entrada franca"
+        add_an_event: "Add an event"
+        load_the_next_events: "Load the next events..."
+        full_price_: "Full price:"
+        to_date: "to" # eg. from 01/01 to 01/05
+        all_themes: "All themes"
+
+      events_show:
+        # details and booking of an event
+        event_description: "Descrição do evento"
+        downloadable_documents: "Documentos para download"
+        information_and_booking: "Informações e reservas"
+        dates: "Dates"
+        beginning: "Início:"
+        ending: "Término:"
+        opening_hours: "Abre ás:"
+        all_day: "All day"
+        from_time: "From" # eg. from 18:00 to 21:00
+        to_time: "to"  # eg. from 18:00 to 21:00
+        full_price_: "Full price:"
+        tickets_still_availables: "Tickets ainda disponíveis:"
+        sold_out: "Esgotado."
+        free_entry: "Entrada franca"
+        cancelled: "Cancelado"
+        ticket: "{NUMBER, plural, one{ticket} other{tickets}}"
+        make_a_gift_of_this_reservation: "Doe esta reserva"
+        thank_you_your_payment_has_been_successfully_registered: "Tank you. Your payment has been successfully registered!"
+        you_can_find_your_reservation_s_details_on_your_: "Você pode encontrar detalhes da sua reserva em seu"
+        dashboard: "dashboard"
+        you_booked_DATE: "Sua reserva ({DATE}):"
+        canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
+        book: "Reservar"
+        confirm_and_pay: "Confirm and pay"
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" # (contexte : validate a payment of $20,00)
+        online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+        please_select_a_member_first: "Please select a member first"
+        change_the_reservation: "Alterar reserva"
+        you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
+        confirmation_required: "Confirmação obrigatória"
+        do_you_really_want_to_delete_this_event:  "Vocêrealmente deseja remover este evento?"
+        delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
+        delete_this_event: "Only this event"
+        delete_this_and_next: "This event and the following"
+        delete_all: "All events"
+        event_successfully_deleted: "Evento excluído com sucesso"
+        events_deleted: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been deleted"
+        unable_to_delete_the_event: "Unable to delete the event, it may be booked by a member"
+        events_not_deleted: "On {TOTAL} events, {COUNT, plural, =1{one was not deleted} other{{COUNT} were not deleted}}. Some reservations may exists on {COUNT, plural, =1{it} other{them}}."
+        cancel_the_reservation: "Cancel the reservation"
+        do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
+        reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
+        cancellation_failed: "Cancellation failed."                                                 #translation_missin
+        event_is_over: "The event is over"
+        thanks_for_coming: "Thanks for coming!"
+        view_event_list: "View events to come"
+        share_on_facebook: "Share on Facebook"
+        share_on_twitter: "Share on Twitter"
+
+      calendar:
+        # public calendar
+        calendar: "Calendário"
+        show_unavailables: "Mostrar slots não disponíveis"
+        filter_calendar: "Filtrar calendário"
+        trainings: "Treinamentos"
+        machines: "Máquinas"
+        spaces: "Espaços"
+        events: "Eventos"
+        externals: "Outras agendas"
+
+      spaces_list:
+        # list of spaces
+        the_spaces: "Os espaços"
+        new_availability: "Open reservations"
+        add_a_space: "Adicionar espaço"
+        status_enabled: "Ativo"
+        status_disabled: "Desabilitado"
+        status_all: "Todos"
+        book: "Reservar"
+
+      space_show:
+        # display the details of a space
+        book_this_space: "Marcar este espaço"
+        unauthorized_operation: "Operação não autorizada"
+        confirmation_required: "Confirmação obrigatória"
+        do_you_really_want_to_delete_this_space: "Você realmente deseja remover este espaço?"
+        the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Impossível remover este espaço, pois ele já foi reservado por alguns usuários."
+        characteristics: "Características"
+        files_to_download: "Arquivo para download"
+        projects_using_the_space: "Projetos usando espaço"
+
+      tour:
+        conclusion:
+          title: "Thank you for your attention"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+        welcome:
+          welcome:
+            title: "Welcome to Fab-manager"
+            content: "To help you get started with the application, we are going to take a quick tour of the features."
+          home:
+            title: "Home page"
+            content: "Clicking here will take you back to the home page where you are currently."
+          machines:
+            title: "Machines"
+            content: "<p>This page will allow you to consult the list of all machines and reserve a slot on behalf of a member.</p><p>A machine can be, for example, a 3D printer.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          trainings:
+            title: "Trainings"
+            content: "<p>This page will allow you to consult the list of all training sessions and to register a member for a training session.</p><p>Certaines formations peuvent être un préalable à la réservation de certaines machines.</p><p>Members can also access this page and register for a training session themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          spaces:
+            title: "Spaces"
+            content: "<p>This page will allow you to consult the list of all available spaces and to reserve a place on a slot, on behalf of a member.</p><p>A space can be, for example, a woodshop or a meeting room.</p><p>Their particularity is that they can be booked by several people at the same time.</p><p>Members can also access this page and reserve a machine themselves, if credit card payment is enabled, or if some prices are equal to 0.</p>"
+          events:
+            title: "Events"
+            content: "<p>An open house evening or an internship to make your desk lamp? It's over here!</p><p>Events can be free or paid (with different prices), with or without reservation.</p><p>Again, members can access this page and book themselves places for free events, or paid events if credit card payment is enabled.</p>"
           calendar:
-            calendar: "Calendário"
-            show_unavailables: "Mostrar slots não disponíveis"
-            filter_calendar: "Filtrar calendário"
-            trainings: "Treinamentos"
-            machines: "Máquinas"
-            spaces: "Espaços"
-            events: "Eventos"
-
-        spaces_list:
-          # list of spaces
-          spaces_list:
-            the_spaces: "Os espaços"
-            add_a_space: "Adicionar espaço"
-            status_enabled: "Ativo"
-            status_disabled: "Desabilitado"
-            status_all: "Todos"
-            book: "Reservar"
-
-        space_show:
-          # display the details of a space
-          space_show:
-            book_this_space: "Marcar este espaço"
-            unauthorized_operation: "Operação não autorizada"
-            confirmation_required: "Confirmação obrigatória"
-            do_you_really_want_to_delete_this_space: "Você realmente deseja remover este espaço?"
-            the_space_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Impossível remover este espaço, pois ele já foi reservado por alguns usuários."
-            characteristics: "Características"
-            files_to_download: "Arquivo para download"
-            projects_using_the_space: "Projetos usando espaço"
+            title: "Agenda"
+            content: "Visualize at a glance everything that is scheduled for the next coming weeks (events, training, machines available, etc.)."
+          projects:
+            title: "Projects"
+            content: "<p>Document and share all your creations with the community.</p><p>If you use OpenLab, you will also be able to consult the projects of the entire Fab-Manager network. <a href='mailto:contact@fab-manager.com'>Contact-us</a> to get your access, it's free!</p>"
+          plans:
+            title: "Subscriptions"
+            content: "Subscriptions provide a way to segment your prices and provide benefits to regular users."
+          admin:
+            title: "Administrator section"
+            content: "<p>All of the elements below are only accessible to administrators. They allow you to manage and configure Fab-manager.</p><p>At the end of this visit, click on one of them to find out more.</p>"
+          about:
+            title: "About"
+            content: "A page that you can fully customize, to present your activity and your structure."
+          notifications:
+            title: "Notifications center"
+            content: "<p>Every time something important happens (reservations, creation of accounts, activity of your members, etc.), you will be notified here.</p><p>Your members also receive notifications there.</p>"
+          profile:
+            title: "User's menu"
+            content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
+          news:
+            title: "News"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from [Customization]> [Home page].</p>"
+          last_projects:
+            title: "Last projects"
+            content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
+          last_tweet:
+            title: "Last tweet"
+            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from [Customization]> [Home page].</p>"
+          last_members:
+            title: "Last members"
+            content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
+          next_events:
+            title: "Upcoming events"
+            content: "The next three scheduled events are displayed in this space."
+          customize:
+            title: "Customize the home page"
+            content: "<p>This page can be fully personalized.</p><p>You can <a href='mailto:contact@fab-manager.com'>contact-us</a> to make a tailored customization of the home page.</p>"
+          version:
+            title: "Application version"
+            content: "Hover your cursor over this icon to find out the version of Fab-manager. If you are not up to date, this will be reported here and you'll be able to get details by clicking on it."
+        machines:
+          welcome:
+            title: "Machines"
+            content: "<p>Machines are the tools available for your users. You must create here the machines which can then be reserved by the members.</p><p>You can also create entries for non-bookable or free access machines, then you just need to not associate availability slots with them.</p>"
+          view:
+            title: "View"
+            content: "To modify or delete a machine, click here first. You will not be able to delete a machine that has already been associated with availability slots, but you can deactivate it."
+        spaces:
+          welcome:
+            title: "Spaces"
+            content: "<p>Spaces are places available for your users. For example, a meeting room or a woodshop. You must create here the spaces which can then be reserved by members.</p><p>The specificity of the spaces is that they can be reserved by several users at the same time.</p>"
+          view:
+            title: "View"
+            content: "To modify or delete a space, click here first. You will not be able to delete a space that has already been associated with availability slots, but you can deactivate it."

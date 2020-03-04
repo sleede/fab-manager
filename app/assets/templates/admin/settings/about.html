@@ -1,33 +1,56 @@
 <div class="panel panel-default m-t-md">
+  <div class="panel-heading">
+    <span class="font-sbold" translate>{{ 'app.admin.settings.link' }}</span>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-4">
+      <form role="form" novalidate>
+        <label for="linkName" class="control-label m-r" translate>{{ 'app.admin.settings.link_to_about' }}</label>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-link"></i></div>
+            <input type="text" id="linkName" ng-model="linkName.value" class="form-control" placeholder="{{ 'app.admin.settings.link_to_about' | translate }}"/>
+          </div>
+        </div>
+        <button name="button" class="btn btn-warning" ng-click="save(linkName)" translate>{{ 'app.shared.buttons.save' }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default m-t-md">
+    <div class="panel-heading">
+      <span class="font-sbold" translate>{{ 'app.admin.settings.content' }}</span>
+    </div>
     <div class="panel-body">
 
         <div class="row m-t-lg m-b-lg">
             <div class="col-sm-offset-4 col-sm-4">
-                <h1 ng-model="aboutTitleSetting.value" medium-editor options='{"placeholder": "{{ "settings.title_of_the_about_page" | translate }}", "disableToolbar": true, "disableReturn": false}' class="text-u-c"></h1>
-                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'settings.shift_enter_to_force_carriage_return' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="save(aboutTitleSetting)" translate>{{ 'save' }}</button>
+                <h1 ng-model="aboutTitleSetting.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.title_of_the_about_page" | translate }}", "disableToolbar": true, "disableReturn": false}' class="text-u-c"></h1>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.shift_enter_to_force_carriage_return' | translate }}</span>
+                <button name="button" class="btn btn-warning" ng-click="save(aboutTitleSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
 
         </div>
 
         <div class="row">
             <div class="col-md-4 col-md-offset-1">
-                <div class="text-justify" ng-model="aboutBodySetting.value" medium-editor options='{"placeholder": "{{ "settings.input_the_main_content" | translate }}",
+                <div class="text-justify" ng-model="aboutBodySetting.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.input_the_main_content" | translate }}",
                   "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
                   }'>
 
                 </div>
-                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'settings.drag_and_drop_to_insert_images' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="save(aboutBodySetting)" translate>{{ 'save' }}</button>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.drag_and_drop_to_insert_images' | translate }}</span>
+                <button name="button" class="btn btn-warning" ng-click="save(aboutBodySetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
             <div class="col-md-4 col-md-offset-2">
-                <div ng-model="aboutContactsSetting.value" medium-editor options='{"placeholder": "{{ "settings.input_the_fablab_contacts" | translate }}",
+                <div ng-model="aboutContactsSetting.value" medium-editor options='{"placeholder": "{{ "app.admin.settings.input_the_fablab_contacts" | translate }}",
                   "buttons": ["bold", "italic", "anchor", "header1", "header2" ]
                   }'>
 
                 </div>
-                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'settings.shift_enter_to_force_carriage_return' | translate }}</span>
-                <button name="button" class="btn btn-warning" ng-click="save(aboutContactsSetting)" translate>{{ 'save' }}</button>
+                <span class="help-block text-info text-xs"><i class="fa fa-lightbulb-o"></i> {{ 'app.admin.settings.shift_enter_to_force_carriage_return' | translate }}</span>
+                <button name="button" class="btn btn-warning" ng-click="save(aboutContactsSetting)" translate>{{ 'app.shared.buttons.save' }}</button>
             </div>
 
         </div>

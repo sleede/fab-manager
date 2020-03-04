@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Admin defined assets (like PDF or images uploaded)
 class CustomAsset < ActiveRecord::Base
   has_one :custom_asset_file, as: :viewable, dependent: :destroy
   accepts_nested_attributes_for :custom_asset_file, allow_destroy: true
@@ -11,6 +14,6 @@ class CustomAsset < ActiveRecord::Base
   after_update :update_stylesheet if :viewable_changed?
 
   def update_stylesheet
-    Stylesheet.first.rebuild! if %w[profile-image-file].include? name
+    Stylesheet.theme.rebuild! if %w[profile-image-file].include? name
   end
 end

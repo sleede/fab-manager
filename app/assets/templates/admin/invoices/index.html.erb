@@ -5,33 +5,39 @@
         <a href="#" ng-click="backPrevLocation($event)"><i class="fa fa-long-arrow-left "></i></a>
       </section>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-8 b-l">
+    <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r">
       <section class="heading-title">
-        <h1 translate>{{ 'invoices.invoices' }}</h1>
+        <h1 translate>{{ 'app.admin.invoices.invoices' }}</h1>
       </section>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md">
+    <div class="col-xs-12 col-sm-12 col-md-3">
       <section class="heading-actions wrapper">
-        <a class="btn btn-default rounded m-t-sm" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
+        <a class="btn btn-default rounded m-t-sm export-accounting-button" ng-click="toggleExportModal()"><i class="fa fa-book"></i></a>
         <iframe name="export-frame" height="0" width="0" class="none" id="accounting-export-frame"></iframe>
-        <a class="btn btn-lg btn-default rounded m-t-sm text-sm" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'invoices.accounting_periods' | translate }}</a>
+        <a class="btn btn-lg btn-default rounded m-t-sm text-sm close-accounting-periods-button" ng-click="closeAnAccountingPeriod()"><i class="fa fa-calendar-check-o"></i> {{ 'app.admin.invoices.accounting_periods' | translate }}</a>
       </section>
     </div>
   </div>
 </section>
 
-<section class="m-lg">
+<section class="m-lg invoices-management"
+         ui-tour="invoices"
+         ui-tour-backdrop="true"
+         ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+         ui-tour-use-hotkeys="true"
+         ui-tour-scroll-parent-id="content-main"
+         post-render="setupInvoicesTour">
   <div class="row">
     <div class="col-md-12">
-      <uib-tabset justified="true">
-        <uib-tab heading="{{ 'invoices.invoices_list' | translate }}" ng-hide="fablabWithoutInvoices" active="tabs.listing.active">
-          <h3 class="m-t-xs"><i class="fa fa-filter"></i> {{ 'invoices.filter_invoices' | translate }}</h3>
+      <uib-tabset justified="true" active="tabs.active">
+        <uib-tab heading="{{ 'app.admin.invoices.invoices_list' | translate }}" ng-hide="fablabWithoutInvoices" index="0">
+          <h3 class="m-t-xs"><i class="fa fa-filter"></i> {{ 'app.admin.invoices.filter_invoices' | translate }}</h3>
 
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon" translate>{{ 'invoices.invoice_num_' }}</span>
+                  <span class="input-group-addon" translate>{{ 'app.admin.invoices.invoice_num_' }}</span>
                   <input type="text" ng-model="searchInvoice.reference" class="form-control" placeholder="" ng-change="handleFilterChange()">
                 </div>
               </div>
@@ -40,7 +46,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon" translate>{{ 'invoices.customer_' }}</span>
+                  <span class="input-group-addon" translate>{{ 'app.admin.invoices.customer_' }}</span>
                   <input type="text" ng-model="searchInvoice.name" class="form-control" placeholder="" ng-change="handleFilterChange()">
                 </div>
               </div>
@@ -49,7 +55,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon">{{ "invoices.date_" | translate }}</span>
+                  <span class="input-group-addon">{{ "app.admin.invoices.date_" | translate }}</span>
                   <input type="date" ng-model="searchInvoice.date" class="form-control" ng-change="handleFilterChange()">
                 </div>
               </div>
@@ -60,24 +66,24 @@
           <div class="row">
     		    <div class="col-md-12">
 
-    		      <table class="table" ng-if="invoices.length > 0">
+    		      <table class="table invoices-list" ng-if="invoices.length > 0">
     		        <thead>
     		        <tr>
                   <th style="width:5%"></th>
-    		          <th style="width:15%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'invoices.invoice_num' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+    		          <th style="width:15%"><a href="" ng-click="setOrderInvoice('reference')">{{ 'app.admin.invoices.invoice_num' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='reference', 'fa fa-sort-numeric-desc': orderInvoice=='-reference', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
-    		          <th style="width:20%"><a href="" ng-click="setOrderInvoice('date')">{{ 'invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+    		          <th style="width:20%"><a href="" ng-click="setOrderInvoice('date')">{{ 'app.admin.invoices.date' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='date', 'fa fa-sort-numeric-desc': orderInvoice=='-date', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
-    		          <th style="width:10%"><a href="" ng-click="setOrderInvoice('total')"> {{ 'invoices.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='total', 'fa fa-sort-numeric-desc': orderInvoice=='-total', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+    		          <th style="width:10%"><a href="" ng-click="setOrderInvoice('total')"> {{ 'app.admin.invoices.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderInvoice=='total', 'fa fa-sort-numeric-desc': orderInvoice=='-total', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
-    		          <th style="width:20%"><a href="" ng-click="setOrderInvoice('name')">{{ 'invoices.customer' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderInvoice=='name', 'fa fa-sort-alpha-desc': orderInvoice=='-name', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
+    		          <th style="width:20%"><a href="" ng-click="setOrderInvoice('name')">{{ 'app.admin.invoices.customer' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderInvoice=='name', 'fa fa-sort-alpha-desc': orderInvoice=='-name', 'fa fa-arrows-v': orderInvoice }"></i></a></th>
 
     		          <th style="width:30%"></th>
     		        </tr>
     		        </thead>
     		        <tbody>
     		        <tr ng-repeat="invoice in invoices">
-                  <td>
+                  <td class="chained-indicator">
                     <i class="fa fa-link chained" ng-show="invoice.chained_footprint"/>
                     <i class="fa fa-chain-broken broken" ng-hide="invoice.chained_footprint"/>
                   </td>
@@ -90,14 +96,14 @@
                     <span ng-hide="invoice.user_id">{{ invoice.name }}</span>
     		          <td>
     		            <div class="buttons">
-    		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
-    		                <i class="fa fa-file-pdf-o"></i> {{ 'invoices.download_the_invoice' | translate }}
+    		              <a class="btn btn-default download-button" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="!invoice.is_avoir">
+    		                <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.invoices.download_the_invoice' | translate }}
     		              </a>
     		              <a class="btn btn-default" ng-href="api/invoices/{{invoice.id}}/download" target="_blank" ng-if="invoice.is_avoir">
-    		                <i class="fa fa-file-pdf-o"></i> {{ 'invoices.download_the_credit_note' | translate }}
+    		                <i class="fa fa-file-pdf-o"></i> {{ 'app.admin.invoices.download_the_credit_note' | translate }}
     		              </a>
-    		              <a class="btn btn-default" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
-    		                <i class="fa fa-reply"></i> {{ 'invoices.credit_note' | translate }}
+    		              <a class="btn btn-default refund-button" ng-click="generateAvoirForInvoice(invoice)" ng-if="(!invoice.has_avoir || invoice.has_avoir == 'partial') && !invoice.is_avoir && !invoice.prevent_refund && !isDateClosed(invoice.created_at)">
+    		                <i class="fa fa-reply"></i> {{ 'app.admin.invoices.credit_note' | translate }}
     		              </a>
     		            </div>
     		          </td>
@@ -105,9 +111,9 @@
     		        </tbody>
     		      </table>
               <div class="text-center">
-                <button class="btn btn-warning" ng-click="showNextInvoices()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'invoices.display_more_invoices' | translate }}</button>
+                <button class="btn btn-warning" ng-click="showNextInvoices()" ng-hide="noMoreResults"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ 'app.admin.invoices.display_more_invoices' | translate }}</button>
               </div>
-    		      <p ng-if="invoices.length == 0" translate>{{ 'invoices.no_invoices_for_now' }}</p>
+    		      <p ng-if="invoices.length == 0" translate>{{ 'app.admin.invoices.no_invoices_for_now' }}</p>
 
     		    </div>
           </div>
@@ -116,211 +122,211 @@
 
 
 
-	    <uib-tab heading="{{ 'invoices.invoicing_settings' | translate }}" active="tabs.settings.active">
-      <div class="alert alert-warning p-md m-t" role="alert" ng-show="fablabWithoutInvoices">
-        <i class="fa fa-warning m-r"></i>
-        <span translate>{{ 'invoices.warning_invoices_disabled' }}</span>
-      </div>
-			<form class="invoice-placeholder">
-				<div class="invoice-logo">
-				    <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!invoice.logo" class="img-responsive">
-            <img base-sixty-four-image="invoice.logo" ng-if="invoice.logo && invoice.logo.base64">
-				    <div class="tools-box">
-				        <div class="btn-group">
-				            <div class="btn btn-default btn-file">
-				                <i class="fa fa-edit"></i> {{ 'invoices.change_logo' | translate }}
-				                <input type="file" accept="image/png,image/jpeg,image/x-png,image/pjpeg" name="invoice[logo][attachment]" ng-model="invoice.logo" base-sixty-four-input>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-        <div class="invoice-buyer-infos">
-            <strong translate>{{ 'invoices.john_smith' }}</strong>
-            <div translate>{{ 'invoices.john_smith_at_example_com' }}</div>
+	    <uib-tab heading="{{ 'app.admin.invoices.invoicing_settings' | translate }}" index="1" class="invoices-settings">
+        <div class="alert alert-warning p-md m-t" role="alert" ng-show="fablabWithoutInvoices">
+          <i class="fa fa-warning m-r"></i>
+          <span translate>{{ 'app.admin.invoices.warning_invoices_disabled' }}</span>
         </div>
-				<div class="invoice-reference invoice-editable" ng-click="openEditReference()">{{ 'invoices.invoice_reference_' | translate }} {{mkReference()}}</div>
-			  <div class="invoice-code invoice-editable" ng-show="invoice.code.active" ng-click="openEditCode()">{{ 'invoices.code_' | translate }} {{invoice.code.model}}</div>
-        <div class="invoice-code invoice-activable" ng-show="!invoice.code.active" ng-click="openEditCode()" translate>{{ 'invoices.code_disabled' }}</div>
-				<div class="invoice-order invoice-editable" ng-click="openEditInvoiceNb()"> {{ 'invoices.order_num' | translate }} {{mkNumber()}}</div>
-				<div class="invoice-date">{{ 'invoices.invoice_issued_on_DATE_at_TIME' | translate:{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT')} }}</div>
-				<div class="invoice-object">
-					{{ 'invoices.object_reservation_of_john_smith_on_DATE_at_TIME' | translate:{DATE:(inOneWeek | amDateFormat:'L'), TIME:(inOneWeek | amDateFormat:'LT')} }}
-				</div>
-				<div class="invoice-data">
-					{{ 'invoices.order_summary' | translate }}
-					<table>
-						<thead>
-							<tr>
-								<th translate>{{ 'invoices.details' }}</th>
-								<th class="right" translate>{{ 'invoices.amount' }}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{ 'invoices.machine_booking-3D_printer' | translate }} {{inOneWeek | amDateFormat:'LLL'}} - {{inOneWeekAndOneHour | amDateFormat:'LT'}}</td>
-								<td class="right">{{30.0 | currency}}</td>
-							</tr>
+        <form class="invoice-placeholder">
+          <div class="invoice-logo">
+              <img src="data:image/png;base64," data-src="holder.js/100%x100%/text:&#xf03e;/font:FontAwesome/icon" bs-holder ng-if="!invoice.logo" class="img-responsive">
+              <img base-sixty-four-image="invoice.logo" ng-if="invoice.logo && invoice.logo.base64">
+              <div class="tools-box">
+                  <div class="btn-group">
+                      <div class="btn btn-default btn-file">
+                          <i class="fa fa-edit"></i> {{ 'app.admin.invoices.change_logo' | translate }}
+                          <input type="file" accept="image/png,image/jpeg,image/x-png,image/pjpeg" name="invoice[logo][attachment]" ng-model="invoice.logo" base-sixty-four-input>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="invoice-buyer-infos">
+              <strong translate>{{ 'app.admin.invoices.john_smith' }}</strong>
+              <div translate>{{ 'app.admin.invoices.john_smith_at_example_com' }}</div>
+          </div>
+          <div class="invoice-reference invoice-editable" ng-click="openEditReference()">{{ 'app.admin.invoices.invoice_reference_' | translate }} {{mkReference()}}</div>
+          <div class="invoice-code invoice-editable" ng-show="invoice.code.active" ng-click="openEditCode()">{{ 'app.admin.invoices.code_' | translate }} {{invoice.code.model}}</div>
+          <div class="invoice-code invoice-activable" ng-show="!invoice.code.active" ng-click="openEditCode()" translate>{{ 'app.admin.invoices.code_disabled' }}</div>
+          <div class="invoice-order invoice-editable" ng-click="openEditInvoiceNb()"> {{ 'app.admin.invoices.order_num' | translate }} {{mkNumber()}}</div>
+          <div class="invoice-date">{{ 'app.admin.invoices.invoice_issued_on_DATE_at_TIME' | translate:{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT')} }}</div>
+          <div class="invoice-object">
+            {{ 'app.admin.invoices.object_reservation_of_john_smith_on_DATE_at_TIME' | translate:{DATE:(inOneWeek | amDateFormat:'L'), TIME:(inOneWeek | amDateFormat:'LT')} }}
+          </div>
+          <div class="invoice-data">
+            {{ 'app.admin.invoices.order_summary' | translate }}
+            <table>
+              <thead>
+                <tr>
+                  <th translate>{{ 'app.admin.invoices.details' }}</th>
+                  <th class="right" translate>{{ 'app.admin.invoices.amount' }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ 'app.admin.invoices.machine_booking-3D_printer' | translate }} {{inOneWeek | amDateFormat:'LLL'}} - {{inOneWeekAndOneHour | amDateFormat:'LT'}}</td>
+                  <td class="right">{{30.0 | currency}}</td>
+                </tr>
 
-              <tr class="invoice-total" ng-class="{'bold vat-line':invoice.VAT.active}">
-								<td ng-show="!invoice.VAT.active" translate>{{ 'invoices.total_amount' }}</td>
-                <td ng-show="invoice.VAT.active" translate>{{ 'invoices.total_including_all_taxes' }}</td>
-								<td class="right">{{30.0 | currency}}</td>
-							</tr>
+                <tr class="invoice-total" ng-class="{'bold vat-line':invoice.VAT.active}">
+                  <td ng-show="!invoice.VAT.active" translate>{{ 'app.admin.invoices.total_amount' }}</td>
+                  <td ng-show="invoice.VAT.active" translate>{{ 'app.admin.invoices.total_including_all_taxes' }}</td>
+                  <td class="right">{{30.0 | currency}}</td>
+                </tr>
 
-              <tr class="invoice-vat invoice-activable" ng-click="openEditVAT()" ng-show="!invoice.VAT.active">
-                  <td translate>{{ 'invoices.VAT_disabled' }}</td>
-                  <td></td>
-              </tr>
+                <tr class="invoice-vat invoice-activable" ng-click="openEditVAT()" ng-show="!invoice.VAT.active">
+                    <td translate>{{ 'app.admin.invoices.VAT_disabled' }}</td>
+                    <td></td>
+                </tr>
 
-              <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
-                  <td>{{ 'invoices.including_VAT' | translate }} {{invoice.VAT.rate}} %</td>
-                  <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
-              </tr>
-              <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
-                  <td translate>{{ 'invoices.including_total_excluding_taxes' }}</td>
-                  <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
-              </tr>
-              <tr class="invoice-payed vat-line bold" ng-show="invoice.VAT.active">
-                  <td translate>{{ 'invoices.including_amount_payed_on_ordering' }}</td>
-                  <td>{{30.0 | currency}}</td>
-              </tr>
+                <tr class="invoice-vat invoice-editable vat-line italic" ng-click="openEditVAT()" ng-show="invoice.VAT.active">
+                    <td>{{ 'app.admin.invoices.including_VAT' | translate }} {{invoice.VAT.rate}} %</td>
+                    <td>{{30-(30/(invoice.VAT.rate/100+1)) | currency}}</td>
+                </tr>
+                <tr class="invoice-ht vat-line italic" ng-show="invoice.VAT.active">
+                    <td translate>{{ 'app.admin.invoices.including_total_excluding_taxes' }}</td>
+                    <td>{{30/(invoice.VAT.rate/100+1) | currency}}</td>
+                </tr>
+                <tr class="invoice-payed vat-line bold" ng-show="invoice.VAT.active">
+                    <td translate>{{ 'app.admin.invoices.including_amount_payed_on_ordering' }}</td>
+                    <td>{{30.0 | currency}}</td>
+                </tr>
 
-						</tbody>
-					</table>
-					<p class="invoice-payment" translate translate-values="{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT'), AMOUNT:(30.0 | currency)}">
-						{{ 'invoices.settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT' }}
-					</p>
-				</div>
-				<div medium-editor class="invoice-text invoice-editable" ng-model="invoice.text.content"
-             options='{
-                  "placeholder": "{{ "invoices.important_notes" | translate }}",
-                  "buttons": ["underline"]
-             }'
-             ng-blur="textEditEnd($event)">
-				</div>
-				<div medium-editor class="invoice-legals invoice-editable" ng-model="invoice.legals.content"
-             options='{
-                  "placeholder": "{{ "invoices.address_and_legal_information" | translate }}",
-                  "buttons": ["bold", "underline"]
-             }'
-             ng-blur="legalsEditEnd($event)">
-				</div>
-			</form>
+              </tbody>
+            </table>
+            <p class="invoice-payment" translate translate-values="{DATE:(today | amDateFormat:'L'), TIME:(today | amDateFormat:'LT'), AMOUNT:(30.0 | currency)}">
+              {{ 'app.admin.invoices.settlement_by_debit_card_on_DATE_at_TIME_for_an_amount_of_AMOUNT' }}
+            </p>
+          </div>
+          <div medium-editor class="invoice-text invoice-editable" ng-model="invoice.text.content"
+               options='{
+                    "placeholder": "{{ "app.admin.invoices.important_notes" | translate }}",
+                    "buttons": ["underline"]
+               }'
+               ng-blur="textEditEnd($event)">
+          </div>
+          <div medium-editor class="invoice-legals invoice-editable" ng-model="invoice.legals.content"
+               options='{
+                    "placeholder": "{{ "app.admin.invoices.address_and_legal_information" | translate }}",
+                    "buttons": ["bold", "underline"]
+               }'
+               ng-blur="legalsEditEnd($event)">
+          </div>
+        </form>
 	    </uib-tab>
 
 
 
 
-      <uib-tab heading="{{ 'invoices.accounting_codes' | translate }}">
+      <uib-tab heading="{{ 'app.admin.invoices.accounting_codes' | translate }}" index="2" class="accounting-codes-tab">
         <div class="panel panel-default m-t-md accounting-codes">
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
-                <label for="journalCode" translate>{{ 'invoices.accounting_journal_code' }}</label>
-                <input type="text" id="journalCode" ng-model="settings.journalCode.value" class="form-control" placeholder="{{ 'invoices.general_journal_code' | translate }}"/>
+                <label for="journalCode" translate>{{ 'app.admin.invoices.accounting_journal_code' }}</label>
+                <input type="text" id="journalCode" ng-model="settings.journalCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_journal_code' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="cardClientCode" translate>{{ 'invoices.accounting_card_client_code' }}</label>
-                <input type="text" id="cardClientCode" ng-model="settings.cardClientCode.value" class="form-control" placeholder="{{ 'invoices.card_client_code' | translate }}" />
+                <label for="cardClientCode" translate>{{ 'app.admin.invoices.accounting_card_client_code' }}</label>
+                <input type="text" id="cardClientCode" ng-model="settings.cardClientCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.card_client_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="cardClientLabel" translate>{{ 'invoices.accounting_card_client_label' }}</label>
-                <input type="text" id="cardClientLabel" ng-model="settings.cardClientLabel.value" class="form-control" placeholder="{{ 'invoices.card_client_label' | translate }}"/>
+                <label for="cardClientLabel" translate>{{ 'app.admin.invoices.accounting_card_client_label' }}</label>
+                <input type="text" id="cardClientLabel" ng-model="settings.cardClientLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.card_client_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="walletClientCode" translate>{{ 'invoices.accounting_wallet_client_code' }}</label>
-                <input type="text" id="walletClientCode" ng-model="settings.walletClientCode.value" class="form-control" placeholder="{{ 'invoices.wallet_client_code' | translate }}" />
+                <label for="walletClientCode" translate>{{ 'app.admin.invoices.accounting_wallet_client_code' }}</label>
+                <input type="text" id="walletClientCode" ng-model="settings.walletClientCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.wallet_client_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="walletClientLabel" translate>{{ 'invoices.accounting_wallet_client_label' }}</label>
-                <input type="text" id="walletClientLabel" ng-model="settings.walletClientLabel.value" class="form-control" placeholder="{{ 'invoices.wallet_client_label' | translate }}"/>
+                <label for="walletClientLabel" translate>{{ 'app.admin.invoices.accounting_wallet_client_label' }}</label>
+                <input type="text" id="walletClientLabel" ng-model="settings.walletClientLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.wallet_client_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="otherClientCode" translate>{{ 'invoices.accounting_other_client_code' }}</label>
-                <input type="text" id="otherClientCode" ng-model="settings.otherClientCode.value" class="form-control" placeholder="{{ 'invoices.other_client_code' | translate }}" />
+                <label for="otherClientCode" translate>{{ 'app.admin.invoices.accounting_other_client_code' }}</label>
+                <input type="text" id="otherClientCode" ng-model="settings.otherClientCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.other_client_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="otherClientLabel" translate>{{ 'invoices.accounting_other_client_label' }}</label>
-                <input type="text" id="otherClientLabel" ng-model="settings.otherClientLabel.value" class="form-control" placeholder="{{ 'invoices.other_client_label' | translate }}"/>
+                <label for="otherClientLabel" translate>{{ 'app.admin.invoices.accounting_other_client_label' }}</label>
+                <input type="text" id="otherClientLabel" ng-model="settings.otherClientLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.other_client_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="walletCode" translate>{{ 'invoices.accounting_wallet_code' }}</label>
-                <input type="text" id="walletCode" ng-model="settings.walletCode.value" class="form-control" placeholder="{{ 'invoices.general_wallet_code' | translate }}" />
+                <label for="walletCode" translate>{{ 'app.admin.invoices.accounting_wallet_code' }}</label>
+                <input type="text" id="walletCode" ng-model="settings.walletCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_wallet_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="walletLabel" translate>{{ 'invoices.accounting_wallet_label' }}</label>
-                <input type="text" id="walletLabel" ng-model="settings.walletLabel.value" class="form-control" placeholder="{{ 'invoices.general_wallet_label' | translate }}"/>
+                <label for="walletLabel" translate>{{ 'app.admin.invoices.accounting_wallet_label' }}</label>
+                <input type="text" id="walletLabel" ng-model="settings.walletLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_wallet_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="vatCode" translate>{{ 'invoices.accounting_vat_code' }}</label>
-                <input type="text" id="vatCode" ng-model="settings.vatCode.value" class="form-control" placeholder="{{ 'invoices.general_vat_code' | translate }}"/>
+                <label for="vatCode" translate>{{ 'app.admin.invoices.accounting_vat_code' }}</label>
+                <input type="text" id="vatCode" ng-model="settings.vatCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_vat_code' | translate }}"/>
               </div>
               <div class="col-md-6">
-                <label for="vatLabel" translate>{{ 'invoices.accounting_vat_label' }}</label>
-                <input type="text" id="vatLabel" ng-model="settings.vatLabel.value" class="form-control" placeholder="{{ 'invoices.general_vat_label' | translate }}"/>
+                <label for="vatLabel" translate>{{ 'app.admin.invoices.accounting_vat_label' }}</label>
+                <input type="text" id="vatLabel" ng-model="settings.vatLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_vat_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="subscriptionCode" translate>{{ 'invoices.accounting_subscription_code' }}</label>
-                <input type="text" id="subscriptionCode" ng-model="settings.subscriptionCode.value" class="form-control" placeholder="{{ 'invoices.general_subscription_code' | translate }}" />
+                <label for="subscriptionCode" translate>{{ 'app.admin.invoices.accounting_subscription_code' }}</label>
+                <input type="text" id="subscriptionCode" ng-model="settings.subscriptionCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_subscription_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="subscriptionLabel" translate>{{ 'invoices.accounting_subscription_label' }}</label>
-                <input type="text" id="subscriptionLabel" ng-model="settings.subscriptionLabel.value" class="form-control" placeholder="{{ 'invoices.general_subscription_label' | translate }}"/>
+                <label for="subscriptionLabel" translate>{{ 'app.admin.invoices.accounting_subscription_label' }}</label>
+                <input type="text" id="subscriptionLabel" ng-model="settings.subscriptionLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_subscription_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="machineCode" translate>{{ 'invoices.accounting_Machine_code' }}</label>
-                <input type="text" id="machineCode" ng-model="settings.machineCode.value" class="form-control" placeholder="{{ 'invoices.general_machine_code' | translate }}"/>
+                <label for="machineCode" translate>{{ 'app.admin.invoices.accounting_Machine_code' }}</label>
+                <input type="text" id="machineCode" ng-model="settings.machineCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_machine_code' | translate }}"/>
               </div>
               <div class="col-md-6">
-                <label for="machineLabel" translate>{{ 'invoices.accounting_Machine_label' }}</label>
-                <input type="text" id="machineLabel" ng-model="settings.machineLabel.value" class="form-control" placeholder="{{ 'invoices.general_machine_label' | translate }}"/>
+                <label for="machineLabel" translate>{{ 'app.admin.invoices.accounting_Machine_label' }}</label>
+                <input type="text" id="machineLabel" ng-model="settings.machineLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_machine_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="trainingCode" translate>{{ 'invoices.accounting_Training_code' }}</label>
-                <input type="text" id="trainingCode" ng-model="settings.trainingCode.value" class="form-control" placeholder="{{ 'invoices.general_training_code' | translate }}" />
+                <label for="trainingCode" translate>{{ 'app.admin.invoices.accounting_Training_code' }}</label>
+                <input type="text" id="trainingCode" ng-model="settings.trainingCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_training_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="trainingLabel" translate>{{ 'invoices.accounting_Training_label' }}</label>
-                <input type="text" id="trainingLabel" ng-model="settings.trainingLabel.value" class="form-control" placeholder="{{ 'invoices.general_training_label' | translate }}"/>
+                <label for="trainingLabel" translate>{{ 'app.admin.invoices.accounting_Training_label' }}</label>
+                <input type="text" id="trainingLabel" ng-model="settings.trainingLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_training_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="eventCode" translate>{{ 'invoices.accounting_Event_code' }}</label>
-                <input type="text" id="eventCode" ng-model="settings.eventCode.value" class="form-control" placeholder="{{ 'invoices.general_event_code' | translate }}"/>
+                <label for="eventCode" translate>{{ 'app.admin.invoices.accounting_Event_code' }}</label>
+                <input type="text" id="eventCode" ng-model="settings.eventCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_event_code' | translate }}"/>
               </div>
               <div class="col-md-6">
-                <label for="eventLabel" translate>{{ 'invoices.accounting_Event_label' }}</label>
-                <input type="text" id="eventLabel" ng-model="settings.eventLabel.value" class="form-control" placeholder="{{ 'invoices.general_event_label' | translate }}"/>
+                <label for="eventLabel" translate>{{ 'app.admin.invoices.accounting_Event_label' }}</label>
+                <input type="text" id="eventLabel" ng-model="settings.eventLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_event_label' | translate }}"/>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label for="spaceCode" translate>{{ 'invoices.accounting_Space_code' }}</label>
-                <input type="text" id="spaceCode" ng-model="settings.spaceCode.value" class="form-control" placeholder="{{ 'invoices.general_space_code' | translate }}" />
+                <label for="spaceCode" translate>{{ 'app.admin.invoices.accounting_Space_code' }}</label>
+                <input type="text" id="spaceCode" ng-model="settings.spaceCode.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_space_code' | translate }}" />
               </div>
               <div class="col-md-6">
-                <label for="spaceLabel" translate>{{ 'invoices.accounting_Space_label' }}</label>
-                <input type="text" id="spaceLabel" ng-model="settings.spaceLabel.value" class="form-control" placeholder="{{ 'invoices.general_space_label' | translate }}"/>
+                <label for="spaceLabel" translate>{{ 'app.admin.invoices.accounting_Space_label' }}</label>
+                <input type="text" id="spaceLabel" ng-model="settings.spaceLabel.value" class="form-control" placeholder="{{ 'app.admin.invoices.general_space_label' | translate }}"/>
               </div>
             </div>
-            <button name="button" class="btn btn-warning m-t-lg" ng-click="save()" translate>{{ 'save' }}</button>
+            <button name="button" class="btn btn-warning m-t-lg" ng-click="save()" translate>{{ 'app.shared.buttons.save' }}</button>
           </div>
         </div>
       </uib-tab>
@@ -333,125 +339,125 @@
 <script type="text/ng-template" id="editReference.html">
     <div class="custom-invoice">
       <div class="modal-header">
-          <h3 class="modal-title" translate>{{ 'invoices.invoice_reference' }}</h3>
+          <h3 class="modal-title" translate>{{ 'app.admin.invoices.invoice_reference' }}</h3>
       </div>
       <div class="modal-body row">
           <div class="elements col-md-4">
               <h4>Éléments</h4>
               <ul>
-                  <li ng-click="invoice.reference.help = 'addYear.html'">{{ 'invoices.year' | translate }}</li>
-                  <li ng-click="invoice.reference.help = 'addMonth.html'">{{ 'invoices.month' | translate }}</li>
-                  <li ng-click="invoice.reference.help = 'addDay.html'">{{ 'invoices.day' | translate }}</li>
-                  <li ng-click="invoice.reference.help = 'addInvoiceNumber.html'">{{ 'invoices.num_of_invoice' | translate }}</li>
-                  <li ng-click="invoice.reference.help = 'addOnlineInfo.html'">{{ 'invoices.online_sales' | translate }}</li>
-                  <%# <li ng-click="invoice.reference.help = 'addWalletInfo.html'">{{ 'invoices.wallet' | translate }}</li> %>
-                  <li ng-click="invoice.reference.help = 'addRefundInfo.html'">{{ 'invoices.refund' | translate }}</li>
+                  <li ng-click="invoice.reference.help = 'addYear.html'">{{ 'app.admin.invoices.year' | translate }}</li>
+                  <li ng-click="invoice.reference.help = 'addMonth.html'">{{ 'app.admin.invoices.month' | translate }}</li>
+                  <li ng-click="invoice.reference.help = 'addDay.html'">{{ 'app.admin.invoices.day' | translate }}</li>
+                  <li ng-click="invoice.reference.help = 'addInvoiceNumber.html'">{{ 'app.admin.invoices.num_of_invoice' | translate }}</li>
+                  <li ng-click="invoice.reference.help = 'addOnlineInfo.html'">{{ 'app.admin.invoices.online_sales' | translate }}</li>
+                  <%# <li ng-click="invoice.reference.help = 'addWalletInfo.html'">{{ 'app.admin.invoices.wallet' | translate }}</li> %>
+                  <li ng-click="invoice.reference.help = 'addRefundInfo.html'">{{ 'app.admin.invoices.refund' | translate }}</li>
               </ul>
           </div>
           <div class="col-md-8">
             <div class="model">
-                <h4 translate>{{ 'invoices.model' }}</h4>
+                <h4 translate>{{ 'app.admin.invoices.model' }}</h4>
                 <input type="text" class="form-control" ng-model="model">
             </div>
             <div class="help">
-                <h4 translate>{{ 'invoices.documentation' }}</h4>
+                <h4 translate>{{ 'app.admin.invoices.documentation' }}</h4>
                 <ng-include src="invoice.reference.help" autoscroll="true">
                 </ng-include>
             </div>
           </div>
       </div>
       <div class="modal-footer">
-          <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
-          <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+          <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+          <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
       </div>
     </div>
 </script>
 
 <script type="text/ng-template" id="addYear.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>YY</strong></td><td translate>{{ 'invoices.2_digits_year' }}</td></tr>
-        <tr><td><strong>YYYY</strong></td><td translate>{{ 'invoices.4_digits_year' }}</td></tr>
+        <tr><td><strong>YY</strong></td><td translate>{{ 'app.admin.invoices.2_digits_year' }}</td></tr>
+        <tr><td><strong>YYYY</strong></td><td translate>{{ 'app.admin.invoices.4_digits_year' }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addMonth.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>M</strong></td><td translate>{{ 'invoices.month_number' }}</td></tr>
-        <tr><td><strong>MM</strong></td><td translate>{{ 'invoices.2_digits_month_number' }}</td></tr>
-        <tr><td><strong>MMM</strong></td><td translate>{{ 'invoices.3_characters_month_name' }}</td></tr>
+        <tr><td><strong>M</strong></td><td translate>{{ 'app.admin.invoices.month_number' }}</td></tr>
+        <tr><td><strong>MM</strong></td><td translate>{{ 'app.admin.invoices.2_digits_month_number' }}</td></tr>
+        <tr><td><strong>MMM</strong></td><td translate>{{ 'app.admin.invoices.3_characters_month_name' }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addDay.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>D</strong></td><td translate>{{ 'invoices.day_in_the_month' }}</td></tr>
-        <tr><td><strong>DD</strong></td><td translate>{{ 'invoices.2_digits_day_in_the_month' }}</td></tr>
+        <tr><td><strong>D</strong></td><td translate>{{ 'app.admin.invoices.day_in_the_month' }}</td></tr>
+        <tr><td><strong>DD</strong></td><td translate>{{ 'app.admin.invoices.2_digits_day_in_the_month' }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addInvoiceNumber.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'invoices.n_digits_daily_count_of_invoices' }}</td></tr>
-        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'invoices.n_digits_monthly_count_of_invoices' }}</td></tr>
-        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'invoices.n_digits_annual_amount_of_invoices' }}</td></tr>
+        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'app.admin.invoices.n_digits_daily_count_of_invoices' }}</td></tr>
+        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'app.admin.invoices.n_digits_monthly_count_of_invoices' }}</td></tr>
+        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'app.admin.invoices.n_digits_annual_amount_of_invoices' }}</td></tr>
     </table>
-    <span class="bottom-notes" translate>{{ 'invoices.beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left' }}</span>
+    <span class="bottom-notes" translate>{{ 'app.admin.invoices.beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left' }}</span>
 </script>
 
 <script type="text/ng-template" id="addOrderNumber.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>nn...nn</strong></td><td translate>{{ 'invoices.n_digits_count_of_orders' }}</td></tr>
-        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'invoices.n_digits_daily_count_of_orders' }}</td></tr>
-        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'invoices.n_digits_monthly_count_of_orders' }}</td></tr>
-        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'invoices.n_digits_annual_amount_of_orders' }}</td></tr>
+        <tr><td><strong>nn...nn</strong></td><td translate>{{ 'app.admin.invoices.n_digits_count_of_orders' }}</td></tr>
+        <tr><td><strong>dd...dd</strong></td><td translate>{{ 'app.admin.invoices.n_digits_daily_count_of_orders' }}</td></tr>
+        <tr><td><strong>mm...mm</strong></td><td translate>{{ 'app.admin.invoices.n_digits_monthly_count_of_orders' }}</td></tr>
+        <tr><td><strong>yy...yy</strong></td><td translate>{{ 'app.admin.invoices.n_digits_annual_amount_of_orders' }}</td></tr>
     </table>
-    <span class="bottom-notes" translate>{{ 'invoices.beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left' }}</span>
+    <span class="bottom-notes" translate>{{ 'app.admin.invoices.beware_if_the_number_exceed_the_specified_length_it_will_be_truncated_by_the_left' }}</span>
 </script>
 
 <script type="text/ng-template" id="addOnlineInfo.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>X[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'invoices.eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe' | translate }}</td></tr>
+        <tr><td><strong>X[texte]</strong></td><td>{{ 'app.admin.invoices.add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'app.admin.invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'app.admin.invoices.eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe' | translate }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addWalletInfo.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>W[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'invoices.eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet' | translate }}</td></tr>
+        <tr><td><strong>W[texte]</strong></td><td>{{ 'app.admin.invoices.add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned' | translate }} <mark translate>{{ 'app.admin.invoices.this_will_never_be_added_when_a_refund_notice_is_present' }}</mark> {{ 'app.admin.invoices.eg_WPM_will_add_PM_to_the_invoices_settled_with_wallet' | translate }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="addRefundInfo.html">
     <table class="invoice-element-legend">
-        <tr><td><strong>R[texte]</strong></td><td>{{ 'invoices.add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned' | translate }}<mark translate>{{ 'invoices.this_will_never_be_added_when_an_online_sales_notice_is_present' }}</mark> {{ 'invoices.eg_RA_will_add_A_to_the_refund_invoices' | translate }}</td></tr>
+        <tr><td><strong>R[texte]</strong></td><td>{{ 'app.admin.invoices.add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned' | translate }}<mark translate>{{ 'app.admin.invoices.this_will_never_be_added_when_an_online_sales_notice_is_present' }}</mark> {{ 'app.admin.invoices.eg_RA_will_add_A_to_the_refund_invoices' | translate }}</td></tr>
     </table>
 </script>
 
 <script type="text/ng-template" id="editCode.html">
     <div class="custom-invoice">
       <div class="modal-header">
-          <h3 class="modal-title" translate>{{ 'invoices.code' }}</h3>
+          <h3 class="modal-title" translate>{{ 'app.admin.invoices.code' }}</h3>
       </div>
       <div class="modal-body">
             <div class="form-group">
-                  <label for="enableCode" class="control-label" translate>{{ 'invoices.enable_the_code' }}</label>
+                  <label for="enableCode" class="control-label" translate>{{ 'app.admin.invoices.enable_the_code' }}</label>
                   <input bs-switch
                          ng-model="isSelected"
                          id="enableCode"
                          type="checkbox"
                          class="form-control m-l-sm"
-                         switch-on-text="{{ 'invoices.enabled' | translate }}"
-                         switch-off-text="{{ 'invoices.disabled' | translate }}"
+                         switch-on-text="{{ 'app.admin.invoices.enabled' | translate }}"
+                         switch-off-text="{{ 'app.admin.invoices.disabled' | translate }}"
                          switch-animate="true"/>
             </div>
 
             <div class="form-group" ng-show="isSelected">
-                <label for="codeModel" class="control-label" translate>{{ 'invoices.code' }}</label>
+                <label for="codeModel" class="control-label" translate>{{ 'app.admin.invoices.code' }}</label>
                 <input id="codeModel" type="text" ng-model="codeModel" class="form-control"/>
             </div>
       </div>
       <div class="modal-footer">
-          <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
-          <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+          <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+          <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
       </div>
     </div>
 </script>
@@ -461,33 +467,33 @@
 <script type="text/ng-template" id="editNumber.html">
     <div class="custom-invoice">
         <div class="modal-header">
-            <h3 class="modal-title" translate>{{ 'invoices.order_number' }}</h3>
+            <h3 class="modal-title" translate>{{ 'app.admin.invoices.order_number' }}</h3>
         </div>
         <div class="modal-body row">
             <div class="elements col-md-4">
-                <h4 translate>{{ 'invoices.elements' }}</h4>
+                <h4 translate>{{ 'app.admin.invoices.elements' }}</h4>
                 <ul>
-                    <li ng-click="invoice.number.help = 'addYear.html'">{{ 'invoices.year' | translate }}</li>
-                    <li ng-click="invoice.number.help = 'addMonth.html'">{{ 'invoices.month' | translate }}</li>
-                    <li ng-click="invoice.number.help = 'addDay.html'">{{ 'invoices.day' | translate }}</li>
-                    <li ng-click="invoice.number.help = 'addOrderNumber.html'">{{ 'invoices.order_num' | translate }}</li>
+                    <li ng-click="invoice.number.help = 'addYear.html'">{{ 'app.admin.invoices.year' | translate }}</li>
+                    <li ng-click="invoice.number.help = 'addMonth.html'">{{ 'app.admin.invoices.month' | translate }}</li>
+                    <li ng-click="invoice.number.help = 'addDay.html'">{{ 'app.admin.invoices.day' | translate }}</li>
+                    <li ng-click="invoice.number.help = 'addOrderNumber.html'">{{ 'app.admin.invoices.order_num' | translate }}</li>
                 </ul>
             </div>
             <div class="col-md-8">
                 <div class="model">
-                    <h4 translate>{{ 'invoices.model' }}</h4>
+                    <h4 translate>{{ 'app.admin.invoices.model' }}</h4>
                     <input type="text" class="form-control" ng-model="model">
                 </div>
                 <div class="help">
-                    <h4 translate>{{ 'invoices.documentation' }}</h4>
+                    <h4 translate>{{ 'app.admin.invoices.documentation' }}</h4>
                     <ng-include src="invoice.number.help" autoscroll="true">
                     </ng-include>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
-            <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+            <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+            <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
         </div>
     </div>
 </script>
@@ -496,23 +502,23 @@
 <script type="text/ng-template" id="editVAT.html">
     <div class="custom-invoice">
         <div class="modal-header">
-            <h3 class="modal-title" translate>{{ 'invoices.VAT' }}</h3>
+            <h3 class="modal-title" translate>{{ 'app.admin.invoices.VAT' }}</h3>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="enableVAT" class="control-label" translate>{{ 'invoices.enable_VAT' }}</label>
+                <label for="enableVAT" class="control-label" translate>{{ 'app.admin.invoices.enable_VAT' }}</label>
                 <input bs-switch
                        ng-model="isSelected"
                        id="enableVAT"
                        type="checkbox"
                        class="form-control m-l-sm"
-                       switch-on-text="{{ 'invoices.enabled' | translate }}"
-                       switch-off-text="{{ 'invoices.disabled' | translate }}"
+                       switch-on-text="{{ 'app.admin.invoices.enabled' | translate }}"
+                       switch-off-text="{{ 'app.admin.invoices.disabled' | translate }}"
                        switch-animate="true"/>
             </div>
 
             <div class="form-group" ng-show="isSelected">
-                <label for="vatRate" class="control-label" translate>{{ 'invoices.VAT_rate' }}</label>
+                <label for="vatRate" class="control-label" translate>{{ 'app.admin.invoices.VAT_rate' }}</label>
                 <div class="input-group">
                     <span class="input-group-addon">% </span>
                     <input id="vatRate" type="number" ng-model="rate" class="form-control" min="0" max="100"/>
@@ -520,32 +526,32 @@
             </div>
 
           <div class="m-t-lg">
-            <h4 translate>{{ 'invoices.VAT_history' }}</h4>
+            <h4 translate>{{ 'app.admin.invoices.VAT_history' }}</h4>
             <table class="table scrollable-3-cols">
               <thead>
                 <tr>
-                  <th translate>{{ 'invoices.VAT_rate' }}</th>
-                  <th translate>{{ 'invoices.changed_at' }}</th>
-                  <th translate>{{ 'invoices.changed_by' }}</th>
+                  <th translate>{{ 'app.admin.invoices.VAT_rate' }}</th>
+                  <th translate>{{ 'app.admin.invoices.changed_at' }}</th>
+                  <th translate>{{ 'app.admin.invoices.changed_by' }}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="value in history | orderBy:'-date'">
                   <td>
-                    <span class="no-user-label" ng-show="value.enabled === false" translate>{{'invoices.VAT_disabled'}}</span>
-                    <span class="no-user-label" ng-show="value.enabled === true" translate>{{'invoices.VAT_enabled'}}</span>
+                    <span class="no-user-label" ng-show="value.enabled === false" translate>{{'app.admin.invoices.VAT_disabled'}}</span>
+                    <span class="no-user-label" ng-show="value.enabled === true" translate>{{'app.admin.invoices.VAT_enabled'}}</span>
                     <span ng-show="value.rate">{{value.rate}}</span>
                   </td>
                   <td>{{value.date | amDateFormat:'L LT'}}</td>
-                  <td>{{value.user.name}}<span class="no-user-label" ng-hide="value.user" translate>{{ 'invoices.deleted_user' }}</span></td>
+                  <td>{{value.user.name}}<span class="no-user-label" ng-hide="value.user" translate>{{ 'app.admin.invoices.deleted_user' }}</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
-            <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+            <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+            <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
         </div>
     </div>
 </script>

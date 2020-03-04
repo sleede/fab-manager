@@ -6,7 +6,7 @@ namespace :fablab do
 
     desc 'Cancel stripe subscriptions'
     task cancel_subscriptions: :environment do
-      Subscription.where('expiration_date >= ?', Time.now.at_beginning_of_day).each do |s|
+      Subscription.where('expiration_date >= ?', DateTime.current.at_beginning_of_day).each do |s|
         puts "-> Start cancel subscription of #{s.user.email}"
         s.cancel
         puts '-> Done'
@@ -43,6 +43,18 @@ namespace :fablab do
         cassette = cassette.gsub(Rails.application.secrets.stripe_publishable_key, 'pk_test_faketestfaketestfaketest')
         puts cassette
         File.write(cassette_file, cassette)
+      end
+    end
+
+    desc 'sync users to the stripe database'
+    task sync_members: :environment do
+      User.members.each do |member|
+        begin
+          stp_customer = Stripe::Customer.retrieve member.stp_customer_id
+          StripeWorker.perform_async(:create_stripe_customer, member.id) if stp_customer.nil? || stp_customer[:deleted]
+        rescue Stripe::InvalidRequestError
+          StripeWorker.perform_async(:create_stripe_customer, member.id)
+        end
       end
     end
   end

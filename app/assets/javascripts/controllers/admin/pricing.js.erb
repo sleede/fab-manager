@@ -18,9 +18,10 @@
 /**
  * Controller used in the prices edition page
  */
-Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t',
-  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, _t) {
-  /* PUBLIC SCOPE */
+Application.Controllers.controller('EditPricingController', ['$scope', '$state', '$uibModal', '$filter', 'TrainingsPricing', 'Credit', 'Pricing', 'Plan', 'Coupon', 'plans', 'groups', 'growl', 'machinesPricesPromise', 'Price', 'dialogs', 'trainingsPricingsPromise', 'trainingsPromise', 'machineCreditsPromise', 'machinesPromise', 'trainingCreditsPromise', 'couponsPromise', 'spacesPromise', 'spacesPricesPromise', 'spacesCreditsPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, $uibModal, $filter, TrainingsPricing, Credit, Pricing, Plan, Coupon, plans, groups, growl, machinesPricesPromise, Price, dialogs, trainingsPricingsPromise, trainingsPromise, machineCreditsPromise, machinesPromise, trainingCreditsPromise, couponsPromise, spacesPromise, spacesPricesPromise, spacesCreditsPromise, _t, Member, uiTourService) {
+    /* PUBLIC SCOPE */
+
     // List of machines prices (not considering any plan)
     $scope.machinesPrices = machinesPricesPromise;
 
@@ -84,7 +85,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
 
     // Default: we do not filter coupons
     $scope.filter = {
-      coupon: 'all',
+      coupon: 'all'
     };
 
     // Available status for filtering coupons
@@ -96,6 +97,16 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       'active'
     ];
 
+    // default tab: plans list
+    $scope.tabs = { active: 0 };
+
+    /**
+     * Retrieve a training price from all the trainings prices
+     * @param trainingsPricings {Array<Object>} all trainings prices
+     * @param trainingId {number}
+     * @param groupId {number}
+     * @returns {float}
+     */
     $scope.findTrainingsPricing = function (trainingsPricings, trainingId, groupId) {
       for (let trainingsPricing of Array.from(trainingsPricings)) {
         if ((trainingsPricing.training_id === trainingId) && (trainingsPricing.group_id === groupId)) {
@@ -104,11 +115,17 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
     };
 
+    /**
+     * Update the price of a training for the given parameters
+     * @param data {float} the new price
+     * @param trainingsPricing {Object} the training pricing to update
+     * @returns {Promise|string}
+     */
     $scope.updateTrainingsPricing = function (data, trainingsPricing) {
       if (data != null) {
         return TrainingsPricing.update({ id: trainingsPricing.id }, { trainings_pricing: { amount: data } }).$promise;
       } else {
-        return _t('pricing.please_specify_a_number');
+        return _t('app.admin.pricing.please_specify_a_number');
       }
     };
 
@@ -146,7 +163,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     $scope.showTrainings = function (trainings) {
       if (!angular.isArray(trainings) || !(trainings.length > 0)) {
-        return _t('pricing.none');
+        return _t('app.admin.pricing.none');
       }
 
       const selected = [];
@@ -155,7 +172,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
           return selected.push(t.name);
         }
       });
-      if (selected.length) { return selected.join(' | '); } else { return _t('pricing.none'); }
+      if (selected.length) { return selected.join(' | '); } else { return _t('app.admin.pricing.none'); }
     };
 
     /**
@@ -170,7 +187,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         { training_credit_nb: newdata.training_credits }
         , angular.noop() // do nothing in case of success
         , function (error) {
-          growl.error(_t('pricing.an_error_occurred_while_saving_the_number_of_credits'));
+          growl.error(_t('app.admin.pricing.an_error_occurred_while_saving_the_number_of_credits'));
           console.error(error);
         }
       );
@@ -190,11 +207,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
                       return $scope.trainingCreditsGroups[planId].splice($scope.trainingCreditsGroups[planId].indexOf(tc.id), 1);
                     }
                     , function (error) {
-                      growl.error(_t('pricing.an_error_occurred_while_deleting_credit_with_the_TRAINING', { TRAINING: tc.creditable.name }));
+                      growl.error(_t('app.admin.pricing.an_error_occurred_while_deleting_credit_with_the_TRAINING', { TRAINING: tc.creditable.name }));
                       console.error(error);
                     });
                 } else {
-                  return growl.error(_t('pricing.an_error_occurred_unable_to_find_the_credit_to_revoke'));
+                  return growl.error(_t('app.admin.pricing.an_error_occurred_unable_to_find_the_credit_to_revoke'));
                 }
               }
             });
@@ -215,7 +232,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
                 }
                 , function (error) { // failed
                   const training = getTrainingFromId(newTrainingId);
-                  growl.error(_t('pricing.an_error_occurred_while_creating_credit_with_the_TRAINING', { TRAINING: training.name }));
+                  growl.error(_t('app.admin.pricing.an_error_occurred_while_creating_credit_with_the_TRAINING', { TRAINING: training.name }));
                   return console.error(error);
                 });
               }
@@ -250,7 +267,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      * @returns {String}
      */
     $scope.showCreditableName = function (credit) {
-      let selected = _t('pricing.not_set');
+      let selected = _t('app.admin.pricing.not_set');
       if (credit && credit.creditable_id) {
         const object = $scope.getCreditable(credit);
         selected = object.name;
@@ -295,7 +312,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     $scope.saveMachineCredit = function (data, id) {
       for (let mc of Array.from($scope.machineCredits)) {
         if ((mc.plan_id === data.plan_id) && (mc.creditable_id === data.creditable_id) && ((id === null) || (mc.id !== id))) {
-          growl.error(_t('pricing.error_a_credit_linking_this_machine_with_that_subscription_already_exists'));
+          growl.error(_t('app.admin.pricing.error_a_credit_linking_this_machine_with_that_subscription_already_exists'));
           if (!id) {
             $scope.machineCredits.pop();
           }
@@ -304,18 +321,18 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
 
       if (id != null) {
-        return Credit.update({ id }, { credit: data }, function () { growl.success(_t('pricing.changes_have_been_successfully_saved')); });
+        return Credit.update({ id }, { credit: data }, function () { growl.success(_t('app.admin.pricing.changes_have_been_successfully_saved')); });
       } else {
         data.creditable_type = 'Machine';
         return Credit.save(
           { credit: data }
           , function (resp) {
             $scope.machineCredits[$scope.machineCredits.length - 1].id = resp.id;
-            return growl.success(_t('pricing.credit_was_successfully_saved'));
+            return growl.success(_t('app.admin.pricing.credit_was_successfully_saved'));
           }
           , function (err) {
             $scope.machineCredits.pop();
-            growl.error(_t('pricing.error_creating_credit'));
+            growl.error(_t('app.admin.pricing.error_creating_credit'));
             console.error(err);
           });
       }
@@ -365,7 +382,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
     $scope.saveSpaceCredit = function (data, id) {
       for (let sc of Array.from($scope.spaceCredits)) {
         if ((sc.plan_id === data.plan_id) && (sc.creditable_id === data.creditable_id) && ((id === null) || (sc.id !== id))) {
-          growl.error(_t('pricing.error_a_credit_linking_this_space_with_that_subscription_already_exists'));
+          growl.error(_t('app.admin.pricing.error_a_credit_linking_this_space_with_that_subscription_already_exists'));
           if (!id) {
             $scope.spaceCredits.pop();
           }
@@ -374,18 +391,18 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       }
 
       if (id != null) {
-        return Credit.update({ id }, { credit: data }, function () { growl.success(_t('pricing.changes_have_been_successfully_saved')); });
+        return Credit.update({ id }, { credit: data }, function () { growl.success(_t('app.admin.pricing.changes_have_been_successfully_saved')); });
       } else {
         data.creditable_type = 'Space';
         return Credit.save(
           { credit: data }
           , function (resp) {
             $scope.spaceCredits[$scope.spaceCredits.length - 1].id = resp.id;
-            return growl.success(_t('pricing.credit_was_successfully_saved'));
+            return growl.success(_t('app.admin.pricing.credit_was_successfully_saved'));
           }
           , function (err) {
             $scope.spaceCredits.pop();
-            return growl.error(_t('pricing.error_creating_credit'));
+            return growl.error(_t('app.admin.pricing.error_creating_credit'));
           });
       }
     };
@@ -419,8 +436,8 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     $scope.getPlanType = function (type) {
       if (type === 'PartnerPlan') {
-        return _t('pricing.partner');
-      } else { return _t('pricing.standard'); }
+        return _t('app.admin.pricing.partner');
+      } else { return _t('app.admin.pricing.standard'); }
     };
 
     /**
@@ -453,7 +470,7 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       if (data != null) {
         return Price.update({ id: price.id }, { price: { amount: data } }).$promise;
       } else {
-        return _t('pricing.please_specify_a_number');
+        return _t('app.admin.pricing.please_specify_a_number');
       }
     };
 
@@ -471,8 +488,8 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             resolve: {
               object () {
                 return {
-                  title: _t('pricing.confirmation_required'),
-                  msg: _t('pricing.do_you_really_want_to_delete_this_subscription_plan')
+                  title: _t('app.admin.pricing.confirmation_required'),
+                  msg: _t('app.admin.pricing.do_you_really_want_to_delete_this_subscription_plan')
                 };
               }
             }
@@ -482,12 +499,12 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
             Plan.delete(
               { id },
               function (res) {
-                growl.success(_t('pricing.subscription_plan_was_successfully_deleted'));
+                growl.success(_t('app.admin.pricing.subscription_plan_was_successfully_deleted'));
                 return $scope.plans.splice(findItemIdxById(plans, id), 1);
               },
               function (error) {
                 if (error.statusText) { console.error(`[EditPricingController::deletePlan] Error: ${error.statusText}`); }
-                growl.error(_t('pricing.unable_to_delete_the_specified_subscription_an_error_occurred'));
+                growl.error(_t('app.admin.pricing.unable_to_delete_the_specified_subscription_an_error_occurred'));
               }
             );
           }
@@ -519,8 +536,8 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
           resolve: {
             object () {
               return {
-                title: _t('pricing.confirmation_required'),
-                msg: _t('pricing.do_you_really_want_to_delete_this_coupon')
+                title: _t('app.admin.pricing.confirmation_required'),
+                msg: _t('app.admin.pricing.do_you_really_want_to_delete_this_coupon')
               };
             }
           }
@@ -528,16 +545,16 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         , function () {
         // the admin has confirmed, delete the coupon
           Coupon.delete({ id }, function (res) {
-            growl.success(_t('coupon_was_successfully_deleted'));
+            growl.success(_t('app.admin.pricing.coupon_was_successfully_deleted'));
             return $scope.coupons.splice(findItemIdxById(coupons, id), 1);
           }
 
           , function (error) {
             if (error.statusText) { console.error(`[EditPricingController::deleteCoupon] Error: ${error.statusText}`); }
             if (error.status === 422) {
-              return growl.error(_t('pricing.unable_to_delete_the_specified_coupon_already_in_use'));
+              return growl.error(_t('app.admin.pricing.unable_to_delete_the_specified_coupon_already_in_use'));
             } else {
-              return growl.error(_t('pricing.unable_to_delete_the_specified_coupon_an_unexpected_error_occurred'));
+              return growl.error(_t('app.admin.pricing.unable_to_delete_the_specified_coupon_an_unexpected_error_occurred'));
             }
           });
         });
@@ -566,11 +583,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
           // Callback to validate sending of the coupon
           $scope.ok = function () {
             Coupon.send({ coupon_code: coupon.code, user_id: $scope.ctrl.member.id }, function (res) {
-              growl.success(_t('pricing.coupon_successfully_sent_to_USER', { USER: $scope.ctrl.member.name }));
+              growl.success(_t('app.admin.pricing.coupon_successfully_sent_to_USER', { USER: $scope.ctrl.member.name }));
               return $uibModalInstance.close({ user_id: $scope.ctrl.member.id });
             }
             , function (err) {
-              growl.error(_t('pricing.an_error_occurred_unable_to_send_the_coupon'));
+              growl.error(_t('app.admin.pricing.an_error_occurred_unable_to_send_the_coupon'));
               console.error(err);
             });
           };
@@ -600,6 +617,107 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
       });
     }
 
+    /**
+     * Setup the feature-tour for the admin/pricing page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupPricingTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('pricing');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.pricing.welcome.title'),
+        content: _t('app.admin.tour.pricing.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .new-plan-button',
+        stepId: 'new_plan',
+        order: 1,
+        title: _t('app.admin.tour.pricing.new_plan.title'),
+        content: _t('app.admin.tour.pricing.new_plan.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .trainings-tab',
+        stepId: 'trainings',
+        order: 2,
+        title: _t('app.admin.tour.pricing.trainings.title'),
+        content: _t('app.admin.tour.pricing.trainings.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .machines-tab',
+        stepId: 'machines',
+        order: 3,
+        title: _t('app.admin.tour.pricing.machines.title'),
+        content: _t('app.admin.tour.pricing.machines.content'),
+        placement: 'bottom'
+      });
+      if (!Fablab.withoutSpaces) {
+        uitour.createStep({
+          selector: '.plans-pricing .spaces-tab',
+          stepId: 'spaces',
+          order: 4,
+          title: _t('app.admin.tour.pricing.spaces.title'),
+          content: _t('app.admin.tour.pricing.spaces.content'),
+          placement: 'bottom'
+        });
+      }
+      uitour.createStep({
+        selector: '.plans-pricing .credits-tab',
+        stepId: 'credits',
+        order: 5,
+        title: _t('app.admin.tour.pricing.credits.title'),
+        content: _t('app.admin.tour.pricing.credits.content'),
+        placement: 'bottom'
+      });
+      uitour.createStep({
+        selector: '.plans-pricing .coupons-tab',
+        stepId: 'coupons',
+        order: 6,
+        title: _t('app.admin.tour.pricing.coupons.title'),
+        content: _t('app.admin.tour.pricing.coupons.content'),
+        placement: 'bottom',
+        popupClass: 'shift-left-50'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 7,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on step change, change the active tab if needed
+      uitour.on('stepChanged', function (nextStep) {
+        if (nextStep.stepId === 'new_plan') { $scope.tabs.active = 0; }
+        if (nextStep.stepId === 'trainings') { $scope.tabs.active = 1; }
+        if (nextStep.stepId === 'machines') { $scope.tabs.active = 2; }
+        if (nextStep.stepId === 'spaces') { $scope.tabs.active = 3; }
+        if (nextStep.stepId === 'credits') { $scope.tabs.active = 4; }
+        if (nextStep.stepId === 'coupons') { $scope.tabs.active = 5; }
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'pricing' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('pricing') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    }
+
     /* PRIVATE SCOPE */
 
     /**
@@ -607,6 +725,11 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
      */
     const initialize = function () {
       $scope.trainingCreditsGroups = groupCreditsByPlan($scope.trainingCredits);
+
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
 
       // adds empty array for plan which hasn't any credits yet
       return (function () {
@@ -620,6 +743,18 @@ Application.Controllers.controller('EditPricingController', ['$scope', '$state',
         }
         return result;
       })();
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('pricing');
+        if (tour) { tour.start(); }
+      }
     };
 
     /**

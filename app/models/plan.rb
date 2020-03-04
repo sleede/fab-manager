@@ -25,7 +25,6 @@ class Plan < ActiveRecord::Base
   after_create :create_statistic_type
   after_create :set_name
 
-
   validates :amount, :group, :base_name, presence: true
   validates :interval_count, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :interval_count, numericality: { less_than: 13 }, if: proc { |plan| plan.interval == 'month' }

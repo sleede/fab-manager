@@ -165,8 +165,8 @@ class ProjectsController {
         resolve: {
           object () {
             return {
-              title: _t('confirmation_required'),
-              msg: _t('do_you_really_want_to_delete_this_step')
+              title: _t('app.shared.project.confirmation_required'),
+              msg: _t('app.shared.project.do_you_really_want_to_delete_this_step')
             };
           }
         }
@@ -215,6 +215,10 @@ class ProjectsController {
       return false;
     };
 
+    /**
+     * This function will query the API to autocomplete the typed user's name
+     * @param nameLookup {string}
+     */
     $scope.autoCompleteName = function (nameLookup) {
       if (!nameLookup) {
         return;
@@ -246,6 +250,16 @@ class ProjectsController {
         return step.project_step_images_attributes.splice(index, 1);
       }
     };
+
+    /**
+     * Returns the text to display on the save button, depending on the current state of the project
+     */
+    $scope.saveButtonValue = function () {
+      if (!$scope.project.state || $scope.project.state === 'draft') {
+        return _t('app.shared.project.save_as_draft');
+      }
+      return _t('app.shared.buttons.save');
+    }
   }
 }
 
@@ -324,7 +338,7 @@ Application.Controllers.controller('ProjectsController', ['$scope', '$state', 'P
         $scope.projectsPagination = new paginationService.Instance(OpenlabProject, currentPage, PROJECTS_PER_PAGE, null, { }, loadMoreOpenlabCallback);
         return OpenlabProject.query({ q: $scope.search.q, page: currentPage, per_page: PROJECTS_PER_PAGE }, function (projectsPromise) {
           if (projectsPromise.errors != null) {
-            growl.error(_t('projects_list.openlab_search_not_available_at_the_moment'));
+            growl.error(_t('app.public.projects_list.openlab_search_not_available_at_the_moment'));
             $scope.openlab.searchOverWholeNetwork = false;
             return $scope.triggerSearch();
           } else {
@@ -533,8 +547,8 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
           resolve: {
             object () {
               return {
-                title: _t('confirmation_required'),
-                msg: _t('do_you_really_want_to_delete_this_project')
+                title: _t('app.public.projects_show.confirmation_required'),
+                msg: _t('app.public.projects_show.do_you_really_want_to_delete_this_project')
               };
             }
           }
@@ -543,7 +557,7 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
           $scope.project.$delete(function () { $state.go('app.public.projects_list', {}, { reload: true }); });
         });
       } else {
-        return console.error(_t('unauthorized_operation'));
+        return console.error(_t('app.public.projects_show.unauthorized_operation'));
       }
     };
 
@@ -577,12 +591,12 @@ Application.Controllers.controller('ShowProjectController', ['$scope', '$state',
               { abuse: $scope.signaler },
               function (res) {
                 // creation successful
-                growl.success(_t('your_report_was_successful_thanks'));
+                growl.success(_t('app.public.projects_show.your_report_was_successful_thanks'));
                 return $uibModalInstance.close(res);
               }
               , function (error) {
                 // creation failed...
-                growl.error(_t('an_error_occured_while_sending_your_report'));
+                growl.error(_t('app.public.projects_show.an_error_occured_while_sending_your_report'));
               }
             );
           };

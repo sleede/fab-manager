@@ -1,4 +1,78 @@
-# Changelog Fab Manager
+# Changelog Fab-manager
+
+## v4.3.0 2020 March 04
+
+- Ability to configure reservation slot restricted for plan subscribers
+- Ability to configure the policy (allow or prevent) for members booking a machine/formation/event slot, if they already have a reservation the same day at the same time
+- Ability to create and delete periodic calendar availabilities (recurrence)
+- Ability to fully customize the home page
+- Automated setup assistant
+- An administrator can delete a member
+- An event reservation can be cancelled, if reservation cancellation is enabled
+- Delete multiple recurring events at one time
+- Edit multiple recurring events at one time
+- Ability to import iCalendar agendas in the public calendar, through URLs to ICS files (RFC 5545)
+- Ability to configure the duration of a reservation slot, using `SLOT_DURATION`. Previously, only 60 minutes slots were allowed
+- Ability to force the email validation when a new user registers. This is optionally configured with `USER_CONFIRMATION_NEEDED_TO_SIGN_IN`
+- Display the scheduled events in the admin calendar, depending on `EVENTS_IN_CALENDAR` configuration.
+- Display indications on required fields in new administrator form
+- Administrators can to book machine/space/training slots, until 1 month in the past
+- Filter members by non-validated emails or by inactive for 3 years
+- Ability to customize the title of the link to the about page
+- Automatic version check with security alerts
+- Public endpoint to check the system health
+- Configuration of phone number in members registration forms: can be required or optional, depending on `PHONE_REQUIRED` configuration
+- Improved user experience in defining slots in the calendar management
+- Improved notification email to the member when a rolling subscription is taken
+- Notify all admins on the creation of a refund invoice
+- Helper links between admin sections of the scheduling process
+- Calendar management: improved legend display and visual behavior
+- Reorganized left menu
+- Create machine availabilities: select all/none in a click
+- Prevent event reservation in the past [Taiga#127]
+- Removed the need of twitter API keys to display the last tweet on the home page
+- Various helper links to help newcomers creating their first items
+- Handle Ctrl^C in upgrade scripts
+- Updated moment-timezone
+- Updated angular-ui-bootstrap from v0.14 to v1.2
+- Updated caxlsx to 3.0.1 and rails_axlsx to rails_caxlsx
+- Updated sidekiq to 5.2.8
+- Option to disable developers analytics
+- Added the a "cron" tab in Sidekiq web-ui to watch scheduled tasks
+- Integration of Crowdin "in-context" translation management system
+- Added freeCAD files as default allowed extensions
+- Rake task to sync local users with Stripe
+- Unified translations syntax to use ICU MessageFormat
+- Refactored front-end translations keys with unified paths
+- Updated and refactored README and documentations
+- Harmonized Fab-manager typography and case
+- Updated seeds file
+- Fix a bug: unable to remove the picture from a training
+- Fix a bug: no alerts on errors during admin creation
+- Fix a bug: replaces all Time.now by DateTime.current to prevent time zones issues [Taiga#134]
+- Fix a bug: logs are not printed in staging environment
+- Fix a bug: theme colors must be selected twice before the changes became effective
+- Fix a bug: datepicker does not work in profile completion screen
+- Fix a bug: unable to select a group in profile completion screen
+- Fix a bug: in some cases, bogus admin notification on profile completed
+- Fix a bug: with Firefox browser, the texts in date inputs are shifted to the bottom
+- Fix a bug: sometimes when browsing the invoices section, the translations are missing
+- Fix a bug: first day of week is ignored in agendas (#169)
+- Fix a bug: statistics page is bogus before the creation of the first plan
+- Fix a bug: default invoice logo is broken and prevent invoice generation
+- Fix a security issue: updated loofah to fix [CVE-2019-15587](https://nvd.nist.gov/vuln/detail/CVE-2019-15587)
+- Fix a security issue: updated angular to 1.7.9 to fix [CVE-2019-10768](https://nvd.nist.gov/vuln/detail/CVE-2019-10768)
+- Fix a security issue: updated puma to 3.12.4 to fix [GHSA-7xx3-m584-x994](https://github.com/advisories/GHSA-7xx3-m584-x994), [CVE-2020-5247](https://nvd.nist.gov/vuln/detail/CVE-2020-5247) and [CVE-2019-16254](https://nvd.nist.gov/vuln/detail/CVE-2020-5247)
+- Fix a security issue: updated nokogiri to 1.10.8 to fix [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595)
+- Fix a security issue: updated rack to 1.6.12 to fix [CVE-2019-16782](https://nvd.nist.gov/vuln/detail/CVE-2019-16782)
+- [TODO DEPLOY] add the `SLOT_DURATION` environment variable (see [doc/environment.md](doc/environment.md#SLOT_DURATION) for configuration details)
+- [TODO DEPLOY] add the `PHONE_REQUIRED` environment variable (see [doc/environment.md](doc/environment.md#PHONE_REQUIRED) for configuration details)
+- [TODO DEPLOY] add the `EVENTS_IN_CALENDAR` environment variable (see [doc/environment.md](doc/environment.md#EVENTS_IN_CALENDAR) for configuration details)
+- [TODO DEPLOY] add the `USER_CONFIRMATION_NEEDED_TO_SIGN_IN` environment variable (see [doc/environment.md](doc/environment.md#USER_CONFIRMATION_NEEDED_TO_SIGN_IN) for configuration details)
+- [TODO DEPLOY] add the `BOOK_SLOT_AT_SAME_TIME` environment variable (see [doc/environment.md](doc/environment.md#BOOK_SLOT_AT_SAME_TIME) for configuration details)
+- [TODO DEPLOY] -> (only dev) `bundle install && yarn install`
+- [TODO DEPLOY] `rake db:migrate && rake db:seed`
+- [TODO DEPLOY] `rake fablab:fix:name_stylesheet`
 
 ## v4.2.4 2019 October 30
 
@@ -58,6 +132,7 @@
 - [TODO DEPLOY] add the `MAX_IMPORT_SIZE` environment variable (see [doc/environment.md](doc/environment.md#MAX_IMPORT_SIZE) for configuration details)
 - [TODO DEPLOY] add the `FABLAB_WITHOUT_INVOICES` environment variable (see [doc/environment.md](doc/environment.md#FABLAB_WITHOUT_INVOICES) for configuration details)
 - [TODO DEPLOY] add the `SMTP_TLS` environment variable (see [doc/environment.md](doc/environment.md#SMTP_TLS) for configuration details)
+- [TODO DEPLOY] add the `FABLAB_WITHOUT_WALLET` environment variable (see [doc/environment.md](doc/environment.md#FABLAB_WITHOUT_WALLET) for configuration details)
 - [TODO DEPLOY] **IMPORTANT** Please read [postgres_upgrade.md](doc/postgres_upgrade.md) for instructions on upgrading PostgreSQL.
 
 ## v4.1.1 2019 September 20
@@ -91,7 +166,7 @@
 ## v4.0.4 2019 August 14
 
 - Fix a bug: #140 VAT rate is erroneous in invoices.
-  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3)  to regenerate the invoices since August 1st (if 
+  Note: this bug was introduced in v4.0.3 and requires (if you are on v4.0.3) to regenerate the invoices since August 1st 
 - [TODO DEPLOY] `rake fablab:maintenance:regenerate_invoices[2019,8]`
 
 ## v4.0.3 2019 August 01
@@ -135,7 +210,7 @@
 - Refactored user's profile to keep invoicing data after an user was deleted
 - Refactored user's profile to keep statistical data after an user was deleted
 - Ability to delete an user (fixes #129 and #120)
-- Ask user acceptance before deposing analytics cookies 
+- Ask user acceptance before deposing analytics cookies
 - Fix a bug: (spanish) some translations are not loaded correctly
 - Fix a bug: some users may not appear in the admin's general listing
 - Fix a bug: Availabilities export report an erroneous number of reservations for machine availabilities (#131)
@@ -171,7 +246,7 @@
 - Improved date checks before closing an accounting period
 - Paginate list of coupons
 - Allow filtering coupons list
-- Fix a bug: when VAT has changed during fab-manager's lifecycle, this may not be reflected in archives
+- Fix a bug: when VAT has changed during Fab-manager's lifecycle, this may not be reflected in archives
 - Fix a bug: using a quote in event category's name results in angular $parse:syntax Error
 
 ## v3.0.1 2019 April 1st
@@ -204,7 +279,7 @@
 - [TODO DEPLOY] `rake fablab:setup:chain_invoices_records`
 - [TODO DEPLOY] `rake fablab:setup:chain_history_values_records`
 - [TODO DEPLOY] add `DISK_SPACE_MB_ALERT` and `SUPERADMIN_EMAIL` environment variables (see [doc/environment.md](doc/environment.md) for configuration details)
-- [TODO DEPLOY] add the `accounting` volume to the fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
+- [TODO DEPLOY] add the `accounting` volume to the Fab-manager's image in [docker-compose.yml](docker/docker-compose.yml)
 
 ## v2.8.4 2019 March 18
 
@@ -332,8 +407,8 @@
 - Fix a security issue: sprockets < 2.12.5 has a security vulnerability as described in [CVE-2018-3760](https://nvd.nist.gov/vuln/detail/CVE-2018-3760)
 - Ensure elasticSearch indices are started with green status on new installations
 - Refactored User.to_json to remove code duplication
-- Fixed syntax and typos in README 
-- [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch. 
+- Fixed syntax and typos in README
+- [TODO DEPLOY] **IMPORTANT** Please read [elastic_upgrade.md](doc/elastic_upgrade.md) for instructions on upgrading ElasticSearch.
 - [TODO DEPLOY] `rake fablab:fix:categories_slugs`
 - [TODO DEPLOY] -> (only dev) `bundle install`
 - [TODO DEPLOY] `rake db:seed`
@@ -343,10 +418,10 @@
 - Ability to share trainings on social medias
 - Fix a bug: a reminder notification were sent for canceled reservations
 - Fix a bug: sharing an event on facebook has HTML tags in the description
-- Set Stripe API version, all fab-managers has to use this version because codebase relies on it
+- Set Stripe API version, all Fab-managers has to use this version because codebase relies on it
 - Fix a security issue: OmniAuth < 1.3.2  has a security vulnerability described in [CVE-2017-18076](https://nvd.nist.gov/vuln/detail/CVE-2017-18076)
 - Fix a security issue: rack-protection < 1.5.5 has a security vulnerability described in [CVE-2018-1000119](https://nvd.nist.gov/vuln/detail/CVE-2018-1000119)
-- Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency 
+- Fix a security issue: http gem < 0.7.3 has a security vulnerability described in [CVE-2015-1828](https://nvd.nist.gov/vuln/detail/CVE-2015-1828), updates twitter gem as a dependency
 
 ## v2.6.3 2018 January 2
 
@@ -402,12 +477,12 @@
 
 ## v2.5.13 2017 September 11
 
-- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with recursive events which the initial event was deleted 
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with recursive events which the initial event was deleted
 
 ## v2.5.12 2017 September 11
 
 - Fix a bug: Long words overflow from homepage's events blocks
-- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with non-recursive events 
+- Fix a bug: ActiveRecord::RecordNotFound when running rake task fix:recursive_events_over_DST with non-recursive events
 
 ## v2.5.11 2017 September 7
 
@@ -614,7 +689,7 @@
 - Project images will show in full-size on a click
 - Add a checkbox "I accept to receive informations from the FabLab" on Sign-up dialog and user's profile
 - Share project with Facebook/Twitter
-- Display fab-manager's version in "Powered by" label, when logged as admin
+- Display Fab-manager's version in "Powered by" label, when logged as admin
 - Load translation locales from subdirectories
 - Add wallet to user, client can pay total/partial reservation or subscription by wallet
 - Public calendar for show all trainings/machines/events

@@ -7,31 +7,37 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate>{{ 'fablab_events' }}</h1>
+        <h1 translate>{{ 'app.admin.events.fablab_events' }}</h1>
       </section>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 b-t hide-b-md" ng-if="isAuthorized(['admin'])">
       <section class="heading-actions wrapper">
-        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button" translate>{{ 'add_an_event' }}</a>
+        <a class="btn btn-lg btn-warning bg-white b-2x rounded m-t-sm upper text-sm" ui-sref="app.admin.events_new" role="button" translate>{{ 'app.admin.events.add_an_event' }}</a>
       </section>
     </div>
   </div>
 
-  <section class="m-lg">
+  <section class="m-lg events-management"
+           ui-tour="events"
+           ui-tour-backdrop="true"
+           ui-tour-template-url="'<%= asset_path "shared/tour-step-template.html" %>'"
+           ui-tour-use-hotkeys="true"
+           ui-tour-scroll-parent-id="content-main"
+           post-render="setupEventsTour">
     <div class="row">
       <div class="col-md-12">
-        <uib-tabset justified="true">
-          <uib-tab heading="{{ 'events_monitoring' | translate }}">
-            <ng-include src="'<%= asset_path 'admin/events/monitoring.html' %>'"></ng-include>
+        <uib-tabset justified="true" active="tabs.active">
+          <uib-tab heading="{{ 'app.admin.events.events_monitoring' | translate }}" index="0">
+            <ng-include src="'<%= asset_path "admin/events/monitoring.html" %>'"></ng-include>
           </uib-tab>
 
-          <uib-tab heading="{{ 'manage_filters' | translate }}">
-            <ng-include src="'<%= asset_path 'admin/events/filters.html' %>'"></ng-include>
+          <uib-tab heading="{{ 'app.admin.events.manage_filters' | translate }}" index="1">
+            <ng-include src="'<%= asset_path "admin/events/filters.html" %>'"></ng-include>
           </uib-tab>
 
-          <uib-tab heading="{{ 'manage_prices_categories' | translate }}">
-            <ng-include src="'<%= asset_path 'admin/events/prices.html' %>'"></ng-include>
+          <uib-tab heading="{{ 'app.admin.events.manage_prices_categories' | translate }}" index="2" class="prices-tab">
+            <ng-include src="'<%= asset_path "admin/events/prices.html" %>'"></ng-include>
           </uib-tab>
         </uib-tabset>
       </div>

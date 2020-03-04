@@ -80,7 +80,8 @@ en:
       subject: "Your subscription has been successfully purchased"
       body:
         plan_subscribed_html: "You have subscribed the plan: <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Your subscription plan will end on %{DATE}"
+        rolling_subscription_stops_on: "Your subscription will end %{DURATION} after your first training. Otherwise, it will stop on %{DATE}."
+        subscription_stops_on: "Your subscription will end on %{DATE}."
 
     notify_member_create_reservation:
       subject: "Your reservation has been successfully saved"
@@ -258,7 +259,7 @@ en:
         statistics_global: "of all the statistics"
         statistics_account: "of the registration statistics"
         statistics_event: "of statistics about events"
-        statistics_machine: "of statistics about machine hours"
+        statistics_machine: "of statistics about machine slots"
         statistics_project: "of statistics about projects"
         statistics_subscription: "of subscription statistics"
         statistics_training: "of statistics about trainings"
@@ -290,7 +291,7 @@ en:
 
     notify_admin_free_disk_space:
       subject: "Low disk space"
-      body: "Warning: available disk space on the server hosting fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
+      body: "Warning: available disk space on the server hosting Fab-manager is less than %{THRESHOLD} MiB. This can affect its operation and prevent saving some data. Currently, %{AVAILABLE} MiB of free disk space remains available on the mount point."
 
     notify_admin_close_period_reminder:
       subject: "Remind to close your accounting periods"
@@ -311,6 +312,12 @@ en:
       body:
         content_html: "<p>We wish to inform you that we have just updated our privacy policy.</p><p>We may change our privacy policy regularly. In accordance with the regulations, you will receive a notification for each update.</p><p>By accessing or using our services after the privacy policy update, we will consider that you agree its terms, updates included.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+
+    notify_admin_refund_created:
+      subject: "A refund has been generated"
+      body:
+        refund_created: "A refund of %{AMOUNT} has been generated on invoice %{INVOICE} of user %{USER}"
+        download: "Click here to download this refund invoice"
 
     shared:
       hello: "Hello %{user_name}"

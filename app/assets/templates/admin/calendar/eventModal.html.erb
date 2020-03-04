@@ -1,27 +1,27 @@
 <div class="modal-header">
   <h3 class="text-center red">
-      {{ 'admin_calendar.DATE_slot' | translate:{DATE:(start | amDateFormat: 'LL')} }} {{start | amDateFormat:'LT'}} - {{end | amDateFormat:'LT'}}
+      {{ 'app.admin.calendar.DATE_slot' | translate:{DATE:(start | amDateFormat: 'LL')} }} {{start | amDateFormat:'LT'}} - {{end | amDateFormat:'LT'}}
   </h3>
 </div>
 <div class="modal-body" ng-show="step === 1">
-  <label class="m-t-sm" translate>{{ 'admin_calendar.what_kind_of_slot_do_you_want_to_create' }}</label>
+  <label class="m-t-sm" translate>{{ 'app.admin.calendar.what_kind_of_slot_do_you_want_to_create' }}</label>
   <div class="form-group">
     <div class="radio">
       <label>
         <input type="radio" id="training" name="available_type" value="training" ng-model="availability.available_type">
-        <span translate>{{ 'admin_calendar.training' }}</span>
+        <span translate>{{ 'app.admin.calendar.training' }}</span>
       </label>
     </div>
     <div class="radio">
       <label>
         <input type="radio" id="machine" name="available_type" value="machines" ng-model="availability.available_type">
-        <span translate>{{ 'admin_calendar.machine' }}</span>
+        <span translate>{{ 'app.admin.calendar.machine' }}</span>
       </label>
     </div>
     <div class="radio" ng-hide="fablabWithoutSpaces">
       <label>
         <input type="radio" id="space" name="available_type" value="space" ng-model="availability.available_type" ng-disabled="spaces.length === 0">
-        <span translate>{{ 'admin_calendar.space' }}</span>
+        <span translate>{{ 'app.admin.calendar.space' }}</span>
       </label>
     </div>
   </div>
@@ -29,12 +29,16 @@
 <div class="modal-body" ng-show="step === 2">
 
   <div ng-show="availability.available_type == 'machines'">
-    <p class="text-center font-sbold m-t-sm">{{ 'admin_calendar.select_some_machines' | translate }}</p>
+    <p class="text-center font-sbold m-t-sm">{{ 'app.admin.calendar.select_some_machines' | translate }}</p>
 
     <div class="form-group m-l-xl">
+      <button class="btn btn-default pull-right m-t-n-xl" ng-click="toggleAll()" translate>{{ selectedMachines.length == 0 ? 'app.admin.calendar.select_all' : 'app.admin.calendar.select_none' }}</button>
       <label class="checkbox" ng-repeat="machine in machines">
-        <input type="checkbox" ng-click="toggleSelection(machine)"> {{machine.name}} <span class="text-xs">(id {{machine.id}})</span>
+        <input type="checkbox" ng-click="toggleSelection(machine)" ng-model="selectedMachinesBinding[machine.id]"> {{machine.name}} <span class="text-xs">(id {{machine.id}})</span>
       </label>
+    </div>
+    <div class="alert alert-info m-b-none text-xs wrapper-sm">
+      <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i> <a ui-sref="app.public.machines_list" ng-click="cancel()" translate> {{ 'app.admin.calendar.manage_machines' }}</a>
     </div>
   </div>
 
@@ -43,11 +47,14 @@
     </select>
     <div class="row m-t">
       <div class="form-group">
-        <label class="col-sm-6 control-label" for="nb_places_training" translate>{{ 'admin_calendar.number_of_tickets' }}</label>
+        <label class="col-sm-6 control-label" for="nb_places_training" translate>{{ 'app.admin.calendar.number_of_tickets' }}</label>
         <div class="col-sm-6">
           <input type="number" id="nb_places_training" class="form-control" ng-model="availability.nb_total_places">
         </div>
       </div>
+    </div>
+    <div class="alert alert-info m-b-none text-xs wrapper-sm m-t">
+      <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i> <a ui-sref="app.public.trainings_list" ng-click="cancel()" translate> {{ 'app.admin.calendar.manage_trainings' }}</a>
     </div>
   </div>
 
@@ -56,29 +63,37 @@
     </select>
     <div class="row m-t">
       <div class="form-group">
-        <label class="col-sm-6 control-label" for="nb_places_space" translate>{{ 'admin_calendar.number_of_tickets' }}</label>
+        <label class="col-sm-6 control-label" for="nb_places_space" translate>{{ 'app.admin.calendar.number_of_tickets' }}</label>
         <div class="col-sm-6">
           <input type="number" id="nb_places_space" class="form-control" ng-model="availability.nb_total_places">
         </div>
       </div>
     </div>
+    <div class="alert alert-info m-b-none text-xs wrapper-sm m-t">
+      <i class="fa fa-lightbulb-o m-r" aria-hidden="true"></i> <a ui-sref="app.public.spaces_list" ng-click="cancel()" translate> {{ 'app.admin.calendar.manage_spaces' }}</a>
+    </div>
   </div>
 </div>
 <div class="modal-body" ng-show="step === 3">
   <div id="timeAdjust" class="m-t-sm">
-      <p class="text-center font-sbold" translate>{{ 'admin_calendar.adjust_the_opening_hours' }}</p>
+      <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.adjust_the_opening_hours' }}</p>
       <div class="row">
           <div class="col-md-3 col-md-offset-2">
               <uib-timepicker ng-model="start" hour-step="timepickers.start.hstep" readonly-input="true" minute-step="timepickers.start.mstep" show-meridian="false"></uib-timepicker>
           </div>
-          <span class="col-md-1 m-t-xl m-l" translate>{{ 'admin_calendar.to_time' }}</span>
+          <span class="col-md-1 m-t-xl m-l" translate>{{ 'app.admin.calendar.to_time' }}</span>
           <fieldset ng-disabled="endDateReadOnly" class="col-md-5">
               <uib-timepicker ng-model="end" hour-step="timepickers.end.hstep" readonly-input="true" minute-step="timepickers.end.mstep" show-meridian="false"></uib-timepicker>
           </fieldset>
       </div>
   </div>
+</div>
+<div class="modal-body" ng-show="step === 4">
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_options' }}</p>
+  </div>
   <div id="tagAssociate" class="m-t-lg">
-      <p class="text-center font-sbold" translate>{{ 'admin_calendar.restrict_this_slot_with_labels_optional' }}</p>
+      <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_with_labels' }}</p>
       <div class="row">
           <div class="col-sm-12">
               <ui-select multiple ng-model="availability.tag_ids" class="form-control">
@@ -92,14 +107,124 @@
           </div>
       </div>
   </div>
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.restrict_for_subscriptions' }}</p>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="is_only_subscriptions" translate>{{ 'app.admin.calendar.enabled' }}</label>
+        <input bs-switch
+               ng-model="isOnlySubscriptions"
+               id="is_only_subscriptions"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+               switch-animate="true"/>
+      </div>
+      <div class="col-md-12" ng-show="isOnlySubscriptions">
+        <p class="font-sbold m-t-sm">{{ 'app.admin.calendar.select_some_plans' | translate }}</p>
+
+        <div class="form-group">
+          <button class="btn btn-default pull-right m-t-n-xl" ng-click="toggleAllPlans()" translate>{{ selectedPlans.length == 0 ? 'app.admin.calendar.select_all' : 'app.admin.calendar.select_none' }}</button>
+          <div ng-repeat="group in plansClassifiedByGroup">
+            <div class="text-center font-sbold">{{::group.name}}</div>
+            <label class="checkbox m-l-md" ng-repeat="plan in group.plans">
+              <input type="checkbox" ng-click="toggleSelectPlan(plan)" ng-model="selectedPlansBinding[plan.id]"> {{::plan.name}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="modal-footer" ng-show="step < 3">
-  <button class="btn btn-info" ng-click="previous()" ng-disabled="step === 1" translate>{{ 'admin_calendar.previous' }}</button>
-  <button class="btn btn-info" ng-click="next()" translate>{{ 'admin_calendar.next' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+<div class="modal-body m-h" ng-show="step === 5">
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.recurrence' }}</p>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="is_recurrent" translate>{{ 'app.admin.calendar.enabled' }}</label>
+        <input bs-switch
+               ng-model="availability.is_recurrent"
+               id="is_recurrent"
+               type="checkbox"
+               class="form-control"
+               switch-on-text="{{ 'app.shared.buttons.yes' | translate }}"
+               switch-off-text="{{ 'app.shared.buttons.no' | translate }}"
+               switch-animate="true"/>
+        <input type="hidden" name="availability[is_recurrent]" value="{{availability.is_recurrent}}"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="period">{{ 'app.admin.calendar.period' | translate }}</label>
+      <select id="period"
+              name="period"
+              class="form-control"
+              ng-model="availability.period"
+              ng-required="availability.is_recurrent"
+              ng-disabled="!availability.is_recurrent">
+        <option value="week" ng-selected="availability.period == 'week'" translate>{{ 'app.admin.calendar.week' }}</option>
+        <option value="month" ng-selected="availability.period == 'month'" translate>{{ 'app.admin.calendar.month' }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="nb_periods">{{ 'app.admin.calendar.number_of_periods' | translate }}</label>
+      <input id="nb_periods"
+             name="nb_periods"
+             class="form-control"
+             ng-model="availability.nb_periods"
+             type="number"
+             ng-required="availability.is_recurrent"
+             ng-disabled="!availability.is_recurrent" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="end_date">{{ 'app.admin.calendar.end_date' | translate }}</label>
+      <input id="end_date"
+             name="end_date"
+             class="form-control"
+             ng-model="availability.end_date"
+             type="date"
+             ng-required="availability.is_recurrent"
+             ng-disabled="!availability.is_recurrent" />
+    </div>
+  </div>
 </div>
-<div class="modal-footer" ng-show="step === 3">
-  <button class="btn btn-info" ng-click="previous()" translate>{{ 'admin_calendar.previous' }}</button>
-  <button class="btn btn-warning" ng-click="ok()" translate>{{ 'confirm' }}</button>
-  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'cancel' }}</button>
+<div class="modal-body m-h" ng-show="step === 6">
+  <div class="m-t-sm">
+    <p class="text-center font-sbold" translate>{{ 'app.admin.calendar.summary' }}</p>
+    <div class="row">
+      <span>{{ 'app.admin.calendar.about_to_create' | translate:{NUMBER:occurrences.length,TYPE:availability.available_type} }}</span>
+      <ul>
+        <li ng-repeat="slot in occurrences">{{slot.start_at | amDateFormat:'L LT'}} - {{slot.end_at | amDateFormat:'LT'}}</li>
+      </ul>
+      <div class="alert alert-warning" translate translate-values="{DURATION: slotDuration}"> {{ 'app.admin.calendar.divided_in_slots' }} </div>
+      <div>
+        <span class="underline" translate>{{ 'app.admin.calendar.reservable' }}</span>
+        <span ng-bind-html="reservableName"></span>
+      </div>
+      <div class="m-t">
+        <span class="underline"  translate>{{ 'app.admin.calendar.labels' }}</span>
+        <span ng-bind-html="tagsName"></span>
+      </div>
+      <div class="m-t" ng-show="isOnlySubscriptions">
+        <span class="underline"  translate>{{ 'app.admin.calendar.plans' }}</span>
+        <span ng-bind-html="plansName"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer" ng-show="step < 6">
+  <button class="btn btn-info" ng-click="previous()" ng-disabled="step === 1" translate>{{ 'app.admin.calendar.previous' }}</button>
+  <button class="btn btn-info" ng-click="next()" translate>{{ 'app.admin.calendar.next' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
+</div>
+<div class="modal-footer" ng-show="step === 6">
+  <button class="btn btn-info" ng-click="previous()" translate>{{ 'app.admin.calendar.previous' }}</button>
+  <button class="btn btn-warning" ng-click="ok()" translate>{{ 'app.shared.buttons.confirm' }}</button>
+  <button class="btn btn-default" ng-click="cancel()" translate>{{ 'app.shared.buttons.cancel' }}</button>
 </div>

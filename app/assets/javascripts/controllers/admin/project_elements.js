@@ -12,9 +12,9 @@
  */
 'use strict';
 
-Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise',
-  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise) {
-  // Materials list (plastic, wood ...)
+Application.Controllers.controller('ProjectElementsController', ['$scope', '$state', 'Component', 'Licence', 'Theme', 'componentsPromise', 'licencesPromise', 'themesPromise', '_t', 'Member', 'uiTourService',
+  function ($scope, $state, Component, Licence, Theme, componentsPromise, licencesPromise, themesPromise, _t, Member, uiTourService) {
+    // Materials list (plastic, wood ...)
     $scope.components = componentsPromise;
 
     // Licences list (Creative Common ...)
@@ -149,12 +149,89 @@ Application.Controllers.controller('ProjectElementsController', ['$scope', '$sta
      * @param rowform {Object} see http://vitalets.github.io/angular-xeditable/
      * @param index {number} licence index in the $scope.licences array
      */
-    return $scope.cancelLicence = function (rowform, index) {
+    $scope.cancelLicence = function (rowform, index) {
       if ($scope.licences[index].id != null) {
         return rowform.$cancel();
       } else {
         return $scope.licences.splice(index, 1);
       }
     };
+
+    /**
+     * Setup the feature-tour for the admin/project_elements page.
+     * This is intended as a contextual help (when pressing F1)
+     */
+    $scope.setupProjectElementsTour = function () {
+      // get the tour defined by the ui-tour directive
+      const uitour = uiTourService.getTourByName('project-elements');
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'welcome',
+        order: 0,
+        title: _t('app.admin.tour.project_elements.welcome.title'),
+        content: _t('app.admin.tour.project_elements.welcome.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      uitour.createStep({
+        selector: '.heading .abuses-button',
+        stepId: 'abuses',
+        order: 1,
+        title: _t('app.admin.tour.project_elements.abuses.title'),
+        content: _t('app.admin.tour.project_elements.abuses.content'),
+        placement: 'bottom',
+        popupClass: 'shift-left-40'
+      });
+      uitour.createStep({
+        selector: 'body',
+        stepId: 'conclusion',
+        order: 2,
+        title: _t('app.admin.tour.conclusion.title'),
+        content: _t('app.admin.tour.conclusion.content'),
+        placement: 'bottom',
+        orphan: true
+      });
+      // on tour end, save the status in database
+      uitour.on('ended', function () {
+        if (uitour.getStatus() === uitour.Status.ON && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
+          Member.completeTour({ id: $scope.currentUser.id }, { tour: 'project-elements' }, function (res) {
+            $scope.currentUser.profile.tours = res.tours;
+          });
+        }
+      });
+      // if the user has never seen the tour, show him now
+      if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('project-elements') < 0) {
+        uitour.start();
+      }
+      // start this tour when an user press F1 - this is contextual help
+      window.addEventListener('keydown', handleF1);
+    };
+
+    /* PRIVATE SCOPE */
+
+    /**
+     * Kind of constructor: these actions will be realized first when the controller is loaded
+     */
+    const initialize = function () {
+      // listen the $destroy event of the controller to remove the F1 key binding
+      $scope.$on('$destroy', function () {
+        window.removeEventListener('keydown', handleF1);
+      });
+    };
+
+    /**
+     * Callback used to trigger the feature tour when the user press the F1 key.
+     * @param e {KeyboardEvent}
+     */
+    const handleF1 = function (e) {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        const tour = uiTourService.getTourByName('project-elements');
+        if (tour) { tour.start(); }
+      }
+    };
+
+    // !!! MUST BE CALLED AT THE END of the controller
+    return initialize();
   }
 ]);

@@ -17,7 +17,7 @@ Application.Services.factory('CalendarConfig', [() =>
         center: 'title',
         right: 'today prev,next'
       },
-      firstDay: 1, // Week start on monday (France)
+      firstDay: Fablab.weekStartingDay,
       scrollTime: DEFAULT_CALENDAR_POSITION,
       slotDuration: BASE_SLOT,
       allDayDefault: false,

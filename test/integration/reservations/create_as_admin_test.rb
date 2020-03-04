@@ -1,8 +1,8 @@
 module Reservations
   class CreateAsAdminTest < ActionDispatch::IntegrationTest
     setup do
-      @user_without_subscription = User.with_role(:member).without_subscription.first
-      @user_with_subscription = User.with_role(:member).with_subscription.second
+      @user_without_subscription = User.members.without_subscription.first
+      @user_with_subscription = User.members.with_subscription.second
       @admin = User.with_role(:admin).first
       login_as(@admin, scope: :user)
     end

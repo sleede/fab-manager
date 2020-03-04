@@ -15,7 +15,24 @@ json.training_reservations @member.reservations.where(reservable_type: 'Training
   json.start_at r.slots.first.start_at
   json.end_at r.slots.first.end_at
   json.reservable r.reservable
+  json.reservable_type 'Training'
   json.is_valid @member.statistic_profile.training_ids.include?(r.reservable_id)
+  json.canceled_at r.slots.first.canceled_at
+end
+json.machine_reservations @member.reservations.where(reservable_type: 'Machine') do |r|
+  json.id r.id
+  json.start_at r.slots.first.start_at
+  json.end_at r.slots.first.end_at
+  json.reservable r.reservable
+  json.reservable_type 'Machine'
+  json.canceled_at r.slots.first.canceled_at
+end
+json.space_reservations @member.reservations.where(reservable_type: 'Space') do |r|
+  json.id r.id
+  json.start_at r.slots.first.start_at
+  json.end_at r.slots.first.end_at
+  json.reservable r.reservable
+  json.reservable_type 'Space'
   json.canceled_at r.slots.first.canceled_at
 end
 
@@ -65,6 +82,7 @@ json.events_reservations @member.reservations.where(reservable_type: 'Event').jo
     end
   end
   json.reservable r.reservable
+  json.reservable_type 'Event'
 end
 json.invoices @member.invoices.order('reference DESC') do |i|
   json.id i.id

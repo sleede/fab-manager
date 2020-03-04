@@ -8,62 +8,62 @@
           <ul class="nav nav-main m-t-xs" data-ride="collapse">
             <!-- Disconnected user menu for small devices -->
             <li class="hidden-sm hidden-md hidden-lg" ng-if-start="!isAuthenticated()">
-              <a href="#" class="auto" ng-click="signup($event)">
-                  <i class="fa fa-rocket"></i> <span translate>{{ 'sign_up' }}</span>
+              <a class="auto pointer" ng-click="signup($event)">
+                  <i class="fa fa-rocket"></i> <span translate>{{ 'app.public.common.sign_up' }}</span>
               </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" ng-if-end>
-              <a href="#" class="auto" ng-click="login($event)">
-                  <i class="fa fa-sign-in"></i> <span translate>{{ 'sign_in' }}</span>
+              <a class="auto pointer" ng-click="login($event)">
+                  <i class="fa fa-sign-in"></i> <span translate>{{ 'app.public.common.sign_in' }}</span>
               </a>
             </li>
             <!-- Connected user menu for small devices -->
             <li class="notification-open hidden-sm hidden-md hidden-lg" ng-if-start="isAuthenticated()">
-                <a href="#" ui-sref="app.logged.notifications">
+                <a ui-sref="app.logged.notifications">
                     <i>
                         <i class="fa fa-bell fa-2x black"></i> <span class="menu-badge badge" ng-class="{'bg-red': notifications.length > 0}">{{notifications.length}}</span>
                     </i>
-                    <span translate>{{ 'notifications' }}</span>
+                    <span translate>{{ 'app.public.common.notifications' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ng-click="logout($event)">
-                    <i class="fa fa-power-off"></i> <span translate>{{ 'sign_out' }}</span>
+                <a class="pointer" ng-click="logout($event)">
+                    <i class="fa fa-power-off"></i> <span translate>{{ 'app.public.common.sign_out' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" >
-              <a href="#" ui-sref="app.logged.dashboard.profile">
-                <i class="fa fa-user"></i> <span translate>{{ 'my_profile' }}</span>
+              <a ui-sref="app.logged.dashboard.profile">
+                <i class="fa fa-user"></i> <span translate>{{ 'app.public.common.my_profile' }}</span>
               </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" >
-                <a href="#" ui-sref="app.logged.dashboard.settings">
-                    <i class="fa fa-user"></i> <span translate>{{ 'my_settings' }}</span>
+                <a ui-sref="app.logged.dashboard.settings">
+                    <i class="fa fa-user"></i> <span translate>{{ 'app.public.common.my_settings' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ui-sref="app.logged.dashboard.projects">
-                    <i class="fa fa-puzzle-piece"></i> <span translate>{{ 'my_projects' }}</span>
+                <a ui-sref="app.logged.dashboard.projects">
+                    <i class="fa fa-puzzle-piece"></i> <span translate>{{ 'app.public.common.my_projects' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ui-sref="app.logged.dashboard.trainings">
-                    <i class="fa fa-graduation-cap"></i> <span translate>{{ 'my_trainings' }}</span>
+                <a ui-sref="app.logged.dashboard.trainings">
+                    <i class="fa fa-graduation-cap"></i> <span translate>{{ 'app.public.common.my_trainings' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg">
-                <a href="#" ui-sref="app.logged.dashboard.events">
-                    <i class="fa fa-calendar-o"></i> <span translate>{{ 'my_events' }}</span>
+                <a ui-sref="app.logged.dashboard.events">
+                    <i class="fa fa-calendar-o"></i> <span translate>{{ 'app.public.common.my_events' }}</span>
                 </a>
             </li>
             <li class="hidden-sm hidden-md hidden-lg" ng-hide="fablabWithoutInvoices" ng-if-end>
-                <a href="#" ui-sref="app.logged.dashboard.invoices">
-                    <i class="fa fa-file-pdf-o"></i> <span translate>{{ 'my_invoices' }}</span>
+                <a ui-sref="app.logged.dashboard.invoices">
+                    <i class="fa fa-file-pdf-o"></i> <span translate>{{ 'app.public.common.my_invoices' }}</span>
                 </a>
             </li>
             <!-- Common menu entries -->
-            <li class="" ng-repeat="navLink in navLinks" >
-              <a ng-click="toggleNavSize($event)" ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav">
+            <li class="{{navLink.class}}" ng-repeat="navLink in navLinks">
+              <a ng-click="toggleNavSize($event)" ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav" ng-if="navLink.state">
                 <i class="fa fa-{{navLink.linkIcon}} fa-lg"></i>
                 <span>{{navLink.linkText | translate}}</span>
               </a>
@@ -72,10 +72,10 @@
 
           <!-- Admin entries -->
           <div class="line-s bg-red-dark dk " ng-if="isAuthorized('admin')"></div>
-          <div class="text-xs font-bold text-bordeau hidden-nav-xs padder m-t-lg m-b-sm" ng-if="isAuthorized('admin')" translate>{{ 'admin' }}</div>
+          <div class="text-xs font-bold text-bordeau hidden-nav-xs padder m-t-lg m-b-sm admin-section" ng-if="isAuthorized('admin')" translate>{{ 'app.public.common.admin' }}</div>
           <ul class="nav" ng-if="isAuthorized('admin')">
-            <li class="" ng-repeat="navLink in adminNavLinks">
-              <a ng-click="toggleNavSize($event)" ga ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav">
+            <li class="{{navLink.class}}" ng-repeat="navLink in adminNavLinks">
+              <a ng-click="toggleNavSize($event)" ga ui-sref="{{navLink.state}}" ui-sref-active="active" class="auto" data-toggle="class:nav-off-screen" data-target="#nav" ng-if="navLink.state">
                 <i class="fa fa-{{navLink.linkIcon}} fa-lg"></i>
                 <span>{{navLink.linkText | translate}}</span>
               </a>
@@ -88,7 +88,7 @@
 
     <footer class="footer hidden-xs no-padder text-center-nav-xs">
       <a data-link="#nav" data-toggle="class:nav-xs" class="btn btn-theme btn-block no-b btn-icon icon-muted btn-inactive no-radius wrapper" ng-click="toggleNavSize($event)">
-        <i class="fa fa-long-arrow-left text"></i> <span class="text text-sm" translate>{{ 'reduce_panel' }}</span>
+        <i class="fa fa-long-arrow-left text"></i> <span class="text text-sm" translate>{{ 'app.public.common.reduce_panel' }}</span>
         <i class="fa fa-long-arrow-right text-active"></i>
       </a>
     </footer>

@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-8 b-l b-r-md">
       <section class="heading-title">
-        <h1 translate translate-values="{NAME:space.name}">{{ 'space_reserve.planning_of_space_NAME' }}</h1>
+        <h1 translate translate-values="{NAME:space.name}">{{ 'app.logged.space_reserve.planning_of_space_NAME' }}</h1>
       </section>
     </div>
   </div>
@@ -17,7 +17,7 @@
 <div class="row no-gutter training-reserve">
   <div class="col-sm-12 col-md-12 col-lg-9">
     <div ui-calendar="calendarConfig" ng-model="eventSources" calendar="calendar" class="wrapper-lg" ng-show="!plansAreShown"></div>
-    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path 'plans/_plan.html' %>'"></ng-include>
+    <ng-include ng-if="!fablabWithoutPlans" src="'<%= asset_path "plans/_plan.html" %>'"></ng-include>
   </div>
 
 
@@ -35,6 +35,8 @@
           plan="selectedPlan"
           plan-selection-time="planSelectionTime"
           settings="settings"
+          plans="plans"
+          groups="groups"
           on-slot-added-to-cart="markSlotAsAdded"
           on-slot-removed-from-cart="markSlotAsRemoved"
           on-slot-start-to-modify="markSlotAsModifying"

@@ -1,21 +1,21 @@
-<h2 translate>{{ 'pricing.list_of_the_subscription_plans' }}</h2>
+<h2 translate>{{ 'app.admin.pricing.list_of_the_subscription_plans' }}</h2>
 
 <div ng-show="fablabWithoutPlans" class="alert alert-warning m-t">
-  {{ 'pricing.beware_the_subscriptions_are_disabled_on_this_application' | translate }}
-  {{ 'pricing.you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager' | translate }}
-  <br>{{ 'pricing.for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later' | translate }}
+  {{ 'app.admin.pricing.beware_the_subscriptions_are_disabled_on_this_application' | translate }}
+  {{ 'app.admin.pricing.you_can_create_some_but_they_wont_be_available_until_the_project_is_redeployed_by_the_server_manager' | translate }}
+  <br>{{ 'app.admin.pricing.for_safety_reasons_please_dont_create_subscriptions_if_you_dont_want_intend_to_use_them_later' | translate }}
 </div>
 
 <div class="m-t-lg">
-  <button type="button" class="btn btn-warning" ui-sref="app.admin.plans.new">
+  <button type="button" class="btn btn-warning new-plan-button" ui-sref="app.admin.plans.new">
     <i class="fa fa-plus m-r"></i>
-    <span translate>{{ 'pricing.add_a_new_subscription_plan' }}</span>
+    <span translate>{{ 'app.admin.pricing.add_a_new_subscription_plan' }}</span>
   </button>
   <div class="form-group pull-right">
     <div class="input-group">
       <span class="input-group-addon"><i class="fa fa-filter"></i></span>
       <select ng-model="planFiltering" class="form-control">
-        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'pricing.status_'+status }}</option>
+        <option ng-repeat="status in filterDisabled" value="{{status}}" translate>{{ 'app.admin.pricing.status_'+status }}</option>
       </select>
     </div>
   </div>
@@ -24,12 +24,12 @@
 <table class="table">
   <thead>
   <tr>
-    <th><a href="" ng-click="setOrderPlans('type')">{{ 'pricing.type' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='type', 'fa fa-sort-alpha-desc': orderPlans=='-type', 'fa fa-arrows-v': orderPlans }"></i></a></th>
-    <th><a href="" ng-click="setOrderPlans('name')">{{ 'pricing.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='name', 'fa fa-sort-alpha-desc': orderPlans=='-name', 'fa fa-arrows-v': orderPlans }"></i></a></th>
-    <th><a href="" ng-click="setOrderPlans('interval')">{{ 'pricing.duration' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-amount-asc': orderPlans=='interval', 'fa fa-sort-amount-desc': orderPlans=='-interval', 'fa fa-arrows-v': orderPlans }"></i></a></th>
-    <th><a href="" ng-click="setOrderPlans('group_id')">{{ 'pricing.group' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='group_id', 'fa fa-sort-alpha-desc': orderPlans=='-group_id', 'fa fa-arrows-v': orderPlans }"></i></a></th>
-    <th class="hidden-xs"><a href="" ng-click="setOrderPlans('pricing.ui_weight')">{{ 'pricing.prominence' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPlans=='ui_weight', 'fa fa-sort-numeric-desc': orderPlans=='-ui_weight', 'fa fa-arrows-v': orderPlans }"></i></a></th>
-    <th><a href="" ng-click="setOrderPlans('amount')">{{ 'pricing.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPlans=='amount', 'fa fa-sort-numeric-desc': orderPlans=='-amount', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+    <th><a href="" ng-click="setOrderPlans('type')">{{ 'app.admin.pricing.type' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='type', 'fa fa-sort-alpha-desc': orderPlans=='-type', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+    <th><a href="" ng-click="setOrderPlans('name')">{{ 'app.admin.pricing.name' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='name', 'fa fa-sort-alpha-desc': orderPlans=='-name', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+    <th><a href="" ng-click="setOrderPlans('interval')">{{ 'app.admin.pricing.duration' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-amount-asc': orderPlans=='interval', 'fa fa-sort-amount-desc': orderPlans=='-interval', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+    <th><a href="" ng-click="setOrderPlans('group_id')">{{ 'app.admin.pricing.group' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-alpha-asc': orderPlans=='group_id', 'fa fa-sort-alpha-desc': orderPlans=='-group_id', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+    <th class="hidden-xs"><a href="" ng-click="setOrderPlans('app.admin.pricing.ui_weight')">{{ 'app.admin.pricing.prominence' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPlans=='ui_weight', 'fa fa-sort-numeric-desc': orderPlans=='-ui_weight', 'fa fa-arrows-v': orderPlans }"></i></a></th>
+    <th><a href="" ng-click="setOrderPlans('amount')">{{ 'app.admin.pricing.price' | translate }} <i class="fa fa-arrows-v" ng-class="{'fa fa-sort-numeric-asc': orderPlans=='amount', 'fa fa-sort-numeric-desc': orderPlans=='-amount', 'fa fa-arrows-v': orderPlans }"></i></a></th>
     <th></th>
   </tr>
   </thead>

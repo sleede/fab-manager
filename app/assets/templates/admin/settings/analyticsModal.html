@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h3 class="text-center red" translate>{{ 'app.admin.settings.fab_analytics' }}</h3>
+</div>
+<div class="modal-body">
+  <p translate>{{ 'app.admin.settings.privacy.analytics.intro_analytics_html' }}</p>
+  <div>
+    <table class="table table-bordered">
+      <tbody>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.version' }}</td><td>{{ data.version }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.members' }}</td><td>{{ data.members }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.admins' }}</td><td>{{ data.admins }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.availabilities' }}</td><td>{{ data.availabilities }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.reservations' }}</td><td>{{ data.reservations }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.plans' }}</td><td>{{ data.plans }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.spaces' }}</td><td>{{ data.spaces }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.online_payment' }}</td><td>{{ data.online_payment }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.invoices' }}</td><td>{{ data.invoices }}</td></tr>
+      <tr><td translate>{{ 'app.admin.settings.privacy.analytics.openlab' }}</td><td>{{ data.openlab }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="close()" translate>{{ 'app.shared.buttons.close' }}</button>
+</div>

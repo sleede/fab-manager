@@ -4,7 +4,7 @@ gem 'compass-rails', '2.0.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.11.1'
 # Use Puma as web server
-gem 'puma', '3.10.0'
+gem 'puma', '3.12.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
 
@@ -61,7 +61,7 @@ group :test do
   gem 'webmock'
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
 end
 
@@ -88,9 +88,6 @@ gem 'font-awesome-rails'
 gem 'mini_magick'
 # upload files
 gem 'carrierwave'
-
-gem 'twitter'
-gem 'twitter-text'
 
 # slug url
 gem 'friendly_id', '~> 5.1.0'
@@ -140,8 +137,8 @@ gem 'apipie-rails'
 gem 'has_secure_token'
 
 # XLS files generation
-gem 'axlsx_rails'
 gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'rubyzip', '>= 1.3.0'
 
 gem 'rack-protection', '1.5.5'
@@ -152,3 +149,5 @@ gem 'sys-filesystem'
 gem 'sha3'
 
 gem 'repost'
+
+gem 'icalendar'

@@ -1,14 +1,3 @@
-/* eslint-disable
-    no-return-assign,
-    no-undef,
-*/
-// TODO: This file was created by bulk-decaffeinate.
-// Fix any style issues and re-enable lint.
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 'use strict';
 
 /**
@@ -36,9 +25,9 @@ Application.Directives.directive('selectMember', [ 'Diacritics', 'Member', funct
           q['subscription'] = attributes.subscription;
         }
 
-        return Member.search(q, function (users) {
+        Member.search(q, function (users) {
           scope.matchingMembers = users;
-          return scope.isLoadingMembers = false;
+          scope.isLoadingMembers = false;
         }
         , function (error) { console.error(error); });
       };

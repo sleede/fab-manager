@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
 
   def recurrence_events
     Event.includes(:availability)
-         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, Time.now)
+         .where('events.recurrence_id = ? AND events.id != ? AND availabilities.start_at >= ?', recurrence_id, id, DateTime.current)
          .references(:availabilities)
   end
 
@@ -72,6 +72,15 @@ class Event < ActiveRecord::Base
   #   Reservation.where(reservable: self)
   # end
 
+  def update_nb_free_places
+    if nb_total_places.nil?
+      self.nb_free_places = nil
+    else
+      reserved_places = reservations.joins(:slots).where('slots.canceled_at': nil).map(&:total_booked_seats).inject(0) { |sum, t| sum + t }
+      self.nb_free_places = (nb_total_places - reserved_places)
+    end
+  end
+
   private
 
   def event_recurrence
@@ -89,7 +98,7 @@ class Event < ActiveRecord::Base
          else
            nil
          end
-    r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at+1.day, until: recurrence_end_at)
+    r = Recurrence.new(every: recurrence, on: on, starts: availability.start_at + 1.day, until: recurrence_end_at)
     r.events.each do |date|
       days_diff = availability.end_at.day - availability.start_at.day
       start_at = DateTime.new(
@@ -101,7 +110,7 @@ class Event < ActiveRecord::Base
         availability.start_at.sec,
         availability.start_at.zone
       )
-      start_at = dst_correction(availability.start_at,start_at)
+      start_at = dst_correction(availability.start_at, start_at)
       end_date = date + days_diff.days
       end_at = DateTime.new(
         end_date.year,
@@ -112,7 +121,7 @@ class Event < ActiveRecord::Base
         availability.end_at.sec,
         availability.end_at.zone
       )
-      end_at = dst_correction(availability.start_at,end_at)
+      end_at = dst_correction(availability.start_at, end_at)
       ei = EventImage.new(attachment: event_image.attachment) if event_image
       efs = event_files.map do |f|
         EventFile.new(attachment: f.attachment)
@@ -140,14 +149,5 @@ class Event < ActiveRecord::Base
       event.save
     end
     update_columns(recurrence_id: id)
-  end
-
-  def update_nb_free_places
-    if nb_total_places.nil?
-      self.nb_free_places = nil
-    else
-      reserved_places = reservations.map(&:total_booked_seats).inject(0){ |sum, t| sum + t }
-      self.nb_free_places = (nb_total_places - reserved_places)
-    end
   end
 end

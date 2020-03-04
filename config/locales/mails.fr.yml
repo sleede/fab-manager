@@ -80,7 +80,8 @@ fr:
       subject: "Votre abonnement a bien été souscrit"
       body:
         plan_subscribed_html: "Vous avez souscrit à l'abonnement : <strong><em>%{PLAN}</em></strong>."
-        subscription_stops_on: "Votre abonnement s'arrêtera automatiquement le %{DATE}"
+        rolling_subscription_stops_on: "Votre abonnement s'arrêtera automatiquement %{DURATION} après votre première formation. À défaut, il s'arrêtera le %{DATE}."
+        subscription_stops_on: "Votre abonnement s'arrêtera automatiquement le %{DATE}."
 
     notify_member_create_reservation:
       subject: "Votre réservation a bien été enregistrée"
@@ -258,7 +259,7 @@ fr:
         statistics_global: "de toutes les statistiques"
         statistics_account: "des statistiques d'inscriptions"
         statistics_event: "des statistiques sur les évènements"
-        statistics_machine: "des statistiques d'heures machines"
+        statistics_machine: "des statistiques de créneaux machines"
         statistics_project: "des statistiques sur les projets"
         statistics_subscription: "des statistiques d'abonnements"
         statistics_training: "des statistiques sur les formations"
@@ -290,7 +291,7 @@ fr:
 
     notify_admin_free_disk_space:
       subject: "Espace disque faible"
-      body: "Attention : l'espace disque disponible sur le serveur hébergeant fab-manager est inférieur à %{THRESHOLD} MiO. Cela peut nuire à son bon fonctionnement et empêcher la sauvegarde de certaines données. Actuellement, il reste %{AVAILABLE} MiO d'espace libre sur le point de montage."
+      body: "Attention : l'espace disque disponible sur le serveur hébergeant Fab-manager est inférieur à %{THRESHOLD} MiO. Cela peut nuire à son bon fonctionnement et empêcher la sauvegarde de certaines données. Actuellement, il reste %{AVAILABLE} MiO d'espace libre sur le point de montage."
 
     notify_admin_close_period_reminder:
       subject: "Pensez à clôturer vos périodes comptables"
@@ -311,6 +312,12 @@ fr:
       body:
         content_html: "<p>Nous souhaitons vous signaler que nous venons de mettre à jour notre politique de confidentialité.</p><p>Nous pouvons apporter régulièrement des modifications à notre politique de confidentialité. Conformément à la réglementation, une notification vous sera envoyée à chaque mise à jour.</p><p>En accédant ou en utilisant nos services après la mise à jour de la Politique de confidentialité, nous considérerons que vous acceptez les termes de celle-ci, mises à jour comprises.</p>"
         link_to_policy: "Cliquez ici pour consultez la politique de confidentialité."
+
+    notify_admin_refund_created:
+      subject: "Un avoir a été généré"
+      body:
+        refund_created: "Un avoir de %{AMOUNT} a été généré sur la facture %{INVOICE} de l'utilisateur %{USER}"
+        download: "Cliquez ici pour télécharger cet avoir"
 
     shared:
       hello: "Bonjour %{user_name}"
