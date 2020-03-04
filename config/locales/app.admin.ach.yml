@@ -65,7 +65,7 @@ ach:
         select_nb_period: "crwdns6787:0crwdne6787:0"
         select_end_date: "crwdns6789:0crwdne6789:0"
         about_to_create: "crwdns6791:0TYPE={TYPE}crwdnd6791:0NUMBER={NUMBER}crwdne6791:0"
-        divided_in_slots: "crwdns19772:0{DURATION}crwdne19772:0"
+        divided_in_slots: "crwdns20172:0COUNT={COUNT}crwdnd20172:0DURATION={DURATION}crwdne20172:0"
         reservable: "crwdns6793:0crwdne6793:0"
         labels: "crwdns6795:0crwdne6795:0"
         none: "crwdns6797:0crwdne6797:0"
@@ -1044,7 +1044,7 @@ ach:
       tour:
         conclusion:
           title: "crwdns19898:0crwdne19898:0"
-          content: "crwdns19900:0crwdne19900:0"
+          content: "crwdns20174:0crwdne20174:0"
         trainings:
           welcome:
             title: "crwdns19902:0crwdne19902:0"
