@@ -38,17 +38,17 @@ pt:
         reserve_a_space: "Reserva de espaço"
         projects_gallery: "Galeria de Projetos"
         subscriptions: "Assinaturas"
-        public_calendar: "Calendário"
+        public_calendar: "Agenda"
         #left menu (admin)
-        trainings_monitoring: "Trainings"
-        manage_the_calendar: "Calendar"
-        manage_the_users: "Users"
-        manage_the_invoices: "Invoices"
+        trainings_monitoring: "Treinamentos"
+        manage_the_calendar: "Agenda"
+        manage_the_users: "Uusuários"
+        manage_the_invoices: "Contas"
         subscriptions_and_prices: "Assinaturas e Preços"
-        manage_the_events: "Events"
-        manage_the_machines: "Machines"
-        manage_the_spaces: "Spaces"
-        manage_the_projects_elements: "Projects"
+        manage_the_events: "Eventos"
+        manage_the_machines: "Máquinas"
+        manage_the_spaces: "Espaços"
+        manage_the_projects_elements: "Projeto"
         statistics: "Estatísticas"
         customization: "Customizações"
         open_api_clients: "OpenAPI clients"
@@ -93,7 +93,7 @@ pt:
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
-        you_will_receive_confirmation_instructions_by_email_detailed: "You will receive an email with instructions about how to confirm your account in a few minutes."
+        you_will_receive_confirmation_instructions_by_email_detailed: "Você receberá um email com instruções sobre como confirmar sua conta em alguns minutos."
         #password modification modal
         change_your_password: "Mudar sua senha"
         your_new_password: "Sua nova senha"
@@ -101,13 +101,13 @@ pt:
         #connection modal
         connection: "Login"
         password_forgotten: "Esqueceu sua senha?"
-        confirm_my_account: "Confirm my e-mail"
+        confirm_my_account: "Confirmar sua conta"
         not_registered_to_the_fablab: "Ainda não registrado no Fablab?"
         create_an_account: "Criar conta"
         wrong_email_or_password: "E-mail ou senha incorretos."
         caps_lock_is_on: "A tecla Caps Lock está ativada."
         #confirmation modal
-        you_will_receive_confirmation_instructions_by_email: You will receive confirmation instructions by email.
+        you_will_receive_confirmation_instructions_by_email: Você receberá instruções de confirmação por e-mail.
         #forgotten password modal
         your_email_address_is_unknown: "Seu e-mail não está cadastrado."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Você irá receber um e-mail com as instruções para resetar sua senha."
@@ -155,7 +155,7 @@ pt:
         #projects gallery
         the_fablab_projects: "Projetos do Fab Lab"
         add_a_project: "Adicionar projeto"
-        search_over_the_whole_network: "Search over the whole Fab-manager network"
+        search_over_the_whole_network: "Pesquisar em todos os FabLabs"
         tooltip_openlab_projects_switch: "A busca em todos os FabLabs busca projetos em todos os FabLabs que usam o Fab-manager !"
         openlab_search_not_available_at_the_moment: "A busca em toda a rede de FabLabs não está disponível no momento. Você pode procurar por projetos nesta plataforma."
         project_search_result_is_empty: "Desculpe, nós não achamos nenhum resultado para sua pesquisa."
@@ -232,7 +232,7 @@ pt:
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "O treinamento não pode ser deletado pois já foi reservado por alguns usuários."
       plans:
         #summary of the subscriptions
-        subscriptions: "Subscriptions"
+        subscriptions: "Assinaturas"
         i_choose_that_plan: "Eu escolho esse plano"
         i_subscribe_online: "Me inscrever online"
         i_already_subscribed: "Eu já estou inscrito"
