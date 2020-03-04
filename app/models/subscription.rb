@@ -179,7 +179,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def set_expiration_date
-    start_at = DateTime.current
+    start_at = DateTime.current.in_time_zone
     self.expiration_date = start_at + plan.duration
   end
 
