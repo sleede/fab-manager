@@ -40,16 +40,16 @@ es:
         next: "Siguiente >"
         previous: "< Anterior"
         select_some_machines: "Seleccione algunas máquinas"
-        select_all: "All"
-        select_none: "None"
+        select_all: "Todas"
+        select_none: "No"
         manage_machines: "Click here to add or remove machines."
         manage_spaces: "Click here to add or remove spaces."
         manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Número de tickets: "
         adjust_the_opening_hours: "Ajustar el horario de apertura"
-        to_time: "to" #eg. from 18:00 to 21:00
+        to_time: "a" #eg. from 18:00 to 21:00
         restrict_options: "Restriction options"
-        restrict_with_labels: "Restrict this slot with labels"
+        restrict_with_labels: "Restringir este horario con etiquetas"
         restrict_for_subscriptions: "Restrict this slot for subscription users"
         select_some_plans: "Select some plans"
         plans: "Plan(s):"
@@ -243,8 +243,8 @@ es:
         events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
         unable_to_update_the_event: "Unable to update the event"
         events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
-        error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
-        other_error: "An unexpected error occurred while updating the event"
+        error_deleting_reserved_price: "No se puede eliminar el precio solicitado porque está asociado con algunas reservas."
+        other_error: "Se ha producido un error inesperado al actualizar el evento."
       event_reservations:
         #event reservations list
         the_reservations: "Reservas :"
@@ -286,7 +286,7 @@ es:
         hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Suscripciónes relacionada"
         please_specify_a_number: "Por favor, especifique un número."
-        none: "None" #grammar concordance with training.
+        none: "Nada" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "Se ha producido un error al guardar el número de créditos."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "Se ha producido un error al eliminar el crédito con la {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "Se ha producido un error: no se puede encontrar el crédito a revocar."
@@ -462,7 +462,7 @@ es:
         description: "Descripción"
         description_optional: "Descripción (opcional):"
         will_appear_on_the_refund_invoice: "Aparecerá en la factura de reembolso."
-        none: "None" #grammar concordance with payment mean
+        none: "Nada" #grammar concordance with payment mean
         by_cash: "En efectivo"
         by_cheque: "Mediante cheque"
         by_transfer: "Por transferencia"
@@ -855,7 +855,7 @@ es:
         neutral: "Neutral."
         eg: "ej:"
         about: "Acerca de"
-        the_team: "The team of"
+        the_team: "El equipo"
         male_preposition: "el"
         female_preposition: "la"
         neutral_preposition: ""
