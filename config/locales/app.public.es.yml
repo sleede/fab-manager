@@ -38,17 +38,17 @@ es:
         reserve_a_space: "Reservar un espacio"
         projects_gallery: "Galería de proyectos"
         subscriptions: "Suscripciones"
-        public_calendar: "Calendario"
+        public_calendar: "Agenda"
         #left menu (admin)
-        trainings_monitoring: "Trainings"
-        manage_the_calendar: "Calendar"
-        manage_the_users: "Users"
-        manage_the_invoices: "Invoices"
+        trainings_monitoring: "Cursos"
+        manage_the_calendar: "Agenda"
+        manage_the_users: "Usuarios"
+        manage_the_invoices: "Facturas"
         subscriptions_and_prices: "Suscripciones y precios"
-        manage_the_events: "Events"
-        manage_the_machines: "Machines"
-        manage_the_spaces: "Spaces"
-        manage_the_projects_elements: "Projects"
+        manage_the_events: "Eventos"
+        manage_the_machines: "Máquinas"
+        manage_the_spaces: "Espacios"
+        manage_the_projects_elements: "Proyectos"
         statistics: "Estadísticas"
         customization: "Customización"
         open_api_clients: "Clientes OpenAPI"
@@ -93,7 +93,7 @@ es:
         used_for_reservation: "This data will be used in case of change on one of your bookings"
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
-        you_will_receive_confirmation_instructions_by_email_detailed: "You will receive an email with instructions about how to confirm your account in a few minutes."
+        you_will_receive_confirmation_instructions_by_email_detailed: "Recibirá un correo electrónico con instrucciones sobre cómo confirmar su cuenta en unos minutos."
         #password modification modal
         change_your_password: "Cambiar contraseña"
         your_new_password: "Nueva contraseña"
@@ -101,13 +101,13 @@ es:
         #connection modal
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
-        confirm_my_account: "Confirm my e-mail"
+        confirm_my_account: "Confirmar mi E-mail"
         not_registered_to_the_fablab: "¿No está registrado en el fablab todavía?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
         #confirmation modal
-        you_will_receive_confirmation_instructions_by_email: You will receive confirmation instructions by email.
+        you_will_receive_confirmation_instructions_by_email: Recibirá las instrucciones de confirmación por email.
         #forgotten password modal
         your_email_address_is_unknown: "Se desconoce su email."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "En un momento recibirá las instrucciones para restablecer su contraseña en su mail."
@@ -155,7 +155,7 @@ es:
         #projects gallery
         the_fablab_projects: "Los proyectos del FabLab"
         add_a_project: "Añadir un proyecto"
-        search_over_the_whole_network: "Search over the whole Fab-manager network"
+        search_over_the_whole_network: "Buscar en toda la red de FabLab"
         tooltip_openlab_projects_switch: "La busqueda en toda la red le permite buscar los proyectos de todos los FabLab que usan esta característica"
         openlab_search_not_available_at_the_moment: "La busqueda en toda la red no está disponible en este momento. Puede seguir buscando proyectos en este FabLab."
         project_search_result_is_empty: "Lo sentimos, no hemos encontrado nada."
@@ -232,7 +232,7 @@ es:
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
       plans:
         #summary of the subscriptions
-        subscriptions: "Subscriptions"
+        subscriptions: "Suscripciones"
         i_choose_that_plan: "Elijo este plan"
         i_subscribe_online: "Suscribirme online"
         i_already_subscribed: "Ya me he suscrito"
