@@ -221,7 +221,7 @@ es:
         statistics_global: "de todas las estadísticas"
         statistics_account: "de las estadísticas de registro"
         statistics_event: "de estadísticas sobre eventos"
-        statistics_machine: "of statistics about machine slots"
+        statistics_machine: "de estadísticas sobre slots de máquina"
         statistics_project: "de estadísticas sobre proyectos"
         statistics_subscription: "de estadísticas de suscripción"
         statistics_training: "de estadísticas sobre entrenamientos"
