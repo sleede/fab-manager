@@ -67,7 +67,7 @@ fr:
         select_nb_period: "Veuillez choisir un nombre de périodes pour la récurrence"
         select_end_date: "Veuillez choisir la date de dernière occurrence"
         about_to_create: "Vous vous apprêtez à créer {NUMBER, plural, one{le créneau} other{les créneaux}} {TYPE, select, machines{machine} training{formation} space{espace} other{autre}} suivant :"
-        divided_in_slots: "Ce créneau sera proposé à la réservation par tranches de {DURATION} minutes. Contactez votre administrateur système pour modifier ce paramètre."
+        divided_in_slots: "{COUNT, plural, =1{Ce créneau sera proposé} other{Ces créneaux seront proposés}} à la réservation par tranches de {DURATION} minutes. Contactez votre administrateur système pour modifier ce paramètre."
         reservable: "Réservable(s) :"
         labels: "Étiquette(s) :"
         none: "Aucune"
@@ -1074,7 +1074,7 @@ fr:
       tour:
         conclusion:
           title: "Merci de votre attention"
-          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
+          content: "<p>Si vous souhaitez relancer cette aide contextuelle, appuyez sur <strong>F1</strong> à n'importe quel moment ou cliquez sur [? Aide] depuis le menu utilisateur.</p><p>Si vous avez besoin d'aide supplémentaire, vous pouvez <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>consulter le guide d'utilisation</a> disponible en Français.</p><p>L'équipe de Fab-manager propose également du support personnalisé (aide à la prise en main, aide à l'installation, personnalisation, etc.), <a href='mailto:contact@fab-manager.com'>contactez-nous</a> pour plus d'informations.</p>"
         trainings:
           welcome:
             title: "Formations"

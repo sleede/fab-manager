@@ -67,7 +67,7 @@ es:
         select_nb_period: "Please select a number of periods for the recurrence"
         select_end_date: "Please select the date of the last occurrence"
         about_to_create: "Está a punto de crear los horarios siguientes: {TYPE, select, machines{machine} training{training} space{space} other{other}} {NUMBER, plural, one{slot} other{slots}}:"
-        divided_in_slots: "This slot will be open for booking in {DURATION}-minutes increments. Contact your system administrator to change this setting."
+        divided_in_slots: "{COUNT, plural, =1{This slot} other{These slots}} will be open for booking in {DURATION}-minutes increments. Contact your system administrator to change this setting."
         reservable: "Reservable(s):"
         labels: "Etiqueta(s):"
         none: "Ninguna"
@@ -1075,7 +1075,7 @@ es:
       tour:
         conclusion:
           title: "Thank you for your attention"
-          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.2.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
+          content: "<p>If you want to restart this contextual help, press <strong>F1</strong> at any time or click on [? Help] from the user's menu.</p><p>If you need additional help, you can <a href='https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf' target='_blank'>check the user guide</a> (only in French for now).</p><p>The Fab-manager's team also provides personalized support (help with getting started, help with installation, customization, etc.), <a href='mailto:contact@fab-manager.com'>contact-us</a> for more info.</p>"
         trainings:
           welcome:
             title: "Trainings"
