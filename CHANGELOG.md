@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.3.0 2020 March 04
+
 - Ability to configure reservation slot restricted for plan subscribers
 - Ability to configure the policy (allow or prevent) for members booking a machine/formation/event slot, if they already have a reservation the same day at the same time
 - Ability to create and delete periodic calendar availabilities (recurrence)
