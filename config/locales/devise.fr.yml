@@ -10,20 +10,20 @@ fr:
       inactive: "Votre compte n’est pas encore activé."
       invalid: "E-mail ou mot de passe incorrect."
       locked: "Votre compte est verrouillé."
-      last_attempt: "You have one more attempt before your account will be locked."
+      last_attempt: "Vous avez encore une tentative avant que votre compte soit verrouillé."
       not_found_in_database: "E-mail ou mot de passe incorrect."
       timeout: "Votre session est périmée, veuillez vous reconnecter pour continuer."
       unauthenticated: "Vous devez vous connecter ou vous enregistrer pour continuer."
-      unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
+      unconfirmed: "Vous devez confirmer votre compte avant de continuer. Veuillez cliquer sur le lien sous le formulaire."
     mailer:
       confirmation_instructions:
-        action: "Confirm my email address"
-        instruction: "You can finalize your registration by confirming your email address. Please click on the following link:"
+        action: "Confirmer mon adresse e-mail"
+        instruction: "Vous pouvez finaliser votre inscription en confirmant votre adresse e-mail. Veuillez cliquer sur le lien suivant :"
         subject: "Confirmation d'inscription"
       reset_password_instructions:
-        action: "Change my password"
-        instruction: "Someone asked for a link to change your password. You can do it through the link below."
-        ignore_otherwise: "If you have not made this request, please ignore this message."
+        action: "Changer mon mot de passe"
+        instruction: "Quelqu'un a demandé le changement de votre mot de passe. Vous pouvez le modifier via le lien ci-dessous."
+        ignore_otherwise: "S'il ne s'agit pas de vous, veillez ignorer ce mail."
         subject: "Instructions pour changer le mot de passe"
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"
@@ -53,10 +53,10 @@ fr:
       unlocked: "Votre compte a été débloqué avec succès. Veuillez vous connecter."
   errors:
     messages:
-      already_confirmed: "This email was already confirmed, please try signing in."
+      already_confirmed: "Cet e-mail a déjà été confirmé, veuillez essayer de vous connecter."
       confirmation_period_expired: "doit être confirmé(e) en %{period}, veuillez en demander un(e) autre"
       expired: "est périmé, veuillez en demander un autre"
-      not_found: "This email was not found"
+      not_found: "Cet e-mail n'a pas été trouvé"
       not_locked: "n’était pas verrouillé(e)"
       not_saved:
         one: "une erreur a empêché ce (ou cette) %{resource} d’être enregistré(e) :"
