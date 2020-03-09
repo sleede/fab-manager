@@ -182,7 +182,7 @@ es:
         from_DATE: "Desde {DATE}"
         from_TIME: "Desde {TIME}"
         to_date: "to" #eg: from 01/01 to 01/05
-        to_time: "to" #eg: from 18:00 to 21:00
+        to_time: "to" #eg. from 18:00 to 21:00
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -286,7 +286,7 @@ es:
         hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Suscripciónes relacionada"
         please_specify_a_number: "Por favor, especifique un número."
-        none: "Nada"
+        none: "Nada" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "Se ha producido un error al guardar el número de créditos."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "Se ha producido un error al eliminar el crédito con la {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "Se ha producido un error: no se puede encontrar el crédito a revocar."
@@ -410,7 +410,7 @@ es:
         year: "Año"
         month: "Mes"
         day: "Día"
-        num_of_invoice: "#de factura"
+        num_of_invoice: "#of invoice"
         online_sales: "Ventas en línea"
         wallet: "Cartera"
         refund: "Reembolso"
@@ -462,7 +462,7 @@ es:
         description: "Descripción"
         description_optional: "Descripción (opcional):"
         will_appear_on_the_refund_invoice: "Aparecerá en la factura de reembolso."
-        none: "Nada"  #grammar note: concordancia con medio de pago
+        none: "Nada" #grammar concordance with payment mean
         by_cash: "En efectivo"
         by_cheque: "Mediante cheque"
         by_transfer: "Por transferencia"
@@ -553,7 +553,7 @@ es:
         general_space_code: "Accounting code for all spaces"
         accounting_Space_label: "Spaces label"
         general_space_label: "Account label for all spaces"
-        codes_customization_success: "Customization of the accounting codes successfully saved."
+        codes_customization_success: "Customization of accounting codes successfully saved."
         export_accounting_data: "Export accounting data"
         export_to: "Export to the accounting software"
         export_is_running: "Exportando, será notificado cuando esté listo."
@@ -564,7 +564,7 @@ es:
         encoding: "Encoding"
         separator: "Separator"
         dateFormat: "Date format"
-        labelMaxLength: "Label (max)"
+        labelMaxLength: "Label maximum length"
         decimalSeparator: "Decimal separator"
         exportInvoicesAtZero: "Export invoices equal to 0"
         columns: "Columns"
@@ -785,8 +785,8 @@ es:
         statistics: "Statistics"
         evolution: "Evolución"
         age_filter: "Filtro de edad"
-        from_age: "Desde" #context: age. eg: from 8 to 40 years old
-        to_age: "a" #context: age. eg: from 8 to 40 years old
+        from_age: "Desde" #eg. from 8 to 40 years old
+        to_age: "a" #eg. from 8 to 40 years old
         _years_old: "años"
         start: "Principio:"
         end: "Final:"
@@ -829,8 +829,8 @@ es:
         data: "Datos"
         day: "Dia"
         week: "Semana"
-        from_date: "From" # eg: from 01/01 to 01/05
-        to_date: "to" # eg: from 01/01 to 01/05
+        from_date: "From" #eg: from 01/01 to 01/05
+        to_date: "to" #eg: from 01/01 to 01/05
         month: "Month"
         start: "Inicio:"
         end: "Final:"
