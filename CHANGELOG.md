@@ -1,5 +1,8 @@
 # Changelog Fab-manager
 
+- Secure the session cookie
+- Refactored translations to help merging Crowdin PR
+
 ## v4.3.1 2020 March 04
 
 - Updated user's manual for v4.3 (fr)

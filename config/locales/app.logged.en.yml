@@ -1,8 +1,8 @@
 en:
   app:
     logged:
+      #user's profile completion page when logging from an SSO provider
       profile_completion:
-        #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirm your new account"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "You've just created a new account on {GENDER, select, neutral{} other{the}} {NAME}, by logging from"
         we_need_some_more_details: "To finalize the platform setup, we need some more details"
@@ -43,8 +43,8 @@ en:
         #dashboard: public profile
         profile:
           empty: ''
+        #dashboard: edit my profile
         settings:
-          #dashboard: edit my profile
           last_activity_on_: "Last activity on"
           i_want_to_change_group: "I want to change group!"
           your_subscription_expires_on_: "Your subscription expires on"
@@ -91,8 +91,8 @@ en:
           _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
           _disconnect_then_reconnect_: "disconnect then reconnect"
           _for_your_changes_to_take_effect: "for your changes to take effect."
+        #dashboard: my projects
         projects:
-          #dashboard: my projects
           you_dont_have_any_projects: "You don't have any projects."
           add_a_project: "Add a project"
           author: "Author"
@@ -103,33 +103,33 @@ en:
           machines: "Machines"
           materials: "Materials"
           collaborators: "Collaborators"
+        #dashboard: my trainings
         trainings:
-          #dashboard: my trainings
           your_next_trainings: "Your next trainings"
           your_previous_trainings: "Your previous trainings"
           your_approved_trainings: "Your approved trainings"
           no_trainings: "No trainings"
+        #dashboard: my events
         events:
-          #dashboard: my events
           your_next_events: "Your next events"
           no_events_to_come: "No events to come"
           your_previous_events: "Your previous events"
           no_passed_events: "No passed events"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
+        #dashboard: my invoices
         invoices:
-          #dashboard: my invoices
           reference_number: "Reference number"
           date: "Date"
           price: "Price"
           download_the_invoice: "Download the invoice"
           download_the_credit_note: "Download the refund invoice"
           no_invoices_for_now: "No invoices for now."
+      #public profil of a member
       members_show:
-        #public profil of a member
         members_list: "Members list"
+      #list of members accepting to be contacted
       members:
-        #list of members accepting to be contacted
         the_fablab_members: "The Fab Lab members"
         display_more_members: "Display more members..."
         no_members_for_now: "No members for now"
@@ -137,16 +137,16 @@ en:
         user: "User"
         pseudonym: "Pseudonym"
         email_address: "Email address"
+      #add a new project
       projects_new:
-        #add a new project
         add_a_new_project: "Add a new project"
+      #modify an existing project
       projects_edit:
-        #modify an existing project
         edit_the_project: "Edit the project"
         rough_draft: "Draft"
         publish: "Publish"
+      #book a machine
       machines_reserve:
-        #book a machine
         machine_planning: "Machine planning"
         i_ve_reserved: "I've reserved"
         not_available: "Not available"
@@ -157,17 +157,17 @@ en:
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
+      #book a training
       trainings_reserve:
-        #book a training
         trainings_planning: "Trainings planning"
-        planning_of: "Planning of" #followed by the training name (eg. Planning of 3d printer training)
+        planning_of: "Planning of " #eg. Planning of 3d printer training
         all_trainings: "All trainings"
         cancel_my_selection: "Cancel my selection"
         i_change: "I change"
         i_shift: "I shift"
         i_ve_reserved: "I've reserved"
+      #book a space
       space_reserve:
-        #book a space
         planning_of_space_NAME: "Planning of the {NAME} space"
         i_ve_reserved: "I've reserved"
         i_shift: "I shift"
