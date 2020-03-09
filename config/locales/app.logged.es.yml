@@ -160,7 +160,7 @@ es:
       #book a training
       trainings_reserve:
         trainings_planning: "Plan de curso"
-        planning_of: "Plan de " #eg. Planning of 3d printer training
+        planning_of: "Planning of " #eg. Planning of 3d printer training
         all_trainings: "Todos los cursos"
         cancel_my_selection: "Cancelar mi selección"
         i_change: "I change"
