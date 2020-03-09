@@ -14,7 +14,7 @@ pt:
       not_found_in_database: "Email ou senha inválidos."
       timeout: "Sua sessão expirou, faça login novamente para continuar."
       unauthenticated: "Você precisa fazer login ou se registrar, antes de continuar."
-      unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
+      unconfirmed: "Você precisa confirmar sua conta, antes de continuar. Por favor, clique no link abaixo do formulário."
     mailer:
       confirmation_instructions:
         action: "Confirm my email address"
@@ -53,7 +53,7 @@ pt:
       unlocked: "Sua conta foi desbloqueada com sucesso. Faça login para continuar."
   errors:
     messages:
-      already_confirmed: "This email was already confirmed, please try signing in."
+      already_confirmed: "Este email já foi confirmado."
       confirmation_period_expired: "deve ser confirmada dentro de %{period}, por favor solicite uma nova"
       expired: "expirado, por favor solicite uma nova"
       not_found: "This email was not found"
