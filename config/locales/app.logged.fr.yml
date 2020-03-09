@@ -1,8 +1,8 @@
 fr:
   app:
     logged:
+      #user's profile completion page when logging from an SSO provider
       profile_completion:
-        # page de complétion du profil utilisateur, à la première connexion depuis un SSO
         confirm_your_new_account: "Confirmez votre nouveau compte"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Vous venez de créer un nouveau compte sur {GENDER, select, male{le} female{la} neutral{} other{les}} {NAME}, en vous connectant depuis"
         we_need_some_more_details: "Afin de finaliser le paramétrage de la plate-forme, nous avons besoin de quelques renseignements supplémentaires"
@@ -40,11 +40,11 @@ fr:
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
       dashboard:
-        # tableau de bord: profile publique
+        #dashboard: public profile
         profile:
           empty: ''
+        #dashboard: edit my profile
         settings:
-          # tableau de bord : éditer mon profil
           last_activity_on_: "Dernière activité le {DATE}"
           i_want_to_change_group: "Je veux changer de groupe !"
           your_subscription_expires_on_: "Votre abonnement expire le"
@@ -91,8 +91,8 @@ fr:
           _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
           _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
           _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
+        #dashboard: my projects
         projects:
-          # tableau de bord : mes projets
           you_dont_have_any_projects: "Vous n'avez aucun projet."
           add_a_project: "Ajouter un projet"
           author: "Auteur"
@@ -103,33 +103,33 @@ fr:
           machines: "Machines"
           materials: "Matériaux"
           collaborators: "Les collaborateurs"
+        #dashboard: my trainings
         trainings:
-          # tableau de bord : mes formations
           your_next_trainings: "Vos prochaines formations"
           your_previous_trainings: "Vos formations passées"
           your_approved_trainings: "Vos formations validées"
           no_trainings: "Aucune formation"
+        #dashboard: my events
         events:
-          # tableau de bord : mes évènements
           your_next_events: "Vos prochains évènements"
           no_events_to_come: "Aucun évènement à venir"
           your_previous_events: "Vos évènements passés"
           no_passed_events: "Aucun évènement passé"
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place normale réservée} other{places normales réservées}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{place {NAME} réservée} other{places {NAME} réservées}}"
+        #dashboard: my invoices
         invoices:
-          # tableau de bord : mes factures
           reference_number: "Référence"
           date: "Date"
           price: "Prix"
           download_the_invoice: "Télécharger la facture"
           download_the_credit_note: "Télécharger l'avoir"
           no_invoices_for_now: "Aucune facture pour le moment."
+      #public profil of a member
       members_show:
-        # profil public d'un membre
         members_list: "Liste des membres"
+      #list of members accepting to be contacted
       members:
-        #  liste des membres qui acceptent d'être contactés
         the_fablab_members: "Les membres du Fab Lab"
         display_more_members: "Afficher plus de membres..."
         no_members_for_now: "Pas de membres pour le moment"
@@ -137,16 +137,16 @@ fr:
         user: "Utilisateur"
         pseudonym: "Pseudonyme"
         email_address: "Adresse électronique"
+      #add a new project
       projects_new:
-        # ajouter un nouveau projet
         add_a_new_project: "Ajouter un nouveau projet"
+      #modify an existing project
       projects_edit:
-        # modifier un projet existant
         edit_the_project: "Éditer le projet"
         rough_draft: "Brouillon"
         publish: "Publier"
+      #book a machine
       machines_reserve:
-        # réserver une machine
         machine_planning: "Planning machine"
         i_ve_reserved: "J'ai réservé"
         not_available: "Non disponible"
@@ -157,17 +157,17 @@ fr:
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "Échec de l'annulation."
         a_problem_occured_during_the_payment_process_please_try_again_later: "Un problème est survenu pendant le processus de paiement. Merci de réessayer ultérieurement."
+      #book a training
       trainings_reserve:
-        # réserver une formation
         trainings_planning: "Planning formations"
-        planning_of: "Planning de la"   # suivi du nom de la formation (eg. Planning de la formation imprimante 3d)
+        planning_of: "Planning of " #followed by the training name (eg. Planning of 3d printer training)
         all_trainings: "Toutes les formations"
         cancel_my_selection: "Annuler ma sélection"
         i_change: "Je change"
         i_shift: "Je déplace"
         i_ve_reserved: "J'ai réservé"
+      #book a space
       space_reserve:
-        # réserver un espace
         planning_of_space_NAME: "Planning de l'espace {NAME}"
         i_ve_reserved: "J'ai réservé"
         i_shift: "Je déplace"
