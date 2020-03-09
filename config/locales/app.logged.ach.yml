@@ -1,8 +1,8 @@
 ach:
   app:
     logged:
+      #user's profile completion page when logging from an SSO provider
       profile_completion:
-        #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "crwdns8505:0crwdne8505:0"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "crwdns8507:0GENDER={GENDER}crwdnd8507:0NAME={NAME}crwdne8507:0"
         we_need_some_more_details: "crwdns8509:0crwdne8509:0"
@@ -43,8 +43,8 @@ ach:
         #dashboard: public profile
         profile:
           empty: 'crwdns8577:0crwdne8577:0'
+        #dashboard: edit my profile
         settings:
-          #dashboard: edit my profile
           last_activity_on_: "crwdns8579:0crwdne8579:0"
           i_want_to_change_group: "crwdns8581:0crwdne8581:0"
           your_subscription_expires_on_: "crwdns8583:0crwdne8583:0"
@@ -91,8 +91,8 @@ ach:
           _click_on_the_synchronization_button_opposite_: "crwdns8665:0crwdne8665:0"
           _disconnect_then_reconnect_: "crwdns8667:0crwdne8667:0"
           _for_your_changes_to_take_effect: "crwdns8669:0crwdne8669:0"
+        #dashboard: my projects
         projects:
-          #dashboard: my projects
           you_dont_have_any_projects: "crwdns8671:0crwdne8671:0"
           add_a_project: "crwdns8673:0crwdne8673:0"
           author: "crwdns8675:0crwdne8675:0"
@@ -103,33 +103,33 @@ ach:
           machines: "crwdns8685:0crwdne8685:0"
           materials: "crwdns8687:0crwdne8687:0"
           collaborators: "crwdns8689:0crwdne8689:0"
+        #dashboard: my trainings
         trainings:
-          #dashboard: my trainings
           your_next_trainings: "crwdns8691:0crwdne8691:0"
           your_previous_trainings: "crwdns8693:0crwdne8693:0"
           your_approved_trainings: "crwdns8695:0crwdne8695:0"
           no_trainings: "crwdns8697:0crwdne8697:0"
+        #dashboard: my events
         events:
-          #dashboard: my events
           your_next_events: "crwdns8699:0crwdne8699:0"
           no_events_to_come: "crwdns8701:0crwdne8701:0"
           your_previous_events: "crwdns8703:0crwdne8703:0"
           no_passed_events: "crwdns8705:0crwdne8705:0"
           NUMBER_normal_places_reserved: "crwdns8707:0NUMBER={NUMBER}crwdnd8707:0NUMBER={NUMBER}crwdne8707:0"
           NUMBER_of_NAME_places_reserved: "crwdns8709:0NUMBER={NUMBER}crwdnd8709:0NUMBER={NUMBER}crwdnd8709:0NAME={NAME}crwdnd8709:0NAME={NAME}crwdne8709:0"
+        #dashboard: my invoices
         invoices:
-          #dashboard: my invoices
           reference_number: "crwdns8711:0crwdne8711:0"
           date: "crwdns8713:0crwdne8713:0"
           price: "crwdns8715:0crwdne8715:0"
           download_the_invoice: "crwdns8717:0crwdne8717:0"
           download_the_credit_note: "crwdns8719:0crwdne8719:0"
           no_invoices_for_now: "crwdns8721:0crwdne8721:0"
+      #public profil of a member
       members_show:
-        #public profil of a member
         members_list: "crwdns8723:0crwdne8723:0"
+      #list of members accepting to be contacted
       members:
-        #list of members accepting to be contacted
         the_fablab_members: "crwdns8725:0crwdne8725:0"
         display_more_members: "crwdns8727:0crwdne8727:0"
         no_members_for_now: "crwdns8729:0crwdne8729:0"
@@ -137,16 +137,16 @@ ach:
         user: "crwdns8733:0crwdne8733:0"
         pseudonym: "crwdns8735:0crwdne8735:0"
         email_address: "crwdns8737:0crwdne8737:0"
+      #add a new project
       projects_new:
-        #add a new project
         add_a_new_project: "crwdns8739:0crwdne8739:0"
+      #modify an existing project
       projects_edit:
-        #modify an existing project
         edit_the_project: "crwdns8741:0crwdne8741:0"
         rough_draft: "crwdns8743:0crwdne8743:0"
         publish: "crwdns8745:0crwdne8745:0"
+      #book a machine
       machines_reserve:
-        #book a machine
         machine_planning: "crwdns8747:0crwdne8747:0"
         i_ve_reserved: "crwdns8749:0crwdne8749:0"
         not_available: "crwdns8751:0crwdne8751:0"
@@ -157,17 +157,17 @@ ach:
         reservation_was_cancelled_successfully: "crwdns8761:0crwdne8761:0"
         cancellation_failed: "crwdns8763:0crwdne8763:0"
         a_problem_occured_during_the_payment_process_please_try_again_later: "crwdns8765:0crwdne8765:0"
+      #book a training
       trainings_reserve:
-        #book a training
         trainings_planning: "crwdns8767:0crwdne8767:0"
-        planning_of: "crwdns20180:0crwdne20180:0" #followed by the training name (eg. Planning of 3d printer training)
+        planning_of: "crwdns20194:0crwdne20194:0" #followed by the training name (eg. Planning of 3d printer training)
         all_trainings: "crwdns8771:0crwdne8771:0"
         cancel_my_selection: "crwdns8773:0crwdne8773:0"
         i_change: "crwdns8775:0crwdne8775:0"
         i_shift: "crwdns8777:0crwdne8777:0"
         i_ve_reserved: "crwdns8779:0crwdne8779:0"
+      #book a space
       space_reserve:
-        #book a space
         planning_of_space_NAME: "crwdns8781:0{NAME}crwdne8781:0"
         i_ve_reserved: "crwdns8783:0crwdne8783:0"
         i_shift: "crwdns8785:0crwdne8785:0"
