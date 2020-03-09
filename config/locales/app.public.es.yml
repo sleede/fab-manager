@@ -1,8 +1,8 @@
 es:
   app:
     public:
+      #header and "about" page
       common:
-        #header and "about" page
         about_the_fablab: "Acerca de {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}"
         return: "Volver"
         #cookies
@@ -121,19 +121,19 @@ es:
         how_to: "How to upgrade?"
         #Notifications
         and_NUMBER_other_notifications: "y {NUMBER, plural, =0{no other notifications} =1{one other notification} otras{{NUMBER} other notifications}}..."
+      #about page
       about:
-        #about page
         read_the_fablab_policy: "Leer la politica del FabLab"
         read_the_fablab_s_general_terms_and_conditions: "Leer los terminos y condiciones del FabLab"
         your_fablab_s_contacts: "Sus contactos del FabLab"
         privacy_policy: "Política de privacidad"
+      #'privacy policy' page
       privacy:
-        #'privacy policy' page
         title: "Política de privacidad"
         dpo: "Oficial de protección de datos"
         last_update: "Última actualización,"
+      #home page
       home:
-        #home page
         latest_documented_projects: "Los últimos proyectos documentados"
         follow_us: "Siguenos"
         latest_tweets: "Los últimos tweets"
@@ -151,8 +151,8 @@ es:
         full_price: "Precio final"
         event_full: "Evento lleno"
         still_available: "Available place(s)"
+      #projects gallery
       projects_list:
-        #projects gallery
         the_fablab_projects: "Los proyectos del FabLab"
         add_a_project: "Añadir un proyecto"
         search_over_the_whole_network: "Buscar en toda la red de FabLab"
@@ -169,8 +169,8 @@ es:
         all_materials: "Todo el material"
         load_next_projects: "Cargar más proyectos"
         rough_draft: "Borrador"
+      #details of a projet
       projects_show:
-        #details of a projet
         rough_draft: "Draft"
         project_description: "Descripción de proyecto"
         by_name: "Por {NAME}"
@@ -198,8 +198,8 @@ es:
         message_is_required: "El mensaje es obligatorio."
         report: "Reportar"
         do_you_really_want_to_delete_this_project: "¿Está seguro de querer eliminar este proyecto?"
+      #list of machines
       machines_list:
-        #list of machines
         the_fablab_s_machines: "Las máquinas del FabLab"
         add_a_machine: "Añadir una máquina"
         new_availability: "Open reservations"
@@ -208,8 +208,8 @@ es:
         status_enabled: "Activas"
         status_disabled: "No activas"
         status_all: "Todas"
+      #details of a machine
       machines_show:
-        #details of a machine
         book_this_machine: "Alquilar máquina"
         technical_specifications: "Technical specifications"
         files_to_download: "Archivos a descargar"
@@ -219,19 +219,19 @@ es:
         do_you_really_want_to_delete_this_machine: "¿Está seguro de querer eliminar esta máquina?"
         unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La máquina no puede borrarse porque está siendo usada o ha sido reservada por algún usuario."
+      #list of trainings
       trainings_list:
-        #list of trainings
         book: "Reservar"
         the_trainings: "Lista de cursos"
+      #details of a training
       training_show:
-        #details of a training
         book_this_training: "reservar plaza en este curso"
         do_you_really_want_to_delete_this_training: "Está seguro de querer eliminar este curso?"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "El curso no puede borrarse porque ya ha sido reservado por algún usuario."
+      #summary of the subscriptions
       plans:
-        #summary of the subscriptions
         subscriptions: "Suscripciones"
         i_choose_that_plan: "Elijo este plan"
         i_subscribe_online: "Suscribirme online"
@@ -259,8 +259,8 @@ es:
         here_is_the_NAME_subscription_summary: "Resumen de la suscrpición de {NAME}:"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+      #Fablab's events list
       events_list:
-        #Fablab's events list
         the_fablab_s_events: "Los eventos del FabLab"
         all_categories: "Todas las categorías"
         for_all: "Para todo"
@@ -274,8 +274,8 @@ es:
         full_price_: "Full price:"
         to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
+      #details and booking of an event
       events_show:
-        #details and booking of an event
         event_description: "Descripción del evento"
         downloadable_documents: "Archivos descargables"
         information_and_booking: "Información y reservas"
@@ -285,7 +285,7 @@ es:
         opening_hours: "Hora de apertura:"
         all_day: "All day"
         from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to"  #eg. from 18:00 to 21:00
+        to_time: "to" #eg. from 18:00 to 21:00
         full_price_: "Full price:"
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
@@ -324,8 +324,8 @@ es:
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
+      #public calendar
       calendar:
-        #public calendar
         calendar: "Calendario"
         show_unavailables: "Mostrar campos inválidos"
         filter_calendar: "Filtrar calendario"
@@ -334,8 +334,8 @@ es:
         spaces: "Espacios"
         events: "Eventos"
         externals: "Otros calendarios"
+      #list of spaces
       spaces_list:
-        #list of spaces
         the_spaces: "Espacios"
         new_availability: "Open reservations"
         add_a_space: "Añadir espacios"
@@ -343,8 +343,8 @@ es:
         status_disabled: "No activos"
         status_all: "Todos"
         book: "Reservar"
+      #display the details of a space
       space_show:
-        #display the details of a space
         book_this_space: "Reservar este espacio"
         unauthorized_operation: "Operación no autorizada"
         confirmation_required: "Confirmación requerida"
