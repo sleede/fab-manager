@@ -1,8 +1,8 @@
 pt:
   app:
     public:
+      #header and "about" page
       common:
-        #header and "about" page
         about_the_fablab: "Sobre {GENDER, select, male{o} female{a} neutral{} other{do}} {NAME}"
         return: "Voltar"
         #cookies
@@ -121,19 +121,19 @@ pt:
         how_to: "How to upgrade?"
         #Notifications
         and_NUMBER_other_notifications: "and {NUMBER, plural, =0{no other notifications} =1{one other notification} other{{NUMBER} other notifications}}..."
+      #about page
       about:
-        #about page
         read_the_fablab_policy: "Ler a política do FabLab"
         read_the_fablab_s_general_terms_and_conditions: "Ler os termos e condições do FabLab"
         your_fablab_s_contacts: "Nossos contatos"
         privacy_policy: "Política de privacidade"
+      #'privacy policy' page
       privacy:
-        #'privacy policy' page
         title: "Política de privacidade"
         dpo: "Oficial de proteção de dados"
         last_update: "Última atualização,"
+      #home page
       home:
-        #home page
         latest_documented_projects: "Últimos projetos documentados"
         follow_us: "Siga nos"
         latest_tweets: "Os últimos tweets"
@@ -151,8 +151,8 @@ pt:
         full_price: "Valor inteira"
         event_full: "Evento lotado"
         still_available: "Locais disponíveis"
+      #projects gallery
       projects_list:
-        #projects gallery
         the_fablab_projects: "Projetos do Fab Lab"
         add_a_project: "Adicionar projeto"
         search_over_the_whole_network: "Pesquisar em todos os FabLabs"
@@ -169,8 +169,8 @@ pt:
         all_materials: "Todos os materiais"
         load_next_projects: "Carregar próximos projetos"
         rough_draft: "Rascunho"
+      #details of a projet
       projects_show:
-        #details of a projet
         rough_draft: "Draft"
         project_description: "Descrição do projeto"
         by_name: "Por {NAME}"
@@ -198,8 +198,8 @@ pt:
         message_is_required: "Menssagem é obrigatório."
         report: "Enviar"
         do_you_really_want_to_delete_this_project: "Você quer realmente deletar esse projeto?"
+      #list of machines
       machines_list:
-        #list of machines
         the_fablab_s_machines: "Lista de máquinas no FabLab"
         add_a_machine: "Adicionar uma máquina"
         new_availability: "Open reservations"
@@ -208,8 +208,8 @@ pt:
         status_enabled: "Ativo"
         status_disabled: "Desabilitado"
         status_all: "Todos"
+      #details of a machine
       machines_show:
-        #details of a machine
         book_this_machine: "Reservar essa máquina"
         technical_specifications: "Technical specifications"
         files_to_download: "Arquivos para download"
@@ -219,19 +219,19 @@ pt:
         do_you_really_want_to_delete_this_machine: "Você realmente quer deletar essa máquina?"
         unauthorized_operation: "Operação não autorizada"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "Esta máquina não pode ser deletada, pois já está em reservada por alguns usuários."
+      #list of trainings
       trainings_list:
-        #list of trainings
         book: "Book"
         the_trainings: "Os treinamentos"
+      #details of a training
       training_show:
-        #details of a training
         book_this_training: "Reservar este treinamento"
         do_you_really_want_to_delete_this_training: "Você realmente quer deletar esse treinamento?"
         unauthorized_operation: "Operação não autorizada"
         confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "O treinamento não pode ser deletado pois já foi reservado por alguns usuários."
+      #summary of the subscriptions
       plans:
-        #summary of the subscriptions
         subscriptions: "Assinaturas"
         i_choose_that_plan: "Eu escolho esse plano"
         i_subscribe_online: "Me inscrever online"
@@ -259,8 +259,8 @@ pt:
         here_is_the_NAME_subscription_summary: "Aqui é o sumário de inscrição do {NAME}:"
         confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
+      #Fablab's events list
       events_list:
-        #Fablab's events list
         the_fablab_s_events: "Eventos do Fablab"
         all_categories: "Todas categorias"
         for_all: "Para todos"
@@ -274,8 +274,8 @@ pt:
         full_price_: "Full price:"
         to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
+      #details and booking of an event
       events_show:
-        #details and booking of an event
         event_description: "Descrição do evento"
         downloadable_documents: "Documentos para download"
         information_and_booking: "Informações e reservas"
@@ -285,7 +285,7 @@ pt:
         opening_hours: "Abre ás:"
         all_day: "All day"
         from_time: "From" #eg. from 18:00 to 21:00
-        to_time: "to"  #eg. from 18:00 to 21:00
+        to_time: "to" #eg. from 18:00 to 21:00
         full_price_: "Full price:"
         tickets_still_availables: "Tickets ainda disponíveis:"
         sold_out: "Esgotado."
@@ -306,7 +306,7 @@ pt:
         change_the_reservation: "Alterar reserva"
         you_can_shift_this_reservation_on_the_following_slots: "Você pode alterar essa reserva nos campos a seguir:"
         confirmation_required: "Confirmação obrigatória"
-        do_you_really_want_to_delete_this_event:  "Vocêrealmente deseja remover este evento?"
+        do_you_really_want_to_delete_this_event: "Vocêrealmente deseja remover este evento?"
         delete_recurring_event: "You're about to delete a periodic event. What do you want to do?"
         delete_this_event: "Only this event"
         delete_this_and_next: "This event and the following"
@@ -318,14 +318,14 @@ pt:
         cancel_the_reservation: "Cancel the reservation"
         do_you_really_want_to_cancel_this_reservation_this_apply_to_all_booked_tickets: "Do you really want to cancel this reservation? This apply to ALL booked tickets."
         reservation_was_successfully_cancelled: "Reservation was successfully cancelled"
-        cancellation_failed: "Cancellation failed."                                                 #translation_missin
+        cancellation_failed: "Cancellation failed."
         event_is_over: "The event is over"
         thanks_for_coming: "Thanks for coming!"
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
+      #public calendar
       calendar:
-        #public calendar
         calendar: "Calendário"
         show_unavailables: "Mostrar slots não disponíveis"
         filter_calendar: "Filtrar calendário"
@@ -334,8 +334,8 @@ pt:
         spaces: "Espaços"
         events: "Eventos"
         externals: "Outras agendas"
+      #list of spaces
       spaces_list:
-        #list of spaces
         the_spaces: "Os espaços"
         new_availability: "Open reservations"
         add_a_space: "Adicionar espaço"
@@ -343,8 +343,8 @@ pt:
         status_disabled: "Desabilitado"
         status_all: "Todos"
         book: "Reservar"
+      #display the details of a space
       space_show:
-        #display the details of a space
         book_this_space: "Marcar este espaço"
         unauthorized_operation: "Operação não autorizada"
         confirmation_required: "Confirmação obrigatória"
