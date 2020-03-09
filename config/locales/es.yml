@@ -23,7 +23,7 @@ es:
       mini_magick_processing_error: "Error al editar con MiniMagick, ¿Está seguro de que el archivo es una imagen?  Error original: %{e}"
       wrong_size: "es de tamaño incorrecto (debería ser de %{file_size})"
       size_too_small: "es demasiado pequeño (debería ser de minimo %{file_size})"
-      size_too_big: "es demasiado grande (debería ser de maximo %{file_size})"
+      size_too_big: "es demasiado grande (deberia ser de maximo %{file_size})"
       export_not_found: "La exportación solicitada no se encontró. Probablemente fue borrada, por favor, genere una nueva exportación."
       percentage_out_of_range: "El porcentaje debe estar incluido entre 0 y 100"
       cannot_be_blank_at_same_time: "no puede estar vacío cuando %{field} también está vacío"
