@@ -1,7 +1,7 @@
 pt:
   layouts:
     notifications_mailer:
-      see_you_later: "Te vejo em breve em {GENDER, select, male{o} female{a} neutral{} other{do}}"  #messageFormat interpolation
+      see_you_later: "Te vejo em breve em {GENDER, select, male{o} female{a} neutral{} other{do}}" #messageFormat interpolation
       sincerely: "Atenciosamente,"
       signature: "Equipe do Fab Lab."
       do_not_reply: "Por favor não responda este email."
@@ -10,7 +10,7 @@ pt:
       subject: "Sua conta no FabLab foi criada com sucesso"
       body:
         hello: "Olá %{NAME},"
-        intro: "A equipe do FabLab acaba de criar uma conta para você em {GENDER, select, male{o} female{a} neutral{} other{do}} {FABLAB} website:"  #messageFormat interpolation
+        intro: "A equipe do FabLab acaba de criar uma conta para você em {GENDER, select, male{o} female{a} neutral{} other{do}} {FABLAB} website:" #messageFormat interpolation
         connection_parameters: "Aqui estão seus parâmetros de conexão:"
         account_name: "Nome da conta:"
         password: "Senha:"
@@ -33,7 +33,7 @@ pt:
     notify_admin_subscription_extended:
       subject: "Uma assinatura foi estendida"
       body:
-        subscription_extended_html: "Assinatura <strong><em>{PLAN}</em></strong> pelo usuário <strong><em>{NAME}</strong></em> foi extendida {FREE, select, true{grátis} other{}} until {DATE}."   #messageFormat interpolation
+        subscription_extended_html: "Assinatura <strong><em>{PLAN}</em></strong> pelo usuário <strong><em>{NAME}</strong></em> foi extendida {FREE, select, true{grátis} other{}} until {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
       subject: "Sua assinatura foi extendida"
       body:
@@ -108,8 +108,8 @@ pt:
     notify_member_invoice_ready:
       subject: "Fatura do seu FabLab"
       body:
-        please_find_attached_html: "Por favor, encontre como anexo a sua fatura de {DATE}, com o montante de {AMOUNT} sobre o seu {TYPE, select, Reservation{reserva} other{assinatura}}."  #messageFormat interpolation
-        invoice_in_your_dashboard_html:  "Você pode acessar sua fatura em %{DASHBOARD} no site Fab Lab."
+        please_find_attached_html: "Por favor, encontre como anexo a sua fatura de {DATE}, com o montante de {AMOUNT} sobre o seu {TYPE, select, Reservation{reserva} other{assinatura}}." #messageFormat interpolation
+        invoice_in_your_dashboard_html: "Você pode acessar sua fatura em %{DASHBOARD} no site Fab Lab."
         your_dashboard: "seu dashboard"
     notify_member_reservation_reminder:
       subject: "Lembrete de reserva"
@@ -119,7 +119,7 @@ pt:
     notify_member_avoir_ready:
       subject: "Fatura de reembolso do seu FabLab"
       body:
-        please_find_attached_html: "Por favor, encontre como anexo a sua fatura de reembolso {DATE}, com o montante de {AMOUNT} sobre o seu {TYPE, select, Reservation{reserva} WalletTransaction{carteira de crédito} other{assinatura}}."  #messageFormat interpolation
+        please_find_attached_html: "Por favor, encontre como anexo a sua fatura de reembolso {DATE}, com o montante de {AMOUNT} sobre o seu {TYPE, select, Reservation{reserva} WalletTransaction{carteira de crédito} other{assinatura}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Você pode acessar sua fatura de reembolso em %{DASHBOARD} no site Fab Lab."
         your_dashboard: "seu dashboard"
     notify_member_subscription_will_expire_in_7_days:
@@ -246,7 +246,7 @@ pt:
       subject: "Cupom"
       body:
         enjoy_a_discount_of_PERCENT_with_code_CODE: "Desfrute de um desconto de %{PERCENT}% em todo o site com o código %{CODE}."
-        enjoy_a_discount_of_AMOUNT_with_code_CODE:  "Desfrute de um desconto de %{AMOUNT} em todo o site com o código %{CODE}."
+        enjoy_a_discount_of_AMOUNT_with_code_CODE: "Desfrute de um desconto de %{AMOUNT} em todo o site com o código %{CODE}."
         this_coupon_is_valid_USAGE_times_until_DATE_for_all_your_purchases: "Esse cupom é válido {USAGE, plural, =1{uma vez} other{vérias vezes}}: para todas as suas compras {TYPE, select, amount_off{pelo menos igual ao montante do cupom} other{}}, from now {DATE, select, NO-DATE{e sem limite de tempo} other{até {DATE}}}."
     notify_admin_free_disk_space:
       subject: "Low disk space"
