@@ -1,8 +1,8 @@
 ach:
   app:
     shared:
+      #translations of common buttons
       buttons:
-        #translations of common buttons
         confirm_changes: "crwdns9375:0crwdne9375:0"
         consult: "crwdns9377:0crwdne9377:0"
         edit: "crwdns9379:0crwdne9379:0"
@@ -22,8 +22,8 @@ ach:
         you_will_lose_any_unsaved_modification_if_you_quit_this_page: "crwdns9405:0crwdne9405:0"
         you_will_lose_any_unsaved_modification_if_you_reload_this_page: "crwdns9407:0crwdne9407:0"
         payment_card_error: "crwdns9409:0crwdne9409:0"
+      #user edition form
       user:
-        #user edition form
         man: "crwdns9411:0crwdne9411:0"
         woman: "crwdns9413:0crwdne9413:0"
         add_an_avatar: "crwdns9415:0crwdne9415:0"
@@ -62,8 +62,8 @@ ach:
         used_for_invoicing: "crwdns9481:0crwdne9481:0"
         used_for_reservation: "crwdns9483:0crwdne9483:0"
         used_for_profile: "crwdns9485:0crwdne9485:0"
+      #project edition form
       project:
-        #project edition form
         name: "crwdns9487:0crwdne9487:0"
         name_is_required: "crwdns9489:0crwdne9489:0"
         illustration: "crwdns9491:0crwdne9491:0"
@@ -91,8 +91,8 @@ ach:
         themes: "crwdns9535:0crwdne9535:0"
         tags: "crwdns9537:0crwdne9537:0"
         save_as_draft: "crwdns9539:0crwdne9539:0"
+      #machine edition form
       machine:
-        #machine edition form
         name: "crwdns9541:0crwdne9541:0"
         name_is_required: "crwdns9543:0crwdne9543:0"
         illustration: "crwdns9545:0crwdne9545:0"
@@ -106,28 +106,28 @@ ach:
         add_an_attachment: "crwdns9561:0crwdne9561:0"
         disable_machine: "crwdns9563:0crwdne9563:0"
         validate_your_machine: "crwdns9565:0crwdne9565:0"
+      #frame to select a plan to subscribe
       plan_subscribe:
-        #frame to select a plan to subscribe
         subscribe_online: "crwdns9567:0crwdne9567:0"
         do_not_subscribe: "crwdns9569:0crwdne9569:0"
+      #admin: choose a member to interact with
       member_select:
-        #admin: choose a member to interact with
         select_a_member: "crwdns9571:0crwdne9571:0"
         start_typing: "crwdns9573:0crwdne9573:0"
+      #stripe payment modal
       stripe:
-        #stripe payment modal
         online_payment: "crwdns9575:0crwdne9575:0"
         i_have_read_and_accept_: "crwdns9577:0crwdne9577:0"
         _the_general_terms_and_conditions: "crwdns9579:0crwdne9579:0"
         credit_amount_for_pay_reservation: "crwdns9581:0{amount}crwdnd9581:0{currency}crwdne9581:0"
         client_credit_amount_for_pay_reservation: "crwdns9583:0{amount}crwdnd9583:0{currency}crwdne9583:0"
         confirm_payment_of_: "crwdns9585:0{AMOUNT}crwdne9585:0"
+      #dialog of on site payment for reservations
       valid_reservation_modal:
-        #dialog of on site payment for reservations
         booking_confirmation: "crwdns9587:0crwdne9587:0"
         here_is_the_summary_of_the_slots_to_book_for_the_current_user: "crwdns9589:0crwdne9589:0"
+      #event edition form
       event:
-        #event edition form
         title: "crwdns9591:0crwdne9591:0"
         title_is_required: "crwdns9593:0crwdne9593:0"
         matching_visual: "crwdns9595:0crwdne9595:0"
@@ -151,8 +151,8 @@ ach:
         tickets_available: "crwdns9631:0crwdne9631:0"
         event_theme: "crwdns9633:0crwdne9633:0"
         age_range: "crwdns9635:0crwdne9635:0"
+      #subscription plan edition form
       plan:
-        #subscription plan edition form
         general_information: "crwdns9637:0crwdne9637:0"
         name: "crwdns9639:0crwdne9639:0"
         name_is_required: "crwdns9641:0crwdne9641:0"
@@ -193,8 +193,8 @@ ach:
         email_address_is_required: "crwdns9711:0crwdne9711:0"
         disabled: "crwdns9713:0crwdne9713:0"
         disable_plan_will_not_unsubscribe_users: "crwdns9715:0crwdne9715:0"
+      #training edition form
       trainings:
-        #training edition form
         name: "crwdns9717:0crwdne9717:0"
         name_is_required: "crwdns9719:0crwdne9719:0"
         illustration: "crwdns9721:0crwdne9721:0"
@@ -207,8 +207,8 @@ ach:
         number_of_tickets: "crwdns9735:0crwdne9735:0"
         public_page: "crwdns9737:0crwdne9737:0"
         disable_training: "crwdns9739:0crwdne9739:0"
+      #partial form to edit/create an user (admin view)
       user_admin:
-        #partial form to edit/create an user (admin view)
         user: "crwdns9741:0crwdne9741:0"
         incomplete_profile: "crwdns9743:0crwdne9743:0"
         user_profile: "crwdns9745:0crwdne9745:0"
@@ -217,8 +217,8 @@ ach:
         group_is_required: "crwdns9751:0crwdne9751:0"
         trainings: "crwdns9753:0crwdne9753:0"
         tags: "crwdns9755:0crwdne9755:0"
+      #partial form to edit/create an authentication provider (SSO)
       authentication:
-        #partial form to edit/create an authentication provider (SSO)
         name: "crwdns9757:0crwdne9757:0"
         provider_name_is_required: "crwdns9759:0crwdne9759:0"
         authentication_type: "crwdns9761:0crwdne9761:0"
@@ -229,8 +229,8 @@ ach:
         expected_data_type: "crwdns9771:0crwdne9771:0"
         input_format: "crwdns9773:0crwdne9773:0"
         mappings: "crwdns9775:0crwdne9775:0"
+      #edition/creation form of an OAuth2 authentication provider
       oauth2:
-        #edition/creation form of an OAuth2 authentication provider
         common_url: "crwdns9777:0crwdne9777:0"
         common_url_is_required: "crwdns9779:0crwdne9779:0"
         provided_url_is_not_a_valid_url: "crwdns9781:0crwdne9781:0"
@@ -253,25 +253,25 @@ ach:
         api_endpoint_url: "crwdns9815:0crwdne9815:0"
         api_type: "crwdns9817:0crwdne9817:0"
         api_fields: "crwdns9819:0crwdne9819:0"
+      #machine/training slot modification modal
       confirm_modify_slot_modal:
-        #machine/training slot modification modal
         change_the_slot: "crwdns9821:0crwdne9821:0"
         do_you_want_to_change_your_booking_slot_initially_planned_at: "crwdns9823:0crwdne9823:0"
         do_you_want_to_change_NAME_s_booking_slot_initially_planned_at: "crwdns9825:0{NAME}crwdne9825:0"
         cancel_this_reservation: "crwdns9827:0crwdne9827:0"
         i_want_to_change_date: "crwdns9829:0crwdne9829:0"
+      #modal introducing that a training is requested before booking a machine
       request_training_modal:
-        #modal introducing that a training is requested before booking a machine
         to_book_the_MACHINE_you_must_have_completed_the_TRAINING: "crwdns9831:0{MACHINE}crwdnd9831:0{TRAINING}crwdne9831:0"
         register_for_the_training: "crwdns9833:0crwdne9833:0"
         i_dont_want_to_register_now: "crwdns9835:0crwdne9835:0"
+      #modal introducing that a user must wait for his training being validated before booking a machine
       training_reservation_modal:
-        #modal introducing that a user must wait for his training being validated before booking a machine
         machine_reservation: "crwdns9837:0crwdne9837:0"
         you_must_wait_for_your_training_is_being_validated_by_the_fablab_team_to_book_this_machine: "crwdns9839:0crwdne9839:0"
         your_training_will_occur_: "crwdns9841:0crwdne9841:0"
+      #user public profile
       public_profile:
-        #user public profile
         last_activity_html: "crwdns9843:0{DATE}crwdne9843:0"
         to_come: "crwdns9845:0crwdne9845:0"
         approved: "crwdns9847:0crwdne9847:0"
@@ -285,8 +285,8 @@ ach:
         email_address: "crwdns9863:0crwdne9863:0"
         trainings: "crwdns9865:0crwdne9865:0"
         no_trainings: "crwdns9867:0crwdne9867:0"
+      #wallet
       wallet:
-        #wallet
         wallet: 'crwdns9869:0crwdne9869:0'
         your_wallet_amount: 'crwdns9871:0crwdne9871:0'
         wallet_amount: 'crwdns9873:0crwdne9873:0'
@@ -321,8 +321,8 @@ ach:
         debit_reservation_machine: "crwdns9931:0crwdne9931:0"
         debit_reservation_event: "crwdns9933:0crwdne9933:0"
         warning_uneditable_credit: "crwdns9935:0crwdne9935:0"
+      #promotional coupon (creation/edition form)
       coupon:
-        #promotional coupon (creation/edition form)
         name: "crwdns9937:0crwdne9937:0"
         name_is_required: "crwdns9939:0crwdne9939:0"
         code: "crwdns9941:0crwdne9941:0"
@@ -344,8 +344,8 @@ ach:
         max_usages: "crwdns9973:0crwdne9973:0"
         max_usages_must_be_equal_or_greater_than_0: "crwdns9975:0crwdne9975:0"
         enabled: "crwdns9977:0crwdne9977:0"
+      #coupon (input zone for users)
       coupon_input:
-        #coupon (input zone for users)
         i_have_a_coupon: "crwdns9979:0crwdne9979:0"
         code_: "crwdns9981:0crwdne9981:0"
         the_coupon_has_been_applied_you_get_PERCENT_discount: "crwdns9983:0{PERCENT}crwdne9983:0"
@@ -357,8 +357,8 @@ ach:
         unable_to_apply_the_coupon_because_amount_exceeded: "crwdns9995:0crwdne9995:0"
         unable_to_apply_the_coupon_because_undefined: "crwdns9997:0crwdne9997:0"
         unable_to_apply_the_coupon_because_rejected: "crwdns9999:0crwdne9999:0"
+      #form to create/edit a space
       space:
-        #form to create/edit a space
         name: "crwdns10001:0crwdne10001:0"
         name_is_required: "crwdns10003:0crwdne10003:0"
         illustration: "crwdns10005:0crwdne10005:0"
@@ -373,8 +373,8 @@ ach:
         default_places: "crwdns10023:0crwdne10023:0"
         default_places_is_required: "crwdns10025:0crwdne10025:0"
         disable_space: "crwdns10027:0crwdne10027:0"
+      #shopping cart module for reservations
       cart:
-        #module de panier d'achat de réservations
         summary: "crwdns10029:0crwdne10029:0"
         select_one_or_more_slots_in_the_calendar: "crwdns10031:0SINGLE={SINGLE}crwdne10031:0"
         you_ve_just_selected_the_slot: "crwdns10033:0crwdne10033:0"
@@ -404,15 +404,28 @@ ach:
         tags_of_the_destination_slot: "crwdns10081:0crwdne10081:0"
         confirm_my_modification: "crwdns10083:0crwdne10083:0"
         your_booking_slot_was_successfully_moved_from_: "crwdns10085:0crwdne10085:0"
-        to_date: crwdns10129:0crwdne10129:0
-        please_select_a_member_first: 'crwdns10089:0crwdne10089:0'
-        unable_to_select_plan_if_slots_in_the_past: 'crwdns19571:0crwdne19571:0'
+        to_date: "crwdns20134:0crwdne20134:0" #eg. from 01/01 to 01/05
+        please_select_a_member_first: "crwdns10089:0crwdne10089:0"
+        unable_to_select_plan_if_slots_in_the_past: "crwdns20136:0crwdne20136:0"
         unable_to_change_the_reservation: "crwdns10091:0crwdne10091:0"
         confirmation_required: "crwdns10093:0crwdne10093:0"
         do_you_really_want_to_cancel_this_reservation: "crwdns10095:0crwdne10095:0"
         reservation_was_cancelled_successfully: "crwdns10097:0crwdne10097:0"
         cancellation_failed: "crwdns10099:0crwdne10099:0"
-        confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #(context: confirm my payment of $20.00)
+        confirm_payment_of_html: "crwdns10101:0ROLE={ROLE}crwdnd10101:0AMOUNT={AMOUNT}crwdne10101:0" #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "crwdns10103:0crwdne10103:0"
         none: "crwdns10105:0crwdne10105:0"
         online_payment_disabled: "crwdns10107:0crwdne10107:0"
+        slot_restrict_plans: "crwdns20138:0crwdne20138:0"
+        slot_restrict_subscriptions_must_select_plan: "crwdns20140:0crwdne20140:0"
+        slot_restrict_plans_of_others_groups: "crwdns20142:0crwdne20142:0"
+        selected_plan_dont_match_slot: "crwdns20144:0crwdne20144:0"
+        user_plan_dont_match_slot: "crwdns20146:0crwdne20146:0"
+        no_plan_match_slot: "crwdns20148:0crwdne20148:0"
+        slot_at_same_time: "crwdns20150:0crwdne20150:0"
+        do_you_really_want_to_book_slot_at_same_time: "crwdns20152:0crwdne20152:0"
+        unable_to_book_slot_because_really_have_reservation_at_same_time: "crwdns20154:0crwdne20154:0"
+      tour:
+        previous: "crwdns20166:0crwdne20166:0"
+        next: "crwdns20168:0crwdne20168:0"
+        end: "crwdns20170:0crwdne20170:0"
