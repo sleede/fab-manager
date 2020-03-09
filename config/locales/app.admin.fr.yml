@@ -2,15 +2,15 @@ fr:
   app:
     admin:
       machines_new:
-        #ajout d'une nouvelle machine
+        #add a new machine
         declare_a_new_machine: "Déclarer une nouvelle machine"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'une machine, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
         consider_changing_them_before_creating_any_reservation_slot: "Pensez à les modifier avant de créer des créneaux pour cette machine."
       machines_edit:
-        #edition d'une machine
+        #machine edition
         machine_edit: "Modifier une machine"
       calendar:
-        #gestion des créneaux machines et formations
+        #manage the trainings & machines slots
         calendar_management: "Gestion du calendrier"
         trainings: "Formations"
         machines: "Machines"
@@ -47,7 +47,7 @@ fr:
         manage_trainings: "Cliquez-ici pour ajouter ou supprimer des formations."
         number_of_tickets: "Nombre de places : "
         adjust_the_opening_hours: "Ajuster l'horaire"
-        to_time: "à"  #eg. from 18:00 to 21:00
+        to_time: "à" #eg. from 18:00 to 21:00
         restrict_options: "Options de restriction"
         restrict_with_labels: "Restreindre ce créneau avec des étiquettes"
         restrict_for_subscriptions: "Restreindre ce créneau pour les abonnements"
@@ -119,7 +119,7 @@ fr:
         confirm_delete_import: "Êtes-vous sur de vouloir supprimer cet import iCalendar ?"
         delete_success: "L'import iCalendar a bien été supprimé"
       project_elements:
-        #gestion des éléments constituant les projets
+        #management of the projects' components
         name: "Nom"
         projects_elements_management: "Gestion des éléments projets"
         materials: "Matériaux"
@@ -131,7 +131,7 @@ fr:
         add_a_new_licence: "Ajouter une nouvelle licence"
         manage_abuses: "Gérer les signalements"
       trainings:
-        #suivre et surveiller les formations
+        #track and monitor the trainings
         trainings_monitoring: "Suivi formations"
         plan_session: "Planifier une nouvelle session"
         trainings: "Formations"
@@ -147,7 +147,7 @@ fr:
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, =0{réservation} one{réservation} other{réservations}}"
         none: "Aucune"
         training_validation: "Validation formation"
-        training_of_the_DATE_TIME_html : "Formation du <strong>{DATE} - {TIME}</strong>"
+        training_of_the_DATE_TIME_html: "Formation du <strong>{DATE} - {TIME}</strong>"
         you_can_validate_the_training_of_the_following_members: "Vous pouvez valider la formation des membres suivants :"
         deleted_user: "Utilisateur supprimé"
         no_reservation: "Aucune réservation"
@@ -164,12 +164,12 @@ fr:
         status_disabled: "Désactivés"
         status_all: "Tous"
       trainings_new:
-        #créer une nouvelle formation
+        #create a new training
         add_a_new_training: "Ajouter une nouvelle formation"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Attention, lors de la création d'une formation, ses tarifs de réservation sont initialisés à zero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Pensez à les modifier avant de créer des créneaux pour cette formation."
       events:
-        #gestion et suivi des évènements
+        #events tracking and management
         events_monitoring: "Suivi des évènements"
         manage_filters: "Gérer les filtres"
         fablab_events: "Les évènements du Fab Lab"
@@ -182,7 +182,7 @@ fr:
         from_DATE: "du {DATE}"
         from_TIME: "de {TIME}"
         to_date: "au" #eg: from 01/01 to 01/05
-        to_time: "à"  #eg. from 18:00 to 21:00
+        to_time: "à" #eg. from 18:00 to 21:00
         title: "Titre"
         dates: "Dates"
         booking: "Réservations"
@@ -223,7 +223,7 @@ fr:
         price_category_successfully_deleted: "Catégorie tarifaire supprimée avec succès."
         price_category_deletion_failed: "Échec de la suppression de la catégorie tarifaire."
       events_new:
-        #ajouter un nouvel évènement
+        #add a new event
         add_an_event: "Ajouter un évènement"
         none: "Aucune"
         every_days: "Tous les jours"
@@ -231,7 +231,7 @@ fr:
         every_month: "Chaque mois"
         every_year: "Chaque année"
       events_edit:
-        #modifier un évènement existant
+        #edit an existing event
         edit_the_event: "Éditer l'évènement"
         confirmation_required: "Confirmation requise"
         edit_recurring_event: "Vous êtes sur le point de modifier un évènement périodique. Que voulez-vous modifier ?"
@@ -246,7 +246,7 @@ fr:
         error_deleting_reserved_price: "Impossible de supprimer le tarif demandé car il est associé à des réservations"
         other_error: "Une erreur inattendue est survenue lors de la mise à jour de l'évènement"
       event_reservations:
-        #liste des réservations sur un évènement
+        #event reservations list
         the_reservations: "Les réservations :"
         user: "Utilisateur"
         payment_date: "Date de paiement"
@@ -257,7 +257,7 @@ fr:
         back_to_monitoring: "Retour au suivi"
         canceled: "Annulée"
       pricing:
-        #gestion des abonnements, des tarifs, des crédits et des codes promo
+        #subscriptions, prices, credits and coupons management
         pricing_management: "Gestion de la tarification"
         subscriptions: "Abonnements"
         trainings: "Formations"
@@ -286,7 +286,7 @@ fr:
         hours: "Créneaux de {DURATION} minutes"
         related_subscriptions: "Abonnements associés"
         please_specify_a_number: "Veuillez spécifier un nombre."
-        none: "Aucune"  #grammar concordance with training.
+        none: "Aucune" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "Une erreur est survenue lors de l'enregistrement du nombre de crédits."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "Une erreur est survenue lors de la suppression du crédit avec la {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "Une erreur est survenue : impossible de retrouver le crédit à enlever."
@@ -346,13 +346,13 @@ fr:
         unable_to_update_the_coupon_an_error_occurred: "Impossible de mettre à jour le code promotionnel : une erreur est survenue."
       plans:
         new:
-          #ajouter une formule d'abonnement sur la plate-forme
+          #add a subscription plan on the platform
           add_a_subscription_plan: "Ajouter une formule d'abonnement"
           unable_to_create_the_subscription_please_try_again: "L'abonnement n'a pas pu être créé. Veuillez réessayer."
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "Création du/des abonnement(s) réussie. N'oubliez pas de redéfinir les tarifs."
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossible d'enregistrer cet utilisateur. Vérifiez qu'il n'existe pas déjà un utilisateur du même nom."
         edit:
-          #modifier une formule d'abonnement / les prix des créneaux machines
+          #edit a subscription plan / machine slots prices
           subscription_plan: "Formule d'abonnement :"
           prices: "Tarifs"
           copy_prices_from: "Copier les prix depuis"
@@ -364,7 +364,7 @@ fr:
           unable_to_save_subscription_changes_please_try_again: "Les modifications de l'abonnement n'ont pas pu être enregistrées. Veuillez réessayer."
           subscription_successfully_changed: "Modification de l'abonnement réussie."
       invoices:
-        #liste de toutes les factures & paramètres de facturation
+        #list of all invoices & invoicing parameters
         invoices: "Factures"
         accounting_periods: "Périodes comptables"
         invoices_list: "Liste des factures"
@@ -410,7 +410,7 @@ fr:
         year: "Année"
         month: "Mois"
         day: "Jour"
-        num_of_invoice: "N° de facture"
+        num_of_invoice: "# of invoice"
         online_sales: "Vente en ligne"
         wallet: "Porte-monnaie"
         refund: "Remboursement"
@@ -462,7 +462,7 @@ fr:
         description: "Description"
         description_optional: "Description (optionnelle) :"
         will_appear_on_the_refund_invoice: "Apparaîtra sur la facture de remboursement."
-        none: "Aucun"  #grammar concordance with payment mean
+        none: "Aucun" #grammar concordance with payment mean
         by_cash: "En espèces"
         by_cheque: "Par chèque"
         by_transfer: "Par virement"
@@ -581,7 +581,7 @@ fr:
           credit_euro: "Crédit euro"
           lettering: "Lettrage"
       members:
-        #gestion des utilisateurs, des groupes, des étiquettes, etc.
+        #management of users, labels, groups, and so on
         users_management: "Gestion des utilisateurs"
         members: "Membres"
         subscriptions: "Abonnements"
@@ -660,11 +660,11 @@ fr:
           member_filter_not_confirmed: "Non confirmés"
           member_filter_inactive_for_3_years: "Inactifs depuis 3 ans"
       members_new:
-        #ajouter un membre
+        #add a member
         add_a_member: "Ajouter un membre"
         user_is_an_organization: "L'utilisateur est une structure"
       members_import:
-        #import massif de members
+        #members bulk import
         import_members: "Importer des membres"
         info: "Vous pouvez téléverser un fichier CSV afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier le groupe, les formations et les étiquettes des membres."
         required_fields: "Votre fichier doit obligatoirement comporter, au minimum, les informations suivantes pour chaque utilisateur à créer : courriel, nom, prénom et groupe. Si le mot passe n'est pas rempli, il sera généré automatiquement. Lors d'une mise à jour, les champs non remplis seront gardés tel quels."
@@ -689,7 +689,7 @@ fr:
         update_on_username: "Pseudonyme"
         update_on_email: "Adresse de courriel"
       members_import_result:
-        #résultats de l'import
+        #import results
         import_results: "Résultats de l'import"
         import_details: "Import n°{ID}, du {DATE}, initié par {USER}"
         results: "Résultats"
@@ -700,7 +700,7 @@ fr:
         failed: "Échec"
         error_details: "Détails de l'erreur :"
       members_edit:
-        #modifier un membre
+        #edit a member
         subscription: "Abonnement"
         duration: "Durée :"
         expires_at: "Expire le :"
@@ -743,7 +743,7 @@ fr:
         wallet: "Porte-monnaie"
         to_credit: 'Créditer'
       admins_new:
-        #ajouter un nouvel administrateur à la plate-forme
+        #add a new administrator to the platform
         add_an_administrator: "Ajouter un administrateur"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "L'administrateur a bien été créé. {GENDER, select, female{Elle} other{Il}} recevra ses instructions de connexion par email."
         failed_to_create_admin: "Impossible de créer l'administrateur :"
@@ -761,7 +761,7 @@ fr:
         address: "Adresse"
         phone_number: "Numéro de téléphone"
       authentication_new:
-        #ajouter un nouveau fournisseur d'authentification (SSO)
+        #add a new authentication provider (SSO)
         local_database: "Base de données locale"
         o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Ajouter un fournisseur d'authentification"
@@ -775,18 +775,18 @@ fr:
         unsecured_oauth2_provider_successfully_added: "Le fournisseur OAuth 2.0 (non sécurisé) a bien été enregistré."
         oauth2_provider_successfully_added: "Le fournisseur OAuth 2.0 a bien été enregistré."
       authentication_edit:
-        #modifier un fournisseur d'authentification (SSO)
+        #edit an authentication provider (SSO)
         provider: "Fournisseur :"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Il est obligatoire d'établir la correspondance entre User.uid et l'API pour pouvoir ajouter ce fournisseur."
         provider_successfully_updated: "Le fournisseur a bien été mis à jour."
         an_error_occurred_unable_to_update_the_provider: "Une error est survenue : impossible de mettre à jour le fournisseur."
       statistics:
-        #tableau de statistiques
+        #statistics tables
         statistics: "Statistiques"
         evolution: "évolution"
         age_filter: "Filtre d'âge"
-        from_age: "De"  #eg: from 8 to 40 years old
-        to_age: "à"  #eg: from 8 to 40 years old
+        from_age: "De" #eg. from 8 to 40 years old
+        to_age: "à" #eg. from 8 to 40 years old
         _years_old: "ans"
         start: "Début :"
         end: "Fin :"
@@ -824,7 +824,7 @@ fr:
         create_plans_to_start: "Pour commencer, créez de nouvelles formules d'abonnement."
         click_here: "Cliquez ici pour créer votre première formule."
       stats_graphs:
-        #graphiques de statistiques
+        #statistics graphs
         statistics: "Statistiques"
         data: "Données"
         day: "Jour"
@@ -843,7 +843,7 @@ fr:
         no_data_for_this_period: "Pas de données pour cette période"
         date: "Date"
       settings:
-        #paramètres globaux de l'application et personnalisation
+        #global application parameters and customization
         title: "Titre"
         customize_the_application: "Personnalisation de l'application"
         general: "Général"
@@ -1021,17 +1021,17 @@ fr:
         client_successfully_deleted: "Le compte client a bien été supprimé."
         access_successfully_revoked: "L'accès a bien été revoqué."
       space_new:
-        #créer un nouvel espace
+        #create a new space
         add_a_new_space: "Ajouter un nouvel espace"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Attention, lors de la création d'un espace, ses tarifs de réservation sont initialisés à zero pour tous les abonnements."
         consider_changing_its_prices_before_creating_any_reservation_slot: "Pensez à modifier ces prix avant de créer des créneaux pour cet espace."
         add_this_space: "Ajouter cet espace"
       space_edit:
-        #modifier un espace existant
+        #modify an exiting space
         edit_the_space_NAME: "Modifier l'espace : {NAME}"
         validate_the_changes: "Valider les modifications"
       manage_abuses:
-        #traiter et supprimer les rapports d'abus
+        #process and delete abuses reports
         abuses_list: "Liste des signalements"
         no_reports: "Aucun signalement pour le moment"
         published_by: "publié par"
