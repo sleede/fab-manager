@@ -47,7 +47,7 @@ pt:
         manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Número de vagas: "
         adjust_the_opening_hours: "Ajustar o horário de funcionamento"
-        to_time: "ás"  #eg. from 18:00 to 21:00
+        to_time: "ás" #eg. from 18:00 to 21:00
         restrict_options: "Restriction options"
         restrict_with_labels: "Restrinja este slot com etiquetas"
         restrict_for_subscriptions: "Restrict this slot for subscription users"
@@ -147,7 +147,7 @@ pt:
         NUMBER_reservation: "{NUMBER} {NUMBER, plural, one{reserva} other{reservas}}"
         none: "Vazio"
         training_validation: "Validação de treinamentos"
-        training_of_the_DATE_TIME_html : "Training of the <strong>{DATE} - {TIME}</strong>"
+        training_of_the_DATE_TIME_html: "Training of the <strong>{DATE} - {TIME}</strong>"
         you_can_validate_the_training_of_the_following_members: "Você pode validar um treinamento dos seguintes membros:"
         deleted_user: "Deleted user"
         no_reservation: "Sem reservas"
@@ -182,7 +182,7 @@ pt:
         from_DATE: "Em {DATE}"
         from_TIME: "Ás {TIME}"
         to_date: "to" #eg: from 01/01 to 01/05
-        to_time: "to"  #eg. from 18:00 to 21:00
+        to_time: "to" #eg. from 18:00 to 21:00
         title: "Title"
         dates: "Dates"
         booking: "Reserva"
@@ -286,7 +286,7 @@ pt:
         hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Assinaturas relacionadas"
         please_specify_a_number: "Por favor especifique um número."
-        none: "Vazio"  #grammar concordance with training.
+        none: "Vazio" #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "Um erro ocorreu enquanto era salvo o número de créditos."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "Um erro ocorreu enquanto o crédito era deletado do {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "Um erro ocorreu : incapaz de encontrar o crédito para revogar."
@@ -352,7 +352,7 @@ pt:
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "Assinaturas criadas com sucesso. Não se esqueça de redefinir os preços."
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Impossível salvar este usuário. Certifique-se que ele não possui o mesmo nome de outro usuário."
         edit:
-          #edit a subscription plan / machine slot prices
+          #edit a subscription plan / machine slots prices
           subscription_plan: "Plano de assinatura:"
           prices: "Preços"
           copy_prices_from: "Copiar preços de"
@@ -410,7 +410,7 @@ pt:
         year: "Ano"
         month: "Mês"
         day: "Dia"
-        num_of_invoice: "#da fatura"
+        num_of_invoice: "# da fatura"
         online_sales: "Vendas online"
         wallet: "Carteira"
         refund: "Restituição"
@@ -462,7 +462,7 @@ pt:
         description: "Descrição"
         description_optional: "Descrição (optional):"
         will_appear_on_the_refund_invoice: "Aparecerá na fatura de reembolso."
-        none: "Vazio"  #grammar concordance with payment mean
+        none: "Vazio" #grammar concordance with payment mean
         by_cash: "Em dinheiro"
         by_cheque: "Em cheque"
         by_transfer: "Por transferência"
@@ -785,8 +785,8 @@ pt:
         statistics: "Statistics"
         evolution: "Evolução"
         age_filter: "Filtro de idade"
-        from_age: "Dos"  #eg: from 8 to 40 years old
-        to_age: "aos"  #eg: from 8 to 40 years old
+        from_age: "Dos" #eg. from 8 to 40 years old
+        to_age: "aos" #eg. from 8 to 40 years old
         _years_old: "anos de idade"
         start: "Início:"
         end: "Fim:"

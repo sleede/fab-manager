@@ -410,7 +410,7 @@ en:
         year: "Year"
         month: "Month"
         day: "Day"
-        num_of_invoice: "#of invoice"
+        num_of_invoice: "# of invoice"
         online_sales: "Online sales"
         wallet: "Wallet"
         refund: "Refund"

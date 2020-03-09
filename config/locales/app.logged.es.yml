@@ -2,7 +2,7 @@ es:
   app:
     logged:
       profile_completion:
-        # user's profile completion page when logging from an SSO provider
+        #user's profile completion page when logging from an SSO provider
         confirm_your_new_account: "Confirme su nueva cuenta"
         you_ve_just_created_a_new_account_on_the_fablab_by_logging_from: "Acaba de crear una nueva cuenta en {GENDER, select, male{el} female{la} neutral{} other{las}} {NAME}, al iniciar sesión desde"
         we_need_some_more_details: "Para finalizar la configuración de la plataforma, necesitamos algunos detalles más."
@@ -40,11 +40,11 @@ es:
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
       dashboard:
-        # dashboard: public profile
+        #dashboard: public profile
         profile:
           empty: ''
         settings:
-          # dashboard: edit my profile
+          #dashboard: edit my profile
           last_activity_on_: "Última vez activo"
           i_want_to_change_group: "Quiero cambiar de grupo"
           your_subscription_expires_on_: "su suscripción acaba el"
@@ -92,7 +92,7 @@ es:
           _disconnect_then_reconnect_: "reconectarse"
           _for_your_changes_to_take_effect: "para que sus cambios sean aplicados."
         projects:
-          # dashboard: my projects
+          #dashboard: my projects
           you_dont_have_any_projects: "Aún no tiene proyectos."
           add_a_project: "Add a project"
           author: "Autor"
@@ -104,13 +104,13 @@ es:
           materials: "Materials"
           collaborators: "Collaborators"
         trainings:
-          # dashboard: my trainings
+          #dashboard: my trainings
           your_next_trainings: "Sus próximos cursos"
           your_previous_trainings: "Sus cursos anteriores"
           your_approved_trainings: "Sus cursos aprobados"
           no_trainings: "No trainings"
         events:
-          # dashboard: my events
+          #dashboard: my events
           your_next_events: "Sus próximos eventos"
           no_events_to_come: "No hay próximos eventos"
           your_previous_events: "Sus eventos anteriores"
@@ -118,7 +118,7 @@ es:
           NUMBER_normal_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{normal place reserved} other{normal places reserved}}"
           NUMBER_of_NAME_places_reserved: "{NUMBER} {NUMBER, plural, =0{} =1{of {NAME} place reserved} other{of {NAME} places reserved}}"
         invoices:
-          # dashboard: my invoices
+          #dashboard: my invoices
           reference_number: "Numero de referencia"
           date: "Date"
           price: "Price"
@@ -126,10 +126,10 @@ es:
           download_the_credit_note: "Download the refund invoice"
           no_invoices_for_now: "No invoices for now."
       members_show:
-        # public profil of a member
+        #public profil of a member
         members_list: "Lista de miembros"
       members:
-        # list of members accepting to be contacted
+        #list of members accepting to be contacted
         the_fablab_members: "Los miembros del fablab"
         display_more_members: "Ver más miembros"
         no_members_for_now: "Aún no hay miembros"
@@ -138,15 +138,15 @@ es:
         pseudonym: "Pseudonym"
         email_address: "Email address"
       projects_new:
-        # add a new project
+        #add a new project
         add_a_new_project: "Añadir nuevo proyecto"
       projects_edit:
-        # modify an existing project
+        #modify an existing project
         edit_the_project: "Editar proyecto"
         rough_draft: "Draft"
         publish: "Publicar"
       machines_reserve:
-        # book a machine
+        #book a machine
         machine_planning: "Planning de la máquina"
         i_ve_reserved: "He reservado"
         not_available: "No disponible"
@@ -158,16 +158,16 @@ es:
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
       trainings_reserve:
-        # book a training
+        #book a training
         trainings_planning: "Plan de curso"
-        planning_of: "Plan de " # followed by the training name (eg. Planning of 3d printer training)
+        planning_of: "Plan de " #followed by the training name (eg. Planning of 3d printer training)
         all_trainings: "Todos los cursos"
         cancel_my_selection: "Cancelar mi selección"
         i_change: "I change"
         i_shift: "I shift"
         i_ve_reserved: "He reservado"
       space_reserve:
-        # book a space
+        #book a space
         planning_of_space_NAME: "Planes de {NAME} "
         i_ve_reserved: "he reservado"
         i_shift: "reemplazo"
