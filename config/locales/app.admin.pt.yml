@@ -977,8 +977,8 @@ pt:
         sort_by:
           default: "Default"
           name: "Nome"
-          created_at: "TODO"
-          updated_at: "TODO"
+          created_at: "Data de criação"
+          updated_at: "Última Data de Atualização"
         privacy:
           title: "Política de privacidade"
           input_the_dpo: "Input the contact of the Data Protection Officer"
