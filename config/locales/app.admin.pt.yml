@@ -410,7 +410,7 @@ pt:
         year: "Ano"
         month: "Mês"
         day: "Dia"
-        num_of_invoice: "#of invoice"
+        num_of_invoice: "# of invoice"
         online_sales: "Vendas online"
         wallet: "Carteira"
         refund: "Restituição"
