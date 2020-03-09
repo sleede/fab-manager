@@ -160,7 +160,7 @@ fr:
       #book a training
       trainings_reserve:
         trainings_planning: "Planning formations"
-        planning_of: "Planning de la " #eg. Planning of 3d printer training
+        planning_of: "Planning of " #eg. Planning of 3d printer training
         all_trainings: "Toutes les formations"
         cancel_my_selection: "Annuler ma sélection"
         i_change: "Je change"
