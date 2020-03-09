@@ -1,7 +1,7 @@
 fr:
   layouts:
     notifications_mailer:
-      see_you_later: "A très bientôt sur {GENDER, select, male{le} female{la} neutral{} other{les}}"  #messageFormat interpolation
+      see_you_later: "A très bientôt sur {GENDER, select, male{le} female{la} neutral{} other{les}}" #messageFormat interpolation
       sincerely: "Cordialement,"
       signature: "L'équipe du Fab Lab."
       do_not_reply: "Merci de ne pas répondre directement à cet email."
@@ -10,7 +10,7 @@ fr:
       subject: "Votre compte Fab Lab a bien été créé"
       body:
         hello: "Bonjour %{NAME},"
-        intro: "L’équipe du Fab Lab vient de vous créer un compte sur le site {GENDER, select, male{du} female{de la} neutral{} other{des}} {FABLAB} :"  #messageFormat interpolation
+        intro: "L’équipe du Fab Lab vient de vous créer un compte sur le site {GENDER, select, male{du} female{de la} neutral{} other{des}} {FABLAB} :" #messageFormat interpolation
         connection_parameters: "Voici vos paramètres de connexion :"
         account_name: "Nom de compte :"
         password: "Mot de passe :"
@@ -33,7 +33,7 @@ fr:
     notify_admin_subscription_extended:
       subject: "Un abonnement a été prolongé"
       body:
-        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitment} other{}} jusqu'au {DATE}."   #messageFormat interpolation
+        subscription_extended_html: "L'abonnement <strong><em>{PLAN}</em></strong> du membre <strong><em>{NAME}</strong></em> a été prolongé {FREE, select, true{gratuitment} other{}} jusqu'au {DATE}." #messageFormat interpolation
     notify_member_subscription_extended:
       subject: "Votre abonnement a été prolongé"
       body:
@@ -108,7 +108,7 @@ fr:
     notify_member_invoice_ready:
       subject: "Votre facture du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}."  #messageFormat interpolation
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} other{abonnement}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
     notify_member_reservation_reminder:
@@ -119,7 +119,7 @@ fr:
     notify_member_avoir_ready:
       subject: "Votre facture d'avoir du FabLab"
       body:
-        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} WalletTransaction{crédit du porte-monnaie} other{abonnement}}."  #messageFormat interpolation
+        please_find_attached_html: "Vous trouverez en pièce jointe votre facture d'avoir du {DATE}, d'un montant de {AMOUNT} concernant votre {TYPE, select, Reservation{réservation} WalletTransaction{crédit du porte-monnaie} other{abonnement}}." #messageFormat interpolation
         invoice_in_your_dashboard_html: "Vous pouvez à tout moment retrouver votre facture d'avoir dans %{DASHBOARD} sur le site du Fab Lab."
         your_dashboard: "votre tableau de bord"
     notify_member_subscription_will_expire_in_7_days:

@@ -1,6 +1,6 @@
 ach:
+  #subscription plan duration
   duration:
-    #subscription plan duration
     year:
       one: 'crwdns3157:1crwdne3157:1'
       other: 'crwdns3157:5%{count}crwdne3157:5'
@@ -10,13 +10,9 @@ ach:
     week:
       one: 'crwdns3161:1crwdne3161:1'
       other: 'crwdns3161:5%{count}crwdne3161:5'
-  time:
-    formats:
-      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
-      hour_minute: "%I:%M %p"
   errors:
+    #CarrierWave
     messages:
-      #CarrierWave
       carrierwave_processing_error: "crwdns3165:0crwdne3165:0"
       carrierwave_integrity_error: "crwdns3167:0crwdne3167:0"
       carrierwave_download_error: "crwdns3169:0crwdne3169:0"
@@ -40,55 +36,29 @@ ach:
       end_before_start: "crwdns3205:0%{START}crwdne3205:0"
       invalid_duration: "crwdns3207:0%{DAYS}crwdne3207:0"
       must_be_in_the_past: "crwdns3209:0crwdne3209:0"
-  activemodel:
-    errors:
-      messages:
-        carrierwave_processing_error: crwdns3211:0crwdne3211:0
-        carrierwave_integrity_error: crwdns3213:0crwdne3213:0
-        carrierwave_download_error: crwdns3215:0crwdne3215:0
-        extension_white_list_error: crwdns3217:0%{extension}crwdnd3217:0%{allowed_types}crwdne3217:0
-        extension_black_list_error: crwdns3219:0%{extension}crwdnd3219:0%{prohibited_types}crwdne3219:0
-        rmagick_processing_error: crwdns3221:0%{e}crwdne3221:0
-        mime_types_processing_error: crwdns3223:0%{e}crwdne3223:0
-        mini_magick_processing_error: crwdns3225:0%{e}crwdne3225:0
-        wrong_size: crwdns3227:0%{file_size}crwdne3227:0
-        size_too_small: crwdns3229:0%{file_size}crwdne3229:0
-        size_too_big: crwdns3231:0%{file_size}crwdne3231:0
-        export_not_found: crwdns3233:0crwdne3233:0
-        percentage_out_of_range: crwdns3235:0crwdne3235:0
-        cannot_be_blank_at_same_time: crwdns3237:0%{field}crwdne3237:0
-        cannot_be_in_the_past: crwdns3239:0crwdne3239:0
-        cannot_be_before_previous_value: crwdns3241:0crwdne3241:0
-        cannot_overlap: crwdns3243:0crwdne3243:0
-        cannot_encompass: crwdns3245:0crwdne3245:0
-        in_closed_period: crwdns3247:0crwdne3247:0
-        invalid_footprint: crwdns3249:0crwdne3249:0
-        end_before_start: crwdns3251:0%{START}crwdne3251:0
-        invalid_duration: crwdns3253:0%{DAYS}crwdne3253:0
-        must_be_in_the_past: crwdns3255:0crwdne3255:0
   apipie:
     api_documentation: "crwdns3257:0crwdne3257:0"
+  #error messages when importing an account from a SSO
   omniauth:
-    #error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "crwdns3259:0%{OLD_MAIL}crwdne3259:0"
     your_username_is_already_linked_to_another_account_unable_to_update_it: "crwdns3261:0%{USERNAME}crwdne3261:0"
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "crwdns3263:0%{EMAIL}crwdne3263:0"
     this_account_is_already_linked_to_an_user_of_the_platform: "crwdns3265:0%{NAME}crwdne3265:0"
+  #availability slots in the calendar
   availabilities:
-    #availability slots in the calendar
     not_available: "crwdns3267:0crwdne3267:0"
     i_ve_reserved: "crwdns3269:0crwdne3269:0"
     length_must_be_slot_multiple: "crwdns3271:0%{MIN}crwdne3271:0"
     must_be_associated_with_at_least_1_machine: "crwdns3273:0crwdne3273:0"
+  #members management
   members:
-    #members management
     unable_to_change_the_group_while_a_subscription_is_running: "crwdns3275:0crwdne3275:0"
     please_input_the_authentication_code_sent_to_the_address: "crwdns3277:0%{EMAIL}crwdne3277:0"
     your_authentication_code_is_not_valid: "crwdns3279:0crwdne3279:0"
     current_authentication_method_no_code: "crwdns3281:0crwdne3281:0"
     requested_account_does_not_exists: "crwdns3283:0crwdne3283:0"
+  #PDF invoices generation
   invoices:
-    #PDF invoices generation
     refund_invoice_reference: "crwdns3285:0%{REF}crwdne3285:0"
     invoice_reference: "crwdns3287:0%{REF}crwdne3287:0"
     code: "crwdns3289:0%{CODE}crwdne3289:0"
@@ -139,6 +109,7 @@ ach:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "crwdns3371:0%{NAME}crwdnd3371:0%{DURATION}crwdnd3371:0%{DATE}crwdne3371:0"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "crwdns3373:0%{NAME}crwdnd3373:0%{STARTDATE}crwdnd3373:0%{ENDDATE}crwdne3373:0"
     and: 'crwdns3375:0crwdne3375:0'
+  #CVS accounting export (columns headers)
   accounting_export:
     journal_code: "crwdns3377:0crwdne3377:0"
     date: "crwdns3379:0crwdne3379:0"
@@ -158,19 +129,19 @@ ach:
     Event_reservation: "crwdns3407:0crwdne3407:0"
     Space_reservation: "crwdns3409:0crwdne3409:0"
     wallet: "crwdns3411:0crwdne3411:0"
+  #training availabilities
   trainings:
-    #training availabilities
     i_ve_reserved: "crwdns3413:0crwdne3413:0"
     completed: "crwdns3415:0crwdne3415:0"
+  #error messages when updating an event
   events:
-    #error messages when updating an event
     error_deleting_reserved_price: "crwdns3417:0crwdne3417:0"
     other_error: "crwdns3419:0crwdne3419:0"
     #event duration
     from_STARTDATE_to_ENDDATE: "crwdns3421:0%{STARTDATE}crwdnd3421:0%{ENDDATE}crwdne3421:0"
     from_STARTTIME_to_ENDTIME: "crwdns3423:0%{STARTTIME}crwdnd3423:0%{ENDTIME}crwdne3423:0"
+  #members list export to EXCEL format
   export_members:
-    #members list export to EXCEL format
     members: "crwdns3425:0crwdne3425:0"
     id: "crwdns3427:0crwdne3427:0"
     surname: "crwdns3429:0crwdne3429:0"
@@ -201,8 +172,8 @@ ach:
     man: "crwdns3479:0crwdne3479:0"
     woman: "crwdns3481:0crwdne3481:0"
     without_subscriptions: "crwdns3483:0crwdne3483:0"
+  #machines/trainings/events reservations list to EXCEL format
   export_reservations:
-    #machines/trainings/events reservations list to EXCEL format
     reservations: "crwdns3485:0crwdne3485:0"
     customer_id: "crwdns3487:0crwdne3487:0"
     customer: "crwdns3489:0crwdne3489:0"
@@ -214,8 +185,8 @@ ach:
     payment_method: "crwdns3501:0crwdne3501:0"
     local_payment: "crwdns3503:0crwdne3503:0"
     online_payment: "crwdns3505:0crwdne3505:0"
+  #subscriptions list export to EXCEL format
   export_subscriptions:
-    #subscriptions list export to EXCEL format
     subscriptions: "crwdns3507:0crwdne3507:0"
     id: "crwdns3509:0crwdne3509:0"
     customer: "crwdns3511:0crwdne3511:0"
@@ -228,8 +199,8 @@ ach:
     payment_method: "crwdns3525:0crwdne3525:0"
     local_payment: "crwdns3527:0crwdne3527:0"
     online_payment: "crwdns3529:0crwdne3529:0"
+  #reservation slots export, by type, to EXCEL format
   export_availabilities:
-    #reservation slots export, by type, to EXCEL format
     machines: "crwdns3531:0crwdne3531:0"
     trainings: "crwdns3533:0crwdne3533:0"
     spaces: "crwdns3535:0crwdne3535:0"
@@ -244,15 +215,15 @@ ach:
     reservations: "crwdns3553:0crwdne3553:0"
     available_seats: "crwdns3555:0crwdne3555:0"
   api:
+    #internal app notifications
     notifications:
-      #internal app notifications
       deleted_user: "crwdns3557:0crwdne3557:0"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "crwdns3559:0%{TYPE}crwdnd3559:0%{ID}crwdnd3559:0%{NAME}crwdne3559:0"
       notify_admin_member_create_reservation:
         a_RESERVABLE_reservation_was_made_by_USER_html: "crwdns3561:0%{RESERVABLE}crwdnd3561:0%{USER}crwdne3561:0"
       notify_admin_profile_complete:
-        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "crwdns3563:0%{PROVIDER}crwdnd3563:0%{UID}crwdne3563:0"
+        account_imported_from_PROVIDER_UID_has_completed_its_information_html: "crwdns20158:0%{PROVIDER}crwdnd20158:0%{UID}crwdne20158:0"
       notify_admin_slot_is_canceled:
         USER_s_reservation_on_the_DATE_was_cancelled_remember_to_generate_a_refund_invoice_if_applicable_html: "crwdns3565:0%{USER}crwdnd3565:0%{DATE}crwdne3565:0"
       notify_admin_slot_is_modified:
@@ -358,8 +329,8 @@ ach:
         click_to_show: "crwdns3687:0crwdne3687:0"
       notify_admin_refund_created:
         refund_created: "crwdns4559:0%{AMOUNT}crwdnd4559:0%{USER}crwdne4559:0"
+  #statistics tools for admins
   statistics:
-    #statistics tools for admins
     subscriptions: "crwdns3689:0crwdne3689:0"
     machines_hours: "crwdns4561:0crwdne4561:0"
     spaces: "crwdns3693:0crwdne3693:0"
@@ -385,8 +356,8 @@ ach:
     revenue: "crwdns3733:0crwdne3733:0"
     account_creation: "crwdns3735:0crwdne3735:0"
     project_publication: "crwdns3737:0crwdne3737:0"
+  #statistics exports to the excel file format
   export:
-    #statistics exports to the excel file format
     entries: "crwdns3739:0crwdne3739:0"
     revenue: "crwdns3741:0crwdne3741:0"
     average_age: "crwdns3743:0crwdne3743:0"
@@ -400,8 +371,8 @@ ach:
     type: "crwdns3759:0crwdne3759:0"
     male: "crwdns3761:0crwdne3761:0"
     female: "crwdns3763:0crwdne3763:0"
+  #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
-    #initial price's category for events, created to replace the old "reduced amount" property
     reduced_fare: "crwdns3765:0crwdne3765:0"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "crwdns3767:0crwdne3767:0"
   group:

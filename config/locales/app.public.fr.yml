@@ -1,8 +1,8 @@
 fr:
   app:
     public:
+      #header and "about" page
       common:
-        #en-tête et page "à propos"
         about_the_fablab: "A propos {GENDER, select, male{du} female{de la} neutral{} other{des}} {NAME}"
         return: "Retour"
         #cookies
@@ -11,7 +11,7 @@ fr:
           learn_more: "En savoir plus"
           accept: "Accepter les cookies"
           decline: "Refuser"
-        #sections du tableau de bord
+        #dashboard sections
         dashboard: "Tableau de bord"
         my_profile: "Mon profil"
         my_settings: "Mes paramètres"
@@ -20,17 +20,17 @@ fr:
         my_events: "Mes évènements"
         my_invoices: "Mes factures"
         my_wallet: "Mon porte-monnaie"
-        #aide contextuelle
+        #contextual help
         help: "Aide"
-        #connexion / déconnexion
+        #login/logout
         sign_out: "Se déconnecter"
         sign_up: "S'inscrire"
         sign_in: "Se connecter"
-        #menu de gauche
+        #left menu
         notifications: "Notifications"
         admin: "Admin"
         reduce_panel: "Réduire le volet"
-        #menu de gauche (partie publique)
+        #left menu (public)
         home: "Accueil"
         reserve_a_machine: "Réserver une machine"
         trainings_registrations: "Inscriptions formations"
@@ -39,7 +39,7 @@ fr:
         projects_gallery: "Galerie de projets"
         subscriptions: "Abonnements"
         public_calendar: "Agenda"
-        #menu de gauche (partie admin)
+        #left menu (admin)
         trainings_monitoring: "Formations"
         manage_the_calendar: "Agenda"
         manage_the_users: "Utilisateurs"
@@ -52,7 +52,7 @@ fr:
         statistics: "Statistiques"
         customization: "Personnalisation"
         open_api_clients: "Clients OpenAPI"
-        #fenêtre de création de compte
+        #account creation modal
         create_your_account: "Créer votre compte"
         man: "Homme"
         woman: "Femme"
@@ -94,11 +94,11 @@ fr:
         used_for_profile: "Cette donnée sera seulement affichée sur votre profil"
         public_profile: "Vous aurez un profil public et les autres utilisateurs pourront vous associer à leurs projets"
         you_will_receive_confirmation_instructions_by_email_detailed: "Vous allez recevoir dans quelques minutes un email comportant des instructions pour confirmer votre compte."
-        #fenêtre de changement de mot de passe
+        #password modification modal
         change_your_password: "Modifier votre mot de passe"
         your_new_password: "Votre nouveau mot de passe"
         your_password_was_successfully_changed: "Votre mot de passe a bien été modifié."
-        #fenêtre de connexion
+        #connection modal
         connection: "Connexion"
         password_forgotten: "Mot de passe oublié ?"
         confirm_my_account: "Confirmer mon adresse de courriel"
@@ -106,9 +106,9 @@ fr:
         create_an_account: "Créer un compte"
         wrong_email_or_password: "Adresse courriel ou mot de passe incorrect."
         caps_lock_is_on: "La touche de verrouillage des majuscules est activée."
-        #fenêtre d'envoi des instructions de confirmation
+        #confirmation modal
         you_will_receive_confirmation_instructions_by_email: "Vous recevrez les instructions de confirmation par email."
-        #mot de passe oublié
+        #forgotten password modal
         your_email_address_is_unknown: "Votre adresse de courriel est inconnue."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "Vous allez recevoir sous quelques minutes un courriel vous indiquant comment réinitialiser votre mot de passe."
         #Fab-manager's version
@@ -121,26 +121,26 @@ fr:
         how_to: "Comment mettre à jour ?"
         #Notifications
         and_NUMBER_other_notifications: "et {NUMBER, plural, =0{aucune autre notification} =1{une autre notification} other{{NUMBER} autres notifications}}..."
+      #about page
       about:
-        #page à propos
         read_the_fablab_policy: "Consulter les règles d'utilisation du Fab Lab"
         read_the_fablab_s_general_terms_and_conditions: "Consulter les conditions générales de vente du Fab Lab"
         your_fablab_s_contacts: "Vos contacts au Fab Lab"
         privacy_policy: "Politique de confidentialité"
+      #'privacy policy' page
       privacy:
-        #page 'politique de confidentialité'
         title: "Politique de confidentialité"
         dpo: "Délégué à la protection des données"
         last_update: "Dernière mise à jour,"
+      #home page
       home:
-        #page d'accueil
         latest_documented_projects: "Les derniers projets documentés"
         follow_us: "Suivez-nous"
         latest_tweets: "Les derniers tweets"
         latest_registered_members: "Derniers membres inscrits"
         create_an_account: "Créer un compte"
         discover_members: "Découvrir les membres"
-        #résumé des prochains évènements sur la page d'acceuil
+        #next events summary on the home page
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
         from_date_to_date: "du {START} au {END}"
@@ -151,8 +151,8 @@ fr:
         full_price: "Plein tarif : "
         event_full: "Événement complet"
         still_available: "Place(s) disponible(s) :"
+      #projects gallery
       projects_list:
-        #galerie des projets
         the_fablab_projects: "Les projets du FabLab"
         add_a_project: "Ajouter un projet"
         search_over_the_whole_network: "Chercher sur tout le réseau Fab-manager"
@@ -169,8 +169,8 @@ fr:
         all_materials: "Tous les matériaux"
         load_next_projects: "Charger les projets suivants"
         rough_draft: "Brouillon"
+      #details of a projet
       projects_show:
-        #détails d'un projet
         rough_draft: "Brouillon"
         project_description: "Description du projet"
         by_name: "Par {NAME}"
@@ -198,8 +198,8 @@ fr:
         message_is_required: "Le message est requis."
         report: "Signaler"
         do_you_really_want_to_delete_this_project: "Êtes-vous sur de vouloir supprimer ce projet ?"
+      #list of machines
       machines_list:
-        #liste des machines
         the_fablab_s_machines: "Les machines du FabLab"
         add_a_machine: "Ajouter une machine"
         new_availability: "Ouvrir des réservations"
@@ -208,8 +208,8 @@ fr:
         status_enabled: "Actives"
         status_disabled: "Désactivées"
         status_all: "Toutes"
+      #details of a machine
       machines_show:
-        #détail d'une machine
         book_this_machine: "Réserver cette machine"
         technical_specifications: "Caractéristiques techniques"
         files_to_download: "Fichiers à télécharger"
@@ -219,19 +219,19 @@ fr:
         do_you_really_want_to_delete_this_machine: "Êtes-vous sur de vouloir supprimer cette machine ?"
         unauthorized_operation: "Opération non autorisée"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La machine ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+      #list of trainings
       trainings_list:
-        #liste des formations
         book: "Réserver"
         the_trainings: "Les formations"
+      #details of a training
       training_show:
-        #détails d'une formation
         book_this_training: "Réserver cette formation"
         do_you_really_want_to_delete_this_training: "Êtes-vous sur de vouloir supprimer cette formation ?"
         unauthorized_operation: "Opération non autorisée"
         confirmation_required: "Confirmation requise"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "La formation ne peut pas être supprimée car elle a déjà été réservée par des utilisateurs."
+      #summary of the subscriptions
       plans:
-        #page récapitulative des abonnements
         subscriptions: "Les abonnements"
         i_choose_that_plan: "Je choisis cette formule"
         i_subscribe_online: "Je m'abonne en ligne"
@@ -257,10 +257,10 @@ fr:
         an_error_occured_during_the_payment_process_please_try_again_later: "Il y a eu un problème lors de la procédure de paiement. Veuillez réessayer plus tard."
         subscription_confirmation: "Validation de l'abonnement"
         here_is_the_NAME_subscription_summary: "Voici le récapitulatif de l'abonnement de {NAME} :"
-        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : valider un paiement de 20,00 €)
+        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Le paiement par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
+      #Fablab's events list
       events_list:
-        #liste des évènements du fablab
         the_fablab_s_events: "Les évènements du Fab Lab"
         all_categories: "Toutes les catégories"
         for_all: "Tout public"
@@ -274,8 +274,8 @@ fr:
         full_price_: "Plein tarif :"
         to_date: "au" #eg. from 01/01 to 01/05
         all_themes: "Toutes les thématiques"
+      #details and booking of an event
       events_show:
-        #détails d'un événement et réservation
         event_description: "Description de l'évènement"
         downloadable_documents: "Documents à télécharger"
         information_and_booking: "Informations et réservation"
@@ -285,7 +285,7 @@ fr:
         opening_hours: "Horaires :"
         all_day: "Toute la journée"
         from_time: "De" #eg. from 18:00 to 21:00
-        to_time: "à"  #eg. from 18:00 to 21:00
+        to_time: "à" #eg. from 18:00 to 21:00
         full_price_: "Plein tarif :"
         tickets_still_availables: "Places encore disponibles :"
         sold_out: "Événement complet"
@@ -300,13 +300,13 @@ fr:
         canceled_reservation_SEATS: "Réservation annulée ({SEATS} places)"
         book: "Réserver"
         confirm_and_pay: "Valider et payer"
-        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : valider un paiement de 20,00 €)
+        confirm_payment_of_html: "{ROLE, select, admin{Encaisser} other{Payer}} : {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Le payment par carte bancaire n'est pas disponible. Merci de contacter directement l'accueil du Fablab."
         please_select_a_member_first: "Veuillez tout d'abord sélectionner un membre"
         change_the_reservation: "Modifier la réservation"
         you_can_shift_this_reservation_on_the_following_slots: "Vous pouvez déplacer cette réservation sur les créneaux suivants :"
         confirmation_required: "Confirmation requise"
-        do_you_really_want_to_delete_this_event:  "Voulez-vous vraiment supprimer cet évènement ?"
+        do_you_really_want_to_delete_this_event: "Voulez-vous vraiment supprimer cet évènement ?"
         delete_recurring_event: "Vous êtes sur le point de supprimer un évènement périodique. Que voulez-vous supprimer ?"
         delete_this_event: "Uniquement cet évènement"
         delete_this_and_next: "Cet évènement et tous les suivants"
@@ -324,8 +324,8 @@ fr:
         view_event_list: "Voir les évènements à venir"
         share_on_facebook: "Partager sur Facebook"
         share_on_twitter: "Partager sur Twitter"
+      #public calendar
       calendar:
-        #calendrier publique
         calendar: "Calendrier"
         show_unavailables: "Afficher les créneaux non disponibles"
         filter_calendar: "Filtrer le calendrier"
@@ -334,8 +334,8 @@ fr:
         spaces: "Espaces"
         events: "Évènements"
         externals: "Autres calendriers"
+      #list of spaces
       spaces_list:
-        #liste des espaces
         the_spaces: "Les espaces"
         new_availability: "Ouvrir des réservations"
         add_a_space: "Ajouter un espace"
@@ -343,8 +343,8 @@ fr:
         status_disabled: "Désactivés"
         status_all: "Tous"
         book: "Réserver"
+      #display the details of a space
       space_show:
-        #affichage des détails d'un espace
         book_this_space: "Réserver cet espace"
         unauthorized_operation: "Opération non autorisée"
         confirmation_required: "Confirmation requise"
