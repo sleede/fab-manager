@@ -56,7 +56,7 @@ pt:
       already_confirmed: "Este email já foi confirmado."
       confirmation_period_expired: "deve ser confirmada dentro de %{period}, por favor solicite uma nova"
       expired: "expirado, por favor solicite uma nova"
-      not_found: "This email was not found"
+      not_found: "Este email não está associado a nenhuma conta."
       not_locked: "não encontra-se bloqueada"
       not_saved:
         one: "1 erro impediu a gravação de %{resource} :"
