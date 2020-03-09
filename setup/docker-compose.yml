@@ -48,7 +48,7 @@ services:
     restart: always
 
   nginx:
-    image: nginx:1.9
+    image: nginx:latest
     ports:
       - "80:80"
       - "443:443"
