@@ -160,7 +160,7 @@ ach:
       trainings_reserve:
         #book a training
         trainings_planning: "crwdns8767:0crwdne8767:0"
-        planning_of: "crwdns8769:0crwdne8769:0"
+        planning_of: "crwdns20180:0crwdne20180:0" #followed by the training name (eg. Planning of 3d printer training)
         all_trainings: "crwdns8771:0crwdne8771:0"
         cancel_my_selection: "crwdns8773:0crwdne8773:0"
         i_change: "crwdns8775:0crwdne8775:0"
