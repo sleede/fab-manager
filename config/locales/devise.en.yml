@@ -18,13 +18,13 @@ en:
       unconfirmed: "You have to confirm your account before continuing. Please click on the link below the form."
     mailer:
       confirmation_instructions:
-        action:
-        instruction:
+        action: "Confirm my email address"
+        instruction: "You can finalize your registration by confirming your email address. Please click on the following link:"
         subject: "Confirmation instructions"
       reset_password_instructions:
-        action:
-        instruction:
-        ignore_otherwise:
+        action: "Change my password"
+        instruction: "Someone asked for a link to change your password. You can do it through the link below."
+        ignore_otherwise: "If you have not made this request, please ignore this message."
         subject: "Reset password instructions"
       unlock_instructions:
         subject: "Unlock Instructions"

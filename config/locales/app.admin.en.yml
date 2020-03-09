@@ -2,17 +2,15 @@ en:
   app:
     admin:
       machines_new:
-        # add a new machine
+        #add a new machine
         declare_a_new_machine: "Declare a new machine"
         watch_out_when_creating_a_new_machine_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new machine, its prices are initialized at 0 for all subscriptions."
         consider_changing_them_before_creating_any_reservation_slot: "Consider changing them before creating any reservation slot."
-
       machines_edit:
-        # machine edition
+        #machine edition
         machine_edit: "Edit a machine"
-
       calendar:
-        # manage the trainings & machines slots
+        #manage the trainings & machines slots
         calendar_management: "Calendar management"
         trainings: "Trainings"
         machines: "Machines"
@@ -49,7 +47,7 @@ en:
         manage_trainings: "Click here to add or remove trainings."
         number_of_tickets: "Number of tickets: "
         adjust_the_opening_hours: "Adjust the opening hours"
-        to_time: "to"  # eg. from 18:00 to 21:00
+        to_time: "to"  #eg. from 18:00 to 21:00
         restrict_options: "Restriction options"
         restrict_with_labels: "Restrict this slot with labels"
         restrict_for_subscriptions: "Restrict this slot for subscription users"
@@ -100,7 +98,6 @@ en:
         legend: "legend"
         and: "and"
         external_sync: "Calendar synchronization"
-
       icalendar:
         icalendar_import: "iCalendar import"
         intro: "Fab-manager allows to automatically import calendar events, at RFC 5545 iCalendar format, from external URL. These URL are synchronized every hours and the events are shown in the public calendar. You can trigger a synchronisation too, by clicking on the corresponding button, in front of each import."
@@ -121,9 +118,8 @@ en:
         confirmation_required: "Confirmation required"
         confirm_delete_import: "Do you really want to delete this iCalendar import?"
         delete_success: "iCalendar import successfully deleted"
-
       project_elements:
-        # management of the projects' components
+        #management of the projects' components
         name: "Name"
         projects_elements_management: "Projects elements management"
         materials: "Materials"
@@ -134,9 +130,8 @@ en:
         description: "Description"
         add_a_new_licence: "Add a new licence"
         manage_abuses: "Manage the reports"
-
       trainings:
-        # track and monitor the trainings
+        #track and monitor the trainings
         trainings_monitoring: "Trainings monitoring"
         plan_session: "Schedule a new session"
         trainings: "Trainings"
@@ -168,15 +163,13 @@ en:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-
       trainings_new:
-        # create a new training
+        #create a new training
         add_a_new_training: "Add a new training"
         beware_when_creating_a_training_its_reservation_prices_are_initialized_to_zero: "Beware, when creating a training, its reservation prices are initialized at zero."
         dont_forget_to_change_them_before_creating_slots_for_this_training: "Don't forget to change them before creating slots for this training."
-
       events:
-        # events tracking and management
+        #events tracking and management
         events_monitoring: "Events monitoring"
         manage_filters: "Manage filters"
         fablab_events: "Fablab events"
@@ -188,8 +181,8 @@ en:
         on_DATE: "on {DATE}"
         from_DATE: "from {DATE}"
         from_TIME: "from {TIME}"
-        to_date: "to" # eg: from 01/01 to 01/05
-        to_time: "to"  # eg. from 18:00 to 21:00
+        to_date: "to" #eg: from 01/01 to 01/05
+        to_time: "to"  #eg. from 18:00 to 21:00
         title: "Title"
         dates: "Dates"
         booking: "Booking"
@@ -229,18 +222,16 @@ en:
         do_you_really_want_to_delete_this_price_category: "Do you really want to delete this price category?"
         price_category_successfully_deleted: "Price category successfully deleted."
         price_category_deletion_failed: "Price category deletion failed."
-
       events_new:
-        # add a new event
+        #add a new event
         add_an_event: "Add an event"
         none: "None"
         every_days: "Every days"
         every_week: "Every week"
         every_month: "Every month"
         every_year: "Every year"
-
       events_edit:
-        # edit an existing event
+        #edit an existing event
         edit_the_event: "Edit the event"
         confirmation_required: "Confirmation required"
         edit_recurring_event: "You're about to update a periodic event. What do you want to update ?"
@@ -254,9 +245,8 @@ en:
         events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
         error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
         other_error: "An unexpected error occurred while updating the event"
-
       event_reservations:
-        # event reservations list
+        #event reservations list
         the_reservations: "Reservations:"
         user: "User"
         payment_date: "Payment date"
@@ -266,9 +256,8 @@ en:
         no_reservations_for_now: "No reservation for now."
         back_to_monitoring: "Back to monitoring"
         canceled: "Canceled"
-
       pricing:
-        # subscriptions, prices, credits and coupons management
+        #subscriptions, prices, credits and coupons management
         pricing_management: "Pricing management"
         subscriptions: "Subscriptions"
         trainings: "Trainings"
@@ -297,7 +286,7 @@ en:
         hours: "Slots of {DURATION} minutes"
         related_subscriptions: "Related subscriptions"
         please_specify_a_number: "Please specify a number."
-        none: "None"  # grammar concordance with training.
+        none: "None"  #grammar concordance with training.
         an_error_occurred_while_saving_the_number_of_credits: "An error occurred while saving the number of credits."
         an_error_occurred_while_deleting_credit_with_the_TRAINING: "An error occurred while deleting credit with the {TRAINING}."
         an_error_occurred_unable_to_find_the_credit_to_revoke: "An error occurred : unable to find the credit to revoke."
@@ -347,26 +336,23 @@ en:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-
       coupons_new:
-        # ajouter un code promotionnel
+        #ajouter un code promotionnel
         add_a_coupon: "Add a coupon"
         unable_to_create_the_coupon_check_code_already_used: "Unable to create the coupon. Please check that the code is not already used"
-
       coupons_edit:
-        # mettre à jour un code promotionnel
+        #mettre à jour un code promotionnel
         coupon: "Coupon:"
         unable_to_update_the_coupon_an_error_occurred: "Unable to update the coupon: an error occurred."
-
       plans:
         new:
-          # add a subscription plan on the platform
+          #add a subscription plan on the platform
           add_a_subscription_plan: "Add a subscription plan"
           unable_to_create_the_subscription_please_try_again: "Unable to create the subscription plan. Please try again."
           successfully_created_subscriptions_dont_forget_to_redefine_prices: "Subscription(s) successfully created. Don't forget to redefine prices."
           unable_to_save_this_user_check_that_there_isnt_an_already_a_user_with_the_same_name: "Unable to save this user. Check that there isn't an already defined user with the same name."
         edit:
-          # edit a subscription plan / machine slots prices
+          #edit a subscription plan / machine slots prices
           subscription_plan: "Subscription plan:"
           prices: "Prices"
           copy_prices_from: "Copy prices from"
@@ -377,9 +363,8 @@ en:
           space: "Space"
           unable_to_save_subscription_changes_please_try_again: "Unable to save subscription changes. Please try again."
           subscription_successfully_changed: "Subscription successfully changed."
-
       invoices:
-        # list of all invoices & invoicing parameters
+        #list of all invoices & invoicing parameters
         invoices: "Invoices"
         accounting_periods: "Accounting periods"
         invoices_list: "Invoices list"
@@ -425,7 +410,7 @@ en:
         year: "Year"
         month: "Month"
         day: "Day"
-        num_of_invoice: "# of invoice"
+        num_of_invoice: "#of invoice"
         online_sales: "Online sales"
         wallet: "Wallet"
         refund: "Refund"
@@ -477,7 +462,7 @@ en:
         description: "Description"
         description_optional: "Description (optional):"
         will_appear_on_the_refund_invoice: "Will appear on the refund invoice."
-        none: "None"  # grammar concordance with payment mean
+        none: "None"  #grammar concordance with payment mean
         by_cash: "By cash"
         by_cheque: "By cheque"
         by_transfer: "By transfer"
@@ -595,9 +580,8 @@ en:
           debit_euro: "Euro debit"
           credit_euro: "Euro credit"
           lettering: "Lettering"
-
       members:
-        # management of users, labels, groups, and so on
+        #management of users, labels, groups, and so on
         users_management: "Users management"
         members: "Members"
         subscriptions: "Subscriptions"
@@ -675,14 +659,12 @@ en:
           member_filter_all: "All"
           member_filter_not_confirmed: "Unconfirmed"
           member_filter_inactive_for_3_years: "Inactive for 3 years"
-
       members_new:
-        # add a member
+        #add a member
         add_a_member: "Add a member"
         user_is_an_organization: "User is an organization"
-
       members_import:
-        # members bulk import
+        #members bulk import
         import_members: "Import members"
         info: "You can upload a CSV file to create new members or update existing ones. Your file must user the identifiers below to specify the group, the trainings and the tags of the members."
         required_fields: "Your file must contain, at least, the following information for each user to create: email, name, first name and group. If the password is empty, it will be generated. On updates, the empty fields will be kept as is."
@@ -706,9 +688,8 @@ en:
         update_on_id: "ID"
         update_on_username: "Username"
         update_on_email: "Email address"
-
       members_import_result:
-        # import results
+        #import results
         import_results: "Import results"
         import_details: "Import #{ID}, of {DATE}, initiated by {USER}"
         results: "Results"
@@ -718,9 +699,8 @@ en:
         success: "Success"
         failed: "Failed"
         error_details: "Error's details:"
-
       members_edit:
-        # edit a member
+        #edit a member
         subscription: "Subscription"
         duration: "Duration:"
         expires_at: "Expires at:"
@@ -762,9 +742,8 @@ en:
         a_problem_occurred_while_taking_the_subscription: "A problem occurred while taking the subscription"
         wallet: "Wallet"
         to_credit: 'Credit'
-
       admins_new:
-        # add a new administrator to the platform
+        #add a new administrator to the platform
         add_an_administrator: "Add an administrator"
         administrator_successfully_created_he_will_receive_his_connection_directives_by_email: "Administrator successfully created. {GENDER, select, female{She} other{He}} receive {GENDER, select, female{her} other{his}} connection directives by e-mail."
         failed_to_create_admin: "Unable to create the administrator:"
@@ -781,9 +760,8 @@ en:
         birth_date: "Date of birth"
         address: "Address"
         phone_number: "Phone number"
-
       authentication_new:
-        # add a new authentication provider (SSO)
+        #add a new authentication provider (SSO)
         local_database: "Local Database"
         o_auth2: "OAuth 2.0"
         add_a_new_authentication_provider: "Add a new authentication provider"
@@ -796,21 +774,19 @@ en:
         do_you_really_want_to_continue: "Do you really want to continue?"
         unsecured_oauth2_provider_successfully_added: "Unsecured OAuth 2.0 provider successfully added."
         oauth2_provider_successfully_added: "OAuth 2.0 provider successfully added."
-
       authentication_edit:
-        # edit an authentication provider (SSO)
+        #edit an authentication provider (SSO)
         provider: "Provider :"
         it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider"
         provider_successfully_updated: "Provider successfully updated"
         an_error_occurred_unable_to_update_the_provider: "An error occurred: unable to update the provider."
-
       statistics:
-        # statistics tables
+        #statistics tables
         statistics: "Statistics"
         evolution: "Evolution"
         age_filter: "Age filter"
-        from_age: "From"  # eg. from 8 to 40 years old
-        to_age: "to"  # eg. from 8 to 40 years old
+        from_age: "From"  #eg. from 8 to 40 years old
+        to_age: "to"  #eg. from 8 to 40 years old
         _years_old: "years old"
         start: "Start:"
         end: "End:"
@@ -819,8 +795,8 @@ en:
         criterion: "Criterion:"
         value: "Value:"
         exclude: "Exclude"
-        from_date: "From" # eg: from 01/01 to 01/05
-        to_date: "to" # eg: from 01/01 to 01/05
+        from_date: "From" #eg: from 01/01 to 01/05
+        to_date: "to" #eg: from 01/01 to 01/05
         entries: "Entries:"
         revenue_: "Revenue:"
         average_age: "Average age:"
@@ -847,15 +823,14 @@ en:
         export_is_running_you_ll_be_notified_when_its_ready: "Export is running. You'll be notified when it's ready."
         create_plans_to_start: "Start by creating new subscription plans."
         click_here: "Click here to create your first one."
-
       stats_graphs:
-        # statistics graphs
+        #statistics graphs
         statistics: "Statistics"
         data: "Data"
         day: "Day"
         week: "Week"
-        from_date: "From" # eg: from 01/01 to 01/05
-        to_date: "to" # eg: from 01/01 to 01/05
+        from_date: "From" #eg: from 01/01 to 01/05
+        to_date: "to" #eg: from 01/01 to 01/05
         month: "Month"
         start: "Start:"
         end: "End:"
@@ -867,9 +842,8 @@ en:
         week_of_START_to_END: "Week of {START} to {END}"
         no_data_for_this_period: "No data for this period"
         date: "Date"
-
       settings:
-        # global application parameters and customization
+        #global application parameters and customization
         title: "Title"
         customize_the_application: "Customize the application"
         general: "General"
@@ -1029,7 +1003,6 @@ en:
             online_payment: "Is the online payment module active?"
             invoices: "Is the invoicing module active?"
             openlab: "Is the project sharing module (OpenLab) active?"
-
       open_api_clients:
         add_new_client: "Create new API client"
         api_documentation: "API documentation"
@@ -1047,21 +1020,18 @@ en:
         client_successfully_updated: "Client successfully updated."
         client_successfully_deleted: "Client successfully deleted."
         access_successfully_revoked: "Access successfully revoked."
-
       space_new:
-        # create a new space
+        #create a new space
         add_a_new_space: "Add a new space"
         watch_out_when_creating_a_new_space_its_prices_are_initialized_at_0_for_all_subscriptions: "Watch out! When creating a new space, its prices are initialized at 0 for all subscriptions."
         consider_changing_its_prices_before_creating_any_reservation_slot: "Consider changing its prices before creating any reservation slot."
         add_this_space: "Add this space"
-
       space_edit:
-        # modify an exiting space
+        #modify an exiting space
         edit_the_space_NAME: "Edit the space: {NAME}"
         validate_the_changes: "Validate the changes"
-
       manage_abuses:
-        # process and delete abuses reports
+        #process and delete abuses reports
         abuses_list: "Reports list"
         no_reports: "No reports for now"
         published_by: "published by"
@@ -1071,7 +1041,6 @@ en:
         report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"
         report_removed: "The report has been deleted"
         failed_to_remove: "An error occurred, unable to delete the report"
-
       tour:
         conclusion:
           title: "Thank you for your attention"

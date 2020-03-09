@@ -1,19 +1,17 @@
 en:
   app:
     public:
+      #header and "about" page
       common:
-        # header and "about" page
         about_the_fablab: "About {GENDER, select, male{the} female{the} neutral{} other{the}} {NAME}"
         return: "Return"
-
-        # cookies
+        #cookies
         cookies:
           about_cookies: "This website uses cookies for audience measurement purposes."
           learn_more: "Learn more"
           accept: "Accept cookies"
           decline: "Refuse"
-
-        # dashboard sections
+        #dashboard sections
         dashboard: "Dashboard"
         my_profile: "My Profile"
         my_settings: "My Settings"
@@ -22,21 +20,17 @@ en:
         my_events: "My Events"
         my_invoices: "My Invoices"
         my_wallet: "My Wallet"
-
-        # contextual help
+        #contextual help
         help: "Help"
-
-        # login/logout
+        #login/logout
         sign_out: "Sign Out"
         sign_up: "Sign Up"
         sign_in: "Sign In"
-
-        # left menu
+        #left menu
         notifications: "Notifications"
         admin: "Admin"
         reduce_panel: "Reduce panel"
-
-        # left menu (public)
+        #left menu (public)
         home: "Home"
         reserve_a_machine: "Reserve a Machine"
         trainings_registrations: "Trainings registrations"
@@ -45,8 +39,7 @@ en:
         projects_gallery: "Projects gallery"
         subscriptions: "Subscriptions"
         public_calendar: "Calendar"
-
-        # left menu (admin)
+        #left menu (admin)
         trainings_monitoring: "Trainings"
         manage_the_calendar: "Calendar"
         manage_the_users: "Users"
@@ -59,8 +52,7 @@ en:
         statistics: "Statistics"
         customization: "Customization"
         open_api_clients: "OpenAPI clients"
-
-        # account creation modal
+        #account creation modal
         create_your_account: "Create your account"
         man: "Man"
         woman: "Woman"
@@ -102,13 +94,11 @@ en:
         used_for_profile: "This data will only be displayed on your profile"
         public_profile: "You will have a public profile and other users will be able to associate you in their projects"
         you_will_receive_confirmation_instructions_by_email_detailed: "You will receive an email with instructions about how to confirm your account in a few minutes."
-
-        # password modification modal
+        #password modification modal
         change_your_password: "Change your password"
         your_new_password: "Your new password"
         your_password_was_successfully_changed: "Your password was successfully changed."
-
-        # connection modal
+        #connection modal
         connection: "Connection"
         password_forgotten: "Forgotten password?"
         confirm_my_account: "Confirm my e-mail"
@@ -116,15 +106,12 @@ en:
         create_an_account: "Create an account"
         wrong_email_or_password: "Wrong e-mail or password."
         caps_lock_is_on: "Caps lock key is on."
-
-        # confirmation modal
-        you_will_receive_confirmation_instructions_by_email: You will receive confirmation instructions by email.
-
-        # forgotten password modal
+        #confirmation modal
+        you_will_receive_confirmation_instructions_by_email: "You will receive confirmation instructions by email."
+        #forgotten password modal
         your_email_address_is_unknown: "Your e-mail address is unknown."
         you_will_receive_in_a_moment_an_email_with_instructions_to_reset_your_password: "You will receive in a moment, an e-mail with instructions to reset your password."
-
-        # Fab-manager's version
+        #Fab-manager's version
         version: "Version:"
         upgrade_fabmanager: "Upgrade Fab-manager"
         current_version: "You are currently using version {VERSION} of Fab-manager."
@@ -132,33 +119,28 @@ en:
         read_more: "View the details of this release"
         security_version_html: "<strong>Your current version is vulnerable!</strong><br> A later version, currently available, includes security fixes. Upgrade as soon as possible!"
         how_to: "How to upgrade?"
-
-        # Notifications
+        #Notifications
         and_NUMBER_other_notifications: "and {NUMBER, plural, =0{no other notifications} =1{one other notification} other{{NUMBER} other notifications}}..."
-
+      #about page
       about:
-        # about page
         read_the_fablab_policy: "Read the FabLab policy"
         read_the_fablab_s_general_terms_and_conditions: "Read the FabLab's general terms and conditions"
         your_fablab_s_contacts: "Your FabLab's contacts"
         privacy_policy: "Privacy policy"
-
+      #'privacy policy' page
       privacy:
-        # 'privacy policy' page
         title: "Privacy policy"
         dpo: "Data protection officer"
         last_update: "Last update,"
-
+      #home page
       home:
-        # home page
         latest_documented_projects: "The latest documented projects"
         follow_us: "Follow Us"
         latest_tweets: "The latest tweets"
         latest_registered_members: "Latest registered members"
         create_an_account: "Create an account"
         discover_members: "Discover members"
-
-        # next events summary on the home page
+        #next events summary on the home page
         fablab_s_next_events: "Fablab's next events"
         every_events: "Every events"
         from_date_to_date: "From {START} to {END}"
@@ -169,9 +151,8 @@ en:
         full_price: "Full price"
         event_full: "Event full"
         still_available: "Available place(s)"
-
+      #projects gallery
       projects_list:
-        # projects gallery
         the_fablab_projects: "The Fab Lab projects"
         add_a_project: "Add a project"
         search_over_the_whole_network: "Search over the whole Fab-manager network"
@@ -188,9 +169,8 @@ en:
         all_materials: "All materials"
         load_next_projects: "Load next projects"
         rough_draft: "Rough draft"
-
+      #details of a projet
       projects_show:
-        # details of a projet
         rough_draft: "Draft"
         project_description: "Project description"
         by_name: "By {NAME}"
@@ -218,9 +198,8 @@ en:
         message_is_required: "Message is required."
         report: "Report"
         do_you_really_want_to_delete_this_project: "Do you really want to delete this project?"
-
+      #list of machines
       machines_list:
-        # list of machines
         the_fablab_s_machines: "The FabLab's machines"
         add_a_machine: "Add a machine"
         new_availability: "Open reservations"
@@ -229,9 +208,8 @@ en:
         status_enabled: "Enabled"
         status_disabled: "Disabled"
         status_all: "All"
-
+      #details of a machine
       machines_show:
-        # details of a machine
         book_this_machine: "Book this machine"
         technical_specifications: "Technical specifications"
         files_to_download: "Files to download"
@@ -241,22 +219,19 @@ en:
         do_you_really_want_to_delete_this_machine: "Do you really want to delete this machine?"
         unauthorized_operation: "Unauthorized operation"
         the_machine_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The machine can't be deleted because it's already reserved by some users."
-
+      #list of trainings
       trainings_list:
-        # list of trainings
         book: "Book"
         the_trainings: "The trainings"
-
+      #details of a training
       training_show:
-        # details of a training
         book_this_training: "Book this training"
         do_you_really_want_to_delete_this_training: "Do you really want to delete this training?"
         unauthorized_operation: "Unauthorized operation"
         confirmation_required: "Confirmation required"
         the_training_cant_be_deleted_because_it_is_already_reserved_by_some_users: "The training can't be deleted because it's already reserved by some users."
-
+      #summary of the subscriptions
       plans:
-        # summary of the subscriptions
         subscriptions: "Subscriptions"
         i_choose_that_plan: "I choose that plan"
         i_subscribe_online: "I subscribe online"
@@ -282,11 +257,10 @@ en:
         an_error_occured_during_the_payment_process_please_try_again_later: "An error occurred during the payment process. Please try again later."
         subscription_confirmation: "Subscription confirmation"
         here_is_the_NAME_subscription_summary: "Here is the {NAME}'s subscription summary:"
-        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" # (contexte : validate a payment of $20,00)
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
-
+      #Fablab's events list
       events_list:
-        # Fablab's events list
         the_fablab_s_events: "The Fablab's events"
         all_categories: "All categories"
         for_all: "For all"
@@ -298,11 +272,10 @@ en:
         add_an_event: "Add an event"
         load_the_next_events: "Load the next events..."
         full_price_: "Full price:"
-        to_date: "to" # eg. from 01/01 to 01/05
+        to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
-
+      #details and booking of an event
       events_show:
-        # details and booking of an event
         event_description: "Event description"
         downloadable_documents: "Downloadable documents"
         information_and_booking: "Information and booking"
@@ -311,8 +284,8 @@ en:
         ending: "Ending:"
         opening_hours: "Opening hours:"
         all_day: "All day"
-        from_time: "From" # eg. from 18:00 to 21:00
-        to_time: "to"  # eg. from 18:00 to 21:00
+        from_time: "From" #eg. from 18:00 to 21:00
+        to_time: "to"  #eg. from 18:00 to 21:00
         full_price_: "Full price:"
         tickets_still_availables: "Tickets still available:"
         sold_out: "Sold out."
@@ -327,7 +300,7 @@ en:
         canceled_reservation_SEATS: "Reservation canceled ({SEATS} seats)"
         book: "Book"
         confirm_and_pay: "Confirm and pay"
-        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" # (contexte : validate a payment of $20,00)
+        confirm_payment_of_html: "{ROLE, select, admin{Cash} other{Pay}}: {AMOUNT}" #(contexte : validate a payment of $20,00)
         online_payment_disabled: "Payment by credit card is not available. Please contact the Fablab's reception directly."
         please_select_a_member_first: "Please select a member first"
         change_the_reservation: "Change the reservation"
@@ -351,9 +324,8 @@ en:
         view_event_list: "View events to come"
         share_on_facebook: "Share on Facebook"
         share_on_twitter: "Share on Twitter"
-
+      #public calendar
       calendar:
-        # public calendar
         calendar: "Calendar"
         show_unavailables: "Show unavailable slots"
         filter_calendar: "Filter calendar"
@@ -362,9 +334,8 @@ en:
         spaces: "Spaces"
         events: "Events"
         externals: "Other calendars"
-
+      #list of spaces
       spaces_list:
-        # list of spaces
         the_spaces: "The spaces"
         new_availability: "Open reservations"
         add_a_space: "Add a space"
@@ -372,9 +343,8 @@ en:
         status_disabled: "Disabled"
         status_all: "All"
         book: "Book"
-
+      #display the details of a space
       space_show:
-        # display the details of a space
         book_this_space: "Book this space"
         unauthorized_operation: "Unauthorized operation"
         confirmation_required: "Confirmation required"
@@ -383,7 +353,6 @@ en:
         characteristics: "Characteristics"
         files_to_download: "Files to download"
         projects_using_the_space: "Projects using the space"
-
       tour:
         conclusion:
           title: "Thank you for your attention"

@@ -39,7 +39,6 @@ pt:
         _click_on_the_synchronization_button_opposite_: "click on the synchronization button opposite"
         _disconnect_then_reconnect_: "disconnect then reconnect"
         _for_your_changes_to_take_effect: "for your changes to take effect."
-
       dashboard:
         # dashboard: public profile
         profile:
@@ -126,11 +125,9 @@ pt:
           download_the_invoice: "Download the invoice"
           download_the_credit_note: "Download the refund invoice"
           no_invoices_for_now: "No invoices for now."
-
       members_show:
         # public profil of a member
         members_list: "Lista de membros"
-
       members:
         # list of members accepting to be contacted
         the_fablab_members: "Membros do FabLab"
@@ -140,17 +137,14 @@ pt:
         user: "User"
         pseudonym: "Pseudonym"
         email_address: "Email address"
-
       projects_new:
         # add a new project
         add_a_new_project: "Adicionar novo projeto"
-
       projects_edit:
         # modify an existing project
         edit_the_project: "Editar projeto"
         rough_draft: "Draft"
         publish: "Publicar"
-
       machines_reserve:
         # book a machine
         machine_planning: "Planejamento de máquinas"
@@ -163,24 +157,21 @@ pt:
         reservation_was_cancelled_successfully: "Reservation was cancelled successfully."
         cancellation_failed: "Cancellation failed."
         a_problem_occured_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
-
       trainings_reserve:
         # book a training
         trainings_planning: "Planos de treinamento"
-        planning_of: "Planejamento de"   # followed by the training name (eg. "Planning of 3d printer training")
+        planning_of: "Planejamento de"   # followed by the training name (eg. Planning of 3d printer training)
         all_trainings: "Todos treinamentos"
         cancel_my_selection: "Cancelar minha seleção"
         i_change: "I change"
         i_shift: "I shift"
         i_ve_reserved: "Eu reservei"
-
       space_reserve:
         # book a space
         planning_of_space_NAME: "Plano de {NAME} espaço"
         i_ve_reserved: "Eu reservei"
         i_shift: "Eu troco"
         i_change: "Eu altero"
-
       notifications:
         notifications_center: "Centro de notificações"
         mark_all_as_read: "Marcar todas como lidas"

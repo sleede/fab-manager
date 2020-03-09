@@ -39,7 +39,6 @@ fr:
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
         _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
-
       dashboard:
         # tableau de bord: profile publique
         profile:
@@ -126,11 +125,9 @@ fr:
           download_the_invoice: "Télécharger la facture"
           download_the_credit_note: "Télécharger l'avoir"
           no_invoices_for_now: "Aucune facture pour le moment."
-
       members_show:
         # profil public d'un membre
         members_list: "Liste des membres"
-
       members:
         #  liste des membres qui acceptent d'être contactés
         the_fablab_members: "Les membres du Fab Lab"
@@ -140,17 +137,14 @@ fr:
         user: "Utilisateur"
         pseudonym: "Pseudonyme"
         email_address: "Adresse électronique"
-
       projects_new:
         # ajouter un nouveau projet
         add_a_new_project: "Ajouter un nouveau projet"
-
       projects_edit:
         # modifier un projet existant
         edit_the_project: "Éditer le projet"
         rough_draft: "Brouillon"
         publish: "Publier"
-
       machines_reserve:
         # réserver une machine
         machine_planning: "Planning machine"
@@ -163,24 +157,21 @@ fr:
         reservation_was_cancelled_successfully: "La réservation a bien été annulée."
         cancellation_failed: "Échec de l'annulation."
         a_problem_occured_during_the_payment_process_please_try_again_later: "Un problème est survenu pendant le processus de paiement. Merci de réessayer ultérieurement."
-
       trainings_reserve:
         # réserver une formation
         trainings_planning: "Planning formations"
-        planning_of: "Planning de la"   # suivi du nom de la formation (eg. "Planning de la formation imprimante 3d")
+        planning_of: "Planning de la"   # suivi du nom de la formation (eg. Planning de la formation imprimante 3d)
         all_trainings: "Toutes les formations"
         cancel_my_selection: "Annuler ma sélection"
         i_change: "Je change"
         i_shift: "Je déplace"
         i_ve_reserved: "J'ai réservé"
-
       space_reserve:
         # réserver un espace
         planning_of_space_NAME: "Planning de l'espace {NAME}"
         i_ve_reserved: "J'ai réservé"
         i_shift: "Je déplace"
         i_change: "Je change"
-
       notifications:
         notifications_center: "Centre de notifications"
         mark_all_as_read: "Tout marquer comme lu"

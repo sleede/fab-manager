@@ -1,6 +1,6 @@
 en:
+  #subscription plan duration
   duration:
-    # subscription plan duration
     year:
       one: 'one year'
       other: '%{count} years'
@@ -10,15 +10,9 @@ en:
     week:
       one: 'one week'
       other: '%{count} weeks'
-
-  time:
-    formats:
-      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
-      hour_minute: "%I:%M %p"
-
-  errors: &errors
-    messages: &errors_messages
-      # CarrierWave
+  errors:
+    #CarrierWave
+    messages:
       carrierwave_processing_error: "failed to be processed"
       carrierwave_integrity_error: "is not of an allowed file type"
       carrierwave_download_error: "could not be downloaded"
@@ -42,38 +36,29 @@ en:
       end_before_start: "The end date can't be before the start date. Pick a date after %{START}"
       invalid_duration: "The allowed duration must be between 1 day and 1 year. Your period is %{DAYS} days long."
       must_be_in_the_past: "The period must be strictly prior to today's date."
-
-  activemodel:
-    errors:
-      <<: *errors
-
   apipie:
     api_documentation: "API Documentation"
-
+  #error messages when importing an account from a SSO
   omniauth:
-    # error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "E-mail address \"%{OLD_MAIL}\" is already linked to another account, please input your authentication code."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Your username (%{USERNAME}) is already linked to another account, unable to update it."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) is already linked to another account, unable to update it."
     this_account_is_already_linked_to_an_user_of_the_platform: "This %{NAME} account is already linked to an user of the platform."
-
+  #availability slots in the calendar
   availabilities:
-    # availability slots in the calendar
     not_available: "Not available"
     i_ve_reserved: "I've reserved"
     length_must_be_slot_multiple: "must be at least %{MIN} minutes after the start date"
     must_be_associated_with_at_least_1_machine: "must be associated with at least 1 machine"
-
+  #members management
   members:
-    # members management
     unable_to_change_the_group_while_a_subscription_is_running: "Unable to change the group while a subscription is running"
     please_input_the_authentication_code_sent_to_the_address: "Please input the authentication code sent to the e-mail address %{EMAIL}"
     your_authentication_code_is_not_valid: "Your authentication code is not valid."
     current_authentication_method_no_code: "The current authentication method does not require any migration code"
     requested_account_does_not_exists: "The requested account does not exist"
-
+  #PDF invoices generation
   invoices:
-    # PDF invoices generation
     refund_invoice_reference: "Refund invoice reference: %{REF}"
     invoice_reference: "Invoice reference: %{REF}"
     code: "Code: %{CODE}"
@@ -101,7 +86,7 @@ en:
       one: "One %{NAME} ticket"
       other: "%{count} %{NAME} tickets"
     reservation_other: "Reservation (other)"
-    coupon_CODE_discount_of_DISCOUNT: "Coupon {CODE}: discount of {DISCOUNT}{TYPE, select, percent_off{%} other{}}"  # messageFormat interpolation
+    coupon_CODE_discount_of_DISCOUNT: "Coupon {CODE}: discount of {DISCOUNT}{TYPE, select, percent_off{%} other{}}"  #messageFormat interpolation
     total_including_all_taxes: "Total incl. all taxes"
     including_VAT_RATE: "Including VAT %{RATE}%"
     including_total_excluding_taxes: "Including Total excl. taxes"
@@ -119,12 +104,12 @@ en:
     settlement_by_wallet: "Settlement by wallet"
     on_DATE_at_TIME: "on %{DATE} at %{TIME},"
     for_an_amount_of_AMOUNT: "for an amount of %{AMOUNT}"
-    on_DATE_from_START_to_END: "On %{DATE} from %{START} to %{END}" # eg: on feb. 7 from 7AM to 9AM
-    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "From %{STARTDATE} to %{ENDDATE}, from %{STARTTIME} to %{ENDTIME}" # eg: from feb. 7 to feb. 10, from 6PM to 10PM
+    on_DATE_from_START_to_END: "On %{DATE} from %{START} to %{END}" #eg: on feb. 7 from 7AM to 9AM
+    from_STARTDATE_to_ENDDATE_from_STARTTIME_to_ENDTIME: "From %{STARTDATE} to %{ENDDATE}, from %{STARTTIME} to %{ENDTIME}" #eg: from feb. 7 to feb. 10, from 6PM to 10PM
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Subscription of %{NAME} for %{DURATION} starting from %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscription of %{NAME} extended (Free days) starting from %{STARTDATE} until %{ENDDATE}"
     and: 'and'
-
+  # CVS accounting export (columns headers)
   accounting_export:
     journal_code: "Journal code"
     date: "Entry date"
@@ -144,22 +129,19 @@ en:
     Event_reservation: "event reserv."
     Space_reservation: "space reserv."
     wallet: "wallet"
-
+  #training availabilities
   trainings:
-    # training availabilities
     i_ve_reserved: "I've reserved"
     completed: "Full"
-
+  #error messages when updating an event
   events:
-    # error messages when updating an event
     error_deleting_reserved_price: "Unable to delete the requested price because it is associated with some reservations"
     other_error: "An unexpected error occurred while updating the event"
-    # event duration
+    #event duration
     from_STARTDATE_to_ENDDATE: "From %{STARTDATE} to %{ENDDATE},"
     from_STARTTIME_to_ENDTIME: "from %{STARTTIME} to %{ENDTIME}"
-
+  #members list export to EXCEL format
   export_members:
-    # members list export to EXCEL format
     members: "Members"
     id: "ID"
     surname: "Surname"
@@ -190,9 +172,8 @@ en:
     man: "Man"
     woman: "Woman"
     without_subscriptions: "Without subscriptions"
-
+  #machines/trainings/events reservations list to EXCEL format
   export_reservations:
-    # machines/trainings/events reservations list to EXCEL format
     reservations: "Reservations"
     customer_id: "Customer ID"
     customer: "Customer"
@@ -204,9 +185,8 @@ en:
     payment_method: "Payment method"
     local_payment: "Payment at the reception"
     online_payment: "Online payment"
-
+  #subscriptions list export to EXCEL format
   export_subscriptions:
-    # subscriptions list export to EXCEL format
     subscriptions: "Subscriptions"
     id: "ID"
     customer: "Customer"
@@ -219,9 +199,8 @@ en:
     payment_method: "Payment method"
     local_payment: "Payment at the reception"
     online_payment: "Online payment"
-
+  #reservation slots export, by type, to EXCEL format
   export_availabilities:
-    # reservation slots export, by type, to EXCEL format
     machines: "Machines"
     trainings: "Trainings"
     spaces: "Spaces"
@@ -235,10 +214,9 @@ en:
     event: "Event"
     reservations: "Reservations"
     available_seats: "Available seats"
-
   api:
+    #internal app notifications
     notifications:
-      # internal app notifications
       deleted_user: "Deleted user"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "An abuse was reported on <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
@@ -255,15 +233,15 @@ en:
       notify_admin_subscription_canceled:
         USER_s_subscription_has_been_cancelled: "%{USER}'s subscription has been cancelled."
       notify_admin_subscription_extended:
-        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Subscription <strong><em>{PLAN}</em></strong> of the member <strong><em>{USER}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}."  # messageFormat interpolation
+        subscription_PLAN_of_the_member_USER_has_been_extended_FREE_until_DATE_html: "Subscription <strong><em>{PLAN}</em></strong> of the member <strong><em>{USER}</strong></em> has been extended {FREE, select, true{for free} other{}} until {DATE}."  #messageFormat interpolation
       notify_admin_subscription_is_expired:
         USER_s_subscription_has_expired: "%{USER}'s subscription has expired."
       notify_admin_subscription_will_expire_in_7_days:
         USER_s_subscription_will_expire_in_7_days: "%{USER}'s subscription will expire in 7 days."
       notify_admin_user_group_changed:
-        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed {GENDER, select, true{his} other{her}} group."  # messageFormat interpolation
+        user_NAME_changed_his_group_html: "User <strong><em>{NAME}</strong></em> changed {GENDER, select, true{his} other{her}} group."  #messageFormat interpolation
       notify_admin_user_merged:
-        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>."  # messageFormat interpolation
+        user_NAME_has_merged_his_account_with_the_one_imported_from_PROVIDER_UID_html: "User <strong><em>{NAME}</strong></em> has merged {GENDER, select, true{his} other{her}} account with the one imported from <strong><em>{PROVIDER} </strong> ({UID})</em>."  #messageFormat interpolation
       notify_admin_when_project_published:
         project_NAME_has_been_published_html: "Project <a href='/#!/projects/%{ID}'><strong><em>%{NAME}<em></strong></a> has been published."
       notify_admin_when_user_is_created:
@@ -285,7 +263,7 @@ en:
       notify_member_subscription_canceled:
         your_subscription_PLAN_was_successfully_cancelled_html: "Your subscription <strong><em>%{PLAN}</em></strong> was successfully cancelled."
       notify_member_subscription_extended:
-        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Your subscription <strong><em>{PLAN}</em></strong> has been extended {FREE, select, true{for free} other{}} until {DATE}."  # messageFormat interpolation
+        your_subscription_PLAN_has_been_extended_FREE_until_DATE_html: "Your subscription <strong><em>{PLAN}</em></strong> has been extended {FREE, select, true{for free} other{}} until {DATE}."  #messageFormat interpolation
       notify_member_subscription_is_expired:
         your_subscription_has_expired: "Your subscription has expired."
       notify_member_subscription_will_expire_in_7_days:
@@ -351,9 +329,8 @@ en:
         click_to_show: "Click here to consult"
       notify_admin_refund_created:
         refund_created: "A refund of %{AMOUNT} has been created for user %{USER}"
-
+  #statistics tools for admins
   statistics:
-    # statistics tools for admins
     subscriptions: "Subscriptions"
     machines_hours: "Machines slots"
     spaces: "Spaces"
@@ -379,9 +356,8 @@ en:
     revenue: "Revenue"
     account_creation: "Account creation"
     project_publication: "Project publication"
-
+  #statistics exports to the excel file format
   export:
-    # statistics exports to the excel file format
     entries: "Entries"
     revenue: "Revenue"
     average_age: "Average Age"
@@ -395,12 +371,10 @@ en:
     type: "Type"
     male: "Man"
     female: "Woman"
-
+  #initial price's category for events, created to replace the old "reduced amount" property
   price_category:
-    # initial price's category for events, created to replace the old "reduced amount" property
     reduced_fare: "Reduced fare"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Reduced fare if you are under 25, student or unemployed."
-
   group:
-    # name of the user's group for administrators
+    #name of the user's group for administrators
     admins: 'Administrators'

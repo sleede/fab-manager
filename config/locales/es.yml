@@ -1,6 +1,6 @@
 es:
   duration:
-    # subscription plan duration
+    #subscription plan duration
     year:
       one: 'un año'
       other: '%{count} años'
@@ -10,15 +10,9 @@ es:
     week:
       one: 'una semana'
       other: '%{count} semanas'
-
-  time:
-    formats:
-      # See http://apidock.com/ruby/DateTime/strftime for a list of available directives
-      hour_minute: "%I:%M %p"
-
-  errors: &errors
-    messages: &errors_messages
-      # CarrierWave
+  errors:
+    messages:
+      #CarrierWave
       carrierwave_processing_error: "falló al procesar"
       carrierwave_integrity_error: "es un tipo de archivo no permitido"
       carrierwave_download_error: "no pudo ser descargado"
@@ -42,38 +36,29 @@ es:
       end_before_start: "La fecha de fin no puede ser anterior a la fecha de inicio. Elija una fecha posterior a %{START}"
       invalid_duration: "La duración permitida es de 1 día a 1 año. Su período es %{DAYS} días de largo."
       must_be_in_the_past: "El período debe ser estrictamente anterior a la fecha de hoy."
-
-  activemodel:
-    errors:
-      <<: *errors
-
   apipie:
     api_documentation: "Documentación API"
-
   omniauth:
-    # error messages when importing an account from a SSO
+    #error messages when importing an account from a SSO
     email_already_linked_to_another_account_please_input_your_authentication_code: "El correo electrónico \"%{OLD_MAIL}\" ya está ligado a otra cuenta, ingrese su código de autenticación."
     your_username_is_already_linked_to_another_account_unable_to_update_it: "Su nombre de usuario (%{USERNAME}) ya está ligado a otra cuenta, no se puede actualizar."
     your_email_address_is_already_linked_to_another_account_unable_to_update_it: "Your e-mail address (%{EMAIL}) ya está ligado a otra cuenta, no se puede actualizar."
     this_account_is_already_linked_to_an_user_of_the_platform: "Esta cuenta %{NAME} ya está ligada a un usuario de la plataforma."
-
   availabilities:
-    # availability slots in the calendar
+    #availability slots in the calendar
     not_available: "No disponible"
     i_ve_reserved: "He reservado"
     length_must_be_slot_multiple: "Debe ser al menos %{MIN} minutos después de la fecha de inicio"
     must_be_associated_with_at_least_1_machine: "debe estar asociado con al menos 1 máquina"
-
   members:
-    # members management
+    #members management
     unable_to_change_the_group_while_a_subscription_is_running: "No se puede cambiar de grupo mientras haya una suscripción en curso"
     please_input_the_authentication_code_sent_to_the_address: "Por favor Ingrese el código de autenticación enviado a la dirección de correo electrónico %{EMAIL}"
     your_authentication_code_is_not_valid: "Su código de autenticación no es válido."
     current_authentication_method_no_code: "El método de autenticación actual no requiere ningún código de migración"
     requested_account_does_not_exists: "La cuenta solicitada no existe"
-
   invoices:
-    # PDF invoices generation
+    #PDF invoices generation
     refund_invoice_reference: "Referencia de la factura de reembolso: %{REF}"
     invoice_reference: "Referencia de factura: %{REF}"
     code: "Código: %{CODE}"
@@ -124,7 +109,6 @@ es:
     subscription_of_NAME_for_DURATION_starting_from_DATE: "Suscripción %{NAME} por %{DURATION} empezando desde %{DATE}"
     subscription_of_NAME_extended_starting_from_STARTDATE_until_ENDDATE: "Subscripción de %{NAME} extendida (días gratuitos) empezando desde %{STARTDATE} hasta %{ENDDATE}"
     and: 'y'
-
   accounting_export:
     journal_code: "Código de registro"
     date: "Fecha contable"
@@ -144,22 +128,19 @@ es:
     Event_reservation: "reserv. evento"
     Space_reservation: "reserv. espacio"
     wallet: "cartera"
-
   trainings:
-    # training availabilities
+    #training availabilities
     i_ve_reserved: "Reservé"
     completed: "Lleno"
-
   events:
-    # error messages when updating an event
+    #error messages when updating an event
     error_deleting_reserved_price: "No se puede eliminar el precio solicitado porque está asociado con algunas reservas."
     other_error: "Se ha producido un error inesperado al actualizar el evento."
-    # event duration
+    #event duration
     from_STARTDATE_to_ENDDATE: "Del %{STARTDATE} al %{ENDDATE},"
     from_STARTTIME_to_ENDTIME: "de %{STARTTIME} a %{ENDTIME}"
-
   export_members:
-    # members list export to EXCEL format
+    #members list export to EXCEL format
     members: "Miembros"
     id: "ID"
     surname: "Apellido"
@@ -190,9 +171,8 @@ es:
     man: "hombre"
     woman: "mujer"
     without_subscriptions: "Sin suscripciones"
-
   export_reservations:
-    # machines/trainings/events reservations list to EXCEL format
+    #machines/trainings/events reservations list to EXCEL format
     reservations: "Reservas"
     customer_id: "Identificación del cliente"
     customer: "Cliente"
@@ -204,9 +184,8 @@ es:
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago online"
-
   export_subscriptions:
-    # subscriptions list export to EXCEL format
+    #subscriptions list export to EXCEL format
     subscriptions: "Suscripciones"
     id: "ID"
     customer: "Cliente"
@@ -219,9 +198,8 @@ es:
     payment_method: "Método de pago"
     local_payment: "Pago en recepción"
     online_payment: "Pago en línea"
-
   export_availabilities:
-    # reservation slots export, by type, to EXCEL format
+    #reservation slots export, by type, to EXCEL format
     machines: "Máquinas"
     trainings: "Formaciones"
     spaces: "Espacios"
@@ -235,10 +213,9 @@ es:
     event: "Evento"
     reservations: "Reservas"
     available_seats: "Asientos disponibles"
-
   api:
     notifications:
-      # internal app notifications
+      #internal app notifications
       deleted_user: "Usuario eliminado"
       notify_admin_abuse_reported:
         an_abuse_was_reported_on_TYPE_ID_NAME_html: "Un abuso ha sido reportado <strong>%{TYPE} %{ID}: <em>%{NAME}</em></strong>."
@@ -351,9 +328,8 @@ es:
         click_to_show: "Haga clic aquí para consultar"
       notify_admin_refund_created:
         refund_created: "Se ha creado un reembolso de %{AMOUNT} para el usuario %{USER}"
-
   statistics:
-    # statistics tools for admins
+    #statistics tools for admins
     subscriptions: "Suscripciones"
     machines_hours: "Machine slots"
     spaces: "Espacios"
@@ -379,9 +355,8 @@ es:
     revenue: "Ingresos"
     account_creation: "Creación de cuenta"
     project_publication: "Publicación de proyectos"
-
   export:
-    # statistics exports to the excel file format
+    #statistics exports to the excel file format
     entries: "Entradas"
     revenue: "Ingresos"
     average_age: "Edad media"
@@ -395,12 +370,10 @@ es:
     type: "Tipo"
     male: "Hombre"
     female: "Mujer"
-
   price_category:
-    # initial price's category for events, created to replace the old "reduced amount" property
+    #initial price's category for events, created to replace the old "reduced amount" property
     reduced_fare: "Tarifa reducida"
     reduced_fare_if_you_are_under_25_student_or_unemployed: "Tarifa reducida si tienes menos de 25 años, eres estudiante o estás desempleado."
-
   group:
-    # name of the user's group for administrators
+    #name of the user's group for administrators
     admins: 'Administradores'
