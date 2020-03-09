@@ -411,7 +411,7 @@ fr:
         year: "Année"
         month: "Mois"
         day: "Jour"
-        num_of_invoice: "# of invoice"
+        num_of_invoice: "Num. of invoice"
         online_sales: "Vente en ligne"
         wallet: "Porte-monnaie"
         refund: "Remboursement"
