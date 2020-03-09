@@ -411,7 +411,7 @@ es:
         year: "Año"
         month: "Mes"
         day: "Día"
-        num_of_invoice: "# of invoice"
+        num_of_invoice: "Num. of invoice"
         online_sales: "Ventas en línea"
         wallet: "Cartera"
         refund: "Reembolso"
