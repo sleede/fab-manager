@@ -1,7 +1,7 @@
 'use strict';
 
-Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'settingsPromise', 'Member', 'uiTourService', '_t',
-  function ($scope, $stateParams, settingsPromise, Member, uiTourService, _t) {
+Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 'settingsPromise', 'Member', 'uiTourService', '_t', 'Help',
+  function ($scope, $stateParams, settingsPromise, Member, uiTourService, _t, Help) {
   /* PUBLIC SCOPE */
 
     // Home page HTML content
@@ -41,10 +41,6 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // We set the home page content, with the directives replacing the placeholders
       $scope.homeContent = insertDirectives(settingsPromise.home_content);
 
-      // listen the $destroy event of the controller to remove the F1 key binding
-      $scope.$on('$destroy', function () {
-        window.removeEventListener('keydown', handleF1);
-      });
 
       // for admins, setup the tour on login
       $scope.$watch('currentUser', function (newValue, oldValue) {
@@ -304,20 +300,6 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // if the user has never seen the tour, show him now
       if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('welcome') < 0) {
         uitour.start();
-      }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', handleF1);
-    };
-
-    /**
-     * Callback used to trigger the feature tour when the user press the F1 key.
-     * @param e {KeyboardEvent}
-     */
-    const handleF1 = function (e) {
-      if (e.key === 'F1') {
-        e.preventDefault();
-        const tour = uiTourService.getTourByName('welcome');
-        if (tour) { tour.start(); }
       }
     };
 

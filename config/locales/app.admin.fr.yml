@@ -1042,6 +1042,7 @@ fr:
         report_will_be_destroyed: "Une fois le signalement traité, le rapport sera supprimé. Cette action est irréversible, continuer ?"
         report_removed: "Le rapport a bien été supprimé"
         failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"
+      #feature tour
       tour:
         conclusion:
           title: "Merci de votre attention"

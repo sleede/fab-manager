@@ -12,8 +12,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 
-Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version',
-  function ($rootScope, $scope, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version) {
+Application.Controllers.controller('ApplicationController', ['$rootScope', '$scope', '$window', '$locale', '$timeout', 'Session', 'AuthService', 'Auth', '$uibModal', '$state', 'growl', 'Notification', '$interval', 'Setting', '_t', 'Version', 'Help',
+  function ($rootScope, $scope, $window, $locale, $timeout, Session, AuthService, Auth, $uibModal, $state, growl, Notification, $interval, Setting, _t, Version, Help) {
   /* PRIVATE STATIC CONSTANTS */
 
     // User's notifications will get refreshed every 30s
@@ -346,22 +346,7 @@ Application.Controllers.controller('ApplicationController', ['$rootScope', '$sco
       $rootScope.login = $scope.login;
 
       // handle F1 key to trigger help
-      window.addEventListener('keydown', function(e) {
-        if (e.key === 'F1') {
-          if ($rootScope.currentUser.role !== 'admin') return;
-
-          e.preventDefault();
-          // we wait a little bit and then, check if a tour has started (by checking for a tour popover).
-          // if not, we consider that we are on a page that does not provides a tour so we fallback to the default behavior
-          // -> opening the user's manual
-          setTimeout(function() {
-            const tourPopover = document.querySelector('.ui-tour-popup');
-            if (!tourPopover || (tourPopover.offsetTop === 0 && tourPopover.offsetTop === 0)) {
-              window.open('https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf', '_blank');
-            }
-          }, 300);
-        }
-      });
+      window.addEventListener('keydown', Help);
     };
 
     /**

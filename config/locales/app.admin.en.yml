@@ -1042,6 +1042,7 @@ en:
         report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"
         report_removed: "The report has been deleted"
         failed_to_remove: "An error occurred, unable to delete the report"
+      #feature tour
       tour:
         conclusion:
           title: "Thank you for your attention"

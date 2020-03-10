@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <img ng-src="{{logoBlack.custom_asset_file_attributes.attachment_url}}" alt="{{logo.custom_asset_file_attributes.attachment}}" class="modal-logo"/>
+  <h1>
+    <i class="fa fa-question-circle" aria-hidden="true"></i>
+    <span translate>{{ 'app.shared.help.title' }}</span>
+  </h1>
+</div>
+<div class="modal-body">
+  <p translate>{{ 'app.shared.help.what_to_do' }}</p>
+  <div class="row text-center">
+    <button class="btn btn-default" ng-click="onTour()" translate>{{ 'app.shared.help.tour' }}</button>
+  </div>
+  <div class="row text-center m-t-lg m-b-md">
+    <a class="btn btn-default"
+       ng-click="onGuide()"
+       href="https://github.com/sleede/fab-manager/raw/master/doc/fr/guide_utilisation_fab_manager_v4.3.pdf"
+       target="_blank"
+       translate>{{ 'app.shared.help.guide' }}</a>
+  </div>
+</div>
