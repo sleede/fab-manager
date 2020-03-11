@@ -1,5 +1,7 @@
 # Changelog Fab-manager
 
+## v4.3.2 2020 March 11
+
 - Secure the session cookie
 - Improved contextual help with a modal dialog
 - Updated translations
