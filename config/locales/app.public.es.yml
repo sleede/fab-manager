@@ -102,7 +102,7 @@ es:
         connection: "Conexión"
         password_forgotten: "¿Ha olvidado su contraseña?"
         confirm_my_account: "Confirmar mi E-mail"
-        not_registered_to_the_fablab: "Not registered to the FabLab?"
+        not_registered_to_the_fablab: "¿No está registrado en el FabLab todavía?"
         create_an_account: "Crear una cuenta"
         wrong_email_or_password: "E-mail o contraseña incorrecta."
         caps_lock_is_on: "Las mayusculas están activadas."
@@ -148,10 +148,10 @@ es:
         from_time_to_time: "Desde {START} hasta {END}"
         free_entry: "Entrada gratuita"
         free_admission: "Admisión gratuita"
-        full_price: "Full price: "
+        full_price: "Precio completo: "
         event_full: "Evento lleno"
-        still_available: "Available place(s): "
-        all_day: "All day"
+        still_available: "Asiento(s) disponible(s): "
+        all_day: "Todo el día"
       #projects gallery
       projects_list:
         the_fablab_projects: "Los proyectos del FabLab"
@@ -268,11 +268,11 @@ es:
         sold_out: "Sold Out"
         cancelled: "Cancelled"
         free_admission: "Free admission"
-        still_available: "available place(s)"
+        still_available: "asiento(s) disponible(s)"
         free_entry: "Free entry"
         add_an_event: "Add an event"
         load_the_next_events: "Cargar los próximos eventos..."
-        full_price_: "Full price:"
+        full_price_: "Precio completo:"
         to_date: "to" #eg. from 01/01 to 01/05
         all_themes: "All themes"
       #details and booking of an event
@@ -284,10 +284,10 @@ es:
         beginning: "Empieza:"
         ending: "Termina:"
         opening_hours: "Hora de apertura:"
-        all_day: "All day"
+        all_day: "Todo el día"
         from_time: "From" #eg. from 18:00 to 21:00
         to_time: "to" #eg. from 18:00 to 21:00
-        full_price_: "Full price:"
+        full_price_: "Precio completo:"
         tickets_still_availables: "Entradas disponibles:"
         sold_out: "Entradas vendidas."
         free_entry: "Entrada gratuita"
