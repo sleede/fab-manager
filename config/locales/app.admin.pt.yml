@@ -95,7 +95,7 @@ pt:
         event_in_the_past: "Unable to create a slot in the past."
         edit_event: "Edit the event"
         view_reservations: "Ver reservas"
-        legend: "legenda"
+        legend: "Legend"
         and: "and"
         external_sync: "Calendar synchronization"
       #import external iCal calendar
@@ -240,7 +240,7 @@ pt:
         edit_this_and_next: "This event and the following"
         edit_all: "All events"
         date_wont_change: "Warning: you have changed the event date. This modification won't be propagated to other occurrences of the periodic event."
-        event_successfully_updated: "Event successfully updated"
+        event_successfully_updated: "Event successfully updated."
         events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
         unable_to_update_the_event: "Unable to update the event"
         events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
@@ -340,7 +340,7 @@ pt:
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Adicionar cupom"
-        unable_to_create_the_coupon_check_code_already_used: "Impossível criar cupom. Por favor certifique-se que o código já não foi utilizado"
+        unable_to_create_the_coupon_check_code_already_used: "Unable to create the coupon. Please check that the code is not already used."
       #mettre à jour un code promotionnel
       coupons_edit:
         coupon: "Coupon:"
@@ -692,7 +692,7 @@ pt:
       #import results
       members_import_result:
         import_results: "Import results"
-        import_details: "Import #{ID}, of {DATE}, initiated by {USER}"
+        import_details: "Import # {ID}, of {DATE}, initiated by {USER}"
         results: "Results"
         pending: "Pending..."
         status_create: "Creating a new user"
@@ -768,7 +768,7 @@ pt:
         add_a_new_authentication_provider: "Adicionar novo provedor de autenticação"
         a_local_database_provider_already_exists_unable_to_create_another: "Um provedor \"Local Database\" já existe. Não foi possível criar outro."
         local_provider_successfully_saved: "Provedor local salvo com sucesso."
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "É necessário definir a correspondência entre User.uid ea API para adicionar este fornecedor"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
         security_issue_detected: "Erro de segurança detectado"
         beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "Cuidado: o provedor OAuth 2 que você está prestes a adicionar não está usando HTTPS."
         this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "Este é um problema de segurança grave na Internet e nunca deve ser usado, exceto para fins de teste."
@@ -778,8 +778,8 @@ pt:
       #edit an authentication provider (SSO)
       authentication_edit:
         provider: "Provedor :"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "É necessário definir a correspondência entre User.uid ea API para adicionar este fornecedor"
-        provider_successfully_updated: "Provedor modificado com sucesso"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
+        provider_successfully_updated: "Provider successfully updated."
         an_error_occurred_unable_to_update_the_provider: "Um erro ocorreu: não é possível atualizar provedor."
       #statistics tables
       statistics:
@@ -800,7 +800,7 @@ pt:
         entries: "Entradas:"
         revenue_: "Receita:"
         average_age: "Idade média:"
-        years_old: "anos de idade"
+        years_old: "years old"
         total: "Total"
         available_hours: "Horas disponíveis para reserva:"
         available_tickets: "Vagas disponíveis para reserva:"
@@ -1008,10 +1008,10 @@ pt:
         api_documentation: "Documentação da API"
         open_api_clients: "Cliente OpenAPI"
         name: "Name"
-        calls_count: "Contagem de chamadas"
+        calls_count: "Calls count"
         token: "Token"
         created_at: "Data de criação"
-        reset_token: "revogar acesso"
+        reset_token: "Revoke access"
         client_name: "Nome do cliente"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_open_api_client: "Deseja realmente excluir este cliente OpenAPI??"
@@ -1041,6 +1041,7 @@ pt:
         report_will_be_destroyed: "Once the report has been processed, it will be deleted. This can't be undone, continue?"
         report_removed: "The report has been deleted"
         failed_to_remove: "An error occurred, unable to delete the report"
+      #feature tour
       tour:
         conclusion:
           title: "Thank you for your attention"
@@ -1051,7 +1052,7 @@ pt:
             content: "Here you can create, modify and delete trainings. It is also the place where you can validate the training courses followed by your members."
           trainings:
             title: "Manage trainings"
-            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab [Calendar].</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
+            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
           filter:
             title: "Filter"
             content: "By default, only active courses are displayed here. Display the others by choosing another filter here."
