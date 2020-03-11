@@ -400,13 +400,13 @@ es:
             content: "<p>Find your personal information here as well as all your activity on Fab-manager.</p><p>This space is also available for all your members.</p>"
           news:
             title: "News"
-            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page».</p>"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
             title: "Last projects"
             content: "<p>This carousel scrolls through the latest projects documented by your members.</p>"
           last_tweet:
             title: "Last tweet"
-            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configure it from « Customization », « Home page».</p>"
+            content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
           last_members:
             title: "Last members"
             content: "The last registered members who have validated their address and agreed to be contacted will be shown here."
