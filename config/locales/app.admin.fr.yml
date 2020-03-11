@@ -435,7 +435,7 @@ fr:
         add_a_notice_regarding_the_online_sales_only_if_the_invoice_is_concerned: "Ajoute une information relative à la vente en ligne, uniquement si cela concerne la facture."
         this_will_never_be_added_when_a_refund_notice_is_present: "Ceci ne sera jamais cumulé avec une information de remboursement."
         eg_XVL_will_add_VL_to_the_invoices_settled_with_stripe: '(ex. X[/VL] ajoutera "/VL" aux factures réglées avec stripe)'
-        add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture. "
+        add_a_notice_regarding_refunds_only_if_the_invoice_is_concerned: "Ajoute une information relative aux remboursements, uniquement si cela concerne la facture."
         this_will_never_be_added_when_an_online_sales_notice_is_present: "Ceci ne sera jamais cumulé avec une information de vente en ligne."
         eg_RA_will_add_A_to_the_refund_invoices: '(ex. R[/A] ajoutera "/A" aux factures de remboursement)'
         add_a_notice_regarding_the_wallet_only_if_the_invoice_is_concerned: "Ajoute une information relative au paiement par le porte-monnaie, uniquement si cela concerne la facture."
@@ -669,7 +669,7 @@ fr:
         import_members: "Importer des membres"
         info: "Vous pouvez téléverser un fichier CSV afin de créer des nouveaux membres ou de mettre à jour les existants. Votre fichier doit utiliser les identifiants ci-dessous pour spécifier le groupe, les formations et les étiquettes des membres."
         required_fields: "Votre fichier doit obligatoirement comporter, au minimum, les informations suivantes pour chaque utilisateur à créer : courriel, nom, prénom et groupe. Si le mot passe n'est pas rempli, il sera généré automatiquement. Lors d'une mise à jour, les champs non remplis seront gardés tel quels."
-        about_example: "Merci de vous référer au fichier d'exemple fourni pour générer un fichier CSV au bon format. Attention à l'utiliser l'encodage Unicode UTF-8"
+        about_example: "Merci de vous référer au fichier d'exemple fourni pour générer un fichier CSV au bon format. Attention à l'utiliser l'encodage Unicode UTF-8."
         groups: "Groupes"
         group_name: "Nom du groupe"
         group_identifier: "Identifiant à utiliser"
@@ -784,7 +784,7 @@ fr:
       #statistics tables
       statistics:
         statistics: "Statistiques"
-        evolution: "évolution"
+        evolution: "Évolution"
         age_filter: "Filtre d'âge"
         from_age: "De" #eg. from 8 to 40 years old
         to_age: "à" #eg. from 8 to 40 years old
