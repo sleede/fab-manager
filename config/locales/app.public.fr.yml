@@ -143,9 +143,9 @@ fr:
         #next events summary on the home page
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
-        from_date_to_date: "du {START} au {END}"
-        on_the_date: "le {DATE}"
-        from_time_to_time: "de {START} à {END}"
+        from_date_to_date: "Du {START} au {END}"
+        on_the_date: "Le {DATE}"
+        from_time_to_time: "De {START} à {END}"
         free_entry: "Accès libre"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
@@ -379,7 +379,7 @@ fr:
             content: "<p>Une soirée porte ouverte ou un stage pour fabriquer sa lampe de bureau ? C'est par ici !</p><p>Les évènements peuvent être gratuits ou payants (avec plusieurs tarifs), avec ou sans réservation.</p><p>Ici encore, les membres peuvent accéder à cette page et réserver eux-mêmes des places pour des évènements gratuits, ou payants si le paiement par carte bancaire est activé.</p>"
           calendar:
             title: "Agenda"
-            content: "Visualisez en un clin d'oeil tout ce qui est prévu au programme des prochaines semaines (évènements, formations, machines disponibles, etc.)."
+            content: "Visualisez en un clin d’œil tout ce qui est prévu au programme des prochaines semaines (événements, formations, machines disponibles, etc.)."
           projects:
             title: "Projets"
             content: "<p>Documentez et partagez toutes vos réalisations avec la communauté.</p><p>Si vous utilisez OpenLab, vous pourrez également consulter les projets de l'ensemble du réseau Fab-manager. <a href='mailto:contact@fab-manager.com'>Contactez-nous</a> pour obtenir votre accès, c'est gratuit !</p>"
@@ -402,7 +402,7 @@ fr:
             title: "Les brèves"
             content: "<p>Cet espace vous permet d'afficher les dernières actualités de votre structure.</p><p>Vous pouvez facilement changer son contenu depuis « Personnalisation », « Page d'accueil ».</p>"
           last_projects:
-            title: "les derniers projets"
+            title: "Les derniers projets"
             content: "<p>Ce carousel fait défiler les derniers projets documentés par vos membres.</p>"
           last_tweet:
             title: "Dernier tweet"
