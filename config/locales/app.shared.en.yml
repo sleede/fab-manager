@@ -307,7 +307,7 @@ en:
         will_appear_on_the_refund_invoice: "Will appear on the refund invoice."
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
-        a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
+        a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet."
         amount_is_required: "The amount is required."
         amount_minimum_1: "The amount minimum is 1"
         amount_confirm_is_required: "The amount confirmation is required."
