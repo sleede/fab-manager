@@ -880,7 +880,7 @@ fr:
         change_the_logo: "Changer le logo"
         logo_black_background: "Logo (font noir)"
         favicon: "Favicon"
-        change_the_favicon: "Changer la  favicon"
+        change_the_favicon: "Changer la favicon"
         main_colour: "Couleur principale :"
         primary: "Primaire"
         secondary_colour: "Couleur secondaire :"
@@ -966,7 +966,7 @@ fr:
         display_machine_reservation_user_name: "Afficher le nom de l'utilisateur ayant réservé une machine"
         display_name: "Afficher le nom"
         display_name_enable: "l'affichage du nom"
-        machines_sort_by: "l'odre d'affichage des machines"
+        machines_sort_by: "l'ordre d'affichage des machines"
         fab_analytics: "Fab Analytics"
         elements_ordering: "Ordre d'affichage des éléments"
         machines_order: "Ordre des machines"
@@ -1016,11 +1016,11 @@ fr:
         client_name: "Nom du client"
         confirmation_required: "Confirmation requise"
         do_you_really_want_to_delete_this_open_api_client: "Voulez vous vraiment supprimer ce compte client OpenAPI ?"
-        do_you_really_want_to_revoke_this_open_api_access: "Voulez vous vraiment revoquer l'accès de ce compte OpenAPI ? Une confirmation aura pour effet la génération d'un nouveau token."
+        do_you_really_want_to_revoke_this_open_api_access: "Voulez vous vraiment révoquer l'accès de ce compte OpenAPI ? Une confirmation aura pour effet la génération d'un nouveau jeton."
         client_successfully_created: "Le compte client a bien été créé."
         client_successfully_updated: "Les modifications ont été enregistrées."
         client_successfully_deleted: "Le compte client a bien été supprimé."
-        access_successfully_revoked: "L'accès a bien été revoqué."
+        access_successfully_revoked: "L'accès a bien été révoqué."
       #create a new space
       space_new:
         add_a_new_space: "Ajouter un nouvel espace"
@@ -1115,7 +1115,7 @@ fr:
             content: "Par défaut, ce tableau liste l'ensemble des factures et avoirs émis via Fab-manager. Vous pouvez trier la liste dans un ordre différent en cliquant sur l'entête de chaque colonne."
           chained:
             title: "Indicateur de chaînage"
-            content: "<p>Cette icône assure l'inaltérablité des données comptables de la facture sur cette ligne, conformément à la loi de finances française de 2018 contre la fraude à la TVA.</p><p>Si une icône rouge apparaît au lieu de celle-ci, merci de contactez immédiatement le support technique.</p>"
+            content: "<p>Cette icône assure l'inaltérabilité des données comptables de la facture sur cette ligne, conformément à la loi de finances française de 2018 contre la fraude à la TVA.</p><p>Si une icône rouge apparaît au lieu de celle-ci, merci de contactez immédiatement le support technique.</p>"
           download:
             title: "Télécharger"
             content: "Cliquez ici pour télécharger la facture au format PDF."
@@ -1155,7 +1155,7 @@ fr:
             content: "<p>Les crédits vous permettent d'offrir certains services aux utilisateurs qui souscrivent à un abonnement.</p><p>Vous pouvez, par exemple, offrir 2h d'imprimante 3D pour tous les abonnements annuels ; ou une formation au choix pour les abonnés étudiants, etc.</p>"
           coupons:
             title: "Codes promotionnels"
-            content: "Créez et gérez des codes promotionnels permettant d'offir des réductions ponctuelles à leurs détenteurs."
+            content: "Créez et gérez des codes promotionnels permettant d'offrir des réductions ponctuelles à leurs détenteurs."
         events:
           welcome:
             title: "Évènements"
