@@ -307,7 +307,7 @@ pt:
         will_appear_on_the_refund_invoice: "Aparecerá na fatura de reembolso."
         to_credit: 'Crédito'
         wallet_credit_successfully: "Carteira de usuário creditada com sucesso."
-        a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet."
+        a_problem_occurred_for_wallet_credit: "Um erro ocorreu ao creditar a carteira."
         amount_is_required: "A quantia é obrigatório."
         amount_minimum_1: "A quantia mínima é 1"
         amount_confirm_is_required: "A confirmação da quantia é obrigatório."
