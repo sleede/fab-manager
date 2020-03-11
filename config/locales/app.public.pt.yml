@@ -102,7 +102,7 @@ pt:
         connection: "Login"
         password_forgotten: "Esqueceu sua senha?"
         confirm_my_account: "Confirmar sua conta"
-        not_registered_to_the_fablab: "Not registered to the FabLab?"
+        not_registered_to_the_fablab: "Ainda não registrado no FabLab?"
         create_an_account: "Criar conta"
         wrong_email_or_password: "E-mail ou senha incorretos."
         caps_lock_is_on: "A tecla Caps Lock está ativada."
