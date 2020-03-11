@@ -788,7 +788,6 @@ fr:
         age_filter: "Filtre d'âge"
         from_age: "De" #eg. from 8 to 40 years old
         to_age: "à" #eg. from 8 to 40 years old
-        _years_old: "ans"
         start: "Début :"
         end: "Fin :"
         custom_filter: "Filtre personnalisé"

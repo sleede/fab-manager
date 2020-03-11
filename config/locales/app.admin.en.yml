@@ -95,7 +95,7 @@ en:
         event_in_the_past: "Unable to create a slot in the past."
         edit_event: "Edit the event"
         view_reservations: "View reservations"
-        legend: "legend"
+        legend: "Legend"
         and: "and"
         external_sync: "Calendar synchronization"
       # import external iCal calendar
@@ -240,7 +240,7 @@ en:
         edit_this_and_next: "This event and the following"
         edit_all: "All events"
         date_wont_change: "Warning: you have changed the event date. This modification won't be propagated to other occurrences of the periodic event."
-        event_successfully_updated: "Event successfully updated"
+        event_successfully_updated: "Event successfully updated."
         events_updated: "The event, and {COUNT, plural, =1{one other} other{{COUNT} others}}, have been updated"
         unable_to_update_the_event: "Unable to update the event"
         events_not_updated: "On {TOTAL} events, {COUNT, plural, =1{one was not updated} other{{COUNT} were not deleted}}."
@@ -340,7 +340,7 @@ en:
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Add a coupon"
-        unable_to_create_the_coupon_check_code_already_used: "Unable to create the coupon. Please check that the code is not already used"
+        unable_to_create_the_coupon_check_code_already_used: "Unable to create the coupon. Please check that the code is not already used."
       #mettre à jour un code promotionnel
       coupons_edit:
         coupon: "Coupon:"
@@ -692,7 +692,7 @@ en:
       #import results
       members_import_result:
         import_results: "Import results"
-        import_details: "Import #{ID}, of {DATE}, initiated by {USER}"
+        import_details: "Import # {ID}, of {DATE}, initiated by {USER}"
         results: "Results"
         pending: "Pending..."
         status_create: "Creating a new user"
@@ -768,7 +768,7 @@ en:
         add_a_new_authentication_provider: "Add a new authentication provider"
         a_local_database_provider_already_exists_unable_to_create_another: "A \"Local Database\" provider already exists. Unable to create another."
         local_provider_successfully_saved: "Local provider successfully saved."
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
         security_issue_detected: "Security issue detected"
         beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "Beware: the OAuth 2 provider you are about to add isn't using HTTPS."
         this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "This is a serious security issue on internet and should never be used except for testing purposes."
@@ -778,8 +778,8 @@ en:
       #edit an authentication provider (SSO)
       authentication_edit:
         provider: "Provider :"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider"
-        provider_successfully_updated: "Provider successfully updated"
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
+        provider_successfully_updated: "Provider successfully updated."
         an_error_occurred_unable_to_update_the_provider: "An error occurred: unable to update the provider."
       #statistics tables
       statistics:
@@ -788,7 +788,6 @@ en:
         age_filter: "Age filter"
         from_age: "From"  #eg. from 8 to 40 years old
         to_age: "to"  #eg. from 8 to 40 years old
-        _years_old: "years old"
         start: "Start:"
         end: "End:"
         custom_filter: "Custom filter"
@@ -801,7 +800,7 @@ en:
         entries: "Entries:"
         revenue_: "Revenue:"
         average_age: "Average age:"
-        years_old: "Years old"
+        years_old: "years old"
         total: "Total"
         available_hours: "Hours available for booking:"
         available_tickets: "Tickets available for booking:"
@@ -1009,10 +1008,10 @@ en:
         api_documentation: "API documentation"
         open_api_clients: "OpenAPI clients"
         name: "Name"
-        calls_count: "calls count"
+        calls_count: "Calls count"
         token: "Token"
         created_at: "Creation date"
-        reset_token: "revoke access"
+        reset_token: "Revoke access"
         client_name: "Client's name"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_open_api_client: "Do you really want to delete this OpenAPI client?"
@@ -1053,7 +1052,7 @@ en:
             content: "Here you can create, modify and delete trainings. It is also the place where you can validate the training courses followed by your members."
           trainings:
             title: "Manage trainings"
-            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab [Calendar].</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
+            content: "<p>When creating a training, you can define a default number of places. However, the number of actual places may be modified for each session.</p><p>The training sessions are scheduled from the administrator tab « Calendar ».</p><p>Another thing: it is possible to associate one or more machines with a training. This makes it a prerequisite for the reservation of these machines.</p>"
           filter:
             title: "Filter"
             content: "By default, only active courses are displayed here. Display the others by choosing another filter here."

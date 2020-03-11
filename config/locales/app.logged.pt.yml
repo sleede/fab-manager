@@ -45,7 +45,7 @@ pt:
           empty: ''
         #dashboard: edit my profile
         settings:
-          last_activity_on_: "Última atividade em"
+          last_activity_on_: "Última atividade em {DATE}"
           i_want_to_change_group: "Eu quero trocar de grupo!"
           your_subscription_expires_on_: "Sua inscrição expira em"
           no_subscriptions: "Sem inscrições"
