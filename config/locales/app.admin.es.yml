@@ -95,7 +95,7 @@ es:
         event_in_the_past: "Unable to create a slot in the past."
         edit_event: "Edit the event"
         view_reservations: "Ver reservas"
-        legend: "Legend"
+        legend: "Leyenda"
         and: "y"
         external_sync: "Calendar synchronization"
       #import external iCal calendar
@@ -340,7 +340,7 @@ es:
       #ajouter un code promotionnel
       coupons_new:
         add_a_coupon: "Añadir un cupón"
-        unable_to_create_the_coupon_check_code_already_used: "Unable to create the coupon. Please check that the code is not already used."
+        unable_to_create_the_coupon_check_code_already_used: "No se puede crear el cupón. Compruebe que el código no esté ya utilizado."
       #mettre à jour un code promotionnel
       coupons_edit:
         coupon: "Coupon:"
@@ -768,7 +768,7 @@ es:
         add_a_new_authentication_provider: "Agregar un nuevo proveedor de autenticación"
         a_local_database_provider_already_exists_unable_to_create_another: "A proveedor de \"Base de datos local\"  ya existe. No se puede crear otro."
         local_provider_successfully_saved: "Proveedor local guardado correctamente."
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor."
         security_issue_detected: "Se ha detectado un problema de seguridad"
         beware_the_oauth2_authenticatoin_provider_you_are_about_to_add_isnt_using_HTTPS: "Tenga cuidado: el proveedor de OAuth 2 que va a agregar no está usando HTTPS."
         this_is_a_serious_security_issue_on_internet_and_should_never_be_used_except_for_testing_purposes: "Este es un grave problema de seguridad en Internet y nunca debe utilizarse excepto para fines de prueba."
@@ -778,8 +778,8 @@ es:
       #edit an authentication provider (SSO)
       authentication_edit:
         provider: "Proveedor :"
-        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "It is required to set the matching between User.uid and the API to add this provider."
-        provider_successfully_updated: "Provider successfully updated."
+        it_is_required_to_set_the_matching_between_User.uid_and_the_API_to_add_this_provider: "Es necesario establecer la coincidencia entre User.uid y la API para agregar este proveedor."
+        provider_successfully_updated: "Proveedor actualizado correctamente."
         an_error_occurred_unable_to_update_the_provider: "Se ha producido un error: no se puede actualizar el proveedor."
       #statistics tables
       statistics:
@@ -800,7 +800,7 @@ es:
         entries: "Entradas:"
         revenue_: "Ingresos:"
         average_age: "Edad media:"
-        years_old: "years old"
+        years_old: "años"
         total: "Total"
         available_hours: "Horas disponibles para reservar:"
         available_tickets: "Tickets disponibles para reservar:"
@@ -1008,10 +1008,10 @@ es:
         api_documentation: "Documentation API"
         open_api_clients: "Clientes OpenAPI"
         name: "Name"
-        calls_count: "Calls count"
+        calls_count: "Número de llamadas"
         token: "Token"
         created_at: "Fecha de creación"
-        reset_token: "Revoke access"
+        reset_token: "Revocar el acceso"
         client_name: "Nombre del cliente"
         confirmation_required: "Confirmation required"
         do_you_really_want_to_delete_this_open_api_client: "¿Desea realmente eliminar este cliente OpenAPI?"
