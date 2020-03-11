@@ -45,7 +45,7 @@ ach:
           empty: 'crwdns8577:0crwdne8577:0'
         #dashboard: edit my profile
         settings:
-          last_activity_on_: "crwdns8579:0crwdne8579:0"
+          last_activity_on_: "crwdns20238:0{DATE}crwdne20238:0"
           i_want_to_change_group: "crwdns8581:0crwdne8581:0"
           your_subscription_expires_on_: "crwdns8583:0crwdne8583:0"
           no_subscriptions: "crwdns8585:0crwdne8585:0"
