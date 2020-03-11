@@ -37,7 +37,7 @@ fr:
         sync_my_profile: "Synchroniser mon profil"
         once_your_data_are_up_to_date_: "Une fois vos données à jour,"
         _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
-        _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
+        _disconnect_then_reconnect_: "déconnectez-vous puis reconnectez vous"
         _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
       dashboard:
         #dashboard: public profile
@@ -89,7 +89,7 @@ fr:
           sync_my_profile: "Synchroniser mon profil"
           once_your_data_are_up_to_date_: "Une fois vos données à jour,"
           _click_on_the_synchronization_button_opposite_: "cliquez sur le bouton de synchronisation ci-contre"
-          _disconnect_then_reconnect_: "déconnectez-vous puis re-connectez vous"
+          _disconnect_then_reconnect_: "déconnectez-vous puis reconnectez vous"
           _for_your_changes_to_take_effect: "pour que les modifications soient prises en compte."
         #dashboard: my projects
         projects:
