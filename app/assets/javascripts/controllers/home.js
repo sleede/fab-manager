@@ -41,7 +41,6 @@ Application.Controllers.controller('HomeController', ['$scope', '$stateParams', 
       // We set the home page content, with the directives replacing the placeholders
       $scope.homeContent = insertDirectives(settingsPromise.home_content);
 
-
       // for admins, setup the tour on login
       $scope.$watch('currentUser', function (newValue, oldValue) {
         if (!oldValue && newValue && newValue.role === 'admin') {
