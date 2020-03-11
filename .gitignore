@@ -24,6 +24,7 @@
 # Ignore application configurations
 /config/application.yml
 /config/database.yml
+.env
 
 *.DS_Store
 .idea

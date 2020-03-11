@@ -19,10 +19,8 @@ Rails.application.routes.draw do
     get '/sso-redirect', to: 'application#sso_redirect', as: :sso_redirect
   end
 
-
   ## The priority is based upon order of creation: first created -> highest priority.
   ## See how all your routes lay out with "rake routes".
-
 
   constraints user_agent: %r{facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet} do
     root to: 'social_bot#share', as: :bot_root

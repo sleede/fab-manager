@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'csv'
 require 'rails/all'
 require 'elasticsearch/rails/instrumentation'
 require 'elasticsearch/persistence/model'
-
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -33,17 +32,16 @@ module Fablab
 
     config.assets.paths << Rails.root.join('node_modules').to_s
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     config.to_prepare do
       Devise::Mailer.layout 'notifications_mailer'
     end
 
     # allow use rails helpers in angular templates
-    Rails.application.assets.context_class.class_eval do
-      include ActionView::Helpers
-      include Rails.application.routes.url_helpers
+    Rails.application.config.assets.configure do |env|
+      env.context_class.class_eval do
+        include ActionView::Helpers
+        include Rails.application.routes.url_helpers
+      end
     end
 
     config.active_job.queue_adapter = :sidekiq

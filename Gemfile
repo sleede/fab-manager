@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'compass-rails', '2.0.4'
+gem 'compass-rails', '3.0.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11.1'
+gem 'rails', '~> 5.0.7.2'
 # Use Puma as web server
 gem 'puma', '3.12.4'
 # Use SCSS for stylesheets
-gem 'sass-rails', '5.0.1'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.1.20'
@@ -28,36 +30,35 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # comment over to use visual debugger (eg. RubyMine), uncomment to use manual debugging
   # gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.1.3'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  gem 'railroady'
-
-  gem 'rubocop', '~> 0.61.1', require: false
 end
 
 group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'active_record_query_trace'
   gem 'awesome_print'
   gem 'coveralls', require: false
   gem 'foreman'
+  gem 'web-console', '>= 3.3.0'
   # Preview mail in the browser
-  gem 'mailcatcher'
+  gem 'listen', '~> 3.0.5'
+  # don't put mailcatcher into your Gemfile. It will conflict with your applications gems at some point.
+  # Instead, pop a note in your README stating you use mailcatcher, and to run gem install mailcatcher then mailcatcher to get started.
+  # gem 'mailcatcher'
   gem 'rb-readline'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'railroady'
+  gem 'rubocop', '~> 0.61.1', require: false
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
-  gem 'byebug'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
   gem 'faker'
   gem 'minitest-reporters'
   gem 'pdf-reader'
-  gem 'test_after_commit'
-  gem 'vcr'
+  gem 'vcr', '3.0.1'
   gem 'webmock'
 end
 
@@ -78,8 +79,6 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'rolify'
 
 gem 'kaminari'
-
-gem 'figaro'
 
 gem 'bootstrap-sass', '>= 3.4.1'
 gem 'font-awesome-rails'
@@ -120,13 +119,10 @@ gem 'pundit'
 
 gem 'oj'
 
-gem 'actionpack-page_caching'
+gem 'actionpack-page_caching', '1.1.0'
 gem 'rails-observers'
 
 gem 'chroma'
-
-
-gem 'protected_attributes'
 
 gem 'message_format'
 
@@ -140,8 +136,6 @@ gem 'has_secure_token'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'rubyzip', '>= 1.3.0'
-
-gem 'rack-protection', '1.5.5'
 
 # get free disk space
 gem 'sys-filesystem'

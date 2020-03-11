@@ -16,7 +16,8 @@ class AuthProvider < ActiveRecord::Base
 
   belongs_to :providable, polymorphic: true, dependent: :destroy
   accepts_nested_attributes_for :providable
-  attr_accessible :name, :providable_type, :providable_attributes
+  # add gem 'protected_attributes_continued' for Rails 5+
+  # attr_accessible :name, :providable_type, :providable_attributes
 
   before_create :set_initial_state
 

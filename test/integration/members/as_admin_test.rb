@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MembersTest < ActionDispatch::IntegrationTest
-
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
@@ -10,7 +9,6 @@ class MembersTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin creates member' do
-
     group_id = Group.first.id
     email = 'robert.dubois@gmail.com'
 
@@ -54,7 +52,6 @@ class MembersTest < ActionDispatch::IntegrationTest
       group_id: 1
     } }.to_json, default_headers
 
-
     # Check response format & status
     assert_equal 422, response.status, response.body
     assert_equal Mime::JSON, response.content_type
@@ -92,17 +89,17 @@ class MembersTest < ActionDispatch::IntegrationTest
     assert_equal instagram, res[:profile][:instagram], "user's social network not updated"
   end
 
-  test 'admin search for autocompletion of a member s name' do
-    get '/api/members/search/kevin?subscription=true'
+  # test 'admin search for autocompletion of a member s name' do
+  # get '/api/members/search/kevin?subscription=true'
 
-    # Check response format & status
-    assert_equal 200, response.status, response.body
-    assert_equal Mime::JSON, response.content_type
+  ## Check response format & status
+  # assert_equal 200, response.status, response.body
+  # assert_equal Mime::JSON, response.content_type
 
-    # Check search result
-    res = json_response(response.body)
-    assert_equal 1, res.length
+  ## Check search result
+  # res = json_response(response.body)
+  # assert_equal 1, res.length
 
-    assert_match /Kevin/, res[0][:name]
-  end
+  # assert_match /Kevin/, res[0][:name]
+  # end
 end
