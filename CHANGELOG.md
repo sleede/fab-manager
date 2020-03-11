@@ -4,6 +4,7 @@
 - Improved contextual help with a modal dialog
 - Updated translations
 - Refactored translations to help merging Crowdin PR
+- Updated translation documentation
 - Fix a bug: unable to create new availabilities if SLOT_DURATION is not defined
 
 ## v4.3.1 2020 March 04
