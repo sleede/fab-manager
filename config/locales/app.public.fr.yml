@@ -400,13 +400,13 @@ fr:
             content: "<p>Retrouvez ici vos informations personnelles ainsi que toute votre activité sur Fab-manager.</p><p>Cet espace est également disponible pour tous vos membres.</p>"
           news:
             title: "Les brèves"
-            content: "<p>Cet espace vous permet d'afficher les dernières actualités de votre structure.</p><p>Vous pouvez facilement changer son contenu depuis « Personnalisation », « Page d'accueil ».</p>"
+            content: "<p>This space allows you to display the latest news from your structure.</p><p>You can easily change its content from « Customization », « Home page ».</p>"
           last_projects:
             title: "les derniers projets"
             content: "<p>Ce carousel fait défiler les derniers projets documentés par vos membres.</p>"
           last_tweet:
             title: "Dernier tweet"
-            content: "<p>Le dernier tweet de votre flux Twitter peut s'afficher ici.</p><p>Configurez-le depuis « Personnalisation », « Page d'accueil ».</p>"
+            content: "<p>The last tweet of your Tweeter feed can be shown here.</p><p>Configure it from « Customization », « Home page ».</p>"
           last_members:
             title: "Derniers membres"
             content: "Les derniers membres inscrits qui ont validé leur adresse et accepté d'être contactés, seront affichés ici."
