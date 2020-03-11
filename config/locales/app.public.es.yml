@@ -151,6 +151,7 @@ es:
         full_price: "Precio final"
         event_full: "Evento lleno"
         still_available: "Available place(s)"
+        all_day: "Todo el día"
       #projects gallery
       projects_list:
         the_fablab_projects: "Los proyectos del FabLab"

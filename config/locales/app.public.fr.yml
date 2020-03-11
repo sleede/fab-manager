@@ -102,7 +102,7 @@ fr:
         connection: "Connexion"
         password_forgotten: "Mot de passe oublié ?"
         confirm_my_account: "Confirmer mon adresse de courriel"
-        not_registered_to_the_fablab: "Vous n'êtes pas inscrit au FAB LAB ?"
+        not_registered_to_the_fablab: "Vous n'êtes pas inscrit au FabLab ?"
         create_an_account: "Créer un compte"
         wrong_email_or_password: "Adresse courriel ou mot de passe incorrect."
         caps_lock_is_on: "La touche de verrouillage des majuscules est activée."
@@ -143,14 +143,15 @@ fr:
         #next events summary on the home page
         fablab_s_next_events: "Les prochains évènements du Fab Lab"
         every_events: "Tous les évènements"
-        from_date_to_date: "du {START} au {END}"
-        on_the_date: "le {DATE}"
-        from_time_to_time: "de {START} à {END}"
+        from_date_to_date: "Du {START} au {END}"
+        on_the_date: "Le {DATE}"
+        from_time_to_time: "De {START} à {END}"
         free_entry: "Accès libre"
         free_admission: "Entrée gratuite"
         full_price: "Plein tarif : "
         event_full: "Événement complet"
         still_available: "Place(s) disponible(s) :"
+        all_day: "Toute la journée"
       #projects gallery
       projects_list:
         the_fablab_projects: "Les projets du FabLab"

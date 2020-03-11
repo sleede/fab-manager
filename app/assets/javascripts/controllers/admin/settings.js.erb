@@ -467,8 +467,6 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('settings') < 0) {
         uitour.start();
       }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', handleF1);
     }
 
     /* PRIVATE SCOPE */
@@ -521,23 +519,8 @@ Application.Controllers.controller('SettingsController', ['$scope', '$rootScope'
       $scope.$watch('advancedSettings.open', function (newValue) {
         if (newValue) $scope.codeMirrorEditor.refresh();
       })
-      // listen the $destroy event of the controller to remove the F1 key binding
-      $scope.$on('$destroy', function () {
-        window.removeEventListener('keydown', handleF1);
-      });
     };
 
-    /**
-     * Callback used to trigger the feature tour when the user press the F1 key.
-     * @param e {KeyboardEvent}
-     */
-    const handleF1 = function (e) {
-      if (e.key === 'F1') {
-        e.preventDefault();
-        const tour = uiTourService.getTourByName('settings');
-        if (tour) { tour.start(); }
-      }
-    };
     // init the controller (call at the end !)
     return initialize();
   }

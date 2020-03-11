@@ -788,7 +788,6 @@ fr:
         age_filter: "Filtre d'âge"
         from_age: "De" #eg. from 8 to 40 years old
         to_age: "à" #eg. from 8 to 40 years old
-        _years_old: "ans"
         start: "Début :"
         end: "Fin :"
         custom_filter: "Filtre personnalisé"
@@ -1042,6 +1041,7 @@ fr:
         report_will_be_destroyed: "Une fois le signalement traité, le rapport sera supprimé. Cette action est irréversible, continuer ?"
         report_removed: "Le rapport a bien été supprimé"
         failed_to_remove: "Une erreur est survenue, impossible de supprimer le rapport"
+      #feature tour
       tour:
         conclusion:
           title: "Merci de votre attention"

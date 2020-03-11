@@ -137,8 +137,6 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
       if (Fablab.featureTourDisplay !== 'manual' && $scope.currentUser.profile.tours.indexOf('open-api') < 0) {
         uitour.start();
       }
-      // start this tour when an user press F1 - this is contextual help
-      window.addEventListener('keydown', handleF1);
     };
 
     /* PRIVATE SCOPE */
@@ -146,24 +144,7 @@ Application.Controllers.controller('OpenAPIClientsController', ['$scope', 'clien
     /**
      * Kind of constructor: these actions will be realized first when the controller is loaded
      */
-    const initialize = function () {
-      // listen the $destroy event of the controller to remove the F1 key binding
-      $scope.$on('$destroy', function () {
-        window.removeEventListener('keydown', handleF1);
-      });
-    };
-
-    /**
-     * Callback used to trigger the feature tour when the user press the F1 key.
-     * @param e {KeyboardEvent}
-     */
-    const handleF1 = function (e) {
-      if (e.key === 'F1') {
-        e.preventDefault();
-        const tour = uiTourService.getTourByName('open-api');
-        if (tour) { tour.start(); }
-      }
-    };
+    const initialize = function () {};
 
     // !!! MUST BE CALLED AT THE END of the controller
     return initialize();

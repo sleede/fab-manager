@@ -214,7 +214,7 @@ en:
         user_profile: "User profile"
         warning_incomplete_user_profile_probably_imported_from_sso: "Warning: This user's profile is incomplete. As \"single sign-on\" (SSO) authentication is currently enabled, it may probably be an imported but non merged account. Do not modify it unless you know what your doing."
         group: "Group"
-        group_is_required: "Group is required"
+        group_is_required: "Group is required."
         trainings: "Trainings"
         tags: "Tags"
       #partial form to edit/create an authentication provider (SSO)
@@ -308,10 +308,10 @@ en:
         to_credit: 'Credit'
         wallet_credit_successfully: "Wallet of user is credited successfully."
         a_problem_occurred_for_wallet_credit: "A problem is occurred while taking the credit of wallet"
-        amount_is_required: "The amount is required"
+        amount_is_required: "The amount is required."
         amount_minimum_1: "The amount minimum is 1"
-        amount_confirm_is_required: "The amount confirmation is required"
-        amount_confirm_does_not_match: "The amount confirmation does not match"
+        amount_confirm_is_required: "The amount confirmation is required."
+        amount_confirm_does_not_match: "The amount confirmation does not match."
         you_have_amount_in_wallet: "You have {amount} {currency} in your wallet"
         client_have_amount_in_wallet: "Client has {amount} {currency} in wallet"
         wallet_pay_reservation: "You can pay direct your reservation"
@@ -415,7 +415,7 @@ en:
         confirm_payment_of_html: "{ROLE, select, admin{Payment on site} other{Pay}}: {AMOUNT}"  #eg. confirm my payment of $20.00
         a_problem_occurred_during_the_payment_process_please_try_again_later: "A problem occurred during the payment process. Please try again later."
         none: "None"
-        online_payment_disabled: "Online payment is not available. Please contact the Fablab reception directly."
+        online_payment_disabled: "Online payment is not available. Please contact the FabLab's reception directly."
         slot_restrict_plans: "This slot is restricted for the plans below:"
         slot_restrict_subscriptions_must_select_plan: "The slot is restricted for the subscribers. Please select a plan first."
         slot_restrict_plans_of_others_groups: "The slot is restricted for the subscribers of others groups."
@@ -425,7 +425,14 @@ en:
         slot_at_same_time: "Conflict with others reservations"
         do_you_really_want_to_book_slot_at_same_time: "Do you really want to book this slot? Other bookings take place at the same time"
         unable_to_book_slot_because_really_have_reservation_at_same_time: "Unable to book this slot because the following reservation occurs at the same time."
+      # feature-tour modal
       tour:
         previous: "Previous"
         next: "Next"
         end: "End the tour"
+      # help modal
+      help:
+        title: "Help"
+        what_to_do: "What do you want to do?"
+        tour: "Start the feature tour"
+        guide: "Open the user's manual"

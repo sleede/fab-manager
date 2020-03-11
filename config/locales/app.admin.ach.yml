@@ -788,7 +788,6 @@ ach:
         age_filter: "crwdns8095:0crwdne8095:0"
         from_age: "crwdns8097:0crwdne8097:0" #eg. from 8 to 40 years old
         to_age: "crwdns8099:0crwdne8099:0" #eg. from 8 to 40 years old
-        _years_old: "crwdns8101:0crwdne8101:0"
         start: "crwdns8103:0crwdne8103:0"
         end: "crwdns8105:0crwdne8105:0"
         custom_filter: "crwdns8107:0crwdne8107:0"

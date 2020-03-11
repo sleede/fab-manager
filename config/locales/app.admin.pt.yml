@@ -788,7 +788,6 @@ pt:
         age_filter: "Filtro de idade"
         from_age: "Dos" #eg. from 8 to 40 years old
         to_age: "aos" #eg. from 8 to 40 years old
-        _years_old: "anos de idade"
         start: "Início:"
         end: "Fim:"
         custom_filter: "Filtro customizado"
@@ -801,7 +800,7 @@ pt:
         entries: "Entradas:"
         revenue_: "Receita:"
         average_age: "Idade média:"
-        years_old: "Anos de idade"
+        years_old: "anos de idade"
         total: "Total"
         available_hours: "Horas disponíveis para reserva:"
         available_tickets: "Vagas disponíveis para reserva:"

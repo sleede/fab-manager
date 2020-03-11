@@ -1,6 +1,7 @@
 # Changelog Fab-manager
 
 - Secure the session cookie
+- Improved contextual help with a modal dialog
 - Updated translations
 - Refactored translations to help merging Crowdin PR
 
