@@ -307,7 +307,7 @@ ach:
         will_appear_on_the_refund_invoice: "crwdns9903:0crwdne9903:0"
         to_credit: 'crwdns9905:0crwdne9905:0'
         wallet_credit_successfully: "crwdns9907:0crwdne9907:0"
-        a_problem_occurred_for_wallet_credit: "crwdns9909:0crwdne9909:0"
+        a_problem_occurred_for_wallet_credit: "crwdns20272:0crwdne20272:0"
         amount_is_required: "crwdns20222:0crwdne20222:0"
         amount_minimum_1: "crwdns9913:0crwdne9913:0"
         amount_confirm_is_required: "crwdns20224:0crwdne20224:0"
